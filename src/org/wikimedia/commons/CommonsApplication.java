@@ -13,7 +13,7 @@ public class CommonsApplication extends Application {
         // TODO Auto-generated method stub
         super.onCreate();
         DefaultHttpClient client = new DefaultHttpClient();
-        api = new MWApi("http://test.wikipedia.org/w/api.php", client);
+        api = new MWApi("http://192.168.1.34/w/api.php", client);
     }
     
     public MWApi getApi() {

@@ -10,6 +10,7 @@ import android.content.Context;
 import android.view.*;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 
 public class LoginActivity extends Activity {
@@ -22,15 +23,19 @@ public class LoginActivity extends Activity {
     
     private class LoginTask extends AsyncTask<String, String, String> {
 
-        Context context;
+        Activity context;
         ProgressDialog dialog;
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             if(result.equals("Success")) {
                 dialog.cancel();
+                Toast successToast = Toast.makeText(context, R.string.login_success, Toast.LENGTH_SHORT);
+                successToast.show();
+                context.finish();
             } else {
-                dialog.setMessage("Ayyooo poche!");
+                Toast failureToast = Toast.makeText(context, R.string.login_failed, Toast.LENGTH_LONG);
+                failureToast.show();
             }
             
         }
@@ -45,7 +50,7 @@ public class LoginActivity extends Activity {
             dialog.show();
         }
         
-        LoginTask(Context context) {
+        LoginTask(Activity context) {
             this.context = context;
         }
         
@@ -71,7 +76,7 @@ public class LoginActivity extends Activity {
         loginButton = (Button)findViewById(R.id.loginButton);
         usernameEdit = (EditText)findViewById(R.id.loginUsername);
         passwordEdit = (EditText)findViewById(R.id.loginPassword);
-        final Context that = this;
+        final Activity that = this;
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

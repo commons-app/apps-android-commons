@@ -3,6 +3,7 @@ package org.wikimedia.commons;
 import java.net.*;
 import java.io.*;
 
+import android.content.Context;
 import android.graphics.*;
 import android.net.Uri;
 import android.os.*;

@@ -12,5 +12,7 @@
     <string name="logging_in_message">Witty text here</string>
     <string name="title_activity_share">ShareActivity</string>
     <string name="upload_overlay_title">Upload to Commons</string>
+    <string name="login_success">Login success!</string>
+    <string name="login_failed">Login failed!</string>
 
 </resources>

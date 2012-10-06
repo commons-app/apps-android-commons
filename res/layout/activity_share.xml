@@ -27,7 +27,6 @@
         android:background="@drawable/share_overlay_background_gradient" >
 
         <TextView
-            android:id="@+id/overlayTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/upload_overlay_title"
@@ -42,7 +41,7 @@
             />
         
         <EditText 
-            android:id="@+id/overlayTitleEdit"
+            android:id="@+id/titleEdit"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
@@ -54,17 +53,17 @@
             android:layout_height="wrap_content"
             android:text="Description"
             android:textAppearance="?android:attr/textAppearanceMedium" 
-            android:layout_below="@id/overlayTitle"/>
+           /> 
         
         <EditText 
-            android:id="@+id/overlayDescEdit"
+            android:id="@+id/descEdit"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:inputType="textMultiLine"
             />
         
         <Button
-            android:id="@+id/overlayUploadButton"
+            android:id="@+id/uploadButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Upload"
