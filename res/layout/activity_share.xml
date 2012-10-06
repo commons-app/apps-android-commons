@@ -22,8 +22,8 @@
         android:layout_marginTop="64dip" 
         android:paddingLeft="16dip"
         android:paddingRight="16dip"
-        android:paddingTop="24dip"
-        android:paddingBottom="24dip"
+        android:paddingTop="8dip"
+        android:paddingBottom="8dip"
         android:background="@drawable/share_overlay_background_gradient" >
 
         <TextView
@@ -31,6 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/upload_overlay_title"
+            android:layout_marginBottom="16dip"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
@@ -38,13 +39,14 @@
             android:layout_height="wrap_content"
             android:text="Title"
             android:textAppearance="?android:attr/textAppearanceMedium" 
-            android:layout_below="@id/overlayTitle"/>
+            />
         
         <EditText 
             android:id="@+id/overlayTitleEdit"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
+            android:scrollHorizontally="false"
             />
         
         <TextView
