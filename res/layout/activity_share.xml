@@ -1,0 +1,73 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:scaleType="centerCrop" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:orientation="vertical"
+        android:layout_marginBottom="64dip"
+        android:layout_marginLeft="16dip"
+        android:layout_marginRight="16dip"
+        android:layout_marginTop="64dip" 
+        android:paddingLeft="16dip"
+        android:paddingRight="16dip"
+        android:paddingTop="24dip"
+        android:paddingBottom="24dip"
+        android:background="@drawable/share_overlay_background_gradient" >
+
+        <TextView
+            android:id="@+id/overlayTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/upload_overlay_title"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            android:textAppearance="?android:attr/textAppearanceMedium" 
+            android:layout_below="@id/overlayTitle"/>
+        
+        <EditText 
+            android:id="@+id/overlayTitleEdit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            />
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:textAppearance="?android:attr/textAppearanceMedium" 
+            android:layout_below="@id/overlayTitle"/>
+        
+        <EditText 
+            android:id="@+id/overlayDescEdit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            />
+        
+        <Button
+            android:id="@+id/overlayUploadButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Upload"
+            />
+        
+    </LinearLayout>
+
+</RelativeLayout>
