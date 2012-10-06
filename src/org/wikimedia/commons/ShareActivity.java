@@ -18,6 +18,7 @@ import org.w3c.dom.Document;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -80,6 +81,7 @@ public class ShareActivity extends Activity {
 //                return str;
                 return result.getString("/api/upload/@result");
             } catch (IOException e) {
+                e.printStackTrace();
                 return "Failure";
             }
         }
