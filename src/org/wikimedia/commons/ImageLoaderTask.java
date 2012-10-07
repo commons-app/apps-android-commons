@@ -8,18 +8,50 @@ import android.graphics.*;
 import android.net.Uri;
 import android.os.*;
 import android.provider.MediaStore;
+import android.util.Log;
+import android.view.WindowManager;
 import android.widget.*;
 
 class ImageLoaderTask extends AsyncTask<Uri, String, Bitmap> {
     ImageView view;
 
-    private Bitmap getBitmap(Uri url) throws MalformedURLException, IOException {
-        if(url.getScheme().equals("content")) {
-            return MediaStore.Images.Media.getBitmap(view.getContext().getContentResolver(), url);
-        } else {
-            Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL(url.toString()).getContent());
-            return bitmap;
+    public int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        // Raw height and width of image
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+            if (width > height) {
+                inSampleSize = Math.round((float) height / (float) reqHeight);
+            } else {
+                inSampleSize = Math.round((float) width / (float) reqWidth);
+            }
         }
+        return inSampleSize;
+    }
+
+    public Bitmap getBitmap(Uri imageUri) throws FileNotFoundException {
+
+        WindowManager wm = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
+        int reqHeight = wm.getDefaultDisplay().getHeight();
+        int reqWidth = wm.getDefaultDisplay().getWidth();
+        
+        // First decode with inJustDecodeBounds=true to check dimensions
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        InputStream bitmapStream = view.getContext().getContentResolver().openInputStream(imageUri);
+        BitmapFactory.decodeStream(bitmapStream, null, options);
+
+        // Calculate inSampleSize
+        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+        
+        // Decode bitmap with inSampleSize set
+        options.inJustDecodeBounds = false;
+        
+        // Re-get the InputStream!
+        bitmapStream = view.getContext().getContentResolver().openInputStream(imageUri);
+        return BitmapFactory.decodeStream(bitmapStream, null, options);
     }
 
     ImageLoaderTask(ImageView view) {
@@ -32,8 +64,6 @@ class ImageLoaderTask extends AsyncTask<Uri, String, Bitmap> {
         Bitmap bitmap;
         try {
             bitmap = getBitmap(url);
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
