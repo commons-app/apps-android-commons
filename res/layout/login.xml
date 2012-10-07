@@ -24,12 +24,35 @@
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="150dp"
+            android:layout_height="fill_parent"
             android:layout_below="@+id/commonsLogo"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
-            android:orientation="vertical" >
-            
+            android:orientation="vertical"
+            android:padding="20dp" >
+
+            <EditText
+               android:id="@+id/loginUsername"
+               android:layout_width="fill_parent"
+               android:layout_height="wrap_content"
+               android:hint="@string/username" >
+
+               <requestFocus />
+           </EditText>
+
+           <EditText
+	            android:id="@+id/loginPassword"
+               android:layout_width="fill_parent"
+               android:layout_height="wrap_content"
+               android:hint="@string/password"
+               android:inputType="textPassword" />
+
+           <Button
+               android:id="@+id/loginButton"
+               android:layout_width="fill_parent"
+               android:layout_height="wrap_content"
+               android:layout_margin="20dp"
+               android:text="@string/login" />
             
         </LinearLayout>
         

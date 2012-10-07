@@ -38,13 +38,29 @@
         android:paddingBottom="8dip"
         android:background="@drawable/share_overlay_background_gradient" >
 
-        <TextView
-            android:textColor="#818181"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/upload_overlay_title"
-            android:layout_marginBottom="16dip"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/ic_download" />
+
+            <TextView
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dip"
+                android:text="@string/upload_overlay_title"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#818181" />
+        </LinearLayout>
+        
+        
+        
+        
 
         <TextView
             android:textColor="#818181"
@@ -63,6 +79,17 @@
             android:textColor="#363636"
             />
         
+         
+        <LinearLayout 
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:orientation="vertical"
+            android:background="#dadada"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+            
+        </LinearLayout>
+        
         <TextView
             android:textColor="#818181"
             android:layout_width="wrap_content"
@@ -78,6 +105,17 @@
             android:inputType="textMultiLine"
             android:textColor="#363636"
             />
+        
+         
+        <LinearLayout 
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:orientation="vertical"
+            android:background="#dadada"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+            
+        </LinearLayout>
         
         <Button
             android:id="@+id/uploadButton"
