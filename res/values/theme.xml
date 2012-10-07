@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.Commons" parent="android:style/Theme.Holo">
+    <style name="Theme.Commons" parent="android:style/Theme.Holo.Light">
     <item name="android:actionBarStyle">@style/ActionBar</item>
 	</style>
 
-	<style name="ActionBar" parent="android:style/Widget.Holo.ActionBar">
+	<style name="ActionBar" parent="android:style/Widget.Holo.Light.ActionBar">
 	    <item name="android:background">@drawable/action_bar_translucent</item>
 	</style>
 
