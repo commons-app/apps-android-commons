@@ -33,6 +33,7 @@ class ImageLoaderTask extends AsyncTask<Uri, String, Bitmap> {
 
     public Bitmap getBitmap(Uri imageUri) throws FileNotFoundException {
 
+        // FIXME: Use proper window width, not device width. But should do for now!
         WindowManager wm = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
         int reqHeight = wm.getDefaultDisplay().getHeight();
         int reqWidth = wm.getDefaultDisplay().getWidth();
