@@ -14,5 +14,9 @@
     <string name="upload_overlay_title">Upload to Commons</string>
     <string name="login_success">Login success!</string>
     <string name="login_failed">Login failed!</string>
-
+    <string name="uploading_title">Uploading photo</string>
+    <string name="uploading_message">More witty text here!</string>
+    <string name="uploading_success">Upload succeeded!</string>
+    <string name="uploading_failed">Upload failed!</string>
+    
 </resources>

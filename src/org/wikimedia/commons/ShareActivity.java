@@ -1,28 +1,16 @@
 package org.wikimedia.commons;
 
 import java.io.*;
-import java.net.*;
-import java.util.concurrent.ExecutionException;
-
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.TransformerFactoryConfigurationError;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 
 import org.mediawiki.api.ApiResult;
 import org.mediawiki.api.MWApi;
-import org.w3c.dom.Document;
 
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.app.Activity;
+import android.app.*;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.*;
 import android.util.Log;
 import android.view.*;
 import android.widget.*;
@@ -41,7 +29,8 @@ public class ShareActivity extends Activity {
     
     class UploadImageTask extends AsyncTask<String, Integer, String> {
         MWApi api;
-        Context context;
+        Activity context;
+        ProgressDialog dialog;
         
         @Override
         protected String doInBackground(String... params)  {
@@ -62,17 +51,17 @@ public class ShareActivity extends Activity {
             
             try {
                 ApiResult result = api.upload(filename, file, text, comment);
-                Document document = (Document)result.getDocument();
-                StringWriter wr = new StringWriter();
-                try {
-                    Transformer trans = TransformerFactory.newInstance().newTransformer();
-                    trans.transform(new DOMSource(result.getDocument()),   new StreamResult(wr));
-                    String res = wr.toString();
-                    return res;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    //FUCK YOU YOU SON OF A LEMON PARTY
-                }
+//                Document document = (Document)result.getDocument();
+//                StringWriter wr = new StringWriter();
+//                try {
+//                    Transformer trans = TransformerFactory.newInstance().newTransformer();
+//                    trans.transform(new DOMSource(result.getDocument()),   new StreamResult(wr));
+//                    String res = wr.toString();
+//                    return res;
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                    //FUCK YOU YOU SON OF A LEMON PARTY
+//                }
                 
 //                DOMImplementationLS domImplLS = (DOMImplementationLS) document
 //                    .getImplementation();
@@ -86,9 +75,33 @@ public class ShareActivity extends Activity {
             }
         }
         
-        UploadImageTask(MWApi api, Context context) {
+        UploadImageTask(MWApi api, Activity context) {
             this.api = api;
             this.context = context;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if(result.equals("Success")) {
+                dialog.hide();
+                Toast successToast = Toast.makeText(context, R.string.uploading_success, Toast.LENGTH_LONG);
+                successToast.show();
+                context.finish();
+            } else {
+                dialog.hide();
+                Toast failureToast = Toast.makeText(context, R.string.uploading_failed, Toast.LENGTH_LONG);
+                failureToast.show();
+            }
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog = new ProgressDialog(context);
+            dialog.setTitle(R.string.uploading_title);
+            dialog.setMessage(getString(R.string.uploading_message));
+            dialog.show();
         }
     }
     
@@ -110,7 +123,7 @@ public class ShareActivity extends Activity {
     
         Intent intent = getIntent();
         
-        final Context that = this;
+        final Activity that = this;
         
         if(intent.getAction().equals(Intent.ACTION_SEND)) {
             if(intent.getType().startsWith("image/")) {
@@ -124,13 +137,6 @@ public class ShareActivity extends Activity {
                         UploadImageTask uploadImage = new UploadImageTask(app.getApi(), that);
                         Log.d("Commons", "Starting upload, yo!");
                         uploadImage.execute(imageUri.toString(), titleEdit.getText().toString(), descEdit.getText().toString(), "Mobile Upload represent!");
-                        try {
-                            String result = uploadImage.get();
-                            Log.d("Commons", "Result is " + result);
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }
-                        
                     }
                 });
             }
