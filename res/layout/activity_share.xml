@@ -1,15 +1,27 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" >
-
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+    
+  
+    
     <ImageView
         android:id="@+id/backgroundImage"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:scaleType="centerCrop" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="12dp"
+            android:layout_marginTop="48dp"
+            android:background="@drawable/actionbar_top_shadow"
+            android:orientation="vertical" >
+        </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,6 +39,7 @@
         android:background="@drawable/share_overlay_background_gradient" >
 
         <TextView
+            android:textColor="#818181"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/upload_overlay_title"
@@ -34,6 +47,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
+            android:textColor="#818181"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Title"
@@ -46,9 +60,11 @@
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:scrollHorizontally="false"
+            android:textColor="#363636"
             />
         
         <TextView
+            android:textColor="#818181"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Description"
@@ -60,6 +76,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:inputType="textMultiLine"
+            android:textColor="#363636"
             />
         
         <Button
@@ -70,5 +87,7 @@
             />
         
     </LinearLayout>
+    
+    </RelativeLayout>
 
-</RelativeLayout>
+</FrameLayout>

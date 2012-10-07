@@ -95,7 +95,12 @@ public class ShareActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Actionbar overlay on top of imageview (should be called before .setcontentview)
+        getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+        getActionBar().setDisplayShowTitleEnabled(false);
+        
         setContentView(R.layout.activity_share);
+        
         app = (CommonsApplication)this.getApplicationContext();
         
         backgroundImageView = (ImageView)findViewById(R.id.backgroundImage);
