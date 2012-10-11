@@ -18,5 +18,6 @@
     <string name="uploading_message">More witty text here!</string>
     <string name="uploading_success">Upload succeeded!</string>
     <string name="uploading_failed">Upload failed!</string>
+    <string name="uploading_started">Upload started!</string>
     
 </resources>

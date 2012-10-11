@@ -28,6 +28,7 @@
                 <data android:mimeType="image/*" />
             </intent-filter>
         </activity>
+        <service android:name="UploadService"></service>
     </application>
 
 </manifest>
