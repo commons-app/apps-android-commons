@@ -5,5 +5,14 @@
     <style name="NoTitle" parent="AppTheme">
         <item name="android:windowNoTitle">true</item>
     </style>
-    
+
+    <style name="NotificationText">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+
+    <style name="NotificationTitle">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

@@ -4,7 +4,6 @@ import java.io.*;
 
 import org.mediawiki.api.ApiResult;
 import org.mediawiki.api.MWApi;
-import org.wikimedia.commons.UploadService.UploadBinder;
 
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -49,8 +48,6 @@ public class ShareActivity extends Activity {
     
         Intent intent = getIntent();
         
-        final Activity that = this;
-        
         if(intent.getAction().equals(Intent.ACTION_SEND)) {
             if(intent.getType().startsWith("image/")) {
                 ImageLoaderTask loader = new ImageLoaderTask(backgroundImageView);
@@ -60,31 +57,19 @@ public class ShareActivity extends Activity {
                 uploadButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Log.d("Commons", "Starting upload, yo!");
-                        ServiceConnection connection = new ServiceConnection() {
-                            
-                            @Override
-                            public void onServiceDisconnected(ComponentName name) {
-                            }
-                            
-                            @Override
-                            public void onServiceConnected(ComponentName name, IBinder service) {
-                                Log.d("Commons", "Service connected!");
-                               UploadService uploadService = ((UploadService.UploadBinder)service).getService();
-                               uploadService.doUpload(app.getApi(), imageUri, titleEdit.getText().toString(), 
-                                       descEdit.getText().toString(), "Mobile Upload represent!" );
-                               that.finish();
-                            }
-                        };
-                        that.bindService(new Intent(that, UploadService.class), connection, Context.BIND_AUTO_CREATE);
-                        Log.d("Commons", "Service requeseted");
+                        Intent uploadIntent = new Intent(getApplicationContext(), UploadService.class);
+                        uploadIntent.putExtra(UploadService.EXTRA_MEDIA_URI, imageUri);
+                        uploadIntent.putExtra(UploadService.EXTRA_TARGET_FILENAME, titleEdit.getText().toString());
+                        uploadIntent.putExtra(UploadService.EXTRA_PAGE_CONTENT, descEdit.getText().toString());
+                        uploadIntent.putExtra(UploadService.EXTRA_EDIT_SUMMARY, "Mobile upload from Wikimedia Commons Android app");
+                        startService(uploadIntent);
+                        finish();
                     }
                 });
             }
         }
     }
 
-    
     @Override
     protected void onResume() {
         super.onResume();
