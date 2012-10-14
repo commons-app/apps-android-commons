@@ -36,16 +36,19 @@ public class UploadService extends IntentService {
     private class NotificationUpdateProgressListener implements ProgressListener {
 
         Notification curNotification;
+        private int lastPercent = 0;
         public NotificationUpdateProgressListener(Notification curNotification) {
             Log.d("Commons", "Fuckity");
             this.curNotification = curNotification;
         }
         @Override
         public void onProgress(long transferred, long total) {
-            double percent = (double)transferred / (double)total * 100;
-            Log.d("Commons", "Uploaded " + percent + "% (" + transferred + " of " + total + ")");
-            curNotification.contentView.setProgressBar(R.id.uploadNotificationProgress, 100, (int)percent, false); 
-            notificationManager.notify(NOTIFICATION_DOWNLOAD_IN_PROGRESS, curNotification);
+            int percent =(int) ((double)transferred / (double)total * 100);
+            if(percent > lastPercent) {
+                curNotification.contentView.setProgressBar(R.id.uploadNotificationProgress, 100, percent, false); 
+                notificationManager.notify(NOTIFICATION_DOWNLOAD_IN_PROGRESS, curNotification);
+                lastPercent = percent;
+            }
         }
 
     }
