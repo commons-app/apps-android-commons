@@ -11,6 +11,7 @@ import android.content.*;
 import android.os.*;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.view.View;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 import android.net.*;
@@ -82,10 +83,6 @@ public class UploadService extends IntentService {
            file =  this.getContentResolver().openInputStream(mediaUri);
            length = this.getContentResolver().openAssetFileDescriptor(mediaUri, "r").getLength();
        } catch (FileNotFoundException e) {
-           throw new RuntimeException(e);
-       } catch (IOException e) {
-           //I'm hoping there are no streams that can be opened and read only once.
-           e.printStackTrace();
            throw new RuntimeException(e);
        }
             

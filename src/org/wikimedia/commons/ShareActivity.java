@@ -4,6 +4,7 @@ import java.io.*;
 
 import org.mediawiki.api.ApiResult;
 import org.mediawiki.api.MWApi;
+import org.wikimedia.commons.auth.LoginActivity;
 
 import android.net.Uri;
 import android.os.AsyncTask;

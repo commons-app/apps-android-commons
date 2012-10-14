@@ -10,11 +10,9 @@ import org.apache.http.params.CoreProtocolPNames;
 public class CommonsApplication extends Application {
 
     private MWApi api;
-    
-    @Override
-    public void onCreate() {
-        // TODO Auto-generated method stub
-        super.onCreate();
+    public static final String API_URL = "http://test.wikipedia.org/w/api.php";
+   
+    public static MWApi createMWApi() {
         DefaultHttpClient client = new DefaultHttpClient();
         // Because WMF servers support only HTTP/1.0. Biggest difference that
         // this makes is support for Chunked Transfer Encoding. 
@@ -22,7 +20,14 @@ public class CommonsApplication extends Application {
         // throws up. 
         client.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, 
                 HttpVersion.HTTP_1_0);
-        api = new MWApi("http://test.wikipedia.org/w/api.php", client);
+        return new MWApi(API_URL, client);
+    }
+    
+    @Override
+    public void onCreate() {
+        // TODO Auto-generated method stub
+        super.onCreate();
+        api = createMWApi();
     }
     
     public MWApi getApi() {
