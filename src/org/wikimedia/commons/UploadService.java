@@ -61,14 +61,6 @@ public class UploadService extends IntentService {
         notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
     }
 
-    private long countBytes(InputStream source) throws IOException {
-        long length = 0;
-        while(source.read() != -1) {
-            length++;
-        }
-        return length;
-    }
-    
     @Override
     protected void onHandleIntent(Intent intent) {
        MWApi api = ((CommonsApplication)this.getApplicationContext()).getApi();
@@ -85,9 +77,7 @@ public class UploadService extends IntentService {
        
        try {
            file =  this.getContentResolver().openInputStream(mediaUri);
-           InputStream streamForCounting = this.getContentResolver().openInputStream(mediaUri);
-           length = countBytes(streamForCounting);
-           streamForCounting.close();
+           length = this.getContentResolver().openAssetFileDescriptor(mediaUri, "r").getLength();
        } catch (FileNotFoundException e) {
            throw new RuntimeException(e);
        } catch (IOException e) {
