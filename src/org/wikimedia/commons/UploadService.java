@@ -42,7 +42,7 @@ public class UploadService extends IntentService {
         }
         @Override
         public void onProgress(long transferred, long total) {
-            double percent = transferred/total * 100;
+            double percent = (double)transferred / (double)total * 100;
             Log.d("Commons", "Uploaded " + percent + "% (" + transferred + " of " + total + ")");
             curNotification.contentView.setProgressBar(R.id.uploadNotificationProgress, 100, (int)percent, false); 
             notificationManager.notify(NOTIFICATION_DOWNLOAD_IN_PROGRESS, curNotification);
@@ -98,6 +98,7 @@ public class UploadService extends IntentService {
             
        notificationView = new RemoteViews(getPackageName(), R.layout.layout_upload_progress);
        notificationView.setTextViewText(R.id.uploadNotificationTitle, "Uploading " + filename);
+       notificationView.setProgressBar(R.id.uploadNotificationProgress, 100, 0, false);
        
        Log.d("Commons", "Before execution!");
        Notification curNotification = new NotificationCompat.Builder(this).setAutoCancel(true)
@@ -105,12 +106,11 @@ public class UploadService extends IntentService {
                .setAutoCancel(true)
                .setContent(notificationView)
                .setContentIntent(PendingIntent.getActivity(getApplicationContext(), 0, new Intent(), 0))
+               .setOngoing(true)
                .getNotification();
      
        notificationManager.notify(NOTIFICATION_DOWNLOAD_IN_PROGRESS, curNotification);
        
-       Toast startingToast = Toast.makeText(this, R.string.uploading_started, Toast.LENGTH_LONG);
-       startingToast.show(); 
        Log.d("Commons", "Just before");
        try {
            result = api.upload(filename, file, length, pageContents, editSummary, new NotificationUpdateProgressListener(curNotification));

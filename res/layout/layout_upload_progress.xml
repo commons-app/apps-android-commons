@@ -28,7 +28,9 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:indeterminate="false"
-             >
+            android:indeterminateOnly="false"
+            android:progressDrawable="@android:drawable/progress_horizontal" >
+
         </ProgressBar>
     </LinearLayout>
 
