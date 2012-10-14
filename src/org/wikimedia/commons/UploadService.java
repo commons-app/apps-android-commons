@@ -61,10 +61,19 @@ public class UploadService extends IntentService {
         notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
     }
 
+    private long countBytes(InputStream source) throws IOException {
+        long length = 0;
+        while(source.read() != -1) {
+            length++;
+        }
+        return length;
+    }
+    
     @Override
     protected void onHandleIntent(Intent intent) {
        MWApi api = ((CommonsApplication)this.getApplicationContext()).getApi();
        InputStream file;
+       long length;
        ApiResult result;
        RemoteViews notificationView;
        
@@ -76,7 +85,14 @@ public class UploadService extends IntentService {
        
        try {
            file =  this.getContentResolver().openInputStream(mediaUri);
+           InputStream streamForCounting = this.getContentResolver().openInputStream(mediaUri);
+           length = countBytes(streamForCounting);
+           streamForCounting.close();
        } catch (FileNotFoundException e) {
+           throw new RuntimeException(e);
+       } catch (IOException e) {
+           //I'm hoping there are no streams that can be opened and read only once.
+           e.printStackTrace();
            throw new RuntimeException(e);
        }
             
@@ -97,10 +113,8 @@ public class UploadService extends IntentService {
        startingToast.show(); 
        Log.d("Commons", "Just before");
        try {
-           result = api.upload(filename, file, pageContents, editSummary, new NotificationUpdateProgressListener(curNotification));
+           result = api.upload(filename, file, length, pageContents, editSummary, new NotificationUpdateProgressListener(curNotification));
        } catch (IOException e) {
-           // Do error handling!
-           Log.d("Commons", "Fuck");
            e.printStackTrace();
            throw new RuntimeException(e);
        }
