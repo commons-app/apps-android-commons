@@ -47,6 +47,8 @@ public class ShareActivity extends Activity {
         uploadButton = (Button)findViewById(R.id.uploadButton);
     
         Intent intent = getIntent();
+      
+        final Context that = this;
         
         if(intent.getAction().equals(Intent.ACTION_SEND)) {
             if(intent.getType().startsWith("image/")) {
@@ -63,6 +65,8 @@ public class ShareActivity extends Activity {
                         uploadIntent.putExtra(UploadService.EXTRA_PAGE_CONTENT, descEdit.getText().toString());
                         uploadIntent.putExtra(UploadService.EXTRA_EDIT_SUMMARY, "Mobile upload from Wikimedia Commons Android app");
                         startService(uploadIntent);
+                        Toast startingToast = Toast.makeText(that, R.string.uploading_started, Toast.LENGTH_LONG);
+                        startingToast.show(); 
                         finish();
                     }
                 });
