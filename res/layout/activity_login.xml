@@ -32,7 +32,9 @@
                android:id="@+id/loginUsername"
                android:layout_width="fill_parent"
                android:layout_height="wrap_content"
-               android:hint="@string/username" >
+               android:hint="@string/username"
+               android:inputType="textNoSuggestions"
+                >
 
                <requestFocus />
            </EditText>
