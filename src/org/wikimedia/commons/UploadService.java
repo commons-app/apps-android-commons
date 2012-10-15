@@ -37,17 +37,19 @@ public class UploadService extends IntentService {
     private class NotificationUpdateProgressListener implements ProgressListener {
 
         Notification curNotification;
+        String notificationTag;
         private int lastPercent = 0;
-        public NotificationUpdateProgressListener(Notification curNotification) {
+        public NotificationUpdateProgressListener(Notification curNotification, String notificationTag) {
             Log.d("Commons", "Fuckity");
             this.curNotification = curNotification;
+            this.notificationTag = notificationTag;
         }
         @Override
         public void onProgress(long transferred, long total) {
             int percent =(int) ((double)transferred / (double)total * 100);
             if(percent > lastPercent) {
                 curNotification.contentView.setProgressBar(R.id.uploadNotificationProgress, 100, percent, false); 
-                notificationManager.notify(NOTIFICATION_DOWNLOAD_IN_PROGRESS, curNotification);
+                notificationManager.notify(notificationTag, NOTIFICATION_DOWNLOAD_IN_PROGRESS, curNotification);
                 lastPercent = percent;
             }
         }
@@ -79,6 +81,8 @@ public class UploadService extends IntentService {
        String pageContents = intent.getStringExtra(EXTRA_PAGE_CONTENT);
        String editSummary = intent.getStringExtra(EXTRA_EDIT_SUMMARY);
        
+       String notificationTag = mediaUri.toString();
+               
        try {
            file =  this.getContentResolver().openInputStream(mediaUri);
            length = this.getContentResolver().openAssetFileDescriptor(mediaUri, "r").getLength();
@@ -96,21 +100,19 @@ public class UploadService extends IntentService {
                .setAutoCancel(true)
                .setContent(notificationView)
                .setContentIntent(PendingIntent.getActivity(getApplicationContext(), 0, new Intent(), 0))
-               .setOngoing(true)
                .getNotification();
      
-       notificationManager.notify(NOTIFICATION_DOWNLOAD_IN_PROGRESS, curNotification);
+       notificationManager.notify(notificationTag, NOTIFICATION_DOWNLOAD_IN_PROGRESS, curNotification);
        
        Log.d("Commons", "Just before");
        try {
-           result = api.upload(filename, file, length, pageContents, editSummary, new NotificationUpdateProgressListener(curNotification));
+           result = api.upload(filename, file, length, pageContents, editSummary, new NotificationUpdateProgressListener(curNotification, notificationTag));
        } catch (IOException e) {
            e.printStackTrace();
            throw new RuntimeException(e);
        }
        
        Log.d("Commons", "After");
-       notificationView.setTextViewText(R.id.uploadNotificationTitle, filename + " Uploaded!");
-       notificationManager.notify(NOTIFICATION_DOWNLOAD_IN_PROGRESS, curNotification);
+       notificationManager.cancel(notificationTag, NOTIFICATION_DOWNLOAD_IN_PROGRESS);
     }
 }
