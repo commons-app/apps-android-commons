@@ -63,6 +63,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 context.finish();
             } else {
                 Toast failureToast = Toast.makeText(context, R.string.login_failed, Toast.LENGTH_LONG);
+                dialog.dismiss();
                 failureToast.show();
             }
 
