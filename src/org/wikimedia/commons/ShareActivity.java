@@ -84,6 +84,8 @@ public class ShareActivity extends AuthenticatedActivity {
         titleEdit = (EditText)findViewById(R.id.titleEdit);
         descEdit = (EditText)findViewById(R.id.descEdit);
         uploadButton = (Button)findViewById(R.id.uploadButton);
+        
+        requestAuthToken();
     
     }
 

@@ -17,6 +17,7 @@ import android.accounts.AccountAuthenticatorResponse;
 import android.accounts.AccountManager;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.util.Log;
 import android.view.*;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,8 +44,9 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
+            Log.d("Commons", "Login done!");
             if (result.equals("Success")) {
-                dialog.cancel();
+                dialog.dismiss();
                 Toast successToast = Toast.makeText(context, R.string.login_success, Toast.LENGTH_SHORT);
                 successToast.show();
                 Account account = new Account(username, WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
@@ -112,6 +114,8 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 String username = usernameEdit.getText().toString();
                 String password = passwordEdit.getText().toString();
 
+                
+                Log.d("Commons", "Login to start!");
                 LoginTask task = new LoginTask(that);
                 task.execute(username, password);
             }
