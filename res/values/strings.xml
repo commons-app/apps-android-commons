@@ -3,14 +3,14 @@
     <string name="app_name">Wikimedia Commons</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_login">Sign in to Wikimedia Commons</string>
     <string name="login_subtitle">Login to upload media to commons</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="login">Log In</string>
     <string name="logging_in_title">Logging In</string>
     <string name="logging_in_message">Witty text here</string>
-    <string name="title_activity_share">ShareActivity</string>
+    <string name="title_activity_share">Wikimedia Commons</string>
     <string name="upload_overlay_title">Upload to Commons</string>
     <string name="login_success">Login success!</string>
     <string name="login_failed">Login failed!</string>
