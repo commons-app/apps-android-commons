@@ -40,7 +40,6 @@ public class UploadService extends IntentService {
         String notificationTag;
         private int lastPercent = 0;
         public NotificationUpdateProgressListener(Notification curNotification, String notificationTag) {
-            Log.d("Commons", "Fuckity");
             this.curNotification = curNotification;
             this.notificationTag = notificationTag;
         }

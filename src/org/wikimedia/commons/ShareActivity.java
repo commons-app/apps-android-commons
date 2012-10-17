@@ -4,7 +4,9 @@ import java.io.*;
 
 import org.mediawiki.api.ApiResult;
 import org.mediawiki.api.MWApi;
+import org.wikimedia.commons.auth.AuthenticatedActivity;
 import org.wikimedia.commons.auth.LoginActivity;
+import org.wikimedia.commons.auth.WikiAccountAuthenticator;
 
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -20,7 +22,11 @@ import android.view.*;
 import android.widget.*;
 import android.support.v4.app.NavUtils;
 
-public class ShareActivity extends Activity {
+public class ShareActivity extends AuthenticatedActivity {
+
+    public ShareActivity() {
+        super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
+    }
 
     private CommonsApplication app;
    
@@ -32,21 +38,9 @@ public class ShareActivity extends Activity {
     private Uri imageUri;
     
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        //Actionbar overlay on top of imageview (should be called before .setcontentview)
-        getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
-        getActionBar().setDisplayShowTitleEnabled(false);
-        
-        setContentView(R.layout.activity_share);
-        
-        app = (CommonsApplication)this.getApplicationContext();
-        
-        backgroundImageView = (ImageView)findViewById(R.id.backgroundImage);
-        titleEdit = (EditText)findViewById(R.id.titleEdit);
-        descEdit = (EditText)findViewById(R.id.descEdit);
-        uploadButton = (Button)findViewById(R.id.uploadButton);
-    
+    protected void onAuthCookieAcquired(String authCookie) {
+        super.onAuthCookieAcquired(authCookie);
+        app.getApi().setAuthCookie(authCookie);
         Intent intent = getIntent();
       
         final Context that = this;
@@ -76,12 +70,26 @@ public class ShareActivity extends Activity {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //Actionbar overlay on top of imageview (should be called before .setcontentview)
+        getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+        getActionBar().setDisplayShowTitleEnabled(false);
+        
+        setContentView(R.layout.activity_share);
+        
+        app = (CommonsApplication)this.getApplicationContext();
+        
+        backgroundImageView = (ImageView)findViewById(R.id.backgroundImage);
+        titleEdit = (EditText)findViewById(R.id.titleEdit);
+        descEdit = (EditText)findViewById(R.id.descEdit);
+        uploadButton = (Button)findViewById(R.id.uploadButton);
+    
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
-        if(!app.getApi().isLoggedIn) {
-            Intent loginIntent = new Intent(this, LoginActivity.class);
-            this.startActivity(loginIntent);
-        }
     }
 
 

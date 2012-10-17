@@ -14,6 +14,7 @@ import android.accounts.NetworkErrorException;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
 
@@ -47,7 +48,7 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
     }
 
     private String getAuthCookie(String username, String password) throws IOException {
-        MWApi api = ((CommonsApplication)context.getApplicationContext()).createMWApi();
+        MWApi api = CommonsApplication.createMWApi();
         String result = api.login(username, password);
         if(result.equals("Success")) {
             return api.getAuthCookie();
@@ -57,14 +58,6 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
     }
     @Override
     public Bundle getAuthToken(AccountAuthenticatorResponse response, Account account, String authTokenType, Bundle options) throws NetworkErrorException {
-        // If the caller requested an authToken type we don't support, then
-        // return an error
-        if (!authTokenType.equals(COMMONS_ACCOUNT_TYPE)) {
-            final Bundle result = new Bundle();
-            result.putString(AccountManager.KEY_ERROR_MESSAGE, "invalid authTokenType");
-            return result;
-        }
-
         // Extract the username and password from the Account Manager, and ask
         // the server for an appropriate AuthToken.
         final AccountManager am = AccountManager.get(context);
@@ -75,6 +68,7 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
                 authCookie = getAuthCookie(account.name, password);
             } catch (IOException e) {
                 // Network error!
+                e.printStackTrace();
                 throw new NetworkErrorException(e);
             }
             if (authCookie != null) {
