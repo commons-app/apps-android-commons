@@ -32,7 +32,8 @@ public class UploadService extends IntentService {
     public UploadService() {
         super("UploadService");
     }
-    public static final int NOTIFICATION_DOWNLOAD_IN_PROGRESS = 1;
+    public static final int NOTIFICATION_DOWNLOAD_IN_PROGRESS = 0;
+    public static final int NOTIFICATION_DOWNLOAD_COMPLETE = 1;
     
     private class NotificationUpdateProgressListener implements ProgressListener {
 
@@ -66,6 +67,7 @@ public class UploadService extends IntentService {
         notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
     }
 
+    
     @Override
     protected void onHandleIntent(Intent intent) {
        MWApi api = ((CommonsApplication)this.getApplicationContext()).getApi();
@@ -94,24 +96,35 @@ public class UploadService extends IntentService {
        notificationView.setProgressBar(R.id.uploadNotificationProgress, 100, 0, false);
        
        Log.d("Commons", "Before execution!");
-       Notification curNotification = new NotificationCompat.Builder(this).setAutoCancel(true)
+       Notification progressNotification = new NotificationCompat.Builder(this).setAutoCancel(true)
                .setSmallIcon(R.drawable.ic_launcher)
                .setAutoCancel(true)
                .setContent(notificationView)
                .setContentIntent(PendingIntent.getActivity(getApplicationContext(), 0, new Intent(), 0))
                .getNotification();
      
-       notificationManager.notify(notificationTag, NOTIFICATION_DOWNLOAD_IN_PROGRESS, curNotification);
+       notificationManager.notify(notificationTag, NOTIFICATION_DOWNLOAD_IN_PROGRESS, progressNotification);
        
        Log.d("Commons", "Just before");
        try {
-           result = api.upload(filename, file, length, pageContents, editSummary, new NotificationUpdateProgressListener(curNotification, notificationTag));
+           result = api.upload(filename, file, length, pageContents, editSummary, new NotificationUpdateProgressListener(progressNotification, notificationTag));
        } catch (IOException e) {
            e.printStackTrace();
            throw new RuntimeException(e);
        }
-       
-       Log.d("Commons", "After");
+      
        notificationManager.cancel(notificationTag, NOTIFICATION_DOWNLOAD_IN_PROGRESS);
+       
+       String descUrl = result.getString("/api/upload/imageinfo/@descriptionurl");
+       
+       Intent openUploadedPageIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(descUrl));
+       Notification doneNotification = new NotificationCompat.Builder(this)
+               .setSmallIcon(R.drawable.ic_launcher)
+               .setContentTitle(String.format(getString(R.string.upload_completed_notification_title), filename))
+               .setContentText(getString(R.string.upload_completed_notification_text))
+               .setContentIntent(PendingIntent.getActivity(this, 0, openUploadedPageIntent, 0))
+               .getNotification();
+       
+       notificationManager.notify(notificationTag, NOTIFICATION_DOWNLOAD_COMPLETE, doneNotification);
     }
 }

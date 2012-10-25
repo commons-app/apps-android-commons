@@ -20,5 +20,7 @@
     <string name="uploading_failed">Upload failed!</string>
     <string name="authentication_failed">Authentication failed!</string>
     <string name="uploading_started">Upload started!</string>
-    
+   
+    <string name="upload_completed_notification_title">%1$s uploaded!</string>
+    <string name="upload_completed_notification_text">Tap to view your upload</string>
 </resources>
