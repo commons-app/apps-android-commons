@@ -23,4 +23,7 @@
    
     <string name="upload_completed_notification_title">%1$s uploaded!</string>
     <string name="upload_completed_notification_text">Tap to view your upload</string>
+    <string name="upload_progress_notification_title_start">Starting %1$s upload</string>
+    <string name="upload_progress_notification_title_in_progress">%1$s uploading</string>
+    <string name="upload_progress_notification_title_finishing">Finishing uploading %1$s</string>
 </resources>

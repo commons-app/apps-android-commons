@@ -39,18 +39,37 @@ public class UploadService extends IntentService {
 
         Notification curNotification;
         String notificationTag;
+        boolean notificationTitleChanged;
+       
+        String notificationProgressTitle;
+        String notificationFinishingTitle;
+        
         private int lastPercent = 0;
-        public NotificationUpdateProgressListener(Notification curNotification, String notificationTag) {
+        
+        public NotificationUpdateProgressListener(Notification curNotification, String notificationTag, String notificationProgressTitle, String notificationFinishingTitle) {
             this.curNotification = curNotification;
             this.notificationTag = notificationTag;
+            this.notificationProgressTitle = notificationProgressTitle;
+            this.notificationFinishingTitle = notificationFinishingTitle;
         }
         @Override
         public void onProgress(long transferred, long total) {
+            RemoteViews curView = curNotification.contentView;
+            if(!notificationTitleChanged) {
+                curView.setTextViewText(R.id.uploadNotificationTitle, notificationProgressTitle);
+                notificationTitleChanged = false;
+                notificationManager.notify(notificationTag, NOTIFICATION_DOWNLOAD_IN_PROGRESS, curNotification);
+            }
             int percent =(int) ((double)transferred / (double)total * 100);
             if(percent > lastPercent) {
                 curNotification.contentView.setProgressBar(R.id.uploadNotificationProgress, 100, percent, false); 
                 notificationManager.notify(notificationTag, NOTIFICATION_DOWNLOAD_IN_PROGRESS, curNotification);
                 lastPercent = percent;
+            }
+            if(percent == 100) {
+                // Completed!
+                curView.setTextViewText(R.id.uploadNotificationTitle, notificationFinishingTitle);
+                notificationManager.notify(notificationTag, NOTIFICATION_DOWNLOAD_IN_PROGRESS, curNotification);
             }
         }
 
@@ -92,7 +111,7 @@ public class UploadService extends IntentService {
        }
             
        notificationView = new RemoteViews(getPackageName(), R.layout.layout_upload_progress);
-       notificationView.setTextViewText(R.id.uploadNotificationTitle, "Uploading " + filename);
+       notificationView.setTextViewText(R.id.uploadNotificationTitle, String.format(getString(R.string.upload_progress_notification_title_start), filename));
        notificationView.setProgressBar(R.id.uploadNotificationProgress, 100, 0, false);
        
        Log.d("Commons", "Before execution!");
@@ -106,8 +125,12 @@ public class UploadService extends IntentService {
        notificationManager.notify(notificationTag, NOTIFICATION_DOWNLOAD_IN_PROGRESS, progressNotification);
        
        Log.d("Commons", "Just before");
+       NotificationUpdateProgressListener notificationUpdater = new NotificationUpdateProgressListener(progressNotification, notificationTag, 
+                                                                    String.format(getString(R.string.upload_progress_notification_title_in_progress), filename), 
+                                                                    String.format(getString(R.string.upload_progress_notification_title_finishing), filename)
+                                                                );
        try {
-           result = api.upload(filename, file, length, pageContents, editSummary, new NotificationUpdateProgressListener(progressNotification, notificationTag));
+           result = api.upload(filename, file, length, pageContents, editSummary, notificationUpdater);
        } catch (IOException e) {
            e.printStackTrace();
            throw new RuntimeException(e);
