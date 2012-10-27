@@ -4,6 +4,7 @@ import java.net.*;
 import java.io.*;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.*;
 import android.net.Uri;
 import android.os.*;
@@ -30,14 +31,36 @@ class ImageLoaderTask extends AsyncTask<Uri, String, Bitmap> {
         }
         return inSampleSize;
     }
+    
+    private int getOrientation(Uri photoUri) {
+        /* it's on the external media. */
+        Cursor cursor = view.getContext().getContentResolver().query(photoUri,
+                new String[] { MediaStore.Images.ImageColumns.ORIENTATION }, null, null, null);
 
+        if (cursor.getCount() != 1) {
+            return -1;
+        }
+
+        cursor.moveToFirst();
+        return cursor.getInt(0);
+    }
+    
     public Bitmap getBitmap(Uri imageUri) throws FileNotFoundException {
 
+        
         // FIXME: Use proper window width, not device width. But should do for now!
         WindowManager wm = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
         int reqHeight = wm.getDefaultDisplay().getHeight();
         int reqWidth = wm.getDefaultDisplay().getWidth();
         
+        int orientation = getOrientation(imageUri);
+        
+        if(orientation == 90 || orientation == 270) {
+            // Swap height and width if this is rotated
+            int temp = reqHeight;
+            reqHeight = reqWidth;
+            reqWidth = temp;
+        }
         // First decode with inJustDecodeBounds=true to check dimensions
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
@@ -52,7 +75,12 @@ class ImageLoaderTask extends AsyncTask<Uri, String, Bitmap> {
         
         // Re-get the InputStream!
         bitmapStream = view.getContext().getContentResolver().openInputStream(imageUri);
-        return BitmapFactory.decodeStream(bitmapStream, null, options);
+        Bitmap bitmap = BitmapFactory.decodeStream(bitmapStream, null, options);
+        
+        Matrix matrix = new Matrix();
+        matrix.postRotate(orientation);
+        
+        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
     }
 
     ImageLoaderTask(ImageView view) {
