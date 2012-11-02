@@ -112,12 +112,14 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             @Override
             public void onClick(View v) {
                 String username = usernameEdit.getText().toString();
-                String password = passwordEdit.getText().toString();
+                // Because Mediawiki is upercase-first-char-then-case-sensitive :)
+                String canonicalUsername = username.substring(0,1).toUpperCase() + username.substring(1);
 
+                String password = passwordEdit.getText().toString();
                 
                 Log.d("Commons", "Login to start!");
                 LoginTask task = new LoginTask(that);
-                task.execute(username, password);
+                task.execute(canonicalUsername, password);
             }
         });
     }
