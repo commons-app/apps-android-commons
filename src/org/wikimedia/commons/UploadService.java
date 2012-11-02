@@ -3,6 +3,7 @@ package org.wikimedia.commons;
 import java.io.*;
 
 import org.mediawiki.api.*;
+import org.wikimedia.commons.media.Media;
 
 import de.mastacode.http.ProgressListener;
 
@@ -21,7 +22,7 @@ public class UploadService extends IntentService {
     private static final String EXTRA_PREFIX = "org.wikimedia.commons.uploader";
     public static final String EXTRA_MEDIA_URI = EXTRA_PREFIX + ".media_uri";
     public static final String EXTRA_TARGET_FILENAME = EXTRA_PREFIX + ".filename";
-    public static final String EXTRA_PAGE_CONTENT = EXTRA_PREFIX + ".content";
+    public static final String EXTRA_DESCRIPTION = EXTRA_PREFIX + ".description";
     public static final String EXTRA_EDIT_SUMMARY = EXTRA_PREFIX + ".summary";
    
     private NotificationManager notificationManager;
@@ -101,9 +102,8 @@ public class UploadService extends IntentService {
        Bundle extras = intent.getExtras();
        Uri mediaUri = (Uri)extras.getParcelable(EXTRA_MEDIA_URI);
        String filename = intent.getStringExtra(EXTRA_TARGET_FILENAME);
-       String pageContents = intent.getStringExtra(EXTRA_PAGE_CONTENT);
+       String description = intent.getStringExtra(EXTRA_DESCRIPTION);
        String editSummary = intent.getStringExtra(EXTRA_EDIT_SUMMARY);
-       
        String notificationTag = mediaUri.toString();
                
        try {
@@ -147,7 +147,8 @@ public class UploadService extends IntentService {
                    return;
                }
            }
-           result = api.upload(filename, file, length, pageContents, editSummary, notificationUpdater);
+           Media media = new Media(mediaUri, filename, description, editSummary, app.getCurrentAccount().name);
+           result = api.upload(filename, file, length, media.getPageContents(), editSummary, notificationUpdater);
        } catch (IOException e) {
            e.printStackTrace();
            throw new RuntimeException(e);

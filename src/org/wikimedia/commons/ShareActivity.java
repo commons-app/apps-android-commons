@@ -57,7 +57,7 @@ public class ShareActivity extends AuthenticatedActivity {
                         Intent uploadIntent = new Intent(getApplicationContext(), UploadService.class);
                         uploadIntent.putExtra(UploadService.EXTRA_MEDIA_URI, imageUri);
                         uploadIntent.putExtra(UploadService.EXTRA_TARGET_FILENAME, titleEdit.getText().toString());
-                        uploadIntent.putExtra(UploadService.EXTRA_PAGE_CONTENT, descEdit.getText().toString());
+                        uploadIntent.putExtra(UploadService.EXTRA_DESCRIPTION, descEdit.getText().toString());
                         uploadIntent.putExtra(UploadService.EXTRA_EDIT_SUMMARY, "Mobile upload from Wikimedia Commons Android app");
                         startService(uploadIntent);
                         Toast startingToast = Toast.makeText(that, R.string.uploading_started, Toast.LENGTH_LONG);
