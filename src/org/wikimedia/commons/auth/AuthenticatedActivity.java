@@ -2,6 +2,8 @@ package org.wikimedia.commons.auth;
 
 import java.io.IOException;
 
+import org.wikimedia.commons.CommonsApplication;
+
 import android.accounts.*;
 import android.app.Activity;
 import android.content.*;
@@ -14,6 +16,8 @@ public class AuthenticatedActivity extends Activity {
     
     
     String accountType;
+    CommonsApplication app;
+    
     public AuthenticatedActivity(String accountType) {
        this.accountType = accountType;
     }
@@ -102,9 +106,8 @@ public class AuthenticatedActivity extends Activity {
     }
     protected void requestAuthToken() {
         AccountManager accountManager = AccountManager.get(this);
-        Account[] allAccounts =accountManager.getAccountsByType(accountType);
-        Account curAccount = null;
-        if(allAccounts.length == 0) {
+        Account curAccount = app.getCurrentAccount();
+        if(curAccount == null) {
             AddAccountTask addAccountTask = new AddAccountTask(accountManager);
             // This AsyncTask blocks until the Login Activity returns
             // And since in Android 4.x+ only one background thread runs all AsyncTasks
@@ -114,12 +117,21 @@ public class AuthenticatedActivity extends Activity {
             // See: https://groups.google.com/forum/?fromgroups=#!topic/android-developers/8M0RTFfO7-M
             addAccountTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         } else {
-            curAccount = allAccounts[0];
             GetAuthCookieTask task = new GetAuthCookieTask(curAccount, accountManager);
             task.execute();
         }
     }
     
+    
+    
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        app = (CommonsApplication)this.getApplicationContext();
+    }
+
+
+
     protected void onAuthCookieAcquired(String authCookie) {
         
     }

@@ -18,6 +18,7 @@ import org.apache.http.params.CoreProtocolPNames;
 public class CommonsApplication extends Application {
 
     private MWApi api;
+    private Account currentAccount = null; // Unlike a savings account...
     public static final String API_URL = "http://test.wikipedia.org/w/api.php";
    
     public static MWApi createMWApi() {
@@ -42,10 +43,24 @@ public class CommonsApplication extends Application {
         return api;
     }
     
+    public Account getCurrentAccount() {
+        if(currentAccount == null) {
+            AccountManager accountManager = AccountManager.get(this);
+            Account[] allAccounts = accountManager.getAccountsByType(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
+            if(allAccounts.length != 0) {
+                currentAccount = allAccounts[0];
+            }
+        }
+        return currentAccount;
+    }
+    
     public Boolean revalidateAuthToken() {
         AccountManager accountManager = AccountManager.get(this);
-        Account[] allAccounts =accountManager.getAccountsByType(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
-        Account curAccount = allAccounts[0];
+        Account curAccount = getCurrentAccount();
+       
+        if(curAccount == null) {
+            return false; // This should never happen
+        }
         
         accountManager.invalidateAuthToken(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE, api.getAuthCookie());
         try {
