@@ -25,6 +25,8 @@ public class UploadService extends IntentService {
     public static final String EXTRA_EDIT_SUMMARY = EXTRA_PREFIX + ".summary";
    
     private NotificationManager notificationManager;
+    private CommonsApplication app;
+    
     public UploadService(String name) {
         super(name);
     }
@@ -84,12 +86,13 @@ public class UploadService extends IntentService {
     public void onCreate() {
         super.onCreate();
         notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+        app = (CommonsApplication)this.getApplicationContext();
     }
 
     
     @Override
     protected void onHandleIntent(Intent intent) {
-       MWApi api = ((CommonsApplication)this.getApplicationContext()).getApi();
+       MWApi api = app.getApi();
        InputStream file;
        long length;
        ApiResult result;
@@ -124,12 +127,26 @@ public class UploadService extends IntentService {
      
        notificationManager.notify(notificationTag, NOTIFICATION_DOWNLOAD_IN_PROGRESS, progressNotification);
        
+       
        Log.d("Commons", "Just before");
        NotificationUpdateProgressListener notificationUpdater = new NotificationUpdateProgressListener(progressNotification, notificationTag, 
                                                                     String.format(getString(R.string.upload_progress_notification_title_in_progress), filename), 
                                                                     String.format(getString(R.string.upload_progress_notification_title_finishing), filename)
                                                                 );
        try {
+           if(!api.validateLogin()) {
+               // Need to revalidate! 
+               if(app.revalidateAuthToken()) {
+                   Log.d("Commons", "Successfully revalidated token!");
+               } else {
+                   Log.d("Commons", "Unable to revalidate :(");
+                   // TODO: Put up a new notification, ask them to re-login
+                   notificationManager.cancel(notificationTag, NOTIFICATION_DOWNLOAD_IN_PROGRESS);
+                   Toast failureToast = Toast.makeText(this, R.string.authentication_failed, Toast.LENGTH_LONG);
+                   failureToast.show();
+                   return;
+               }
+           }
            result = api.upload(filename, file, length, pageContents, editSummary, notificationUpdater);
        } catch (IOException e) {
            e.printStackTrace();
@@ -142,6 +159,7 @@ public class UploadService extends IntentService {
        
        Intent openUploadedPageIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(descUrl));
        Notification doneNotification = new NotificationCompat.Builder(this)
+               .setAutoCancel(true)
                .setSmallIcon(R.drawable.ic_launcher)
                .setContentTitle(String.format(getString(R.string.upload_completed_notification_title), filename))
                .setContentText(getString(R.string.upload_completed_notification_text))
