@@ -1,6 +1,7 @@
 package org.wikimedia.commons;
 
 import java.io.*;
+import java.util.Date;
 
 import org.mediawiki.api.*;
 import org.wikimedia.commons.media.Media;
@@ -9,8 +10,11 @@ import de.mastacode.http.ProgressListener;
 
 import android.app.*;
 import android.content.*;
+import android.database.Cursor;
 import android.os.*;
+import android.provider.MediaStore;
 import android.support.v4.app.NotificationCompat;
+import android.text.method.DateTimeKeyListener;
 import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
@@ -105,10 +109,17 @@ public class UploadService extends IntentService {
        String description = intent.getStringExtra(EXTRA_DESCRIPTION);
        String editSummary = intent.getStringExtra(EXTRA_EDIT_SUMMARY);
        String notificationTag = mediaUri.toString();
+       Date dateCreated = null;
                
        try {
            file =  this.getContentResolver().openInputStream(mediaUri);
            length = this.getContentResolver().openAssetFileDescriptor(mediaUri, "r").getLength();
+           Cursor cursor = this.getContentResolver().query(mediaUri,
+                new String[] { MediaStore.Images.ImageColumns.DATE_TAKEN }, null, null, null);
+           if(cursor.getCount() != 0) {
+               cursor.moveToFirst();
+               dateCreated = new Date(cursor.getInt(0));
+           }
        } catch (FileNotFoundException e) {
            throw new RuntimeException(e);
        }
@@ -147,13 +158,14 @@ public class UploadService extends IntentService {
                    return;
                }
            }
-           Media media = new Media(mediaUri, filename, description, editSummary, app.getCurrentAccount().name);
+           Media media = new Media(mediaUri, filename, description, editSummary, app.getCurrentAccount().name, dateCreated);
            result = api.upload(filename, file, length, media.getPageContents(), editSummary, notificationUpdater);
        } catch (IOException e) {
            e.printStackTrace();
            throw new RuntimeException(e);
        }
       
+       Log.d("Commons", app.getStringFromDOM(result.getDocument()));
        notificationManager.cancel(notificationTag, NOTIFICATION_DOWNLOAD_IN_PROGRESS);
        
        String descUrl = result.getString("/api/upload/imageinfo/@descriptionurl");
