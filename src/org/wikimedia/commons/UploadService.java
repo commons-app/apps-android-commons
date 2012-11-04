@@ -39,8 +39,11 @@ public class UploadService extends IntentService {
     public UploadService() {
         super("UploadService");
     }
-    public static final int NOTIFICATION_DOWNLOAD_IN_PROGRESS = 0;
-    public static final int NOTIFICATION_DOWNLOAD_COMPLETE = 1;
+    // DO NOT HAVE NOTIFICATION ID OF 0 FOR ANYTHING
+    // See http://stackoverflow.com/questions/8725909/startforeground-does-not-show-my-notification
+    // Seriously, Android?
+    public static final int NOTIFICATION_DOWNLOAD_IN_PROGRESS = 1;
+    public static final int NOTIFICATION_DOWNLOAD_COMPLETE = 2;
     
     private class NotificationUpdateProgressListener implements ProgressListener {
 
@@ -65,18 +68,18 @@ public class UploadService extends IntentService {
             if(!notificationTitleChanged) {
                 curView.setTextViewText(R.id.uploadNotificationTitle, notificationProgressTitle);
                 notificationTitleChanged = false;
-                notificationManager.notify(notificationTag, NOTIFICATION_DOWNLOAD_IN_PROGRESS, curNotification);
+                startForeground(NOTIFICATION_DOWNLOAD_IN_PROGRESS, curNotification);
             }
             int percent =(int) ((double)transferred / (double)total * 100);
             if(percent > lastPercent) {
                 curNotification.contentView.setProgressBar(R.id.uploadNotificationProgress, 100, percent, false); 
-                notificationManager.notify(notificationTag, NOTIFICATION_DOWNLOAD_IN_PROGRESS, curNotification);
+                startForeground(NOTIFICATION_DOWNLOAD_IN_PROGRESS, curNotification);
                 lastPercent = percent;
             }
             if(percent == 100) {
                 // Completed!
                 curView.setTextViewText(R.id.uploadNotificationTitle, notificationFinishingTitle);
-                notificationManager.notify(notificationTag, NOTIFICATION_DOWNLOAD_IN_PROGRESS, curNotification);
+                startForeground(NOTIFICATION_DOWNLOAD_IN_PROGRESS, curNotification);
             }
         }
 
@@ -133,11 +136,11 @@ public class UploadService extends IntentService {
                .setSmallIcon(R.drawable.ic_launcher)
                .setAutoCancel(true)
                .setContent(notificationView)
+               .setOngoing(true)
                .setContentIntent(PendingIntent.getActivity(getApplicationContext(), 0, new Intent(), 0))
                .getNotification();
      
-       notificationManager.notify(notificationTag, NOTIFICATION_DOWNLOAD_IN_PROGRESS, progressNotification);
-       
+       this.startForeground(NOTIFICATION_DOWNLOAD_IN_PROGRESS, progressNotification);
        
        Log.d("Commons", "Just before");
        NotificationUpdateProgressListener notificationUpdater = new NotificationUpdateProgressListener(progressNotification, notificationTag, 
@@ -162,11 +165,12 @@ public class UploadService extends IntentService {
            result = api.upload(filename, file, length, media.getPageContents(), editSummary, notificationUpdater);
        } catch (IOException e) {
            e.printStackTrace();
+           Log.d("Commons", "I have a network fuckup");
            throw new RuntimeException(e);
        }
       
-       Log.d("Commons", app.getStringFromDOM(result.getDocument()));
-       notificationManager.cancel(notificationTag, NOTIFICATION_DOWNLOAD_IN_PROGRESS);
+       Log.d("Commons", "Response is"  + CommonsApplication.getStringFromDOM(result.getDocument()));
+       stopForeground(true);
        
        String descUrl = result.getString("/api/upload/imageinfo/@descriptionurl");
        
