@@ -138,6 +138,7 @@ public class UploadService extends IntentService {
                .setContent(notificationView)
                .setOngoing(true)
                .setContentIntent(PendingIntent.getActivity(getApplicationContext(), 0, new Intent(), 0))
+               .setTicker(String.format(getString(R.string.upload_progress_notification_title_in_progress), filename))
                .getNotification();
      
        this.startForeground(NOTIFICATION_DOWNLOAD_IN_PROGRESS, progressNotification);
@@ -180,6 +181,7 @@ public class UploadService extends IntentService {
                .setSmallIcon(R.drawable.ic_launcher)
                .setContentTitle(String.format(getString(R.string.upload_completed_notification_title), filename))
                .setContentText(getString(R.string.upload_completed_notification_text))
+               .setTicker(String.format(getString(R.string.upload_completed_notification_title), filename))
                .setContentIntent(PendingIntent.getActivity(this, 0, openUploadedPageIntent, 0))
                .getNotification();
        
