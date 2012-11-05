@@ -119,7 +119,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 
                 Log.d("Commons", "Login to start!");
                 LoginTask task = new LoginTask(that);
-                task.execute(canonicalUsername, password);
+                 task.execute(canonicalUsername, password);
             }
         });
     }

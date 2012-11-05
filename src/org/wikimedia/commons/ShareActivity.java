@@ -2,25 +2,23 @@ package org.wikimedia.commons;
 
 import java.io.*;
 
-import org.mediawiki.api.ApiResult;
-import org.mediawiki.api.MWApi;
 import org.wikimedia.commons.auth.AuthenticatedActivity;
-import org.wikimedia.commons.auth.LoginActivity;
 import org.wikimedia.commons.auth.WikiAccountAuthenticator;
 
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.IBinder;
-import android.app.*;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.util.Log;
-import android.view.*;
-import android.widget.*;
+import android.widget.ImageView;
 import android.support.v4.app.NavUtils;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.Window;
+import android.widget.*;
+import android.view.*;
+
 
 public class ShareActivity extends AuthenticatedActivity {
 
@@ -85,8 +83,7 @@ public class ShareActivity extends AuthenticatedActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Actionbar overlay on top of imageview (should be called before .setcontentview)
-        getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
-        getActionBar().setDisplayShowTitleEnabled(false);
+        requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
         
         setContentView(R.layout.activity_share);
         
@@ -109,7 +106,7 @@ public class ShareActivity extends AuthenticatedActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_share, menu);
+        getSupportMenuInflater().inflate(R.menu.activity_share, menu);
         return true;
     }
 

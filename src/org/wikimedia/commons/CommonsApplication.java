@@ -7,6 +7,9 @@ import javax.xml.transform.*;
 
 import android.accounts.*;
 import android.app.Application;
+import android.os.AsyncTask;
+import android.os.Build;
+
 import org.mediawiki.api.*;
 import org.w3c.dom.Node;
 import org.wikimedia.commons.auth.WikiAccountAuthenticator;
@@ -103,4 +106,14 @@ public class CommonsApplication extends Application {
        } 
        return outputStream.toString();
     }
+    
+    static public <T> void executeAsyncTask(AsyncTask<T, ?, ?> task,
+            T... params) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
+        }
+        else {
+            task.execute(params);
+        }
+    } 
 }

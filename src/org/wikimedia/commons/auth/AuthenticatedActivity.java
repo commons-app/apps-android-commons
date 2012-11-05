@@ -4,15 +4,13 @@ import java.io.IOException;
 
 import org.wikimedia.commons.CommonsApplication;
 
+import com.actionbarsherlock.app.*;
+
 import android.accounts.*;
-import android.app.Activity;
-import android.content.*;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 
-public class AuthenticatedActivity extends Activity {
+public class AuthenticatedActivity extends SherlockActivity {
     
     
     String accountType;
@@ -115,22 +113,18 @@ public class AuthenticatedActivity extends Activity {
             // returns, we have a deadlock!
             // Fixed by explicitly asking this to be executed in parallel
             // See: https://groups.google.com/forum/?fromgroups=#!topic/android-developers/8M0RTFfO7-M
-            addAccountTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            CommonsApplication.executeAsyncTask(addAccountTask);
         } else {
             GetAuthCookieTask task = new GetAuthCookieTask(curAccount, accountManager);
             task.execute();
         }
     }
     
-    
-    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         app = (CommonsApplication)this.getApplicationContext();
     }
-
-
 
     protected void onAuthCookieAcquired(String authCookie) {
         
