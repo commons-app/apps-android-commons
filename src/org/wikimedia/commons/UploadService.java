@@ -44,6 +44,7 @@ public class UploadService extends IntentService {
     // Seriously, Android?
     public static final int NOTIFICATION_DOWNLOAD_IN_PROGRESS = 1;
     public static final int NOTIFICATION_DOWNLOAD_COMPLETE = 2;
+    public static final int NOTIFICATION_UPLOAD_FAILED = 3;
     
     private class NotificationUpdateProgressListener implements ProgressListener {
 
@@ -156,7 +157,7 @@ public class UploadService extends IntentService {
                } else {
                    Log.d("Commons", "Unable to revalidate :(");
                    // TODO: Put up a new notification, ask them to re-login
-                   notificationManager.cancel(notificationTag, NOTIFICATION_DOWNLOAD_IN_PROGRESS);
+                   stopForeground(true);
                    Toast failureToast = Toast.makeText(this, R.string.authentication_failed, Toast.LENGTH_LONG);
                    failureToast.show();
                    return;
@@ -165,9 +166,18 @@ public class UploadService extends IntentService {
            Media media = new Media(mediaUri, filename, description, editSummary, app.getCurrentAccount().name, dateCreated);
            result = api.upload(filename, file, length, media.getPageContents(), editSummary, notificationUpdater);
        } catch (IOException e) {
-           e.printStackTrace();
            Log.d("Commons", "I have a network fuckup");
-           throw new RuntimeException(e);
+           stopForeground(true);
+           Notification failureNotification = new NotificationCompat.Builder(this).setAutoCancel(true)
+                   .setSmallIcon(R.drawable.ic_launcher)
+                   .setAutoCancel(true)
+                   .setContentIntent(PendingIntent.getService(getApplicationContext(), 0, intent, 0))
+                   .setTicker(String.format(getString(R.string.upload_failed_notification_title), filename))
+                   .setContentTitle(String.format(getString(R.string.upload_failed_notification_title), filename))
+                   .setContentText(getString(R.string.upload_failed_notification_subtitle))
+                   .getNotification();
+           notificationManager.notify(NOTIFICATION_UPLOAD_FAILED, failureNotification);
+           return;
        }
       
        Log.d("Commons", "Response is"  + CommonsApplication.getStringFromDOM(result.getDocument()));
