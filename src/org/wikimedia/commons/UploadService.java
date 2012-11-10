@@ -118,11 +118,12 @@ public class UploadService extends IntentService {
        try {
            file =  this.getContentResolver().openInputStream(mediaUri);
            length = this.getContentResolver().openAssetFileDescriptor(mediaUri, "r").getLength();
+           
            Cursor cursor = this.getContentResolver().query(mediaUri,
                 new String[] { MediaStore.Images.ImageColumns.DATE_TAKEN }, null, null, null);
            if(cursor.getCount() != 0) {
                cursor.moveToFirst();
-               dateCreated = new Date(cursor.getInt(0));
+               dateCreated = new Date(cursor.getLong(0));
            }
        } catch (FileNotFoundException e) {
            throw new RuntimeException(e);
