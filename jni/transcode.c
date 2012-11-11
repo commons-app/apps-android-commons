@@ -56,6 +56,8 @@ static int transcode(const char *infile, const char *outfile,
     gst_object_unref (bus);
     gst_element_set_state (pipeline, GST_STATE_NULL);
     gst_object_unref (pipeline);
+
+    return 0;
 }
 
 jint Java_org_wikimedia_commons_Transcoder_transcode(JNIEnv* env,
