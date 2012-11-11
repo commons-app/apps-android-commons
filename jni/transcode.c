@@ -15,7 +15,7 @@ static int init(void)
 }
 
 static int transcode(const char *infile, const char *outfile,
-        const char *profile)
+        const char *profile, jobject cb_obj, JNIEnv *env)
 {
     GstElement *pipeline;
     GstBus *bus;
@@ -25,8 +25,10 @@ static int transcode(const char *infile, const char *outfile,
     init();
 
     snprintf(pipeline_str, 1024,
-            "filesrc location=\"%s\" ! decodebin2 ! audioconvert ! "
-            "vorbisenc ! oggmux ! filesink location=\"%s\"",
+            "filesrc location=\"%s\" ! "
+            "progressreport silent=true format=percent update-freq=1 ! "
+            "decodebin2 ! audioconvert ! vorbisenc ! oggmux ! "
+            "filesink location=\"%s\"",
             infile, outfile);
 
     pipeline = gst_parse_launch(pipeline_str, NULL);
@@ -34,22 +36,58 @@ static int transcode(const char *infile, const char *outfile,
     gst_element_set_state (pipeline, GST_STATE_PLAYING);
 
     bus = gst_element_get_bus(pipeline);
-    msg = gst_bus_timed_pop_filtered(bus, GST_CLOCK_TIME_NONE,
-            GST_MESSAGE_ERROR | GST_MESSAGE_EOS);
 
-    if (GST_MESSAGE_TYPE(msg) == GST_MESSAGE_ERROR) {
-        GError *err = NULL;
-        gchar *debug_info = NULL;
+    for (;;) {
+        msg = gst_bus_timed_pop_filtered(bus, GST_CLOCK_TIME_NONE,
+                GST_MESSAGE_ERROR | GST_MESSAGE_EOS | GST_MESSAGE_ELEMENT);
 
-        gst_message_parse_error(msg, &err, &debug_info);
+        switch (GST_MESSAGE_TYPE(msg)) {
+            case GST_MESSAGE_ELEMENT: {
+                const GstStructure *s = gst_message_get_structure(msg);
+                int percent;
+                jclass cb_class;
+                jmethodID cb_id;
 
-        GST_ERROR_OBJECT(pipeline, "%s -- %s", err->message,
-                debug_info ? debug_info : "no debug info");
+                if (!cb_obj)
+                    break;
 
-        g_error_free(err);
-        g_free(debug_info);
+                if (!g_str_equal(gst_structure_get_name(s), "progress"))
+                    break;
+
+                gst_structure_get_int(s, "percent", &percent);
+
+                break;
+
+                cb_class = (*env)->FindClass(env, "org/wikimedia/commons/TranscoderProgressCallback");
+                cb_id = (*env)->GetMethodID(env, cb_class, "transcodeProgressCb", "(I)V");
+                (*env)->CallVoidMethod(env, cb_obj, cb_id, percent);
+
+                break;
+            }
+
+            case GST_MESSAGE_ERROR: {
+                GError *err = NULL;
+                gchar *debug_info = NULL;
+
+                gst_message_parse_error(msg, &err, &debug_info);
+
+                GST_ERROR_OBJECT(pipeline, "%s -- %s", err->message,
+                        debug_info ? debug_info : "no debug info");
+
+                g_error_free(err);
+                g_free(debug_info);
+                goto done;
+            }
+
+            case GST_MESSAGE_EOS:
+                goto done;
+
+            default:
+                break;
+        }
     }
 
+done:
     if (msg != NULL)
         gst_message_unref (msg);
 
@@ -61,7 +99,8 @@ static int transcode(const char *infile, const char *outfile,
 }
 
 jint Java_org_wikimedia_commons_Transcoder_transcode(JNIEnv* env,
-        jclass *klass, jstring infile, jstring outfile, jstring profile)
+        jclass *klass, jstring infile, jstring outfile, jstring profile,
+        jobject cb_obj)
 {
     const char *in;
     const char *out;
@@ -76,7 +115,7 @@ jint Java_org_wikimedia_commons_Transcoder_transcode(JNIEnv* env,
     if (profile)
         prof = (*env)->GetStringUTFChars(env, profile, 0);
 
-    return transcode(in, out, prof);
+    return transcode(in, out, prof, cb_obj, env);
 }
 
 
