@@ -17,7 +17,6 @@ GSTREAMER_PLUGINS := \
 	$(GSTREAMER_PLUGINS_PLAYBACK) \
 	debug \
 	audioparsers id3demux isomp4 ogg vorbis  \
-	amrnb amrwbdec faad mad mpegaudioparse \
-	amc
+	amrnb amrwbdec faad mad mpegaudioparse
 
 include $(GSTREAMER_NDK_BUILD_PATH)/gstreamer.mk
