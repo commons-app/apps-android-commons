@@ -22,6 +22,7 @@ static int transcode(const char *infile, const char *outfile,
     GstBus *bus;
     GstMessage *msg;
     gchar pipeline_str[1024];
+    int ret = 0;
 
     init();
 
@@ -89,6 +90,8 @@ static int transcode(const char *infile, const char *outfile,
 
                 g_error_free(err);
                 g_free(debug_info);
+
+                ret = -1;
                 goto done;
             }
 
@@ -108,7 +111,7 @@ done:
     gst_element_set_state (pipeline, GST_STATE_NULL);
     gst_object_unref (pipeline);
 
-    return 0;
+    return ret;
 }
 
 jint Java_org_wikimedia_commons_Transcoder_transcode(JNIEnv* env,
