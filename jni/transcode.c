@@ -25,8 +25,8 @@ static int transcode(const char *infile, const char *outfile,
     init();
 
     snprintf(pipeline_str, 1024,
-            "filesrc location=%s ! decodebin2 ! audioconvert ! "
-            "vorbisenc ! oggmux ! filesink location=%s",
+            "filesrc location=\"%s\" ! decodebin2 ! audioconvert ! "
+            "vorbisenc ! oggmux ! filesink location=\"%s\"",
             infile, outfile);
 
     pipeline = gst_parse_launch(pipeline_str, NULL);
