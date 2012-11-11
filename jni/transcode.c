@@ -1,6 +1,7 @@
 #include <gst/gst.h>
 
 #include <jni.h>
+#include <android/log.h>
 
 static int init(void)
 {
@@ -56,11 +57,23 @@ static int transcode(const char *infile, const char *outfile,
 
                 gst_structure_get_int(s, "percent", &percent);
 
-                break;
+                cb_class = (*env)->FindClass(env, "org/wikimedia/commons/Transcoder$TranscoderProgressCallback");
+                if ((*env)->ExceptionCheck(env)) {
+                    __android_log_print(ANDROID_LOG_ERROR, "GStreamer", "Class not found");
+                    break;
+                }
 
-                cb_class = (*env)->FindClass(env, "org/wikimedia/commons/TranscoderProgressCallback");
                 cb_id = (*env)->GetMethodID(env, cb_class, "transcodeProgressCb", "(I)V");
+                if ((*env)->ExceptionCheck(env)) {
+                    __android_log_print(ANDROID_LOG_ERROR, "GStreamer", "Method not found");
+                    break;
+                }
+
                 (*env)->CallVoidMethod(env, cb_obj, cb_id, percent);
+                if ((*env)->ExceptionCheck(env)) {
+                    __android_log_print(ANDROID_LOG_ERROR, "GStreamer", "Method call failed");
+                    break;
+                }
 
                 break;
             }
