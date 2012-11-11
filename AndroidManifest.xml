@@ -36,6 +36,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
 
                 <data android:mimeType="image/*" />
+                <data android:mimeType="audio/*" />
             </intent-filter>
         </activity>
 

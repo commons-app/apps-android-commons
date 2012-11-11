@@ -1,6 +1,7 @@
 package org.wikimedia.commons;
 
 import java.io.IOException;
+import com.gst_sdk.GStreamer;
 import java.io.StringWriter;
 
 import javax.xml.transform.*;
@@ -39,6 +40,13 @@ public class CommonsApplication extends Application {
     public void onCreate() {
         // TODO Auto-generated method stub
         super.onCreate();
+        System.loadLibrary("gstreamer_android");
+        try {
+            GStreamer.init(this);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         api = createMWApi();
     }
     

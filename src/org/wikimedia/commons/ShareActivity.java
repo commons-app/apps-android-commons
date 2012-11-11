@@ -33,7 +33,7 @@ public class ShareActivity extends AuthenticatedActivity {
     private EditText titleEdit;
     private EditText descEdit;
     
-    private Uri imageUri;
+    private Uri mediaUri;
     
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
@@ -44,26 +44,29 @@ public class ShareActivity extends AuthenticatedActivity {
         final Context that = this;
         
         if(intent.getAction().equals(Intent.ACTION_SEND)) {
-            if(intent.getType().startsWith("image/")) {
+            mediaUri = (Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM);
+            
+            final String mimeType = intent.getType();
+            if(mimeType.startsWith("image/")) {
                 ImageLoaderTask loader = new ImageLoaderTask(backgroundImageView);
-                imageUri = (Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM);
-                loader.execute(imageUri);
-                
-                uploadButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent uploadIntent = new Intent(getApplicationContext(), UploadService.class);
-                        uploadIntent.putExtra(UploadService.EXTRA_MEDIA_URI, imageUri);
-                        uploadIntent.putExtra(UploadService.EXTRA_TARGET_FILENAME, titleEdit.getText().toString());
-                        uploadIntent.putExtra(UploadService.EXTRA_DESCRIPTION, descEdit.getText().toString());
-                        uploadIntent.putExtra(UploadService.EXTRA_EDIT_SUMMARY, "Mobile upload from Wikimedia Commons Android app");
-                        startService(uploadIntent);
-                        Toast startingToast = Toast.makeText(that, R.string.uploading_started, Toast.LENGTH_LONG);
-                        startingToast.show(); 
-                        finish();
-                    }
-                });
+                loader.execute(mediaUri);
             }
+                
+            uploadButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent uploadIntent = new Intent(getApplicationContext(), UploadService.class);
+                    uploadIntent.putExtra(UploadService.EXTRA_MEDIA_URI, mediaUri);
+                    uploadIntent.putExtra(UploadService.EXTRA_TARGET_FILENAME, titleEdit.getText().toString());
+                    uploadIntent.putExtra(UploadService.EXTRA_DESCRIPTION, descEdit.getText().toString());
+                    uploadIntent.putExtra(UploadService.EXTRA_MIMETYPE, mimeType);
+                    uploadIntent.putExtra(UploadService.EXTRA_EDIT_SUMMARY, "Mobile upload from Wikimedia Commons Android app");
+                    startService(uploadIntent);
+                    Toast startingToast = Toast.makeText(that, R.string.uploading_started, Toast.LENGTH_LONG);
+                    startingToast.show(); 
+                    finish();
+                }
+            });
         }
     }
     
