@@ -1,0 +1,8 @@
+* Get the GStreamer SDK for Android
+  - http://docs.gstreamer.com/display/GstSDK/Installing+for+Android+development
+  - user: test, pass: Jo6eem7e (these will go away once the SDK gets out of the
+    beta stage)
+* Get the NDK
+* export GSTREAMER_SDK_ROOT_ANDROID=/path/to/unpacked/gstreamer/sdk
+* cd jni; <NDK path>/ndk-build
+* cd ..; Continue building as usual
