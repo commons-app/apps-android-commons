@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.Date;
 
 import org.mediawiki.api.*;
+import org.wikimedia.commons.Transcoder.TranscoderProgressCallback;
 import org.wikimedia.commons.media.Media;
 
 import de.mastacode.http.ProgressListener;
@@ -49,7 +50,21 @@ public class UploadService extends IntentService {
     
     public static final int NOTIFICATION_TRANSCODING_IN_PROGRESS = 4;
     public static final int NOTIFICATION_TRANSCODING_FAILED = 5;
-    
+   
+    private class TranscodeProgressListener implements TranscoderProgressCallback {
+
+        private Notification curNotification;
+        public TranscodeProgressListener(Notification curNotification) {
+            this.curNotification = curNotification;
+        }
+        @Override
+        public void transcodeProgressCb(int percent) {
+            curNotification.contentView.setProgressBar(R.id.uploadNotificationProgress, 100, percent, false); 
+            startForeground(NOTIFICATION_TRANSCODING_IN_PROGRESS, curNotification);
+            Log.d("Commons", "Percentage: " + percent);
+        }
+        
+    }
     private class NotificationUpdateProgressListener implements ProgressListener {
 
         Notification curNotification;
@@ -146,18 +161,22 @@ public class UploadService extends IntentService {
                Log.d("Commons", "Path is " + srcPath);
                Log.d("Commons", "Dest is " + destFile.getAbsolutePath());
                
+               RemoteViews transcodeNotificationView = new RemoteViews(getPackageName(), R.layout.layout_upload_progress);
+               transcodeNotificationView.setTextViewText(R.id.uploadNotificationTitle, String.format(getString(R.string.transcoding_progress_title_in_progress), filename));
+               transcodeNotificationView.setProgressBar(R.id.uploadNotificationProgress, 100, 0, false);
+               
                Notification transcodeNotification = new NotificationCompat.Builder(this).setAutoCancel(true)
                        .setSmallIcon(R.drawable.ic_launcher)
                        .setAutoCancel(true)
                        .setOngoing(true)
-                       .setContentTitle(String.format(getString(R.string.transcoding_progress_title_in_progress), filename))
+                       .setContent(transcodeNotificationView)
                        .setContentIntent(PendingIntent.getActivity(getApplicationContext(), 0, new Intent(), 0))
                        .setTicker(String.format(getString(R.string.transcoding_progress_title_in_progress), filename))
                        .getNotification();
                
                startForeground(NOTIFICATION_TRANSCODING_IN_PROGRESS, transcodeNotification);
                
-               int transcodeResult = Transcoder.transcode(srcPath, destFile.getAbsolutePath(), null);
+               int transcodeResult = Transcoder.transcode(srcPath, destFile.getAbsolutePath(), null, new TranscodeProgressListener(transcodeNotification));
                stopForeground(true);
                
                if(transcodeResult != 0) {
