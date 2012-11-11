@@ -142,6 +142,7 @@ public class UploadService extends IntentService {
            } else if (mimeType.startsWith("audio/")) {
                String srcPath = this.getRealPathFromURI(mediaUri);
                File destFile = File.createTempFile("org.wikimedia.commons", ".ogg");
+               filename = filename + ".ogg";
                Log.d("Commons", "Path is " + srcPath);
                Log.d("Commons", "Dest is " + destFile.getAbsolutePath());
                
