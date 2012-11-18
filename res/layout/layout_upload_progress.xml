@@ -21,7 +21,13 @@
             style="@style/NotificationTitle"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Uploading image to commons"/>
+            android:text="Uploading image to commons"
+            android:singleLine="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:ellipsize="marquee"/>
 
         <ProgressBar
             android:id="@+id/uploadNotificationProgress"
