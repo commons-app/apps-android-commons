@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.Date;
 
 import org.mediawiki.api.*;
+import org.wikimedia.commons.Transcoder.TranscoderProgressCallback;
 import org.wikimedia.commons.media.Media;
 
 import de.mastacode.http.ProgressListener;
@@ -28,6 +29,7 @@ public class UploadService extends IntentService {
     public static final String EXTRA_TARGET_FILENAME = EXTRA_PREFIX + ".filename";
     public static final String EXTRA_DESCRIPTION = EXTRA_PREFIX + ".description";
     public static final String EXTRA_EDIT_SUMMARY = EXTRA_PREFIX + ".summary";
+    public static final String EXTRA_MIMETYPE = EXTRA_PREFIX + ".mimetype";
    
     private NotificationManager notificationManager;
     private CommonsApplication app;
@@ -46,6 +48,23 @@ public class UploadService extends IntentService {
     public static final int NOTIFICATION_DOWNLOAD_COMPLETE = 2;
     public static final int NOTIFICATION_UPLOAD_FAILED = 3;
     
+    public static final int NOTIFICATION_TRANSCODING_IN_PROGRESS = 4;
+    public static final int NOTIFICATION_TRANSCODING_FAILED = 5;
+   
+    private class TranscodeProgressListener implements TranscoderProgressCallback {
+
+        private Notification curNotification;
+        public TranscodeProgressListener(Notification curNotification) {
+            this.curNotification = curNotification;
+        }
+        @Override
+        public void transcodeProgressCb(int percent) {
+            curNotification.contentView.setProgressBar(R.id.uploadNotificationProgress, 100, percent, false); 
+            startForeground(NOTIFICATION_TRANSCODING_IN_PROGRESS, curNotification);
+            Log.d("Commons", "Percentage: " + percent);
+        }
+        
+    }
     private class NotificationUpdateProgressListener implements ProgressListener {
 
         Notification curNotification;
@@ -98,12 +117,20 @@ public class UploadService extends IntentService {
         app = (CommonsApplication)this.getApplicationContext();
     }
 
+    private String getRealPathFromURI(Uri contentUri) {
+        String[] proj = { MediaStore.Images.Media.DATA };
+        CursorLoader loader = new CursorLoader(this, contentUri, proj, null, null, null);
+        Cursor cursor = loader.loadInBackground();
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
+    }
     
     @Override
     protected void onHandleIntent(Intent intent) {
        MWApi api = app.getApi();
-       InputStream file;
-       long length;
+       InputStream file = null;
+       long length = 0;
        ApiResult result;
        RemoteViews notificationView;
        
@@ -112,20 +139,67 @@ public class UploadService extends IntentService {
        String filename = intent.getStringExtra(EXTRA_TARGET_FILENAME);
        String description = intent.getStringExtra(EXTRA_DESCRIPTION);
        String editSummary = intent.getStringExtra(EXTRA_EDIT_SUMMARY);
+       String mimeType = intent.getStringExtra(EXTRA_MIMETYPE);
        String notificationTag = mediaUri.toString();
        Date dateCreated = null;
                
        try {
-           file =  this.getContentResolver().openInputStream(mediaUri);
-           length = this.getContentResolver().openAssetFileDescriptor(mediaUri, "r").getLength();
-           
-           Cursor cursor = this.getContentResolver().query(mediaUri,
-                new String[] { MediaStore.Images.ImageColumns.DATE_TAKEN }, null, null, null);
-           if(cursor.getCount() != 0) {
-               cursor.moveToFirst();
-               dateCreated = new Date(cursor.getLong(0));
+           Log.d("Commons", "MimeType is " + mimeType);
+           if(mimeType.startsWith("image/")) {
+               file =  this.getContentResolver().openInputStream(mediaUri);
+               length = this.getContentResolver().openAssetFileDescriptor(mediaUri, "r").getLength();
+               Cursor cursor = this.getContentResolver().query(mediaUri,
+                       new String[] { MediaStore.Images.ImageColumns.DATE_TAKEN }, null, null, null);
+               if(cursor.getCount() != 0) {
+                   cursor.moveToFirst();
+                   dateCreated = new Date(cursor.getInt(0));
+               }
+           } else if (mimeType.startsWith("audio/")) {
+               String srcPath = this.getRealPathFromURI(mediaUri);
+               File destFile = File.createTempFile("org.wikimedia.commons", ".ogg");
+               filename = filename + ".ogg";
+               Log.d("Commons", "Path is " + srcPath);
+               Log.d("Commons", "Dest is " + destFile.getAbsolutePath());
+               
+               RemoteViews transcodeNotificationView = new RemoteViews(getPackageName(), R.layout.layout_upload_progress);
+               transcodeNotificationView.setTextViewText(R.id.uploadNotificationTitle, String.format(getString(R.string.transcoding_progress_title_in_progress), filename));
+               transcodeNotificationView.setProgressBar(R.id.uploadNotificationProgress, 100, 0, false);
+               
+               Notification transcodeNotification = new NotificationCompat.Builder(this).setAutoCancel(true)
+                       .setSmallIcon(R.drawable.ic_launcher)
+                       .setAutoCancel(true)
+                       .setOngoing(true)
+                       .setContent(transcodeNotificationView)
+                       .setContentIntent(PendingIntent.getActivity(getApplicationContext(), 0, new Intent(), 0))
+                       .setTicker(String.format(getString(R.string.transcoding_progress_title_in_progress), filename))
+                       .getNotification();
+               
+               startForeground(NOTIFICATION_TRANSCODING_IN_PROGRESS, transcodeNotification);
+               
+               int transcodeResult = Transcoder.transcode(srcPath, destFile.getAbsolutePath(), null, new TranscodeProgressListener(transcodeNotification));
+               stopForeground(true);
+               
+               if(transcodeResult != 0) {
+                   Notification failureNotification = new NotificationCompat.Builder(this).setAutoCancel(true)
+                           .setSmallIcon(R.drawable.ic_launcher)
+                           .setAutoCancel(true)
+                           .setContentIntent(PendingIntent.getService(getApplicationContext(), 0, intent, 0))
+                           .setTicker(String.format(getString(R.string.transcoding_failed_notification_title), filename))
+                           .setContentTitle(String.format(getString(R.string.transcoding_failed_notification_title), filename))
+                           .setContentText(getString(R.string.transcoding_failed_notification_subtitle))
+                           .getNotification();
+                   notificationManager.notify(NOTIFICATION_TRANSCODING_FAILED, failureNotification);
+                   return;
+               }
+               
+               file = new FileInputStream(destFile);
+               length = destFile.length();
+               dateCreated = new Date(destFile.lastModified());
+               Log.d("Commons", "Transcode doen!");
            }
        } catch (FileNotFoundException e) {
+           throw new RuntimeException(e);
+       } catch (IOException e) {
            throw new RuntimeException(e);
        }
             
