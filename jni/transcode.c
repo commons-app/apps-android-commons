@@ -3,18 +3,6 @@
 #include <jni.h>
 #include <android/log.h>
 
-static int init(void)
-{
-    /* XXX: ZERO thread-safety guarantees here */
-    static gboolean inited = 0;
-
-    if (inited)
-        return 0;
-
-    gst_init(NULL, NULL);
-    return 0;
-}
-
 static int transcode(const char *infile, const char *outfile,
         const char *profile, jobject cb_obj, JNIEnv *env)
 {
@@ -23,8 +11,6 @@ static int transcode(const char *infile, const char *outfile,
     GstMessage *msg;
     gchar pipeline_str[1024];
     int ret = 0;
-
-    init();
 
     snprintf(pipeline_str, 1024,
             "filesrc location=\"%s\" ! "
