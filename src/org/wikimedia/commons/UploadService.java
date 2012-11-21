@@ -152,7 +152,7 @@ public class UploadService extends IntentService {
                        new String[] { MediaStore.Images.ImageColumns.DATE_TAKEN }, null, null, null);
                if(cursor.getCount() != 0) {
                    cursor.moveToFirst();
-                   dateCreated = new Date(cursor.getInt(0));
+                   dateCreated = new Date(cursor.getLong(0));
                }
            } else if (mimeType.startsWith("audio/")) {
                String srcPath = this.getRealPathFromURI(mediaUri);
