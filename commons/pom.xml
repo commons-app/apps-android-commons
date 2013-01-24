@@ -28,7 +28,7 @@
           <type>apklib</type>
       </dependency>
       <dependency>
-          <groupId>com.google.android</groupId>
+          <groupId>android</groupId>
           <artifactId>android</artifactId>
       </dependency>
     <dependency>
