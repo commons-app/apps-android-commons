@@ -15,9 +15,8 @@
     </modules>
 
     <properties>
-        <platform.version> 4.0.1.2
-            </platform.version>
-        <android.sdk.path>${env.HOME}/adk</android.sdk.path>
+        <platform.version> 4.0.1.2</platform.version>
+        <android.sdk.path>${env.ANDROID_HOME}</android.sdk.path>
     </properties>
 
 
