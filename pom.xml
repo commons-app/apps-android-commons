@@ -14,7 +14,7 @@
     </modules>
 
     <properties>
-        <platform.version> 4.0.1.2</platform.version>
+        <platform.version>4.0.1.2</platform.version>
         <android.sdk.path>${env.ANDROID_HOME}</android.sdk.path>
     </properties>
 
@@ -35,12 +35,6 @@
                 <version>1.0.5</version>
             </dependency>
 
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.10</version>
-                <scope>provided</scope>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -50,7 +44,7 @@
                 <plugin>
                     <groupId>com.jayway.maven.plugins.android.generation2</groupId>
                     <artifactId>android-maven-plugin</artifactId>
-                    <version>3.1.1</version>
+                    <version>3.5.0</version>
                     <inherited>true</inherited>
                     <configuration>
                         <androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
