@@ -212,4 +212,12 @@
         </profile>
     </profiles>
 
+    <repositories>
+        <repository>
+            <id>yuvi.in</id>
+            <name>Yuvi's Maven Repo</name>
+            <url>http://yuvi.in/blog/maven</url>
+        </repository>
+    </repositories>
+
 </project>
