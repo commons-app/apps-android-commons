@@ -26,12 +26,6 @@ public class CommonsApplication extends Application {
    
     public static MWApi createMWApi() {
         DefaultHttpClient client = new DefaultHttpClient();
-        // Because WMF servers support only HTTP/1.0. Biggest difference that
-        // this makes is support for Chunked Transfer Encoding. 
-        // I have this here so if any 1.1 features start being used, it 
-        // throws up. 
-        client.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, 
-                HttpVersion.HTTP_1_0);
         return new MWApi(API_URL, client);
     }
     
