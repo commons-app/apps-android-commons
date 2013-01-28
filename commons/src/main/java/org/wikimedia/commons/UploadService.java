@@ -136,9 +136,9 @@ public class UploadService extends IntentService {
                    cursor.moveToFirst();
                    dateCreated = new Date(cursor.getLong(0));
                }
-           } else if (mimeType.startsWith("audio/")) {
-             /* Removed Audio implementationf or now */
-           }
+           } /* else if (mimeType.startsWith("audio/")) {
+             Removed Audio implementationf or now
+           }  */
        } catch (FileNotFoundException e) {
            throw new RuntimeException(e);
        } catch (IOException e) {
