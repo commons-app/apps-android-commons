@@ -18,6 +18,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.Window;
 import android.widget.*;
 import android.view.*;
+import org.wikimedia.commons.media.Media;
 
 
 public class ShareActivity extends AuthenticatedActivity {
@@ -56,11 +57,11 @@ public class ShareActivity extends AuthenticatedActivity {
                 @Override
                 public void onClick(View v) {
                     Intent uploadIntent = new Intent(getApplicationContext(), UploadService.class);
-                    uploadIntent.putExtra(UploadService.EXTRA_MEDIA_URI, mediaUri);
-                    uploadIntent.putExtra(UploadService.EXTRA_TARGET_FILENAME, titleEdit.getText().toString());
-                    uploadIntent.putExtra(UploadService.EXTRA_DESCRIPTION, descEdit.getText().toString());
-                    uploadIntent.putExtra(UploadService.EXTRA_MIMETYPE, mimeType);
-                    uploadIntent.putExtra(UploadService.EXTRA_EDIT_SUMMARY, "Mobile upload from Wikimedia Commons Android app");
+                    uploadIntent.putExtra(Media.EXTRA_MEDIA_URI, mediaUri);
+                    uploadIntent.putExtra(Media.EXTRA_TARGET_FILENAME, titleEdit.getText().toString());
+                    uploadIntent.putExtra(Media.EXTRA_DESCRIPTION, descEdit.getText().toString());
+                    uploadIntent.putExtra(Media.EXTRA_MIMETYPE, mimeType);
+                    uploadIntent.putExtra(Media.EXTRA_EDIT_SUMMARY, "Mobile upload from Wikimedia Commons Android app");
                     startService(uploadIntent);
                     Toast startingToast = Toast.makeText(that, R.string.uploading_started, Toast.LENGTH_LONG);
                     startingToast.show(); 

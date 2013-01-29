@@ -9,6 +9,14 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Media implements Parcelable {
+
+    private static final String EXTRA_PREFIX = "org.wikimedia.commons.media";
+    public static final String EXTRA_MEDIA_URI = EXTRA_PREFIX + ".uri";
+    public static final String EXTRA_TARGET_FILENAME = EXTRA_PREFIX + ".filename";
+    public static final String EXTRA_DESCRIPTION = EXTRA_PREFIX + ".description";
+    public static final String EXTRA_EDIT_SUMMARY = EXTRA_PREFIX + ".summary";
+    public static final String EXTRA_MIMETYPE = EXTRA_PREFIX + ".mimetype";
+
     private Uri mediaUri;
     private String fileName;
     private String editSummary;
@@ -16,17 +24,22 @@ public class Media implements Parcelable {
     private String description;
     private String userName;
     private Date dateCreated;
+    private long length;
     private Date dateUploaded;
     
-    public Media(Uri mediaUri, String fileName, String description, String editSummary, String userName, Date dateCreated) {
+    public Media(Uri mediaUri, String fileName, String description, String editSummary, String userName, Date dateCreated, long length) {
         this.mediaUri = mediaUri;
         this.fileName = fileName;
         this.description = description;
         this.editSummary = editSummary;
         this.userName = userName;
         this.dateCreated = dateCreated;
+        this.length = length;
     }
-    
+
+    public long getLength() {
+        return length;
+    }
     public Uri getMediaUri() {
         return mediaUri;
     }
@@ -74,6 +87,7 @@ public class Media implements Parcelable {
         parcel.writeString(description);
         parcel.writeString(editSummary);
         parcel.writeString(userName);
+        parcel.writeLong(length);
         parcel.writeSerializable(dateCreated);
     }
 
@@ -83,8 +97,9 @@ public class Media implements Parcelable {
         String description = parcel.readString();
         String editSummary = parcel.readString();
         String userName = parcel.readString();
+        Long length = parcel.readLong();
         Date dateCreated = (Date)parcel.readSerializable();
-        return new Media(mediaUri, fileName, description, editSummary, userName, dateCreated);
+        return new Media(mediaUri, fileName, description, editSummary, userName, dateCreated, length);
     }
 
     public static final Parcelable.Creator<Media> CREATOR = new Parcelable.Creator<Media>() {

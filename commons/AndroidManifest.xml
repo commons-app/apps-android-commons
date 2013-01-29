@@ -39,7 +39,16 @@
                <!-- Remove Audio Support for now <data android:mimeType="audio/*" /> -->
             </intent-filter>
         </activity>
-
+        <activity
+                android:name=".ContributionsActivity"
+                android:icon="@drawable/ic_launcher"
+                android:label="@string/title_activity_share"
+                 >
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN"/>
+             </intent-filter>
+        </activity>
         <service android:name="UploadService" >
         </service>
         <service
