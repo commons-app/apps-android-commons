@@ -69,8 +69,6 @@ public class UploadService extends IntentService {
             if(!notificationTitleChanged) {
                 curView.setTextViewText(R.id.uploadNotificationTitle, notificationProgressTitle);
                 notificationTitleChanged = true;
-                notificationManager.notify(NOTIFICATION_DOWNLOAD_IN_PROGRESS, curNotification);
-                return;
             }
             if(transferred == total) {
                 // Completed!
