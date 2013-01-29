@@ -32,6 +32,10 @@ public class UploadService extends IntentService {
    
     private NotificationManager notificationManager;
     private CommonsApplication app;
+
+    private Notification curProgressNotification;
+
+    private int toUpload;
     
     public UploadService(String name) {
         super(name);
@@ -68,6 +72,8 @@ public class UploadService extends IntentService {
             RemoteViews curView = curNotification.contentView;
             if(!notificationTitleChanged) {
                 curView.setTextViewText(R.id.uploadNotificationTitle, notificationProgressTitle);
+                curView.setTextViewText(R.id.uploadNotificationsCount, String.format(getString(R.string.uploads_pending_notification_indicator), toUpload));
+                Log.d("Commons", String.format("%d uploads left", toUpload));
                 notificationTitleChanged = true;
             }
             if(transferred == total) {
@@ -102,7 +108,18 @@ public class UploadService extends IntentService {
         cursor.moveToFirst();
         return cursor.getString(column_index);
     }
-    
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        toUpload++;
+        if(curProgressNotification != null) {
+            curProgressNotification.contentView.setTextViewText(R.id.uploadNotificationsCount, String.format(getString(R.string.uploads_pending_notification_indicator), toUpload));
+            Log.d("Commons", String.format("%d uploads left", toUpload));
+            notificationManager.notify(NOTIFICATION_DOWNLOAD_IN_PROGRESS, curProgressNotification);
+        }
+        return super.onStartCommand(intent, flags, startId);
+    }
+
     @Override
     protected void onHandleIntent(Intent intent) {
        MWApi api = app.getApi();
@@ -145,7 +162,7 @@ public class UploadService extends IntentService {
        notificationView.setProgressBar(R.id.uploadNotificationProgress, 100, 0, false);
        
        Log.d("Commons", "Before execution!");
-       Notification progressNotification = new NotificationCompat.Builder(this).setAutoCancel(true)
+       curProgressNotification = new NotificationCompat.Builder(this).setAutoCancel(true)
                .setSmallIcon(R.drawable.ic_launcher)
                .setAutoCancel(true)
                .setContent(notificationView)
@@ -154,10 +171,10 @@ public class UploadService extends IntentService {
                .setTicker(String.format(getString(R.string.upload_progress_notification_title_in_progress), filename))
                .getNotification();
      
-       this.startForeground(NOTIFICATION_DOWNLOAD_IN_PROGRESS, progressNotification);
+       this.startForeground(NOTIFICATION_DOWNLOAD_IN_PROGRESS, curProgressNotification);
        
        Log.d("Commons", "Just before");
-       NotificationUpdateProgressListener notificationUpdater = new NotificationUpdateProgressListener(progressNotification, notificationTag, 
+       NotificationUpdateProgressListener notificationUpdater = new NotificationUpdateProgressListener(curProgressNotification, notificationTag,
                                                                     String.format(getString(R.string.upload_progress_notification_title_in_progress), filename), 
                                                                     String.format(getString(R.string.upload_progress_notification_title_finishing), filename)
                                                                 );
@@ -190,10 +207,13 @@ public class UploadService extends IntentService {
                    .getNotification();
            notificationManager.notify(NOTIFICATION_UPLOAD_FAILED, failureNotification);
            return;
+       } finally {
+           toUpload--;
        }
       
        Log.d("Commons", "Response is"  + CommonsApplication.getStringFromDOM(result.getDocument()));
        stopForeground(true);
+       curProgressNotification = null;
        
        String descUrl = result.getString("/api/upload/imageinfo/@descriptionurl");
        
