@@ -33,6 +33,8 @@ public class CommonsApplication extends Application {
     public void onCreate() {
         // TODO Auto-generated method stub
         super.onCreate();
+        // Fire progress callbacks for every 3% of uploaded content
+        System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0");
         api = createMWApi();
     }
     

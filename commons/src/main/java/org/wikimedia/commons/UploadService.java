@@ -55,9 +55,7 @@ public class UploadService extends IntentService {
        
         String notificationProgressTitle;
         String notificationFinishingTitle;
-        
-        private int lastPercent = 0;
-        
+
         public NotificationUpdateProgressListener(Notification curNotification, String notificationTag, String notificationProgressTitle, String notificationFinishingTitle) {
             this.curNotification = curNotification;
             this.notificationTag = notificationTag;
@@ -66,22 +64,21 @@ public class UploadService extends IntentService {
         }
         @Override
         public void onProgress(long transferred, long total) {
+            Log.d("Commons", String.format("Uploaded %d of %d", transferred, total));
             RemoteViews curView = curNotification.contentView;
             if(!notificationTitleChanged) {
                 curView.setTextViewText(R.id.uploadNotificationTitle, notificationProgressTitle);
-                notificationTitleChanged = false;
-                startForeground(NOTIFICATION_DOWNLOAD_IN_PROGRESS, curNotification);
+                notificationTitleChanged = true;
+                notificationManager.notify(NOTIFICATION_DOWNLOAD_IN_PROGRESS, curNotification);
+                return;
             }
-            int percent =(int) ((double)transferred / (double)total * 100);
-            if(percent > lastPercent) {
-                curNotification.contentView.setProgressBar(R.id.uploadNotificationProgress, 100, percent, false); 
-                startForeground(NOTIFICATION_DOWNLOAD_IN_PROGRESS, curNotification);
-                lastPercent = percent;
-            }
-            if(percent == 100) {
+            if(transferred == total) {
                 // Completed!
                 curView.setTextViewText(R.id.uploadNotificationTitle, notificationFinishingTitle);
-                startForeground(NOTIFICATION_DOWNLOAD_IN_PROGRESS, curNotification);
+                notificationManager.notify(NOTIFICATION_DOWNLOAD_IN_PROGRESS, curNotification);
+            } else {
+                curNotification.contentView.setProgressBar(R.id.uploadNotificationProgress, 100, (int)(((double)transferred / (double)total) * 100), false);
+                notificationManager.notify(NOTIFICATION_DOWNLOAD_IN_PROGRESS, curNotification);
             }
         }
 
