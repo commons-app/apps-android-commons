@@ -5,8 +5,10 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import android.net.*;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class Media {
+public class Media implements Parcelable {
     private Uri mediaUri;
     private String fileName;
     private String editSummary;
@@ -61,4 +63,38 @@ public class Media {
     public String getMimeType() {
         return mimeType;
     }
+
+    public int describeContents() {
+        return 0;
+    }
+
+    public void writeToParcel(Parcel parcel, int flags) {
+        parcel.writeParcelable(mediaUri, flags);
+        parcel.writeString(fileName);
+        parcel.writeString(description);
+        parcel.writeString(editSummary);
+        parcel.writeString(userName);
+        parcel.writeSerializable(dateCreated);
+    }
+
+    public static Media fromParcel(Parcel parcel) {
+        Uri mediaUri = parcel.readParcelable(Uri.class.getClassLoader());
+        String fileName = parcel.readString();
+        String description = parcel.readString();
+        String editSummary = parcel.readString();
+        String userName = parcel.readString();
+        Date dateCreated = (Date)parcel.readSerializable();
+        return new Media(mediaUri, fileName, description, editSummary, userName, dateCreated);
+    }
+
+    public static final Parcelable.Creator<Media> CREATOR = new Parcelable.Creator<Media>() {
+
+        public Media createFromParcel(Parcel in) {
+            return fromParcel(in);
+        }
+
+        public Media[] newArray(int size) {
+            return new Media[size];
+        }
+    };
 }
