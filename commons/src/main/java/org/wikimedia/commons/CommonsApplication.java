@@ -17,8 +17,11 @@ import org.apache.http.HttpVersion;
 import org.apache.http.conn.ConnectionKeepAliveStrategy;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreProtocolPNames;
+import org.wikimedia.commons.data.DBOpenHelper;
 
 public class CommonsApplication extends Application {
+
+    private DBOpenHelper dbOpenHelper;
 
     private MWApi api;
     private Account currentAccount = null; // Unlike a savings account...
@@ -28,7 +31,15 @@ public class CommonsApplication extends Application {
         DefaultHttpClient client = new DefaultHttpClient();
         return new MWApi(API_URL, client);
     }
-    
+
+    public DBOpenHelper getDbOpenHelper() {
+        if(dbOpenHelper == null) {
+            dbOpenHelper = new DBOpenHelper(this);
+        }
+        return dbOpenHelper;
+    }
+
+
     @Override
     public void onCreate() {
         // TODO Auto-generated method stub

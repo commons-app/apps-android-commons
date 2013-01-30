@@ -5,7 +5,8 @@ import java.util.Date;
 
 import android.support.v4.content.LocalBroadcastManager;
 import org.mediawiki.api.*;
-import org.wikimedia.commons.media.Media;
+import org.wikimedia.commons.contributions.Contribution;
+import org.wikimedia.commons.contributions.ContributionsContentProvider;
 
 import in.yuvi.http.fluent.ProgressListener;
 
@@ -15,9 +16,7 @@ import android.database.Cursor;
 import android.os.*;
 import android.provider.MediaStore;
 import android.support.v4.app.NotificationCompat;
-import android.text.method.DateTimeKeyListener;
 import android.util.Log;
-import android.view.View;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 import android.net.*;
@@ -32,8 +31,16 @@ public class UploadService extends IntentService {
     public static final String EXTRA_MEDIA = ".media";
     public static final String EXTRA_TRANSFERRED_BYTES = ".progress.transferred";
 
+
+    public static final String EXTRA_MEDIA_URI = EXTRA_PREFIX + ".uri";
+    public static final String EXTRA_TARGET_FILENAME = EXTRA_PREFIX + ".filename";
+    public static final String EXTRA_DESCRIPTION = EXTRA_PREFIX + ".description";
+    public static final String EXTRA_EDIT_SUMMARY = EXTRA_PREFIX + ".summary";
+    public static final String EXTRA_MIMETYPE = EXTRA_PREFIX + ".mimetype";
+
     private NotificationManager notificationManager;
     private LocalBroadcastManager localBroadcastManager;
+    private ContentProviderClient contributionsProviderClient;
     private CommonsApplication app;
 
     private Notification curProgressNotification;
@@ -59,17 +66,17 @@ public class UploadService extends IntentService {
         Notification curNotification;
         String notificationTag;
         boolean notificationTitleChanged;
-        Media media;
+        Contribution contribution;
        
         String notificationProgressTitle;
         String notificationFinishingTitle;
 
-        public NotificationUpdateProgressListener(Notification curNotification, String notificationTag, String notificationProgressTitle, String notificationFinishingTitle, Media media) {
+        public NotificationUpdateProgressListener(Notification curNotification, String notificationTag, String notificationProgressTitle, String notificationFinishingTitle, Contribution contribution) {
             this.curNotification = curNotification;
             this.notificationTag = notificationTag;
             this.notificationProgressTitle = notificationProgressTitle;
             this.notificationFinishingTitle = notificationFinishingTitle;
-            this.media = media;
+            this.contribution = contribution;
         }
         @Override
         public void onProgress(long transferred, long total) {
@@ -83,7 +90,7 @@ public class UploadService extends IntentService {
                 }
                 notificationTitleChanged = true;
                 Intent mediaUploadStartedEvent = new Intent(INTENT_UPLOAD_STARTED);
-                mediaUploadStartedEvent.putExtra(EXTRA_MEDIA, media);
+               // mediaUploadStartedEvent.putExtra(EXTRA_MEDIA, contribution);
                 localBroadcastManager.sendBroadcast(mediaUploadStartedEvent);
             }
             if(transferred == total) {
@@ -94,7 +101,7 @@ public class UploadService extends IntentService {
                 curNotification.contentView.setProgressBar(R.id.uploadNotificationProgress, 100, (int)(((double)transferred / (double)total) * 100), false);
                 notificationManager.notify(NOTIFICATION_DOWNLOAD_IN_PROGRESS, curNotification);
                 Intent mediaUploadProgressIntent = new Intent(INTENT_UPLOAD_PROGRESS);
-                mediaUploadProgressIntent.putExtra(EXTRA_MEDIA, media);
+               // mediaUploadProgressIntent.putExtra(EXTRA_MEDIA, contribution);
                 mediaUploadProgressIntent.putExtra(EXTRA_TRANSFERRED_BYTES, transferred);
                 localBroadcastManager.sendBroadcast(mediaUploadProgressIntent);
             }
@@ -104,6 +111,7 @@ public class UploadService extends IntentService {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        contributionsProviderClient.release();
         Log.d("Commons", "ZOMG I AM BEING KILLED HALP!");
     }
 
@@ -113,6 +121,7 @@ public class UploadService extends IntentService {
         notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
         localBroadcastManager = LocalBroadcastManager.getInstance(this);
         app = (CommonsApplication)this.getApplicationContext();
+        contributionsProviderClient = this.getContentResolver().acquireContentProviderClient(ContributionsContentProvider.AUTHORITY);
     }
 
     private String getRealPathFromURI(Uri contentUri) {
@@ -124,13 +133,13 @@ public class UploadService extends IntentService {
         return cursor.getString(column_index);
     }
 
-    private Media mediaFromIntent(Intent intent) {
+    private Contribution mediaFromIntent(Intent intent) {
         Bundle extras = intent.getExtras();
-        Uri mediaUri = (Uri)extras.getParcelable(Media.EXTRA_MEDIA_URI);
-        String filename = intent.getStringExtra(Media.EXTRA_TARGET_FILENAME);
-        String description = intent.getStringExtra(Media.EXTRA_DESCRIPTION);
-        String editSummary = intent.getStringExtra(Media.EXTRA_EDIT_SUMMARY);
-        String mimeType = intent.getStringExtra(Media.EXTRA_MIMETYPE);
+        Uri mediaUri = (Uri)extras.getParcelable(EXTRA_MEDIA_URI);
+        String filename = intent.getStringExtra(EXTRA_TARGET_FILENAME);
+        String description = intent.getStringExtra(EXTRA_DESCRIPTION);
+        String editSummary = intent.getStringExtra(EXTRA_EDIT_SUMMARY);
+        String mimeType = intent.getStringExtra(EXTRA_MIMETYPE);
         Date dateCreated = null;
 
         Long length = null;
@@ -152,8 +161,8 @@ public class UploadService extends IntentService {
         } /* else if (mimeType.startsWith("audio/")) {
              Removed Audio implementationf or now
            }  */
-        Media media = new Media(mediaUri, filename, description, editSummary, app.getCurrentAccount().name, dateCreated, length);
-        return media;
+        Contribution contribution = new Contribution(mediaUri, null, filename, description, null, length, dateCreated, null, app.getCurrentAccount().name, editSummary);
+        return contribution;
     }
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -164,10 +173,16 @@ public class UploadService extends IntentService {
             notificationManager.notify(NOTIFICATION_DOWNLOAD_IN_PROGRESS, curProgressNotification);
         }
 
-        Media media = mediaFromIntent(intent);
+        Contribution contribution = mediaFromIntent(intent);
+
+        try {
+            contributionsProviderClient.insert(ContributionsContentProvider.BASE_URI, contribution.toContentValues());
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
 
         Intent mediaUploadQueuedIntent = new Intent(INTENT_UPLOAD_QUEUED);
-        mediaUploadQueuedIntent.putExtra(EXTRA_MEDIA, media);
+        mediaUploadQueuedIntent.putExtra(EXTRA_MEDIA, contribution);
         localBroadcastManager.sendBroadcast(mediaUploadQueuedIntent);
         return super.onStartCommand(mediaUploadQueuedIntent, flags, startId);
     }
@@ -178,21 +193,21 @@ public class UploadService extends IntentService {
 
        ApiResult result;
        RemoteViews notificationView;
-       Media media;
+       Contribution contribution;
        InputStream file = null;
-       media = (Media)intent.getParcelableExtra(EXTRA_MEDIA);
+       contribution = (Contribution)intent.getSerializableExtra(EXTRA_MEDIA);
 
-       String notificationTag = media.getMediaUri().toString();
+       String notificationTag = contribution.getLocalUri().toString();
 
 
         try {
-            file =  this.getContentResolver().openInputStream(media.getMediaUri());
+            file =  this.getContentResolver().openInputStream(contribution.getLocalUri());
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
 
        notificationView = new RemoteViews(getPackageName(), R.layout.layout_upload_progress);
-       notificationView.setTextViewText(R.id.uploadNotificationTitle, String.format(getString(R.string.upload_progress_notification_title_start), media.getFileName()));
+       notificationView.setTextViewText(R.id.uploadNotificationTitle, String.format(getString(R.string.upload_progress_notification_title_start), contribution.getFilename()));
        notificationView.setProgressBar(R.id.uploadNotificationProgress, 100, 0, false);
        
        Log.d("Commons", "Before execution!");
@@ -202,7 +217,7 @@ public class UploadService extends IntentService {
                .setContent(notificationView)
                .setOngoing(true)
                .setContentIntent(PendingIntent.getActivity(getApplicationContext(), 0, new Intent(), 0))
-               .setTicker(String.format(getString(R.string.upload_progress_notification_title_in_progress), media.getFileName()))
+               .setTicker(String.format(getString(R.string.upload_progress_notification_title_in_progress), contribution.getFilename()))
                .getNotification();
      
        this.startForeground(NOTIFICATION_DOWNLOAD_IN_PROGRESS, curProgressNotification);
@@ -224,11 +239,11 @@ public class UploadService extends IntentService {
                }
            }
            NotificationUpdateProgressListener notificationUpdater = new NotificationUpdateProgressListener(curProgressNotification, notificationTag,
-                   String.format(getString(R.string.upload_progress_notification_title_in_progress), media.getFileName()),
-                   String.format(getString(R.string.upload_progress_notification_title_finishing), media.getFileName()),
-                   media
+                   String.format(getString(R.string.upload_progress_notification_title_in_progress), contribution.getFilename()),
+                   String.format(getString(R.string.upload_progress_notification_title_finishing), contribution.getFilename()),
+                   contribution
            );
-           result = api.upload(media.getFileName(), file, media.getLength(), media.getPageContents(), media.getEditSummary(), notificationUpdater);
+           result = api.upload(contribution.getFilename(), file, contribution.getDataLength(), contribution.getPageContents(), contribution.getEditSummary(), notificationUpdater);
        } catch (IOException e) {
            Log.d("Commons", "I have a network fuckup");
            stopForeground(true);
@@ -236,8 +251,8 @@ public class UploadService extends IntentService {
                    .setSmallIcon(R.drawable.ic_launcher)
                    .setAutoCancel(true)
                    .setContentIntent(PendingIntent.getService(getApplicationContext(), 0, intent, 0))
-                   .setTicker(String.format(getString(R.string.upload_failed_notification_title), media.getFileName()))
-                   .setContentTitle(String.format(getString(R.string.upload_failed_notification_title), media.getFileName()))
+                   .setTicker(String.format(getString(R.string.upload_failed_notification_title), contribution.getFilename()))
+                   .setContentTitle(String.format(getString(R.string.upload_failed_notification_title), contribution.getFilename()))
                    .setContentText(getString(R.string.upload_failed_notification_subtitle))
                    .getNotification();
            notificationManager.notify(NOTIFICATION_UPLOAD_FAILED, failureNotification);
@@ -256,16 +271,16 @@ public class UploadService extends IntentService {
        Notification doneNotification = new NotificationCompat.Builder(this)
                .setAutoCancel(true)
                .setSmallIcon(R.drawable.ic_launcher)
-               .setContentTitle(String.format(getString(R.string.upload_completed_notification_title), media.getFileName()))
+               .setContentTitle(String.format(getString(R.string.upload_completed_notification_title), contribution.getFilename()))
                .setContentText(getString(R.string.upload_completed_notification_text))
-               .setTicker(String.format(getString(R.string.upload_completed_notification_title), media.getFileName()))
+               .setTicker(String.format(getString(R.string.upload_completed_notification_title), contribution.getFilename()))
                .setContentIntent(PendingIntent.getActivity(this, 0, openUploadedPageIntent, 0))
                .getNotification();
        
        notificationManager.notify(notificationTag, NOTIFICATION_DOWNLOAD_COMPLETE, doneNotification);
 
        Intent mediaUploadedIntent = new Intent(INTENT_UPLOAD_COMPLETE);
-       mediaUploadedIntent.putExtra(EXTRA_MEDIA, media);
+       //mediaUploadedIntent.putExtra(EXTRA_MEDIA, contribution);
        localBroadcastManager.sendBroadcast(mediaUploadedIntent);
     }
 }

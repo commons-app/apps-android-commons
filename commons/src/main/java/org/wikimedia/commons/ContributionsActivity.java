@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import com.actionbarsherlock.app.SherlockActivity;
-import org.wikimedia.commons.media.Media;
+import org.wikimedia.commons.contributions.Contribution;
 
 public class ContributionsActivity extends SherlockActivity  {
 
@@ -22,8 +22,8 @@ public class ContributionsActivity extends SherlockActivity  {
     private BroadcastReceiver messageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Media media = (Media)intent.getParcelableExtra(UploadService.EXTRA_MEDIA);
-            Log.d("Commons", "Completed " + intent.getAction() +" of " + media.getFileName());
+            Contribution contribution = (Contribution)intent.getParcelableExtra(UploadService.EXTRA_MEDIA);
+            Log.d("Commons", "Completed " + intent.getAction() +" of " + contribution.getFilename());
         }
     };
 

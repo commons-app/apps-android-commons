@@ -63,6 +63,11 @@
                 android:name="android.accounts.AccountAuthenticator"
                 android:resource="@xml/authenticator" />
         </service>
+        <provider
+                android:name=".contributions.ContributionsContentProvider"
+                android:authorities="org.wikimedia.commons.contributions.contentprovider"
+                android:exported="false">
+        </provider>
     </application>
 
 </manifest>
