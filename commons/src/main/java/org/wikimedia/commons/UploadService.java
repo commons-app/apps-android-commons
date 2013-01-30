@@ -77,8 +77,10 @@ public class UploadService extends IntentService {
             RemoteViews curView = curNotification.contentView;
             if(!notificationTitleChanged) {
                 curView.setTextViewText(R.id.uploadNotificationTitle, notificationProgressTitle);
-                curView.setTextViewText(R.id.uploadNotificationsCount, String.format(getString(R.string.uploads_pending_notification_indicator), toUpload));
-                Log.d("Commons", String.format("%d uploads left", toUpload));
+                if(toUpload != 1) {
+                    curView.setTextViewText(R.id.uploadNotificationsCount, String.format(getString(R.string.uploads_pending_notification_indicator), toUpload));
+                    Log.d("Commons", String.format("%d uploads left", toUpload));
+                }
                 notificationTitleChanged = true;
                 Intent mediaUploadStartedEvent = new Intent(INTENT_UPLOAD_STARTED);
                 mediaUploadStartedEvent.putExtra(EXTRA_MEDIA, media);
@@ -156,7 +158,7 @@ public class UploadService extends IntentService {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         toUpload++;
-        if(curProgressNotification != null) {
+        if(curProgressNotification != null && toUpload != 1) {
             curProgressNotification.contentView.setTextViewText(R.id.uploadNotificationsCount, String.format(getString(R.string.uploads_pending_notification_indicator), toUpload));
             Log.d("Commons", String.format("%d uploads left", toUpload));
             notificationManager.notify(NOTIFICATION_DOWNLOAD_IN_PROGRESS, curProgressNotification);

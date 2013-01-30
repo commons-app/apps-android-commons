@@ -51,7 +51,6 @@
                 android:layout_width="wrap_content"
                 android:singleLine="true"
                 android:focusable="true"
-                android:text="1 left"
                 android:focusableInTouchMode="true"
                 style="@style/NotificationText"
                 android:layout_marginLeft="8dp"

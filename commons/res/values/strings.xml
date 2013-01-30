@@ -28,7 +28,7 @@
     <string name="upload_progress_notification_title_finishing">Finishing uploading %1$s</string>
     <string name="upload_failed_notification_title">Uploading %1$s failed</string>
     <string name="upload_failed_notification_subtitle">Tap to retry</string>
-    <string name="uploads_pending_notification_indicator">%d</string>
+    <string name="uploads_pending_notification_indicator">%d left</string>
     
     <string name="transcoding_progress_title_start">Starting %1$s Transcoding</string>
     <string name="transcoding_progress_title_in_progress">Transcoding %1$s</string>
