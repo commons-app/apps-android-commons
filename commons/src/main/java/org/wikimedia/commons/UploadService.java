@@ -178,7 +178,6 @@ public class UploadService extends IntentService {
        RemoteViews notificationView;
        Media media;
        InputStream file = null;
-       long length = 0;
        media = (Media)intent.getParcelableExtra(EXTRA_MEDIA);
 
        String notificationTag = media.getMediaUri().toString();
@@ -227,7 +226,7 @@ public class UploadService extends IntentService {
                    String.format(getString(R.string.upload_progress_notification_title_finishing), media.getFileName()),
                    media
            );
-           result = api.upload(media.getFileName(), file, length, media.getPageContents(), media.getEditSummary(), notificationUpdater);
+           result = api.upload(media.getFileName(), file, media.getLength(), media.getPageContents(), media.getEditSummary(), notificationUpdater);
        } catch (IOException e) {
            Log.d("Commons", "I have a network fuckup");
            stopForeground(true);
