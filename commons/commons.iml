@@ -44,15 +44,13 @@
       <excludeFolder url="file://$MODULE_DIR$/target/unpack" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: org.mediawiki:api:1.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.httpcomponents:fluent-hc:4.2.2" level="project" />
+    <orderEntry type="library" name="Maven: org.mediawiki:api:1.2" level="project" />
+    <orderEntry type="library" name="Maven: in.yuvi:http.fluent:1.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpclient:4.2.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore:4.2.2" level="project" />
     <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.6" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpmime:4.2.2" level="project" />
-    <orderEntry type="library" name="Maven: in.yuvi:http.fluent:1.0" level="project" />
-    <orderEntry type="library" name="Maven: com.actionbarsherlock:actionbarsherlock:apklib:4.2.0" level="project" />
     <orderEntry type="library" name="Maven: com.google.android:support-v4:r7" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: android:android:4.1_r2" level="project" />
     <orderEntry type="library" name="Maven: de.akquinet.android.androlog:androlog:1.0.5" level="project" />
