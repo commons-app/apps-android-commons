@@ -73,7 +73,7 @@ public class ContributionsContentProvider extends ContentProvider{
                 throw new IllegalArgumentException("Unknown URI: " + uri);
         }
         getContext().getContentResolver().notifyChange(uri, null);
-        return Uri.parse(BASE_PATH + "/" + id);
+        return Uri.parse(BASE_PATH + "/" + contentValues.get(Contribution.Table.COLUMN_FILENAME));
     }
 
     @Override
