@@ -3,13 +3,22 @@ package org.wikimedia.commons.contributions;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import android.content.ContentProviderClient;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.*;
+import android.os.RemoteException;
 import org.wikimedia.commons.Media;
 
 public class Contribution extends Media {
 
+    // No need to be bitwise - they're mutually exclusive
+    public static final int STATE_COMPLETED = 0;
+    public static final int STATE_QUEUED = 1;
+    public static final int STATE_IN_PROGRESS = 2;
+
+    private ContentProviderClient client;
+    private Uri contentUri;
 
     public String getEditSummary() {
         return editSummary;
@@ -59,7 +68,23 @@ public class Contribution extends Media {
         return buffer.toString();
     }
 
-    public ContentValues toContentValues() {
+    public void setContentProviderClient(ContentProviderClient client) {
+        this.client = client;
+    }
+
+    public void save() {
+        try {
+            if(contentUri == null) {
+                contentUri = client.insert(ContributionsContentProvider.BASE_URI, this.toContentValues());
+            } else {
+                client.update(contentUri, toContentValues(), null, null);
+            }
+        } catch(RemoteException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private ContentValues toContentValues() {
         ContentValues cv = new ContentValues();
         cv.put(Table.COLUMN_FILENAME, getFilename());
         if(getLocalUri() != null) {
@@ -86,10 +111,7 @@ public class Contribution extends Media {
         public static final String COLUMN_STATE = "state";
         public static final String COLUMN_LENGTH = "length";
 
-        // No need to be bitwise - they're mutually exclusive
-        public static final int STATE_COMPLETED = 0;
-        public static final int STATE_QUEUED = 1;
-        public static final int STATE_IN_PROGRESS = 2;
+
 
 
         private static final String CREATE_TABLE_STATEMENT = "CREATE TABLE " + TABLE_NAME + " ("

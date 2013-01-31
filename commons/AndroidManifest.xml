@@ -40,7 +40,7 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".ContributionsActivity"
+                android:name=".contributions.ContributionsActivity"
                 android:icon="@drawable/ic_launcher"
                 android:label="@string/title_activity_share"
                  >
