@@ -15,7 +15,7 @@ import org.wikimedia.commons.data.DBOpenHelper;
 public class ContributionsContentProvider extends ContentProvider{
 
     private static final int CONTRIBUTIONS = 1;
-    private static final int CONTRIBUtiONS_ID = 2;
+    private static final int CONTRIBUTIONS_ID = 2;
 
     public static final String AUTHORITY = "org.wikimedia.commons.contributions.contentprovider";
     private static final String BASE_PATH = "contributions";
@@ -25,7 +25,7 @@ public class ContributionsContentProvider extends ContentProvider{
     private static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
     static {
         uriMatcher.addURI(AUTHORITY, BASE_PATH, CONTRIBUTIONS);
-        uriMatcher.addURI(AUTHORITY, BASE_PATH + "/*", CONTRIBUtiONS_ID);
+        uriMatcher.addURI(AUTHORITY, BASE_PATH + "/*", CONTRIBUTIONS_ID);
     }
 
 
@@ -98,7 +98,7 @@ public class ContributionsContentProvider extends ContentProvider{
                         selection,
                         selectionArgs);
                 break;
-            case CONTRIBUtiONS_ID:
+            case CONTRIBUTIONS_ID:
                 String id = uri.getLastPathSegment();
 
                 if (TextUtils.isEmpty(selection)) {
