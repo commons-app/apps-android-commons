@@ -88,6 +88,13 @@ public class ContributionsContentProvider extends ContentProvider{
 
     @Override
     public int update(Uri uri, ContentValues contentValues, String selection, String[] selectionArgs) {
+        /*
+        SQL Injection warnings: First, note that we're not exposing this to the outside world (exported="false")
+        Even then, we should make sure to sanitize all user input appropriately. Input that passes through ContentValues
+        should be fine. So only issues are those that pass in via concating.
+
+        In here, the only concat created argument is for id. It is cast to an int, and will error out otherwise.
+         */
         int uriType = uriMatcher.match(uri);
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         int rowsUpdated = 0;
@@ -99,21 +106,15 @@ public class ContributionsContentProvider extends ContentProvider{
                         selectionArgs);
                 break;
             case CONTRIBUTIONS_ID:
-                String id = uri.getLastPathSegment();
+                int id = Integer.valueOf(uri.getLastPathSegment());
 
                 if (TextUtils.isEmpty(selection)) {
                     rowsUpdated = sqlDB.update(Contribution.Table.TABLE_NAME,
                             contentValues,
-                            Contribution.Table.COLUMN_ID + "= " + id,
-                            null);
+                            Contribution.Table.COLUMN_ID + " = ?",
+                            new String[] { String.valueOf(id) } );
                 } else {
-                    // Doesn't make sense, since FILENAME has to be unique. Implementing for sake of completeness
-                    rowsUpdated = sqlDB.update(Contribution.Table.TABLE_NAME,
-                            contentValues,
-                            Contribution.Table.COLUMN_ID + "= " + id
-                                    + " and "
-                                    + selection,
-                            selectionArgs);
+                    throw new IllegalArgumentException("Parameter `selection` should be empty when updating an ID");
                 }
                 break;
             default:
