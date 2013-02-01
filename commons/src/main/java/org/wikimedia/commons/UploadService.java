@@ -6,6 +6,7 @@ import java.util.Date;
 import android.support.v4.content.LocalBroadcastManager;
 import org.mediawiki.api.*;
 import org.wikimedia.commons.contributions.Contribution;
+import org.wikimedia.commons.contributions.ContributionsActivity;
 import org.wikimedia.commons.contributions.ContributionsContentProvider;
 
 import in.yuvi.http.fluent.ProgressListener;
@@ -211,7 +212,7 @@ public class UploadService extends IntentService {
                .setAutoCancel(true)
                .setContent(notificationView)
                .setOngoing(true)
-               .setContentIntent(PendingIntent.getActivity(getApplicationContext(), 0, new Intent(), 0))
+               .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, ContributionsActivity.class), 0))
                .setTicker(String.format(getString(R.string.upload_progress_notification_title_in_progress), contribution.getFilename()))
                .getNotification();
      
