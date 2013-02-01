@@ -110,6 +110,7 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle(R.string.title_activity_contributions);
         localBroadcastManager = LocalBroadcastManager.getInstance(this);
         setContentView(R.layout.activity_contributions);
         contributionsList = (ListView)findViewById(R.id.contributionsList);
