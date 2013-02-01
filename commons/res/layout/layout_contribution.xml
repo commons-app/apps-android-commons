@@ -3,11 +3,11 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="fill_parent"
-              android:layout_height="fill_parent">
+              android:layout_height="256dp">
 
     <ImageView android:id="@+id/contributionImage"
                android:layout_width="fill_parent"
-               android:layout_height="fill_parent"
+               android:layout_height="256dp"
                android:scaleType="centerCrop"
                />
 
@@ -22,9 +22,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:background="#AA000000"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingBottom="10dp"
+                android:padding="10dp"
                 android:textColor="#FFFFFFFF"
                 android:textSize="18dp"
                 android:typeface="serif" />

@@ -1,5 +1,6 @@
 package org.wikimedia.commons.contributions;
 
+import android.net.Uri;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -8,20 +9,52 @@ import android.content.*;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.content.*;
+import android.support.v4.widget.CursorAdapter;
 import android.support.v4.widget.SimpleCursorAdapter;
-import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import org.wikimedia.commons.ImageLoaderTask;
 import org.wikimedia.commons.R;
 import org.wikimedia.commons.UploadService;
 
 // Inherit from SherlockFragmentActivity but not use Fragments. Because Loaders are available only from FragmentActivities
 public class ContributionsActivity extends SherlockFragmentActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
+    private class ContributionAdapter extends CursorAdapter {
+
+        private final int COLUMN_FILENAME;
+        private final int COLUMN_LOCALURI;
+        public ContributionAdapter(Context context, Cursor c, int flags) {
+            super(context, c, flags);
+            COLUMN_FILENAME = c.getColumnIndex(Contribution.Table.COLUMN_FILENAME);
+            COLUMN_LOCALURI = c.getColumnIndex(Contribution.Table.COLUMN_LOCAL_URI);
+        }
+
+        @Override
+        public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
+            return getLayoutInflater().inflate(R.layout.layout_contribution, viewGroup, false);
+        }
+
+        @Override
+        public void bindView(View view, Context context, Cursor cursor) {
+            ImageView image = (ImageView)view.findViewById(R.id.contributionImage);
+            TextView title = (TextView)view.findViewById(R.id.contributionTitle);
+
+            ImageLoaderTask imageLoader = new ImageLoaderTask(image);
+            imageLoader.execute(Uri.parse(cursor.getString(COLUMN_LOCALURI)));
+
+            title.setText(cursor.getString(COLUMN_FILENAME));
+
+        }
+    }
     private LocalBroadcastManager localBroadcastManager;
 
     private ListView contributionsList;
-    private SimpleCursorAdapter contributionsAdapter;
+    private ContributionAdapter contributionsAdapter;
 
     private String[] broadcastsToReceive = {
             UploadService.INTENT_CONTRIBUTION_STATE_CHANGED
@@ -66,7 +99,8 @@ public class ContributionsActivity extends SherlockFragmentActivity implements L
         setContentView(R.layout.activity_contributions);
         contributionsList = (ListView)findViewById(R.id.contributionsList);
 
-        contributionsAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_2, null, new String[] { Contribution.Table.COLUMN_FILENAME, Contribution.Table.COLUMN_STATE }, new int[] { android.R.id.text1, android.R.id.text2 }, SimpleCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+        Cursor allContributions = getContentResolver().query(ContributionsContentProvider.BASE_URI, CONTRIBUTIONS_PROJECTION, CONTRIBUTION_SELECTION, null, CONTRIBUTION_SORT);
+        contributionsAdapter = new ContributionAdapter(this, allContributions, 0);
         contributionsList.setAdapter(contributionsAdapter);
 
         getSupportLoaderManager().initLoader(0, null, this);

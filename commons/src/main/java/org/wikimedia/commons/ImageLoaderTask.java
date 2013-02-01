@@ -13,7 +13,7 @@ import android.util.Log;
 import android.view.WindowManager;
 import android.widget.*;
 
-class ImageLoaderTask extends AsyncTask<Uri, String, Bitmap> {
+public class ImageLoaderTask extends AsyncTask<Uri, String, Bitmap> {
     ImageView view;
 
     public int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
@@ -83,7 +83,7 @@ class ImageLoaderTask extends AsyncTask<Uri, String, Bitmap> {
         return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
     }
 
-    ImageLoaderTask(ImageView view) {
+    public ImageLoaderTask(ImageView view) {
         this.view = view;
     }
 
