@@ -1,7 +1,5 @@
 <resources>
 
-    <style name="AppTheme" parent="android:Theme.Holo.Light" />
-
     <style name="NotificationProgress" parent="android:Widget.Holo.ProgressBar.Horizontal" />
 
 </resources>

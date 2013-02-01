@@ -19,7 +19,7 @@
         android:name=".CommonsApplication"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/Theme.Commons" >
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".auth.LoginActivity"
             android:label="@string/title_activity_login"
@@ -42,7 +42,7 @@
         <activity
                 android:name=".contributions.ContributionsActivity"
                 android:icon="@drawable/ic_launcher"
-                android:label="@string/title_activity_share"
+                android:label="@string/title_activity_contributions"
                  >
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER"/>
