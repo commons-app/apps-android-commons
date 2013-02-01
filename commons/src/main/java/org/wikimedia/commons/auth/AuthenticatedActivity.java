@@ -10,7 +10,7 @@ import android.accounts.*;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
-public class AuthenticatedActivity extends SherlockActivity {
+public class AuthenticatedActivity extends SherlockFragmentActivity {
     
     
     String accountType;

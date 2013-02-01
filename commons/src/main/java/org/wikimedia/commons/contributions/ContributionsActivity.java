@@ -20,9 +20,15 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import org.wikimedia.commons.ImageLoaderTask;
 import org.wikimedia.commons.R;
 import org.wikimedia.commons.UploadService;
+import org.wikimedia.commons.auth.AuthenticatedActivity;
+import org.wikimedia.commons.auth.WikiAccountAuthenticator;
 
 // Inherit from SherlockFragmentActivity but not use Fragments. Because Loaders are available only from FragmentActivities
-public class ContributionsActivity extends SherlockFragmentActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class ContributionsActivity extends AuthenticatedActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+
+    public ContributionsActivity() {
+        super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
+    }
 
     private class ContributionAdapter extends CursorAdapter {
 
@@ -93,17 +99,22 @@ public class ContributionsActivity extends SherlockFragmentActivity implements L
     }
 
     @Override
+    protected void onAuthCookieAcquired(String authCookie) {
+        Cursor allContributions = getContentResolver().query(ContributionsContentProvider.BASE_URI, CONTRIBUTIONS_PROJECTION, CONTRIBUTION_SELECTION, null, CONTRIBUTION_SORT);
+        contributionsAdapter = new ContributionAdapter(this, allContributions, 0);
+        contributionsList.setAdapter(contributionsAdapter);
+
+        getSupportLoaderManager().initLoader(0, null, this);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         localBroadcastManager = LocalBroadcastManager.getInstance(this);
         setContentView(R.layout.activity_contributions);
         contributionsList = (ListView)findViewById(R.id.contributionsList);
 
-        Cursor allContributions = getContentResolver().query(ContributionsContentProvider.BASE_URI, CONTRIBUTIONS_PROJECTION, CONTRIBUTION_SELECTION, null, CONTRIBUTION_SORT);
-        contributionsAdapter = new ContributionAdapter(this, allContributions, 0);
-        contributionsList.setAdapter(contributionsAdapter);
-
-        getSupportLoaderManager().initLoader(0, null, this);
+        requestAuthToken();
     }
 
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
