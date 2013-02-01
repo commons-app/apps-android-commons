@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent">
+
+    <ImageView android:id="@+id/contributionImage"
+               android:layout_width="fill_parent"
+               android:layout_height="fill_parent"
+               android:scaleType="centerCrop"
+               />
+
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|bottom"
+            android:orientation="vertical" >
+
+        <TextView
+                android:id="@+id/contributionTitle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#AA000000"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="10dp"
+                android:textColor="#FFFFFFFF"
+                android:textSize="18dp"
+                android:typeface="serif" />
+    </LinearLayout>
+
+</FrameLayout>
