@@ -16,6 +16,7 @@ import android.support.v4.widget.SimpleCursorAdapter;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -96,7 +97,7 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
     }
     private LocalBroadcastManager localBroadcastManager;
 
-    private ListView contributionsList;
+    private GridView contributionsList;
 
     private ContributionAdapter contributionsAdapter;
 
@@ -167,7 +168,7 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
         setTitle(R.string.title_activity_contributions);
         localBroadcastManager = LocalBroadcastManager.getInstance(this);
         setContentView(R.layout.activity_contributions);
-        contributionsList = (ListView)findViewById(R.id.contributionsList);
+        contributionsList = (GridView)findViewById(R.id.contributionsList);
 
         requestAuthToken();
     }

@@ -4,11 +4,12 @@
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent">
-    <ListView android:id="@+id/contributionsList"
+    <GridView android:id="@+id/contributionsList"
               android:layout_height="fill_parent"
               android:layout_width="fill_parent"
-              android:dividerHeight="0dp"
-              android:divider="@null"
+              android:stretchMode="columnWidth"
+              android:columnWidth="256dp"
+              android:numColumns="auto_fit"
             />
 
 </LinearLayout>
