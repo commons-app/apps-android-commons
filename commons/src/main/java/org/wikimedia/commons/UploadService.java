@@ -159,7 +159,7 @@ public class UploadService extends IntentService {
             if(cursor != null && cursor.getCount() != 0) {
                 cursor.moveToFirst();
                 dateCreated = new Date(cursor.getLong(0));
-            }
+            } // FIXME: Alternate way of setting dateCreated if this data is not found
         } /* else if (mimeType.startsWith("audio/")) {
              Removed Audio implementationf or now
            }  */

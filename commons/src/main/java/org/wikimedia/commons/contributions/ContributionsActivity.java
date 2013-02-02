@@ -2,6 +2,7 @@ package org.wikimedia.commons.contributions;
 
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -42,6 +43,7 @@ import java.util.Date;
 public class ContributionsActivity extends AuthenticatedActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private final static int SELECT_FROM_GALLERY = 1;
+    private final static int SELECT_FROM_CAMERA = 2;
 
     public ContributionsActivity() {
         super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
@@ -171,8 +173,18 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
                     shareIntent.setType("image/*"); //FIXME: Find out appropriate mime type
                     shareIntent.putExtra(Intent.EXTRA_STREAM, data.getData());
                     startActivity(shareIntent);
-                    break;
                 }
+                break;
+            case SELECT_FROM_CAMERA:
+                if(resultCode == RESULT_OK) {
+                    Intent shareIntent = new Intent(this, ShareActivity.class);
+                    shareIntent.setAction(Intent.ACTION_SEND);
+                    Log.d("Commons", "Type is " + data.getType() + " Uri is " + data.getData());
+                    shareIntent.setType("image/*"); //FIXME: Find out appropriate mime type
+                    shareIntent.putExtra(Intent.EXTRA_STREAM, data.getData());
+                    startActivity(shareIntent);
+                }
+                break;
         }
     }
 
@@ -183,6 +195,10 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
                 Intent pickImageIntent = new Intent(Intent.ACTION_GET_CONTENT);
                 pickImageIntent.setType("image/*");
                 startActivityForResult(pickImageIntent,  SELECT_FROM_GALLERY);
+                return true;
+            case R.id.menu_from_camera:
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(takePictureIntent, SELECT_FROM_CAMERA);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
