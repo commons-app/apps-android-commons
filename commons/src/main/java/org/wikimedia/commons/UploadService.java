@@ -45,7 +45,7 @@ public class UploadService extends IntentService {
     private Notification curProgressNotification;
 
     private int toUpload;
-    
+
     public UploadService(String name) {
         super(name);
     }
@@ -53,6 +53,7 @@ public class UploadService extends IntentService {
     public UploadService() {
         super("UploadService");
     }
+
     // DO NOT HAVE NOTIFICATION ID OF 0 FOR ANYTHING
     // See http://stackoverflow.com/questions/8725909/startforeground-does-not-show-my-notification
     // Seriously, Android?
@@ -66,7 +67,7 @@ public class UploadService extends IntentService {
         String notificationTag;
         boolean notificationTitleChanged;
         Contribution contribution;
-       
+
         String notificationProgressTitle;
         String notificationFinishingTitle;
 
@@ -77,6 +78,7 @@ public class UploadService extends IntentService {
             this.notificationFinishingTitle = notificationFinishingTitle;
             this.contribution = contribution;
         }
+
         @Override
         public void onProgress(long transferred, long total) {
             Log.d("Commons", String.format("Uploaded %d of %d", transferred, total));
@@ -96,17 +98,18 @@ public class UploadService extends IntentService {
                 curView.setTextViewText(R.id.uploadNotificationTitle, notificationFinishingTitle);
                 notificationManager.notify(NOTIFICATION_DOWNLOAD_IN_PROGRESS, curNotification);
             } else {
-                curNotification.contentView.setProgressBar(R.id.uploadNotificationProgress, 100, (int)(((double)transferred / (double)total) * 100), false);
+                curNotification.contentView.setProgressBar(R.id.uploadNotificationProgress, 100, (int) (((double) transferred / (double) total) * 100), false);
                 notificationManager.notify(NOTIFICATION_DOWNLOAD_IN_PROGRESS, curNotification);
 
                 Intent mediaUploadProgressIntent = new Intent(INTENT_CONTRIBUTION_STATE_CHANGED);
-               // mediaUploadProgressIntent.putExtra(EXTRA_MEDIA contribution);
+                // mediaUploadProgressIntent.putExtra(EXTRA_MEDIA contribution);
                 mediaUploadProgressIntent.putExtra(EXTRA_TRANSFERRED_BYTES, transferred);
                 localBroadcastManager.sendBroadcast(mediaUploadProgressIntent);
             }
         }
 
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -117,14 +120,14 @@ public class UploadService extends IntentService {
     @Override
     public void onCreate() {
         super.onCreate();
-        notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+        notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         localBroadcastManager = LocalBroadcastManager.getInstance(this);
-        app = (CommonsApplication)this.getApplicationContext();
+        app = (CommonsApplication) this.getApplicationContext();
         contributionsProviderClient = this.getContentResolver().acquireContentProviderClient(ContributionsContentProvider.AUTHORITY);
     }
 
     private String getRealPathFromURI(Uri contentUri) {
-        String[] proj = { MediaStore.Images.Media.DATA };
+        String[] proj = {MediaStore.Images.Media.DATA};
         CursorLoader loader = new CursorLoader(this, contentUri, proj, null, null, null);
         Cursor cursor = loader.loadInBackground();
         int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
@@ -134,7 +137,7 @@ public class UploadService extends IntentService {
 
     private Contribution mediaFromIntent(Intent intent) {
         Bundle extras = intent.getExtras();
-        Uri mediaUri = (Uri)extras.getParcelable(EXTRA_MEDIA_URI);
+        Uri mediaUri = (Uri) extras.getParcelable(EXTRA_MEDIA_URI);
         String filename = intent.getStringExtra(EXTRA_TARGET_FILENAME);
         String description = intent.getStringExtra(EXTRA_DESCRIPTION);
         String editSummary = intent.getStringExtra(EXTRA_EDIT_SUMMARY);
@@ -144,16 +147,16 @@ public class UploadService extends IntentService {
         Long length = null;
         try {
             length = this.getContentResolver().openAssetFileDescriptor(mediaUri, "r").getLength();
-        } catch (FileNotFoundException e) {
+        } catch(FileNotFoundException e) {
             throw new RuntimeException(e);
         }
 
 
         Log.d("Commons", "MimeType is " + mimeType);
-        if (mimeType.startsWith("image/")) {
+        if(mimeType.startsWith("image/")) {
             Cursor cursor = this.getContentResolver().query(mediaUri,
                     new String[]{MediaStore.Images.ImageColumns.DATE_TAKEN}, null, null, null);
-            if (cursor.getCount() != 0) {
+            if(cursor.getCount() != 0) {
                 cursor.moveToFirst();
                 dateCreated = new Date(cursor.getLong(0));
             }
@@ -163,6 +166,7 @@ public class UploadService extends IntentService {
         Contribution contribution = new Contribution(mediaUri, null, filename, description, null, length, dateCreated, null, app.getCurrentAccount().name, editSummary);
         return contribution;
     }
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         toUpload++;
@@ -186,109 +190,109 @@ public class UploadService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-       MWApi api = app.getApi();
+        MWApi api = app.getApi();
 
-       ApiResult result;
-       RemoteViews notificationView;
-       Contribution contribution;
-       InputStream file = null;
-       contribution = (Contribution)intent.getSerializableExtra("dummy-data");
+        ApiResult result;
+        RemoteViews notificationView;
+        Contribution contribution;
+        InputStream file = null;
+        contribution = (Contribution) intent.getSerializableExtra("dummy-data");
 
-       String notificationTag = contribution.getLocalUri().toString();
+        String notificationTag = contribution.getLocalUri().toString();
 
 
         try {
-            file =  this.getContentResolver().openInputStream(contribution.getLocalUri());
-        } catch (FileNotFoundException e) {
+            file = this.getContentResolver().openInputStream(contribution.getLocalUri());
+        } catch(FileNotFoundException e) {
             throw new RuntimeException(e);
         }
 
-       notificationView = new RemoteViews(getPackageName(), R.layout.layout_upload_progress);
-       notificationView.setTextViewText(R.id.uploadNotificationTitle, String.format(getString(R.string.upload_progress_notification_title_start), contribution.getFilename()));
-       notificationView.setProgressBar(R.id.uploadNotificationProgress, 100, 0, false);
-       
-       Log.d("Commons", "Before execution!");
-       curProgressNotification = new NotificationCompat.Builder(this).setAutoCancel(true)
-               .setSmallIcon(R.drawable.ic_launcher)
-               .setAutoCancel(true)
-               .setContent(notificationView)
-               .setOngoing(true)
-               .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, ContributionsActivity.class), 0))
-               .setTicker(String.format(getString(R.string.upload_progress_notification_title_in_progress), contribution.getFilename()))
-               .getNotification();
-     
-       this.startForeground(NOTIFICATION_DOWNLOAD_IN_PROGRESS, curProgressNotification);
-       
-       Log.d("Commons", "Just before");
+        notificationView = new RemoteViews(getPackageName(), R.layout.layout_upload_progress);
+        notificationView.setTextViewText(R.id.uploadNotificationTitle, String.format(getString(R.string.upload_progress_notification_title_start), contribution.getFilename()));
+        notificationView.setProgressBar(R.id.uploadNotificationProgress, 100, 0, false);
 
-       try {
-           if(!api.validateLogin()) {
-               // Need to revalidate! 
-               if(app.revalidateAuthToken()) {
-                   Log.d("Commons", "Successfully revalidated token!");
-               } else {
-                   Log.d("Commons", "Unable to revalidate :(");
-                   // TODO: Put up a new notification, ask them to re-login
-                   stopForeground(true);
-                   Toast failureToast = Toast.makeText(this, R.string.authentication_failed, Toast.LENGTH_LONG);
-                   failureToast.show();
-                   return;
-               }
-           }
-           NotificationUpdateProgressListener notificationUpdater = new NotificationUpdateProgressListener(curProgressNotification, notificationTag,
-                   String.format(getString(R.string.upload_progress_notification_title_in_progress), contribution.getFilename()),
-                   String.format(getString(R.string.upload_progress_notification_title_finishing), contribution.getFilename()),
-                   contribution
-           );
-           result = api.upload(contribution.getFilename(), file, contribution.getDataLength(), contribution.getPageContents(), contribution.getEditSummary(), notificationUpdater);
-       } catch (IOException e) {
-           Log.d("Commons", "I have a network fuckup");
-           stopForeground(true);
-           Notification failureNotification = new NotificationCompat.Builder(this).setAutoCancel(true)
-                   .setSmallIcon(R.drawable.ic_launcher)
-                   .setAutoCancel(true)
-                   .setContentIntent(PendingIntent.getService(getApplicationContext(), 0, intent, 0))
-                   .setTicker(String.format(getString(R.string.upload_failed_notification_title), contribution.getFilename()))
-                   .setContentTitle(String.format(getString(R.string.upload_failed_notification_title), contribution.getFilename()))
-                   .setContentText(getString(R.string.upload_failed_notification_subtitle))
-                   .getNotification();
-           notificationManager.notify(NOTIFICATION_UPLOAD_FAILED, failureNotification);
+        Log.d("Commons", "Before execution!");
+        curProgressNotification = new NotificationCompat.Builder(this).setAutoCancel(true)
+                .setSmallIcon(R.drawable.ic_launcher)
+                .setAutoCancel(true)
+                .setContent(notificationView)
+                .setOngoing(true)
+                .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, ContributionsActivity.class), 0))
+                .setTicker(String.format(getString(R.string.upload_progress_notification_title_in_progress), contribution.getFilename()))
+                .getNotification();
 
-           contribution.setState(Contribution.STATE_QUEUED);
-           contribution.save();
-           return;
-       } finally {
-           toUpload--;
-       }
-      
-       Log.d("Commons", "Response is"  + CommonsApplication.getStringFromDOM(result.getDocument()));
-       stopForeground(true);
-       curProgressNotification = null;
+        this.startForeground(NOTIFICATION_DOWNLOAD_IN_PROGRESS, curProgressNotification);
 
-       SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"); // Assuming MW always gives me UTC
+        Log.d("Commons", "Just before");
+
+        try {
+            if(!api.validateLogin()) {
+                // Need to revalidate!
+                if(app.revalidateAuthToken()) {
+                    Log.d("Commons", "Successfully revalidated token!");
+                } else {
+                    Log.d("Commons", "Unable to revalidate :(");
+                    // TODO: Put up a new notification, ask them to re-login
+                    stopForeground(true);
+                    Toast failureToast = Toast.makeText(this, R.string.authentication_failed, Toast.LENGTH_LONG);
+                    failureToast.show();
+                    return;
+                }
+            }
+            NotificationUpdateProgressListener notificationUpdater = new NotificationUpdateProgressListener(curProgressNotification, notificationTag,
+                    String.format(getString(R.string.upload_progress_notification_title_in_progress), contribution.getFilename()),
+                    String.format(getString(R.string.upload_progress_notification_title_finishing), contribution.getFilename()),
+                    contribution
+            );
+            result = api.upload(contribution.getFilename(), file, contribution.getDataLength(), contribution.getPageContents(), contribution.getEditSummary(), notificationUpdater);
+        } catch(IOException e) {
+            Log.d("Commons", "I have a network fuckup");
+            stopForeground(true);
+            Notification failureNotification = new NotificationCompat.Builder(this).setAutoCancel(true)
+                    .setSmallIcon(R.drawable.ic_launcher)
+                    .setAutoCancel(true)
+                    .setContentIntent(PendingIntent.getService(getApplicationContext(), 0, intent, 0))
+                    .setTicker(String.format(getString(R.string.upload_failed_notification_title), contribution.getFilename()))
+                    .setContentTitle(String.format(getString(R.string.upload_failed_notification_title), contribution.getFilename()))
+                    .setContentText(getString(R.string.upload_failed_notification_subtitle))
+                    .getNotification();
+            notificationManager.notify(NOTIFICATION_UPLOAD_FAILED, failureNotification);
+
+            contribution.setState(Contribution.STATE_QUEUED);
+            contribution.save();
+            return;
+        } finally {
+            toUpload--;
+        }
+
+        Log.d("Commons", "Response is" + CommonsApplication.getStringFromDOM(result.getDocument()));
+        stopForeground(true);
+        curProgressNotification = null;
+
+        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"); // Assuming MW always gives me UTC
 
 
-       String descUrl = result.getString("/api/upload/imageinfo/@descriptionurl");
+        String descUrl = result.getString("/api/upload/imageinfo/@descriptionurl");
         Date dateUploaded = null;
         try {
             dateUploaded = isoFormat.parse(result.getString("/api/upload/imageinfo/@timestamp"));
-        } catch (java.text.ParseException e) {
-               throw new RuntimeException(e); // Hopefully mediawiki doesn't give me bogus stuff?
+        } catch(java.text.ParseException e) {
+            throw new RuntimeException(e); // Hopefully mediawiki doesn't give me bogus stuff?
         }
 
         Intent openUploadedPageIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(descUrl));
-       Notification doneNotification = new NotificationCompat.Builder(this)
-               .setAutoCancel(true)
-               .setSmallIcon(R.drawable.ic_launcher)
-               .setContentTitle(String.format(getString(R.string.upload_completed_notification_title), contribution.getFilename()))
-               .setContentText(getString(R.string.upload_completed_notification_text))
-               .setTicker(String.format(getString(R.string.upload_completed_notification_title), contribution.getFilename()))
-               .setContentIntent(PendingIntent.getActivity(this, 0, openUploadedPageIntent, 0))
-               .getNotification();
-       
-       notificationManager.notify(notificationTag, NOTIFICATION_DOWNLOAD_COMPLETE, doneNotification);
-       contribution.setState(Contribution.STATE_COMPLETED);
-       contribution.setDateUploaded(dateUploaded);
-       contribution.save();
+        Notification doneNotification = new NotificationCompat.Builder(this)
+                .setAutoCancel(true)
+                .setSmallIcon(R.drawable.ic_launcher)
+                .setContentTitle(String.format(getString(R.string.upload_completed_notification_title), contribution.getFilename()))
+                .setContentText(getString(R.string.upload_completed_notification_text))
+                .setTicker(String.format(getString(R.string.upload_completed_notification_title), contribution.getFilename()))
+                .setContentIntent(PendingIntent.getActivity(this, 0, openUploadedPageIntent, 0))
+                .getNotification();
+
+        notificationManager.notify(notificationTag, NOTIFICATION_DOWNLOAD_COMPLETE, doneNotification);
+        contribution.setState(Contribution.STATE_COMPLETED);
+        contribution.setDateUploaded(dateUploaded);
+        contribution.save();
     }
 }
