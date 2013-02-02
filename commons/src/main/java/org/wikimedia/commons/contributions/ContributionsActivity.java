@@ -76,9 +76,9 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
                 Date uploaded = new Date(cursor.getLong(COLUMN_UPLOADED));
                 stateView.setText(SimpleDateFormat.getDateInstance().format(uploaded));
             } else if(state == Contribution.STATE_QUEUED) {
-                stateView.setText("Queued");
+                stateView.setText(R.string.contribution_state_queued);
             } else if(state == Contribution.STATE_IN_PROGRESS) {
-                stateView.setText("Uploading");
+                stateView.setText(R.string.contribution_state_in_progress);
             }
 
         }
