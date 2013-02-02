@@ -16,6 +16,9 @@ import android.os.Build;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.download.ImageDownloader;
+import org.acra.ACRA;
+import org.acra.ReportingInteractionMode;
+import org.acra.annotation.ReportsCrashes;
 import org.mediawiki.api.*;
 import org.w3c.dom.Node;
 import org.wikimedia.commons.auth.WikiAccountAuthenticator;
@@ -25,6 +28,15 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreProtocolPNames;
 import org.wikimedia.commons.data.DBOpenHelper;
 
+// TODO: Use ProGuard to rip out reporting when publishing
+@ReportsCrashes(formKey = "",
+        mailTo = "yuvipanda@wikimedia.org",
+        mode = ReportingInteractionMode.DIALOG,
+        resDialogText = R.string.crash_dialog_text,
+        resDialogTitle = R.string.crash_dialog_title,
+        resDialogCommentPrompt = R.string.crash_dialog_comment_prompt,
+        resDialogOkToast = R.string.crash_dialog_ok_toast
+)
 public class CommonsApplication extends Application {
 
     private DBOpenHelper dbOpenHelper;
@@ -63,7 +75,7 @@ public class CommonsApplication extends Application {
 
     @Override
     public void onCreate() {
-        // TODO Auto-generated method stub
+        ACRA.init(this);
         super.onCreate();
         // Fire progress callbacks for every 3% of uploaded content
         System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0");
