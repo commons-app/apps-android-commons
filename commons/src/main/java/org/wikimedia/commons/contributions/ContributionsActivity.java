@@ -70,14 +70,17 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
 
         @Override
         public void bindView(View view, Context context, Cursor cursor) {
-            ImageView image = (ImageView)view.findViewById(R.id.contributionImage);
+            ImageView imageView = (ImageView)view.findViewById(R.id.contributionImage);
             TextView titleView = (TextView)view.findViewById(R.id.contributionTitle);
             TextView stateView = (TextView)view.findViewById(R.id.contributionState);
 
             Uri imageUri = Uri.parse(cursor.getString(COLUMN_LOCALURI));
             int state = cursor.getInt(COLUMN_STATE);
 
-            ImageLoader.getInstance().displayImage(imageUri.toString(), image, contributionDisplayOptions);
+            if(imageView.getTag() == null || !imageView.getTag().equals(imageUri.toString())) {
+                ImageLoader.getInstance().displayImage(imageUri.toString(), imageView, contributionDisplayOptions);
+                imageView.setTag(imageUri.toString());
+            }
 
             titleView.setText(cursor.getString(COLUMN_FILENAME));
             if(state == Contribution.STATE_COMPLETED) {
