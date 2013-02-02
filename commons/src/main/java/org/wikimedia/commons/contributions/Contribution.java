@@ -47,6 +47,10 @@ public class Contribution extends Media {
         this.state = state;
     }
 
+    public void setDateUploaded(Date date) {
+        this.dateUploaded = date;
+    }
+
     public String getPageContents() {
         StringBuffer buffer = new StringBuffer();
         SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -93,6 +97,9 @@ public class Contribution extends Media {
         if(getRemoteUri() != null) {
             cv.put(Table.COLUMN_REMOTE_URI, getRemoteUri().toString());
         }
+        if(getDateUploaded() != null) {
+            cv.put(Table.COLUMN_UPLOADED, getDateUploaded().getTime());
+        }
         cv.put(Table.COLUMN_LENGTH, getDataLength());
         cv.put(Table.COLUMN_TIMESTAMP, getTimestamp().getTime());
         cv.put(Table.COLUMN_STATE, getState());
@@ -110,8 +117,7 @@ public class Contribution extends Media {
         public static final String COLUMN_TIMESTAMP = "timestamp";
         public static final String COLUMN_STATE = "state";
         public static final String COLUMN_LENGTH = "length";
-
-
+        public static final String COLUMN_UPLOADED = "uploaded";
 
 
         private static final String CREATE_TABLE_STATEMENT = "CREATE TABLE " + TABLE_NAME + " ("
@@ -119,6 +125,7 @@ public class Contribution extends Media {
                 + "filename STRING,"
                 + "local_uri STRING,"
                 + "remote_uri STRING,"
+                + "uploaded INTEGER,"
                 + "timestamp INTEGER,"
                 + "state INTEGER,"
                 + "length INTEGER"

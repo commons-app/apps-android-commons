@@ -11,21 +11,29 @@
                android:scaleType="centerCrop"
                />
 
-    <LinearLayout
+    <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center|bottom"
-            android:orientation="vertical" >
+            android:background="#AA000000"
+            android:padding="10dp"
+            >
 
         <TextView
                 android:id="@+id/contributionTitle"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#AA000000"
-                android:padding="10dp"
                 android:textColor="#FFFFFFFF"
                 android:textSize="18dp"
                 android:typeface="serif" />
-    </LinearLayout>
+        <TextView
+            android:id="@+id/contributionState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            style="?android:textAppearanceSmall"
+            android:textColor="#FFFFFFFF"
+            />
+    </RelativeLayout>
 
 </FrameLayout>

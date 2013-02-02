@@ -1,6 +1,7 @@
 package org.wikimedia.commons;
 
 import java.io.*;
+import java.text.*;
 import java.util.Date;
 
 import android.support.v4.content.LocalBroadcastManager;
@@ -263,10 +264,19 @@ public class UploadService extends IntentService {
        Log.d("Commons", "Response is"  + CommonsApplication.getStringFromDOM(result.getDocument()));
        stopForeground(true);
        curProgressNotification = null;
-       
+
+       SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"); // Assuming MW always gives me UTC
+
+
        String descUrl = result.getString("/api/upload/imageinfo/@descriptionurl");
-       
-       Intent openUploadedPageIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(descUrl));
+        Date dateUploaded = null;
+        try {
+            dateUploaded = isoFormat.parse(result.getString("/api/upload/imageinfo/@timestamp"));
+        } catch (java.text.ParseException e) {
+               throw new RuntimeException(e); // Hopefully mediawiki doesn't give me bogus stuff?
+        }
+
+        Intent openUploadedPageIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(descUrl));
        Notification doneNotification = new NotificationCompat.Builder(this)
                .setAutoCancel(true)
                .setSmallIcon(R.drawable.ic_launcher)
@@ -278,6 +288,7 @@ public class UploadService extends IntentService {
        
        notificationManager.notify(notificationTag, NOTIFICATION_DOWNLOAD_COMPLETE, doneNotification);
        contribution.setState(Contribution.STATE_COMPLETED);
+       contribution.setDateUploaded(dateUploaded);
        contribution.save();
     }
 }

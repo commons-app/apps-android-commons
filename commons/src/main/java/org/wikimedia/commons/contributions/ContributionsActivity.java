@@ -31,6 +31,9 @@ import org.wikimedia.commons.UploadService;
 import org.wikimedia.commons.auth.AuthenticatedActivity;
 import org.wikimedia.commons.auth.WikiAccountAuthenticator;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 // Inherit from SherlockFragmentActivity but not use Fragments. Because Loaders are available only from FragmentActivities
 public class ContributionsActivity extends AuthenticatedActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -42,10 +45,14 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
 
         private final int COLUMN_FILENAME;
         private final int COLUMN_LOCALURI;
+        private final int COLUMN_STATE;
+        private final int COLUMN_UPLOADED;
         public ContributionAdapter(Context context, Cursor c, int flags) {
             super(context, c, flags);
             COLUMN_FILENAME = c.getColumnIndex(Contribution.Table.COLUMN_FILENAME);
+            COLUMN_STATE = c.getColumnIndex(Contribution.Table.COLUMN_STATE);
             COLUMN_LOCALURI = c.getColumnIndex(Contribution.Table.COLUMN_LOCAL_URI);
+            COLUMN_UPLOADED = c.getColumnIndex(Contribution.Table.COLUMN_UPLOADED);
         }
 
         @Override
@@ -56,13 +63,23 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
         @Override
         public void bindView(View view, Context context, Cursor cursor) {
             ImageView image = (ImageView)view.findViewById(R.id.contributionImage);
-            TextView title = (TextView)view.findViewById(R.id.contributionTitle);
+            TextView titleView = (TextView)view.findViewById(R.id.contributionTitle);
+            TextView stateView = (TextView)view.findViewById(R.id.contributionState);
 
             Uri imageUri = Uri.parse(cursor.getString(COLUMN_LOCALURI));
+            int state = cursor.getInt(COLUMN_STATE);
 
             ImageLoader.getInstance().displayImage(imageUri.toString(), image, contributionDisplayOptions);
 
-            title.setText(cursor.getString(COLUMN_FILENAME));
+            titleView.setText(cursor.getString(COLUMN_FILENAME));
+            if(state == Contribution.STATE_COMPLETED) {
+                Date uploaded = new Date(cursor.getLong(COLUMN_UPLOADED));
+                stateView.setText(SimpleDateFormat.getDateInstance().format(uploaded));
+            } else if(state == Contribution.STATE_QUEUED) {
+                stateView.setText("Queued");
+            } else if(state == Contribution.STATE_IN_PROGRESS) {
+                stateView.setText("Uploading");
+            }
 
         }
     }
@@ -82,7 +99,8 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
         Contribution.Table.COLUMN_ID,
         Contribution.Table.COLUMN_FILENAME,
         Contribution.Table.COLUMN_LOCAL_URI,
-        Contribution.Table.COLUMN_STATE
+        Contribution.Table.COLUMN_STATE,
+        Contribution.Table.COLUMN_UPLOADED
     };
 
     private String CONTRIBUTION_SELECTION = "";
