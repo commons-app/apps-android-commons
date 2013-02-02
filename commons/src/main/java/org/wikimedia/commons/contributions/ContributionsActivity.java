@@ -2,6 +2,7 @@ package org.wikimedia.commons.contributions;
 
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -21,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -37,6 +39,8 @@ import org.wikimedia.commons.UploadService;
 import org.wikimedia.commons.auth.AuthenticatedActivity;
 import org.wikimedia.commons.auth.WikiAccountAuthenticator;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -174,6 +178,18 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putParcelable("lastGeneratedCaptureURI", lastGeneratedCaptureURI);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        lastGeneratedCaptureURI = (Uri) savedInstanceState.getParcelable("lastGeneratedCaptureURI");
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch(requestCode) {
@@ -191,15 +207,39 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
                 if(resultCode == RESULT_OK) {
                     Intent shareIntent = new Intent(this, ShareActivity.class);
                     shareIntent.setAction(Intent.ACTION_SEND);
-                    Log.d("Commons", "Type is " + data.getType() + " Uri is " + data.getData());
-                    shareIntent.setType("image/*"); //FIXME: Find out appropriate mime type
-                    shareIntent.putExtra(Intent.EXTRA_STREAM, data.getData());
+                    Log.d("Commons", "Uri is " + lastGeneratedCaptureURI);
+                    shareIntent.setType("image/jpeg"); //FIXME: Find out appropriate mime type
+                    shareIntent.putExtra(Intent.EXTRA_STREAM, lastGeneratedCaptureURI);
                     startActivity(shareIntent);
                 }
                 break;
         }
     }
 
+    // See http://stackoverflow.com/a/5054673/17865 for why this is done
+    private Uri lastGeneratedCaptureURI;
+
+    private void reGenerateImageCaptureURI() {
+        String storageState = Environment.getExternalStorageState();
+        if(storageState.equals(Environment.MEDIA_MOUNTED)) {
+
+            String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Commons/images/" + new Date().getTime() + ".jpg";
+            File _photoFile = new File(path);
+            try {
+                if(_photoFile.exists() == false) {
+                    _photoFile.getParentFile().mkdirs();
+                    _photoFile.createNewFile();
+                }
+
+            } catch (IOException e) {
+                Log.e("Commons", "Could not create file: " + path, e);
+            }
+
+            lastGeneratedCaptureURI = Uri.fromFile(_photoFile);
+        }   else {
+            throw new RuntimeException("No external storage found!");
+        }
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
@@ -210,6 +250,8 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
                 return true;
             case R.id.menu_from_camera:
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                reGenerateImageCaptureURI();
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, lastGeneratedCaptureURI);
                 startActivityForResult(takePictureIntent, SELECT_FROM_CAMERA);
                 return true;
             default:
