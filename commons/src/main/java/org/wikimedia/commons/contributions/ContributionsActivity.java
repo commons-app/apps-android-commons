@@ -12,12 +12,15 @@ import android.os.Bundle;
 import android.support.v4.content.*;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v4.widget.SimpleCursorAdapter;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -27,6 +30,7 @@ import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import org.wikimedia.commons.ImageLoaderTask;
 import org.wikimedia.commons.R;
+import org.wikimedia.commons.ShareActivity;
 import org.wikimedia.commons.UploadService;
 import org.wikimedia.commons.auth.AuthenticatedActivity;
 import org.wikimedia.commons.auth.WikiAccountAuthenticator;
@@ -36,6 +40,8 @@ import java.util.Date;
 
 // Inherit from SherlockFragmentActivity but not use Fragments. Because Loaders are available only from FragmentActivities
 public class ContributionsActivity extends AuthenticatedActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+
+    private final static int SELECT_FROM_GALLERY = 1;
 
     public ContributionsActivity() {
         super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
@@ -151,6 +157,42 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
         contributionsList = (ListView)findViewById(R.id.contributionsList);
 
         requestAuthToken();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch(requestCode) {
+            case SELECT_FROM_GALLERY:
+                if(resultCode == RESULT_OK) {
+                    Intent shareIntent = new Intent(this, ShareActivity.class);
+                    shareIntent.setAction(Intent.ACTION_SEND);
+                    Log.d("Commons", "Type is " + data.getType() + " Uri is " + data.getData());
+                    shareIntent.setType("image/*"); //FIXME: Find out appropriate mime type
+                    shareIntent.putExtra(Intent.EXTRA_STREAM, data.getData());
+                    startActivity(shareIntent);
+                    break;
+                }
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.menu_from_gallery:
+                Intent pickImageIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                pickImageIntent.setType("image/*");
+                startActivityForResult(pickImageIntent,  SELECT_FROM_GALLERY);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getSupportMenuInflater().inflate(R.menu.activity_contributions, menu);
+        return true;
     }
 
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {

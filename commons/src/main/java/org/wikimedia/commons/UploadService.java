@@ -156,7 +156,7 @@ public class UploadService extends IntentService {
         if(mimeType.startsWith("image/")) {
             Cursor cursor = this.getContentResolver().query(mediaUri,
                     new String[]{MediaStore.Images.ImageColumns.DATE_TAKEN}, null, null, null);
-            if(cursor.getCount() != 0) {
+            if(cursor != null && cursor.getCount() != 0) {
                 cursor.moveToFirst();
                 dateCreated = new Date(cursor.getLong(0));
             }

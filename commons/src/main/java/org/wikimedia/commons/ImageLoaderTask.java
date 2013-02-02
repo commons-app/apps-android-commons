@@ -37,8 +37,8 @@ public class ImageLoaderTask extends AsyncTask<Uri, String, Bitmap> {
         Cursor cursor = view.getContext().getContentResolver().query(photoUri,
                 new String[] { MediaStore.Images.ImageColumns.ORIENTATION }, null, null, null);
 
-        if (cursor.getCount() != 1) {
-            return -1;
+        if (cursor == null || cursor.getCount() != 1) {
+            return 0;
         }
 
         cursor.moveToFirst();
