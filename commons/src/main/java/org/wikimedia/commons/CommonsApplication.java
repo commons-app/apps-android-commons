@@ -1,15 +1,21 @@
 package org.wikimedia.commons;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringWriter;
+import java.net.URI;
 
 import javax.xml.transform.*;
 
 import android.accounts.*;
 import android.app.Application;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.download.ImageDownloader;
 import org.mediawiki.api.*;
 import org.w3c.dom.Node;
 import org.wikimedia.commons.auth.WikiAccountAuthenticator;
@@ -39,6 +45,21 @@ public class CommonsApplication extends Application {
         return dbOpenHelper;
     }
 
+    public class ContentUriImageDownloader extends ImageDownloader {
+
+        @Override
+        protected InputStream getStreamFromNetwork(URI uri) throws IOException {
+            return super.getStream(uri); // Pass back to parent code, which handles http, https, etc
+        }
+
+        @Override
+        protected InputStream getStreamFromOtherSource(URI imageUri) throws IOException {
+            if(imageUri.getScheme().equals("content")) {
+                return getContentResolver().openInputStream(Uri.parse(imageUri.toString()));
+            }
+            throw new RuntimeException("Not a content URI: " + imageUri);
+        }
+    }
 
     @Override
     public void onCreate() {
@@ -47,6 +68,11 @@ public class CommonsApplication extends Application {
         // Fire progress callbacks for every 3% of uploaded content
         System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0");
         api = createMWApi();
+
+
+        ImageLoaderConfiguration imageLoaderConfiguration = new ImageLoaderConfiguration.Builder(getApplicationContext())
+                .imageDownloader(new ContentUriImageDownloader()).build();
+        ImageLoader.getInstance().init(imageLoaderConfiguration);
     }
     
     public MWApi getApi() {

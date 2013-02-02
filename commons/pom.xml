@@ -35,6 +35,11 @@
       <groupId>de.akquinet.android.androlog</groupId>
       <artifactId>androlog</artifactId>
     </dependency>
+      <dependency>
+          <groupId>com.nostra13.universalimageloader</groupId>
+          <artifactId>universal-image-loader</artifactId>
+          <version>1.7.1</version>
+      </dependency>
   </dependencies>
 
 <build>

@@ -1,5 +1,6 @@
 package org.wikimedia.commons.contributions;
 
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -17,6 +18,13 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import org.wikimedia.commons.ImageLoaderTask;
 import org.wikimedia.commons.R;
 import org.wikimedia.commons.UploadService;
@@ -50,8 +58,9 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
             ImageView image = (ImageView)view.findViewById(R.id.contributionImage);
             TextView title = (TextView)view.findViewById(R.id.contributionTitle);
 
-            ImageLoaderTask imageLoader = new ImageLoaderTask(image);
-            imageLoader.execute(Uri.parse(cursor.getString(COLUMN_LOCALURI)));
+            Uri imageUri = Uri.parse(cursor.getString(COLUMN_LOCALURI));
+
+            ImageLoader.getInstance().displayImage(imageUri.toString(), image, contributionDisplayOptions);
 
             title.setText(cursor.getString(COLUMN_FILENAME));
 
@@ -60,7 +69,10 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
     private LocalBroadcastManager localBroadcastManager;
 
     private ListView contributionsList;
+
     private ContributionAdapter contributionsAdapter;
+
+    private DisplayImageOptions contributionDisplayOptions;
 
     private String[] broadcastsToReceive = {
             UploadService.INTENT_CONTRIBUTION_STATE_CHANGED
@@ -100,6 +112,11 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
 
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
+        contributionDisplayOptions = new DisplayImageOptions.Builder().cacheInMemory()
+                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
+                .displayer(new FadeInBitmapDisplayer(300))
+                .resetViewBeforeLoading().build();
+
         Cursor allContributions = getContentResolver().query(ContributionsContentProvider.BASE_URI, CONTRIBUTIONS_PROJECTION, CONTRIBUTION_SELECTION, null, CONTRIBUTION_SORT);
         contributionsAdapter = new ContributionAdapter(this, allContributions, 0);
         contributionsList.setAdapter(contributionsAdapter);
