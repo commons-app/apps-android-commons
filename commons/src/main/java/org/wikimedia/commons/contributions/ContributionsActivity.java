@@ -112,7 +112,15 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
     };
 
     private String CONTRIBUTION_SELECTION = "";
-    private String CONTRIBUTION_SORT = Contribution.Table.COLUMN_TIMESTAMP + " DESC";
+    /*
+        This sorts in the following order:
+        Currently Uploading
+        Queued to Upload (Sorted in ascending order of time added - FIFO)
+        Completed (Sorted in descending order of time added)
+
+        This is why Contribution.STATE_COMPLETED is -1.
+     */
+    private String CONTRIBUTION_SORT = Contribution.Table.COLUMN_STATE + " DESC, (" + Contribution.Table.COLUMN_TIMESTAMP + " * " + Contribution.Table.COLUMN_STATE + ")";
 
     private BroadcastReceiver messageReceiver = new BroadcastReceiver() {
         @Override

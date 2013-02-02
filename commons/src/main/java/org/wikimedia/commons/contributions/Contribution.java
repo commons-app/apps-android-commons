@@ -13,7 +13,7 @@ import org.wikimedia.commons.Media;
 public class Contribution extends Media {
 
     // No need to be bitwise - they're mutually exclusive
-    public static final int STATE_COMPLETED = 0;
+    public static final int STATE_COMPLETED = -1;
     public static final int STATE_QUEUED = 1;
     public static final int STATE_IN_PROGRESS = 2;
 
