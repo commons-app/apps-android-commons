@@ -260,7 +260,7 @@ public class UploadService extends IntentService {
         SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"); // Assuming MW always gives me UTC
 
         String resultStatus = result.getString("/api/upload/@result");
-        if(!resultStatus.equals("success")) {
+        if(!resultStatus.equals("Success")) {
             showFailedNotification(contribution);
         } else {
             Date dateUploaded = null;
