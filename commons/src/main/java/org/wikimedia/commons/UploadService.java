@@ -124,6 +124,15 @@ public class UploadService extends IntentService {
         return cursor.getString(column_index);
     }
 
+    private long countBytes(InputStream stream) throws IOException {
+        long count = 0;
+        BufferedInputStream bis = new BufferedInputStream(stream);
+        while(bis.read() != -1) {
+           count++;
+        }
+        return count;
+    }
+
     private Contribution mediaFromIntent(Intent intent) {
         Bundle extras = intent.getExtras();
         Uri mediaUri = (Uri) extras.getParcelable(EXTRA_MEDIA_URI);
@@ -136,7 +145,11 @@ public class UploadService extends IntentService {
         Long length = null;
         try {
             length = this.getContentResolver().openAssetFileDescriptor(mediaUri, "r").getLength();
-        } catch(FileNotFoundException e) {
+            if(length == -1) {
+                // Let us find out the long way!
+                length = countBytes(this.getContentResolver().openInputStream(mediaUri));
+            }
+        } catch(IOException e) {
             throw new RuntimeException(e);
         }
 

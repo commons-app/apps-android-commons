@@ -245,7 +245,7 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case R.id.menu_from_gallery:
-                Intent pickImageIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+                Intent pickImageIntent = new Intent(Intent.ACTION_GET_CONTENT);
                 pickImageIntent.setType("image/*");
                 startActivityForResult(pickImageIntent,  SELECT_FROM_GALLERY);
                 return true;
