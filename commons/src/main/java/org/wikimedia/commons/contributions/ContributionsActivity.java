@@ -136,6 +136,7 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
     /*
         This sorts in the following order:
         Currently Uploading
+        Failed (Sorted in ascending order of time added - FIFO)
         Queued to Upload (Sorted in ascending order of time added - FIFO)
         Completed (Sorted in descending order of time added)
 
