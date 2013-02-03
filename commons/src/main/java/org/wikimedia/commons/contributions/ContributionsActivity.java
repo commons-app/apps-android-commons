@@ -88,13 +88,20 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
             }
 
             titleView.setText(cursor.getString(COLUMN_FILENAME));
-            if(state == Contribution.STATE_COMPLETED) {
-                Date uploaded = new Date(cursor.getLong(COLUMN_UPLOADED));
-                stateView.setText(SimpleDateFormat.getDateInstance().format(uploaded));
-            } else if(state == Contribution.STATE_QUEUED) {
-                stateView.setText(R.string.contribution_state_queued);
-            } else if(state == Contribution.STATE_IN_PROGRESS) {
-                stateView.setText(R.string.contribution_state_in_progress);
+            switch(state) {
+                case Contribution.STATE_COMPLETED:
+                    Date uploaded = new Date(cursor.getLong(COLUMN_UPLOADED));
+                    stateView.setText(SimpleDateFormat.getDateInstance().format(uploaded));
+                    break;
+                case Contribution.STATE_QUEUED:
+                    stateView.setText(R.string.contribution_state_queued);
+                    break;
+                case Contribution.STATE_IN_PROGRESS:
+                    stateView.setText(R.string.contribution_state_in_progress);
+                    break;
+                case Contribution.STATE_FAILED:
+                    stateView.setText(R.string.contribution_state_failed);
+                    break;
             }
 
         }

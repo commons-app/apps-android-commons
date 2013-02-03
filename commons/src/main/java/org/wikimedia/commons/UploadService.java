@@ -247,19 +247,7 @@ public class UploadService extends IntentService {
             result = api.upload(contribution.getFilename(), file, contribution.getDataLength(), contribution.getPageContents(), contribution.getEditSummary(), notificationUpdater);
         } catch(IOException e) {
             Log.d("Commons", "I have a network fuckup");
-            stopForeground(true);
-            Notification failureNotification = new NotificationCompat.Builder(this).setAutoCancel(true)
-                    .setSmallIcon(R.drawable.ic_launcher)
-                    .setAutoCancel(true)
-                    .setContentIntent(PendingIntent.getService(getApplicationContext(), 0, intent, 0))
-                    .setTicker(String.format(getString(R.string.upload_failed_notification_title), contribution.getFilename()))
-                    .setContentTitle(String.format(getString(R.string.upload_failed_notification_title), contribution.getFilename()))
-                    .setContentText(getString(R.string.upload_failed_notification_subtitle))
-                    .getNotification();
-            notificationManager.notify(NOTIFICATION_UPLOAD_FAILED, failureNotification);
-
-            contribution.setState(Contribution.STATE_QUEUED);
-            contribution.save();
+            showFailedNotification(contribution);
             return;
         } finally {
             toUpload--;
@@ -271,28 +259,35 @@ public class UploadService extends IntentService {
 
         SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"); // Assuming MW always gives me UTC
 
-
-        String descUrl = result.getString("/api/upload/imageinfo/@descriptionurl");
-        Date dateUploaded = null;
-        try {
-            dateUploaded = isoFormat.parse(result.getString("/api/upload/imageinfo/@timestamp"));
-        } catch(java.text.ParseException e) {
-            throw new RuntimeException(e); // Hopefully mediawiki doesn't give me bogus stuff?
+        String resultStatus = result.getString("/api/upload/@result");
+        if(!resultStatus.equals("success")) {
+            showFailedNotification(contribution);
+        } else {
+            Date dateUploaded = null;
+            try {
+                dateUploaded = isoFormat.parse(result.getString("/api/upload/imageinfo/@timestamp"));
+            } catch(java.text.ParseException e) {
+                throw new RuntimeException(e); // Hopefully mediawiki doesn't give me bogus stuff?
+            }
+            contribution.setState(Contribution.STATE_COMPLETED);
+            contribution.setDateUploaded(dateUploaded);
+            contribution.save();
         }
+    }
 
-        Intent openUploadedPageIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(descUrl));
-        Notification doneNotification = new NotificationCompat.Builder(this)
-                .setAutoCancel(true)
+    private void showFailedNotification(Contribution contribution) {
+        stopForeground(true);
+        Notification failureNotification = new NotificationCompat.Builder(this).setAutoCancel(true)
                 .setSmallIcon(R.drawable.ic_launcher)
-                .setContentTitle(String.format(getString(R.string.upload_completed_notification_title), contribution.getFilename()))
-                .setContentText(getString(R.string.upload_completed_notification_text))
-                .setTicker(String.format(getString(R.string.upload_completed_notification_title), contribution.getFilename()))
-                .setContentIntent(PendingIntent.getActivity(this, 0, openUploadedPageIntent, 0))
+                .setAutoCancel(true)
+                .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, ContributionsActivity.class), 0))
+                .setTicker(String.format(getString(R.string.upload_failed_notification_title), contribution.getFilename()))
+                .setContentTitle(String.format(getString(R.string.upload_failed_notification_title), contribution.getFilename()))
+                .setContentText(getString(R.string.upload_failed_notification_subtitle))
                 .getNotification();
+        notificationManager.notify(NOTIFICATION_UPLOAD_FAILED, failureNotification);
 
-        notificationManager.notify(notificationTag, NOTIFICATION_DOWNLOAD_COMPLETE, doneNotification);
-        contribution.setState(Contribution.STATE_COMPLETED);
-        contribution.setDateUploaded(dateUploaded);
+        contribution.setState(Contribution.STATE_FAILED);
         contribution.save();
     }
 }
