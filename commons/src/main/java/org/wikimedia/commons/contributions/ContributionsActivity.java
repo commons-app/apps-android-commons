@@ -7,7 +7,6 @@ import android.provider.MediaStore;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.content.BroadcastReceiver;
 import android.content.*;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -50,6 +49,8 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
     private final static int SELECT_FROM_GALLERY = 1;
     private final static int SELECT_FROM_CAMERA = 2;
 
+    private TextView progressUpdateTextView;
+
     public ContributionsActivity() {
         super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
     }
@@ -60,12 +61,17 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
         private final int COLUMN_LOCALURI;
         private final int COLUMN_STATE;
         private final int COLUMN_UPLOADED;
+        private final int COLUMN_TRANSFERRED;
+        private final int COLUMN_LENGTH;
+
         public ContributionAdapter(Context context, Cursor c, int flags) {
             super(context, c, flags);
             COLUMN_FILENAME = c.getColumnIndex(Contribution.Table.COLUMN_FILENAME);
             COLUMN_STATE = c.getColumnIndex(Contribution.Table.COLUMN_STATE);
             COLUMN_LOCALURI = c.getColumnIndex(Contribution.Table.COLUMN_LOCAL_URI);
             COLUMN_UPLOADED = c.getColumnIndex(Contribution.Table.COLUMN_UPLOADED);
+            COLUMN_LENGTH = c.getColumnIndex(Contribution.Table.COLUMN_LENGTH);
+            COLUMN_TRANSFERRED = c.getColumnIndex(Contribution.Table.COLUMN_TRANSFERRED);
         }
 
         @Override
@@ -97,7 +103,11 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
                     stateView.setText(R.string.contribution_state_queued);
                     break;
                 case Contribution.STATE_IN_PROGRESS:
-                    stateView.setText(R.string.contribution_state_in_progress);
+                    stateView.setText(R.string.contribution_state_starting);
+                    long total = cursor.getLong(COLUMN_LENGTH);
+                    long transferred = cursor.getLong(COLUMN_TRANSFERRED);
+                    String stateString = String.format(getString(R.string.contribution_state_in_progress), (int)(((double)transferred / (double)total) * 100));
+                    stateView.setText(stateString);
                     break;
                 case Contribution.STATE_FAILED:
                     stateView.setText(R.string.contribution_state_failed);
@@ -106,24 +116,20 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
 
         }
     }
-    private LocalBroadcastManager localBroadcastManager;
-
     private GridView contributionsList;
 
     private ContributionAdapter contributionsAdapter;
 
     private DisplayImageOptions contributionDisplayOptions;
 
-    private String[] broadcastsToReceive = {
-            UploadService.INTENT_CONTRIBUTION_STATE_CHANGED
-    };
-
     private String[] CONTRIBUTIONS_PROJECTION = {
         Contribution.Table.COLUMN_ID,
         Contribution.Table.COLUMN_FILENAME,
         Contribution.Table.COLUMN_LOCAL_URI,
         Contribution.Table.COLUMN_STATE,
-        Contribution.Table.COLUMN_UPLOADED
+        Contribution.Table.COLUMN_UPLOADED,
+        Contribution.Table.COLUMN_LENGTH,
+        Contribution.Table.COLUMN_TRANSFERRED
     };
 
     private String CONTRIBUTION_SELECTION = "";
@@ -137,26 +143,14 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
      */
     private String CONTRIBUTION_SORT = Contribution.Table.COLUMN_STATE + " DESC, (" + Contribution.Table.COLUMN_TIMESTAMP + " * " + Contribution.Table.COLUMN_STATE + ")";
 
-    private BroadcastReceiver messageReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-        }
-    };
-
     @Override
     protected void onResume() {
         super.onResume();
-        for(int i=0; i < broadcastsToReceive.length; i++) {
-            localBroadcastManager.registerReceiver(messageReceiver, new IntentFilter(broadcastsToReceive[i]));
-        }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        for(int i=0; i < broadcastsToReceive.length; i++) {
-            localBroadcastManager.unregisterReceiver(messageReceiver);
-        }
     }
 
     @Override
@@ -177,7 +171,6 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle(R.string.title_activity_contributions);
-        localBroadcastManager = LocalBroadcastManager.getInstance(this);
         setContentView(R.layout.activity_contributions);
         contributionsList = (GridView)findViewById(R.id.contributionsList);
 

@@ -4,7 +4,6 @@ import java.io.*;
 import java.text.*;
 import java.util.Date;
 
-import android.support.v4.content.LocalBroadcastManager;
 import org.mediawiki.api.*;
 import org.wikimedia.commons.contributions.Contribution;
 import org.wikimedia.commons.contributions.ContributionsActivity;
@@ -26,10 +25,6 @@ import android.net.*;
 public class UploadService extends IntentService {
 
     private static final String EXTRA_PREFIX = "org.wikimedia.commons.upload";
-    public static final String INTENT_CONTRIBUTION_STATE_CHANGED = EXTRA_PREFIX + ".progress";
-    public static final String EXTRA_CONTRIBUTION_ID = EXTRA_PREFIX + ".filename";
-    public static final String EXTRA_TRANSFERRED_BYTES = EXTRA_PREFIX + ".progress.transferred";
-
 
     public static final String EXTRA_MEDIA_URI = EXTRA_PREFIX + ".uri";
     public static final String EXTRA_TARGET_FILENAME = EXTRA_PREFIX + ".filename";
@@ -38,7 +33,6 @@ public class UploadService extends IntentService {
     public static final String EXTRA_MIMETYPE = EXTRA_PREFIX + ".mimetype";
 
     private NotificationManager notificationManager;
-    private LocalBroadcastManager localBroadcastManager;
     private ContentProviderClient contributionsProviderClient;
     private CommonsApplication app;
 
@@ -91,7 +85,6 @@ public class UploadService extends IntentService {
                 }
                 notificationTitleChanged = true;
                 contribution.setState(Contribution.STATE_IN_PROGRESS);
-                contribution.save();
             }
             if(transferred == total) {
                 // Completed!
@@ -100,12 +93,9 @@ public class UploadService extends IntentService {
             } else {
                 curNotification.contentView.setProgressBar(R.id.uploadNotificationProgress, 100, (int) (((double) transferred / (double) total) * 100), false);
                 notificationManager.notify(NOTIFICATION_DOWNLOAD_IN_PROGRESS, curNotification);
-
-                Intent mediaUploadProgressIntent = new Intent(INTENT_CONTRIBUTION_STATE_CHANGED);
-                // mediaUploadProgressIntent.putExtra(EXTRA_MEDIA contribution);
-                mediaUploadProgressIntent.putExtra(EXTRA_TRANSFERRED_BYTES, transferred);
-                localBroadcastManager.sendBroadcast(mediaUploadProgressIntent);
             }
+            contribution.setTransferred(transferred);
+            contribution.save();
         }
 
     }
@@ -121,7 +111,6 @@ public class UploadService extends IntentService {
     public void onCreate() {
         super.onCreate();
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        localBroadcastManager = LocalBroadcastManager.getInstance(this);
         app = (CommonsApplication) this.getApplicationContext();
         contributionsProviderClient = this.getContentResolver().acquireContentProviderClient(ContributionsContentProvider.AUTHORITY);
     }
@@ -184,7 +173,6 @@ public class UploadService extends IntentService {
 
         Intent mediaUploadQueuedIntent = new Intent();
         mediaUploadQueuedIntent.putExtra("dummy-data", contribution); // FIXME: Move to separate handler, do not inherit from IntentService
-        localBroadcastManager.sendBroadcast(mediaUploadQueuedIntent);
         return super.onStartCommand(mediaUploadQueuedIntent, flags, startId);
     }
 

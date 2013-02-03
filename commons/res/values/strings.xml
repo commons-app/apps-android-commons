@@ -39,7 +39,8 @@
     <string name="title_activity_contributions">My Contributions</string>
     <string name="contribution_state_queued">Queued</string>
     <string name="contribution_state_failed">Failed</string>
-    <string name="contribution_state_in_progress">Uploading</string>
+    <string name="contribution_state_in_progress">%1$d%% complete</string>
+    <string name="contribution_state_starting">Uploading</string>
     <string name="menu_from_gallery">From Gallery</string>
     <string name="menu_from_camera">Take Photo</string>
 </resources>

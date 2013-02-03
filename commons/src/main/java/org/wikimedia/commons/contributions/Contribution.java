@@ -21,10 +21,23 @@ public class Contribution extends Media {
     private ContentProviderClient client;
     private Uri contentUri;
 
+    public long getTransferred() {
+        return transferred;
+    }
+
+    public void setTransferred(long transferred) {
+        this.transferred = transferred;
+    }
+
+    private long transferred;
+
     public String getEditSummary() {
         return editSummary;
     }
 
+    public Uri getContentUri() {
+        return contentUri;
+    }
     private String editSummary;
 
     public Date getTimestamp() {
@@ -104,6 +117,7 @@ public class Contribution extends Media {
         cv.put(Table.COLUMN_LENGTH, getDataLength());
         cv.put(Table.COLUMN_TIMESTAMP, getTimestamp().getTime());
         cv.put(Table.COLUMN_STATE, getState());
+        cv.put(Table.COLUMN_TRANSFERRED, transferred);
         return cv;
     }
 
@@ -119,6 +133,7 @@ public class Contribution extends Media {
         public static final String COLUMN_STATE = "state";
         public static final String COLUMN_LENGTH = "length";
         public static final String COLUMN_UPLOADED = "uploaded";
+        public static final String COLUMN_TRANSFERRED = "transferred"; // Currently transferred number of bytes
 
 
         private static final String CREATE_TABLE_STATEMENT = "CREATE TABLE " + TABLE_NAME + " ("
@@ -129,7 +144,8 @@ public class Contribution extends Media {
                 + "uploaded INTEGER,"
                 + "timestamp INTEGER,"
                 + "state INTEGER,"
-                + "length INTEGER"
+                + "length INTEGER,"
+                + "transferred INTEGER"
         + ");";
 
 
