@@ -220,6 +220,12 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
     // See http://stackoverflow.com/a/5054673/17865 for why this is done
     private Uri lastGeneratedCaptureURI;
 
+    @Override
+    protected void onAuthFailure() {
+        super.onAuthFailure();
+        finish(); // If authentication failed, we just exit
+    }
+
     private void reGenerateImageCaptureURI() {
         String storageState = Environment.getExternalStorageState();
         if(storageState.equals(Environment.MEDIA_MOUNTED)) {
