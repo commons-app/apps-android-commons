@@ -2,6 +2,7 @@ package org.wikimedia.commons.auth;
 
 import java.io.IOException;
 
+import android.content.ContentResolver;
 import org.wikimedia.commons.CommonsApplication;
 import org.wikimedia.commons.R;
 import org.wikimedia.commons.R.id;
@@ -23,6 +24,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.support.v4.app.NavUtils;
+import org.wikimedia.commons.contributions.ContributionsContentProvider;
 
 public class LoginActivity extends AccountAuthenticatorActivity {
 
@@ -62,6 +64,8 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                         response.onResult(authResult);
                     }
                 }
+                // FIXME: If the user turns it off, it shouldn't be auto turned back on
+                ContentResolver.setSyncAutomatically(account, ContributionsContentProvider.AUTHORITY, true); // Enable sync by default!
                 context.finish();
             } else {
                 Toast failureToast = Toast.makeText(context, R.string.login_failed, Toast.LENGTH_LONG);

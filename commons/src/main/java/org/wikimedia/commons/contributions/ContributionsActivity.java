@@ -32,10 +32,7 @@ import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
-import org.wikimedia.commons.ImageLoaderTask;
-import org.wikimedia.commons.R;
-import org.wikimedia.commons.ShareActivity;
-import org.wikimedia.commons.UploadService;
+import org.wikimedia.commons.*;
 import org.wikimedia.commons.auth.AuthenticatedActivity;
 import org.wikimedia.commons.auth.WikiAccountAuthenticator;
 
@@ -165,6 +162,8 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
 
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
+        // Do a sync everytime we get here!
+        ContentResolver.requestSync(((CommonsApplication)getApplicationContext()).getCurrentAccount(), ContributionsContentProvider.AUTHORITY, new Bundle());
         contributionDisplayOptions = new DisplayImageOptions.Builder().cacheInMemory()
                 .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
                 .displayer(new FadeInBitmapDisplayer(300))
