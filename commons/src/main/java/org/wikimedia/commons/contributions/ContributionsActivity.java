@@ -148,7 +148,7 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
 
         This is why Contribution.STATE_COMPLETED is -1.
      */
-    private String CONTRIBUTION_SORT = Contribution.Table.COLUMN_STATE + " DESC, (" + Contribution.Table.COLUMN_TIMESTAMP + " * " + Contribution.Table.COLUMN_STATE + "), " + Contribution.Table.COLUMN_UPLOADED + " DESC";
+    private String CONTRIBUTION_SORT = Contribution.Table.COLUMN_STATE + " DESC, " + Contribution.Table.COLUMN_UPLOADED + " DESC , (" + Contribution.Table.COLUMN_TIMESTAMP + " * " + Contribution.Table.COLUMN_STATE + ")";
 
     @Override
     protected void onResume() {
