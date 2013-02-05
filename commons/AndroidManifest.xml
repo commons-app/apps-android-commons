@@ -85,6 +85,8 @@
 
         <provider
                 android:name=".contributions.ContributionsContentProvider"
+                android:label="@string/provider_contributions"
+                android:syncable="true"
                 android:authorities="org.wikimedia.commons.contributions.contentprovider"
                 android:exported="false">
         </provider>
