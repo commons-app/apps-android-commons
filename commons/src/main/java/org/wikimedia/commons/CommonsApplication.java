@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
 import java.net.URI;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.xml.transform.*;
 
@@ -13,12 +16,17 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 
+import com.nostra13.universalimageloader.cache.disc.impl.TotalSizeLimitedDiscCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.download.HttpClientImageDownloader;
 import com.nostra13.universalimageloader.core.download.ImageDownloader;
+import com.nostra13.universalimageloader.core.download.URLConnectionImageDownloader;
+import com.nostra13.universalimageloader.utils.StorageUtils;
 import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
+import org.apache.http.client.HttpClient;
 import org.mediawiki.api.*;
 import org.w3c.dom.Node;
 import org.wikimedia.commons.auth.WikiAccountAuthenticator;
@@ -43,12 +51,15 @@ public class CommonsApplication extends Application {
 
     private MWApi api;
     private Account currentAccount = null; // Unlike a savings account...
-    public static final String API_URL = "http://test.wikipedia.org/w/api.php";
-   
+    public static final String API_URL = "https://test.wikipedia.org/w/api.php";
+    public static final String IMAGE_URL_BASE = "https://upload.wikimedia.org/wikipedia/test";
+
+
     public static MWApi createMWApi() {
         DefaultHttpClient client = new DefaultHttpClient();
         return new MWApi(API_URL, client);
     }
+
 
     public DBOpenHelper getDbOpenHelper() {
         if(dbOpenHelper == null) {
@@ -57,13 +68,7 @@ public class CommonsApplication extends Application {
         return dbOpenHelper;
     }
 
-    public class ContentUriImageDownloader extends ImageDownloader {
-
-        @Override
-        protected InputStream getStreamFromNetwork(URI uri) throws IOException {
-            return super.getStream(uri); // Pass back to parent code, which handles http, https, etc
-        }
-
+    public class ContentUriImageDownloader extends URLConnectionImageDownloader {
         @Override
         protected InputStream getStreamFromOtherSource(URI imageUri) throws IOException {
             if(imageUri.getScheme().equals("content")) {
@@ -83,6 +88,7 @@ public class CommonsApplication extends Application {
 
 
         ImageLoaderConfiguration imageLoaderConfiguration = new ImageLoaderConfiguration.Builder(getApplicationContext())
+                .discCache(new TotalSizeLimitedDiscCache(StorageUtils.getCacheDirectory(this), 128 * 1024 * 1024))
                 .imageDownloader(new ContentUriImageDownloader()).build();
         ImageLoader.getInstance().init(imageLoaderConfiguration);
     }
@@ -127,38 +133,5 @@ public class CommonsApplication extends Application {
         }
     }
 
-    public static String getStringFromDOM(Node dom) {
-       javax.xml.transform.Transformer transformer = null;
-       try {
-           transformer = TransformerFactory.newInstance().newTransformer();
-       } catch (TransformerConfigurationException e) {
-           // TODO Auto-generated catch block
-           e.printStackTrace();
-       } catch (TransformerFactoryConfigurationError e) {
-           // TODO Auto-generated catch block
-           e.printStackTrace();
-       }
 
-       StringWriter  outputStream = new StringWriter();
-       javax.xml.transform.dom.DOMSource domSource = new javax.xml.transform.dom.DOMSource(dom);
-       javax.xml.transform.stream.StreamResult strResult = new javax.xml.transform.stream.StreamResult(outputStream);
-
-       try {
-        transformer.transform(domSource, strResult);
-       } catch (TransformerException e) {
-           // TODO Auto-generated catch block
-           e.printStackTrace();
-       } 
-       return outputStream.toString();
-    }
-    
-    static public <T> void executeAsyncTask(AsyncTask<T, ?, ?> task,
-            T... params) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
-        }
-        else {
-            task.execute(params);
-        }
-    } 
 }

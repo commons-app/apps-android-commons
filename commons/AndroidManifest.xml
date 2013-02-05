@@ -70,6 +70,18 @@
                 android:name="android.accounts.AccountAuthenticator"
                 android:resource="@xml/authenticator" />
         </service>
+        <service
+                android:name=".contributions.ContributionsSyncService"
+                android:exported="true">
+            <intent-filter>
+                <action
+                        android:name="android.content.SyncAdapter" />
+            </intent-filter>
+            <meta-data
+                    android:name="android.content.SyncAdapter"
+                    android:resource="@xml/syncadapter" />
+        </service>
+
         <provider
                 android:name=".contributions.ContributionsContentProvider"
                 android:authorities="org.wikimedia.commons.contributions.contentprovider"

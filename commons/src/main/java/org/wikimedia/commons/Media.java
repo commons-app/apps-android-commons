@@ -11,8 +11,8 @@ public class Media implements Serializable {
         return localUri;
     }
 
-    public Uri getRemoteUri() {
-        return remoteUri;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
     public String getFilename() {
@@ -21,10 +21,6 @@ public class Media implements Serializable {
 
     public String getDescription() {
         return description;
-    }
-
-    public String getCommonsURL() {
-        return commonsURL;
     }
 
     public long getDataLength() {
@@ -43,12 +39,15 @@ public class Media implements Serializable {
         return creator;
     }
 
+    public String getThumbnailUrl(int width) {
+        return String.format("%s/%dpx-%s", imageUrl, width, filename);
+    }
+
 
     protected Uri localUri;
-    protected Uri remoteUri;
+    protected String imageUrl;
     protected String filename;
     protected String description;
-    protected String commonsURL;
     protected long dataLength;
     protected Date dateCreated;
     protected Date dateUploaded;
@@ -57,12 +56,11 @@ public class Media implements Serializable {
     protected String creator;
 
 
-    public Media(Uri localUri, Uri remoteUri, String filename, String description, String commonsURL, long dataLength, Date dateCreated, Date dateUploaded, String creator) {
+    public Media(Uri localUri, String imageUrl, String filename, String description, long dataLength, Date dateCreated, Date dateUploaded, String creator) {
         this.localUri = localUri;
-        this.remoteUri = remoteUri;
+        this.imageUrl = imageUrl;
         this.filename = filename;
         this.description = description;
-        this.commonsURL = commonsURL;
         this.dataLength = dataLength;
         this.dateCreated = dateCreated;
         this.dateUploaded = dateUploaded;

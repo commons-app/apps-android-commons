@@ -165,7 +165,7 @@ public class UploadService extends IntentService {
         } /* else if (mimeType.startsWith("audio/")) {
              Removed Audio implementationf or now
            }  */
-        Contribution contribution = new Contribution(mediaUri, null, filename, description, null, length, dateCreated, null, app.getCurrentAccount().name, editSummary);
+        Contribution contribution = new Contribution(mediaUri, null, filename, description, length, dateCreated, null, app.getCurrentAccount().name, editSummary);
         return contribution;
     }
 
@@ -254,22 +254,17 @@ public class UploadService extends IntentService {
             toUpload--;
         }
 
-        Log.d("Commons", "Response is" + CommonsApplication.getStringFromDOM(result.getDocument()));
+        Log.d("Commons", "Response is" + Utils.getStringFromDOM(result.getDocument()));
         stopForeground(true);
         curProgressNotification = null;
 
-        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"); // Assuming MW always gives me UTC
 
         String resultStatus = result.getString("/api/upload/@result");
         if(!resultStatus.equals("Success")) {
             showFailedNotification(contribution);
         } else {
             Date dateUploaded = null;
-            try {
-                dateUploaded = isoFormat.parse(result.getString("/api/upload/imageinfo/@timestamp"));
-            } catch(java.text.ParseException e) {
-                throw new RuntimeException(e); // Hopefully mediawiki doesn't give me bogus stuff?
-            }
+            dateUploaded = Utils.parseMWDate(result.getString("/api/upload/imageinfo/@timestamp"));
             contribution.setState(Contribution.STATE_COMPLETED);
             contribution.setDateUploaded(dateUploaded);
             contribution.save();

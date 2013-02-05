@@ -68,7 +68,6 @@ public class ContributionsContentProvider extends ContentProvider{
     public Uri insert(Uri uri, ContentValues contentValues) {
         int uriType = uriMatcher.match(uri);
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
-        int rowsDeleted = 0;
         long id = 0;
         switch (uriType) {
             case CONTRIBUTIONS:
@@ -84,6 +83,28 @@ public class ContributionsContentProvider extends ContentProvider{
     @Override
     public int delete(Uri uri, String s, String[] strings) {
         return 0;
+    }
+
+    @Override
+    public int bulkInsert(Uri uri, ContentValues[] values) {
+        Log.d("Commons", "Hello, bulk insert!");
+        int uriType = uriMatcher.match(uri);
+        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
+        sqlDB.beginTransaction();
+        switch (uriType) {
+            case CONTRIBUTIONS:
+                for(ContentValues value: values) {
+                    Log.d("Commons", "Inserting! " + value.toString());
+                    sqlDB.insert(Contribution.Table.TABLE_NAME, null, value);
+                }
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown URI: " + uri);
+        }
+        sqlDB.setTransactionSuccessful();
+        sqlDB.endTransaction();
+        getContext().getContentResolver().notifyChange(uri, null);
+        return values.length;
     }
 
     @Override

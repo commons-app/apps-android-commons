@@ -9,6 +9,7 @@ import com.actionbarsherlock.app.*;
 import android.accounts.*;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import org.wikimedia.commons.Utils;
 
 public class AuthenticatedActivity extends SherlockFragmentActivity {
     
@@ -113,7 +114,7 @@ public class AuthenticatedActivity extends SherlockFragmentActivity {
             // returns, we have a deadlock!
             // Fixed by explicitly asking this to be executed in parallel
             // See: https://groups.google.com/forum/?fromgroups=#!topic/android-developers/8M0RTFfO7-M
-            CommonsApplication.executeAsyncTask(addAccountTask);
+            Utils.executeAsyncTask(addAccountTask);
         } else {
             GetAuthCookieTask task = new GetAuthCookieTask(curAccount, accountManager);
             task.execute();

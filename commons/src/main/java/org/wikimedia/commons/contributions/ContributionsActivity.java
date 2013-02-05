@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.v4.content.*;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v4.widget.SimpleCursorAdapter;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +64,7 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
         private final int COLUMN_UPLOADED;
         private final int COLUMN_TRANSFERRED;
         private final int COLUMN_LENGTH;
+        private final int COLUMN_IMAGE_URL;
 
         public ContributionAdapter(Context context, Cursor c, int flags) {
             super(context, c, flags);
@@ -72,6 +74,7 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
             COLUMN_UPLOADED = c.getColumnIndex(Contribution.Table.COLUMN_UPLOADED);
             COLUMN_LENGTH = c.getColumnIndex(Contribution.Table.COLUMN_LENGTH);
             COLUMN_TRANSFERRED = c.getColumnIndex(Contribution.Table.COLUMN_TRANSFERRED);
+            COLUMN_IMAGE_URL = c.getColumnIndex(Contribution.Table.COLUMN_IMAGE_URL);
         }
 
         @Override
@@ -85,15 +88,20 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
             TextView titleView = (TextView)view.findViewById(R.id.contributionTitle);
             TextView stateView = (TextView)view.findViewById(R.id.contributionState);
 
-            Uri imageUri = Uri.parse(cursor.getString(COLUMN_LOCALURI));
+            String localUri = cursor.getString(COLUMN_LOCALURI);
+            String imageUrl = cursor.getString(COLUMN_IMAGE_URL);
+            String title = cursor.getString(COLUMN_FILENAME);
             int state = cursor.getInt(COLUMN_STATE);
 
-            if(imageView.getTag() == null || !imageView.getTag().equals(imageUri.toString())) {
-                ImageLoader.getInstance().displayImage(imageUri.toString(), imageView, contributionDisplayOptions);
-                imageView.setTag(imageUri.toString());
+            String actualUrl = TextUtils.isEmpty(imageUrl) ? localUri : Contribution.makeThumbUrl(imageUrl, title, 320);
+            Log.d("Commons", "Trying URL " + actualUrl);
+
+            if(imageView.getTag() == null || !imageView.getTag().equals(actualUrl)) {
+                ImageLoader.getInstance().displayImage(actualUrl, imageView, contributionDisplayOptions);
+                imageView.setTag(actualUrl);
             }
 
-            titleView.setText(cursor.getString(COLUMN_FILENAME));
+            titleView.setText(title);
             switch(state) {
                 case Contribution.STATE_COMPLETED:
                     Date uploaded = new Date(cursor.getLong(COLUMN_UPLOADED));
@@ -129,7 +137,8 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
         Contribution.Table.COLUMN_STATE,
         Contribution.Table.COLUMN_UPLOADED,
         Contribution.Table.COLUMN_LENGTH,
-        Contribution.Table.COLUMN_TRANSFERRED
+        Contribution.Table.COLUMN_TRANSFERRED,
+        Contribution.Table.COLUMN_IMAGE_URL
     };
 
     private String CONTRIBUTION_SELECTION = "";
@@ -142,7 +151,7 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
 
         This is why Contribution.STATE_COMPLETED is -1.
      */
-    private String CONTRIBUTION_SORT = Contribution.Table.COLUMN_STATE + " DESC, (" + Contribution.Table.COLUMN_TIMESTAMP + " * " + Contribution.Table.COLUMN_STATE + ")";
+    private String CONTRIBUTION_SORT = Contribution.Table.COLUMN_STATE + " DESC, (" + Contribution.Table.COLUMN_TIMESTAMP + " * " + Contribution.Table.COLUMN_STATE + "), " + Contribution.Table.COLUMN_UPLOADED + " DESC";
 
     @Override
     protected void onResume() {
@@ -159,6 +168,8 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
         contributionDisplayOptions = new DisplayImageOptions.Builder().cacheInMemory()
                 .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
                 .displayer(new FadeInBitmapDisplayer(300))
+                .cacheInMemory()
+                .cacheOnDisc()
                 .resetViewBeforeLoading().build();
 
         Cursor allContributions = getContentResolver().query(ContributionsContentProvider.BASE_URI, CONTRIBUTIONS_PROJECTION, CONTRIBUTION_SELECTION, null, CONTRIBUTION_SORT);

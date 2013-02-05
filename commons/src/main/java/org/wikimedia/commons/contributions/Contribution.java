@@ -8,6 +8,7 @@ import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.*;
 import android.os.RemoteException;
+import android.text.TextUtils;
 import org.wikimedia.commons.Media;
 
 public class Contribution extends Media {
@@ -47,8 +48,8 @@ public class Contribution extends Media {
     private Date timestamp;
     private int state;
 
-    public Contribution(Uri localUri, Uri remoteUri, String filename, String description, String commonsURL, long dataLength, Date dateCreated, Date dateUploaded, String creator, String editSummary) {
-        super(localUri, remoteUri, filename, description, commonsURL, dataLength, dateCreated, dateUploaded, creator);
+    public Contribution(Uri localUri, String remoteUri, String filename, String description, long dataLength, Date dateCreated, Date dateUploaded, String creator, String editSummary) {
+        super(localUri, remoteUri, filename, description, dataLength, dateCreated, dateUploaded, creator);
         this.editSummary = editSummary;
         timestamp = new Date(System.currentTimeMillis());
     }
@@ -102,14 +103,24 @@ public class Contribution extends Media {
         }
     }
 
-    private ContentValues toContentValues() {
+    public static String makeThumbUrl(String imageUrl, String filename, int width) {
+        // Ugly Hack!
+        // Update: OH DEAR GOD WHAT A HORRIBLE HACK I AM SO SORRY
+        String thumbUrl = imageUrl.replaceFirst("test/", "test/thumb/").replace("commons/", "commons/thumb/") + "/" + width + "px-" + filename.replaceAll("File:", "").replaceAll(" ", "_");
+        if(thumbUrl.endsWith("jpg") || thumbUrl.endsWith("png") || thumbUrl.endsWith("jpeg")) {
+            return thumbUrl;
+        } else {
+            return thumbUrl + ".png";
+        }
+    }
+    public ContentValues toContentValues() {
         ContentValues cv = new ContentValues();
         cv.put(Table.COLUMN_FILENAME, getFilename());
         if(getLocalUri() != null) {
             cv.put(Table.COLUMN_LOCAL_URI, getLocalUri().toString());
         }
-        if(getRemoteUri() != null) {
-            cv.put(Table.COLUMN_REMOTE_URI, getRemoteUri().toString());
+        if(getImageUrl() != null) {
+            cv.put(Table.COLUMN_IMAGE_URL, getImageUrl().toString());
         }
         if(getDateUploaded() != null) {
             cv.put(Table.COLUMN_UPLOADED, getDateUploaded().getTime());
@@ -128,7 +139,7 @@ public class Contribution extends Media {
         public static final String COLUMN_ID = "_id";
         public static final String COLUMN_FILENAME = "filename";
         public static final String COLUMN_LOCAL_URI = "local_uri";
-        public static final String COLUMN_REMOTE_URI = "remote_uri";
+        public static final String COLUMN_IMAGE_URL = "image_url";
         public static final String COLUMN_TIMESTAMP = "timestamp";
         public static final String COLUMN_STATE = "state";
         public static final String COLUMN_LENGTH = "length";
@@ -140,7 +151,7 @@ public class Contribution extends Media {
                 + "_id INTEGER PRIMARY KEY,"
                 + "filename STRING,"
                 + "local_uri STRING,"
-                + "remote_uri STRING,"
+                + "image_url STRING,"
                 + "uploaded INTEGER,"
                 + "timestamp INTEGER,"
                 + "state INTEGER,"
