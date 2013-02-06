@@ -25,6 +25,24 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
     private int getLimit() {
         return 500; // FIXME: Parameterize!
     }
+
+    private static final String[] existsQuery = { Contribution.Table.COLUMN_FILENAME };
+    private static final String existsSelection = Contribution.Table.COLUMN_FILENAME + " = ?";
+    private boolean fileExists(ContentProviderClient client, String filename) {
+        Cursor cursor = null;
+        try {
+            cursor = client.query(ContributionsContentProvider.BASE_URI,
+                    existsQuery,
+                    existsSelection,
+                    new String[] { filename },
+                    ""
+            );
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
+        return cursor != null && cursor.getCount() != 0;
+    }
+
     @Override
     public void onPerformSync(Account account, Bundle bundle, String s, ContentProviderClient contentProviderClient, SyncResult syncResult) {
         // This code is fraught with possibilities of race conditions, but lalalalala I can't hear you!
@@ -52,20 +70,22 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
 
         ArrayList<ApiResult> uploads = result.getNodes("/api/query/logevents/item");
         Log.d("Commons", uploads.size() + " results!");
-        ContentValues[] imageValues = new ContentValues[uploads.size()];
-        for(int i=0; i < uploads.size(); i++) {
-            ApiResult image = uploads.get(i);
+        ArrayList<ContentValues> imageValues = new ArrayList<ContentValues>();
+        for(ApiResult image: uploads) {
             String filename = image.getString("@title");
+            if(fileExists(contentProviderClient, filename)) {
+                Log.d("Commons", "Skipping " + filename);
+                continue;
+            }
             String thumbUrl = Utils.makeThumbBaseUrl(filename);
             Date dateUpdated = Utils.parseMWDate(image.getString("@timestamp"));
             Contribution contrib = new Contribution(null, thumbUrl, filename, "", -1, dateUpdated, dateUpdated, user, "");
             contrib.setState(Contribution.STATE_COMPLETED);
-            imageValues[i] = contrib.toContentValues();
-            Log.d("Commons", "For " + imageValues[i].toString());
+            imageValues.add(contrib.toContentValues());
         }
 
         try {
-            contentProviderClient.bulkInsert(ContributionsContentProvider.BASE_URI, imageValues);
+            contentProviderClient.bulkInsert(ContributionsContentProvider.BASE_URI, imageValues.toArray(new ContentValues[]{}));
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
