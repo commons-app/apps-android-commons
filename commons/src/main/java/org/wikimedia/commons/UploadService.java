@@ -51,8 +51,8 @@ public class UploadService extends IntentService {
     // DO NOT HAVE NOTIFICATION ID OF 0 FOR ANYTHING
     // See http://stackoverflow.com/questions/8725909/startforeground-does-not-show-my-notification
     // Seriously, Android?
-    public static final int NOTIFICATION_DOWNLOAD_IN_PROGRESS = 1;
-    public static final int NOTIFICATION_DOWNLOAD_COMPLETE = 2;
+    public static final int NOTIFICATION_UPLOAD_IN_PROGRESS = 1;
+    public static final int NOTIFICATION_UPLOAD_COMPLETE = 2;
     public static final int NOTIFICATION_UPLOAD_FAILED = 3;
 
     private class NotificationUpdateProgressListener implements ProgressListener {
@@ -89,10 +89,10 @@ public class UploadService extends IntentService {
             if(transferred == total) {
                 // Completed!
                 curView.setTextViewText(R.id.uploadNotificationTitle, notificationFinishingTitle);
-                notificationManager.notify(NOTIFICATION_DOWNLOAD_IN_PROGRESS, curNotification);
+                notificationManager.notify(NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification);
             } else {
                 curNotification.contentView.setProgressBar(R.id.uploadNotificationProgress, 100, (int) (((double) transferred / (double) total) * 100), false);
-                notificationManager.notify(NOTIFICATION_DOWNLOAD_IN_PROGRESS, curNotification);
+                notificationManager.notify(NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification);
             }
             contribution.setTransferred(transferred);
             contribution.save();
@@ -175,7 +175,7 @@ public class UploadService extends IntentService {
         if(curProgressNotification != null && toUpload != 1) {
             curProgressNotification.contentView.setTextViewText(R.id.uploadNotificationsCount, String.format(getString(R.string.uploads_pending_notification_indicator), toUpload));
             Log.d("Commons", String.format("%d uploads left", toUpload));
-            notificationManager.notify(NOTIFICATION_DOWNLOAD_IN_PROGRESS, curProgressNotification);
+            notificationManager.notify(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification);
         }
 
         Contribution contribution = mediaFromIntent(intent);
@@ -222,7 +222,7 @@ public class UploadService extends IntentService {
                 .setTicker(String.format(getString(R.string.upload_progress_notification_title_in_progress), contribution.getFilename()))
                 .getNotification();
 
-        this.startForeground(NOTIFICATION_DOWNLOAD_IN_PROGRESS, curProgressNotification);
+        this.startForeground(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification);
 
         Log.d("Commons", "Just before");
 
