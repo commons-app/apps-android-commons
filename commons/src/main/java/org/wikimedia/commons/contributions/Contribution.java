@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.*;
 import android.os.RemoteException;
 import android.text.TextUtils;
+import org.wikimedia.commons.CommonsApplication;
 import org.wikimedia.commons.Media;
 
 public class Contribution extends Media {
@@ -84,6 +85,7 @@ public class Contribution extends Media {
             .append("== {{int:license-header}} ==\n")
                 .append("{{self|cc-by-sa-3.0}}")
             ;
+        buffer.append("\n{{Uploaded from Mobile|platform=Android|version=").append(CommonsApplication.APPLICATION_VERSION).append("}}");
         return buffer.toString();
     }
 

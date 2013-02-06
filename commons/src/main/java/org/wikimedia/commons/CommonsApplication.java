@@ -12,6 +12,8 @@ import javax.xml.transform.*;
 
 import android.accounts.*;
 import android.app.Application;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -48,6 +50,7 @@ import org.wikimedia.commons.data.DBOpenHelper;
 public class CommonsApplication extends Application {
 
     private DBOpenHelper dbOpenHelper;
+    public static String APPLICATION_VERSION; // Populated in onCreate. Race conditions theoretically possible, but practically not?
 
     private MWApi api;
     private Account currentAccount = null; // Unlike a savings account...
@@ -91,6 +94,14 @@ public class CommonsApplication extends Application {
                 .discCache(new TotalSizeLimitedDiscCache(StorageUtils.getCacheDirectory(this), 128 * 1024 * 1024))
                 .imageDownloader(new ContentUriImageDownloader()).build();
         ImageLoader.getInstance().init(imageLoaderConfiguration);
+
+        try {
+            PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            APPLICATION_VERSION = pInfo.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            // LET US WIN THE AWARD FOR DUMBEST CHECKED EXCEPTION EVER!
+            throw new RuntimeException(e);
+        }
     }
     
     public MWApi getApi() {
