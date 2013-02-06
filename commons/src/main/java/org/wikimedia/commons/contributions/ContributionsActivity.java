@@ -98,7 +98,7 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
                 imageView.setTag(actualUrl);
             }
 
-            titleView.setText(title);
+            titleView.setText(Utils.displayTitleFromTitle(title));
             switch(state) {
                 case Contribution.STATE_COMPLETED:
                     Date uploaded = new Date(cursor.getLong(COLUMN_UPLOADED));

@@ -132,6 +132,14 @@ public class Contribution extends Media {
         return cv;
     }
 
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
 
     public static class Table {
         public static final String TABLE_NAME = "contributions";

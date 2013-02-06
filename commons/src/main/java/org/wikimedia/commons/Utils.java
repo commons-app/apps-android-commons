@@ -15,6 +15,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Utils {
     public static Date parseMWDate(String mwDate) {
@@ -71,6 +73,17 @@ public class Utils {
         }
         else {
             task.execute(params);
+        }
+    }
+
+    public static Pattern displayTitlePattern = Pattern.compile("\\w+:(.*)(\\.\\w+)", Pattern.CASE_INSENSITIVE);
+    public static String displayTitleFromTitle(String title) {
+        // FIXME: This does not work for pages without an extension!
+        Matcher matcher = displayTitlePattern.matcher(title);
+        if(matcher.matches()) {
+            return matcher.group(1);
+        } else {
+            return title;
         }
     }
 }

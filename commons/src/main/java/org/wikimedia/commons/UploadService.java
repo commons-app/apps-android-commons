@@ -1,7 +1,6 @@
 package org.wikimedia.commons;
 
 import java.io.*;
-import java.text.*;
 import java.util.Date;
 
 import org.mediawiki.api.*;
@@ -265,6 +264,10 @@ public class UploadService extends IntentService {
         } else {
             Date dateUploaded = null;
             dateUploaded = Utils.parseMWDate(result.getString("/api/upload/imageinfo/@timestamp"));
+            String canonicalFilename = "File:" + result.getString("/api/upload/@filename").replace("_", " "); // Title vs Filename
+            String imageUrl = result.getString("/api/upload/imageinfo/@url");
+            contribution.setFilename(canonicalFilename);
+            contribution.setImageUrl(imageUrl);
             contribution.setState(Contribution.STATE_COMPLETED);
             contribution.setDateUploaded(dateUploaded);
             contribution.save();
