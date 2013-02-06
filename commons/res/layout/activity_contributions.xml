@@ -10,6 +10,8 @@
               android:stretchMode="columnWidth"
               android:columnWidth="256dp"
               android:numColumns="auto_fit"
+              android:listSelector="@null"
+              android:fadingEdge="none"
             />
 
 </LinearLayout>
