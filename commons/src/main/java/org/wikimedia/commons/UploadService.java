@@ -31,6 +31,8 @@ public class UploadService extends Service {
     public static final String EXTRA_EDIT_SUMMARY = EXTRA_PREFIX + ".summary";
     public static final String EXTRA_MIMETYPE = EXTRA_PREFIX + ".mimetype";
 
+    private static final int ACTION_UPLOAD_FILE = 1;
+
     private NotificationManager notificationManager;
     private ContentProviderClient contributionsProviderClient;
     private CommonsApplication app;
@@ -51,7 +53,13 @@ public class UploadService extends Service {
 
         @Override
         public void handleMessage(Message msg) {
-            onHandleIntent((Intent)msg.obj);
+            switch(msg.what) {
+                case ACTION_UPLOAD_FILE:
+                    Contribution contrib = (Contribution)msg.obj;
+                    uploadContribution(contrib);
+                    break;
+
+            }
             stopSelf(msg.arg1);
         }
     }
@@ -169,12 +177,10 @@ public class UploadService extends Service {
         Contribution contribution = new Contribution(mediaUri, null, filename, description, length, dateCreated, null, app.getCurrentAccount().name, editSummary);
         return contribution;
     }
-
-    @Override
-    public void onStart(Intent intent, int startId) {
-        Message msg = mServiceHandler.obtainMessage();
-        msg.arg1 = startId;
-        msg.obj = intent;
+    
+    private void postMessage(int type, Object obj) {
+        Message msg = mServiceHandler.obtainMessage(type);
+        msg.obj = obj;
         mServiceHandler.sendMessage(msg);
     }
 
@@ -193,20 +199,16 @@ public class UploadService extends Service {
 
         contribution.save();
 
-        Intent mediaUploadQueuedIntent = new Intent();
-        mediaUploadQueuedIntent.putExtra("dummy-data", contribution); // FIXME: Move to separate handler, do not inherit from IntentService
-        onStart(mediaUploadQueuedIntent, startId);
+        postMessage(ACTION_UPLOAD_FILE, contribution);
         return START_REDELIVER_INTENT;
     }
 
-    protected void onHandleIntent(Intent intent) {
+    void uploadContribution(Contribution contribution) {
         MWApi api = app.getApi();
 
         ApiResult result;
         RemoteViews notificationView;
-        Contribution contribution;
         InputStream file = null;
-        contribution = (Contribution) intent.getSerializableExtra("dummy-data");
 
         String notificationTag = contribution.getLocalUri().toString();
 
