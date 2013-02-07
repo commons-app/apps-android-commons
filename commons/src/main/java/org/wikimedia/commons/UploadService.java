@@ -21,7 +21,7 @@ import android.widget.RemoteViews;
 import android.widget.Toast;
 import android.net.*;
 
-public class UploadService extends IntentService {
+public class UploadService extends Service {
 
     private static final String EXTRA_PREFIX = "org.wikimedia.commons.upload";
 
@@ -39,12 +39,21 @@ public class UploadService extends IntentService {
 
     private int toUpload;
 
-    public UploadService(String name) {
-        super(name);
-    }
+    private volatile Looper mServiceLooper;
+    private volatile ServiceHandler mServiceHandler;
+    private String mName;
+    private boolean mRedelivery;
 
-    public UploadService() {
-        super("UploadService");
+    private final class ServiceHandler extends Handler {
+        public ServiceHandler(Looper looper) {
+            super(looper);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            onHandleIntent((Intent)msg.obj);
+            stopSelf(msg.arg1);
+        }
     }
 
     // DO NOT HAVE NOTIFICATION ID OF 0 FOR ANYTHING
@@ -102,25 +111,27 @@ public class UploadService extends IntentService {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        mServiceLooper.quit();
         contributionsProviderClient.release();
         Log.d("Commons", "ZOMG I AM BEING KILLED HALP!");
     }
 
     @Override
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
+
+    @Override
     public void onCreate() {
         super.onCreate();
+        HandlerThread thread = new HandlerThread("UploadService");
+        thread.start();
+
+        mServiceLooper = thread.getLooper();
+        mServiceHandler = new ServiceHandler(mServiceLooper);
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         app = (CommonsApplication) this.getApplicationContext();
         contributionsProviderClient = this.getContentResolver().acquireContentProviderClient(ContributionsContentProvider.AUTHORITY);
-    }
-
-    private long countBytes(InputStream stream) throws IOException {
-        long count = 0;
-        BufferedInputStream bis = new BufferedInputStream(stream);
-        while(bis.read() != -1) {
-           count++;
-        }
-        return count;
     }
 
     private Contribution mediaFromIntent(Intent intent) {
@@ -137,7 +148,7 @@ public class UploadService extends IntentService {
             length = this.getContentResolver().openAssetFileDescriptor(mediaUri, "r").getLength();
             if(length == -1) {
                 // Let us find out the long way!
-                length = countBytes(this.getContentResolver().openInputStream(mediaUri));
+                length = Utils.countBytes(this.getContentResolver().openInputStream(mediaUri));
             }
         } catch(IOException e) {
             throw new RuntimeException(e);
@@ -160,6 +171,14 @@ public class UploadService extends IntentService {
     }
 
     @Override
+    public void onStart(Intent intent, int startId) {
+        Message msg = mServiceHandler.obtainMessage();
+        msg.arg1 = startId;
+        msg.obj = intent;
+        mServiceHandler.sendMessage(msg);
+    }
+
+    @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         toUpload++;
         if(curProgressNotification != null && toUpload != 1) {
@@ -176,10 +195,10 @@ public class UploadService extends IntentService {
 
         Intent mediaUploadQueuedIntent = new Intent();
         mediaUploadQueuedIntent.putExtra("dummy-data", contribution); // FIXME: Move to separate handler, do not inherit from IntentService
-        return super.onStartCommand(mediaUploadQueuedIntent, flags, startId);
+        onStart(mediaUploadQueuedIntent, startId);
+        return START_REDELIVER_INTENT;
     }
 
-    @Override
     protected void onHandleIntent(Intent intent) {
         MWApi api = app.getApi();
 

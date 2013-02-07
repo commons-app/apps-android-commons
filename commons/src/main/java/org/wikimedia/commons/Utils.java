@@ -10,6 +10,9 @@ import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.TransformerFactoryConfigurationError;
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -85,5 +88,14 @@ public class Utils {
         } else {
             return title;
         }
+    }
+
+    public static long countBytes(InputStream stream) throws IOException {
+        long count = 0;
+        BufferedInputStream bis = new BufferedInputStream(stream);
+        while(bis.read() != -1) {
+            count++;
+        }
+        return count;
     }
 }
