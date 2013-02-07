@@ -14,10 +14,6 @@
     <string name="upload_overlay_title">Upload to Commons</string>
     <string name="login_success">Login success!</string>
     <string name="login_failed">Login failed!</string>
-    <string name="uploading_title">Uploading photo</string>
-    <string name="uploading_message">More witty text here!</string>
-    <string name="uploading_success">Upload succeeded!</string>
-    <string name="uploading_failed">Upload failed!</string>
     <string name="authentication_failed">Authentication failed!</string>
     <string name="uploading_started">Upload started!</string>
    
@@ -29,12 +25,6 @@
     <string name="upload_failed_notification_title">Uploading %1$s failed</string>
     <string name="upload_failed_notification_subtitle">Tap to retry</string>
     <string name="uploads_pending_notification_indicator">%d left</string>
-    
-    <string name="transcoding_progress_title_start">Starting %1$s Transcoding</string>
-    <string name="transcoding_progress_title_in_progress">Transcoding %1$s</string>
-    <string name="transcoding_progress_title_finishing">Finished Transcoding %1$s</string>
-    <string name="transcoding_failed_notification_title">Failed Transcoding %1$s</string>
-    <string name="transcoding_failed_notification_subtitle">Tap to try again</string>
 
     <string name="title_activity_contributions">My Contributions</string>
     <string name="contribution_state_queued">Queued</string>
