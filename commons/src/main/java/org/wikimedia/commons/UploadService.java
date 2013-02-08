@@ -33,6 +33,8 @@ public class UploadService extends Service {
 
     private static final int ACTION_UPLOAD_FILE = 1;
 
+    public static final String ACTION_START_SERVICE = EXTRA_PREFIX + ".upload";
+
     private NotificationManager notificationManager;
     private ContentProviderClient contributionsProviderClient;
     private CommonsApplication app;
@@ -197,23 +199,33 @@ public class UploadService extends Service {
         contribution.setContentProviderClient(contributionsProviderClient);
 
         contribution.save();
+        toUpload++;
+        if (curProgressNotification != null && toUpload != 1) {
+            curProgressNotification.contentView.setTextViewText(R.id.uploadNotificationsCount, String.format(getString(R.string.uploads_pending_notification_indicator), toUpload));
+            Log.d("Commons", String.format("%d uploads left", toUpload));
+            notificationManager.notify(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification);
+        }
 
         postMessage(ACTION_UPLOAD_FILE, contribution);
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        toUpload++;
-        if(curProgressNotification != null && toUpload != 1) {
-            curProgressNotification.contentView.setTextViewText(R.id.uploadNotificationsCount, String.format(getString(R.string.uploads_pending_notification_indicator), toUpload));
-            Log.d("Commons", String.format("%d uploads left", toUpload));
-            notificationManager.notify(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification);
+        if(intent.getAction() == ACTION_START_SERVICE) {
+            ContentValues failedValues = new ContentValues();
+            failedValues.put(Contribution.Table.COLUMN_STATE, Contribution.STATE_FAILED);
+
+            int updated = getContentResolver().update(ContributionsContentProvider.BASE_URI,
+                    failedValues,
+                    Contribution.Table.COLUMN_STATE + " = ? OR " + Contribution.Table.COLUMN_STATE + " = ?",
+                    new String[]{ String.valueOf(Contribution.STATE_QUEUED), String.valueOf(Contribution.STATE_IN_PROGRESS) }
+            );
+            Log.d("Commons", "Set " + updated + " uploads to failed");
+        } else {
+
+            Contribution contribution = mediaFromIntent(intent);
+            queueContribution(contribution);
         }
-
-        Log.d("Commons", "Received startcommand");
-        Contribution contribution = mediaFromIntent(intent);
-        queueContribution(contribution);
-
         return START_REDELIVER_INTENT;
     }
 

@@ -169,8 +169,10 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
                 .cacheInMemory()
                 .cacheOnDisc()
                 .resetViewBeforeLoading().build();
-
-        bindService(new Intent(this, UploadService.class), uploadServiceConnection, Context.BIND_AUTO_CREATE);
+        Intent uploadServiceIntent = new Intent(this, UploadService.class);
+        uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
+        startService(uploadServiceIntent);
+        bindService(uploadServiceIntent, uploadServiceConnection, Context.BIND_AUTO_CREATE);
 
         Cursor allContributions = getContentResolver().query(ContributionsContentProvider.BASE_URI, Contribution.Table.ALL_FIELDS, CONTRIBUTION_SELECTION, null, CONTRIBUTION_SORT);
         contributionsAdapter = new ContributionAdapter(this, allContributions, 0);
