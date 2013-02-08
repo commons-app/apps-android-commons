@@ -25,9 +25,13 @@ public class ContributionsContentProvider extends ContentProvider{
     private static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
     static {
         uriMatcher.addURI(AUTHORITY, BASE_PATH, CONTRIBUTIONS);
-        uriMatcher.addURI(AUTHORITY, BASE_PATH + "/*", CONTRIBUTIONS_ID);
+        uriMatcher.addURI(AUTHORITY, BASE_PATH + "/#", CONTRIBUTIONS_ID);
     }
 
+
+    public static Uri uriForId(int id) {
+        return Uri.parse(BASE_URI.toString() + "/" + id);
+    }
 
     private DBOpenHelper dbOpenHelper;
     @Override

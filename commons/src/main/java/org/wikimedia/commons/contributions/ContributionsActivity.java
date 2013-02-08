@@ -3,6 +3,7 @@ package org.wikimedia.commons.contributions;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
+import android.os.IBinder;
 import android.provider.MediaStore;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -17,10 +18,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.*;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.Menu;
@@ -52,6 +50,18 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
     public ContributionsActivity() {
         super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
     }
+
+    private UploadService uploadService;
+    private ServiceConnection uploadServiceConnection = new ServiceConnection() {
+        public void onServiceConnected(ComponentName componentName, IBinder binder) {
+            uploadService = ((UploadService.UploadServiceLocalBinder)binder).getService();
+        }
+
+        public void onServiceDisconnected(ComponentName componentName) {
+            // this should never happen
+            throw new RuntimeException("UploadService died but the rest of the process did not!");
+        }
+    };
 
     private class ContributionAdapter extends CursorAdapter {
 
@@ -127,17 +137,6 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
 
     private DisplayImageOptions contributionDisplayOptions;
 
-    private String[] CONTRIBUTIONS_PROJECTION = {
-        Contribution.Table.COLUMN_ID,
-        Contribution.Table.COLUMN_FILENAME,
-        Contribution.Table.COLUMN_LOCAL_URI,
-        Contribution.Table.COLUMN_STATE,
-        Contribution.Table.COLUMN_UPLOADED,
-        Contribution.Table.COLUMN_LENGTH,
-        Contribution.Table.COLUMN_TRANSFERRED,
-        Contribution.Table.COLUMN_IMAGE_URL
-    };
-
     private String CONTRIBUTION_SELECTION = "";
     /*
         This sorts in the following order:
@@ -171,11 +170,25 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
                 .cacheOnDisc()
                 .resetViewBeforeLoading().build();
 
-        Cursor allContributions = getContentResolver().query(ContributionsContentProvider.BASE_URI, CONTRIBUTIONS_PROJECTION, CONTRIBUTION_SELECTION, null, CONTRIBUTION_SORT);
+        bindService(new Intent(this, UploadService.class), uploadServiceConnection, Context.BIND_AUTO_CREATE);
+
+        Cursor allContributions = getContentResolver().query(ContributionsContentProvider.BASE_URI, Contribution.Table.ALL_FIELDS, CONTRIBUTION_SELECTION, null, CONTRIBUTION_SORT);
         contributionsAdapter = new ContributionAdapter(this, allContributions, 0);
         contributionsList.setAdapter(contributionsAdapter);
 
         getSupportLoaderManager().initLoader(0, null, this);
+
+        contributionsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long item) {
+                Cursor cursor = (Cursor)adapterView.getItemAtPosition(position);
+                Contribution c = Contribution.fromCursor(cursor);
+                if(c.getState() == Contribution.STATE_FAILED) {
+                    uploadService.queueContribution(c);
+                    Log.d("Commons", "Restarting for" + c.toContentValues().toString());
+                }
+                Log.d("Commons", "You clicked on:" + c.toContentValues().toString());
+            }
+        });
     }
 
     @Override
@@ -283,7 +296,7 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
     }
 
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        return new CursorLoader(this, ContributionsContentProvider.BASE_URI, CONTRIBUTIONS_PROJECTION, CONTRIBUTION_SELECTION, null, CONTRIBUTION_SORT);
+        return new CursorLoader(this, ContributionsContentProvider.BASE_URI, Contribution.Table.ALL_FIELDS, CONTRIBUTION_SELECTION, null, CONTRIBUTION_SORT);
     }
 
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {

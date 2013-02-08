@@ -7,6 +7,9 @@ import java.util.Date;
 
 public class Media implements Serializable {
 
+    protected Media() {
+    }
+
     public Uri getLocalUri() {
         return localUri;
     }

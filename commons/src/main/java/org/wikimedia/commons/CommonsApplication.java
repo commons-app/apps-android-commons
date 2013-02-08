@@ -57,6 +57,8 @@ public class CommonsApplication extends Application {
     public static final String API_URL = "https://test.wikipedia.org/w/api.php";
     public static final String IMAGE_URL_BASE = "https://upload.wikimedia.org/wikipedia/test";
 
+    public static final String DEFAULT_EDIT_SUMMARY = "Uploaded using Android Commons app";
+
 
     public static MWApi createMWApi() {
         DefaultHttpClient client = new DefaultHttpClient();

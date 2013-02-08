@@ -5,6 +5,7 @@ import java.util.*;
 
 import android.content.ContentProviderClient;
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.*;
 import android.os.RemoteException;
@@ -34,7 +35,7 @@ public class Contribution extends Media {
     private long transferred;
 
     public String getEditSummary() {
-        return editSummary;
+        return editSummary != null ? editSummary : CommonsApplication.DEFAULT_EDIT_SUMMARY;
     }
 
     public Uri getContentUri() {
@@ -142,6 +143,26 @@ public class Contribution extends Media {
         this.imageUrl = imageUrl;
     }
 
+    private Contribution() {
+        // Empty constructor for being constructed by our static methods
+    }
+
+    public static Contribution fromCursor(Cursor cursor) {
+        // Hardcoding column positions!
+        Contribution c = new Contribution();
+        c.contentUri = ContributionsContentProvider.uriForId(cursor.getInt(0));
+        c.filename = cursor.getString(1);
+        c.localUri = TextUtils.isEmpty(cursor.getString(2)) ? null : Uri.parse(cursor.getString(2));
+        c.imageUrl = cursor.getString(3);
+        c.timestamp = cursor.getLong(4) == 0 ? null : new Date(cursor.getLong(4));
+        c.state = cursor.getInt(5);
+        c.dataLength = cursor.getLong(6);
+        c.dateUploaded =  cursor.getLong(7) == 0 ? null : new Date(cursor.getLong(7));
+        c.transferred = cursor.getLong(8);
+        return c;
+    }
+
+
 
     public static class Table {
         public static final String TABLE_NAME = "contributions";
@@ -155,6 +176,19 @@ public class Contribution extends Media {
         public static final String COLUMN_LENGTH = "length";
         public static final String COLUMN_UPLOADED = "uploaded";
         public static final String COLUMN_TRANSFERRED = "transferred"; // Currently transferred number of bytes
+
+        // NOTE! KEEP IN SAME ORDER AS THEY ARE DEFINED UP THERE. HELPS HARD CODE COLUMN INDICES.
+        public static final String[] ALL_FIELDS = {
+                COLUMN_ID,
+                COLUMN_FILENAME,
+                COLUMN_LOCAL_URI,
+                COLUMN_IMAGE_URL,
+                COLUMN_TIMESTAMP,
+                COLUMN_STATE,
+                COLUMN_LENGTH,
+                COLUMN_UPLOADED,
+                COLUMN_TRANSFERRED
+        };
 
 
         private static final String CREATE_TABLE_STATEMENT = "CREATE TABLE " + TABLE_NAME + " ("

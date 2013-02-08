@@ -41,10 +41,8 @@ public class UploadService extends Service {
 
     private int toUpload;
 
-    private volatile Looper mServiceLooper;
-    private volatile ServiceHandler mServiceHandler;
-    private String mName;
-    private boolean mRedelivery;
+    private volatile Looper uploadThreadLooper;
+    private volatile ServiceHandler uploadThreadHandler;
 
     private final class ServiceHandler extends Handler {
         public ServiceHandler(Looper looper) {
@@ -119,14 +117,22 @@ public class UploadService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mServiceLooper.quit();
+        uploadThreadLooper.quit();
         contributionsProviderClient.release();
         Log.d("Commons", "ZOMG I AM BEING KILLED HALP!");
     }
 
+    public class UploadServiceLocalBinder extends Binder {
+        public UploadService getService() {
+            return UploadService.this;
+        }
+
+    }
+
+    private final IBinder localBinder = new UploadServiceLocalBinder();
     @Override
     public IBinder onBind(Intent intent) {
-        return null;
+        return localBinder;
     }
 
     @Override
@@ -135,8 +141,8 @@ public class UploadService extends Service {
         HandlerThread thread = new HandlerThread("UploadService");
         thread.start();
 
-        mServiceLooper = thread.getLooper();
-        mServiceHandler = new ServiceHandler(mServiceLooper);
+        uploadThreadLooper = thread.getLooper();
+        uploadThreadHandler = new ServiceHandler(uploadThreadLooper);
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         app = (CommonsApplication) this.getApplicationContext();
         contributionsProviderClient = this.getContentResolver().acquireContentProviderClient(ContributionsContentProvider.AUTHORITY);
@@ -179,9 +185,20 @@ public class UploadService extends Service {
     }
     
     private void postMessage(int type, Object obj) {
-        Message msg = mServiceHandler.obtainMessage(type);
+        Message msg = uploadThreadHandler.obtainMessage(type);
         msg.obj = obj;
-        mServiceHandler.sendMessage(msg);
+        uploadThreadHandler.sendMessage(msg);
+    }
+
+
+    public void queueContribution(Contribution contribution) {
+        contribution.setState(Contribution.STATE_QUEUED);
+        contribution.setTransferred(0);
+        contribution.setContentProviderClient(contributionsProviderClient);
+
+        contribution.save();
+
+        postMessage(ACTION_UPLOAD_FILE, contribution);
     }
 
     @Override
@@ -193,13 +210,10 @@ public class UploadService extends Service {
             notificationManager.notify(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification);
         }
 
+        Log.d("Commons", "Received startcommand");
         Contribution contribution = mediaFromIntent(intent);
-        contribution.setState(Contribution.STATE_QUEUED);
-        contribution.setContentProviderClient(contributionsProviderClient);
+        queueContribution(contribution);
 
-        contribution.save();
-
-        postMessage(ACTION_UPLOAD_FILE, contribution);
         return START_REDELIVER_INTENT;
     }
 
