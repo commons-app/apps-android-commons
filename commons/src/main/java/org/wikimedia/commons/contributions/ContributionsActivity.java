@@ -54,7 +54,7 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
     private UploadService uploadService;
     private ServiceConnection uploadServiceConnection = new ServiceConnection() {
         public void onServiceConnected(ComponentName componentName, IBinder binder) {
-            uploadService = ((UploadService.UploadServiceLocalBinder)binder).getService();
+            uploadService = (UploadService) ((HandlerService.HandlerServiceLocalBinder)binder).getService();
         }
 
         public void onServiceDisconnected(ComponentName componentName) {
@@ -185,7 +185,7 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
                 Cursor cursor = (Cursor)adapterView.getItemAtPosition(position);
                 Contribution c = Contribution.fromCursor(cursor);
                 if(c.getState() == Contribution.STATE_FAILED) {
-                    uploadService.queueContribution(c);
+                    uploadService.queue(UploadService.ACTION_UPLOAD_FILE,  c);
                     Log.d("Commons", "Restarting for" + c.toContentValues().toString());
                 }
                 Log.d("Commons", "You clicked on:" + c.toContentValues().toString());

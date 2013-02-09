@@ -21,7 +21,7 @@ import android.widget.RemoteViews;
 import android.widget.Toast;
 import android.net.*;
 
-public class UploadService extends Service {
+public class UploadService extends HandlerService<Contribution> {
 
     private static final String EXTRA_PREFIX = "org.wikimedia.commons.upload";
 
@@ -31,7 +31,7 @@ public class UploadService extends Service {
     public static final String EXTRA_EDIT_SUMMARY = EXTRA_PREFIX + ".summary";
     public static final String EXTRA_MIMETYPE = EXTRA_PREFIX + ".mimetype";
 
-    private static final int ACTION_UPLOAD_FILE = 1;
+    public static final int ACTION_UPLOAD_FILE = 1;
 
     public static final String ACTION_START_SERVICE = EXTRA_PREFIX + ".upload";
 
@@ -42,27 +42,6 @@ public class UploadService extends Service {
     private Notification curProgressNotification;
 
     private int toUpload;
-
-    private volatile Looper uploadThreadLooper;
-    private volatile ServiceHandler uploadThreadHandler;
-
-    private final class ServiceHandler extends Handler {
-        public ServiceHandler(Looper looper) {
-            super(looper);
-        }
-
-        @Override
-        public void handleMessage(Message msg) {
-            switch(msg.what) {
-                case ACTION_UPLOAD_FILE:
-                    Contribution contrib = (Contribution)msg.obj;
-                    uploadContribution(contrib);
-                    break;
-
-            }
-            stopSelf(msg.arg1);
-        }
-    }
 
     // DO NOT HAVE NOTIFICATION ID OF 0 FOR ANYTHING
     // See http://stackoverflow.com/questions/8725909/startforeground-does-not-show-my-notification
@@ -119,32 +98,14 @@ public class UploadService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        uploadThreadLooper.quit();
         contributionsProviderClient.release();
         Log.d("Commons", "ZOMG I AM BEING KILLED HALP!");
-    }
-
-    public class UploadServiceLocalBinder extends Binder {
-        public UploadService getService() {
-            return UploadService.this;
-        }
-
-    }
-
-    private final IBinder localBinder = new UploadServiceLocalBinder();
-    @Override
-    public IBinder onBind(Intent intent) {
-        return localBinder;
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        HandlerThread thread = new HandlerThread("UploadService");
-        thread.start();
 
-        uploadThreadLooper = thread.getLooper();
-        uploadThreadHandler = new ServiceHandler(uploadThreadLooper);
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         app = (CommonsApplication) this.getApplicationContext();
         contributionsProviderClient = this.getContentResolver().acquireContentProviderClient(ContributionsContentProvider.AUTHORITY);
@@ -185,29 +146,43 @@ public class UploadService extends Service {
         Contribution contribution = new Contribution(mediaUri, null, filename, description, length, dateCreated, null, app.getCurrentAccount().name, editSummary);
         return contribution;
     }
-    
-    private void postMessage(int type, Object obj) {
-        Message msg = uploadThreadHandler.obtainMessage(type);
-        msg.obj = obj;
-        uploadThreadHandler.sendMessage(msg);
+
+    @Override
+    protected void handle(int what, Contribution contribution) {
+        switch(what) {
+            case ACTION_UPLOAD_FILE:
+                uploadContribution(contribution);
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown value for what");
+        }
     }
 
+    @Override
+    public void queue(int what, Contribution contribution) {
+        switch (what) {
+            case ACTION_UPLOAD_FILE:
 
-    public void queueContribution(Contribution contribution) {
-        contribution.setState(Contribution.STATE_QUEUED);
-        contribution.setTransferred(0);
-        contribution.setContentProviderClient(contributionsProviderClient);
+                contribution.setState(Contribution.STATE_QUEUED);
+                contribution.setTransferred(0);
+                contribution.setContentProviderClient(contributionsProviderClient);
 
-        contribution.save();
-        toUpload++;
-        if (curProgressNotification != null && toUpload != 1) {
-            curProgressNotification.contentView.setTextViewText(R.id.uploadNotificationsCount, String.format(getString(R.string.uploads_pending_notification_indicator), toUpload));
-            Log.d("Commons", String.format("%d uploads left", toUpload));
-            notificationManager.notify(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification);
+                contribution.save();
+                toUpload++;
+                if (curProgressNotification != null && toUpload != 1) {
+                    curProgressNotification.contentView.setTextViewText(R.id.uploadNotificationsCount, String.format(getString(R.string.uploads_pending_notification_indicator), toUpload));
+                    Log.d("Commons", String.format("%d uploads left", toUpload));
+                    notificationManager.notify(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification);
+                }
+
+                super.queue(what, contribution);
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown value for what");
         }
 
-        postMessage(ACTION_UPLOAD_FILE, contribution);
     }
+
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -224,12 +199,12 @@ public class UploadService extends Service {
         } else {
 
             Contribution contribution = mediaFromIntent(intent);
-            queueContribution(contribution);
+            queue(ACTION_UPLOAD_FILE, contribution);
         }
         return START_REDELIVER_INTENT;
     }
 
-    void uploadContribution(Contribution contribution) {
+    private void uploadContribution(Contribution contribution) {
         MWApi api = app.getApi();
 
         ApiResult result;
@@ -260,8 +235,6 @@ public class UploadService extends Service {
                 .getNotification();
 
         this.startForeground(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification);
-
-        Log.d("Commons", "Just before");
 
         try {
             if(!api.validateLogin()) {
