@@ -2,19 +2,13 @@
 
     <string name="app_name">The name of the application</string>
     <string name="menu_settings">Label for menu item to show settings</string>
-    <string name="title_activity_login">Sign in to Wikimedia Commons</string>
-    <string name="login_subtitle">Login to upload media to commons</string>
-    <string name="username">Username</string>
-    <string name="password">Password</string>
     <string name="login">Button to have people log in</string>
     <string name="logging_in_title">Title of dialog box shown while logging in</string>
     <string name="logging_in_message">Contents of dialog box shown while logging in</string>
-    <string name="title_activity_share">Wikimedia Commons</string>
-    <string name="upload_overlay_title">Upload to Commons</string>
     <string name="login_success">Message when login has succeeded</string>
     <string name="login_failed">Message when login has failed</string>
     <string name="uploading_started">Toast message when uploading has started</string>
-   
+
     <string name="upload_completed_notification_title">Title for notification about upload being completed. %1$s represents file name.</string>
     <string name="upload_completed_notification_text">Text for notification about upload being completed.</string>
     <string name="upload_progress_notification_title_start">Title for notificiation about upload being started. %1$s represents file name</string>

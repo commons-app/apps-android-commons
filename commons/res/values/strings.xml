@@ -4,12 +4,12 @@
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_login">Sign in to Wikimedia Commons</string>
-    <string name="login_subtitle">Login to upload media to commons</string>
+    <string name="login_subtitle">Login to upload media to Wikimedia Commons</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
-    <string name="login">Log In</string>
-    <string name="logging_in_title">Logging In</string>
-    <string name="logging_in_message">Witty text here</string>
+    <string name="login">Log in</string>
+    <string name="logging_in_title">Logging in</string>
+    <string name="logging_in_message">Please wait...</string>
     <string name="title_activity_share">Wikimedia Commons</string>
     <string name="upload_overlay_title">Upload to Commons</string>
     <string name="login_success">Login success!</string>
@@ -26,13 +26,13 @@
     <string name="upload_failed_notification_subtitle">Tap to retry</string>
     <string name="uploads_pending_notification_indicator">%d left</string>
 
-    <string name="title_activity_contributions">My Contributions</string>
+    <string name="title_activity_contributions">My contributions</string>
     <string name="contribution_state_queued">Queued</string>
     <string name="contribution_state_failed">Failed</string>
     <string name="contribution_state_in_progress">%1$d%% complete</string>
     <string name="contribution_state_starting">Uploading</string>
     <string name="menu_from_gallery">From Gallery</string>
-    <string name="menu_from_camera">Take Photo</string>
+    <string name="menu_from_camera">Take photo</string>
 
-    <string name="provider_contributions">My Contributions</string>
+    <string name="provider_contributions">My contributions</string>
 </resources>
