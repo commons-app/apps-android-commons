@@ -1,7 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="crash_dialog_title">Title of dialog to show when the app crashes</string>
-    <string name="crash_dialog_text">Humorous and non-sensical reasoning for why the app crashed.</string>
-    <string name="crash_dialog_comment_prompt">Prompt asking people to enter info about what they were doing when the app crashed</string>
-    <string name="crash_dialog_ok_toast">Toast to be displayed once someone sends an error report thanking them</string>
-</resources>
+<resources><string name="crash_dialog_title">Title of dialog to show when the app crashes</string><string name="crash_dialog_text">Humorous and non-sensical reasoning for why the app crashed.</string><string name="crash_dialog_comment_prompt">Prompt asking people to enter info about what they were doing when the app crashed</string><string name="crash_dialog_ok_toast">Toast to be displayed once someone sends an error report thanking them.
+{{Identical|Thank you}}</string></resources>
