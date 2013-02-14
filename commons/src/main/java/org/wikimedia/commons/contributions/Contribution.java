@@ -11,6 +11,7 @@ import android.net.*;
 import android.os.RemoteException;
 import android.text.TextUtils;
 import org.wikimedia.commons.CommonsApplication;
+import org.wikimedia.commons.EventLog;
 import org.wikimedia.commons.Media;
 
 public class Contribution extends Media {
@@ -21,8 +22,15 @@ public class Contribution extends Media {
     public static final int STATE_QUEUED = 2;
     public static final int STATE_IN_PROGRESS = 3;
 
+    public static final String SOURCE_CAMERA = "camera";
+    public static final String SOURCE_GALLERY = "gallery";
+    public static final String SOURCE_EXTERNAL = "external";
+
     private ContentProviderClient client;
     private Uri contentUri;
+    private String source;
+
+    public EventLog.LogBuilder event;
 
     public long getTransferred() {
         return transferred;
@@ -132,6 +140,7 @@ public class Contribution extends Media {
         cv.put(Table.COLUMN_TIMESTAMP, getTimestamp().getTime());
         cv.put(Table.COLUMN_STATE, getState());
         cv.put(Table.COLUMN_TRANSFERRED, transferred);
+        cv.put(Table.COLUMN_SOURCE,  source);
         return cv;
     }
 
@@ -159,9 +168,17 @@ public class Contribution extends Media {
         c.dataLength = cursor.getLong(6);
         c.dateUploaded =  cursor.getLong(7) == 0 ? null : new Date(cursor.getLong(7));
         c.transferred = cursor.getLong(8);
+        c.source = cursor.getString(9);
         return c;
     }
 
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
 
 
     public static class Table {
@@ -176,6 +193,7 @@ public class Contribution extends Media {
         public static final String COLUMN_LENGTH = "length";
         public static final String COLUMN_UPLOADED = "uploaded";
         public static final String COLUMN_TRANSFERRED = "transferred"; // Currently transferred number of bytes
+        public static final String COLUMN_SOURCE = "source";
 
         // NOTE! KEEP IN SAME ORDER AS THEY ARE DEFINED UP THERE. HELPS HARD CODE COLUMN INDICES.
         public static final String[] ALL_FIELDS = {
@@ -187,7 +205,8 @@ public class Contribution extends Media {
                 COLUMN_STATE,
                 COLUMN_LENGTH,
                 COLUMN_UPLOADED,
-                COLUMN_TRANSFERRED
+                COLUMN_TRANSFERRED,
+                COLUMN_SOURCE
         };
 
 
@@ -200,7 +219,8 @@ public class Contribution extends Media {
                 + "timestamp INTEGER,"
                 + "state INTEGER,"
                 + "length INTEGER,"
-                + "transferred INTEGER"
+                + "transferred INTEGER,"
+                + "source STRING"
         + ");";
 
 

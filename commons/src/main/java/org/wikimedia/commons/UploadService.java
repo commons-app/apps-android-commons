@@ -34,6 +34,7 @@ public class UploadService extends HandlerService<Contribution> {
     public static final int ACTION_UPLOAD_FILE = 1;
 
     public static final String ACTION_START_SERVICE = EXTRA_PREFIX + ".upload";
+    public static final String EXTRA_SOURCE = EXTRA_PREFIX + ".source";
 
     private NotificationManager notificationManager;
     private ContentProviderClient contributionsProviderClient;
@@ -118,6 +119,7 @@ public class UploadService extends HandlerService<Contribution> {
         String description = intent.getStringExtra(EXTRA_DESCRIPTION);
         String editSummary = intent.getStringExtra(EXTRA_EDIT_SUMMARY);
         String mimeType = intent.getStringExtra(EXTRA_MIMETYPE);
+        String source = intent.getStringExtra(EXTRA_SOURCE);
         Date dateCreated = null;
 
         Long length = null;
@@ -144,6 +146,7 @@ public class UploadService extends HandlerService<Contribution> {
              Removed Audio implementationf or now
            }  */
         Contribution contribution = new Contribution(mediaUri, null, filename, description, length, dateCreated, null, app.getCurrentAccount().name, editSummary);
+        contribution.setSource(source);
         return contribution;
     }
 
@@ -271,7 +274,14 @@ public class UploadService extends HandlerService<Contribution> {
 
         String resultStatus = result.getString("/api/upload/@result");
         if(!resultStatus.equals("Success")) {
+            String errorCode = result.getString("/api/error/@code");
             showFailedNotification(contribution);
+            EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT)
+                    .param("username", app.getCurrentAccount().name)
+                    .param("source", contribution.getSource())
+                    .param("result", errorCode)
+                    .param("filename", contribution.getFilename())
+                    .log();
         } else {
             Date dateUploaded = null;
             dateUploaded = Utils.parseMWDate(result.getString("/api/upload/imageinfo/@timestamp"));
@@ -282,6 +292,13 @@ public class UploadService extends HandlerService<Contribution> {
             contribution.setState(Contribution.STATE_COMPLETED);
             contribution.setDateUploaded(dateUploaded);
             contribution.save();
+
+            EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT)
+                    .param("username", app.getCurrentAccount().name)
+                    .param("source", contribution.getSource()) //FIXME
+                    .param("filename", contribution.getFilename())
+                    .param("result", "success")
+                    .log();
         }
     }
 

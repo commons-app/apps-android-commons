@@ -226,6 +226,7 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
                     Log.d("Commons", "Type is " + data.getType() + " Uri is " + data.getData());
                     shareIntent.setType("image/*"); //FIXME: Find out appropriate mime type
                     shareIntent.putExtra(Intent.EXTRA_STREAM, data.getData());
+                    shareIntent.putExtra(UploadService.EXTRA_SOURCE, Contribution.SOURCE_GALLERY);
                     startActivity(shareIntent);
                 }
                 break;
@@ -236,6 +237,7 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
                     Log.d("Commons", "Uri is " + lastGeneratedCaptureURI);
                     shareIntent.setType("image/jpeg"); //FIXME: Find out appropriate mime type
                     shareIntent.putExtra(Intent.EXTRA_STREAM, lastGeneratedCaptureURI);
+                    shareIntent.putExtra(UploadService.EXTRA_SOURCE, Contribution.SOURCE_CAMERA);
                     startActivity(shareIntent);
                 }
                 break;

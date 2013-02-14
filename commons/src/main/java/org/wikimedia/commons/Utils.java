@@ -2,8 +2,10 @@ package org.wikimedia.commons;
 
 import android.os.AsyncTask;
 import android.os.Build;
+import org.apache.commons.codec.EncoderException;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.codec.net.URLCodec;
 import org.w3c.dom.Node;
 
 import javax.xml.transform.TransformerConfigurationException;
@@ -87,6 +89,16 @@ public class Utils {
             return matcher.group(1);
         } else {
             return title;
+        }
+    }
+
+    private static final URLCodec urlCodec = new URLCodec();
+
+    public static String urlEncode(String url) {
+        try {
+            return urlCodec.encode(url);
+        } catch (EncoderException e) {
+            throw new RuntimeException(e);
         }
     }
 

@@ -56,6 +56,10 @@ public class CommonsApplication extends Application {
     private Account currentAccount = null; // Unlike a savings account...
     public static final String API_URL = "https://test.wikipedia.org/w/api.php";
     public static final String IMAGE_URL_BASE = "https://upload.wikimedia.org/wikipedia/test";
+    public static final String EVENTLOG_URL = "https://bits.wikimedia.org/event.gif";
+
+    public static final Object[] EVENT_UPLOAD_ATTEMPT = {"MobileAppUploadAttempts", 5241449};
+    public static final Object[] EVENT_LOGIN_ATTEMPT = {"MobileAppLoginAttempts", 5240393};
 
     public static final String DEFAULT_EDIT_SUMMARY = "Uploaded using Android Commons app";
 
