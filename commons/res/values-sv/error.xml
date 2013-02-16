@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources><string name="crash_dialog_title">Commons har kraschat</string><string name="crash_dialog_text">Oj. Något gick fel!</string><string name="crash_dialog_comment_prompt">Beskriv vad du gjorde, och skicka det med epost till oss. Det hjälper oss att fixa det!</string><string name="crash_dialog_ok_toast">Tack!</string></resources>

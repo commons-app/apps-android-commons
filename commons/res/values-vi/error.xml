@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources><string name="crash_dialog_title">Commons bị sự cố</string><string name="crash_dialog_text">Oái, đã bị trục trặc!</string><string name="crash_dialog_comment_prompt">Xin hãy cho biết bạn đang làm gì lúc đó và gửi chuyện kể cho chúng tôi qua thư điện tử, để cho chúng tôi biết cách sửa vấn đề.</string><string name="crash_dialog_ok_toast">Cám ơn!</string></resources>
