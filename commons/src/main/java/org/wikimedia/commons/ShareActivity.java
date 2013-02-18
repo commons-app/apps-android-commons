@@ -1,5 +1,12 @@
 package org.wikimedia.commons;
 
+import android.content.ComponentName;
+import android.content.ServiceConnection;
+import android.database.Cursor;
+import android.os.AsyncTask;
+import android.os.IBinder;
+import android.provider.MediaStore;
+import android.util.Log;
 import org.wikimedia.commons.auth.AuthenticatedActivity;
 import org.wikimedia.commons.auth.WikiAccountAuthenticator;
 
@@ -16,6 +23,9 @@ import android.widget.*;
 import android.view.*;
 import org.wikimedia.commons.contributions.Contribution;
 
+import java.io.IOException;
+import java.util.Date;
+
 
 public class ShareActivity extends AuthenticatedActivity {
 
@@ -30,7 +40,72 @@ public class ShareActivity extends AuthenticatedActivity {
     private EditText titleEdit;
     private EditText descEdit;
 
+    private String source;
+    private String mimeType;
+
     private Uri mediaUri;
+
+    private UploadService uploadService;
+    private ServiceConnection uploadServiceConnection = new ServiceConnection() {
+        public void onServiceConnected(ComponentName componentName, IBinder binder) {
+            uploadService = (UploadService) ((HandlerService.HandlerServiceLocalBinder)binder).getService();
+        }
+
+        public void onServiceDisconnected(ComponentName componentName) {
+            // this should never happen
+            throw new RuntimeException("UploadService died but the rest of the process did not!");
+        }
+    };
+
+
+    private class StartUploadTask extends AsyncTask<Void, Void, Contribution> {
+
+        @Override
+        protected void onPreExecute() {
+            Toast startingToast = Toast.makeText(getApplicationContext(), R.string.uploading_started, Toast.LENGTH_LONG);
+            startingToast.show();
+        }
+
+        @Override
+        protected Contribution doInBackground(Void... voids) {
+            String title = titleEdit.getText().toString();
+            String description = descEdit.getText().toString();
+
+            Date dateCreated = null;
+
+            Long length = null;
+            try {
+                length = getContentResolver().openAssetFileDescriptor(mediaUri, "r").getLength();
+                if(length == -1) {
+                    // Let us find out the long way!
+                    length = Utils.countBytes(getContentResolver().openInputStream(mediaUri));
+                }
+            } catch(IOException e) {
+                throw new RuntimeException(e);
+            }
+
+
+            if(mimeType.startsWith("image/")) {
+                Cursor cursor = getContentResolver().query(mediaUri,
+                        new String[]{MediaStore.Images.ImageColumns.DATE_TAKEN}, null, null, null);
+                if(cursor != null && cursor.getCount() != 0) {
+                    cursor.moveToFirst();
+                    dateCreated = new Date(cursor.getLong(0));
+                } // FIXME: Alternate way of setting dateCreated if this data is not found
+            } /* else if (mimeType.startsWith("audio/")) {
+             Removed Audio implementationf or now
+           }  */
+            Contribution contribution = new Contribution(mediaUri, null, title, description, length, dateCreated, null, app.getCurrentAccount().name, CommonsApplication.DEFAULT_EDIT_SUMMARY);
+            contribution.setSource(source);
+            return contribution;
+        }
+
+        @Override
+        protected void onPostExecute(Contribution contribution) {
+            uploadService.queue(UploadService.ACTION_UPLOAD_FILE, contribution);
+            finish();
+        }
+    }
 
     @Override
     public void onBackPressed() {
@@ -52,33 +127,28 @@ public class ShareActivity extends AuthenticatedActivity {
         
         if(intent.getAction().equals(Intent.ACTION_SEND)) {
             mediaUri = (Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM);
-            final String  source;
             if(intent.hasExtra(UploadService.EXTRA_SOURCE)) {
                 source = intent.getStringExtra(UploadService.EXTRA_SOURCE);
             } else {
                 source = Contribution.SOURCE_EXTERNAL;
             }
             
-            final String mimeType = intent.getType();
+            mimeType = intent.getType();
             if(mimeType.startsWith("image/")) {
                 ImageLoaderTask loader = new ImageLoaderTask(backgroundImageView);
                 loader.execute(mediaUri);
             }
+
+            Intent uploadServiceIntent = new Intent(getApplicationContext(), UploadService.class);
+            uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
+            startService(uploadServiceIntent);
+            bindService(uploadServiceIntent, uploadServiceConnection, Context.BIND_AUTO_CREATE);
                 
             uploadButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent uploadIntent = new Intent(getApplicationContext(), UploadService.class);
-                    uploadIntent.putExtra(UploadService.EXTRA_MEDIA_URI, mediaUri);
-                    uploadIntent.putExtra(UploadService.EXTRA_TARGET_FILENAME, titleEdit.getText().toString());
-                    uploadIntent.putExtra(UploadService.EXTRA_DESCRIPTION, descEdit.getText().toString());
-                    uploadIntent.putExtra(UploadService.EXTRA_MIMETYPE, mimeType);
-                    uploadIntent.putExtra(UploadService.EXTRA_EDIT_SUMMARY, "Mobile upload from Wikimedia Commons Android app");
-                    uploadIntent.putExtra(UploadService.EXTRA_SOURCE, source);
-                    startService(uploadIntent);
-                    Toast startingToast = Toast.makeText(that, R.string.uploading_started, Toast.LENGTH_LONG);
-                    startingToast.show(); 
-                    finish();
+                    StartUploadTask task = new StartUploadTask();
+                    task.execute();
                 }
             });
         }

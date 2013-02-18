@@ -112,44 +112,6 @@ public class UploadService extends HandlerService<Contribution> {
         contributionsProviderClient = this.getContentResolver().acquireContentProviderClient(ContributionsContentProvider.AUTHORITY);
     }
 
-    private Contribution mediaFromIntent(Intent intent) {
-        Bundle extras = intent.getExtras();
-        Uri mediaUri = (Uri) extras.getParcelable(EXTRA_MEDIA_URI);
-        String filename = intent.getStringExtra(EXTRA_TARGET_FILENAME);
-        String description = intent.getStringExtra(EXTRA_DESCRIPTION);
-        String editSummary = intent.getStringExtra(EXTRA_EDIT_SUMMARY);
-        String mimeType = intent.getStringExtra(EXTRA_MIMETYPE);
-        String source = intent.getStringExtra(EXTRA_SOURCE);
-        Date dateCreated = null;
-
-        Long length = null;
-        try {
-            length = this.getContentResolver().openAssetFileDescriptor(mediaUri, "r").getLength();
-            if(length == -1) {
-                // Let us find out the long way!
-                length = Utils.countBytes(this.getContentResolver().openInputStream(mediaUri));
-            }
-        } catch(IOException e) {
-            throw new RuntimeException(e);
-        }
-
-
-        Log.d("Commons", "MimeType is " + mimeType);
-        if(mimeType.startsWith("image/")) {
-            Cursor cursor = this.getContentResolver().query(mediaUri,
-                    new String[]{MediaStore.Images.ImageColumns.DATE_TAKEN}, null, null, null);
-            if(cursor != null && cursor.getCount() != 0) {
-                cursor.moveToFirst();
-                dateCreated = new Date(cursor.getLong(0));
-            } // FIXME: Alternate way of setting dateCreated if this data is not found
-        } /* else if (mimeType.startsWith("audio/")) {
-             Removed Audio implementationf or now
-           }  */
-        Contribution contribution = new Contribution(mediaUri, null, filename, description, length, dateCreated, null, app.getCurrentAccount().name, editSummary);
-        contribution.setSource(source);
-        return contribution;
-    }
-
     @Override
     protected void handle(int what, Contribution contribution) {
         switch(what) {
@@ -199,10 +161,6 @@ public class UploadService extends HandlerService<Contribution> {
                     new String[]{ String.valueOf(Contribution.STATE_QUEUED), String.valueOf(Contribution.STATE_IN_PROGRESS) }
             );
             Log.d("Commons", "Set " + updated + " uploads to failed");
-        } else {
-
-            Contribution contribution = mediaFromIntent(intent);
-            queue(ACTION_UPLOAD_FILE, contribution);
         }
         return START_REDELIVER_INTENT;
     }
