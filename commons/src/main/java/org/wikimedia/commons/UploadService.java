@@ -148,10 +148,11 @@ public class UploadService extends HandlerService<Contribution> {
 
     }
 
+    private boolean freshStart = true;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if(intent.getAction() == ACTION_START_SERVICE) {
+        if(intent.getAction() == ACTION_START_SERVICE && freshStart) {
             ContentValues failedValues = new ContentValues();
             failedValues.put(Contribution.Table.COLUMN_STATE, Contribution.STATE_FAILED);
 
@@ -161,6 +162,8 @@ public class UploadService extends HandlerService<Contribution> {
                     new String[]{ String.valueOf(Contribution.STATE_QUEUED), String.valueOf(Contribution.STATE_IN_PROGRESS) }
             );
             Log.d("Commons", "Set " + updated + " uploads to failed");
+            Log.d("Commons", "Flags is" + flags + " id is" + startId);
+            freshStart = false;
         }
         return START_REDELIVER_INTENT;
     }
