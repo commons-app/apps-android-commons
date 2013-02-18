@@ -69,7 +69,6 @@ public class EventLog {
                 fullData.put("schema", schema);
                 fullData.put("revision", rev);
                 fullData.put("wiki", "commonswiki");
-                fullData.put("isValid", true); // Hehe
                 fullData.put("event", data);
                 return new URL(CommonsApplication.EVENTLOG_URL + "?" + Utils.urlEncode(fullData.toString()) + ";");
             } catch (MalformedURLException e) {
@@ -90,10 +89,10 @@ public class EventLog {
         return new LogBuilder(schema, revision);
     }
 
-    public static LogBuilder schema(Object[] schema_rev) {
-        if(schema_rev.length != 2) {
+    public static LogBuilder schema(Object[] scid) {
+        if(scid.length != 2) {
             throw new IllegalArgumentException("Needs an object array with schema as first param and revision as second");
         }
-        return schema((String)schema_rev[0], (Long)schema_rev[1]);
+        return schema((String)scid[0], (Long)scid[1]);
     }
 }
