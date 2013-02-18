@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import android.content.ContentResolver;
 import org.wikimedia.commons.CommonsApplication;
+import org.wikimedia.commons.EventLog;
 import org.wikimedia.commons.R;
 import org.wikimedia.commons.R.id;
 import org.wikimedia.commons.R.layout;
@@ -47,6 +48,12 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             Log.d("Commons", "Login done!");
+
+            EventLog.schema(CommonsApplication.EVENT_LOGIN_ATTEMPT)
+                    .param("username", username)
+                    .param("result", result)
+                    .log();
+
             if (result.equals("Success")) {
                 dialog.dismiss();
                 Toast successToast = Toast.makeText(context, R.string.login_success, Toast.LENGTH_SHORT);
@@ -123,7 +130,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 
                 Log.d("Commons", "Login to start!");
                 LoginTask task = new LoginTask(that);
-                 task.execute(canonicalUsername, password);
+                task.execute(canonicalUsername, password);
             }
         });
     }
