@@ -169,9 +169,7 @@ public class ShareActivity extends AuthenticatedActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Actionbar overlay on top of imageview (should be called before .setcontentview)
-        requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
-        
+
         setContentView(R.layout.activity_share);
         
         app = (CommonsApplication)this.getApplicationContext();
