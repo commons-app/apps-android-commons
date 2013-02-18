@@ -25,12 +25,6 @@ public class UploadService extends HandlerService<Contribution> {
 
     private static final String EXTRA_PREFIX = "org.wikimedia.commons.upload";
 
-    public static final String EXTRA_MEDIA_URI = EXTRA_PREFIX + ".uri";
-    public static final String EXTRA_TARGET_FILENAME = EXTRA_PREFIX + ".filename";
-    public static final String EXTRA_DESCRIPTION = EXTRA_PREFIX + ".description";
-    public static final String EXTRA_EDIT_SUMMARY = EXTRA_PREFIX + ".summary";
-    public static final String EXTRA_MIMETYPE = EXTRA_PREFIX + ".mimetype";
-
     public static final int ACTION_UPLOAD_FILE = 1;
 
     public static final String ACTION_START_SERVICE = EXTRA_PREFIX + ".upload";
