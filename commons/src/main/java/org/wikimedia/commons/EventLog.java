@@ -69,7 +69,6 @@ public class EventLog {
                 fullData.put("schema", schema);
                 fullData.put("revision", rev);
                 fullData.put("wiki", "commonswiki");
-                fullData.put("isValid", true); // Hehe
                 fullData.put("event", data);
                 return new URL(CommonsApplication.EVENTLOG_URL + "?" + Utils.urlEncode(fullData.toString()) + ";");
             } catch (MalformedURLException e) {
