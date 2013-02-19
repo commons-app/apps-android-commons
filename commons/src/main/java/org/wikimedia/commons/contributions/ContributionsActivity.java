@@ -134,8 +134,8 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
 
     @Override
     protected void onDestroy() {
-        unbindService(uploadServiceConnection);
         super.onDestroy();
+        unbindService(uploadServiceConnection);
     }
 
     private GridView contributionsList;

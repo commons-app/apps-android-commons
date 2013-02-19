@@ -190,8 +190,8 @@ public class ShareActivity extends AuthenticatedActivity {
 
     @Override
     protected void onDestroy() {
-        unbindService(uploadServiceConnection);
         super.onDestroy();
+        unbindService(uploadServiceConnection);
     }
 
     @Override
