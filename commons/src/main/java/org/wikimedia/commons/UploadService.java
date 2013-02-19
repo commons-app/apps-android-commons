@@ -3,6 +3,7 @@ package org.wikimedia.commons;
 import java.io.*;
 import java.util.Date;
 
+import android.graphics.BitmapFactory;
 import org.mediawiki.api.*;
 import org.wikimedia.commons.contributions.Contribution;
 import org.wikimedia.commons.contributions.ContributionsActivity;
@@ -34,7 +35,7 @@ public class UploadService extends HandlerService<Contribution> {
     private ContentProviderClient contributionsProviderClient;
     private CommonsApplication app;
 
-    private Notification curProgressNotification;
+    private NotificationCompat.Builder curProgressNotification;
 
     private int toUpload;
 
@@ -47,7 +48,6 @@ public class UploadService extends HandlerService<Contribution> {
 
     private class NotificationUpdateProgressListener implements ProgressListener {
 
-        Notification curNotification;
         String notificationTag;
         boolean notificationTitleChanged;
         Contribution contribution;
@@ -55,8 +55,7 @@ public class UploadService extends HandlerService<Contribution> {
         String notificationProgressTitle;
         String notificationFinishingTitle;
 
-        public NotificationUpdateProgressListener(Notification curNotification, String notificationTag, String notificationProgressTitle, String notificationFinishingTitle, Contribution contribution) {
-            this.curNotification = curNotification;
+        public NotificationUpdateProgressListener(String notificationTag, String notificationProgressTitle, String notificationFinishingTitle, Contribution contribution) {
             this.notificationTag = notificationTag;
             this.notificationProgressTitle = notificationProgressTitle;
             this.notificationFinishingTitle = notificationFinishingTitle;
@@ -66,24 +65,20 @@ public class UploadService extends HandlerService<Contribution> {
         @Override
         public void onProgress(long transferred, long total) {
             Log.d("Commons", String.format("Uploaded %d of %d", transferred, total));
-            RemoteViews curView = curNotification.contentView;
             if(!notificationTitleChanged) {
-                curView.setTextViewText(R.id.uploadNotificationTitle, notificationProgressTitle);
-                if(toUpload != 1) {
-                    curView.setTextViewText(R.id.uploadNotificationsCount, String.format(getString(R.string.uploads_pending_notification_indicator), toUpload));
-                    Log.d("Commons", String.format("%d uploads left", toUpload));
-                }
+                curProgressNotification.setContentTitle(notificationProgressTitle);
+                Log.d("Commons", String.format("%d uploads left", toUpload));
                 notificationTitleChanged = true;
                 contribution.setState(Contribution.STATE_IN_PROGRESS);
             }
             if(transferred == total) {
                 // Completed!
-                curView.setTextViewText(R.id.uploadNotificationTitle, notificationFinishingTitle);
-                notificationManager.notify(NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification);
+                curProgressNotification.setContentTitle(notificationFinishingTitle);
+                curProgressNotification.setProgress(0, 100, true);
             } else {
-                curNotification.contentView.setProgressBar(R.id.uploadNotificationProgress, 100, (int) (((double) transferred / (double) total) * 100), false);
-                notificationManager.notify(NOTIFICATION_UPLOAD_IN_PROGRESS, curNotification);
+                curProgressNotification.setProgress(100, (int) (((double) transferred / (double) total) * 100), false);
             }
+            notificationManager.notify(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification.build());
             contribution.setTransferred(transferred);
             contribution.save();
         }
@@ -129,9 +124,9 @@ public class UploadService extends HandlerService<Contribution> {
                 contribution.save();
                 toUpload++;
                 if (curProgressNotification != null && toUpload != 1) {
-                    curProgressNotification.contentView.setTextViewText(R.id.uploadNotificationsCount, String.format(getString(R.string.uploads_pending_notification_indicator), toUpload));
+                    curProgressNotification.setContentText(String.format(getString(R.string.uploads_pending_notification_indicator), toUpload));
                     Log.d("Commons", String.format("%d uploads left", toUpload));
-                    notificationManager.notify(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification);
+                    notificationManager.notify(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification.build());
                 }
 
                 super.queue(what, contribution);
@@ -166,7 +161,6 @@ public class UploadService extends HandlerService<Contribution> {
         MWApi api = app.getApi();
 
         ApiResult result;
-        RemoteViews notificationView;
         InputStream file = null;
 
         String notificationTag = contribution.getLocalUri().toString();
@@ -178,21 +172,19 @@ public class UploadService extends HandlerService<Contribution> {
             throw new RuntimeException(e);
         }
 
-        notificationView = new RemoteViews(getPackageName(), R.layout.layout_upload_progress);
-        notificationView.setTextViewText(R.id.uploadNotificationTitle, String.format(getString(R.string.upload_progress_notification_title_start), contribution.getFilename()));
-        notificationView.setProgressBar(R.id.uploadNotificationProgress, 100, 0, false);
-
         Log.d("Commons", "Before execution!");
         curProgressNotification = new NotificationCompat.Builder(this).setAutoCancel(true)
                 .setSmallIcon(R.drawable.ic_launcher)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher))
                 .setAutoCancel(true)
-                .setContent(notificationView)
+                .setContentTitle(String.format(getString(R.string.upload_progress_notification_title_start), contribution.getFilename()))
+                .setContentText(String.format(getString(R.string.uploads_pending_notification_indicator), toUpload))
                 .setOngoing(true)
-                .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, ContributionsActivity.class), 0))
-                .setTicker(String.format(getString(R.string.upload_progress_notification_title_in_progress), contribution.getFilename()))
-                .getNotification();
+                .setProgress(100, 0, true)
+                .setContentIntent(PendingIntent.getActivity(getApplicationContext(), 0, new Intent(this, ContributionsActivity.class), 0))
+                .setTicker(String.format(getString(R.string.upload_progress_notification_title_in_progress), contribution.getFilename()));
 
-        this.startForeground(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification);
+        this.startForeground(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification.build());
 
         try {
             if(!api.validateLogin()) {
@@ -208,7 +200,7 @@ public class UploadService extends HandlerService<Contribution> {
                     return;
                 }
             }
-            NotificationUpdateProgressListener notificationUpdater = new NotificationUpdateProgressListener(curProgressNotification, notificationTag,
+            NotificationUpdateProgressListener notificationUpdater = new NotificationUpdateProgressListener(notificationTag,
                     String.format(getString(R.string.upload_progress_notification_title_in_progress), contribution.getFilename()),
                     String.format(getString(R.string.upload_progress_notification_title_finishing), contribution.getFilename()),
                     contribution
@@ -266,7 +258,7 @@ public class UploadService extends HandlerService<Contribution> {
                 .setTicker(String.format(getString(R.string.upload_failed_notification_title), contribution.getFilename()))
                 .setContentTitle(String.format(getString(R.string.upload_failed_notification_title), contribution.getFilename()))
                 .setContentText(getString(R.string.upload_failed_notification_subtitle))
-                .getNotification();
+                .build();
         notificationManager.notify(NOTIFICATION_UPLOAD_FAILED, failureNotification);
 
         contribution.setState(Contribution.STATE_FAILED);
