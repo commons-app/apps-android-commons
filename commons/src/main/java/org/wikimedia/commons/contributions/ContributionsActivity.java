@@ -192,7 +192,7 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
                 Cursor cursor = (Cursor)adapterView.getItemAtPosition(position);
                 Contribution c = Contribution.fromCursor(cursor);
                 if(c.getState() == Contribution.STATE_FAILED) {
-                    uploadService.queue(UploadService.ACTION_UPLOAD_FILE,  c);
+                    uploadService.queue(UploadService.ACTION_UPLOAD_FILE, c);
                     Log.d("Commons", "Restarting for" + c.toContentValues().toString());
                 }
                 Log.d("Commons", "You clicked on:" + c.toContentValues().toString());
