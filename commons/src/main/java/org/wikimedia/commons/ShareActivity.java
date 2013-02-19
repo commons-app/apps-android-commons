@@ -188,6 +188,11 @@ public class ShareActivity extends AuthenticatedActivity {
         super.onResume();
     }
 
+    @Override
+    protected void onDestroy() {
+        unbindService(uploadServiceConnection);
+        super.onDestroy();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
