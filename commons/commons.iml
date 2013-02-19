@@ -53,8 +53,9 @@
     <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.6" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpmime:4.2.2" level="project" />
-    <orderEntry type="library" name="Maven: com.google.android:support-v4:r7" level="project" />
+    <orderEntry type="library" name="Maven: com.actionbarsherlock:actionbarsherlock:apklib:4.2.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: android:android:4.1_r2" level="project" />
+    <orderEntry type="library" name="Maven: android.support:compatibility-v4:11" level="project" />
     <orderEntry type="library" name="Maven: de.akquinet.android.androlog:androlog:1.0.5" level="project" />
     <orderEntry type="library" name="Maven: com.nostra13.universalimageloader:universal-image-loader:1.7.1" level="project" />
     <orderEntry type="library" name="Maven: ch.acra:acra:4.4.0" level="project" />
