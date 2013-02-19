@@ -114,16 +114,7 @@ public class Contribution extends Media {
         }
     }
 
-    public static String makeThumbUrl(String imageUrl, String filename, int width) {
-        // Ugly Hack!
-        // Update: OH DEAR GOD WHAT A HORRIBLE HACK I AM SO SORRY
-        String thumbUrl = imageUrl.replaceFirst("test/", "test/thumb/").replace("commons/", "commons/thumb/") + "/" + width + "px-" + filename.replaceAll("File:", "").replaceAll(" ", "_");
-        if(thumbUrl.endsWith("jpg") || thumbUrl.endsWith("png") || thumbUrl.endsWith("jpeg")) {
-            return thumbUrl;
-        } else {
-            return thumbUrl + ".png";
-        }
-    }
+
     public ContentValues toContentValues() {
         ContentValues cv = new ContentValues();
         cv.put(Table.COLUMN_FILENAME, getFilename());

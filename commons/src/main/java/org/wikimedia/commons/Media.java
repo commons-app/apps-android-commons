@@ -1,6 +1,7 @@
 package org.wikimedia.commons;
 
 import android.net.Uri;
+import org.wikimedia.commons.contributions.Contribution;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -43,7 +44,7 @@ public class Media implements Serializable {
     }
 
     public String getThumbnailUrl(int width) {
-        return String.format("%s/%dpx-%s", imageUrl, width, filename);
+        return Utils.makeThumbUrl(imageUrl, filename, width);
     }
 
 

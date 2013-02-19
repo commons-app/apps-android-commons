@@ -95,21 +95,22 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
             TextView titleView = (TextView)view.findViewById(R.id.contributionTitle);
             TextView stateView = (TextView)view.findViewById(R.id.contributionState);
 
-            String localUri = cursor.getString(COLUMN_LOCALURI);
-            String imageUrl = cursor.getString(COLUMN_IMAGE_URL);
-            String title = cursor.getString(COLUMN_FILENAME);
-            int state = cursor.getInt(COLUMN_STATE);
+            Contribution contribution = Contribution.fromCursor(cursor);
 
-            String actualUrl = TextUtils.isEmpty(imageUrl) ? localUri : Contribution.makeThumbUrl(imageUrl, title, 320);
+            String actualUrl = TextUtils.isEmpty(contribution.getImageUrl()) ? contribution.getLocalUri().toString() : contribution.getThumbnailUrl(320);
             Log.d("Commons", "Trying URL " + actualUrl);
 
+            Log.d("Commons", "For " + contribution.toContentValues());
+
             if(imageView.getTag() == null || !imageView.getTag().equals(actualUrl)) {
+                Log.d("Commons", "Tag is " + imageView.getTag() + " url is " + actualUrl); //+ " equals is " + imageView.getTag().equals(actualUrl) + " the other thing is " + (imageView.getTag() == null));
+
                 ImageLoader.getInstance().displayImage(actualUrl, imageView, contributionDisplayOptions);
                 imageView.setTag(actualUrl);
             }
 
-            titleView.setText(Utils.displayTitleFromTitle(title));
-            switch(state) {
+            titleView.setText(Utils.displayTitleFromTitle(contribution.getFilename()));
+            switch(contribution.getState()) {
                 case Contribution.STATE_COMPLETED:
                     Date uploaded = new Date(cursor.getLong(COLUMN_UPLOADED));
                     stateView.setText(SimpleDateFormat.getDateInstance().format(uploaded));
