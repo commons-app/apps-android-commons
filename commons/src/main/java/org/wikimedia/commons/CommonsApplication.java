@@ -66,6 +66,7 @@ public class CommonsApplication extends Application {
 
     public static MWApi createMWApi() {
         DefaultHttpClient client = new DefaultHttpClient();
+        client.getParams().setParameter(CoreProtocolPNames.USER_AGENT, "Commons/" + APPLICATION_VERSION + " (https://mediawiki.org/wiki/Apps/Commons) Android/" + Build.VERSION.RELEASE);
         return new MWApi(API_URL, client);
     }
 
