@@ -58,8 +58,8 @@ public class CommonsApplication extends Application {
     public static final String IMAGE_URL_BASE = "https://upload.wikimedia.org/wikipedia/test";
     public static final String EVENTLOG_URL = "https://bits.wikimedia.org/event.gif";
 
-    public static final Object[] EVENT_UPLOAD_ATTEMPT = {"MobileAppUploadAttempts", 5241449L};
-    public static final Object[] EVENT_LOGIN_ATTEMPT = {"MobileAppLoginAttempts", 5254859L};
+    public static final Object[] EVENT_UPLOAD_ATTEMPT = {"MobileAppUploadAttempts", 5257716L};
+    public static final Object[] EVENT_LOGIN_ATTEMPT = {"MobileAppLoginAttempts", 5257721L};
 
     public static final String DEFAULT_EDIT_SUMMARY = "Uploaded using Android Commons app";
 

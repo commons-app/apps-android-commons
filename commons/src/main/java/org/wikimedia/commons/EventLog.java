@@ -1,6 +1,8 @@
 package org.wikimedia.commons;
 
 import android.os.AsyncTask;
+import android.os.Build;
+import android.text.TextUtils;
 import de.akquinet.android.androlog.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,6 +45,15 @@ public class EventLog {
         }
     }
 
+    private static final String DEVICE;
+    static {
+        if (Build.MODEL.startsWith(Build.MANUFACTURER)) {
+            DEVICE = Utils.capitalize(Build.MODEL);
+        } else {
+            DEVICE = Utils.capitalize(Build.MANUFACTURER) + " " + Build.MODEL;
+        }
+    }
+
     public static class LogBuilder {
         private JSONObject data;
         private long rev;
@@ -69,6 +80,9 @@ public class EventLog {
                 fullData.put("schema", schema);
                 fullData.put("revision", rev);
                 fullData.put("wiki", "commonswiki");
+                data.put("device", DEVICE);
+                data.put("platform", "Android/" + Build.VERSION.RELEASE);
+                data.put("appversion", "Android/" + CommonsApplication.APPLICATION_VERSION);
                 fullData.put("event", data);
                 return new URL(CommonsApplication.EVENTLOG_URL + "?" + Utils.urlEncode(fullData.toString()) + ";");
             } catch (MalformedURLException e) {
