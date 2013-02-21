@@ -1,12 +1,14 @@
 package org.wikimedia.commons;
 
 import android.net.Uri;
+import android.os.Parcel;
+import android.os.Parcelable;
 import org.wikimedia.commons.contributions.Contribution;
 
 import java.io.Serializable;
 import java.util.Date;
 
-public class Media implements Serializable {
+public class Media implements Parcelable {
 
     protected Media() {
     }
@@ -69,5 +71,31 @@ public class Media implements Serializable {
         this.dateCreated = dateCreated;
         this.dateUploaded = dateUploaded;
         this.creator = creator;
+    }
+
+    public int describeContents() {
+        return 0;
+    }
+
+    public void writeToParcel(Parcel parcel, int flags) {
+        parcel.writeParcelable(localUri, flags);
+        parcel.writeString(imageUrl);
+        parcel.writeString(filename);
+        parcel.writeString(description);
+        parcel.writeLong(dataLength);
+        parcel.writeSerializable(dateCreated);
+        parcel.writeSerializable(dateUploaded);
+        parcel.writeString(creator);
+    }
+
+    public Media(Parcel in) {
+        localUri = (Uri)in.readParcelable(Uri.class.getClassLoader());
+        imageUrl = in.readString();
+        filename = in.readString();
+        description = in.readString();
+        dataLength = in.readLong();
+        dateCreated = (Date) in.readSerializable();
+        dateUploaded = (Date) in.readSerializable();
+        creator = in.readString();
     }
 }

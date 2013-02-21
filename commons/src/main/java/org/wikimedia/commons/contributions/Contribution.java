@@ -8,6 +8,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.*;
+import android.os.Parcel;
 import android.os.RemoteException;
 import android.text.TextUtils;
 import org.wikimedia.commons.CommonsApplication;
@@ -29,8 +30,32 @@ public class Contribution extends Media {
     private ContentProviderClient client;
     private Uri contentUri;
     private String source;
+    private String editSummary;
+    private Date timestamp;
+    private int state;
+    private long transferred;
 
     public EventLog.LogBuilder event;
+
+
+    @Override
+    public void writeToParcel(Parcel parcel, int flags) {
+        super.writeToParcel(parcel, flags);
+        parcel.writeParcelable(contentUri, flags);
+        parcel.writeString(source);
+        parcel.writeSerializable(timestamp);
+        parcel.writeInt(state);
+        parcel.writeLong(transferred);
+    }
+
+    public Contribution(Parcel in) {
+        super(in);
+        contentUri = (Uri)in.readParcelable(Uri.class.getClassLoader());
+        source = in.readString();
+        timestamp = (Date) in.readSerializable();
+        state = in.readInt();
+        transferred = in.readLong();
+    }
 
     public long getTransferred() {
         return transferred;
@@ -40,7 +65,6 @@ public class Contribution extends Media {
         this.transferred = transferred;
     }
 
-    private long transferred;
 
     public String getEditSummary() {
         return editSummary != null ? editSummary : CommonsApplication.DEFAULT_EDIT_SUMMARY;
@@ -49,14 +73,11 @@ public class Contribution extends Media {
     public Uri getContentUri() {
         return contentUri;
     }
-    private String editSummary;
 
     public Date getTimestamp() {
         return timestamp;
     }
 
-    private Date timestamp;
-    private int state;
 
     public Contribution(Uri localUri, String remoteUri, String filename, String description, long dataLength, Date dateCreated, Date dateUploaded, String creator, String editSummary) {
         super(localUri, remoteUri, filename, description, dataLength, dateCreated, dateUploaded, creator);
