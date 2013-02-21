@@ -102,6 +102,11 @@ public class ContributionsListFragment extends SherlockFragment {
         contributionsAdapter.swapCursor(cursor);
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("grid-position", contributionsList.getFirstVisiblePosition());
+    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -116,6 +121,10 @@ public class ContributionsListFragment extends SherlockFragment {
                 .resetViewBeforeLoading().build();
 
         contributionsList.setOnItemClickListener((AdapterView.OnItemClickListener)getActivity());
+        if(savedInstanceState != null) {
+            Log.d("Commons", "Scrolling to " + savedInstanceState.getInt("grid-position"));
+            contributionsList.setSelection(savedInstanceState.getInt("grid-position"));
+        }
 
     }
 }
