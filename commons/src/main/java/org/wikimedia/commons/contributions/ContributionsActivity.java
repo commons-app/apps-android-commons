@@ -1,5 +1,6 @@
 package org.wikimedia.commons.contributions;
 
+import android.*;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.IBinder;
@@ -16,21 +17,27 @@ import android.widget.AdapterView;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import org.wikimedia.commons.*;
+import org.wikimedia.commons.R;
 import org.wikimedia.commons.auth.AuthenticatedActivity;
 import org.wikimedia.commons.auth.WikiAccountAuthenticator;
+import org.wikimedia.commons.media.MediaDetailPagerFragment;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
-// Inherit from SherlockFragmentActivity but not use Fragments. Because Loaders are available only from FragmentActivities
-public class ContributionsActivity extends AuthenticatedActivity implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener {
+public  class       ContributionsActivity
+        extends     AuthenticatedActivity
+        implements  LoaderManager.LoaderCallbacks<Cursor>,
+                    AdapterView.OnItemClickListener,
+                    MediaDetailPagerFragment.MediaDetailProvider {
 
     private final static int SELECT_FROM_GALLERY = 1;
     private final static int SELECT_FROM_CAMERA = 2;
 
     private Cursor allContributions;
     private ContributionsListFragment contributionsList;
+    private MediaDetailPagerFragment mediaDetails;
 
     public ContributionsActivity() {
         super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
@@ -103,6 +110,19 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
         contributionsList = (ContributionsListFragment)getSupportFragmentManager().findFragmentById(R.id.contributionsListFragment);
 
         requestAuthToken();
+    }
+
+    private void showDetail(int i) {
+        if(mediaDetails == null ||!mediaDetails.isVisible()) {
+            mediaDetails = new MediaDetailPagerFragment();
+            this.getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.contributionsFragmentContainer, mediaDetails)
+                    .addToBackStack(null)
+                    .commit();
+            this.getSupportFragmentManager().executePendingTransactions();
+        }
+        mediaDetails.showImage(i);
     }
 
     @Override
@@ -201,6 +221,9 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
         if(c.getState() == Contribution.STATE_FAILED) {
             uploadService.queue(UploadService.ACTION_UPLOAD_FILE, c);
             Log.d("Commons", "Restarting for" + c.toContentValues().toString());
+        } else {
+            Log.d("Commons", "CLicking for " + c.toContentValues());
+            showDetail(position);
         }
         Log.d("Commons", "You clicked on:" + c.toContentValues().toString());
     }
@@ -224,4 +247,15 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
         contributionsList.setCursor(null);
     }
 
+    public Media getItem(int i) {
+        allContributions.moveToPosition(i);
+        return Contribution.fromCursor(allContributions);
+    }
+
+    public int getCount() {
+        if(allContributions == null) {
+            return 0;
+        }
+        return allContributions.getCount();
+    }
 }

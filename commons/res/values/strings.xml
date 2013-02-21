@@ -34,4 +34,5 @@
     <string name="menu_from_camera">Take photo</string>
 
     <string name="provider_contributions">My contributions</string>
+    <string name="share">Share</string>
 </resources>
