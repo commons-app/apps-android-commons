@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent">
+    <GridView android:id="@+id/contributionsList"
+              android:layout_height="fill_parent"
+              android:layout_width="fill_parent"
+              android:stretchMode="columnWidth"
+              android:columnWidth="240dp"
+              android:numColumns="auto_fit"
+              android:listSelector="@null"
+              android:fadingEdge="none"
+            />
+
+</LinearLayout>

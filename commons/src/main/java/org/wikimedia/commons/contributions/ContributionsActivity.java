@@ -1,6 +1,5 @@
 package org.wikimedia.commons.contributions;
 
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.IBinder;
@@ -11,41 +10,27 @@ import android.support.v4.content.Loader;
 import android.content.*;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.content.*;
-import android.support.v4.widget.CursorAdapter;
-import android.support.v4.widget.SimpleCursorAdapter;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.*;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.ActionMode;
+import android.widget.AdapterView;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import org.wikimedia.commons.*;
 import org.wikimedia.commons.auth.AuthenticatedActivity;
 import org.wikimedia.commons.auth.WikiAccountAuthenticator;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 // Inherit from SherlockFragmentActivity but not use Fragments. Because Loaders are available only from FragmentActivities
-public class ContributionsActivity extends AuthenticatedActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class ContributionsActivity extends AuthenticatedActivity implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener {
 
     private final static int SELECT_FROM_GALLERY = 1;
     private final static int SELECT_FROM_CAMERA = 2;
 
-    private TextView progressUpdateTextView;
+    private Cursor allContributions;
+    private ContributionsListFragment contributionsList;
 
     public ContributionsActivity() {
         super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
@@ -63,72 +48,13 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
         }
     };
 
-    private class ContributionAdapter extends CursorAdapter {
 
-        public ContributionAdapter(Context context, Cursor c, int flags) {
-            super(context, c, flags);
-        }
-
-        @Override
-        public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
-            return getLayoutInflater().inflate(R.layout.layout_contribution, viewGroup, false);
-        }
-
-        @Override
-        public void bindView(View view, Context context, Cursor cursor) {
-            ImageView imageView = (ImageView)view.findViewById(R.id.contributionImage);
-            TextView titleView = (TextView)view.findViewById(R.id.contributionTitle);
-            TextView stateView = (TextView)view.findViewById(R.id.contributionState);
-
-            Contribution contribution = Contribution.fromCursor(cursor);
-
-            String actualUrl = TextUtils.isEmpty(contribution.getImageUrl()) ? contribution.getLocalUri().toString() : contribution.getThumbnailUrl(320);
-            Log.d("Commons", "Trying URL " + actualUrl);
-
-            Log.d("Commons", "For " + contribution.toContentValues());
-
-            if(imageView.getTag() == null || !imageView.getTag().equals(actualUrl)) {
-                Log.d("Commons", "Tag is " + imageView.getTag() + " url is " + actualUrl); //+ " equals is " + imageView.getTag().equals(actualUrl) + " the other thing is " + (imageView.getTag() == null));
-
-                ImageLoader.getInstance().displayImage(actualUrl, imageView, contributionDisplayOptions);
-                imageView.setTag(actualUrl);
-            }
-
-            titleView.setText(Utils.displayTitleFromTitle(contribution.getFilename()));
-            switch(contribution.getState()) {
-                case Contribution.STATE_COMPLETED:
-                    Date uploaded = contribution.getDateUploaded();
-                    stateView.setText(SimpleDateFormat.getDateInstance().format(uploaded));
-                    break;
-                case Contribution.STATE_QUEUED:
-                    stateView.setText(R.string.contribution_state_queued);
-                    break;
-                case Contribution.STATE_IN_PROGRESS:
-                    stateView.setText(R.string.contribution_state_starting);
-                    long total = contribution.getDataLength();
-                    long transferred = contribution.getTransferred();
-                    String stateString = String.format(getString(R.string.contribution_state_in_progress), (int)(((double)transferred / (double)total) * 100));
-                    stateView.setText(stateString);
-                    break;
-                case Contribution.STATE_FAILED:
-                    stateView.setText(R.string.contribution_state_failed);
-                    break;
-            }
-
-        }
-    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         unbindService(uploadServiceConnection);
     }
-
-    private GridView contributionsList;
-
-    private ContributionAdapter contributionsAdapter;
-
-    private DisplayImageOptions contributionDisplayOptions;
 
     private String CONTRIBUTION_SELECTION = "";
     /*
@@ -156,34 +82,16 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
     protected void onAuthCookieAcquired(String authCookie) {
         // Do a sync everytime we get here!
         ContentResolver.requestSync(((CommonsApplication)getApplicationContext()).getCurrentAccount(), ContributionsContentProvider.AUTHORITY, new Bundle());
-        contributionDisplayOptions = new DisplayImageOptions.Builder().cacheInMemory()
-                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
-                .displayer(new FadeInBitmapDisplayer(300))
-                .cacheInMemory()
-                .cacheOnDisc()
-                .resetViewBeforeLoading().build();
         Intent uploadServiceIntent = new Intent(this, UploadService.class);
         uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
         startService(uploadServiceIntent);
         bindService(uploadServiceIntent, uploadServiceConnection, Context.BIND_AUTO_CREATE);
 
-        Cursor allContributions = getContentResolver().query(ContributionsContentProvider.BASE_URI, Contribution.Table.ALL_FIELDS, CONTRIBUTION_SELECTION, null, CONTRIBUTION_SORT);
-        contributionsAdapter = new ContributionAdapter(this, allContributions, 0);
-        contributionsList.setAdapter(contributionsAdapter);
+        allContributions = getContentResolver().query(ContributionsContentProvider.BASE_URI, Contribution.Table.ALL_FIELDS, CONTRIBUTION_SELECTION, null, CONTRIBUTION_SORT);
 
         getSupportLoaderManager().initLoader(0, null, this);
 
-        contributionsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long item) {
-                Cursor cursor = (Cursor)adapterView.getItemAtPosition(position);
-                Contribution c = Contribution.fromCursor(cursor);
-                if(c.getState() == Contribution.STATE_FAILED) {
-                    uploadService.queue(UploadService.ACTION_UPLOAD_FILE, c);
-                    Log.d("Commons", "Restarting for" + c.toContentValues().toString());
-                }
-                Log.d("Commons", "You clicked on:" + c.toContentValues().toString());
-            }
-        });
+
     }
 
     @Override
@@ -191,7 +99,8 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
         super.onCreate(savedInstanceState);
         setTitle(R.string.title_activity_contributions);
         setContentView(R.layout.activity_contributions);
-        contributionsList = (GridView)findViewById(R.id.contributionsList);
+
+        contributionsList = (ContributionsListFragment)getSupportFragmentManager().findFragmentById(R.id.contributionsListFragment);
 
         requestAuthToken();
     }
@@ -286,6 +195,16 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
         }
     }
 
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long item) {
+        Cursor cursor = (Cursor)adapterView.getItemAtPosition(position);
+        Contribution c = Contribution.fromCursor(cursor);
+        if(c.getState() == Contribution.STATE_FAILED) {
+            uploadService.queue(UploadService.ACTION_UPLOAD_FILE, c);
+            Log.d("Commons", "Restarting for" + c.toContentValues().toString());
+        }
+        Log.d("Commons", "You clicked on:" + c.toContentValues().toString());
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getSupportMenuInflater().inflate(R.menu.activity_contributions, menu);
@@ -297,11 +216,12 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
     }
 
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
-        contributionsAdapter.swapCursor(cursor);
+        allContributions = cursor;
+        contributionsList.setCursor(cursor);
     }
 
     public void onLoaderReset(Loader<Cursor> cursorLoader) {
-        contributionsAdapter.swapCursor(null);
+        contributionsList.setCursor(null);
     }
 
 }
