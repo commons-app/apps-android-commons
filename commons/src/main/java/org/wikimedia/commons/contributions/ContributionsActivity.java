@@ -65,23 +65,8 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
 
     private class ContributionAdapter extends CursorAdapter {
 
-        private final int COLUMN_FILENAME;
-        private final int COLUMN_LOCALURI;
-        private final int COLUMN_STATE;
-        private final int COLUMN_UPLOADED;
-        private final int COLUMN_TRANSFERRED;
-        private final int COLUMN_LENGTH;
-        private final int COLUMN_IMAGE_URL;
-
         public ContributionAdapter(Context context, Cursor c, int flags) {
             super(context, c, flags);
-            COLUMN_FILENAME = c.getColumnIndex(Contribution.Table.COLUMN_FILENAME);
-            COLUMN_STATE = c.getColumnIndex(Contribution.Table.COLUMN_STATE);
-            COLUMN_LOCALURI = c.getColumnIndex(Contribution.Table.COLUMN_LOCAL_URI);
-            COLUMN_UPLOADED = c.getColumnIndex(Contribution.Table.COLUMN_UPLOADED);
-            COLUMN_LENGTH = c.getColumnIndex(Contribution.Table.COLUMN_LENGTH);
-            COLUMN_TRANSFERRED = c.getColumnIndex(Contribution.Table.COLUMN_TRANSFERRED);
-            COLUMN_IMAGE_URL = c.getColumnIndex(Contribution.Table.COLUMN_IMAGE_URL);
         }
 
         @Override
@@ -112,7 +97,7 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
             titleView.setText(Utils.displayTitleFromTitle(contribution.getFilename()));
             switch(contribution.getState()) {
                 case Contribution.STATE_COMPLETED:
-                    Date uploaded = new Date(cursor.getLong(COLUMN_UPLOADED));
+                    Date uploaded = contribution.getDateUploaded();
                     stateView.setText(SimpleDateFormat.getDateInstance().format(uploaded));
                     break;
                 case Contribution.STATE_QUEUED:
@@ -120,8 +105,8 @@ public class ContributionsActivity extends AuthenticatedActivity implements Load
                     break;
                 case Contribution.STATE_IN_PROGRESS:
                     stateView.setText(R.string.contribution_state_starting);
-                    long total = cursor.getLong(COLUMN_LENGTH);
-                    long transferred = cursor.getLong(COLUMN_TRANSFERRED);
+                    long total = contribution.getDataLength();
+                    long transferred = contribution.getTransferred();
                     String stateString = String.format(getString(R.string.contribution_state_in_progress), (int)(((double)transferred / (double)total) * 100));
                     stateView.setText(stateString);
                     break;
