@@ -68,8 +68,7 @@ public class ContributionsListFragment extends SherlockFragment {
             titleView.setText(Utils.displayTitleFromTitle(contribution.getFilename()));
             switch(contribution.getState()) {
                 case Contribution.STATE_COMPLETED:
-                    Date uploaded = contribution.getDateUploaded();
-                    stateView.setText(SimpleDateFormat.getDateInstance().format(uploaded));
+                    stateView.setText("");
                     break;
                 case Contribution.STATE_QUEUED:
                     stateView.setText(R.string.contribution_state_queued);

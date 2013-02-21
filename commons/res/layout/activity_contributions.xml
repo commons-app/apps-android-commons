@@ -5,6 +5,7 @@
               android:layout_height="match_parent"
               android:orientation="horizontal"
               android:id="@+id/contributionsFragmentContainer"
+              android:background="#000000"
         >
     <fragment
         android:name="org.wikimedia.commons.contributions.ContributionsListFragment"

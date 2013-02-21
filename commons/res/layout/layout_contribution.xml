@@ -4,6 +4,9 @@
               android:orientation="vertical"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
+              android:padding="2dp"
+              android:paddingBottom="0dp"
+              android:background="#000000"
         >
 
     <ImageView android:id="@+id/contributionImage"
@@ -26,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#FFFFFFFF"
                 style="?android:textAppearanceMedium"
-                android:typeface="serif" />
+                />
         <TextView
             android:id="@+id/contributionState"
             android:layout_width="wrap_content"
