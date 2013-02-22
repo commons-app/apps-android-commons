@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.os.IBinder;
 import android.provider.MediaStore;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -30,7 +31,8 @@ public  class       ContributionsActivity
         extends     AuthenticatedActivity
         implements  LoaderManager.LoaderCallbacks<Cursor>,
                     AdapterView.OnItemClickListener,
-                    MediaDetailPagerFragment.MediaDetailProvider {
+                    MediaDetailPagerFragment.MediaDetailProvider,
+                    FragmentManager.OnBackStackChangedListener {
 
     private final static int SELECT_FROM_GALLERY = 1;
     private final static int SELECT_FROM_CAMERA = 2;
@@ -97,8 +99,6 @@ public  class       ContributionsActivity
         allContributions = getContentResolver().query(ContributionsContentProvider.BASE_URI, Contribution.Table.ALL_FIELDS, CONTRIBUTION_SELECTION, null, CONTRIBUTION_SORT);
 
         getSupportLoaderManager().initLoader(0, null, this);
-
-
     }
 
     @Override
@@ -108,6 +108,8 @@ public  class       ContributionsActivity
         setContentView(R.layout.activity_contributions);
 
         contributionsList = (ContributionsListFragment)getSupportFragmentManager().findFragmentById(R.id.contributionsListFragment);
+
+        getSupportFragmentManager().addOnBackStackChangedListener(this);
 
         requestAuthToken();
     }
@@ -210,6 +212,11 @@ public  class       ContributionsActivity
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, lastGeneratedCaptureURI);
                 startActivityForResult(takePictureIntent, SELECT_FROM_CAMERA);
                 return true;
+            case android.R.id.home:
+                if(mediaDetails.isVisible()) {
+                    getSupportFragmentManager().popBackStack();
+                }
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -257,5 +264,13 @@ public  class       ContributionsActivity
             return 0;
         }
         return allContributions.getCount();
+    }
+
+    public void onBackStackChanged() {
+        if(mediaDetails.isVisible()) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        } else {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        }
     }
 }

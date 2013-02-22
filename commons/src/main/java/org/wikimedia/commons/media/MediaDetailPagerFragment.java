@@ -59,8 +59,6 @@ public class MediaDetailPagerFragment extends SherlockFragment {
         setHasOptionsMenu(true);
     }
 
-
-
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
