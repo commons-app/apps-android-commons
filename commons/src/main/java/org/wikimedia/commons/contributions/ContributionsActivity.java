@@ -248,6 +248,8 @@ public  class       ContributionsActivity
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
         allContributions = cursor;
         contributionsList.setCursor(cursor);
+
+        getSupportActionBar().setSubtitle(getResources().getQuantityString(R.plurals.contributions_subtitle, cursor.getCount(), cursor.getCount()));
     }
 
     public void onLoaderReset(Loader<Cursor> cursorLoader) {
