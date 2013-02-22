@@ -9,6 +9,14 @@
               android:background="#000000"
         >
 
+    <TextView android:id="@+id/contributionSequenceNumber"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textSize="98sp"
+              android:textColor="#33FFFFFF"
+              android:typeface="serif"
+              android:layout_gravity="end|bottom"
+            />
     <ImageView android:id="@+id/contributionImage"
                android:layout_width="fill_parent"
                android:layout_height="240dp"

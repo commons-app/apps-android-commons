@@ -50,6 +50,7 @@ public class ContributionsListFragment extends SherlockFragment {
             ImageView imageView = (ImageView)view.findViewById(R.id.contributionImage);
             TextView titleView = (TextView)view.findViewById(R.id.contributionTitle);
             TextView stateView = (TextView)view.findViewById(R.id.contributionState);
+            TextView seqNumView = (TextView)view.findViewById(R.id.contributionSequenceNumber);
 
             Contribution contribution = Contribution.fromCursor(cursor);
 
@@ -66,6 +67,7 @@ public class ContributionsListFragment extends SherlockFragment {
             }
 
             titleView.setText(Utils.displayTitleFromTitle(contribution.getFilename()));
+            seqNumView.setText(String.valueOf(cursor.getPosition() + 1));
             switch(contribution.getState()) {
                 case Contribution.STATE_COMPLETED:
                     stateView.setText("");
