@@ -14,25 +14,16 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
-<!-- Hiding the shadow because we're not doing the Actionbar now
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="12dp"
-            android:layout_marginTop="48dp"
-            android:background="@drawable/actionbar_top_shadow"
-            android:orientation="vertical" >
-        </LinearLayout>
-        -->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="fill_horizontal"
-            android:layout_marginBottom="64dip"
+            android:layout_marginBottom="48dip"
             android:layout_marginLeft="16dip"
             android:layout_marginRight="16dip"
-            android:layout_marginTop="64dip"
-            android:background="@drawable/share_overlay_background_gradient"
+            android:layout_marginTop="48dip"
+            android:background="#EAFFFFFF"
             android:orientation="vertical"
             android:paddingBottom="8dip"
             android:paddingLeft="16dip"
