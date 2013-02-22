@@ -25,7 +25,7 @@
     <string name="upload_failed_notification_subtitle">Tap to retry</string>
     <string name="uploads_pending_notification_indicator">%d files uploading</string>
 
-    <string name="title_activity_contributions">My contributions</string>
+    <string name="title_activity_contributions">My uploads</string>
     <string name="contribution_state_queued">Queued</string>
     <string name="contribution_state_failed">Failed</string>
     <string name="contribution_state_in_progress">%1$d%% complete</string>
@@ -33,11 +33,11 @@
     <string name="menu_from_gallery">From Gallery</string>
     <string name="menu_from_camera">Take photo</string>
 
-    <string name="provider_contributions">My contributions</string>
+    <string name="provider_contributions">My uploads</string>
 
     <plurals name="contributions_subtitle">
-        <item quantity="zero">No contributions yet</item>
-        <item quantity="one">1 file contributed</item>
-        <item quantity="other">%d files contributed</item>
+        <item quantity="zero">No uploads yet</item>
+        <item quantity="one">1 upload</item>
+        <item quantity="other">%d uploads</item>
     </plurals>
 </resources>
