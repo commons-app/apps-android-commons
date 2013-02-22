@@ -46,9 +46,11 @@ public  class       ContributionsActivity
     }
 
     private UploadService uploadService;
+    private boolean isUploadServiceConnected;
     private ServiceConnection uploadServiceConnection = new ServiceConnection() {
         public void onServiceConnected(ComponentName componentName, IBinder binder) {
             uploadService = (UploadService) ((HandlerService.HandlerServiceLocalBinder)binder).getService();
+            isUploadServiceConnected = true;
         }
 
         public void onServiceDisconnected(ComponentName componentName) {
@@ -62,7 +64,9 @@ public  class       ContributionsActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unbindService(uploadServiceConnection);
+        if(isUploadServiceConnected) {
+            unbindService(uploadServiceConnection);
+        }
     }
 
     private String CONTRIBUTION_SELECTION = "";

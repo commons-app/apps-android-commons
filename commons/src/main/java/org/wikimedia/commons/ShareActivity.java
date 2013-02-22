@@ -46,9 +46,11 @@ public class ShareActivity extends AuthenticatedActivity {
     private Uri mediaUri;
 
     private UploadService uploadService;
+    private boolean isUploadServiceConnected;
     private ServiceConnection uploadServiceConnection = new ServiceConnection() {
         public void onServiceConnected(ComponentName componentName, IBinder binder) {
             uploadService = (UploadService) ((HandlerService.HandlerServiceLocalBinder)binder).getService();
+            isUploadServiceConnected = true;
         }
 
         public void onServiceDisconnected(ComponentName componentName) {
@@ -191,7 +193,9 @@ public class ShareActivity extends AuthenticatedActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unbindService(uploadServiceConnection);
+        if(isUploadServiceConnected) {
+            unbindService(uploadServiceConnection);
+        }
     }
 
     @Override
