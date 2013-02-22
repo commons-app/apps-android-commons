@@ -52,42 +52,54 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
         String lastModified = prefs.getString("lastSyncTimestamp", "");
         Date curTime = new Date();
         ApiResult result;
-        try {
-            MWApi.RequestBuilder builder = api.action("query")
-                    .param("list", "logevents")
-                    .param("leaction", "upload/upload")
-                    .param("leprop", "title|timestamp")
-                    .param("leuser", user)
-                    .param("lelimit", getLimit());
-            if(!TextUtils.isEmpty(lastModified)) {
-                builder.param("leend", lastModified);
-            }
-            result = builder.get();
-        } catch (IOException e) {
-            throw new RuntimeException(e); // FIXME: Maybe something else?
-        }
-        Log.d("Commons", "Last modified at " + lastModified);
+        Boolean done = false;
+        String queryContinue = null;
+        while(!done) {
 
-        ArrayList<ApiResult> uploads = result.getNodes("/api/query/logevents/item");
-        Log.d("Commons", uploads.size() + " results!");
-        ArrayList<ContentValues> imageValues = new ArrayList<ContentValues>();
-        for(ApiResult image: uploads) {
-            String filename = image.getString("@title");
-            if(fileExists(contentProviderClient, filename)) {
-                Log.d("Commons", "Skipping " + filename);
-                continue;
+            try {
+                MWApi.RequestBuilder builder = api.action("query")
+                        .param("list", "logevents")
+                        .param("leaction", "upload/upload")
+                        .param("leprop", "title|timestamp")
+                        .param("leuser", user)
+                        .param("lelimit", getLimit());
+                if(!TextUtils.isEmpty(lastModified)) {
+                    builder.param("leend", lastModified);
+                }
+                if(!TextUtils.isEmpty(queryContinue)) {
+                    builder.param("lestart", queryContinue);
+                }
+                result = builder.get();
+            } catch (IOException e) {
+                throw new RuntimeException(e); // FIXME: Maybe something else?
             }
-            String thumbUrl = Utils.makeThumbBaseUrl(filename);
-            Date dateUpdated = Utils.parseMWDate(image.getString("@timestamp"));
-            Contribution contrib = new Contribution(null, thumbUrl, filename, "", -1, dateUpdated, dateUpdated, user, "");
-            contrib.setState(Contribution.STATE_COMPLETED);
-            imageValues.add(contrib.toContentValues());
-        }
+            Log.d("Commons", "Last modified at " + lastModified);
 
-        try {
-            contentProviderClient.bulkInsert(ContributionsContentProvider.BASE_URI, imageValues.toArray(new ContentValues[]{}));
-        } catch (RemoteException e) {
-            throw new RuntimeException(e);
+            ArrayList<ApiResult> uploads = result.getNodes("/api/query/logevents/item");
+            Log.d("Commons", uploads.size() + " results!");
+            ArrayList<ContentValues> imageValues = new ArrayList<ContentValues>();
+            for(ApiResult image: uploads) {
+                String filename = image.getString("@title");
+                if(fileExists(contentProviderClient, filename)) {
+                    Log.d("Commons", "Skipping " + filename);
+                    continue;
+                }
+                String thumbUrl = Utils.makeThumbBaseUrl(filename);
+                Date dateUpdated = Utils.parseMWDate(image.getString("@timestamp"));
+                Contribution contrib = new Contribution(null, thumbUrl, filename, "", -1, dateUpdated, dateUpdated, user, "");
+                contrib.setState(Contribution.STATE_COMPLETED);
+                imageValues.add(contrib.toContentValues());
+            }
+
+            try {
+                contentProviderClient.bulkInsert(ContributionsContentProvider.BASE_URI, imageValues.toArray(new ContentValues[]{}));
+            } catch (RemoteException e) {
+                throw new RuntimeException(e);
+            }
+            queryContinue = result.getString("/api/query-continue/logevents/@lestart");
+            if(TextUtils.isEmpty(queryContinue)) {
+                done = true;
+            }
         }
         prefs.edit().putString("lastSyncTimestamp", Utils.toMWDate(curTime)).apply();
         Log.d("Commons", "Oh hai, everyone! Look, a kitty!");
