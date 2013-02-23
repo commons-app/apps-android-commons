@@ -18,6 +18,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.widget.ShareActionProvider;
 import org.wikimedia.commons.Media;
 import org.wikimedia.commons.R;
+import org.wikimedia.commons.Utils;
 
 public class MediaDetailPagerFragment extends SherlockFragment {
     private ViewPager pager;
@@ -60,8 +61,25 @@ public class MediaDetailPagerFragment extends SherlockFragment {
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.menu_share_current_image:
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                MediaDetailProvider provider = (MediaDetailProvider)getSherlockActivity();
+                Media m = provider.getItem(pager.getCurrentItem());
+                shareIntent.putExtra(Intent.EXTRA_TEXT, m.getDisplayTitle() + " " + m.getDescriptionUrl());
+                startActivity(shareIntent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.fragment_image_detail, menu);
     }
 
     public void showImage(int i) {

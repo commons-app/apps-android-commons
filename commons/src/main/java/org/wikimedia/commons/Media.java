@@ -13,6 +13,11 @@ public class Media implements Parcelable {
     protected Media() {
     }
 
+    public String getDescriptionUrl() {
+        // HACK! Geez
+        return CommonsApplication.HOME_URL + "File:" + Utils.urlEncode(getFilename().replace("File:", "").replace(" ", "_"));
+    }
+
     public Uri getLocalUri() {
         return localUri;
     }
@@ -47,6 +52,10 @@ public class Media implements Parcelable {
 
     public String getThumbnailUrl(int width) {
         return Utils.makeThumbUrl(imageUrl, filename, width);
+    }
+
+    public String getDisplayTitle() {
+        return Utils.displayTitleFromTitle(filename);
     }
 
 
