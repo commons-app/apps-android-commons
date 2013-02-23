@@ -17,6 +17,16 @@ import org.wikimedia.commons.Media;
 
 public class Contribution extends Media {
 
+    public static Creator<Contribution> CREATOR = new Creator<Contribution>() {
+        public Contribution createFromParcel(Parcel parcel) {
+            return new Contribution(parcel);
+        }
+
+        public Contribution[] newArray(int i) {
+            return new Contribution[0];
+        }
+    };
+
     // No need to be bitwise - they're mutually exclusive
     public static final int STATE_COMPLETED = -1;
     public static final int STATE_FAILED = 1;

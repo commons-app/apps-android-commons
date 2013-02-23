@@ -10,7 +10,7 @@ import java.util.Date;
 
 public class Media implements Parcelable {
 
-    public Creator<Media> CREATOR = new Creator<Media>() {
+    public static Creator<Media> CREATOR = new Creator<Media>() {
         public Media createFromParcel(Parcel parcel) {
             return new Media(parcel);
         }
