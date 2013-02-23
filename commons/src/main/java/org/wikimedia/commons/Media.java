@@ -10,6 +10,16 @@ import java.util.Date;
 
 public class Media implements Parcelable {
 
+    public Creator<Media> CREATOR = new Creator<Media>() {
+        public Media createFromParcel(Parcel parcel) {
+            return new Media(parcel);
+        }
+
+        public Media[] newArray(int i) {
+            return new Media[0];
+        }
+    };
+
     protected Media() {
     }
 
