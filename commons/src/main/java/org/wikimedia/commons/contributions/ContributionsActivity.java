@@ -34,8 +34,6 @@ public  class       ContributionsActivity
                     MediaDetailPagerFragment.MediaDetailProvider,
                     FragmentManager.OnBackStackChangedListener {
 
-    private final static int SELECT_FROM_GALLERY = 1;
-    private final static int SELECT_FROM_CAMERA = 2;
 
     private Cursor allContributions;
     private ContributionsListFragment contributionsList;
@@ -94,7 +92,7 @@ public  class       ContributionsActivity
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
         // Do a sync everytime we get here!
-        ContentResolver.requestSync(((CommonsApplication)getApplicationContext()).getCurrentAccount(), ContributionsContentProvider.AUTHORITY, new Bundle());
+        ContentResolver.requestSync(((CommonsApplication) getApplicationContext()).getCurrentAccount(), ContributionsContentProvider.AUTHORITY, new Bundle());
         Intent uploadServiceIntent = new Intent(this, UploadService.class);
         uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
         startService(uploadServiceIntent);
@@ -132,90 +130,8 @@ public  class       ContributionsActivity
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        outState.putParcelable("lastGeneratedCaptureURI", lastGeneratedCaptureURI);
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        lastGeneratedCaptureURI = (Uri) savedInstanceState.getParcelable("lastGeneratedCaptureURI");
-        super.onRestoreInstanceState(savedInstanceState);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch(requestCode) {
-            case SELECT_FROM_GALLERY:
-                if(resultCode == RESULT_OK) {
-                    Intent shareIntent = new Intent(this, ShareActivity.class);
-                    shareIntent.setAction(Intent.ACTION_SEND);
-                    Log.d("Commons", "Type is " + data.getType() + " Uri is " + data.getData());
-                    shareIntent.setType("image/*"); //FIXME: Find out appropriate mime type
-                    shareIntent.putExtra(Intent.EXTRA_STREAM, data.getData());
-                    shareIntent.putExtra(UploadService.EXTRA_SOURCE, Contribution.SOURCE_GALLERY);
-                    startActivity(shareIntent);
-                }
-                break;
-            case SELECT_FROM_CAMERA:
-                if(resultCode == RESULT_OK) {
-                    Intent shareIntent = new Intent(this, ShareActivity.class);
-                    shareIntent.setAction(Intent.ACTION_SEND);
-                    Log.d("Commons", "Uri is " + lastGeneratedCaptureURI);
-                    shareIntent.setType("image/jpeg"); //FIXME: Find out appropriate mime type
-                    shareIntent.putExtra(Intent.EXTRA_STREAM, lastGeneratedCaptureURI);
-                    shareIntent.putExtra(UploadService.EXTRA_SOURCE, Contribution.SOURCE_CAMERA);
-                    startActivity(shareIntent);
-                }
-                break;
-        }
-    }
-
-    // See http://stackoverflow.com/a/5054673/17865 for why this is done
-    private Uri lastGeneratedCaptureURI;
-
-    @Override
-    protected void onAuthFailure() {
-        super.onAuthFailure();
-        finish(); // If authentication failed, we just exit
-    }
-
-    private void reGenerateImageCaptureURI() {
-        String storageState = Environment.getExternalStorageState();
-        if(storageState.equals(Environment.MEDIA_MOUNTED)) {
-
-            String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Commons/images/" + new Date().getTime() + ".jpg";
-            File _photoFile = new File(path);
-            try {
-                if(_photoFile.exists() == false) {
-                    _photoFile.getParentFile().mkdirs();
-                    _photoFile.createNewFile();
-                }
-
-            } catch (IOException e) {
-                Log.e("Commons", "Could not create file: " + path, e);
-            }
-
-            lastGeneratedCaptureURI = Uri.fromFile(_photoFile);
-        }   else {
-            throw new RuntimeException("No external storage found!");
-        }
-    }
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
-            case R.id.menu_from_gallery:
-                Intent pickImageIntent = new Intent(Intent.ACTION_GET_CONTENT);
-                pickImageIntent.setType("image/*");
-                startActivityForResult(pickImageIntent,  SELECT_FROM_GALLERY);
-                return true;
-            case R.id.menu_from_camera:
-                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                reGenerateImageCaptureURI();
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, lastGeneratedCaptureURI);
-                startActivityForResult(takePictureIntent, SELECT_FROM_CAMERA);
-                return true;
             case android.R.id.home:
                 if(mediaDetails.isVisible()) {
                     getSupportFragmentManager().popBackStack();
@@ -225,6 +141,13 @@ public  class       ContributionsActivity
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    @Override
+    protected void onAuthFailure() {
+        super.onAuthFailure();
+        finish(); // If authentication failed, we just exit
+    }
+
 
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long item) {
         Cursor cursor = (Cursor)adapterView.getItemAtPosition(position);
@@ -241,8 +164,7 @@ public  class       ContributionsActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getSupportMenuInflater().inflate(R.menu.activity_contributions, menu);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {

@@ -2,7 +2,7 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/menu_share_current_image"
-          android:showAsAction="always"
+          android:showAsAction="always|withText"
           android:icon="@android:drawable/ic_menu_share"
           android:title="@string/menu_share"
           />

@@ -79,6 +79,7 @@ public class MediaDetailPagerFragment extends SherlockFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear(); // see http://stackoverflow.com/a/8495697/17865
         inflater.inflate(R.menu.fragment_image_detail, menu);
     }
 
