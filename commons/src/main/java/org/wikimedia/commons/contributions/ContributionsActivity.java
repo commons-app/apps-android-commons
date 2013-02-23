@@ -182,12 +182,12 @@ public  class       ContributionsActivity
         contributionsList.setCursor(null);
     }
 
-    public Media getItem(int i) {
+    public Media getMediaAtPosition(int i) {
         allContributions.moveToPosition(i);
         return Contribution.fromCursor(allContributions);
     }
 
-    public int getCount() {
+    public int getTotalMediaCount() {
         if(allContributions == null) {
             return 0;
         }

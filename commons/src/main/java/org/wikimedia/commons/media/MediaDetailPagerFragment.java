@@ -1,6 +1,5 @@
 package org.wikimedia.commons.media;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,22 +11,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.widget.ShareActionProvider;
 import org.wikimedia.commons.Media;
 import org.wikimedia.commons.R;
-import org.wikimedia.commons.Utils;
 
 public class MediaDetailPagerFragment extends SherlockFragment {
     private ViewPager pager;
     private ShareActionProvider shareActionProvider;
 
     public interface MediaDetailProvider {
-        public Media getItem(int i);
-        public int getCount();
+        public Media getMediaAtPosition(int i);
+        public int getTotalMediaCount();
     }
     private class MediaDetailAdapter extends FragmentStatePagerAdapter {
 
@@ -37,13 +34,13 @@ public class MediaDetailPagerFragment extends SherlockFragment {
 
         @Override
         public Fragment getItem(int i) {
-            Media m = ((MediaDetailProvider)getActivity()).getItem(i);
+            Media m = ((MediaDetailProvider)getActivity()).getMediaAtPosition(i);
             return MediaDetailFragment.forMedia((m));
         }
 
         @Override
         public int getCount() {
-            return ((MediaDetailProvider)getActivity()).getCount();
+            return ((MediaDetailProvider)getActivity()).getTotalMediaCount();
         }
     }
 
@@ -64,7 +61,7 @@ public class MediaDetailPagerFragment extends SherlockFragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         MediaDetailProvider provider = (MediaDetailProvider)getSherlockActivity();
-        Media m = provider.getItem(pager.getCurrentItem());
+        Media m = provider.getMediaAtPosition(pager.getCurrentItem());
         switch(item.getItemId()) {
             case R.id.menu_share_current_image:
                 Intent shareIntent = new Intent();
