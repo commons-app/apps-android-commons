@@ -195,7 +195,7 @@ public  class       ContributionsActivity
     }
 
     public void onBackStackChanged() {
-        if(mediaDetails.isVisible()) {
+        if(mediaDetails != null && mediaDetails.isVisible()) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         } else {
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
