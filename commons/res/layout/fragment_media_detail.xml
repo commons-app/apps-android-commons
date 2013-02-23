@@ -6,11 +6,27 @@
              android:layout_height="fill_parent"
              android:background="@android:color/background_dark"
         >
+    <ProgressBar android:id="@+id/mediaDetailImageLoading"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_gravity="center"
+                 android:indeterminate="true"
+                 android:visibility="visible"
+                 />
+
+    <ImageView android:id="@+id/mediaDetailImageFailed"
+               android:layout_height="wrap_content"
+               android:layout_width="wrap_content"
+               android:layout_gravity="center"
+               android:src="@android:drawable/ic_menu_close_clear_cancel"
+               android:visibility="gone"
+               />
 
     <ImageView android:id="@+id/mediaDetailImage"
                android:layout_width="fill_parent"
                android:layout_height="fill_parent"
                android:scaleType="fitCenter"
+               android:visibility="gone"
             />
 
     <RelativeLayout
