@@ -2,6 +2,7 @@ package org.wikimedia.commons.media;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -62,15 +63,21 @@ public class MediaDetailPagerFragment extends SherlockFragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        MediaDetailProvider provider = (MediaDetailProvider)getSherlockActivity();
+        Media m = provider.getItem(pager.getCurrentItem());
         switch(item.getItemId()) {
             case R.id.menu_share_current_image:
                 Intent shareIntent = new Intent();
                 shareIntent.setAction(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
-                MediaDetailProvider provider = (MediaDetailProvider)getSherlockActivity();
-                Media m = provider.getItem(pager.getCurrentItem());
                 shareIntent.putExtra(Intent.EXTRA_TEXT, m.getDisplayTitle() + " " + m.getDescriptionUrl());
                 startActivity(shareIntent);
+                return true;
+            case R.id.menu_browser_current_image:
+                Intent viewIntent = new Intent();
+                viewIntent.setAction(Intent.ACTION_VIEW);
+                viewIntent.setData(Uri.parse(m.getDescriptionUrl()));
+                startActivity(viewIntent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

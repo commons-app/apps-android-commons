@@ -35,6 +35,7 @@
 
     <string name="provider_contributions">My uploads</string>
     <string name="menu_share">Share</string>
+    <string name="menu_open_in_browser">View in Browser</string>
 
     <plurals name="contributions_subtitle">
         <item quantity="zero">No uploads yet</item>
