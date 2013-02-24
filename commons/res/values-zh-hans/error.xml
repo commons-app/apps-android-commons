@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources><string name="crash_dialog_title">共享资源崩溃</string><string name="crash_dialog_text">哎呀。出错啦 ！</string><string name="crash_dialog_comment_prompt">告诉我们你怎么做的，然后通过电子邮件分享给我们。这将帮助我们修好它！</string><string name="crash_dialog_ok_toast">谢谢您！</string></resources>
