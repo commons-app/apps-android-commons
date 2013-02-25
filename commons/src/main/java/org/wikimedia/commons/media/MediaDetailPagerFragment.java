@@ -49,7 +49,23 @@ public class MediaDetailPagerFragment extends SherlockFragment {
         View view = inflater.inflate(R.layout.fragment_media_detail_pager, container, false);
         pager = (ViewPager) view.findViewById(R.id.mediaDetailsPager);
         pager.setAdapter(new MediaDetailAdapter(getChildFragmentManager()));
+        if(savedInstanceState != null) {
+            final int pageNumber = savedInstanceState.getInt("current-page");
+            // Adapter doesn't seem to be loading immediately.
+            // Dear God, please forgive us for our sins
+            view.postDelayed(new Runnable() {
+                public void run() {
+                    pager.setCurrentItem(pageNumber, false);
+                }
+            }, 100);
+        }
         return view;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("current-page", pager.getCurrentItem());
     }
 
     @Override
