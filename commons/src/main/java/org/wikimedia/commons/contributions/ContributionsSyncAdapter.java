@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
+    private static int COMMIT_THRESHOLD = 10;
     public ContributionsSyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
     }
@@ -89,12 +90,23 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                 Contribution contrib = new Contribution(null, thumbUrl, filename, "", -1, dateUpdated, dateUpdated, user, "");
                 contrib.setState(Contribution.STATE_COMPLETED);
                 imageValues.add(contrib.toContentValues());
+
+                if(imageValues.size() % COMMIT_THRESHOLD == 0) {
+                    try {
+                        contentProviderClient.bulkInsert(ContributionsContentProvider.BASE_URI, imageValues.toArray(new ContentValues[]{}));
+                    } catch (RemoteException e) {
+                        throw new RuntimeException(e);
+                    }
+                    imageValues.clear();
+                }
             }
 
-            try {
-                contentProviderClient.bulkInsert(ContributionsContentProvider.BASE_URI, imageValues.toArray(new ContentValues[]{}));
-            } catch (RemoteException e) {
-                throw new RuntimeException(e);
+            if(imageValues.size() != 0) {
+                try {
+                    contentProviderClient.bulkInsert(ContributionsContentProvider.BASE_URI, imageValues.toArray(new ContentValues[]{}));
+                } catch (RemoteException e) {
+                    throw new RuntimeException(e);
+                }
             }
             queryContinue = result.getString("/api/query-continue/logevents/@lestart");
             if(TextUtils.isEmpty(queryContinue)) {
