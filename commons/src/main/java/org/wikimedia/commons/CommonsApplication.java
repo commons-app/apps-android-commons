@@ -122,6 +122,8 @@ public class CommonsApplication extends Application {
             Account[] allAccounts = accountManager.getAccountsByType(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
             if(allAccounts.length != 0) {
                 currentAccount = allAccounts[0];
+            } else {
+                throw new RuntimeException("No accounts found!");
             }
         }
         return currentAccount;
