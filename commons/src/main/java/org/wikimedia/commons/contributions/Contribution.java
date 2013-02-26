@@ -123,9 +123,9 @@ public class Contribution extends Media {
         buffer
                 .append("}}").append("\n")
             .append("== {{int:license-header}} ==\n")
-                .append("{{self|cc-by-sa-3.0}}")
-            ;
-        buffer.append("\n{{Uploaded from Mobile|platform=Android|version=").append(CommonsApplication.APPLICATION_VERSION).append("}}");
+                .append("{{self|cc-by-sa-3.0}}\n\n")
+            .append("{{Uploaded from Mobile|platform=Android|version=").append(CommonsApplication.APPLICATION_VERSION).append("}}\n")
+            .append("{{subst:unc}}");  // Remove when we have categorization
         return buffer.toString();
     }
 
