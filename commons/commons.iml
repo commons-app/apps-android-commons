@@ -46,6 +46,7 @@
       <excludeFolder url="file://$MODULE_DIR$/target/unpack" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: com.actionbarsherlock:actionbarsherlock:apklib:4.2.0" level="project" />
     <orderEntry type="library" name="Maven: org.mediawiki:api:1.2" level="project" />
     <orderEntry type="library" name="Maven: in.yuvi:http.fluent:1.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpclient:4.2.2" level="project" />
