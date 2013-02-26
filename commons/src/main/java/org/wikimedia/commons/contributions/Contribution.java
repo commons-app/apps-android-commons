@@ -112,13 +112,13 @@ public class Contribution extends Media {
         SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd");
         buffer
             .append("== {{int:filedesc}} ==\n")
-                .append("{{Information")
-                    .append("|Description=").append(description)
-                    .append("|source=").append("{{own}}")
-                    .append("|author=[[User:").append(creator).append("]]");
+                .append("{{Information\n")
+                    .append("|Description=").append(description).append("\n")
+                    .append("|source=").append("{{own}}\n")
+                    .append("|author=[[User:").append(creator).append("]]\n");
         if(dateCreated != null) {
             buffer
-                    .append("|date={{According to EXIF data|").append(isoFormat.format(dateCreated)).append("}}");
+                    .append("|date={{According to EXIF data|").append(isoFormat.format(dateCreated)).append("}}\n");
         }
         buffer
                 .append("}}").append("\n")
