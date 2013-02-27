@@ -163,6 +163,8 @@ public class Contribution extends Media {
         cv.put(Table.COLUMN_STATE, getState());
         cv.put(Table.COLUMN_TRANSFERRED, transferred);
         cv.put(Table.COLUMN_SOURCE,  source);
+        cv.put(Table.COLUMN_DESCRIPTION, description);
+        cv.put(Table.COLUMN_CREATOR, creator);
         return cv;
     }
 
@@ -191,6 +193,8 @@ public class Contribution extends Media {
         c.dateUploaded =  cursor.getLong(7) == 0 ? null : new Date(cursor.getLong(7));
         c.transferred = cursor.getLong(8);
         c.source = cursor.getString(9);
+        c.description = cursor.getString(10);
+        c.creator = cursor.getString(11);
         return c;
     }
 
@@ -216,6 +220,8 @@ public class Contribution extends Media {
         public static final String COLUMN_UPLOADED = "uploaded";
         public static final String COLUMN_TRANSFERRED = "transferred"; // Currently transferred number of bytes
         public static final String COLUMN_SOURCE = "source";
+        public static final String COLUMN_DESCRIPTION = "description";
+        public static final String COLUMN_CREATOR = "creator"; // Initial uploader
 
         // NOTE! KEEP IN SAME ORDER AS THEY ARE DEFINED UP THERE. HELPS HARD CODE COLUMN INDICES.
         public static final String[] ALL_FIELDS = {
@@ -228,7 +234,9 @@ public class Contribution extends Media {
                 COLUMN_LENGTH,
                 COLUMN_UPLOADED,
                 COLUMN_TRANSFERRED,
-                COLUMN_SOURCE
+                COLUMN_SOURCE,
+                COLUMN_DESCRIPTION,
+                COLUMN_CREATOR
         };
 
 
@@ -242,7 +250,9 @@ public class Contribution extends Media {
                 + "state INTEGER,"
                 + "length INTEGER,"
                 + "transferred INTEGER,"
-                + "source STRING"
+                + "source STRING,"
+                + "description STRING,"
+                + "creator STRING"
         + ");";
 
 
@@ -250,9 +260,17 @@ public class Contribution extends Media {
             db.execSQL(CREATE_TABLE_STATEMENT);
         }
 
-        public static void onUpdate(SQLiteDatabase db) {
-            // Drop everything and recreate stuff
-            // FIXME: Understatement
+        public static void onUpdate(SQLiteDatabase db, int from, int to) {
+            if(from == to) {
+                return;
+            }
+            if(from == 1) {
+                db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN description STRING;");
+                db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN creator STRING;");
+                from++;
+                onUpdate(db, from, to);
+                return;
+            }
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
             onCreate(db);
         }

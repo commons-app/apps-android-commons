@@ -8,7 +8,7 @@ import org.wikimedia.commons.contributions.Contribution;
 public class DBOpenHelper  extends SQLiteOpenHelper{
 
     private static final String DATABASE_NAME = "commons.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     public DBOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -20,7 +20,7 @@ public class DBOpenHelper  extends SQLiteOpenHelper{
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i2) {
-        Contribution.Table.onUpdate(sqLiteDatabase);
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int from, int to) {
+        Contribution.Table.onUpdate(sqLiteDatabase, from, to);
     }
 }
