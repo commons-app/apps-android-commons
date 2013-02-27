@@ -140,19 +140,22 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         passwordEdit = (EditText) findViewById(R.id.loginPassword);
         final Activity that = this;
 
-        usernameEdit.addTextChangedListener(new TextWatcher() {
+        TextWatcher loginEnabler = new TextWatcher() {
             public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) { }
 
             public void onTextChanged(CharSequence charSequence, int start, int count, int after) { }
 
             public void afterTextChanged(Editable editable) {
-                if(usernameEdit.getText().length() != 0) {
+                if(usernameEdit.getText().length() != 0 && passwordEdit.getText().length() != 0) {
                     loginButton.setEnabled(true);
                 } else {
                     loginButton.setEnabled(false);
                 }
             }
-        });
+        };
+
+        usernameEdit.addTextChangedListener(loginEnabler);
+        passwordEdit.addTextChangedListener(loginEnabler);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
