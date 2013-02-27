@@ -9,6 +9,7 @@ import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import org.wikimedia.commons.auth.AuthenticatedActivity;
 import org.wikimedia.commons.auth.WikiAccountAuthenticator;
 
@@ -139,8 +140,7 @@ public class ShareActivity extends AuthenticatedActivity {
             
             mimeType = intent.getType();
             if(mimeType.startsWith("image/")) {
-                ImageLoaderTask loader = new ImageLoaderTask(backgroundImageView);
-                loader.execute(mediaUri);
+                ImageLoader.getInstance().displayImage(mediaUri.toString(), backgroundImageView);
             }
 
             Intent uploadServiceIntent = new Intent(getApplicationContext(), UploadService.class);
