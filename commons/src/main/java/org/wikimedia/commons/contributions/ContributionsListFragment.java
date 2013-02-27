@@ -117,7 +117,7 @@ public class ContributionsListFragment extends SherlockFragment {
             if(actualImageDrawable != null && actualImageDrawable.getBitmap() != null && actualImageDrawable.getBitmap().hasAlpha()) {
                 views.imageView.setBackgroundResource(android.R.color.white);
             } else {
-                views.imageView.setBackground(null);
+                views.imageView.setBackgroundDrawable(null);
             }
 
             views.titleView.setText(Utils.displayTitleFromTitle(contribution.getFilename()));
