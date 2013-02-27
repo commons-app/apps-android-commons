@@ -89,7 +89,8 @@
                 android:id="@+id/uploadButton"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Upload" />
+                android:enabled="false"
+                android:text="@string/share_upload_button" />
         </LinearLayout>
     </RelativeLayout>
 

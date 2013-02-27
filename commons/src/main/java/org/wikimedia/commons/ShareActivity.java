@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.IBinder;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import org.wikimedia.commons.auth.AuthenticatedActivity;
 import org.wikimedia.commons.auth.WikiAccountAuthenticator;
@@ -180,6 +182,23 @@ public class ShareActivity extends AuthenticatedActivity {
         titleEdit = (EditText)findViewById(R.id.titleEdit);
         descEdit = (EditText)findViewById(R.id.descEdit);
         uploadButton = (Button)findViewById(R.id.uploadButton);
+
+        TextWatcher uploadEnabler = new TextWatcher() {
+            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) { }
+
+            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {}
+
+            public void afterTextChanged(Editable editable) {
+                if(titleEdit.getText().length() != 0) {
+                    uploadButton.setEnabled(true);
+                } else {
+                    uploadButton.setEnabled(false);
+                }
+
+            }
+        };
+
+        titleEdit.addTextChangedListener(uploadEnabler);
         
         requestAuthToken();
     

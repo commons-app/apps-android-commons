@@ -45,6 +45,7 @@
     </string>
     <string name="login_failed_blocked">Sorry, this user has been blocked on Commons</string>
     <string name="login_failed_generic">Login failed</string>
+    <string name="share_upload_button">Upload</string>
 
     <plurals name="contributions_subtitle">
         <item quantity="zero">No uploads yet</item>
