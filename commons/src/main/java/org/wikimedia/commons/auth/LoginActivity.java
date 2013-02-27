@@ -3,6 +3,10 @@ package org.wikimedia.commons.auth;
 import java.io.IOException;
 
 import android.content.ContentResolver;
+import android.text.Editable;
+import android.text.TextWatcher;
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 import org.wikimedia.commons.CommonsApplication;
 import org.wikimedia.commons.EventLog;
 import org.wikimedia.commons.R;
@@ -75,9 +79,25 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 ContentResolver.setSyncAutomatically(account, ContributionsContentProvider.AUTHORITY, true); // Enable sync by default!
                 context.finish();
             } else {
-                Toast failureToast = Toast.makeText(context, R.string.login_failed, Toast.LENGTH_LONG);
+                int response;
+                if(result.equals("NetworkFailure")) {
+                    response = R.string.login_failed_network;
+                } else if(result.equals("NotExists") || result.equals("Illegal") || result.equals("NotExists")) {
+                    response = R.string.login_failed_username;
+                    passwordEdit.setText("");
+                } else if(result.equals("EmptyPass") || result.equals("WrongPass")) {
+                    response = R.string.login_failed_password;
+                    passwordEdit.setText("");
+                } else if(result.equals("Throttled")) {
+                    response = R.string.login_failed_throttled;
+                } else if(result.equals("Blocked")) {
+                    response = R.string.login_failed_blocked;
+                } else {
+                    // Should never really happen
+                    response = R.string.login_failed_generic;
+                }
+                Crouton.makeText(context, response, Style.ALERT, id.loginErrors).show();
                 dialog.dismiss();
-                failureToast.show();
             }
 
         }
@@ -104,7 +124,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 return app.getApi().login(username, password);
             } catch (IOException e) {
                 // Do something better!
-                return "Failure";
+                return "NetworkFailure";
             }
         }
 
@@ -119,6 +139,21 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         usernameEdit = (EditText) findViewById(R.id.loginUsername);
         passwordEdit = (EditText) findViewById(R.id.loginPassword);
         final Activity that = this;
+
+        usernameEdit.addTextChangedListener(new TextWatcher() {
+            public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) { }
+
+            public void onTextChanged(CharSequence charSequence, int start, int count, int after) { }
+
+            public void afterTextChanged(Editable editable) {
+                if(usernameEdit.getText().length() != 0) {
+                    loginButton.setEnabled(true);
+                } else {
+                    loginButton.setEnabled(false);
+                }
+            }
+        });
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

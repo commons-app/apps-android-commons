@@ -30,7 +30,13 @@
                 android:layout_height="fill_parent"
                 android:layout_margin="16dip"
                 android:gravity="center"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+               >
+            <FrameLayout
+                    android:id="@+id/loginErrors"
+                    android:layout_width="fill_parent"
+                    android:layout_height="48dp"
+                    />
 
             <EditText
                     android:id="@+id/loginUsername"
@@ -54,6 +60,7 @@
                     android:id="@+id/loginButton"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:enabled="false"
                     android:text="@string/login" />
 
         </LinearLayout>

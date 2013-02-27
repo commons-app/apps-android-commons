@@ -56,6 +56,11 @@
           <artifactId>acra</artifactId>
           <version>4.4.0</version>
       </dependency>
+      <dependency>
+          <groupId>de.keyboardsurfer.android.widget</groupId>
+          <artifactId>crouton</artifactId>
+          <version>1.7</version>
+      </dependency>
   </dependencies>
 
 <build>
