@@ -72,7 +72,11 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                 }
                 result = builder.get();
             } catch (IOException e) {
-                throw new RuntimeException(e); // FIXME: Maybe something else?
+                // There isn't really much we can do, eh?
+                // FIXME: Perhaps add EventLogging?
+                syncResult.stats.numIoExceptions += 1; // Not sure if this does anything. Shitty docs
+                Log.d("Commons", "Syncing failed due to " + e.toString());
+                return;
             }
             Log.d("Commons", "Last modified at " + lastModified);
 
