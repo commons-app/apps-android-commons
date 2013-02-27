@@ -37,6 +37,8 @@
                 android:layout_height="wrap_content"
                 android:textColor="#FFFFFFFF"
                 style="?android:textAppearanceMedium"
+                android:maxLines="2"
+                android:ellipsize="end"
                 />
         <TextView
             android:id="@+id/contributionState"
