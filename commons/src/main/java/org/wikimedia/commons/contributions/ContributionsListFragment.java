@@ -4,26 +4,28 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.widget.CursorAdapter;
+import android.text.AndroidCharacter;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.*;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import org.wikimedia.commons.R;
@@ -47,6 +49,22 @@ public class ContributionsListFragment extends SherlockFragment {
     private DisplayImageOptions contributionDisplayOptions;
     private Cursor allContributions;
 
+    private static class ContributionViewHolder {
+        final ImageView imageView;
+        final TextView titleView;
+        final TextView stateView;
+        final TextView seqNumView;
+
+        String url;
+
+        ContributionViewHolder(View parent) {
+            imageView = (ImageView)parent.findViewById(R.id.contributionImage);
+            titleView = (TextView)parent.findViewById(R.id.contributionTitle);
+            stateView = (TextView)parent.findViewById(R.id.contributionState);
+            seqNumView = (TextView)parent.findViewById(R.id.contributionSequenceNumber);
+        }
+    }
+
     private class ContributionsListAdapter extends CursorAdapter {
 
         public ContributionsListAdapter(Context context, Cursor c, int flags) {
@@ -55,16 +73,15 @@ public class ContributionsListFragment extends SherlockFragment {
 
         @Override
         public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
-            return getActivity().getLayoutInflater().inflate(R.layout.layout_contribution, viewGroup, false);
+            View parent = getActivity().getLayoutInflater().inflate(R.layout.layout_contribution, viewGroup, false);
+            parent.setTag(new ContributionViewHolder(parent));
+            return parent;
         }
 
         @Override
         public void bindView(View view, Context context, Cursor cursor) {
-            ImageView imageView = (ImageView)view.findViewById(R.id.contributionImage);
-            TextView titleView = (TextView)view.findViewById(R.id.contributionTitle);
-            TextView stateView = (TextView)view.findViewById(R.id.contributionState);
-            TextView seqNumView = (TextView)view.findViewById(R.id.contributionSequenceNumber);
 
+            final ContributionViewHolder views = (ContributionViewHolder)view.getTag();
             Contribution contribution = Contribution.fromCursor(cursor);
 
             String actualUrl = TextUtils.isEmpty(contribution.getImageUrl()) ? contribution.getLocalUri().toString() : contribution.getThumbnailUrl(320);
@@ -72,31 +89,58 @@ public class ContributionsListFragment extends SherlockFragment {
 
             Log.d("Commons", "For " + contribution.toContentValues());
 
-            if(imageView.getTag() == null || !imageView.getTag().equals(actualUrl)) {
-                Log.d("Commons", "Tag is " + imageView.getTag() + " url is " + actualUrl); //+ " equals is " + imageView.getTag().equals(actualUrl) + " the other thing is " + (imageView.getTag() == null));
+            if(views.url == null || !views.url.equals(actualUrl)) {
+                ImageLoader.getInstance().displayImage(actualUrl, views.imageView, contributionDisplayOptions, new ImageLoadingListener() {
+                    public void onLoadingStarted() {
 
-                ImageLoader.getInstance().displayImage(actualUrl, imageView, contributionDisplayOptions);
-                imageView.setTag(actualUrl);
+                    }
+
+                    public void onLoadingFailed(FailReason failReason) {
+
+                    }
+
+                    public void onLoadingComplete(Bitmap bitmap) {
+                        if(bitmap.hasAlpha()) {
+                            views.imageView.setBackgroundResource(android.R.color.white);
+                        }
+                        views.seqNumView.setVisibility(View.GONE);
+                    }
+
+                    public void onLoadingCancelled() {
+
+                    }
+                });
+                views.url = actualUrl;
             }
 
-            titleView.setText(Utils.displayTitleFromTitle(contribution.getFilename()));
-            seqNumView.setText(String.valueOf(cursor.getPosition() + 1));
+            BitmapDrawable actualImageDrawable = (BitmapDrawable)views.imageView.getDrawable();
+            if(actualImageDrawable != null && actualImageDrawable.getBitmap() != null && actualImageDrawable.getBitmap().hasAlpha()) {
+                views.imageView.setBackgroundResource(android.R.color.white);
+            } else {
+                views.imageView.setBackground(null);
+            }
+
+            views.titleView.setText(Utils.displayTitleFromTitle(contribution.getFilename()));
+
+            views.seqNumView.setText(String.valueOf(cursor.getPosition() + 1));
+            views.seqNumView.setVisibility(View.VISIBLE);
+
             switch(contribution.getState()) {
                 case Contribution.STATE_COMPLETED:
-                    stateView.setText("");
+                    views.stateView.setText("");
                     break;
                 case Contribution.STATE_QUEUED:
-                    stateView.setText(R.string.contribution_state_queued);
+                    views.stateView.setText(R.string.contribution_state_queued);
                     break;
                 case Contribution.STATE_IN_PROGRESS:
-                    stateView.setText(R.string.contribution_state_starting);
+                    views.stateView.setText(R.string.contribution_state_starting);
                     long total = contribution.getDataLength();
                     long transferred = contribution.getTransferred();
                     String stateString = String.format(getString(R.string.contribution_state_in_progress), (int)(((double)transferred / (double)total) * 100));
-                    stateView.setText(stateString);
+                    views.stateView.setText(stateString);
                     break;
                 case Contribution.STATE_FAILED:
-                    stateView.setText(R.string.contribution_state_failed);
+                    views.stateView.setText(R.string.contribution_state_failed);
                     break;
             }
 

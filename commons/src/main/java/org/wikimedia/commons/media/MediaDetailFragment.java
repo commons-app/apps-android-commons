@@ -71,6 +71,9 @@ public class MediaDetailFragment extends SherlockFragment {
                 loadingProgress.setVisibility(View.GONE);
                 loadingFailed.setVisibility(View.GONE);
                 image.setVisibility(View.VISIBLE);
+                if(bitmap.hasAlpha()) {
+                    image.setBackgroundResource(android.R.color.white);
+                }
 
             }
 
