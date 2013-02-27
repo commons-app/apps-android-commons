@@ -58,6 +58,7 @@ public class CommonsApplication extends Application {
     public static final String IMAGE_URL_BASE = "https://upload.wikimedia.org/wikipedia/test";
     public static final String HOME_URL = "https://test.wikipedia.org/wiki/";
     public static final String EVENTLOG_URL = "https://bits.wikimedia.org/event.gif";
+    public static final String EVENTLOG_WIKI = "testwiki";
 
     public static final Object[] EVENT_UPLOAD_ATTEMPT = {"MobileAppUploadAttempts", 5257716L};
     public static final Object[] EVENT_LOGIN_ATTEMPT = {"MobileAppLoginAttempts", 5257721L};

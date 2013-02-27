@@ -79,7 +79,7 @@ public class EventLog {
             try {
                 fullData.put("schema", schema);
                 fullData.put("revision", rev);
-                fullData.put("wiki", "commonswiki");
+                fullData.put("wiki", CommonsApplication.EVENTLOG_WIKI);
                 data.put("device", DEVICE);
                 data.put("platform", "Android/" + Build.VERSION.RELEASE);
                 data.put("appversion", "Android/" + CommonsApplication.APPLICATION_VERSION);
