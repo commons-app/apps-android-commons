@@ -2,8 +2,6 @@
 
     <string name="app_name">Wikimedia Commons</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_login">Sign in to Wikimedia Commons</string>
-    <string name="login_subtitle">Login to upload media to Wikimedia Commons</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="login">Log in</string>
