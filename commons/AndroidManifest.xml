@@ -45,7 +45,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
 
                 <data android:mimeType="image/*" />
-               <!-- Remove Audio Support for now <data android:mimeType="audio/*" /> -->
+                <data android:mimeType="audio/ogg" />
             </intent-filter>
         </activity>
         <activity

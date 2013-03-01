@@ -97,9 +97,11 @@ public class ShareActivity extends AuthenticatedActivity {
                     cursor.moveToFirst();
                     dateCreated = new Date(cursor.getLong(0));
                 } // FIXME: Alternate way of setting dateCreated if this data is not found
-            } /* else if (mimeType.startsWith("audio/")) {
-             Removed Audio implementationf or now
-           }  */
+            } else if (mimeType.equals("audio/ogg")) {
+                if(!title.endsWith(".ogg") || !title.endsWith(".oga")) {
+                    title += ".oga";
+                }
+            }
             Contribution contribution = new Contribution(mediaUri, null, title, description, length, dateCreated, null, app.getCurrentAccount().name, CommonsApplication.DEFAULT_EDIT_SUMMARY);
             contribution.setSource(source);
             return contribution;
