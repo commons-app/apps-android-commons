@@ -21,7 +21,10 @@
     <string name="upload_progress_notification_title_finishing">Finishing uploading %1$s</string>
     <string name="upload_failed_notification_title">Uploading %1$s failed</string>
     <string name="upload_failed_notification_subtitle">Tap to view</string>
-    <string name="uploads_pending_notification_indicator">%d files uploading</string>
+    <plurals name="uploads_pending_notification_indicator">
+        <item quantity="one">1 file uploading</item>
+        <item quantity="other">%d files uploading</item>
+    </plurals>
 
     <string name="title_activity_contributions">My uploads</string>
     <string name="contribution_state_queued">Queued</string>
@@ -36,13 +39,15 @@
     <string name="menu_open_in_browser">View in Browser</string>
     <string name="share_title_hint">Title</string>
     <string name="share_description_hint">Description</string>
+
     <string name="login_failed_network">Unable to login - network failure</string>
     <string name="login_failed_username">Unable to login - please check your username</string>
-    <string name="login_failed_password">Unable to login - please heck your password</string>
-    <string name="login_failed_throttled">You have had too many unsuccessfull attempts. Please try again in 5 minutes
+    <string name="login_failed_password">Unable to login - please check your password</string>
+    <string name="login_failed_throttled">Too many unsuccessful attempts. Please try again in a few minutes
     </string>
     <string name="login_failed_blocked">Sorry, this user has been blocked on Commons</string>
     <string name="login_failed_generic">Login failed</string>
+
     <string name="share_upload_button">Upload</string>
 
     <plurals name="contributions_subtitle">

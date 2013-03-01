@@ -67,7 +67,6 @@ public class UploadService extends HandlerService<Contribution> {
             Log.d("Commons", String.format("Uploaded %d of %d", transferred, total));
             if(!notificationTitleChanged) {
                 curProgressNotification.setContentTitle(notificationProgressTitle);
-                Log.d("Commons", String.format("%d uploads left", toUpload));
                 notificationTitleChanged = true;
                 contribution.setState(Contribution.STATE_IN_PROGRESS);
             }
@@ -124,7 +123,7 @@ public class UploadService extends HandlerService<Contribution> {
                 contribution.save();
                 toUpload++;
                 if (curProgressNotification != null && toUpload != 1) {
-                    curProgressNotification.setContentText(String.format(getString(R.string.uploads_pending_notification_indicator), toUpload));
+                    curProgressNotification.setContentText(getResources().getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload));
                     Log.d("Commons", String.format("%d uploads left", toUpload));
                     notificationManager.notify(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification.build());
                 }
@@ -178,7 +177,7 @@ public class UploadService extends HandlerService<Contribution> {
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher))
                 .setAutoCancel(true)
                 .setContentTitle(String.format(getString(R.string.upload_progress_notification_title_start), contribution.getFilename()))
-                .setContentText(String.format(getString(R.string.uploads_pending_notification_indicator), toUpload))
+                .setContentText(getResources().getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload))
                 .setOngoing(true)
                 .setProgress(100, 0, true)
                 .setContentIntent(PendingIntent.getActivity(getApplicationContext(), 0, new Intent(this, ContributionsActivity.class), 0))
