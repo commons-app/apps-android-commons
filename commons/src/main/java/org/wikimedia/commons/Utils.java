@@ -12,10 +12,7 @@ import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.TransformerFactoryConfigurationError;
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.StringWriter;
+import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -96,8 +93,8 @@ public class Utils {
 
     public static String urlEncode(String url) {
         try {
-            return urlCodec.encode(url);
-        } catch (EncoderException e) {
+            return urlCodec.encode(url, "utf-8");
+        } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
     }
