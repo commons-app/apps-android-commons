@@ -1,6 +1,7 @@
 <resources>
 
     <string name="app_name">Wikimedia Commons</string>
+    <string name="app_name_beta">Wikimedia Commons Beta</string>
     <string name="menu_settings">Settings</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
