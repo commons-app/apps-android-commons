@@ -31,7 +31,6 @@
 
         <activity
             android:name=".auth.LoginActivity"
-            android:label="@string/title_activity_login"
             android:theme="@style/NoTitle" >
         </activity>
         <activity
