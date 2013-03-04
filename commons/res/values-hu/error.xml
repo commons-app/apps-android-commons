@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources><string name="crash_dialog_title">Az alkalmazás összeomlott</string><string name="crash_dialog_text">Hoppá! Valami elromlott!</string><string name="crash_dialog_comment_prompt">Kérjük írja meg nekünk emailben, hogy mit csinált a programban. Ez segít kijavítani a hibát!</string><string name="crash_dialog_ok_toast">Köszönjük!</string></resources>
