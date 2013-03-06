@@ -47,7 +47,7 @@ public class MediaDetailFragment extends SherlockFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if(media == null) {
-            media = (Media)savedInstanceState.get("media");
+            media = (Media)savedInstanceState.getParcelable("media");
         }
         View view = inflater.inflate(R.layout.fragment_media_detail, container, false);
         image = (ImageView) view.findViewById(R.id.mediaDetailImage);
