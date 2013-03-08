@@ -2,7 +2,7 @@
 
 ## Build Requirements ##
 
-1. [Android SDK][1] (Level 16)
+1. [Android SDK][1] (Level 15)
 2. [Maven][2]
 
 ## Build Instructions ##
