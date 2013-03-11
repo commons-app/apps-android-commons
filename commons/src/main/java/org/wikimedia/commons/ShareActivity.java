@@ -9,6 +9,7 @@ import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.webkit.MimeTypeMap;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import org.wikimedia.commons.auth.AuthenticatedActivity;
 import org.wikimedia.commons.auth.WikiAccountAuthenticator;
@@ -89,6 +90,13 @@ public class ShareActivity extends AuthenticatedActivity {
                 throw new RuntimeException(e);
             }
 
+            String extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType);
+
+            if(!title.toLowerCase().endsWith(extension.toLowerCase())) {
+                title += "." + extension;
+            }
+
+            Log.d("Commons", "Title is " + title + " mimetype is " + mimeType);
 
             if(mimeType.startsWith("image/")) {
                 Cursor cursor = getContentResolver().query(mediaUri,
@@ -97,10 +105,6 @@ public class ShareActivity extends AuthenticatedActivity {
                     cursor.moveToFirst();
                     dateCreated = new Date(cursor.getLong(0));
                 } // FIXME: Alternate way of setting dateCreated if this data is not found
-            } else if (mimeType.equals("audio/ogg")) {
-                if(!title.endsWith(".ogg") || !title.endsWith(".oga")) {
-                    title += ".oga";
-                }
             }
             Contribution contribution = new Contribution(mediaUri, null, title, description, length, dateCreated, null, app.getCurrentAccount().name, CommonsApplication.DEFAULT_EDIT_SUMMARY);
             contribution.setSource(source);

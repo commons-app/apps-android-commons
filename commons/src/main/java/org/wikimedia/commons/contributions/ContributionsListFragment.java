@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.widget.CursorAdapter;
-import android.text.AndroidCharacter;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -176,8 +175,8 @@ public class ContributionsListFragment extends SherlockFragment {
                 if(resultCode == Activity.RESULT_OK) {
                     Intent shareIntent = new Intent(getActivity(), ShareActivity.class);
                     shareIntent.setAction(Intent.ACTION_SEND);
-                    Log.d("Commons", "Type is " + data.getType() + " Uri is " + data.getData());
-                    shareIntent.setType("image/*"); //FIXME: Find out appropriate mime type
+
+                    shareIntent.setType(getActivity().getContentResolver().getType(data.getData()));
                     shareIntent.putExtra(Intent.EXTRA_STREAM, data.getData());
                     shareIntent.putExtra(UploadService.EXTRA_SOURCE, Contribution.SOURCE_GALLERY);
                     startActivity(shareIntent);
