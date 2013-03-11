@@ -1,5 +1,9 @@
 # Wikimedia Commons for Android
 
+## v1.0 beta 3
+- Fix reported crashes
+- i18n updates
+
 ## v1.0 beta 2
 
 - Fix bug with non-ASCII characters
