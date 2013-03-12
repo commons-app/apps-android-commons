@@ -15,11 +15,9 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import org.wikimedia.commons.Media;
 import org.wikimedia.commons.R;
-import org.wikimedia.commons.Utils;
 
 public class MediaDetailFragment extends SherlockFragment {
 
@@ -83,7 +81,7 @@ public class MediaDetailFragment extends SherlockFragment {
 
             }
         });
-        title.setText(Utils.displayTitleFromTitle(media.getFilename()));
+        title.setText(media.getDisplayTitle());
 
         return view;
     }

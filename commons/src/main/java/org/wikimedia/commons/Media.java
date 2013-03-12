@@ -7,6 +7,8 @@ import org.wikimedia.commons.contributions.Contribution;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Media implements Parcelable {
 
@@ -21,6 +23,19 @@ public class Media implements Parcelable {
     };
 
     protected Media() {
+    }
+
+
+    public static Pattern displayTitlePattern = Pattern.compile("(.*)(\\.\\w+)", Pattern.CASE_INSENSITIVE);
+    public  String getDisplayTitle() {
+        // FIXME: Gross hack bercause my regex skills suck maybe or I am too lazy who knows
+        String title = filename.replaceFirst("^File:", "");
+        Matcher matcher = displayTitlePattern.matcher(title);
+        if(matcher.matches()) {
+            return matcher.group(1);
+        } else {
+            return title;
+        }
     }
 
     public String getDescriptionUrl() {
@@ -63,11 +78,6 @@ public class Media implements Parcelable {
     public String getThumbnailUrl(int width) {
         return Utils.makeThumbUrl(imageUrl, filename, width);
     }
-
-    public String getDisplayTitle() {
-        return Utils.displayTitleFromTitle(filename);
-    }
-
 
     protected Uri localUri;
     protected String imageUrl;

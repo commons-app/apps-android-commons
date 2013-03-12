@@ -30,7 +30,6 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import org.wikimedia.commons.R;
 import org.wikimedia.commons.ShareActivity;
 import org.wikimedia.commons.UploadService;
-import org.wikimedia.commons.Utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -119,7 +118,7 @@ public class ContributionsListFragment extends SherlockFragment {
                 views.imageView.setBackgroundDrawable(null);
             }
 
-            views.titleView.setText(Utils.displayTitleFromTitle(contribution.getFilename()));
+            views.titleView.setText(contribution.getDisplayTitle());
 
             views.seqNumView.setText(String.valueOf(cursor.getPosition() + 1));
             views.seqNumView.setVisibility(View.VISIBLE);

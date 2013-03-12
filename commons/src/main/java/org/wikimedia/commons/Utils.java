@@ -78,17 +78,6 @@ public class Utils {
         }
     }
 
-    public static Pattern displayTitlePattern = Pattern.compile("\\w+:(.*)(\\.\\w+)", Pattern.CASE_INSENSITIVE);
-    public static String displayTitleFromTitle(String title) {
-        // FIXME: This does not work for pages without an extension!
-        Matcher matcher = displayTitlePattern.matcher(title);
-        if(matcher.matches()) {
-            return matcher.group(1);
-        } else {
-            return title;
-        }
-    }
-
     private static final URLCodec urlCodec = new URLCodec();
 
     public static String urlEncode(String url) {
