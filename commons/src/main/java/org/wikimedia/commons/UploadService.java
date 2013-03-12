@@ -176,12 +176,12 @@ public class UploadService extends HandlerService<Contribution> {
                 .setSmallIcon(R.drawable.ic_launcher)
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher))
                 .setAutoCancel(true)
-                .setContentTitle(String.format(getString(R.string.upload_progress_notification_title_start), contribution.getFilename()))
+                .setContentTitle(String.format(getString(R.string.upload_progress_notification_title_start), contribution.getDisplayTitle()))
                 .setContentText(getResources().getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload))
                 .setOngoing(true)
                 .setProgress(100, 0, true)
                 .setContentIntent(PendingIntent.getActivity(getApplicationContext(), 0, new Intent(this, ContributionsActivity.class), 0))
-                .setTicker(String.format(getString(R.string.upload_progress_notification_title_in_progress), contribution.getFilename()));
+                .setTicker(String.format(getString(R.string.upload_progress_notification_title_in_progress), contribution.getDisplayTitle()));
 
         this.startForeground(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification.build());
 
@@ -200,8 +200,8 @@ public class UploadService extends HandlerService<Contribution> {
                 }
             }
             NotificationUpdateProgressListener notificationUpdater = new NotificationUpdateProgressListener(notificationTag,
-                    String.format(getString(R.string.upload_progress_notification_title_in_progress), contribution.getFilename()),
-                    String.format(getString(R.string.upload_progress_notification_title_finishing), contribution.getFilename()),
+                    String.format(getString(R.string.upload_progress_notification_title_in_progress), contribution.getDisplayTitle()),
+                    String.format(getString(R.string.upload_progress_notification_title_finishing), contribution.getDisplayTitle()),
                     contribution
             );
             result = api.upload(contribution.getFilename(), file, contribution.getDataLength(), contribution.getPageContents(), contribution.getEditSummary(), notificationUpdater);
@@ -254,8 +254,8 @@ public class UploadService extends HandlerService<Contribution> {
                 .setSmallIcon(R.drawable.ic_launcher)
                 .setAutoCancel(true)
                 .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, ContributionsActivity.class), 0))
-                .setTicker(String.format(getString(R.string.upload_failed_notification_title), contribution.getFilename()))
-                .setContentTitle(String.format(getString(R.string.upload_failed_notification_title), contribution.getFilename()))
+                .setTicker(String.format(getString(R.string.upload_failed_notification_title), contribution.getDisplayTitle()))
+                .setContentTitle(String.format(getString(R.string.upload_failed_notification_title), contribution.getDisplayTitle()))
                 .setContentText(getString(R.string.upload_failed_notification_subtitle))
                 .build();
         notificationManager.notify(NOTIFICATION_UPLOAD_FAILED, failureNotification);
