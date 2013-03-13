@@ -83,9 +83,6 @@ public class ContributionsListFragment extends SherlockFragment {
             Contribution contribution = Contribution.fromCursor(cursor);
 
             String actualUrl = TextUtils.isEmpty(contribution.getImageUrl()) ? contribution.getLocalUri().toString() : contribution.getThumbnailUrl(320);
-            Log.d("Commons", "Trying URL " + actualUrl);
-
-            Log.d("Commons", "For " + contribution.toContentValues());
 
             if(views.url == null || !views.url.equals(actualUrl)) {
                 ImageLoader.getInstance().displayImage(actualUrl, views.imageView, contributionDisplayOptions, new ImageLoadingListener() {

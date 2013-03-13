@@ -45,7 +45,6 @@ public class ContributionsContentProvider extends ContentProvider{
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
         queryBuilder.setTables(Contribution.Table.TABLE_NAME);
 
-        Log.d("Commons", "Insert URI is " + uri);
         int uriType = uriMatcher.match(uri);
 
         switch(uriType) {
