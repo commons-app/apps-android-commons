@@ -4,25 +4,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
 import java.net.URI;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import javax.xml.transform.*;
 
 import android.accounts.*;
 import android.app.Application;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 
 import com.nostra13.universalimageloader.cache.disc.impl.TotalSizeLimitedDiscCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.download.HttpClientImageDownloader;
-import com.nostra13.universalimageloader.core.download.ImageDownloader;
 import com.nostra13.universalimageloader.core.download.URLConnectionImageDownloader;
 import com.nostra13.universalimageloader.utils.StorageUtils;
 import org.acra.ACRA;
@@ -30,11 +22,8 @@ import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
 import org.apache.http.client.HttpClient;
 import org.mediawiki.api.*;
-import org.w3c.dom.Node;
 import org.wikimedia.commons.auth.WikiAccountAuthenticator;
-import org.apache.http.HttpVersion;
-import org.apache.http.conn.ConnectionKeepAliveStrategy;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.*;
 import org.apache.http.params.CoreProtocolPNames;
 import org.wikimedia.commons.data.DBOpenHelper;
 
@@ -66,10 +55,14 @@ public class CommonsApplication extends Application {
     public static final String DEFAULT_EDIT_SUMMARY = "Uploaded using Android Commons app";
 
 
-    public static MWApi createMWApi() {
+    public static AbstractHttpClient createHttpClient() {
         DefaultHttpClient client = new DefaultHttpClient();
         client.getParams().setParameter(CoreProtocolPNames.USER_AGENT, "Commons/" + APPLICATION_VERSION + " (https://mediawiki.org/wiki/Apps/Commons) Android/" + Build.VERSION.RELEASE);
-        return new MWApi(API_URL, client);
+        return client;
+    }
+
+    public static MWApi createMWApi() {
+        return new MWApi(API_URL, createHttpClient());
     }
 
 

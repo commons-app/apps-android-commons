@@ -4,6 +4,8 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.text.TextUtils;
 import de.akquinet.android.androlog.Log;
+import in.yuvi.http.fluent.Http;
+import org.apache.http.HttpResponse;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,16 +22,15 @@ public class EventLog {
         protected Boolean doInBackground(LogBuilder... logBuilders) {
 
             boolean  allSuccess = true;
-
-            // Going to simply use the default URLConnection.
-            // This should be as lightweight as possible, and doesn't really do any fancy stuff
+            // Not using the default URL connection, since that seems to have different behavior than the rest of the code
             for(LogBuilder logBuilder: logBuilders) {
                 HttpURLConnection conn;
                 try {
+
                     URL url = logBuilder.toUrl();
-                    conn = (HttpURLConnection) url.openConnection();
-                    int respCode = conn.getResponseCode();
-                    if(respCode != 204) {
+                    HttpResponse response = Http.get(url.toString()).use(CommonsApplication.createHttpClient()).asResponse();
+
+                    if(response.getStatusLine().getStatusCode() != 204) {
                         allSuccess = false;
                     }
                     Log.d("Commons", "EventLog hit " + url.toString());
