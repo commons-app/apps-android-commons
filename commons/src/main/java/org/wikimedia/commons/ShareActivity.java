@@ -92,7 +92,7 @@ public class ShareActivity extends AuthenticatedActivity {
 
             String extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType);
 
-            if(!title.toLowerCase().endsWith(extension.toLowerCase())) {
+            if(extension != null && !title.toLowerCase().endsWith(extension.toLowerCase())) {
                 title += "." + extension;
             }
 
