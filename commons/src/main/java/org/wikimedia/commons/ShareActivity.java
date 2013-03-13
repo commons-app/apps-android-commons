@@ -1,5 +1,6 @@
 package org.wikimedia.commons;
 
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.ServiceConnection;
 import android.database.Cursor;
@@ -11,6 +12,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import org.wikimedia.commons.*;
 import org.wikimedia.commons.auth.AuthenticatedActivity;
 import org.wikimedia.commons.auth.WikiAccountAuthenticator;
 
@@ -64,59 +66,19 @@ public class ShareActivity extends AuthenticatedActivity {
     };
 
 
-    private class StartUploadTask extends AsyncTask<Void, Void, Contribution> {
+    private class SingleStartUploadTask extends StartUploadTask {
 
-        @Override
-        protected void onPreExecute() {
-            Toast startingToast = Toast.makeText(getApplicationContext(), R.string.uploading_started, Toast.LENGTH_LONG);
-            startingToast.show();
-        }
-
-        @Override
-        protected Contribution doInBackground(Void... voids) {
-            String title = titleEdit.getText().toString();
-            String description = descEdit.getText().toString();
-
-            Date dateCreated = null;
-
-            Long length = null;
-            try {
-                length = getContentResolver().openAssetFileDescriptor(mediaUri, "r").getLength();
-                if(length == -1) {
-                    // Let us find out the long way!
-                    length = Utils.countBytes(getContentResolver().openInputStream(mediaUri));
-                }
-            } catch(IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            String extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType);
-
-            if(extension != null && !title.toLowerCase().endsWith(extension.toLowerCase())) {
-                title += "." + extension;
-            }
-
-            Log.d("Commons", "Title is " + title + " mimetype is " + mimeType);
-
-            if(mimeType.startsWith("image/")) {
-                Cursor cursor = getContentResolver().query(mediaUri,
-                        new String[]{MediaStore.Images.ImageColumns.DATE_TAKEN}, null, null, null);
-                if(cursor != null && cursor.getCount() != 0) {
-                    cursor.moveToFirst();
-                    dateCreated = new Date(cursor.getLong(0));
-                } // FIXME: Alternate way of setting dateCreated if this data is not found
-            }
-            Contribution contribution = new Contribution(mediaUri, null, title, description, length, dateCreated, null, app.getCurrentAccount().name, CommonsApplication.DEFAULT_EDIT_SUMMARY);
-            contribution.setSource(source);
-            return contribution;
+        private SingleStartUploadTask(Activity context, UploadService uploadService, String rawTitle, Uri mediaUri, String description, String mimeType, String source) {
+            super(context, uploadService, rawTitle, mediaUri, description, mimeType, source);
         }
 
         @Override
         protected void onPostExecute(Contribution contribution) {
-            uploadService.queue(UploadService.ACTION_UPLOAD_FILE, contribution);
+            super.onPostExecute(contribution);
             finish();
         }
     }
+
 
     @Override
     public void onBackPressed() {
@@ -157,7 +119,7 @@ public class ShareActivity extends AuthenticatedActivity {
             uploadButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    StartUploadTask task = new StartUploadTask();
+                    StartUploadTask task = new SingleStartUploadTask(ShareActivity.this, uploadService, titleEdit.getText().toString(), mediaUri, descEdit.getText().toString(), mimeType,  source);
                     task.execute();
                 }
             });
