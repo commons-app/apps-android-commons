@@ -73,6 +73,12 @@ public class ShareActivity extends AuthenticatedActivity {
         }
 
         @Override
+        protected void onPreExecute() {
+            Toast startingToast = Toast.makeText(getApplicationContext(), R.string.uploading_started, Toast.LENGTH_LONG);
+            startingToast.show();
+        }
+
+        @Override
         protected void onPostExecute(Contribution contribution) {
             super.onPostExecute(contribution);
             finish();

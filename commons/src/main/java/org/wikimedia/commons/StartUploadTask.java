@@ -41,12 +41,6 @@ public class StartUploadTask extends AsyncTask<Void, Void, Contribution> {
     }
 
     @Override
-    protected void onPreExecute() {
-        Toast startingToast = Toast.makeText(context.getApplicationContext(), R.string.uploading_started, Toast.LENGTH_LONG);
-        startingToast.show();
-    }
-
-    @Override
     protected Contribution doInBackground(Void... voids) {
         String title = rawTitle;
 
