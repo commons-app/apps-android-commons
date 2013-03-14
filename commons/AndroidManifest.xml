@@ -48,6 +48,21 @@
             </intent-filter>
         </activity>
         <activity
+                android:name=".MultipleShareActivity"
+                android:icon="@drawable/ic_launcher"
+                android:label="@string/title_activity_share"
+                >
+            <intent-filter>
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="image/*" />
+                <data android:mimeType="audio/ogg" />
+            </intent-filter>
+        </activity>
+
+        <activity
                 android:name=".contributions.ContributionsActivity"
                 android:icon="@drawable/ic_launcher"
                 android:label="@string/app_name"

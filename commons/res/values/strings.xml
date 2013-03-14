@@ -50,10 +50,15 @@
     <string name="login_failed_generic">Login failed</string>
 
     <string name="share_upload_button">Upload</string>
+    <string name="multiple_share_base_title">Base Title</string>
 
     <plurals name="contributions_subtitle">
         <item quantity="zero">No uploads yet</item>
         <item quantity="one">1 upload</item>
         <item quantity="other">%d uploads</item>
+    </plurals>
+    <plurals name="starting_multiple_uploads">
+        <item quantity="one">Starting 1 upload</item>
+        <item quantity="other">Starting %d uploads</item>
     </plurals>
 </resources>
