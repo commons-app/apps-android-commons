@@ -77,7 +77,8 @@ public class UploadService extends HandlerService<Contribution> {
             } else {
                 curProgressNotification.setProgress(100, (int) (((double) transferred / (double) total) * 100), false);
             }
-            notificationManager.notify(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification.build());
+            startForeground(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification.build());
+
             contribution.setTransferred(transferred);
             contribution.save();
         }
@@ -125,7 +126,7 @@ public class UploadService extends HandlerService<Contribution> {
                 if (curProgressNotification != null && toUpload != 1) {
                     curProgressNotification.setContentText(getResources().getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload));
                     Log.d("Commons", String.format("%d uploads left", toUpload));
-                    notificationManager.notify(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification.build());
+                    this.startForeground(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification.build());
                 }
 
                 super.queue(what, contribution);
@@ -211,10 +212,13 @@ public class UploadService extends HandlerService<Contribution> {
             return;
         } finally {
             toUpload--;
+            if(toUpload == 0) {
+                stopForeground(true);
+            }
         }
 
         Log.d("Commons", "Response is" + Utils.getStringFromDOM(result.getDocument()));
-        stopForeground(true);
+
         curProgressNotification = null;
 
 
@@ -249,7 +253,6 @@ public class UploadService extends HandlerService<Contribution> {
     }
 
     private void showFailedNotification(Contribution contribution) {
-        stopForeground(true);
         Notification failureNotification = new NotificationCompat.Builder(this).setAutoCancel(true)
                 .setSmallIcon(R.drawable.ic_launcher)
                 .setAutoCancel(true)
