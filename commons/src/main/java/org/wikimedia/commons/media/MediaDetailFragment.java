@@ -55,30 +55,26 @@ public class MediaDetailFragment extends SherlockFragment {
 
         String actualUrl = TextUtils.isEmpty(media.getImageUrl()) ? media.getLocalUri().toString() : media.getThumbnailUrl(640);
         ImageLoader.getInstance().displayImage(actualUrl, image, displayOptions, new ImageLoadingListener() {
-            public void onLoadingStarted() {
+            public void onLoadingStarted(String s, View view) {
                 loadingProgress.setVisibility(View.VISIBLE);
             }
 
-            public void onLoadingFailed(FailReason failReason) {
+            public void onLoadingFailed(String s, View view, FailReason failReason) {
                 loadingProgress.setVisibility(View.GONE);
                 loadingFailed.setVisibility(View.VISIBLE);
-
             }
 
-            public void onLoadingComplete(Bitmap bitmap) {
+            public void onLoadingComplete(String s, View view, Bitmap bitmap) {
                 loadingProgress.setVisibility(View.GONE);
                 loadingFailed.setVisibility(View.GONE);
                 image.setVisibility(View.VISIBLE);
                 if(bitmap.hasAlpha()) {
                     image.setBackgroundResource(android.R.color.white);
                 }
-
             }
 
-            public void onLoadingCancelled() {
-                // wat?
+            public void onLoadingCancelled(String s, View view) {
                 throw new RuntimeException("Image loading cancelled. But why?");
-
             }
         });
         title.setText(media.getDisplayTitle());

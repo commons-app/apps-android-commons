@@ -26,6 +26,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import org.wikimedia.commons.R;
 import org.wikimedia.commons.ShareActivity;
@@ -85,25 +86,16 @@ public class ContributionsListFragment extends SherlockFragment {
             String actualUrl = TextUtils.isEmpty(contribution.getImageUrl()) ? contribution.getLocalUri().toString() : contribution.getThumbnailUrl(320);
 
             if(views.url == null || !views.url.equals(actualUrl)) {
-                ImageLoader.getInstance().displayImage(actualUrl, views.imageView, contributionDisplayOptions, new ImageLoadingListener() {
-                    public void onLoadingStarted() {
+                ImageLoader.getInstance().displayImage(actualUrl, views.imageView, contributionDisplayOptions, new SimpleImageLoadingListener() {
 
-                    }
-
-                    public void onLoadingFailed(FailReason failReason) {
-
-                    }
-
-                    public void onLoadingComplete(Bitmap bitmap) {
-                        if(bitmap.hasAlpha()) {
+                    @Override
+                    public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                        if(loadedImage.hasAlpha()) {
                             views.imageView.setBackgroundResource(android.R.color.white);
                         }
                         views.seqNumView.setVisibility(View.GONE);
                     }
 
-                    public void onLoadingCancelled() {
-
-                    }
                 });
                 views.url = actualUrl;
             }

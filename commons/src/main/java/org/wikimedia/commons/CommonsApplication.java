@@ -9,13 +9,14 @@ import android.accounts.*;
 import android.app.Application;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 
 import com.nostra13.universalimageloader.cache.disc.impl.TotalSizeLimitedDiscCache;
+import com.nostra13.universalimageloader.cache.memory.impl.LimitedAgeMemoryCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.download.URLConnectionImageDownloader;
 import com.nostra13.universalimageloader.utils.StorageUtils;
 import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
@@ -73,15 +74,6 @@ public class CommonsApplication extends Application {
         return dbOpenHelper;
     }
 
-    public class ContentUriImageDownloader extends URLConnectionImageDownloader {
-        @Override
-        protected InputStream getStreamFromOtherSource(URI imageUri) throws IOException {
-            if(imageUri.getScheme().equals("content")) {
-                return getContentResolver().openInputStream(Uri.parse(imageUri.toString()));
-            }
-            throw new RuntimeException("Not a content URI: " + imageUri);
-        }
-    }
 
     @Override
     public void onCreate() {
@@ -94,7 +86,7 @@ public class CommonsApplication extends Application {
 
         ImageLoaderConfiguration imageLoaderConfiguration = new ImageLoaderConfiguration.Builder(getApplicationContext())
                 .discCache(new TotalSizeLimitedDiscCache(StorageUtils.getCacheDirectory(this), 128 * 1024 * 1024))
-                .imageDownloader(new ContentUriImageDownloader()).build();
+                .build();
         ImageLoader.getInstance().init(imageLoaderConfiguration);
 
         try {
