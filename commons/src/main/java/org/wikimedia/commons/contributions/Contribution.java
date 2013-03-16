@@ -176,7 +176,7 @@ public class Contribution extends Media {
         this.imageUrl = imageUrl;
     }
 
-    private Contribution() {
+    public Contribution() {
         // Empty constructor for being constructed by our static methods
     }
 
@@ -204,6 +204,10 @@ public class Contribution extends Media {
 
     public void setSource(String source) {
         this.source = source;
+    }
+
+    public void setLocalUri(Uri localUri) {
+        this.localUri = localUri;
     }
 
 

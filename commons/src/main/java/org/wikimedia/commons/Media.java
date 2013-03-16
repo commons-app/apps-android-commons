@@ -74,8 +74,16 @@ public class Media implements Parcelable {
         return dataLength;
     }
 
+    public void setDataLength(long dataLength) {
+        this.dataLength = dataLength;
+    }
+
     public Date getDateCreated() {
         return dateCreated;
+    }
+
+    public void setDateCreated(Date date) {
+        this.dateCreated = date;
     }
 
     public Date getDateUploaded() {
