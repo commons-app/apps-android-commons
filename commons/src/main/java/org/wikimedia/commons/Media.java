@@ -7,6 +7,8 @@ import org.wikimedia.commons.contributions.Contribution;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,6 +27,15 @@ public class Media implements Parcelable {
     protected Media() {
     }
 
+    private HashMap<String, Object> tags = new HashMap<String, Object>();
+
+    public Object getTag(String key) {
+        return tags.get(key);
+    }
+
+    public void setTag(String key, Object value) {
+        tags.put(key, value);
+    }
 
     public static Pattern displayTitlePattern = Pattern.compile("(.*)(\\.\\w+)", Pattern.CASE_INSENSITIVE);
     public  String getDisplayTitle() {
@@ -115,6 +126,7 @@ public class Media implements Parcelable {
         parcel.writeSerializable(dateCreated);
         parcel.writeSerializable(dateUploaded);
         parcel.writeString(creator);
+        parcel.writeSerializable(tags);
     }
 
     public Media(Parcel in) {
@@ -126,5 +138,6 @@ public class Media implements Parcelable {
         dateCreated = (Date) in.readSerializable();
         dateUploaded = (Date) in.readSerializable();
         creator = in.readString();
+        tags = (HashMap<String, Object>)in.readSerializable();
     }
 }
