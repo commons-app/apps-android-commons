@@ -242,6 +242,9 @@ public class MultipleShareActivity extends AuthenticatedActivity {
                 up.mimeType = intent.getType();
                 photosList.add(up);
             }
+
+            setTitle(getResources().getQuantityString(R.plurals.multiple_uploads_title, urisList.size(), urisList.size()));
+
             DisplayMetrics screenMetrics = getResources().getDisplayMetrics();
             int screenWidth = screenMetrics.widthPixels;
             int screenHeight = screenMetrics.heightPixels;

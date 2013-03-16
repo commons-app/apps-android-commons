@@ -61,4 +61,8 @@
         <item quantity="one">Starting 1 upload</item>
         <item quantity="other">Starting %d uploads</item>
     </plurals>
+    <plurals name="multiple_uploads_title">
+        <item quantity="one">1 upload</item>
+        <item quantity="other">%d uploads</item>
+    </plurals>
 </resources>
