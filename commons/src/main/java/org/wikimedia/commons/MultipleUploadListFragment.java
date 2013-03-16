@@ -111,6 +111,10 @@ public class MultipleUploadListFragment extends SherlockFragment {
         photosGrid = (GridView)view.findViewById(R.id.multipleShareBackground);
         baseTitle = (EditText)view.findViewById(R.id.multipleBaseTitle);
 
+        if(savedInstanceState != null) {
+            setData(savedInstanceState.<Contribution>getParcelableArrayList("photosData"));
+        }
+
         baseTitle.addTextChangedListener(new TextWatcher() {
             public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
 
@@ -149,6 +153,12 @@ public class MultipleUploadListFragment extends SherlockFragment {
                 .resetViewBeforeLoading().build();
 
 
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList("photosData", photosList);
     }
 
     public void setData(ArrayList<Contribution> photosList) {
