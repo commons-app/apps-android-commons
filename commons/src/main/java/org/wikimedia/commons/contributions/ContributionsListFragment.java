@@ -31,6 +31,7 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import org.wikimedia.commons.R;
 import org.wikimedia.commons.ShareActivity;
 import org.wikimedia.commons.UploadService;
+import org.wikimedia.commons.Utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -245,12 +246,7 @@ public class ContributionsListFragment extends SherlockFragment {
         super.onActivityCreated(savedInstanceState);
 
         contributionsList = (GridView)getView().findViewById(R.id.contributionsList);
-        contributionDisplayOptions = new DisplayImageOptions.Builder().cacheInMemory()
-                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
-                .displayer(new FadeInBitmapDisplayer(300))
-                .cacheInMemory()
-                .cacheOnDisc()
-                .resetViewBeforeLoading().build();
+        contributionDisplayOptions = Utils.getGenericDisplayOptions().build();
 
         contributionsList.setOnItemClickListener((AdapterView.OnItemClickListener)getActivity());
         if(savedInstanceState != null) {

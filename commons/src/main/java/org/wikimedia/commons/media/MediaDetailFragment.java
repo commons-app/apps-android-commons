@@ -18,6 +18,7 @@ import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import org.wikimedia.commons.Media;
 import org.wikimedia.commons.R;
+import org.wikimedia.commons.Utils;
 
 public class MediaDetailFragment extends SherlockFragment {
 
@@ -86,11 +87,6 @@ public class MediaDetailFragment extends SherlockFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        displayOptions = new DisplayImageOptions.Builder().cacheInMemory()
-                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
-                .displayer(new FadeInBitmapDisplayer(300))
-                .cacheInMemory()
-                .cacheOnDisc()
-                .resetViewBeforeLoading().build();
+        displayOptions = Utils.getGenericDisplayOptions().build();
     }
 }

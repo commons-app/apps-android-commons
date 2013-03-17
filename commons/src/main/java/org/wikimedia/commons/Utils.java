@@ -2,6 +2,9 @@ package org.wikimedia.commons;
 
 import android.os.AsyncTask;
 import android.os.Build;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import org.apache.commons.codec.EncoderException;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -76,6 +79,18 @@ public class Utils {
         else {
             task.execute(params);
         }
+    }
+
+    private static DisplayImageOptions.Builder defaultImageOptionsBuilder;
+    public static DisplayImageOptions.Builder getGenericDisplayOptions() {
+        if(defaultImageOptionsBuilder == null) {
+            defaultImageOptionsBuilder = new DisplayImageOptions.Builder().cacheInMemory()
+                    .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
+                    .displayer(new FadeInBitmapDisplayer(300))
+                    .cacheInMemory()
+                    .resetViewBeforeLoading();
+        }
+        return defaultImageOptionsBuilder;
     }
 
     private static final URLCodec urlCodec = new URLCodec();

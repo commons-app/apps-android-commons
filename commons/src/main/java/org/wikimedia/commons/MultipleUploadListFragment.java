@@ -146,13 +146,8 @@ public class MultipleUploadListFragment extends SherlockFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        uploadDisplayOptions = new DisplayImageOptions.Builder().cacheInMemory()
-                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
-                .displayer(new FadeInBitmapDisplayer(300))
-                .cacheInMemory()
-                .resetViewBeforeLoading().build();
 
-
+        uploadDisplayOptions = Utils.getGenericDisplayOptions().build();
     }
 
     @Override
