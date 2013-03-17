@@ -148,10 +148,12 @@ public class MultipleShareActivity extends AuthenticatedActivity {
 
         if(intent.getAction() == Intent.ACTION_SEND_MULTIPLE) {
             ArrayList<Uri> urisList = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
-            for(Uri uri: urisList) {
+            for(int i=0; i < urisList.size(); i++) {
                 Contribution up = new Contribution();
+                Uri uri = urisList.get(i);
                 up.setLocalUri(uri);
                 up.setTag("mimeType", intent.getType());
+                up.setTag("sequence", i);
                 photosList.add(up);
             }
 

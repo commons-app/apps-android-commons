@@ -125,7 +125,7 @@ public class MultipleUploadListFragment extends SherlockFragment {
                     Boolean isDirty = (Boolean)up.getTag("isDirty");
                     if(isDirty == null || !isDirty) {
                         if(!TextUtils.isEmpty(charSequence)) {
-                            up.setFilename(charSequence.toString() + " - " + i);
+                            up.setFilename(charSequence.toString() + " - " + ((Integer)up.getTag("sequence") + 1));
                         } else {
                             up.setFilename("");
                         }
