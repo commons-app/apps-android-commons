@@ -114,7 +114,9 @@ public class MultipleUploadListFragment extends SherlockFragment {
     }
 
     public void notifyDatasetChanged() {
-        photosAdapter.notifyDataSetChanged();
+        if(photosAdapter != null) {
+            photosAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
