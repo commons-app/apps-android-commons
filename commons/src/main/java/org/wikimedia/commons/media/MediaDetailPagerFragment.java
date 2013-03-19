@@ -21,7 +21,7 @@ import org.wikimedia.commons.R;
 public class MediaDetailPagerFragment extends SherlockFragment {
     private ViewPager pager;
     private ShareActionProvider shareActionProvider;
-    private final Boolean editable;
+    private Boolean editable;
 
     public interface MediaDetailProvider {
         public Media getMediaAtPosition(int i);
@@ -75,11 +75,15 @@ public class MediaDetailPagerFragment extends SherlockFragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt("current-page", pager.getCurrentItem());
+        outState.putBoolean("editable", editable);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(savedInstanceState != null) {
+            editable = savedInstanceState.getBoolean("editable");
+        }
         setHasOptionsMenu(true);
     }
 
