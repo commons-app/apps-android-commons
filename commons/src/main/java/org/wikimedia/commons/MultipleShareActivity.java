@@ -212,13 +212,14 @@ public  class       MultipleShareActivity
                 }
             }
 
-            uploadsList =  new MultipleUploadListFragment();
-            this.getSupportFragmentManager()
-                    .beginTransaction()
-                    .add(R.id.uploadsFragmentContainer, uploadsList)
-                    .commit();
-            this.getSupportFragmentManager().executePendingTransactions();
-
+            uploadsList = (MultipleUploadListFragment) getSupportFragmentManager().findFragmentByTag("uploadsList");
+            if(uploadsList == null) {
+                uploadsList =  new MultipleUploadListFragment();
+                this.getSupportFragmentManager()
+                        .beginTransaction()
+                        .add(R.id.uploadsFragmentContainer, uploadsList, "uploadsList")
+                        .commit();
+            }
             setTitle(getResources().getQuantityString(R.plurals.multiple_uploads_title, photosList.size(), photosList.size()));
 
             Intent uploadServiceIntent = new Intent(getApplicationContext(), UploadService.class);
