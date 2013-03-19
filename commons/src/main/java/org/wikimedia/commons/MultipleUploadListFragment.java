@@ -1,5 +1,6 @@
 package org.wikimedia.commons;
 
+import android.content.Context;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.net.Uri;
@@ -11,6 +12,7 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -83,6 +85,18 @@ public class MultipleUploadListFragment extends SherlockFragment {
 
             return view;
 
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // FIXME: Stops the keyboard from being shown 'stale' while
+        View target = getView().findFocus();
+        if (target != null) {
+            InputMethodManager imm = (InputMethodManager) target.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(target.getWindowToken(), 0);
         }
     }
 
