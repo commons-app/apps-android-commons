@@ -12,6 +12,7 @@ import android.os.IBinder;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.*;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -19,18 +20,47 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import org.wikimedia.commons.auth.AuthenticatedActivity;
 import org.wikimedia.commons.auth.WikiAccountAuthenticator;
 import org.wikimedia.commons.contributions.Contribution;
+import org.wikimedia.commons.media.MediaDetailPagerFragment;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-public class MultipleShareActivity extends AuthenticatedActivity {
+public  class       MultipleShareActivity
+        extends     AuthenticatedActivity
+        implements  MediaDetailPagerFragment.MediaDetailProvider,
+                    AdapterView.OnItemClickListener {
     private CommonsApplication app;
-    private ArrayList<Contribution> photosList = new ArrayList<Contribution>();
+    private ArrayList<Contribution> photosList = null;
 
     private MultipleUploadListFragment uploadsList;
+    private MediaDetailPagerFragment mediaDetails;
+
 
     public MultipleShareActivity() {
         super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
+    }
+
+    public Media getMediaAtPosition(int i) {
+        return photosList.get(i);
+    }
+
+    public int getTotalMediaCount() {
+        if(photosList == null) {
+            return 0;
+        }
+        return photosList.size();
+    }
+
+    public void notifyDatasetChanged() {
+        if(uploadsList != null) {
+            uploadsList.notifyDatasetChanged();
+        }
+    }
+
+
+    public void onItemClick(AdapterView<?> adapterView, View view, int index, long item) {
+        showDetail(index);
+
     }
 
     private class StartMultipleUploadTask extends AsyncTask<Void, Integer, Void> {
@@ -126,8 +156,11 @@ public class MultipleShareActivity extends AuthenticatedActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_multiple_uploads);
-        uploadsList = (MultipleUploadListFragment)getSupportFragmentManager().findFragmentById(R.id.uploadsListFragment);
         app = (CommonsApplication)this.getApplicationContext();
+
+        if(savedInstanceState != null) {
+            photosList = savedInstanceState.getParcelableArrayList("uploadsList");
+        }
         requestAuthToken();
 
     }
@@ -141,32 +174,57 @@ public class MultipleShareActivity extends AuthenticatedActivity {
         }
     }
 
+    private void showDetail(int i) {
+        if(mediaDetails == null ||!mediaDetails.isVisible()) {
+            mediaDetails = new MediaDetailPagerFragment(true);
+            this.getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.uploadsFragmentContainer, mediaDetails)
+                    .addToBackStack(null)
+                    .commit();
+            this.getSupportFragmentManager().executePendingTransactions();
+        }
+        mediaDetails.showImage(i);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList("uploadsList", photosList);
+    }
+
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
         app.getApi().setAuthCookie(authCookie);
         Intent intent = getIntent();
 
         if(intent.getAction() == Intent.ACTION_SEND_MULTIPLE) {
-            ArrayList<Uri> urisList = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
-            for(int i=0; i < urisList.size(); i++) {
-                Contribution up = new Contribution();
-                Uri uri = urisList.get(i);
-                up.setLocalUri(uri);
-                up.setTag("mimeType", intent.getType());
-                up.setTag("sequence", i);
-                photosList.add(up);
+            if(photosList == null) {
+                photosList = new ArrayList<Contribution>();
+                ArrayList<Uri> urisList = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
+                for(int i=0; i < urisList.size(); i++) {
+                    Contribution up = new Contribution();
+                    Uri uri = urisList.get(i);
+                    up.setLocalUri(uri);
+                    up.setTag("mimeType", intent.getType());
+                    up.setTag("sequence", i);
+                    photosList.add(up);
+                }
             }
 
-            uploadsList.setData(photosList);
+            uploadsList =  new MultipleUploadListFragment();
+            this.getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.uploadsFragmentContainer, uploadsList)
+                    .commit();
+            this.getSupportFragmentManager().executePendingTransactions();
 
-            setTitle(getResources().getQuantityString(R.plurals.multiple_uploads_title, urisList.size(), urisList.size()));
+            setTitle(getResources().getQuantityString(R.plurals.multiple_uploads_title, photosList.size(), photosList.size()));
 
             Intent uploadServiceIntent = new Intent(getApplicationContext(), UploadService.class);
             uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
             startService(uploadServiceIntent);
             bindService(uploadServiceIntent, uploadServiceConnection, Context.BIND_AUTO_CREATE);
-
-
         }
 
     }

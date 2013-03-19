@@ -18,6 +18,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import org.wikimedia.commons.contributions.Contribution;
+import org.wikimedia.commons.media.MediaDetailPagerFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +30,7 @@ public class MultipleUploadListFragment extends SherlockFragment {
     private EditText baseTitle;
 
     private Point photoSize;
-
-    private ArrayList<Contribution> photosList;
+    private MediaDetailPagerFragment.MediaDetailProvider detailProvider;
 
     private DisplayImageOptions uploadDisplayOptions;
 
@@ -43,18 +43,12 @@ public class MultipleUploadListFragment extends SherlockFragment {
 
     private class PhotoDisplayAdapter extends BaseAdapter {
 
-        private ArrayList<Contribution> urisList;
-
-        private PhotoDisplayAdapter(ArrayList<Contribution> urisList) {
-            this.urisList = urisList;
-        }
-
         public int getCount() {
-            return urisList.size();
+            return detailProvider.getTotalMediaCount();
         }
 
         public Object getItem(int i) {
-            return urisList.get(i);
+            return detailProvider.getMediaAtPosition(i);
         }
 
         public long getItemId(int i) {
@@ -105,23 +99,31 @@ public class MultipleUploadListFragment extends SherlockFragment {
 
     }
 
+    public void notifyDatasetChanged() {
+        photosAdapter.notifyDataSetChanged();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_multiple_uploads_list, container);
+        View view = inflater.inflate(R.layout.fragment_multiple_uploads_list, null);
         photosGrid = (GridView)view.findViewById(R.id.multipleShareBackground);
         baseTitle = (EditText)view.findViewById(R.id.multipleBaseTitle);
 
-        if(savedInstanceState != null) {
-            setData(savedInstanceState.<Contribution>getParcelableArrayList("photosData"));
-        }
+
+        photosAdapter = new PhotoDisplayAdapter();
+        photosGrid.setAdapter(photosAdapter);
+        photosGrid.setOnItemClickListener((AdapterView.OnItemClickListener)getActivity());
+        photoSize = calculatePicDimension(detailProvider.getTotalMediaCount());
+        photosGrid.setColumnWidth(photoSize.x);
 
         baseTitle.addTextChangedListener(new TextWatcher() {
-            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+            public void beforeTextChanged(CharSequence charSequence, int i1, int i2, int i3) {
 
             }
 
-            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                for(Contribution up: photosList) {
+            public void onTextChanged(CharSequence charSequence, int i1, int i2, int i3) {
+                for(int i = 0; i < detailProvider.getTotalMediaCount(); i++) {
+                    Contribution up = (Contribution) detailProvider.getMediaAtPosition(i);
                     Boolean isDirty = (Boolean)up.getTag("isDirty");
                     if(isDirty == null || !isDirty) {
                         if(!TextUtils.isEmpty(charSequence)) {
@@ -131,7 +133,7 @@ public class MultipleUploadListFragment extends SherlockFragment {
                         }
                     }
                 }
-                photosAdapter.notifyDataSetChanged();
+                detailProvider.notifyDatasetChanged();
 
             }
 
@@ -148,22 +150,8 @@ public class MultipleUploadListFragment extends SherlockFragment {
         super.onCreate(savedInstanceState);
 
         uploadDisplayOptions = Utils.getGenericDisplayOptions().build();
+        detailProvider = (MediaDetailPagerFragment.MediaDetailProvider)getActivity();
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putParcelableArrayList("photosData", photosList);
-    }
 
-    public void setData(ArrayList<Contribution> photosList) {
-        if(this.photosList == null) {
-            photosAdapter = new PhotoDisplayAdapter(photosList);
-            photosGrid.setAdapter(photosAdapter);
-        }
-        this.photosList = photosList;
-        photoSize = calculatePicDimension(photosList.size());
-        photosAdapter.notifyDataSetChanged();
-        photosGrid.setColumnWidth(photoSize.x);
-    }
 }

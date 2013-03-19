@@ -39,6 +39,9 @@ public class Media implements Parcelable {
 
     public static Pattern displayTitlePattern = Pattern.compile("(.*)(\\.\\w+)", Pattern.CASE_INSENSITIVE);
     public  String getDisplayTitle() {
+        if(filename == null) {
+            return "";
+        }
         // FIXME: Gross hack bercause my regex skills suck maybe or I am too lazy who knows
         String title = filename.replaceFirst("^File:", "");
         Matcher matcher = displayTitlePattern.matcher(title);
@@ -64,6 +67,10 @@ public class Media implements Parcelable {
 
     public String getFilename() {
         return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 
     public String getDescription() {

@@ -194,6 +194,10 @@ public  class       ContributionsActivity
         return allContributions.getCount();
     }
 
+    public void notifyDatasetChanged() {
+        // Do nothing for now
+    }
+
     public void onBackStackChanged() {
         if(mediaDetails != null && mediaDetails.isVisible()) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);

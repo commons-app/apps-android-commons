@@ -21,10 +21,12 @@ import org.wikimedia.commons.R;
 public class MediaDetailPagerFragment extends SherlockFragment {
     private ViewPager pager;
     private ShareActionProvider shareActionProvider;
+    private final Boolean editable;
 
     public interface MediaDetailProvider {
         public Media getMediaAtPosition(int i);
         public int getTotalMediaCount();
+        public void notifyDatasetChanged();
     }
     private class MediaDetailAdapter extends FragmentStatePagerAdapter {
 
@@ -34,14 +36,21 @@ public class MediaDetailPagerFragment extends SherlockFragment {
 
         @Override
         public Fragment getItem(int i) {
-            Media m = ((MediaDetailProvider)getActivity()).getMediaAtPosition(i);
-            return MediaDetailFragment.forMedia((m));
+            return MediaDetailFragment.forMedia(i, editable);
         }
 
         @Override
         public int getCount() {
             return ((MediaDetailProvider)getActivity()).getTotalMediaCount();
         }
+    }
+
+    public MediaDetailPagerFragment() {
+        this(false);
+    }
+
+    public MediaDetailPagerFragment(Boolean editable) {
+        this.editable = editable;
     }
 
     @Override
@@ -105,6 +114,5 @@ public class MediaDetailPagerFragment extends SherlockFragment {
 
     public void showImage(int i) {
         pager.setCurrentItem(i);
-
     }
 }
