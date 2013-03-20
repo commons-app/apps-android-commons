@@ -35,8 +35,7 @@ public class StartUploadTask extends AsyncTask<Void, Void, Contribution> {
 
         contribution = new Contribution(mediaUri, null, rawTitle, description, -1, null, null, app.getCurrentAccount().name, CommonsApplication.DEFAULT_EDIT_SUMMARY);
         contribution.setTag("mimeType", mimeType);
-
-
+        contribution.setSource(source);
     }
 
     public StartUploadTask(Activity context, UploadService uploadService, Contribution contribution) {
