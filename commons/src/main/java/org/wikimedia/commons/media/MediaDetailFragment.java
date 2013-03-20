@@ -83,6 +83,9 @@ public class MediaDetailFragment extends SherlockFragment {
         title.setFocusable(editable);
         title.setCursorVisible(editable);
         title.setFocusableInTouchMode(editable);
+        if(!editable) {
+            title.setBackgroundDrawable(null);
+        }
 
         String actualUrl = TextUtils.isEmpty(media.getImageUrl()) ? media.getLocalUri().toString() : media.getThumbnailUrl(640);
         ImageLoader.getInstance().displayImage(actualUrl, image, displayOptions, new ImageLoadingListener() {
