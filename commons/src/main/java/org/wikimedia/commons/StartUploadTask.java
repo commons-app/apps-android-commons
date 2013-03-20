@@ -41,6 +41,7 @@ public class StartUploadTask extends AsyncTask<Void, Void, Contribution> {
     public StartUploadTask(Activity context, UploadService uploadService, Contribution contribution) {
         this.context = context;
         this.uploadService = uploadService;
+        this.contribution = contribution;
 
         app = (CommonsApplication)context.getApplicationContext();
     }
@@ -52,7 +53,7 @@ public class StartUploadTask extends AsyncTask<Void, Void, Contribution> {
 
         long length;
         try {
-            if(contribution.getDataLength() == -1) {
+            if(contribution.getDataLength() <= 0) {
                 length = context.getContentResolver().openAssetFileDescriptor(contribution.getLocalUri(), "r").getLength();
                 if(length == -1) {
                     // Let us find out the long way!

@@ -82,7 +82,7 @@ public  class       MultipleShareActivity
                     }
                 }
 
-                StartUploadTask startUploadTask = new StartUploadTask(MultipleShareActivity.this, uploadService,  up.getFilename(),  up.getLocalUri(),  up.getDescription(), (String)up.getTag("mimeType"), Contribution.SOURCE_EXTERNAL);
+                StartUploadTask startUploadTask = new StartUploadTask(MultipleShareActivity.this, uploadService, up);
                 try {
                     Utils.executeAsyncTask(startUploadTask);
                     startUploadTask.get();

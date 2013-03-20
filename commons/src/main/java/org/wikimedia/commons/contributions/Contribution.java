@@ -177,7 +177,7 @@ public class Contribution extends Media {
     }
 
     public Contribution() {
-        // Empty constructor for being constructed by our static methods
+        timestamp = new Date(System.currentTimeMillis());
     }
 
     public static Contribution fromCursor(Cursor cursor) {
