@@ -220,6 +220,7 @@ public class UploadService extends HandlerService<Contribution> {
                 EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT)
                         .param("username", app.getCurrentAccount().name)
                         .param("source", contribution.getSource())
+                        .param("multiple", contribution.getMultiple())
                         .param("result", errorCode)
                         .param("filename", contribution.getFilename())
                         .log();
@@ -238,6 +239,7 @@ public class UploadService extends HandlerService<Contribution> {
                         .param("username", app.getCurrentAccount().name)
                         .param("source", contribution.getSource()) //FIXME
                         .param("filename", contribution.getFilename())
+                        .param("multiple", contribution.getMultiple())
                         .param("result", "success")
                         .log();
             }

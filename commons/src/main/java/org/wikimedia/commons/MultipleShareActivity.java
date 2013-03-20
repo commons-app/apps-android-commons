@@ -218,6 +218,8 @@ public  class       MultipleShareActivity
                     up.setLocalUri(uri);
                     up.setTag("mimeType", intent.getType());
                     up.setTag("sequence", i);
+                    up.setSource(Contribution.SOURCE_EXTERNAL);
+                    up.setMultiple(true);
                     photosList.add(up);
                 }
             }

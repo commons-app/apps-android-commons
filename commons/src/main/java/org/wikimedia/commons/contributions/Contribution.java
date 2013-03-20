@@ -45,6 +45,16 @@ public class Contribution extends Media {
     private int state;
     private long transferred;
 
+    private boolean isMultiple;
+
+    public boolean getMultiple() {
+        return isMultiple;
+    }
+
+    public void setMultiple(boolean multiple) {
+        isMultiple = multiple;
+    }
+
     public EventLog.LogBuilder event;
 
 
@@ -56,6 +66,7 @@ public class Contribution extends Media {
         parcel.writeSerializable(timestamp);
         parcel.writeInt(state);
         parcel.writeLong(transferred);
+        parcel.writeInt(isMultiple ? 1 : 0);
     }
 
     public Contribution(Parcel in) {
@@ -65,6 +76,8 @@ public class Contribution extends Media {
         timestamp = (Date) in.readSerializable();
         state = in.readInt();
         transferred = in.readLong();
+        isMultiple = in.readInt() == 1;
+
     }
 
     public long getTransferred() {
@@ -165,6 +178,7 @@ public class Contribution extends Media {
         cv.put(Table.COLUMN_SOURCE,  source);
         cv.put(Table.COLUMN_DESCRIPTION, description);
         cv.put(Table.COLUMN_CREATOR, creator);
+        cv.put(Table.COLUMN_MULTIPLE, isMultiple ? 1 : 0);
         return cv;
     }
 
@@ -195,6 +209,7 @@ public class Contribution extends Media {
         c.source = cursor.getString(9);
         c.description = cursor.getString(10);
         c.creator = cursor.getString(11);
+        c.isMultiple = cursor.getInt(12) == 1;
         return c;
     }
 
@@ -226,6 +241,7 @@ public class Contribution extends Media {
         public static final String COLUMN_SOURCE = "source";
         public static final String COLUMN_DESCRIPTION = "description";
         public static final String COLUMN_CREATOR = "creator"; // Initial uploader
+        public static final String COLUMN_MULTIPLE = "multiple";
 
         // NOTE! KEEP IN SAME ORDER AS THEY ARE DEFINED UP THERE. HELPS HARD CODE COLUMN INDICES.
         public static final String[] ALL_FIELDS = {
@@ -240,7 +256,8 @@ public class Contribution extends Media {
                 COLUMN_TRANSFERRED,
                 COLUMN_SOURCE,
                 COLUMN_DESCRIPTION,
-                COLUMN_CREATOR
+                COLUMN_CREATOR,
+                COLUMN_MULTIPLE
         };
 
 
@@ -256,7 +273,8 @@ public class Contribution extends Media {
                 + "transferred INTEGER,"
                 + "source STRING,"
                 + "description STRING,"
-                + "creator STRING"
+                + "creator STRING,"
+                + "multiple INTEGER"
         + ");";
 
 
@@ -274,6 +292,9 @@ public class Contribution extends Media {
                 from++;
                 onUpdate(db, from, to);
                 return;
+            }
+            if(from == 2) {
+                db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN multiple INTEGER;");
             }
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
             onCreate(db);
