@@ -1,5 +1,12 @@
 # Wikimedia Commons for Android
 
+## v1.0 beta 4
+- Switched properly to Holo Dark theme
+- Multiple uploads support! Select multiple images from gallery and send 'em here!
+- Update UIL
+- General refactoring for a slightly cleaner codebase
+- i18n updates
+
 ## v1.0 beta 3
 - Fix reported crashes
 - i18n updates
