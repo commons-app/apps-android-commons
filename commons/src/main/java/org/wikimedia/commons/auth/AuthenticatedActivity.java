@@ -16,6 +16,8 @@ public class AuthenticatedActivity extends SherlockFragmentActivity {
     
     String accountType;
     CommonsApplication app;
+
+    private String authCookie;
     
     public AuthenticatedActivity(String accountType) {
        this.accountType = accountType;
@@ -34,6 +36,7 @@ public class AuthenticatedActivity extends SherlockFragmentActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             if(result != null) {
+                authCookie = result;
                 onAuthCookieAcquired(result);
             } else {
                 onAuthFailure();
@@ -104,6 +107,10 @@ public class AuthenticatedActivity extends SherlockFragmentActivity {
         }
     }
     protected void requestAuthToken() {
+        if(authCookie != null) {
+            onAuthCookieAcquired(authCookie);
+            return;
+        }
         AccountManager accountManager = AccountManager.get(this);
         Account curAccount = app.getCurrentAccount();
         if(curAccount == null) {
@@ -125,6 +132,15 @@ public class AuthenticatedActivity extends SherlockFragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         app = (CommonsApplication)this.getApplicationContext();
+        if(savedInstanceState != null) {
+            authCookie = savedInstanceState.getString("authCookie");
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("authCookie", authCookie);
     }
 
     protected void onAuthCookieAcquired(String authCookie) {
