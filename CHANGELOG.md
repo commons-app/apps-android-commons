@@ -3,6 +3,7 @@
 ## v1.0 beta 4
 - Switched properly to Holo Dark theme
 - Multiple uploads support! Select multiple images from gallery and send 'em here!
+- Reduce naming related upload errors
 - Update UIL
 - General refactoring for a slightly cleaner codebase
 - i18n updates
