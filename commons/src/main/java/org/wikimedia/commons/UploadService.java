@@ -206,6 +206,41 @@ public class UploadService extends HandlerService<Contribution> {
                     contribution
             );
             result = api.upload(contribution.getFilename(), file, contribution.getDataLength(), contribution.getPageContents(), contribution.getEditSummary(), notificationUpdater);
+
+
+            Log.d("Commons", "Response is" + Utils.getStringFromDOM(result.getDocument()));
+
+            curProgressNotification = null;
+
+
+            String resultStatus = result.getString("/api/upload/@result");
+            if(!resultStatus.equals("Success")) {
+                String errorCode = result.getString("/api/error/@code");
+                showFailedNotification(contribution);
+                EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT)
+                        .param("username", app.getCurrentAccount().name)
+                        .param("source", contribution.getSource())
+                        .param("result", errorCode)
+                        .param("filename", contribution.getFilename())
+                        .log();
+            } else {
+                Date dateUploaded = null;
+                dateUploaded = Utils.parseMWDate(result.getString("/api/upload/imageinfo/@timestamp"));
+                String canonicalFilename = "File:" + result.getString("/api/upload/@filename").replace("_", " "); // Title vs Filename
+                String imageUrl = result.getString("/api/upload/imageinfo/@url");
+                contribution.setFilename(canonicalFilename);
+                contribution.setImageUrl(imageUrl);
+                contribution.setState(Contribution.STATE_COMPLETED);
+                contribution.setDateUploaded(dateUploaded);
+                contribution.save();
+
+                EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT)
+                        .param("username", app.getCurrentAccount().name)
+                        .param("source", contribution.getSource()) //FIXME
+                        .param("filename", contribution.getFilename())
+                        .param("result", "success")
+                        .log();
+            }
         } catch(IOException e) {
             Log.d("Commons", "I have a network fuckup");
             showFailedNotification(contribution);
@@ -217,39 +252,6 @@ public class UploadService extends HandlerService<Contribution> {
             }
         }
 
-        Log.d("Commons", "Response is" + Utils.getStringFromDOM(result.getDocument()));
-
-        curProgressNotification = null;
-
-
-        String resultStatus = result.getString("/api/upload/@result");
-        if(!resultStatus.equals("Success")) {
-            String errorCode = result.getString("/api/error/@code");
-            showFailedNotification(contribution);
-            EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT)
-                    .param("username", app.getCurrentAccount().name)
-                    .param("source", contribution.getSource())
-                    .param("result", errorCode)
-                    .param("filename", contribution.getFilename())
-                    .log();
-        } else {
-            Date dateUploaded = null;
-            dateUploaded = Utils.parseMWDate(result.getString("/api/upload/imageinfo/@timestamp"));
-            String canonicalFilename = "File:" + result.getString("/api/upload/@filename").replace("_", " "); // Title vs Filename
-            String imageUrl = result.getString("/api/upload/imageinfo/@url");
-            contribution.setFilename(canonicalFilename);
-            contribution.setImageUrl(imageUrl);
-            contribution.setState(Contribution.STATE_COMPLETED);
-            contribution.setDateUploaded(dateUploaded);
-            contribution.save();
-
-            EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT)
-                    .param("username", app.getCurrentAccount().name)
-                    .param("source", contribution.getSource()) //FIXME
-                    .param("filename", contribution.getFilename())
-                    .param("result", "success")
-                    .log();
-        }
     }
 
     private void showFailedNotification(Contribution contribution) {
