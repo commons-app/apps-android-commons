@@ -295,6 +295,10 @@ public class Contribution extends Media {
             }
             if(from == 2) {
                 db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN multiple INTEGER;");
+                db.execSQL("UPDATE " + TABLE_NAME + " SET multiple = 0");
+                from++;
+                onUpdate(db, from, to);
+                return;
             }
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
             onCreate(db);
