@@ -208,7 +208,7 @@ public  class       MultipleShareActivity
         app.getApi().setAuthCookie(authCookie);
         Intent intent = getIntent();
 
-        if(intent.getAction() == Intent.ACTION_SEND_MULTIPLE) {
+        if(intent.getAction().equals(Intent.ACTION_SEND_MULTIPLE)) {
             if(photosList == null) {
                 photosList = new ArrayList<Contribution>();
                 ArrayList<Uri> urisList = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
