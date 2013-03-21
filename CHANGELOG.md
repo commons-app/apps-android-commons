@@ -1,5 +1,8 @@
 # Wikimedia Commons for Android
 
+## v1.0 beta 5.1
+- Emergency release, since beta5 uploaded to testwiki
+
 ## v1.0 beta 5
 
 - Fix bug setting descriptions and author info on multiple image uploads to 'null'
