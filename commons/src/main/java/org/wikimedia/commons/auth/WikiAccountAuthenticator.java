@@ -2,19 +2,12 @@ package org.wikimedia.commons.auth;
 
 import java.io.IOException;
 
-import org.mediawiki.api.ApiResult;
-import org.mediawiki.api.MWApi;
-import org.wikimedia.commons.CommonsApplication;
+import android.accounts.*;
+import android.content.*;
+import android.os.*;
 
-import android.accounts.AbstractAccountAuthenticator;
-import android.accounts.Account;
-import android.accounts.AccountAuthenticatorResponse;
-import android.accounts.AccountManager;
-import android.accounts.NetworkErrorException;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
+import org.mediawiki.api.*;
+import org.wikimedia.commons.*;
 
 public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
 

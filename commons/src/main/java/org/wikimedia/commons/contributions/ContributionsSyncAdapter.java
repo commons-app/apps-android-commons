@@ -7,15 +7,14 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.accounts.Account;
 import android.os.Bundle;
-import org.apache.commons.codec.digest.DigestUtils;
-import org.wikimedia.commons.CommonsApplication;
+
+import java.io.*;
+import java.util.*;
+
 import org.mediawiki.api.*;
 import org.wikimedia.commons.Utils;
+import org.wikimedia.commons.*;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
     private static int COMMIT_THRESHOLD = 10;

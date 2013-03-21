@@ -1,27 +1,19 @@
 package org.wikimedia.commons;
 
-import android.os.AsyncTask;
-import android.os.Build;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import android.os.*;
+import com.nostra13.universalimageloader.core.*;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
-import org.apache.commons.codec.EncoderException;
+
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.codec.net.URLCodec;
 import org.w3c.dom.Node;
 
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.TransformerFactoryConfigurationError;
+import javax.xml.transform.*;
 import java.io.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.TimeZone;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.text.*;
+import java.util.*;
 
 public class Utils {
     public static Date parseMWDate(String mwDate) {

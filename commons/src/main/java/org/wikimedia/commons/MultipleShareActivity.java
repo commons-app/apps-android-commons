@@ -1,31 +1,22 @@
 package org.wikimedia.commons;
 
-import android.app.ProgressDialog;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.IBinder;
+import java.util.*;
+import java.util.concurrent.*;
+
+import android.app.*;
+import android.content.*;
+import android.net.*;
+import android.os.*;
 import android.support.v4.app.FragmentManager;
-import android.text.Editable;
-import android.text.TextUtils;
-import android.text.TextWatcher;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
+import android.text.*;
+import android.view.*;
 import android.widget.*;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import org.wikimedia.commons.auth.AuthenticatedActivity;
-import org.wikimedia.commons.auth.WikiAccountAuthenticator;
-import org.wikimedia.commons.contributions.Contribution;
-import org.wikimedia.commons.media.MediaDetailPagerFragment;
 
-import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
+import org.wikimedia.commons.auth.*;
+import org.wikimedia.commons.contributions.*;
+import org.wikimedia.commons.media.*;
 
 public  class       MultipleShareActivity
         extends     AuthenticatedActivity

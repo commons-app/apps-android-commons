@@ -1,16 +1,10 @@
 package org.wikimedia.commons;
 
 import android.net.Uri;
-import android.os.Parcel;
-import android.os.Parcelable;
-import org.wikimedia.commons.contributions.Contribution;
+import android.os.*;
 
-import java.io.Serializable;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.*;
+import java.util.regex.*;
 
 public class Media implements Parcelable {
 

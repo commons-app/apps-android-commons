@@ -1,21 +1,16 @@
 package org.wikimedia.commons;
 
-import android.app.Activity;
+import android.app.*;
 import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.provider.MediaStore;
-import android.util.Log;
+import android.net.*;
+import android.os.*;
+import android.provider.*;
 import android.webkit.MimeTypeMap;
-import android.widget.Toast;
-import org.wikimedia.commons.CommonsApplication;
-import org.wikimedia.commons.R;
-import org.wikimedia.commons.UploadService;
-import org.wikimedia.commons.Utils;
-import org.wikimedia.commons.contributions.Contribution;
 
-import java.io.IOException;
-import java.util.Date;
+import java.io.*;
+import java.util.*;
+
+import org.wikimedia.commons.contributions.*;
 
 public class StartUploadTask extends AsyncTask<Void, Void, Contribution> {
 

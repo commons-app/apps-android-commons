@@ -1,19 +1,12 @@
 package org.wikimedia.commons;
 
-import android.os.AsyncTask;
-import android.os.Build;
-import android.text.TextUtils;
-import de.akquinet.android.androlog.Log;
+import android.os.*;
+import android.util.*;
 import in.yuvi.http.fluent.Http;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.utils.URLEncodedUtils;
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import org.json.*;
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.*;
 
 public class EventLog {
     private static class LogTask extends AsyncTask<LogBuilder, Void, Boolean> {

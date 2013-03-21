@@ -2,34 +2,21 @@ package org.wikimedia.commons.auth;
 
 import java.io.IOException;
 
-import android.content.ContentResolver;
-import android.text.Editable;
-import android.text.TextWatcher;
-import de.keyboardsurfer.android.widget.crouton.Crouton;
-import de.keyboardsurfer.android.widget.crouton.Style;
-import org.wikimedia.commons.CommonsApplication;
-import org.wikimedia.commons.EventLog;
-import org.wikimedia.commons.R;
-import org.wikimedia.commons.R.id;
-import org.wikimedia.commons.R.layout;
-import org.wikimedia.commons.R.menu;
-import org.wikimedia.commons.R.string;
-
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.accounts.Account;
-import android.accounts.AccountAuthenticatorActivity;
-import android.accounts.AccountAuthenticatorResponse;
-import android.accounts.AccountManager;
-import android.app.Activity;
-import android.app.ProgressDialog;
-import android.util.Log;
+import android.content.*;
+import android.text.*;
+import de.keyboardsurfer.android.widget.crouton.*;
+import android.os.*;
+import android.accounts.*;
+import android.app.*;
+import android.util.*;
 import android.view.*;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.*;
 import android.support.v4.app.NavUtils;
-import org.wikimedia.commons.contributions.ContributionsContentProvider;
+
+import org.wikimedia.commons.*;
+import org.wikimedia.commons.EventLog;
+import org.wikimedia.commons.contributions.*;
+
 
 public class LoginActivity extends AccountAuthenticatorActivity {
 
@@ -96,7 +83,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                     // Should never really happen
                     response = R.string.login_failed_generic;
                 }
-                Crouton.makeText(context, response, Style.ALERT, id.loginErrors).show();
+                Crouton.makeText(context, response, Style.ALERT, R.id.loginErrors).show();
                 dialog.dismiss();
             }
 

@@ -1,29 +1,20 @@
 package org.wikimedia.commons;
 
-import android.content.Context;
-import android.graphics.Point;
-import android.graphics.Rect;
-import android.net.Uri;
-import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextUtils;
-import android.text.TextWatcher;
-import android.util.DisplayMetrics;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.content.*;
+import android.graphics.*;
+import android.net.*;
+import android.os.*;
+import android.text.*;
+import android.util.*;
+import android.view.*;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import com.actionbarsherlock.app.SherlockFragment;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
-import org.wikimedia.commons.contributions.Contribution;
-import org.wikimedia.commons.media.MediaDetailPagerFragment;
+import com.nostra13.universalimageloader.core.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.wikimedia.commons.contributions.*;
+import org.wikimedia.commons.media.*;
+
 
 public class MultipleUploadListFragment extends SherlockFragment {
 

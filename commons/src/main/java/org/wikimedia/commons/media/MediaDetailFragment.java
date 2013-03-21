@@ -1,27 +1,17 @@
 package org.wikimedia.commons.media;
 
-import android.graphics.Bitmap;
-import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextUtils;
-import android.text.TextWatcher;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.graphics.*;
+import android.os.*;
+import android.text.*;
+import android.view.*;
+import android.widget.*;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
-import org.wikimedia.commons.Media;
-import org.wikimedia.commons.R;
-import org.wikimedia.commons.Utils;
+
+import org.wikimedia.commons.*;
 
 public class MediaDetailFragment extends SherlockFragment {
 

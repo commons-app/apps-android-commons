@@ -3,24 +3,17 @@ package org.wikimedia.commons;
 import java.io.*;
 import java.util.Date;
 
-import android.graphics.BitmapFactory;
+import android.graphics.*;
 import org.mediawiki.api.*;
-import org.wikimedia.commons.contributions.Contribution;
-import org.wikimedia.commons.contributions.ContributionsActivity;
-import org.wikimedia.commons.contributions.ContributionsContentProvider;
-
 import in.yuvi.http.fluent.ProgressListener;
 
 import android.app.*;
 import android.content.*;
-import android.database.Cursor;
-import android.os.*;
-import android.provider.MediaStore;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
-import android.widget.RemoteViews;
-import android.widget.Toast;
-import android.net.*;
+import android.util.*;
+import android.widget.*;
+
+import org.wikimedia.commons.contributions.*;
 
 public class UploadService extends HandlerService<Contribution> {
 

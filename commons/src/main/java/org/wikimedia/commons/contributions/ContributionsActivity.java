@@ -13,11 +13,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+
 import org.wikimedia.commons.*;
-import org.wikimedia.commons.R;
-import org.wikimedia.commons.auth.AuthenticatedActivity;
-import org.wikimedia.commons.auth.WikiAccountAuthenticator;
-import org.wikimedia.commons.media.MediaDetailPagerFragment;
+import org.wikimedia.commons.auth.*;
+import org.wikimedia.commons.media.*;
 
 public  class       ContributionsActivity
         extends     AuthenticatedActivity

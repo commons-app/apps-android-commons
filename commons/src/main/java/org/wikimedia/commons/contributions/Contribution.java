@@ -1,19 +1,16 @@
 package org.wikimedia.commons.contributions;
 
-import java.text.SimpleDateFormat;
+import java.text.*;
 import java.util.*;
 
-import android.content.ContentProviderClient;
-import android.content.ContentValues;
+import android.content.*;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.*;
-import android.os.Parcel;
-import android.os.RemoteException;
-import android.text.TextUtils;
-import org.wikimedia.commons.CommonsApplication;
-import org.wikimedia.commons.EventLog;
-import org.wikimedia.commons.Media;
+import android.os.*;
+import android.text.*;
+
+import org.wikimedia.commons.*;
 
 public class Contribution extends Media {
 

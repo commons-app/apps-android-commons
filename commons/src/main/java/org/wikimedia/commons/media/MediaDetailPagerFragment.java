@@ -1,22 +1,20 @@
 package org.wikimedia.commons.media;
 
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
+import android.content.*;
+import android.net.*;
+import android.os.*;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.widget.ShareActionProvider;
-import org.wikimedia.commons.Media;
-import org.wikimedia.commons.R;
+
+import org.wikimedia.commons.*;
 
 public class MediaDetailPagerFragment extends SherlockFragment {
     private ViewPager pager;

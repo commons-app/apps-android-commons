@@ -21,21 +21,14 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
-import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
-import org.wikimedia.commons.R;
-import org.wikimedia.commons.ShareActivity;
-import org.wikimedia.commons.UploadService;
-import org.wikimedia.commons.Utils;
+import com.nostra13.universalimageloader.core.*;
+import com.nostra13.universalimageloader.core.assist.*;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Date;
+import java.io.*;
+import java.util.*;
+
+
+import org.wikimedia.commons.*;
 
 public class ContributionsListFragment extends SherlockFragment {
 

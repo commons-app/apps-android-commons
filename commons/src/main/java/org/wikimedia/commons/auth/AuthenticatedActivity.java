@@ -2,14 +2,13 @@ package org.wikimedia.commons.auth;
 
 import java.io.IOException;
 
-import org.wikimedia.commons.CommonsApplication;
-
+import android.accounts.OperationCanceledException;
 import com.actionbarsherlock.app.*;
 
 import android.accounts.*;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import org.wikimedia.commons.Utils;
+import android.os.*;
+
+import org.wikimedia.commons.*;
 
 public class AuthenticatedActivity extends SherlockFragmentActivity {
     

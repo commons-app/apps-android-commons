@@ -1,36 +1,19 @@
 package org.wikimedia.commons;
 
-import android.app.Activity;
-import android.content.ComponentName;
-import android.content.ServiceConnection;
-import android.database.Cursor;
-import android.os.AsyncTask;
-import android.os.IBinder;
-import android.provider.MediaStore;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.webkit.MimeTypeMap;
+import android.app.*;
+import android.content.*;
+import android.os.*;
+import android.text.*;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import org.wikimedia.commons.*;
-import org.wikimedia.commons.auth.AuthenticatedActivity;
-import org.wikimedia.commons.auth.WikiAccountAuthenticator;
-
-import android.net.Uri;
-import android.os.Bundle;
-import android.content.Context;
-import android.content.Intent;
-import android.widget.ImageView;
+import android.net.*;
 import android.support.v4.app.NavUtils;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.Window;
 import android.widget.*;
 import android.view.*;
-import org.wikimedia.commons.contributions.Contribution;
 
-import java.io.IOException;
-import java.util.Date;
+import org.wikimedia.commons.contributions.*;
+import org.wikimedia.commons.auth.*;
 
 
 public class ShareActivity extends AuthenticatedActivity {

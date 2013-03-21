@@ -1,16 +1,14 @@
 package org.wikimedia.commons.contributions;
 
-import android.content.ContentProvider;
-import android.content.ContentValues;
-import android.content.UriMatcher;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteQueryBuilder;
-import android.net.Uri;
-import android.text.TextUtils;
-import android.util.Log;
-import org.wikimedia.commons.CommonsApplication;
-import org.wikimedia.commons.data.DBOpenHelper;
+import android.content.*;
+import android.database.*;
+import android.database.sqlite.*;
+import android.net.*;
+import android.text.*;
+import android.util.*;
+
+import org.wikimedia.commons.*;
+import org.wikimedia.commons.data.*;
 
 public class ContributionsContentProvider extends ContentProvider{
 

@@ -26,7 +26,7 @@ import org.mediawiki.api.*;
 import org.wikimedia.commons.auth.WikiAccountAuthenticator;
 import org.apache.http.impl.client.*;
 import org.apache.http.params.CoreProtocolPNames;
-import org.wikimedia.commons.data.DBOpenHelper;
+import org.wikimedia.commons.data.*;
 
 // TODO: Use ProGuard to rip out reporting when publishing
 @ReportsCrashes(formKey = "",
