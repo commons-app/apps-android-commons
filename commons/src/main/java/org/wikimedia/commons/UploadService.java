@@ -39,6 +39,10 @@ public class UploadService extends HandlerService<Contribution> {
     public static final int NOTIFICATION_UPLOAD_COMPLETE = 2;
     public static final int NOTIFICATION_UPLOAD_FAILED = 3;
 
+    protected UploadService(String serviceName) {
+        super("UploadService");
+    }
+
     private class NotificationUpdateProgressListener implements ProgressListener {
 
         String notificationTag;

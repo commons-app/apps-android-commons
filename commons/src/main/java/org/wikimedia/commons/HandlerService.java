@@ -7,6 +7,7 @@ import android.os.*;
 public abstract class HandlerService<T> extends Service {
     private volatile Looper threadLooper;
     private volatile ServiceHandler threadHandler;
+    private String serviceName;
 
     private final class ServiceHandler extends Handler {
         public ServiceHandler(Looper looper) {
@@ -39,10 +40,14 @@ public abstract class HandlerService<T> extends Service {
         return localBinder;
     }
 
+    protected HandlerService(String serviceName) {
+        this.serviceName = serviceName;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
-        HandlerThread thread = new HandlerThread("UploadService");
+        HandlerThread thread = new HandlerThread(serviceName);
         thread.start();
 
         threadLooper = thread.getLooper();
