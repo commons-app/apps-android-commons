@@ -95,6 +95,10 @@ public class Media implements Parcelable {
         return creator;
     }
 
+    public void setCreator(String creator) {
+        this.creator = creator;
+    }
+
     public String getThumbnailUrl(int width) {
         return Utils.makeThumbUrl(imageUrl, filename, width);
     }
@@ -148,5 +152,9 @@ public class Media implements Parcelable {
         dateUploaded = (Date) in.readSerializable();
         creator = in.readString();
         tags = (HashMap<String, Object>)in.readSerializable();
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.net.*;
 import android.os.*;
 import android.provider.*;
+import android.text.TextUtils;
 import android.webkit.MimeTypeMap;
 
 import java.io.*;
@@ -58,6 +59,14 @@ public class StartUploadTask extends AsyncTask<Void, Void, Contribution> {
             }
         } catch(IOException e) {
             throw new RuntimeException(e);
+        }
+
+        if(TextUtils.isEmpty(contribution.getCreator())) {
+            contribution.setCreator(app.getCurrentAccount().name);
+        }
+
+        if(contribution.getDescription() == null) {
+            contribution.setDescription("");
         }
 
         String mimeType = (String)contribution.getTag("mimeType");
