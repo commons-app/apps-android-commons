@@ -1,5 +1,9 @@
 # Wikimedia Commons for Android
 
+## v1.0 beta 5
+
+- Fix bug setting descriptions and author info on multiple image uploads to 'null'
+
 ## v1.0 beta 4
 - Switched properly to Holo Dark theme
 - Multiple uploads support! Select multiple images from gallery and send 'em here!
