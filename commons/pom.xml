@@ -42,10 +42,6 @@
           <artifactId>compatibility-v4</artifactId>
           <version>11</version>
       </dependency>
-    <dependency>
-      <groupId>de.akquinet.android.androlog</groupId>
-      <artifactId>androlog</artifactId>
-    </dependency>
       <dependency>
           <groupId>com.nostra13.universalimageloader</groupId>
           <artifactId>universal-image-loader</artifactId>
