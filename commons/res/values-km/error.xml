@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources><string name="crash_dialog_title">Commons ត្រូវបានគាំង</string><string name="crash_dialog_text">Opps. មានអ្វីមួយកំពុងមានបញ្ហា-កំហុស!</string><string name="crash_dialog_comment_prompt">ប្រាប់យើងអំពីសកម្មភាពរបស់អ្នក ហើយផ្ញើមកយើងតាមអ៊ីម៉ែល។ នេះនឹងជួយយើងក្នុងការដោះស្រាយបញ្ហា-កំហុសនេះ!</string><string name="crash_dialog_ok_toast">សូមអរគុណ!</string></resources>
