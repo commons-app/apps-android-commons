@@ -18,8 +18,8 @@ import org.wikimedia.commons.*;
 
 public class MediaDetailPagerFragment extends SherlockFragment {
     private ViewPager pager;
-    private ShareActionProvider shareActionProvider;
     private Boolean editable;
+    private CommonsApplication app;
 
     public interface MediaDetailProvider {
         public Media getMediaAtPosition(int i);
@@ -82,6 +82,7 @@ public class MediaDetailPagerFragment extends SherlockFragment {
         if(savedInstanceState != null) {
             editable = savedInstanceState.getBoolean("editable");
         }
+        app = (CommonsApplication)getActivity().getApplicationContext();
         setHasOptionsMenu(true);
     }
 
@@ -91,6 +92,10 @@ public class MediaDetailPagerFragment extends SherlockFragment {
         Media m = provider.getMediaAtPosition(pager.getCurrentItem());
         switch(item.getItemId()) {
             case R.id.menu_share_current_image:
+                EventLog.schema(CommonsApplication.EVENT_SHARE_ATTEMPT)
+                        .param("username", app.getCurrentAccount().name)
+                        .param("filename", m.getFilename())
+                        .log();
                 Intent shareIntent = new Intent();
                 shareIntent.setAction(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
