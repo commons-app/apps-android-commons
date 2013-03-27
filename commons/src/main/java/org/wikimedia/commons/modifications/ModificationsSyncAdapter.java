@@ -44,10 +44,9 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
             return;
         }
 
-        CommonsApplication app = (CommonsApplication)getContext().getApplicationContext();
         String authCookie;
         try {
-             authCookie = AccountManager.get(app).blockingGetAuthToken(account, "", false);
+             authCookie = AccountManager.get(getContext()).blockingGetAuthToken(account, "", false);
         } catch (OperationCanceledException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
@@ -56,7 +55,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
             throw new RuntimeException(e);
         }
 
-        MWApi api = app.getApi();
+        MWApi api = CommonsApplication.createMWApi();
         api.setAuthCookie(authCookie);
         String editToken;
 
