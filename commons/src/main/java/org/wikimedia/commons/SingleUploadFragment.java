@@ -29,12 +29,12 @@ public class SingleUploadFragment extends SherlockFragment {
 
     private OnUploadActionInitiated uploadActionInitiatedHandler;
 
-    private Menu actionMenu;
-
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.activity_share, menu);
-        actionMenu = menu;
+        if(titleEdit != null) {
+            menu.findItem(R.id.menu_upload_single).setEnabled(titleEdit.getText().length() != 0);
+        }
     }
 
     @Override
@@ -61,10 +61,7 @@ public class SingleUploadFragment extends SherlockFragment {
             public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {}
 
             public void afterTextChanged(Editable editable) {
-                if(actionMenu == null) {
-                    getSherlockActivity().invalidateOptionsMenu();
-                }
-                actionMenu.findItem(R.id.menu_upload_single).setEnabled(titleEdit.getText().length() != 0);
+                getSherlockActivity().invalidateOptionsMenu();
             }
         };
 
