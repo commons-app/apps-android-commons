@@ -26,7 +26,6 @@ public class ShareActivity extends AuthenticatedActivity {
     private CommonsApplication app;
    
     private ImageView backgroundImageView;
-    private Button uploadButton;
     private EditText titleEdit;
     private EditText descEdit;
 
@@ -87,9 +86,7 @@ public class ShareActivity extends AuthenticatedActivity {
         super.onAuthCookieAcquired(authCookie);
         app.getApi().setAuthCookie(authCookie);
         Intent intent = getIntent();
-      
-        final Context that = this;
-        
+
         if(intent.getAction().equals(Intent.ACTION_SEND)) {
             mediaUri = (Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM);
             if(intent.hasExtra(UploadService.EXTRA_SOURCE)) {
@@ -107,14 +104,6 @@ public class ShareActivity extends AuthenticatedActivity {
             uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
             startService(uploadServiceIntent);
             bindService(uploadServiceIntent, uploadServiceConnection, Context.BIND_AUTO_CREATE);
-                
-            uploadButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    StartUploadTask task = new SingleStartUploadTask(ShareActivity.this, uploadService, titleEdit.getText().toString(), mediaUri, descEdit.getText().toString(), mimeType,  source);
-                    task.execute();
-                }
-            });
         }
     }
     
@@ -141,7 +130,6 @@ public class ShareActivity extends AuthenticatedActivity {
         backgroundImageView = (ImageView)findViewById(R.id.backgroundImage);
         titleEdit = (EditText)findViewById(R.id.titleEdit);
         descEdit = (EditText)findViewById(R.id.descEdit);
-        uploadButton = (Button)findViewById(R.id.uploadButton);
 
         TextWatcher uploadEnabler = new TextWatcher() {
             public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) { }
@@ -149,12 +137,7 @@ public class ShareActivity extends AuthenticatedActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {}
 
             public void afterTextChanged(Editable editable) {
-                if(titleEdit.getText().length() != 0) {
-                    uploadButton.setEnabled(true);
-                } else {
-                    uploadButton.setEnabled(false);
-                }
-
+                actionMenu.findItem(R.id.menu_upload_single).setEnabled(titleEdit.getText().length() != 0);
             }
         };
 
@@ -177,9 +160,11 @@ public class ShareActivity extends AuthenticatedActivity {
         }
     }
 
+    private Menu actionMenu;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getSupportMenuInflater().inflate(R.menu.activity_share, menu);
+        actionMenu = menu;
         return true;
     }
 
@@ -189,6 +174,10 @@ public class ShareActivity extends AuthenticatedActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
+                return true;
+            case R.id.menu_upload_single:
+                StartUploadTask task = new SingleStartUploadTask(ShareActivity.this, uploadService, titleEdit.getText().toString(), mediaUri, descEdit.getText().toString(), mimeType,  source);
+                task.execute();
                 return true;
         }
         return super.onOptionsItemSelected(item);

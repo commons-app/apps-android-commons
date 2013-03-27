@@ -12,44 +12,17 @@
         android:layout_height="fill_parent"
         android:scaleType="centerCrop" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="fill_horizontal"
-            android:layout_marginBottom="48dip"
-            android:layout_marginLeft="16dip"
-            android:layout_marginRight="16dip"
-            android:layout_marginTop="48dip"
-            android:background="#EAFFFFFF"
+            android:layout_height="match_parent"
+            android:layout_gravity="fill"
+            android:background="#AA000000"
             android:orientation="vertical"
             android:paddingBottom="8dip"
             android:paddingLeft="16dip"
             android:paddingRight="16dip"
             android:paddingTop="8dip" >
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:src="@drawable/ic_download" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dip"
-                    android:layout_marginLeft="8dip"
-                    android:text="@string/upload_overlay_title"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="#818181"
-                    android:textSize="20sp" />
-            </LinearLayout>
 
             <EditText
                 android:id="@+id/titleEdit"
@@ -58,16 +31,7 @@
                 android:scrollHorizontally="false"
                 android:singleLine="true"
                 android:hint="@string/share_title_hint"
-                android:textColor="#363636" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:background="#dadada"
-                android:orientation="vertical" >
-            </LinearLayout>
+                 />
 
             <EditText
                 android:id="@+id/descEdit"
@@ -75,24 +39,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
                 android:hint="@string/share_description_hint"
-                android:textColor="#363636" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:background="#dadada"
-                android:orientation="vertical" >
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/uploadButton"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:text="@string/share_upload_button" />
+                 />
         </LinearLayout>
-    </RelativeLayout>
 
 </FrameLayout>
