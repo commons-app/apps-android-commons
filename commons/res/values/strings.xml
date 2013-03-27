@@ -8,8 +8,7 @@
     <string name="login">Log in</string>
     <string name="logging_in_title">Logging in</string>
     <string name="logging_in_message">Please wait...</string>
-    <string name="title_activity_share">Wikimedia Commons</string>
-    <string name="upload_overlay_title">Upload to Commons</string>
+    <string name="title_activity_share">Upload media</string>
     <string name="login_success">Login success!</string>
     <string name="login_failed">Login failed!</string>
     <string name="authentication_failed">Authentication failed!</string>
