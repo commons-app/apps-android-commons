@@ -1,4 +1,4 @@
-package org.wikimedia.commons.contributions;
+package org.wikimedia.commons.modifications;
 
 import android.content.*;
 import android.database.*;
@@ -10,20 +10,20 @@ import android.util.*;
 import org.wikimedia.commons.*;
 import org.wikimedia.commons.data.*;
 
-public class ContributionsContentProvider extends ContentProvider{
+public class ModificationsContentProvider extends ContentProvider{
 
-    private static final int CONTRIBUTIONS = 1;
-    private static final int CONTRIBUTIONS_ID = 2;
+    private static final int MODIFICATIONS = 1;
+    private static final int MODIFICATIONS_ID = 2;
 
-    public static final String AUTHORITY = "org.wikimedia.commons.contributions.contentprovider";
-    private static final String BASE_PATH = "contributions";
+    public static final String AUTHORITY = "org.wikimedia.commons.modifications.contentprovider";
+    private static final String BASE_PATH = "modifications";
 
     public static final Uri BASE_URI = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH);
 
     private static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
     static {
-        uriMatcher.addURI(AUTHORITY, BASE_PATH, CONTRIBUTIONS);
-        uriMatcher.addURI(AUTHORITY, BASE_PATH + "/#", CONTRIBUTIONS_ID);
+        uriMatcher.addURI(AUTHORITY, BASE_PATH, MODIFICATIONS);
+        uriMatcher.addURI(AUTHORITY, BASE_PATH + "/#", MODIFICATIONS_ID);
     }
 
 
@@ -41,31 +41,20 @@ public class ContributionsContentProvider extends ContentProvider{
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
-        queryBuilder.setTables(Contribution.Table.TABLE_NAME);
+        queryBuilder.setTables(ModifierSequence.Table.TABLE_NAME);
 
         int uriType = uriMatcher.match(uri);
 
-        SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
-        Cursor cursor;
-
         switch(uriType) {
-            case CONTRIBUTIONS:
-                cursor = queryBuilder.query(db, projection, selection, selectionArgs, null, null, sortOrder);
-                break;
-            case CONTRIBUTIONS_ID:
-                cursor = queryBuilder.query(db,
-                        Contribution.Table.ALL_FIELDS,
-                        "_id = ?",
-                        new String[] { uri.getLastPathSegment() },
-                        null,
-                        null,
-                        sortOrder
-                );
+            case MODIFICATIONS:
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI" + uri);
         }
 
+        SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
+
+        Cursor cursor = queryBuilder.query(db, projection, selection, selectionArgs, null, null, sortOrder);
         cursor.setNotificationUri(getContext().getContentResolver(), uri);
 
         return cursor;
@@ -82,8 +71,8 @@ public class ContributionsContentProvider extends ContentProvider{
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         long id = 0;
         switch (uriType) {
-            case CONTRIBUTIONS:
-                id = sqlDB.insert(Contribution.Table.TABLE_NAME, null, contentValues);
+            case MODIFICATIONS:
+                id = sqlDB.insert(ModifierSequence.Table.TABLE_NAME, null, contentValues);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
@@ -94,7 +83,19 @@ public class ContributionsContentProvider extends ContentProvider{
 
     @Override
     public int delete(Uri uri, String s, String[] strings) {
-        return 0;
+        int uriType = uriMatcher.match(uri);
+        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
+        switch (uriType) {
+            case MODIFICATIONS_ID:
+                String id = uri.getLastPathSegment();
+                sqlDB.delete(ModifierSequence.Table.TABLE_NAME,
+                        "_id = ?",
+                        new String[] { id }
+                        );
+                return 1;
+            default:
+                throw new IllegalArgumentException("Unknown URI: " + uri);
+        }
     }
 
     @Override
@@ -104,10 +105,10 @@ public class ContributionsContentProvider extends ContentProvider{
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         sqlDB.beginTransaction();
         switch (uriType) {
-            case CONTRIBUTIONS:
+            case MODIFICATIONS:
                 for(ContentValues value: values) {
                     Log.d("Commons", "Inserting! " + value.toString());
-                    sqlDB.insert(Contribution.Table.TABLE_NAME, null, value);
+                    sqlDB.insert(ModifierSequence.Table.TABLE_NAME, null, value);
                 }
                 break;
             default:
@@ -132,19 +133,19 @@ public class ContributionsContentProvider extends ContentProvider{
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         int rowsUpdated = 0;
         switch (uriType) {
-            case CONTRIBUTIONS:
-                rowsUpdated = sqlDB.update(Contribution.Table.TABLE_NAME,
+            case MODIFICATIONS:
+                rowsUpdated = sqlDB.update(ModifierSequence.Table.TABLE_NAME,
                         contentValues,
                         selection,
                         selectionArgs);
                 break;
-            case CONTRIBUTIONS_ID:
+            case MODIFICATIONS_ID:
                 int id = Integer.valueOf(uri.getLastPathSegment());
 
                 if (TextUtils.isEmpty(selection)) {
-                    rowsUpdated = sqlDB.update(Contribution.Table.TABLE_NAME,
+                    rowsUpdated = sqlDB.update(ModifierSequence.Table.TABLE_NAME,
                             contentValues,
-                            Contribution.Table.COLUMN_ID + " = ?",
+                            ModifierSequence.Table.COLUMN_ID + " = ?",
                             new String[] { String.valueOf(id) } );
                 } else {
                     throw new IllegalArgumentException("Parameter `selection` should be empty when updating an ID");

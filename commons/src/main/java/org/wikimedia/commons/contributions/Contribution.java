@@ -297,8 +297,11 @@ public class Contribution extends Media {
                 onUpdate(db, from, to);
                 return;
             }
-            db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-            onCreate(db);
+            if(from == 3) {
+                // Do nothing
+                from++;
+                return;
+            }
         }
     }
 }

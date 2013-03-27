@@ -14,6 +14,7 @@ import android.view.*;
 
 import org.wikimedia.commons.contributions.*;
 import org.wikimedia.commons.auth.*;
+import org.wikimedia.commons.modifications.PostUploadActivity;
 
 
 public class ShareActivity extends AuthenticatedActivity {
@@ -64,10 +65,12 @@ public class ShareActivity extends AuthenticatedActivity {
         @Override
         protected void onPostExecute(Contribution contribution) {
             super.onPostExecute(contribution);
+            Intent postUploadIntent = new Intent(ShareActivity.this, PostUploadActivity.class);
+            postUploadIntent.putExtra(PostUploadActivity.EXTRA_MEDIA_URI, contribution.getContentUri());
+            startActivity(postUploadIntent);
             finish();
         }
     }
-
 
     @Override
     public void onBackPressed() {

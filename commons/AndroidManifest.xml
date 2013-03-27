@@ -34,6 +34,9 @@
             android:theme="@style/NoTitle" >
         </activity>
         <activity
+            android:name=".modifications.PostUploadActivity"
+            />
+        <activity
             android:name=".ShareActivity"
             android:icon="@drawable/ic_launcher"
             android:label="@string/title_activity_share"
@@ -96,7 +99,19 @@
             </intent-filter>
             <meta-data
                     android:name="android.content.SyncAdapter"
-                    android:resource="@xml/syncadapter" />
+                    android:resource="@xml/contributions_sync_adapter" />
+        </service>
+
+        <service
+                android:name=".modifications.ModificationsSyncService"
+                android:exported="true">
+            <intent-filter>
+                <action
+                        android:name="android.content.SyncAdapter" />
+            </intent-filter>
+            <meta-data
+                    android:name="android.content.SyncAdapter"
+                    android:resource="@xml/modifications_sync_adapter" />
         </service>
 
         <provider
@@ -104,6 +119,13 @@
                 android:label="@string/provider_contributions"
                 android:syncable="true"
                 android:authorities="org.wikimedia.commons.contributions.contentprovider"
+                android:exported="false">
+        </provider>
+        <provider
+                android:name=".modifications.ModificationsContentProvider"
+                android:label="@string/provider_modifications"
+                android:syncable="true"
+                android:authorities="org.wikimedia.commons.modifications.contentprovider"
                 android:exported="false">
         </provider>
     </application>

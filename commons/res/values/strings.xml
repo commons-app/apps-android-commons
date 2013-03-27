@@ -51,6 +51,7 @@
 
     <string name="share_upload_button">Upload</string>
     <string name="multiple_share_base_title">Name this set</string>
+    <string name="provider_modifications">Modifications</string>
 
     <plurals name="contributions_subtitle">
         <item quantity="zero">No uploads yet</item>
