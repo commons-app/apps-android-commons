@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="fill"
+        android:background="#AA000000"
+        android:orientation="vertical"
+        android:paddingBottom="8dip"
+        android:paddingLeft="16dip"
+        android:paddingRight="16dip"
+        android:paddingTop="8dip" >
+
+    <EditText
+            android:id="@+id/titleEdit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:scrollHorizontally="false"
+            android:singleLine="true"
+            android:hint="@string/share_title_hint"
+            />
+
+    <EditText
+            android:id="@+id/descEdit"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:hint="@string/share_description_hint"
+            />
+</LinearLayout>

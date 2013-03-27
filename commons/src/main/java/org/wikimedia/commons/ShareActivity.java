@@ -17,22 +17,22 @@ import org.wikimedia.commons.auth.*;
 import org.wikimedia.commons.modifications.PostUploadActivity;
 
 
-public class ShareActivity extends AuthenticatedActivity {
+public class ShareActivity extends AuthenticatedActivity implements SingleUploadFragment.OnUploadActionInitiated {
+
+    private SingleUploadFragment shareView;
 
     public ShareActivity() {
         super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
     }
 
     private CommonsApplication app;
-   
-    private ImageView backgroundImageView;
-    private EditText titleEdit;
-    private EditText descEdit;
 
     private String source;
     private String mimeType;
 
     private Uri mediaUri;
+
+    private ImageView backgroundImageView;
 
     private UploadService uploadService;
     private boolean isUploadServiceConnected;
@@ -48,6 +48,11 @@ public class ShareActivity extends AuthenticatedActivity {
         }
     };
 
+    public void uploadActionInitiated(String title, String description) {
+        StartUploadTask task = new SingleStartUploadTask(ShareActivity.this, uploadService, title, mediaUri, description, mimeType,  source);
+        task.execute();
+
+    }
 
     private class SingleStartUploadTask extends StartUploadTask {
 
@@ -85,29 +90,22 @@ public class ShareActivity extends AuthenticatedActivity {
     protected void onAuthCookieAcquired(String authCookie) {
         super.onAuthCookieAcquired(authCookie);
         app.getApi().setAuthCookie(authCookie);
-        Intent intent = getIntent();
 
-        if(intent.getAction().equals(Intent.ACTION_SEND)) {
-            mediaUri = (Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM);
-            if(intent.hasExtra(UploadService.EXTRA_SOURCE)) {
-                source = intent.getStringExtra(UploadService.EXTRA_SOURCE);
-            } else {
-                source = Contribution.SOURCE_EXTERNAL;
-            }
-            
-            mimeType = intent.getType();
-            if(mimeType.startsWith("image/")) {
-                ImageLoader.getInstance().displayImage(mediaUri.toString(), backgroundImageView);
-            }
 
-            Intent uploadServiceIntent = new Intent(getApplicationContext(), UploadService.class);
-            uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
-            startService(uploadServiceIntent);
-            bindService(uploadServiceIntent, uploadServiceConnection, Context.BIND_AUTO_CREATE);
+        shareView = (SingleUploadFragment) getSupportFragmentManager().findFragmentByTag("shareView");
+        if(shareView == null) {
+            shareView = new SingleUploadFragment();
+            this.getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.single_upload_fragment_container, shareView, "shareView")
+                    .commit();
         }
+
+        Intent uploadServiceIntent = new Intent(getApplicationContext(), UploadService.class);
+        uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
+        startService(uploadServiceIntent);
+        bindService(uploadServiceIntent, uploadServiceConnection, Context.BIND_AUTO_CREATE);
     }
-    
-    
 
     @Override
     protected void onAuthFailure() {
@@ -116,8 +114,6 @@ public class ShareActivity extends AuthenticatedActivity {
         failureToast.show();
         finish();
     }
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -128,28 +124,23 @@ public class ShareActivity extends AuthenticatedActivity {
         app = (CommonsApplication)this.getApplicationContext();
         
         backgroundImageView = (ImageView)findViewById(R.id.backgroundImage);
-        titleEdit = (EditText)findViewById(R.id.titleEdit);
-        descEdit = (EditText)findViewById(R.id.descEdit);
 
-        TextWatcher uploadEnabler = new TextWatcher() {
-            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) { }
+        Intent intent = getIntent();
 
-            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {}
-
-            public void afterTextChanged(Editable editable) {
-                actionMenu.findItem(R.id.menu_upload_single).setEnabled(titleEdit.getText().length() != 0);
+        if(intent.getAction().equals(Intent.ACTION_SEND)) {
+            mediaUri = (Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM);
+            if(intent.hasExtra(UploadService.EXTRA_SOURCE)) {
+                source = intent.getStringExtra(UploadService.EXTRA_SOURCE);
+            } else {
+                source = Contribution.SOURCE_EXTERNAL;
             }
-        };
 
-        titleEdit.addTextChangedListener(uploadEnabler);
+            mimeType = intent.getType();
+        }
+
+        ImageLoader.getInstance().displayImage(mediaUri.toString(), backgroundImageView);
         
         requestAuthToken();
-    
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
     }
 
     @Override
@@ -160,24 +151,11 @@ public class ShareActivity extends AuthenticatedActivity {
         }
     }
 
-    private Menu actionMenu;
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getSupportMenuInflater().inflate(R.menu.activity_share, menu);
-        actionMenu = menu;
-        return true;
-    }
-
-    
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
-                return true;
-            case R.id.menu_upload_single:
-                StartUploadTask task = new SingleStartUploadTask(ShareActivity.this, uploadService, titleEdit.getText().toString(), mediaUri, descEdit.getText().toString(), mimeType,  source);
-                task.execute();
                 return true;
         }
         return super.onOptionsItemSelected(item);
