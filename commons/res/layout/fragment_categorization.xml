@@ -37,6 +37,16 @@
             android:gravity="center"
             />
 
+    <TextView
+        android:id="@+id/categoriesExplanation"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginTop="48dp"
+        android:gravity="center"
+        android:focusable="true"
+        android:text="@string/categories_skip_explanation"
+        />
+
     <ListView
         android:id="@+id/categoriesListBox"
         android:layout_height="wrap_content"

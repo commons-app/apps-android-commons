@@ -35,6 +35,7 @@ public class CategorizationFragment extends SherlockFragment{
     EditText categoriesFilter;
     ProgressBar categoriesSearchInProgress;
     TextView categoriesNotFoundView;
+    TextView categoriesSkip;
 
     CategoriesAdapter categoriesAdapter;
     CategoriesUpdater lastUpdater = null;
@@ -87,6 +88,11 @@ public class CategorizationFragment extends SherlockFragment{
             filter = categoriesFilter.getText().toString();
             categoriesSearchInProgress.setVisibility(View.VISIBLE);
             categoriesNotFoundView.setVisibility(View.GONE);
+
+            if(!TextUtils.isEmpty(filter)) {
+                // Only hide this on first count of non-empty filter
+                categoriesSkip.setVisibility(View.GONE);
+            }
         }
 
         @Override
@@ -202,6 +208,13 @@ public class CategorizationFragment extends SherlockFragment{
         categoriesFilter = (EditText) rootView.findViewById(R.id.categoriesSearchBox);
         categoriesSearchInProgress = (ProgressBar) rootView.findViewById(R.id.categoriesSearchInProgress);
         categoriesNotFoundView = (TextView) rootView.findViewById(R.id.categoriesNotFound);
+        categoriesSkip = (TextView) rootView.findViewById(R.id.categoriesExplanation);
+
+        categoriesSkip.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                getActivity().finish();
+            }
+        });
 
         ArrayList<CategoryItem> items;
         if(savedInstanceState == null) {
