@@ -14,12 +14,21 @@ import android.view.*;
 
 import org.wikimedia.commons.contributions.*;
 import org.wikimedia.commons.auth.*;
+import org.wikimedia.commons.modifications.CategoryModifier;
+import org.wikimedia.commons.modifications.ModificationsContentProvider;
+import org.wikimedia.commons.modifications.ModifierSequence;
 import org.wikimedia.commons.modifications.PostUploadActivity;
 
+import java.util.ArrayList;
 
-public class ShareActivity extends AuthenticatedActivity implements SingleUploadFragment.OnUploadActionInitiated {
+
+public  class       ShareActivity
+        extends     AuthenticatedActivity
+        implements  SingleUploadFragment.OnUploadActionInitiated,
+                    CategorizationFragment.OnCategoriesSaveHandler {
 
     private SingleUploadFragment shareView;
+    private CategorizationFragment categorizationFragment;
 
     public ShareActivity() {
         super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
@@ -31,6 +40,8 @@ public class ShareActivity extends AuthenticatedActivity implements SingleUpload
     private String mimeType;
 
     private Uri mediaUri;
+
+    private Contribution contribution;
 
     private ImageView backgroundImageView;
 
@@ -51,7 +62,23 @@ public class ShareActivity extends AuthenticatedActivity implements SingleUpload
     public void uploadActionInitiated(String title, String description) {
         StartUploadTask task = new SingleStartUploadTask(ShareActivity.this, uploadService, title, mediaUri, description, mimeType,  source);
         task.execute();
+    }
 
+    private void showPostUpload() {
+        if(categorizationFragment == null) {
+            categorizationFragment = new CategorizationFragment();
+        }
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.single_upload_fragment_container, categorizationFragment, "categorization")
+                .commit();
+    }
+
+    public void onCategoriesSave(ArrayList<String> categories) {
+        ModifierSequence categoriesSequence = new ModifierSequence(contribution.getContentUri());
+        categoriesSequence.queueModifier(new CategoryModifier(categories.toArray(new String[]{})));
+        categoriesSequence.setContentProviderClient(getContentResolver().acquireContentProviderClient(ModificationsContentProvider.AUTHORITY));
+        categoriesSequence.save();
+        finish();
     }
 
     private class SingleStartUploadTask extends StartUploadTask {
@@ -69,10 +96,16 @@ public class ShareActivity extends AuthenticatedActivity implements SingleUpload
         @Override
         protected void onPostExecute(Contribution contribution) {
             super.onPostExecute(contribution);
-            Intent postUploadIntent = new Intent(ShareActivity.this, PostUploadActivity.class);
-            postUploadIntent.putExtra(PostUploadActivity.EXTRA_MEDIA_URI, contribution.getContentUri());
-            startActivity(postUploadIntent);
-            finish();
+            ShareActivity.this.contribution = contribution;
+            showPostUpload();
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if(contribution != null) {
+            outState.putParcelable("contribution", contribution);
         }
     }
 
@@ -93,13 +126,15 @@ public class ShareActivity extends AuthenticatedActivity implements SingleUpload
 
 
         shareView = (SingleUploadFragment) getSupportFragmentManager().findFragmentByTag("shareView");
-        if(shareView == null) {
-            shareView = new SingleUploadFragment();
-            this.getSupportFragmentManager()
-                    .beginTransaction()
-                    .add(R.id.single_upload_fragment_container, shareView, "shareView")
-                    .commit();
+        categorizationFragment = (CategorizationFragment) getSupportFragmentManager().findFragmentByTag("categorization");
+        if(shareView == null && categorizationFragment == null) {
+                shareView = new SingleUploadFragment();
+                this.getSupportFragmentManager()
+                        .beginTransaction()
+                        .add(R.id.single_upload_fragment_container, shareView, "shareView")
+                        .commit();
         }
+
 
         Intent uploadServiceIntent = new Intent(getApplicationContext(), UploadService.class);
         uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
@@ -139,7 +174,11 @@ public class ShareActivity extends AuthenticatedActivity implements SingleUpload
         }
 
         ImageLoader.getInstance().displayImage(mediaUri.toString(), backgroundImageView);
-        
+
+        if(savedInstanceState != null)  {
+            contribution = savedInstanceState.getParcelable("contribution");
+        }
+
         requestAuthToken();
     }
 

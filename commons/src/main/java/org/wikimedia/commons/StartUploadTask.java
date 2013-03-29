@@ -84,6 +84,7 @@ public class StartUploadTask extends AsyncTask<Void, Void, Contribution> {
                 contribution.setDateCreated(new Date(cursor.getLong(0)));
             } // FIXME: Alternate way of setting dateCreated if this data is not found
         }
+
         return contribution;
     }
 

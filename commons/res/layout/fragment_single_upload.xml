@@ -4,12 +4,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="fill"
-        android:background="#AA000000"
-        android:orientation="vertical"
-        android:paddingBottom="8dip"
-        android:paddingLeft="16dip"
-        android:paddingRight="16dip"
-        android:paddingTop="8dip" >
+        android:orientation="vertical">
 
     <EditText
             android:id="@+id/titleEdit"
