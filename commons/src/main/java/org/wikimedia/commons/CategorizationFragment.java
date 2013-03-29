@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.*;
 import android.view.MenuInflater;
@@ -109,6 +110,9 @@ public class CategorizationFragment extends SherlockFragment{
 
         @Override
         protected ArrayList<String> doInBackground(Void... voids) {
+            if(TextUtils.isEmpty(filter)) {
+                return new ArrayList<String>();
+            }
             if(categoriesCache.containsKey(filter)) {
                 return categoriesCache.get(filter);
             }
