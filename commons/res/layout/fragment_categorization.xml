@@ -29,6 +29,14 @@
             />
     </FrameLayout>
 
+    <TextView
+            android:id="@+id/categoriesNotFound"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:gravity="center"
+            />
+
     <ListView
         android:id="@+id/categoriesListBox"
         android:layout_height="wrap_content"

@@ -34,6 +34,7 @@ public class CategorizationFragment extends SherlockFragment{
     ListView categoriesList;
     EditText categoriesFilter;
     ProgressBar categoriesSearchInProgress;
+    TextView categoriesNotFoundView;
 
     CategoriesAdapter categoriesAdapter;
     CategoriesUpdater lastUpdater = null;
@@ -85,6 +86,7 @@ public class CategorizationFragment extends SherlockFragment{
             super.onPreExecute();
             filter = categoriesFilter.getText().toString();
             categoriesSearchInProgress.setVisibility(View.VISIBLE);
+            categoriesNotFoundView.setVisibility(View.GONE);
         }
 
         @Override
@@ -106,6 +108,10 @@ public class CategorizationFragment extends SherlockFragment{
             categoriesAdapter.setItems(items);
             categoriesAdapter.notifyDataSetInvalidated();
             categoriesSearchInProgress.setVisibility(View.GONE);
+            if(!TextUtils.isEmpty(filter) && categories.size() == 0) {
+                categoriesNotFoundView.setText(getString(R.string.categories_not_found, filter));
+                categoriesNotFoundView.setVisibility(View.VISIBLE);
+            }
         }
 
         @Override
@@ -195,6 +201,7 @@ public class CategorizationFragment extends SherlockFragment{
         categoriesList = (ListView) rootView.findViewById(R.id.categoriesListBox);
         categoriesFilter = (EditText) rootView.findViewById(R.id.categoriesSearchBox);
         categoriesSearchInProgress = (ProgressBar) rootView.findViewById(R.id.categoriesSearchInProgress);
+        categoriesNotFoundView = (TextView) rootView.findViewById(R.id.categoriesNotFound);
 
         ArrayList<CategoryItem> items;
         if(savedInstanceState == null) {
