@@ -123,8 +123,8 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                     }
 
                     sequence.delete();
-                    allModifications.moveToNext();
                 }
+                allModifications.moveToNext();
 
             }
         } finally {
