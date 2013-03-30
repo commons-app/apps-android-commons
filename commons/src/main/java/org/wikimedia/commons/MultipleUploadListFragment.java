@@ -83,7 +83,7 @@ public class MultipleUploadListFragment extends SherlockFragment {
     public void onStop() {
         super.onStop();
 
-        // FIXME: Stops the keyboard from being shown 'stale' while
+        // FIXME: Stops the keyboard from being shown 'stale' while moving out of this fragment into the next
         View target = getView().findFocus();
         if (target != null) {
             InputMethodManager imm = (InputMethodManager) target.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);

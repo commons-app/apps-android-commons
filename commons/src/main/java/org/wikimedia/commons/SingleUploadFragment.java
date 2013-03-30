@@ -10,6 +10,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
@@ -77,6 +78,18 @@ public class SingleUploadFragment extends SherlockFragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         uploadActionInitiatedHandler = (OnUploadActionInitiated) activity;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // FIXME: Stops the keyboard from being shown 'stale' while moving out of this fragment into the next
+        View target = getView().findFocus();
+        if (target != null) {
+            InputMethodManager imm = (InputMethodManager) target.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(target.getWindowToken(), 0);
+        }
     }
 
     @Override
