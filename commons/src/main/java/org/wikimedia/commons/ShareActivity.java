@@ -17,7 +17,6 @@ import org.wikimedia.commons.auth.*;
 import org.wikimedia.commons.modifications.CategoryModifier;
 import org.wikimedia.commons.modifications.ModificationsContentProvider;
 import org.wikimedia.commons.modifications.ModifierSequence;
-import org.wikimedia.commons.modifications.PostUploadActivity;
 
 import java.util.ArrayList;
 
