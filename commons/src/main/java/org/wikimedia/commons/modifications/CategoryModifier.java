@@ -46,4 +46,9 @@ public class CategoryModifier extends PageModifier {
         }
         return pageContents + categoriesString.toString();
     }
+
+    @Override
+    public String getEditSumary() {
+        return String.format("Added " + params.optJSONArray(PARAM_CATEGORIES).length() + " categories.");
+    }
 }

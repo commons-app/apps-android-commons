@@ -110,6 +110,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                                 .param("title", contrib.getFilename())
                                 .param("token", editToken)
                                 .param("text", processedPageContent)
+                                .param("summary", sequence.getEditSummary())
                                 .post();
                     } catch (IOException e) {
                         throw new RuntimeException(e);

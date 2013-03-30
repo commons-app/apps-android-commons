@@ -24,6 +24,8 @@ public abstract class PageModifier {
 
     public abstract String doModification(String pageName, String pageContents);
 
+    public abstract String getEditSumary();
+
     public JSONObject toJSON() {
         JSONObject data = new JSONObject();
         try {

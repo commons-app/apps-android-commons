@@ -50,6 +50,15 @@ public class ModifierSequence {
         return pageContents;
     }
 
+    public String getEditSummary() {
+        StringBuffer editSummary = new StringBuffer();
+        for(PageModifier modifier: modifiers) {
+            editSummary.append(modifier.getEditSumary()).append(" ");
+        }
+        editSummary.append("Via Commons Mobile App");
+        return editSummary.toString();
+    }
+
     public JSONObject toJSON() {
         JSONObject data = new JSONObject();
         try {
