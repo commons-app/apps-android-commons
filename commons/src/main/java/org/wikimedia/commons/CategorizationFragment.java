@@ -268,6 +268,7 @@ public class CategorizationFragment extends SherlockFragment{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        getActivity().setTitle(R.string.categories_activity_title);
     }
 
     @Override

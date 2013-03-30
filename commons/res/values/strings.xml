@@ -75,4 +75,5 @@
         Start typing to add categories.\n
         Tap this message (or hit back) to skip this step.
     </string>
+    <string name="categories_activity_title">Categories</string>
 </resources>
