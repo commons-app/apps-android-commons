@@ -61,7 +61,9 @@ public class SingleUploadFragment extends SherlockFragment {
             public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {}
 
             public void afterTextChanged(Editable editable) {
-                getSherlockActivity().invalidateOptionsMenu();
+                if(getSherlockActivity() != null) {
+                    getSherlockActivity().invalidateOptionsMenu();
+                }
             }
         };
 
