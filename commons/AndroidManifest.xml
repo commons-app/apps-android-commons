@@ -34,9 +34,6 @@
             android:theme="@style/NoTitle" >
         </activity>
         <activity
-            android:name=".modifications.PostUploadActivity"
-            />
-        <activity
             android:name=".ShareActivity"
             android:icon="@drawable/ic_launcher"
             android:label="@string/title_activity_share"
