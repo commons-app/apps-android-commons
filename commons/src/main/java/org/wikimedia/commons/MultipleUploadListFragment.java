@@ -41,6 +41,8 @@ public class MultipleUploadListFragment extends SherlockFragment {
 
         ImageView image;
         TextView title;
+
+        RelativeLayout overlay;
     }
 
     private class PhotoDisplayAdapter extends BaseAdapter {
@@ -65,6 +67,7 @@ public class MultipleUploadListFragment extends SherlockFragment {
                 holder = new UploadHolderView();
                 holder.image = (ImageView) view.findViewById(R.id.uploadImage);
                 holder.title = (TextView) view.findViewById(R.id.uploadTitle);
+                holder.overlay = (RelativeLayout) view.findViewById(R.id.uploadOverlay);
 
                 holder.image.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, photoSize.y));
 
@@ -81,7 +84,12 @@ public class MultipleUploadListFragment extends SherlockFragment {
                 holder.imageUri = up.getLocalUri();
             }
 
-            holder.title.setText(up.getFilename());
+            if(!imageOnlyMode) {
+                holder.overlay.setVisibility(View.VISIBLE);
+                holder.title.setText(up.getFilename());
+            } else {
+                holder.overlay.setVisibility(View.GONE);
+            }
 
             return view;
 
@@ -126,7 +134,7 @@ public class MultipleUploadListFragment extends SherlockFragment {
         } else {
             baseTitle.setVisibility(View.VISIBLE);
         }
-        photosAdapter.notifyDataSetInvalidated();
+        photosAdapter.notifyDataSetChanged();
     }
 
     @Override

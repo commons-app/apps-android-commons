@@ -17,18 +17,23 @@ import com.actionbarsherlock.view.MenuItem;
 import org.wikimedia.commons.auth.*;
 import org.wikimedia.commons.contributions.*;
 import org.wikimedia.commons.media.*;
+import org.wikimedia.commons.modifications.CategoryModifier;
+import org.wikimedia.commons.modifications.ModificationsContentProvider;
+import org.wikimedia.commons.modifications.ModifierSequence;
 
 public  class       MultipleShareActivity
         extends     AuthenticatedActivity
         implements  MediaDetailPagerFragment.MediaDetailProvider,
                     AdapterView.OnItemClickListener,
                     FragmentManager.OnBackStackChangedListener,
-                    MultipleUploadListFragment.OnMultipleUploadInitiatedHandler {
+                    MultipleUploadListFragment.OnMultipleUploadInitiatedHandler,
+                    CategorizationFragment.OnCategoriesSaveHandler {
     private CommonsApplication app;
     private ArrayList<Contribution> photosList = null;
 
     private MultipleUploadListFragment uploadsList;
     private MediaDetailPagerFragment mediaDetails;
+    private CategorizationFragment categorizationFragment;
 
 
     public MultipleShareActivity() {
@@ -61,6 +66,26 @@ public  class       MultipleShareActivity
     public void OnMultipleUploadInitiated() {
         StartMultipleUploadTask startUploads = new StartMultipleUploadTask();
         Utils.executeAsyncTask(startUploads);
+        uploadsList.setImageOnlyMode(true);
+
+        categorizationFragment = (CategorizationFragment) this.getSupportFragmentManager().findFragmentByTag("categorization");
+        if(categorizationFragment == null) {
+            categorizationFragment = new CategorizationFragment();
+        }
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.uploadsFragmentContainer, categorizationFragment, "categorization")
+                .commit();
+    }
+
+    public void onCategoriesSave(ArrayList<String> categories) {
+        ContentProviderClient client = getContentResolver().acquireContentProviderClient(ModificationsContentProvider.AUTHORITY);
+        for(Contribution contribution: photosList) {
+            ModifierSequence categoriesSequence = new ModifierSequence(contribution.getContentUri());
+            categoriesSequence.queueModifier(new CategoryModifier(categories.toArray(new String[]{})));
+            categoriesSequence.setContentProviderClient(client);
+            categoriesSequence.save();
+        }
+        finish();
     }
 
     private class StartMultipleUploadTask extends AsyncTask<Void, Integer, Void> {
@@ -115,7 +140,6 @@ public  class       MultipleShareActivity
             dialog.dismiss();
             Toast startingToast = Toast.makeText(getApplicationContext(), R.string.uploading_started, Toast.LENGTH_LONG);
             startingToast.show();
-            finish();
         }
     }
 
