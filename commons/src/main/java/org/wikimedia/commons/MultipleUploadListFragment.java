@@ -10,6 +10,8 @@ import android.view.*;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 import com.nostra13.universalimageloader.core.*;
 
 import org.wikimedia.commons.contributions.*;
@@ -18,14 +20,21 @@ import org.wikimedia.commons.media.*;
 
 public class MultipleUploadListFragment extends SherlockFragment {
 
+    public interface OnMultipleUploadInitiatedHandler {
+        public void OnMultipleUploadInitiated();
+    }
+
     private GridView photosGrid;
     private PhotoDisplayAdapter photosAdapter;
     private EditText baseTitle;
 
     private Point photoSize;
     private MediaDetailPagerFragment.MediaDetailProvider detailProvider;
+    private OnMultipleUploadInitiatedHandler multipleUploadInitiatedHandler;
 
     private DisplayImageOptions uploadDisplayOptions;
+
+    private boolean imageOnlyMode;
 
     private static class UploadHolderView {
         Uri imageUri;
@@ -110,6 +119,16 @@ public class MultipleUploadListFragment extends SherlockFragment {
         }
     }
 
+    public void setImageOnlyMode(boolean mode) {
+        imageOnlyMode = mode;
+        if(imageOnlyMode) {
+            baseTitle.setVisibility(View.GONE);
+        } else {
+            baseTitle.setVisibility(View.VISIBLE);
+        }
+        photosAdapter.notifyDataSetInvalidated();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_multiple_uploads_list, null);
@@ -153,11 +172,31 @@ public class MultipleUploadListFragment extends SherlockFragment {
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, com.actionbarsherlock.view.MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+        inflater.inflate(R.menu.fragment_multiple_upload_list, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.menu_upload_multiple:
+                multipleUploadInitiatedHandler.OnMultipleUploadInitiated();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         uploadDisplayOptions = Utils.getGenericDisplayOptions().build();
         detailProvider = (MediaDetailPagerFragment.MediaDetailProvider)getActivity();
+        multipleUploadInitiatedHandler = (OnMultipleUploadInitiatedHandler) getActivity();
+
+        setHasOptionsMenu(true);
     }
 
 

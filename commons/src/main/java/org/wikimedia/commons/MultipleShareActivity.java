@@ -22,7 +22,8 @@ public  class       MultipleShareActivity
         extends     AuthenticatedActivity
         implements  MediaDetailPagerFragment.MediaDetailProvider,
                     AdapterView.OnItemClickListener,
-                    FragmentManager.OnBackStackChangedListener {
+                    FragmentManager.OnBackStackChangedListener,
+                    MultipleUploadListFragment.OnMultipleUploadInitiatedHandler {
     private CommonsApplication app;
     private ArrayList<Contribution> photosList = null;
 
@@ -55,6 +56,11 @@ public  class       MultipleShareActivity
     public void onItemClick(AdapterView<?> adapterView, View view, int index, long item) {
         showDetail(index);
 
+    }
+
+    public void OnMultipleUploadInitiated() {
+        StartMultipleUploadTask startUploads = new StartMultipleUploadTask();
+        Utils.executeAsyncTask(startUploads);
     }
 
     private class StartMultipleUploadTask extends AsyncTask<Void, Integer, Void> {
@@ -128,19 +134,8 @@ public  class       MultipleShareActivity
     };
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getSupportMenuInflater().inflate(R.menu.activity_multiple_share, menu);
-        return true;
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
-            case R.id.menu_upload_multiple:
-
-                StartMultipleUploadTask startUploads = new StartMultipleUploadTask();
-                Utils.executeAsyncTask(startUploads);
-                return true;
             case android.R.id.home:
                 if(mediaDetails.isVisible()) {
                     getSupportFragmentManager().popBackStack();
