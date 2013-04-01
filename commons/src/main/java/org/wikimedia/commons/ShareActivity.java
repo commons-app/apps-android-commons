@@ -4,6 +4,7 @@ import android.app.*;
 import android.content.*;
 import android.os.*;
 import android.text.*;
+import android.util.Log;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import android.net.*;
 import android.support.v4.app.NavUtils;
@@ -77,6 +78,13 @@ public  class       ShareActivity
         categoriesSequence.queueModifier(new CategoryModifier(categories.toArray(new String[]{})));
         categoriesSequence.setContentProviderClient(getContentResolver().acquireContentProviderClient(ModificationsContentProvider.AUTHORITY));
         categoriesSequence.save();
+        EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT)
+                .param("username", app.getCurrentAccount().name)
+                .param("categories-count", categories.size())
+                .param("files-count", 1)
+                .param("source", contribution.getSource())
+                .param("result", "queued")
+                .log();
         finish();
     }
 
@@ -111,11 +119,22 @@ public  class       ShareActivity
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT)
-                .param("username", app.getCurrentAccount().name)
-                .param("source", getIntent().getStringExtra(UploadService.EXTRA_SOURCE))
-                .param("result", "cancelled")
-                .log();
+        if(categorizationFragment != null && categorizationFragment.isVisible()) {
+            EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT)
+                    .param("username", app.getCurrentAccount().name)
+                    .param("categories-count", categorizationFragment.getCurrentSelectedCount())
+                    .param("files-count", 1)
+                    .param("source", contribution.getSource())
+                    .param("result", "cancelled")
+                    .log();
+        } else {
+            EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT)
+                    .param("username", app.getCurrentAccount().name)
+                    .param("source", getIntent().getStringExtra(UploadService.EXTRA_SOURCE))
+                    .param("multiple", true)
+                    .param("result", "cancelled")
+                    .log();
+        }
     }
 
     @Override

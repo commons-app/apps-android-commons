@@ -201,6 +201,16 @@ public class CategorizationFragment extends SherlockFragment{
         }
     }
 
+    public int getCurrentSelectedCount() {
+        int count = 0;
+        for(CategoryItem item: categoriesAdapter.getItems()) {
+            if(item.selected) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_categorization, null);
@@ -212,6 +222,7 @@ public class CategorizationFragment extends SherlockFragment{
 
         categoriesSkip.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                getActivity().onBackPressed();
                 getActivity().finish();
             }
         });

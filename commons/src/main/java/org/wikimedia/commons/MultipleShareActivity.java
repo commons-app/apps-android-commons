@@ -85,6 +85,13 @@ public  class       MultipleShareActivity
             categoriesSequence.setContentProviderClient(client);
             categoriesSequence.save();
         }
+        EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT)
+                .param("username", app.getCurrentAccount().name)
+                .param("categories-count", categories.size())
+                .param("files-count", photosList.size())
+                .param("source", Contribution.SOURCE_EXTERNAL)
+                .param("result", "queued")
+                .log();
         finish();
     }
 
@@ -259,6 +266,27 @@ public  class       MultipleShareActivity
         Toast failureToast = Toast.makeText(this, R.string.authentication_failed, Toast.LENGTH_LONG);
         failureToast.show();
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if(categorizationFragment != null && categorizationFragment.isVisible()) {
+            EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT)
+                    .param("username", app.getCurrentAccount().name)
+                    .param("categories-count", categorizationFragment.getCurrentSelectedCount())
+                    .param("files-count", photosList.size())
+                    .param("source", Contribution.SOURCE_EXTERNAL)
+                    .param("result", "cancelled")
+                    .log();
+        } else {
+            EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT)
+                    .param("username", app.getCurrentAccount().name)
+                    .param("source", getIntent().getStringExtra(UploadService.EXTRA_SOURCE))
+                    .param("multiple", true)
+                    .param("result", "cancelled")
+                    .log();
+        }
     }
 
     public void onBackStackChanged() {
