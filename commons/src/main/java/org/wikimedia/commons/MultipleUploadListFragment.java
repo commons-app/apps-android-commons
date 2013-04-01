@@ -135,6 +135,7 @@ public class MultipleUploadListFragment extends SherlockFragment {
             baseTitle.setVisibility(View.VISIBLE);
         }
         photosAdapter.notifyDataSetChanged();
+        photosGrid.setEnabled(!mode);
     }
 
     @Override
