@@ -10,6 +10,7 @@ import android.os.*;
 import android.support.v4.app.FragmentManager;
 import android.text.*;
 import android.view.*;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -71,6 +72,12 @@ public  class       MultipleShareActivity
         categorizationFragment = (CategorizationFragment) this.getSupportFragmentManager().findFragmentByTag("categorization");
         if(categorizationFragment == null) {
             categorizationFragment = new CategorizationFragment();
+        }
+        // FIXME: Stops the keyboard from being shown 'stale' while moving out of this fragment into the next
+        View target = this.getCurrentFocus();
+        if (target != null) {
+            InputMethodManager imm = (InputMethodManager) target.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(target.getWindowToken(), 0);
         }
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.uploadsFragmentContainer, categorizationFragment, "categorization")
