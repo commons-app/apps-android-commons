@@ -1,5 +1,11 @@
 # Wikimedia Commons for Android
 
+## v1.0 beta 6
+- Add categorization
+- Add a 'Modifications Sync' framework for doing eventual-consistent page edits
+- More consistent designb between single and multiple upload
+- i18n updates
+
 ## v1.0 beta 5.1
 - Emergency release, since beta5 uploaded to testwiki
 
