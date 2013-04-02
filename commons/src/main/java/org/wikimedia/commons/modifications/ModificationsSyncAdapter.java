@@ -50,7 +50,8 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
         } catch (OperationCanceledException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            Log.d("Commons", "Could not authenticate :(");
+            return;
         } catch (AuthenticatorException e) {
             throw new RuntimeException(e);
         }
@@ -63,7 +64,8 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
         try {
             editToken = api.getEditToken();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            Log.d("Commons", "Can not retreive edit token!");
+            return;
         }
 
 
@@ -98,7 +100,8 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                                 .param("titles", contrib.getFilename())
                                 .get();
                     } catch (IOException e) {
-                        throw new RuntimeException(e);
+                        Log.d("Commons", "Network fuckup on modifications sync!");
+                        continue;
                     }
 
                     Log.d("Commons", "Page content is " + Utils.getStringFromDOM(requestResult.getDocument()));
@@ -113,17 +116,19 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                                 .param("summary", sequence.getEditSummary())
                                 .post();
                     } catch (IOException e) {
-                        throw new RuntimeException(e);
+                        Log.d("Commons", "Network fuckup on modifications sync!");
+                        continue;
                     }
 
                     Log.d("Commons", "Response is" + Utils.getStringFromDOM(responseResult.getDocument()));
 
                     String result = responseResult.getString("/api/edit/@result");
                     if(!result.equals("Success")) {
-                        throw new RuntimeException();
+                        // FIXME: Log this somewhere else
+                        Log.d("Commons", "Non success result!" + result);
+                    } else {
+                        sequence.delete();
                     }
-
-                    sequence.delete();
                 }
                 allModifications.moveToNext();
 
