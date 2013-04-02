@@ -92,6 +92,9 @@ public  class       MultipleShareActivity
             categoriesSequence.setContentProviderClient(client);
             categoriesSequence.save();
         }
+        // FIXME: Make sure that the content provider is up
+        // This is the wrong place for it, but bleh - better than not having it turned on by default for people who don't go throughl ogin
+        ContentResolver.setSyncAutomatically(app.getCurrentAccount(), ModificationsContentProvider.AUTHORITY, true); // Enable sync by default!
         EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT)
                 .param("username", app.getCurrentAccount().name)
                 .param("categories-count", categories.size())
