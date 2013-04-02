@@ -257,7 +257,7 @@ public class CategorizationFragment extends SherlockFragment{
                     lastUpdater.cancel(true);
                 }
                 lastUpdater = new CategoriesUpdater();
-                lastUpdater.executeOnExecutor(executor);
+                Utils.executeAsyncTask(lastUpdater, executor);
             }
 
             public void afterTextChanged(Editable editable) {

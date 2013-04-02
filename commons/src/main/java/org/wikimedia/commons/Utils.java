@@ -14,6 +14,7 @@ import javax.xml.transform.*;
 import java.io.*;
 import java.text.*;
 import java.util.*;
+import java.util.concurrent.Executor;
 
 public class Utils {
     public static Date parseMWDate(String mwDate) {
@@ -72,6 +73,18 @@ public class Utils {
             task.execute(params);
         }
     }
+
+    static public <T> void executeAsyncTask(AsyncTask<T, ?, ?> task, Executor executor,
+                                            T... params) {
+        // FIXME: We're simply ignoring the executor on older androids
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            task.executeOnExecutor(executor, params);
+        }
+        else {
+            task.execute(params);
+        }
+    }
+
 
     private static DisplayImageOptions.Builder defaultImageOptionsBuilder;
     public static DisplayImageOptions.Builder getGenericDisplayOptions() {
