@@ -30,8 +30,7 @@ public class EventLog {
 
                 } catch (IOException e) {
                     // Probably just ignore for now. Can be much more robust with a service, etc later on.
-                    // But in the interest of debugging
-                    throw new RuntimeException(e);
+                    Log.d("Commons", "IO Error, EventLog hit skipped");
                 }
 
             }
