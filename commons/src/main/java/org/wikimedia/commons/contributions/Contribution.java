@@ -123,7 +123,7 @@ public class Contribution extends Media {
         buffer
             .append("== {{int:filedesc}} ==\n")
                 .append("{{Information\n")
-                    .append("|Description=").append(description).append("\n")
+                    .append("|description=").append(description).append("\n")
                     .append("|source=").append("{{own}}\n")
                     .append("|author=[[User:").append(creator).append("]]\n");
         if(dateCreated != null) {
