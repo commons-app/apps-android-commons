@@ -100,9 +100,8 @@ public class CommonsApplication extends Application {
             throw new RuntimeException(e);
         }
 
-        // Enable / disable tracking based on user preference. Defaults to true
-        SharedPreferences settings = getSharedPreferences(Prefs.GLOBAL_PREFS, MODE_PRIVATE);
-        EventLog.enabled = settings.getBoolean(Prefs.TRACKING_ENABLED, EventLog.enabled);
+        // Initialize EventLogging
+        EventLog.setApp(this);
     }
     
     public MWApi getApi() {

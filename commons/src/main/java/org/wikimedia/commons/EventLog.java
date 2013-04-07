@@ -1,6 +1,9 @@
 package org.wikimedia.commons;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.*;
+import android.preference.PreferenceManager;
 import android.util.*;
 import in.yuvi.http.fluent.Http;
 import org.apache.http.HttpResponse;
@@ -10,8 +13,7 @@ import java.net.*;
 
 public class EventLog {
 
-    // Set to false in CommonsApplication if the user has disabled tracking
-    public static boolean enabled = true;
+    private static CommonsApplication app;
 
     private static class LogTask extends AsyncTask<LogBuilder, Void, Boolean> {
 
@@ -50,6 +52,10 @@ public class EventLog {
         } else {
             DEVICE = Utils.capitalize(Build.MANUFACTURER) + " " + Build.MODEL;
         }
+    }
+
+    public static void setApp(CommonsApplication app) {
+        EventLog.app = app;
     }
 
     public static class LogBuilder {
@@ -91,7 +97,8 @@ public class EventLog {
         }
 
         public void log() {
-            if(!enabled) {
+            SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(app);
+            if(!settings.getBoolean(Prefs.TRACKING_ENABLED, true)) {
                 return; // User has disabled tracking
             }
             LogTask logTask = new LogTask();

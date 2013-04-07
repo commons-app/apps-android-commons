@@ -217,6 +217,10 @@ public class ContributionsListFragment extends SherlockFragment {
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, lastGeneratedCaptureURI);
                 startActivityForResult(takePictureIntent, SELECT_FROM_CAMERA);
                 return true;
+            case R.id.menu_settings:
+                Intent settingsIntent = new Intent(getActivity(), SettingsActivity.class);
+                startActivity(settingsIntent);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
