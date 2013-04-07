@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="crash_dialog_title">Commons har kræsjet</string><string name="crash_dialog_text">Oisann. Noe gikk galt!</string><string name="crash_dialog_comment_prompt">Beskriv hva du gjorde, og del det med oss per e-post. Det hjelper oss med å ordne det!</string><string name="crash_dialog_ok_toast">Takk!</string></resources>
+<resources>
+  <string name="crash_dialog_title">Commons har kræsjet</string>
+  <string name="crash_dialog_text">Oisann. Noe gikk galt!</string>
+  <string name="crash_dialog_comment_prompt">Beskriv hva du gjorde, og del det med oss per e-post. Det hjelper oss med å ordne det!</string>
+  <string name="crash_dialog_ok_toast">Takk!</string>
+</resources>

@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="crash_dialog_title">El Commons s\'ha penjat</string><string name="crash_dialog_text">Uups ! Quelcom ha anat malament !</string><string name="crash_dialog_comment_prompt">Explica\'ns que estaves fent, després comparteix-ho mitjançant email amb nosaltres. Ens ajudaràs a arreglar-ho!</string><string name="crash_dialog_ok_toast">Gràcies!</string></resources>
+<resources>
+  <string name="crash_dialog_title">El Commons s\'ha penjat</string>
+  <string name="crash_dialog_text">Uups ! Quelcom ha anat malament !</string>
+  <string name="crash_dialog_comment_prompt">Explica\'ns que estaves fent, després comparteix-ho mitjançant email amb nosaltres. Ens ajudaràs a arreglar-ho!</string>
+  <string name="crash_dialog_ok_toast">Gràcies!</string>
+</resources>

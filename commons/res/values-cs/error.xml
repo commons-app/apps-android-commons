@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="crash_dialog_title">Commons spadly</string><string name="crash_dialog_text">Ups. Něco je špatně!</string><string name="crash_dialog_comment_prompt">Řekněte nám, co jste dělali a dejte nám to vědět e-mailem. Pomůže sjednat nápravu!</string><string name="crash_dialog_ok_toast">Děkujeme vám!</string></resources>
+<resources>
+  <string name="crash_dialog_title">Commons spadly</string>
+  <string name="crash_dialog_text">Ups. Něco je špatně!</string>
+  <string name="crash_dialog_comment_prompt">Řekněte nám, co jste dělali a dejte nám to vědět e-mailem. Pomůže sjednat nápravu!</string>
+  <string name="crash_dialog_ok_toast">Děkujeme vám!</string>
+</resources>

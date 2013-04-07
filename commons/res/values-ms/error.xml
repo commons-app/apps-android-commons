@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="crash_dialog_title">Commons telah runtuh</string><string name="crash_dialog_text">Maaf, berlakunya ralat!</string><string name="crash_dialog_comment_prompt">Beritahu kami melalui e-mel apa yang sedang anda lakukan supaya kami boleh membaikinya.</string><string name="crash_dialog_ok_toast">Terima kasih!</string></resources>
+<resources>
+  <string name="crash_dialog_title">Commons telah runtuh</string>
+  <string name="crash_dialog_text">Maaf, berlakunya ralat!</string>
+  <string name="crash_dialog_comment_prompt">Beritahu kami melalui e-mel apa yang sedang anda lakukan supaya kami boleh membaikinya.</string>
+  <string name="crash_dialog_ok_toast">Terima kasih!</string>
+</resources>

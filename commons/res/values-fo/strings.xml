@@ -1,2 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="app_name">Wikimedia Commons</string><string name="app_name_beta">Wikimedia Commons Beta</string><string name="menu_settings">Innstillingar</string><string name="username">Brúkaranavn</string><string name="password">Loyniorð</string><string name="login">Rita inn</string><string name="logging_in_title">Ritar inn</string><string name="logging_in_message">Vinarliga bíða...</string><string name="title_activity_share" fuzzy="true">Wikimedia Commons</string><string name="login_success">Innritan væleydnað!</string><string name="login_failed">Innritan miseydnaðist</string><string name="authentication_failed">Góðkenning miseydnaðist!</string><string name="uploading_started">Upplóting er byrjað!</string><string name="upload_completed_notification_title">%1$s er lagt út!</string><string name="upload_completed_notification_text">Trýst fyri at síggja tað sum tú legði út</string><string name="upload_progress_notification_title_start">Byrjar %1$s útlegging</string><string name="upload_progress_notification_title_in_progress">%1$s verður lagt út</string><string name="upload_progress_notification_title_finishing">Útlegging av %1$s er við at vera liðug</string><string name="upload_failed_notification_title">Tað miseydnaðist at leggja %1$s út</string><string name="upload_failed_notification_subtitle">Trýst fyri at síggja</string><string name="title_activity_contributions">Tað sum eg havi lagt út</string><string name="contribution_state_queued">Í bíðirøð</string><string name="contribution_state_failed">Miseydnaðist</string><string name="contribution_state_in_progress">%1$d%% liðugt</string><string name="contribution_state_starting">Leggur út</string><string name="menu_from_gallery">Frá Myndasavni</string><string name="menu_from_camera">Tak mynd</string><string name="provider_contributions">Tað sum eg havi lagt út</string><string name="menu_share">Deil</string><string name="menu_open_in_browser">Síggj í internetkaga</string><string name="share_title_hint">Heiti</string><string name="share_description_hint">Frágreiðing</string><string name="login_failed_network">Ómøguligt at rita inn - feilur í netsambandinum</string><string name="login_failed_username">Ómøguligt at rita inn - vinarliga eftirkanna títt brúkaranavn</string><string name="login_failed_password">Ómøguligt at rita inn - vinarliga kanna eftir, um títt loyniorð er rætt</string><string name="login_failed_throttled">Ov nógv miseydnaðar royndir. Vinarliga royn aftur um fáir minuttir</string><string name="login_failed_blocked">Haldið okkum tilgóðar, hesin brúkari er blivin sperraður á Commons</string><string name="login_failed_generic">Login miseydnaðist</string><string name="share_upload_button">Legg út</string><string name="multiple_share_base_title">Gev hesi mappuni navn</string></resources>
+<resources>
+  <string name="app_name">Wikimedia Commons</string>
+  <string name="app_name_beta">Wikimedia Commons Beta</string>
+  <string name="menu_settings">Innstillingar</string>
+  <string name="username">Brúkaranavn</string>
+  <string name="password">Loyniorð</string>
+  <string name="login">Rita inn</string>
+  <string name="logging_in_title">Ritar inn</string>
+  <string name="logging_in_message">Vinarliga bíða...</string>
+  <string name="title_activity_share" fuzzy="true">Wikimedia Commons</string>
+  <string name="login_success">Innritan væleydnað!</string>
+  <string name="login_failed">Innritan miseydnaðist</string>
+  <string name="authentication_failed">Góðkenning miseydnaðist!</string>
+  <string name="uploading_started">Upplóting er byrjað!</string>
+  <string name="upload_completed_notification_title">%1$s er lagt út!</string>
+  <string name="upload_completed_notification_text">Trýst fyri at síggja tað sum tú legði út</string>
+  <string name="upload_progress_notification_title_start">Byrjar %1$s útlegging</string>
+  <string name="upload_progress_notification_title_in_progress">%1$s verður lagt út</string>
+  <string name="upload_progress_notification_title_finishing">Útlegging av %1$s er við at vera liðug</string>
+  <string name="upload_failed_notification_title">Tað miseydnaðist at leggja %1$s út</string>
+  <string name="upload_failed_notification_subtitle">Trýst fyri at síggja</string>
+  <string name="title_activity_contributions">Tað sum eg havi lagt út</string>
+  <string name="contribution_state_queued">Í bíðirøð</string>
+  <string name="contribution_state_failed">Miseydnaðist</string>
+  <string name="contribution_state_in_progress">%1$d%% liðugt</string>
+  <string name="contribution_state_starting">Leggur út</string>
+  <string name="menu_from_gallery">Frá Myndasavni</string>
+  <string name="menu_from_camera">Tak mynd</string>
+  <string name="provider_contributions">Tað sum eg havi lagt út</string>
+  <string name="menu_share">Deil</string>
+  <string name="menu_open_in_browser">Síggj í internetkaga</string>
+  <string name="share_title_hint">Heiti</string>
+  <string name="share_description_hint">Frágreiðing</string>
+  <string name="login_failed_network">Ómøguligt at rita inn - feilur í netsambandinum</string>
+  <string name="login_failed_username">Ómøguligt at rita inn - vinarliga eftirkanna títt brúkaranavn</string>
+  <string name="login_failed_password">Ómøguligt at rita inn - vinarliga kanna eftir, um títt loyniorð er rætt</string>
+  <string name="login_failed_throttled">Ov nógv miseydnaðar royndir. Vinarliga royn aftur um fáir minuttir</string>
+  <string name="login_failed_blocked">Haldið okkum tilgóðar, hesin brúkari er blivin sperraður á Commons</string>
+  <string name="login_failed_generic">Login miseydnaðist</string>
+  <string name="share_upload_button">Legg út</string>
+  <string name="multiple_share_base_title">Gev hesi mappuni navn</string>
+</resources>

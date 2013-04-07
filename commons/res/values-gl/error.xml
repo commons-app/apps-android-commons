@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="crash_dialog_title">Commons fallou</string><string name="crash_dialog_text">Vaites! Algo foi mal!</string><string name="crash_dialog_comment_prompt">Envíenos un correo electrónico contándonos o que estaba a facer. Axúdenos a arranxalo!</string><string name="crash_dialog_ok_toast">Grazas!</string></resources>
+<resources>
+  <string name="crash_dialog_title">Commons fallou</string>
+  <string name="crash_dialog_text">Vaites! Algo foi mal!</string>
+  <string name="crash_dialog_comment_prompt">Envíenos un correo electrónico contándonos o que estaba a facer. Axúdenos a arranxalo!</string>
+  <string name="crash_dialog_ok_toast">Grazas!</string>
+</resources>

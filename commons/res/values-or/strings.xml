@@ -1,2 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="app_name">ଉଇକିମିଡ଼ିଆ କମନ୍ସ</string><string name="app_name_beta">ଉଇକିମିଡ଼ିଆ କମନ୍ସ ବିଟା</string><string name="menu_settings">ସଜାଣି</string><string name="username">ବ୍ୟବହାରକାରୀ ନାମ</string><string name="password">ପାସୱାର୍ଡ଼</string><string name="login">ଲଗ ଇନ</string><string name="logging_in_title">ଲଗିଂ ଇନ...</string><string name="logging_in_message">ଦୟାକରି ଅପେକ୍ଷା କରନ୍ତୁ...</string><string name="title_activity_share">ଅପଲୋଡ଼ ମିଡ଼ିଆ</string><string name="login_success">ଠିକଭାବେ ଲଗଇନ ହେଲା!</string><string name="login_failed">ଲଗଇନ ହେଲାନାହିଁ!</string><string name="contribution_state_starting">ଅପଲୋଡ଼ ହେଉଛି</string><string name="menu_share">ଜଣାଇବେ</string><string name="menu_open_in_browser">ବ୍ରାଉଜରରେ ଦେଖିବେ</string><string name="share_title_hint">ଶିରୋନାମା</string><string name="share_description_hint">ବିବରଣୀ</string><string name="login_failed_generic">ଲଗଇନ ହେଲାନାହିଁ</string><string name="share_upload_button">ଅପଲୋଡ଼</string><string name="menu_upload_single">ଅପଲୋଡ଼</string><string name="categories_search_text_hint">ଶ୍ରେଣୀଗୁଡ଼ିକ ଖୋଜନ୍ତୁ</string><string name="menu_save_categories">ସାଇତିବେ</string><string name="categories_activity_title">ଶ୍ରେଣୀସମୂହ</string></resources>
+<resources>
+  <string name="app_name">ଉଇକିମିଡ଼ିଆ କମନ୍ସ</string>
+  <string name="app_name_beta">ଉଇକିମିଡ଼ିଆ କମନ୍ସ ବିଟା</string>
+  <string name="menu_settings">ସଜାଣି</string>
+  <string name="username">ବ୍ୟବହାରକାରୀ ନାମ</string>
+  <string name="password">ପାସୱାର୍ଡ଼</string>
+  <string name="login">ଲଗ ଇନ</string>
+  <string name="logging_in_title">ଲଗିଂ ଇନ...</string>
+  <string name="logging_in_message">ଦୟାକରି ଅପେକ୍ଷା କରନ୍ତୁ...</string>
+  <string name="title_activity_share">ଅପଲୋଡ଼ ମିଡ଼ିଆ</string>
+  <string name="login_success">ଠିକଭାବେ ଲଗଇନ ହେଲା!</string>
+  <string name="login_failed">ଲଗଇନ ହେଲାନାହିଁ!</string>
+  <string name="contribution_state_starting">ଅପଲୋଡ଼ ହେଉଛି</string>
+  <string name="menu_share">ଜଣାଇବେ</string>
+  <string name="menu_open_in_browser">ବ୍ରାଉଜରରେ ଦେଖିବେ</string>
+  <string name="share_title_hint">ଶିରୋନାମା</string>
+  <string name="share_description_hint">ବିବରଣୀ</string>
+  <string name="login_failed_generic">ଲଗଇନ ହେଲାନାହିଁ</string>
+  <string name="share_upload_button">ଅପଲୋଡ଼</string>
+  <string name="menu_upload_single">ଅପଲୋଡ଼</string>
+  <string name="categories_search_text_hint">ଶ୍ରେଣୀଗୁଡ଼ିକ ଖୋଜନ୍ତୁ</string>
+  <string name="menu_save_categories">ସାଇତିବେ</string>
+  <string name="categories_activity_title">ଶ୍ରେଣୀସମୂହ</string>
+</resources>

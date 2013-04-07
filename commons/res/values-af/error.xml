@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="crash_dialog_title">Commons het omgeval</string><string name="crash_dialog_text">Oeps. Iets is fout!</string><string name="crash_dialog_comment_prompt">Vertel ons wat u gedoen het, en e-pos dit aan ons. Dit sal ons help om die probleem op te los.</string><string name="crash_dialog_ok_toast">Baie dankie!</string></resources>
+<resources>
+  <string name="crash_dialog_title">Commons het omgeval</string>
+  <string name="crash_dialog_text">Oeps. Iets is fout!</string>
+  <string name="crash_dialog_comment_prompt">Vertel ons wat u gedoen het, en e-pos dit aan ons. Dit sal ons help om die probleem op te los.</string>
+  <string name="crash_dialog_ok_toast">Baie dankie!</string>
+</resources>

@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="crash_dialog_title">יישום ויקישיתוף קרס</string><string name="crash_dialog_text">אוי, משהו השתבש!</string><string name="crash_dialog_comment_prompt">אפשר לספר לנו בדואר אלקטרוני מה עשית ואנחנו ננסה לתקן את זה.</string><string name="crash_dialog_ok_toast">תודה!</string></resources>
+<resources>
+  <string name="crash_dialog_title">יישום ויקישיתוף קרס</string>
+  <string name="crash_dialog_text">אוי, משהו השתבש!</string>
+  <string name="crash_dialog_comment_prompt">אפשר לספר לנו בדואר אלקטרוני מה עשית ואנחנו ננסה לתקן את זה.</string>
+  <string name="crash_dialog_ok_toast">תודה!</string>
+</resources>
