@@ -11,7 +11,7 @@ import java.net.*;
 public class EventLog {
 
     // Set to false in CommonsApplication if the user has disabled tracking
-    public static boolean enabled = false;
+    public static boolean enabled = true;
 
     private static class LogTask extends AsyncTask<LogBuilder, Void, Boolean> {
 
