@@ -96,13 +96,20 @@ public class EventLog {
             }
         }
 
-        public void log() {
+        // force param disregards user preference
+        // Use *only* for tracking the user preference change for EventLogging
+        // Attempting to use anywhere else will cause kitten explosions
+        public void log(boolean force) {
             SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(app);
-            if(!settings.getBoolean(Prefs.TRACKING_ENABLED, true)) {
+            if(!settings.getBoolean(Prefs.TRACKING_ENABLED, true) && !force) {
                 return; // User has disabled tracking
             }
             LogTask logTask = new LogTask();
             Utils.executeAsyncTask(logTask, this);
+        }
+
+        public void log() {
+            log(false);
         }
 
     }
