@@ -7,6 +7,7 @@ import java.net.URI;
 
 import android.accounts.*;
 import android.app.Application;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -98,6 +99,10 @@ public class CommonsApplication extends Application {
             // LET US WIN THE AWARD FOR DUMBEST CHECKED EXCEPTION EVER!
             throw new RuntimeException(e);
         }
+
+        // Enable / disable tracking based on user preference. Defaults to true
+        SharedPreferences settings = getSharedPreferences(Prefs.GLOBAL_PREFS, MODE_PRIVATE);
+        EventLog.enabled = settings.getBoolean(Prefs.TRACKING_ENABLED, EventLog.enabled);
     }
     
     public MWApi getApi() {

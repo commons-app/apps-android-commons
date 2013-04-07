@@ -9,6 +9,10 @@ import java.io.IOException;
 import java.net.*;
 
 public class EventLog {
+
+    // Set to false in CommonsApplication if the user has disabled tracking
+    public static boolean enabled = false;
+
     private static class LogTask extends AsyncTask<LogBuilder, Void, Boolean> {
 
         @Override
@@ -87,6 +91,9 @@ public class EventLog {
         }
 
         public void log() {
+            if(!enabled) {
+                return; // User has disabled tracking
+            }
             LogTask logTask = new LogTask();
             Utils.executeAsyncTask(logTask, this);
         }
