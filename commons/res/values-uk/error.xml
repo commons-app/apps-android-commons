@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="crash_dialog_text">Ой. Щось пішло не так!</string><string name="crash_dialog_comment_prompt">Розкажіть, що Ви робили, і надішліть нам електронною поштою. Це допоможе нам виправитись!</string><string name="crash_dialog_ok_toast">Дякуємо!</string></resources>
+<resources><string name="crash_dialog_title">Крах додатку</string><string name="crash_dialog_text">Ой. Щось пішло не так!</string><string name="crash_dialog_comment_prompt">Розкажіть, що Ви робили, і надішліть нам електронною поштою. Це допоможе нам виправитись!</string><string name="crash_dialog_ok_toast">Дякуємо!</string></resources>

@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources><string name="crash_dialog_title">Непредвиденная остановка приложения</string><string name="crash_dialog_text">Ой. Что-то пошло не так!</string><string name="crash_dialog_comment_prompt">Расскажите, что вы делали, и отправьте нам по электронной почте. Это поможет нам исправить проблему!</string><string name="crash_dialog_ok_toast">Спасибо!</string></resources>
