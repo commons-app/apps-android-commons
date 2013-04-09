@@ -20,6 +20,10 @@
           android:title="@string/menu_about"
           android:showAsAction="never"
           />
+    <item android:id="@+id/menu_feedback"
+          android:title="@string/menu_feedback"
+          android:showAsAction="never"
+            />
 
 
 </menu>

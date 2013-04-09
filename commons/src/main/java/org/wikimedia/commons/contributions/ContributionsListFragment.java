@@ -225,6 +225,13 @@ public class ContributionsListFragment extends SherlockFragment {
                 Intent aboutIntent = new Intent(getActivity(),  AboutActivity.class);
                 startActivity(aboutIntent);
                 return true;
+            case R.id.menu_feedback:
+                Intent feedbackIntent = new Intent(Intent.ACTION_SEND);
+                feedbackIntent.setType("message/rfc822");
+                feedbackIntent.putExtra(Intent.EXTRA_EMAIL, new String[] { CommonsApplication.FEEDBACK_EMAIL });
+                feedbackIntent.putExtra(Intent.EXTRA_SUBJECT, String.format(CommonsApplication.FEEDBACK_EMAIL_SUBJECT, CommonsApplication.APPLICATION_VERSION));
+                startActivity(feedbackIntent);
+
             default:
                 return super.onOptionsItemSelected(item);
         }

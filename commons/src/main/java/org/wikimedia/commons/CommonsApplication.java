@@ -59,6 +59,9 @@ public class CommonsApplication extends Application {
 
     public static final String DEFAULT_EDIT_SUMMARY = "Uploaded using Android Commons app";
 
+    public static final String FEEDBACK_EMAIL = "mobile-feedback-l@lists.wikimedia.org";
+    public static final String FEEDBACK_EMAIL_SUBJECT = "Commons Android App (%s) Feedback";
+
 
     public static AbstractHttpClient createHttpClient() {
         DefaultHttpClient client = new DefaultHttpClient();
