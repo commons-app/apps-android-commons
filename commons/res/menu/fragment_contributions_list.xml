@@ -16,5 +16,10 @@
           android:showAsAction="never"
           android:icon="@android:drawable/ic_menu_preferences"
           />
+    <item android:id="@+id/menu_about"
+          android:title="@string/menu_about"
+          android:showAsAction="never"
+          />
+
 
 </menu>

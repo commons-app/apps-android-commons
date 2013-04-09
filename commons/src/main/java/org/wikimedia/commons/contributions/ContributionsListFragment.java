@@ -221,6 +221,10 @@ public class ContributionsListFragment extends SherlockFragment {
                 Intent settingsIntent = new Intent(getActivity(), SettingsActivity.class);
                 startActivity(settingsIntent);
                 return true;
+            case R.id.menu_about:
+                Intent aboutIntent = new Intent(getActivity(),  AboutActivity.class);
+                startActivity(aboutIntent);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
