@@ -1,5 +1,13 @@
 # Wikimedia Commons for Android
 
+## v1.0 beta 7
+- Added opt out from EventLogging
+- Remove {{Uncategorized}} template after adding categories
+- Be more consistent and proactive in syncing modifications (adding categories)
+- Add a minimal About page
+- Add option to send feedback via email from within the app
+- i18n updates
+
 ## v1.0 beta 6
 - Add categorization
 - Add a 'Modifications Sync' framework for doing eventual-consistent page edits
