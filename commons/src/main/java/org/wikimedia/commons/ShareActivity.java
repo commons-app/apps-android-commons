@@ -18,6 +18,7 @@ import org.wikimedia.commons.auth.*;
 import org.wikimedia.commons.modifications.CategoryModifier;
 import org.wikimedia.commons.modifications.ModificationsContentProvider;
 import org.wikimedia.commons.modifications.ModifierSequence;
+import org.wikimedia.commons.modifications.TemplateRemoveModifier;
 
 import java.util.ArrayList;
 
@@ -74,10 +75,14 @@ public  class       ShareActivity
     }
 
     public void onCategoriesSave(ArrayList<String> categories) {
-        ModifierSequence categoriesSequence = new ModifierSequence(contribution.getContentUri());
-        categoriesSequence.queueModifier(new CategoryModifier(categories.toArray(new String[]{})));
-        categoriesSequence.setContentProviderClient(getContentResolver().acquireContentProviderClient(ModificationsContentProvider.AUTHORITY));
-        categoriesSequence.save();
+        if(categories.size() > 0) {
+            ModifierSequence categoriesSequence = new ModifierSequence(contribution.getContentUri());
+
+            categoriesSequence.queueModifier(new CategoryModifier(categories.toArray(new String[]{})));
+            categoriesSequence.queueModifier(new TemplateRemoveModifier("Uncategorized"));
+            categoriesSequence.setContentProviderClient(getContentResolver().acquireContentProviderClient(ModificationsContentProvider.AUTHORITY));
+            categoriesSequence.save();
+        }
 
         // FIXME: Make sure that the content provider is up
         // This is the wrong place for it, but bleh - better than not having it turned on by default for people who don't go throughl ogin

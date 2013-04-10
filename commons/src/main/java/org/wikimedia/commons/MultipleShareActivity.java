@@ -21,6 +21,7 @@ import org.wikimedia.commons.media.*;
 import org.wikimedia.commons.modifications.CategoryModifier;
 import org.wikimedia.commons.modifications.ModificationsContentProvider;
 import org.wikimedia.commons.modifications.ModifierSequence;
+import org.wikimedia.commons.modifications.TemplateRemoveModifier;
 
 public  class       MultipleShareActivity
         extends     AuthenticatedActivity
@@ -85,12 +86,17 @@ public  class       MultipleShareActivity
     }
 
     public void onCategoriesSave(ArrayList<String> categories) {
+        if(categories.size() > 0) {
         ContentProviderClient client = getContentResolver().acquireContentProviderClient(ModificationsContentProvider.AUTHORITY);
-        for(Contribution contribution: photosList) {
-            ModifierSequence categoriesSequence = new ModifierSequence(contribution.getContentUri());
-            categoriesSequence.queueModifier(new CategoryModifier(categories.toArray(new String[]{})));
-            categoriesSequence.setContentProviderClient(client);
-            categoriesSequence.save();
+            for(Contribution contribution: photosList) {
+                ModifierSequence categoriesSequence = new ModifierSequence(contribution.getContentUri());
+
+                categoriesSequence.queueModifier(new CategoryModifier(categories.toArray(new String[]{})));
+                categoriesSequence.queueModifier(new TemplateRemoveModifier("Uncategorized"));
+
+                categoriesSequence.setContentProviderClient(client);
+                categoriesSequence.save();
+            }
         }
         // FIXME: Make sure that the content provider is up
         // This is the wrong place for it, but bleh - better than not having it turned on by default for people who don't go throughl ogin

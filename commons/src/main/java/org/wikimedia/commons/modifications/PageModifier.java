@@ -10,7 +10,10 @@ public abstract class PageModifier {
         String name = data.optString("name");
         if(name.equals(CategoryModifier.MODIFIER_NAME)) {
             return new CategoryModifier(data.optJSONObject("data"));
+        } else if(name.equals(TemplateRemoveModifier.MODIFIER_NAME)) {
+            return new TemplateRemoveModifier(data.optJSONObject("data"));
         }
+
         return null;
     }
 
