@@ -12,6 +12,10 @@ public class TemplateRemoveModifier extends PageModifier {
 
     public static final String PARAM_TEMPLATE_NAME = "template";
 
+    public static final Pattern PATTERN_TEMPLATE_OPEN = Pattern.compile("\\{\\{");
+    public static final Pattern PATTERN_TEMPLATE_CLOSE = Pattern.compile("\\}\\}");
+
+
     public TemplateRemoveModifier(String templateName) {
         super(MODIFIER_NAME);
         try {
@@ -39,13 +43,13 @@ public class TemplateRemoveModifier extends PageModifier {
         Matcher matcher = templateStartPattern.matcher(pageContents);
 
         while(matcher.find()) {
-            int braceCount = 2;
+            int braceCount = 1;
             int startIndex = matcher.start();
             int curIndex = matcher.end();
             while(curIndex < pageContents.length()) {
-                if(pageContents.charAt(curIndex) == '{') {
+                if(PATTERN_TEMPLATE_OPEN.matcher(pageContents).find(curIndex)) {
                     braceCount++;
-                } else if(pageContents.charAt(curIndex) == '}') {
+                } else if(PATTERN_TEMPLATE_CLOSE.matcher(pageContents).find(curIndex)) {
                     braceCount--;
                 }
                 curIndex++;
