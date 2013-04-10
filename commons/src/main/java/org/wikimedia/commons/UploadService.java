@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.Date;
 
 import android.graphics.*;
+import android.os.Bundle;
 import org.mediawiki.api.*;
 import in.yuvi.http.fluent.ProgressListener;
 
@@ -14,6 +15,7 @@ import android.util.*;
 import android.widget.*;
 
 import org.wikimedia.commons.contributions.*;
+import org.wikimedia.commons.modifications.ModificationsContentProvider;
 
 public class UploadService extends HandlerService<Contribution> {
 
@@ -247,6 +249,8 @@ public class UploadService extends HandlerService<Contribution> {
         } finally {
             toUpload--;
             if(toUpload == 0) {
+                // Sync modifications right after all uplaods are processed
+                ContentResolver.requestSync(((CommonsApplication) getApplicationContext()).getCurrentAccount(), ModificationsContentProvider.AUTHORITY, new Bundle());
                 stopForeground(true);
             }
         }
