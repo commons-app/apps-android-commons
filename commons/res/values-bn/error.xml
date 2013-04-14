@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="crash_dialog_title">কমনস ক্র্যাশ করেছে</string>
-  <string name="crash_dialog_text">হমম. কিছু একটা ত্রুটি হয়েছে!</string>
+  <string name="crash_dialog_title">কমন্স ক্র্যাশ করেছে</string>
+  <string name="crash_dialog_text">ওহ! কিছু একটা ত্রুটি হয়েছে!</string>
   <string name="crash_dialog_comment_prompt">আপনি যা করছিলেন আমাদের জানান, আমাদের ই-মেইল করুন। এটি ঠিক করতে আমাদের সুবিধা হবে!</string>
-  <string name="crash_dialog_ok_toast">ধন্যবাদ !</string>
+  <string name="crash_dialog_ok_toast">আপনাকে ধন্যবাদ!</string>
 </resources>

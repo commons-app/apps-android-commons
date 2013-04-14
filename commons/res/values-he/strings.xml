@@ -8,7 +8,6 @@
   <string name="login">כניסה</string>
   <string name="logging_in_title">כניסה לחשבון</string>
   <string name="logging_in_message">נא להמתין...</string>
-  <string name="title_activity_share">העלאת מדיה</string>
   <string name="login_success">הכניסה הצליחה</string>
   <string name="login_failed">הכניסה נכשלה!</string>
   <string name="authentication_failed">אימות הפרטים נכשל</string>
@@ -50,4 +49,6 @@
 כדי להוסיף קטגוריה יש להתחיל לכתוב.
 יש ללחוץ על ההודעה הזאת או על כפתור \"חזרה\" כדי לדלג על הצעד הזה.</string>
   <string name="categories_activity_title">קטגוריות</string>
+  <string name="preference_tracking">דוחות שימוש</string>
+  <string name="title_activity_settings">הגדרות</string>
 </resources>

@@ -8,7 +8,6 @@
   <string name="login">Anmelden</string>
   <string name="logging_in_title">Anmelden</string>
   <string name="logging_in_message">Bitte warten …</string>
-  <string name="title_activity_share">Mediendatei hochladen</string>
   <string name="login_success">Anmeldung erfolgreich!</string>
   <string name="login_failed">Anmeldung fehlgeschlagen!</string>
   <string name="authentication_failed">Authentifizierung fehlgeschlagen!</string>

@@ -8,7 +8,6 @@
   <string name="login">Meld aan</string>
   <string name="logging_in_title">Besig met aanmelding</string>
   <string name="logging_in_message">Wag asseblief...</string>
-  <string name="title_activity_share">Laai media op</string>
   <string name="login_success">Aanmelding geslaagd</string>
   <string name="login_failed">Aanmelding gefaal</string>
   <string name="authentication_failed">Verifikasie het gefaal!</string>
@@ -50,4 +49,5 @@
 Begin tik om kategorieë by te sit.
 Tik die boodskap (of terug) om die stap oor te slaan.</string>
   <string name="categories_activity_title">Kategorieë</string>
+  <string name="title_activity_settings">Voorkeure</string>
 </resources>

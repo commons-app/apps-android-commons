@@ -8,7 +8,6 @@
   <string name="login">ورود به سامانه</string>
   <string name="logging_in_title">ورود به سیستم</string>
   <string name="logging_in_message">لطفاً صبر کنید...</string>
-  <string name="title_activity_share" fuzzy="true">ویکی‌انبار</string>
   <string name="login_success">ورود موفق!</string>
   <string name="login_failed">ورود ناموفق!</string>
   <string name="authentication_failed">تأیید اعتبار انجام نشد!</string>

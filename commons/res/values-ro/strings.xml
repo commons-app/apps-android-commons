@@ -8,7 +8,6 @@
   <string name="login">Autentificare</string>
   <string name="logging_in_title">Se conectează</string>
   <string name="logging_in_message">Așteptați...</string>
-  <string name="title_activity_share">Încărcare fișiere media</string>
   <string name="login_success">Autentificare reușită!</string>
   <string name="login_failed">Autentificare nereușită!</string>
   <string name="authentication_failed">Certificare nereușită!</string>
@@ -50,4 +49,7 @@
 Începeți să tastați pentru a adăuga categorii.
 Atingeți acest mesaj (sau mergeți înapoi) pentru a omite acest pas.</string>
   <string name="categories_activity_title">Categorii</string>
+  <string name="preference_tracking">Rapoarte de utilizare</string>
+  <string name="preference_tracking_summary">Trimiteți rapoarte de utilizare către Wikimedia pentru a ajuta la îmbunătățirea aplicației</string>
+  <string name="title_activity_settings">Setări</string>
 </resources>

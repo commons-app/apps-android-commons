@@ -8,7 +8,6 @@
   <string name="login">Acceder ao sistema</string>
   <string name="logging_in_title">Accedendo ao sistema</string>
   <string name="logging_in_message">Por favor, agarde...</string>
-  <string name="title_activity_share">Cargar ficheiros multimedia</string>
   <string name="login_success">Acceso exitoso!</string>
   <string name="login_failed">Erro durante o inición de sesión!</string>
   <string name="authentication_failed">Erro durante a autenticación!</string>
@@ -50,4 +49,7 @@
 Comece a escribir para engadir categorías.
 Prema nesta mensaxe (ou no botón \"Atrás\") para saltar este paso.</string>
   <string name="categories_activity_title">Categorías</string>
+  <string name="preference_tracking">Informes de uso</string>
+  <string name="preference_tracking_summary">Enviar informes de uso á Wikimedia para axudar a mellorar a aplicación</string>
+  <string name="title_activity_settings">Configuracións</string>
 </resources>

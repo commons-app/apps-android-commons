@@ -7,7 +7,6 @@
   <string name="login">Iniciar sesión</string>
   <string name="logging_in_title">Iniciando sesión</string>
   <string name="logging_in_message">Por favor espera...</string>
-  <string name="title_activity_share" fuzzy="true">Wikimedia Commons</string>
   <string name="login_success">¡Inicio de sesión exitoso!</string>
   <string name="login_failed">¡Inicio de sesión fallido!</string>
   <string name="authentication_failed">¡Autentificación fallida!</string>

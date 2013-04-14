@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">ವಿಕಿಮೀಡಿಯ ಕಾಮನ್ಸ್</string>
+  <string name="app_name_beta">ವಿಕಿಮೀಡಿಯ ಕಾಮನ್ಸ್ ಬೀಟ</string>
+  <string name="menu_settings">ವ್ಯವಸ್ಥೆಗಳು</string>
+  <string name="username">ಬಳಕೆದಾರ ಹೆಸರು</string>
+  <string name="password">ಪ್ರವೇಶಪದ</string>
+  <string name="login">ಲಾಗ್ ಇನ್</string>
+  <string name="logging_in_title">ಲಾಗಿನ್ ಆಗುತ್ತಿದ್ದೀರಿ</string>
+  <string name="logging_in_message">ದಯವಿಟ್ಟು ನಿರೀಕ್ಷಿಸಿ...</string>
+  <string name="login_success">ಲಾಗಿನ್ ಯಶಸ್ವಿ!</string>
+  <string name="login_failed">ಲಾಗಿನ್ ಸಾಧ್ಯವಾಗಿಲ್ಲ!</string>
+  <string name="uploading_started">ಅಪ್ಲೋಡ್ ಪ್ರಾರಂಭವಾಗಿದೆ!</string>
+  <string name="upload_completed_notification_title">%1$s ಅಪ್ಲೋಡ್ ಆಗಿದೆ!</string>
+  <string name="share_title_hint">ಶೀರ್ಷಿಕೆ</string>
+  <string name="share_description_hint">ವಿವರ</string>
+  <string name="login_failed_generic">ಲಾಗಿನ್ ಸಾಧ್ಯವಾಗಿಲ್ಲ</string>
+  <string name="share_upload_button">ಅಪ್ಲೋಡ್</string>
+  <string name="provider_modifications">ಬದಲಾವಣೆಗಳು</string>
+  <string name="menu_upload_single">ಅಪ್ಲೋಡ್</string>
+  <string name="categories_search_text_hint">ವರ್ಗಗಳಲ್ಲಿ ಹುಡುಕು</string>
+  <string name="menu_save_categories">ಉಳಿಸಿ</string>
+  <string name="categories_activity_title">ವರ್ಗಗಳು</string>
+  <string name="title_activity_settings">ವ್ಯವಸ್ಥೆಗಳು</string>
+</resources>

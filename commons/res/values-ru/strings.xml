@@ -8,7 +8,6 @@
   <string name="login">Представиться</string>
   <string name="logging_in_title">Вход в систему</string>
   <string name="logging_in_message">Пожалуйста, подождите…</string>
-  <string name="title_activity_share">Загрузить медиафайл</string>
   <string name="login_success">Опознание прошло успешно</string>
   <string name="login_failed">Ошибка входа в систему!</string>
   <string name="authentication_failed">Ошибка аутентификации!</string>
@@ -50,4 +49,7 @@
 Начните ввод для добавления категорий.
 Нажмите на это сообщение (или за ним), чтобы пропустить этот шаг.</string>
   <string name="categories_activity_title">Категории</string>
+  <string name="preference_tracking">Отчёты об использовании</string>
+  <string name="preference_tracking_summary">Отправлять отчёты об использовании в Викимедиа, чтобы помочь нам улучшить приложение</string>
+  <string name="title_activity_settings">Настройки</string>
 </resources>

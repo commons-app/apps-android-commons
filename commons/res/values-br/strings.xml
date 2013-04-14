@@ -8,7 +8,6 @@
   <string name="login">Kevreañ</string>
   <string name="logging_in_title">O kevreañ</string>
   <string name="logging_in_message">Gortozit mar plij...</string>
-  <string name="title_activity_share">Enporzhiañ mediaoù</string>
   <string name="login_success">Kevreet oc\'h !</string>
   <string name="login_failed">Kudenn gevreañ !</string>
   <string name="authentication_failed">Dilesadur c\'hwitet!</string>
@@ -50,4 +49,7 @@
 Krogit da ouzhpennañ rummadoù.
 Pouezit war ar c\'hemenn-mañ (pe distroit en a-raok) evit mont dreist ar bazenn-mañ.</string>
   <string name="categories_activity_title">Rummadoù</string>
+  <string name="preference_tracking">Danevelloù implij</string>
+  <string name="preference_tracking_summary">Kas danevelloù implij deomp evit ma c\'hallfemp gwellaat an arload.</string>
+  <string name="title_activity_settings">Arventennoù</string>
 </resources>

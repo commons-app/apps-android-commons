@@ -8,7 +8,6 @@
   <string name="login">ଲଗ ଇନ</string>
   <string name="logging_in_title">ଲଗିଂ ଇନ...</string>
   <string name="logging_in_message">ଦୟାକରି ଅପେକ୍ଷା କରନ୍ତୁ...</string>
-  <string name="title_activity_share">ଅପଲୋଡ଼ ମିଡ଼ିଆ</string>
   <string name="login_success">ଠିକଭାବେ ଲଗଇନ ହେଲା!</string>
   <string name="login_failed">ଲଗଇନ ହେଲାନାହିଁ!</string>
   <string name="contribution_state_starting">ଅପଲୋଡ଼ ହେଉଛି</string>

@@ -8,7 +8,6 @@
   <string name="login">Logg inn</string>
   <string name="logging_in_title">Logger inn</string>
   <string name="logging_in_message">Vennligst vent...</string>
-  <string name="title_activity_share">Last opp media</string>
   <string name="login_success">Innloggingen var vellykket!</string>
   <string name="login_failed">Innloggingen feilet!</string>
   <string name="authentication_failed">Autentiseringen feilet!</string>

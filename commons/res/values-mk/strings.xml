@@ -8,7 +8,6 @@
   <string name="login">Најава</string>
   <string name="logging_in_title">Најава</string>
   <string name="logging_in_message">Почекајте...</string>
-  <string name="title_activity_share">Подигни слики/снимки</string>
   <string name="login_success">Најавувањето е успешно!</string>
   <string name="login_failed">Најавата не успеа!</string>
   <string name="authentication_failed">Заверката не успеа!</string>
@@ -50,4 +49,7 @@
 За да ставите категорија, почнете со пишување на нејзиното име.
 Тапнете ја поракава (или стиснете на назад) за да го прескокнете овој чекор.</string>
   <string name="categories_activity_title">Категории</string>
+  <string name="preference_tracking">Извештаи за употреба</string>
+  <string name="preference_tracking_summary">Испраќајте ѝ на Викимедија извештаи за употреба, со цел да го подобриме прилогов</string>
+  <string name="title_activity_settings">Нагодувања</string>
 </resources>

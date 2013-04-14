@@ -8,7 +8,6 @@
   <string name="login">Se connecter</string>
   <string name="logging_in_title">Connexion</string>
   <string name="logging_in_message">Veuillez patienter…</string>
-  <string name="title_activity_share">Importer des médias</string>
   <string name="login_success">Connexion réussie !</string>
   <string name="login_failed">Échec de la connexion!</string>
   <string name="authentication_failed">Échec de l’authentification!</string>
@@ -50,4 +49,7 @@
 Commencer à ajouter des catégories. 
 Appuyez sur ce message (ou retournez en arrière) pour sauter cette étape.</string>
   <string name="categories_activity_title">Catégories</string>
+  <string name="preference_tracking">Rapports d’utilisation</string>
+  <string name="preference_tracking_summary">Envoyer les rapports d’utilisation à Wikimédia pour nous aider à améliorer l’application</string>
+  <string name="title_activity_settings">Paramètres</string>
 </resources>

@@ -8,7 +8,6 @@
   <string name="login">ログイン</string>
   <string name="logging_in_title">ログイン中</string>
   <string name="logging_in_message">お待ちください...</string>
-  <string name="title_activity_share">メディアのアップロード</string>
   <string name="login_success">ログインしました!</string>
   <string name="login_failed">ログインに失敗しました!</string>
   <string name="authentication_failed">認証に失敗しました!</string>
@@ -48,4 +47,6 @@
 カテゴリ名の入力を開始してください。
 この手順をスキップするにはこのメッセージをタップしてください(または戻るボタン)。</string>
   <string name="categories_activity_title">カテゴリ</string>
+  <string name="preference_tracking">使用状況の報告</string>
+  <string name="title_activity_settings">設定</string>
 </resources>

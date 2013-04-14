@@ -8,7 +8,6 @@
   <string name="login">Přihlásit se</string>
   <string name="logging_in_title">Přihlášení</string>
   <string name="logging_in_message">Čekejte prosím...</string>
-  <string name="title_activity_share" fuzzy="true">Wikimedia Commons</string>
   <string name="login_success">Přihlášení uspělo!</string>
   <string name="login_failed">Přihlášení se nezdařilo!</string>
   <string name="authentication_failed">Ověření se nezdařilo!</string>

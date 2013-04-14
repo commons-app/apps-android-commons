@@ -8,7 +8,6 @@
   <string name="login">Aloggen</string>
   <string name="logging_in_title">Aloggen</string>
   <string name="logging_in_message">Waart w.e.g. ...</string>
-  <string name="title_activity_share" fuzzy="true">Wikimedia Commons</string>
   <string name="login_success">Umeldung huet geklappt!</string>
   <string name="login_failed">D\'Aloggen huet net fonctionnéiert</string>
   <string name="authentication_failed">Authentifizéierung huet net fonctionnéiert!</string>
@@ -40,4 +39,11 @@
   <string name="login_failed_generic">Aloggen huet net fonctionnéiert</string>
   <string name="share_upload_button">Eroplueden</string>
   <string name="multiple_share_base_title">Gitt dëser Biller een Numm</string>
+  <string name="provider_modifications">Ännerungen</string>
+  <string name="menu_upload_single">Eroplueden</string>
+  <string name="categories_search_text_hint">Kategorie sichen</string>
+  <string name="menu_save_categories">Späicheren</string>
+  <string name="categories_not_found">D\'Kategorie %1$s gouf net fonnt</string>
+  <string name="categories_activity_title">Kategorien</string>
+  <string name="title_activity_settings">Astellungen</string>
 </resources>

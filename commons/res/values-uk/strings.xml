@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Вікісховище</string>
+  <string name="app_name_beta">Wikimedia Commons Beta</string>
   <string name="menu_settings">Налаштування</string>
   <string name="username">Ім\'я користувача</string>
   <string name="password">Пароль</string>
   <string name="login">Увійти</string>
   <string name="logging_in_title">Вхід до системи</string>
   <string name="logging_in_message">Будь ласка, зачекайте…</string>
-  <string name="title_activity_share">Завантажити медіафайл</string>
   <string name="login_success">Ви успішно увійшли!</string>
   <string name="login_failed">Не вдалося увійти!</string>
   <string name="authentication_failed">Помилка автентифікації!</string>
@@ -49,4 +49,7 @@
 Почніть ввід щоб додати категорії.
 Натисніть на це повідомлення (або за ним), щоб пропустити цей крок.</string>
   <string name="categories_activity_title">Категорії</string>
+  <string name="preference_tracking">Звіти про використання</string>
+  <string name="preference_tracking_summary">Надсилати статистику використання до Вікімедіа, щоб допомогти нам покращити програму</string>
+  <string name="title_activity_settings">Налаштування</string>
 </resources>

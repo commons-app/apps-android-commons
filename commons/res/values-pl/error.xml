@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="crash_dialog_title">Wystąpił błąd Commons.</string>
   <string name="crash_dialog_text">Ups. Coś poszło nie tak!</string>
+  <string name="crash_dialog_comment_prompt">Poinformuj nas co powinniśmy zrobić,  wyślij nam email. Pomóż nam ulepszyć aplikację</string>
   <string name="crash_dialog_ok_toast">Dziękujemy!</string>
 </resources>

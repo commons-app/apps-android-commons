@@ -8,7 +8,6 @@
   <string name="login">Inicia una sessió</string>
   <string name="logging_in_title">Iniciant sessió</string>
   <string name="logging_in_message">Espereu...</string>
-  <string name="title_activity_share">Carrega fitxers multimèdia</string>
   <string name="login_success">S\'ha iniciat sessió correctament !</string>
   <string name="login_failed">Error en iniciar la sessió !</string>
   <string name="authentication_failed">L\'autenticació ha fallat!</string>
@@ -47,4 +46,7 @@
   <string name="categories_not_found">No s\'ha trobat cap categoria que coincideixi amb %1$s</string>
   <string name="categories_skip_explanation">Afegiu categories per fer que les vostres imatges siguin més fàcils de trobar a Wikimedia Commons.</string>
   <string name="categories_activity_title">Categories</string>
+  <string name="preference_tracking">Informes d\'ús</string>
+  <string name="preference_tracking_summary">Envia informes d\'ús a Wikimedia per ajudar-nos a millorar l\'aplicació</string>
+  <string name="title_activity_settings">Paràmetres</string>
 </resources>

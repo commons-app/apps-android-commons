@@ -7,8 +7,7 @@
   <string name="password">Wachtwoord</string>
   <string name="login">Aanmelden</string>
   <string name="logging_in_title">Bezig met aanmelden</string>
-  <string name="logging_in_message">Even geduld alstublieft...</string>
-  <string name="title_activity_share">Media uploaden</string>
+  <string name="logging_in_message">Een ogenblik geduld...</string>
   <string name="login_success">Aanmelden geslaagd</string>
   <string name="login_failed">Aanmelden mislukt</string>
   <string name="authentication_failed">Verificatie is mislukt</string>
@@ -45,12 +44,18 @@
   <string name="categories_search_text_hint">Categorieën zoeken</string>
   <string name="menu_save_categories">Opslaan</string>
   <string name="categories_not_found">Er zijn geen categorieën met \"%1$s\" gevonden</string>
-  <string name="categories_skip_explanation" fuzzy="true">
-        Voeg categorieën toe om uw afbeeldingen makkelijker te vinden te maken op Wikimedia Commons.
+  <string name="categories_skip_explanation">Voeg categorieën toe om uw afbeeldingen makkelijker te vinden te maken op Wikimedia Commons.
 
+Begin met het toevoegen van categorieën.
 
-        Begin met het toevoegen van categorieën.
-
-        Klik op dit bericht, of ga terug, om deze stap over te slaan.</string>
+Klik op dit bericht, of ga terug, om deze stap over te slaan.</string>
   <string name="categories_activity_title">Categorieën</string>
+  <string name="preference_tracking">Gebruiksrapporten</string>
+  <string name="preference_tracking_summary">Gebruiksrapporten verzenden naar Wikimedia om ons te helpen de app te verbeteren</string>
+  <string name="title_activity_settings">Instellingen</string>
+  <string name="menu_about">Over</string>
+  <string name="about_license">Open sourcesoftware vrijgegeven onder de</string>
+  <string name="about_improve">Broncode op . Bugs op .</string>
+  <string name="title_activity_about">Over</string>
+  <string name="menu_feedback">Terugkoppeling geven (via e-mail)</string>
 </resources>

@@ -8,7 +8,6 @@
   <string name="login">Đăng nhập</string>
   <string name="logging_in_title">Đang đăng nhập</string>
   <string name="logging_in_message">Vui lòng chờ…</string>
-  <string name="title_activity_share">Tải lên phương tiện</string>
   <string name="login_success">Đã đăng nhập thành công!</string>
   <string name="login_failed">Đăng nhập thất bại!</string>
   <string name="authentication_failed">Xác thực thất bại!</string>
@@ -50,4 +49,7 @@
 Hãy bắt đầu nhập tên thể loại để tìm kiếm.
 Chạm vào thông điệp này (hoặc bấm Quay lại) để bỏ qua bước này.</string>
   <string name="categories_activity_title">Thể loại</string>
+  <string name="preference_tracking">Báo cáo sử dụng</string>
+  <string name="preference_tracking_summary">Gửi báo cáo sử dụng cho Wikimedia để giúp chúng tôi cải tiến ứng dụng</string>
+  <string name="title_activity_settings">Tùy chọn</string>
 </resources>

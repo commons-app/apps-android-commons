@@ -8,7 +8,6 @@
   <string name="login">ឡុកអ៊ីន​</string>
   <string name="logging_in_title">កំពុងឡុកអ៊ីន​</string>
   <string name="logging_in_message">សូមរង់ចាំ...</string>
-  <string name="title_activity_share" fuzzy="true">Wikimedia Commons</string>
   <string name="login_success">កត់ឈ្មោះចូលបានសំរេច</string>
   <string name="login_failed">កត់ឈ្មោះចូលបរាជ័យ</string>
   <string name="authentication_failed">Authentication បានបរាជ័យ!</string>

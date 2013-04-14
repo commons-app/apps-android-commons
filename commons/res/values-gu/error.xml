@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="crash_dialog_title">કોમન્સ ભાંગી પડ્યું છે</string>
+  <string name="crash_dialog_text">ઉપ્સ. કંઇક ખરાબ થયું છે!</string>
+  <string name="crash_dialog_comment_prompt">અમને કહો કે તમે શું કરી રહ્યા હતા, અને તે અમને ઇમેલ વડે મોકલો. એ અમને સુધારવામાં મદદરુપ બનશે!</string>
+  <string name="crash_dialog_ok_toast">તમારો આભાર!</string>
+</resources>

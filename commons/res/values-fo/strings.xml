@@ -8,7 +8,6 @@
   <string name="login">Rita inn</string>
   <string name="logging_in_title">Ritar inn</string>
   <string name="logging_in_message">Vinarliga bíða...</string>
-  <string name="title_activity_share" fuzzy="true">Wikimedia Commons</string>
   <string name="login_success">Innritan væleydnað!</string>
   <string name="login_failed">Innritan miseydnaðist</string>
   <string name="authentication_failed">Góðkenning miseydnaðist!</string>
