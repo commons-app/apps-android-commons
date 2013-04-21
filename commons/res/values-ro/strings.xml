@@ -52,4 +52,9 @@ Atingeți acest mesaj (sau mergeți înapoi) pentru a omite acest pas.</string>
   <string name="preference_tracking">Rapoarte de utilizare</string>
   <string name="preference_tracking_summary">Trimiteți rapoarte de utilizare către Wikimedia pentru a ajuta la îmbunătățirea aplicației</string>
   <string name="title_activity_settings">Setări</string>
+  <string name="menu_about">Despre</string>
+  <string name="about_license">Software cu sursă deschisă lansat sub</string>
+  <string name="about_improve">Sursa la . Buguri la .</string>
+  <string name="title_activity_about">Despre</string>
+  <string name="menu_feedback">Trimitere reacții (prin e-mail)</string>
 </resources>

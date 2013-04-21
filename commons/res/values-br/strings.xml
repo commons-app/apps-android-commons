@@ -52,4 +52,8 @@ Pouezit war ar c\'hemenn-mañ (pe distroit en a-raok) evit mont dreist ar bazenn
   <string name="preference_tracking">Danevelloù implij</string>
   <string name="preference_tracking_summary">Kas danevelloù implij deomp evit ma c\'hallfemp gwellaat an arload.</string>
   <string name="title_activity_settings">Arventennoù</string>
+  <string name="menu_about">Diwar-benn</string>
+  <string name="about_license">Meziant frank a wirioù embannet dindan</string>
+  <string name="title_activity_about">Diwar-benn</string>
+  <string name="menu_feedback">Kas ho soñj (dre bostel)</string>
 </resources>

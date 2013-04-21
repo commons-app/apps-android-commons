@@ -52,4 +52,9 @@ Knacka på detta meddelande (eller gå tillbaka) för att hoppa över detta steg
   <string name="preference_tracking">Användningsrapporter</string>
   <string name="preference_tracking_summary">Skicka användningsrapporter till Wikimedia för att hjälpa oss förbättra appen</string>
   <string name="title_activity_settings">Inställningar</string>
+  <string name="menu_about">Om</string>
+  <string name="about_license">Programvara med öppen källkod släppt under</string>
+  <string name="about_improve">Källa på . Buggar på .</string>
+  <string name="title_activity_about">Om</string>
+  <string name="menu_feedback">Skicka feedback (via e-post!)</string>
 </resources>

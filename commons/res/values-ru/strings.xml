@@ -52,4 +52,9 @@
   <string name="preference_tracking">Отчёты об использовании</string>
   <string name="preference_tracking_summary">Отправлять отчёты об использовании в Викимедиа, чтобы помочь нам улучшить приложение</string>
   <string name="title_activity_settings">Настройки</string>
+  <string name="menu_about">О приложении</string>
+  <string name="about_license">Приложение с открытым исходным кодом, выпущено под лицензией</string>
+  <string name="about_improve">Исходный код на . Ошибки на .</string>
+  <string name="title_activity_about">О приложении</string>
+  <string name="menu_feedback">Отправить отзыв (по электронной почте)</string>
 </resources>

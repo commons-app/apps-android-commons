@@ -48,4 +48,5 @@
   <string name="preference_tracking">ഉപയോഗം സംബന്ധിച്ച റിപ്പോർട്ടുകൾ</string>
   <string name="preference_tracking_summary">ഈ ആപ് മെച്ചപ്പെടുത്തുന്നതിനായി ഉപയോഗം സംബന്ധിച്ച റിപ്പോർട്ടുകൾ വിക്കിമീഡിയയ്ക്ക് അയയ്ക്കുക</string>
   <string name="title_activity_settings">സജ്ജീകരണങ്ങൾ</string>
+  <string name="menu_about">വിവരണം</string>
 </resources>

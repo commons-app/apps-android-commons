@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="menu_settings">ਸੈਟਿੰਗ</string>
+  <string name="username">ਯੂਜ਼ਰ ਨਾਂ</string>
+  <string name="password">ਪਾਸਵਰਡ</string>
+  <string name="login">ਲਾਗ ਇਨ</string>
+  <string name="logging_in_message">ਉਡੀਕੋ ਜੀ...</string>
+  <string name="login_success">ਲਾਗਇਨ ਸਫ਼ਲ</string>
+  <string name="login_failed">ਲਾਗਇਨ ਫੇਲ੍ਹ ਹੈ!</string>
+  <string name="menu_from_camera">ਤਸਵੀਰ ਲਵੋ</string>
+  <string name="provider_contributions">ਮੇਰੇ ਅੱਪਲੋਡ</string>
+  <string name="menu_share">ਸਾਂਝਾ</string>
+  <string name="menu_open_in_browser">ਬਰਾਊਜ਼ਰ ਵਿਚ ਖੋਲ੍ਹੋ</string>
+  <string name="share_title_hint">ਟਾਈਟਲ</string>
+  <string name="share_description_hint">ਵੇਰਵਾ</string>
+  <string name="login_failed_generic">ਲਾਗਇਨ ਫੇਲ੍ਹ ਹੈ</string>
+  <string name="share_upload_button">ਅੱਪਲੋਡ</string>
+  <string name="menu_upload_single">ਅੱਪਲੋਡ</string>
+  <string name="menu_save_categories">ਸੰਭਾਲੋ</string>
+  <string name="categories_activity_title">ਕੈਟਾਗਰੀਆਂ</string>
+  <string name="preference_tracking">ਵਰਤੋਂ ਰਿਪੋਰਟਾਂ</string>
+  <string name="title_activity_settings">ਸੈਟਿੰਗ</string>
+  <string name="menu_about">ਇਸ ਬਾਰੇ</string>
+  <string name="about_license">ਓਪਨ ਸਰੋਤ ਸਾਫਟਵੇਅਰ ਨੂੰ ਜਾਰੀ ਕੀਤਾ ਹੈ ਇਸ ਦੇ ਅਧੀਨ</string>
+  <string name="title_activity_about">ਇਸ ਬਾਰੇ</string>
+  <string name="menu_feedback">ਸੁਝਾਅ ਭੇਜੋ (ਈਮੇਲ ਰਾਹੀਂ)</string>
+</resources>

@@ -49,4 +49,5 @@
   <string name="categories_activity_title">カテゴリ</string>
   <string name="preference_tracking">使用状況の報告</string>
   <string name="title_activity_settings">設定</string>
+  <string name="menu_feedback">フィードバックをメールで送信</string>
 </resources>

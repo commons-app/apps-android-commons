@@ -52,4 +52,9 @@ Appuyez sur ce message (ou retournez en arrière) pour sauter cette étape.</str
   <string name="preference_tracking">Rapports d’utilisation</string>
   <string name="preference_tracking_summary">Envoyer les rapports d’utilisation à Wikimédia pour nous aider à améliorer l’application</string>
   <string name="title_activity_settings">Paramètres</string>
+  <string name="menu_about">À propos</string>
+  <string name="about_license">Les logiciels Open Source sont publié sous la</string>
+  <string name="about_improve">Source sur . Bugs à .</string>
+  <string name="title_activity_about">À propos</string>
+  <string name="menu_feedback">Envoyez vos commentaires (par courriel)</string>
 </resources>

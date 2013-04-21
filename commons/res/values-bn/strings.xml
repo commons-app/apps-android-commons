@@ -37,4 +37,6 @@
   <string name="categories_activity_title">বিষয়শ্রেণীসমূহ</string>
   <string name="preference_tracking">ব্যবহারের প্রতিবেদন</string>
   <string name="title_activity_settings">সেটিংস</string>
+  <string name="menu_about">পরিচিতি</string>
+  <string name="menu_feedback">প্রতিক্রিয়া পাঠান (ইমেইলের মাধ্যমে)</string>
 </resources>

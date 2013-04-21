@@ -52,4 +52,9 @@
   <string name="preference_tracking">Извештаи за употреба</string>
   <string name="preference_tracking_summary">Испраќајте ѝ на Викимедија извештаи за употреба, со цел да го подобриме прилогов</string>
   <string name="title_activity_settings">Нагодувања</string>
+  <string name="menu_about">За прилогот</string>
+  <string name="about_license">Прилог со отворен код, издадено под лиценцата</string>
+  <string name="about_improve">Изворниот код е на . Грешките се на .</string>
+  <string name="title_activity_about">За прилогот</string>
+  <string name="menu_feedback">Испратете ваш одѕив (по е-пошта)</string>
 </resources>

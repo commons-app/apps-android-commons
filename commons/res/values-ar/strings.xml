@@ -39,4 +39,16 @@
   <string name="login_failed_generic">فشل تسجيل الدخول</string>
   <string name="share_upload_button">ارفع</string>
   <string name="multiple_share_base_title">اسم هذه المجموعة</string>
+  <string name="provider_modifications">تعديلات</string>
+  <string name="menu_upload_single">ارفع</string>
+  <string name="categories_search_text_hint">تصنيفات البحث</string>
+  <string name="menu_save_categories">احفظ</string>
+  <string name="categories_not_found">لا توجد تصنيفات تطابق %1$s</string>
+  <string name="categories_activity_title">تصنيفات</string>
+  <string name="preference_tracking">تقارير الاستخدام</string>
+  <string name="preference_tracking_summary">إرسال تقارير الاستخدام إلى ويكيميديا لمساعدتنا على تحسين التطبيق</string>
+  <string name="title_activity_settings">الإعدادات</string>
+  <string name="menu_about">حول</string>
+  <string name="title_activity_about">حول</string>
+  <string name="menu_feedback">إرسال ملاحظات (عبر البريد الإلكتروني)</string>
 </resources>

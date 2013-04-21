@@ -52,4 +52,9 @@ Prema nesta mensaxe (ou no botón \"Atrás\") para saltar este paso.</string>
   <string name="preference_tracking">Informes de uso</string>
   <string name="preference_tracking_summary">Enviar informes de uso á Wikimedia para axudar a mellorar a aplicación</string>
   <string name="title_activity_settings">Configuracións</string>
+  <string name="menu_about">Acerca de</string>
+  <string name="about_license">Software de código aberto liberado baixo a</string>
+  <string name="about_improve">Fonte en . Erros en .</string>
+  <string name="title_activity_about">Acerca de</string>
+  <string name="menu_feedback">Enviar comentarios (por correo electrónico)</string>
 </resources>

@@ -62,4 +62,7 @@
   <string name="preference_tracking">Text for preference that enables the user to enable or disable collection of data about the user\'s usage patterns.</string>
   <string name="preference_tracking_summary">Help text for preference that enables the user to enable or disable collection of data about the user\'s usage patterns.</string>
   <string name="title_activity_settings">{{Identical|Settings}}</string>
+  <string name="menu_about">{{Identical|About}}</string>
+  <string name="title_activity_about">{{Identical|About}}</string>
+  <string name="menu_feedback">Menu item text that prompts user to send feedback to WMF via email</string>
 </resources>

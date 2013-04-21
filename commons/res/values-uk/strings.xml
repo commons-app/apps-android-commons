@@ -52,4 +52,10 @@
   <string name="preference_tracking">Звіти про використання</string>
   <string name="preference_tracking_summary">Надсилати статистику використання до Вікімедіа, щоб допомогти нам покращити програму</string>
   <string name="title_activity_settings">Налаштування</string>
+  <string name="menu_about">Про програму</string>
+  <string name="about_license">Open Source програмне забезпечення випущено під</string>
+  <string name="about_improve">Джерело. Помилки на.</string>
+  <string name="about_privacy_policy">Wikimedia:Commons-android-strings-about privacy policy/uk</string>
+  <string name="title_activity_about">Про програму</string>
+  <string name="menu_feedback">Надіслати відгук по електронній пошті</string>
 </resources>

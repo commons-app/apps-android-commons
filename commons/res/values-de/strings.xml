@@ -52,4 +52,9 @@ Tippe auf diese Nachricht oder drücke „Zurück“, um diesen Schritt zu über
   <string name="preference_tracking">Nutzungsberichte</string>
   <string name="preference_tracking_summary">Nutzungsberichte an Wikimedia senden, um zur Verbesserung der App beizutragen</string>
   <string name="title_activity_settings">Einstellungen</string>
+  <string name="menu_about">Über</string>
+  <string name="about_license">Open-Source-Software veröffentlicht unter der</string>
+  <string name="about_improve">Quelle auf . Fehler unter .</string>
+  <string name="title_activity_about">Über</string>
+  <string name="menu_feedback">Rückmeldung per E-Mail senden</string>
 </resources>

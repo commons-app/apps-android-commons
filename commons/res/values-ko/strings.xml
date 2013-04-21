@@ -50,6 +50,6 @@
 이 단계를 건너뛰려면 이 메시지를 탭하세요(또는 뒤로를 누르세요).</string>
   <string name="categories_activity_title">분류</string>
   <string name="preference_tracking">사용 보고서</string>
-  <string name="preference_tracking_summary">애플리케이션을 향상시킬 수 있도록 돕기 위해 사용 보고서를 전송합니다.</string>
+  <string name="preference_tracking_summary">애플리케이션을 향상시킬 수 있도록 돕기 위해 위키미디어에 사용 보고서를 보냅니다</string>
   <string name="title_activity_settings">설정</string>
 </resources>
