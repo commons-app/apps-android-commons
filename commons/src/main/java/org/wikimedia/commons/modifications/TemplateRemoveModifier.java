@@ -46,14 +46,27 @@ public class TemplateRemoveModifier extends PageModifier {
             int braceCount = 1;
             int startIndex = matcher.start();
             int curIndex = matcher.end();
+            Matcher openMatch = PATTERN_TEMPLATE_OPEN.matcher(pageContents);
+            Matcher closeMatch = PATTERN_TEMPLATE_CLOSE.matcher(pageContents);
+
             while(curIndex < pageContents.length()) {
-                if(PATTERN_TEMPLATE_OPEN.matcher(pageContents).find(curIndex)) {
+                boolean openFound = openMatch.find(curIndex);
+                boolean closeFound = closeMatch.find(curIndex);
+
+                if(openFound && (!closeFound || openMatch.start() < closeMatch.start())) {
                     braceCount++;
-                } else if(PATTERN_TEMPLATE_CLOSE.matcher(pageContents).find(curIndex)) {
+                    curIndex = openMatch.end();
+                } else if (closeFound) {
                     braceCount--;
+                    curIndex = closeMatch.end();
+                } else if (braceCount > 0) {
+                    // The template never closes, so...remove nothing
+                    curIndex = startIndex;
+                    break;
                 }
-                curIndex++;
-                if(braceCount == 0) {
+
+                if (braceCount == 0) {
+                    // The braces have all been closed!
                     break;
                 }
             }
