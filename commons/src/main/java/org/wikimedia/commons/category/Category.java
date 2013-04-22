@@ -107,9 +107,10 @@ public class Category /*implements Parcelable */{
     public static Category fromCursor(Cursor cursor) {
         // Hardcoding column positions!
         Category c = new Category();
-        c.name = cursor.getString(0);
-        c.lastUsed = new Date(cursor.getLong(1));
-        c.timesUsed = cursor.getInt(2);
+        c.contentUri = ContributionsContentProvider.uriForId(cursor.getInt(0));
+        c.name = cursor.getString(1);
+        c.lastUsed = new Date(cursor.getLong(2));
+        c.timesUsed = cursor.getInt(3);
         return c;
     }
 
