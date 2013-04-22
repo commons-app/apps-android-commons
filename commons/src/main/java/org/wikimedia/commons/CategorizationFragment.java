@@ -2,6 +2,7 @@ package org.wikimedia.commons;
 
 import android.app.Activity;
 import android.content.Context;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Parcel;
@@ -18,6 +19,8 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import org.mediawiki.api.ApiResult;
 import org.mediawiki.api.MWApi;
+import org.wikimedia.commons.category.Category;
+import org.wikimedia.commons.contributions.Contribution;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -198,6 +201,30 @@ public class CategorizationFragment extends SherlockFragment{
             checkedView.setTag(i);
 
             return checkedView;
+        }
+    }
+
+    private class RecentCategoriesAdapter extends CursorAdapter {
+
+        public RecentCategoriesAdapter(Context context, Cursor c, int flags) {
+            super(context, c, flags);
+        }
+
+        @Override
+        public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
+            return getSherlockActivity().getLayoutInflater().inflate(R.layout.layout_categories_item, null);
+        }
+
+        @Override
+        public void bindView(View view, Context context, Cursor cursor) {
+            CheckedTextView checkedView;
+
+            Category category = Category.fromCursor(cursor);
+            checkedView = (CheckedTextView) view;
+
+            checkedView.setChecked(false);
+            checkedView.setText(category.getName());
+            checkedView.setTag(category.getName());
         }
     }
 
