@@ -26,6 +26,7 @@ import org.wikimedia.commons.contributions.Contribution;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -134,7 +135,7 @@ public class CategorizationFragment extends SherlockFragment{
                         CategoryContentProvider.BASE_URI,
                         Category.Table.ALL_FIELDS,
                         null,
-                        new String[] {},
+                        new String[]{},
                         null);
                 while (cursor.moveToNext()) {
                     Category cat = Category.fromCursor(cursor);
@@ -228,6 +229,36 @@ public class CategorizationFragment extends SherlockFragment{
         return count;
     }
 
+    private Category lookupCategory(String name) {
+        Cursor cursor = getActivity().getContentResolver().query(
+                CategoryContentProvider.BASE_URI,
+                Category.Table.ALL_FIELDS,
+                null,
+                new String[] {},
+                null);
+        // fixme move to conditions
+        while (cursor.moveToNext()) {
+            Category cat = Category.fromCursor(cursor);
+            if (cat.getName().equals(name)) {
+                return cat;
+            }
+        }
+
+        // Newly used category...
+        Category cat = new Category();
+        cat.setName(name);
+        cat.setLastUsed(new Date());
+        cat.setTimesUsed(0);
+        // fixme do we have to dispose of this ContentProviderClient?
+        cat.setContentProviderClient(getActivity().getContentResolver().acquireContentProviderClient(CategoryContentProvider.AUTHORITY));
+        return cat;
+    }
+    private void updateCategoryCount(String name) {
+        Category cat = lookupCategory(name);
+        cat.incTimesUsed();
+        cat.save();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_categorization, null);
@@ -262,7 +293,8 @@ public class CategorizationFragment extends SherlockFragment{
                 CategoryItem item = (CategoryItem) adapterView.getAdapter().getItem(index);
                 item.selected = !item.selected;
                 checkedView.setChecked(item.selected);
-                // fixme save/update the item in the most recently used list
+                // fixme do this asynchronously?
+                updateCategoryCount(item.name);
             }
         });
 
