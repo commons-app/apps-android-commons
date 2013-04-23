@@ -20,33 +20,13 @@ import java.util.Date;
  * Time: 3:37 PM
  * To change this template use File | Settings | File Templates.
  */
-public class Category /*implements Parcelable */{
+public class Category {
     private ContentProviderClient client;
     private Uri contentUri;
 
     private String name;
     private Date lastUsed;
     private int timesUsed;
-
-    /*
-    // Do we need parcelable stuff?
-    @Override
-    public void writeToParcel(Parcel parcel, int flags) {
-        parcel.writeString(name);
-        parcel.writeSerializable(lastUsed);
-        parcel.writeInt(timesUsed);
-    }
-
-    public Category(Parcel in) {
-        name = in.readString();
-        lastUsed = (Date)in.readSerializable();
-        timesUsed = in.readInt();
-    }
-
-    public int describeContents() {
-        return 0;
-    }
-    */
 
     // Getters/setters
     public String getName() {
