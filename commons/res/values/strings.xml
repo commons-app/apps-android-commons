@@ -80,4 +80,5 @@
     <string name="about_privacy_policy"><a href="https://wikimediafoundation.org/wiki/Privacy_policy">Privacy policy</a></string>
     <string name="title_activity_about">About</string>
     <string name="menu_feedback">Send Feedback (via Email)</string>
+    <string name="provider_categories">Recently used categories</string>
 </resources>
