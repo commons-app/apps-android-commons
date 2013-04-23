@@ -12,6 +12,10 @@ public class TemplateRemoveModifier extends PageModifier {
 
     public static final String PARAM_TEMPLATE_NAME = "template";
 
+    public static final Pattern PATTERN_TEMPLATE_OPEN = Pattern.compile("\\{\\{");
+    public static final Pattern PATTERN_TEMPLATE_CLOSE = Pattern.compile("\\}\\}");
+
+
     public TemplateRemoveModifier(String templateName) {
         super(MODIFIER_NAME);
         try {
@@ -26,7 +30,6 @@ public class TemplateRemoveModifier extends PageModifier {
         this.params = data;
     }
 
-    // Never get into a land war in Asia.
     @Override
     public String doModification(String pageName, String pageContents) {
         String templateRawName = params.optString(PARAM_TEMPLATE_NAME);
@@ -44,14 +47,13 @@ public class TemplateRemoveModifier extends PageModifier {
             int startIndex = matcher.start();
             int curIndex = matcher.end();
             while(curIndex < pageContents.length()) {
-                if(pageContents.substring(curIndex, curIndex + 2).equals("{{")) {
+                if(PATTERN_TEMPLATE_OPEN.matcher(pageContents).find(curIndex)) {
                     braceCount++;
-                } else if(pageContents.substring(curIndex, curIndex + 2).equals("}}")) {
+                } else if(PATTERN_TEMPLATE_CLOSE.matcher(pageContents).find(curIndex)) {
                     braceCount--;
                 }
                 curIndex++;
                 if(braceCount == 0) {
-                    curIndex++; // To account for the last brace in the closing }} pair
                     break;
                 }
             }
