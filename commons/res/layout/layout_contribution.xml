@@ -22,13 +22,23 @@
                android:scaleType="centerCrop"
                />
 
-    <RelativeLayout
+    <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center|bottom"
             android:background="#AA000000"
+            android:orientation="vertical"
             android:padding="8dp"
             >
+
+        <TextView
+                android:id="@+id/contributionState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:textAppearanceSmall"
+                android:textColor="#FFFFFFFF"
+                android:visibility="gone"
+                />
 
         <TextView
                 android:id="@+id/contributionTitle"
@@ -39,15 +49,7 @@
                 android:maxLines="2"
                 android:ellipsize="end"
                 />
-        <TextView
-            android:id="@+id/contributionState"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignBaseline="@id/contributionTitle"
-            style="?android:textAppearanceSmall"
-            android:textColor="#FFFFFFFF"
-            />
-    </RelativeLayout>
+
+    </LinearLayout>
 
 </FrameLayout>

@@ -108,12 +108,15 @@ public class ContributionsListFragment extends SherlockFragment {
 
             switch(contribution.getState()) {
                 case Contribution.STATE_COMPLETED:
+                    views.stateView.setVisibility(View.GONE);
                     views.stateView.setText("");
                     break;
                 case Contribution.STATE_QUEUED:
+                    views.stateView.setVisibility(View.VISIBLE);
                     views.stateView.setText(R.string.contribution_state_queued);
                     break;
                 case Contribution.STATE_IN_PROGRESS:
+                    views.stateView.setVisibility(View.VISIBLE);
                     views.stateView.setText(R.string.contribution_state_starting);
                     long total = contribution.getDataLength();
                     long transferred = contribution.getTransferred();
@@ -121,6 +124,7 @@ public class ContributionsListFragment extends SherlockFragment {
                     views.stateView.setText(stateString);
                     break;
                 case Contribution.STATE_FAILED:
+                    views.stateView.setVisibility(View.VISIBLE);
                     views.stateView.setText(R.string.contribution_state_failed);
                     break;
             }
