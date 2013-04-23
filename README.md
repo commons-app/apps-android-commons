@@ -14,6 +14,10 @@
 
 **Note**: Currently uses a bunch of dependencies that are staged at `yuvi.in/blog/maven`. Will be migrated to either [Maven Central][4] or a Wikimedia staging server soon.
 
+## License ##
+
+This software is licensed under the [Apache License][5].
+
 ## Bugs? ##
 
 This software has no bugs. You can dispute this statement at [bugzilla][3]
@@ -22,3 +26,4 @@ This software has no bugs. You can dispute this statement at [bugzilla][3]
 [2]: https://maven.apache.org/
 [3]: https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App
 [4]: http://search.maven.org/
+[5]: https://www.apache.org/licenses/LICENSE-2.0
