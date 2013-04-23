@@ -1,6 +1,7 @@
 package org.wikimedia.commons;
 
 import android.app.Activity;
+import android.content.ContentProviderClient;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.AsyncTask;
@@ -249,14 +250,21 @@ public class CategorizationFragment extends SherlockFragment{
         cat.setName(name);
         cat.setLastUsed(new Date());
         cat.setTimesUsed(0);
-        // fixme do we have to dispose of this ContentProviderClient?
-        cat.setContentProviderClient(getActivity().getContentResolver().acquireContentProviderClient(CategoryContentProvider.AUTHORITY));
         return cat;
     }
     private void updateCategoryCount(String name) {
         Category cat = lookupCategory(name);
         cat.incTimesUsed();
+
+        ContentProviderClient client = getActivity().getContentResolver().acquireContentProviderClient(CategoryContentProvider.AUTHORITY);
+        if (client == null) {
+            // explode
+            throw new RuntimeException("wtf");
+        }
+        cat.setContentProviderClient(client);
         cat.save();
+        cat.setContentProviderClient(null);
+        client.release();
     }
 
     @Override
@@ -294,7 +302,9 @@ public class CategorizationFragment extends SherlockFragment{
                 item.selected = !item.selected;
                 checkedView.setChecked(item.selected);
                 // fixme do this asynchronously?
-                updateCategoryCount(item.name);
+                if (item.selected) {
+                    updateCategoryCount(item.name);
+                }
             }
         });
 

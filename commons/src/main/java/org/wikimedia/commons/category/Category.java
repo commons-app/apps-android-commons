@@ -87,7 +87,7 @@ public class Category {
     public static Category fromCursor(Cursor cursor) {
         // Hardcoding column positions!
         Category c = new Category();
-        c.contentUri = ContributionsContentProvider.uriForId(cursor.getInt(0));
+        c.contentUri = CategoryContentProvider.uriForId(cursor.getInt(0));
         c.name = cursor.getString(1);
         c.lastUsed = new Date(cursor.getLong(2));
         c.timesUsed = cursor.getInt(3);
