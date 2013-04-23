@@ -20,6 +20,7 @@ import com.actionbarsherlock.view.MenuItem;
 import org.mediawiki.api.ApiResult;
 import org.mediawiki.api.MWApi;
 import org.wikimedia.commons.category.Category;
+import org.wikimedia.commons.category.CategoryContentProvider;
 import org.wikimedia.commons.contributions.Contribution;
 
 import java.io.IOException;
@@ -126,7 +127,20 @@ public class CategorizationFragment extends SherlockFragment{
         @Override
         protected ArrayList<String> doInBackground(Void... voids) {
             if(TextUtils.isEmpty(filter)) {
-                return new ArrayList<String>();
+                ArrayList<String> items = new ArrayList<String>();
+                // fixme add a limit?
+                // fixme sort by last_used descending?
+                Cursor cursor = getActivity().getContentResolver().query(
+                        CategoryContentProvider.BASE_URI,
+                        Category.Table.ALL_FIELDS,
+                        null,
+                        new String[] {},
+                        null);
+                while (cursor.moveToNext()) {
+                    Category cat = Category.fromCursor(cursor);
+                    items.add(cat.getName());
+                }
+                return items;
             }
             if(categoriesCache.containsKey(filter)) {
                 return categoriesCache.get(filter);
@@ -204,30 +218,6 @@ public class CategorizationFragment extends SherlockFragment{
         }
     }
 
-    private class RecentCategoriesAdapter extends CursorAdapter {
-
-        public RecentCategoriesAdapter(Context context, Cursor c, int flags) {
-            super(context, c, flags);
-        }
-
-        @Override
-        public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
-            return getSherlockActivity().getLayoutInflater().inflate(R.layout.layout_categories_item, null);
-        }
-
-        @Override
-        public void bindView(View view, Context context, Cursor cursor) {
-            CheckedTextView checkedView;
-
-            Category category = Category.fromCursor(cursor);
-            checkedView = (CheckedTextView) view;
-
-            checkedView.setChecked(false);
-            checkedView.setText(category.getName());
-            checkedView.setTag(category.getName());
-        }
-    }
-
     public int getCurrentSelectedCount() {
         int count = 0;
         for(CategoryItem item: categoriesAdapter.getItems()) {
@@ -272,6 +262,7 @@ public class CategorizationFragment extends SherlockFragment{
                 CategoryItem item = (CategoryItem) adapterView.getAdapter().getItem(index);
                 item.selected = !item.selected;
                 checkedView.setChecked(item.selected);
+                // fixme save/update the item in the most recently used list
             }
         });
 
