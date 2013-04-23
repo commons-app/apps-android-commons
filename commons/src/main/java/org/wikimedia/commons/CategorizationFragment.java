@@ -4,10 +4,7 @@ import android.app.Activity;
 import android.content.ContentProviderClient;
 import android.content.Context;
 import android.database.Cursor;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
+import android.os.*;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -50,6 +47,8 @@ public class CategorizationFragment extends SherlockFragment{
     private OnCategoriesSaveHandler onCategoriesSaveHandler;
 
     private HashMap<String, ArrayList<String>> categoriesCache;
+
+    private ContentProviderClient client;
 
     public static class CategoryItem implements Parcelable {
         public String name;
@@ -132,15 +131,20 @@ public class CategorizationFragment extends SherlockFragment{
                 ArrayList<String> items = new ArrayList<String>();
                 // fixme add a limit?
                 // fixme sort by last_used descending?
-                Cursor cursor = getActivity().getContentResolver().query(
-                        CategoryContentProvider.BASE_URI,
-                        Category.Table.ALL_FIELDS,
-                        null,
-                        new String[]{},
-                        null);
-                while (cursor.moveToNext()) {
-                    Category cat = Category.fromCursor(cursor);
-                    items.add(cat.getName());
+                try {
+                    Cursor cursor = client.query(
+                            CategoryContentProvider.BASE_URI,
+                            Category.Table.ALL_FIELDS,
+                            null,
+                            new String[]{},
+                            null);
+                    while (cursor.moveToNext()) {
+                        Category cat = Category.fromCursor(cursor);
+                        items.add(cat.getName());
+                    }
+                } catch (RemoteException e) {
+                    // faaaail
+                    throw new RuntimeException(e);
                 }
                 return items;
             }
@@ -256,15 +260,8 @@ public class CategorizationFragment extends SherlockFragment{
         Category cat = lookupCategory(name);
         cat.incTimesUsed();
 
-        ContentProviderClient client = getActivity().getContentResolver().acquireContentProviderClient(CategoryContentProvider.AUTHORITY);
-        if (client == null) {
-            // explode
-            throw new RuntimeException("wtf");
-        }
         cat.setContentProviderClient(client);
         cat.save();
-        cat.setContentProviderClient(null);
-        client.release();
     }
 
     @Override
@@ -340,6 +337,14 @@ public class CategorizationFragment extends SherlockFragment{
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         getActivity().setTitle(R.string.categories_activity_title);
+        client = getActivity().getContentResolver().acquireContentProviderClient(CategoryContentProvider.AUTHORITY);
+    }
+
+    @Override
+    public void onDestroy() {
+        client.release();
+        client = null;
+        super.onDestroy();
     }
 
     @Override
