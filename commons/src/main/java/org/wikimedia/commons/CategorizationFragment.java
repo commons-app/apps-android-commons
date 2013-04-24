@@ -124,6 +124,9 @@ public class CategorizationFragment extends SherlockFragment{
             if(!TextUtils.isEmpty(filter) && categories.size() == 0) {
                 categoriesNotFoundView.setText(getString(R.string.categories_not_found, filter));
                 categoriesNotFoundView.setVisibility(View.VISIBLE);
+            } else {
+                // If we found recent cats, hide the skip message!
+                categoriesSkip.setVisibility(View.GONE);
             }
         }
 
@@ -308,11 +311,7 @@ public class CategorizationFragment extends SherlockFragment{
             }
 
             public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                if(lastUpdater != null) {
-                    lastUpdater.cancel(true);
-                }
-                lastUpdater = new CategoriesUpdater();
-                Utils.executeAsyncTask(lastUpdater, executor);
+                startUpdatingCategoryList();
             }
 
             public void afterTextChanged(Editable editable) {
@@ -320,8 +319,17 @@ public class CategorizationFragment extends SherlockFragment{
             }
         });
 
+        startUpdatingCategoryList();
 
         return rootView;
+    }
+
+    private void startUpdatingCategoryList() {
+        if (lastUpdater != null) {
+            lastUpdater.cancel(true);
+        }
+        lastUpdater = new CategoriesUpdater();
+        Utils.executeAsyncTask(lastUpdater, executor);
     }
 
     @Override
