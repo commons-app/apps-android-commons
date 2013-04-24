@@ -137,7 +137,7 @@ public class CategorizationFragment extends SherlockFragment{
                             Category.Table.ALL_FIELDS,
                             null,
                             new String[]{},
-                            null);
+                            Category.Table.COLUMN_LAST_USED + " DESC");
                     while (cursor.moveToNext()) {
                         Category cat = Category.fromCursor(cursor);
                         items.add(cat.getName());

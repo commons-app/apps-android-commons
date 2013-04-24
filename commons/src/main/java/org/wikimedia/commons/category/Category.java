@@ -47,6 +47,10 @@ public class Category {
         lastUsed = (Date)lastUsed_.clone();
     }
 
+    public void touch() {
+        lastUsed = new Date();
+    }
+
     public int getTimesUsed() {
         return timesUsed;
     }
@@ -57,6 +61,7 @@ public class Category {
 
     public void incTimesUsed() {
         timesUsed++;
+        touch();
     }
 
     // Database/content-provider stuff
