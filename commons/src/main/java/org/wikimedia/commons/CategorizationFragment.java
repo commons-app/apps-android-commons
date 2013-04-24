@@ -50,7 +50,7 @@ public class CategorizationFragment extends SherlockFragment{
 
     private ContentProviderClient client;
 
-    private final int RECENT_CATS_LIMIT = 20;
+    private final int SEARCH_CATS_LIMIT = 25;
 
     public static class CategoryItem implements Parcelable {
         public String name;
@@ -139,7 +139,7 @@ public class CategorizationFragment extends SherlockFragment{
                             new String[]{},
                             Category.Table.COLUMN_LAST_USED + " DESC");
                     // fixme add a limit on the original query instead of falling out of the loop?
-                    while (cursor.moveToNext() && cursor.getPosition() < RECENT_CATS_LIMIT) {
+                    while (cursor.moveToNext() && cursor.getPosition() < SEARCH_CATS_LIMIT) {
                         Category cat = Category.fromCursor(cursor);
                         items.add(cat.getName());
                     }
@@ -159,7 +159,7 @@ public class CategorizationFragment extends SherlockFragment{
                 result = api.action("query")
                         .param("list", "allcategories")
                         .param("acprefix", filter)
-                        .param("aclimit", 25)
+                        .param("aclimit", SEARCH_CATS_LIMIT)
                         .get();
             } catch (IOException e) {
                 throw new RuntimeException(e);
