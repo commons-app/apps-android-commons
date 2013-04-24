@@ -50,6 +50,8 @@ public class CategorizationFragment extends SherlockFragment{
 
     private ContentProviderClient client;
 
+    private final int RECENT_CATS_LIMIT = 20;
+
     public static class CategoryItem implements Parcelable {
         public String name;
         public boolean selected;
@@ -129,8 +131,6 @@ public class CategorizationFragment extends SherlockFragment{
         protected ArrayList<String> doInBackground(Void... voids) {
             if(TextUtils.isEmpty(filter)) {
                 ArrayList<String> items = new ArrayList<String>();
-                // fixme add a limit?
-                // fixme sort by last_used descending?
                 try {
                     Cursor cursor = client.query(
                             CategoryContentProvider.BASE_URI,
@@ -138,7 +138,8 @@ public class CategorizationFragment extends SherlockFragment{
                             null,
                             new String[]{},
                             Category.Table.COLUMN_LAST_USED + " DESC");
-                    while (cursor.moveToNext()) {
+                    // fixme add a limit on the original query instead of falling out of the loop?
+                    while (cursor.moveToNext() && cursor.getPosition() < RECENT_CATS_LIMIT) {
                         Category cat = Category.fromCursor(cursor);
                         items.add(cat.getName());
                     }
