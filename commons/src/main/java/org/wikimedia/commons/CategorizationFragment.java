@@ -238,15 +238,12 @@ public class CategorizationFragment extends SherlockFragment{
         Cursor cursor = getActivity().getContentResolver().query(
                 CategoryContentProvider.BASE_URI,
                 Category.Table.ALL_FIELDS,
-                null,
-                new String[] {},
+                Category.Table.COLUMN_NAME + "=?",
+                new String[] {name},
                 null);
-        // fixme move to conditions
-        while (cursor.moveToNext()) {
+        if (cursor.moveToNext()) {
             Category cat = Category.fromCursor(cursor);
-            if (cat.getName().equals(name)) {
-                return cat;
-            }
+            return cat;
         }
 
         // Newly used category...
