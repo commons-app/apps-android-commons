@@ -51,6 +51,7 @@
         android:gravity="center"
         android:focusable="true"
         android:text="@string/categories_skip_explanation"
+        android:visibility="gone"
         />
 
     <ListView
