@@ -302,6 +302,11 @@ public class Contribution extends Media {
                 from++;
                 return;
             }
+            if(from == 4) {
+                // Do nothing -- added Category
+                from++;
+                return;
+            }
         }
     }
 }

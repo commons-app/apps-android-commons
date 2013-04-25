@@ -130,6 +130,13 @@
                 android:authorities="org.wikimedia.commons.modifications.contentprovider"
                 android:exported="false">
         </provider>
+        <provider
+                android:name=".category.CategoryContentProvider"
+                android:label="@string/provider_categories"
+                android:syncable="false"
+                android:authorities="org.wikimedia.commons.categories.contentprovider"
+                android:exported="false">
+        </provider>
     </application>
 
 </manifest>

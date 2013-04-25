@@ -1,11 +1,10 @@
 package org.wikimedia.commons;
 
 import android.app.Activity;
+import android.content.ContentProviderClient;
 import android.content.Context;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
+import android.database.Cursor;
+import android.os.*;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -18,10 +17,14 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import org.mediawiki.api.ApiResult;
 import org.mediawiki.api.MWApi;
+import org.wikimedia.commons.category.Category;
+import org.wikimedia.commons.category.CategoryContentProvider;
+import org.wikimedia.commons.contributions.Contribution;
 
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -44,6 +47,10 @@ public class CategorizationFragment extends SherlockFragment{
     private OnCategoriesSaveHandler onCategoriesSaveHandler;
 
     private HashMap<String, ArrayList<String>> categoriesCache;
+
+    private ContentProviderClient client;
+
+    private final int SEARCH_CATS_LIMIT = 25;
 
     public static class CategoryItem implements Parcelable {
         public String name;
@@ -114,16 +121,38 @@ public class CategorizationFragment extends SherlockFragment{
             categoriesAdapter.setItems(items);
             categoriesAdapter.notifyDataSetInvalidated();
             categoriesSearchInProgress.setVisibility(View.GONE);
-            if(!TextUtils.isEmpty(filter) && categories.size() == 0) {
-                categoriesNotFoundView.setText(getString(R.string.categories_not_found, filter));
-                categoriesNotFoundView.setVisibility(View.VISIBLE);
+            if (categories.size() == 0) {
+                if(!TextUtils.isEmpty(filter)) {
+                    categoriesNotFoundView.setText(getString(R.string.categories_not_found, filter));
+                    categoriesNotFoundView.setVisibility(View.VISIBLE);
+                }
+            } else {
+                // If we found recent cats, hide the skip message!
+                categoriesSkip.setVisibility(View.GONE);
             }
         }
 
         @Override
         protected ArrayList<String> doInBackground(Void... voids) {
             if(TextUtils.isEmpty(filter)) {
-                return new ArrayList<String>();
+                ArrayList<String> items = new ArrayList<String>();
+                try {
+                    Cursor cursor = client.query(
+                            CategoryContentProvider.BASE_URI,
+                            Category.Table.ALL_FIELDS,
+                            null,
+                            new String[]{},
+                            Category.Table.COLUMN_LAST_USED + " DESC");
+                    // fixme add a limit on the original query instead of falling out of the loop?
+                    while (cursor.moveToNext() && cursor.getPosition() < SEARCH_CATS_LIMIT) {
+                        Category cat = Category.fromCursor(cursor);
+                        items.add(cat.getName());
+                    }
+                } catch (RemoteException e) {
+                    // faaaail
+                    throw new RuntimeException(e);
+                }
+                return items;
             }
             if(categoriesCache.containsKey(filter)) {
                 return categoriesCache.get(filter);
@@ -135,7 +164,7 @@ public class CategorizationFragment extends SherlockFragment{
                 result = api.action("query")
                         .param("list", "allcategories")
                         .param("acprefix", filter)
-                        .param("aclimit", 25)
+                        .param("aclimit", SEARCH_CATS_LIMIT)
                         .get();
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -211,6 +240,55 @@ public class CategorizationFragment extends SherlockFragment{
         return count;
     }
 
+    private Category lookupCategory(String name) {
+        try {
+            Cursor cursor = client.query(
+                    CategoryContentProvider.BASE_URI,
+                    Category.Table.ALL_FIELDS,
+                    Category.Table.COLUMN_NAME + "=?",
+                    new String[] {name},
+                    null);
+            if (cursor.moveToFirst()) {
+                Category cat = Category.fromCursor(cursor);
+                return cat;
+            }
+        } catch (RemoteException e) {
+            // This feels lazy, but to hell with checked exceptions. :)
+            throw new RuntimeException(e);
+        }
+
+        // Newly used category...
+        Category cat = new Category();
+        cat.setName(name);
+        cat.setLastUsed(new Date());
+        cat.setTimesUsed(0);
+        return cat;
+    }
+
+    private class CategoryCountUpdater extends AsyncTask<Void, Void, Void> {
+
+        private String name;
+
+        public CategoryCountUpdater(String name) {
+            this.name = name;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            Category cat = lookupCategory(name);
+            cat.incTimesUsed();
+
+            cat.setContentProviderClient(client);
+            cat.save();
+
+            return null; // Make the compiler happy.
+        }
+    }
+
+    private void updateCategoryCount(String name) {
+        Utils.executeAsyncTask(new CategoryCountUpdater(name), executor);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_categorization, null);
@@ -245,6 +323,9 @@ public class CategorizationFragment extends SherlockFragment{
                 CategoryItem item = (CategoryItem) adapterView.getAdapter().getItem(index);
                 item.selected = !item.selected;
                 checkedView.setChecked(item.selected);
+                if (item.selected) {
+                    updateCategoryCount(item.name);
+                }
             }
         });
 
@@ -253,11 +334,7 @@ public class CategorizationFragment extends SherlockFragment{
             }
 
             public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                if(lastUpdater != null) {
-                    lastUpdater.cancel(true);
-                }
-                lastUpdater = new CategoriesUpdater();
-                Utils.executeAsyncTask(lastUpdater, executor);
+                startUpdatingCategoryList();
             }
 
             public void afterTextChanged(Editable editable) {
@@ -265,8 +342,17 @@ public class CategorizationFragment extends SherlockFragment{
             }
         });
 
+        startUpdatingCategoryList();
 
         return rootView;
+    }
+
+    private void startUpdatingCategoryList() {
+        if (lastUpdater != null) {
+            lastUpdater.cancel(true);
+        }
+        lastUpdater = new CategoriesUpdater();
+        Utils.executeAsyncTask(lastUpdater, executor);
     }
 
     @Override
@@ -280,6 +366,13 @@ public class CategorizationFragment extends SherlockFragment{
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         getActivity().setTitle(R.string.categories_activity_title);
+        client = getActivity().getContentResolver().acquireContentProviderClient(CategoryContentProvider.AUTHORITY);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        client.release();
     }
 
     @Override
