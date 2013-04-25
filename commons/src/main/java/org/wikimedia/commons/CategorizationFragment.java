@@ -272,12 +272,14 @@ public class CategorizationFragment extends SherlockFragment{
         }
 
         @Override
-        protected void doInBackground(Void... voids) {
+        protected Void doInBackground(Void... voids) {
             Category cat = lookupCategory(name);
             cat.incTimesUsed();
 
             cat.setContentProviderClient(client);
             cat.save();
+
+            return null; // Make the compiler happy.
         }
     }
 
