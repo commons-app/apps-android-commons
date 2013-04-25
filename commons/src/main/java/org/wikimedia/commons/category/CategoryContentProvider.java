@@ -135,12 +135,6 @@ public class CategoryContentProvider extends ContentProvider {
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         int rowsUpdated = 0;
         switch (uriType) {
-            case CATEGORIES:
-                rowsUpdated = sqlDB.update(Category.Table.TABLE_NAME,
-                        contentValues,
-                        selection,
-                        selectionArgs);
-                break;
             case CATEGORIES_ID:
                 int id = Integer.valueOf(uri.getLastPathSegment());
 
