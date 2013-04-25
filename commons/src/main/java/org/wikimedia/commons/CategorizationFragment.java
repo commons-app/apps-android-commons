@@ -121,9 +121,11 @@ public class CategorizationFragment extends SherlockFragment{
             categoriesAdapter.setItems(items);
             categoriesAdapter.notifyDataSetInvalidated();
             categoriesSearchInProgress.setVisibility(View.GONE);
-            if(!TextUtils.isEmpty(filter) && categories.size() == 0) {
-                categoriesNotFoundView.setText(getString(R.string.categories_not_found, filter));
-                categoriesNotFoundView.setVisibility(View.VISIBLE);
+            if (categories.size() == 0) {
+                if(!TextUtils.isEmpty(filter)) {
+                    categoriesNotFoundView.setText(getString(R.string.categories_not_found, filter));
+                    categoriesNotFoundView.setVisibility(View.VISIBLE);
+                }
             } else {
                 // If we found recent cats, hide the skip message!
                 categoriesSkip.setVisibility(View.GONE);
