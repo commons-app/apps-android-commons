@@ -5,28 +5,11 @@
       <configuration>
         <option name="GEN_FOLDER_RELATIVE_PATH_APT" value="/target/generated-sources/r" />
         <option name="GEN_FOLDER_RELATIVE_PATH_AIDL" value="/target/generated-sources/aidl" />
-        <option name="MANIFEST_FILE_RELATIVE_PATH" value="/AndroidManifest.xml" />
-        <option name="RES_FOLDER_RELATIVE_PATH" value="/res" />
-        <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/assets" />
         <option name="LIBS_FOLDER_RELATIVE_PATH" value="/src/main/native" />
-        <option name="USE_CUSTOM_APK_RESOURCE_FOLDER" value="false" />
         <option name="CUSTOM_APK_RESOURCE_FOLDER" value="/target/generated-sources/combined-resources/res" />
-        <option name="USE_CUSTOM_COMPILER_MANIFEST" value="false" />
-        <option name="CUSTOM_COMPILER_MANIFEST" value="" />
         <option name="APK_PATH" value="/target/commons.apk" />
-        <option name="LIBRARY_PROJECT" value="false" />
         <option name="RUN_PROCESS_RESOURCES_MAVEN_TASK" value="false" />
-        <option name="GENERATE_UNSIGNED_APK" value="false" />
-        <option name="CUSTOM_DEBUG_KEYSTORE_PATH" value="" />
-        <option name="PACK_TEST_CODE" value="false" />
-        <option name="RUN_PROGUARD" value="false" />
-        <option name="PROGUARD_CFG_PATH" value="/proguard-project.txt" />
-        <resOverlayFolders>
-          <path>/res-overlay</path>
-        </resOverlayFolders>
-        <includeSystemProguardFile>true</includeSystemProguardFile>
         <includeAssetsFromLibraries>true</includeAssetsFromLibraries>
-        <additionalNativeLibs />
       </configuration>
     </facet>
   </component>

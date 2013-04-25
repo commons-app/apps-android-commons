@@ -13,13 +13,6 @@ import org.wikimedia.commons.contributions.ContributionsContentProvider;
 
 import java.util.Date;
 
-/**
- * Created with IntelliJ IDEA.
- * User: brion
- * Date: 4/22/13
- * Time: 3:37 PM
- * To change this template use File | Settings | File Templates.
- */
 public class Category {
     private ContentProviderClient client;
     private Uri contentUri;
@@ -33,8 +26,8 @@ public class Category {
         return name;
     }
 
-    public void setName(String name_) {
-        name = name_;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Date getLastUsed() {
@@ -42,9 +35,9 @@ public class Category {
         return (Date)lastUsed.clone();
     }
 
-    public void setLastUsed(Date lastUsed_) {
+    public void setLastUsed(Date lastUsed) {
         // warning: Date objects are mutable.
-        lastUsed = (Date)lastUsed_.clone();
+        this.lastUsed = (Date)lastUsed.clone();
     }
 
     public void touch() {
@@ -55,8 +48,8 @@ public class Category {
         return timesUsed;
     }
 
-    public void setTimesUsed(int timesUsed_) {
-        timesUsed = timesUsed_;
+    public void setTimesUsed(int timesUsed) {
+        this.timesUsed = timesUsed;
     }
 
     public void incTimesUsed() {
@@ -119,7 +112,7 @@ public class Category {
         private static final String CREATE_TABLE_STATEMENT = "CREATE TABLE " + TABLE_NAME + " ("
                 + COLUMN_ID + " INTEGER PRIMARY KEY,"
                 + COLUMN_NAME + " STRING,"
-                + COLUMN_LAST_USED + " INTEGER," // Will this roll over in 2038? :)
+                + COLUMN_LAST_USED + " INTEGER,"
                 + COLUMN_TIMES_USED + " INTEGER"
                 + ");";
 

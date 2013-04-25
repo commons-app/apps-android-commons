@@ -239,15 +239,20 @@ public class CategorizationFragment extends SherlockFragment{
     }
 
     private Category lookupCategory(String name) {
-        Cursor cursor = getActivity().getContentResolver().query(
-                CategoryContentProvider.BASE_URI,
-                Category.Table.ALL_FIELDS,
-                Category.Table.COLUMN_NAME + "=?",
-                new String[] {name},
-                null);
-        if (cursor.moveToNext()) {
-            Category cat = Category.fromCursor(cursor);
-            return cat;
+        try {
+            Cursor cursor = client.query(
+                    CategoryContentProvider.BASE_URI,
+                    Category.Table.ALL_FIELDS,
+                    Category.Table.COLUMN_NAME + "=?",
+                    new String[] {name},
+                    null);
+            if (cursor.moveToFirst()) {
+                Category cat = Category.fromCursor(cursor);
+                return cat;
+            }
+        } catch (RemoteException e) {
+            // This feels lazy, but to hell with checked exceptions. :)
+            throw new RuntimeException(e);
         }
 
         // Newly used category...
@@ -257,12 +262,27 @@ public class CategorizationFragment extends SherlockFragment{
         cat.setTimesUsed(0);
         return cat;
     }
-    private void updateCategoryCount(String name) {
-        Category cat = lookupCategory(name);
-        cat.incTimesUsed();
 
-        cat.setContentProviderClient(client);
-        cat.save();
+    private class CategoryCountUpdater extends AsyncTask<Void, Void, Void> {
+
+        private String name;
+
+        public CategoryCountUpdater(String name) {
+            this.name = name;
+        }
+
+        @Override
+        protected void doInBackground(Void... voids) {
+            Category cat = lookupCategory(name);
+            cat.incTimesUsed();
+
+            cat.setContentProviderClient(client);
+            cat.save();
+        }
+    }
+
+    private void updateCategoryCount(String name) {
+        Utils.executeAsyncTask(new CategoryCountUpdater(name), executor);
     }
 
     @Override
@@ -299,7 +319,6 @@ public class CategorizationFragment extends SherlockFragment{
                 CategoryItem item = (CategoryItem) adapterView.getAdapter().getItem(index);
                 item.selected = !item.selected;
                 checkedView.setChecked(item.selected);
-                // fixme do this asynchronously?
                 if (item.selected) {
                     updateCategoryCount(item.name);
                 }
@@ -348,9 +367,8 @@ public class CategorizationFragment extends SherlockFragment{
 
     @Override
     public void onDestroy() {
-        client.release();
-        client = null;
         super.onDestroy();
+        client.release();
     }
 
     @Override

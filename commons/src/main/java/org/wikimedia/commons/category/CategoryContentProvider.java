@@ -12,16 +12,9 @@ import android.util.Log;
 import org.wikimedia.commons.CommonsApplication;
 import org.wikimedia.commons.data.DBOpenHelper;
 
-/**
- * Created with IntelliJ IDEA.
- * User: brion
- * Date: 4/22/13
- * Time: 4:09 PM
- * To change this template use File | Settings | File Templates.
- */
 public class CategoryContentProvider extends ContentProvider {
 
-    // ????
+    // For URI matcher
     private static final int CATEGORIES = 1;
     private static final int CATEGORIES_ID = 2;
 
