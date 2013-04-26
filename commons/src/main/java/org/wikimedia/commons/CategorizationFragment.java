@@ -96,10 +96,7 @@ public class CategorizationFragment extends SherlockFragment{
             categoriesSearchInProgress.setVisibility(View.VISIBLE);
             categoriesNotFoundView.setVisibility(View.GONE);
 
-            if(!TextUtils.isEmpty(filter)) {
-                // Only hide this on first count of non-empty filter
-                categoriesSkip.setVisibility(View.GONE);
-            }
+            categoriesSkip.setVisibility(View.GONE);
         }
 
         @Override
@@ -122,13 +119,13 @@ public class CategorizationFragment extends SherlockFragment{
             categoriesAdapter.notifyDataSetInvalidated();
             categoriesSearchInProgress.setVisibility(View.GONE);
             if (categories.size() == 0) {
-                if(!TextUtils.isEmpty(filter)) {
+                if(TextUtils.isEmpty(filter)) {
+                    // If we found no recent cats, show the skip message!
+                    categoriesSkip.setVisibility(View.VISIBLE);
+                } else {
                     categoriesNotFoundView.setText(getString(R.string.categories_not_found, filter));
                     categoriesNotFoundView.setVisibility(View.VISIBLE);
                 }
-            } else {
-                // If we found recent cats, hide the skip message!
-                categoriesSkip.setVisibility(View.GONE);
             }
         }
 
