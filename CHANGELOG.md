@@ -1,5 +1,13 @@
 # Wikimedia Commons for Android
 
+## v1.0 beta 8
+- Disable menu items for share and open browser when upload incomplete
+- Show recently-used categories
+- Prevent upload status from overlapping with the title of upload
+- Make template removal work properly
+- Relicense to Apache License
+- i18n updates
+
 ## v1.0 beta 7
 - Added opt out from EventLogging
 - Remove {{Uncategorized}} template after adding categories
