@@ -138,15 +138,15 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
         if(!editable) { // Disable menu options for editable views
             menu.clear(); // see http://stackoverflow.com/a/8495697/17865
             inflater.inflate(R.menu.fragment_image_detail, menu);
-        }
-        if(pager != null) {
-            MediaDetailProvider provider = (MediaDetailProvider)getSherlockActivity();
-            Media m = provider.getMediaAtPosition(pager.getCurrentItem());
-            if(m != null && !m.getFilename().startsWith("File:")) {
-                // Crude way of checking if the file has been successfully saved!
-                menu.findItem(R.id.menu_browser_current_image).setEnabled(false);
-                menu.findItem(R.id.menu_share_current_image).setEnabled(false);
-                return;
+            if(pager != null) {
+                MediaDetailProvider provider = (MediaDetailProvider)getSherlockActivity();
+                Media m = provider.getMediaAtPosition(pager.getCurrentItem());
+                if(m != null && !m.getFilename().startsWith("File:")) {
+                    // Crude way of checking if the file has been successfully saved!
+                    menu.findItem(R.id.menu_browser_current_image).setEnabled(false);
+                    menu.findItem(R.id.menu_share_current_image).setEnabled(false);
+                    return;
+                }
             }
         }
     }
