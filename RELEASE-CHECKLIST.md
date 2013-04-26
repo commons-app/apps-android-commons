@@ -10,4 +10,14 @@ To prevent sad pandas, please check the following items before making a release:
   only need to test from the last database version, so should not be that hard!
   Do this on the final signed APK. You can use `adb install -r <apk>` to install
   it different versions of it.
-- Bump the version numbers in AndroidManifest.xml
+- Bump the version numbers in `AndroidManifest.xml`. `versionCode` is monotonically
+  increasing integers. `versionName` is descriptive string for this version.
+- Add the new release to the `CHANGELOG`. Make sure that the `CHANGELOG` additions
+  and the `AndroidManifest.xml` additions go together on the same commit.
+- Add an appropriately named git tag, such as `v1.0beta8`. Don't forget to push
+  it to the repo :)
+- Upload the new APK to the store using the dev console. Also modify the Changelog
+  in the store listing to contain changes for the last two releases. 
+- Email mobile-l with release announcement - short description of major new features
+  and then a copy of the CHANGELOG. Forward that to commons-l and wikitech-l with
+  a pithy note about how nobody reads mobile-l.
