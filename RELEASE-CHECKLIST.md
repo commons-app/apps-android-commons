@@ -21,3 +21,10 @@ To prevent sad pandas, please check the following items before making a release:
 - Email mobile-l with release announcement - short description of major new features
   and then a copy of the CHANGELOG. Forward that to commons-l and wikitech-l with
   a pithy note about how nobody reads mobile-l.
+- Find someone with write access to `dumps.wikimedia.org` and get them to put the
+  signed APK at `https://dumps.wikimedia.org/android/'. Add a link to the
+  [Release History page][2].
+- Respond to users at the [Feedback page on Commons][1].
+
+[1]: http://commons.wikimedia.org/wiki/Commons_talk:Mobile_app
+[2]: https://www.mediawiki.org/wiki/Mobile/Release_history#Commons
