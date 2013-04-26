@@ -16,10 +16,21 @@ import com.actionbarsherlock.widget.ShareActionProvider;
 
 import org.wikimedia.commons.*;
 
-public class MediaDetailPagerFragment extends SherlockFragment {
+public class MediaDetailPagerFragment extends SherlockFragment implements ViewPager.OnPageChangeListener {
     private ViewPager pager;
     private Boolean editable;
     private CommonsApplication app;
+
+    public void onPageScrolled(int i, float v, int i2) {
+        getSherlockActivity().supportInvalidateOptionsMenu();
+    }
+
+    public void onPageSelected(int i) {
+    }
+
+    public void onPageScrollStateChanged(int i) {
+
+    }
 
     public interface MediaDetailProvider {
         public Media getMediaAtPosition(int i);
@@ -34,6 +45,14 @@ public class MediaDetailPagerFragment extends SherlockFragment {
 
         @Override
         public Fragment getItem(int i) {
+            if(i == 0) {
+                // See bug https://code.google.com/p/android/issues/detail?id=27526
+                pager.postDelayed(new Runnable() {
+                    public void run() {
+                        getSherlockActivity().supportInvalidateOptionsMenu();
+                    }
+                }, 5);
+            }
             return MediaDetailFragment.forMedia(i, editable);
         }
 
@@ -55,6 +74,7 @@ public class MediaDetailPagerFragment extends SherlockFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_media_detail_pager, container, false);
         pager = (ViewPager) view.findViewById(R.id.mediaDetailsPager);
+        pager.setOnPageChangeListener(this);
         pager.setAdapter(new MediaDetailAdapter(getChildFragmentManager()));
         if(savedInstanceState != null) {
             final int pageNumber = savedInstanceState.getInt("current-page");
@@ -118,6 +138,16 @@ public class MediaDetailPagerFragment extends SherlockFragment {
         if(!editable) { // Disable menu options for editable views
             menu.clear(); // see http://stackoverflow.com/a/8495697/17865
             inflater.inflate(R.menu.fragment_image_detail, menu);
+        }
+        if(pager != null) {
+            MediaDetailProvider provider = (MediaDetailProvider)getSherlockActivity();
+            Media m = provider.getMediaAtPosition(pager.getCurrentItem());
+            if(m != null && !m.getFilename().startsWith("File:")) {
+                // Crude way of checking if the file has been successfully saved!
+                menu.findItem(R.id.menu_browser_current_image).setEnabled(false);
+                menu.findItem(R.id.menu_share_current_image).setEnabled(false);
+                return;
+            }
         }
     }
 
