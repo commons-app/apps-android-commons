@@ -52,4 +52,8 @@ Sentuh mesej ini (atau tekan butang undur) untuk melangkau langkah ini.</string>
   <string name="preference_tracking">Laporan penggunaan</string>
   <string name="preference_tracking_summary">Hantar laporan penggunaan kepada Wikimedia untuk membantu kami menambah baik app ini</string>
   <string name="title_activity_settings">Tetapan</string>
+  <string name="menu_about">Perihal</string>
+  <string name="about_license">Perisian Sumber Terbuka yang dikeluarkan di bawah</string>
+  <string name="title_activity_about">Perihal</string>
+  <string name="menu_feedback">Hantar Maklum Balas (secara e-mel)</string>
 </resources>

@@ -52,4 +52,10 @@ Chạm vào thông điệp này (hoặc bấm Quay lại) để bỏ qua bước
   <string name="preference_tracking">Báo cáo sử dụng</string>
   <string name="preference_tracking_summary">Gửi báo cáo sử dụng cho Wikimedia để giúp chúng tôi cải tiến ứng dụng</string>
   <string name="title_activity_settings">Tùy chọn</string>
+  <string name="menu_about">Giới thiệu</string>
+  <string name="about_license">Phần mềm mã nguồn mở được phát hành theo</string>
+  <string name="about_improve">Mã nguồn có sẵn tại . Báo cáo lỗi tại .</string>
+  <string name="about_privacy_policy"/>
+  <string name="title_activity_about">Giới thiệu</string>
+  <string name="menu_feedback">Phản hồi (qua Thư điện tử)</string>
 </resources>

@@ -9,7 +9,8 @@
   <string name="password">{{Identical|Password}}</string>
   <string name="login">Button to have people log in.
 {{Identical|Log in}}</string>
-  <string name="logging_in_title">Title of dialog box shown while logging in</string>
+  <string name="logging_in_title">Title of dialog box shown while logging in.
+{{Identical|Logging in}}</string>
   <string name="logging_in_message">Contents of dialog box shown while logging in.
 {{Identical|Please wait}}</string>
   <string name="login_success">Message when login has succeeded.
@@ -58,7 +59,8 @@
 {{Identical|Save}}</string>
   <string name="categories_not_found">Message shown to the user when no category matching what they searched for was found. %1$s represents the category name</string>
   <string name="categories_skip_explanation">Text explaining to users why and how to add categories to images. Users can also tap this message to skip adding categories.</string>
-  <string name="categories_activity_title">Title for the activity where Categories are being selected to add to the Image. {{Identical|Categories}}</string>
+  <string name="categories_activity_title">Title for the activity where Categories are being selected to add to the Image.
+{{Identical|Categories}}</string>
   <string name="preference_tracking">Text for preference that enables the user to enable or disable collection of data about the user\'s usage patterns.</string>
   <string name="preference_tracking_summary">Help text for preference that enables the user to enable or disable collection of data about the user\'s usage patterns.</string>
   <string name="title_activity_settings">{{Identical|Settings}}</string>

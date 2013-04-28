@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Wikimedia Commons</string>
+  <string name="app_name_beta">Wikimedia Commons Beta</string>
+  <string name="menu_settings">Ayarlar</string>
+  <string name="username">Kullanıcı adı</string>
+  <string name="password">Parola</string>
+  <string name="login">Oturum aç</string>
+  <string name="logging_in_message">Lütfen bekleyin...</string>
+  <string name="login_success">Oturum açma başarılı!</string>
+  <string name="login_failed">Oturum açma başarısız oldu!</string>
+  <string name="authentication_failed">Kimlik doğrulama başarısız oldu!</string>
+  <string name="uploading_started">Yükleme başladı!</string>
+  <string name="upload_completed_notification_title">%1$s yüklendi!</string>
+  <string name="upload_completed_notification_text">Yüklemelerinizi görüntülemek için dokunun</string>
+  <string name="upload_failed_notification_subtitle">Görüntülemek için dokunun</string>
+  <string name="title_activity_contributions">Yüklemelerim</string>
+  <string name="contribution_state_failed">Başarısız</string>
+  <string name="contribution_state_in_progress">%1$d%% tamamlandı</string>
+  <string name="contribution_state_starting">Yükleniyor</string>
+  <string name="menu_from_gallery">Galeri\'den</string>
+  <string name="menu_from_camera">Fotoğraf çek</string>
+  <string name="provider_contributions">Yüklemelerim</string>
+  <string name="menu_share">Paylaş</string>
+  <string name="menu_open_in_browser">Tarayıcıda görüntüle</string>
+  <string name="share_title_hint">Başlık</string>
+  <string name="share_description_hint">Açıklama</string>
+  <string name="title_activity_about">Hakkında</string>
+  <string name="menu_feedback">Geri Bildirim Gönder (E-posta ile)</string>
+</resources>

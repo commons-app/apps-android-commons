@@ -44,6 +44,8 @@
   <string name="categories_search_text_hint">Kategorie sichen</string>
   <string name="menu_save_categories">Späicheren</string>
   <string name="categories_not_found">D\'Kategorie %1$s gouf net fonnt</string>
+  <string name="categories_skip_explanation">Fänkt u mat Tippen fir Kategorien derbäizesetzen.
+Klickt op dëse Message (oder dréck op Zréck) fir dëse Schrëtt z\'iwwersprangen.</string>
   <string name="categories_activity_title">Kategorien</string>
   <string name="preference_tracking">Rapporten iwwer de Gebrauch</string>
   <string name="preference_tracking_summary">Schéckr Rapporte iwwer de Gebrauch u Wikimedia fir eis ze hëllefen d\'App ze verbesseren</string>

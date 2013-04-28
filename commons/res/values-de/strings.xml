@@ -28,11 +28,11 @@
   <string name="menu_from_camera">Foto schießen</string>
   <string name="provider_contributions">Meine hochgeladenen Dateien</string>
   <string name="menu_share">Teilen</string>
-  <string name="menu_open_in_browser">In Browser anzeigen</string>
+  <string name="menu_open_in_browser">Im Browser anzeigen</string>
   <string name="share_title_hint">Titel</string>
   <string name="share_description_hint">Beschreibung</string>
   <string name="login_failed_network">Anmeldung fehlgeschlagen – Netzwerkfehler</string>
-  <string name="login_failed_username">Anmeldung fehlgeschlagen – Bitte Benutzername überprüfen</string>
+  <string name="login_failed_username">Anmeldung fehlgeschlagen – Bitte Benutzernamen überprüfen</string>
   <string name="login_failed_password">Anmeldung fehlgeschlagen – Bitte Passwort überprüfen</string>
   <string name="login_failed_throttled">Zu viele erfolglose Versuche. Bitte in einigen Minuten erneut versuchen.</string>
   <string name="login_failed_blocked">Dieser Benutzer wurde leider auf Commons gesperrt</string>
@@ -57,4 +57,5 @@ Tippe auf diese Nachricht oder drücke „Zurück“, um diesen Schritt zu über
   <string name="about_improve">Quelle auf . Fehler unter .</string>
   <string name="title_activity_about">Über</string>
   <string name="menu_feedback">Rückmeldung per E-Mail senden</string>
+  <string name="provider_categories">Kürzlich verwendete Kategorien</string>
 </resources>
