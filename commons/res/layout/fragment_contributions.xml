@@ -6,6 +6,16 @@
               android:layout_height="fill_parent"
               android:background="#000000"
         >
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Waiting for first sync..."
+            android:id="@+id/waitingMessage" android:layout_gravity="center" android:visibility="gone"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="You have not yet uploaded any photos."
+            android:id="@+id/emptyMessage" android:layout_gravity="center" android:visibility="gone"/>
     <GridView android:id="@+id/contributionsList"
               android:layout_height="fill_parent"
               android:layout_width="fill_parent"
