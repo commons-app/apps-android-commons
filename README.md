@@ -14,9 +14,9 @@
 
 **Note**: Currently uses a bunch of dependencies that are staged at `yuvi.in/blog/maven`. Will be migrated to either [Maven Central][4] or a Wikimedia staging server soon.
 
-## Set Up IntelliJ for Commons App Development ##
+## Set Up IntelliJ for Commons Android App Development ##
 
-### Import and Compile CommonApp ##
+### Import and Compile Commons Android App ##
 
 [Download IntelliJ][6]
 
