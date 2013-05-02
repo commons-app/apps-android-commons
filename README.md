@@ -18,7 +18,7 @@
 
 ### Import and Compile CommonApp ##
 
-[Download IntelliJ] [6]
+[Download IntelliJ][6]
 
 1. Clone the repository.
 2. Open IntelliJ.
