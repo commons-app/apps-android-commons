@@ -22,10 +22,10 @@
 
 1. Clone the repository.
 2. Open IntelliJ.
-3. Import Project:
-	File -> Import Project
-	or
-	Select 'Import Project' from the Quick Start menu
+3. Import Project:  
+	File -> Import Project  
+	or  
+	Select 'Import Project' from the Quick Start menu  
 4. Navigate to the folder with the cloned repository and press 'OK'.
 5. Select 'Import Project from external model' -> 'Maven' and press 'Next'.
 6. Make sure 'Search for projects recursively' and 'Import Maven projects automatically' are checked. Select 'Next'.
