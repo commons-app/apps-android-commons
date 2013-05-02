@@ -51,3 +51,4 @@ This software has no bugs. You can dispute this statement at [bugzilla][3]
 [3]: https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App
 [4]: http://search.maven.org/
 [5]: https://www.apache.org/licenses/LICENSE-2.0
+[6]: httpK//www.jetbrains.com/idea/download/index.html
