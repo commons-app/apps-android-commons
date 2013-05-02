@@ -35,7 +35,7 @@
 10. This section needs no modifications. Select 'Next'.
 11. Select 'Finish'.
 12. After the program opens select 'Make project' - there should be errors.
-13. Neat the top of the file that is opened up, one of the offending lines should be "import android.support.v4.app.FragmentActivity;" - put your cursor on that line and hit 'alt'/'option'+'enter' to bring up the AutoFix dialog. Select the 'compatibility' option.
+13. Near the top of the file that is opened up, one of the offending lines should be "import android.support.v4.app.FragmentActivity;" - put your cursor on that line and hit 'alt'/'option'+'enter' to bring up the AutoFix dialog. Select the 'compatibility' option.
 14. Select 'Make project' again. It should compile successfully.
 
 ## License ##
@@ -51,4 +51,4 @@ This software has no bugs. You can dispute this statement at [bugzilla][3]
 [3]: https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App
 [4]: http://search.maven.org/
 [5]: https://www.apache.org/licenses/LICENSE-2.0
-[6]: httpK//www.jetbrains.com/idea/download/index.html
+[6]: http://www.jetbrains.com/idea/download/index.html
