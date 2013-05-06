@@ -92,8 +92,15 @@ public class Utils {
     public static DisplayImageOptions.Builder getGenericDisplayOptions() {
         if(defaultImageOptionsBuilder == null) {
             defaultImageOptionsBuilder = new DisplayImageOptions.Builder().cacheInMemory()
-                    .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
-                    .displayer(new FadeInBitmapDisplayer(300))
+                    .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                // List views flicker badly during data updates on Android 2.3; we
+                // haven't quite figured out why but cells seem to be rearranged oddly.
+                // Disable the fade-in on 2.3 to reduce the effect.
+                defaultImageOptionsBuilder = defaultImageOptionsBuilder
+                        .displayer(new FadeInBitmapDisplayer(300));
+            }
+            defaultImageOptionsBuilder = defaultImageOptionsBuilder
                     .cacheInMemory()
                     .resetViewBeforeLoading();
         }
