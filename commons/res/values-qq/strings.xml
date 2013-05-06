@@ -67,4 +67,6 @@
   <string name="menu_about">{{Identical|About}}</string>
   <string name="title_activity_about">{{Identical|About}}</string>
   <string name="menu_feedback">Menu item text that prompts user to send feedback to WMF via email</string>
+  <string name="waiting_first_sync">Message shown on contributions list during first sync.</string>
+  <string name="no_uploads_yet">Message shown on contribution list during non-first sync if no uploads present.</string>
 </resources>

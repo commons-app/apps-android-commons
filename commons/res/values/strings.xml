@@ -81,4 +81,7 @@
     <string name="title_activity_about">About</string>
     <string name="menu_feedback">Send Feedback (via Email)</string>
     <string name="provider_categories">Recently used categories</string>
+
+    <string name="waiting_first_sync">Waiting for first sync...</string>
+    <string name="no_uploads_yet">You have not yet uploaded any photos.</string>
 </resources>
