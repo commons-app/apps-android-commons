@@ -3,6 +3,7 @@ package org.wikimedia.commons.contributions;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -36,6 +37,8 @@ public class ContributionsListFragment extends SherlockFragment {
     private final static int SELECT_FROM_CAMERA = 2;
 
     private GridView contributionsList;
+    private TextView waitingMessage;
+    private TextView emptyMessage;
 
     private ContributionsListAdapter contributionsAdapter;
 
@@ -73,6 +76,8 @@ public class ContributionsListFragment extends SherlockFragment {
 
         @Override
         public void bindView(View view, Context context, Cursor cursor) {
+            // hack: hide the 'first sync' message once we've loaded a cell
+            clearSyncMessage();
 
             final ContributionViewHolder views = (ContributionViewHolder)view.getTag();
             Contribution contribution = Contribution.fromCursor(cursor);
@@ -258,6 +263,8 @@ public class ContributionsListFragment extends SherlockFragment {
         super.onActivityCreated(savedInstanceState);
 
         contributionsList = (GridView)getView().findViewById(R.id.contributionsList);
+        waitingMessage = (TextView)getView().findViewById(R.id.waitingMessage);
+        emptyMessage = (TextView)getView().findViewById(R.id.waitingMessage);
         contributionDisplayOptions = Utils.getGenericDisplayOptions().build();
 
         contributionsList.setOnItemClickListener((AdapterView.OnItemClickListener)getActivity());
@@ -267,5 +274,14 @@ public class ContributionsListFragment extends SherlockFragment {
             contributionsList.setSelection(savedInstanceState.getInt("grid-position"));
         }
 
+        SharedPreferences prefs = this.getSherlockActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        String lastModified = prefs.getString("lastSyncTimestamp", "");
+        if (lastModified.equals("")) {
+            waitingMessage.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void clearSyncMessage() {
+        waitingMessage.setVisibility(View.GONE);
     }
 }
