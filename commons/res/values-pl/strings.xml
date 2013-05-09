@@ -52,4 +52,9 @@ Dotknij tej wiadomości (lub naciśnij \"cofnij\") aby pominąć ten krok</strin
   <string name="preference_tracking">Raporty użycia</string>
   <string name="preference_tracking_summary">Wyślij raporty do Wikimedia, aby pomóc w ulepszeniu aplikacji</string>
   <string name="title_activity_settings">Ustawienia</string>
+  <string name="menu_about">O aplikacji</string>
+  <string name="about_license">Oprogramowanie Open Source, wydane na licencji</string>
+  <string name="title_activity_about">O aplikacji</string>
+  <string name="menu_feedback">Wyślij opinię (przez e-mail)</string>
+  <string name="provider_categories">Niedawno używane Kategorie</string>
 </resources>

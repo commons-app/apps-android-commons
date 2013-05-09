@@ -57,4 +57,5 @@ Prema nesta mensaxe (ou no botón \"Atrás\") para saltar este paso.</string>
   <string name="about_improve">Fonte en . Erros en .</string>
   <string name="title_activity_about">Acerca de</string>
   <string name="menu_feedback">Enviar comentarios (por correo electrónico)</string>
+  <string name="provider_categories">Categorías usadas recentemente</string>
 </resources>

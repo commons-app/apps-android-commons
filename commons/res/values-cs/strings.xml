@@ -54,4 +54,5 @@
   <string name="about_improve">Zdrojový text na . Hlášení chyb na .</string>
   <string name="title_activity_about">O aplikaci</string>
   <string name="menu_feedback">Poslat názory (e-mailem)</string>
+  <string name="provider_categories">Nedávno použité kategorie</string>
 </resources>

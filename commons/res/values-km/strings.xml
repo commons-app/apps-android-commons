@@ -39,4 +39,21 @@
   <string name="login_failed_generic">កត់ឈ្មោះចូលបរាជ័យ</string>
   <string name="share_upload_button">ផ្ទុកឡើង</string>
   <string name="multiple_share_base_title">ដាក់ឈ្មោះឲ្យសំនុំនេះ</string>
+  <string name="provider_modifications">បម្រែបម្រួល</string>
+  <string name="menu_upload_single">ផ្ទុកឡើង</string>
+  <string name="categories_search_text_hint">ស្វែងរកចំណាត់ថ្នាក់ក្រុម</string>
+  <string name="menu_save_categories">រក្សាទុក</string>
+  <string name="categories_not_found">រកមិនឃើញចំណាត់ថ្នាក់ក្រុមដែលត្រូវនឹង %1$s ទេ</string>
+  <string name="categories_skip_explanation">បន្ថែមចំណាត់ថ្នាក់ក្រុមអោយរូបភាពរបស់អ្នកដើម្បីអោយងាយស្រួលស្វែងរក្នុង Wikimedia Commons។
+ចាប់ផ្ដើមវាយបញ្ចូលឈ្មោះចំណាត់ថ្នាក់ក្រុម។
+ចុចលើសារនេះ (ឬចុចប៊ូតុងត្រលប់ក្រោយ)ដើម្បីរំលងជំហ៊ាននេះ។</string>
+  <string name="categories_activity_title">ចំណាត់ថ្នាក់ក្រុម</string>
+  <string name="preference_tracking">របាយការណ៍ស្ដីពីបម្រើបម្រាស់</string>
+  <string name="preference_tracking_summary">ផ្ញើរបាយការណ៍ស្ដីពីបម្រើបម្រាស់ទៅ Wikimedia ដើម្បីជួយកែលម្អកម្មវិធីយើងខ្ញុំ</string>
+  <string name="title_activity_settings">ការកំណត់</string>
+  <string name="menu_about">អំពី</string>
+  <string name="about_license">សូហ្វវែរប្រភពបើកទូលាយត្រូវបានចេញផ្សាយក្រោម</string>
+  <string name="title_activity_about">អំពី</string>
+  <string name="menu_feedback">ផ្ញើមតិកែលម្អ (តាមអ៊ីមែល)</string>
+  <string name="provider_categories">ចំណាត់ថ្នាក់ក្រុមដែលត្រូវបានប្រើថ្មីៗ</string>
 </resources>

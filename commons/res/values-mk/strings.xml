@@ -8,7 +8,7 @@
   <string name="login">Најава</string>
   <string name="logging_in_title">Најава</string>
   <string name="logging_in_message">Почекајте...</string>
-  <string name="login_success">Најавувањето е успешно!</string>
+  <string name="login_success">Најавата е успешна!</string>
   <string name="login_failed">Најавата не успеа!</string>
   <string name="authentication_failed">Заверката не успеа!</string>
   <string name="uploading_started">Подигањето започна</string>
@@ -57,4 +57,5 @@
   <string name="about_improve">Изворниот код е на . Грешките се на .</string>
   <string name="title_activity_about">За прилогот</string>
   <string name="menu_feedback">Испратете ваш одѕив (по е-пошта)</string>
+  <string name="provider_categories">Неодамна искористени категории</string>
 </resources>

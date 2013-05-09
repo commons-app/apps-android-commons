@@ -55,7 +55,10 @@ Tippe auf diese Nachricht oder drücke „Zurück“, um diesen Schritt zu über
   <string name="menu_about">Über</string>
   <string name="about_license">Open-Source-Software veröffentlicht unter der</string>
   <string name="about_improve">Quelle auf . Fehler unter .</string>
+  <string name="about_privacy_policy"/>
   <string name="title_activity_about">Über</string>
   <string name="menu_feedback">Rückmeldung per E-Mail senden</string>
   <string name="provider_categories">Kürzlich verwendete Kategorien</string>
+  <string name="waiting_first_sync">Warte auf die erste Synchronisierung …</string>
+  <string name="no_uploads_yet">Du hast noch keine Fotos hochgeladen.</string>
 </resources>

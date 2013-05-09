@@ -57,4 +57,5 @@ Appuyez sur ce message (ou retournez en arrière) pour sauter cette étape.</str
   <string name="about_improve">Source sur . Bugs à .</string>
   <string name="title_activity_about">À propos</string>
   <string name="menu_feedback">Envoyez vos commentaires (par courriel)</string>
+  <string name="provider_categories">Catégories utilisées récemment</string>
 </resources>

@@ -13,6 +13,10 @@
   <string name="uploading_started">Yükleme başladı!</string>
   <string name="upload_completed_notification_title">%1$s yüklendi!</string>
   <string name="upload_completed_notification_text">Yüklemelerinizi görüntülemek için dokunun</string>
+  <string name="upload_progress_notification_title_start">%1$s yüklemesine başlanıyor</string>
+  <string name="upload_progress_notification_title_in_progress">%1$s yükleniyor</string>
+  <string name="upload_progress_notification_title_finishing">%1$s yüklemesi bitiriliyor</string>
+  <string name="upload_failed_notification_title">%1$s dosyasının yüklemesi başarısız oldu</string>
   <string name="upload_failed_notification_subtitle">Görüntülemek için dokunun</string>
   <string name="title_activity_contributions">Yüklemelerim</string>
   <string name="contribution_state_failed">Başarısız</string>
@@ -25,6 +29,25 @@
   <string name="menu_open_in_browser">Tarayıcıda görüntüle</string>
   <string name="share_title_hint">Başlık</string>
   <string name="share_description_hint">Açıklama</string>
+  <string name="login_failed_network">Oturum açılamıyor - ağ hatası</string>
+  <string name="login_failed_username">Oturum açılamıyor - lütfen kullanıcı adınızı kontrol edin</string>
+  <string name="login_failed_password">Oturum açılamıyor - lütfen parolanızı kontrol edin</string>
+  <string name="login_failed_throttled">Çok sayıda başarısız girişimde bulundunuz. Birkaç dakika sonra tekrar deneyin.</string>
+  <string name="login_failed_blocked">Üzgünüz, bu kullanıcı Commons\'ta engellendi</string>
+  <string name="login_failed_generic">Oturum açma başarısız</string>
+  <string name="share_upload_button">Yükle</string>
+  <string name="multiple_share_base_title">Bu grubun adı</string>
+  <string name="provider_modifications">Değişiklikler</string>
+  <string name="menu_upload_single">Yükle</string>
+  <string name="categories_search_text_hint">Kategorileri ara</string>
+  <string name="menu_save_categories">Kaydet</string>
+  <string name="categories_not_found">%1$s ile eşleşen bir kategori bulunamadı</string>
+  <string name="categories_activity_title">Kategoriler</string>
+  <string name="preference_tracking">Kullanım raporları</string>
+  <string name="title_activity_settings">Ayarlar</string>
+  <string name="menu_about">Hakkında</string>
+  <string name="about_license">Lisansı altında yayımlanan açık kaynak yazılım</string>
   <string name="title_activity_about">Hakkında</string>
   <string name="menu_feedback">Geri Bildirim Gönder (E-posta ile)</string>
+  <string name="provider_categories">Son kullanılan kategoriler</string>
 </resources>

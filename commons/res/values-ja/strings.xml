@@ -50,4 +50,6 @@
   <string name="preference_tracking">使用状況の報告</string>
   <string name="title_activity_settings">設定</string>
   <string name="menu_feedback">フィードバックをメールで送信</string>
+  <string name="provider_categories">最近使用したカテゴリ</string>
+  <string name="no_uploads_yet">まだ写真をアップロードしていません。</string>
 </resources>

@@ -57,4 +57,5 @@ Knacka på detta meddelande (eller gå tillbaka) för att hoppa över detta steg
   <string name="about_improve">Källa på . Buggar på .</string>
   <string name="title_activity_about">Om</string>
   <string name="menu_feedback">Skicka feedback (via e-post!)</string>
+  <string name="provider_categories">Nyligen använda kategorier</string>
 </resources>

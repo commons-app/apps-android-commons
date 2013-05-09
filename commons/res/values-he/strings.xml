@@ -50,5 +50,11 @@
 יש ללחוץ על ההודעה הזאת או על כפתור \"חזרה\" כדי לדלג על הצעד הזה.</string>
   <string name="categories_activity_title">קטגוריות</string>
   <string name="preference_tracking">דוחות שימוש</string>
+  <string name="preference_tracking_summary">לשלוח דוחות שימוש לויקימדיה כדי לעזור לנו לשפר את היישום</string>
   <string name="title_activity_settings">הגדרות</string>
+  <string name="menu_about">אודות</string>
+  <string name="about_license">תוכנת קוד-פתוח המשוחררת תחת הרישיון</string>
+  <string name="about_improve">קוד מקור ב־ . דיווחי באגים ב־ .</string>
+  <string name="title_activity_about">אודות</string>
+  <string name="menu_feedback">שליחת משוב (בדוא\"ל)</string>
 </resources>

@@ -57,4 +57,5 @@ Atingeți acest mesaj (sau mergeți înapoi) pentru a omite acest pas.</string>
   <string name="about_improve">Sursa la . Buguri la .</string>
   <string name="title_activity_about">Despre</string>
   <string name="menu_feedback">Trimitere reacții (prin e-mail)</string>
+  <string name="provider_categories">Categorii utilizate recent</string>
 </resources>

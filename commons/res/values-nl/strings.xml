@@ -58,4 +58,7 @@ Klik op dit bericht, of ga terug, om deze stap over te slaan.</string>
   <string name="about_improve">Broncode op . Bugs op .</string>
   <string name="title_activity_about">Over</string>
   <string name="menu_feedback">Terugkoppeling geven (via e-mail)</string>
+  <string name="provider_categories">Recent gebruikte categorieën</string>
+  <string name="waiting_first_sync">Wachten op de eerste synchronisatie...</string>
+  <string name="no_uploads_yet">U hebt nog geen afbeeldingen geüpload.</string>
 </resources>

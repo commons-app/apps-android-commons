@@ -13,20 +13,27 @@
   <string name="uploading_started"> আপলোড আরম্ভ হয়েছে!</string>
   <string name="upload_completed_notification_title">%1$s আপলোড হয়েছে!</string>
   <string name="upload_completed_notification_text">আপনার আপলোড দেখতে ট্যাপ করুন</string>
+  <string name="upload_progress_notification_title_start"> %1$s আপলোড শুরু হচ্ছে��</string>
   <string name="upload_progress_notification_title_in_progress">%1$ আপলোড হয়েছে</string>
-  <string name="upload_failed_notification_subtitle" fuzzy="true">আরেকবার চেষ্টা করার জন্য ট্যাপ করুন</string>
-  <string name="title_activity_contributions" fuzzy="true">আমার অবদান</string>
+  <string name="upload_progress_notification_title_finishing">%1$s আপলোড শেষ হয়েছে</string>
+  <string name="upload_failed_notification_title">%1$s আপলোড ব্যর্থ</string>
+  <string name="upload_failed_notification_subtitle">দেখার জন্য ট্যাপ করুন</string>
+  <string name="title_activity_contributions">আমার আপলোড</string>
   <string name="contribution_state_queued">অপেক্ষারত</string>
   <string name="contribution_state_failed">ব্যর্থ</string>
   <string name="contribution_state_in_progress">%1$d%% সম্পন্ন</string>
   <string name="contribution_state_starting">আপলোডি করা হচ্ছে</string>
   <string name="menu_from_gallery">Gallery থেকে</string>
   <string name="menu_from_camera">একটি ছবি তুলুন</string>
-  <string name="provider_contributions" fuzzy="true">আমার অবদান</string>
+  <string name="provider_contributions">আমার আপলোড</string>
   <string name="menu_share">বণ্টন</string>
   <string name="menu_open_in_browser">ব্রাউজারে দেখুন</string>
   <string name="share_title_hint">শিরোনাম</string>
   <string name="share_description_hint">বিবরণ</string>
+  <string name="login_failed_network">প্রবেশ করা যাচ্ছে না - নেটওয়ার্ক ব্যর্থতা</string>
+  <string name="login_failed_username">প্রবেশ করা যাচ্ছে না - অনুগ্রহ করে আপনার ব্যবহারকারী নাম পরীক্ষা করুন।</string>
+  <string name="login_failed_password">প্রবেশ করা যাচ্ছে না - অনুগ্রহ করে আপনার শব্দচাবি পরীক্ষা করুন</string>
+  <string name="login_failed_throttled">খুব বেশি ব্যর্থ প্রচেষ্টা। অনুগ্রহ করে কয়েক মিনিট পরে আবারও চেষ্টা করুন</string>
   <string name="login_failed_generic">লগইন ব্যর্থ হয়েছে</string>
   <string name="share_upload_button">আপলোড</string>
   <string name="multiple_share_base_title">এই সেটের নাম</string>
@@ -38,5 +45,7 @@
   <string name="preference_tracking">ব্যবহারের প্রতিবেদন</string>
   <string name="title_activity_settings">সেটিংস</string>
   <string name="menu_about">পরিচিতি</string>
+  <string name="title_activity_about">পরিচিতি</string>
   <string name="menu_feedback">প্রতিক্রিয়া পাঠান (ইমেইলের মাধ্যমে)</string>
+  <string name="provider_categories">সাম্প্রতিক ব্যবহৃত বিষয়শ্রেণী</string>
 </resources>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Wikimedija Commons</string>
+  <string name="app_name_beta">Wikimedia Commons Beta</string>
+  <string name="menu_settings">Iestatījumi</string>
+  <string name="username">Lietotājvārds</string>
+  <string name="password">Parole</string>
+  <string name="login">Pieslēgties</string>
+  <string name="logging_in_title">Pieslēdzas</string>
+  <string name="logging_in_message">Lūdzu, uzgaidiet...</string>
+  <string name="login_success">Ieiešana veiksmīga</string>
+  <string name="login_failed">Pieteikšanās neizdevās.</string>
+  <string name="authentication_failed">Autentifikācija neizdevās!</string>
+  <string name="uploading_started">Augšupielāde sākās!</string>
+  <string name="upload_completed_notification_title">%1$s augšupielādēti!</string>
+  <string name="upload_progress_notification_title_in_progress">%1$s augšupielādēti</string>
+  <string name="title_activity_contributions">Manas augsupielades</string>
+  <string name="contribution_state_queued">Rindā iekļauts</string>
+  <string name="contribution_state_failed">Neizdevās</string>
+  <string name="contribution_state_starting">Augšupielādē</string>
+  <string name="menu_from_gallery">No galerijas</string>
+  <string name="menu_from_camera">Uzņemt fotoattēlu</string>
+  <string name="provider_contributions">Manas augsupielades</string>
+  <string name="menu_share">Dalīties</string>
+  <string name="menu_open_in_browser">Skatīt pārlūkprogrammā</string>
+  <string name="share_title_hint">Nosaukums</string>
+  <string name="share_description_hint">Apraksts</string>
+  <string name="login_failed_blocked">Atvainojiet, šis lietotājs tika bloķēts uz Commons</string>
+  <string name="login_failed_generic">Pieteikšanās neizdevās</string>
+  <string name="share_upload_button">Augšupielādēt</string>
+  <string name="provider_modifications">Izmaiņas</string>
+  <string name="menu_upload_single">Augšupielādēt</string>
+  <string name="menu_save_categories">Saglabāt</string>
+  <string name="categories_activity_title">Kategorijas</string>
+  <string name="preference_tracking">Lietošanas atskaites</string>
+  <string name="title_activity_settings">Iestatījumi</string>
+  <string name="menu_about">Par</string>
+  <string name="about_improve">Uz avotu. Pie kļūdām.</string>
+  <string name="title_activity_about">Par</string>
+  <string name="menu_feedback">Nosūtīt atsauksmes (pa e-pastu)</string>
+  <string name="provider_categories">Nesen lietotās kategorijas</string>
+</resources>

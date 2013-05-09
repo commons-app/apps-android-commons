@@ -2,5 +2,6 @@
 <resources>
   <string name="crash_dialog_title">കോമൺസ് തകർന്നു</string>
   <string name="crash_dialog_text">അയ്യോ. എന്തോ പ്രശ്നമുണ്ടായി!</string>
+  <string name="crash_dialog_comment_prompt">താങ്കളെന്തായിരുന്നു ചെയ്തുകൊണ്ടിരുന്നതെന്ന് ഞങ്ങളെ ഇമെയിൽ വഴി അറിയിക്കുക. ശരിയാക്കാൻ ഞങ്ങൾക്കത് സഹായകരമാവും.</string>
   <string name="crash_dialog_ok_toast">നന്ദി!</string>
 </resources>

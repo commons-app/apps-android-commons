@@ -25,4 +25,9 @@
   <string name="share_title_hint">Título</string>
   <string name="share_description_hint">Descrição</string>
   <string name="login_failed_throttled">Demasiadas tentativas mal sucedidas. Por favor, tente de novo dentro de alguns minutos</string>
+  <string name="menu_save_categories">Salvar</string>
+  <string name="categories_activity_title">Categorias</string>
+  <string name="title_activity_settings">Configurações</string>
+  <string name="menu_about">Sobre</string>
+  <string name="title_activity_about">Sobre</string>
 </resources>

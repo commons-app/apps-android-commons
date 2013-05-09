@@ -48,11 +48,12 @@
 Klickt op dëse Message (oder dréck op Zréck) fir dëse Schrëtt z\'iwwersprangen.</string>
   <string name="categories_activity_title">Kategorien</string>
   <string name="preference_tracking">Rapporten iwwer de Gebrauch</string>
-  <string name="preference_tracking_summary">Schéckr Rapporte iwwer de Gebrauch u Wikimedia fir eis ze hëllefen d\'App ze verbesseren</string>
+  <string name="preference_tracking_summary">Schéckt Rapporten iwwer de Gebrauch vu Wikimedia fir eis ze hëllefen d\'App ze verbesseren</string>
   <string name="title_activity_settings">Astellungen</string>
   <string name="menu_about">Iwwer</string>
   <string name="about_license">\'Open-Source-Software\' verëffentlecht ënner der</string>
   <string name="about_improve">Quell op . Feeler op .</string>
   <string name="title_activity_about">Iwwer</string>
   <string name="menu_feedback">Feedback schécken (per E-Mail)</string>
+  <string name="provider_categories">Rezent benotzt Kategorien</string>
 </resources>

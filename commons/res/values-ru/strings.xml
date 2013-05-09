@@ -57,4 +57,5 @@
   <string name="about_improve">Исходный код на . Ошибки на .</string>
   <string name="title_activity_about">О приложении</string>
   <string name="menu_feedback">Отправить отзыв (e-mail)</string>
+  <string name="provider_categories">Недавно использованные категории</string>
 </resources>
