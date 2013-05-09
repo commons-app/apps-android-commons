@@ -128,6 +128,14 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
                 viewIntent.setData(Uri.parse(m.getDescriptionUrl()));
                 startActivity(viewIntent);
                 return true;
+            case R.id.menu_retry_current_image:
+                // todo: close this activity and retry image
+                this.getSherlockActivity().finish();
+                return true;
+            case R.id.menu_abort_current_image:
+                // todo: close this activity and delete image
+                this.getSherlockActivity().finish();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
