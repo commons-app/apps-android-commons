@@ -21,6 +21,7 @@
             android:layout_width="match_parent"
             android:hint="@string/categories_search_text_hint"
             android:singleLine="true"
+            android:imeOptions="flagNoExtractUi"
             />
         <ProgressBar
             android:id="@+id/categoriesSearchInProgress"

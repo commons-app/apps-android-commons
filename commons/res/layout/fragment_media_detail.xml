@@ -41,6 +41,7 @@
                 android:id="@+id/mediaDetailTitle"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:imeOptions="flagNoExtractUi"
                  />
        <!-- <TextView
                 android:id="@+id/mediaDetailDescription"

@@ -8,6 +8,7 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:hint="@string/multiple_share_base_title"
+              android:imeOptions="flagNoExtractUi"
               />
 
     <GridView android:id="@+id/multipleShareBackground"
