@@ -43,6 +43,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/username"
                     android:inputType="textNoSuggestions"
+                    android:imeOptions="flagNoExtractUi"
                     >
 
                 <requestFocus />
@@ -53,7 +54,8 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/password"
-                    android:inputType="textPassword" />
+                    android:inputType="textPassword"
+                    android:imeOptions="flagNoExtractUi" />
 
             <Button
                     android:id="@+id/loginButton"

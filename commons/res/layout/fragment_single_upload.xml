@@ -19,6 +19,7 @@
             android:scrollHorizontally="false"
             android:singleLine="true"
             android:hint="@string/share_title_hint"
+            android:imeOptions="flagNoExtractUi"
             />
 
     <EditText
@@ -27,5 +28,6 @@
             android:layout_height="wrap_content"
             android:inputType="textMultiLine"
             android:hint="@string/share_description_hint"
+            android:imeOptions="flagNoExtractUi"
             />
 </LinearLayout>
