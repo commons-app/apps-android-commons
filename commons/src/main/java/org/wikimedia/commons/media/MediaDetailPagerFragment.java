@@ -143,8 +143,10 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
                 Media m = provider.getMediaAtPosition(pager.getCurrentItem());
                 if(m != null && !m.getFilename().startsWith("File:")) {
                     // Crude way of checking if the file has been successfully saved!
-                    menu.findItem(R.id.menu_browser_current_image).setEnabled(false);
-                    menu.findItem(R.id.menu_share_current_image).setEnabled(false);
+                    menu.findItem(R.id.menu_browser_current_image).setEnabled(false).setVisible(false);
+                    menu.findItem(R.id.menu_share_current_image).setEnabled(false).setVisible(false);
+                    menu.findItem(R.id.menu_retry_current_image).setEnabled(true).setVisible(true);
+                    menu.findItem(R.id.menu_abort_current_image).setEnabled(true).setVisible(true);
                     return;
                 }
             }

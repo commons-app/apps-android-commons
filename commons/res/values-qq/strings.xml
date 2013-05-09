@@ -71,4 +71,6 @@
   <string name="menu_feedback">Menu item text that prompts user to send feedback to WMF via email</string>
   <string name="waiting_first_sync">Message shown on contributions list during first sync.</string>
   <string name="no_uploads_yet">Message shown on contribution list during non-first sync if no uploads present.</string>
+  <string name="menu_retry">Menu item text prompting user to retry a failed upload.</string>
+  <string name="menu_abort">Menu item text prompting user to abort and delete a failed upload.</string>
 </resources>
