@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.*;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
@@ -15,6 +16,8 @@ import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.widget.ShareActionProvider;
 
 import org.wikimedia.commons.*;
+import org.wikimedia.commons.contributions.Contribution;
+import org.wikimedia.commons.contributions.ContributionsActivity;
 
 public class MediaDetailPagerFragment extends SherlockFragment implements ViewPager.OnPageChangeListener {
     private ViewPager pager;
@@ -129,12 +132,13 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
                 startActivity(viewIntent);
                 return true;
             case R.id.menu_retry_current_image:
-                // todo: close this activity and retry image
-                this.getSherlockActivity().finish();
+                // Is this... sane? :)
+                ((ContributionsActivity)getSherlockActivity()).retryUpload(pager.getCurrentItem());
+                getSherlockActivity().getSupportFragmentManager().popBackStack();
                 return true;
             case R.id.menu_abort_current_image:
-                // todo: close this activity and delete image
-                this.getSherlockActivity().finish();
+                // todo: delete image
+                getSherlockActivity().getSupportFragmentManager().popBackStack();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
