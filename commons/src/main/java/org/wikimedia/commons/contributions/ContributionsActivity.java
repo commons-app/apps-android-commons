@@ -131,6 +131,18 @@ public  class       ContributionsActivity
         }
     }
 
+    public void deleteUpload(int i) {
+        allContributions.moveToPosition(i);
+        Contribution c = Contribution.fromCursor(allContributions);
+        if(c.getState() == Contribution.STATE_FAILED) {
+            Log.d("Commons", "Deleting failed contrib " + c.toContentValues().toString());
+            c.setContentProviderClient(getContentResolver().acquireContentProviderClient(ContributionsContentProvider.AUTHORITY));
+            c.delete();
+        } else {
+            Log.d("Commons", "Skipping deletion for non-failed contrib " + c.toContentValues().toString());
+        }
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {

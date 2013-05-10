@@ -139,6 +139,7 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
                 return true;
             case R.id.menu_abort_current_image:
                 // todo: delete image
+                ((ContributionsActivity)getSherlockActivity()).deleteUpload(pager.getCurrentItem());
                 getSherlockActivity().getSupportFragmentManager().popBackStack();
                 return true;
             default:

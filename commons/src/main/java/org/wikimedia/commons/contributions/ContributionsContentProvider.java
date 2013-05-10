@@ -94,7 +94,24 @@ public class ContributionsContentProvider extends ContentProvider{
 
     @Override
     public int delete(Uri uri, String s, String[] strings) {
-        return 0;
+        int rows = 0;
+        int uriType = uriMatcher.match(uri);
+
+        SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
+
+        switch(uriType) {
+            case CONTRIBUTIONS_ID:
+                Log.d("Commons", "Deleting contribution id " + uri.getLastPathSegment());
+                rows = db.delete(Contribution.Table.TABLE_NAME,
+                        "_id = ?",
+                        new String[] { uri.getLastPathSegment() }
+                );
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown URI" + uri);
+        }
+        getContext().getContentResolver().notifyChange(uri, null);
+        return rows;
     }
 
     @Override
