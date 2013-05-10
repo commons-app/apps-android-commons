@@ -11,5 +11,19 @@
           android:icon="@android:drawable/ic_menu_view"
           android:title="@string/menu_open_in_browser"
             />
+    <item android:id="@+id/menu_retry_current_image"
+          android:showAsAction="always|withText"
+          android:icon="@android:drawable/ic_menu_revert"
+          android:title="@string/menu_retry"
+          android:visible="false"
+          android:enabled="false"
+            />
+    <item android:id="@+id/menu_abort_current_image"
+          android:showAsAction="always|withText"
+          android:icon="@android:drawable/ic_menu_delete"
+          android:title="@string/menu_abort"
+          android:visible="false"
+          android:enabled="false"
+            />
 
 </menu>

@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.*;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
@@ -15,6 +16,8 @@ import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.widget.ShareActionProvider;
 
 import org.wikimedia.commons.*;
+import org.wikimedia.commons.contributions.Contribution;
+import org.wikimedia.commons.contributions.ContributionsActivity;
 
 public class MediaDetailPagerFragment extends SherlockFragment implements ViewPager.OnPageChangeListener {
     private ViewPager pager;
@@ -83,6 +86,7 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
             view.postDelayed(new Runnable() {
                 public void run() {
                     pager.setCurrentItem(pageNumber, false);
+                    getSherlockActivity().supportInvalidateOptionsMenu();
                 }
             }, 100);
         }
@@ -128,6 +132,16 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
                 viewIntent.setData(Uri.parse(m.getDescriptionUrl()));
                 startActivity(viewIntent);
                 return true;
+            case R.id.menu_retry_current_image:
+                // Is this... sane? :)
+                ((ContributionsActivity)getSherlockActivity()).retryUpload(pager.getCurrentItem());
+                getSherlockActivity().getSupportFragmentManager().popBackStack();
+                return true;
+            case R.id.menu_abort_current_image:
+                // todo: delete image
+                ((ContributionsActivity)getSherlockActivity()).deleteUpload(pager.getCurrentItem());
+                getSherlockActivity().getSupportFragmentManager().popBackStack();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -143,8 +157,10 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
                 Media m = provider.getMediaAtPosition(pager.getCurrentItem());
                 if(m != null && !m.getFilename().startsWith("File:")) {
                     // Crude way of checking if the file has been successfully saved!
-                    menu.findItem(R.id.menu_browser_current_image).setEnabled(false);
-                    menu.findItem(R.id.menu_share_current_image).setEnabled(false);
+                    menu.findItem(R.id.menu_browser_current_image).setEnabled(false).setVisible(false);
+                    menu.findItem(R.id.menu_share_current_image).setEnabled(false).setVisible(false);
+                    menu.findItem(R.id.menu_retry_current_image).setEnabled(true).setVisible(true);
+                    menu.findItem(R.id.menu_abort_current_image).setEnabled(true).setVisible(true);
                     return;
                 }
             }

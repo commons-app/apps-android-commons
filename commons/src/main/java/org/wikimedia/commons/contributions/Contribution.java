@@ -155,6 +155,19 @@ public class Contribution extends Media {
         }
     }
 
+    public void delete() {
+        try {
+            if(contentUri == null) {
+                // noooo
+                throw new RuntimeException("tried to delete item with no content URI");
+            } else {
+                client.delete(contentUri, null, null);
+            }
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     public ContentValues toContentValues() {
         ContentValues cv = new ContentValues();

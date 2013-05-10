@@ -120,6 +120,29 @@ public  class       ContributionsActivity
         mediaDetails.showImage(i);
     }
 
+    public void retryUpload(int i) {
+        allContributions.moveToPosition(i);
+        Contribution c = Contribution.fromCursor(allContributions);
+        if(c.getState() == Contribution.STATE_FAILED) {
+            uploadService.queue(UploadService.ACTION_UPLOAD_FILE, c);
+            Log.d("Commons", "Restarting for" + c.toContentValues().toString());
+        } else {
+            Log.d("Commons", "Skipping re-upload for non-failed " + c.toContentValues().toString());
+        }
+    }
+
+    public void deleteUpload(int i) {
+        allContributions.moveToPosition(i);
+        Contribution c = Contribution.fromCursor(allContributions);
+        if(c.getState() == Contribution.STATE_FAILED) {
+            Log.d("Commons", "Deleting failed contrib " + c.toContentValues().toString());
+            c.setContentProviderClient(getContentResolver().acquireContentProviderClient(ContributionsContentProvider.AUTHORITY));
+            c.delete();
+        } else {
+            Log.d("Commons", "Skipping deletion for non-failed contrib " + c.toContentValues().toString());
+        }
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
@@ -143,13 +166,10 @@ public  class       ContributionsActivity
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long item) {
         Cursor cursor = (Cursor)adapterView.getItemAtPosition(position);
         Contribution c = Contribution.fromCursor(cursor);
-        if(c.getState() == Contribution.STATE_FAILED) {
-            uploadService.queue(UploadService.ACTION_UPLOAD_FILE, c);
-            Log.d("Commons", "Restarting for" + c.toContentValues().toString());
-        } else {
-            Log.d("Commons", "CLicking for " + c.toContentValues());
-            showDetail(position);
-        }
+
+        Log.d("Commons", "Clicking for " + c.toContentValues());
+        showDetail(position);
+
         Log.d("Commons", "You clicked on:" + c.toContentValues().toString());
     }
 
