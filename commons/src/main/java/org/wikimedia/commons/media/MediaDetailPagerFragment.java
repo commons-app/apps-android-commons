@@ -86,6 +86,7 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
             view.postDelayed(new Runnable() {
                 public void run() {
                     pager.setCurrentItem(pageNumber, false);
+                    getSherlockActivity().supportInvalidateOptionsMenu();
                 }
             }, 100);
         }
