@@ -56,4 +56,5 @@
   <string name="title_activity_about">អំពី</string>
   <string name="menu_feedback">ផ្ញើមតិកែលម្អ (តាមអ៊ីមែល)</string>
   <string name="provider_categories">ចំណាត់ថ្នាក់ក្រុមដែលត្រូវបានប្រើថ្មីៗ</string>
+  <string name="no_uploads_yet">អ្នកមិនទាន់បានផ្ទុករូបថតណាមួយឡើងនៅឡើយទេ។</string>
 </resources>

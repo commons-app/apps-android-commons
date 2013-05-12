@@ -58,4 +58,6 @@
   <string name="title_activity_about">О приложении</string>
   <string name="menu_feedback">Отправить отзыв (e-mail)</string>
   <string name="provider_categories">Недавно использованные категории</string>
+  <string name="waiting_first_sync">Ожидание первой синхронизации...</string>
+  <string name="no_uploads_yet">Вы еще не загрузили ни одной фотографии.</string>
 </resources>

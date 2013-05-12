@@ -61,4 +61,6 @@ Klik op dit bericht, of ga terug, om deze stap over te slaan.</string>
   <string name="provider_categories">Recent gebruikte categorieën</string>
   <string name="waiting_first_sync">Wachten op de eerste synchronisatie...</string>
   <string name="no_uploads_yet">U hebt nog geen afbeeldingen geüpload.</string>
+  <string name="menu_retry">Opnieuw proberen</string>
+  <string name="menu_abort">Afbreken</string>
 </resources>

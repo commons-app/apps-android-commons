@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">ويکيمېډيا کامنز</string>
+  <string name="app_name_beta">ويکيمېډيا کامنز بيټا</string>
+  <string name="menu_settings">امستنې</string>
+  <string name="username">کارن-نوم</string>
+  <string name="password">پټنوم</string>
+  <string name="login">ننوتل</string>
+  <string name="logging_in_title">په ننوتلو کې دی</string>
+  <string name="logging_in_message">لطفاً تم شۍ ...</string>
+  <string name="login_success">غونډال کې بريالی ورننوتلۍ!</string>
+  <string name="login_failed">غونډال کې ننوتنه نابريالې شوه!</string>
+  <string name="contribution_state_in_progress">%1$d%% بشپړ</string>
+  <string name="contribution_state_starting">د برسېرېدلو په حال کې...</string>
+  <string name="menu_from_camera">انځور اخيستل</string>
+  <string name="provider_contributions">زما پورته کېدنې</string>
+  <string name="menu_share">شريکول</string>
+  <string name="share_title_hint">سرليک</string>
+  <string name="share_description_hint">څرګندونه</string>
+  <string name="login_failed_generic">غونډال کې ننوتنه نابريالې شوه</string>
+  <string name="share_upload_button">پورته کول</string>
+  <string name="provider_modifications">بدلونونه</string>
+  <string name="menu_upload_single">پورته کول</string>
+  <string name="categories_search_text_hint">وېشنيزې پلټل</string>
+  <string name="menu_save_categories">خوندي کول</string>
+  <string name="categories_activity_title">وېشنيزې</string>
+  <string name="preference_tracking">د کارېدنې راپورونه</string>
+  <string name="title_activity_settings">امستنې</string>
+  <string name="menu_about">په اړه</string>
+  <string name="title_activity_about">په اړه</string>
+</resources>

@@ -58,4 +58,6 @@
   <string name="title_activity_about">За прилогот</string>
   <string name="menu_feedback">Испратете ваш одѕив (по е-пошта)</string>
   <string name="provider_categories">Неодамна искористени категории</string>
+  <string name="waiting_first_sync">Го чекам првото усогласување...</string>
+  <string name="no_uploads_yet">Сè уште немате подигнато ниедна слика.</string>
 </resources>

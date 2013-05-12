@@ -58,4 +58,6 @@ Appuyez sur ce message (ou retournez en arrière) pour sauter cette étape.</str
   <string name="title_activity_about">À propos</string>
   <string name="menu_feedback">Envoyez vos commentaires (par courriel)</string>
   <string name="provider_categories">Catégories utilisées récemment</string>
+  <string name="waiting_first_sync">Attente de première synchronisation…</string>
+  <string name="no_uploads_yet">Vous n’avez pas encore téléchargé de photo.</string>
 </resources>

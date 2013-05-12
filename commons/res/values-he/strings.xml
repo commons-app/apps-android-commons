@@ -55,6 +55,10 @@
   <string name="menu_about">אודות</string>
   <string name="about_license">תוכנת קוד-פתוח המשוחררת תחת הרישיון</string>
   <string name="about_improve">קוד מקור ב־ . דיווחי באגים ב־ .</string>
+  <string name="about_privacy_policy"/>
   <string name="title_activity_about">אודות</string>
   <string name="menu_feedback">שליחת משוב (בדוא\"ל)</string>
+  <string name="provider_categories">קטגוריות בשימוש לאחרונה</string>
+  <string name="waiting_first_sync">מחכה לסנכרון הראשון...</string>
+  <string name="no_uploads_yet">עדיין לא העלית תמונות.</string>
 </resources>

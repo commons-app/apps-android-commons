@@ -58,4 +58,6 @@ Knacka på detta meddelande (eller gå tillbaka) för att hoppa över detta steg
   <string name="title_activity_about">Om</string>
   <string name="menu_feedback">Skicka feedback (via e-post!)</string>
   <string name="provider_categories">Nyligen använda kategorier</string>
+  <string name="waiting_first_sync">Väntar på första synkroniseringen...</string>
+  <string name="no_uploads_yet">Du har inte lagt upp några bilder ännu.</string>
 </resources>
