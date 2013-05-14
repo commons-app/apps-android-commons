@@ -29,7 +29,13 @@ public class StartUploadTask extends AsyncTask<Void, Void, Contribution> {
 
         app = (CommonsApplication)context.getApplicationContext();
 
-        contribution = new Contribution(mediaUri, null, rawTitle, description, -1, null, null, app.getCurrentAccount().name, CommonsApplication.DEFAULT_EDIT_SUMMARY);
+        String title = rawTitle;
+        String extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType);
+        if(extension != null && !title.toLowerCase().endsWith(extension.toLowerCase())) {
+            title += "." + extension;
+        }
+
+        contribution = new Contribution(mediaUri, null, title, description, -1, null, null, app.getCurrentAccount().name, CommonsApplication.DEFAULT_EDIT_SUMMARY);
         contribution.setTag("mimeType", mimeType);
         contribution.setSource(source);
     }
@@ -70,12 +76,6 @@ public class StartUploadTask extends AsyncTask<Void, Void, Contribution> {
         }
 
         String mimeType = (String)contribution.getTag("mimeType");
-        String extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType);
-
-        if(extension != null && !title.toLowerCase().endsWith(extension.toLowerCase())) {
-            title += "." + extension;
-        }
-
         if(mimeType.startsWith("image/") && contribution.getDateCreated() == null) {
             Cursor cursor = context.getContentResolver().query(contribution.getLocalUri(),
                     new String[]{MediaStore.Images.ImageColumns.DATE_TAKEN}, null, null, null);
