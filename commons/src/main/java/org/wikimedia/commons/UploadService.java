@@ -1,7 +1,10 @@
 package org.wikimedia.commons;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import android.graphics.*;
 import android.os.Bundle;
@@ -186,6 +189,7 @@ public class UploadService extends HandlerService<Contribution> {
         this.startForeground(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification.build());
 
         try {
+            String filename = findUniqueFilename(contribution.getFilename());
             if(!api.validateLogin()) {
                 // Need to revalidate!
                 if(app.revalidateAuthToken()) {
@@ -204,7 +208,7 @@ public class UploadService extends HandlerService<Contribution> {
                     String.format(getString(R.string.upload_progress_notification_title_finishing), contribution.getDisplayTitle()),
                     contribution
             );
-            result = api.upload(contribution.getFilename(), file, contribution.getDataLength(), contribution.getPageContents(), contribution.getEditSummary(), notificationUpdater);
+            result = api.upload(filename, file, contribution.getDataLength(), contribution.getPageContents(), contribution.getEditSummary(), notificationUpdater);
 
 
             Log.d("Commons", "Response is" + Utils.getStringFromDOM(result.getDocument()));
@@ -270,5 +274,50 @@ public class UploadService extends HandlerService<Contribution> {
 
         contribution.setState(Contribution.STATE_FAILED);
         contribution.save();
+    }
+
+    private String findUniqueFilename(String fileName) {
+        return findUniqueFilename(fileName, 1);
+    }
+
+    private String findUniqueFilename(String fileName, int sequenceNumber) {
+        String sequenceFileName;
+        if (sequenceNumber == 1) {
+            sequenceFileName = fileName;
+        } else {
+            if (fileName.indexOf('.') == -1) {
+                // We really should have appended a file type suffix already.
+                // But... we might not.
+                sequenceFileName = fileName + " " + sequenceNumber;
+            } else {
+                Pattern regex = Pattern.compile("^(.*)(\\..+?)$");
+                Matcher regexMatcher = regex.matcher(fileName);
+                sequenceFileName = regexMatcher.replaceAll("$1 " + sequenceNumber + "$2");
+            }
+        }
+        Log.d("Commons", "checking for uniqueness of name " + sequenceFileName);
+
+        if (fileExistsWithName(sequenceFileName)) {
+            return findUniqueFilename(fileName, sequenceNumber + 1);
+        } else {
+            return sequenceFileName;
+        }
+    }
+
+    private boolean fileExistsWithName(String fileName) {
+        MWApi api = app.getApi();
+        ApiResult result;
+
+        try {
+            result = api.action("query")
+                    .param("prop", "imageinfo")
+                    .param("titles", "File:" + fileName)
+                    .get();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        ArrayList<ApiResult> nodes = result.getNodes("/api/query/pages/page/imageinfo");
+        return nodes.size() > 0;
     }
 }
