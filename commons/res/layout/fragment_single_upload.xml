@@ -30,4 +30,9 @@
             android:hint="@string/share_description_hint"
             android:imeOptions="flagNoExtractUi"
             />
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/share_license_summary"
+            android:id="@+id/textView" android:layout_gravity="center" android:layout_marginTop="16dp"/>
 </LinearLayout>
