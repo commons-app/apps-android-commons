@@ -87,4 +87,6 @@
 
     <string name="menu_retry">Retry</string>
     <string name="menu_abort">Abort</string>
+
+    <string name="share_license_summary">You agree to upload under the terms of the CC-BY-SA 3.0 license.</string>
 </resources>

@@ -73,4 +73,5 @@
   <string name="no_uploads_yet">Message shown on contribution list during non-first sync if no uploads present.</string>
   <string name="menu_retry">Menu item text prompting user to retry a failed upload.</string>
   <string name="menu_abort">Menu item text prompting user to abort and delete a failed upload.</string>
+  <string name="share_license_summary">Text label briefly describing CC-BY-SA license.</string>
 </resources>
