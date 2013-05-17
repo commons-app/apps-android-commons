@@ -8,10 +8,12 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
@@ -27,6 +29,7 @@ public class SingleUploadFragment extends SherlockFragment {
 
     private EditText titleEdit;
     private EditText descEdit;
+    private TextView licenseLabel;
 
     private OnUploadActionInitiated uploadActionInitiatedHandler;
 
@@ -55,6 +58,7 @@ public class SingleUploadFragment extends SherlockFragment {
 
         titleEdit = (EditText)rootView.findViewById(R.id.titleEdit);
         descEdit = (EditText)rootView.findViewById(R.id.descEdit);
+        licenseLabel = (TextView)rootView.findViewById(R.id.licenseLabel);
 
         TextWatcher uploadEnabler = new TextWatcher() {
             public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) { }
@@ -69,6 +73,21 @@ public class SingleUploadFragment extends SherlockFragment {
         };
 
         titleEdit.addTextChangedListener(uploadEnabler);
+
+        // Open license page on touch
+        licenseLabel.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getActionMasked() == MotionEvent.ACTION_DOWN) {
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse("https://creativecommons.org/licenses/by-sa/3.0/"));
+                    startActivity(intent);
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
 
         return rootView;
     }
