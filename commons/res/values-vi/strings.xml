@@ -59,4 +59,8 @@ Chạm vào thông điệp này (hoặc bấm Quay lại) để bỏ qua bước
   <string name="title_activity_about">Giới thiệu</string>
   <string name="menu_feedback">Gửi Phản hồi (qua Thư điện tử)</string>
   <string name="provider_categories">Thể loại được sử dụng gần đây</string>
+  <string name="waiting_first_sync">Đang chờ đồng bộ lần đầu tiên…</string>
+  <string name="no_uploads_yet">Bạn chưa tải lên hình nào.</string>
+  <string name="menu_retry">Thử lại</string>
+  <string name="menu_abort">Hủy bỏ</string>
 </resources>

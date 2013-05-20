@@ -58,4 +58,6 @@ Klickt op dëse Message (oder dréck op Zréck) fir dëse Schrëtt z\'iwwerspran
   <string name="provider_categories">Rezent benotzt Kategorien</string>
   <string name="waiting_first_sync">Waarden op déi éischt Synchronisatioun...</string>
   <string name="no_uploads_yet">Dir hutt nach keng Fotoen eropgelueden.</string>
+  <string name="menu_retry">Nach eng Kéier probéieren</string>
+  <string name="menu_abort">Ofbriechen</string>
 </resources>

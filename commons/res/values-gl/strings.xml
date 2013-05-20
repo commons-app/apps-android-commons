@@ -60,4 +60,6 @@ Prema nesta mensaxe (ou no botón \"Atrás\") para saltar este paso.</string>
   <string name="provider_categories">Categorías usadas recentemente</string>
   <string name="waiting_first_sync">Agardando pola primeira sincronización...</string>
   <string name="no_uploads_yet">Aínda non cargou ningunha foto.</string>
+  <string name="menu_retry">Reintentar</string>
+  <string name="menu_abort">Anular</string>
 </resources>

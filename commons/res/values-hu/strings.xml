@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Wikimedia Commons</string>
+  <string name="app_name_beta">Wikimédia Commons Béta</string>
   <string name="menu_settings">Beállítások</string>
   <string name="username">Felhasználónév</string>
   <string name="password">Jelszó</string>
@@ -17,13 +18,34 @@
   <string name="upload_progress_notification_title_in_progress">%1$s feltöltése</string>
   <string name="upload_progress_notification_title_finishing">Feltöltés befejezve: %1$s</string>
   <string name="upload_failed_notification_title">%1$s feltöltése sikertelen</string>
-  <string name="upload_failed_notification_subtitle" fuzzy="true">Újra?</string>
-  <string name="title_activity_contributions" fuzzy="true">Közreműködéseim</string>
+  <string name="upload_failed_notification_subtitle">Kattints a megtekintéshez</string>
+  <string name="title_activity_contributions">Feltöltéseim</string>
   <string name="contribution_state_queued">Várólistán</string>
   <string name="contribution_state_failed">Sikertelen.</string>
   <string name="contribution_state_in_progress">%1$d%% kész</string>
   <string name="contribution_state_starting">Feltöltés</string>
   <string name="menu_from_gallery">A galériából</string>
   <string name="menu_from_camera">Fényképezés</string>
-  <string name="provider_contributions" fuzzy="true">Közreműködéseim</string>
+  <string name="provider_contributions">Feltöltéseim</string>
+  <string name="menu_share">Megosztás</string>
+  <string name="menu_open_in_browser">Megtekintés böngészőben</string>
+  <string name="share_title_hint">Cím</string>
+  <string name="share_description_hint">Leírás</string>
+  <string name="login_failed_network">Nem lehet bejelentkezni - hálózati hiba</string>
+  <string name="login_failed_username">Nem lehet bejelentkezni - ellenőrizd a felhasználóneved</string>
+  <string name="login_failed_password">Nem lehet bejelentkezni - ellenőrizd a jelszavad</string>
+  <string name="login_failed_throttled">Túl sok sikertelen próbálkozás. Próbálkozz újra pár perc múlva</string>
+  <string name="login_failed_blocked">Sajnáljuk, ezt a felhasználót blokkolták a Commonson</string>
+  <string name="login_failed_generic">Bejelentkezési hiba</string>
+  <string name="share_upload_button">Feltöltés</string>
+  <string name="provider_modifications">Értesítések</string>
+  <string name="menu_upload_single">Feltöltés</string>
+  <string name="categories_search_text_hint">Keresés a kategóriák között</string>
+  <string name="menu_save_categories">Mentés</string>
+  <string name="categories_not_found">Nincs a(z) „%1$s” keresési kifejezésnek megfelelő kategória</string>
+  <string name="categories_skip_explanation">Adj kategóriákat a képekhez, hogy könnyebben meg lehessen találni őket a Commonson.
+
+Kezdd el beírni a kategória nevét, hogy hozzáadd.
+Kattints erre az üzenetre a lépés kihagyásához</string>
+  <string name="categories_activity_title">Kategóriák</string>
 </resources>

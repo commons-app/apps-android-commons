@@ -60,4 +60,6 @@
   <string name="provider_categories">Неодамна искористени категории</string>
   <string name="waiting_first_sync">Го чекам првото усогласување...</string>
   <string name="no_uploads_yet">Сè уште немате подигнато ниедна слика.</string>
+  <string name="menu_retry">Пробај пак</string>
+  <string name="menu_abort">Откажи</string>
 </resources>

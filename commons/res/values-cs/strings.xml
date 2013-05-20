@@ -55,4 +55,8 @@
   <string name="title_activity_about">O aplikaci</string>
   <string name="menu_feedback">Poslat názory (e-mailem)</string>
   <string name="provider_categories">Nedávno použité kategorie</string>
+  <string name="waiting_first_sync">Čeká se na první synchronizaci...</string>
+  <string name="no_uploads_yet">Zatím jste nenahrál žádné fotky.</string>
+  <string name="menu_retry">Zkusit znovu</string>
+  <string name="menu_abort">Zrušit</string>
 </resources>

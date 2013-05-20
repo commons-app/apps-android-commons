@@ -61,4 +61,6 @@ Tippe auf diese Nachricht oder drücke „Zurück“, um diesen Schritt zu über
   <string name="provider_categories">Kürzlich verwendete Kategorien</string>
   <string name="waiting_first_sync">Warte auf die erste Synchronisierung …</string>
   <string name="no_uploads_yet">Du hast noch keine Fotos hochgeladen.</string>
+  <string name="menu_retry">Erneut versuchen</string>
+  <string name="menu_abort">Abbrechen</string>
 </resources>

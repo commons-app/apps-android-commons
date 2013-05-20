@@ -60,4 +60,6 @@ Atingeți acest mesaj (sau mergeți înapoi) pentru a omite acest pas.</string>
   <string name="provider_categories">Categorii utilizate recent</string>
   <string name="waiting_first_sync">Se așteaptă prima sincronizare...</string>
   <string name="no_uploads_yet">Încă nu ați încărcat nicio fotografie.</string>
+  <string name="menu_retry">Reîncercare</string>
+  <string name="menu_abort">Abandonare</string>
 </resources>

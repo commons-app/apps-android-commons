@@ -58,4 +58,6 @@
   <string name="provider_categories">Categories usades recentment</string>
   <string name="waiting_first_sync">S\'està esperant la primera sincronització…</string>
   <string name="no_uploads_yet">Encara no heu carregat cap foto.</string>
+  <string name="menu_retry">Torna-ho a provar</string>
+  <string name="menu_abort">Parar</string>
 </resources>

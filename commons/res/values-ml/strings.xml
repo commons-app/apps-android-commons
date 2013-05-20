@@ -57,4 +57,5 @@
   <string name="title_activity_about">വിവരണം</string>
   <string name="menu_feedback">പ്രതികരണം അറിയിക്കുക (ഇമെയിൽ വഴി)</string>
   <string name="provider_categories">സമീപകാലത്ത് ഉപയോഗിച്ച വർഗ്ഗങ്ങൾ</string>
+  <string name="menu_retry">വീണ്ടും ശ്രമിക്കുക</string>
 </resources>

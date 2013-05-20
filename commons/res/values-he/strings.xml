@@ -61,4 +61,6 @@
   <string name="provider_categories">קטגוריות בשימוש לאחרונה</string>
   <string name="waiting_first_sync">מחכה לסנכרון הראשון...</string>
   <string name="no_uploads_yet">עדיין לא העלית תמונות.</string>
+  <string name="menu_retry">לנסות שוב</string>
+  <string name="menu_abort">לבטל</string>
 </resources>

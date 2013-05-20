@@ -60,4 +60,6 @@ Appuyez sur ce message (ou retournez en arrière) pour sauter cette étape.</str
   <string name="provider_categories">Catégories utilisées récemment</string>
   <string name="waiting_first_sync">Attente de première synchronisation…</string>
   <string name="no_uploads_yet">Vous n’avez pas encore téléchargé de photo.</string>
+  <string name="menu_retry">Réessayer</string>
+  <string name="menu_abort">Annuler</string>
 </resources>
