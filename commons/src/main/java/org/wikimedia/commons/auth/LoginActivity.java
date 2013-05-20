@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import android.content.*;
 import android.text.*;
+import android.view.inputmethod.EditorInfo;
 import de.keyboardsurfer.android.widget.crouton.*;
 import android.os.*;
 import android.accounts.*;
@@ -127,7 +128,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         loginButton = (Button) findViewById(R.id.loginButton);
         usernameEdit = (EditText) findViewById(R.id.loginUsername);
         passwordEdit = (EditText) findViewById(R.id.loginPassword);
-        final Activity that = this;
+        final LoginActivity that = this;
 
         TextWatcher loginEnabler = new TextWatcher() {
             public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) { }
@@ -145,21 +146,39 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
         usernameEdit.addTextChangedListener(loginEnabler);
         passwordEdit.addTextChangedListener(loginEnabler);
+        passwordEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+                if (loginButton.isEnabled()) {
+                    if (actionId == EditorInfo.IME_ACTION_DONE) {
+                        performLogin();
+                        return true;
+                    } else if ((keyEvent != null) && keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+                        performLogin();
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = usernameEdit.getText().toString();
-                // Because Mediawiki is upercase-first-char-then-case-sensitive :)
-                String canonicalUsername = username.substring(0,1).toUpperCase() + username.substring(1);
-
-                String password = passwordEdit.getText().toString();
-                
-                Log.d("Commons", "Login to start!");
-                LoginTask task = new LoginTask(that);
-                task.execute(canonicalUsername, password);
+                that.performLogin();
             }
         });
+    }
+
+    private void performLogin() {
+        String username = usernameEdit.getText().toString();
+        // Because Mediawiki is upercase-first-char-then-case-sensitive :)
+        String canonicalUsername = username.substring(0,1).toUpperCase() + username.substring(1);
+
+        String password = passwordEdit.getText().toString();
+
+        Log.d("Commons", "Login to start!");
+        LoginTask task = new LoginTask(this);
+        task.execute(canonicalUsername, password);
     }
 
     @Override
