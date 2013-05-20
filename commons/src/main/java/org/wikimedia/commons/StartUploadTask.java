@@ -31,6 +31,10 @@ public class StartUploadTask extends AsyncTask<Void, Void, Contribution> {
 
         String title = rawTitle;
         String extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType);
+        // People are used to ".jpg" more than ".jpeg" which the system gives us.
+        if (extension != null && extension.toLowerCase().equals("jpeg")) {
+            extension = "jpg";
+        }
         if(extension != null && !title.toLowerCase().endsWith(extension.toLowerCase())) {
             title += "." + extension;
         }
