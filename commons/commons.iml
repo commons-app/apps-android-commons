@@ -41,7 +41,7 @@
     <orderEntry type="library" name="Maven: com.nostra13.universalimageloader:universal-image-loader:1.8.2" level="project" />
     <orderEntry type="library" name="Maven: ch.acra:acra:4.4.0" level="project" />
     <orderEntry type="library" name="Maven: de.keyboardsurfer.android.widget:crouton:1.7" level="project" />
-    <orderEntry type="jdk" jdkName="Android 4.0.3 Platform" jdkType="Android SDK" />
+    <orderEntry type="jdk" jdkName="Android 4.2.2" jdkType="Android SDK" />
     <orderEntry type="module" module-name="~apklib-com.actionbarsherlock_actionbarsherlock_4.2.0" />
   </component>
 </module>
