@@ -14,7 +14,7 @@
     <item android:id="@+id/menu_download_current_image"
           android:showAsAction="never"
           android:icon="@drawable/ic_menu_download"
-          android:title="Download"
+          android:title="@string/menu_download"
           />
     <item android:id="@+id/menu_retry_current_image"
           android:showAsAction="ifRoom|withText"
