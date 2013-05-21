@@ -75,4 +75,5 @@
 {{Identical|Retry}}</string>
   <string name="menu_abort">Menu item text prompting user to abort and delete a failed upload.</string>
   <string name="share_license_summary">Text label briefly describing CC-BY-SA license.</string>
+  <string name="menu_download">Menu item text prompting user to download a selected photo or media file locally.</string>
 </resources>
