@@ -139,12 +139,12 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
                 return true;
             case R.id.menu_retry_current_image:
                 // Is this... sane? :)
-                ((ContributionsActivity)getSherlockActivity()).retryUpload(pager.getCurrentItem());
+                ((ContributionsActivity)getActivity()).retryUpload(pager.getCurrentItem());
                 getSherlockActivity().getSupportFragmentManager().popBackStack();
                 return true;
             case R.id.menu_abort_current_image:
                 // todo: delete image
-                ((ContributionsActivity)getSherlockActivity()).deleteUpload(pager.getCurrentItem());
+                ((ContributionsActivity)getActivity()).deleteUpload(pager.getCurrentItem());
                 getSherlockActivity().getSupportFragmentManager().popBackStack();
                 return true;
             default:
@@ -184,7 +184,7 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
             req.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
         }
 
-        final DownloadManager manager = (DownloadManager)getSherlockActivity().getSystemService(Context.DOWNLOAD_SERVICE);
+        final DownloadManager manager = (DownloadManager)getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
         final long downloadId = manager.enqueue(req);
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
@@ -203,17 +203,17 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
                         if (status == DownloadManager.STATUS_SUCCESSFUL) {
                             // Force Gallery to index the new file
                             Uri mediaUri = Uri.parse("file://" + Environment.getExternalStorageDirectory());
-                            getSherlockActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, mediaUri));
+                            getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, mediaUri));
 
                             // todo: show a persistent notification?
                         }
                     } else {
                         Log.d("Commons", "Couldn't get download status for some reason");
                     }
-                    getSherlockActivity().unregisterReceiver(this);
+                    getActivity().unregisterReceiver(this);
                 }
             };
-            getSherlockActivity().registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+            getActivity().registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
         }
     }
 
