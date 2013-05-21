@@ -274,7 +274,7 @@ public class ContributionsListFragment extends SherlockFragment {
             contributionsList.setSelection(savedInstanceState.getInt("grid-position"));
         }
 
-        SharedPreferences prefs = this.getSherlockActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        SharedPreferences prefs = this.getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
         String lastModified = prefs.getString("lastSyncTimestamp", "");
         if (lastModified.equals("")) {
             waitingMessage.setVisibility(View.VISIBLE);
