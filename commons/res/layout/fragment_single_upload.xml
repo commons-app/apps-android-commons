@@ -8,7 +8,9 @@
         android:background="#AA000000"
         android:paddingBottom="8dip"
         android:paddingLeft="16dip"
+        android:paddingStart="16dip"
         android:paddingRight="16dip"
+        android:paddingEnd="16dip"
         android:paddingTop="8dip"
         >
 
