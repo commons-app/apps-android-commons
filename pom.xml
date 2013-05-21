@@ -44,7 +44,7 @@
                         <resourceDirectory>${project.basedir}/res</resourceDirectory>
                         <nativeLibrariesDirectory>${project.basedir}/src/main/native</nativeLibrariesDirectory>
                         <sdk>
-                            <platform>15</platform>
+                            <platform>17</platform>
                         </sdk>
                                                 <undeployBeforeDeploy>true</undeployBeforeDeploy>
                     </configuration>
