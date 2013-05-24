@@ -103,8 +103,23 @@ public  class       ContributionsActivity
         contributionsList = (ContributionsListFragment)getSupportFragmentManager().findFragmentById(R.id.contributionsListFragment);
 
         getSupportFragmentManager().addOnBackStackChangedListener(this);
+        if (savedInstanceState != null) {
+            mediaDetails = (MediaDetailPagerFragment)getSupportFragmentManager().findFragmentById(R.id.contributionsFragmentContainer);
+            // onBackStackChanged uses mediaDetails.isVisible() but this returns false now.
+            // Use the saved value from before pause or orientation change.
+            if (mediaDetails != null && savedInstanceState.getBoolean("mediaDetailsVisible")) {
+                // Feels awful that we have to reset this manually!
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            }
+        }
 
         requestAuthToken();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("mediaDetailsVisible", (mediaDetails != null && mediaDetails.isVisible()));
     }
 
     private void showDetail(int i) {
