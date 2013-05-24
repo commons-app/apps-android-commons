@@ -276,11 +276,11 @@ public class UploadService extends HandlerService<Contribution> {
         contribution.save();
     }
 
-    private String findUniqueFilename(String fileName) {
+    private String findUniqueFilename(String fileName) throws IOException {
         return findUniqueFilename(fileName, 1);
     }
 
-    private String findUniqueFilename(String fileName, int sequenceNumber) {
+    private String findUniqueFilename(String fileName, int sequenceNumber) throws IOException  {
         String sequenceFileName;
         if (sequenceNumber == 1) {
             sequenceFileName = fileName;
@@ -304,18 +304,14 @@ public class UploadService extends HandlerService<Contribution> {
         }
     }
 
-    private boolean fileExistsWithName(String fileName) {
+    private boolean fileExistsWithName(String fileName) throws IOException {
         MWApi api = app.getApi();
         ApiResult result;
 
-        try {
-            result = api.action("query")
-                    .param("prop", "imageinfo")
-                    .param("titles", "File:" + fileName)
-                    .get();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        result = api.action("query")
+                .param("prop", "imageinfo")
+                .param("titles", "File:" + fileName)
+                .get();
 
         ArrayList<ApiResult> nodes = result.getNodes("/api/query/pages/page/imageinfo");
         return nodes.size() > 0;
