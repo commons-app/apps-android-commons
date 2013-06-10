@@ -53,8 +53,9 @@
   <string name="preference_tracking_summary">Испраќајте ѝ на Викимедија извештаи за употреба, со цел да го подобриме прилогов</string>
   <string name="title_activity_settings">Нагодувања</string>
   <string name="menu_about">За прилогот</string>
-  <string name="about_license">Прилог со отворен код, издадено под лиценцата</string>
-  <string name="about_improve">Изворниот код е на . Грешките се на .</string>
+  <string name="about_license">Програм со отворен код, издаден под лиценцата &lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;Апачи вер. 2&lt;/a&gt;</string>
+  <string name="about_improve">Изворот се наоѓа на &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;. Бубачките се на &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Заштита на личните податоци\"&gt;Заштита_на_личните_податоци&lt;/a&gt;</string>
   <string name="title_activity_about">За прилогот</string>
   <string name="menu_feedback">Испратете ваш одѕив (по е-пошта)</string>
   <string name="provider_categories">Неодамна искористени категории</string>
@@ -62,4 +63,6 @@
   <string name="no_uploads_yet">Сè уште немате подигнато ниедна слика.</string>
   <string name="menu_retry">Пробај пак</string>
   <string name="menu_abort">Откажи</string>
+  <string name="share_license_summary">Се согласувате да подигате под лиценцата CC-BY-SA 3.0.</string>
+  <string name="menu_download">Преземи</string>
 </resources>

@@ -53,7 +53,16 @@ Sentuh mesej ini (atau tekan butang undur) untuk melangkau langkah ini.</string>
   <string name="preference_tracking_summary">Hantar laporan penggunaan kepada Wikimedia untuk membantu kami menambah baik app ini</string>
   <string name="title_activity_settings">Tetapan</string>
   <string name="menu_about">Perihal</string>
-  <string name="about_license">Perisian Sumber Terbuka yang dikeluarkan di bawah</string>
+  <string name="about_license" fuzzy="true">Perisian Sumber Terbuka yang dikeluarkan di bawah</string>
+  <string name="about_improve" fuzzy="true">Sumber di . Pepijat di .</string>
+  <string name="about_privacy_policy">Wikimedia:Commons-android-strings-about privacy policy/ms</string>
   <string name="title_activity_about">Perihal</string>
   <string name="menu_feedback">Hantar Maklum Balas (secara e-mel)</string>
+  <string name="provider_categories">Kategori yang baru digunakan</string>
+  <string name="waiting_first_sync">Menunggu penyegerakan pertama...</string>
+  <string name="no_uploads_yet">Anda belum memuat naik sebarang gambar.</string>
+  <string name="menu_retry">Cuba lagi</string>
+  <string name="menu_abort">Batal</string>
+  <string name="share_license_summary">Anda bersetuju untuk memuat naik di bawah syarat-syarat lesen CC-BY-SA 3.0.</string>
+  <string name="menu_download">Muat Turun</string>
 </resources>

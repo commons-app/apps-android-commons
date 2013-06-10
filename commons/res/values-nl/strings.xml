@@ -54,8 +54,9 @@ Klik op dit bericht, of ga terug, om deze stap over te slaan.</string>
   <string name="preference_tracking_summary">Gebruiksrapporten verzenden naar Wikimedia om ons te helpen de app te verbeteren</string>
   <string name="title_activity_settings">Instellingen</string>
   <string name="menu_about">Over</string>
-  <string name="about_license">Open sourcesoftware vrijgegeven onder de</string>
-  <string name="about_improve">Broncode op . Bugs op .</string>
+  <string name="about_license">Open sourcesoftware vrijgegeven onder de &lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
+  <string name="about_improve">Broncode op &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;. Bugs in &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privacybeleid&lt;/a&gt;</string>
   <string name="title_activity_about">Over</string>
   <string name="menu_feedback">Terugkoppeling geven (via e-mail)</string>
   <string name="provider_categories">Recent gebruikte categorieën</string>
@@ -63,4 +64,6 @@ Klik op dit bericht, of ga terug, om deze stap over te slaan.</string>
   <string name="no_uploads_yet">U hebt nog geen afbeeldingen geüpload.</string>
   <string name="menu_retry">Opnieuw proberen</string>
   <string name="menu_abort">Afbreken</string>
+  <string name="share_license_summary">U gaat akkoord met uploaden onder de voorwaarden van de licentie CC BY-SA.</string>
+  <string name="menu_download">Downloaden</string>
 </resources>

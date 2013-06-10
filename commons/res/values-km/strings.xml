@@ -52,9 +52,16 @@
   <string name="preference_tracking_summary">ផ្ញើរបាយការណ៍ស្ដីពីបម្រើបម្រាស់ទៅ Wikimedia ដើម្បីជួយកែលម្អកម្មវិធីយើងខ្ញុំ</string>
   <string name="title_activity_settings">ការកំណត់</string>
   <string name="menu_about">អំពី</string>
-  <string name="about_license">សូហ្វវែរប្រភពបើកទូលាយត្រូវបានចេញផ្សាយក្រោម</string>
+  <string name="about_license">សូហ្វវែរប្រភពបើកទូលាយត្រូវបានចេញផ្សាយក្រោមអាជ្ញាបណ្ណ &lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
+  <string name="about_improve">ប្រភពកូដមាននៅ &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;. Bugs មាននៅ &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;គោលការភាពជាឯកជន&lt;/a&gt;</string>
   <string name="title_activity_about">អំពី</string>
   <string name="menu_feedback">ផ្ញើមតិកែលម្អ (តាមអ៊ីមែល)</string>
   <string name="provider_categories">ចំណាត់ថ្នាក់ក្រុមដែលត្រូវបានប្រើថ្មីៗ</string>
+  <string name="waiting_first_sync">កំពុងរង់ចាំ ធ្វើការ sync ជាលើកដំបូង...</string>
   <string name="no_uploads_yet">អ្នកមិនទាន់បានផ្ទុករូបថតណាមួយឡើងនៅឡើយទេ។</string>
+  <string name="menu_retry">ព្យាយាមម្តងទៀត</string>
+  <string name="menu_abort">បោះបង់</string>
+  <string name="share_license_summary">អ្នកយល់ព្រមក្នុងការផ្ទុកឡើងក្រោមលក្ខខណ្ឌនៃអាជ្ញាបណ្ណ CC-BY-SA 3.0 ។</string>
+  <string name="menu_download">ទាញយក</string>
 </resources>

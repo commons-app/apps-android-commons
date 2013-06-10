@@ -35,7 +35,7 @@
   <string name="preference_tracking">Lietošanas atskaites</string>
   <string name="title_activity_settings">Iestatījumi</string>
   <string name="menu_about">Par</string>
-  <string name="about_improve">Uz avotu. Pie kļūdām.</string>
+  <string name="about_improve" fuzzy="true">Uz avotu. Pie kļūdām.</string>
   <string name="title_activity_about">Par</string>
   <string name="menu_feedback">Nosūtīt atsauksmes (pa e-pastu)</string>
   <string name="provider_categories">Nesen lietotās kategorijas</string>

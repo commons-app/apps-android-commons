@@ -54,4 +54,5 @@
   <string name="no_uploads_yet">まだ写真をアップロードしていません。</string>
   <string name="menu_retry">再試行</string>
   <string name="menu_abort">中止</string>
+  <string name="menu_download">ダウンロード</string>
 </resources>

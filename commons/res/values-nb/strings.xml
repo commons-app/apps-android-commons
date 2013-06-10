@@ -53,11 +53,16 @@ Trykk på denne meldingen (eller trykk tilbake) for å hoppe over dette steget.<
   <string name="preference_tracking_summary">Send bruksrapporter til Wikimedia for å hjelpe oss med å forbedre appen</string>
   <string name="title_activity_settings">Innstillinger</string>
   <string name="menu_about">Om</string>
-  <string name="about_license">Åpen kildekode programvare sluppet under</string>
-  <string name="about_improve">Kildekode på . Feilmeldinger på .</string>
+  <string name="about_license" fuzzy="true">Åpen kildekode programvare sluppet under</string>
+  <string name="about_improve" fuzzy="true">Kildekode på . Feilmeldinger på .</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Personvernpolicy&lt;/a&gt;</string>
   <string name="title_activity_about">Om</string>
   <string name="menu_feedback">Send tilbakemelding (via Epost)</string>
   <string name="provider_categories">Nylig brukte kategorier</string>
   <string name="waiting_first_sync">Venter på første synkronisering...</string>
   <string name="no_uploads_yet">Du har ikke lastet opp nøn bilder ennå.</string>
+  <string name="menu_retry">Prøv igjen</string>
+  <string name="menu_abort">Avbryt</string>
+  <string name="share_license_summary">Du samtykker til å lisensiere opplastingen under vilkårene til CC-BY-SA 3.0-lisensen.</string>
+  <string name="menu_download">Last ned</string>
 </resources>

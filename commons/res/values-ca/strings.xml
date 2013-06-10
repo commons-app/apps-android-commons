@@ -50,8 +50,8 @@
   <string name="preference_tracking_summary">Envia informes d\'ús a Wikimedia per ajudar-nos a millorar l\'aplicació</string>
   <string name="title_activity_settings">Paràmetres</string>
   <string name="menu_about">Quant a</string>
-  <string name="about_license">Programari de codi obert sota la llicència</string>
-  <string name="about_improve">Codi a . Informes d\'error a .</string>
+  <string name="about_license">Programari de codi obert distribuït sota la &lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;llicència Apache v2&lt;/a&gt;</string>
+  <string name="about_improve">Codi a &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;. Informes d\'error a &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
   <string name="about_privacy_policy">Wikimedia:Commons-android-texts-sobre privacitat/ca</string>
   <string name="title_activity_about">Quant a</string>
   <string name="menu_feedback">Envia comentaris (per correu)</string>
@@ -60,4 +60,6 @@
   <string name="no_uploads_yet">Encara no heu carregat cap foto.</string>
   <string name="menu_retry">Torna-ho a provar</string>
   <string name="menu_abort">Parar</string>
+  <string name="share_license_summary">Esteu d\'acord en carregar material sota els termes de la llicència CC-BY-SA 3.0.</string>
+  <string name="menu_download">Baixa</string>
 </resources>

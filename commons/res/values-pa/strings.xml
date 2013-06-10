@@ -21,7 +21,7 @@
   <string name="preference_tracking">ਵਰਤੋਂ ਰਿਪੋਰਟਾਂ</string>
   <string name="title_activity_settings">ਸੈਟਿੰਗ</string>
   <string name="menu_about">ਇਸ ਬਾਰੇ</string>
-  <string name="about_license">ਓਪਨ ਸਰੋਤ ਸਾਫਟਵੇਅਰ ਨੂੰ ਜਾਰੀ ਕੀਤਾ ਹੈ ਇਸ ਦੇ ਅਧੀਨ</string>
+  <string name="about_license" fuzzy="true">ਓਪਨ ਸਰੋਤ ਸਾਫਟਵੇਅਰ ਨੂੰ ਜਾਰੀ ਕੀਤਾ ਹੈ ਇਸ ਦੇ ਅਧੀਨ</string>
   <string name="title_activity_about">ਇਸ ਬਾਰੇ</string>
   <string name="menu_feedback">ਸੁਝਾਅ ਭੇਜੋ (ਈਮੇਲ ਰਾਹੀਂ)</string>
 </resources>

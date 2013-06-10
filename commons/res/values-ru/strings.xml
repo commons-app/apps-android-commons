@@ -53,8 +53,9 @@
   <string name="preference_tracking_summary">Отправлять отчёты об использовании в Викимедиа, чтобы помочь нам улучшить приложение</string>
   <string name="title_activity_settings">Настройки</string>
   <string name="menu_about">О приложении</string>
-  <string name="about_license">Приложение с открытым исходным кодом, выпущено под лицензией</string>
-  <string name="about_improve">Исходный код на . Ошибки на .</string>
+  <string name="about_license">Приложение с открытым исходным кодом, выпущено под лицензией &lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
+  <string name="about_improve">Исходный код на &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;. Ошибки на &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Политика_конфиденциальности\"&gt;Политика конфиденциальности&lt;/a&gt;</string>
   <string name="title_activity_about">О приложении</string>
   <string name="menu_feedback">Отправить отзыв (e-mail)</string>
   <string name="provider_categories">Недавно использованные категории</string>
@@ -62,4 +63,6 @@
   <string name="no_uploads_yet">Вы еще не загрузили ни одной фотографии.</string>
   <string name="menu_retry">Повторить</string>
   <string name="menu_abort">Прервать</string>
+  <string name="share_license_summary">Вы соглашаетесь с тем, что загружаете на условиях лицензии CC-BY-SA 3.0.</string>
+  <string name="menu_download">Скачать</string>
 </resources>

@@ -53,7 +53,7 @@
   <string name="preference_tracking_summary">ഈ ആപ് മെച്ചപ്പെടുത്തുന്നതിനായി ഉപയോഗം സംബന്ധിച്ച റിപ്പോർട്ടുകൾ വിക്കിമീഡിയയ്ക്ക് അയയ്ക്കുക</string>
   <string name="title_activity_settings">സജ്ജീകരണങ്ങൾ</string>
   <string name="menu_about">വിവരണം</string>
-  <string name="about_license">ഇതു പ്രകാരം പുറത്തിറക്കപ്പെട്ട ഓപ്പൺ സോഴ്സ് സോഫ്റ്റ്‌വേർ</string>
+  <string name="about_license" fuzzy="true">ഇതു പ്രകാരം പുറത്തിറക്കപ്പെട്ട ഓപ്പൺ സോഴ്സ് സോഫ്റ്റ്‌വേർ</string>
   <string name="title_activity_about">വിവരണം</string>
   <string name="menu_feedback">പ്രതികരണം അറിയിക്കുക (ഇമെയിൽ വഴി)</string>
   <string name="provider_categories">സമീപകാലത്ത് ഉപയോഗിച്ച വർഗ്ഗങ്ങൾ</string>

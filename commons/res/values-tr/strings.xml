@@ -46,7 +46,7 @@
   <string name="preference_tracking">Kullanım raporları</string>
   <string name="title_activity_settings">Ayarlar</string>
   <string name="menu_about">Hakkında</string>
-  <string name="about_license">Lisansı altında yayımlanan açık kaynak yazılım</string>
+  <string name="about_license" fuzzy="true">Lisansı altında yayımlanan açık kaynak yazılım</string>
   <string name="title_activity_about">Hakkında</string>
   <string name="menu_feedback">Geri Bildirim Gönder (E-posta ile)</string>
   <string name="provider_categories">Son kullanılan kategoriler</string>

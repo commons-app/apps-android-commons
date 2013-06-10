@@ -50,8 +50,9 @@
   <string name="preference_tracking_summary">Odesílat hlášení o používání nadaci Wikimedia za účelem zlepšování aplikace</string>
   <string name="title_activity_settings">Nastavení</string>
   <string name="menu_about">O aplikaci</string>
-  <string name="about_license">Open-source software dostupný za podmínek</string>
-  <string name="about_improve">Zdrojový text na . Hlášení chyb na .</string>
+  <string name="about_license">Open-source software dostupný za podmínek &lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
+  <string name="about_improve">Zdrojový text na &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHubu&lt;/a&gt;. Hlášení chyb v &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzille&lt;/a&gt;.</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Ochrana_osobn%C3%ADch_%C3%BAdaj%C5%AF\"&gt;Ochrana osobních údajů&lt;/a&gt;</string>
   <string name="title_activity_about">O aplikaci</string>
   <string name="menu_feedback">Poslat názory (e-mailem)</string>
   <string name="provider_categories">Nedávno použité kategorie</string>
