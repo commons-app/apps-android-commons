@@ -138,6 +138,7 @@ public class CommonsApplication extends Application {
                     imageCache.put(key, bitmap);
                 }
             });
+            imageLoader.setBatchedResponseDelay(0);
         }
         return imageLoader;
     }
