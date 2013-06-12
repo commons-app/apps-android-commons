@@ -11,6 +11,7 @@ public class AboutActivity extends Activity {
     private TextView licenseText;
     private TextView improveText;
     private TextView privacyPolicyText;
+    private TextView uploadsToText;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,8 +21,9 @@ public class AboutActivity extends Activity {
         licenseText = (TextView) findViewById(R.id.about_license);
         improveText = (TextView) findViewById(R.id.about_improve);
         privacyPolicyText = (TextView) findViewById(R.id.about_privacy_policy);
+        uploadsToText = (TextView) findViewById(R.id.about_uploads_to);
 
-
+        uploadsToText.setText(CommonsApplication.EVENTLOG_WIKI);
         versionText.setText(CommonsApplication.APPLICATION_VERSION);
 
         // We can't use formatted strings directly because it breaks with
