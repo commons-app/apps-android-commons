@@ -22,14 +22,16 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import com.nostra13.universalimageloader.core.*;
-import com.nostra13.universalimageloader.core.assist.*;
+
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 
 import java.io.*;
 import java.util.*;
 
 
+import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import org.wikimedia.commons.*;
+import org.wikimedia.commons.R;
 
 public class ContributionsListFragment extends SherlockFragment {
 
@@ -85,17 +87,23 @@ public class ContributionsListFragment extends SherlockFragment {
             String actualUrl = TextUtils.isEmpty(contribution.getImageUrl()) ? contribution.getLocalUri().toString() : contribution.getThumbnailUrl(320);
 
             if(views.url == null || !views.url.equals(actualUrl)) {
-                ImageLoader.getInstance().displayImage(actualUrl, views.imageView, contributionDisplayOptions, new SimpleImageLoadingListener() {
+                if(actualUrl.startsWith("http")) {
+                    MediaWikiImageView mwImageView = (MediaWikiImageView)views.imageView;
+                    mwImageView.setMedia(contribution, ((CommonsApplication) getActivity().getApplicationContext()).getImageLoader());
+                    // FIXME: For transparent images
+                } else {
+                    com.nostra13.universalimageloader.core.ImageLoader.getInstance().displayImage(actualUrl, views.imageView, contributionDisplayOptions, new SimpleImageLoadingListener() {
 
-                    @Override
-                    public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                        if(loadedImage.hasAlpha()) {
-                            views.imageView.setBackgroundResource(android.R.color.white);
+                        @Override
+                        public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                            if(loadedImage.hasAlpha()) {
+                                views.imageView.setBackgroundResource(android.R.color.white);
+                            }
+                            views.seqNumView.setVisibility(View.GONE);
                         }
-                        views.seqNumView.setVisibility(View.GONE);
-                    }
 
-                });
+                    });
+                }
                 views.url = actualUrl;
             }
 

@@ -3,13 +3,16 @@ package org.wikimedia.commons.media;
 import android.graphics.*;
 import android.os.*;
 import android.text.*;
+import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import com.actionbarsherlock.app.SherlockFragment;
+import com.android.volley.toolbox.NetworkImageView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
+
+import com.android.volley.toolbox.*;
 
 import org.wikimedia.commons.*;
 
@@ -78,29 +81,38 @@ public class MediaDetailFragment extends SherlockFragment {
         }
 
         String actualUrl = TextUtils.isEmpty(media.getImageUrl()) ? media.getLocalUri().toString() : media.getThumbnailUrl(640);
-        ImageLoader.getInstance().displayImage(actualUrl, image, displayOptions, new ImageLoadingListener() {
-            public void onLoadingStarted(String s, View view) {
-                loadingProgress.setVisibility(View.VISIBLE);
-            }
-
-            public void onLoadingFailed(String s, View view, FailReason failReason) {
-                loadingProgress.setVisibility(View.GONE);
-                loadingFailed.setVisibility(View.VISIBLE);
-            }
-
-            public void onLoadingComplete(String s, View view, Bitmap bitmap) {
-                loadingProgress.setVisibility(View.GONE);
-                loadingFailed.setVisibility(View.GONE);
-                image.setVisibility(View.VISIBLE);
-                if(bitmap.hasAlpha()) {
-                    image.setBackgroundResource(android.R.color.white);
+        if(actualUrl.startsWith("http")) {
+            ImageLoader loader = ((CommonsApplication)getActivity().getApplicationContext()).getImageLoader();
+            MediaWikiImageView mwImage = (MediaWikiImageView)image;
+            mwImage.setLoadingView(loadingProgress); //FIXME: Set this as an attribute
+            mwImage.setMedia(media, loader);
+            Log.d("Volley", actualUrl);
+            // FIXME: For transparent images
+        } else {
+            com.nostra13.universalimageloader.core.ImageLoader.getInstance().displayImage(actualUrl, image, displayOptions, new ImageLoadingListener() {
+                public void onLoadingStarted(String s, View view) {
+                    loadingProgress.setVisibility(View.VISIBLE);
                 }
-            }
 
-            public void onLoadingCancelled(String s, View view) {
-                throw new RuntimeException("Image loading cancelled. But why?");
-            }
-        });
+                public void onLoadingFailed(String s, View view, FailReason failReason) {
+                    loadingProgress.setVisibility(View.GONE);
+                    loadingFailed.setVisibility(View.VISIBLE);
+                }
+
+                public void onLoadingComplete(String s, View view, Bitmap bitmap) {
+                    loadingProgress.setVisibility(View.GONE);
+                    loadingFailed.setVisibility(View.GONE);
+                    image.setVisibility(View.VISIBLE);
+                    if(bitmap.hasAlpha()) {
+                        image.setBackgroundResource(android.R.color.white);
+                    }
+                }
+
+                public void onLoadingCancelled(String s, View view) {
+                    throw new RuntimeException("Image loading cancelled. But why?");
+                }
+            });
+        }
         title.setText(media.getDisplayTitle());
 
         title.addTextChangedListener(new TextWatcher() {

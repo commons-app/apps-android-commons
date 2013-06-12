@@ -14,6 +14,8 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 
+import android.support.v4.util.LruCache;
+import com.android.volley.RequestQueue;
 import com.nostra13.universalimageloader.cache.disc.impl.TotalSizeLimitedDiscCache;
 import com.nostra13.universalimageloader.cache.memory.impl.LimitedAgeMemoryCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -28,6 +30,8 @@ import org.wikimedia.commons.auth.WikiAccountAuthenticator;
 import org.apache.http.impl.client.*;
 import org.apache.http.params.CoreProtocolPNames;
 import org.wikimedia.commons.data.*;
+
+import com.android.volley.toolbox.*;
 
 // TODO: Use ProGuard to rip out reporting when publishing
 @ReportsCrashes(formKey = "",
@@ -62,6 +66,7 @@ public class CommonsApplication extends Application {
     public static final String FEEDBACK_EMAIL = "mobile-feedback-l@lists.wikimedia.org";
     public static final String FEEDBACK_EMAIL_SUBJECT = "Commons Android App (%s) Feedback";
 
+    public RequestQueue volleyQueue;
 
     public static AbstractHttpClient createHttpClient() {
         DefaultHttpClient client = new DefaultHttpClient();
@@ -106,6 +111,35 @@ public class CommonsApplication extends Application {
 
         // Initialize EventLogging
         EventLog.setApp(this);
+
+        volleyQueue = Volley.newRequestQueue(this);
+    }
+
+    private com.android.volley.toolbox.ImageLoader imageLoader;
+    // based off https://developer.android.com/training/displaying-bitmaps/cache-bitmap.html
+    // Cache for 1/8th of available VM memory
+    private LruCache<String, Bitmap> imageCache = new LruCache<String, Bitmap>((int) (Runtime.getRuntime().maxMemory() / (1024 * 8))) {
+        @Override
+        protected int sizeOf(String key, Bitmap bitmap) {
+            // The cache size will be measured in kilobytes rather than
+            // number of items.
+            return bitmap.getByteCount() / 1024;
+        }
+    };
+
+    public com.android.volley.toolbox.ImageLoader getImageLoader() {
+        if(imageLoader == null) {
+            imageLoader = new com.android.volley.toolbox.ImageLoader(volleyQueue, new com.android.volley.toolbox.ImageLoader.ImageCache() {
+                public Bitmap getBitmap(String key) {
+                    return imageCache.get(key);
+                }
+
+                public void putBitmap(String key, Bitmap bitmap) {
+                    imageCache.put(key, bitmap);
+                }
+            });
+        }
+        return imageLoader;
     }
     
     public MWApi getApi() {

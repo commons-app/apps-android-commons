@@ -16,7 +16,7 @@
               android:typeface="serif"
               android:layout_gravity="end|bottom"
             />
-    <ImageView android:id="@+id/contributionImage"
+    <org.wikimedia.commons.MediaWikiImageView android:id="@+id/contributionImage"
                android:layout_width="fill_parent"
                android:layout_height="240dp"
                android:scaleType="centerCrop"

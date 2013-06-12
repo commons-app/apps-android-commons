@@ -22,11 +22,10 @@
                android:visibility="gone"
                />
 
-    <ImageView android:id="@+id/mediaDetailImage"
+    <org.wikimedia.commons.MediaWikiImageView android:id="@+id/mediaDetailImage"
                android:layout_width="fill_parent"
                android:layout_height="fill_parent"
                android:scaleType="fitCenter"
-               android:visibility="gone"
             />
 
     <RelativeLayout
