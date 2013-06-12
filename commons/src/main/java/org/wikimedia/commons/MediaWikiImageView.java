@@ -104,7 +104,6 @@ public class MediaWikiImageView extends ImageView {
         // We ignore it if the image request was for either the current URL of for the full URL
         // Since the full URL is always the second, and
         if (mImageContainer != null && mImageContainer.getRequestUrl() != null) {
-            Log.d("Commons", "Older one is " + mImageContainer.getRequestUrl() + " new one is " + mUrl);
             if (mImageContainer.getRequestUrl().equals(mMedia.getImageUrl()) || mImageContainer.getRequestUrl().equals(mUrl)) {
                 return;
             } else {
@@ -126,7 +125,6 @@ public class MediaWikiImageView extends ImageView {
                 new ImageListener() {
                     @Override
                     public void onErrorResponse(final VolleyError error) {
-                        Log.d("Commons", "Error: or Url " + mUrl + " value is " + tryOriginal);
                         if(!tryOriginal) {
                             post(new Runnable() {
                                 public void run() {
@@ -162,8 +160,7 @@ public class MediaWikiImageView extends ImageView {
                                 loadingView.setVisibility(View.GONE);
                             }
                         } else {
-                            Log.d("Commons", "Whelp, fully can not load an image at all!");
-                            // We got nothing back, figure out some sort of a solution?
+                            // I'm not really sure where this would hit but not onError
                         }
                     }
                 });
