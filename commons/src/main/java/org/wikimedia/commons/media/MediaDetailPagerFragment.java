@@ -172,8 +172,8 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
         Uri imageUri = Uri.parse(imageUrl);
 
         DownloadManager.Request req = new DownloadManager.Request(imageUri);
-        req.setDescription(m.getDisplayTitle());
-        req.setTitle("Commons");
+        req.setDescription(getString(R.string.app_name));
+        req.setTitle(m.getDisplayTitle());
         req.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             // Modern Android updates the gallery automatically. Yay!
