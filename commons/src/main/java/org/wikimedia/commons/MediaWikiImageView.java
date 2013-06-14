@@ -78,6 +78,10 @@ public class MediaWikiImageView extends ImageView {
             return;
         }
 
+        if(mMedia == null) {
+            return;
+        }
+
         final String  mUrl;
         if(tryOriginal) {
             mUrl = mMedia.getImageUrl();
@@ -172,9 +176,7 @@ public class MediaWikiImageView extends ImageView {
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
-        Log.d("Commons", "Called via onLayout");
         loadImageIfNecessary(true);
-        // Called via onLayout
     }
 
     @Override
