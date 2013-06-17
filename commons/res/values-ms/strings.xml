@@ -53,8 +53,8 @@ Sentuh mesej ini (atau tekan butang undur) untuk melangkau langkah ini.</string>
   <string name="preference_tracking_summary">Hantar laporan penggunaan kepada Wikimedia untuk membantu kami menambah baik app ini</string>
   <string name="title_activity_settings">Tetapan</string>
   <string name="menu_about">Perihal</string>
-  <string name="about_license" fuzzy="true">Perisian Sumber Terbuka yang dikeluarkan di bawah</string>
-  <string name="about_improve" fuzzy="true">Sumber di . Pepijat di .</string>
+  <string name="about_license">Perisian Sumber Terbuka yang dikeluarkan dengan &lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;Lesen Apache v2&lt;/a&gt;</string>
+  <string name="about_improve">Sumber di &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;. Pepijat di &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
   <string name="about_privacy_policy">Wikimedia:Commons-android-strings-about privacy policy/ms</string>
   <string name="title_activity_about">Perihal</string>
   <string name="menu_feedback">Hantar Maklum Balas (secara e-mel)</string>
