@@ -266,6 +266,11 @@ public class ContributionsListFragment extends SherlockFragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear(); // See http://stackoverflow.com/a/8495697/17865
         inflater.inflate(R.menu.fragment_contributions_list, menu);
+
+        CommonsApplication app = (CommonsApplication)getActivity().getApplicationContext();
+        if (!app.deviceHasCamera()) {
+            menu.findItem(R.id.menu_from_camera).setEnabled(false);
+        }
     }
 
     @Override
