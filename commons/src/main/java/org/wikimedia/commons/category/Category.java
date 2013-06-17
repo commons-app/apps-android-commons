@@ -134,6 +134,14 @@ public class Category {
             if(from == 4) {
                 // table added in version 5
                 onCreate(db);
+                from++;
+                onUpdate(db, from, to);
+                return;
+            }
+            if(from == 5) {
+                from++;
+                onUpdate(db, from, to);
+                return;
             }
         }
     }

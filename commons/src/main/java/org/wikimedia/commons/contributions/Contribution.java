@@ -189,6 +189,8 @@ public class Contribution extends Media {
         cv.put(Table.COLUMN_DESCRIPTION, description);
         cv.put(Table.COLUMN_CREATOR, creator);
         cv.put(Table.COLUMN_MULTIPLE, isMultiple ? 1 : 0);
+        cv.put(Table.COLUMN_WIDTH, width);
+        cv.put(Table.COLUMN_HEIGHT, height);
         return cv;
     }
 
@@ -220,6 +222,9 @@ public class Contribution extends Media {
         c.description = cursor.getString(10);
         c.creator = cursor.getString(11);
         c.isMultiple = cursor.getInt(12) == 1;
+        c.width = cursor.getInt(13);
+        c.height = cursor.getInt(14);
+
         return c;
     }
 
@@ -252,6 +257,8 @@ public class Contribution extends Media {
         public static final String COLUMN_DESCRIPTION = "description";
         public static final String COLUMN_CREATOR = "creator"; // Initial uploader
         public static final String COLUMN_MULTIPLE = "multiple";
+        public static final String COLUMN_WIDTH = "width";
+        public static final String COLUMN_HEIGHT = "height";
 
         // NOTE! KEEP IN SAME ORDER AS THEY ARE DEFINED UP THERE. HELPS HARD CODE COLUMN INDICES.
         public static final String[] ALL_FIELDS = {
@@ -267,7 +274,9 @@ public class Contribution extends Media {
                 COLUMN_SOURCE,
                 COLUMN_DESCRIPTION,
                 COLUMN_CREATOR,
-                COLUMN_MULTIPLE
+                COLUMN_MULTIPLE,
+                COLUMN_WIDTH,
+                COLUMN_HEIGHT
         };
 
 
@@ -284,7 +293,9 @@ public class Contribution extends Media {
                 + "source STRING,"
                 + "description STRING,"
                 + "creator STRING,"
-                + "multiple INTEGER"
+                + "multiple INTEGER,"
+                + "width INTEGER,"
+                + "height INTEGER"
         + ");";
 
 
@@ -313,11 +324,23 @@ public class Contribution extends Media {
             if(from == 3) {
                 // Do nothing
                 from++;
+                onUpdate(db, from, to);
                 return;
             }
             if(from == 4) {
                 // Do nothing -- added Category
                 from++;
+                onUpdate(db, from, to);
+                return;
+            }
+            if(from == 5) {
+                // Added width and height fields
+                db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN width INTEGER;");
+                db.execSQL("UPDATE " + TABLE_NAME + " SET width = 0");
+                db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN height INTEGER;");
+                db.execSQL("UPDATE " + TABLE_NAME + " SET height = 0");
+                from++;
+                onUpdate(db, from, to);
                 return;
             }
         }

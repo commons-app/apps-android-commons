@@ -27,6 +27,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageLoader.ImageContainer;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
+import org.wikimedia.commons.contributions.Contribution;
+import org.wikimedia.commons.contributions.ContributionsContentProvider;
 
 
 public class MediaWikiImageView extends ImageView {
@@ -90,7 +92,15 @@ public class MediaWikiImageView extends ImageView {
             // Possible a similar size image has already been generated.
             // Reduces Server cache fragmentation, also increases chance of cache hit
             // If width is less than 320, we just use that directly, to avoid a case of the Maths
-            mUrl = mMedia.getThumbnailUrl(width <= 320 ? width : (width / 320) * 320);
+            int bucketedWidth = width <= 320 ? width: (width / 320) * 320;
+            if(mMedia.getWidth() != 0 && mMedia.getWidth() < bucketedWidth) {
+                // If we know that the width of the image is lesser than the required width
+                // We don't even try to load the thumbnai, go directly to the source
+                loadImageIfNecessary(isInLayoutPass, true);
+                return;
+            } else {
+                mUrl = mMedia.getThumbnailUrl(width <= 320 ? width : (width / 320) * 320);
+            }
         }
 
         // if the URL to be loaded in this view is empty, cancel any old requests and clear the
@@ -155,11 +165,15 @@ public class MediaWikiImageView extends ImageView {
                             return;
                         }
 
-
-                        Log.d("Commons", "No-Error: For Url " + mUrl + " value is " + tryOriginal);
-
                         if (response.getBitmap() != null) {
                             setImageBitmap(response.getBitmap());
+                            if(tryOriginal && mMedia instanceof Contribution && response.getBitmap().getWidth() > mMedia.getWidth() || response.getBitmap().getHeight() > mMedia.getHeight()) {
+                                // If there is no width information for this image, save it. This speeds up image loading massively for smaller images
+                                mMedia.setHeight(response.getBitmap().getHeight());
+                                mMedia.setWidth(response.getBitmap().getWidth());
+                                ((Contribution)mMedia).setContentProviderClient(MediaWikiImageView.this.getContext().getContentResolver().acquireContentProviderClient(ContributionsContentProvider.AUTHORITY));
+                                ((Contribution)mMedia).save();
+                            }
                             if(loadingView != null) {
                                 loadingView.setVisibility(View.GONE);
                             }
