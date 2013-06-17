@@ -1,5 +1,5 @@
 <resources>
 
-    <style name="NotificationProgress" parent="android:Widget.Holo.ProgressBar.Horizontal" />
+    <style name="ProgressBar" parent="android:Widget.Holo.ProgressBar.Horizontal" />
 
 </resources>

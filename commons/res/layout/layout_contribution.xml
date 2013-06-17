@@ -30,6 +30,15 @@
             android:orientation="vertical"
             android:padding="8dp"
             >
+        <ProgressBar
+            android:id="@+id/contributionProgress"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            style="@style/ProgressBar"
+            android:indeterminateOnly="false"
+            android:max="100"
+            android:visibility="gone"
+            />
 
         <TextView
                 android:id="@+id/contributionState"

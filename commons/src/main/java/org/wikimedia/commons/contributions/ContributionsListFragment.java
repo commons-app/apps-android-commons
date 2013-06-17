@@ -52,6 +52,7 @@ public class ContributionsListFragment extends SherlockFragment {
         final TextView titleView;
         final TextView stateView;
         final TextView seqNumView;
+        final ProgressBar progressView;
 
         String url;
 
@@ -60,6 +61,7 @@ public class ContributionsListFragment extends SherlockFragment {
             titleView = (TextView)parent.findViewById(R.id.contributionTitle);
             stateView = (TextView)parent.findViewById(R.id.contributionState);
             seqNumView = (TextView)parent.findViewById(R.id.contributionSequenceNumber);
+            progressView = (ProgressBar)parent.findViewById(R.id.contributionProgress);
         }
     }
 
@@ -122,23 +124,29 @@ public class ContributionsListFragment extends SherlockFragment {
             switch(contribution.getState()) {
                 case Contribution.STATE_COMPLETED:
                     views.stateView.setVisibility(View.GONE);
+                    views.progressView.setVisibility(View.GONE);
                     views.stateView.setText("");
                     break;
                 case Contribution.STATE_QUEUED:
                     views.stateView.setVisibility(View.VISIBLE);
+                    views.progressView.setVisibility(View.GONE);
                     views.stateView.setText(R.string.contribution_state_queued);
                     break;
                 case Contribution.STATE_IN_PROGRESS:
-                    views.stateView.setVisibility(View.VISIBLE);
-                    views.stateView.setText(R.string.contribution_state_starting);
+                    views.stateView.setVisibility(View.GONE);
+                    views.progressView.setVisibility(View.VISIBLE);
                     long total = contribution.getDataLength();
                     long transferred = contribution.getTransferred();
-                    String stateString = String.format(getString(R.string.contribution_state_in_progress), (int)(((double)transferred / (double)total) * 100));
-                    views.stateView.setText(stateString);
+                    if(transferred == 0 || transferred >= total) {
+                        views.progressView.setIndeterminate(true);
+                    } else {
+                        views.progressView.setProgress((int)(((double)transferred / (double)total) * 100));
+                    }
                     break;
                 case Contribution.STATE_FAILED:
                     views.stateView.setVisibility(View.VISIBLE);
                     views.stateView.setText(R.string.contribution_state_failed);
+                    views.progressView.setVisibility(View.GONE);
                     break;
             }
 
