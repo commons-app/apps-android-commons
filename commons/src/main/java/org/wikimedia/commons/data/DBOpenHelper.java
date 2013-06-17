@@ -10,7 +10,7 @@ import org.wikimedia.commons.modifications.ModifierSequence;
 public class DBOpenHelper  extends SQLiteOpenHelper{
 
     private static final String DATABASE_NAME = "commons.db";
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 6;
 
     public DBOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

@@ -103,6 +103,22 @@ public class Media implements Parcelable {
         return Utils.makeThumbUrl(imageUrl, filename, width);
     }
 
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
     protected Uri localUri;
     protected String imageUrl;
     protected String filename;
@@ -110,6 +126,8 @@ public class Media implements Parcelable {
     protected long dataLength;
     protected Date dateCreated;
     protected Date dateUploaded;
+    protected int width;
+    protected int height;
 
 
     protected String creator;
