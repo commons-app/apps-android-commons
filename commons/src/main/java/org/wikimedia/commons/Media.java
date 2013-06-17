@@ -158,6 +158,8 @@ public class Media implements Parcelable {
         parcel.writeSerializable(dateUploaded);
         parcel.writeString(creator);
         parcel.writeSerializable(tags);
+        parcel.writeInt(width);
+        parcel.writeInt(height);
     }
 
     public Media(Parcel in) {
@@ -170,6 +172,8 @@ public class Media implements Parcelable {
         dateUploaded = (Date) in.readSerializable();
         creator = in.readString();
         tags = (HashMap<String, Object>)in.readSerializable();
+        width = in.readInt();
+        height = in.readInt();
     }
 
     public void setDescription(String description) {
