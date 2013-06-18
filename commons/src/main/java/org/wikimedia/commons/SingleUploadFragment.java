@@ -3,8 +3,10 @@ package org.wikimedia.commons;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -29,7 +31,7 @@ public class SingleUploadFragment extends SherlockFragment {
 
     private EditText titleEdit;
     private EditText descEdit;
-    private TextView licenseLabel;
+    private TextView licenseSummaryView;
 
     private OnUploadActionInitiated uploadActionInitiatedHandler;
 
@@ -58,7 +60,7 @@ public class SingleUploadFragment extends SherlockFragment {
 
         titleEdit = (EditText)rootView.findViewById(R.id.titleEdit);
         descEdit = (EditText)rootView.findViewById(R.id.descEdit);
-        licenseLabel = (TextView)rootView.findViewById(R.id.licenseLabel);
+        licenseSummaryView = (TextView)rootView.findViewById(R.id.share_license_summary);
 
         TextWatcher uploadEnabler = new TextWatcher() {
             public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) { }
@@ -74,13 +76,17 @@ public class SingleUploadFragment extends SherlockFragment {
 
         titleEdit.addTextChangedListener(uploadEnabler);
 
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        final String license = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA);
+        licenseSummaryView.setText(getString(R.string.share_license_summary, getString(Utils.licenseNameFor(license))));
+
         // Open license page on touch
-        licenseLabel.setOnTouchListener(new View.OnTouchListener() {
+        licenseSummaryView.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if (motionEvent.getActionMasked() == MotionEvent.ACTION_DOWN) {
                     Intent intent = new Intent();
                     intent.setAction(Intent.ACTION_VIEW);
-                    intent.setData(Uri.parse("https://creativecommons.org/licenses/by-sa/3.0/"));
+                    intent.setData(Uri.parse(Utils.licenseUrlFor(license)));
                     startActivity(intent);
                     return true;
                 } else {

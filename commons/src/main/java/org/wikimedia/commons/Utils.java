@@ -141,4 +141,37 @@ public class Utils {
         return string.substring(0,1).toUpperCase() + string.substring(1);
     }
 
+    public static String licenseTemplateFor(String license) {
+        if(license.equals(Prefs.Licenses.CC_BY)) {
+            return "{{self|cc-by}}";
+        } else if(license.equals(Prefs.Licenses.CC_BY_SA)) {
+            return "{{self|cc-by-sa}}";
+        } else if(license.equals(Prefs.Licenses.CC0)) {
+            return "{{self|cc0}}";
+        }
+        throw new RuntimeException("Unrecognized license value");
+    }
+
+    public static int licenseNameFor(String license) {
+        if(license.equals(Prefs.Licenses.CC_BY)) {
+            return R.string.license_name_cc_by;
+        } else if(license.equals(Prefs.Licenses.CC_BY_SA)) {
+            return R.string.license_name_cc_by_sa;
+        } else if(license.equals(Prefs.Licenses.CC0)) {
+            return R.string.license_name_cc0;
+        }
+        throw new RuntimeException("Unrecognized license value");
+    }
+
+    public static String licenseUrlFor(String license) {
+        if(license.equals(Prefs.Licenses.CC_BY)) {
+            return "https://creativecommons.org/licenses/by/3.0/";
+        } else if(license.equals(Prefs.Licenses.CC_BY_SA)) {
+            return "https://creativecommons.org/licenses/by-sa/3.0/";
+        } else if(license.equals(Prefs.Licenses.CC0)) {
+            return "https://creativecommons.org/publicdomain/zero/1.0/";
+        }
+        throw new RuntimeException("Unrecognized license value");
+    }
+
 }

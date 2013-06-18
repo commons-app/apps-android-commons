@@ -119,6 +119,14 @@ public class Media implements Parcelable {
         this.height = height;
     }
 
+    public String getLicense() {
+        return license;
+    }
+
+    public void setLicense(String license) {
+        this.license = license;
+    }
+
     protected Uri localUri;
     protected String imageUrl;
     protected String filename;
@@ -128,6 +136,7 @@ public class Media implements Parcelable {
     protected Date dateUploaded;
     protected int width;
     protected int height;
+    protected String license;
 
 
     protected String creator;
@@ -160,6 +169,7 @@ public class Media implements Parcelable {
         parcel.writeSerializable(tags);
         parcel.writeInt(width);
         parcel.writeInt(height);
+        parcel.writeString(license);
     }
 
     public Media(Parcel in) {
@@ -174,6 +184,7 @@ public class Media implements Parcelable {
         tags = (HashMap<String, Object>)in.readSerializable();
         width = in.readInt();
         height = in.readInt();
+        license = in.readString();
     }
 
     public void setDescription(String description) {

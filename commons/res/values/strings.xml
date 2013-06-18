@@ -88,7 +88,12 @@
     <string name="menu_retry">Retry</string>
     <string name="menu_abort">Abort</string>
 
-    <string name="share_license_summary">You agree to upload under the terms of the CC-BY-SA 3.0 license.</string>
+    <string name="share_license_summary">This image will be licensed under %1$s</string>
 
     <string name="menu_download">Download</string>
+    <string name="preference_license">License</string>
+
+    <string name="license_name_cc_by_sa">CC\u00A0Attribution-ShareAlike</string>
+    <string name="license_name_cc_by">CC\u00A0Attribution</string>
+    <string name="license_name_cc0">CC0</string>
 </resources>

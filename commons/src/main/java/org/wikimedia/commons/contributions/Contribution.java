@@ -133,7 +133,7 @@ public class Contribution extends Media {
         buffer
                 .append("}}").append("\n")
             .append("== {{int:license-header}} ==\n")
-                .append("{{self|cc-by-sa-3.0}}\n\n")
+                .append(Utils.licenseTemplateFor(license)).append("\n\n")
             .append("{{Uploaded from Mobile|platform=Android|version=").append(CommonsApplication.APPLICATION_VERSION).append("}}\n")
             .append("{{subst:unc}}");  // Remove when we have categorization
         return buffer.toString();
@@ -191,6 +191,7 @@ public class Contribution extends Media {
         cv.put(Table.COLUMN_MULTIPLE, isMultiple ? 1 : 0);
         cv.put(Table.COLUMN_WIDTH, width);
         cv.put(Table.COLUMN_HEIGHT, height);
+        cv.put(Table.COLUMN_LICENSE, license);
         return cv;
     }
 
@@ -224,6 +225,7 @@ public class Contribution extends Media {
         c.isMultiple = cursor.getInt(12) == 1;
         c.width = cursor.getInt(13);
         c.height = cursor.getInt(14);
+        c.license = cursor.getString(15);
 
         return c;
     }
@@ -259,6 +261,7 @@ public class Contribution extends Media {
         public static final String COLUMN_MULTIPLE = "multiple";
         public static final String COLUMN_WIDTH = "width";
         public static final String COLUMN_HEIGHT = "height";
+        public static final String COLUMN_LICENSE = "license";
 
         // NOTE! KEEP IN SAME ORDER AS THEY ARE DEFINED UP THERE. HELPS HARD CODE COLUMN INDICES.
         public static final String[] ALL_FIELDS = {
@@ -276,7 +279,8 @@ public class Contribution extends Media {
                 COLUMN_CREATOR,
                 COLUMN_MULTIPLE,
                 COLUMN_WIDTH,
-                COLUMN_HEIGHT
+                COLUMN_HEIGHT,
+                COLUMN_LICENSE
         };
 
 
@@ -295,7 +299,8 @@ public class Contribution extends Media {
                 + "creator STRING,"
                 + "multiple INTEGER,"
                 + "width INTEGER,"
-                + "height INTEGER"
+                + "height INTEGER,"
+                + "LICENSE STRING"
         + ");";
 
 
@@ -339,6 +344,8 @@ public class Contribution extends Media {
                 db.execSQL("UPDATE " + TABLE_NAME + " SET width = 0");
                 db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN height INTEGER;");
                 db.execSQL("UPDATE " + TABLE_NAME + " SET height = 0");
+                db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN license STRING;");
+                db.execSQL("UPDATE " + TABLE_NAME + " SET license='" + Prefs.Licenses.CC_BY_SA + "';");
                 from++;
                 onUpdate(db, from, to);
                 return;

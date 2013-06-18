@@ -3,7 +3,9 @@ package org.wikimedia.commons;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.ListPreference;
 import android.preference.Preference;
+import android.util.Log;
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
 
 public class SettingsActivity extends SherlockPreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
@@ -12,6 +14,18 @@ public class SettingsActivity extends SherlockPreferenceActivity implements Shar
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
+        ListPreference licensePreference = (ListPreference) findPreference(Prefs.DEFAULT_LICENSE);
+        // WARNING: ORDERING NEEDS TO MATCH FOR THE LICENSE NAMES AND DISPLAY VALUES
+        licensePreference.setEntries(new String[]{
+                getString(R.string.license_name_cc0),
+                getString(R.string.license_name_cc_by),
+                getString(R.string.license_name_cc_by_sa)
+        });
+        licensePreference.setEntryValues(new String[]{
+                Prefs.Licenses.CC0,
+                Prefs.Licenses.CC_BY,
+                Prefs.Licenses.CC_BY_SA
+        });
         app = (CommonsApplication)getApplicationContext();
     }
 

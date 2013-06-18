@@ -1,9 +1,12 @@
 package org.wikimedia.commons;
 
 import android.app.*;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.*;
 import android.os.*;
+import android.preference.PreferenceManager;
 import android.provider.*;
 import android.text.TextUtils;
 import android.webkit.MimeTypeMap;
@@ -42,6 +45,10 @@ public class StartUploadTask extends AsyncTask<Void, Void, Contribution> {
         contribution = new Contribution(mediaUri, null, title, description, -1, null, null, app.getCurrentAccount().name, CommonsApplication.DEFAULT_EDIT_SUMMARY);
         contribution.setTag("mimeType", mimeType);
         contribution.setSource(source);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        String license = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA);
+        contribution.setLicense(license);
     }
 
     public StartUploadTask(Activity context, UploadService uploadService, Contribution contribution) {
