@@ -88,18 +88,18 @@ public class MediaWikiImageView extends ImageView {
         if(tryOriginal) {
             mUrl = mMedia.getImageUrl();
         } else {
-            // Round it down to the nearest 320
+            // Round it to the nearest 320
             // Possible a similar size image has already been generated.
             // Reduces Server cache fragmentation, also increases chance of cache hit
-            // If width is less than 320, we just use that directly, to avoid a case of the Maths
-            int bucketedWidth = width <= 320 ? width: (width / 320) * 320;
+            // If width is less than 320, we round up to 320
+            int bucketedWidth = width <= 320 ? 320 : Math.round((float)width / 320.0f) * 320;
             if(mMedia.getWidth() != 0 && mMedia.getWidth() < bucketedWidth) {
                 // If we know that the width of the image is lesser than the required width
                 // We don't even try to load the thumbnai, go directly to the source
                 loadImageIfNecessary(isInLayoutPass, true);
                 return;
             } else {
-                mUrl = mMedia.getThumbnailUrl(width <= 320 ? width : (width / 320) * 320);
+                mUrl = mMedia.getThumbnailUrl(bucketedWidth);
             }
         }
 
