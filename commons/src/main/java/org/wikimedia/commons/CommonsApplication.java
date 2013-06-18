@@ -121,9 +121,16 @@ public class CommonsApplication extends Application {
     private LruCache<String, Bitmap> imageCache = new LruCache<String, Bitmap>((int) (Runtime.getRuntime().maxMemory() / (1024 * 8))) {
         @Override
         protected int sizeOf(String key, Bitmap bitmap) {
+            // bitmap.getByteCount() not available on older androids
+            int bitmapSize;
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB_MR1) {
+                bitmapSize = bitmap.getRowBytes() * bitmap.getHeight();
+            } else {
+                bitmapSize = bitmap.getByteCount();
+            }
             // The cache size will be measured in kilobytes rather than
             // number of items.
-            return bitmap.getByteCount() / 1024;
+            return bitmapSize / 1024;
         }
     };
 
