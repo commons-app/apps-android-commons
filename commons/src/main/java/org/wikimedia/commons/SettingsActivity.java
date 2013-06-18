@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
 
@@ -26,6 +27,15 @@ public class SettingsActivity extends SherlockPreferenceActivity implements Shar
                 Prefs.Licenses.CC_BY,
                 Prefs.Licenses.CC_BY_SA
         });
+
+        licensePreference.setSummary(getString(Utils.licenseNameFor(licensePreference.getValue())));
+        licensePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                preference.setSummary(getString(Utils.licenseNameFor((String)newValue)));
+                return true;
+            }
+        });
+
         app = (CommonsApplication)getApplicationContext();
     }
 
