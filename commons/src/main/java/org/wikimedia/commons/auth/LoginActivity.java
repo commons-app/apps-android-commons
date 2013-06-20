@@ -99,6 +99,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             dialog.setIndeterminate(true);
             dialog.setTitle(getString(R.string.logging_in_title));
             dialog.setMessage(getString(R.string.logging_in_message));
+            dialog.setCanceledOnTouchOutside(false);
             dialog.show();
         }
 
