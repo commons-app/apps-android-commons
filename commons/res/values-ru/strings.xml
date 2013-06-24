@@ -63,6 +63,6 @@
   <string name="no_uploads_yet">Вы еще не загрузили ни одной фотографии.</string>
   <string name="menu_retry">Повторить</string>
   <string name="menu_abort">Прервать</string>
-  <string name="share_license_summary">Вы соглашаетесь с тем, что загружаете на условиях лицензии CC-BY-SA 3.0.</string>
+  <string name="share_license_summary" fuzzy="true">Вы соглашаетесь с тем, что загружаете на условиях лицензии CC-BY-SA 3.0.</string>
   <string name="menu_download">Скачать</string>
 </resources>

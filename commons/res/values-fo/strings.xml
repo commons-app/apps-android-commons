@@ -63,6 +63,6 @@ Trýst hetta boðið (ella vend aftur) fyri at droppa hetta stigið.</string>
   <string name="no_uploads_yet">Tú hevur ikki lagt nakrar myndir út enn.</string>
   <string name="menu_retry">Royn aftur</string>
   <string name="menu_abort">Halt uppat</string>
-  <string name="share_license_summary">Tú játtar at leggja út undir treytunum hjá CC-BY-SA 3.0 lisensinum.</string>
+  <string name="share_license_summary" fuzzy="true">Tú játtar at leggja út undir treytunum hjá CC-BY-SA 3.0 lisensinum.</string>
   <string name="menu_download">Tak niður</string>
 </resources>

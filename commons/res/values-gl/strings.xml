@@ -63,6 +63,6 @@ Prema nesta mensaxe (ou no botón \"Atrás\") para saltar este paso.</string>
   <string name="no_uploads_yet">Aínda non cargou ningunha foto.</string>
   <string name="menu_retry">Reintentar</string>
   <string name="menu_abort">Anular</string>
-  <string name="share_license_summary">Acepta realizar as cargas baixo os termos da licenza CC-BY-SA 3.0.</string>
+  <string name="share_license_summary" fuzzy="true">Acepta realizar as cargas baixo os termos da licenza CC-BY-SA 3.0.</string>
   <string name="menu_download">Descargar</string>
 </resources>

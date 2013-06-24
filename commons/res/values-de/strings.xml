@@ -63,6 +63,6 @@ Tippe auf diese Nachricht oder drücke „Zurück“, um diesen Schritt zu über
   <string name="no_uploads_yet">Du hast noch keine Fotos hochgeladen.</string>
   <string name="menu_retry">Erneut versuchen</string>
   <string name="menu_abort">Abbrechen</string>
-  <string name="share_license_summary">Du stimmst dem Hochladen deiner Dateien unter den Bedingungen der CC-BY-SA-3.0-Lizenz zu.</string>
+  <string name="share_license_summary" fuzzy="true">Du stimmst dem Hochladen deiner Dateien unter den Bedingungen der CC-BY-SA-3.0-Lizenz zu.</string>
   <string name="menu_download">Herunterladen</string>
 </resources>

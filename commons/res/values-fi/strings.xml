@@ -63,6 +63,6 @@ Napauta tätä viestiä (tai paina takaisin) ohittaaksesi tämän vaiheen.</stri
   <string name="no_uploads_yet">Et ole vielä tallentanut kuvia.</string>
   <string name="menu_retry">Yritä uudelleen</string>
   <string name="menu_abort">Keskeytä</string>
-  <string name="share_license_summary">Hyväksyt tallentavasi tiedoston CC-BY-SA 3.0 -lisenssin ehtojen mukaisesti.</string>
+  <string name="share_license_summary" fuzzy="true">Hyväksyt tallentavasi tiedoston CC-BY-SA 3.0 -lisenssin ehtojen mukaisesti.</string>
   <string name="menu_download">Lataa</string>
 </resources>

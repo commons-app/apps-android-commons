@@ -63,6 +63,6 @@ Dotknij tej wiadomości (lub naciśnij \"cofnij\") aby pominąć ten krok</strin
   <string name="no_uploads_yet">Nie wgrałeś jeszcze żadnych zdjęć.</string>
   <string name="menu_retry">Ponów próbę</string>
   <string name="menu_abort">Przerwij</string>
-  <string name="share_license_summary">Zgadzasz się przesłać zgodnie z warunkami licencji CC-BY-SA 3.0.</string>
+  <string name="share_license_summary" fuzzy="true">Zgadzasz się przesłać zgodnie z warunkami licencji CC-BY-SA 3.0.</string>
   <string name="menu_download">Pobieranie</string>
 </resources>

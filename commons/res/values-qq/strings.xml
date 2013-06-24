@@ -54,7 +54,7 @@
   <string name="multiple_share_base_title">Hint for the textbox that lets user type the Base title for the set of multiple images being uploaded. Example: If the user types \'Visit to Kolkata\' in this text box, the images will all be titled as \'Visit to Kolkata - 1\', \'Visit to Kolkata - 2\', etc.</string>
   <string name="menu_upload_single">Hint text on menu item to upload a single image. {{Identical|Upload}}</string>
   <string name="categories_search_text_hint">This message is followed by a list of the categories.
-{{Identical|Select category}}</string>
+{{Identical|Search category}}</string>
   <string name="menu_save_categories">Hint text on menu item to save selected categories.
 {{Identical|Save}}</string>
   <string name="categories_not_found">Message shown to the user when no category matching what they searched for was found. %1$s represents the category name</string>
@@ -78,7 +78,7 @@
   <string name="share_license_summary">Text label telling user the license of the current upload in progress. %1$s refers to appropriate display text for the chosen CC license</string>
   <string name="menu_download">Menu item text prompting user to download a selected photo or media file locally.
 {{Identical|Download}}</string>
-    <string name="license_name_cc_by_sa">CC Attribution-Sharelike License display name. Use the non-breaking space character(\u00A0) between \'CC\' and \'Attribution-Sharealike\'</string>
-    <string name="license_name_cc_by">CC Attribution License display name. Use the non-breaking space character(\u00A0) between \'CC\' and \'Attribution\'</string>
-    <string name="license_name_cc0">CC0 License display name.</string>
+  <string name="license_name_cc_by_sa">CC Attribution-Sharelike License display name. Use the non-breaking space character(u00A0) between \'CC\' and \'Attribution-Sharealike\'</string>
+  <string name="license_name_cc_by">CC Attribution License display name. Use the non-breaking space character(u00A0) between \'CC\' and \'Attribution\'</string>
+  <string name="license_name_cc0">CC0 License display name.</string>
 </resources>

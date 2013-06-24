@@ -56,4 +56,7 @@ Pouezit war ar c\'hemenn-mañ (pe distroit en a-raok) evit mont dreist ar bazenn
   <string name="about_license" fuzzy="true">Meziant frank a wirioù embannet dindan</string>
   <string name="title_activity_about">Diwar-benn</string>
   <string name="menu_feedback">Kas ho soñj (dre bostel)</string>
+  <string name="menu_retry">Klask en-dro</string>
+  <string name="menu_abort">Dilezel</string>
+  <string name="menu_download">Pellgargañ</string>
 </resources>

@@ -60,6 +60,6 @@ Kattints erre az üzenetre a lépés kihagyásához</string>
   <string name="no_uploads_yet">Még nem töltöttél fel fotókat.</string>
   <string name="menu_retry">Újra</string>
   <string name="menu_abort">Megszakítás</string>
-  <string name="share_license_summary">Vállalod a feltöltést a CC-BY-SA-3.0 feltételeinek alapján.</string>
+  <string name="share_license_summary" fuzzy="true">Vállalod a feltöltést a CC-BY-SA-3.0 feltételeinek alapján.</string>
   <string name="menu_download">Letöltés</string>
 </resources>

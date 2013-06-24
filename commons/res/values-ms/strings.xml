@@ -63,6 +63,6 @@ Sentuh mesej ini (atau tekan butang undur) untuk melangkau langkah ini.</string>
   <string name="no_uploads_yet">Anda belum memuat naik sebarang gambar.</string>
   <string name="menu_retry">Cuba lagi</string>
   <string name="menu_abort">Batal</string>
-  <string name="share_license_summary">Anda bersetuju untuk memuat naik di bawah syarat-syarat lesen CC-BY-SA 3.0.</string>
+  <string name="share_license_summary" fuzzy="true">Anda bersetuju untuk memuat naik di bawah syarat-syarat lesen CC-BY-SA 3.0.</string>
   <string name="menu_download">Muat Turun</string>
 </resources>

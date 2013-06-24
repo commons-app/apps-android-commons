@@ -63,6 +63,6 @@ Chạm vào thông điệp này (hoặc bấm Quay lại) để bỏ qua bước
   <string name="no_uploads_yet">Bạn chưa tải lên hình nào.</string>
   <string name="menu_retry">Thử lại</string>
   <string name="menu_abort">Hủy bỏ</string>
-  <string name="share_license_summary">Bạn đồng ý tải lên theo các điều khoản của giấy pháp CC BY-SA 3.0.</string>
+  <string name="share_license_summary" fuzzy="true">Bạn đồng ý tải lên theo các điều khoản của giấy pháp CC BY-SA 3.0.</string>
   <string name="menu_download">Tải về</string>
 </resources>

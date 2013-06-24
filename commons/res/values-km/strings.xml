@@ -62,6 +62,6 @@
   <string name="no_uploads_yet">អ្នកមិនទាន់បានផ្ទុករូបថតណាមួយឡើងនៅឡើយទេ។</string>
   <string name="menu_retry">ព្យាយាមម្តងទៀត</string>
   <string name="menu_abort">បោះបង់</string>
-  <string name="share_license_summary">អ្នកយល់ព្រមក្នុងការផ្ទុកឡើងក្រោមលក្ខខណ្ឌនៃអាជ្ញាបណ្ណ CC-BY-SA 3.0 ។</string>
+  <string name="share_license_summary" fuzzy="true">អ្នកយល់ព្រមក្នុងការផ្ទុកឡើងក្រោមលក្ខខណ្ឌនៃអាជ្ញាបណ្ណ CC-BY-SA 3.0 ។</string>
   <string name="menu_download">ទាញយក</string>
 </resources>

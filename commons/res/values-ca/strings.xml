@@ -60,6 +60,6 @@
   <string name="no_uploads_yet">Encara no heu carregat cap foto.</string>
   <string name="menu_retry">Torna-ho a provar</string>
   <string name="menu_abort">Parar</string>
-  <string name="share_license_summary">Esteu d\'acord en carregar material sota els termes de la llicència CC-BY-SA 3.0.</string>
+  <string name="share_license_summary" fuzzy="true">Esteu d\'acord en carregar material sota els termes de la llicència CC-BY-SA 3.0.</string>
   <string name="menu_download">Baixa</string>
 </resources>

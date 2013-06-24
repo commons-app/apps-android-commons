@@ -63,6 +63,6 @@
   <string name="no_uploads_yet">Сè уште немате подигнато ниедна слика.</string>
   <string name="menu_retry">Пробај пак</string>
   <string name="menu_abort">Откажи</string>
-  <string name="share_license_summary">Се согласувате да подигате под лиценцата CC-BY-SA 3.0.</string>
+  <string name="share_license_summary" fuzzy="true">Се согласувате да подигате под лиценцата CC-BY-SA 3.0.</string>
   <string name="menu_download">Преземи</string>
 </resources>

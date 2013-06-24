@@ -63,6 +63,6 @@ Toca este mensaje (o pulsa Anterior) para omitir este paso.</string>
   <string name="no_uploads_yet">Aún no has subido ninguna foto.</string>
   <string name="menu_retry">Reintentar</string>
   <string name="menu_abort">Cancelar</string>
-  <string name="share_license_summary">Usted acepta cargar bajo los términos de la licencia CC-BY-SA 3.0.</string>
+  <string name="share_license_summary" fuzzy="true">Usted acepta cargar bajo los términos de la licencia CC-BY-SA 3.0.</string>
   <string name="menu_download">Descargar</string>
 </resources>

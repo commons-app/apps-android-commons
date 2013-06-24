@@ -6,6 +6,7 @@
   <string name="username">Kullanıcı adı</string>
   <string name="password">Parola</string>
   <string name="login">Oturum aç</string>
+  <string name="logging_in_title">Oturum açılıyor</string>
   <string name="logging_in_message">Lütfen bekleyin...</string>
   <string name="login_success">Oturum açma başarılı!</string>
   <string name="login_failed">Oturum açma başarısız oldu!</string>
@@ -19,6 +20,7 @@
   <string name="upload_failed_notification_title">%1$s dosyasının yüklemesi başarısız oldu</string>
   <string name="upload_failed_notification_subtitle">Görüntülemek için dokunun</string>
   <string name="title_activity_contributions">Yüklemelerim</string>
+  <string name="contribution_state_queued">Sırada</string>
   <string name="contribution_state_failed">Başarısız</string>
   <string name="contribution_state_in_progress">%1$d%% tamamlandı</string>
   <string name="contribution_state_starting">Yükleniyor</string>
@@ -42,12 +44,27 @@
   <string name="categories_search_text_hint">Kategorileri ara</string>
   <string name="menu_save_categories">Kaydet</string>
   <string name="categories_not_found">%1$s ile eşleşen bir kategori bulunamadı</string>
+  <string name="categories_skip_explanation">Resimlerinizi Wikimedia Commons\'ta daha bulunabilir duruma getirmek için kategoriler ekleyin.
+
+Kategori eklemek için yazmaya başlayın.
+Bu adımı atlamak için bu iletiye dokunun ya da geri tıklayın.</string>
   <string name="categories_activity_title">Kategoriler</string>
   <string name="preference_tracking">Kullanım raporları</string>
+  <string name="preference_tracking_summary">Uygulamayı geliştirmemize yardımcı olmak için kullanım raporlarını Wikimedia\'ya gönder</string>
   <string name="title_activity_settings">Ayarlar</string>
   <string name="menu_about">Hakkında</string>
-  <string name="about_license" fuzzy="true">Lisansı altında yayımlanan açık kaynak yazılım</string>
+  <string name="about_license">&lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;Apache Lisansı s2&lt;/a&gt; altında yayımlanan Açık Kaynak yazılımı</string>
+  <string name="about_improve">Kaynak: &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;
+
+Yazılım hataları: &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Gizlilik Politikası&lt;/a&gt;</string>
   <string name="title_activity_about">Hakkında</string>
   <string name="menu_feedback">Geri Bildirim Gönder (E-posta ile)</string>
   <string name="provider_categories">Son kullanılan kategoriler</string>
+  <string name="waiting_first_sync">İlk eşitleme için bekleniyor...</string>
+  <string name="no_uploads_yet">Yüklenmiş fotoğrafınız henüz hiç yok.</string>
+  <string name="menu_retry">Yeniden Dene</string>
+  <string name="menu_abort">Vazgeç</string>
+  <string name="share_license_summary" fuzzy="true">CC-BY-SA 3.0 lisans koşulları altında yüklemeyi kabul ediyorsunuz.</string>
+  <string name="menu_download">İndir</string>
 </resources>

@@ -55,6 +55,6 @@
   <string name="waiting_first_sync">প্রথম সমলয়নের জন্য অপেক্ষা করা হচ্ছে ...</string>
   <string name="no_uploads_yet">আপনি এখনও কোনো ছবি আপলোড করেননি।</string>
   <string name="menu_retry">পুনরায় চেষ্টা করুন</string>
-  <string name="share_license_summary">আপনি সিসি-বিওয়াই-এসএ ৩.০ লাইসেন্সের শর্তাবলীর অধীনে আপলোড করতে সম্মত।</string>
+  <string name="share_license_summary" fuzzy="true">আপনি সিসি-বিওয়াই-এসএ ৩.০ লাইসেন্সের শর্তাবলীর অধীনে আপলোড করতে সম্মত।</string>
   <string name="menu_download">ডাউনলোড</string>
 </resources>
