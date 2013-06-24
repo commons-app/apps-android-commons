@@ -256,6 +256,7 @@ public class ContributionsListFragment extends SherlockFragment {
                 feedbackIntent.putExtra(Intent.EXTRA_EMAIL, new String[] { CommonsApplication.FEEDBACK_EMAIL });
                 feedbackIntent.putExtra(Intent.EXTRA_SUBJECT, String.format(CommonsApplication.FEEDBACK_EMAIL_SUBJECT, CommonsApplication.APPLICATION_VERSION));
                 startActivity(feedbackIntent);
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);

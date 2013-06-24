@@ -78,7 +78,14 @@
   <string name="share_license_summary">Text label telling user the license of the current upload in progress. %1$s refers to appropriate display text for the chosen CC license</string>
   <string name="menu_download">Menu item text prompting user to download a selected photo or media file locally.
 {{Identical|Download}}</string>
-  <string name="license_name_cc_by_sa">CC Attribution-Sharelike License display name. Use the non-breaking space character(u00A0) between \'CC\' and \'Attribution-Sharealike\'</string>
-  <string name="license_name_cc_by">CC Attribution License display name. Use the non-breaking space character(u00A0) between \'CC\' and \'Attribution\'</string>
-  <string name="license_name_cc0">CC0 License display name.</string>
+    <string name="license_name_cc_by_sa">CC Attribution-Sharelike License display name. Use the non-breaking space character(\u00A0) between \'CC\' and \'Attribution-Sharealike\'</string>
+    <string name="license_name_cc_by">CC Attribution License display name. Use the non-breaking space character(\u00A0) between \'CC\' and \'Attribution\'</string>
+    <string name="license_name_cc0">CC0 License display name.</string>
+    <string name="welcome_wikipedia_text">Message inviting users to contribute their images.</string>
+    <string name="welcome_wikipedia_subtext">Message explaining that Wikipedia images Wikimedia Commons.</string>
+    <string name="welcome_copyright_text">Message explaining the educational benefit of contributing images.</string>
+    <string name="welcome_copyright_subtext">Message explaining what kind of images not to submit.</string>
+    <string name="welcome_final_text">Message asking user if they understand what kinds of images to upload.</string>
+    <string name="welcome_final_button_text">Button text for confirming the user understands what kinds of images to upload.
+{{Identical|Yes}}</string>
 </resources>

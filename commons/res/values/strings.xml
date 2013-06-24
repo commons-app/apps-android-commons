@@ -96,4 +96,10 @@
     <string name="license_name_cc_by_sa">CC\u00A0Attribution-ShareAlike</string>
     <string name="license_name_cc_by">CC\u00A0Attribution</string>
     <string name="license_name_cc0">CC0</string>
+    <string name="welcome_wikipedia_text">Contribute your images. Help Wikipedia articles come to life!</string>
+    <string name="welcome_wikipedia_subtext">Images on Wikipedia come from Wikimedia Commons.</string>
+    <string name="welcome_copyright_text">Your images help educate people around the world.</string>
+    <string name="welcome_copyright_subtext">Avoid copyrighted materials you found from the Internet as well as images of posters, book covers, etc.</string>
+    <string name="welcome_final_text">You think you got it?</string>
+    <string name="welcome_final_button_text">Yes!</string>
 </resources>
