@@ -210,5 +210,4 @@ public class CommonsApplication extends Application {
         return pm.hasSystemFeature(PackageManager.FEATURE_CAMERA) ||
                 pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT);
     }
-
 }

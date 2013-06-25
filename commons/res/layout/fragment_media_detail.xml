@@ -28,31 +28,14 @@
                android:scaleType="fitCenter"
             />
 
-    <RelativeLayout
+    <ListView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center|bottom"
-            android:background="#AA000000"
-            android:padding="8dp"
-            >
-
-        <EditText
-                android:id="@+id/mediaDetailTitle"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:imeOptions="flagNoExtractUi"
-                android:inputType="textNoSuggestions"
-                android:singleLine="true"
-                android:textColor="#FFFFFF"/>
-       <!-- <TextView
-                android:id="@+id/mediaDetailDescription"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/mediaDetailTitle"
-                android:layout_alignParentBottom="true"
-                style="?android:textAppearanceSmall"
-                android:textColor="#FFFFFFFF"
-                /> -->
-    </RelativeLayout>
+            android:id="@+id/mediaDetailListView"
+            android:divider="#00A0A0A0"
+            android:fillViewport="true"
+            android:background="@android:color/transparent"
+            android:cacheColorHint="@android:color/transparent"
+            />
 
 </FrameLayout>

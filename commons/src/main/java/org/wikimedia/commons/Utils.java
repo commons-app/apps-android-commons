@@ -1,5 +1,6 @@
 package org.wikimedia.commons;
 
+import android.net.Uri;
 import android.os.*;
 import com.nostra13.universalimageloader.core.*;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
@@ -174,4 +175,23 @@ public class Utils {
         throw new RuntimeException("Unrecognized license value");
     }
 
+    public static String implode(String glue, Iterable<String> pieces) {
+        StringBuffer buffer = new StringBuffer();
+        boolean first = true;
+        for (String piece : pieces) {
+            if (first) {
+                first = false;
+            } else {
+                buffer.append(glue);
+            }
+            buffer.append(pieces);
+        }
+        return buffer.toString();
+    }
+
+    public static Uri uriForWikiPage(String name) {
+        String underscored = name.trim().replace(" ", "_");
+        String uriStr = CommonsApplication.HOME_URL + urlEncode(underscored);
+        return Uri.parse(uriStr);
+    }
 }

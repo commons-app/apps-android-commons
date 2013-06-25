@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent">
+
+    <!-- Placeholder. Height gets set at runtime based on container size; the initial value is a hack to keep
+         the detail info offscreen until it's placed properly. May be a better way to do this. -->
+    <org.wikimedia.commons.media.MediaDetailSpacer
+            android:layout_width="fill_parent"
+            android:layout_height="1600dp"
+            android:id="@+id/mediaDetailSpacer"/>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#AA000000"
+            android:padding="8dp">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Title of the media"
+                android:id="@+id/mediaDetailTitle"
+                android:layout_gravity="left|start"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" /> <!-- 18sp == MediumText -->
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Description of the media goes here. This can potentially be fairly long, and will need to wrap across multiple lines. We hope it looks nice though."
+                android:id="@+id/mediaDetailDesc"
+                android:layout_gravity="left|start"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/detail_panel_cats_label"
+                android:textSize="18sp"
+                android:layout_gravity="left|start"
+                android:paddingTop="24dp" android:textColor="@android:color/white"/>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/mediaDetailCategoryList"
+                android:layout_gravity="left|start"/>
+    </LinearLayout>
+</LinearLayout>
