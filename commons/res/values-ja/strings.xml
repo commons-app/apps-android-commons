@@ -55,4 +55,8 @@
   <string name="menu_retry">再試行</string>
   <string name="menu_abort">中止</string>
   <string name="menu_download">ダウンロード</string>
+  <string name="preference_license">ライセンス</string>
+  <string name="license_name_cc_by_sa">CCu00A0Attribution-ShareAlike</string>
+  <string name="license_name_cc_by">CCu00A0Attribution</string>
+  <string name="license_name_cc0">CC0</string>
 </resources>

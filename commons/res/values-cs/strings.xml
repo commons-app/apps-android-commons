@@ -60,4 +60,7 @@
   <string name="no_uploads_yet">Zatím jste nenahrál žádné fotky.</string>
   <string name="menu_retry">Zkusit znovu</string>
   <string name="menu_abort">Zrušit</string>
+  <string name="share_license_summary">Tento obrázek bude zveřejněn pod licencí %1$s</string>
+  <string name="preference_license">Licence</string>
+  <string name="license_name_cc0">CC0</string>
 </resources>

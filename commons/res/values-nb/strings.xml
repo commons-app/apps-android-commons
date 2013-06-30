@@ -63,6 +63,10 @@ Trykk på denne meldingen (eller trykk tilbake) for å hoppe over dette steget.<
   <string name="no_uploads_yet">Du har ikke lastet opp nøn bilder ennå.</string>
   <string name="menu_retry">Prøv igjen</string>
   <string name="menu_abort">Avbryt</string>
-  <string name="share_license_summary" fuzzy="true">Du samtykker til å lisensiere opplastingen under vilkårene til CC-BY-SA 3.0-lisensen.</string>
+  <string name="share_license_summary">Dette bildet vil bli lisensiert under %1$s</string>
   <string name="menu_download">Last ned</string>
+  <string name="preference_license">Lisens</string>
+  <string name="license_name_cc_by_sa">CCu00A0Navngivelse-DelPåSammeVilkår</string>
+  <string name="license_name_cc_by">CCu00A0Navngivelse</string>
+  <string name="license_name_cc0">CC0</string>
 </resources>

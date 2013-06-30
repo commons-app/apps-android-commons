@@ -63,6 +63,10 @@ Knacka på detta meddelande (eller gå tillbaka) för att hoppa över detta steg
   <string name="no_uploads_yet">Du har inte lagt upp några bilder ännu.</string>
   <string name="menu_retry">Försök igen</string>
   <string name="menu_abort">Avbryt</string>
-  <string name="share_license_summary" fuzzy="true">Du samtycker till att ladda upp enligt villkoren i licensen CC-BY-SA 3.0.</string>
+  <string name="share_license_summary">Denna bild kommer att licensieras under %1$s</string>
   <string name="menu_download">Ladda ned</string>
+  <string name="preference_license">Licens</string>
+  <string name="license_name_cc_by_sa">CCu00A0Erkännande-DelaLika</string>
+  <string name="license_name_cc_by">CCu00A0Erkännande</string>
+  <string name="license_name_cc0">CC0</string>
 </resources>
