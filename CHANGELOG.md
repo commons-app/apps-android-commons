@@ -1,5 +1,17 @@
 # Wikimedia Commons for Android
 
+## v1.0 beta 9
+- Sharper, higher resolution image thumbnails used
+- Better caching mechanism in place for image thumbnails
+- Allow users to pick between various CC licenses
+- Display tutorial on first use explaining Commons
+- Experimental checks to avoid filename duplication
+- Experimental support for RTL flipping with Android 4.2
+- Add option to download full resolution image to phone
+- Fix 'flickering' on Android 2.3
+- Various minor bug fixes
+- i18n updates
+
 ## v1.0 beta 8
 - Disable menu items for share and open browser when upload incomplete
 - Show recently-used categories

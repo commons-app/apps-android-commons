@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.wikimedia.commons"
-    android:versionCode="9"
-    android:versionName="1.0alpha1" >
+    android:versionCode="10"
+    android:versionName="1.0beta9" >
 
     <uses-sdk
         android:minSdkVersion="9"
