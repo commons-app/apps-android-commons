@@ -63,6 +63,10 @@ Atingeți acest mesaj (sau mergeți înapoi) pentru a omite acest pas.</string>
   <string name="no_uploads_yet">Încă nu ați încărcat nicio fotografie.</string>
   <string name="menu_retry">Reîncercare</string>
   <string name="menu_abort">Abandonare</string>
-  <string name="share_license_summary" fuzzy="true">Sunteți de acord să încărcați sub termenii licenței CC-BY-SA 3.0.</string>
+  <string name="share_license_summary">Această imagine va fi licențiată sub %1$s</string>
   <string name="menu_download">Descarcă</string>
+  <string name="preference_license">Licență</string>
+  <string name="license_name_cc_by_sa">CCu00A0Atribuire și distribuire în condiții identice</string>
+  <string name="license_name_cc_by">CCu00A0Atribuire</string>
+  <string name="license_name_cc0">CC0</string>
 </resources>

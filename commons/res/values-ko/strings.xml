@@ -53,9 +53,15 @@
   <string name="preference_tracking_summary">애플리케이션을 향상시킬 수 있도록 돕기 위해 위키미디어에 사용 보고서를 보냅니다</string>
   <string name="title_activity_settings">설정</string>
   <string name="menu_about">소개</string>
-  <string name="about_license" fuzzy="true">오픈 소스 소프트웨어는 다음에 따라 공개됩니다:</string>
-  <string name="about_improve" fuzzy="true">소스: . 버그 보고: .</string>
+  <string name="about_license">오픈 소스 소프트웨어는 &lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;아파치 라이선스 v2&lt;/a&gt;에 따라 공개됩니다</string>
+  <string name="about_improve">소스 코드는 &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;에 있으며, 버그 신고는&lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;버그질라&lt;/a&gt;를 이용해주십시오.</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy/ko\"&gt;개인정보 정책&lt;/a&gt;</string>
   <string name="title_activity_about">소개</string>
   <string name="menu_feedback">(이메일로) 피드백 보내기</string>
   <string name="provider_categories">최근에 사용한 분류</string>
+  <string name="menu_download">다운로드</string>
+  <string name="preference_license">라이선스</string>
+  <string name="license_name_cc_by_sa">CCu00A0저작자표시-동일조건변경허락</string>
+  <string name="license_name_cc_by">CCu00A0저작자표시</string>
+  <string name="license_name_cc0">CC0</string>
 </resources>
