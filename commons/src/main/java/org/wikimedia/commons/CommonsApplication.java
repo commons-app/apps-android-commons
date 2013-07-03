@@ -35,7 +35,7 @@ import com.android.volley.toolbox.*;
 
 // TODO: Use ProGuard to rip out reporting when publishing
 @ReportsCrashes(formKey = "",
-        mailTo = "mobile-feedback-l@wikimedia.org",
+        mailTo = "mobile-feedback-l@lists.wikimedia.org",
         mode = ReportingInteractionMode.DIALOG,
         resDialogText = R.string.crash_dialog_text,
         resDialogTitle = R.string.crash_dialog_title,
