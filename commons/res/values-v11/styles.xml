@@ -1,6 +1,0 @@
-<resources>
-
-    <style name="AppTheme" parent="android:Theme.Holo" />
-    <style name="LightNoTitle" parent="android:Theme.Holo.Light.NoActionBar"></style>
-
-</resources>
