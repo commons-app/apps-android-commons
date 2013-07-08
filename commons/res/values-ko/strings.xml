@@ -54,14 +54,25 @@
   <string name="title_activity_settings">설정</string>
   <string name="menu_about">소개</string>
   <string name="about_license">오픈 소스 소프트웨어는 &lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;아파치 라이선스 v2&lt;/a&gt;에 따라 공개됩니다</string>
-  <string name="about_improve">소스 코드는 &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;에 있으며, 버그 신고는&lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;버그질라&lt;/a&gt;를 이용해주십시오.</string>
+  <string name="about_improve">소스 코드는 &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;에 있으며, 버그는&lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;버그질라&lt;/a&gt;에 보고하세요.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy/ko\"&gt;개인정보 정책&lt;/a&gt;</string>
   <string name="title_activity_about">소개</string>
   <string name="menu_feedback">(이메일로) 피드백 보내기</string>
   <string name="provider_categories">최근에 사용한 분류</string>
+  <string name="waiting_first_sync">첫 동기화를 기다리는 중...</string>
+  <string name="no_uploads_yet">아직 사진을 올리지 않았습니다.</string>
+  <string name="menu_retry">다시 시도</string>
+  <string name="menu_abort">중지</string>
+  <string name="share_license_summary">이 그림은 %1$s에 따라 사용이 허가됩니다</string>
   <string name="menu_download">다운로드</string>
   <string name="preference_license">라이선스</string>
   <string name="license_name_cc_by_sa">CCu00A0저작자표시-동일조건변경허락</string>
   <string name="license_name_cc_by">CCu00A0저작자표시</string>
   <string name="license_name_cc0">CC0</string>
+  <string name="welcome_wikipedia_text">당신의 그림을 기여하세요. 위키백과 문서의 생명이 오는 데 도와주세요!</string>
+  <string name="welcome_wikipedia_subtext">위키백과의 그림은 위키미디어 공용에서 옵니다.</string>
+  <string name="welcome_copyright_text">당신의 그림은 전세계 사람을 교육하는 데 도움이 됩니다.</string>
+  <string name="welcome_copyright_subtext">포스터, 책 표지 등의 그림 뿐만 아니라 인터넷에서 찾은 저작권이 있는 자료를 피하세요.</string>
+  <string name="welcome_final_text">이해하셨습니까?</string>
+  <string name="welcome_final_button_text">예!</string>
 </resources>

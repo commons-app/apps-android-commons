@@ -69,4 +69,10 @@ Atingeți acest mesaj (sau mergeți înapoi) pentru a omite acest pas.</string>
   <string name="license_name_cc_by_sa">CCu00A0Atribuire și distribuire în condiții identice</string>
   <string name="license_name_cc_by">CCu00A0Atribuire</string>
   <string name="license_name_cc0">CC0</string>
+  <string name="welcome_wikipedia_text">Contribuiți cu imagini personale. Faceți ca articolele Wikipediei să prindă viață!</string>
+  <string name="welcome_wikipedia_subtext">Imaginile de pe Wikipedia provin de la Wikimedia Commons.</string>
+  <string name="welcome_copyright_text">Imaginile dumneavoastră ajută la educarea oamenilor din întreaga lume.</string>
+  <string name="welcome_copyright_subtext">Evitați materialele cu drepturi de autor găsite pe Internet, precum și imagini ale posterelor, coperților de cărți etc.</string>
+  <string name="welcome_final_text">Credeți că ați înțeles?</string>
+  <string name="welcome_final_button_text">Da!</string>
 </resources>

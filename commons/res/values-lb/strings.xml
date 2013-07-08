@@ -67,4 +67,10 @@ Klickt op dëse Message (oder dréck op Zréck) fir dëse Schrëtt z\'iwwerspran
   <string name="license_name_cc_by_sa">CCu00A0Attribution-ShareAlike</string>
   <string name="license_name_cc_by">CCu00A0Attribution</string>
   <string name="license_name_cc0">CC0</string>
+  <string name="welcome_wikipedia_text">Maacht mat mat Äre Biller. Hëlleft Wikipedia-Artikele méi lieweg ze maachen!</string>
+  <string name="welcome_wikipedia_subtext">Biller op Wikipedia komme vu Wikimedia Commons.</string>
+  <string name="welcome_copyright_text">Är Biller hëllefe Leit op der ganzer Welt ze forméieren.</string>
+  <string name="welcome_copyright_subtext">Evitéiert Materialien déi ënnert de Copyright falen an déi Dir um Internet fonnt hutt, genee esou wéi Biller vu Pousteren, Bicher, asw.</string>
+  <string name="welcome_final_text">Dir mengt Dir huet et verstan?</string>
+  <string name="welcome_final_button_text">Jo!</string>
 </resources>

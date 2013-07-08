@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="crash_dialog_text">ਅਫਸੋਸ। ਕੁਝ ਗਲਤ ਹੋ ਗਿਆ!</string>
-  <string name="crash_dialog_ok_toast">ਤੁਹਾਡਾ ਧੰਨਵਾਦ!</string>
+  <string name="crash_dialog_title">ਕਾਮਨਜ਼ ਖ਼ਰਾਬ ਹੋ ਗਿਆ ਹੈ</string>
+  <string name="crash_dialog_text">ਓ ਹੋ। ਕੁਝ ਗ਼ਲਤ ਹੋ ਗਿਆ!</string>
+  <string name="crash_dialog_comment_prompt">ਸਾਨੂੰ ਦੱਸੋ ਤੁਸੀਂ ਕੀ ਕਰ ਰਹੇ ਸੀ, ਫੇਰ ਈਮੇਲ ਰਾਹੀਂ ਸਾਡੇ ਨਾਲ਼ ਸਾਂਝਾ ਕਰੋ। ਸਾਨੂੰ ਠੀਕ ਕਰਨ ਵਿਚ ਮਦਦਗਾਰ ਹੋਵੇਗਾ!</string>
+  <string name="crash_dialog_ok_toast">ਮਿਹਰਬਾਨੀ!</string>
 </resources>

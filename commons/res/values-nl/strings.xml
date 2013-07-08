@@ -70,4 +70,10 @@ Klik op dit bericht, of ga terug, om deze stap over te slaan.</string>
   <string name="license_name_cc_by_sa">CCu00A0Naamsvermelding-Gelijku00A0Delen</string>
   <string name="license_name_cc_by">CCu00A0Naamsvermelding</string>
   <string name="license_name_cc0">CC0</string>
+  <string name="welcome_wikipedia_text">Draag uw afbeelding bij. Help pagina\'s in Wikipedia tot leven te laten komen!</string>
+  <string name="welcome_wikipedia_subtext">Afbeeldingen op Wikipedia komen van Wikimedia Commons.</string>
+  <string name="welcome_copyright_text">Uw afbeeldingen helpen mensen van over de hele wereld te leren.</string>
+  <string name="welcome_copyright_subtext">Vermijd auteursrechtelijk beschermd materiaal dat u op internet hebt gevonden zoals  afbeeldingen van posters, boeken, enzovoort.</string>
+  <string name="welcome_final_text">Begrijpt u het?</string>
+  <string name="welcome_final_button_text">Ja!</string>
 </resources>

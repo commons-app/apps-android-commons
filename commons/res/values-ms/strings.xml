@@ -69,4 +69,11 @@ Sentuh mesej ini (atau tekan butang undur) untuk melangkau langkah ini.</string>
   <string name="license_name_cc_by_sa">CCu00A0Attribution-ShareAlike</string>
   <string name="license_name_cc_by">CCu00A0Attribution</string>
   <string name="license_name_cc0">CC0</string>
+  <string name="welcome_wikipedia_text">Sumbangkan gambar-gambar anda.
+Hidupkan rencana-rencana di Wikipedia!</string>
+  <string name="welcome_wikipedia_subtext">Gambar-gambar di Wikipedia datang dari Wikimedia Commons.</string>
+  <string name="welcome_copyright_text">Gambar-gambar anda akan membantu mendidik masyarakat seluruh dunia.</string>
+  <string name="welcome_copyright_subtext">Elakkan bahan-bahan terhak cipta yang anda jumpai di Internet dan juga gambar-gambar poster, kulit buku, dsb.</string>
+  <string name="welcome_final_text">Adakah anda faham?</string>
+  <string name="welcome_final_button_text">Faham!</string>
 </resources>

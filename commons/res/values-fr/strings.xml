@@ -69,4 +69,10 @@ Appuyez sur ce message (ou retournez en arrière) pour sauter cette étape.</str
   <string name="license_name_cc_by_sa">CCu00A0Attribution-ShareAlike</string>
   <string name="license_name_cc_by">CCu00A0Attribution</string>
   <string name="license_name_cc0">CC0</string>
+  <string name="welcome_wikipedia_text">Contribuez avec vos images. Aidez les articles de Wikipédia à prendre vie !</string>
+  <string name="welcome_wikipedia_subtext">Les images sur Wikipédia viennent de Communs de Wikimédia.</string>
+  <string name="welcome_copyright_text">Vos images aident à éduquer les gens dans le monde entier.</string>
+  <string name="welcome_copyright_subtext">Évitez les matériaux protégés que vous trouvez sur l’Internet ainsi que les images d’affiches, couvertures de livre, etc.</string>
+  <string name="welcome_final_text">Vous pensez que c’est bon ?</string>
+  <string name="welcome_final_button_text">Oui !</string>
 </resources>
