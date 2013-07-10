@@ -181,7 +181,10 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
 
             // On HC/ICS/JB we can leave the download notification up when complete.
             // This allows folks to open the file directly in gallery viewer.
-            req.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+            // But for some reason it fails on Honeycomb (Google TV). Sigh.
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+                req.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+            }
         }
 
         final DownloadManager manager = (DownloadManager)getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
