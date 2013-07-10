@@ -16,6 +16,7 @@
 package org.wikimedia.commons;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.drawable.BitmapDrawable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -41,12 +42,16 @@ public class MediaWikiImageView extends ImageView {
 
     private View loadingView;
 
+    private boolean isThumbnail;
+
     public MediaWikiImageView(Context context) {
         this(context, null);
     }
 
     public MediaWikiImageView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
+        TypedArray actualAttrs = context.getTheme().obtainStyledAttributes(attrs, R.styleable.MediaWikiImageView, 0, 0);
+        isThumbnail = actualAttrs.getBoolean(0, false);
     }
 
     public MediaWikiImageView(Context context, AttributeSet attrs, int defStyle) {
@@ -82,6 +87,15 @@ public class MediaWikiImageView extends ImageView {
 
         if(mMedia == null) {
             return;
+        }
+
+
+        // Do not count for density when loading thumbnails.
+        // FIXME: Use another 'algorithm' that doesn't punish low res devices
+        if(isThumbnail) {
+            float dpFactor =  Math.max(getResources().getDisplayMetrics().density, 1.0f);
+            width = (int) (width / dpFactor);
+            height = (int) (height / dpFactor);
         }
 
         final String  mUrl;
