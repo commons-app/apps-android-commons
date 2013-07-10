@@ -52,6 +52,7 @@ public class MediaWikiImageView extends ImageView {
         this(context, attrs, 0);
         TypedArray actualAttrs = context.getTheme().obtainStyledAttributes(attrs, R.styleable.MediaWikiImageView, 0, 0);
         isThumbnail = actualAttrs.getBoolean(0, false);
+        actualAttrs.recycle();
     }
 
     public MediaWikiImageView(Context context, AttributeSet attrs, int defStyle) {
