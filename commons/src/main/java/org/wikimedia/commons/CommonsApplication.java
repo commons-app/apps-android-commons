@@ -112,7 +112,9 @@ public class CommonsApplication extends Application {
         // Initialize EventLogging
         EventLog.setApp(this);
 
-        volleyQueue = Volley.newRequestQueue(this);
+        DiskBasedCache cache = new DiskBasedCache(getCacheDir(), 16 * 1024 * 1024);
+        volleyQueue = new RequestQueue(cache, new BasicNetwork(new HurlStack()));
+        volleyQueue.start();
     }
 
     private com.android.volley.toolbox.ImageLoader imageLoader;
