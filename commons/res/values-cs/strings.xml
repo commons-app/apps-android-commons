@@ -61,6 +61,10 @@
   <string name="menu_retry">Zkusit znovu</string>
   <string name="menu_abort">Zrušit</string>
   <string name="share_license_summary">Tento obrázek bude zveřejněn pod licencí %1$s</string>
+  <string name="menu_download">Stáhnout</string>
   <string name="preference_license">Licence</string>
+  <string name="license_name_cc_by_sa">CCu00A0Uveďte autora-Zachovejte licenci</string>
+  <string name="license_name_cc_by">CCu00A0Uveďte autora</string>
   <string name="license_name_cc0">CC0</string>
+  <string name="welcome_final_button_text">Ano!</string>
 </resources>

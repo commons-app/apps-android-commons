@@ -69,4 +69,10 @@ Chạm vào thông điệp này (hoặc bấm Quay lại) để bỏ qua bước
   <string name="license_name_cc_by_sa">Creativeu00A0Commons Ghiu00A0công–Chiau00A0sẻ tươngu00A0tự</string>
   <string name="license_name_cc_by">Creativeu00A0Commons Ghiu00A0công</string>
   <string name="license_name_cc0">CC0</string>
+  <string name="welcome_wikipedia_text">Đóng góp hình ảnh của bạn. Làm sinh động các bài viết Wikipedia!</string>
+  <string name="welcome_wikipedia_subtext">Các hình ảnh trên Wikipedia được cung cấp bởi Wikimedia Commons.</string>
+  <string name="welcome_copyright_text">Các hình ảnh của bạn giúp giáo dục người dân trên khắp thế giới.</string>
+  <string name="welcome_copyright_subtext">Tránh dùng các hình ảnh có bản quyền bạn tìm được trên Internet, cũng như các hình chụp áp phích, bìa sách, v.v.</string>
+  <string name="welcome_final_text">Bạn hiểu rồi chứ?</string>
+  <string name="welcome_final_button_text">Có!</string>
 </resources>

@@ -71,4 +71,10 @@ Yazılım hataları: &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?p
   <string name="license_name_cc_by_sa">CCu00A0Attribution-ShareAlike</string>
   <string name="license_name_cc_by">CCu00A0Attribution</string>
   <string name="license_name_cc0">CC0</string>
+  <string name="welcome_wikipedia_text">Resimleriniz ile Vikipedi maddelerinin canlandırılmasına katkıda bulunabilirsiniz!</string>
+  <string name="welcome_wikipedia_subtext">Vikipedi\'ye Wikimedia Commons\'tan gelen görüntüler.</string>
+  <string name="welcome_copyright_text">Görüntüler dünya insanlarının eğitiminde yardımcı olur.</string>
+  <string name="welcome_copyright_subtext">Telif hakkı olan ve internette bulunan film afişi, kitap kapağı gibi malzemelerin kullanımından kaçının.</string>
+  <string name="welcome_final_text">Bunu anladınız mı?</string>
+  <string name="welcome_final_button_text">Evet!</string>
 </resources>
