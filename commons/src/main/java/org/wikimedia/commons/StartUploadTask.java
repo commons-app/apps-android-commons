@@ -56,6 +56,13 @@ public class StartUploadTask extends AsyncTask<Void, Void, Contribution> {
         this.uploadService = uploadService;
         this.contribution = contribution;
 
+        // Set things that have not been set!
+        if(contribution.getLicense() == null) {
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+            String license = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA);
+            contribution.setLicense(license);
+        }
+
         app = (CommonsApplication)context.getApplicationContext();
     }
 
