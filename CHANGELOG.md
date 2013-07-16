@@ -1,5 +1,12 @@
 # Wikimedia Commons for Android
 
+## v1.0 beta 10
+- Successfully reached double digit beta number
+- Honeycomb fixes
+- Fix crash when uploading multiple files
+- Make thumbnail loading faster
+- i18n updates
+
 ## v1.0 beta 9
 - Sharper, higher resolution image thumbnails used
 - Better caching mechanism in place for image thumbnails
