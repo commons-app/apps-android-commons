@@ -126,6 +126,8 @@ public class CategorizationFragment extends SherlockFragment{
                     categoriesNotFoundView.setText(getString(R.string.categories_not_found, filter));
                     categoriesNotFoundView.setVisibility(View.VISIBLE);
                 }
+            } else {
+                categoriesList.smoothScrollToPosition(existingKeys.size());
             }
         }
 
