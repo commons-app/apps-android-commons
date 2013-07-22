@@ -69,4 +69,10 @@ Trykk på denne meldingen (eller trykk tilbake) for å hoppe over dette steget.<
   <string name="license_name_cc_by_sa">CCu00A0Navngivelse-DelPåSammeVilkår</string>
   <string name="license_name_cc_by">CCu00A0Navngivelse</string>
   <string name="license_name_cc0">CC0</string>
+  <string name="welcome_wikipedia_text">Bidra med dine bilder. Hjelp til med å blåse liv i Wikipedias artikler!</string>
+  <string name="welcome_wikipedia_subtext">Bilder på Wikipedia kommer fra Wikimedia Commons.</string>
+  <string name="welcome_copyright_text">Bildene dine kan være til hjelp for mennesker over hele verden som søker kunnskap og dannelse.</string>
+  <string name="welcome_copyright_subtext">Unngå opphavsrettsbeskyttet materiale som du har funnet på internett samt bilder av plakater, bokomslag, osv.</string>
+  <string name="welcome_final_text">Forstått?</string>
+  <string name="welcome_final_button_text">Ja!</string>
 </resources>

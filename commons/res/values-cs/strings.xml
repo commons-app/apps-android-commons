@@ -66,5 +66,10 @@
   <string name="license_name_cc_by_sa">CCu00A0Uveďte autora-Zachovejte licenci</string>
   <string name="license_name_cc_by">CCu00A0Uveďte autora</string>
   <string name="license_name_cc0">CC0</string>
+  <string name="welcome_wikipedia_subtext">Obrázky na Wikipedii pochází 
+z Wikimedia Commons.</string>
+  <string name="welcome_copyright_text">Vaše obrázky pomáhají vzdělávat lidi po celém světě.</string>
+  <string name="welcome_copyright_subtext">Vyhněte se používání materiálů nalezených na internetu, které podléhají autorskoprávní ochraně.</string>
+  <string name="welcome_final_text">Myslíte, že rozumíte?</string>
   <string name="welcome_final_button_text">Ano!</string>
 </resources>
