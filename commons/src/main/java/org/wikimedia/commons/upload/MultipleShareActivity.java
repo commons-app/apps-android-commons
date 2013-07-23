@@ -1,4 +1,4 @@
-package org.wikimedia.commons;
+package org.wikimedia.commons.upload;
 
 import java.util.*;
 import java.util.concurrent.*;
@@ -12,10 +12,11 @@ import android.text.*;
 import android.view.*;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
-import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 
+import org.wikimedia.commons.*;
 import org.wikimedia.commons.auth.*;
+import org.wikimedia.commons.category.CategorizationFragment;
 import org.wikimedia.commons.contributions.*;
 import org.wikimedia.commons.media.*;
 import org.wikimedia.commons.modifications.CategoryModifier;
@@ -29,7 +30,7 @@ public  class       MultipleShareActivity
                     AdapterView.OnItemClickListener,
                     FragmentManager.OnBackStackChangedListener,
                     MultipleUploadListFragment.OnMultipleUploadInitiatedHandler,
-                    CategorizationFragment.OnCategoriesSaveHandler {
+        CategorizationFragment.OnCategoriesSaveHandler {
     private CommonsApplication app;
     private ArrayList<Contribution> photosList = null;
 

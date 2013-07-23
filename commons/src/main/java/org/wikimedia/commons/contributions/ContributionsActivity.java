@@ -17,6 +17,7 @@ import com.actionbarsherlock.view.MenuItem;
 import org.wikimedia.commons.*;
 import org.wikimedia.commons.auth.*;
 import org.wikimedia.commons.media.*;
+import org.wikimedia.commons.upload.UploadService;
 
 public  class       ContributionsActivity
         extends     AuthenticatedActivity

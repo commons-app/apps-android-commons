@@ -32,6 +32,8 @@ import java.util.*;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import org.wikimedia.commons.*;
 import org.wikimedia.commons.R;
+import org.wikimedia.commons.upload.ShareActivity;
+import org.wikimedia.commons.upload.UploadService;
 
 public class ContributionsListFragment extends SherlockFragment {
 

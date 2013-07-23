@@ -1,4 +1,4 @@
-package org.wikimedia.commons;
+package org.wikimedia.commons.upload;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import android.graphics.*;
 import android.os.Bundle;
+import android.util.EventLog;
 import org.mediawiki.api.*;
 import in.yuvi.http.fluent.ProgressListener;
 
@@ -17,6 +18,7 @@ import android.support.v4.app.NotificationCompat;
 import android.util.*;
 import android.widget.*;
 
+import org.wikimedia.commons.*;
 import org.wikimedia.commons.contributions.*;
 import org.wikimedia.commons.modifications.ModificationsContentProvider;
 
@@ -220,7 +222,7 @@ public class UploadService extends HandlerService<Contribution> {
             if(!resultStatus.equals("Success")) {
                 String errorCode = result.getString("/api/error/@code");
                 showFailedNotification(contribution);
-                EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT)
+                org.wikimedia.commons.EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT)
                         .param("username", app.getCurrentAccount().name)
                         .param("source", contribution.getSource())
                         .param("multiple", contribution.getMultiple())
@@ -238,7 +240,7 @@ public class UploadService extends HandlerService<Contribution> {
                 contribution.setDateUploaded(dateUploaded);
                 contribution.save();
 
-                EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT)
+                org.wikimedia.commons.EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT)
                         .param("username", app.getCurrentAccount().name)
                         .param("source", contribution.getSource()) //FIXME
                         .param("filename", contribution.getFilename())

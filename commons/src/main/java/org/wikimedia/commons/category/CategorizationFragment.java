@@ -1,4 +1,4 @@
-package org.wikimedia.commons;
+package org.wikimedia.commons.category;
 
 import android.app.Activity;
 import android.content.ContentProviderClient;
@@ -17,6 +17,9 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import org.mediawiki.api.ApiResult;
 import org.mediawiki.api.MWApi;
+import org.wikimedia.commons.CommonsApplication;
+import org.wikimedia.commons.R;
+import org.wikimedia.commons.Utils;
 import org.wikimedia.commons.category.Category;
 import org.wikimedia.commons.category.CategoryContentProvider;
 import org.wikimedia.commons.contributions.Contribution;

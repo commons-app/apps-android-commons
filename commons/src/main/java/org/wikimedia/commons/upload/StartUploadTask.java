@@ -1,7 +1,6 @@
-package org.wikimedia.commons;
+package org.wikimedia.commons.upload;
 
 import android.app.*;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.*;
@@ -14,6 +13,9 @@ import android.webkit.MimeTypeMap;
 import java.io.*;
 import java.util.*;
 
+import org.wikimedia.commons.CommonsApplication;
+import org.wikimedia.commons.Prefs;
+import org.wikimedia.commons.Utils;
 import org.wikimedia.commons.contributions.*;
 
 public class StartUploadTask extends AsyncTask<Void, Void, Contribution> {

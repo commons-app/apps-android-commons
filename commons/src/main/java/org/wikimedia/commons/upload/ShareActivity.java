@@ -1,18 +1,16 @@
-package org.wikimedia.commons;
+package org.wikimedia.commons.upload;
 
 import android.app.*;
 import android.content.*;
 import android.os.*;
-import android.text.*;
-import android.util.Log;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import android.net.*;
 import android.support.v4.app.NavUtils;
-import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import android.widget.*;
-import android.view.*;
 
+import org.wikimedia.commons.*;
+import org.wikimedia.commons.category.CategorizationFragment;
 import org.wikimedia.commons.contributions.*;
 import org.wikimedia.commons.auth.*;
 import org.wikimedia.commons.modifications.CategoryModifier;
@@ -26,7 +24,7 @@ import java.util.ArrayList;
 public  class       ShareActivity
         extends     AuthenticatedActivity
         implements  SingleUploadFragment.OnUploadActionInitiated,
-                    CategorizationFragment.OnCategoriesSaveHandler {
+        CategorizationFragment.OnCategoriesSaveHandler {
 
     private SingleUploadFragment shareView;
     private CategorizationFragment categorizationFragment;

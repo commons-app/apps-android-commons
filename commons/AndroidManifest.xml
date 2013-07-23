@@ -39,7 +39,7 @@
             android:theme="@style/NoTitle" >
         </activity>
         <activity
-            android:name=".ShareActivity"
+            android:name=".upload.ShareActivity"
             android:icon="@drawable/ic_launcher"
             android:label="@string/app_name"
             >
@@ -53,7 +53,7 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".MultipleShareActivity"
+                android:name=".upload.MultipleShareActivity"
                 android:icon="@drawable/ic_launcher"
                 android:label="@string/app_name"
                 >
@@ -82,7 +82,7 @@
             android:label="@string/title_activity_settings"
             />
         <activity android:name=".AboutActivity" android:label="@string/title_activity_about"/>
-        <service android:name="UploadService" >
+        <service android:name=".upload.UploadService" >
         </service>
         <service
             android:name=".auth.WikiAccountAuthenticatorService"
