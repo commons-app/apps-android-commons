@@ -38,9 +38,9 @@
           <artifactId>android</artifactId>
       </dependency>
       <dependency>
-          <groupId>android.support</groupId>
-          <artifactId>compatibility-v4</artifactId>
-          <version>11</version>
+          <groupId>com.google.android</groupId>
+          <artifactId>support-v4</artifactId>
+          <version>18</version>
       </dependency>
       <dependency>
           <groupId>com.nostra13.universalimageloader</groupId>
