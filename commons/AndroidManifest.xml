@@ -82,6 +82,15 @@
             android:label="@string/title_activity_settings"
             />
         <activity android:name=".AboutActivity" android:label="@string/title_activity_about"/>
+        <activity android:name=".campaigns.CampaignActivity" android:label="Campaigns"
+                android:icon="@drawable/ic_launcher"
+                >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
         <service android:name=".upload.UploadService" >
         </service>
         <service
