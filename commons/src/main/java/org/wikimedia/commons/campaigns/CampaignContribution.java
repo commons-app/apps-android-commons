@@ -1,13 +1,21 @@
 package org.wikimedia.commons.campaigns;
 
+import android.net.Uri;
 import org.wikimedia.commons.contributions.Contribution;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class CampaignContribution extends Contribution {
     private Campaign campaign;
 
     private ArrayList<String> fieldValues;
+
+
+    public CampaignContribution(Uri localUri, String remoteUri, String filename, String description, long dataLength, Date dateCreated, Date dateUploaded, String creator, String editSummary, Campaign campaign) {
+        super(localUri, remoteUri, filename, description, dataLength, dateCreated, dateUploaded, creator, editSummary);
+        this.campaign = campaign;
+    }
 
     public Campaign getCampaign() {
         return campaign;
