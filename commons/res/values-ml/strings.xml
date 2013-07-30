@@ -7,7 +7,7 @@
   <string name="password">രഹസ്യവാക്ക്</string>
   <string name="login">പ്രവേശിക്കുക</string>
   <string name="logging_in_title">പ്രവേശിക്കുന്നു</string>
-  <string name="logging_in_message">ദയവായി കാത്തിരിക്കുക</string>
+  <string name="logging_in_message">ദയവായി കാത്തിരിക്കുക...</string>
   <string name="login_success">പ്രവേശനം വിജയകരം!</string>
   <string name="login_failed">പ്രവേശനം പരാജയപ്പെട്ടു!</string>
   <string name="authentication_failed">സാധുതാനിർണ്ണയം പരാജയപ്പെട്ടു!</string>
@@ -54,8 +54,17 @@
   <string name="title_activity_settings">സജ്ജീകരണങ്ങൾ</string>
   <string name="menu_about">വിവരണം</string>
   <string name="about_license" fuzzy="true">ഇതു പ്രകാരം പുറത്തിറക്കപ്പെട്ട ഓപ്പൺ സോഴ്സ് സോഫ്റ്റ്‌വേർ</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;സ്വകാര്യതാനയം&lt;/a&gt;</string>
   <string name="title_activity_about">വിവരണം</string>
   <string name="menu_feedback">പ്രതികരണം അറിയിക്കുക (ഇമെയിൽ വഴി)</string>
   <string name="provider_categories">സമീപകാലത്ത് ഉപയോഗിച്ച വർഗ്ഗങ്ങൾ</string>
+  <string name="no_uploads_yet">താങ്കളിതുവരെ ചിത്രങ്ങളൊന്നും അപ്‌ലോഡ് ചെയ്തിട്ടില്ല.</string>
   <string name="menu_retry">വീണ്ടും ശ്രമിക്കുക</string>
+  <string name="menu_abort">റദ്ദാക്കുക</string>
+  <string name="menu_download">ഡൗൺലോഡ്</string>
+  <string name="preference_license">അനുമതി</string>
+  <string name="license_name_cc0">സി.സി.0</string>
+  <string name="welcome_wikipedia_subtext">വിക്കിപീഡിയയിലുള്ള ചിത്രങ്ങൾ വിക്കിമീഡിയ കോമൺസിൽ നിന്നാണ്</string>
+  <string name="welcome_final_text">മനസ്സിലായോ?</string>
+  <string name="welcome_final_button_text">ശരി!</string>
 </resources>
