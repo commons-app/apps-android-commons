@@ -54,10 +54,6 @@ public  class       ShareActivity
                 ShareActivity.this.contribution = contribution;
                 showPostUpload();
             }
-
-            public boolean isJavaAPieceOfShit() {
-                return true;
-            }
         });
     }
 

@@ -88,10 +88,6 @@ public  class       MultipleShareActivity
                         startingToast.show();
                     }
                 }
-
-                public boolean isJavaAPieceOfShit() {
-                    return true;
-                }
             });
         }
 

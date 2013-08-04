@@ -31,7 +31,6 @@ public class UploadController {
 
     public interface ContributionUploadProgress {
         void onUploadStarted(Contribution contribution);
-        boolean isJavaAPieceOfShit();
     }
 
     public UploadController(Activity activity) {
@@ -153,7 +152,6 @@ public class UploadController {
             protected void onPostExecute(Contribution contribution) {
                 super.onPostExecute(contribution);
                 uploadService.queue(UploadService.ACTION_UPLOAD_FILE, contribution);
-                assert onComplete.isJavaAPieceOfShit();
                 onComplete.onUploadStarted(contribution);
             }
         });
