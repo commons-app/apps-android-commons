@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.os.Build;
 
 import android.support.v4.util.LruCache;
+import android.util.Log;
 import com.android.volley.RequestQueue;
 import com.nostra13.universalimageloader.cache.disc.impl.TotalSizeLimitedDiscCache;
 import com.nostra13.universalimageloader.cache.memory.impl.LimitedAgeMemoryCache;
@@ -112,29 +113,41 @@ public class CommonsApplication extends Application {
         // Initialize EventLogging
         EventLog.setApp(this);
 
+
+        // based off https://developer.android.com/training/displaying-bitmaps/cache-bitmap.html
+        // Cache for 1/8th of available VM memory
+        long maxMem = Runtime.getRuntime().maxMemory();
+        if (maxMem < 48L * 1024L * 1024L) {
+            // Cache only one bitmap if VM memory is too small (such as Nexus One);
+            Log.d("Commons", "Skipping bitmap cache; max mem is: " + maxMem);
+            imageCache = new LruCache<String, Bitmap>(1);
+        } else {
+            int cacheSize = (int) (maxMem / (1024 * 8));
+            Log.d("Commons", "Bitmap cache size " + cacheSize + " from max mem " + maxMem);
+            imageCache = new LruCache<String, Bitmap>(cacheSize) {
+                @Override
+                protected int sizeOf(String key, Bitmap bitmap) {
+                    // bitmap.getByteCount() not available on older androids
+                    int bitmapSize;
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB_MR1) {
+                        bitmapSize = bitmap.getRowBytes() * bitmap.getHeight();
+                    } else {
+                        bitmapSize = bitmap.getByteCount();
+                    }
+                    // The cache size will be measured in kilobytes rather than
+                    // number of items.
+                    return bitmapSize / 1024;
+                }
+            };
+        }
+
         DiskBasedCache cache = new DiskBasedCache(getCacheDir(), 16 * 1024 * 1024);
         volleyQueue = new RequestQueue(cache, new BasicNetwork(new HurlStack()));
         volleyQueue.start();
     }
 
     private com.android.volley.toolbox.ImageLoader imageLoader;
-    // based off https://developer.android.com/training/displaying-bitmaps/cache-bitmap.html
-    // Cache for 1/8th of available VM memory
-    private LruCache<String, Bitmap> imageCache = new LruCache<String, Bitmap>((int) (Runtime.getRuntime().maxMemory() / (1024 * 8))) {
-        @Override
-        protected int sizeOf(String key, Bitmap bitmap) {
-            // bitmap.getByteCount() not available on older androids
-            int bitmapSize;
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB_MR1) {
-                bitmapSize = bitmap.getRowBytes() * bitmap.getHeight();
-            } else {
-                bitmapSize = bitmap.getByteCount();
-            }
-            // The cache size will be measured in kilobytes rather than
-            // number of items.
-            return bitmapSize / 1024;
-        }
-    };
+    private LruCache<String, Bitmap> imageCache;
 
     public com.android.volley.toolbox.ImageLoader getImageLoader() {
         if(imageLoader == null) {
