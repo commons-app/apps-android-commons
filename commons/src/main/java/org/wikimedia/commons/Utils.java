@@ -143,11 +143,11 @@ public class Utils {
 
     public static String licenseTemplateFor(String license) {
         if(license.equals(Prefs.Licenses.CC_BY)) {
-            return "{{self|cc-by}}";
+            return "{{self|cc-by-3.0}}";
         } else if(license.equals(Prefs.Licenses.CC_BY_SA)) {
-            return "{{self|cc-by-sa}}";
+            return "{{self|cc-by-sa-3.0}}";
         } else if(license.equals(Prefs.Licenses.CC0)) {
-            return "{{self|cc0}}";
+            return "{{self|cc-zero}}";
         }
         throw new RuntimeException("Unrecognized license value");
     }
