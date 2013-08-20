@@ -1,5 +1,10 @@
 # Wikimedia Commons for Android
 
+## v1.0 beta 11
+- New Launcher Icon
+- Fix bug with licensing templates
+- i18n updates
+
 ## v1.0 beta 10
 - Successfully reached double digit beta number
 - Honeycomb fixes
