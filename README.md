@@ -9,7 +9,7 @@
 
 1. Set the environment variable `ANDROID_HOME` to be the path to your Android SDK
 2. Run `mvn install` to build
-3. Run `mvn android:deploy` to deploy to a device
+3. Run `cd commons && mvn android:deploy` to deploy to a device
 4. There is no step 4
 
 **Note**: Currently uses a bunch of dependencies that are staged at `yuvi.in/blog/maven`. Will be migrated to either [Maven Central][4] or a Wikimedia staging server soon.
