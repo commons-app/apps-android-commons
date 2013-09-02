@@ -35,8 +35,16 @@
   <string name="preference_tracking">Lietošanas atskaites</string>
   <string name="title_activity_settings">Iestatījumi</string>
   <string name="menu_about">Par</string>
-  <string name="about_improve" fuzzy="true">Uz avotu. Pie kļūdām.</string>
+  <string name="about_improve">Izejas kods pieejams &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;. Kļūdas ziņot &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privātuma politika&lt;/a&gt;</string>
   <string name="title_activity_about">Par</string>
   <string name="menu_feedback">Nosūtīt atsauksmes (pa e-pastu)</string>
   <string name="provider_categories">Nesen lietotās kategorijas</string>
+  <string name="waiting_first_sync">Gaida pirmo sinhronizāciju...</string>
+  <string name="no_uploads_yet">Jūs vēl neesat augšupielādējis nevienu fotogrāfiju.</string>
+  <string name="menu_retry">Mēģināt vēlreiz</string>
+  <string name="menu_abort">Atcelt</string>
+  <string name="menu_download">Lejupielādēt</string>
+  <string name="preference_license">Licence</string>
+  <string name="welcome_final_button_text">Jā!</string>
 </resources>

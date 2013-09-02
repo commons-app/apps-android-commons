@@ -66,9 +66,13 @@ Dotknij tej wiadomości (lub naciśnij \"cofnij\") aby pominąć ten krok</strin
   <string name="share_license_summary">Ten obraz będzie udostępniany na licencji %1$s</string>
   <string name="menu_download">Pobieranie</string>
   <string name="preference_license">Licencja</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Uznanie autorstwa-Na tych samych warunkach</string>
+  <string name="license_name_cc_by" fuzzy="true">CCu00A0Uznanie autorstwa</string>
   <string name="license_name_cc0">CC0</string>
+  <string name="welcome_wikipedia_text">Dołóż swoje grafiki. Pomóż artykułom na Wikipedii ożywić się!</string>
   <string name="welcome_wikipedia_subtext">Ilustracje we Wikipedii pochodzą z Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Twoje ilustracje pomagają w edukacji ludzi na całym świecie.</string>
   <string name="welcome_copyright_subtext">Unikaj materiałów objętych prawami autorskimi znalezionych w Internecie, a także zdjęć plakatów, okładek książek itp.</string>
+  <string name="welcome_final_text">Uważasz że wszystko jasne?</string>
   <string name="welcome_final_button_text">Tak!</string>
 </resources>

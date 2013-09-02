@@ -13,20 +13,20 @@
   <string name="authentication_failed">인증 실패!</string>
   <string name="uploading_started">올리기를 시작했습니다!</string>
   <string name="upload_completed_notification_title">%1$s 파일을 올렸습니다!</string>
-  <string name="upload_completed_notification_text">올린 것을 보려면 누르세요</string>
+  <string name="upload_completed_notification_text">올린 것을 보려면 탭하세요</string>
   <string name="upload_progress_notification_title_start">%1$s 파일 올리기를 시작하는 중</string>
   <string name="upload_progress_notification_title_in_progress">%1$s 파일을 올리는 중</string>
   <string name="upload_progress_notification_title_finishing">%1$s 파일 올리기를 끝내는 중</string>
   <string name="upload_failed_notification_title">%1$s 파일 올리기 실패</string>
-  <string name="upload_failed_notification_subtitle">보려면 누르세요</string>
-  <string name="title_activity_contributions">내 올리기</string>
+  <string name="upload_failed_notification_subtitle">보려면 탭하세요</string>
+  <string name="title_activity_contributions">내 올린 파일</string>
   <string name="contribution_state_queued">대기 중</string>
   <string name="contribution_state_failed">실패</string>
   <string name="contribution_state_in_progress">%1$d%% 완료</string>
   <string name="contribution_state_starting">올리는 중</string>
   <string name="menu_from_gallery">갤러리에서 선택</string>
   <string name="menu_from_camera">사진 찍기</string>
-  <string name="provider_contributions">내 올리기</string>
+  <string name="provider_contributions">내 올린 파일</string>
   <string name="menu_share">공유하기</string>
   <string name="menu_open_in_browser">브라우저로 보기</string>
   <string name="share_title_hint">제목</string>
@@ -66,8 +66,8 @@
   <string name="share_license_summary">이 그림은 %1$s에 따라 사용이 허가됩니다</string>
   <string name="menu_download">다운로드</string>
   <string name="preference_license">라이선스</string>
-  <string name="license_name_cc_by_sa">CCu00A0저작자표시-동일조건변경허락</string>
-  <string name="license_name_cc_by">CCu00A0저작자표시</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0저작자표시-동일조건변경허락</string>
+  <string name="license_name_cc_by" fuzzy="true">CCu00A0저작자표시</string>
   <string name="license_name_cc0">CC0</string>
   <string name="welcome_wikipedia_text">당신의 그림을 기여하세요. 위키백과 문서의 생명이 오는 데 도와주세요!</string>
   <string name="welcome_wikipedia_subtext">위키백과의 그림은 위키미디어 공용에서 옵니다.</string>

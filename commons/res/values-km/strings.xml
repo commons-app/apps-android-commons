@@ -65,11 +65,13 @@
   <string name="share_license_summary">រូបភាពនេះនឹងត្រូវដាក់ក្រោមអាជ្ញាបណ្ណ %1$s ។</string>
   <string name="menu_download">ទាញយក</string>
   <string name="preference_license">អាជ្ញាប័ណ្ណ</string>
-  <string name="license_name_cc_by_sa">CCu00A0Attribution-ShareAlike</string>
-  <string name="license_name_cc_by">CCu00A0Attribution</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Attribution-ShareAlike</string>
+  <string name="license_name_cc_by" fuzzy="true">CCu00A0Attribution</string>
   <string name="license_name_cc0">CC0</string>
   <string name="welcome_wikipedia_text">បរិច្ចាគរូបភាពរបស់អ្នក។ សូមជួយផ្ដល់ភាពរស់រវើកដល់អត្ថបទវិគីភីឌា។</string>
   <string name="welcome_wikipedia_subtext">រូបភាពនៅលើវិគីភីឌាបានមកពីWikimedia Commons។</string>
   <string name="welcome_copyright_text">រូបភាពរបស់អ្នកជួយផ្ដល់ចំណេះដឹងដល់ប្រជាជនទូទាំងពិភពលោក។</string>
   <string name="welcome_copyright_subtext">ជៀសវៀងផ្ទុកឡើងរបស់ដែលជាប់កម្មសិទ្ធិបញ្ញាដែលអ្នករកបានពីអ៊ីនធើណិត ក៏ដូចជារូបភាពខិតបណ្ឌ ក្របសៀវភៅជាដើម...</string>
+  <string name="welcome_final_text">តើលោកអ្នកយល់ហើយ?</string>
+  <string name="welcome_final_button_text">បាទ/ចាស៎!</string>
 </resources>

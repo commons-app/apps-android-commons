@@ -52,7 +52,8 @@
   <string name="login_failed_generic">{{Identical|Login failed}}</string>
   <string name="share_upload_button">{{Identical|Upload}}</string>
   <string name="multiple_share_base_title">Hint for the textbox that lets user type the Base title for the set of multiple images being uploaded. Example: If the user types \'Visit to Kolkata\' in this text box, the images will all be titled as \'Visit to Kolkata - 1\', \'Visit to Kolkata - 2\', etc.</string>
-  <string name="menu_upload_single">Hint text on menu item to upload a single image. {{Identical|Upload}}</string>
+  <string name="menu_upload_single">Hint text on menu item to upload a single image.
+{{Identical|Upload}}</string>
   <string name="categories_search_text_hint">This message is followed by a list of the categories.
 {{Identical|Search category}}</string>
   <string name="menu_save_categories">Hint text on menu item to save selected categories.
@@ -89,7 +90,7 @@
   <string name="welcome_final_text">Message asking user if they understand what kinds of images to upload.</string>
   <string name="welcome_final_button_text">Button text for confirming the user understands what kinds of images to upload.
 {{Identical|Yes}}</string>
-    <string name="detail_panel_cats_label">Label for categories list in media detail panel</string>
-    <string name="detail_panel_cats_loading">Placeholder for categories list in media detail panel, while loading from network.</string>
-    <string name="detail_panel_cats_none">Placeholder for categories list in media detail panel, if no categories found.</string>
+  <string name="detail_panel_cats_label">Label for categories list in media detail panel</string>
+  <string name="detail_panel_cats_loading">Placeholder for categories list in media detail panel, while loading from network.</string>
+  <string name="detail_panel_cats_none">Placeholder for categories list in media detail panel, if no categories found.</string>
 </resources>

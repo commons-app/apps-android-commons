@@ -59,8 +59,8 @@
   <string name="share_license_summary">এই ছবিটি %1$s এর অধীনে লাইসেন্স করা হবে</string>
   <string name="menu_download">ডাউনলোড</string>
   <string name="preference_license">লাইসেন্স</string>
-  <string name="license_name_cc_by_sa">সিসিইউ০০এ০এঅ্যাট্রিবিউসন-শেয়ারঅ্যালাইক</string>
-  <string name="license_name_cc_by">সিসিইউ০০এ০এঅ্যাট্রিবিউসন</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">সিসিইউ০০এ০এঅ্যাট্রিবিউসন-শেয়ারঅ্যালাইক</string>
+  <string name="license_name_cc_by" fuzzy="true">সিসিইউ০০এ০এঅ্যাট্রিবিউসন</string>
   <string name="license_name_cc0">সিসি০</string>
   <string name="welcome_wikipedia_subtext">উইকিপিডিয়াতে চিত্র উইকিমিডিয়া কমন্স থেকে এসেছে।</string>
   <string name="welcome_final_button_text">হ্যাঁ!</string>

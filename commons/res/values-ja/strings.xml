@@ -56,8 +56,8 @@
   <string name="menu_abort">中止</string>
   <string name="menu_download">ダウンロード</string>
   <string name="preference_license">ライセンス</string>
-  <string name="license_name_cc_by_sa">CCu00A0Attribution-ShareAlike</string>
-  <string name="license_name_cc_by">CCu00A0Attribution</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Attribution-ShareAlike</string>
+  <string name="license_name_cc_by" fuzzy="true">CCu00A0Attribution</string>
   <string name="license_name_cc0">CC0</string>
   <string name="welcome_final_text">ご理解いただけましたか?</string>
   <string name="welcome_final_button_text">はい</string>

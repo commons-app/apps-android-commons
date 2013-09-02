@@ -66,8 +66,8 @@ Atingeți acest mesaj (sau mergeți înapoi) pentru a omite acest pas.</string>
   <string name="share_license_summary">Această imagine va fi licențiată sub %1$s</string>
   <string name="menu_download">Descarcă</string>
   <string name="preference_license">Licență</string>
-  <string name="license_name_cc_by_sa">CCu00A0Atribuire și distribuire în condiții identice</string>
-  <string name="license_name_cc_by">CCu00A0Atribuire</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Atribuire și distribuire în condiții identice</string>
+  <string name="license_name_cc_by" fuzzy="true">CCu00A0Atribuire</string>
   <string name="license_name_cc0">CC0</string>
   <string name="welcome_wikipedia_text">Contribuiți cu imagini personale. Faceți ca articolele Wikipediei să prindă viață!</string>
   <string name="welcome_wikipedia_subtext">Imaginile de pe Wikipedia provin de la Wikimedia Commons.</string>

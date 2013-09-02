@@ -60,6 +60,16 @@
   <string name="no_uploads_yet">Encara no heu carregat cap foto.</string>
   <string name="menu_retry">Torna-ho a provar</string>
   <string name="menu_abort">Parar</string>
-  <string name="share_license_summary" fuzzy="true">Esteu d\'acord en carregar material sota els termes de la llicència CC-BY-SA 3.0.</string>
+  <string name="share_license_summary">Aquesta imatge es llicenciarà sota %1$s</string>
   <string name="menu_download">Baixa</string>
+  <string name="preference_license">Llicència</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Reconeixement-CompartirIgual</string>
+  <string name="license_name_cc_by" fuzzy="true">CCu00A0Reconeixement</string>
+  <string name="license_name_cc0">CC0</string>
+  <string name="welcome_wikipedia_text">Doneu les vostres imatges. Ajudeu a donar vida als articles de la Viquipèdia!</string>
+  <string name="welcome_wikipedia_subtext">Les imatges de la Viquipèdia vénen de la Wikimedia Commons.</string>
+  <string name="welcome_copyright_text">Les vostres imatges ajuden a educar gent d\'arreu del món.</string>
+  <string name="welcome_copyright_subtext">No utilitzis material amb copyright que puguis trobar a Internet, ni tampoc imatges de pòsters, portades de llibres, etc.</string>
+  <string name="welcome_final_text">Creieu que ho heu entès?</string>
+  <string name="welcome_final_button_text">Sí!</string>
 </resources>

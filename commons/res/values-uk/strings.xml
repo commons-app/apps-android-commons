@@ -53,9 +53,26 @@
   <string name="preference_tracking_summary">Надсилати статистику використання до Вікімедіа, щоб допомогти нам покращити програму</string>
   <string name="title_activity_settings">Налаштування</string>
   <string name="menu_about">Про програму</string>
-  <string name="about_license" fuzzy="true">Open Source програмне забезпечення випущено під</string>
-  <string name="about_improve" fuzzy="true">Джерело. Помилки на.</string>
+  <string name="about_license">Програмне забезпечення з відкритим кодом випущено під &lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;ліцензією Apache в.2&lt;/a&gt;</string>
+  <string name="about_improve">Код на &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;. Помилки на a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
   <string name="about_privacy_policy">Wikimedia:Commons-android-strings-about privacy policy/uk</string>
   <string name="title_activity_about">Про програму</string>
   <string name="menu_feedback">Надіслати відгук по електронній пошті</string>
+  <string name="provider_categories">Недавно використані категорії</string>
+  <string name="waiting_first_sync">В очікуванні першої синхронізації...</string>
+  <string name="no_uploads_yet">Ви ще не завантажили жодної світлини.</string>
+  <string name="menu_retry">Повторити</string>
+  <string name="menu_abort">Перервати</string>
+  <string name="share_license_summary">Це зображення буде ліцензоване згідно %1$s</string>
+  <string name="menu_download">Завантажити</string>
+  <string name="preference_license">Ліцензія</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Attribution-ShareAlike</string>
+  <string name="license_name_cc_by" fuzzy="true">CCu00A0Attribution</string>
+  <string name="license_name_cc0">CC0</string>
+  <string name="welcome_wikipedia_text">Надсилайте ваші зображення. Допоможіть статтям Вікіпедії оживати!</string>
+  <string name="welcome_wikipedia_subtext">Зображення у Вікіпедії надходять з Вікісховища.</string>
+  <string name="welcome_copyright_text">Ваші зображення допомагають освіті людей у всьому світі.</string>
+  <string name="welcome_copyright_subtext">Уникнути захищених авторським правом матеріалів, що ви знайшли в Інтернеті, а також зображень плакатів, обкладинок книг, і т. д.</string>
+  <string name="welcome_final_text">Ви це зрозуміли?</string>
+  <string name="welcome_final_button_text">Так!</string>
 </resources>

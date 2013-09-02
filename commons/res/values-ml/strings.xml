@@ -53,18 +53,27 @@
   <string name="preference_tracking_summary">ഈ ആപ് മെച്ചപ്പെടുത്തുന്നതിനായി ഉപയോഗം സംബന്ധിച്ച റിപ്പോർട്ടുകൾ വിക്കിമീഡിയയ്ക്ക് അയയ്ക്കുക</string>
   <string name="title_activity_settings">സജ്ജീകരണങ്ങൾ</string>
   <string name="menu_about">വിവരണം</string>
-  <string name="about_license" fuzzy="true">ഇതു പ്രകാരം പുറത്തിറക്കപ്പെട്ട ഓപ്പൺ സോഴ്സ് സോഫ്റ്റ്‌വേർ</string>
+  <string name="about_license">&lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;അപാച്ചേ അനുമതിപത്രം പതിപ്പ് 2&lt;/a&gt; പ്രകാരം പുറത്തിറക്കപ്പെട്ട ഓപ്പൺ സോഴ്സ് സോഫ്റ്റ്‌വേർ</string>
+  <string name="about_improve">സ്രോതസ്സ് രൂപം &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;ജിറ്റ്ഹബിൽ&lt;/a&gt; ലഭ്യമാണ്. 
+പ്രശ്നങ്ങൾ &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;ബഗ്സില്ലയിൽ&lt;/a&gt; അറിയിക്കുക.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;സ്വകാര്യതാനയം&lt;/a&gt;</string>
   <string name="title_activity_about">വിവരണം</string>
   <string name="menu_feedback">പ്രതികരണം അറിയിക്കുക (ഇമെയിൽ വഴി)</string>
   <string name="provider_categories">സമീപകാലത്ത് ഉപയോഗിച്ച വർഗ്ഗങ്ങൾ</string>
+  <string name="waiting_first_sync">ആദ്യ സമീകരണത്തിനായി കാത്തിരിക്കുന്നു...</string>
   <string name="no_uploads_yet">താങ്കളിതുവരെ ചിത്രങ്ങളൊന്നും അപ്‌ലോഡ് ചെയ്തിട്ടില്ല.</string>
   <string name="menu_retry">വീണ്ടും ശ്രമിക്കുക</string>
   <string name="menu_abort">റദ്ദാക്കുക</string>
+  <string name="share_license_summary">ചിത്രം %1$s പ്രകാരം അനുമതി നൽകപ്പെടുന്നതാണ്</string>
   <string name="menu_download">ഡൗൺലോഡ്</string>
   <string name="preference_license">അനുമതി</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">സി.സി.u00A0ആട്രിബ്യൂഷൻ-ഷെയർ‌എലൈക്</string>
+  <string name="license_name_cc_by" fuzzy="true">സി.സി.u00A0ആട്രിബ്യൂഷൻ</string>
   <string name="license_name_cc0">സി.സി.0</string>
+  <string name="welcome_wikipedia_text">താങ്കളെടുക്കുന്ന ചിത്രങ്ങൾ സംഭാവന ചെയ്യുക. വിക്കിപീഡിയ ലേഖനങ്ങൾ ജീവസ്സുറ്റതാക്കിത്തീർക്കുക!</string>
   <string name="welcome_wikipedia_subtext">വിക്കിപീഡിയയിലുള്ള ചിത്രങ്ങൾ വിക്കിമീഡിയ കോമൺസിൽ നിന്നാണ്</string>
+  <string name="welcome_copyright_text">താങ്കളെടുക്കുന്ന ചിത്രങ്ങൾ ലോകമെമ്പാടുമുള്ള ജനങ്ങൾക്ക് വിജ്ഞാനദായകമായിത്തീരുന്നതാണ്.</string>
+  <string name="welcome_copyright_subtext">ഇന്റർനെറ്റിൽ നിന്നും താങ്കൾക്ക് തേടിയെടുക്കാനാവുന്നതോ, പോസ്റ്ററുകൾ, പുസ്തകങ്ങളുടെ പുറംചട്ടകൾ എന്നിവിടങ്ങളിൽ നിന്നും മറ്റും ലഭിക്കുന്നതോ ആയ പകർപ്പവകാശസംരക്ഷിതങ്ങളായവ ഒഴിവാക്കുക.</string>
   <string name="welcome_final_text">മനസ്സിലായോ?</string>
   <string name="welcome_final_button_text">ശരി!</string>
 </resources>

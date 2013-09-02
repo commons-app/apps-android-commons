@@ -33,7 +33,7 @@
   <string name="share_description_hint">Beschreiwung</string>
   <string name="login_failed_network">Aloggen huet net fonctionnéiert - Feeler mam Reseau</string>
   <string name="login_failed_username">Login net méiglech - kuckt w.e.g. Äre Benotzernumm no</string>
-  <string name="login_failed_password">Login net méiglech - kuckt w.e.g. Ärt Passwuert no</string>
+  <string name="login_failed_password">Login net méiglech - kuckt w.e.g. Äert Passwuert no</string>
   <string name="login_failed_throttled">Ze dacks ouni Succès probéiert. Probéiert w.e.g. an e puer Minutten nach eng Kéier</string>
   <string name="login_failed_blocked">Pardon, dëse Benotzer ass op Commons gespaart</string>
   <string name="login_failed_generic">Aloggen huet net fonctionnéiert</string>
@@ -64,8 +64,8 @@ Klickt op dëse Message (oder dréck op Zréck) fir dëse Schrëtt z\'iwwerspran
   <string name="share_license_summary">Dëst Bild gëtt ënnert %1$s lizenzéiert</string>
   <string name="menu_download">Eroflueden</string>
   <string name="preference_license">Lizenz</string>
-  <string name="license_name_cc_by_sa">CCu00A0Attribution-ShareAlike</string>
-  <string name="license_name_cc_by">CCu00A0Attribution</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Attribution-ShareAlike</string>
+  <string name="license_name_cc_by" fuzzy="true">CCu00A0Attribution</string>
   <string name="license_name_cc0">CC0</string>
   <string name="welcome_wikipedia_text">Maacht mat mat Äre Biller. Hëlleft Wikipedia-Artikele méi lieweg ze maachen!</string>
   <string name="welcome_wikipedia_subtext">Biller op Wikipedia komme vu Wikimedia Commons.</string>

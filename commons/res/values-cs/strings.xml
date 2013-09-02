@@ -63,9 +63,10 @@
   <string name="share_license_summary">Tento obrázek bude zveřejněn pod licencí %1$s</string>
   <string name="menu_download">Stáhnout</string>
   <string name="preference_license">Licence</string>
-  <string name="license_name_cc_by_sa">CCu00A0Uveďte autora-Zachovejte licenci</string>
-  <string name="license_name_cc_by">CCu00A0Uveďte autora</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Uveďte autora-Zachovejte licenci</string>
+  <string name="license_name_cc_by" fuzzy="true">CCu00A0Uveďte autora</string>
   <string name="license_name_cc0">CC0</string>
+  <string name="welcome_wikipedia_text">Přispějte svými obrázky. Pomozte oživit články na Wikipedii.</string>
   <string name="welcome_wikipedia_subtext">Obrázky na Wikipedii pochází 
 z Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Vaše obrázky pomáhají vzdělávat lidi po celém světě.</string>

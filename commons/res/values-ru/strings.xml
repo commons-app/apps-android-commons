@@ -66,8 +66,8 @@
   <string name="share_license_summary">Это изображение будет лицензировано под %1$s</string>
   <string name="menu_download">Скачать</string>
   <string name="preference_license">Лицензия</string>
-  <string name="license_name_cc_by_sa">CCu00A0Attribution-ShareAlike</string>
-  <string name="license_name_cc_by">CCu00A0Attribution</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Attribution-ShareAlike</string>
+  <string name="license_name_cc_by" fuzzy="true">CCu00A0Attribution</string>
   <string name="license_name_cc0">CC0</string>
   <string name="welcome_wikipedia_text">Загрузите свои изображения. Помогите Википедии оживить статьи!</string>
   <string name="welcome_wikipedia_subtext">Изображения в Википедии доступны на Викискладе.</string>

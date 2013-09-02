@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="app_name">விக்கிமீடியா காமன்சு</string>
   <string name="app_name_beta">விக்கிமீடியா காமன்சு பீட்டா</string>
   <string name="menu_settings">அமைப்புகள்</string>
   <string name="username">பயனர் பெயர்</string>

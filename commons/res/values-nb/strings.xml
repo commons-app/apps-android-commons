@@ -66,8 +66,8 @@ Trykk på denne meldingen (eller trykk tilbake) for å hoppe over dette steget.<
   <string name="share_license_summary">Dette bildet vil bli lisensiert under %1$s</string>
   <string name="menu_download">Last ned</string>
   <string name="preference_license">Lisens</string>
-  <string name="license_name_cc_by_sa">CCu00A0Navngivelse-DelPåSammeVilkår</string>
-  <string name="license_name_cc_by">CCu00A0Navngivelse</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Navngivelse-DelPåSammeVilkår</string>
+  <string name="license_name_cc_by" fuzzy="true">CCu00A0Navngivelse</string>
   <string name="license_name_cc0">CC0</string>
   <string name="welcome_wikipedia_text">Bidra med dine bilder. Hjelp til med å blåse liv i Wikipedias artikler!</string>
   <string name="welcome_wikipedia_subtext">Bilder på Wikipedia kommer fra Wikimedia Commons.</string>

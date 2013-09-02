@@ -66,8 +66,8 @@
   <string name="share_license_summary">ਇਹ ਤਸਵੀਰ ਦਾ %1$s ਹੇਠ ਲਸੰਸ ਜਾਰੀ ਕੀਤੀ ਜਾਵੇਗਾ</string>
   <string name="menu_download">ਡਾਊਨਲੋਡ</string>
   <string name="preference_license">ਲਸੰਸ</string>
-  <string name="license_name_cc_by_sa">CCu00A0Attribution-ShareAlike</string>
-  <string name="license_name_cc_by">CCu00A0Attribution</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Attribution-ShareAlike</string>
+  <string name="license_name_cc_by" fuzzy="true">CCu00A0Attribution</string>
   <string name="license_name_cc0">CC0</string>
   <string name="welcome_wikipedia_text">ਆਪਣੀਆਂ ਤਸਵੀਰਾਂ ਦਾ ਯੋਗਦਾਨ ਪਾਓ। ਵਿਕੀਪੀਡੀਆ ਲੇਖਾਂ ਨੂੰ ਸੁਰਜੀਤ ਕਰ ਦਿਓ!</string>
   <string name="welcome_wikipedia_subtext">ਵਿਕੀਪੀਡੀਆ ਉਤਲੀਆਂ ਤਸਵੀਰਾਂ ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼ ਤੋਂ ਆਉਂਦੀਆਂ ਹਨ</string>

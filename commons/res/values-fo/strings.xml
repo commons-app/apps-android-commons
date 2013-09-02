@@ -65,4 +65,15 @@ Trýst hetta boðið (ella vend aftur) fyri at droppa hetta stigið.</string>
   <string name="menu_abort">Halt uppat</string>
   <string name="share_license_summary">Henda myndin kemur undir %1$s lisensin</string>
   <string name="menu_download">Tak niður</string>
+  <string name="preference_license">Lisensur</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Attribution-ShareAlike</string>
+  <string name="license_name_cc_by" fuzzy="true">CCu00A0Navnageving</string>
+  <string name="license_name_cc0">CC0</string>
+  <string name="welcome_wikipedia_text">Luttak við tínum myndum. Hjálp Wikipedia greinum at gerast livandi!</string>
+  <string name="welcome_wikipedia_subtext">Myndir á Wikipedia koma frá Wikimedia Commons.</string>
+  <string name="welcome_copyright_text">Tínar myndir hjálpa við at útbúgva fólk kring heimin.</string>
+  <string name="welcome_copyright_subtext">Ikki brúka tilfar sum er vart av upphavsrætti (copyright), sum tú hevur funnið á netinum, heldur ikki myndir av
+plakatum, forsíðum á bókum osfr.</string>
+  <string name="welcome_final_text">Hevur tú skilt tað?</string>
+  <string name="welcome_final_button_text">Ja!</string>
 </resources>

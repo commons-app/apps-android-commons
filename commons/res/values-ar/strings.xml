@@ -44,11 +44,32 @@
   <string name="categories_search_text_hint">تصنيفات البحث</string>
   <string name="menu_save_categories">احفظ</string>
   <string name="categories_not_found">لا توجد تصنيفات تطابق %1$s</string>
+  <string name="categories_skip_explanation">أضف التصانيف لتسهل اكتشاف صورك على ويكيميديا كومنز.
+
+ابدأ الكتاب لتضيف التصانيف.
+انقر هذه الرسالة لتتجاوز هذه الخطوة.</string>
   <string name="categories_activity_title">تصنيفات</string>
   <string name="preference_tracking">تقارير الاستخدام</string>
   <string name="preference_tracking_summary">إرسال تقارير الاستخدام إلى ويكيميديا لمساعدتنا على تحسين التطبيق</string>
   <string name="title_activity_settings">الإعدادات</string>
   <string name="menu_about">حول</string>
+  <string name="about_license">برنامج مفتوح المصدر منشور &lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;برخصة أباتشي النسخة 2&lt;/a&gt;</string>
+  <string name="about_improve">المصدر على &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;غِتهب&lt;/a&gt;. العلل في &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;بغزِلا&lt;/a&gt;.</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;سياسة الخصوصية&lt;/a&gt;</string>
   <string name="title_activity_about">حول</string>
   <string name="menu_feedback">إرسال ملاحظات (عبر البريد الإلكتروني)</string>
+  <string name="provider_categories">التصانيف المستخدمة مؤخرا</string>
+  <string name="waiting_first_sync">ينتظر أول مزامنة...</string>
+  <string name="no_uploads_yet">لم ترفع بعد أية صور.</string>
+  <string name="menu_retry">أعد المحاولة</string>
+  <string name="menu_abort">عن</string>
+  <string name="share_license_summary">ستُرخص الصورة برخصة %1$s.</string>
+  <string name="menu_download">نزّل</string>
+  <string name="preference_license">الرخصة</string>
+  <string name="welcome_wikipedia_text">ساهم بصورك. أنعش مقالات ويكيبيديا!</string>
+  <string name="welcome_wikipedia_subtext">تأتي صور ويكيبيديا من ويكيميديا كومنز.</string>
+  <string name="welcome_copyright_text">صورك تساعد الناس في شتى أنحاء العالم على التعلم.</string>
+  <string name="welcome_copyright_subtext">تجنب المواد محفوظة الحقوق الموجودة على الإنترنت وصور الملصقات وأغلفة الكتب، إلخ.</string>
+  <string name="welcome_final_text">هل تظن أنك فهمت؟</string>
+  <string name="welcome_final_button_text">نعم!</string>
 </resources>
