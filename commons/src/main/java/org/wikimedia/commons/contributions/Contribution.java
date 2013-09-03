@@ -125,7 +125,7 @@ public class Contribution extends Media {
                 .append("{{Information\n")
                     .append("|description=").append(description).append("\n")
                     .append("|source=").append("{{own}}\n")
-                    .append("|author=[[User:").append(creator).append("]]\n");
+                    .append("|author=[[User:").append(creator).append("|").append(creator).append("]]\n");
         if(dateCreated != null) {
             buffer
                     .append("|date={{According to EXIF data|").append(isoFormat.format(dateCreated)).append("}}\n");
