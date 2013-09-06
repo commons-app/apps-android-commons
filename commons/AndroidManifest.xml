@@ -106,6 +106,17 @@
                 android:resource="@xml/authenticator" />
         </service>
         <service
+                android:name=".campaigns.CampaignsSyncService"
+                android:exported="true">
+            <intent-filter>
+                <action
+                        android:name="android.content.SyncAdapter" />
+            </intent-filter>
+            <meta-data
+                    android:name="android.content.SyncAdapter"
+                    android:resource="@xml/campaigns_sync_adapter" />
+        </service>
+        <service
                 android:name=".contributions.ContributionsSyncService"
                 android:exported="true">
             <intent-filter>
@@ -134,6 +145,13 @@
                 android:label="@string/provider_contributions"
                 android:syncable="true"
                 android:authorities="org.wikimedia.commons.contributions.contentprovider"
+                android:exported="false">
+        </provider>
+        <provider
+                android:name=".campaigns.CampaignsContentProvider"
+                android:label="@string/provider_campaigns"
+                android:syncable="true"
+                android:authorities="org.wikimedia.commons.campaigns.contentprovider"
                 android:exported="false">
         </provider>
         <provider

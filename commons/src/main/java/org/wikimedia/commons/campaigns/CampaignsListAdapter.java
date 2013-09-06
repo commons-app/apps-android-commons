@@ -1,54 +1,47 @@
 package org.wikimedia.commons.campaigns;
 
 import android.app.Activity;
-import android.view.*;
-import android.widget.*;
+import android.content.Context;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.support.v4.widget.CursorAdapter;
+import android.text.TextUtils;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import com.actionbarsherlock.app.SherlockFragment;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
+import org.wikimedia.commons.CommonsApplication;
+import org.wikimedia.commons.MediaWikiImageView;
 import org.wikimedia.commons.R;
+import org.wikimedia.commons.Utils;
+import org.wikimedia.commons.campaigns.Campaign;
 
-import java.util.ArrayList;
+class CampaignsListAdapter extends CursorAdapter {
 
-public class CampaignsListAdapter extends BaseAdapter {
-    private ArrayList<Campaign> campaigns;
+    private DisplayImageOptions contributionDisplayOptions = Utils.getGenericDisplayOptions().build();;
     private Activity activity;
 
-    public CampaignsListAdapter(Activity activity, ArrayList<Campaign> campaigns) {
-        this.campaigns = campaigns;
+    public CampaignsListAdapter(Activity activity, Cursor c, int flags) {
+        super(activity, c, flags);
         this.activity = activity;
     }
 
-    public ArrayList<Campaign> getCampaigns() {
-        return campaigns;
+    @Override
+    public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
+        View parent = activity.getLayoutInflater().inflate(android.R.layout.simple_list_item_1, viewGroup, false);
+        return parent;
     }
 
-    public void setCampaigns(ArrayList<Campaign> campaigns) {
-        this.campaigns = campaigns;
+    @Override
+    public void bindView(View view, Context context, Cursor cursor) {
+        TextView campaignName = (TextView)view.findViewById(android.R.id.text1);
+
+        Campaign campaign = Campaign.fromCursor(cursor);
+
+        campaignName.setText(campaign.getTitle());
     }
 
-    public int getCount() {
-        if(campaigns == null) {
-            return 0;
-        }
-        return campaigns.size();
-    }
-
-    public Object getItem(int i) {
-        return campaigns.get(i);
-    }
-
-    public long getItemId(int i) {
-        return i;
-    }
-
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        if(view == null) {
-            view = activity.getLayoutInflater().inflate(R.layout.layout_campaign_item, null);
-        }
-
-        TextView campaignName = (TextView)view.findViewById(R.id.campaignItemName);
-
-        Campaign campaign = campaigns.get(i);
-
-        campaignName.setText(campaign.getName());
-        return view;
-    }
 }

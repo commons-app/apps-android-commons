@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<sync-adapter xmlns:android="http://schemas.android.com/apk/res/android"
+              android:contentAuthority="org.wikimedia.commons.campaigns.contentprovider"
+              android:accountType="org.wikimedia.commons"
+              android:supportsUploading="false"
+              android:userVisible="true"
+              android:isAlwaysSyncable="true"
+        />

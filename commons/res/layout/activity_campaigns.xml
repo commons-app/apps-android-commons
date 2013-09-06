@@ -5,9 +5,8 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <fragment
-        android:id="@+id/campaignsListFragment"
-        class="org.wikimedia.commons.campaigns.CampaignsListFragment"
+    <ListView
+        android:id="@+id/campaignsList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
