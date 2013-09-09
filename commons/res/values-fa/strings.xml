@@ -75,4 +75,7 @@
   <string name="welcome_copyright_subtext">از رسانه‌ها و پوسترهایی و غیره حق‌تکثیردار که در اینترنت یا جلد کتاب‌ها می‌بابید، اجتناب کنبد.</string>
   <string name="welcome_final_text">آیا متوجه منظور شدید؟</string>
   <string name="welcome_final_button_text">بله!</string>
+  <string name="detail_panel_cats_label">رده‌ها</string>
+  <string name="detail_panel_cats_loading">در حال بارگیری...</string>
+  <string name="detail_panel_cats_none">هیچ‌کدام انتخاب‌نشده</string>
 </resources>

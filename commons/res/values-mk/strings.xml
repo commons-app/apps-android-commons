@@ -66,8 +66,8 @@
   <string name="share_license_summary">Сликава ќе се води под лиценцата %1$s</string>
   <string name="menu_download">Преземи</string>
   <string name="preference_license">Лиценца</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0НаведиИзвор-СподелиПодИстиУслови</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0НаведиИзвор</string>
+  <string name="license_name_cc_by_sa">CCu00A0НаведиИзвор-СподелиПодИстиУсловиu00A03.0</string>
+  <string name="license_name_cc_by">CCu00A0НаведиИзворu00A03.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="welcome_wikipedia_text">Споделете ги вашите слики. Да ги оживееме статиите на Википедија!</string>
   <string name="welcome_wikipedia_subtext">Сликите на Википедија доаѓаат од Ризницата.</string>
@@ -75,4 +75,7 @@
   <string name="welcome_copyright_subtext">Избегнуавјте материјали што сте ги нашле на интернет, како и слики од плакати, корици од книги и тн.</string>
   <string name="welcome_final_text">Објаснивме добро?</string>
   <string name="welcome_final_button_text">Да!</string>
+  <string name="detail_panel_cats_label">Категории</string>
+  <string name="detail_panel_cats_loading">Вчитувам...</string>
+  <string name="detail_panel_cats_none">Ништо не е одбрано</string>
 </resources>

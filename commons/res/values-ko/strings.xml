@@ -66,8 +66,8 @@
   <string name="share_license_summary">이 그림은 %1$s에 따라 사용이 허가됩니다</string>
   <string name="menu_download">다운로드</string>
   <string name="preference_license">라이선스</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0저작자표시-동일조건변경허락</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0저작자표시</string>
+  <string name="license_name_cc_by_sa">CCu00A0저작자표시-동일조건변경허락u00A03.0</string>
+  <string name="license_name_cc_by">CCu00A0저작자표시u00A03.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="welcome_wikipedia_text">당신의 그림을 기여하세요. 위키백과 문서의 생명이 오는 데 도와주세요!</string>
   <string name="welcome_wikipedia_subtext">위키백과의 그림은 위키미디어 공용에서 옵니다.</string>
@@ -75,4 +75,7 @@
   <string name="welcome_copyright_subtext">포스터, 책 표지 등의 그림 뿐만 아니라 인터넷에서 찾은 저작권이 있는 자료를 피하세요.</string>
   <string name="welcome_final_text">이해하셨습니까?</string>
   <string name="welcome_final_button_text">예!</string>
+  <string name="detail_panel_cats_label">분류</string>
+  <string name="detail_panel_cats_loading">불러오는 중...</string>
+  <string name="detail_panel_cats_none">선택하지 않음</string>
 </resources>

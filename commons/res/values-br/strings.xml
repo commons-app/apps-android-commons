@@ -66,12 +66,16 @@ Pouezit war ar c\'hemenn-mañ (pe distroit en a-raok) evit mont dreist ar bazenn
   <string name="share_license_summary">Gant an aotre-implijout %1$s e vo ar skeudenn-mañ</string>
   <string name="menu_download">Pellgargañ</string>
   <string name="preference_license">Aotre-implijout</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Dereiñ-RannañHeñvel</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0Dereiñ</string>
+  <string name="license_name_cc_by_sa">CCu00A0Dereiñ-RannañAlikeu00A03.0</string>
+  <string name="license_name_cc_by">CCu00A0Dereiñu00A03.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="welcome_wikipedia_text">Kemerit perzh gant ho skeudennoù. Sikourit pennadoù Wikipedia da zont da vev !</string>
   <string name="welcome_wikipedia_subtext">Dont a ra skeudennoù Wikipedia eus Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Ho skeudennoù a sikour an dud da zeskiñ traoù dre ar bed a-bezh.</string>
+  <string name="welcome_copyright_subtext">Diarbenn an dafar gwarezet a vez kavet ganeoc\'h war ar Genrouedad, hag ivez ar skeudennoù skritelloù, ar goloioù  levrioù ha kement zo...</string>
   <string name="welcome_final_text">Ha soñjal a rit eo mat ?</string>
   <string name="welcome_final_button_text">Ya !</string>
+  <string name="detail_panel_cats_label">Rummadoù</string>
+  <string name="detail_panel_cats_loading">O kargañ...</string>
+  <string name="detail_panel_cats_none">Hini ebet diuzet</string>
 </resources>

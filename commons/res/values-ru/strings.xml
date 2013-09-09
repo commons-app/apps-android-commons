@@ -75,4 +75,6 @@
   <string name="welcome_copyright_subtext">Избегайте материалов, найденных в интернете и защищенных авторским правом, а также изображений плакатов, книжных обложек и т.п.</string>
   <string name="welcome_final_text">Вам это понятно?</string>
   <string name="welcome_final_button_text">Да!</string>
+  <string name="detail_panel_cats_label">Категории</string>
+  <string name="detail_panel_cats_loading">Загрузка…</string>
 </resources>

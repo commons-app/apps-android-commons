@@ -90,7 +90,10 @@
   <string name="welcome_final_text">Message asking user if they understand what kinds of images to upload.</string>
   <string name="welcome_final_button_text">Button text for confirming the user understands what kinds of images to upload.
 {{Identical|Yes}}</string>
-  <string name="detail_panel_cats_label">Label for categories list in media detail panel</string>
-  <string name="detail_panel_cats_loading">Placeholder for categories list in media detail panel, while loading from network.</string>
-  <string name="detail_panel_cats_none">Placeholder for categories list in media detail panel, if no categories found.</string>
+  <string name="detail_panel_cats_label">Label for categories list in media detail panel.
+{{Identical|Category}}</string>
+  <string name="detail_panel_cats_loading">Placeholder for categories list in media detail panel, while loading from network.
+{{Identical|Loading}}</string>
+  <string name="detail_panel_cats_none">Placeholder for categories list in media detail panel, if no categories found.
+{{Identical|None selected}}</string>
 </resources>

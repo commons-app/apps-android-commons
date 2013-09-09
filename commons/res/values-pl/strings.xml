@@ -75,4 +75,7 @@ Dotknij tej wiadomości (lub naciśnij \"cofnij\") aby pominąć ten krok</strin
   <string name="welcome_copyright_subtext">Unikaj materiałów objętych prawami autorskimi znalezionych w Internecie, a także zdjęć plakatów, okładek książek itp.</string>
   <string name="welcome_final_text">Uważasz że wszystko jasne?</string>
   <string name="welcome_final_button_text">Tak!</string>
+  <string name="detail_panel_cats_label">Kategorie</string>
+  <string name="detail_panel_cats_loading">Ładowanie...</string>
+  <string name="detail_panel_cats_none">Nic nie zaznaczono</string>
 </resources>

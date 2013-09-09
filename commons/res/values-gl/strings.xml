@@ -8,7 +8,7 @@
   <string name="login">Acceder ao sistema</string>
   <string name="logging_in_title">Accedendo ao sistema</string>
   <string name="logging_in_message">Por favor, agarde...</string>
-  <string name="login_success">Acceso exitoso!</string>
+  <string name="login_success">Accedeu correctamente!</string>
   <string name="login_failed">Erro durante o inición de sesión!</string>
   <string name="authentication_failed">Erro durante a autenticación!</string>
   <string name="uploading_started">A carga comezou!</string>
@@ -66,8 +66,8 @@ Prema nesta mensaxe (ou no botón \"Atrás\") para saltar este paso.</string>
   <string name="share_license_summary">Esta imaxe quedará baixo a licenza %1$s</string>
   <string name="menu_download">Descargar</string>
   <string name="preference_license">Licenza</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0recoñecementou00A0compartiru00A0igual</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0recoñecemento</string>
+  <string name="license_name_cc_by_sa">CCu00A0recoñecementou00A0compartiru00A0igualu00A03.0</string>
+  <string name="license_name_cc_by">CCu00A0recoñecementou00A03.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="welcome_wikipedia_text">Achegue as súas imaxes. Axude a que os artigos da Wikipedia cobren vida!</string>
   <string name="welcome_wikipedia_subtext">As imaxes da Wikipedia veñen da Wikimedia Commons.</string>
@@ -75,4 +75,7 @@ Prema nesta mensaxe (ou no botón \"Atrás\") para saltar este paso.</string>
   <string name="welcome_copyright_subtext">Evite os materiais protexidos por dereitos de autoría que se atopen na internet, así como imaxes de pósters, portadas de libros etc.</string>
   <string name="welcome_final_text">Entende como vai?</string>
   <string name="welcome_final_button_text">Si!</string>
+  <string name="detail_panel_cats_label">Categorías</string>
+  <string name="detail_panel_cats_loading">Cargando...</string>
+  <string name="detail_panel_cats_none">Ningunha seleccionada</string>
 </resources>

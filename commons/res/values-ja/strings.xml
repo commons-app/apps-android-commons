@@ -56,9 +56,12 @@
   <string name="menu_abort">中止</string>
   <string name="menu_download">ダウンロード</string>
   <string name="preference_license">ライセンス</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Attribution-ShareAlike</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0Attribution</string>
+  <string name="license_name_cc_by_sa">CCu00A0表示-継承u00A03.0</string>
+  <string name="license_name_cc_by">CCu00A0表示u00A03.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="welcome_final_text">ご理解いただけましたか?</string>
   <string name="welcome_final_button_text">はい</string>
+  <string name="detail_panel_cats_label">カテゴリ</string>
+  <string name="detail_panel_cats_loading">読み込み中...</string>
+  <string name="detail_panel_cats_none">選択なし</string>
 </resources>

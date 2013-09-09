@@ -63,8 +63,8 @@
   <string name="share_license_summary">Aquesta imatge es llicenciarà sota %1$s</string>
   <string name="menu_download">Baixa</string>
   <string name="preference_license">Llicència</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Reconeixement-CompartirIgual</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0Reconeixement</string>
+  <string name="license_name_cc_by_sa">CCu00A0Reconeixement-CompartirIgualu00A03.0</string>
+  <string name="license_name_cc_by">CCu00A0Reconeixementu00A03.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="welcome_wikipedia_text">Doneu les vostres imatges. Ajudeu a donar vida als articles de la Viquipèdia!</string>
   <string name="welcome_wikipedia_subtext">Les imatges de la Viquipèdia vénen de la Wikimedia Commons.</string>
@@ -72,4 +72,7 @@
   <string name="welcome_copyright_subtext">No utilitzis material amb copyright que puguis trobar a Internet, ni tampoc imatges de pòsters, portades de llibres, etc.</string>
   <string name="welcome_final_text">Creieu que ho heu entès?</string>
   <string name="welcome_final_button_text">Sí!</string>
+  <string name="detail_panel_cats_label">Categories</string>
+  <string name="detail_panel_cats_loading">Carregant...</string>
+  <string name="detail_panel_cats_none">No se n\'ha seleccionat cap</string>
 </resources>

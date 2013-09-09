@@ -66,8 +66,8 @@ Appuyez sur ce message (ou retournez en arrière) pour sauter cette étape.</str
   <string name="share_license_summary">Cette image sera sous licence %1$s</string>
   <string name="menu_download">Télécharger</string>
   <string name="preference_license">Licence</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Attribution-ShareAlike</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0Attribution</string>
+  <string name="license_name_cc_by_sa">CCu00A0Attributionu00A0-u00A0Partageu00A0dansu00A0lesu00A0Mêmesu00A0Conditionsu00A03.0</string>
+  <string name="license_name_cc_by">CCu00A0Attributionu00A03.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="welcome_wikipedia_text">Contribuez avec vos images. Aidez les articles de Wikipédia à prendre vie !</string>
   <string name="welcome_wikipedia_subtext">Les images sur Wikipédia viennent de Wikimedia Commons.</string>
@@ -75,4 +75,7 @@ Appuyez sur ce message (ou retournez en arrière) pour sauter cette étape.</str
   <string name="welcome_copyright_subtext">Évitez les matériaux protégés que vous trouvez sur l’Internet ainsi que les images d’affiches, couvertures de livre, etc.</string>
   <string name="welcome_final_text">Vous pensez que c’est bon ?</string>
   <string name="welcome_final_button_text">Oui !</string>
+  <string name="detail_panel_cats_label">Catégories</string>
+  <string name="detail_panel_cats_loading">Chargement…</string>
+  <string name="detail_panel_cats_none">Aucune catégorie sélectionnée</string>
 </resources>
