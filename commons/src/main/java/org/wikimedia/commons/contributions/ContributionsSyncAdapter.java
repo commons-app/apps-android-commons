@@ -59,7 +59,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
             try {
                 MWApi.RequestBuilder builder = api.action("query")
                         .param("list", "logevents")
-                        .param("leaction", "upload/upload")
+                        .param("letype", "upload")
                         .param("leprop", "title|timestamp")
                         .param("leuser", user)
                         .param("lelimit", getLimit());
