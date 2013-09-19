@@ -56,6 +56,9 @@ public class Media implements Parcelable {
     }
 
     public String getImageUrl() {
+        if(imageUrl == null) {
+            imageUrl = Utils.makeThumbBaseUrl(this.getFilename());
+        }
         return imageUrl;
     }
 
@@ -100,7 +103,7 @@ public class Media implements Parcelable {
     }
 
     public String getThumbnailUrl(int width) {
-        return Utils.makeThumbUrl(imageUrl, filename, width);
+        return Utils.makeThumbUrl(getImageUrl(), getFilename(), width);
     }
 
     public int getWidth() {
