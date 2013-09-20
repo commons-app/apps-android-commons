@@ -38,6 +38,7 @@ public class CampaignContribution extends Contribution {
         } else {
             buffer.append("{{subst:unc}}\n");
         }
+        buffer.append("[[Category:").append(campaign.getTrackingCategory()).append("\n");
         return buffer.toString();
     }
 
