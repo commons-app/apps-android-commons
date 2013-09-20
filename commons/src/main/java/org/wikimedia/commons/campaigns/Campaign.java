@@ -157,7 +157,6 @@ public class Campaign {
                 COLUMN_ENABLED,
                 COLUMN_TITLE,
                 COLUMN_DESCRIPTION,
-                COLUMN_DESCRIPTION,
                 COLUMN_TRACKING_CATEGORY,
                 COLUMN_BODY
         };
