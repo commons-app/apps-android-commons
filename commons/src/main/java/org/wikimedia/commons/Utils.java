@@ -1,6 +1,7 @@
 package org.wikimedia.commons;
 
 import android.os.*;
+import android.util.Log;
 import com.nostra13.universalimageloader.core.*;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;

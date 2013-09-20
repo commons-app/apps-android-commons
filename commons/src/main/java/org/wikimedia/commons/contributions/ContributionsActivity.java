@@ -8,6 +8,7 @@ import android.support.v4.content.Loader;
 import android.content.*;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.widget.CursorAdapter;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,12 +17,15 @@ import com.actionbarsherlock.view.MenuItem;
 
 import org.wikimedia.commons.*;
 import org.wikimedia.commons.auth.*;
+import org.wikimedia.commons.campaigns.Campaign;
 import org.wikimedia.commons.media.*;
 import org.wikimedia.commons.upload.UploadService;
 
+import java.util.ArrayList;
+
 public  class       ContributionsActivity
         extends     AuthenticatedActivity
-        implements  LoaderManager.LoaderCallbacks<Cursor>,
+        implements  LoaderManager.LoaderCallbacks<Object>,
                     AdapterView.OnItemClickListener,
                     MediaDetailPagerFragment.MediaDetailProvider,
                     FragmentManager.OnBackStackChangedListener {
@@ -30,6 +34,8 @@ public  class       ContributionsActivity
     private Cursor allContributions;
     private ContributionsListFragment contributionsList;
     private MediaDetailPagerFragment mediaDetails;
+
+    private Campaign campaign;
 
     public ContributionsActivity() {
         super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
@@ -100,6 +106,10 @@ public  class       ContributionsActivity
         super.onCreate(savedInstanceState);
         setTitle(R.string.title_activity_contributions);
         setContentView(R.layout.activity_contributions);
+
+        if(getIntent().hasExtra("campaign")) {
+            this.campaign = (Campaign) getIntent().getSerializableExtra("campaign");
+        }
 
         contributionsList = (ContributionsListFragment)getSupportFragmentManager().findFragmentById(R.id.contributionsListFragment);
 
@@ -180,13 +190,7 @@ public  class       ContributionsActivity
 
 
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long item) {
-        Cursor cursor = (Cursor)adapterView.getItemAtPosition(position);
-        Contribution c = Contribution.fromCursor(cursor);
-
-        Log.d("Commons", "Clicking for " + c.toContentValues());
         showDetail(position);
-
-        Log.d("Commons", "You clicked on:" + c.toContentValues().toString());
     }
 
     @Override
@@ -194,31 +198,51 @@ public  class       ContributionsActivity
         return super.onCreateOptionsMenu(menu);
     }
 
-    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        return new CursorLoader(this, ContributionsContentProvider.BASE_URI, Contribution.Table.ALL_FIELDS, CONTRIBUTION_SELECTION, null, CONTRIBUTION_SORT);
+    public Loader onCreateLoader(int i, Bundle bundle) {
+        if(campaign == null) {
+            return new CursorLoader(this, ContributionsContentProvider.BASE_URI, Contribution.Table.ALL_FIELDS, CONTRIBUTION_SELECTION, null, CONTRIBUTION_SORT);
+        } else {
+            return new CategoryImagesLoader(this, campaign.getTrackingCategory());
+        }
     }
 
-    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
-        allContributions = cursor;
-        contributionsList.setCursor(cursor);
+    public void onLoadFinished(Loader cursorLoader, Object result) {
+        if(campaign == null) {
+            Cursor cursor = (Cursor) result;
+            if(contributionsList.getAdapter() == null) {
+                contributionsList.setAdapter(new ContributionsListAdapter(this, cursor, 0));
+            } else {
+                ((CursorAdapter)contributionsList.getAdapter()).swapCursor(cursor);
+            }
 
-        getSupportActionBar().setSubtitle(getResources().getQuantityString(R.plurals.contributions_subtitle, cursor.getCount(), cursor.getCount()));
+            getSupportActionBar().setSubtitle(getResources().getQuantityString(R.plurals.contributions_subtitle, cursor.getCount(), cursor.getCount()));
+        } else {
+            contributionsList.setAdapter(new MediaListAdapter(this, (ArrayList<Media>) result));
+        }
     }
 
-    public void onLoaderReset(Loader<Cursor> cursorLoader) {
-        contributionsList.setCursor(null);
+    public void onLoaderReset(Loader cursorLoader) {
+        if(campaign == null) {
+            ((CursorAdapter) contributionsList.getAdapter()).swapCursor(null);
+        } else {
+            //((MediaListAdapter) contributionsList.getAdapter()).
+            // DO SOMETHING!
+        }
     }
 
     public Media getMediaAtPosition(int i) {
-        allContributions.moveToPosition(i);
-        return Contribution.fromCursor(allContributions);
+        if(campaign == null) {
+            return Contribution.fromCursor((Cursor) contributionsList.getAdapter().getItem(i));
+        } else {
+            return (Media) contributionsList.getAdapter().getItem(i);
+        }
     }
 
     public int getTotalMediaCount() {
-        if(allContributions == null) {
+        if(contributionsList.getAdapter() == null) {
             return 0;
         }
-        return allContributions.getCount();
+        return contributionsList.getAdapter().getCount();
     }
 
     public void notifyDatasetChanged() {

@@ -16,8 +16,6 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-
 
 import org.wikimedia.commons.*;
 import org.wikimedia.commons.R;
@@ -28,10 +26,6 @@ public class ContributionsListFragment extends SherlockFragment {
     private TextView waitingMessage;
     private TextView emptyMessage;
 
-    private ContributionsListAdapter contributionsAdapter;
-
-    private Cursor allContributions;
-
     private ContributionController controller;
 
     @Override
@@ -39,13 +33,12 @@ public class ContributionsListFragment extends SherlockFragment {
         return inflater.inflate(R.layout.fragment_contributions, container, false);
     }
 
-    public void setCursor(Cursor cursor) {
-        if(allContributions == null) {
-            contributionsAdapter = new ContributionsListAdapter(this, cursor, 0);
-            contributionsList.setAdapter(contributionsAdapter);
-        }
-        allContributions = cursor;
-        contributionsAdapter.swapCursor(cursor);
+    public ListAdapter getAdapter() {
+        return contributionsList.getAdapter();
+    }
+
+    public void setAdapter(ListAdapter adapter) {
+        this.contributionsList.setAdapter(adapter);
     }
 
     @Override
@@ -109,6 +102,11 @@ public class ContributionsListFragment extends SherlockFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
     @Override

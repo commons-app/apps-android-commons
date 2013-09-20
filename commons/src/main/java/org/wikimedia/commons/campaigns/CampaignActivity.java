@@ -1,14 +1,18 @@
 package org.wikimedia.commons.campaigns;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import org.wikimedia.commons.R;
+import org.wikimedia.commons.contributions.ContributionsActivity;
 
 public  class CampaignActivity
         extends SherlockFragmentActivity
@@ -16,12 +20,20 @@ public  class CampaignActivity
 
     private ListView campaignsListView;
     private CampaignsListAdapter campaignsListAdapter;
-    private Cursor allCampaigns;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_campaigns);
         campaignsListView = (ListView) findViewById(R.id.campaignsList);
+
+        campaignsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Campaign c = Campaign.fromCursor((Cursor) adapterView.getItemAtPosition(i));
+                Intent intent = new Intent(CampaignActivity.this, ContributionsActivity.class);
+                intent.putExtra("campaign", c);
+                startActivity(intent);
+            }
+        });
         getSupportLoaderManager().initLoader(0, null, this);
     }
 

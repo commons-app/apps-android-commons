@@ -7,9 +7,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Campaign {
+// FIXME: Implement Parcelable
+public class Campaign implements Serializable {
     private boolean enabled;
 
     private String autoAddWikitext;

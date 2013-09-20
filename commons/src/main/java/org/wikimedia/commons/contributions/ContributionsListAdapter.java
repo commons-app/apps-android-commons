@@ -1,5 +1,6 @@
 package org.wikimedia.commons.contributions;
 
+import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -19,16 +20,16 @@ import org.wikimedia.commons.Utils;
 class ContributionsListAdapter extends CursorAdapter {
 
     private DisplayImageOptions contributionDisplayOptions = Utils.getGenericDisplayOptions().build();;
-    private SherlockFragment fragment;
+    private Activity activity;
 
-    public ContributionsListAdapter(SherlockFragment fragment, Cursor c, int flags) {
-        super(fragment.getActivity(), c, flags);
-        this.fragment = fragment;
+    public ContributionsListAdapter(Activity activity, Cursor c, int flags) {
+        super(activity, c, flags);
+        this.activity = activity;
     }
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
-        View parent = fragment.getActivity().getLayoutInflater().inflate(R.layout.layout_contribution, viewGroup, false);
+        View parent = activity.getLayoutInflater().inflate(R.layout.layout_contribution, viewGroup, false);
         parent.setTag(new ContributionViewHolder(parent));
         return parent;
     }
@@ -38,12 +39,12 @@ class ContributionsListAdapter extends CursorAdapter {
         final ContributionViewHolder views = (ContributionViewHolder)view.getTag();
         Contribution contribution = Contribution.fromCursor(cursor);
 
-        String actualUrl = TextUtils.isEmpty(contribution.getImageUrl()) ? contribution.getLocalUri().toString() : contribution.getThumbnailUrl(320);
+        String actualUrl = (contribution.getLocalUri() != null && TextUtils.isEmpty(contribution.getLocalUri().toString())) ? contribution.getLocalUri().toString() : contribution.getThumbnailUrl(640);
 
         if(views.url == null || !views.url.equals(actualUrl)) {
             if(actualUrl.startsWith("http")) {
                 MediaWikiImageView mwImageView = (MediaWikiImageView)views.imageView;
-                mwImageView.setMedia(contribution, ((CommonsApplication) fragment.getActivity().getApplicationContext()).getImageLoader());
+                mwImageView.setMedia(contribution, ((CommonsApplication) activity.getApplicationContext()).getImageLoader());
                 // FIXME: For transparent images
             } else {
                 com.nostra13.universalimageloader.core.ImageLoader.getInstance().displayImage(actualUrl, views.imageView, contributionDisplayOptions, new SimpleImageLoadingListener() {

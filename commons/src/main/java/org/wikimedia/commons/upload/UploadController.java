@@ -27,6 +27,7 @@ public class UploadController {
     private UploadService uploadService;
 
     private final Activity activity;
+    private Campaign campaign;
     final CommonsApplication app;
 
     public interface ContributionUploadProgress {
@@ -35,7 +36,12 @@ public class UploadController {
 
     public UploadController(Activity activity) {
         this.activity = activity;
-         app = (CommonsApplication)activity.getApplicationContext();
+        app = (CommonsApplication)activity.getApplicationContext();
+    }
+
+    public UploadController(Activity activity, Campaign campaign) {
+        this(activity);
+        this.campaign = campaign;
     }
 
     private boolean isUploadServiceConnected;
@@ -64,12 +70,7 @@ public class UploadController {
         }
     }
 
-    /* The JavaScript is Leaking!*/
     public void startUpload(String rawTitle, Uri mediaUri, String description, String mimeType, String source, ContributionUploadProgress onComplete) {
-        startUpload(rawTitle, mediaUri, description, mimeType, source, null, onComplete);
-    }
-
-    public void startUpload(String rawTitle, Uri mediaUri, String description, String mimeType, String source, Campaign campaign, ContributionUploadProgress onComplete) {
         Contribution contribution;
 
         String title = rawTitle;
