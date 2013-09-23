@@ -1,6 +1,7 @@
 package org.wikimedia.commons.campaigns;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import org.wikimedia.commons.CommonsApplication;
 import org.wikimedia.commons.R;
 import org.wikimedia.commons.contributions.ContributionsActivity;
 
@@ -24,6 +26,8 @@ public  class CampaignActivity
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_campaigns);
+
+        ContentResolver.setSyncAutomatically(((CommonsApplication)getApplicationContext()).getCurrentAccount(), CampaignsContentProvider.AUTHORITY, true); // Enable sync by default!
         campaignsListView = (ListView) findViewById(R.id.campaignsList);
 
         campaignsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
