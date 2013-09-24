@@ -93,9 +93,42 @@
     <string name="menu_download">Download</string>
     <string name="preference_license">License</string>
 
+    <!-- These three are semi-legacy entries, and should be changed in future -->
     <string name="license_name_cc_by_sa">CC\u00A0Attribution-ShareAlike\u00A03.0</string>
     <string name="license_name_cc_by">CC\u00A0Attribution\u00A03.0</string>
     <string name="license_name_cc0">CC0</string>
+
+    <!-- Licenses from the default UploadWizard selection list -->
+    <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+    <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Austria)</string>
+    <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Germany)</string>
+    <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonia)</string>
+    <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Spain)</string>
+    <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Croatia)</string>
+    <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxembourg)</string>
+    <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Netherlands)</string>
+    <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norway)</string>
+    <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Poland)</string>
+    <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romania)</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="license_name_cc_zero">CC Zero</string>
+    <string name="license_name_own_pd">own-pd</string>
+    <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
+    <string name="license_name_cc_by_2_5">CC BY 2.5</string>
+    <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
+    <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
+    <string name="license_name_cc_2_0">CC BY 2.0</string>
+    <string name="license_name_fal">Free Art License</string>
+    <string name="license_name_pd_old_100">Public domain (author died over 100 years ago)</string>
+    <string name="license_name_pd_old">Public domain (copyright expired)</string>
+    <string name="license_name_pd_art">Public domain (art)</string>
+    <string name="license_name_pd_us">Public domain (US)</string>
+    <string name="license_name_pd_usgov">Public domain (US government)</string>
+    <string name="license_name_pd_usgov_nasa">Public domain (NASA)</string>
+    <string name="license_name_pd_ineligible">Public domain (ineligible for copyright)</string>
+    <string name="license_name_attribution">Attribution</string>
+    <string name="license_name_gfdl">GNU Free Documentation License</string>
+
     <string name="welcome_wikipedia_text">Contribute your images. Help Wikipedia articles come to life!</string>
     <string name="welcome_wikipedia_subtext">Images on Wikipedia come from Wikimedia Commons.</string>
     <string name="welcome_copyright_text">Your images help educate people around the world.</string>
