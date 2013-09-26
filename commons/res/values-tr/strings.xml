@@ -77,4 +77,7 @@ Yazılım hataları: &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?p
   <string name="welcome_copyright_subtext">Telif hakkı olan ve internette bulunan film afişi, kitap kapağı gibi malzemelerin kullanımından kaçının.</string>
   <string name="welcome_final_text">Bunu anladınız mı?</string>
   <string name="welcome_final_button_text">Evet!</string>
+  <string name="detail_panel_cats_label">Kategoriler</string>
+  <string name="detail_panel_cats_loading">Yükleniyor...</string>
+  <string name="detail_panel_cats_none">Hiçbir şey seçilmedi</string>
 </resources>

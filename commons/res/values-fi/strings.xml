@@ -65,4 +65,6 @@ Napauta tätä viestiä (tai paina takaisin) ohittaaksesi tämän vaiheen.</stri
   <string name="menu_abort">Keskeytä</string>
   <string name="share_license_summary" fuzzy="true">Hyväksyt tallentavasi tiedoston CC-BY-SA 3.0 -lisenssin ehtojen mukaisesti.</string>
   <string name="menu_download">Lataa</string>
+  <string name="detail_panel_cats_label">Luokat</string>
+  <string name="detail_panel_cats_loading">Ladataan...</string>
 </resources>

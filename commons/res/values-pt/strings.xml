@@ -45,4 +45,7 @@
   <string name="menu_abort">Abortar</string>
   <string name="preference_license">Licença</string>
   <string name="welcome_final_button_text">Sim</string>
+  <string name="detail_panel_cats_label">Categorias</string>
+  <string name="detail_panel_cats_loading">A carregar...</string>
+  <string name="detail_panel_cats_none">Nenhuma selecionada</string>
 </resources>
