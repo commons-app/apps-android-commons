@@ -218,7 +218,7 @@ public class MediaDataExtractor {
                     // Hopefully a language code. Nasty hack!
                     String lang = title;
                     Node valueNode = findTemplateParameter(node, 1);
-                    String value = Utils.getStringFromDOM(valueNode); // hope there's no subtemplates or formatting for now
+                    String value = valueNode.getTextContent(); // hope there's no subtemplates or formatting for now
                     texts.put(lang, value);
                 }
             } else if (node.getNodeType() == Node.TEXT_NODE) {
