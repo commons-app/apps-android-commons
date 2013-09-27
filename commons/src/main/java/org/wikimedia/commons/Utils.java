@@ -38,7 +38,7 @@ public class Utils {
     public static String makeThumbBaseUrl(String filename) {
         String name = filename.replaceFirst("File:", "").replace(" ", "_");
         String sha = new String(Hex.encodeHex(DigestUtils.md5(name)));
-        return String.format("%s/%s/%s/%s", CommonsApplication.IMAGE_URL_BASE, sha.substring(0, 1), sha.substring(0, 2), name);
+        return String.format("%s/%s/%s/%s", CommonsApplication.IMAGE_URL_BASE, sha.substring(0, 1), sha.substring(0, 2), urlEncode(name));
     }
 
 
