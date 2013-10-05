@@ -67,8 +67,8 @@
   <string name="share_license_summary">ചിത്രം %1$s പ്രകാരം അനുമതി നൽകപ്പെടുന്നതാണ്</string>
   <string name="menu_download">ഡൗൺലോഡ്</string>
   <string name="preference_license">അനുമതി</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">സി.സി.u00A0ആട്രിബ്യൂഷൻ-ഷെയർ‌എലൈക്</string>
-  <string name="license_name_cc_by" fuzzy="true">സി.സി.u00A0ആട്രിബ്യൂഷൻ</string>
+  <string name="license_name_cc_by_sa">സി.സി.u00A0ആട്രിബ്യൂഷൻ-ഷെയർ‌എലൈക്u00A03.0</string>
+  <string name="license_name_cc_by">സി.സി.u00A0ആട്രിബ്യൂഷൻu00A03.0</string>
   <string name="license_name_cc0">സി.സി.0</string>
   <string name="welcome_wikipedia_text">താങ്കളെടുക്കുന്ന ചിത്രങ്ങൾ സംഭാവന ചെയ്യുക. വിക്കിപീഡിയ ലേഖനങ്ങൾ ജീവസ്സുറ്റതാക്കിത്തീർക്കുക!</string>
   <string name="welcome_wikipedia_subtext">വിക്കിപീഡിയയിലുള്ള ചിത്രങ്ങൾ വിക്കിമീഡിയ കോമൺസിൽ നിന്നാണ്</string>
@@ -76,4 +76,7 @@
   <string name="welcome_copyright_subtext">ഇന്റർനെറ്റിൽ നിന്നും താങ്കൾക്ക് തേടിയെടുക്കാനാവുന്നതോ, പോസ്റ്ററുകൾ, പുസ്തകങ്ങളുടെ പുറംചട്ടകൾ എന്നിവിടങ്ങളിൽ നിന്നും മറ്റും ലഭിക്കുന്നതോ ആയ പകർപ്പവകാശസംരക്ഷിതങ്ങളായവ ഒഴിവാക്കുക.</string>
   <string name="welcome_final_text">മനസ്സിലായോ?</string>
   <string name="welcome_final_button_text">ശരി!</string>
+  <string name="detail_panel_cats_label">വർഗ്ഗങ്ങൾ</string>
+  <string name="detail_panel_cats_loading">ശേഖരിക്കുന്നു...</string>
+  <string name="detail_panel_cats_none">ഒന്നും തിരഞ്ഞെടുത്തിട്ടില്ല</string>
 </resources>

@@ -17,6 +17,7 @@
   <string name="title_activity_contributions">Manas augsupielades</string>
   <string name="contribution_state_queued">Rindā iekļauts</string>
   <string name="contribution_state_failed">Neizdevās</string>
+  <string name="contribution_state_in_progress">%1$d%% pabeigti</string>
   <string name="contribution_state_starting">Augšupielādē</string>
   <string name="menu_from_gallery">No galerijas</string>
   <string name="menu_from_camera">Uzņemt fotoattēlu</string>
@@ -46,5 +47,9 @@
   <string name="menu_abort">Atcelt</string>
   <string name="menu_download">Lejupielādēt</string>
   <string name="preference_license">Licence</string>
+  <string name="license_name_cc0">CC0</string>
+  <string name="welcome_final_text">Jums šķiet, ka sapratāt?</string>
   <string name="welcome_final_button_text">Jā!</string>
+  <string name="detail_panel_cats_label">Kategorijas</string>
+  <string name="detail_panel_cats_loading">Ielādē…</string>
 </resources>

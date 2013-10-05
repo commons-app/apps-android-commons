@@ -61,7 +61,7 @@ Klickt op dëse Message (oder dréck op Zréck) fir dëse Schrëtt z\'iwwerspran
   <string name="no_uploads_yet">Dir hutt nach keng Fotoen eropgelueden.</string>
   <string name="menu_retry">Nach eng Kéier probéieren</string>
   <string name="menu_abort">Ofbriechen</string>
-  <string name="share_license_summary">Dëst Bild gëtt ënnert %1$s lizenzéiert</string>
+  <string name="share_license_summary">Dëst Bild gëtt ënner %1$s lizenzéiert</string>
   <string name="menu_download">Eroflueden</string>
   <string name="preference_license">Lizenz</string>
   <string name="license_name_cc_by_sa">CCu00A0Attribution-ShareAlikeu00A03.0</string>
@@ -70,7 +70,7 @@ Klickt op dëse Message (oder dréck op Zréck) fir dëse Schrëtt z\'iwwerspran
   <string name="welcome_wikipedia_text">Maacht mat mat Äre Biller. Hëlleft Wikipedia-Artikele méi lieweg ze maachen!</string>
   <string name="welcome_wikipedia_subtext">Biller op Wikipedia komme vu Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Är Biller hëllefe Leit op der ganzer Welt ze forméieren.</string>
-  <string name="welcome_copyright_subtext">Evitéiert Materialien déi ënnert de Copyright falen an déi Dir um Internet fonnt hutt, genee esou wéi Biller vu Pousteren, Bicher, asw.</string>
+  <string name="welcome_copyright_subtext">Evitéiert Materialien déi ënner de Copyright falen an déi Dir um Internet fonnt hutt, genee esou wéi Biller vu Pousteren, Bicher, asw.</string>
   <string name="welcome_final_text">Dir mengt Dir huet et verstan?</string>
   <string name="welcome_final_button_text">Jo!</string>
   <string name="detail_panel_cats_label">Kategorien</string>

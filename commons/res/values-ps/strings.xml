@@ -21,7 +21,7 @@
   <string name="menu_share">شريکول</string>
   <string name="menu_open_in_browser">په کتنمل کې کتل</string>
   <string name="share_title_hint">سرليک</string>
-  <string name="share_description_hint">څرګندونه</string>
+  <string name="share_description_hint">څرگندونه</string>
   <string name="login_failed_generic">غونډال کې ننوتنه نابريالې شوه</string>
   <string name="share_upload_button">پورته کول</string>
   <string name="provider_modifications">بدلونونه</string>
@@ -34,4 +34,8 @@
   <string name="menu_about">په اړه</string>
   <string name="title_activity_about">په اړه</string>
   <string name="menu_retry">بياآزمويل</string>
+  <string name="menu_download">ښکته کول</string>
+  <string name="preference_license">منښتليک</string>
+  <string name="welcome_final_button_text">هو</string>
+  <string name="detail_panel_cats_label">وېشنيزې</string>
 </resources>
