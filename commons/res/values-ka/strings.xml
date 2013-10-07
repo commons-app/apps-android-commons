@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">ვიკისაწყობი</string>
+  <string name="app_name_beta">ვიკისაწყობი ბეტა</string>
+  <string name="menu_settings">კონფიგურაცია</string>
+  <string name="username">მომხმარებლის სახელი</string>
+  <string name="password">პაროლი</string>
+  <string name="login">შესვლა</string>
+  <string name="logging_in_title">სისტემაში შესვლა</string>
+  <string name="logging_in_message">გთხოვთ მოიცადოთ...</string>
+  <string name="login_success">სისტემაში შესვლა წარმატებით განხორციელდა!</string>
+  <string name="login_failed">სისტემაში შესვლა ვერ განხორციელდა!</string>
+  <string name="title_activity_contributions">ჩემი ატვირთვები</string>
+  <string name="menu_from_gallery">გალერეიდან</string>
+  <string name="menu_from_camera">ფოტოს გადაღება</string>
+  <string name="provider_contributions">ჩემი ატვირთვები</string>
+  <string name="menu_share">გაზიარება</string>
+  <string name="menu_open_in_browser">ბრაუზერში გახსნა</string>
+  <string name="share_title_hint">სათაური</string>
+  <string name="share_description_hint">აღწერა</string>
+  <string name="share_upload_button">ატვირთვა</string>
+  <string name="menu_upload_single">ატვირთვა</string>
+  <string name="menu_save_categories">შენახვა</string>
+  <string name="categories_activity_title">კატეგორია</string>
+  <string name="title_activity_settings">კონფიგურაცია</string>
+  <string name="menu_about">პროგრამის შესახებ</string>
+  <string name="title_activity_about">პროგრამის შესახებ</string>
+  <string name="menu_feedback">გამოხმაურების გაგზავნა (ელ.ფოსტით)</string>
+  <string name="menu_retry">გამეორება</string>
+  <string name="menu_abort">შეწყვეტა</string>
+  <string name="menu_download">ჩამოტვირთვა</string>
+  <string name="preference_license">ლიცენზია</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Attribution-ShareAlike</string>
+  <string name="license_name_cc_by" fuzzy="true">CCu00A0Attribution</string>
+  <string name="license_name_cc0">CC0</string>
+  <string name="welcome_final_button_text">დიახ!</string>
+</resources>

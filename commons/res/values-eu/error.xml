@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="crash_dialog_title">Commons apurtu da</string>
+  <string name="crash_dialog_text">Uiii. Zerbait gaizki dabil!</string>
+  <string name="crash_dialog_comment_prompt">Esaiguzu zer ari zinen egiten, eta bidaliguzu e-posta bidez. Saiatuko gara hori konpontzen!</string>
+  <string name="crash_dialog_ok_toast">Mila esker!</string>
+</resources>

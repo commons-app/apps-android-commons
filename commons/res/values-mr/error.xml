@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="crash_dialog_title">कॉमन्स कोसळले आहे</string>
+  <string name="crash_dialog_text">ओह. काहीतरी गडबड झाली!</string>
+  <string name="crash_dialog_comment_prompt">आम्हास सांगा आपण काय करीत होता, मग ते आम्हास विपत्राद्वारे पाठवा.आम्ही ते ठिक करण्यास मदत करु!</string>
+  <string name="crash_dialog_ok_toast">धन्यवाद!</string>
+</resources>

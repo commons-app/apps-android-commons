@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Wikimedia Commons</string>
+  <string name="app_name_beta">Wikimedia Commons Beta</string>
+  <string name="menu_settings">Pengaturan</string>
+  <string name="username">Nama pengguna</string>
+  <string name="password">Kata sandi</string>
+  <string name="login">Masuk log</string>
+  <string name="logging_in_title">Memasuki log</string>
+  <string name="logging_in_message">Silakan tunggu...</string>
+  <string name="login_success">Berhasil masuk log!</string>
+  <string name="login_failed">Masuk log gagal!</string>
+  <string name="authentication_failed">Autentikasi gagal!</string>
+  <string name="uploading_started">Mulai unggah!</string>
+  <string name="upload_completed_notification_title">%1$s terunggah!</string>
+  <string name="upload_completed_notification_text">Tekan untuk melihat unggahan Anda</string>
+  <string name="upload_progress_notification_title_start">Memulai unggahan %1$s</string>
+  <string name="upload_progress_notification_title_in_progress">%1$s terunggah!</string>
+  <string name="upload_progress_notification_title_finishing">Menyelesaikan pengunggahan %1$s</string>
+  <string name="upload_failed_notification_title">Mengunggah %1$s gagal</string>
+  <string name="upload_failed_notification_subtitle">Tekan untuk melihat</string>
+  <string name="title_activity_contributions">Unggahan saya</string>
+  <string name="contribution_state_queued">Antrean</string>
+  <string name="contribution_state_failed">Gagal</string>
+  <string name="contribution_state_in_progress">%1$d%% selesai</string>
+  <string name="contribution_state_starting">Mengunggah</string>
+  <string name="menu_from_gallery">Dari Galeri</string>
+  <string name="menu_from_camera">Ambil foto</string>
+  <string name="provider_contributions">Unggahan saya</string>
+  <string name="menu_share">Bagikan</string>
+  <string name="menu_open_in_browser">Buka di Peramban</string>
+  <string name="share_title_hint">Judul</string>
+  <string name="share_description_hint">Deskripsi</string>
+  <string name="login_failed_network">Tidak dapat login - kesalahan pada jaringan</string>
+  <string name="login_failed_username">Tidak dapat masuk log - harap periksa nama pengguna Anda</string>
+  <string name="login_failed_password">Tidak dapat masuk log - harap periksa kata sandi Anda</string>
+  <string name="login_failed_throttled">Terlalu banyak usaha yang gagal. Harap coba lagi dalam beberapa menit</string>
+  <string name="login_failed_blocked">Maaf, pengguna ini telah diblokir di Commons</string>
+  <string name="login_failed_generic">Gagal masuk log</string>
+  <string name="share_upload_button">Unggah</string>
+  <string name="multiple_share_base_title">Beri nama set ini</string>
+  <string name="provider_modifications">Modifikasi</string>
+  <string name="menu_upload_single">Unggah</string>
+  <string name="categories_search_text_hint">Telusuri kategori</string>
+  <string name="menu_save_categories">Simpan</string>
+  <string name="categories_not_found">Tidak ada kategori yang cocok %1$s  ditemukan</string>
+  <string name="categories_skip_explanation">Tambahkan kategori untuk membuat citra Anda lebih mudah ditemukan di Wikimedia Commons.
+
+Mulai mengetik untuk menambahkan kategori.
+Tekan pesan ini (atau pukul kembali) untuk melewatkan langkah ini.</string>
+  <string name="categories_activity_title">Kategori</string>
+  <string name="preference_tracking">Laporan penggunaan</string>
+  <string name="preference_tracking_summary">Kirimkan laporan penggunaan ke Wikimedia untuk membantu kami meningkatkan aplikasi</string>
+  <string name="title_activity_settings">Pengaturan</string>
+  <string name="menu_about">Tentang</string>
+  <string name="about_license">Perangkat lunak terbuka dirilis di bawah &lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;lisensi Apache v2&lt;/a&gt;</string>
+  <string name="about_improve">Bersumber pada &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;. Bug di &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Kebijakan privasi&lt;/a&gt;</string>
+  <string name="title_activity_about">Tentang</string>
+  <string name="menu_feedback">Kirim umpan balik (via Surel)</string>
+  <string name="provider_categories">Kategori yang terakhir digunakan</string>
+  <string name="waiting_first_sync">Menunggu sinkronisasi pertama...</string>
+  <string name="no_uploads_yet">Anda belum mengunggah foto apapun.</string>
+  <string name="menu_retry">Coba lagi</string>
+  <string name="menu_abort">Batalkan</string>
+  <string name="share_license_summary">Citra ini akan dilisensikan di bawah %1$s</string>
+  <string name="menu_download">Unduh</string>
+  <string name="preference_license">Lisensi</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Attribution-ShareAlike</string>
+  <string name="license_name_cc_by" fuzzy="true">CCu00A0Attribution</string>
+  <string name="license_name_cc0">CC0</string>
+  <string name="welcome_wikipedia_text">Berkontribusi dengan gambar-gambar anda. Bantulah artikel Wikipedia menjadi hidup!</string>
+  <string name="welcome_wikipedia_subtext">Gambar di Wikipedia diambil dari Wikimedia Commons.</string>
+  <string name="welcome_copyright_text">Gambar Anda membantu mendidik orang-orang di seluruh dunia</string>
+  <string name="welcome_copyright_subtext">Hindari materi berhak cipta yang Anda temukan dari internet serta gambar poster, sampul buku, d.l.l.</string>
+  <string name="welcome_final_text">Apakah Anda paham?</string>
+  <string name="welcome_final_button_text">Ya!</string>
+</resources>

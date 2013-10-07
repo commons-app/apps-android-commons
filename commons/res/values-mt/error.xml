@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="crash_dialog_title">Commons waqaf jaħdem</string>
+  <string name="crash_dialog_text">Oops. Xi ħaġa marret ħażin!</string>
+  <string name="crash_dialog_comment_prompt">Għidilna dak li kont qiegħed tagħmel, u imbgħad aqsmu magħna permezz tal-posta elettronika. Tgħinna nirranġaw il-problema!</string>
+  <string name="crash_dialog_ok_toast">Grazzi!</string>
+</resources>

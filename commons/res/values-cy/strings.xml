@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Comin Wikimedia</string>
+  <string name="app_name_beta">Comin Wikimedia Beta</string>
+  <string name="menu_settings">Gosodiadau</string>
+  <string name="username">Enw defnyddiwr</string>
+  <string name="password">Cyfrinair</string>
+  <string name="login">Mewngofnodi</string>
+  <string name="logging_in_title">Wrthi\'n mewngofnodi</string>
+  <string name="logging_in_message">Disgwyliwch...</string>
+  <string name="login_success">Llwyddodd y mewngofnodi!</string>
+  <string name="login_failed">Methodd y mewngofnodi!</string>
+  <string name="authentication_failed">Methodd y dilysu!</string>
+  <string name="uploading_started">Dechreuodd yr uwchlwytho!</string>
+  <string name="upload_completed_notification_title">Uwchlwythwyd %1$s!</string>
+  <string name="upload_completed_notification_text">Tapiwch i weld eich uwchlwythiad</string>
+  <string name="upload_progress_notification_title_start">Yn dechrau uwchlwytho %1$s</string>
+  <string name="upload_progress_notification_title_in_progress">Wrthi\'n uwchlwytho %1$s</string>
+  <string name="upload_progress_notification_title_finishing">Yn gorffen uwchlwytho %1$s</string>
+  <string name="upload_failed_notification_title">Methwyd uwchlwytho %1$s</string>
+  <string name="upload_failed_notification_subtitle">Tapiwch i weld</string>
+  <string name="title_activity_contributions">Fy uwchlwythiadau</string>
+  <string name="contribution_state_queued">Yn y ciw</string>
+  <string name="contribution_state_failed">Methiant</string>
+  <string name="contribution_state_in_progress">Wedi cwblhau %1$d%%</string>
+  <string name="contribution_state_starting">Ar fin uwchlwytho</string>
+  <string name="menu_from_gallery">O\'r galeri</string>
+  <string name="menu_from_camera">Tynnu llun</string>
+  <string name="provider_contributions">Fy uwchlwythiadau</string>
+  <string name="menu_share">Rhannu</string>
+  <string name="menu_open_in_browser">Agor yn y Porwr</string>
+  <string name="share_title_hint">Teitl</string>
+  <string name="share_description_hint">Disgrifiad</string>
+  <string name="login_failed_network">Yn methu mewngofnodi - methodd y rhwydwaith</string>
+  <string name="login_failed_username">Yn methu mewngofnodi - gwirwch eich enw defnyddiwr</string>
+  <string name="login_failed_password">Yn methu mewngofnodi - gwirwch eich cyfrinair</string>
+  <string name="login_failed_throttled">Cafwyd gormod o ymgeision aflwyddiannus. Oedwch ennyd cyn ceisio eto.</string>
+  <string name="login_failed_blocked">Ymddiheurwn. Mae\'r defnyddiwr hwn wedi ei flocio ar Gomin Wikimedia</string>
+  <string name="login_failed_generic">Methodd y mewngofnodi</string>
+  <string name="share_upload_button">Uwchlwyther</string>
+  <string name="multiple_share_base_title">Enwch y set hwn</string>
+  <string name="provider_modifications">Newidiadau</string>
+  <string name="menu_upload_single">Uwchlwytho</string>
+  <string name="categories_search_text_hint">Archwilio\'r categorïau</string>
+  <string name="menu_save_categories">Cadwer</string>
+  <string name="categories_not_found">Dim categori\'n cyfateb i %1$s ar gael</string>
+  <string name="categories_skip_explanation">Cychwynwch deipio i ychwanegu categoriau.
+Cyffyrddwch y neges hon (neu ddewis Nôl) i fynd i\'r cam nesaf.</string>
+  <string name="categories_activity_title">Categorïau</string>
+  <string name="preference_tracking">Adroddiadau ar y defnydd</string>
+  <string name="preference_tracking_summary">Danfonwch yr adroddiadau ar y defnydd i Wikimedia i\'n cynorthwyo i wella\'r ap</string>
+  <string name="title_activity_settings">Gosodiadau</string>
+  <string name="menu_about">Amdanom</string>
+  <string name="about_license">Meddalwedd Cynnwys Agored wedi\'i rhyddhau o dan &lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;Drwydded Apache v2&lt;/a&gt;</string>
+  <string name="about_improve">Y ffynhonell ar &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;. Bygiau ar &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Polisi preifatrwydd&lt;/a&gt;</string>
+  <string name="title_activity_about">Amdanom</string>
+  <string name="menu_feedback">Danfonwch Adborth (drwy Ebost)</string>
+  <string name="provider_categories">Categorïau a ddefnyddiwyd yn ddiweddar</string>
+  <string name="waiting_first_sync">Yn aros am y sync cyntaf...</string>
+  <string name="no_uploads_yet">Nid ydych wedi uwchlwytho ffotograffau eto.</string>
+  <string name="menu_retry">Ceisiwch eto</string>
+  <string name="menu_abort">Rhodder heibio</string>
+  <string name="share_license_summary">Caiff y ddelwedd hon ei thrwyddedu yn ôl termau\'r drwydded %1$s.</string>
+  <string name="menu_download">Lawrlwytho</string>
+  <string name="preference_license">Trwydded</string>
+  <string name="license_name_cc_by_sa">CCu00A0Attribution-ShareAlikeu00A03.0</string>
+  <string name="license_name_cc_by">CCu00A0Attributionu00A03.0</string>
+  <string name="license_name_cc0">CC0</string>
+  <string name="welcome_wikipedia_text">Cyfranwch luniau. Cynorthwywch Wicipedia i roi bywyd yn yr erthyglau!</string>
+  <string name="welcome_wikipedia_subtext">Mae\'r delweddau ar Wicipedia\'n dod o
+Gomin Wikimedia.</string>
+  <string name="welcome_copyright_text">Mae eich delweddau\'n cynorthwyo i addysgu pobl ledled y byd.</string>
+  <string name="welcome_copyright_subtext">Cadwch yn glir o ddeunydd a hawlfraint arno a ganfyddwch ar y we, ac hefyd lluniau o bosteri, cloriau llyfrau, ayb.</string>
+  <string name="welcome_final_text">Ydych chi wedi deall?</string>
+  <string name="welcome_final_button_text">Do!</string>
+  <string name="detail_panel_cats_label">Categorïau</string>
+  <string name="detail_panel_cats_loading">Wrthi\'n llwytho...</string>
+  <string name="detail_panel_cats_none">Dim categorïau wedi eu dewis</string>
+</resources>
