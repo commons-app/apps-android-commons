@@ -72,4 +72,7 @@
   <string name="welcome_copyright_subtext">تجنب المواد محفوظة الحقوق الموجودة على الإنترنت وصور الملصقات وأغلفة الكتب، إلخ.</string>
   <string name="welcome_final_text">هل تظن أنك فهمت؟</string>
   <string name="welcome_final_button_text">نعم!</string>
+  <string name="detail_panel_cats_label">تصنيفات</string>
+  <string name="detail_panel_cats_loading">جارٍ التحميل...</string>
+  <string name="detail_panel_cats_none">لا شيء محدد</string>
 </resources>
