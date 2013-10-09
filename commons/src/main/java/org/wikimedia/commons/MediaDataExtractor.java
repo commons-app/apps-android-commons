@@ -33,16 +33,19 @@ public class MediaDataExtractor {
     private Map<String, String> descriptions;
     private String author;
     private Date date;
+    private String license;
+    private LicenseList licenseList;
 
     /**
      * @param filename of the target media object, should include 'File:' prefix
      */
-    public MediaDataExtractor(String filename) {
+    public MediaDataExtractor(String filename, LicenseList licenseList) {
         this.filename = filename;
         categories = new ArrayList<String>();
         descriptions = new HashMap<String, String>();
         fetched = false;
         processed = false;
+        this.licenseList = licenseList;
     }
 
     /**
@@ -114,7 +117,41 @@ public class MediaDataExtractor {
             descriptions = getMultilingualText(descriptionNode);
 
             Node authorNode = findTemplateParameter(templateNode, "author");
-            author = Utils.getStringFromDOM(authorNode);
+            author = getFlatText(authorNode);
+        }
+
+        /*
+        Pull up the license data list...
+        look for the templates in two ways:
+            * look for 'self' template and check its first parameter
+            * if none, look for any of the known templates
+         */
+        Log.d("Commons", "MediaDataExtractor searching for license");
+        Node selfLicenseNode = findTemplate(doc.getDocumentElement(), "self");
+        if (selfLicenseNode != null) {
+            Node firstNode = findTemplateParameter(selfLicenseNode, 1);
+            String licenseTemplate = getFlatText(firstNode);
+            License license = licenseList.licenseForTemplate(licenseTemplate);
+            if (license == null) {
+                Log.d("Commons", "MediaDataExtractor found no matching license for self parameter: " + licenseTemplate + "; faking it");
+                this.license = licenseTemplate; // hack hack! For non-selectable licenses that are still in the system.
+            } else {
+                // fixme: record the self-ness in here too... sigh
+                // all this needs better server-side metadata
+                this.license = license.getKey();
+                Log.d("Commons", "MediaDataExtractor found self-license " + this.license);
+            }
+        } else {
+            for (License license : licenseList.values()) {
+                String templateName = license.getTemplate();
+                Node template = findTemplate(doc.getDocumentElement(), templateName);
+                if (template != null) {
+                    // Found!
+                    this.license = license.getKey();
+                    Log.d("Commons", "MediaDataExtractor found non-self license " + this.license);
+                    break;
+                }
+            }
         }
     }
 
@@ -201,6 +238,10 @@ public class MediaDataExtractor {
         throw new IOException("No matching template parameter node found.");
     }
 
+    private String getFlatText(Node parentNode) throws IOException {
+        return parentNode.getTextContent();
+    }
+
     // Extract a dictionary of multilingual texts from a subset of the parse tree.
     // Texts are wrapped in things like {{en|foo} or {{en|1=foo bar}}.
     // Text outside those wrappers is stuffed into a 'default' faux language key if present.
@@ -246,6 +287,9 @@ public class MediaDataExtractor {
 
         media.setCategories(categories);
         media.setDescriptions(descriptions);
+        if (license != null) {
+            media.setLicense(license);
+        }
 
         // add author, date, etc fields
     }

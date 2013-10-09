@@ -10,6 +10,8 @@ import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.codec.net.URLCodec;
 import org.w3c.dom.Node;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 
 import javax.xml.transform.*;
 import java.io.*;
@@ -193,5 +195,34 @@ public class Utils {
         String underscored = name.trim().replace(" ", "_");
         String uriStr = CommonsApplication.HOME_URL + urlEncode(underscored);
         return Uri.parse(uriStr);
+    }
+
+    /**
+     * Fast-forward an XmlPullParser to the next instance of the given element
+     * in the input stream (namespaced).
+     *
+     * @param parser
+     * @param namespace
+     * @param element
+     * @return true on match, false on failure
+     */
+    public static boolean xmlFastForward(XmlPullParser parser, String namespace, String element) {
+        try {
+            while (parser.next() != XmlPullParser.END_DOCUMENT) {
+                if (parser.getEventType() == XmlPullParser.START_TAG &&
+                        parser.getNamespace().equals(namespace) &&
+                        parser.getName().equals(element)) {
+                    // We found it!
+                    return true;
+                }
+            }
+            return false;
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+            return false;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

@@ -59,6 +59,7 @@ public class MediaDetailFragment extends SherlockFragment {
 
     private TextView title;
     private TextView desc;
+    private TextView license;
     private ListView listView;
     private ArrayList<String> categoryNames;
     private boolean categoriesLoaded = false;
@@ -133,6 +134,7 @@ public class MediaDetailFragment extends SherlockFragment {
         spacer = (MediaDetailSpacer) detailView.findViewById(R.id.mediaDetailSpacer);
         title = (TextView) detailView.findViewById(R.id.mediaDetailTitle);
         desc = (TextView) detailView.findViewById(R.id.mediaDetailDesc);
+        license = (TextView) detailView.findViewById(R.id.mediaDetailLicense);
 
         // Enable or disable editing on the title
         /*
@@ -160,10 +162,12 @@ public class MediaDetailFragment extends SherlockFragment {
             // FIXME: cache this data
             detailFetchTask = new AsyncTask<Void, Void, Boolean>() {
                 private MediaDataExtractor extractor;
+                private LicenseList licenseList;
 
                 @Override
                 protected void onPreExecute() {
-                    extractor = new MediaDataExtractor(media.getFilename());
+                    licenseList = new LicenseList(getActivity());
+                    extractor = new MediaDataExtractor(media.getFilename(), licenseList);
                 }
 
                 @Override
@@ -186,6 +190,16 @@ public class MediaDetailFragment extends SherlockFragment {
 
                         // Fill some fields
                         desc.setText(media.getDescription("en"));
+
+                        String licenseKey = media.getLicense();
+                        License licenseObj = licenseList.get(licenseKey);
+                        if (licenseObj == null) {
+                            license.setText(licenseKey);
+                        } else {
+                            license.setText(licenseObj.getName());
+                        }
+                        Log.d("Commons", "Media license is: " + media.getLicense());
+
 
                         categoryNames.removeAll(categoryNames);
                         categoryNames.addAll(media.getCategories());
@@ -231,7 +245,8 @@ public class MediaDetailFragment extends SherlockFragment {
         }
 
         title.setText(media.getDisplayTitle());
-        desc.setText("");
+        desc.setText(""); // fill in from network...
+        license.setText(""); // fill in from network...
 
         /*
         title.addTextChangedListener(new TextWatcher() {
