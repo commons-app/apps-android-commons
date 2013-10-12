@@ -50,8 +50,8 @@
   <string name="preference_tracking_summary">Erabiler txostenak Wikimediara bidaltzen tresna hau hobetzen laguntzen diguzu</string>
   <string name="title_activity_settings">Hobespenak</string>
   <string name="menu_about">Honi buruz</string>
-  <string name="about_license">Open Source softwarea &lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;Apache Lizentzia v2ren&lt;/a&gt; pean egina</string>
-  <string name="about_improve">Jatorria &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;en. Akatsak &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;n.</string>
+  <string name="about_license">Open Source softwarea &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache Lizentzia v2ren&lt;/a&gt; pean egina</string>
+  <string name="about_improve">Jatorria &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;en. Akatsak &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;n.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Pribatutasun politika&lt;/a&gt;</string>
   <string name="title_activity_about">Honi buruz</string>
   <string name="menu_feedback">Bidali zure iritzia (e-posta bidez)</string>

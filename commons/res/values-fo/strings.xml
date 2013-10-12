@@ -53,8 +53,8 @@ Trýst hetta boðið (ella vend aftur) fyri at droppa hetta stigið.</string>
   <string name="preference_tracking_summary">Send brúkarafrágreiðingar til Wikimedia fyri at hjálpa okkum at betra um appina</string>
   <string name="title_activity_settings">Innstillingar</string>
   <string name="menu_about">Um</string>
-  <string name="about_license">Open Source ritbúnaður útgivin undir &lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
-  <string name="about_improve">Kelda á &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;. Lýs (bugs) á &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
+  <string name="about_license">Open Source ritbúnaður útgivin undir &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
+  <string name="about_improve">Kelda á &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Lýs (bugs) á &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privatlívs politikkur&lt;/a&gt;</string>
   <string name="title_activity_about">Um</string>
   <string name="menu_feedback">Send afturmelding (við T-posti)</string>

@@ -53,8 +53,8 @@ Pouezit war ar c\'hemenn-mañ (pe distroit en a-raok) evit mont dreist ar bazenn
   <string name="preference_tracking_summary">Kas danevelloù implij deomp evit ma c\'hallfemp gwellaat an arload.</string>
   <string name="title_activity_settings">Arventennoù</string>
   <string name="menu_about">Diwar-benn</string>
-  <string name="about_license">Meziant frank a wirioù embannet dindan &lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;an Aotre-implijout Apache s2&lt;/a&gt;</string>
-  <string name="about_improve">Mammenn war &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;. Drein war &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
+  <string name="about_license">Meziant frank a wirioù embannet dindan &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;an Aotre-implijout Apache s2&lt;/a&gt;</string>
+  <string name="about_improve">Mammenn war &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Drein war &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Reolennoù prevezded&lt;/a&gt;</string>
   <string name="title_activity_about">Diwar-benn</string>
   <string name="menu_feedback">Kas ho soñj (dre bostel)</string>

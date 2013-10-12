@@ -53,8 +53,8 @@ Napauta tätä viestiä (tai paina takaisin) ohittaaksesi tämän vaiheen.</stri
   <string name="preference_tracking_summary">Lähetä käyttöraportteja Wikimedialle auttaaksesi ohjelman kehityksessä</string>
   <string name="title_activity_settings">Asetukset</string>
   <string name="menu_about">Tietoja</string>
-  <string name="about_license">Vapaan lähdekoodin ohjelmisto, joka on julkaistu &lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; -lisenssin alaisena</string>
-  <string name="about_improve">Lähdekoodi saatavilla &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHubissa&lt;/a&gt;. Ohjelmavirheet &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzillassa&lt;/a&gt;.</string>
+  <string name="about_license">Vapaan lähdekoodin ohjelmisto, joka on julkaistu &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; -lisenssin alaisena</string>
+  <string name="about_improve">Lähdekoodi saatavilla &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHubissa&lt;/a&gt;. Ohjelmavirheet &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzillassa&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Yksityisyydensuoja&lt;/a&gt;</string>
   <string name="title_activity_about">Tietoja</string>
   <string name="menu_feedback">Lähetä palautetta (sähköpostitse)</string>
