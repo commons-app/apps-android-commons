@@ -36,7 +36,7 @@
   <string name="login_failed_password">Não foi possível entrar - verifique sua senha</string>
   <string name="login_failed_throttled">Demasiadas tentativas mal sucedidas. Por favor, tente de novo dentro de alguns minutos</string>
   <string name="login_failed_blocked">Desculpe, este utilizador foi bloqueado no Commons</string>
-  <string name="menu_save_categories">Salvar</string>
+  <string name="menu_save_categories">Gravar</string>
   <string name="categories_activity_title">Categorias</string>
   <string name="title_activity_settings">Configurações</string>
   <string name="menu_about">Sobre</string>

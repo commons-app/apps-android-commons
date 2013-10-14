@@ -83,6 +83,7 @@
   <string name="license_name_cc_by_sa">CC Attribution-Sharelike License display name. Use the non-breaking space character(u00A0) between \'CC\' and \'Attribution-Sharealike\'</string>
   <string name="license_name_cc_by">CC Attribution License display name. Use the non-breaking space character(u00A0) between \'CC\' and \'Attribution\'</string>
   <string name="license_name_cc0">CC0 License display name.</string>
+  <string name="license_name_attribution">{{Identical|Attribution}}</string>
   <string name="welcome_wikipedia_text">Message inviting users to contribute their images.</string>
   <string name="welcome_wikipedia_subtext">Message explaining that Wikipedia images Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Message explaining the educational benefit of contributing images.</string>
