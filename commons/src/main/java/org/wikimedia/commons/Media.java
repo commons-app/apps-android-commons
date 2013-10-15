@@ -59,6 +59,9 @@ public class Media implements Parcelable {
     }
 
     public String getImageUrl() {
+        if(imageUrl == null) {
+            imageUrl = Utils.makeThumbBaseUrl(this.getFilename());
+        }
         return imageUrl;
     }
 
@@ -103,7 +106,7 @@ public class Media implements Parcelable {
     }
 
     public String getThumbnailUrl(int width) {
-        return Utils.makeThumbUrl(imageUrl, filename, width);
+        return Utils.makeThumbUrl(getImageUrl(), getFilename(), width);
     }
 
     public int getWidth() {
@@ -180,6 +183,10 @@ public class Media implements Parcelable {
             // FIXME: return the first available non-English description?
             return "";
         }
+    }
+
+    public Media(String filename) {
+        this.filename = filename;
     }
 
     public Media(Uri localUri, String imageUrl, String filename, String description, long dataLength, Date dateCreated, Date dateUploaded, String creator) {

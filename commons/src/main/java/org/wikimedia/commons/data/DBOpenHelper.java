@@ -3,6 +3,7 @@ package org.wikimedia.commons.data;
 import android.content.*;
 import android.database.sqlite.*;
 
+import org.wikimedia.commons.campaigns.Campaign;
 import org.wikimedia.commons.category.Category;
 import org.wikimedia.commons.contributions.*;
 import org.wikimedia.commons.modifications.ModifierSequence;
@@ -21,6 +22,7 @@ public class DBOpenHelper  extends SQLiteOpenHelper{
         Contribution.Table.onCreate(sqLiteDatabase);
         ModifierSequence.Table.onCreate(sqLiteDatabase);
         Category.Table.onCreate(sqLiteDatabase);
+        Campaign.Table.onCreate(sqLiteDatabase);
     }
 
     @Override
@@ -28,5 +30,6 @@ public class DBOpenHelper  extends SQLiteOpenHelper{
         Contribution.Table.onUpdate(sqLiteDatabase, from, to);
         ModifierSequence.Table.onUpdate(sqLiteDatabase, from, to);
         Category.Table.onUpdate(sqLiteDatabase, from, to);
+        Campaign.Table.onUpdate(sqLiteDatabase, from, to);
     }
 }

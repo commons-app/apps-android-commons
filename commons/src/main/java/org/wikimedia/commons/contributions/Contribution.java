@@ -117,13 +117,17 @@ public class Contribution extends Media {
         this.dateUploaded = date;
     }
 
+    public String getTrackingTemplates() {
+        return "{{subst:unc}}";  // Remove when we have categorization
+    }
+
     public String getPageContents() {
         StringBuffer buffer = new StringBuffer();
         SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd");
         buffer
             .append("== {{int:filedesc}} ==\n")
                 .append("{{Information\n")
-                    .append("|description=").append(description).append("\n")
+                    .append("|description=").append(getDescription()).append("\n")
                     .append("|source=").append("{{own}}\n")
                     .append("|author=[[User:").append(creator).append("|").append(creator).append("]]\n");
         if(dateCreated != null) {
@@ -133,9 +137,9 @@ public class Contribution extends Media {
         buffer
                 .append("}}").append("\n")
             .append("== {{int:license-header}} ==\n")
-                .append(Utils.licenseTemplateFor(license)).append("\n\n")
+                .append(Utils.licenseTemplateFor(getLicense())).append("\n\n")
             .append("{{Uploaded from Mobile|platform=Android|version=").append(CommonsApplication.APPLICATION_VERSION).append("}}\n")
-            .append("{{subst:unc}}");  // Remove when we have categorization
+            .append(getTrackingTemplates());
         return buffer.toString();
     }
 

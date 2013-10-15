@@ -182,7 +182,7 @@ public class MediaWikiImageView extends ImageView {
 
                         if (response.getBitmap() != null) {
                             setImageBitmap(response.getBitmap());
-                            if(tryOriginal && mMedia instanceof Contribution && response.getBitmap().getWidth() > mMedia.getWidth() || response.getBitmap().getHeight() > mMedia.getHeight()) {
+                            if(tryOriginal && mMedia instanceof Contribution && (response.getBitmap().getWidth() > mMedia.getWidth() || response.getBitmap().getHeight() > mMedia.getHeight())) {
                                 // If there is no width information for this image, save it. This speeds up image loading massively for smaller images
                                 mMedia.setHeight(response.getBitmap().getHeight());
                                 mMedia.setWidth(response.getBitmap().getWidth());

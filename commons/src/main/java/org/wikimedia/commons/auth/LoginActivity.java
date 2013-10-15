@@ -16,6 +16,7 @@ import android.support.v4.app.NavUtils;
 
 import org.wikimedia.commons.*;
 import org.wikimedia.commons.EventLog;
+import org.wikimedia.commons.campaigns.CampaignsContentProvider;
 import org.wikimedia.commons.contributions.*;
 import org.wikimedia.commons.modifications.ModificationsContentProvider;
 
@@ -67,6 +68,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 // FIXME: If the user turns it off, it shouldn't be auto turned back on
                 ContentResolver.setSyncAutomatically(account, ContributionsContentProvider.AUTHORITY, true); // Enable sync by default!
                 ContentResolver.setSyncAutomatically(account, ModificationsContentProvider.AUTHORITY, true); // Enable sync by default!
+                ContentResolver.setSyncAutomatically(account, CampaignsContentProvider.AUTHORITY, true); // Enable sync by default!
                 context.finish();
             } else {
                 int response;
