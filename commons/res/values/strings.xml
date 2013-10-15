@@ -85,8 +85,8 @@
     <string name="waiting_first_sync">Waiting for first sync...</string>
     <string name="no_uploads_yet">You have not yet uploaded any photos.</string>
 
-    <string name="menu_retry">Retry</string>
-    <string name="menu_abort">Abort</string>
+    <string name="menu_retry_upload">Retry</string>
+    <string name="menu_cancel_upload">Cancel</string>
 
     <string name="share_license_summary">This image will be licensed under %1$s</string>
 

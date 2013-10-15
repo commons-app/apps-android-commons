@@ -142,7 +142,7 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
                 ((ContributionsActivity)getActivity()).retryUpload(pager.getCurrentItem());
                 getSherlockActivity().getSupportFragmentManager().popBackStack();
                 return true;
-            case R.id.menu_abort_current_image:
+            case R.id.menu_cancel_current_image:
                 // todo: delete image
                 ((ContributionsActivity)getActivity()).deleteUpload(pager.getCurrentItem());
                 getSherlockActivity().getSupportFragmentManager().popBackStack();
@@ -228,13 +228,37 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
             if(pager != null) {
                 MediaDetailProvider provider = (MediaDetailProvider)getSherlockActivity();
                 Media m = provider.getMediaAtPosition(pager.getCurrentItem());
-                if(m != null && !m.getFilename().startsWith("File:")) {
-                    // Crude way of checking if the file has been successfully saved!
-                    menu.findItem(R.id.menu_browser_current_image).setEnabled(false).setVisible(false);
-                    menu.findItem(R.id.menu_share_current_image).setEnabled(false).setVisible(false);
-                    menu.findItem(R.id.menu_download_current_image).setEnabled(false).setVisible(false);
-                    menu.findItem(R.id.menu_retry_current_image).setEnabled(true).setVisible(true);
-                    menu.findItem(R.id.menu_abort_current_image).setEnabled(true).setVisible(true);
+                if(m != null) {
+                    // Enable default set of actions, then re-enable different set of actions only if it is a failed contrib
+
+                    if(m instanceof Contribution) {
+                        Contribution c = (Contribution)m;
+                        switch(c.getState()) {
+                            case Contribution.STATE_FAILED:
+                                menu.findItem(R.id.menu_retry_current_image).setEnabled(true).setVisible(true);
+                                menu.findItem(R.id.menu_cancel_current_image).setEnabled(true).setVisible(true);
+                                menu.findItem(R.id.menu_browser_current_image).setEnabled(false).setVisible(false);
+                                menu.findItem(R.id.menu_share_current_image).setEnabled(false).setVisible(false);
+                                menu.findItem(R.id.menu_download_current_image).setEnabled(false).setVisible(false);
+                                break;
+                            case Contribution.STATE_IN_PROGRESS:
+                            case Contribution.STATE_QUEUED:
+                                menu.findItem(R.id.menu_retry_current_image).setEnabled(false).setVisible(false);
+                                menu.findItem(R.id.menu_cancel_current_image).setEnabled(false).setVisible(false);
+                                menu.findItem(R.id.menu_browser_current_image).setEnabled(false).setVisible(false);
+                                menu.findItem(R.id.menu_share_current_image).setEnabled(false).setVisible(false);
+                                menu.findItem(R.id.menu_download_current_image).setEnabled(false).setVisible(false);
+                                break;
+                            case Contribution.STATE_COMPLETED:
+                                menu.findItem(R.id.menu_retry_current_image).setEnabled(false).setVisible(false);
+                                menu.findItem(R.id.menu_cancel_current_image).setEnabled(false).setVisible(false);
+                                menu.findItem(R.id.menu_browser_current_image).setEnabled(true).setVisible(true);
+                                menu.findItem(R.id.menu_share_current_image).setEnabled(true).setVisible(true);
+                                menu.findItem(R.id.menu_download_current_image).setEnabled(true).setVisible(true);
+                                break;
+                        }
+
+                    }
                     return;
                 }
             }
