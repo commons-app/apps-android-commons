@@ -230,6 +230,11 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
                 Media m = provider.getMediaAtPosition(pager.getCurrentItem());
                 if(m != null) {
                     // Enable default set of actions, then re-enable different set of actions only if it is a failed contrib
+                    menu.findItem(R.id.menu_retry_current_image).setEnabled(false).setVisible(false);
+                    menu.findItem(R.id.menu_cancel_current_image).setEnabled(false).setVisible(false);
+                    menu.findItem(R.id.menu_browser_current_image).setEnabled(true).setVisible(true);
+                    menu.findItem(R.id.menu_share_current_image).setEnabled(true).setVisible(true);
+                    menu.findItem(R.id.menu_download_current_image).setEnabled(true).setVisible(true);
 
                     if(m instanceof Contribution) {
                         Contribution c = (Contribution)m;
@@ -250,11 +255,7 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
                                 menu.findItem(R.id.menu_download_current_image).setEnabled(false).setVisible(false);
                                 break;
                             case Contribution.STATE_COMPLETED:
-                                menu.findItem(R.id.menu_retry_current_image).setEnabled(false).setVisible(false);
-                                menu.findItem(R.id.menu_cancel_current_image).setEnabled(false).setVisible(false);
-                                menu.findItem(R.id.menu_browser_current_image).setEnabled(true).setVisible(true);
-                                menu.findItem(R.id.menu_share_current_image).setEnabled(true).setVisible(true);
-                                menu.findItem(R.id.menu_download_current_image).setEnabled(true).setVisible(true);
+                                // Default set of menu items works fine. Treat same as regular media object
                                 break;
                         }
 
