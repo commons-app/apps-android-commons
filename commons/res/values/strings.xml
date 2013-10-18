@@ -138,4 +138,5 @@
     <string name="detail_panel_cats_label">Categories</string>
     <string name="detail_panel_cats_loading">Loading...</string>
     <string name="detail_panel_cats_none">None selected</string>
+    <string name="provider_campaigns">Campaigns</string>
 </resources>

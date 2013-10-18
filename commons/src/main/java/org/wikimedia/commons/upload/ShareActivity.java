@@ -44,23 +44,17 @@ public  class       ShareActivity
 
     private ImageView backgroundImageView;
 
-    private UploadService uploadService;
-    private boolean isUploadServiceConnected;
-    private ServiceConnection uploadServiceConnection = new ServiceConnection() {
-        public void onServiceConnected(ComponentName componentName, IBinder binder) {
-            uploadService = (UploadService) ((HandlerService.HandlerServiceLocalBinder)binder).getService();
-            isUploadServiceConnected = true;
-        }
-
-        public void onServiceDisconnected(ComponentName componentName) {
-            // this should never happen
-            throw new RuntimeException("UploadService died but the rest of the process did not!");
-        }
-    };
+    private UploadController uploadController;
 
     public void uploadActionInitiated(String title, String description) {
-        StartUploadTask task = new SingleStartUploadTask(ShareActivity.this, uploadService, title, mediaUri, description, mimeType,  source);
-        task.execute();
+        Toast startingToast = Toast.makeText(getApplicationContext(), R.string.uploading_started, Toast.LENGTH_LONG);
+        startingToast.show();
+        uploadController.startUpload(title, mediaUri, description, mimeType,  source, new UploadController.ContributionUploadProgress() {
+            public void onUploadStarted(Contribution contribution) {
+                ShareActivity.this.contribution = contribution;
+                showPostUpload();
+            }
+        });
     }
 
     private void showPostUpload() {
@@ -94,26 +88,6 @@ public  class       ShareActivity
                 .param("result", "queued")
                 .log();
         finish();
-    }
-
-    private class SingleStartUploadTask extends StartUploadTask {
-
-        private SingleStartUploadTask(Activity context, UploadService uploadService, String rawTitle, Uri mediaUri, String description, String mimeType, String source) {
-            super(context, uploadService, rawTitle, mediaUri, description, mimeType, source);
-        }
-
-        @Override
-        protected void onPreExecute() {
-            Toast startingToast = Toast.makeText(getApplicationContext(), R.string.uploading_started, Toast.LENGTH_LONG);
-            startingToast.show();
-        }
-
-        @Override
-        protected void onPostExecute(Contribution contribution) {
-            super.onPostExecute(contribution);
-            ShareActivity.this.contribution = contribution;
-            showPostUpload();
-        }
     }
 
     @Override
@@ -161,11 +135,7 @@ public  class       ShareActivity
                         .commit();
         }
 
-
-        Intent uploadServiceIntent = new Intent(getApplicationContext(), UploadService.class);
-        uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
-        startService(uploadServiceIntent);
-        bindService(uploadServiceIntent, uploadServiceConnection, Context.BIND_AUTO_CREATE);
+        uploadController.prepareService();
     }
 
     @Override
@@ -179,7 +149,7 @@ public  class       ShareActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        uploadController = new UploadController(this);
         setContentView(R.layout.activity_share);
         
         app = (CommonsApplication)this.getApplicationContext();
@@ -211,9 +181,7 @@ public  class       ShareActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(isUploadServiceConnected) {
-            unbindService(uploadServiceConnection);
-        }
+        uploadController.cleanup();
     }
 
     @Override

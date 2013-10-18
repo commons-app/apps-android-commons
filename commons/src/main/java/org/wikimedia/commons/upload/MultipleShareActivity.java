@@ -38,6 +38,7 @@ public  class       MultipleShareActivity
     private MediaDetailPagerFragment mediaDetails;
     private CategorizationFragment categorizationFragment;
 
+    private UploadController uploadController;
 
     public MultipleShareActivity() {
         super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
@@ -67,8 +68,29 @@ public  class       MultipleShareActivity
     }
 
     public void OnMultipleUploadInitiated() {
-        StartMultipleUploadTask startUploads = new StartMultipleUploadTask();
-        Utils.executeAsyncTask(startUploads);
+        final ProgressDialog dialog = new ProgressDialog(MultipleShareActivity.this);
+        dialog.setIndeterminate(false);
+        dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        dialog.setMax(photosList.size());
+        dialog.setTitle(getResources().getQuantityString(R.plurals.starting_multiple_uploads, photosList.size(), photosList.size()));
+        dialog.show();
+
+        for(int i = 0; i < photosList.size(); i++) {
+            Contribution up = photosList.get(i);
+            final int uploadCount = i + 1; // Goddamn Java
+
+            uploadController.startUpload(up, new UploadController.ContributionUploadProgress() {
+                public void onUploadStarted(Contribution contribution) {
+                    dialog.setProgress(uploadCount);
+                    if(uploadCount == photosList.size()) {
+                        dialog.dismiss();
+                        Toast startingToast = Toast.makeText(getApplicationContext(), R.string.uploading_started, Toast.LENGTH_LONG);
+                        startingToast.show();
+                    }
+                }
+            });
+        }
+
         uploadsList.setImageOnlyMode(true);
 
         categorizationFragment = (CategorizationFragment) this.getSupportFragmentManager().findFragmentByTag("categorization");
@@ -112,75 +134,6 @@ public  class       MultipleShareActivity
         finish();
     }
 
-    private class StartMultipleUploadTask extends AsyncTask<Void, Integer, Void> {
-
-        ProgressDialog dialog;
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            for(int i = 0; i < photosList.size(); i++) {
-                Contribution up = photosList.get(i);
-                String curMimetype = (String)up.getTag("mimeType");
-                if(curMimetype == null || TextUtils.isEmpty(curMimetype) || curMimetype.endsWith("*")) {
-                    String mimeType = getContentResolver().getType(up.getLocalUri());
-                    if(mimeType != null) {
-                        up.setTag("mimeType", mimeType);
-                    }
-                }
-
-                StartUploadTask startUploadTask = new StartUploadTask(MultipleShareActivity.this, uploadService, up);
-                try {
-                    Utils.executeAsyncTask(startUploadTask);
-                    startUploadTask.get();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                } catch (ExecutionException e) {
-                    throw new RuntimeException(e);
-                }
-                this.publishProgress(i);
-
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            dialog = new ProgressDialog(MultipleShareActivity.this);
-            dialog.setIndeterminate(false);
-            dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            dialog.setMax(photosList.size());
-            dialog.setTitle(getResources().getQuantityString(R.plurals.starting_multiple_uploads, photosList.size(), photosList.size()));
-            dialog.show();
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            dialog.setProgress(values[0]);
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            dialog.dismiss();
-            Toast startingToast = Toast.makeText(getApplicationContext(), R.string.uploading_started, Toast.LENGTH_LONG);
-            startingToast.show();
-        }
-    }
-
-    private UploadService uploadService;
-    private boolean isUploadServiceConnected;
-    private ServiceConnection uploadServiceConnection = new ServiceConnection() {
-        public void onServiceConnected(ComponentName componentName, IBinder binder) {
-            uploadService = (UploadService) ((HandlerService.HandlerServiceLocalBinder)binder).getService();
-            isUploadServiceConnected = true;
-        }
-
-        public void onServiceDisconnected(ComponentName componentName) {
-            // this should never happen
-            throw new RuntimeException("UploadService died but the rest of the process did not!");
-        }
-    };
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
@@ -196,6 +149,7 @@ public  class       MultipleShareActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        uploadController = new UploadController(this);
 
         setContentView(R.layout.activity_multiple_uploads);
         app = (CommonsApplication)this.getApplicationContext();
@@ -213,9 +167,7 @@ public  class       MultipleShareActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(isUploadServiceConnected) {
-            unbindService(uploadServiceConnection);
-        }
+        uploadController.cleanup();
     }
 
     private void showDetail(int i) {
@@ -267,11 +219,7 @@ public  class       MultipleShareActivity
                         .commit();
             }
             setTitle(getResources().getQuantityString(R.plurals.multiple_uploads_title, photosList.size(), photosList.size()));
-
-            Intent uploadServiceIntent = new Intent(getApplicationContext(), UploadService.class);
-            uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
-            startService(uploadServiceIntent);
-            bindService(uploadServiceIntent, uploadServiceConnection, Context.BIND_AUTO_CREATE);
+            uploadController.prepareService();
         }
 
     }
