@@ -53,8 +53,8 @@
   <string name="preference_tracking_summary">애플리케이션을 향상시킬 수 있도록 돕기 위해 위키미디어에 사용 보고서를 보냅니다</string>
   <string name="title_activity_settings">설정</string>
   <string name="menu_about">소개</string>
-  <string name="about_license">오픈 소스 소프트웨어는 &lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;아파치 라이선스 v2&lt;/a&gt;에 따라 공개됩니다</string>
-  <string name="about_improve">소스 코드는 &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;에 있으며, 버그는&lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;버그질라&lt;/a&gt;에 보고하세요.</string>
+  <string name="about_license">오픈 소스 소프트웨어는 &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;아파치 라이선스 v2&lt;/a&gt;에 따라 공개됩니다</string>
+  <string name="about_improve">소스 코드는 &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;에 있으며, 버그는&lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;버그질라&lt;/a&gt;에 보고하세요.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy/ko\"&gt;개인 정보 정책&lt;/a&gt;</string>
   <string name="title_activity_about">소개</string>
   <string name="menu_feedback">(이메일로) 피드백 보내기</string>

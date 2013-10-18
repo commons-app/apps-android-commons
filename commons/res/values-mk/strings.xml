@@ -53,8 +53,8 @@
   <string name="preference_tracking_summary">Испраќајте ѝ на Викимедија извештаи за употреба, со цел да го подобриме прилогов</string>
   <string name="title_activity_settings">Нагодувања</string>
   <string name="menu_about">За прилогот</string>
-  <string name="about_license">Програм со отворен код, издаден под лиценцата &lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;Апачи вер. 2&lt;/a&gt;</string>
-  <string name="about_improve">Изворот се наоѓа на &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;. Бубачките се на &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
+  <string name="about_license">Програм со отворен код, издаден под лиценцата &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Апачи вер. 2&lt;/a&gt;</string>
+  <string name="about_improve">Изворот се наоѓа на &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Бубачките се на &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Заштита на личните податоци\"&gt;Заштита_на_личните_податоци&lt;/a&gt;</string>
   <string name="title_activity_about">За прилогот</string>
   <string name="menu_feedback">Испратете ваш одѕив (по е-пошта)</string>

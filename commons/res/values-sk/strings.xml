@@ -33,7 +33,7 @@
   <string name="menu_save_categories">Uložiť</string>
   <string name="title_activity_settings">Nastavenia</string>
   <string name="menu_about">O aplikácii</string>
-  <string name="about_improve">Zdroj na &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;. Bugy na &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
+  <string name="about_improve">Zdroj na &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Bugy na &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
   <string name="title_activity_about">O aplikácii</string>
   <string name="menu_feedback">Odoslať spätnú väzbu (emailom)</string>
   <string name="waiting_first_sync">Čaká sa na prvú synchronizáciu...</string>

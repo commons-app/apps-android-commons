@@ -51,8 +51,8 @@ Klickt op dëse Message (oder dréck op Zréck) fir dëse Schrëtt z\'iwwerspran
   <string name="preference_tracking_summary">Schéckt Rapporten iwwer de Gebrauch vu Wikimedia fir eis ze hëllefen d\'App ze verbesseren</string>
   <string name="title_activity_settings">Astellungen</string>
   <string name="menu_about">Iwwer</string>
-  <string name="about_license">\'Open-Source-Software\' verëffentlecht ënner der &lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;Apache Lizenz v2&lt;/a&gt;</string>
-  <string name="about_improve">Quell op &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;. Feeler op &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
+  <string name="about_license">\'Open-Source-Software\' verëffentlecht ënner der &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache Lizenz v2&lt;/a&gt;</string>
+  <string name="about_improve">Quell op &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Feeler op &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Dateschutzerklärung&lt;/a&gt;</string>
   <string name="title_activity_about">Iwwer</string>
   <string name="menu_feedback">Feedback schécken (per E-Mail)</string>

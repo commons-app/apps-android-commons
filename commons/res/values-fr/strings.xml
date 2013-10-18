@@ -53,8 +53,8 @@ Appuyez sur ce message (ou retournez en arrière) pour sauter cette étape.</str
   <string name="preference_tracking_summary">Envoyer les rapports d’utilisation à Wikimédia pour nous aider à améliorer l’application</string>
   <string name="title_activity_settings">Paramètres</string>
   <string name="menu_about">À propos</string>
-  <string name="about_license">Les logiciels Open Source sont publié sous la &lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;licence Apache v2&lt;/a&gt;</string>
-  <string name="about_improve">Source sur &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;. Bogues sur &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
+  <string name="about_license">Les logiciels Open Source sont publié sous la &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;licence Apache v2&lt;/a&gt;</string>
+  <string name="about_improve">Source sur &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Bogues sur &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politique de confidentialité&lt;/a&gt;</string>
   <string name="title_activity_about">À propos</string>
   <string name="menu_feedback">Envoyez vos commentaires (par courriel)</string>

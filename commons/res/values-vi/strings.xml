@@ -53,8 +53,8 @@ Chạm vào thông điệp này (hoặc bấm Quay lại) để bỏ qua bước
   <string name="preference_tracking_summary">Gửi báo cáo sử dụng cho Wikimedia để giúp chúng tôi cải tiến ứng dụng</string>
   <string name="title_activity_settings">Cài đặt</string>
   <string name="menu_about">Giới thiệu</string>
-  <string name="about_license">Phần mềm mã nguồn mở được phát hành theo &lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;Giấy phép Apache v2&lt;/a&gt;</string>
-  <string name="about_improve">Mã nguồn có sẵn tại &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;. Báo cáo lỗi tại &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
+  <string name="about_license">Phần mềm mã nguồn mở được phát hành theo &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Giấy phép Apache v2&lt;/a&gt;</string>
+  <string name="about_improve">Mã nguồn có sẵn tại &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Báo cáo lỗi tại &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
   <string name="about_privacy_policy"/>
   <string name="title_activity_about">Giới thiệu</string>
   <string name="menu_feedback">Gửi Phản hồi (qua Thư điện tử)</string>

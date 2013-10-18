@@ -53,8 +53,8 @@
   <string name="preference_tracking_summary">إرسال تقارير الاستخدام إلى ويكيميديا لمساعدتنا على تحسين التطبيق</string>
   <string name="title_activity_settings">الإعدادات</string>
   <string name="menu_about">حول</string>
-  <string name="about_license">برنامج مفتوح المصدر منشور &lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;برخصة أباتشي النسخة 2&lt;/a&gt;</string>
-  <string name="about_improve">المصدر على &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;غِتهب&lt;/a&gt;. العلل في &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;بغزِلا&lt;/a&gt;.</string>
+  <string name="about_license">برنامج مفتوح المصدر منشور &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;برخصة أباتشي النسخة 2&lt;/a&gt;</string>
+  <string name="about_improve">المصدر على &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;غِتهب&lt;/a&gt;. العلل في &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;بغزِلا&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;سياسة الخصوصية&lt;/a&gt;</string>
   <string name="title_activity_about">حول</string>
   <string name="menu_feedback">إرسال ملاحظات (عبر البريد الإلكتروني)</string>

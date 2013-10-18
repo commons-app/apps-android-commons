@@ -54,8 +54,8 @@ Klik op dit bericht, of ga terug, om deze stap over te slaan.</string>
   <string name="preference_tracking_summary">Gebruiksrapporten verzenden naar Wikimedia om ons te helpen de app te verbeteren</string>
   <string name="title_activity_settings">Instellingen</string>
   <string name="menu_about">Over</string>
-  <string name="about_license">Open sourcesoftware vrijgegeven onder de &lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
-  <string name="about_improve">Broncode op &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;. Bugs in &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
+  <string name="about_license">Open sourcesoftware vrijgegeven onder de &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
+  <string name="about_improve">Broncode op &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Bugs in &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privacybeleid&lt;/a&gt;</string>
   <string name="title_activity_about">Over</string>
   <string name="menu_feedback">Terugkoppeling geven (via e-mail)</string>

@@ -47,8 +47,8 @@
   <string name="preference_tracking_summary">আমাদের অ্যাপ্লিকেশন উন্নয়নে সহায়তা করতে উইকিমিডিয়ায় ব্যবহারের প্রতিবেদন পাঠান।</string>
   <string name="title_activity_settings">সেটিংস</string>
   <string name="menu_about">পরিচিতি</string>
-  <string name="about_license">ওপেন সোর্স সফটওয়্যার &lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;এ্যাপাচি লাইসেন্স v2&lt;/a&gt; অধীনে প্রকাশিত</string>
-  <string name="about_improve">উত্স &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;গিটহাব&lt;/a&gt;-এ। বাগ &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;বাগজিলা&lt;/a&gt;-এ।</string>
+  <string name="about_license">ওপেন সোর্স সফটওয়্যার &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;এ্যাপাচি লাইসেন্স v2&lt;/a&gt; অধীনে প্রকাশিত</string>
+  <string name="about_improve">উত্স &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;গিটহাব&lt;/a&gt;-এ। বাগ &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;বাগজিলা&lt;/a&gt;-এ।</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;গোপনীয়তা নীতি&lt;/a&gt;</string>
   <string name="title_activity_about">পরিচিতি</string>
   <string name="menu_feedback">প্রতিক্রিয়া পাঠান (ইমেইলের মাধ্যমে)</string>
