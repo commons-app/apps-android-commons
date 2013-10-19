@@ -61,8 +61,6 @@ Appuyez sur ce message (ou retournez en arrière) pour sauter cette étape.</str
   <string name="provider_categories">Catégories utilisées récemment</string>
   <string name="waiting_first_sync">Attente de première synchronisation…</string>
   <string name="no_uploads_yet">Vous n’avez pas encore téléchargé de photo.</string>
-  <string name="menu_retry">Réessayer</string>
-  <string name="menu_abort">Annuler</string>
   <string name="share_license_summary">Cette image sera sous licence %1$s</string>
   <string name="menu_download">Télécharger</string>
   <string name="preference_license">Licence</string>

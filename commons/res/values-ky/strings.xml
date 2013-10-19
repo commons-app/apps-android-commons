@@ -61,8 +61,6 @@
   <string name="provider_categories">Жакында колдонулган түрмөктөр</string>
   <string name="waiting_first_sync">Алгачкы мезгилдештирүүнү күтүү...</string>
   <string name="no_uploads_yet">Сиз бир дагы сүрөт жүктөй элексиз.</string>
-  <string name="menu_retry">Кайталоо</string>
-  <string name="menu_abort">Үзүү</string>
   <string name="share_license_summary">Бул сүрөт %1$s лицензияланат</string>
   <string name="menu_download">Жүктөп алуу</string>
   <string name="preference_license">Лицензия</string>

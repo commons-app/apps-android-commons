@@ -61,8 +61,6 @@
   <string name="provider_categories">ਹਾਲ \'ਚ ਵਰਤੀਆਂ ਗਈਆਂ ਸ਼੍ਰੇਣੀਆਂ</string>
   <string name="waiting_first_sync">ਪਹਿਲੀ ਸਿੰਕ ਲਈ ਉਡੀਕ...</string>
   <string name="no_uploads_yet">ਤੁਸੀਂ ਹਾਲੇ ਤੱਕ ਕੋਈ ਤਸਵੀਰਾਂ ਅੱਪਲੋਡ ਨਹੀਂ ਕੀਤੀਆਂ</string>
-  <string name="menu_retry">ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕਰੋ</string>
-  <string name="menu_abort">ਰੱਦ ਕਰੋ</string>
   <string name="share_license_summary">ਇਹ ਤਸਵੀਰ ਦਾ %1$s ਹੇਠ ਲਸੰਸ ਜਾਰੀ ਕੀਤੀ ਜਾਵੇਗਾ</string>
   <string name="menu_download">ਡਾਊਨਲੋਡ</string>
   <string name="preference_license">ਲਸੰਸ</string>

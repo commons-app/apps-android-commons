@@ -61,14 +61,13 @@
   <string name="provider_categories">رده‌هایی که اخیراً استفاده شده‌اند</string>
   <string name="waiting_first_sync">در حال انتظار برای اولین همگام‌سازی...</string>
   <string name="no_uploads_yet">شما هنوز نگاره‌ای بارگذاری نکرده‌اید.</string>
-  <string name="menu_retry">سعی مجدد</string>
-  <string name="menu_abort">بی‌نتیجه</string>
-  <string name="share_license_summary">این نگاره تحت مجوز %1$s  می‌باشد</string>
+  <string name="share_license_summary">این نگاره تحت مجوز %1$s است</string>
   <string name="menu_download">بارگیری</string>
   <string name="preference_license">مجوز</string>
   <string name="license_name_cc_by_sa">CCu00A0Attribution-ShareAlikeu00A03.0</string>
   <string name="license_name_cc_by">CCu00A0Attributionu00A03.0</string>
   <string name="license_name_cc0">CC0</string>
+  <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="welcome_wikipedia_text">عکس‌های خود را به‌اشتراک بگذارید. به ویکی‌پدیا کمک کنید تا مقالاتش زنده شوند!</string>
   <string name="welcome_wikipedia_subtext">ویکی‌پدیا از تصویرهای ویکی‌انبار استفاده می‌کند.</string>
   <string name="welcome_copyright_text">تصویرهای شما به مطالعهٔ مردم در سراسر دنیا کمک می‌کنند.</string>

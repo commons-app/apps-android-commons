@@ -50,8 +50,6 @@ Hanc notionem tangere ad id praetermittere.</string>
   <string name="menu_feedback">Relationem mittere</string>
   <string name="provider_categories">Categoriae nuper adhibitae</string>
   <string name="no_uploads_yet">Nullae iam imagines adduntur.</string>
-  <string name="menu_retry">Iterum inmittere</string>
-  <string name="menu_abort">Dimittere</string>
   <string name="share_license_summary">Haec imago sub licentia %1$s communicabitur.</string>
   <string name="menu_download">Inmissio</string>
   <string name="preference_license">Licentia</string>

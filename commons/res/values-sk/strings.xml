@@ -37,8 +37,6 @@
   <string name="title_activity_about">O aplikácii</string>
   <string name="menu_feedback">Odoslať spätnú väzbu (emailom)</string>
   <string name="waiting_first_sync">Čaká sa na prvú synchronizáciu...</string>
-  <string name="menu_retry">Skúsiť znova</string>
-  <string name="menu_abort">Zrušiť</string>
   <string name="share_license_summary">Tento obrázok bude licencovaný podľa %1$s</string>
   <string name="menu_download">Stiahnuť</string>
   <string name="preference_license">Licencia</string>

@@ -61,8 +61,6 @@ Tekan pesan ini (atau pukul kembali) untuk melewatkan langkah ini.</string>
   <string name="provider_categories">Kategori yang terakhir digunakan</string>
   <string name="waiting_first_sync">Menunggu sinkronisasi pertama...</string>
   <string name="no_uploads_yet">Anda belum mengunggah foto apapun.</string>
-  <string name="menu_retry">Coba lagi</string>
-  <string name="menu_abort">Batalkan</string>
   <string name="share_license_summary">Citra ini akan dilisensikan di bawah %1$s</string>
   <string name="menu_download">Unduh</string>
   <string name="preference_license">Lisensi</string>

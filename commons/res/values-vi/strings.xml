@@ -61,8 +61,6 @@ Chạm vào thông điệp này (hoặc bấm Quay lại) để bỏ qua bước
   <string name="provider_categories">Thể loại được sử dụng gần đây</string>
   <string name="waiting_first_sync">Đang chờ đồng bộ lần đầu tiên…</string>
   <string name="no_uploads_yet">Bạn chưa tải lên hình nào.</string>
-  <string name="menu_retry">Thử lại</string>
-  <string name="menu_abort">Hủy bỏ</string>
   <string name="share_license_summary">Hình này sẽ được phát hành theo giấy phép %1$s</string>
   <string name="menu_download">Tải về</string>
   <string name="preference_license">Giấy phép</string>

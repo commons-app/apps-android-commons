@@ -62,8 +62,6 @@
   <string name="provider_categories">സമീപകാലത്ത് ഉപയോഗിച്ച വർഗ്ഗങ്ങൾ</string>
   <string name="waiting_first_sync">ആദ്യ സമീകരണത്തിനായി കാത്തിരിക്കുന്നു...</string>
   <string name="no_uploads_yet">താങ്കളിതുവരെ ചിത്രങ്ങളൊന്നും അപ്‌ലോഡ് ചെയ്തിട്ടില്ല.</string>
-  <string name="menu_retry">വീണ്ടും ശ്രമിക്കുക</string>
-  <string name="menu_abort">റദ്ദാക്കുക</string>
   <string name="share_license_summary">ചിത്രം %1$s പ്രകാരം അനുമതി നൽകപ്പെടുന്നതാണ്</string>
   <string name="menu_download">ഡൗൺലോഡ്</string>
   <string name="preference_license">അനുമതി</string>

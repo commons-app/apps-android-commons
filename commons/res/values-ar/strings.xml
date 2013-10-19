@@ -61,8 +61,6 @@
   <string name="provider_categories">التصانيف المستخدمة مؤخرا</string>
   <string name="waiting_first_sync">ينتظر أول مزامنة...</string>
   <string name="no_uploads_yet">لم ترفع بعد أية صور.</string>
-  <string name="menu_retry">أعد المحاولة</string>
-  <string name="menu_abort">عن</string>
   <string name="share_license_summary">ستُرخص الصورة برخصة %1$s.</string>
   <string name="menu_download">نزّل</string>
   <string name="preference_license">الرخصة</string>

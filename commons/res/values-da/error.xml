@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="crash_dialog_title">Commons gik ned</string>
   <string name="crash_dialog_text">Ups. Noget gik galt!</string>
+  <string name="crash_dialog_comment_prompt">Fortæl os hvad du gjorde, og så del det via e-mail til os. Det vil hjælpe os med at ordne det!</string>
   <string name="crash_dialog_ok_toast">Tak!</string>
 </resources>

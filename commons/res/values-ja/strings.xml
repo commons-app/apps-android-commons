@@ -52,8 +52,6 @@
   <string name="menu_feedback">フィードバックをメールで送信</string>
   <string name="provider_categories">最近使用したカテゴリ</string>
   <string name="no_uploads_yet">まだ写真をアップロードしていません。</string>
-  <string name="menu_retry">再試行</string>
-  <string name="menu_abort">中止</string>
   <string name="menu_download">ダウンロード</string>
   <string name="preference_license">ライセンス</string>
   <string name="license_name_cc_by_sa">CCu00A0表示-継承u00A03.0</string>
@@ -72,11 +70,13 @@
   <string name="license_name_cc_by_sa_3_0_ro">CC 表示-継承 3.0 (ルーマニア)</string>
   <string name="license_name_cc_by_3_0">CC 表示 3.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
+  <string name="license_name_own_pd">own-pd</string>
   <string name="license_name_cc_by_sa_2_5">CC 表示-継承 2.5</string>
   <string name="license_name_cc_by_2_5">CC 表示 2.5</string>
   <string name="license_name_cc_by_sa_2_0">CC 表示-継承 2.0</string>
   <string name="license_name_cc_by_2_0">CC 表示-継承 2.0</string>
   <string name="license_name_cc_2_0">CC 表示 2.0</string>
+  <string name="license_name_pd_usgov_nasa">パブリック・ドメイン (NASA)</string>
   <string name="license_name_attribution">帰属</string>
   <string name="welcome_final_text">ご理解いただけましたか?</string>
   <string name="welcome_final_button_text">はい</string>

@@ -43,8 +43,6 @@
   <string name="provider_categories">Nesen lietotās kategorijas</string>
   <string name="waiting_first_sync">Gaida pirmo sinhronizāciju...</string>
   <string name="no_uploads_yet">Jūs vēl neesat augšupielādējis nevienu fotogrāfiju.</string>
-  <string name="menu_retry">Mēģināt vēlreiz</string>
-  <string name="menu_abort">Atcelt</string>
   <string name="menu_download">Lejupielādēt</string>
   <string name="preference_license">Licence</string>
   <string name="license_name_cc0">CC0</string>

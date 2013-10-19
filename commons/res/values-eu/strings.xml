@@ -58,8 +58,6 @@
   <string name="provider_categories">Berriki erabilitako kategoriak</string>
   <string name="waiting_first_sync">Itxoiten lehenengo sinkronizaziora...</string>
   <string name="no_uploads_yet">Oraindik ez duzu argazkirik igo.</string>
-  <string name="menu_retry">Saiatu berriz</string>
-  <string name="menu_abort">Ezeztatu</string>
   <string name="share_license_summary" fuzzy="true">CC-BY-SA 3.0 lizentziaren pean argazkiak igotzekoa onartzen duzu.</string>
   <string name="menu_download">Jaitsi</string>
 </resources>

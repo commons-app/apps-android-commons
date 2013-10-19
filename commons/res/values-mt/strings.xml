@@ -54,8 +54,6 @@ Agħfas fuq dan il-messaġġ (jew mur lura) sabiex taqbeż dan il-pass.</string>
   <string name="title_activity_about">Dwar</string>
   <string name="provider_categories">Kategoriji wżati riċentament</string>
   <string name="no_uploads_yet">Għadek ma tellgħajt l-ebda ritratt.</string>
-  <string name="menu_retry">Erġa\' pprova</string>
-  <string name="menu_abort">Ħassar</string>
   <string name="share_license_summary">Din l-istampa se tiġi liċenzjata taħt %1$s</string>
   <string name="menu_download">Niżżel</string>
   <string name="preference_license">Liċenzja</string>

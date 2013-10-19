@@ -61,8 +61,6 @@
   <string name="provider_categories">Неодамна искористени категории</string>
   <string name="waiting_first_sync">Го чекам првото усогласување...</string>
   <string name="no_uploads_yet">Сè уште немате подигнато ниедна слика.</string>
-  <string name="menu_retry">Пробај пак</string>
-  <string name="menu_abort">Откажи</string>
   <string name="share_license_summary">Сликава ќе се води под лиценцата %1$s</string>
   <string name="menu_download">Преземи</string>
   <string name="preference_license">Лиценца</string>

@@ -61,8 +61,6 @@ Trykk på denne meldingen (eller trykk tilbake) for å hoppe over dette steget.<
   <string name="provider_categories">Nylig brukte kategorier</string>
   <string name="waiting_first_sync">Venter på første synkronisering...</string>
   <string name="no_uploads_yet">Du har ikke lastet opp nøn bilder ennå.</string>
-  <string name="menu_retry">Prøv igjen</string>
-  <string name="menu_abort">Avbryt</string>
   <string name="share_license_summary">Dette bildet vil bli lisensiert under %1$s</string>
   <string name="menu_download">Last ned</string>
   <string name="preference_license">Lisens</string>

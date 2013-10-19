@@ -61,8 +61,6 @@
   <string name="provider_categories">Недавно використані категорії</string>
   <string name="waiting_first_sync">В очікуванні першої синхронізації...</string>
   <string name="no_uploads_yet">Ви ще не завантажили жодної світлини.</string>
-  <string name="menu_retry">Повторити</string>
-  <string name="menu_abort">Перервати</string>
   <string name="share_license_summary">Це зображення буде ліцензоване згідно %1$s</string>
   <string name="menu_download">Завантажити</string>
   <string name="preference_license">Ліцензія</string>

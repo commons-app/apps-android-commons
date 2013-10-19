@@ -41,8 +41,6 @@
   <string name="title_activity_settings">Configurações</string>
   <string name="menu_about">Sobre</string>
   <string name="title_activity_about">Sobre</string>
-  <string name="menu_retry">Repetir</string>
-  <string name="menu_abort">Abortar</string>
   <string name="preference_license">Licença</string>
   <string name="welcome_final_button_text">Sim</string>
   <string name="detail_panel_cats_label">Categorias</string>

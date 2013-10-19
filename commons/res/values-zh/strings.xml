@@ -61,8 +61,6 @@
   <string name="provider_categories">最近使用过的类别</string>
   <string name="waiting_first_sync">等待第一次同步...</string>
   <string name="no_uploads_yet">你尚未上传任何照片。</string>
-  <string name="menu_retry">重试</string>
-  <string name="menu_abort">中止</string>
   <string name="share_license_summary">此图像将在%1$s协议下上传</string>
   <string name="menu_download">下载</string>
   <string name="preference_license">授权协议</string>
