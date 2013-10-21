@@ -10,6 +10,7 @@ import com.actionbarsherlock.view.MenuItem;
 import android.widget.*;
 
 import org.wikimedia.commons.*;
+import org.wikimedia.commons.campaigns.Campaign;
 import org.wikimedia.commons.category.CategorizationFragment;
 import org.wikimedia.commons.contributions.*;
 import org.wikimedia.commons.auth.*;
@@ -149,7 +150,11 @@ public  class       ShareActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        uploadController = new UploadController(this);
+        Campaign campaign = null;
+        if(getIntent().hasExtra(UploadService.EXTRA_CAMPAIGN)) {
+            campaign = (Campaign) getIntent().getSerializableExtra(UploadService.EXTRA_CAMPAIGN);
+        }
+        uploadController = new UploadController(this, campaign);
         setContentView(R.layout.activity_share);
         
         app = (CommonsApplication)this.getApplicationContext();

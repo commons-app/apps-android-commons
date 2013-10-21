@@ -8,6 +8,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import com.actionbarsherlock.app.SherlockFragment;
+import org.wikimedia.commons.campaigns.Campaign;
 import org.wikimedia.commons.upload.ShareActivity;
 import org.wikimedia.commons.upload.UploadService;
 
@@ -18,13 +19,15 @@ import java.util.Date;
 public class ContributionController {
     private SherlockFragment fragment;
     private Activity activity;
+    private Campaign campaign;
 
     private final static int SELECT_FROM_GALLERY = 1;
     private final static int SELECT_FROM_CAMERA = 2;
 
-    public ContributionController(SherlockFragment fragment) {
+    public ContributionController(SherlockFragment fragment, Campaign campaign) {
         this.fragment = fragment;
         this.activity = fragment.getActivity();
+        this.campaign = campaign;
     }
 
     // See http://stackoverflow.com/a/5054673/17865 for why this is done
@@ -68,6 +71,7 @@ public class ContributionController {
     public void handleImagePicked(int requestCode, Intent data) {
         Intent shareIntent = new Intent(activity, ShareActivity.class);
         shareIntent.setAction(Intent.ACTION_SEND);
+        shareIntent.putExtra(UploadService.EXTRA_CAMPAIGN, campaign);
         switch(requestCode) {
             case SELECT_FROM_GALLERY:
                 shareIntent.setType(activity.getContentResolver().getType(data.getData()));
@@ -85,11 +89,13 @@ public class ContributionController {
 
     public void saveState(Bundle outState) {
         outState.putParcelable("lastGeneratedCaptureURI", lastGeneratedCaptureURI);
+        outState.putSerializable("campaign", campaign);
     }
 
     public void loadState(Bundle savedInstanceState) {
         if(savedInstanceState != null) {
             lastGeneratedCaptureURI = (Uri) savedInstanceState.getParcelable("lastGeneratedCaptureURI");
+            campaign = (Campaign) savedInstanceState.getSerializable("campaign");
         }
     }
 

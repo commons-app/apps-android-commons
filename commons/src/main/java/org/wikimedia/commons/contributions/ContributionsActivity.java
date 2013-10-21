@@ -28,6 +28,7 @@ public  class       ContributionsActivity
         implements  LoaderManager.LoaderCallbacks<Object>,
                     AdapterView.OnItemClickListener,
                     MediaDetailPagerFragment.MediaDetailProvider,
+                    ContributionsListFragment.CurrentCampaignProvider,
                     FragmentManager.OnBackStackChangedListener {
 
 
@@ -255,5 +256,9 @@ public  class       ContributionsActivity
         } else {
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         }
+    }
+
+    public Campaign getCurrentCampaign() {
+        return campaign;
     }
 }

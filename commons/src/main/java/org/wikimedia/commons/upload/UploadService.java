@@ -30,6 +30,7 @@ public class UploadService extends HandlerService<Contribution> {
 
     public static final String ACTION_START_SERVICE = EXTRA_PREFIX + ".upload";
     public static final String EXTRA_SOURCE = EXTRA_PREFIX + ".source";
+    public static final String EXTRA_CAMPAIGN = EXTRA_PREFIX + ".campaign";
 
     private NotificationManager notificationManager;
     private ContentProviderClient contributionsProviderClient;

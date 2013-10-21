@@ -19,12 +19,18 @@ import com.actionbarsherlock.view.MenuItem;
 
 import org.wikimedia.commons.*;
 import org.wikimedia.commons.R;
+import org.wikimedia.commons.campaigns.Campaign;
 
 public class ContributionsListFragment extends SherlockFragment {
+
+    public interface CurrentCampaignProvider {
+        Campaign getCurrentCampaign();
+    }
 
     private GridView contributionsList;
     private TextView waitingMessage;
     private TextView emptyMessage;
+    private Campaign campaign;
 
     private ContributionController controller;
 
@@ -113,7 +119,7 @@ public class ContributionsListFragment extends SherlockFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        controller = new ContributionController(this);
+        controller = new ContributionController(this, ((CurrentCampaignProvider)getActivity()).getCurrentCampaign());
         controller.loadState(savedInstanceState);
 
         contributionsList = (GridView)getView().findViewById(R.id.contributionsList);
