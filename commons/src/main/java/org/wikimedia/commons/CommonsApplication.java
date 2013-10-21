@@ -26,6 +26,11 @@ import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
 import org.apache.http.client.HttpClient;
+import org.apache.http.conn.*;
+import org.apache.http.conn.scheme.*;
+import org.apache.http.conn.ssl.*;
+import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
+import org.apache.http.params.BasicHttpParams;
 import org.mediawiki.api.*;
 import org.wikimedia.commons.auth.WikiAccountAuthenticator;
 import org.apache.http.impl.client.*;
@@ -70,9 +75,15 @@ public class CommonsApplication extends Application {
     public RequestQueue volleyQueue;
 
     public static AbstractHttpClient createHttpClient() {
-        DefaultHttpClient client = new DefaultHttpClient();
-        client.getParams().setParameter(CoreProtocolPNames.USER_AGENT, "Commons/" + APPLICATION_VERSION + " (https://mediawiki.org/wiki/Apps/Commons) Android/" + Build.VERSION.RELEASE);
-        return client;
+        BasicHttpParams params = new BasicHttpParams();
+        SchemeRegistry schemeRegistry = new SchemeRegistry();
+        schemeRegistry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
+        final SSLSocketFactory sslSocketFactory = SSLSocketFactory.getSocketFactory();
+        schemeRegistry.register(new Scheme("https", sslSocketFactory, 443));
+        ClientConnectionManager cm = new ThreadSafeClientConnManager(params, schemeRegistry);
+        params.setParameter(CoreProtocolPNames.USER_AGENT, "Commons/" + APPLICATION_VERSION + " (https://mediawiki.org/wiki/Apps/Commons) Android/" + Build.VERSION.RELEASE);
+        DefaultHttpClient httpclient = new DefaultHttpClient(cm, params);
+        return httpclient;
     }
 
     public static MWApi createMWApi() {
