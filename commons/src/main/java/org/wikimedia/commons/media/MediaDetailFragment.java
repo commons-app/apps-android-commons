@@ -2,7 +2,6 @@ package org.wikimedia.commons.media;
 
 import android.content.Intent;
 import android.graphics.*;
-import android.net.Uri;
 import android.os.*;
 import android.text.*;
 import android.util.Log;
@@ -10,15 +9,12 @@ import android.util.TypedValue;
 import android.view.*;
 import android.widget.*;
 import com.actionbarsherlock.app.SherlockFragment;
-import com.android.volley.toolbox.NetworkImageView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 
 import com.android.volley.toolbox.*;
 
-import org.mediawiki.api.ApiResult;
-import org.mediawiki.api.MWApi;
 import org.wikimedia.commons.*;
 
 import java.io.IOException;
@@ -54,19 +50,20 @@ public class MediaDetailFragment extends SherlockFragment {
     private ProgressBar loadingProgress;
     private ImageView loadingFailed;
     private MediaDetailSpacer spacer;
-    private int initialListIndex = 0;
     private int initialListTop = 0;
 
     private TextView title;
     private TextView desc;
     private TextView license;
-    private ListView listView;
+    private LinearLayout categoryContainer;
+    private ScrollView scrollView;
     private ArrayList<String> categoryNames;
     private boolean categoriesLoaded = false;
     private boolean categoriesPresent = false;
-    private ArrayAdapter categoryAdapter;
-    private ViewTreeObserver.OnGlobalLayoutListener observer; // for layout stuff, only used once!
+    private ViewTreeObserver.OnGlobalLayoutListener layoutListener; // for layout stuff, only used once!
+    private ViewTreeObserver.OnScrollChangedListener scrollListener;
     private AsyncTask<Void,Void,Boolean> detailFetchTask;
+    private LicenseList licenseList;
 
 
     @Override
@@ -76,18 +73,11 @@ public class MediaDetailFragment extends SherlockFragment {
         outState.putBoolean("editable", editable);
 
         getScrollPosition();
-        outState.putInt("listIndex", initialListIndex);
         outState.putInt("listTop", initialListTop);
     }
 
     private void getScrollPosition() {
-        int initialListIndex = listView.getFirstVisiblePosition();
-        View firstVisibleItem = listView.getChildAt(initialListIndex);
-        if (firstVisibleItem == null) {
-            initialListTop = 0;
-        } else {
-            initialListTop = firstVisibleItem.getTop();
-        }
+        initialListTop = scrollView.getScrollY();
     }
 
     @Override
@@ -97,11 +87,11 @@ public class MediaDetailFragment extends SherlockFragment {
         if(savedInstanceState != null) {
             editable = savedInstanceState.getBoolean("editable");
             index = savedInstanceState.getInt("index");
-            initialListIndex = savedInstanceState.getInt("listIndex");
             initialListTop = savedInstanceState.getInt("listTop");
         } else {
             editable = getArguments().getBoolean("editable");
             index = getArguments().getInt("index");
+            initialListTop = 0;
         }
         final Media media = detailProvider.getMediaAtPosition(index);
         categoryNames = new ArrayList<String>();
@@ -112,29 +102,16 @@ public class MediaDetailFragment extends SherlockFragment {
         image = (ImageView) view.findViewById(R.id.mediaDetailImage);
         loadingProgress = (ProgressBar) view.findViewById(R.id.mediaDetailImageLoading);
         loadingFailed = (ImageView) view.findViewById(R.id.mediaDetailImageFailed);
-        listView = (ListView) view.findViewById(R.id.mediaDetailListView);
+        scrollView = (ScrollView) view.findViewById(R.id.mediaDetailScrollView);
 
         // Detail consists of a list view with main pane in header view, plus category list.
-        View detailView = getActivity().getLayoutInflater().inflate(R.layout.detail_main_panel, null, false);
-        listView.addHeaderView(detailView, null, false);
-        categoryAdapter = new ArrayAdapter(getActivity(), R.layout.detail_category_item, categoryNames);
-        listView.setAdapter(categoryAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                if (categoriesLoaded && categoriesPresent) {
-                    String selectedCategoryTitle = "Category:" + categoryNames.get(position - 1);
-                    Intent viewIntent = new Intent();
-                    viewIntent.setAction(Intent.ACTION_VIEW);
-                    viewIntent.setData(Utils.uriForWikiPage(selectedCategoryTitle));
-                    startActivity(viewIntent);
-                }
-            }
-        });
+        spacer = (MediaDetailSpacer) view.findViewById(R.id.mediaDetailSpacer);
+        title = (TextView) view.findViewById(R.id.mediaDetailTitle);
+        desc = (TextView) view.findViewById(R.id.mediaDetailDesc);
+        license = (TextView) view.findViewById(R.id.mediaDetailLicense);
+        categoryContainer = (LinearLayout) view.findViewById(R.id.mediaDetailCategoryContainer);
 
-        spacer = (MediaDetailSpacer) detailView.findViewById(R.id.mediaDetailSpacer);
-        title = (TextView) detailView.findViewById(R.id.mediaDetailTitle);
-        desc = (TextView) detailView.findViewById(R.id.mediaDetailDesc);
-        license = (TextView) detailView.findViewById(R.id.mediaDetailLicense);
+        licenseList = new LicenseList(getActivity());
 
         // Enable or disable editing on the title
         /*
@@ -162,11 +139,9 @@ public class MediaDetailFragment extends SherlockFragment {
             // FIXME: cache this data
             detailFetchTask = new AsyncTask<Void, Void, Boolean>() {
                 private MediaDataExtractor extractor;
-                private LicenseList licenseList;
 
                 @Override
                 protected void onPreExecute() {
-                    licenseList = new LicenseList(getActivity());
                     extractor = new MediaDataExtractor(media.getFilename(), licenseList);
                 }
 
@@ -189,17 +164,8 @@ public class MediaDetailFragment extends SherlockFragment {
                         extractor.fill(media);
 
                         // Fill some fields
-                        desc.setText(media.getDescription("en"));
-
-                        String licenseKey = media.getLicense();
-                        License licenseObj = licenseList.get(licenseKey);
-                        if (licenseObj == null) {
-                            license.setText(licenseKey);
-                        } else {
-                            license.setText(licenseObj.getName());
-                        }
-                        Log.d("Commons", "Media license is: " + media.getLicense());
-
+                        desc.setText(prettyDescription(media));
+                        license.setText(prettyLicense(media));
 
                         categoryNames.removeAll(categoryNames);
                         categoryNames.addAll(media.getCategories());
@@ -210,8 +176,7 @@ public class MediaDetailFragment extends SherlockFragment {
                             // Stick in a filler element.
                             categoryNames.add(getString(R.string.detail_panel_cats_none));
                         }
-
-                        categoryAdapter.notifyDataSetChanged();
+                        rebuildCatList();
                     } else {
                         Log.d("Commons", "Failed to load photo details.");
                     }
@@ -266,15 +231,23 @@ public class MediaDetailFragment extends SherlockFragment {
         });
         */
 
-        // Layout observer to size the spacer item relative to the available space.
+        // Progressively darken the image in the background when we scroll detail pane up
+        scrollListener = new ViewTreeObserver.OnScrollChangedListener() {
+            public void onScrollChanged() {
+                updateTheDarkness();
+            }
+        };
+        view.getViewTreeObserver().addOnScrollChangedListener(scrollListener);
+
+        // Layout layoutListener to size the spacer item relative to the available space.
         // There may be a .... better way to do this.
-        observer = new ViewTreeObserver.OnGlobalLayoutListener() {
+        layoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
             private int currentHeight = -1;
 
             public void onGlobalLayout() {
                 int viewHeight = view.getHeight();
                 //int textHeight = title.getLineHeight();
-                int paddingDp = 48;
+                int paddingDp = 112;
                 float paddingPx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, paddingDp, getResources().getDisplayMetrics());
                 int newHeight = viewHeight - Math.round(paddingPx);
 
@@ -284,15 +257,12 @@ public class MediaDetailFragment extends SherlockFragment {
                     params.height = newHeight;
                     spacer.setLayoutParams(params);
 
-                    // hack hack to trigger relayout
-                    categoryAdapter.notifyDataSetChanged();
-
-                    listView.setSelectionFromTop(initialListIndex, initialListTop);
+                    scrollView.scrollTo(0, initialListTop);
                 }
 
             }
         };
-        view.getViewTreeObserver().addOnGlobalLayoutListener(observer);
+        view.getViewTreeObserver().addOnGlobalLayoutListener(layoutListener);
         return view;
     }
 
@@ -309,10 +279,78 @@ public class MediaDetailFragment extends SherlockFragment {
             detailFetchTask.cancel(true);
             detailFetchTask = null;
         }
-        if (observer != null) {
-            getView().getViewTreeObserver().removeGlobalOnLayoutListener(observer); // old Android was on crack. CRACK IS WHACK
-            observer = null;
+        if (layoutListener != null) {
+            getView().getViewTreeObserver().removeGlobalOnLayoutListener(layoutListener); // old Android was on crack. CRACK IS WHACK
+            layoutListener = null;
+        }
+        if (scrollListener != null) {
+            getView().getViewTreeObserver().removeOnScrollChangedListener(scrollListener);
+            scrollListener  = null;
         }
         super.onDestroyView();
+    }
+
+    private void rebuildCatList() {
+        // @fixme add the category items
+        for (String cat : categoryNames) {
+            View catLabel = buildCatLabel(cat);
+            categoryContainer.addView(catLabel);
+        }
+    }
+
+    private View buildCatLabel(String cat) {
+        final String catName = cat;
+        final View item = getLayoutInflater(null).inflate(R.layout.detail_category_item, null, false);
+        final TextView textView = (TextView)item.findViewById(R.id.mediaDetailCategoryItemText);
+
+        textView.setText(cat);
+        if (categoriesLoaded && categoriesPresent) {
+            textView.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view) {
+                    String selectedCategoryTitle = "Category:" + catName;
+                    Intent viewIntent = new Intent();
+                    viewIntent.setAction(Intent.ACTION_VIEW);
+                    viewIntent.setData(Utils.uriForWikiPage(selectedCategoryTitle));
+                    startActivity(viewIntent);
+                }
+            });
+        }
+        return item;
+    }
+
+    private void updateTheDarkness() {
+        // You must face the darkness alone
+        int scrollY = scrollView.getScrollY();
+        int scrollMax = getView().getHeight();
+        float scrollPercentage = (float)scrollY / (float)scrollMax;
+        final float transparencyMax = 0.75f;
+        if (scrollPercentage > transparencyMax) {
+            scrollPercentage = transparencyMax;
+        }
+        image.setAlpha(1.0f - scrollPercentage);
+    }
+
+    private String prettyDescription(Media media) {
+        // @todo use UI language when multilingual descs are available
+        String desc = media.getDescription("en").trim();
+        if (desc.equals("")) {
+            return getString(R.string.detail_description_empty);
+        } else {
+            return desc;
+        }
+    }
+
+    private String prettyLicense(Media media) {
+        String licenseKey = media.getLicense();
+        Log.d("Commons", "Media license is: " + licenseKey);
+        if (licenseKey.equals("")) {
+            return getString(R.string.detail_license_empty);
+        }
+        License licenseObj = licenseList.get(licenseKey);
+        if (licenseObj == null) {
+            return licenseKey;
+        } else {
+            return licenseObj.getName();
+        }
     }
 }
