@@ -27,6 +27,10 @@ public class ContributionsListFragment extends SherlockFragment {
         Campaign getCurrentCampaign();
     }
 
+    public interface SourceRefresher {
+        void refreshSource();
+    }
+
     private GridView contributionsList;
     private TextView waitingMessage;
     private TextView emptyMessage;
@@ -87,7 +91,9 @@ public class ContributionsListFragment extends SherlockFragment {
                 feedbackIntent.putExtra(Intent.EXTRA_SUBJECT, String.format(CommonsApplication.FEEDBACK_EMAIL_SUBJECT, CommonsApplication.APPLICATION_VERSION));
                 startActivity(feedbackIntent);
                 return true;
-
+            case R.id.menu_refresh:
+                ((SourceRefresher)getActivity()).refreshSource();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -101,6 +107,9 @@ public class ContributionsListFragment extends SherlockFragment {
         CommonsApplication app = (CommonsApplication)getActivity().getApplicationContext();
         if (!app.deviceHasCamera()) {
             menu.findItem(R.id.menu_from_camera).setEnabled(false);
+        }
+        if(campaign == null) {
+            menu.findItem(R.id.menu_refresh).setVisible(false);
         }
     }
 
@@ -119,7 +128,8 @@ public class ContributionsListFragment extends SherlockFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        controller = new ContributionController(this, ((CurrentCampaignProvider)getActivity()).getCurrentCampaign());
+        campaign = ((CurrentCampaignProvider)getActivity()).getCurrentCampaign();
+        controller = new ContributionController(this, campaign);
         controller.loadState(savedInstanceState);
 
         contributionsList = (GridView)getView().findViewById(R.id.contributionsList);

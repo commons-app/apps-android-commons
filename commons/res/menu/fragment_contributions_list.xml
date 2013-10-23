@@ -26,5 +26,9 @@
           android:showAsAction="never"
           android:icon="@android:drawable/ic_menu_send"
             />
+    <item android:id="@+id/menu_refresh"
+          android:title="@string/menu_refresh"
+          android:showAsAction="never"
+          />
 
 </menu>

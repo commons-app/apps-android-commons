@@ -29,7 +29,8 @@ public  class       ContributionsActivity
                     AdapterView.OnItemClickListener,
                     MediaDetailPagerFragment.MediaDetailProvider,
                     ContributionsListFragment.CurrentCampaignProvider,
-                    FragmentManager.OnBackStackChangedListener {
+                    FragmentManager.OnBackStackChangedListener,
+                    ContributionsListFragment.SourceRefresher {
 
 
     private Cursor allContributions;
@@ -219,7 +220,11 @@ public  class       ContributionsActivity
 
             getSupportActionBar().setSubtitle(getResources().getQuantityString(R.plurals.contributions_subtitle, cursor.getCount(), cursor.getCount()));
         } else {
-            contributionsList.setAdapter(new MediaListAdapter(this, (ArrayList<Media>) result));
+            if(contributionsList.getAdapter() == null) {
+                contributionsList.setAdapter(new MediaListAdapter(this, (ArrayList<Media>) result));
+            } else {
+                ((MediaListAdapter)contributionsList.getAdapter()).updateMediaList((ArrayList<Media>) result);
+            }
         }
     }
 
@@ -227,8 +232,7 @@ public  class       ContributionsActivity
         if(campaign == null) {
             ((CursorAdapter) contributionsList.getAdapter()).swapCursor(null);
         } else {
-            //((MediaListAdapter) contributionsList.getAdapter()).
-            // DO SOMETHING!
+            contributionsList.setAdapter(null);
         }
     }
 
@@ -261,5 +265,9 @@ public  class       ContributionsActivity
 
     public Campaign getCurrentCampaign() {
         return campaign;
+    }
+
+    public void refreshSource() {
+        getSupportLoaderManager().restartLoader(0, null, this);
     }
 }

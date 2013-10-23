@@ -3,6 +3,7 @@
   <string name="app_name">The name of the application.
 {{Identical|Wikimedia Commons}}</string>
   <string name="app_name_beta">Name of the beta version of the application</string>
+  <string name="menu_refresh">Label for menu item that refreshes current list of images.</string>
   <string name="menu_settings">Label for menu item to show settings.
 {{Identical|Settings}}</string>
   <string name="username">{{Identical|Username}}</string>

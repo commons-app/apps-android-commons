@@ -20,6 +20,21 @@ public class MediaListAdapter extends BaseAdapter {
         this.activity = activity;
     }
 
+    public void updateMediaList(ArrayList<Media> newMediaList) {
+        // FIXME: Hack for now, replace with something more efficient later on
+        for(Media newMedia: newMediaList) {
+            boolean isDuplicate = false;
+            for(Media oldMedia: mediaList ) {
+                if(newMedia.getFilename().equals(oldMedia.getFilename())) {
+                    isDuplicate = true;
+                    break;
+                }
+            }
+            if(!isDuplicate) {
+                mediaList.add(0, newMedia);
+            }
+        }
+    }
     public int getCount() {
         return mediaList.size();
     }
