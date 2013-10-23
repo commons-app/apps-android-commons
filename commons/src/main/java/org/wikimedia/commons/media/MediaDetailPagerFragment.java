@@ -3,6 +3,7 @@ package org.wikimedia.commons.media;
 import android.app.DownloadManager;
 import android.content.*;
 import android.database.Cursor;
+import android.database.DataSetObserver;
 import android.net.*;
 import android.os.*;
 import android.support.v4.app.Fragment;
@@ -41,6 +42,8 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
         public Media getMediaAtPosition(int i);
         public int getTotalMediaCount();
         public void notifyDatasetChanged();
+        public void registerDataSetObserver(DataSetObserver observer);
+        public void unregisterDataSetObserver(DataSetObserver observer);
     }
     private class MediaDetailAdapter extends FragmentStatePagerAdapter {
 
@@ -80,17 +83,19 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
         View view = inflater.inflate(R.layout.fragment_media_detail_pager, container, false);
         pager = (ViewPager) view.findViewById(R.id.mediaDetailsPager);
         pager.setOnPageChangeListener(this);
-        pager.setAdapter(new MediaDetailAdapter(getChildFragmentManager()));
         if(savedInstanceState != null) {
             final int pageNumber = savedInstanceState.getInt("current-page");
             // Adapter doesn't seem to be loading immediately.
             // Dear God, please forgive us for our sins
             view.postDelayed(new Runnable() {
                 public void run() {
+                    pager.setAdapter(new MediaDetailAdapter(getChildFragmentManager()));
                     pager.setCurrentItem(pageNumber, false);
                     getSherlockActivity().supportInvalidateOptionsMenu();
                 }
             }, 100);
+        } else {
+            pager.setAdapter(new MediaDetailAdapter(getChildFragmentManager()));
         }
         return view;
     }

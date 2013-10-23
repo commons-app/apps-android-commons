@@ -5,6 +5,7 @@ import java.util.concurrent.*;
 
 import android.app.*;
 import android.content.*;
+import android.database.DataSetObserver;
 import android.net.*;
 import android.os.*;
 import android.support.v4.app.FragmentManager;
@@ -61,6 +62,13 @@ public  class       MultipleShareActivity
         }
     }
 
+    public void registerDataSetObserver(DataSetObserver observer) {
+        // fixme implement me if needed
+    }
+
+    public void unregisterDataSetObserver(DataSetObserver observer) {
+        // fixme implement me if needed
+    }
 
     public void onItemClick(AdapterView<?> adapterView, View view, int index, long item) {
         showDetail(index);

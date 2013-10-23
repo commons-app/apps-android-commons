@@ -1,6 +1,7 @@
 package org.wikimedia.commons.media;
 
 import android.content.Intent;
+import android.database.DataSetObserver;
 import android.graphics.*;
 import android.os.*;
 import android.text.*;
@@ -62,6 +63,7 @@ public class MediaDetailFragment extends SherlockFragment {
     private boolean categoriesPresent = false;
     private ViewTreeObserver.OnGlobalLayoutListener layoutListener; // for layout stuff, only used once!
     private ViewTreeObserver.OnScrollChangedListener scrollListener;
+    DataSetObserver dataObserver;
     private AsyncTask<Void,Void,Boolean> detailFetchTask;
     private LicenseList licenseList;
 
@@ -93,7 +95,6 @@ public class MediaDetailFragment extends SherlockFragment {
             index = getArguments().getInt("index");
             initialListTop = 0;
         }
-        final Media media = detailProvider.getMediaAtPosition(index);
         categoryNames = new ArrayList<String>();
         categoryNames.add(getString(R.string.detail_panel_cats_loading));
 
@@ -113,18 +114,60 @@ public class MediaDetailFragment extends SherlockFragment {
 
         licenseList = new LicenseList(getActivity());
 
-        // Enable or disable editing on the title
-        /*
-        title.setClickable(editable);
-        title.setFocusable(editable);
-        title.setCursorVisible(editable);
-        title.setFocusableInTouchMode(editable);
-        if(!editable) {
-            title.setBackgroundDrawable(null);
+        Media media = detailProvider.getMediaAtPosition(index);
+        if (media == null) {
+            // Ask the detail provider to ping us when we're ready
+            Log.d("Commons", "MediaDetailFragment not yet ready to display details; registering observer");
+            dataObserver = new DataSetObserver() {
+                public void onChanged() {
+                    Log.d("Commons", "MediaDetailFragment ready to display delayed details!");
+                    detailProvider.unregisterDataSetObserver(dataObserver);
+                    dataObserver = null;
+                    displayMediaDetails(detailProvider.getMediaAtPosition(index));
+                }
+            };
+            detailProvider.registerDataSetObserver(dataObserver);
+        } else {
+            Log.d("Commons", "MediaDetailFragment ready to display details");
+            displayMediaDetails(media);
         }
-        */
 
+        // Progressively darken the image in the background when we scroll detail pane up
+        scrollListener = new ViewTreeObserver.OnScrollChangedListener() {
+            public void onScrollChanged() {
+                updateTheDarkness();
+            }
+        };
+        view.getViewTreeObserver().addOnScrollChangedListener(scrollListener);
 
+        // Layout layoutListener to size the spacer item relative to the available space.
+        // There may be a .... better way to do this.
+        layoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
+            private int currentHeight = -1;
+
+            public void onGlobalLayout() {
+                int viewHeight = view.getHeight();
+                //int textHeight = title.getLineHeight();
+                int paddingDp = 112;
+                float paddingPx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, paddingDp, getResources().getDisplayMetrics());
+                int newHeight = viewHeight - Math.round(paddingPx);
+
+                if (newHeight != currentHeight) {
+                    currentHeight = newHeight;
+                    ViewGroup.LayoutParams params = spacer.getLayoutParams();
+                    params.height = newHeight;
+                    spacer.setLayoutParams(params);
+
+                    scrollView.scrollTo(0, initialListTop);
+                }
+
+            }
+        };
+        view.getViewTreeObserver().addOnGlobalLayoutListener(layoutListener);
+        return view;
+    }
+
+    private void displayMediaDetails(final Media media) {
         String actualUrl = (media.getLocalUri() != null && TextUtils.isEmpty(media.getLocalUri().toString())) ? media.getLocalUri().toString() : media.getThumbnailUrl(640);
         if(actualUrl.startsWith("http")) {
             ImageLoader loader = ((CommonsApplication)getActivity().getApplicationContext()).getImageLoader();
@@ -212,58 +255,6 @@ public class MediaDetailFragment extends SherlockFragment {
         title.setText(media.getDisplayTitle());
         desc.setText(""); // fill in from network...
         license.setText(""); // fill in from network...
-
-        /*
-        title.addTextChangedListener(new TextWatcher() {
-            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-
-            }
-
-            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                detailProvider.getMediaAtPosition(index).setFilename(title.getText().toString());
-                detailProvider.getMediaAtPosition(index).setTag("isDirty", true);
-                detailProvider.notifyDatasetChanged();
-            }
-
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-        */
-
-        // Progressively darken the image in the background when we scroll detail pane up
-        scrollListener = new ViewTreeObserver.OnScrollChangedListener() {
-            public void onScrollChanged() {
-                updateTheDarkness();
-            }
-        };
-        view.getViewTreeObserver().addOnScrollChangedListener(scrollListener);
-
-        // Layout layoutListener to size the spacer item relative to the available space.
-        // There may be a .... better way to do this.
-        layoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
-            private int currentHeight = -1;
-
-            public void onGlobalLayout() {
-                int viewHeight = view.getHeight();
-                //int textHeight = title.getLineHeight();
-                int paddingDp = 112;
-                float paddingPx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, paddingDp, getResources().getDisplayMetrics());
-                int newHeight = viewHeight - Math.round(paddingPx);
-
-                if (newHeight != currentHeight) {
-                    currentHeight = newHeight;
-                    ViewGroup.LayoutParams params = spacer.getLayoutParams();
-                    params.height = newHeight;
-                    spacer.setLayoutParams(params);
-
-                    scrollView.scrollTo(0, initialListTop);
-                }
-
-            }
-        };
-        view.getViewTreeObserver().addOnGlobalLayoutListener(layoutListener);
-        return view;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package org.wikimedia.commons.contributions;
 
+import android.database.DataSetObserver;
 import android.os.IBinder;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
@@ -12,6 +13,7 @@ import android.support.v4.widget.CursorAdapter;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Adapter;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 
@@ -36,6 +38,7 @@ public  class       ContributionsActivity
     private Cursor allContributions;
     private ContributionsListFragment contributionsList;
     private MediaDetailPagerFragment mediaDetails;
+    private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<DataSetObserver>();
 
     private Campaign campaign;
 
@@ -226,6 +229,7 @@ public  class       ContributionsActivity
                 ((MediaListAdapter)contributionsList.getAdapter()).updateMediaList((ArrayList<Media>) result);
             }
         }
+        notifyAndClearDataSetObservers();
     }
 
     public void onLoaderReset(Loader cursorLoader) {
@@ -237,7 +241,10 @@ public  class       ContributionsActivity
     }
 
     public Media getMediaAtPosition(int i) {
-        if(campaign == null) {
+        if (contributionsList.getAdapter() == null) {
+            // not yet ready to return data
+            return null;
+        } else if(campaign == null) {
             return Contribution.fromCursor((Cursor) contributionsList.getAdapter().getItem(i));
         } else {
             return (Media) contributionsList.getAdapter().getItem(i);
@@ -253,6 +260,31 @@ public  class       ContributionsActivity
 
     public void notifyDatasetChanged() {
         // Do nothing for now
+    }
+
+    private void notifyAndClearDataSetObservers() {
+        for (DataSetObserver observer : observersWaitingForLoad) {
+            observer.onChanged();
+        }
+        observersWaitingForLoad.clear();
+    }
+
+    public void registerDataSetObserver(DataSetObserver observer) {
+        Adapter adapter = contributionsList.getAdapter();
+        if (adapter == null) {
+            observersWaitingForLoad.add(observer);
+        } else {
+            adapter.registerDataSetObserver(observer);
+        }
+    }
+
+    public void unregisterDataSetObserver(DataSetObserver observer) {
+        Adapter adapter = contributionsList.getAdapter();
+        if (adapter == null) {
+            observersWaitingForLoad.remove(observer);
+        } else {
+            adapter.registerDataSetObserver(observer);
+        }
     }
 
     public void onBackStackChanged() {
