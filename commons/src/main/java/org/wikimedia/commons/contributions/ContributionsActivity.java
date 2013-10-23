@@ -229,7 +229,7 @@ public  class       ContributionsActivity
                 ((MediaListAdapter)contributionsList.getAdapter()).updateMediaList((ArrayList<Media>) result);
             }
         }
-        notifyAndClearDataSetObservers();
+        notifyAndMigrateDataSetObservers();
     }
 
     public void onLoaderReset(Loader cursorLoader) {
@@ -262,11 +262,19 @@ public  class       ContributionsActivity
         // Do nothing for now
     }
 
-    private void notifyAndClearDataSetObservers() {
+    private void notifyAndMigrateDataSetObservers() {
+        Adapter adapter = contributionsList.getAdapter();
+
+        // First, move the observers over to the adapter now that we have it.
+        for (DataSetObserver observer : observersWaitingForLoad) {
+            adapter.registerDataSetObserver(observer);
+        }
+        observersWaitingForLoad.clear();
+
+        // Now fire off a first notification...
         for (DataSetObserver observer : observersWaitingForLoad) {
             observer.onChanged();
         }
-        observersWaitingForLoad.clear();
     }
 
     public void registerDataSetObserver(DataSetObserver observer) {
@@ -283,7 +291,7 @@ public  class       ContributionsActivity
         if (adapter == null) {
             observersWaitingForLoad.remove(observer);
         } else {
-            adapter.registerDataSetObserver(observer);
+            adapter.unregisterDataSetObserver(observer);
         }
     }
 

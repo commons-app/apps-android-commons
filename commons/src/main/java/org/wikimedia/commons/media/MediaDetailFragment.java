@@ -278,6 +278,10 @@ public class MediaDetailFragment extends SherlockFragment {
             getView().getViewTreeObserver().removeOnScrollChangedListener(scrollListener);
             scrollListener  = null;
         }
+        if (dataObserver != null) {
+            detailProvider.unregisterDataSetObserver(dataObserver);
+            dataObserver = null;
+        }
         super.onDestroyView();
     }
 
