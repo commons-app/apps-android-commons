@@ -82,14 +82,6 @@
             android:label="@string/title_activity_settings"
             />
         <activity android:name=".AboutActivity" android:label="@string/title_activity_about"/>
-        <activity android:name=".campaigns.CampaignActivity" android:label="Campaigns"
-                android:icon="@drawable/ic_launcher"
-                >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
 
         <service android:name=".upload.UploadService" >
         </service>
@@ -104,17 +96,6 @@
             <meta-data
                 android:name="android.accounts.AccountAuthenticator"
                 android:resource="@xml/authenticator" />
-        </service>
-        <service
-                android:name=".campaigns.CampaignsSyncService"
-                android:exported="true">
-            <intent-filter>
-                <action
-                        android:name="android.content.SyncAdapter" />
-            </intent-filter>
-            <meta-data
-                    android:name="android.content.SyncAdapter"
-                    android:resource="@xml/campaigns_sync_adapter" />
         </service>
         <service
                 android:name=".contributions.ContributionsSyncService"
@@ -145,13 +126,6 @@
                 android:label="@string/provider_contributions"
                 android:syncable="true"
                 android:authorities="org.wikimedia.commons.contributions.contentprovider"
-                android:exported="false">
-        </provider>
-        <provider
-                android:name=".campaigns.CampaignsContentProvider"
-                android:label="@string/provider_campaigns"
-                android:syncable="true"
-                android:authorities="org.wikimedia.commons.campaigns.contentprovider"
                 android:exported="false">
         </provider>
         <provider
