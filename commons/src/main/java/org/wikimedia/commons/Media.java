@@ -186,6 +186,7 @@ public class Media implements Parcelable {
     }
 
     public Media(String filename) {
+        this();
         this.filename = filename;
     }
 
