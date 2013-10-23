@@ -110,6 +110,7 @@ public  class       ContributionsActivity
 
         if(getIntent().hasExtra("campaign")) {
             this.campaign = (Campaign) getIntent().getSerializableExtra("campaign");
+            this.setTitle(campaign.getTitle());
         }
 
         contributionsList = (ContributionsListFragment)getSupportFragmentManager().findFragmentById(R.id.contributionsListFragment);
