@@ -7,10 +7,12 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.widget.CursorAdapter;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 import org.wikimedia.commons.CommonsApplication;
 import org.wikimedia.commons.MediaWikiImageView;
@@ -37,9 +39,9 @@ class ContributionsListAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         final ContributionViewHolder views = (ContributionViewHolder)view.getTag();
-        Contribution contribution = Contribution.fromCursor(cursor);
+        final Contribution contribution = Contribution.fromCursor(cursor);
 
-        String actualUrl = (contribution.getLocalUri() != null && TextUtils.isEmpty(contribution.getLocalUri().toString())) ? contribution.getLocalUri().toString() : contribution.getThumbnailUrl(640);
+        String actualUrl = (contribution.getLocalUri() != null && !TextUtils.isEmpty(contribution.getLocalUri().toString())) ? contribution.getLocalUri().toString() : contribution.getThumbnailUrl(640);
 
         if(views.url == null || !views.url.equals(actualUrl)) {
             if(actualUrl.startsWith("http")) {
@@ -57,6 +59,12 @@ class ContributionsListAdapter extends CursorAdapter {
                         views.seqNumView.setVisibility(View.GONE);
                     }
 
+                    @Override
+                    public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+                        super.onLoadingFailed(imageUri, view, failReason);
+                        MediaWikiImageView mwImageView = (MediaWikiImageView)views.imageView;
+                        mwImageView.setMedia(contribution, ((CommonsApplication) activity.getApplicationContext()).getImageLoader());
+                    }
                 });
             }
             views.url = actualUrl;

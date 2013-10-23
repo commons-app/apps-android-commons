@@ -168,7 +168,7 @@ public class MediaDetailFragment extends SherlockFragment {
     }
 
     private void displayMediaDetails(final Media media) {
-        String actualUrl = (media.getLocalUri() != null && TextUtils.isEmpty(media.getLocalUri().toString())) ? media.getLocalUri().toString() : media.getThumbnailUrl(640);
+        String actualUrl = (media.getLocalUri() != null && !TextUtils.isEmpty(media.getLocalUri().toString())) ? media.getLocalUri().toString() : media.getThumbnailUrl(640);
         if(actualUrl.startsWith("http")) {
             ImageLoader loader = ((CommonsApplication)getActivity().getApplicationContext()).getImageLoader();
             MediaWikiImageView mwImage = (MediaWikiImageView)image;
