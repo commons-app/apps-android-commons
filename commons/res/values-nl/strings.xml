@@ -85,7 +85,7 @@ Klik op dit bericht, of ga terug, om deze stap over te slaan.</string>
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="license_name_own_pd">eigen-pd</string>
   <string name="license_name_cc_by_sa_2_5">CC-BY-SA-2.5</string>
-  <string name="license_name_cc_by_2_5">CC BY-2.5</string>
+  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
   <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
   <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
   <string name="license_name_cc_2_0">CC BY 2.0</string>
@@ -108,5 +108,8 @@ Klik op dit bericht, of ga terug, om deze stap over te slaan.</string>
   <string name="detail_panel_cats_label">Categorieën</string>
   <string name="detail_panel_cats_loading">Bezig met laden…</string>
   <string name="detail_panel_cats_none">Geen selectie</string>
+  <string name="detail_description_empty">Geen beschrijving</string>
+  <string name="detail_license_empty">Onbekende licentie</string>
   <string name="provider_campaigns">Campagnes</string>
+  <string name="menu_refresh">Verversen</string>
 </resources>

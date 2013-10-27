@@ -63,6 +63,8 @@ Yazılım hataları: &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?p
   <string name="provider_categories">Son kullanılan kategoriler</string>
   <string name="waiting_first_sync">İlk eşitleme için bekleniyor...</string>
   <string name="no_uploads_yet">Yüklenmiş fotoğrafınız henüz hiç yok.</string>
+  <string name="menu_retry_upload">Tekrar Dene</string>
+  <string name="menu_cancel_upload">İptal</string>
   <string name="share_license_summary">Bu resmi %1$s lisansı altında olacak.</string>
   <string name="menu_download">İndir</string>
   <string name="preference_license">Lisans</string>
@@ -107,4 +109,5 @@ Yazılım hataları: &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?p
   <string name="detail_panel_cats_label">Kategoriler</string>
   <string name="detail_panel_cats_loading">Yükleniyor...</string>
   <string name="detail_panel_cats_none">Hiçbir şey seçilmedi</string>
+  <string name="provider_campaigns">Kampanyalar</string>
 </resources>

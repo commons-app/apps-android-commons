@@ -61,6 +61,8 @@
   <string name="provider_categories">Недавно использованные категории</string>
   <string name="waiting_first_sync">Ожидание первой синхронизации...</string>
   <string name="no_uploads_yet">Вы еще не загрузили ни одной фотографии.</string>
+  <string name="menu_retry_upload">Повторить</string>
+  <string name="menu_cancel_upload">Отмена</string>
   <string name="share_license_summary">Это изображение будет лицензировано под %1$s</string>
   <string name="menu_download">Скачать</string>
   <string name="preference_license">Лицензия</string>
@@ -105,4 +107,8 @@
   <string name="detail_panel_cats_label">Категории</string>
   <string name="detail_panel_cats_loading">Загрузка…</string>
   <string name="detail_panel_cats_none">Ничего не выбрано</string>
+  <string name="detail_description_empty">Нет описания</string>
+  <string name="detail_license_empty">Неизвестная лицензия</string>
+  <string name="provider_campaigns">Кампании</string>
+  <string name="menu_refresh">Обновить</string>
 </resources>

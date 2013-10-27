@@ -5,7 +5,7 @@
   <string name="menu_settings">Asetukset</string>
   <string name="username">Käyttäjätunnus</string>
   <string name="password">Salasana</string>
-  <string name="login">Kirjaudu</string>
+  <string name="login">Kirjaudu sisään</string>
   <string name="logging_in_title">Kirjaudutaan</string>
   <string name="logging_in_message">Odota...</string>
   <string name="login_success">Kirjautuminen onnistui!</string>
@@ -61,6 +61,7 @@ Napauta tätä viestiä (tai paina takaisin) ohittaaksesi tämän vaiheen.</stri
   <string name="provider_categories">Äskettäin käytetyt luokat</string>
   <string name="waiting_first_sync">Odotetaan ensimmäistä synkronointia.</string>
   <string name="no_uploads_yet">Et ole vielä tallentanut kuvia.</string>
+  <string name="menu_cancel_upload">Peruuta</string>
   <string name="share_license_summary" fuzzy="true">Hyväksyt tallentavasi tiedoston CC-BY-SA 3.0 -lisenssin ehtojen mukaisesti.</string>
   <string name="menu_download">Lataa</string>
   <string name="preference_license">Lisenssi</string>

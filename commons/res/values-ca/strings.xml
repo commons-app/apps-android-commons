@@ -58,12 +58,31 @@
   <string name="provider_categories">Categories usades recentment</string>
   <string name="waiting_first_sync">S\'està esperant la primera sincronització…</string>
   <string name="no_uploads_yet">Encara no heu carregat cap foto.</string>
+  <string name="menu_retry_upload">Reintenta</string>
+  <string name="menu_cancel_upload">Cancel·la</string>
   <string name="share_license_summary">Aquesta imatge es llicenciarà sota %1$s</string>
   <string name="menu_download">Baixa</string>
   <string name="preference_license">Llicència</string>
   <string name="license_name_cc_by_sa">CCu00A0Reconeixement-CompartirIgualu00A03.0</string>
   <string name="license_name_cc_by">CCu00A0Reconeixementu00A03.0</string>
   <string name="license_name_cc0">CC0</string>
+  <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Àustria)</string>
+  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Alemanya)</string>
+  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estònia)</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Espanya)</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Croàcia)</string>
+  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxemburg)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Països Baixos)</string>
+  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Noruega)</string>
+  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polònia)</string>
+  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romania)</string>
+  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_zero">CC Zero</string>
+  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
+  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
+  <string name="license_name_cc_2_0">CC BY 2.0</string>
+  <string name="license_name_attribution">Reconeixement</string>
   <string name="welcome_wikipedia_text">Doneu les vostres imatges. Ajudeu a donar vida als articles de la Viquipèdia!</string>
   <string name="welcome_wikipedia_subtext">Les imatges de la Viquipèdia vénen de la Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Les vostres imatges ajuden a educar gent d\'arreu del món.</string>
@@ -73,4 +92,5 @@
   <string name="detail_panel_cats_label">Categories</string>
   <string name="detail_panel_cats_loading">Carregant...</string>
   <string name="detail_panel_cats_none">No se n\'ha seleccionat cap</string>
+  <string name="provider_campaigns">Campanyes</string>
 </resources>

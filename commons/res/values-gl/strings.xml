@@ -61,6 +61,8 @@ Prema nesta mensaxe (ou no botón \"Atrás\") para saltar este paso.</string>
   <string name="provider_categories">Categorías usadas recentemente</string>
   <string name="waiting_first_sync">Agardando pola primeira sincronización...</string>
   <string name="no_uploads_yet">Aínda non cargou ningunha foto.</string>
+  <string name="menu_retry_upload">Reintentar</string>
+  <string name="menu_cancel_upload">Cancelar</string>
   <string name="share_license_summary">Esta imaxe quedará baixo a licenza %1$s</string>
   <string name="menu_download">Descargar</string>
   <string name="preference_license">Licenza</string>
@@ -105,4 +107,5 @@ Prema nesta mensaxe (ou no botón \"Atrás\") para saltar este paso.</string>
   <string name="detail_panel_cats_label">Categorías</string>
   <string name="detail_panel_cats_loading">Cargando...</string>
   <string name="detail_panel_cats_none">Ningunha seleccionada</string>
+  <string name="provider_campaigns">Avisos</string>
 </resources>

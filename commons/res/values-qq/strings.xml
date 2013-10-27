@@ -3,7 +3,6 @@
   <string name="app_name">The name of the application.
 {{Identical|Wikimedia Commons}}</string>
   <string name="app_name_beta">Name of the beta version of the application</string>
-  <string name="menu_refresh">Label for menu item that refreshes current list of images.</string>
   <string name="menu_settings">Label for menu item to show settings.
 {{Identical|Settings}}</string>
   <string name="username">{{Identical|Username}}</string>
@@ -76,7 +75,8 @@
   <string name="no_uploads_yet">Message shown on contribution list during non-first sync if no uploads present.</string>
   <string name="menu_retry_upload">Menu item text prompting user to retry a failed upload.
 {{Identical|Retry}}</string>
-  <string name="menu_cancel_upload">Menu item text prompting user to cancel and delete a failed upload.</string>
+  <string name="menu_cancel_upload">Menu item text prompting user to cancel and delete a failed upload.
+{{Identical|Cancel}}</string>
   <string name="share_license_summary">Text label telling user the license of the current upload in progress. %1$s refers to appropriate display text for the chosen CC license</string>
   <string name="menu_download">Menu item text prompting user to download a selected photo or media file locally.
 {{Identical|Download}}</string>
@@ -98,4 +98,8 @@
 {{Identical|Loading}}</string>
   <string name="detail_panel_cats_none">Placeholder for categories list in media detail panel, if no categories found.
 {{Identical|None selected}}</string>
+  <string name="detail_description_empty">{{Identical|No description}}</string>
+  <string name="provider_campaigns">{{Identical|Campaign}}</string>
+  <string name="menu_refresh">Label for menu item that refreshes current list of images.
+{{Identical|Refresh}}</string>
 </resources>

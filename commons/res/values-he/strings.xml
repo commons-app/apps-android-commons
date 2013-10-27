@@ -61,6 +61,7 @@
   <string name="provider_categories">קטגוריות בשימוש לאחרונה</string>
   <string name="waiting_first_sync">מחכה לסנכרון הראשון...</string>
   <string name="no_uploads_yet">עדיין לא העלית תמונות.</string>
+  <string name="menu_cancel_upload">ביטול</string>
   <string name="menu_download">הורדה</string>
   <string name="preference_license">רישיון</string>
   <string name="welcome_wikipedia_subtext">התמונות בוויקיפדיה מגיעות מ־Wikimedia Commons.</string>
