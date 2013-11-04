@@ -13,12 +13,12 @@
   <string name="authentication_failed">身份验证失败！</string>
   <string name="uploading_started">上传开始！</string>
   <string name="upload_completed_notification_title">%1$s已上传！</string>
-  <string name="upload_completed_notification_text">轻触以查看你的上传</string>
+  <string name="upload_completed_notification_text">查看你的上传</string>
   <string name="upload_progress_notification_title_start">开始%1$s的上传</string>
   <string name="upload_progress_notification_title_in_progress">%1$s正在上传</string>
   <string name="upload_progress_notification_title_finishing">完成上传%1$s</string>
   <string name="upload_failed_notification_title">上传%1$s失败</string>
-  <string name="upload_failed_notification_subtitle">轻触以查看</string>
+  <string name="upload_failed_notification_subtitle">触摸以查看</string>
   <string name="title_activity_contributions">我的上传</string>
   <string name="contribution_state_queued">队列</string>
   <string name="contribution_state_failed">失败</string>
@@ -52,7 +52,7 @@
   <string name="preference_tracking_summary">发送使用报告至维基媒体以帮助我们改进该应用</string>
   <string name="title_activity_settings">设置</string>
   <string name="menu_about">关于</string>
-  <string name="about_license">开源软件采用&lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;授权</string>
+  <string name="about_license">采用&lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;授权的开源软件</string>
   <string name="about_improve">源代码位于&lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;。漏洞（bug）报告位于&lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;。</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;隐私权政策&lt;/a&gt;</string>
   <string name="title_activity_about">关于</string>

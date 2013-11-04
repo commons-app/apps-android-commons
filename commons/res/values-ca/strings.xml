@@ -79,10 +79,22 @@
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romania)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
+  <string name="license_name_own_pd">own-pd</string>
+  <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
+  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
   <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
   <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
   <string name="license_name_cc_2_0">CC BY 2.0</string>
+  <string name="license_name_fal">Llicència artística lliure</string>
+  <string name="license_name_pd_old_100">Domini públic (l\'autor va morir fa més de 100 anys)</string>
+  <string name="license_name_pd_old">Domini públic (copyright expirat)</string>
+  <string name="license_name_pd_art">Domini públic (art)</string>
+  <string name="license_name_pd_us">Domini públic (EUA)</string>
+  <string name="license_name_pd_usgov">Domini públic (govern dels EUA)</string>
+  <string name="license_name_pd_usgov_nasa">Domini públic (NASA)</string>
+  <string name="license_name_pd_ineligible">Domini públic (copyright no aplicable)</string>
   <string name="license_name_attribution">Reconeixement</string>
+  <string name="license_name_gfdl">Llicència de Documentació Lliure de GNU</string>
   <string name="welcome_wikipedia_text">Doneu les vostres imatges. Ajudeu a donar vida als articles de la Viquipèdia!</string>
   <string name="welcome_wikipedia_subtext">Les imatges de la Viquipèdia vénen de la Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Les vostres imatges ajuden a educar gent d\'arreu del món.</string>
@@ -92,5 +104,8 @@
   <string name="detail_panel_cats_label">Categories</string>
   <string name="detail_panel_cats_loading">Carregant...</string>
   <string name="detail_panel_cats_none">No se n\'ha seleccionat cap</string>
+  <string name="detail_description_empty">Sense descripció</string>
+  <string name="detail_license_empty">Llicència desconeguda</string>
   <string name="provider_campaigns">Campanyes</string>
+  <string name="menu_refresh">Refresca</string>
 </resources>

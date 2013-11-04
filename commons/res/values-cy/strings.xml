@@ -59,6 +59,8 @@ Cyffyrddwch y neges hon (neu ddewis Nôl) i fynd i\'r cam nesaf.</string>
   <string name="provider_categories">Categorïau a ddefnyddiwyd yn ddiweddar</string>
   <string name="waiting_first_sync">Yn aros am y sync cyntaf...</string>
   <string name="no_uploads_yet">Nid ydych wedi uwchlwytho ffotograffau eto.</string>
+  <string name="menu_retry_upload">Ailgynnig</string>
+  <string name="menu_cancel_upload">Diddymer</string>
   <string name="share_license_summary">Caiff y ddelwedd hon ei thrwyddedu yn ôl termau\'r drwydded %1$s.</string>
   <string name="menu_download">Lawrlwytho</string>
   <string name="preference_license">Trwydded</string>
@@ -91,6 +93,9 @@ Cyffyrddwch y neges hon (neu ddewis Nôl) i fynd i\'r cam nesaf.</string>
   <string name="license_name_pd_us">Parth y cyhoedd (UDA)</string>
   <string name="license_name_pd_usgov">Parth y cyhoedd (Llywodraeth UDA)</string>
   <string name="license_name_pd_usgov_nasa">Parth y cyhoedd (NASA)</string>
+  <string name="license_name_pd_ineligible">Y parth cyhoeddus (gosod hawlfraint ddim yn gymwys)</string>
+  <string name="license_name_attribution">Cydnabyddiaeth</string>
+  <string name="license_name_gfdl">GNU Free Documentation License</string>
   <string name="welcome_wikipedia_text">Cyfranwch luniau. Cynorthwywch Wicipedia i roi bywyd yn yr erthyglau!</string>
   <string name="welcome_wikipedia_subtext">Mae\'r delweddau ar Wicipedia\'n dod o
 Gomin Wikimedia.</string>
@@ -101,4 +106,8 @@ Gomin Wikimedia.</string>
   <string name="detail_panel_cats_label">Categorïau</string>
   <string name="detail_panel_cats_loading">Wrthi\'n llwytho...</string>
   <string name="detail_panel_cats_none">Dim categorïau wedi eu dewis</string>
+  <string name="detail_description_empty">Dim disgrifiad</string>
+  <string name="detail_license_empty">Trwydded anhysbys</string>
+  <string name="provider_campaigns">Ymgyrchoedd</string>
+  <string name="menu_refresh">Adnewyddu</string>
 </resources>

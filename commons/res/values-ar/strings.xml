@@ -74,4 +74,6 @@
   <string name="detail_panel_cats_label">تصنيفات</string>
   <string name="detail_panel_cats_loading">جارٍ التحميل...</string>
   <string name="detail_panel_cats_none">لا شيء محدد</string>
+  <string name="detail_license_empty">ترخيص غير معلوم</string>
+  <string name="menu_refresh">تحديث</string>
 </resources>
