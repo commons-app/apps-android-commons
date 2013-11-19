@@ -13,12 +13,12 @@
   <string name="authentication_failed">Échec de l’authentification!</string>
   <string name="uploading_started">Téléchargement démarré!</string>
   <string name="upload_completed_notification_title">%1$s téléchargés!</string>
-  <string name="upload_completed_notification_text">Appuyez pour voir votre téléchargement</string>
+  <string name="upload_completed_notification_text">Appuyer pour voir votre téléchargement</string>
   <string name="upload_progress_notification_title_start">Début de téléchargement %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s téléchargés</string>
   <string name="upload_progress_notification_title_finishing">Fin du téléchargement %1$s</string>
   <string name="upload_failed_notification_title">Téléchargement échoué à %1$s</string>
-  <string name="upload_failed_notification_subtitle">Appuyez pour afficher</string>
+  <string name="upload_failed_notification_subtitle">Appuyer pour afficher</string>
   <string name="title_activity_contributions">Mes téléchargements</string>
   <string name="contribution_state_queued">Mis en file d\'attente</string>
   <string name="contribution_state_failed">Échoué</string>
@@ -35,7 +35,7 @@
   <string name="login_failed_username">Impossible de se connecter — veuillez vérifier votre nom d’utilisateur</string>
   <string name="login_failed_password">Impossible de se connecter — veuillez vérifier votre mot de passe</string>
   <string name="login_failed_throttled">Trop de tentatives infructueuses. Veuillez réessayer dans quelques minutes</string>
-  <string name="login_failed_blocked">Désolé, cet utilisateur a été verrouillé dans Communs</string>
+  <string name="login_failed_blocked">Désolé, cet utilisateur a été bloqué dans Commons</string>
   <string name="login_failed_generic">Échec de connexion</string>
   <string name="share_upload_button">Télécharger</string>
   <string name="multiple_share_base_title">Nommer ce jeu</string>
@@ -50,14 +50,14 @@ Commencer à ajouter des catégories.
 Appuyez sur ce message (ou retournez en arrière) pour sauter cette étape.</string>
   <string name="categories_activity_title">Catégories</string>
   <string name="preference_tracking">Rapports d’utilisation</string>
-  <string name="preference_tracking_summary">Envoyer les rapports d’utilisation à Wikimédia pour nous aider à améliorer l’application</string>
+  <string name="preference_tracking_summary">Envoyer les rapports d’utilisation à Wikimedia pour nous aider à améliorer l’application</string>
   <string name="title_activity_settings">Paramètres</string>
   <string name="menu_about">À propos</string>
   <string name="about_license">Les logiciels Open Source sont publié sous la &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;licence Apache v2&lt;/a&gt;</string>
   <string name="about_improve">Source sur &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Bogues sur &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politique de confidentialité&lt;/a&gt;</string>
   <string name="title_activity_about">À propos</string>
-  <string name="menu_feedback">Envoyez vos commentaires (par courriel)</string>
+  <string name="menu_feedback">Envoyer vos commentaires (par courriel)</string>
   <string name="provider_categories">Catégories utilisées récemment</string>
   <string name="waiting_first_sync">Attente de première synchronisation…</string>
   <string name="no_uploads_yet">Vous n’avez pas encore téléchargé de photo.</string>
@@ -88,7 +88,7 @@ Appuyez sur ce message (ou retournez en arrière) pour sauter cette étape.</str
   <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
   <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
   <string name="license_name_cc_2_0">CC BY 2.0</string>
-  <string name="license_name_fal">Licence d’Art libre</string>
+  <string name="license_name_fal">Licence Art Libre</string>
   <string name="license_name_pd_old_100">Domaine public (auteur décédé depuis plus de 100 ans)</string>
   <string name="license_name_pd_old">Domaine public (droit d’auteur expiré)</string>
   <string name="license_name_pd_art">Domaine public (art)</string>
@@ -97,11 +97,11 @@ Appuyez sur ce message (ou retournez en arrière) pour sauter cette étape.</str
   <string name="license_name_pd_usgov_nasa">Domaine public (NASA)</string>
   <string name="license_name_pd_ineligible">Domaine public (non éligible au droit d’auteur)</string>
   <string name="license_name_attribution">Attribution</string>
-  <string name="license_name_gfdl">Licence de documentation GNU libre</string>
+  <string name="license_name_gfdl">Licence de documentation libre GNU</string>
   <string name="welcome_wikipedia_text">Contribuez avec vos images. Aidez les articles de Wikipédia à prendre vie !</string>
   <string name="welcome_wikipedia_subtext">Les images sur Wikipédia viennent de Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Vos images aident à éduquer les gens dans le monde entier.</string>
-  <string name="welcome_copyright_subtext">Évitez les matériaux protégés que vous trouvez sur l’Internet ainsi que les images d’affiches, couvertures de livre, etc.</string>
+  <string name="welcome_copyright_subtext">Évitez les oeuvres protégées que vous trouvez sur l’Internet ainsi que les images d’affiches, couvertures de livre, etc.</string>
   <string name="welcome_final_text">Vous pensez que c’est bon ?</string>
   <string name="welcome_final_button_text">Oui !</string>
   <string name="detail_panel_cats_label">Catégories</string>

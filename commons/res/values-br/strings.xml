@@ -61,6 +61,7 @@ Pouezit war ar c\'hemenn-mañ (pe distroit en a-raok) evit mont dreist ar bazenn
   <string name="provider_categories">Rummadoù bet implijet n\'eus ket pell</string>
   <string name="waiting_first_sync">O c\'hortoz ar sinkroneladur gentañ...</string>
   <string name="no_uploads_yet">N\'ho peus ket enporzhiet skeudennoù c\'hoazh.</string>
+  <string name="menu_retry_upload">Klask en-dro</string>
   <string name="menu_cancel_upload">Nullañ</string>
   <string name="share_license_summary">Gant an aotre-implijout %1$s e vo ar skeudenn-mañ</string>
   <string name="menu_download">Pellgargañ</string>
@@ -68,7 +69,18 @@ Pouezit war ar c\'hemenn-mañ (pe distroit en a-raok) evit mont dreist ar bazenn
   <string name="license_name_cc_by_sa">CCu00A0Dereiñ-RannañAlikeu00A03.0</string>
   <string name="license_name_cc_by">CCu00A0Dereiñu00A03.0</string>
   <string name="license_name_cc0">CC0</string>
+  <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Aostria)</string>
+  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Alamagn)</string>
+  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonia)</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Bro Spagn)</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Kroatia)</string>
+  <string name="license_name_fal">Aotre-implijout arzel frank</string>
   <string name="license_name_pd_us">Domani foran (SUA)</string>
+  <string name="license_name_pd_usgov">Domani foran (gouarnamant Stadoù-Unantet)</string>
+  <string name="license_name_pd_usgov_nasa">Domani foran (NASA)</string>
+  <string name="license_name_attribution">Deroadenn</string>
+  <string name="license_name_gfdl">Aotre-implijout teuliaouiñ frank GNU</string>
   <string name="welcome_wikipedia_text">Kemerit perzh gant ho skeudennoù. Sikourit pennadoù Wikipedia da zont da vev !</string>
   <string name="welcome_wikipedia_subtext">Dont a ra skeudennoù Wikipedia eus Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Ho skeudennoù a sikour an dud da zeskiñ traoù dre ar bed a-bezh.</string>
