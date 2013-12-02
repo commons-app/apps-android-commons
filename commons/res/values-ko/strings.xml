@@ -41,7 +41,7 @@
   <string name="multiple_share_base_title">이 집합의 이름 짓기</string>
   <string name="provider_modifications">바뀜</string>
   <string name="menu_upload_single">올리기</string>
-  <string name="categories_search_text_hint">찾기 분류</string>
+  <string name="categories_search_text_hint">분류 검색</string>
   <string name="menu_save_categories">저장</string>
   <string name="categories_not_found">%1$s와(과) 일치하는 분류를 찾을 수 없습니다</string>
   <string name="categories_skip_explanation">위키미디어 공용에 그림을 더 찾을 수 있도록 분류를 추가합니다.

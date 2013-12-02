@@ -36,14 +36,67 @@
   <string name="login_failed_password">Não foi possível entrar - verifique sua senha</string>
   <string name="login_failed_throttled">Demasiadas tentativas mal sucedidas. Por favor, tente de novo dentro de alguns minutos</string>
   <string name="login_failed_blocked">Desculpe, este utilizador foi bloqueado no Commons</string>
+  <string name="login_failed_generic">Falha ao iniciar sessão</string>
+  <string name="share_upload_button">Carregar</string>
+  <string name="multiple_share_base_title">Nomeie este conjunto</string>
+  <string name="provider_modifications">Modificações</string>
+  <string name="menu_upload_single">Enviar</string>
+  <string name="categories_search_text_hint">Pesquisar categorias</string>
   <string name="menu_save_categories">Gravar</string>
+  <string name="categories_not_found">Nenhuma categoria correspondente %1$s encontrada</string>
+  <string name="categories_skip_explanation">Adicione categorias para tornar as suas imagens mais fáceis de encontrar no Wikimedia Commons. 
+
+Comece a digitar para adicionar categorias.
+Carregue nesta mensagem (ou carregue para voltar) para saltar este passo</string>
   <string name="categories_activity_title">Categorias</string>
+  <string name="preference_tracking">Relatórios de uso</string>
+  <string name="preference_tracking_summary">Enviar relatório de uso para a Wikimedia para ajudar-nos a melhorar o aplicativo</string>
   <string name="title_activity_settings">Configurações</string>
   <string name="menu_about">Sobre</string>
+  <string name="about_improve">Código no &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;. Bugs no &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Política de privacidade&lt;/a&gt;</string>
   <string name="title_activity_about">Sobre</string>
+  <string name="menu_feedback">Enviar comentários (por e-mail)</string>
+  <string name="provider_categories">Categorias usadas recentemente</string>
+  <string name="waiting_first_sync">A aguardar pela primeira sincronização...</string>
+  <string name="no_uploads_yet">Você ainda não carregou nenhuma foto.</string>
+  <string name="menu_retry_upload">Tente novamente</string>
+  <string name="menu_cancel_upload">Cancelar</string>
+  <string name="share_license_summary">Essa imagem será licenciada sob %1$s</string>
+  <string name="menu_download">Descarregar</string>
   <string name="preference_license">Licença</string>
+  <string name="license_name_cc0">CC0</string>
+  <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Áustria)</string>
+  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Alemanha)</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Espanha)</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Croácia)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Países Baixos)</string>
+  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polónia)</string>
+  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_zero">CC Zero</string>
+  <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
+  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
+  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
+  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
+  <string name="license_name_cc_2_0">CC BY 2.0</string>
+  <string name="license_name_pd_old">Domínio público (direitos autorais expirados)</string>
+  <string name="license_name_pd_art">Domínio público (arte)</string>
+  <string name="license_name_pd_us">Dominio público (Estados Unidos)</string>
+  <string name="license_name_pd_usgov">Domínio público (governo dos EUA)</string>
+  <string name="license_name_pd_usgov_nasa">Dominio público (NASA)</string>
+  <string name="license_name_pd_ineligible">Domínio público (inelegível para direitos autorais)</string>
+  <string name="license_name_attribution">Atribuição</string>
+  <string name="license_name_gfdl">Licença de Documentação Livre GNU</string>
+  <string name="welcome_wikipedia_text">Contribua com as suas imagens. Ajude os artigos da Wikipédia a ganhar vida!</string>
+  <string name="welcome_copyright_text">As suas imagens ajudam a educar as pessoas em todo o mundo.</string>
+  <string name="welcome_final_text">Você acha que conseguiu?</string>
   <string name="welcome_final_button_text">Sim</string>
   <string name="detail_panel_cats_label">Categorias</string>
   <string name="detail_panel_cats_loading">A carregar...</string>
   <string name="detail_panel_cats_none">Nenhuma selecionada</string>
+  <string name="detail_description_empty">Sem descrição</string>
+  <string name="detail_license_empty">Licença desconhecida</string>
+  <string name="provider_campaigns">Campanhas</string>
+  <string name="menu_refresh">Actualizar</string>
 </resources>
