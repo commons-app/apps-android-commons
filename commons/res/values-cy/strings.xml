@@ -42,7 +42,7 @@
   <string name="provider_modifications">Newidiadau</string>
   <string name="menu_upload_single">Uwchlwytho</string>
   <string name="categories_search_text_hint">Archwilio\'r categorïau</string>
-  <string name="menu_save_categories">Cadwer</string>
+  <string name="menu_save_categories">Cadw</string>
   <string name="categories_not_found">Dim categori\'n cyfateb i %1$s ar gael</string>
   <string name="categories_skip_explanation">Cychwynwch deipio i ychwanegu categoriau.
 Cyffyrddwch y neges hon (neu ddewis Nôl) i fynd i\'r cam nesaf.</string>

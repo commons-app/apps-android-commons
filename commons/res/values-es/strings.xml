@@ -7,7 +7,7 @@
   <string name="password">Contraseña</string>
   <string name="login">Iniciar sesión</string>
   <string name="logging_in_title">Iniciando sesión</string>
-  <string name="logging_in_message">Por favor espera...</string>
+  <string name="logging_in_message">Espera un momento…</string>
   <string name="login_success">¡Inicio de sesión exitoso!</string>
   <string name="login_failed">¡Inicio de sesión fallido!</string>
   <string name="authentication_failed">¡Autentificación fallida!</string>

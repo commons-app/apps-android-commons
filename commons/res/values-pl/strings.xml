@@ -61,16 +61,32 @@ Dotknij tej wiadomości (lub naciśnij \"cofnij\") aby pominąć ten krok</strin
   <string name="provider_categories">Niedawno używane Kategorie</string>
   <string name="waiting_first_sync">Oczekiwanie na pierwszą synchronizację ...</string>
   <string name="no_uploads_yet">Nie wgrałeś jeszcze żadnych zdjęć.</string>
+  <string name="menu_retry_upload">Ponów próbę</string>
+  <string name="menu_cancel_upload">Anuluj</string>
   <string name="share_license_summary">Ten obraz będzie udostępniany na licencji %1$s</string>
   <string name="menu_download">Pobieranie</string>
   <string name="preference_license">Licencja</string>
   <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Uznanie autorstwa-Na tych samych warunkach</string>
   <string name="license_name_cc_by" fuzzy="true">CCu00A0Uznanie autorstwa</string>
   <string name="license_name_cc0">CC0</string>
+  <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Austria)</string>
   <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Niemcy)</string>
+  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonia)</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Hiszpania)</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Chorwacja)</string>
+  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luksemburg)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Holandia)</string>
+  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norwegia)</string>
+  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polska)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Rumunia)</string>
+  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_zero">CC Zero</string>
+  <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
+  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
   <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
+  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
+  <string name="license_name_cc_2_0">CC BY 2.0</string>
   <string name="welcome_wikipedia_text">Dołóż swoje grafiki. Pomóż artykułom na Wikipedii ożywić się!</string>
   <string name="welcome_wikipedia_subtext">Ilustracje we Wikipedii pochodzą z Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Twoje ilustracje pomagają w edukacji ludzi na całym świecie.</string>
@@ -80,4 +96,6 @@ Dotknij tej wiadomości (lub naciśnij \"cofnij\") aby pominąć ten krok</strin
   <string name="detail_panel_cats_label">Kategorie</string>
   <string name="detail_panel_cats_loading">Ładowanie...</string>
   <string name="detail_panel_cats_none">Nic nie zaznaczono</string>
+  <string name="detail_license_empty">Nieznana licencja</string>
+  <string name="menu_refresh">Odśwież</string>
 </resources>
