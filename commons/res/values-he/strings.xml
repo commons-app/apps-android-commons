@@ -64,6 +64,7 @@
   <string name="menu_cancel_upload">ביטול</string>
   <string name="menu_download">הורדה</string>
   <string name="preference_license">רישיון</string>
+  <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="welcome_wikipedia_subtext">התמונות בוויקיפדיה מגיעות מ־Wikimedia Commons.</string>
   <string name="welcome_final_text">נראה לך שקלטת?</string>
   <string name="welcome_final_button_text">כן!</string>

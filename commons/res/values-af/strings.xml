@@ -53,7 +53,18 @@ Tik die boodskap (of terug) om die stap oor te slaan.</string>
   <string name="menu_about">Oor ons</string>
   <string name="title_activity_about">Oor ons</string>
   <string name="menu_feedback">Stuur terugvoer (via e-pos)</string>
+  <string name="menu_retry_upload">Herprobeer</string>
+  <string name="menu_cancel_upload">Kanselleer</string>
   <string name="menu_download">Laai af</string>
   <string name="preference_license">Lisensie</string>
+  <string name="license_name_attribution">Naamsvermelding</string>
+  <string name="license_name_gfdl">GNU-lisensie vir vrye dokumentasie</string>
   <string name="welcome_final_button_text">Ja!</string>
+  <string name="detail_panel_cats_label">Kategorieë</string>
+  <string name="detail_panel_cats_loading">Laai...</string>
+  <string name="detail_panel_cats_none">Niks gekies nie</string>
+  <string name="detail_description_empty">Geen beskrywing</string>
+  <string name="detail_license_empty">Onbekende lisensie</string>
+  <string name="provider_campaigns">Veldtogte</string>
+  <string name="menu_refresh">Verfris</string>
 </resources>
