@@ -61,7 +61,9 @@
   <string name="provider_categories">קטגוריות בשימוש לאחרונה</string>
   <string name="waiting_first_sync">מחכה לסנכרון הראשון...</string>
   <string name="no_uploads_yet">עדיין לא העלית תמונות.</string>
+  <string name="menu_retry_upload">לנסות שוב</string>
   <string name="menu_cancel_upload">ביטול</string>
+  <string name="share_license_summary">התמונה הזו היא תחת רשיון %1$s</string>
   <string name="menu_download">הורדה</string>
   <string name="preference_license">רישיון</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
@@ -69,4 +71,5 @@
   <string name="welcome_final_text">נראה לך שקלטת?</string>
   <string name="welcome_final_button_text">כן!</string>
   <string name="detail_panel_cats_label">קטגוריות</string>
+  <string name="menu_refresh">רענון</string>
 </resources>
