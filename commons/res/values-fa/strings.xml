@@ -22,7 +22,7 @@
   <string name="title_activity_contributions">بارگذاری‌های من</string>
   <string name="contribution_state_queued">در صف</string>
   <string name="contribution_state_failed">ناموفق بود</string>
-  <string name="contribution_state_in_progress">%1$d%٪ کامل شد</string>
+  <string name="contribution_state_in_progress">%1$d٪ کامل شد</string>
   <string name="contribution_state_starting">در حال بارگذاری</string>
   <string name="menu_from_gallery">از نگارخانه</string>
   <string name="menu_from_camera">گرفتن عکس</string>
