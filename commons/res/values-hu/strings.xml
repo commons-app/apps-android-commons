@@ -58,6 +58,16 @@ Kattints erre az üzenetre a lépés kihagyásához</string>
   <string name="provider_categories">Legutóbb használt kategóriák</string>
   <string name="waiting_first_sync">Várakozás az első szinkronizálásra...</string>
   <string name="no_uploads_yet">Még nem töltöttél fel fotókat.</string>
-  <string name="share_license_summary" fuzzy="true">Vállalod a feltöltést a CC-BY-SA-3.0 feltételeinek alapján.</string>
+  <string name="share_license_summary">Ez a kép %1$s licence alatt kerül feltöltésre</string>
   <string name="menu_download">Letöltés</string>
+  <string name="preference_license">Licenc</string>
+  <string name="welcome_final_text">Megértetted?</string>
+  <string name="welcome_final_button_text">Igen!</string>
+  <string name="detail_panel_cats_label">Kategóriák</string>
+  <string name="detail_panel_cats_loading">Betöltés…</string>
+  <string name="detail_panel_cats_none">Nincs kijelölés</string>
+  <string name="detail_description_empty">Nincs leírás</string>
+  <string name="detail_license_empty">Ismeretlen licenc</string>
+  <string name="provider_campaigns">Kampányok</string>
+  <string name="menu_refresh">Frissítés</string>
 </resources>

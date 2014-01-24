@@ -67,7 +67,14 @@
   <string name="license_name_fal">ফ্রি আর্ট লাইসেন্স</string>
   <string name="license_name_pd_old_100">পাবলিক ডোমেইন (লেখক ১০০ বছর আগে মারা গেছেন)</string>
   <string name="license_name_pd_old">পাবলিক ডোমেইন (কপিরাইটের মেয়াদ শেষ)</string>
+  <string name="license_name_pd_art">পাবলিক ডোমেইন (চিত্রকল্প)</string>
+  <string name="license_name_pd_us">পাবলিক ডোমেইন (মার্কিন যুক্তরাষ্ট্র)</string>
+  <string name="license_name_pd_usgov">পাবলিক ডোমেইন (মার্কিন যুক্তরাষ্ট্র সরকার)</string>
+  <string name="license_name_pd_usgov_nasa">পাবলিক ডোমেইন (নাসা)</string>
+  <string name="license_name_pd_ineligible">পাবলিক ডোমেইন (কপিরাইটের অনুপযুক্ত)</string>
+  <string name="license_name_attribution">স্বীকৃতিপ্রদান</string>
   <string name="welcome_wikipedia_subtext">উইকিপিডিয়াতে চিত্র উইকিমিডিয়া কমন্স থেকে এসেছে।</string>
+  <string name="welcome_final_text">আপনি মনে করেন আপনি বুঝতে পেরেছেন?</string>
   <string name="welcome_final_button_text">হ্যাঁ!</string>
   <string name="detail_panel_cats_label">বিষয়শ্রেণীসমূহ</string>
   <string name="detail_panel_cats_loading">লোডিং...</string>
