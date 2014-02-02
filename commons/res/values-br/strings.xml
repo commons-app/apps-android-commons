@@ -89,9 +89,13 @@ Pouezit war ar c\'hemenn-mañ (pe distroit en a-raok) evit mont dreist ar bazenn
   <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
   <string name="license_name_cc_2_0">CC BY 2.0</string>
   <string name="license_name_fal">Aotre-implijout arzel frank</string>
+  <string name="license_name_pd_old_100">Domani foran (aozer marvet ouzhpenn 100 vloaz zo)</string>
+  <string name="license_name_pd_old">Domani foran (gwirioù-eilañ diamzeret)</string>
+  <string name="license_name_pd_art">Domani foran (arz)</string>
   <string name="license_name_pd_us">Domani foran (SUA)</string>
   <string name="license_name_pd_usgov">Domani foran (gouarnamant Stadoù-Unantet)</string>
   <string name="license_name_pd_usgov_nasa">Domani foran (NASA)</string>
+  <string name="license_name_pd_ineligible">Domani foran (ne c\'hall ket kaout gwirioù-eilañ)</string>
   <string name="license_name_attribution">Deroadenn</string>
   <string name="license_name_gfdl">Aotre-implijout teuliaouiñ frank GNU</string>
   <string name="welcome_wikipedia_text">Kemerit perzh gant ho skeudennoù. Sikourit pennadoù Wikipedia da zont da vev !</string>

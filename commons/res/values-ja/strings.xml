@@ -48,6 +48,7 @@
 この手順をスキップするにはこのメッセージをタップしてください(または戻るボタン)。</string>
   <string name="categories_activity_title">カテゴリ</string>
   <string name="preference_tracking">使用状況の報告</string>
+  <string name="preference_tracking_summary">アプリの改善を支援するために、使用状況の報告をウィキメディアに送信する</string>
   <string name="title_activity_settings">設定</string>
   <string name="about_license">&lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache ライセンス v2&lt;/a&gt; のもとで公開されているオープン ソース ソフトウェア</string>
   <string name="about_improve">ソースは &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt; にあります。バグは &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt; へ。</string>
