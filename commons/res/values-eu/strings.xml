@@ -58,6 +58,35 @@
   <string name="provider_categories">Berriki erabilitako kategoriak</string>
   <string name="waiting_first_sync">Itxoiten lehenengo sinkronizaziora...</string>
   <string name="no_uploads_yet">Oraindik ez duzu argazkirik igo.</string>
-  <string name="share_license_summary" fuzzy="true">CC-BY-SA 3.0 lizentziaren pean argazkiak igotzekoa onartzen duzu.</string>
+  <string name="menu_cancel_upload">Utzi</string>
+  <string name="share_license_summary">Irudi hau %1$ lizentziapean egongo da</string>
   <string name="menu_download">Jaitsi</string>
+  <string name="preference_license">Lizentzia</string>
+  <string name="license_name_cc0">CC0</string>
+  <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Austria)</string>
+  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Alemania)</string>
+  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonia)</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Espainia)</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Kroazia)</string>
+  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxenburgo)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Herbehereak)</string>
+  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norvegia)</string>
+  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polonia)</string>
+  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Errumania)</string>
+  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_zero">CC Zero</string>
+  <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
+  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
+  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
+  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
+  <string name="license_name_cc_2_0">CC BY 2.0</string>
+  <string name="license_name_pd_art">Jabetza publikoa (artea)</string>
+  <string name="license_name_pd_us">Jabetza publikoa (AEB)</string>
+  <string name="license_name_pd_usgov">Jabetza publikoa (AEBtako gobernua)</string>
+  <string name="license_name_pd_usgov_nasa">Jabetza publikoa (NASA)</string>
+  <string name="welcome_final_button_text">Bai!</string>
+  <string name="detail_panel_cats_label">Kategoriak</string>
+  <string name="detail_panel_cats_loading">Kargatzen...</string>
+  <string name="detail_license_empty">Lizentzia ezezaguna</string>
 </resources>

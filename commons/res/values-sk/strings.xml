@@ -50,11 +50,15 @@ Na pridanie kategórií začnite písať.
 Kliknite na tento odkaz (alebo na späť) ak chcete tento krok vynechať.</string>
   <string name="categories_activity_title">Kategórie</string>
   <string name="preference_tracking">Hlásenie o používaní</string>
+  <string name="preference_tracking_summary">Pošlite hlásenie o požívaní nadácií Wikimédia za účelom vylepšovania aplikácie.</string>
   <string name="title_activity_settings">Nastavenia</string>
   <string name="menu_about">O aplikácii</string>
+  <string name="about_license">Open Source softvér dostupný za podmienok &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
   <string name="about_improve">Zdroj na &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Bugy na &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Ochrana osobných údajov&lt;/a&gt;</string>
   <string name="title_activity_about">O aplikácii</string>
   <string name="menu_feedback">Odoslať spätnú väzbu (emailom)</string>
+  <string name="provider_categories">Nedávno použité kategórie</string>
   <string name="waiting_first_sync">Čaká sa na prvú synchronizáciu...</string>
   <string name="no_uploads_yet">Ešte ste nenahrali žiadne fotografie.</string>
   <string name="menu_retry_upload">Znova</string>
@@ -62,6 +66,8 @@ Kliknite na tento odkaz (alebo na späť) ak chcete tento krok vynechať.</strin
   <string name="share_license_summary">Tento obrázok bude licencovaný podľa %1$s</string>
   <string name="menu_download">Stiahnuť</string>
   <string name="preference_license">Licencia</string>
+  <string name="license_name_cc_by_sa">CCu00A0Attribution-ShareAlikeu00A03.0</string>
+  <string name="license_name_cc_by">CCu00A0Attributionu00A03.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Rakúsko)</string>
@@ -76,12 +82,26 @@ Kliknite na tento odkaz (alebo na späť) ak chcete tento krok vynechať.</strin
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Rumunsko)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
+  <string name="license_name_own_pd">vlastné-voľné dielo</string>
   <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
   <string name="license_name_cc_by_2_5">CC BY 2.5</string>
   <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
   <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
   <string name="license_name_cc_2_0">CC BY 2.0</string>
+  <string name="license_name_fal">Free Art License</string>
+  <string name="license_name_pd_old_100">Voľné dielo (autor zomrel pred viac ako 100 rokmi)</string>
+  <string name="license_name_pd_old">Voľné dielo (autorské práva vypršali)</string>
+  <string name="license_name_pd_art">Voľné dielo (umenie)</string>
+  <string name="license_name_pd_us">Voľné dielo (US)</string>
+  <string name="license_name_pd_usgov">Voľné dielo (vláda USA)</string>
+  <string name="license_name_pd_usgov_nasa">Voľné dielo (NASA)</string>
+  <string name="license_name_pd_ineligible">Voľné dielo (nevhodné pre autorské práva)</string>
+  <string name="license_name_attribution">Uveďte autora</string>
+  <string name="license_name_gfdl">GNU Free Documentation License</string>
+  <string name="welcome_wikipedia_text">Prispejte svojimi obrázkami. Pomôžte oživiť články na Wikipédií.</string>
   <string name="welcome_wikipedia_subtext">Obrázky na Wikipédií pochádzajú z Wikimedia Commons.</string>
+  <string name="welcome_copyright_text">Vaše obrázky pomáhajú vzdelávať ľudí po celom svete.</string>
+  <string name="welcome_copyright_subtext">Vyvarujte sa materiálom nájdeným na internete, ktoré podliehajú autorským právam.</string>
   <string name="welcome_final_text">Myslíte, že rozumiete?</string>
   <string name="welcome_final_button_text">Áno!</string>
   <string name="detail_panel_cats_label">Kategórie</string>

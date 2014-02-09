@@ -52,6 +52,7 @@
   <string name="title_activity_settings">設定</string>
   <string name="about_license">&lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache ライセンス v2&lt;/a&gt; のもとで公開されているオープン ソース ソフトウェア</string>
   <string name="about_improve">ソースは &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt; にあります。バグは &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt; へ。</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/プライバシー・ポリシー\"&gt;プライバシー・ポリシー&lt;/a&gt;</string>
   <string name="menu_feedback">フィードバックをメールで送信</string>
   <string name="provider_categories">最近使用したカテゴリ</string>
   <string name="no_uploads_yet">まだ写真をアップロードしていません。</string>
