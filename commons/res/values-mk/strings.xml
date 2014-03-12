@@ -101,7 +101,7 @@
   <string name="welcome_wikipedia_text">Споделете ги вашите слики. Да ги оживееме статиите на Википедија!</string>
   <string name="welcome_wikipedia_subtext">Сликите на Википедија доаѓаат од Ризницата.</string>
   <string name="welcome_copyright_text">Со вашите слики помагате во образованието на луѓето ширум светот.</string>
-  <string name="welcome_copyright_subtext">Избегнуавјте материјали што сте ги нашле на интернет, како и слики од плакати, корици од книги и тн.</string>
+  <string name="welcome_copyright_subtext">Избегнуавјте материјали што сте ги нашле на семрежјето, како и слики од плакати, корици од книги и тн.</string>
   <string name="welcome_final_text">Објаснивме добро?</string>
   <string name="welcome_final_button_text">Да!</string>
   <string name="detail_panel_cats_label">Категории</string>

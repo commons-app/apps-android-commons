@@ -32,10 +32,29 @@
   <string name="preference_tracking">د کارېدنې راپورونه</string>
   <string name="title_activity_settings">امستنې</string>
   <string name="menu_about">په اړه</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;د پټنتيا تگلاره&lt;/a&gt;</string>
   <string name="title_activity_about">په اړه</string>
+  <string name="provider_categories">وروستۍ کارېدلې وېشنيزې</string>
+  <string name="no_uploads_yet">تاسې تر اوسه کوم انځور نه دی پورته کړی.</string>
+  <string name="menu_retry_upload">بياآزمويل</string>
   <string name="menu_cancel_upload">ناگارل</string>
+  <string name="share_license_summary">دا انځور به د %1$s په منښتليک سمبال وي.</string>
   <string name="menu_download">ښکته کول</string>
   <string name="preference_license">منښتليک</string>
+  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (اتريش)</string>
+  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (جرمني)</string>
+  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (اېسټونيا)</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (سپانيا)</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (کرواسيا)</string>
+  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (لوکسزمبورگ)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (نېدرلند)</string>
+  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (ناروې)</string>
+  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (پولند)</string>
+  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (رومانيا)</string>
+  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_zero">CC صفر</string>
+  <string name="license_name_fal">د وړيا هنر منښتليک</string>
+  <string name="license_name_pd_old_100">ټولگړی شپول (ليکوال يې 100 کاله دمخه مړ شوی)</string>
   <string name="welcome_final_button_text">هو</string>
   <string name="detail_panel_cats_label">وېشنيزې</string>
 </resources>

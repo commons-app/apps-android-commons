@@ -10,6 +10,7 @@
   <string name="logging_in_message">একটু অপেক্ষা করুন...</string>
   <string name="login_success">লগ-ইন সফল!</string>
   <string name="login_failed">লগ-ইন সম্পন্ন হয়নি!</string>
+  <string name="authentication_failed">প্রমাণীকরণ ব্যর্থ হয়েছে!</string>
   <string name="uploading_started"> আপলোড আরম্ভ হয়েছে!</string>
   <string name="upload_completed_notification_title">%1$s আপলোড হয়েছে!</string>
   <string name="upload_completed_notification_text">আপনার আপলোড দেখতে ট্যাপ করুন</string>

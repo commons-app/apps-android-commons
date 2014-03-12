@@ -31,9 +31,9 @@
   <string name="menu_open_in_browser">مشاهده در مرورگر</string>
   <string name="share_title_hint">عنوان</string>
   <string name="share_description_hint">توضیحات</string>
-  <string name="login_failed_network">قادر به ورود به سیستم نیست - نارسایی شبکه</string>
-  <string name="login_failed_username">قادر به ورود به سیستم نیست - لطفاً از درستی نام کاربریتان مطمئن شوید</string>
-  <string name="login_failed_password">قادر به ورود به سیستم نیست - لطفاً از درستی رمز ورود مطمئن شوید</string>
+  <string name="login_failed_network">قادر به ورود نیست - شکست شبکه‌ای</string>
+  <string name="login_failed_username">ناتوانی در ورود - لطفاً نام کاربریتان را بررسی کنید</string>
+  <string name="login_failed_password">ناتوانی در ورود - لطفاً گذرواژه‌یتان را بررسی کنید</string>
   <string name="login_failed_throttled">تلاش ناموفق بیش از حد. لطفاً چند دقیقهٔ دیگر دوباره تلاش کنید</string>
   <string name="login_failed_blocked">پوزش، کاربر در ویکی‌انبار بسته شده‌است</string>
   <string name="login_failed_generic">ورود ناموفق بود</string>

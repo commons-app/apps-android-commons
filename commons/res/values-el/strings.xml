@@ -7,7 +7,7 @@
   <string name="password">Κωδικός πρόσβασης</string>
   <string name="login">Σύνδεση</string>
   <string name="logging_in_title">Συνδέεται</string>
-  <string name="logging_in_message">Παρακαλούμε περιμένετε...</string>
+  <string name="logging_in_message">Παρακαλώ περιμένετε...</string>
   <string name="login_success">Επιτυχής σύνδεση!</string>
   <string name="login_failed">Η είσοδος απέτυχε!</string>
   <string name="authentication_failed">Απέτυχε ο έλεγχος ταυτότητας!</string>
@@ -17,17 +17,18 @@
   <string name="contribution_state_failed">Απέτυχε</string>
   <string name="contribution_state_in_progress">%1$d%% ολοκληρώθηκε</string>
   <string name="contribution_state_starting">Επιφορτώνει...</string>
-  <string name="menu_from_gallery">Από την γκαλερί</string>
+  <string name="menu_from_gallery">Από τη Συλλογή</string>
   <string name="menu_from_camera">Τραβήξτε φωτογραφία</string>
   <string name="provider_contributions">Οι επιφορτώσεις μου</string>
   <string name="menu_share">Κοινοποίηση</string>
   <string name="menu_open_in_browser">Προβολή στον περιηγητή</string>
   <string name="share_title_hint">Τίτλος</string>
   <string name="share_description_hint">Περιγραφή</string>
-  <string name="login_failed_network">Δεν είναι δυνατή η είσοδος - αποτυχία του δικτύου</string>
+  <string name="login_failed_network">Δεν είναι δυνατή η σύνδεση - αποτυχία του δικτύου</string>
   <string name="login_failed_username">Δεν είναι δυνατή η σύνδεση - ελέγξτε το όνομα χρήστη σας</string>
   <string name="login_failed_password">Δεν είναι δυνατή η σύνδεση - παρακαλούμε ελέγξτε τον κωδικό σας</string>
-  <string name="login_failed_throttled">Πάρα πολλές αποτυχημένες προσπάθειες. Παρακαλούμε δοκιμάστε ξανά σε λίγα λεπτά</string>
+  <string name="login_failed_throttled">Πάρα πολλές αποτυχημένες προσπάθειες. Παρακαλώ δοκιμάστε ξανά σε λίγα λεπτά</string>
+  <string name="login_failed_blocked">Συγνώμη, αυτός ο χρήστης έχει αποκλειστεί από τα Commons</string>
   <string name="login_failed_generic">Η είσοδος απέτυχε</string>
   <string name="share_upload_button">Ανέβασμα</string>
   <string name="multiple_share_base_title">Ονομάστε το σύνολο</string>
@@ -36,9 +37,18 @@
   <string name="categories_search_text_hint">Αναζήτηση κατηγοριών</string>
   <string name="menu_save_categories">Αποθήκευση</string>
   <string name="categories_not_found">Δεν βρέθηκαν κατηγορίες που ταιριάζουν %1$s</string>
+  <string name="categories_skip_explanation">Προσθέστε κατηγορίες για να κάνετε τις εικόνες σας πιο ανιχνεύσιμες στα Wikimedia Commons.
+
+Αρχίστε να γράφετε για να προσθέσετε κατηγορίες.
+Πατήστε αυτό το μήνυμα (ή πατήστε επιστροφή) για να παραλείψετε αυτό το βήμα.</string>
   <string name="categories_activity_title">Κατηγορίες</string>
+  <string name="preference_tracking">Αναφορές χρήσης</string>
+  <string name="preference_tracking_summary">Στείλτε αναφορές σχετικά με την χρήση σας στο Wikimedia για να μας βοηθήσετε να βελτιώσουμε την εφαρμογή</string>
   <string name="title_activity_settings">Ρυθμίσεις</string>
   <string name="menu_about">Σχετικά</string>
+  <string name="about_license">Λογισμικό ανοικτού κώδικα και κυκλοφορεί υπό την &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Άδεια Apache v2&lt;/a&gt;</string>
+  <string name="about_improve">Ο πηγαίος κώδικας είναι στο &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Αναφορές σφάλματων στο &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Πολιτική προσωπικών δεδομένων&lt;/a&gt;</string>
   <string name="title_activity_about">Σχετικά</string>
   <string name="menu_feedback">Αποστολή σχολίων (μέσω Email)</string>
   <string name="provider_categories">Κατηγορίες που χρησιμοποιήθηκαν πρόσφατα</string>
@@ -53,6 +63,23 @@
   <string name="license_name_cc_by">CCu00A0Attributionu00A03.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Αυστρία)</string>
+  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Γερμανία)</string>
+  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Εσθονία)</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Ισπανία)</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Κροατία)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Κάτω Χώρες)</string>
+  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Νορβηγία)</string>
+  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Πολωνία)</string>
+  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Ρουμανία)</string>
+  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_zero">CC Μηδέν</string>
+  <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
+  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
+  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
+  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
+  <string name="license_name_cc_2_0">CC BY 2.0</string>
+  <string name="license_name_fal">Ελεύθερη Άδεια Τέχνης</string>
   <string name="license_name_pd_old_100">Κοινό κτήμα (ο δημιουργός πέθανε πάνω από 100 χρόνια πριν)</string>
   <string name="license_name_pd_old">Κοινό κτήμα (τα πνευματικά δικαιώματα έχουν λήξει)</string>
   <string name="license_name_pd_art">Κοινό κτήμα (τέχνη)</string>

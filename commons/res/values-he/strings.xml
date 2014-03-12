@@ -71,5 +71,6 @@
   <string name="welcome_final_text">נראה לך שקלטת?</string>
   <string name="welcome_final_button_text">כן!</string>
   <string name="detail_panel_cats_label">קטגוריות</string>
+  <string name="detail_license_empty">רישיון לא ידוע</string>
   <string name="menu_refresh">רענון</string>
 </resources>

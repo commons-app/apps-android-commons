@@ -38,6 +38,7 @@
   <string name="login_failed_blocked">Sajnáljuk, ezt a felhasználót blokkolták a Commonson</string>
   <string name="login_failed_generic">Bejelentkezési hiba</string>
   <string name="share_upload_button">Feltöltés</string>
+  <string name="multiple_share_base_title">Nevezd el a gyűjteményt</string>
   <string name="provider_modifications">Értesítések</string>
   <string name="menu_upload_single">Feltöltés</string>
   <string name="categories_search_text_hint">Keresés a kategóriák között</string>
@@ -48,6 +49,8 @@
 Kezdd el beírni a kategória nevét, hogy hozzáadd.
 Kattints erre az üzenetre a lépés kihagyásához</string>
   <string name="categories_activity_title">Kategóriák</string>
+  <string name="preference_tracking">Felhasználási jelentések</string>
+  <string name="preference_tracking_summary">Felhasználási jelentések küldése a Wikimédia részére az alkalmazás fejlesztése érdekében</string>
   <string name="title_activity_settings">Beállítások</string>
   <string name="menu_about">Névjegy</string>
   <string name="about_license">Nyílt forráskódú szoftver &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; alatt kiadva</string>
@@ -58,9 +61,26 @@ Kattints erre az üzenetre a lépés kihagyásához</string>
   <string name="provider_categories">Legutóbb használt kategóriák</string>
   <string name="waiting_first_sync">Várakozás az első szinkronizálásra...</string>
   <string name="no_uploads_yet">Még nem töltöttél fel fotókat.</string>
-  <string name="share_license_summary">Ez a kép %1$s licence alatt kerül feltöltésre</string>
+  <string name="menu_retry_upload">Újra</string>
+  <string name="menu_cancel_upload">Mégse</string>
+  <string name="share_license_summary">Ez a kép %1$s licenc alatt kerül feltöltésre</string>
   <string name="menu_download">Letöltés</string>
   <string name="preference_license">Licenc</string>
+  <string name="license_name_cc0">CC0</string>
+  <string name="license_name_fal">Free Art License</string>
+  <string name="license_name_pd_old_100">Közkincs (az szerző több mint 100 éve halt meg)</string>
+  <string name="license_name_pd_old">Közkincs (a szerzői jog lejárt)</string>
+  <string name="license_name_pd_art">Közkincs (művészet)</string>
+  <string name="license_name_pd_us">Közkincs (USA)</string>
+  <string name="license_name_pd_usgov">Közkincs (USA kormány)</string>
+  <string name="license_name_pd_usgov_nasa">Közkincs (NASA)</string>
+  <string name="license_name_pd_ineligible">Közkincs (szerzői jogra nem jogosult)</string>
+  <string name="license_name_attribution">Nevezd meg!</string>
+  <string name="license_name_gfdl">GNU Szabad Dokumentációs Licenc</string>
+  <string name="welcome_wikipedia_text">Tedd közzé a képeidet! Segíts, hogy a Wikipédia szócikkek életre keljenek!</string>
+  <string name="welcome_wikipedia_subtext">A Wikipédián található képek a Wikimédia Commonsből származnak.</string>
+  <string name="welcome_copyright_text">A képeid segítenek a világ minden táján élő emberek oktatásában.</string>
+  <string name="welcome_copyright_subtext">Kerüld az internetről származó szerzői joggal védett anyagokat, mint a poszterek, könyvborítók, stb.</string>
   <string name="welcome_final_text">Megértetted?</string>
   <string name="welcome_final_button_text">Igen!</string>
   <string name="detail_panel_cats_label">Kategóriák</string>

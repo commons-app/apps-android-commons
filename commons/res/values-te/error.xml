@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="crash_dialog_title">కామన్స్ క్రాషయింది</string>
+  <string name="crash_dialog_text">అడెడె.. ఎక్కడో తప్పు జరిగింది!</string>
+  <string name="crash_dialog_comment_prompt">అప్పుడు మీరేం చేస్తున్నారో చెప్పండి. దాన్ని ఈమెయిలు ద్వారా మాకు పంపండి. లోపాన్ని సరిదిద్దడంలో అది మాకు పనికొస్తుంది!</string>
+  <string name="crash_dialog_ok_toast">నెరులు!</string>
+</resources>

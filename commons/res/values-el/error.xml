@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="crash_dialog_title">Τα Commons παρουσίασαν σφάλμα</string>
   <string name="crash_dialog_text">Ωχ. Κάτι πήγε στραβά!</string>
   <string name="crash_dialog_ok_toast">Ευχαριστούμε!</string>
 </resources>
