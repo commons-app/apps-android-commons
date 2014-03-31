@@ -33,6 +33,12 @@
   <string name="share_description_hint">Açıqlama</string>
   <string name="login_failed_network">Daxil olmaq olmur — şəbəkə xətası</string>
   <string name="login_failed_username">Daxil olmaq mümkün olmadı — lütfən, öz istifadəçi adınızı yoxlayın</string>
+  <string name="share_upload_button">Yüklə</string>
+  <string name="provider_modifications">Bildirişlər</string>
+  <string name="menu_upload_single">Yüklə</string>
+  <string name="categories_search_text_hint">Kateqoriyaları axtar</string>
+  <string name="menu_save_categories">Qeyd et</string>
+  <string name="categories_not_found">%1$s axtarışına uyğun kateqoriya tapılmadı</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_zero">CC0</string>
   <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>

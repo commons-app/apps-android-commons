@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="crash_dialog_title">Nasazlıq</string>
   <string name="crash_dialog_text">Uups. Nəsə düzgün çalışmır!</string>
+  <string name="crash_dialog_comment_prompt">Nə etdiyinizi dəqiqləşdirib, bizə bildirin və sonra e-poçtla bizə göndərin. Bu problemi həll etməyə bizə kömək edin.</string>
   <string name="crash_dialog_ok_toast">Təşəkkür!</string>
 </resources>
