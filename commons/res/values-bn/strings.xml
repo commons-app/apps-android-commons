@@ -74,7 +74,9 @@
   <string name="license_name_pd_usgov_nasa">পাবলিক ডোমেইন (নাসা)</string>
   <string name="license_name_pd_ineligible">পাবলিক ডোমেইন (কপিরাইটের অনুপযুক্ত)</string>
   <string name="license_name_attribution">স্বীকৃতিপ্রদান</string>
+  <string name="welcome_wikipedia_text">আপনার ছবি দিয়ে অবদান রাখুন। উইকিপিডিয়ার নিবন্ধগুলিকে নতুন রূপ দিতে সাহায্য করুন!</string>
   <string name="welcome_wikipedia_subtext">উইকিপিডিয়াতে চিত্র উইকিমিডিয়া কমন্স থেকে এসেছে।</string>
+  <string name="welcome_copyright_text">আপনার ছবি সারা বিশ্বের শিক্ষিত মানুষকে সাহায্য করবে।</string>
   <string name="welcome_final_text">আপনি মনে করেন আপনি বুঝতে পেরেছেন?</string>
   <string name="welcome_final_button_text">হ্যাঁ!</string>
   <string name="detail_panel_cats_label">বিষয়শ্রেণীসমূহ</string>

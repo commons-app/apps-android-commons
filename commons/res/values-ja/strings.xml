@@ -34,6 +34,7 @@
   <string name="login_failed_network">ログインできません - ネットワークのエラーです</string>
   <string name="login_failed_username">ログインできません - 利用者名を確認してください</string>
   <string name="login_failed_password">ログインできません - パスワードを確認してください</string>
+  <string name="login_failed_throttled">失敗した回数が多すぎます。数分でもう一度お試しください。</string>
   <string name="login_failed_blocked">申し訳ありませんが、この利用者はコモンズでブロックされています。</string>
   <string name="login_failed_generic">ログイン失敗</string>
   <string name="share_upload_button">アップロード</string>
