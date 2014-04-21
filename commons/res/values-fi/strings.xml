@@ -83,6 +83,12 @@ Napauta tätä viestiä (tai paina takaisin) ohittaaksesi tämän vaiheen.</stri
   <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
   <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
   <string name="license_name_cc_2_0">CC BY 2.0</string>
+  <string name="license_name_pd_old_100">Public domain (tekijä kuollut yli 100 vuotta sitten)</string>
+  <string name="license_name_pd_old">Public domain (tekijänoikeudet vanhentuneet)</string>
+  <string name="license_name_pd_art">Public domain (taide)</string>
+  <string name="license_name_pd_us">Public domain (US)</string>
+  <string name="license_name_pd_usgov">Public domain (Yhdysvaltain hallitus)</string>
+  <string name="license_name_pd_usgov_nasa">Public domain (NASA)</string>
   <string name="welcome_wikipedia_text">Herätä Wikipedia-artikkelit eloon kuvillasi! Tuo kuvasi Wikipediaan.</string>
   <string name="welcome_wikipedia_subtext">Wikipedian kuvat tulevat Wikimedia Commonsista.</string>
   <string name="welcome_copyright_text">Kuvat auttavat useita ihmisiä ympäri maailmaa artikkeleiden ymmärtämisessä.</string>

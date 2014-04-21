@@ -23,7 +23,7 @@
   <string name="contribution_state_queued">Na cola</string>
   <string name="contribution_state_failed">Erróneo</string>
   <string name="contribution_state_in_progress">%1$d%% completado</string>
-  <string name="contribution_state_starting">Cargando</string>
+  <string name="contribution_state_starting">Subindo</string>
   <string name="menu_from_gallery">Da galería</string>
   <string name="menu_from_camera">Tirar unha foto</string>
   <string name="provider_contributions">As miñas cargas</string>
@@ -37,10 +37,10 @@
   <string name="login_failed_throttled">Demasiados intentos incorrectos. Inténteo de novo nuns minutos</string>
   <string name="login_failed_blocked">Sentímolo, este usuario está bloqueado en Commons</string>
   <string name="login_failed_generic">Erro durante o inición de sesión</string>
-  <string name="share_upload_button">Cargar</string>
+  <string name="share_upload_button">Subir</string>
   <string name="multiple_share_base_title">Dea un nome a este conxunto</string>
   <string name="provider_modifications">Modificacións</string>
-  <string name="menu_upload_single">Cargar</string>
+  <string name="menu_upload_single">Subir</string>
   <string name="categories_search_text_hint">Procurar categorías</string>
   <string name="menu_save_categories">Gardar</string>
   <string name="categories_not_found">Non se atopou ningunha categoría que coincidise con \"%1$s\"</string>

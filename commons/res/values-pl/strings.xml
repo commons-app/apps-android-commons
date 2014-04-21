@@ -106,5 +106,6 @@ Dotknij tej wiadomości (lub naciśnij \"cofnij\") aby pominąć ten krok</strin
   <string name="detail_panel_cats_none">Nic nie zaznaczono</string>
   <string name="detail_description_empty">Brak opisu</string>
   <string name="detail_license_empty">Nieznana licencja</string>
+  <string name="provider_campaigns">Kampanie</string>
   <string name="menu_refresh">Odśwież</string>
 </resources>
