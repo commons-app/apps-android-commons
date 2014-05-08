@@ -95,6 +95,7 @@ Dotknij tej wiadomości (lub naciśnij \"cofnij\") aby pominąć ten krok</strin
   <string name="license_name_pd_usgov_nasa">Domena publiczna (NASA)</string>
   <string name="license_name_pd_ineligible">Domena publiczna (nie podlega ochronie prawa autorskiego)</string>
   <string name="license_name_attribution">Uznanie autorstwa</string>
+  <string name="license_name_gfdl">GNU Free Documentation License</string>
   <string name="welcome_wikipedia_text">Dołóż swoje grafiki. Pomóż artykułom na Wikipedii ożywić się!</string>
   <string name="welcome_wikipedia_subtext">Ilustracje we Wikipedii pochodzą z Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Twoje ilustracje pomagają w edukacji ludzi na całym świecie.</string>
