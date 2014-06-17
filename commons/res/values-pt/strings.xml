@@ -53,6 +53,7 @@ Carregue nesta mensagem (ou carregue para voltar) para saltar este passo</string
   <string name="preference_tracking_summary">Enviar relatório de uso para a Wikimedia para ajudar-nos a melhorar o aplicativo</string>
   <string name="title_activity_settings">Configurações</string>
   <string name="menu_about">Sobre</string>
+  <string name="about_license">Software em código aberto distribuído sob &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
   <string name="about_improve">Código no &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;. Bugs no &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Política de privacidade&lt;/a&gt;</string>
   <string name="title_activity_about">Sobre</string>
@@ -65,6 +66,8 @@ Carregue nesta mensagem (ou carregue para voltar) para saltar este passo</string
   <string name="share_license_summary">Essa imagem será licenciada sob %1$s</string>
   <string name="menu_download">Descarregar</string>
   <string name="preference_license">Licença</string>
+  <string name="license_name_cc_by_sa">CCu00A0Atrubuição-CompartilhaIgualu00A03.0</string>
+  <string name="license_name_cc_by">CCu00A0Atribuiçãou00A03.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Áustria)</string>
@@ -79,11 +82,14 @@ Carregue nesta mensagem (ou carregue para voltar) para saltar este passo</string
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Roménia)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
+  <string name="license_name_own_pd">own-pd</string>
   <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
   <string name="license_name_cc_by_2_5">CC BY 2.5</string>
   <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
   <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
   <string name="license_name_cc_2_0">CC BY 2.0</string>
+  <string name="license_name_fal">Licença Artística Livre</string>
+  <string name="license_name_pd_old_100">Domínio público (o autor morreu há mais de 100 anos)</string>
   <string name="license_name_pd_old">Domínio público (direitos autorais expirados)</string>
   <string name="license_name_pd_art">Domínio público (arte)</string>
   <string name="license_name_pd_us">Dominio público (Estados Unidos)</string>
@@ -93,9 +99,11 @@ Carregue nesta mensagem (ou carregue para voltar) para saltar este passo</string
   <string name="license_name_attribution">Atribuição</string>
   <string name="license_name_gfdl">Licença de Documentação Livre GNU</string>
   <string name="welcome_wikipedia_text">Contribua com as suas imagens. Ajude os artigos da Wikipédia a ganhar vida!</string>
+  <string name="welcome_wikipedia_subtext">As imagens na Wikipédia provêm do Wikimedia Commons.</string>
   <string name="welcome_copyright_text">As suas imagens ajudam a educar as pessoas em todo o mundo.</string>
+  <string name="welcome_copyright_subtext">Evite materiais protegidos por direitos de autor que tenham sido encontrados na Internet, bem como imagens de cartazes, capas de livros, etc.</string>
   <string name="welcome_final_text">Você acha que conseguiu?</string>
-  <string name="welcome_final_button_text">Sim</string>
+  <string name="welcome_final_button_text">Sim!</string>
   <string name="detail_panel_cats_label">Categorias</string>
   <string name="detail_panel_cats_loading">A carregar...</string>
   <string name="detail_panel_cats_none">Nenhuma selecionada</string>

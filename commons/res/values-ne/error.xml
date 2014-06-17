@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="crash_dialog_title">कमन्स दुर्घटनाग्रस्त भएको छ</string>
+  <string name="crash_dialog_text">ओहो। केही गल्ती भयो!</string>
+  <string name="crash_dialog_comment_prompt">तपाईँ के गर्दै हुनुहुन्थ्यो हामीलाई भन्नुहोस्, त्यसपछि यसलाई इमेल मार्फत हामीसँग साझेदारी गर्नुहोस्। ठीक गर्न हामीलाई मद्दत गर्नेछ!</string>
+  <string name="crash_dialog_ok_toast">धन्यवाद !</string>
+</resources>

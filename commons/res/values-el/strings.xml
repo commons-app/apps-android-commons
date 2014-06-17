@@ -12,6 +12,7 @@
   <string name="login_failed">Η είσοδος απέτυχε!</string>
   <string name="authentication_failed">Απέτυχε ο έλεγχος ταυτότητας!</string>
   <string name="uploading_started">Η αποστολή ξεκίνησε!</string>
+  <string name="upload_completed_notification_text">Πατήστε για να προβάλλετε την αποστολή</string>
   <string name="title_activity_contributions">Οι επιφορτώσεις μου</string>
   <string name="contribution_state_queued">Στην ουρά</string>
   <string name="contribution_state_failed">Απέτυχε</string>

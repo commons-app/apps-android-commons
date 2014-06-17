@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="crash_dialog_title">କମନ୍ସ ଅକାମୀ ହୋଇଗଲା</string>
+  <string name="crash_dialog_text">କିଛି ଗୋଟେ ଅଘଟଣ ଘଟିଲା!</string>
+  <string name="crash_dialog_comment_prompt">ଆପଣ କଣ କରୁଥିଲା ବେଳେ କି ଅସୁବିଧା ଘଟିଲା ଆମକୁ ମେଲ କରନ୍ତୁ । ଆମେ ତାହା ସୁଧାରିଦେବୁ!</string>
+  <string name="crash_dialog_ok_toast">ସାଧୁବାଦ!</string>
+</resources>
