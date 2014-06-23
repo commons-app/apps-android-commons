@@ -47,7 +47,7 @@
   <string name="categories_skip_explanation">Lägg till kategorier för att göra dina bilder synliga på Wikimedia Commons.
 
 Börja skriva för att lägga till kategorier.
-Knacka på detta meddelande (eller gå tillbaka) för att hoppa över detta steg.</string>
+Tryck på detta meddelande (eller gå tillbaka) för att hoppa över detta steg.</string>
   <string name="categories_activity_title">Kategorier</string>
   <string name="preference_tracking">Användningsrapporter</string>
   <string name="preference_tracking_summary">Skicka användningsrapporter till Wikimedia för att hjälpa oss förbättra appen</string>
@@ -57,7 +57,7 @@ Knacka på detta meddelande (eller gå tillbaka) för att hoppa över detta steg
   <string name="about_improve">Källa på &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Buggar på &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Integritetspolicy&lt;/a&gt;</string>
   <string name="title_activity_about">Om</string>
-  <string name="menu_feedback">Skicka återkoppling (via e-post)</string>
+  <string name="menu_feedback">Skicka feedback (via e-post)</string>
   <string name="provider_categories">Nyligen använda kategorier</string>
   <string name="waiting_first_sync">Väntar på första synkroniseringen...</string>
   <string name="no_uploads_yet">Du har inte lagt upp några bilder ännu.</string>
@@ -101,7 +101,7 @@ Knacka på detta meddelande (eller gå tillbaka) för att hoppa över detta steg
   <string name="welcome_wikipedia_text">Bidra med dina bilder. Hjälp Wikipedia-artiklar att komma till liv!</string>
   <string name="welcome_wikipedia_subtext">Bilder på Wikipedia kommer från Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Dina bilder hjälper till att utbilda människor runt om i världen.</string>
-  <string name="welcome_copyright_subtext">Undvik upphovsrättsskyddat material som du hittar på internet samt bilder av affischer, bokomslag, etc.</string>
+  <string name="welcome_copyright_subtext">Undvik upphovsrättsskyddat material som du hittar på Internet, samt bilder av affischer, bokomslag, etc.</string>
   <string name="welcome_final_text">Tror du att du förstår?</string>
   <string name="welcome_final_button_text">Ja!</string>
   <string name="detail_panel_cats_label">Kategorier</string>

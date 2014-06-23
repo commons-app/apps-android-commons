@@ -66,6 +66,8 @@ Napauta tätä viestiä (tai paina takaisin) ohittaaksesi tämän vaiheen.</stri
   <string name="share_license_summary">Tiedosto tallennetaan lisenssin %1$s ehtojen mukaisesti.</string>
   <string name="menu_download">Lataa</string>
   <string name="preference_license">Lisenssi</string>
+  <string name="license_name_cc_by_sa">CCu00A0Nimeä-Jaau00A0samoinu00A03.0</string>
+  <string name="license_name_cc_by">CCu00A0Nimeäu00A03.0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Itävalta)</string>
   <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Saksa)</string>
@@ -89,6 +91,7 @@ Napauta tätä viestiä (tai paina takaisin) ohittaaksesi tämän vaiheen.</stri
   <string name="license_name_pd_us">Public domain (US)</string>
   <string name="license_name_pd_usgov">Public domain (Yhdysvaltain hallitus)</string>
   <string name="license_name_pd_usgov_nasa">Public domain (NASA)</string>
+  <string name="license_name_gfdl">GNU Free Documentation License</string>
   <string name="welcome_wikipedia_text">Herätä Wikipedia-artikkelit eloon kuvillasi! Tuo kuvasi Wikipediaan.</string>
   <string name="welcome_wikipedia_subtext">Wikipedian kuvat tulevat Wikimedia Commonsista.</string>
   <string name="welcome_copyright_text">Kuvat auttavat useita ihmisiä ympäri maailmaa artikkeleiden ymmärtämisessä.</string>
