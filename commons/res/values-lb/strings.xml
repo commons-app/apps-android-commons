@@ -19,6 +19,7 @@
   <string name="upload_progress_notification_title_finishing">Eroplueden vu(n) %1$s ofschléissen</string>
   <string name="upload_failed_notification_title">D\'Eropluede vu(n) %1$s huet net funktionéiert</string>
   <string name="upload_failed_notification_subtitle">Dréckt fir nach eng Kéier ze probéieren</string>
+  <string name="uploads_pending_notification_indicator">%d Fichieren eroplueden</string>
   <string name="title_activity_contributions">Meng eropgeluede Fichieren</string>
   <string name="contribution_state_queued">An der Queue</string>
   <string name="contribution_state_failed">Huet net funktionéiert</string>
@@ -86,6 +87,12 @@ Klickt op dëse Message (oder dréck op Zréck) fir dëse Schrëtt z\'iwwerspran
   <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
   <string name="license_name_cc_2_0">CC BY 2.0</string>
   <string name="license_name_fal">Fräi Artistesch Lizenz (Free Art License)</string>
+  <string name="license_name_pd_old_100">Ëffentlechen Domaine (Auteur ass viru méi wéi 100 Joer gestuerwen)</string>
+  <string name="license_name_pd_old">Ëffentlechen Domaine (Copyright ass ofgelaf)</string>
+  <string name="license_name_pd_art">Ëffentlechen Domaine (Konscht)</string>
+  <string name="license_name_pd_us">Ëffentlechen Domaine (USA)</string>
+  <string name="license_name_pd_usgov">Ëffentlechen Domaine (US-Regierung)</string>
+  <string name="license_name_pd_usgov_nasa">Ëffentlechen Domaine (NASA)</string>
   <string name="license_name_attribution">Attributioun</string>
   <string name="license_name_gfdl">GNU Fräi Dokumentatiouns Lizenz</string>
   <string name="welcome_wikipedia_text">Maacht mat mat Äre Biller. Hëlleft Wikipedia-Artikele méi lieweg ze maachen!</string>

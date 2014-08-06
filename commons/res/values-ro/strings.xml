@@ -19,6 +19,7 @@
   <string name="upload_progress_notification_title_finishing">Se finalizează încărcarea fișierului %1$s</string>
   <string name="upload_failed_notification_title">Încărcarea fișierului %1$s nu a reușit</string>
   <string name="upload_failed_notification_subtitle">Atingeți pentru a vizualiza</string>
+  <string name="uploads_pending_notification_indicator">%d fișiere se încarcă</string>
   <string name="title_activity_contributions">Încărcările mele</string>
   <string name="contribution_state_queued">În așteptare</string>
   <string name="contribution_state_failed">Nu a reușit</string>

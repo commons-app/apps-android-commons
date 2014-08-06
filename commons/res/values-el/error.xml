@@ -2,5 +2,6 @@
 <resources>
   <string name="crash_dialog_title">Τα Commons παρουσίασαν σφάλμα</string>
   <string name="crash_dialog_text">Ωχ. Κάτι πήγε στραβά!</string>
+  <string name="crash_dialog_comment_prompt">Πείτε μας τι κάνατε και μετά μοιραστείτε το μέσω email με μας. Θα μας βοηθήσει να το διορθώσουμε!</string>
   <string name="crash_dialog_ok_toast">Ευχαριστούμε!</string>
 </resources>

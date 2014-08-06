@@ -12,7 +12,13 @@
   <string name="login_failed">Η είσοδος απέτυχε!</string>
   <string name="authentication_failed">Απέτυχε ο έλεγχος ταυτότητας!</string>
   <string name="uploading_started">Η αποστολή ξεκίνησε!</string>
+  <string name="upload_completed_notification_title">%1$s επιφορτώθηκε!</string>
   <string name="upload_completed_notification_text">Πατήστε για να προβάλλετε την αποστολή</string>
+  <string name="upload_progress_notification_title_start">Έναρξη  %1$s  επιφορτώθηκε</string>
+  <string name="upload_progress_notification_title_in_progress">%1$s επιφορτώνεται</string>
+  <string name="upload_progress_notification_title_finishing">Αποπεράτωση επιφόρτωσης %1$s</string>
+  <string name="upload_failed_notification_title">Επιφόρτωση του %1$s απέτυχε</string>
+  <string name="upload_failed_notification_subtitle">Πατήστε για να δείτε</string>
   <string name="title_activity_contributions">Οι επιφορτώσεις μου</string>
   <string name="contribution_state_queued">Στην ουρά</string>
   <string name="contribution_state_failed">Απέτυχε</string>
@@ -69,6 +75,7 @@
   <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Εσθονία)</string>
   <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Ισπανία)</string>
   <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Κροατία)</string>
+  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Λουξεμβούργο)</string>
   <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Κάτω Χώρες)</string>
   <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Νορβηγία)</string>
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Πολωνία)</string>
@@ -93,6 +100,7 @@
   <string name="welcome_wikipedia_text">Συνεισφέρετε τις εικόνες σας. Βοηθείστε τα λήμματα της Wikipedia να έρθουν στη ζωή!</string>
   <string name="welcome_wikipedia_subtext">Οι εικόνες στη Wikipedia προέρχονται από το Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Οι εικόνες σας βοηθούν να εκπαιδευτούν άνθρωποι σε όλο τον κόσμο.</string>
+  <string name="welcome_copyright_subtext">Αποφύγετε προστατευμένο υλικό  που βρήκατε από το Internet, καθώς και εικόνες, αφίσες, εξώφυλλα βιβλίων, κλπ.</string>
   <string name="welcome_final_text">Νομίζεις ότι έχεις;</string>
   <string name="welcome_final_button_text">Ναι!</string>
   <string name="detail_panel_cats_label">Κατηγορίες</string>

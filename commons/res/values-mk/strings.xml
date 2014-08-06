@@ -19,6 +19,7 @@
   <string name="upload_progress_notification_title_finishing">Заврпувам со подигање на „%1$s“</string>
   <string name="upload_failed_notification_title">Подигањето на „%1$s“ не успеа</string>
   <string name="upload_failed_notification_subtitle">Допрете за да погледате</string>
+  <string name="uploads_pending_notification_indicator">Се подигаат %d податотеки</string>
   <string name="title_activity_contributions">Мои подигања</string>
   <string name="contribution_state_queued">Чека ред</string>
   <string name="contribution_state_failed">Не успеа</string>

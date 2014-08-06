@@ -55,7 +55,7 @@ Tekan pesan ini (atau tekan kembali) untuk melewatkan langkah ini.</string>
   <string name="menu_about">Tentang</string>
   <string name="about_license">Perangkat lunak terbuka dirilis di bawah &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;lisensi Apache v2&lt;/a&gt;</string>
   <string name="about_improve">Bersumber di &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Bug di &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Kebijakan privasi&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy/id\"&gt;Kebijakan privasi&lt;/a&gt;</string>
   <string name="title_activity_about">Tentang</string>
   <string name="menu_feedback">Kirim umpan balik (via Surel)</string>
   <string name="provider_categories">Kategori yang terakhir digunakan</string>
@@ -81,7 +81,7 @@ Tekan pesan ini (atau tekan kembali) untuk melewatkan langkah ini.</string>
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polandia)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Rumania)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
+  <string name="license_name_cc_zero">CC Nol</string>
   <string name="license_name_own_pd">own-pd</string>
   <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
   <string name="license_name_cc_by_2_5">CC BY 2.5</string>

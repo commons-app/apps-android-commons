@@ -19,6 +19,7 @@
   <string name="upload_progress_notification_title_finishing">Avslutar uppladdning av %1$s</string>
   <string name="upload_failed_notification_title">Uppladdning av %1$s misslyckades</string>
   <string name="upload_failed_notification_subtitle">Tryck för att visa</string>
+  <string name="uploads_pending_notification_indicator">%d filer laddas upp</string>
   <string name="title_activity_contributions">Mina uppladdningar</string>
   <string name="contribution_state_queued">Köade</string>
   <string name="contribution_state_failed">Misslyckades</string>

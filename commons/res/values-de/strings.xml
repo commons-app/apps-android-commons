@@ -19,6 +19,7 @@
   <string name="upload_progress_notification_title_finishing">Hochladen von „%1$s“ abschließen</string>
   <string name="upload_failed_notification_title">Hochladen von „%1$s“ fehlgeschlagen</string>
   <string name="upload_failed_notification_subtitle">Tippen zum Betrachten</string>
+  <string name="uploads_pending_notification_indicator">%d Dateien werden hochgeladen</string>
   <string name="title_activity_contributions">Meine hochgeladenen Dateien</string>
   <string name="contribution_state_queued">In der Warteschlange</string>
   <string name="contribution_state_failed">Fehlgeschlagen</string>

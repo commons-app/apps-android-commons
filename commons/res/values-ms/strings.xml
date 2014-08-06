@@ -19,6 +19,7 @@
   <string name="upload_progress_notification_title_finishing">%1$s akan siap dimuat naik</string>
   <string name="upload_failed_notification_title">%1$s gagal dimuat naik</string>
   <string name="upload_failed_notification_subtitle">Ketik untuk lihat</string>
+  <string name="uploads_pending_notification_indicator">%d fail sedang dimuat naik</string>
   <string name="title_activity_contributions">Muatan naik saya</string>
   <string name="contribution_state_queued">Dibaris gilir</string>
   <string name="contribution_state_failed">Gagal</string>

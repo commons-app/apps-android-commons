@@ -19,6 +19,7 @@
   <string name="upload_progress_notification_title_finishing">اكتمال رفع %1$s</string>
   <string name="upload_failed_notification_title">فشل رفع %1$s</string>
   <string name="upload_failed_notification_subtitle">انقر لتشاهد</string>
+  <string name="uploads_pending_notification_indicator" fuzzy="true">متبقى %d</string>
   <string name="title_activity_contributions">مرفوعاتي</string>
   <string name="contribution_state_queued">في قائمة الانتظار</string>
   <string name="contribution_state_failed">فشل</string>

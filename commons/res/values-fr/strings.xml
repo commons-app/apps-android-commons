@@ -19,6 +19,7 @@
   <string name="upload_progress_notification_title_finishing">Fin du téléchargement %1$s</string>
   <string name="upload_failed_notification_title">Téléchargement échoué à %1$s</string>
   <string name="upload_failed_notification_subtitle">Appuyer pour afficher</string>
+  <string name="uploads_pending_notification_indicator">%d fichiers en téléchargement</string>
   <string name="title_activity_contributions">Mes téléchargements</string>
   <string name="contribution_state_queued">Mis en file d\'attente</string>
   <string name="contribution_state_failed">Échoué</string>

@@ -19,6 +19,7 @@
   <string name="upload_progress_notification_title_finishing">Đang hoàn thành việc tải lên tập tin %1$s</string>
   <string name="upload_failed_notification_title">Tải lên tập tin %1$s thất bại</string>
   <string name="upload_failed_notification_subtitle">Chạm để xem</string>
+  <string name="uploads_pending_notification_indicator">%d tập tin đang được tải lên</string>
   <string name="title_activity_contributions">Tập tin do tôi tải lên</string>
   <string name="contribution_state_queued">Đang chờ</string>
   <string name="contribution_state_failed">Thất bại</string>

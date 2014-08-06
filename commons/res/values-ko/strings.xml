@@ -19,6 +19,7 @@
   <string name="upload_progress_notification_title_finishing">%1$s 파일 올리기를 끝내는 중</string>
   <string name="upload_failed_notification_title">%1$s 파일 올리기 실패</string>
   <string name="upload_failed_notification_subtitle">보려면 탭하세요</string>
+  <string name="uploads_pending_notification_indicator">파일 %d개 올리는 중</string>
   <string name="title_activity_contributions">내 올린 파일</string>
   <string name="contribution_state_queued">대기 중</string>
   <string name="contribution_state_failed">실패</string>

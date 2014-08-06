@@ -68,6 +68,7 @@ Napauta tätä viestiä (tai paina takaisin) ohittaaksesi tämän vaiheen.</stri
   <string name="preference_license">Lisenssi</string>
   <string name="license_name_cc_by_sa">CCu00A0Nimeä-Jaau00A0samoinu00A03.0</string>
   <string name="license_name_cc_by">CCu00A0Nimeäu00A03.0</string>
+  <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Itävalta)</string>
   <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Saksa)</string>
@@ -80,6 +81,7 @@ Napauta tätä viestiä (tai paina takaisin) ohittaaksesi tämän vaiheen.</stri
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Puola)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romania)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_zero">CC0</string>
   <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
   <string name="license_name_cc_by_2_5">CC BY 2.5</string>
   <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>

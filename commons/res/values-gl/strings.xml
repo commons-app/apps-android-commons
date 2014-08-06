@@ -19,6 +19,7 @@
   <string name="upload_progress_notification_title_finishing">Rematando a carga de \"%1$s\"</string>
   <string name="upload_failed_notification_title">Erro ao cargar \"%1$s\"</string>
   <string name="upload_failed_notification_subtitle">Prema para mostralo</string>
+  <string name="uploads_pending_notification_indicator">Cargándose %d ficheiros</string>
   <string name="title_activity_contributions">As miñas cargas</string>
   <string name="contribution_state_queued">Na cola</string>
   <string name="contribution_state_failed">Erróneo</string>

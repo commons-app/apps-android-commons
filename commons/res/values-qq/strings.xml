@@ -27,6 +27,8 @@
   <string name="upload_progress_notification_title_finishing">Title for notification about upload being completed. %1$s represents file name</string>
   <string name="upload_failed_notification_title">Title for notification about upload failing. %1$s represents file name</string>
   <string name="upload_failed_notification_subtitle">Text for notification about upload being completed.</string>
+  <string name="uploads_pending_notification_indicator">Status text about number of uploads left.
+* %d represents number of uploads left, including current one</string>
   <string name="title_activity_contributions">Title for screen showing my contributions.
 {{Identical|My upload}}</string>
   <string name="contribution_state_queued">Show status of upload as currently queued.

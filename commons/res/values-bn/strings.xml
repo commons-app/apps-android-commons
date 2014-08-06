@@ -19,6 +19,7 @@
   <string name="upload_progress_notification_title_finishing">%1$s আপলোড শেষ হয়েছে</string>
   <string name="upload_failed_notification_title">%1$s আপলোড ব্যর্থ</string>
   <string name="upload_failed_notification_subtitle">দেখার জন্য ট্যাপ করুন</string>
+  <string name="uploads_pending_notification_indicator" fuzzy="true">%d বাকি রয়েছে</string>
   <string name="title_activity_contributions">আমার আপলোড</string>
   <string name="contribution_state_queued">অপেক্ষারত</string>
   <string name="contribution_state_failed">ব্যর্থ</string>
@@ -43,6 +44,11 @@
   <string name="menu_upload_single">আপলোড</string>
   <string name="categories_search_text_hint">বিষয়শ্রেণী অনুসন্ধান</string>
   <string name="menu_save_categories">সংরক্ষণ</string>
+  <string name="categories_not_found">%1$s বিষয়শ্রেণী পাওয়া যায়নি</string>
+  <string name="categories_skip_explanation">উইকিমিডিয়া কমন্স থেকে আপনার মিডিয়া ফাইলটি সহজে খুঁজে পেতে বিষয়শ্রেণী যুক্ত করুন।
+
+বিষয়শ্রেণী যোগ করার জন্য টাইপিং শুরু করুন।
+এই ধাপটি বাতিল করতে এই বার্তা (বা ফিরে যান) ট্যাপ করুন।</string>
   <string name="categories_activity_title">বিষয়শ্রেণীসমূহ</string>
   <string name="preference_tracking">ব্যবহারের প্রতিবেদন</string>
   <string name="preference_tracking_summary">আমাদের অ্যাপ্লিকেশন উন্নয়নে সহায়তা করতে উইকিমিডিয়ায় ব্যবহারের প্রতিবেদন পাঠান।</string>
@@ -70,8 +76,14 @@
   <string name="license_name_cc_by_sa_3_0_ee">সিসি বাই-এসএ ৩.০ (এস্তোনিয়া)</string>
   <string name="license_name_cc_by_sa_3_0_es">সিসি বাই-এসএ ৩.০ (স্পেন)</string>
   <string name="license_name_cc_by_sa_3_0_hr">সিসি বাই-এসএ ৩.০ (ক্রোয়েশিয়া)</string>
+  <string name="license_name_cc_by_sa_3_0_lu">সিসি বাই-এসএ ৩.০ (লুক্সেমবুর্গ)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">সিসি বাই-এসএ ৩.০ (নেদারল্যান্ডস)</string>
+  <string name="license_name_cc_by_sa_3_0_no">সিসি বাই-এসএ ৩.০ (নরওয়ে)</string>
+  <string name="license_name_cc_by_sa_3_0_pl">সিসি বাই-এসএ ৩.০ (পোল্যান্ড)</string>
+  <string name="license_name_cc_by_sa_3_0_ro">সিসি বাই-এসএ ৩.০ (রোমানিয়া)</string>
   <string name="license_name_cc_by_3_0">সিসি বাই ৩.০</string>
   <string name="license_name_cc_zero">সিসি জিরো</string>
+  <string name="license_name_own_pd">নিজের কাজ</string>
   <string name="license_name_cc_by_sa_2_5">সিসি বাই-এসএ ২.৫</string>
   <string name="license_name_cc_by_2_5">সিসি বাই ২.৫</string>
   <string name="license_name_cc_by_sa_2_0">সিসি বাই-এসএ ২.০</string>
@@ -86,9 +98,11 @@
   <string name="license_name_pd_usgov_nasa">পাবলিক ডোমেইন (নাসা)</string>
   <string name="license_name_pd_ineligible">পাবলিক ডোমেইন (কপিরাইটের অনুপযুক্ত)</string>
   <string name="license_name_attribution">স্বীকৃতিপ্রদান</string>
+  <string name="license_name_gfdl">গনু ফ্রি ডকুমেন্টেশন লাইসেন্স</string>
   <string name="welcome_wikipedia_text">আপনার ছবি দিয়ে অবদান রাখুন। উইকিপিডিয়ার নিবন্ধগুলিকে নতুন রূপ দিতে সাহায্য করুন!</string>
   <string name="welcome_wikipedia_subtext">উইকিপিডিয়াতে চিত্র উইকিমিডিয়া কমন্স থেকে এসেছে।</string>
   <string name="welcome_copyright_text">আপনার ছবি সারা বিশ্বের শিক্ষিত মানুষকে সাহায্য করবে।</string>
+  <string name="welcome_copyright_subtext">পোষ্টারের চিত্র, বইয়ের কভার ইত্যাদির পাশাপাশি ইন্টারনেট থেকে পাওয়া কপিরাইটযুক্ত উপকরণ এড়িয়ে চলুন।</string>
   <string name="welcome_final_text">আপনি মনে করেন আপনি বুঝতে পেরেছেন?</string>
   <string name="welcome_final_button_text">হ্যাঁ!</string>
   <string name="detail_panel_cats_label">বিষয়শ্রেণীসমূহ</string>

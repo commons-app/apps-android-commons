@@ -19,6 +19,7 @@
   <string name="upload_progress_notification_title_finishing">%1$s のアップロードを完了中</string>
   <string name="upload_failed_notification_title">%1$s のアップロードに失敗しました</string>
   <string name="upload_failed_notification_subtitle">閲覧するにはタップしてください</string>
+  <string name="uploads_pending_notification_indicator">%d ファイルをアップロード中</string>
   <string name="title_activity_contributions">自分のアップロード</string>
   <string name="contribution_state_queued">順番待ち中</string>
   <string name="contribution_state_failed">失敗しました</string>

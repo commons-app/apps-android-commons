@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="crash_dialog_title">Commons è andato in errore</string><string name="crash_dialog_text">Oops. Qualcosa è andato storto!</string><string name="crash_dialog_comment_prompt">Dicci cosa stavi facendo, e inviacelo per email. Ci aiuterà a risolvere il problema!</string><string name="crash_dialog_ok_toast">Grazie!</string></resources>
+<resources>
+  <string name="crash_dialog_title">Commons è andato in errore</string>
+  <string name="crash_dialog_text">Oops. Qualcosa è andato storto!</string>
+  <string name="crash_dialog_comment_prompt">Dicci cosa stavi facendo, e inviacelo per email. Ci aiuterà a risolvere il problema!</string>
+  <string name="crash_dialog_ok_toast">Grazie!</string>
+</resources>

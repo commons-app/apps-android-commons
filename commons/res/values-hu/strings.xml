@@ -19,6 +19,7 @@
   <string name="upload_progress_notification_title_finishing">Feltöltés befejezve: %1$s</string>
   <string name="upload_failed_notification_title">%1$s feltöltése sikertelen</string>
   <string name="upload_failed_notification_subtitle">Kattints a megtekintéshez</string>
+  <string name="uploads_pending_notification_indicator" fuzzy="true">%d van hátra</string>
   <string name="title_activity_contributions">Feltöltéseim</string>
   <string name="contribution_state_queued">Várólistán</string>
   <string name="contribution_state_failed">Sikertelen.</string>

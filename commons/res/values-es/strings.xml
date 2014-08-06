@@ -19,6 +19,7 @@
   <string name="upload_progress_notification_title_finishing">Finalizando la subida de %1$s</string>
   <string name="upload_failed_notification_title">Error al subir \"%1$s\"</string>
   <string name="upload_failed_notification_subtitle">Toca para ver</string>
+  <string name="uploads_pending_notification_indicator">Cargando %d archivos</string>
   <string name="title_activity_contributions">Mis subidas</string>
   <string name="contribution_state_queued">En la cola</string>
   <string name="contribution_state_failed">Fallido</string>
