@@ -1,5 +1,7 @@
 # The Wikimedia Commons Android App #
 
+Please note that this app is no longer officially supported by the Wikimedia Foundation.
+
 ## Build Requirements ##
 
 1. [Android SDK][1] (Level 15)
