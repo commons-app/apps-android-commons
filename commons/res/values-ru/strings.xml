@@ -21,6 +21,8 @@
   <string name="upload_failed_notification_subtitle">Нажмите для просмотра</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">загружается 1 файл</item>
+    <item quantity="few">загружается %d файлов</item>
+    <item quantity="other">загружается %d файла</item>
   </plurals>
   <string name="title_activity_contributions">Мои загрузки</string>
   <string name="contribution_state_queued">Очередь</string>
@@ -49,12 +51,18 @@
   <plurals name="contributions_subtitle">
     <item quantity="zero">Нет загрузок</item>
     <item quantity="one">1 загрузка</item>
+    <item quantity="few">%d загрузок</item>
+    <item quantity="other">%d загрузки</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Начинается 1 загрузка</item>
+    <item quantity="few">Начинается %d загрузок</item>
+    <item quantity="other">Начинается %d загрузки</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">1 загрузка</item>
+    <item quantity="few">%d загрузок</item>
+    <item quantity="other">%d загрузки</item>
   </plurals>
   <string name="categories_not_found">Категории, соответствующие %1$s, не найдены</string>
   <string name="categories_skip_explanation">Добавьте категории, чтобы ваши изображения можно было легко найти на Викискладе.

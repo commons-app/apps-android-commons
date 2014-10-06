@@ -19,7 +19,10 @@
   <string name="upload_progress_notification_title_finishing">%1$s ਦਾ ਅੱਪਲੋਡ ਖ਼ਤਮ ਹੋ ਰਿਹਾ ਹੈ</string>
   <string name="upload_failed_notification_title">%1$s ਦਾ ਅੱਪਲੋਡ ਫੇਲ੍ਹ ਹੋਇਆ</string>
   <string name="upload_failed_notification_subtitle">ਵੇਖਣ ਲਈ ਥਪੇੜੋ</string>
-  <plurals name="uploads_pending_notification_indicator"/>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">1 ਫਾਈਲ ਅੱਪਲੋਡ ਹੋ ਰਹੀ ਹੈ</item>
+    <item quantity="other">%d ਫਾਈਲਾਂ ਅੱਪਲੋਡ ਹੋ ਰਹੀਆਂ ਹਨ</item>
+  </plurals>
   <string name="title_activity_contributions">ਮੇਰੇ ਅੱਪਲੋਡ</string>
   <string name="contribution_state_queued">ਕਤਾਰ ਵਿਚ</string>
   <string name="contribution_state_failed">ਫੇਲ੍ਹ ਹੋਇਆ</string>
@@ -44,9 +47,18 @@
   <string name="menu_upload_single">ਅੱਪਲੋਡ</string>
   <string name="categories_search_text_hint">ਸ਼੍ਰੇਣੀਆਂ ਖੋਜੋ</string>
   <string name="menu_save_categories">ਸਾਂਭੋ</string>
-  <plurals name="contributions_subtitle"/>
-  <plurals name="starting_multiple_uploads"/>
-  <plurals name="multiple_uploads_title"/>
+  <plurals name="contributions_subtitle">
+    <item quantity="one">ਅਜੇ ਕੋਈ ਅੱਪਲੋਡ ਨਹੀਂ</item>
+    <item quantity="other">1 ਅੱਪਲੋਡ</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">1 ਅੱਪਲੋਡ ਸ਼ੁਰੂ ਹੋ ਰਿਹਾ ਹੈ</item>
+    <item quantity="other">%d ਸ਼ੁਰੂ ਹੋ ਰਹੇ ਹਨ</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">1 ਅੱਪਲੋਡ</item>
+    <item quantity="other">%d ਅੱਪਲੋਡ</item>
+  </plurals>
   <string name="categories_not_found">%1$s ਨਾਲ਼ ਮੇਲ ਖਾਂਦੀ ਕੋਈ ਸ਼੍ਰੇਣੀ ਨਹੀਂ ਲੱਭੀ</string>
   <string name="categories_skip_explanation">ਆਪਣੀਆਂ ਤਸਵੀਰਾਂ ਨੂੰ ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼ ਵਿਚ ਜ਼ਿਆਦਾ ਲੱਭਣਯੋਗ ਬਣਾਉਣ ਲਈ ਸ਼੍ਰੇਣੀਆਂ ਜੋੜੋ।
 

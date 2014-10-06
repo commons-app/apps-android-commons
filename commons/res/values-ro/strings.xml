@@ -47,15 +47,18 @@
   <plurals name="contributions_subtitle">
     <item quantity="zero">Nicio încărcare încă</item>
     <item quantity="one">1 încărcare</item>
-    <item quantity="other">%d încărcări</item>
+    <item quantity="few">%d încărcări</item>
+    <item quantity="other">%d de încărcări</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Se pornește 1 încărcare</item>
-    <item quantity="other">Se pornesc %d încărcări</item>
+    <item quantity="few">Se pornesc %d încărcări</item>
+    <item quantity="other">Se pornesc %d de încărcări</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">1 încărcare</item>
-    <item quantity="other">%d încărcări</item>
+    <item quantity="few">%d încărcări</item>
+    <item quantity="other">%d de încărcări</item>
   </plurals>
   <string name="categories_not_found">Nu s-a găsit nicio categorie corespunzătoare cu %1$s</string>
   <string name="categories_skip_explanation">Adăugați categorii pentru a facilita găsirea imaginilor dumneavoastră la Wikimedia Commons.
