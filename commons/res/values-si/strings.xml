@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="app_name">විකිමීඩියා කොමන්ස්</string>
+  <string name="app_name_beta">විකිමීඩියා කොමන්ස් බීටා</string>
   <string name="menu_settings">සැකසුම්</string>
   <string name="username">පරිශීලක නාමය</string>
   <string name="password">මුරපදය</string>
@@ -17,6 +19,10 @@
   <string name="upload_progress_notification_title_finishing"> %1$s උඩුගතකිරීම් අවසන් කරමින්</string>
   <string name="upload_failed_notification_title">උදුගතකරමින්  %1$s අසාර්ථකයි</string>
   <string name="upload_failed_notification_subtitle">පෙන්වන්න තට්ටු කරන්න.</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">ගොනුවක් උඩුගත කෙරේ</item>
+    <item quantity="other">ගොනු %dක් උඩුගත කෙරේ</item>
+  </plurals>
   <string name="title_activity_contributions">මගේ උඩුගතකිරීම්</string>
   <string name="contribution_state_queued">පෝලිමට එක්වූවා</string>
   <string name="contribution_state_failed">අසාර්ථකයි</string>
@@ -41,13 +47,32 @@
   <string name="menu_upload_single">උඩුගත කරන්න</string>
   <string name="categories_search_text_hint">සෙවුම් ප්‍රවර්ග</string>
   <string name="menu_save_categories">සුරකින්න</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">තවමත් කිසිදු උඩුගත කිරීමක් නැත</item>
+    <item quantity="one">එක් උඩුගත කිරීමක්</item>
+    <item quantity="other">උඩුගත කිරීම් %d ක්</item>
+  </plurals>
   <string name="categories_not_found">ප්‍රවර්ග සැසඳේන්නේ නැත %1$ හමුවිය</string>
   <string name="categories_activity_title">ප්‍රවර්ග</string>
+  <string name="preference_tracking">භාවිත වාර්තා</string>
+  <string name="title_activity_settings">සැකසුම්</string>
   <string name="menu_about">පිළිබඳ</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;පෞද්ගලිකත්ව ප්‍රතිපත්තිය&lt;/a&gt;</string>
   <string name="title_activity_about">පිළිබඳ</string>
+  <string name="no_uploads_yet">ඔබ තවමත් කිසිදු ඡායාරුපයක් උඩුගත කර නැත.</string>
   <string name="menu_retry_upload">නැවත උත්සහ කරන්න</string>
   <string name="menu_cancel_upload">අවලංගු කරන්න</string>
   <string name="share_license_summary">මෙම පින්තූරය %1$s යටතේ වලංගු වනු ඇත</string>
   <string name="menu_download">බාගන්න</string>
   <string name="preference_license">බලපත්‍රය</string>
+  <string name="license_name_attribution">ආරෝපණය</string>
+  <string name="license_name_gfdl">GNU නිදහස් ප්‍රලේඛන බලපත්‍රය</string>
+  <string name="welcome_final_button_text">ඔව්!</string>
+  <string name="detail_panel_cats_label">ප්‍රවර්ග</string>
+  <string name="detail_panel_cats_loading">ප්‍රවේශනය වෙමින් පවතී...</string>
+  <string name="detail_panel_cats_none">කිසිවක් තෝරාගෙන නැත</string>
+  <string name="detail_description_empty">විස්තරයක් නැත</string>
+  <string name="detail_license_empty">නොදන්නා බලපත්‍රය</string>
+  <string name="provider_campaigns">ව්‍යාපාර</string>
+  <string name="menu_refresh">නැවත ප්‍රාණවත් කරන්න</string>
 </resources>

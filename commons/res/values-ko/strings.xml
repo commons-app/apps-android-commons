@@ -44,6 +44,15 @@
   <string name="menu_upload_single">올리기</string>
   <string name="categories_search_text_hint">분류 검색</string>
   <string name="menu_save_categories">저장</string>
+  <plurals name="contributions_subtitle"/>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">한 장 업로드 시작</item>
+    <item quantity="other">%d 장 업로드 시작</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">한 장 업로드</item>
+    <item quantity="other">%d 장 업로드</item>
+  </plurals>
   <string name="categories_not_found">%1$s와(과) 일치하는 분류를 찾을 수 없습니다</string>
   <string name="categories_skip_explanation">위키미디어 공용에 그림을 더 찾을 수 있도록 분류를 추가합니다.
 

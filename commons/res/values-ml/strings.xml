@@ -19,6 +19,10 @@
   <string name="upload_progress_notification_title_finishing">%1$s അപ്‌ലോഡിങ് പൂർത്തിയാക്കുന്നു</string>
   <string name="upload_failed_notification_title">%1$s അപ്‌ലോഡിങ് പരാജയപ്പെട്ടു</string>
   <string name="upload_failed_notification_subtitle">കാണാനായി ടാപ് ചെയ്യുക</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">1 പ്രമാണം അപ്‌ലോഡ് ചെയ്യുന്നു</item>
+    <item quantity="other">%d പ്രമാണങ്ങൾ അപ്‌ലോഡ് ചെയ്യുന്നു</item>
+  </plurals>
   <string name="title_activity_contributions">എന്റെ അപ്‌ലോഡുകൾ</string>
   <string name="contribution_state_queued">നിരയായി വെച്ചു</string>
   <string name="contribution_state_failed">പരാജയപ്പെട്ടു</string>
@@ -43,6 +47,19 @@
   <string name="menu_upload_single">അപ്‌ലോഡ്</string>
   <string name="categories_search_text_hint">വർഗ്ഗങ്ങളിൽ തിരയുക</string>
   <string name="menu_save_categories">സേവ് ചെയ്യുക</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">ഒരു അപ്‌ലോഡും ചെയ്തില്ല</item>
+    <item quantity="one">ഒരു അപ്‌ലോഡ്</item>
+    <item quantity="other">%d അപ്‌ലോഡുകൾ</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">ഒരു അപ്‌ലോഡ് തുടങ്ങുന്നു</item>
+    <item quantity="other">%d അപ്‌ലോഡുകൾ തുടങ്ങുന്നു</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">ഒരു അപ്‌ലോഡ്</item>
+    <item quantity="other">%d അപ്‌ലോഡുകൾ</item>
+  </plurals>
   <string name="categories_not_found">%1$s എന്നതുമായി പൊരുത്തമുള്ള ഒരു വർഗ്ഗവും കണ്ടെത്താനായില്ല</string>
   <string name="categories_skip_explanation">താങ്കളുടെ ചിത്രങ്ങൾ വിക്കിമീഡിയ കോമൺസിൽ കൂടുതൽ എളുപ്പത്തിൽ കണ്ടെത്തപ്പെടാനായി വർഗ്ഗങ്ങൾ ചേർക്കുക.
 

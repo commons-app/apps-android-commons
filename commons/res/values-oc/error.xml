@@ -2,5 +2,6 @@
 <resources>
   <string name="crash_dialog_title">Commons a fracassat</string>
   <string name="crash_dialog_text">Ops! Quicòm a trucat !</string>
+  <string name="crash_dialog_comment_prompt">Digatz-nos çò que fasiatz, puèi partejatz-lo per corrièr electronic amb nosautres. Aquò nos ajudarà a lo corregir!</string>
   <string name="crash_dialog_ok_toast">Mercés !</string>
 </resources>

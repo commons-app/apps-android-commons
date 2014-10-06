@@ -19,6 +19,10 @@
   <string name="upload_progress_notification_title_finishing">A terminar o carregamento de %1$s</string>
   <string name="upload_failed_notification_title">O carregamento de %1$s falhou</string>
   <string name="upload_failed_notification_subtitle">Toque para ver</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">A carregar um ficheiro</item>
+    <item quantity="other">A carregar %d ficheiros</item>
+  </plurals>
   <string name="title_activity_contributions">Meus carregamentos</string>
   <string name="contribution_state_queued">Em espera</string>
   <string name="contribution_state_failed">Falhou</string>
@@ -43,6 +47,19 @@
   <string name="menu_upload_single">Enviar</string>
   <string name="categories_search_text_hint">Pesquisar categorias</string>
   <string name="menu_save_categories">Gravar</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">Sem carregamentos ainda</item>
+    <item quantity="one">1 carregamento</item>
+    <item quantity="other">%d carregamentos</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">A iniciar um carregamento</item>
+    <item quantity="other">A iniciar %d carregamentos</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">1 carregamento</item>
+    <item quantity="other">%d carregamentos</item>
+  </plurals>
   <string name="categories_not_found">Nenhuma categoria correspondente %1$s encontrada</string>
   <string name="categories_skip_explanation">Adicione categorias para tornar as suas imagens mais fáceis de encontrar no Wikimedia Commons. 
 

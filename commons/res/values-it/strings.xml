@@ -44,6 +44,19 @@
   <string name="menu_upload_single">Carica</string>
   <string name="categories_search_text_hint">Cerca categorie</string>
   <string name="menu_save_categories">Salva</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">Nessun caricamento ancora</item>
+    <item quantity="one">1 caricamento</item>
+    <item quantity="other">%d caricamenti</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Iniziato 1 caricamento</item>
+    <item quantity="other">Iniziati %d caricamenti</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">1 caricamento</item>
+    <item quantity="other">%d caricamenti</item>
+  </plurals>
   <string name="categories_not_found">Non è stata trovata alcuna categoria che contiene %1$s</string>
   <string name="categories_skip_explanation">Aggiungi categorie per rendere le tue immagini più facilmente individuabili su Wikimedia Commons.
 

@@ -4,7 +4,7 @@
   <string name="app_name_beta">উইকিমিডিয়া কমন্স বেটা</string>
   <string name="menu_settings">সেটিং</string>
   <string name="username">ব্যবহারকারী নাম</string>
-  <string name="password">শব্দচাবি (Password)</string>
+  <string name="password">পাসওয়ার্ড</string>
   <string name="login">প্রবেশ</string>
   <string name="logging_in_title">প্রবেশ হচ্ছে</string>
   <string name="logging_in_message">একটু অপেক্ষা করুন...</string>
@@ -19,7 +19,10 @@
   <string name="upload_progress_notification_title_finishing">%1$s আপলোড শেষ হয়েছে</string>
   <string name="upload_failed_notification_title">%1$s আপলোড ব্যর্থ</string>
   <string name="upload_failed_notification_subtitle">দেখার জন্য ট্যাপ করুন</string>
-  <string name="uploads_pending_notification_indicator" fuzzy="true">%d বাকি রয়েছে</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">১টি ফাইল আপলোড হচ্ছে</item>
+    <item quantity="other">%dটি ফাইল আপলোড হচ্ছে</item>
+  </plurals>
   <string name="title_activity_contributions">আমার আপলোড</string>
   <string name="contribution_state_queued">অপেক্ষারত</string>
   <string name="contribution_state_failed">ব্যর্থ</string>
@@ -34,7 +37,7 @@
   <string name="share_description_hint">বিবরণ</string>
   <string name="login_failed_network">প্রবেশ করা যাচ্ছে না - নেটওয়ার্ক ব্যর্থতা</string>
   <string name="login_failed_username">প্রবেশ করা যাচ্ছে না - অনুগ্রহ করে আপনার ব্যবহারকারী নাম পরীক্ষা করুন।</string>
-  <string name="login_failed_password">প্রবেশ করা যাচ্ছে না - অনুগ্রহ করে আপনার শব্দচাবি পরীক্ষা করুন</string>
+  <string name="login_failed_password">প্রবেশ করা যাচ্ছে না - অনুগ্রহ করে আপনার পাসওয়ার্ড পরীক্ষা করুন</string>
   <string name="login_failed_throttled">খুব বেশি ব্যর্থ প্রচেষ্টা। অনুগ্রহ করে কয়েক মিনিট পরে আবারও চেষ্টা করুন</string>
   <string name="login_failed_blocked">দুঃখিত, এই ব্যবহারকারী কমন্সে ব্লক করা হয়েছে</string>
   <string name="login_failed_generic">প্রবেশ ব্যর্থ</string>
@@ -44,6 +47,19 @@
   <string name="menu_upload_single">আপলোড</string>
   <string name="categories_search_text_hint">বিষয়শ্রেণী অনুসন্ধান</string>
   <string name="menu_save_categories">সংরক্ষণ</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">কোন আপলোড নেই</item>
+    <item quantity="one">১টি আপলোড</item>
+    <item quantity="other">%dটি আপলোড</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">১টি আপলোড শুরু হয়েছে</item>
+    <item quantity="other">%dটি আপলোড শুরু হয়েছে</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">১টি আপলোড</item>
+    <item quantity="other">%dটি আপলোড</item>
+  </plurals>
   <string name="categories_not_found">%1$s বিষয়শ্রেণী পাওয়া যায়নি</string>
   <string name="categories_skip_explanation">উইকিমিডিয়া কমন্স থেকে আপনার মিডিয়া ফাইলটি সহজে খুঁজে পেতে বিষয়শ্রেণী যুক্ত করুন।
 

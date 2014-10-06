@@ -44,6 +44,19 @@
   <string name="menu_upload_single">Subir</string>
   <string name="categories_search_text_hint">Procurar categorías</string>
   <string name="menu_save_categories">Gardar</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">Aínda non hai ningunha carga</item>
+    <item quantity="one">1 carga</item>
+    <item quantity="other">%d cargas</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Iniciando 1 carga</item>
+    <item quantity="other">Iniciando %d cargas</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">1 carga</item>
+    <item quantity="other">%d cargas</item>
+  </plurals>
   <string name="categories_not_found">Non se atopou ningunha categoría que coincidise con \"%1$s\"</string>
   <string name="categories_skip_explanation">Engada categorías para facer máis accesibles as súas imaxes na Wikimedia Commons.
 

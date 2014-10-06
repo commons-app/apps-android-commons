@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="crash_dialog_title">維基共享資源已當機</string>
+  <string name="crash_dialog_text">哎呀。出了錯 ！</string>
+  <string name="crash_dialog_comment_prompt">通過電郵告訴我們你剛才在做什麼。將會幫助我們解決錯誤！</string>
+  <string name="crash_dialog_ok_toast">謝謝！</string>
+</resources>

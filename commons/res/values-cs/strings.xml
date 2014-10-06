@@ -99,7 +99,7 @@
   <string name="welcome_wikipedia_subtext">Obrázky na Wikipedii pochází 
 z Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Vaše obrázky pomáhají vzdělávat lidi po celém světě.</string>
-  <string name="welcome_copyright_subtext">Vyhněte se používání materiálů nalezených na internetu, které podléhají autorskoprávní ochraně.</string>
+  <string name="welcome_copyright_subtext">Vyhněte se dílům chráněným autorským právem, která jste našli na internetu, jako i obrázkům plakátů, přebalů knih apod.</string>
   <string name="welcome_final_text">Myslíte, že rozumíte?</string>
   <string name="welcome_final_button_text">Ano!</string>
   <string name="detail_panel_cats_label">Kategorie</string>

@@ -19,6 +19,10 @@
   <string name="upload_progress_notification_title_finishing">Acabant la càrrega al servidor de %1$s</string>
   <string name="upload_failed_notification_title">Error al carregar %1$s</string>
   <string name="upload_failed_notification_subtitle">Prem per veure-ho</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">s\'està carregant 1 fitxer</item>
+    <item quantity="other">s\'estan carregant %d fitxers</item>
+  </plurals>
   <string name="title_activity_contributions">Les meves càrregues</string>
   <string name="contribution_state_queued">En cua</string>
   <string name="contribution_state_failed">Ha fallat</string>
@@ -33,7 +37,7 @@
   <string name="share_description_hint">Descripció</string>
   <string name="login_failed_network">No s\'ha pogut iniciar la sessió – error de xarxa</string>
   <string name="login_failed_username">No s\'ha pogut iniciar la sessió – siusplau comprova el teu nom d\'usuari</string>
-  <string name="login_failed_password">No s\'ha pogut iniciar la sessió – comprova la teva contrasenya</string>
+  <string name="login_failed_password">No s’ha pogut iniciar la sessió. Comproveu la vostra contrasenya</string>
   <string name="login_failed_throttled">Masses intents erronis – Siusplau prova-ho d\'aquí uns minuts</string>
   <string name="login_failed_blocked">Ho sentim, aquest usuari ha estat blocat a Commons</string>
   <string name="login_failed_generic">Ha fallat l\'inici de sessió</string>
@@ -43,6 +47,19 @@
   <string name="menu_upload_single">Carrega</string>
   <string name="categories_search_text_hint">Categories de cerca</string>
   <string name="menu_save_categories">Desa</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">No hi ha cap càrrega encara</item>
+    <item quantity="one">1 càrrega</item>
+    <item quantity="other">%d càrregues</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">S\'està iniciant 1 càrrega</item>
+    <item quantity="other">S\'estan iniciant %d càrregues</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">1 càrrega</item>
+    <item quantity="other">%d càrregues</item>
+  </plurals>
   <string name="categories_not_found">No s\'ha trobat cap categoria que coincideixi amb %1$s</string>
   <string name="categories_skip_explanation">Afegiu categories per fer que les vostres imatges siguin més fàcils de trobar a Wikimedia Commons.</string>
   <string name="categories_activity_title">Categories</string>

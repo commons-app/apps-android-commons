@@ -43,6 +43,19 @@
   <string name="menu_upload_single">Telecargar</string>
   <string name="categories_search_text_hint">Recercar de categorias</string>
   <string name="menu_save_categories">Enregistrar</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">Pas mai cap de telecargament</item>
+    <item quantity="one">1 telecargament</item>
+    <item quantity="other">%d telecargaments</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">1 telecargament aviat</item>
+    <item quantity="other">%d telecargaments aviats</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">1 telecargament</item>
+    <item quantity="other">%d telecargaments</item>
+  </plurals>
   <string name="categories_not_found">Cap de categoria que correspond a %1$s pas trobada</string>
   <string name="categories_activity_title">Categorias</string>
   <string name="preference_tracking">Rapòrts d’utilizacion</string>

@@ -44,6 +44,19 @@
   <string name="menu_upload_single">Hochladen</string>
   <string name="categories_search_text_hint">Kategorien durchsuchen</string>
   <string name="menu_save_categories">Speichern</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">Noch keine hochgeladenen Dateien</item>
+    <item quantity="one">Eine hochgeladene Datei</item>
+    <item quantity="other">%d hochgeladene Dateien</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Starte einen Upload</item>
+    <item quantity="other">Starte %d Uploads</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">Eine hochgeladene Datei</item>
+    <item quantity="other">%d hochgeladene Dateien</item>
+  </plurals>
   <string name="categories_not_found">Die Kategorie „%1$s“ wurde nicht gefunden</string>
   <string name="categories_skip_explanation">Füge Kategorien hinzu, um deine Bilder auf Wikimedia Commons auffindbarer zu machen.
 

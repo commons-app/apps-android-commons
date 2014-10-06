@@ -44,6 +44,19 @@
   <string name="menu_upload_single">Uploaden</string>
   <string name="categories_search_text_hint">Categorieën zoeken</string>
   <string name="menu_save_categories">Opslaan</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">Nog geen uploads</item>
+    <item quantity="one">1 upload</item>
+    <item quantity="other">%d uploads</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Bezig met 1 upload</item>
+    <item quantity="other">Bezig met %d uploads</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">1 upload</item>
+    <item quantity="other">%d uploads</item>
+  </plurals>
   <string name="categories_not_found">Er zijn geen categorieën met \"%1$s\" gevonden</string>
   <string name="categories_skip_explanation">Voeg categorieën toe om uw afbeeldingen makkelijker te vinden te maken op Wikimedia Commons.
 

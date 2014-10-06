@@ -84,9 +84,15 @@
   <string name="license_name_cc_by_sa_2_0">CC 表示-継承 2.0</string>
   <string name="license_name_cc_by_2_0">CC 表示-継承 2.0</string>
   <string name="license_name_cc_2_0">CC 表示 2.0</string>
+  <string name="license_name_pd_old">パブリックドメイン (著作権期限切れ)</string>
   <string name="license_name_pd_us">パブリック・ドメイン (アメリカ合衆国)</string>
+  <string name="license_name_pd_usgov">パブリックドメイン (米国政府作成物)</string>
   <string name="license_name_pd_usgov_nasa">パブリック・ドメイン (NASA)</string>
+  <string name="license_name_pd_ineligible">パブリックドメイン (著作権の対象外)</string>
   <string name="license_name_attribution">帰属</string>
+  <string name="license_name_gfdl">GNUフリー文書利用許諾契約書 (GNU Free Documentation License)</string>
+  <string name="welcome_wikipedia_text">画像を投稿してください。ウィキペディアの記事に彩りを！</string>
+  <string name="welcome_copyright_subtext">インターネットで見つけた画像、ポスター、書籍の表紙など著作権のある素材は避けてください。</string>
   <string name="welcome_final_text">ご理解いただけましたか?</string>
   <string name="welcome_final_button_text">はい</string>
   <string name="detail_panel_cats_label">カテゴリ</string>

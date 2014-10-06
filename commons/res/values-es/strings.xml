@@ -44,6 +44,19 @@
   <string name="menu_upload_single">Subir</string>
   <string name="categories_search_text_hint">Buscar categorías</string>
   <string name="menu_save_categories">Guardar</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">No hay ninguna carga</item>
+    <item quantity="one">1 carga</item>
+    <item quantity="other">%d cargas</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Iniciando 1 carga</item>
+    <item quantity="other">Iniciando %d cargas</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">1 carga</item>
+    <item quantity="other">%d cargas</item>
+  </plurals>
   <string name="categories_not_found">No se encontraron categorías que coincidieran con %1$s</string>
   <string name="categories_skip_explanation">Añade categorías para hacer que tus imágenes sean más fáciles de encontrar en Wikimedia Commons.
 
@@ -64,7 +77,7 @@ Toca este mensaje (o pulsa Anterior) para omitir este paso.</string>
   <string name="no_uploads_yet">Aún no has subido ninguna foto.</string>
   <string name="menu_retry_upload">Reintentar</string>
   <string name="menu_cancel_upload">Cancelar</string>
-  <string name="share_license_summary">Esta imagen se licenciará bajo%1$s</string>
+  <string name="share_license_summary">Esta imagen se publicará bajo la licencia %1$s</string>
   <string name="menu_download">Descargar</string>
   <string name="preference_license">Licencia</string>
   <string name="license_name_cc_by_sa">CCu00A0Atribución-CompartirIgualu00A03.0</string>

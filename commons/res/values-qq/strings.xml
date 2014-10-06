@@ -60,6 +60,7 @@
 {{Identical|Search category}}</string>
   <string name="menu_save_categories">Hint text on menu item to save selected categories.
 {{Identical|Save}}</string>
+  <string name="multiple_uploads_title">{{Identical|Upload}}</string>
   <string name="categories_not_found">Message shown to the user when no category matching what they searched for was found. %1$s represents the category name</string>
   <string name="categories_skip_explanation">Text explaining to users why and how to add categories to images. Users can also tap this message to skip adding categories.</string>
   <string name="categories_activity_title">Title for the activity where Categories are being selected to add to the Image.
@@ -94,8 +95,10 @@
   <string name="license_name_cc_by_2_0">{{Identical|CC BY-SA}}</string>
   <string name="license_name_cc_2_0">{{Identical|CC BY}}</string>
   <string name="license_name_attribution">{{Identical|Attribution}}</string>
-  <string name="welcome_wikipedia_text">Message inviting users to contribute their images.</string>
-  <string name="welcome_wikipedia_subtext">Message explaining that Wikipedia images Wikimedia Commons.</string>
+  <string name="welcome_wikipedia_text">Message inviting users to contribute their images.
+
+Followed by {{msg-wm|Commons-android-strings-welcome wikipedia subtext}}.</string>
+  <string name="welcome_wikipedia_subtext">Preceded by {{msg-wm|Commons-android-strings-welcome wikipedia text}}.</string>
   <string name="welcome_copyright_text">Message explaining the educational benefit of contributing images.</string>
   <string name="welcome_copyright_subtext">Message explaining what kind of images not to submit.</string>
   <string name="welcome_final_text">Message asking user if they understand what kinds of images to upload.</string>

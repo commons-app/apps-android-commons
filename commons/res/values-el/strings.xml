@@ -19,6 +19,10 @@
   <string name="upload_progress_notification_title_finishing">Αποπεράτωση επιφόρτωσης %1$s</string>
   <string name="upload_failed_notification_title">Επιφόρτωση του %1$s απέτυχε</string>
   <string name="upload_failed_notification_subtitle">Πατήστε για να δείτε</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">1 αρχείο επιφορτώνεται</item>
+    <item quantity="other">%d αρχεία επιφορτώνονται</item>
+  </plurals>
   <string name="title_activity_contributions">Οι επιφορτώσεις μου</string>
   <string name="contribution_state_queued">Στην ουρά</string>
   <string name="contribution_state_failed">Απέτυχε</string>
@@ -43,6 +47,19 @@
   <string name="menu_upload_single">Ανέβασμα</string>
   <string name="categories_search_text_hint">Αναζήτηση κατηγοριών</string>
   <string name="menu_save_categories">Αποθήκευση</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">Δεν υπάρχουν επιφορτώσεις ακόμη</item>
+    <item quantity="one">1 επιφόρτωση</item>
+    <item quantity="other">%d επιφορτώσεις</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Έναρξη 1 επιφόρτωσης</item>
+    <item quantity="other">Έναρτξη %d επιφορτώσεων</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">1 επιφόρτωση</item>
+    <item quantity="other">%d επιφορτώσεις</item>
+  </plurals>
   <string name="categories_not_found">Δεν βρέθηκαν κατηγορίες που ταιριάζουν %1$s</string>
   <string name="categories_skip_explanation">Προσθέστε κατηγορίες για να κάνετε τις εικόνες σας πιο ανιχνεύσιμες στα Wikimedia Commons.
 
@@ -82,6 +99,7 @@
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Ρουμανία)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_zero">CC Μηδέν</string>
+  <string name="license_name_own_pd">δική μου - κοινό κτήμα</string>
   <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
   <string name="license_name_cc_by_2_5">CC BY 2.5</string>
   <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>

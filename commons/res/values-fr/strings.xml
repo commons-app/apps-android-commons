@@ -44,6 +44,19 @@
   <string name="menu_upload_single">Importer</string>
   <string name="categories_search_text_hint">Rechercher des catégories</string>
   <string name="menu_save_categories">Enregistrer</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">Encore aucun téléchargement</item>
+    <item quantity="one">1 téléchargement</item>
+    <item quantity="other">%d téléchargements</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">1 téléchargement démarré</item>
+    <item quantity="other">%d téléchargements démarrés</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">1 téléchargement</item>
+    <item quantity="other">%d téléchargements</item>
+  </plurals>
   <string name="categories_not_found">Aucune catégorie correspondant à %1$s trouvée</string>
   <string name="categories_skip_explanation">Ajoutez des catégories pour rendre vos images plus simple à trouver sur Wikimedia Commons. 
 

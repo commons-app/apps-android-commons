@@ -19,6 +19,7 @@
   <string name="upload_progress_notification_title_finishing">%1$s ਦਾ ਅੱਪਲੋਡ ਖ਼ਤਮ ਹੋ ਰਿਹਾ ਹੈ</string>
   <string name="upload_failed_notification_title">%1$s ਦਾ ਅੱਪਲੋਡ ਫੇਲ੍ਹ ਹੋਇਆ</string>
   <string name="upload_failed_notification_subtitle">ਵੇਖਣ ਲਈ ਥਪੇੜੋ</string>
+  <plurals name="uploads_pending_notification_indicator"/>
   <string name="title_activity_contributions">ਮੇਰੇ ਅੱਪਲੋਡ</string>
   <string name="contribution_state_queued">ਕਤਾਰ ਵਿਚ</string>
   <string name="contribution_state_failed">ਫੇਲ੍ਹ ਹੋਇਆ</string>
@@ -37,12 +38,15 @@
   <string name="login_failed_throttled">ਬਹੁਤ ਸਾਰੀਆਂ ਅਸਫ਼ਲ ਕੋਸ਼ਿਸ਼ਾਂ। ਥੋੜ੍ਹੀ ਦੇਰ ਬਾਅਦ ਕੋਸ਼ਿਸ਼ ਕਰੋ ਜੀ</string>
   <string name="login_failed_blocked">ਅਫ਼ਸੋਸ, ਇਹ ਵਰਤੋਂਕਾਰ ਕਾਮਨਜ਼ ਉੱਤੇ ਬਲਾਕ ਕਰ ਦਿੱਤਾ ਗਿਆ ਹੈ</string>
   <string name="login_failed_generic">ਦਾਖ਼ਲਾ ਫੇਲ੍ਹ ਹੋਇਆ</string>
-  <string name="share_upload_button">ਅੱਪਲੋਡ ਕਰੋ</string>
+  <string name="share_upload_button">ਚੜ੍ਹਾਉ</string>
   <string name="multiple_share_base_title">ਇਸ ਸੈੱਟ ਨੂੰ ਨਾਂ ਦਿਓ</string>
   <string name="provider_modifications">ਸੋਧਾਂ</string>
   <string name="menu_upload_single">ਅੱਪਲੋਡ</string>
   <string name="categories_search_text_hint">ਸ਼੍ਰੇਣੀਆਂ ਖੋਜੋ</string>
-  <string name="menu_save_categories">ਸੰਭਾਲੋ</string>
+  <string name="menu_save_categories">ਸਾਂਭੋ</string>
+  <plurals name="contributions_subtitle"/>
+  <plurals name="starting_multiple_uploads"/>
+  <plurals name="multiple_uploads_title"/>
   <string name="categories_not_found">%1$s ਨਾਲ਼ ਮੇਲ ਖਾਂਦੀ ਕੋਈ ਸ਼੍ਰੇਣੀ ਨਹੀਂ ਲੱਭੀ</string>
   <string name="categories_skip_explanation">ਆਪਣੀਆਂ ਤਸਵੀਰਾਂ ਨੂੰ ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼ ਵਿਚ ਜ਼ਿਆਦਾ ਲੱਭਣਯੋਗ ਬਣਾਉਣ ਲਈ ਸ਼੍ਰੇਣੀਆਂ ਜੋੜੋ।
 
@@ -66,17 +70,49 @@
   <string name="share_license_summary">ਇਹ ਤਸਵੀਰ ਦਾ %1$s ਹੇਠ ਲਸੰਸ ਜਾਰੀ ਕੀਤੀ ਜਾਵੇਗਾ</string>
   <string name="menu_download">ਡਾਊਨਲੋਡ</string>
   <string name="preference_license">ਲਸੰਸ</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Attribution-ShareAlike</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0Attribution</string>
+  <string name="license_name_cc_by_sa">CCu00A0Attribution-ShareAlikeu00A03.0</string>
+  <string name="license_name_cc_by">CCu00A0Attributionu00A03.0</string>
   <string name="license_name_cc0">CC0</string>
+  <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (ਅਸਟਰੀਆ)</string>
+  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (ਜਰਮਨੀ)</string>
+  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (ਇਸਟੋਨੀਆ)</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (ਸਪੇਨ)</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (ਕਰੋਸ਼ੀਆ)</string>
+  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (ਲਕਜ਼ਮਬਰਗ)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (ਨੀਦਰਲੈਂਡ)</string>
+  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (ਨੌਰਵੇ)</string>
+  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (ਪੋਲੈਂਡ)</string>
+  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (ਰੋਮਾਨੀਆ)</string>
+  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_zero">CC ਸਿਫ਼ਰ</string>
+  <string name="license_name_own_pd">own-pd</string>
+  <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
+  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
+  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
+  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
+  <string name="license_name_cc_2_0">CC BY 2.0</string>
+  <string name="license_name_fal">ਮੁਫ਼ਤ ਕਲਾ ਲਾਇਸੰਸ</string>
+  <string name="license_name_pd_old_100">ਜਨਤਕ ਖੇਤਰ (ਲੇਖਕ 100 ਕੁ ਸਾਲ ਪਹਿਲਾਂ ਮਰ ਗਿਆ)</string>
+  <string name="license_name_pd_old">ਜਨਤਕ ਖੇਤਰ (ਨਕਲ-ਹੱਕ ਮੁੱਕ ਚੁੱਕਾ)</string>
+  <string name="license_name_pd_art">ਜਨਤਕ ਖੇਤਰ (ਕਲਾ)</string>
+  <string name="license_name_pd_us">ਜਨਤਕ ਖੇਤਰ (US)</string>
+  <string name="license_name_pd_usgov">ਜਨਤਕ ਖੇਤਰ (US ਸਰਕਾਰ)</string>
+  <string name="license_name_pd_usgov_nasa">ਜਨਤਕ ਖੇਤਰ (NASA)</string>
+  <string name="license_name_pd_ineligible">ਜਨਤਕ ਖੇਤਰ (ਨਕਲ-ਹੱਕ ਦੇ ਅਯੋਗ)</string>
+  <string name="license_name_attribution">ਗੁਣਾਂ ਦੀ ਦੱਸ</string>
+  <string name="license_name_gfdl">GNU ਮੁਫ਼ਤ ਦਸਤਾਵੇਜੀਕਰਣ ਲਾਇਸੰਸ</string>
   <string name="welcome_wikipedia_text">ਆਪਣੀਆਂ ਤਸਵੀਰਾਂ ਦਾ ਯੋਗਦਾਨ ਪਾਓ। ਵਿਕੀਪੀਡੀਆ ਲੇਖਾਂ ਨੂੰ ਸੁਰਜੀਤ ਕਰ ਦਿਓ!</string>
   <string name="welcome_wikipedia_subtext">ਵਿਕੀਪੀਡੀਆ ਉਤਲੀਆਂ ਤਸਵੀਰਾਂ ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼ ਤੋਂ ਆਉਂਦੀਆਂ ਹਨ</string>
   <string name="welcome_copyright_text">ਤੁਹਾਡੀਆਂ ਤਸਵੀਰਾਂ ਦੁਨੀਆਂ ਭਰ ਦੇ ਲੋਕਾਂ ਨੂੰ ਪੜ੍ਹਨ ਵਿਚ ਮਦਦ ਕਰਦੀਆਂ ਹਨ।</string>
   <string name="welcome_copyright_subtext">ਇੰਟਰਨੈੱਟ ਉੱਤੇ ਮਿਲੀ ਕਾਪੀਰਾਈਟ ਸਮੱਗਰੀ ਅਤੇ ਪੋਸਟਰਾਂ, ਕਿਤਾਬਾਂ ਦੀਆਂ ਜਿਲਦਾਂ ਦੀਆਂ ਤਸਵੀਆਂ ਆਦਿ ਤੋਂ ਪਰਹੇਜ਼ ਰੱਖੋ।</string>
   <string name="welcome_final_text">ਤੁਹਾਨੂੰ ਲੱਗਦਾ ਹੈ ਕਿ ਤੁਹਾਡੇ ਕੋਲ ਹੈ?</string>
   <string name="welcome_final_button_text">ਹਾਂ!</string>
+  <string name="detail_panel_cats_label">ਸ਼੍ਰੇਣੀਆਂ</string>
   <string name="detail_panel_cats_loading">...ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ</string>
+  <string name="detail_panel_cats_none">ਕੋਈ ਵੀ ਨਹੀਂ ਚੁਣਿਆ</string>
   <string name="detail_description_empty">ਕੋਈ ਵੇਰਵਾ ਨਹੀਂ</string>
   <string name="detail_license_empty">ਅਣਜਾਣ ਲਸੰਸ</string>
+  <string name="provider_campaigns">ਮੁਹਿੰਮਾਂ</string>
   <string name="menu_refresh">ਤਾਜ਼ਾ ਕਰੋ</string>
 </resources>
