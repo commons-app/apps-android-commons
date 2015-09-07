@@ -35,7 +35,7 @@
 {{Identical|Queue}}</string>
   <string name="contribution_state_failed">Show status of upload as failed.
 {{Identical|Failed}}</string>
-  <string name="contribution_state_in_progress">Show status of upload as currently in progress. &lt;code&gt;%1$d%%&lt;/code&gt; represents percentage of current file that has been uploaded; &lt;code&gt;%%&lt;/code&gt; is rendered \"%\", because &lt;code&gt;%&lt;/code&gt; is a special character here so to render one you have to write two.</string>
+  <string name="contribution_state_in_progress">Show status of upload as currently in progress. &lt;code&gt;%1$d%%&lt;/code&gt; represents percentage of current file that has been uploaded; &lt;code&gt;%%&lt;/code&gt; is rendered \"%%\", because &lt;code&gt;%%&lt;/code&gt; is a special character here so to render one you have to write two.</string>
   <string name="contribution_state_starting">Show status of upload as about to start.
 {{Identical|Uploading}}</string>
   <string name="menu_from_gallery">Action bar item to prompt the user to pick a picture from the phone to upload</string>
