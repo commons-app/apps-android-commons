@@ -55,11 +55,11 @@ public class CommonsApplication extends Application {
 
     private MWApi api;
     private Account currentAccount = null; // Unlike a savings account...
-    public static final String API_URL = "https://test.wikipedia.org/w/api.php";
-    public static final String IMAGE_URL_BASE = "https://upload.wikimedia.org/wikipedia/test";
-    public static final String HOME_URL = "https://test.wikipedia.org/wiki/";
+    public static final String API_URL = "https://commons.wikimedia.org/w/api.php";
+    public static final String IMAGE_URL_BASE = "https://upload.wikimedia.org/wikipedia/commons";
+    public static final String HOME_URL = "https://commons.wikimedia.org/wiki/";
     public static final String EVENTLOG_URL = "https://bits.wikimedia.org/event.gif";
-    public static final String EVENTLOG_WIKI = "testwiki";
+    public static final String EVENTLOG_WIKI = "commonswiki";
 
     public static final Object[] EVENT_UPLOAD_ATTEMPT = {"MobileAppUploadAttempts", 5334329L};
     public static final Object[] EVENT_LOGIN_ATTEMPT = {"MobileAppLoginAttempts", 5257721L};
