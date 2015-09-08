@@ -1,4 +1,6 @@
-# The Wikimedia Commons Android App #
+# Upload to Commons #
+
+Upload pictures from your Android phone/tablet to Wikimedia Commons!
 
 Community-maintained app, independant from the Wikimedia Foundation. Volunteers welcome!
 
@@ -45,7 +47,7 @@ This software is licensed under the [Apache License][5].
 
 ## Bugs ##
 
-Please report all bugs on [Github][3].
+Please report any bugs [on Github][3].
 
 ## Code Structure ##
 
@@ -86,10 +88,6 @@ A list of recently-used categories is stored in the Categories content provider,
 Captured files are not currently stored within the app, but are passed by content: or file: URI from other apps.
 
 Thumbnail images are not currently cached. (?)
-
-
-
-
 
 
 [1]: https://developer.android.com/sdk/index.html
