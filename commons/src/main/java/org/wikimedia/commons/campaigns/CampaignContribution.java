@@ -1,7 +1,7 @@
-package org.wikimedia.commons.campaigns;
+package fr.nrw.free.commons.campaigns;
 
 import android.net.Uri;
-import org.wikimedia.commons.contributions.Contribution;
+import fr.nrw.free.commons.contributions.Contribution;
 
 import java.util.ArrayList;
 import java.util.Date;

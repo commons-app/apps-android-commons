@@ -1,4 +1,4 @@
-package org.wikimedia.commons.campaigns;
+package fr.nrw.free.commons.campaigns;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
@@ -9,15 +9,15 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
-import org.wikimedia.commons.CommonsApplication;
-import org.wikimedia.commons.data.DBOpenHelper;
+import fr.nrw.free.commons.CommonsApplication;
+import fr.nrw.free.commons.data.DBOpenHelper;
 
 public class CampaignsContentProvider extends ContentProvider{
 
     private static final int CAMPAIGNS = 1;
     private static final int CAMPAIGNS_ID = 2;
 
-    public static final String AUTHORITY = "org.wikimedia.commons.campaigns.contentprovider";
+    public static final String AUTHORITY = "fr.nrw.free.commons.campaigns.contentprovider";
     private static final String BASE_PATH = "campiagns";
 
     public static final Uri BASE_URI = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH);

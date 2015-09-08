@@ -58,7 +58,7 @@ static int transcode(const char *infile, const char *outfile,
 
                 gst_structure_get_int(s, "percent", &percent);
 
-                cb_class = (*env)->FindClass(env, "org/wikimedia/commons/Transcoder$TranscoderProgressCallback");
+                cb_class = (*env)->FindClass(env, "fr/free/nrw/commons/Transcoder$TranscoderProgressCallback");
                 if ((*env)->ExceptionCheck(env)) {
                     __android_log_print(ANDROID_LOG_ERROR, "GStreamer", "Class not found");
                     break;
@@ -114,7 +114,7 @@ done:
     return ret;
 }
 
-jint Java_org_wikimedia_commons_Transcoder_transcode(JNIEnv* env,
+jint Java_fr_free_nrw_commons_Transcoder_transcode(JNIEnv* env,
         jclass *klass, jstring infile, jstring outfile, jstring profile,
         jobject cb_obj)
 {

@@ -1,13 +1,13 @@
-package org.wikimedia.commons.contributions;
+package fr.nrw.free.commons.contributions;
 
 import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import com.android.volley.toolbox.ImageLoader;
-import org.wikimedia.commons.CommonsApplication;
-import org.wikimedia.commons.Media;
-import org.wikimedia.commons.R;
+import fr.nrw.free.commons.CommonsApplication;
+import fr.nrw.free.commons.Media;
+import fr.nrw.free.commons.R;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package org.wikimedia.commons;
+package fr.nrw.free.commons;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,16 +32,16 @@ import org.apache.http.conn.ssl.*;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
 import org.mediawiki.api.*;
-import org.wikimedia.commons.auth.WikiAccountAuthenticator;
+import fr.nrw.free.commons.auth.WikiAccountAuthenticator;
 import org.apache.http.impl.client.*;
 import org.apache.http.params.CoreProtocolPNames;
-import org.wikimedia.commons.data.*;
+import fr.nrw.free.commons.data.*;
 
 import com.android.volley.toolbox.*;
 
 // TODO: Use ProGuard to rip out reporting when publishing
 @ReportsCrashes(formKey = "",
-        mailTo = "mobile-feedback-l@lists.wikimedia.org",
+        mailTo = "commons-app-android@googlegroups.com",
         mode = ReportingInteractionMode.DIALOG,
         resDialogText = R.string.crash_dialog_text,
         resDialogTitle = R.string.crash_dialog_title,
@@ -69,7 +69,7 @@ public class CommonsApplication extends Application {
 
     public static final String DEFAULT_EDIT_SUMMARY = "Uploaded using Android Commons app";
 
-    public static final String FEEDBACK_EMAIL = "mobile-feedback-l@lists.wikimedia.org";
+    public static final String FEEDBACK_EMAIL = "commons-app-android@googlegroups.com";
     public static final String FEEDBACK_EMAIL_SUBJECT = "Commons Android App (%s) Feedback";
 
     public RequestQueue volleyQueue;

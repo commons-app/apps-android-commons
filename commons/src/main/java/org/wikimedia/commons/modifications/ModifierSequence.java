@@ -1,4 +1,4 @@
-package org.wikimedia.commons.modifications;
+package fr.nrw.free.commons.modifications;
 
 import android.content.ContentProviderClient;
 import android.content.ContentValues;
@@ -10,7 +10,7 @@ import android.text.TextUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.wikimedia.commons.contributions.ContributionsContentProvider;
+import fr.nrw.free.commons.contributions.ContributionsContentProvider;
 
 import java.util.ArrayList;
 import java.util.Date;

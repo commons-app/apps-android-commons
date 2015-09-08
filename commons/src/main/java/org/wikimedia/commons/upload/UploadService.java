@@ -1,4 +1,4 @@
-package org.wikimedia.commons.upload;
+package fr.nrw.free.commons.upload;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -18,13 +18,13 @@ import android.support.v4.app.NotificationCompat;
 import android.util.*;
 import android.widget.*;
 
-import org.wikimedia.commons.*;
-import org.wikimedia.commons.contributions.*;
-import org.wikimedia.commons.modifications.ModificationsContentProvider;
+import fr.nrw.free.commons.*;
+import fr.nrw.free.commons.contributions.*;
+import fr.nrw.free.commons.modifications.ModificationsContentProvider;
 
 public class UploadService extends HandlerService<Contribution> {
 
-    private static final String EXTRA_PREFIX = "org.wikimedia.commons.upload";
+    private static final String EXTRA_PREFIX = "fr.nrw.free.commons.upload";
 
     public static final int ACTION_UPLOAD_FILE = 1;
 
@@ -223,7 +223,7 @@ public class UploadService extends HandlerService<Contribution> {
             if(!resultStatus.equals("Success")) {
                 String errorCode = result.getString("/api/error/@code");
                 showFailedNotification(contribution);
-                org.wikimedia.commons.EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT)
+                fr.nrw.free.commons.EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT)
                         .param("username", app.getCurrentAccount().name)
                         .param("source", contribution.getSource())
                         .param("multiple", contribution.getMultiple())
@@ -241,7 +241,7 @@ public class UploadService extends HandlerService<Contribution> {
                 contribution.setDateUploaded(dateUploaded);
                 contribution.save();
 
-                org.wikimedia.commons.EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT)
+                fr.nrw.free.commons.EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT)
                         .param("username", app.getCurrentAccount().name)
                         .param("source", contribution.getSource()) //FIXME
                         .param("filename", contribution.getFilename())

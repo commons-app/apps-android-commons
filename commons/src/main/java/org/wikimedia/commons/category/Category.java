@@ -1,4 +1,4 @@
-package org.wikimedia.commons.category;
+package fr.nrw.free.commons.category;
 
 import android.content.ContentProviderClient;
 import android.content.ContentValues;
@@ -9,7 +9,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
 import android.text.TextUtils;
-import org.wikimedia.commons.contributions.ContributionsContentProvider;
+import fr.nrw.free.commons.contributions.ContributionsContentProvider;
 
 import java.util.Date;
 

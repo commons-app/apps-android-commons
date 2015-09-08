@@ -1,4 +1,4 @@
-package org.wikimedia.commons.upload;
+package fr.nrw.free.commons.upload;
 
 import android.app.Activity;
 import android.content.*;
@@ -10,13 +10,13 @@ import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.webkit.MimeTypeMap;
-import org.wikimedia.commons.CommonsApplication;
-import org.wikimedia.commons.HandlerService;
-import org.wikimedia.commons.Prefs;
-import org.wikimedia.commons.Utils;
-import org.wikimedia.commons.campaigns.Campaign;
-import org.wikimedia.commons.campaigns.CampaignContribution;
-import org.wikimedia.commons.contributions.Contribution;
+import fr.nrw.free.commons.CommonsApplication;
+import fr.nrw.free.commons.HandlerService;
+import fr.nrw.free.commons.Prefs;
+import fr.nrw.free.commons.Utils;
+import fr.nrw.free.commons.campaigns.Campaign;
+import fr.nrw.free.commons.campaigns.CampaignContribution;
+import fr.nrw.free.commons.contributions.Contribution;
 
 import java.io.IOException;
 import java.util.Date;

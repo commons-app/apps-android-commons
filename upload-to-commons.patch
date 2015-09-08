@@ -1,7 +1,7 @@
-diff --git a/commons/src/main/java/org/wikimedia/commons/CommonsApplication.java b/commons/src/main/java/org/wikimedia/commons/CommonsApplication.java
+diff --git a/commons/src/main/java/fr/free/nrw/commons/CommonsApplication.java b/commons/src/main/java/fr/free/nrw/commons/CommonsApplication.java
 index 3fe594d..8306000 100644
---- a/commons/src/main/java/org/wikimedia/commons/CommonsApplication.java
-+++ b/commons/src/main/java/org/wikimedia/commons/CommonsApplication.java
+--- a/commons/src/main/java/fr/free/nrw/commons/CommonsApplication.java
++++ b/commons/src/main/java/fr/free/nrw/commons/CommonsApplication.java
 @@ -45,11 +45,12 @@ public class CommonsApplication extends Application {
  
      private MWApi api;

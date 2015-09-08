@@ -1,4 +1,4 @@
-package org.wikimedia.commons.media;
+package fr.nrw.free.commons.media;
 
 import android.content.Context;
 import android.util.AttributeSet;

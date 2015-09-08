@@ -1,4 +1,4 @@
-package org.wikimedia.commons.modifications;
+package fr.nrw.free.commons.modifications;
 
 import org.json.JSONException;
 import org.json.JSONObject;

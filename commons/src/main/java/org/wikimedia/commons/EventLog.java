@@ -1,4 +1,4 @@
-package org.wikimedia.commons;
+package fr.nrw.free.commons;
 
 import android.content.Context;
 import android.content.SharedPreferences;

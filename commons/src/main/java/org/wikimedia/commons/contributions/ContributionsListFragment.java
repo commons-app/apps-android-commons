@@ -1,4 +1,4 @@
-package org.wikimedia.commons.contributions;
+package fr.nrw.free.commons.contributions;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,9 +17,9 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
 
-import org.wikimedia.commons.*;
-import org.wikimedia.commons.R;
-import org.wikimedia.commons.campaigns.Campaign;
+import fr.nrw.free.commons.*;
+import fr.nrw.free.commons.R;
+import fr.nrw.free.commons.campaigns.Campaign;
 
 public class ContributionsListFragment extends SherlockFragment {
 

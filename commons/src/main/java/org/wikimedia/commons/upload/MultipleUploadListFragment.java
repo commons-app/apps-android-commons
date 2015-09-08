@@ -1,4 +1,4 @@
-package org.wikimedia.commons.upload;
+package fr.nrw.free.commons.upload;
 
 import android.content.*;
 import android.graphics.*;
@@ -14,10 +14,10 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.nostra13.universalimageloader.core.*;
 
-import org.wikimedia.commons.R;
-import org.wikimedia.commons.Utils;
-import org.wikimedia.commons.contributions.*;
-import org.wikimedia.commons.media.*;
+import fr.nrw.free.commons.R;
+import fr.nrw.free.commons.Utils;
+import fr.nrw.free.commons.contributions.*;
+import fr.nrw.free.commons.media.*;
 
 
 public class MultipleUploadListFragment extends SherlockFragment {

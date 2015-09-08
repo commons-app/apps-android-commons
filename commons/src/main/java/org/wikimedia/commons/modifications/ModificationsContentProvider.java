@@ -1,4 +1,4 @@
-package org.wikimedia.commons.modifications;
+package fr.nrw.free.commons.modifications;
 
 import android.content.*;
 import android.database.*;
@@ -7,15 +7,15 @@ import android.net.*;
 import android.text.*;
 import android.util.*;
 
-import org.wikimedia.commons.*;
-import org.wikimedia.commons.data.*;
+import fr.nrw.free.commons.*;
+import fr.nrw.free.commons.data.*;
 
 public class ModificationsContentProvider extends ContentProvider{
 
     private static final int MODIFICATIONS = 1;
     private static final int MODIFICATIONS_ID = 2;
 
-    public static final String AUTHORITY = "org.wikimedia.commons.modifications.contentprovider";
+    public static final String AUTHORITY = "fr.nrw.free.commons.modifications.contentprovider";
     private static final String BASE_PATH = "modifications";
 
     public static final Uri BASE_URI = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH);

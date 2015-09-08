@@ -1,4 +1,4 @@
-package org.wikimedia.commons.upload;
+package fr.nrw.free.commons.upload;
 
 import java.util.*;
 import java.util.concurrent.*;
@@ -15,15 +15,15 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import com.actionbarsherlock.view.MenuItem;
 
-import org.wikimedia.commons.*;
-import org.wikimedia.commons.auth.*;
-import org.wikimedia.commons.category.CategorizationFragment;
-import org.wikimedia.commons.contributions.*;
-import org.wikimedia.commons.media.*;
-import org.wikimedia.commons.modifications.CategoryModifier;
-import org.wikimedia.commons.modifications.ModificationsContentProvider;
-import org.wikimedia.commons.modifications.ModifierSequence;
-import org.wikimedia.commons.modifications.TemplateRemoveModifier;
+import fr.nrw.free.commons.*;
+import fr.nrw.free.commons.auth.*;
+import fr.nrw.free.commons.category.CategorizationFragment;
+import fr.nrw.free.commons.contributions.*;
+import fr.nrw.free.commons.media.*;
+import fr.nrw.free.commons.modifications.CategoryModifier;
+import fr.nrw.free.commons.modifications.ModificationsContentProvider;
+import fr.nrw.free.commons.modifications.ModifierSequence;
+import fr.nrw.free.commons.modifications.TemplateRemoveModifier;
 
 public  class       MultipleShareActivity
         extends     AuthenticatedActivity

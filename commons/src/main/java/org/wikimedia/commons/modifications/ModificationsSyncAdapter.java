@@ -1,4 +1,4 @@
-package org.wikimedia.commons.modifications;
+package fr.nrw.free.commons.modifications;
 
 import android.accounts.AccountManager;
 import android.accounts.AuthenticatorException;
@@ -15,10 +15,10 @@ import java.io.*;
 import java.util.*;
 
 import org.mediawiki.api.*;
-import org.wikimedia.commons.Utils;
-import org.wikimedia.commons.*;
-import org.wikimedia.commons.contributions.Contribution;
-import org.wikimedia.commons.contributions.ContributionsContentProvider;
+import fr.nrw.free.commons.Utils;
+import fr.nrw.free.commons.*;
+import fr.nrw.free.commons.contributions.Contribution;
+import fr.nrw.free.commons.contributions.ContributionsContentProvider;
 
 
 public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {

@@ -1,4 +1,4 @@
-package org.wikimedia.commons;
+package fr.nrw.free.commons;
 
 import android.net.Uri;
 import android.os.*;

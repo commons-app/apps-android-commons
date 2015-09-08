@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.wikimedia.commons;
+package fr.nrw.free.commons;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -28,8 +28,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageLoader.ImageContainer;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
-import org.wikimedia.commons.contributions.Contribution;
-import org.wikimedia.commons.contributions.ContributionsContentProvider;
+import fr.nrw.free.commons.contributions.Contribution;
+import fr.nrw.free.commons.contributions.ContributionsContentProvider;
 
 
 public class MediaWikiImageView extends ImageView {

@@ -1,4 +1,4 @@
-package org.wikimedia.commons.api;
+package fr.nrw.free.commons.api;
 
 import com.android.volley.RequestQueue;
 

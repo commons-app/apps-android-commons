@@ -1,4 +1,4 @@
-package org.wikimedia.commons.auth;
+package fr.nrw.free.commons.auth;
 
 import android.app.*;
 import android.content.*;

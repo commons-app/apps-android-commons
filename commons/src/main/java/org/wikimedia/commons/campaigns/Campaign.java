@@ -1,4 +1,4 @@
-package org.wikimedia.commons.campaigns;
+package fr.nrw.free.commons.campaigns;
 
 import android.content.ContentValues;
 import android.database.Cursor;

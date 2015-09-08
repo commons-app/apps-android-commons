@@ -1,4 +1,4 @@
-package org.wikimedia.commons.auth;
+package fr.nrw.free.commons.auth;
 
 import java.io.IOException;
 
@@ -8,7 +8,7 @@ import com.actionbarsherlock.app.*;
 import android.accounts.*;
 import android.os.*;
 
-import org.wikimedia.commons.*;
+import fr.nrw.free.commons.*;
 
 public class AuthenticatedActivity extends SherlockFragmentActivity {
     

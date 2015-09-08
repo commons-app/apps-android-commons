@@ -1,4 +1,4 @@
-package org.wikimedia.commons.media;
+package fr.nrw.free.commons.media;
 
 import android.app.DownloadManager;
 import android.content.*;
@@ -18,9 +18,9 @@ import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.widget.ShareActionProvider;
 
-import org.wikimedia.commons.*;
-import org.wikimedia.commons.contributions.Contribution;
-import org.wikimedia.commons.contributions.ContributionsActivity;
+import fr.nrw.free.commons.*;
+import fr.nrw.free.commons.contributions.Contribution;
+import fr.nrw.free.commons.contributions.ContributionsActivity;
 
 public class MediaDetailPagerFragment extends SherlockFragment implements ViewPager.OnPageChangeListener {
     private ViewPager pager;

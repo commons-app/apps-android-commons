@@ -1,4 +1,4 @@
-package org.wikimedia.commons.contributions;
+package fr.nrw.free.commons.contributions;
 
 import android.app.*;
 import android.content.Intent;
@@ -8,9 +8,9 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import com.actionbarsherlock.app.SherlockFragment;
-import org.wikimedia.commons.campaigns.Campaign;
-import org.wikimedia.commons.upload.ShareActivity;
-import org.wikimedia.commons.upload.UploadService;
+import fr.nrw.free.commons.campaigns.Campaign;
+import fr.nrw.free.commons.upload.ShareActivity;
+import fr.nrw.free.commons.upload.UploadService;
 
 import java.io.File;
 import java.io.IOException;
