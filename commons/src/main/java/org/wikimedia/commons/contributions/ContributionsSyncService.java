@@ -1,4 +1,4 @@
-package fr.nrw.free.commons.contributions;
+package fr.free.nrw.commons.contributions;
 
 import android.app.*;
 import android.content.*;

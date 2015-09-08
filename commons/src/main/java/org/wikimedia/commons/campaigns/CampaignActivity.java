@@ -1,4 +1,4 @@
-package fr.nrw.free.commons.campaigns;
+package fr.free.nrw.commons.campaigns;
 
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -12,9 +12,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
-import fr.nrw.free.commons.CommonsApplication;
-import fr.nrw.free.commons.R;
-import fr.nrw.free.commons.contributions.ContributionsActivity;
+import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.contributions.ContributionsActivity;
 
 public  class CampaignActivity
         extends SherlockFragmentActivity

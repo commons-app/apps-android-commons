@@ -1,4 +1,4 @@
-package fr.nrw.free.commons.api;
+package fr.free.nrw.commons.api;
 
 import com.android.volley.RequestQueue;
 

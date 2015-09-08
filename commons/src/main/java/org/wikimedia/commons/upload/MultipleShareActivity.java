@@ -1,4 +1,4 @@
-package fr.nrw.free.commons.upload;
+package fr.free.nrw.commons.upload;
 
 import java.util.*;
 import java.util.concurrent.*;
@@ -15,15 +15,15 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import com.actionbarsherlock.view.MenuItem;
 
-import fr.nrw.free.commons.*;
-import fr.nrw.free.commons.auth.*;
-import fr.nrw.free.commons.category.CategorizationFragment;
-import fr.nrw.free.commons.contributions.*;
-import fr.nrw.free.commons.media.*;
-import fr.nrw.free.commons.modifications.CategoryModifier;
-import fr.nrw.free.commons.modifications.ModificationsContentProvider;
-import fr.nrw.free.commons.modifications.ModifierSequence;
-import fr.nrw.free.commons.modifications.TemplateRemoveModifier;
+import fr.free.nrw.commons.*;
+import fr.free.nrw.commons.auth.*;
+import fr.free.nrw.commons.category.CategorizationFragment;
+import fr.free.nrw.commons.contributions.*;
+import fr.free.nrw.commons.media.*;
+import fr.free.nrw.commons.modifications.CategoryModifier;
+import fr.free.nrw.commons.modifications.ModificationsContentProvider;
+import fr.free.nrw.commons.modifications.ModifierSequence;
+import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
 
 public  class       MultipleShareActivity
         extends     AuthenticatedActivity

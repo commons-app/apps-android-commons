@@ -1,4 +1,4 @@
-package fr.nrw.free.commons;
+package fr.free.nrw.commons;
 
 import android.util.Log;
 import org.mediawiki.api.ApiResult;

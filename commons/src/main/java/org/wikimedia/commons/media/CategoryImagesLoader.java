@@ -1,12 +1,12 @@
-package fr.nrw.free.commons.media;
+package fr.free.nrw.commons.media;
 
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
 import org.mediawiki.api.ApiResult;
-import fr.nrw.free.commons.CommonsApplication;
-import fr.nrw.free.commons.Media;
-import fr.nrw.free.commons.Utils;
+import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.Utils;
 
 import java.io.IOException;
 import java.util.ArrayList;

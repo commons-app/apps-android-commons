@@ -1,4 +1,4 @@
-package fr.nrw.free.commons.contributions;
+package fr.free.nrw.commons.contributions;
 
 import android.app.*;
 import android.content.Intent;
@@ -8,9 +8,9 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import com.actionbarsherlock.app.SherlockFragment;
-import fr.nrw.free.commons.campaigns.Campaign;
-import fr.nrw.free.commons.upload.ShareActivity;
-import fr.nrw.free.commons.upload.UploadService;
+import fr.free.nrw.commons.campaigns.Campaign;
+import fr.free.nrw.commons.upload.ShareActivity;
+import fr.free.nrw.commons.upload.UploadService;
 
 import java.io.File;
 import java.io.IOException;

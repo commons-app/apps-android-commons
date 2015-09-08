@@ -1,4 +1,4 @@
-package fr.nrw.free.commons.contributions;
+package fr.free.nrw.commons.contributions;
 
 import java.text.*;
 import java.util.*;
@@ -10,7 +10,7 @@ import android.net.*;
 import android.os.*;
 import android.text.*;
 
-import fr.nrw.free.commons.*;
+import fr.free.nrw.commons.*;
 
 public class Contribution extends Media {
 

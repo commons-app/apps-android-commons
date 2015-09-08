@@ -1,4 +1,4 @@
-package fr.nrw.free.commons.campaigns;
+package fr.free.nrw.commons.campaigns;
 
 import android.content.ContentValues;
 import android.database.Cursor;

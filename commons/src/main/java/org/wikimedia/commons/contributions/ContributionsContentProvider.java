@@ -1,4 +1,4 @@
-package fr.nrw.free.commons.contributions;
+package fr.free.nrw.commons.contributions;
 
 import android.content.*;
 import android.database.*;
@@ -7,15 +7,15 @@ import android.net.*;
 import android.text.*;
 import android.util.*;
 
-import fr.nrw.free.commons.*;
-import fr.nrw.free.commons.data.*;
+import fr.free.nrw.commons.*;
+import fr.free.nrw.commons.data.*;
 
 public class ContributionsContentProvider extends ContentProvider{
 
     private static final int CONTRIBUTIONS = 1;
     private static final int CONTRIBUTIONS_ID = 2;
 
-    public static final String AUTHORITY = "fr.nrw.free.commons.contributions.contentprovider";
+    public static final String AUTHORITY = "fr.free.nrw.commons.contributions.contentprovider";
     private static final String BASE_PATH = "contributions";
 
     public static final Uri BASE_URI = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH);

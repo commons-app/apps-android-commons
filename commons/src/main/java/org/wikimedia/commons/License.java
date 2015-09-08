@@ -1,4 +1,4 @@
-package fr.nrw.free.commons;
+package fr.free.nrw.commons;
 
 public class License {
     String key;

@@ -1,4 +1,4 @@
-package fr.nrw.free.commons.category;
+package fr.free.nrw.commons.category;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
@@ -9,8 +9,8 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
-import fr.nrw.free.commons.CommonsApplication;
-import fr.nrw.free.commons.data.DBOpenHelper;
+import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.data.DBOpenHelper;
 
 public class CategoryContentProvider extends ContentProvider {
 
@@ -18,7 +18,7 @@ public class CategoryContentProvider extends ContentProvider {
     private static final int CATEGORIES = 1;
     private static final int CATEGORIES_ID = 2;
 
-    public static final String AUTHORITY = "fr.nrw.free.commons.categories.contentprovider";
+    public static final String AUTHORITY = "fr.free.nrw.commons.categories.contentprovider";
     private static final String BASE_PATH = "categories";
 
     public static final Uri BASE_URI = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH);

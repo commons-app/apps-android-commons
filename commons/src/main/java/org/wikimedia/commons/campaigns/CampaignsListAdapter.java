@@ -1,4 +1,4 @@
-package fr.nrw.free.commons.campaigns;
+package fr.free.nrw.commons.campaigns;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,11 +13,11 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
-import fr.nrw.free.commons.CommonsApplication;
-import fr.nrw.free.commons.MediaWikiImageView;
-import fr.nrw.free.commons.R;
-import fr.nrw.free.commons.Utils;
-import fr.nrw.free.commons.campaigns.Campaign;
+import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.MediaWikiImageView;
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.campaigns.Campaign;
 
 class CampaignsListAdapter extends CursorAdapter {
 

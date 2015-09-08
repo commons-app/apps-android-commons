@@ -1,4 +1,4 @@
-package fr.nrw.free.commons.auth;
+package fr.free.nrw.commons.auth;
 
 import java.io.IOException;
 
@@ -8,7 +8,7 @@ import com.actionbarsherlock.app.*;
 import android.accounts.*;
 import android.os.*;
 
-import fr.nrw.free.commons.*;
+import fr.free.nrw.commons.*;
 
 public class AuthenticatedActivity extends SherlockFragmentActivity {
     

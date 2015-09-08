@@ -1,4 +1,4 @@
-package fr.nrw.free.commons.category;
+package fr.free.nrw.commons.category;
 
 import android.content.ContentProviderClient;
 import android.content.ContentValues;
@@ -9,7 +9,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
 import android.text.TextUtils;
-import fr.nrw.free.commons.contributions.ContributionsContentProvider;
+import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 
 import java.util.Date;
 

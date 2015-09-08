@@ -1,4 +1,4 @@
-package fr.nrw.free.commons.modifications;
+package fr.free.nrw.commons.modifications;
 
 import android.os.Bundle;
 import android.os.Parcel;

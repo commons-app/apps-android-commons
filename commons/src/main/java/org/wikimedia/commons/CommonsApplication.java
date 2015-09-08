@@ -1,4 +1,4 @@
-package fr.nrw.free.commons;
+package fr.free.nrw.commons;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,10 +32,10 @@ import org.apache.http.conn.ssl.*;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
 import org.mediawiki.api.*;
-import fr.nrw.free.commons.auth.WikiAccountAuthenticator;
+import fr.free.nrw.commons.auth.WikiAccountAuthenticator;
 import org.apache.http.impl.client.*;
 import org.apache.http.params.CoreProtocolPNames;
-import fr.nrw.free.commons.data.*;
+import fr.free.nrw.commons.data.*;
 
 import com.android.volley.toolbox.*;
 

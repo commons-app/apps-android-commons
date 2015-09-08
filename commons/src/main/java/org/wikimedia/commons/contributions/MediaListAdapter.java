@@ -1,13 +1,13 @@
-package fr.nrw.free.commons.contributions;
+package fr.free.nrw.commons.contributions;
 
 import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import com.android.volley.toolbox.ImageLoader;
-import fr.nrw.free.commons.CommonsApplication;
-import fr.nrw.free.commons.Media;
-import fr.nrw.free.commons.R;
+import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.R;
 
 import java.util.ArrayList;
 

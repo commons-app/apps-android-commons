@@ -1,4 +1,4 @@
-package fr.nrw.free.commons.modifications;
+package fr.free.nrw.commons.modifications;
 
 import org.json.JSONException;
 import org.json.JSONObject;

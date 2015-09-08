@@ -1,9 +1,9 @@
-package fr.nrw.free.commons.campaigns;
+package fr.free.nrw.commons.campaigns;
 
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
-import fr.nrw.free.commons.contributions.ContributionsSyncAdapter;
+import fr.free.nrw.commons.contributions.ContributionsSyncAdapter;
 
 public class CampaignsSyncService extends Service {
 

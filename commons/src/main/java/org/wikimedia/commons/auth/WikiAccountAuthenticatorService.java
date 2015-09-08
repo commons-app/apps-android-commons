@@ -1,4 +1,4 @@
-package fr.nrw.free.commons.auth;
+package fr.free.nrw.commons.auth;
 
 import android.app.*;
 import android.content.*;

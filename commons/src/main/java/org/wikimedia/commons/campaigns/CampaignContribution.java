@@ -1,7 +1,7 @@
-package fr.nrw.free.commons.campaigns;
+package fr.free.nrw.commons.campaigns;
 
 import android.net.Uri;
-import fr.nrw.free.commons.contributions.Contribution;
+import fr.free.nrw.commons.contributions.Contribution;
 
 import java.util.ArrayList;
 import java.util.Date;

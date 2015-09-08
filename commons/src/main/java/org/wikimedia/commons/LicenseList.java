@@ -1,4 +1,4 @@
-package fr.nrw.free.commons;
+package fr.free.nrw.commons;
 
 import android.app.Activity;
 import android.content.res.Resources;
@@ -59,7 +59,7 @@ public class LicenseList {
     }
 
     private int stringIdByName(String stringId) {
-        return res.getIdentifier("fr.nrw.free.commons:string/" + stringId, null, null);
+        return res.getIdentifier("fr.free.nrw.commons:string/" + stringId, null, null);
     }
 
     public String nameForTemplate(String template) {

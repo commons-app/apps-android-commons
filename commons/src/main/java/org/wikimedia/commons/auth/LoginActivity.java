@@ -1,4 +1,4 @@
-package fr.nrw.free.commons.auth;
+package fr.free.nrw.commons.auth;
 
 import java.io.IOException;
 
@@ -14,16 +14,16 @@ import android.view.*;
 import android.widget.*;
 import android.support.v4.app.NavUtils;
 
-import fr.nrw.free.commons.*;
-import fr.nrw.free.commons.EventLog;
-import fr.nrw.free.commons.campaigns.CampaignsContentProvider;
-import fr.nrw.free.commons.contributions.*;
-import fr.nrw.free.commons.modifications.ModificationsContentProvider;
+import fr.free.nrw.commons.*;
+import fr.free.nrw.commons.EventLog;
+import fr.free.nrw.commons.campaigns.CampaignsContentProvider;
+import fr.free.nrw.commons.contributions.*;
+import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 
 
 public class LoginActivity extends AccountAuthenticatorActivity {
 
-    public static final String PARAM_USERNAME = "fr.nrw.free.commons.login.username";
+    public static final String PARAM_USERNAME = "fr.free.nrw.commons.login.username";
 
     private CommonsApplication app;
 

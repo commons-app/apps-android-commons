@@ -1,4 +1,4 @@
-package fr.nrw.free.commons.category;
+package fr.free.nrw.commons.category;
 
 import android.app.Activity;
 import android.content.ContentProviderClient;
@@ -17,12 +17,12 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import org.mediawiki.api.ApiResult;
 import org.mediawiki.api.MWApi;
-import fr.nrw.free.commons.CommonsApplication;
-import fr.nrw.free.commons.R;
-import fr.nrw.free.commons.Utils;
-import fr.nrw.free.commons.category.Category;
-import fr.nrw.free.commons.category.CategoryContentProvider;
-import fr.nrw.free.commons.contributions.Contribution;
+import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.category.Category;
+import fr.free.nrw.commons.category.CategoryContentProvider;
+import fr.free.nrw.commons.contributions.Contribution;
 
 import java.io.IOException;
 import java.io.Serializable;

@@ -1,7 +1,7 @@
-package fr.nrw.free.commons;
+package fr.free.nrw.commons;
 
 public class Prefs {
-    public static String GLOBAL_PREFS = "fr.nrw.free.commons.preferences";
+    public static String GLOBAL_PREFS = "fr.free.nrw.commons.preferences";
 
     public static String TRACKING_ENABLED = "eventLogging";
     public static final String DEFAULT_LICENSE = "defaultLicense";
