@@ -43,10 +43,14 @@
                         <assetsDirectory>${project.basedir}/assets</assetsDirectory>
                         <resourceDirectory>${project.basedir}/res</resourceDirectory>
                         <nativeLibrariesDirectory>${project.basedir}/src/main/native</nativeLibrariesDirectory>
+                        <release>true</release>
                         <sdk>
                             <platform>22</platform>
                         </sdk>
-                                                <undeployBeforeDeploy>true</undeployBeforeDeploy>
+                        <sign>
+                            <debug>false</debug>
+                        </sign>
+                        <undeployBeforeDeploy>true</undeployBeforeDeploy>
                     </configuration>
                 </plugin>
                 <plugin>
