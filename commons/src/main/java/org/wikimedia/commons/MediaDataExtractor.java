@@ -158,7 +158,7 @@ public class MediaDataExtractor {
     private Node findTemplate(Element parentNode, String title) throws IOException {
         String ucTitle= Utils.capitalize(title);
         NodeList nodes = parentNode.getChildNodes();
-        for (int i = 0; i < nodes.getLength(); i++) {
+        for (int i = 0, length = nodes.getLength(); i < length; i++) {
             Node node = nodes.item(i);
             if (node.getNodeName().equals("template")) {
                 String foundTitle = getTemplateTitle(node);
@@ -172,7 +172,7 @@ public class MediaDataExtractor {
 
     private String getTemplateTitle(Node templateNode) throws IOException {
         NodeList nodes = templateNode.getChildNodes();
-        for (int i = 0; i < nodes.getLength(); i++) {
+        for (int i = 0, length = nodes.getLength(); i < length; i++) {
             Node node = nodes.item(i);
             if (node.getNodeName().equals("title")) {
                 return node.getTextContent().trim();
@@ -214,16 +214,16 @@ public class MediaDataExtractor {
 
     private Node findTemplateParameter(Node templateNode, TemplateChildNodeComparator comparator) throws IOException {
         NodeList nodes = templateNode.getChildNodes();
-        for (int i = 0; i < nodes.getLength(); i++) {
+        for (int i = 0, length = nodes.getLength(); i < length; i++) {
             Node node = nodes.item(i);
             if (node.getNodeName().equals("part")) {
                 NodeList childNodes = node.getChildNodes();
-                for (int j = 0; j < childNodes.getLength(); j++) {
+                for (int j = 0, childNodesLength = childNodes.getLength(); j < childNodesLength; j++) {
                     Node childNode = childNodes.item(j);
                     if (childNode.getNodeName().equals("name")) {
                         if (comparator.match(childNode)) {
                             // yay! Now fetch the value node.
-                            for (int k = j + 1; k < childNodes.getLength(); k++) {
+                            for (int k = j + 1; k < childNodesLength; k++) {
                                 Node siblingNode = childNodes.item(k);
                                 if (siblingNode.getNodeName().equals("value")) {
                                     return siblingNode;
@@ -250,7 +250,7 @@ public class MediaDataExtractor {
         StringBuilder localText = new StringBuilder();
 
         NodeList nodes = parentNode.getChildNodes();
-        for (int i = 0; i < nodes.getLength(); i++) {
+        for (int i = 0, length = nodes.getLength(); i < length; i++) {
             Node node = nodes.item(i);
             if (node.getNodeName().equals("template")) {
                 // process a template node
