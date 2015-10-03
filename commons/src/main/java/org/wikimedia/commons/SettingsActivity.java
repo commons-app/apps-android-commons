@@ -1,4 +1,4 @@
-package fr.free.nrw.commons;
+package org.wikimedia.commons;
 
 
 import android.content.SharedPreferences;
@@ -8,6 +8,10 @@ import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
+import fr.free.nrw.commons.*;
+import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.Prefs;
+import fr.free.nrw.commons.Utils;
 
 public class SettingsActivity extends SherlockPreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
     CommonsApplication app;
@@ -56,7 +60,7 @@ public class SettingsActivity extends SherlockPreferenceActivity implements Shar
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if(key.equals(Prefs.TRACKING_ENABLED)) {
             // We force log this, so it is logged even if EL is turned off
-            EventLog.schema(CommonsApplication.EVENT_EVENTLOGGING_CHANGE)
+            fr.free.nrw.commons.EventLog.schema(CommonsApplication.EVENT_EVENTLOGGING_CHANGE)
                     .param("username", app.getCurrentAccount().name)
                     .param("state", sharedPreferences.getBoolean(key, true))
                     .log(true);
