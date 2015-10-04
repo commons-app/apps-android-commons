@@ -16,7 +16,7 @@
             android:textColor="@android:color/white"
             android:background="#20ffffff"
             />
-    <org.wikimedia.commons.media.MediaDetailSpacer
+    <free.nrw.commons.media.MediaDetailSpacer
             android:layout_width="fill_parent"
             android:layout_height="8dp"/>
 </LinearLayout>

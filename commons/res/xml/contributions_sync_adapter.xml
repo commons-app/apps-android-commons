@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <sync-adapter xmlns:android="http://schemas.android.com/apk/res/android"
-              android:contentAuthority="org.wikimedia.commons.contributions.contentprovider"
-              android:accountType="org.wikimedia.commons"
+              android:contentAuthority="free.nrw.commons.contributions.contentprovider"
+              android:accountType="free.nrw.commons"
               android:supportsUploading="false"
               android:userVisible="true"
               android:isAlwaysSyncable="true"
