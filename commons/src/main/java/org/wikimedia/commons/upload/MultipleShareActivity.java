@@ -1,7 +1,6 @@
-package fr.free.nrw.commons.upload;
+package org.wikimedia.commons.upload;
 
 import java.util.*;
-import java.util.concurrent.*;
 
 import android.app.*;
 import android.content.*;
@@ -9,21 +8,20 @@ import android.database.DataSetObserver;
 import android.net.*;
 import android.os.*;
 import android.support.v4.app.FragmentManager;
-import android.text.*;
 import android.view.*;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import com.actionbarsherlock.view.MenuItem;
 
-import fr.free.nrw.commons.*;
-import fr.free.nrw.commons.auth.*;
-import fr.free.nrw.commons.category.CategorizationFragment;
-import fr.free.nrw.commons.contributions.*;
-import fr.free.nrw.commons.media.*;
-import fr.free.nrw.commons.modifications.CategoryModifier;
-import fr.free.nrw.commons.modifications.ModificationsContentProvider;
-import fr.free.nrw.commons.modifications.ModifierSequence;
-import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
+import org.wikimedia.commons.*;
+import org.wikimedia.commons.auth.*;
+import org.wikimedia.commons.category.CategorizationFragment;
+import org.wikimedia.commons.contributions.*;
+import org.wikimedia.commons.media.*;
+import org.wikimedia.commons.modifications.CategoryModifier;
+import org.wikimedia.commons.modifications.ModificationsContentProvider;
+import org.wikimedia.commons.modifications.ModifierSequence;
+import org.wikimedia.commons.modifications.TemplateRemoveModifier;
 
 public  class       MultipleShareActivity
         extends     AuthenticatedActivity

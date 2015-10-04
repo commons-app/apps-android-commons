@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.category;
+package org.wikimedia.commons.category;
 
 import android.app.Activity;
 import android.content.ContentProviderClient;
@@ -9,23 +9,17 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.*;
-import android.view.MenuInflater;
 import android.widget.*;
 import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.view.*;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import org.mediawiki.api.ApiResult;
 import org.mediawiki.api.MWApi;
-import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.category.Category;
-import fr.free.nrw.commons.category.CategoryContentProvider;
-import fr.free.nrw.commons.contributions.Contribution;
+import org.wikimedia.commons.CommonsApplication;
+import org.wikimedia.commons.R;
+import org.wikimedia.commons.Utils;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;

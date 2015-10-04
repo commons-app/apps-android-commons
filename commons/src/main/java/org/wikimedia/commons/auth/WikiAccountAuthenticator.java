@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.auth;
+package org.wikimedia.commons.auth;
 
 import java.io.IOException;
 
@@ -7,11 +7,11 @@ import android.content.*;
 import android.os.*;
 
 import org.mediawiki.api.*;
-import fr.free.nrw.commons.*;
+import org.wikimedia.commons.*;
 
 public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
 
-    public static final String COMMONS_ACCOUNT_TYPE = "fr.free.nrw.commons";
+    public static final String COMMONS_ACCOUNT_TYPE = "org.wikimedia.commons";
     private Context context;
     public WikiAccountAuthenticator(Context context) {
         super(context);

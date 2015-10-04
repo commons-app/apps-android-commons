@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.contributions;
+package org.wikimedia.commons.contributions;
 
 import android.database.DataSetObserver;
 import android.os.IBinder;
@@ -17,11 +17,11 @@ import android.widget.Adapter;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 
-import fr.free.nrw.commons.*;
-import fr.free.nrw.commons.auth.*;
-import fr.free.nrw.commons.campaigns.Campaign;
-import fr.free.nrw.commons.media.*;
-import fr.free.nrw.commons.upload.UploadService;
+import org.wikimedia.commons.*;
+import org.wikimedia.commons.auth.*;
+import org.wikimedia.commons.campaigns.Campaign;
+import org.wikimedia.commons.media.*;
+import org.wikimedia.commons.upload.UploadService;
 
 import java.util.ArrayList;
 

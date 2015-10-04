@@ -1,12 +1,12 @@
-package fr.free.nrw.commons.data;
+package org.wikimedia.commons.data;
 
 import android.content.*;
 import android.database.sqlite.*;
 
-import fr.free.nrw.commons.campaigns.Campaign;
-import fr.free.nrw.commons.category.Category;
-import fr.free.nrw.commons.contributions.*;
-import fr.free.nrw.commons.modifications.ModifierSequence;
+import org.wikimedia.commons.campaigns.Campaign;
+import org.wikimedia.commons.category.Category;
+import org.wikimedia.commons.contributions.*;
+import org.wikimedia.commons.modifications.ModifierSequence;
 
 public class DBOpenHelper  extends SQLiteOpenHelper{
 

@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.contributions;
+package org.wikimedia.commons.contributions;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,17 +7,15 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.widget.CursorAdapter;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import com.actionbarsherlock.app.SherlockFragment;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
-import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.MediaWikiImageView;
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
+import org.wikimedia.commons.CommonsApplication;
+import org.wikimedia.commons.MediaWikiImageView;
+import org.wikimedia.commons.R;
+import org.wikimedia.commons.Utils;
 
 class ContributionsListAdapter extends CursorAdapter {
 

@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.contributions;
+package org.wikimedia.commons.contributions;
 
 import android.content.*;
 import android.database.Cursor;
@@ -12,8 +12,8 @@ import java.io.*;
 import java.util.*;
 
 import org.mediawiki.api.*;
-import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.*;
+import org.wikimedia.commons.Utils;
+import org.wikimedia.commons.*;
 
 
 public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {

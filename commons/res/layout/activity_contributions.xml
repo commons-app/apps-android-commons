@@ -8,7 +8,7 @@
               android:background="#000000"
         >
     <fragment
-        android:name="fr.free.nrw.commons.contributions.ContributionsListFragment"
+        android:name="org.wikimedia.commons.contributions.ContributionsListFragment"
         android:id="@+id/contributionsListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

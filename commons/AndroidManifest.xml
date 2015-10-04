@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="fr.free.nrw.commons"
+    package="org.wikimedia.commons"
     android:versionCode="17"
     android:versionName="1.2" >
 
@@ -31,15 +31,15 @@
                   android:finishOnTaskLaunch="true" />
 
         <activity
-            android:name=".auth.LoginActivity"
+            android:name="org.wikimedia.commons.auth.LoginActivity"
             android:theme="@style/NoTitle" >
         </activity>
         <activity
-            android:name=".WelcomeActivity"
+            android:name="org.wikimedia.commons.WelcomeActivity"
             android:theme="@style/NoTitle" >
         </activity>
         <activity
-            android:name=".upload.ShareActivity"
+            android:name="org.wikimedia.commons.upload.ShareActivity"
             android:icon="@drawable/ic_launcher"
             android:label="@string/app_name"
             >
@@ -53,7 +53,7 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".upload.MultipleShareActivity"
+                android:name="org.wikimedia.commons.upload.MultipleShareActivity"
                 android:icon="@drawable/ic_launcher"
                 android:label="@string/app_name"
                 >
@@ -68,7 +68,7 @@
         </activity>
 
         <activity
-                android:name=".contributions.ContributionsActivity"
+                android:name="org.wikimedia.commons.contributions.ContributionsActivity"
                 android:icon="@drawable/ic_launcher"
                 android:label="@string/app_name"
                  >
@@ -78,11 +78,11 @@
              </intent-filter>
         </activity>
         <activity
-            android:name=".SettingsActivity"
+            android:name="org.wikimedia.commons.SettingsActivity"
             android:label="@string/title_activity_settings"
             />
-        <activity android:name=".AboutActivity" android:label="@string/title_activity_about"/>
-        <activity android:name=".campaigns.CampaignActivity" android:label="Campaigns"
+        <activity android:name="org.wikimedia.commons.AboutActivity" android:label="@string/title_activity_about"/>
+        <activity android:name="org.wikimedia.commons.campaigns.CampaignActivity" android:label="Campaigns"
                 android:icon="@drawable/ic_launcher"
                 >
             <intent-filter>
@@ -91,10 +91,10 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".upload.UploadService" >
+        <service android:name="org.wikimedia.commons.upload.UploadService" >
         </service>
         <service
-            android:name=".auth.WikiAccountAuthenticatorService"
+            android:name="org.wikimedia.commons.auth.WikiAccountAuthenticatorService"
             android:exported="true"
             android:process=":auth" >
             <intent-filter>
@@ -106,7 +106,7 @@
                 android:resource="@xml/authenticator" />
         </service>
         <service
-                android:name=".campaigns.CampaignsSyncService"
+                android:name="org.wikimedia.commons.campaigns.CampaignsSyncService"
                 android:exported="true">
             <intent-filter>
                 <action
@@ -117,7 +117,7 @@
                     android:resource="@xml/campaigns_sync_adapter" />
         </service>
         <service
-                android:name=".contributions.ContributionsSyncService"
+                android:name="org.wikimedia.commons.contributions.ContributionsSyncService"
                 android:exported="true">
             <intent-filter>
                 <action
@@ -129,7 +129,7 @@
         </service>
 
         <service
-                android:name=".modifications.ModificationsSyncService"
+                android:name="org.wikimedia.commons.modifications.ModificationsSyncService"
                 android:exported="true">
             <intent-filter>
                 <action
@@ -141,31 +141,31 @@
         </service>
 
         <provider
-                android:name=".contributions.ContributionsContentProvider"
+                android:name="org.wikimedia.commons.contributions.ContributionsContentProvider"
                 android:label="@string/provider_contributions"
                 android:syncable="true"
-                android:authorities="fr.free.nrw.commons.contributions.contentprovider"
+                android:authorities="org.wikimedia.commons.contributions.contentprovider"
                 android:exported="false">
         </provider>
         <provider
-                android:name=".campaigns.CampaignsContentProvider"
+                android:name="org.wikimedia.commons.campaigns.CampaignsContentProvider"
                 android:label="@string/provider_campaigns"
                 android:syncable="true"
-                android:authorities="fr.free.nrw.commons.campaigns.contentprovider"
+                android:authorities="org.wikimedia.commons.campaigns.contentprovider"
                 android:exported="false">
         </provider>
         <provider
-                android:name=".modifications.ModificationsContentProvider"
+                android:name="org.wikimedia.commons.modifications.ModificationsContentProvider"
                 android:label="@string/provider_modifications"
                 android:syncable="true"
-                android:authorities="fr.free.nrw.commons.modifications.contentprovider"
+                android:authorities="org.wikimedia.commons.modifications.contentprovider"
                 android:exported="false">
         </provider>
         <provider
-                android:name=".category.CategoryContentProvider"
+                android:name="org.wikimedia.commons.category.CategoryContentProvider"
                 android:label="@string/provider_categories"
                 android:syncable="false"
-                android:authorities="fr.free.nrw.commons.categories.contentprovider"
+                android:authorities="org.wikimedia.commons.categories.contentprovider"
                 android:exported="false">
         </provider>
     </application>

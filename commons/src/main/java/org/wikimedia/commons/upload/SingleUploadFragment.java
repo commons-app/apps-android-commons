@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.upload;
+package org.wikimedia.commons.upload;
 
 import android.app.Activity;
 import android.content.Context;
@@ -20,11 +20,9 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import fr.free.nrw.commons.Prefs;
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.contributions.Contribution;
+import org.wikimedia.commons.Prefs;
+import org.wikimedia.commons.R;
+import org.wikimedia.commons.Utils;
 
 public class SingleUploadFragment extends SherlockFragment {
 

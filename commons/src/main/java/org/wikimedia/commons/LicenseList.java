@@ -1,4 +1,4 @@
-package fr.free.nrw.commons;
+package org.wikimedia.commons;
 
 import android.app.Activity;
 import android.content.res.Resources;
@@ -59,7 +59,7 @@ public class LicenseList {
     }
 
     private int stringIdByName(String stringId) {
-        return res.getIdentifier("fr.free.nrw.commons:string/" + stringId, null, null);
+        return res.getIdentifier("org.wikimedia.commons:string/" + stringId, null, null);
     }
 
     public String nameForTemplate(String template) {

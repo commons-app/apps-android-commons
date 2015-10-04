@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.media;
+package org.wikimedia.commons.media;
 
 import android.content.Intent;
 import android.database.DataSetObserver;
@@ -16,7 +16,7 @@ import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 
 import com.android.volley.toolbox.*;
 
-import fr.free.nrw.commons.*;
+import org.wikimedia.commons.*;
 
 import java.io.IOException;
 import java.util.ArrayList;

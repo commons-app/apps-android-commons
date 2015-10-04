@@ -1,22 +1,17 @@
-package fr.free.nrw.commons.campaigns;
+package org.wikimedia.commons.campaigns;
 
 import android.accounts.Account;
 import android.content.*;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.text.TextUtils;
 import android.util.Log;
 import org.mediawiki.api.ApiResult;
 import org.mediawiki.api.MWApi;
-import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.contributions.Contribution;
-import fr.free.nrw.commons.contributions.ContributionsContentProvider;
+import org.wikimedia.commons.CommonsApplication;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 
 
 public class CampaignsSyncAdapter extends AbstractThreadedSyncAdapter {

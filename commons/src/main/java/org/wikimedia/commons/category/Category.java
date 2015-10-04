@@ -1,15 +1,11 @@
-package fr.free.nrw.commons.category;
+package org.wikimedia.commons.category;
 
 import android.content.ContentProviderClient;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.os.RemoteException;
-import android.text.TextUtils;
-import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 
 import java.util.Date;
 

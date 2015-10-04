@@ -1,6 +1,5 @@
-package fr.free.nrw.commons.modifications;
+package org.wikimedia.commons.modifications;
 
-import android.os.Bundle;
 import org.json.JSONException;
 import org.json.JSONObject;
 

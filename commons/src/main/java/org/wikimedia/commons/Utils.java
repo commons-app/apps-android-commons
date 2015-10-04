@@ -1,8 +1,7 @@
-package fr.free.nrw.commons;
+package org.wikimedia.commons;
 
 import android.net.Uri;
 import android.os.*;
-import android.util.Log;
 import com.nostra13.universalimageloader.core.*;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
@@ -19,7 +18,6 @@ import java.io.*;
 import java.text.*;
 import java.util.*;
 import java.util.concurrent.Executor;
-import java.util.regex.Pattern;
 
 public class Utils {
 

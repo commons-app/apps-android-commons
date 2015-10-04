@@ -42,7 +42,7 @@ index 5ad1c77..50b16ff 100644
 -                android:name=".campaigns.CampaignsContentProvider"
 -                android:label="@string/provider_campaigns"
 -                android:syncable="true"
--                android:authorities="fr.free.nrw.commons.campaigns.contentprovider"
+-                android:authorities="org.wikimedia.commons.campaigns.contentprovider"
 -                android:exported="false">
 -        </provider>
 -        <provider

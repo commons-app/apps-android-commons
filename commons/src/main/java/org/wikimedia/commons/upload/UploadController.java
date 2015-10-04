@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.upload;
+package org.wikimedia.commons.upload;
 
 import android.app.Activity;
 import android.content.*;
@@ -10,18 +10,16 @@ import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.webkit.MimeTypeMap;
-import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.HandlerService;
-import fr.free.nrw.commons.Prefs;
-import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.campaigns.Campaign;
-import fr.free.nrw.commons.campaigns.CampaignContribution;
-import fr.free.nrw.commons.contributions.Contribution;
+import org.wikimedia.commons.CommonsApplication;
+import org.wikimedia.commons.HandlerService;
+import org.wikimedia.commons.Prefs;
+import org.wikimedia.commons.Utils;
+import org.wikimedia.commons.campaigns.Campaign;
+import org.wikimedia.commons.campaigns.CampaignContribution;
+import org.wikimedia.commons.contributions.Contribution;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
 
 public class UploadController {
     private UploadService uploadService;

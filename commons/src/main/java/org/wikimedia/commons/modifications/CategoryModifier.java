@@ -1,13 +1,8 @@
-package fr.free.nrw.commons.modifications;
+package org.wikimedia.commons.modifications;
 
-import android.os.Bundle;
-import android.os.Parcel;
-import android.text.TextUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.*;
 
 public class CategoryModifier extends PageModifier {
 

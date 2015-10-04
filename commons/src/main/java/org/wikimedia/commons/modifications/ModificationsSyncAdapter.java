@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.modifications;
+package org.wikimedia.commons.modifications;
 
 import android.accounts.AccountManager;
 import android.accounts.AuthenticatorException;
@@ -6,19 +6,17 @@ import android.accounts.OperationCanceledException;
 import android.content.*;
 import android.database.Cursor;
 import android.os.RemoteException;
-import android.text.TextUtils;
 import android.util.Log;
 import android.accounts.Account;
 import android.os.Bundle;
 
 import java.io.*;
-import java.util.*;
 
 import org.mediawiki.api.*;
-import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.*;
-import fr.free.nrw.commons.contributions.Contribution;
-import fr.free.nrw.commons.contributions.ContributionsContentProvider;
+import org.wikimedia.commons.Utils;
+import org.wikimedia.commons.*;
+import org.wikimedia.commons.contributions.Contribution;
+import org.wikimedia.commons.contributions.ContributionsContentProvider;
 
 
 public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {

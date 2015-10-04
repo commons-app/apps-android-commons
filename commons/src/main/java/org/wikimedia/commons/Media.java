@@ -1,8 +1,7 @@
-package fr.free.nrw.commons;
+package org.wikimedia.commons;
 
 import android.net.Uri;
 import android.os.*;
-import android.util.Log;
 
 import java.util.*;
 import java.util.regex.*;

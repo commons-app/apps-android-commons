@@ -1,4 +1,4 @@
-package fr.free.nrw.commons;
+package org.wikimedia.commons;
 
 public class License {
     String key;

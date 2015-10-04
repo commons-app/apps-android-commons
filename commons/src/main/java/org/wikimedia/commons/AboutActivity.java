@@ -1,6 +1,5 @@
-package fr.free.nrw.commons;
+package org.wikimedia.commons;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;

@@ -1,23 +1,14 @@
-package fr.free.nrw.commons.campaigns;
+package org.wikimedia.commons.campaigns;
 
 import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.widget.CursorAdapter;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import com.actionbarsherlock.app.SherlockFragment;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
-import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.MediaWikiImageView;
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.campaigns.Campaign;
+import org.wikimedia.commons.Utils;
 
 class CampaignsListAdapter extends CursorAdapter {
 

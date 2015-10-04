@@ -1,9 +1,8 @@
-package fr.free.nrw.commons.campaigns;
+package org.wikimedia.commons.campaigns;
 
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
-import fr.free.nrw.commons.contributions.ContributionsSyncAdapter;
 
 public class CampaignsSyncService extends Service {
 

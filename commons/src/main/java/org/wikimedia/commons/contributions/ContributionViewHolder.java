@@ -1,11 +1,10 @@
-package fr.free.nrw.commons.contributions;
+package org.wikimedia.commons.contributions;
 
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import fr.free.nrw.commons.MediaWikiImageView;
-import fr.free.nrw.commons.R;
+import org.wikimedia.commons.MediaWikiImageView;
+import org.wikimedia.commons.R;
 
 class ContributionViewHolder {
     final MediaWikiImageView imageView;

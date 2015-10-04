@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.modifications;
+package org.wikimedia.commons.modifications;
 
 import android.app.*;
 import android.content.*;

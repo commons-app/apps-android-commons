@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.modifications;
+package org.wikimedia.commons.modifications;
 
 import android.content.ContentProviderClient;
 import android.content.ContentValues;
@@ -6,15 +6,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.RemoteException;
-import android.text.TextUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 
 public class ModifierSequence {
     private Uri mediaUri;

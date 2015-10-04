@@ -1,6 +1,5 @@
-package fr.free.nrw.commons.upload;
+package org.wikimedia.commons.upload;
 
-import android.app.*;
 import android.content.*;
 import android.os.*;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -9,15 +8,15 @@ import android.support.v4.app.NavUtils;
 import com.actionbarsherlock.view.MenuItem;
 import android.widget.*;
 
-import fr.free.nrw.commons.*;
-import fr.free.nrw.commons.campaigns.Campaign;
-import fr.free.nrw.commons.category.CategorizationFragment;
-import fr.free.nrw.commons.contributions.*;
-import fr.free.nrw.commons.auth.*;
-import fr.free.nrw.commons.modifications.CategoryModifier;
-import fr.free.nrw.commons.modifications.ModificationsContentProvider;
-import fr.free.nrw.commons.modifications.ModifierSequence;
-import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
+import org.wikimedia.commons.*;
+import org.wikimedia.commons.campaigns.Campaign;
+import org.wikimedia.commons.category.CategorizationFragment;
+import org.wikimedia.commons.contributions.*;
+import org.wikimedia.commons.auth.*;
+import org.wikimedia.commons.modifications.CategoryModifier;
+import org.wikimedia.commons.modifications.ModificationsContentProvider;
+import org.wikimedia.commons.modifications.ModifierSequence;
+import org.wikimedia.commons.modifications.TemplateRemoveModifier;
 
 import java.util.ArrayList;
 

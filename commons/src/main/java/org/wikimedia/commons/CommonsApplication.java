@@ -1,41 +1,34 @@
-package fr.free.nrw.commons;
+package org.wikimedia.commons;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.StringWriter;
-import java.net.URI;
 
 import android.accounts.*;
 import android.app.Application;
-import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Build;
 
 import android.support.v4.util.LruCache;
 import android.util.Log;
 import com.android.volley.RequestQueue;
 import com.nostra13.universalimageloader.cache.disc.impl.TotalSizeLimitedDiscCache;
-import com.nostra13.universalimageloader.cache.memory.impl.LimitedAgeMemoryCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.utils.StorageUtils;
 import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
-import org.apache.http.client.HttpClient;
 import org.apache.http.conn.*;
 import org.apache.http.conn.scheme.*;
 import org.apache.http.conn.ssl.*;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
 import org.mediawiki.api.*;
-import fr.free.nrw.commons.auth.WikiAccountAuthenticator;
+import org.wikimedia.commons.auth.WikiAccountAuthenticator;
 import org.apache.http.impl.client.*;
 import org.apache.http.params.CoreProtocolPNames;
-import fr.free.nrw.commons.data.*;
+import org.wikimedia.commons.data.*;
 
 import com.android.volley.toolbox.*;
 
