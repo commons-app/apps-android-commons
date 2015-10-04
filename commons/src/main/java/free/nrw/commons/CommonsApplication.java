@@ -58,7 +58,7 @@ public class CommonsApplication extends Application {
     public static final Object[] EVENT_LOGIN_ATTEMPT = {"MobileAppLoginAttempts", 5257721L};
     public static final Object[] EVENT_SHARE_ATTEMPT = {"MobileAppShareAttempts", 5346170L};
     public static final Object[] EVENT_CATEGORIZATION_ATTEMPT = {"MobileAppCategorizationAttempts", 5359208L};
-    public static final Object[] EVENT_EVENTLOGGING_CHANGE = {"MobileAppTrackingChange", 5369400L};
+
 
     public static final String DEFAULT_EDIT_SUMMARY = "Uploaded using Android Commons app";
 
