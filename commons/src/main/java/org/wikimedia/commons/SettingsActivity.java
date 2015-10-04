@@ -54,13 +54,6 @@ public class SettingsActivity extends SherlockPreferenceActivity implements Shar
     }
 
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if(key.equals(Prefs.TRACKING_ENABLED)) {
-            // We force log this, so it is logged even if EL is turned off
-            EventLog.schema(CommonsApplication.EVENT_EVENTLOGGING_CHANGE)
-                    .param("username", app.getCurrentAccount().name)
-                    .param("state", sharedPreferences.getBoolean(key, true))
-                    .log(true);
-        }
 
     }
 }
