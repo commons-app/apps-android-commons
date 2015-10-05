@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <CheckBoxPreference
-        android:key="eventLogging"
-        android:title="@string/preference_tracking"
-        android:summary="@string/preference_tracking_summary"
-        android:defaultValue="false"
-        />
+
     <ListPreference
         android:key="defaultLicense"
         android:title="@string/preference_license"
