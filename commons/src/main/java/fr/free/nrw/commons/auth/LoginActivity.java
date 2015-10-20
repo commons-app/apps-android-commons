@@ -3,6 +3,7 @@ package fr.free.nrw.commons.auth;
 import java.io.IOException;
 
 import android.content.*;
+import android.net.Uri;
 import android.text.*;
 import android.view.inputmethod.EditorInfo;
 import de.keyboardsurfer.android.widget.crouton.*;
@@ -30,6 +31,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     private CommonsApplication app;
 
     Button loginButton;
+    Button signupButton;
     EditText usernameEdit;
     EditText passwordEdit;
 
@@ -131,6 +133,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         app = (CommonsApplication) this.getApplicationContext();
         setContentView(R.layout.activity_login);
         loginButton = (Button) findViewById(R.id.loginButton);
+        signupButton = (Button) findViewById(R.id.signupButton);
         usernameEdit = (EditText) findViewById(R.id.loginUsername);
         passwordEdit = (EditText) findViewById(R.id.loginPassword);
         final LoginActivity that = this;
@@ -166,8 +169,13 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             }
         });
 
+        signupButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse("https://commons.wikimedia.org/wiki/Special:UserLogin/signup")));
+            }
+        });
+
         loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View v) {
                 that.performLogin();
             }
