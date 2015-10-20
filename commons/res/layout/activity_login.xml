@@ -63,8 +63,14 @@
                     android:layout_height="wrap_content"
                     android:enabled="false"
                     android:text="@string/login" />
-
+            <Button
+                    android:id="@+id/signupButton"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/signup"
+                    android:layout_gravity="center_horizontal"/>
         </LinearLayout>
+
 
     </LinearLayout>
 </ScrollView>
