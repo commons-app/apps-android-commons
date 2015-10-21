@@ -9,6 +9,7 @@ import com.actionbarsherlock.app.SherlockPreferenceActivity;
 
 public class SettingsActivity extends SherlockPreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
     CommonsApplication app;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,12 +30,12 @@ public class SettingsActivity extends SherlockPreferenceActivity implements Shar
         licensePreference.setSummary(getString(Utils.licenseNameFor(licensePreference.getValue())));
         licensePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
-                preference.setSummary(getString(Utils.licenseNameFor((String)newValue)));
+                preference.setSummary(getString(Utils.licenseNameFor((String) newValue)));
                 return true;
             }
         });
 
-        app = (CommonsApplication)getApplicationContext();
+        app = (CommonsApplication) getApplicationContext();
     }
 
     @Override

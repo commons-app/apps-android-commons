@@ -19,7 +19,8 @@ import fr.free.nrw.commons.R;
 
 class ContributionsListAdapter extends CursorAdapter {
 
-    private DisplayImageOptions contributionDisplayOptions = Utils.getGenericDisplayOptions().build();;
+    private DisplayImageOptions contributionDisplayOptions = Utils.getGenericDisplayOptions().build();
+    ;
     private Activity activity;
 
     public ContributionsListAdapter(Activity activity, Cursor c, int flags) {
@@ -36,14 +37,14 @@ class ContributionsListAdapter extends CursorAdapter {
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        final ContributionViewHolder views = (ContributionViewHolder)view.getTag();
+        final ContributionViewHolder views = (ContributionViewHolder) view.getTag();
         final Contribution contribution = Contribution.fromCursor(cursor);
 
         String actualUrl = (contribution.getLocalUri() != null && !TextUtils.isEmpty(contribution.getLocalUri().toString())) ? contribution.getLocalUri().toString() : contribution.getThumbnailUrl(640);
 
-        if(views.url == null || !views.url.equals(actualUrl)) {
-            if(actualUrl.startsWith("http")) {
-                MediaWikiImageView mwImageView = (MediaWikiImageView)views.imageView;
+        if (views.url == null || !views.url.equals(actualUrl)) {
+            if (actualUrl.startsWith("http")) {
+                MediaWikiImageView mwImageView = (MediaWikiImageView) views.imageView;
                 mwImageView.setMedia(contribution, ((CommonsApplication) activity.getApplicationContext()).getImageLoader());
                 // FIXME: For transparent images
             } else {
@@ -51,7 +52,7 @@ class ContributionsListAdapter extends CursorAdapter {
 
                     @Override
                     public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                        if(loadedImage.hasAlpha()) {
+                        if (loadedImage.hasAlpha()) {
                             views.imageView.setBackgroundResource(android.R.color.white);
                         }
                         views.seqNumView.setVisibility(View.GONE);
@@ -60,7 +61,7 @@ class ContributionsListAdapter extends CursorAdapter {
                     @Override
                     public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
                         super.onLoadingFailed(imageUri, view, failReason);
-                        MediaWikiImageView mwImageView = (MediaWikiImageView)views.imageView;
+                        MediaWikiImageView mwImageView = (MediaWikiImageView) views.imageView;
                         mwImageView.setMedia(contribution, ((CommonsApplication) activity.getApplicationContext()).getImageLoader());
                     }
                 });
@@ -68,8 +69,8 @@ class ContributionsListAdapter extends CursorAdapter {
             views.url = actualUrl;
         }
 
-        BitmapDrawable actualImageDrawable = (BitmapDrawable)views.imageView.getDrawable();
-        if(actualImageDrawable != null && actualImageDrawable.getBitmap() != null && actualImageDrawable.getBitmap().hasAlpha()) {
+        BitmapDrawable actualImageDrawable = (BitmapDrawable) views.imageView.getDrawable();
+        if (actualImageDrawable != null && actualImageDrawable.getBitmap() != null && actualImageDrawable.getBitmap().hasAlpha()) {
             views.imageView.setBackgroundResource(android.R.color.white);
         } else {
             views.imageView.setBackgroundDrawable(null);
@@ -80,7 +81,7 @@ class ContributionsListAdapter extends CursorAdapter {
         views.seqNumView.setText(String.valueOf(cursor.getPosition() + 1));
         views.seqNumView.setVisibility(View.VISIBLE);
 
-        switch(contribution.getState()) {
+        switch (contribution.getState()) {
             case Contribution.STATE_COMPLETED:
                 views.stateView.setVisibility(View.GONE);
                 views.progressView.setVisibility(View.GONE);
@@ -96,10 +97,10 @@ class ContributionsListAdapter extends CursorAdapter {
                 views.progressView.setVisibility(View.VISIBLE);
                 long total = contribution.getDataLength();
                 long transferred = contribution.getTransferred();
-                if(transferred == 0 || transferred >= total) {
+                if (transferred == 0 || transferred >= total) {
                     views.progressView.setIndeterminate(true);
                 } else {
-                    views.progressView.setProgress((int)(((double)transferred / (double)total) * 100));
+                    views.progressView.setProgress((int) (((double) transferred / (double) total) * 100));
                 }
                 break;
             case Contribution.STATE_FAILED:

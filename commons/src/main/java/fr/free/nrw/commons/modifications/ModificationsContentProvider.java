@@ -10,7 +10,7 @@ import android.util.*;
 import fr.free.nrw.commons.data.*;
 import fr.free.nrw.commons.CommonsApplication;
 
-public class ModificationsContentProvider extends ContentProvider{
+public class ModificationsContentProvider extends ContentProvider {
 
     private static final int MODIFICATIONS = 1;
     private static final int MODIFICATIONS_ID = 2;
@@ -21,6 +21,7 @@ public class ModificationsContentProvider extends ContentProvider{
     public static final Uri BASE_URI = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH);
 
     private static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+
     static {
         uriMatcher.addURI(AUTHORITY, BASE_PATH, MODIFICATIONS);
         uriMatcher.addURI(AUTHORITY, BASE_PATH + "/#", MODIFICATIONS_ID);
@@ -32,9 +33,10 @@ public class ModificationsContentProvider extends ContentProvider{
     }
 
     private DBOpenHelper dbOpenHelper;
+
     @Override
     public boolean onCreate() {
-        dbOpenHelper = ((CommonsApplication)this.getContext().getApplicationContext()).getDbOpenHelper();
+        dbOpenHelper = ((CommonsApplication) this.getContext().getApplicationContext()).getDbOpenHelper();
         return false;
     }
 
@@ -45,7 +47,7 @@ public class ModificationsContentProvider extends ContentProvider{
 
         int uriType = uriMatcher.match(uri);
 
-        switch(uriType) {
+        switch (uriType) {
             case MODIFICATIONS:
                 break;
             default:
@@ -90,8 +92,8 @@ public class ModificationsContentProvider extends ContentProvider{
                 String id = uri.getLastPathSegment();
                 sqlDB.delete(ModifierSequence.Table.TABLE_NAME,
                         "_id = ?",
-                        new String[] { id }
-                        );
+                        new String[]{id}
+                );
                 return 1;
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
@@ -106,7 +108,7 @@ public class ModificationsContentProvider extends ContentProvider{
         sqlDB.beginTransaction();
         switch (uriType) {
             case MODIFICATIONS:
-                for(ContentValues value: values) {
+                for (ContentValues value : values) {
                     Log.d("Commons", "Inserting! " + value.toString());
                     sqlDB.insert(ModifierSequence.Table.TABLE_NAME, null, value);
                 }
@@ -146,7 +148,7 @@ public class ModificationsContentProvider extends ContentProvider{
                     rowsUpdated = sqlDB.update(ModifierSequence.Table.TABLE_NAME,
                             contentValues,
                             ModifierSequence.Table.COLUMN_ID + " = ?",
-                            new String[] { String.valueOf(id) } );
+                            new String[]{String.valueOf(id)});
                 } else {
                     throw new IllegalArgumentException("Parameter `selection` should be empty when updating an ID");
                 }

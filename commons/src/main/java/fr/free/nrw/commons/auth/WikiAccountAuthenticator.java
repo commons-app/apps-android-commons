@@ -13,6 +13,7 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
 
     public static final String COMMONS_ACCOUNT_TYPE = "fr.free.nrw.commons";
     private Context context;
+
     public WikiAccountAuthenticator(Context context) {
         super(context);
         this.context = context;
@@ -43,12 +44,13 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
     private String getAuthCookie(String username, String password) throws IOException {
         MWApi api = CommonsApplication.createMWApi();
         String result = api.login(username, password);
-        if(result.equals("Success")) {
+        if (result.equals("Success")) {
             return api.getAuthCookie();
         } else {
             return null;
         }
     }
+
     @Override
     public Bundle getAuthToken(AccountAuthenticatorResponse response, Account account, String authTokenType, Bundle options) throws NetworkErrorException {
         // Extract the username and password from the Account Manager, and ask

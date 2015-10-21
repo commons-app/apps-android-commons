@@ -18,6 +18,7 @@ import fr.free.nrw.commons.Utils;
 
 public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
     private static int COMMIT_THRESHOLD = 10;
+
     public ContributionsSyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
     }
@@ -26,15 +27,16 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
         return 500; // FIXME: Parameterize!
     }
 
-    private static final String[] existsQuery = { Contribution.Table.COLUMN_FILENAME };
+    private static final String[] existsQuery = {Contribution.Table.COLUMN_FILENAME};
     private static final String existsSelection = Contribution.Table.COLUMN_FILENAME + " = ?";
+
     private boolean fileExists(ContentProviderClient client, String filename) {
         Cursor cursor = null;
         try {
             cursor = client.query(ContributionsContentProvider.BASE_URI,
                     existsQuery,
                     existsSelection,
-                    new String[] { filename },
+                    new String[]{filename},
                     ""
             );
         } catch (RemoteException e) {
@@ -54,7 +56,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
         ApiResult result;
         Boolean done = false;
         String queryContinue = null;
-        while(!done) {
+        while (!done) {
 
             try {
                 MWApi.RequestBuilder builder = api.action("query")
@@ -63,10 +65,10 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                         .param("leprop", "title|timestamp")
                         .param("leuser", user)
                         .param("lelimit", getLimit());
-                if(!TextUtils.isEmpty(lastModified)) {
+                if (!TextUtils.isEmpty(lastModified)) {
                     builder.param("leend", lastModified);
                 }
-                if(!TextUtils.isEmpty(queryContinue)) {
+                if (!TextUtils.isEmpty(queryContinue)) {
                     builder.param("lestart", queryContinue);
                 }
                 result = builder.get();
@@ -82,9 +84,9 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
             ArrayList<ApiResult> uploads = result.getNodes("/api/query/logevents/item");
             Log.d("Commons", uploads.size() + " results!");
             ArrayList<ContentValues> imageValues = new ArrayList<ContentValues>();
-            for(ApiResult image: uploads) {
+            for (ApiResult image : uploads) {
                 String filename = image.getString("@title");
-                if(fileExists(contentProviderClient, filename)) {
+                if (fileExists(contentProviderClient, filename)) {
                     Log.d("Commons", "Skipping " + filename);
                     continue;
                 }
@@ -94,7 +96,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                 contrib.setState(Contribution.STATE_COMPLETED);
                 imageValues.add(contrib.toContentValues());
 
-                if(imageValues.size() % COMMIT_THRESHOLD == 0) {
+                if (imageValues.size() % COMMIT_THRESHOLD == 0) {
                     try {
                         contentProviderClient.bulkInsert(ContributionsContentProvider.BASE_URI, imageValues.toArray(new ContentValues[]{}));
                     } catch (RemoteException e) {
@@ -104,7 +106,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                 }
             }
 
-            if(imageValues.size() != 0) {
+            if (imageValues.size() != 0) {
                 try {
                     contentProviderClient.bulkInsert(ContributionsContentProvider.BASE_URI, imageValues.toArray(new ContentValues[]{}));
                 } catch (RemoteException e) {
@@ -112,7 +114,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                 }
             }
             queryContinue = result.getString("/api/query-continue/logevents/@lestart");
-            if(TextUtils.isEmpty(queryContinue)) {
+            if (TextUtils.isEmpty(queryContinue)) {
                 done = true;
             }
         }

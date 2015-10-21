@@ -37,14 +37,14 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
         }
 
         // Exit early if nothing to do
-        if(allModifications == null || allModifications.getCount() == 0) {
+        if (allModifications == null || allModifications.getCount() == 0) {
             Log.d("Commons", "No modifications to perform");
             return;
         }
 
         String authCookie;
         try {
-             authCookie = AccountManager.get(getContext()).blockingGetAuthToken(account, "", false);
+            authCookie = AccountManager.get(getContext()).blockingGetAuthToken(account, "", false);
         } catch (OperationCanceledException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
@@ -75,7 +75,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
         try {
             contributionsClient = getContext().getContentResolver().acquireContentProviderClient(ContributionsContentProvider.AUTHORITY);
 
-            while(!allModifications.isAfterLast()) {
+            while (!allModifications.isAfterLast()) {
                 ModifierSequence sequence = ModifierSequence.fromCursor(allModifications);
                 sequence.setContentProviderClient(contentProviderClient);
                 Contribution contrib;
@@ -89,7 +89,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                 contributionCursor.moveToFirst();
                 contrib = Contribution.fromCursor(contributionCursor);
 
-                if(contrib.getState() == Contribution.STATE_COMPLETED) {
+                if (contrib.getState() == Contribution.STATE_COMPLETED) {
 
                     try {
                         requestResult = api.action("query")
@@ -104,7 +104,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
 
                     Log.d("Commons", "Page content is " + Utils.getStringFromDOM(requestResult.getDocument()));
                     String pageContent = requestResult.getString("/api/query/pages/page/revisions/rev");
-                    String processedPageContent = sequence.executeModifications(contrib.getFilename(),  pageContent);
+                    String processedPageContent = sequence.executeModifications(contrib.getFilename(), pageContent);
 
                     try {
                         responseResult = api.action("edit")
@@ -121,7 +121,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                     Log.d("Commons", "Response is" + Utils.getStringFromDOM(responseResult.getDocument()));
 
                     String result = responseResult.getString("/api/edit/@result");
-                    if(!result.equals("Success")) {
+                    if (!result.equals("Success")) {
                         // FIXME: Log this somewhere else
                         Log.d("Commons", "Non success result!" + result);
                     } else {
@@ -132,7 +132,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
 
             }
         } finally {
-            if(contributionsClient != null) {
+            if (contributionsClient != null) {
                 contributionsClient.release();
             }
 

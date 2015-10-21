@@ -72,12 +72,12 @@ public class UploadService extends HandlerService<Contribution> {
         @Override
         public void onProgress(long transferred, long total) {
             Log.d("Commons", String.format("Uploaded %d of %d", transferred, total));
-            if(!notificationTitleChanged) {
+            if (!notificationTitleChanged) {
                 curProgressNotification.setContentTitle(notificationProgressTitle);
                 notificationTitleChanged = true;
                 contribution.setState(Contribution.STATE_IN_PROGRESS);
             }
-            if(transferred == total) {
+            if (transferred == total) {
                 // Completed!
                 curProgressNotification.setContentTitle(notificationFinishingTitle);
                 curProgressNotification.setProgress(0, 100, true);
@@ -110,7 +110,7 @@ public class UploadService extends HandlerService<Contribution> {
 
     @Override
     protected void handle(int what, Contribution contribution) {
-        switch(what) {
+        switch (what) {
             case ACTION_UPLOAD_FILE:
                 uploadContribution(contribution);
                 break;
@@ -148,14 +148,14 @@ public class UploadService extends HandlerService<Contribution> {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if(intent.getAction() == ACTION_START_SERVICE && freshStart) {
+        if (intent.getAction() == ACTION_START_SERVICE && freshStart) {
             ContentValues failedValues = new ContentValues();
             failedValues.put(Contribution.Table.COLUMN_STATE, Contribution.STATE_FAILED);
 
             int updated = getContentResolver().update(ContributionsContentProvider.BASE_URI,
                     failedValues,
                     Contribution.Table.COLUMN_STATE + " = ? OR " + Contribution.Table.COLUMN_STATE + " = ?",
-                    new String[]{ String.valueOf(Contribution.STATE_QUEUED), String.valueOf(Contribution.STATE_IN_PROGRESS) }
+                    new String[]{String.valueOf(Contribution.STATE_QUEUED), String.valueOf(Contribution.STATE_IN_PROGRESS)}
             );
             Log.d("Commons", "Set " + updated + " uploads to failed");
             Log.d("Commons", "Flags is" + flags + " id is" + startId);
@@ -175,7 +175,7 @@ public class UploadService extends HandlerService<Contribution> {
 
         try {
             file = this.getContentResolver().openInputStream(contribution.getLocalUri());
-        } catch(FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
 
@@ -195,9 +195,9 @@ public class UploadService extends HandlerService<Contribution> {
 
         try {
             String filename = findUniqueFilename(contribution.getFilename());
-            if(!api.validateLogin()) {
+            if (!api.validateLogin()) {
                 // Need to revalidate!
-                if(app.revalidateAuthToken()) {
+                if (app.revalidateAuthToken()) {
                     Log.d("Commons", "Successfully revalidated token!");
                 } else {
                     Log.d("Commons", "Unable to revalidate :(");
@@ -222,7 +222,7 @@ public class UploadService extends HandlerService<Contribution> {
 
 
             String resultStatus = result.getString("/api/upload/@result");
-            if(!resultStatus.equals("Success")) {
+            if (!resultStatus.equals("Success")) {
                 String errorCode = result.getString("/api/error/@code");
                 showFailedNotification(contribution);
                 fr.free.nrw.commons.EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT)
@@ -251,13 +251,13 @@ public class UploadService extends HandlerService<Contribution> {
                         .param("result", "success")
                         .log();
             }
-        } catch(IOException e) {
+        } catch (IOException e) {
             Log.d("Commons", "I have a network fuckup");
             showFailedNotification(contribution);
             return;
         } finally {
             toUpload--;
-            if(toUpload == 0) {
+            if (toUpload == 0) {
                 // Sync modifications right after all uplaods are processed
                 ContentResolver.requestSync(((CommonsApplication) getApplicationContext()).getCurrentAccount(), ModificationsContentProvider.AUTHORITY, new Bundle());
                 stopForeground(true);
@@ -285,7 +285,7 @@ public class UploadService extends HandlerService<Contribution> {
         return findUniqueFilename(fileName, 1);
     }
 
-    private String findUniqueFilename(String fileName, int sequenceNumber) throws IOException  {
+    private String findUniqueFilename(String fileName, int sequenceNumber) throws IOException {
         String sequenceFileName;
         if (sequenceNumber == 1) {
             sequenceFileName = fileName;

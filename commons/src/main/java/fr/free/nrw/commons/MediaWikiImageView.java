@@ -1,12 +1,12 @@
 /**
  * Copyright (C) 2013 The Android Open Source Project
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -85,29 +85,29 @@ public class MediaWikiImageView extends ImageView {
             return;
         }
 
-        if(mMedia == null) {
+        if (mMedia == null) {
             return;
         }
 
 
         // Do not count for density when loading thumbnails.
         // FIXME: Use another 'algorithm' that doesn't punish low res devices
-        if(isThumbnail) {
-            float dpFactor =  Math.max(getResources().getDisplayMetrics().density, 1.0f);
+        if (isThumbnail) {
+            float dpFactor = Math.max(getResources().getDisplayMetrics().density, 1.0f);
             width = (int) (width / dpFactor);
             height = (int) (height / dpFactor);
         }
 
-        final String  mUrl;
-        if(tryOriginal) {
+        final String mUrl;
+        if (tryOriginal) {
             mUrl = mMedia.getImageUrl();
         } else {
             // Round it to the nearest 320
             // Possible a similar size image has already been generated.
             // Reduces Server cache fragmentation, also increases chance of cache hit
             // If width is less than 320, we round up to 320
-            int bucketedWidth = width <= 320 ? 320 : Math.round((float)width / 320.0f) * 320;
-            if(mMedia.getWidth() != 0 && mMedia.getWidth() < bucketedWidth) {
+            int bucketedWidth = width <= 320 ? 320 : Math.round((float) width / 320.0f) * 320;
+            if (mMedia.getWidth() != 0 && mMedia.getWidth() < bucketedWidth) {
                 // If we know that the width of the image is lesser than the required width
                 // We don't even try to load the thumbnai, go directly to the source
                 loadImageIfNecessary(isInLayoutPass, true);
@@ -137,10 +137,10 @@ public class MediaWikiImageView extends ImageView {
             } else {
                 // if there is a pre-existing request, cancel it if it's fetching a different URL.
                 mImageContainer.cancelRequest();
-                BitmapDrawable actualDrawable = (BitmapDrawable)getDrawable();
-                if(actualDrawable != null && actualDrawable.getBitmap() != null) {
+                BitmapDrawable actualDrawable = (BitmapDrawable) getDrawable();
+                if (actualDrawable != null && actualDrawable.getBitmap() != null) {
                     setImageBitmap(null);
-                    if(loadingView != null) {
+                    if (loadingView != null) {
                         loadingView.setVisibility(View.VISIBLE);
                     }
                 }
@@ -153,7 +153,7 @@ public class MediaWikiImageView extends ImageView {
                 new ImageListener() {
                     @Override
                     public void onErrorResponse(final VolleyError error) {
-                        if(!tryOriginal) {
+                        if (!tryOriginal) {
                             post(new Runnable() {
                                 public void run() {
                                     loadImageIfNecessary(false, true);
@@ -181,14 +181,14 @@ public class MediaWikiImageView extends ImageView {
 
                         if (response.getBitmap() != null) {
                             setImageBitmap(response.getBitmap());
-                            if(tryOriginal && mMedia instanceof Contribution && (response.getBitmap().getWidth() > mMedia.getWidth() || response.getBitmap().getHeight() > mMedia.getHeight())) {
+                            if (tryOriginal && mMedia instanceof Contribution && (response.getBitmap().getWidth() > mMedia.getWidth() || response.getBitmap().getHeight() > mMedia.getHeight())) {
                                 // If there is no width information for this image, save it. This speeds up image loading massively for smaller images
                                 mMedia.setHeight(response.getBitmap().getHeight());
                                 mMedia.setWidth(response.getBitmap().getWidth());
-                                ((Contribution)mMedia).setContentProviderClient(MediaWikiImageView.this.getContext().getContentResolver().acquireContentProviderClient(ContributionsContentProvider.AUTHORITY));
-                                ((Contribution)mMedia).save();
+                                ((Contribution) mMedia).setContentProviderClient(MediaWikiImageView.this.getContext().getContentResolver().acquireContentProviderClient(ContributionsContentProvider.AUTHORITY));
+                                ((Contribution) mMedia).save();
                             }
-                            if(loadingView != null) {
+                            if (loadingView != null) {
                                 loadingView.setVisibility(View.GONE);
                             }
                         } else {

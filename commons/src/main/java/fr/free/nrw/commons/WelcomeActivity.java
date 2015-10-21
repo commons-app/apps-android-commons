@@ -14,7 +14,7 @@ public class WelcomeActivity extends Activity {
     static final int PAGE_WIKIPEDIA = 0,
             PAGE_COPYRIGHT = 1,
             PAGE_FINAL = 2;
-    static final int[] pageLayouts = new int[] {
+    static final int[] pageLayouts = new int[]{
             R.layout.welcome_wikipedia,
             R.layout.welcome_copyright,
             R.layout.welcome_final
@@ -28,7 +28,7 @@ public class WelcomeActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
-        pager = (ViewPager)findViewById(R.id.welcomePager);
+        pager = (ViewPager) findViewById(R.id.welcomePager);
         pager.setAdapter(new PagerAdapter() {
             @Override
             public int getCount() {
@@ -45,7 +45,7 @@ public class WelcomeActivity extends Activity {
                 View view = getLayoutInflater().inflate(pageLayouts[position], null);
                 container.addView(view);
                 if (position == PAGE_FINAL) {
-                    yesButton = (Button)view.findViewById(R.id.welcomeYesButton);
+                    yesButton = (Button) view.findViewById(R.id.welcomeYesButton);
                     yesButton.setOnClickListener(new View.OnClickListener() {
                         public void onClick(View view) {
                             finish();
@@ -58,11 +58,11 @@ public class WelcomeActivity extends Activity {
             @Override
             public void destroyItem(ViewGroup container, int position, Object obj) {
                 yesButton = null;
-                container.removeView((View)obj);
+                container.removeView((View) obj);
             }
         });
 
-        CirclePageIndicator indicator = (CirclePageIndicator)findViewById(R.id.welcomePagerIndicator);
+        CirclePageIndicator indicator = (CirclePageIndicator) findViewById(R.id.welcomePagerIndicator);
         indicator.setViewPager(pager);
     }
 }

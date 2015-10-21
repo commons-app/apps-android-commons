@@ -39,7 +39,7 @@ public class SingleUploadFragment extends SherlockFragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.activity_share, menu);
-        if(titleEdit != null) {
+        if (titleEdit != null) {
             menu.findItem(R.id.menu_upload_single).setEnabled(titleEdit.getText().length() != 0);
         }
     }
@@ -59,17 +59,19 @@ public class SingleUploadFragment extends SherlockFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_single_upload, null);
 
-        titleEdit = (EditText)rootView.findViewById(R.id.titleEdit);
-        descEdit = (EditText)rootView.findViewById(R.id.descEdit);
-        licenseSummaryView = (TextView)rootView.findViewById(R.id.share_license_summary);
+        titleEdit = (EditText) rootView.findViewById(R.id.titleEdit);
+        descEdit = (EditText) rootView.findViewById(R.id.descEdit);
+        licenseSummaryView = (TextView) rootView.findViewById(R.id.share_license_summary);
 
         TextWatcher uploadEnabler = new TextWatcher() {
-            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) { }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+            }
 
-            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {}
+            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+            }
 
             public void afterTextChanged(Editable editable) {
-                if(getSherlockActivity() != null) {
+                if (getSherlockActivity() != null) {
                     getSherlockActivity().invalidateOptionsMenu();
                 }
             }

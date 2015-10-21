@@ -64,7 +64,7 @@ public class MultipleUploadListFragment extends SherlockFragment {
         public View getView(int i, View view, ViewGroup viewGroup) {
             UploadHolderView holder;
 
-            if(view == null) {
+            if (view == null) {
                 view = getLayoutInflater(null).inflate(R.layout.layout_upload_item, null);
                 holder = new UploadHolderView();
                 holder.image = (ImageView) view.findViewById(R.id.uploadImage);
@@ -75,18 +75,18 @@ public class MultipleUploadListFragment extends SherlockFragment {
 
                 view.setTag(holder);
             } else {
-                holder = (UploadHolderView)view.getTag();
+                holder = (UploadHolderView) view.getTag();
             }
 
 
-            Contribution up = (Contribution)this.getItem(i);
+            Contribution up = (Contribution) this.getItem(i);
 
-            if(holder.imageUri == null || !holder.imageUri.equals(up.getLocalUri())) {
+            if (holder.imageUri == null || !holder.imageUri.equals(up.getLocalUri())) {
                 ImageLoader.getInstance().displayImage(up.getLocalUri().toString(), holder.image, uploadDisplayOptions);
                 holder.imageUri = up.getLocalUri();
             }
 
-            if(!imageOnlyMode) {
+            if (!imageOnlyMode) {
                 holder.overlay.setVisibility(View.VISIBLE);
                 holder.title.setText(up.getFilename());
             } else {
@@ -117,21 +117,21 @@ public class MultipleUploadListFragment extends SherlockFragment {
         int screenHeight = screenMetrics.heightPixels;
 
         int picWidth = Math.min((int) Math.sqrt(screenWidth * screenHeight / count), screenWidth);
-        picWidth = Math.min((int)(192 * screenMetrics.density), Math.max((int) (120  * screenMetrics.density), picWidth / 48 * 48));
-        int picHeight = Math.min(picWidth, (int)(192 * screenMetrics.density)); // Max Height is same as Contributions list
+        picWidth = Math.min((int) (192 * screenMetrics.density), Math.max((int) (120 * screenMetrics.density), picWidth / 48 * 48));
+        int picHeight = Math.min(picWidth, (int) (192 * screenMetrics.density)); // Max Height is same as Contributions list
         return new Point(picWidth, picHeight);
 
     }
 
     public void notifyDatasetChanged() {
-        if(photosAdapter != null) {
+        if (photosAdapter != null) {
             photosAdapter.notifyDataSetChanged();
         }
     }
 
     public void setImageOnlyMode(boolean mode) {
         imageOnlyMode = mode;
-        if(imageOnlyMode) {
+        if (imageOnlyMode) {
             baseTitle.setVisibility(View.GONE);
         } else {
             baseTitle.setVisibility(View.VISIBLE);
@@ -143,13 +143,13 @@ public class MultipleUploadListFragment extends SherlockFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_multiple_uploads_list, null);
-        photosGrid = (GridView)view.findViewById(R.id.multipleShareBackground);
-        baseTitle = (EditText)view.findViewById(R.id.multipleBaseTitle);
+        photosGrid = (GridView) view.findViewById(R.id.multipleShareBackground);
+        baseTitle = (EditText) view.findViewById(R.id.multipleBaseTitle);
 
 
         photosAdapter = new PhotoDisplayAdapter();
         photosGrid.setAdapter(photosAdapter);
-        photosGrid.setOnItemClickListener((AdapterView.OnItemClickListener)getActivity());
+        photosGrid.setOnItemClickListener((AdapterView.OnItemClickListener) getActivity());
         photoSize = calculatePicDimension(detailProvider.getTotalMediaCount());
         photosGrid.setColumnWidth(photoSize.x);
 
@@ -159,12 +159,12 @@ public class MultipleUploadListFragment extends SherlockFragment {
             }
 
             public void onTextChanged(CharSequence charSequence, int i1, int i2, int i3) {
-                for(int i = 0; i < detailProvider.getTotalMediaCount(); i++) {
+                for (int i = 0; i < detailProvider.getTotalMediaCount(); i++) {
                     Contribution up = (Contribution) detailProvider.getMediaAtPosition(i);
-                    Boolean isDirty = (Boolean)up.getTag("isDirty");
-                    if(isDirty == null || !isDirty) {
-                        if(!TextUtils.isEmpty(charSequence)) {
-                            up.setFilename(charSequence.toString() + " - " + ((Integer)up.getTag("sequence") + 1));
+                    Boolean isDirty = (Boolean) up.getTag("isDirty");
+                    if (isDirty == null || !isDirty) {
+                        if (!TextUtils.isEmpty(charSequence)) {
+                            up.setFilename(charSequence.toString() + " - " + ((Integer) up.getTag("sequence") + 1));
                         } else {
                             up.setFilename("");
                         }
@@ -191,7 +191,7 @@ public class MultipleUploadListFragment extends SherlockFragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.menu_upload_multiple:
                 multipleUploadInitiatedHandler.OnMultipleUploadInitiated();
                 return true;
@@ -204,7 +204,7 @@ public class MultipleUploadListFragment extends SherlockFragment {
         super.onCreate(savedInstanceState);
 
         uploadDisplayOptions = Utils.getGenericDisplayOptions().build();
-        detailProvider = (MediaDetailPagerFragment.MediaDetailProvider)getActivity();
+        detailProvider = (MediaDetailPagerFragment.MediaDetailProvider) getActivity();
         multipleUploadInitiatedHandler = (OnMultipleUploadInitiatedHandler) getActivity();
 
         setHasOptionsMenu(true);

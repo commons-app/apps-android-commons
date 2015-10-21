@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
-public class CategorizationFragment extends SherlockFragment{
+public class CategorizationFragment extends SherlockFragment {
     public static interface OnCategoriesSaveHandler {
         public void onCategoriesSave(ArrayList<String> categories);
     }
@@ -86,6 +86,7 @@ public class CategorizationFragment extends SherlockFragment{
     private class CategoriesUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
 
         private String filter;
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -101,14 +102,14 @@ public class CategorizationFragment extends SherlockFragment{
             super.onPostExecute(categories);
             ArrayList<CategoryItem> items = new ArrayList<CategoryItem>();
             HashSet<String> existingKeys = new HashSet<String>();
-            for(CategoryItem item : categoriesAdapter.getItems()) {
-                if(item.selected) {
+            for (CategoryItem item : categoriesAdapter.getItems()) {
+                if (item.selected) {
                     items.add(item);
                     existingKeys.add(item.name);
                 }
             }
-            for(String category : categories) {
-                if(!existingKeys.contains(category)) {
+            for (String category : categories) {
+                if (!existingKeys.contains(category)) {
                     items.add(new CategoryItem(category, false));
                 }
             }
@@ -116,7 +117,7 @@ public class CategorizationFragment extends SherlockFragment{
             categoriesAdapter.notifyDataSetInvalidated();
             categoriesSearchInProgress.setVisibility(View.GONE);
             if (categories.size() == 0) {
-                if(TextUtils.isEmpty(filter)) {
+                if (TextUtils.isEmpty(filter)) {
                     // If we found no recent cats, show the skip message!
                     categoriesSkip.setVisibility(View.VISIBLE);
                 } else {
@@ -130,7 +131,7 @@ public class CategorizationFragment extends SherlockFragment{
 
         @Override
         protected ArrayList<String> doInBackground(Void... voids) {
-            if(TextUtils.isEmpty(filter)) {
+            if (TextUtils.isEmpty(filter)) {
                 ArrayList<String> items = new ArrayList<String>();
                 try {
                     Cursor cursor = client.query(
@@ -150,7 +151,7 @@ public class CategorizationFragment extends SherlockFragment{
                 }
                 return items;
             }
-            if(categoriesCache.containsKey(filter)) {
+            if (categoriesCache.containsKey(filter)) {
                 return categoriesCache.get(filter);
             }
             MWApi api = CommonsApplication.createMWApi();
@@ -167,7 +168,7 @@ public class CategorizationFragment extends SherlockFragment{
             }
 
             ArrayList<ApiResult> categoryNodes = result.getNodes("/api/query/allcategories/c");
-            for(ApiResult categoryNode: categoryNodes) {
+            for (ApiResult categoryNode : categoryNodes) {
                 categories.add(categoryNode.getDocument().getTextContent());
             }
 
@@ -210,7 +211,7 @@ public class CategorizationFragment extends SherlockFragment{
         public View getView(int i, View view, ViewGroup viewGroup) {
             CheckedTextView checkedView;
 
-            if(view == null) {
+            if (view == null) {
                 checkedView = (CheckedTextView) getSherlockActivity().getLayoutInflater().inflate(R.layout.layout_categories_item, null);
 
             } else {
@@ -228,8 +229,8 @@ public class CategorizationFragment extends SherlockFragment{
 
     public int getCurrentSelectedCount() {
         int count = 0;
-        for(CategoryItem item: categoriesAdapter.getItems()) {
-            if(item.selected) {
+        for (CategoryItem item : categoriesAdapter.getItems()) {
+            if (item.selected) {
                 count++;
             }
         }
@@ -242,7 +243,7 @@ public class CategorizationFragment extends SherlockFragment{
                     CategoryContentProvider.BASE_URI,
                     Category.Table.ALL_FIELDS,
                     Category.Table.COLUMN_NAME + "=?",
-                    new String[] {name},
+                    new String[]{name},
                     null);
             if (cursor.moveToFirst()) {
                 Category cat = Category.fromCursor(cursor);
@@ -302,7 +303,7 @@ public class CategorizationFragment extends SherlockFragment{
         });
 
         ArrayList<CategoryItem> items;
-        if(savedInstanceState == null) {
+        if (savedInstanceState == null) {
             items = new ArrayList<CategoryItem>();
             categoriesCache = new HashMap<String, ArrayList<String>>();
         } else {
@@ -380,11 +381,11 @@ public class CategorizationFragment extends SherlockFragment{
 
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
-        switch(menuItem.getItemId()) {
+        switch (menuItem.getItemId()) {
             case R.id.menu_save_categories:
                 ArrayList<String> selectedCategories = new ArrayList<String>();
-                for(CategoryItem item: categoriesAdapter.getItems()) {
-                    if(item.selected) {
+                for (CategoryItem item : categoriesAdapter.getItems()) {
+                    if (item.selected) {
                         selectedCategories.add(item.name);
                     }
                 }

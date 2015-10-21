@@ -4,11 +4,10 @@ import android.content.*;
 import android.database.sqlite.*;
 
 import fr.free.nrw.commons.modifications.ModifierSequence;
-import fr.free.nrw.commons.campaigns.Campaign;
 import fr.free.nrw.commons.category.Category;
 import fr.free.nrw.commons.contributions.*;
 
-public class DBOpenHelper  extends SQLiteOpenHelper{
+public class DBOpenHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "commons.db";
     private static final int DATABASE_VERSION = 6;
@@ -22,7 +21,6 @@ public class DBOpenHelper  extends SQLiteOpenHelper{
         Contribution.Table.onCreate(sqLiteDatabase);
         ModifierSequence.Table.onCreate(sqLiteDatabase);
         Category.Table.onCreate(sqLiteDatabase);
-        Campaign.Table.onCreate(sqLiteDatabase);
     }
 
     @Override
@@ -30,6 +28,5 @@ public class DBOpenHelper  extends SQLiteOpenHelper{
         Contribution.Table.onUpdate(sqLiteDatabase, from, to);
         ModifierSequence.Table.onUpdate(sqLiteDatabase, from, to);
         Category.Table.onUpdate(sqLiteDatabase, from, to);
-        Campaign.Table.onUpdate(sqLiteDatabase, from, to);
     }
 }

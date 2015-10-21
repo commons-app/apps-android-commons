@@ -16,7 +16,7 @@ public abstract class HandlerService<T> extends Service {
 
         @Override
         public void handleMessage(Message msg) {
-            handle(msg.what, (T)msg.obj);
+            handle(msg.what, (T) msg.obj);
             stopSelf(msg.arg1);
         }
     }
@@ -35,6 +35,7 @@ public abstract class HandlerService<T> extends Service {
     }
 
     private final IBinder localBinder = new HandlerServiceLocalBinder();
+
     @Override
     public IBinder onBind(Intent intent) {
         return localBinder;

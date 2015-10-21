@@ -68,7 +68,7 @@ public class Contribution extends Media {
 
     public Contribution(Parcel in) {
         super(in);
-        contentUri = (Uri)in.readParcelable(Uri.class.getClassLoader());
+        contentUri = (Uri) in.readParcelable(Uri.class.getClassLoader());
         source = in.readString();
         timestamp = (Date) in.readSerializable();
         state = in.readInt();
@@ -125,21 +125,21 @@ public class Contribution extends Media {
         StringBuffer buffer = new StringBuffer();
         SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd");
         buffer
-            .append("== {{int:filedesc}} ==\n")
+                .append("== {{int:filedesc}} ==\n")
                 .append("{{Information\n")
-                    .append("|description=").append(getDescription()).append("\n")
-                    .append("|source=").append("{{own}}\n")
-                    .append("|author=[[User:").append(creator).append("|").append(creator).append("]]\n");
-        if(dateCreated != null) {
+                .append("|description=").append(getDescription()).append("\n")
+                .append("|source=").append("{{own}}\n")
+                .append("|author=[[User:").append(creator).append("|").append(creator).append("]]\n");
+        if (dateCreated != null) {
             buffer
                     .append("|date={{According to EXIF data|").append(isoFormat.format(dateCreated)).append("}}\n");
         }
         buffer
                 .append("}}").append("\n")
-            .append("== {{int:license-header}} ==\n")
+                .append("== {{int:license-header}} ==\n")
                 .append(Utils.licenseTemplateFor(getLicense())).append("\n\n")
-            .append("{{Uploaded from Mobile|platform=Android|version=").append(CommonsApplication.APPLICATION_VERSION).append("}}\n")
-            .append(getTrackingTemplates());
+                .append("{{Uploaded from Mobile|platform=Android|version=").append(CommonsApplication.APPLICATION_VERSION).append("}}\n")
+                .append(getTrackingTemplates());
         return buffer.toString();
     }
 
@@ -149,19 +149,19 @@ public class Contribution extends Media {
 
     public void save() {
         try {
-            if(contentUri == null) {
+            if (contentUri == null) {
                 contentUri = client.insert(ContributionsContentProvider.BASE_URI, this.toContentValues());
             } else {
                 client.update(contentUri, toContentValues(), null, null);
             }
-        } catch(RemoteException e) {
+        } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
     }
 
     public void delete() {
         try {
-            if(contentUri == null) {
+            if (contentUri == null) {
                 // noooo
                 throw new RuntimeException("tried to delete item with no content URI");
             } else {
@@ -176,20 +176,20 @@ public class Contribution extends Media {
     public ContentValues toContentValues() {
         ContentValues cv = new ContentValues();
         cv.put(Table.COLUMN_FILENAME, getFilename());
-        if(getLocalUri() != null) {
+        if (getLocalUri() != null) {
             cv.put(Table.COLUMN_LOCAL_URI, getLocalUri().toString());
         }
-        if(getImageUrl() != null) {
+        if (getImageUrl() != null) {
             cv.put(Table.COLUMN_IMAGE_URL, getImageUrl().toString());
         }
-        if(getDateUploaded() != null) {
+        if (getDateUploaded() != null) {
             cv.put(Table.COLUMN_UPLOADED, getDateUploaded().getTime());
         }
         cv.put(Table.COLUMN_LENGTH, getDataLength());
         cv.put(Table.COLUMN_TIMESTAMP, getTimestamp().getTime());
         cv.put(Table.COLUMN_STATE, getState());
         cv.put(Table.COLUMN_TRANSFERRED, transferred);
-        cv.put(Table.COLUMN_SOURCE,  source);
+        cv.put(Table.COLUMN_SOURCE, source);
         cv.put(Table.COLUMN_DESCRIPTION, description);
         cv.put(Table.COLUMN_CREATOR, creator);
         cv.put(Table.COLUMN_MULTIPLE, isMultiple ? 1 : 0);
@@ -222,7 +222,7 @@ public class Contribution extends Media {
         c.timestamp = cursor.getLong(4) == 0 ? null : new Date(cursor.getLong(4));
         c.state = cursor.getInt(5);
         c.dataLength = cursor.getLong(6);
-        c.dateUploaded =  cursor.getLong(7) == 0 ? null : new Date(cursor.getLong(7));
+        c.dateUploaded = cursor.getLong(7) == 0 ? null : new Date(cursor.getLong(7));
         c.transferred = cursor.getLong(8);
         c.source = cursor.getString(9);
         c.description = cursor.getString(10);
@@ -306,7 +306,7 @@ public class Contribution extends Media {
                 + "width INTEGER,"
                 + "height INTEGER,"
                 + "LICENSE STRING"
-        + ");";
+                + ");";
 
 
         public static void onCreate(SQLiteDatabase db) {
@@ -314,36 +314,36 @@ public class Contribution extends Media {
         }
 
         public static void onUpdate(SQLiteDatabase db, int from, int to) {
-            if(from == to) {
+            if (from == to) {
                 return;
             }
-            if(from == 1) {
+            if (from == 1) {
                 db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN description STRING;");
                 db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN creator STRING;");
                 from++;
                 onUpdate(db, from, to);
                 return;
             }
-            if(from == 2) {
+            if (from == 2) {
                 db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN multiple INTEGER;");
                 db.execSQL("UPDATE " + TABLE_NAME + " SET multiple = 0");
                 from++;
                 onUpdate(db, from, to);
                 return;
             }
-            if(from == 3) {
+            if (from == 3) {
                 // Do nothing
                 from++;
                 onUpdate(db, from, to);
                 return;
             }
-            if(from == 4) {
+            if (from == 4) {
                 // Do nothing -- added Category
                 from++;
                 onUpdate(db, from, to);
                 return;
             }
-            if(from == 5) {
+            if (from == 5) {
                 // Added width and height fields
                 db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN width INTEGER;");
                 db.execSQL("UPDATE " + TABLE_NAME + " SET width = 0");

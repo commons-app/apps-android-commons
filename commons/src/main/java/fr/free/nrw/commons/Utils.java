@@ -72,8 +72,7 @@ public class Utils {
                                             T... params) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
-        }
-        else {
+        } else {
             task.execute(params);
         }
     }
@@ -83,16 +82,16 @@ public class Utils {
         // FIXME: We're simply ignoring the executor on older androids
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             task.executeOnExecutor(executor, params);
-        }
-        else {
+        } else {
             task.execute(params);
         }
     }
 
 
     private static DisplayImageOptions.Builder defaultImageOptionsBuilder;
+
     public static DisplayImageOptions.Builder getGenericDisplayOptions() {
-        if(defaultImageOptionsBuilder == null) {
+        if (defaultImageOptionsBuilder == null) {
             defaultImageOptionsBuilder = new DisplayImageOptions.Builder().cacheInMemory()
                     .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
@@ -122,7 +121,7 @@ public class Utils {
     public static long countBytes(InputStream stream) throws IOException {
         long count = 0;
         BufferedInputStream bis = new BufferedInputStream(stream);
-        while(bis.read() != -1) {
+        while (bis.read() != -1) {
             count++;
         }
         return count;
@@ -132,7 +131,7 @@ public class Utils {
         // Ugly Hack!
         // Update: OH DEAR GOD WHAT A HORRIBLE HACK I AM SO SORRY
         String thumbUrl = imageUrl.replaceFirst("test/", "test/thumb/").replace("commons/", "commons/thumb/") + "/" + width + "px-" + filename.replaceAll("File:", "").replaceAll(" ", "_");
-        if(thumbUrl.endsWith("jpg") || thumbUrl.endsWith("png") || thumbUrl.endsWith("jpeg")) {
+        if (thumbUrl.endsWith("jpg") || thumbUrl.endsWith("png") || thumbUrl.endsWith("jpeg")) {
             return thumbUrl;
         } else {
             return thumbUrl + ".png";
@@ -140,37 +139,37 @@ public class Utils {
     }
 
     public static String capitalize(String string) {
-        return string.substring(0,1).toUpperCase() + string.substring(1);
+        return string.substring(0, 1).toUpperCase() + string.substring(1);
     }
 
     public static String licenseTemplateFor(String license) {
-        if(license.equals(Prefs.Licenses.CC_BY)) {
+        if (license.equals(Prefs.Licenses.CC_BY)) {
             return "{{self|cc-by-3.0}}";
-        } else if(license.equals(Prefs.Licenses.CC_BY_SA)) {
+        } else if (license.equals(Prefs.Licenses.CC_BY_SA)) {
             return "{{self|cc-by-sa-3.0}}";
-        } else if(license.equals(Prefs.Licenses.CC0)) {
+        } else if (license.equals(Prefs.Licenses.CC0)) {
             return "{{self|cc-zero}}";
         }
         throw new RuntimeException("Unrecognized license value");
     }
 
     public static int licenseNameFor(String license) {
-        if(license.equals(Prefs.Licenses.CC_BY)) {
+        if (license.equals(Prefs.Licenses.CC_BY)) {
             return R.string.license_name_cc_by;
-        } else if(license.equals(Prefs.Licenses.CC_BY_SA)) {
+        } else if (license.equals(Prefs.Licenses.CC_BY_SA)) {
             return R.string.license_name_cc_by_sa;
-        } else if(license.equals(Prefs.Licenses.CC0)) {
+        } else if (license.equals(Prefs.Licenses.CC0)) {
             return R.string.license_name_cc0;
         }
         throw new RuntimeException("Unrecognized license value");
     }
 
     public static String licenseUrlFor(String license) {
-        if(license.equals(Prefs.Licenses.CC_BY)) {
+        if (license.equals(Prefs.Licenses.CC_BY)) {
             return "https://creativecommons.org/licenses/by/3.0/";
-        } else if(license.equals(Prefs.Licenses.CC_BY_SA)) {
+        } else if (license.equals(Prefs.Licenses.CC_BY_SA)) {
             return "https://creativecommons.org/licenses/by-sa/3.0/";
-        } else if(license.equals(Prefs.Licenses.CC0)) {
+        } else if (license.equals(Prefs.Licenses.CC0)) {
             return "https://creativecommons.org/publicdomain/zero/1.0/";
         }
         throw new RuntimeException("Unrecognized license value");

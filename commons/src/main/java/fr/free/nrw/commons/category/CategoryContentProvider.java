@@ -24,6 +24,7 @@ public class CategoryContentProvider extends ContentProvider {
     public static final Uri BASE_URI = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH);
 
     private static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+
     static {
         uriMatcher.addURI(AUTHORITY, BASE_PATH, CATEGORIES);
         uriMatcher.addURI(AUTHORITY, BASE_PATH + "/#", CATEGORIES_ID);
@@ -35,9 +36,10 @@ public class CategoryContentProvider extends ContentProvider {
     }
 
     private DBOpenHelper dbOpenHelper;
+
     @Override
     public boolean onCreate() {
-        dbOpenHelper = ((CommonsApplication)this.getContext().getApplicationContext()).getDbOpenHelper();
+        dbOpenHelper = ((CommonsApplication) this.getContext().getApplicationContext()).getDbOpenHelper();
         return false;
     }
 
@@ -51,7 +53,7 @@ public class CategoryContentProvider extends ContentProvider {
         SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
         Cursor cursor;
 
-        switch(uriType) {
+        switch (uriType) {
             case CATEGORIES:
                 cursor = queryBuilder.query(db, projection, selection, selectionArgs, null, null, sortOrder);
                 break;
@@ -59,7 +61,7 @@ public class CategoryContentProvider extends ContentProvider {
                 cursor = queryBuilder.query(db,
                         Category.Table.ALL_FIELDS,
                         "_id = ?",
-                        new String[] { uri.getLastPathSegment() },
+                        new String[]{uri.getLastPathSegment()},
                         null,
                         null,
                         sortOrder
@@ -108,7 +110,7 @@ public class CategoryContentProvider extends ContentProvider {
         sqlDB.beginTransaction();
         switch (uriType) {
             case CATEGORIES:
-                for(ContentValues value: values) {
+                for (ContentValues value : values) {
                     Log.d("Commons", "Inserting! " + value.toString());
                     sqlDB.insert(Category.Table.TABLE_NAME, null, value);
                 }
@@ -142,7 +144,7 @@ public class CategoryContentProvider extends ContentProvider {
                     rowsUpdated = sqlDB.update(Category.Table.TABLE_NAME,
                             contentValues,
                             Category.Table.COLUMN_ID + " = ?",
-                            new String[] { String.valueOf(id) } );
+                            new String[]{String.valueOf(id)});
                 } else {
                     throw new IllegalArgumentException("Parameter `selection` should be empty when updating an ID");
                 }

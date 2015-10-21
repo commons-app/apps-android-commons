@@ -10,7 +10,7 @@ import android.util.Log;
 import com.actionbarsherlock.app.SherlockFragment;
 import fr.free.nrw.commons.upload.ShareActivity;
 import fr.free.nrw.commons.upload.UploadService;
-import fr.free.nrw.commons.campaigns.Campaign;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -19,15 +19,15 @@ import java.util.Date;
 public class ContributionController {
     private SherlockFragment fragment;
     private Activity activity;
-    private Campaign campaign;
+
 
     private final static int SELECT_FROM_GALLERY = 1;
     private final static int SELECT_FROM_CAMERA = 2;
 
-    public ContributionController(SherlockFragment fragment, Campaign campaign) {
+    public ContributionController(SherlockFragment fragment) {
         this.fragment = fragment;
         this.activity = fragment.getActivity();
-        this.campaign = campaign;
+
     }
 
     // See http://stackoverflow.com/a/5054673/17865 for why this is done
@@ -35,12 +35,12 @@ public class ContributionController {
 
     private Uri reGenerateImageCaptureURI() {
         String storageState = Environment.getExternalStorageState();
-        if(storageState.equals(Environment.MEDIA_MOUNTED)) {
+        if (storageState.equals(Environment.MEDIA_MOUNTED)) {
 
             String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Commons/images/" + new Date().getTime() + ".jpg";
             File _photoFile = new File(path);
             try {
-                if(_photoFile.exists() == false) {
+                if (_photoFile.exists() == false) {
                     _photoFile.getParentFile().mkdirs();
                     _photoFile.createNewFile();
                 }
@@ -50,7 +50,7 @@ public class ContributionController {
             }
 
             return Uri.fromFile(_photoFile);
-        }   else {
+        } else {
             throw new RuntimeException("No external storage found!");
         }
     }
@@ -71,8 +71,7 @@ public class ContributionController {
     public void handleImagePicked(int requestCode, Intent data) {
         Intent shareIntent = new Intent(activity, ShareActivity.class);
         shareIntent.setAction(Intent.ACTION_SEND);
-        shareIntent.putExtra(UploadService.EXTRA_CAMPAIGN, campaign);
-        switch(requestCode) {
+        switch (requestCode) {
             case SELECT_FROM_GALLERY:
                 shareIntent.setType(activity.getContentResolver().getType(data.getData()));
                 shareIntent.putExtra(Intent.EXTRA_STREAM, data.getData());
@@ -89,13 +88,11 @@ public class ContributionController {
 
     public void saveState(Bundle outState) {
         outState.putParcelable("lastGeneratedCaptureURI", lastGeneratedCaptureURI);
-        outState.putSerializable("campaign", campaign);
     }
 
     public void loadState(Bundle savedInstanceState) {
-        if(savedInstanceState != null) {
+        if (savedInstanceState != null) {
             lastGeneratedCaptureURI = (Uri) savedInstanceState.getParcelable("lastGeneratedCaptureURI");
-            campaign = (Campaign) savedInstanceState.getSerializable("campaign");
         }
     }
 

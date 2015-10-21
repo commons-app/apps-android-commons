@@ -28,12 +28,12 @@ public class Category {
 
     public Date getLastUsed() {
         // warning: Date objects are mutable.
-        return (Date)lastUsed.clone();
+        return (Date) lastUsed.clone();
     }
 
     public void setLastUsed(Date lastUsed) {
         // warning: Date objects are mutable.
-        this.lastUsed = (Date)lastUsed.clone();
+        this.lastUsed = (Date) lastUsed.clone();
     }
 
     public void touch() {
@@ -60,12 +60,12 @@ public class Category {
 
     public void save() {
         try {
-            if(contentUri == null) {
+            if (contentUri == null) {
                 contentUri = client.insert(CategoryContentProvider.BASE_URI, this.toContentValues());
             } else {
                 client.update(contentUri, toContentValues(), null, null);
             }
-        } catch(RemoteException e) {
+        } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
     }
@@ -118,23 +118,23 @@ public class Category {
         }
 
         public static void onUpdate(SQLiteDatabase db, int from, int to) {
-            if(from == to) {
+            if (from == to) {
                 return;
             }
-            if(from < 4) {
+            if (from < 4) {
                 // doesn't exist yet
                 from++;
                 onUpdate(db, from, to);
                 return;
             }
-            if(from == 4) {
+            if (from == 4) {
                 // table added in version 5
                 onCreate(db);
                 from++;
                 onUpdate(db, from, to);
                 return;
             }
-            if(from == 5) {
+            if (from == 5) {
                 from++;
                 onUpdate(db, from, to);
                 return;

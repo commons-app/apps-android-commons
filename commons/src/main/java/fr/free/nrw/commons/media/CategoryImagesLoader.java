@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryImagesLoader extends AsyncTaskLoader<List<Media>>{
+public class CategoryImagesLoader extends AsyncTaskLoader<List<Media>> {
     private final CommonsApplication app;
     private final String category;
 
@@ -49,7 +49,7 @@ public class CategoryImagesLoader extends AsyncTaskLoader<List<Media>>{
         Log.d("Commons", Utils.getStringFromDOM(result.getDocument()));
 
         List<ApiResult> members = result.getNodes("/api/query/categorymembers/cm");
-        for(ApiResult member : members) {
+        for (ApiResult member : members) {
             mediaList.add(new Media(member.getString("@title")));
         }
         return mediaList;
