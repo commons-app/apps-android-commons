@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 
 /**
  * Fetch additional media data from the network that we don't store locally.
- * <p>
+ *
  * This includes things like category lists and multilingual descriptions,
  * which are not intrinsic to the media and may change due to editing.
  */
@@ -51,7 +51,7 @@ public class MediaDataExtractor {
     /**
      * Actually fetch the data over the network.
      * todo: use local caching?
-     * <p>
+     *
      * Warning: synchronous i/o, call on a background thread
      */
     public void fetch() throws IOException {
@@ -156,7 +156,7 @@ public class MediaDataExtractor {
     }
 
     private Node findTemplate(Element parentNode, String title) throws IOException {
-        String ucTitle = Utils.capitalize(title);
+        String ucTitle= Utils.capitalize(title);
         NodeList nodes = parentNode.getChildNodes();
         for (int i = 0, length = nodes.getLength(); i < length; i++) {
             Node node = nodes.item(i);
@@ -200,7 +200,7 @@ public class MediaDataExtractor {
         return findTemplateParameter(templateNode, new TemplateChildNodeComparator() {
             @Override
             public boolean match(Node node) {
-                Element el = (Element) node;
+                Element el = (Element)node;
                 if (el.getTextContent().trim().equals(theIndex)) {
                     return true;
                 } else if (el.getAttribute("index") != null && el.getAttribute("index").trim().equals(theIndex)) {
@@ -278,7 +278,6 @@ public class MediaDataExtractor {
     /**
      * Take our metadata and inject it into a live Media object.
      * Media object might contain stale or cached data, or emptiness.
-     *
      * @param media
      */
     public void fill(Media media) {

@@ -64,7 +64,7 @@ public class MediaDetailFragment extends SherlockFragment {
     private ViewTreeObserver.OnGlobalLayoutListener layoutListener; // for layout stuff, only used once!
     private ViewTreeObserver.OnScrollChangedListener scrollListener;
     DataSetObserver dataObserver;
-    private AsyncTask<Void, Void, Boolean> detailFetchTask;
+    private AsyncTask<Void,Void,Boolean> detailFetchTask;
     private LicenseList licenseList;
 
 
@@ -84,9 +84,9 @@ public class MediaDetailFragment extends SherlockFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        detailProvider = (MediaDetailPagerFragment.MediaDetailProvider) getActivity();
+        detailProvider = (MediaDetailPagerFragment.MediaDetailProvider)getActivity();
 
-        if (savedInstanceState != null) {
+        if(savedInstanceState != null) {
             editable = savedInstanceState.getBoolean("editable");
             index = savedInstanceState.getInt("index");
             initialListTop = savedInstanceState.getInt("listTop");
@@ -169,9 +169,9 @@ public class MediaDetailFragment extends SherlockFragment {
 
     private void displayMediaDetails(final Media media) {
         String actualUrl = (media.getLocalUri() != null && !TextUtils.isEmpty(media.getLocalUri().toString())) ? media.getLocalUri().toString() : media.getThumbnailUrl(640);
-        if (actualUrl.startsWith("http")) {
-            ImageLoader loader = ((CommonsApplication) getActivity().getApplicationContext()).getImageLoader();
-            MediaWikiImageView mwImage = (MediaWikiImageView) image;
+        if(actualUrl.startsWith("http")) {
+            ImageLoader loader = ((CommonsApplication)getActivity().getApplicationContext()).getImageLoader();
+            MediaWikiImageView mwImage = (MediaWikiImageView)image;
             mwImage.setLoadingView(loadingProgress); //FIXME: Set this as an attribute
             mwImage.setMedia(media, loader);
             Log.d("Volley", actualUrl);
@@ -241,7 +241,7 @@ public class MediaDetailFragment extends SherlockFragment {
                     loadingProgress.setVisibility(View.GONE);
                     loadingFailed.setVisibility(View.GONE);
                     image.setVisibility(View.VISIBLE);
-                    if (bitmap.hasAlpha()) {
+                    if(bitmap.hasAlpha()) {
                         image.setBackgroundResource(android.R.color.white);
                     }
                 }
@@ -276,7 +276,7 @@ public class MediaDetailFragment extends SherlockFragment {
         }
         if (scrollListener != null) {
             getView().getViewTreeObserver().removeOnScrollChangedListener(scrollListener);
-            scrollListener = null;
+            scrollListener  = null;
         }
         if (dataObserver != null) {
             detailProvider.unregisterDataSetObserver(dataObserver);
@@ -296,7 +296,7 @@ public class MediaDetailFragment extends SherlockFragment {
     private View buildCatLabel(String cat) {
         final String catName = cat;
         final View item = getLayoutInflater(null).inflate(R.layout.detail_category_item, null, false);
-        final TextView textView = (TextView) item.findViewById(R.id.mediaDetailCategoryItemText);
+        final TextView textView = (TextView)item.findViewById(R.id.mediaDetailCategoryItemText);
 
         textView.setText(cat);
         if (categoriesLoaded && categoriesPresent) {
@@ -317,7 +317,7 @@ public class MediaDetailFragment extends SherlockFragment {
         // You must face the darkness alone
         int scrollY = scrollView.getScrollY();
         int scrollMax = getView().getHeight();
-        float scrollPercentage = (float) scrollY / (float) scrollMax;
+        float scrollPercentage = (float)scrollY / (float)scrollMax;
         final float transparencyMax = 0.75f;
         if (scrollPercentage > transparencyMax) {
             scrollPercentage = transparencyMax;

@@ -7,7 +7,6 @@ import android.util.*;
 import in.yuvi.http.fluent.Http;
 import org.apache.http.HttpResponse;
 import org.json.*;
-
 import java.io.IOException;
 import java.net.*;
 
@@ -20,16 +19,16 @@ public class EventLog {
         @Override
         protected Boolean doInBackground(LogBuilder... logBuilders) {
 
-            boolean allSuccess = true;
+            boolean  allSuccess = true;
             // Not using the default URL connection, since that seems to have different behavior than the rest of the code
-            for (LogBuilder logBuilder : logBuilders) {
+            for(LogBuilder logBuilder: logBuilders) {
                 HttpURLConnection conn;
                 try {
 
                     URL url = logBuilder.toUrl();
                     HttpResponse response = Http.get(url.toString()).use(CommonsApplication.createHttpClient()).asResponse();
 
-                    if (response.getStatusLine().getStatusCode() != 204) {
+                    if(response.getStatusLine().getStatusCode() != 204) {
                         allSuccess = false;
                     }
                     Log.d("Commons", "EventLog hit " + url.toString());
@@ -46,7 +45,6 @@ public class EventLog {
     }
 
     private static final String DEVICE;
-
     static {
         if (Build.MODEL.startsWith(Build.MANUFACTURER)) {
             DEVICE = Utils.capitalize(Build.MODEL);
@@ -102,7 +100,7 @@ public class EventLog {
         // Attempting to use anywhere else will cause kitten explosions
         public void log(boolean force) {
             SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(app);
-            if (!settings.getBoolean(Prefs.TRACKING_ENABLED, true) && !force) {
+            if(!settings.getBoolean(Prefs.TRACKING_ENABLED, true) && !force) {
                 return; // User has disabled tracking
             }
             LogTask logTask = new LogTask();
@@ -120,9 +118,9 @@ public class EventLog {
     }
 
     public static LogBuilder schema(Object[] scid) {
-        if (scid.length != 2) {
+        if(scid.length != 2) {
             throw new IllegalArgumentException("Needs an object array with schema as first param and revision as second");
         }
-        return schema((String) scid[0], (Long) scid[1]);
+        return schema((String)scid[0], (Long)scid[1]);
     }
 }

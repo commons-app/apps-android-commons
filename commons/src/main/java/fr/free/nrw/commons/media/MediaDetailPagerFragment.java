@@ -42,16 +42,11 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
 
     public interface MediaDetailProvider {
         public Media getMediaAtPosition(int i);
-
         public int getTotalMediaCount();
-
         public void notifyDatasetChanged();
-
         public void registerDataSetObserver(DataSetObserver observer);
-
         public void unregisterDataSetObserver(DataSetObserver observer);
     }
-
     private class MediaDetailAdapter extends FragmentStatePagerAdapter {
 
         public MediaDetailAdapter(FragmentManager fm) {
@@ -60,7 +55,7 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
 
         @Override
         public Fragment getItem(int i) {
-            if (i == 0) {
+            if(i == 0) {
                 // See bug https://code.google.com/p/android/issues/detail?id=27526
                 pager.postDelayed(new Runnable() {
                     public void run() {
@@ -73,7 +68,7 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
 
         @Override
         public int getCount() {
-            return ((MediaDetailProvider) getActivity()).getTotalMediaCount();
+            return ((MediaDetailProvider)getActivity()).getTotalMediaCount();
         }
     }
 
@@ -90,7 +85,7 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
         View view = inflater.inflate(R.layout.fragment_media_detail_pager, container, false);
         pager = (ViewPager) view.findViewById(R.id.mediaDetailsPager);
         pager.setOnPageChangeListener(this);
-        if (savedInstanceState != null) {
+        if(savedInstanceState != null) {
             final int pageNumber = savedInstanceState.getInt("current-page");
             // Adapter doesn't seem to be loading immediately.
             // Dear God, please forgive us for our sins
@@ -117,18 +112,18 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (savedInstanceState != null) {
+        if(savedInstanceState != null) {
             editable = savedInstanceState.getBoolean("editable");
         }
-        app = (CommonsApplication) getActivity().getApplicationContext();
+        app = (CommonsApplication)getActivity().getApplicationContext();
         setHasOptionsMenu(true);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        MediaDetailProvider provider = (MediaDetailProvider) getSherlockActivity();
+        MediaDetailProvider provider = (MediaDetailProvider)getSherlockActivity();
         Media m = provider.getMediaAtPosition(pager.getCurrentItem());
-        switch (item.getItemId()) {
+        switch(item.getItemId()) {
             case R.id.menu_share_current_image:
                 EventLog.schema(CommonsApplication.EVENT_SHARE_ATTEMPT)
                         .param("username", app.getCurrentAccount().name)
@@ -151,12 +146,12 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
                 return true;
             case R.id.menu_retry_current_image:
                 // Is this... sane? :)
-                ((ContributionsActivity) getActivity()).retryUpload(pager.getCurrentItem());
+                ((ContributionsActivity)getActivity()).retryUpload(pager.getCurrentItem());
                 getSherlockActivity().getSupportFragmentManager().popBackStack();
                 return true;
             case R.id.menu_cancel_current_image:
                 // todo: delete image
-                ((ContributionsActivity) getActivity()).deleteUpload(pager.getCurrentItem());
+                ((ContributionsActivity)getActivity()).deleteUpload(pager.getCurrentItem());
                 getSherlockActivity().getSupportFragmentManager().popBackStack();
                 return true;
             default:
@@ -172,7 +167,7 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
      */
     private void downloadMedia(Media m) {
         String imageUrl = m.getImageUrl(),
-                fileName = m.getFilename();
+               fileName = m.getFilename();
         // Strip 'File:' from beginning of filename, we really shouldn't store it
         fileName = fileName.replaceFirst("^File:", "");
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
@@ -199,7 +194,7 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
             }
         }
 
-        final DownloadManager manager = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
+        final DownloadManager manager = (DownloadManager)getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
         final long downloadId = manager.enqueue(req);
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
@@ -209,8 +204,8 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
                 public void onReceive(Context context, Intent intent) {
                     // Check if the download has completed...
                     Cursor c = manager.query(new DownloadManager.Query()
-                                    .setFilterById(downloadId)
-                                    .setFilterByStatus(DownloadManager.STATUS_SUCCESSFUL | DownloadManager.STATUS_FAILED)
+                            .setFilterById(downloadId)
+                            .setFilterByStatus(DownloadManager.STATUS_SUCCESSFUL | DownloadManager.STATUS_FAILED)
                     );
                     if (c.moveToFirst()) {
                         int status = c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS));
@@ -234,13 +229,13 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if (!editable) { // Disable menu options for editable views
+        if(!editable) { // Disable menu options for editable views
             menu.clear(); // see http://stackoverflow.com/a/8495697/17865
             inflater.inflate(R.menu.fragment_image_detail, menu);
-            if (pager != null) {
-                MediaDetailProvider provider = (MediaDetailProvider) getSherlockActivity();
+            if(pager != null) {
+                MediaDetailProvider provider = (MediaDetailProvider)getSherlockActivity();
                 Media m = provider.getMediaAtPosition(pager.getCurrentItem());
-                if (m != null) {
+                if(m != null) {
                     // Enable default set of actions, then re-enable different set of actions only if it is a failed contrib
                     menu.findItem(R.id.menu_retry_current_image).setEnabled(false).setVisible(false);
                     menu.findItem(R.id.menu_cancel_current_image).setEnabled(false).setVisible(false);
@@ -248,9 +243,9 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
                     menu.findItem(R.id.menu_share_current_image).setEnabled(true).setVisible(true);
                     menu.findItem(R.id.menu_download_current_image).setEnabled(true).setVisible(true);
 
-                    if (m instanceof Contribution) {
-                        Contribution c = (Contribution) m;
-                        switch (c.getState()) {
+                    if(m instanceof Contribution) {
+                        Contribution c = (Contribution)m;
+                        switch(c.getState()) {
                             case Contribution.STATE_FAILED:
                                 menu.findItem(R.id.menu_retry_current_image).setEnabled(true).setVisible(true);
                                 menu.findItem(R.id.menu_cancel_current_image).setEnabled(true).setVisible(true);

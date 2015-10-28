@@ -34,15 +34,14 @@ public class Media implements Parcelable {
     }
 
     public static Pattern displayTitlePattern = Pattern.compile("(.*)(\\.\\w+)", Pattern.CASE_INSENSITIVE);
-
-    public String getDisplayTitle() {
-        if (filename == null) {
+    public  String getDisplayTitle() {
+        if(filename == null) {
             return "";
         }
         // FIXME: Gross hack bercause my regex skills suck maybe or I am too lazy who knows
         String title = filename.replaceFirst("^File:", "");
         Matcher matcher = displayTitlePattern.matcher(title);
-        if (matcher.matches()) {
+        if(matcher.matches()) {
             return matcher.group(1);
         } else {
             return title;
@@ -59,7 +58,7 @@ public class Media implements Parcelable {
     }
 
     public String getImageUrl() {
-        if (imageUrl == null) {
+        if(imageUrl == null) {
             imageUrl = Utils.makeThumbBaseUrl(this.getFilename());
         }
         return imageUrl;
@@ -152,7 +151,7 @@ public class Media implements Parcelable {
     protected Map<String, String> descriptions; // multilingual descriptions as loaded
 
     public ArrayList<String> getCategories() {
-        return (ArrayList<String>) categories.clone(); // feels dirty
+        return (ArrayList<String>)categories.clone(); // feels dirty
     }
 
     public void setCategories(List<String> categories) {
@@ -160,7 +159,7 @@ public class Media implements Parcelable {
         this.categories.addAll(categories);
     }
 
-    public void setDescriptions(Map<String, String> descriptions) {
+    public void setDescriptions(Map<String,String> descriptions) {
         for (String key : this.descriptions.keySet()) {
             this.descriptions.remove(key);
         }
@@ -224,7 +223,7 @@ public class Media implements Parcelable {
     }
 
     public Media(Parcel in) {
-        localUri = (Uri) in.readParcelable(Uri.class.getClassLoader());
+        localUri = (Uri)in.readParcelable(Uri.class.getClassLoader());
         imageUrl = in.readString();
         filename = in.readString();
         description = in.readString();
@@ -232,7 +231,7 @@ public class Media implements Parcelable {
         dateCreated = (Date) in.readSerializable();
         dateUploaded = (Date) in.readSerializable();
         creator = in.readString();
-        tags = (HashMap<String, Object>) in.readSerializable();
+        tags = (HashMap<String, Object>)in.readSerializable();
         width = in.readInt();
         height = in.readInt();
         license = in.readString();

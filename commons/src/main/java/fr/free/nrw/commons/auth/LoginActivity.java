@@ -17,6 +17,7 @@ import android.support.v4.app.NavUtils;
 
 import fr.free.nrw.commons.*;
 import fr.free.nrw.commons.WelcomeActivity;
+import fr.free.nrw.commons.campaigns.CampaignsContentProvider;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.EventLog;
@@ -71,20 +72,21 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 // FIXME: If the user turns it off, it shouldn't be auto turned back on
                 ContentResolver.setSyncAutomatically(account, ContributionsContentProvider.AUTHORITY, true); // Enable sync by default!
                 ContentResolver.setSyncAutomatically(account, ModificationsContentProvider.AUTHORITY, true); // Enable sync by default!
+                ContentResolver.setSyncAutomatically(account, CampaignsContentProvider.AUTHORITY, true); // Enable sync by default!
                 context.finish();
             } else {
                 int response;
-                if (result.equals("NetworkFailure")) {
+                if(result.equals("NetworkFailure")) {
                     response = R.string.login_failed_network;
-                } else if (result.equals("NotExists") || result.equals("Illegal") || result.equals("NotExists")) {
+                } else if(result.equals("NotExists") || result.equals("Illegal") || result.equals("NotExists")) {
                     response = R.string.login_failed_username;
                     passwordEdit.setText("");
-                } else if (result.equals("EmptyPass") || result.equals("WrongPass")) {
+                } else if(result.equals("EmptyPass") || result.equals("WrongPass")) {
                     response = R.string.login_failed_password;
                     passwordEdit.setText("");
-                } else if (result.equals("Throttled")) {
+                } else if(result.equals("Throttled")) {
                     response = R.string.login_failed_throttled;
-                } else if (result.equals("Blocked")) {
+                } else if(result.equals("Blocked")) {
                     response = R.string.login_failed_blocked;
                 } else {
                     // Should never really happen
@@ -137,14 +139,12 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         final LoginActivity that = this;
 
         TextWatcher loginEnabler = new TextWatcher() {
-            public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
-            }
+            public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) { }
 
-            public void onTextChanged(CharSequence charSequence, int start, int count, int after) {
-            }
+            public void onTextChanged(CharSequence charSequence, int start, int count, int after) { }
 
             public void afterTextChanged(Editable editable) {
-                if (usernameEdit.getText().length() != 0 && passwordEdit.getText().length() != 0) {
+                if(usernameEdit.getText().length() != 0 && passwordEdit.getText().length() != 0) {
                     loginButton.setEnabled(true);
                 } else {
                     loginButton.setEnabled(false);
@@ -190,7 +190,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     private void performLogin() {
         String username = usernameEdit.getText().toString();
         // Because Mediawiki is upercase-first-char-then-case-sensitive :)
-        String canonicalUsername = username.substring(0, 1).toUpperCase() + username.substring(1);
+        String canonicalUsername = username.substring(0,1).toUpperCase() + username.substring(1);
 
         String password = passwordEdit.getText().toString();
 
@@ -208,9 +208,9 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
+        case android.R.id.home:
+            NavUtils.navigateUpFromSameTask(this);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

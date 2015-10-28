@@ -12,31 +12,30 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
 
 public class AuthenticatedActivity extends SherlockFragmentActivity {
-
-
+    
+    
     String accountType;
     CommonsApplication app;
 
     private String authCookie;
-
+    
     public AuthenticatedActivity(String accountType) {
-        this.accountType = accountType;
+       this.accountType = accountType;
     }
 
-
+   
     private class GetAuthCookieTask extends AsyncTask<Void, String, String> {
         private Account account;
         private AccountManager accountManager;
-
         public GetAuthCookieTask(Account account, AccountManager accountManager) {
             this.account = account;
             this.accountManager = accountManager;
         }
-
+        
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            if (result != null) {
+            if(result != null) {
                 authCookie = result;
                 onAuthCookieAcquired(result);
             } else {
@@ -60,20 +59,19 @@ public class AuthenticatedActivity extends SherlockFragmentActivity {
             }
         }
     }
-
-
+   
+    
     private class AddAccountTask extends AsyncTask<Void, String, String> {
         private AccountManager accountManager;
-
         public AddAccountTask(AccountManager accountManager) {
             this.accountManager = accountManager;
         }
-
+        
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            if (result != null) {
-                Account[] allAccounts = accountManager.getAccountsByType(accountType);
+            if(result != null) {
+                Account[] allAccounts =accountManager.getAccountsByType(accountType);
                 Account curAccount = allAccounts[0];
                 GetAuthCookieTask getCookieTask = new GetAuthCookieTask(curAccount, accountManager);
                 getCookieTask.execute();
@@ -100,23 +98,22 @@ public class AuthenticatedActivity extends SherlockFragmentActivity {
                 e.printStackTrace();
                 return null;
             }
-            if (result.containsKey(AccountManager.KEY_ACCOUNT_NAME)) {
+            if(result.containsKey(AccountManager.KEY_ACCOUNT_NAME)) {
                 return result.getString(AccountManager.KEY_ACCOUNT_NAME);
             } else {
                 return null;
             }
-
+            
         }
     }
-
     protected void requestAuthToken() {
-        if (authCookie != null) {
+        if(authCookie != null) {
             onAuthCookieAcquired(authCookie);
             return;
         }
         AccountManager accountManager = AccountManager.get(this);
         Account curAccount = app.getCurrentAccount();
-        if (curAccount == null) {
+        if(curAccount == null) {
             AddAccountTask addAccountTask = new AddAccountTask(accountManager);
             // This AsyncTask blocks until the Login Activity returns
             // And since in Android 4.x+ only one background thread runs all AsyncTasks
@@ -130,12 +127,12 @@ public class AuthenticatedActivity extends SherlockFragmentActivity {
             task.execute();
         }
     }
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        app = (CommonsApplication) this.getApplicationContext();
-        if (savedInstanceState != null) {
+        app = (CommonsApplication)this.getApplicationContext();
+        if(savedInstanceState != null) {
             authCookie = savedInstanceState.getString("authCookie");
         }
     }
@@ -147,10 +144,9 @@ public class AuthenticatedActivity extends SherlockFragmentActivity {
     }
 
     protected void onAuthCookieAcquired(String authCookie) {
-
+        
     }
-
     protected void onAuthFailure() {
-
+        
     }
 }

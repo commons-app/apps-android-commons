@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.category;
+package fr.free.nrw.commons.campaigns;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
@@ -12,21 +12,20 @@ import android.util.Log;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.data.DBOpenHelper;
 
-public class CategoryContentProvider extends ContentProvider {
+public class CampaignsContentProvider extends ContentProvider{
 
-    // For URI matcher
-    private static final int CATEGORIES = 1;
-    private static final int CATEGORIES_ID = 2;
+    private static final int CAMPAIGNS = 1;
+    private static final int CAMPAIGNS_ID = 2;
 
-    public static final String AUTHORITY = "fr.free.nrw.commons.categories.contentprovider";
-    private static final String BASE_PATH = "categories";
+    public static final String AUTHORITY = "fr.free.nrw.commons.campaigns.contentprovider";
+    private static final String BASE_PATH = "campiagns";
 
     public static final Uri BASE_URI = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH);
 
     private static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
     static {
-        uriMatcher.addURI(AUTHORITY, BASE_PATH, CATEGORIES);
-        uriMatcher.addURI(AUTHORITY, BASE_PATH + "/#", CATEGORIES_ID);
+        uriMatcher.addURI(AUTHORITY, BASE_PATH, CAMPAIGNS);
+        uriMatcher.addURI(AUTHORITY, BASE_PATH + "/#", CAMPAIGNS_ID);
     }
 
 
@@ -44,7 +43,7 @@ public class CategoryContentProvider extends ContentProvider {
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
-        queryBuilder.setTables(Category.Table.TABLE_NAME);
+        queryBuilder.setTables(Campaign.Table.TABLE_NAME);
 
         int uriType = uriMatcher.match(uri);
 
@@ -52,12 +51,12 @@ public class CategoryContentProvider extends ContentProvider {
         Cursor cursor;
 
         switch(uriType) {
-            case CATEGORIES:
+            case CAMPAIGNS:
                 cursor = queryBuilder.query(db, projection, selection, selectionArgs, null, null, sortOrder);
                 break;
-            case CATEGORIES_ID:
+            case CAMPAIGNS_ID:
                 cursor = queryBuilder.query(db,
-                        Category.Table.ALL_FIELDS,
+                        Campaign.Table.ALL_FIELDS,
                         "_id = ?",
                         new String[] { uri.getLastPathSegment() },
                         null,
@@ -85,8 +84,18 @@ public class CategoryContentProvider extends ContentProvider {
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         long id = 0;
         switch (uriType) {
-            case CATEGORIES:
-                id = sqlDB.insert(Category.Table.TABLE_NAME, null, contentValues);
+            case CAMPAIGNS:
+                sqlDB.beginTransaction();
+                // if the campaign already exists, rip it out and then re-insert
+                if(campaignExists(sqlDB, contentValues)) {
+                    sqlDB.delete(
+                            Campaign.Table.TABLE_NAME,
+                            Campaign.Table.COLUMN_NAME + " = ?",
+                            new String[]{contentValues.getAsString(Campaign.Table.COLUMN_NAME)}
+                    );
+                }
+                id = sqlDB.insert(Campaign.Table.TABLE_NAME, null, contentValues);
+                sqlDB.endTransaction();
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
@@ -97,7 +106,34 @@ public class CategoryContentProvider extends ContentProvider {
 
     @Override
     public int delete(Uri uri, String s, String[] strings) {
-        return 0;
+        int rows = 0;
+        int uriType = uriMatcher.match(uri);
+
+        SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
+
+        switch(uriType) {
+            case CAMPAIGNS_ID:
+                rows = db.delete(Campaign.Table.TABLE_NAME,
+                        "_id = ?",
+                        new String[] { uri.getLastPathSegment() }
+                );
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown URI" + uri);
+        }
+        getContext().getContentResolver().notifyChange(uri, null);
+        return rows;
+    }
+
+    private boolean campaignExists(SQLiteDatabase db, ContentValues campaign) {
+        Cursor cr = db.query(
+                Campaign.Table.TABLE_NAME,
+                new String[]{Campaign.Table.COLUMN_NAME},
+                Campaign.Table.COLUMN_NAME + " = ?",
+                new String[]{campaign.getAsString(Campaign.Table.COLUMN_NAME)},
+                "", "", ""
+        );
+        return cr != null && cr.getCount() != 0;
     }
 
     @Override
@@ -107,10 +143,18 @@ public class CategoryContentProvider extends ContentProvider {
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         sqlDB.beginTransaction();
         switch (uriType) {
-            case CATEGORIES:
+            case CAMPAIGNS:
                 for(ContentValues value: values) {
                     Log.d("Commons", "Inserting! " + value.toString());
-                    sqlDB.insert(Category.Table.TABLE_NAME, null, value);
+                    // if the campaign already exists, rip it out and then re-insert
+                    if(campaignExists(sqlDB, value)) {
+                        sqlDB.delete(
+                                Campaign.Table.TABLE_NAME,
+                                Campaign.Table.COLUMN_NAME + " = ?",
+                                new String[]{value.getAsString(Campaign.Table.COLUMN_NAME)}
+                        );
+                    }
+                    sqlDB.insert(Campaign.Table.TABLE_NAME, null, value);
                 }
                 break;
             default:
@@ -135,13 +179,19 @@ public class CategoryContentProvider extends ContentProvider {
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         int rowsUpdated = 0;
         switch (uriType) {
-            case CATEGORIES_ID:
+            case CAMPAIGNS:
+                rowsUpdated = sqlDB.update(Campaign.Table.TABLE_NAME,
+                        contentValues,
+                        selection,
+                        selectionArgs);
+                break;
+            case CAMPAIGNS_ID:
                 int id = Integer.valueOf(uri.getLastPathSegment());
 
                 if (TextUtils.isEmpty(selection)) {
-                    rowsUpdated = sqlDB.update(Category.Table.TABLE_NAME,
+                    rowsUpdated = sqlDB.update(Campaign.Table.TABLE_NAME,
                             contentValues,
-                            Category.Table.COLUMN_ID + " = ?",
+                            Campaign.Table.COLUMN_ID + " = ?",
                             new String[] { String.valueOf(id) } );
                 } else {
                     throw new IllegalArgumentException("Parameter `selection` should be empty when updating an ID");
@@ -154,4 +204,3 @@ public class CategoryContentProvider extends ContentProvider {
         return rowsUpdated;
     }
 }
-

@@ -10,7 +10,7 @@ import android.util.*;
 import fr.free.nrw.commons.data.*;
 import fr.free.nrw.commons.CommonsApplication;
 
-public class ContributionsContentProvider extends ContentProvider {
+public class ContributionsContentProvider extends ContentProvider{
 
     private static final int CONTRIBUTIONS = 1;
     private static final int CONTRIBUTIONS_ID = 2;
@@ -21,7 +21,6 @@ public class ContributionsContentProvider extends ContentProvider {
     public static final Uri BASE_URI = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH);
 
     private static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-
     static {
         uriMatcher.addURI(AUTHORITY, BASE_PATH, CONTRIBUTIONS);
         uriMatcher.addURI(AUTHORITY, BASE_PATH + "/#", CONTRIBUTIONS_ID);
@@ -33,10 +32,9 @@ public class ContributionsContentProvider extends ContentProvider {
     }
 
     private DBOpenHelper dbOpenHelper;
-
     @Override
     public boolean onCreate() {
-        dbOpenHelper = ((CommonsApplication) this.getContext().getApplicationContext()).getDbOpenHelper();
+        dbOpenHelper = ((CommonsApplication)this.getContext().getApplicationContext()).getDbOpenHelper();
         return false;
     }
 
@@ -50,7 +48,7 @@ public class ContributionsContentProvider extends ContentProvider {
         SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
         Cursor cursor;
 
-        switch (uriType) {
+        switch(uriType) {
             case CONTRIBUTIONS:
                 cursor = queryBuilder.query(db, projection, selection, selectionArgs, null, null, sortOrder);
                 break;
@@ -58,7 +56,7 @@ public class ContributionsContentProvider extends ContentProvider {
                 cursor = queryBuilder.query(db,
                         Contribution.Table.ALL_FIELDS,
                         "_id = ?",
-                        new String[]{uri.getLastPathSegment()},
+                        new String[] { uri.getLastPathSegment() },
                         null,
                         null,
                         sortOrder
@@ -101,12 +99,12 @@ public class ContributionsContentProvider extends ContentProvider {
 
         SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
 
-        switch (uriType) {
+        switch(uriType) {
             case CONTRIBUTIONS_ID:
                 Log.d("Commons", "Deleting contribution id " + uri.getLastPathSegment());
                 rows = db.delete(Contribution.Table.TABLE_NAME,
                         "_id = ?",
-                        new String[]{uri.getLastPathSegment()}
+                        new String[] { uri.getLastPathSegment() }
                 );
                 break;
             default:
@@ -124,7 +122,7 @@ public class ContributionsContentProvider extends ContentProvider {
         sqlDB.beginTransaction();
         switch (uriType) {
             case CONTRIBUTIONS:
-                for (ContentValues value : values) {
+                for(ContentValues value: values) {
                     Log.d("Commons", "Inserting! " + value.toString());
                     sqlDB.insert(Contribution.Table.TABLE_NAME, null, value);
                 }
@@ -164,7 +162,7 @@ public class ContributionsContentProvider extends ContentProvider {
                     rowsUpdated = sqlDB.update(Contribution.Table.TABLE_NAME,
                             contentValues,
                             Contribution.Table.COLUMN_ID + " = ?",
-                            new String[]{String.valueOf(id)});
+                            new String[] { String.valueOf(id) } );
                 } else {
                     throw new IllegalArgumentException("Parameter `selection` should be empty when updating an ID");
                 }

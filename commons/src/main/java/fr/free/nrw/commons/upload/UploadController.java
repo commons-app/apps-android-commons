@@ -15,7 +15,8 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.Prefs;
 import fr.free.nrw.commons.Utils;
-
+import fr.free.nrw.commons.campaigns.Campaign;
+import fr.free.nrw.commons.campaigns.CampaignContribution;
 
 import java.io.IOException;
 import java.util.Date;
@@ -24,6 +25,7 @@ public class UploadController {
     private UploadService uploadService;
 
     private final Activity activity;
+    private Campaign campaign;
     final CommonsApplication app;
 
     public interface ContributionUploadProgress {
@@ -32,14 +34,18 @@ public class UploadController {
 
     public UploadController(Activity activity) {
         this.activity = activity;
-        app = (CommonsApplication) activity.getApplicationContext();
+        app = (CommonsApplication)activity.getApplicationContext();
     }
 
+    public UploadController(Activity activity, Campaign campaign) {
+        this(activity);
+        this.campaign = campaign;
+    }
 
     private boolean isUploadServiceConnected;
     private ServiceConnection uploadServiceConnection = new ServiceConnection() {
         public void onServiceConnected(ComponentName componentName, IBinder binder) {
-            uploadService = (UploadService) ((HandlerService.HandlerServiceLocalBinder) binder).getService();
+            uploadService = (UploadService) ((HandlerService.HandlerServiceLocalBinder)binder).getService();
             isUploadServiceConnected = true;
         }
 
@@ -57,7 +63,7 @@ public class UploadController {
     }
 
     public void cleanup() {
-        if (isUploadServiceConnected) {
+        if(isUploadServiceConnected) {
             activity.unbindService(uploadServiceConnection);
         }
     }
@@ -71,13 +77,15 @@ public class UploadController {
         if (extension != null && extension.toLowerCase().equals("jpeg")) {
             extension = "jpg";
         }
-        if (extension != null && !title.toLowerCase().endsWith(extension.toLowerCase())) {
+        if(extension != null && !title.toLowerCase().endsWith(extension.toLowerCase())) {
             title += "." + extension;
         }
 
-
-        contribution = new Contribution(mediaUri, null, title, description, -1, null, null, app.getCurrentAccount().name, CommonsApplication.DEFAULT_EDIT_SUMMARY);
-
+        if(campaign == null) {
+            contribution = new Contribution(mediaUri, null, title, description, -1, null, null, app.getCurrentAccount().name, CommonsApplication.DEFAULT_EDIT_SUMMARY);
+        } else {
+            contribution = new CampaignContribution(mediaUri, null, title, description, -1, null, null, app.getCurrentAccount().name, CommonsApplication.DEFAULT_EDIT_SUMMARY, campaign);
+        }
         contribution.setTag("mimeType", mimeType);
         contribution.setSource(source);
 
@@ -87,11 +95,11 @@ public class UploadController {
     public void startUpload(final Contribution contribution, final ContributionUploadProgress onComplete) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
 
-        if (TextUtils.isEmpty(contribution.getCreator())) {
+        if(TextUtils.isEmpty(contribution.getCreator())) {
             contribution.setCreator(app.getCurrentAccount().name);
         }
 
-        if (contribution.getDescription() == null) {
+        if(contribution.getDescription() == null) {
             contribution.setDescription("");
         }
 
@@ -107,30 +115,30 @@ public class UploadController {
             protected Contribution doInBackground(Void... voids /* stare into you */) {
                 long length;
                 try {
-                    if (contribution.getDataLength() <= 0) {
+                    if(contribution.getDataLength() <= 0) {
                         length = activity.getContentResolver().openAssetFileDescriptor(contribution.getLocalUri(), "r").getLength();
-                        if (length == -1) {
+                        if(length == -1) {
                             // Let us find out the long way!
                             length = Utils.countBytes(activity.getContentResolver().openInputStream(contribution.getLocalUri()));
                         }
                         contribution.setDataLength(length);
                     }
-                } catch (IOException e) {
+                } catch(IOException e) {
                     throw new RuntimeException(e);
                 }
 
-                String mimeType = (String) contribution.getTag("mimeType");
-                if (mimeType == null || TextUtils.isEmpty(mimeType) || mimeType.endsWith("*")) {
+                String mimeType = (String)contribution.getTag("mimeType");
+                if(mimeType == null || TextUtils.isEmpty(mimeType) || mimeType.endsWith("*")) {
                     mimeType = activity.getContentResolver().getType(contribution.getLocalUri());
-                    if (mimeType != null) {
+                    if(mimeType != null) {
                         contribution.setTag("mimeType", mimeType);
                     }
                 }
 
-                if (mimeType.startsWith("image/") && contribution.getDateCreated() == null) {
+                if(mimeType.startsWith("image/") && contribution.getDateCreated() == null) {
                     Cursor cursor = activity.getContentResolver().query(contribution.getLocalUri(),
                             new String[]{MediaStore.Images.ImageColumns.DATE_TAKEN}, null, null, null);
-                    if (cursor != null && cursor.getCount() != 0) {
+                    if(cursor != null && cursor.getCount() != 0) {
                         cursor.moveToFirst();
                         contribution.setDateCreated(new Date(cursor.getLong(0)));
                     } // FIXME: Alternate way of setting dateCreated if this data is not found

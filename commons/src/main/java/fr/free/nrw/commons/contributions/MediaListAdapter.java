@@ -21,20 +21,19 @@ public class MediaListAdapter extends BaseAdapter {
 
     public void updateMediaList(ArrayList<Media> newMediaList) {
         // FIXME: Hack for now, replace with something more efficient later on
-        for (Media newMedia : newMediaList) {
+        for(Media newMedia: newMediaList) {
             boolean isDuplicate = false;
-            for (Media oldMedia : mediaList) {
-                if (newMedia.getFilename().equals(oldMedia.getFilename())) {
+            for(Media oldMedia: mediaList ) {
+                if(newMedia.getFilename().equals(oldMedia.getFilename())) {
                     isDuplicate = true;
                     break;
                 }
             }
-            if (!isDuplicate) {
+            if(!isDuplicate) {
                 mediaList.add(0, newMedia);
             }
         }
     }
-
     public int getCount() {
         return mediaList.size();
     }
@@ -48,14 +47,14 @@ public class MediaListAdapter extends BaseAdapter {
     }
 
     public View getView(int i, View view, ViewGroup viewGroup) {
-        if (view == null) {
+        if(view == null) {
             view = activity.getLayoutInflater().inflate(R.layout.layout_contribution, null, false);
             view.setTag(new ContributionViewHolder(view));
         }
 
         Media m = (Media) getItem(i);
         ContributionViewHolder holder = (ContributionViewHolder) view.getTag();
-        holder.imageView.setMedia(m, ((CommonsApplication) activity.getApplicationContext()).getImageLoader());
+        holder.imageView.setMedia(m, ((CommonsApplication)activity.getApplicationContext()).getImageLoader());
         holder.titleView.setText(m.getDisplayTitle());
         return view;
     }

@@ -22,18 +22,20 @@ import fr.free.nrw.commons.auth.*;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.campaigns.Campaign;
 import fr.free.nrw.commons.media.*;
 import fr.free.nrw.commons.upload.UploadService;
 
 import java.util.ArrayList;
 
-public class ContributionsActivity
-        extends AuthenticatedActivity
-        implements LoaderManager.LoaderCallbacks<Object>,
-        AdapterView.OnItemClickListener,
-        MediaDetailPagerFragment.MediaDetailProvider,
-        FragmentManager.OnBackStackChangedListener,
-        ContributionsListFragment.SourceRefresher {
+public  class       ContributionsActivity
+        extends     AuthenticatedActivity
+        implements  LoaderManager.LoaderCallbacks<Object>,
+                    AdapterView.OnItemClickListener,
+                    MediaDetailPagerFragment.MediaDetailProvider,
+                    ContributionsListFragment.CurrentCampaignProvider,
+                    FragmentManager.OnBackStackChangedListener,
+                    ContributionsListFragment.SourceRefresher {
 
 
     private Cursor allContributions;
@@ -41,6 +43,7 @@ public class ContributionsActivity
     private MediaDetailPagerFragment mediaDetails;
     private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<DataSetObserver>();
 
+    private Campaign campaign;
 
     public ContributionsActivity() {
         super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
@@ -50,7 +53,7 @@ public class ContributionsActivity
     private boolean isUploadServiceConnected;
     private ServiceConnection uploadServiceConnection = new ServiceConnection() {
         public void onServiceConnected(ComponentName componentName, IBinder binder) {
-            uploadService = (UploadService) ((HandlerService.HandlerServiceLocalBinder) binder).getService();
+            uploadService = (UploadService) ((HandlerService.HandlerServiceLocalBinder)binder).getService();
             isUploadServiceConnected = true;
         }
 
@@ -61,10 +64,11 @@ public class ContributionsActivity
     };
 
 
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (isUploadServiceConnected) {
+        if(isUploadServiceConnected) {
             unbindService(uploadServiceConnection);
         }
     }
@@ -111,11 +115,16 @@ public class ContributionsActivity
         setTitle(R.string.title_activity_contributions);
         setContentView(R.layout.activity_contributions);
 
-        contributionsList = (ContributionsListFragment) getSupportFragmentManager().findFragmentById(R.id.contributionsListFragment);
+        if(getIntent().hasExtra("campaign")) {
+            this.campaign = (Campaign) getIntent().getSerializableExtra("campaign");
+            this.setTitle(campaign.getTitle());
+        }
+
+        contributionsList = (ContributionsListFragment)getSupportFragmentManager().findFragmentById(R.id.contributionsListFragment);
 
         getSupportFragmentManager().addOnBackStackChangedListener(this);
         if (savedInstanceState != null) {
-            mediaDetails = (MediaDetailPagerFragment) getSupportFragmentManager().findFragmentById(R.id.contributionsFragmentContainer);
+            mediaDetails = (MediaDetailPagerFragment)getSupportFragmentManager().findFragmentById(R.id.contributionsFragmentContainer);
             // onBackStackChanged uses mediaDetails.isVisible() but this returns false now.
             // Use the saved value from before pause or orientation change.
             if (mediaDetails != null && savedInstanceState.getBoolean("mediaDetailsVisible")) {
@@ -134,7 +143,7 @@ public class ContributionsActivity
     }
 
     private void showDetail(int i) {
-        if (mediaDetails == null || !mediaDetails.isVisible()) {
+        if(mediaDetails == null ||!mediaDetails.isVisible()) {
             mediaDetails = new MediaDetailPagerFragment();
             this.getSupportFragmentManager()
                     .beginTransaction()
@@ -149,7 +158,7 @@ public class ContributionsActivity
     public void retryUpload(int i) {
         allContributions.moveToPosition(i);
         Contribution c = Contribution.fromCursor(allContributions);
-        if (c.getState() == Contribution.STATE_FAILED) {
+        if(c.getState() == Contribution.STATE_FAILED) {
             uploadService.queue(UploadService.ACTION_UPLOAD_FILE, c);
             Log.d("Commons", "Restarting for" + c.toContentValues().toString());
         } else {
@@ -160,7 +169,7 @@ public class ContributionsActivity
     public void deleteUpload(int i) {
         allContributions.moveToPosition(i);
         Contribution c = Contribution.fromCursor(allContributions);
-        if (c.getState() == Contribution.STATE_FAILED) {
+        if(c.getState() == Contribution.STATE_FAILED) {
             Log.d("Commons", "Deleting failed contrib " + c.toContentValues().toString());
             c.setContentProviderClient(getContentResolver().acquireContentProviderClient(ContributionsContentProvider.AUTHORITY));
             c.delete();
@@ -171,9 +180,9 @@ public class ContributionsActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+        switch(item.getItemId()) {
             case android.R.id.home:
-                if (mediaDetails.isVisible()) {
+                if(mediaDetails.isVisible()) {
                     getSupportFragmentManager().popBackStack();
                 }
                 return true;
@@ -199,42 +208,54 @@ public class ContributionsActivity
     }
 
     public Loader onCreateLoader(int i, Bundle bundle) {
-
-        return new CursorLoader(this, ContributionsContentProvider.BASE_URI, Contribution.Table.ALL_FIELDS, CONTRIBUTION_SELECTION, null, CONTRIBUTION_SORT);
-
+        if(campaign == null) {
+            return new CursorLoader(this, ContributionsContentProvider.BASE_URI, Contribution.Table.ALL_FIELDS, CONTRIBUTION_SELECTION, null, CONTRIBUTION_SORT);
+        } else {
+            return new CategoryImagesLoader(this, campaign.getTrackingCategory());
+        }
     }
 
     public void onLoadFinished(Loader cursorLoader, Object result) {
+        if(campaign == null) {
+            Cursor cursor = (Cursor) result;
+            if(contributionsList.getAdapter() == null) {
+                contributionsList.setAdapter(new ContributionsListAdapter(this, cursor, 0));
+            } else {
+                ((CursorAdapter)contributionsList.getAdapter()).swapCursor(cursor);
+            }
 
-        Cursor cursor = (Cursor) result;
-        if (contributionsList.getAdapter() == null) {
-            contributionsList.setAdapter(new ContributionsListAdapter(this, cursor, 0));
+            getSupportActionBar().setSubtitle(getResources().getQuantityString(R.plurals.contributions_subtitle, cursor.getCount(), cursor.getCount()));
         } else {
-            ((CursorAdapter) contributionsList.getAdapter()).swapCursor(cursor);
+            if(contributionsList.getAdapter() == null) {
+                contributionsList.setAdapter(new MediaListAdapter(this, (ArrayList<Media>) result));
+            } else {
+                ((MediaListAdapter)contributionsList.getAdapter()).updateMediaList((ArrayList<Media>) result);
+            }
         }
-
-        getSupportActionBar().setSubtitle(getResources().getQuantityString(R.plurals.contributions_subtitle, cursor.getCount(), cursor.getCount()));
-
         notifyAndMigrateDataSetObservers();
     }
 
     public void onLoaderReset(Loader cursorLoader) {
-
-        ((CursorAdapter) contributionsList.getAdapter()).swapCursor(null);
-
+        if(campaign == null) {
+            ((CursorAdapter) contributionsList.getAdapter()).swapCursor(null);
+        } else {
+            contributionsList.setAdapter(null);
+        }
     }
 
     public Media getMediaAtPosition(int i) {
         if (contributionsList.getAdapter() == null) {
             // not yet ready to return data
             return null;
-        } else {
+        } else if(campaign == null) {
             return Contribution.fromCursor((Cursor) contributionsList.getAdapter().getItem(i));
+        } else {
+            return (Media) contributionsList.getAdapter().getItem(i);
         }
     }
 
     public int getTotalMediaCount() {
-        if (contributionsList.getAdapter() == null) {
+        if(contributionsList.getAdapter() == null) {
             return 0;
         }
         return contributionsList.getAdapter().getCount();
@@ -278,13 +299,16 @@ public class ContributionsActivity
     }
 
     public void onBackStackChanged() {
-        if (mediaDetails != null && mediaDetails.isVisible()) {
+        if(mediaDetails != null && mediaDetails.isVisible()) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         } else {
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         }
     }
 
+    public Campaign getCurrentCampaign() {
+        return campaign;
+    }
 
     public void refreshSource() {
         getSupportLoaderManager().restartLoader(0, null, this);

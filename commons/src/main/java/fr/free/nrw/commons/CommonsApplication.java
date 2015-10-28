@@ -58,7 +58,7 @@ public class CommonsApplication extends Application {
     public static final Object[] EVENT_LOGIN_ATTEMPT = {"MobileAppLoginAttempts", 5257721L};
     public static final Object[] EVENT_SHARE_ATTEMPT = {"MobileAppShareAttempts", 5346170L};
     public static final Object[] EVENT_CATEGORIZATION_ATTEMPT = {"MobileAppCategorizationAttempts", 5359208L};
-
+    
 
     public static final String DEFAULT_EDIT_SUMMARY = "Uploaded using Android Commons app";
 
@@ -85,7 +85,7 @@ public class CommonsApplication extends Application {
 
 
     public DBOpenHelper getDbOpenHelper() {
-        if (dbOpenHelper == null) {
+        if(dbOpenHelper == null) {
             dbOpenHelper = new DBOpenHelper(this);
         }
         return dbOpenHelper;
@@ -154,7 +154,7 @@ public class CommonsApplication extends Application {
     private LruCache<String, Bitmap> imageCache;
 
     public com.android.volley.toolbox.ImageLoader getImageLoader() {
-        if (imageLoader == null) {
+        if(imageLoader == null) {
             imageLoader = new com.android.volley.toolbox.ImageLoader(volleyQueue, new com.android.volley.toolbox.ImageLoader.ImageCache() {
                 public Bitmap getBitmap(String key) {
                     return imageCache.get(key);
@@ -168,30 +168,30 @@ public class CommonsApplication extends Application {
         }
         return imageLoader;
     }
-
+    
     public MWApi getApi() {
         return api;
     }
-
+    
     public Account getCurrentAccount() {
-        if (currentAccount == null) {
+        if(currentAccount == null) {
             AccountManager accountManager = AccountManager.get(this);
             Account[] allAccounts = accountManager.getAccountsByType(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
-            if (allAccounts.length != 0) {
+            if(allAccounts.length != 0) {
                 currentAccount = allAccounts[0];
             }
         }
         return currentAccount;
     }
-
+    
     public Boolean revalidateAuthToken() {
         AccountManager accountManager = AccountManager.get(this);
         Account curAccount = getCurrentAccount();
-
-        if (curAccount == null) {
+       
+        if(curAccount == null) {
             return false; // This should never happen
         }
-
+        
         accountManager.invalidateAuthToken(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE, api.getAuthCookie());
         try {
             String authCookie = accountManager.blockingGetAuthToken(curAccount, "", false);
