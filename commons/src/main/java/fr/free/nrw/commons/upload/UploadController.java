@@ -15,8 +15,6 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.Prefs;
 import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.campaigns.Campaign;
-import fr.free.nrw.commons.campaigns.CampaignContribution;
 
 import java.io.IOException;
 import java.util.Date;
@@ -25,7 +23,6 @@ public class UploadController {
     private UploadService uploadService;
 
     private final Activity activity;
-    private Campaign campaign;
     final CommonsApplication app;
 
     public interface ContributionUploadProgress {
@@ -35,11 +32,6 @@ public class UploadController {
     public UploadController(Activity activity) {
         this.activity = activity;
         app = (CommonsApplication)activity.getApplicationContext();
-    }
-
-    public UploadController(Activity activity, Campaign campaign) {
-        this(activity);
-        this.campaign = campaign;
     }
 
     private boolean isUploadServiceConnected;
@@ -81,11 +73,9 @@ public class UploadController {
             title += "." + extension;
         }
 
-        if(campaign == null) {
-            contribution = new Contribution(mediaUri, null, title, description, -1, null, null, app.getCurrentAccount().name, CommonsApplication.DEFAULT_EDIT_SUMMARY);
-        } else {
-            contribution = new CampaignContribution(mediaUri, null, title, description, -1, null, null, app.getCurrentAccount().name, CommonsApplication.DEFAULT_EDIT_SUMMARY, campaign);
-        }
+
+        contribution = new Contribution(mediaUri, null, title, description, -1, null, null, app.getCurrentAccount().name, CommonsApplication.DEFAULT_EDIT_SUMMARY);
+
         contribution.setTag("mimeType", mimeType);
         contribution.setSource(source);
 
