@@ -1,5 +1,11 @@
 # Wikimedia Commons for Android
 
+## v1.3
+- Removed 'send usage reports' setting
+- Fixed package naming issue
+- Added 'sign up' button
+- Removed unused 'campaigns' shortcut
+
 ## v1.0 beta 11
 - New Launcher Icon
 - Fix bug with licensing templates

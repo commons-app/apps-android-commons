@@ -19,7 +19,9 @@ import fr.free.nrw.commons.R;
 
 class ContributionsListAdapter extends CursorAdapter {
 
-    private DisplayImageOptions contributionDisplayOptions = Utils.getGenericDisplayOptions().build();;
+
+    private DisplayImageOptions contributionDisplayOptions = Utils.getGenericDisplayOptions().build();
+
     private Activity activity;
 
     public ContributionsListAdapter(Activity activity, Cursor c, int flags) {
