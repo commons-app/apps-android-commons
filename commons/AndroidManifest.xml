@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="fr.free.nrw.commons"
-    android:versionCode="17"
-    android:versionName="1.2" >
+    android:versionCode="18"
+    android:versionName="1.3" >
 
     <uses-sdk
         android:minSdkVersion="9"
@@ -82,14 +82,6 @@
             android:label="@string/title_activity_settings"
             />
         <activity android:name=".AboutActivity" android:label="@string/title_activity_about"/>
-        <activity android:name=".campaigns.CampaignActivity" android:label="Campaigns"
-                android:icon="@drawable/ic_launcher"
-                >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
 
         <service android:name=".upload.UploadService" >
         </service>
@@ -105,17 +97,7 @@
                 android:name="android.accounts.AccountAuthenticator"
                 android:resource="@xml/authenticator" />
         </service>
-        <service
-                android:name=".campaigns.CampaignsSyncService"
-                android:exported="true">
-            <intent-filter>
-                <action
-                        android:name="android.content.SyncAdapter" />
-            </intent-filter>
-            <meta-data
-                    android:name="android.content.SyncAdapter"
-                    android:resource="@xml/campaigns_sync_adapter" />
-        </service>
+
         <service
                 android:name=".contributions.ContributionsSyncService"
                 android:exported="true">
@@ -147,13 +129,7 @@
                 android:authorities="fr.free.nrw.commons.contributions.contentprovider"
                 android:exported="false">
         </provider>
-        <provider
-                android:name=".campaigns.CampaignsContentProvider"
-                android:label="@string/provider_campaigns"
-                android:syncable="true"
-                android:authorities="fr.free.nrw.commons.campaigns.contentprovider"
-                android:exported="false">
-        </provider>
+
         <provider
                 android:name=".modifications.ModificationsContentProvider"
                 android:label="@string/provider_modifications"

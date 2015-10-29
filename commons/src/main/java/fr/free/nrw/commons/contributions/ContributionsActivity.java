@@ -22,7 +22,6 @@ import fr.free.nrw.commons.auth.*;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.campaigns.Campaign;
 import fr.free.nrw.commons.media.*;
 import fr.free.nrw.commons.upload.UploadService;
 
@@ -33,7 +32,6 @@ public  class       ContributionsActivity
         implements  LoaderManager.LoaderCallbacks<Object>,
                     AdapterView.OnItemClickListener,
                     MediaDetailPagerFragment.MediaDetailProvider,
-                    ContributionsListFragment.CurrentCampaignProvider,
                     FragmentManager.OnBackStackChangedListener,
                     ContributionsListFragment.SourceRefresher {
 
@@ -43,7 +41,6 @@ public  class       ContributionsActivity
     private MediaDetailPagerFragment mediaDetails;
     private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<DataSetObserver>();
 
-    private Campaign campaign;
 
     public ContributionsActivity() {
         super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
@@ -115,10 +112,6 @@ public  class       ContributionsActivity
         setTitle(R.string.title_activity_contributions);
         setContentView(R.layout.activity_contributions);
 
-        if(getIntent().hasExtra("campaign")) {
-            this.campaign = (Campaign) getIntent().getSerializableExtra("campaign");
-            this.setTitle(campaign.getTitle());
-        }
 
         contributionsList = (ContributionsListFragment)getSupportFragmentManager().findFragmentById(R.id.contributionsListFragment);
 
@@ -208,49 +201,35 @@ public  class       ContributionsActivity
     }
 
     public Loader onCreateLoader(int i, Bundle bundle) {
-        if(campaign == null) {
-            return new CursorLoader(this, ContributionsContentProvider.BASE_URI, Contribution.Table.ALL_FIELDS, CONTRIBUTION_SELECTION, null, CONTRIBUTION_SORT);
-        } else {
-            return new CategoryImagesLoader(this, campaign.getTrackingCategory());
-        }
+        return new CursorLoader(this, ContributionsContentProvider.BASE_URI, Contribution.Table.ALL_FIELDS, CONTRIBUTION_SELECTION, null, CONTRIBUTION_SORT);
     }
 
     public void onLoadFinished(Loader cursorLoader, Object result) {
-        if(campaign == null) {
-            Cursor cursor = (Cursor) result;
-            if(contributionsList.getAdapter() == null) {
-                contributionsList.setAdapter(new ContributionsListAdapter(this, cursor, 0));
-            } else {
-                ((CursorAdapter)contributionsList.getAdapter()).swapCursor(cursor);
-            }
 
-            getSupportActionBar().setSubtitle(getResources().getQuantityString(R.plurals.contributions_subtitle, cursor.getCount(), cursor.getCount()));
+        Cursor cursor = (Cursor) result;
+        if(contributionsList.getAdapter() == null) {
+            contributionsList.setAdapter(new ContributionsListAdapter(this, cursor, 0));
         } else {
-            if(contributionsList.getAdapter() == null) {
-                contributionsList.setAdapter(new MediaListAdapter(this, (ArrayList<Media>) result));
-            } else {
-                ((MediaListAdapter)contributionsList.getAdapter()).updateMediaList((ArrayList<Media>) result);
-            }
+            ((CursorAdapter)contributionsList.getAdapter()).swapCursor(cursor);
         }
+
+        getSupportActionBar().setSubtitle(getResources().getQuantityString(R.plurals.contributions_subtitle, cursor.getCount(), cursor.getCount()));
+
         notifyAndMigrateDataSetObservers();
     }
 
     public void onLoaderReset(Loader cursorLoader) {
-        if(campaign == null) {
-            ((CursorAdapter) contributionsList.getAdapter()).swapCursor(null);
-        } else {
-            contributionsList.setAdapter(null);
-        }
+
+        ((CursorAdapter) contributionsList.getAdapter()).swapCursor(null);
+
     }
 
     public Media getMediaAtPosition(int i) {
         if (contributionsList.getAdapter() == null) {
             // not yet ready to return data
             return null;
-        } else if(campaign == null) {
+        } else  {
             return Contribution.fromCursor((Cursor) contributionsList.getAdapter().getItem(i));
-        } else {
-            return (Media) contributionsList.getAdapter().getItem(i);
         }
     }
 
@@ -306,9 +285,6 @@ public  class       ContributionsActivity
         }
     }
 
-    public Campaign getCurrentCampaign() {
-        return campaign;
-    }
 
     public void refreshSource() {
         getSupportLoaderManager().restartLoader(0, null, this);
