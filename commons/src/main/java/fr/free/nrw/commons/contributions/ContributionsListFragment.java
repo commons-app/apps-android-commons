@@ -20,13 +20,10 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.AboutActivity;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.SettingsActivity;
-import fr.free.nrw.commons.campaigns.Campaign;
 
 public class ContributionsListFragment extends SherlockFragment {
 
-    public interface CurrentCampaignProvider {
-        Campaign getCurrentCampaign();
-    }
+
 
     public interface SourceRefresher {
         void refreshSource();
@@ -35,7 +32,6 @@ public class ContributionsListFragment extends SherlockFragment {
     private GridView contributionsList;
     private TextView waitingMessage;
     private TextView emptyMessage;
-    private Campaign campaign;
 
     private ContributionController controller;
 
@@ -109,9 +105,9 @@ public class ContributionsListFragment extends SherlockFragment {
         if (!app.deviceHasCamera()) {
             menu.findItem(R.id.menu_from_camera).setEnabled(false);
         }
-        if(campaign == null) {
-            menu.findItem(R.id.menu_refresh).setVisible(false);
-        }
+
+        menu.findItem(R.id.menu_refresh).setVisible(false);
+
     }
 
     @Override
@@ -129,8 +125,7 @@ public class ContributionsListFragment extends SherlockFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        campaign = ((CurrentCampaignProvider)getActivity()).getCurrentCampaign();
-        controller = new ContributionController(this, campaign);
+        controller = new ContributionController(this);
         controller.loadState(savedInstanceState);
 
         contributionsList = (GridView)getView().findViewById(R.id.contributionsList);

@@ -13,7 +13,6 @@ import fr.free.nrw.commons.modifications.CategoryModifier;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.EventLog;
-import fr.free.nrw.commons.campaigns.Campaign;
 import fr.free.nrw.commons.category.CategorizationFragment;
 import fr.free.nrw.commons.contributions.*;
 import fr.free.nrw.commons.auth.*;
@@ -151,11 +150,7 @@ public  class       ShareActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Campaign campaign = null;
-        if(getIntent().hasExtra(UploadService.EXTRA_CAMPAIGN)) {
-            campaign = (Campaign) getIntent().getSerializableExtra(UploadService.EXTRA_CAMPAIGN);
-        }
-        uploadController = new UploadController(this, campaign);
+        uploadController = new UploadController(this);
         setContentView(R.layout.activity_share);
         
         app = (CommonsApplication)this.getApplicationContext();
