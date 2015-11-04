@@ -39,15 +39,27 @@ public  class       ContributionsActivity
     private Cursor allContributions;
     private ContributionsListFragment contributionsList;
     private MediaDetailPagerFragment mediaDetails;
+    private UploadService uploadService;
+    private boolean isUploadServiceConnected;
     private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<DataSetObserver>();
+    private String CONTRIBUTION_SELECTION = "";
+    /*
+        This sorts in the following order:
+        Currently Uploading
+        Failed (Sorted in ascending order of time added - FIFO)
+        Queued to Upload (Sorted in ascending order of time added - FIFO)
+        Completed (Sorted in descending order of time added)
+
+        This is why Contribution.STATE_COMPLETED is -1.
+     */
+    private String CONTRIBUTION_SORT = Contribution.Table.COLUMN_STATE + " DESC, " + Contribution.Table.COLUMN_UPLOADED + " DESC , (" + Contribution.Table.COLUMN_TIMESTAMP + " * " + Contribution.Table.COLUMN_STATE + ")";
 
 
     public ContributionsActivity() {
         super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
     }
 
-    private UploadService uploadService;
-    private boolean isUploadServiceConnected;
+
     private ServiceConnection uploadServiceConnection = new ServiceConnection() {
         public void onServiceConnected(ComponentName componentName, IBinder binder) {
             uploadService = (UploadService) ((HandlerService.HandlerServiceLocalBinder)binder).getService();
@@ -70,17 +82,6 @@ public  class       ContributionsActivity
         }
     }
 
-    private String CONTRIBUTION_SELECTION = "";
-    /*
-        This sorts in the following order:
-        Currently Uploading
-        Failed (Sorted in ascending order of time added - FIFO)
-        Queued to Upload (Sorted in ascending order of time added - FIFO)
-        Completed (Sorted in descending order of time added)
-
-        This is why Contribution.STATE_COMPLETED is -1.
-     */
-    private String CONTRIBUTION_SORT = Contribution.Table.COLUMN_STATE + " DESC, " + Contribution.Table.COLUMN_UPLOADED + " DESC , (" + Contribution.Table.COLUMN_TIMESTAMP + " * " + Contribution.Table.COLUMN_STATE + ")";
 
     @Override
     protected void onResume() {
