@@ -17,7 +17,6 @@ import android.support.v4.app.NavUtils;
 
 import fr.free.nrw.commons.*;
 import fr.free.nrw.commons.WelcomeActivity;
-import fr.free.nrw.commons.campaigns.CampaignsContentProvider;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.EventLog;
@@ -72,7 +71,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 // FIXME: If the user turns it off, it shouldn't be auto turned back on
                 ContentResolver.setSyncAutomatically(account, ContributionsContentProvider.AUTHORITY, true); // Enable sync by default!
                 ContentResolver.setSyncAutomatically(account, ModificationsContentProvider.AUTHORITY, true); // Enable sync by default!
-                ContentResolver.setSyncAutomatically(account, CampaignsContentProvider.AUTHORITY, true); // Enable sync by default!
                 context.finish();
             } else {
                 int response;
