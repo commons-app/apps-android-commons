@@ -3,3 +3,6 @@ commons/gen-external-apklibs/*
 commons/target/*
 out/*
 *.iml
+*.ipr
+*.iws
+*.apk
