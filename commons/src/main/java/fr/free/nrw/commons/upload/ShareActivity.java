@@ -30,10 +30,6 @@ public  class       ShareActivity
     private SingleUploadFragment shareView;
     private CategorizationFragment categorizationFragment;
 
-    public ShareActivity() {
-        super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
-    }
-
     private CommonsApplication app;
 
     private String source;
@@ -46,6 +42,10 @@ public  class       ShareActivity
     private ImageView backgroundImageView;
 
     private UploadController uploadController;
+
+    public ShareActivity() {
+        super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
+    }
 
     public void uploadActionInitiated(String title, String description) {
         Toast startingToast = Toast.makeText(getApplicationContext(), R.string.uploading_started, Toast.LENGTH_LONG);

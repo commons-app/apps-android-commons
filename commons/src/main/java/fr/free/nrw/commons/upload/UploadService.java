@@ -68,7 +68,7 @@ public class UploadService extends HandlerService<Contribution> {
             this.notificationFinishingTitle = notificationFinishingTitle;
             this.contribution = contribution;
         }
-        
+
         public void onProgress(long transferred, long total) {
             Log.d("Commons", String.format("Uploaded %d of %d", transferred, total));
             if(!notificationTitleChanged) {
