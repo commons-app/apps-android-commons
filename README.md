@@ -17,14 +17,14 @@ Community-maintained app, independant from the Wikimedia Foundation. Volunteers 
 
 **Note**: Currently uses a bunch of dependencies that are staged at `yuvi.in/blog/maven`. Will be migrated to either [Maven Central][4] or a Wikimedia staging server soon.
 
-## Set Up IntelliJ for Commons Android App Development ##
+## Set Up Android Studio or IntelliJ for Commons Android App Development ##
 
 ### Import and Compile Commons Android App ##
 
-[Download IntelliJ][6]
+[Download IntelliJ][6] or [Download Android Studio][7]. 
 
 1. Clone the repository.
-2. Open IntelliJ.
+2. Open IntelliJ/Android Studio. Ensure Maven integration plugin is enabled.
 3. Import Project:  
 	File -> Import Project  
 	or  
@@ -96,3 +96,4 @@ Thumbnail images are not currently cached. (?)
 [4]: http://search.maven.org/
 [5]: https://www.apache.org/licenses/LICENSE-2.0
 [6]: http://www.jetbrains.com/idea/download/index.html
+[7]: http://developer.android.com/sdk/index.html
