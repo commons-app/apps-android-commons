@@ -80,6 +80,7 @@ public class ContributionController {
                 shareIntent.putExtra(UploadService.EXTRA_SOURCE, Contribution.SOURCE_CAMERA);
                 break;
         }
+        Log.i("Image", "Image selected");
         activity.startActivity(shareIntent);
     }
 
