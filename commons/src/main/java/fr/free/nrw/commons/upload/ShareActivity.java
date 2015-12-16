@@ -42,8 +42,7 @@ public  class       ShareActivity
     private String source;
     private String mimeType;
     private String mediaUriString;
-    private String mediaUriPath;
-    private String mediaUriAbsPath;
+    private String filePath = "";
 
     private static final String TAG = "Image";
 
@@ -189,43 +188,13 @@ public  class       ShareActivity
         mediaUriString = mediaUri.toString();
         Log.d(TAG, "Uri: " + mediaUriString);
 
-        mediaUriPath = mediaUri.getPath();
+        ImageProcessing imageObj = new ImageProcessing(mediaUri);
+        String filePath = imageObj.getFilePath();
+        String latitude = imageObj.getLatitude(filePath);
 
-        // Will return "image:x*"
-        String wholeID = DocumentsContract.getDocumentId(mediaUri);
 
-// Split at colon, use second item in the array
-        String id = wholeID.split(":")[1];
 
-        String[] column = { MediaStore.Images.Media.DATA };
 
-// where id is equal to
-        String sel = MediaStore.Images.Media._ID + "=?";
-
-        Cursor cursor = getContentResolver().
-                query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                        column, sel, new String[]{ id }, null);
-
-        String filePath = "";
-
-        int columnIndex = cursor.getColumnIndex(column[0]);
-
-        if (cursor.moveToFirst()) {
-            filePath = cursor.getString(columnIndex);
-        }
-
-        cursor.close();
-
-        Log.d(TAG, "Path 1: " + mediaUriPath);
-        Log.d(TAG, "Path 2: " + filePath);
-
-        try {
-            exif = new ExifInterface(filePath);
-            String latitude = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE);
-            Log.d("Image", "Latitude: " + latitude);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         ImageLoader.getInstance().displayImage(mediaUriString, backgroundImageView);
 
