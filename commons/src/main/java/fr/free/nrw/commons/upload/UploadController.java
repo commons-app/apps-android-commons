@@ -140,6 +140,7 @@ public class UploadController {
             @Override
             protected void onPostExecute(Contribution contribution) {
                 super.onPostExecute(contribution);
+                //temporarily disabled for debugging
                 //uploadService.queue(UploadService.ACTION_UPLOAD_FILE, contribution);
                 onComplete.onUploadStarted(contribution);
             }

@@ -1,12 +1,17 @@
 package fr.free.nrw.commons.upload;
 
 import android.content.*;
+import android.media.ExifInterface;
 import android.os.*;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import android.net.*;
+import android.provider.MediaStore;
 import android.support.v4.app.NavUtils;
 import com.actionbarsherlock.view.MenuItem;
+
+import android.util.Log;
 import android.widget.*;
+import android.database.Cursor;
 
 import fr.free.nrw.commons.*;
 import fr.free.nrw.commons.modifications.CategoryModifier;
@@ -19,6 +24,7 @@ import fr.free.nrw.commons.auth.*;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -34,8 +40,14 @@ public  class       ShareActivity
 
     private String source;
     private String mimeType;
+    private String mediaUriString;
+    private String mediaUriPath;
+
+    private static final String TAG = "Image";
 
     private Uri mediaUri;
+
+    private ExifInterface exif;
 
     private Contribution contribution;
 
@@ -50,7 +62,7 @@ public  class       ShareActivity
     public void uploadActionInitiated(String title, String description) {
         Toast startingToast = Toast.makeText(getApplicationContext(), R.string.uploading_started, Toast.LENGTH_LONG);
         startingToast.show();
-        uploadController.startUpload(title, mediaUri, description, mimeType,  source, new UploadController.ContributionUploadProgress() {
+        uploadController.startUpload(title, mediaUri, description, mimeType, source, new UploadController.ContributionUploadProgress() {
             public void onUploadStarted(Contribution contribution) {
                 ShareActivity.this.contribution = contribution;
                 showPostUpload();
@@ -154,7 +166,6 @@ public  class       ShareActivity
         setContentView(R.layout.activity_share);
         
         app = (CommonsApplication)this.getApplicationContext();
-        
         backgroundImageView = (ImageView)findViewById(R.id.backgroundImage);
 
         Intent intent = getIntent();
@@ -163,6 +174,9 @@ public  class       ShareActivity
             mediaUri = (Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM);
             if(intent.hasExtra(UploadService.EXTRA_SOURCE)) {
                 source = intent.getStringExtra(UploadService.EXTRA_SOURCE);
+                //Bundle bundle = intent.getExtras();
+                //String filepath = bundle.getString("file_path");
+                //Log.d(TAG, "Filepath: " + filepath);
             } else {
                 source = Contribution.SOURCE_EXTERNAL;
             }
@@ -170,7 +184,21 @@ public  class       ShareActivity
             mimeType = intent.getType();
         }
 
-        ImageLoader.getInstance().displayImage(mediaUri.toString(), backgroundImageView);
+        mediaUriString = mediaUri.toString();
+        Log.d(TAG, "Uri: " + mediaUriString);
+
+        mediaUriPath = mediaUri.getPath();
+        Log.d(TAG, "Path: " + mediaUriPath);
+
+        try {
+            exif = new ExifInterface(mediaUriPath);
+            String latitude = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE);
+            Log.d("Image", "Latitude: " + latitude);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        ImageLoader.getInstance().displayImage(mediaUriString, backgroundImageView);
 
         if(savedInstanceState != null)  {
             contribution = savedInstanceState.getParcelable("contribution");
