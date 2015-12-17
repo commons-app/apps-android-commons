@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.upload;
 
-import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.media.ExifInterface;
@@ -15,11 +14,9 @@ import java.io.IOException;
 /**
  * Created by misao on 16-Dec-15.
  */
-//Needs to extend Activity in order to call getContentResolver(). Might not be the best way?
 public class ImageProcessing {
 
     private Uri uri;
-    private ExifInterface exif;
     private Context context;
 
     public ImageProcessing(Context context, Uri uri){
@@ -52,11 +49,13 @@ public class ImageProcessing {
         return filePath;
     }
 
+
     public String getCoords(String filePath) {
         String latitude = "";
         String longitude = "";
         String latitude_ref = "";
         String longitude_ref = "";
+        ExifInterface exif;
 
         try {
             exif = new ExifInterface(filePath);
