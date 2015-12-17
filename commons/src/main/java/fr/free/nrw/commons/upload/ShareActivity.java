@@ -175,9 +175,6 @@ public  class       ShareActivity
             mediaUri = (Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM);
             if(intent.hasExtra(UploadService.EXTRA_SOURCE)) {
                 source = intent.getStringExtra(UploadService.EXTRA_SOURCE);
-                //Bundle bundle = intent.getExtras();
-                //String filepath = bundle.getString("file_path");
-                //Log.d(TAG, "Filepath: " + filepath);
             } else {
                 source = Contribution.SOURCE_EXTERNAL;
             }
@@ -188,7 +185,7 @@ public  class       ShareActivity
         mediaUriString = mediaUri.toString();
         Log.d(TAG, "Uri: " + mediaUriString);
 
-        ImageProcessing imageObj = new ImageProcessing(mediaUri);
+        ImageProcessing imageObj = new ImageProcessing(getApplicationContext(), mediaUri);
         String filePath = imageObj.getFilePath();
         String latitude = imageObj.getLatitude(filePath);
 
