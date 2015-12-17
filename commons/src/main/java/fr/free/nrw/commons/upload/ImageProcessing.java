@@ -52,7 +52,7 @@ public class ImageProcessing {
         return filePath;
     }
 
-    public String getLatitude(String filePath) {
+    public String getCoords(String filePath) {
         String latitude = "";
         String longitude = "";
         String latitude_ref = "";

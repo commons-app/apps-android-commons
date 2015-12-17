@@ -185,9 +185,9 @@ public  class       ShareActivity
         mediaUriString = mediaUri.toString();
         Log.d(TAG, "Uri: " + mediaUriString);
 
-        ImageProcessing imageObj = new ImageProcessing(getApplicationContext(), mediaUri);
+        ImageProcessing imageObj = new ImageProcessing(this, mediaUri);
         String filePath = imageObj.getFilePath();
-        String latitude = imageObj.getLatitude(filePath);
+        String latitude = imageObj.getCoords(filePath);
 
 
 
