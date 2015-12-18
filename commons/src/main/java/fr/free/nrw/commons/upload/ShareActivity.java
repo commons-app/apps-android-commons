@@ -44,8 +44,6 @@ public  class       ShareActivity
     private String mediaUriString;
     private String filePath = "";
 
-    private static final String TAG = "Image";
-
     private Uri mediaUri;
 
     private ExifInterface exif;
@@ -183,12 +181,12 @@ public  class       ShareActivity
         }
 
         mediaUriString = mediaUri.toString();
-        Log.d(TAG, "Uri: " + mediaUriString);
+        Log.d("Image", "Uri: " + mediaUriString);
 
         ImageProcessing imageObj = new ImageProcessing(this, mediaUri);
         String filePath = imageObj.getFilePath();
         String coords = imageObj.getCoords(filePath);
-        Log.d(TAG, "Coords of image: " + coords);
+        Log.d("Image", "Coords of image: " + coords);
 
 
         ImageLoader.getInstance().displayImage(mediaUriString, backgroundImageView);

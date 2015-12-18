@@ -96,7 +96,7 @@ public class ImageProcessing {
             decLongitude = 0 - convertToDegree(longitude);
         }
 
-        return (String.valueOf(decLatitude) + ", " + String.valueOf(decLongitude));
+        return (String.valueOf(decLatitude) + "|" + String.valueOf(decLongitude));
     }
 
     private double convertToDegree(String stringDMS){
