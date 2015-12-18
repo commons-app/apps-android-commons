@@ -187,10 +187,8 @@ public  class       ShareActivity
 
         ImageProcessing imageObj = new ImageProcessing(this, mediaUri);
         String filePath = imageObj.getFilePath();
-        String latitude = imageObj.getCoords(filePath);
-
-
-
+        String coords = imageObj.getCoords(filePath);
+        Log.d(TAG, "Coords of image: " + coords);
 
 
         ImageLoader.getInstance().displayImage(mediaUriString, backgroundImageView);
