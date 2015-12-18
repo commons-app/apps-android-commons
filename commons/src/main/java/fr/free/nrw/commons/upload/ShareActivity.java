@@ -1,18 +1,14 @@
 package fr.free.nrw.commons.upload;
 
 import android.content.*;
-import android.media.ExifInterface;
 import android.os.*;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import android.net.*;
-import android.provider.DocumentsContract;
-import android.provider.MediaStore;
 import android.support.v4.app.NavUtils;
 import com.actionbarsherlock.view.MenuItem;
 
 import android.util.Log;
 import android.widget.*;
-import android.database.Cursor;
 
 import fr.free.nrw.commons.*;
 import fr.free.nrw.commons.modifications.CategoryModifier;
@@ -25,7 +21,6 @@ import fr.free.nrw.commons.auth.*;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -42,11 +37,8 @@ public  class       ShareActivity
     private String source;
     private String mimeType;
     private String mediaUriString;
-    private String filePath = "";
 
     private Uri mediaUri;
-
-    private ExifInterface exif;
 
     private Contribution contribution;
 
@@ -183,9 +175,11 @@ public  class       ShareActivity
         mediaUriString = mediaUri.toString();
         Log.d("Image", "Uri: " + mediaUriString);
 
-        ImageProcessing imageObj = new ImageProcessing(this, mediaUri);
-        String filePath = imageObj.getFilePath();
-        String coords = imageObj.getCoords(filePath);
+        FilePathConverter uriObj = new FilePathConverter(this, mediaUri);
+        String filePath = uriObj.getFilePath();
+
+        GPSExtractor imageObj = new GPSExtractor(filePath);
+        String coords = imageObj.getCoords();
         Log.d("Image", "Coords of image: " + coords);
 
 
