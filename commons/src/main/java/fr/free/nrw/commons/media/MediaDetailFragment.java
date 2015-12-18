@@ -174,6 +174,7 @@ public class MediaDetailFragment extends SherlockFragment {
             MediaWikiImageView mwImage = (MediaWikiImageView)image;
             mwImage.setLoadingView(loadingProgress); //FIXME: Set this as an attribute
             mwImage.setMedia(media, loader);
+
             Log.d("Volley", actualUrl);
             // FIXME: For transparent images
 

@@ -6,6 +6,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import android.net.*;
 import android.support.v4.app.NavUtils;
 import com.actionbarsherlock.view.MenuItem;
+
+import android.util.Log;
 import android.widget.*;
 
 import fr.free.nrw.commons.*;
@@ -30,14 +32,11 @@ public  class       ShareActivity
     private SingleUploadFragment shareView;
     private CategorizationFragment categorizationFragment;
 
-    public ShareActivity() {
-        super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
-    }
-
     private CommonsApplication app;
 
     private String source;
     private String mimeType;
+    private String mediaUriString;
 
     private Uri mediaUri;
 
@@ -47,10 +46,14 @@ public  class       ShareActivity
 
     private UploadController uploadController;
 
+    public ShareActivity() {
+        super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
+    }
+
     public void uploadActionInitiated(String title, String description) {
         Toast startingToast = Toast.makeText(getApplicationContext(), R.string.uploading_started, Toast.LENGTH_LONG);
         startingToast.show();
-        uploadController.startUpload(title, mediaUri, description, mimeType,  source, new UploadController.ContributionUploadProgress() {
+        uploadController.startUpload(title, mediaUri, description, mimeType, source, new UploadController.ContributionUploadProgress() {
             public void onUploadStarted(Contribution contribution) {
                 ShareActivity.this.contribution = contribution;
                 showPostUpload();
@@ -154,7 +157,6 @@ public  class       ShareActivity
         setContentView(R.layout.activity_share);
         
         app = (CommonsApplication)this.getApplicationContext();
-        
         backgroundImageView = (ImageView)findViewById(R.id.backgroundImage);
 
         Intent intent = getIntent();
@@ -170,7 +172,18 @@ public  class       ShareActivity
             mimeType = intent.getType();
         }
 
-        ImageLoader.getInstance().displayImage(mediaUri.toString(), backgroundImageView);
+        mediaUriString = mediaUri.toString();
+        Log.d("Image", "Uri: " + mediaUriString);
+
+        FilePathConverter uriObj = new FilePathConverter(this, mediaUri);
+        String filePath = uriObj.getFilePath();
+
+        GPSExtractor imageObj = new GPSExtractor(filePath);
+        String coords = imageObj.getCoords();
+        Log.d("Image", "Coords of image: " + coords);
+
+
+        ImageLoader.getInstance().displayImage(mediaUriString, backgroundImageView);
 
         if(savedInstanceState != null)  {
             contribution = savedInstanceState.getParcelable("contribution");

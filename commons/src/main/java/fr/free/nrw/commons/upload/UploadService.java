@@ -69,7 +69,6 @@ public class UploadService extends HandlerService<Contribution> {
             this.contribution = contribution;
         }
 
-        @Override
         public void onProgress(long transferred, long total) {
             Log.d("Commons", String.format("Uploaded %d of %d", transferred, total));
             if(!notificationTitleChanged) {
