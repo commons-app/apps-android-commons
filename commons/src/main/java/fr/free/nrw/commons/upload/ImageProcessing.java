@@ -80,7 +80,7 @@ public class ImageProcessing {
     //Converts format of coords into decimal coords as required by API for next step
     private String getDecimalCoords(String latitude, String latitude_ref, String longitude, String longitude_ref) {
 
-        Float decLatitude, decLongitude;
+        double decLatitude, decLongitude;
 
         if(latitude_ref.equals("N")){
             decLatitude = convertToDegree(latitude);
@@ -99,27 +99,26 @@ public class ImageProcessing {
         return (String.valueOf(decLatitude) + ", " + String.valueOf(decLongitude));
     }
 
-    private Float convertToDegree(String stringDMS){
-        Float result;
+    private double convertToDegree(String stringDMS){
+        double result;
         String[] DMS = stringDMS.split(",", 3);
 
         String[] stringD = DMS[0].split("/", 2);
-        Double D0 = new Double(stringD[0]);
-        Double D1 = new Double(stringD[1]);
-        Double FloatD = D0/D1;
+        double d0 = new Double(stringD[0]);
+        double d1 = new Double(stringD[1]);
+        double degrees = d0/d1;
 
         String[] stringM = DMS[1].split("/", 2);
-        Double M0 = new Double(stringM[0]);
-        Double M1 = new Double(stringM[1]);
-        Double FloatM = M0/M1;
+        double m0 = new Double(stringM[0]);
+        double m1 = new Double(stringM[1]);
+        double minutes = m0/m1;
 
         String[] stringS = DMS[2].split("/", 2);
-        Double S0 = new Double(stringS[0]);
-        Double S1 = new Double(stringS[1]);
-        Double FloatS = S0/S1;
+        double s0 = new Double(stringS[0]);
+        double s1 = new Double(stringS[1]);
+        double seconds = s0/s1;
 
-        result = new Float(FloatD + (FloatM/60) + (FloatS/3600));
-
+        result = degrees + (minutes/60) + (seconds/3600);
         return result;
     }
 
