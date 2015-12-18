@@ -104,18 +104,18 @@ public class ImageProcessing {
         String[] DMS = stringDMS.split(",", 3);
 
         String[] stringD = DMS[0].split("/", 2);
-        double d0 = new Double(stringD[0]);
-        double d1 = new Double(stringD[1]);
+        double d0 = Double.parseDouble(stringD[0]);
+        double d1 = Double.parseDouble(stringD[1]);
         double degrees = d0/d1;
 
         String[] stringM = DMS[1].split("/", 2);
-        double m0 = new Double(stringM[0]);
-        double m1 = new Double(stringM[1]);
+        double m0 = Double.parseDouble(stringM[0]);
+        double m1 = Double.parseDouble(stringM[1]);
         double minutes = m0/m1;
 
         String[] stringS = DMS[2].split("/", 2);
-        double s0 = new Double(stringS[0]);
-        double s1 = new Double(stringS[1]);
+        double s0 = Double.parseDouble(stringS[0]);
+        double s1 = Double.parseDouble(stringS[1]);
         double seconds = s0/s1;
 
         result = degrees + (minutes/60) + (seconds/3600);
