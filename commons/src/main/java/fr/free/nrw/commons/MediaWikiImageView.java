@@ -151,7 +151,7 @@ public class MediaWikiImageView extends ImageView {
         // from the network.
         ImageContainer newContainer = mImageLoader.get(mUrl,
                 new ImageListener() {
-
+                    @Override
                     public void onErrorResponse(final VolleyError error) {
                         if(!tryOriginal) {
                             post(new Runnable() {
@@ -163,7 +163,7 @@ public class MediaWikiImageView extends ImageView {
 
                     }
 
-
+                    @Override
                     public void onResponse(final ImageContainer response, boolean isImmediate) {
                         // If this was an immediate response that was delivered inside of a layout
                         // pass do not set the image immediately as it will trigger a requestLayout
@@ -171,7 +171,7 @@ public class MediaWikiImageView extends ImageView {
                         // the main thread.
                         if (isImmediate && isInLayoutPass) {
                             post(new Runnable() {
-
+                                @Override
                                 public void run() {
                                     onResponse(response, false);
                                 }

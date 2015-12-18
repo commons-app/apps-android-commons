@@ -11,9 +11,6 @@ import android.util.Log;
 import java.io.IOException;
 
 
-/**
- * Created by misao on 16-Dec-15.
- */
 public class ImageProcessing {
 
     private Uri uri;
@@ -23,8 +20,10 @@ public class ImageProcessing {
         this.context = context;
         this.uri = uri;
     }
-
-    //Gets file path of image from its Uri
+    /**
+    * Gets file path of image from its Uri
+    * May return null
+    */
     public String getFilePath(){
         String filePath ="";
         // Will return "image:x*"

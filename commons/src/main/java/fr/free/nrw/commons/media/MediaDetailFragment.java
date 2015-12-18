@@ -187,7 +187,6 @@ public class MediaDetailFragment extends SherlockFragment {
                 @Override
                 protected void onPreExecute() {
                     extractor = new MediaDataExtractor(media.getFilename(), licenseList);
-
                 }
 
                 @Override
