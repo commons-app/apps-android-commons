@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class APICalls {
-    
+
     private static RequestQueue REQUEST_QUEUE;
     private static final Gson GSON = new Gson();
     private Context context;

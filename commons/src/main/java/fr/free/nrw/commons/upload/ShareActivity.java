@@ -184,12 +184,12 @@ public  class       ShareActivity
         String coords = imageObj.getCoords();
         Log.d("Image", "Coords of image: " + coords);
 
-        //build URL for MediaWiki API calls
+        //build URL with image coords for MediaWiki API calls
         String apiUrl = UrlBuilder.buildUrl(coords);
         Log.d("Image", "URL: " + apiUrl);
 
 
-        //TODO: Call request() method of APICalls
+        //asynchronous calls to MediaWiki Commons API to match image coords with nearby Commons categories
         APICalls apiCall = new APICalls(this);
         apiCall.request(apiUrl);
 
