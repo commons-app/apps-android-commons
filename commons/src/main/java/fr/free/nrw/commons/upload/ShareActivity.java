@@ -220,8 +220,11 @@ public  class       ShareActivity
         return super.onOptionsItemSelected(item);
     }
 
-    //https://commons.wikimedia.org/w/api.php?action=query&prop=categories|coordinates|pageprops&format=json&clshow=!hidden&coprop=type|name|dim|country|region|globe&codistancefrompoint=38.11386944444445|13.356263888888888&
-    // generator=geosearch&redirects=&ggscoord=38.11386944444445|13.356263888888888&ggsradius=100&ggslimit=10&ggsnamespace=6&ggsprop=type|name|dim|country|region|globe&ggsprimary=all&formatversion=2
+    /**
+     * Builds URL with image coords for MediaWiki API calls
+     * Example URL: https://commons.wikimedia.org/w/api.php?action=query&prop=categories|coordinates|pageprops&format=json&clshow=!hidden&coprop=type|name|dim|country|region|globe&codistancefrompoint=38.11386944444445|13.356263888888888&
+     * generator=geosearch&redirects=&ggscoord=38.11386944444445|13.356263888888888&ggsradius=100&ggslimit=10&ggsnamespace=6&ggsprop=type|name|dim|country|region|globe&ggsprimary=all&formatversion=2
+     */
     public static class UrlBuilder {
         private static String buildUrl (String coords){
 
