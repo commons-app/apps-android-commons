@@ -164,27 +164,6 @@ public class APICalls {
         }
 
     }
-/*
-    private class Category {
-        private Category [] categories;
-        private int ns;
-        private String title;
 
-        public Category(Object categoryobj) {
-            //TODO
-        }
-
-        public String toString() {
-            StringBuilder builder = new StringBuilder("categories=");
-            for (Category category: categories) {
-                builder.append(category.toString());
-                builder.append("\n");
-            }
-            builder.replace(builder.length() - 1, builder.length(), "");
-            return builder.toString();
-        }
-
-
-    }*/
 }
 
