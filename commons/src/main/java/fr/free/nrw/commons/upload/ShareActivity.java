@@ -191,7 +191,7 @@ public  class       ShareActivity
 
         //TODO: Call request() method of APICalls
         APICalls apiCall = new APICalls(this);
-        apiCall.request();
+        apiCall.request(apiUrl);
 
 
         ImageLoader.getInstance().displayImage(mediaUriString, backgroundImageView);

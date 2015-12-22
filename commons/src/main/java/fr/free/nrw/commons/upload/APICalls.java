@@ -21,9 +21,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class APICalls {
-
-    //private static final String ENDPOINT = "https://commons.wikimedia.org/w/api.php?action=query&prop=categories|coordinates|pageprops&format=json&clshow=!hidden&coprop=type%7Cname%7Cdim%7Ccountry%7Cregion%7Cglobe&codistancefrompoint=40.7127%7C-74.0059&generator=geosearch&redirects=&ggscoord=40.7127%7C-74.0059&ggsradius=10&ggslimit=5&ggsnamespace=6&ggsprop=type%7Cname%7Cdim%7Ccountry%7Cregion%7Cglobe&ggsprimary=all&formatversion=2";
-    private static final String ENDPOINT = "https://commons.wikimedia.org/w/api.php?action=query&prop=categories|coordinates|pageprops&format=json&clshow=!hidden&coprop=type%7Cname%7Cdim%7Ccountry%7Cregion%7Cglobe&codistancefrompoint=38.11386944444445%7C13.356263888888888&generator=geosearch&redirects=&ggscoord=38.11386944444445%7C13.356263888888888&ggsradius=100&ggslimit=10&ggsnamespace=6&ggsprop=type%7Cname%7Cdim%7Ccountry%7Cregion%7Cglobe&ggsprimary=all&formatversion=2";
+    
     private static RequestQueue REQUEST_QUEUE;
     private static final Gson GSON = new Gson();
     private Context context;
@@ -31,8 +29,8 @@ public class APICalls {
     public APICalls(Context context) {
         this.context = context;
     }
-    public void request() {
-        JsonRequest<QueryResponse> request = new QueryRequest(ENDPOINT,
+    public void request(String apiUrl) {
+        JsonRequest<QueryResponse> request = new QueryRequest(apiUrl,
                 new LogResponseListener<QueryResponse>(), new LogResponseErrorListener());
         getQueue().add(request);
     }
