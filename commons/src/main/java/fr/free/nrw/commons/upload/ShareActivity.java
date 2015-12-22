@@ -184,7 +184,14 @@ public  class       ShareActivity
         String coords = imageObj.getCoords();
         Log.d("Image", "Coords of image: " + coords);
 
-        Log.d("Image", "URL: " + UrlBuilder.buildUrl(coords));
+        //build URL for MediaWiki API calls
+        String apiUrl = UrlBuilder.buildUrl(coords);
+        Log.d("Image", "URL: " + apiUrl);
+
+
+        //TODO: Call request() method of APICalls
+        APICalls apiCall = new APICalls(this);
+        apiCall.request();
 
 
         ImageLoader.getInstance().displayImage(mediaUriString, backgroundImageView);
@@ -237,8 +244,7 @@ public  class       ShareActivity
                     .appendQueryParameter("ggsprimary", "all")
                     .appendQueryParameter("formatversion", "2");
 
-            String url = builder.build().toString();
-            return url;
+            return builder.build().toString();
         }
     }
 
