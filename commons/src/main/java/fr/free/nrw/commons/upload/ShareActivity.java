@@ -179,19 +179,23 @@ public  class       ShareActivity
         FilePathConverter uriObj = new FilePathConverter(this, mediaUri);
         String filePath = uriObj.getFilePath();
 
-        //extract the coordinates of image in decimal degrees
-        GPSExtractor imageObj = new GPSExtractor(filePath);
-        String coords = imageObj.getCoords();
-        Log.d("Image", "Coords of image: " + coords);
+        if (filePath != null) {
+            //extract the coordinates of image in decimal degrees
+            GPSExtractor imageObj = new GPSExtractor(filePath);
+            String coords = imageObj.getCoords();
 
-        MwVolleyApi apiCall = new MwVolleyApi(this);
+            if (coords != null) {
+                Log.d("Image", "Coords of image: " + coords);
+                MwVolleyApi apiCall = new MwVolleyApi(this);
 
-        //build URL with image coords for MediaWiki API calls
-        String apiUrl = apiCall.buildUrl(coords);
-        Log.d("Image", "URL: " + apiUrl);
+                //build URL with image coords for MediaWiki API calls
+                String apiUrl = apiCall.buildUrl(coords);
+                Log.d("Image", "URL: " + apiUrl);
 
-        //asynchronous calls to MediaWiki Commons API to match image coords with nearby Commons categories
-        apiCall.request(apiUrl);
+                //asynchronous calls to MediaWiki Commons API to match image coords with nearby Commons categories
+                apiCall.request(apiUrl);
+            }
+        }
 
         ImageLoader.getInstance().displayImage(mediaUriString, backgroundImageView);
 
