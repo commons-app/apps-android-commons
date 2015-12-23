@@ -175,12 +175,23 @@ public  class       ShareActivity
         mediaUriString = mediaUri.toString();
         Log.d("Image", "Uri: " + mediaUriString);
 
+        //convert image Uri to file path
         FilePathConverter uriObj = new FilePathConverter(this, mediaUri);
         String filePath = uriObj.getFilePath();
 
+        //extract the coordinates of image in decimal degrees
         GPSExtractor imageObj = new GPSExtractor(filePath);
         String coords = imageObj.getCoords();
         Log.d("Image", "Coords of image: " + coords);
+
+        //build URL with image coords for MediaWiki API calls
+        String apiUrl = UrlBuilder.buildUrl(coords);
+        Log.d("Image", "URL: " + apiUrl);
+
+
+        //asynchronous calls to MediaWiki Commons API to match image coords with nearby Commons categories
+        MwVolleyApi apiCall = new MwVolleyApi(this);
+        apiCall.request(apiUrl);
 
 
         ImageLoader.getInstance().displayImage(mediaUriString, backgroundImageView);
@@ -191,6 +202,7 @@ public  class       ShareActivity
 
         requestAuthToken();
     }
+
 
     @Override
     protected void onDestroy() {
@@ -206,6 +218,37 @@ public  class       ShareActivity
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Builds URL with image coords for MediaWiki API calls
+     * Example URL: https://commons.wikimedia.org/w/api.php?action=query&prop=categories|coordinates|pageprops&format=json&clshow=!hidden&coprop=type|name|dim|country|region|globe&codistancefrompoint=38.11386944444445|13.356263888888888&
+     * generator=geosearch&redirects=&ggscoord=38.11386944444445|13.356263888888888&ggsradius=100&ggslimit=10&ggsnamespace=6&ggsprop=type|name|dim|country|region|globe&ggsprimary=all&formatversion=2
+     */
+    public static class UrlBuilder {
+        private static String buildUrl (String coords){
+
+            Uri.Builder builder = Uri.parse("https://commons.wikimedia.org/").buildUpon();
+
+            builder.appendPath("w")
+                    .appendPath("api.php")
+                    .appendQueryParameter("action", "query")
+                    .appendQueryParameter("prop", "categories|coordinates|pageprops")
+                    .appendQueryParameter("format", "json")
+                    .appendQueryParameter("clshow", "!hidden")
+                    .appendQueryParameter("coprop", "type|name|dim|country|region|globe")
+                    .appendQueryParameter("codistancefrompoint", coords)
+                    .appendQueryParameter("generator", "geosearch")
+                    .appendQueryParameter("ggscoord", coords)
+                    .appendQueryParameter("ggsradius", "100")
+                    .appendQueryParameter("ggslimit", "10")
+                    .appendQueryParameter("ggsnamespace", "6")
+                    .appendQueryParameter("ggsprop", "type|name|dim|country|region|globe")
+                    .appendQueryParameter("ggsprimary", "all")
+                    .appendQueryParameter("formatversion", "2");
+
+            return builder.toString();
+        }
     }
 
 }
