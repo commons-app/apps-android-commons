@@ -130,15 +130,14 @@ public class MwVolleyApi {
         public String toString() {
 
             StringBuilder builder = new StringBuilder("PAGEID=" + pageid + " ns=" + ns + " title=" + title + "\n" + " CATEGORIES= ");
-            if (categories != null) {
+
+            if (categories == null || categories.length == 0) {
+                builder.append("no categories exist\n");
+            } else {
                 for (Category category : categories) {
                     builder.append(category.toString());
                     builder.append("\n");
                 }
-            }
-            else {
-                builder.append("no categories exist");
-                builder.append("\n");
             }
 
             builder.replace(builder.length() - 1, builder.length(), "");
