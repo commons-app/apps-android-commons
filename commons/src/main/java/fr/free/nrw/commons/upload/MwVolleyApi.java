@@ -14,16 +14,15 @@ import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.Volley;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.Collection;
 
 public class MwVolleyApi {
 
     private static RequestQueue REQUEST_QUEUE;
-    private static final Gson GSON = new Gson();
+    private static final Gson GSON = new GsonBuilder().create();
     private Context context;
 
     public MwVolleyApi(Context context) {
@@ -110,14 +109,12 @@ public class MwVolleyApi {
 
         @Override
         public String toString() {
-            StringBuilder builder = new StringBuilder("pages=");
+            StringBuilder builder = new StringBuilder("pages=" + "\n");
             for (Page page : pages) {
                 builder.append(page.toString());
                 builder.append("\n");
-                //page.extractCategories();
             }
             builder.replace(builder.length() - 1, builder.length(), "");
-
             return builder.toString();
         }
     }
@@ -126,44 +123,39 @@ public class MwVolleyApi {
         private int pageid;
         private int ns;
         private String title;
-        //private ArrayList<Object> categories;
-        //private Category category;
-
-        /*
-        public boolean categoryExists()  {
-            if (categories != null) {
-                return true;
-            }
-            else {
-                return false;
-            }
-        }
-
-        public void extractCategories() {
-            if (categoryExists()==true) {
-                Log.d("Cat", "categories exist");
-                for (Object categoryobj : categories) {
-                    Log.d("Cat", categoryobj.getClass().getName());
-                }
-            }
-            else {
-                Log.d("Cat", "categories don't exist");
-            }
-        }*/
-
+        private Category[] categories;
+        private Category category;
 
         @Override
         public String toString() {
 
-            //if (categoryExists()==true) {
-                return "pageid=" + pageid + " ns=" + ns + " title=" + title + " categories=";// + category.toString();
-            //}
-            //else {
-            //    return "pageid=" + pageid + " ns=" + ns + " title=" + title;
-           // }
-        }
+            StringBuilder builder = new StringBuilder("PAGEID=" + pageid + " ns=" + ns + " title=" + title + "\n" + " CATEGORIES= ");
+            if (categories != null) {
+                for (Category category : categories) {
+                    builder.append(category.toString());
+                    builder.append("\n");
+                }
+            }
+            else {
+                builder.append("no categories exist");
+                builder.append("\n");
+            }
 
+            builder.replace(builder.length() - 1, builder.length(), "");
+            return builder.toString();
+        }
     }
 
-}
+        private static class Category {
+            private int ns;
+            private String title;
+
+            @Override
+            public String toString() {
+                return " ns=" + ns + " title=" + title;
+            }
+        }
+    }
+
+
 
