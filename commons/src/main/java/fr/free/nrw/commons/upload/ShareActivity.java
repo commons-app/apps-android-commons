@@ -190,7 +190,7 @@ public  class       ShareActivity
 
 
         //asynchronous calls to MediaWiki Commons API to match image coords with nearby Commons categories
-        APICalls apiCall = new APICalls(this);
+        MwVolleyApi apiCall = new MwVolleyApi(this);
         apiCall.request(apiUrl);
 
 
@@ -247,7 +247,7 @@ public  class       ShareActivity
                     .appendQueryParameter("ggsprimary", "all")
                     .appendQueryParameter("formatversion", "2");
 
-            return builder.build().toString();
+            return builder.toString();
         }
     }
 

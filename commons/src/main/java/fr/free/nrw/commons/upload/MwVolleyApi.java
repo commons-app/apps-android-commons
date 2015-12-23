@@ -20,13 +20,13 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class APICalls {
+public class MwVolleyApi {
 
     private static RequestQueue REQUEST_QUEUE;
     private static final Gson GSON = new Gson();
     private Context context;
 
-    public APICalls(Context context) {
+    public MwVolleyApi(Context context) {
         this.context = context;
     }
     public void request(String apiUrl) {
