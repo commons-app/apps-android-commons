@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 
 import com.android.volley.Cache;
@@ -28,7 +29,39 @@ public class MwVolleyApi {
     public MwVolleyApi(Context context) {
         this.context = context;
     }
+
+    /**
+     * Builds URL with image coords for MediaWiki API calls
+     * Example URL: https://commons.wikimedia.org/w/api.php?action=query&prop=categories|coordinates|pageprops&format=json&clshow=!hidden&coprop=type|name|dim|country|region|globe&codistancefrompoint=38.11386944444445|13.356263888888888&
+     * generator=geosearch&redirects=&ggscoord=38.11386944444445|13.356263888888888&ggsradius=100&ggslimit=10&ggsnamespace=6&ggsprop=type|name|dim|country|region|globe&ggsprimary=all&formatversion=2
+     */
+    public String buildUrl (String coords){
+
+        Uri.Builder builder = Uri.parse("https://commons.wikimedia.org/").buildUpon();
+
+        builder.appendPath("w")
+                .appendPath("api.php")
+                .appendQueryParameter("action", "query")
+                .appendQueryParameter("prop", "categories|coordinates|pageprops")
+                .appendQueryParameter("format", "json")
+                .appendQueryParameter("clshow", "!hidden")
+                .appendQueryParameter("coprop", "type|name|dim|country|region|globe")
+                .appendQueryParameter("codistancefrompoint", coords)
+                .appendQueryParameter("generator", "geosearch")
+                .appendQueryParameter("ggscoord", coords)
+                .appendQueryParameter("ggsradius", "100")
+                .appendQueryParameter("ggslimit", "10")
+                .appendQueryParameter("ggsnamespace", "6")
+                .appendQueryParameter("ggsprop", "type|name|dim|country|region|globe")
+                .appendQueryParameter("ggsprimary", "all")
+                .appendQueryParameter("formatversion", "2");
+
+        return builder.toString();
+    }
+
+
     public void request(String apiUrl) {
+
         JsonRequest<QueryResponse> request = new QueryRequest(apiUrl,
                 new LogResponseListener<QueryResponse>(), new LogResponseErrorListener());
         getQueue().add(request);
