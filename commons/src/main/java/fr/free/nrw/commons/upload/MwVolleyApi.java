@@ -34,7 +34,7 @@ public class MwVolleyApi {
         getQueue().add(request);
     }
 
-    private RequestQueue getQueue() {
+    private synchronized RequestQueue getQueue() {
         return getQueue(context);
     }
 
