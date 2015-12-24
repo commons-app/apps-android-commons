@@ -174,8 +174,7 @@ public class MwVolleyApi {
                 return "No collection of categories";
             }
             else {
-                String[] categoryArray = categorySet.toArray(new String[0]);
-                return categoryArray.toString();
+                return categorySet.toString();
             }
         }
 
