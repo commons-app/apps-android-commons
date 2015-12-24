@@ -19,6 +19,9 @@ import com.google.gson.GsonBuilder;
 
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class MwVolleyApi {
 
@@ -134,10 +137,11 @@ public class MwVolleyApi {
 
     private static class QueryResponse {
         private Query query;
+        private Page page;
 
         @Override
         public String toString() {
-            return "query=" + query.toString();
+            return "query=" + query.toString() + "\n" + page.printSet();
         }
     }
 
@@ -163,6 +167,18 @@ public class MwVolleyApi {
         private Category[] categories;
         private Category category;
 
+        private HashSet<String> categorySet = new HashSet<String>();
+
+        private String printSet() {
+            if (categorySet.isEmpty()) {
+                return "No collection of categories";
+            }
+            else {
+                String[] categoryArray = categorySet.toArray(new String[0]);
+                return categoryArray.toString();
+            }
+        }
+
         @Override
         public String toString() {
 
@@ -174,6 +190,9 @@ public class MwVolleyApi {
                 for (Category category : categories) {
                     builder.append(category.toString());
                     builder.append("\n");
+                    if (category != null && category.toString() != null && category.toString() != "") {
+                        categorySet.add(category.toString());
+                    }
                 }
             }
 
