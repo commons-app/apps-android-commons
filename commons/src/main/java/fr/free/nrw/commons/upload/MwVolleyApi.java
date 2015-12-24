@@ -29,6 +29,8 @@ public class MwVolleyApi {
     private static final Gson GSON = new GsonBuilder().create();
     private Context context;
 
+    protected HashSet<String> categorySet;
+
     public MwVolleyApi(Context context) {
         this.context = context;
     }
@@ -135,18 +137,27 @@ public class MwVolleyApi {
         }
     }
 
-    private static class QueryResponse {
-        private Query query;
+    private class QueryResponse {
+        private Query query = new Query();
         private Page page;
+
+        public QueryResponse() {
+            
+        }
 
         @Override
         public String toString() {
-            return "query=" + query.toString() + "\n" + page.printSet();
+            return "query=" + query.toString() + "\n" //page.printSet()
+            ;
         }
     }
 
-    private static class Query {
+    private class Query {
         private Page [] pages;
+
+        public Query() {
+
+        }
 
         @Override
         public String toString() {
@@ -156,21 +167,31 @@ public class MwVolleyApi {
                 builder.append("\n");
             }
             builder.replace(builder.length() - 1, builder.length(), "");
+
+
+            if (categorySet == null || categorySet.isEmpty()) {
+                Log.d("Set", "No category set");
+            }
+            else {
+                Log.d("Set", categorySet.toString());
+            }
+
             return builder.toString();
+
         }
     }
 
-    private static class Page {
+    private class Page {
         private int pageid;
         private int ns;
         private String title;
         private Category[] categories;
         private Category category;
 
-        private HashSet<String> categorySet = new HashSet<String>();
+
 
         private String printSet() {
-            if (categorySet.isEmpty()) {
+            if (categorySet == null || categorySet.isEmpty()) {
                 return "No collection of categories";
             }
             else {
@@ -180,12 +201,13 @@ public class MwVolleyApi {
 
         @Override
         public String toString() {
-
+            categorySet = new HashSet<String>();
             StringBuilder builder = new StringBuilder("PAGEID=" + pageid + " ns=" + ns + " title=" + title + "\n" + " CATEGORIES= ");
 
             if (categories == null || categories.length == 0) {
                 builder.append("no categories exist\n");
-            } else {
+            }
+            else {
                 for (Category category : categories) {
                     builder.append(category.toString());
                     builder.append("\n");
