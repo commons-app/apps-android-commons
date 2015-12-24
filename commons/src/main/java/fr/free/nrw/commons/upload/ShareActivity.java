@@ -188,12 +188,8 @@ public  class       ShareActivity
                 Log.d("Image", "Coords of image: " + coords);
                 MwVolleyApi apiCall = new MwVolleyApi(this);
 
-                //build URL with image coords for MediaWiki API calls
-                String apiUrl = apiCall.buildUrl(coords);
-                Log.d("Image", "URL: " + apiUrl);
-
                 //asynchronous calls to MediaWiki Commons API to match image coords with nearby Commons categories
-                apiCall.request(apiUrl);
+                apiCall.request(coords);
             }
         }
 
