@@ -20,8 +20,6 @@ import com.google.gson.GsonBuilder;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 public class MwVolleyApi {
 
@@ -29,12 +27,12 @@ public class MwVolleyApi {
     private static final Gson GSON = new GsonBuilder().create();
     private Context context;
 
-    protected HashSet<String> categorySet;
+    protected static HashSet<String> categorySet;
 
     public MwVolleyApi(Context context) {
         this.context = context;
+        categorySet = new HashSet<String>();
     }
-
 
     public void request(String coords) {
 
@@ -74,7 +72,6 @@ public class MwVolleyApi {
 
         return builder.toString();
     }
-
 
     private synchronized RequestQueue getQueue() {
         return getQueue(context);
@@ -122,11 +119,9 @@ public class MwVolleyApi {
             return Response.success(queryResponse, cacheEntry(response));
         }
 
-
         private Cache.Entry cacheEntry(NetworkResponse response) {
             return HttpHeaderParser.parseCacheHeaders(response);
         }
-
 
         private String parseString(NetworkResponse response) {
             try {
@@ -137,27 +132,26 @@ public class MwVolleyApi {
         }
     }
 
-    private class QueryResponse {
+    private static class QueryResponse {
         private Query query = new Query();
         private Page page;
 
-        public QueryResponse() {
-            
+        private String printSet() {
+            if (categorySet == null || categorySet.isEmpty()) {
+                return "No collection of categories";
+            }
+            else {
+                return categorySet.toString();
+            }
         }
-
         @Override
         public String toString() {
-            return "query=" + query.toString() + "\n" //page.printSet()
-            ;
+            return "query=" + query.toString() + "\n" + printSet();
         }
     }
 
-    private class Query {
+    private static class Query {
         private Page [] pages;
-
-        public Query() {
-
-        }
 
         @Override
         public String toString() {
@@ -167,7 +161,6 @@ public class MwVolleyApi {
                 builder.append("\n");
             }
             builder.replace(builder.length() - 1, builder.length(), "");
-
 
             if (categorySet == null || categorySet.isEmpty()) {
                 Log.d("Set", "No category set");
@@ -181,7 +174,7 @@ public class MwVolleyApi {
         }
     }
 
-    private class Page {
+    private static class Page {
         private int pageid;
         private int ns;
         private String title;
@@ -190,18 +183,9 @@ public class MwVolleyApi {
 
 
 
-        private String printSet() {
-            if (categorySet == null || categorySet.isEmpty()) {
-                return "No collection of categories";
-            }
-            else {
-                return categorySet.toString();
-            }
-        }
-
         @Override
         public String toString() {
-            categorySet = new HashSet<String>();
+
             StringBuilder builder = new StringBuilder("PAGEID=" + pageid + " ns=" + ns + " title=" + title + "\n" + " CATEGORIES= ");
 
             if (categories == null || categories.length == 0) {
@@ -211,8 +195,10 @@ public class MwVolleyApi {
                 for (Category category : categories) {
                     builder.append(category.toString());
                     builder.append("\n");
-                    if (category != null && category.toString() != null && category.toString() != "") {
+                    if (category != null) {
                         categorySet.add(category.toString());
+                        Log.d("Set", "category added: " + category.toString());
+                        Log.d("Set", categorySet.toString());
                     }
                 }
             }
