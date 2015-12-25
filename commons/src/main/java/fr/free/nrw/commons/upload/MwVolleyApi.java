@@ -141,7 +141,7 @@ public class MwVolleyApi {
                 return "No collection of categories";
             }
             else {
-                return categorySet.toString();
+                return "CATEGORIES FOUND" + categorySet.toString();
             }
         }
         @Override
@@ -162,13 +162,6 @@ public class MwVolleyApi {
             }
             builder.replace(builder.length() - 1, builder.length(), "");
 
-            if (categorySet == null || categorySet.isEmpty()) {
-                Log.d("Set", "No category set");
-            }
-            else {
-                Log.d("Set", categorySet.toString());
-            }
-
             return builder.toString();
 
         }
@@ -180,8 +173,6 @@ public class MwVolleyApi {
         private String title;
         private Category[] categories;
         private Category category;
-
-
 
         @Override
         public String toString() {
@@ -197,8 +188,8 @@ public class MwVolleyApi {
                     builder.append("\n");
                     if (category != null) {
                         categorySet.add(category.toString());
-                        Log.d("Set", "category added: " + category.toString());
-                        Log.d("Set", categorySet.toString());
+                        //Log.d("Set", "category added: " + category.toString());
+                        //Log.d("Set", "Current category Set" + categorySet.toString());
                     }
                 }
             }
