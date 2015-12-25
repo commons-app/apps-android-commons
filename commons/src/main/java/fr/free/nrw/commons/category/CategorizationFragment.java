@@ -8,6 +8,7 @@ import android.os.*;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import com.actionbarsherlock.app.SherlockFragment;
@@ -112,6 +113,10 @@ public class CategorizationFragment extends SherlockFragment{
                     items.add(new CategoryItem(category, false));
                 }
             }
+
+            //TODO: Remove this later
+            Log.d("Cat", "I am still called when upload is commented out");
+
             categoriesAdapter.setItems(items);
             categoriesAdapter.notifyDataSetInvalidated();
             categoriesSearchInProgress.setVisibility(View.GONE);

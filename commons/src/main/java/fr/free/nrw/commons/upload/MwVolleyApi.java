@@ -30,6 +30,7 @@ public class MwVolleyApi {
     private Context context;
 
     protected static HashSet<String> categorySet;
+
     //To check later on whether any nearby categories were found
     public static boolean gpsCatExists;
 
