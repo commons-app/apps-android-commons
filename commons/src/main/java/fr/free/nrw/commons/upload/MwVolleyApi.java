@@ -204,7 +204,7 @@ public class MwVolleyApi {
 
             @Override
             public String toString() {
-                return " title=" + title;
+                return title;
             }
         }
     }
