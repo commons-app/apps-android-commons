@@ -200,12 +200,11 @@ public class MwVolleyApi {
     }
 
         private static class Category {
-            private int ns;
             private String title;
 
             @Override
             public String toString() {
-                return " ns=" + ns + " title=" + title;
+                return " title=" + title;
             }
         }
     }
