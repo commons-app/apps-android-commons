@@ -114,11 +114,7 @@ public class CategorizationFragment extends SherlockFragment{
                     items.add(new CategoryItem(category, false));
                 }
             }
-
-            //TODO: Remove this later
-            Log.d("Cat", "I am still called when upload is commented out");
-
-
+            
             categoriesAdapter.setItems(items);
             categoriesAdapter.notifyDataSetInvalidated();
             categoriesSearchInProgress.setVisibility(View.GONE);
