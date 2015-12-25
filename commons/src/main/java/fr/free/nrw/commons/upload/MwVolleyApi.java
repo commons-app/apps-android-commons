@@ -40,7 +40,7 @@ public class MwVolleyApi {
     }
 
     //To get the list of categories for display
-    public ArrayList<String> getGpsCat() {
+    public static ArrayList<String> getGpsCat() {
         ArrayList<String> list = new ArrayList<String>(categorySet);
         return list;
     }

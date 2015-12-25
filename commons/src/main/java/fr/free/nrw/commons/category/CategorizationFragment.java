@@ -19,6 +19,7 @@ import org.mediawiki.api.ApiResult;
 import org.mediawiki.api.MWApi;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.upload.MwVolleyApi;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -117,6 +118,7 @@ public class CategorizationFragment extends SherlockFragment{
             //TODO: Remove this later
             Log.d("Cat", "I am still called when upload is commented out");
 
+
             categoriesAdapter.setItems(items);
             categoriesAdapter.notifyDataSetInvalidated();
             categoriesSearchInProgress.setVisibility(View.GONE);
@@ -137,6 +139,8 @@ public class CategorizationFragment extends SherlockFragment{
         protected ArrayList<String> doInBackground(Void... voids) {
             if(TextUtils.isEmpty(filter)) {
                 ArrayList<String> items = new ArrayList<String>();
+                ArrayList<String> mergedItems= new ArrayList<String>();
+
                 try {
                     Cursor cursor = client.query(
                             CategoryContentProvider.BASE_URI,
@@ -149,11 +153,21 @@ public class CategorizationFragment extends SherlockFragment{
                         Category cat = Category.fromCursor(cursor);
                         items.add(cat.getName());
                     }
-                } catch (RemoteException e) {
+
+                    if (MwVolleyApi.gpsCatExists){
+                        Log.d("Cat", "GPS cats found in CategorizationFragment.java" + MwVolleyApi.getGpsCat().toString());
+                        ArrayList<String> gpsItems = new ArrayList<String>();
+
+                        mergedItems.addAll(items);
+                        mergedItems.addAll(gpsItems);
+                    }
+
+                }
+                catch (RemoteException e) {
                     // faaaail
                     throw new RuntimeException(e);
                 }
-                return items;
+                return mergedItems;
             }
             if(categoriesCache.containsKey(filter)) {
                 return categoriesCache.get(filter);
