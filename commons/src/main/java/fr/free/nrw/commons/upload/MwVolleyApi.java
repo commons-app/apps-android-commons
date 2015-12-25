@@ -30,6 +30,7 @@ public class MwVolleyApi {
     private Context context;
 
     protected static HashSet<String> categorySet;
+
     //To check later on whether any nearby categories were found
     public static boolean gpsCatExists;
 
@@ -39,7 +40,7 @@ public class MwVolleyApi {
     }
 
     //To get the list of categories for display
-    public ArrayList<String> getGpsCat() {
+    public static ArrayList<String> getGpsCat() {
         ArrayList<String> list = new ArrayList<String>(categorySet);
         return list;
     }
