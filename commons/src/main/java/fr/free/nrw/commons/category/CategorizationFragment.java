@@ -154,23 +154,24 @@ public class CategorizationFragment extends SherlockFragment{
                         items.add(cat.getName());
                     }
 
+                    mergedItems.addAll(items);
+
                     if (MwVolleyApi.gpsCatExists){
                         Log.d("Cat", "GPS cats found in CategorizationFragment.java" + MwVolleyApi.getGpsCat().toString());
                         ArrayList<String> gpsItems = new ArrayList<String>(MwVolleyApi.getGpsCat());
                         Log.d("Cat", "GPS items: " + gpsItems.toString());
 
-                        mergedItems.addAll(items);
                         mergedItems.addAll(gpsItems);
-                        Log.d("Cat", "Merged items: " + mergedItems.toString());
                     }
-
                 }
                 catch (RemoteException e) {
                     // faaaail
                     throw new RuntimeException(e);
                 }
+                Log.d("Cat", "Merged items: " + mergedItems.toString());
                 return mergedItems;
             }
+            
             if(categoriesCache.containsKey(filter)) {
                 return categoriesCache.get(filter);
             }
