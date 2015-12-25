@@ -28,7 +28,6 @@ public class MwVolleyApi {
     private Context context;
 
     protected static HashSet<String> categorySet;
-    protected static String categorySetString;
 
     public MwVolleyApi(Context context) {
         this.context = context;
@@ -142,9 +141,8 @@ public class MwVolleyApi {
                 return "No collection of categories";
             }
             else {
-                categorySetString = categorySet.toString();
-                categorySetString = categorySetString.replace("Category:", "");
-                return "CATEGORIES FOUND" + categorySetString;
+
+                return "CATEGORIES FOUND" + categorySet.toString();
             }
         }
         @Override
@@ -190,7 +188,8 @@ public class MwVolleyApi {
                     builder.append(category.toString());
                     builder.append("\n");
                     if (category != null) {
-                        categorySet.add(category.toString());
+                        String categoryString = category.toString().replace("Category:", "");
+                        categorySet.add(categoryString);
                         //Log.d("Set", "category added: " + category.toString());
                         //Log.d("Set", "Current category Set" + categorySet.toString());
                     }
