@@ -30,6 +30,8 @@ public class MwVolleyApi {
     private Context context;
 
     protected static HashSet<String> categorySet;
+    //To check later on whether any nearby categories were found
+    public static boolean gpsCatExists;
 
     public MwVolleyApi(Context context) {
         this.context = context;
@@ -37,7 +39,7 @@ public class MwVolleyApi {
     }
 
     //To get the list of categories for display
-    public ArrayList<String> getCategoriesGps() {
+    public ArrayList<String> getGpsCat() {
         ArrayList<String> list = new ArrayList<String>(categorySet);
         return list;
     }
@@ -147,10 +149,13 @@ public class MwVolleyApi {
 
         private String printSet() {
             if (categorySet == null || categorySet.isEmpty()) {
+                gpsCatExists = false;
+                Log.d("Cat", "gpsCatExists=" + gpsCatExists);
                 return "No collection of categories";
             }
             else {
-
+                gpsCatExists = true;
+                Log.d("Cat", "gpsCatExists=" + gpsCatExists);
                 return "CATEGORIES FOUND" + categorySet.toString();
             }
         }
