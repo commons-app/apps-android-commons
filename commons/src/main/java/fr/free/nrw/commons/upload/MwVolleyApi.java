@@ -19,7 +19,9 @@ import com.google.gson.GsonBuilder;
 
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 public class MwVolleyApi {
 
@@ -33,6 +35,13 @@ public class MwVolleyApi {
         this.context = context;
         categorySet = new HashSet<String>();
     }
+
+    //To get the list of categories for display
+    public ArrayList<String> getCategoriesGps() {
+        ArrayList<String> list = new ArrayList<String>(categorySet);
+        return list;
+    }
+
 
     public void request(String coords) {
 
