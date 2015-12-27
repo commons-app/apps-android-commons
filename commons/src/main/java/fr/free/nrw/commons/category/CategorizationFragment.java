@@ -149,7 +149,7 @@ public class CategorizationFragment extends SherlockFragment{
                         Category cat = Category.fromCursor(cursor);
                         items.add(cat.getName());
                     }
-                    
+
                     if (MwVolleyApi.gpsCatExists){
                         Log.d("Cat", "GPS cats found in CategorizationFragment.java" + MwVolleyApi.getGpsCat().toString());
                         ArrayList<String> gpsItems = new ArrayList<String>(MwVolleyApi.getGpsCat());
