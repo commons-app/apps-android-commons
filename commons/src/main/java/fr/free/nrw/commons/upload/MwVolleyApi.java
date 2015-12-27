@@ -28,6 +28,7 @@ public class MwVolleyApi {
     private static RequestQueue REQUEST_QUEUE;
     private static final Gson GSON = new GsonBuilder().create();
     private Context context;
+    private static String coordsLog;
 
     protected static HashSet<String> categorySet;
 
@@ -48,6 +49,7 @@ public class MwVolleyApi {
 
     public void request(String coords) {
 
+        coordsLog = coords;
         String apiUrl = buildUrl(coords);
         Log.d("Image", "URL: " + apiUrl);
 
@@ -162,7 +164,12 @@ public class MwVolleyApi {
         }
         @Override
         public String toString() {
-            return "query=" + query.toString() + "\n" + printSet();
+            if (query!=null) {
+                return "query=" + query.toString() + "\n" + printSet();
+            }
+            else {
+                return "No pages found near " + coordsLog;
+            }
         }
     }
 

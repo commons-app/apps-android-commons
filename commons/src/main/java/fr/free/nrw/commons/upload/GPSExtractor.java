@@ -33,7 +33,7 @@ public class GPSExtractor {
         }
 
         if (exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE) == null) {
-            Log.w("Image", "Picture has no GPS info");
+            Log.d("Image", "Picture has no GPS info");
             return null;
         }
         else {

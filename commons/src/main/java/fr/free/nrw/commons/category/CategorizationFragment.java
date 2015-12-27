@@ -114,7 +114,7 @@ public class CategorizationFragment extends SherlockFragment{
                     items.add(new CategoryItem(category, false));
                 }
             }
-            
+
             categoriesAdapter.setItems(items);
             categoriesAdapter.notifyDataSetInvalidated();
             categoriesSearchInProgress.setVisibility(View.GONE);
