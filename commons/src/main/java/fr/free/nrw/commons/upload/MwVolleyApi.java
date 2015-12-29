@@ -30,6 +30,7 @@ public class MwVolleyApi {
     private Context context;
     private static String coordsLog;
 
+
     protected static HashSet<String> categorySet;
 
     //To check later on whether any nearby categories were found
@@ -50,12 +51,20 @@ public class MwVolleyApi {
     public void request(String coords) {
 
         coordsLog = coords;
-        String apiUrl = buildUrl(coords);
-        Log.d("Image", "URL: " + apiUrl);
 
-        JsonRequest<QueryResponse> request = new QueryRequest(apiUrl,
-                new LogResponseListener<QueryResponse>(), new LogResponseErrorListener());
-        getQueue().add(request);
+        for (int radius=100; radius<=10000; radius=radius*10) {
+            String apiUrl = buildUrl(coords, radius);
+            Log.d("Image", "URL: " + apiUrl);
+
+            JsonRequest<QueryResponse> request = new QueryRequest(apiUrl,
+                    new LogResponseListener<QueryResponse>(), new LogResponseErrorListener());
+            getQueue().add(request);
+            Log.d("Image", "Repeating API call with radius " + Integer.toString(radius));
+
+            if (categorySet.size()>=10) {
+                break;
+            }
+        }
     }
 
     /**
@@ -63,7 +72,7 @@ public class MwVolleyApi {
      * Example URL: https://commons.wikimedia.org/w/api.php?action=query&prop=categories|coordinates|pageprops&format=json&clshow=!hidden&coprop=type|name|dim|country|region|globe&codistancefrompoint=38.11386944444445|13.356263888888888&
      * generator=geosearch&redirects=&ggscoord=38.11386944444445|13.356263888888888&ggsradius=100&ggslimit=10&ggsnamespace=6&ggsprop=type|name|dim|country|region|globe&ggsprimary=all&formatversion=2
      */
-    private String buildUrl (String coords){
+    private String buildUrl (String coords, int ggsradius){
 
         Uri.Builder builder = Uri.parse("https://commons.wikimedia.org/").buildUpon();
 
@@ -77,7 +86,7 @@ public class MwVolleyApi {
                 .appendQueryParameter("codistancefrompoint", coords)
                 .appendQueryParameter("generator", "geosearch")
                 .appendQueryParameter("ggscoord", coords)
-                .appendQueryParameter("ggsradius", "100")
+                .appendQueryParameter("ggsradius", Integer.toString(ggsradius))
                 .appendQueryParameter("ggslimit", "10")
                 .appendQueryParameter("ggsnamespace", "6")
                 .appendQueryParameter("ggsprop", "type|name|dim|country|region|globe")
