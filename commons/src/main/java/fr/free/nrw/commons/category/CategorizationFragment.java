@@ -151,7 +151,7 @@ public class CategorizationFragment extends SherlockFragment{
                         items.add(cat.getName());
                     }
 
-                    if (MwVolleyApi.gpsCatExists){
+                    if (MwVolleyApi.GpsCatExists.getGpsCatExists() == true){
                         Log.d("Cat", "GPS cats found in CategorizationFragment.java" + MwVolleyApi.getGpsCat().toString());
                         List<String> gpsItems = new ArrayList<String>(MwVolleyApi.getGpsCat());
                         Log.d("Cat", "GPS items: " + gpsItems.toString());

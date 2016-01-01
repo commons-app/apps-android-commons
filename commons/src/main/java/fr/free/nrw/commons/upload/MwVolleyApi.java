@@ -33,8 +33,6 @@ public class MwVolleyApi {
 
     protected static Set<String> categorySet;
 
-    //To check later on whether any nearby categories were found
-    public static boolean gpsCatExists;
     public static final String MWURL = "https://commons.wikimedia.org/";
 
     public MwVolleyApi(Context context) {
@@ -147,19 +145,30 @@ public class MwVolleyApi {
             }
         }
     }
+    
+    public static class GpsCatExists {
+        private static boolean gpsCatExists;
+
+        public static void setGpsCatExists(boolean gpsCat) {
+            gpsCatExists = gpsCat;
+        }
+
+        public static boolean getGpsCatExists() {
+            return gpsCatExists;
+        }
+    }
 
     private static class QueryResponse {
         private Query query = new Query();
-        private Page page;
 
         private String printSet() {
             if (categorySet == null || categorySet.isEmpty()) {
-                gpsCatExists = false;
-                Log.d("Cat", "gpsCatExists=" + gpsCatExists);
+                GpsCatExists.setGpsCatExists(false);
+                Log.d("Cat", "gpsCatExists=" + GpsCatExists.getGpsCatExists());
                 return "No collection of categories";
             } else {
-                gpsCatExists = true;
-                Log.d("Cat", "gpsCatExists=" + gpsCatExists);
+                GpsCatExists.setGpsCatExists(true);
+                Log.d("Cat", "gpsCatExists=" + GpsCatExists.getGpsCatExists());
                 return "CATEGORIES FOUND" + categorySet.toString();
             }
         }
