@@ -29,7 +29,6 @@ public class MwVolleyApi {
     private static RequestQueue REQUEST_QUEUE;
     private static final Gson GSON = new GsonBuilder().create();
     private Context context;
-    private String coordsLog;
 
     protected static Set<String> categorySet;
 
@@ -48,17 +47,15 @@ public class MwVolleyApi {
 
     public void request(String coords) {
 
-        coordsLog = coords;
-
         //If <10 categories found, repeat API call with incremented radius
         for (int radius=100; radius<=10000; radius=radius*10) {
             String apiUrl = buildUrl(coords, radius);
-            Log.d("Image", "URL: " + apiUrl);
+            Log.d("Repeat", "URL: " + apiUrl);
 
             JsonRequest<QueryResponse> request = new QueryRequest(apiUrl,
                     new LogResponseListener<QueryResponse>(), new LogResponseErrorListener());
             getQueue().add(request);
-            Log.d("Image", "Repeating API call with radius " + Integer.toString(radius));
+            Log.d("Repeat", "Repeating API call with radius " + Integer.toString(radius));
 
             if (categorySet.size()>=10) {
                 break;
@@ -136,7 +133,6 @@ public class MwVolleyApi {
         @Override
         protected Response<QueryResponse> parseNetworkResponse(NetworkResponse response) {
             String json = parseString(response);
-            //Log.d(TAG, "json=" + json);
             QueryResponse queryResponse = GSON.fromJson(json, QueryResponse.class);
             return Response.success(queryResponse, cacheEntry(response));
         }
