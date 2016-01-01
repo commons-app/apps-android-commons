@@ -26,7 +26,6 @@ public class GPSExtractor {
 
         try {
             exif = new ExifInterface(filePath);
-
         } catch (IOException e) {
             Log.w("Image", e);
             return null;

@@ -156,8 +156,7 @@ public class MwVolleyApi {
                 gpsCatExists = false;
                 Log.d("Cat", "gpsCatExists=" + gpsCatExists);
                 return "No collection of categories";
-            }
-            else {
+            } else {
                 gpsCatExists = true;
                 Log.d("Cat", "gpsCatExists=" + gpsCatExists);
                 return "CATEGORIES FOUND" + categorySet.toString();
@@ -168,8 +167,7 @@ public class MwVolleyApi {
         public String toString() {
             if (query != null) {
                 return "query=" + query.toString() + "\n" + printSet();
-            }
-            else {
+            } else {
                 return "No pages found near " + coordsLog;
             }
         }
@@ -206,16 +204,13 @@ public class MwVolleyApi {
 
             if (categories == null || categories.length == 0) {
                 builder.append("no categories exist\n");
-            }
-            else {
+            } else {
                 for (Category category : categories) {
                     builder.append(category.toString());
                     builder.append("\n");
                     if (category != null) {
                         String categoryString = category.toString().replace("Category:", "");
                         categorySet.add(categoryString);
-                        //Log.d("Set", "category added: " + category.toString());
-                        //Log.d("Set", "Current category Set" + categorySet.toString());
                     }
                 }
             }
