@@ -214,18 +214,18 @@ public class MwVolleyApi {
         @Override
         public String toString() {
 
-            StringBuilder builder = new StringBuilder("PAGEID=" + pageid + " ns=" + ns + " title=" + title + "\n" + " CATEGORIES= ");
+            StringBuilder builder = new StringBuilder("PAGEID=" + pageid + " ns=" + ns + " title=" + title + " CATEGORIES= ");
 
             if (categories == null || categories.length == 0) {
                 builder.append("no categories exist\n");
             } else {
                 for (Category category : categories) {
-                    builder.append(category.toString());
-                    builder.append("\n");
                     if (category != null) {
                         String categoryString = category.toString().replace("Category:", "");
                         categorySet.add(categoryString);
                     }
+                    builder.append(category.toString());
+                    builder.append(", ");
                 }
             }
 
