@@ -29,7 +29,7 @@ public class MwVolleyApi {
     private static RequestQueue REQUEST_QUEUE;
     private static final Gson GSON = new GsonBuilder().create();
     private Context context;
-    private static String coordsLog;
+    private String coordsLog;
 
     protected static Set<String> categorySet;
 
@@ -168,7 +168,7 @@ public class MwVolleyApi {
             if (query != null) {
                 return "query=" + query.toString() + "\n" + printSet();
             } else {
-                return "No pages found near " + coordsLog;
+                return "No pages found";
             }
         }
     }
