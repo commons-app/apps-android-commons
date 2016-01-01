@@ -22,6 +22,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class MwVolleyApi {
 
@@ -30,7 +31,7 @@ public class MwVolleyApi {
     private Context context;
     private static String coordsLog;
 
-    protected static HashSet<String> categorySet;
+    protected static Set<String> categorySet;
 
     //To check later on whether any nearby categories were found
     public static boolean gpsCatExists;

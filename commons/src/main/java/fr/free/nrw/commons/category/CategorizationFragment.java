@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 public class CategorizationFragment extends SherlockFragment{
@@ -152,7 +153,7 @@ public class CategorizationFragment extends SherlockFragment{
 
                     if (MwVolleyApi.gpsCatExists){
                         Log.d("Cat", "GPS cats found in CategorizationFragment.java" + MwVolleyApi.getGpsCat().toString());
-                        ArrayList<String> gpsItems = new ArrayList<String>(MwVolleyApi.getGpsCat());
+                        List<String> gpsItems = new ArrayList<String>(MwVolleyApi.getGpsCat());
                         Log.d("Cat", "GPS items: " + gpsItems.toString());
 
                         mergedItems.addAll(gpsItems);
