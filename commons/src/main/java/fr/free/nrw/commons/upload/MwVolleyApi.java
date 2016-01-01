@@ -33,7 +33,7 @@ public class MwVolleyApi {
 
     protected static Set<String> categorySet;
 
-    public static final String MWURL = "https://commons.wikimedia.org/";
+    private static final String MWURL = "https://commons.wikimedia.org/";
 
     public MwVolleyApi(Context context) {
         this.context = context;
@@ -145,7 +145,7 @@ public class MwVolleyApi {
             }
         }
     }
-    
+
     public static class GpsCatExists {
         private static boolean gpsCatExists;
 
