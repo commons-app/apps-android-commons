@@ -35,6 +35,7 @@ public class MwVolleyApi {
 
     //To check later on whether any nearby categories were found
     public static boolean gpsCatExists;
+    public static final String MWURL = "https://commons.wikimedia.org/";
 
     public MwVolleyApi(Context context) {
         this.context = context;
@@ -66,7 +67,7 @@ public class MwVolleyApi {
      */
     private String buildUrl (String coords){
 
-        Uri.Builder builder = Uri.parse("https://commons.wikimedia.org/").buildUpon();
+        Uri.Builder builder = Uri.parse(MWURL).buildUpon();
 
         builder.appendPath("w")
                 .appendPath("api.php")
