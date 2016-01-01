@@ -42,8 +42,8 @@ public class MwVolleyApi {
     }
 
     //To get the list of categories for display
-    public static ArrayList<String> getGpsCat() {
-        ArrayList<String> list = new ArrayList<String>(categorySet);
+    public static List<String> getGpsCat() {
+        List<String> list = new ArrayList<String>(categorySet);
         return list;
     }
 
@@ -163,9 +163,10 @@ public class MwVolleyApi {
                 return "CATEGORIES FOUND" + categorySet.toString();
             }
         }
+
         @Override
         public String toString() {
-            if (query!=null) {
+            if (query != null) {
                 return "query=" + query.toString() + "\n" + printSet();
             }
             else {
