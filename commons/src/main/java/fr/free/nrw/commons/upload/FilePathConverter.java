@@ -48,9 +48,7 @@ public class FilePathConverter {
 
             Log.d("Image", "File path: " + filePath);
             return filePath;
-        }
-
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             Log.w("Image", e);
             return null;
         }

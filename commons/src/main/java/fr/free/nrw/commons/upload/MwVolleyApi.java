@@ -22,18 +22,18 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class MwVolleyApi {
 
     private static RequestQueue REQUEST_QUEUE;
     private static final Gson GSON = new GsonBuilder().create();
     private Context context;
-    private static String coordsLog;
+    private String coordsLog;
 
-    protected static HashSet<String> categorySet;
+    protected static Set<String> categorySet;
 
-    //To check later on whether any nearby categories were found
-    public static boolean gpsCatExists;
+    private static final String MWURL = "https://commons.wikimedia.org/";
 
     public MwVolleyApi(Context context) {
         this.context = context;
@@ -41,8 +41,8 @@ public class MwVolleyApi {
     }
 
     //To get the list of categories for display
-    public static ArrayList<String> getGpsCat() {
-        ArrayList<String> list = new ArrayList<String>(categorySet);
+    public static List<String> getGpsCat() {
+        List<String> list = new ArrayList<String>(categorySet);
         return list;
     }
 
@@ -73,7 +73,7 @@ public class MwVolleyApi {
      */
     private String buildUrl (String coords, int ggsradius){
 
-        Uri.Builder builder = Uri.parse("https://commons.wikimedia.org/").buildUpon();
+        Uri.Builder builder = Uri.parse(MWURL).buildUpon();
 
         builder.appendPath("w")
                 .appendPath("api.php")
@@ -154,29 +154,39 @@ public class MwVolleyApi {
         }
     }
 
+    public static class GpsCatExists {
+        private static boolean gpsCatExists;
+
+        public static void setGpsCatExists(boolean gpsCat) {
+            gpsCatExists = gpsCat;
+        }
+
+        public static boolean getGpsCatExists() {
+            return gpsCatExists;
+        }
+    }
+
     private static class QueryResponse {
         private Query query = new Query();
-        private Page page;
 
         private String printSet() {
             if (categorySet == null || categorySet.isEmpty()) {
-                gpsCatExists = false;
-                Log.d("Cat", "gpsCatExists=" + gpsCatExists);
+                GpsCatExists.setGpsCatExists(false);
+                Log.d("Cat", "gpsCatExists=" + GpsCatExists.getGpsCatExists());
                 return "No collection of categories";
-            }
-            else {
-                gpsCatExists = true;
-                Log.d("Cat", "gpsCatExists=" + gpsCatExists);
+            } else {
+                GpsCatExists.setGpsCatExists(true);
+                Log.d("Cat", "gpsCatExists=" + GpsCatExists.getGpsCatExists());
                 return "CATEGORIES FOUND" + categorySet.toString();
             }
         }
+
         @Override
         public String toString() {
-            if (query!=null) {
+            if (query != null) {
                 return "query=" + query.toString() + "\n" + printSet();
-            }
-            else {
-                return "No pages found near " + coordsLog;
+            } else {
+                return "No pages found";
             }
         }
     }
@@ -212,16 +222,13 @@ public class MwVolleyApi {
 
             if (categories == null || categories.length == 0) {
                 builder.append("no categories exist\n");
-            }
-            else {
+            } else {
                 for (Category category : categories) {
                     builder.append(category.toString());
                     builder.append("\n");
                     if (category != null) {
                         String categoryString = category.toString().replace("Category:", "");
                         categorySet.add(categoryString);
-                        //Log.d("Set", "category added: " + category.toString());
-                        //Log.d("Set", "Current category Set" + categorySet.toString());
                     }
                 }
             }
