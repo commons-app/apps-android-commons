@@ -30,7 +30,6 @@ public class MwVolleyApi {
     private Context context;
     private static String coordsLog;
 
-
     protected static HashSet<String> categorySet;
 
     //To check later on whether any nearby categories were found
@@ -47,11 +46,11 @@ public class MwVolleyApi {
         return list;
     }
 
-
     public void request(String coords) {
 
         coordsLog = coords;
 
+        //If <10 categories found, repeat API call with incremented radius
         for (int radius=100; radius<=10000; radius=radius*10) {
             String apiUrl = buildUrl(coords, radius);
             Log.d("Image", "URL: " + apiUrl);
