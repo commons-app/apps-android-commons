@@ -8,6 +8,7 @@ import android.os.*;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import com.actionbarsherlock.app.SherlockFragment;
@@ -18,12 +19,14 @@ import org.mediawiki.api.ApiResult;
 import org.mediawiki.api.MWApi;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.upload.MwVolleyApi;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 public class CategorizationFragment extends SherlockFragment{
@@ -112,6 +115,7 @@ public class CategorizationFragment extends SherlockFragment{
                     items.add(new CategoryItem(category, false));
                 }
             }
+
             categoriesAdapter.setItems(items);
             categoriesAdapter.notifyDataSetInvalidated();
             categoriesSearchInProgress.setVisibility(View.GONE);
@@ -132,6 +136,8 @@ public class CategorizationFragment extends SherlockFragment{
         protected ArrayList<String> doInBackground(Void... voids) {
             if(TextUtils.isEmpty(filter)) {
                 ArrayList<String> items = new ArrayList<String>();
+                ArrayList<String> mergedItems= new ArrayList<String>();
+
                 try {
                     Cursor cursor = client.query(
                             CategoryContentProvider.BASE_URI,
@@ -144,12 +150,25 @@ public class CategorizationFragment extends SherlockFragment{
                         Category cat = Category.fromCursor(cursor);
                         items.add(cat.getName());
                     }
-                } catch (RemoteException e) {
+
+                    if (MwVolleyApi.GpsCatExists.getGpsCatExists() == true){
+                        Log.d("Cat", "GPS cats found in CategorizationFragment.java" + MwVolleyApi.getGpsCat().toString());
+                        List<String> gpsItems = new ArrayList<String>(MwVolleyApi.getGpsCat());
+                        Log.d("Cat", "GPS items: " + gpsItems.toString());
+
+                        mergedItems.addAll(gpsItems);
+                    }
+
+                    mergedItems.addAll(items);
+                }
+                catch (RemoteException e) {
                     // faaaail
                     throw new RuntimeException(e);
                 }
-                return items;
+                Log.d("Cat", "Merged items: " + mergedItems.toString());
+                return mergedItems;
             }
+            
             if(categoriesCache.containsKey(filter)) {
                 return categoriesCache.get(filter);
             }

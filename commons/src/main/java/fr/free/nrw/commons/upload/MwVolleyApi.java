@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 
 import com.android.volley.Cache;
@@ -18,23 +19,75 @@ import com.google.gson.GsonBuilder;
 
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class MwVolleyApi {
 
     private static RequestQueue REQUEST_QUEUE;
     private static final Gson GSON = new GsonBuilder().create();
     private Context context;
+    private String coordsLog;
+
+    protected static Set<String> categorySet;
+
+    private static final String MWURL = "https://commons.wikimedia.org/";
 
     public MwVolleyApi(Context context) {
         this.context = context;
+        categorySet = new HashSet<String>();
     }
-    public void request(String apiUrl) {
+
+    //To get the list of categories for display
+    public static List<String> getGpsCat() {
+        List<String> list = new ArrayList<String>(categorySet);
+        return list;
+    }
+
+
+    public void request(String coords) {
+
+        coordsLog = coords;
+        String apiUrl = buildUrl(coords);
+        Log.d("Image", "URL: " + apiUrl);
+
         JsonRequest<QueryResponse> request = new QueryRequest(apiUrl,
                 new LogResponseListener<QueryResponse>(), new LogResponseErrorListener());
         getQueue().add(request);
     }
 
-    private RequestQueue getQueue() {
+    /**
+     * Builds URL with image coords for MediaWiki API calls
+     * Example URL: https://commons.wikimedia.org/w/api.php?action=query&prop=categories|coordinates|pageprops&format=json&clshow=!hidden&coprop=type|name|dim|country|region|globe&codistancefrompoint=38.11386944444445|13.356263888888888&
+     * generator=geosearch&redirects=&ggscoord=38.11386944444445|13.356263888888888&ggsradius=100&ggslimit=10&ggsnamespace=6&ggsprop=type|name|dim|country|region|globe&ggsprimary=all&formatversion=2
+     */
+    private String buildUrl (String coords){
+
+        Uri.Builder builder = Uri.parse(MWURL).buildUpon();
+
+        builder.appendPath("w")
+                .appendPath("api.php")
+                .appendQueryParameter("action", "query")
+                .appendQueryParameter("prop", "categories|coordinates|pageprops")
+                .appendQueryParameter("format", "json")
+                .appendQueryParameter("clshow", "!hidden")
+                .appendQueryParameter("coprop", "type|name|dim|country|region|globe")
+                .appendQueryParameter("codistancefrompoint", coords)
+                .appendQueryParameter("generator", "geosearch")
+                .appendQueryParameter("ggscoord", coords)
+                .appendQueryParameter("ggsradius", "100")
+                .appendQueryParameter("ggslimit", "10")
+                .appendQueryParameter("ggsnamespace", "6")
+                .appendQueryParameter("ggsprop", "type|name|dim|country|region|globe")
+                .appendQueryParameter("ggsprimary", "all")
+                .appendQueryParameter("formatversion", "2");
+
+        return builder.toString();
+    }
+
+    private synchronized RequestQueue getQueue() {
         return getQueue(context);
     }
 
@@ -80,11 +133,9 @@ public class MwVolleyApi {
             return Response.success(queryResponse, cacheEntry(response));
         }
 
-
         private Cache.Entry cacheEntry(NetworkResponse response) {
             return HttpHeaderParser.parseCacheHeaders(response);
         }
-
 
         private String parseString(NetworkResponse response) {
             try {
@@ -95,12 +146,40 @@ public class MwVolleyApi {
         }
     }
 
+    public static class GpsCatExists {
+        private static boolean gpsCatExists;
+
+        public static void setGpsCatExists(boolean gpsCat) {
+            gpsCatExists = gpsCat;
+        }
+
+        public static boolean getGpsCatExists() {
+            return gpsCatExists;
+        }
+    }
+
     private static class QueryResponse {
-        private Query query;
+        private Query query = new Query();
+
+        private String printSet() {
+            if (categorySet == null || categorySet.isEmpty()) {
+                GpsCatExists.setGpsCatExists(false);
+                Log.d("Cat", "gpsCatExists=" + GpsCatExists.getGpsCatExists());
+                return "No collection of categories";
+            } else {
+                GpsCatExists.setGpsCatExists(true);
+                Log.d("Cat", "gpsCatExists=" + GpsCatExists.getGpsCatExists());
+                return "CATEGORIES FOUND" + categorySet.toString();
+            }
+        }
 
         @Override
         public String toString() {
-            return "query=" + query.toString();
+            if (query != null) {
+                return "query=" + query.toString() + "\n" + printSet();
+            } else {
+                return "No pages found";
+            }
         }
     }
 
@@ -115,7 +194,9 @@ public class MwVolleyApi {
                 builder.append("\n");
             }
             builder.replace(builder.length() - 1, builder.length(), "");
+
             return builder.toString();
+
         }
     }
 
@@ -130,15 +211,18 @@ public class MwVolleyApi {
         public String toString() {
 
             StringBuilder builder = new StringBuilder("PAGEID=" + pageid + " ns=" + ns + " title=" + title + "\n" + " CATEGORIES= ");
-            if (categories != null) {
+
+            if (categories == null || categories.length == 0) {
+                builder.append("no categories exist\n");
+            } else {
                 for (Category category : categories) {
                     builder.append(category.toString());
                     builder.append("\n");
+                    if (category != null) {
+                        String categoryString = category.toString().replace("Category:", "");
+                        categorySet.add(categoryString);
+                    }
                 }
-            }
-            else {
-                builder.append("no categories exist");
-                builder.append("\n");
             }
 
             builder.replace(builder.length() - 1, builder.length(), "");
@@ -147,12 +231,11 @@ public class MwVolleyApi {
     }
 
         private static class Category {
-            private int ns;
             private String title;
 
             @Override
             public String toString() {
-                return " ns=" + ns + " title=" + title;
+                return title;
             }
         }
     }

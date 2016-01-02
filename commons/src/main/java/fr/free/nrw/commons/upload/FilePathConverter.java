@@ -23,27 +23,34 @@ public class FilePathConverter {
      * May return null
      */
     public String getFilePath(){
+
         String filePath ="";
-        // Will return "image:x*"
-        String wholeID = DocumentsContract.getDocumentId(uri);
 
-        // Split at colon, use second item in the array
-        String id = wholeID.split(":")[1];
-        String[] column = { MediaStore.Images.Media.DATA };
+        try {
+            // Will return "image:x*"
+            String wholeID = DocumentsContract.getDocumentId(uri);
 
-        // where id is equal to
-        String sel = MediaStore.Images.Media._ID + "=?";
-        Cursor cursor = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                column, sel, new String[]{id}, null);
+            // Split at colon, use second item in the array
+            String id = wholeID.split(":")[1];
+            String[] column = {MediaStore.Images.Media.DATA};
 
-        int columnIndex = cursor.getColumnIndex(column[0]);
+            // where id is equal to
+            String sel = MediaStore.Images.Media._ID + "=?";
+            Cursor cursor = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                    column, sel, new String[]{id}, null);
 
-        if (cursor.moveToFirst()) {
-            filePath = cursor.getString(columnIndex);
+            int columnIndex = cursor.getColumnIndex(column[0]);
+
+            if (cursor.moveToFirst()) {
+                filePath = cursor.getString(columnIndex);
+            }
+            cursor.close();
+
+            Log.d("Image", "File path: " + filePath);
+            return filePath;
+        } catch (IllegalArgumentException e) {
+            Log.w("Image", e);
+            return null;
         }
-        cursor.close();
-
-        Log.d("Image", "File path: " + filePath);
-        return filePath;
     }
 }

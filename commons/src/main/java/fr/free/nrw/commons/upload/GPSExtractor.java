@@ -26,6 +26,16 @@ public class GPSExtractor {
 
         try {
             exif = new ExifInterface(filePath);
+        } catch (IOException e) {
+            Log.w("Image", e);
+            return null;
+        }
+
+        if (exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE) == null) {
+            Log.d("Image", "Picture has no GPS info");
+            return null;
+        }
+        else {
             latitude = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE);
             latitude_ref = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE_REF);
             longitude = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE);
@@ -35,11 +45,8 @@ public class GPSExtractor {
             Log.d("Image", "Longitude: " + longitude + " " + longitude_ref);
 
             decimalCoords = getDecimalCoords(latitude, latitude_ref, longitude, longitude_ref);
-
-        } catch (IOException e) {
-            Log.w("Image", e);
+            return decimalCoords;
         }
-        return decimalCoords;
     }
 
     //Converts format of coords into decimal coords as required by API for next step

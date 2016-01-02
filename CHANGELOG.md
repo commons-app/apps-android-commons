@@ -1,5 +1,8 @@
 # Wikimedia Commons for Android
 
+## v1.5
+- New feature: Suggests nearby Commons categories
+
 ## v1.3
 - Removed 'send usage reports' setting
 - Fixed package naming issue
