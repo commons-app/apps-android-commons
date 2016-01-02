@@ -203,11 +203,8 @@ public class MediaDataExtractor {
                 Element el = (Element)node;
                 if (el.getTextContent().trim().equals(theIndex)) {
                     return true;
-                } else if (el.getAttribute("index") != null && el.getAttribute("index").trim().equals(theIndex)) {
-                    return true;
-                } else {
-                    return false;
-                }
+                } else
+                    return el.getAttribute("index") != null && el.getAttribute("index").trim().equals(theIndex);
             }
         });
     }

@@ -23,7 +23,7 @@ import fr.free.nrw.commons.media.*;
 public class MultipleUploadListFragment extends SherlockFragment {
 
     public interface OnMultipleUploadInitiatedHandler {
-        public void OnMultipleUploadInitiated();
+        void OnMultipleUploadInitiated();
     }
 
     private GridView photosGrid;

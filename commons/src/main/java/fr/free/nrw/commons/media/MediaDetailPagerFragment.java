@@ -41,11 +41,11 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
     }
 
     public interface MediaDetailProvider {
-        public Media getMediaAtPosition(int i);
-        public int getTotalMediaCount();
-        public void notifyDatasetChanged();
-        public void registerDataSetObserver(DataSetObserver observer);
-        public void unregisterDataSetObserver(DataSetObserver observer);
+        Media getMediaAtPosition(int i);
+        int getTotalMediaCount();
+        void notifyDatasetChanged();
+        void registerDataSetObserver(DataSetObserver observer);
+        void unregisterDataSetObserver(DataSetObserver observer);
     }
     private class MediaDetailAdapter extends FragmentStatePagerAdapter {
 

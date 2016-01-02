@@ -30,8 +30,8 @@ import java.util.List;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 public class CategorizationFragment extends SherlockFragment{
-    public static interface OnCategoriesSaveHandler {
-        public void onCategoriesSave(ArrayList<String> categories);
+    public interface OnCategoriesSaveHandler {
+        void onCategoriesSave(ArrayList<String> categories);
     }
 
     ListView categoriesList;

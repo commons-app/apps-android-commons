@@ -162,7 +162,7 @@ public  class       ShareActivity
         Intent intent = getIntent();
 
         if(intent.getAction().equals(Intent.ACTION_SEND)) {
-            mediaUri = (Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM);
+            mediaUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
             if(intent.hasExtra(UploadService.EXTRA_SOURCE)) {
                 source = intent.getStringExtra(UploadService.EXTRA_SOURCE);
             } else {
@@ -190,7 +190,7 @@ public  class       ShareActivity
                 MwVolleyApi apiCall = new MwVolleyApi(this, coords);
 
                 //asynchronous calls to MediaWiki Commons API to match image coords with nearby Commons categories
-                apiCall.request(coords);
+                apiCall.request();
             }
         }
 
