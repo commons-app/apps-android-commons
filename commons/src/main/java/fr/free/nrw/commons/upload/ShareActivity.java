@@ -187,7 +187,7 @@ public  class       ShareActivity
 
             if (coords != null) {
                 Log.d("Image", "Coords of image: " + coords);
-                MwVolleyApi apiCall = new MwVolleyApi(this);
+                MwVolleyApi apiCall = new MwVolleyApi(this, coords);
 
                 //asynchronous calls to MediaWiki Commons API to match image coords with nearby Commons categories
                 apiCall.request(coords);

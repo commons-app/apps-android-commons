@@ -29,13 +29,15 @@ public class MwVolleyApi {
     private static RequestQueue REQUEST_QUEUE;
     private static final Gson GSON = new GsonBuilder().create();
     private Context context;
+    private String coords;
 
     protected static Set<String> categorySet;
 
     private static final String MWURL = "https://commons.wikimedia.org/";
 
-    public MwVolleyApi(Context context) {
+    public MwVolleyApi(Context context, String coords) {
         this.context = context;
+        this.coords = coords;
         categorySet = new HashSet<String>();
     }
 
@@ -44,7 +46,7 @@ public class MwVolleyApi {
      * Example URL: https://commons.wikimedia.org/w/api.php?action=query&prop=categories|coordinates|pageprops&format=json&clshow=!hidden&coprop=type|name|dim|country|region|globe&codistancefrompoint=38.11386944444445|13.356263888888888&
      * generator=geosearch&redirects=&ggscoord=38.11386944444445|13.356263888888888&ggsradius=100&ggslimit=10&ggsnamespace=6&ggsprop=type|name|dim|country|region|globe&ggsprimary=all&formatversion=2
      */
-    private String buildUrl (String coords, int ggsradius){
+    private static String buildUrl (int ggsradius){
 
         Uri.Builder builder = Uri.parse(MWURL).buildUpon();
 
@@ -85,22 +87,13 @@ public class MwVolleyApi {
         return REQUEST_QUEUE;
     }
 
-    public void request(String coords) {
+    public void request() {
 
         //If <10 categories found, repeat API call with incremented radius
-        for (int radius=100; radius<=10000; radius=radius*10) {
-            String apiUrl = buildUrl(coords, radius);
-            Log.d("Repeat", "URL: " + apiUrl);
+        JsonRequest<QueryResponse> request = new QueryRequest(apiUrl, new LogResponseListener<QueryResponse>(), new LogResponseErrorListener());
+        getQueue().add(request);
 
-            JsonRequest<QueryResponse> request = new QueryRequest(apiUrl,
-                    new LogResponseListener<QueryResponse>(), new LogResponseErrorListener());
-            getQueue().add(request);
-            Log.d("Repeat", "Repeating API call with radius " + Integer.toString(radius));
 
-            if (categorySet.size()>=10) {
-                break;
-            }
-        }
     }
 
     private static class LogResponseListener<T> implements Response.Listener<T> {
@@ -110,6 +103,19 @@ public class MwVolleyApi {
         public void onResponse(T response) {
             Log.d(TAG, response.toString());
             Log.d("Repeat", "categorySet contains: " + categorySet.toString());
+
+            for (int radius=100; radius<=10000; radius=radius*10) {
+                String apiUrl = buildUrl(radius);
+                Log.d("Repeat", "URL: " + apiUrl);
+                Log.d("Repeat", "Repeating API call with radius " + Integer.toString(radius));
+                //request();
+                
+                JsonRequest<QueryResponse> request = new QueryRequest(apiUrl, new LogResponseListener<QueryResponse>(), new LogResponseErrorListener());
+                getQueue().add(request);
+
+                if (categorySet.size()>=10) {
+                    break;
+                }
         }
     }
 
