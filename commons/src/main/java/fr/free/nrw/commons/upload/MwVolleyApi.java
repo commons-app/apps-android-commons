@@ -74,16 +74,15 @@ public class MwVolleyApi {
         return list;
     }
 
-    public static class GpsCatExists {
-        private static boolean gpsCatExists;
+    private synchronized RequestQueue getQueue() {
+        return getQueue(context);
+    }
 
-        public static void setGpsCatExists(boolean gpsCat) {
-            gpsCatExists = gpsCat;
+    private static RequestQueue getQueue(Context context) {
+        if (REQUEST_QUEUE == null) {
+            REQUEST_QUEUE = Volley.newRequestQueue(context.getApplicationContext());
         }
-
-        public static boolean getGpsCatExists() {
-            return gpsCatExists;
-        }
+        return REQUEST_QUEUE;
     }
 
     public void request(String coords) {
@@ -104,23 +103,13 @@ public class MwVolleyApi {
         }
     }
 
-    private synchronized RequestQueue getQueue() {
-        return getQueue(context);
-    }
-
-    private static RequestQueue getQueue(Context context) {
-        if (REQUEST_QUEUE == null) {
-            REQUEST_QUEUE = Volley.newRequestQueue(context.getApplicationContext());
-        }
-        return REQUEST_QUEUE;
-    }
-
     private static class LogResponseListener<T> implements Response.Listener<T> {
         private static final String TAG = LogResponseListener.class.getName();
 
         @Override
         public void onResponse(T response) {
             Log.d(TAG, response.toString());
+            Log.d("Repeat", "categorySet contains: " + categorySet.toString());
         }
     }
 
@@ -242,6 +231,18 @@ public class MwVolleyApi {
                 return title;
             }
         }
+
+    public static class GpsCatExists {
+        private static boolean gpsCatExists;
+
+        public static void setGpsCatExists(boolean gpsCat) {
+            gpsCatExists = gpsCat;
+        }
+
+        public static boolean getGpsCatExists() {
+            return gpsCatExists;
+        }
+    }
     }
 
 
