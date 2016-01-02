@@ -34,7 +34,7 @@ public class MwVolleyApi {
     protected static Set<String> categorySet;
 
     private static final String MWURL = "https://commons.wikimedia.org/";
-    private final int INITRADIUS = 100;
+    private static String apiUrl;
 
     public MwVolleyApi(Context context, String coords) {
         this.context = context;
@@ -79,8 +79,11 @@ public class MwVolleyApi {
     }
 
     public void request() {
-        String apiUrl = buildUrl(INITRADIUS);
-        JsonRequest request = new QueryRequest(apiUrl, new LogResponseListener<QueryResponse>(), new LogResponseErrorListener());
+
+        if (apiUrl == null) {
+            apiUrl = buildUrl(100);
+        }
+        JsonRequest request = new QueryRequest(apiUrl, new LogResponseListener<QueryResponse>(context), new LogResponseErrorListener());
         getQueue().add(request);
 
 
@@ -100,7 +103,11 @@ public class MwVolleyApi {
 
     private static class LogResponseListener<T> implements Response.Listener<T> {
         private static final String TAG = LogResponseListener.class.getName();
+        private Context mContext;
 
+        public LogResponseListener (Context context) {
+            mContext = context;
+        }
         @Override
         public void onResponse(T response) {
             Log.d(TAG, response.toString());
@@ -108,11 +115,12 @@ public class MwVolleyApi {
 
             //If <10 categories found, repeat API call with incremented radius
             for (int radius = 100; radius <= 10000; radius = radius * 10) {
-                String apiUrl = buildUrl(radius);
+                apiUrl = buildUrl(radius);
                 Log.d("Repeat", "URL: " + apiUrl);
                 Log.d("Repeat", "Repeating API call with radius " + Integer.toString(radius));
-                
-                //request();
+
+                MwVolleyApi apiObj = new MwVolleyApi(mContext, coordsLog);
+                apiObj.request();
 
                 //JsonRequest<QueryResponse> request = new QueryRequest(apiUrl, new LogResponseListener<QueryResponse>(), new LogResponseErrorListener());
                 //MwVolleyApi.getQueue(context).add(request);
@@ -121,6 +129,7 @@ public class MwVolleyApi {
                     break;
                 }
             }
+            Log.d("Repeat", "Loop has ended");
         }
     }
 
