@@ -39,30 +39,6 @@ public class MwVolleyApi {
         categorySet = new HashSet<String>();
     }
 
-    //To get the list of categories for display
-    public static List<String> getGpsCat() {
-        List<String> list = new ArrayList<String>(categorySet);
-        return list;
-    }
-
-    public void request(String coords) {
-
-        //If <10 categories found, repeat API call with incremented radius
-        for (int radius=100; radius<=10000; radius=radius*10) {
-            String apiUrl = buildUrl(coords, radius);
-            Log.d("Repeat", "URL: " + apiUrl);
-
-            JsonRequest<QueryResponse> request = new QueryRequest(apiUrl,
-                    new LogResponseListener<QueryResponse>(), new LogResponseErrorListener());
-            getQueue().add(request);
-            Log.d("Repeat", "Repeating API call with radius " + Integer.toString(radius));
-
-            if (categorySet.size()>=10) {
-                break;
-            }
-        }
-    }
-
     /**
      * Builds URL with image coords for MediaWiki API calls
      * Example URL: https://commons.wikimedia.org/w/api.php?action=query&prop=categories|coordinates|pageprops&format=json&clshow=!hidden&coprop=type|name|dim|country|region|globe&codistancefrompoint=38.11386944444445|13.356263888888888&
@@ -90,6 +66,42 @@ public class MwVolleyApi {
                 .appendQueryParameter("formatversion", "2");
 
         return builder.toString();
+    }
+
+    //To get the list of categories for display
+    public static List<String> getGpsCat() {
+        List<String> list = new ArrayList<String>(categorySet);
+        return list;
+    }
+
+    public static class GpsCatExists {
+        private static boolean gpsCatExists;
+
+        public static void setGpsCatExists(boolean gpsCat) {
+            gpsCatExists = gpsCat;
+        }
+
+        public static boolean getGpsCatExists() {
+            return gpsCatExists;
+        }
+    }
+
+    public void request(String coords) {
+
+        //If <10 categories found, repeat API call with incremented radius
+        for (int radius=100; radius<=10000; radius=radius*10) {
+            String apiUrl = buildUrl(coords, radius);
+            Log.d("Repeat", "URL: " + apiUrl);
+
+            JsonRequest<QueryResponse> request = new QueryRequest(apiUrl,
+                    new LogResponseListener<QueryResponse>(), new LogResponseErrorListener());
+            getQueue().add(request);
+            Log.d("Repeat", "Repeating API call with radius " + Integer.toString(radius));
+
+            if (categorySet.size()>=10) {
+                break;
+            }
+        }
     }
 
     private synchronized RequestQueue getQueue() {
@@ -147,18 +159,6 @@ public class MwVolleyApi {
             } catch (UnsupportedEncodingException e) {
                 return new String(response.data);
             }
-        }
-    }
-
-    public static class GpsCatExists {
-        private static boolean gpsCatExists;
-
-        public static void setGpsCatExists(boolean gpsCat) {
-            gpsCatExists = gpsCat;
-        }
-
-        public static boolean getGpsCatExists() {
-            return gpsCatExists;
         }
     }
 
@@ -234,7 +234,7 @@ public class MwVolleyApi {
         }
     }
 
-        private static class Category {
+    private static class Category {
             private String title;
 
             @Override
