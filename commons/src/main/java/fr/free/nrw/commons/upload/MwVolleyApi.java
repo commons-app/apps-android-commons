@@ -29,7 +29,7 @@ public class MwVolleyApi {
     private static RequestQueue REQUEST_QUEUE;
     private static final Gson GSON = new GsonBuilder().create();
     private Context context;
-    private static String coordsLog;
+    private String coordsLog;
 
     protected static Set<String> categorySet;
 
@@ -38,8 +38,8 @@ public class MwVolleyApi {
 
     public MwVolleyApi(Context context, String coords) {
         this.context = context;
-        coordsLog = coords;
         categorySet = new HashSet<String>();
+        coordsLog = coords;
     }
 
 
@@ -48,7 +48,7 @@ public class MwVolleyApi {
      * Example URL: https://commons.wikimedia.org/w/api.php?action=query&prop=categories|coordinates|pageprops&format=json&clshow=!hidden&coprop=type|name|dim|country|region|globe&codistancefrompoint=38.11386944444445|13.356263888888888&
      * generator=geosearch&redirects=&ggscoord=38.11386944444445|13.356263888888888&ggsradius=100&ggslimit=10&ggsnamespace=6&ggsprop=type|name|dim|country|region|globe&ggsprimary=all&formatversion=2
      */
-    private static String buildUrl(int ggsradius) {
+    private String buildUrl(int ggsradius) {
 
         Uri.Builder builder = Uri.parse(MWURL).buildUpon();
 
@@ -80,7 +80,7 @@ public class MwVolleyApi {
 
     public void request() {
         String apiUrl = buildUrl(INITRADIUS);
-        JsonRequest<QueryResponse> request = new QueryRequest(apiUrl, new LogResponseListener<QueryResponse>(), new LogResponseErrorListener());
+        JsonRequest request = new QueryRequest(apiUrl, new LogResponseListener<QueryResponse>(), new LogResponseErrorListener());
         getQueue().add(request);
 
 
@@ -122,138 +122,139 @@ public class MwVolleyApi {
                 }
             }
         }
+    }
 
-        private static class LogResponseErrorListener implements Response.ErrorListener {
-            private static final String TAG = LogResponseErrorListener.class.getName();
+    private static class LogResponseErrorListener implements Response.ErrorListener {
+        private static final String TAG = LogResponseErrorListener.class.getName();
 
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, error.toString());
-            }
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            Log.e(TAG, error.toString());
+        }
+    }
+
+    private static class QueryRequest extends JsonRequest<QueryResponse> {
+        private static final String TAG = QueryRequest.class.getName();
+
+        public QueryRequest(String url,
+                            Response.Listener<QueryResponse> listener,
+                            Response.ErrorListener errorListener) {
+            super(Request.Method.GET, url, null, listener, errorListener);
         }
 
-        private static class QueryRequest extends JsonRequest<QueryResponse> {
-            private static final String TAG = QueryRequest.class.getName();
-
-            public QueryRequest(String url,
-                                Response.Listener<QueryResponse> listener,
-                                Response.ErrorListener errorListener) {
-                super(Request.Method.GET, url, null, listener, errorListener);
-            }
-
-            @Override
-            protected Response<QueryResponse> parseNetworkResponse(NetworkResponse response) {
-                String json = parseString(response);
-                QueryResponse queryResponse = GSON.fromJson(json, QueryResponse.class);
-                return Response.success(queryResponse, cacheEntry(response));
-            }
-
-            private Cache.Entry cacheEntry(NetworkResponse response) {
-                return HttpHeaderParser.parseCacheHeaders(response);
-            }
-
-            private String parseString(NetworkResponse response) {
-                try {
-                    return new String(response.data, HttpHeaderParser.parseCharset(response.headers));
-                } catch (UnsupportedEncodingException e) {
-                    return new String(response.data);
-                }
-            }
+        @Override
+        protected Response<QueryResponse> parseNetworkResponse(NetworkResponse response) {
+            String json = parseString(response);
+            QueryResponse queryResponse = GSON.fromJson(json, QueryResponse.class);
+            return Response.success(queryResponse, cacheEntry(response));
         }
 
-        private static class QueryResponse {
-            private Query query = new Query();
-
-            private String printSet() {
-                if (categorySet == null || categorySet.isEmpty()) {
-                    GpsCatExists.setGpsCatExists(false);
-                    Log.d("Cat", "gpsCatExists=" + GpsCatExists.getGpsCatExists());
-                    return "No collection of categories";
-                } else {
-                    GpsCatExists.setGpsCatExists(true);
-                    Log.d("Cat", "gpsCatExists=" + GpsCatExists.getGpsCatExists());
-                    return "CATEGORIES FOUND" + categorySet.toString();
-                }
-            }
-
-            @Override
-            public String toString() {
-                if (query != null) {
-                    return "query=" + query.toString() + "\n" + printSet();
-                } else {
-                    return "No pages found";
-                }
-            }
+        private Cache.Entry cacheEntry(NetworkResponse response) {
+            return HttpHeaderParser.parseCacheHeaders(response);
         }
 
-        private static class Query {
-            private Page[] pages;
-
-            @Override
-            public String toString() {
-                StringBuilder builder = new StringBuilder("pages=" + "\n");
-                for (Page page : pages) {
-                    builder.append(page.toString());
-                    builder.append("\n");
-                }
-                builder.replace(builder.length() - 1, builder.length(), "");
-
-                return builder.toString();
-
-            }
-        }
-
-        private static class Page {
-            private int pageid;
-            private int ns;
-            private String title;
-            private Category[] categories;
-            private Category category;
-
-            @Override
-            public String toString() {
-
-                StringBuilder builder = new StringBuilder("PAGEID=" + pageid + " ns=" + ns + " title=" + title + " CATEGORIES= ");
-
-                if (categories == null || categories.length == 0) {
-                    builder.append("no categories exist\n");
-                } else {
-                    for (Category category : categories) {
-                        if (category != null) {
-                            String categoryString = category.toString().replace("Category:", "");
-                            categorySet.add(categoryString);
-                        }
-                        builder.append(category.toString());
-                        builder.append(", ");
-                    }
-                }
-
-                builder.replace(builder.length() - 1, builder.length(), "");
-                return builder.toString();
-            }
-        }
-
-        private static class Category {
-            private String title;
-
-            @Override
-            public String toString() {
-                return title;
-            }
-        }
-
-        public static class GpsCatExists {
-            private static boolean gpsCatExists;
-
-            public static void setGpsCatExists(boolean gpsCat) {
-                gpsCatExists = gpsCat;
-            }
-
-            public static boolean getGpsCatExists() {
-                return gpsCatExists;
+        private String parseString(NetworkResponse response) {
+            try {
+                return new String(response.data, HttpHeaderParser.parseCharset(response.headers));
+            } catch (UnsupportedEncodingException e) {
+                return new String(response.data);
             }
         }
     }
+
+    private static class QueryResponse {
+        private Query query = new Query();
+
+        private String printSet() {
+            if (categorySet == null || categorySet.isEmpty()) {
+                GpsCatExists.setGpsCatExists(false);
+                Log.d("Cat", "gpsCatExists=" + GpsCatExists.getGpsCatExists());
+                return "No collection of categories";
+            } else {
+                GpsCatExists.setGpsCatExists(true);
+                Log.d("Cat", "gpsCatExists=" + GpsCatExists.getGpsCatExists());
+                return "CATEGORIES FOUND" + categorySet.toString();
+            }
+        }
+
+        @Override
+        public String toString() {
+            if (query != null) {
+                return "query=" + query.toString() + "\n" + printSet();
+            } else {
+                return "No pages found";
+            }
+        }
+    }
+
+    private static class Query {
+        private Page[] pages;
+
+        @Override
+        public String toString() {
+            StringBuilder builder = new StringBuilder("pages=" + "\n");
+            for (Page page : pages) {
+                builder.append(page.toString());
+                builder.append("\n");
+            }
+            builder.replace(builder.length() - 1, builder.length(), "");
+
+            return builder.toString();
+
+        }
+    }
+
+    private static class Page {
+        private int pageid;
+        private int ns;
+        private String title;
+        private Category[] categories;
+        private Category category;
+
+        @Override
+        public String toString() {
+
+            StringBuilder builder = new StringBuilder("PAGEID=" + pageid + " ns=" + ns + " title=" + title + " CATEGORIES= ");
+
+            if (categories == null || categories.length == 0) {
+                builder.append("no categories exist\n");
+            } else {
+                for (Category category : categories) {
+                    if (category != null) {
+                        String categoryString = category.toString().replace("Category:", "");
+                        categorySet.add(categoryString);
+                    }
+                    builder.append(category.toString());
+                    builder.append(", ");
+                }
+            }
+
+            builder.replace(builder.length() - 1, builder.length(), "");
+            return builder.toString();
+        }
+    }
+
+    private static class Category {
+        private String title;
+
+        @Override
+        public String toString() {
+            return title;
+        }
+    }
+
+    public static class GpsCatExists {
+        private static boolean gpsCatExists;
+
+        public static void setGpsCatExists(boolean gpsCat) {
+            gpsCatExists = gpsCat;
+        }
+
+        public static boolean getGpsCatExists() {
+            return gpsCatExists;
+        }
+    }
+}
 }
 
 
