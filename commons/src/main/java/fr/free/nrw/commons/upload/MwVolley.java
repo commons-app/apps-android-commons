@@ -87,6 +87,7 @@ public class MwVolley {
         ShareActivity.ErrorListener errorListener = new ShareActivity().new ErrorListener();
 
         JsonRequest request = new QueryRequest(apiUrl, responseListener, errorListener);
+        //Add request to RequestQueue
         VolleyRequestQueue.getInstance(context).addToRequestQueue(request);
     }
 
@@ -153,6 +154,60 @@ public class MwVolley {
             return gpsCatExists;
         }
     }
+
+    private class Query {
+        private Page[] pages;
+
+        @Override
+        public String toString() {
+            StringBuilder builder = new StringBuilder("pages=" + "\n");
+            for (Page page : pages) {
+                builder.append(page.toString());
+                builder.append("\n");
+            }
+            builder.replace(builder.length() - 1, builder.length(), "");
+
+            return builder.toString();
+
+        }
+    }
+
+    private class Page {
+        private Category[] categories;
+        private Category category;
+
+        @Override
+        public String toString() {
+
+            StringBuilder builder = new StringBuilder(" CATEGORIES= ");
+
+            if (categories == null || categories.length == 0) {
+                builder.append("no categories exist\n");
+            } else {
+                for (Category category : categories) {
+                    if (category != null) {
+                        String categoryString = category.toString().replace("Category:", "");
+                        categorySet.add(categoryString);
+                    }
+                    builder.append(category.toString());
+                    builder.append(", ");
+                }
+            }
+
+            builder.replace(builder.length() - 1, builder.length(), "");
+            return builder.toString();
+        }
+    }
+
+    private class Category {
+        private String title;
+
+        @Override
+        public String toString() {
+            return title;
+        }
+    }
+
 
 
 
