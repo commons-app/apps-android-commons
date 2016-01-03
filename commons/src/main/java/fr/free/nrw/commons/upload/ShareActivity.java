@@ -53,7 +53,7 @@ public  class       ShareActivity
 
     private UploadController uploadController;
 
-    private MwVolley apiCall;
+    protected MwVolley apiCall;
 
     public static List<String> gpsItems;
 
@@ -200,11 +200,12 @@ public  class       ShareActivity
                 Log.d("Image", "Coords of image: " + coords);
 
 
-                apiCall = new MwVolley(this, coords);
+                apiCall = new MwVolley(getApplicationContext(), coords);
 
                 //asynchronous calls to MediaWiki Commons API to match image coords with nearby Commons categories
                 apiCall.request();
             }
+
         }
 
         ImageLoader.getInstance().displayImage(mediaUriString, backgroundImageView);
