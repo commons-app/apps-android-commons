@@ -52,6 +52,8 @@ public  class       ShareActivity
 
     private UploadController uploadController;
 
+    private MwVolley apiCall;
+
     public ShareActivity() {
         super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
     }
@@ -195,7 +197,7 @@ public  class       ShareActivity
                 Log.d("Image", "Coords of image: " + coords);
 
 
-                MwVolleyApi apiCall = new MwVolleyApi(this, coords);
+                apiCall = new MwVolley(this, coords);
 
                 //asynchronous calls to MediaWiki Commons API to match image coords with nearby Commons categories
                 apiCall.request();
@@ -211,16 +213,17 @@ public  class       ShareActivity
         requestAuthToken();
     }
 
-    protected static class ResponseListener<T> implements Response.Listener<T>{
+    protected class ResponseListener<T> implements Response.Listener<T>{
         @Override
         public void onResponse(T response){
+            apiCall.setRadius(1000);
 
         }
     }
 
-    protected static class ErrorListener implements Response.ErrorListener {
+    protected class ErrorListener implements Response.ErrorListener {
 
-        private static final String TAG = ErrorListener.class.getName();
+        private final String TAG = ErrorListener.class.getName();
 
         @Override
         public void onErrorResponse(VolleyError error) {

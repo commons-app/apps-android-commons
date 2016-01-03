@@ -26,7 +26,7 @@ public class MwVolley {
     private String coords;
     private static final String MWURL = "https://commons.wikimedia.org/";
     private String apiUrl;
-    private int radius;
+    private int radius = 100;
     private Gson GSON;
 
     protected Set<String> categorySet;
@@ -83,7 +83,7 @@ public class MwVolley {
         radius = getRadius();
         apiUrl = buildUrl(radius);
 
-        ShareActivity.ResponseListener responseListener = new ShareActivity.ResponseListener();
+        ShareActivity.ResponseListener responseListener = new ShareActivity().new ResponseListener();
         ShareActivity.ErrorListener errorListener = new ShareActivity.ErrorListener();
 
         JsonRequest request = new QueryRequest(apiUrl, responseListener, errorListener);
