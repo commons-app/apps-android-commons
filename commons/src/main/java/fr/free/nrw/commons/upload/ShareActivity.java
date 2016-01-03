@@ -222,8 +222,6 @@ public  class       ShareActivity
 
         @Override
         public void onResponse(T response) {
-            //TODO get the radius, do logic, then set the radius to old radius * 10
-
 
             int currentRadius = apiCall.getRadius();
             int nextRadius = currentRadius * 10;

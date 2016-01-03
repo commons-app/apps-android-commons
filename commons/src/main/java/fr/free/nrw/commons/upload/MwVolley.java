@@ -13,6 +13,7 @@ import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonRequest;
 
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -20,6 +21,7 @@ import java.util.Set;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.InstanceCreator;
 
 
 public class MwVolley {
@@ -29,7 +31,6 @@ public class MwVolley {
     private static final String MWURL = "https://commons.wikimedia.org/";
     private String apiUrl;
     private int radius = 100;
-    private Gson GSON;
     private boolean gpsCatExists;
 
     protected Set<String> categorySet;
@@ -39,7 +40,6 @@ public class MwVolley {
         this.context = context;
         this.coords = coords;
         categorySet = new HashSet<String>();
-        GSON = new GsonBuilder().create();
         //Instantiate RequestQueue with Application context
         RequestQueue queue = VolleyRequestQueue.getInstance(context.getApplicationContext()).getRequestQueue();
     }
@@ -103,7 +103,13 @@ public class MwVolley {
         @Override
         protected Response<QueryResponse> parseNetworkResponse(NetworkResponse response) {
             String json = parseString(response);
-            QueryResponse queryResponse = GSON.fromJson(json, QueryResponse.class);
+
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            gsonBuilder.registerTypeAdapter(QueryResponse.class, new QueryResponseInstanceCreator());
+            gsonBuilder.registerTypeAdapter(Query.class, new QueryInstanceCreator());
+            Gson gson = gsonBuilder.create();
+
+            QueryResponse queryResponse = gson.fromJson(json, QueryResponse.class);
             return Response.success(queryResponse, cacheEntry(response));
         }
 
@@ -120,9 +126,28 @@ public class MwVolley {
         }
     }
 
-    private class QueryResponse {
-        private Query query = new Query();
+    class QueryResponseInstanceCreator implements InstanceCreator<QueryResponse> {
+        public QueryResponse createInstance(Type type)
+        {
+            return new QueryResponse();
+        }
+    }
 
+    class QueryInstanceCreator implements InstanceCreator<Query> {
+        public Query createInstance(Type type)
+        {
+            return new Query();
+        }
+    }
+
+    private class QueryResponse {
+
+        private Query query;
+
+        public QueryResponse() {
+            this.query = new Query();
+
+        }
         private String printSet() {
 
             if (categorySet == null || categorySet.isEmpty()) {
