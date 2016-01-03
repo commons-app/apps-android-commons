@@ -38,6 +38,8 @@ public class MwVolley {
     public MwVolley(Context context) {
         this.context = context;
         this.coords = "";
+        categorySet = new HashSet<String>();
+        RequestQueue queue = VolleyRequestQueue.getInstance(context.getApplicationContext()).getRequestQueue();
     }
 
     public MwVolley(Context context, String coords) {

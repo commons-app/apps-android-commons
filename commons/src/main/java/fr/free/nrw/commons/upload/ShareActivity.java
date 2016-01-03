@@ -53,7 +53,7 @@ public  class       ShareActivity
 
     private UploadController uploadController;
 
-    protected MwVolley apiCall = new MwVolley(this);
+    protected MwVolley apiCall;
 
     public static List<String> gpsItems;
 
@@ -189,6 +189,7 @@ public  class       ShareActivity
         //convert image Uri to file path
         FilePathConverter uriObj = new FilePathConverter(this, mediaUri);
         String filePath = uriObj.getFilePath();
+        apiCall = new MwVolley(this);
 
         if (filePath != null) {
             //extract the coordinates of image in decimal degrees
@@ -222,7 +223,7 @@ public  class       ShareActivity
         @Override
         public void onResponse(T response) {
 
-            int currentRadius = apiCall.getRadius();
+            int currentRadius = 100; //apiCall.getRadius();
             int nextRadius = currentRadius * 10;
 
             Log.d(TAG, response.toString());
