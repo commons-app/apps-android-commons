@@ -84,7 +84,7 @@ public class MwVolley {
         apiUrl = buildUrl(radius);
 
         ShareActivity.ResponseListener responseListener = new ShareActivity().new ResponseListener();
-        ShareActivity.ErrorListener errorListener = new ShareActivity.ErrorListener();
+        ShareActivity.ErrorListener errorListener = new ShareActivity().new ErrorListener();
 
         JsonRequest request = new QueryRequest(apiUrl, responseListener, errorListener);
         VolleyRequestQueue.getInstance(context).addToRequestQueue(request);
@@ -116,17 +116,18 @@ public class MwVolley {
         }
     }
 
-    private static class QueryResponse {
+    private class QueryResponse {
         private Query query = new Query();
 
         private String printSet() {
+            GpsCatExists gpsCatExists = new GpsCatExists();
             if (categorySet == null || categorySet.isEmpty()) {
-                GpsCatExists.setGpsCatExists(false);
-                Log.d("Cat", "gpsCatExists=" + GpsCatExists.getGpsCatExists());
+                gpsCatExists.setGpsCatExists(false);
+                Log.d("Cat", "gpsCatExists=" + gpsCatExists.getGpsCatExists());
                 return "No collection of categories";
             } else {
-                GpsCatExists.setGpsCatExists(true);
-                Log.d("Cat", "gpsCatExists=" + GpsCatExists.getGpsCatExists());
+                gpsCatExists.setGpsCatExists(true);
+                Log.d("Cat", "gpsCatExists=" + gpsCatExists.getGpsCatExists());
                 return "CATEGORIES FOUND" + categorySet.toString();
             }
         }
@@ -138,6 +139,18 @@ public class MwVolley {
             } else {
                 return "No pages found";
             }
+        }
+    }
+
+    public class GpsCatExists {
+        private boolean gpsCatExists;
+
+        public void setGpsCatExists(boolean gpsCat) {
+            gpsCatExists = gpsCat;
+        }
+
+        public boolean getGpsCatExists() {
+            return gpsCatExists;
         }
     }
 

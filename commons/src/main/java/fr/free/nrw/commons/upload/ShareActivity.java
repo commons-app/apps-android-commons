@@ -214,8 +214,10 @@ public  class       ShareActivity
     }
 
     protected class ResponseListener<T> implements Response.Listener<T>{
+
         @Override
         public void onResponse(T response){
+            //TODO get the radius, do logic, then set the radius to old radius * 10
             apiCall.setRadius(1000);
 
         }
