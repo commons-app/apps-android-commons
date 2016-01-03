@@ -42,15 +42,6 @@ public class MwVolley {
         RequestQueue queue = VolleyRequestQueue.getInstance(context.getApplicationContext()).getRequestQueue();
     }
 
-    public MwVolley(Context context, String coords) {
-
-        this.context = context;
-        this.coords = coords;
-        categorySet = new HashSet<String>();
-        //Instantiate RequestQueue with Application context
-        RequestQueue queue = VolleyRequestQueue.getInstance(context.getApplicationContext()).getRequestQueue();
-    }
-
     public void setCoords(String coords) {
         this.coords = coords;
     }
