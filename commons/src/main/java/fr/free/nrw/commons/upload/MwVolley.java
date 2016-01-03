@@ -35,6 +35,11 @@ public class MwVolley {
 
     protected Set<String> categorySet;
 
+    public MwVolley(Context context) {
+        this.context = context;
+        this.coords = "";
+    }
+
     public MwVolley(Context context, String coords) {
 
         this.context = context;
@@ -42,6 +47,10 @@ public class MwVolley {
         categorySet = new HashSet<String>();
         //Instantiate RequestQueue with Application context
         RequestQueue queue = VolleyRequestQueue.getInstance(context.getApplicationContext()).getRequestQueue();
+    }
+
+    public void setCoords(String coords) {
+        this.coords = coords;
     }
 
     protected void setRadius(int radius) {

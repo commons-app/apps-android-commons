@@ -53,7 +53,7 @@ public  class       ShareActivity
 
     private UploadController uploadController;
 
-    protected MwVolley apiCall;
+    protected MwVolley apiCall = new MwVolley(this);
 
     public static List<String> gpsItems;
 
@@ -199,9 +199,7 @@ public  class       ShareActivity
             if (coords != null) {
                 Log.d("Image", "Coords of image: " + coords);
 
-
-                apiCall = new MwVolley(getApplicationContext(), coords);
-
+                apiCall.setCoords(coords);
                 //asynchronous calls to MediaWiki Commons API to match image coords with nearby Commons categories
                 apiCall.request();
             }
