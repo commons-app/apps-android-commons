@@ -5,6 +5,7 @@ import android.os.*;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import android.net.*;
 import android.support.v4.app.NavUtils;
@@ -210,10 +211,20 @@ public  class       ShareActivity
         requestAuthToken();
     }
 
-    private class ResponseListener<T> implements Response.Listener<T>{
+    protected static class ResponseListener<T> implements Response.Listener<T>{
         @Override
         public void onResponse(T response){
 
+        }
+    }
+
+    protected static class ErrorListener implements Response.ErrorListener {
+
+        private static final String TAG = ErrorListener.class.getName();
+
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            Log.e(TAG, error.toString());
         }
     }
 
