@@ -13,7 +13,9 @@ import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonRequest;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.google.gson.Gson;
@@ -28,6 +30,7 @@ public class MwVolley {
     private String apiUrl;
     private int radius = 100;
     private Gson GSON;
+    private boolean gpsCatExists;
 
     protected Set<String> categorySet;
 
@@ -54,7 +57,7 @@ public class MwVolley {
      * Example URL: https://commons.wikimedia.org/w/api.php?action=query&prop=categories|coordinates|pageprops&format=json&clshow=!hidden&coprop=type|name|dim|country|region|globe&codistancefrompoint=38.11386944444445|13.356263888888888&
      * generator=geosearch&redirects=&ggscoord=38.11386944444445|13.356263888888888&ggsradius=100&ggslimit=10&ggsnamespace=6&ggsprop=type|name|dim|country|region|globe&ggsprimary=all&formatversion=2
      */
-    private String buildUrl(int ggsradius) {
+    protected String buildUrl(int ggsradius) {
 
         Uri.Builder builder = Uri.parse(MWURL).buildUpon();
 
@@ -121,14 +124,14 @@ public class MwVolley {
         private Query query = new Query();
 
         private String printSet() {
-            GpsCatExists gpsCatExists = new GpsCatExists();
+
             if (categorySet == null || categorySet.isEmpty()) {
-                gpsCatExists.setGpsCatExists(false);
-                Log.d("Cat", "gpsCatExists=" + gpsCatExists.getGpsCatExists());
+               setGpsCatExists(false);
+                Log.d("Cat", "gpsCatExists=" + getGpsCatExists());
                 return "No collection of categories";
             } else {
-                gpsCatExists.setGpsCatExists(true);
-                Log.d("Cat", "gpsCatExists=" + gpsCatExists.getGpsCatExists());
+                setGpsCatExists(true);
+                Log.d("Cat", "gpsCatExists=" + getGpsCatExists());
                 return "CATEGORIES FOUND" + categorySet.toString();
             }
         }
@@ -143,16 +146,17 @@ public class MwVolley {
         }
     }
 
-    public class GpsCatExists {
-        private boolean gpsCatExists;
+    public List<String> getGpsCat() {
+        List<String> list = new ArrayList<String>(categorySet);
+        return list;
+    }
 
-        public void setGpsCatExists(boolean gpsCat) {
-            gpsCatExists = gpsCat;
-        }
+    public void setGpsCatExists(boolean gpsCat) {
+        gpsCatExists = gpsCat;
+    }
 
-        public boolean getGpsCatExists() {
-            return gpsCatExists;
-        }
+    public boolean getGpsCatExists() {
+        return gpsCatExists;
     }
 
     private class Query {

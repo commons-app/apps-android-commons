@@ -28,6 +28,7 @@ import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public  class       ShareActivity
@@ -53,6 +54,8 @@ public  class       ShareActivity
     private UploadController uploadController;
 
     private MwVolley apiCall;
+
+    public static List<String> gpsItems;
 
     public ShareActivity() {
         super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
@@ -140,11 +143,11 @@ public  class       ShareActivity
         shareView = (SingleUploadFragment) getSupportFragmentManager().findFragmentByTag("shareView");
         categorizationFragment = (CategorizationFragment) getSupportFragmentManager().findFragmentByTag("categorization");
         if(shareView == null && categorizationFragment == null) {
-                shareView = new SingleUploadFragment();
-                this.getSupportFragmentManager()
-                        .beginTransaction()
-                        .add(R.id.single_upload_fragment_container, shareView, "shareView")
-                        .commit();
+            shareView = new SingleUploadFragment();
+            this.getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.single_upload_fragment_container, shareView, "shareView")
+                    .commit();
         }
 
         uploadController.prepareService();
@@ -163,7 +166,7 @@ public  class       ShareActivity
         super.onCreate(savedInstanceState);
         uploadController = new UploadController(this);
         setContentView(R.layout.activity_share);
-        
+
         app = (CommonsApplication)this.getApplicationContext();
         backgroundImageView = (ImageView)findViewById(R.id.backgroundImage);
 
@@ -213,13 +216,37 @@ public  class       ShareActivity
         requestAuthToken();
     }
 
-    protected class ResponseListener<T> implements Response.Listener<T>{
+    protected class ResponseListener<T> implements Response.Listener<T> {
+
+        private final String TAG = ResponseListener.class.getName();
 
         @Override
-        public void onResponse(T response){
+        public void onResponse(T response) {
             //TODO get the radius, do logic, then set the radius to old radius * 10
-            apiCall.setRadius(1000);
 
+
+            int currentRadius = apiCall.getRadius();
+            int nextRadius = currentRadius * 10;
+
+            Log.d(TAG, response.toString());
+            Log.d("Repeat", "categorySet contains: " + apiCall.categorySet.toString());
+
+            if (nextRadius <= 10000 && apiCall.categorySet.size() <= 10) {
+
+                apiCall.setRadius(nextRadius);
+                Log.d("Repeat", "Repeating API call with radius " + Integer.toString(nextRadius));
+
+                apiCall.request();
+
+            }
+
+            if (apiCall.getGpsCatExists() == true) {
+                gpsItems = new ArrayList<String>(apiCall.getGpsCat());
+                Log.d("Cat", "GPS items: " + gpsItems.toString());
+
+            } else {
+                gpsItems = new ArrayList<String>();
+            }
         }
     }
 
