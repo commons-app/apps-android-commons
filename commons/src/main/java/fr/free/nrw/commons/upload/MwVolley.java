@@ -107,6 +107,8 @@ public class MwVolley {
             GsonBuilder gsonBuilder = new GsonBuilder();
             gsonBuilder.registerTypeAdapter(QueryResponse.class, new QueryResponseInstanceCreator());
             gsonBuilder.registerTypeAdapter(Query.class, new QueryInstanceCreator());
+            gsonBuilder.registerTypeAdapter(Page.class, new PageInstanceCreator());
+            gsonBuilder.registerTypeAdapter(Category.class, new CategoryInstanceCreator());
             Gson gson = gsonBuilder.create();
 
             QueryResponse queryResponse = gson.fromJson(json, QueryResponse.class);
@@ -137,6 +139,20 @@ public class MwVolley {
         public Query createInstance(Type type)
         {
             return new Query();
+        }
+    }
+
+    class PageInstanceCreator implements InstanceCreator<Page> {
+        public Page createInstance(Type type)
+        {
+            return new Page();
+        }
+    }
+
+    class CategoryInstanceCreator implements InstanceCreator<Category> {
+        public Category createInstance(Type type)
+        {
+            return new Category();
         }
     }
 
