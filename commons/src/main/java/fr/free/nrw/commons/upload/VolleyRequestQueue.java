@@ -1,17 +1,13 @@
 package fr.free.nrw.commons.upload;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.util.LruCache;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
-/**
- * Created by misao on 03-Jan-16.
- */
+
 public class VolleyRequestQueue {
     private static VolleyRequestQueue mInstance;
     private RequestQueue mRequestQueue;
@@ -42,5 +38,5 @@ public class VolleyRequestQueue {
     public <T> void addToRequestQueue(Request<T> req) {
         getRequestQueue().add(req);
     }
-    
+
 }

@@ -3,6 +3,7 @@ package fr.free.nrw.commons.upload;
 import android.content.*;
 import android.os.*;
 
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import android.net.*;
@@ -191,6 +192,8 @@ public  class       ShareActivity
 
             if (coords != null) {
                 Log.d("Image", "Coords of image: " + coords);
+
+
                 MwVolleyApi apiCall = new MwVolleyApi(this, coords);
 
                 //asynchronous calls to MediaWiki Commons API to match image coords with nearby Commons categories
