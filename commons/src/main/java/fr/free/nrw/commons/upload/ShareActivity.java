@@ -2,6 +2,8 @@ package fr.free.nrw.commons.upload;
 
 import android.content.*;
 import android.os.*;
+
+import com.android.volley.Response;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import android.net.*;
 import android.support.v4.app.NavUtils;
@@ -9,6 +11,8 @@ import com.actionbarsherlock.view.MenuItem;
 
 import android.util.Log;
 import android.widget.*;
+
+import org.json.JSONObject;
 
 import fr.free.nrw.commons.*;
 import fr.free.nrw.commons.modifications.CategoryModifier;
@@ -201,6 +205,13 @@ public  class       ShareActivity
         }
 
         requestAuthToken();
+    }
+
+    private class ResponseListener<T> implements Response.Listener<T>{
+        @Override
+        public void onResponse(T response){
+
+        }
     }
 
 
