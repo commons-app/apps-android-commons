@@ -90,7 +90,7 @@ public class ContributionController {
 
     public void loadState(Bundle savedInstanceState) {
         if(savedInstanceState != null) {
-            lastGeneratedCaptureURI = (Uri) savedInstanceState.getParcelable("lastGeneratedCaptureURI");
+            lastGeneratedCaptureURI = savedInstanceState.getParcelable("lastGeneratedCaptureURI");
         }
     }
 

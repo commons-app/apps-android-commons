@@ -9,53 +9,49 @@ import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonRequest;
-import com.android.volley.toolbox.Volley;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class MwVolleyApi {
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.InstanceCreator;
 
-    private static RequestQueue REQUEST_QUEUE;
-    private static final Gson GSON = new GsonBuilder().create();
+
+public class MwVolley {
+
     private Context context;
-    private String coordsLog;
-
-    protected static Set<String> categorySet;
-
+    private String coords;
     private static final String MWURL = "https://commons.wikimedia.org/";
+    private String apiUrl;
+    private int radius = 100;
+    private boolean gpsCatExists;
 
-    public MwVolleyApi(Context context) {
+    protected Set<String> categorySet;
+
+    public MwVolley(Context context) {
         this.context = context;
+        this.coords = "";
         categorySet = new HashSet<String>();
+        RequestQueue queue = VolleyRequestQueue.getInstance(context.getApplicationContext()).getRequestQueue();
     }
 
-    //To get the list of categories for display
-    public static List<String> getGpsCat() {
-        List<String> list = new ArrayList<String>(categorySet);
-        return list;
+    public void setCoords(String coords) {
+        this.coords = coords;
     }
 
+    protected void setRadius(int radius) {
+        this.radius = radius;
+    }
 
-    public void request(String coords) {
-
-        coordsLog = coords;
-        String apiUrl = buildUrl(coords);
-        Log.d("Image", "URL: " + apiUrl);
-
-        JsonRequest<QueryResponse> request = new QueryRequest(apiUrl,
-                new LogResponseListener<QueryResponse>(), new LogResponseErrorListener());
-        getQueue().add(request);
+    protected int getRadius() {
+        return radius;
     }
 
     /**
@@ -63,7 +59,7 @@ public class MwVolleyApi {
      * Example URL: https://commons.wikimedia.org/w/api.php?action=query&prop=categories|coordinates|pageprops&format=json&clshow=!hidden&coprop=type|name|dim|country|region|globe&codistancefrompoint=38.11386944444445|13.356263888888888&
      * generator=geosearch&redirects=&ggscoord=38.11386944444445|13.356263888888888&ggsradius=100&ggslimit=10&ggsnamespace=6&ggsprop=type|name|dim|country|region|globe&ggsprimary=all&formatversion=2
      */
-    private String buildUrl (String coords){
+    protected String buildUrl(int ggsradius) {
 
         Uri.Builder builder = Uri.parse(MWURL).buildUpon();
 
@@ -77,7 +73,7 @@ public class MwVolleyApi {
                 .appendQueryParameter("codistancefrompoint", coords)
                 .appendQueryParameter("generator", "geosearch")
                 .appendQueryParameter("ggscoord", coords)
-                .appendQueryParameter("ggsradius", "100")
+                .appendQueryParameter("ggsradius", Integer.toString(ggsradius))
                 .appendQueryParameter("ggslimit", "10")
                 .appendQueryParameter("ggsnamespace", "6")
                 .appendQueryParameter("ggsprop", "type|name|dim|country|region|globe")
@@ -87,49 +83,37 @@ public class MwVolleyApi {
         return builder.toString();
     }
 
-    private synchronized RequestQueue getQueue() {
-        return getQueue(context);
+    public void request() {
+
+        radius = getRadius();
+        apiUrl = buildUrl(radius);
+
+        ShareActivity.ResponseListener responseListener = new ShareActivity().new ResponseListener();
+        ShareActivity.ErrorListener errorListener = new ShareActivity().new ErrorListener();
+
+        JsonRequest request = new QueryRequest(apiUrl, responseListener, errorListener);
+        //Add request to RequestQueue
+        VolleyRequestQueue.getInstance(context).addToRequestQueue(request);
     }
 
-    private static RequestQueue getQueue(Context context) {
-        if (REQUEST_QUEUE == null) {
-            REQUEST_QUEUE = Volley.newRequestQueue(context.getApplicationContext());
-        }
-        return REQUEST_QUEUE;
-    }
+    private class QueryRequest extends JsonRequest<QueryResponse> {
 
-    private static class LogResponseListener<T> implements Response.Listener<T> {
-        private static final String TAG = LogResponseListener.class.getName();
-
-        @Override
-        public void onResponse(T response) {
-            Log.d(TAG, response.toString());
-        }
-    }
-
-    private static class LogResponseErrorListener implements Response.ErrorListener {
-        private static final String TAG = LogResponseErrorListener.class.getName();
-
-        @Override
-        public void onErrorResponse(VolleyError error) {
-            Log.e(TAG, error.toString());
-        }
-    }
-
-    private static class QueryRequest extends JsonRequest<QueryResponse> {
-        private static final String TAG = QueryRequest.class.getName();
-
-        public QueryRequest(String url,
-                            Response.Listener<QueryResponse> listener,
-                            Response.ErrorListener errorListener) {
+        public QueryRequest(String url, Response.Listener<QueryResponse> listener, Response.ErrorListener errorListener) {
             super(Request.Method.GET, url, null, listener, errorListener);
         }
 
         @Override
         protected Response<QueryResponse> parseNetworkResponse(NetworkResponse response) {
             String json = parseString(response);
-            //Log.d(TAG, "json=" + json);
-            QueryResponse queryResponse = GSON.fromJson(json, QueryResponse.class);
+
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            gsonBuilder.registerTypeAdapter(QueryResponse.class, new QueryResponseInstanceCreator());
+            gsonBuilder.registerTypeAdapter(Query.class, new QueryInstanceCreator());
+            gsonBuilder.registerTypeAdapter(Page.class, new PageInstanceCreator());
+            gsonBuilder.registerTypeAdapter(Category.class, new CategoryInstanceCreator());
+            Gson gson = gsonBuilder.create();
+
+            QueryResponse queryResponse = gson.fromJson(json, QueryResponse.class);
             return Response.success(queryResponse, cacheEntry(response));
         }
 
@@ -146,29 +130,51 @@ public class MwVolleyApi {
         }
     }
 
-    public static class GpsCatExists {
-        private static boolean gpsCatExists;
-
-        public static void setGpsCatExists(boolean gpsCat) {
-            gpsCatExists = gpsCat;
-        }
-
-        public static boolean getGpsCatExists() {
-            return gpsCatExists;
+    class QueryResponseInstanceCreator implements InstanceCreator<QueryResponse> {
+        public QueryResponse createInstance(Type type)
+        {
+            return new QueryResponse();
         }
     }
 
-    private static class QueryResponse {
-        private Query query = new Query();
+    class QueryInstanceCreator implements InstanceCreator<Query> {
+        public Query createInstance(Type type)
+        {
+            return new Query();
+        }
+    }
 
+    class PageInstanceCreator implements InstanceCreator<Page> {
+        public Page createInstance(Type type)
+        {
+            return new Page();
+        }
+    }
+
+    class CategoryInstanceCreator implements InstanceCreator<Category> {
+        public Category createInstance(Type type)
+        {
+            return new Category();
+        }
+    }
+
+    private class QueryResponse {
+
+        private Query query;
+
+        public QueryResponse() {
+            this.query = new Query();
+
+        }
         private String printSet() {
+
             if (categorySet == null || categorySet.isEmpty()) {
-                GpsCatExists.setGpsCatExists(false);
-                Log.d("Cat", "gpsCatExists=" + GpsCatExists.getGpsCatExists());
+               setGpsCatExists(false);
+                Log.d("Cat", "gpsCatExists=" + getGpsCatExists());
                 return "No collection of categories";
             } else {
-                GpsCatExists.setGpsCatExists(true);
-                Log.d("Cat", "gpsCatExists=" + GpsCatExists.getGpsCatExists());
+                setGpsCatExists(true);
+                Log.d("Cat", "gpsCatExists=" + getGpsCatExists());
                 return "CATEGORIES FOUND" + categorySet.toString();
             }
         }
@@ -183,8 +189,21 @@ public class MwVolleyApi {
         }
     }
 
-    private static class Query {
-        private Page [] pages;
+    public List<String> getGpsCat() {
+        List<String> list = new ArrayList<String>(categorySet);
+        return list;
+    }
+
+    public void setGpsCatExists(boolean gpsCat) {
+        gpsCatExists = gpsCat;
+    }
+
+    public boolean getGpsCatExists() {
+        return gpsCatExists;
+    }
+
+    private class Query {
+        private Page[] pages;
 
         @Override
         public String toString() {
@@ -200,28 +219,25 @@ public class MwVolleyApi {
         }
     }
 
-    private static class Page {
-        private int pageid;
-        private int ns;
-        private String title;
+    private class Page {
         private Category[] categories;
         private Category category;
 
         @Override
         public String toString() {
 
-            StringBuilder builder = new StringBuilder("PAGEID=" + pageid + " ns=" + ns + " title=" + title + "\n" + " CATEGORIES= ");
+            StringBuilder builder = new StringBuilder(" CATEGORIES= ");
 
             if (categories == null || categories.length == 0) {
                 builder.append("no categories exist\n");
             } else {
                 for (Category category : categories) {
-                    builder.append(category.toString());
-                    builder.append("\n");
                     if (category != null) {
                         String categoryString = category.toString().replace("Category:", "");
                         categorySet.add(categoryString);
                     }
+                    builder.append(category.toString());
+                    builder.append(", ");
                 }
             }
 
@@ -230,15 +246,17 @@ public class MwVolleyApi {
         }
     }
 
-        private static class Category {
-            private String title;
+    private class Category {
+        private String title;
 
-            @Override
-            public String toString() {
-                return title;
-            }
+        @Override
+        public String toString() {
+            return title;
         }
     }
 
 
 
+
+
+}

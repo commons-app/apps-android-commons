@@ -223,7 +223,7 @@ public class Media implements Parcelable {
     }
 
     public Media(Parcel in) {
-        localUri = (Uri)in.readParcelable(Uri.class.getClassLoader());
+        localUri = in.readParcelable(Uri.class.getClassLoader());
         imageUrl = in.readString();
         filename = in.readString();
         description = in.readString();

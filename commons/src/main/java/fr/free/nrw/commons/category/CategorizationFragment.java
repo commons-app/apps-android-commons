@@ -19,7 +19,7 @@ import org.mediawiki.api.ApiResult;
 import org.mediawiki.api.MWApi;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.upload.MwVolleyApi;
+import fr.free.nrw.commons.upload.ShareActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,8 +30,8 @@ import java.util.List;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 public class CategorizationFragment extends SherlockFragment{
-    public static interface OnCategoriesSaveHandler {
-        public void onCategoriesSave(ArrayList<String> categories);
+    public interface OnCategoriesSaveHandler {
+        void onCategoriesSave(ArrayList<String> categories);
     }
 
     ListView categoriesList;
@@ -151,17 +151,13 @@ public class CategorizationFragment extends SherlockFragment{
                         items.add(cat.getName());
                     }
 
-                    if (MwVolleyApi.GpsCatExists.getGpsCatExists() == true){
-                        Log.d("Cat", "GPS cats found in CategorizationFragment.java" + MwVolleyApi.getGpsCat().toString());
-                        List<String> gpsItems = new ArrayList<String>(MwVolleyApi.getGpsCat());
-                        Log.d("Cat", "GPS items: " + gpsItems.toString());
-
-                        mergedItems.addAll(gpsItems);
+                    List<String> gpsItems = ShareActivity.gpsItems;
+                    if (gpsItems.size() != 0) {
+                        mergedItems.addAll(ShareActivity.gpsItems);
                     }
-
                     mergedItems.addAll(items);
-                }
-                catch (RemoteException e) {
+
+                } catch (RemoteException e) {
                     // faaaail
                     throw new RuntimeException(e);
                 }
@@ -172,9 +168,11 @@ public class CategorizationFragment extends SherlockFragment{
             if(categoriesCache.containsKey(filter)) {
                 return categoriesCache.get(filter);
             }
+
             MWApi api = CommonsApplication.createMWApi();
             ApiResult result;
             ArrayList<String> categories = new ArrayList<String>();
+
             try {
                 result = api.action("query")
                         .param("list", "allcategories")
@@ -189,9 +187,7 @@ public class CategorizationFragment extends SherlockFragment{
             for(ApiResult categoryNode: categoryNodes) {
                 categories.add(categoryNode.getDocument().getTextContent());
             }
-
             categoriesCache.put(filter, categories);
-
             return categories;
         }
     }

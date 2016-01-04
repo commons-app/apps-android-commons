@@ -2,6 +2,10 @@ package fr.free.nrw.commons.upload;
 
 import android.content.*;
 import android.os.*;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import android.net.*;
 import android.support.v4.app.NavUtils;
@@ -9,6 +13,8 @@ import com.actionbarsherlock.view.MenuItem;
 
 import android.util.Log;
 import android.widget.*;
+
+import org.json.JSONObject;
 
 import fr.free.nrw.commons.*;
 import fr.free.nrw.commons.modifications.CategoryModifier;
@@ -22,6 +28,7 @@ import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public  class       ShareActivity
@@ -45,6 +52,10 @@ public  class       ShareActivity
     private ImageView backgroundImageView;
 
     private UploadController uploadController;
+
+    protected MwVolley apiCall;
+
+    public static List<String> gpsItems;
 
     public ShareActivity() {
         super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
@@ -132,11 +143,11 @@ public  class       ShareActivity
         shareView = (SingleUploadFragment) getSupportFragmentManager().findFragmentByTag("shareView");
         categorizationFragment = (CategorizationFragment) getSupportFragmentManager().findFragmentByTag("categorization");
         if(shareView == null && categorizationFragment == null) {
-                shareView = new SingleUploadFragment();
-                this.getSupportFragmentManager()
-                        .beginTransaction()
-                        .add(R.id.single_upload_fragment_container, shareView, "shareView")
-                        .commit();
+            shareView = new SingleUploadFragment();
+            this.getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.single_upload_fragment_container, shareView, "shareView")
+                    .commit();
         }
 
         uploadController.prepareService();
@@ -155,14 +166,14 @@ public  class       ShareActivity
         super.onCreate(savedInstanceState);
         uploadController = new UploadController(this);
         setContentView(R.layout.activity_share);
-        
+
         app = (CommonsApplication)this.getApplicationContext();
         backgroundImageView = (ImageView)findViewById(R.id.backgroundImage);
 
         Intent intent = getIntent();
 
         if(intent.getAction().equals(Intent.ACTION_SEND)) {
-            mediaUri = (Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM);
+            mediaUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
             if(intent.hasExtra(UploadService.EXTRA_SOURCE)) {
                 source = intent.getStringExtra(UploadService.EXTRA_SOURCE);
             } else {
@@ -178,6 +189,8 @@ public  class       ShareActivity
         //convert image Uri to file path
         FilePathConverter uriObj = new FilePathConverter(this, mediaUri);
         String filePath = uriObj.getFilePath();
+        apiCall = new MwVolley(this);
+        Log.d("Repeat", "Logging apiCall object in onCreate: " + apiCall.toString());
 
         if (filePath != null) {
             //extract the coordinates of image in decimal degrees
@@ -187,11 +200,12 @@ public  class       ShareActivity
 
             if (coords != null) {
                 Log.d("Image", "Coords of image: " + coords);
-                MwVolleyApi apiCall = new MwVolleyApi(this);
 
+                apiCall.setCoords(coords);
                 //asynchronous calls to MediaWiki Commons API to match image coords with nearby Commons categories
-                apiCall.request(coords);
+                apiCall.request();
             }
+
         }
 
         ImageLoader.getInstance().displayImage(mediaUriString, backgroundImageView);
@@ -201,6 +215,51 @@ public  class       ShareActivity
         }
 
         requestAuthToken();
+    }
+
+    protected class ResponseListener<T> implements Response.Listener<T> {
+
+        private final String TAG = ResponseListener.class.getName();
+
+        @Override
+        public void onResponse(T response) {
+            
+            int currentRadius = apiCall.getRadius();
+            Log.d("Repeat", "Logging apiCall object in ResponseListener: " + apiCall.toString());
+
+            int nextRadius = currentRadius * 10;
+
+            Log.d(TAG, response.toString());
+
+            Log.d("Repeat", "categorySet contains: " + apiCall.categorySet.toString());
+
+            if (nextRadius <= 10000 && apiCall.categorySet.size() <= 10) {
+
+                apiCall.setRadius(nextRadius);
+                Log.d("Repeat", "Repeating API call with radius " + Integer.toString(nextRadius));
+
+                apiCall.request();
+
+            }
+
+            if (apiCall.getGpsCatExists() == true) {
+                gpsItems = new ArrayList<String>(apiCall.getGpsCat());
+                Log.d("Cat", "GPS items: " + gpsItems.toString());
+
+            } else {
+                gpsItems = new ArrayList<String>();
+            }
+        }
+    }
+
+    protected class ErrorListener implements Response.ErrorListener {
+
+        private final String TAG = ErrorListener.class.getName();
+
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            Log.e(TAG, error.toString());
+        }
     }
 
 
