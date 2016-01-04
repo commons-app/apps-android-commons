@@ -223,12 +223,14 @@ public  class       ShareActivity
 
         @Override
         public void onResponse(T response) {
+            
+            int currentRadius = apiCall.getRadius();
+            Log.d("Repeat", "Logging apiCall object in ResponseListener: " + apiCall.toString());
 
-            int currentRadius = 100; //apiCall.getRadius();
             int nextRadius = currentRadius * 10;
 
             Log.d(TAG, response.toString());
-            Log.d("Repeat", "Logging apiCall object in ResponseListener: " + apiCall.toString());
+
             Log.d("Repeat", "categorySet contains: " + apiCall.categorySet.toString());
 
             if (nextRadius <= 10000 && apiCall.categorySet.size() <= 10) {
