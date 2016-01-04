@@ -190,6 +190,7 @@ public  class       ShareActivity
         FilePathConverter uriObj = new FilePathConverter(this, mediaUri);
         String filePath = uriObj.getFilePath();
         apiCall = new MwVolley(this);
+        Log.d("Repeat", "Logging apiCall object in onCreate: " + apiCall.toString());
 
         if (filePath != null) {
             //extract the coordinates of image in decimal degrees
@@ -227,6 +228,7 @@ public  class       ShareActivity
             int nextRadius = currentRadius * 10;
 
             Log.d(TAG, response.toString());
+            Log.d("Repeat", "Logging apiCall object in ResponseListener: " + apiCall.toString());
             Log.d("Repeat", "categorySet contains: " + apiCall.categorySet.toString());
 
             if (nextRadius <= 10000 && apiCall.categorySet.size() <= 10) {
