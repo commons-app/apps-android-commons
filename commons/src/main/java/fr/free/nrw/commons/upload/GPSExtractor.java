@@ -68,7 +68,8 @@ public class GPSExtractor {
             decLongitude = 0 - convertToDegree(longitude);
         }
 
-        return (String.valueOf(decLatitude) + "|" + String.valueOf(decLongitude));
+        //Have to return Longitude before Latitude for X/Y conversion. Long = X; Lat = Y
+        return ("Long|Lat" + String.valueOf(decLongitude) + "|" + String.valueOf(decLatitude));
     }
 
     private double convertToDegree(String stringDMS){

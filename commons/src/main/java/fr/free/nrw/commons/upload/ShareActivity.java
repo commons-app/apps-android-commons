@@ -11,6 +11,7 @@ import android.util.Log;
 import android.widget.*;
 
 import fr.free.nrw.commons.*;
+import fr.free.nrw.commons.caching.CacheController;
 import fr.free.nrw.commons.modifications.CategoryModifier;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
 import fr.free.nrw.commons.CommonsApplication;
@@ -188,9 +189,12 @@ public  class       ShareActivity
                 Log.d("Image", "Coords of image: " + coords);
 
                 //TODO: Insert cache query here, only send API request if no cached categories
+                CacheController cacheObj = new CacheController(this, coords);
+                cacheObj.getCoords();
 
-                MwVolleyApi apiCall = new MwVolleyApi(this);
+
                 //asynchronous calls to MediaWiki Commons API to match image coords with nearby Commons categories
+                MwVolleyApi apiCall = new MwVolleyApi(this);
                 apiCall.request(coords);
             }
         }
