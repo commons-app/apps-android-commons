@@ -184,7 +184,7 @@ public  class       ShareActivity
             Log.d("Image", "Calling GPSExtractor");
             GPSExtractor imageObj = new GPSExtractor(filePath);
             //decimalCoords for MediaWiki API, xyCoords for Quadtree
-            String decimalCoords = imageObj.getCoords(false);
+            String decimalCoords = imageObj.getCoords();
 
             double decLongitude = imageObj.getDecLongitude();
             double decLatitude = imageObj.getDecLatitude();
