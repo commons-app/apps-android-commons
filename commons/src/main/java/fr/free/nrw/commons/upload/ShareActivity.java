@@ -194,6 +194,8 @@ public  class       ShareActivity
 
                 CacheController cacheObj = new CacheController(this, decLongitude, decLatitude);
                 cacheObj.initQuadTree();
+                cacheObj.cacheCategory();
+                cacheObj.findCategory();
 
                 //TODO: If no categories found from cache in that area, call MW API
                 //asynchronous calls to MediaWiki Commons API to match image coords with nearby Commons categories
