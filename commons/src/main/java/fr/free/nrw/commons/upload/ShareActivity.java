@@ -186,7 +186,7 @@ public  class       ShareActivity
             String coords = imageObj.getCoords();
 
             if (coords != null) {
-                Log.d("Image", "Coords of image: " + coords);
+                Log.d("Image", "Coords of image in Long/Lat: " + coords);
 
                 //TODO: Insert cache query here, only send API request if no cached categories
                 CacheController cacheObj = new CacheController(this, coords);
