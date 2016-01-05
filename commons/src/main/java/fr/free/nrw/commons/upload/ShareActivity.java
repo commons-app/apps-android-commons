@@ -174,7 +174,6 @@ public  class       ShareActivity
 
         mediaUriString = mediaUri.toString();
         Log.d("Image", "Uri: " + mediaUriString);
-
         //convert image Uri to file path
         FilePathConverter uriObj = new FilePathConverter(this, mediaUri);
         String filePath = uriObj.getFilePath();
@@ -187,8 +186,10 @@ public  class       ShareActivity
 
             if (coords != null) {
                 Log.d("Image", "Coords of image: " + coords);
-                MwVolleyApi apiCall = new MwVolleyApi(this);
 
+                //TODO: Insert cache query here, only send API request if no cached categories
+
+                MwVolleyApi apiCall = new MwVolleyApi(this);
                 //asynchronous calls to MediaWiki Commons API to match image coords with nearby Commons categories
                 apiCall.request(coords);
             }
