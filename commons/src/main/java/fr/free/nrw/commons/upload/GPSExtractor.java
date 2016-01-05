@@ -15,7 +15,7 @@ public class GPSExtractor {
     }
 
     //Extract GPS coords of image
-    public String getCoords() {
+    public String getCoords(boolean xyCoordsReq) {
 
         ExifInterface exif;
         String latitude = "";
@@ -23,6 +23,7 @@ public class GPSExtractor {
         String latitude_ref = "";
         String longitude_ref = "";
         String decimalCoords = "";
+        String xyCoords = "";
 
         try {
             exif = new ExifInterface(filePath);
@@ -45,11 +46,17 @@ public class GPSExtractor {
             Log.d("Image", "Longitude: " + longitude + " " + longitude_ref);
 
             decimalCoords = getDecimalCoords(latitude, latitude_ref, longitude, longitude_ref);
-            return decimalCoords;
+            xyCoords = getXyCoords(latitude, latitude_ref, longitude, longitude_ref);
+
+            if (xyCoordsReq = true) {
+                return xyCoords;
+            } else {
+                return decimalCoords;
+            }
         }
     }
 
-    //Converts format of coords into decimal coords as required by API for next step
+    //Converts format of coords into decimal coords as required by MediaWiki API
     private String getDecimalCoords(String latitude, String latitude_ref, String longitude, String longitude_ref) {
 
         double decLatitude, decLongitude;
@@ -68,9 +75,36 @@ public class GPSExtractor {
             decLongitude = 0 - convertToDegree(longitude);
         }
 
-        //Have to return Longitude before Latitude for X/Y conversion. Long = X; Lat = Y
-        return (String.valueOf(decLongitude) + "|" + String.valueOf(decLatitude));
+        String decimalCoords = String.valueOf(decLatitude) + "|" + String.valueOf(decLongitude);
+        Log.d("Coords", "Latitude and Longitude are " + decimalCoords);
+        return decimalCoords;
     }
+
+    //Converts format of coords into XY values as required by Quadtree for caching
+    private String getXyCoords(String latitude, String latitude_ref, String longitude, String longitude_ref) {
+
+        double decLatitude, decLongitude;
+
+        if(latitude_ref.equals("N")){
+            decLatitude = convertToDegree(latitude);
+        }
+        else{
+            decLatitude = 0 - convertToDegree(latitude);
+        }
+
+        if(longitude_ref.equals("E")){
+            decLongitude = convertToDegree(longitude);
+        }
+        else{
+            decLongitude = 0 - convertToDegree(longitude);
+        }
+
+        //Have to return Longitude before Latitude for X/Y conversion. Long = X; Lat = Y
+        String xyCoords = String.valueOf(decLongitude) + "|" + String.valueOf(decLatitude);
+        Log.d("Coords", "X and Y are " + xyCoords);
+        return xyCoords;
+    }
+
 
     private double convertToDegree(String stringDMS){
         double result;

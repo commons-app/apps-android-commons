@@ -183,7 +183,7 @@ public  class       ShareActivity
             //extract the coordinates of image in decimal degrees
             Log.d("Image", "Calling GPSExtractor");
             GPSExtractor imageObj = new GPSExtractor(filePath);
-            String coords = imageObj.getCoords();
+            String coords = imageObj.getCoords(false);
 
             if (coords != null) {
                 Log.d("Image", "Coords of image in Long/Lat: " + coords);
