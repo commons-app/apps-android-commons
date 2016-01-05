@@ -9,6 +9,7 @@ import java.io.IOException;
 public class GPSExtractor {
 
     private String filePath;
+    private double decLatitude, decLongitude;
 
     public GPSExtractor(String filePath){
         this.filePath = filePath;
@@ -56,10 +57,18 @@ public class GPSExtractor {
         }
     }
 
+    public double getDecLatitude() {
+        return decLatitude;
+    }
+
+    public double getDecLongitude() {
+        return decLongitude;
+    }
+
     //Converts format of coords into decimal coords as required by MediaWiki API
     private String getDecimalCoords(String latitude, String latitude_ref, String longitude, String longitude_ref) {
 
-        double decLatitude, decLongitude;
+
 
         if(latitude_ref.equals("N")){
             decLatitude = convertToDegree(latitude);

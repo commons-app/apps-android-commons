@@ -9,15 +9,23 @@ import android.util.Log;
 public class CacheController {
 
     private Context context;
-    private String coords;
+    private double decLongitude;
+    private double decLatitude;
+    private QuadTree quadTree;
+    private String category = "test";
 
-    public CacheController(Context context, String coords) {
+    public CacheController(Context context, double decLongitude, double decLatitude) {
         this.context = context;
-        this.coords = coords;
+        this.decLongitude = decLongitude;
+        this.decLatitude = decLatitude;
+
     }
 
-    public String getCoords() {
-        Log.d("Cache", "Coords passed to cache: " + coords);
-        return coords;
+
+    public void callQuadTree() {
+        quadTree = new QuadTree(-180, -90, +180, +90);
+        Log.d("Cache", "New QuadTree created");
+        Log.d("Cache", "X (longitude) value: " + decLongitude + ", Y (latitude) value: " + decLatitude);
+        quadTree.set(decLongitude, decLatitude, category);
     }
 }
