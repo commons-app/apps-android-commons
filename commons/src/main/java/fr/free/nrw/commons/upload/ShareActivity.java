@@ -183,19 +183,22 @@ public  class       ShareActivity
             //extract the coordinates of image in decimal degrees
             Log.d("Image", "Calling GPSExtractor");
             GPSExtractor imageObj = new GPSExtractor(filePath);
-            String coords = imageObj.getCoords(false);
+            //decimalCoords for MediaWiki API, xyCoords for Quadtree
+            String decimalCoords = imageObj.getCoords(false);
+            String xyCoords = imageObj.getCoords(true);
 
-            if (coords != null) {
-                Log.d("Image", "Coords of image in Long/Lat: " + coords);
+            if (decimalCoords != null) {
+                Log.d("Coords", "Decimal coords of image: " + decimalCoords);
+                Log.d("Coords", "XY coords of image: " + xyCoords);
 
                 //TODO: Insert cache query here, only send API request if no cached categories
-                CacheController cacheObj = new CacheController(this, coords);
+                CacheController cacheObj = new CacheController(this, xyCoords);
                 cacheObj.getCoords();
 
 
                 //asynchronous calls to MediaWiki Commons API to match image coords with nearby Commons categories
                 MwVolleyApi apiCall = new MwVolleyApi(this);
-                apiCall.request(coords);
+                apiCall.request(decimalCoords);
             }
         }
 

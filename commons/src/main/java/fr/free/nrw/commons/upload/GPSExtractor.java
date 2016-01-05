@@ -42,15 +42,15 @@ public class GPSExtractor {
             longitude = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE);
             longitude_ref = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE_REF);
 
-            Log.d("Image", "Latitude: " + latitude + " " + latitude_ref);
-            Log.d("Image", "Longitude: " + longitude + " " + longitude_ref);
-
-            decimalCoords = getDecimalCoords(latitude, latitude_ref, longitude, longitude_ref);
-            xyCoords = getXyCoords(latitude, latitude_ref, longitude, longitude_ref);
-
-            if (xyCoordsReq = true) {
+            if (xyCoordsReq == true) {
+                Log.d("Image", "Latitude: " + latitude + " " + latitude_ref);
+                Log.d("Image", "Longitude: " + longitude + " " + longitude_ref);
+                xyCoords = getXyCoords(latitude, latitude_ref, longitude, longitude_ref);
                 return xyCoords;
             } else {
+                Log.d("Image", "Latitude: " + latitude + " " + latitude_ref);
+                Log.d("Image", "Longitude: " + longitude + " " + longitude_ref);
+                decimalCoords = getDecimalCoords(latitude, latitude_ref, longitude, longitude_ref);
                 return decimalCoords;
             }
         }
