@@ -192,13 +192,15 @@ public  class       ShareActivity
             if (decimalCoords != null) {
                 Log.d("Coords", "Decimal coords of image: " + decimalCoords);
 
-                //TODO: Insert cache query here, only send API request if no cached categories
                 CacheController cacheObj = new CacheController(this, decLongitude, decLatitude);
-                cacheObj.callQuadTree();
+                cacheObj.initQuadTree();
 
+                //TODO: If no categories found from cache in that area, call MW API
                 //asynchronous calls to MediaWiki Commons API to match image coords with nearby Commons categories
                 MwVolleyApi apiCall = new MwVolleyApi(this);
                 apiCall.request(decimalCoords);
+
+                //TODO: Set Category object for this point
             }
         }
 
