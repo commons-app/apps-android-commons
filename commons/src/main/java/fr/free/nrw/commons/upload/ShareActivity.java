@@ -183,7 +183,10 @@ public  class       ShareActivity
         FilePathConverter uriObj = new FilePathConverter(this, mediaUri);
         String filePath = uriObj.getFilePath();
 
-        cacheObj = new CacheController();
+        //Using global singleton to get CacheController to last longer than the activity lifecycle
+        CacheApplication cacheObj = ((CacheApplication)this.getApplication());
+
+
 
         if (filePath != null) {
             //extract the coordinates of image in decimal degrees
@@ -197,9 +200,9 @@ public  class       ShareActivity
 
             if (decimalCoords != null) {
                 Log.d("Coords", "Decimal coords of image: " + decimalCoords);
-                cacheObj.initQuadTree(decLongitude, decLatitude);
+                cacheObj.data.setQtPoint(decLongitude, decLatitude);
 
-                cacheObj.findCategory();
+                cacheObj.data.findCategory();
 
                 //TODO: If no categories found from cache in that area, call MW API
                 //asynchronous calls to MediaWiki Commons API to match image coords with nearby Commons categories

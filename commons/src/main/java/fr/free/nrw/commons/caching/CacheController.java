@@ -18,12 +18,11 @@ public class CacheController {
     private Point[] pointsFound;
 
     public CacheController() {
-
+        quadTree = new QuadTree(-180, -90, +180, +90);
     }
 
 
-    public void initQuadTree(double decLongitude, double decLatitude) {
-        quadTree = new QuadTree(-180, -90, +180, +90);
+    public void setQtPoint(double decLongitude, double decLatitude) {
         x = decLongitude;
         y = decLatitude;
         Log.d("Cache", "New QuadTree created");
