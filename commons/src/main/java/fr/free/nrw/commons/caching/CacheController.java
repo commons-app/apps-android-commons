@@ -61,7 +61,7 @@ public class CacheController {
                 index++;
             }
 
-            Log.d("Cache", "Categories found in cache: " + catList.toString());
+            Log.d("Cache", "Categories found in cache: " + displayCatList.toString());
         } else {
             Log.d("Cache", "No categories found in cache");
         }
