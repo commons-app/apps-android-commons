@@ -15,6 +15,7 @@ public class CacheController {
     private double y;
     private QuadTree quadTree;
     private Point[] pointsFound;
+    private double xMinus, xPlus, yMinus, yPlus;
 
     public CacheController() {
         quadTree = new QuadTree(-180, -90, +180, +90);
@@ -44,7 +45,8 @@ public class CacheController {
     public List findCategory() {
 
         //TODO: Convert decLatitude and decLongitude to a range with proper formula, for testing just use 10
-        pointsFound = quadTree.searchWithin(x-10, y-10, x+10, y+10);
+        convertCoordRange();
+        pointsFound = quadTree.searchWithin(xMinus, yMinus, xPlus, yPlus);
         List displayCatList = new ArrayList();
         Log.d("Cache", "Points found in quadtree: " + pointsFound);
 
@@ -67,5 +69,27 @@ public class CacheController {
         return displayCatList;
     }
 
-    public
+    public void convertCoordRange() {
+        //Position, decimal degrees
+        double lat = y;
+        double lon = x;
+
+        //Earth’s radius, sphere
+        double radius=6378137;
+
+        //offsets in meters
+        double offset = 100;
+
+
+        //Coordinate offsets in radians
+        double dLat = offset/radius;
+        double dLon = offset/(radius*Math.cos(Math.PI*lat/180));
+
+        //OffsetPosition, decimal degrees
+        yPlus = lat + dLat * 180/Math.PI;
+        yMinus = lat - dLat * 180/Math.PI;
+        xPlus = lon + dLon * 180/Math.PI;
+        xMinus = lon - dLon * 180/Math.PI;
+        Log.d("Cache", "Search within: xMinus=" + xMinus + ", yMinus=" + yMinus + ", xPlus=" + xPlus + ", yPlus=" + yPlus);
+    }
 }
