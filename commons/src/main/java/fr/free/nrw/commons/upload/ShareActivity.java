@@ -47,6 +47,8 @@ public  class       ShareActivity
 
     private UploadController uploadController;
 
+    private CacheController cacheObj;
+
     public ShareActivity() {
         super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
     }
@@ -54,6 +56,8 @@ public  class       ShareActivity
     public void uploadActionInitiated(String title, String description) {
         Toast startingToast = Toast.makeText(getApplicationContext(), R.string.uploading_started, Toast.LENGTH_LONG);
         startingToast.show();
+        //Has to be called after apiCall.request()
+        cacheObj.cacheCategory();
         uploadController.startUpload(title, mediaUri, description, mimeType, source, new UploadController.ContributionUploadProgress() {
             public void onUploadStarted(Contribution contribution) {
                 ShareActivity.this.contribution = contribution;
@@ -179,6 +183,8 @@ public  class       ShareActivity
         FilePathConverter uriObj = new FilePathConverter(this, mediaUri);
         String filePath = uriObj.getFilePath();
 
+        cacheObj = new CacheController();
+
         if (filePath != null) {
             //extract the coordinates of image in decimal degrees
             Log.d("Image", "Calling GPSExtractor");
@@ -191,10 +197,8 @@ public  class       ShareActivity
 
             if (decimalCoords != null) {
                 Log.d("Coords", "Decimal coords of image: " + decimalCoords);
+                cacheObj.initQuadTree(decLongitude, decLatitude);
 
-                CacheController cacheObj = new CacheController(this, decLongitude, decLatitude);
-                cacheObj.initQuadTree();
-                cacheObj.cacheCategory();
                 cacheObj.findCategory();
 
                 //TODO: If no categories found from cache in that area, call MW API
@@ -202,7 +206,7 @@ public  class       ShareActivity
                 MwVolleyApi apiCall = new MwVolleyApi(this);
                 apiCall.request(decimalCoords);
 
-                //TODO: Set Category object for this point
+
             }
         }
 

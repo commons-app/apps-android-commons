@@ -24,6 +24,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import fr.free.nrw.commons.caching.CacheController;
+
 public class MwVolleyApi {
 
     private static RequestQueue REQUEST_QUEUE;
