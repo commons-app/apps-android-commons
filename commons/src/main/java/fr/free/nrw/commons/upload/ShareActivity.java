@@ -204,7 +204,10 @@ public  class       ShareActivity
 
                 cacheObj.cacheData.findCategory();
 
+                //TODO: If categories found from cache in that area, skip API call and display those categories instead
+
                 //TODO: If no categories found from cache in that area, call MW API
+
                 //asynchronous calls to MediaWiki Commons API to match image coords with nearby Commons categories
                 MwVolleyApi apiCall = new MwVolleyApi(this);
                 apiCall.request(decimalCoords);

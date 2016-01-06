@@ -57,14 +57,14 @@ public class CacheController {
             Log.d("Cache", "Entering for loop");
             int index = 0;
             for (Point point : pointsFound) {
-                Log.d("Cache", "Point: " + point.toString());
+                Log.d("Cache", "Nearby point: " + point.toString());
                 Object cat = point.getValue();
-                Log.d("Cache", "Cat: " + cat);
+                Log.d("Cache", "Nearby cat: " + cat);
                 catList.add(index, cat);
                 index++;
             }
 
-            Log.d("Cache", "Categories found: " + catList.toString());
+            Log.d("Cache", "Categories found in cache: " + catList.toString());
         } else {
             Log.d("Cache", "No categories found in cache");
         }
