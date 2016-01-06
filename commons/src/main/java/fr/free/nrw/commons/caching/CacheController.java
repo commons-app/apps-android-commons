@@ -41,11 +41,11 @@ public class CacheController {
         quadTree.set(x, y, pointCatList);
     }
 
-    public void findCategory() {
+    public List findCategory() {
 
         //TODO: Convert decLatitude and decLongitude to a range with proper formula, for testing just use 10
         pointsFound = quadTree.searchWithin(x-10, y-10, x+10, y+10);
-        ArrayList displayCatList = new ArrayList();
+        List displayCatList = new ArrayList();
         Log.d("Cache", "Points found in quadtree: " + pointsFound);
 
         //TODO: Potentially flatten catList and iterate thru it to convert into unique Set? But currently just displays one point...
@@ -60,11 +60,12 @@ public class CacheController {
                 displayCatList.add(index, cat);
                 index++;
             }
-
             Log.d("Cache", "Categories found in cache: " + displayCatList.toString());
         } else {
             Log.d("Cache", "No categories found in cache");
         }
-
+        return displayCatList;
     }
+
+    public
 }

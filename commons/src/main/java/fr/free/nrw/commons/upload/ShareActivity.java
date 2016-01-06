@@ -23,6 +23,7 @@ import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public  class       ShareActivity
@@ -202,7 +203,7 @@ public  class       ShareActivity
                 Log.d("Coords", "Decimal coords of image: " + decimalCoords);
                 cacheObj.cacheData.setQtPoint(decLongitude, decLatitude);
 
-                cacheObj.cacheData.findCategory();
+                List displayCatList = cacheObj.cacheData.findCategory();
 
                 //TODO: If categories found from cache in that area, skip API call and display those categories instead
 
