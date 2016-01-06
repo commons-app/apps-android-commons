@@ -6,9 +6,6 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by misao on 05-Jan-16.
- */
 public class CacheController {
 
     private Context context;
