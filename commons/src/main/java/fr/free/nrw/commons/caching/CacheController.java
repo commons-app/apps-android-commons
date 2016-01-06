@@ -47,19 +47,25 @@ public class CacheController {
     }
 
     public void findCategory() {
+
         //TODO: Convert decLatitude and decLongitude to a range with proper formula, for testing just use 10
         pointsFound = quadTree.searchWithin(x-10, y-10, x+10, y+10);
+        ArrayList catList = new ArrayList();
         Log.d("Cache", "Points found in quadtree: " + pointsFound);
 
-        if (pointsFound != null) {
-            double x;
-            Object cat = null;
-            //TODO: This does not truly iterate, just for testing. In future probably need to store results in Array
+        if (pointsFound.length != 0) {
+
+            Log.d("Cache", "Entering for loop");
+            int index = 0;
             for (Point point : pointsFound) {
-                x = point.getX();
-                cat = point.getValue();
+                Log.d("Cache", "Point: " + point.toString());
+                Object cat = point.getValue();
+                Log.d("Cache", "Cat: " + cat);
+                catList.add(index, cat);
+                index++;
             }
-            Log.d("Cache", "Categories found: " + cat.toString());
+
+            Log.d("Cache", "Categories found: " + catList.toString());
         } else {
             Log.d("Cache", "No categories found in cache");
         }
