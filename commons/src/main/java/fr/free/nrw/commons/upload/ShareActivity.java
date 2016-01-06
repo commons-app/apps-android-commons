@@ -47,7 +47,7 @@ public  class       ShareActivity
 
     private UploadController uploadController;
 
-    private CacheController cacheObj;
+    private CommonsApplication cacheObj;
 
     public ShareActivity() {
         super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
@@ -57,7 +57,7 @@ public  class       ShareActivity
         Toast startingToast = Toast.makeText(getApplicationContext(), R.string.uploading_started, Toast.LENGTH_LONG);
         startingToast.show();
         //Has to be called after apiCall.request()
-        cacheObj.cacheCategory();
+        cacheObj.cacheData.cacheCategory();
         uploadController.startUpload(title, mediaUri, description, mimeType, source, new UploadController.ContributionUploadProgress() {
             public void onUploadStarted(Contribution contribution) {
                 ShareActivity.this.contribution = contribution;
@@ -184,7 +184,7 @@ public  class       ShareActivity
         String filePath = uriObj.getFilePath();
 
         //Using global singleton to get CacheController to last longer than the activity lifecycle
-        CacheApplication cacheObj = ((CacheApplication)this.getApplication());
+        cacheObj = ((CommonsApplication)this.getApplication());
 
 
 
@@ -200,9 +200,9 @@ public  class       ShareActivity
 
             if (decimalCoords != null) {
                 Log.d("Coords", "Decimal coords of image: " + decimalCoords);
-                cacheObj.data.setQtPoint(decLongitude, decLatitude);
+                cacheObj.cacheData.setQtPoint(decLongitude, decLatitude);
 
-                cacheObj.data.findCategory();
+                cacheObj.cacheData.findCategory();
 
                 //TODO: If no categories found from cache in that area, call MW API
                 //asynchronous calls to MediaWiki Commons API to match image coords with nearby Commons categories
