@@ -10,9 +10,7 @@ import fr.free.nrw.commons.upload.MwVolleyApi;
 
 public class CacheController {
 
-    private Context context;
-    private double x;
-    private double y;
+    private double x, y;
     private QuadTree quadTree;
     private Point[] pointsFound;
     private double xMinus, xPlus, yMinus, yPlus;
@@ -21,14 +19,12 @@ public class CacheController {
         quadTree = new QuadTree(-180, -90, +180, +90);
     }
 
-
     public void setQtPoint(double decLongitude, double decLatitude) {
         x = decLongitude;
         y = decLatitude;
         Log.d("Cache", "New QuadTree created");
         Log.d("Cache", "X (longitude) value: " + x + ", Y (latitude) value: " + y);
     }
-
 
     public void cacheCategory() {
 
@@ -44,7 +40,7 @@ public class CacheController {
 
     public List findCategory() {
 
-        //Convert decLatitude and decLongitude to a coordinate offset range 
+        //Convert decLatitude and decLongitude to a coordinate offset range
         convertCoordRange();
         pointsFound = quadTree.searchWithin(xMinus, yMinus, xPlus, yPlus);
         List displayCatList = new ArrayList();
@@ -76,10 +72,8 @@ public class CacheController {
 
         //Earth’s radius, sphere
         double radius=6378137;
-
         //offsets in meters
         double offset = 100;
-
 
         //Coordinate offsets in radians
         double dLat = offset/radius;
