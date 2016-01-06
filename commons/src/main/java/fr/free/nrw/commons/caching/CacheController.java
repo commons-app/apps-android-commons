@@ -44,7 +44,7 @@ public class CacheController {
 
     public List findCategory() {
 
-        //TODO: Convert decLatitude and decLongitude to a range with proper formula, for testing just use 10
+        //Convert decLatitude and decLongitude to a coordinate offset range 
         convertCoordRange();
         pointsFound = quadTree.searchWithin(xMinus, yMinus, xPlus, yPlus);
         List displayCatList = new ArrayList();
