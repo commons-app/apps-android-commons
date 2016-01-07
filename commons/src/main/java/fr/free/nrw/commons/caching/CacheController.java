@@ -38,14 +38,14 @@ public class CacheController {
         quadTree.set(x, y, pointCatList);
     }
 
-    public ArrayList findCategory() {
+    public List findCategory() {
         //Convert decLatitude and decLongitude to a coordinate offset range
         convertCoordRange();
         pointsFound = quadTree.searchWithin(xMinus, yMinus, xPlus, yPlus);
-        ArrayList displayCatList = new ArrayList();
+        List displayCatList = new ArrayList();
         Log.d(TAG, "Points found in quadtree: " + pointsFound);
 
-        ArrayList<String> flatCatList = new ArrayList<String>();
+        List<String> flatCatList = new ArrayList<String>();
 
         if (pointsFound.length != 0) {
             Log.d(TAG, "Entering for loop");
