@@ -83,7 +83,7 @@ public class MwVolleyApi {
                 .appendQueryParameter("codistancefrompoint", coords)
                 .appendQueryParameter("generator", "geosearch")
                 .appendQueryParameter("ggscoord", coords)
-                .appendQueryParameter("ggsradius", "1000")
+                .appendQueryParameter("ggsradius", "10000")
                 .appendQueryParameter("ggslimit", "10")
                 .appendQueryParameter("ggsnamespace", "6")
                 .appendQueryParameter("ggsprop", "type|name|dim|country|region|globe")
