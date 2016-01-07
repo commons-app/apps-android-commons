@@ -34,6 +34,7 @@ public class MwVolleyApi {
     private String coordsLog;
 
     protected static Set<String> categorySet;
+    private static List<String> categoryList;
 
     private static final String MWURL = "https://commons.wikimedia.org/";
 
@@ -44,8 +45,12 @@ public class MwVolleyApi {
 
     //To get the list of categories for display
     public static List<String> getGpsCat() {
-        List<String> list = new ArrayList<String>(categorySet);
-        return list;
+        categoryList = new ArrayList<String>(categorySet);
+        return categoryList;
+    }
+
+    public static void setGpsCat(List cachedList) {
+        categoryList = new ArrayList<String>(cachedList);
     }
 
 

@@ -57,8 +57,11 @@ public  class       ShareActivity
     public void uploadActionInitiated(String title, String description) {
         Toast startingToast = Toast.makeText(getApplicationContext(), R.string.uploading_started, Toast.LENGTH_LONG);
         startingToast.show();
+
         //Has to be called after apiCall.request()
         cacheObj.cacheData.cacheCategory();
+        Log.d("Cache", "Cache the categories found");
+
         uploadController.startUpload(title, mediaUri, description, mimeType, source, new UploadController.ContributionUploadProgress() {
             public void onUploadStarted(Contribution contribution) {
                 ShareActivity.this.contribution = contribution;
@@ -203,16 +206,19 @@ public  class       ShareActivity
                 Log.d("Coords", "Decimal coords of image: " + decimalCoords);
                 cacheObj.cacheData.setQtPoint(decLongitude, decLatitude);
 
+                MwVolleyApi apiCall = new MwVolleyApi(this);
+
                 List displayCatList = cacheObj.cacheData.findCategory();
 
-                //TODO: If categories found from cache in that area, skip API call and display those categories instead
-
-                //TODO: If no categories found from cache in that area, call MW API
-
-                //asynchronous calls to MediaWiki Commons API to match image coords with nearby Commons categories
-                MwVolleyApi apiCall = new MwVolleyApi(this);
-                apiCall.request(decimalCoords);
-
+                //if no categories found in cache, call MW API to match image coords with nearby Commons categories
+                if (displayCatList.size() == 0) {
+                    apiCall.request(decimalCoords);
+                    Log.d("Cache", "displayCatList size 0, calling MWAPI");
+                } else {
+                    //TODO: Set categoryList in MwVolleyApi
+                    MwVolleyApi.setGpsCat(displayCatList);
+                    Log.d("Cache", "Cache found, setting categoryList in MwVolleyApi to " + displayCatList.toString());
+                }
 
             }
         }
