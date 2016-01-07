@@ -46,8 +46,8 @@ public class CacheController {
         ArrayList displayCatList = new ArrayList();
         Log.d("Cache", "Points found in quadtree: " + pointsFound);
 
-        ArrayList<String> flatCatList = null;
-        //TODO: Make this return a proper flat array
+        ArrayList<String> flatCatList = new ArrayList<String>();
+
         if (pointsFound.length != 0) {
 
             Log.d("Cache", "Entering for loop");

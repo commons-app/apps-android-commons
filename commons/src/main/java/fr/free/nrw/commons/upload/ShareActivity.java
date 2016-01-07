@@ -211,6 +211,7 @@ public  class       ShareActivity
                 List displayCatList = cacheObj.cacheData.findCategory();
 
                 //if no categories found in cache, call MW API to match image coords with nearby Commons categories
+
                 if (displayCatList.size() == 0) {
                     apiCall.request(decimalCoords);
                     Log.d("Cache", "displayCatList size 0, calling MWAPI" + displayCatList.toString());
