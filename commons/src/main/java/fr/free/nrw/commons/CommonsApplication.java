@@ -151,7 +151,9 @@ public class CommonsApplication extends Application {
 
         }
 
+        //For caching area -> categories
         cacheData  = new CacheController();
+
         DiskBasedCache cache = new DiskBasedCache(getCacheDir(), 16 * 1024 * 1024);
         volleyQueue = new RequestQueue(cache, new BasicNetwork(new HurlStack()));
         volleyQueue.start();
