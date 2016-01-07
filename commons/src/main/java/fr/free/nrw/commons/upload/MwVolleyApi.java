@@ -37,6 +37,7 @@ public class MwVolleyApi {
     private static List<String> categoryList;
 
     private static final String MWURL = "https://commons.wikimedia.org/";
+    private static final String TAG = MwVolleyApi.class.getName();
 
     public MwVolleyApi(Context context) {
         this.context = context;
@@ -52,7 +53,7 @@ public class MwVolleyApi {
     public static void setGpsCat(List cachedList) {
         categoryList = new ArrayList<String>();
         categoryList.addAll(cachedList);
-        Log.d("Cache", "Setting GPS cats from cache: " + categoryList.toString());
+        Log.d(TAG, "Setting GPS cats from cache: " + categoryList.toString());
     }
 
 

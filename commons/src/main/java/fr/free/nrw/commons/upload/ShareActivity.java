@@ -49,6 +49,9 @@ public  class       ShareActivity
     private UploadController uploadController;
 
     private CommonsApplication cacheObj;
+    private boolean cacheFound;
+
+    private static final String TAG = ShareActivity.class.getName();
 
     public ShareActivity() {
         super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
@@ -58,9 +61,11 @@ public  class       ShareActivity
         Toast startingToast = Toast.makeText(getApplicationContext(), R.string.uploading_started, Toast.LENGTH_LONG);
         startingToast.show();
 
-        //Has to be called after apiCall.request()
-        cacheObj.cacheData.cacheCategory();
-        Log.d("Cache", "Cache the categories found");
+        if (cacheFound == false) {
+            //Has to be called after apiCall.request()
+            cacheObj.cacheData.cacheCategory();
+            Log.d("Cache", "Cache the categories found");
+        }
 
         uploadController.startUpload(title, mediaUri, description, mimeType, source, new UploadController.ContributionUploadProgress() {
             public void onUploadStarted(Contribution contribution) {
@@ -213,12 +218,14 @@ public  class       ShareActivity
                 //if no categories found in cache, call MW API to match image coords with nearby Commons categories
 
                 if (displayCatList.size() == 0) {
+                    cacheFound = false;
                     apiCall.request(decimalCoords);
-                    Log.d("Cache", "displayCatList size 0, calling MWAPI" + displayCatList.toString());
+                    Log.d(TAG, "displayCatList size 0, calling MWAPI" + displayCatList.toString());
+
                 } else {
                     //TODO: Set categoryList in MwVolleyApi. Not filling up right. Maybe do global singleton for MwVolleyApi? Can't do that, we want new cats for each upload, so new instance of mwapi
-
-                    Log.d("Cache", "Cache found, setting categoryList in MwVolleyApi to " + displayCatList.toString());
+                    cacheFound = true;
+                    Log.d(TAG, "Cache found, setting categoryList in MwVolleyApi to " + displayCatList.toString());
                     MwVolleyApi.setGpsCat(displayCatList);
                 }
 

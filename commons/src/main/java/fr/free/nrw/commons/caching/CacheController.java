@@ -15,6 +15,8 @@ public class CacheController {
     private Point[] pointsFound;
     private double xMinus, xPlus, yMinus, yPlus;
 
+    private static final String TAG = CacheController.class.getName();
+
     public CacheController() {
         quadTree = new QuadTree(-180, -90, +180, +90);
     }
@@ -22,8 +24,8 @@ public class CacheController {
     public void setQtPoint(double decLongitude, double decLatitude) {
         x = decLongitude;
         y = decLatitude;
-        Log.d("Cache", "New QuadTree created");
-        Log.d("Cache", "X (longitude) value: " + x + ", Y (latitude) value: " + y);
+        Log.d(TAG, "New QuadTree created");
+        Log.d(TAG, "X (longitude) value: " + x + ", Y (latitude) value: " + y);
     }
 
     public void cacheCategory() {
@@ -31,9 +33,9 @@ public class CacheController {
         List<String> pointCatList = new ArrayList<String>();
         if (MwVolleyApi.GpsCatExists.getGpsCatExists() == true) {
              pointCatList.addAll(MwVolleyApi.getGpsCat());
-            Log.d("Cache", "Categories being cached: " + pointCatList);
+            Log.d(TAG, "Categories being cached: " + pointCatList);
         } else {
-            Log.d("Cache", "No categories found, so no categories cached");
+            Log.d(TAG, "No categories found, so no categories cached");
         }
         quadTree.set(x, y, pointCatList);
     }
@@ -44,26 +46,26 @@ public class CacheController {
         convertCoordRange();
         pointsFound = quadTree.searchWithin(xMinus, yMinus, xPlus, yPlus);
         ArrayList displayCatList = new ArrayList();
-        Log.d("Cache", "Points found in quadtree: " + pointsFound);
+        Log.d(TAG, "Points found in quadtree: " + pointsFound);
 
         ArrayList<String> flatCatList = new ArrayList<String>();
 
         if (pointsFound.length != 0) {
 
-            Log.d("Cache", "Entering for loop");
+            Log.d(TAG, "Entering for loop");
             int index = 0;
             for (Point point : pointsFound) {
-                Log.d("Cache", "Nearby point: " + point.toString());
+                Log.d(TAG, "Nearby point: " + point.toString());
                 Object cat = point.getValue();
-                Log.d("Cache", "Nearby cat: " + cat);
+                Log.d(TAG, "Nearby cat: " + cat);
                 displayCatList.add(index, cat);
                 index++;
             }
             //FIXME: temporary, can't figure out why for loop always only accesses 1 point
              flatCatList = ((ArrayList<String>)displayCatList.get(0));
-            Log.d("Cache", "Categories found in cache: " + flatCatList.toString());
+            Log.d(TAG, "Categories found in cache: " + flatCatList.toString());
         } else {
-            Log.d("Cache", "No categories found in cache");
+            Log.d(TAG, "No categories found in cache");
         }
         return flatCatList;
     }
@@ -89,6 +91,6 @@ public class CacheController {
         yMinus = lat - dLat * 180/Math.PI;
         xPlus = lon + dLon * 180/Math.PI;
         xMinus = lon - dLon * 180/Math.PI;
-        Log.d("Cache", "Search within: xMinus=" + xMinus + ", yMinus=" + yMinus + ", xPlus=" + xPlus + ", yPlus=" + yPlus);
+        Log.d(TAG, "Search within: xMinus=" + xMinus + ", yMinus=" + yMinus + ", xPlus=" + xPlus + ", yPlus=" + yPlus);
     }
 }
