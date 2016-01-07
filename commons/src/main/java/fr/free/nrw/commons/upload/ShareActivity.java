@@ -215,7 +215,7 @@ public  class       ShareActivity
                     apiCall.request(decimalCoords);
                     Log.d("Cache", "displayCatList size 0, calling MWAPI");
                 } else {
-                    //TODO: Set categoryList in MwVolleyApi
+                    //TODO: Set categoryList in MwVolleyApi. Not filling up right. Maybe do global singleton for MwVolleyApi
                     MwVolleyApi.setGpsCat(displayCatList);
                     Log.d("Cache", "Cache found, setting categoryList in MwVolleyApi to " + displayCatList.toString());
                 }

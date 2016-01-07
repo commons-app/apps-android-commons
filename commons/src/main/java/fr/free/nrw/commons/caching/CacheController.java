@@ -46,7 +46,7 @@ public class CacheController {
         List displayCatList = new ArrayList();
         Log.d("Cache", "Points found in quadtree: " + pointsFound);
 
-        //TODO: Potentially flatten catList and iterate thru it to convert into unique Set? But currently just displays one point...
+        //TODO: Make this return a proper flat array
         if (pointsFound.length != 0) {
 
             Log.d("Cache", "Entering for loop");
