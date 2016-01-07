@@ -44,7 +44,6 @@ public class MwVolleyApi {
         categorySet = new HashSet<String>();
     }
 
-    //To get the list of categories for display
     public static List<String> getGpsCat() {
         return categoryList;
     }
@@ -55,9 +54,7 @@ public class MwVolleyApi {
         Log.d(TAG, "Setting GPS cats from cache: " + categoryList.toString());
     }
 
-
     public void request(String coords) {
-
         coordsLog = coords;
         String apiUrl = buildUrl(coords);
         Log.d("Image", "URL: " + apiUrl);

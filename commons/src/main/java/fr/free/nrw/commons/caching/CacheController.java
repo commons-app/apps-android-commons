@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.caching;
 
-import android.content.Context;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -29,7 +28,6 @@ public class CacheController {
     }
 
     public void cacheCategory() {
-
         List<String> pointCatList = new ArrayList<String>();
         if (MwVolleyApi.GpsCatExists.getGpsCatExists() == true) {
              pointCatList.addAll(MwVolleyApi.getGpsCat());
@@ -41,7 +39,6 @@ public class CacheController {
     }
 
     public ArrayList findCategory() {
-
         //Convert decLatitude and decLongitude to a coordinate offset range
         convertCoordRange();
         pointsFound = quadTree.searchWithin(xMinus, yMinus, xPlus, yPlus);
@@ -51,7 +48,6 @@ public class CacheController {
         ArrayList<String> flatCatList = new ArrayList<String>();
 
         if (pointsFound.length != 0) {
-
             Log.d(TAG, "Entering for loop");
             int index = 0;
             for (Point point : pointsFound) {
@@ -63,14 +59,13 @@ public class CacheController {
             }
             //FIXME: temporary, can't figure out why for loop always only accesses 1 point
              flatCatList = ((ArrayList<String>)displayCatList.get(0));
+
             Log.d(TAG, "Categories found in cache: " + flatCatList.toString());
         } else {
             Log.d(TAG, "No categories found in cache");
         }
         return flatCatList;
     }
-
-
 
     public void convertCoordRange() {
         //Position, decimal degrees

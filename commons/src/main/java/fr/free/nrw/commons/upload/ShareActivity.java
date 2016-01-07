@@ -182,7 +182,6 @@ public  class       ShareActivity
             } else {
                 source = Contribution.SOURCE_EXTERNAL;
             }
-
             mimeType = intent.getType();
         }
 
@@ -195,15 +194,11 @@ public  class       ShareActivity
         //Using global singleton to get CacheController to last longer than the activity lifecycle
         cacheObj = ((CommonsApplication)this.getApplication());
 
-
-
         if (filePath != null) {
             //extract the coordinates of image in decimal degrees
             Log.d(TAG, "Calling GPSExtractor");
             GPSExtractor imageObj = new GPSExtractor(filePath);
-            //decimalCoords for MediaWiki API, xyCoords for Quadtree
             String decimalCoords = imageObj.getCoords();
-
             double decLongitude = imageObj.getDecLongitude();
             double decLatitude = imageObj.getDecLatitude();
 
@@ -216,14 +211,12 @@ public  class       ShareActivity
                 List displayCatList = cacheObj.cacheData.findCategory();
 
                 //if no categories found in cache, call MW API to match image coords with nearby Commons categories
-
                 if (displayCatList.size() == 0) {
                     cacheFound = false;
                     apiCall.request(decimalCoords);
                     Log.d(TAG, "displayCatList size 0, calling MWAPI" + displayCatList.toString());
 
                 } else {
-                    //TODO: Set categoryList in MwVolleyApi. Not filling up right. Maybe do global singleton for MwVolleyApi? Can't do that, we want new cats for each upload, so new instance of mwapi
                     cacheFound = true;
                     Log.d(TAG, "Cache found, setting categoryList in MwVolleyApi to " + displayCatList.toString());
                     MwVolleyApi.setGpsCat(displayCatList);
