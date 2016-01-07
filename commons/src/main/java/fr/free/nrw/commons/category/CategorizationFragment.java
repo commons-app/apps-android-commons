@@ -51,6 +51,7 @@ public class CategorizationFragment extends SherlockFragment{
     private ContentProviderClient client;
 
     private final int SEARCH_CATS_LIMIT = 25;
+    private static final String TAG = CategorizationFragment.class.getName();
 
     public static class CategoryItem implements Parcelable {
         public String name;
@@ -152,9 +153,9 @@ public class CategorizationFragment extends SherlockFragment{
                     }
 
                     if (MwVolleyApi.GpsCatExists.getGpsCatExists() == true){
-                        Log.d("Cat", "GPS cats found in CategorizationFragment.java" + MwVolleyApi.getGpsCat().toString());
+                        Log.d(TAG, "GPS cats found in CategorizationFragment.java" + MwVolleyApi.getGpsCat().toString());
                         List<String> gpsItems = new ArrayList<String>(MwVolleyApi.getGpsCat());
-                        Log.d("Cat", "GPS items: " + gpsItems.toString());
+                        Log.d(TAG, "GPS items: " + gpsItems.toString());
 
                         mergedItems.addAll(gpsItems);
                     }
@@ -165,7 +166,7 @@ public class CategorizationFragment extends SherlockFragment{
                     // faaaail
                     throw new RuntimeException(e);
                 }
-                Log.d("Cat", "Merged items: " + mergedItems.toString());
+                Log.d(TAG, "Merged items: " + mergedItems.toString());
                 return mergedItems;
             }
             

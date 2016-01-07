@@ -174,11 +174,11 @@ public class MwVolleyApi {
         private String printSet() {
             if (categorySet == null || categorySet.isEmpty()) {
                 GpsCatExists.setGpsCatExists(false);
-                Log.d("Cat", "gpsCatExists=" + GpsCatExists.getGpsCatExists());
+                Log.d(TAG, "gpsCatExists=" + GpsCatExists.getGpsCatExists());
                 return "No collection of categories";
             } else {
                 GpsCatExists.setGpsCatExists(true);
-                Log.d("Cat", "gpsCatExists=" + GpsCatExists.getGpsCatExists());
+                Log.d(TAG, "gpsCatExists=" + GpsCatExists.getGpsCatExists());
                 return "CATEGORIES FOUND" + categorySet.toString();
             }
         }

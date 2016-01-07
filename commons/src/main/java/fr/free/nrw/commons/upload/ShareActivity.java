@@ -64,7 +64,7 @@ public  class       ShareActivity
         if (cacheFound == false) {
             //Has to be called after apiCall.request()
             cacheObj.cacheData.cacheCategory();
-            Log.d("Cache", "Cache the categories found");
+            Log.d(TAG, "Cache the categories found");
         }
 
         uploadController.startUpload(title, mediaUri, description, mimeType, source, new UploadController.ContributionUploadProgress() {
@@ -187,7 +187,7 @@ public  class       ShareActivity
         }
 
         mediaUriString = mediaUri.toString();
-        Log.d("Image", "Uri: " + mediaUriString);
+        Log.d(TAG, "Uri: " + mediaUriString);
         //convert image Uri to file path
         FilePathConverter uriObj = new FilePathConverter(this, mediaUri);
         String filePath = uriObj.getFilePath();
@@ -199,7 +199,7 @@ public  class       ShareActivity
 
         if (filePath != null) {
             //extract the coordinates of image in decimal degrees
-            Log.d("Image", "Calling GPSExtractor");
+            Log.d(TAG, "Calling GPSExtractor");
             GPSExtractor imageObj = new GPSExtractor(filePath);
             //decimalCoords for MediaWiki API, xyCoords for Quadtree
             String decimalCoords = imageObj.getCoords();
@@ -208,7 +208,7 @@ public  class       ShareActivity
             double decLatitude = imageObj.getDecLatitude();
 
             if (decimalCoords != null) {
-                Log.d("Coords", "Decimal coords of image: " + decimalCoords);
+                Log.d(TAG, "Decimal coords of image: " + decimalCoords);
                 cacheObj.cacheData.setQtPoint(decLongitude, decLatitude);
 
                 MwVolleyApi apiCall = new MwVolleyApi(this);
