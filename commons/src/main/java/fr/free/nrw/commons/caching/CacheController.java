@@ -38,14 +38,15 @@ public class CacheController {
         quadTree.set(x, y, pointCatList);
     }
 
-    public List findCategory() {
+    public ArrayList findCategory() {
 
         //Convert decLatitude and decLongitude to a coordinate offset range
         convertCoordRange();
         pointsFound = quadTree.searchWithin(xMinus, yMinus, xPlus, yPlus);
-        List displayCatList = new ArrayList();
+        ArrayList displayCatList = new ArrayList();
         Log.d("Cache", "Points found in quadtree: " + pointsFound);
 
+        ArrayList<String> flatCatList = null;
         //TODO: Make this return a proper flat array
         if (pointsFound.length != 0) {
 
@@ -58,12 +59,16 @@ public class CacheController {
                 displayCatList.add(index, cat);
                 index++;
             }
-            Log.d("Cache", "Categories found in cache: " + displayCatList.toString());
+            //FIXME: temporary, can't figure out why for loop always only accesses 1 point
+             flatCatList = ((ArrayList<String>)displayCatList.get(0));
+            Log.d("Cache", "Categories found in cache: " + flatCatList.toString());
         } else {
             Log.d("Cache", "No categories found in cache");
         }
-        return displayCatList;
+        return flatCatList;
     }
+
+
 
     public void convertCoordRange() {
         //Position, decimal degrees

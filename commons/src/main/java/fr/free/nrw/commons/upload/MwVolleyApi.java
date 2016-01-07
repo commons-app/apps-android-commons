@@ -51,6 +51,7 @@ public class MwVolleyApi {
 
     public static void setGpsCat(List cachedList) {
         categoryList = new ArrayList<String>(cachedList);
+        Log.d("Cache", "Setting GPS cats from cache: " + categoryList.toString());
     }
 
 
