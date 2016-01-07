@@ -50,7 +50,8 @@ public class MwVolleyApi {
     }
 
     public static void setGpsCat(List cachedList) {
-        categoryList = new ArrayList<String>(cachedList);
+        categoryList = new ArrayList<String>();
+        categoryList.addAll(cachedList);
         Log.d("Cache", "Setting GPS cats from cache: " + categoryList.toString());
     }
 
@@ -85,7 +86,7 @@ public class MwVolleyApi {
                 .appendQueryParameter("codistancefrompoint", coords)
                 .appendQueryParameter("generator", "geosearch")
                 .appendQueryParameter("ggscoord", coords)
-                .appendQueryParameter("ggsradius", "100")
+                .appendQueryParameter("ggsradius", "1000")
                 .appendQueryParameter("ggslimit", "10")
                 .appendQueryParameter("ggsnamespace", "6")
                 .appendQueryParameter("ggsprop", "type|name|dim|country|region|globe")

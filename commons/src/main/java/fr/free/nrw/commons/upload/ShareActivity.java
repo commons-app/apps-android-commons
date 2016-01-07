@@ -217,8 +217,9 @@ public  class       ShareActivity
                     Log.d("Cache", "displayCatList size 0, calling MWAPI" + displayCatList.toString());
                 } else {
                     //TODO: Set categoryList in MwVolleyApi. Not filling up right. Maybe do global singleton for MwVolleyApi? Can't do that, we want new cats for each upload, so new instance of mwapi
-                    MwVolleyApi.setGpsCat(displayCatList);
+
                     Log.d("Cache", "Cache found, setting categoryList in MwVolleyApi to " + displayCatList.toString());
+                    MwVolleyApi.setGpsCat(displayCatList);
                 }
 
             }
