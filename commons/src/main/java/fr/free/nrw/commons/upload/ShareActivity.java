@@ -1,9 +1,11 @@
 package fr.free.nrw.commons.upload;
 
 import android.content.*;
+import android.database.Cursor;
 import android.os.*;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import android.net.*;
+import android.provider.MediaStore;
 import android.support.v4.app.NavUtils;
 import com.actionbarsherlock.view.MenuItem;
 
@@ -165,6 +167,20 @@ public  class       ShareActivity
         finish();
     }
 
+    private String getRealPathFromURI(Uri contentURI) {
+        String result;
+        Cursor cursor = getContentResolver().query(contentURI, null, null, null, null);
+        if (cursor == null) { // Source is Dropbox or other similar local file path
+            result = contentURI.getPath();
+        } else {
+            cursor.moveToFirst();
+            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            result = cursor.getString(idx);
+            cursor.close();
+        }
+        return result;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -188,10 +204,13 @@ public  class       ShareActivity
 
         mediaUriString = mediaUri.toString();
         Log.d(TAG, "Uri: " + mediaUriString);
+
         //convert image Uri to file path
         Log.d(TAG, "Ext storage dir: " + Environment.getExternalStorageDirectory());
-        FilePathConverter uriObj = new FilePathConverter(this, mediaUri);
-        String filePath = uriObj.getFilePath();
+        //FilePathConverter uriObj = new FilePathConverter(this, mediaUri);
+        //String filePath = uriObj.getFilePath();
+        String filePath = getRealPathFromURI(mediaUri);
+
         Log.d(TAG, "Filepath: " + filePath);
 
         //Using global singleton to get CacheController to last longer than the activity lifecycle
