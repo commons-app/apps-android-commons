@@ -2,6 +2,9 @@ package fr.free.nrw.commons.caching;
 
 import android.util.Log;
 
+import com.github.varunpant.quadtree.Point;
+import com.github.varunpant.quadtree.QuadTree;
+
 import java.util.ArrayList;
 import java.util.List;
 
