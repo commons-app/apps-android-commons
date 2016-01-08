@@ -189,8 +189,10 @@ public  class       ShareActivity
         mediaUriString = mediaUri.toString();
         Log.d(TAG, "Uri: " + mediaUriString);
         //convert image Uri to file path
+        Log.d(TAG, "Ext storage dir: " + Environment.getExternalStorageDirectory());
         FilePathConverter uriObj = new FilePathConverter(this, mediaUri);
         String filePath = uriObj.getFilePath();
+        Log.d(TAG, "Filepath: " + filePath);
 
         //Using global singleton to get CacheController to last longer than the activity lifecycle
         cacheObj = ((CommonsApplication)this.getApplication());
