@@ -2,7 +2,7 @@
 
 ## v1.5
 - Caches area and associated categories
-- Increases search radius for nearby categories
+- Increased search radius for nearby categories
 
 ## v1.4
 - New feature: Suggests nearby Commons categories
