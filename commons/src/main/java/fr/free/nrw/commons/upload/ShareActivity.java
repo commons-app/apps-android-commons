@@ -170,7 +170,7 @@ public  class       ShareActivity
     private String getRealPathFromURI(Uri contentURI) {
         String result;
         Cursor cursor = getContentResolver().query(contentURI, null, null, null, null);
-        if (cursor == null) { // Source is Dropbox or other similar local file path
+        if (cursor == null) { // Source is local file path
             result = contentURI.getPath();
         } else {
             cursor.moveToFirst();
@@ -204,13 +204,10 @@ public  class       ShareActivity
 
         mediaUriString = mediaUri.toString();
         Log.d(TAG, "Uri: " + mediaUriString);
+        Log.d(TAG, "Ext storage dir: " + Environment.getExternalStorageDirectory());
 
         //convert image Uri to file path
-        Log.d(TAG, "Ext storage dir: " + Environment.getExternalStorageDirectory());
-        //FilePathConverter uriObj = new FilePathConverter(this, mediaUri);
-        //String filePath = uriObj.getFilePath();
         String filePath = getRealPathFromURI(mediaUri);
-
         Log.d(TAG, "Filepath: " + filePath);
 
         //Using global singleton to get CacheController to last longer than the activity lifecycle
