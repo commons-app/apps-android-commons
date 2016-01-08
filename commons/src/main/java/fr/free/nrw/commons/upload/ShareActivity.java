@@ -203,6 +203,8 @@ public  class       ShareActivity
         }
 
         mediaUriString = mediaUri.toString();
+        ImageLoader.getInstance().displayImage(mediaUriString, backgroundImageView);
+
         Log.d(TAG, "Uri: " + mediaUriString);
         Log.d(TAG, "Ext storage dir: " + Environment.getExternalStorageDirectory());
 
@@ -244,7 +246,7 @@ public  class       ShareActivity
             }
         }
 
-        ImageLoader.getInstance().displayImage(mediaUriString, backgroundImageView);
+
 
         if(savedInstanceState != null)  {
             contribution = savedInstanceState.getParcelable("contribution");
