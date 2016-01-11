@@ -65,6 +65,7 @@ public class CacheController {
         return displayCatList;
     }
 
+    //Based on algorithm at http://gis.stackexchange.com/questions/2951/algorithm-for-offsetting-a-latitude-longitude-by-some-amount-of-meters
     public void convertCoordRange() {
         //Position, decimal degrees
         double lat = y;
