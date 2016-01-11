@@ -191,7 +191,7 @@ public  class       ShareActivity
         //convert image Uri to file path
         FilePathConverter uriObj = new FilePathConverter(this, mediaUri);
         String filePath = uriObj.getFilePath();
-        
+
 
         if (filePath != null) {
             //extract the coordinates of image in decimal degrees
@@ -206,11 +206,11 @@ public  class       ShareActivity
                 app.cacheData.setQtPoint(decLongitude, decLatitude);
 
                 MwVolleyApi apiCall = new MwVolleyApi(this);
-
                 List displayCatList = app.cacheData.findCategory();
-
+                boolean catListEmpty = displayCatList.isEmpty();
+                
                 //if no categories found in cache, call MW API to match image coords with nearby Commons categories
-                if (displayCatList.size() == 0) {
+                if (catListEmpty) {
                     cacheFound = false;
                     apiCall.request(decimalCoords);
                     Log.d(TAG, "displayCatList size 0, calling MWAPI" + displayCatList.toString());
