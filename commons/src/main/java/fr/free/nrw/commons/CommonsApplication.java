@@ -147,8 +147,6 @@ public class CommonsApplication extends Application {
                     return bitmapSize / 1024;
                 }
             };
-
-
         }
 
         //For caching area -> categories

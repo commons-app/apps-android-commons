@@ -18,6 +18,7 @@ public class CacheController {
     private double xMinus, xPlus, yMinus, yPlus;
 
     private static final String TAG = CacheController.class.getName();
+    private static final int EARTH_RADIUS = 6378137;
 
     public CacheController() {
         quadTree = new QuadTree(-180, -90, +180, +90);
@@ -45,44 +46,37 @@ public class CacheController {
         //Convert decLatitude and decLongitude to a coordinate offset range
         convertCoordRange();
         pointsFound = quadTree.searchWithin(xMinus, yMinus, xPlus, yPlus);
-        List displayCatList = new ArrayList();
+        List<String> displayCatList = new ArrayList<String>();
         Log.d(TAG, "Points found in quadtree: " + pointsFound);
-
-        List<String> flatCatList = new ArrayList<String>();
 
         if (pointsFound.length != 0) {
             Log.d(TAG, "Entering for loop");
-            int index = 0;
+
             for (Point point : pointsFound) {
                 Log.d(TAG, "Nearby point: " + point.toString());
-                Object cat = point.getValue();
-                Log.d(TAG, "Nearby cat: " + cat);
-                displayCatList.add(index, cat);
-                index++;
+                displayCatList = (List<String>)point.getValue();
+                Log.d(TAG, "Nearby cat: " + point.getValue());
             }
-            //FIXME: temporary, can't figure out why for loop always only accesses 1 point
-             flatCatList = ((ArrayList<String>)displayCatList.get(0));
 
-            Log.d(TAG, "Categories found in cache: " + flatCatList.toString());
+            Log.d(TAG, "Categories found in cache: " + displayCatList.toString());
         } else {
             Log.d(TAG, "No categories found in cache");
         }
-        return flatCatList;
+        return displayCatList;
     }
 
+    //Based on algorithm at http://gis.stackexchange.com/questions/2951/algorithm-for-offsetting-a-latitude-longitude-by-some-amount-of-meters
     public void convertCoordRange() {
         //Position, decimal degrees
         double lat = y;
         double lon = x;
 
-        //Earth’s radius, sphere
-        double radius=6378137;
         //offsets in meters
         double offset = 100;
 
         //Coordinate offsets in radians
-        double dLat = offset/radius;
-        double dLon = offset/(radius*Math.cos(Math.PI*lat/180));
+        double dLat = offset/EARTH_RADIUS;
+        double dLon = offset/(EARTH_RADIUS*Math.cos(Math.PI*lat/180));
 
         //OffsetPosition, decimal degrees
         yPlus = lat + dLat * 180/Math.PI;

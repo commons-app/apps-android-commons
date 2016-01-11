@@ -66,7 +66,7 @@ public  class       ShareActivity
 
         if (cacheFound == false) {
             //Has to be called after apiCall.request()
-            cacheObj.cacheData.cacheCategory();
+            app.cacheData.cacheCategory();
             Log.d(TAG, "Cache the categories found");
         }
 
@@ -221,27 +221,28 @@ public  class       ShareActivity
         String filePath = getRealPathFromURI(mediaUri);
         Log.d(TAG, "Filepath: " + filePath);
 
-        //Using global singleton to get CacheController to last longer than the activity lifecycle
-        cacheObj = ((CommonsApplication)this.getApplication());
 
         if (filePath != null) {
             //extract the coordinates of image in decimal degrees
             Log.d(TAG, "Calling GPSExtractor");
             GPSExtractor imageObj = new GPSExtractor(filePath);
             String decimalCoords = imageObj.getCoords();
-            double decLongitude = imageObj.getDecLongitude();
-            double decLatitude = imageObj.getDecLatitude();
+
 
             if (decimalCoords != null) {
+                double decLongitude = imageObj.getDecLongitude();
+                double decLatitude = imageObj.getDecLatitude();
+
                 Log.d(TAG, "Decimal coords of image: " + decimalCoords);
-                cacheObj.cacheData.setQtPoint(decLongitude, decLatitude);
+                app.cacheData.setQtPoint(decLongitude, decLatitude);
 
                 MwVolleyApi apiCall = new MwVolleyApi(this);
 
-                List displayCatList = cacheObj.cacheData.findCategory();
+                List displayCatList = app.cacheData.findCategory();
+                boolean catListEmpty = displayCatList.isEmpty();
 
                 //if no categories found in cache, call MW API to match image coords with nearby Commons categories
-                if (displayCatList.size() == 0) {
+                if (catListEmpty) {
                     cacheFound = false;
                     apiCall.request(decimalCoords);
                     Log.d(TAG, "displayCatList size 0, calling MWAPI" + displayCatList.toString());
