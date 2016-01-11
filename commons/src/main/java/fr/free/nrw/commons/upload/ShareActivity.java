@@ -191,9 +191,7 @@ public  class       ShareActivity
         //convert image Uri to file path
         FilePathConverter uriObj = new FilePathConverter(this, mediaUri);
         String filePath = uriObj.getFilePath();
-
-        //Using global singleton to get CacheController to last longer than the activity lifecycle
-        cacheObj = ((CommonsApplication)this.getApplication());
+        
 
         if (filePath != null) {
             //extract the coordinates of image in decimal degrees
