@@ -46,29 +46,23 @@ public class CacheController {
         //Convert decLatitude and decLongitude to a coordinate offset range
         convertCoordRange();
         pointsFound = quadTree.searchWithin(xMinus, yMinus, xPlus, yPlus);
-        List displayCatList = new ArrayList();
+        List<String> displayCatList = new ArrayList<String>();
         Log.d(TAG, "Points found in quadtree: " + pointsFound);
-
-        List<String> flatCatList = new ArrayList<String>();
 
         if (pointsFound.length != 0) {
             Log.d(TAG, "Entering for loop");
-            int index = 0;
+
             for (Point point : pointsFound) {
                 Log.d(TAG, "Nearby point: " + point.toString());
-                Object cat = point.getValue();
-                Log.d(TAG, "Nearby cat: " + cat);
-                displayCatList.add(index, cat);
-                index++;
+                displayCatList = (List<String>)point.getValue();
+                Log.d(TAG, "Nearby cat: " + point.getValue());
             }
-            //FIXME: temporary, can't figure out why for loop always only accesses 1 point
-             flatCatList = ((ArrayList<String>)displayCatList.get(0));
 
-            Log.d(TAG, "Categories found in cache: " + flatCatList.toString());
+            Log.d(TAG, "Categories found in cache: " + displayCatList.toString());
         } else {
             Log.d(TAG, "No categories found in cache");
         }
-        return flatCatList;
+        return displayCatList;
     }
 
     public void convertCoordRange() {
