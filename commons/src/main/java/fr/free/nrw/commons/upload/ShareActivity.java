@@ -198,17 +198,20 @@ public  class       ShareActivity
             Log.d(TAG, "Calling GPSExtractor");
             GPSExtractor imageObj = new GPSExtractor(filePath);
             String decimalCoords = imageObj.getCoords();
-            double decLongitude = imageObj.getDecLongitude();
-            double decLatitude = imageObj.getDecLatitude();
+
 
             if (decimalCoords != null) {
+                double decLongitude = imageObj.getDecLongitude();
+                double decLatitude = imageObj.getDecLatitude();
+
                 Log.d(TAG, "Decimal coords of image: " + decimalCoords);
                 app.cacheData.setQtPoint(decLongitude, decLatitude);
 
                 MwVolleyApi apiCall = new MwVolleyApi(this);
+
                 List displayCatList = app.cacheData.findCategory();
                 boolean catListEmpty = displayCatList.isEmpty();
-                
+
                 //if no categories found in cache, call MW API to match image coords with nearby Commons categories
                 if (catListEmpty) {
                     cacheFound = false;
