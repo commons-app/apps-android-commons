@@ -18,6 +18,7 @@ public class CacheController {
     private double xMinus, xPlus, yMinus, yPlus;
 
     private static final String TAG = CacheController.class.getName();
+    private static final int EARTH_RADIUS = 6378137;
 
     public CacheController() {
         quadTree = new QuadTree(-180, -90, +180, +90);
@@ -75,14 +76,12 @@ public class CacheController {
         double lat = y;
         double lon = x;
 
-        //Earth’s radius, sphere
-        double radius=6378137;
         //offsets in meters
         double offset = 100;
 
         //Coordinate offsets in radians
-        double dLat = offset/radius;
-        double dLon = offset/(radius*Math.cos(Math.PI*lat/180));
+        double dLat = offset/EARTH_RADIUS;
+        double dLon = offset/(EARTH_RADIUS*Math.cos(Math.PI*lat/180));
 
         //OffsetPosition, decimal degrees
         yPlus = lat + dLat * 180/Math.PI;

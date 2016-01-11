@@ -64,7 +64,7 @@ public  class       ShareActivity
 
         if (cacheFound == false) {
             //Has to be called after apiCall.request()
-            cacheObj.cacheData.cacheCategory();
+            app.cacheData.cacheCategory();
             Log.d(TAG, "Cache the categories found");
         }
 
@@ -205,11 +205,11 @@ public  class       ShareActivity
 
             if (decimalCoords != null) {
                 Log.d(TAG, "Decimal coords of image: " + decimalCoords);
-                cacheObj.cacheData.setQtPoint(decLongitude, decLatitude);
+                app.cacheData.setQtPoint(decLongitude, decLatitude);
 
                 MwVolleyApi apiCall = new MwVolleyApi(this);
 
-                List displayCatList = cacheObj.cacheData.findCategory();
+                List displayCatList = app.cacheData.findCategory();
 
                 //if no categories found in cache, call MW API to match image coords with nearby Commons categories
                 if (displayCatList.size() == 0) {
