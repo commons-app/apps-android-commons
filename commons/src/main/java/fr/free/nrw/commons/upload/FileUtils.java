@@ -9,16 +9,17 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.DocumentsContract;
 
-
-/**
- * Get a file path from a Uri. This will get the the path for Storage Access
- * Framework Documents, as well as the _data field for the MediaStore and
- * other file-based ContentProviders.
- *
- * @author paulburke
- */
-
 public class FileUtils {
+
+    /**
+     * Get a file path from a Uri. This will get the the path for Storage Access
+     * Framework Documents, as well as the _data field for the MediaStore and
+     * other file-based ContentProviders.
+     *
+     * @param context The context.
+     * @param uri The Uri to query.
+     * @author paulburke
+     */
     public static String getPath(final Context context, final Uri uri) {
 
         final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
@@ -110,7 +111,6 @@ public class FileUtils {
         }
         return null;
     }
-
 
     /**
      * @param uri The Uri to check.

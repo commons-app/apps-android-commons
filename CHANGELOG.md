@@ -1,5 +1,8 @@
 # Wikimedia Commons for Android
 
+## v1.6
+- Bugfix for invalid images
+
 ## v1.5
 - Caches area and associated categories
 - Increased search radius for nearby categories
