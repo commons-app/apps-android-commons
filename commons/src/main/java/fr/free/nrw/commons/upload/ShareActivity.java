@@ -166,25 +166,6 @@ public  class       ShareActivity
         finish();
     }
 
-
-    private String getRealPathFromURI(Uri contentUri) {
-        Cursor cursor = null;
-        try {
-            String[] proj = {MediaStore.Images.Media.DATA};
-            cursor = getContentResolver().query(contentUri, proj, null, null, null);
-            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            cursor.moveToFirst();
-            return cursor.getString(column_index);
-        } catch (Exception e) {
-            Log.w(TAG, e);
-            return "";
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
-        }
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -213,9 +194,8 @@ public  class       ShareActivity
         Log.d(TAG, "Ext storage dir: " + Environment.getExternalStorageDirectory());
 
         //convert image Uri to file path
-        String filePath = getRealPathFromURI(mediaUri);
+        String filePath = FileUtils.getPath(this, mediaUri);
         Log.d(TAG, "Filepath: " + filePath);
-
 
         if (filePath != null && !filePath.equals("")) {
             //extract the coordinates of image in decimal degrees
@@ -247,16 +227,12 @@ public  class       ShareActivity
                     Log.d(TAG, "Cache found, setting categoryList in MwVolleyApi to " + displayCatList.toString());
                     MwVolleyApi.setGpsCat(displayCatList);
                 }
-
             }
         }
-
-
 
         if(savedInstanceState != null)  {
             contribution = savedInstanceState.getParcelable("contribution");
         }
-
         requestAuthToken();
     }
 
