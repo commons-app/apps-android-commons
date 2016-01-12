@@ -166,6 +166,7 @@ public  class       ShareActivity
         finish();
     }
 
+
     private String getRealPathFromURI(Uri contentUri) {
         String[] proj = { MediaStore.Images.Media.DATA };
         Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
@@ -173,7 +174,7 @@ public  class       ShareActivity
         cursor.moveToFirst();
 
         String cursorString = cursor.getString(column_index);
-        cursor.close();
+        //cursor.close();
         return cursorString;
     }
 
