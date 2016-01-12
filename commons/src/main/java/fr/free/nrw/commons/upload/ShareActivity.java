@@ -167,21 +167,14 @@ public  class       ShareActivity
     }
 
     private String getRealPathFromURI(Uri contentUri) {
-        Cursor cursor = null;
-        try {
-            String[] proj = {MediaStore.Images.Media.DATA};
-            cursor = getContentResolver().query(contentUri, proj, null, null, null);
-            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            cursor.moveToFirst();
-            return cursor.getString(column_index);
-        } catch (Exception e) {
-            Log.w(TAG, e);
-            return "";
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
-        }
+        String[] proj = { MediaStore.Images.Media.DATA };
+        Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+
+        String cursorString = cursor.getString(column_index);
+        cursor.close();
+        return cursorString;
     }
 
     @Override
@@ -215,11 +208,13 @@ public  class       ShareActivity
         String filePath = getRealPathFromURI(mediaUri);
         Log.d(TAG, "Filepath: " + filePath);
 
-        if (filePath != null && !filePath.equals("")) {
+
+        if (filePath != null) {
             //extract the coordinates of image in decimal degrees
             Log.d(TAG, "Calling GPSExtractor");
             GPSExtractor imageObj = new GPSExtractor(filePath);
             String decimalCoords = imageObj.getCoords();
+
 
             if (decimalCoords != null) {
                 double decLongitude = imageObj.getDecLongitude();
@@ -244,12 +239,16 @@ public  class       ShareActivity
                     Log.d(TAG, "Cache found, setting categoryList in MwVolleyApi to " + displayCatList.toString());
                     MwVolleyApi.setGpsCat(displayCatList);
                 }
+
             }
         }
+
+
 
         if(savedInstanceState != null)  {
             contribution = savedInstanceState.getParcelable("contribution");
         }
+
         requestAuthToken();
     }
 
