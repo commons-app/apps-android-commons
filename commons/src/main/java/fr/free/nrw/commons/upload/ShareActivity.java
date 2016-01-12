@@ -168,14 +168,21 @@ public  class       ShareActivity
 
 
     private String getRealPathFromURI(Uri contentUri) {
-        String[] proj = { MediaStore.Images.Media.DATA };
-        Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();
-
-        String cursorString = cursor.getString(column_index);
-        //cursor.close();
-        return cursorString;
+        Cursor cursor = null;
+        try {
+            String[] proj = {MediaStore.Images.Media.DATA};
+            cursor = getContentResolver().query(contentUri, proj, null, null, null);
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        } catch (Exception e) {
+            Log.w(TAG, e);
+            return "";
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
     }
 
     @Override
@@ -210,7 +217,7 @@ public  class       ShareActivity
         Log.d(TAG, "Filepath: " + filePath);
 
 
-        if (filePath != null) {
+        if (filePath != null && !filePath.equals("")) {
             //extract the coordinates of image in decimal degrees
             Log.d(TAG, "Calling GPSExtractor");
             GPSExtractor imageObj = new GPSExtractor(filePath);
