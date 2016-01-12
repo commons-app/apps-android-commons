@@ -28,6 +28,8 @@ import org.apache.http.params.BasicHttpParams;
 import org.mediawiki.api.*;
 import org.apache.http.impl.client.*;
 import org.apache.http.params.CoreProtocolPNames;
+
+import fr.free.nrw.commons.caching.CacheController;
 import fr.free.nrw.commons.data.*;
 
 import com.android.volley.toolbox.*;
@@ -66,6 +68,8 @@ public class CommonsApplication extends Application {
     public static final String FEEDBACK_EMAIL_SUBJECT = "Commons Android App (%s) Feedback";
 
     public RequestQueue volleyQueue;
+
+    public CacheController cacheData;
 
     public static AbstractHttpClient createHttpClient() {
         BasicHttpParams params = new BasicHttpParams();
@@ -144,6 +148,9 @@ public class CommonsApplication extends Application {
                 }
             };
         }
+
+        //For caching area -> categories
+        cacheData  = new CacheController();
 
         DiskBasedCache cache = new DiskBasedCache(getCacheDir(), 16 * 1024 * 1024);
         volleyQueue = new RequestQueue(cache, new BasicNetwork(new HurlStack()));

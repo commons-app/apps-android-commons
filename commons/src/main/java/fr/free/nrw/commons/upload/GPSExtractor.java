@@ -9,6 +9,7 @@ import java.io.IOException;
 public class GPSExtractor {
 
     private String filePath;
+    private double decLatitude, decLongitude;
 
     public GPSExtractor(String filePath){
         this.filePath = filePath;
@@ -41,18 +42,27 @@ public class GPSExtractor {
             longitude = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE);
             longitude_ref = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE_REF);
 
+
             Log.d("Image", "Latitude: " + latitude + " " + latitude_ref);
             Log.d("Image", "Longitude: " + longitude + " " + longitude_ref);
-
             decimalCoords = getDecimalCoords(latitude, latitude_ref, longitude, longitude_ref);
             return decimalCoords;
+
         }
     }
 
-    //Converts format of coords into decimal coords as required by API for next step
+    public double getDecLatitude() {
+        return decLatitude;
+    }
+
+    public double getDecLongitude() {
+        return decLongitude;
+    }
+
+    //Converts format of coords into decimal coords as required by MediaWiki API
     private String getDecimalCoords(String latitude, String latitude_ref, String longitude, String longitude_ref) {
 
-        double decLatitude, decLongitude;
+
 
         if(latitude_ref.equals("N")){
             decLatitude = convertToDegree(latitude);
@@ -68,8 +78,11 @@ public class GPSExtractor {
             decLongitude = 0 - convertToDegree(longitude);
         }
 
-        return (String.valueOf(decLatitude) + "|" + String.valueOf(decLongitude));
+        String decimalCoords = String.valueOf(decLatitude) + "|" + String.valueOf(decLongitude);
+        Log.d("Coords", "Latitude and Longitude are " + decimalCoords);
+        return decimalCoords;
     }
+
 
     private double convertToDegree(String stringDMS){
         double result;

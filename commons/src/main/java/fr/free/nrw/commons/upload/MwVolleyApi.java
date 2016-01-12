@@ -24,6 +24,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import fr.free.nrw.commons.caching.CacheController;
+
 public class MwVolleyApi {
 
     private static RequestQueue REQUEST_QUEUE;
@@ -32,23 +34,27 @@ public class MwVolleyApi {
     private String coordsLog;
 
     protected static Set<String> categorySet;
+    private static List<String> categoryList;
 
     private static final String MWURL = "https://commons.wikimedia.org/";
+    private static final String TAG = MwVolleyApi.class.getName();
 
     public MwVolleyApi(Context context) {
         this.context = context;
         categorySet = new HashSet<String>();
     }
 
-    //To get the list of categories for display
     public static List<String> getGpsCat() {
-        List<String> list = new ArrayList<String>(categorySet);
-        return list;
+        return categoryList;
     }
 
+    public static void setGpsCat(List cachedList) {
+        categoryList = new ArrayList<String>();
+        categoryList.addAll(cachedList);
+        Log.d(TAG, "Setting GPS cats from cache: " + categoryList.toString());
+    }
 
     public void request(String coords) {
-
         coordsLog = coords;
         String apiUrl = buildUrl(coords);
         Log.d("Image", "URL: " + apiUrl);
@@ -77,7 +83,7 @@ public class MwVolleyApi {
                 .appendQueryParameter("codistancefrompoint", coords)
                 .appendQueryParameter("generator", "geosearch")
                 .appendQueryParameter("ggscoord", coords)
-                .appendQueryParameter("ggsradius", "100")
+                .appendQueryParameter("ggsradius", "10000")
                 .appendQueryParameter("ggslimit", "10")
                 .appendQueryParameter("ggsnamespace", "6")
                 .appendQueryParameter("ggsprop", "type|name|dim|country|region|globe")
@@ -164,13 +170,14 @@ public class MwVolleyApi {
         private String printSet() {
             if (categorySet == null || categorySet.isEmpty()) {
                 GpsCatExists.setGpsCatExists(false);
-                Log.d("Cat", "gpsCatExists=" + GpsCatExists.getGpsCatExists());
+                Log.d(TAG, "gpsCatExists=" + GpsCatExists.getGpsCatExists());
                 return "No collection of categories";
             } else {
                 GpsCatExists.setGpsCatExists(true);
-                Log.d("Cat", "gpsCatExists=" + GpsCatExists.getGpsCatExists());
+                Log.d(TAG, "gpsCatExists=" + GpsCatExists.getGpsCatExists());
                 return "CATEGORIES FOUND" + categorySet.toString();
             }
+
         }
 
         @Override
@@ -225,6 +232,7 @@ public class MwVolleyApi {
                 }
             }
 
+            categoryList = new ArrayList<String>(categorySet);
             builder.replace(builder.length() - 1, builder.length(), "");
             return builder.toString();
         }

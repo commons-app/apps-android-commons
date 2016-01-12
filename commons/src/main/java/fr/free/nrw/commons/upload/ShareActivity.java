@@ -11,6 +11,7 @@ import android.util.Log;
 import android.widget.*;
 
 import fr.free.nrw.commons.*;
+import fr.free.nrw.commons.caching.CacheController;
 import fr.free.nrw.commons.modifications.CategoryModifier;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
 import fr.free.nrw.commons.CommonsApplication;
@@ -22,6 +23,8 @@ import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 
 import java.util.ArrayList;
+import java.util.List;
+
 
 
 public  class       ShareActivity
@@ -46,6 +49,11 @@ public  class       ShareActivity
 
     private UploadController uploadController;
 
+    private CommonsApplication cacheObj;
+    private boolean cacheFound;
+
+    private static final String TAG = ShareActivity.class.getName();
+
     public ShareActivity() {
         super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
     }
@@ -53,6 +61,13 @@ public  class       ShareActivity
     public void uploadActionInitiated(String title, String description) {
         Toast startingToast = Toast.makeText(getApplicationContext(), R.string.uploading_started, Toast.LENGTH_LONG);
         startingToast.show();
+
+        if (cacheFound == false) {
+            //Has to be called after apiCall.request()
+            app.cacheData.cacheCategory();
+            Log.d(TAG, "Cache the categories found");
+        }
+
         uploadController.startUpload(title, mediaUri, description, mimeType, source, new UploadController.ContributionUploadProgress() {
             public void onUploadStarted(Contribution contribution) {
                 ShareActivity.this.contribution = contribution;
@@ -168,29 +183,47 @@ public  class       ShareActivity
             } else {
                 source = Contribution.SOURCE_EXTERNAL;
             }
-
             mimeType = intent.getType();
         }
 
         mediaUriString = mediaUri.toString();
-        Log.d("Image", "Uri: " + mediaUriString);
-
+        Log.d(TAG, "Uri: " + mediaUriString);
         //convert image Uri to file path
         FilePathConverter uriObj = new FilePathConverter(this, mediaUri);
         String filePath = uriObj.getFilePath();
 
+
         if (filePath != null) {
             //extract the coordinates of image in decimal degrees
-            Log.d("Image", "Calling GPSExtractor");
+            Log.d(TAG, "Calling GPSExtractor");
             GPSExtractor imageObj = new GPSExtractor(filePath);
-            String coords = imageObj.getCoords();
+            String decimalCoords = imageObj.getCoords();
 
-            if (coords != null) {
-                Log.d("Image", "Coords of image: " + coords);
+
+            if (decimalCoords != null) {
+                double decLongitude = imageObj.getDecLongitude();
+                double decLatitude = imageObj.getDecLatitude();
+
+                Log.d(TAG, "Decimal coords of image: " + decimalCoords);
+                app.cacheData.setQtPoint(decLongitude, decLatitude);
+
                 MwVolleyApi apiCall = new MwVolleyApi(this);
 
-                //asynchronous calls to MediaWiki Commons API to match image coords with nearby Commons categories
-                apiCall.request(coords);
+                List displayCatList = app.cacheData.findCategory();
+                boolean catListEmpty = displayCatList.isEmpty();
+
+                //if no categories found in cache, call MW API to match image coords with nearby Commons categories
+                if (catListEmpty) {
+                    cacheFound = false;
+                    apiCall.request(decimalCoords);
+                    Log.d(TAG, "displayCatList size 0, calling MWAPI" + displayCatList.toString());
+
+                } else {
+                    cacheFound = true;
+                    Log.d(TAG, "Cache found, setting categoryList in MwVolleyApi to " + displayCatList.toString());
+                    MwVolleyApi.setGpsCat(displayCatList);
+                }
+
             }
         }
 
