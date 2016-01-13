@@ -1,9 +1,11 @@
 package fr.free.nrw.commons.upload;
 
 import android.content.*;
+import android.database.Cursor;
 import android.os.*;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import android.net.*;
+import android.provider.MediaStore;
 import android.support.v4.app.NavUtils;
 import com.actionbarsherlock.view.MenuItem;
 
@@ -153,7 +155,6 @@ public  class       ShareActivity
                         .add(R.id.single_upload_fragment_container, shareView, "shareView")
                         .commit();
         }
-
         uploadController.prepareService();
     }
 
@@ -187,13 +188,16 @@ public  class       ShareActivity
         }
 
         mediaUriString = mediaUri.toString();
+        ImageLoader.getInstance().displayImage(mediaUriString, backgroundImageView);
+
         Log.d(TAG, "Uri: " + mediaUriString);
+        Log.d(TAG, "Ext storage dir: " + Environment.getExternalStorageDirectory());
+
         //convert image Uri to file path
-        FilePathConverter uriObj = new FilePathConverter(this, mediaUri);
-        String filePath = uriObj.getFilePath();
+        String filePath = FileUtils.getPath(this, mediaUri);
+        Log.d(TAG, "Filepath: " + filePath);
 
-
-        if (filePath != null) {
+        if (filePath != null && !filePath.equals("")) {
             //extract the coordinates of image in decimal degrees
             Log.d(TAG, "Calling GPSExtractor");
             GPSExtractor imageObj = new GPSExtractor(filePath);
@@ -223,16 +227,12 @@ public  class       ShareActivity
                     Log.d(TAG, "Cache found, setting categoryList in MwVolleyApi to " + displayCatList.toString());
                     MwVolleyApi.setGpsCat(displayCatList);
                 }
-
             }
         }
-
-        ImageLoader.getInstance().displayImage(mediaUriString, backgroundImageView);
 
         if(savedInstanceState != null)  {
             contribution = savedInstanceState.getParcelable("contribution");
         }
-
         requestAuthToken();
     }
 
