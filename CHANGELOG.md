@@ -1,5 +1,9 @@
 # Wikimedia Commons for Android
 
+## v1.7
+- Fixed bug with uploading images in Marshmallow
+- Fixed links in About page
+
 ## v1.6
 - Bugfix for invalid images
 
