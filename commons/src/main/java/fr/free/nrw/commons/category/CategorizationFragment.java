@@ -29,6 +29,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
+
 public class CategorizationFragment extends SherlockFragment{
     public static interface OnCategoriesSaveHandler {
         public void onCategoriesSave(ArrayList<String> categories);
@@ -42,6 +43,7 @@ public class CategorizationFragment extends SherlockFragment{
 
     CategoriesAdapter categoriesAdapter;
     CategoriesUpdater lastUpdater = null;
+    MethodAUpdater methodAUpdater = null;
     ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
 
     private OnCategoriesSaveHandler onCategoriesSaveHandler;
@@ -84,6 +86,127 @@ public class CategorizationFragment extends SherlockFragment{
         public void writeToParcel(Parcel parcel, int flags) {
             parcel.writeString(name);
             parcel.writeInt(selected ? 1 : 0);
+        }
+    }
+
+
+    private class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
+
+        private String filter;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            filter = categoriesFilter.getText().toString();
+            categoriesSearchInProgress.setVisibility(View.VISIBLE);
+            categoriesNotFoundView.setVisibility(View.GONE);
+
+            categoriesSkip.setVisibility(View.GONE);
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<String> categories) {
+            super.onPostExecute(categories);
+            ArrayList<CategoryItem> items = new ArrayList<CategoryItem>();
+            HashSet<String> existingKeys = new HashSet<String>();
+            for(CategoryItem item : categoriesAdapter.getItems()) {
+                if(item.selected) {
+                    items.add(item);
+                    existingKeys.add(item.name);
+                }
+            }
+            for(String category : categories) {
+                if(!existingKeys.contains(category)) {
+                    items.add(new CategoryItem(category, false));
+                }
+            }
+
+            categoriesAdapter.setItems(items);
+            categoriesAdapter.notifyDataSetInvalidated();
+            categoriesSearchInProgress.setVisibility(View.GONE);
+            if (categories.size() == 0) {
+                if(TextUtils.isEmpty(filter)) {
+                    // If we found no recent cats, show the skip message!
+                    categoriesSkip.setVisibility(View.VISIBLE);
+                } else {
+                    categoriesNotFoundView.setText(getString(R.string.categories_not_found, filter));
+                    categoriesNotFoundView.setVisibility(View.VISIBLE);
+                }
+            } else {
+                categoriesList.smoothScrollToPosition(existingKeys.size());
+            }
+        }
+
+        @Override
+        protected ArrayList<String> doInBackground(Void... voids) {
+            if(TextUtils.isEmpty(filter)) {
+                ArrayList<String> items = new ArrayList<String>();
+                ArrayList<String> mergedItems= new ArrayList<String>();
+
+                try {
+                    Cursor cursor = client.query(
+                            CategoryContentProvider.BASE_URI,
+                            Category.Table.ALL_FIELDS,
+                            null,
+                            new String[]{},
+                            Category.Table.COLUMN_LAST_USED + " DESC");
+                    // fixme add a limit on the original query instead of falling out of the loop?
+                    while (cursor.moveToNext() && cursor.getPosition() < SEARCH_CATS_LIMIT) {
+                        Category cat = Category.fromCursor(cursor);
+                        items.add(cat.getName());
+                    }
+
+                    if (MwVolleyApi.GpsCatExists.getGpsCatExists() == true){
+                        //Log.d(TAG, "GPS cats found in CategorizationFragment.java" + MwVolleyApi.getGpsCat().toString());
+                        List<String> gpsItems = new ArrayList<String>(MwVolleyApi.getGpsCat());
+                        //Log.d(TAG, "GPS items: " + gpsItems.toString());
+
+                        mergedItems.addAll(gpsItems);
+                    }
+
+                    mergedItems.addAll(items);
+                }
+                catch (RemoteException e) {
+                    // faaaail
+                    throw new RuntimeException(e);
+                }
+                //Log.d(TAG, "Merged items: " + mergedItems.toString());
+                return mergedItems;
+            }
+
+            if(categoriesCache.containsKey(filter)) {
+                return categoriesCache.get(filter);
+            }
+
+            MWApi api = CommonsApplication.createMWApi();
+            ApiResult result;
+            ArrayList<String> categories = new ArrayList<String>();
+
+            //URL https://commons.wikimedia.org/w/api.php?action=query&format=xml&list=search&srwhat=text&srenablerewrites=1&srnamespace=14&srlimit=10&srsearch=
+            try {
+                result = api.action("query")
+                        .param("format", "xml")
+                        .param("list", "search")
+                        .param("srwhat", "text")
+                        .param("srnamespace", "14")
+                        .param("srlimit", SEARCH_CATS_LIMIT)
+                        .param("srsearch", filter)
+                        .get();
+                Log.d(TAG, "Method A URL filter" + result.toString());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+
+            ArrayList<ApiResult> categoryNodes = result.getNodes("/api/query/search/p/@title");
+            for(ApiResult categoryNode: categoryNodes) {
+                String cat = categoryNode.getDocument().getTextContent();
+                String catString = cat.replace("Category:", "");
+                categories.add(catString);
+            }
+
+            categoriesCache.put(filter, categories);
+
+            return categories;
         }
     }
 
@@ -153,9 +276,9 @@ public class CategorizationFragment extends SherlockFragment{
                     }
 
                     if (MwVolleyApi.GpsCatExists.getGpsCatExists() == true){
-                        Log.d(TAG, "GPS cats found in CategorizationFragment.java" + MwVolleyApi.getGpsCat().toString());
+                        //Log.d(TAG, "GPS cats found in CategorizationFragment.java" + MwVolleyApi.getGpsCat().toString());
                         List<String> gpsItems = new ArrayList<String>(MwVolleyApi.getGpsCat());
-                        Log.d(TAG, "GPS items: " + gpsItems.toString());
+                        //Log.d(TAG, "GPS items: " + gpsItems.toString());
 
                         mergedItems.addAll(gpsItems);
                     }
@@ -166,7 +289,7 @@ public class CategorizationFragment extends SherlockFragment{
                     // faaaail
                     throw new RuntimeException(e);
                 }
-                Log.d(TAG, "Merged items: " + mergedItems.toString());
+                //Log.d(TAG, "Merged items: " + mergedItems.toString());
                 return mergedItems;
             }
             
@@ -174,8 +297,7 @@ public class CategorizationFragment extends SherlockFragment{
                 return categoriesCache.get(filter);
             }
 
-            //TODO: Try just replacing the call first to see if XPath is correct
-            /**
+
             MWApi api = CommonsApplication.createMWApi();
             ApiResult result;
             ArrayList<String> categories = new ArrayList<String>();
@@ -185,6 +307,7 @@ public class CategorizationFragment extends SherlockFragment{
                         .param("acprefix", filter)
                         .param("aclimit", SEARCH_CATS_LIMIT)
                         .get();
+                Log.d(TAG, "Prefix URL filter" + result.toString());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -193,34 +316,7 @@ public class CategorizationFragment extends SherlockFragment{
             for(ApiResult categoryNode: categoryNodes) {
                 categories.add(categoryNode.getDocument().getTextContent());
             }
-             */
 
-            MWApi api = CommonsApplication.createMWApi();
-            ApiResult result;
-            ArrayList<String> categories = new ArrayList<String>();
-
-            //URL https://commons.wikimedia.org/w/api.php?action=query&format=xml&list=search&srwhat=text&srenablerewrites=1&srnamespace=14&srlimit=10&srsearch=
-            try {
-                result = api.action("query")
-                        .param("format", "xml")
-                        .param("list", "search")
-                        .param("srwhat", "text")
-                        .param("srnamespace", "14")
-                        .param("srlimit", SEARCH_CATS_LIMIT)
-                        .param("srsearch", filter)
-                        .get();
-                Log.d(TAG, "URL filter" + result.toString());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-
-            ArrayList<ApiResult> categoryNodes = result.getNodes("/api/query/search/p/@title");
-            for(ApiResult categoryNode: categoryNodes) {
-                String cat = categoryNode.getDocument().getTextContent();
-                String catString = cat.replace("Category:", "");
-                categories.add(catString);
-            }
 
             categoriesCache.put(filter, categories);
 
@@ -398,8 +494,19 @@ public class CategorizationFragment extends SherlockFragment{
         if (lastUpdater != null) {
             lastUpdater.cancel(true);
         }
+
+        if (methodAUpdater != null) {
+            methodAUpdater.cancel(true);
+        }
+
+        methodAUpdater = new MethodAUpdater();
         lastUpdater = new CategoriesUpdater();
+
+        //TODO: Only the first one is ever called, why?
         Utils.executeAsyncTask(lastUpdater, executor);
+        Utils.executeAsyncTask(methodAUpdater, executor);
+
+
     }
 
     @Override
