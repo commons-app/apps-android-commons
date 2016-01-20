@@ -173,6 +173,9 @@ public class CategorizationFragment extends SherlockFragment{
             if(categoriesCache.containsKey(filter)) {
                 return categoriesCache.get(filter);
             }
+
+            //TODO: Try just replacing the call first to see if XPath is correct
+            /**
             MWApi api = CommonsApplication.createMWApi();
             ApiResult result;
             ArrayList<String> categories = new ArrayList<String>();
@@ -187,6 +190,32 @@ public class CategorizationFragment extends SherlockFragment{
             }
 
             ArrayList<ApiResult> categoryNodes = result.getNodes("/api/query/allcategories/c");
+            for(ApiResult categoryNode: categoryNodes) {
+                categories.add(categoryNode.getDocument().getTextContent());
+            }
+             */
+
+            MWApi api = CommonsApplication.createMWApi();
+            ApiResult result;
+            ArrayList<String> categories = new ArrayList<String>();
+
+            //URL https://commons.wikimedia.org/w/api.php?action=query&format=xml&list=search&srwhat=text&srenablerewrites=1&srnamespace=14&srlimit=10&srsearch=
+            try {
+                result = api.action("query")
+                        .param("format", "xml")
+                        .param("list", "search")
+                        .param("srwhat", "text")
+                        .param("srnamespace", "14")
+                        .param("srlimit", SEARCH_CATS_LIMIT)
+                        .param("srsearch", filter)
+                        .get();
+                Log.d(TAG, "URL filter" + result.toString());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+
+            ArrayList<ApiResult> categoryNodes = result.getNodes("/api/query/search/p/@title");
             for(ApiResult categoryNode: categoryNodes) {
                 categories.add(categoryNode.getDocument().getTextContent());
             }
