@@ -298,7 +298,7 @@ public class CategorizationFragment extends SherlockFragment{
                 return categoriesCache.get(filter);
             }
 
-            //otherwise if user has typed something in, search API for matching categories
+            //otherwise if user has typed something in that isn't in cache, search API for matching categories
             MWApi api = CommonsApplication.createMWApi();
             ApiResult result;
             ArrayList<String> categories = new ArrayList<String>();
