@@ -258,6 +258,7 @@ public class CategorizationFragment extends SherlockFragment{
 
         @Override
         protected ArrayList<String> doInBackground(Void... voids) {
+            //If user hasn't typed anything in yet, get GPS and recent items
             if(TextUtils.isEmpty(filter)) {
                 ArrayList<String> items = new ArrayList<String>();
                 ArrayList<String> mergedItems= new ArrayList<String>();
@@ -286,18 +287,18 @@ public class CategorizationFragment extends SherlockFragment{
                     mergedItems.addAll(items);
                 }
                 catch (RemoteException e) {
-                    // faaaail
                     throw new RuntimeException(e);
                 }
                 //Log.d(TAG, "Merged items: " + mergedItems.toString());
                 return mergedItems;
             }
-            
+
+            //if user types in something that is in cache, return cached category
             if(categoriesCache.containsKey(filter)) {
                 return categoriesCache.get(filter);
             }
 
-
+            //otherwise if user has typed something in, search API for matching categories
             MWApi api = CommonsApplication.createMWApi();
             ApiResult result;
             ArrayList<String> categories = new ArrayList<String>();
