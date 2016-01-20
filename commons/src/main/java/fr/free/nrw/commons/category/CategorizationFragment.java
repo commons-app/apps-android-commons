@@ -503,8 +503,8 @@ public class CategorizationFragment extends SherlockFragment{
         lastUpdater = new CategoriesUpdater();
 
         //TODO: Only the first one is ever called, why?
-        Utils.executeAsyncTask(lastUpdater, executor);
-        Utils.executeAsyncTask(methodAUpdater, executor);
+        Utils.executeAsyncTask(lastUpdater);
+        Utils.executeAsyncTask(methodAUpdater);
 
 
     }
