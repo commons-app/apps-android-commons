@@ -44,7 +44,7 @@ public class CategorizationFragment extends SherlockFragment{
     CategoriesAdapter categoriesAdapter;
     CategoriesUpdater lastUpdater = null;
     MethodAUpdater methodAUpdater = null;
-    ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
+    ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(2);
 
     private OnCategoriesSaveHandler onCategoriesSaveHandler;
 
@@ -503,8 +503,8 @@ public class CategorizationFragment extends SherlockFragment{
         lastUpdater = new CategoriesUpdater();
 
         //TODO: Only the first one is ever called, why?
-        Utils.executeAsyncTask(lastUpdater);
-        Utils.executeAsyncTask(methodAUpdater);
+        Utils.executeAsyncTask(lastUpdater, executor);
+        Utils.executeAsyncTask(methodAUpdater, executor);
 
 
     }
