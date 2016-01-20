@@ -217,7 +217,9 @@ public class CategorizationFragment extends SherlockFragment{
 
             ArrayList<ApiResult> categoryNodes = result.getNodes("/api/query/search/p/@title");
             for(ApiResult categoryNode: categoryNodes) {
-                categories.add(categoryNode.getDocument().getTextContent());
+                String cat = categoryNode.getDocument().getTextContent();
+                String catString = cat.replace("Category:", "");
+                categories.add(catString);
             }
 
             categoriesCache.put(filter, categories);
