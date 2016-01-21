@@ -50,6 +50,7 @@ public class CategorizationFragment extends SherlockFragment{
     private OnCategoriesSaveHandler onCategoriesSaveHandler;
 
     private HashMap<String, ArrayList<String>> categoriesCache;
+    LinkedHashSet<CategoryItem> itemSet = new LinkedHashSet<CategoryItem>();
 
     private ContentProviderClient client;
 
@@ -201,6 +202,8 @@ public class CategorizationFragment extends SherlockFragment{
         protected void onPostExecute(ArrayList<String> categories) {
             super.onPostExecute(categories);
             setCatsAfterAsync(categories, filter);
+
+
         }
 
         @Override
@@ -259,10 +262,11 @@ public class CategorizationFragment extends SherlockFragment{
         }
 
         //TODO: This will set items twice in Adapter. Need to be able to 'add' items to adapter instead? Need to convert LinkedHashSet to ArrayList first?
-        //TODO: Maybe DON'T call this Adapter method. Instead make an add(items) method that will build up the LinkedHashSet. Then call the next block after AsyncTask over?
-        categoriesAdapter.setItems(items);
-        categoriesAdapter.notifyDataSetInvalidated();
-        categoriesSearchInProgress.setVisibility(View.GONE);
+        //TODO: Maybe DON'T call this Adapter method. Instead make an add(items) method that will build up the LinkedHashSet. Then move this whole thing to bottom
+        itemSet.addAll(items);
+        Log.d(TAG, "Item Set" + itemSet.toString());
+
+
         if (categories.size() == 0) {
             if(TextUtils.isEmpty(filter)) {
                 // If we found no recent cats, show the skip message!
@@ -274,6 +278,8 @@ public class CategorizationFragment extends SherlockFragment{
         } else {
             categoriesList.smoothScrollToPosition(existingKeys.size());
         }
+
+
     }
 
     private class CategoriesAdapter extends BaseAdapter {
@@ -283,7 +289,6 @@ public class CategorizationFragment extends SherlockFragment{
 
         private CategoriesAdapter(Context context, ArrayList<CategoryItem> items) {
             this.context = context;
-
             this.items = items;
         }
 
@@ -452,11 +457,20 @@ public class CategorizationFragment extends SherlockFragment{
             methodAUpdater.cancel(true);
         }
 
+
         methodAUpdater = new MethodAUpdater();
         lastUpdater = new CategoriesUpdater();
 
         Utils.executeAsyncTask(lastUpdater, executor);
         Utils.executeAsyncTask(methodAUpdater, executor);
+
+        ArrayList<CategoryItem> itemList = new ArrayList<CategoryItem>(itemSet);
+
+        categoriesAdapter.setItems(itemList);
+        Log.d(TAG, "After AsyncTask over, set items in adapter to " + itemList.toString());
+        
+        categoriesAdapter.notifyDataSetInvalidated();
+        categoriesSearchInProgress.setVisibility(View.GONE);
 
 
     }
