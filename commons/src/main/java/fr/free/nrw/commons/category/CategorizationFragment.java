@@ -458,17 +458,18 @@ public class CategorizationFragment extends SherlockFragment{
         }
 
 
+        ArrayList<CategoryItem> itemList = new ArrayList<CategoryItem>(itemSet);
+
         methodAUpdater = new MethodAUpdater();
         lastUpdater = new CategoriesUpdater();
 
         Utils.executeAsyncTask(lastUpdater, executor);
         Utils.executeAsyncTask(methodAUpdater, executor);
 
-        ArrayList<CategoryItem> itemList = new ArrayList<CategoryItem>(itemSet);
 
         categoriesAdapter.setItems(itemList);
         Log.d(TAG, "After AsyncTask over, set items in adapter to " + itemList.toString());
-        
+
         categoriesAdapter.notifyDataSetInvalidated();
         categoriesSearchInProgress.setVisibility(View.GONE);
 
