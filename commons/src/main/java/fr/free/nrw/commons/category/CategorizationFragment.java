@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
@@ -121,38 +122,6 @@ public class CategorizationFragment extends SherlockFragment{
         }
         //Log.d(TAG, "Merged items: " + mergedItems.toString());
         return mergedItems;
-    }
-
-    private void setCatsAfterAsync(ArrayList<String> categories, String filter) {
-
-        ArrayList<CategoryItem> items = new ArrayList<CategoryItem>();
-        HashSet<String> existingKeys = new HashSet<String>();
-        for(CategoryItem item : categoriesAdapter.getItems()) {
-            if(item.selected) {
-                items.add(item);
-                existingKeys.add(item.name);
-            }
-        }
-        for(String category : categories) {
-            if(!existingKeys.contains(category)) {
-                items.add(new CategoryItem(category, false));
-            }
-        }
-
-        categoriesAdapter.setItems(items);
-        categoriesAdapter.notifyDataSetInvalidated();
-        categoriesSearchInProgress.setVisibility(View.GONE);
-        if (categories.size() == 0) {
-            if(TextUtils.isEmpty(filter)) {
-                // If we found no recent cats, show the skip message!
-                categoriesSkip.setVisibility(View.VISIBLE);
-            } else {
-                categoriesNotFoundView.setText(getString(R.string.categories_not_found, filter));
-                categoriesNotFoundView.setVisibility(View.VISIBLE);
-            }
-        } else {
-            categoriesList.smoothScrollToPosition(existingKeys.size());
-        }
     }
 
     private class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
@@ -271,6 +240,42 @@ public class CategorizationFragment extends SherlockFragment{
         }
     }
 
+
+
+    private void setCatsAfterAsync(ArrayList<String> categories, String filter) {
+
+        ArrayList<CategoryItem> items = new ArrayList<CategoryItem>();
+        HashSet<String> existingKeys = new HashSet<String>();
+        for(CategoryItem item : categoriesAdapter.getItems()) {
+            if(item.selected) {
+                items.add(item);
+                existingKeys.add(item.name);
+            }
+        }
+        for(String category : categories) {
+            if(!existingKeys.contains(category)) {
+                items.add(new CategoryItem(category, false));
+            }
+        }
+
+        //TODO: This will set items twice in Adapter. Need to be able to 'add' items to adapter instead? Need to convert LinkedHashSet to ArrayList first?
+        //TODO: Maybe DON'T call this Adapter method. Instead make an add(items) method that will build up the LinkedHashSet. Then call the next block after AsyncTask over?
+        categoriesAdapter.setItems(items);
+        categoriesAdapter.notifyDataSetInvalidated();
+        categoriesSearchInProgress.setVisibility(View.GONE);
+        if (categories.size() == 0) {
+            if(TextUtils.isEmpty(filter)) {
+                // If we found no recent cats, show the skip message!
+                categoriesSkip.setVisibility(View.VISIBLE);
+            } else {
+                categoriesNotFoundView.setText(getString(R.string.categories_not_found, filter));
+                categoriesNotFoundView.setVisibility(View.VISIBLE);
+            }
+        } else {
+            categoriesList.smoothScrollToPosition(existingKeys.size());
+        }
+    }
+
     private class CategoriesAdapter extends BaseAdapter {
 
         private Context context;
@@ -278,6 +283,7 @@ public class CategorizationFragment extends SherlockFragment{
 
         private CategoriesAdapter(Context context, ArrayList<CategoryItem> items) {
             this.context = context;
+
             this.items = items;
         }
 
@@ -448,7 +454,7 @@ public class CategorizationFragment extends SherlockFragment{
 
         methodAUpdater = new MethodAUpdater();
         lastUpdater = new CategoriesUpdater();
-        
+
         Utils.executeAsyncTask(lastUpdater, executor);
         Utils.executeAsyncTask(methodAUpdater, executor);
 
