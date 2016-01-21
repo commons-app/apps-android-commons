@@ -256,41 +256,45 @@ public class CategorizationFragment extends SherlockFragment{
             }
         }
 
+        private ArrayList<String> recentCatQuery() {
+            ArrayList<String> items = new ArrayList<String>();
+            ArrayList<String> mergedItems= new ArrayList<String>();
+
+            try {
+                Cursor cursor = client.query(
+                        CategoryContentProvider.BASE_URI,
+                        Category.Table.ALL_FIELDS,
+                        null,
+                        new String[]{},
+                        Category.Table.COLUMN_LAST_USED + " DESC");
+                // fixme add a limit on the original query instead of falling out of the loop?
+                while (cursor.moveToNext() && cursor.getPosition() < SEARCH_CATS_LIMIT) {
+                    Category cat = Category.fromCursor(cursor);
+                    items.add(cat.getName());
+                }
+
+                if (MwVolleyApi.GpsCatExists.getGpsCatExists() == true){
+                    //Log.d(TAG, "GPS cats found in CategorizationFragment.java" + MwVolleyApi.getGpsCat().toString());
+                    List<String> gpsItems = new ArrayList<String>(MwVolleyApi.getGpsCat());
+                    //Log.d(TAG, "GPS items: " + gpsItems.toString());
+
+                    mergedItems.addAll(gpsItems);
+                }
+
+                mergedItems.addAll(items);
+            }
+            catch (RemoteException e) {
+                throw new RuntimeException(e);
+            }
+            //Log.d(TAG, "Merged items: " + mergedItems.toString());
+            return mergedItems;
+        }
+
         @Override
         protected ArrayList<String> doInBackground(Void... voids) {
             //If user hasn't typed anything in yet, get GPS and recent items
             if(TextUtils.isEmpty(filter)) {
-                ArrayList<String> items = new ArrayList<String>();
-                ArrayList<String> mergedItems= new ArrayList<String>();
-
-                try {
-                    Cursor cursor = client.query(
-                            CategoryContentProvider.BASE_URI,
-                            Category.Table.ALL_FIELDS,
-                            null,
-                            new String[]{},
-                            Category.Table.COLUMN_LAST_USED + " DESC");
-                    // fixme add a limit on the original query instead of falling out of the loop?
-                    while (cursor.moveToNext() && cursor.getPosition() < SEARCH_CATS_LIMIT) {
-                        Category cat = Category.fromCursor(cursor);
-                        items.add(cat.getName());
-                    }
-
-                    if (MwVolleyApi.GpsCatExists.getGpsCatExists() == true){
-                        //Log.d(TAG, "GPS cats found in CategorizationFragment.java" + MwVolleyApi.getGpsCat().toString());
-                        List<String> gpsItems = new ArrayList<String>(MwVolleyApi.getGpsCat());
-                        //Log.d(TAG, "GPS items: " + gpsItems.toString());
-
-                        mergedItems.addAll(gpsItems);
-                    }
-
-                    mergedItems.addAll(items);
-                }
-                catch (RemoteException e) {
-                    throw new RuntimeException(e);
-                }
-                //Log.d(TAG, "Merged items: " + mergedItems.toString());
-                return mergedItems;
+                return recentCatQuery();
             }
 
             //if user types in something that is in cache, return cached category
