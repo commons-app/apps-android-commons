@@ -37,24 +37,24 @@ public class CategorizationFragment extends SherlockFragment{
     }
 
     ListView categoriesList;
-    EditText categoriesFilter;
+    protected EditText categoriesFilter;
     ProgressBar categoriesSearchInProgress;
     TextView categoriesNotFoundView;
     TextView categoriesSkip;
 
     CategoriesAdapter categoriesAdapter;
-    CategoriesUpdater lastUpdater = null;
+    PrefixUpdater lastUpdater = null;
     MethodAUpdater methodAUpdater = null;
     ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(2);
 
     private OnCategoriesSaveHandler onCategoriesSaveHandler;
 
-    private HashMap<String, ArrayList<String>> categoriesCache;
+    protected HashMap<String, ArrayList<String>> categoriesCache;
     LinkedHashSet<CategoryItem> itemSet = new LinkedHashSet<CategoryItem>();
 
     private ContentProviderClient client;
 
-    private final int SEARCH_CATS_LIMIT = 25;
+    protected final int SEARCH_CATS_LIMIT = 25;
     private static final String TAG = CategorizationFragment.class.getName();
 
     public static class CategoryItem implements Parcelable {
@@ -91,7 +91,7 @@ public class CategorizationFragment extends SherlockFragment{
         }
     }
 
-    private ArrayList<String> recentCatQuery() {
+    protected ArrayList<String> recentCatQuery() {
         ArrayList<String> items = new ArrayList<String>();
         ArrayList<String> mergedItems= new ArrayList<String>();
 
@@ -125,127 +125,8 @@ public class CategorizationFragment extends SherlockFragment{
         return mergedItems;
     }
 
-    private class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
 
-        private String filter;
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            filter = categoriesFilter.getText().toString();
-            categoriesSearchInProgress.setVisibility(View.VISIBLE);
-            categoriesNotFoundView.setVisibility(View.GONE);
-
-            categoriesSkip.setVisibility(View.GONE);
-        }
-
-        @Override
-        protected void onPostExecute(ArrayList<String> categories) {
-            super.onPostExecute(categories);
-            setCatsAfterAsync(categories, filter);
-        }
-
-        @Override
-        protected ArrayList<String> doInBackground(Void... voids) {
-            if(TextUtils.isEmpty(filter)) {
-                return recentCatQuery();
-            }
-
-            if(categoriesCache.containsKey(filter)) {
-                return categoriesCache.get(filter);
-            }
-
-            MWApi api = CommonsApplication.createMWApi();
-            ApiResult result;
-            ArrayList<String> categories = new ArrayList<String>();
-
-            //URL https://commons.wikimedia.org/w/api.php?action=query&format=xml&list=search&srwhat=text&srenablerewrites=1&srnamespace=14&srlimit=10&srsearch=
-            try {
-                result = api.action("query")
-                        .param("format", "xml")
-                        .param("list", "search")
-                        .param("srwhat", "text")
-                        .param("srnamespace", "14")
-                        .param("srlimit", SEARCH_CATS_LIMIT)
-                        .param("srsearch", filter)
-                        .get();
-                Log.d(TAG, "Method A URL filter" + result.toString());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            ArrayList<ApiResult> categoryNodes = result.getNodes("/api/query/search/p/@title");
-            for(ApiResult categoryNode: categoryNodes) {
-                String cat = categoryNode.getDocument().getTextContent();
-                String catString = cat.replace("Category:", "");
-                categories.add(catString);
-            }
-
-            categoriesCache.put(filter, categories);
-            return categories;
-        }
-    }
-
-    private class CategoriesUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
-
-        private String filter;
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            filter = categoriesFilter.getText().toString();
-            categoriesSearchInProgress.setVisibility(View.VISIBLE);
-            categoriesNotFoundView.setVisibility(View.GONE);
-
-            categoriesSkip.setVisibility(View.GONE);
-        }
-
-        @Override
-        protected void onPostExecute(ArrayList<String> categories) {
-            super.onPostExecute(categories);
-            setCatsAfterAsync(categories, filter);
-
-
-        }
-
-        @Override
-        protected ArrayList<String> doInBackground(Void... voids) {
-            //If user hasn't typed anything in yet, get GPS and recent items
-            if(TextUtils.isEmpty(filter)) {
-                return recentCatQuery();
-            }
-
-            //if user types in something that is in cache, return cached category
-            if(categoriesCache.containsKey(filter)) {
-                return categoriesCache.get(filter);
-            }
-
-            //otherwise if user has typed something in that isn't in cache, search API for matching categories
-            MWApi api = CommonsApplication.createMWApi();
-            ApiResult result;
-            ArrayList<String> categories = new ArrayList<String>();
-            try {
-                result = api.action("query")
-                        .param("list", "allcategories")
-                        .param("acprefix", filter)
-                        .param("aclimit", SEARCH_CATS_LIMIT)
-                        .get();
-                Log.d(TAG, "Prefix URL filter" + result.toString());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            ArrayList<ApiResult> categoryNodes = result.getNodes("/api/query/allcategories/c");
-            for(ApiResult categoryNode: categoryNodes) {
-                categories.add(categoryNode.getDocument().getTextContent());
-            }
-
-            categoriesCache.put(filter, categories);
-            return categories;
-        }
-    }
-
-
-
-    private void setCatsAfterAsync(ArrayList<String> categories, String filter) {
+    protected void setCatsAfterAsync(ArrayList<String> categories, String filter) {
 
         ArrayList<CategoryItem> items = new ArrayList<CategoryItem>();
         HashSet<String> existingKeys = new HashSet<String>();
@@ -461,7 +342,7 @@ public class CategorizationFragment extends SherlockFragment{
         ArrayList<CategoryItem> itemList = new ArrayList<CategoryItem>(itemSet);
 
         methodAUpdater = new MethodAUpdater();
-        lastUpdater = new CategoriesUpdater();
+        lastUpdater = new PrefixUpdater();
 
         Utils.executeAsyncTask(lastUpdater, executor);
         Utils.executeAsyncTask(methodAUpdater, executor);
