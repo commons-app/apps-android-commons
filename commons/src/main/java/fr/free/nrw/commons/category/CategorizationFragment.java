@@ -28,6 +28,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 
@@ -50,7 +51,7 @@ public class CategorizationFragment extends SherlockFragment{
     private OnCategoriesSaveHandler onCategoriesSaveHandler;
 
     protected HashMap<String, ArrayList<String>> categoriesCache;
-    LinkedHashSet<CategoryItem> itemSet = new LinkedHashSet<CategoryItem>();
+    private final Set<CategoryItem> results = new LinkedHashSet<CategoryItem>();
 
     private ContentProviderClient client;
 
@@ -144,9 +145,14 @@ public class CategorizationFragment extends SherlockFragment{
 
         //TODO: This will set items twice in Adapter. Need to be able to 'add' items to adapter instead? Need to convert LinkedHashSet to ArrayList first?
         //TODO: Maybe DON'T call this Adapter method. Instead make an add(items) method that will build up the LinkedHashSet. Then move this whole thing to bottom
+        categoriesAdapter.setItems(items);
+        categoriesAdapter.notifyDataSetInvalidated();
+        categoriesSearchInProgress.setVisibility(View.GONE);
+
+        /*
         itemSet.addAll(items);
         Log.d(TAG, "Item Set" + itemSet.toString());
-
+        */
 
         if (categories.size() == 0) {
             if(TextUtils.isEmpty(filter)) {
@@ -159,8 +165,6 @@ public class CategorizationFragment extends SherlockFragment{
         } else {
             categoriesList.smoothScrollToPosition(existingKeys.size());
         }
-
-
     }
 
     private class CategoriesAdapter extends BaseAdapter {
@@ -347,6 +351,7 @@ public class CategorizationFragment extends SherlockFragment{
         Utils.executeAsyncTask(lastUpdater, executor);
         Utils.executeAsyncTask(methodAUpdater, executor);
 
+        //TODO: This needs to be in OnPostExecute() of the subtasks
 
         categoriesAdapter.setItems(itemList);
         Log.d(TAG, "After AsyncTask over, set items in adapter to " + itemList.toString());
