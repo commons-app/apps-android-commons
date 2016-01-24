@@ -344,7 +344,7 @@ public class CategorizationFragment extends SherlockFragment{
                 }
                 catch (InterruptedException e) {
                     Log.w(TAG, e);
-                    Thread.currentThread().interrupt();
+                    //Thread.currentThread().interrupt();
                 }
                 return result;
             }
@@ -372,14 +372,17 @@ public class CategorizationFragment extends SherlockFragment{
                 latch.countDown();
             }
         });
+
+
     }
 
     private void startUpdatingCategoryList() {
 
         requestSearchResults();
+
         /*
         if (prefixUpdater != null) {
-            prefixUpdaterSub.cancel(true);
+            prefixUpdater.cancel(true);
         }
 
         if (methodAUpdaterSub != null) {
