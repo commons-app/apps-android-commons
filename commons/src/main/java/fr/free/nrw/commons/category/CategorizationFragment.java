@@ -22,6 +22,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.upload.MwVolleyApi;
 
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -29,6 +30,7 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 
@@ -333,6 +335,7 @@ public class CategorizationFragment extends SherlockFragment{
         return rootView;
     }
 
+
     private void startUpdatingCategoryList() {
         if (lastUpdater != null) {
             lastUpdater.cancel(true);
@@ -351,13 +354,6 @@ public class CategorizationFragment extends SherlockFragment{
         Utils.executeAsyncTask(lastUpdater, executor);
         Utils.executeAsyncTask(methodAUpdater, executor);
 
-        //TODO: This needs to be in OnPostExecute() of the subtasks
-
-        categoriesAdapter.setItems(itemList);
-        Log.d(TAG, "After AsyncTask over, set items in adapter to " + itemList.toString());
-
-        categoriesAdapter.notifyDataSetInvalidated();
-        categoriesSearchInProgress.setVisibility(View.GONE);
 
 
     }
