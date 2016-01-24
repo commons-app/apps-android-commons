@@ -38,14 +38,17 @@ public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
 
     @Override
     protected ArrayList<String> doInBackground(Void... voids) {
+        //If user hasn't typed anything in yet, get GPS and recent items
         if(TextUtils.isEmpty(filter)) {
             return catFragment.recentCatQuery();
         }
 
+        //if user types in something that is in cache, return cached category
         if(catFragment.categoriesCache.containsKey(filter)) {
             return catFragment.categoriesCache.get(filter);
         }
 
+        //otherwise if user has typed something in that isn't in cache, search API for matching categories
         MWApi api = CommonsApplication.createMWApi();
         ApiResult result;
         ArrayList<String> categories = new ArrayList<String>();
