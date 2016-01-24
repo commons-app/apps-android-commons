@@ -46,14 +46,15 @@ public class CategorizationFragment extends SherlockFragment{
     TextView categoriesSkip;
 
     CategoriesAdapter categoriesAdapter;
-    PrefixUpdater lastUpdater = null;
-    MethodAUpdater methodAUpdater = null;
     ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(2);
 
     private OnCategoriesSaveHandler onCategoriesSaveHandler;
 
     protected HashMap<String, ArrayList<String>> categoriesCache;
+
     private final Set<String> results = new LinkedHashSet<String>();
+    PrefixUpdaterSub prefixUpdaterSub = null;
+    MethodAUpdaterSub methodAUpdaterSub = null;
 
     private ContentProviderClient client;
 
@@ -110,6 +111,7 @@ public class CategorizationFragment extends SherlockFragment{
                 Category cat = Category.fromCursor(cursor);
                 items.add(cat.getName());
             }
+            cursor.close();
 
             if (MwVolleyApi.GpsCatExists.getGpsCatExists() == true){
                 //Log.d(TAG, "GPS cats found in CategorizationFragment.java" + MwVolleyApi.getGpsCat().toString());
@@ -145,16 +147,9 @@ public class CategorizationFragment extends SherlockFragment{
             }
         }
 
-        //TODO: This will set items twice in Adapter. Need to be able to 'add' items to adapter instead? Need to convert LinkedHashSet to ArrayList first?
-        //TODO: Maybe DON'T call this Adapter method. Instead make an add(items) method that will build up the LinkedHashSet. Then move this whole thing to bottom
         categoriesAdapter.setItems(items);
         categoriesAdapter.notifyDataSetInvalidated();
         categoriesSearchInProgress.setVisibility(View.GONE);
-
-        /*
-        itemSet.addAll(items);
-        Log.d(TAG, "Item Set" + itemSet.toString());
-        */
 
         if (categories.size() == 0) {
             if(TextUtils.isEmpty(filter)) {
@@ -335,74 +330,74 @@ public class CategorizationFragment extends SherlockFragment{
         return rootView;
     }
 
+    final CountDownLatch latch = new CountDownLatch(1);
 
+    class PrefixUpdaterSub extends PrefixUpdater {
+
+        public PrefixUpdaterSub() {
+            super(CategorizationFragment.this);
+        }
+
+        @Override
+        protected ArrayList<String> doInBackground(Void... voids) {
+            ArrayList<String> result = new ArrayList<String>();
+            try {
+                result = super.doInBackground();
+                latch.await();
+            }
+            catch (InterruptedException e) {
+                Log.w(TAG, e);
+                Thread.currentThread().interrupt();
+            }
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<String> result) {
+            super.onPostExecute(result);
+
+            results.addAll(result);
+            Log.d(TAG, "Prefix result: " + result);
+            categoriesAdapter.notifyDataSetChanged();
+        }
+    }
+
+
+    class MethodAUpdaterSub extends MethodAUpdater {
+
+        public MethodAUpdaterSub() {
+            super(CategorizationFragment.this);
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<String> result) {
+            results.clear();
+            super.onPostExecute(result);
+
+            results.addAll(result);
+            Log.d(TAG, "Method A result: " + result);
+            categoriesAdapter.notifyDataSetChanged();
+
+            latch.countDown();
+        }
+    }
 
     private void startUpdatingCategoryList() {
 
-
-        final CountDownLatch latch = new CountDownLatch(1);
-
-        class PrefixUpdaterSub extends PrefixUpdater {
-
-            public PrefixUpdaterSub() {
-                super(CategorizationFragment.this);
-            }
-
-            @Override
-            protected ArrayList<String> doInBackground(Void... voids) {
-                ArrayList<String> result = new ArrayList<String>();
-                try {
-                    result = super.doInBackground();
-                    latch.await();
-                }
-                catch (InterruptedException e) {
-                    Log.w(TAG, e);
-                }
-                return result;
-            }
-
-            @Override
-            protected void onPostExecute(ArrayList<String> result) {
-                super.onPostExecute(result);
-
-                results.addAll(result);
-                categoriesAdapter.notifyDataSetChanged();
-            }
+        if (prefixUpdaterSub != null) {
+            prefixUpdaterSub.cancel(true);
         }
 
-
-        class MethodAUpdaterSub extends MethodAUpdater {
-
-            public MethodAUpdaterSub() {
-                super(CategorizationFragment.this);
-            }
-
-            @Override
-            protected void onPostExecute(ArrayList<String> result) {
-                super.onPostExecute(result);
-
-                results.clear();
-                results.addAll(result);
-                categoriesAdapter.notifyDataSetChanged();
-
-                latch.countDown();
-            }
+        if (methodAUpdaterSub != null) {
+            methodAUpdaterSub.cancel(true);
         }
 
-        if (lastUpdater != null) {
-            lastUpdater.cancel(true);
-        }
-
-        if (methodAUpdater != null) {
-            methodAUpdater.cancel(true);
-        }
-
-
-        PrefixUpdaterSub prefixUpdaterSub = new PrefixUpdaterSub();
-        MethodAUpdaterSub methodAUpdaterSub = new MethodAUpdaterSub();
+        prefixUpdaterSub = new PrefixUpdaterSub();
+        methodAUpdaterSub = new MethodAUpdaterSub();
 
         Utils.executeAsyncTask(prefixUpdaterSub);
         Utils.executeAsyncTask(methodAUpdaterSub);
+        Log.d(TAG, "Final results: " + results);
 
     }
 
