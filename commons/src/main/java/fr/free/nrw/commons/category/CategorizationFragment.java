@@ -335,60 +335,59 @@ public class CategorizationFragment extends SherlockFragment{
         return rootView;
     }
 
-    final CountDownLatch latch = new CountDownLatch(1);
-
-    private class PrefixUpdaterSub extends PrefixUpdater {
-
-        public PrefixUpdaterSub() {
-            super(CategorizationFragment.this);
-        }
-
-        @Override
-        protected ArrayList<String> doInBackground(Void... voids) {
-            ArrayList<String> result = new ArrayList<String>();
-            try {
-                result = super.doInBackground();
-                latch.await();
-            }
-            catch (InterruptedException e) {
-                Log.w(TAG, e);
-            }
-            return result;
-        }
-
-        @Override
-        protected void onPostExecute(ArrayList<String> result) {
-            super.onPostExecute(result);
-
-            results.addAll(result);
-            categoriesAdapter.notifyDataSetChanged();
-        }
-    }
-
-
-    private class MethodAUpdaterSub extends MethodAUpdater {
-
-        public MethodAUpdaterSub() {
-            super(CategorizationFragment.this);
-        }
-
-        @Override
-        protected void onPostExecute(ArrayList<String> result) {
-            super.onPostExecute(result);
-
-            results.clear();
-            results.addAll(result);
-            categoriesAdapter.notifyDataSetChanged();
-
-            latch.countDown();
-        }
-    }
 
 
     private void startUpdatingCategoryList() {
 
 
+        final CountDownLatch latch = new CountDownLatch(1);
 
+        class PrefixUpdaterSub extends PrefixUpdater {
+
+            public PrefixUpdaterSub() {
+                super(CategorizationFragment.this);
+            }
+
+            @Override
+            protected ArrayList<String> doInBackground(Void... voids) {
+                ArrayList<String> result = new ArrayList<String>();
+                try {
+                    result = super.doInBackground();
+                    latch.await();
+                }
+                catch (InterruptedException e) {
+                    Log.w(TAG, e);
+                }
+                return result;
+            }
+
+            @Override
+            protected void onPostExecute(ArrayList<String> result) {
+                super.onPostExecute(result);
+
+                results.addAll(result);
+                categoriesAdapter.notifyDataSetChanged();
+            }
+        }
+
+
+        class MethodAUpdaterSub extends MethodAUpdater {
+
+            public MethodAUpdaterSub() {
+                super(CategorizationFragment.this);
+            }
+
+            @Override
+            protected void onPostExecute(ArrayList<String> result) {
+                super.onPostExecute(result);
+
+                results.clear();
+                results.addAll(result);
+                categoriesAdapter.notifyDataSetChanged();
+
+                latch.countDown();
+            }
+        }
 
         if (lastUpdater != null) {
             lastUpdater.cancel(true);
@@ -404,15 +403,6 @@ public class CategorizationFragment extends SherlockFragment{
 
         Utils.executeAsyncTask(prefixUpdaterSub);
         Utils.executeAsyncTask(methodAUpdaterSub);
-/*
-        ArrayList<CategoryItem> itemList = new ArrayList<CategoryItem>(itemSet);
-
-        methodAUpdater = new MethodAUpdater();
-        lastUpdater = new PrefixUpdater();
-
-        Utils.executeAsyncTask(lastUpdater, executor);
-        Utils.executeAsyncTask(methodAUpdater, executor);
-        */
 
     }
 
