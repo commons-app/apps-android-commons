@@ -18,7 +18,12 @@ public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
 
     private String filter;
     private static final String TAG = PrefixUpdater.class.getName();
-    CategorizationFragment catFragment = new CategorizationFragment();
+    CategorizationFragment catFragment;
+
+    public PrefixUpdater(CategorizationFragment catFragment) {
+        this.catFragment = catFragment;
+    }
+
     @Override
     protected void onPreExecute() {
         super.onPreExecute();

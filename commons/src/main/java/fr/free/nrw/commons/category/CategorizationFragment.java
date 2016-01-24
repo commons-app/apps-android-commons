@@ -336,6 +336,49 @@ public class CategorizationFragment extends SherlockFragment{
     }
 
 
+    final CountDownLatch latch = new CountDownLatch(1);
+
+    private class PrefixUpdaterSub extends PrefixUpdater {
+
+        public PrefixUpdaterSub() {
+            super(CategorizationFragment.this);
+        }
+
+        @Override
+        void doInBackground() {
+            super.doInBackground();
+            latch.await();
+        }
+
+        @Override
+        void onPostExecute(ResultSet result) {
+            super.onPostExecute(result):
+
+            results.addAll(result);
+            adapter.notifyDataSetComplete();
+        }
+    }
+
+
+    private class MethodAUpdaterSub extends MethodAUpdater {
+
+        public MethodAUpdaterSub() {
+            super(CategorizationFragment.this);
+        }
+
+        @Override
+        void onPostExecute(ResultSet result) {
+            super.onPostExecute(result):
+
+            results.clear();
+            results.addAll(result);
+            adapter.notifyDataSetComplete();
+
+            latch.countDown();
+        }
+    }
+
+
     private void startUpdatingCategoryList() {
         if (lastUpdater != null) {
             lastUpdater.cancel(true);
@@ -346,6 +389,12 @@ public class CategorizationFragment extends SherlockFragment{
         }
 
 
+        PrefixUpdaterSub prefixUpdaterSub = new PrefixUpdaterSub();
+        MethodAUpdaterSub methodAUpdaterSub = new MethodAUpdaterSub();
+
+        Utils.executeAsyncTask(prefixUpdaterSub);
+        Utils.executeAsyncTask(methodAUpdaterSub);
+/*
         ArrayList<CategoryItem> itemList = new ArrayList<CategoryItem>(itemSet);
 
         methodAUpdater = new MethodAUpdater();
@@ -353,8 +402,7 @@ public class CategorizationFragment extends SherlockFragment{
 
         Utils.executeAsyncTask(lastUpdater, executor);
         Utils.executeAsyncTask(methodAUpdater, executor);
-
-
+        */
 
     }
 

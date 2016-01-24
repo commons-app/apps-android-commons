@@ -18,7 +18,11 @@ public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
 
     private String filter;
     private static final String TAG = MethodAUpdater.class.getName();
-    CategorizationFragment catFragment = new CategorizationFragment();
+    CategorizationFragment catFragment;
+
+    public MethodAUpdater(CategorizationFragment catFragment) {
+        this.catFragment = catFragment;
+    }
 
     @Override
     protected void onPreExecute() {
