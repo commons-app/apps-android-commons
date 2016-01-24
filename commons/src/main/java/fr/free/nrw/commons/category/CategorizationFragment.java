@@ -53,7 +53,7 @@ public class CategorizationFragment extends SherlockFragment{
     private OnCategoriesSaveHandler onCategoriesSaveHandler;
 
     protected HashMap<String, ArrayList<String>> categoriesCache;
-    private final Set<CategoryItem> results = new LinkedHashSet<CategoryItem>();
+    private final Set<String> results = new LinkedHashSet<String>();
 
     private ContentProviderClient client;
 
@@ -335,7 +335,6 @@ public class CategorizationFragment extends SherlockFragment{
         return rootView;
     }
 
-
     final CountDownLatch latch = new CountDownLatch(1);
 
     private class PrefixUpdaterSub extends PrefixUpdater {
@@ -345,17 +344,24 @@ public class CategorizationFragment extends SherlockFragment{
         }
 
         @Override
-        void doInBackground() {
-            super.doInBackground();
-            latch.await();
+        protected ArrayList<String> doInBackground(Void... voids) {
+            ArrayList<String> result = new ArrayList<String>();
+            try {
+                result = super.doInBackground();
+                latch.await();
+            }
+            catch (InterruptedException e) {
+                Log.w(TAG, e);
+            }
+            return result;
         }
 
         @Override
-        void onPostExecute(ResultSet result) {
-            super.onPostExecute(result):
+        protected void onPostExecute(ArrayList<String> result) {
+            super.onPostExecute(result);
 
             results.addAll(result);
-            adapter.notifyDataSetComplete();
+            categoriesAdapter.notifyDataSetChanged();
         }
     }
 
@@ -367,12 +373,12 @@ public class CategorizationFragment extends SherlockFragment{
         }
 
         @Override
-        void onPostExecute(ResultSet result) {
-            super.onPostExecute(result):
+        protected void onPostExecute(ArrayList<String> result) {
+            super.onPostExecute(result);
 
             results.clear();
             results.addAll(result);
-            adapter.notifyDataSetComplete();
+            categoriesAdapter.notifyDataSetChanged();
 
             latch.countDown();
         }
@@ -380,6 +386,10 @@ public class CategorizationFragment extends SherlockFragment{
 
 
     private void startUpdatingCategoryList() {
+
+
+
+
         if (lastUpdater != null) {
             lastUpdater.cancel(true);
         }
