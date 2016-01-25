@@ -79,7 +79,7 @@ public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
             categories.add(catString);
         }
 
-        catFragment.categoriesCache.put(filter, categories);
+        //catFragment.categoriesCache.put(filter, categories);
         return categories;
     }
 }

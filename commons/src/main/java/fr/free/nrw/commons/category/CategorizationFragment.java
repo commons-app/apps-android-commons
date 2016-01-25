@@ -354,6 +354,11 @@ public class CategorizationFragment extends SherlockFragment{
                 super.onPostExecute(result);
 
                 results.addAll(result);
+
+                String filter = categoriesFilter.getText().toString();
+                ArrayList<String> resultsList = new ArrayList<String>(results);
+                categoriesCache.put(filter, resultsList);
+
                 Log.d(TAG, "Prefix result: " + result);
                 categoriesAdapter.notifyDataSetChanged();
             }
