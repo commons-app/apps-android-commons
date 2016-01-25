@@ -359,7 +359,8 @@ public class CategorizationFragment extends SherlockFragment{
                 String filter = categoriesFilter.getText().toString();
                 ArrayList<String> resultsList = new ArrayList<String>(results);
                 categoriesCache.put(filter, resultsList);
-                
+                Log.d(TAG, "Final results List: " + resultsList);
+
                 categoriesAdapter.notifyDataSetChanged();
                 setCatsAfterAsync(resultsList, filter);
             }
