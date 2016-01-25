@@ -37,7 +37,6 @@ public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
     protected void onPostExecute(ArrayList<String> categories) {
         super.onPostExecute(categories);
         //catFragment.setCatsAfterAsync(categories, filter);
-
     }
 
     @Override

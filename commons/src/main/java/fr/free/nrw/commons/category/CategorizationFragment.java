@@ -379,10 +379,8 @@ public class CategorizationFragment extends SherlockFragment{
                 latch.countDown();
             }
         };
-
         Utils.executeAsyncTask(prefixUpdaterSub);
         Utils.executeAsyncTask(methodAUpdaterSub);
-
     }
 
     private void startUpdatingCategoryList() {
@@ -394,10 +392,8 @@ public class CategorizationFragment extends SherlockFragment{
         if (methodAUpdaterSub != null) {
             methodAUpdaterSub.cancel(true);
         }
-
+        
         requestSearchResults();
-
-        //Log.d(TAG, "Final results: " + results);
     }
 
     @Override
