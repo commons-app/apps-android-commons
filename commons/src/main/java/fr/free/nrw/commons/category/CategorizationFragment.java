@@ -53,8 +53,8 @@ public class CategorizationFragment extends SherlockFragment{
     protected HashMap<String, ArrayList<String>> categoriesCache;
 
     private final Set<String> results = new LinkedHashSet<String>();
-    //PrefixUpdaterSub prefixUpdaterSub = null;
-    //MethodAUpdaterSub methodAUpdaterSub = null;
+    PrefixUpdater prefixUpdaterSub = null;
+    MethodAUpdater methodAUpdaterSub = null;
 
     private ContentProviderClient client;
 
@@ -334,7 +334,7 @@ public class CategorizationFragment extends SherlockFragment{
 
         final CountDownLatch latch = new CountDownLatch(1);
 
-        Utils.executeAsyncTask(new PrefixUpdater(this) {
+        prefixUpdaterSub = new PrefixUpdater(this) {
             @Override
             protected ArrayList<String> doInBackground(Void... voids) {
                 ArrayList<String> result = new ArrayList<String>();
@@ -357,9 +357,9 @@ public class CategorizationFragment extends SherlockFragment{
                 Log.d(TAG, "Prefix result: " + result);
                 categoriesAdapter.notifyDataSetChanged();
             }
-        });
+        };
 
-        Utils.executeAsyncTask(new MethodAUpdater(this) {
+        methodAUpdaterSub = new MethodAUpdater(this) {
             @Override
             protected void onPostExecute(ArrayList<String> result) {
                 results.clear();
@@ -371,32 +371,26 @@ public class CategorizationFragment extends SherlockFragment{
 
                 latch.countDown();
             }
-        });
+        };
 
+        Utils.executeAsyncTask(prefixUpdaterSub);
+        Utils.executeAsyncTask(methodAUpdaterSub);
 
     }
 
     private void startUpdatingCategoryList() {
 
-        requestSearchResults();
-
-        /*
-        if (prefixUpdater != null) {
-            prefixUpdater.cancel(true);
+        if (prefixUpdaterSub != null) {
+            prefixUpdaterSub.cancel(true);
         }
 
         if (methodAUpdaterSub != null) {
             methodAUpdaterSub.cancel(true);
         }
 
-        prefixUpdaterSub = new PrefixUpdaterSub();
-        methodAUpdaterSub = new MethodAUpdaterSub();
+        requestSearchResults();
 
-        Utils.executeAsyncTask(prefixUpdaterSub);
-        Utils.executeAsyncTask(methodAUpdaterSub);
-        Log.d(TAG, "Final results: " + results);
-*/
-
+        //Log.d(TAG, "Final results: " + results);
     }
 
     @Override
