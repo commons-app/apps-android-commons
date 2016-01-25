@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import fr.free.nrw.commons.CommonsApplication;
 
 public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
-    //TODO: Return type?
 
     private String filter;
     private static final String TAG = PrefixUpdater.class.getName();
@@ -38,7 +37,6 @@ public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
     protected void onPostExecute(ArrayList<String> categories) {
         super.onPostExecute(categories);
         catFragment.setCatsAfterAsync(categories, filter);
-        //TODO: Return its own List
 
     }
 
