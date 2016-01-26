@@ -35,11 +35,6 @@ public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
     }
 
     @Override
-    protected void onPostExecute(ArrayList<String> categories) {
-        super.onPostExecute(categories);
-    }
-
-    @Override
     protected ArrayList<String> doInBackground(Void... voids) {
         //If user hasn't typed anything in yet, get GPS and recent items
         if(TextUtils.isEmpty(filter)) {
@@ -77,7 +72,7 @@ public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
             String catString = cat.replace("Category:", "");
             categories.add(catString);
         }
-        
+
         return categories;
     }
 }
