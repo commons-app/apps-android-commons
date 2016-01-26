@@ -37,7 +37,6 @@ public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
     @Override
     protected void onPostExecute(ArrayList<String> categories) {
         super.onPostExecute(categories);
-        //catFragment.setCatsAfterAsync(categories, filter);
     }
 
     @Override
@@ -78,8 +77,7 @@ public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
             String catString = cat.replace("Category:", "");
             categories.add(catString);
         }
-
-        //catFragment.categoriesCache.put(filter, categories);
+        
         return categories;
     }
 }
