@@ -52,13 +52,14 @@ public class CategorizationFragment extends SherlockFragment{
 
     protected HashMap<String, ArrayList<String>> categoriesCache;
 
+    // LHS guarantees ordered insertions, allowing for prioritized method A results
     private final Set<String> results = new LinkedHashSet<String>();
-    PrefixUpdater prefixUpdaterSub = null;
-    MethodAUpdater methodAUpdaterSub = null;
+    PrefixUpdater prefixUpdaterSub;
+    MethodAUpdater methodAUpdaterSub;
 
     private ContentProviderClient client;
 
-    protected final int SEARCH_CATS_LIMIT = 25;
+    protected final static int SEARCH_CATS_LIMIT = 25;
     private static final String TAG = CategorizationFragment.class.getName();
 
     public static class CategoryItem implements Parcelable {
