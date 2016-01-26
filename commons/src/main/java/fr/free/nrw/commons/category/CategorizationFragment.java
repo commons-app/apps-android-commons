@@ -133,34 +133,39 @@ public class CategorizationFragment extends SherlockFragment{
 
     protected void setCatsAfterAsync(ArrayList<String> categories, String filter) {
 
-        ArrayList<CategoryItem> items = new ArrayList<CategoryItem>();
-        HashSet<String> existingKeys = new HashSet<String>();
-        for(CategoryItem item : categoriesAdapter.getItems()) {
-            if(item.selected) {
-                items.add(item);
-                existingKeys.add(item.name);
+        if (getActivity() != null) {
+            ArrayList<CategoryItem> items = new ArrayList<CategoryItem>();
+            HashSet<String> existingKeys = new HashSet<String>();
+            for (CategoryItem item : categoriesAdapter.getItems()) {
+                if (item.selected) {
+                    items.add(item);
+                    existingKeys.add(item.name);
+                }
             }
-        }
-        for(String category : categories) {
-            if(!existingKeys.contains(category)) {
-                items.add(new CategoryItem(category, false));
+            for (String category : categories) {
+                if (!existingKeys.contains(category)) {
+                    items.add(new CategoryItem(category, false));
+                }
             }
-        }
 
-        categoriesAdapter.setItems(items);
-        categoriesAdapter.notifyDataSetInvalidated();
-        categoriesSearchInProgress.setVisibility(View.GONE);
+            categoriesAdapter.setItems(items);
+            categoriesAdapter.notifyDataSetInvalidated();
+            categoriesSearchInProgress.setVisibility(View.GONE);
 
-        if (categories.isEmpty()) {
-            if(TextUtils.isEmpty(filter)) {
-                // If we found no recent cats, show the skip message!
-                categoriesSkip.setVisibility(View.VISIBLE);
+            if (categories.isEmpty()) {
+                if (TextUtils.isEmpty(filter)) {
+                    // If we found no recent cats, show the skip message!
+                    categoriesSkip.setVisibility(View.VISIBLE);
+                } else {
+                    categoriesNotFoundView.setText(getString(R.string.categories_not_found, filter));
+                    categoriesNotFoundView.setVisibility(View.VISIBLE);
+                }
             } else {
-                categoriesNotFoundView.setText(getString(R.string.categories_not_found, filter));
-                categoriesNotFoundView.setVisibility(View.VISIBLE);
+                categoriesList.smoothScrollToPosition(existingKeys.size());
             }
-        } else {
-            categoriesList.smoothScrollToPosition(existingKeys.size());
+        }
+        else {
+            Log.e(TAG, "Error: Fragment is null");
         }
     }
 
