@@ -151,7 +151,7 @@ public class CategorizationFragment extends SherlockFragment{
         categoriesAdapter.notifyDataSetInvalidated();
         categoriesSearchInProgress.setVisibility(View.GONE);
 
-        if (categories.size() == 0) {
+        if (categories.isEmpty()) {
             if(TextUtils.isEmpty(filter)) {
                 // If we found no recent cats, show the skip message!
                 categoriesSkip.setVisibility(View.VISIBLE);
