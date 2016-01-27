@@ -1,5 +1,8 @@
 # Wikimedia Commons for Android
 
+## v1.8
+- New feature: Improved category search function (not limited to prefix search now)
+
 ## v1.7
 - Fixed bug with uploading images in Marshmallow
 - Fixed links in About page
