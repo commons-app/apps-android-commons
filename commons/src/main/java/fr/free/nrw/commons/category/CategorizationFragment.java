@@ -22,12 +22,17 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.upload.MwVolleyApi;
 
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
+
 
 public class CategorizationFragment extends SherlockFragment{
     public static interface OnCategoriesSaveHandler {
@@ -35,22 +40,26 @@ public class CategorizationFragment extends SherlockFragment{
     }
 
     ListView categoriesList;
-    EditText categoriesFilter;
+    protected EditText categoriesFilter;
     ProgressBar categoriesSearchInProgress;
     TextView categoriesNotFoundView;
     TextView categoriesSkip;
 
     CategoriesAdapter categoriesAdapter;
-    CategoriesUpdater lastUpdater = null;
-    ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
+    ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(2);
 
     private OnCategoriesSaveHandler onCategoriesSaveHandler;
 
-    private HashMap<String, ArrayList<String>> categoriesCache;
+    protected HashMap<String, ArrayList<String>> categoriesCache;
+
+    // LHS guarantees ordered insertions, allowing for prioritized method A results
+    private final Set<String> results = new LinkedHashSet<String>();
+    PrefixUpdater prefixUpdaterSub;
+    MethodAUpdater methodAUpdaterSub;
 
     private ContentProviderClient client;
 
-    private final int SEARCH_CATS_LIMIT = 25;
+    protected final static int SEARCH_CATS_LIMIT = 25;
     private static final String TAG = CategorizationFragment.class.getName();
 
     public static class CategoryItem implements Parcelable {
@@ -87,32 +96,55 @@ public class CategorizationFragment extends SherlockFragment{
         }
     }
 
-    private class CategoriesUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
+    protected ArrayList<String> recentCatQuery() {
+        ArrayList<String> items = new ArrayList<String>();
+        ArrayList<String> mergedItems= new ArrayList<String>();
 
-        private String filter;
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            filter = categoriesFilter.getText().toString();
-            categoriesSearchInProgress.setVisibility(View.VISIBLE);
-            categoriesNotFoundView.setVisibility(View.GONE);
+        try {
+            Cursor cursor = client.query(
+                    CategoryContentProvider.BASE_URI,
+                    Category.Table.ALL_FIELDS,
+                    null,
+                    new String[]{},
+                    Category.Table.COLUMN_LAST_USED + " DESC");
+            // fixme add a limit on the original query instead of falling out of the loop?
+            while (cursor.moveToNext() && cursor.getPosition() < SEARCH_CATS_LIMIT) {
+                Category cat = Category.fromCursor(cursor);
+                items.add(cat.getName());
+            }
+            cursor.close();
 
-            categoriesSkip.setVisibility(View.GONE);
+            if (MwVolleyApi.GpsCatExists.getGpsCatExists() == true) {
+                //Log.d(TAG, "GPS cats found in CategorizationFragment.java" + MwVolleyApi.getGpsCat().toString());
+                List<String> gpsItems = new ArrayList<String>(MwVolleyApi.getGpsCat());
+                //Log.d(TAG, "GPS items: " + gpsItems.toString());
+
+                mergedItems.addAll(gpsItems);
+            }
+
+            mergedItems.addAll(items);
         }
+        catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
+        //Log.d(TAG, "Merged items: " + mergedItems.toString());
+        return mergedItems;
+    }
 
-        @Override
-        protected void onPostExecute(ArrayList<String> categories) {
-            super.onPostExecute(categories);
+
+    protected void setCatsAfterAsync(ArrayList<String> categories, String filter) {
+
+        if (getActivity() != null) {
             ArrayList<CategoryItem> items = new ArrayList<CategoryItem>();
             HashSet<String> existingKeys = new HashSet<String>();
-            for(CategoryItem item : categoriesAdapter.getItems()) {
-                if(item.selected) {
+            for (CategoryItem item : categoriesAdapter.getItems()) {
+                if (item.selected) {
                     items.add(item);
                     existingKeys.add(item.name);
                 }
             }
-            for(String category : categories) {
-                if(!existingKeys.contains(category)) {
+            for (String category : categories) {
+                if (!existingKeys.contains(category)) {
                     items.add(new CategoryItem(category, false));
                 }
             }
@@ -120,8 +152,9 @@ public class CategorizationFragment extends SherlockFragment{
             categoriesAdapter.setItems(items);
             categoriesAdapter.notifyDataSetInvalidated();
             categoriesSearchInProgress.setVisibility(View.GONE);
-            if (categories.size() == 0) {
-                if(TextUtils.isEmpty(filter)) {
+
+            if (categories.isEmpty()) {
+                if (TextUtils.isEmpty(filter)) {
                     // If we found no recent cats, show the skip message!
                     categoriesSkip.setVisibility(View.VISIBLE);
                 } else {
@@ -132,68 +165,8 @@ public class CategorizationFragment extends SherlockFragment{
                 categoriesList.smoothScrollToPosition(existingKeys.size());
             }
         }
-
-        @Override
-        protected ArrayList<String> doInBackground(Void... voids) {
-            if(TextUtils.isEmpty(filter)) {
-                ArrayList<String> items = new ArrayList<String>();
-                ArrayList<String> mergedItems= new ArrayList<String>();
-
-                try {
-                    Cursor cursor = client.query(
-                            CategoryContentProvider.BASE_URI,
-                            Category.Table.ALL_FIELDS,
-                            null,
-                            new String[]{},
-                            Category.Table.COLUMN_LAST_USED + " DESC");
-                    // fixme add a limit on the original query instead of falling out of the loop?
-                    while (cursor.moveToNext() && cursor.getPosition() < SEARCH_CATS_LIMIT) {
-                        Category cat = Category.fromCursor(cursor);
-                        items.add(cat.getName());
-                    }
-
-                    if (MwVolleyApi.GpsCatExists.getGpsCatExists() == true){
-                        Log.d(TAG, "GPS cats found in CategorizationFragment.java" + MwVolleyApi.getGpsCat().toString());
-                        List<String> gpsItems = new ArrayList<String>(MwVolleyApi.getGpsCat());
-                        Log.d(TAG, "GPS items: " + gpsItems.toString());
-
-                        mergedItems.addAll(gpsItems);
-                    }
-
-                    mergedItems.addAll(items);
-                }
-                catch (RemoteException e) {
-                    // faaaail
-                    throw new RuntimeException(e);
-                }
-                Log.d(TAG, "Merged items: " + mergedItems.toString());
-                return mergedItems;
-            }
-            
-            if(categoriesCache.containsKey(filter)) {
-                return categoriesCache.get(filter);
-            }
-            MWApi api = CommonsApplication.createMWApi();
-            ApiResult result;
-            ArrayList<String> categories = new ArrayList<String>();
-            try {
-                result = api.action("query")
-                        .param("list", "allcategories")
-                        .param("acprefix", filter)
-                        .param("aclimit", SEARCH_CATS_LIMIT)
-                        .get();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            ArrayList<ApiResult> categoryNodes = result.getNodes("/api/query/allcategories/c");
-            for(ApiResult categoryNode: categoryNodes) {
-                categories.add(categoryNode.getDocument().getTextContent());
-            }
-
-            categoriesCache.put(filter, categories);
-
-            return categories;
+        else {
+            Log.e(TAG, "Error: Fragment is null");
         }
     }
 
@@ -363,12 +336,70 @@ public class CategorizationFragment extends SherlockFragment{
         return rootView;
     }
 
+    private void requestSearchResults() {
+
+        final CountDownLatch latch = new CountDownLatch(1);
+
+        prefixUpdaterSub = new PrefixUpdater(this) {
+            @Override
+            protected ArrayList<String> doInBackground(Void... voids) {
+                ArrayList<String> result = new ArrayList<String>();
+                try {
+                    result = super.doInBackground();
+                    latch.await();
+                }
+                catch (InterruptedException e) {
+                    Log.w(TAG, e);
+                    //Thread.currentThread().interrupt();
+                }
+                return result;
+            }
+
+            @Override
+            protected void onPostExecute(ArrayList<String> result) {
+                super.onPostExecute(result);
+
+                results.addAll(result);
+                Log.d(TAG, "Prefix result: " + result);
+
+                String filter = categoriesFilter.getText().toString();
+                ArrayList<String> resultsList = new ArrayList<String>(results);
+                categoriesCache.put(filter, resultsList);
+                Log.d(TAG, "Final results List: " + resultsList);
+
+                categoriesAdapter.notifyDataSetChanged();
+                setCatsAfterAsync(resultsList, filter);
+            }
+        };
+
+        methodAUpdaterSub = new MethodAUpdater(this) {
+            @Override
+            protected void onPostExecute(ArrayList<String> result) {
+                results.clear();
+                super.onPostExecute(result);
+
+                results.addAll(result);
+                Log.d(TAG, "Method A result: " + result);
+                categoriesAdapter.notifyDataSetChanged();
+
+                latch.countDown();
+            }
+        };
+        Utils.executeAsyncTask(prefixUpdaterSub);
+        Utils.executeAsyncTask(methodAUpdaterSub);
+    }
+
     private void startUpdatingCategoryList() {
-        if (lastUpdater != null) {
-            lastUpdater.cancel(true);
+
+        if (prefixUpdaterSub != null) {
+            prefixUpdaterSub.cancel(true);
         }
-        lastUpdater = new CategoriesUpdater();
-        Utils.executeAsyncTask(lastUpdater, executor);
+
+        if (methodAUpdaterSub != null) {
+            methodAUpdaterSub.cancel(true);
+        }
+        
+        requestSearchResults();
     }
 
     @Override
