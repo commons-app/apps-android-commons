@@ -98,7 +98,7 @@ public class CategorizationFragment extends SherlockFragment{
 
     protected ArrayList<String> recentCatQuery() {
         ArrayList<String> items = new ArrayList<String>();
-        LinkedHashSet<String> mergedItems = new LinkedHashSet<String>();
+        Set<String> mergedItems = new LinkedHashSet<String>();
 
         try {
             Cursor cursor = client.query(
