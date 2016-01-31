@@ -98,7 +98,7 @@ public class CategorizationFragment extends SherlockFragment{
 
     protected ArrayList<String> recentCatQuery() {
         ArrayList<String> items = new ArrayList<String>();
-        ArrayList<String> mergedItems= new ArrayList<String>();
+        Set<String> mergedItems = new LinkedHashSet<String>();
 
         try {
             Cursor cursor = client.query(
@@ -127,8 +127,10 @@ public class CategorizationFragment extends SherlockFragment{
         catch (RemoteException e) {
             throw new RuntimeException(e);
         }
-        //Log.d(TAG, "Merged items: " + mergedItems.toString());
-        return mergedItems;
+
+        //Needs to be an ArrayList and not a List unless we want to modify a big portion of preexisting code
+        ArrayList<String> mergedItemsList = new ArrayList<String>(mergedItems);
+        return mergedItemsList;
     }
 
 
