@@ -13,7 +13,7 @@ public class GPSExtractor {
 
     private String filePath;
     private double decLatitude, decLongitude;
-    Context context;
+    private Context context;
     private static final String TAG = GPSExtractor.class.getName();
     public boolean imageCoordsExists;
 
@@ -54,17 +54,17 @@ public class GPSExtractor {
         }
         else {
             imageCoordsExists = true;
+            Log.d(TAG, "Picture has GPS info");
+
             latitude = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE);
             latitude_ref = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE_REF);
             longitude = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE);
             longitude_ref = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE_REF);
-
-
             Log.d("Image", "Latitude: " + latitude + " " + latitude_ref);
             Log.d("Image", "Longitude: " + longitude + " " + longitude_ref);
+
             decimalCoords = getDecimalCoords(latitude, latitude_ref, longitude, longitude_ref);
             return decimalCoords;
-
         }
     }
 
@@ -78,8 +78,6 @@ public class GPSExtractor {
 
     //Converts format of coords into decimal coords as required by MediaWiki API
     private String getDecimalCoords(String latitude, String latitude_ref, String longitude, String longitude_ref) {
-
-
 
         if(latitude_ref.equals("N")){
             decLatitude = convertToDegree(latitude);
@@ -99,7 +97,6 @@ public class GPSExtractor {
         Log.d("Coords", "Latitude and Longitude are " + decimalCoords);
         return decimalCoords;
     }
-
 
     private double convertToDegree(String stringDMS){
         double result;
@@ -123,5 +120,4 @@ public class GPSExtractor {
         result = degrees + (minutes/60) + (seconds/3600);
         return result;
     }
-
 }

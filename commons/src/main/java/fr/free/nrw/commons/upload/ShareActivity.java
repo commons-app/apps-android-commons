@@ -201,8 +201,9 @@ public  class       ShareActivity
             //extract the coordinates of image in decimal degrees
             Log.d(TAG, "Calling GPSExtractor");
             GPSExtractor imageObj = new GPSExtractor(filePath, this);
-            String decimalCoords = imageObj.getCoords();
 
+            //Gets image coords if exist, otherwise gets last known coords
+            String decimalCoords = imageObj.getCoords();
 
             if (decimalCoords != null) {
                 Log.d(TAG, "Decimal coords of image: " + decimalCoords);
