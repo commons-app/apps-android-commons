@@ -205,11 +205,14 @@ public  class       ShareActivity
 
 
             if (decimalCoords != null) {
-                double decLongitude = imageObj.getDecLongitude();
-                double decLatitude = imageObj.getDecLatitude();
-
                 Log.d(TAG, "Decimal coords of image: " + decimalCoords);
-                app.cacheData.setQtPoint(decLongitude, decLatitude);
+
+                //Only set cache for this point if image has coords
+                if (imageObj.imageCoordsExists) {
+                    double decLongitude = imageObj.getDecLongitude();
+                    double decLatitude = imageObj.getDecLatitude();
+                    app.cacheData.setQtPoint(decLongitude, decLatitude);
+                }
 
                 MwVolleyApi apiCall = new MwVolleyApi(this);
 
