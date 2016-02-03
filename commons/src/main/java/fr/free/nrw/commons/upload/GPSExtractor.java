@@ -1,5 +1,8 @@
 package fr.free.nrw.commons.upload;
 
+import android.content.Context;
+import android.location.Location;
+import android.location.LocationManager;
 import android.media.ExifInterface;
 import android.util.Log;
 
@@ -10,9 +13,12 @@ public class GPSExtractor {
 
     private String filePath;
     private double decLatitude, decLongitude;
+    Context context;
+    private static final String TAG = GPSExtractor.class.getName();
 
-    public GPSExtractor(String filePath){
+    public GPSExtractor(String filePath, Context context){
         this.filePath = filePath;
+        this.context = context;
     }
 
     //Extract GPS coords of image
@@ -33,8 +39,16 @@ public class GPSExtractor {
         }
 
         if (exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE) == null) {
-            Log.d("Image", "Picture has no GPS info");
-            return null;
+            Log.d(TAG, "Picture has no GPS info");
+
+            LocationManager locationManager = (LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
+            Location getLastLocation = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+            double currentLongitude = getLastLocation.getLongitude();
+            double currentLatitude = getLastLocation.getLatitude();
+            Log.d(TAG, "Current location values: Lat = " + currentLatitude + " Long = " + currentLongitude);
+
+            String currentCoords = String.valueOf(currentLatitude) + "|" + String.valueOf(currentLongitude);
+            return currentCoords;
         }
         else {
             latitude = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE);
