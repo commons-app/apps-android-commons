@@ -15,6 +15,7 @@ public class GPSExtractor {
     private double decLatitude, decLongitude;
     Context context;
     private static final String TAG = GPSExtractor.class.getName();
+    public boolean imageCoordsExists;
 
     public GPSExtractor(String filePath, Context context){
         this.filePath = filePath;
@@ -39,6 +40,7 @@ public class GPSExtractor {
         }
 
         if (exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE) == null) {
+            imageCoordsExists = false;
             Log.d(TAG, "Picture has no GPS info");
 
             LocationManager locationManager = (LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
@@ -51,6 +53,7 @@ public class GPSExtractor {
             return currentCoords;
         }
         else {
+            imageCoordsExists = true;
             latitude = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE);
             latitude_ref = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE_REF);
             longitude = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE);
