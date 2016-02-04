@@ -1,10 +1,16 @@
 package fr.free.nrw.commons.upload;
 
 import android.content.Context;
+import android.content.Intent;
+import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.ExifInterface;
+import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -13,9 +19,11 @@ public class GPSExtractor {
 
     private String filePath;
     private double decLatitude, decLongitude;
+    private double currentLatitude, currentLongitude;
     private Context context;
     private static final String TAG = GPSExtractor.class.getName();
     public boolean imageCoordsExists;
+    private MyLocationListener myLocationListener;
 
     public GPSExtractor(String filePath, Context context){
         this.filePath = filePath;
@@ -43,16 +51,26 @@ public class GPSExtractor {
             imageCoordsExists = false;
             Log.d(TAG, "Picture has no GPS info");
 
-            LocationManager locationManager = (LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
-            Location getLastLocation = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
-            double currentLongitude = getLastLocation.getLongitude();
-            double currentLatitude = getLastLocation.getLatitude();
-            Log.d(TAG, "Current location values: Lat = " + currentLatitude + " Long = " + currentLongitude);
+            LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+            Criteria criteria = new Criteria();
+            String provider = locationManager.getBestProvider(criteria, true);
+            myLocationListener = new MyLocationListener();
+            
+            locationManager.requestLocationUpdates(provider, 400, 1, myLocationListener);
+            Location location = locationManager.getLastKnownLocation(provider);
 
+            if (location != null) {
+                myLocationListener.onLocationChanged(location);
+            }
+            else {
+                //calling method is equipped to deal with null return value
+                return null;
+            }
+            Log.d(TAG, "Current location values: Lat = " + currentLatitude + " Long = " + currentLongitude);
             String currentCoords = String.valueOf(currentLatitude) + "|" + String.valueOf(currentLongitude);
             return currentCoords;
-        }
-        else {
+
+        } else {
             imageCoordsExists = true;
             Log.d(TAG, "Picture has GPS info");
 
@@ -65,6 +83,31 @@ public class GPSExtractor {
 
             decimalCoords = getDecimalCoords(latitude, latitude_ref, longitude, longitude_ref);
             return decimalCoords;
+        }
+    }
+
+
+    private class MyLocationListener implements LocationListener {
+
+        @Override
+        public void onLocationChanged(Location location) {
+            currentLatitude = location.getLatitude();
+            currentLongitude = location.getLongitude();
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+            Log.d(TAG, provider + "'s status changed to " + status);
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+            Log.d(TAG, "Provider " + provider + " enabled");
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+            Log.d(TAG, "Provider " + provider + " disabled");
         }
     }
 
