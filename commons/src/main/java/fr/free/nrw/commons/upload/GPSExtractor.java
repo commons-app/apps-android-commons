@@ -2,17 +2,21 @@ package fr.free.nrw.commons.upload;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.ExifInterface;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
 
 import java.io.IOException;
+
+import fr.free.nrw.commons.SettingsActivity;
 
 
 public class GPSExtractor {
@@ -28,6 +32,13 @@ public class GPSExtractor {
     public GPSExtractor(String filePath, Context context){
         this.filePath = filePath;
         this.context = context;
+    }
+
+    private boolean gpsPreferenceEnabled() {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        boolean gpsPref = sharedPref.getBoolean("allowGps", false);
+        Log.d(TAG, "Gps pref set to: " + gpsPref);
+        return gpsPref;
     }
 
     //Extract GPS coords of image
@@ -50,6 +61,9 @@ public class GPSExtractor {
         if (exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE) == null) {
             imageCoordsExists = false;
             Log.d(TAG, "Picture has no GPS info");
+
+            //Check what user's preference is for automatic location detection
+            boolean gpsPrefEnabled = gpsPreferenceEnabled();
 
             LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
             Criteria criteria = new Criteria();
