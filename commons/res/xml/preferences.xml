@@ -10,7 +10,7 @@
     <CheckBoxPreference
         android:title="Automatically get current location"
         android:defaultValue="false"
-        android:summary="Retrieve your current location to offer category suggestions if an image is not geotagged."
+        android:summary="Retrieve current location to offer category suggestions if image is not geotagged"
         android:key="allowGps" />
 
 
