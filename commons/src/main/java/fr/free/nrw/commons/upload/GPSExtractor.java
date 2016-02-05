@@ -54,8 +54,8 @@ public class GPSExtractor {
             LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
             Criteria criteria = new Criteria();
             String provider = locationManager.getBestProvider(criteria, true);
+
             myLocationListener = new MyLocationListener();
-            
             locationManager.requestLocationUpdates(provider, 400, 1, myLocationListener);
             Location location = locationManager.getLastKnownLocation(provider);
 
