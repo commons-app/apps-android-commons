@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.upload;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Criteria;
 import android.location.Location;
@@ -10,14 +9,8 @@ import android.location.LocationManager;
 import android.media.ExifInterface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.provider.Settings;
 import android.util.Log;
-import android.widget.Toast;
-
 import java.io.IOException;
-
-import fr.free.nrw.commons.SettingsActivity;
-
 
 public class GPSExtractor {
 
@@ -88,7 +81,6 @@ public class GPSExtractor {
                 //Otherwise treat as if no coords found
                 return null;
             }
-
         } else {
             imageCoordsExists = true;
             Log.d(TAG, "Picture has GPS info");
@@ -104,7 +96,6 @@ public class GPSExtractor {
             return decimalCoords;
         }
     }
-
 
     private class MyLocationListener implements LocationListener {
 
