@@ -1,19 +1,16 @@
 package fr.free.nrw.commons.upload;
 
 import android.content.Context;
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.ExifInterface;
 import android.os.Bundle;
-import android.provider.Settings;
+import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.Toast;
-
 import java.io.IOException;
-
 
 public class GPSExtractor {
 
@@ -28,6 +25,13 @@ public class GPSExtractor {
     public GPSExtractor(String filePath, Context context){
         this.filePath = filePath;
         this.context = context;
+    }
+
+    private boolean gpsPreferenceEnabled() {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        boolean gpsPref = sharedPref.getBoolean("allowGps", false);
+        Log.d(TAG, "Gps pref set to: " + gpsPref);
+        return gpsPref;
     }
 
     //Extract GPS coords of image
@@ -51,24 +55,32 @@ public class GPSExtractor {
             imageCoordsExists = false;
             Log.d(TAG, "Picture has no GPS info");
 
-            LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-            Criteria criteria = new Criteria();
-            String provider = locationManager.getBestProvider(criteria, true);
-            myLocationListener = new MyLocationListener();
-            
-            locationManager.requestLocationUpdates(provider, 400, 1, myLocationListener);
-            Location location = locationManager.getLastKnownLocation(provider);
+            //Check what user's preference is for automatic location detection
+            boolean gpsPrefEnabled = gpsPreferenceEnabled();
 
-            if (location != null) {
-                myLocationListener.onLocationChanged(location);
-            }
-            else {
-                //calling method is equipped to deal with null return value
+            if (gpsPrefEnabled) {
+                //If pref enabled, set up LocationListener to get current location
+                LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+                Criteria criteria = new Criteria();
+                String provider = locationManager.getBestProvider(criteria, true);
+
+                myLocationListener = new MyLocationListener();
+                locationManager.requestLocationUpdates(provider, 400, 1, myLocationListener);
+                Location location = locationManager.getLastKnownLocation(provider);
+
+                if (location != null) {
+                    myLocationListener.onLocationChanged(location);
+                } else {
+                    //calling method is equipped to deal with null return value
+                    return null;
+                }
+                Log.d(TAG, "Current location values: Lat = " + currentLatitude + " Long = " + currentLongitude);
+                String currentCoords = String.valueOf(currentLatitude) + "|" + String.valueOf(currentLongitude);
+                return currentCoords;
+            } else {
+                //Otherwise treat as if no coords found
                 return null;
             }
-            Log.d(TAG, "Current location values: Lat = " + currentLatitude + " Long = " + currentLongitude);
-            String currentCoords = String.valueOf(currentLatitude) + "|" + String.valueOf(currentLongitude);
-            return currentCoords;
 
         } else {
             imageCoordsExists = true;
@@ -85,7 +97,6 @@ public class GPSExtractor {
             return decimalCoords;
         }
     }
-
 
     private class MyLocationListener implements LocationListener {
 
