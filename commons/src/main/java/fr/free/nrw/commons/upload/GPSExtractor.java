@@ -81,6 +81,7 @@ public class GPSExtractor {
                 //Otherwise treat as if no coords found
                 return null;
             }
+
         } else {
             imageCoordsExists = true;
             Log.d(TAG, "Picture has GPS info");
