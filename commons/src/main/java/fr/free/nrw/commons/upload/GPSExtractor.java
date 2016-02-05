@@ -133,17 +133,15 @@ public class GPSExtractor {
     //Converts format of coords into decimal coords as required by MediaWiki API
     private String getDecimalCoords(String latitude, String latitude_ref, String longitude, String longitude_ref) {
 
-        if(latitude_ref.equals("N")){
+        if (latitude_ref.equals("N")) {
             decLatitude = convertToDegree(latitude);
-        }
-        else{
+        } else {
             decLatitude = 0 - convertToDegree(latitude);
         }
 
-        if(longitude_ref.equals("E")){
+        if (longitude_ref.equals("E")) {
             decLongitude = convertToDegree(longitude);
-        }
-        else{
+        } else {
             decLongitude = 0 - convertToDegree(longitude);
         }
 
