@@ -65,24 +65,29 @@ public class GPSExtractor {
             //Check what user's preference is for automatic location detection
             boolean gpsPrefEnabled = gpsPreferenceEnabled();
 
-            LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-            Criteria criteria = new Criteria();
-            String provider = locationManager.getBestProvider(criteria, true);
+            if (gpsPrefEnabled) {
+                //If pref enabled, set up LocationListener to get current location
+                LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+                Criteria criteria = new Criteria();
+                String provider = locationManager.getBestProvider(criteria, true);
 
-            myLocationListener = new MyLocationListener();
-            locationManager.requestLocationUpdates(provider, 400, 1, myLocationListener);
-            Location location = locationManager.getLastKnownLocation(provider);
+                myLocationListener = new MyLocationListener();
+                locationManager.requestLocationUpdates(provider, 400, 1, myLocationListener);
+                Location location = locationManager.getLastKnownLocation(provider);
 
-            if (location != null) {
-                myLocationListener.onLocationChanged(location);
-            }
-            else {
-                //calling method is equipped to deal with null return value
+                if (location != null) {
+                    myLocationListener.onLocationChanged(location);
+                } else {
+                    //calling method is equipped to deal with null return value
+                    return null;
+                }
+                Log.d(TAG, "Current location values: Lat = " + currentLatitude + " Long = " + currentLongitude);
+                String currentCoords = String.valueOf(currentLatitude) + "|" + String.valueOf(currentLongitude);
+                return currentCoords;
+            } else {
+                //Otherwise treat as if no coords found
                 return null;
             }
-            Log.d(TAG, "Current location values: Lat = " + currentLatitude + " Long = " + currentLongitude);
-            String currentCoords = String.valueOf(currentLatitude) + "|" + String.valueOf(currentLongitude);
-            return currentCoords;
 
         } else {
             imageCoordsExists = true;
