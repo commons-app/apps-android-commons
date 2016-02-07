@@ -8,9 +8,9 @@
         android:defaultValue="CC BY-SA"
         />
     <CheckBoxPreference
-        android:title="Automatically get current location"
+        android:title="@string/allow_gps"
         android:defaultValue="false"
-        android:summary="Retrieve current location to offer category suggestions if image is not geotagged"
+        android:summary="@string/allow_gps_summary"
         android:key="allowGps" />
 
 
