@@ -14,11 +14,12 @@ import java.io.IOException;
 
 public class GPSExtractor {
 
+    private static final String TAG = GPSExtractor.class.getName();
+
     private String filePath;
     private double decLatitude, decLongitude;
     private double currentLatitude, currentLongitude;
     private Context context;
-    private static final String TAG = GPSExtractor.class.getName();
     public boolean imageCoordsExists;
     private MyLocationListener myLocationListener;
 
