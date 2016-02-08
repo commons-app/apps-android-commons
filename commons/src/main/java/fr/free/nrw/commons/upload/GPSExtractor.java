@@ -22,6 +22,9 @@ public class GPSExtractor {
     private Context context;
     public boolean imageCoordsExists;
     private MyLocationListener myLocationListener;
+    private LocationManager locationManager;
+    private String provider;
+    private Criteria criteria;
 
     public GPSExtractor(String filePath, Context context){
         this.filePath = filePath;
@@ -33,6 +36,15 @@ public class GPSExtractor {
         boolean gpsPref = sharedPref.getBoolean("allowGps", false);
         Log.d(TAG, "Gps pref set to: " + gpsPref);
         return gpsPref;
+    }
+
+    private void registerLocationManager() {
+        locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        criteria = new Criteria();
+        provider = locationManager.getBestProvider(criteria, true);
+        myLocationListener = new MyLocationListener();
+        
+        locationManager.requestLocationUpdates(provider, 400, 1, myLocationListener);
     }
 
     //Extract GPS coords of image
@@ -60,13 +72,7 @@ public class GPSExtractor {
             boolean gpsPrefEnabled = gpsPreferenceEnabled();
 
             if (gpsPrefEnabled) {
-                //If pref enabled, set up LocationListener to get current location
-                LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-                Criteria criteria = new Criteria();
-                String provider = locationManager.getBestProvider(criteria, true);
-
-                myLocationListener = new MyLocationListener();
-                locationManager.requestLocationUpdates(provider, 400, 1, myLocationListener);
+                //If pref enabled, get current location
                 Location location = locationManager.getLastKnownLocation(provider);
 
                 if (location != null) {
