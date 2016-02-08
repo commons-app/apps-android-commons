@@ -34,6 +34,8 @@ public  class       ShareActivity
         implements  SingleUploadFragment.OnUploadActionInitiated,
         CategorizationFragment.OnCategoriesSaveHandler {
 
+    private static final String TAG = ShareActivity.class.getName();
+
     private SingleUploadFragment shareView;
     private CategorizationFragment categorizationFragment;
 
@@ -44,17 +46,14 @@ public  class       ShareActivity
     private String mediaUriString;
 
     private Uri mediaUri;
-
     private Contribution contribution;
-
     private ImageView backgroundImageView;
-
     private UploadController uploadController;
 
     private CommonsApplication cacheObj;
     private boolean cacheFound;
 
-    private static final String TAG = ShareActivity.class.getName();
+    private GPSExtractor imageObj;
 
     public ShareActivity() {
         super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
@@ -197,11 +196,10 @@ public  class       ShareActivity
         String filePath = FileUtils.getPath(this, mediaUri);
         Log.d(TAG, "Filepath: " + filePath);
 
-        if (filePath != null && !filePath.equals("")) {
-            //extract the coordinates of image in decimal degrees
-            Log.d(TAG, "Calling GPSExtractor");
-            GPSExtractor imageObj = new GPSExtractor(filePath, this);
+        Log.d(TAG, "Calling GPSExtractor");
+        imageObj = new GPSExtractor(filePath, this);
 
+        if (filePath != null && !filePath.equals("")) {
             //Gets image coords if exist, otherwise gets last known coords
             String decimalCoords = imageObj.getCoords();
 
@@ -240,6 +238,11 @@ public  class       ShareActivity
         requestAuthToken();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        imageObj.registerLocationManager();
+    }
 
     @Override
     protected void onDestroy() {

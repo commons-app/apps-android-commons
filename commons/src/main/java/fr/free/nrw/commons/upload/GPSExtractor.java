@@ -38,12 +38,12 @@ public class GPSExtractor {
         return gpsPref;
     }
 
-    private void registerLocationManager() {
+    protected void registerLocationManager() {
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         criteria = new Criteria();
         provider = locationManager.getBestProvider(criteria, true);
         myLocationListener = new MyLocationListener();
-        
+
         locationManager.requestLocationUpdates(provider, 400, 1, myLocationListener);
     }
 
