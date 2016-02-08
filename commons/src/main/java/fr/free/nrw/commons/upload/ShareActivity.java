@@ -189,7 +189,6 @@ public  class       ShareActivity
         mediaUriString = mediaUri.toString();
         ImageLoader.getInstance().displayImage(mediaUriString, backgroundImageView);
 
-
         if(savedInstanceState != null)  {
             contribution = savedInstanceState.getParcelable("contribution");
         }
@@ -243,7 +242,6 @@ public  class       ShareActivity
                 }
             }
         }
-
     }
 
     @Override
