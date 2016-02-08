@@ -189,6 +189,17 @@ public  class       ShareActivity
         mediaUriString = mediaUri.toString();
         ImageLoader.getInstance().displayImage(mediaUriString, backgroundImageView);
 
+
+        if(savedInstanceState != null)  {
+            contribution = savedInstanceState.getParcelable("contribution");
+        }
+        requestAuthToken();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
         Log.d(TAG, "Uri: " + mediaUriString);
         Log.d(TAG, "Ext storage dir: " + Environment.getExternalStorageDirectory());
 
@@ -198,6 +209,7 @@ public  class       ShareActivity
 
         Log.d(TAG, "Calling GPSExtractor");
         imageObj = new GPSExtractor(filePath, this);
+        imageObj.registerLocationManager();
 
         if (filePath != null && !filePath.equals("")) {
             //Gets image coords if exist, otherwise gets last known coords
@@ -232,16 +244,6 @@ public  class       ShareActivity
             }
         }
 
-        if(savedInstanceState != null)  {
-            contribution = savedInstanceState.getParcelable("contribution");
-        }
-        requestAuthToken();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        imageObj.registerLocationManager();
     }
 
     @Override
