@@ -245,6 +245,12 @@ public  class       ShareActivity
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        imageObj.unregisterLocationManager();
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         uploadController.cleanup();
