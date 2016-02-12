@@ -45,6 +45,8 @@ public class GPSExtractor {
         myLocationListener = new MyLocationListener();
 
         locationManager.requestLocationUpdates(provider, 400, 1, myLocationListener);
+        Location location = locationManager.getLastKnownLocation(provider);
+        myLocationListener.onLocationChanged(location);
     }
 
     protected void unregisterLocationManager() {
@@ -76,15 +78,6 @@ public class GPSExtractor {
             boolean gpsPrefEnabled = gpsPreferenceEnabled();
 
             if (gpsPrefEnabled) {
-                //If pref enabled, get current location
-                Location location = locationManager.getLastKnownLocation(provider);
-
-                if (location != null) {
-                    myLocationListener.onLocationChanged(location);
-                } else {
-                    //calling method is equipped to deal with null return value
-                    return null;
-                }
                 Log.d(TAG, "Current location values: Lat = " + currentLatitude + " Long = " + currentLongitude);
                 String currentCoords = String.valueOf(currentLatitude) + "|" + String.valueOf(currentLongitude);
                 return currentCoords;
