@@ -196,13 +196,16 @@ public class MwVolleyApi {
         @Override
         public String toString() {
             StringBuilder builder = new StringBuilder("pages=" + "\n");
-            for (Page page : pages) {
-                builder.append(page.toString());
-                builder.append("\n");
+            if (pages != null) {
+                for (Page page : pages) {
+                    builder.append(page.toString());
+                    builder.append("\n");
+                }
+                builder.replace(builder.length() - 1, builder.length(), "");
+                return builder.toString();
+            } else {
+                return "No pages found";
             }
-            builder.replace(builder.length() - 1, builder.length(), "");
-
-            return builder.toString();
 
         }
     }

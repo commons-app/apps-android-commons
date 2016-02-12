@@ -93,6 +93,9 @@
     <string name="menu_download">Download</string>
     <string name="preference_license">License</string>
 
+    <string name="allow_gps">Automatically get current location</string>
+    <string name="allow_gps_summary">Retrieve current location to offer category suggestions if image is not geotagged</string>
+
     <!-- These three are semi-legacy entries, and should be changed in future -->
     <string name="license_name_cc_by_sa">CC\u00A0Attribution-ShareAlike\u00A03.0</string>
     <string name="license_name_cc_by">CC\u00A0Attribution\u00A03.0</string>
