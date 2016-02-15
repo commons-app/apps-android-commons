@@ -1,8 +1,8 @@
 # Upload to Commons #
 
-Upload pictures from your Android phone/tablet to Wikimedia Commons!
+Upload pictures from your Android phone/tablet to Wikimedia Commons.
 
-Community-maintained app, independant from the Wikimedia Foundation. Volunteers welcome!
+Initially started by the Wikimedia Foundation, this app is now maintained by volunteers. Anyone is welcome to improve it, just choose among the [open issues](https://github.com/nicolas-raoul/apps-android-commons/issues) and send us a pull request :-)
 
 ## Build Requirements ##
 
