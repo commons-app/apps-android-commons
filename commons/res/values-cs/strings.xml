@@ -12,7 +12,7 @@
   <string name="login_failed">Přihlášení se nezdařilo!</string>
   <string name="authentication_failed">Ověření se nezdařilo!</string>
   <string name="uploading_started">Nahrávání začalo!</string>
-  <string name="upload_completed_notification_title">%1$ nahráno!</string>
+  <string name="upload_completed_notification_title">%1$s nahráno!</string>
   <string name="upload_completed_notification_text">Klepnutím zobrazíte upload</string>
   <string name="upload_progress_notification_title_start">Spouští se načítání souboru %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s nahrávání</string>
