@@ -34,6 +34,8 @@ public  class       ShareActivity
         implements  SingleUploadFragment.OnUploadActionInitiated,
         CategorizationFragment.OnCategoriesSaveHandler {
 
+    private static final String TAG = ShareActivity.class.getName();
+
     private SingleUploadFragment shareView;
     private CategorizationFragment categorizationFragment;
 
@@ -44,17 +46,14 @@ public  class       ShareActivity
     private String mediaUriString;
 
     private Uri mediaUri;
-
     private Contribution contribution;
-
     private ImageView backgroundImageView;
-
     private UploadController uploadController;
 
     private CommonsApplication cacheObj;
     private boolean cacheFound;
 
-    private static final String TAG = ShareActivity.class.getName();
+    private GPSExtractor imageObj;
 
     public ShareActivity() {
         super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
@@ -190,6 +189,16 @@ public  class       ShareActivity
         mediaUriString = mediaUri.toString();
         ImageLoader.getInstance().displayImage(mediaUriString, backgroundImageView);
 
+        if(savedInstanceState != null)  {
+            contribution = savedInstanceState.getParcelable("contribution");
+        }
+        requestAuthToken();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
         Log.d(TAG, "Uri: " + mediaUriString);
         Log.d(TAG, "Ext storage dir: " + Environment.getExternalStorageDirectory());
 
@@ -197,19 +206,23 @@ public  class       ShareActivity
         String filePath = FileUtils.getPath(this, mediaUri);
         Log.d(TAG, "Filepath: " + filePath);
 
+        Log.d(TAG, "Calling GPSExtractor");
+        imageObj = new GPSExtractor(filePath, this);
+        imageObj.registerLocationManager();
+
         if (filePath != null && !filePath.equals("")) {
-            //extract the coordinates of image in decimal degrees
-            Log.d(TAG, "Calling GPSExtractor");
-            GPSExtractor imageObj = new GPSExtractor(filePath);
+            //Gets image coords if exist, otherwise gets last known coords
             String decimalCoords = imageObj.getCoords();
 
-
             if (decimalCoords != null) {
-                double decLongitude = imageObj.getDecLongitude();
-                double decLatitude = imageObj.getDecLatitude();
-
                 Log.d(TAG, "Decimal coords of image: " + decimalCoords);
-                app.cacheData.setQtPoint(decLongitude, decLatitude);
+
+                //Only set cache for this point if image has coords
+                if (imageObj.imageCoordsExists) {
+                    double decLongitude = imageObj.getDecLongitude();
+                    double decLatitude = imageObj.getDecLatitude();
+                    app.cacheData.setQtPoint(decLongitude, decLatitude);
+                }
 
                 MwVolleyApi apiCall = new MwVolleyApi(this);
 
@@ -229,13 +242,13 @@ public  class       ShareActivity
                 }
             }
         }
-
-        if(savedInstanceState != null)  {
-            contribution = savedInstanceState.getParcelable("contribution");
-        }
-        requestAuthToken();
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        imageObj.unregisterLocationManager();
+    }
 
     @Override
     protected void onDestroy() {

@@ -1,5 +1,19 @@
 # Wikimedia Commons for Android
 
+## v1.10
+- Bugfix for null location crash
+
+## v1.9
+- Bugfix for null pages array crash
+- New feature: Added option to use GPS to find nearby categories if picture is not geotagged
+
+## v1.8
+- New feature: Improved category search function (not limited to prefix search now)
+
+## v1.7
+- Fixed bug with uploading images in Marshmallow
+- Fixed links in About page
+
 ## v1.6
 - Bugfix for invalid images
 
