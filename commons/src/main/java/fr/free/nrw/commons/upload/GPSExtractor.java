@@ -46,7 +46,9 @@ public class GPSExtractor {
 
         locationManager.requestLocationUpdates(provider, 400, 1, myLocationListener);
         Location location = locationManager.getLastKnownLocation(provider);
-        myLocationListener.onLocationChanged(location);
+        if (location != null) {
+            myLocationListener.onLocationChanged(location);
+        }
     }
 
     protected void unregisterLocationManager() {
