@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="logging">Proszę czekać...</string>
-  <string name="status">%1$s zakończone</string>
-  <string name="login">Zalogowano pomyślnie</string>
+  <string name="app_name">Wikimedia Commons</string>
+  <string name="app_name_beta">Wikimedia Commons - wersja Beta</string>
+  <string name="menu_settings">Ustawienia</string>
+  <string name="username">Nazwa użytkownika</string>
+  <string name="password">Hasło</string>
+  <string name="login">Zaloguj się</string>
+  <string name="logging_in_title">Logowanie</string>
+  <string name="logging_in_message">Proszę czekać...</string>
+  <string name="login_success">Zalogowano pomyślnie</string>
   <string name="login_failed">Logowanie nie powiodło się!</string>
   <string name="authentication_failed">Błąd uwierzytelniania!</string>
   <string name="uploading_started">Wysyłanie rozpoczęte</string>
@@ -16,6 +22,7 @@
   <string name="title_activity_contributions">Moje wysłane pliki</string>
   <string name="contribution_state_queued">W kolejce</string>
   <string name="contribution_state_failed">Porażka</string>
+  <string name="contribution_state_in_progress">%1$d%% zakończone</string>
   <string name="contribution_state_starting">Wysyłanie</string>
   <string name="menu_from_gallery">Z galerii</string>
   <string name="menu_from_camera">Zrób zdjęcie</string>
