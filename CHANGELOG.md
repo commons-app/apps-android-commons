@@ -1,5 +1,8 @@
 # Wikimedia Commons for Android
 
+## v1.11
+- Bugfix for Polish language crash
+
 ## v1.10
 - Bugfix for null location crash
 
