@@ -12,7 +12,7 @@
   <string name="login_failed">Accesso non riuscito!</string>
   <string name="authentication_failed">Autenticazione non riuscita!</string>
   <string name="uploading_started">Caricamento iniziato!</string>
-  <string name="upload_completed_notification_title">%1$ caricato!</string>
+  <string name="upload_completed_notification_title">%1$s caricato!</string>
   <string name="upload_completed_notification_text">Premi per vedere i tuoi caricamenti</string>
   <string name="upload_progress_notification_title_start">Inizio caricamento di %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Sto caricando %1$s</string>
