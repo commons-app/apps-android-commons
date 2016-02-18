@@ -15,8 +15,8 @@
   <string name="upload_completed_notification_title">%1$s ଅପଲୋଡ଼ ହୋଇଗଲା!</string>
   <string name="upload_completed_notification_text">ନିଜର ଅପଲୋଡ଼ ଦେଖିବା ନିମନ୍ତେ ଟ୍ୟାପ କରନ୍ତୁ</string>
   <string name="upload_progress_notification_title_start">%1$ତମ ଅପଲୋଡ଼ ଆରମ୍ଭ କରୁଛି</string>
-  <string name="upload_progress_notification_title_in_progress">%1$ ଅପଲୋଡ଼ ହୋଇଗଲା</string>
-  <string name="upload_progress_notification_title_finishing">%1$ ଅପଲୋଡ଼ ସରୁଛି</string>
+  <string name="upload_progress_notification_title_in_progress">%1$s ଅପଲୋଡ଼ ହୋଇଗଲା</string>
+  <string name="upload_progress_notification_title_finishing">%1$s ଅପଲୋଡ଼ ସରୁଛି</string>
   <string name="upload_failed_notification_title">%1$s ଅପଲୋଡ଼ କରିବାରେ ବିଫଳ ହେଲୁ</string>
   <string name="upload_failed_notification_subtitle">ଦେଖିବା ପାଇଁ ଟ୍ୟାପ କରନ୍ତୁ</string>
   <string name="title_activity_contributions">ମୋ ଅପଲୋଡ଼ମାନ</string>

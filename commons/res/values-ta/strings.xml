@@ -9,7 +9,7 @@
   <string name="logging_in_message">தயவுசெய்து காத்திருங்கள்...</string>
   <string name="login_success">புகுபதிகை வெற்றி</string>
   <string name="login_failed">புகுபதிகை தோல்வியடைந்தது</string>
-  <string name="upload_completed_notification_title">%1$ பதிவேற்றப்பட்டது!</string>
+  <string name="upload_completed_notification_title">%1$s பதிவேற்றப்பட்டது!</string>
   <string name="upload_failed_notification_subtitle">காண்பதற்கு தட்டுக</string>
   <string name="title_activity_contributions">எனது பதிவேற்றங்கள்</string>
   <string name="contribution_state_in_progress">%1$d%% முடின்துள்ளத்து</string>

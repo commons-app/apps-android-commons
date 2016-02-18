@@ -59,7 +59,7 @@
   <string name="waiting_first_sync">Itxoiten lehenengo sinkronizaziora...</string>
   <string name="no_uploads_yet">Oraindik ez duzu argazkirik igo.</string>
   <string name="menu_cancel_upload">Utzi</string>
-  <string name="share_license_summary">Irudi hau %1$ lizentziapean egongo da</string>
+  <string name="share_license_summary">Irudi hau %1$s lizentziapean egongo da</string>
   <string name="menu_download">Jaitsi</string>
   <string name="preference_license">Lizentzia</string>
   <string name="license_name_cc0">CC0</string>

@@ -17,7 +17,7 @@
   <string name="upload_progress_notification_title_start">Rozpoczęto wysyłanie pliku : %1$</string>
   <string name="upload_progress_notification_title_in_progress">Wysyłanie %1$</string>
   <string name="upload_progress_notification_title_finishing">Zakończono wysyłanie pliku %1$</string>
-  <string name="upload_failed_notification_title">Wysyłanie %1$ zakończone porażką</string>
+  <string name="upload_failed_notification_title">Wysyłanie %1$s zakończone porażką</string>
   <string name="upload_failed_notification_subtitle">Kliknij aby zobaczyć</string>
   <string name="title_activity_contributions">Moje wysłane pliki</string>
   <string name="contribution_state_queued">W kolejce</string>

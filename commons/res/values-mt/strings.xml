@@ -11,7 +11,7 @@
   <string name="login_failed">Id-dħul fil-kont ma rnexxiex!</string>
   <string name="authentication_failed">L-awtentikar falla!</string>
   <string name="uploading_started">Beda t-tlugħ!</string>
-  <string name="upload_completed_notification_title">%1$ tela\'!</string>
+  <string name="upload_completed_notification_title">%1$s tela\'!</string>
   <string name="upload_completed_notification_text">Agħfas sabiex tara t-tlugħ tiegħek</string>
   <string name="upload_progress_notification_title_start">Se jibda t-tlugħ ta\' %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Tiela\' %1$s</string>

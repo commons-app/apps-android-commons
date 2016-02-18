@@ -15,7 +15,7 @@
   <string name="upload_completed_notification_title">%1$s আপলোড হয়েছে!</string>
   <string name="upload_completed_notification_text">আপনার আপলোড দেখতে ট্যাপ করুন</string>
   <string name="upload_progress_notification_title_start">%1$s আপলোড শুরু হচ্ছে</string>
-  <string name="upload_progress_notification_title_in_progress">%1$ আপলোড হয়েছে</string>
+  <string name="upload_progress_notification_title_in_progress">%1$s আপলোড হয়েছে</string>
   <string name="upload_progress_notification_title_finishing">%1$s আপলোড শেষ হয়েছে</string>
   <string name="upload_failed_notification_title">%1$s আপলোড ব্যর্থ</string>
   <string name="upload_failed_notification_subtitle">দেখার জন্য ট্যাপ করুন</string>

@@ -52,7 +52,7 @@
     <item quantity="one">එක් උඩුගත කිරීමක්</item>
     <item quantity="other">උඩුගත කිරීම් %d ක්</item>
   </plurals>
-  <string name="categories_not_found">ප්‍රවර්ග සැසඳේන්නේ නැත %1$ හමුවිය</string>
+  <string name="categories_not_found">ප්‍රවර්ග සැසඳේන්නේ නැත %1$s හමුවිsය</string>
   <string name="categories_activity_title">ප්‍රවර්ග</string>
   <string name="preference_tracking">භාවිත වාර්තා</string>
   <string name="title_activity_settings">සැකසුම්</string>
