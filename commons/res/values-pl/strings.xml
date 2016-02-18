@@ -12,11 +12,11 @@
   <string name="login_failed">Logowanie nie powiodło się!</string>
   <string name="authentication_failed">Błąd uwierzytelniania!</string>
   <string name="uploading_started">Wysyłanie rozpoczęte</string>
-  <string name="upload_completed_notification_title">Przesłano %1$!</string>
+  <string name="upload_completed_notification_title">Przesłano %1$s!</string>
   <string name="upload_completed_notification_text">Kliknij aby zobaczyć swój wysłany plik</string>
-  <string name="upload_progress_notification_title_start">Rozpoczęto wysyłanie pliku : %1$</string>
-  <string name="upload_progress_notification_title_in_progress">Wysyłanie %1$</string>
-  <string name="upload_progress_notification_title_finishing">Zakończono wysyłanie pliku %1$</string>
+  <string name="upload_progress_notification_title_start">Rozpoczęto wysyłanie pliku : %1$s</string>
+  <string name="upload_progress_notification_title_in_progress">Wysyłanie %1$s</string>
+  <string name="upload_progress_notification_title_finishing">Zakończono wysyłanie pliku %1$s</string>
   <string name="upload_failed_notification_title">Wysyłanie %1$s zakończone porażką</string>
   <string name="upload_failed_notification_subtitle">Kliknij aby zobaczyć</string>
   <string name="title_activity_contributions">Moje wysłane pliki</string>

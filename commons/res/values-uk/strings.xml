@@ -12,7 +12,7 @@
   <string name="login_failed">Не вдалося увійти!</string>
   <string name="authentication_failed">Помилка автентифікації!</string>
   <string name="uploading_started">Завантаження розпочато!</string>
-  <string name="upload_completed_notification_title">Завантажено %1$!</string>
+  <string name="upload_completed_notification_title">Завантажено %1$s!</string>
   <string name="upload_completed_notification_text">Торкніться, щоб переглянути Ваше завантаження</string>
   <string name="upload_progress_notification_title_start">Розпочинається завантаження %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s завантажується</string>

@@ -60,7 +60,7 @@
     <item quantity="one">1 opplasting</item>
     <item quantity="other">%d opplastinger</item>
   </plurals>
-  <string name="categories_not_found">Ingen kategorier som stemte overens med %1 funnet</string>
+  <string name="categories_not_found">Ingen kategorier som stemte overens med %1$s funnet</string>
   <string name="categories_skip_explanation">Legg til kategorier for å gjøre bildene dine lettere å finne på Wikimedia Commons.
 
 Begynn å skrive navnet på kategoriene.
