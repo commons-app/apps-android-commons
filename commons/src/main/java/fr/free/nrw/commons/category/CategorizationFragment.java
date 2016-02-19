@@ -348,9 +348,9 @@ public class CategorizationFragment extends SherlockFragment{
 
     /**
      * Makes asynchronous calls to the Commons MediaWiki API via anonymous subclasses of
-     * 'MethodAUpdater' and 'PrefixUpdater'. Some of their methods are overridden to implement
-     * more specialized behaviour to aggregate the results. A CountDownLatch is used to ensure that
-     * MethodA results are shown above Prefix results.
+     * 'MethodAUpdater' and 'PrefixUpdater'. Some of their methods are overridden in order to
+     * aggregate the results. A CountDownLatch is used to ensure that MethodA results are shown
+     * above Prefix results.
      */
     private void requestSearchResults() {
 
