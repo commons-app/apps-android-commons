@@ -17,15 +17,17 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import fr.free.nrw.commons.caching.CacheController;
-
+/**
+ * Uses the Volley library to implement asynchronous calls to the Commons MediaWiki API to match
+ * GPS coordinates with nearby Commons categories. Parses the results using GSON to obtain a list
+ * of relevant categories.
+ */
 public class MwVolleyApi {
 
     private static RequestQueue REQUEST_QUEUE;
@@ -66,8 +68,9 @@ public class MwVolleyApi {
 
     /**
      * Builds URL with image coords for MediaWiki API calls
-     * Example URL: https://commons.wikimedia.org/w/api.php?action=query&prop=categories|coordinates|pageprops&format=json&clshow=!hidden&coprop=type|name|dim|country|region|globe&codistancefrompoint=38.11386944444445|13.356263888888888&
-     * generator=geosearch&redirects=&ggscoord=38.11386944444445|13.356263888888888&ggsradius=100&ggslimit=10&ggsnamespace=6&ggsprop=type|name|dim|country|region|globe&ggsprimary=all&formatversion=2
+     * Example URL: https://commons.wikimedia.org/w/api.php?action=query&prop=categories|coordinates|pageprops&format=json&clshow=!hidden&coprop=type|name|dim|country|region|globe&codistancefrompoint=38.11386944444445|13.356263888888888&generator=geosearch&redirects=&ggscoord=38.11386944444445|1.356263888888888&ggsradius=100&ggslimit=10&ggsnamespace=6&ggsprop=type|name|dim|country|region|globe&ggsprimary=all&formatversion=2
+     * @param coords Coordinates to build query with
+     * @return URL for API query
      */
     private String buildUrl (String coords){
 
@@ -134,7 +137,6 @@ public class MwVolleyApi {
         @Override
         protected Response<QueryResponse> parseNetworkResponse(NetworkResponse response) {
             String json = parseString(response);
-            //Log.d(TAG, "json=" + json);
             QueryResponse queryResponse = GSON.fromJson(json, QueryResponse.class);
             return Response.success(queryResponse, cacheEntry(response));
         }

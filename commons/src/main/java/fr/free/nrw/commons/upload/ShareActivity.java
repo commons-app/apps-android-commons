@@ -27,8 +27,10 @@ import fr.free.nrw.commons.modifications.ModifierSequence;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
+/**
+ * Activity for the title/desc screen after image is selected. Also starts processing image
+ * GPS coordinates or user location (if enabled in Settings) for category suggestions.
+ */
 public  class       ShareActivity
         extends     AuthenticatedActivity
         implements  SingleUploadFragment.OnUploadActionInitiated,
@@ -195,6 +197,10 @@ public  class       ShareActivity
         requestAuthToken();
     }
 
+    /**
+     * Initiates retrieval of image coordinates or user coordinates, and caching of coordinates.
+     * Then initiates the calls to MediaWiki API through an instance of MwVolleyApi.
+     */
     @Override
     public void onResume() {
         super.onResume();

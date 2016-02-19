@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.category;
 
-
 import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.Log;
@@ -14,6 +13,11 @@ import java.util.ArrayList;
 
 import fr.free.nrw.commons.CommonsApplication;
 
+/**
+ * Sends asynchronous queries to the Commons MediaWiki API to retrieve categories that are close to
+ * the keyword typed in by the user. The 'srsearch' action-specific parameter is used for this
+ * purpose. This class should be subclassed in CategorizationFragment.java to aggregate the results.
+ */
 public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
 
     private String filter;

@@ -33,7 +33,9 @@ import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
-
+/**
+ * Displays the category suggestion and selection screen. Category search is initiated here.
+ */
 public class CategorizationFragment extends SherlockFragment{
     public static interface OnCategoriesSaveHandler {
         public void onCategoriesSave(ArrayList<String> categories);
@@ -96,6 +98,10 @@ public class CategorizationFragment extends SherlockFragment{
         }
     }
 
+    /**
+     * Retrieves recently-used categories and nearby categories, and merges them without duplicates.
+     * @return a list containing these categories
+     */
     protected ArrayList<String> recentCatQuery() {
         ArrayList<String> items = new ArrayList<String>();
         Set<String> mergedItems = new LinkedHashSet<String>();
@@ -133,7 +139,11 @@ public class CategorizationFragment extends SherlockFragment{
         return mergedItemsList;
     }
 
-
+    /**
+     * Displays categories found to the user as they type in the search box
+     * @param categories a list of all categories found for the search string
+     * @param filter the search string
+     */
     protected void setCatsAfterAsync(ArrayList<String> categories, String filter) {
 
         if (getActivity() != null) {
@@ -338,6 +348,12 @@ public class CategorizationFragment extends SherlockFragment{
         return rootView;
     }
 
+    /**
+     * Makes asynchronous calls to the Commons MediaWiki API via anonymous subclasses of
+     * 'MethodAUpdater' and 'PrefixUpdater'. Some of their methods are overridden in order to
+     * aggregate the results. A CountDownLatch is used to ensure that MethodA results are shown
+     * above Prefix results.
+     */
     private void requestSearchResults() {
 
         final CountDownLatch latch = new CountDownLatch(1);

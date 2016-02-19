@@ -12,6 +12,11 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import java.io.IOException;
 
+/**
+ * Extracts geolocation to be passed to API for category suggestions. If a picture with geolocation
+ * is uploaded, extract latitude and longitude from EXIF data of image. If a picture without
+ * geolocation is uploaded, retrieve user's location (if enabled in Settings).
+ */
 public class GPSExtractor {
 
     private static final String TAG = GPSExtractor.class.getName();
@@ -31,6 +36,10 @@ public class GPSExtractor {
         this.context = context;
     }
 
+    /**
+     * Check if user enabled retrieval of their current location in Settings
+     * @return true if enabled, false if disabled
+     */
     private boolean gpsPreferenceEnabled() {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         boolean gpsPref = sharedPref.getBoolean("allowGps", false);
@@ -38,6 +47,9 @@ public class GPSExtractor {
         return gpsPref;
     }
 
+    /**
+     * Registers a LocationManager to listen for current location
+     */
     protected void registerLocationManager() {
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         criteria = new Criteria();
@@ -55,7 +67,10 @@ public class GPSExtractor {
         locationManager.removeUpdates(myLocationListener);
     }
 
-    //Extract GPS coords of image
+    /**
+     * Extracts geolocation of image from EXIF data.
+     * @return coordinates of image as string (needs to be passed as a String in API query)
+     */
     public String getCoords() {
 
         ExifInterface exif;
@@ -136,7 +151,10 @@ public class GPSExtractor {
         return decLongitude;
     }
 
-    //Converts format of coords into decimal coords as required by MediaWiki API
+    /**
+     * Converts format of geolocation into decimal coordinates as required by MediaWiki API
+     * @return the coordinates in decimals
+     */
     private String getDecimalCoords(String latitude, String latitude_ref, String longitude, String longitude_ref) {
 
         if (latitude_ref.equals("N")) {
