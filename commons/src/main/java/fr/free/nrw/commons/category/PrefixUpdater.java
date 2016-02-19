@@ -13,6 +13,12 @@ import java.util.ArrayList;
 
 import fr.free.nrw.commons.CommonsApplication;
 
+/**
+ * Sends asynchronous queries to the Commons MediaWiki API to retrieve categories that share the
+ * same prefix as the keyword typed in by the user. The 'acprefix' action-specific parameter is used
+ * for this purpose. This class should be subclassed in CategorizationFragment.java to aggregate
+ * the results.
+ */
 public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
 
     private String filter;
