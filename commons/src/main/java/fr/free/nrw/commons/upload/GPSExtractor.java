@@ -173,7 +173,7 @@ public class GPSExtractor {
         Log.d("Coords", "Latitude and Longitude are " + decimalCoords);
         return decimalCoords;
     }
-    
+
     private double convertToDegree(String stringDMS){
         double result;
         String[] DMS = stringDMS.split(",", 3);
