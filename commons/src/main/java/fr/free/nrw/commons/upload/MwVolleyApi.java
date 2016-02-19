@@ -24,7 +24,9 @@ import java.util.List;
 import java.util.Set;
 
 /**
- *
+ * Uses the Volley library to implement asynchronous calls to the Commons MediaWiki API to match
+ * GPS coordinates with nearby Commons categories. Parses the results using GSON to obtain a list
+ * of relevant categories.
  */
 public class MwVolleyApi {
 
