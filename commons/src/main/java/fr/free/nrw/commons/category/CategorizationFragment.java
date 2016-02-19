@@ -33,7 +33,9 @@ import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
-
+/**
+ * Displays the category suggestion and selection screen. Category search is initiated here.
+ */
 public class CategorizationFragment extends SherlockFragment{
     public static interface OnCategoriesSaveHandler {
         public void onCategoriesSave(ArrayList<String> categories);
