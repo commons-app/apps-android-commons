@@ -339,7 +339,7 @@ public class MediaDetailFragment extends SherlockFragment {
     private String prettyLicense(Media media) {
         String licenseKey = media.getLicense();
         Log.d("Commons", "Media license is: " + licenseKey);
-        if (licenseKey.equals("")) {
+        if (licenseKey == null || licenseKey.equals("")) {
             return getString(R.string.detail_license_empty);
         }
         License licenseObj = licenseList.get(licenseKey);
