@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <licenses xmlns="https://www.mediawiki.org/wiki/Extension:UploadWizard/xmlns/licenses">
-  <license id="cc-by-4.0" template="cc-by-4.0" url="https://creativecommons.org/licenses/by-sa/4.0/deed.$lang"/>
+  <license id="cc-by-4.0" template="cc-by-4.0" url="https://creativecommons.org/licenses/by/4.0/deed.$lang"/>
   <license id="cc-by-sa-4.0" template="cc-by-sa-4.0" url="https://creativecommons.org/licenses/by-sa/4.0/deed.$lang"/>
   <license id="cc-by-sa-3.0" template="cc-by-sa-3.0" url="https://creativecommons.org/licenses/by-sa/3.0/deed.$lang"/>
   <license id="cc-by-sa-3.0-at" template="cc-by-sa-3.0-at" url="https://creativecommons.org/licenses/by-sa/3.0/at/deed.$lang"/>
