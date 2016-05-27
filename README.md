@@ -47,7 +47,7 @@ This software is licensed under the [Apache License][5].
 
 ## Bugs ##
 
-Please report any bugs [on Github][3].
+Please report any bug [on Github][3].
 
 ## Code Structure ##
 
