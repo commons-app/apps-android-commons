@@ -27,7 +27,7 @@ Initially started by the Wikimedia Foundation, this app is now maintained by vol
 2. Open IntelliJ/Android Studio. Tick the box for the Maven Integration plugin by selecting:  
  	File > Settings > Plugins > Maven Integration  
 	or  
-	(From Quick Start menu): Configure > Settings > Plugins > Maven Integration
+	(From Quick Start menu): Configure > Plugins > Maven Integration
 3. Import Project:  
 	File > Import Project  
 	or  
