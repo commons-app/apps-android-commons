@@ -24,11 +24,14 @@ Initially started by the Wikimedia Foundation, this app is now maintained by vol
 [Download IntelliJ][6] or [Download Android Studio][7]. (Note: The steps below currently only work on Android Studio 1.5 and below)
 
 1. Clone the repository.
-2. Open IntelliJ/Android Studio. Ensure Maven integration plugin is enabled (File > Settings > Plugins > Maven integration).
-3. Import Project:  
-	File -> Import Project  
+2. Open IntelliJ/Android Studio. Tick the box for the Maven Integration plugin by selecting:  
+ 	File > Settings > Plugins > Maven Integration  
 	or  
-	Select 'Import Project' from the Quick Start menu  
+	(From Quick Start menu): Configure > Settings > Plugins > Maven Integration
+3. Import Project:  
+	File > Import Project  
+	or  
+	(From Quick Start menu): 'Import Project'
 4. Navigate to the folder with the cloned repository and press 'OK'.
 5. Select 'Import Project from external model' -> 'Maven' and press 'Next'.
 6. Make sure 'Search for projects recursively' and 'Import Maven projects automatically' are checked. Select 'Next'.
