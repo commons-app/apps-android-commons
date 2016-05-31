@@ -58,7 +58,7 @@
     <item quantity="other">%d 上傳</item>
   </plurals>
   <string name="categories_not_found">沒有發現與 %1$s 匹配的分類</string>
-  <string name="categories_skip_explanation">添加分類使您的相片在維基共享資源上更容易發現。
+  <string name="categories_explanation">添加分類使您的相片在維基共享資源上更容易發現。
 
 開始輸入要添加的分類。
 按此（或按返回）跳過此步驟。</string>

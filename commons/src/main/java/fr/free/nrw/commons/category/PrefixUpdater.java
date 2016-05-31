@@ -36,7 +36,7 @@ public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
         catFragment.categoriesSearchInProgress.setVisibility(View.VISIBLE);
         catFragment.categoriesNotFoundView.setVisibility(View.GONE);
 
-        catFragment.categoriesSkip.setVisibility(View.GONE);
+        catFragment.categoriesExplain.setVisibility(View.GONE);
     }
 
     @Override

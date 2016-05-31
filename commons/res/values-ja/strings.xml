@@ -44,7 +44,7 @@
   <string name="categories_search_text_hint">検索するカテゴリ</string>
   <string name="menu_save_categories">保存</string>
   <string name="categories_not_found">%1$s に一致するカテゴリが見つかりません</string>
-  <string name="categories_skip_explanation">あなたの画像をウィキメディア・コモンズで見つけやすくするためにカテゴリを追加してください。
+  <string name="categories_explanation">あなたの画像をウィキメディア・コモンズで見つけやすくするためにカテゴリを追加してください。
 
 カテゴリ名の入力を開始してください。
 この手順をスキップするにはこのメッセージをタップしてください(または戻るボタン)。</string>

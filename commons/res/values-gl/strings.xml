@@ -58,7 +58,7 @@
     <item quantity="other">%d cargas</item>
   </plurals>
   <string name="categories_not_found">Non se atopou ningunha categoría que coincidise con \"%1$s\"</string>
-  <string name="categories_skip_explanation">Engada categorías para facer máis accesibles as súas imaxes na Wikimedia Commons.
+  <string name="categories_explanation">Engada categorías para facer máis accesibles as súas imaxes na Wikimedia Commons.
 
 Comece a escribir para engadir categorías.
 Prema nesta mensaxe (ou no botón \"Atrás\") para saltar este paso.</string>

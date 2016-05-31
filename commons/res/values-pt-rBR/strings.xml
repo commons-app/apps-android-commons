@@ -53,7 +53,7 @@
     <item quantity="other">%d envios</item>
   </plurals>
   <string name="categories_not_found">Nenhuma categoria correspondente %1$s encontrada</string>
-  <string name="categories_skip_explanation">Adicione categorias para fazer suas imagens mais vistas no Wikimedia Commons. 
+  <string name="categories_explanation">Adicione categorias para fazer suas imagens mais vistas no Wikimedia Commons. 
 
 Comece a digitar para adicionar categorias.
 Aperte nesta mensagem (ou aperte para voltar) para pular este passo</string>

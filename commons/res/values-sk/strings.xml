@@ -44,7 +44,7 @@
   <string name="categories_search_text_hint">Vyhľadávanie kategórií</string>
   <string name="menu_save_categories">Uložiť</string>
   <string name="categories_not_found">Žiadne kategórie nezodpovedajú „%1$s“</string>
-  <string name="categories_skip_explanation">Pridajte kategórie, aby boli vaše obrázky možné na Wikimedia Commons nájsť.
+  <string name="categories_explanation">Pridajte kategórie, aby boli vaše obrázky možné na Wikimedia Commons nájsť.
 
 Na pridanie kategórií začnite písať.
 Kliknite na tento odkaz (alebo na späť) ak chcete tento krok vynechať.</string>

@@ -45,7 +45,7 @@
   <string name="categories_search_text_hint">חיפוש קטגוריות</string>
   <string name="menu_save_categories">שמירה</string>
   <string name="categories_not_found">לא נמצאו קטגוריות בשם %1$s</string>
-  <string name="categories_skip_explanation">נא להוסיף קטגוריות כדי שיהיה קל יותר למצוא את התמונות שלך בוויקישיתוף.
+  <string name="categories_explanation">נא להוסיף קטגוריות כדי שיהיה קל יותר למצוא את התמונות שלך בוויקישיתוף.
 
 כדי להוסיף קטגוריה יש להתחיל לכתוב.
 יש ללחוץ על ההודעה הזאת או על כפתור \"חזרה\" כדי לדלג על הצעד הזה.</string>

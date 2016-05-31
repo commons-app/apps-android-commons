@@ -21,7 +21,7 @@ Initially started by the Wikimedia Foundation, this app is now maintained by vol
 
 ### Import and Compile Commons Android App ##
 
-[Download IntelliJ][6] or [Download Android Studio][7]. 
+[Download IntelliJ][6] or [Download Android Studio][7]. (Note: The steps below currently only work on Android Studio 1.5 and below)
 
 1. Clone the repository.
 2. Open IntelliJ/Android Studio. Ensure Maven integration plugin is enabled (File > Settings > Plugins > Maven integration).
@@ -39,7 +39,9 @@ Initially started by the Wikimedia Foundation, this app is now maintained by vol
 11. Select 'Finish'.
 12. After the program opens select 'Make project' - there should be errors.
 13. Near the top of the file that is opened up, one of the offending lines should be "import android.support.v4.app.FragmentActivity;" - put your cursor on that line and hit 'alt'/'option'+'enter' to bring up the AutoFix dialog. Select the 'compatibility' option.
-14. Select 'Make project' again. It should compile successfully.
+14. File -> Project Structure -> Project and ensure the Project SDK is set to at least API 23. This is required for DocumentsContract to work.
+15. File -> Project Structure -> Modules and select 'commons'. Select the 'Dependencies' tab and click the green '+' button. Select 'JARs or directories' and navigate to the 'lib' folder. Select all the .jars in that folder and click 'OK'. This imports the QuadTree and GSON libraries.
+16. Select 'Make project' again. It should compile successfully.
 
 ## License ##
 

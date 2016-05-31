@@ -4,25 +4,30 @@ import android.app.Activity;
 import android.content.ContentProviderClient;
 import android.content.Context;
 import android.database.Cursor;
-import android.os.*;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.RemoteException;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.*;
-import android.widget.*;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.CheckedTextView;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import fr.free.nrw.commons.Utils;
-import org.mediawiki.api.ApiResult;
-import org.mediawiki.api.MWApi;
-import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.upload.MwVolleyApi;
 
-import java.io.IOException;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -32,6 +37,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
+
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.upload.MwVolleyApi;
 
 /**
  * Displays the category suggestion and selection screen. Category search is initiated here.
@@ -45,7 +54,7 @@ public class CategorizationFragment extends SherlockFragment{
     protected EditText categoriesFilter;
     ProgressBar categoriesSearchInProgress;
     TextView categoriesNotFoundView;
-    TextView categoriesSkip;
+    TextView categoriesExplain;
 
     CategoriesAdapter categoriesAdapter;
     ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(2);
@@ -167,8 +176,8 @@ public class CategorizationFragment extends SherlockFragment{
 
             if (categories.isEmpty()) {
                 if (TextUtils.isEmpty(filter)) {
-                    // If we found no recent cats, show the skip message!
-                    categoriesSkip.setVisibility(View.VISIBLE);
+                    // If we found no recent cats, show the explanation message!
+                    categoriesExplain.setVisibility(View.VISIBLE);
                 } else {
                     categoriesNotFoundView.setText(getString(R.string.categories_not_found, filter));
                     categoriesNotFoundView.setVisibility(View.VISIBLE);
@@ -297,14 +306,7 @@ public class CategorizationFragment extends SherlockFragment{
         categoriesFilter = (EditText) rootView.findViewById(R.id.categoriesSearchBox);
         categoriesSearchInProgress = (ProgressBar) rootView.findViewById(R.id.categoriesSearchInProgress);
         categoriesNotFoundView = (TextView) rootView.findViewById(R.id.categoriesNotFound);
-        categoriesSkip = (TextView) rootView.findViewById(R.id.categoriesExplanation);
-
-        categoriesSkip.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                getActivity().onBackPressed();
-                getActivity().finish();
-            }
-        });
+        categoriesExplain = (TextView) rootView.findViewById(R.id.categoriesExplanation);
 
         ArrayList<CategoryItem> items;
         if(savedInstanceState == null) {

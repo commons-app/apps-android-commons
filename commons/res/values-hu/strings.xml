@@ -45,7 +45,7 @@
   <string name="categories_search_text_hint">Keresés a kategóriák között</string>
   <string name="menu_save_categories">Mentés</string>
   <string name="categories_not_found">Nincs a(z) „%1$s” keresési kifejezésnek megfelelő kategória</string>
-  <string name="categories_skip_explanation">Adj kategóriákat a képekhez, hogy könnyebben meg lehessen találni őket a Commonson.
+  <string name="categories_explanation">Adj kategóriákat a képekhez, hogy könnyebben meg lehessen találni őket a Commonson.
 
 Kezdd el beírni a kategória nevét, hogy hozzáadd.
 Kattints erre az üzenetre a lépés kihagyásához</string>

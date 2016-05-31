@@ -44,7 +44,7 @@
   <string name="categories_search_text_hint">Archwilio\'r categorïau</string>
   <string name="menu_save_categories">Cadw</string>
   <string name="categories_not_found">Dim categori\'n cyfateb i %1$s ar gael</string>
-  <string name="categories_skip_explanation">Cychwynwch deipio i ychwanegu categoriau.
+  <string name="categories_explanation">Cychwynwch deipio i ychwanegu categoriau.
 Cyffyrddwch y neges hon (neu ddewis Nôl) i fynd i\'r cam nesaf.</string>
   <string name="categories_activity_title">Categorïau</string>
   <string name="preference_tracking">Adroddiadau ar y defnydd</string>

@@ -58,7 +58,7 @@
     <item quantity="other">%d Fichieren eropgelueden</item>
   </plurals>
   <string name="categories_not_found">D\'Kategorie %1$s gouf net fonnt</string>
-  <string name="categories_skip_explanation">Fänkt u mat Tippen fir Kategorien derbäizesetzen.
+  <string name="categories_explanation">Fänkt u mat Tippen fir Kategorien derbäizesetzen.
 Klickt op dëse Message (oder dréck op Zréck) fir dëse Schrëtt z\'iwwersprangen.</string>
   <string name="categories_activity_title">Kategorien</string>
   <string name="preference_tracking">Rapporten iwwer de Gebrauch</string>
