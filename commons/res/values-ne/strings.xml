@@ -44,7 +44,7 @@
   <string name="categories_search_text_hint">खोज श्रेणीहरू</string>
   <string name="menu_save_categories">संग्रह गर्ने</string>
   <string name="categories_not_found">मिल्दो वर्ग %1$s फेला परेन</string>
-  <string name="categories_skip_explanation">विकिमीडिया कमन्समा आफ्नो तस्वीरहरू थप भेट्टाउने बनाउन वर्नहरू थप्नुहोस।
+  <string name="categories_explanation">विकिमीडिया कमन्समा आफ्नो तस्वीरहरू थप भेट्टाउने बनाउन वर्नहरू थप्नुहोस।
 
 वर्गहरू थप्नको लागि टाइप गर्न सुरु गर्नुहोस्।
 यो चरण छोड्न यो सन्देशमा ट्याप गर्नुहोस् (वा पछाडि जाने थिच्नुहोस्)।</string>

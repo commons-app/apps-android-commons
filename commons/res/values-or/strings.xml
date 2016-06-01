@@ -44,7 +44,7 @@
   <string name="categories_search_text_hint">ଶ୍ରେଣୀଗୁଡ଼ିକ ଖୋଜନ୍ତୁ</string>
   <string name="menu_save_categories">ସାଇତିବେ [Save]</string>
   <string name="categories_not_found">%1$s ସହ ମେଳ ହେଉଥିବା କୌଣସି ଶ୍ରେଣୀ ମିଳିଲା ନାହିଁ</string>
-  <string name="categories_skip_explanation">ଶ୍ରେଣୀମାନ ଯୋଡ଼ିବା ପାଇଁ ଟାଇପ କରନ୍ତୁ ।
+  <string name="categories_explanation">ଶ୍ରେଣୀମାନ ଯୋଡ଼ିବା ପାଇଁ ଟାଇପ କରନ୍ତୁ ।
 ଏହି ସୋପାନଟି ବାଦ ଦେବା ପାଇଁ ମେସେଜଟି ଉପରେ ଟ୍ୟାପ କରନ୍ତୁ (କିମ୍ବା ପଛକୁ ଫେରନ୍ତୁ) ।</string>
   <string name="categories_activity_title">ଶ୍ରେଣୀସମୂହ</string>
   <string name="preference_tracking">ବ୍ୟବହାର ବିବରଣୀ</string>

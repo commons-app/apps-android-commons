@@ -44,7 +44,7 @@
   <string name="categories_search_text_hint">Leita í bólkum</string>
   <string name="menu_save_categories">Goym</string>
   <string name="categories_not_found">Ongin bólkur sum passaði saman við %1$s varð funnin</string>
-  <string name="categories_skip_explanation">Legg bólkar til fyri at tínar myndir verða lættari at finna á Wikimedia Commons.
+  <string name="categories_explanation">Legg bólkar til fyri at tínar myndir verða lættari at finna á Wikimedia Commons.
 
 Byrja við at skriva fyri at leggja bólkar til.
 Trýst hetta boðið (ella vend aftur) fyri at droppa hetta stigið.</string>

@@ -52,7 +52,7 @@
   <string name="starting_multiple_uploads">Memulakan %d kerja muat naik</string>
   <string name="multiple_uploads_title">1 muatnaikan</string>
   <string name="categories_not_found">Tiada kategori yang sepadan dengan %1$s dijumpai</string>
-  <string name="categories_skip_explanation">Tambahkan kategori supaya gambar-gambar anda lebih senang ditemui di Wikimedia Commons.
+  <string name="categories_explanation">Tambahkan kategori supaya gambar-gambar anda lebih senang ditemui di Wikimedia Commons.
 
 Mula menaip untuk menambahkan kategori.
 Ketik mesej ini (atau tekan butang undur) untuk melangkau langkah ini.</string>

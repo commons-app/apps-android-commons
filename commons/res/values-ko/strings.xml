@@ -54,7 +54,7 @@
     <item quantity="other">%d 장 업로드</item>
   </plurals>
   <string name="categories_not_found">%1$s와(과) 일치하는 분류를 찾을 수 없습니다</string>
-  <string name="categories_skip_explanation">위키미디어 공용에 그림을 더 찾을 수 있도록 분류를 추가합니다.
+  <string name="categories_explanation">위키미디어 공용에 그림을 더 찾을 수 있도록 분류를 추가합니다.
 
 분류를 추가하려면 입력을 시작하세요.
 이 단계를 건너뛰려면 이 메시지를 탭하세요(또는 뒤로를 누르세요).</string>

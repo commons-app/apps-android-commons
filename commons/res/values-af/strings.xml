@@ -44,7 +44,7 @@
   <string name="categories_search_text_hint">Soek kategorieë</string>
   <string name="menu_save_categories">Stoor</string>
   <string name="categories_not_found">Geen kategorieë met \"%1$s\" gevind nie</string>
-  <string name="categories_skip_explanation">Voeg kategorieë by om dit makliker te maak om u beelde op te spoor.
+  <string name="categories_explanation">Voeg kategorieë by om dit makliker te maak om u beelde op te spoor.
 
 Begin tik om kategorieë by te sit.
 Tik die boodskap (of terug) om die stap oor te slaan.</string>

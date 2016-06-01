@@ -61,7 +61,7 @@
     <item quantity="other">%d de încărcări</item>
   </plurals>
   <string name="categories_not_found">Nu s-a găsit nicio categorie corespunzătoare cu %1$s</string>
-  <string name="categories_skip_explanation">Adăugați categorii pentru a facilita găsirea imaginilor dumneavoastră la Wikimedia Commons.
+  <string name="categories_explanation">Adăugați categorii pentru a facilita găsirea imaginilor dumneavoastră la Wikimedia Commons.
 
 Începeți să tastați pentru a adăuga categorii.
 Atingeți acest mesaj (sau mergeți înapoi) pentru a omite acest pas.</string>
