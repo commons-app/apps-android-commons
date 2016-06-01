@@ -42,20 +42,7 @@ Initially started by the Wikimedia Foundation, this app is now maintained by vol
     Select ``Next``.
 10. Select ``Next``.
 11. Select ``Finish``.
-12. Use Javac 1.8. To do this, navigate to:  
-    ``File`` > ``Settings`` > ``Build, Execution, Deployment`` > ``Compiler`` > ``Java Compiler``.
-    Then enter these settings:  
-    ``Use compiler: Javac``  
-    ``Project bytecode version (leave blank for JDK default)`` (leave blank)  
-    ``Per-module bytecode versionn`` - for both (``commons`` and ``commons-parent``) remove the preset value. It should change to ``JDK default``.  
-    Select ``OK``.
-13. Reset the SDK. To do this, navigate to:  
-    ``File`` > ``Project Structure`` > ``Project Settings`` > ``Project``.  
-    Set the ``Project SDK`` to ``Maven Android API 23 Platform`` or ``Android API 23 Platform``.  
-14. Set the language levels. On the sidebar go to ``Project Settings`` > ``Modules``.  
-    Select the ``Sources`` tab on the right pane  
-    Go through ``commons``, ``commons-parent``, ``~apklib-com.actionbarsherlock_actionbarsherlock_4.4.0``, and ``~apklib-com.viewpagerindicator_library_2.4.1``. For all of them set ``Language level`` to ``Project default (8 - Lambdas, type annotations etc.)``
-15. Set the Module SDKs.  
+12. Set the Module SDKs.  
     Select the ``Dependencies`` tab on the right pane.  
     Set the modules as follows:  
 
@@ -66,14 +53,14 @@ Initially started by the Wikimedia Foundation, this app is now maintained by vol
 	| ~apklib-com.actionbarsherlock_actionbarsherlock_4.4.0 | Maven Android API 14 Platform         |
 	| ~apklib-com.viewpagerindicator_library_2.4.1          | Maven Android API 16 Platform         |
 
-    If these modules are not available, install the correct API levels through the SDK manager. To do this do the following:  
+    If certain modules are not available, install the correct API levels through the SDK manager. To do this do the following:  
     
     * Click ``Cancel``. Navigate to ``File`` > ``Settings`` > ``Appearance & Behaviour`` > ``System Settings`` > ``Android SDK``.  
     * Tick the boxes for API levels ``14``, ``16``, and ``23`` (or Android ``4.0``, ``4.1.2`` and ``6.0``).  
     * Then click ``OK``, and allow it to download the new APIs. Once it has finished, click ``File`` > ``Project Structure`` > ``Project Settings`` > ``Modules``, and repeat step 15.
-16. Select ``commons``. Click the green ``+`` button on the right. Select ``JARs or directories...``. Choose the ``apps-android-commons/lib`` folder. Select ``OK``.
-17. Select ``OK`` to save your changes to the project structre settings.
-18. To test it worked, check if it builds (Select ``commons`` on the projects panel. Select ``Build`` > ``Make Module 'commons'``). If there are no errors (warnings are OK) you're set!
+13. Select ``commons``. Click the green ``+`` button on the right. Select ``JARs or directories...``. Choose the ``apps-android-commons/lib`` folder. Select ``OK``.
+14. Select ``OK`` to save your changes to the project structre settings.
+15. To test it worked, check if it builds (Select ``commons`` on the projects panel. Select ``Build`` > ``Make Module 'commons'``). If there are no errors (warnings are OK) you're set!
 
 ## License ##
 
