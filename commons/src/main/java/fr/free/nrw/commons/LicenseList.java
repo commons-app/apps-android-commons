@@ -53,7 +53,7 @@ public class LicenseList {
     }
 
     public String nameIdForTemplate(String template) {
-        // hack :D
+        // hack :D (converts dashes and periods to underscores)
         // cc-by-sa-3.0 -> cc_by_sa_3_0
         return "license_name_" + template.toLowerCase().replace("-", "_").replace(".", "_");
     }
@@ -68,8 +68,11 @@ public class LicenseList {
         Log.d("Commons", "LicenseList.nameForTemplate: stringId: " + stringId);
         int nameId = stringIdByName(stringId);
         Log.d("Commons", "LicenseList.nameForTemplate: nameId: " + nameId);
-        String name = res.getString(nameId);
-        Log.d("Commons", "LicenseList.nameForTemplate: name: " + name);
-        return name;
+        if(nameId != 0) {
+            String name = res.getString(nameId);
+            Log.d("Commons", "LicenseList.nameForTemplate: name: " + name);
+            return name;
+        }
+        return template;
     }
 }
