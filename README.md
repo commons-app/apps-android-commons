@@ -6,7 +6,7 @@ Initially started by the Wikimedia Foundation, this app is now maintained by vol
 
 ## Build Requirements ##
 
-1. [Android SDK][1] (Level 22)
+1. [Android SDK][1] (Level 23)
 2. [Maven][2]
 
 ## Build Instructions ##
@@ -21,27 +21,46 @@ Initially started by the Wikimedia Foundation, this app is now maintained by vol
 
 ### Import and Compile Commons Android App ##
 
-[Download IntelliJ][6] or [Download Android Studio][7]. (Note: The steps below currently only work on Android Studio 1.5 and below)
+[Download IntelliJ][6] or [Download Android Studio 1.5.2][7]. (Note: The steps below currently only work on Android Studio 1.5.2 and below)
 
 1. Clone the repository.
-2. Open IntelliJ/Android Studio. Ensure Maven integration plugin is enabled (File > Settings > Plugins > Maven integration).
-3. Import Project:  
-	File -> Import Project  
+2. Open IntelliJ/Android Studio. Tick the box for the Maven Integration plugin by selecting:  
+ 	``File`` > ``Settings`` > ``Plugins`` > ``Maven Integration``  
 	or  
-	Select 'Import Project' from the Quick Start menu  
-4. Navigate to the folder with the cloned repository and press 'OK'.
-5. Select 'Import Project from external model' -> 'Maven' and press 'Next'.
-6. Make sure 'Search for projects recursively' and 'Import Maven projects automatically' are checked. Select 'Next'.
-7. This section needs no modification. Select 'Next'.
-8. This section needs no modification. Select 'Next'.
-9. Make sure the 'Android SDK home path' points to the 'android-sdk' folder. If the dropdown next to 'Java SDK' is empty, hit the '+' button avobe the sidebar and select 'JDK'. Navigate to your jdk folder, select it, and hit 'OK'. Now select the newly added JDK and hit 'Next'.
-10. This section needs no modifications. Select 'Next'.
-11. Select 'Finish'.
-12. After the program opens select 'Make project' - there should be errors.
-13. Near the top of the file that is opened up, one of the offending lines should be "import android.support.v4.app.FragmentActivity;" - put your cursor on that line and hit 'alt'/'option'+'enter' to bring up the AutoFix dialog. Select the 'compatibility' option.
-14. File -> Project Structure -> Project and ensure the Project SDK is set to at least API 23. This is required for DocumentsContract to work.
-15. File -> Project Structure -> Modules and select 'commons'. Select the 'Dependencies' tab and click the green '+' button. Select 'JARs or directories' and navigate to the 'lib' folder. Select all the .jars in that folder and click 'OK'. This imports the QuadTree and GSON libraries.
-16. Select 'Make project' again. It should compile successfully.
+	(From Quick Start menu): ``Configure`` > ``Plugins`` > ``Maven Integration``
+3. Import Project:  
+	``File`` > ``Import Project``  
+	or  
+	(From Quick Start menu): ``Import Project (Eclipse ADT, Gradle, etc.)``
+4. Navigate to the folder with the cloned repository (named apps-android-commons). Select ``OK``.
+5. Select ``Import Project from external model`` > ``Maven``. Select ``Next``.
+6. Tick the boxes ``Search for projects recursively`` and ``Import Maven projects automatically``. Select ``Next``.
+7. Select ``Next``.
+8. Select ``Next``.
+9. Click ``Maven Android API 23 Platform`` or ``Android API 23 Platform`` in the sidebar. Make sure the ``Android SDK home path`` points to the ``/Android/Sdk`` folder. Make sure the ``Java SDK`` is set to 1.8 or higher.  
+    If there are no options for the ``Java SDK``, click the ``+`` button above the sidebar and select 'JDK'. Navigate to your JDK folder, select it, and hit ``OK``, and then select the newly added JDK.  
+    Select ``Next``.
+10. Select ``Next``.
+11. Select ``Finish``.
+12. Set the Module SDKs.  
+    Select the ``Dependencies`` tab on the right pane.  
+    Set the modules as follows:  
+
+	| Name                                                  | Module SDK                            |
+	|-------------------------------------------------------|---------------------------------------|
+	| commons                                               | Project SDK (Android API 23 Platform) |
+	| commons-parent                                        | Project SDK (Android API 23 Platform) |
+	| ~apklib-com.actionbarsherlock_actionbarsherlock_4.4.0 | Maven Android API 14 Platform         |
+	| ~apklib-com.viewpagerindicator_library_2.4.1          | Maven Android API 16 Platform         |
+
+    If certain modules are not available, install the correct API levels through the SDK manager. To do this do the following:  
+    
+    * Click ``Cancel``. Navigate to ``File`` > ``Settings`` > ``Appearance & Behaviour`` > ``System Settings`` > ``Android SDK``.  
+    * Tick the boxes for API levels ``14``, ``16``, and ``23`` (or Android ``4.0``, ``4.1.2`` and ``6.0``).  
+    * Then click ``OK``, and allow it to download the new APIs. Once it has finished, click ``File`` > ``Project Structure`` > ``Project Settings`` > ``Modules``, and repeat step 15.
+13. Select ``commons``. Click the green ``+`` button on the right. Select ``JARs or directories...``. Choose the ``apps-android-commons/lib`` folder. Select ``OK``.
+14. Select ``OK`` to save your changes to the project structre settings.
+15. To test it worked, check if it builds (Select ``commons`` on the projects panel. Select ``Build`` > ``Make Module 'commons'``). If there are no errors (warnings are OK) you're set!
 
 ## License ##
 
@@ -98,4 +117,4 @@ Thumbnail images are not currently cached. (?)
 [4]: http://search.maven.org/
 [5]: https://www.apache.org/licenses/LICENSE-2.0
 [6]: http://www.jetbrains.com/idea/download/index.html
-[7]: http://developer.android.com/sdk/index.html
+[7]: https://sites.google.com/a/android.com/tools/download/studio/builds/1-5-2
