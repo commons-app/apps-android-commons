@@ -188,8 +188,10 @@ public  class       ShareActivity
             mimeType = intent.getType();
         }
 
-        mediaUriString = mediaUri.toString();
-        ImageLoader.getInstance().displayImage(mediaUriString, backgroundImageView);
+        if (mediaUri != null) {
+            mediaUriString = mediaUri.toString();
+            ImageLoader.getInstance().displayImage(mediaUriString, backgroundImageView);
+        }
 
         if(savedInstanceState != null)  {
             contribution = savedInstanceState.getParcelable("contribution");
