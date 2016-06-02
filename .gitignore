@@ -7,6 +7,8 @@
 # Gradle
 .gradle
 local.properties
+/commons/.gradle
+/commons/build
 /commons/app/build
 
 # IDE / Text editor files
