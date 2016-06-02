@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="fr.free.nrw.commons"
-    android:versionCode="28"
-    android:versionName="1.12" >
+    android:versionCode="29"
+    android:versionName="1.13" >
 
     <uses-sdk
         android:minSdkVersion="9"
