@@ -1,7 +1,23 @@
-.idea
-commons/gen-external-apklibs/*
-commons/target/*
-out/*
+# IDEA files
 *.iml
-*.ipr
 *.iws
+*.ipr
+.idea
+
+# Gradle
+.gradle
+local.properties
+/commons/app/build
+
+# IDE / Text editor files
+.nb-gradle
+.nb-gradle-properties
+*.sw[op]
+*~
+*.sublime-*
+.textmate
+.java-version
+
+# OS files
+*.DS_Store
+Thumbs.db
