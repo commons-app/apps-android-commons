@@ -1,0 +1,34 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_from_camera"
+          android:title="@string/menu_from_camera"
+          android:orderInCategory="100"
+          android:showAsAction="always|withText"
+          android:icon="@android:drawable/ic_menu_camera"
+            />
+    <item android:id="@+id/menu_from_gallery"
+        android:title="@string/menu_from_gallery"
+        android:orderInCategory="200"
+        android:showAsAction="always|withText"
+        android:icon="@android:drawable/ic_menu_gallery"
+            />
+    <item android:id="@+id/menu_settings"
+          android:title="@string/menu_settings"
+          android:showAsAction="never"
+          android:icon="@android:drawable/ic_menu_preferences"
+          />
+    <item android:id="@+id/menu_about"
+          android:title="@string/menu_about"
+          android:showAsAction="never"
+          android:icon="@android:drawable/ic_menu_info_details"
+          />
+    <item android:id="@+id/menu_feedback"
+          android:title="@string/menu_feedback"
+          android:showAsAction="never"
+          android:icon="@android:drawable/ic_menu_send"
+            />
+    <item android:id="@+id/menu_refresh"
+          android:title="@string/menu_refresh"
+          android:showAsAction="never"
+          />
+
+</menu>

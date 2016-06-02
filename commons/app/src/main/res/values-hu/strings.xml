@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Wikimedia Commons</string>
+  <string name="app_name_beta">Wikimédia Commons Béta</string>
+  <string name="menu_settings">Beállítások</string>
+  <string name="username">Felhasználónév</string>
+  <string name="password">Jelszó</string>
+  <string name="login">Bejelentkezés</string>
+  <string name="logging_in_title">Belépés...</string>
+  <string name="logging_in_message">Kérlek várj…</string>
+  <string name="login_success">Sikeres bejelentkezés</string>
+  <string name="login_failed">A bejelentkezés nem sikerült.</string>
+  <string name="authentication_failed">Sikertelen azonosítás.</string>
+  <string name="uploading_started">Feltöltés indul.</string>
+  <string name="upload_completed_notification_title">%1$s feltöltve!</string>
+  <string name="upload_completed_notification_text">Feltöltés megtekintése</string>
+  <string name="upload_progress_notification_title_start">Feltöltés indul: %1$s</string>
+  <string name="upload_progress_notification_title_in_progress">%1$s feltöltése</string>
+  <string name="upload_progress_notification_title_finishing">Feltöltés befejezve: %1$s</string>
+  <string name="upload_failed_notification_title">%1$s feltöltése sikertelen</string>
+  <string name="upload_failed_notification_subtitle">Kattints a megtekintéshez</string>
+  <string name="uploads_pending_notification_indicator" fuzzy="true">%d van hátra</string>
+  <string name="title_activity_contributions">Feltöltéseim</string>
+  <string name="contribution_state_queued">Várólistán</string>
+  <string name="contribution_state_failed">Sikertelen.</string>
+  <string name="contribution_state_in_progress">%1$d%% kész</string>
+  <string name="contribution_state_starting">Feltöltés</string>
+  <string name="menu_from_gallery">A galériából</string>
+  <string name="menu_from_camera">Fényképezés</string>
+  <string name="provider_contributions">Feltöltéseim</string>
+  <string name="menu_share">Megosztás</string>
+  <string name="menu_open_in_browser">Megtekintés böngészőben</string>
+  <string name="share_title_hint">Cím</string>
+  <string name="share_description_hint">Leírás</string>
+  <string name="login_failed_network">Nem lehet bejelentkezni - hálózati hiba</string>
+  <string name="login_failed_username">Nem lehet bejelentkezni - ellenőrizd a felhasználóneved</string>
+  <string name="login_failed_password">Nem lehet bejelentkezni - ellenőrizd a jelszavad</string>
+  <string name="login_failed_throttled">Túl sok sikertelen próbálkozás. Próbálkozz újra pár perc múlva</string>
+  <string name="login_failed_blocked">Sajnáljuk, ezt a felhasználót blokkolták a Commonson</string>
+  <string name="login_failed_generic">Bejelentkezési hiba</string>
+  <string name="share_upload_button">Feltöltés</string>
+  <string name="multiple_share_base_title">Nevezd el a gyűjteményt</string>
+  <string name="provider_modifications">Értesítések</string>
+  <string name="menu_upload_single">Feltöltés</string>
+  <string name="categories_search_text_hint">Keresés a kategóriák között</string>
+  <string name="menu_save_categories">Mentés</string>
+  <string name="categories_not_found">Nincs a(z) „%1$s” keresési kifejezésnek megfelelő kategória</string>
+  <string name="categories_skip_explanation">Adj kategóriákat a képekhez, hogy könnyebben meg lehessen találni őket a Commonson.
+
+Kezdd el beírni a kategória nevét, hogy hozzáadd.
+Kattints erre az üzenetre a lépés kihagyásához</string>
+  <string name="categories_activity_title">Kategóriák</string>
+  <string name="preference_tracking">Felhasználási jelentések</string>
+  <string name="preference_tracking_summary">Felhasználási jelentések küldése a Wikimédia részére az alkalmazás fejlesztése érdekében</string>
+  <string name="title_activity_settings">Beállítások</string>
+  <string name="menu_about">Névjegy</string>
+  <string name="about_license">Nyílt forráskódú szoftver &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; alatt kiadva</string>
+  <string name="about_improve">Forráskód a &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHubon&lt;/a&gt;. Hibabejelentés a &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzillán&lt;/a&gt;.</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Adatvédelmi_irányelv\"&gt;Adatvédelmi irányelvek&lt;/a&gt;</string>
+  <string name="title_activity_about">Névjegy</string>
+  <string name="menu_feedback">Visszajelzés küldése (email)</string>
+  <string name="provider_categories">Legutóbb használt kategóriák</string>
+  <string name="waiting_first_sync">Várakozás az első szinkronizálásra...</string>
+  <string name="no_uploads_yet">Még nem töltöttél fel fotókat.</string>
+  <string name="menu_retry_upload">Újra</string>
+  <string name="menu_cancel_upload">Mégse</string>
+  <string name="share_license_summary">Ez a kép %1$s licenc alatt kerül feltöltésre</string>
+  <string name="menu_download">Letöltés</string>
+  <string name="preference_license">Licenc</string>
+  <string name="license_name_cc0">CC0</string>
+  <string name="license_name_fal">Free Art License</string>
+  <string name="license_name_pd_old_100">Közkincs (a szerző több, mint 100 éve halt meg)</string>
+  <string name="license_name_pd_old">Közkincs (a szerzői jog lejárt)</string>
+  <string name="license_name_pd_art">Közkincs (művészet)</string>
+  <string name="license_name_pd_us">Közkincs (USA)</string>
+  <string name="license_name_pd_usgov">Közkincs (USA kormány)</string>
+  <string name="license_name_pd_usgov_nasa">Közkincs (NASA)</string>
+  <string name="license_name_pd_ineligible">Közkincs (szerzői jogra nem jogosult)</string>
+  <string name="license_name_attribution">Nevezd meg!</string>
+  <string name="license_name_gfdl">GNU Szabad Dokumentációs Licenc</string>
+  <string name="welcome_wikipedia_text">Tedd közzé a képeidet! Segíts, hogy a Wikipédia szócikkek életre keljenek!</string>
+  <string name="welcome_wikipedia_subtext">A Wikipédián található képek a Wikimédia Commonsből származnak.</string>
+  <string name="welcome_copyright_text">A képeid segítenek a világ minden táján élő emberek oktatásában.</string>
+  <string name="welcome_copyright_subtext">Kerüld az internetről származó szerzői joggal védett anyagokat, mint a poszterek, könyvborítók, stb.</string>
+  <string name="welcome_final_text">Megértetted?</string>
+  <string name="welcome_final_button_text">Igen!</string>
+  <string name="detail_panel_cats_label">Kategóriák</string>
+  <string name="detail_panel_cats_loading">Betöltés…</string>
+  <string name="detail_panel_cats_none">Nincs kijelölés</string>
+  <string name="detail_description_empty">Nincs leírás</string>
+  <string name="detail_license_empty">Ismeretlen licenc</string>
+  <string name="provider_campaigns">Kampányok</string>
+  <string name="menu_refresh">Frissítés</string>
+</resources>

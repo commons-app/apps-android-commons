@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="#000000"
+        >
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/waiting_first_sync"
+            android:id="@+id/waitingMessage" android:layout_gravity="center" android:visibility="gone"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_uploads_yet"
+            android:id="@+id/emptyMessage" android:layout_gravity="center" android:visibility="gone"/>
+    <GridView android:id="@+id/contributionsList"
+              android:layout_height="fill_parent"
+              android:layout_width="fill_parent"
+              android:stretchMode="columnWidth"
+              android:columnWidth="240dp"
+              android:numColumns="auto_fit"
+              android:listSelector="@null"
+              android:fadingEdge="none"
+              android:fastScrollEnabled="true"
+            />
+
+</LinearLayout>

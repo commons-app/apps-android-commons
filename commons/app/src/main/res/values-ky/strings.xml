@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Уикиказына</string>
+  <string name="app_name_beta">Уикиказына</string>
+  <string name="menu_settings">Ырастоолор</string>
+  <string name="username">Колдонуучунун аты</string>
+  <string name="password">Сырсөз</string>
+  <string name="login">Кирүү</string>
+  <string name="logging_in_title">Системага кирүү</string>
+  <string name="logging_in_message">Сураныч, күтө туруңуз...</string>
+  <string name="login_success">Сиз ийгиликтүү кирдиңиз</string>
+  <string name="login_failed">Системага кирүүдө катачылык бар!</string>
+  <string name="authentication_failed">Таану катачылыгы!</string>
+  <string name="uploading_started">Жүктөө башталды!</string>
+  <string name="upload_completed_notification_title">%1$s жүктөлүүдө</string>
+  <string name="upload_completed_notification_text">Жүктөлгөн файлды көрүү үчүн басыңыз</string>
+  <string name="upload_progress_notification_title_start">Жүктөө %1$s башталды</string>
+  <string name="upload_progress_notification_title_in_progress">%1$s жүктөлүүдө</string>
+  <string name="upload_progress_notification_title_finishing">Жүктөө соңуна жетти %1$s</string>
+  <string name="upload_failed_notification_title">Жүктөө %1$s иш жүзүнө ашкан жок</string>
+  <string name="upload_failed_notification_subtitle">Көрүү үчүн басыңыз</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">1 файл жүктөлүүдө</item>
+    <item quantity="other">%d файл жүктөлүүдө</item>
+  </plurals>
+  <string name="title_activity_contributions">Менин жүктөөлөрүм</string>
+  <string name="contribution_state_queued">Кезек</string>
+  <string name="contribution_state_failed">Жүктөө каталары</string>
+  <string name="contribution_state_in_progress">%1$d%%  соңуна чыкты</string>
+  <string name="contribution_state_starting">Жүктөө</string>
+  <string name="menu_from_gallery">Галереядан алынган</string>
+  <string name="menu_from_camera">Сүрөткө тартуу</string>
+  <string name="provider_contributions">Менин жүктөөлөрүм</string>
+  <string name="menu_share">Бөлүшүү</string>
+  <string name="menu_open_in_browser">Браузерден ачуу</string>
+  <string name="share_title_hint">Аталышы</string>
+  <string name="share_description_hint">Баяндамасы</string>
+  <string name="login_failed_network">Кирүүгө болбой жатат - тармакта үзгүлтүк бар</string>
+  <string name="login_failed_username">Кирүүгө мүмкүн эмес - сураныч, колдонуучу ысымыңызды текшериңиз</string>
+  <string name="login_failed_password">Кирүүгө мүмкүн эмес - сураныч, сыр сөзүңүздү текшериңиз</string>
+  <string name="login_failed_throttled">Өтө көп натыйжасыз иш аракет. Суранабыз, бир нече мүнөттөн кийин кайталаңыз</string>
+  <string name="login_failed_blocked">Кечириңиз, бул кодонуучу Уикиказынада блокко алынган.</string>
+  <string name="login_failed_generic">Системага кирүүдө катачылык бар!</string>
+  <string name="share_upload_button">Жүктөө</string>
+  <string name="multiple_share_base_title">Файлардын бул тайпасынын аталышын жазыңыз</string>
+  <string name="provider_modifications">Өзгөрүүлөр</string>
+  <string name="menu_upload_single">Жүктөө</string>
+  <string name="categories_search_text_hint">Түрмөктөрдү издөө</string>
+  <string name="menu_save_categories">Сактоо</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">Азырынча жүктөөлөр жок</item>
+    <item quantity="one">1 жүктөө</item>
+    <item quantity="other">%d жүктөө</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">1 жүктөө башталды</item>
+    <item quantity="other">%d жүктөө башталды</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">1 жүктөө</item>
+    <item quantity="other">%d жүктөө</item>
+  </plurals>
+  <string name="categories_not_found">%1$s түрмөктөрү табылган жок</string>
+  <string name="categories_skip_explanation">Уикиказынада Сиздин сүрөттөрдү жеңил табуу үчүн түрмөктөрдү кошуңуз.
+
+Түрмөктөрдү жазууну баштаңыз.
+Бул кадамды аттап өтүү үчүн, бул билдирүүнү (же кийинкини) басыңыз.</string>
+  <string name="categories_activity_title">Түрмөктөр</string>
+  <string name="preference_tracking">Отчеттор</string>
+  <string name="preference_tracking_summary">Тиркемени жакшыртуу үчүн Уикимедианы колдонууда отчет жөнөтүү</string>
+  <string name="title_activity_settings">Ырастоолор</string>
+  <string name="menu_about">Тиркеме жөнүндө</string>
+  <string name="about_license">баштапкы коду ачык тиркемелер, &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; лицензиясынын негизинде чыгарылган</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt; шилтемесине баштапкы код. &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt; шилтемесиндеги катачылык.</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Конфиденциалдуулук_саясаты\"&gt;Конфиденциалдуулук саясаты&lt;/a&gt;</string>
+  <string name="title_activity_about">Тиркеме жөнүндө</string>
+  <string name="menu_feedback">Шарттуу жооп жөнөтүү (Email)</string>
+  <string name="provider_categories">Жакында колдонулган түрмөктөр</string>
+  <string name="waiting_first_sync">Алгачкы мезгилдештирүүнү күтүү...</string>
+  <string name="no_uploads_yet">Сиз бир дагы сүрөт жүктөй элексиз.</string>
+  <string name="menu_retry_upload">Кайра аракет кылуу</string>
+  <string name="menu_cancel_upload">Жокко чыгаруу</string>
+  <string name="share_license_summary">Бул сүрөт %1$s лицензияланат</string>
+  <string name="menu_download">Жүктөп алуу</string>
+  <string name="preference_license">Лицензия</string>
+  <string name="license_name_cc_by_sa">CCu00A0Attribution-ShareAlikeu00A03.0</string>
+  <string name="license_name_cc_by">CCu00A0Attributionu00A03.0</string>
+  <string name="license_name_cc0">CC0</string>
+  <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Австрия)</string>
+  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Германия)</string>
+  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Эстония)</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Испания)</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Хорватия)</string>
+  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Люксембург)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Нидерланддар)</string>
+  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Норвегия)</string>
+  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Польша)</string>
+  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Румыния)</string>
+  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_zero">CC Нөл (Zero)</string>
+  <string name="license_name_own_pd">own-pd</string>
+  <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
+  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
+  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
+  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
+  <string name="license_name_cc_2_0">CC BY 2.0</string>
+  <string name="license_name_fal">Free Art Лицензиясы</string>
+  <string name="license_name_pd_old_100">Коомдук дөөлөт (автор 100дөн ашык жыл мурун өлгөн)</string>
+  <string name="welcome_wikipedia_text">Жеке сүрөттөрүңүздү жүктөңүз. Уикипедияда макалаларды жандандырууга салымыңызды кошуңуз!</string>
+  <string name="welcome_wikipedia_subtext">Уикипедиядагы сүрөттөр Уикиказынада жеткиликтүү</string>
+  <string name="welcome_copyright_text">Сиздин сүрөттөр дүйнө жүзүндөгү адамдардын билим алышына өбөлгө түзүүдө.</string>
+  <string name="welcome_copyright_subtext">Интернетте жарыяланган автордук укукка ээ сүрөттөрдөн, ошондой эле плакаттардан жана китептердин мукабасынан ж.б. четтеңиз.</string>
+  <string name="welcome_final_text">Сизге бул түшүнүктүүбү?</string>
+  <string name="welcome_final_button_text">Ооба!</string>
+  <string name="detail_panel_cats_label">Түрмөктөр</string>
+  <string name="detail_panel_cats_loading">Жүктөлүүдө...</string>
+  <string name="detail_panel_cats_none">Тандалган жок</string>
+  <string name="menu_refresh">Жаңылоо</string>
+</resources>

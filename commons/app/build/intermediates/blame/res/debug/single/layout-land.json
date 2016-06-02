@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/build/intermediates/res/merged/debug/layout-land/welcome_wikipedia.xml",
+        "source": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/layout-land/welcome_wikipedia.xml"
+    },
+    {
+        "merged": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/build/intermediates/res/merged/debug/layout-land/welcome_copyright.xml",
+        "source": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/layout-land/welcome_copyright.xml"
+    },
+    {
+        "merged": "/home/adam/Documents/Programming/commons/app/build/intermediates/res/merged/debug/layout-land/welcome_final.xml",
+        "source": "/home/adam/Documents/Programming/commons/app/src/main/res/layout-land/welcome_final.xml"
+    },
+    {
+        "merged": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/build/intermediates/res/merged/debug/layout-land/welcome_final.xml",
+        "source": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/layout-land/welcome_final.xml"
+    },
+    {
+        "merged": "/home/adam/Documents/Programming/commons/app/build/intermediates/res/merged/debug/layout-land/welcome_wikipedia.xml",
+        "source": "/home/adam/Documents/Programming/commons/app/src/main/res/layout-land/welcome_wikipedia.xml"
+    },
+    {
+        "merged": "/home/adam/Documents/Programming/commons/app/build/intermediates/res/merged/debug/layout-land/welcome_copyright.xml",
+        "source": "/home/adam/Documents/Programming/commons/app/src/main/res/layout-land/welcome_copyright.xml"
+    }
+]

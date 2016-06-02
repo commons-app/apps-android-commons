@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="fr.free.nrw.commons"
+    android:versionCode="28"
+    android:versionName="1.12" >
+
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="23" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_SYNC_STATS" />
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <application
+        name="fr.free.nrw.commons.CommonsApplication"
+        android:name="com.android.tools.fd.runtime.BootstrapApplication"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="org.acra.CrashReportDialog"
+            android:excludeFromRecents="true"
+            android:finishOnTaskLaunch="true"
+            android:launchMode="singleInstance"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name="fr.free.nrw.commons.auth.LoginActivity"
+            android:theme="@style/NoTitle" >
+        </activity>
+        <activity
+            android:name="fr.free.nrw.commons.WelcomeActivity"
+            android:theme="@style/NoTitle" >
+        </activity>
+        <activity
+            android:name="fr.free.nrw.commons.upload.ShareActivity"
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="image/*" />
+                <data android:mimeType="audio/ogg" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="fr.free.nrw.commons.upload.MultipleShareActivity"
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="image/*" />
+                <data android:mimeType="audio/ogg" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="fr.free.nrw.commons.contributions.ContributionsActivity"
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="fr.free.nrw.commons.SettingsActivity"
+            android:label="@string/title_activity_settings" />
+        <activity
+            android:name="fr.free.nrw.commons.AboutActivity"
+            android:label="@string/title_activity_about" />
+
+        <service android:name="fr.free.nrw.commons.upload.UploadService" >
+        </service>
+        <service
+            android:name="fr.free.nrw.commons.auth.WikiAccountAuthenticatorService"
+            android:exported="true"
+            android:process=":auth" >
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.accounts.AccountAuthenticator"
+                android:resource="@xml/authenticator" />
+        </service>
+        <service
+            android:name="fr.free.nrw.commons.contributions.ContributionsSyncService"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/contributions_sync_adapter" />
+        </service>
+        <service
+            android:name="fr.free.nrw.commons.modifications.ModificationsSyncService"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/modifications_sync_adapter" />
+        </service>
+
+        <provider
+            android:name="fr.free.nrw.commons.contributions.ContributionsContentProvider"
+            android:authorities="fr.free.nrw.commons.contributions.contentprovider"
+            android:exported="false"
+            android:label="@string/provider_contributions"
+            android:syncable="true" >
+        </provider>
+        <provider
+            android:name="fr.free.nrw.commons.modifications.ModificationsContentProvider"
+            android:authorities="fr.free.nrw.commons.modifications.contentprovider"
+            android:exported="false"
+            android:label="@string/provider_modifications"
+            android:syncable="true" >
+        </provider>
+        <provider
+            android:name="fr.free.nrw.commons.category.CategoryContentProvider"
+            android:authorities="fr.free.nrw.commons.categories.contentprovider"
+            android:exported="false"
+            android:label="@string/provider_categories"
+            android:syncable="false" >
+        </provider>
+    </application>
+
+</manifest>

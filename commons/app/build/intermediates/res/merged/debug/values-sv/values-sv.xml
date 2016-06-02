@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="contributions_subtitle">
+    <item quantity="zero">Inga uppladdningar ännu</item>
+    <item quantity="one">1 uppladdning</item>
+    <item quantity="other">%d uppladdningar</item>
+  </plurals>
+    <plurals name="multiple_uploads_title">
+    <item quantity="one">1 uppladdning</item>
+    <item quantity="other">%d uppladdningar</item>
+  </plurals>
+    <plurals name="starting_multiple_uploads">
+    <item quantity="one">Startar 1 uppladdning</item>
+    <item quantity="other">Startar %d uppladdningar</item>
+  </plurals>
+    <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">1 filuppladdning</item>
+    <item quantity="other">%d filuppladdningar</item>
+  </plurals>
+    <string name="about_improve">Källa på &lt;a href=\"https://github.com/wikimedia/apps-android-commons\">GitHub&lt;/a>. Buggar på &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\">Bugzilla&lt;/a>.</string>
+    <string name="about_license">Programvara med öppen källkod släppt under &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\">licensen Apache v2&lt;/a></string>
+    <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\">Integritetspolicy&lt;/a></string>
+    <string name="app_name">Wikimedia Commons</string>
+    <string name="app_name_beta">Wikimedia Commons Beta</string>
+    <string name="authentication_failed">Autentisering misslyckades!</string>
+    <string name="categories_activity_title">Kategorier</string>
+    <string name="categories_not_found">Inga kategorier som stämmer överens med %1$s hittades</string>
+    <string name="categories_search_text_hint">Sök kategorier</string>
+    <string name="categories_skip_explanation">Lägg till kategorier för att göra dina bilder synliga på Wikimedia Commons.
+
+Börja skriva för att lägga till kategorier.
+Tryck på detta meddelande (eller gå tillbaka) för att hoppa över detta steg.</string>
+    <string name="contribution_state_failed">Misslyckades</string>
+    <string name="contribution_state_in_progress">%1$d%% färdigt</string>
+    <string name="contribution_state_queued">Köade</string>
+    <string name="contribution_state_starting">Laddar upp</string>
+    <string name="crash_dialog_comment_prompt">Beskriv vad du gjorde, och skicka det med e-post till oss. Det hjälper oss att fixa det!</string>
+    <string name="crash_dialog_ok_toast">Tack!</string>
+    <string name="crash_dialog_text">Oj. Något gick fel!</string>
+    <string name="crash_dialog_title">Commons har kraschat</string>
+    <string name="detail_description_empty">Ingen beskrivning</string>
+    <string name="detail_license_empty">Okänd licens</string>
+    <string name="detail_panel_cats_label">Kategorier</string>
+    <string name="detail_panel_cats_loading">Läser in...</string>
+    <string name="detail_panel_cats_none">Ingen markerad</string>
+    <string name="license_name_attribution">Erkännande</string>
+    <string name="license_name_cc0">CC0</string>
+    <string name="license_name_cc_2_0">CC BY 2.0</string>
+    <string name="license_name_cc_by">CC Erkännande 3.0</string>
+    <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
+    <string name="license_name_cc_by_2_5">CC BY 2.5</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="license_name_cc_by_sa">CCu00A0Erkännande-DelaLikau00A03.0</string>
+    <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
+    <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
+    <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+    <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Österrike)</string>
+    <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Tyskland)</string>
+    <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estland)</string>
+    <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Spanien)</string>
+    <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Kroatien)</string>
+    <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxemburg)</string>
+    <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Nederländerna)</string>
+    <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norge)</string>
+    <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polen)</string>
+    <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Rumänien)</string>
+    <string name="license_name_cc_zero">CC Zero</string>
+    <string name="license_name_fal">Free Art License</string>
+    <string name="license_name_gfdl">GNU Free Documentation License</string>
+    <string name="license_name_own_pd">own-pd</string>
+    <string name="license_name_pd_art">Allmän egendom (konst)</string>
+    <string name="license_name_pd_ineligible">Allmän egendom (inte berättigad för upphovsrätt)</string>
+    <string name="license_name_pd_old">Allmän egendom (upphovsrätten har löpt ut)</string>
+    <string name="license_name_pd_old_100">Allmän egendom (författaren dog för över 100 år sedan)</string>
+    <string name="license_name_pd_us">Allmän egendom (USA)</string>
+    <string name="license_name_pd_usgov">Allmän egendom (USA:s regering)</string>
+    <string name="license_name_pd_usgov_nasa">Allmän egendom (NASA)</string>
+    <string name="logging_in_message">Var god vänta...</string>
+    <string name="logging_in_title">Loggar in</string>
+    <string name="login">Logga in</string>
+    <string name="login_failed">Det gick inte att logga in!</string>
+    <string name="login_failed_blocked">Tyvärr, denna användare har blockerats på Commons</string>
+    <string name="login_failed_generic">Inloggningen misslyckades</string>
+    <string name="login_failed_network">Det gick inte att logga in - nätverksfel</string>
+    <string name="login_failed_password">Det gick inte att logga in - var god kontrollera ditt lösenord</string>
+    <string name="login_failed_throttled">För många misslyckade försök. Var god försök igen om några minuter</string>
+    <string name="login_failed_username">Det gick inte att logga in - var god kontrollera ditt användarnamn</string>
+    <string name="login_success">Inloggningen lyckades!</string>
+    <string name="menu_about">Om</string>
+    <string name="menu_cancel_upload">Avbryt</string>
+    <string name="menu_download">Ladda ned</string>
+    <string name="menu_feedback">Skicka feedback (via e-post)</string>
+    <string name="menu_from_camera">Ta foto</string>
+    <string name="menu_from_gallery">Från galleri</string>
+    <string name="menu_open_in_browser">Visa i webbläsaren</string>
+    <string name="menu_refresh">Uppdatera</string>
+    <string name="menu_retry_upload">Försök igen</string>
+    <string name="menu_save_categories">Spara</string>
+    <string name="menu_settings">Inställningar</string>
+    <string name="menu_share">Dela</string>
+    <string name="menu_upload_single">Ladda upp</string>
+    <string name="multiple_share_base_title">Namnge denna uppsättning</string>
+    <string name="no_uploads_yet">Du har inte lagt upp några bilder ännu.</string>
+    <string name="password">Lösenord</string>
+    <string name="preference_license">Licens</string>
+    <string name="preference_tracking">Användningsrapporter</string>
+    <string name="preference_tracking_summary">Skicka användningsrapporter till Wikimedia för att hjälpa oss förbättra appen</string>
+    <string name="provider_campaigns">Kampanjer</string>
+    <string name="provider_categories">Nyligen använda kategorier</string>
+    <string name="provider_contributions">Mina uppladdningar</string>
+    <string name="provider_modifications">Ändringar</string>
+    <string name="share_description_hint">Beskrivning</string>
+    <string name="share_license_summary">Denna bild kommer att licensieras under %1$s</string>
+    <string name="share_title_hint">Titel</string>
+    <string name="share_upload_button">Ladda upp</string>
+    <string name="title_activity_about">Om</string>
+    <string name="title_activity_contributions">Mina uppladdningar</string>
+    <string name="title_activity_settings">Inställningar</string>
+    <string name="upload_completed_notification_text">Tryck för att visa din uppladdning</string>
+    <string name="upload_completed_notification_title">%1$s överförd!</string>
+    <string name="upload_failed_notification_subtitle">Tryck för att visa</string>
+    <string name="upload_failed_notification_title">Uppladdning av %1$s misslyckades</string>
+    <string name="upload_progress_notification_title_finishing">Avslutar uppladdning av %1$s</string>
+    <string name="upload_progress_notification_title_in_progress">%1$s laddas upp</string>
+    <string name="upload_progress_notification_title_start">Påbörjar uppladdning av %1$s</string>
+    <string name="uploading_started">Överföring påbörjad!</string>
+    <string name="username">Användarnamn</string>
+    <string name="waiting_first_sync">Väntar på första synkroniseringen...</string>
+    <string name="welcome_copyright_subtext">Undvik upphovsrättsskyddat material som du hittar på Internet, samt bilder av affischer, bokomslag, etc.</string>
+    <string name="welcome_copyright_text">Dina bilder hjälper till att utbilda människor runt om i världen.</string>
+    <string name="welcome_final_button_text">Ja!</string>
+    <string name="welcome_final_text">Tror du att du förstår?</string>
+    <string name="welcome_wikipedia_subtext">Bilder på Wikipedia kommer från Wikimedia Commons.</string>
+    <string name="welcome_wikipedia_text">Bidra med dina bilder. Hjälp Wikipedia-artiklar att komma till liv!</string>
+</resources>

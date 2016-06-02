@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="contributions_subtitle">
+    <item quantity="zero">Ingen opplastinger enda</item>
+    <item quantity="one">1 opplasting</item>
+    <item quantity="other">%d opplastinger</item>
+  </plurals>
+    <plurals name="multiple_uploads_title">
+    <item quantity="one">1 opplasting</item>
+    <item quantity="other">%d opplastinger</item>
+  </plurals>
+    <plurals name="starting_multiple_uploads">
+    <item quantity="one">Starter 1 opplasting</item>
+    <item quantity="other">Starter %d opplastinger</item>
+  </plurals>
+    <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">1 fil lastes opp</item>
+    <item quantity="other">%d filer lastes opp</item>
+  </plurals>
+    <string name="about_improve">Kildekode på &lt;a href=\"https://github.com/wikimedia/apps-android-commons\">GitHub&lt;/a>. Feilmeldinger på &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\">Bugzilla&lt;/a>.</string>
+    <string name="about_license">Åpen kildekode programvare sluppet under &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\">Apache License v2&lt;/a></string>
+    <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\">Personvernpolicy&lt;/a></string>
+    <string name="app_name">Wikimedia Commons</string>
+    <string name="app_name_beta">Wikimedia Commons Beta</string>
+    <string name="authentication_failed">Autentiseringen feilet!</string>
+    <string name="categories_activity_title">Kategorier</string>
+    <string name="categories_not_found">Ingen kategorier som stemte overens med %1$s funnet</string>
+    <string name="categories_search_text_hint">Søk kategorier</string>
+    <string name="categories_skip_explanation">Legg til kategorier for å gjøre bildene dine lettere å finne på Wikimedia Commons.
+
+Begynn å skrive navnet på kategoriene.
+Trykk på denne meldingen (eller trykk tilbake) for å hoppe over dette steget.</string>
+    <string name="contribution_state_failed">Feilet</string>
+    <string name="contribution_state_in_progress">%1$d%% ferdig</string>
+    <string name="contribution_state_queued">I ventekø</string>
+    <string name="contribution_state_starting">Laster opp</string>
+    <string name="crash_dialog_comment_prompt">Beskriv hva du gjorde, og del det med oss per e-post. Det hjelper oss med å ordne det!</string>
+    <string name="crash_dialog_ok_toast">Takk!</string>
+    <string name="crash_dialog_text">Oisann. Noe gikk galt!</string>
+    <string name="crash_dialog_title">Commons har kræsjet</string>
+    <string name="detail_description_empty">Ingen beskrivelse</string>
+    <string name="detail_license_empty">Ukjent lisens</string>
+    <string name="detail_panel_cats_label">Kategorier</string>
+    <string name="detail_panel_cats_loading">Laster...</string>
+    <string name="detail_panel_cats_none">Ingen valgt</string>
+    <string name="license_name_attribution">Navngivelse</string>
+    <string name="license_name_cc0">CC0</string>
+    <string name="license_name_cc_2_0">CC BY 2.0</string>
+    <string name="license_name_cc_by">CCu00A0Navngivelseu00A03.0</string>
+    <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
+    <string name="license_name_cc_by_2_5">CC BY 2.5</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="license_name_cc_by_sa">CCu00A0Navngivelse-DelPåSammeVilkåru00A03.0</string>
+    <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
+    <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
+    <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+    <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Østerrike)</string>
+    <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Tyskland)</string>
+    <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estland)</string>
+    <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Spania)</string>
+    <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Kroatia)</string>
+    <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxembourg)</string>
+    <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Nederland)</string>
+    <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norge)</string>
+    <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polen)</string>
+    <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romania)</string>
+    <string name="license_name_cc_zero">CC Zero</string>
+    <string name="license_name_fal">Licence Art Libre</string>
+    <string name="license_name_gfdl">GNU fri dokumentasjonslisens</string>
+    <string name="license_name_own_pd">own-pd</string>
+    <string name="license_name_pd_art">Offentlig eiendom (kunst)</string>
+    <string name="license_name_pd_ineligible">Offentlig eiendom (ikke mulig å opphavsrettsbeskytte)</string>
+    <string name="license_name_pd_old">Offentlig eiendom (opphavsretten er utløpt)</string>
+    <string name="license_name_pd_old_100">Offentlig eiendom (opphavsperson døde for over 100 år siden)</string>
+    <string name="license_name_pd_us">Offentlig eiendom (USA)</string>
+    <string name="license_name_pd_usgov">Offentlig eiendom (USAs regjering)</string>
+    <string name="license_name_pd_usgov_nasa">Offentlig eiendom (NASA)</string>
+    <string name="logging_in_message">Vennligst vent...</string>
+    <string name="logging_in_title">Logger inn</string>
+    <string name="login">Logg inn</string>
+    <string name="login_failed">Innloggingen feilet!</string>
+    <string name="login_failed_blocked">Beklager, denne brukeren har blitt blokkert på Commons</string>
+    <string name="login_failed_generic">Innlogging feilet</string>
+    <string name="login_failed_network">Innlogging feilet - nettverksproblem</string>
+    <string name="login_failed_password">Innlogging feilet - sjekk passordet ditt</string>
+    <string name="login_failed_throttled">For mange misslykkede forsøk. Vennligst vent et par minutter før du prøver igjen</string>
+    <string name="login_failed_username">Innlogging feilet - sjekk brukernavnet ditt</string>
+    <string name="login_success">Innloggingen var vellykket!</string>
+    <string name="menu_about">Om</string>
+    <string name="menu_cancel_upload">Avbryt</string>
+    <string name="menu_download">Last ned</string>
+    <string name="menu_feedback">Send tilbakemelding (via Epost)</string>
+    <string name="menu_from_camera">Knips foto</string>
+    <string name="menu_from_gallery">Fra galleriet</string>
+    <string name="menu_open_in_browser">Vis i nettleser</string>
+    <string name="menu_refresh">Gjenoppfrisk</string>
+    <string name="menu_retry_upload">Prøv igjen</string>
+    <string name="menu_save_categories">Lagre</string>
+    <string name="menu_settings">Innstillinger</string>
+    <string name="menu_share">Del</string>
+    <string name="menu_upload_single">Last opp</string>
+    <string name="multiple_share_base_title">Navngi dette settet</string>
+    <string name="no_uploads_yet">Du har ikke lastet opp nøn bilder ennå.</string>
+    <string name="password">Passord</string>
+    <string name="preference_license">Lisens</string>
+    <string name="preference_tracking">Bruksrapporter</string>
+    <string name="preference_tracking_summary">Send bruksrapporter til Wikimedia for å hjelpe oss med å forbedre appen</string>
+    <string name="provider_campaigns">Kampanjer</string>
+    <string name="provider_categories">Nylig brukte kategorier</string>
+    <string name="provider_contributions">Mine opplastinger</string>
+    <string name="provider_modifications">Endringer</string>
+    <string name="share_description_hint">Beskrivelse</string>
+    <string name="share_license_summary">Dette bildet vil bli lisensiert under %1$s</string>
+    <string name="share_title_hint">Tittel</string>
+    <string name="share_upload_button">Last opp</string>
+    <string name="title_activity_about">Om</string>
+    <string name="title_activity_contributions">Mine opplastinger</string>
+    <string name="title_activity_settings">Innstillinger</string>
+    <string name="upload_completed_notification_text">Trykk for å vise din opplasting</string>
+    <string name="upload_completed_notification_title">%1$s lastet opp!</string>
+    <string name="upload_failed_notification_subtitle">Trykk for å vise</string>
+    <string name="upload_failed_notification_title">Opplastingen av %1$s feilet</string>
+    <string name="upload_progress_notification_title_finishing">Avslutter opplasting av %1$s</string>
+    <string name="upload_progress_notification_title_in_progress">%1$s lastet opp</string>
+    <string name="upload_progress_notification_title_start">Starter opplasting av %1$s</string>
+    <string name="uploading_started">Opplastingen startet</string>
+    <string name="username">Brukernavn</string>
+    <string name="waiting_first_sync">Venter på første synkronisering...</string>
+    <string name="welcome_copyright_subtext">Unngå opphavsrettsbeskyttet materiale som du har funnet på internett samt bilder av plakater, bokomslag, osv.</string>
+    <string name="welcome_copyright_text">Bildene dine kan være til hjelp for mennesker over hele verden som søker kunnskap og dannelse.</string>
+    <string name="welcome_final_button_text">Ja!</string>
+    <string name="welcome_final_text">Forstått?</string>
+    <string name="welcome_wikipedia_subtext">Bilder på Wikipedia kommer fra Wikimedia Commons.</string>
+    <string name="welcome_wikipedia_text">Bidra med dine bilder. Hjelp til med å blåse liv i Wikipedias artikler!</string>
+</resources>

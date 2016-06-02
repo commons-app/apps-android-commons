@@ -1,0 +1,164 @@
+[
+    {
+        "outputFile": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/build/intermediates/res/merged/debug/values-gu/values-gu.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 149,
+                    "endOffset": 200
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-gu/error.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 2,
+                        "startOffset": 190,
+                        "endColumn": 147,
+                        "endOffset": 335
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 205,
+                    "endColumn": 61,
+                    "endOffset": 262
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-gu/error.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 2,
+                        "startOffset": 338,
+                        "endColumn": 59,
+                        "endOffset": 395
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 267,
+                    "endColumn": 70,
+                    "endOffset": 333
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-gu/error.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 2,
+                        "startOffset": 121,
+                        "endColumn": 68,
+                        "endOffset": 187
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 5,
+                    "startColumn": 4,
+                    "startOffset": 338,
+                    "endColumn": 69,
+                    "endOffset": 403
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-gu/error.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 2,
+                        "startOffset": 53,
+                        "endColumn": 67,
+                        "endOffset": 118
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "outputFile": "/home/adam/Documents/Programming/commons/app/build/intermediates/res/merged/debug/values-gu/values-gu.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 149,
+                    "endOffset": 200
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-gu/error.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 2,
+                        "startOffset": 190,
+                        "endColumn": 147,
+                        "endOffset": 335
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 205,
+                    "endColumn": 61,
+                    "endOffset": 262
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-gu/error.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 2,
+                        "startOffset": 338,
+                        "endColumn": 59,
+                        "endOffset": 395
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 267,
+                    "endColumn": 70,
+                    "endOffset": 333
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-gu/error.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 2,
+                        "startOffset": 121,
+                        "endColumn": 68,
+                        "endOffset": 187
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 5,
+                    "startColumn": 4,
+                    "startOffset": 338,
+                    "endColumn": 69,
+                    "endOffset": 403
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-gu/error.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 2,
+                        "startOffset": 53,
+                        "endColumn": 67,
+                        "endOffset": 118
+                    }
+                }
+            }
+        ]
+    }
+]

@@ -1,0 +1,50 @@
+[
+    {
+        "merged": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/build/intermediates/res/merged/debug/xml/contributions_sync_adapter.xml",
+        "source": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/xml/contributions_sync_adapter.xml"
+    },
+    {
+        "merged": "/home/adam/Documents/Programming/commons/app/build/intermediates/res/merged/debug/xml/wikimedia_licenses.xml",
+        "source": "/home/adam/Documents/Programming/commons/app/src/main/res/xml/wikimedia_licenses.xml"
+    },
+    {
+        "merged": "/home/adam/Documents/Programming/commons/app/build/intermediates/res/merged/debug/xml/modifications_sync_adapter.xml",
+        "source": "/home/adam/Documents/Programming/commons/app/src/main/res/xml/modifications_sync_adapter.xml"
+    },
+    {
+        "merged": "/home/adam/Documents/Programming/commons/app/build/intermediates/res/merged/debug/xml/preferences.xml",
+        "source": "/home/adam/Documents/Programming/commons/app/src/main/res/xml/preferences.xml"
+    },
+    {
+        "merged": "/home/adam/Documents/Programming/commons/app/build/intermediates/res/merged/debug/xml/campaigns_sync_adapter.xml",
+        "source": "/home/adam/Documents/Programming/commons/app/src/main/res/xml/campaigns_sync_adapter.xml"
+    },
+    {
+        "merged": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/build/intermediates/res/merged/debug/xml/preferences.xml",
+        "source": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/xml/preferences.xml"
+    },
+    {
+        "merged": "/home/adam/Documents/Programming/commons/app/build/intermediates/res/merged/debug/xml/contributions_sync_adapter.xml",
+        "source": "/home/adam/Documents/Programming/commons/app/src/main/res/xml/contributions_sync_adapter.xml"
+    },
+    {
+        "merged": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/build/intermediates/res/merged/debug/xml/wikimedia_licenses.xml",
+        "source": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/xml/wikimedia_licenses.xml"
+    },
+    {
+        "merged": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/build/intermediates/res/merged/debug/xml/campaigns_sync_adapter.xml",
+        "source": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/xml/campaigns_sync_adapter.xml"
+    },
+    {
+        "merged": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/build/intermediates/res/merged/debug/xml/authenticator.xml",
+        "source": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/xml/authenticator.xml"
+    },
+    {
+        "merged": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/build/intermediates/res/merged/debug/xml/modifications_sync_adapter.xml",
+        "source": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/xml/modifications_sync_adapter.xml"
+    },
+    {
+        "merged": "/home/adam/Documents/Programming/commons/app/build/intermediates/res/merged/debug/xml/authenticator.xml",
+        "source": "/home/adam/Documents/Programming/commons/app/src/main/res/xml/authenticator.xml"
+    }
+]

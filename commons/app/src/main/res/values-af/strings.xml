@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Wikimedia Commons</string>
+  <string name="app_name_beta">Wikimedia Commons Beta</string>
+  <string name="menu_settings">Voorkeure</string>
+  <string name="username">Gebruikersnaam</string>
+  <string name="password">Wagwoord</string>
+  <string name="login">Meld aan</string>
+  <string name="logging_in_title">Besig met aanmelding</string>
+  <string name="logging_in_message">Wag asseblief...</string>
+  <string name="login_success">Aanmelding geslaagd</string>
+  <string name="login_failed">Aanmelding gefaal</string>
+  <string name="authentication_failed">Verifikasie het gefaal!</string>
+  <string name="uploading_started">Oplaai het begin!</string>
+  <string name="upload_completed_notification_title">%1$s opgelaai!</string>
+  <string name="upload_completed_notification_text">Vat om u oplaaie te sien</string>
+  <string name="upload_progress_notification_title_start">Begin oplaai van %1$s</string>
+  <string name="upload_progress_notification_title_in_progress">Besig om %1$s op te laai</string>
+  <string name="upload_progress_notification_title_finishing">Voltooi oplaai van %1$s</string>
+  <string name="upload_failed_notification_title">Oplaai van %1$s het gefaal</string>
+  <string name="upload_failed_notification_subtitle">Vat om te kyk</string>
+  <string name="title_activity_contributions">My oplaaie</string>
+  <string name="contribution_state_queued">Gewaglys</string>
+  <string name="contribution_state_failed">Gefaal</string>
+  <string name="contribution_state_in_progress">%1$d%% voltooi</string>
+  <string name="contribution_state_starting">Besig om op te laai</string>
+  <string name="menu_from_gallery">Van galery</string>
+  <string name="menu_from_camera">Neem foto</string>
+  <string name="provider_contributions">My oplaaie</string>
+  <string name="menu_share">Deel</string>
+  <string name="menu_open_in_browser">Wys in blaaier</string>
+  <string name="share_title_hint">Naam</string>
+  <string name="share_description_hint">Beskrywing</string>
+  <string name="login_failed_network">Aanmelding nie moontlik - probleem met netwerk</string>
+  <string name="login_failed_username">Aanmelding nie moontlik - kontroleer gebruikersnaam</string>
+  <string name="login_failed_password">Aanmelding nie moontlik - kontroleer wagwoord</string>
+  <string name="login_failed_throttled">Te veel mislukte probeerslae. Probeer weer oor \'n paar minute</string>
+  <string name="login_failed_blocked">Die gebruiker is op Commons geblokkeer</string>
+  <string name="login_failed_generic">Aanmelding het gefaal</string>
+  <string name="share_upload_button">Laai op</string>
+  <string name="multiple_share_base_title">Gee hierdie versameling \'n naam</string>
+  <string name="provider_modifications">Wysigings</string>
+  <string name="menu_upload_single">Laai op</string>
+  <string name="categories_search_text_hint">Soek kategorieë</string>
+  <string name="menu_save_categories">Stoor</string>
+  <string name="categories_not_found">Geen kategorieë met \"%1$s\" gevind nie</string>
+  <string name="categories_skip_explanation">Voeg kategorieë by om dit makliker te maak om u beelde op te spoor.
+
+Begin tik om kategorieë by te sit.
+Tik die boodskap (of terug) om die stap oor te slaan.</string>
+  <string name="categories_activity_title">Kategorieë</string>
+  <string name="title_activity_settings">Voorkeure</string>
+  <string name="menu_about">Oor ons</string>
+  <string name="title_activity_about">Oor ons</string>
+  <string name="menu_feedback">Stuur terugvoer (via e-pos)</string>
+  <string name="menu_retry_upload">Herprobeer</string>
+  <string name="menu_cancel_upload">Kanselleer</string>
+  <string name="menu_download">Laai af</string>
+  <string name="preference_license">Lisensie</string>
+  <string name="license_name_attribution">Naamsvermelding</string>
+  <string name="license_name_gfdl">GNU-lisensie vir vrye dokumentasie</string>
+  <string name="welcome_final_button_text">Ja!</string>
+  <string name="detail_panel_cats_label">Kategorieë</string>
+  <string name="detail_panel_cats_loading">Laai...</string>
+  <string name="detail_panel_cats_none">Niks gekies nie</string>
+  <string name="detail_description_empty">Geen beskrywing</string>
+  <string name="detail_license_empty">Onbekende lisensie</string>
+  <string name="provider_campaigns">Veldtogte</string>
+  <string name="menu_refresh">Verfris</string>
+</resources>

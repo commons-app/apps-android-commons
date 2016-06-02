@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/shaders"/></dataSet><dataSet config="debug"><source path="/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/debug/shaders"/></dataSet></merger>

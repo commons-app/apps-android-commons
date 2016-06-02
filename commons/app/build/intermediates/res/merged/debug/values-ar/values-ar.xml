@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="about_improve">المصدر على &lt;a href=\"https://github.com/wikimedia/apps-android-commons\">غِتهب&lt;/a>. العلل في &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\">بغزِلا&lt;/a>.</string>
+    <string name="about_license">برنامج مفتوح المصدر منشور &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\">برخصة أباتشي النسخة 2&lt;/a></string>
+    <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\">سياسة الخصوصية&lt;/a></string>
+    <string name="app_name">ويكيميديا كومنز</string>
+    <string name="app_name_beta">ويكيميديا كومنز بيتا</string>
+    <string name="authentication_failed">فشل الاستيقان!</string>
+    <string name="categories_activity_title">تصنيفات</string>
+    <string name="categories_not_found">لا توجد تصنيفات تطابق %1$s</string>
+    <string name="categories_search_text_hint">تصنيفات البحث</string>
+    <string name="categories_skip_explanation">أضف التصانيف لتسهل اكتشاف صورك على ويكيميديا كومنز.
+
+ابدأ الكتاب لتضيف التصانيف.
+انقر هذه الرسالة لتتجاوز هذه الخطوة.</string>
+    <string name="contribution_state_failed">فشل</string>
+    <string name="contribution_state_in_progress">انتهاء %1$d%%</string>
+    <string name="contribution_state_queued">في قائمة الانتظار</string>
+    <string name="contribution_state_starting">يجري الرفع</string>
+    <string name="crash_dialog_comment_prompt">أخبرنا ماذا كنت تفعل، ثم أرسلها لنا بالبريد الإلكتروني. سوف يساعدنا هذا في الحل!</string>
+    <string name="crash_dialog_ok_toast">شكرا لك!</string>
+    <string name="crash_dialog_text">عفوا. حدث خطأ!</string>
+    <string name="crash_dialog_title">لقد تعطل كومنز</string>
+    <string name="detail_license_empty">ترخيص غير معلوم</string>
+    <string name="detail_panel_cats_label">تصنيفات</string>
+    <string name="detail_panel_cats_loading">جارٍ التحميل...</string>
+    <string name="detail_panel_cats_none">لا شيء محدد</string>
+    <string name="logging_in_message">الرجاء الانتظار...</string>
+    <string name="logging_in_title">يجري الدخول</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="login_failed">فشل تسجيل الدخول</string>
+    <string name="login_failed_blocked">عذراً، لقد تم منع هذا المستخدم على كومنز</string>
+    <string name="login_failed_generic">فشل تسجيل الدخول</string>
+    <string name="login_failed_network">لا يمكن تسجيل الدخول - فشل في شبكة الاتصال</string>
+    <string name="login_failed_password">لا يمكن تسجيل الدخول - فضلا تحقق من كلمة السر</string>
+    <string name="login_failed_throttled">الكثير من المحاولات غير الناجحة. الرجاء المحاولة مرة أخرى في بضع دقائق</string>
+    <string name="login_failed_username">لا يمكن تسجيل الدخول - فضلا تحقق من اسم المستخدم</string>
+    <string name="login_success">تم الدخول بشكل صحيح</string>
+    <string name="menu_about">حول</string>
+    <string name="menu_cancel_upload">إلغاء</string>
+    <string name="menu_download">نزّل</string>
+    <string name="menu_feedback">إرسال ملاحظات (عبر البريد الإلكتروني)</string>
+    <string name="menu_from_camera">التقط صورة</string>
+    <string name="menu_from_gallery">من المعرض</string>
+    <string name="menu_open_in_browser">افتح في المتصفح</string>
+    <string name="menu_refresh">تحديث</string>
+    <string name="menu_retry_upload">إعادة المحاولة</string>
+    <string name="menu_save_categories">احفظ</string>
+    <string name="menu_settings">الإعدادات</string>
+    <string name="menu_share">انشرها</string>
+    <string name="menu_upload_single">ارفع</string>
+    <string name="multiple_share_base_title">اسم هذه المجموعة</string>
+    <string name="no_uploads_yet">لم ترفع بعد أية صور.</string>
+    <string name="password">كلمة السر</string>
+    <string name="preference_license">الرخصة</string>
+    <string name="preference_tracking">تقارير الاستخدام</string>
+    <string name="preference_tracking_summary">إرسال تقارير الاستخدام إلى ويكيميديا لمساعدتنا على تحسين التطبيق</string>
+    <string name="provider_categories">التصانيف المستخدمة مؤخرا</string>
+    <string name="provider_contributions">مرفوعاتي</string>
+    <string name="provider_modifications">تعديلات</string>
+    <string name="share_description_hint">الوصف</string>
+    <string name="share_license_summary">ستُرخص الصورة برخصة %1$s.</string>
+    <string name="share_title_hint">العنوان</string>
+    <string name="share_upload_button">ارفع</string>
+    <string name="title_activity_about">حول</string>
+    <string name="title_activity_contributions">مرفوعاتي</string>
+    <string name="title_activity_settings">الإعدادات</string>
+    <string name="upload_completed_notification_text">انقر لعرض ملفك المرفوع</string>
+    <string name="upload_completed_notification_title">رُفع %1$s!</string>
+    <string name="upload_failed_notification_subtitle">انقر لتشاهد</string>
+    <string name="upload_failed_notification_title">فشل رفع %1$s</string>
+    <string name="upload_progress_notification_title_finishing">اكتمال رفع %1$s</string>
+    <string name="upload_progress_notification_title_in_progress">يجري رفع %1$s</string>
+    <string name="upload_progress_notification_title_start">بدء رفع %1$s</string>
+    <string name="uploading_started">بدأ الرفع!</string>
+    <string fuzzy="true" name="uploads_pending_notification_indicator">متبقى %d</string>
+    <string name="username">اسم المستخدم</string>
+    <string name="waiting_first_sync">ينتظر أول مزامنة...</string>
+    <string name="welcome_copyright_subtext">تجنب المواد محفوظة الحقوق الموجودة على الإنترنت وصور الملصقات وأغلفة الكتب، إلخ.</string>
+    <string name="welcome_copyright_text">صورك تساعد الناس في شتى أنحاء العالم على التعلم.</string>
+    <string name="welcome_final_button_text">نعم!</string>
+    <string name="welcome_final_text">هل تظن أنك فهمت؟</string>
+    <string name="welcome_wikipedia_subtext">تأتي صور ويكيبيديا من ويكيميديا كومنز.</string>
+    <string name="welcome_wikipedia_text">ساهم بصورك. أنعش مقالات ويكيبيديا!</string>
+</resources>

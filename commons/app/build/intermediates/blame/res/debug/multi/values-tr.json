@@ -1,0 +1,4444 @@
+[
+    {
+        "outputFile": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/build/intermediates/res/merged/debug/values-tr/values-tr.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endLine": 6,
+                    "endColumn": 12,
+                    "endOffset": 245
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 49,
+                        "startColumn": 2,
+                        "startOffset": 3221,
+                        "endLine": 53,
+                        "endColumn": 12,
+                        "endOffset": 3411
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 7,
+                    "startColumn": 4,
+                    "startOffset": 250,
+                    "endLine": 10,
+                    "endColumn": 12,
+                    "endOffset": 389
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 58,
+                        "startColumn": 2,
+                        "startOffset": 3585,
+                        "endLine": 61,
+                        "endColumn": 12,
+                        "endOffset": 3724
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 11,
+                    "startColumn": 4,
+                    "startOffset": 394,
+                    "endLine": 14,
+                    "endColumn": 12,
+                    "endOffset": 562
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 54,
+                        "startColumn": 2,
+                        "startOffset": 3414,
+                        "endLine": 57,
+                        "endColumn": 12,
+                        "endOffset": 3582
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 15,
+                    "startColumn": 4,
+                    "startOffset": 567,
+                    "endLine": 18,
+                    "endColumn": 12,
+                    "endOffset": 740
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 21,
+                        "startColumn": 2,
+                        "startOffset": 1394,
+                        "endLine": 24,
+                        "endColumn": 12,
+                        "endOffset": 1567
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 19,
+                    "startColumn": 4,
+                    "startOffset": 745,
+                    "endLine": 21,
+                    "endColumn": 124,
+                    "endOffset": 986
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 73,
+                        "startColumn": 2,
+                        "startOffset": 4638,
+                        "endLine": 75,
+                        "endColumn": 130,
+                        "endOffset": 4891
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 22,
+                    "startColumn": 4,
+                    "startOffset": 991,
+                    "endColumn": 191,
+                    "endOffset": 1178
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 72,
+                        "startColumn": 2,
+                        "startOffset": 4442,
+                        "endColumn": 195,
+                        "endOffset": 4635
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 23,
+                    "startColumn": 4,
+                    "startOffset": 1183,
+                    "endColumn": 142,
+                    "endOffset": 1321
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 76,
+                        "startColumn": 2,
+                        "startOffset": 4894,
+                        "endColumn": 146,
+                        "endOffset": 5038
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 24,
+                    "startColumn": 4,
+                    "startOffset": 1326,
+                    "endColumn": 54,
+                    "endOffset": 1376
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 2,
+                        "startOffset": 53,
+                        "endColumn": 52,
+                        "endOffset": 103
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 25,
+                    "startColumn": 4,
+                    "startOffset": 1381,
+                    "endColumn": 64,
+                    "endOffset": 1441
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 2,
+                        "startOffset": 106,
+                        "endColumn": 62,
+                        "endOffset": 166
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 26,
+                    "startColumn": 4,
+                    "startOffset": 1446,
+                    "endColumn": 82,
+                    "endOffset": 1524
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 12,
+                        "startColumn": 2,
+                        "startOffset": 602,
+                        "endColumn": 80,
+                        "endOffset": 680
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 27,
+                    "startColumn": 4,
+                    "startOffset": 1529,
+                    "endColumn": 65,
+                    "endOffset": 1590
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 67,
+                        "startColumn": 2,
+                        "startOffset": 4067,
+                        "endColumn": 63,
+                        "endOffset": 4128
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 28,
+                    "startColumn": 4,
+                    "startOffset": 1595,
+                    "endColumn": 89,
+                    "endOffset": 1680
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 62,
+                        "startColumn": 2,
+                        "startOffset": 3727,
+                        "endColumn": 87,
+                        "endOffset": 3812
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 29,
+                    "startColumn": 4,
+                    "startOffset": 1685,
+                    "endColumn": 72,
+                    "endOffset": 1753
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 47,
+                        "startColumn": 2,
+                        "startOffset": 3096,
+                        "endColumn": 70,
+                        "endOffset": 3164
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 30,
+                    "startColumn": 4,
+                    "startOffset": 1758,
+                    "endLine": 33,
+                    "endColumn": 70,
+                    "endOffset": 2007
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 63,
+                        "startColumn": 2,
+                        "startOffset": 3815,
+                        "endLine": 66,
+                        "endColumn": 70,
+                        "endOffset": 4064
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 34,
+                    "startColumn": 4,
+                    "startOffset": 2012,
+                    "endColumn": 63,
+                    "endOffset": 2071
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 27,
+                        "startColumn": 2,
+                        "startOffset": 1697,
+                        "endColumn": 61,
+                        "endOffset": 1756
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 35,
+                    "startColumn": 4,
+                    "startOffset": 2076,
+                    "endColumn": 76,
+                    "endOffset": 2148
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 28,
+                        "startColumn": 2,
+                        "startOffset": 1759,
+                        "endColumn": 74,
+                        "endOffset": 1831
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 36,
+                    "startColumn": 4,
+                    "startOffset": 2153,
+                    "endColumn": 60,
+                    "endOffset": 2209
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 26,
+                        "startColumn": 2,
+                        "startOffset": 1638,
+                        "endColumn": 58,
+                        "endOffset": 1694
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 37,
+                    "startColumn": 4,
+                    "startOffset": 2214,
+                    "endColumn": 66,
+                    "endOffset": 2276
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 29,
+                        "startColumn": 2,
+                        "startOffset": 1834,
+                        "endColumn": 64,
+                        "endOffset": 1896
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 38,
+                    "startColumn": 4,
+                    "startOffset": 2281,
+                    "endColumn": 162,
+                    "endOffset": 2439
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/error.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 2,
+                        "startOffset": 191,
+                        "endColumn": 160,
+                        "endOffset": 349
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 39,
+                    "startColumn": 4,
+                    "startOffset": 2444,
+                    "endColumn": 62,
+                    "endOffset": 2502
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/error.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 2,
+                        "startOffset": 352,
+                        "endColumn": 60,
+                        "endOffset": 410
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 40,
+                    "startColumn": 4,
+                    "startOffset": 2507,
+                    "endColumn": 80,
+                    "endOffset": 2583
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/error.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 2,
+                        "startOffset": 112,
+                        "endColumn": 78,
+                        "endOffset": 188
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 41,
+                    "startColumn": 4,
+                    "startOffset": 2588,
+                    "endColumn": 60,
+                    "endOffset": 2644
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/error.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 2,
+                        "startOffset": 53,
+                        "endColumn": 58,
+                        "endOffset": 109
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 42,
+                    "startColumn": 4,
+                    "startOffset": 2649,
+                    "endColumn": 65,
+                    "endOffset": 2710
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 128,
+                        "startColumn": 2,
+                        "startOffset": 8775,
+                        "endColumn": 63,
+                        "endOffset": 8836
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 43,
+                    "startColumn": 4,
+                    "startOffset": 2715,
+                    "endColumn": 66,
+                    "endOffset": 2777
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 129,
+                        "startColumn": 2,
+                        "startOffset": 8839,
+                        "endColumn": 64,
+                        "endOffset": 8901
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 44,
+                    "startColumn": 4,
+                    "startOffset": 2782,
+                    "endColumn": 63,
+                    "endOffset": 2841
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 125,
+                        "startColumn": 2,
+                        "startOffset": 8577,
+                        "endColumn": 61,
+                        "endOffset": 8636
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 45,
+                    "startColumn": 4,
+                    "startOffset": 2846,
+                    "endColumn": 67,
+                    "endOffset": 2909
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 126,
+                        "startColumn": 2,
+                        "startOffset": 8639,
+                        "endColumn": 65,
+                        "endOffset": 8702
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 46,
+                    "startColumn": 4,
+                    "startOffset": 2914,
+                    "endColumn": 71,
+                    "endOffset": 2981
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 127,
+                        "startColumn": 2,
+                        "startOffset": 8705,
+                        "endColumn": 69,
+                        "endOffset": 8772
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 47,
+                    "startColumn": 4,
+                    "startOffset": 2986,
+                    "endColumn": 57,
+                    "endOffset": 3039
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 117,
+                        "startColumn": 2,
+                        "startOffset": 7827,
+                        "endColumn": 55,
+                        "endOffset": 7880
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 48,
+                    "startColumn": 4,
+                    "startOffset": 3044,
+                    "endColumn": 48,
+                    "endOffset": 3088
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 89,
+                        "startColumn": 2,
+                        "startOffset": 5850,
+                        "endColumn": 46,
+                        "endOffset": 5894
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 49,
+                    "startColumn": 4,
+                    "startOffset": 3093,
+                    "endColumn": 57,
+                    "endOffset": 3146
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 108,
+                        "startColumn": 2,
+                        "startOffset": 7185,
+                        "endColumn": 55,
+                        "endOffset": 7238
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 50,
+                    "startColumn": 4,
+                    "startOffset": 3151,
+                    "endColumn": 73,
+                    "endOffset": 3220
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 88,
+                        "startColumn": 2,
+                        "startOffset": 5778,
+                        "endColumn": 71,
+                        "endOffset": 5847
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 51,
+                    "startColumn": 4,
+                    "startOffset": 3225,
+                    "endColumn": 63,
+                    "endOffset": 3284
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 107,
+                        "startColumn": 2,
+                        "startOffset": 7123,
+                        "endColumn": 61,
+                        "endOffset": 7182
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 52,
+                    "startColumn": 4,
+                    "startOffset": 3289,
+                    "endColumn": 60,
+                    "endOffset": 3345
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 105,
+                        "startColumn": 2,
+                        "startOffset": 6999,
+                        "endColumn": 58,
+                        "endOffset": 7055
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 53,
+                    "startColumn": 4,
+                    "startOffset": 3350,
+                    "endColumn": 60,
+                    "endOffset": 3406
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 101,
+                        "startColumn": 2,
+                        "startOffset": 6751,
+                        "endColumn": 58,
+                        "endOffset": 6807
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 54,
+                    "startColumn": 4,
+                    "startOffset": 3411,
+                    "endColumn": 87,
+                    "endOffset": 3494
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 87,
+                        "startColumn": 2,
+                        "startOffset": 5692,
+                        "endColumn": 85,
+                        "endOffset": 5775
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 55,
+                    "startColumn": 4,
+                    "startOffset": 3499,
+                    "endColumn": 66,
+                    "endOffset": 3561
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 106,
+                        "startColumn": 2,
+                        "startOffset": 7058,
+                        "endColumn": 64,
+                        "endOffset": 7120
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 56,
+                    "startColumn": 4,
+                    "startOffset": 3566,
+                    "endColumn": 66,
+                    "endOffset": 3628
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 104,
+                        "startColumn": 2,
+                        "startOffset": 6934,
+                        "endColumn": 64,
+                        "endOffset": 6996
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 57,
+                    "startColumn": 4,
+                    "startOffset": 3633,
+                    "endColumn": 66,
+                    "endOffset": 3695
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 90,
+                        "startColumn": 2,
+                        "startOffset": 5897,
+                        "endColumn": 64,
+                        "endOffset": 5959
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 58,
+                    "startColumn": 4,
+                    "startOffset": 3700,
+                    "endColumn": 81,
+                    "endOffset": 3777
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 91,
+                        "startColumn": 2,
+                        "startOffset": 5962,
+                        "endColumn": 79,
+                        "endOffset": 6039
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 59,
+                    "startColumn": 4,
+                    "startOffset": 3782,
+                    "endColumn": 79,
+                    "endOffset": 3857
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 92,
+                        "startColumn": 2,
+                        "startOffset": 6042,
+                        "endColumn": 77,
+                        "endOffset": 6117
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 60,
+                    "startColumn": 4,
+                    "startOffset": 3862,
+                    "endColumn": 79,
+                    "endOffset": 3937
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 93,
+                        "startColumn": 2,
+                        "startOffset": 6120,
+                        "endColumn": 77,
+                        "endOffset": 6195
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 61,
+                    "startColumn": 4,
+                    "startOffset": 3942,
+                    "endColumn": 79,
+                    "endOffset": 4017
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 94,
+                        "startColumn": 2,
+                        "startOffset": 6198,
+                        "endColumn": 77,
+                        "endOffset": 6273
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 62,
+                    "startColumn": 4,
+                    "startOffset": 4022,
+                    "endColumn": 83,
+                    "endOffset": 4101
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 95,
+                        "startColumn": 2,
+                        "startOffset": 6276,
+                        "endColumn": 81,
+                        "endOffset": 6355
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 63,
+                    "startColumn": 4,
+                    "startOffset": 4106,
+                    "endColumn": 82,
+                    "endOffset": 4184
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 96,
+                        "startColumn": 2,
+                        "startOffset": 6358,
+                        "endColumn": 80,
+                        "endOffset": 6436
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 64,
+                    "startColumn": 4,
+                    "startOffset": 4189,
+                    "endColumn": 80,
+                    "endOffset": 4265
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 97,
+                        "startColumn": 2,
+                        "startOffset": 6439,
+                        "endColumn": 78,
+                        "endOffset": 6515
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 65,
+                    "startColumn": 4,
+                    "startOffset": 4270,
+                    "endColumn": 78,
+                    "endOffset": 4344
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 98,
+                        "startColumn": 2,
+                        "startOffset": 6518,
+                        "endColumn": 76,
+                        "endOffset": 6592
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 66,
+                    "startColumn": 4,
+                    "startOffset": 4349,
+                    "endColumn": 79,
+                    "endOffset": 4424
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 99,
+                        "startColumn": 2,
+                        "startOffset": 6595,
+                        "endColumn": 77,
+                        "endOffset": 6670
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 67,
+                    "startColumn": 4,
+                    "startOffset": 4429,
+                    "endColumn": 79,
+                    "endOffset": 4504
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 100,
+                        "startColumn": 2,
+                        "startOffset": 6673,
+                        "endColumn": 77,
+                        "endOffset": 6748
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 68,
+                    "startColumn": 4,
+                    "startOffset": 4509,
+                    "endColumn": 52,
+                    "endOffset": 4557
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 102,
+                        "startColumn": 2,
+                        "startOffset": 6810,
+                        "endColumn": 50,
+                        "endOffset": 6858
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 69,
+                    "startColumn": 4,
+                    "startOffset": 4562,
+                    "endColumn": 64,
+                    "endOffset": 4622
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 109,
+                        "startColumn": 2,
+                        "startOffset": 7241,
+                        "endColumn": 62,
+                        "endOffset": 7301
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 70,
+                    "startColumn": 4,
+                    "startOffset": 4627,
+                    "endColumn": 73,
+                    "endOffset": 4696
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 118,
+                        "startColumn": 2,
+                        "startOffset": 7883,
+                        "endColumn": 71,
+                        "endOffset": 7952
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 71,
+                    "startColumn": 4,
+                    "startOffset": 4701,
+                    "endColumn": 74,
+                    "endOffset": 4771
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 103,
+                        "startColumn": 2,
+                        "startOffset": 6861,
+                        "endColumn": 72,
+                        "endOffset": 6931
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 72,
+                    "startColumn": 4,
+                    "startOffset": 4776,
+                    "endColumn": 65,
+                    "endOffset": 4837
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 112,
+                        "startColumn": 2,
+                        "startOffset": 7474,
+                        "endColumn": 63,
+                        "endOffset": 7535
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 73,
+                    "startColumn": 4,
+                    "startOffset": 4842,
+                    "endColumn": 86,
+                    "endOffset": 4924
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 116,
+                        "startColumn": 2,
+                        "startOffset": 7742,
+                        "endColumn": 84,
+                        "endOffset": 7824
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 74,
+                    "startColumn": 4,
+                    "startOffset": 4929,
+                    "endColumn": 85,
+                    "endOffset": 5010
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 111,
+                        "startColumn": 2,
+                        "startOffset": 7390,
+                        "endColumn": 83,
+                        "endOffset": 7471
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 75,
+                    "startColumn": 4,
+                    "startOffset": 5015,
+                    "endColumn": 87,
+                    "endOffset": 5098
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 110,
+                        "startColumn": 2,
+                        "startOffset": 7304,
+                        "endColumn": 85,
+                        "endOffset": 7387
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 76,
+                    "startColumn": 4,
+                    "startOffset": 5103,
+                    "endColumn": 62,
+                    "endOffset": 5161
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 113,
+                        "startColumn": 2,
+                        "startOffset": 7538,
+                        "endColumn": 60,
+                        "endOffset": 7596
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 77,
+                    "startColumn": 4,
+                    "startOffset": 5166,
+                    "endColumn": 74,
+                    "endOffset": 5236
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 114,
+                        "startColumn": 2,
+                        "startOffset": 7599,
+                        "endColumn": 72,
+                        "endOffset": 7669
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 78,
+                    "startColumn": 4,
+                    "startOffset": 5241,
+                    "endColumn": 71,
+                    "endOffset": 5308
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 115,
+                        "startColumn": 2,
+                        "startOffset": 7672,
+                        "endColumn": 69,
+                        "endOffset": 7739
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 79,
+                    "startColumn": 4,
+                    "startOffset": 5313,
+                    "endColumn": 65,
+                    "endOffset": 5374
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 2,
+                        "startOffset": 409,
+                        "endColumn": 63,
+                        "endOffset": 470
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 80,
+                    "startColumn": 4,
+                    "startOffset": 5379,
+                    "endColumn": 60,
+                    "endOffset": 5435
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 2,
+                        "startOffset": 350,
+                        "endColumn": 58,
+                        "endOffset": 406
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 81,
+                    "startColumn": 4,
+                    "startOffset": 5440,
+                    "endColumn": 43,
+                    "endOffset": 5479
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 2,
+                        "startOffset": 308,
+                        "endColumn": 41,
+                        "endOffset": 347
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 82,
+                    "startColumn": 4,
+                    "startOffset": 5484,
+                    "endColumn": 68,
+                    "endOffset": 5548
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 11,
+                        "startColumn": 2,
+                        "startOffset": 535,
+                        "endColumn": 66,
+                        "endOffset": 599
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 83,
+                    "startColumn": 4,
+                    "startOffset": 5553,
+                    "endColumn": 93,
+                    "endOffset": 5642
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 41,
+                        "startColumn": 2,
+                        "startOffset": 2703,
+                        "endColumn": 91,
+                        "endOffset": 2792
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 84,
+                    "startColumn": 4,
+                    "startOffset": 5647,
+                    "endColumn": 70,
+                    "endOffset": 5713
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 42,
+                        "startColumn": 2,
+                        "startOffset": 2795,
+                        "endColumn": 68,
+                        "endOffset": 2861
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 85,
+                    "startColumn": 4,
+                    "startOffset": 5718,
+                    "endColumn": 78,
+                    "endOffset": 5792
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 37,
+                        "startColumn": 2,
+                        "startOffset": 2293,
+                        "endColumn": 76,
+                        "endOffset": 2367
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 86,
+                    "startColumn": 4,
+                    "startOffset": 5797,
+                    "endColumn": 100,
+                    "endOffset": 5893
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 39,
+                        "startColumn": 2,
+                        "startOffset": 2476,
+                        "endColumn": 98,
+                        "endOffset": 2572
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 87,
+                    "startColumn": 4,
+                    "startOffset": 5898,
+                    "endColumn": 129,
+                    "endOffset": 6023
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 40,
+                        "startColumn": 2,
+                        "startOffset": 2575,
+                        "endColumn": 127,
+                        "endOffset": 2700
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 88,
+                    "startColumn": 4,
+                    "startOffset": 6028,
+                    "endColumn": 107,
+                    "endOffset": 6131
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 38,
+                        "startColumn": 2,
+                        "startOffset": 2370,
+                        "endColumn": 105,
+                        "endOffset": 2473
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 89,
+                    "startColumn": 4,
+                    "startOffset": 6136,
+                    "endColumn": 63,
+                    "endOffset": 6195
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 2,
+                        "startOffset": 473,
+                        "endColumn": 61,
+                        "endOffset": 532
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 90,
+                    "startColumn": 4,
+                    "startOffset": 6200,
+                    "endColumn": 47,
+                    "endOffset": 6243
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 71,
+                        "startColumn": 2,
+                        "startOffset": 4396,
+                        "endColumn": 45,
+                        "endOffset": 4439
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 91,
+                    "startColumn": 4,
+                    "startOffset": 6248,
+                    "endColumn": 52,
+                    "endOffset": 6296
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 83,
+                        "startColumn": 2,
+                        "startOffset": 5457,
+                        "endColumn": 50,
+                        "endOffset": 5505
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 92,
+                    "startColumn": 4,
+                    "startOffset": 6301,
+                    "endColumn": 47,
+                    "endOffset": 6344
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 85,
+                        "startColumn": 2,
+                        "startOffset": 5594,
+                        "endColumn": 45,
+                        "endOffset": 5637
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 93,
+                    "startColumn": 4,
+                    "startOffset": 6349,
+                    "endColumn": 76,
+                    "endOffset": 6421
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 78,
+                        "startColumn": 2,
+                        "startOffset": 5097,
+                        "endColumn": 74,
+                        "endOffset": 5169
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 94,
+                    "startColumn": 4,
+                    "startOffset": 6426,
+                    "endColumn": 57,
+                    "endOffset": 6479
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 31,
+                        "startColumn": 2,
+                        "startOffset": 1955,
+                        "endColumn": 55,
+                        "endOffset": 2008
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 95,
+                    "startColumn": 4,
+                    "startOffset": 6484,
+                    "endColumn": 57,
+                    "endOffset": 6537
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 30,
+                        "startColumn": 2,
+                        "startOffset": 1899,
+                        "endColumn": 55,
+                        "endOffset": 1952
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 96,
+                    "startColumn": 4,
+                    "startOffset": 6542,
+                    "endColumn": 69,
+                    "endOffset": 6607
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 34,
+                        "startColumn": 2,
+                        "startOffset": 2117,
+                        "endColumn": 67,
+                        "endOffset": 2182
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 97,
+                    "startColumn": 4,
+                    "startOffset": 6612,
+                    "endColumn": 47,
+                    "endOffset": 6655
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 131,
+                        "startColumn": 2,
+                        "startOffset": 8961,
+                        "endColumn": 45,
+                        "endOffset": 9004
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 98,
+                    "startColumn": 4,
+                    "startOffset": 6660,
+                    "endColumn": 57,
+                    "endOffset": 6713
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 82,
+                        "startColumn": 2,
+                        "startOffset": 5401,
+                        "endColumn": 55,
+                        "endOffset": 5454
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 99,
+                    "startColumn": 4,
+                    "startOffset": 6718,
+                    "endColumn": 55,
+                    "endOffset": 6769
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 48,
+                        "startColumn": 2,
+                        "startOffset": 3167,
+                        "endColumn": 53,
+                        "endOffset": 3218
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 100,
+                    "startColumn": 4,
+                    "startOffset": 6774,
+                    "endColumn": 49,
+                    "endOffset": 6819
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 2,
+                        "startOffset": 169,
+                        "endColumn": 47,
+                        "endOffset": 214
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 101,
+                    "startColumn": 4,
+                    "startOffset": 6824,
+                    "endColumn": 45,
+                    "endOffset": 6865
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 33,
+                        "startColumn": 2,
+                        "startOffset": 2073,
+                        "endColumn": 43,
+                        "endOffset": 2114
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 102,
+                    "startColumn": 4,
+                    "startOffset": 6870,
+                    "endColumn": 52,
+                    "endOffset": 6918
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 46,
+                        "startColumn": 2,
+                        "startOffset": 3045,
+                        "endColumn": 50,
+                        "endOffset": 3093
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 103,
+                    "startColumn": 4,
+                    "startOffset": 6923,
+                    "endColumn": 67,
+                    "endOffset": 6986
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 44,
+                        "startColumn": 2,
+                        "startOffset": 2916,
+                        "endColumn": 65,
+                        "endOffset": 2979
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 104,
+                    "startColumn": 4,
+                    "startOffset": 6991,
+                    "endColumn": 80,
+                    "endOffset": 7067
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 81,
+                        "startColumn": 2,
+                        "startOffset": 5322,
+                        "endColumn": 78,
+                        "endOffset": 5398
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 105,
+                    "startColumn": 4,
+                    "startOffset": 7072,
+                    "endColumn": 43,
+                    "endOffset": 7111
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 2,
+                        "startOffset": 266,
+                        "endColumn": 41,
+                        "endOffset": 305
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 106,
+                    "startColumn": 4,
+                    "startOffset": 7116,
+                    "endColumn": 53,
+                    "endOffset": 7165
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 86,
+                        "startColumn": 2,
+                        "startOffset": 5640,
+                        "endColumn": 51,
+                        "endOffset": 5689
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 107,
+                    "startColumn": 4,
+                    "startOffset": 7170,
+                    "endColumn": 66,
+                    "endOffset": 7232
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 68,
+                        "startColumn": 2,
+                        "startOffset": 4131,
+                        "endColumn": 64,
+                        "endOffset": 4193
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 108,
+                    "startColumn": 4,
+                    "startOffset": 7237,
+                    "endColumn": 143,
+                    "endOffset": 7376
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 69,
+                        "startColumn": 2,
+                        "startOffset": 4196,
+                        "endColumn": 141,
+                        "endOffset": 4335
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 109,
+                    "startColumn": 4,
+                    "startOffset": 7381,
+                    "endColumn": 58,
+                    "endOffset": 7435
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 130,
+                        "startColumn": 2,
+                        "startOffset": 8904,
+                        "endColumn": 56,
+                        "endOffset": 8958
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 110,
+                    "startColumn": 4,
+                    "startOffset": 7440,
+                    "endColumn": 74,
+                    "endOffset": 7510
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 79,
+                        "startColumn": 2,
+                        "startOffset": 5172,
+                        "endColumn": 72,
+                        "endOffset": 5242
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 111,
+                    "startColumn": 4,
+                    "startOffset": 7515,
+                    "endColumn": 63,
+                    "endOffset": 7574
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 32,
+                        "startColumn": 2,
+                        "startOffset": 2011,
+                        "endColumn": 61,
+                        "endOffset": 2070
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 112,
+                    "startColumn": 4,
+                    "startOffset": 7579,
+                    "endColumn": 64,
+                    "endOffset": 7639
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 45,
+                        "startColumn": 2,
+                        "startOffset": 2982,
+                        "endColumn": 62,
+                        "endOffset": 3042
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 113,
+                    "startColumn": 4,
+                    "startOffset": 7644,
+                    "endColumn": 59,
+                    "endOffset": 7699
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 36,
+                        "startColumn": 2,
+                        "startOffset": 2235,
+                        "endColumn": 57,
+                        "endOffset": 2290
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 114,
+                    "startColumn": 4,
+                    "startOffset": 7704,
+                    "endColumn": 87,
+                    "endOffset": 7787
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 84,
+                        "startColumn": 2,
+                        "startOffset": 5508,
+                        "endColumn": 85,
+                        "endOffset": 5591
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 115,
+                    "startColumn": 4,
+                    "startOffset": 7792,
+                    "endColumn": 51,
+                    "endOffset": 7839
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 35,
+                        "startColumn": 2,
+                        "startOffset": 2185,
+                        "endColumn": 49,
+                        "endOffset": 2232
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 116,
+                    "startColumn": 4,
+                    "startOffset": 7844,
+                    "endColumn": 53,
+                    "endOffset": 7893
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 43,
+                        "startColumn": 2,
+                        "startOffset": 2864,
+                        "endColumn": 51,
+                        "endOffset": 2913
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 117,
+                    "startColumn": 4,
+                    "startOffset": 7898,
+                    "endColumn": 57,
+                    "endOffset": 7951
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 77,
+                        "startColumn": 2,
+                        "startOffset": 5041,
+                        "endColumn": 55,
+                        "endOffset": 5094
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 118,
+                    "startColumn": 4,
+                    "startOffset": 7956,
+                    "endColumn": 69,
+                    "endOffset": 8021
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 25,
+                        "startColumn": 2,
+                        "startOffset": 1570,
+                        "endColumn": 67,
+                        "endOffset": 1635
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 119,
+                    "startColumn": 4,
+                    "startOffset": 8026,
+                    "endColumn": 59,
+                    "endOffset": 8081
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 70,
+                        "startColumn": 2,
+                        "startOffset": 4338,
+                        "endColumn": 57,
+                        "endOffset": 4393
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 120,
+                    "startColumn": 4,
+                    "startOffset": 8086,
+                    "endColumn": 104,
+                    "endOffset": 8186
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 2,
+                        "startOffset": 821,
+                        "endColumn": 102,
+                        "endOffset": 921
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 121,
+                    "startColumn": 4,
+                    "startOffset": 8191,
+                    "endColumn": 78,
+                    "endOffset": 8265
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 14,
+                        "startColumn": 2,
+                        "startOffset": 744,
+                        "endColumn": 76,
+                        "endOffset": 818
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 122,
+                    "startColumn": 4,
+                    "startOffset": 8270,
+                    "endColumn": 89,
+                    "endOffset": 8355
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 20,
+                        "startColumn": 2,
+                        "startOffset": 1306,
+                        "endColumn": 87,
+                        "endOffset": 1391
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 123,
+                    "startColumn": 4,
+                    "startOffset": 8360,
+                    "endColumn": 101,
+                    "endOffset": 8457
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 19,
+                        "startColumn": 2,
+                        "startOffset": 1206,
+                        "endColumn": 99,
+                        "endOffset": 1303
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 124,
+                    "startColumn": 4,
+                    "startOffset": 8462,
+                    "endColumn": 99,
+                    "endOffset": 8557
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 18,
+                        "startColumn": 2,
+                        "startOffset": 1108,
+                        "endColumn": 97,
+                        "endOffset": 1203
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 125,
+                    "startColumn": 4,
+                    "startOffset": 8562,
+                    "endColumn": 90,
+                    "endOffset": 8648
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 2,
+                        "startOffset": 1019,
+                        "endColumn": 88,
+                        "endOffset": 1105
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 126,
+                    "startColumn": 4,
+                    "startOffset": 8653,
+                    "endColumn": 96,
+                    "endOffset": 8745
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 16,
+                        "startColumn": 2,
+                        "startOffset": 924,
+                        "endColumn": 94,
+                        "endOffset": 1016
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 127,
+                    "startColumn": 4,
+                    "startOffset": 8750,
+                    "endColumn": 62,
+                    "endOffset": 8808
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 13,
+                        "startColumn": 2,
+                        "startOffset": 683,
+                        "endColumn": 60,
+                        "endOffset": 741
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 128,
+                    "startColumn": 4,
+                    "startOffset": 8813,
+                    "endColumn": 50,
+                    "endOffset": 8859
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 2,
+                        "startOffset": 217,
+                        "endColumn": 48,
+                        "endOffset": 263
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 129,
+                    "startColumn": 4,
+                    "startOffset": 8864,
+                    "endColumn": 78,
+                    "endOffset": 8938
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 80,
+                        "startColumn": 2,
+                        "startOffset": 5245,
+                        "endColumn": 76,
+                        "endOffset": 5319
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 130,
+                    "startColumn": 4,
+                    "startOffset": 8943,
+                    "endColumn": 158,
+                    "endOffset": 9097
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 122,
+                        "startColumn": 2,
+                        "startOffset": 8298,
+                        "endColumn": 156,
+                        "endOffset": 8452
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 131,
+                    "startColumn": 4,
+                    "startOffset": 9102,
+                    "endColumn": 106,
+                    "endOffset": 9204
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 121,
+                        "startColumn": 2,
+                        "startOffset": 8193,
+                        "endColumn": 104,
+                        "endOffset": 8295
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 132,
+                    "startColumn": 4,
+                    "startOffset": 9209,
+                    "endColumn": 59,
+                    "endOffset": 9264
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 124,
+                        "startColumn": 2,
+                        "startOffset": 8519,
+                        "endColumn": 57,
+                        "endOffset": 8574
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 133,
+                    "startColumn": 4,
+                    "startOffset": 9269,
+                    "endColumn": 65,
+                    "endOffset": 9330
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 123,
+                        "startColumn": 2,
+                        "startOffset": 8455,
+                        "endColumn": 63,
+                        "endOffset": 8516
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 134,
+                    "startColumn": 4,
+                    "startOffset": 9335,
+                    "endColumn": 107,
+                    "endOffset": 9438
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 120,
+                        "startColumn": 2,
+                        "startOffset": 8087,
+                        "endColumn": 105,
+                        "endOffset": 8190
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 135,
+                    "startColumn": 4,
+                    "startOffset": 9443,
+                    "endColumn": 133,
+                    "endOffset": 9572
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/apps-android-commons (copy)/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 119,
+                        "startColumn": 2,
+                        "startOffset": 7955,
+                        "endColumn": 131,
+                        "endOffset": 8084
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "outputFile": "/home/adam/Documents/Programming/commons/app/build/intermediates/res/merged/debug/values-tr/values-tr.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endLine": 6,
+                    "endColumn": 12,
+                    "endOffset": 245
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 49,
+                        "startColumn": 2,
+                        "startOffset": 3221,
+                        "endLine": 53,
+                        "endColumn": 12,
+                        "endOffset": 3411
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 7,
+                    "startColumn": 4,
+                    "startOffset": 250,
+                    "endLine": 10,
+                    "endColumn": 12,
+                    "endOffset": 389
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 58,
+                        "startColumn": 2,
+                        "startOffset": 3585,
+                        "endLine": 61,
+                        "endColumn": 12,
+                        "endOffset": 3724
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 11,
+                    "startColumn": 4,
+                    "startOffset": 394,
+                    "endLine": 14,
+                    "endColumn": 12,
+                    "endOffset": 562
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 54,
+                        "startColumn": 2,
+                        "startOffset": 3414,
+                        "endLine": 57,
+                        "endColumn": 12,
+                        "endOffset": 3582
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 15,
+                    "startColumn": 4,
+                    "startOffset": 567,
+                    "endLine": 18,
+                    "endColumn": 12,
+                    "endOffset": 740
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 21,
+                        "startColumn": 2,
+                        "startOffset": 1394,
+                        "endLine": 24,
+                        "endColumn": 12,
+                        "endOffset": 1567
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 19,
+                    "startColumn": 4,
+                    "startOffset": 745,
+                    "endLine": 21,
+                    "endColumn": 124,
+                    "endOffset": 986
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 73,
+                        "startColumn": 2,
+                        "startOffset": 4638,
+                        "endLine": 75,
+                        "endColumn": 130,
+                        "endOffset": 4891
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 22,
+                    "startColumn": 4,
+                    "startOffset": 991,
+                    "endColumn": 191,
+                    "endOffset": 1178
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 72,
+                        "startColumn": 2,
+                        "startOffset": 4442,
+                        "endColumn": 195,
+                        "endOffset": 4635
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 23,
+                    "startColumn": 4,
+                    "startOffset": 1183,
+                    "endColumn": 142,
+                    "endOffset": 1321
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 76,
+                        "startColumn": 2,
+                        "startOffset": 4894,
+                        "endColumn": 146,
+                        "endOffset": 5038
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 24,
+                    "startColumn": 4,
+                    "startOffset": 1326,
+                    "endColumn": 54,
+                    "endOffset": 1376
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 2,
+                        "startOffset": 53,
+                        "endColumn": 52,
+                        "endOffset": 103
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 25,
+                    "startColumn": 4,
+                    "startOffset": 1381,
+                    "endColumn": 64,
+                    "endOffset": 1441
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 2,
+                        "startOffset": 106,
+                        "endColumn": 62,
+                        "endOffset": 166
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 26,
+                    "startColumn": 4,
+                    "startOffset": 1446,
+                    "endColumn": 82,
+                    "endOffset": 1524
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 12,
+                        "startColumn": 2,
+                        "startOffset": 602,
+                        "endColumn": 80,
+                        "endOffset": 680
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 27,
+                    "startColumn": 4,
+                    "startOffset": 1529,
+                    "endColumn": 65,
+                    "endOffset": 1590
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 67,
+                        "startColumn": 2,
+                        "startOffset": 4067,
+                        "endColumn": 63,
+                        "endOffset": 4128
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 28,
+                    "startColumn": 4,
+                    "startOffset": 1595,
+                    "endColumn": 89,
+                    "endOffset": 1680
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 62,
+                        "startColumn": 2,
+                        "startOffset": 3727,
+                        "endColumn": 87,
+                        "endOffset": 3812
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 29,
+                    "startColumn": 4,
+                    "startOffset": 1685,
+                    "endColumn": 72,
+                    "endOffset": 1753
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 47,
+                        "startColumn": 2,
+                        "startOffset": 3096,
+                        "endColumn": 70,
+                        "endOffset": 3164
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 30,
+                    "startColumn": 4,
+                    "startOffset": 1758,
+                    "endLine": 33,
+                    "endColumn": 70,
+                    "endOffset": 2007
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 63,
+                        "startColumn": 2,
+                        "startOffset": 3815,
+                        "endLine": 66,
+                        "endColumn": 70,
+                        "endOffset": 4064
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 34,
+                    "startColumn": 4,
+                    "startOffset": 2012,
+                    "endColumn": 63,
+                    "endOffset": 2071
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 27,
+                        "startColumn": 2,
+                        "startOffset": 1697,
+                        "endColumn": 61,
+                        "endOffset": 1756
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 35,
+                    "startColumn": 4,
+                    "startOffset": 2076,
+                    "endColumn": 76,
+                    "endOffset": 2148
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 28,
+                        "startColumn": 2,
+                        "startOffset": 1759,
+                        "endColumn": 74,
+                        "endOffset": 1831
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 36,
+                    "startColumn": 4,
+                    "startOffset": 2153,
+                    "endColumn": 60,
+                    "endOffset": 2209
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 26,
+                        "startColumn": 2,
+                        "startOffset": 1638,
+                        "endColumn": 58,
+                        "endOffset": 1694
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 37,
+                    "startColumn": 4,
+                    "startOffset": 2214,
+                    "endColumn": 66,
+                    "endOffset": 2276
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 29,
+                        "startColumn": 2,
+                        "startOffset": 1834,
+                        "endColumn": 64,
+                        "endOffset": 1896
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 38,
+                    "startColumn": 4,
+                    "startOffset": 2281,
+                    "endColumn": 162,
+                    "endOffset": 2439
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/error.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 2,
+                        "startOffset": 191,
+                        "endColumn": 160,
+                        "endOffset": 349
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 39,
+                    "startColumn": 4,
+                    "startOffset": 2444,
+                    "endColumn": 62,
+                    "endOffset": 2502
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/error.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 2,
+                        "startOffset": 352,
+                        "endColumn": 60,
+                        "endOffset": 410
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 40,
+                    "startColumn": 4,
+                    "startOffset": 2507,
+                    "endColumn": 80,
+                    "endOffset": 2583
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/error.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 2,
+                        "startOffset": 112,
+                        "endColumn": 78,
+                        "endOffset": 188
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 41,
+                    "startColumn": 4,
+                    "startOffset": 2588,
+                    "endColumn": 60,
+                    "endOffset": 2644
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/error.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 2,
+                        "startOffset": 53,
+                        "endColumn": 58,
+                        "endOffset": 109
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 42,
+                    "startColumn": 4,
+                    "startOffset": 2649,
+                    "endColumn": 65,
+                    "endOffset": 2710
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 128,
+                        "startColumn": 2,
+                        "startOffset": 8775,
+                        "endColumn": 63,
+                        "endOffset": 8836
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 43,
+                    "startColumn": 4,
+                    "startOffset": 2715,
+                    "endColumn": 66,
+                    "endOffset": 2777
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 129,
+                        "startColumn": 2,
+                        "startOffset": 8839,
+                        "endColumn": 64,
+                        "endOffset": 8901
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 44,
+                    "startColumn": 4,
+                    "startOffset": 2782,
+                    "endColumn": 63,
+                    "endOffset": 2841
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 125,
+                        "startColumn": 2,
+                        "startOffset": 8577,
+                        "endColumn": 61,
+                        "endOffset": 8636
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 45,
+                    "startColumn": 4,
+                    "startOffset": 2846,
+                    "endColumn": 67,
+                    "endOffset": 2909
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 126,
+                        "startColumn": 2,
+                        "startOffset": 8639,
+                        "endColumn": 65,
+                        "endOffset": 8702
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 46,
+                    "startColumn": 4,
+                    "startOffset": 2914,
+                    "endColumn": 71,
+                    "endOffset": 2981
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 127,
+                        "startColumn": 2,
+                        "startOffset": 8705,
+                        "endColumn": 69,
+                        "endOffset": 8772
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 47,
+                    "startColumn": 4,
+                    "startOffset": 2986,
+                    "endColumn": 57,
+                    "endOffset": 3039
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 117,
+                        "startColumn": 2,
+                        "startOffset": 7827,
+                        "endColumn": 55,
+                        "endOffset": 7880
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 48,
+                    "startColumn": 4,
+                    "startOffset": 3044,
+                    "endColumn": 48,
+                    "endOffset": 3088
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 89,
+                        "startColumn": 2,
+                        "startOffset": 5850,
+                        "endColumn": 46,
+                        "endOffset": 5894
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 49,
+                    "startColumn": 4,
+                    "startOffset": 3093,
+                    "endColumn": 57,
+                    "endOffset": 3146
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 108,
+                        "startColumn": 2,
+                        "startOffset": 7185,
+                        "endColumn": 55,
+                        "endOffset": 7238
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 50,
+                    "startColumn": 4,
+                    "startOffset": 3151,
+                    "endColumn": 73,
+                    "endOffset": 3220
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 88,
+                        "startColumn": 2,
+                        "startOffset": 5778,
+                        "endColumn": 71,
+                        "endOffset": 5847
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 51,
+                    "startColumn": 4,
+                    "startOffset": 3225,
+                    "endColumn": 63,
+                    "endOffset": 3284
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 107,
+                        "startColumn": 2,
+                        "startOffset": 7123,
+                        "endColumn": 61,
+                        "endOffset": 7182
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 52,
+                    "startColumn": 4,
+                    "startOffset": 3289,
+                    "endColumn": 60,
+                    "endOffset": 3345
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 105,
+                        "startColumn": 2,
+                        "startOffset": 6999,
+                        "endColumn": 58,
+                        "endOffset": 7055
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 53,
+                    "startColumn": 4,
+                    "startOffset": 3350,
+                    "endColumn": 60,
+                    "endOffset": 3406
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 101,
+                        "startColumn": 2,
+                        "startOffset": 6751,
+                        "endColumn": 58,
+                        "endOffset": 6807
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 54,
+                    "startColumn": 4,
+                    "startOffset": 3411,
+                    "endColumn": 87,
+                    "endOffset": 3494
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 87,
+                        "startColumn": 2,
+                        "startOffset": 5692,
+                        "endColumn": 85,
+                        "endOffset": 5775
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 55,
+                    "startColumn": 4,
+                    "startOffset": 3499,
+                    "endColumn": 66,
+                    "endOffset": 3561
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 106,
+                        "startColumn": 2,
+                        "startOffset": 7058,
+                        "endColumn": 64,
+                        "endOffset": 7120
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 56,
+                    "startColumn": 4,
+                    "startOffset": 3566,
+                    "endColumn": 66,
+                    "endOffset": 3628
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 104,
+                        "startColumn": 2,
+                        "startOffset": 6934,
+                        "endColumn": 64,
+                        "endOffset": 6996
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 57,
+                    "startColumn": 4,
+                    "startOffset": 3633,
+                    "endColumn": 66,
+                    "endOffset": 3695
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 90,
+                        "startColumn": 2,
+                        "startOffset": 5897,
+                        "endColumn": 64,
+                        "endOffset": 5959
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 58,
+                    "startColumn": 4,
+                    "startOffset": 3700,
+                    "endColumn": 81,
+                    "endOffset": 3777
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 91,
+                        "startColumn": 2,
+                        "startOffset": 5962,
+                        "endColumn": 79,
+                        "endOffset": 6039
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 59,
+                    "startColumn": 4,
+                    "startOffset": 3782,
+                    "endColumn": 79,
+                    "endOffset": 3857
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 92,
+                        "startColumn": 2,
+                        "startOffset": 6042,
+                        "endColumn": 77,
+                        "endOffset": 6117
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 60,
+                    "startColumn": 4,
+                    "startOffset": 3862,
+                    "endColumn": 79,
+                    "endOffset": 3937
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 93,
+                        "startColumn": 2,
+                        "startOffset": 6120,
+                        "endColumn": 77,
+                        "endOffset": 6195
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 61,
+                    "startColumn": 4,
+                    "startOffset": 3942,
+                    "endColumn": 79,
+                    "endOffset": 4017
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 94,
+                        "startColumn": 2,
+                        "startOffset": 6198,
+                        "endColumn": 77,
+                        "endOffset": 6273
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 62,
+                    "startColumn": 4,
+                    "startOffset": 4022,
+                    "endColumn": 83,
+                    "endOffset": 4101
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 95,
+                        "startColumn": 2,
+                        "startOffset": 6276,
+                        "endColumn": 81,
+                        "endOffset": 6355
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 63,
+                    "startColumn": 4,
+                    "startOffset": 4106,
+                    "endColumn": 82,
+                    "endOffset": 4184
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 96,
+                        "startColumn": 2,
+                        "startOffset": 6358,
+                        "endColumn": 80,
+                        "endOffset": 6436
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 64,
+                    "startColumn": 4,
+                    "startOffset": 4189,
+                    "endColumn": 80,
+                    "endOffset": 4265
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 97,
+                        "startColumn": 2,
+                        "startOffset": 6439,
+                        "endColumn": 78,
+                        "endOffset": 6515
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 65,
+                    "startColumn": 4,
+                    "startOffset": 4270,
+                    "endColumn": 78,
+                    "endOffset": 4344
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 98,
+                        "startColumn": 2,
+                        "startOffset": 6518,
+                        "endColumn": 76,
+                        "endOffset": 6592
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 66,
+                    "startColumn": 4,
+                    "startOffset": 4349,
+                    "endColumn": 79,
+                    "endOffset": 4424
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 99,
+                        "startColumn": 2,
+                        "startOffset": 6595,
+                        "endColumn": 77,
+                        "endOffset": 6670
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 67,
+                    "startColumn": 4,
+                    "startOffset": 4429,
+                    "endColumn": 79,
+                    "endOffset": 4504
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 100,
+                        "startColumn": 2,
+                        "startOffset": 6673,
+                        "endColumn": 77,
+                        "endOffset": 6748
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 68,
+                    "startColumn": 4,
+                    "startOffset": 4509,
+                    "endColumn": 52,
+                    "endOffset": 4557
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 102,
+                        "startColumn": 2,
+                        "startOffset": 6810,
+                        "endColumn": 50,
+                        "endOffset": 6858
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 69,
+                    "startColumn": 4,
+                    "startOffset": 4562,
+                    "endColumn": 64,
+                    "endOffset": 4622
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 109,
+                        "startColumn": 2,
+                        "startOffset": 7241,
+                        "endColumn": 62,
+                        "endOffset": 7301
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 70,
+                    "startColumn": 4,
+                    "startOffset": 4627,
+                    "endColumn": 73,
+                    "endOffset": 4696
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 118,
+                        "startColumn": 2,
+                        "startOffset": 7883,
+                        "endColumn": 71,
+                        "endOffset": 7952
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 71,
+                    "startColumn": 4,
+                    "startOffset": 4701,
+                    "endColumn": 74,
+                    "endOffset": 4771
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 103,
+                        "startColumn": 2,
+                        "startOffset": 6861,
+                        "endColumn": 72,
+                        "endOffset": 6931
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 72,
+                    "startColumn": 4,
+                    "startOffset": 4776,
+                    "endColumn": 65,
+                    "endOffset": 4837
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 112,
+                        "startColumn": 2,
+                        "startOffset": 7474,
+                        "endColumn": 63,
+                        "endOffset": 7535
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 73,
+                    "startColumn": 4,
+                    "startOffset": 4842,
+                    "endColumn": 86,
+                    "endOffset": 4924
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 116,
+                        "startColumn": 2,
+                        "startOffset": 7742,
+                        "endColumn": 84,
+                        "endOffset": 7824
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 74,
+                    "startColumn": 4,
+                    "startOffset": 4929,
+                    "endColumn": 85,
+                    "endOffset": 5010
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 111,
+                        "startColumn": 2,
+                        "startOffset": 7390,
+                        "endColumn": 83,
+                        "endOffset": 7471
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 75,
+                    "startColumn": 4,
+                    "startOffset": 5015,
+                    "endColumn": 87,
+                    "endOffset": 5098
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 110,
+                        "startColumn": 2,
+                        "startOffset": 7304,
+                        "endColumn": 85,
+                        "endOffset": 7387
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 76,
+                    "startColumn": 4,
+                    "startOffset": 5103,
+                    "endColumn": 62,
+                    "endOffset": 5161
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 113,
+                        "startColumn": 2,
+                        "startOffset": 7538,
+                        "endColumn": 60,
+                        "endOffset": 7596
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 77,
+                    "startColumn": 4,
+                    "startOffset": 5166,
+                    "endColumn": 74,
+                    "endOffset": 5236
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 114,
+                        "startColumn": 2,
+                        "startOffset": 7599,
+                        "endColumn": 72,
+                        "endOffset": 7669
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 78,
+                    "startColumn": 4,
+                    "startOffset": 5241,
+                    "endColumn": 71,
+                    "endOffset": 5308
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 115,
+                        "startColumn": 2,
+                        "startOffset": 7672,
+                        "endColumn": 69,
+                        "endOffset": 7739
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 79,
+                    "startColumn": 4,
+                    "startOffset": 5313,
+                    "endColumn": 65,
+                    "endOffset": 5374
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 2,
+                        "startOffset": 409,
+                        "endColumn": 63,
+                        "endOffset": 470
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 80,
+                    "startColumn": 4,
+                    "startOffset": 5379,
+                    "endColumn": 60,
+                    "endOffset": 5435
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 2,
+                        "startOffset": 350,
+                        "endColumn": 58,
+                        "endOffset": 406
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 81,
+                    "startColumn": 4,
+                    "startOffset": 5440,
+                    "endColumn": 43,
+                    "endOffset": 5479
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 2,
+                        "startOffset": 308,
+                        "endColumn": 41,
+                        "endOffset": 347
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 82,
+                    "startColumn": 4,
+                    "startOffset": 5484,
+                    "endColumn": 68,
+                    "endOffset": 5548
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 11,
+                        "startColumn": 2,
+                        "startOffset": 535,
+                        "endColumn": 66,
+                        "endOffset": 599
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 83,
+                    "startColumn": 4,
+                    "startOffset": 5553,
+                    "endColumn": 93,
+                    "endOffset": 5642
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 41,
+                        "startColumn": 2,
+                        "startOffset": 2703,
+                        "endColumn": 91,
+                        "endOffset": 2792
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 84,
+                    "startColumn": 4,
+                    "startOffset": 5647,
+                    "endColumn": 70,
+                    "endOffset": 5713
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 42,
+                        "startColumn": 2,
+                        "startOffset": 2795,
+                        "endColumn": 68,
+                        "endOffset": 2861
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 85,
+                    "startColumn": 4,
+                    "startOffset": 5718,
+                    "endColumn": 78,
+                    "endOffset": 5792
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 37,
+                        "startColumn": 2,
+                        "startOffset": 2293,
+                        "endColumn": 76,
+                        "endOffset": 2367
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 86,
+                    "startColumn": 4,
+                    "startOffset": 5797,
+                    "endColumn": 100,
+                    "endOffset": 5893
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 39,
+                        "startColumn": 2,
+                        "startOffset": 2476,
+                        "endColumn": 98,
+                        "endOffset": 2572
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 87,
+                    "startColumn": 4,
+                    "startOffset": 5898,
+                    "endColumn": 129,
+                    "endOffset": 6023
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 40,
+                        "startColumn": 2,
+                        "startOffset": 2575,
+                        "endColumn": 127,
+                        "endOffset": 2700
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 88,
+                    "startColumn": 4,
+                    "startOffset": 6028,
+                    "endColumn": 107,
+                    "endOffset": 6131
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 38,
+                        "startColumn": 2,
+                        "startOffset": 2370,
+                        "endColumn": 105,
+                        "endOffset": 2473
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 89,
+                    "startColumn": 4,
+                    "startOffset": 6136,
+                    "endColumn": 63,
+                    "endOffset": 6195
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 2,
+                        "startOffset": 473,
+                        "endColumn": 61,
+                        "endOffset": 532
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 90,
+                    "startColumn": 4,
+                    "startOffset": 6200,
+                    "endColumn": 47,
+                    "endOffset": 6243
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 71,
+                        "startColumn": 2,
+                        "startOffset": 4396,
+                        "endColumn": 45,
+                        "endOffset": 4439
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 91,
+                    "startColumn": 4,
+                    "startOffset": 6248,
+                    "endColumn": 52,
+                    "endOffset": 6296
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 83,
+                        "startColumn": 2,
+                        "startOffset": 5457,
+                        "endColumn": 50,
+                        "endOffset": 5505
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 92,
+                    "startColumn": 4,
+                    "startOffset": 6301,
+                    "endColumn": 47,
+                    "endOffset": 6344
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 85,
+                        "startColumn": 2,
+                        "startOffset": 5594,
+                        "endColumn": 45,
+                        "endOffset": 5637
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 93,
+                    "startColumn": 4,
+                    "startOffset": 6349,
+                    "endColumn": 76,
+                    "endOffset": 6421
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 78,
+                        "startColumn": 2,
+                        "startOffset": 5097,
+                        "endColumn": 74,
+                        "endOffset": 5169
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 94,
+                    "startColumn": 4,
+                    "startOffset": 6426,
+                    "endColumn": 57,
+                    "endOffset": 6479
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 31,
+                        "startColumn": 2,
+                        "startOffset": 1955,
+                        "endColumn": 55,
+                        "endOffset": 2008
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 95,
+                    "startColumn": 4,
+                    "startOffset": 6484,
+                    "endColumn": 57,
+                    "endOffset": 6537
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 30,
+                        "startColumn": 2,
+                        "startOffset": 1899,
+                        "endColumn": 55,
+                        "endOffset": 1952
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 96,
+                    "startColumn": 4,
+                    "startOffset": 6542,
+                    "endColumn": 69,
+                    "endOffset": 6607
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 34,
+                        "startColumn": 2,
+                        "startOffset": 2117,
+                        "endColumn": 67,
+                        "endOffset": 2182
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 97,
+                    "startColumn": 4,
+                    "startOffset": 6612,
+                    "endColumn": 47,
+                    "endOffset": 6655
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 131,
+                        "startColumn": 2,
+                        "startOffset": 8961,
+                        "endColumn": 45,
+                        "endOffset": 9004
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 98,
+                    "startColumn": 4,
+                    "startOffset": 6660,
+                    "endColumn": 57,
+                    "endOffset": 6713
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 82,
+                        "startColumn": 2,
+                        "startOffset": 5401,
+                        "endColumn": 55,
+                        "endOffset": 5454
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 99,
+                    "startColumn": 4,
+                    "startOffset": 6718,
+                    "endColumn": 55,
+                    "endOffset": 6769
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 48,
+                        "startColumn": 2,
+                        "startOffset": 3167,
+                        "endColumn": 53,
+                        "endOffset": 3218
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 100,
+                    "startColumn": 4,
+                    "startOffset": 6774,
+                    "endColumn": 49,
+                    "endOffset": 6819
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 2,
+                        "startOffset": 169,
+                        "endColumn": 47,
+                        "endOffset": 214
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 101,
+                    "startColumn": 4,
+                    "startOffset": 6824,
+                    "endColumn": 45,
+                    "endOffset": 6865
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 33,
+                        "startColumn": 2,
+                        "startOffset": 2073,
+                        "endColumn": 43,
+                        "endOffset": 2114
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 102,
+                    "startColumn": 4,
+                    "startOffset": 6870,
+                    "endColumn": 52,
+                    "endOffset": 6918
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 46,
+                        "startColumn": 2,
+                        "startOffset": 3045,
+                        "endColumn": 50,
+                        "endOffset": 3093
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 103,
+                    "startColumn": 4,
+                    "startOffset": 6923,
+                    "endColumn": 67,
+                    "endOffset": 6986
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 44,
+                        "startColumn": 2,
+                        "startOffset": 2916,
+                        "endColumn": 65,
+                        "endOffset": 2979
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 104,
+                    "startColumn": 4,
+                    "startOffset": 6991,
+                    "endColumn": 80,
+                    "endOffset": 7067
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 81,
+                        "startColumn": 2,
+                        "startOffset": 5322,
+                        "endColumn": 78,
+                        "endOffset": 5398
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 105,
+                    "startColumn": 4,
+                    "startOffset": 7072,
+                    "endColumn": 43,
+                    "endOffset": 7111
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 2,
+                        "startOffset": 266,
+                        "endColumn": 41,
+                        "endOffset": 305
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 106,
+                    "startColumn": 4,
+                    "startOffset": 7116,
+                    "endColumn": 53,
+                    "endOffset": 7165
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 86,
+                        "startColumn": 2,
+                        "startOffset": 5640,
+                        "endColumn": 51,
+                        "endOffset": 5689
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 107,
+                    "startColumn": 4,
+                    "startOffset": 7170,
+                    "endColumn": 66,
+                    "endOffset": 7232
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 68,
+                        "startColumn": 2,
+                        "startOffset": 4131,
+                        "endColumn": 64,
+                        "endOffset": 4193
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 108,
+                    "startColumn": 4,
+                    "startOffset": 7237,
+                    "endColumn": 143,
+                    "endOffset": 7376
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 69,
+                        "startColumn": 2,
+                        "startOffset": 4196,
+                        "endColumn": 141,
+                        "endOffset": 4335
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 109,
+                    "startColumn": 4,
+                    "startOffset": 7381,
+                    "endColumn": 58,
+                    "endOffset": 7435
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 130,
+                        "startColumn": 2,
+                        "startOffset": 8904,
+                        "endColumn": 56,
+                        "endOffset": 8958
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 110,
+                    "startColumn": 4,
+                    "startOffset": 7440,
+                    "endColumn": 74,
+                    "endOffset": 7510
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 79,
+                        "startColumn": 2,
+                        "startOffset": 5172,
+                        "endColumn": 72,
+                        "endOffset": 5242
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 111,
+                    "startColumn": 4,
+                    "startOffset": 7515,
+                    "endColumn": 63,
+                    "endOffset": 7574
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 32,
+                        "startColumn": 2,
+                        "startOffset": 2011,
+                        "endColumn": 61,
+                        "endOffset": 2070
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 112,
+                    "startColumn": 4,
+                    "startOffset": 7579,
+                    "endColumn": 64,
+                    "endOffset": 7639
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 45,
+                        "startColumn": 2,
+                        "startOffset": 2982,
+                        "endColumn": 62,
+                        "endOffset": 3042
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 113,
+                    "startColumn": 4,
+                    "startOffset": 7644,
+                    "endColumn": 59,
+                    "endOffset": 7699
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 36,
+                        "startColumn": 2,
+                        "startOffset": 2235,
+                        "endColumn": 57,
+                        "endOffset": 2290
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 114,
+                    "startColumn": 4,
+                    "startOffset": 7704,
+                    "endColumn": 87,
+                    "endOffset": 7787
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 84,
+                        "startColumn": 2,
+                        "startOffset": 5508,
+                        "endColumn": 85,
+                        "endOffset": 5591
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 115,
+                    "startColumn": 4,
+                    "startOffset": 7792,
+                    "endColumn": 51,
+                    "endOffset": 7839
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 35,
+                        "startColumn": 2,
+                        "startOffset": 2185,
+                        "endColumn": 49,
+                        "endOffset": 2232
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 116,
+                    "startColumn": 4,
+                    "startOffset": 7844,
+                    "endColumn": 53,
+                    "endOffset": 7893
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 43,
+                        "startColumn": 2,
+                        "startOffset": 2864,
+                        "endColumn": 51,
+                        "endOffset": 2913
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 117,
+                    "startColumn": 4,
+                    "startOffset": 7898,
+                    "endColumn": 57,
+                    "endOffset": 7951
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 77,
+                        "startColumn": 2,
+                        "startOffset": 5041,
+                        "endColumn": 55,
+                        "endOffset": 5094
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 118,
+                    "startColumn": 4,
+                    "startOffset": 7956,
+                    "endColumn": 69,
+                    "endOffset": 8021
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 25,
+                        "startColumn": 2,
+                        "startOffset": 1570,
+                        "endColumn": 67,
+                        "endOffset": 1635
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 119,
+                    "startColumn": 4,
+                    "startOffset": 8026,
+                    "endColumn": 59,
+                    "endOffset": 8081
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 70,
+                        "startColumn": 2,
+                        "startOffset": 4338,
+                        "endColumn": 57,
+                        "endOffset": 4393
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 120,
+                    "startColumn": 4,
+                    "startOffset": 8086,
+                    "endColumn": 104,
+                    "endOffset": 8186
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 2,
+                        "startOffset": 821,
+                        "endColumn": 102,
+                        "endOffset": 921
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 121,
+                    "startColumn": 4,
+                    "startOffset": 8191,
+                    "endColumn": 78,
+                    "endOffset": 8265
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 14,
+                        "startColumn": 2,
+                        "startOffset": 744,
+                        "endColumn": 76,
+                        "endOffset": 818
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 122,
+                    "startColumn": 4,
+                    "startOffset": 8270,
+                    "endColumn": 89,
+                    "endOffset": 8355
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 20,
+                        "startColumn": 2,
+                        "startOffset": 1306,
+                        "endColumn": 87,
+                        "endOffset": 1391
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 123,
+                    "startColumn": 4,
+                    "startOffset": 8360,
+                    "endColumn": 101,
+                    "endOffset": 8457
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 19,
+                        "startColumn": 2,
+                        "startOffset": 1206,
+                        "endColumn": 99,
+                        "endOffset": 1303
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 124,
+                    "startColumn": 4,
+                    "startOffset": 8462,
+                    "endColumn": 99,
+                    "endOffset": 8557
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 18,
+                        "startColumn": 2,
+                        "startOffset": 1108,
+                        "endColumn": 97,
+                        "endOffset": 1203
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 125,
+                    "startColumn": 4,
+                    "startOffset": 8562,
+                    "endColumn": 90,
+                    "endOffset": 8648
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 2,
+                        "startOffset": 1019,
+                        "endColumn": 88,
+                        "endOffset": 1105
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 126,
+                    "startColumn": 4,
+                    "startOffset": 8653,
+                    "endColumn": 96,
+                    "endOffset": 8745
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 16,
+                        "startColumn": 2,
+                        "startOffset": 924,
+                        "endColumn": 94,
+                        "endOffset": 1016
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 127,
+                    "startColumn": 4,
+                    "startOffset": 8750,
+                    "endColumn": 62,
+                    "endOffset": 8808
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 13,
+                        "startColumn": 2,
+                        "startOffset": 683,
+                        "endColumn": 60,
+                        "endOffset": 741
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 128,
+                    "startColumn": 4,
+                    "startOffset": 8813,
+                    "endColumn": 50,
+                    "endOffset": 8859
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 2,
+                        "startOffset": 217,
+                        "endColumn": 48,
+                        "endOffset": 263
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 129,
+                    "startColumn": 4,
+                    "startOffset": 8864,
+                    "endColumn": 78,
+                    "endOffset": 8938
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 80,
+                        "startColumn": 2,
+                        "startOffset": 5245,
+                        "endColumn": 76,
+                        "endOffset": 5319
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 130,
+                    "startColumn": 4,
+                    "startOffset": 8943,
+                    "endColumn": 158,
+                    "endOffset": 9097
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 122,
+                        "startColumn": 2,
+                        "startOffset": 8298,
+                        "endColumn": 156,
+                        "endOffset": 8452
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 131,
+                    "startColumn": 4,
+                    "startOffset": 9102,
+                    "endColumn": 106,
+                    "endOffset": 9204
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 121,
+                        "startColumn": 2,
+                        "startOffset": 8193,
+                        "endColumn": 104,
+                        "endOffset": 8295
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 132,
+                    "startColumn": 4,
+                    "startOffset": 9209,
+                    "endColumn": 59,
+                    "endOffset": 9264
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 124,
+                        "startColumn": 2,
+                        "startOffset": 8519,
+                        "endColumn": 57,
+                        "endOffset": 8574
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 133,
+                    "startColumn": 4,
+                    "startOffset": 9269,
+                    "endColumn": 65,
+                    "endOffset": 9330
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 123,
+                        "startColumn": 2,
+                        "startOffset": 8455,
+                        "endColumn": 63,
+                        "endOffset": 8516
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 134,
+                    "startColumn": 4,
+                    "startOffset": 9335,
+                    "endColumn": 107,
+                    "endOffset": 9438
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 120,
+                        "startColumn": 2,
+                        "startOffset": 8087,
+                        "endColumn": 105,
+                        "endOffset": 8190
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 135,
+                    "startColumn": 4,
+                    "startOffset": 9443,
+                    "endColumn": 133,
+                    "endOffset": 9572
+                },
+                "from": {
+                    "file": "/home/adam/Documents/Programming/commons/app/src/main/res/values-tr/strings.xml",
+                    "position": {
+                        "startLine": 119,
+                        "startColumn": 2,
+                        "startOffset": 7955,
+                        "endColumn": 131,
+                        "endOffset": 8084
+                    }
+                }
+            }
+        ]
+    }
+]
