@@ -1,7 +1,7 @@
 # Wikimedia Commons for Android
 
 ## v1.13
-- Fixed various bugs and crashes
+- Fixed prettyLicense and mediaUri crashes
 
 ## v1.12
 - Further bug fixes for Polish language
