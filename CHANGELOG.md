@@ -1,5 +1,8 @@
 # Wikimedia Commons for Android
 
+## v1.13
+- Fixed various bugs and crashes
+
 ## v1.12
 - Further bug fixes for Polish language
 - Added Javadocs
