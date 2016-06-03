@@ -80,8 +80,8 @@
   <string name="share_license_summary">Сликава ќе се води под лиценцата %1$s</string>
   <string name="menu_download">Преземи</string>
   <string name="preference_license">Лиценца</string>
-  <string name="license_name_cc_by_sa">CCu00A0НаведиИзвор-СподелиПодИстиУсловиu00A03.0</string>
-  <string name="license_name_cc_by">CCu00A0НаведиИзворu00A03.0</string>
+  <string name="license_name_cc_by_sa">CC НаведиИзвор-СподелиПодИстиУслови 3.0</string>
+  <string name="license_name_cc_by">CC НаведиИзвор 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Австрија)</string>

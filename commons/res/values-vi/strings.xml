@@ -73,8 +73,8 @@ Chạm vào thông điệp này (hoặc bấm Quay lại) để bỏ qua bước
   <string name="share_license_summary">Hình này sẽ được phát hành theo giấy phép %1$s</string>
   <string name="menu_download">Tải về</string>
   <string name="preference_license">Giấy phép</string>
-  <string name="license_name_cc_by_sa">Creativeu00A0Commons Ghiu00A0công–Chiau00A0sẻ tươngu00A0tự 3.0</string>
-  <string name="license_name_cc_by">Creativeu00A0Commons Ghiu00A0công 3.0</string>
+  <string name="license_name_cc_by_sa">Creative Commons Ghi công–Chia sẻ tương tự 3.0</string>
+  <string name="license_name_cc_by">Creative Commons Ghi công 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Áo)</string>

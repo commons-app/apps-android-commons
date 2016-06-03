@@ -57,8 +57,8 @@ Agħfas fuq dan il-messaġġ (jew mur lura) sabiex taqbeż dan il-pass.</string>
   <string name="share_license_summary">Din l-istampa se tiġi liċenzjata taħt %1$s</string>
   <string name="menu_download">Niżżel</string>
   <string name="preference_license">Liċenzja</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Attribution-ShareAlike</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0Attribution</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CC Attribution-ShareAlike</string>
+  <string name="license_name_cc_by" fuzzy="true">CC Attribution</string>
   <string name="license_name_cc0">CC0</string>
   <string name="welcome_wikipedia_text">Ikkontribwixxi l-istampi tiegħek. Agħti l-ħajja lill-artikli tal-Wikipedija!</string>
   <string name="welcome_wikipedia_subtext">L-istampi fuq il-Wikipedija ġejjin mill-Wikimedia Commons.</string>
