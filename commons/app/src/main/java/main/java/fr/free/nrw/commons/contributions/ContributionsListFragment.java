@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.contributions;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,6 +18,7 @@ import android.support.v4.app.Fragment;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import fr.free.nrw.commons.AboutActivity;
 import fr.free.nrw.commons.CommonsApplication;
@@ -106,7 +108,14 @@ public class ContributionsListFragment extends Fragment {
                 feedbackIntent.setType("message/rfc822");
                 feedbackIntent.putExtra(Intent.EXTRA_EMAIL, new String[] { CommonsApplication.FEEDBACK_EMAIL });
                 feedbackIntent.putExtra(Intent.EXTRA_SUBJECT, String.format(CommonsApplication.FEEDBACK_EMAIL_SUBJECT, CommonsApplication.APPLICATION_VERSION));
-                startActivity(feedbackIntent);
+
+                try {
+                    startActivity(feedbackIntent);
+                }
+                catch (ActivityNotFoundException e) {
+                    Toast.makeText(getActivity(), R.string.no_email_client, Toast.LENGTH_SHORT).show();
+                }
+
                 return true;
             case R.id.menu_refresh:
                 ((SourceRefresher)getActivity()).refreshSource();
