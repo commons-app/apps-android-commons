@@ -1,7 +1,8 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/menu_upload_single"
         android:title="@string/menu_upload_single"
         android:icon="@drawable/social_send_now"
         android:enabled="false"
-        android:showAsAction="always" />
+        app:showAsAction="always" />
 </menu>

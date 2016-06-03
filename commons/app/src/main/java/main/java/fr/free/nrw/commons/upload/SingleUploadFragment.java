@@ -7,24 +7,25 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
-import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
-import fr.free.nrw.commons.Prefs;
-import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.R;
 
-public class SingleUploadFragment extends SherlockFragment {
+import fr.free.nrw.commons.Prefs;
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
+
+public class SingleUploadFragment extends Fragment {
 
     public interface OnUploadActionInitiated {
         void uploadActionInitiated(String title, String description);
@@ -69,8 +70,8 @@ public class SingleUploadFragment extends SherlockFragment {
             public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {}
 
             public void afterTextChanged(Editable editable) {
-                if(getSherlockActivity() != null) {
-                    getSherlockActivity().invalidateOptionsMenu();
+                if(getActivity() != null) {
+                    getActivity().invalidateOptionsMenu();
                 }
             }
         };

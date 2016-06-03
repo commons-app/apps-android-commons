@@ -1,31 +1,35 @@
 package fr.free.nrw.commons.contributions;
 
+import android.content.ComponentName;
+import android.content.ContentResolver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.database.Cursor;
 import android.database.DataSetObserver;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.content.*;
-import android.database.Cursor;
-import android.os.Bundle;
 import android.support.v4.widget.CursorAdapter;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Adapter;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
+import android.widget.AdapterView;
 
-import fr.free.nrw.commons.*;
-import fr.free.nrw.commons.auth.*;
+import java.util.ArrayList;
+
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.auth.*;
 import fr.free.nrw.commons.media.*;
 import fr.free.nrw.commons.upload.UploadService;
-
-import java.util.ArrayList;
 
 public  class       ContributionsActivity
         extends     AuthenticatedActivity
@@ -34,7 +38,6 @@ public  class       ContributionsActivity
                     MediaDetailPagerFragment.MediaDetailProvider,
                     FragmentManager.OnBackStackChangedListener,
                     ContributionsListFragment.SourceRefresher {
-
 
     private Cursor allContributions;
     private ContributionsListFragment contributionsList;

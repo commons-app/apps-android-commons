@@ -1,28 +1,29 @@
 package fr.free.nrw.commons.contributions;
 
-import android.app.*;
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.Fragment;
 import android.util.Log;
-import com.actionbarsherlock.app.SherlockFragment;
-import fr.free.nrw.commons.upload.ShareActivity;
-import fr.free.nrw.commons.upload.UploadService;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
+import fr.free.nrw.commons.upload.ShareActivity;
+import fr.free.nrw.commons.upload.UploadService;
+
 public class ContributionController {
-    private SherlockFragment fragment;
+    private Fragment fragment;
     private Activity activity;
 
     private final static int SELECT_FROM_GALLERY = 1;
     private final static int SELECT_FROM_CAMERA = 2;
 
-    public ContributionController(SherlockFragment fragment) {
+    public ContributionController(Fragment fragment) {
         this.fragment = fragment;
         this.activity = fragment.getActivity();
     }
@@ -72,12 +73,12 @@ public class ContributionController {
             case SELECT_FROM_GALLERY:
                 shareIntent.setType(activity.getContentResolver().getType(data.getData()));
                 shareIntent.putExtra(Intent.EXTRA_STREAM, data.getData());
-                shareIntent.putExtra(UploadService.EXTRA_SOURCE, Contribution.SOURCE_GALLERY);
+                shareIntent.putExtra(UploadService.EXTRA_SOURCE, fr.free.nrw.commons.contributions.Contribution.SOURCE_GALLERY);
                 break;
             case SELECT_FROM_CAMERA:
                 shareIntent.setType("image/jpeg"); //FIXME: Find out appropriate mime type
                 shareIntent.putExtra(Intent.EXTRA_STREAM, lastGeneratedCaptureURI);
-                shareIntent.putExtra(UploadService.EXTRA_SOURCE, Contribution.SOURCE_CAMERA);
+                shareIntent.putExtra(UploadService.EXTRA_SOURCE, fr.free.nrw.commons.contributions.Contribution.SOURCE_CAMERA);
                 break;
         }
         Log.i("Image", "Image selected");

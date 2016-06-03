@@ -9,19 +9,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
-import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.ListAdapter;
+import android.widget.TextView;
+import android.support.v4.app.Fragment;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
-
-import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.AboutActivity;
 import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.SettingsActivity;
 
-public class ContributionsListFragment extends SherlockFragment {
+public class ContributionsListFragment extends Fragment {
 
 
 
@@ -33,11 +35,29 @@ public class ContributionsListFragment extends SherlockFragment {
     private TextView waitingMessage;
     private TextView emptyMessage;
 
-    private ContributionController controller;
+    private fr.free.nrw.commons.contributions.ContributionController controller;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_contributions, container, false);
+        View v = inflater.inflate(R.layout.fragment_contributions, container, false);
+
+        contributionsList = (GridView) v.findViewById(R.id.contributionsList);
+        waitingMessage = (TextView) v.findViewById(R.id.waitingMessage);
+        emptyMessage = (TextView) v.findViewById(R.id.waitingMessage);
+
+        contributionsList.setOnItemClickListener((AdapterView.OnItemClickListener)getActivity());
+        if(savedInstanceState != null) {
+            Log.d("Commons", "Scrolling to " + savedInstanceState.getInt("grid-position"));
+            contributionsList.setSelection(savedInstanceState.getInt("grid-position"));
+        }
+
+        SharedPreferences prefs = this.getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        String lastModified = prefs.getString("lastSyncTimestamp", "");
+        if (lastModified.equals("")) {
+            waitingMessage.setVisibility(View.VISIBLE);
+        }
+
+        return v;
     }
 
     public ListAdapter getAdapter() {
@@ -125,24 +145,8 @@ public class ContributionsListFragment extends SherlockFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        controller = new ContributionController(this);
+        controller = new fr.free.nrw.commons.contributions.ContributionController(this);
         controller.loadState(savedInstanceState);
-
-        contributionsList = (GridView)getView().findViewById(R.id.contributionsList);
-        waitingMessage = (TextView)getView().findViewById(R.id.waitingMessage);
-        emptyMessage = (TextView)getView().findViewById(R.id.waitingMessage);
-
-        contributionsList.setOnItemClickListener((AdapterView.OnItemClickListener)getActivity());
-        if(savedInstanceState != null) {
-            Log.d("Commons", "Scrolling to " + savedInstanceState.getInt("grid-position"));
-            contributionsList.setSelection(savedInstanceState.getInt("grid-position"));
-        }
-
-        SharedPreferences prefs = this.getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
-        String lastModified = prefs.getString("lastSyncTimestamp", "");
-        if (lastModified.equals("")) {
-            waitingMessage.setVisibility(View.VISIBLE);
-        }
     }
 
     private void clearSyncMessage() {
