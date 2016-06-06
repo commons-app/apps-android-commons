@@ -66,8 +66,8 @@ Kliknite na tento odkaz (alebo na späť) ak chcete tento krok vynechať.</strin
   <string name="share_license_summary">Tento obrázok bude licencovaný podľa %1$s</string>
   <string name="menu_download">Stiahnuť</string>
   <string name="preference_license">Licencia</string>
-  <string name="license_name_cc_by_sa">CCu00A0Attribution-ShareAlikeu00A03.0</string>
-  <string name="license_name_cc_by">CCu00A0Attributionu00A03.0</string>
+  <string name="license_name_cc_by_sa">CC Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Rakúsko)</string>

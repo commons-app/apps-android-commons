@@ -63,8 +63,8 @@
   <string name="share_license_summary">Billedet vil blive licenseret under %1$s</string>
   <string name="menu_download">Hent</string>
   <string name="preference_license">Licens</string>
-  <string name="license_name_cc_by_sa">CCu00A0Navngivelse-DelPåSammeVilkåru00A03.0</string>
-  <string name="license_name_cc_by">CCu00A0Navngivelseu00A03.0</string>
+  <string name="license_name_cc_by_sa">CC Navngivelse-DelPåSammeVilkår 3.0</string>
+  <string name="license_name_cc_by">CC Navngivelse 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Østrig)</string>

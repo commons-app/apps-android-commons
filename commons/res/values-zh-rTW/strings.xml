@@ -80,8 +80,8 @@
   <string name="share_license_summary">此圖片將以%1$s協議授權下上載</string>
   <string name="menu_download">下載</string>
   <string name="preference_license">協議授權</string>
-  <string name="license_name_cc_by_sa">CCu00A0姓名標示-相同方式分享u00A03.0</string>
-  <string name="license_name_cc_by">CCu00A0姓名標示u00A03.0</string>
+  <string name="license_name_cc_by_sa">CC 姓名標示-相同方式分享 3.0</string>
+  <string name="license_name_cc_by">CC 姓名標示 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC姓名標示-相同方式分享3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC姓名標示-相同方式分享3.0（奥地利）</string>

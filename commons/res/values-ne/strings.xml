@@ -66,8 +66,8 @@
   <string name="share_license_summary">यो तस्विर  %1$s अनुमतिपत्र अनुसार प्राप्त हुनेछ</string>
   <string name="menu_download">डाउनलोड गर्ने</string>
   <string name="preference_license">इजाजतपत्र</string>
-  <string name="license_name_cc_by_sa">CCu00A0एट्रिब्युसन-सेयर अलाइकu00A0३.०</string>
-  <string name="license_name_cc_by">CCu00A0एट्रिब्युसनu00A0३.०</string>
+  <string name="license_name_cc_by_sa">CC एट्रिब्युसन-सेयर अलाइक ३.०</string>
+  <string name="license_name_cc_by">CC एट्रिब्युसन ३.०</string>
   <string name="license_name_cc0">CC०</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA ३.०</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA ३.० (अस्ट्रिया)</string>

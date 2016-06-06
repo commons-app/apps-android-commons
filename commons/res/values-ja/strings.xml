@@ -62,8 +62,8 @@
   <string name="menu_cancel_upload">キャンセル</string>
   <string name="menu_download">ダウンロード</string>
   <string name="preference_license">ライセンス</string>
-  <string name="license_name_cc_by_sa">CCu00A0表示-継承u00A03.0</string>
-  <string name="license_name_cc_by">CCu00A0表示u00A03.0</string>
+  <string name="license_name_cc_by_sa">CC 表示-継承 3.0</string>
+  <string name="license_name_cc_by">CC 表示 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC 表示-継承 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC 表示-継承 3.0 (オーストリア)</string>

@@ -80,8 +80,8 @@ Tippe auf diese Nachricht oder drücke „Zurück“, um diesen Schritt zu über
   <string name="share_license_summary">Dieses Bild wird lizenziert unter %1$s</string>
   <string name="menu_download">Herunterladen</string>
   <string name="preference_license">Lizenz</string>
-  <string name="license_name_cc_by_sa">CCu00A0Attribution-ShareAlikeu00A03.0</string>
-  <string name="license_name_cc_by">CCu00A0Attributionu00A03.0</string>
+  <string name="license_name_cc_by_sa">CC Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC-BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC-BY-SA 3.0 (Österreich)</string>
