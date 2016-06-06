@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Wikimedia Commons</string>
+  <string name="app_name_beta">Wikimedia Commons Beta</string>
+  <string name="menu_settings">Instellingen</string>
+  <string name="username">Gebruikersnaam</string>
+  <string name="password">Wachtwoord</string>
+  <string name="login">Aanmelden</string>
+  <string name="logging_in_title">Bezig met aanmelden</string>
+  <string name="logging_in_message">Een ogenblik geduld...</string>
+  <string name="login_success">Aanmelden geslaagd</string>
+  <string name="login_failed">Aanmelden mislukt</string>
+  <string name="authentication_failed">Verificatie is mislukt</string>
+  <string name="uploading_started">Uploaden is begonnen</string>
+  <string name="upload_completed_notification_title">%1$s geüpload</string>
+  <string name="upload_completed_notification_text">Wijs aan om uw upload te bekijken</string>
+  <string name="upload_progress_notification_title_start">Het uploaden van %1$s begint</string>
+  <string name="upload_progress_notification_title_in_progress">Bezig met het uploaden van %1$s</string>
+  <string name="upload_progress_notification_title_finishing">Het uploaden van %1$s is afgerond</string>
+  <string name="upload_failed_notification_title">Het uploaden van %1$s is mislukt</string>
+  <string name="upload_failed_notification_subtitle">Wijs aan om te bekijken</string>
+  <string name="uploads_pending_notification_indicator">%d bestanden aan het uploaden</string>
+  <string name="title_activity_contributions">Mijn uploads</string>
+  <string name="contribution_state_queued">In wachtrij</string>
+  <string name="contribution_state_failed">Mislukt</string>
+  <string name="contribution_state_in_progress">%1$d%% afgerond</string>
+  <string name="contribution_state_starting">Bezig met uploaden</string>
+  <string name="menu_from_gallery">Uit galerij</string>
+  <string name="menu_from_camera">Foto nemen</string>
+  <string name="provider_contributions">Mijn uploads</string>
+  <string name="menu_share">Delen</string>
+  <string name="menu_open_in_browser">In browser bekijken</string>
+  <string name="share_title_hint">Naam</string>
+  <string name="share_description_hint">Beschrijving</string>
+  <string name="login_failed_network">Aanmelden niet mogelijk. Er is een probleem met het netwerk</string>
+  <string name="login_failed_username">Aanmelden niet mogelijk. Controleer uw gebruikersnaam</string>
+  <string name="login_failed_password">Aanmelden niet mogelijk. Controleer uw wachtwoord</string>
+  <string name="login_failed_throttled">U hebt te vaak geprobeerd aan te melden. Probeer het over een aantal minuten opnieuw</string>
+  <string name="login_failed_blocked">Deze gebruiker is helaas geblokkeerd op Wikimedia Commons</string>
+  <string name="login_failed_generic">Aanmelden mislukt</string>
+  <string name="share_upload_button">Uploaden</string>
+  <string name="multiple_share_base_title">Geef deze verzameling een naam</string>
+  <string name="provider_modifications">Wijzigingen</string>
+  <string name="menu_upload_single">Uploaden</string>
+  <string name="categories_search_text_hint">Categorieën zoeken</string>
+  <string name="menu_save_categories">Opslaan</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">Nog geen uploads</item>
+    <item quantity="one">1 upload</item>
+    <item quantity="other">%d uploads</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Bezig met 1 upload</item>
+    <item quantity="other">Bezig met %d uploads</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">1 upload</item>
+    <item quantity="other">%d uploads</item>
+  </plurals>
+  <string name="categories_not_found">Er zijn geen categorieën met \"%1$s\" gevonden</string>
+  <string name="categories_skip_explanation">Voeg categorieën toe om uw afbeeldingen makkelijker te vinden te maken op Wikimedia Commons.
+
+Begin met het toevoegen van categorieën.
+
+Klik op dit bericht, of ga terug, om deze stap over te slaan.</string>
+  <string name="categories_activity_title">Categorieën</string>
+  <string name="preference_tracking">Gebruiksrapporten</string>
+  <string name="preference_tracking_summary">Gebruiksrapporten verzenden naar Wikimedia om ons te helpen de app te verbeteren</string>
+  <string name="title_activity_settings">Instellingen</string>
+  <string name="menu_about">Over</string>
+  <string name="about_license">Open sourcesoftware vrijgegeven onder de &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
+  <string name="about_improve">Broncode op &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Bugs in &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privacybeleid&lt;/a&gt;</string>
+  <string name="title_activity_about">Over</string>
+  <string name="menu_feedback">Terugkoppeling geven (via e-mail)</string>
+  <string name="provider_categories">Recent gebruikte categorieën</string>
+  <string name="waiting_first_sync">Wachten op de eerste synchronisatie...</string>
+  <string name="no_uploads_yet">U hebt nog geen afbeeldingen geüpload.</string>
+  <string name="menu_retry_upload">Opnieuw proberen</string>
+  <string name="menu_cancel_upload">Annuleren</string>
+  <string name="share_license_summary">Deze afbeelding wordt gelicenseerd onder %1$s</string>
+  <string name="menu_download">Downloaden</string>
+  <string name="preference_license">Licentie</string>
+  <string name="license_name_cc_by_sa">CCu00A0Naamsvermelding-Gelijku00A0delenu00A03.0</string>
+  <string name="license_name_cc_by">CCu00A0Naamsvermeldingu00A03.0</string>
+  <string name="license_name_cc0">CC0</string>
+  <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Oostenrijk)</string>
+  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Duitsland)</string>
+  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estland)</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Spanje)</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Kroatië)</string>
+  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxemburg)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Nederland)</string>
+  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Noorwegen)</string>
+  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polen)</string>
+  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Roemenië)</string>
+  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_zero">CC Zero</string>
+  <string name="license_name_own_pd">eigen-pd</string>
+  <string name="license_name_cc_by_sa_2_5">CC-BY-SA-2.5</string>
+  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
+  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
+  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
+  <string name="license_name_cc_2_0">CC BY 2.0</string>
+  <string name="license_name_fal">Vrije Artistieke Licentie (FAL)</string>
+  <string name="license_name_pd_old_100">Publiek domein (auteur is meer dan 100 jaar geleden gestorven)</string>
+  <string name="license_name_pd_old">Publiek domein (auteursrechten verlopen)</string>
+  <string name="license_name_pd_art">Publiek domein (kunst)</string>
+  <string name="license_name_pd_us">Publiek domein (VS)</string>
+  <string name="license_name_pd_usgov">Publiek domein (Amerikaanse overheid)</string>
+  <string name="license_name_pd_usgov_nasa">Publiek domein (NASA)</string>
+  <string name="license_name_pd_ineligible">Publiek domein (komt niet in aanmerking voor auteursrechten)</string>
+  <string name="license_name_attribution">Naamsvermelding</string>
+  <string name="license_name_gfdl">GNU-licentie voor vrije documentatie</string>
+  <string name="welcome_wikipedia_text">Draag uw afbeelding bij. Help pagina\'s in Wikipedia tot leven te laten komen!</string>
+  <string name="welcome_wikipedia_subtext">Afbeeldingen op Wikipedia komen van Wikimedia Commons.</string>
+  <string name="welcome_copyright_text">Uw afbeeldingen helpen mensen van over de hele wereld te leren.</string>
+  <string name="welcome_copyright_subtext">Vermijd auteursrechtelijk beschermd materiaal dat u op internet hebt gevonden zoals  afbeeldingen van posters, boeken, enzovoort.</string>
+  <string name="welcome_final_text">Begrijpt u het?</string>
+  <string name="welcome_final_button_text">Ja!</string>
+  <string name="detail_panel_cats_label">Categorieën</string>
+  <string name="detail_panel_cats_loading">Bezig met laden…</string>
+  <string name="detail_panel_cats_none">Geen selectie</string>
+  <string name="detail_description_empty">Geen beschrijving</string>
+  <string name="detail_license_empty">Onbekende licentie</string>
+  <string name="provider_campaigns">Campagnes</string>
+  <string name="menu_refresh">Vernieuwen</string>
+</resources>
