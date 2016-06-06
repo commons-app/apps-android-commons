@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Wikimedia Commons</string>
+  <string name="app_name_beta">Beta Wikimedia Commons</string>
+  <string name="menu_settings">Arventennoù</string>
+  <string name="username">Anv implijer</string>
+  <string name="password">Ger-tremen</string>
+  <string name="login">Kevreañ</string>
+  <string name="logging_in_title">O kevreañ</string>
+  <string name="logging_in_message">Gortozit mar plij...</string>
+  <string name="login_success">Kevreet oc\'h !</string>
+  <string name="login_failed">Kudenn gevreañ !</string>
+  <string name="authentication_failed">Dilesadur c\'hwitet!</string>
+  <string name="uploading_started">Kroget da enporzhiañ!</string>
+  <string name="upload_completed_notification_title">%1$s bet enporzhiet !</string>
+  <string name="upload_completed_notification_text">Pouezit evit gwelet hoc\'h enporzhiadenn</string>
+  <string name="upload_progress_notification_title_start">O kregiñ da enporzhiañ %1$s</string>
+  <string name="upload_progress_notification_title_in_progress">O enporzhiañ %1$s !</string>
+  <string name="upload_progress_notification_title_finishing">Oc\'h echuiñ enporzhiadenn %1$s</string>
+  <string name="upload_failed_notification_title">C\'hwitet en deus enporzhiañ %1$s</string>
+  <string name="upload_failed_notification_subtitle">Pouezit evit diskwel</string>
+  <string name="uploads_pending_notification_indicator">%d restr oc\'h enporzhiañ</string>
+  <string name="title_activity_contributions">Ma enporzhiadennoù</string>
+  <string name="contribution_state_queued">Lakaet el lostenn</string>
+  <string name="contribution_state_failed">C\'hwitet</string>
+  <string name="contribution_state_in_progress">%1$d%% graet</string>
+  <string name="contribution_state_starting">Oc\'h enporzhiañ</string>
+  <string name="menu_from_gallery">Adalek ar skeudennaoueg</string>
+  <string name="menu_from_camera">Tapout ul luc\'hskeudenn</string>
+  <string name="provider_contributions">Ma enporzhiadennoù</string>
+  <string name="menu_share">Rannañ</string>
+  <string name="menu_open_in_browser">Diskwel er meerder</string>
+  <string name="share_title_hint">Titl</string>
+  <string name="share_description_hint">Deskrivadur</string>
+  <string name="login_failed_network">Ne c\'haller ket kevreañ - rouedad sac\'het</string>
+  <string name="login_failed_username">Ne c\'haller ket kevreañ - Gwiriit hoc\'h anv implijer, mar plij</string>
+  <string name="login_failed_password">Ne c\'haller ket kevreañ - Gwiriit ho ker tremen, mar plij</string>
+  <string name="login_failed_throttled">Klasket ho peus re. Esaeit en-dro en ur pennadig</string>
+  <string name="login_failed_blocked">Hon digarezit, prennet eo bet an implijer-mañ e Commons</string>
+  <string name="login_failed_generic">C\'hwitet eo ar c\'hevreañ</string>
+  <string name="share_upload_button">Pellgargañ</string>
+  <string name="multiple_share_base_title">Envel ar rikoù-mañ</string>
+  <string name="provider_modifications">Kemmoù</string>
+  <string name="menu_upload_single">Enporzhiañ</string>
+  <string name="categories_search_text_hint">Klask rummadoù</string>
+  <string name="menu_save_categories">Enrollañ</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">Pellgardenn ebet c\'hoazh</item>
+    <item quantity="one">1 bellgargadenn</item>
+    <item quantity="other">%d Pellgargadennoù</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">1 bellgargadenn loc\'het</item>
+    <item quantity="other">%d pellgargadennoù loc\'het</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">1 bellgargadenn</item>
+    <item quantity="other">%d pellgargadennoù</item>
+  </plurals>
+  <string name="categories_not_found">N\'eus bet kavet rummad ebet o klotañ gant %1$s</string>
+  <string name="categories_explanation">Ouzhpennit rummadoù evit ma vo aesoc\'h kavout ho skeudennoù war Wikimedia Commons.
+
+Krogit da ouzhpennañ rummadoù.
+Pouezit war ar c\'hemenn-mañ (pe distroit en a-raok) evit mont dreist ar bazenn-mañ.</string>
+  <string name="categories_activity_title">Rummadoù</string>
+  <string name="preference_tracking">Danevelloù implij</string>
+  <string name="preference_tracking_summary">Kas danevelloù implij deomp evit ma c\'hallfemp gwellaat an arload.</string>
+  <string name="title_activity_settings">Arventennoù</string>
+  <string name="menu_about">Diwar-benn</string>
+  <string name="about_license">Meziant frank a wirioù embannet dindan &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;an Aotre-implijout Apache s2&lt;/a&gt;</string>
+  <string name="about_improve">Mammenn war &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Drein war &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Reolennoù prevezded&lt;/a&gt;</string>
+  <string name="title_activity_about">Diwar-benn</string>
+  <string name="menu_feedback">Kas ho soñj (dre bostel)</string>
+  <string name="provider_categories">Rummadoù bet implijet n\'eus ket pell</string>
+  <string name="waiting_first_sync">O c\'hortoz ar sinkroneladur kentañ...</string>
+  <string name="no_uploads_yet">N\'ho peus ket enporzhiet skeudennoù c\'hoazh.</string>
+  <string name="menu_retry_upload">Klask en-dro</string>
+  <string name="menu_cancel_upload">Nullañ</string>
+  <string name="share_license_summary">Gant an aotre-implijout %1$s e vo ar skeudenn-mañ</string>
+  <string name="menu_download">Pellgargañ</string>
+  <string name="preference_license">Aotre-implijout</string>
+  <string name="license_name_cc_by_sa">CC Dereiñ-RannañAlike 3.0</string>
+  <string name="license_name_cc_by">CC Dereiñ 3.0</string>
+  <string name="license_name_cc0">CC0</string>
+  <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Aostria)</string>
+  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Alamagn)</string>
+  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonia)</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Bro Spagn)</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Kroatia)</string>
+  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luksembourg)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Izelvroioù)</string>
+  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norvegia)</string>
+  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polonia)</string>
+  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Roumania)</string>
+  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_zero">CC Zero</string>
+  <string name="license_name_own_pd">own-pd</string>
+  <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
+  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
+  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
+  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
+  <string name="license_name_cc_2_0">CC BY 2.0</string>
+  <string name="license_name_fal">Aotre-implijout arzel frank</string>
+  <string name="license_name_pd_old_100">Domani foran (aozer marvet ouzhpenn 100 vloaz zo)</string>
+  <string name="license_name_pd_old">Domani foran (gwirioù-eilañ diamzeret)</string>
+  <string name="license_name_pd_art">Domani foran (arz)</string>
+  <string name="license_name_pd_us">Domani foran (SUA)</string>
+  <string name="license_name_pd_usgov">Domani foran (gouarnamant ar Stadoù-Unanet)</string>
+  <string name="license_name_pd_usgov_nasa">Domani foran (NASA)</string>
+  <string name="license_name_pd_ineligible">Domani foran (ne c\'hall ket kaout gwirioù-eilañ)</string>
+  <string name="license_name_attribution">Deroadenn</string>
+  <string name="license_name_gfdl">Aotre-implijout teuliaouiñ frank GNU</string>
+  <string name="welcome_wikipedia_text">Kemerit perzh gant ho skeudennoù. Sikourit pennadoù Wikipedia da zont da vev !</string>
+  <string name="welcome_wikipedia_subtext">Dont a ra skeudennoù Wikipedia eus Wikimedia Commons.</string>
+  <string name="welcome_copyright_text">Ho skeudennoù a sikour an dud da zeskiñ traoù dre ar bed a-bezh.</string>
+  <string name="welcome_copyright_subtext">Diarbenn an dafar gwarezet a vez kavet ganeoc\'h war ar Genrouedad, hag ivez ar skeudennoù skritelloù, ar goloioù levrioù ha kement zo...</string>
+  <string name="welcome_final_text">Ha soñjal a rit eo mat ?</string>
+  <string name="welcome_final_button_text">Ya !</string>
+  <string name="detail_panel_cats_label">Rummadoù</string>
+  <string name="detail_panel_cats_loading">O kargañ...</string>
+  <string name="detail_panel_cats_none">Hini ebet diuzet</string>
+  <string name="detail_description_empty">Deskrivadur ebet</string>
+  <string name="detail_license_empty">Aotre-implijout dizanv</string>
+  <string name="provider_campaigns">Koulzadoù</string>
+  <string name="menu_refresh">Freskaat</string>
+</resources>

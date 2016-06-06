@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">维基共享资源</string>
+  <string name="app_name_beta">维基共享资源测试版</string>
+  <string name="menu_settings">设置</string>
+  <string name="username">用户名</string>
+  <string name="password">密码</string>
+  <string name="login">登录</string>
+  <string name="logging_in_title">登录中</string>
+  <string name="logging_in_message">请稍候...</string>
+  <string name="login_success">登录成功 ！</string>
+  <string name="login_failed">登录失败!</string>
+  <string name="authentication_failed">身份验证失败 ！</string>
+  <string name="uploading_started">开始上传！</string>
+  <string name="upload_completed_notification_title">已上传%1$s！</string>
+  <string name="upload_completed_notification_text">轻触以查看您的上传</string>
+  <string name="upload_progress_notification_title_start">正在开始上传%1$s</string>
+  <string name="upload_progress_notification_title_in_progress">正在上传%1$s</string>
+  <string name="upload_progress_notification_title_finishing">正在完成上传%1$s</string>
+  <string name="upload_failed_notification_title">上传%1$s失败</string>
+  <string name="upload_failed_notification_subtitle">轻触以查看</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%d个文件上传中</item>
+    <item quantity="other">%d个文件上传中</item>
+  </plurals>
+  <string name="title_activity_contributions">我上传的内容</string>
+  <string name="contribution_state_queued">队列</string>
+  <string name="contribution_state_failed">失败</string>
+  <string name="contribution_state_in_progress">%1$d%%完成</string>
+  <string name="contribution_state_starting">上传中</string>
+  <string name="menu_from_gallery">从图库</string>
+  <string name="menu_from_camera">拍照</string>
+  <string name="provider_contributions">我的上传</string>
+  <string name="menu_share">分享</string>
+  <string name="menu_open_in_browser">在浏览器中查看</string>
+  <string name="share_title_hint">标题</string>
+  <string name="share_description_hint">说明</string>
+  <string name="login_failed_network">无法登录-网络故障</string>
+  <string name="login_failed_username">无法登录-请检查您的用户名</string>
+  <string name="login_failed_password">无法登录-请检查您的密码</string>
+  <string name="login_failed_throttled">错误次数过多，请在几分钟后再次尝试</string>
+  <string name="login_failed_blocked">抱歉，此用户已在维基共享资源上被封禁</string>
+  <string name="login_failed_generic">登录失败</string>
+  <string name="share_upload_button">上传</string>
+  <string name="multiple_share_base_title">命名此组</string>
+  <string name="provider_modifications">修改</string>
+  <string name="menu_upload_single">上传</string>
+  <string name="categories_search_text_hint">搜索分类</string>
+  <string name="menu_save_categories">保存</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="one">%d次上传</item>
+    <item quantity="other">%d次上传</item>
+    <item quantity="zero">没有上传</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">开始%d次上传</item>
+    <item quantity="other">开始%d次上传</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%d次上传</item>
+    <item quantity="other">%d次上传</item>
+  </plurals>
+  <string name="categories_not_found">没有找到匹配%1$s的分类</string>
+  <string name="categories_explanation">为您的图片添加分类，让它们在维基共享上更容易被找到。
+
+开始添加分类。
+点击本信息（或点击返回）跳过此步。</string>
+  <string name="categories_activity_title">分类</string>
+  <string name="preference_tracking">使用报告</string>
+  <string name="preference_tracking_summary">向维基媒体发送使用报告，帮助我们改进应用</string>
+  <string name="title_activity_settings">设置</string>
+  <string name="menu_about">关于</string>
+  <string name="about_license">开放源码软件在&lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;下释放</string>
+  <string name="about_improve">源代码位于&lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;。在&lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;报告错误。</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;隐私政策&lt;/a&gt;</string>
+  <string name="title_activity_about">关于</string>
+  <string name="menu_feedback">反馈（通过电子邮件）</string>
+  <string name="provider_categories">最近使用过的类别</string>
+  <string name="waiting_first_sync">等待第一次同步...</string>
+  <string name="no_uploads_yet">你尚未上传任何照片。</string>
+  <string name="menu_retry_upload">重试</string>
+  <string name="menu_cancel_upload">取消</string>
+  <string name="share_license_summary">此图像将使用%1$s协议</string>
+  <string name="menu_download">下载</string>
+  <string name="preference_license">授权协议</string>
+  <string name="license_name_cc_by_sa">CC 署名-相同方式分享 3.0</string>
+  <string name="license_name_cc_by">CC 署名 3.0</string>
+  <string name="license_name_cc0">CC0</string>
+  <string name="license_name_cc_by_sa_3_0">知识共享 署名-相同方式共享 3.0</string>
+  <string name="license_name_cc_by_sa_3_0_at">CC署名-相同方式共享3.0（奥地利）</string>
+  <string name="license_name_cc_by_sa_3_0_de">CC署名-相同方式共享3.0（德国）</string>
+  <string name="license_name_cc_by_sa_3_0_ee">CC署名-相同方式共享3.0（爱沙尼亚）</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC署名-相同方式共享3.0（西班牙）</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC署名-相同方式共享3.0（克罗地亚）</string>
+  <string name="license_name_cc_by_sa_3_0_lu">CC署名-相同方式共享3.0（卢森堡）</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC署名-相同方式共享3.0（荷兰）</string>
+  <string name="license_name_cc_by_sa_3_0_no">CC署名-相同方式共享3.0（挪威）</string>
+  <string name="license_name_cc_by_sa_3_0_pl">CC署名-相同方式共享3.0（波兰）</string>
+  <string name="license_name_cc_by_sa_3_0_ro">CC署名-相同方式共享3.0（罗马尼亚）</string>
+  <string name="license_name_cc_by_3_0">CC署名3.0</string>
+  <string name="license_name_cc_zero">CC0</string>
+  <string name="license_name_own_pd">个人公有领域</string>
+  <string name="license_name_cc_by_sa_2_5">知识共享 署名-相同方式共享 2.5</string>
+  <string name="license_name_cc_by_2_5">知识共享-署名2.5</string>
+  <string name="license_name_cc_by_sa_2_0">知识共享 署名-相同方式共享 2.0</string>
+  <string name="license_name_cc_by_2_0">知识共享 署名-相同方式共享 2.0</string>
+  <string name="license_name_cc_2_0">知识共享“署名 2.0”</string>
+  <string name="license_name_fal">自由艺术许可证</string>
+  <string name="license_name_pd_old_100">公有领域(作者去世超过100年)</string>
+  <string name="license_name_pd_old">公有领域（版权过期）</string>
+  <string name="license_name_pd_art">公有领域（艺术）</string>
+  <string name="license_name_pd_us">公有领域（美国）</string>
+  <string name="license_name_pd_usgov">公有领域（美国政府）</string>
+  <string name="license_name_pd_usgov_nasa">公有领域（美国航天局）</string>
+  <string name="license_name_pd_ineligible">公有领域（不具有版权）</string>
+  <string name="license_name_attribution">署名</string>
+  <string name="license_name_gfdl">GNU自由文件授权协议</string>
+  <string name="welcome_wikipedia_text">贡献您持有的图像。
+让维基百科的条目更加生活化！</string>
+  <string name="welcome_wikipedia_subtext">维基百科上的图像来自维基共享资源。</string>
+  <string name="welcome_copyright_text">您的图像将有助于教育世界各地的人。</string>
+  <string name="welcome_copyright_subtext">避免使用来自互联网的图像、海报、书籍封面等受版权保护的材料。</string>
+  <string name="welcome_final_text">您明白了吗？</string>
+  <string name="welcome_final_button_text">是的！</string>
+  <string name="detail_panel_cats_label">分类</string>
+  <string name="detail_panel_cats_loading">正在载入...</string>
+  <string name="detail_panel_cats_none">未选择</string>
+  <string name="detail_description_empty">没有说明</string>
+  <string name="detail_license_empty">未知授权协议</string>
+  <string name="provider_campaigns">宣传</string>
+  <string name="menu_refresh">刷新</string>
+</resources>
