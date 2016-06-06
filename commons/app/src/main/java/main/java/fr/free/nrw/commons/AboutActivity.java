@@ -1,12 +1,12 @@
 package fr.free.nrw.commons;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
-import com.actionbarsherlock.app.SherlockActivity;
 
-public class AboutActivity extends SherlockActivity {
+public class AboutActivity extends Activity {
     private TextView versionText;
     private TextView licenseText;
     private TextView improveText;
@@ -23,8 +23,8 @@ public class AboutActivity extends SherlockActivity {
         privacyPolicyText = (TextView) findViewById(R.id.about_privacy_policy);
         uploadsToText = (TextView) findViewById(R.id.about_uploads_to);
 
-        uploadsToText.setText(CommonsApplication.EVENTLOG_WIKI);
-        versionText.setText(CommonsApplication.APPLICATION_VERSION);
+        uploadsToText.setText(fr.free.nrw.commons.CommonsApplication.EVENTLOG_WIKI);
+        versionText.setText(fr.free.nrw.commons.CommonsApplication.APPLICATION_VERSION);
 
         // We can't use formatted strings directly because it breaks with
         // our localization tools. Grab an HTML string and turn it into

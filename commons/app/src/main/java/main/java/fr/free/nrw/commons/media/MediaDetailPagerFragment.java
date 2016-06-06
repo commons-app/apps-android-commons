@@ -1,36 +1,42 @@
 package fr.free.nrw.commons.media;
 
 import android.app.DownloadManager;
-import android.content.*;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.database.DataSetObserver;
-import android.net.*;
-import android.os.*;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.*;
-import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 
-import fr.free.nrw.commons.*;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.EventLog;
 import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 
-public class MediaDetailPagerFragment extends SherlockFragment implements ViewPager.OnPageChangeListener {
+public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPageChangeListener {
     private ViewPager pager;
     private Boolean editable;
     private CommonsApplication app;
 
     public void onPageScrolled(int i, float v, int i2) {
-        getSherlockActivity().supportInvalidateOptionsMenu();
+        getActivity().supportInvalidateOptionsMenu();
     }
 
     public void onPageSelected(int i) {
@@ -59,11 +65,11 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
                 // See bug https://code.google.com/p/android/issues/detail?id=27526
                 pager.postDelayed(new Runnable() {
                     public void run() {
-                        getSherlockActivity().supportInvalidateOptionsMenu();
+                        getActivity().supportInvalidateOptionsMenu();
                     }
                 }, 5);
             }
-            return MediaDetailFragment.forMedia(i, editable);
+            return fr.free.nrw.commons.media.MediaDetailFragment.forMedia(i, editable);
         }
 
         @Override
@@ -93,7 +99,7 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
                 public void run() {
                     pager.setAdapter(new MediaDetailAdapter(getChildFragmentManager()));
                     pager.setCurrentItem(pageNumber, false);
-                    getSherlockActivity().supportInvalidateOptionsMenu();
+                    getActivity().supportInvalidateOptionsMenu();
                 }
             }, 100);
         } else {
@@ -121,7 +127,7 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        MediaDetailProvider provider = (MediaDetailProvider)getSherlockActivity();
+        MediaDetailProvider provider = (MediaDetailProvider)getActivity();
         Media m = provider.getMediaAtPosition(pager.getCurrentItem());
         switch(item.getItemId()) {
             case R.id.menu_share_current_image:
@@ -147,12 +153,12 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
             case R.id.menu_retry_current_image:
                 // Is this... sane? :)
                 ((ContributionsActivity)getActivity()).retryUpload(pager.getCurrentItem());
-                getSherlockActivity().getSupportFragmentManager().popBackStack();
+                getActivity().getSupportFragmentManager().popBackStack();
                 return true;
             case R.id.menu_cancel_current_image:
                 // todo: delete image
                 ((ContributionsActivity)getActivity()).deleteUpload(pager.getCurrentItem());
-                getSherlockActivity().getSupportFragmentManager().popBackStack();
+                getActivity().getSupportFragmentManager().popBackStack();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -233,7 +239,7 @@ public class MediaDetailPagerFragment extends SherlockFragment implements ViewPa
             menu.clear(); // see http://stackoverflow.com/a/8495697/17865
             inflater.inflate(R.menu.fragment_image_detail, menu);
             if(pager != null) {
-                MediaDetailProvider provider = (MediaDetailProvider)getSherlockActivity();
+                MediaDetailProvider provider = (MediaDetailProvider)getActivity();
                 Media m = provider.getMediaAtPosition(pager.getCurrentItem());
                 if(m != null) {
                     // Enable default set of actions, then re-enable different set of actions only if it is a failed contrib

@@ -1,16 +1,22 @@
 package fr.free.nrw.commons.contributions;
 
-import java.text.*;
-import java.util.*;
-
-import android.content.*;
+import android.content.ContentProviderClient;
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.*;
-import android.os.*;
-import android.text.*;
+import android.net.Uri;
+import android.os.Parcel;
+import android.os.RemoteException;
+import android.text.TextUtils;
 
-import fr.free.nrw.commons.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.EventLog;
+import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.Prefs;
+import fr.free.nrw.commons.Utils;
 
 public class Contribution extends Media {
 
@@ -150,7 +156,7 @@ public class Contribution extends Media {
     public void save() {
         try {
             if(contentUri == null) {
-                contentUri = client.insert(ContributionsContentProvider.BASE_URI, this.toContentValues());
+                contentUri = client.insert(fr.free.nrw.commons.contributions.ContributionsContentProvider.BASE_URI, this.toContentValues());
             } else {
                 client.update(contentUri, toContentValues(), null, null);
             }
@@ -215,7 +221,7 @@ public class Contribution extends Media {
     public static Contribution fromCursor(Cursor cursor) {
         // Hardcoding column positions!
         Contribution c = new Contribution();
-        c.contentUri = ContributionsContentProvider.uriForId(cursor.getInt(0));
+        c.contentUri = fr.free.nrw.commons.contributions.ContributionsContentProvider.uriForId(cursor.getInt(0));
         c.filename = cursor.getString(1);
         c.localUri = TextUtils.isEmpty(cursor.getString(2)) ? null : Uri.parse(cursor.getString(2));
         c.imageUrl = cursor.getString(3);

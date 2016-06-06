@@ -1,12 +1,12 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.Sherlock" />
+    <style name="AppTheme" parent="Theme.AppCompat" />
 
     <style name="NoTitle" parent="AppTheme">
         <item name="android:windowNoTitle">true</item>
     </style>
 
-    <style name="LightNoTitle" parent="Theme.Sherlock.Light.NoActionBar"></style>
+    <style name="LightNoTitle" parent="Theme.AppCompat.Light.NoActionBar"/>
 
     <style name="NotificationText" parent="android:TextAppearance.DeviceDefault.Small">
         <item name="android:textColor">?android:attr/textColorPrimary</item>

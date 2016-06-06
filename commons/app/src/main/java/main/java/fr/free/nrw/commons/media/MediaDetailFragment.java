@@ -2,30 +2,45 @@ package fr.free.nrw.commons.media;
 
 import android.content.Intent;
 import android.database.DataSetObserver;
-import android.graphics.*;
-import android.os.*;
-import android.text.*;
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
-import android.view.*;
-import android.widget.*;
-import com.actionbarsherlock.app.SherlockFragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
+import android.widget.TextView;
+
+import com.android.volley.toolbox.ImageLoader;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 
-import com.android.volley.toolbox.*;
-
-import fr.free.nrw.commons.*;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class MediaDetailFragment extends SherlockFragment {
+import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.License;
+import fr.free.nrw.commons.LicenseList;
+import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.MediaDataExtractor;
+import fr.free.nrw.commons.MediaWikiImageView;
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
+
+public class MediaDetailFragment extends Fragment {
 
     private boolean editable;
     private DisplayImageOptions displayOptions;
-    private MediaDetailPagerFragment.MediaDetailProvider detailProvider;
+    private fr.free.nrw.commons.media.MediaDetailPagerFragment.MediaDetailProvider detailProvider;
     private int index;
 
     public static MediaDetailFragment forMedia(int index) {
@@ -50,7 +65,7 @@ public class MediaDetailFragment extends SherlockFragment {
     //private EditText title;
     private ProgressBar loadingProgress;
     private ImageView loadingFailed;
-    private MediaDetailSpacer spacer;
+    private fr.free.nrw.commons.media.MediaDetailSpacer spacer;
     private int initialListTop = 0;
 
     private TextView title;
@@ -84,7 +99,7 @@ public class MediaDetailFragment extends SherlockFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        detailProvider = (MediaDetailPagerFragment.MediaDetailProvider)getActivity();
+        detailProvider = (fr.free.nrw.commons.media.MediaDetailPagerFragment.MediaDetailProvider)getActivity();
 
         if(savedInstanceState != null) {
             editable = savedInstanceState.getBoolean("editable");
@@ -106,7 +121,7 @@ public class MediaDetailFragment extends SherlockFragment {
         scrollView = (ScrollView) view.findViewById(R.id.mediaDetailScrollView);
 
         // Detail consists of a list view with main pane in header view, plus category list.
-        spacer = (MediaDetailSpacer) view.findViewById(R.id.mediaDetailSpacer);
+        spacer = (fr.free.nrw.commons.media.MediaDetailSpacer) view.findViewById(R.id.mediaDetailSpacer);
         title = (TextView) view.findViewById(R.id.mediaDetailTitle);
         desc = (TextView) view.findViewById(R.id.mediaDetailDesc);
         license = (TextView) view.findViewById(R.id.mediaDetailLicense);

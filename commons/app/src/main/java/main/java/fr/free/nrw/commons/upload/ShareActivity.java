@@ -1,31 +1,31 @@
 package fr.free.nrw.commons.upload;
 
-import android.content.*;
-import android.database.Cursor;
-import android.os.*;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import android.net.*;
-import android.provider.MediaStore;
+import android.content.ContentResolver;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.NavUtils;
-import com.actionbarsherlock.view.MenuItem;
-
 import android.util.Log;
-import android.widget.*;
+import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.Toast;
 
-import fr.free.nrw.commons.*;
-import fr.free.nrw.commons.caching.CacheController;
-import fr.free.nrw.commons.modifications.CategoryModifier;
-import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
-import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.EventLog;
-import fr.free.nrw.commons.category.CategorizationFragment;
-import fr.free.nrw.commons.contributions.*;
-import fr.free.nrw.commons.auth.*;
-import fr.free.nrw.commons.modifications.ModificationsContentProvider;
-import fr.free.nrw.commons.modifications.ModifierSequence;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.EventLog;
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.auth.*;
+import fr.free.nrw.commons.category.CategorizationFragment;
+import fr.free.nrw.commons.contributions.*;
+import fr.free.nrw.commons.modifications.CategoryModifier;
+import fr.free.nrw.commons.modifications.ModificationsContentProvider;
+import fr.free.nrw.commons.modifications.ModifierSequence;
+import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
 
 /**
  * Activity for the title/desc screen after image is selected. Also starts processing image

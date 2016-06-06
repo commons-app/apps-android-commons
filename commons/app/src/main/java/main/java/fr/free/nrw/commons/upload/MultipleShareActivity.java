@@ -8,10 +8,10 @@ import android.database.DataSetObserver;
 import android.net.*;
 import android.os.*;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.*;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
-import com.actionbarsherlock.view.MenuItem;
 
 import fr.free.nrw.commons.*;
 import fr.free.nrw.commons.auth.*;

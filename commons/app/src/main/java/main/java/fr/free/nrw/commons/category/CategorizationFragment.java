@@ -4,25 +4,29 @@ import android.app.Activity;
 import android.content.ContentProviderClient;
 import android.content.Context;
 import android.database.Cursor;
-import android.os.*;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.RemoteException;
+import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.*;
-import android.widget.*;
-import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import fr.free.nrw.commons.Utils;
-import org.mediawiki.api.ApiResult;
-import org.mediawiki.api.MWApi;
-import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.upload.MwVolleyApi;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.CheckedTextView;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
-import java.io.IOException;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -33,10 +37,14 @@ import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.upload.MwVolleyApi;
+
 /**
  * Displays the category suggestion and selection screen. Category search is initiated here.
  */
-public class CategorizationFragment extends SherlockFragment{
+public class CategorizationFragment extends Fragment {
     public static interface OnCategoriesSaveHandler {
         public void onCategoriesSave(ArrayList<String> categories);
     }
@@ -56,8 +64,8 @@ public class CategorizationFragment extends SherlockFragment{
 
     // LHS guarantees ordered insertions, allowing for prioritized method A results
     private final Set<String> results = new LinkedHashSet<String>();
-    PrefixUpdater prefixUpdaterSub;
-    MethodAUpdater methodAUpdaterSub;
+    fr.free.nrw.commons.category.PrefixUpdater prefixUpdaterSub;
+    fr.free.nrw.commons.category.MethodAUpdater methodAUpdaterSub;
 
     private ContentProviderClient client;
 
@@ -108,14 +116,14 @@ public class CategorizationFragment extends SherlockFragment{
 
         try {
             Cursor cursor = client.query(
-                    CategoryContentProvider.BASE_URI,
-                    Category.Table.ALL_FIELDS,
+                    fr.free.nrw.commons.category.CategoryContentProvider.BASE_URI,
+                    fr.free.nrw.commons.category.Category.Table.ALL_FIELDS,
                     null,
                     new String[]{},
-                    Category.Table.COLUMN_LAST_USED + " DESC");
+                    fr.free.nrw.commons.category.Category.Table.COLUMN_LAST_USED + " DESC");
             // fixme add a limit on the original query instead of falling out of the loop?
             while (cursor.moveToNext() && cursor.getPosition() < SEARCH_CATS_LIMIT) {
-                Category cat = Category.fromCursor(cursor);
+                fr.free.nrw.commons.category.Category cat = fr.free.nrw.commons.category.Category.fromCursor(cursor);
                 items.add(cat.getName());
             }
             cursor.close();
@@ -216,7 +224,7 @@ public class CategorizationFragment extends SherlockFragment{
             CheckedTextView checkedView;
 
             if(view == null) {
-                checkedView = (CheckedTextView) getSherlockActivity().getLayoutInflater().inflate(R.layout.layout_categories_item, null);
+                checkedView = (CheckedTextView) getActivity().getLayoutInflater().inflate(R.layout.layout_categories_item, null);
 
             } else {
                 checkedView = (CheckedTextView) view;
@@ -241,16 +249,16 @@ public class CategorizationFragment extends SherlockFragment{
         return count;
     }
 
-    private Category lookupCategory(String name) {
+    private fr.free.nrw.commons.category.Category lookupCategory(String name) {
         try {
             Cursor cursor = client.query(
-                    CategoryContentProvider.BASE_URI,
-                    Category.Table.ALL_FIELDS,
-                    Category.Table.COLUMN_NAME + "=?",
+                    fr.free.nrw.commons.category.CategoryContentProvider.BASE_URI,
+                    fr.free.nrw.commons.category.Category.Table.ALL_FIELDS,
+                    fr.free.nrw.commons.category.Category.Table.COLUMN_NAME + "=?",
                     new String[] {name},
                     null);
             if (cursor.moveToFirst()) {
-                Category cat = Category.fromCursor(cursor);
+                fr.free.nrw.commons.category.Category cat = fr.free.nrw.commons.category.Category.fromCursor(cursor);
                 return cat;
             }
         } catch (RemoteException e) {
@@ -259,7 +267,7 @@ public class CategorizationFragment extends SherlockFragment{
         }
 
         // Newly used category...
-        Category cat = new Category();
+        fr.free.nrw.commons.category.Category cat = new fr.free.nrw.commons.category.Category();
         cat.setName(name);
         cat.setLastUsed(new Date());
         cat.setTimesUsed(0);
@@ -276,7 +284,7 @@ public class CategorizationFragment extends SherlockFragment{
 
         @Override
         protected Void doInBackground(Void... voids) {
-            Category cat = lookupCategory(name);
+            fr.free.nrw.commons.category.Category cat = lookupCategory(name);
             cat.incTimesUsed();
 
             cat.setContentProviderClient(client);
@@ -358,7 +366,7 @@ public class CategorizationFragment extends SherlockFragment{
 
         final CountDownLatch latch = new CountDownLatch(1);
 
-        prefixUpdaterSub = new PrefixUpdater(this) {
+        prefixUpdaterSub = new fr.free.nrw.commons.category.PrefixUpdater(this) {
             @Override
             protected ArrayList<String> doInBackground(Void... voids) {
                 ArrayList<String> result = new ArrayList<String>();
@@ -390,7 +398,7 @@ public class CategorizationFragment extends SherlockFragment{
             }
         };
 
-        methodAUpdaterSub = new MethodAUpdater(this) {
+        methodAUpdaterSub = new fr.free.nrw.commons.category.MethodAUpdater(this) {
             @Override
             protected void onPostExecute(ArrayList<String> result) {
                 results.clear();
@@ -421,7 +429,7 @@ public class CategorizationFragment extends SherlockFragment{
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, com.actionbarsherlock.view.MenuInflater inflater) {
+    public void onCreateOptionsMenu(Menu menu, android.view.MenuInflater inflater) {
         menu.clear();
         inflater.inflate(R.menu.fragment_categorization, menu);
     }
@@ -431,7 +439,7 @@ public class CategorizationFragment extends SherlockFragment{
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         getActivity().setTitle(R.string.categories_activity_title);
-        client = getActivity().getContentResolver().acquireContentProviderClient(CategoryContentProvider.AUTHORITY);
+        client = getActivity().getContentResolver().acquireContentProviderClient(fr.free.nrw.commons.category.CategoryContentProvider.AUTHORITY);
     }
 
     @Override

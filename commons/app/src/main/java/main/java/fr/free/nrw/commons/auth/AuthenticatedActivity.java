@@ -3,15 +3,15 @@ package fr.free.nrw.commons.auth;
 import java.io.IOException;
 
 import android.accounts.OperationCanceledException;
-import com.actionbarsherlock.app.*;
 
 import android.accounts.*;
 import android.os.*;
+import android.support.v7.app.AppCompatActivity;
 
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
 
-public class AuthenticatedActivity extends SherlockFragmentActivity {
+public class AuthenticatedActivity extends AppCompatActivity {
     
     
     String accountType;
