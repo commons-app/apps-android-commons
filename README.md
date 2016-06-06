@@ -16,6 +16,8 @@ Initially started by the Wikimedia Foundation, this app is now maintained by vol
 	or  
 	(From Quick Start menu): ``Open an existing Android Studio project``
 3. Navigate to the folder in the cloned repository (named commons). Select ``OK``.
+4. Disable Instant Run. To do this untick the box at:  
+ 	``File`` > ``Settings`` > ``Build, Execution, Deployment`` > ``Instant Run`` > ``Enable Instant Run to hot swap code/resource changes on deploy``
 
 ## Build Manually ##
 
