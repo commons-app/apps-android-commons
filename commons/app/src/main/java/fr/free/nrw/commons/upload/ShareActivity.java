@@ -1,13 +1,19 @@
 package fr.free.nrw.commons.upload;
 
+import android.Manifest;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
+import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -19,9 +25,9 @@ import java.util.List;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.EventLog;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.auth.*;
+import fr.free.nrw.commons.auth.AuthenticatedActivity;
+import fr.free.nrw.commons.auth.WikiAccountAuthenticator;
 import fr.free.nrw.commons.category.CategorizationFragment;
-import fr.free.nrw.commons.contributions.*;
 import fr.free.nrw.commons.modifications.CategoryModifier;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.modifications.ModifierSequence;
@@ -33,12 +39,12 @@ import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
  */
 public  class       ShareActivity
         extends     AuthenticatedActivity
-        implements  SingleUploadFragment.OnUploadActionInitiated,
+        implements  fr.free.nrw.commons.upload.SingleUploadFragment.OnUploadActionInitiated,
         CategorizationFragment.OnCategoriesSaveHandler {
 
     private static final String TAG = ShareActivity.class.getName();
 
-    private SingleUploadFragment shareView;
+    private fr.free.nrw.commons.upload.SingleUploadFragment shareView;
     private CategorizationFragment categorizationFragment;
 
     private CommonsApplication app;
@@ -48,14 +54,14 @@ public  class       ShareActivity
     private String mediaUriString;
 
     private Uri mediaUri;
-    private Contribution contribution;
+    private fr.free.nrw.commons.contributions.Contribution contribution;
     private ImageView backgroundImageView;
-    private UploadController uploadController;
+    private fr.free.nrw.commons.upload.UploadController uploadController;
 
     private CommonsApplication cacheObj;
     private boolean cacheFound;
 
-    private GPSExtractor imageObj;
+    private fr.free.nrw.commons.upload.GPSExtractor imageObj;
 
     public ShareActivity() {
         super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
@@ -71,8 +77,8 @@ public  class       ShareActivity
             Log.d(TAG, "Cache the categories found");
         }
 
-        uploadController.startUpload(title, mediaUri, description, mimeType, source, new UploadController.ContributionUploadProgress() {
-            public void onUploadStarted(Contribution contribution) {
+        uploadController.startUpload(title, mediaUri, description, mimeType, source, new fr.free.nrw.commons.upload.UploadController.ContributionUploadProgress() {
+            public void onUploadStarted(fr.free.nrw.commons.contributions.Contribution contribution) {
                 ShareActivity.this.contribution = contribution;
                 showPostUpload();
             }
@@ -134,7 +140,7 @@ public  class       ShareActivity
         } else {
             EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT)
                     .param("username", app.getCurrentAccount().name)
-                    .param("source", getIntent().getStringExtra(UploadService.EXTRA_SOURCE))
+                    .param("source", getIntent().getStringExtra(fr.free.nrw.commons.upload.UploadService.EXTRA_SOURCE))
                     .param("multiple", true)
                     .param("result", "cancelled")
                     .log();
@@ -147,10 +153,10 @@ public  class       ShareActivity
         app.getApi().setAuthCookie(authCookie);
 
 
-        shareView = (SingleUploadFragment) getSupportFragmentManager().findFragmentByTag("shareView");
+        shareView = (fr.free.nrw.commons.upload.SingleUploadFragment) getSupportFragmentManager().findFragmentByTag("shareView");
         categorizationFragment = (CategorizationFragment) getSupportFragmentManager().findFragmentByTag("categorization");
         if(shareView == null && categorizationFragment == null) {
-                shareView = new SingleUploadFragment();
+                shareView = new fr.free.nrw.commons.upload.SingleUploadFragment();
                 this.getSupportFragmentManager()
                         .beginTransaction()
                         .add(R.id.single_upload_fragment_container, shareView, "shareView")
@@ -170,9 +176,9 @@ public  class       ShareActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        uploadController = new UploadController(this);
+        uploadController = new fr.free.nrw.commons.upload.UploadController(this);
         setContentView(R.layout.activity_share);
-        
+
         app = (CommonsApplication)this.getApplicationContext();
         backgroundImageView = (ImageView)findViewById(R.id.backgroundImage);
 
@@ -180,10 +186,10 @@ public  class       ShareActivity
 
         if(intent.getAction().equals(Intent.ACTION_SEND)) {
             mediaUri = (Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM);
-            if(intent.hasExtra(UploadService.EXTRA_SOURCE)) {
-                source = intent.getStringExtra(UploadService.EXTRA_SOURCE);
+            if(intent.hasExtra(fr.free.nrw.commons.upload.UploadService.EXTRA_SOURCE)) {
+                source = intent.getStringExtra(fr.free.nrw.commons.upload.UploadService.EXTRA_SOURCE);
             } else {
-                source = Contribution.SOURCE_EXTERNAL;
+                source = fr.free.nrw.commons.contributions.Contribution.SOURCE_EXTERNAL;
             }
             mimeType = intent.getType();
         }
@@ -210,12 +216,36 @@ public  class       ShareActivity
         Log.d(TAG, "Uri: " + mediaUriString);
         Log.d(TAG, "Ext storage dir: " + Environment.getExternalStorageDirectory());
 
+
+
+        // Check permissions
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE)) {
+
+                Log.i(TAG,
+                        "Displaying camera permission rationale to provide additional context.");
+                Snackbar.make(this.findViewById(android.R.id.content), R.string.storage_permission_rationale, Snackbar.LENGTH_INDEFINITE).setAction(R.string.ok, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                ActivityCompat.requestPermissions(ShareActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+                            }
+                        }).show();
+
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+            }
+        }
+
         //convert image Uri to file path
-        String filePath = FileUtils.getPath(this, mediaUri);
+        String filePath = fr.free.nrw.commons.upload.FileUtils.getPath(this, mediaUri);
         Log.d(TAG, "Filepath: " + filePath);
 
         Log.d(TAG, "Calling GPSExtractor");
-        imageObj = new GPSExtractor(filePath, this);
+        imageObj = new fr.free.nrw.commons.upload.GPSExtractor(filePath, this);
         imageObj.registerLocationManager();
 
         if (filePath != null && !filePath.equals("")) {
@@ -232,7 +262,7 @@ public  class       ShareActivity
                     app.cacheData.setQtPoint(decLongitude, decLatitude);
                 }
 
-                MwVolleyApi apiCall = new MwVolleyApi(this);
+                fr.free.nrw.commons.upload.MwVolleyApi apiCall = new fr.free.nrw.commons.upload.MwVolleyApi(this);
 
                 List displayCatList = app.cacheData.findCategory();
                 boolean catListEmpty = displayCatList.isEmpty();
@@ -246,7 +276,7 @@ public  class       ShareActivity
                 } else {
                     cacheFound = true;
                     Log.d(TAG, "Cache found, setting categoryList in MwVolleyApi to " + displayCatList.toString());
-                    MwVolleyApi.setGpsCat(displayCatList);
+                    fr.free.nrw.commons.upload.MwVolleyApi.setGpsCat(displayCatList);
                 }
             }
         }

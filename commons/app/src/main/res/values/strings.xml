@@ -148,4 +148,7 @@
     <string name="detail_license_empty">Unknown license</string>
     <string name="provider_campaigns">Campaigns</string>
     <string name="menu_refresh">Refresh</string>
+
+    <string name="storage_permission_rationale">Storage permission is needed to access photos</string>
+    <string name="ok">OK</string>
 </resources>
