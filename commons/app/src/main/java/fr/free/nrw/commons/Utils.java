@@ -1,8 +1,10 @@
 package fr.free.nrw.commons;
 
 import android.net.Uri;
-import android.os.*;
-import com.nostra13.universalimageloader.core.*;
+import android.os.AsyncTask;
+import android.os.Build;
+
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
@@ -13,11 +15,21 @@ import org.w3c.dom.Node;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-import javax.xml.transform.*;
-import java.io.*;
-import java.text.*;
-import java.util.*;
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 import java.util.concurrent.Executor;
+
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerFactoryConfigurationError;
 
 public class Utils {
 
@@ -131,11 +143,15 @@ public class Utils {
     public static String makeThumbUrl(String imageUrl, String filename, int width) {
         // Ugly Hack!
         // Update: OH DEAR GOD WHAT A HORRIBLE HACK I AM SO SORRY
-        String thumbUrl = imageUrl.replaceFirst("test/", "test/thumb/").replace("commons/", "commons/thumb/") + "/" + width + "px-" + filename.replaceAll("File:", "").replaceAll(" ", "_");
-        if(thumbUrl.endsWith("jpg") || thumbUrl.endsWith("png") || thumbUrl.endsWith("jpeg")) {
-            return thumbUrl;
+        if(imageUrl.endsWith("webm")) {
+            return imageUrl.replaceFirst("test/", "test/thumb/").replace("commons/", "commons/thumb/") + "/" + width + "px--" + filename.replaceAll("File:", "").replaceAll(" ", "_") + ".jpg";
         } else {
-            return thumbUrl + ".png";
+            String thumbUrl = imageUrl.replaceFirst("test/", "test/thumb/").replace("commons/", "commons/thumb/") + "/" + width + "px-" + filename.replaceAll("File:", "").replaceAll(" ", "_");
+            if(thumbUrl.endsWith("jpg") || thumbUrl.endsWith("png") || thumbUrl.endsWith("jpeg")) {
+                return thumbUrl;
+            } else {
+                return thumbUrl + ".png";
+            }
         }
     }
 
