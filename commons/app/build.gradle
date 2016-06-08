@@ -8,12 +8,12 @@ dependencies {
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.8.4'
     compile 'ch.acra:acra:4.5.0'
     compile 'org.mediawiki:api:1.3'
-    compile 'de.keyboardsurfer.android.widget:crouton:1.8.5@aar'
     compile 'commons-codec:commons-codec:1.10'
     compile 'com.android.support:support-v4:23.4.0'
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:design:23.4.0'
-    //noinspectio GradleDependency - old version has required feature
+
+    //noinspection GradleDependency - old version has required feature
     compile 'com.google.code.gson:gson:1.4'
 }
 

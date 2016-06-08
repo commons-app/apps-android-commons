@@ -1,26 +1,39 @@
 package fr.free.nrw.commons.auth;
 
+import android.accounts.Account;
+import android.accounts.AccountAuthenticatorActivity;
+import android.accounts.AccountAuthenticatorResponse;
+import android.accounts.AccountManager;
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.ContentResolver;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.NavUtils;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import java.io.IOException;
 
-import android.content.*;
-import android.net.Uri;
-import android.text.*;
-import android.view.inputmethod.EditorInfo;
-import de.keyboardsurfer.android.widget.crouton.*;
-import android.os.*;
-import android.accounts.*;
-import android.app.*;
-import android.util.*;
-import android.view.*;
-import android.widget.*;
-import android.support.v4.app.NavUtils;
-
-import fr.free.nrw.commons.*;
-import fr.free.nrw.commons.WelcomeActivity;
-import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.EventLog;
-import fr.free.nrw.commons.contributions.*;
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.WelcomeActivity;
+import fr.free.nrw.commons.contributions.ContributionsContentProvider;
+import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 
 
 public class LoginActivity extends AccountAuthenticatorActivity {
@@ -79,7 +92,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 } else if(result.equals("NotExists") || result.equals("Illegal") || result.equals("NotExists")) {
                     response = R.string.login_failed_username;
                     passwordEdit.setText("");
-                } else if(result.equals("EmptyPass") || result.equals("WrongPass")) {
+                } else if(result.equals("EmptyPass") || result.equals("WrongPass") || result.equals("WrongPluginPass")) {
                     response = R.string.login_failed_password;
                     passwordEdit.setText("");
                 } else if(result.equals("Throttled")) {
@@ -88,10 +101,11 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                     response = R.string.login_failed_blocked;
                 } else {
                     // Should never really happen
+                    Log.d("Commons", "Login failed with reason: " + result);
                     response = R.string.login_failed_generic;
                 }
-                Crouton.makeText(context, response, Style.ALERT, R.id.loginErrors).show();
-                dialog.dismiss();
+                Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
+                dialog.cancel();
             }
 
         }
