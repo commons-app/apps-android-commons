@@ -1,7 +1,11 @@
 package fr.free.nrw.commons.upload;
 
 import android.app.Activity;
-import android.content.*;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -10,14 +14,15 @@ import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.webkit.MimeTypeMap;
-import fr.free.nrw.commons.contributions.Contribution;
+
+import java.io.IOException;
+import java.util.Date;
+
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.Prefs;
 import fr.free.nrw.commons.Utils;
-
-import java.io.IOException;
-import java.util.Date;
+import fr.free.nrw.commons.contributions.Contribution;
 
 public class UploadController {
     private UploadService uploadService;
@@ -130,8 +135,15 @@ public class UploadController {
                             new String[]{MediaStore.Images.ImageColumns.DATE_TAKEN}, null, null, null);
                     if(cursor != null && cursor.getCount() != 0) {
                         cursor.moveToFirst();
-                        contribution.setDateCreated(new Date(cursor.getLong(0)));
-                    } // FIXME: Alternate way of setting dateCreated if this data is not found
+                        Date dateCreated = new Date(cursor.getLong(0));
+                        if(dateCreated.equals(new Date(0))) {
+                            // If date is incorrect (1st second of unix time) then set it to the current date
+                            dateCreated = new Date();
+                        }
+                        contribution.setDateCreated(dateCreated);
+                    } else {
+                        contribution.setDateCreated(new Date());
+                    }
                 }
 
                 return contribution;
