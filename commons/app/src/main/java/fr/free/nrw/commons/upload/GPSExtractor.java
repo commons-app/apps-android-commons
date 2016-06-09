@@ -9,6 +9,7 @@ import android.location.LocationManager;
 import android.media.ExifInterface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import java.io.IOException;
 
@@ -71,7 +72,7 @@ public class GPSExtractor {
      * Extracts geolocation of image from EXIF data.
      * @return coordinates of image as string (needs to be passed as a String in API query)
      */
-    public String getCoords() {
+    public String getCoords(boolean useGPS) {
 
         ExifInterface exif;
         String latitude = "";
@@ -87,25 +88,27 @@ public class GPSExtractor {
             return null;
         }
 
-        if (exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE) == null) {
+        if (exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE) == null && useGPS) {
+            registerLocationManager();
+
             imageCoordsExists = false;
-            Log.d(TAG, "Picture has no GPS info");
+            Log.d(TAG, "EXIF data has no location info");
 
             //Check what user's preference is for automatic location detection
             boolean gpsPrefEnabled = gpsPreferenceEnabled();
 
             if (gpsPrefEnabled) {
                 Log.d(TAG, "Current location values: Lat = " + currentLatitude + " Long = " + currentLongitude);
-                String currentCoords = String.valueOf(currentLatitude) + "|" + String.valueOf(currentLongitude);
-                return currentCoords;
+                return String.valueOf(currentLatitude) + "|" + String.valueOf(currentLongitude);
             } else {
-                //Otherwise treat as if no coords found
+                // No coords found
                 return null;
             }
-
+        } else if(exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE) == null) {
+            return null;
         } else {
             imageCoordsExists = true;
-            Log.d(TAG, "Picture has GPS info");
+            Log.d(TAG, "EXIF data has location info");
 
             latitude = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE);
             latitude_ref = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE_REF);

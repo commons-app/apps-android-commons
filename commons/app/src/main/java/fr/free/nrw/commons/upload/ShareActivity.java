@@ -65,6 +65,12 @@ public  class       ShareActivity
     private boolean cacheFound;
 
     private GPSExtractor imageObj;
+    private String filePath;
+    private String decimalCoords;
+
+    private boolean useNewPermissions = false;
+    private boolean storagePermission = false;
+    private boolean locationPermission = false;
 
     public ShareActivity() {
         super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
@@ -216,12 +222,19 @@ public  class       ShareActivity
         Log.d(TAG, "Uri: " + mediaUriString);
         Log.d(TAG, "Ext storage dir: " + Environment.getExternalStorageDirectory());
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            useNewPermissions = true;
+            if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                storagePermission = true;
+            }
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                locationPermission = true;
+            }
+        }
+
         // Check storage permissions if marshmallow or newer
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
-                (ContextCompat.checkSelfPermission(this,
-                        Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ||
-                        ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
-            if (!(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE) && (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)))) {
+        if (useNewPermissions && (!storagePermission || !locationPermission)) {
+            if (!storagePermission && !locationPermission) {
                 String permissionRationales = getResources().getString(R.string.storage_permission_rationale) + "\n" + getResources().getString(R.string.location_permission_rationale);
                 Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), permissionRationales,
                         Snackbar.LENGTH_INDEFINITE)
@@ -229,14 +242,14 @@ public  class       ShareActivity
                             @Override
                             public void onClick(View view) {
                                 ActivityCompat.requestPermissions(ShareActivity.this,
-                                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION}, 3);
                             }
                         });
                 snackbar.show();
                 View snackbarView = snackbar.getView();
                 TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
                 textView.setMaxLines(3);
-            } else if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            } else if (!storagePermission) {
                 Snackbar.make(findViewById(android.R.id.content), R.string.storage_permission_rationale,
                         Snackbar.LENGTH_INDEFINITE)
                         .setAction(R.string.ok, new View.OnClickListener() {
@@ -246,60 +259,106 @@ public  class       ShareActivity
                                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
                             }
                         }).show();
-            } else if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+            } else if (!locationPermission) {
                 Snackbar.make(findViewById(android.R.id.content), R.string.location_permission_rationale,
                         Snackbar.LENGTH_INDEFINITE)
                         .setAction(R.string.ok, new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 ActivityCompat.requestPermissions(ShareActivity.this,
-                                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+                                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 2);
                             }
                         }).show();
             }
-        } else {
-            // Convert image Uri to file path
-            String filePath = FileUtils.getPath(this, mediaUri);
-            Log.d(TAG, "Filepath: " + filePath);
+        } else if (useNewPermissions && storagePermission && !locationPermission) {
+            getFileMetadata();
+        } else if(!useNewPermissions || (storagePermission && locationPermission)) {
+            getFileMetadata();
+            getLocationData();
+        }
+    }
 
-            // Check location permissions if marshmallow or newer
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || ContextCompat.checkSelfPermission(this,
-                    Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                Log.d(TAG, "Calling GPSExtractor");
-                imageObj = new GPSExtractor(filePath, this);
-                imageObj.registerLocationManager();
-
-                if (filePath != null && !filePath.equals("")) {
-                    // Gets image coords if exist, otherwise gets last known coords
-                    String decimalCoords = imageObj.getCoords();
-
-                    if (decimalCoords != null) {
-                        Log.d(TAG, "Decimal coords of image: " + decimalCoords);
-
-                        // Only set cache for this point if image has coords
-                        if (imageObj.imageCoordsExists) {
-                            double decLongitude = imageObj.getDecLongitude();
-                            double decLatitude = imageObj.getDecLatitude();
-                            app.cacheData.setQtPoint(decLongitude, decLatitude);
-                        }
-
-                        MwVolleyApi apiCall = new MwVolleyApi(this);
-
-                        List displayCatList = app.cacheData.findCategory();
-                        boolean catListEmpty = displayCatList.isEmpty();
-
-                        // If no categories found in cache, call MediaWiki API to match image coords with nearby Commons categories
-                        if (catListEmpty) {
-                            cacheFound = false;
-                            apiCall.request(decimalCoords);
-                            Log.d(TAG, "displayCatList size 0, calling MWAPI" + displayCatList.toString());
-                        } else {
-                            cacheFound = true;
-                            Log.d(TAG, "Cache found, setting categoryList in MwVolleyApi to " + displayCatList.toString());
-                            MwVolleyApi.setGpsCat(displayCatList);
-                        }
-                    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            // 1 = Storage
+            case 1: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    getFileMetadata();
                 }
+                return;
+            }
+            // 2 = Location
+            case 2: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    getLocationData();
+                }
+                return;
+            }
+            // 3 = Storage + Location
+            case 3: {
+                if (grantResults.length > 1
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    getFileMetadata();
+                }
+                if (grantResults.length > 1
+                        && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                    getLocationData();
+                }
+            }
+        }
+    }
+
+    public void getFileMetadata() {
+        filePath = FileUtils.getPath(this, mediaUri);
+        Log.d(TAG, "Filepath: " + filePath);
+        Log.d(TAG, "Calling GPSExtractor");
+        imageObj = new GPSExtractor(filePath, this);
+
+        if (filePath != null && !filePath.equals("")) {
+            // Gets image coords from exif data
+            decimalCoords = imageObj.getCoords(false);
+            useImageCoords();
+        }
+    }
+
+    public void getLocationData() {
+        if(imageObj == null) {
+            imageObj = new GPSExtractor(filePath, this);
+        }
+
+        decimalCoords = imageObj.getCoords(true);
+        useImageCoords();
+    }
+
+    public void useImageCoords() {
+        if(decimalCoords != null) {
+            Log.d(TAG, "Decimal coords of image: " + decimalCoords);
+
+            // Only set cache for this point if image has coords
+            if (imageObj.imageCoordsExists) {
+                double decLongitude = imageObj.getDecLongitude();
+                double decLatitude = imageObj.getDecLatitude();
+                app.cacheData.setQtPoint(decLongitude, decLatitude);
+            }
+
+            MwVolleyApi apiCall = new MwVolleyApi(this);
+
+            List displayCatList = app.cacheData.findCategory();
+            boolean catListEmpty = displayCatList.isEmpty();
+
+            // If no categories found in cache, call MediaWiki API to match image coords with nearby Commons categories
+            if (catListEmpty) {
+                cacheFound = false;
+                apiCall.request(decimalCoords);
+                Log.d(TAG, "displayCatList size 0, calling MWAPI" + displayCatList.toString());
+            } else {
+                cacheFound = true;
+                Log.d(TAG, "Cache found, setting categoryList in MwVolleyApi to " + displayCatList.toString());
+                MwVolleyApi.setGpsCat(displayCatList);
             }
         }
     }
@@ -307,7 +366,6 @@ public  class       ShareActivity
     @Override
     public void onPause() {
         super.onPause();
-
         try {
             imageObj.unregisterLocationManager();
             Log.d(TAG, "Unregistered locationManager");
