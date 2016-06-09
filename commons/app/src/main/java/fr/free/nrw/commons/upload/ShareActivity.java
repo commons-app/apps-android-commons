@@ -307,9 +307,13 @@ public  class       ShareActivity
     @Override
     public void onPause() {
         super.onPause();
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+        try {
             imageObj.unregisterLocationManager();
+            Log.d(TAG, "Unregistered locationManager");
+        }
+        catch (NullPointerException e) {
+            Log.d(TAG, "locationManager does not exist, not unregistered");
         }
     }
 
