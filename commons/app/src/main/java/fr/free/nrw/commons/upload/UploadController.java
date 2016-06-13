@@ -136,7 +136,8 @@ public class UploadController {
                     if(cursor != null && cursor.getCount() != 0) {
                         cursor.moveToFirst();
                         Date dateCreated = new Date(cursor.getLong(0));
-                        if(dateCreated.equals(new Date(0))) {
+                        Date epochStart = new Date(0);
+                        if(dateCreated.equals(epochStart) || dateCreated.before(epochStart)) {
                             // If date is incorrect (1st second of unix time) then set it to the current date
                             dateCreated = new Date();
                         }
