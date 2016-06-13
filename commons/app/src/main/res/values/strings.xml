@@ -148,4 +148,9 @@
     <string name="detail_license_empty">Unknown license</string>
     <string name="provider_campaigns">Campaigns</string>
     <string name="menu_refresh">Refresh</string>
+
+    <string name="storage_permission_rationale">Recommended: Storage for photo metadata</string>
+    <string name="location_permission_rationale">Optional: Current location for category suggestions</string>
+    <string name="ok">OK</string>
+    <string name="back">Back</string>
 </resources>
