@@ -1,5 +1,10 @@
 # Wikimedia Commons for Android
 
+## v1.14
+- Migrated to Gradle
+- Fixed API 23 permission crash
+- Fixed "Template:According to EXIF data" analyzing EXIF data incorrectly
+
 ## v1.13
 - Fixed prettyLicense and mediaUri crashes
 
