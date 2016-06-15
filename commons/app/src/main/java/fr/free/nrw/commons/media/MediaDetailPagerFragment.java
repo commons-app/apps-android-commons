@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.media;
 
+import android.annotation.SuppressLint;
 import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -82,6 +83,7 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
         this(false);
     }
 
+    @SuppressLint("ValidFragment")
     public MediaDetailPagerFragment(Boolean editable) {
         this.editable = editable;
     }
