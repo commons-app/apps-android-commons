@@ -21,7 +21,7 @@ Initially started by the Wikimedia Foundation, this app is now maintained by vol
 
 ## Build Manually ##
 
-Note: It is much harder to build manually. We reccomend you use Android Studio or IntelliJ IDEA, which both have gradle and all the android tools built in.
+Note: It is much harder to build manually. We recommend you use Android Studio or IntelliJ IDEA, which both have gradle and all the android tools built in.
 
 ### Requirements ###
 
