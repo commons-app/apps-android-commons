@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name">Commons</string>
+    <string name="app_name">Upload to Commons</string>
     <string name="menu_settings">Settings</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
@@ -75,7 +75,7 @@
     <string name="preference_tracking_summary">Send usage reports to Wikimedia to help us improve the app</string>
     <string name="title_activity_settings">Settings</string>
     <string name="menu_about">About</string>
-    <string name="about_license">Open Source software released under the &lt;a href="https://github.com/wikimedia/apps-android-commons/blob/master/COPYING">Apache License v2&lt;/a>. Wikimedia Commons and its logo are trademarks of the Wikimedia Foundation and are used with the permission of the Wikimedia Foundation. We are not endorsed by or affiliated with the Wikimedia Foundation.</string>
+    <string name="about_license">Open Source software released under the &lt;a href="https://github.com/wikimedia/apps-android-commons/blob/master/COPYING">Apache License v2&lt;/a></string>
     <string name="about_improve">Source on &lt;a href="https://github.com/nicolas-raoul/apps-android-commons/">GitHub&lt;/a>. Create a new &lt;a href="https://github.com/nicolas-raoul/apps-android-commons/issues">GitHub issue&lt;/a> for bug reports/suggestions.</string>
     <string name="about_privacy_policy">&lt;a href="https://wikimediafoundation.org/wiki/Privacy_policy">Privacy policy&lt;/a></string>
     <string name="title_activity_about">About</string>
