@@ -163,6 +163,7 @@ public class UploadService extends HandlerService<Contribution> {
         return START_REDELIVER_INTENT;
     }
 
+
     private void uploadContribution(Contribution contribution) {
         MWApi api = app.getApi();
 
@@ -171,11 +172,12 @@ public class UploadService extends HandlerService<Contribution> {
 
         String notificationTag = contribution.getLocalUri().toString();
 
-
         try {
             file = this.getContentResolver().openInputStream(contribution.getLocalUri());
         } catch(FileNotFoundException e) {
-            throw new RuntimeException(e);
+            Log.d("Exception", "File not found");
+            Toast fileNotFound = Toast.makeText(this, R.string.upload_failed, Toast.LENGTH_LONG);
+            fileNotFound.show();
         }
 
         Log.d("Commons", "Before execution!");
