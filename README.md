@@ -83,7 +83,7 @@ A list of recently-used categories is stored in the Categories content provider,
 
 Captured files are not currently stored within the app, but are passed by content: or file: URI from other apps.
 
-Thumbnail images are not currently cached. (?)
+Thumbnail images are not currently cached.
 
 
 [1]: https://developer.android.com/studio/index.html
