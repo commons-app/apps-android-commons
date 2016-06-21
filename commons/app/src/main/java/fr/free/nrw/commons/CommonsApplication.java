@@ -45,7 +45,6 @@ import com.android.volley.toolbox.*;
 )
 public class CommonsApplication extends Application {
 
-    private DBOpenHelper dbOpenHelper;
     public static String APPLICATION_VERSION; // Populated in onCreate. Race conditions theoretically possible, but practically not?
 
     private MWApi api;
@@ -86,15 +85,6 @@ public class CommonsApplication extends Application {
     public static MWApi createMWApi() {
         return new MWApi(API_URL, createHttpClient());
     }
-
-
-    public DBOpenHelper getDbOpenHelper() {
-        if(dbOpenHelper == null) {
-            dbOpenHelper = new DBOpenHelper(this);
-        }
-        return dbOpenHelper;
-    }
-
 
     @Override
     public void onCreate() {
