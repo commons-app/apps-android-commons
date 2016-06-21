@@ -34,7 +34,7 @@ public class ContributionsContentProvider extends ContentProvider{
     private DBOpenHelper dbOpenHelper;
     @Override
     public boolean onCreate() {
-        dbOpenHelper = ((CommonsApplication)this.getContext().getApplicationContext()).getDbOpenHelper();
+        dbOpenHelper = DBOpenHelper.getInstance(getContext());
         return false;
     }
 
