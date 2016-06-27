@@ -27,8 +27,6 @@ import fr.free.nrw.commons.SettingsActivity;
 
 public class ContributionsListFragment extends Fragment {
 
-
-
     public interface SourceRefresher {
         void refreshSource();
     }
@@ -55,8 +53,11 @@ public class ContributionsListFragment extends Fragment {
 
         SharedPreferences prefs = this.getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
         String lastModified = prefs.getString("lastSyncTimestamp", "");
+        Log.d("Commons", "Last Sync Timestamp: " + lastModified);
+
         if (lastModified.equals("")) {
             waitingMessage.setVisibility(View.VISIBLE);
+        } else {
         }
 
         return v;
