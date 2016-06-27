@@ -36,7 +36,7 @@ public class ContributionsListFragment extends Fragment {
     private TextView emptyMessage;
 
     private fr.free.nrw.commons.contributions.ContributionController controller;
-    private static final String TAG = ContributionsListFragment.class.getName();
+    private static final String TAG = "ContributionsList";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
