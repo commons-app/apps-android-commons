@@ -58,6 +58,7 @@ public class ContributionsListFragment extends Fragment {
         if (lastModified.equals("")) {
             waitingMessage.setVisibility(View.VISIBLE);
         } else {
+            waitingMessage.setVisibility(View.GONE);
         }
 
         return v;
