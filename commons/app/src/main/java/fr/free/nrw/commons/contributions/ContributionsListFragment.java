@@ -36,6 +36,7 @@ public class ContributionsListFragment extends Fragment {
     private TextView emptyMessage;
 
     private fr.free.nrw.commons.contributions.ContributionController controller;
+    private static final String TAG = ContributionsListFragment.class.getName();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,13 +48,13 @@ public class ContributionsListFragment extends Fragment {
 
         contributionsList.setOnItemClickListener((AdapterView.OnItemClickListener)getActivity());
         if(savedInstanceState != null) {
-            Log.d("Commons", "Scrolling to " + savedInstanceState.getInt("grid-position"));
+            Log.d(TAG, "Scrolling to " + savedInstanceState.getInt("grid-position"));
             contributionsList.setSelection(savedInstanceState.getInt("grid-position"));
         }
 
         SharedPreferences prefs = this.getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
         String lastModified = prefs.getString("lastSyncTimestamp", "");
-        Log.d("Commons", "Last Sync Timestamp: " + lastModified);
+        Log.d(TAG, "Last Sync Timestamp: " + lastModified);
 
         if (lastModified.equals("")) {
             waitingMessage.setVisibility(View.VISIBLE);
