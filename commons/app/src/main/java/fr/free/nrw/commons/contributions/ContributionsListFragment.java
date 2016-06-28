@@ -162,7 +162,7 @@ public class ContributionsListFragment extends Fragment {
         controller.loadState(savedInstanceState);
     }
 
-    private void clearSyncMessage() {
+    protected void clearSyncMessage() {
         waitingMessage.setVisibility(View.GONE);
     }
 }
