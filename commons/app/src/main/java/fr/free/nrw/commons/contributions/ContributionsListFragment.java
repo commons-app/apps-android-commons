@@ -27,8 +27,6 @@ import fr.free.nrw.commons.SettingsActivity;
 
 public class ContributionsListFragment extends Fragment {
 
-
-
     public interface SourceRefresher {
         void refreshSource();
     }
@@ -38,6 +36,7 @@ public class ContributionsListFragment extends Fragment {
     private TextView emptyMessage;
 
     private fr.free.nrw.commons.contributions.ContributionController controller;
+    private static final String TAG = "ContributionsList";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,18 +44,23 @@ public class ContributionsListFragment extends Fragment {
 
         contributionsList = (GridView) v.findViewById(R.id.contributionsList);
         waitingMessage = (TextView) v.findViewById(R.id.waitingMessage);
-        emptyMessage = (TextView) v.findViewById(R.id.waitingMessage);
+        emptyMessage = (TextView) v.findViewById(R.id.emptyMessage);
 
         contributionsList.setOnItemClickListener((AdapterView.OnItemClickListener)getActivity());
         if(savedInstanceState != null) {
-            Log.d("Commons", "Scrolling to " + savedInstanceState.getInt("grid-position"));
+            Log.d(TAG, "Scrolling to " + savedInstanceState.getInt("grid-position"));
             contributionsList.setSelection(savedInstanceState.getInt("grid-position"));
         }
 
+        //TODO: Should this be in onResume?
         SharedPreferences prefs = this.getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
         String lastModified = prefs.getString("lastSyncTimestamp", "");
+        Log.d(TAG, "Last Sync Timestamp: " + lastModified);
+
         if (lastModified.equals("")) {
             waitingMessage.setVisibility(View.VISIBLE);
+        } else {
+            waitingMessage.setVisibility(View.GONE);
         }
 
         return v;
@@ -158,7 +162,7 @@ public class ContributionsListFragment extends Fragment {
         controller.loadState(savedInstanceState);
     }
 
-    private void clearSyncMessage() {
+    protected void clearSyncMessage() {
         waitingMessage.setVisibility(View.GONE);
     }
 }

@@ -219,7 +219,9 @@ public  class       ContributionsActivity
 
         getSupportActionBar().setSubtitle(getResources().getQuantityString(R.plurals.contributions_subtitle, cursor.getCount(), cursor.getCount()));
 
+        contributionsList.clearSyncMessage();
         notifyAndMigrateDataSetObservers();
+
     }
 
     public void onLoaderReset(Loader cursorLoader) {
