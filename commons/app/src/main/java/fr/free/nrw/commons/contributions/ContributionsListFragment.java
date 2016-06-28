@@ -44,7 +44,7 @@ public class ContributionsListFragment extends Fragment {
 
         contributionsList = (GridView) v.findViewById(R.id.contributionsList);
         waitingMessage = (TextView) v.findViewById(R.id.waitingMessage);
-        emptyMessage = (TextView) v.findViewById(R.id.waitingMessage);
+        emptyMessage = (TextView) v.findViewById(R.id.emptyMessage);
 
         contributionsList.setOnItemClickListener((AdapterView.OnItemClickListener)getActivity());
         if(savedInstanceState != null) {
@@ -52,6 +52,7 @@ public class ContributionsListFragment extends Fragment {
             contributionsList.setSelection(savedInstanceState.getInt("grid-position"));
         }
 
+        //TODO: Should this be in onResume?
         SharedPreferences prefs = this.getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
         String lastModified = prefs.getString("lastSyncTimestamp", "");
         Log.d(TAG, "Last Sync Timestamp: " + lastModified);
