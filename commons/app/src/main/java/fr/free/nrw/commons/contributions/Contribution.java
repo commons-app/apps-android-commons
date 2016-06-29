@@ -223,7 +223,7 @@ public class Contribution extends Media {
         Contribution c = new Contribution();
 
         //Check that cursor has a value to avoid CursorIndexOutOfBoundsException
-        if(cursor.getCount() > 0) {
+        if (cursor.getCount() > 0) {
             c.contentUri = fr.free.nrw.commons.contributions.ContributionsContentProvider.uriForId(cursor.getInt(0));
             c.filename = cursor.getString(1);
             c.localUri = TextUtils.isEmpty(cursor.getString(2)) ? null : Uri.parse(cursor.getString(2));
