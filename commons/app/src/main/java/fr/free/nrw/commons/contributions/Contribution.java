@@ -221,22 +221,26 @@ public class Contribution extends Media {
     public static Contribution fromCursor(Cursor cursor) {
         // Hardcoding column positions!
         Contribution c = new Contribution();
-        c.contentUri = fr.free.nrw.commons.contributions.ContributionsContentProvider.uriForId(cursor.getInt(0));
-        c.filename = cursor.getString(1);
-        c.localUri = TextUtils.isEmpty(cursor.getString(2)) ? null : Uri.parse(cursor.getString(2));
-        c.imageUrl = cursor.getString(3);
-        c.timestamp = cursor.getLong(4) == 0 ? null : new Date(cursor.getLong(4));
-        c.state = cursor.getInt(5);
-        c.dataLength = cursor.getLong(6);
-        c.dateUploaded =  cursor.getLong(7) == 0 ? null : new Date(cursor.getLong(7));
-        c.transferred = cursor.getLong(8);
-        c.source = cursor.getString(9);
-        c.description = cursor.getString(10);
-        c.creator = cursor.getString(11);
-        c.isMultiple = cursor.getInt(12) == 1;
-        c.width = cursor.getInt(13);
-        c.height = cursor.getInt(14);
-        c.license = cursor.getString(15);
+
+        //Check that cursor has a value to avoid CursorIndexOutOfBoundsException
+        if(cursor.getCount() > 0) {
+            c.contentUri = fr.free.nrw.commons.contributions.ContributionsContentProvider.uriForId(cursor.getInt(0));
+            c.filename = cursor.getString(1);
+            c.localUri = TextUtils.isEmpty(cursor.getString(2)) ? null : Uri.parse(cursor.getString(2));
+            c.imageUrl = cursor.getString(3);
+            c.timestamp = cursor.getLong(4) == 0 ? null : new Date(cursor.getLong(4));
+            c.state = cursor.getInt(5);
+            c.dataLength = cursor.getLong(6);
+            c.dateUploaded =  cursor.getLong(7) == 0 ? null : new Date(cursor.getLong(7));
+            c.transferred = cursor.getLong(8);
+            c.source = cursor.getString(9);
+            c.description = cursor.getString(10);
+            c.creator = cursor.getString(11);
+            c.isMultiple = cursor.getInt(12) == 1;
+            c.width = cursor.getInt(13);
+            c.height = cursor.getInt(14);
+            c.license = cursor.getString(15);
+        }
 
         return c;
     }
