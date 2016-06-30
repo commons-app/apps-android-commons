@@ -112,6 +112,7 @@ public  class       ContributionsActivity
         setTitle(R.string.title_activity_contributions);
         setContentView(R.layout.activity_contributions);
 
+        // Activity can call methods in the fragment by acquiring a reference to the Fragment from FragmentManager, using findFragmentById()
         contributionsList = (ContributionsListFragment)getSupportFragmentManager().findFragmentById(R.id.contributionsListFragment);
 
         getSupportFragmentManager().addOnBackStackChangedListener(this);
@@ -133,6 +134,9 @@ public  class       ContributionsActivity
         outState.putBoolean("mediaDetailsVisible", (mediaDetails != null && mediaDetails.isVisible()));
     }
 
+    /** Replace whatever is in the current contributionsFragmentContainer view with mediaDetailPagerFragment,
+    /   and preserve previous state in back stack.
+    /   Called when user selects a contribution. */
     private void showDetail(int i) {
         if(mediaDetails == null ||!mediaDetails.isVisible()) {
             mediaDetails = new MediaDetailPagerFragment();
@@ -284,7 +288,7 @@ public  class       ContributionsActivity
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         }
     }
-    
+
     public void refreshSource() {
         getSupportLoaderManager().restartLoader(0, null, this);
     }
