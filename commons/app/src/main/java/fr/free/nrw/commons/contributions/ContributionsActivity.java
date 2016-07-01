@@ -62,7 +62,6 @@ public  class       ContributionsActivity
         super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
     }
 
-
     private ServiceConnection uploadServiceConnection = new ServiceConnection() {
         public void onServiceConnected(ComponentName componentName, IBinder binder) {
             uploadService = (UploadService) ((HandlerService.HandlerServiceLocalBinder)binder).getService();
@@ -75,8 +74,6 @@ public  class       ContributionsActivity
         }
     };
 
-
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -84,7 +81,6 @@ public  class       ContributionsActivity
             unbindService(uploadServiceConnection);
         }
     }
-
 
     @Override
     protected void onResume() {
@@ -116,7 +112,6 @@ public  class       ContributionsActivity
         setTitle(R.string.title_activity_contributions);
         setContentView(R.layout.activity_contributions);
 
-
         contributionsList = (ContributionsListFragment)getSupportFragmentManager().findFragmentById(R.id.contributionsListFragment);
 
         getSupportFragmentManager().addOnBackStackChangedListener(this);
@@ -129,7 +124,6 @@ public  class       ContributionsActivity
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             }
         }
-
         requestAuthToken();
     }
 
@@ -290,8 +284,7 @@ public  class       ContributionsActivity
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         }
     }
-
-
+    
     public void refreshSource() {
         getSupportLoaderManager().restartLoader(0, null, this);
     }
