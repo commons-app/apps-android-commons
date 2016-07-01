@@ -203,6 +203,9 @@ public class CommonsApplication extends Application {
         } catch (IOException e) {
             e.printStackTrace();
             return false;
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 
