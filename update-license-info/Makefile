@@ -1,9 +1,9 @@
 .FAKE : build update clean install
 
-build : ../commons/res/xml/wikimedia_licenses.xml
+build : ../app/src/main/res/xml/wikimedia_licenses.xml
 
-../commons/res/xml/wikimedia_licenses.xml : licenses.php mediawiki-extensions-UploadWizard
-	php licenses.php > ../commons/res/xml/wikimedia_licenses.xml
+../app/src/main/res/xml/wikimedia_licenses.xml : licenses.php mediawiki-extensions-UploadWizard
+	php licenses.php > ../app/src/main/res/xml/wikimedia_licenses.xml
 
 mediawiki-extensions-UploadWizard : update
 
