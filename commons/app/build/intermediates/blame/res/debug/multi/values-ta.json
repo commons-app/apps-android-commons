@@ -1,0 +1,520 @@
+[
+    {
+        "outputFile": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\res\\merged\\debug\\values-ta\\values-ta.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 57,
+                    "endOffset": 108
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ta\\strings.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 2,
+                        "startOffset": 55,
+                        "endColumn": 55,
+                        "endOffset": 108
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 113,
+                    "endColumn": 69,
+                    "endOffset": 178
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ta\\strings.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 2,
+                        "startOffset": 112,
+                        "endColumn": 67,
+                        "endOffset": 177
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 183,
+                    "endColumn": 64,
+                    "endOffset": 243
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ta\\strings.xml",
+                    "position": {
+                        "startLine": 27,
+                        "startColumn": 2,
+                        "startOffset": 1615,
+                        "endColumn": 62,
+                        "endOffset": 1675
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 5,
+                    "startColumn": 4,
+                    "startOffset": 248,
+                    "endColumn": 81,
+                    "endOffset": 325
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ta\\strings.xml",
+                    "position": {
+                        "startLine": 14,
+                        "startColumn": 2,
+                        "startOffset": 810,
+                        "endColumn": 79,
+                        "endOffset": 887
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 6,
+                    "startColumn": 4,
+                    "startOffset": 330,
+                    "endColumn": 74,
+                    "endOffset": 400
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ta\\strings.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 2,
+                        "startOffset": 891,
+                        "endColumn": 72,
+                        "endOffset": 961
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 7,
+                    "startColumn": 4,
+                    "startOffset": 405,
+                    "endColumn": 74,
+                    "endOffset": 475
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ta\\strings.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 2,
+                        "startOffset": 371,
+                        "endColumn": 72,
+                        "endOffset": 441
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 8,
+                    "startColumn": 4,
+                    "startOffset": 480,
+                    "endColumn": 43,
+                    "endOffset": 519
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ta\\strings.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 2,
+                        "startOffset": 328,
+                        "endColumn": 41,
+                        "endOffset": 367
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 9,
+                    "startColumn": 4,
+                    "startOffset": 524,
+                    "endColumn": 65,
+                    "endOffset": 585
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ta\\strings.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 2,
+                        "startOffset": 503,
+                        "endColumn": 63,
+                        "endOffset": 564
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 10,
+                    "startColumn": 4,
+                    "startOffset": 590,
+                    "endColumn": 73,
+                    "endOffset": 659
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ta\\strings.xml",
+                    "position": {
+                        "startLine": 23,
+                        "startColumn": 2,
+                        "startOffset": 1376,
+                        "endColumn": 71,
+                        "endOffset": 1445
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 11,
+                    "startColumn": 4,
+                    "startOffset": 664,
+                    "endColumn": 58,
+                    "endOffset": 718
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ta\\strings.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 2,
+                        "startOffset": 445,
+                        "endColumn": 56,
+                        "endOffset": 499
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 12,
+                    "startColumn": 4,
+                    "startOffset": 723,
+                    "endColumn": 59,
+                    "endOffset": 778
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ta\\strings.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 2,
+                        "startOffset": 1031,
+                        "endColumn": 57,
+                        "endOffset": 1086
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 13,
+                    "startColumn": 4,
+                    "startOffset": 783,
+                    "endColumn": 66,
+                    "endOffset": 845
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ta\\strings.xml",
+                    "position": {
+                        "startLine": 16,
+                        "startColumn": 2,
+                        "startOffset": 965,
+                        "endColumn": 64,
+                        "endOffset": 1027
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 14,
+                    "startColumn": 4,
+                    "startOffset": 850,
+                    "endColumn": 62,
+                    "endOffset": 908
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ta\\strings.xml",
+                    "position": {
+                        "startLine": 20,
+                        "startColumn": 2,
+                        "startOffset": 1203,
+                        "endColumn": 60,
+                        "endOffset": 1261
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 15,
+                    "startColumn": 4,
+                    "startOffset": 913,
+                    "endColumn": 53,
+                    "endOffset": 962
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ta\\strings.xml",
+                    "position": {
+                        "startLine": 26,
+                        "startColumn": 2,
+                        "startOffset": 1562,
+                        "endColumn": 51,
+                        "endOffset": 1611
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 16,
+                    "startColumn": 4,
+                    "startOffset": 967,
+                    "endColumn": 52,
+                    "endOffset": 1015
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ta\\strings.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 2,
+                        "startOffset": 181,
+                        "endColumn": 50,
+                        "endOffset": 229
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 17,
+                    "startColumn": 4,
+                    "startOffset": 1020,
+                    "endColumn": 44,
+                    "endOffset": 1060
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ta\\strings.xml",
+                    "position": {
+                        "startLine": 19,
+                        "startColumn": 2,
+                        "startOffset": 1159,
+                        "endColumn": 42,
+                        "endOffset": 1199
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 18,
+                    "startColumn": 4,
+                    "startOffset": 1065,
+                    "endColumn": 56,
+                    "endOffset": 1117
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ta\\strings.xml",
+                    "position": {
+                        "startLine": 25,
+                        "startColumn": 2,
+                        "startOffset": 1506,
+                        "endColumn": 54,
+                        "endOffset": 1558
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 19,
+                    "startColumn": 4,
+                    "startOffset": 1122,
+                    "endColumn": 47,
+                    "endOffset": 1165
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ta\\strings.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 2,
+                        "startOffset": 281,
+                        "endColumn": 45,
+                        "endOffset": 324
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 20,
+                    "startColumn": 4,
+                    "startOffset": 1170,
+                    "endColumn": 69,
+                    "endOffset": 1235
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ta\\strings.xml",
+                    "position": {
+                        "startLine": 18,
+                        "startColumn": 2,
+                        "startOffset": 1090,
+                        "endColumn": 67,
+                        "endOffset": 1155
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 21,
+                    "startColumn": 4,
+                    "startOffset": 1240,
+                    "endColumn": 59,
+                    "endOffset": 1295
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ta\\strings.xml",
+                    "position": {
+                        "startLine": 22,
+                        "startColumn": 2,
+                        "startOffset": 1317,
+                        "endColumn": 57,
+                        "endOffset": 1372
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 22,
+                    "startColumn": 4,
+                    "startOffset": 1300,
+                    "endColumn": 52,
+                    "endOffset": 1348
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ta\\strings.xml",
+                    "position": {
+                        "startLine": 21,
+                        "startColumn": 2,
+                        "startOffset": 1265,
+                        "endColumn": 50,
+                        "endOffset": 1313
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 23,
+                    "startColumn": 4,
+                    "startOffset": 1353,
+                    "endColumn": 57,
+                    "endOffset": 1406
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ta\\strings.xml",
+                    "position": {
+                        "startLine": 24,
+                        "startColumn": 2,
+                        "startOffset": 1449,
+                        "endColumn": 55,
+                        "endOffset": 1502
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 24,
+                    "startColumn": 4,
+                    "startOffset": 1411,
+                    "endColumn": 75,
+                    "endOffset": 1482
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ta\\strings.xml",
+                    "position": {
+                        "startLine": 13,
+                        "startColumn": 2,
+                        "startOffset": 735,
+                        "endColumn": 73,
+                        "endOffset": 806
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 25,
+                    "startColumn": 4,
+                    "startOffset": 1487,
+                    "endColumn": 62,
+                    "endOffset": 1545
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ta\\strings.xml",
+                    "position": {
+                        "startLine": 28,
+                        "startColumn": 2,
+                        "startOffset": 1679,
+                        "endColumn": 60,
+                        "endOffset": 1737
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 26,
+                    "startColumn": 4,
+                    "startOffset": 1550,
+                    "endColumn": 86,
+                    "endOffset": 1632
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ta\\strings.xml",
+                    "position": {
+                        "startLine": 11,
+                        "startColumn": 2,
+                        "startOffset": 568,
+                        "endColumn": 84,
+                        "endOffset": 650
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 27,
+                    "startColumn": 4,
+                    "startOffset": 1637,
+                    "endColumn": 81,
+                    "endOffset": 1714
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ta\\strings.xml",
+                    "position": {
+                        "startLine": 12,
+                        "startColumn": 2,
+                        "startOffset": 654,
+                        "endColumn": 79,
+                        "endOffset": 731
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 28,
+                    "startColumn": 4,
+                    "startOffset": 1719,
+                    "endColumn": 48,
+                    "endOffset": 1763
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ta\\strings.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 2,
+                        "startOffset": 233,
+                        "endColumn": 46,
+                        "endOffset": 277
+                    }
+                }
+            }
+        ]
+    }
+]

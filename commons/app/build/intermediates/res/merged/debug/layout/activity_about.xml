@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:gravity="center"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <ImageView
+        android:src="@drawable/ic_launcher"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        />
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/app_name"
+        style="?android:textAppearanceLarge"
+        />
+
+    <TextView
+        android:id="@+id/about_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        android:id="@+id/about_license"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        style="?android:textAppearanceSmall"
+        android:gravity="center"
+        android:text="@string/about_license"
+        />
+    <TextView
+            android:id="@+id/about_improve"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            style="?android:textAppearanceSmall"
+            android:gravity="center"
+            android:text="@string/about_improve"
+            />
+    <TextView
+            android:id="@+id/about_privacy_policy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            style="?android:textAppearanceSmall"
+            android:gravity="center"
+            android:text="@string/about_privacy_policy"
+            />
+    <TextView
+        android:id="@+id/about_uploads_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        style="?android:textAppearanceSmall"
+        android:gravity="center"
+        android:alpha="0.2"
+        />
+</LinearLayout>

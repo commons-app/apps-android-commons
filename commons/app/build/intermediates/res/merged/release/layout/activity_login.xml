@@ -1,0 +1,76 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+        >
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+        <ImageView
+                android:id="@+id/commonsLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/commons_logo_large" />
+
+        <TextView
+                android:id="@+id/loginSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/app_name"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_margin="16dip"
+                android:gravity="center"
+                android:orientation="vertical"
+               >
+            <FrameLayout
+                    android:id="@+id/loginErrors"
+                    android:layout_width="fill_parent"
+                    android:layout_height="48dp"
+                    />
+
+            <EditText
+                    android:id="@+id/loginUsername"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/username"
+                    android:inputType="textNoSuggestions"
+                    android:imeOptions="flagNoExtractUi"
+                    >
+
+                <requestFocus />
+            </EditText>
+
+            <EditText
+                    android:id="@+id/loginPassword"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    android:imeOptions="flagNoExtractUi" />
+
+            <Button
+                    android:id="@+id/loginButton"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:text="@string/login" />
+            <Button
+                    android:id="@+id/signupButton"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/signup"
+                    android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+</ScrollView>

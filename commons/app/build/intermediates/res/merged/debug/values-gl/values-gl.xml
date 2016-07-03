@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="contributions_subtitle">
+    <item quantity="zero">Aínda non hai ningunha carga</item>
+    <item quantity="one">1 carga</item>
+    <item quantity="other">%d cargas</item>
+  </plurals>
+    <plurals name="multiple_uploads_title">
+    <item quantity="one">1 carga</item>
+    <item quantity="other">%d cargas</item>
+  </plurals>
+    <plurals name="starting_multiple_uploads">
+    <item quantity="one">Iniciando 1 carga</item>
+    <item quantity="other">Iniciando %d cargas</item>
+  </plurals>
+    <string name="about_improve">Fonte en &lt;a href=\"https://github.com/wikimedia/apps-android-commons\">GitHub&lt;/a>. Erros en &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\">Bugzilla&lt;/a>.</string>
+    <string name="about_license">Software de código aberto liberado baixo a &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\">licenza Apache v2&lt;/a></string>
+    <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Política_de_protección_de_datos_(gl)\">Política de protección de datos&lt;/a></string>
+    <string name="app_name">Wikimedia Commons</string>
+    <string name="app_name_beta">Beta da Wikimedia Commons</string>
+    <string name="authentication_failed">Erro durante a autenticación!</string>
+    <string name="categories_activity_title">Categorías</string>
+    <string name="categories_not_found">Non se atopou ningunha categoría que coincidise con \"%1$s\"</string>
+    <string name="categories_search_text_hint">Procurar categorías</string>
+    <string name="categories_skip_explanation">Engada categorías para facer máis accesibles as súas imaxes na Wikimedia Commons.
+
+Comece a escribir para engadir categorías.
+Prema nesta mensaxe (ou no botón \"Atrás\") para saltar este paso.</string>
+    <string name="contribution_state_failed">Erróneo</string>
+    <string name="contribution_state_in_progress">%1$d%% completado</string>
+    <string name="contribution_state_queued">Na cola</string>
+    <string name="contribution_state_starting">Subindo</string>
+    <string name="crash_dialog_comment_prompt">Envíenos un correo electrónico contándonos o que estaba a facer. Axúdenos a arranxalo!</string>
+    <string name="crash_dialog_ok_toast">Grazas!</string>
+    <string name="crash_dialog_text">Vaites! Algo foi mal!</string>
+    <string name="crash_dialog_title">Commons fallou</string>
+    <string name="detail_description_empty">Sen descrición</string>
+    <string name="detail_license_empty">Licenza descoñecida</string>
+    <string name="detail_panel_cats_label">Categorías</string>
+    <string name="detail_panel_cats_loading">Cargando...</string>
+    <string name="detail_panel_cats_none">Ningunha seleccionada</string>
+    <string name="license_name_attribution">Recoñecemento</string>
+    <string name="license_name_cc0">CC0</string>
+    <string name="license_name_cc_2_0">CC BY 2.0</string>
+    <string name="license_name_cc_by">CCu00A0recoñecementou00A03.0</string>
+    <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
+    <string name="license_name_cc_by_2_5">CC BY 2.5</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="license_name_cc_by_sa">CCu00A0recoñecementou00A0compartiru00A0igualu00A03.0</string>
+    <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
+    <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
+    <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+    <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Austria)</string>
+    <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Alemaña)</string>
+    <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonia)</string>
+    <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (España)</string>
+    <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Croacia)</string>
+    <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxemburgo)</string>
+    <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Países Baixos)</string>
+    <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Noruega)</string>
+    <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polonia)</string>
+    <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romanía)</string>
+    <string name="license_name_cc_zero">CC Zero</string>
+    <string name="license_name_fal">Licenza artística libre</string>
+    <string name="license_name_gfdl">Licenza de documentación libre de GNU</string>
+    <string name="license_name_own_pd">own-pd</string>
+    <string name="license_name_pd_art">Dominio público (obra de arte)</string>
+    <string name="license_name_pd_ineligible">Dominio público (non apto para aplicarlle dereitos de autoría)</string>
+    <string name="license_name_pd_old">Dominio público (os dereitos de autoría caducaron)</string>
+    <string name="license_name_pd_old_100">Dominio público (o autor morreu hai máis de 100 anos)</string>
+    <string name="license_name_pd_us">Dominio público (EUA)</string>
+    <string name="license_name_pd_usgov">Dominio público (goberno dos EUA)</string>
+    <string name="license_name_pd_usgov_nasa">Dominio público (NASA)</string>
+    <string name="logging_in_message">Por favor, agarde...</string>
+    <string name="logging_in_title">Accedendo ao sistema</string>
+    <string name="login">Acceder ao sistema</string>
+    <string name="login_failed">Erro durante o inición de sesión!</string>
+    <string name="login_failed_blocked">Sentímolo, este usuario está bloqueado en Commons</string>
+    <string name="login_failed_generic">Erro durante o inición de sesión</string>
+    <string name="login_failed_network">Erro ao acceder ao sistema: Fallou a rede</string>
+    <string name="login_failed_password">Erro ao acceder ao sistema: Comprobe o seu contrasinal</string>
+    <string name="login_failed_throttled">Demasiados intentos incorrectos. Inténteo de novo nuns minutos</string>
+    <string name="login_failed_username">Erro ao acceder ao sistema: Comprobe o seu nome de usuario</string>
+    <string name="login_success">Accedeu correctamente!</string>
+    <string name="menu_about">Acerca de</string>
+    <string name="menu_cancel_upload">Cancelar</string>
+    <string name="menu_download">Descargar</string>
+    <string name="menu_feedback">Enviar comentarios (por correo electrónico)</string>
+    <string name="menu_from_camera">Tirar unha foto</string>
+    <string name="menu_from_gallery">Da galería</string>
+    <string name="menu_open_in_browser">Mostrar no navegador</string>
+    <string name="menu_refresh">Refrescar</string>
+    <string name="menu_retry_upload">Reintentar</string>
+    <string name="menu_save_categories">Gardar</string>
+    <string name="menu_settings">Configuracións</string>
+    <string name="menu_share">Compartir</string>
+    <string name="menu_upload_single">Subir</string>
+    <string name="multiple_share_base_title">Dea un nome a este conxunto</string>
+    <string name="no_uploads_yet">Aínda non cargou ningunha foto.</string>
+    <string name="password">Contrasinal</string>
+    <string name="preference_license">Licenza</string>
+    <string name="preference_tracking">Informes de uso</string>
+    <string name="preference_tracking_summary">Enviar informes de uso á Wikimedia para axudar a mellorar a aplicación</string>
+    <string name="provider_campaigns">Avisos</string>
+    <string name="provider_categories">Categorías usadas recentemente</string>
+    <string name="provider_contributions">As miñas cargas</string>
+    <string name="provider_modifications">Modificacións</string>
+    <string name="share_description_hint">Descrición</string>
+    <string name="share_license_summary">Esta imaxe quedará baixo a licenza %1$s</string>
+    <string name="share_title_hint">Título</string>
+    <string name="share_upload_button">Subir</string>
+    <string name="title_activity_about">Acerca de</string>
+    <string name="title_activity_contributions">As miñas cargas</string>
+    <string name="title_activity_settings">Configuracións</string>
+    <string name="upload_completed_notification_text">Prema para ollar a súa carga</string>
+    <string name="upload_completed_notification_title">Cargouse \"%1$s\"!</string>
+    <string name="upload_failed_notification_subtitle">Prema para mostralo</string>
+    <string name="upload_failed_notification_title">Erro ao cargar \"%1$s\"</string>
+    <string name="upload_progress_notification_title_finishing">Rematando a carga de \"%1$s\"</string>
+    <string name="upload_progress_notification_title_in_progress">Cargando \"%1$s\"</string>
+    <string name="upload_progress_notification_title_start">Comezando a carga de \"%1$s\"</string>
+    <string name="uploading_started">A carga comezou!</string>
+    <string name="uploads_pending_notification_indicator">Cargándose %d ficheiros</string>
+    <string name="username">Nome de usuario</string>
+    <string name="waiting_first_sync">Agardando pola primeira sincronización...</string>
+    <string name="welcome_copyright_subtext">Evite os materiais protexidos por dereitos de autoría que se atopen na internet, así como imaxes de pósters, portadas de libros etc.</string>
+    <string name="welcome_copyright_text">As súas imaxes axudan a educar xente de todo o mundo.</string>
+    <string name="welcome_final_button_text">Si!</string>
+    <string name="welcome_final_text">Entende como vai?</string>
+    <string name="welcome_wikipedia_subtext">As imaxes da Wikipedia veñen da Wikimedia Commons.</string>
+    <string name="welcome_wikipedia_text">Achegue as súas imaxes. Axude a que os artigos da Wikipedia cobren vida!</string>
+</resources>

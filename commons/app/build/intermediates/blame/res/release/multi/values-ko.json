@@ -1,0 +1,2597 @@
+[
+    {
+        "outputFile": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\res\\merged\\release\\values-ko\\values-ko.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 44,
+                    "endOffset": 95
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 46,
+                        "startColumn": 2,
+                        "startOffset": 2725,
+                        "endColumn": 42,
+                        "endOffset": 2765
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 100,
+                    "endLine": 6,
+                    "endColumn": 12,
+                    "endOffset": 235
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 51,
+                        "startColumn": 2,
+                        "startOffset": 2920,
+                        "endLine": 54,
+                        "endColumn": 12,
+                        "endOffset": 3058
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 7,
+                    "startColumn": 4,
+                    "startOffset": 240,
+                    "endLine": 10,
+                    "endColumn": 12,
+                    "endOffset": 384
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 47,
+                        "startColumn": 2,
+                        "startOffset": 2769,
+                        "endLine": 50,
+                        "endColumn": 12,
+                        "endOffset": 2916
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 11,
+                    "startColumn": 4,
+                    "startOffset": 389,
+                    "endColumn": 94,
+                    "endOffset": 479
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-ko\\values-ko.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 94,
+                        "endOffset": 145
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 12,
+                    "startColumn": 4,
+                    "startOffset": 484,
+                    "endColumn": 107,
+                    "endOffset": 587
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-ko\\values-ko.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 150,
+                        "endColumn": 107,
+                        "endOffset": 253
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 13,
+                    "startColumn": 4,
+                    "startOffset": 592,
+                    "endColumn": 122,
+                    "endOffset": 710
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-ko\\values-ko.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 258,
+                        "endColumn": 122,
+                        "endOffset": 376
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 14,
+                    "startColumn": 4,
+                    "startOffset": 715,
+                    "endColumn": 93,
+                    "endOffset": 804
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-ko\\values-ko.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 381,
+                        "endColumn": 93,
+                        "endOffset": 470
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 15,
+                    "startColumn": 4,
+                    "startOffset": 809,
+                    "endColumn": 101,
+                    "endOffset": 906
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-ko\\values-ko.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 475,
+                        "endColumn": 101,
+                        "endOffset": 572
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 16,
+                    "startColumn": 4,
+                    "startOffset": 911,
+                    "endColumn": 81,
+                    "endOffset": 988
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-ko\\values-ko.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 577,
+                        "endColumn": 81,
+                        "endOffset": 654
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 17,
+                    "startColumn": 4,
+                    "startOffset": 993,
+                    "endColumn": 97,
+                    "endOffset": 1086
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-ko\\values-ko.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 659,
+                        "endColumn": 97,
+                        "endOffset": 752
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 18,
+                    "startColumn": 4,
+                    "startOffset": 1091,
+                    "endColumn": 105,
+                    "endOffset": 1192
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-ko\\values-ko.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 4,
+                        "startOffset": 757,
+                        "endColumn": 105,
+                        "endOffset": 858
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 19,
+                    "startColumn": 4,
+                    "startOffset": 1197,
+                    "endColumn": 78,
+                    "endOffset": 1271
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-ko\\values-ko.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 4,
+                        "startOffset": 863,
+                        "endColumn": 78,
+                        "endOffset": 937
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 20,
+                    "startColumn": 4,
+                    "startOffset": 1276,
+                    "endColumn": 75,
+                    "endOffset": 1347
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-ko\\values-ko.xml",
+                    "position": {
+                        "startLine": 11,
+                        "startColumn": 4,
+                        "startOffset": 942,
+                        "endColumn": 75,
+                        "endOffset": 1013
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 21,
+                    "startColumn": 4,
+                    "startOffset": 1352,
+                    "endColumn": 79,
+                    "endOffset": 1427
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-ko\\values-ko.xml",
+                    "position": {
+                        "startLine": 12,
+                        "startColumn": 4,
+                        "startOffset": 1018,
+                        "endColumn": 79,
+                        "endOffset": 1093
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 22,
+                    "startColumn": 4,
+                    "startOffset": 1432,
+                    "endColumn": 97,
+                    "endOffset": 1525
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-ko\\values-ko.xml",
+                    "position": {
+                        "startLine": 13,
+                        "startColumn": 4,
+                        "startOffset": 1098,
+                        "endColumn": 97,
+                        "endOffset": 1191
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 23,
+                    "startColumn": 4,
+                    "startOffset": 1530,
+                    "endColumn": 94,
+                    "endOffset": 1620
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-ko\\values-ko.xml",
+                    "position": {
+                        "startLine": 14,
+                        "startColumn": 4,
+                        "startOffset": 1196,
+                        "endColumn": 94,
+                        "endOffset": 1286
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 24,
+                    "startColumn": 4,
+                    "startOffset": 1625,
+                    "endColumn": 94,
+                    "endOffset": 1715
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-ko\\values-ko.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 4,
+                        "startOffset": 1291,
+                        "endColumn": 94,
+                        "endOffset": 1381
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 25,
+                    "startColumn": 4,
+                    "startOffset": 1720,
+                    "endColumn": 99,
+                    "endOffset": 1815
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-ko\\values-ko.xml",
+                    "position": {
+                        "startLine": 16,
+                        "startColumn": 4,
+                        "startOffset": 1386,
+                        "endColumn": 99,
+                        "endOffset": 1481
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 26,
+                    "startColumn": 4,
+                    "startOffset": 1820,
+                    "endColumn": 95,
+                    "endOffset": 1911
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-ko\\values-ko.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 4,
+                        "startOffset": 1486,
+                        "endColumn": 95,
+                        "endOffset": 1577
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 27,
+                    "startColumn": 4,
+                    "startOffset": 1916,
+                    "endColumn": 98,
+                    "endOffset": 2010
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-ko\\values-ko.xml",
+                    "position": {
+                        "startLine": 18,
+                        "startColumn": 4,
+                        "startOffset": 1582,
+                        "endColumn": 98,
+                        "endOffset": 1676
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 28,
+                    "startColumn": 4,
+                    "startOffset": 2015,
+                    "endColumn": 114,
+                    "endOffset": 2125
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-ko\\values-ko.xml",
+                    "position": {
+                        "startLine": 19,
+                        "startColumn": 4,
+                        "startOffset": 1681,
+                        "endColumn": 114,
+                        "endOffset": 1791
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 29,
+                    "startColumn": 4,
+                    "startOffset": 2130,
+                    "endColumn": 93,
+                    "endOffset": 2219
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-ko\\values-ko.xml",
+                    "position": {
+                        "startLine": 20,
+                        "startColumn": 4,
+                        "startOffset": 1796,
+                        "endColumn": 93,
+                        "endOffset": 1885
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 30,
+                    "startColumn": 4,
+                    "startOffset": 2224,
+                    "endColumn": 238,
+                    "endOffset": 2458
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 66,
+                        "startColumn": 2,
+                        "startOffset": 3771,
+                        "endColumn": 248,
+                        "endOffset": 4017
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 31,
+                    "startColumn": 4,
+                    "startOffset": 2463,
+                    "endColumn": 168,
+                    "endOffset": 2627
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 65,
+                        "startColumn": 2,
+                        "startOffset": 3597,
+                        "endColumn": 172,
+                        "endOffset": 3767
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 32,
+                    "startColumn": 4,
+                    "startOffset": 2632,
+                    "endColumn": 134,
+                    "endOffset": 2762
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 67,
+                        "startColumn": 2,
+                        "startOffset": 4021,
+                        "endColumn": 138,
+                        "endOffset": 4157
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 33,
+                    "startColumn": 4,
+                    "startOffset": 2767,
+                    "endColumn": 45,
+                    "endOffset": 2808
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 2,
+                        "startOffset": 55,
+                        "endColumn": 43,
+                        "endOffset": 96
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 34,
+                    "startColumn": 4,
+                    "startOffset": 2813,
+                    "endColumn": 53,
+                    "endOffset": 2862
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 2,
+                        "startOffset": 100,
+                        "endColumn": 51,
+                        "endOffset": 149
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 35,
+                    "startColumn": 4,
+                    "startOffset": 2867,
+                    "endColumn": 56,
+                    "endOffset": 2919
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 12,
+                        "startColumn": 2,
+                        "startOffset": 522,
+                        "endColumn": 54,
+                        "endOffset": 574
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 36,
+                    "startColumn": 4,
+                    "startOffset": 2924,
+                    "endColumn": 56,
+                    "endOffset": 2976
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 60,
+                        "startColumn": 2,
+                        "startOffset": 3292,
+                        "endColumn": 54,
+                        "endOffset": 3344
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 37,
+                    "startColumn": 4,
+                    "startOffset": 2981,
+                    "endColumn": 76,
+                    "endOffset": 3053
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 55,
+                        "startColumn": 2,
+                        "startOffset": 3062,
+                        "endColumn": 74,
+                        "endOffset": 3134
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 38,
+                    "startColumn": 4,
+                    "startOffset": 3058,
+                    "endColumn": 61,
+                    "endOffset": 3115
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 44,
+                        "startColumn": 2,
+                        "startOffset": 2613,
+                        "endColumn": 59,
+                        "endOffset": 2670
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 39,
+                    "startColumn": 4,
+                    "startOffset": 3120,
+                    "endLine": 42,
+                    "endColumn": 46,
+                    "endOffset": 3267
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 56,
+                        "startColumn": 2,
+                        "startOffset": 3138,
+                        "endLine": 59,
+                        "endColumn": 46,
+                        "endOffset": 3288
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 43,
+                    "startColumn": 4,
+                    "startOffset": 3272,
+                    "endColumn": 56,
+                    "endOffset": 3324
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 24,
+                        "startColumn": 2,
+                        "startOffset": 1408,
+                        "endColumn": 54,
+                        "endOffset": 1460
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 44,
+                    "startColumn": 4,
+                    "startOffset": 3329,
+                    "endColumn": 68,
+                    "endOffset": 3393
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 25,
+                        "startColumn": 2,
+                        "startOffset": 1464,
+                        "endColumn": 66,
+                        "endOffset": 1528
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 45,
+                    "startColumn": 4,
+                    "startOffset": 3398,
+                    "endColumn": 58,
+                    "endOffset": 3452
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 23,
+                        "startColumn": 2,
+                        "startOffset": 1350,
+                        "endColumn": 56,
+                        "endOffset": 1404
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 46,
+                    "startColumn": 4,
+                    "startOffset": 3457,
+                    "endColumn": 61,
+                    "endOffset": 3514
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 26,
+                        "startColumn": 2,
+                        "startOffset": 1532,
+                        "endColumn": 59,
+                        "endOffset": 1589
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 47,
+                    "startColumn": 4,
+                    "startOffset": 3519,
+                    "endColumn": 104,
+                    "endOffset": 3619
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\error.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 2,
+                        "startOffset": 184,
+                        "endColumn": 102,
+                        "endOffset": 284
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 48,
+                    "startColumn": 4,
+                    "startOffset": 3624,
+                    "endColumn": 56,
+                    "endOffset": 3676
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\error.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 2,
+                        "startOffset": 288,
+                        "endColumn": 54,
+                        "endOffset": 340
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 49,
+                    "startColumn": 4,
+                    "startOffset": 3681,
+                    "endColumn": 62,
+                    "endOffset": 3739
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\error.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 2,
+                        "startOffset": 122,
+                        "endColumn": 60,
+                        "endOffset": 180
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 50,
+                    "startColumn": 4,
+                    "startOffset": 3744,
+                    "endColumn": 67,
+                    "endOffset": 3807
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\error.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 2,
+                        "startOffset": 55,
+                        "endColumn": 65,
+                        "endOffset": 118
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 51,
+                    "startColumn": 4,
+                    "startOffset": 3812,
+                    "endColumn": 58,
+                    "endOffset": 3866
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 119,
+                        "startColumn": 2,
+                        "startOffset": 7794,
+                        "endColumn": 56,
+                        "endOffset": 7848
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 52,
+                    "startColumn": 4,
+                    "startOffset": 3871,
+                    "endColumn": 60,
+                    "endOffset": 3927
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 120,
+                        "startColumn": 2,
+                        "startOffset": 7852,
+                        "endColumn": 58,
+                        "endOffset": 7908
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 53,
+                    "startColumn": 4,
+                    "startOffset": 3932,
+                    "endColumn": 54,
+                    "endOffset": 3982
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 116,
+                        "startColumn": 2,
+                        "startOffset": 7619,
+                        "endColumn": 52,
+                        "endOffset": 7669
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 54,
+                    "startColumn": 4,
+                    "startOffset": 3987,
+                    "endColumn": 63,
+                    "endOffset": 4046
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 117,
+                        "startColumn": 2,
+                        "startOffset": 7673,
+                        "endColumn": 61,
+                        "endOffset": 7732
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 55,
+                    "startColumn": 4,
+                    "startOffset": 4051,
+                    "endColumn": 58,
+                    "endOffset": 4105
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 118,
+                        "startColumn": 2,
+                        "startOffset": 7736,
+                        "endColumn": 56,
+                        "endOffset": 7790
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 56,
+                    "startColumn": 4,
+                    "startOffset": 4110,
+                    "endColumn": 58,
+                    "endOffset": 4164
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 108,
+                        "startColumn": 2,
+                        "startOffset": 7036,
+                        "endColumn": 56,
+                        "endOffset": 7090
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 57,
+                    "startColumn": 4,
+                    "startOffset": 4169,
+                    "endColumn": 48,
+                    "endOffset": 4213
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 80,
+                        "startColumn": 2,
+                        "startOffset": 4866,
+                        "endColumn": 46,
+                        "endOffset": 4910
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 58,
+                    "startColumn": 4,
+                    "startOffset": 4218,
+                    "endColumn": 68,
+                    "endOffset": 4282
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 99,
+                        "startColumn": 2,
+                        "startOffset": 6435,
+                        "endColumn": 66,
+                        "endOffset": 6499
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 59,
+                    "startColumn": 4,
+                    "startOffset": 4287,
+                    "endColumn": 67,
+                    "endOffset": 4350
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 79,
+                        "startColumn": 2,
+                        "startOffset": 4799,
+                        "endColumn": 65,
+                        "endOffset": 4862
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 60,
+                    "startColumn": 4,
+                    "startOffset": 4355,
+                    "endColumn": 80,
+                    "endOffset": 4431
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 98,
+                        "startColumn": 2,
+                        "startOffset": 6355,
+                        "endColumn": 78,
+                        "endOffset": 6431
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 61,
+                    "startColumn": 4,
+                    "startOffset": 4436,
+                    "endColumn": 71,
+                    "endOffset": 4503
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 96,
+                        "startColumn": 2,
+                        "startOffset": 6201,
+                        "endColumn": 69,
+                        "endOffset": 6268
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 62,
+                    "startColumn": 4,
+                    "startOffset": 4508,
+                    "endColumn": 71,
+                    "endOffset": 4575
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 92,
+                        "startColumn": 2,
+                        "startOffset": 5927,
+                        "endColumn": 69,
+                        "endOffset": 5994
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 63,
+                    "startColumn": 4,
+                    "startOffset": 4580,
+                    "endColumn": 79,
+                    "endOffset": 4655
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 78,
+                        "startColumn": 2,
+                        "startOffset": 4720,
+                        "endColumn": 77,
+                        "endOffset": 4795
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 64,
+                    "startColumn": 4,
+                    "startOffset": 4660,
+                    "endColumn": 83,
+                    "endOffset": 4739
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 97,
+                        "startColumn": 2,
+                        "startOffset": 6272,
+                        "endColumn": 81,
+                        "endOffset": 6351
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 65,
+                    "startColumn": 4,
+                    "startOffset": 4744,
+                    "endColumn": 83,
+                    "endOffset": 4823
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 95,
+                        "startColumn": 2,
+                        "startOffset": 6118,
+                        "endColumn": 81,
+                        "endOffset": 6197
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 66,
+                    "startColumn": 4,
+                    "startOffset": 4828,
+                    "endColumn": 83,
+                    "endOffset": 4907
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 81,
+                        "startColumn": 2,
+                        "startOffset": 4914,
+                        "endColumn": 81,
+                        "endOffset": 4993
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 67,
+                    "startColumn": 4,
+                    "startOffset": 4912,
+                    "endColumn": 94,
+                    "endOffset": 5002
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 82,
+                        "startColumn": 2,
+                        "startOffset": 4997,
+                        "endColumn": 92,
+                        "endOffset": 5087
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 68,
+                    "startColumn": 4,
+                    "startOffset": 5007,
+                    "endColumn": 91,
+                    "endOffset": 5094
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 83,
+                        "startColumn": 2,
+                        "startOffset": 5091,
+                        "endColumn": 89,
+                        "endOffset": 5178
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 69,
+                    "startColumn": 4,
+                    "startOffset": 5099,
+                    "endColumn": 94,
+                    "endOffset": 5189
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 84,
+                        "startColumn": 2,
+                        "startOffset": 5182,
+                        "endColumn": 92,
+                        "endOffset": 5272
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 70,
+                    "startColumn": 4,
+                    "startOffset": 5194,
+                    "endColumn": 92,
+                    "endOffset": 5282
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 85,
+                        "startColumn": 2,
+                        "startOffset": 5276,
+                        "endColumn": 90,
+                        "endOffset": 5364
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 71,
+                    "startColumn": 4,
+                    "startOffset": 5287,
+                    "endColumn": 94,
+                    "endOffset": 5377
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 86,
+                        "startColumn": 2,
+                        "startOffset": 5368,
+                        "endColumn": 92,
+                        "endOffset": 5458
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 72,
+                    "startColumn": 4,
+                    "startOffset": 5382,
+                    "endColumn": 94,
+                    "endOffset": 5472
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 87,
+                        "startColumn": 2,
+                        "startOffset": 5462,
+                        "endColumn": 92,
+                        "endOffset": 5552
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 73,
+                    "startColumn": 4,
+                    "startOffset": 5477,
+                    "endColumn": 93,
+                    "endOffset": 5566
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 88,
+                        "startColumn": 2,
+                        "startOffset": 5556,
+                        "endColumn": 91,
+                        "endOffset": 5645
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 74,
+                    "startColumn": 4,
+                    "startOffset": 5571,
+                    "endColumn": 93,
+                    "endOffset": 5660
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 89,
+                        "startColumn": 2,
+                        "startOffset": 5649,
+                        "endColumn": 91,
+                        "endOffset": 5738
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 75,
+                    "startColumn": 4,
+                    "startOffset": 5665,
+                    "endColumn": 92,
+                    "endOffset": 5753
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 90,
+                        "startColumn": 2,
+                        "startOffset": 5742,
+                        "endColumn": 90,
+                        "endOffset": 5830
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 76,
+                    "startColumn": 4,
+                    "startOffset": 5758,
+                    "endColumn": 93,
+                    "endOffset": 5847
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 91,
+                        "startColumn": 2,
+                        "startOffset": 5834,
+                        "endColumn": 91,
+                        "endOffset": 5923
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 77,
+                    "startColumn": 4,
+                    "startOffset": 5852,
+                    "endColumn": 54,
+                    "endOffset": 5902
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 93,
+                        "startColumn": 2,
+                        "startOffset": 5998,
+                        "endColumn": 52,
+                        "endOffset": 6048
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 78,
+                    "startColumn": 4,
+                    "startOffset": 5907,
+                    "endColumn": 55,
+                    "endOffset": 5958
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 100,
+                        "startColumn": 2,
+                        "startOffset": 6503,
+                        "endColumn": 53,
+                        "endOffset": 6554
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 79,
+                    "startColumn": 4,
+                    "startOffset": 5963,
+                    "endColumn": 60,
+                    "endOffset": 6019
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 109,
+                        "startColumn": 2,
+                        "startOffset": 7094,
+                        "endColumn": 58,
+                        "endOffset": 7150
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 80,
+                    "startColumn": 4,
+                    "startOffset": 6024,
+                    "endColumn": 66,
+                    "endOffset": 6086
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 94,
+                        "startColumn": 2,
+                        "startOffset": 6052,
+                        "endColumn": 64,
+                        "endOffset": 6114
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 81,
+                    "startColumn": 4,
+                    "startOffset": 6091,
+                    "endColumn": 63,
+                    "endOffset": 6150
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 103,
+                        "startColumn": 2,
+                        "startOffset": 6704,
+                        "endColumn": 61,
+                        "endOffset": 6763
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 82,
+                    "startColumn": 4,
+                    "startOffset": 6155,
+                    "endColumn": 76,
+                    "endOffset": 6227
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 107,
+                        "startColumn": 2,
+                        "startOffset": 6960,
+                        "endColumn": 74,
+                        "endOffset": 7032
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 83,
+                    "startColumn": 4,
+                    "startOffset": 6232,
+                    "endColumn": 65,
+                    "endOffset": 6293
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 102,
+                        "startColumn": 2,
+                        "startOffset": 6639,
+                        "endColumn": 63,
+                        "endOffset": 6700
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 84,
+                    "startColumn": 4,
+                    "startOffset": 6298,
+                    "endColumn": 81,
+                    "endOffset": 6375
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 101,
+                        "startColumn": 2,
+                        "startOffset": 6558,
+                        "endColumn": 79,
+                        "endOffset": 6635
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 85,
+                    "startColumn": 4,
+                    "startOffset": 6380,
+                    "endColumn": 59,
+                    "endOffset": 6435
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 104,
+                        "startColumn": 2,
+                        "startOffset": 6767,
+                        "endColumn": 57,
+                        "endOffset": 6822
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 86,
+                    "startColumn": 4,
+                    "startOffset": 6440,
+                    "endColumn": 65,
+                    "endOffset": 6501
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 105,
+                        "startColumn": 2,
+                        "startOffset": 6826,
+                        "endColumn": 63,
+                        "endOffset": 6887
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 87,
+                    "startColumn": 4,
+                    "startOffset": 6506,
+                    "endColumn": 69,
+                    "endOffset": 6571
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 106,
+                        "startColumn": 2,
+                        "startOffset": 6891,
+                        "endColumn": 67,
+                        "endOffset": 6956
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 88,
+                    "startColumn": 4,
+                    "startOffset": 6576,
+                    "endColumn": 57,
+                    "endOffset": 6629
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 2,
+                        "startOffset": 368,
+                        "endColumn": 55,
+                        "endOffset": 421
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 89,
+                    "startColumn": 4,
+                    "startOffset": 6634,
+                    "endColumn": 50,
+                    "endOffset": 6680
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 2,
+                        "startOffset": 318,
+                        "endColumn": 48,
+                        "endOffset": 364
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 90,
+                    "startColumn": 4,
+                    "startOffset": 6685,
+                    "endColumn": 37,
+                    "endOffset": 6718
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 2,
+                        "startOffset": 281,
+                        "endColumn": 35,
+                        "endOffset": 314
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 91,
+                    "startColumn": 4,
+                    "startOffset": 6723,
+                    "endColumn": 48,
+                    "endOffset": 6767
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 11,
+                        "startColumn": 2,
+                        "startOffset": 474,
+                        "endColumn": 46,
+                        "endOffset": 518
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 92,
+                    "startColumn": 4,
+                    "startOffset": 6772,
+                    "endColumn": 75,
+                    "endOffset": 6843
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 38,
+                        "startColumn": 2,
+                        "startOffset": 2264,
+                        "endColumn": 73,
+                        "endOffset": 2335
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 93,
+                    "startColumn": 4,
+                    "startOffset": 6848,
+                    "endColumn": 55,
+                    "endOffset": 6899
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 39,
+                        "startColumn": 2,
+                        "startOffset": 2339,
+                        "endColumn": 53,
+                        "endOffset": 2390
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 94,
+                    "startColumn": 4,
+                    "startOffset": 6904,
+                    "endColumn": 73,
+                    "endOffset": 6973
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 34,
+                        "startColumn": 2,
+                        "startOffset": 1955,
+                        "endColumn": 71,
+                        "endOffset": 2024
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 95,
+                    "startColumn": 4,
+                    "startOffset": 6978,
+                    "endColumn": 75,
+                    "endOffset": 7049
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 36,
+                        "startColumn": 2,
+                        "startOffset": 2105,
+                        "endColumn": 73,
+                        "endOffset": 2176
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 96,
+                    "startColumn": 4,
+                    "startOffset": 7054,
+                    "endColumn": 84,
+                    "endOffset": 7134
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 37,
+                        "startColumn": 2,
+                        "startOffset": 2180,
+                        "endColumn": 82,
+                        "endOffset": 2260
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 97,
+                    "startColumn": 4,
+                    "startOffset": 7139,
+                    "endColumn": 77,
+                    "endOffset": 7212
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 35,
+                        "startColumn": 2,
+                        "startOffset": 2028,
+                        "endColumn": 75,
+                        "endOffset": 2101
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 98,
+                    "startColumn": 4,
+                    "startOffset": 7217,
+                    "endColumn": 49,
+                    "endOffset": 7262
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 2,
+                        "startOffset": 425,
+                        "endColumn": 47,
+                        "endOffset": 470
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 99,
+                    "startColumn": 4,
+                    "startOffset": 7267,
+                    "endColumn": 41,
+                    "endOffset": 7304
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 64,
+                        "startColumn": 2,
+                        "startOffset": 3556,
+                        "endColumn": 39,
+                        "endOffset": 3593
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 100,
+                    "startColumn": 4,
+                    "startOffset": 7309,
+                    "endColumn": 49,
+                    "endOffset": 7354
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 74,
+                        "startColumn": 2,
+                        "startOffset": 4500,
+                        "endColumn": 47,
+                        "endOffset": 4545
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 101,
+                    "startColumn": 4,
+                    "startOffset": 7359,
+                    "endColumn": 46,
+                    "endOffset": 7401
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 76,
+                        "startColumn": 2,
+                        "startOffset": 4623,
+                        "endColumn": 44,
+                        "endOffset": 4665
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 102,
+                    "startColumn": 4,
+                    "startOffset": 7406,
+                    "endColumn": 56,
+                    "endOffset": 7458
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 69,
+                        "startColumn": 2,
+                        "startOffset": 4212,
+                        "endColumn": 54,
+                        "endOffset": 4264
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 103,
+                    "startColumn": 4,
+                    "startOffset": 7463,
+                    "endColumn": 50,
+                    "endOffset": 7509
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 28,
+                        "startColumn": 2,
+                        "startOffset": 1647,
+                        "endColumn": 48,
+                        "endOffset": 1693
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 104,
+                    "startColumn": 4,
+                    "startOffset": 7514,
+                    "endColumn": 54,
+                    "endOffset": 7564
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 27,
+                        "startColumn": 2,
+                        "startOffset": 1593,
+                        "endColumn": 52,
+                        "endOffset": 1643
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 105,
+                    "startColumn": 4,
+                    "startOffset": 7569,
+                    "endColumn": 57,
+                    "endOffset": 7622
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 31,
+                        "startColumn": 2,
+                        "startOffset": 1798,
+                        "endColumn": 55,
+                        "endOffset": 1851
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 106,
+                    "startColumn": 4,
+                    "startOffset": 7627,
+                    "endColumn": 46,
+                    "endOffset": 7669
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 122,
+                        "startColumn": 2,
+                        "startOffset": 7961,
+                        "endColumn": 44,
+                        "endOffset": 8003
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 107,
+                    "startColumn": 4,
+                    "startOffset": 7674,
+                    "endColumn": 51,
+                    "endOffset": 7721
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 73,
+                        "startColumn": 2,
+                        "startOffset": 4449,
+                        "endColumn": 49,
+                        "endOffset": 4496
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 108,
+                    "startColumn": 4,
+                    "startOffset": 7726,
+                    "endColumn": 51,
+                    "endOffset": 7773
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 45,
+                        "startColumn": 2,
+                        "startOffset": 2674,
+                        "endColumn": 49,
+                        "endOffset": 2721
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 109,
+                    "startColumn": 4,
+                    "startOffset": 7778,
+                    "endColumn": 44,
+                    "endOffset": 7818
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 2,
+                        "startOffset": 153,
+                        "endColumn": 42,
+                        "endOffset": 193
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 110,
+                    "startColumn": 4,
+                    "startOffset": 7823,
+                    "endColumn": 43,
+                    "endOffset": 7862
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 30,
+                        "startColumn": 2,
+                        "startOffset": 1755,
+                        "endColumn": 41,
+                        "endOffset": 1794
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 111,
+                    "startColumn": 4,
+                    "startOffset": 7867,
+                    "endColumn": 50,
+                    "endOffset": 7913
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 43,
+                        "startColumn": 2,
+                        "startOffset": 2563,
+                        "endColumn": 48,
+                        "endOffset": 2609
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 112,
+                    "startColumn": 4,
+                    "startOffset": 7918,
+                    "endColumn": 65,
+                    "endOffset": 7979
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 41,
+                        "startColumn": 2,
+                        "startOffset": 2445,
+                        "endColumn": 63,
+                        "endOffset": 2506
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 113,
+                    "startColumn": 4,
+                    "startOffset": 7984,
+                    "endColumn": 60,
+                    "endOffset": 8040
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 72,
+                        "startColumn": 2,
+                        "startOffset": 4389,
+                        "endColumn": 58,
+                        "endOffset": 4445
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 114,
+                    "startColumn": 4,
+                    "startOffset": 8045,
+                    "endColumn": 41,
+                    "endOffset": 8082
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 2,
+                        "startOffset": 240,
+                        "endColumn": 39,
+                        "endOffset": 277
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 115,
+                    "startColumn": 4,
+                    "startOffset": 8087,
+                    "endColumn": 51,
+                    "endOffset": 8134
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 77,
+                        "startColumn": 2,
+                        "startOffset": 4669,
+                        "endColumn": 49,
+                        "endOffset": 4716
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 116,
+                    "startColumn": 4,
+                    "startOffset": 8139,
+                    "endColumn": 54,
+                    "endOffset": 8189
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 61,
+                        "startColumn": 2,
+                        "startOffset": 3348,
+                        "endColumn": 52,
+                        "endOffset": 3398
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 117,
+                    "startColumn": 4,
+                    "startOffset": 8194,
+                    "endColumn": 100,
+                    "endOffset": 8290
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 62,
+                        "startColumn": 2,
+                        "startOffset": 3402,
+                        "endColumn": 98,
+                        "endOffset": 3498
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 118,
+                    "startColumn": 4,
+                    "startOffset": 8295,
+                    "endColumn": 49,
+                    "endOffset": 8340
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 121,
+                        "startColumn": 2,
+                        "startOffset": 7912,
+                        "endColumn": 47,
+                        "endOffset": 7957
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 119,
+                    "startColumn": 4,
+                    "startOffset": 8345,
+                    "endColumn": 58,
+                    "endOffset": 8399
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 70,
+                        "startColumn": 2,
+                        "startOffset": 4268,
+                        "endColumn": 56,
+                        "endOffset": 4322
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 120,
+                    "startColumn": 4,
+                    "startOffset": 8404,
+                    "endColumn": 58,
+                    "endOffset": 8458
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 29,
+                        "startColumn": 2,
+                        "startOffset": 1697,
+                        "endColumn": 56,
+                        "endOffset": 1751
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 121,
+                    "startColumn": 4,
+                    "startOffset": 8463,
+                    "endColumn": 53,
+                    "endOffset": 8512
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 42,
+                        "startColumn": 2,
+                        "startOffset": 2510,
+                        "endColumn": 51,
+                        "endOffset": 2559
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 122,
+                    "startColumn": 4,
+                    "startOffset": 8517,
+                    "endColumn": 53,
+                    "endOffset": 8566
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 33,
+                        "startColumn": 2,
+                        "startOffset": 1902,
+                        "endColumn": 51,
+                        "endOffset": 1951
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 123,
+                    "startColumn": 4,
+                    "startOffset": 8571,
+                    "endColumn": 74,
+                    "endOffset": 8641
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 75,
+                        "startColumn": 2,
+                        "startOffset": 4549,
+                        "endColumn": 72,
+                        "endOffset": 4619
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 124,
+                    "startColumn": 4,
+                    "startOffset": 8646,
+                    "endColumn": 47,
+                    "endOffset": 8689
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 32,
+                        "startColumn": 2,
+                        "startOffset": 1855,
+                        "endColumn": 45,
+                        "endOffset": 1898
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 125,
+                    "startColumn": 4,
+                    "startOffset": 8694,
+                    "endColumn": 51,
+                    "endOffset": 8741
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 40,
+                        "startColumn": 2,
+                        "startOffset": 2394,
+                        "endColumn": 49,
+                        "endOffset": 2441
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 126,
+                    "startColumn": 4,
+                    "startOffset": 8746,
+                    "endColumn": 100,
+                    "endOffset": 8842
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-ko\\values-ko.xml",
+                    "position": {
+                        "startLine": 21,
+                        "startColumn": 4,
+                        "startOffset": 1890,
+                        "endColumn": 100,
+                        "endOffset": 1986
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 127,
+                    "startColumn": 4,
+                    "startOffset": 8847,
+                    "endColumn": 51,
+                    "endOffset": 8894
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 68,
+                        "startColumn": 2,
+                        "startOffset": 4161,
+                        "endColumn": 49,
+                        "endOffset": 4208
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 128,
+                    "startColumn": 4,
+                    "startOffset": 8899,
+                    "endColumn": 64,
+                    "endOffset": 8959
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 22,
+                        "startColumn": 2,
+                        "startOffset": 1286,
+                        "endColumn": 62,
+                        "endOffset": 1346
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 129,
+                    "startColumn": 4,
+                    "startOffset": 8964,
+                    "endColumn": 54,
+                    "endOffset": 9014
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 63,
+                        "startColumn": 2,
+                        "startOffset": 3502,
+                        "endColumn": 52,
+                        "endOffset": 3552
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 130,
+                    "startColumn": 4,
+                    "startOffset": 9019,
+                    "endColumn": 77,
+                    "endOffset": 9092
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 2,
+                        "startOffset": 715,
+                        "endColumn": 75,
+                        "endOffset": 788
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 131,
+                    "startColumn": 4,
+                    "startOffset": 9097,
+                    "endColumn": 79,
+                    "endOffset": 9172
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 14,
+                        "startColumn": 2,
+                        "startOffset": 636,
+                        "endColumn": 77,
+                        "endOffset": 711
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 132,
+                    "startColumn": 4,
+                    "startOffset": 9177,
+                    "endColumn": 72,
+                    "endOffset": 9245
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 20,
+                        "startColumn": 2,
+                        "startOffset": 1135,
+                        "endColumn": 70,
+                        "endOffset": 1203
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 133,
+                    "startColumn": 4,
+                    "startOffset": 9250,
+                    "endColumn": 75,
+                    "endOffset": 9321
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 19,
+                        "startColumn": 2,
+                        "startOffset": 1060,
+                        "endColumn": 73,
+                        "endOffset": 1131
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 134,
+                    "startColumn": 4,
+                    "startOffset": 9326,
+                    "endColumn": 91,
+                    "endOffset": 9413
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 18,
+                        "startColumn": 2,
+                        "startOffset": 969,
+                        "endColumn": 89,
+                        "endOffset": 1056
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 135,
+                    "startColumn": 4,
+                    "startOffset": 9418,
+                    "endColumn": 89,
+                    "endOffset": 9503
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 2,
+                        "startOffset": 880,
+                        "endColumn": 87,
+                        "endOffset": 965
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 136,
+                    "startColumn": 4,
+                    "startOffset": 9508,
+                    "endColumn": 88,
+                    "endOffset": 9592
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 16,
+                        "startColumn": 2,
+                        "startOffset": 792,
+                        "endColumn": 86,
+                        "endOffset": 876
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 137,
+                    "startColumn": 4,
+                    "startOffset": 9597,
+                    "endColumn": 58,
+                    "endOffset": 9651
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 13,
+                        "startColumn": 2,
+                        "startOffset": 578,
+                        "endColumn": 56,
+                        "endOffset": 632
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 138,
+                    "startColumn": 4,
+                    "startOffset": 9656,
+                    "endColumn": 79,
+                    "endOffset": 9731
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 21,
+                        "startColumn": 2,
+                        "startOffset": 1207,
+                        "endColumn": 77,
+                        "endOffset": 1282
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 139,
+                    "startColumn": 4,
+                    "startOffset": 9736,
+                    "endColumn": 43,
+                    "endOffset": 9775
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 2,
+                        "startOffset": 197,
+                        "endColumn": 41,
+                        "endOffset": 236
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 140,
+                    "startColumn": 4,
+                    "startOffset": 9780,
+                    "endColumn": 63,
+                    "endOffset": 9839
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 71,
+                        "startColumn": 2,
+                        "startOffset": 4326,
+                        "endColumn": 61,
+                        "endOffset": 4385
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 141,
+                    "startColumn": 4,
+                    "startOffset": 9844,
+                    "endColumn": 103,
+                    "endOffset": 9943
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 113,
+                        "startColumn": 2,
+                        "startOffset": 7405,
+                        "endColumn": 101,
+                        "endOffset": 7504
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 142,
+                    "startColumn": 4,
+                    "startOffset": 9948,
+                    "endColumn": 82,
+                    "endOffset": 10026
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 112,
+                        "startColumn": 2,
+                        "startOffset": 7323,
+                        "endColumn": 80,
+                        "endOffset": 7401
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 143,
+                    "startColumn": 4,
+                    "startOffset": 10031,
+                    "endColumn": 56,
+                    "endOffset": 10083
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 115,
+                        "startColumn": 2,
+                        "startOffset": 7563,
+                        "endColumn": 54,
+                        "endOffset": 7615
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 144,
+                    "startColumn": 4,
+                    "startOffset": 10088,
+                    "endColumn": 55,
+                    "endOffset": 10139
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 114,
+                        "startColumn": 2,
+                        "startOffset": 7508,
+                        "endColumn": 53,
+                        "endOffset": 7559
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 145,
+                    "startColumn": 4,
+                    "startOffset": 10144,
+                    "endColumn": 79,
+                    "endOffset": 10219
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 111,
+                        "startColumn": 2,
+                        "startOffset": 7244,
+                        "endColumn": 77,
+                        "endOffset": 7319
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 146,
+                    "startColumn": 4,
+                    "startOffset": 10224,
+                    "endColumn": 90,
+                    "endOffset": 10310
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-ko\\strings.xml",
+                    "position": {
+                        "startLine": 110,
+                        "startColumn": 2,
+                        "startOffset": 7154,
+                        "endColumn": 88,
+                        "endOffset": 7240
+                    }
+                }
+            }
+        ]
+    }
+]

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <EditText android:id="@+id/multipleBaseTitle"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:hint="@string/multiple_share_base_title"
+              android:imeOptions="flagNoExtractUi"
+              />
+
+    <GridView android:id="@+id/multipleShareBackground"
+              android:layout_height="fill_parent"
+              android:layout_width="fill_parent"
+              android:stretchMode="columnWidth"
+              android:numColumns="auto_fit"
+              android:listSelector="@null"
+              android:fadingEdge="none"
+              android:fastScrollEnabled="false"
+            />
+</LinearLayout>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string msgid="4600421777120114993" name="abc_action_bar_home_description">"Siirry etusivulle"</string>
+    <string msgid="1397052879051804371" name="abc_action_bar_home_description_format">"%1$s, %2$s"</string>
+    <string msgid="6623331958280229229" name="abc_action_bar_home_subtitle_description_format">"%1$s, %2$s, %3$s"</string>
+    <string msgid="1594238315039666878" name="abc_action_bar_up_description">"Siirry ylös"</string>
+    <string msgid="3588849162933574182" name="abc_action_menu_overflow_description">"Lisää"</string>
+    <string msgid="4076576682505996667" name="abc_action_mode_done">"Valmis"</string>
+    <string msgid="7468859129482906941" name="abc_activity_chooser_view_see_all">"Näytä kaikki"</string>
+    <string msgid="2031811694353399454" name="abc_activitychooserview_choose_application">"Valitse sovellus"</string>
+    <string msgid="121134116657445385" name="abc_capital_off">"POIS KÄYTÖSTÄ"</string>
+    <string msgid="3405795526292276155" name="abc_capital_on">"KÄYTÖSSÄ"</string>
+    <string msgid="7723749260725869598" name="abc_search_hint">"Haku…"</string>
+    <string msgid="3691816814315814921" name="abc_searchview_description_clear">"Tyhjennä kysely"</string>
+    <string msgid="2550479030709304392" name="abc_searchview_description_query">"Hakulauseke"</string>
+    <string msgid="8264924765203268293" name="abc_searchview_description_search">"Haku"</string>
+    <string msgid="8928215447528550784" name="abc_searchview_description_submit">"Lähetä kysely"</string>
+    <string msgid="893419373245838918" name="abc_searchview_description_voice">"Puhehaku"</string>
+    <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"Jakaminen:"</string>
+    <string msgid="7165123711973476752" name="abc_shareactionprovider_share_with_application">"Jakaminen: %s"</string>
+    <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"Kutista"</string>
+    <string name="about_improve">Lähdekoodi saatavilla &lt;a href=\"https://github.com/wikimedia/apps-android-commons\">GitHubissa&lt;/a>. Ohjelmavirheet &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\">Bugzillassa&lt;/a>.</string>
+    <string name="about_license">Vapaan lähdekoodin ohjelmisto, joka on julkaistu &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\">Apache License v2&lt;/a> -lisenssin alaisena</string>
+    <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\">Yksityisyydensuoja&lt;/a></string>
+    <string name="app_name">Wikimedia Commons</string>
+    <string name="app_name_beta">Wikimedia Commons Beta</string>
+    <string name="authentication_failed">Tunnistautuminen epäonnistui!</string>
+    <string name="categories_activity_title">Luokat</string>
+    <string name="categories_not_found">Luokkaa %1$s ei löytynyt</string>
+    <string name="categories_search_text_hint">Etsi luokkia</string>
+    <string name="categories_skip_explanation">Lisää luokkia tehdäksesi kuvistasi helpommin löydettäviä.
+
+Aloita kirjoittaminen lisätäksesi luokkia.
+Napauta tätä viestiä (tai paina takaisin) ohittaaksesi tämän vaiheen.</string>
+    <string name="contribution_state_failed">Epäonnistui</string>
+    <string name="contribution_state_in_progress">%1$d%% valmis</string>
+    <string name="contribution_state_queued">Jonossa</string>
+    <string name="contribution_state_starting">Tallennetaan</string>
+    <string name="crash_dialog_comment_prompt">Kerro meille, mitä teit äsken, sähköpostitse. Se auttaa meitä korjaamaan ongelman!</string>
+    <string name="crash_dialog_ok_toast">Kiitos!</string>
+    <string name="crash_dialog_text">Pahoittelemme, virhe tapahtui.</string>
+    <string name="crash_dialog_title">Commons kohtasi virheen</string>
+    <string name="detail_description_empty">Ei kuvausta</string>
+    <string name="detail_license_empty">Tuntematon lisenssi</string>
+    <string name="detail_panel_cats_label">Luokat</string>
+    <string name="detail_panel_cats_loading">Ladataan...</string>
+    <string name="detail_panel_cats_none">Ei yhtään valittu</string>
+    <string name="license_name_cc0">CC0</string>
+    <string name="license_name_cc_2_0">CC BY 2.0</string>
+    <string name="license_name_cc_by">CCu00A0Nimeäu00A03.0</string>
+    <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
+    <string name="license_name_cc_by_2_5">CC BY 2.5</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="license_name_cc_by_sa">CCu00A0Nimeä-Jaau00A0samoinu00A03.0</string>
+    <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
+    <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
+    <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+    <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Itävalta)</string>
+    <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Saksa)</string>
+    <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Viro)</string>
+    <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Espanja)</string>
+    <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Kroatia)</string>
+    <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxemburg)</string>
+    <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Alankomaat)</string>
+    <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norja)</string>
+    <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Puola)</string>
+    <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romania)</string>
+    <string name="license_name_cc_zero">CC0</string>
+    <string name="license_name_gfdl">GNU Free Documentation License</string>
+    <string name="license_name_pd_art">Public domain (taide)</string>
+    <string name="license_name_pd_old">Public domain (tekijänoikeudet vanhentuneet)</string>
+    <string name="license_name_pd_old_100">Public domain (tekijä kuollut yli 100 vuotta sitten)</string>
+    <string name="license_name_pd_us">Public domain (US)</string>
+    <string name="license_name_pd_usgov">Public domain (Yhdysvaltain hallitus)</string>
+    <string name="license_name_pd_usgov_nasa">Public domain (NASA)</string>
+    <string name="logging_in_message">Odota...</string>
+    <string name="logging_in_title">Kirjaudutaan</string>
+    <string name="login">Kirjaudu sisään</string>
+    <string name="login_failed">Kirjautuminen epäonnistui!</string>
+    <string name="login_failed_blocked">Pahoittelut, tämä käyttäjä on estetty Commonsissa</string>
+    <string name="login_failed_generic">Kirjautuminen epäonnistui</string>
+    <string name="login_failed_network">Kirjautuminen epäonnistui - verkkovirhe</string>
+    <string name="login_failed_password">Kirjautuminen epäonnistui - tarkista salasana</string>
+    <string name="login_failed_throttled">Liikaa epäonnistuneita yrityksiä. Yritä uudelleen hetken kuluttua</string>
+    <string name="login_failed_username">Kirjautuminen epäonnistui - tarkista käyttäjätunnus</string>
+    <string name="login_success">Kirjautuminen onnistui!</string>
+    <string name="menu_about">Tietoja</string>
+    <string name="menu_cancel_upload">Peruuta</string>
+    <string name="menu_download">Lataa</string>
+    <string name="menu_feedback">Lähetä palautetta (sähköpostitse)</string>
+    <string name="menu_from_camera">Ota kuva</string>
+    <string name="menu_from_gallery">Olemassaoleva</string>
+    <string name="menu_open_in_browser">Näytä selaimessa</string>
+    <string name="menu_refresh">Päivitä</string>
+    <string name="menu_retry_upload">Yritä uudelleen</string>
+    <string name="menu_save_categories">Tallenna</string>
+    <string name="menu_settings">Asetukset</string>
+    <string name="menu_share">Jaa</string>
+    <string name="menu_upload_single">Tallenna</string>
+    <string name="multiple_share_base_title">Nimeä sarja</string>
+    <string name="no_uploads_yet">Et ole vielä tallentanut kuvia.</string>
+    <string name="password">Salasana</string>
+    <string name="preference_license">Lisenssi</string>
+    <string name="preference_tracking">Käyttöraportit</string>
+    <string name="preference_tracking_summary">Lähetä käyttöraportteja Wikimedialle auttaaksesi ohjelman kehityksessä</string>
+    <string name="provider_campaigns">Kampanjat</string>
+    <string name="provider_categories">Äskettäin käytetyt luokat</string>
+    <string name="provider_contributions">Omat tallennukset</string>
+    <string name="provider_modifications">Muutokset</string>
+    <string name="share_description_hint">Kuvaus</string>
+    <string name="share_license_summary">Tiedosto tallennetaan lisenssin %1$s ehtojen mukaisesti.</string>
+    <string name="share_title_hint">Otsikko</string>
+    <string name="share_upload_button">Tallenna</string>
+    <string msgid="2869576371154716097" name="status_bar_notification_info_overflow">"999+"</string>
+    <string name="title_activity_about">Tietoja</string>
+    <string name="title_activity_contributions">Omat tallennukset</string>
+    <string name="title_activity_settings">Asetukset</string>
+    <string name="upload_completed_notification_text">Napauta katsoaksesi tallennuksen</string>
+    <string name="upload_completed_notification_title">%1$s tallennettiin!</string>
+    <string name="upload_failed_notification_subtitle">Napauta katsoaksesi</string>
+    <string name="upload_failed_notification_title">Tiedoston %1$s lataaminen epäonnistui</string>
+    <string name="upload_progress_notification_title_finishing">%1$s tallennettu</string>
+    <string name="upload_progress_notification_title_in_progress">Tallennetaan %1$s</string>
+    <string name="upload_progress_notification_title_start">Aloitetaan tiedoston %1$s tallennusta</string>
+    <string name="uploading_started">Tallentaminen aloitettiin!</string>
+    <string name="username">Käyttäjätunnus</string>
+    <string name="waiting_first_sync">Odotetaan ensimmäistä synkronointia.</string>
+    <string name="welcome_copyright_subtext">Vältä tekijänoikeuksien alaista materiaalia, kuten julisteita, kirjan kansia ja useimpia Internetistä löydettyjä kuvia.</string>
+    <string name="welcome_copyright_text">Kuvat auttavat useita ihmisiä ympäri maailmaa artikkeleiden ymmärtämisessä.</string>
+    <string name="welcome_final_button_text">Kyllä!</string>
+    <string name="welcome_final_text">Luuletko ymmärtäneesi tämän?</string>
+    <string name="welcome_wikipedia_subtext">Wikipedian kuvat tulevat Wikimedia Commonsista.</string>
+    <string name="welcome_wikipedia_text">Herätä Wikipedia-artikkelit eloon kuvillasi! Tuo kuvasi Wikipediaan.</string>
+</resources>

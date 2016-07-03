@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\res\\merged\\release\\layout-land\\welcome_final.xml",
+        "source": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\layout-land\\welcome_final.xml"
+    },
+    {
+        "merged": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\res\\merged\\release\\layout-land\\welcome_wikipedia.xml",
+        "source": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\layout-land\\welcome_wikipedia.xml"
+    },
+    {
+        "merged": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\res\\merged\\release\\layout-land\\welcome_copyright.xml",
+        "source": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\layout-land\\welcome_copyright.xml"
+    }
+]

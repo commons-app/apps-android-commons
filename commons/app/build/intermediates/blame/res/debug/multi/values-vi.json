@@ -1,0 +1,2595 @@
+[
+    {
+        "outputFile": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\res\\merged\\debug\\values-vi\\values-vi.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endLine": 5,
+                    "endColumn": 12,
+                    "endOffset": 214
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 46,
+                        "startColumn": 2,
+                        "startOffset": 3192,
+                        "endLine": 49,
+                        "endColumn": 12,
+                        "endOffset": 3354
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 6,
+                    "startColumn": 4,
+                    "startOffset": 219,
+                    "endColumn": 113,
+                    "endOffset": 328
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-vi\\values-vi.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 113,
+                        "endOffset": 164
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 7,
+                    "startColumn": 4,
+                    "startOffset": 333,
+                    "endColumn": 107,
+                    "endOffset": 436
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-vi\\values-vi.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 169,
+                        "endColumn": 107,
+                        "endOffset": 272
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 8,
+                    "startColumn": 4,
+                    "startOffset": 441,
+                    "endColumn": 122,
+                    "endOffset": 559
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-vi\\values-vi.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 277,
+                        "endColumn": 122,
+                        "endOffset": 395
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 9,
+                    "startColumn": 4,
+                    "startOffset": 564,
+                    "endColumn": 107,
+                    "endOffset": 667
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-vi\\values-vi.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 400,
+                        "endColumn": 107,
+                        "endOffset": 503
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 10,
+                    "startColumn": 4,
+                    "startOffset": 672,
+                    "endColumn": 108,
+                    "endOffset": 776
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-vi\\values-vi.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 508,
+                        "endColumn": 108,
+                        "endOffset": 612
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 11,
+                    "startColumn": 4,
+                    "startOffset": 781,
+                    "endColumn": 83,
+                    "endOffset": 860
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-vi\\values-vi.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 617,
+                        "endColumn": 83,
+                        "endOffset": 696
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 12,
+                    "startColumn": 4,
+                    "startOffset": 865,
+                    "endColumn": 102,
+                    "endOffset": 963
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-vi\\values-vi.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 701,
+                        "endColumn": 102,
+                        "endOffset": 799
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 13,
+                    "startColumn": 4,
+                    "startOffset": 968,
+                    "endColumn": 118,
+                    "endOffset": 1082
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-vi\\values-vi.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 4,
+                        "startOffset": 804,
+                        "endColumn": 118,
+                        "endOffset": 918
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 14,
+                    "startColumn": 4,
+                    "startOffset": 1087,
+                    "endColumn": 76,
+                    "endOffset": 1159
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-vi\\values-vi.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 4,
+                        "startOffset": 923,
+                        "endColumn": 76,
+                        "endOffset": 995
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 15,
+                    "startColumn": 4,
+                    "startOffset": 1164,
+                    "endColumn": 76,
+                    "endOffset": 1236
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-vi\\values-vi.xml",
+                    "position": {
+                        "startLine": 11,
+                        "startColumn": 4,
+                        "startOffset": 1000,
+                        "endColumn": 76,
+                        "endOffset": 1072
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 16,
+                    "startColumn": 4,
+                    "startOffset": 1241,
+                    "endColumn": 83,
+                    "endOffset": 1320
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-vi\\values-vi.xml",
+                    "position": {
+                        "startLine": 12,
+                        "startColumn": 4,
+                        "startOffset": 1077,
+                        "endColumn": 83,
+                        "endOffset": 1156
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 17,
+                    "startColumn": 4,
+                    "startOffset": 1325,
+                    "endColumn": 103,
+                    "endOffset": 1424
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-vi\\values-vi.xml",
+                    "position": {
+                        "startLine": 13,
+                        "startColumn": 4,
+                        "startOffset": 1161,
+                        "endColumn": 103,
+                        "endOffset": 1260
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 18,
+                    "startColumn": 4,
+                    "startOffset": 1429,
+                    "endColumn": 108,
+                    "endOffset": 1533
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-vi\\values-vi.xml",
+                    "position": {
+                        "startLine": 14,
+                        "startColumn": 4,
+                        "startOffset": 1265,
+                        "endColumn": 108,
+                        "endOffset": 1369
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 19,
+                    "startColumn": 4,
+                    "startOffset": 1538,
+                    "endColumn": 100,
+                    "endOffset": 1634
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-vi\\values-vi.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 4,
+                        "startOffset": 1374,
+                        "endColumn": 100,
+                        "endOffset": 1470
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 20,
+                    "startColumn": 4,
+                    "startOffset": 1639,
+                    "endColumn": 104,
+                    "endOffset": 1739
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-vi\\values-vi.xml",
+                    "position": {
+                        "startLine": 16,
+                        "startColumn": 4,
+                        "startOffset": 1475,
+                        "endColumn": 104,
+                        "endOffset": 1575
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 21,
+                    "startColumn": 4,
+                    "startOffset": 1744,
+                    "endColumn": 113,
+                    "endOffset": 1853
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-vi\\values-vi.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 4,
+                        "startOffset": 1580,
+                        "endColumn": 113,
+                        "endOffset": 1689
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 22,
+                    "startColumn": 4,
+                    "startOffset": 1858,
+                    "endColumn": 104,
+                    "endOffset": 1958
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-vi\\values-vi.xml",
+                    "position": {
+                        "startLine": 18,
+                        "startColumn": 4,
+                        "startOffset": 1694,
+                        "endColumn": 104,
+                        "endOffset": 1794
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 23,
+                    "startColumn": 4,
+                    "startOffset": 1963,
+                    "endColumn": 119,
+                    "endOffset": 2078
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-vi\\values-vi.xml",
+                    "position": {
+                        "startLine": 19,
+                        "startColumn": 4,
+                        "startOffset": 1799,
+                        "endColumn": 119,
+                        "endOffset": 1914
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 24,
+                    "startColumn": 4,
+                    "startOffset": 2083,
+                    "endColumn": 98,
+                    "endOffset": 2177
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-vi\\values-vi.xml",
+                    "position": {
+                        "startLine": 20,
+                        "startColumn": 4,
+                        "startOffset": 1919,
+                        "endColumn": 98,
+                        "endOffset": 2013
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 25,
+                    "startColumn": 4,
+                    "startOffset": 2182,
+                    "endColumn": 256,
+                    "endOffset": 2434
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 63,
+                        "startColumn": 2,
+                        "startOffset": 4405,
+                        "endColumn": 266,
+                        "endOffset": 4669
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 26,
+                    "startColumn": 4,
+                    "startOffset": 2439,
+                    "endColumn": 194,
+                    "endOffset": 2629
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 62,
+                        "startColumn": 2,
+                        "startOffset": 4205,
+                        "endColumn": 198,
+                        "endOffset": 4401
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 27,
+                    "startColumn": 4,
+                    "startOffset": 2634,
+                    "endColumn": 41,
+                    "endOffset": 2671
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 64,
+                        "startColumn": 2,
+                        "startOffset": 4673,
+                        "endColumn": 39,
+                        "endOffset": 4710
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 28,
+                    "startColumn": 4,
+                    "startOffset": 2676,
+                    "endColumn": 54,
+                    "endOffset": 2726
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 2,
+                        "startOffset": 55,
+                        "endColumn": 52,
+                        "endOffset": 105
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 29,
+                    "startColumn": 4,
+                    "startOffset": 2731,
+                    "endColumn": 64,
+                    "endOffset": 2791
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 2,
+                        "startOffset": 109,
+                        "endColumn": 62,
+                        "endOffset": 169
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 30,
+                    "startColumn": 4,
+                    "startOffset": 2796,
+                    "endColumn": 68,
+                    "endOffset": 2860
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 12,
+                        "startColumn": 2,
+                        "startOffset": 608,
+                        "endColumn": 66,
+                        "endOffset": 672
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 31,
+                    "startColumn": 4,
+                    "startOffset": 2865,
+                    "endColumn": 62,
+                    "endOffset": 2923
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 57,
+                        "startColumn": 2,
+                        "startOffset": 3847,
+                        "endColumn": 60,
+                        "endOffset": 3905
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 32,
+                    "startColumn": 4,
+                    "startOffset": 2928,
+                    "endColumn": 86,
+                    "endOffset": 3010
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 52,
+                        "startColumn": 2,
+                        "startOffset": 3512,
+                        "endColumn": 84,
+                        "endOffset": 3594
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 33,
+                    "startColumn": 4,
+                    "startOffset": 3015,
+                    "endColumn": 68,
+                    "endOffset": 3079
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 44,
+                        "startColumn": 2,
+                        "startOffset": 3072,
+                        "endColumn": 66,
+                        "endOffset": 3136
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 34,
+                    "startColumn": 4,
+                    "startOffset": 3084,
+                    "endLine": 37,
+                    "endColumn": 72,
+                    "endOffset": 3326
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 53,
+                        "startColumn": 2,
+                        "startOffset": 3598,
+                        "endLine": 56,
+                        "endColumn": 72,
+                        "endOffset": 3843
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 38,
+                    "startColumn": 4,
+                    "startOffset": 3331,
+                    "endColumn": 62,
+                    "endOffset": 3389
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 24,
+                        "startColumn": 2,
+                        "startOffset": 1642,
+                        "endColumn": 60,
+                        "endOffset": 1700
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 39,
+                    "startColumn": 4,
+                    "startOffset": 3394,
+                    "endColumn": 74,
+                    "endOffset": 3464
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 25,
+                        "startColumn": 2,
+                        "startOffset": 1704,
+                        "endColumn": 72,
+                        "endOffset": 1774
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 40,
+                    "startColumn": 4,
+                    "startOffset": 3469,
+                    "endColumn": 62,
+                    "endOffset": 3527
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 23,
+                        "startColumn": 2,
+                        "startOffset": 1580,
+                        "endColumn": 60,
+                        "endOffset": 1638
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 41,
+                    "startColumn": 4,
+                    "startOffset": 3532,
+                    "endColumn": 68,
+                    "endOffset": 3596
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 26,
+                        "startColumn": 2,
+                        "startOffset": 1778,
+                        "endColumn": 66,
+                        "endOffset": 1842
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 42,
+                    "startColumn": 4,
+                    "startOffset": 3601,
+                    "endColumn": 167,
+                    "endOffset": 3764
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\error.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 2,
+                        "startOffset": 195,
+                        "endColumn": 165,
+                        "endOffset": 358
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 43,
+                    "startColumn": 4,
+                    "startOffset": 3769,
+                    "endColumn": 57,
+                    "endOffset": 3822
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\error.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 2,
+                        "startOffset": 362,
+                        "endColumn": 55,
+                        "endOffset": 415
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 44,
+                    "startColumn": 4,
+                    "startOffset": 3827,
+                    "endColumn": 74,
+                    "endOffset": 3897
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\error.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 2,
+                        "startOffset": 121,
+                        "endColumn": 72,
+                        "endOffset": 191
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 45,
+                    "startColumn": 4,
+                    "startOffset": 3902,
+                    "endColumn": 66,
+                    "endOffset": 3964
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\error.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 2,
+                        "startOffset": 55,
+                        "endColumn": 64,
+                        "endOffset": 117
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 46,
+                    "startColumn": 4,
+                    "startOffset": 3969,
+                    "endColumn": 66,
+                    "endOffset": 4031
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 116,
+                        "startColumn": 2,
+                        "startOffset": 8603,
+                        "endColumn": 64,
+                        "endOffset": 8665
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 47,
+                    "startColumn": 4,
+                    "startOffset": 4036,
+                    "endColumn": 67,
+                    "endOffset": 4099
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 117,
+                        "startColumn": 2,
+                        "startOffset": 8669,
+                        "endColumn": 65,
+                        "endOffset": 8732
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 48,
+                    "startColumn": 4,
+                    "startOffset": 4104,
+                    "endColumn": 60,
+                    "endOffset": 4160
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 113,
+                        "startColumn": 2,
+                        "startOffset": 8420,
+                        "endColumn": 58,
+                        "endOffset": 8476
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 49,
+                    "startColumn": 4,
+                    "startOffset": 4165,
+                    "endColumn": 63,
+                    "endOffset": 4224
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 114,
+                        "startColumn": 2,
+                        "startOffset": 8480,
+                        "endColumn": 61,
+                        "endOffset": 8539
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 50,
+                    "startColumn": 4,
+                    "startOffset": 4229,
+                    "endColumn": 60,
+                    "endOffset": 4285
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 115,
+                        "startColumn": 2,
+                        "startOffset": 8543,
+                        "endColumn": 58,
+                        "endOffset": 8599
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 51,
+                    "startColumn": 4,
+                    "startOffset": 4290,
+                    "endColumn": 61,
+                    "endOffset": 4347
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 105,
+                        "startColumn": 2,
+                        "startOffset": 7650,
+                        "endColumn": 59,
+                        "endOffset": 7707
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 52,
+                    "startColumn": 4,
+                    "startOffset": 4352,
+                    "endColumn": 48,
+                    "endOffset": 4396
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 77,
+                        "startColumn": 2,
+                        "startOffset": 5570,
+                        "endColumn": 46,
+                        "endOffset": 5614
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 53,
+                    "startColumn": 4,
+                    "startOffset": 4401,
+                    "endColumn": 57,
+                    "endOffset": 4454
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 96,
+                        "startColumn": 2,
+                        "startOffset": 6911,
+                        "endColumn": 55,
+                        "endOffset": 6964
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 54,
+                    "startColumn": 4,
+                    "startOffset": 4459,
+                    "endColumn": 84,
+                    "endOffset": 4539
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 76,
+                        "startColumn": 2,
+                        "startOffset": 5486,
+                        "endColumn": 82,
+                        "endOffset": 5566
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 55,
+                    "startColumn": 4,
+                    "startOffset": 4544,
+                    "endColumn": 63,
+                    "endOffset": 4603
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 95,
+                        "startColumn": 2,
+                        "startOffset": 6848,
+                        "endColumn": 61,
+                        "endOffset": 6907
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 56,
+                    "startColumn": 4,
+                    "startOffset": 4608,
+                    "endColumn": 60,
+                    "endOffset": 4664
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 93,
+                        "startColumn": 2,
+                        "startOffset": 6722,
+                        "endColumn": 58,
+                        "endOffset": 6778
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 57,
+                    "startColumn": 4,
+                    "startOffset": 4669,
+                    "endColumn": 60,
+                    "endOffset": 4725
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 89,
+                        "startColumn": 2,
+                        "startOffset": 6468,
+                        "endColumn": 58,
+                        "endOffset": 6524
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 58,
+                    "startColumn": 4,
+                    "startOffset": 4730,
+                    "endColumn": 112,
+                    "endOffset": 4838
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 75,
+                        "startColumn": 2,
+                        "startOffset": 5374,
+                        "endColumn": 110,
+                        "endOffset": 5482
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 59,
+                    "startColumn": 4,
+                    "startOffset": 4843,
+                    "endColumn": 66,
+                    "endOffset": 4905
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 94,
+                        "startColumn": 2,
+                        "startOffset": 6782,
+                        "endColumn": 64,
+                        "endOffset": 6844
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 60,
+                    "startColumn": 4,
+                    "startOffset": 4910,
+                    "endColumn": 66,
+                    "endOffset": 4972
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 92,
+                        "startColumn": 2,
+                        "startOffset": 6656,
+                        "endColumn": 64,
+                        "endOffset": 6718
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 61,
+                    "startColumn": 4,
+                    "startOffset": 4977,
+                    "endColumn": 66,
+                    "endOffset": 5039
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 78,
+                        "startColumn": 2,
+                        "startOffset": 5618,
+                        "endColumn": 64,
+                        "endOffset": 5680
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 62,
+                    "startColumn": 4,
+                    "startOffset": 5044,
+                    "endColumn": 74,
+                    "endOffset": 5114
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 79,
+                        "startColumn": 2,
+                        "startOffset": 5684,
+                        "endColumn": 72,
+                        "endOffset": 5754
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 63,
+                    "startColumn": 4,
+                    "startOffset": 5119,
+                    "endColumn": 75,
+                    "endOffset": 5190
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 80,
+                        "startColumn": 2,
+                        "startOffset": 5758,
+                        "endColumn": 73,
+                        "endOffset": 5829
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 64,
+                    "startColumn": 4,
+                    "startOffset": 5195,
+                    "endColumn": 79,
+                    "endOffset": 5270
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 81,
+                        "startColumn": 2,
+                        "startOffset": 5833,
+                        "endColumn": 77,
+                        "endOffset": 5908
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 65,
+                    "startColumn": 4,
+                    "startOffset": 5275,
+                    "endColumn": 83,
+                    "endOffset": 5354
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 82,
+                        "startColumn": 2,
+                        "startOffset": 5912,
+                        "endColumn": 81,
+                        "endOffset": 5991
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 66,
+                    "startColumn": 4,
+                    "startOffset": 5359,
+                    "endColumn": 79,
+                    "endOffset": 5434
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 83,
+                        "startColumn": 2,
+                        "startOffset": 5995,
+                        "endColumn": 77,
+                        "endOffset": 6070
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 67,
+                    "startColumn": 4,
+                    "startOffset": 5439,
+                    "endColumn": 82,
+                    "endOffset": 5517
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 84,
+                        "startColumn": 2,
+                        "startOffset": 6074,
+                        "endColumn": 80,
+                        "endOffset": 6152
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 68,
+                    "startColumn": 4,
+                    "startOffset": 5522,
+                    "endColumn": 78,
+                    "endOffset": 5596
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 85,
+                        "startColumn": 2,
+                        "startOffset": 6156,
+                        "endColumn": 76,
+                        "endOffset": 6230
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 69,
+                    "startColumn": 4,
+                    "startOffset": 5601,
+                    "endColumn": 77,
+                    "endOffset": 5674
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 86,
+                        "startColumn": 2,
+                        "startOffset": 6234,
+                        "endColumn": 75,
+                        "endOffset": 6307
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 70,
+                    "startColumn": 4,
+                    "startOffset": 5679,
+                    "endColumn": 78,
+                    "endOffset": 5753
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 87,
+                        "startColumn": 2,
+                        "startOffset": 6311,
+                        "endColumn": 76,
+                        "endOffset": 6385
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 71,
+                    "startColumn": 4,
+                    "startOffset": 5758,
+                    "endColumn": 79,
+                    "endOffset": 5833
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 88,
+                        "startColumn": 2,
+                        "startOffset": 6389,
+                        "endColumn": 77,
+                        "endOffset": 6464
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 72,
+                    "startColumn": 4,
+                    "startOffset": 5838,
+                    "endColumn": 52,
+                    "endOffset": 5886
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 90,
+                        "startColumn": 2,
+                        "startOffset": 6528,
+                        "endColumn": 50,
+                        "endOffset": 6576
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 73,
+                    "startColumn": 4,
+                    "startOffset": 5891,
+                    "endColumn": 71,
+                    "endOffset": 5958
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 97,
+                        "startColumn": 2,
+                        "startOffset": 6968,
+                        "endColumn": 69,
+                        "endOffset": 7035
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 74,
+                    "startColumn": 4,
+                    "startOffset": 5963,
+                    "endColumn": 74,
+                    "endOffset": 6033
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 106,
+                        "startColumn": 2,
+                        "startOffset": 7711,
+                        "endColumn": 72,
+                        "endOffset": 7781
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 75,
+                    "startColumn": 4,
+                    "startOffset": 6038,
+                    "endColumn": 76,
+                    "endOffset": 6110
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 91,
+                        "startColumn": 2,
+                        "startOffset": 6580,
+                        "endColumn": 74,
+                        "endOffset": 6652
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 76,
+                    "startColumn": 4,
+                    "startOffset": 6115,
+                    "endColumn": 77,
+                    "endOffset": 6188
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 100,
+                        "startColumn": 2,
+                        "startOffset": 7232,
+                        "endColumn": 75,
+                        "endOffset": 7305
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 77,
+                    "startColumn": 4,
+                    "startOffset": 6193,
+                    "endColumn": 103,
+                    "endOffset": 6292
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 104,
+                        "startColumn": 2,
+                        "startOffset": 7547,
+                        "endColumn": 101,
+                        "endOffset": 7646
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 78,
+                    "startColumn": 4,
+                    "startOffset": 6297,
+                    "endColumn": 85,
+                    "endOffset": 6378
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 99,
+                        "startColumn": 2,
+                        "startOffset": 7147,
+                        "endColumn": 83,
+                        "endOffset": 7228
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 79,
+                    "startColumn": 4,
+                    "startOffset": 6383,
+                    "endColumn": 108,
+                    "endOffset": 6487
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 98,
+                        "startColumn": 2,
+                        "startOffset": 7039,
+                        "endColumn": 106,
+                        "endOffset": 7143
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 80,
+                    "startColumn": 4,
+                    "startOffset": 6492,
+                    "endColumn": 73,
+                    "endOffset": 6561
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 101,
+                        "startColumn": 2,
+                        "startOffset": 7309,
+                        "endColumn": 71,
+                        "endOffset": 7378
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 81,
+                    "startColumn": 4,
+                    "startOffset": 6566,
+                    "endColumn": 86,
+                    "endOffset": 6648
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 102,
+                        "startColumn": 2,
+                        "startOffset": 7382,
+                        "endColumn": 84,
+                        "endOffset": 7464
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 82,
+                    "startColumn": 4,
+                    "startOffset": 6653,
+                    "endColumn": 79,
+                    "endOffset": 6728
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 103,
+                        "startColumn": 2,
+                        "startOffset": 7468,
+                        "endColumn": 77,
+                        "endOffset": 7543
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 83,
+                    "startColumn": 4,
+                    "startOffset": 6733,
+                    "endColumn": 60,
+                    "endOffset": 6789
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 2,
+                        "startOffset": 422,
+                        "endColumn": 58,
+                        "endOffset": 478
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 84,
+                    "startColumn": 4,
+                    "startOffset": 6794,
+                    "endColumn": 59,
+                    "endOffset": 6849
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 2,
+                        "startOffset": 363,
+                        "endColumn": 57,
+                        "endOffset": 418
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 85,
+                    "startColumn": 4,
+                    "startOffset": 6854,
+                    "endColumn": 43,
+                    "endOffset": 6893
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 2,
+                        "startOffset": 320,
+                        "endColumn": 41,
+                        "endOffset": 359
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 86,
+                    "startColumn": 4,
+                    "startOffset": 6898,
+                    "endColumn": 60,
+                    "endOffset": 6954
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 11,
+                        "startColumn": 2,
+                        "startOffset": 548,
+                        "endColumn": 58,
+                        "endOffset": 604
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 87,
+                    "startColumn": 4,
+                    "startOffset": 6959,
+                    "endColumn": 95,
+                    "endOffset": 7050
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 38,
+                        "startColumn": 2,
+                        "startOffset": 2668,
+                        "endColumn": 93,
+                        "endOffset": 2759
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 88,
+                    "startColumn": 4,
+                    "startOffset": 7055,
+                    "endColumn": 67,
+                    "endOffset": 7118
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 39,
+                        "startColumn": 2,
+                        "startOffset": 2763,
+                        "endColumn": 65,
+                        "endOffset": 2826
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 89,
+                    "startColumn": 4,
+                    "startOffset": 7123,
+                    "endColumn": 82,
+                    "endOffset": 7201
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 34,
+                        "startColumn": 2,
+                        "startOffset": 2247,
+                        "endColumn": 80,
+                        "endOffset": 2325
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 90,
+                    "startColumn": 4,
+                    "startOffset": 7206,
+                    "endColumn": 102,
+                    "endOffset": 7304
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 36,
+                        "startColumn": 2,
+                        "startOffset": 2437,
+                        "endColumn": 100,
+                        "endOffset": 2535
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 91,
+                    "startColumn": 4,
+                    "startOffset": 7309,
+                    "endColumn": 129,
+                    "endOffset": 7434
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 37,
+                        "startColumn": 2,
+                        "startOffset": 2539,
+                        "endColumn": 127,
+                        "endOffset": 2664
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 92,
+                    "startColumn": 4,
+                    "startOffset": 7439,
+                    "endColumn": 108,
+                    "endOffset": 7543
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 35,
+                        "startColumn": 2,
+                        "startOffset": 2329,
+                        "endColumn": 106,
+                        "endOffset": 2433
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 93,
+                    "startColumn": 4,
+                    "startOffset": 7548,
+                    "endColumn": 66,
+                    "endOffset": 7610
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 2,
+                        "startOffset": 482,
+                        "endColumn": 64,
+                        "endOffset": 544
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 94,
+                    "startColumn": 4,
+                    "startOffset": 7615,
+                    "endColumn": 49,
+                    "endOffset": 7660
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 61,
+                        "startColumn": 2,
+                        "startOffset": 4156,
+                        "endColumn": 47,
+                        "endOffset": 4201
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 95,
+                    "startColumn": 4,
+                    "startOffset": 7665,
+                    "endColumn": 53,
+                    "endOffset": 7714
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 71,
+                        "startColumn": 2,
+                        "startOffset": 5121,
+                        "endColumn": 51,
+                        "endOffset": 5170
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 96,
+                    "startColumn": 4,
+                    "startOffset": 7719,
+                    "endColumn": 48,
+                    "endOffset": 7763
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 73,
+                        "startColumn": 2,
+                        "startOffset": 5270,
+                        "endColumn": 46,
+                        "endOffset": 5314
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 97,
+                    "startColumn": 4,
+                    "startOffset": 7768,
+                    "endColumn": 72,
+                    "endOffset": 7836
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 66,
+                        "startColumn": 2,
+                        "startOffset": 4773,
+                        "endColumn": 70,
+                        "endOffset": 4841
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 98,
+                    "startColumn": 4,
+                    "startOffset": 7841,
+                    "endColumn": 53,
+                    "endOffset": 7890
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 28,
+                        "startColumn": 2,
+                        "startOffset": 1903,
+                        "endColumn": 51,
+                        "endOffset": 1952
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 99,
+                    "startColumn": 4,
+                    "startOffset": 7895,
+                    "endColumn": 57,
+                    "endOffset": 7948
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 27,
+                        "startColumn": 2,
+                        "startOffset": 1846,
+                        "endColumn": 55,
+                        "endOffset": 1899
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 100,
+                    "startColumn": 4,
+                    "startOffset": 7953,
+                    "endColumn": 69,
+                    "endOffset": 8018
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 31,
+                        "startColumn": 2,
+                        "startOffset": 2072,
+                        "endColumn": 67,
+                        "endOffset": 2137
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 101,
+                    "startColumn": 4,
+                    "startOffset": 8023,
+                    "endColumn": 49,
+                    "endOffset": 8068
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 119,
+                        "startColumn": 2,
+                        "startOffset": 8793,
+                        "endColumn": 47,
+                        "endOffset": 8838
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 102,
+                    "startColumn": 4,
+                    "startOffset": 8073,
+                    "endColumn": 53,
+                    "endOffset": 8122
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 70,
+                        "startColumn": 2,
+                        "startOffset": 5068,
+                        "endColumn": 51,
+                        "endOffset": 5117
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 103,
+                    "startColumn": 4,
+                    "startOffset": 8127,
+                    "endColumn": 52,
+                    "endOffset": 8175
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 45,
+                        "startColumn": 2,
+                        "startOffset": 3140,
+                        "endColumn": 50,
+                        "endOffset": 3188
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 104,
+                    "startColumn": 4,
+                    "startOffset": 8180,
+                    "endColumn": 51,
+                    "endOffset": 8227
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 2,
+                        "startOffset": 173,
+                        "endColumn": 49,
+                        "endOffset": 220
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 105,
+                    "startColumn": 4,
+                    "startOffset": 8232,
+                    "endColumn": 46,
+                    "endOffset": 8274
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 30,
+                        "startColumn": 2,
+                        "startOffset": 2026,
+                        "endColumn": 44,
+                        "endOffset": 2068
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 106,
+                    "startColumn": 4,
+                    "startOffset": 8279,
+                    "endColumn": 54,
+                    "endOffset": 8329
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 43,
+                        "startColumn": 2,
+                        "startOffset": 3018,
+                        "endColumn": 52,
+                        "endOffset": 3068
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 107,
+                    "startColumn": 4,
+                    "startOffset": 8334,
+                    "endColumn": 70,
+                    "endOffset": 8400
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 41,
+                        "startColumn": 2,
+                        "startOffset": 2885,
+                        "endColumn": 68,
+                        "endOffset": 2951
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 108,
+                    "startColumn": 4,
+                    "startOffset": 8405,
+                    "endColumn": 69,
+                    "endOffset": 8470
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 51,
+                        "startColumn": 2,
+                        "startOffset": 3443,
+                        "endColumn": 67,
+                        "endOffset": 3508
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 109,
+                    "startColumn": 4,
+                    "startOffset": 8475,
+                    "endColumn": 69,
+                    "endOffset": 8540
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 69,
+                        "startColumn": 2,
+                        "startOffset": 4999,
+                        "endColumn": 67,
+                        "endOffset": 5064
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 110,
+                    "startColumn": 4,
+                    "startOffset": 8545,
+                    "endColumn": 45,
+                    "endOffset": 8586
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 2,
+                        "startOffset": 275,
+                        "endColumn": 43,
+                        "endOffset": 316
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 111,
+                    "startColumn": 4,
+                    "startOffset": 8591,
+                    "endColumn": 56,
+                    "endOffset": 8643
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 74,
+                        "startColumn": 2,
+                        "startOffset": 5318,
+                        "endColumn": 54,
+                        "endOffset": 5370
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 112,
+                    "startColumn": 4,
+                    "startOffset": 8648,
+                    "endColumn": 63,
+                    "endOffset": 8707
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 58,
+                        "startColumn": 2,
+                        "startOffset": 3909,
+                        "endColumn": 61,
+                        "endOffset": 3968
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 113,
+                    "startColumn": 4,
+                    "startOffset": 8712,
+                    "endColumn": 125,
+                    "endOffset": 8833
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 59,
+                        "startColumn": 2,
+                        "startOffset": 3972,
+                        "endColumn": 123,
+                        "endOffset": 4093
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 114,
+                    "startColumn": 4,
+                    "startOffset": 8838,
+                    "endColumn": 57,
+                    "endOffset": 8891
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 118,
+                        "startColumn": 2,
+                        "startOffset": 8736,
+                        "endColumn": 55,
+                        "endOffset": 8789
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 115,
+                    "startColumn": 4,
+                    "startOffset": 8896,
+                    "endColumn": 77,
+                    "endOffset": 8969
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 67,
+                        "startColumn": 2,
+                        "startOffset": 4845,
+                        "endColumn": 75,
+                        "endOffset": 4918
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 116,
+                    "startColumn": 4,
+                    "startOffset": 8974,
+                    "endColumn": 70,
+                    "endOffset": 9040
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 29,
+                        "startColumn": 2,
+                        "startOffset": 1956,
+                        "endColumn": 68,
+                        "endOffset": 2022
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 117,
+                    "startColumn": 4,
+                    "startOffset": 9045,
+                    "endColumn": 63,
+                    "endOffset": 9104
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 42,
+                        "startColumn": 2,
+                        "startOffset": 2955,
+                        "endColumn": 61,
+                        "endOffset": 3014
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 118,
+                    "startColumn": 4,
+                    "startOffset": 9109,
+                    "endColumn": 58,
+                    "endOffset": 9163
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 33,
+                        "startColumn": 2,
+                        "startOffset": 2189,
+                        "endColumn": 56,
+                        "endOffset": 2243
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 119,
+                    "startColumn": 4,
+                    "startOffset": 9168,
+                    "endColumn": 96,
+                    "endOffset": 9260
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 72,
+                        "startColumn": 2,
+                        "startOffset": 5174,
+                        "endColumn": 94,
+                        "endOffset": 5266
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 120,
+                    "startColumn": 4,
+                    "startOffset": 9265,
+                    "endColumn": 48,
+                    "endOffset": 9309
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 32,
+                        "startColumn": 2,
+                        "startOffset": 2141,
+                        "endColumn": 46,
+                        "endOffset": 2185
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 121,
+                    "startColumn": 4,
+                    "startOffset": 9314,
+                    "endColumn": 55,
+                    "endOffset": 9365
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 40,
+                        "startColumn": 2,
+                        "startOffset": 2830,
+                        "endColumn": 53,
+                        "endOffset": 2881
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 122,
+                    "startColumn": 4,
+                    "startOffset": 9370,
+                    "endColumn": 85,
+                    "endOffset": 9451
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 50,
+                        "startColumn": 2,
+                        "startOffset": 3358,
+                        "endColumn": 83,
+                        "endOffset": 3439
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 123,
+                    "startColumn": 4,
+                    "startOffset": 9456,
+                    "endColumn": 100,
+                    "endOffset": 9552
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.4.0\\res\\values-vi\\values-vi.xml",
+                    "position": {
+                        "startLine": 21,
+                        "startColumn": 4,
+                        "startOffset": 2018,
+                        "endColumn": 100,
+                        "endOffset": 2114
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 124,
+                    "startColumn": 4,
+                    "startOffset": 9557,
+                    "endColumn": 59,
+                    "endOffset": 9612
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 65,
+                        "startColumn": 2,
+                        "startOffset": 4714,
+                        "endColumn": 57,
+                        "endOffset": 4769
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 125,
+                    "startColumn": 4,
+                    "startOffset": 9617,
+                    "endColumn": 79,
+                    "endOffset": 9692
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 22,
+                        "startColumn": 2,
+                        "startOffset": 1501,
+                        "endColumn": 77,
+                        "endOffset": 1576
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 126,
+                    "startColumn": 4,
+                    "startOffset": 9697,
+                    "endColumn": 59,
+                    "endOffset": 9752
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 60,
+                        "startColumn": 2,
+                        "startOffset": 4097,
+                        "endColumn": 57,
+                        "endOffset": 4152
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 127,
+                    "startColumn": 4,
+                    "startOffset": 9757,
+                    "endColumn": 104,
+                    "endOffset": 9857
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 2,
+                        "startOffset": 821,
+                        "endColumn": 102,
+                        "endOffset": 921
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 128,
+                    "startColumn": 4,
+                    "startOffset": 9862,
+                    "endColumn": 80,
+                    "endOffset": 9938
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 14,
+                        "startColumn": 2,
+                        "startOffset": 741,
+                        "endColumn": 78,
+                        "endOffset": 817
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 129,
+                    "startColumn": 4,
+                    "startOffset": 9943,
+                    "endColumn": 75,
+                    "endOffset": 10014
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 20,
+                        "startColumn": 2,
+                        "startOffset": 1331,
+                        "endColumn": 73,
+                        "endOffset": 1402
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 130,
+                    "startColumn": 4,
+                    "startOffset": 10019,
+                    "endColumn": 90,
+                    "endOffset": 10105
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 19,
+                        "startColumn": 2,
+                        "startOffset": 1241,
+                        "endColumn": 88,
+                        "endOffset": 1327
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 131,
+                    "startColumn": 4,
+                    "startOffset": 10110,
+                    "endColumn": 114,
+                    "endOffset": 10220
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 18,
+                        "startColumn": 2,
+                        "startOffset": 1127,
+                        "endColumn": 112,
+                        "endOffset": 1237
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 132,
+                    "startColumn": 4,
+                    "startOffset": 10225,
+                    "endColumn": 100,
+                    "endOffset": 10321
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 2,
+                        "startOffset": 1027,
+                        "endColumn": 98,
+                        "endOffset": 1123
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 133,
+                    "startColumn": 4,
+                    "startOffset": 10326,
+                    "endColumn": 102,
+                    "endOffset": 10424
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 16,
+                        "startColumn": 2,
+                        "startOffset": 925,
+                        "endColumn": 100,
+                        "endOffset": 1023
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 134,
+                    "startColumn": 4,
+                    "startOffset": 10429,
+                    "endColumn": 65,
+                    "endOffset": 10490
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 13,
+                        "startColumn": 2,
+                        "startOffset": 676,
+                        "endColumn": 63,
+                        "endOffset": 737
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 135,
+                    "startColumn": 4,
+                    "startOffset": 10495,
+                    "endColumn": 95,
+                    "endOffset": 10586
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 21,
+                        "startColumn": 2,
+                        "startOffset": 1406,
+                        "endColumn": 93,
+                        "endOffset": 1497
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 136,
+                    "startColumn": 4,
+                    "startOffset": 10591,
+                    "endColumn": 51,
+                    "endOffset": 10638
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 2,
+                        "startOffset": 224,
+                        "endColumn": 49,
+                        "endOffset": 271
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 137,
+                    "startColumn": 4,
+                    "startOffset": 10643,
+                    "endColumn": 77,
+                    "endOffset": 10716
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 68,
+                        "startColumn": 2,
+                        "startOffset": 4922,
+                        "endColumn": 75,
+                        "endOffset": 4995
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 138,
+                    "startColumn": 4,
+                    "startOffset": 10721,
+                    "endColumn": 166,
+                    "endOffset": 10883
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 110,
+                        "startColumn": 2,
+                        "startOffset": 8133,
+                        "endColumn": 164,
+                        "endOffset": 8295
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 139,
+                    "startColumn": 4,
+                    "startOffset": 10888,
+                    "endColumn": 115,
+                    "endOffset": 10999
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 109,
+                        "startColumn": 2,
+                        "startOffset": 8018,
+                        "endColumn": 113,
+                        "endOffset": 8129
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 140,
+                    "startColumn": 4,
+                    "startOffset": 11004,
+                    "endColumn": 57,
+                    "endOffset": 11057
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 112,
+                        "startColumn": 2,
+                        "startOffset": 8363,
+                        "endColumn": 55,
+                        "endOffset": 8416
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 141,
+                    "startColumn": 4,
+                    "startOffset": 11062,
+                    "endColumn": 64,
+                    "endOffset": 11122
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 111,
+                        "startColumn": 2,
+                        "startOffset": 8299,
+                        "endColumn": 62,
+                        "endOffset": 8359
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 142,
+                    "startColumn": 4,
+                    "startOffset": 11127,
+                    "endColumn": 118,
+                    "endOffset": 11241
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 108,
+                        "startColumn": 2,
+                        "startOffset": 7900,
+                        "endColumn": 116,
+                        "endOffset": 8014
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 143,
+                    "startColumn": 4,
+                    "startOffset": 11246,
+                    "endColumn": 115,
+                    "endOffset": 11357
+                },
+                "from": {
+                    "file": "C:\\Code\\GitHub\\apps-android-commons\\commons\\app\\src\\main\\res\\values-vi\\strings.xml",
+                    "position": {
+                        "startLine": 107,
+                        "startColumn": 2,
+                        "startOffset": 7785,
+                        "endColumn": 113,
+                        "endOffset": 7896
+                    }
+                }
+            }
+        ]
+    }
+]

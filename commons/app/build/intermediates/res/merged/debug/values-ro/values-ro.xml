@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="contributions_subtitle">
+    <item quantity="zero">Nicio încărcare încă</item>
+    <item quantity="one">1 încărcare</item>
+    <item quantity="few">%d încărcări</item>
+    <item quantity="other">%d de încărcări</item>
+  </plurals>
+    <plurals name="multiple_uploads_title">
+    <item quantity="one">1 încărcare</item>
+    <item quantity="few">%d încărcări</item>
+    <item quantity="other">%d de încărcări</item>
+  </plurals>
+    <plurals name="starting_multiple_uploads">
+    <item quantity="one">Se pornește 1 încărcare</item>
+    <item quantity="few">Se pornesc %d încărcări</item>
+    <item quantity="other">Se pornesc %d de încărcări</item>
+  </plurals>
+    <string msgid="4600421777120114993" name="abc_action_bar_home_description">"Navigați la ecranul de pornire"</string>
+    <string msgid="1397052879051804371" name="abc_action_bar_home_description_format">"%1$s, %2$s"</string>
+    <string msgid="6623331958280229229" name="abc_action_bar_home_subtitle_description_format">"%1$s, %2$s, %3$s"</string>
+    <string msgid="1594238315039666878" name="abc_action_bar_up_description">"Navigați în sus"</string>
+    <string msgid="3588849162933574182" name="abc_action_menu_overflow_description">"Mai multe opțiuni"</string>
+    <string msgid="4076576682505996667" name="abc_action_mode_done">"Terminat"</string>
+    <string msgid="7468859129482906941" name="abc_activity_chooser_view_see_all">"Afișați-le pe toate"</string>
+    <string msgid="2031811694353399454" name="abc_activitychooserview_choose_application">"Alegeți o aplicație"</string>
+    <string msgid="121134116657445385" name="abc_capital_off">"DEZACTIVAȚI"</string>
+    <string msgid="3405795526292276155" name="abc_capital_on">"ACTIVAȚI"</string>
+    <string msgid="7723749260725869598" name="abc_search_hint">"Căutați…"</string>
+    <string msgid="3691816814315814921" name="abc_searchview_description_clear">"Ștergeți interogarea"</string>
+    <string msgid="2550479030709304392" name="abc_searchview_description_query">"Interogare de căutare"</string>
+    <string msgid="8264924765203268293" name="abc_searchview_description_search">"Căutați"</string>
+    <string msgid="8928215447528550784" name="abc_searchview_description_submit">"Trimiteți interogarea"</string>
+    <string msgid="893419373245838918" name="abc_searchview_description_voice">"Căutare vocală"</string>
+    <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"Trimiteți la"</string>
+    <string msgid="7165123711973476752" name="abc_shareactionprovider_share_with_application">"Trimiteți la %s"</string>
+    <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"Restrângeți"</string>
+    <string name="about_improve">Sursa la &lt;a href=\"https://github.com/wikimedia/apps-android-commons\">GitHub&lt;/a>. Buguri la &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\">Bugzilla&lt;/a>.</string>
+    <string name="about_license">Software cu sursă deschisă lansat sub &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\">Licența Apache v2&lt;/a></string>
+    <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\">Politica de confidențialitate&lt;/a></string>
+    <string name="app_name">Wikimedia Commons</string>
+    <string name="app_name_beta">Wikimedia Commons Beta</string>
+    <string name="authentication_failed">Certificare nereușită!</string>
+    <string name="categories_activity_title">Categorii</string>
+    <string name="categories_not_found">Nu s-a găsit nicio categorie corespunzătoare cu %1$s</string>
+    <string name="categories_search_text_hint">Căutare categorii</string>
+    <string name="categories_skip_explanation">Adăugați categorii pentru a facilita găsirea imaginilor dumneavoastră la Wikimedia Commons.
+
+Începeți să tastați pentru a adăuga categorii.
+Atingeți acest mesaj (sau mergeți înapoi) pentru a omite acest pas.</string>
+    <string name="contribution_state_failed">Nu a reușit</string>
+    <string name="contribution_state_in_progress">%1$d%% finalizat</string>
+    <string name="contribution_state_queued">În așteptare</string>
+    <string name="contribution_state_starting">Se încarcă</string>
+    <string name="crash_dialog_comment_prompt">Spuneți-ne ce anume făceați, apoi informați-ne prin e-mail. Ne va ajuta să remediem problema!</string>
+    <string name="crash_dialog_ok_toast">Mulțumim!</string>
+    <string name="crash_dialog_text">Hopa! Ceva nu a mers bine!</string>
+    <string name="crash_dialog_title">Commons s-a blocat</string>
+    <string name="detail_description_empty">Fără descriere</string>
+    <string name="detail_license_empty">Licență necunoscută</string>
+    <string name="detail_panel_cats_label">Categorii</string>
+    <string name="detail_panel_cats_loading">Se încarcă...</string>
+    <string name="detail_panel_cats_none">Niciuna selectată</string>
+    <string name="license_name_attribution">Atribuire</string>
+    <string name="license_name_cc0">CC0</string>
+    <string name="license_name_cc_2_0">CC BY 2.0</string>
+    <string name="license_name_cc_by">CCu00A0Atribuireu00A03.0</string>
+    <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
+    <string name="license_name_cc_by_2_5">CC BY 2.5</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="license_name_cc_by_sa">CCu00A0Atribuireu00A0șiu00A0distribuireu00A0înu00A0condițiiu00A0identiceu00A03.0</string>
+    <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
+    <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
+    <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+    <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Austria)</string>
+    <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Germania)</string>
+    <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonia)</string>
+    <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Spania)</string>
+    <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Croația)</string>
+    <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxemburg)</string>
+    <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Țările de Jos)</string>
+    <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norvegia)</string>
+    <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polonia)</string>
+    <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (România)</string>
+    <string name="license_name_cc_zero">CC Zero</string>
+    <string name="license_name_fal">Free Art License</string>
+    <string name="license_name_gfdl">Licența GNU pentru Documentare Liberă</string>
+    <string name="license_name_own_pd">own-pd</string>
+    <string name="license_name_pd_art">Domeniul public (artă)</string>
+    <string name="license_name_pd_ineligible">Domeniul public (nu intră sub protecția drepturilor de autor)</string>
+    <string name="license_name_pd_old">Domeniul public (drepturi de autor expirate)</string>
+    <string name="license_name_pd_old_100">Domeniul public (autorul a decedat cu peste 100 de ani în urmă)</string>
+    <string name="license_name_pd_us">Domeniul public (SUA)</string>
+    <string name="license_name_pd_usgov">Domeniul public (Guvernul SUA)</string>
+    <string name="license_name_pd_usgov_nasa">Domeniul public (NASA)</string>
+    <string name="logging_in_message">Așteptați...</string>
+    <string name="logging_in_title">Se conectează</string>
+    <string name="login">Autentificare</string>
+    <string name="login_failed">Autentificare nereușită!</string>
+    <string name="login_failed_blocked">Ne pare rău, acest utilizator a fost blocat la Commons</string>
+    <string name="login_failed_generic">Autentificare nereușită</string>
+    <string name="login_failed_network">Autentificare nereușită – defecțiune de rețea</string>
+    <string name="login_failed_password">Autentificare nereușită – verificați-vă parola</string>
+    <string name="login_failed_throttled">Prea multe încercări nereușite. Încercați din nou peste câteva minute</string>
+    <string name="login_failed_username">Autentificare nereușită – verificați-vă numele de utilizator</string>
+    <string name="login_success">Autentificare reușită!</string>
+    <string name="menu_about">Despre</string>
+    <string name="menu_cancel_upload">Revocare</string>
+    <string name="menu_download">Descarcă</string>
+    <string name="menu_feedback">Trimitere reacții (prin e-mail)</string>
+    <string name="menu_from_camera">Faceți o poză</string>
+    <string name="menu_from_gallery">Din galerie</string>
+    <string name="menu_open_in_browser">Afișează în navigator</string>
+    <string name="menu_refresh">Reîncarcă</string>
+    <string name="menu_retry_upload">Reîncercare</string>
+    <string name="menu_save_categories">Salvare</string>
+    <string name="menu_settings">Setări</string>
+    <string name="menu_share">Partajare</string>
+    <string name="menu_upload_single">Încărcare</string>
+    <string name="multiple_share_base_title">Dați un nume acestui set</string>
+    <string name="no_uploads_yet">Încă nu ați încărcat nicio fotografie.</string>
+    <string name="password">Parolă</string>
+    <string name="preference_license">Licență</string>
+    <string name="preference_tracking">Rapoarte de utilizare</string>
+    <string name="preference_tracking_summary">Trimiteți rapoarte de utilizare către Wikimedia pentru a ajuta la îmbunătățirea aplicației</string>
+    <string name="provider_campaigns">Campanii</string>
+    <string name="provider_categories">Categorii utilizate recent</string>
+    <string name="provider_contributions">Încărcările mele</string>
+    <string name="provider_modifications">Modificări</string>
+    <string name="share_description_hint">Descriere</string>
+    <string name="share_license_summary">Această imagine va fi licențiată sub %1$s</string>
+    <string name="share_title_hint">Titlu</string>
+    <string name="share_upload_button">Încărcare</string>
+    <string msgid="2869576371154716097" name="status_bar_notification_info_overflow">"˃999"</string>
+    <string name="title_activity_about">Despre</string>
+    <string name="title_activity_contributions">Încărcările mele</string>
+    <string name="title_activity_settings">Setări</string>
+    <string name="upload_completed_notification_text">Atingeți pentru a vizualiza elementul încărcat</string>
+    <string name="upload_completed_notification_title">%1$s s-a încărcat!</string>
+    <string name="upload_failed_notification_subtitle">Atingeți pentru a vizualiza</string>
+    <string name="upload_failed_notification_title">Încărcarea fișierului %1$s nu a reușit</string>
+    <string name="upload_progress_notification_title_finishing">Se finalizează încărcarea fișierului %1$s</string>
+    <string name="upload_progress_notification_title_in_progress">%1$s se încarcă</string>
+    <string name="upload_progress_notification_title_start">Se pornește încărcarea fișierului %1$s</string>
+    <string name="uploading_started">Încărcarea a început!</string>
+    <string name="uploads_pending_notification_indicator">%d fișiere se încarcă</string>
+    <string name="username">Nume de utilizator</string>
+    <string name="waiting_first_sync">Se așteaptă prima sincronizare...</string>
+    <string name="welcome_copyright_subtext">Evitați materialele cu drepturi de autor găsite pe Internet, precum și imagini ale posterelor, coperților de cărți etc.</string>
+    <string name="welcome_copyright_text">Imaginile dumneavoastră ajută la educarea oamenilor din întreaga lume.</string>
+    <string name="welcome_final_button_text">Da!</string>
+    <string name="welcome_final_text">Credeți că ați înțeles?</string>
+    <string name="welcome_wikipedia_subtext">Imaginile de pe Wikipedia provin de la Wikimedia Commons.</string>
+    <string name="welcome_wikipedia_text">Contribuiți cu imagini personale. Faceți ca articolele Wikipediei să prindă viață!</string>
+</resources>

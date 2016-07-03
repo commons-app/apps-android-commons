@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string msgid="4600421777120114993" name="abc_action_bar_home_description">"Pārvietoties uz sākuma ekrānu"</string>
+    <string msgid="1397052879051804371" name="abc_action_bar_home_description_format">"%1$s: %2$s"</string>
+    <string msgid="6623331958280229229" name="abc_action_bar_home_subtitle_description_format">"%1$s, %2$s: %3$s"</string>
+    <string msgid="1594238315039666878" name="abc_action_bar_up_description">"Pārvietoties augšup"</string>
+    <string msgid="3588849162933574182" name="abc_action_menu_overflow_description">"Vairāk opciju"</string>
+    <string msgid="4076576682505996667" name="abc_action_mode_done">"Gatavs"</string>
+    <string msgid="7468859129482906941" name="abc_activity_chooser_view_see_all">"Skatīt visu"</string>
+    <string msgid="2031811694353399454" name="abc_activitychooserview_choose_application">"Izvēlieties lietotni"</string>
+    <string msgid="121134116657445385" name="abc_capital_off">"IZSLĒGTS"</string>
+    <string msgid="3405795526292276155" name="abc_capital_on">"IESLĒGTS"</string>
+    <string msgid="7723749260725869598" name="abc_search_hint">"Meklējiet…"</string>
+    <string msgid="3691816814315814921" name="abc_searchview_description_clear">"Notīrīt vaicājumu"</string>
+    <string msgid="2550479030709304392" name="abc_searchview_description_query">"Meklēšanas vaicājums"</string>
+    <string msgid="8264924765203268293" name="abc_searchview_description_search">"Meklēt"</string>
+    <string msgid="8928215447528550784" name="abc_searchview_description_submit">"Iesniegt vaicājumu"</string>
+    <string msgid="893419373245838918" name="abc_searchview_description_voice">"Meklēšana ar balsi"</string>
+    <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"Kopīgot ar:"</string>
+    <string msgid="7165123711973476752" name="abc_shareactionprovider_share_with_application">"Kopīgot ar %s"</string>
+    <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"Sakļaut"</string>
+    <string name="about_improve">Izejas kods pieejams &lt;a href=\"https://github.com/wikimedia/apps-android-commons\">GitHub&lt;/a>. Kļūdas ziņot &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\">Bugzilla&lt;/a>.</string>
+    <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\">Privātuma politika&lt;/a></string>
+    <string name="app_name">Wikimedija Commons</string>
+    <string name="app_name_beta">Wikimedia Commons Beta</string>
+    <string name="authentication_failed">Autentifikācija neizdevās!</string>
+    <string name="categories_activity_title">Kategorijas</string>
+    <string name="contribution_state_failed">Neizdevās</string>
+    <string name="contribution_state_in_progress">%1$d%% pabeigti</string>
+    <string name="contribution_state_queued">Rindā iekļauts</string>
+    <string name="contribution_state_starting">Augšupielādē</string>
+    <string name="crash_dialog_ok_toast">Paldies!</string>
+    <string name="crash_dialog_text">Ups. Kaut kas nogāja greizi!</string>
+    <string name="detail_description_empty">Nav apraksta</string>
+    <string name="detail_license_empty">Nezināma licence</string>
+    <string name="detail_panel_cats_label">Kategorijas</string>
+    <string name="detail_panel_cats_loading">Ielādē…</string>
+    <string name="license_name_cc0">CC0</string>
+    <string name="logging_in_message">Lūdzu, uzgaidiet...</string>
+    <string name="logging_in_title">Pieslēdzas</string>
+    <string name="login">Pieslēgties</string>
+    <string name="login_failed">Pieteikšanās neizdevās.</string>
+    <string name="login_failed_blocked">Atvainojiet, šis lietotājs tika bloķēts uz Commons</string>
+    <string name="login_failed_generic">Pieteikšanās neizdevās</string>
+    <string name="login_success">Ieiešana veiksmīga</string>
+    <string name="menu_about">Par</string>
+    <string name="menu_cancel_upload">Atcelt</string>
+    <string name="menu_download">Lejupielādēt</string>
+    <string name="menu_feedback">Nosūtīt atsauksmes (pa e-pastu)</string>
+    <string name="menu_from_camera">Uzņemt fotoattēlu</string>
+    <string name="menu_from_gallery">No galerijas</string>
+    <string name="menu_open_in_browser">Skatīt pārlūkprogrammā</string>
+    <string name="menu_refresh">Atjaunināt</string>
+    <string name="menu_retry_upload">Mēģināt vēlreiz</string>
+    <string name="menu_save_categories">Saglabāt</string>
+    <string name="menu_settings">Iestatījumi</string>
+    <string name="menu_share">Dalīties</string>
+    <string name="menu_upload_single">Augšupielādēt</string>
+    <string name="no_uploads_yet">Jūs vēl neesat augšupielādējis nevienu fotogrāfiju.</string>
+    <string name="password">Parole</string>
+    <string name="preference_license">Licence</string>
+    <string name="preference_tracking">Lietošanas atskaites</string>
+    <string name="provider_campaigns">Kampaņas</string>
+    <string name="provider_categories">Nesen lietotās kategorijas</string>
+    <string name="provider_contributions">Manas augsupielades</string>
+    <string name="provider_modifications">Izmaiņas</string>
+    <string name="share_description_hint">Apraksts</string>
+    <string name="share_title_hint">Nosaukums</string>
+    <string name="share_upload_button">Augšupielādēt</string>
+    <string msgid="2869576371154716097" name="status_bar_notification_info_overflow">"999+"</string>
+    <string name="title_activity_about">Par</string>
+    <string name="title_activity_contributions">Manas augsupielades</string>
+    <string name="title_activity_settings">Iestatījumi</string>
+    <string name="upload_completed_notification_title">%1$s augšupielādēti!</string>
+    <string name="upload_progress_notification_title_in_progress">%1$s augšupielādēti</string>
+    <string name="uploading_started">Augšupielāde sākās!</string>
+    <string name="username">Lietotājvārds</string>
+    <string name="waiting_first_sync">Gaida pirmo sinhronizāciju...</string>
+    <string name="welcome_final_button_text">Jā!</string>
+    <string name="welcome_final_text">Jums šķiet, ka sapratāt?</string>
+</resources>

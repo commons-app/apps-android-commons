@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string msgid="4600421777120114993" name="abc_action_bar_home_description">"Ugrás a főoldalra"</string>
+    <string msgid="1397052879051804371" name="abc_action_bar_home_description_format">"%1$s, %2$s"</string>
+    <string msgid="6623331958280229229" name="abc_action_bar_home_subtitle_description_format">"%1$s, %2$s, %3$s"</string>
+    <string msgid="1594238315039666878" name="abc_action_bar_up_description">"Felfelé mozgatás"</string>
+    <string msgid="3588849162933574182" name="abc_action_menu_overflow_description">"További lehetőségek"</string>
+    <string msgid="4076576682505996667" name="abc_action_mode_done">"Kész"</string>
+    <string msgid="7468859129482906941" name="abc_activity_chooser_view_see_all">"Összes megtekintése"</string>
+    <string msgid="2031811694353399454" name="abc_activitychooserview_choose_application">"Válasszon ki egy alkalmazást"</string>
+    <string msgid="121134116657445385" name="abc_capital_off">"KI"</string>
+    <string msgid="3405795526292276155" name="abc_capital_on">"BE"</string>
+    <string msgid="7723749260725869598" name="abc_search_hint">"Keresés…"</string>
+    <string msgid="3691816814315814921" name="abc_searchview_description_clear">"Lekérdezés törlése"</string>
+    <string msgid="2550479030709304392" name="abc_searchview_description_query">"Keresési lekérdezés"</string>
+    <string msgid="8264924765203268293" name="abc_searchview_description_search">"Keresés"</string>
+    <string msgid="8928215447528550784" name="abc_searchview_description_submit">"Lekérdezés küldése"</string>
+    <string msgid="893419373245838918" name="abc_searchview_description_voice">"Hangalapú keresés"</string>
+    <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"Megosztás a következővel:"</string>
+    <string msgid="7165123711973476752" name="abc_shareactionprovider_share_with_application">"Megosztás a következővel: %s"</string>
+    <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"Összecsukás"</string>
+    <string name="about_improve">Forráskód a &lt;a href=\"https://github.com/wikimedia/apps-android-commons\">GitHubon&lt;/a>. Hibabejelentés a &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\">Bugzillán&lt;/a>.</string>
+    <string name="about_license">Nyílt forráskódú szoftver &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\">Apache License v2&lt;/a> alatt kiadva</string>
+    <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Adatvédelmi_irányelv\">Adatvédelmi irányelvek&lt;/a></string>
+    <string name="app_name">Wikimedia Commons</string>
+    <string name="app_name_beta">Wikimédia Commons Béta</string>
+    <string name="authentication_failed">Sikertelen azonosítás.</string>
+    <string name="categories_activity_title">Kategóriák</string>
+    <string name="categories_not_found">Nincs a(z) „%1$s” keresési kifejezésnek megfelelő kategória</string>
+    <string name="categories_search_text_hint">Keresés a kategóriák között</string>
+    <string name="categories_skip_explanation">Adj kategóriákat a képekhez, hogy könnyebben meg lehessen találni őket a Commonson.
+
+Kezdd el beírni a kategória nevét, hogy hozzáadd.
+Kattints erre az üzenetre a lépés kihagyásához</string>
+    <string name="contribution_state_failed">Sikertelen.</string>
+    <string name="contribution_state_in_progress">%1$d%% kész</string>
+    <string name="contribution_state_queued">Várólistán</string>
+    <string name="contribution_state_starting">Feltöltés</string>
+    <string name="crash_dialog_comment_prompt">Kérjük írja meg nekünk emailben, hogy mit csinált a programban. Ez segít kijavítani a hibát!</string>
+    <string name="crash_dialog_ok_toast">Köszönjük!</string>
+    <string name="crash_dialog_text">Hoppá! Valami elromlott!</string>
+    <string name="crash_dialog_title">Az alkalmazás összeomlott</string>
+    <string name="detail_description_empty">Nincs leírás</string>
+    <string name="detail_license_empty">Ismeretlen licenc</string>
+    <string name="detail_panel_cats_label">Kategóriák</string>
+    <string name="detail_panel_cats_loading">Betöltés…</string>
+    <string name="detail_panel_cats_none">Nincs kijelölés</string>
+    <string name="license_name_attribution">Nevezd meg!</string>
+    <string name="license_name_cc0">CC0</string>
+    <string name="license_name_fal">Free Art License</string>
+    <string name="license_name_gfdl">GNU Szabad Dokumentációs Licenc</string>
+    <string name="license_name_pd_art">Közkincs (művészet)</string>
+    <string name="license_name_pd_ineligible">Közkincs (szerzői jogra nem jogosult)</string>
+    <string name="license_name_pd_old">Közkincs (a szerzői jog lejárt)</string>
+    <string name="license_name_pd_old_100">Közkincs (a szerző több, mint 100 éve halt meg)</string>
+    <string name="license_name_pd_us">Közkincs (USA)</string>
+    <string name="license_name_pd_usgov">Közkincs (USA kormány)</string>
+    <string name="license_name_pd_usgov_nasa">Közkincs (NASA)</string>
+    <string name="logging_in_message">Kérlek várj…</string>
+    <string name="logging_in_title">Belépés...</string>
+    <string name="login">Bejelentkezés</string>
+    <string name="login_failed">A bejelentkezés nem sikerült.</string>
+    <string name="login_failed_blocked">Sajnáljuk, ezt a felhasználót blokkolták a Commonson</string>
+    <string name="login_failed_generic">Bejelentkezési hiba</string>
+    <string name="login_failed_network">Nem lehet bejelentkezni - hálózati hiba</string>
+    <string name="login_failed_password">Nem lehet bejelentkezni - ellenőrizd a jelszavad</string>
+    <string name="login_failed_throttled">Túl sok sikertelen próbálkozás. Próbálkozz újra pár perc múlva</string>
+    <string name="login_failed_username">Nem lehet bejelentkezni - ellenőrizd a felhasználóneved</string>
+    <string name="login_success">Sikeres bejelentkezés</string>
+    <string name="menu_about">Névjegy</string>
+    <string name="menu_cancel_upload">Mégse</string>
+    <string name="menu_download">Letöltés</string>
+    <string name="menu_feedback">Visszajelzés küldése (email)</string>
+    <string name="menu_from_camera">Fényképezés</string>
+    <string name="menu_from_gallery">A galériából</string>
+    <string name="menu_open_in_browser">Megtekintés böngészőben</string>
+    <string name="menu_refresh">Frissítés</string>
+    <string name="menu_retry_upload">Újra</string>
+    <string name="menu_save_categories">Mentés</string>
+    <string name="menu_settings">Beállítások</string>
+    <string name="menu_share">Megosztás</string>
+    <string name="menu_upload_single">Feltöltés</string>
+    <string name="multiple_share_base_title">Nevezd el a gyűjteményt</string>
+    <string name="no_uploads_yet">Még nem töltöttél fel fotókat.</string>
+    <string name="password">Jelszó</string>
+    <string name="preference_license">Licenc</string>
+    <string name="preference_tracking">Felhasználási jelentések</string>
+    <string name="preference_tracking_summary">Felhasználási jelentések küldése a Wikimédia részére az alkalmazás fejlesztése érdekében</string>
+    <string name="provider_campaigns">Kampányok</string>
+    <string name="provider_categories">Legutóbb használt kategóriák</string>
+    <string name="provider_contributions">Feltöltéseim</string>
+    <string name="provider_modifications">Értesítések</string>
+    <string name="share_description_hint">Leírás</string>
+    <string name="share_license_summary">Ez a kép %1$s licenc alatt kerül feltöltésre</string>
+    <string name="share_title_hint">Cím</string>
+    <string name="share_upload_button">Feltöltés</string>
+    <string msgid="2869576371154716097" name="status_bar_notification_info_overflow">"999+"</string>
+    <string name="title_activity_about">Névjegy</string>
+    <string name="title_activity_contributions">Feltöltéseim</string>
+    <string name="title_activity_settings">Beállítások</string>
+    <string name="upload_completed_notification_text">Feltöltés megtekintése</string>
+    <string name="upload_completed_notification_title">%1$s feltöltve!</string>
+    <string name="upload_failed_notification_subtitle">Kattints a megtekintéshez</string>
+    <string name="upload_failed_notification_title">%1$s feltöltése sikertelen</string>
+    <string name="upload_progress_notification_title_finishing">Feltöltés befejezve: %1$s</string>
+    <string name="upload_progress_notification_title_in_progress">%1$s feltöltése</string>
+    <string name="upload_progress_notification_title_start">Feltöltés indul: %1$s</string>
+    <string name="uploading_started">Feltöltés indul.</string>
+    <string fuzzy="true" name="uploads_pending_notification_indicator">%d van hátra</string>
+    <string name="username">Felhasználónév</string>
+    <string name="waiting_first_sync">Várakozás az első szinkronizálásra...</string>
+    <string name="welcome_copyright_subtext">Kerüld az internetről származó szerzői joggal védett anyagokat, mint a poszterek, könyvborítók, stb.</string>
+    <string name="welcome_copyright_text">A képeid segítenek a világ minden táján élő emberek oktatásában.</string>
+    <string name="welcome_final_button_text">Igen!</string>
+    <string name="welcome_final_text">Megértetted?</string>
+    <string name="welcome_wikipedia_subtext">A Wikipédián található képek a Wikimédia Commonsből származnak.</string>
+    <string name="welcome_wikipedia_text">Tedd közzé a képeidet! Segíts, hogy a Wikipédia szócikkek életre keljenek!</string>
+</resources>

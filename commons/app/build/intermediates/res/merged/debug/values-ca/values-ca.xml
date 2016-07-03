@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="contributions_subtitle">
+    <item quantity="zero">No hi ha cap càrrega encara</item>
+    <item quantity="one">1 càrrega</item>
+    <item quantity="other">%d càrregues</item>
+  </plurals>
+    <plurals name="multiple_uploads_title">
+    <item quantity="one">1 càrrega</item>
+    <item quantity="other">%d càrregues</item>
+  </plurals>
+    <plurals name="starting_multiple_uploads">
+    <item quantity="one">S\'està iniciant 1 càrrega</item>
+    <item quantity="other">S\'estan iniciant %d càrregues</item>
+  </plurals>
+    <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">s\'està carregant 1 fitxer</item>
+    <item quantity="other">s\'estan carregant %d fitxers</item>
+  </plurals>
+    <string msgid="4600421777120114993" name="abc_action_bar_home_description">"Navega a la pàgina d\'inici"</string>
+    <string msgid="1397052879051804371" name="abc_action_bar_home_description_format">"%1$s, %2$s"</string>
+    <string msgid="6623331958280229229" name="abc_action_bar_home_subtitle_description_format">"%1$s, %2$s, %3$s"</string>
+    <string msgid="1594238315039666878" name="abc_action_bar_up_description">"Navega cap a dalt"</string>
+    <string msgid="3588849162933574182" name="abc_action_menu_overflow_description">"Més opcions"</string>
+    <string msgid="4076576682505996667" name="abc_action_mode_done">"Fet"</string>
+    <string msgid="7468859129482906941" name="abc_activity_chooser_view_see_all">"Mostra\'ls tots"</string>
+    <string msgid="2031811694353399454" name="abc_activitychooserview_choose_application">"Selecciona una aplicació"</string>
+    <string msgid="121134116657445385" name="abc_capital_off">"DESACTIVAT"</string>
+    <string msgid="3405795526292276155" name="abc_capital_on">"ACTIVAT"</string>
+    <string msgid="7723749260725869598" name="abc_search_hint">"Cerca..."</string>
+    <string msgid="3691816814315814921" name="abc_searchview_description_clear">"Esborra la consulta"</string>
+    <string msgid="2550479030709304392" name="abc_searchview_description_query">"Consulta de cerca"</string>
+    <string msgid="8264924765203268293" name="abc_searchview_description_search">"Cerca"</string>
+    <string msgid="8928215447528550784" name="abc_searchview_description_submit">"Envia la consulta"</string>
+    <string msgid="893419373245838918" name="abc_searchview_description_voice">"Cerca per veu"</string>
+    <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"Comparteix amb"</string>
+    <string msgid="7165123711973476752" name="abc_shareactionprovider_share_with_application">"Comparteix amb %s"</string>
+    <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"Replega"</string>
+    <string name="about_improve">Codi a &lt;a href=\"https://github.com/wikimedia/apps-android-commons\">GitHub&lt;/a>. Informes d\'error a &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\">Bugzilla&lt;/a>.</string>
+    <string name="about_license">Programari de codi obert distribuït sota la &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\">llicència Apache v2&lt;/a></string>
+    <string name="about_privacy_policy">Wikimedia:Commons-android-texts-sobre privacitat/ca</string>
+    <string name="app_name">Wikimedia Commons</string>
+    <string name="app_name_beta">Wikimedia Commons Beta</string>
+    <string name="authentication_failed">L\'autenticació ha fallat!</string>
+    <string name="categories_activity_title">Categories</string>
+    <string name="categories_not_found">No s\'ha trobat cap categoria que coincideixi amb %1$s</string>
+    <string name="categories_search_text_hint">Categories de cerca</string>
+    <string name="categories_skip_explanation">Afegiu categories per fer que les vostres imatges siguin més fàcils de trobar a Wikimedia Commons.</string>
+    <string name="contribution_state_failed">Ha fallat</string>
+    <string name="contribution_state_in_progress">%1$d%% completat</string>
+    <string name="contribution_state_queued">En cua</string>
+    <string name="contribution_state_starting">Càrrega en curs</string>
+    <string name="crash_dialog_comment_prompt">Explica\'ns que estaves fent, després comparteix-ho mitjançant email amb nosaltres. Ens ajudaràs a arreglar-ho!</string>
+    <string name="crash_dialog_ok_toast">Gràcies!</string>
+    <string name="crash_dialog_text">Uups ! Quelcom ha anat malament !</string>
+    <string name="crash_dialog_title">El Commons s\'ha penjat</string>
+    <string name="detail_description_empty">Sense descripció</string>
+    <string name="detail_license_empty">Llicència desconeguda</string>
+    <string name="detail_panel_cats_label">Categories</string>
+    <string name="detail_panel_cats_loading">Carregant...</string>
+    <string name="detail_panel_cats_none">No se n\'ha seleccionat cap</string>
+    <string name="license_name_attribution">Reconeixement</string>
+    <string name="license_name_cc0">CC0</string>
+    <string name="license_name_cc_2_0">CC BY 2.0</string>
+    <string name="license_name_cc_by">CCu00A0Reconeixementu00A03.0</string>
+    <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
+    <string name="license_name_cc_by_2_5">CC BY 2.5</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="license_name_cc_by_sa">CCu00A0Reconeixement-CompartirIgualu00A03.0</string>
+    <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
+    <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
+    <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+    <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Àustria)</string>
+    <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Alemanya)</string>
+    <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estònia)</string>
+    <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Espanya)</string>
+    <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Croàcia)</string>
+    <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxemburg)</string>
+    <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Països Baixos)</string>
+    <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Noruega)</string>
+    <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polònia)</string>
+    <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romania)</string>
+    <string name="license_name_cc_zero">CC Zero</string>
+    <string name="license_name_fal">Llicència artística lliure</string>
+    <string name="license_name_gfdl">Llicència de Documentació Lliure de GNU</string>
+    <string name="license_name_own_pd">own-pd</string>
+    <string name="license_name_pd_art">Domini públic (art)</string>
+    <string name="license_name_pd_ineligible">Domini públic (copyright no aplicable)</string>
+    <string name="license_name_pd_old">Domini públic (copyright expirat)</string>
+    <string name="license_name_pd_old_100">Domini públic (l\'autor va morir fa més de 100 anys)</string>
+    <string name="license_name_pd_us">Domini públic (EUA)</string>
+    <string name="license_name_pd_usgov">Domini públic (govern dels EUA)</string>
+    <string name="license_name_pd_usgov_nasa">Domini públic (NASA)</string>
+    <string name="logging_in_message">Espereu...</string>
+    <string name="logging_in_title">Iniciant sessió</string>
+    <string name="login">Inicia una sessió</string>
+    <string name="login_failed">Error en iniciar la sessió!</string>
+    <string name="login_failed_blocked">Ho sentim, aquest usuari ha estat blocat a Commons</string>
+    <string name="login_failed_generic">Ha fallat l\'inici de sessió</string>
+    <string name="login_failed_network">No s\'ha pogut iniciar la sessió – error de xarxa</string>
+    <string name="login_failed_password">No s’ha pogut iniciar la sessió. Comproveu la vostra contrasenya</string>
+    <string name="login_failed_throttled">Masses intents erronis – Siusplau prova-ho d\'aquí uns minuts</string>
+    <string name="login_failed_username">No s\'ha pogut iniciar la sessió – siusplau comprova el teu nom d\'usuari</string>
+    <string name="login_success">S\'ha iniciat sessió correctament !</string>
+    <string name="menu_about">Quant a</string>
+    <string name="menu_cancel_upload">Cancel·la</string>
+    <string name="menu_download">Baixa</string>
+    <string name="menu_feedback">Envia comentaris (per correu)</string>
+    <string name="menu_from_camera">Fes una foto</string>
+    <string name="menu_from_gallery">De la galeria</string>
+    <string name="menu_open_in_browser">Mostra al navegador</string>
+    <string name="menu_refresh">Refresca</string>
+    <string name="menu_retry_upload">Reintenta</string>
+    <string name="menu_save_categories">Desa</string>
+    <string name="menu_settings">Configuració</string>
+    <string name="menu_share">Comparteix</string>
+    <string name="menu_upload_single">Carrega</string>
+    <string name="multiple_share_base_title">Anomena aquest conjunt</string>
+    <string name="no_uploads_yet">Encara no heu carregat cap foto.</string>
+    <string name="password">Contrasenya</string>
+    <string name="preference_license">Llicència</string>
+    <string name="preference_tracking">Informes d\'ús</string>
+    <string name="preference_tracking_summary">Envia informes d\'ús a Wikimedia per ajudar-nos a millorar l\'aplicació</string>
+    <string name="provider_campaigns">Campanyes</string>
+    <string name="provider_categories">Categories usades recentment</string>
+    <string name="provider_contributions">Les meves càrregues</string>
+    <string name="provider_modifications">Modificacions</string>
+    <string name="share_description_hint">Descripció</string>
+    <string name="share_license_summary">Aquesta imatge es llicenciarà sota %1$s</string>
+    <string name="share_title_hint">Títol</string>
+    <string name="share_upload_button">Carrega</string>
+    <string msgid="2869576371154716097" name="status_bar_notification_info_overflow">"+999"</string>
+    <string name="title_activity_about">Quant a</string>
+    <string name="title_activity_contributions">Les meves càrregues</string>
+    <string name="title_activity_settings">Paràmetres</string>
+    <string name="upload_completed_notification_text">Prem per veure la teva càrrega</string>
+    <string name="upload_completed_notification_title">S\'ha carregat %1$s !</string>
+    <string name="upload_failed_notification_subtitle">Prem per veure-ho</string>
+    <string name="upload_failed_notification_title">Error al carregar %1$s</string>
+    <string name="upload_progress_notification_title_finishing">Acabant la càrrega al servidor de %1$s</string>
+    <string name="upload_progress_notification_title_in_progress">Carregant %1$s</string>
+    <string name="upload_progress_notification_title_start">Començant la càrrega al servidor de  %1$s</string>
+    <string name="uploading_started">Ha començat la càrrega!</string>
+    <string name="username">Nom d\'usuari:</string>
+    <string name="waiting_first_sync">S\'està esperant la primera sincronització…</string>
+    <string name="welcome_copyright_subtext">No utilitzis material amb copyright que puguis trobar a Internet, ni tampoc imatges de pòsters, portades de llibres, etc.</string>
+    <string name="welcome_copyright_text">Les vostres imatges ajuden a educar gent d\'arreu del món.</string>
+    <string name="welcome_final_button_text">Sí!</string>
+    <string name="welcome_final_text">Creieu que ho heu entès?</string>
+    <string name="welcome_wikipedia_subtext">Les imatges de la Viquipèdia vénen de la Wikimedia Commons.</string>
+    <string name="welcome_wikipedia_text">Doneu les vostres imatges. Ajudeu a donar vida als articles de la Viquipèdia!</string>
+</resources>
