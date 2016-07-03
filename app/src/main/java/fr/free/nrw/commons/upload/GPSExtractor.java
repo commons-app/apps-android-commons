@@ -86,6 +86,9 @@ public class GPSExtractor {
         } catch (IOException e) {
             Log.w("Image", e);
             return null;
+        } catch (IllegalArgumentException e) {
+            Log.w("Image", e);
+            return null;
         }
 
         if (exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE) == null && useGPS) {
