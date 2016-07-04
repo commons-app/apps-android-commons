@@ -1,5 +1,13 @@
 # Wikimedia Commons for Android
 
+## v1.16
+- Fixed various crashes
+- Reduced APK size
+- Fixed 'waiting for first sync' bug
+
+## v1.15
+- Added material design logo
+
 ## v1.14
 - Migrated to Gradle
 - Fixed API 23 permission crash
