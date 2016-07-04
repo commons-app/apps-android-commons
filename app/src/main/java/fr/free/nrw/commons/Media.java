@@ -235,8 +235,9 @@ public class Media implements Parcelable {
         width = in.readInt();
         height = in.readInt();
         license = in.readString();
-        //FIXME: Null check
-        in.readStringList(categories);
+        if (categories != null) {
+            in.readStringList(categories);
+        }
         descriptions = in.readHashMap(ClassLoader.getSystemClassLoader());
     }
 
