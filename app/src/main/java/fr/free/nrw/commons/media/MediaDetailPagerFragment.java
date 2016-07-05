@@ -35,7 +35,7 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
     private ViewPager pager;
     private Boolean editable;
     private CommonsApplication app;
-    
+
     public MediaDetailPagerFragment() {
         this(false);
     }
@@ -43,17 +43,6 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
     @SuppressLint("ValidFragment")
     public MediaDetailPagerFragment(Boolean editable) {
         this.editable = editable;
-    }
-
-    public void onPageScrolled(int i, float v, int i2) {
-        getActivity().supportInvalidateOptionsMenu();
-    }
-
-    public void onPageSelected(int i) {
-    }
-
-    public void onPageScrollStateChanged(int i) {
-
     }
 
     public interface MediaDetailProvider {
@@ -89,7 +78,6 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
             return ((MediaDetailProvider)getActivity()).getTotalMediaCount();
         }
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -286,5 +274,16 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
 
     public void showImage(int i) {
         pager.setCurrentItem(i);
+    }
+    
+    public void onPageScrolled(int i, float v, int i2) {
+        getActivity().supportInvalidateOptionsMenu();
+    }
+
+    public void onPageSelected(int i) {
+    }
+
+    public void onPageScrollStateChanged(int i) {
+
     }
 }
