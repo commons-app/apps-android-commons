@@ -54,6 +54,8 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
         public void registerDataSetObserver(DataSetObserver observer);
         public void unregisterDataSetObserver(DataSetObserver observer);
     }
+
+    //FragmentStatePagerAdapter allows user to swipe across collection of images (no. of images undetermined)
     private class MediaDetailAdapter extends FragmentStatePagerAdapter {
 
         public MediaDetailAdapter(FragmentManager fm) {
