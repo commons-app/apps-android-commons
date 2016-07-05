@@ -178,6 +178,7 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
         Uri imageUri = Uri.parse(imageUrl);
 
         DownloadManager.Request req = new DownloadManager.Request(imageUri);
+        //These are not the image title and description fields, they are download descs for notifications
         req.setDescription(getString(R.string.app_name));
         req.setTitle(m.getDisplayTitle());
         req.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
@@ -275,7 +276,7 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
     public void showImage(int i) {
         pager.setCurrentItem(i);
     }
-    
+
     public void onPageScrolled(int i, float v, int i2) {
         getActivity().supportInvalidateOptionsMenu();
     }
