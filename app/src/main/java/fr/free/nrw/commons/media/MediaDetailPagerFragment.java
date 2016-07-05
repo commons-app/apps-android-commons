@@ -35,6 +35,15 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
     private ViewPager pager;
     private Boolean editable;
     private CommonsApplication app;
+    
+    public MediaDetailPagerFragment() {
+        this(false);
+    }
+
+    @SuppressLint("ValidFragment")
+    public MediaDetailPagerFragment(Boolean editable) {
+        this.editable = editable;
+    }
 
     public void onPageScrolled(int i, float v, int i2) {
         getActivity().supportInvalidateOptionsMenu();
@@ -81,14 +90,6 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
         }
     }
 
-    public MediaDetailPagerFragment() {
-        this(false);
-    }
-
-    @SuppressLint("ValidFragment")
-    public MediaDetailPagerFragment(Boolean editable) {
-        this.editable = editable;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
