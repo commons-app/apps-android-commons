@@ -11,6 +11,8 @@ import org.mediawiki.api.MWApi;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.net.ssl.SSLPeerUnverifiedException;
+
 import fr.free.nrw.commons.CommonsApplication;
 
 /**
@@ -63,7 +65,8 @@ public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
                     .get();
             Log.d(TAG, "Prefix URL filter" + result.toString());
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            //Return empty arraylist
+            return categories;
         }
 
         ArrayList<ApiResult> categoryNodes = result.getNodes("/api/query/allcategories/c");
