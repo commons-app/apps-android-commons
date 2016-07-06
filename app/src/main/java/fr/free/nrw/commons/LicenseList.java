@@ -64,14 +64,14 @@ public class LicenseList {
     }
 
     public String nameForTemplate(String template) {
-        Log.d("Commons", "LicenseList.nameForTemplate: template: " + template);
+        //Log.d("Commons", "LicenseList.nameForTemplate: template: " + template);
         String stringId = nameIdForTemplate(template);
-        Log.d("Commons", "LicenseList.nameForTemplate: stringId: " + stringId);
+        //Log.d("Commons", "LicenseList.nameForTemplate: stringId: " + stringId);
         int nameId = stringIdByName(stringId);
-        Log.d("Commons", "LicenseList.nameForTemplate: nameId: " + nameId);
+        //Log.d("Commons", "LicenseList.nameForTemplate: nameId: " + nameId);
         if(nameId != 0) {
             String name = res.getString(nameId);
-            Log.d("Commons", "LicenseList.nameForTemplate: name: " + name);
+            //Log.d("Commons", "LicenseList.nameForTemplate: name: " + name);
             return name;
         }
         return template;

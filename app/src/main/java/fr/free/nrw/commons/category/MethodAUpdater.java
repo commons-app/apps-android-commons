@@ -67,7 +67,9 @@ public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
                     .get();
             Log.d(TAG, "Method A URL filter" + result.toString());
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            Log.e(TAG, "IO Exception: ", e);
+            //Return empty arraylist
+            return categories;
         }
 
         ArrayList<ApiResult> categoryNodes = result.getNodes("/api/query/search/p/@title");
