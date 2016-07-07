@@ -264,7 +264,7 @@ public class MediaDetailFragment extends Fragment {
                     }
 
                     // Set text of desc, license, and categories
-                    // FIXME: This branch displays the wrong desc and categories
+                    // FIXME: This reveals the desc, license, and categories fields, but displays the wrong desc and categories
                     desc.setText(prettyDescription(media));
                     license.setText(prettyLicense(media));
 
@@ -281,7 +281,7 @@ public class MediaDetailFragment extends Fragment {
                 }
 
                 public void onLoadingCancelled(String s, View view) {
-                    throw new RuntimeException("Image loading cancelled. But why?");
+                    Log.e("Volley", "Image loading cancelled. But why?");
                 }
             });
         }
