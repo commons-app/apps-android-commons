@@ -185,17 +185,17 @@ public class MediaDetailFragment extends Fragment {
     private void displayMediaDetails(final Media media) {
         String actualUrl = (media.getLocalUri() != null && !TextUtils.isEmpty(media.getLocalUri().toString())) ? media.getLocalUri().toString() : media.getThumbnailUrl(640);
         if(actualUrl.startsWith("http")) {
+            Log.d("Volley", "Actual URL starts with http and is: " + actualUrl);
+
             ImageLoader loader = ((CommonsApplication)getActivity().getApplicationContext()).getImageLoader();
             MediaWikiImageView mwImage = (MediaWikiImageView)image;
             mwImage.setLoadingView(loadingProgress); //FIXME: Set this as an attribute
             mwImage.setMedia(media, loader);
 
-            Log.d("Volley", actualUrl);
             // FIXME: For transparent images
-
-            // Load image metadata: desc, license, categories
             // FIXME: keep the spinner going while we load data
             // FIXME: cache this data
+            // Load image metadata: desc, license, categories
             detailFetchTask = new AsyncTask<Void, Void, Boolean>() {
                 private MediaDataExtractor extractor;
 
@@ -243,6 +243,8 @@ public class MediaDetailFragment extends Fragment {
             };
             Utils.executeAsyncTask(detailFetchTask);
         } else {
+            //FIXME: This branch does not display desc, categories, and license
+            Log.d("Volley", "Actual URL does not start with http and is: " + actualUrl);
             com.nostra13.universalimageloader.core.ImageLoader.getInstance().displayImage(actualUrl, image, displayOptions, new ImageLoadingListener() {
                 public void onLoadingStarted(String s, View view) {
                     loadingProgress.setVisibility(View.VISIBLE);
@@ -260,10 +262,26 @@ public class MediaDetailFragment extends Fragment {
                     if(bitmap.hasAlpha()) {
                         image.setBackgroundResource(android.R.color.white);
                     }
+
+                    // Set text of desc, license, and categories
+                    // FIXME: This reveals the desc, license, and categories fields, but displays the wrong desc and categories
+                    desc.setText(prettyDescription(media));
+                    license.setText(prettyLicense(media));
+
+                    categoryNames.removeAll(categoryNames);
+                    categoryNames.addAll(media.getCategories());
+
+                    categoriesLoaded = true;
+                    categoriesPresent = (categoryNames.size() > 0);
+                    if (!categoriesPresent) {
+                        // Stick in a filler element.
+                        categoryNames.add(getString(R.string.detail_panel_cats_none));
+                    }
+                    rebuildCatList();
                 }
 
                 public void onLoadingCancelled(String s, View view) {
-                    throw new RuntimeException("Image loading cancelled. But why?");
+                    Log.e("Volley", "Image loading cancelled. But why?");
                 }
             });
         }

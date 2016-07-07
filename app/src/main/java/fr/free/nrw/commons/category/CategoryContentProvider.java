@@ -102,7 +102,7 @@ public class CategoryContentProvider extends ContentProvider {
 
     @Override
     public int bulkInsert(Uri uri, ContentValues[] values) {
-        Log.d("Commons", "Hello, bulk insert!");
+        Log.d("Commons", "Hello, bulk insert! (CategoryContentProvider)");
         int uriType = uriMatcher.match(uri);
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         sqlDB.beginTransaction();

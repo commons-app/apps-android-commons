@@ -36,15 +36,13 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
     private Boolean editable;
     private CommonsApplication app;
 
-    public void onPageScrolled(int i, float v, int i2) {
-        getActivity().supportInvalidateOptionsMenu();
+    public MediaDetailPagerFragment() {
+        this(false);
     }
 
-    public void onPageSelected(int i) {
-    }
-
-    public void onPageScrollStateChanged(int i) {
-
+    @SuppressLint("ValidFragment")
+    public MediaDetailPagerFragment(Boolean editable) {
+        this.editable = editable;
     }
 
     public interface MediaDetailProvider {
@@ -54,6 +52,8 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
         public void registerDataSetObserver(DataSetObserver observer);
         public void unregisterDataSetObserver(DataSetObserver observer);
     }
+
+    //FragmentStatePagerAdapter allows user to swipe across collection of images (no. of images undetermined)
     private class MediaDetailAdapter extends FragmentStatePagerAdapter {
 
         public MediaDetailAdapter(FragmentManager fm) {
@@ -77,15 +77,6 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
         public int getCount() {
             return ((MediaDetailProvider)getActivity()).getTotalMediaCount();
         }
-    }
-
-    public MediaDetailPagerFragment() {
-        this(false);
-    }
-
-    @SuppressLint("ValidFragment")
-    public MediaDetailPagerFragment(Boolean editable) {
-        this.editable = editable;
     }
 
     @Override
@@ -187,6 +178,7 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
         Uri imageUri = Uri.parse(imageUrl);
 
         DownloadManager.Request req = new DownloadManager.Request(imageUri);
+        //These are not the image title and description fields, they are download descs for notifications
         req.setDescription(getString(R.string.app_name));
         req.setTitle(m.getDisplayTitle());
         req.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
@@ -283,5 +275,16 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
 
     public void showImage(int i) {
         pager.setCurrentItem(i);
+    }
+
+    public void onPageScrolled(int i, float v, int i2) {
+        getActivity().supportInvalidateOptionsMenu();
+    }
+
+    public void onPageSelected(int i) {
+    }
+
+    public void onPageScrollStateChanged(int i) {
+
     }
 }
