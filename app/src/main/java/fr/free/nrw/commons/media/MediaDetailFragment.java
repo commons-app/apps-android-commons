@@ -243,6 +243,7 @@ public class MediaDetailFragment extends Fragment {
             };
             Utils.executeAsyncTask(detailFetchTask);
         } else {
+            //FIXME: This branch does not display desc, categories, and license
             Log.d("Volley", "Actual URL does not start with http and is: " + actualUrl);
             com.nostra13.universalimageloader.core.ImageLoader.getInstance().displayImage(actualUrl, image, displayOptions, new ImageLoadingListener() {
                 public void onLoadingStarted(String s, View view) {
