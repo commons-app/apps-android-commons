@@ -262,6 +262,21 @@ public class MediaDetailFragment extends Fragment {
                     if(bitmap.hasAlpha()) {
                         image.setBackgroundResource(android.R.color.white);
                     }
+
+                    // Fill some fields
+                    desc.setText(prettyDescription(media));
+                    license.setText(prettyLicense(media));
+
+                    categoryNames.removeAll(categoryNames);
+                    categoryNames.addAll(media.getCategories());
+
+                    categoriesLoaded = true;
+                    categoriesPresent = (categoryNames.size() > 0);
+                    if (!categoriesPresent) {
+                        // Stick in a filler element.
+                        categoryNames.add(getString(R.string.detail_panel_cats_none));
+                    }
+                    rebuildCatList();
                 }
 
                 public void onLoadingCancelled(String s, View view) {
