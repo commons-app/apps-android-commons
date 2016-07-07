@@ -185,17 +185,17 @@ public class MediaDetailFragment extends Fragment {
     private void displayMediaDetails(final Media media) {
         String actualUrl = (media.getLocalUri() != null && !TextUtils.isEmpty(media.getLocalUri().toString())) ? media.getLocalUri().toString() : media.getThumbnailUrl(640);
         if(actualUrl.startsWith("http")) {
+            Log.d("Volley", "Actual URL starts with http and is: " + actualUrl);
+
             ImageLoader loader = ((CommonsApplication)getActivity().getApplicationContext()).getImageLoader();
             MediaWikiImageView mwImage = (MediaWikiImageView)image;
             mwImage.setLoadingView(loadingProgress); //FIXME: Set this as an attribute
             mwImage.setMedia(media, loader);
 
-            Log.d("Volley", actualUrl);
             // FIXME: For transparent images
-
-            // Load image metadata: desc, license, categories
             // FIXME: keep the spinner going while we load data
             // FIXME: cache this data
+            // Load image metadata: desc, license, categories
             detailFetchTask = new AsyncTask<Void, Void, Boolean>() {
                 private MediaDataExtractor extractor;
 
@@ -243,6 +243,7 @@ public class MediaDetailFragment extends Fragment {
             };
             Utils.executeAsyncTask(detailFetchTask);
         } else {
+            Log.d("Volley", "Actual URL does not start with http and is: " + actualUrl);
             com.nostra13.universalimageloader.core.ImageLoader.getInstance().displayImage(actualUrl, image, displayOptions, new ImageLoadingListener() {
                 public void onLoadingStarted(String s, View view) {
                     loadingProgress.setVisibility(View.VISIBLE);
