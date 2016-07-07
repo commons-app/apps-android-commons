@@ -183,7 +183,8 @@ public class MediaDetailFragment extends Fragment {
     }
 
     private void displayMediaDetails(final Media media) {
-        String actualUrl = (media.getLocalUri() != null && !TextUtils.isEmpty(media.getLocalUri().toString())) ? media.getLocalUri().toString() : media.getThumbnailUrl(640);
+        //Always load image from Internet to allow viewing the desc, license, and cats
+        String actualUrl = media.getThumbnailUrl(640);
         if(actualUrl.startsWith("http")) {
             Log.d("Volley", "Actual URL starts with http and is: " + actualUrl);
 
@@ -222,7 +223,7 @@ public class MediaDetailFragment extends Fragment {
                     if (success.booleanValue()) {
                         extractor.fill(media);
 
-                        // Fill some fields
+                        // Set text of desc, license, and categories
                         desc.setText(prettyDescription(media));
                         license.setText(prettyLicense(media));
 
@@ -243,7 +244,8 @@ public class MediaDetailFragment extends Fragment {
             };
             Utils.executeAsyncTask(detailFetchTask);
         } else {
-            //FIXME: This branch does not display desc, categories, and license
+            //This should not usually happen, image along with associated details should always be loaded from Internet, but keeping this for now for backup.
+            //Even if image is loaded from device storage, it will display, albeit with empty desc and cat.
             Log.d("Volley", "Actual URL does not start with http and is: " + actualUrl);
             com.nostra13.universalimageloader.core.ImageLoader.getInstance().displayImage(actualUrl, image, displayOptions, new ImageLoadingListener() {
                 public void onLoadingStarted(String s, View view) {
@@ -264,7 +266,6 @@ public class MediaDetailFragment extends Fragment {
                     }
 
                     // Set text of desc, license, and categories
-                    // FIXME: This reveals the desc, license, and categories fields, but displays the wrong desc and categories
                     desc.setText(prettyDescription(media));
                     license.setText(prettyLicense(media));
 
