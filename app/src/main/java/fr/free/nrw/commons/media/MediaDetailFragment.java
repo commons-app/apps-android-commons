@@ -263,7 +263,8 @@ public class MediaDetailFragment extends Fragment {
                         image.setBackgroundResource(android.R.color.white);
                     }
 
-                    // Fill some fields
+                    // Set text of desc, license, and categories
+                    // FIXME: This branch displays the wrong desc and categories
                     desc.setText(prettyDescription(media));
                     license.setText(prettyLicense(media));
 
