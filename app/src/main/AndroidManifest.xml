@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="fr.free.nrw.commons"
-    android:versionCode="34"
-    android:versionName="1.16" >
+    android:versionCode="35"
+    android:versionName="1.17" >
 
     <uses-sdk
         android:minSdkVersion="9"
