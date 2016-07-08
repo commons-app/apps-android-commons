@@ -1,5 +1,9 @@
 # Wikimedia Commons for Android
 
+## v1.17
+- Fixed various crashes
+- Fixed 'Desc/license/categories empty' bug
+
 ## v1.16
 - Fixed various crashes
 - Reduced APK size
