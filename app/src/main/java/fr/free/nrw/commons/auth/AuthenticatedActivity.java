@@ -11,7 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
 
-public class AuthenticatedActivity extends AppCompatActivity {
+public abstract class AuthenticatedActivity extends AppCompatActivity {
     
     
     String accountType;
@@ -143,10 +143,6 @@ public class AuthenticatedActivity extends AppCompatActivity {
         outState.putString("authCookie", authCookie);
     }
 
-    protected void onAuthCookieAcquired(String authCookie) {
-        
-    }
-    protected void onAuthFailure() {
-        
-    }
+    protected abstract void onAuthCookieAcquired(String authCookie);
+    protected abstract void onAuthFailure();
 }

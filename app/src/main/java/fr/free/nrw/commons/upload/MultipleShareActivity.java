@@ -236,7 +236,6 @@ public  class       MultipleShareActivity
 
     @Override
     protected void onAuthFailure() {
-        super.onAuthFailure();
         Toast failureToast = Toast.makeText(this, R.string.authentication_failed, Toast.LENGTH_LONG);
         failureToast.show();
         finish();
