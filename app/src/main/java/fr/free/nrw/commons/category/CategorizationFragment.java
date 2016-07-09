@@ -64,8 +64,8 @@ public class CategorizationFragment extends Fragment {
 
     // LHS guarantees ordered insertions, allowing for prioritized method A results
     private final Set<String> results = new LinkedHashSet<String>();
-    fr.free.nrw.commons.category.PrefixUpdater prefixUpdaterSub;
-    fr.free.nrw.commons.category.MethodAUpdater methodAUpdaterSub;
+    PrefixUpdater prefixUpdaterSub;
+    MethodAUpdater methodAUpdaterSub;
 
     private ContentProviderClient client;
 
@@ -116,14 +116,14 @@ public class CategorizationFragment extends Fragment {
 
         try {
             Cursor cursor = client.query(
-                    fr.free.nrw.commons.category.CategoryContentProvider.BASE_URI,
-                    fr.free.nrw.commons.category.Category.Table.ALL_FIELDS,
+                    CategoryContentProvider.BASE_URI,
+                    Category.Table.ALL_FIELDS,
                     null,
                     new String[]{},
-                    fr.free.nrw.commons.category.Category.Table.COLUMN_LAST_USED + " DESC");
+                    Category.Table.COLUMN_LAST_USED + " DESC");
             // fixme add a limit on the original query instead of falling out of the loop?
             while (cursor.moveToNext() && cursor.getPosition() < SEARCH_CATS_LIMIT) {
-                fr.free.nrw.commons.category.Category cat = fr.free.nrw.commons.category.Category.fromCursor(cursor);
+                Category cat = Category.fromCursor(cursor);
                 items.add(cat.getName());
             }
             cursor.close();
@@ -249,25 +249,30 @@ public class CategorizationFragment extends Fragment {
         return count;
     }
 
-    private fr.free.nrw.commons.category.Category lookupCategory(String name) {
+    private Category lookupCategory(String name) {
+        Cursor cursor = null;
         try {
-            Cursor cursor = client.query(
-                    fr.free.nrw.commons.category.CategoryContentProvider.BASE_URI,
-                    fr.free.nrw.commons.category.Category.Table.ALL_FIELDS,
-                    fr.free.nrw.commons.category.Category.Table.COLUMN_NAME + "=?",
+            cursor = client.query(
+                    CategoryContentProvider.BASE_URI,
+                    Category.Table.ALL_FIELDS,
+                    Category.Table.COLUMN_NAME + "=?",
                     new String[] {name},
                     null);
             if (cursor.moveToFirst()) {
-                fr.free.nrw.commons.category.Category cat = fr.free.nrw.commons.category.Category.fromCursor(cursor);
+                Category cat = Category.fromCursor(cursor);
                 return cat;
             }
         } catch (RemoteException e) {
             // This feels lazy, but to hell with checked exceptions. :)
             throw new RuntimeException(e);
+        } finally {
+            if ( cursor != null ) {
+                cursor.close();
+            }
         }
 
         // Newly used category...
-        fr.free.nrw.commons.category.Category cat = new fr.free.nrw.commons.category.Category();
+        Category cat = new Category();
         cat.setName(name);
         cat.setLastUsed(new Date());
         cat.setTimesUsed(0);
@@ -284,7 +289,7 @@ public class CategorizationFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            fr.free.nrw.commons.category.Category cat = lookupCategory(name);
+            Category cat = lookupCategory(name);
             cat.incTimesUsed();
 
             cat.setContentProviderClient(client);
@@ -366,7 +371,7 @@ public class CategorizationFragment extends Fragment {
 
         final CountDownLatch latch = new CountDownLatch(1);
 
-        prefixUpdaterSub = new fr.free.nrw.commons.category.PrefixUpdater(this) {
+        prefixUpdaterSub = new PrefixUpdater(this) {
             @Override
             protected ArrayList<String> doInBackground(Void... voids) {
                 ArrayList<String> result = new ArrayList<String>();
@@ -398,7 +403,7 @@ public class CategorizationFragment extends Fragment {
             }
         };
 
-        methodAUpdaterSub = new fr.free.nrw.commons.category.MethodAUpdater(this) {
+        methodAUpdaterSub = new MethodAUpdater(this) {
             @Override
             protected void onPostExecute(ArrayList<String> result) {
                 results.clear();
@@ -439,7 +444,7 @@ public class CategorizationFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         getActivity().setTitle(R.string.categories_activity_title);
-        client = getActivity().getContentResolver().acquireContentProviderClient(fr.free.nrw.commons.category.CategoryContentProvider.AUTHORITY);
+        client = getActivity().getContentResolver().acquireContentProviderClient(CategoryContentProvider.AUTHORITY);
     }
 
     @Override
