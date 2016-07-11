@@ -4,7 +4,7 @@
     android:versionName="1.17" >
 
     <uses-sdk
-        android:minSdkVersion="9"
+        android:minSdkVersion="11"
         android:targetSdkVersion="23" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -146,6 +146,8 @@
                 android:authorities="fr.free.nrw.commons.categories.contentprovider"
                 android:exported="false">
         </provider>
+
+
 
     </application>
 
