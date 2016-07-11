@@ -30,7 +30,7 @@ Note: It is much harder to build manually. We recommend you use Android Studio o
 1. Set the environment variable `ANDROID_HOME` to be the path to your Android SDK
 2. Set the environment variable `JAVA_HOME` to the path to your Java SDK
 3. Run `gradlew.bat assembleDebug` (Windows) or `./gradlew assembleDebug` (Mac / Linux) to build an unisgned apk
-4. Alternatively, you can also connect your Android device via USB and install the app on it directly by running `gradlew.bat installDebug` (Windows) or `./gradlew assembleRelease` (Mac / Linux)
+4. Alternatively, you can also connect your Android device via USB and install the app on it directly by running `gradlew.bat installDebug` (Windows) or `./gradlew installDebug` (Mac / Linux)
 
 There are more thorough instructions on the [Android Developers website][5]
 
