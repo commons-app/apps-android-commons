@@ -54,6 +54,7 @@ public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
         }
 
         //otherwise if user has typed something in that isn't in cache, search API for matching categories
+        //URL: https://commons.wikimedia.org/w/api.php?action=query&list=allcategories&acprefix=filter&aclimit=25
         MWApi api = CommonsApplication.createMWApi();
         ApiResult result;
         ArrayList<String> categories = new ArrayList<String>();
