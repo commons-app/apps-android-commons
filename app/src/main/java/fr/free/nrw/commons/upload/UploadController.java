@@ -145,6 +145,7 @@ public class UploadController {
                     } else {
                         contribution.setDateCreated(new Date());
                     }
+                    cursor.close();
                 }
 
                 return contribution;

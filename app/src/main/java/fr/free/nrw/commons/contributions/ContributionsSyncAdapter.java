@@ -37,10 +37,14 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                     new String[] { filename },
                     ""
             );
+            return cursor.getCount() != 0;
         } catch (RemoteException e) {
             throw new RuntimeException(e);
+        } finally {
+            if ( cursor != null ) {
+                cursor.close();
+            }
         }
-        return cursor != null && cursor.getCount() != 0;
     }
 
     @Override
