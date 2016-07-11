@@ -158,7 +158,6 @@ public  class       ShareActivity
 
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
-        super.onAuthCookieAcquired(authCookie);
         app.getApi().setAuthCookie(authCookie);
 
 
@@ -176,7 +175,6 @@ public  class       ShareActivity
 
     @Override
     protected void onAuthFailure() {
-        super.onAuthFailure();
         Toast failureToast = Toast.makeText(this, R.string.authentication_failed, Toast.LENGTH_LONG);
         failureToast.show();
         finish();

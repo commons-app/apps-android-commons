@@ -188,7 +188,6 @@ public  class       ContributionsActivity
 
     @Override
     protected void onAuthFailure() {
-        super.onAuthFailure();
         finish(); // If authentication failed, we just exit
     }
 
