@@ -1,4 +1,4 @@
-# Upload to Commons #
+# Wikimedia Commons Android app #
 
 Upload pictures from your Android phone/tablet to Wikimedia Commons.
 
