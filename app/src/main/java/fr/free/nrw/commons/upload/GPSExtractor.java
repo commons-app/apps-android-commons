@@ -57,10 +57,14 @@ public class GPSExtractor {
         provider = locationManager.getBestProvider(criteria, true);
         myLocationListener = new MyLocationListener();
 
-        locationManager.requestLocationUpdates(provider, 400, 1, myLocationListener);
-        Location location = locationManager.getLastKnownLocation(provider);
-        if (location != null) {
-            myLocationListener.onLocationChanged(location);
+        try {
+            locationManager.requestLocationUpdates(provider, 400, 1, myLocationListener);
+            Location location = locationManager.getLastKnownLocation(provider);
+            if (location != null) {
+                myLocationListener.onLocationChanged(location);
+            }
+        } catch (IllegalArgumentException e){
+            Log.e(TAG, "Illegal argument exception", e);
         }
     }
 
