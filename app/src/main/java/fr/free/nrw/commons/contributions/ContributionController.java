@@ -82,7 +82,11 @@ public class ContributionController {
                 break;
         }
         Log.i("Image", "Image selected");
-        activity.startActivity(shareIntent);
+        try {
+            activity.startActivity(shareIntent);
+        } catch (SecurityException e) {
+            Log.e("ContributionController", "Security Exception", e);
+        }
     }
 
     public void saveState(Bundle outState) {

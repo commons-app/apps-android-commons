@@ -123,6 +123,8 @@ public class UploadController {
                     Log.e("UploadController", "IO Exception: ", e);
                 } catch(NullPointerException e) {
                     Log.e("UploadController", "Null Pointer Exception: ", e);
+                } catch(SecurityException e) {
+                    Log.e("UploadController", "Security Exception: ", e);
                 }
 
                 String mimeType = (String)contribution.getTag("mimeType");
