@@ -13,6 +13,7 @@ import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.webkit.MimeTypeMap;
 
 import java.io.IOException;
@@ -119,7 +120,9 @@ public class UploadController {
                         contribution.setDataLength(length);
                     }
                 } catch(IOException e) {
-                    throw new RuntimeException(e);
+                    Log.e("UploadController", "IO Exception: ", e);
+                } catch(NullPointerException e) {
+                    Log.e("UploadController", "Null Pointer Exception: ", e);
                 }
 
                 String mimeType = (String)contribution.getTag("mimeType");
