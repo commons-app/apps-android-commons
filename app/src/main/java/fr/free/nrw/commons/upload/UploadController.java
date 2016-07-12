@@ -145,10 +145,10 @@ public class UploadController {
                             dateCreated = new Date();
                         }
                         contribution.setDateCreated(dateCreated);
+                        cursor.close();
                     } else {
                         contribution.setDateCreated(new Date());
                     }
-                    cursor.close();
                 }
 
                 return contribution;
