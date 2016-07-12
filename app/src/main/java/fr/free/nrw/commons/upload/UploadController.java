@@ -89,6 +89,8 @@ public class UploadController {
     }
 
     public void startUpload(final Contribution contribution, final ContributionUploadProgress onComplete) {
+
+        //FIXME: Add permission request here
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
 
         if(TextUtils.isEmpty(contribution.getCreator())) {
