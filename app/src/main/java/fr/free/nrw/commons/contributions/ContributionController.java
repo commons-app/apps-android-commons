@@ -85,7 +85,7 @@ public class ContributionController {
         try {
             activity.startActivity(shareIntent);
         } catch (SecurityException e) {
-            //FIXME: Add permission request here
+            //FIXME: Add permission request here. Only startActivity if permission has been granted.
             Log.e("ContributionController", "Security Exception", e);
         }
     }
