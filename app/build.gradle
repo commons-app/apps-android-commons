@@ -1,5 +1,9 @@
 apply plugin: 'com.android.application'
 
+repositories {
+    maven { url "https://jitpack.io" }
+}
+
 dependencies {
     compile fileTree(include: '*.jar', dir: 'libs')
     compile 'fr.avianey.com.viewpagerindicator:library:2.4.1.1@aar'
@@ -12,6 +16,7 @@ dependencies {
     compile 'com.android.support:support-v4:23.4.0'
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:design:23.4.0'
+    compile 'com.github.kaknazaveshtakipishi:PermissionEverywhere:alpha'
 
     //noinspection GradleDependency - old version has required feature
     compile 'com.google.code.gson:gson:1.4'
@@ -25,7 +30,7 @@ android {
 
     defaultConfig {
         applicationId "fr.free.nrw.commons"
-        minSdkVersion 11
+        minSdkVersion 15
         targetSdkVersion 23
 
         ndk {
