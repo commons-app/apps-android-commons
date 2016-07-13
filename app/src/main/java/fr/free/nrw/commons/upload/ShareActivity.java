@@ -75,7 +75,6 @@ public  class       ShareActivity
 
     private String title;
     private String description;
-
     private Snackbar snackbar;
 
     public ShareActivity() {
@@ -87,12 +86,12 @@ public  class       ShareActivity
         this.title = title;
         this.description = description;
 
+        //Check for Storage permission that is required for upload. Do not allow user to proceed without permission, otherwise will crash
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
         } else {
             uploadBegins();
         }
-
     }
 
     private void showPostUpload() {
@@ -161,7 +160,6 @@ public  class       ShareActivity
     protected void onAuthCookieAcquired(String authCookie) {
         app.getApi().setAuthCookie(authCookie);
 
-
         shareView = (SingleUploadFragment) getSupportFragmentManager().findFragmentByTag("shareView");
         categorizationFragment = (CategorizationFragment) getSupportFragmentManager().findFragmentByTag("categorization");
         if(shareView == null && categorizationFragment == null) {
@@ -180,11 +178,6 @@ public  class       ShareActivity
         failureToast.show();
         finish();
     }
-
-    /**
-     * Initiates retrieval of image coordinates or user coordinates, and caching of coordinates.
-     * Then initiates the calls to MediaWiki API through an instance of MwVolleyApi.
-     */
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -305,6 +298,7 @@ public  class       ShareActivity
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
+                    //Uploading only begins if storage permission granted
                     uploadBegins();
                     snackbar.dismiss();
                     getFileMetadata();
@@ -355,6 +349,10 @@ public  class       ShareActivity
         useImageCoords();
     }
 
+    /**
+     * Initiates retrieval of image coordinates or user coordinates, and caching of coordinates.
+     * Then initiates the calls to MediaWiki API through an instance of MwVolleyApi.
+     */
     public void useImageCoords() {
         if(decimalCoords != null) {
             Log.d(TAG, "Decimal coords of image: " + decimalCoords);
@@ -411,5 +409,4 @@ public  class       ShareActivity
         }
         return super.onOptionsItemSelected(item);
     }
-
 }
