@@ -73,7 +73,10 @@ public  class       ShareActivity
     private boolean storagePermission = false;
     private boolean locationPermission = false;
 
+    private String title;
+    private String description;
 
+    private Snackbar snackbar;
 
     public ShareActivity() {
         super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
@@ -81,31 +84,15 @@ public  class       ShareActivity
 
     public void uploadActionInitiated(String title, String description) {
 
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.READ_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
+        this.title = title;
+        this.description = description;
 
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                    1);
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+        } else {
+            uploadBegins();
         }
 
-        Toast startingToast = Toast.makeText(getApplicationContext(), R.string.uploading_started, Toast.LENGTH_LONG);
-        startingToast.show();
-
-        if (cacheFound == false) {
-            //Has to be called after apiCall.request()
-            app.cacheData.cacheCategory();
-            Log.d(TAG, "Cache the categories found");
-        }
-
-
-        uploadController.startUpload(title, mediaUri, description, mimeType, source, new UploadController.ContributionUploadProgress() {
-            public void onUploadStarted(Contribution contribution) {
-                ShareActivity.this.contribution = contribution;
-                showPostUpload();
-            }
-        });
     }
 
     private void showPostUpload() {
@@ -248,7 +235,7 @@ public  class       ShareActivity
         if (useNewPermissions && (!storagePermission || !locationPermission)) {
             if (!storagePermission && !locationPermission) {
                 String permissionRationales = getResources().getString(R.string.storage_permission_rationale) + "\n" + getResources().getString(R.string.location_permission_rationale);
-                Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), permissionRationales,
+                snackbar = Snackbar.make(findViewById(android.R.id.content), permissionRationales,
                         Snackbar.LENGTH_INDEFINITE)
                         .setAction(R.string.ok, new View.OnClickListener() {
                             @Override
@@ -290,6 +277,25 @@ public  class       ShareActivity
         }
     }
 
+    private void uploadBegins() {
+
+        Toast startingToast = Toast.makeText(getApplicationContext(), R.string.uploading_started, Toast.LENGTH_LONG);
+        startingToast.show();
+
+        if (cacheFound == false) {
+            //Has to be called after apiCall.request()
+            app.cacheData.cacheCategory();
+            Log.d(TAG, "Cache the categories found");
+        }
+
+        uploadController.startUpload(title, mediaUri, description, mimeType, source, new UploadController.ContributionUploadProgress() {
+            public void onUploadStarted(Contribution contribution) {
+                ShareActivity.this.contribution = contribution;
+                showPostUpload();
+            }
+        });
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
@@ -298,6 +304,9 @@ public  class       ShareActivity
             case 1: {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    uploadBegins();
+                    snackbar.dismiss();
                     getFileMetadata();
                 }
                 return;
