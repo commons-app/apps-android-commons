@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -15,6 +16,11 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
+import android.widget.Toast;
+
+import com.permissioneverywhere.PermissionEverywhere;
+import com.permissioneverywhere.PermissionResponse;
+import com.permissioneverywhere.PermissionResultCallback;
 
 import java.io.IOException;
 import java.util.Date;
@@ -22,6 +28,7 @@ import java.util.Date;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.Prefs;
+import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.contributions.Contribution;
 
@@ -104,6 +111,17 @@ public class UploadController {
         String license = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA);
         contribution.setLicense(license);
 
+        PermissionEverywhere.getPermission(app,
+                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                2,
+                "Notification title",
+                "This app needs a write permission",
+                R.drawable.ic_launcher)
+                .enqueue(new PermissionResultCallback() {
+                    @Override
+                    public void onComplete(PermissionResponse permissionResponse) {
+
+
         //FIXME: Add permission request here. Only executeAsyncTask if permission has been granted
         Utils.executeAsyncTask(new AsyncTask<Void, Void, Contribution>() {
 
@@ -166,6 +184,9 @@ public class UploadController {
                 onComplete.onUploadStarted(contribution);
             }
         });
+                    }
+                });
     }
+
 
 }
