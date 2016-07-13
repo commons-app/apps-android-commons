@@ -12,6 +12,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -72,11 +73,23 @@ public  class       ShareActivity
     private boolean storagePermission = false;
     private boolean locationPermission = false;
 
+
+
     public ShareActivity() {
         super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
     }
 
     public void uploadActionInitiated(String title, String description) {
+
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    1);
+        }
+
         Toast startingToast = Toast.makeText(getApplicationContext(), R.string.uploading_started, Toast.LENGTH_LONG);
         startingToast.show();
 
@@ -85,6 +98,7 @@ public  class       ShareActivity
             app.cacheData.cacheCategory();
             Log.d(TAG, "Cache the categories found");
         }
+
 
         uploadController.startUpload(title, mediaUri, description, mimeType, source, new UploadController.ContributionUploadProgress() {
             public void onUploadStarted(Contribution contribution) {
