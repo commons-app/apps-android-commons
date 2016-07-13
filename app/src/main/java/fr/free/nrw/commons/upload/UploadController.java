@@ -18,10 +18,6 @@ import android.util.Log;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
-import com.permissioneverywhere.PermissionEverywhere;
-import com.permissioneverywhere.PermissionResponse;
-import com.permissioneverywhere.PermissionResultCallback;
-
 import java.io.IOException;
 import java.util.Date;
 
@@ -111,16 +107,6 @@ public class UploadController {
         String license = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA);
         contribution.setLicense(license);
 
-        PermissionEverywhere.getPermission(app,
-                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                2,
-                "Notification title",
-                "This app needs a write permission",
-                R.drawable.ic_launcher)
-                .enqueue(new PermissionResultCallback() {
-                    @Override
-                    public void onComplete(PermissionResponse permissionResponse) {
-
 
         //FIXME: Add permission request here. Only executeAsyncTask if permission has been granted
         Utils.executeAsyncTask(new AsyncTask<Void, Void, Contribution>() {
@@ -184,9 +170,5 @@ public class UploadController {
                 onComplete.onUploadStarted(contribution);
             }
         });
-                    }
-                });
     }
-
-
 }
