@@ -82,7 +82,12 @@ public class ContributionController {
                 break;
         }
         Log.i("Image", "Image selected");
-        activity.startActivity(shareIntent);
+        try {
+            activity.startActivity(shareIntent);
+        } catch (SecurityException e) {
+            //FIXME: Add permission request here. Only startActivity if permission has been granted.
+            Log.e("ContributionController", "Security Exception", e);
+        }
     }
 
     public void saveState(Bundle outState) {

@@ -12,6 +12,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -72,26 +73,25 @@ public  class       ShareActivity
     private boolean storagePermission = false;
     private boolean locationPermission = false;
 
+    private String title;
+    private String description;
+    private Snackbar snackbar;
+
     public ShareActivity() {
         super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
     }
 
     public void uploadActionInitiated(String title, String description) {
-        Toast startingToast = Toast.makeText(getApplicationContext(), R.string.uploading_started, Toast.LENGTH_LONG);
-        startingToast.show();
 
-        if (cacheFound == false) {
-            //Has to be called after apiCall.request()
-            app.cacheData.cacheCategory();
-            Log.d(TAG, "Cache the categories found");
+        this.title = title;
+        this.description = description;
+
+        //Check for Storage permission that is required for upload. Do not allow user to proceed without permission, otherwise will crash
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+        } else {
+            uploadBegins();
         }
-
-        uploadController.startUpload(title, mediaUri, description, mimeType, source, new UploadController.ContributionUploadProgress() {
-            public void onUploadStarted(Contribution contribution) {
-                ShareActivity.this.contribution = contribution;
-                showPostUpload();
-            }
-        });
     }
 
     private void showPostUpload() {
@@ -160,7 +160,6 @@ public  class       ShareActivity
     protected void onAuthCookieAcquired(String authCookie) {
         app.getApi().setAuthCookie(authCookie);
 
-
         shareView = (SingleUploadFragment) getSupportFragmentManager().findFragmentByTag("shareView");
         categorizationFragment = (CategorizationFragment) getSupportFragmentManager().findFragmentByTag("categorization");
         if(shareView == null && categorizationFragment == null) {
@@ -179,11 +178,6 @@ public  class       ShareActivity
         failureToast.show();
         finish();
     }
-
-    /**
-     * Initiates retrieval of image coordinates or user coordinates, and caching of coordinates.
-     * Then initiates the calls to MediaWiki API through an instance of MwVolleyApi.
-     */
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -234,7 +228,7 @@ public  class       ShareActivity
         if (useNewPermissions && (!storagePermission || !locationPermission)) {
             if (!storagePermission && !locationPermission) {
                 String permissionRationales = getResources().getString(R.string.storage_permission_rationale) + "\n" + getResources().getString(R.string.location_permission_rationale);
-                Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), permissionRationales,
+                snackbar = Snackbar.make(findViewById(android.R.id.content), permissionRationales,
                         Snackbar.LENGTH_INDEFINITE)
                         .setAction(R.string.ok, new View.OnClickListener() {
                             @Override
@@ -276,6 +270,25 @@ public  class       ShareActivity
         }
     }
 
+    private void uploadBegins() {
+
+        Toast startingToast = Toast.makeText(getApplicationContext(), R.string.uploading_started, Toast.LENGTH_LONG);
+        startingToast.show();
+
+        if (cacheFound == false) {
+            //Has to be called after apiCall.request()
+            app.cacheData.cacheCategory();
+            Log.d(TAG, "Cache the categories found");
+        }
+
+        uploadController.startUpload(title, mediaUri, description, mimeType, source, new UploadController.ContributionUploadProgress() {
+            public void onUploadStarted(Contribution contribution) {
+                ShareActivity.this.contribution = contribution;
+                showPostUpload();
+            }
+        });
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
@@ -284,6 +297,10 @@ public  class       ShareActivity
             case 1: {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    //Uploading only begins if storage permission granted
+                    uploadBegins();
+                    snackbar.dismiss();
                     getFileMetadata();
                 }
                 return;
@@ -332,6 +349,10 @@ public  class       ShareActivity
         useImageCoords();
     }
 
+    /**
+     * Initiates retrieval of image coordinates or user coordinates, and caching of coordinates.
+     * Then initiates the calls to MediaWiki API through an instance of MwVolleyApi.
+     */
     public void useImageCoords() {
         if(decimalCoords != null) {
             Log.d(TAG, "Decimal coords of image: " + decimalCoords);
@@ -388,5 +409,4 @@ public  class       ShareActivity
         }
         return super.onOptionsItemSelected(item);
     }
-
 }
