@@ -81,17 +81,43 @@ public  class       ShareActivity
         super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
     }
 
+    /**
+     * Called when user taps the submit button
+     */
     public void uploadActionInitiated(String title, String description) {
 
         this.title = title;
         this.description = description;
 
-        //Check for Storage permission that is required for upload. Do not allow user to proceed without permission, otherwise will crash
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            //Check for Storage permission that is required for upload. Do not allow user to proceed without permission, otherwise will crash
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 4);
+            } else {
+                uploadBegins();
+            }
         } else {
             uploadBegins();
         }
+    }
+
+    private void uploadBegins() {
+
+        Toast startingToast = Toast.makeText(getApplicationContext(), R.string.uploading_started, Toast.LENGTH_LONG);
+        startingToast.show();
+
+        if (cacheFound == false) {
+            //Has to be called after apiCall.request()
+            app.cacheData.cacheCategory();
+            Log.d(TAG, "Cache the categories found");
+        }
+
+        uploadController.startUpload(title, mediaUri, description, mimeType, source, new UploadController.ContributionUploadProgress() {
+            public void onUploadStarted(Contribution contribution) {
+                ShareActivity.this.contribution = contribution;
+                showPostUpload();
+            }
+        });
     }
 
     private void showPostUpload() {
@@ -270,37 +296,14 @@ public  class       ShareActivity
         }
     }
 
-    private void uploadBegins() {
-
-        Toast startingToast = Toast.makeText(getApplicationContext(), R.string.uploading_started, Toast.LENGTH_LONG);
-        startingToast.show();
-
-        if (cacheFound == false) {
-            //Has to be called after apiCall.request()
-            app.cacheData.cacheCategory();
-            Log.d(TAG, "Cache the categories found");
-        }
-
-        uploadController.startUpload(title, mediaUri, description, mimeType, source, new UploadController.ContributionUploadProgress() {
-            public void onUploadStarted(Contribution contribution) {
-                ShareActivity.this.contribution = contribution;
-                showPostUpload();
-            }
-        });
-    }
-
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
         switch (requestCode) {
-            // 1 = Storage
+            // 1 = Storage (from snackbar)
             case 1: {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                    //Uploading only begins if storage permission granted
-                    uploadBegins();
-                    snackbar.dismiss();
                     getFileMetadata();
                 }
                 return;
@@ -323,6 +326,22 @@ public  class       ShareActivity
                         && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                     getLocationData();
                 }
+                return;
+            }
+            // 4 = Storage (from submit button) - this needs to be separate from (1) because only the
+            // submit button should bring user to next screen
+            case 4: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    //It is OK to call this at both (1) and (4) because if perm had been granted at
+                    //snackbar, user should not be prompted at submit button
+                    getFileMetadata();
+
+                    //Uploading only begins if storage permission granted from arrow icon
+                    uploadBegins();
+                    snackbar.dismiss();
+                }
+                return;
             }
         }
     }
