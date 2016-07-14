@@ -1,11 +1,15 @@
 package fr.free.nrw.commons.contributions;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -96,7 +100,11 @@ public class ContributionsListFragment extends Fragment {
             case R.id.menu_from_gallery:
                 //FIXME: Add permission request here. Only startActivity if permission has been granted
                 //Gallery crashes before reach ShareActivity screen so must implement check here
-                controller.startGalleryPick();
+                if (ContextCompat.checkSelfPermission(this.getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(this.getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+                } else {
+                    controller.startGalleryPick();
+                }
                 return true;
             case R.id.menu_from_camera:
                 controller.startCameraCapture();
@@ -128,6 +136,21 @@ public class ContributionsListFragment extends Fragment {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            // 1 = Storage allowed when gallery selected
+            case 1: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    controller.startGalleryPick();
+                }
+                return;
+            }
         }
     }
 
