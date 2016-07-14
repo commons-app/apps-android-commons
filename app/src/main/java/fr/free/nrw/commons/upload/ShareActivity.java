@@ -101,6 +101,25 @@ public  class       ShareActivity
         }
     }
 
+    private void uploadBegins() {
+
+        Toast startingToast = Toast.makeText(getApplicationContext(), R.string.uploading_started, Toast.LENGTH_LONG);
+        startingToast.show();
+
+        if (cacheFound == false) {
+            //Has to be called after apiCall.request()
+            app.cacheData.cacheCategory();
+            Log.d(TAG, "Cache the categories found");
+        }
+
+        uploadController.startUpload(title, mediaUri, description, mimeType, source, new UploadController.ContributionUploadProgress() {
+            public void onUploadStarted(Contribution contribution) {
+                ShareActivity.this.contribution = contribution;
+                showPostUpload();
+            }
+        });
+    }
+
     private void showPostUpload() {
         if(categorizationFragment == null) {
             categorizationFragment = new CategorizationFragment();
@@ -275,25 +294,6 @@ public  class       ShareActivity
             getFileMetadata();
             getLocationData();
         }
-    }
-
-    private void uploadBegins() {
-
-        Toast startingToast = Toast.makeText(getApplicationContext(), R.string.uploading_started, Toast.LENGTH_LONG);
-        startingToast.show();
-
-        if (cacheFound == false) {
-            //Has to be called after apiCall.request()
-            app.cacheData.cacheCategory();
-            Log.d(TAG, "Cache the categories found");
-        }
-
-        uploadController.startUpload(title, mediaUri, description, mimeType, source, new UploadController.ContributionUploadProgress() {
-            public void onUploadStarted(Contribution contribution) {
-                ShareActivity.this.contribution = contribution;
-                showPostUpload();
-            }
-        });
     }
 
     @Override
