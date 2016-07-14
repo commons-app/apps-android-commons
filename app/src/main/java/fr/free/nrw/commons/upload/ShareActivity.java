@@ -326,6 +326,7 @@ public  class       ShareActivity
                         && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                     getLocationData();
                 }
+                return;
             }
             // 4 = Storage (from submit button) - this needs to be separate from (1) because only the
             // submit button should bring user to next screen
@@ -340,6 +341,7 @@ public  class       ShareActivity
                     uploadBegins();
                     snackbar.dismiss();
                 }
+                return;
             }
         }
     }
