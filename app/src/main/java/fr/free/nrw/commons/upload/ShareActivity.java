@@ -83,17 +83,19 @@ public  class       ShareActivity
 
     /**
      * Called when user taps the submit button
-     * @param title
-     * @param description
      */
     public void uploadActionInitiated(String title, String description) {
 
         this.title = title;
         this.description = description;
 
-        //Check for Storage permission that is required for upload. Do not allow user to proceed without permission, otherwise will crash
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 4);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            //Check for Storage permission that is required for upload. Do not allow user to proceed without permission, otherwise will crash
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 4);
+            } else {
+                uploadBegins();
+            }
         } else {
             uploadBegins();
         }
