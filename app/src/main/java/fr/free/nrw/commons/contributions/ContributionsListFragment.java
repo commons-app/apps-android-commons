@@ -102,10 +102,11 @@ public class ContributionsListFragment extends Fragment {
                 //Gallery crashes before reach ShareActivity screen so must implement check here
                 if (ContextCompat.checkSelfPermission(this.getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(this.getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+                    return true;
                 } else {
                     controller.startGalleryPick();
-                }
                     return true;
+                }
             case R.id.menu_from_camera:
                 controller.startCameraCapture();
                 return true;
