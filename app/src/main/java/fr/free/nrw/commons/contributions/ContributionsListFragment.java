@@ -105,7 +105,7 @@ public class ContributionsListFragment extends Fragment {
                 } else {
                     controller.startGalleryPick();
                 }
-                return true;
+                    return true;
             case R.id.menu_from_camera:
                 controller.startCameraCapture();
                 return true;
@@ -148,6 +148,8 @@ public class ContributionsListFragment extends Fragment {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     controller.startGalleryPick();
+                } else {
+                    return;
                 }
                 return;
             }
