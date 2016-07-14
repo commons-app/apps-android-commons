@@ -94,6 +94,8 @@ public class ContributionsListFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case R.id.menu_from_gallery:
+                //FIXME: Add permission request here. Only startActivity if permission has been granted
+                //Gallery crashes before reach ShareActivity screen so must implement check here
                 controller.startGalleryPick();
                 return true;
             case R.id.menu_from_camera:
