@@ -1,5 +1,9 @@
 # Wikimedia Commons for Android
 
+## v1.18
+- Fixed various crashes
+- Fixed camera and gallery for API 23
+
 ## v1.17
 - Fixed various crashes
 - Fixed 'Desc/license/categories empty' bug
