@@ -63,13 +63,19 @@ public class GPSExtractor {
             if (location != null) {
                 myLocationListener.onLocationChanged(location);
             }
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             Log.e(TAG, "Illegal argument exception", e);
+        } catch (SecurityException e) {
+            Log.e(TAG, "Security exception", e);
         }
     }
 
     protected void unregisterLocationManager() {
-        locationManager.removeUpdates(myLocationListener);
+        try {
+            locationManager.removeUpdates(myLocationListener);
+        } catch (SecurityException e) {
+            Log.e(TAG, "Security exception", e);
+        }
     }
 
     /**
