@@ -84,6 +84,7 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
         View view = inflater.inflate(R.layout.fragment_media_detail_pager, container, false);
         pager = (ViewPager) view.findViewById(R.id.mediaDetailsPager);
         pager.setOnPageChangeListener(this);
+
         final MediaDetailAdapter adapter = new MediaDetailAdapter(getChildFragmentManager());
 
         if(savedInstanceState != null) {
@@ -95,6 +96,7 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
                     pager.setAdapter(adapter);
                     pager.setCurrentItem(pageNumber, false);
                     getActivity().supportInvalidateOptionsMenu();
+                    adapter.notifyDataSetChanged();
                 }
             }, 100);
         } else {
