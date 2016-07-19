@@ -36,6 +36,7 @@ class ContributionsListAdapter extends CursorAdapter {
         return parent;
     }
 
+    //FIXME: Potential cause of wrong image display bug
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         final ContributionViewHolder views = (ContributionViewHolder)view.getTag();
