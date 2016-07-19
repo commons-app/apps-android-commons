@@ -61,6 +61,7 @@ public class ContributionController {
     }
 
     public void startGalleryPick() {
+        //FIXME: Starts gallery (opens Google Photos)
         Intent pickImageIntent = new Intent(Intent.ACTION_GET_CONTENT);
         pickImageIntent.setType("image/*");
         fragment.startActivityForResult(pickImageIntent, SELECT_FROM_GALLERY);
@@ -71,6 +72,7 @@ public class ContributionController {
         shareIntent.setAction(Intent.ACTION_SEND);
         switch(requestCode) {
             case SELECT_FROM_GALLERY:
+                //FIXME: Handles image picked from gallery (from Google Photos)
                 shareIntent.setType(activity.getContentResolver().getType(data.getData()));
                 shareIntent.putExtra(Intent.EXTRA_STREAM, data.getData());
                 shareIntent.putExtra(UploadService.EXTRA_SOURCE, fr.free.nrw.commons.contributions.Contribution.SOURCE_GALLERY);
