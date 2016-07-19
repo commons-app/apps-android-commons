@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -29,6 +30,7 @@ import fr.free.nrw.commons.AboutActivity;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.SettingsActivity;
+import fr.free.nrw.commons.upload.UploadService;
 
 public class ContributionsListFragment extends Fragment {
 
@@ -90,9 +92,8 @@ public class ContributionsListFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         //FIXME: must get the file data for Google Photos when receive the intent answer, in the onActivityResult method
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == Activity.RESULT_OK) {
-            controller.handleImagePicked(requestCode, data);
-        }
+        Uri imageData = data.getData();
+        controller.handleImagePicked(requestCode, imageData);
     }
 
 

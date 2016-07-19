@@ -67,13 +67,13 @@ public class ContributionController {
         fragment.startActivityForResult(pickImageIntent, SELECT_FROM_GALLERY);
     }
 
-    public void handleImagePicked(int requestCode, Intent data) {
+    public void handleImagePicked(int requestCode, Uri imageData) {
         Intent shareIntent = new Intent(activity, ShareActivity.class);
         shareIntent.setAction(Intent.ACTION_SEND);
         switch(requestCode) {
             case SELECT_FROM_GALLERY:
                 //FIXME: Handles image picked from gallery (from Google Photos)
-                shareIntent.setType(activity.getContentResolver().getType(data.getData()));
+                shareIntent.setType(activity.getContentResolver().getType(data));
                 shareIntent.putExtra(Intent.EXTRA_STREAM, data.getData());
                 shareIntent.putExtra(UploadService.EXTRA_SOURCE, fr.free.nrw.commons.contributions.Contribution.SOURCE_GALLERY);
                 break;
