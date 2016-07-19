@@ -1,5 +1,9 @@
 # Wikimedia Commons for Android
 
+##v1.19
+- Fixed adapter crash
+- Attempt at fixing Google Photos crash
+
 ## v1.18
 - Fixed various crashes
 - Fixed camera and gallery for API 23
