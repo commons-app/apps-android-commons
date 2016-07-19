@@ -73,8 +73,8 @@ public class ContributionController {
         switch(requestCode) {
             case SELECT_FROM_GALLERY:
                 //FIXME: Handles image picked from gallery (from Google Photos)
-                shareIntent.setType(activity.getContentResolver().getType(data));
-                shareIntent.putExtra(Intent.EXTRA_STREAM, data.getData());
+                shareIntent.setType(activity.getContentResolver().getType(imageData));
+                shareIntent.putExtra(Intent.EXTRA_STREAM, imageData);
                 shareIntent.putExtra(UploadService.EXTRA_SOURCE, fr.free.nrw.commons.contributions.Contribution.SOURCE_GALLERY);
                 break;
             case SELECT_FROM_CAMERA:
