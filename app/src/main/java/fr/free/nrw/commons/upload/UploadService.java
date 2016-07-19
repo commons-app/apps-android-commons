@@ -111,6 +111,7 @@ public class UploadService extends HandlerService<Contribution> {
     protected void handle(int what, Contribution contribution) {
         switch(what) {
             case ACTION_UPLOAD_FILE:
+                //FIXME: Google Photos bug
                 uploadContribution(contribution);
                 break;
             default:
@@ -173,6 +174,7 @@ public class UploadService extends HandlerService<Contribution> {
         String notificationTag = contribution.getLocalUri().toString();
 
         try {
+            //FIXME: Google Photos bug
             file = this.getContentResolver().openInputStream(contribution.getLocalUri());
         } catch(FileNotFoundException e) {
             Log.d("Exception", "File not found");
