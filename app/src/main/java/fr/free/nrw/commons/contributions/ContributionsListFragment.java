@@ -88,6 +88,7 @@ public class ContributionsListFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //FIXME: must get the file data for Google Photos when receive the intent answer, in the onActivityResult method
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == Activity.RESULT_OK) {
             controller.handleImagePicked(requestCode, data);
