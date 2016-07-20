@@ -1,5 +1,8 @@
 # Wikimedia Commons for Android
 
+##v1.20
+- Hotfix for data=null crash
+
 ##v1.19
 - Fixed adapter crash
 - Attempt at fixing Google Photos crash
