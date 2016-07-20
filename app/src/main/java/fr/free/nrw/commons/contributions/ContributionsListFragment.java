@@ -98,7 +98,7 @@ public class ContributionsListFragment extends Fragment {
             Uri imageData = data.getData();
             controller.handleImagePicked(requestCode, imageData);
         } else {
-            Log.d("Contributions", "OnActivityResult() parameters: Result code: " + resultCode + " Data: null");
+            Log.e("Contributions", "OnActivityResult() parameters: Result code: " + resultCode + " Data: null");
         }
     }
 
