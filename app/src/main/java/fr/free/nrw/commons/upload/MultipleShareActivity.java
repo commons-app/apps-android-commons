@@ -2,12 +2,16 @@ package fr.free.nrw.commons.upload;
 
 import java.util.*;
 
+import android.Manifest;
 import android.app.*;
 import android.content.*;
+import android.content.pm.PackageManager;
 import android.database.DataSetObserver;
 import android.net.*;
 import android.os.*;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.*;
 import android.view.inputmethod.InputMethodManager;
@@ -77,6 +81,29 @@ public  class       MultipleShareActivity
     }
 
     public void OnMultipleUploadInitiated() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            //Check for Storage permission that is required for upload. Do not allow user to proceed without permission, otherwise will crash
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+            } else {
+                multipleUploadBegins();
+            }
+        } else {
+            multipleUploadBegins();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        if (requestCode == 1) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                multipleUploadBegins();
+            }
+        }
+    }
+
+    private void multipleUploadBegins() {
         final ProgressDialog dialog = new ProgressDialog(MultipleShareActivity.this);
         dialog.setIndeterminate(false);
         dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
@@ -116,8 +143,6 @@ public  class       MultipleShareActivity
                 .add(R.id.uploadsFragmentContainer, categorizationFragment, "categorization")
                 .commit();
     }
-
-    
 
     public void onCategoriesSave(ArrayList<String> categories) {
         if(categories.size() > 0) {
