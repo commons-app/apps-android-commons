@@ -107,7 +107,7 @@ public  class       MultipleShareActivity
     private void multipleUploadBegins() {
 
         Log.d("MultipleShareActivity", "Multiple upload begins");
-        
+
         final ProgressDialog dialog = new ProgressDialog(MultipleShareActivity.this);
         dialog.setIndeterminate(false);
         dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
@@ -145,7 +145,8 @@ public  class       MultipleShareActivity
         }
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.uploadsFragmentContainer, categorizationFragment, "categorization")
-                .commit();
+                .commitAllowingStateLoss();
+        //See http://stackoverflow.com/questions/7469082/getting-exception-illegalstateexception-can-not-perform-this-action-after-onsa
     }
 
     public void onCategoriesSave(ArrayList<String> categories) {
