@@ -1,5 +1,8 @@
 # Wikimedia Commons for Android
 
+##v1.21
+-Fixed Google Photos multiple share crash
+
 ##v1.20
 - Hotfix for data=null crash
 
