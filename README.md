@@ -1,12 +1,12 @@
-# Upload to Commons [![Build status](https://api.travis-ci.org/nicolas-raoul/apps-android-commons.svg)](https://travis-ci.org/nicolas-raoul/apps-android-commons)
+# Wikimedia Commons Android app
 
 Upload pictures from your Android phone/tablet to Wikimedia Commons.
 
 Initially started by the Wikimedia Foundation, this app is now maintained by volunteers. Anyone is welcome to improve it, just choose among the [open issues](https://github.com/nicolas-raoul/apps-android-commons/issues) and send us a pull request :-)
 
-## Use Android Studio or IntelliJ ##
+[![Build status](https://api.travis-ci.org/nicolas-raoul/apps-android-commons.svg)](https://travis-ci.org/nicolas-raoul/apps-android-commons)
 
-### Import and Compile Commons Android App ##
+## Develop with Android Studio or IntelliJ ##
 
 [Download Android Studio][1] (recommended) or [IntelliJ][2].
 
@@ -17,8 +17,6 @@ Initially started by the Wikimedia Foundation, this app is now maintained by vol
 2. Enter ``https://github.com/nicolas-raoul/apps-android-commons/`` as Git Repository URL. Specify a (new) local directory you would like to clone into and select ``OK``.
 
 ## Build Manually ##
-
-Note: It is much harder to build manually. We recommend you use Android Studio or IntelliJ IDEA, which both have gradle and all the android tools built in.
 
 ### Requirements ###
 
@@ -36,11 +34,7 @@ There are more thorough instructions on the [Android Developers website][5]
 
 ## License ##
 
-This software is licensed under the [Apache License 2.0][6].
-
-## Bugs ##
-
-Please report any bug [on Github][7].
+This software is open source, licensed under the [Apache License 2.0][6].
 
 ## Code Structure ##
 
