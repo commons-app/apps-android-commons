@@ -13,6 +13,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.*;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
@@ -104,6 +105,9 @@ public  class       MultipleShareActivity
     }
 
     private void multipleUploadBegins() {
+
+        Log.d("MultipleShareActivity", "Multiple upload begins");
+        
         final ProgressDialog dialog = new ProgressDialog(MultipleShareActivity.this);
         dialog.setIndeterminate(false);
         dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
