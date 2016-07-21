@@ -1,4 +1,4 @@
-# Wikimedia Commons Android app #
+# Upload to Commons [![Build status](https://api.travis-ci.org/nicolas-raoul/apps-android-commons.svg)](https://travis-ci.org/nicolas-raoul/apps-android-commons)
 
 Upload pictures from your Android phone/tablet to Wikimedia Commons.
 
