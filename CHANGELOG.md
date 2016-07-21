@@ -1,5 +1,19 @@
 # Wikimedia Commons for Android
 
+##v1.21
+- Fixed Google Photos multiple share crash
+
+##v1.20
+- Hotfix for data=null crash
+
+##v1.19
+- Fixed adapter crash
+- Attempt at fixing Google Photos crash
+
+## v1.18
+- Fixed various crashes
+- Fixed camera and gallery for API 23
+
 ## v1.17
 - Fixed various crashes
 - Fixed 'Desc/license/categories empty' bug

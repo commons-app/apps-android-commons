@@ -61,18 +61,20 @@ public class ContributionController {
     }
 
     public void startGalleryPick() {
+        //FIXME: Starts gallery (opens Google Photos)
         Intent pickImageIntent = new Intent(Intent.ACTION_GET_CONTENT);
         pickImageIntent.setType("image/*");
         fragment.startActivityForResult(pickImageIntent, SELECT_FROM_GALLERY);
     }
 
-    public void handleImagePicked(int requestCode, Intent data) {
+    public void handleImagePicked(int requestCode, Uri imageData) {
         Intent shareIntent = new Intent(activity, ShareActivity.class);
         shareIntent.setAction(Intent.ACTION_SEND);
         switch(requestCode) {
             case SELECT_FROM_GALLERY:
-                shareIntent.setType(activity.getContentResolver().getType(data.getData()));
-                shareIntent.putExtra(Intent.EXTRA_STREAM, data.getData());
+                //FIXME: Handles image picked from gallery (from Google Photos)
+                shareIntent.setType(activity.getContentResolver().getType(imageData));
+                shareIntent.putExtra(Intent.EXTRA_STREAM, imageData);
                 shareIntent.putExtra(UploadService.EXTRA_SOURCE, fr.free.nrw.commons.contributions.Contribution.SOURCE_GALLERY);
                 break;
             case SELECT_FROM_CAMERA:
@@ -82,7 +84,11 @@ public class ContributionController {
                 break;
         }
         Log.i("Image", "Image selected");
-        activity.startActivity(shareIntent);
+        try {
+            activity.startActivity(shareIntent);
+        } catch (SecurityException e) {
+            Log.e("ContributionController", "Security Exception", e);
+        }
     }
 
     public void saveState(Bundle outState) {

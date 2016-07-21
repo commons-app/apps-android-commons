@@ -12,6 +12,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -72,11 +73,36 @@ public  class       ShareActivity
     private boolean storagePermission = false;
     private boolean locationPermission = false;
 
+    private String title;
+    private String description;
+    private Snackbar snackbar;
+
     public ShareActivity() {
         super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
     }
 
+    /**
+     * Called when user taps the submit button
+     */
     public void uploadActionInitiated(String title, String description) {
+
+        this.title = title;
+        this.description = description;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            //Check for Storage permission that is required for upload. Do not allow user to proceed without permission, otherwise will crash
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 4);
+            } else {
+                uploadBegins();
+            }
+        } else {
+            uploadBegins();
+        }
+    }
+
+    private void uploadBegins() {
+
         Toast startingToast = Toast.makeText(getApplicationContext(), R.string.uploading_started, Toast.LENGTH_LONG);
         startingToast.show();
 
@@ -160,7 +186,6 @@ public  class       ShareActivity
     protected void onAuthCookieAcquired(String authCookie) {
         app.getApi().setAuthCookie(authCookie);
 
-
         shareView = (SingleUploadFragment) getSupportFragmentManager().findFragmentByTag("shareView");
         categorizationFragment = (CategorizationFragment) getSupportFragmentManager().findFragmentByTag("categorization");
         if(shareView == null && categorizationFragment == null) {
@@ -179,11 +204,6 @@ public  class       ShareActivity
         failureToast.show();
         finish();
     }
-
-    /**
-     * Initiates retrieval of image coordinates or user coordinates, and caching of coordinates.
-     * Then initiates the calls to MediaWiki API through an instance of MwVolleyApi.
-     */
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -234,7 +254,7 @@ public  class       ShareActivity
         if (useNewPermissions && (!storagePermission || !locationPermission)) {
             if (!storagePermission && !locationPermission) {
                 String permissionRationales = getResources().getString(R.string.storage_permission_rationale) + "\n" + getResources().getString(R.string.location_permission_rationale);
-                Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), permissionRationales,
+                snackbar = Snackbar.make(findViewById(android.R.id.content), permissionRationales,
                         Snackbar.LENGTH_INDEFINITE)
                         .setAction(R.string.ok, new View.OnClickListener() {
                             @Override
@@ -280,7 +300,7 @@ public  class       ShareActivity
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
         switch (requestCode) {
-            // 1 = Storage
+            // 1 = Storage (from snackbar)
             case 1: {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -306,6 +326,22 @@ public  class       ShareActivity
                         && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                     getLocationData();
                 }
+                return;
+            }
+            // 4 = Storage (from submit button) - this needs to be separate from (1) because only the
+            // submit button should bring user to next screen
+            case 4: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    //It is OK to call this at both (1) and (4) because if perm had been granted at
+                    //snackbar, user should not be prompted at submit button
+                    getFileMetadata();
+
+                    //Uploading only begins if storage permission granted from arrow icon
+                    uploadBegins();
+                    snackbar.dismiss();
+                }
+                return;
             }
         }
     }
@@ -332,6 +368,10 @@ public  class       ShareActivity
         useImageCoords();
     }
 
+    /**
+     * Initiates retrieval of image coordinates or user coordinates, and caching of coordinates.
+     * Then initiates the calls to MediaWiki API through an instance of MwVolleyApi.
+     */
     public void useImageCoords() {
         if(decimalCoords != null) {
             Log.d(TAG, "Decimal coords of image: " + decimalCoords);
@@ -388,5 +428,4 @@ public  class       ShareActivity
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

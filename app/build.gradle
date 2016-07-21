@@ -13,6 +13,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:design:23.4.0'
 
+
     //noinspection GradleDependency - old version has required feature
     compile 'com.google.code.gson:gson:1.4'
 }

@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -13,7 +14,9 @@ import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.webkit.MimeTypeMap;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.Date;
@@ -21,6 +24,7 @@ import java.util.Date;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.Prefs;
+import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.contributions.Contribution;
 
@@ -88,6 +92,8 @@ public class UploadController {
     }
 
     public void startUpload(final Contribution contribution, final ContributionUploadProgress onComplete) {
+
+
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
 
         if(TextUtils.isEmpty(contribution.getCreator())) {
@@ -101,6 +107,8 @@ public class UploadController {
         String license = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA);
         contribution.setLicense(license);
 
+
+        //FIXME: Add permission request here. Only executeAsyncTask if permission has been granted
         Utils.executeAsyncTask(new AsyncTask<Void, Void, Contribution>() {
 
             // Fills up missing information about Contributions
@@ -119,7 +127,11 @@ public class UploadController {
                         contribution.setDataLength(length);
                     }
                 } catch(IOException e) {
-                    throw new RuntimeException(e);
+                    Log.e("UploadController", "IO Exception: ", e);
+                } catch(NullPointerException e) {
+                    Log.e("UploadController", "Null Pointer Exception: ", e);
+                } catch(SecurityException e) {
+                    Log.e("UploadController", "Security Exception: ", e);
                 }
 
                 String mimeType = (String)contribution.getTag("mimeType");
@@ -142,10 +154,10 @@ public class UploadController {
                             dateCreated = new Date();
                         }
                         contribution.setDateCreated(dateCreated);
+                        cursor.close();
                     } else {
                         contribution.setDateCreated(new Date());
                     }
-                    cursor.close();
                 }
 
                 return contribution;
@@ -159,5 +171,4 @@ public class UploadController {
             }
         });
     }
-
 }

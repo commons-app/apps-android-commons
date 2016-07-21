@@ -16,6 +16,7 @@ public abstract class HandlerService<T> extends Service {
 
         @Override
         public void handleMessage(Message msg) {
+            //FIXME: Google Photos bug
             handle(msg.what, (T)msg.obj);
             stopSelf(msg.arg1);
         }

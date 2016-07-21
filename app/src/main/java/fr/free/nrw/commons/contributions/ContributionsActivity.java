@@ -227,6 +227,7 @@ public  class       ContributionsActivity
 
     }
 
+    //FIXME: Potential cause of wrong image display bug
     public Media getMediaAtPosition(int i) {
         if (contributionsList.getAdapter() == null) {
             // not yet ready to return data
