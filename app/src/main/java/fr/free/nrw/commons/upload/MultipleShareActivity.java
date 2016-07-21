@@ -117,6 +117,8 @@ public  class       MultipleShareActivity
                 .commit();
     }
 
+    
+
     public void onCategoriesSave(ArrayList<String> categories) {
         if(categories.size() > 0) {
         ContentProviderClient client = getContentResolver().acquireContentProviderClient(ModificationsContentProvider.AUTHORITY);
