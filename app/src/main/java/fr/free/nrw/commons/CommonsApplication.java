@@ -36,7 +36,7 @@ import com.android.volley.toolbox.*;
 
 // TODO: Use ProGuard to rip out reporting when publishing
 @ReportsCrashes(
-        mailTo = "commons-app-android@googlegroups.com",
+        mailTo = "commons-app-android-private@googlegroups.com",
         mode = ReportingInteractionMode.DIALOG,
         resDialogText = R.string.crash_dialog_text,
         resDialogTitle = R.string.crash_dialog_title,
