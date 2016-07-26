@@ -42,7 +42,7 @@ public class ContributionsListFragment extends Fragment {
     private TextView waitingMessage;
     private TextView emptyMessage;
 
-    private fr.free.nrw.commons.contributions.ContributionController controller;
+    private ContributionController controller;
     private static final String TAG = "ContributionsList";
 
     @Override
@@ -192,7 +192,7 @@ public class ContributionsListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        controller = new fr.free.nrw.commons.contributions.ContributionController(this);
+        controller = new ContributionController(this);
         setHasOptionsMenu(true);
     }
 
