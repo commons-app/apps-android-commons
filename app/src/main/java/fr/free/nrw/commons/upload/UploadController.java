@@ -135,14 +135,19 @@ public class UploadController {
                 }
 
                 String mimeType = (String)contribution.getTag("mimeType");
+                Boolean imagePrefix = false;
+
                 if(mimeType == null || TextUtils.isEmpty(mimeType) || mimeType.endsWith("*")) {
                     mimeType = activity.getContentResolver().getType(contribution.getLocalUri());
-                    if(mimeType != null) {
-                        contribution.setTag("mimeType", mimeType);
-                    }
                 }
 
-                if(mimeType.startsWith("image/") && contribution.getDateCreated() == null) {
+                if(mimeType != null) {
+                    contribution.setTag("mimeType", mimeType);
+                    imagePrefix = mimeType.startsWith("image/");
+                    Log.d("UploadController", "MimeType is: " + mimeType);
+                }
+
+                if(imagePrefix && contribution.getDateCreated() == null) {
                     Cursor cursor = activity.getContentResolver().query(contribution.getLocalUri(),
                             new String[]{MediaStore.Images.ImageColumns.DATE_TAKEN}, null, null, null);
                     if(cursor != null && cursor.getCount() != 0) {
@@ -159,7 +164,6 @@ public class UploadController {
                         contribution.setDateCreated(new Date());
                     }
                 }
-
                 return contribution;
             }
 
