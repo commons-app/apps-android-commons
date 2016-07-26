@@ -139,10 +139,11 @@ public class UploadController {
 
                 if(mimeType == null || TextUtils.isEmpty(mimeType) || mimeType.endsWith("*")) {
                     mimeType = activity.getContentResolver().getType(contribution.getLocalUri());
-                    if(mimeType != null) {
-                        contribution.setTag("mimeType", mimeType);
-                        imagePrefix = mimeType.startsWith("image/");
-                    }
+                }
+
+                if(mimeType != null) {
+                    contribution.setTag("mimeType", mimeType);
+                    imagePrefix = mimeType.startsWith("image/");
                 }
 
                 if(imagePrefix && contribution.getDateCreated() == null) {
