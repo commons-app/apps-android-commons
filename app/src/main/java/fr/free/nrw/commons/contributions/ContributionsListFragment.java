@@ -42,12 +42,13 @@ public class ContributionsListFragment extends Fragment {
     private TextView waitingMessage;
     private TextView emptyMessage;
 
-    private fr.free.nrw.commons.contributions.ContributionController controller;
+    private ContributionController controller;
     private static final String TAG = "ContributionsList";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_contributions, container, false);
+
 
         contributionsList = (GridView) v.findViewById(R.id.contributionsList);
         waitingMessage = (TextView) v.findViewById(R.id.waitingMessage);
@@ -83,6 +84,9 @@ public class ContributionsListFragment extends Fragment {
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
+        if (outState == null) {
+            outState = new Bundle();
+        }
         super.onSaveInstanceState(outState);
         controller.saveState(outState);
         outState.putInt("grid-position", contributionsList.getFirstVisiblePosition());
@@ -188,6 +192,7 @@ public class ContributionsListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        controller = new ContributionController(this);
         setHasOptionsMenu(true);
     }
 
@@ -199,8 +204,6 @@ public class ContributionsListFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        controller = new fr.free.nrw.commons.contributions.ContributionController(this);
         controller.loadState(savedInstanceState);
     }
 
