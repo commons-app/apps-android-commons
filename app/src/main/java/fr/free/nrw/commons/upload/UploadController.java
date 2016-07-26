@@ -144,6 +144,7 @@ public class UploadController {
                 if(mimeType != null) {
                     contribution.setTag("mimeType", mimeType);
                     imagePrefix = mimeType.startsWith("image/");
+                    Log.d("UploadController", "MimeType is: " + mimeType);
                 }
 
                 if(imagePrefix && contribution.getDateCreated() == null) {
