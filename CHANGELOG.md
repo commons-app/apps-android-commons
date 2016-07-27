@@ -1,5 +1,9 @@
 # Wikimedia Commons for Android
 
+##v1.22
+- Fixed various crashes
+- Crash reports now go to private mailing list to protect user info
+
 ##v1.21
 - Fixed Google Photos multiple share crash
 
