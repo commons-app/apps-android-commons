@@ -14,6 +14,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,6 +27,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -445,6 +447,28 @@ public class CategorizationFragment extends Fragment {
         setHasOptionsMenu(true);
         getActivity().setTitle(R.string.categories_activity_title);
         client = getActivity().getContentResolver().acquireContentProviderClient(CategoryContentProvider.AUTHORITY);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        View rootView = getView();
+        if (rootView != null) {
+            rootView.setFocusableInTouchMode(true);
+            rootView.requestFocus();
+            rootView.setOnKeyListener(new View.OnKeyListener() {
+                @Override
+                public boolean onKey(View v, int keyCode, KeyEvent event) {
+                    if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+                        // handle back button's click listener
+                        Toast.makeText(getActivity(), "Back press", Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                    return false;
+                }
+            });
+        }
     }
 
     @Override
