@@ -484,7 +484,6 @@ public class CategorizationFragment extends Fragment {
         });
         builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                //TODO: Actually go back
                 getActivity().finish();
             }
         });
