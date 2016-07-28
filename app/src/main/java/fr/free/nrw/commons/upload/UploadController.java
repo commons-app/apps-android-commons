@@ -170,7 +170,7 @@ public class UploadController {
             @Override
             protected void onPostExecute(Contribution contribution) {
                 super.onPostExecute(contribution);
-                //uploadService.queue(UploadService.ACTION_UPLOAD_FILE, contribution);
+                uploadService.queue(UploadService.ACTION_UPLOAD_FILE, contribution);
                 onComplete.onUploadStarted(contribution);
             }
         });
