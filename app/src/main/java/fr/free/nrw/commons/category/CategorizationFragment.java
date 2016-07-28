@@ -480,10 +480,12 @@ public class CategorizationFragment extends Fragment {
                 .setTitle("Warning");
         builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
+                //No need to do anything, user remains on categorization screen
             }
         });
         builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
+                //TODO: Actually go back
             }
         });
 
