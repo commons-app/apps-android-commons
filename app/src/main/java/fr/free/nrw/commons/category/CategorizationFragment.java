@@ -465,9 +465,8 @@ public class CategorizationFragment extends Fragment {
                     if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
                         backButtonDialog();
                         return true;
-                    } else {
-                        return false;
                     }
+                    return false;
                 }
             });
         }
