@@ -463,8 +463,6 @@ public class CategorizationFragment extends Fragment {
                 @Override
                 public boolean onKey(View v, int keyCode, KeyEvent event) {
                     if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
-                        // handle back button's click listener
-                        Toast.makeText(getActivity(), "Back press", Toast.LENGTH_SHORT).show();
                         backButtonDialog();
                         return true;
                     } else {
@@ -478,17 +476,14 @@ public class CategorizationFragment extends Fragment {
     private void backButtonDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        builder.setMessage("Are you sure you want to leave? The image will not have any categories saved.")
+        builder.setMessage("Are you sure you want to go back? The image will not have any categories saved.")
                 .setTitle("Warning");
-
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                // User clicked OK button
             }
         });
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                // User cancelled the dialog
             }
         });
 
