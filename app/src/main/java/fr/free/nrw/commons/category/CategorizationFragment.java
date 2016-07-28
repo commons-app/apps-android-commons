@@ -3,6 +3,7 @@ package fr.free.nrw.commons.category;
 import android.app.Activity;
 import android.content.ContentProviderClient;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -463,12 +465,35 @@ public class CategorizationFragment extends Fragment {
                     if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
                         // handle back button's click listener
                         Toast.makeText(getActivity(), "Back press", Toast.LENGTH_SHORT).show();
+                        backButtonDialog();
                         return true;
+                    } else {
+                        return false;
                     }
-                    return false;
                 }
             });
         }
+    }
+
+    private void backButtonDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        builder.setMessage("Are you sure you want to leave? The image will not have any categories saved.")
+                .setTitle("Warning");
+
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User clicked OK button
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User cancelled the dialog
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     @Override
