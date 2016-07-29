@@ -519,6 +519,9 @@ public class CategorizationFragment extends Fragment {
                     }
                 }
 
+                //Need to reassign to a final variable to use in inner class
+                final ArrayList<String> finalCategories = selectedCategories;
+
                 //If no categories selected, display warning to user
                 if (numberSelected == 0) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -527,21 +530,23 @@ public class CategorizationFragment extends Fragment {
                             .setTitle("No Categories Selected");
                     builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            //Exit menuItem
+                            //Exit menuItem so user can select their categories
                             return;
                         }
                     });
                     builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            //Proceed
+                            //Proceed to submission
+                            onCategoriesSaveHandler.onCategoriesSave(finalCategories);
+                            return;
                         }
                     });
 
                     AlertDialog dialog = builder.create();
                     dialog.show();
                 } else {
-
-                    onCategoriesSaveHandler.onCategoriesSave(selectedCategories);
+                    //Proceed to submission
+                    onCategoriesSaveHandler.onCategoriesSave(finalCategories);
                     return true;
                 }
         }
