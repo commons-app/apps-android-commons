@@ -510,16 +510,45 @@ public class CategorizationFragment extends Fragment {
         switch(menuItem.getItemId()) {
             case R.id.menu_save_categories:
                 ArrayList<String> selectedCategories = new ArrayList<String>();
+                int numberSelected = 0;
+
                 for(CategoryItem item: categoriesAdapter.getItems()) {
                     if(item.selected) {
                         selectedCategories.add(item.name);
+                        numberSelected++;
                     }
                 }
-                onCategoriesSaveHandler.onCategoriesSave(selectedCategories);
-                return true;
+
+                //If no categories selected, display warning to user
+                if (numberSelected == 0) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+                    builder.setMessage("Are you sure you want to proceed without selecting categories? Images without categories are rarely usable.")
+                            .setTitle("No Categories Selected");
+                    builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            //Exit menuItem
+                            return;
+                        }
+                    });
+                    builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            //Proceed
+                        }
+                    });
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                } else {
+
+                    onCategoriesSaveHandler.onCategoriesSave(selectedCategories);
+                    return true;
+                }
         }
         return super.onOptionsItemSelected(menuItem);
     }
+
+
 
     @Override
     public void onAttach(Activity activity) {
