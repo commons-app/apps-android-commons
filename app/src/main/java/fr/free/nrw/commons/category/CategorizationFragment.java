@@ -526,15 +526,15 @@ public class CategorizationFragment extends Fragment {
                 if (numberSelected == 0) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-                    builder.setMessage("Are you sure you want to proceed without selecting categories? Images without categories are rarely usable.")
+                    builder.setMessage("Images without categories are rarely usable. Are you sure you want to submit without selecting categories?")
                             .setTitle("No Categories Selected");
-                    builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
+                    builder.setPositiveButton("No, go back", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             //Exit menuItem so user can select their categories
                             return;
                         }
                     });
-                    builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+                    builder.setNegativeButton("Yes, submit", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             //Proceed to submission
                             onCategoriesSaveHandler.onCategoriesSave(finalCategories);
