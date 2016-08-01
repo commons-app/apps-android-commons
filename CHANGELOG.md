@@ -1,5 +1,9 @@
 # Wikimedia Commons for Android
 
+##v1.23
+- Added warning if image is submitted without categories
+- Added check if back button is pressed at category selection screen
+
 ##v1.22
 - Fixed various crashes
 - Crash reports now go to private mailing list to protect user info
