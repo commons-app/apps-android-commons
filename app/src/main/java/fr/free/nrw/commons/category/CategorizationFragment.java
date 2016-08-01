@@ -510,16 +510,50 @@ public class CategorizationFragment extends Fragment {
         switch(menuItem.getItemId()) {
             case R.id.menu_save_categories:
                 ArrayList<String> selectedCategories = new ArrayList<String>();
+                int numberSelected = 0;
+
                 for(CategoryItem item: categoriesAdapter.getItems()) {
                     if(item.selected) {
                         selectedCategories.add(item.name);
+                        numberSelected++;
                     }
                 }
-                onCategoriesSaveHandler.onCategoriesSave(selectedCategories);
-                return true;
+
+                //Need to reassign to a final variable to use in inner class
+                final ArrayList<String> finalCategories = selectedCategories;
+
+                //If no categories selected, display warning to user
+                if (numberSelected == 0) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+                    builder.setMessage("Images without categories are rarely usable. Are you sure you want to submit without selecting categories?")
+                            .setTitle("No Categories Selected");
+                    builder.setPositiveButton("No, go back", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            //Exit menuItem so user can select their categories
+                            return;
+                        }
+                    });
+                    builder.setNegativeButton("Yes, submit", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            //Proceed to submission
+                            onCategoriesSaveHandler.onCategoriesSave(finalCategories);
+                            return;
+                        }
+                    });
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                } else {
+                    //Proceed to submission
+                    onCategoriesSaveHandler.onCategoriesSave(finalCategories);
+                    return true;
+                }
         }
         return super.onOptionsItemSelected(menuItem);
     }
+
+
 
     @Override
     public void onAttach(Activity activity) {
