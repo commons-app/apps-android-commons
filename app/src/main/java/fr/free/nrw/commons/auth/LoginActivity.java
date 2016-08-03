@@ -181,12 +181,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             }
         });
 
-        signupButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse("https://commons.wikimedia.org/wiki/Special:UserLogin/signup")));
-            }
-        });
-
         loginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 that.performLogin();
@@ -227,4 +221,9 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //Called when Sign Up button is clicked
+    public void signUp(View view) {
+        Intent intent = new Intent(this, SignupActivity.class);
+        startActivity(intent);
+    }
 }
