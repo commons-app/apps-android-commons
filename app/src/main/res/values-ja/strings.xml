@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">ウィキメディア・コモンズ</string>
-  <string name="app_name_beta">ウィキメディア・コモンズ ベータ版</string>
+  <string name="app_name">Commons</string>
+  <string name="app_name_beta">Commons ベータ版</string>
   <string name="menu_settings">設定</string>
   <string name="username">利用者名</string>
   <string name="password">パスワード</string>
