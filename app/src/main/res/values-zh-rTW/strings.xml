@@ -68,7 +68,7 @@
   <string name="title_activity_settings">設定</string>
   <string name="menu_about">關於</string>
   <string name="about_license">以&lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;Apache許可證 v2&lt;/a&gt;釋放的開放源碼軟體</string>
-  <string name="about_improve">原始碼位於&lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;。報告錯誤於&lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;。</string>
+  <string name="about_improve">原始碼位於&lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;。報告錯誤於&lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;。</string>
   <string name="about_privacy_policy">&lt;a href=\"http://wikimediafoundation.org/wiki/Privacy_policy\"&gt;私隱政策&lt;/a&gt;</string>
   <string name="title_activity_about">關於</string>
   <string name="menu_feedback">傳送回饋 （通過電子郵件）</string>

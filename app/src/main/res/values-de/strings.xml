@@ -68,7 +68,7 @@ Tippe auf diese Nachricht oder drücke „Zurück“, um diesen Schritt zu über
   <string name="title_activity_settings">Einstellungen</string>
   <string name="menu_about">Über</string>
   <string name="about_license">Open-Source-Software veröffentlicht unter der &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
-  <string name="about_improve">Quellcode auf &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Fehler unter &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
+  <string name="about_improve">Quellcode auf &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Fehler unter &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"//de.wikipedia.org/wiki/Wikipedia:Datenschutz\"&gt;Datenschutzrichtlinie&lt;/a&gt;</string>
   <string name="title_activity_about">Über</string>
   <string name="menu_feedback">Rückmeldung per E-Mail senden</string>

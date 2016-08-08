@@ -62,7 +62,7 @@ Ketik mesej ini (atau tekan butang undur) untuk melangkau langkah ini.</string>
   <string name="title_activity_settings">Tetapan</string>
   <string name="menu_about">Perihal</string>
   <string name="about_license">Perisian Sumber Terbuka yang dikeluarkan dengan &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Lesen Apache v2&lt;/a&gt;</string>
-  <string name="about_improve">Sumber di &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Pepijat di &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
+  <string name="about_improve">Sumber di &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Pepijat di &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">Wikimedia:Commons-android-strings-about privacy policy/ms</string>
   <string name="title_activity_about">Perihal</string>
   <string name="menu_feedback">Hantar Maklum Balas (secara e-mel)</string>
