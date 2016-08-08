@@ -68,7 +68,7 @@ Tocca questo messaggio (o premi Indietro) per saltare l\'aggiunta di categorie.<
   <string name="title_activity_settings">Impostazioni</string>
   <string name="menu_about">Informazioni</string>
   <string name="about_license">Software open source rilasciato con &lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;licenza Apache v2&lt;/a&gt;</string>
-  <string name="about_improve">Codice sorgente su &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;. Errori su &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
+  <string name="about_improve">Codice sorgente su &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;. Errori su &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politica sulla privacy&lt;/a&gt;</string>
   <string name="title_activity_about">Informazioni</string>
   <string name="menu_feedback">Invia un commento (tramite email)</string>

@@ -74,7 +74,7 @@
   <string name="title_activity_settings">Налаштування</string>
   <string name="menu_about">Про програму</string>
   <string name="about_license">Програмне забезпечення з відкритим кодом випущено під &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;ліцензією Apache в.2&lt;/a&gt;</string>
-  <string name="about_improve">Код на &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Помилки на a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
+  <string name="about_improve">Код на &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Помилки на a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">Wikimedia:Commons-android-strings-about privacy policy/uk</string>
   <string name="title_activity_about">Про програму</string>
   <string name="menu_feedback">Надіслати відгук по електронній пошті</string>

@@ -51,7 +51,7 @@
   <string name="title_activity_settings">Nastavení</string>
   <string name="menu_about">O aplikaci</string>
   <string name="about_license">Open-source software dostupný za podmínek &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
-  <string name="about_improve">Zdrojový text na &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHubu&lt;/a&gt;. Hlášení chyb v &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzille&lt;/a&gt;.</string>
+  <string name="about_improve">Zdrojový text na &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHubu&lt;/a&gt;. Hlášení chyb v &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Bugzille&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Ochrana_osobních_údajů\"&gt;Ochrana osobních údajů&lt;/a&gt;</string>
   <string name="title_activity_about">O aplikaci</string>
   <string name="menu_feedback">Poslat názory (e-mailem)</string>

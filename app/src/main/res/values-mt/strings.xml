@@ -49,7 +49,7 @@ Agħfas fuq dan il-messaġġ (jew mur lura) sabiex taqbeż dan il-pass.</string>
   <string name="title_activity_settings">Issettjar</string>
   <string name="menu_about">Dwar</string>
   <string name="about_license">Softwer ta\' sors miftuħ rilaxxat taħt il-&lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Liċenzja Apache v2&lt;/a&gt;</string>
-  <string name="about_improve">Sors fuq &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Żbalji fuq &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
+  <string name="about_improve">Sors fuq &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Żbalji fuq &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politika tal-privatezza&lt;/a&gt;</string>
   <string name="title_activity_about">Dwar</string>
   <string name="provider_categories">Kategoriji wżati riċentament</string>
