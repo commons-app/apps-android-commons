@@ -61,7 +61,7 @@
   <string name="preference_tracking">Rapòrts d’utilizacion</string>
   <string name="title_activity_settings">Paramètres</string>
   <string name="menu_about">A prepaus</string>
-  <string name="about_improve">Font sus &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Bugs sus &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
+  <string name="about_improve">Font sus &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Bugs sus &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politica de confidencialitat&lt;/a&gt;</string>
   <string name="title_activity_about">A prepaus</string>
   <string name="menu_feedback">Mandar vòstres comentaris (per corrièl)</string>

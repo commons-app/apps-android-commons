@@ -68,7 +68,7 @@ Toca este mensaje (o pulsa Anterior) para omitir este paso.</string>
   <string name="title_activity_settings">Ajustes</string>
   <string name="menu_about">Acerca de</string>
   <string name="about_license">Software libre publicado bajo la &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;licencia Apache v2&lt;/a&gt;</string>
-  <string name="about_improve">Fuente en &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Errores en &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?producto=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
+  <string name="about_improve">Fuente en &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Errores en &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Política de privacidad&lt;/a&gt;</string>
   <string name="title_activity_about">Acerca de</string>
   <string name="menu_feedback">Enviar comentarios (por e-mail)</string>

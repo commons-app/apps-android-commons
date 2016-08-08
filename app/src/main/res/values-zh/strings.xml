@@ -54,7 +54,7 @@
   <string name="title_activity_settings">设置</string>
   <string name="menu_about">关于</string>
   <string name="about_license">采用&lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;授权的开源软件</string>
-  <string name="about_improve">源代码位于&lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;。漏洞（bug）报告位于&lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;。</string>
+  <string name="about_improve">源代码位于&lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;。漏洞（bug）报告位于&lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;。</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;隐私权政策&lt;/a&gt;</string>
   <string name="title_activity_about">关于</string>
   <string name="menu_feedback">发送反馈（通过电子邮件）</string>
