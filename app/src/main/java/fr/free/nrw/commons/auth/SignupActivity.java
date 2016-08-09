@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
+import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -33,16 +34,17 @@ public class SignupActivity extends Activity {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             if (Uri.parse(url).getHost().equals("https://commons.m.wikimedia.org/w/index.php?title=Main_Page&welcome=yes")) {
-                // This is my web site, so do not override; let my WebView load the page
+                // Signup success, so load LoginActivity again
                 Log.d("SignupActivity", "Overriding URL");
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
                 return true;
             } else {
-                Log.d("SignupActivity", "Not overriding URL");
+                Log.d("SignupActivity", "Not overriding URL, URL is: " + Uri.parse(url).getHost());
                 return false;
             }
 
         }
+
     }
 }
