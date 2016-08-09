@@ -1,9 +1,12 @@
 package fr.free.nrw.commons.auth;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import fr.free.nrw.commons.R;
 
@@ -16,13 +19,27 @@ public class SignupActivity extends Activity {
 
         WebView webView = new WebView(this);
         setContentView(webView);
-        //myWebView.loadUrl("https://commons.wikimedia.org/w/index.php?title=Special:CreateAccount&returnto=Main+Page");
 
+        webView.setWebViewClient(new MyWebViewClient());
+        //myWebView.loadUrl("https://commons.wikimedia.org/w/index.php?title=Special:CreateAccount&returnto=Main+Page");
         //Mobile page, looks better than the above
         webView.loadUrl("https://commons.m.wikimedia.org/w/index.php?title=Special:CreateAccount&returnto=Main+Page&returntoquery=welcome%3Dyes");
 
-        //After Create Account button is pressed within WebView, it brings user to https://commons.wikimedia.org/wiki/Main_Page. So can we just override that URL?
+        //After Create Account button is pressed within WebView, it brings user to https://commons.m.wikimedia.org/w/index.php?title=Main_Page&welcome=yes. So can we just override that URL?
         //Do we NEED to enable JS? Validation seems to work fine here
     }
 
+    private class MyWebViewClient extends WebViewClient {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            if (Uri.parse(url).getHost().equals("www.example.com")) {
+                // This is my web site, so do not override; let my WebView load the page
+                return false;
+            }
+            // Otherwise, the link is not for a page on my site, so launch another Activity that handles URLs
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            startActivity(intent);
+            return true;
+        }
+    }
 }
