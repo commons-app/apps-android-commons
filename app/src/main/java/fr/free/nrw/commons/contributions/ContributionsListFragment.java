@@ -164,13 +164,12 @@ public class ContributionsListFragment extends Fragment {
         switch (requestCode) {
             // 1 = Storage allowed when gallery selected
             case 1: {
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     controller.startGalleryPick();
                 } else {
                     return;
                 }
-                return;
+                break;
             }
         }
     }
