@@ -114,8 +114,9 @@ public class ContributionsListFragment extends Fragment {
                 //Gallery crashes before reach ShareActivity screen so must implement permissions check here
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if (ContextCompat.checkSelfPermission(this.getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                        ActivityCompat.requestPermissions(this.getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-                        return true;
+                        //See http://stackoverflow.com/questions/33169455/onrequestpermissionsresult-not-being-called-in-dialog-fragment
+                        requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+                        return false;
                     } else {
                         controller.startGalleryPick();
                         return true;
@@ -159,18 +160,14 @@ public class ContributionsListFragment extends Fragment {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
             // 1 = Storage allowed when gallery selected
             case 1: {
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.d("ContributionsList", "Call controller.startGalleryPick()");
                     controller.startGalleryPick();
-                } else {
-                    return;
                 }
-                return;
             }
         }
     }
