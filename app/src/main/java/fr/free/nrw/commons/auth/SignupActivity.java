@@ -32,14 +32,17 @@ public class SignupActivity extends Activity {
     private class MyWebViewClient extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            if (Uri.parse(url).getHost().equals("www.example.com")) {
+            if (Uri.parse(url).getHost().equals("https://commons.m.wikimedia.org/w/index.php?title=Main_Page&welcome=yes")) {
                 // This is my web site, so do not override; let my WebView load the page
+                Log.d("SignupActivity", "Overriding URL");
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+                return true;
+            } else {
+                Log.d("SignupActivity", "Not overriding URL");
                 return false;
             }
-            // Otherwise, the link is not for a page on my site, so launch another Activity that handles URLs
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-            startActivity(intent);
-            return true;
+
         }
     }
 }
