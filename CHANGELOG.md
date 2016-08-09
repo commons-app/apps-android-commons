@@ -1,5 +1,9 @@
 # Wikimedia Commons for Android
 
+##v1.24
+- Moved  from bits/event.gif to wikimedia/beacon
+- Fixed issue with needing to tap gallery again after giving permissions
+
 ##v1.23
 - Added warning if image is submitted without categories
 - Added check if back button is pressed at category selection screen
