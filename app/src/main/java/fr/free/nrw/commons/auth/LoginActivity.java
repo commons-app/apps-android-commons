@@ -189,7 +189,9 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
-            if (extras == null || extras.getBoolean("redirected") == false ) {
+            // Only load welcome screen if we weren't redirected from SignupActivity
+            if (extras == null || extras.getBoolean("Redirected") != true ) {
+                Log.d("SignupActivity", "Redirected? " + Boolean.toString(extras.getBoolean("Redirected")));
                 Intent welcomeIntent = new Intent(this, WelcomeActivity.class);
                 startActivity(welcomeIntent);
             }
