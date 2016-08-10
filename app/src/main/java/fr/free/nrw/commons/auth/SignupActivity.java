@@ -13,10 +13,13 @@ import fr.free.nrw.commons.R;
 
 public class SignupActivity extends Activity {
 
+    private boolean otherPage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d("SignupActivity", "Signup Activity started");
+        otherPage = false;
 
         WebView webView = new WebView(this);
         setContentView(webView);
@@ -40,12 +43,25 @@ public class SignupActivity extends Activity {
                 intent.putExtra("Redirected", true);
                 startActivity(intent);
                 return true;
-            } else {
+            }
+        else {
                 Log.d("SignupActivity", "Not overriding URL, URL is: " + url);
+                otherPage = true;
                 return false;
             }
-
         }
+    }
 
+    @Override
+    public void onBackPressed() {
+        if (otherPage == true) {
+            Intent intent = new Intent(this, SignupActivity.class);
+            startActivity(intent);
+        }
+        else {
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            intent.putExtra("Redirected", true);
+            startActivity(intent);
+        }
     }
 }
