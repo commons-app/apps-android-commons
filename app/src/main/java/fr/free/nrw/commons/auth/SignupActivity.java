@@ -33,14 +33,14 @@ public class SignupActivity extends Activity {
     private class MyWebViewClient extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            if (Uri.parse(url).getHost().equals("https://commons.m.wikimedia.org/w/index.php?title=Main_Page&welcome=yes")) {
+            if (url.equals("https://commons.m.wikimedia.org/w/index.php?title=Main_Page&welcome=yes")) {
                 // Signup success, so load LoginActivity again
-                Log.d("SignupActivity", "Overriding URL");
+                Log.d("SignupActivity", "Overriding URL" + url);
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
                 return true;
             } else {
-                Log.d("SignupActivity", "Not overriding URL, URL is: " + Uri.parse(url).getHost());
+                Log.d("SignupActivity", "Not overriding URL, URL is: " + url);
                 return false;
             }
 
