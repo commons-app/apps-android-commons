@@ -29,7 +29,7 @@ public class SignupActivity extends Activity {
         WebSettings webSettings = webView.getSettings();
         //Needed to refresh Captcha. Might introduce XSS vulnerabilities, but we can trust Wikimedia's site... right?
         webSettings.setJavaScriptEnabled(true);
-        
+
         webView.loadUrl("https://commons.m.wikimedia.org/w/index.php?title=Special:CreateAccount&returnto=Main+Page&returntoquery=welcome%3Dyes");
     }
 
