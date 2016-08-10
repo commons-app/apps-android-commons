@@ -37,14 +37,14 @@ public class SignupActivity extends Activity {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             if (url.equals("https://commons.m.wikimedia.org/w/index.php?title=Main_Page&welcome=yes")) {
-                // Signup success, so load LoginActivity again
+                //Signup success, so load LoginActivity again
                 Log.d("SignupActivity", "Overriding URL" + url);
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 intent.putExtra("Redirected", true);
                 startActivity(intent);
                 return true;
-            }
-        else {
+            } else {
+                //If user clicks any other links in the webview
                 Log.d("SignupActivity", "Not overriding URL, URL is: " + url);
                 otherPage = true;
                 return false;
@@ -55,10 +55,12 @@ public class SignupActivity extends Activity {
     @Override
     public void onBackPressed() {
         if (otherPage == true) {
+            //If we are in any page except the main signup page, back button should take us back to signup page
             Intent intent = new Intent(this, SignupActivity.class);
             startActivity(intent);
         }
         else {
+            //If we are in signup page, back button should take us back to LoginActivity
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             intent.putExtra("Redirected", true);
             startActivity(intent);
