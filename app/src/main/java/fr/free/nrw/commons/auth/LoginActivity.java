@@ -188,8 +188,11 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         });
 
         if (savedInstanceState == null) {
-            Intent welcomeIntent = new Intent(this, WelcomeActivity.class);
-            startActivity(welcomeIntent);
+            Bundle extras = getIntent().getExtras();
+            if (extras == null || extras.getBoolean("redirected") == false ) {
+                Intent welcomeIntent = new Intent(this, WelcomeActivity.class);
+                startActivity(welcomeIntent);
+            }
         }
     }
 

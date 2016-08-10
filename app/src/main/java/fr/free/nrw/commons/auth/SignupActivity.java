@@ -37,6 +37,7 @@ public class SignupActivity extends Activity {
                 // Signup success, so load LoginActivity again
                 Log.d("SignupActivity", "Overriding URL" + url);
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                intent.putExtra("Redirected", true);
                 startActivity(intent);
                 return true;
             } else {
