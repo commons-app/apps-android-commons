@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
 import android.webkit.WebResourceResponse;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -25,12 +26,11 @@ public class SignupActivity extends Activity {
         setContentView(webView);
 
         webView.setWebViewClient(new MyWebViewClient());
-        //myWebView.loadUrl("https://commons.wikimedia.org/w/index.php?title=Special:CreateAccount&returnto=Main+Page");
-        //Mobile page, looks better than the above
+        WebSettings webSettings = webView.getSettings();
+        //Needed to refresh Captcha. Might introduce XSS vulnerabilities, but we can trust Wikimedia's site... right?
+        webSettings.setJavaScriptEnabled(true);
+        
         webView.loadUrl("https://commons.m.wikimedia.org/w/index.php?title=Special:CreateAccount&returnto=Main+Page&returntoquery=welcome%3Dyes");
-
-        //After Create Account button is pressed within WebView, it brings user to https://commons.m.wikimedia.org/w/index.php?title=Main_Page&welcome=yes. So can we just override that URL?
-        //Do we NEED to enable JS? Validation seems to work fine here
     }
 
     private class MyWebViewClient extends WebViewClient {
