@@ -5,6 +5,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -21,6 +23,7 @@ public class SignupActivity extends Activity {
         super.onCreate(savedInstanceState);
         Log.d("SignupActivity", "Signup Activity started");
         otherPage = false;
+
 
         WebView webView = new WebView(this);
         setContentView(webView);
@@ -39,6 +42,13 @@ public class SignupActivity extends Activity {
             if (url.equals("https://commons.m.wikimedia.org/w/index.php?title=Main_Page&welcome=yes")) {
                 //Signup success, so load LoginActivity again
                 Log.d("SignupActivity", "Overriding URL" + url);
+
+                CookieSyncManager.createInstance(getApplicationContext());
+                CookieManager cookieManager = CookieManager.getInstance();
+                cookieManager.removeAllCookie();
+                cookieManager.setAcceptCookie(false);
+                cookieManager.removeSessionCookie();
+
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 intent.putExtra("Redirected", true);
                 startActivity(intent);
