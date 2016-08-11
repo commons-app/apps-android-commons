@@ -11,6 +11,7 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import fr.free.nrw.commons.R;
 
@@ -40,7 +41,7 @@ public class SignupActivity extends Activity {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             if (url.equals("https://commons.m.wikimedia.org/w/index.php?title=Main_Page&welcome=yes")) {
-                //Signup success, so load LoginActivity again
+                //Signup success, so clear cookies, notify user, and load LoginActivity again
                 Log.d("SignupActivity", "Overriding URL" + url);
 
                 CookieSyncManager.createInstance(getApplicationContext());
@@ -48,6 +49,9 @@ public class SignupActivity extends Activity {
                 cookieManager.removeAllCookie();
                 cookieManager.setAcceptCookie(false);
                 cookieManager.removeSessionCookie();
+
+                Toast toast = Toast.makeText(getApplicationContext(), "Account created!", Toast.LENGTH_LONG);
+                toast.show();
 
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 intent.putExtra("Redirected", true);
