@@ -181,12 +181,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             }
         });
 
-        signupButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri.parse("https://commons.wikimedia.org/wiki/Special:UserLogin/signup")));
-            }
-        });
-
         loginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 that.performLogin();
@@ -194,8 +188,15 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         });
 
         if (savedInstanceState == null) {
-            Intent welcomeIntent = new Intent(this, WelcomeActivity.class);
-            startActivity(welcomeIntent);
+            Bundle extras = getIntent().getExtras();
+            // Only load welcome screen if we weren't redirected from SignupActivity
+            if (extras == null || !extras.getBoolean("Redirected")) {
+                if (extras != null) {
+                    Log.d("SignupActivity", "Redirected? " + Boolean.toString(extras.getBoolean("Redirected")));
+                }
+                Intent welcomeIntent = new Intent(this, WelcomeActivity.class);
+                startActivity(welcomeIntent);
+            }
         }
     }
 
@@ -227,4 +228,9 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //Called when Sign Up button is clicked
+    public void signUp(View view) {
+        Intent intent = new Intent(this, SignupActivity.class);
+        startActivity(intent);
+    }
 }

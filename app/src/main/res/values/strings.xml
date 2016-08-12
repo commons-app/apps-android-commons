@@ -13,7 +13,7 @@
     <string name="upload_failed">File not found, please try another file</string>
     <string name="authentication_failed">Authentication failed!</string>
     <string name="uploading_started">Upload started!</string>
-   
+
     <string name="upload_completed_notification_title">%1$s uploaded!</string>
     <string name="upload_completed_notification_text">Tap to view your upload</string>
     <string name="upload_progress_notification_title_start">Starting %1$s upload</string>
@@ -154,4 +154,5 @@
     <string name="location_permission_rationale">Optional permission: Get current location for category suggestions</string>
     <string name="ok">OK</string>
     <string name="back">Back</string>
+    <string name="title_activity_signup">SignupActivity</string>
 </resources>
