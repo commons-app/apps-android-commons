@@ -9,6 +9,7 @@ import android.location.LocationManager;
 import android.media.ExifInterface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import java.io.IOException;
@@ -82,6 +83,7 @@ public class GPSExtractor {
      * Extracts geolocation of image from EXIF data.
      * @return coordinates of image as string (needs to be passed as a String in API query)
      */
+    @Nullable
     public String getCoords(boolean useGPS) {
 
         ExifInterface exif;
@@ -117,7 +119,7 @@ public class GPSExtractor {
                 // No coords found
                 return null;
             }
-        } else if(exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE) == null) {
+        } else if (exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE) == null) {
             return null;
         } else {
             imageCoordsExists = true;
@@ -127,11 +129,16 @@ public class GPSExtractor {
             latitude_ref = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE_REF);
             longitude = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE);
             longitude_ref = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE_REF);
-            Log.d("Image", "Latitude: " + latitude + " " + latitude_ref);
-            Log.d("Image", "Longitude: " + longitude + " " + longitude_ref);
 
-            decimalCoords = getDecimalCoords(latitude, latitude_ref, longitude, longitude_ref);
-            return decimalCoords;
+            if (latitude!=null && latitude_ref!=null && longitude!=null && longitude_ref!=null) {
+                Log.d("Image", "Latitude: " + latitude + " " + latitude_ref);
+                Log.d("Image", "Longitude: " + longitude + " " + longitude_ref);
+
+                decimalCoords = getDecimalCoords(latitude, latitude_ref, longitude, longitude_ref);
+                return decimalCoords;
+            } else {
+                return null;
+            }
         }
     }
 
