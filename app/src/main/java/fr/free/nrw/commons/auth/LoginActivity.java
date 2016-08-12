@@ -78,6 +78,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                         Bundle authResult = new Bundle();
                         authResult.putString(AccountManager.KEY_ACCOUNT_NAME, username);
                         authResult.putString(AccountManager.KEY_ACCOUNT_TYPE, WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
+                        //FIXME: NPE here sometimes, otherwise goes to Signup screen upon successful login...
                         response.onResult(authResult);
                     }
                 }
@@ -190,6 +191,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             // Only load welcome screen if we weren't redirected from SignupActivity
+            // FIXME: This Bundle seems to clash with the Bundle at line 81. Logging in brings user to signup screen - why????
             if (extras == null || !extras.getBoolean("Redirected")) {
                 if (extras != null) {
                     Log.d("SignupActivity", "Redirected? " + Boolean.toString(extras.getBoolean("Redirected")));
