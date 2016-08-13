@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -41,6 +42,8 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     public static final String PARAM_USERNAME = "fr.free.nrw.commons.login.username";
 
     private CommonsApplication app;
+
+    private SharedPreferences prefs = null;
 
     Button loginButton;
     Button signupButton;
@@ -151,6 +154,8 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         passwordEdit = (EditText) findViewById(R.id.loginPassword);
         final LoginActivity that = this;
 
+        prefs = getSharedPreferences("fr.free.nrw.commons", MODE_PRIVATE);
+
         TextWatcher loginEnabler = new TextWatcher() {
             public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) { }
 
@@ -188,17 +193,17 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             }
         });
 
-        if (savedInstanceState == null) {
-            Bundle extras = getIntent().getExtras();
-            // Only load welcome screen if we weren't redirected from SignupActivity
-            // FIXME: This Bundle seems to clash with the Bundle at line 81. Logging in brings user to signup screen - why????
-            if (extras == null || !extras.getBoolean("Redirected")) {
-                if (extras != null) {
-                    Log.d("SignupActivity", "Redirected? " + Boolean.toString(extras.getBoolean("Redirected")));
-                }
-                Intent welcomeIntent = new Intent(this, WelcomeActivity.class);
-                startActivity(welcomeIntent);
-            }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (prefs.getBoolean("firstrun", true)) {
+            // Do first run stuff here then set 'firstrun' as false
+            Intent welcomeIntent = new Intent(this, WelcomeActivity.class);
+            startActivity(welcomeIntent);
+            prefs.edit().putBoolean("firstrun", false).apply();
         }
     }
 

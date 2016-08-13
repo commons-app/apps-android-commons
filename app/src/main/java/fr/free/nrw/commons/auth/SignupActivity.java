@@ -54,7 +54,6 @@ public class SignupActivity extends Activity {
                 toast.show();
 
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                intent.putExtra("Redirected", true);
                 startActivity(intent);
                 return true;
             } else {
@@ -76,7 +75,6 @@ public class SignupActivity extends Activity {
         else {
             //If we are in signup page, back button should take us back to LoginActivity
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-            intent.putExtra("Redirected", true);
             startActivity(intent);
         }
     }
