@@ -51,7 +51,6 @@ public class SignupActivity extends Activity {
             } else {
                 //If user clicks any other links in the webview
                 Log.d("SignupActivity", "Not overriding URL, URL is: " + url);
-                otherPage = true;
                 return false;
             }
         }
