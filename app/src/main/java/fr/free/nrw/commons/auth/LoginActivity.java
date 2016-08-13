@@ -77,7 +77,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
                 Bundle extras = context.getIntent().getExtras();
 
-
                 if (extras != null) {
                     Log.d("LoginActivity", "Bundle of extras: " + extras.toString());
                     if (accountCreated) { // Pass the new account back to the account manager
@@ -94,10 +93,9 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 // FIXME: If the user turns it off, it shouldn't be auto turned back on
                 ContentResolver.setSyncAutomatically(account, ContributionsContentProvider.AUTHORITY, true); // Enable sync by default!
                 ContentResolver.setSyncAutomatically(account, ModificationsContentProvider.AUTHORITY, true); // Enable sync by default!
-                
+
                 Intent intent = new Intent(context, ContributionsActivity.class);
                 startActivity(intent);
-
 
             } else {
                 int response;
@@ -121,7 +119,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
                 dialog.cancel();
             }
-
         }
 
         @Override
@@ -150,7 +147,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 return "NetworkFailure";
             }
         }
-
     }
 
     @Override
