@@ -33,6 +33,7 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.EventLog;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
+import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 
@@ -95,7 +96,10 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 ContentResolver.setSyncAutomatically(account, ModificationsContentProvider.AUTHORITY, true); // Enable sync by default!
 
                 //FIXME: This is supposed to return user to ContributionsActivity (launcher activity), but is instead taking users back to SignupActivity
-                context.finish();
+                //context.finish();
+                Intent intent = new Intent(context, ContributionsActivity.class);
+                startActivity(intent);
+
 
             } else {
                 int response;
@@ -246,7 +250,8 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     //Called when Sign Up button is clicked
     public void signUp(View view) {
         Intent intent = new Intent(this, SignupActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        //	FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
+        //intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 }
