@@ -44,12 +44,6 @@ public class SignupActivity extends Activity {
                 //Signup success, so clear cookies, notify user, and load LoginActivity again
                 Log.d("SignupActivity", "Overriding URL" + url);
 
-                CookieSyncManager.createInstance(getApplicationContext());
-                CookieManager cookieManager = CookieManager.getInstance();
-                cookieManager.removeAllCookie();
-                cookieManager.setAcceptCookie(false);
-                cookieManager.removeSessionCookie();
-
                 Toast toast = Toast.makeText(getApplicationContext(), "Account created!", Toast.LENGTH_LONG);
                 toast.show();
 
