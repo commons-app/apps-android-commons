@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.EventLog;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
+import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 
@@ -41,6 +43,8 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     public static final String PARAM_USERNAME = "fr.free.nrw.commons.login.username";
 
     private CommonsApplication app;
+
+    private SharedPreferences prefs = null;
 
     Button loginButton;
     Button signupButton;
@@ -72,19 +76,27 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 boolean accountCreated = AccountManager.get(context).addAccountExplicitly(account, password, null);
 
                 Bundle extras = context.getIntent().getExtras();
+
                 if (extras != null) {
+                    Log.d("LoginActivity", "Bundle of extras: " + extras.toString());
                     if (accountCreated) { // Pass the new account back to the account manager
                         AccountAuthenticatorResponse response = extras.getParcelable(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE);
                         Bundle authResult = new Bundle();
                         authResult.putString(AccountManager.KEY_ACCOUNT_NAME, username);
                         authResult.putString(AccountManager.KEY_ACCOUNT_TYPE, WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
-                        response.onResult(authResult);
+
+                        if (response != null) {
+                            response.onResult(authResult);
+                        }
                     }
                 }
                 // FIXME: If the user turns it off, it shouldn't be auto turned back on
                 ContentResolver.setSyncAutomatically(account, ContributionsContentProvider.AUTHORITY, true); // Enable sync by default!
                 ContentResolver.setSyncAutomatically(account, ModificationsContentProvider.AUTHORITY, true); // Enable sync by default!
-                context.finish();
+
+                Intent intent = new Intent(context, ContributionsActivity.class);
+                startActivity(intent);
+
             } else {
                 int response;
                 if(result.equals("NetworkFailure")) {
@@ -107,7 +119,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
                 dialog.cancel();
             }
-
         }
 
         @Override
@@ -136,7 +147,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 return "NetworkFailure";
             }
         }
-
     }
 
     @Override
@@ -149,6 +159,8 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         usernameEdit = (EditText) findViewById(R.id.loginUsername);
         passwordEdit = (EditText) findViewById(R.id.loginPassword);
         final LoginActivity that = this;
+
+        prefs = getSharedPreferences("fr.free.nrw.commons", MODE_PRIVATE);
 
         TextWatcher loginEnabler = new TextWatcher() {
             public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) { }
@@ -187,16 +199,17 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             }
         });
 
-        if (savedInstanceState == null) {
-            Bundle extras = getIntent().getExtras();
-            // Only load welcome screen if we weren't redirected from SignupActivity
-            if (extras == null || !extras.getBoolean("Redirected")) {
-                if (extras != null) {
-                    Log.d("SignupActivity", "Redirected? " + Boolean.toString(extras.getBoolean("Redirected")));
-                }
-                Intent welcomeIntent = new Intent(this, WelcomeActivity.class);
-                startActivity(welcomeIntent);
-            }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (prefs.getBoolean("firstrun", true)) {
+            // Do first run stuff here then set 'firstrun' as false
+            Intent welcomeIntent = new Intent(this, WelcomeActivity.class);
+            startActivity(welcomeIntent);
+            prefs.edit().putBoolean("firstrun", false).apply();
         }
     }
 
