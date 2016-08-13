@@ -59,6 +59,7 @@ public class SignupActivity extends Activity {
         }
     }
 
+    /*
     @Override
     public void onBackPressed() {
         if (otherPage == true) {
@@ -72,4 +73,5 @@ public class SignupActivity extends Activity {
             startActivity(intent);
         }
     }
+    */
 }

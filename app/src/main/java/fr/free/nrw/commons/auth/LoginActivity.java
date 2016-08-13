@@ -75,19 +75,25 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 boolean accountCreated = AccountManager.get(context).addAccountExplicitly(account, password, null);
 
                 Bundle extras = context.getIntent().getExtras();
+
+
                 if (extras != null) {
+                    Log.d("LoginActivity", "Bundle of extras: " + extras.toString());
                     if (accountCreated) { // Pass the new account back to the account manager
                         AccountAuthenticatorResponse response = extras.getParcelable(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE);
                         Bundle authResult = new Bundle();
                         authResult.putString(AccountManager.KEY_ACCOUNT_NAME, username);
                         authResult.putString(AccountManager.KEY_ACCOUNT_TYPE, WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
-                        //FIXME: NPE here sometimes, otherwise goes to Signup screen upon successful login...
-                        response.onResult(authResult);
+
+                        if (response != null) {
+                            response.onResult(authResult);
+                        }
                     }
                 }
                 // FIXME: If the user turns it off, it shouldn't be auto turned back on
                 ContentResolver.setSyncAutomatically(account, ContributionsContentProvider.AUTHORITY, true); // Enable sync by default!
                 ContentResolver.setSyncAutomatically(account, ModificationsContentProvider.AUTHORITY, true); // Enable sync by default!
+                //FIXME: This is taking users back to SignupActivity
                 context.finish();
             } else {
                 int response;
