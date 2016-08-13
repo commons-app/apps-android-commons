@@ -17,16 +17,14 @@ import fr.free.nrw.commons.R;
 
 public class SignupActivity extends Activity {
 
-    private boolean otherPage;
+    private WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d("SignupActivity", "Signup Activity started");
-        otherPage = false;
 
-
-        WebView webView = new WebView(this);
+        webView = new WebView(this);
         setContentView(webView);
 
         webView.setWebViewClient(new MyWebViewClient());
@@ -59,19 +57,12 @@ public class SignupActivity extends Activity {
         }
     }
 
-    /*
     @Override
     public void onBackPressed() {
-        if (otherPage == true) {
-            //If we are in any page except the main signup page, back button should take us back to signup page
-            Intent intent = new Intent(this, SignupActivity.class);
-            startActivity(intent);
-        }
-        else {
-            //If we are in signup page, back button should take us back to LoginActivity
-            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(intent);
+        if (webView.canGoBack()) {
+            webView.goBack();
+        } else {
+            super.onBackPressed();
         }
     }
-    */
 }
