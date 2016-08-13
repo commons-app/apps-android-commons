@@ -93,8 +93,10 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 // FIXME: If the user turns it off, it shouldn't be auto turned back on
                 ContentResolver.setSyncAutomatically(account, ContributionsContentProvider.AUTHORITY, true); // Enable sync by default!
                 ContentResolver.setSyncAutomatically(account, ModificationsContentProvider.AUTHORITY, true); // Enable sync by default!
-                //FIXME: This is taking users back to SignupActivity
+
+                //FIXME: This is supposed to return user to ContributionsActivity (launcher activity), but is instead taking users back to SignupActivity
                 context.finish();
+
             } else {
                 int response;
                 if(result.equals("NetworkFailure")) {
@@ -244,6 +246,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     //Called when Sign Up button is clicked
     public void signUp(View view) {
         Intent intent = new Intent(this, SignupActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 }
