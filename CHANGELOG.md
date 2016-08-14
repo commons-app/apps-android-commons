@@ -1,5 +1,9 @@
 # Wikimedia Commons for Android
 
+##v1.25
+- Added in-app signup feature for new users
+- Fixed crash when reading GPS coordinates
+
 ##v1.24
 - Moved  from bits/event.gif to wikimedia/beacon
 - Fixed issue with needing to tap gallery again after giving permissions
