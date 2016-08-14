@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="fr.free.nrw.commons"
-    android:versionCode="42"
-    android:versionName="1.24" >
+    android:versionCode="43"
+    android:versionName="1.25" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
