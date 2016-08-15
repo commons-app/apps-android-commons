@@ -284,7 +284,7 @@ public class UploadService extends HandlerService<Contribution> {
         contribution.save();
     }
 
-    private String findUniqueFilename(String fileName) throws IOException {
+    synchronized private String findUniqueFilename(String fileName) throws IOException {
         return findUniqueFilename(fileName, 1);
     }
 
