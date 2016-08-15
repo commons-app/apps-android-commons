@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.upload;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -15,8 +14,6 @@ import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
-import android.webkit.MimeTypeMap;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.Date;
@@ -24,7 +21,6 @@ import java.util.Date;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.Prefs;
-import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.contributions.Contribution;
 
@@ -69,19 +65,8 @@ public class UploadController {
         }
     }
 
-    public void startUpload(String rawTitle, Uri mediaUri, String description, String mimeType, String source, ContributionUploadProgress onComplete) {
+    public void startUpload(String title, Uri mediaUri, String description, String mimeType, String source, ContributionUploadProgress onComplete) {
         Contribution contribution;
-
-        String title = rawTitle;
-        String extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType);
-        // People are used to ".jpg" more than ".jpeg" which the system gives us.
-        if (extension != null && extension.toLowerCase().equals("jpeg")) {
-            extension = "jpg";
-        }
-        if(extension != null && !title.toLowerCase().endsWith(extension.toLowerCase())) {
-            title += "." + extension;
-        }
-
 
         contribution = new Contribution(mediaUri, null, title, description, -1, null, null, app.getCurrentAccount().name, CommonsApplication.DEFAULT_EDIT_SUMMARY);
 
