@@ -17,6 +17,7 @@ import android.app.*;
 import android.content.*;
 import android.support.v4.app.NotificationCompat;
 import android.util.*;
+import android.webkit.MimeTypeMap;
 import android.widget.*;
 
 import fr.free.nrw.commons.contributions.*;
@@ -197,7 +198,11 @@ public class UploadService extends HandlerService<Contribution> {
         this.startForeground(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification.build());
 
         try {
-            String filename = findUniqueFilename(contribution.getFilename());
+
+            String filename = Utils.fixExtension(
+                    contribution.getFilename(),
+                    MimeTypeMap.getSingleton().getExtensionFromMimeType((String)contribution.getTag("mimeType")));
+            filename = findUniqueFilename(filename);
             if(!api.validateLogin()) {
                 // Need to revalidate!
                 if(app.revalidateAuthToken()) {

@@ -240,4 +240,18 @@ public class Utils {
             return false;
         }
     }
+
+    public static String fixExtension(String title, String extension) {
+        // People are used to ".jpg" more than ".jpeg" which the system gives us.
+        if (extension != null && extension.toLowerCase().equals("jpeg")) {
+            extension = "jpg";
+        }
+        if (title.toLowerCase().endsWith(".jpeg")) {
+            title = title.replaceFirst("\\.jpeg$", ".jpg");
+        }
+        if (extension != null && !title.toLowerCase().endsWith("." + extension.toLowerCase())) {
+            title += "." + extension;
+        }
+        return title;
+    }
 }
