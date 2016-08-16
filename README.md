@@ -14,7 +14,7 @@ Initially started by the Wikimedia Foundation, this app is now maintained by vol
 	``File`` > ``New`` > ``Project from Version Control...`` > ``Git``  
 	or  
 	(From Quick Start menu): ``Check out project from Version Control``
-2. Enter ``https://github.com/nicolas-raoul/apps-android-commons/`` as Git Repository URL. Specify a (new) local directory you would like to clone into and select ``OK``.
+2. Enter ``https://github.com/commons-app/apps-android-commons/`` as Git Repository URL. Specify a (new) local directory you would like to clone into and select ``OK``.
 
 ## Build Manually ##
 
@@ -83,4 +83,4 @@ Thumbnail images are not currently cached.
 [4]: http://gradle.org/gradle-download/
 [5]: https://developer.android.com/studio/build/building-cmdline.html
 [6]: https://www.apache.org/licenses/LICENSE-2.0
-[7]: https://github.com/nicolas-raoul/apps-android-commons/issues
+[7]: https://github.com/commons-app/apps-android-commons/issues
