@@ -167,6 +167,7 @@ public  class       ContributionsActivity
 
         mDrawerList = (ListView)findViewById(R.id.drawer_list);
         addDrawerItems();
+        setupDrawer();
 
         // Activity can call methods in the fragment by acquiring a reference to the Fragment from FragmentManager, using findFragmentById()
         contributionsList = (ContributionsListFragment)getSupportFragmentManager().findFragmentById(R.id.contributionsListFragment);
@@ -231,14 +232,19 @@ public  class       ContributionsActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
-            case android.R.id.home:
-                if(mediaDetails.isVisible()) {
-                    getSupportFragmentManager().popBackStack();
-                }
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        // enabling drawer toggle by clicking on the app icon.
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        } else {
+            switch (item.getItemId()) {
+                case android.R.id.home:
+                    if (mediaDetails.isVisible()) {
+                        getSupportFragmentManager().popBackStack();
+                    }
+                    return true;
+                default:
+                    return super.onOptionsItemSelected(item);
+            }
         }
 
     }
