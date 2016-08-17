@@ -40,6 +40,9 @@
     <string name="share_title_hint">Title</string>
     <string name="share_description_hint">Description</string>
 
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
     <string name="login_failed_network">Unable to login - network failure</string>
     <string name="login_failed_username">Unable to login - please check your username</string>
     <string name="login_failed_password">Unable to login - please check your password</string>
