@@ -1,5 +1,8 @@
 # Wikimedia Commons for Android
 
+##v1.26
+- Fixed bug with overwriting files when multiple images selected
+
 ##v1.25
 - Added in-app signup feature for new users
 - Fixed crash when reading GPS coordinates
