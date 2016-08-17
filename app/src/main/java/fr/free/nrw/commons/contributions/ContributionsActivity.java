@@ -14,12 +14,18 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBarDrawerToggle;
 
 import java.util.ArrayList;
 
@@ -46,6 +52,11 @@ public  class       ContributionsActivity
     private boolean isUploadServiceConnected;
     private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<DataSetObserver>();
     private String CONTRIBUTION_SELECTION = "";
+    private ListView mDrawerList;
+    private ArrayAdapter<String> mAdapter;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private DrawerLayout mDrawerLayout;
+    private String mActivityTitle;
     /*
         This sorts in the following order:
         Currently Uploading
@@ -106,11 +117,51 @@ public  class       ContributionsActivity
         getSupportLoaderManager().initLoader(0, null, this);
     }
 
+    private void addDrawerItems() {
+        String[] itemArray = {"About", "Nearby", "Settings", "Feedback",};
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, itemArray);
+        mDrawerList.setAdapter(mAdapter);
+        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("ContributionsActivity", "Item " + position + " selected");
+            }
+        });
+    }
+
+    private void setupDrawer() {
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
+
+            /** Called when a drawer has settled in a completely open state. */
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+
+            /** Called when a drawer has settled in a completely closed state. */
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+        };
+
+        mDrawerToggle.setDrawerIndicatorEnabled(true);
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle(R.string.title_activity_contributions);
         setContentView(R.layout.activity_contributions);
+
+        //Set up navigation drawer
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView)findViewById(R.id.drawer_list);
+        addDrawerItems();
+        setupDrawer();
 
         // Activity can call methods in the fragment by acquiring a reference to the Fragment from FragmentManager, using findFragmentById()
         contributionsList = (ContributionsListFragment)getSupportFragmentManager().findFragmentById(R.id.contributionsListFragment);
@@ -128,6 +179,13 @@ public  class       ContributionsActivity
         requestAuthToken();
     }
 
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
+    
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -175,15 +233,21 @@ public  class       ContributionsActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
-            case android.R.id.home:
-                if(mediaDetails.isVisible()) {
-                    getSupportFragmentManager().popBackStack();
-                }
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        // enabling drawer toggle by clicking on the app icon.
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        } else {
+            switch (item.getItemId()) {
+                case android.R.id.home:
+                    if (mediaDetails.isVisible()) {
+                        getSupportFragmentManager().popBackStack();
+                    }
+                    return true;
+                default:
+                    return super.onOptionsItemSelected(item);
+            }
         }
+
     }
 
     @Override
