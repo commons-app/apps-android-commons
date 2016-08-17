@@ -20,6 +20,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 
@@ -46,6 +48,8 @@ public  class       ContributionsActivity
     private boolean isUploadServiceConnected;
     private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<DataSetObserver>();
     private String CONTRIBUTION_SELECTION = "";
+    private ListView mDrawerList;
+    private ArrayAdapter<String> mAdapter;
     /*
         This sorts in the following order:
         Currently Uploading
@@ -106,11 +110,20 @@ public  class       ContributionsActivity
         getSupportLoaderManager().initLoader(0, null, this);
     }
 
+    private void addDrawerItems() {
+        String[] osArray = {"About", "Settings", "Feedback", "Nearby"};
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
+        mDrawerList.setAdapter(mAdapter);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle(R.string.title_activity_contributions);
         setContentView(R.layout.activity_contributions);
+
+        mDrawerList = (ListView)findViewById(R.id.drawer_list);
+        addDrawerItems();
 
         // Activity can call methods in the fragment by acquiring a reference to the Fragment from FragmentManager, using findFragmentById()
         contributionsList = (ContributionsListFragment)getSupportFragmentManager().findFragmentById(R.id.contributionsListFragment);
