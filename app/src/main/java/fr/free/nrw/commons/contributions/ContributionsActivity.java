@@ -118,8 +118,8 @@ public  class       ContributionsActivity
     }
 
     private void addDrawerItems() {
-        String[] osArray = {"About", "Nearby", "Settings", "Feedback",};
-        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
+        String[] itemArray = {"About", "Nearby", "Settings", "Feedback",};
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, itemArray);
         mDrawerList.setAdapter(mAdapter);
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -147,10 +147,7 @@ public  class       ContributionsActivity
 
         mDrawerToggle.setDrawerIndicatorEnabled(true);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-
     }
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,11 +155,10 @@ public  class       ContributionsActivity
         setTitle(R.string.title_activity_contributions);
         setContentView(R.layout.activity_contributions);
 
+        //Set up navigation drawer
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        mActivityTitle = getTitle().toString();
-
         mDrawerList = (ListView)findViewById(R.id.drawer_list);
         addDrawerItems();
         setupDrawer();
