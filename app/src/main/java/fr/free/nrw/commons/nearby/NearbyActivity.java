@@ -23,7 +23,7 @@ public class NearbyActivity extends AppCompatActivity {
     private double currentLatitude, currentLongitude;
     private String gpsCoords;
 
-    private static final String TAG = "NearbyActivty";
+    private static final String TAG = "NearbyActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class NearbyActivity extends AppCompatActivity {
      * Registers a LocationManager to listen for current location
      */
     protected void registerLocationManager() {
-        locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         criteria = new Criteria();
         provider = locationManager.getBestProvider(criteria, true);
         myLocationListener = new MyLocationListener();
@@ -83,6 +83,7 @@ public class NearbyActivity extends AppCompatActivity {
         public void onLocationChanged(Location location) {
             currentLatitude = location.getLatitude();
             currentLongitude = location.getLongitude();
+            Log.d(TAG, "Latitude: " + String.valueOf(currentLatitude) + " Longitude: " + String.valueOf(currentLongitude));
         }
 
         @Override
