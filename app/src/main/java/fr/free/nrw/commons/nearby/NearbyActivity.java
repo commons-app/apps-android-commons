@@ -16,4 +16,6 @@ public class NearbyActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    //TODO: Get user's location
+
 }
