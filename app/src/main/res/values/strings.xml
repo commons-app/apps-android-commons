@@ -157,5 +157,5 @@
     <string name="ok">OK</string>
     <string name="back">Back</string>
     <string name="about_">SignupActivity</string>
-    <string name="title_activity_nearby">Nearby Places Lacking Photos</string>
+    <string name="title_activity_nearby">Nearby Places</string>
 </resources>
