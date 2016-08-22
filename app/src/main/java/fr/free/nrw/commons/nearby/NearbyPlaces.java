@@ -27,8 +27,7 @@ public class NearbyPlaces {
 
                 URL file = new URL("https://tools.wmflabs.org/wiki-needs-pictures/data/data.csv");
 
-                BufferedReader in = new BufferedReader(
-                        new InputStreamReader(file.openStream()));
+                BufferedReader in = new BufferedReader(new InputStreamReader(file.openStream()));
 
                 boolean firstLine = true;
                 String line;

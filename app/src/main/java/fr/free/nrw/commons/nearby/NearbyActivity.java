@@ -41,6 +41,8 @@ public class NearbyActivity extends AppCompatActivity {
         registerLocationManager();
         //TODO: Check if we need String or double coords, and in what format
         //gpsCoords = String.valueOf(currentLatitude) + "|" + String.valueOf(currentLongitude);
+
+        //TODO: Use fragment for list like in AttractionListFragment?
     }
 
 
