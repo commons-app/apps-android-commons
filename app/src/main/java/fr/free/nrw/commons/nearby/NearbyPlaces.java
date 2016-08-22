@@ -12,15 +12,15 @@ import java.util.List;
 
 public class NearbyPlaces {
 
-    static List<Place> attractions = null;
+    static List<Place> places = null;
 
     public static synchronized List<Place> get() {
-        if(attractions != null) {
-            return attractions;
+        if(places != null) {
+            return places;
         }
         else {
             try {
-                attractions = new ArrayList<Place>();
+                places = new ArrayList<Place>();
                 // TODO Load in a different thread and show wait dialog
                 StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
                 StrictMode.setThreadPolicy(policy);
@@ -74,7 +74,7 @@ public class NearbyPlaces {
                             image = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Point_d_interrogation.jpg/120px-Point_d_interrogation.jpg";
                     }
 
-                    attractions.add(new Attraction(
+                    places.add(new Attraction(
                             name,
                             type, // list
                             type, // details
@@ -90,7 +90,7 @@ public class NearbyPlaces {
                 e.printStackTrace();
             }
         }
-        return attractions;
+        return places;
     }
 
 }
