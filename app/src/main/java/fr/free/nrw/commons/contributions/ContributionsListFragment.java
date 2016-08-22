@@ -151,6 +151,7 @@ public class ContributionsListFragment extends Fragment {
                 }
                 return true;
             case R.id.menu_nearby:
+                //TODO: Check for permissions if API 23+
                 Intent nearbyIntent = new Intent(getActivity(), NearbyActivity.class);
                 startActivity(nearbyIntent);
             case R.id.menu_refresh:
