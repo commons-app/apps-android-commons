@@ -20,6 +20,9 @@ public class NearbyActivity extends AppCompatActivity {
     private String provider;
     private Criteria criteria;
 
+    private double currentLatitude, currentLongitude;
+    private String gpsCoords;
+
     private static final String TAG = "NearbyActivty";
 
     @Override
@@ -27,9 +30,20 @@ public class NearbyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nearby);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        registerLocationManager();
     }
 
-    //TODO: Get user's location
+    @Override
+    protected void onResume(){
+        super.onResume();
+
+        registerLocationManager();
+        //TODO: Check if we need String or double coords, and in what format
+        gpsCoords = String.valueOf(currentLatitude) + "|" + String.valueOf(currentLongitude);
+    }
+
+
     /**
      * Registers a LocationManager to listen for current location
      */
@@ -85,5 +99,12 @@ public class NearbyActivity extends AppCompatActivity {
         public void onProviderDisabled(String provider) {
             Log.d(TAG, "Provider " + provider + " disabled");
         }
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+
+        unregisterLocationManager();
     }
 }
