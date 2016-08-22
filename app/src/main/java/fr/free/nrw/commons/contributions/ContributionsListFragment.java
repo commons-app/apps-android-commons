@@ -30,6 +30,7 @@ import fr.free.nrw.commons.AboutActivity;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.SettingsActivity;
+import fr.free.nrw.commons.nearby.NearbyActivity;
 import fr.free.nrw.commons.upload.UploadService;
 
 public class ContributionsListFragment extends Fragment {
@@ -142,15 +143,16 @@ public class ContributionsListFragment extends Fragment {
                 feedbackIntent.setType("message/rfc822");
                 feedbackIntent.putExtra(Intent.EXTRA_EMAIL, new String[] { CommonsApplication.FEEDBACK_EMAIL });
                 feedbackIntent.putExtra(Intent.EXTRA_SUBJECT, String.format(CommonsApplication.FEEDBACK_EMAIL_SUBJECT, CommonsApplication.APPLICATION_VERSION));
-
                 try {
                     startActivity(feedbackIntent);
                 }
                 catch (ActivityNotFoundException e) {
                     Toast.makeText(getActivity(), R.string.no_email_client, Toast.LENGTH_SHORT).show();
                 }
-
                 return true;
+            case R.id.menu_nearby:
+                Intent nearbyIntent = new Intent(getActivity(), NearbyActivity.class);
+                startActivity(nearbyIntent);
             case R.id.menu_refresh:
                 ((SourceRefresher)getActivity()).refreshSource();
                 return true;
