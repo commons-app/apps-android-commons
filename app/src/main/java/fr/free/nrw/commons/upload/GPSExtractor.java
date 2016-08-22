@@ -145,7 +145,7 @@ public class GPSExtractor {
     }
 
     /**
-     * LocationListener to obtain user's location
+     * Listen for user's location when it changes
      */
     private class MyLocationListener implements LocationListener {
 
