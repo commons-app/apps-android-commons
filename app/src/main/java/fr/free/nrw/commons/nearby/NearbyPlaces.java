@@ -73,14 +73,13 @@ public class NearbyPlaces {
                             image = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Point_d_interrogation.jpg/120px-Point_d_interrogation.jpg";
                     }
 
-                    places.add(new Attraction(
+                    places.add(new Place(
                             name,
                             type, // list
                             type, // details
                             Uri.parse(image),
                             null,
-                            new LatLng(latitude, longitude),
-                            CITY_SYDNEY
+                            new LatLng(latitude, longitude)
                     ));
                 }
                 in.close();
