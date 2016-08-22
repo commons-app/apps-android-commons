@@ -21,7 +21,7 @@ public class NearbyActivity extends AppCompatActivity {
     private Criteria criteria;
 
     private double currentLatitude, currentLongitude;
-    private String gpsCoords;
+    //private String gpsCoords;
 
     private static final String TAG = "NearbyActivity";
 
@@ -40,7 +40,7 @@ public class NearbyActivity extends AppCompatActivity {
 
         registerLocationManager();
         //TODO: Check if we need String or double coords, and in what format
-        gpsCoords = String.valueOf(currentLatitude) + "|" + String.valueOf(currentLongitude);
+        //gpsCoords = String.valueOf(currentLatitude) + "|" + String.valueOf(currentLongitude);
     }
 
 
