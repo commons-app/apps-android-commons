@@ -12,13 +12,15 @@ import java.util.List;
 
 public class NearbyPlaces {
 
-    public static synchronized List<Attraction> get() {
+    static List<Place> attractions = null;
+
+    public static synchronized List<Place> get() {
         if(attractions != null) {
             return attractions;
         }
         else {
             try {
-                attractions = new ArrayList<Attraction>();
+                attractions = new ArrayList<Place>();
                 // TODO Load in a different thread and show wait dialog
                 StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
                 StrictMode.setThreadPolicy(policy);
