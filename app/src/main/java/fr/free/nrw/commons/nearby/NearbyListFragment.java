@@ -16,6 +16,8 @@ import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import fr.free.nrw.commons.R;
@@ -62,7 +64,28 @@ public class NearbyListFragment extends ListFragment {
 
 
 
-
+    private static List<Attraction> loadAttractionsFromLocation(final LatLng curLatLng) {
+        //String closestCity = TouristAttractions.getClosestCity(curLatLng);
+        //if (closestCity != null) {
+        List<Attraction> attractions = TouristAttractions.get();
+        if (curLatLng != null) {
+            Collections.sort(attractions,
+                    new Comparator<Attraction>() {
+                        @Override
+                        public int compare(Attraction lhs, Attraction rhs) {
+                            double lhsDistance = SphericalUtil.computeDistanceBetween(
+                                    lhs.location, curLatLng);
+                            double rhsDistance = SphericalUtil.computeDistanceBetween(
+                                    rhs.location, curLatLng);
+                            return (int) (lhsDistance - rhsDistance);
+                        }
+                    }
+            );
+        }
+        return attractions;
+        //}
+        //return null;
+    }
 
     private class NearbyAdapter extends ArrayAdapter {
 
