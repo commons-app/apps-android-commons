@@ -3,21 +3,15 @@ package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
-import android.support.v4.view.ViewPager;
-import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -59,7 +53,7 @@ public class NearbyListFragment extends ListFragment {
         //TODO: Original is an AttractionAdapter. Not a CursorAdapter.
         // Create an empty adapter we will use to display the loaded data.
         // We pass null for the cursor, then update it in onLoadFinished()
-        mAdapter = new NearbyAdapter();
+        mAdapter = new NearbyAdapter(getActivity(), );
         setListAdapter(mAdapter);
 
         // Prepare the loader.  Either re-connect with an existing one,
@@ -74,29 +68,32 @@ public class NearbyListFragment extends ListFragment {
 
     private class NearbyAdapter extends ArrayAdapter {
 
-        public List<Place> mAttractionList;
+        public List<Place> placesList;
         private Context mContext;
 
-        public NearbyAdapter(Context context, List<Place> attractions) {
-            super(context, R.layout.item_place);
+        public NearbyAdapter(Context context, List<Place> places) {
+            super(context, 0);
             mContext = context;
-            mAttractionList = attractions;
+            placesList = places;
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             // Get the data item for this position
-            User user = getItem(position);
+            Place place = (Place) getItem(position);
             // Check if an existing view is being reused, otherwise inflate the view
             if (convertView == null) {
-                convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_user, parent, false);
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_place, parent, false);
             }
+
             // Lookup view for data population
             TextView tvName = (TextView) convertView.findViewById(R.id.tvName);
-            TextView tvHome = (TextView) convertView.findViewById(R.id.tvHome);
+            TextView tvDesc = (TextView) convertView.findViewById(R.id.tvDesc);
+
             // Populate the data into the template view using the data object
-            tvName.setText(user.name);
-            tvHome.setText(user.hometown);
+            tvName.setText(place.name);
+            tvDesc.setText(place.description);
+
             // Return the completed view to render on screen
             return convertView;
         }
@@ -110,7 +107,7 @@ public class NearbyListFragment extends ListFragment {
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            Attraction attraction = mAttractionList.get(position);
+            Attraction attraction = placesList.get(position);
 
             holder.mTitleTextView.setText(attraction.name);
             holder.mDescriptionTextView.setText(attraction.description);
@@ -138,7 +135,7 @@ public class NearbyListFragment extends ListFragment {
 
         @Override
         public int getItemCount() {
-            return mAttractionList == null ? 0 : mAttractionList.size();
+            return placesList == null ? 0 : placesList.size();
         }
 
         @Override
