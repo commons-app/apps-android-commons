@@ -64,12 +64,12 @@ public class NearbyListFragment extends ListFragment {
 
 
 
-    private static List<Attraction> loadAttractionsFromLocation(final LatLng curLatLng) {
+    private static List<Place> loadAttractionsFromLocation(final LatLng curLatLng) {
         //String closestCity = TouristAttractions.getClosestCity(curLatLng);
         //if (closestCity != null) {
-        List<Attraction> attractions = TouristAttractions.get();
+        List<Place> places = NearbyPlaces.get();
         if (curLatLng != null) {
-            Collections.sort(attractions,
+            Collections.sort(places,
                     new Comparator<Attraction>() {
                         @Override
                         public int compare(Attraction lhs, Attraction rhs) {
@@ -82,7 +82,7 @@ public class NearbyListFragment extends ListFragment {
                     }
             );
         }
-        return attractions;
+        return places;
         //}
         //return null;
     }
