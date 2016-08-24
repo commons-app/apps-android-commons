@@ -31,26 +31,18 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-/**
- * The main tourist attraction fragment which contains a list of attractions
- * sorted by distance (contained inside
- * {@link com.example.android.xyztouristattractions.ui.AttractionListActivity}).
- */
-public class AttractionListFragment extends Fragment {
+public class NearbyListFragment extends Fragment {
 
     private AttractionAdapter mAdapter;
     private LatLng mLatestLocation;
     private int mImageSize;
     private boolean mItemClicked;
 
-    public AttractionListFragment() {}
+    public NearbyListFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Load a larger size image to make the activity transition to the detail screen smooth
-        mImageSize = getResources().getDimensionPixelSize(R.dimen.image_size)
-                * Constants.IMAGE_ANIM_MULTIPLIER;
 
         mLatestLocation = Utils.getLocation(getActivity());
         List<Attraction> attractions = loadAttractionsFromLocation(mLatestLocation);
