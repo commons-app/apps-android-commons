@@ -54,15 +54,9 @@ public class NearbyListFragment extends ListFragment {
         ViewGroup root = (ViewGroup) view.getRootView();
         root.addView(progressBar);
 
-        //TODO: Original is an AttractionAdapter. Not a CursorAdapter.
-        // Create an empty adapter we will use to display the loaded data.
-        // We pass null for the cursor, then update it in onLoadFinished()
         mAdapter = new NearbyAdapter(getActivity(), places);
         setListAdapter(mAdapter);
 
-        // Prepare the loader.  Either re-connect with an existing one,
-        // or start a new one.
-        getLoaderManager().initLoader(0, null, this);
         return view;
     }
 
@@ -100,36 +94,6 @@ public class NearbyListFragment extends ListFragment {
 
             // Return the completed view to render on screen
             return convertView;
-        }
-
-        @Override
-        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            LayoutInflater inflater = LayoutInflater.from(mContext);
-            View view = inflater.inflate(R.layout.list_row, parent, false);
-            return new RecyclerView.ViewHolder(view, this);
-        }
-
-        @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
-            Attraction attraction = placesList.get(position);
-
-            holder.mTitleTextView.setText(attraction.name);
-            holder.mDescriptionTextView.setText(attraction.description);
-            Glide.with(mContext)
-                    .load(attraction.imageUrl)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .placeholder(R.drawable.empty_photo)
-                    .override(mImageSize, mImageSize)
-                    .into(holder.mImageView);
-
-            String distance =
-                    Utils.formatDistanceBetween(mLatestLocation, attraction.location);
-            if (TextUtils.isEmpty(distance)) {
-                holder.mOverlayTextView.setVisibility(View.GONE);
-            } else {
-                holder.mOverlayTextView.setVisibility(View.VISIBLE);
-                holder.mOverlayTextView.setText(distance);
-            }
         }
 
         @Override
