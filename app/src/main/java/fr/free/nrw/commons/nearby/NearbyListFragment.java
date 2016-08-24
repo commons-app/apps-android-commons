@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -24,7 +25,9 @@ public class NearbyListFragment extends ListFragment {
     private LatLng mLatestLocation;
     private int mImageSize;
     private boolean mItemClicked;
-    Adapter mAdapter;
+    ArrayAdapter mAdapter;
+
+    List<Place> places;
 
     private static final String TAG = "NearbyListFragment";
 
@@ -39,6 +42,7 @@ public class NearbyListFragment extends ListFragment {
 
         View view = inflater.inflate(R.layout.fragment_nearby, container, false);
 
+        places = loadAttractionsFromLocation(mLatestLocation);
 
         // Create a progress bar to display while the list loads
         ProgressBar progressBar = new ProgressBar(getActivity());
@@ -53,7 +57,7 @@ public class NearbyListFragment extends ListFragment {
         //TODO: Original is an AttractionAdapter. Not a CursorAdapter.
         // Create an empty adapter we will use to display the loaded data.
         // We pass null for the cursor, then update it in onLoadFinished()
-        mAdapter = new NearbyAdapter(getActivity(), );
+        mAdapter = new NearbyAdapter(getActivity(), places);
         setListAdapter(mAdapter);
 
         // Prepare the loader.  Either re-connect with an existing one,
