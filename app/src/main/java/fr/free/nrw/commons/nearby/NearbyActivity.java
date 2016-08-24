@@ -32,6 +32,12 @@ public class NearbyActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         registerLocationManager();
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.container, new NearbyListFragment())
+                    .commit();
+        }
     }
 
     @Override
@@ -41,8 +47,6 @@ public class NearbyActivity extends AppCompatActivity {
         registerLocationManager();
         //TODO: Check if we need String or double coords, and in what format
         //gpsCoords = String.valueOf(currentLatitude) + "|" + String.valueOf(currentLongitude);
-
-        //TODO: Use fragment for list like in AttractionListFragment?
     }
 
 
