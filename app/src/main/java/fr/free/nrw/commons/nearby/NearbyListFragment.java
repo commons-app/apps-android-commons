@@ -45,9 +45,6 @@ public class NearbyListFragment extends ListFragment {
 
         View view = inflater.inflate(R.layout.fragment_nearby, container, false);
 
-        //Load from data source (NearbyPlaces.java)
-        places = loadAttractionsFromLocation(mLatestLocation);
-
         /*
         // Create a progress bar to display while the list loads
         ProgressBar progressBar = new ProgressBar(getActivity());
@@ -67,8 +64,11 @@ public class NearbyListFragment extends ListFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
-        final ListView listview = (ListView) view.findViewById(R.id.listview);
+        //Load from data source (NearbyPlaces.java)
+        //TODO: Do asynchronously?
+        places = loadAttractionsFromLocation(mLatestLocation);
 
+        final ListView listview = (ListView) view.findViewById(R.id.listview);
         mAdapter = new NearbyAdapter(getActivity(), places);
         //setListAdapter(mAdapter);
         listview.setAdapter(mAdapter);
