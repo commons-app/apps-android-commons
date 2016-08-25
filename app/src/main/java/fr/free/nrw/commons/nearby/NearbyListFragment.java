@@ -62,7 +62,7 @@ public class NearbyListFragment extends ListFragment {
 
         return view;
     }
-    
+
     private static List<Place> loadAttractionsFromLocation(final LatLng curLatLng) {
 
         List<Place> places = NearbyPlaces.get();
@@ -145,7 +145,7 @@ public class NearbyListFragment extends ListFragment {
         public long getItemId(int position) {
             return position;
         }
-
+/*
         @Override
         public int getItemCount() {
             return placesList == null ? 0 : placesList.size();
@@ -153,12 +153,14 @@ public class NearbyListFragment extends ListFragment {
 
         @Override
         public void onItemClick(View view, int position) {
+
             if (!mItemClicked) {
                 mItemClicked = true;
                 View heroView = view.findViewById(android.R.id.icon);
                 DetailActivity.launch(
                         getActivity(), mAdapter.mAttractionList.get(position).name, heroView);
             }
-        }
+
+        }*/
     }
 }
