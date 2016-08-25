@@ -47,6 +47,7 @@ public class NearbyListFragment extends ListFragment {
         //Load from data source (NearbyPlaces.java)
         places = loadAttractionsFromLocation(mLatestLocation);
 
+        /*
         // Create a progress bar to display while the list loads
         ProgressBar progressBar = new ProgressBar(getActivity());
         progressBar.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -56,6 +57,7 @@ public class NearbyListFragment extends ListFragment {
         // Must add the progress bar to the root of the layout
         ViewGroup root = (ViewGroup) view.getRootView();
         root.addView(progressBar);
+*/
 
         mAdapter = new NearbyAdapter(getActivity(), places);
         setListAdapter(mAdapter);

@@ -31,8 +31,13 @@ public class NearbyPlaces {
 
                 boolean firstLine = true;
                 String line;
-                while ((line = in.readLine()) != null) {
+                int counter = 0;
 
+                //while ((line = in.readLine()) != null) {
+                while (in.readLine() != null && counter < 11) {
+
+                    line = in.readLine();
+                    counter++;
                     // Skip CSV header.
                     if (firstLine) {
                         firstLine = false;
