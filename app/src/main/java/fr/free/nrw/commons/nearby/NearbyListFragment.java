@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -58,9 +59,11 @@ public class NearbyListFragment extends ListFragment {
         ViewGroup root = (ViewGroup) view.getRootView();
         root.addView(progressBar);
 */
+        final ListView listview = (ListView) view.findViewById(R.id.listview);
 
         mAdapter = new NearbyAdapter(getActivity(), places);
-        setListAdapter(mAdapter);
+        //setListAdapter(mAdapter);
+        listview.setAdapter(mAdapter);
 
         return view;
     }
