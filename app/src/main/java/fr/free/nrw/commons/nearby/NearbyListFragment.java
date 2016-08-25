@@ -72,6 +72,8 @@ public class NearbyListFragment extends ListFragment {
         mAdapter = new NearbyAdapter(getActivity(), places);
         //setListAdapter(mAdapter);
         listview.setAdapter(mAdapter);
+        Log.d(TAG, "Adapter set to ListView");
+        mAdapter.notifyDataSetChanged();
     }
 
 
