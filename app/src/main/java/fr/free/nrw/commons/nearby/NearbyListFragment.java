@@ -59,14 +59,24 @@ public class NearbyListFragment extends ListFragment {
         ViewGroup root = (ViewGroup) view.getRootView();
         root.addView(progressBar);
 */
+
+
+        return view;
+    }
+
+    // This event is triggered soon after onCreateView().
+    // Any view setup should occur here.  E.g., view lookups and attaching view listeners.
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        // Setup any handles to view objects here
+        // EditText etFoo = (EditText) view.findViewById(R.id.etFoo);
         final ListView listview = (ListView) view.findViewById(R.id.listview);
 
         mAdapter = new NearbyAdapter(getActivity(), places);
         //setListAdapter(mAdapter);
         listview.setAdapter(mAdapter);
-
-        return view;
     }
+
 
     private static List<Place> loadAttractionsFromLocation(final LatLng curLatLng) {
 
