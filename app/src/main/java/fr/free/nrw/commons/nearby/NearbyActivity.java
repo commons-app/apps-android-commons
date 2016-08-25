@@ -7,6 +7,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -32,11 +33,19 @@ public class NearbyActivity extends AppCompatActivity {
 
         registerLocationManager();
 
+        // Begin the transaction
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        NearbyListFragment fragment = new NearbyListFragment();
+        ft.add(R.id.container, fragment);
+        ft.commit();
+
+        /*
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new NearbyListFragment())
                     .commit();
         }
+        */
     }
 
     @Override

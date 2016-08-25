@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <fragment android:name="fr.free.nrw.commons.nearby.NearbyListFragment"
+    <FrameLayout
         android:id="@+id/container"
-        android:layout_weight="1"
-        android:layout_width="0dp"
-        android:layout_height="match_parent" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </FrameLayout>
 
 </LinearLayout>
