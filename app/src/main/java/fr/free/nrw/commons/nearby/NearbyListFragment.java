@@ -44,6 +44,7 @@ public class NearbyListFragment extends ListFragment {
 
         View view = inflater.inflate(R.layout.fragment_nearby, container, false);
 
+        //Load from data source (NearbyPlaces.java)
         places = loadAttractionsFromLocation(mLatestLocation);
 
         // Create a progress bar to display while the list loads
@@ -61,21 +62,18 @@ public class NearbyListFragment extends ListFragment {
 
         return view;
     }
-
-
-
+    
     private static List<Place> loadAttractionsFromLocation(final LatLng curLatLng) {
-        //String closestCity = TouristAttractions.getClosestCity(curLatLng);
-        //if (closestCity != null) {
+
         List<Place> places = NearbyPlaces.get();
         if (curLatLng != null) {
             Collections.sort(places,
-                    new Comparator<Attraction>() {
+                    new Comparator<Place>() {
                         @Override
-                        public int compare(Attraction lhs, Attraction rhs) {
-                            double lhsDistance = SphericalUtil.computeDistanceBetween(
+                        public int compare(Place lhs, Place rhs) {
+                            double lhsDistance = computeDistanceBetween(
                                     lhs.location, curLatLng);
-                            double rhsDistance = SphericalUtil.computeDistanceBetween(
+                            double rhsDistance = computeDistanceBetween(
                                     rhs.location, curLatLng);
                             return (int) (lhsDistance - rhsDistance);
                         }
@@ -83,8 +81,32 @@ public class NearbyListFragment extends ListFragment {
             );
         }
         return places;
-        //}
-        //return null;
+    }
+
+    private static double computeDistanceBetween(LatLng from, LatLng to) {
+        return computeAngleBetween(from, to) * 6371009.0D;
+    }
+
+    private static double computeAngleBetween(LatLng from, LatLng to) {
+        return distanceRadians(Math.toRadians(from.latitude), Math.toRadians(from.longitude), Math.toRadians(to.latitude), Math.toRadians(to.longitude));
+    }
+
+
+    private static double distanceRadians(double lat1, double lng1, double lat2, double lng2) {
+        return arcHav(havDistance(lat1, lat2, lng1 - lng2));
+    }
+
+    private static double arcHav(double x) {
+        return 2.0D * Math.asin(Math.sqrt(x));
+    }
+
+    private static double havDistance(double lat1, double lat2, double dLng) {
+        return hav(lat1 - lat2) + hav(dLng) * Math.cos(lat1) * Math.cos(lat2);
+    }
+
+    private static double hav(double x) {
+        double sinHalf = Math.sin(x * 0.5D);
+        return sinHalf * sinHalf;
     }
 
     private class NearbyAdapter extends ArrayAdapter {
