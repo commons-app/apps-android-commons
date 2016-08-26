@@ -31,8 +31,6 @@ public class NearbyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_nearby);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        registerLocationManager();
-
         // Begin the transaction
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         NearbyListFragment fragment = new NearbyListFragment();
@@ -70,6 +68,7 @@ public class NearbyActivity extends AppCompatActivity {
         try {
             locationManager.requestLocationUpdates(provider, 400, 1, myLocationListener);
             Location location = locationManager.getLastKnownLocation(provider);
+            Log.d(TAG, "Checking for location...");
             if (location != null) {
                 myLocationListener.onLocationChanged(location);
             }

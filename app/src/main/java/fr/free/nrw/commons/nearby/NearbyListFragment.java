@@ -61,11 +61,12 @@ public class NearbyListFragment extends ListFragment {
         return view;
     }
 
+    //TODO: Do asynchronously?
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
         //Load from data source (NearbyPlaces.java)
-        //TODO: Do asynchronously?
+        //FIXME: mLatestLocation not set. Hardcode it first for testing
         places = loadAttractionsFromLocation(mLatestLocation);
 
         final ListView listview = (ListView) view.findViewById(R.id.listview);
@@ -81,6 +82,7 @@ public class NearbyListFragment extends ListFragment {
 
         List<Place> places = NearbyPlaces.get();
         if (curLatLng != null) {
+            Log.d(TAG, "Sorting places by distance...");
             Collections.sort(places,
                     new Comparator<Place>() {
                         @Override
@@ -93,6 +95,10 @@ public class NearbyListFragment extends ListFragment {
                         }
                     }
             );
+        }
+        //FIXME: This doesn't sort appropriately
+        for(int i = 0; i < places.size(); i++) {
+            System.out.println("Sorted " + places.get(i).name);
         }
         return places;
     }
