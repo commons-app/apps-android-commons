@@ -66,6 +66,7 @@ public class NearbyListFragment extends ListFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
         //Load from data source (NearbyPlaces.java)
+        LatLng mLatestLocation = ((NearbyActivity) getActivity()).getmLatestLocation();
         //FIXME: mLatestLocation not set. Hardcode it first for testing
         places = loadAttractionsFromLocation(mLatestLocation);
 

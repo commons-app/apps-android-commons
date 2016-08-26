@@ -19,6 +19,7 @@ public class NearbyActivity extends AppCompatActivity {
     private LocationManager locationManager;
     private String provider;
     private Criteria criteria;
+    private LatLng mLatestLocation;
 
     private double currentLatitude, currentLongitude;
     //private String gpsCoords;
@@ -30,6 +31,7 @@ public class NearbyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nearby);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        registerLocationManager();
 
         // Begin the transaction
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -50,12 +52,14 @@ public class NearbyActivity extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
 
-        registerLocationManager();
+
         //TODO: Check if we need String or double coords, and in what format
         //gpsCoords = String.valueOf(currentLatitude) + "|" + String.valueOf(currentLongitude);
     }
 
-
+    protected LatLng getmLatestLocation() {
+        return mLatestLocation;
+    }
     /**
      * Registers a LocationManager to listen for current location
      */
@@ -68,6 +72,7 @@ public class NearbyActivity extends AppCompatActivity {
         try {
             locationManager.requestLocationUpdates(provider, 400, 1, myLocationListener);
             Location location = locationManager.getLastKnownLocation(provider);
+            //Location works, just need to 'send' GPS coords via emulator extended controls if testing on emulator
             Log.d(TAG, "Checking for location...");
             if (location != null) {
                 myLocationListener.onLocationChanged(location);
@@ -97,6 +102,8 @@ public class NearbyActivity extends AppCompatActivity {
             currentLatitude = location.getLatitude();
             currentLongitude = location.getLongitude();
             Log.d(TAG, "Latitude: " + String.valueOf(currentLatitude) + " Longitude: " + String.valueOf(currentLongitude));
+
+            mLatestLocation = new LatLng(currentLatitude, currentLongitude);
         }
 
         @Override
