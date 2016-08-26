@@ -34,7 +34,7 @@ public class NearbyPlaces {
                 int counter = 0;
 
                 //while ((line = in.readLine()) != null) {
-                while (in.readLine() != null && counter < 500) {
+                while (in.readLine() != null && counter < 100) {
 
                     line = in.readLine();
                     counter++;
