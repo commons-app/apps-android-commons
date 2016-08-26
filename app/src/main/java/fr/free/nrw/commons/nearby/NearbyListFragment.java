@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.text.NumberFormat;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -25,12 +26,12 @@ import fr.free.nrw.commons.R;
 
 public class NearbyListFragment extends ListFragment {
 
-    private LatLng mLatestLocation;
     private int mImageSize;
     private boolean mItemClicked;
-    ArrayAdapter mAdapter;
+    private ArrayAdapter mAdapter;
 
-    List<Place> places;
+    private List<Place> places;
+    private LatLng mLatestLocation;
 
     private static final String TAG = "NearbyListFragment";
 
@@ -67,9 +68,9 @@ public class NearbyListFragment extends ListFragment {
 
         //Load from data source (NearbyPlaces.java)
 
-        //LatLng mLatestLocation = ((NearbyActivity) getActivity()).getmLatestLocation();
+        mLatestLocation = ((NearbyActivity) getActivity()).getmLatestLocation();
         //FIXME: Hardcoding mLatestLocation to Michigan for testing
-        LatLng mLatestLocation = new LatLng(44.182205, -84.506836);
+        mLatestLocation = new LatLng(44.182205, -84.506836);
         places = loadAttractionsFromLocation(mLatestLocation);
 
         final ListView listview = (ListView) view.findViewById(R.id.listview);
@@ -81,7 +82,7 @@ public class NearbyListFragment extends ListFragment {
     }
 
 
-    private static List<Place> loadAttractionsFromLocation(final LatLng curLatLng) {
+    private List<Place> loadAttractionsFromLocation(final LatLng curLatLng) {
 
         List<Place> places = NearbyPlaces.get();
         if (curLatLng != null) {
@@ -101,9 +102,27 @@ public class NearbyListFragment extends ListFragment {
         }
         //FIXME: This doesn't sort appropriately
         for(int i = 0; i < places.size(); i++) {
-            System.out.println("Sorted " + places.get(i).name);
+            String distance = formatDistanceBetween(mLatestLocation, places.get(i).location);
+            System.out.println("Sorted " + places.get(i).name + " at " + distance + " away.");
         }
         return places;
+    }
+
+    private String formatDistanceBetween(LatLng point1, LatLng point2) {
+        if (point1 == null || point2 == null) {
+            return null;
+        }
+
+        NumberFormat numberFormat = NumberFormat.getNumberInstance();
+        double distance = Math.round(computeDistanceBetween(point1, point2));
+
+        // Adjust to KM if M goes over 1000 (see javadoc of method for note
+        // on only supporting metric)
+        if (distance >= 1000) {
+            numberFormat.setMaximumFractionDigits(1);
+            return numberFormat.format(distance / 1000) + "km";
+        }
+        return numberFormat.format(distance) + "m";
     }
 
     private static double computeDistanceBetween(LatLng from, LatLng to) {
