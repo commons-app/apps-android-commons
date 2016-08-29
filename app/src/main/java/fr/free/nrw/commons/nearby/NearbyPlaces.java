@@ -33,6 +33,7 @@ public class NearbyPlaces {
                 String line;
                 int counter = 0;
 
+                //TODO: Remove limit of lines after get AsyncTask done
                 //while ((line = in.readLine()) != null) {
                 while (in.readLine() != null && counter < 100) {
 
