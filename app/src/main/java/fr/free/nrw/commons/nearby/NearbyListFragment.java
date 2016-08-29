@@ -28,7 +28,7 @@ public class NearbyListFragment extends ListFragment {
 
     private int mImageSize;
     private boolean mItemClicked;
-    private ArrayAdapter mAdapter;
+    private NearbyAdapter mAdapter;
 
     private List<Place> places;
     private LatLng mLatestLocation;
@@ -110,13 +110,13 @@ public class NearbyListFragment extends ListFragment {
         return places;
     }
 
-    private class NearbyAdapter extends ArrayAdapter {
+    private class NearbyAdapter extends ArrayAdapter<Place> {
 
         public List<Place> placesList;
         private Context mContext;
 
         public NearbyAdapter(Context context, List<Place> places) {
-            super(context, 0);
+            super(context, R.layout.item_place, places);
             mContext = context;
             placesList = places;
         }
