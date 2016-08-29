@@ -104,8 +104,10 @@ public class NearbyListFragment extends ListFragment {
         }
 
         for(int i = 0; i < places.size(); i++) {
-            String distance = formatDistanceBetween(mLatestLocation, places.get(i).location);
-            System.out.println("Sorted " + places.get(i).name + " at " + distance + " away.");
+            Place place = places.get(i);
+            String distance = formatDistanceBetween(mLatestLocation, place.location);
+            System.out.println("Sorted " + place.name + " at " + distance + " away.");
+            place.setDistance(distance);
         }
         return places;
     }
@@ -125,7 +127,6 @@ public class NearbyListFragment extends ListFragment {
         public View getView(int position, View convertView, ViewGroup parent) {
             // Get the data item for this position
             Place place = (Place) getItem(position);
-            //FIXME: This never gets called
             Log.d(TAG, "Place " + place.name);
 
             // Check if an existing view is being reused, otherwise inflate the view
@@ -136,10 +137,12 @@ public class NearbyListFragment extends ListFragment {
             // Lookup view for data population
             TextView tvName = (TextView) convertView.findViewById(R.id.tvName);
             TextView tvDesc = (TextView) convertView.findViewById(R.id.tvDesc);
+            TextView distance = (TextView) convertView.findViewById(R.id.distance);
 
             // Populate the data into the template view using the data object
             tvName.setText(place.name);
             tvDesc.setText(place.description);
+            distance.setText(place.distance);
 
             // Return the completed view to render on screen
             return convertView;
