@@ -100,7 +100,7 @@ public class NearbyListFragment extends ListFragment {
                     }
             );
         }
-        //FIXME: This doesn't sort appropriately
+
         for(int i = 0; i < places.size(); i++) {
             String distance = formatDistanceBetween(mLatestLocation, places.get(i).location);
             System.out.println("Sorted " + places.get(i).name + " at " + distance + " away.");
@@ -123,6 +123,9 @@ public class NearbyListFragment extends ListFragment {
         public View getView(int position, View convertView, ViewGroup parent) {
             // Get the data item for this position
             Place place = (Place) getItem(position);
+            //FIXME: This never gets called
+            Log.d(TAG, "Place " + place.name);
+
             // Check if an existing view is being reused, otherwise inflate the view
             if (convertView == null) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_place, parent, false);
