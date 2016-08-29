@@ -64,6 +64,7 @@ public class NearbyPlaces {
                     String type = fields[3];
                     String image;
 
+                    //TODO: remove this
                     switch(type) {
                         case "event":
                             image = "https://upload.wikimedia.org/wikipedia/commons/c/ca/Anarchist_attack_on_the_King_of_Spain_Alfonso_XIII_%281906%29.jpg";
