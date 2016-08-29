@@ -10,15 +10,14 @@
 
         <ImageView
             android:id="@android:id/icon"
-            android:layout_width="@dimen/image_size"
+            android:layout_width="@dimen/icon_size"
             android:layout_height="match_parent"
             android:src="@drawable/empty_photo"
-            android:scaleType="centerCrop"
-            android:transitionName="image" />
+            android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/distance"
-            android:layout_width="@dimen/image_size"
+            android:layout_width="@dimen/icon_size"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@android:id/icon"
             android:gravity="center"
@@ -51,7 +50,7 @@
             android:maxLines="4"
             style="?android:textAppearanceSmall"
             tools:text="Description goes here" />
-        
+
 
     </RelativeLayout>
 </FrameLayout>
