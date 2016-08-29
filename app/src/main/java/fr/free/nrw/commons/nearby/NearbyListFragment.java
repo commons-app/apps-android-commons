@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -138,11 +139,15 @@ public class NearbyListFragment extends ListFragment {
             TextView tvName = (TextView) convertView.findViewById(R.id.tvName);
             TextView tvDesc = (TextView) convertView.findViewById(R.id.tvDesc);
             TextView distance = (TextView) convertView.findViewById(R.id.distance);
+            ImageView icon = (ImageView) convertView.findViewById(R.id.icon);
 
             // Populate the data into the template view using the data object
             tvName.setText(place.name);
             tvDesc.setText(place.description);
             distance.setText(place.distance);
+
+            //TODO: Check for description type and set Drawable image here
+            icon.setImageResource(place.image);
 
             // Return the completed view to render on screen
             return convertView;
