@@ -63,14 +63,14 @@ public class NearbyListFragment extends ListFragment {
         return view;
     }
 
-    //TODO: Do asynchronously?
+    //TODO: Do asynchronously
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
         //Load from data source (NearbyPlaces.java)
 
         mLatestLocation = ((NearbyActivity) getActivity()).getmLatestLocation();
-        //FIXME: Hardcoding mLatestLocation to Michigan for testing
+        //Hardcoding mLatestLocation to Michigan for testing
         //mLatestLocation = new LatLng(44.182205, -84.506836);
 
         places = loadAttractionsFromLocation(mLatestLocation);
@@ -147,6 +147,7 @@ public class NearbyListFragment extends ListFragment {
             distance.setText(place.distance);
 
             //TODO: Check for description type and set Drawable image here
+            //Types of desc: landmark, city, event, mountain, isle
             icon.setImageResource(place.image);
 
             // Return the completed view to render on screen
