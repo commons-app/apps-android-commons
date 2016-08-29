@@ -108,6 +108,63 @@ public class NearbyListFragment extends ListFragment {
         return places;
     }
 
+    private class NearbyAdapter extends ArrayAdapter {
+
+        public List<Place> placesList;
+        private Context mContext;
+
+        public NearbyAdapter(Context context, List<Place> places) {
+            super(context, 0);
+            mContext = context;
+            placesList = places;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            // Get the data item for this position
+            Place place = (Place) getItem(position);
+            // Check if an existing view is being reused, otherwise inflate the view
+            if (convertView == null) {
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_place, parent, false);
+            }
+
+            // Lookup view for data population
+            TextView tvName = (TextView) convertView.findViewById(R.id.tvName);
+            TextView tvDesc = (TextView) convertView.findViewById(R.id.tvDesc);
+
+            // Populate the data into the template view using the data object
+            tvName.setText(place.name);
+            tvDesc.setText(place.description);
+
+            // Return the completed view to render on screen
+            return convertView;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+
+/*
+        @Override
+        public int getItemCount() {
+            return placesList == null ? 0 : placesList.size();
+        }
+
+        @Override
+        public void onItemClick(View view, int position) {
+
+            if (!mItemClicked) {
+                mItemClicked = true;
+                View heroView = view.findViewById(android.R.id.icon);
+                DetailActivity.launch(
+                        getActivity(), mAdapter.mAttractionList.get(position).name, heroView);
+            }
+
+        }*/
+    }
+
     private String formatDistanceBetween(LatLng point1, LatLng point2) {
         if (point1 == null || point2 == null) {
             return null;
@@ -151,58 +208,4 @@ public class NearbyListFragment extends ListFragment {
         return sinHalf * sinHalf;
     }
 
-    private class NearbyAdapter extends ArrayAdapter {
-
-        public List<Place> placesList;
-        private Context mContext;
-
-        public NearbyAdapter(Context context, List<Place> places) {
-            super(context, 0);
-            mContext = context;
-            placesList = places;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            // Get the data item for this position
-            Place place = (Place) getItem(position);
-            // Check if an existing view is being reused, otherwise inflate the view
-            if (convertView == null) {
-                convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_place, parent, false);
-            }
-
-            // Lookup view for data population
-            TextView tvName = (TextView) convertView.findViewById(R.id.tvName);
-            TextView tvDesc = (TextView) convertView.findViewById(R.id.tvDesc);
-
-            // Populate the data into the template view using the data object
-            tvName.setText(place.name);
-            tvDesc.setText(place.description);
-
-            // Return the completed view to render on screen
-            return convertView;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-/*
-        @Override
-        public int getItemCount() {
-            return placesList == null ? 0 : placesList.size();
-        }
-
-        @Override
-        public void onItemClick(View view, int position) {
-
-            if (!mItemClicked) {
-                mItemClicked = true;
-                View heroView = view.findViewById(android.R.id.icon);
-                DetailActivity.launch(
-                        getActivity(), mAdapter.mAttractionList.get(position).name, heroView);
-            }
-
-        }*/
-    }
 }
