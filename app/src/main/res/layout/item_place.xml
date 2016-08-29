@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:foreground="?attr/selectableItemBackground"
-    android:layout_height="@dimen/image_size">
+    android:layout_height="@dimen/icon_size">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -38,20 +38,20 @@
             android:maxLines="1"
             android:ellipsize="end"
             style="?android:textAppearanceMedium"
-            tools:text="Title 1" />
+            tools:text="Name" />
 
         <TextView
             android:id="@+id/tvDesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@android:id/icon"
-            android:layout_below="@android:id/text1"
+            android:layout_toRightOf="@android:id/icon"
+            android:layout_below="@+id/tvName"
             android:padding="@dimen/small_margin"
             android:ellipsize="end"
             android:maxLines="4"
             style="?android:textAppearanceSmall"
-            tools:text="Description goes here" />
-
+            tools:text="Description" />
 
     </RelativeLayout>
 </FrameLayout>
