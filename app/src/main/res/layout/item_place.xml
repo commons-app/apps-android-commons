@@ -13,6 +13,7 @@
             android:layout_width="@dimen/icon_size"
             android:layout_height="match_parent"
             android:src="@drawable/empty_photo"
+            android:background="#ffffff"
             android:scaleType="centerCrop" />
 
         <TextView
@@ -23,6 +24,7 @@
             android:gravity="center"
             android:padding="@dimen/tiny_margin"
             style="?android:textAppearanceSmallInverse"
+            android:textColor="#ffffff"
             android:background="@color/text_background"
             tools:text="Overlay"/>
 

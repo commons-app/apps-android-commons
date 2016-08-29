@@ -148,7 +148,7 @@ public class NearbyListFragment extends ListFragment {
 
             //TODO: Check for description type and set Drawable image here
             //Types of desc: landmark, city, event, mountain, isle
-            icon.setImageResource(R.drawable.icon_war);
+            icon.setImageResource(R.drawable.icon_landmark);
 
             // Return the completed view to render on screen
             return convertView;
