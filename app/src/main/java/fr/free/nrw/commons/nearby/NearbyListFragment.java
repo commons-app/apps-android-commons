@@ -141,8 +141,10 @@ public class NearbyListFragment extends ListFragment {
             TextView distance = (TextView) convertView.findViewById(R.id.distance);
             ImageView icon = (ImageView) convertView.findViewById(R.id.icon);
 
+            String quotelessName = place.name.replaceAll("^\"|\"$", "");
+
             // Populate the data into the template view using the data object
-            tvName.setText(place.name);
+            tvName.setText(quotelessName);
             tvDesc.setText(place.description);
             distance.setText(place.distance);
 
