@@ -149,7 +149,7 @@ public class NearbyListFragment extends ListFragment {
             distance.setText(place.distance);
 
             //TODO: Check for description type and set Drawable image here
-            //Types of desc: landmark, city, event, mountain, isle
+            //Types of desc: landmark, city, edu, event, mountain, isle
             switch(place.description) {
                 case "landmark":
                     icon.setImageResource(R.drawable.icon_landmark);
