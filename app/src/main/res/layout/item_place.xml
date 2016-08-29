@@ -27,10 +27,11 @@
             tools:text="Overlay"/>
 
         <TextView
-            android:id="@android:id/tvName"
+            android:id="@+id/tvName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@android:id/icon"
+            android:layout_toRightOf="@android:id/icon"
             android:paddingTop="@dimen/small_margin"
             android:paddingLeft="@dimen/small_margin"
             android:paddingRight="@dimen/small_margin"
@@ -40,7 +41,7 @@
             tools:text="Title 1" />
 
         <TextView
-            android:id="@android:id/tvDesc"
+            android:id="@+id/tvDesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@android:id/icon"
