@@ -30,14 +30,10 @@ public class NearbyPlaces {
 
                 boolean firstLine = true;
                 String line;
-                int counter = 0;
 
-                //TODO: Remove limit of lines after get AsyncTask done
                 while ((line = in.readLine()) != null) {
-                //while (in.readLine() != null && counter < 1000) {
-
                     line = in.readLine();
-                    counter++;
+                    
                     // Skip CSV header.
                     if (firstLine) {
                         firstLine = false;
