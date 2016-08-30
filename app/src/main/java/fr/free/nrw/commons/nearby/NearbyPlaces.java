@@ -14,7 +14,7 @@ public class NearbyPlaces {
 
     static List<Place> places = null;
 
-    public static synchronized List<Place> get() {
+    public static List<Place> get() {
         if(places != null) {
             return places;
         }

@@ -2,6 +2,7 @@ package fr.free.nrw.commons.nearby;
 
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v7.widget.RecyclerView;
@@ -72,13 +73,9 @@ public class NearbyListFragment extends ListFragment {
         mLatestLocation = ((NearbyActivity) getActivity()).getmLatestLocation();
         //Hardcoding mLatestLocation to Michigan for testing
         //mLatestLocation = new LatLng(44.182205, -84.506836);
-
-        places = loadAttractionsFromLocation(mLatestLocation);
-        mAdapter = new NearbyAdapter(getActivity(), places);
-
-        ListView listview = (ListView) view.findViewById(R.id.listview);
-        //setListAdapter(mAdapter);
-        listview.setAdapter(mAdapter);
+        
+        getNearbyPlaces nearbyList = new getNearbyPlaces();
+        nearbyList.execute();
 
         Log.d(TAG, "Adapter set to ListView");
         mAdapter.notifyDataSetChanged();
@@ -111,6 +108,36 @@ public class NearbyListFragment extends ListFragment {
             place.setDistance(distance);
         }
         return places;
+    }
+
+    private class getNearbyPlaces extends AsyncTask<Void, String, List<Place>> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onProgressUpdate(String... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected List<Place> doInBackground(Void... params) {
+            places = loadAttractionsFromLocation(mLatestLocation);
+            return places;
+        }
+
+        @Override
+        protected void onPostExecute(List<Place> result) {
+            super.onPostExecute(result);
+
+            mAdapter = new NearbyAdapter(getActivity(), places);
+
+            ListView listview = (ListView) getView().findViewById(R.id.listview);
+            //setListAdapter(mAdapter);
+            listview.setAdapter(mAdapter);
+
+        }
     }
 
     private class NearbyAdapter extends ArrayAdapter<Place> {
