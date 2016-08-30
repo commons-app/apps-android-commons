@@ -21,7 +21,6 @@ public class NearbyPlaces {
         else {
             try {
                 places = new ArrayList<Place>();
-                // TODO Load in a different thread and show wait dialog
                 StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
                 StrictMode.setThreadPolicy(policy);
 
@@ -35,7 +34,7 @@ public class NearbyPlaces {
 
                 //TODO: Remove limit of lines after get AsyncTask done
                 //while ((line = in.readLine()) != null) {
-                while (in.readLine() != null && counter < 100) {
+                while (in.readLine() != null && counter < 500) {
 
                     line = in.readLine();
                     counter++;

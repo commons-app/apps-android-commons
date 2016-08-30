@@ -64,7 +64,6 @@ public class NearbyListFragment extends ListFragment {
         return view;
     }
 
-    //TODO: Do asynchronously
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
