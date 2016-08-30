@@ -34,6 +34,7 @@ public class NearbyListFragment extends ListFragment {
 
     private List<Place> places;
     private LatLng mLatestLocation;
+    private ProgressBar progressBar;
 
     private static final String TAG = "NearbyListFragment";
 
@@ -45,10 +46,14 @@ public class NearbyListFragment extends ListFragment {
                              Bundle savedInstanceState) {
 
         Log.d(TAG, "NearbyListFragment created");
-
         View view = inflater.inflate(R.layout.fragment_nearby, container, false);
+        return view;
+    }
 
-        /*
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+
+/*
         // Create a progress bar to display while the list loads
         ProgressBar progressBar = new ProgressBar(getActivity());
         progressBar.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -59,15 +64,10 @@ public class NearbyListFragment extends ListFragment {
         ViewGroup root = (ViewGroup) view.getRootView();
         root.addView(progressBar);
 */
-
-
-        return view;
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-
-        //Load from data source (NearbyPlaces.java)
+        progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
+        progressBar.setMax(10);
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.setProgress(0);
 
         mLatestLocation = ((NearbyActivity) getActivity()).getmLatestLocation();
         //Hardcoding mLatestLocation to Michigan for testing
@@ -100,7 +100,7 @@ public class NearbyListFragment extends ListFragment {
             );
         }
 
-        for(int i = 0; i < places.size(); i++) {
+        for(int i = 0; i < 500; i++) {
             Place place = places.get(i);
             String distance = formatDistanceBetween(mLatestLocation, place.location);
             System.out.println("Sorted " + place.name + " at " + distance + " away.");
@@ -109,15 +109,16 @@ public class NearbyListFragment extends ListFragment {
         return places;
     }
 
-    private class getNearbyPlaces extends AsyncTask<Void, String, List<Place>> {
+    private class getNearbyPlaces extends AsyncTask<Void, Integer, List<Place>> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
         }
 
         @Override
-        protected void onProgressUpdate(String... values) {
+        protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
+            progressBar.setProgress(values[0]);
         }
 
         @Override
@@ -131,6 +132,8 @@ public class NearbyListFragment extends ListFragment {
             super.onPostExecute(result);
 
             mAdapter = new NearbyAdapter(getActivity(), places);
+
+            progressBar.setVisibility(View.GONE);
 
             ListView listview = (ListView) getView().findViewById(R.id.listview);
             //setListAdapter(mAdapter);
