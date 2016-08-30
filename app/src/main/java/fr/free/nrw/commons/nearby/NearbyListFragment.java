@@ -73,12 +73,12 @@ public class NearbyListFragment extends ListFragment {
         mLatestLocation = ((NearbyActivity) getActivity()).getmLatestLocation();
         //Hardcoding mLatestLocation to Michigan for testing
         //mLatestLocation = new LatLng(44.182205, -84.506836);
-        
+
         getNearbyPlaces nearbyList = new getNearbyPlaces();
         nearbyList.execute();
 
         Log.d(TAG, "Adapter set to ListView");
-        mAdapter.notifyDataSetChanged();
+
     }
 
 
@@ -136,7 +136,7 @@ public class NearbyListFragment extends ListFragment {
             ListView listview = (ListView) getView().findViewById(R.id.listview);
             //setListAdapter(mAdapter);
             listview.setAdapter(mAdapter);
-
+            mAdapter.notifyDataSetChanged();
         }
     }
 
