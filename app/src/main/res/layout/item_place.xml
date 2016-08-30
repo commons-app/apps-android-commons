@@ -38,7 +38,7 @@
             android:paddingLeft="@dimen/small_margin"
             android:paddingRight="@dimen/small_margin"
             android:maxLines="1"
-            android:ellipsize="end"
+            android:ellipsize="none"
             style="?android:textAppearanceMedium"
             tools:text="Name" />
 
@@ -50,7 +50,7 @@
             android:layout_toRightOf="@+id/icon"
             android:layout_below="@+id/tvName"
             android:padding="@dimen/small_margin"
-            android:ellipsize="end"
+            android:ellipsize="none"
             android:maxLines="4"
             style="?android:textAppearanceSmall"
             tools:text="Description" />

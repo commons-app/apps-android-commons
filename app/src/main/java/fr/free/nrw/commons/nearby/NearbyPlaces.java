@@ -33,7 +33,7 @@ public class NearbyPlaces {
 
                 while ((line = in.readLine()) != null) {
                     line = in.readLine();
-                    
+
                     // Skip CSV header.
                     if (firstLine) {
                         firstLine = false;
