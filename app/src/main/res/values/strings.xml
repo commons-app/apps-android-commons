@@ -154,7 +154,5 @@
     <string name="storage_permission_rationale">Required permission: Read external storage. App cannot function without this.</string>
     <string name="location_permission_rationale">Optional permission: Get current location for category suggestions</string>
     <string name="ok">OK</string>
-    <string name="back">Back</string>
-
     <string name="title_activity_nearby">Nearby Places</string>
 </resources>
