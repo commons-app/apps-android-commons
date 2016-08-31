@@ -106,6 +106,5 @@
   <string name="detail_panel_cats_none">దేన్నీ ఎంచుకోలేదు</string>
   <string name="detail_description_empty">వివరణ లేదు</string>
   <string name="detail_license_empty">తెలియని లైసెన్సు</string>
-  <string name="provider_campaigns">ప్రచారాలు</string>
   <string name="menu_refresh">తాజాకరించు</string>
 </resources>

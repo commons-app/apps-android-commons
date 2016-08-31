@@ -117,6 +117,5 @@ Hidupkan rencana-rencana di Wikipedia!</string>
   <string name="detail_panel_cats_none">Tiada yang dipilih</string>
   <string name="detail_description_empty">Tiada keterangan</string>
   <string name="detail_license_empty">Lesen tidak diketahui</string>
-  <string name="provider_campaigns">Kempen</string>
   <string name="menu_refresh">Muat semula</string>
 </resources>

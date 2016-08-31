@@ -108,6 +108,5 @@
   <string name="detail_panel_cats_none">केहि पनि छानिएन</string>
   <string name="detail_description_empty">वर्णन छैन</string>
   <string name="detail_license_empty">अज्ञान अनुमतिपत्र</string>
-  <string name="provider_campaigns">अभियानहरु</string>
   <string name="menu_refresh">ताजागर्ने</string>
 </resources>

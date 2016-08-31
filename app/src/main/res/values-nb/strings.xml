@@ -125,6 +125,5 @@ Trykk på denne meldingen (eller trykk tilbake) for å hoppe over dette steget.<
   <string name="detail_panel_cats_none">Ingen valgt</string>
   <string name="detail_description_empty">Ingen beskrivelse</string>
   <string name="detail_license_empty">Ukjent lisens</string>
-  <string name="provider_campaigns">Kampanjer</string>
   <string name="menu_refresh">Gjenoppfrisk</string>
 </resources>

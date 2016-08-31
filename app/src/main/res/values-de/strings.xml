@@ -122,6 +122,5 @@ Tippe auf diese Nachricht oder drücke „Zurück“, um diesen Schritt zu über
   <string name="detail_panel_cats_none">Keine ausgewählt</string>
   <string name="detail_description_empty">Keine Beschreibung</string>
   <string name="detail_license_empty">Unbekannte Lizenz</string>
-  <string name="provider_campaigns">Kampagnen</string>
   <string name="menu_refresh">Aktualisieren</string>
 </resources>

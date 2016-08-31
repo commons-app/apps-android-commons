@@ -125,6 +125,5 @@
   <string name="detail_panel_cats_none">Καμία επιλεγμένη</string>
   <string name="detail_description_empty">Καμία περιγραφή</string>
   <string name="detail_license_empty">Άγνωστη άδεια</string>
-  <string name="provider_campaigns">Εκστρατείες</string>
   <string name="menu_refresh">Ανανέωση</string>
 </resources>

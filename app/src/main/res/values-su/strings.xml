@@ -80,5 +80,4 @@
   <string name="detail_panel_cats_label">Kategori</string>
   <string name="detail_panel_cats_loading">Ngamuat…</string>
   <string name="detail_panel_cats_none">Taya nu dipilih</string>
-  <string name="provider_campaigns">Kampanyeu</string>
 </resources>

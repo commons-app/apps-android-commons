@@ -122,6 +122,5 @@
   <string name="detail_panel_cats_none">未選擇</string>
   <string name="detail_description_empty">無說明</string>
   <string name="detail_license_empty">未知許可</string>
-  <string name="provider_campaigns">宣傳</string>
   <string name="menu_refresh">重新整理</string>
 </resources>
