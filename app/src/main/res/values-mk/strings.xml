@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Ризница</string>
-  <string name="app_name_beta">Ризница Бета</string>
   <string name="menu_settings">Поставки</string>
   <string name="username">Корисничко име</string>
   <string name="password">Лозинка</string>

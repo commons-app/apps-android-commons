@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Уикиказына</string>
-  <string name="app_name_beta">Уикиказына</string>
   <string name="menu_settings">Ырастоолор</string>
   <string name="username">Колдонуучунун аты</string>
   <string name="password">Сырсөз</string>

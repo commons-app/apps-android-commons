@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼</string>
-  <string name="app_name_beta">ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼ ਬੀਟਾ</string>
   <string name="menu_settings">ਸੈਟਿੰਗ</string>
   <string name="username">ਵਰਤੋਂਕਾਰ ਨਾਂ</string>
   <string name="password">ਪਾਸਵਰਡ</string>

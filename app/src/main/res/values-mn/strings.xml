@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Wikimedia Commons програм</string>
-  <string name="app_name_beta">Wikimedia Commons -ын Бета хувилбар</string>
   <string name="menu_settings">Тохиргоо</string>
   <string name="username">Хэрэглэгчийн нэр</string>
   <string name="password">Нууц үг</string>

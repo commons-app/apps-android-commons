@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Вікісховище</string>
-  <string name="app_name_beta">Wikimedia Commons Beta</string>
   <string name="menu_settings">Налаштування</string>
   <string name="username">Ім\'я користувача</string>
   <string name="password">Пароль</string>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">ויקישיתוף</string>
-  <string name="app_name_beta">ויקישיתוף בטא</string>
   <string name="menu_settings">הגדרות</string>
   <string name="username">שם משתמש</string>
   <string name="password">ססמה</string>

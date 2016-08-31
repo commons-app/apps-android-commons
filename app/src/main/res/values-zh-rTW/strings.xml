@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">維基共享資源</string>
-  <string name="app_name_beta">維基共享資源測試版</string>
   <string name="menu_settings">設定</string>
   <string name="username">使用者名稱</string>
   <string name="password">密碼</string>

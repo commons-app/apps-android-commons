@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">উইকিমিডিয়া কমন্স</string>
-  <string name="app_name_beta">উইকিমিডিয়া কমন্স বেটা</string>
   <string name="menu_settings">সেটিং</string>
   <string name="username">ব্যবহারকারী নাম</string>
   <string name="password">পাসওয়ার্ড</string>

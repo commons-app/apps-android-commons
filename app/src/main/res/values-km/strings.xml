@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Wikimedia Commons</string>
-  <string name="app_name_beta">Wikimedia Commons បេតា</string>
   <string name="menu_settings">ការកំណត់​នានា</string>
   <string name="username">ឈ្មោះអ្នកប្រើប្រាស់</string>
   <string name="password">លេខ​សម្ងាត់​</string>

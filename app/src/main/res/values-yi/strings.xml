@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">וויקימעדיע קאמאנס</string>
-  <string name="app_name_beta">וויקימעדיע קאמאנס בעטא</string>
   <string name="menu_settings">איינשטעלונגען</string>
   <string name="username">באַניצער־נאָמען</string>
   <string name="password">פאַסווארט</string>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">विकिमीडिया कमन्स</string>
-  <string name="app_name_beta">विकिमीडिया कमन्स बिटा</string>
   <string name="menu_settings">सेटिङ्गहरू</string>
   <string name="username">प्रयोगकर्ता नाम</string>
   <string name="password">पासवर्ड</string>

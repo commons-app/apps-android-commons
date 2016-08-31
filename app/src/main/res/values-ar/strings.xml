@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">ويكيميديا كومنز</string>
-  <string name="app_name_beta">ويكيميديا كومنز بيتا</string>
   <string name="menu_settings">الإعدادات</string>
   <string name="username">اسم المستخدم</string>
   <string name="password">كلمة السر</string>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Vikiteka</string>
-  <string name="app_name_beta">Vikiteka Beta</string>
   <string name="menu_settings">Nustatymai</string>
   <string name="username">Naudotojo vardas</string>
   <string name="password">Slaptažodis</string>

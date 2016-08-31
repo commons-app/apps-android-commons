@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">వికీమీడియా కామన్స్</string>
-  <string name="app_name_beta">వికీమీడియా కామన్స్ బీటా</string>
   <string name="menu_settings">అమరికలు</string>
   <string name="username">వాడుకరిపేరు</string>
   <string name="password">సంకేతపదం</string>
