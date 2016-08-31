@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">ವಿಕಿಮೀಡಿಯ ಕಾಮನ್ಸ್</string>
-  <string name="app_name_beta">ವಿಕಿಮೀಡಿಯ ಕಾಮನ್ಸ್ ಬೀಟ</string>
   <string name="menu_settings">ವ್ಯವಸ್ಥೆಗಳು</string>
   <string name="username">ಬಳಕೆದಾರ ಹೆಸರು</string>
   <string name="password">ಪ್ರವೇಶಪದ</string>

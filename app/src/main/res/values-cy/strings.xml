@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Comin Wikimedia</string>
-  <string name="app_name_beta">Comin Wikimedia Beta</string>
   <string name="menu_settings">Gosodiadau</string>
   <string name="username">Enw defnyddiwr</string>
   <string name="password">Cyfrinair</string>

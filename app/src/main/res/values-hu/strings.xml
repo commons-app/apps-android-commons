@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Wikimedia Commons</string>
-  <string name="app_name_beta">Wikimédia Commons Béta</string>
   <string name="menu_settings">Beállítások</string>
   <string name="username">Felhasználónév</string>
   <string name="password">Jelszó</string>

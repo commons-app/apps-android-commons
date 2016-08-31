@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">ვიკისაწყობი</string>
-  <string name="app_name_beta">ვიკისაწყობი ბეტა</string>
   <string name="menu_settings">კონფიგურაცია</string>
   <string name="username">მომხმარებლის სახელი</string>
   <string name="password">პაროლი</string>

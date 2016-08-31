@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">විකිමීඩියා කොමන්ස්</string>
-  <string name="app_name_beta">විකිමීඩියා කොමන්ස් බීටා</string>
   <string name="menu_settings">සැකසුම්</string>
   <string name="username">පරිශීලක නාමය</string>
   <string name="password">මුරපදය</string>

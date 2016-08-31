@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">വിക്കിമീഡിയ കോമൺസ്</string>
-  <string name="app_name_beta">വിക്കിമീഡിയ കോമൺസ് ബീറ്റ</string>
   <string name="menu_settings">സജ്ജീകരണങ്ങൾ</string>
   <string name="username">ഉപയോക്തൃനാമം</string>
   <string name="password">രഹസ്യവാക്ക്</string>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Wikimedija Commons</string>
-  <string name="app_name_beta">Wikimedia Commons Beta</string>
   <string name="menu_settings">Iestatījumi</string>
   <string name="username">Lietotājvārds</string>
   <string name="password">Parole</string>

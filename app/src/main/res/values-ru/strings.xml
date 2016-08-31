@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Викисклад</string>
-  <string name="app_name_beta">Викисклад (бета)</string>
   <string name="menu_settings">Настройки</string>
   <string name="username">Имя пользователя</string>
   <string name="password">Пароль</string>
