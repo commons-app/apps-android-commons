@@ -106,6 +106,5 @@
   <string name="detail_panel_cats_none">Ingen valgt</string>
   <string name="detail_description_empty">Ingen beskrivelse</string>
   <string name="detail_license_empty">Ukendt licens</string>
-  <string name="provider_campaigns">Kampagner</string>
   <string name="menu_refresh">Opdater</string>
 </resources>

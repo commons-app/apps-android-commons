@@ -126,6 +126,5 @@
   <string name="detail_panel_cats_none">কিছুই নির্বাচন করা হয়নি</string>
   <string name="detail_description_empty">বিবরণ নেই</string>
   <string name="detail_license_empty">অজানা লাইসেন্স</string>
-  <string name="provider_campaigns">ক্যাম্পেইন</string>
   <string name="menu_refresh">পুনঃসতেজ</string>
 </resources>

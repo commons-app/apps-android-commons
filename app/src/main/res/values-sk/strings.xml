@@ -109,6 +109,5 @@ Kliknite na tento odkaz (alebo na späť) ak chcete tento krok vynechať.</strin
   <string name="detail_panel_cats_none">Nič nebolo vybrané</string>
   <string name="detail_description_empty">Bez popisu</string>
   <string name="detail_license_empty">Neznáma licencia</string>
-  <string name="provider_campaigns">Kampane</string>
   <string name="menu_refresh">Obnoviť</string>
 </resources>

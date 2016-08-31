@@ -111,7 +111,6 @@ Followed by {{msg-wm|Commons-android-strings-welcome wikipedia subtext}}.</strin
   <string name="detail_panel_cats_none">Placeholder for categories list in media detail panel, if no categories found.
 {{Identical|None selected}}</string>
   <string name="detail_description_empty">{{Identical|No description}}</string>
-  <string name="provider_campaigns">{{Identical|Campaign}}</string>
   <string name="menu_refresh">Label for menu item that refreshes current list of images.
 {{Identical|Refresh}}</string>
 </resources>

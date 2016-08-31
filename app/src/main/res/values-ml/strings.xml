@@ -127,6 +127,5 @@
   <string name="detail_panel_cats_none">ഒന്നും തിരഞ്ഞെടുത്തിട്ടില്ല</string>
   <string name="detail_description_empty">വിവരണമൊന്നുമില്ല</string>
   <string name="detail_license_empty">അജ്ഞാതമായ അനുമതി</string>
-  <string name="provider_campaigns">പ്രചാരണപ്രവർത്തനം</string>
   <string name="menu_refresh">പുതുക്കുക</string>
 </resources>

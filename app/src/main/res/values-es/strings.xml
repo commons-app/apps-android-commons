@@ -128,6 +128,5 @@ imágenes de carteles, portadas de libro, etc.</string>
   <string name="detail_panel_cats_none">No hay nada seleccionado</string>
   <string name="detail_description_empty">Sin descripción</string>
   <string name="detail_license_empty">Licencia desconocida</string>
-  <string name="provider_campaigns">Campañas</string>
   <string name="menu_refresh">Actualizar</string>
 </resources>
