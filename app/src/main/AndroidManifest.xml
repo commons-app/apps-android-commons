@@ -84,7 +84,8 @@
             android:label="@string/title_activity_signup"/>
         <activity
             android:name=".nearby.NearbyActivity"
-            android:label="@string/title_activity_nearby" />
+            android:label="@string/title_activity_nearby"
+            android:parentActivityName=".contributions.ContributionsActivity"/>
 
         <service android:name=".upload.UploadService" >
         </service>

@@ -30,7 +30,9 @@ public class NearbyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nearby);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         registerLocationManager();
 
         // Begin the transaction
@@ -38,23 +40,11 @@ public class NearbyActivity extends AppCompatActivity {
         NearbyListFragment fragment = new NearbyListFragment();
         ft.add(R.id.container, fragment);
         ft.commit();
-
-        /*
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new NearbyListFragment())
-                    .commit();
-        }
-        */
     }
 
     @Override
     protected void onResume(){
         super.onResume();
-
-
-        //TODO: Check if we need String or double coords, and in what format
-        //gpsCoords = String.valueOf(currentLatitude) + "|" + String.valueOf(currentLongitude);
     }
 
     protected LatLng getmLatestLocation() {
