@@ -8,7 +8,6 @@ public class Place {
     public String name;
     public String description;
     public String longDescription;
-    public Uri imageUrl;
     public Uri secondaryImageUrl;
     public LatLng location;
 
@@ -18,12 +17,11 @@ public class Place {
 
     public Place() {}
 
-    public Place(String name, String description, String longDescription, Uri imageUrl,
+    public Place(String name, String description, String longDescription,
                  Uri secondaryImageUrl, LatLng location) {
         this.name = name;
         this.description = description;
         this.longDescription = longDescription;
-        this.imageUrl = imageUrl;
         this.secondaryImageUrl = secondaryImageUrl;
         this.location = location;
     }

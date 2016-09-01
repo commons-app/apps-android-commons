@@ -209,25 +209,6 @@ public class NearbyListFragment extends ListFragment {
         public long getItemId(int position) {
             return position;
         }
-
-
-/*
-        @Override
-        public int getItemCount() {
-            return placesList == null ? 0 : placesList.size();
-        }
-
-        @Override
-        public void onItemClick(View view, int position) {
-
-            if (!mItemClicked) {
-                mItemClicked = true;
-                View heroView = view.findViewById(android.R.id.icon);
-                DetailActivity.launch(
-                        getActivity(), mAdapter.mAttractionList.get(position).name, heroView);
-            }
-
-        }*/
     }
 
     private String formatDistanceBetween(LatLng point1, LatLng point2) {

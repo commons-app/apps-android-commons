@@ -60,26 +60,10 @@ public class NearbyPlaces {
                     String type = fields[3];
                     String image;
 
-                    //TODO: remove this
-                    switch(type) {
-                        case "event":
-                            image = "https://upload.wikimedia.org/wikipedia/commons/c/ca/Anarchist_attack_on_the_King_of_Spain_Alfonso_XIII_%281906%29.jpg";
-                            break;
-                        case "edu":
-                            image = "https://upload.wikimedia.org/wikipedia/commons/d/d4/Vrt%2C_pogled_na_glavni_ulaz.JPG";
-                            break;
-                        case "landmark":
-                            image = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/20150902GrenspaalElst_03.JPG/767px-20150902GrenspaalElst_03.JPG";
-                            break;
-                        default:
-                            image = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Point_d_interrogation.jpg/120px-Point_d_interrogation.jpg";
-                    }
-
                     places.add(new Place(
                             name,
                             type, // list
                             type, // details
-                            Uri.parse(image),
                             null,
                             new LatLng(latitude, longitude)
                     ));
