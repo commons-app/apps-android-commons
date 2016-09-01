@@ -197,6 +197,18 @@ public class NearbyListFragment extends ListFragment {
                 case "city":
                     icon.setImageResource(R.drawable.icon_city);
                     break;
+                case "edu":
+                    icon.setImageResource(R.drawable.icon_edu);
+                    break;
+                case "event":
+                    icon.setImageResource(R.drawable.icon_event);
+                    break;
+                case "mountain":
+                    icon.setImageResource(R.drawable.icon_mountain);
+                    break;
+                case "isle":
+                    icon.setImageResource(R.drawable.icon_isle);
+                    break;
                 default:
                     icon.setImageResource(R.drawable.empty_photo);
             }
