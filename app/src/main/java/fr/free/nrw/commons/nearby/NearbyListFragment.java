@@ -56,17 +56,6 @@ public class NearbyListFragment extends ListFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
-/*
-        // Create a progress bar to display while the list loads
-        ProgressBar progressBar = new ProgressBar(getActivity());
-        progressBar.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT));
-        progressBar.setIndeterminate(true);
-        getListView().setEmptyView(progressBar);
-        // Must add the progress bar to the root of the layout
-        ViewGroup root = (ViewGroup) view.getRootView();
-        root.addView(progressBar);
-*/
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
         progressBar.setMax(10);
         progressBar.setVisibility(View.VISIBLE);
@@ -82,7 +71,7 @@ public class NearbyListFragment extends ListFragment {
         Log.d(TAG, "Adapter set to ListView");
 
     }
-    
+
     private List<Place> loadAttractionsFromLocation(final LatLng curLatLng) {
 
         List<Place> places = NearbyPlaces.get();
@@ -142,9 +131,16 @@ public class NearbyListFragment extends ListFragment {
             listview.setAdapter(mAdapter);
 
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                    Log.d(TAG, "Item at position " + position + " selected");
+
+                    Place place = places.get(position);
+                    LatLng placeLatLng = place.location;
+
+                    double latitude = placeLatLng.latitude;
+                    double longitude = placeLatLng.longitude;
+
+                    Log.d(TAG, "Item at position " + position + " has coords: Lat: " + latitude + " Long: " + longitude);
                     /*
                     Intent i = new Intent(More.this, NextActvity.class);
                     //If you wanna send any data to nextActicity.class you can use
