@@ -144,7 +144,7 @@ public class NearbyListFragment extends ListFragment {
                     Log.d(TAG, "Item at position " + position + " has coords: Lat: " + latitude + " Long: " + longitude);
 
                     //Open map app at given position
-                    Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + latitude + "," + longitude + '"');
+                    Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + latitude + "," + longitude);
                     Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
 
                     if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {
