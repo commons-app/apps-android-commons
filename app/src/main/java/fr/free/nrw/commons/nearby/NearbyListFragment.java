@@ -63,8 +63,6 @@ public class NearbyListFragment extends ListFragment {
         progressBar.setProgress(0);
 
         mLatestLocation = ((NearbyActivity) getActivity()).getmLatestLocation();
-        //Hardcoding mLatestLocation to Michigan for testing
-        //mLatestLocation = new LatLng(44.182205, -84.506836);
 
         getNearbyPlaces nearbyList = new getNearbyPlaces();
         nearbyList.execute();
@@ -128,7 +126,6 @@ public class NearbyListFragment extends ListFragment {
             progressBar.setVisibility(View.GONE);
 
             ListView listview = (ListView) getView().findViewById(R.id.listview);
-            //setListAdapter(mAdapter);
             listview.setAdapter(mAdapter);
 
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
