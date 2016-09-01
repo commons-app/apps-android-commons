@@ -187,8 +187,7 @@ public class NearbyListFragment extends ListFragment {
             tvName.setText(quotelessName);
             tvDesc.setText(place.description);
             distance.setText(place.distance);
-
-            //TODO: Check for description type and set Drawable image here
+            
             //Types of desc: landmark, city, edu, event, mountain, isle
             switch(place.description) {
                 case "landmark":
