@@ -3,6 +3,7 @@ package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -141,13 +142,15 @@ public class NearbyListFragment extends ListFragment {
                     double longitude = placeLatLng.longitude;
 
                     Log.d(TAG, "Item at position " + position + " has coords: Lat: " + latitude + " Long: " + longitude);
-                    /*
-                    Intent i = new Intent(More.this, NextActvity.class);
-                    //If you wanna send any data to nextActicity.class you can use
-                    i.putExtra(String key, value.get(position));
 
-                    startActivity(i);
-                    */
+                    Uri gmmIntentUri = Uri.parse("geo:" + latitude + "," + longitude + '"');
+                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+
+                    mapIntent.setPackage("com.google.android.apps.maps");
+
+                    if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+                        startActivity(mapIntent);
+                    }
                 }
             });
             mAdapter.notifyDataSetChanged();
