@@ -2,6 +2,7 @@ package fr.free.nrw.commons.nearby;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -12,12 +13,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.NumberFormat;
 import java.util.Collections;
@@ -79,8 +82,7 @@ public class NearbyListFragment extends ListFragment {
         Log.d(TAG, "Adapter set to ListView");
 
     }
-
-
+    
     private List<Place> loadAttractionsFromLocation(final LatLng curLatLng) {
 
         List<Place> places = NearbyPlaces.get();
@@ -138,6 +140,20 @@ public class NearbyListFragment extends ListFragment {
             ListView listview = (ListView) getView().findViewById(R.id.listview);
             //setListAdapter(mAdapter);
             listview.setAdapter(mAdapter);
+
+            listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+
+                    Log.d(TAG, "Item at position " + position + " selected");
+                    /*
+                    Intent i = new Intent(More.this, NextActvity.class);
+                    //If you wanna send any data to nextActicity.class you can use
+                    i.putExtra(String key, value.get(position));
+
+                    startActivity(i);
+                    */
+                }
+            });
             mAdapter.notifyDataSetChanged();
         }
     }
