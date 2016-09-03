@@ -30,6 +30,7 @@ import fr.free.nrw.commons.AboutActivity;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.SettingsActivity;
+import fr.free.nrw.commons.nearby.NearbyActivity;
 import fr.free.nrw.commons.upload.UploadService;
 
 public class ContributionsListFragment extends Fragment {
@@ -142,15 +143,28 @@ public class ContributionsListFragment extends Fragment {
                 feedbackIntent.setType("message/rfc822");
                 feedbackIntent.putExtra(Intent.EXTRA_EMAIL, new String[] { CommonsApplication.FEEDBACK_EMAIL });
                 feedbackIntent.putExtra(Intent.EXTRA_SUBJECT, String.format(CommonsApplication.FEEDBACK_EMAIL_SUBJECT, CommonsApplication.APPLICATION_VERSION));
-
                 try {
                     startActivity(feedbackIntent);
                 }
                 catch (ActivityNotFoundException e) {
                     Toast.makeText(getActivity(), R.string.no_email_client, Toast.LENGTH_SHORT).show();
                 }
-
                 return true;
+            case R.id.menu_nearby:
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (ContextCompat.checkSelfPermission(this.getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        //See http://stackoverflow.com/questions/33169455/onrequestpermissionsresult-not-being-called-in-dialog-fragment
+                        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 2);
+                        return false;
+                    } else {
+                        Intent nearbyIntent = new Intent(getActivity(), NearbyActivity.class);
+                        startActivity(nearbyIntent);
+                    }
+                }
+                else {
+                    Intent nearbyIntent = new Intent(getActivity(), NearbyActivity.class);
+                    startActivity(nearbyIntent);
+                }
             case R.id.menu_refresh:
                 ((SourceRefresher)getActivity()).refreshSource();
                 return true;
@@ -167,6 +181,14 @@ public class ContributionsListFragment extends Fragment {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Log.d("ContributionsList", "Call controller.startGalleryPick()");
                     controller.startGalleryPick();
+                }
+            }
+            // 2 = Location allowed when 'nearby places' selected
+            case 2: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.d("ContributionsList", "Location permission granted");
+                    Intent nearbyIntent = new Intent(getActivity(), NearbyActivity.class);
+                    startActivity(nearbyIntent);
                 }
             }
         }

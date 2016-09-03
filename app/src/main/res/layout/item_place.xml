@@ -1,0 +1,59 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:foreground="?attr/selectableItemBackground"
+    android:layout_height="@dimen/icon_size">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="match_parent"
+            android:src="@drawable/empty_photo"
+            android:background="#ffffff"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/distance"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/icon"
+            android:gravity="center"
+            android:padding="@dimen/tiny_margin"
+            style="?android:textAppearanceSmallInverse"
+            android:textColor="#ffffff"
+            android:background="@color/text_background"
+            tools:text="Overlay"/>
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/icon"
+            android:layout_toRightOf="@+id/icon"
+            android:paddingTop="@dimen/small_margin"
+            android:paddingLeft="@dimen/small_margin"
+            android:paddingRight="@dimen/small_margin"
+            android:maxLines="1"
+            android:ellipsize="none"
+            style="?android:textAppearanceMedium"
+            tools:text="Name" />
+
+        <TextView
+            android:id="@+id/tvDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/icon"
+            android:layout_toRightOf="@+id/icon"
+            android:layout_below="@+id/tvName"
+            android:padding="@dimen/small_margin"
+            android:ellipsize="none"
+            android:maxLines="4"
+            style="?android:textAppearanceSmall"
+            tools:text="Description" />
+
+    </RelativeLayout>
+</FrameLayout>

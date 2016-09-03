@@ -33,6 +33,7 @@
     <string name="contribution_state_starting">Uploading</string>
     <string name="menu_from_gallery">From Gallery</string>
     <string name="menu_from_camera">Take photo</string>
+    <string name="menu_nearby">Nearby</string>
 
     <string name="provider_contributions">My uploads</string>
     <string name="menu_share">Share</string>
@@ -154,4 +155,6 @@
     <string name="location_permission_rationale">Optional permission: Get current location for category suggestions</string>
     <string name="ok">OK</string>
     <string name="back">Back</string>
+
+    <string name="title_activity_nearby">Nearby Places</string>
 </resources>

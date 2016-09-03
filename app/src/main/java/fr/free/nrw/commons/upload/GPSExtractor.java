@@ -80,8 +80,8 @@ public class GPSExtractor {
     }
 
     /**
-     * Extracts geolocation of image from EXIF data.
-     * @return coordinates of image as string (needs to be passed as a String in API query)
+     * Extracts geolocation (either of image from EXIF data, or of user)
+     * @return coordinates as string (needs to be passed as a String in API query)
      */
     @Nullable
     public String getCoords(boolean useGPS) {
@@ -103,6 +103,7 @@ public class GPSExtractor {
             return null;
         }
 
+        //If image has no EXIF data and user has enabled GPS setting, get user's location
         if (exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE) == null && useGPS) {
             registerLocationManager();
 
@@ -122,6 +123,7 @@ public class GPSExtractor {
         } else if (exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE) == null) {
             return null;
         } else {
+            //If image has EXIF data, extract image coords
             imageCoordsExists = true;
             Log.d(TAG, "EXIF data has location info");
 
@@ -142,6 +144,9 @@ public class GPSExtractor {
         }
     }
 
+    /**
+     * Listen for user's location when it changes
+     */
     private class MyLocationListener implements LocationListener {
 
         @Override
