@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Wikimedia Commons</string>
-  <string name="app_name_beta">Wikimedia Commons Beta</string>
   <string name="menu_settings">Nastavenia</string>
   <string name="username">Používateľské meno</string>
   <string name="password">Heslo</string>
@@ -109,6 +108,5 @@ Kliknite na tento odkaz (alebo na späť) ak chcete tento krok vynechať.</strin
   <string name="detail_panel_cats_none">Nič nebolo vybrané</string>
   <string name="detail_description_empty">Bez popisu</string>
   <string name="detail_license_empty">Neznáma licencia</string>
-  <string name="provider_campaigns">Kampane</string>
   <string name="menu_refresh">Obnoviť</string>
 </resources>

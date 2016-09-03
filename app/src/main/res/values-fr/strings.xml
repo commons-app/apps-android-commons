@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Wikimedia Commons</string>
-  <string name="app_name_beta">Bêta de Wikimedia Commons</string>
   <string name="menu_settings">Paramètres</string>
   <string name="username">Nom d’utilisateur</string>
   <string name="password">Mot de passe</string>
@@ -123,6 +122,5 @@ Appuyez sur ce message (ou retournez en arrière) pour sauter cette étape.</str
   <string name="detail_panel_cats_none">Aucune catégorie sélectionnée</string>
   <string name="detail_description_empty">Aucune description</string>
   <string name="detail_license_empty">Licence inconnue</string>
-  <string name="provider_campaigns">Campagnes</string>
   <string name="menu_refresh">Rafraîchir</string>
 </resources>

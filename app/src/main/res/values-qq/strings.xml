@@ -2,7 +2,6 @@
 <resources>
   <string name="app_name">The name of the application.
 {{Identical|Wikimedia Commons}}</string>
-  <string name="app_name_beta">Name of the beta version of the application</string>
   <string name="menu_settings">Label for menu item to show settings.
 {{Identical|Settings}}</string>
   <string name="username">{{Identical|Username}}</string>
@@ -111,7 +110,6 @@ Followed by {{msg-wm|Commons-android-strings-welcome wikipedia subtext}}.</strin
   <string name="detail_panel_cats_none">Placeholder for categories list in media detail panel, if no categories found.
 {{Identical|None selected}}</string>
   <string name="detail_description_empty">{{Identical|No description}}</string>
-  <string name="provider_campaigns">{{Identical|Campaign}}</string>
   <string name="menu_refresh">Label for menu item that refreshes current list of images.
 {{Identical|Refresh}}</string>
 </resources>

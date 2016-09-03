@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Wikimedia Commons</string>
-  <string name="app_name_beta">Wikimedia Commons Beta</string>
   <string name="menu_settings">Configuració</string>
   <string name="username">Nom d\'usuari:</string>
   <string name="password">Contrasenya</string>
@@ -123,6 +122,5 @@
   <string name="detail_panel_cats_none">No se n\'ha seleccionat cap</string>
   <string name="detail_description_empty">Sense descripció</string>
   <string name="detail_license_empty">Llicència desconeguda</string>
-  <string name="provider_campaigns">Campanyes</string>
   <string name="menu_refresh">Refresca</string>
 </resources>

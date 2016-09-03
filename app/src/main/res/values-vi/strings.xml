@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Wikimedia Commons</string>
-  <string name="app_name_beta">Wikimedia Commons Beta</string>
   <string name="menu_settings">Thiết lập</string>
   <string name="username">Tên người dùng</string>
   <string name="password">Mật khẩu</string>
@@ -116,6 +115,5 @@ Chạm vào thông điệp này (hoặc bấm Quay lại) để bỏ qua bước
   <string name="detail_panel_cats_none">Chưa chọn</string>
   <string name="detail_description_empty">Không miêu tả</string>
   <string name="detail_license_empty">Giấy phép không rõ</string>
-  <string name="provider_campaigns">Chiến dịch</string>
   <string name="menu_refresh">Làm tươi</string>
 </resources>

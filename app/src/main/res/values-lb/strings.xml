@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Wikimedia Commons</string>
-  <string name="app_name_beta">Wikimedia Commons Beta</string>
   <string name="menu_settings">Astellungen</string>
   <string name="username">Benotzernumm</string>
   <string name="password">Passwuert</string>
@@ -121,6 +120,5 @@ Klickt op dëse Message (oder dréck op Zréck) fir dëse Schrëtt z\'iwwerspran
   <string name="detail_panel_cats_none">Näischt ausgewielt</string>
   <string name="detail_description_empty">Keng Beschreiwung</string>
   <string name="detail_license_empty">Onbekannt Lizenz</string>
-  <string name="provider_campaigns">Campagnen</string>
   <string name="menu_refresh">Aktualiséieren</string>
 </resources>

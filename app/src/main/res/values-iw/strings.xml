@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">ויקישיתוף</string>
-  <string name="app_name_beta">ויקישיתוף בטא</string>
   <string name="menu_settings">הגדרות</string>
   <string name="username">שם משתמש</string>
   <string name="password">ססמה</string>
@@ -108,6 +107,5 @@
   <string name="detail_panel_cats_none">לא נבחר דבר</string>
   <string name="detail_description_empty">אין תיאור</string>
   <string name="detail_license_empty">רישיון לא ידוע</string>
-  <string name="provider_campaigns">מבצעים פרסום</string>
   <string name="menu_refresh">רענון</string>
 </resources>

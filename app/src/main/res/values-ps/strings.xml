@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">ويکيمېډيا کامنز</string>
-  <string name="app_name_beta">ويکيمېډيا کامنز بيټا</string>
   <string name="menu_settings">امستنې</string>
   <string name="username">کارن-نوم</string>
   <string name="password">پټنوم</string>

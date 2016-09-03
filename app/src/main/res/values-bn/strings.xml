@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">উইকিমিডিয়া কমন্স</string>
-  <string name="app_name_beta">উইকিমিডিয়া কমন্স বেটা</string>
   <string name="menu_settings">সেটিং</string>
   <string name="username">ব্যবহারকারী নাম</string>
   <string name="password">পাসওয়ার্ড</string>
@@ -126,6 +125,5 @@
   <string name="detail_panel_cats_none">কিছুই নির্বাচন করা হয়নি</string>
   <string name="detail_description_empty">বিবরণ নেই</string>
   <string name="detail_license_empty">অজানা লাইসেন্স</string>
-  <string name="provider_campaigns">ক্যাম্পেইন</string>
   <string name="menu_refresh">পুনঃসতেজ</string>
 </resources>

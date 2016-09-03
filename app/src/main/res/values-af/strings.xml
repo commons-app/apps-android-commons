@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Wikimedia Commons</string>
-  <string name="app_name_beta">Wikimedia Commons Beta</string>
   <string name="menu_settings">Voorkeure</string>
   <string name="username">Gebruikersnaam</string>
   <string name="password">Wagwoord</string>
@@ -65,6 +64,5 @@ Tik die boodskap (of terug) om die stap oor te slaan.</string>
   <string name="detail_panel_cats_none">Niks gekies nie</string>
   <string name="detail_description_empty">Geen beskrywing</string>
   <string name="detail_license_empty">Onbekende lisensie</string>
-  <string name="provider_campaigns">Veldtogte</string>
   <string name="menu_refresh">Verfris</string>
 </resources>

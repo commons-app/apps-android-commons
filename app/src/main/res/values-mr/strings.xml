@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">विकिमिडिया कॉमन्स</string>
-  <string name="app_name_beta">विकिमीडिया कॉमन्स बीटा</string>
   <string name="menu_settings">मांडण्या</string>
   <string name="username">सदस्यनाव</string>
   <string name="password">परवलीचा शब्द(पासवर्ड)</string>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Wikimedia Commons</string>
-  <string name="app_name_beta">Beta Wikimedia Commons</string>
   <string name="menu_settings">Arventennoù</string>
   <string name="username">Anv implijer</string>
   <string name="password">Ger-tremen</string>
@@ -123,6 +122,5 @@ Pouezit war ar c\'hemenn-mañ (pe distroit en a-raok) evit mont dreist ar bazenn
   <string name="detail_panel_cats_none">Hini ebet diuzet</string>
   <string name="detail_description_empty">Deskrivadur ebet</string>
   <string name="detail_license_empty">Aotre-implijout dizanv</string>
-  <string name="provider_campaigns">Koulzadoù</string>
   <string name="menu_refresh">Freskaat</string>
 </resources>

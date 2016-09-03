@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">维基共享资源</string>
-  <string name="app_name_beta">维基共享资源测试版</string>
   <string name="menu_settings">设置</string>
   <string name="username">用户名</string>
   <string name="password">密码</string>
@@ -109,6 +108,5 @@
   <string name="detail_panel_cats_none">未选择</string>
   <string name="detail_description_empty">没有说明</string>
   <string name="detail_license_empty">未知许可协议</string>
-  <string name="provider_campaigns">活动</string>
   <string name="menu_refresh">刷新</string>
 </resources>
