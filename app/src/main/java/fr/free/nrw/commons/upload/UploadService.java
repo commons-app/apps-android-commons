@@ -149,7 +149,7 @@ public class UploadService extends HandlerService<Contribution> {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if(intent.getAction() == ACTION_START_SERVICE && freshStart) {
+        if(intent.getAction().equals(ACTION_START_SERVICE) && freshStart) {
             ContentValues failedValues = new ContentValues();
             failedValues.put(Contribution.Table.COLUMN_STATE, Contribution.STATE_FAILED);
 

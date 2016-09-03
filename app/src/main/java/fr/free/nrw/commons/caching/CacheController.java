@@ -6,6 +6,7 @@ import com.github.varunpant.quadtree.Point;
 import com.github.varunpant.quadtree.QuadTree;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import fr.free.nrw.commons.upload.MwVolleyApi;
@@ -47,7 +48,7 @@ public class CacheController {
         convertCoordRange();
         pointsFound = quadTree.searchWithin(xMinus, yMinus, xPlus, yPlus);
         List<String> displayCatList = new ArrayList<String>();
-        Log.d(TAG, "Points found in quadtree: " + pointsFound);
+        Log.d(TAG, "Points found in quadtree: " + Arrays.asList(pointsFound));
 
         if (pointsFound.length != 0) {
             Log.d(TAG, "Entering for loop");

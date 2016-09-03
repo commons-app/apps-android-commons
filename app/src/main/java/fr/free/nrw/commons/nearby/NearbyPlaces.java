@@ -32,7 +32,6 @@ public class NearbyPlaces {
                 String line;
 
                 while ((line = in.readLine()) != null) {
-                    line = in.readLine();
 
                     // Skip CSV header.
                     if (firstLine) {
@@ -58,7 +57,6 @@ public class NearbyPlaces {
                     }
 
                     String type = fields[3];
-                    String image;
 
                     places.add(new Place(
                             name,
