@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 import java.util.concurrent.Executor;
+import java.util.regex.Pattern;
 
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -242,13 +243,13 @@ public class Utils {
     }
 
     public static String fixExtension(String title, String extension) {
+        Pattern jpegPattern = Pattern.compile("\\.jpeg$", Pattern.CASE_INSENSITIVE);
+
         // People are used to ".jpg" more than ".jpeg" which the system gives us.
         if (extension != null && extension.toLowerCase().equals("jpeg")) {
             extension = "jpg";
         }
-        if (title.toLowerCase().endsWith(".jpeg")) {
-            title = title.replaceFirst("\\.jpeg$", ".jpg");
-        }
+        title = jpegPattern.matcher(title).replaceFirst(".jpg");
         if (extension != null && !title.toLowerCase().endsWith("." + extension.toLowerCase())) {
             title += "." + extension;
         }
