@@ -1,5 +1,8 @@
 # Wikimedia Commons for Android
 
+##v1.27
+- New feature: List of nearby places without photos
+
 ##v1.26
 - Fixed bug with overwriting files when multiple images selected
 
