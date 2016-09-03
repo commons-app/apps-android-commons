@@ -3,6 +3,8 @@ package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -103,6 +105,7 @@ public class NearbyListFragment extends ListFragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            lockScreenOrientation();
         }
 
         @Override
@@ -120,11 +123,10 @@ public class NearbyListFragment extends ListFragment {
         @Override
         protected void onPostExecute(List<Place> result) {
             super.onPostExecute(result);
+            progressBar.setVisibility(View.GONE);
+            unlockScreenOrientation();
 
             mAdapter = new NearbyAdapter(getActivity(), places);
-
-            progressBar.setVisibility(View.GONE);
-
             ListView listview = (ListView) getView().findViewById(R.id.listview);
             listview.setAdapter(mAdapter);
 
@@ -151,6 +153,19 @@ public class NearbyListFragment extends ListFragment {
             });
             mAdapter.notifyDataSetChanged();
         }
+    }
+
+    private void lockScreenOrientation() {
+        int currentOrientation = getResources().getConfiguration().orientation;
+        if (currentOrientation == Configuration.ORIENTATION_PORTRAIT) {
+            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        } else {
+            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        }
+    }
+
+    private void unlockScreenOrientation() {
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
     }
 
     private class NearbyAdapter extends ArrayAdapter<Place> {
