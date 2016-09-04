@@ -68,6 +68,7 @@ public class UploadController {
     public void startUpload(String title, Uri mediaUri, String description, String mimeType, String source, ContributionUploadProgress onComplete) {
         Contribution contribution;
 
+        //TODO: Modify this to include coords
         contribution = new Contribution(mediaUri, null, title, description, -1, null, null, app.getCurrentAccount().name, CommonsApplication.DEFAULT_EDIT_SUMMARY);
 
         contribution.setTag("mimeType", mimeType);

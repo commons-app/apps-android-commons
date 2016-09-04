@@ -130,6 +130,8 @@ public class Contribution extends Media {
     public String getPageContents() {
         StringBuffer buffer = new StringBuffer();
         SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        //TODO: Add location template immediately after Information template. {{Location|37.51136|-77.602615}}
         buffer
             .append("== {{int:filedesc}} ==\n")
                 .append("{{Information\n")
