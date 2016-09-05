@@ -117,7 +117,7 @@ public class ContributionsListFragment extends Fragment {
                     if (ContextCompat.checkSelfPermission(this.getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                         //See http://stackoverflow.com/questions/33169455/onrequestpermissionsresult-not-being-called-in-dialog-fragment
                         requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-                        return false;
+                        return true;
                     } else {
                         controller.startGalleryPick();
                         return true;
@@ -155,15 +155,17 @@ public class ContributionsListFragment extends Fragment {
                     if (ContextCompat.checkSelfPermission(this.getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                         //See http://stackoverflow.com/questions/33169455/onrequestpermissionsresult-not-being-called-in-dialog-fragment
                         requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 2);
-                        return false;
+                        return true;
                     } else {
                         Intent nearbyIntent = new Intent(getActivity(), NearbyActivity.class);
                         startActivity(nearbyIntent);
+                        return true;
                     }
                 }
                 else {
                     Intent nearbyIntent = new Intent(getActivity(), NearbyActivity.class);
                     startActivity(nearbyIntent);
+                    return true;
                 }
             case R.id.menu_refresh:
                 ((SourceRefresher)getActivity()).refreshSource();
@@ -183,6 +185,7 @@ public class ContributionsListFragment extends Fragment {
                     controller.startGalleryPick();
                 }
             }
+            break;
             // 2 = Location allowed when 'nearby places' selected
             case 2: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -191,6 +194,7 @@ public class ContributionsListFragment extends Fragment {
                     startActivity(nearbyIntent);
                 }
             }
+            break;
         }
     }
 
