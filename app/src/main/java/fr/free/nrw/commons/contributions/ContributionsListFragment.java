@@ -165,6 +165,7 @@ public class ContributionsListFragment extends Fragment {
                     Intent nearbyIntent = new Intent(getActivity(), NearbyActivity.class);
                     startActivity(nearbyIntent);
                 }
+                return true;
             case R.id.menu_refresh:
                 ((SourceRefresher)getActivity()).refreshSource();
                 return true;
