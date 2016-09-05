@@ -59,8 +59,8 @@ public class Contribution extends Media {
     }
 
     public EventLog.LogBuilder event;
-    
-    public Contribution(Uri localUri, String remoteUri, String filename, String description, long dataLength, Date dateCreated, Date dateUploaded, String creator, String editSummary) {
+
+    public Contribution(Uri localUri, String remoteUri, String filename, String description, long dataLength, Date dateCreated, Date dateUploaded, String creator, String editSummary, String decimalCoords) {
         super(localUri, remoteUri, filename, description, dataLength, dateCreated, dateUploaded, creator);
         this.editSummary = editSummary;
         timestamp = new Date(System.currentTimeMillis());
