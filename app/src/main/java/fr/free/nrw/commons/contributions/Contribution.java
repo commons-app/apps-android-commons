@@ -59,7 +59,12 @@ public class Contribution extends Media {
     }
 
     public EventLog.LogBuilder event;
-
+    
+    public Contribution(Uri localUri, String remoteUri, String filename, String description, long dataLength, Date dateCreated, Date dateUploaded, String creator, String editSummary) {
+        super(localUri, remoteUri, filename, description, dataLength, dateCreated, dateUploaded, creator);
+        this.editSummary = editSummary;
+        timestamp = new Date(System.currentTimeMillis());
+    }
 
     @Override
     public void writeToParcel(Parcel parcel, int flags) {
@@ -102,13 +107,6 @@ public class Contribution extends Media {
 
     public Date getTimestamp() {
         return timestamp;
-    }
-
-
-    public Contribution(Uri localUri, String remoteUri, String filename, String description, long dataLength, Date dateCreated, Date dateUploaded, String creator, String editSummary) {
-        super(localUri, remoteUri, filename, description, dataLength, dateCreated, dateUploaded, creator);
-        this.editSummary = editSummary;
-        timestamp = new Date(System.currentTimeMillis());
     }
 
     public int getState() {
