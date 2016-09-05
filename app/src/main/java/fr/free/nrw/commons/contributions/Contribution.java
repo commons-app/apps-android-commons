@@ -152,7 +152,6 @@ public class Contribution extends Media {
                 .append(Utils.licenseTemplateFor(getLicense())).append("\n\n")
             .append("{{Uploaded from Mobile|platform=Android|version=").append(CommonsApplication.APPLICATION_VERSION).append("}}\n")
             .append(getTrackingTemplates());
-        Log.d(TAG, buffer.toString());
         return buffer.toString();
     }
 
