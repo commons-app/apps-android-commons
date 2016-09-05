@@ -185,6 +185,7 @@ public class ContributionsListFragment extends Fragment {
                     controller.startGalleryPick();
                 }
             }
+            break;
             // 2 = Location allowed when 'nearby places' selected
             case 2: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -193,6 +194,7 @@ public class ContributionsListFragment extends Fragment {
                     startActivity(nearbyIntent);
                 }
             }
+            break;
         }
     }
 
