@@ -1,29 +1,49 @@
 package fr.free.nrw.commons;
 import org.junit.Test;
 
-import fr.free.nrw.commons.upload.UploadController;
-
 import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.is;
+
 
 public class UtilsTest {
 
-    @Test public void fixExtensionJpegToJpg() {
-        assertEquals("SampleFile.jpg", Utils.fixExtension("SampleFile.jpeg", "jpeg"));
+    @Test public void fixExtensionJpegToJpeg() {
+        assertThat(Utils.fixExtension("SampleFile.jpeg", "jpeg"), is("SampleFile.jpg"));
+    }
+
+    @Test public void fixExtensionJPEGToJpg() {
+        assertThat(Utils.fixExtension("SampleFile.JPEG", null), is("SampleFile.jpg"));
+    }
+
+    @Test public void fixExtensionNull() {
+        assertThat(Utils.fixExtension("SampleFile.jpeg", "JPEG"), is("SampleFile.jpg"));
+    }
+
+    @Test public void fixExtensionJpgToJpeg() {
+        assertThat(Utils.fixExtension("SampleFile.jpg", "jpeg"), is("SampleFile.jpg"));
     }
 
     @Test public void fixExtensionJpgToJpg() {
-        assertEquals("SampleFile.jpg", Utils.fixExtension("SampleFile.jpg", "jpg"));
+        assertThat(Utils.fixExtension("SampleFile.jpg", "jpg"), is("SampleFile.jpg"));
     }
 
     @Test public void fixExtensionPngToPng() {
-        assertEquals("SampleFile.png", Utils.fixExtension("SampleFile.png", "png"));
+        assertThat(Utils.fixExtension("SampleFile.png", "png"), is("SampleFile.png"));
     }
 
     @Test public void fixExtensionEmptyToJpg() {
-        assertEquals("SampleFile.jpg", Utils.fixExtension("SampleFile", "jpg"));
+        assertThat(Utils.fixExtension("SampleFile", "jpg"), is("SampleFile.jpg"));
+    }
+
+    @Test public void fixExtensionEmptyToJpeg() {
+        assertThat(Utils.fixExtension("SampleFile", "jpeg"), is("SampleFile.jpg"));
     }
 
     @Test public void fixExtensionJpgNotExtension() {
-        assertEquals("SampleFileJpg.jpg", Utils.fixExtension("SampleFileJpg", "jpg"));
+        assertThat(Utils.fixExtension("SAMPLEjpg", "jpg"), is("SAMPLEjpg.jpg"));
+    }
+
+    @Test public void fixExtensionJpegNotExtension() {
+        assertThat(Utils.fixExtension("SAMPLE.jpeg.SAMPLE", "jpg"), is("SAMPLE.jpeg.SAMPLE.jpg"));
     }
 }

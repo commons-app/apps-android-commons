@@ -1,8 +1,9 @@
 package fr.free.nrw.commons.upload;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -42,6 +43,9 @@ public class UploadService extends HandlerService<Contribution> {
     private NotificationCompat.Builder curProgressNotification;
 
     private int toUpload;
+
+    // The file names of unfinished uploads, used to prevent overwriting
+    private Set<String> unfinishedUploads = new HashSet<>();
 
     // DO NOT HAVE NOTIFICATION ID OF 0 FOR ANYTHING
     // See http://stackoverflow.com/questions/8725909/startforeground-does-not-show-my-notification
@@ -96,7 +100,7 @@ public class UploadService extends HandlerService<Contribution> {
     public void onDestroy() {
         super.onDestroy();
         contributionsProviderClient.release();
-        Log.d("Commons", "ZOMG I AM BEING KILLED HALP!");
+        Log.d("Commons", "UploadService.onDestroy; " + unfinishedUploads + " are yet to be uploaded");
     }
 
     @Override
@@ -165,7 +169,6 @@ public class UploadService extends HandlerService<Contribution> {
         return START_REDELIVER_INTENT;
     }
 
-
     private void uploadContribution(Contribution contribution) {
         MWApi api = app.getApi();
 
@@ -197,12 +200,17 @@ public class UploadService extends HandlerService<Contribution> {
 
         this.startForeground(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification.build());
 
+        String filename = null;
         try {
-
-            String filename = Utils.fixExtension(
+            filename = Utils.fixExtension(
                     contribution.getFilename(),
                     MimeTypeMap.getSingleton().getExtensionFromMimeType((String)contribution.getTag("mimeType")));
-            filename = findUniqueFilename(filename);
+
+            synchronized (unfinishedUploads) {
+                Log.d("Commons", "making sure of uniqueness of name: " + filename);
+                filename = findUniqueFilename(filename);
+                unfinishedUploads.add(filename);
+            }
             if(!api.validateLogin()) {
                 // Need to revalidate!
                 if(app.revalidateAuthToken()) {
@@ -223,7 +231,6 @@ public class UploadService extends HandlerService<Contribution> {
             );
             result = api.upload(filename, file, contribution.getDataLength(), contribution.getPageContents(), contribution.getEditSummary(), notificationUpdater);
 
-
             Log.d("Commons", "Response is" + Utils.getStringFromDOM(result.getDocument()));
 
             curProgressNotification = null;
@@ -233,7 +240,7 @@ public class UploadService extends HandlerService<Contribution> {
             if(!resultStatus.equals("Success")) {
                 String errorCode = result.getString("/api/error/@code");
                 showFailedNotification(contribution);
-                fr.free.nrw.commons.EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT)
+                EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT)
                         .param("username", app.getCurrentAccount().name)
                         .param("source", contribution.getSource())
                         .param("multiple", contribution.getMultiple())
@@ -264,6 +271,9 @@ public class UploadService extends HandlerService<Contribution> {
             showFailedNotification(contribution);
             return;
         } finally {
+            if ( filename != null ) {
+                unfinishedUploads.remove(filename);
+            }
             toUpload--;
             if(toUpload == 0) {
                 // Sync modifications right after all uplaods are processed
@@ -289,36 +299,33 @@ public class UploadService extends HandlerService<Contribution> {
         contribution.save();
     }
 
-    synchronized private String findUniqueFilename(String fileName) throws IOException {
-        return findUniqueFilename(fileName, 1);
-    }
-
-    private String findUniqueFilename(String fileName, int sequenceNumber) throws IOException  {
+    private String findUniqueFilename(String fileName) throws IOException {
+        MWApi api = app.getApi();
         String sequenceFileName;
-        if (sequenceNumber == 1) {
-            sequenceFileName = fileName;
-        } else {
-            if (fileName.indexOf('.') == -1) {
-                // We really should have appended a file type suffix already.
-                // But... we might not.
-                sequenceFileName = fileName + " " + sequenceNumber;
+        for ( int sequenceNumber = 1; true; sequenceNumber++ ) {
+            if (sequenceNumber == 1) {
+                sequenceFileName = fileName;
             } else {
-                Pattern regex = Pattern.compile("^(.*)(\\..+?)$");
-                Matcher regexMatcher = regex.matcher(fileName);
-                sequenceFileName = regexMatcher.replaceAll("$1 " + sequenceNumber + "$2");
+                if (fileName.indexOf('.') == -1) {
+                    // We really should have appended a file type suffix already.
+                    // But... we might not.
+                    sequenceFileName = fileName + " " + sequenceNumber;
+                } else {
+                    Pattern regex = Pattern.compile("^(.*)(\\..+?)$");
+                    Matcher regexMatcher = regex.matcher(fileName);
+                    sequenceFileName = regexMatcher.replaceAll("$1 " + sequenceNumber + "$2");
+                }
+            }
+            if ( fileExistsWithName(api, sequenceFileName) || unfinishedUploads.contains(sequenceFileName) ) {
+                continue;
+            } else {
+                break;
             }
         }
-        Log.d("Commons", "checking for uniqueness of name " + sequenceFileName);
-
-        if (fileExistsWithName(sequenceFileName)) {
-            return findUniqueFilename(fileName, sequenceNumber + 1);
-        } else {
-            return sequenceFileName;
-        }
+        return sequenceFileName;
     }
 
-    private boolean fileExistsWithName(String fileName) throws IOException {
-        MWApi api = app.getApi();
+    private static boolean fileExistsWithName(MWApi api, String fileName) throws IOException {
         ApiResult result;
 
         result = api.action("query")
@@ -326,7 +333,6 @@ public class UploadService extends HandlerService<Contribution> {
                 .param("titles", "File:" + fileName)
                 .get();
 
-        ArrayList<ApiResult> nodes = result.getNodes("/api/query/pages/page/imageinfo");
-        return nodes.size() > 0;
+        return result.getNodes("/api/query/pages/page/imageinfo").size() > 0;
     }
 }
