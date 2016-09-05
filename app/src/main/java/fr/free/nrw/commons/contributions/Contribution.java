@@ -47,6 +47,7 @@ public class Contribution extends Media {
     private Date timestamp;
     private int state;
     private long transferred;
+    private String decimalCoords;
 
     private boolean isMultiple;
 
@@ -62,6 +63,7 @@ public class Contribution extends Media {
 
     public Contribution(Uri localUri, String remoteUri, String filename, String description, long dataLength, Date dateCreated, Date dateUploaded, String creator, String editSummary, String decimalCoords) {
         super(localUri, remoteUri, filename, description, dataLength, dateCreated, dateUploaded, creator);
+        this.decimalCoords = decimalCoords;
         this.editSummary = editSummary;
         timestamp = new Date(System.currentTimeMillis());
     }
@@ -142,6 +144,7 @@ public class Contribution extends Media {
         }
         buffer
                 .append("}}").append("\n")
+                .append("{{Location|").append(decimalCoords).append("}}").append("\n")
             .append("== {{int:license-header}} ==\n")
                 .append(Utils.licenseTemplateFor(getLicense())).append("\n\n")
             .append("{{Uploaded from Mobile|platform=Android|version=").append(CommonsApplication.APPLICATION_VERSION).append("}}\n")
