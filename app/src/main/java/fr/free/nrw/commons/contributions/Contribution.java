@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -40,6 +41,8 @@ public class Contribution extends Media {
     public static final String SOURCE_GALLERY = "gallery";
     public static final String SOURCE_EXTERNAL = "external";
 
+    private static final String TAG = "Contribution";
+
     private ContentProviderClient client;
     private Uri contentUri;
     private String source;
@@ -47,6 +50,7 @@ public class Contribution extends Media {
     private Date timestamp;
     private int state;
     private long transferred;
+    private String decimalCoords;
 
     private boolean isMultiple;
 
@@ -60,6 +64,12 @@ public class Contribution extends Media {
 
     public EventLog.LogBuilder event;
 
+    public Contribution(Uri localUri, String remoteUri, String filename, String description, long dataLength, Date dateCreated, Date dateUploaded, String creator, String editSummary, String decimalCoords) {
+        super(localUri, remoteUri, filename, description, dataLength, dateCreated, dateUploaded, creator);
+        this.decimalCoords = decimalCoords;
+        this.editSummary = editSummary;
+        timestamp = new Date(System.currentTimeMillis());
+    }
 
     @Override
     public void writeToParcel(Parcel parcel, int flags) {
@@ -104,13 +114,6 @@ public class Contribution extends Media {
         return timestamp;
     }
 
-
-    public Contribution(Uri localUri, String remoteUri, String filename, String description, long dataLength, Date dateCreated, Date dateUploaded, String creator, String editSummary) {
-        super(localUri, remoteUri, filename, description, dataLength, dateCreated, dateUploaded, creator);
-        this.editSummary = editSummary;
-        timestamp = new Date(System.currentTimeMillis());
-    }
-
     public int getState() {
         return state;
     }
@@ -130,6 +133,8 @@ public class Contribution extends Media {
     public String getPageContents() {
         StringBuffer buffer = new StringBuffer();
         SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        //TODO: Add location template immediately after Information template. {{Location|37.51136|-77.602615}}
         buffer
             .append("== {{int:filedesc}} ==\n")
                 .append("{{Information\n")
@@ -142,6 +147,7 @@ public class Contribution extends Media {
         }
         buffer
                 .append("}}").append("\n")
+                .append("{{Location|").append(decimalCoords).append("}}").append("\n")
             .append("== {{int:license-header}} ==\n")
                 .append(Utils.licenseTemplateFor(getLicense())).append("\n\n")
             .append("{{Uploaded from Mobile|platform=Android|version=").append(CommonsApplication.APPLICATION_VERSION).append("}}\n")

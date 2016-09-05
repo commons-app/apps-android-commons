@@ -94,7 +94,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                 }
                 String thumbUrl = Utils.makeThumbBaseUrl(filename);
                 Date dateUpdated = Utils.parseMWDate(image.getString("@timestamp"));
-                Contribution contrib = new Contribution(null, thumbUrl, filename, "", -1, dateUpdated, dateUpdated, user, "");
+                Contribution contrib = new Contribution(null, thumbUrl, filename, "", -1, dateUpdated, dateUpdated, user, "", "");
                 contrib.setState(Contribution.STATE_COMPLETED);
                 imageValues.add(contrib.toContentValues());
 

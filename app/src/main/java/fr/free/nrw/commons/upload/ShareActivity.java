@@ -112,7 +112,8 @@ public  class       ShareActivity
             Log.d(TAG, "Cache the categories found");
         }
 
-        uploadController.startUpload(title, mediaUri, description, mimeType, source, new UploadController.ContributionUploadProgress() {
+        //TODO: Pass in coords here? Need to be in format 37.51136|-77.602615 , which decimalCoords appears to be
+        uploadController.startUpload(title, mediaUri, description, mimeType, source, decimalCoords, new UploadController.ContributionUploadProgress() {
             public void onUploadStarted(Contribution contribution) {
                 ShareActivity.this.contribution = contribution;
                 showPostUpload();
