@@ -165,7 +165,11 @@ public class NearbyListFragment extends ListFragment {
     }
 
     private void unlockScreenOrientation() {
-        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+        try {
+            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+        } catch (NullPointerException e){
+            Log.e(TAG, "NPE: ", e);
+        }
     }
 
     private class NearbyAdapter extends ArrayAdapter<Place> {
