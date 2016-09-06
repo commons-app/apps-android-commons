@@ -27,7 +27,8 @@ import java.util.List;
 
 import fr.free.nrw.commons.R;
 
-public class NearbyListFragment extends ListFragment  {
+
+public class NearbyListFragment extends ListFragment implements TaskListener {
 
     private NearbyAsyncTask nearbyAsyncTask;
     private NearbyAdapter mAdapter;
@@ -44,11 +45,6 @@ public class NearbyListFragment extends ListFragment  {
     public NearbyListFragment() {
     }
 
-    public interface TaskListener {
-        void onTaskStarted();
-
-        void onTaskFinished(List<Place> result);
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -91,9 +87,16 @@ public class NearbyListFragment extends ListFragment  {
 
     }
 
+    @Override
     public void onTaskStarted() {
-        isTaskRunning = true;
-        progressDialog = ProgressDialog.show(getActivity(), "Loading", "Please wait a moment!");
+        progressDialog = ProgressDialog.show(CopyOfMainActivity.this, "Loading", "Please wait a moment!");
+    }
+
+    @Override
+    public void onTaskFinished(List<Place> result) {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
     }
 
     private class NearbyAsyncTask extends AsyncTask<Void, Integer, List<Place>> {
