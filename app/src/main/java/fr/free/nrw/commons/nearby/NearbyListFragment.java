@@ -83,6 +83,7 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
 
     @Override
     public void onSaveInstanceState(Bundle outInstanceState) {
+        // See http://stackoverflow.com/questions/8942135/listview-added-dublicate-item-in-list-when-screen-orientation-changes
         outInstanceState.putInt("value", 1);
     }
 
