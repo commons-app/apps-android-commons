@@ -117,7 +117,7 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
         protected void onPreExecute() {
             super.onPreExecute();
             listener.onTaskStarted();
-            lockScreenOrientation();
+            //lockScreenOrientation();
         }
 
         @Override
@@ -136,7 +136,7 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
         protected void onPostExecute(List<Place> result) {
             super.onPostExecute(result);
             progressBar.setVisibility(View.GONE);
-            unlockScreenOrientation();
+            //unlockScreenOrientation();
 
             mAdapter = new NearbyAdapter(getActivity(), places);
             ListView listview = (ListView) getView().findViewById(R.id.listview);
@@ -144,7 +144,6 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
 
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
 
                     Place place = places.get(position);
                     LatLng placeLatLng = place.location;
@@ -165,23 +164,6 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
             });
             listener.onTaskFinished(result);
             mAdapter.notifyDataSetChanged();
-        }
-    }
-
-    private void lockScreenOrientation() {
-        int currentOrientation = getResources().getConfiguration().orientation;
-        if (currentOrientation == Configuration.ORIENTATION_PORTRAIT) {
-            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        } else {
-            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        }
-    }
-
-    private void unlockScreenOrientation() {
-        try {
-            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
-        } catch (NullPointerException e){
-            Log.e(TAG, "NPE: ", e);
         }
     }
 
