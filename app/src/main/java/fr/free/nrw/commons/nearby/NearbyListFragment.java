@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.nearby;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -9,21 +8,16 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.NumberFormat;
 import java.util.Collections;
@@ -32,19 +26,27 @@ import java.util.List;
 
 import fr.free.nrw.commons.R;
 
-public class NearbyListFragment extends ListFragment {
+public class NearbyListFragment extends ListFragment implements TaskListener {
 
-    private int mImageSize;
-    private boolean mItemClicked;
+    private NearbyAsyncTask nearbyAsyncTask;
     private NearbyAdapter mAdapter;
+    private ListView listview;
+
+    private ProgressBar progressBar;
+    private boolean isTaskRunning = false;
 
     private List<Place> places;
     private LatLng mLatestLocation;
-    private ProgressBar progressBar;
 
     private static final String TAG = "NearbyListFragment";
 
     public NearbyListFragment() {
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
 
     @Override
@@ -53,59 +55,74 @@ public class NearbyListFragment extends ListFragment {
 
         Log.d(TAG, "NearbyListFragment created");
         View view = inflater.inflate(R.layout.fragment_nearby, container, false);
+        progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
         return view;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
-        progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
-        progressBar.setMax(10);
+        //Check that this is the first time view is created, to avoid double list when screen orientation changed
+        if(savedInstanceState == null) {
+            mLatestLocation = ((NearbyActivity) getActivity()).getmLatestLocation();
+            listview = (ListView) getView().findViewById(R.id.listview);
+            nearbyAsyncTask = new NearbyAsyncTask(this);
+            nearbyAsyncTask.execute();
+            progressBar.setVisibility(View.VISIBLE);
+            Log.d(TAG, "Saved instance state is null, populating ListView");
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
+
+        // If we are returning here from a screen orientation and the AsyncTask is still working,
+        // re-create and display the progress dialog.
+        if (isTaskRunning) {
+            progressBar.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outInstanceState) {
+        // See http://stackoverflow.com/questions/8942135/listview-added-dublicate-item-in-list-when-screen-orientation-changes
+        outInstanceState.putInt("value", 1);
+    }
+
+    @Override
+    public void onTaskStarted() {
+        isTaskRunning = true;
         progressBar.setVisibility(View.VISIBLE);
-        progressBar.setProgress(0);
-
-        mLatestLocation = ((NearbyActivity) getActivity()).getmLatestLocation();
-
-        getNearbyPlaces nearbyList = new getNearbyPlaces();
-        nearbyList.execute();
-
-        Log.d(TAG, "Adapter set to ListView");
-
     }
 
-    private List<Place> loadAttractionsFromLocation(final LatLng curLatLng) {
-
-        List<Place> places = NearbyPlaces.get();
-        if (curLatLng != null) {
-            Log.d(TAG, "Sorting places by distance...");
-            Collections.sort(places,
-                    new Comparator<Place>() {
-                        @Override
-                        public int compare(Place lhs, Place rhs) {
-                            double lhsDistance = computeDistanceBetween(
-                                    lhs.location, curLatLng);
-                            double rhsDistance = computeDistanceBetween(
-                                    rhs.location, curLatLng);
-                            return (int) (lhsDistance - rhsDistance);
-                        }
-                    }
-            );
+    @Override
+    public void onTaskFinished(List<Place> result) {
+        if (progressBar != null) {
+            progressBar.setVisibility(View.GONE);
         }
-
-        for(int i = 0; i < 500; i++) {
-            Place place = places.get(i);
-            String distance = formatDistanceBetween(mLatestLocation, place.location);
-            System.out.println("Sorted " + place.name + " at " + distance + " away.");
-            place.setDistance(distance);
-        }
-        return places;
+        isTaskRunning = false;
     }
 
-    private class getNearbyPlaces extends AsyncTask<Void, Integer, List<Place>> {
+    @Override
+    public void onDetach() {
+        // All dialogs should be closed before leaving the activity in order to avoid
+        // the: Activity has leaked window com.android.internal.policy... exception
+        if (progressBar != null && progressBar.isShown()) {
+            progressBar.setVisibility(View.GONE);
+        }
+        super.onDetach();
+    }
+
+    private class NearbyAsyncTask extends AsyncTask<Void, Integer, List<Place>> {
+
+        private final TaskListener listener;
+
+        public NearbyAsyncTask (TaskListener listener) {
+            this.listener = listener;
+        }
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            lockScreenOrientation();
+            listener.onTaskStarted();
         }
 
         @Override
@@ -124,15 +141,13 @@ public class NearbyListFragment extends ListFragment {
         protected void onPostExecute(List<Place> result) {
             super.onPostExecute(result);
             progressBar.setVisibility(View.GONE);
-            unlockScreenOrientation();
 
             mAdapter = new NearbyAdapter(getActivity(), places);
-            ListView listview = (ListView) getView().findViewById(R.id.listview);
+
             listview.setAdapter(mAdapter);
 
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
 
                     Place place = places.get(position);
                     LatLng placeLatLng = place.location;
@@ -151,24 +166,8 @@ public class NearbyListFragment extends ListFragment {
                     }
                 }
             });
+            listener.onTaskFinished(result);
             mAdapter.notifyDataSetChanged();
-        }
-    }
-
-    private void lockScreenOrientation() {
-        int currentOrientation = getResources().getConfiguration().orientation;
-        if (currentOrientation == Configuration.ORIENTATION_PORTRAIT) {
-            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        } else {
-            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        }
-    }
-
-    private void unlockScreenOrientation() {
-        try {
-            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
-        } catch (NullPointerException e){
-            Log.e(TAG, "NPE: ", e);
         }
     }
 
@@ -239,6 +238,33 @@ public class NearbyListFragment extends ListFragment {
         public long getItemId(int position) {
             return position;
         }
+    }
+
+    private List<Place> loadAttractionsFromLocation(final LatLng curLatLng) {
+
+        List<Place> places = NearbyPlaces.get();
+        if (curLatLng != null) {
+            Log.d(TAG, "Sorting places by distance...");
+            Collections.sort(places,
+                    new Comparator<Place>() {
+                        @Override
+                        public int compare(Place lhs, Place rhs) {
+                            double lhsDistance = computeDistanceBetween(
+                                    lhs.location, curLatLng);
+                            double rhsDistance = computeDistanceBetween(
+                                    rhs.location, curLatLng);
+                            return (int) (lhsDistance - rhsDistance);
+                        }
+                    }
+            );
+        }
+
+        for(int i = 0; i < 500; i++) {
+            Place place = places.get(i);
+            String distance = formatDistanceBetween(mLatestLocation, place.location);
+            place.setDistance(distance);
+        }
+        return places;
     }
 
     private String formatDistanceBetween(LatLng point1, LatLng point2) {
