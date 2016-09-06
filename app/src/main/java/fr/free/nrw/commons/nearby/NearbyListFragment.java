@@ -62,6 +62,7 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
+        //Check that this is the first time view is created, to avoid double list when screen orientation changed
         if(savedInstanceState == null) {
             mLatestLocation = ((NearbyActivity) getActivity()).getmLatestLocation();
             listview = (ListView) getView().findViewById(R.id.listview);
@@ -73,9 +74,8 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
             progressBar.setVisibility(View.GONE);
         }
 
-        // If we are returning here from a screen orientation
-        // and the AsyncTask is still working, re-create and display the
-        // progress dialog.
+        // If we are returning here from a screen orientation and the AsyncTask is still working,
+        // re-create and display the progress dialog.
         if (isTaskRunning) {
             progressBar.setVisibility(View.VISIBLE);
         }
