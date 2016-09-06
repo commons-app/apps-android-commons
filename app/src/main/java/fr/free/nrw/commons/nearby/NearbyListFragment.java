@@ -117,7 +117,6 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
         protected void onPreExecute() {
             super.onPreExecute();
             listener.onTaskStarted();
-            //lockScreenOrientation();
         }
 
         @Override
@@ -136,7 +135,6 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
         protected void onPostExecute(List<Place> result) {
             super.onPostExecute(result);
             progressBar.setVisibility(View.GONE);
-            //unlockScreenOrientation();
 
             mAdapter = new NearbyAdapter(getActivity(), places);
             ListView listview = (ListView) getView().findViewById(R.id.listview);
