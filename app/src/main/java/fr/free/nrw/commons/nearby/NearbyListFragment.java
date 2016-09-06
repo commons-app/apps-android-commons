@@ -44,6 +44,12 @@ public class NearbyListFragment extends ListFragment  {
     public NearbyListFragment() {
     }
 
+    public interface TaskListener {
+        void onTaskStarted();
+
+        void onTaskFinished(List<Place> result);
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,12 +83,10 @@ public class NearbyListFragment extends ListFragment  {
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
         progressBar.setVisibility(View.VISIBLE);
-
         mLatestLocation = ((NearbyActivity) getActivity()).getmLatestLocation();
 
         nearbyAsyncTask = new NearbyAsyncTask();
         nearbyAsyncTask.execute();
-
         Log.d(TAG, "Adapter set to ListView");
 
     }
@@ -91,10 +95,19 @@ public class NearbyListFragment extends ListFragment  {
         isTaskRunning = true;
         progressDialog = ProgressDialog.show(getActivity(), "Loading", "Please wait a moment!");
     }
+
     private class NearbyAsyncTask extends AsyncTask<Void, Integer, List<Place>> {
+
+        private final TaskListener listener;
+
+        public NearbyAsyncTask (TaskListener listener) {
+            this.listener = listener;
+        }
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            listener.onTaskStarted();
             lockScreenOrientation();
         }
 
@@ -141,6 +154,7 @@ public class NearbyListFragment extends ListFragment  {
                     }
                 }
             });
+            listener.onTaskFinished(result);
             mAdapter.notifyDataSetChanged();
         }
     }
