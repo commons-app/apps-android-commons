@@ -9,21 +9,16 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.NumberFormat;
 import java.util.Collections;
@@ -34,8 +29,7 @@ import fr.free.nrw.commons.R;
 
 public class NearbyListFragment extends ListFragment {
 
-    private int mImageSize;
-    private boolean mItemClicked;
+    private NearbyAsyncTask nearbyAsyncTask;
     private NearbyAdapter mAdapter;
 
     private List<Place> places;
@@ -66,42 +60,16 @@ public class NearbyListFragment extends ListFragment {
 
         mLatestLocation = ((NearbyActivity) getActivity()).getmLatestLocation();
 
-        getNearbyPlaces nearbyList = new getNearbyPlaces();
-        nearbyList.execute();
+        nearbyAsyncTask = new NearbyAsyncTask();
+        nearbyAsyncTask.execute();
 
         Log.d(TAG, "Adapter set to ListView");
 
     }
 
-    private List<Place> loadAttractionsFromLocation(final LatLng curLatLng) {
 
-        List<Place> places = NearbyPlaces.get();
-        if (curLatLng != null) {
-            Log.d(TAG, "Sorting places by distance...");
-            Collections.sort(places,
-                    new Comparator<Place>() {
-                        @Override
-                        public int compare(Place lhs, Place rhs) {
-                            double lhsDistance = computeDistanceBetween(
-                                    lhs.location, curLatLng);
-                            double rhsDistance = computeDistanceBetween(
-                                    rhs.location, curLatLng);
-                            return (int) (lhsDistance - rhsDistance);
-                        }
-                    }
-            );
-        }
 
-        for(int i = 0; i < 500; i++) {
-            Place place = places.get(i);
-            String distance = formatDistanceBetween(mLatestLocation, place.location);
-            System.out.println("Sorted " + place.name + " at " + distance + " away.");
-            place.setDistance(distance);
-        }
-        return places;
-    }
-
-    private class getNearbyPlaces extends AsyncTask<Void, Integer, List<Place>> {
+    private class NearbyAsyncTask extends AsyncTask<Void, Integer, List<Place>> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -239,6 +207,34 @@ public class NearbyListFragment extends ListFragment {
         public long getItemId(int position) {
             return position;
         }
+    }
+
+    private List<Place> loadAttractionsFromLocation(final LatLng curLatLng) {
+
+        List<Place> places = NearbyPlaces.get();
+        if (curLatLng != null) {
+            Log.d(TAG, "Sorting places by distance...");
+            Collections.sort(places,
+                    new Comparator<Place>() {
+                        @Override
+                        public int compare(Place lhs, Place rhs) {
+                            double lhsDistance = computeDistanceBetween(
+                                    lhs.location, curLatLng);
+                            double rhsDistance = computeDistanceBetween(
+                                    rhs.location, curLatLng);
+                            return (int) (lhsDistance - rhsDistance);
+                        }
+                    }
+            );
+        }
+
+        for(int i = 0; i < 500; i++) {
+            Place place = places.get(i);
+            String distance = formatDistanceBetween(mLatestLocation, place.location);
+            System.out.println("Sorted " + place.name + " at " + distance + " away.");
+            place.setDistance(distance);
+        }
+        return places;
     }
 
     private String formatDistanceBetween(LatLng point1, LatLng point2) {
