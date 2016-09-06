@@ -81,7 +81,7 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
         progressBar.setVisibility(View.VISIBLE);
         mLatestLocation = ((NearbyActivity) getActivity()).getmLatestLocation();
 
-        nearbyAsyncTask = new NearbyAsyncTask();
+        nearbyAsyncTask = new NearbyAsyncTask(this);
         nearbyAsyncTask.execute();
         Log.d(TAG, "Adapter set to ListView");
 
@@ -89,13 +89,13 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
 
     @Override
     public void onTaskStarted() {
-        progressDialog = ProgressDialog.show(CopyOfMainActivity.this, "Loading", "Please wait a moment!");
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void onTaskFinished(List<Place> result) {
-        if (progressDialog != null) {
-            progressDialog.dismiss();
+        if (progressBar != null) {
+            progressBar.setVisibility(View.GONE);
         }
     }
 
