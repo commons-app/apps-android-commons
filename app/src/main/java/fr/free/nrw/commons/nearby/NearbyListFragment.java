@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.nearby;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -27,7 +26,6 @@ import java.util.List;
 
 import fr.free.nrw.commons.R;
 
-
 public class NearbyListFragment extends ListFragment implements TaskListener {
 
     private NearbyAsyncTask nearbyAsyncTask;
@@ -39,19 +37,16 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
     private List<Place> places;
     private LatLng mLatestLocation;
 
-
     private static final String TAG = "NearbyListFragment";
 
     public NearbyListFragment() {
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,8 +68,7 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
             progressBar.setVisibility(View.VISIBLE);
         }
     }
-
-
+    
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
