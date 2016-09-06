@@ -1,5 +1,10 @@
 # Wikimedia Commons for Android
 
+##v1.28
+- Added geocoding template from GPS data stored in image
+- Fixed bug with doubled list view in Nearby
+- Further attempts to reduce overwrites
+
 ##v1.27
 - New feature: List of nearby places without photos
 
