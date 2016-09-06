@@ -61,15 +61,16 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        listview = (ListView) getView().findViewById(R.id.listview);
 
         if(savedInstanceState == null) {
             mLatestLocation = ((NearbyActivity) getActivity()).getmLatestLocation();
-
+            listview = (ListView) getView().findViewById(R.id.listview);
             nearbyAsyncTask = new NearbyAsyncTask(this);
             nearbyAsyncTask.execute();
             progressBar.setVisibility(View.VISIBLE);
             Log.d(TAG, "Saved instance state is null, populating ListView");
+        } else {
+            progressBar.setVisibility(View.GONE);
         }
 
         // If we are returning here from a screen orientation
