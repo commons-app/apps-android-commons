@@ -68,7 +68,7 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
             progressBar.setVisibility(View.VISIBLE);
         }
     }
-    
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
@@ -83,6 +83,7 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
 
     @Override
     public void onTaskStarted() {
+        isTaskRunning = true;
         progressBar.setVisibility(View.VISIBLE);
     }
 
@@ -91,6 +92,17 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
         if (progressBar != null) {
             progressBar.setVisibility(View.GONE);
         }
+        isTaskRunning = false;
+    }
+
+    @Override
+    public void onDetach() {
+        // All dialogs should be closed before leaving the activity in order to avoid
+        // the: Activity has leaked window com.android.internal.policy... exception
+        if (progressBar != null && progressBar.isShown()) {
+            progressBar.setVisibility(View.GONE);
+        }
+        super.onDetach();
     }
 
     private class NearbyAsyncTask extends AsyncTask<Void, Integer, List<Place>> {
