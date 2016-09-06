@@ -30,6 +30,7 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
 
     private NearbyAsyncTask nearbyAsyncTask;
     private NearbyAdapter mAdapter;
+    private ListView listview;
 
     private ProgressBar progressBar;
     private boolean isTaskRunning = false;
@@ -59,8 +60,18 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        listview = (ListView) getView().findViewById(R.id.listview);
+
+        if(savedInstanceState == null) {
+            mLatestLocation = ((NearbyActivity) getActivity()).getmLatestLocation();
+
+            nearbyAsyncTask = new NearbyAsyncTask(this);
+            nearbyAsyncTask.execute();
+            progressBar.setVisibility(View.VISIBLE);
+            Log.d(TAG, "Saved instance state is null, populating ListView");
+        }
+
         // If we are returning here from a screen orientation
         // and the AsyncTask is still working, re-create and display the
         // progress dialog.
@@ -70,15 +81,8 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-
-        progressBar.setVisibility(View.VISIBLE);
-        mLatestLocation = ((NearbyActivity) getActivity()).getmLatestLocation();
-
-        nearbyAsyncTask = new NearbyAsyncTask(this);
-        nearbyAsyncTask.execute();
-        Log.d(TAG, "Adapter set to ListView");
-
+    public void onSaveInstanceState(Bundle outInstanceState) {
+        outInstanceState.putInt("value", 1);
     }
 
     @Override
@@ -137,7 +141,7 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
             progressBar.setVisibility(View.GONE);
 
             mAdapter = new NearbyAdapter(getActivity(), places);
-            ListView listview = (ListView) getView().findViewById(R.id.listview);
+
             listview.setAdapter(mAdapter);
 
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -256,7 +260,6 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
         for(int i = 0; i < 500; i++) {
             Place place = places.get(i);
             String distance = formatDistanceBetween(mLatestLocation, place.location);
-            System.out.println("Sorted " + place.name + " at " + distance + " away.");
             place.setDistance(distance);
         }
         return places;

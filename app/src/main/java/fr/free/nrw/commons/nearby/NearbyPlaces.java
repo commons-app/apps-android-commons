@@ -2,6 +2,7 @@ package fr.free.nrw.commons.nearby;
 
 import android.net.Uri;
 import android.os.StrictMode;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,6 +13,7 @@ import java.util.List;
 
 public class NearbyPlaces {
 
+    private static final String TAG = "NearbyPlaces";
     static List<Place> places = null;
 
     public static List<Place> get() {
@@ -30,6 +32,7 @@ public class NearbyPlaces {
 
                 boolean firstLine = true;
                 String line;
+                Log.d(TAG, "Reading from CSV file...");
 
                 while ((line = in.readLine()) != null) {
 
@@ -39,7 +42,6 @@ public class NearbyPlaces {
                         continue;
                     }
 
-                    System.out.println(line);
                     String[] fields = line.split(",");
                     String name = fields[0];
 
