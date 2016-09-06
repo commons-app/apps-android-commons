@@ -27,14 +27,17 @@ import java.util.List;
 
 import fr.free.nrw.commons.R;
 
-public class NearbyListFragment extends ListFragment {
+public class NearbyListFragment extends ListFragment  {
 
     private NearbyAsyncTask nearbyAsyncTask;
     private NearbyAdapter mAdapter;
 
+    private ProgressBar progressBar;
+    private boolean isTaskRunning = false;
+
     private List<Place> places;
     private LatLng mLatestLocation;
-    private ProgressBar progressBar;
+
 
     private static final String TAG = "NearbyListFragment";
 
@@ -42,21 +45,38 @@ public class NearbyListFragment extends ListFragment {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
+
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         Log.d(TAG, "NearbyListFragment created");
         View view = inflater.inflate(R.layout.fragment_nearby, container, false);
+        progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
         return view;
     }
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        // If we are returning here from a screen orientation
+        // and the AsyncTask is still working, re-create and display the
+        // progress dialog.
+        if (isTaskRunning) {
+            progressBar.setVisibility(View.VISIBLE);
+        }
+    }
+
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
-        progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
-        progressBar.setMax(10);
         progressBar.setVisibility(View.VISIBLE);
-        progressBar.setProgress(0);
 
         mLatestLocation = ((NearbyActivity) getActivity()).getmLatestLocation();
 
@@ -67,8 +87,10 @@ public class NearbyListFragment extends ListFragment {
 
     }
 
-
-
+    public void onTaskStarted() {
+        isTaskRunning = true;
+        progressDialog = ProgressDialog.show(getActivity(), "Loading", "Please wait a moment!");
+    }
     private class NearbyAsyncTask extends AsyncTask<Void, Integer, List<Place>> {
         @Override
         protected void onPreExecute() {
