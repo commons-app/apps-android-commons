@@ -2,8 +2,6 @@ package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -206,28 +204,75 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
             tvDesc.setText(place.description);
             distance.setText(place.distance);
 
-            //Types of desc: landmark, city, edu, event, mountain, isle
+            // See https://github.com/commons-app/apps-android-commons/issues/250
+            // Most common types of desc: building, house, cottage, farmhouse, village, civil parish, church, railway station,
+            // gatehouse, milestone, inn, secondary school, hotel
             switch(place.description) {
-                case "landmark":
-                    icon.setImageResource(R.drawable.icon_landmark);
+                case "building":
+                    icon.setImageResource(R.drawable.round_icon_generic_building);
+                    break;
+                case "house":
+                    icon.setImageResource(R.drawable.round_icon_house);
+                    break;
+                case "cottage":
+                    icon.setImageResource(R.drawable.round_icon_house);
+                    break;
+                case "farmhouse":
+                    icon.setImageResource(R.drawable.round_icon_house);
+                    break;
+                case "church":
+                    icon.setImageResource(R.drawable.round_icon_church);
+                    break;
+                case "railway station":
+                    icon.setImageResource(R.drawable.round_icon_railway_station);
+                    break;
+                case "gatehouse":
+                    icon.setImageResource(R.drawable.round_icon_gatehouse);
+                    break;
+                case "milestone":
+                    icon.setImageResource(R.drawable.round_icon_milestone);
+                    break;
+                case "inn":
+                    icon.setImageResource(R.drawable.round_icon_house);
                     break;
                 case "city":
-                    icon.setImageResource(R.drawable.icon_city);
+                    icon.setImageResource(R.drawable.round_icon_city);
+                    break;
+                case "secondary school":
+                    icon.setImageResource(R.drawable.round_icon_school);
                     break;
                 case "edu":
-                    icon.setImageResource(R.drawable.icon_edu);
-                    break;
-                case "event":
-                    icon.setImageResource(R.drawable.icon_event);
-                    break;
-                case "mountain":
-                    icon.setImageResource(R.drawable.icon_mountain);
+                    icon.setImageResource(R.drawable.round_icon_school);
                     break;
                 case "isle":
-                    icon.setImageResource(R.drawable.icon_isle);
+                    icon.setImageResource(R.drawable.round_icon_island);
+                    break;
+                case "mountain":
+                    icon.setImageResource(R.drawable.round_icon_mountain);
+                    break;
+                case "airport":
+                    icon.setImageResource(R.drawable.round_icon_airport);
+                    break;
+                case "bridge":
+                    icon.setImageResource(R.drawable.round_icon_bridge);
+                    break;
+                case "road":
+                    icon.setImageResource(R.drawable.round_icon_road);
+                    break;
+                case "forest":
+                    icon.setImageResource(R.drawable.round_icon_forest);
+                    break;
+                case "park":
+                    icon.setImageResource(R.drawable.round_icon_park);
+                    break;
+                case "river":
+                    icon.setImageResource(R.drawable.round_icon_river);
+                    break;
+                case "waterfall":
+                    icon.setImageResource(R.drawable.round_icon_waterfall);
                     break;
                 default:
-                    icon.setImageResource(R.drawable.empty_photo);
+                    icon.setImageResource(R.drawable.round_icon_unknown);
             }
 
             // Return the completed view to render on screen
