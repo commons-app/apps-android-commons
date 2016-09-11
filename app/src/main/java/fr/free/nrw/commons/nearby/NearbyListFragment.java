@@ -256,6 +256,9 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
                 case "bridge":
                     icon.setImageResource(R.drawable.round_icon_bridge);
                     break;
+                case "road":
+                    icon.setImageResource(R.drawable.round_icon_road);
+                    break;
                 case "forest":
                     icon.setImageResource(R.drawable.round_icon_forest);
                     break;
