@@ -2,8 +2,6 @@ package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -206,11 +204,23 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
             tvDesc.setText(place.description);
             distance.setText(place.distance);
 
-            //Types of desc: landmark, city, edu, event, mountain, isle
+            // See https://github.com/commons-app/apps-android-commons/issues/250
+            // Most common types of desc: building, house, cottage, farmhouse, village, civil parish, church, railway station,
+            // gatehouse, milestone, inn, secondary school, hotel
             switch(place.description) {
-                case "landmark":
-                    icon.setImageResource(R.drawable.icon_landmark);
+                case "building":
+                    icon.setImageResource(R.drawable.round_icon_generic_building);
                     break;
+                case "house":
+                    icon.setImageResource(R.drawable.round_icon_house);
+                    break;
+                case "cottage":
+                    icon.setImageResource(R.drawable.round_icon_house);
+                    break;
+                case "farmhouse":
+                    icon.setImageResource(R.drawable.round_icon_house);
+                    break;
+                
                 case "city":
                     icon.setImageResource(R.drawable.icon_city);
                     break;
@@ -227,7 +237,7 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
                     icon.setImageResource(R.drawable.icon_isle);
                     break;
                 default:
-                    icon.setImageResource(R.drawable.empty_photo);
+                    icon.setImageResource(R.drawable.round_icon_unknown);
             }
 
             // Return the completed view to render on screen
