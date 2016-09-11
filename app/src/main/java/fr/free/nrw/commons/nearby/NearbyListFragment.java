@@ -220,21 +220,47 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
                 case "farmhouse":
                     icon.setImageResource(R.drawable.round_icon_house);
                     break;
-                
+                case "church":
+                    icon.setImageResource(R.drawable.round_icon_church);
+                    break;
+                case "railway station":
+                    icon.setImageResource(R.drawable.round_icon_railway_station);
+                    break;
+                case "gatehouse":
+                    icon.setImageResource(R.drawable.round_icon_gatehouse);
+                    break;
+                case "milestone":
+                    icon.setImageResource(R.drawable.round_icon_milestone);
+                    break;
+                case "inn":
+                    icon.setImageResource(R.drawable.round_icon_house);
+                    break;
                 case "city":
-                    icon.setImageResource(R.drawable.icon_city);
-                    break;
-                case "edu":
-                    icon.setImageResource(R.drawable.icon_edu);
-                    break;
-                case "event":
-                    icon.setImageResource(R.drawable.icon_event);
-                    break;
-                case "mountain":
-                    icon.setImageResource(R.drawable.icon_mountain);
+                    icon.setImageResource(R.drawable.round_icon_city);
                     break;
                 case "isle":
-                    icon.setImageResource(R.drawable.icon_isle);
+                    icon.setImageResource(R.drawable.round_icon_island);
+                    break;
+                case "mountain":
+                    icon.setImageResource(R.drawable.round_icon_mountain);
+                    break;
+                case "airport":
+                    icon.setImageResource(R.drawable.round_icon_airport);
+                    break;
+                case "bridge":
+                    icon.setImageResource(R.drawable.round_icon_bridge);
+                    break;
+                case "forest":
+                    icon.setImageResource(R.drawable.round_icon_forest);
+                    break;
+                case "park":
+                    icon.setImageResource(R.drawable.round_icon_park);
+                    break;
+                case "river":
+                    icon.setImageResource(R.drawable.round_icon_river);
+                    break;
+                case "waterfall":
+                    icon.setImageResource(R.drawable.round_icon_waterfall);
                     break;
                 default:
                     icon.setImageResource(R.drawable.round_icon_unknown);
