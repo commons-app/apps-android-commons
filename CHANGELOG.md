@@ -1,5 +1,9 @@
 # Wikimedia Commons for Android
 
+##v1.29
+- Added new icons to Nearby
+- Added link to website on About
+
 ##v1.28
 - Added geocoding template from GPS data stored in image
 - Fixed bug with doubled list view in Nearby
