@@ -133,8 +133,7 @@ public class Contribution extends Media {
     public String getPageContents() {
         StringBuffer buffer = new StringBuffer();
         SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-        //TODO: Add location template immediately after Information template. {{Location|37.51136|-77.602615}}
+        
         buffer
             .append("== {{int:filedesc}} ==\n")
                 .append("{{Information\n")
@@ -146,9 +145,14 @@ public class Contribution extends Media {
                     .append("|date={{According to EXIF data|").append(isoFormat.format(dateCreated)).append("}}\n");
         }
         buffer
-                .append("}}").append("\n")
-                .append("{{Location|").append(decimalCoords).append("}}").append("\n")
-            .append("== {{int:license-header}} ==\n")
+                .append("}}").append("\n");
+
+        //Only add Location template (e.g. {{Location|37.51136|-77.602615}} ) if coords is not null
+        if (decimalCoords != null) {
+                buffer.append("{{Location|").append(decimalCoords).append("}}").append("\n");
+        }
+
+        buffer.append("== {{int:license-header}} ==\n")
                 .append(Utils.licenseTemplateFor(getLicense())).append("\n\n")
             .append("{{Uploaded from Mobile|platform=Android|version=").append(CommonsApplication.APPLICATION_VERSION).append("}}\n")
             .append(getTrackingTemplates());
