@@ -1,5 +1,8 @@
 # Wikimedia Commons for Android
 
+##v1.30
+- Fixed {{Location|null}} template bug
+
 ##v1.29
 - Added new icons to Nearby
 - Added link to website on About
