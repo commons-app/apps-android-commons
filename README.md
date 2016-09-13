@@ -1,8 +1,8 @@
 # Wikimedia Commons Android app
 
-Upload pictures from your Android phone/tablet to Wikimedia Commons.
+The Wikimedia Commons Android app allows users to upload pictures from their Android phone/tablet to Wikimedia Commons. Download the app [here][8], or view our [website][9].
 
-Initially started by the Wikimedia Foundation, this app is now maintained by volunteers. Anyone is welcome to improve it, just choose among the [open issues](https://github.com/commons-app/apps-android-commons/issues) and send us a pull request :-)
+Initially started by the Wikimedia Foundation, this app is now maintained by volunteers. Anyone is welcome to improve it, just choose among the [open issues](https://github.com/commons-app/apps-android-commons/issues) and send us a pull request :-) 
 
 [![Build status](https://api.travis-ci.org/commons-app/apps-android-commons.svg)](https://travis-ci.org/commons-app/apps-android-commons)
 
@@ -84,3 +84,5 @@ Thumbnail images are not currently cached.
 [5]: https://developer.android.com/studio/build/building-cmdline.html
 [6]: https://www.apache.org/licenses/LICENSE-2.0
 [7]: https://github.com/commons-app/apps-android-commons/issues
+[8]: https://play.google.com/store/apps/details?id=fr.free.nrw.commons
+[9]: https://commons-app.github.io/
