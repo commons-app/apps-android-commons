@@ -25,7 +25,8 @@ public class GPSExtractor {
 
     private String filePath;
     private double decLatitude, decLongitude;
-    private double currentLatitude, currentLongitude;
+    private Double currentLatitude = null;
+    private Double currentLongitude = null;
     private Context context;
     public boolean imageCoordsExists;
     private MyLocationListener myLocationListener;
@@ -113,7 +114,7 @@ public class GPSExtractor {
             //Check what user's preference is for automatic location detection
             boolean gpsPrefEnabled = gpsPreferenceEnabled();
 
-            if (gpsPrefEnabled) {
+            if (gpsPrefEnabled && currentLatitude != null && currentLongitude != null) {
                 Log.d(TAG, "Current location values: Lat = " + currentLatitude + " Long = " + currentLongitude);
                 return String.valueOf(currentLatitude) + "|" + String.valueOf(currentLongitude);
             } else {
