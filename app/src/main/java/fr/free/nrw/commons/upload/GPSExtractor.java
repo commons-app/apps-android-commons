@@ -114,6 +114,7 @@ public class GPSExtractor {
             //Check what user's preference is for automatic location detection
             boolean gpsPrefEnabled = gpsPreferenceEnabled();
 
+            //Check that currentLatitude and currentLongitude have been explicitly set by MyLocationListener and do not default to (0.0,0.0)
             if (gpsPrefEnabled && currentLatitude != null && currentLongitude != null) {
                 Log.d(TAG, "Current location values: Lat = " + currentLatitude + " Long = " + currentLongitude);
                 return String.valueOf(currentLatitude) + "|" + String.valueOf(currentLongitude);
