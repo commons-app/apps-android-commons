@@ -353,6 +353,10 @@ public  class       ShareActivity
         }
     }
 
+    /**
+     * Gets coordinates for category suggestions, either from EXIF data or user location
+     * @param gpsEnabled
+     */
     public void getFileMetadata(boolean gpsEnabled) {
         filePath = FileUtils.getPath(this, mediaUri);
         Log.d(TAG, "Filepath: " + filePath);

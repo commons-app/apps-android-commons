@@ -82,6 +82,7 @@ public class GPSExtractor {
 
     /**
      * Extracts geolocation (either of image from EXIF data, or of user)
+     * @param useGPS set to true if location permissions allowed (by API 23), false if disallowed
      * @return coordinates as string (needs to be passed as a String in API query)
      */
     @Nullable
