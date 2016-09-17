@@ -104,6 +104,7 @@ public  class       ShareActivity
 
     private void uploadBegins() {
 
+        getFileMetadata();
         Toast startingToast = Toast.makeText(getApplicationContext(), R.string.uploading_started, Toast.LENGTH_LONG);
         startingToast.show();
 
