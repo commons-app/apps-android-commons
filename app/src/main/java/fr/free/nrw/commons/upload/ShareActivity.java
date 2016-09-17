@@ -104,7 +104,7 @@ public  class       ShareActivity
 
     private void uploadBegins() {
 
-        getFileMetadata();
+        getFileMetadata(true);
         Toast startingToast = Toast.makeText(getApplicationContext(), R.string.uploading_started, Toast.LENGTH_LONG);
         startingToast.show();
 
@@ -292,10 +292,9 @@ public  class       ShareActivity
                         }).show();
             }
         } else if (useNewPermissions && storagePermission && !locationPermission) {
-            getFileMetadata();
+            getFileMetadata(true);
         } else if(!useNewPermissions || (storagePermission && locationPermission)) {
-            getFileMetadata();
-            getLocationData();
+            getFileMetadata(true);
         }
 
     }
@@ -308,7 +307,7 @@ public  class       ShareActivity
             case 1: {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    getFileMetadata();
+                    getFileMetadata(true);
                 }
                 return;
             }
@@ -316,7 +315,7 @@ public  class       ShareActivity
             case 2: {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    getLocationData();
+                    getFileMetadata(false);
                 }
                 return;
             }
@@ -324,11 +323,11 @@ public  class       ShareActivity
             case 3: {
                 if (grantResults.length > 1
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    getFileMetadata();
+                    getFileMetadata(true);
                 }
                 if (grantResults.length > 1
                         && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                    getLocationData();
+                    getFileMetadata(false);
                 }
                 return;
             }
@@ -339,7 +338,7 @@ public  class       ShareActivity
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     //It is OK to call this at both (1) and (4) because if perm had been granted at
                     //snackbar, user should not be prompted at submit button
-                    getFileMetadata();
+                    getFileMetadata(true);
 
                     //Uploading only begins if storage permission granted from arrow icon
                     uploadBegins();
@@ -359,7 +358,7 @@ public  class       ShareActivity
         }
 
         if (filePath != null && !filePath.equals("")) {
-            // Gets image coords from exif data
+            // Gets image coords from exif data or user location
             decimalCoords = imageObj.getCoords(gpsEnabled);
             useImageCoords();
         }
