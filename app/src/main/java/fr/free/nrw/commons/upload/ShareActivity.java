@@ -103,8 +103,12 @@ public  class       ShareActivity
     }
 
     private void uploadBegins() {
+        if (locationPermission) {
+            getFileMetadata(true);
+        } else {
+            getFileMetadata(false);
+        }
 
-        getFileMetadata(true);
         Toast startingToast = Toast.makeText(getApplicationContext(), R.string.uploading_started, Toast.LENGTH_LONG);
         startingToast.show();
 
