@@ -1,5 +1,9 @@
 # Wikimedia Commons for Android
 
+##v1.31
+- Fixed bug with geolocation category suggestions not being displayed
+- Fixed bug with (0,0) being recorded as image location occasionally
+
 ##v1.30
 - Fixed {{Location|null}} template bug
 

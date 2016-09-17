@@ -92,7 +92,8 @@ public  class       ShareActivity
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             //Check for Storage permission that is required for upload. Do not allow user to proceed without permission, otherwise will crash
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 4);
+                //See http://stackoverflow.com/questions/33169455/onrequestpermissionsresult-not-being-called-in-dialog-fragment
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 4);
             } else {
                 uploadBegins();
             }
@@ -102,6 +103,11 @@ public  class       ShareActivity
     }
 
     private void uploadBegins() {
+        if (locationPermission) {
+            getFileMetadata(true);
+        } else {
+            getFileMetadata(false);
+        }
 
         Toast startingToast = Toast.makeText(getApplicationContext(), R.string.uploading_started, Toast.LENGTH_LONG);
         startingToast.show();
@@ -290,11 +296,11 @@ public  class       ShareActivity
                         }).show();
             }
         } else if (useNewPermissions && storagePermission && !locationPermission) {
-            getFileMetadata();
+            getFileMetadata(true);
         } else if(!useNewPermissions || (storagePermission && locationPermission)) {
-            getFileMetadata();
-            getLocationData();
+            getFileMetadata(true);
         }
+
     }
 
     @Override
@@ -305,7 +311,7 @@ public  class       ShareActivity
             case 1: {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    getFileMetadata();
+                    getFileMetadata(true);
                 }
                 return;
             }
@@ -313,7 +319,7 @@ public  class       ShareActivity
             case 2: {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    getLocationData();
+                    getFileMetadata(false);
                 }
                 return;
             }
@@ -321,11 +327,11 @@ public  class       ShareActivity
             case 3: {
                 if (grantResults.length > 1
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    getFileMetadata();
+                    getFileMetadata(true);
                 }
                 if (grantResults.length > 1
                         && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                    getLocationData();
+                    getFileMetadata(false);
                 }
                 return;
             }
@@ -336,7 +342,7 @@ public  class       ShareActivity
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     //It is OK to call this at both (1) and (4) because if perm had been granted at
                     //snackbar, user should not be prompted at submit button
-                    getFileMetadata();
+                    getFileMetadata(true);
 
                     //Uploading only begins if storage permission granted from arrow icon
                     uploadBegins();
@@ -347,26 +353,23 @@ public  class       ShareActivity
         }
     }
 
-    public void getFileMetadata() {
+    /**
+     * Gets coordinates for category suggestions, either from EXIF data or user location
+     * @param gpsEnabled
+     */
+    public void getFileMetadata(boolean gpsEnabled) {
         filePath = FileUtils.getPath(this, mediaUri);
         Log.d(TAG, "Filepath: " + filePath);
         Log.d(TAG, "Calling GPSExtractor");
-        imageObj = new GPSExtractor(filePath, this);
-
-        if (filePath != null && !filePath.equals("")) {
-            // Gets image coords from exif data
-            decimalCoords = imageObj.getCoords(false);
-            useImageCoords();
-        }
-    }
-
-    public void getLocationData() {
         if(imageObj == null) {
             imageObj = new GPSExtractor(filePath, this);
         }
 
-        decimalCoords = imageObj.getCoords(true);
-        useImageCoords();
+        if (filePath != null && !filePath.equals("")) {
+            // Gets image coords from exif data or user location
+            decimalCoords = imageObj.getCoords(gpsEnabled);
+            useImageCoords();
+        }
     }
 
     /**
