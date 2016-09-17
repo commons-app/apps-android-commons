@@ -350,26 +350,19 @@ public  class       ShareActivity
         }
     }
 
-    public void getFileMetadata() {
+    public void getFileMetadata(boolean gpsEnabled) {
         filePath = FileUtils.getPath(this, mediaUri);
         Log.d(TAG, "Filepath: " + filePath);
         Log.d(TAG, "Calling GPSExtractor");
-        imageObj = new GPSExtractor(filePath, this);
-
-        if (filePath != null && !filePath.equals("")) {
-            // Gets image coords from exif data
-            decimalCoords = imageObj.getCoords(false);
-            useImageCoords();
-        }
-    }
-
-    public void getLocationData() {
         if(imageObj == null) {
             imageObj = new GPSExtractor(filePath, this);
         }
 
-        decimalCoords = imageObj.getCoords(true);
-        useImageCoords();
+        if (filePath != null && !filePath.equals("")) {
+            // Gets image coords from exif data
+            decimalCoords = imageObj.getCoords(gpsEnabled);
+            useImageCoords();
+        }
     }
 
     /**
