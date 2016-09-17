@@ -92,7 +92,8 @@ public  class       ShareActivity
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             //Check for Storage permission that is required for upload. Do not allow user to proceed without permission, otherwise will crash
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 4);
+                //See http://stackoverflow.com/questions/33169455/onrequestpermissionsresult-not-being-called-in-dialog-fragment
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 4);
             } else {
                 uploadBegins();
             }
@@ -295,6 +296,7 @@ public  class       ShareActivity
             getFileMetadata();
             getLocationData();
         }
+
     }
 
     @Override
