@@ -1,5 +1,9 @@
 # Wikimedia Commons for Android
 
+##v1.32
+- Use Quadtree source instead of JAR, for F-Droid compatibility
+- Fixed GPS extractor not being called
+
 ##v1.31
 - Fixed bug with geolocation category suggestions not being displayed
 - Fixed bug with (0,0) being recorded as image location occasionally
