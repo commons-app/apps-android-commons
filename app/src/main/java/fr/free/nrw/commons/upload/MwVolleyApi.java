@@ -219,6 +219,10 @@ public class MwVolleyApi {
         private Category[] categories;
         private Category category;
 
+        public Page() {
+
+        }
+
         @Override
         public String toString() {
 
