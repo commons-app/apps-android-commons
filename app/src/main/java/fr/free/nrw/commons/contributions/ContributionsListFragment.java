@@ -33,6 +33,8 @@ import fr.free.nrw.commons.SettingsActivity;
 import fr.free.nrw.commons.nearby.NearbyActivity;
 import fr.free.nrw.commons.upload.UploadService;
 
+import static android.app.Activity.RESULT_OK;
+
 public class ContributionsListFragment extends Fragment {
 
     public interface SourceRefresher {
@@ -98,12 +100,11 @@ public class ContributionsListFragment extends Fragment {
         //FIXME: must get the file data for Google Photos when receive the intent answer, in the onActivityResult method
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (data != null) {
-            Log.d("Contributions", "OnActivityResult() parameters: Result code: " + resultCode + " Data: " + data.toString());
-            Uri imageData = data.getData();
-            controller.handleImagePicked(requestCode, imageData);
+        if ( resultCode == RESULT_OK ) {
+            Log.d("Contributions", "OnActivityResult() parameters: Req code: " + requestCode + " Result code: " + resultCode + " Data: " + data);
+            controller.handleImagePicked(requestCode, data);
         } else {
-            Log.e("Contributions", "OnActivityResult() parameters: Result code: " + resultCode + " Data: null");
+            Log.e("Contributions", "OnActivityResult() parameters: Req code: " + requestCode + " Result code: " + resultCode + " Data: " + data);
         }
     }
 
