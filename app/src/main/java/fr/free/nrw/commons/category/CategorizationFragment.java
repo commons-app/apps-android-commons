@@ -318,6 +318,7 @@ public class CategorizationFragment extends Fragment {
         categoriesNotFoundView = (TextView) rootView.findViewById(R.id.categoriesNotFound);
         categoriesSkip = (TextView) rootView.findViewById(R.id.categoriesExplanation);
 
+        //FIXME: Put this back into SingleUploadFragment.java
         //Retrieve last title and desc entered when user clicked Submit icon
         SharedPreferences titleDesc = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String title = titleDesc.getString("Title", "");
