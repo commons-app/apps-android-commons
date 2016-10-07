@@ -113,6 +113,7 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
     public void onDestroy() {
         super.onDestroy();
 
+        // See http://stackoverflow.com/questions/18264408/incomplete-asynctask-crashes-my-app
         if(nearbyAsyncTask != null && nearbyAsyncTask.getStatus() != AsyncTask.Status.FINISHED) {
             nearbyAsyncTask.cancel(true);
         }
