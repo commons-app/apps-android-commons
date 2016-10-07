@@ -60,8 +60,6 @@ public class SingleUploadFragment extends Fragment {
                 editor.putString("Desc", desc);
                 editor.apply();
 
-
-
                 uploadActionInitiatedHandler.uploadActionInitiated(title, desc);
                 return true;
 
