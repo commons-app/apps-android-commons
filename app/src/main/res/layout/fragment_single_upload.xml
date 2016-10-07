@@ -45,6 +45,6 @@
         android:layout_height="wrap_content"
         android:text="@string/share_license_summary"
         android:id="@+id/share_license_summary"
-        android:layout_gravity="center"
+        android:gravity="center"
         android:layout_marginTop="16dp"/>
 </LinearLayout>
