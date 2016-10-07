@@ -10,6 +10,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,6 +19,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -37,6 +39,8 @@ public class SingleUploadFragment extends Fragment {
 
     private OnUploadActionInitiated uploadActionInitiatedHandler;
 
+    private static final String TAG = "SingleUploadFragment";
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.activity_share, menu);
@@ -49,7 +53,18 @@ public class SingleUploadFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_upload_single:
-                uploadActionInitiatedHandler.uploadActionInitiated(titleEdit.getText().toString(), descEdit.getText().toString());
+
+                String title = titleEdit.getText().toString();
+                String desc = descEdit.getText().toString();
+
+                //Save the values of these fields in short-lived cache so next time this fragment is loaded, we can access these
+                SharedPreferences titleDesc = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                SharedPreferences.Editor editor = titleDesc.edit();
+                editor.putString("Title", title);
+                editor.putString("Desc", desc);
+                editor.apply();
+
+                uploadActionInitiatedHandler.uploadActionInitiated(title, desc);
                 return true;
 
         }
@@ -62,6 +77,23 @@ public class SingleUploadFragment extends Fragment {
 
         titleEdit = (EditText)rootView.findViewById(R.id.titleEdit);
         descEdit = (EditText)rootView.findViewById(R.id.descEdit);
+        Button titleDescButton = (Button) rootView.findViewById(R.id.titleDescButton);
+
+        titleDescButton.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                //Retrieve last title and desc entered
+                SharedPreferences titleDesc = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                String title = titleDesc.getString("Title", "");
+                String desc = titleDesc.getString("Desc", "");
+                Log.d(TAG, "Title: " + title + ", Desc: " + desc);
+
+                titleEdit.setText(title);
+                descEdit.setText(desc);
+            }
+        });
+
         licenseSummaryView = (TextView)rootView.findViewById(R.id.share_license_summary);
 
         TextWatcher uploadEnabler = new TextWatcher() {
