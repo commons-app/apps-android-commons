@@ -49,9 +49,19 @@ public class SingleUploadFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_upload_single:
-                //TODO: Save the values of these fields in short-lived cache so next time this fragment is loaded, we can access these
+
                 String title = titleEdit.getText().toString();
                 String desc = descEdit.getText().toString();
+
+                //TODO: Save the values of these fields in short-lived cache so next time this fragment is loaded, we can access these
+                SharedPreferences titleDesc = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                SharedPreferences.Editor editor = titleDesc.edit();
+                editor.putString("Title", title);
+                editor.putString("Desc", desc);
+                editor.apply();
+
+
+
                 uploadActionInitiatedHandler.uploadActionInitiated(title, desc);
                 return true;
 

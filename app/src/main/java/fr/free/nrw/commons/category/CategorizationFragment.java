@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.content.ContentProviderClient;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
@@ -315,6 +317,12 @@ public class CategorizationFragment extends Fragment {
         categoriesSearchInProgress = (ProgressBar) rootView.findViewById(R.id.categoriesSearchInProgress);
         categoriesNotFoundView = (TextView) rootView.findViewById(R.id.categoriesNotFound);
         categoriesSkip = (TextView) rootView.findViewById(R.id.categoriesExplanation);
+
+        //Retrieve last title and desc entered when user clicked Submit icon
+        SharedPreferences titleDesc = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String title = titleDesc.getString("Title", "");
+        String desc = titleDesc.getString("Desc", "");
+        Log.d(TAG, "Title: " + title + ", Desc: " + desc);
 
         categoriesSkip.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
