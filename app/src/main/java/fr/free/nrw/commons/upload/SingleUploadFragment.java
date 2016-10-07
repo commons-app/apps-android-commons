@@ -88,6 +88,9 @@ public class SingleUploadFragment extends Fragment {
                 String title = titleDesc.getString("Title", "");
                 String desc = titleDesc.getString("Desc", "");
                 Log.d(TAG, "Title: " + title + ", Desc: " + desc);
+
+                titleEdit.setText(title);
+                descEdit.setText(desc);
             }
         });
 
