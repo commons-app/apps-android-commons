@@ -18,6 +18,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -73,6 +74,8 @@ public class SingleUploadFragment extends Fragment {
 
         titleEdit = (EditText)rootView.findViewById(R.id.titleEdit);
         descEdit = (EditText)rootView.findViewById(R.id.descEdit);
+        Button titleDescButton = (Button) rootView.findViewById(R.id.titleDescButton);
+
         //TODO: Add button here for 'copy from previous upload'
         licenseSummaryView = (TextView)rootView.findViewById(R.id.share_license_summary);
 
