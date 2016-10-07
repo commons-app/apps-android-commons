@@ -10,6 +10,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -37,6 +38,8 @@ public class SingleUploadFragment extends Fragment {
     private TextView licenseSummaryView;
 
     private OnUploadActionInitiated uploadActionInitiatedHandler;
+
+    private static final String TAG = "SingleUploadFragment";
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -76,7 +79,18 @@ public class SingleUploadFragment extends Fragment {
         descEdit = (EditText)rootView.findViewById(R.id.descEdit);
         Button titleDescButton = (Button) rootView.findViewById(R.id.titleDescButton);
 
-        //TODO: Add button here for 'copy from previous upload'
+        titleDescButton.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                //Retrieve last title and desc entered
+                SharedPreferences titleDesc = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                String title = titleDesc.getString("Title", "");
+                String desc = titleDesc.getString("Desc", "");
+                Log.d(TAG, "Title: " + title + ", Desc: " + desc);
+            }
+        });
+
         licenseSummaryView = (TextView)rootView.findViewById(R.id.share_license_summary);
 
         TextWatcher uploadEnabler = new TextWatcher() {
