@@ -109,6 +109,15 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
         super.onDetach();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        if(nearbyAsyncTask != null && nearbyAsyncTask.getStatus() != AsyncTask.Status.FINISHED) {
+            nearbyAsyncTask.cancel(true);
+        }
+    }
+
     private class NearbyAsyncTask extends AsyncTask<Void, Integer, List<Place>> {
 
         private final TaskListener listener;
@@ -138,6 +147,11 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
         @Override
         protected void onPostExecute(List<Place> result) {
             super.onPostExecute(result);
+
+            if(isCancelled()) {
+                return;
+            }
+
             progressBar.setVisibility(View.GONE);
 
             mAdapter = new NearbyAdapter(getActivity(), places);
@@ -304,10 +318,12 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
             );
         }
 
-        for(int i = 0; i < 500; i++) {
-            Place place = places.get(i);
-            String distance = formatDistanceBetween(mLatestLocation, place.location);
-            place.setDistance(distance);
+        if (places.size() > 0) {
+            for (int i = 0; i < 100; i++) {
+                Place place = places.get(i);
+                String distance = formatDistanceBetween(mLatestLocation, place.location);
+                place.setDistance(distance);
+            }
         }
         return places;
     }
