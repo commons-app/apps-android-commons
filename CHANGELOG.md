@@ -1,5 +1,10 @@
 # Wikimedia Commons for Android
 
+##v1.33
+- Fixed crash when back button pressed before Nearby list is loaded
+- Fixed crash when Nearby list is loaded without network connection
+- Added no args constructor for GPS category suggestions
+
 ##v1.32
 - Use Quadtree source instead of JAR, for F-Droid compatibility
 - Fixed GPS extractor not being called
