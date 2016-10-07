@@ -149,7 +149,7 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
             super.onPostExecute(result);
 
             if(isCancelled()) {
-                return; 
+                return;
             }
 
             progressBar.setVisibility(View.GONE);
@@ -318,10 +318,12 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
             );
         }
 
-        for(int i = 0; i < 500; i++) {
-            Place place = places.get(i);
-            String distance = formatDistanceBetween(mLatestLocation, place.location);
-            place.setDistance(distance);
+        if (places.size() > 0) {
+            for (int i = 0; i < 100; i++) {
+                Place place = places.get(i);
+                String distance = formatDistanceBetween(mLatestLocation, place.location);
+                place.setDistance(distance);
+            }
         }
         return places;
     }
