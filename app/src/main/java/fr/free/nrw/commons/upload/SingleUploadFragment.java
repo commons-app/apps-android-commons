@@ -49,7 +49,10 @@ public class SingleUploadFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_upload_single:
-                uploadActionInitiatedHandler.uploadActionInitiated(titleEdit.getText().toString(), descEdit.getText().toString());
+                //TODO: Save the values of these fields in short-lived cache so next time this fragment is loaded, we can access these
+                String title = titleEdit.getText().toString();
+                String desc = descEdit.getText().toString();
+                uploadActionInitiatedHandler.uploadActionInitiated(title, desc);
                 return true;
 
         }
@@ -62,6 +65,7 @@ public class SingleUploadFragment extends Fragment {
 
         titleEdit = (EditText)rootView.findViewById(R.id.titleEdit);
         descEdit = (EditText)rootView.findViewById(R.id.descEdit);
+        //TODO: Add button here for 'copy from previous upload'
         licenseSummaryView = (TextView)rootView.findViewById(R.id.share_license_summary);
 
         TextWatcher uploadEnabler = new TextWatcher() {
