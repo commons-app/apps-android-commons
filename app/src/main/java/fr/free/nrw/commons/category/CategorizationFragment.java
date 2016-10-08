@@ -117,6 +117,10 @@ public class CategorizationFragment extends Fragment {
     protected ArrayList<String> titleCatQuery() {
         ArrayList<String> items = new ArrayList<String>();
 
+        SharedPreferences titleDesc = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        //Retrieve the title that was saved when user tapped submit icon
+        String title = titleDesc.getString("Title", "");
+        Log.d(TAG, "Title: " + title);
 
         return items;
     }

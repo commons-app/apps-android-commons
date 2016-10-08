@@ -52,12 +52,13 @@ public class SingleUploadFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            //What happens when the 'submit' icon is tapped
             case R.id.menu_upload_single:
 
                 String title = titleEdit.getText().toString();
                 String desc = descEdit.getText().toString();
 
-                //Save the values of these fields in short-lived cache so next time this fragment is loaded, we can access these
+                //Save the title/desc in short-lived cache so next time this fragment is loaded, we can access these
                 SharedPreferences titleDesc = PreferenceManager.getDefaultSharedPreferences(getActivity());
                 SharedPreferences.Editor editor = titleDesc.edit();
                 editor.putString("Title", title);
