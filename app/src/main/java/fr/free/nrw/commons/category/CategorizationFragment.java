@@ -115,12 +115,11 @@ public class CategorizationFragment extends Fragment {
     //TODO: Probably add 'suggest from filename' cats here. We want it to be displayed at start, not upon typing
     //TODO: Search using MethodA query, but can't use MethodAUpdater because we don't want it updating when user types
     /**
-     * Retrieves recently-used categories and nearby categories, and merges them without duplicates.
-     * @return a list containing these categories
+     * Retrieves recently-used categories
+     * @return a list containing recent categories
      */
     protected ArrayList<String> recentCatQuery() {
         ArrayList<String> items = new ArrayList<String>();
-        Set<String> mergedItems = new LinkedHashSet<String>();
 
         try {
             Cursor cursor = client.query(
@@ -135,20 +134,28 @@ public class CategorizationFragment extends Fragment {
                 items.add(cat.getName());
             }
             cursor.close();
-
-            if (MwVolleyApi.GpsCatExists.getGpsCatExists() == true) {
-                //Log.d(TAG, "GPS cats found in CategorizationFragment.java" + MwVolleyApi.getGpsCat().toString());
-                List<String> gpsItems = new ArrayList<String>(MwVolleyApi.getGpsCat());
-                //Log.d(TAG, "GPS items: " + gpsItems.toString());
-
-                mergedItems.addAll(gpsItems);
-            }
-
-            mergedItems.addAll(items);
         }
         catch (RemoteException e) {
             throw new RuntimeException(e);
         }
+
+        return items;
+    }
+
+    /**
+     * Merges recently-used categories and nearby categories without duplicates.
+     * @return a list containing merged categories
+     */
+    protected ArrayList<String> mergeItems() {
+        Set<String> mergedItems = new LinkedHashSet<String>();
+
+        if (MwVolleyApi.GpsCatExists.getGpsCatExists()) {
+            List<String> gpsItems = new ArrayList<String>(MwVolleyApi.getGpsCat());
+            mergedItems.addAll(gpsItems);
+        }
+
+        List<String> recentItems = new ArrayList<String>(recentCatQuery());
+        mergedItems.addAll(recentItems);
 
         //Needs to be an ArrayList and not a List unless we want to modify a big portion of preexisting code
         ArrayList<String> mergedItemsList = new ArrayList<String>(mergedItems);
