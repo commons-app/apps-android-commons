@@ -35,7 +35,7 @@
 
     <Button
         android:text="@string/use_previous"
-        android:background="@android:color/transparent"
+        android:background="#90000000"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/titleDescButton" />
