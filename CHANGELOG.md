@@ -1,5 +1,8 @@
 # Wikimedia Commons for Android
 
+##v1.34
+- Added button to use previous title/desc
+
 ##v1.33
 - Fixed crash when back button pressed before Nearby list is loaded
 - Fixed crash when Nearby list is loaded without network connection
