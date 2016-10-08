@@ -33,6 +33,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.mediawiki.api.ApiResult;
+import org.mediawiki.api.MWApi;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -43,6 +47,7 @@ import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.upload.MwVolleyApi;
@@ -121,6 +126,37 @@ public class CategorizationFragment extends Fragment {
         //Retrieve the title that was saved when user tapped submit icon
         String title = titleDesc.getString("Title", "");
         Log.d(TAG, "Title: " + title);
+
+
+        MWApi api = CommonsApplication.createMWApi();
+        ApiResult result;
+
+
+        //URL https://commons.wikimedia.org/w/api.php?action=query&format=xml&list=search&srwhat=text&srenablerewrites=1&srnamespace=14&srlimit=10&srsearch=
+        try {
+            result = api.action("query")
+                    .param("format", "xml")
+                    .param("list", "search")
+                    .param("srwhat", "text")
+                    .param("srnamespace", "14")
+                    .param("srlimit", SEARCH_CATS_LIMIT)
+                    .param("srsearch", title)
+                    .get();
+            Log.d(TAG, "Searching for cats for title: " + result.toString());
+        } catch (IOException e) {
+            Log.e(TAG, "IO Exception: ", e);
+            //Return empty arraylist
+            return items;
+        }
+
+        ArrayList<ApiResult> categoryNodes = result.getNodes("/api/query/search/p/@title");
+        for(ApiResult categoryNode: categoryNodes) {
+            String cat = categoryNode.getDocument().getTextContent();
+            String catString = cat.replace("Category:", "");
+            items.add(catString);
+        }
+
+        Log.d(TAG, "Title cat query results: " + items);
 
         return items;
     }
