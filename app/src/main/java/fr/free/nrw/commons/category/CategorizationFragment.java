@@ -112,6 +112,7 @@ public class CategorizationFragment extends Fragment {
         }
     }
 
+    //TODO: Probably add 'suggest from filename' cats here. We want it to be displayed at start, not upon typing
     /**
      * Retrieves recently-used categories and nearby categories, and merges them without duplicates.
      * @return a list containing these categories
