@@ -122,17 +122,16 @@ public class CategorizationFragment extends Fragment {
     protected ArrayList<String> titleCatQuery() {
         ArrayList<String> items = new ArrayList<String>();
 
-        SharedPreferences titleDesc = PreferenceManager.getDefaultSharedPreferences(getActivity());
         //Retrieve the title that was saved when user tapped submit icon
+        SharedPreferences titleDesc = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String title = titleDesc.getString("Title", "");
         Log.d(TAG, "Title: " + title);
 
+        //TODO: Split this into AsyncTask
 
         MWApi api = CommonsApplication.createMWApi();
         ApiResult result;
-
-
-        //TODO: Split this into AsyncTask
+        
         //URL https://commons.wikimedia.org/w/api.php?action=query&format=xml&list=search&srwhat=text&srenablerewrites=1&srnamespace=14&srlimit=10&srsearch=
         try {
             result = api.action("query")
