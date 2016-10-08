@@ -208,7 +208,6 @@ public class MwVolleyApi {
             } else {
                 return "No pages found";
             }
-
         }
     }
 
@@ -220,7 +219,6 @@ public class MwVolleyApi {
         private Category category;
 
         public Page() {
-
         }
 
         @Override
@@ -247,15 +245,15 @@ public class MwVolleyApi {
         }
     }
 
-        private static class Category {
-            private String title;
+    private static class Category {
+        private String title;
 
-            @Override
-            public String toString() {
-                return title;
-            }
+        @Override
+        public String toString() {
+            return title;
         }
     }
+}
 
 
 
