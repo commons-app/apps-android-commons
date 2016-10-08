@@ -132,6 +132,7 @@ public class CategorizationFragment extends Fragment {
         ApiResult result;
 
 
+        //TODO: Split this into AsyncTask
         //URL https://commons.wikimedia.org/w/api.php?action=query&format=xml&list=search&srwhat=text&srenablerewrites=1&srnamespace=14&srlimit=10&srsearch=
         try {
             result = api.action("query")
@@ -190,7 +191,7 @@ public class CategorizationFragment extends Fragment {
     }
 
     /**
-     * Merges recently-used categories and nearby categories without duplicates.
+     * Merges nearby categories, categories suggested based on title, and recent categories... without duplicates.
      * @return a list containing merged categories
      */
     protected ArrayList<String> mergeItems() {
