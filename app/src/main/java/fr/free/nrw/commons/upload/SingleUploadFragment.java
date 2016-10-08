@@ -39,7 +39,7 @@ public class SingleUploadFragment extends Fragment {
 
     private OnUploadActionInitiated uploadActionInitiatedHandler;
 
-    private static final String TAG = "SingleUploadFragment";
+    private static final String TAG = SingleUploadFragment.class.getName();
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

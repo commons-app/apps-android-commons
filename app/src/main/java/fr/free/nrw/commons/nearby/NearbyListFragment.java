@@ -36,7 +36,7 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
     private List<Place> places;
     private LatLng mLatestLocation;
 
-    private static final String TAG = "NearbyListFragment";
+    private static final String TAG = NearbyListFragment.class.getName();
 
     public NearbyListFragment() {
     }
