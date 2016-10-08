@@ -211,7 +211,7 @@ public class MwVolleyApi {
         }
     }
 
-    private static class Page {
+    public static class Page {
         private int pageid;
         private int ns;
         private String title;
