@@ -201,11 +201,11 @@ public class CategorizationFragment extends Fragment {
             mergedItems.addAll(gpsItems);
         }
 
-        List<String> recentItems = new ArrayList<String>(recentCatQuery());
-        mergedItems.addAll(recentItems);
-
         List<String> titleItems = new ArrayList<String>(titleCatQuery());
         mergedItems.addAll(titleItems);
+
+        List<String> recentItems = new ArrayList<String>(recentCatQuery());
+        mergedItems.addAll(recentItems);
 
         //Needs to be an ArrayList and not a List unless we want to modify a big portion of preexisting code
         ArrayList<String> mergedItemsList = new ArrayList<String>(mergedItems);
