@@ -114,6 +114,7 @@ public class CategorizationFragment extends Fragment {
 
     //TODO: Probably add 'suggest from filename' cats here. We want it to be displayed at start, not upon typing
     //TODO: Search using MethodA query, but can't use MethodAUpdater because we don't want it updating when user types
+
     /**
      * Retrieves recently-used categories
      * @return a list containing recent categories
