@@ -59,7 +59,7 @@ public class MwVolleyApi {
     public void request(String coords) {
         coordsLog = coords;
         String apiUrl = buildUrl(coords);
-        Log.d("Image", "URL: " + apiUrl);
+        Log.d(TAG, "URL: " + apiUrl);
 
         JsonRequest<QueryResponse> request = new QueryRequest(apiUrl,
                 new LogResponseListener<QueryResponse>(), new LogResponseErrorListener());
@@ -108,7 +108,6 @@ public class MwVolleyApi {
     }
 
     private static class LogResponseListener<T> implements Response.Listener<T> {
-        private static final String TAG = LogResponseListener.class.getName();
 
         @Override
         public void onResponse(T response) {
@@ -117,7 +116,6 @@ public class MwVolleyApi {
     }
 
     private static class LogResponseErrorListener implements Response.ErrorListener {
-        private static final String TAG = LogResponseErrorListener.class.getName();
 
         @Override
         public void onErrorResponse(VolleyError error) {
