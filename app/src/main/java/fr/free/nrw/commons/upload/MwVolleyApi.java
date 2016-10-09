@@ -59,7 +59,7 @@ public class MwVolleyApi {
     public void request(String coords) {
         coordsLog = coords;
         String apiUrl = buildUrl(coords);
-        Log.d("Image", "URL: " + apiUrl);
+        Log.d(TAG, "URL: " + apiUrl);
 
         JsonRequest<QueryResponse> request = new QueryRequest(apiUrl,
                 new LogResponseListener<QueryResponse>(), new LogResponseErrorListener());
@@ -108,7 +108,6 @@ public class MwVolleyApi {
     }
 
     private static class LogResponseListener<T> implements Response.Listener<T> {
-        private static final String TAG = LogResponseListener.class.getName();
 
         @Override
         public void onResponse(T response) {
@@ -117,7 +116,6 @@ public class MwVolleyApi {
     }
 
     private static class LogResponseErrorListener implements Response.ErrorListener {
-        private static final String TAG = LogResponseErrorListener.class.getName();
 
         @Override
         public void onErrorResponse(VolleyError error) {
@@ -208,11 +206,10 @@ public class MwVolleyApi {
             } else {
                 return "No pages found";
             }
-
         }
     }
 
-    private static class Page {
+    public static class Page {
         private int pageid;
         private int ns;
         private String title;
@@ -220,7 +217,6 @@ public class MwVolleyApi {
         private Category category;
 
         public Page() {
-
         }
 
         @Override
@@ -247,15 +243,15 @@ public class MwVolleyApi {
         }
     }
 
-        private static class Category {
-            private String title;
+    private static class Category {
+        private String title;
 
-            @Override
-            public String toString() {
-                return title;
-            }
+        @Override
+        public String toString() {
+            return title;
         }
     }
+}
 
 
 

@@ -24,7 +24,7 @@ public class NearbyActivity extends AppCompatActivity {
     private double currentLatitude, currentLongitude;
     //private String gpsCoords;
 
-    private static final String TAG = "NearbyActivity";
+    private static final String TAG = NearbyActivity.class.getName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

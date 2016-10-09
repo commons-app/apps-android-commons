@@ -13,7 +13,7 @@ import java.util.List;
 
 public class NearbyPlaces {
 
-    private static final String TAG = "NearbyPlaces";
+    private static final String TAG = NearbyPlaces.class.getName();
     static List<Place> places = null;
 
     public static List<Place> get() {
