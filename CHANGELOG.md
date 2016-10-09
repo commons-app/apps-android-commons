@@ -1,5 +1,8 @@
 # Wikimedia Commons for Android
 
+##v1.35
+- Fixed issues with GPS category suggestions
+
 ##v1.34
 - Added button to use previous title/desc
 
