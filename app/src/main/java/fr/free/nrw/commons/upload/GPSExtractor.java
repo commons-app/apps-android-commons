@@ -98,10 +98,10 @@ public class GPSExtractor {
         try {
             exif = new ExifInterface(filePath);
         } catch (IOException e) {
-            Log.w("Image", e);
+            Log.w(TAG, e);
             return null;
         } catch (IllegalArgumentException e) {
-            Log.w("Image", e);
+            Log.w(TAG, e);
             return null;
         }
 
@@ -136,8 +136,8 @@ public class GPSExtractor {
             longitude_ref = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE_REF);
 
             if (latitude!=null && latitude_ref!=null && longitude!=null && longitude_ref!=null) {
-                Log.d("Image", "Latitude: " + latitude + " " + latitude_ref);
-                Log.d("Image", "Longitude: " + longitude + " " + longitude_ref);
+                Log.d(TAG, "Latitude: " + latitude + " " + latitude_ref);
+                Log.d(TAG, "Longitude: " + longitude + " " + longitude_ref);
 
                 decimalCoords = getDecimalCoords(latitude, latitude_ref, longitude, longitude_ref);
                 return decimalCoords;
@@ -201,7 +201,7 @@ public class GPSExtractor {
         }
 
         String decimalCoords = String.valueOf(decLatitude) + "|" + String.valueOf(decLongitude);
-        Log.d("Coords", "Latitude and Longitude are " + decimalCoords);
+        Log.d(TAG, "Latitude and Longitude are " + decimalCoords);
         return decimalCoords;
     }
 
