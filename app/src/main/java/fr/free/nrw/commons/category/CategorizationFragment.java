@@ -127,38 +127,8 @@ public class CategorizationFragment extends Fragment {
         String title = titleDesc.getString("Title", "");
         Log.d(TAG, "Title: " + title);
 
-        //TODO: Split this into AsyncTask
+        //TODO: Add call to TitleCategories AsyncTask here
 
-        MWApi api = CommonsApplication.createMWApi();
-        ApiResult result;
-        
-        //URL https://commons.wikimedia.org/w/api.php?action=query&format=xml&list=search&srwhat=text&srenablerewrites=1&srnamespace=14&srlimit=10&srsearch=
-        try {
-            result = api.action("query")
-                    .param("format", "xml")
-                    .param("list", "search")
-                    .param("srwhat", "text")
-                    .param("srnamespace", "14")
-                    .param("srlimit", SEARCH_CATS_LIMIT)
-                    .param("srsearch", title)
-                    .get();
-            Log.d(TAG, "Searching for cats for title: " + result.toString());
-        } catch (IOException e) {
-            Log.e(TAG, "IO Exception: ", e);
-            //Return empty arraylist
-            return items;
-        }
-
-        ArrayList<ApiResult> categoryNodes = result.getNodes("/api/query/search/p/@title");
-        for(ApiResult categoryNode: categoryNodes) {
-            String cat = categoryNode.getDocument().getTextContent();
-            String catString = cat.replace("Category:", "");
-            items.add(catString);
-        }
-
-        Log.d(TAG, "Title cat query results: " + items);
-
-        return items;
     }
 
     /**
