@@ -127,7 +127,7 @@ public class CategorizationFragment extends Fragment {
         String title = titleDesc.getString("Title", "");
         Log.d(TAG, "Title: " + title);
 
-        //TODO: Add call to TitleCategories AsyncTask here
+        //TODO: Add call to TitleCategories AsyncTask here and return ArrayList<String>
 
     }
 

@@ -13,9 +13,6 @@ import java.util.ArrayList;
 
 import fr.free.nrw.commons.CommonsApplication;
 
-/**
- * Created by misao on 11-Oct-16.
- */
 
 public class TitleCategories extends AsyncTask<Void, Void, ArrayList<String>> {
 
