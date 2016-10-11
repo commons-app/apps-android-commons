@@ -16,6 +16,9 @@ import fr.free.nrw.commons.CommonsApplication;
 
 public class TitleCategories extends AsyncTask<Void, Void, ArrayList<String>> {
 
+    private final static int SEARCH_CATS_LIMIT = 25;
+    private static final String TAG = TitleCategories.class.getName();
+
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
@@ -24,8 +27,6 @@ public class TitleCategories extends AsyncTask<Void, Void, ArrayList<String>> {
     @Override
     protected ArrayList<String> doInBackground(Void... voids) {
 
-
-        //TODO: Split this into AsyncTask
 
         MWApi api = CommonsApplication.createMWApi();
         ApiResult result;
