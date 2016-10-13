@@ -18,6 +18,14 @@ public class TitleCategories extends AsyncTask<Void, Void, ArrayList<String>> {
 
     private final static int SEARCH_CATS_LIMIT = 25;
     private static final String TAG = TitleCategories.class.getName();
+    private String title;
+
+    public TitleCategories(String title) {
+        super();
+        this.title = title;
+        // do stuff
+    }
+
 
     @Override
     protected void onPreExecute() {
