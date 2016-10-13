@@ -45,6 +45,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 import fr.free.nrw.commons.CommonsApplication;
@@ -127,8 +128,16 @@ public class CategorizationFragment extends Fragment {
         String title = titleDesc.getString("Title", "");
         Log.d(TAG, "Title: " + title);
 
-        //TODO: Add call to TitleCategories AsyncTask here and return ArrayList<String>
+        //TODO: How to get results?
+        TitleCategories asyncTask = new TitleCategories(title);
+        try {
+            items = asyncTask.execute().get();
+        } catch (ExecutionException e) {
+            
+        } catch (InterruptedException e) {
 
+        }
+        return items;
     }
 
     /**
