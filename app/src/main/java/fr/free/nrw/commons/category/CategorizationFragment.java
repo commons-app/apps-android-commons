@@ -128,12 +128,12 @@ public class CategorizationFragment extends Fragment {
         String title = titleDesc.getString("Title", "");
         Log.d(TAG, "Title: " + title);
 
-        //TODO: How to get results?
+        //TODO: How to get results? Maybe change to using onPostExecute instead?
         TitleCategories asyncTask = new TitleCategories(title);
         try {
             items = asyncTask.execute().get();
         } catch (ExecutionException e) {
-            
+
         } catch (InterruptedException e) {
 
         }
