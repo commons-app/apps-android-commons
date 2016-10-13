@@ -128,7 +128,8 @@ public class CategorizationFragment extends Fragment {
         String title = titleDesc.getString("Title", "");
         Log.d(TAG, "Title: " + title);
 
-        //TODO: How to get results? Maybe change to using onPostExecute instead?
+        //TODO: Change to using onPostExecute instead
+        //See http://stackoverflow.com/questions/10972114/how-to-get-a-string-back-from-asynctask
         TitleCategories asyncTask = new TitleCategories(title);
         try {
             items = asyncTask.execute().get();
