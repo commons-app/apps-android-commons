@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
   <string name="app_name">Вікісховище</string>
   <string name="menu_settings">Налаштування</string>
   <string name="username">Ім\'я користувача</string>
   <string name="password">Пароль</string>
   <string name="login">Увійти</string>
+  <string name="signup">Зареєструватися</string>
   <string name="logging_in_title">Вхід до системи</string>
   <string name="logging_in_message">Будь ласка, зачекайте…</string>
   <string name="login_success">Ви успішно увійшли!</string>
-  <string name="login_failed">Не вдалося увійти!</string>
-  <string name="authentication_failed">Помилка автентифікації!</string>
+  <string name="login_failed">Не вдалося увійти</string>
+  <string name="upload_failed">Файл не знайдено, будь ласка, спробуйте інший файл</string>
+  <string name="authentication_failed">Помилка автентифікації</string>
   <string name="uploading_started">Завантаження розпочато!</string>
+  
   <string name="upload_completed_notification_title">Завантажено %1$s!</string>
   <string name="upload_completed_notification_text">Торкніться, щоб переглянути Ваше завантаження</string>
   <string name="upload_progress_notification_title_start">Розпочинається завантаження %1$s</string>
@@ -23,6 +27,7 @@
     <item quantity="few">завантажуються %d файли</item>
     <item quantity="other">завантажуються %d файлів</item>
   </plurals>
+  
   <string name="title_activity_contributions">Мої завантаження</string>
   <string name="contribution_state_queued">У черзі</string>
   <string name="contribution_state_failed">Не вдалося</string>
@@ -30,23 +35,28 @@
   <string name="contribution_state_starting">Завантаження</string>
   <string name="menu_from_gallery">З галереї</string>
   <string name="menu_from_camera">Оберіть фото</string>
+  <string name="menu_nearby">Поблизу</string>
+  
   <string name="provider_contributions">Мої завантаження</string>
   <string name="menu_share">Поділитися</string>
   <string name="menu_open_in_browser">Відкрити у браузері</string>
   <string name="share_title_hint">Назва</string>
   <string name="share_description_hint">Опис</string>
+  
   <string name="login_failed_network">Неможливо увійти — збій у мережі</string>
   <string name="login_failed_username">Неможливо увійти — будь ласка, перевірте своє ім\'я користувача</string>
   <string name="login_failed_password">Неможливо увійти — будь ласка, перевірте свій пароль</string>
-  <string name="login_failed_throttled">Надто багато невдалих спроб. Будь ласка, спробуйте знову через декілька хвіилин</string>
+  <string name="login_failed_throttled">Надто багато невдалих спроб. Будь ласка, спробуйте знову через кілька хвилин</string>
   <string name="login_failed_blocked">Вибачте, цього користувача було заблоковано на Вікісховищі</string>
   <string name="login_failed_generic">Не вдалося увійти</string>
+  
   <string name="share_upload_button">Завантажити</string>
   <string name="multiple_share_base_title">Назвіть цю серію</string>
   <string name="provider_modifications">Модифікації</string>
   <string name="menu_upload_single">Завантажити</string>
   <string name="categories_search_text_hint">Пошук категорій</string>
   <string name="menu_save_categories">Зберегти</string>
+  
   <plurals name="contributions_subtitle">
     <item quantity="zero">Наразі нема завантажень</item>
     <item quantity="one">1 завантаження</item>
@@ -62,32 +72,46 @@
     <item quantity="one">1 завантаження</item>
     <item quantity="other">%d завантажень</item>
   </plurals>
+  
   <string name="categories_not_found">Категорій, відповідних %1$s, не знайдено</string>
-  <string name="categories_skip_explanation">Додайте категорії, щоб ваші зображення було легше знайти на Вікісховищі.
-
-Почніть ввід щоб додати категорії.
-Натисніть на це повідомлення (або поверніться назад), щоб пропустити цей крок.</string>
+  <string name="categories_skip_explanation">Додайте категорії, щоб Ваші зображення було легше знайти у Вікісховищі. \n\nПочніть ввід, щоб додати категорії.\nНатисніть на це повідомлення (або поверніться назад), щоб пропустити цей крок.</string>
   <string name="categories_activity_title">Категорії</string>
   <string name="preference_tracking">Звіти про використання</string>
   <string name="preference_tracking_summary">Надсилати статистику використання до Вікімедіа, щоб допомогти нам покращити програму</string>
   <string name="title_activity_settings">Налаштування</string>
+  <string name="title_activity_signup">Зареєструватися</string>
+  
   <string name="menu_about">Про програму</string>
   <string name="about_license">Програмне забезпечення з відкритим кодом випущено під &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;ліцензією Apache в.2&lt;/a&gt;</string>
-  <string name="about_improve">Код на &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Помилки на a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
-  <string name="about_privacy_policy">Wikimedia:Commons-android-strings-about privacy policy/uk</string>
+  <string name="about_improve">Код на &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Помилки на &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Політика приватності&lt;/a&gt;</string>
   <string name="title_activity_about">Про програму</string>
-  <string name="menu_feedback">Надіслати відгук по електронній пошті</string>
+  
+  <string name="menu_feedback">Надіслати відгук (електронною поштою)</string>
+  <string name="no_email_client">Не встановлено програми електронної пошти</string>
   <string name="provider_categories">Недавно використані категорії</string>
-  <string name="waiting_first_sync">В очікуванні першої синхронізації...</string>
+  
+  <string name="waiting_first_sync">Очікується перша синхронізація…</string>
   <string name="no_uploads_yet">Ви ще не завантажили жодної світлини.</string>
+  
   <string name="menu_retry_upload">Повторити</string>
   <string name="menu_cancel_upload">Скасувати</string>
-  <string name="share_license_summary">Це зображення буде ліцензоване згідно %1$s</string>
+  
+  <string name="share_license_summary">Це зображення буде ліцензоване згідно з %1$s</string>
+  
   <string name="menu_download">Завантажити</string>
   <string name="preference_license">Ліцензія</string>
-  <string name="license_name_cc_by_sa">CCu00A0Attribution-ShareAlikeu00A03.0</string>
-  <string name="license_name_cc_by">CCu00A0Attributionu00A03.0</string>
+  <string name="use_previous">Використати попередню назву й опис</string>
+ 
+  <string name="allow_gps">Автоматично отримати поточне розташування</string>
+  <string name="allow_gps_summary">Отримати поточне розташування, щоб з\'явилися підказки категорій, якщо зображення не має геотегів</string>
+ 
+  <!-- These three are semi-legacy entries, and should be changed in future -->
+  <string name="license_name_cc_by_sa">CC Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
+
+  <!-- Licenses from the default UploadWizard selection list -->
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Австрія)</string>
   <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Німеччина)</string>
@@ -100,24 +124,27 @@
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Польща)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Румунія)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_zero">CC0</string>
-  <string name="license_name_own_pd">own-pd</string>
+  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
+  <string name="license_name_cc_by_4_0">CC BY 4.0</string>  
+  <string name="license_name_cc_zero">CC Zero</string>
+  <string name="license_name_own_pd">Суспільне надбання (передано автором)</string>
   <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
   <string name="license_name_cc_by_2_5">CC BY 2.5</string>
   <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
   <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
   <string name="license_name_cc_2_0">CC BY 2.0</string>
-  <string name="license_name_fal">Вільний витвір мистецтва</string>
+  <string name="license_name_fal">Ліцензія Free Art</string>
   <string name="license_name_pd_old_100">Суспільне надбання (автор помер понад 100 років тому)</string>
   <string name="license_name_pd_old">Суспільне надбання (закінчився термін дії авторського права)</string>
   <string name="license_name_pd_art">Суспільне надбання (мистецтво)</string>
   <string name="license_name_pd_us">Суспільне надбання (США)</string>
   <string name="license_name_pd_usgov">Суспільне надбання (уряд США)</string>
   <string name="license_name_pd_usgov_nasa">Суспільне надбання (NASA)</string>
-  <string name="license_name_pd_ineligible">Суспільне надбання (не має права на авторське право)</string>
+  <string name="license_name_pd_ineligible">Суспільне надбання (не підлягає захисту авторським правом)</string>
   <string name="license_name_attribution">Зазначення авторства</string>
-  <string name="license_name_gfdl">Ліцензія Вільної Документації GNU</string>
-  <string name="welcome_wikipedia_text">Надсилайте ваші зображення. Допоможіть оживити статті Вікіпедії!</string>
+  <string name="license_name_gfdl">Ліцензія вільної документації GNU</string>
+  
+  <string name="welcome_wikipedia_text">Надсилайте Ваші зображення. Допоможіть оживити статті Вікіпедії!</string>
   <string name="welcome_wikipedia_subtext">Зображення у Вікіпедії надходять з Вікісховища.</string>
   <string name="welcome_copyright_text">Ваші зображення допомагають освіті людей у всьому світі.</string>
   <string name="welcome_copyright_subtext">Уникайте захищених авторським правом матеріалів, знайдених в Інтернеті, а також зображень плакатів, обкладинок книг і т. п.</string>
@@ -129,4 +156,9 @@
   <string name="detail_description_empty">Немає опису</string>
   <string name="detail_license_empty">Невідома ліцензія</string>
   <string name="menu_refresh">Оновити</string>
+  
+  <string name="storage_permission_rationale">Обов\'язковий дозвіл: читання зовнішньої пам\'яті. Програмка не може працювати без цього.</string>
+  <string name="location_permission_rationale">Додатковий дозвіл: отримувати поточне розташування для підказок категорій</string>
+  <string name="ok">Гаразд</string>
+  <string name="title_activity_nearby">Місця поблизу</string>
 </resources>
