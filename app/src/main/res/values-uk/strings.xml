@@ -104,7 +104,7 @@
   <string name="use_previous">Використати попередню назву й опис</string>
  
   <string name="allow_gps">Автоматично отримати поточне розташування</string>
-  <string name="allow_gps_summary">Отримати поточне розташування, щоб з'явилися підказки категорій, якщо зображення не має геотегів</string>
+  <string name="allow_gps_summary">Отримати поточне розташування, щоб з\'явилися підказки категорій, якщо зображення не має геотегів</string>
  
   <!-- These three are semi-legacy entries, and should be changed in future -->
   <string name="license_name_cc_by_sa">CC Attribution-ShareAlike 3.0</string>
@@ -157,7 +157,7 @@
   <string name="detail_license_empty">Невідома ліцензія</string>
   <string name="menu_refresh">Оновити</string>
   
-  <string name="storage_permission_rationale">Обов'язковий дозвіл: читання зовнішньої пам'яті. Програмка не може працювати без цього.</string>
+  <string name="storage_permission_rationale">Обов\'язковий дозвіл: читання зовнішньої пам\'яті. Програмка не може працювати без цього.</string>
   <string name="location_permission_rationale">Додатковий дозвіл: отримувати поточне розташування для підказок категорій</string>
   <string name="ok">Гаразд</string>
   <string name="title_activity_nearby">Місця поблизу</string>
