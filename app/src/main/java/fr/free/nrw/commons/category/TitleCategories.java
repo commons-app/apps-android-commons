@@ -25,7 +25,6 @@ public class TitleCategories extends AsyncTask<Void, Void, ArrayList<String>> {
         this.title = title;
     }
 
-
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
@@ -33,7 +32,6 @@ public class TitleCategories extends AsyncTask<Void, Void, ArrayList<String>> {
 
     @Override
     protected ArrayList<String> doInBackground(Void... voids) {
-
 
         MWApi api = CommonsApplication.createMWApi();
         ApiResult result;
