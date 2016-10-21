@@ -136,7 +136,9 @@ public class CategorizationFragment extends Fragment {
             @Override
             protected void onPostExecute(ArrayList<String> result) {
                 super.onPostExecute(result);
+                Log.d(TAG, "Results in onPostExecute: " + result);
                 titleCatItems.addAll(result);
+                Log.d(TAG, "TitleCatItems in onPostExecute: " + titleCatItems);
                 mergeLatch.countDown();
             }
         };
