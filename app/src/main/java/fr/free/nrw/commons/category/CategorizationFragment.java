@@ -160,14 +160,7 @@ public class CategorizationFragment extends Fragment {
      */
     protected ArrayList<String> recentCatQuery() {
         ArrayList<String> items = new ArrayList<String>();
-
-        try {
-            mergeLatch.await();
-            Log.d(TAG, "Waited for merge");
-        } catch (InterruptedException e) {
-            Log.e(TAG, "Interrupted Exception: ", e);
-        }
-
+        
         try {
             Cursor cursor = client.query(
                     CategoryContentProvider.BASE_URI,
@@ -195,16 +188,23 @@ public class CategorizationFragment extends Fragment {
     protected ArrayList<String> mergeItems() {
 
         Set<String> mergedItems = new LinkedHashSet<String>();
-        List<String> gpsItems = new ArrayList<String>();
 
         Log.d(TAG, "Calling APIs for GPS cats, title cats and recent cats...");
 
+        List<String> gpsItems = new ArrayList<String>();
         if (MwVolleyApi.GpsCatExists.getGpsCatExists()) {
             gpsItems.addAll(MwVolleyApi.getGpsCat());
         }
-
         List<String> titleItems = new ArrayList<String>(titleCatQuery());
         List<String> recentItems = new ArrayList<String>(recentCatQuery());
+
+        //Await results of titleItems, which is likely to come in last
+        try {
+            mergeLatch.await();
+            Log.d(TAG, "Waited for merge");
+        } catch (InterruptedException e) {
+            Log.e(TAG, "Interrupted Exception: ", e);
+        }
 
         mergedItems.addAll(gpsItems);
         Log.d(TAG, "Adding GPS items: " + gpsItems);
