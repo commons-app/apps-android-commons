@@ -146,7 +146,7 @@ public class CategorizationFragment extends Fragment {
             }
         };
 
-        titleCategoriesSub.execute();
+        Utils.executeAsyncTask(titleCategoriesSub);
         Log.d(TAG, "TitleCatItems in titleCatQuery: " + titleCatItems);
 
         //Only return titleCatItems after API call has finished
