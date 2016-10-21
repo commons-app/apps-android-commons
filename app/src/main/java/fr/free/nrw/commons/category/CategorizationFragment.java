@@ -184,6 +184,8 @@ public class CategorizationFragment extends Fragment {
 
         Set<String> mergedItems = new LinkedHashSet<String>();
 
+        Log.d(TAG, "Merging items...");
+
         if (MwVolleyApi.GpsCatExists.getGpsCatExists()) {
             List<String> gpsItems = new ArrayList<String>(MwVolleyApi.getGpsCat());
             mergedItems.addAll(gpsItems);
@@ -199,6 +201,7 @@ public class CategorizationFragment extends Fragment {
         ArrayList<String> mergedItemsList = new ArrayList<String>(mergedItems);
         try {
             mergeLatch.await();
+            Log.d(TAG, "Waited for merge");
         } catch (InterruptedException e) {
             Log.e(TAG, "Interrupted Exception: ", e);
         }
