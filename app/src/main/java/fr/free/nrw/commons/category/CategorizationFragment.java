@@ -181,28 +181,32 @@ public class CategorizationFragment extends Fragment {
     protected ArrayList<String> mergeItems() {
 
         Set<String> mergedItems = new LinkedHashSet<String>();
+        List<String> gpsItems = new ArrayList<String>();
 
-        Log.d(TAG, "Merging items...");
+        Log.d(TAG, "Calling APIs for GPS cats, title cats and recent cats...");
 
         if (MwVolleyApi.GpsCatExists.getGpsCatExists()) {
-            List<String> gpsItems = new ArrayList<String>(MwVolleyApi.getGpsCat());
-            mergedItems.addAll(gpsItems);
+            gpsItems.addAll(MwVolleyApi.getGpsCat());
+
         }
 
         List<String> titleItems = new ArrayList<String>(titleCatQuery());
-        mergedItems.addAll(titleItems);
-
         List<String> recentItems = new ArrayList<String>(recentCatQuery());
-        mergedItems.addAll(recentItems);
 
-        //Needs to be an ArrayList and not a List unless we want to modify a big portion of preexisting code
-        ArrayList<String> mergedItemsList = new ArrayList<String>(mergedItems);
         try {
             mergeLatch.await();
             Log.d(TAG, "Waited for merge");
         } catch (InterruptedException e) {
             Log.e(TAG, "Interrupted Exception: ", e);
         }
+
+        mergedItems.addAll(gpsItems);
+        mergedItems.addAll(titleItems);
+        mergedItems.addAll(recentItems);
+
+        //Needs to be an ArrayList and not a List unless we want to modify a big portion of preexisting code
+        ArrayList<String> mergedItemsList = new ArrayList<String>(mergedItems);
+
         return mergedItemsList;
     }
 
