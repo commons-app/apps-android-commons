@@ -42,7 +42,7 @@ public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
     protected ArrayList<String> doInBackground(Void... voids) {
         //If user hasn't typed anything in yet, get GPS and recent items
         if(TextUtils.isEmpty(filter)) {
-            return catFragment.recentCatQuery();
+            return catFragment.mergeItems();
         }
 
         //if user types in something that is in cache, return cached category

@@ -33,6 +33,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.mediawiki.api.ApiResult;
+import org.mediawiki.api.MWApi;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -41,8 +45,10 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.upload.MwVolleyApi;
@@ -72,6 +78,9 @@ public class CategorizationFragment extends Fragment {
     private final Set<String> results = new LinkedHashSet<String>();
     PrefixUpdater prefixUpdaterSub;
     MethodAUpdater methodAUpdaterSub;
+
+    private final ArrayList<String> titleCatItems = new ArrayList<String>();
+    final CountDownLatch mergeLatch = new CountDownLatch(1);
 
     private ContentProviderClient client;
 
@@ -113,12 +122,48 @@ public class CategorizationFragment extends Fragment {
     }
 
     /**
-     * Retrieves recently-used categories and nearby categories, and merges them without duplicates.
-     * @return a list containing these categories
+     * Retrieves category suggestions from title input
+     * @return a list containing title-related categories
+     */
+    protected ArrayList<String> titleCatQuery() {
+
+        TitleCategories titleCategoriesSub;
+
+        //Retrieve the title that was saved when user tapped submit icon
+        SharedPreferences titleDesc = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String title = titleDesc.getString("Title", "");
+        Log.d(TAG, "Title: " + title);
+
+        //Override onPostExecute to access the results of async API call
+        titleCategoriesSub = new TitleCategories(title) {
+            @Override
+            protected void onPostExecute(ArrayList<String> result) {
+                super.onPostExecute(result);
+                Log.d(TAG, "Results in onPostExecute: " + result);
+                titleCatItems.addAll(result);
+                Log.d(TAG, "TitleCatItems in onPostExecute: " + titleCatItems);
+                mergeLatch.countDown();
+            }
+        };
+
+        Utils.executeAsyncTask(titleCategoriesSub);
+        Log.d(TAG, "TitleCatItems in titleCatQuery: " + titleCatItems);
+
+        //Only return titleCatItems after API call has finished
+        try {
+            mergeLatch.await();
+        } catch (InterruptedException e) {
+            Log.e(TAG, "Interrupted exception: ", e);
+        }
+        return titleCatItems;
+    }
+
+    /**
+     * Retrieves recently-used categories
+     * @return a list containing recent categories
      */
     protected ArrayList<String> recentCatQuery() {
         ArrayList<String> items = new ArrayList<String>();
-        Set<String> mergedItems = new LinkedHashSet<String>();
 
         try {
             Cursor cursor = client.query(
@@ -133,23 +178,49 @@ public class CategorizationFragment extends Fragment {
                 items.add(cat.getName());
             }
             cursor.close();
-
-            if (MwVolleyApi.GpsCatExists.getGpsCatExists() == true) {
-                //Log.d(TAG, "GPS cats found in CategorizationFragment.java" + MwVolleyApi.getGpsCat().toString());
-                List<String> gpsItems = new ArrayList<String>(MwVolleyApi.getGpsCat());
-                //Log.d(TAG, "GPS items: " + gpsItems.toString());
-
-                mergedItems.addAll(gpsItems);
-            }
-
-            mergedItems.addAll(items);
         }
         catch (RemoteException e) {
             throw new RuntimeException(e);
         }
+        return items;
+    }
+
+    /**
+     * Merges nearby categories, categories suggested based on title, and recent categories... without duplicates.
+     * @return a list containing merged categories
+     */
+    protected ArrayList<String> mergeItems() {
+
+        Set<String> mergedItems = new LinkedHashSet<String>();
+
+        Log.d(TAG, "Calling APIs for GPS cats, title cats and recent cats...");
+
+        List<String> gpsItems = new ArrayList<String>();
+        if (MwVolleyApi.GpsCatExists.getGpsCatExists()) {
+            gpsItems.addAll(MwVolleyApi.getGpsCat());
+        }
+        List<String> titleItems = new ArrayList<String>(titleCatQuery());
+        List<String> recentItems = new ArrayList<String>(recentCatQuery());
+
+        //Await results of titleItems, which is likely to come in last
+        try {
+            mergeLatch.await();
+            Log.d(TAG, "Waited for merge");
+        } catch (InterruptedException e) {
+            Log.e(TAG, "Interrupted Exception: ", e);
+        }
+
+        mergedItems.addAll(gpsItems);
+        Log.d(TAG, "Adding GPS items: " + gpsItems);
+        mergedItems.addAll(titleItems);
+        Log.d(TAG, "Adding title items: " + titleItems);
+        mergedItems.addAll(recentItems);
+        Log.d(TAG, "Adding recent items: " + recentItems);
 
         //Needs to be an ArrayList and not a List unless we want to modify a big portion of preexisting code
         ArrayList<String> mergedItemsList = new ArrayList<String>(mergedItems);
+        Log.d(TAG, "Merged item list: " + mergedItemsList);
+
         return mergedItemsList;
     }
 
