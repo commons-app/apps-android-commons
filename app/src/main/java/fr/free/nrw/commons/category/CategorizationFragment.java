@@ -142,8 +142,13 @@ public class CategorizationFragment extends Fragment {
                 mergeLatch.countDown();
             }
         };
-        Utils.executeAsyncTask(titleCategoriesSub);
-
+        titleCategoriesSub.execute();
+        Log.d(TAG, "TitleCatItems in titleCatQuery: " + titleCatItems);
+        try {
+            mergeLatch.await();
+        } catch (InterruptedException e) {
+            Log.e(TAG, "Interrupted exception: ", e);
+        }
         return titleCatItems;
     }
 
