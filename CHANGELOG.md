@@ -1,5 +1,8 @@
 # Wikimedia Commons for Android
 
+##v1.36
+- Fixed Ukranian translations
+
 ##v1.35
 - Fixed issues with GPS category suggestions
 
