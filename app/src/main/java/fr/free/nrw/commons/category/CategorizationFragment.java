@@ -154,6 +154,14 @@ public class CategorizationFragment extends Fragment {
     protected ArrayList<String> recentCatQuery() {
         ArrayList<String> items = new ArrayList<String>();
 
+
+        try {
+            mergeLatch.await();
+            Log.d(TAG, "Waited for merge");
+        } catch (InterruptedException e) {
+            Log.e(TAG, "Interrupted Exception: ", e);
+        }
+
         try {
             Cursor cursor = client.query(
                     CategoryContentProvider.BASE_URI,
@@ -188,17 +196,8 @@ public class CategorizationFragment extends Fragment {
         if (MwVolleyApi.GpsCatExists.getGpsCatExists()) {
             gpsItems.addAll(MwVolleyApi.getGpsCat());
 
-        }
-
         List<String> titleItems = new ArrayList<String>(titleCatQuery());
         List<String> recentItems = new ArrayList<String>(recentCatQuery());
-
-        try {
-            mergeLatch.await();
-            Log.d(TAG, "Waited for merge");
-        } catch (InterruptedException e) {
-            Log.e(TAG, "Interrupted Exception: ", e);
-        }
 
         mergedItems.addAll(gpsItems);
         mergedItems.addAll(titleItems);
@@ -206,6 +205,7 @@ public class CategorizationFragment extends Fragment {
 
         //Needs to be an ArrayList and not a List unless we want to modify a big portion of preexisting code
         ArrayList<String> mergedItemsList = new ArrayList<String>(mergedItems);
+        Log.d(TAG, "Merged item list: " + mergedItemsList);
 
         return mergedItemsList;
     }
