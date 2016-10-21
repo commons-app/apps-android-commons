@@ -76,6 +76,7 @@ public class CategorizationFragment extends Fragment {
 
     // LHS guarantees ordered insertions, allowing for prioritized method A results
     private final Set<String> results = new LinkedHashSet<String>();
+    private final ArrayList<String> titleCatItems = new ArrayList<String>();
     PrefixUpdater prefixUpdaterSub;
     MethodAUpdater methodAUpdaterSub;
 
@@ -121,7 +122,7 @@ public class CategorizationFragment extends Fragment {
     //TODO: Probably add 'suggest from filename' cats here. We want it to be displayed at start, not upon typing
     //TODO: Search using MethodA query, but can't use MethodAUpdater because we don't want it updating when user types
     protected ArrayList<String> titleCatQuery() {
-        ArrayList<String> items = new ArrayList<String>();
+
         TitleCategories titleCategoriesSub;
 
         //Retrieve the title that was saved when user tapped submit icon
@@ -137,7 +138,7 @@ public class CategorizationFragment extends Fragment {
                 @Override
                 protected void onPostExecute(ArrayList<String> result) {
                     super.onPostExecute(result);
-
+                    titleCatItems.addAll(result);
                 }
             };
             Utils.executeAsyncTask(titleCategoriesSub);
