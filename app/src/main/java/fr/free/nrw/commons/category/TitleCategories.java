@@ -13,7 +13,11 @@ import java.util.ArrayList;
 
 import fr.free.nrw.commons.CommonsApplication;
 
-
+/**
+ * Sends asynchronous queries to the Commons MediaWiki API to retrieve categories that are related to
+ * the title entered in previous screen. The 'srsearch' action-specific parameter is used for this
+ * purpose. This class should be subclassed in CategorizationFragment.java to add the results to recent and GPS cats.
+ */
 public class TitleCategories extends AsyncTask<Void, Void, ArrayList<String>> {
 
     private final static int SEARCH_CATS_LIMIT = 25;

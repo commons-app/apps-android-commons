@@ -121,8 +121,10 @@ public class CategorizationFragment extends Fragment {
         }
     }
 
-    //TODO: Probably add 'suggest from filename' cats here. We want it to be displayed at start, not upon typing
-    //TODO: Search using MethodA query, but can't use MethodAUpdater because we don't want it updating when user types
+    /**
+     * Retrieves category suggestions from title input
+     * @return a list containing title-related categories
+     */
     protected ArrayList<String> titleCatQuery() {
 
         TitleCategories titleCategoriesSub;
@@ -132,6 +134,7 @@ public class CategorizationFragment extends Fragment {
         String title = titleDesc.getString("Title", "");
         Log.d(TAG, "Title: " + title);
 
+        //Override onPostExecute to access the results of async API call
         titleCategoriesSub = new TitleCategories(title) {
             @Override
             protected void onPostExecute(ArrayList<String> result) {
@@ -142,8 +145,11 @@ public class CategorizationFragment extends Fragment {
                 mergeLatch.countDown();
             }
         };
+
         titleCategoriesSub.execute();
         Log.d(TAG, "TitleCatItems in titleCatQuery: " + titleCatItems);
+
+        //Only return titleCatItems after API call has finished
         try {
             mergeLatch.await();
         } catch (InterruptedException e) {
@@ -152,15 +158,13 @@ public class CategorizationFragment extends Fragment {
         return titleCatItems;
     }
 
-
-
     /**
      * Retrieves recently-used categories
      * @return a list containing recent categories
      */
     protected ArrayList<String> recentCatQuery() {
         ArrayList<String> items = new ArrayList<String>();
-        
+
         try {
             Cursor cursor = client.query(
                     CategoryContentProvider.BASE_URI,
