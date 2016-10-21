@@ -76,9 +76,11 @@ public class CategorizationFragment extends Fragment {
 
     // LHS guarantees ordered insertions, allowing for prioritized method A results
     private final Set<String> results = new LinkedHashSet<String>();
-    private final ArrayList<String> titleCatItems = new ArrayList<String>();
     PrefixUpdater prefixUpdaterSub;
     MethodAUpdater methodAUpdaterSub;
+
+    private final ArrayList<String> titleCatItems = new ArrayList<String>();
+    final CountDownLatch mergeLatch = new CountDownLatch(2);
 
     private ContentProviderClient client;
 
@@ -135,6 +137,7 @@ public class CategorizationFragment extends Fragment {
             protected void onPostExecute(ArrayList<String> result) {
                 super.onPostExecute(result);
                 titleCatItems.addAll(result);
+                mergeLatch.countDown();
             }
         };
         Utils.executeAsyncTask(titleCategoriesSub);
@@ -169,6 +172,7 @@ public class CategorizationFragment extends Fragment {
             throw new RuntimeException(e);
         }
 
+        mergeLatch.countDown();
         return items;
     }
 
@@ -177,6 +181,7 @@ public class CategorizationFragment extends Fragment {
      * @return a list containing merged categories
      */
     protected ArrayList<String> mergeItems() {
+
         Set<String> mergedItems = new LinkedHashSet<String>();
 
         if (MwVolleyApi.GpsCatExists.getGpsCatExists()) {
@@ -192,6 +197,11 @@ public class CategorizationFragment extends Fragment {
 
         //Needs to be an ArrayList and not a List unless we want to modify a big portion of preexisting code
         ArrayList<String> mergedItemsList = new ArrayList<String>(mergedItems);
+        try {
+            mergeLatch.await();
+        } catch (InterruptedException e) {
+            Log.e(TAG, "Interrupted Exception: ", e);
+        }
         return mergedItemsList;
     }
 
