@@ -80,7 +80,7 @@ public class CategorizationFragment extends Fragment {
     MethodAUpdater methodAUpdaterSub;
 
     private final ArrayList<String> titleCatItems = new ArrayList<String>();
-    final CountDownLatch mergeLatch = new CountDownLatch(2);
+    final CountDownLatch mergeLatch = new CountDownLatch(1);
 
     private ContentProviderClient client;
 
@@ -171,8 +171,6 @@ public class CategorizationFragment extends Fragment {
         catch (RemoteException e) {
             throw new RuntimeException(e);
         }
-
-        mergeLatch.countDown();
         return items;
     }
 
