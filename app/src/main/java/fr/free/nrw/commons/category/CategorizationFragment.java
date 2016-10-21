@@ -133,7 +133,7 @@ public class CategorizationFragment extends Fragment {
         //TODO: Change to using onPostExecute instead
         //See http://stackoverflow.com/questions/10972114/how-to-get-a-string-back-from-asynctask
         TitleCategories asyncTask = new TitleCategories(title);
-        try {
+
             titleCategoriesSub = new TitleCategories(title) {
                 @Override
                 protected void onPostExecute(ArrayList<String> result) {
@@ -142,14 +142,8 @@ public class CategorizationFragment extends Fragment {
                 }
             };
             Utils.executeAsyncTask(titleCategoriesSub);
-
-            //items = asyncTask.execute().get();
-        } catch (ExecutionException e) {
-
-        } catch (InterruptedException e) {
-
-        }
-        return items;
+        
+        return titleCatItems;
     }
 
 
