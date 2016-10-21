@@ -154,7 +154,6 @@ public class CategorizationFragment extends Fragment {
     protected ArrayList<String> recentCatQuery() {
         ArrayList<String> items = new ArrayList<String>();
 
-
         try {
             mergeLatch.await();
             Log.d(TAG, "Waited for merge");
@@ -195,13 +194,17 @@ public class CategorizationFragment extends Fragment {
 
         if (MwVolleyApi.GpsCatExists.getGpsCatExists()) {
             gpsItems.addAll(MwVolleyApi.getGpsCat());
+        }
 
         List<String> titleItems = new ArrayList<String>(titleCatQuery());
         List<String> recentItems = new ArrayList<String>(recentCatQuery());
 
         mergedItems.addAll(gpsItems);
+        Log.d(TAG, "Adding GPS items: " + gpsItems);
         mergedItems.addAll(titleItems);
+        Log.d(TAG, "Adding title items: " + titleItems);
         mergedItems.addAll(recentItems);
+        Log.d(TAG, "Adding recent items: " + recentItems);
 
         //Needs to be an ArrayList and not a List unless we want to modify a big portion of preexisting code
         ArrayList<String> mergedItemsList = new ArrayList<String>(mergedItems);
