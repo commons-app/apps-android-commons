@@ -122,6 +122,7 @@ public class CategorizationFragment extends Fragment {
     //TODO: Search using MethodA query, but can't use MethodAUpdater because we don't want it updating when user types
     protected ArrayList<String> titleCatQuery() {
         ArrayList<String> items = new ArrayList<String>();
+        TitleCategories titleCategoriesSub;
 
         //Retrieve the title that was saved when user tapped submit icon
         SharedPreferences titleDesc = PreferenceManager.getDefaultSharedPreferences(getActivity());
@@ -132,7 +133,16 @@ public class CategorizationFragment extends Fragment {
         //See http://stackoverflow.com/questions/10972114/how-to-get-a-string-back-from-asynctask
         TitleCategories asyncTask = new TitleCategories(title);
         try {
-            items = asyncTask.execute().get();
+            titleCategoriesSub = new TitleCategories(title) {
+                @Override
+                protected void onPostExecute(ArrayList<String> result) {
+                    super.onPostExecute(result);
+
+                }
+            };
+            Utils.executeAsyncTask(titleCategoriesSub);
+
+            //items = asyncTask.execute().get();
         } catch (ExecutionException e) {
 
         } catch (InterruptedException e) {
@@ -140,6 +150,8 @@ public class CategorizationFragment extends Fragment {
         }
         return items;
     }
+
+
 
     /**
      * Retrieves recently-used categories
