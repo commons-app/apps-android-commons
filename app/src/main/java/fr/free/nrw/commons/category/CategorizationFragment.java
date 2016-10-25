@@ -226,10 +226,9 @@ public class CategorizationFragment extends Fragment {
 
         //"(19|20)\\d{2}"
         //"\\b(19|20)\\d{2}\\b"
-
         for(Iterator<String> item = mergedItemsList.iterator(); item.hasNext();) {
             String s = item.next();
-            if(s.contains("2016")) {
+            if(s.contains("(19|20)\\d{2}")) {
                 Log.d(TAG, "Filtering out year " + s);
                 item.remove();
             }
