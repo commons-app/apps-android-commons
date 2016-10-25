@@ -218,9 +218,7 @@ public class CategorizationFragment extends Fragment {
         Log.d(TAG, "Adding title items: " + titleItems);
         mergedItems.addAll(recentItems);
         Log.d(TAG, "Adding recent items: " + recentItems);
-
-
-
+        
         //Needs to be an ArrayList and not a List unless we want to modify a big portion of preexisting code
         ArrayList<String> mergedItemsList = new ArrayList<String>(mergedItems);
 
