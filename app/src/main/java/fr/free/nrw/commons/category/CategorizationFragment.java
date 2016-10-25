@@ -230,26 +230,12 @@ public class CategorizationFragment extends Fragment {
         for(Iterator<String> item = mergedItemsList.iterator(); item.hasNext();) {
             String s = item.next();
             if(s.contains("2016")) {
-                Log.d(TAG, "Filtering out year " + item);
+                Log.d(TAG, "Filtering out year " + s);
                 item.remove();
             }
         }
 
-        /*
-        for (String item : mergedItemsList) {
-            Log.d(TAG, "Filtering item: " + item);
-            //"(19|20)\\d{2}"
-            //"\\b(19|20)\\d{2}\\b"
-            if (item.contains("2016")) {
-                Log.d(TAG, "Filtering out year " + item);
-                mergedItemsList.remove(item);
-            }
-        }
-*/
-
-
         Log.d(TAG, "Merged item list: " + mergedItemsList);
-
         return mergedItemsList;
     }
 
