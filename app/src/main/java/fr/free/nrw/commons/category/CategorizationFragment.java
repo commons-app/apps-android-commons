@@ -47,6 +47,7 @@ import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
@@ -151,7 +152,7 @@ public class CategorizationFragment extends Fragment {
 
         //Only return titleCatItems after API call has finished
         try {
-            mergeLatch.await();
+            mergeLatch.await(5L, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
             Log.e(TAG, "Interrupted exception: ", e);
         }
@@ -204,7 +205,7 @@ public class CategorizationFragment extends Fragment {
 
         //Await results of titleItems, which is likely to come in last
         try {
-            mergeLatch.await();
+            mergeLatch.await(5L, TimeUnit.SECONDS);
             Log.d(TAG, "Waited for merge");
         } catch (InterruptedException e) {
             Log.e(TAG, "Interrupted Exception: ", e);
