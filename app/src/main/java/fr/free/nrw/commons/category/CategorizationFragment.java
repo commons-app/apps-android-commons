@@ -229,7 +229,7 @@ public class CategorizationFragment extends Fragment {
         //FIXME: Regex not working
         for(Iterator<String> item = mergedItemsList.iterator(); item.hasNext();) {
             String s = item.next();
-            if(s.matches("\\b(19|20)\\d{2}\\b")) {
+            if(s.matches("\\b\\d{4}\\b")) {
                 Log.d(TAG, "Filtering out year " + s);
                 item.remove();
             }
