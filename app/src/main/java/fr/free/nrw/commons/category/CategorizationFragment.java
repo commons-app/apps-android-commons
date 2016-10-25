@@ -223,13 +223,11 @@ public class CategorizationFragment extends Fragment {
 
         //Needs to be an ArrayList and not a List unless we want to modify a big portion of preexisting code
         ArrayList<String> mergedItemsList = new ArrayList<String>(mergedItems);
-
-        //"(19|20)\\d{2}"
-        //"\\b(19|20)\\d{2}\\b"
-        //FIXME: Regex not working
+        
         for(Iterator<String> item = mergedItemsList.iterator(); item.hasNext();) {
             String s = item.next();
-            if(s.matches("\\b\\d{4}\\b")) {
+
+            if(s.matches(".*\\d{4}.*")) {
                 Log.d(TAG, "Filtering out year " + s);
                 item.remove();
             }
