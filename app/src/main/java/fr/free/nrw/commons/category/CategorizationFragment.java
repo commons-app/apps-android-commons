@@ -224,7 +224,7 @@ public class CategorizationFragment extends Fragment {
         //Needs to be an ArrayList and not a List unless we want to modify a big portion of preexisting code
         ArrayList<String> mergedItemsList = new ArrayList<String>(mergedItems);
 
-        //Copy to Iterator to prevent ConcurrentModificationException
+        //Copy to Iterator to prevent ConcurrentModificationException when removing item
         for(Iterator<String> item = mergedItemsList.iterator(); item.hasNext();) {
             String s = item.next();
 
