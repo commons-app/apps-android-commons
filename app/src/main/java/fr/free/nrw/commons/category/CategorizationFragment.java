@@ -219,12 +219,12 @@ public class CategorizationFragment extends Fragment {
         Log.d(TAG, "Adding recent items: " + recentItems);
 
         for (String item : mergedItems) {
-            if (item.matches("(19|20)\\d{2}")) {
+            if (item.contains("(19|20)\\d{2}")) {
                 Log.d(TAG, "Filtering out year " + item);
                 mergedItems.remove(item);
             }
         }
-        
+
         //Needs to be an ArrayList and not a List unless we want to modify a big portion of preexisting code
         ArrayList<String> mergedItemsList = new ArrayList<String>(mergedItems);
         Log.d(TAG, "Merged item list: " + mergedItemsList);
