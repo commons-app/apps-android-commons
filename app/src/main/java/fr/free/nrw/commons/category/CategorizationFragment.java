@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -218,16 +219,35 @@ public class CategorizationFragment extends Fragment {
         mergedItems.addAll(recentItems);
         Log.d(TAG, "Adding recent items: " + recentItems);
 
-        for (String item : mergedItems) {
-            Log.d(TAG, "Filtering item: " + item);
-            if (item.contains("(19|20)\\d{2}")) {
-                Log.d(TAG, "Filtering out year " + item);
-                mergedItems.remove(item);
-            }
-        }
+
 
         //Needs to be an ArrayList and not a List unless we want to modify a big portion of preexisting code
         ArrayList<String> mergedItemsList = new ArrayList<String>(mergedItems);
+
+        //"(19|20)\\d{2}"
+        //"\\b(19|20)\\d{2}\\b"
+
+        for(Iterator<String> item = mergedItemsList.iterator(); item.hasNext();) {
+            String s = item.next();
+            if(s.contains("2016")) {
+                Log.d(TAG, "Filtering out year " + item);
+                item.remove();
+            }
+        }
+
+        /*
+        for (String item : mergedItemsList) {
+            Log.d(TAG, "Filtering item: " + item);
+            //"(19|20)\\d{2}"
+            //"\\b(19|20)\\d{2}\\b"
+            if (item.contains("2016")) {
+                Log.d(TAG, "Filtering out year " + item);
+                mergedItemsList.remove(item);
+            }
+        }
+*/
+
+
         Log.d(TAG, "Merged item list: " + mergedItemsList);
 
         return mergedItemsList;
