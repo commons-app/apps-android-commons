@@ -219,6 +219,7 @@ public class CategorizationFragment extends Fragment {
         Log.d(TAG, "Adding recent items: " + recentItems);
 
         for (String item : mergedItems) {
+            Log.d(TAG, "Filtering item: " + item);
             if (item.contains("(19|20)\\d{2}")) {
                 Log.d(TAG, "Filtering out year " + item);
                 mergedItems.remove(item);
