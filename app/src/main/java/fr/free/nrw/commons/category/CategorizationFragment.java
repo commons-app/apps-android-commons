@@ -223,10 +223,12 @@ public class CategorizationFragment extends Fragment {
 
         //Needs to be an ArrayList and not a List unless we want to modify a big portion of preexisting code
         ArrayList<String> mergedItemsList = new ArrayList<String>(mergedItems);
-        
+
+        //Copy to Iterator to prevent ConcurrentModificationException
         for(Iterator<String> item = mergedItemsList.iterator(); item.hasNext();) {
             String s = item.next();
 
+            //Check if s contains a 4-digit word anywhere within the string (.* is wildcard)
             if(s.matches(".*\\d{4}.*")) {
                 Log.d(TAG, "Filtering out year " + s);
                 item.remove();
