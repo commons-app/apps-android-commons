@@ -1,5 +1,8 @@
 # Wikimedia Commons for Android
 
+##v1.37
+- Added category suggestions based on entered title
+
 ##v1.36
 - Fixed Ukranian translations
 
