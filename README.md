@@ -20,8 +20,9 @@ Initially started by the Wikimedia Foundation, this app is now maintained by vol
 
 ### Requirements ###
 
-1. [Android SDK][3] (Level 23)
-2. [Gradle][4]
+1. Java SDK 8 (OpenJDK 8 or Oracle Java SE 8)
+2. [Android SDK][3] (Level 23)
+3. [Gradle][4]
 
 ### Build Instructions ###
 
