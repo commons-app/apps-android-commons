@@ -10,6 +10,7 @@ import org.mediawiki.api.MWApi;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.net.ssl.SSLPeerUnverifiedException;
 
@@ -39,6 +40,21 @@ public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
         catFragment.categoriesNotFoundView.setVisibility(View.GONE);
 
         catFragment.categoriesSkip.setVisibility(View.GONE);
+    }
+
+    protected ArrayList<String> filterYears(ArrayList<String> items) {
+        //Copy to Iterator to prevent ConcurrentModificationException when removing item
+        for(Iterator<String> item = items.iterator(); item.hasNext();) {
+            String s = item.next();
+
+            //Check if s contains a 4-digit word anywhere within the string (.* is wildcard)
+            if(s.matches(".*(19|20)\\d{2}.*")) {
+                Log.d(TAG, "Filtering out year " + s);
+                item.remove();
+            }
+        }
+
+        return items;
     }
 
     @Override
