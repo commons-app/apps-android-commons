@@ -53,10 +53,11 @@ public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
         Calendar now = Calendar.getInstance();
         int year = now.get(Calendar.YEAR);
         String yearInString = String.valueOf(year);
+        Log.d(TAG, "Year: " + yearInString);
 
         int prevYear = year - 1;
         String prevYearInString = String.valueOf(prevYear);
-
+        Log.d(TAG, "Previous year: " + prevYearInString);
 
         //Copy to Iterator to prevent ConcurrentModificationException when removing item
         for(iterator = items.iterator(); iterator.hasNext();) {
@@ -64,7 +65,7 @@ public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
 
             //Check if s contains a 4-digit word anywhere within the string (.* is wildcard)
             //And that s does not equal the current year or previous year
-            if(s.matches(".*(19|20)\\d{2}.*") && !s.equals(yearInString) && !s.equals(prevYearInString)) {
+            if(s.matches(".*(19|20)\\d{2}.*") && !s.contains(yearInString) && !s.contains(prevYearInString)) {
                 Log.d(TAG, "Filtering out year " + s);
                 iterator.remove();
             }
