@@ -56,14 +56,11 @@ public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
             //Check if s contains a 4-digit word anywhere within the string (.* is wildcard)
             if(s.matches(".*(19|20)\\d{2}.*")) {
                 Log.d(TAG, "Filtering out year " + s);
-                iterator.remove();
+                items.remove(s);
             }
         }
-
-        ArrayList<String> filteredItems = new ArrayList<>();
-
-
-        return filteredItems;
+        
+        return items;
     }
 
     @Override
