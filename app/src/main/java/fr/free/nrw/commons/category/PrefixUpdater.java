@@ -31,8 +31,6 @@ public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
     private static final String TAG = PrefixUpdater.class.getName();
     private CategorizationFragment catFragment;
 
-    ArrayList<String> filteredItems = new ArrayList<> ();
-
     public PrefixUpdater(CategorizationFragment catFragment) {
         this.catFragment = catFragment;
     }
@@ -47,7 +45,7 @@ public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
         catFragment.categoriesSkip.setVisibility(View.GONE);
     }
 
-    protected ArrayList<String> filterYears(ArrayList<String> items) {
+    private ArrayList<String> filterYears(ArrayList<String> items) {
 
         Iterator<String> iterator;
 

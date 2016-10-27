@@ -10,6 +10,7 @@ import org.mediawiki.api.MWApi;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import fr.free.nrw.commons.CommonsApplication;
 
@@ -38,11 +39,34 @@ public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
         catFragment.categoriesSkip.setVisibility(View.GONE);
     }
 
+    private ArrayList<String> filterYears(ArrayList<String> items) {
+
+        Iterator<String> iterator;
+
+        //Copy to Iterator to prevent ConcurrentModificationException when removing item
+        for(iterator = items.iterator(); iterator.hasNext();) {
+            String s = iterator.next();
+
+            //Check if s contains a 4-digit word anywhere within the string (.* is wildcard)
+            if(s.matches(".*(19|20)\\d{2}.*")) {
+                Log.d(TAG, "Filtering out year " + s);
+                iterator.remove();
+            }
+        }
+
+        Log.d(TAG, "Items: " + items.toString());
+        return items;
+    }
+
+
     @Override
     protected ArrayList<String> doInBackground(Void... voids) {
         //If user hasn't typed anything in yet, get GPS and recent items
         if(TextUtils.isEmpty(filter)) {
-            return catFragment.mergeItems();
+            ArrayList<String> mergedItems = new ArrayList<String>(catFragment.mergeItems());
+            Log.d(TAG, "Merged items, waiting for filter");
+            ArrayList<String> filteredItems = new ArrayList<String>(filterYears(mergedItems));
+            return filteredItems;
         }
 
         //if user types in something that is in cache, return cached category
