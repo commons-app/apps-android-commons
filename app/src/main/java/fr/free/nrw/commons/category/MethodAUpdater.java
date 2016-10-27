@@ -71,7 +71,10 @@ public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
 
         //if user types in something that is in cache, return cached category
         if(catFragment.categoriesCache.containsKey(filter)) {
-            return catFragment.categoriesCache.get(filter);
+            ArrayList<String> cachedItems = new ArrayList<String>(catFragment.categoriesCache.get(filter));
+            Log.d(TAG, "Found cache items, waiting for filter");
+            ArrayList<String> filteredItems = new ArrayList<String>(filterYears(cachedItems));
+            return filteredItems;
         }
 
         //otherwise if user has typed something in that isn't in cache, search API for matching categories
@@ -103,6 +106,8 @@ public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
             categories.add(catString);
         }
 
-        return categories;
+        Log.d(TAG, "Found categories from Method A search, waiting for filter");
+        ArrayList<String> filteredItems = new ArrayList<String>(filterYears(categories));
+        return filteredItems;
     }
 }
