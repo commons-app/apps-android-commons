@@ -10,6 +10,7 @@ import org.mediawiki.api.MWApi;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 
@@ -49,12 +50,21 @@ public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
 
         Iterator<String> iterator;
 
+        Calendar now = Calendar.getInstance();
+        int year = now.get(Calendar.YEAR);
+        String yearInString = String.valueOf(year);
+
+        int prevYear = year - 1;
+        String prevYearInString = String.valueOf(prevYear);
+
+
         //Copy to Iterator to prevent ConcurrentModificationException when removing item
         for(iterator = items.iterator(); iterator.hasNext();) {
             String s = iterator.next();
 
             //Check if s contains a 4-digit word anywhere within the string (.* is wildcard)
-            if(s.matches(".*(19|20)\\d{2}.*")) {
+            //And that s does not equal the current year or previous year
+            if(s.matches(".*(19|20)\\d{2}.*") && !s.equals(yearInString) && !s.equals(prevYearInString)) {
                 Log.d(TAG, "Filtering out year " + s);
                 iterator.remove();
             }
