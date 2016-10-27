@@ -31,6 +31,8 @@ public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
     private static final String TAG = PrefixUpdater.class.getName();
     private CategorizationFragment catFragment;
 
+    ArrayList<String> filteredItems = new ArrayList<> ();
+
     public PrefixUpdater(CategorizationFragment catFragment) {
         this.catFragment = catFragment;
     }
@@ -56,10 +58,11 @@ public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
             //Check if s contains a 4-digit word anywhere within the string (.* is wildcard)
             if(s.matches(".*(19|20)\\d{2}.*")) {
                 Log.d(TAG, "Filtering out year " + s);
-                items.remove(s);
+                iterator.remove();
             }
         }
-        
+
+        Log.d(TAG, "Items: " + items.toString());
         return items;
     }
 
