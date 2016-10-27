@@ -11,10 +11,13 @@ import org.mediawiki.api.MWApi;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.net.ssl.SSLPeerUnverifiedException;
 
 import fr.free.nrw.commons.CommonsApplication;
+
+import static android.R.id.list;
 
 /**
  * Sends asynchronous queries to the Commons MediaWiki API to retrieve categories that share the
@@ -44,18 +47,22 @@ public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
 
     protected ArrayList<String> filterYears(ArrayList<String> items) {
 
+        Iterator<String> iterator;
+
         //Copy to Iterator to prevent ConcurrentModificationException when removing item
-        for(Iterator<String> item = items.iterator(); item.hasNext();) {
-            String s = item.next();
+        for(iterator = items.iterator(); iterator.hasNext();) {
+            String s = iterator.next();
 
             //Check if s contains a 4-digit word anywhere within the string (.* is wildcard)
             if(s.matches(".*(19|20)\\d{2}.*")) {
                 Log.d(TAG, "Filtering out year " + s);
-                item.remove();
+                iterator.remove();
             }
         }
 
-        ArrayList<String> filteredItems = new ArrayList<String>(items);
+        ArrayList<String> filteredItems = new ArrayList<>();
+
+
         return filteredItems;
     }
 
