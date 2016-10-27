@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -217,11 +218,11 @@ public class CategorizationFragment extends Fragment {
         Log.d(TAG, "Adding title items: " + titleItems);
         mergedItems.addAll(recentItems);
         Log.d(TAG, "Adding recent items: " + recentItems);
-
+        
         //Needs to be an ArrayList and not a List unless we want to modify a big portion of preexisting code
         ArrayList<String> mergedItemsList = new ArrayList<String>(mergedItems);
-        Log.d(TAG, "Merged item list: " + mergedItemsList);
 
+        Log.d(TAG, "Merged item list: " + mergedItemsList);
         return mergedItemsList;
     }
 
