@@ -226,8 +226,9 @@ public class CategorizationFragment extends Fragment {
         for(Iterator<String> item = mergedItemsList.iterator(); item.hasNext();) {
             String s = item.next();
 
+            //\b(19|20)\d{2}\b
             //Check if s contains a 4-digit word anywhere within the string (.* is wildcard)
-            if(s.matches(".*\\d{4}.*")) {
+            if(s.matches(".*(19|20)\\d{2}.*")) {
                 Log.d(TAG, "Filtering out year " + s);
                 item.remove();
             }
