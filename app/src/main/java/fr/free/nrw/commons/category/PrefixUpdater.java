@@ -61,7 +61,9 @@ public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
     protected ArrayList<String> doInBackground(Void... voids) {
         //If user hasn't typed anything in yet, get GPS and recent items
         if(TextUtils.isEmpty(filter)) {
-            return catFragment.mergeItems();
+            ArrayList<String> mergedItems = new ArrayList<String>(catFragment.mergeItems());
+            ArrayList<String> filteredItems = new ArrayList<String>(filterYears(mergedItems));
+            return filteredItems;
         }
 
         //if user types in something that is in cache, return cached category
