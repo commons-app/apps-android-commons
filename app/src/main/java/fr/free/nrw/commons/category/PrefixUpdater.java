@@ -43,6 +43,7 @@ public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
     }
 
     protected ArrayList<String> filterYears(ArrayList<String> items) {
+
         //Copy to Iterator to prevent ConcurrentModificationException when removing item
         for(Iterator<String> item = items.iterator(); item.hasNext();) {
             String s = item.next();
@@ -54,7 +55,8 @@ public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
             }
         }
 
-        return items;
+        ArrayList<String> filteredItems = new ArrayList<String>(items);
+        return filteredItems;
     }
 
     @Override
@@ -62,6 +64,7 @@ public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
         //If user hasn't typed anything in yet, get GPS and recent items
         if(TextUtils.isEmpty(filter)) {
             ArrayList<String> mergedItems = new ArrayList<String>(catFragment.mergeItems());
+            Log.d(TAG, "Merged items, waiting for filter");
             ArrayList<String> filteredItems = new ArrayList<String>(filterYears(mergedItems));
             return filteredItems;
         }

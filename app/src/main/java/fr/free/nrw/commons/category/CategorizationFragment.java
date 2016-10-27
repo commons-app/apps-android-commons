@@ -222,8 +222,6 @@ public class CategorizationFragment extends Fragment {
         //Needs to be an ArrayList and not a List unless we want to modify a big portion of preexisting code
         ArrayList<String> mergedItemsList = new ArrayList<String>(mergedItems);
 
-
-
         Log.d(TAG, "Merged item list: " + mergedItemsList);
         return mergedItemsList;
     }
