@@ -46,10 +46,18 @@ public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
         catFragment.categoriesSkip.setVisibility(View.GONE);
     }
 
+    /**
+     * Remove categories that contain a year in them (starting with 19__ or 20__), except for this year
+     * and previous year
+     * Rationale: https://github.com/commons-app/apps-android-commons/issues/47
+     * @param items Unfiltered list of categories
+     * @return Filtered category list
+     */
     private ArrayList<String> filterYears(ArrayList<String> items) {
 
         Iterator<String> iterator;
 
+        //Check for current and previous year to exclude these categories from removal
         Calendar now = Calendar.getInstance();
         int year = now.get(Calendar.YEAR);
         String yearInString = String.valueOf(year);
