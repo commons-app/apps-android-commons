@@ -76,6 +76,8 @@ public class CategorizationFragment extends Fragment {
 
     protected HashMap<String, ArrayList<String>> categoriesCache;
 
+    private ArrayList<String> selectedCategories = new ArrayList<String>();
+
     // LHS guarantees ordered insertions, allowing for prioritized method A results
     private final Set<String> results = new LinkedHashSet<String>();
     PrefixUpdater prefixUpdaterSub;
@@ -584,7 +586,7 @@ public class CategorizationFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch(menuItem.getItemId()) {
             case R.id.menu_save_categories:
-                ArrayList<String> selectedCategories = new ArrayList<String>();
+
                 int numberSelected = 0;
 
                 for(CategoryItem item: categoriesAdapter.getItems()) {
@@ -593,9 +595,6 @@ public class CategorizationFragment extends Fragment {
                         numberSelected++;
                     }
                 }
-
-                //Need to reassign to a final variable to use in inner class
-                final ArrayList<String> finalCategories = selectedCategories;
 
                 //If no categories selected, display warning to user
                 if (numberSelected == 0) {
@@ -612,7 +611,7 @@ public class CategorizationFragment extends Fragment {
                     builder.setNegativeButton("Yes, submit", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             //Proceed to submission
-                            onCategoriesSaveHandler.onCategoriesSave(finalCategories);
+                            onCategoriesSaveHandler.onCategoriesSave(selectedCategories);
                             return;
                         }
                     });
@@ -621,7 +620,7 @@ public class CategorizationFragment extends Fragment {
                     dialog.show();
                 } else {
                     //Proceed to submission
-                    onCategoriesSaveHandler.onCategoriesSave(finalCategories);
+                    onCategoriesSaveHandler.onCategoriesSave(selectedCategories);
                     return true;
                 }
         }
