@@ -1,5 +1,9 @@
 # Wikimedia Commons for Android
 
+##v1.38
+- Added filter for suggested categories containing years (other than current or previous year)
+- Attempted fix for issues with categories not being saved
+
 ##v1.37
 - Added category suggestions based on entered title
 
