@@ -76,6 +76,8 @@ public class CategorizationFragment extends Fragment {
 
     protected HashMap<String, ArrayList<String>> categoriesCache;
 
+    private ArrayList<String> selectedCategories = new ArrayList<String>();
+
     // LHS guarantees ordered insertions, allowing for prioritized method A results
     private final Set<String> results = new LinkedHashSet<String>();
     PrefixUpdater prefixUpdaterSub;
@@ -584,7 +586,7 @@ public class CategorizationFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch(menuItem.getItemId()) {
             case R.id.menu_save_categories:
-                final ArrayList<String> selectedCategories = new ArrayList<String>();
+
                 int numberSelected = 0;
 
                 for(CategoryItem item: categoriesAdapter.getItems()) {
