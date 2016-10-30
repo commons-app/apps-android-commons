@@ -28,7 +28,6 @@ public class LicenseList {
             fr.free.nrw.commons.License license = new fr.free.nrw.commons.License(id, template, url, name);
             licenses.put(id, license);
         }
-
     }
 
     public Set<String> keySet() {

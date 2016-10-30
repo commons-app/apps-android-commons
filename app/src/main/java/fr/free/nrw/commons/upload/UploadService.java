@@ -146,7 +146,6 @@ public class UploadService extends HandlerService<Contribution> {
             default:
                 throw new IllegalArgumentException("Unknown value for what");
         }
-
     }
 
     private boolean freshStart = true;
@@ -235,7 +234,6 @@ public class UploadService extends HandlerService<Contribution> {
 
             curProgressNotification = null;
 
-
             String resultStatus = result.getString("/api/upload/@result");
             if(!resultStatus.equals("Success")) {
                 String errorCode = result.getString("/api/error/@code");
@@ -281,7 +279,6 @@ public class UploadService extends HandlerService<Contribution> {
                 stopForeground(true);
             }
         }
-
     }
 
     private void showFailedNotification(Contribution contribution) {

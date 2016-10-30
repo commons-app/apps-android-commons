@@ -104,14 +104,12 @@ public class Category {
                 COLUMN_TIMES_USED
         };
 
-
         private static final String CREATE_TABLE_STATEMENT = "CREATE TABLE " + TABLE_NAME + " ("
                 + COLUMN_ID + " INTEGER PRIMARY KEY,"
                 + COLUMN_NAME + " STRING,"
                 + COLUMN_LAST_USED + " INTEGER,"
                 + COLUMN_TIMES_USED + " INTEGER"
                 + ");";
-
 
         public static void onCreate(SQLiteDatabase db) {
             db.execSQL(CREATE_TABLE_STATEMENT);

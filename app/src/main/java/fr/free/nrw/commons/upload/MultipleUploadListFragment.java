@@ -92,7 +92,6 @@ public class MultipleUploadListFragment extends Fragment {
             }
 
             return view;
-
         }
     }
 
@@ -117,8 +116,8 @@ public class MultipleUploadListFragment extends Fragment {
         int picWidth = Math.min((int) Math.sqrt(screenWidth * screenHeight / count), screenWidth);
         picWidth = Math.min((int)(192 * screenMetrics.density), Math.max((int) (120  * screenMetrics.density), picWidth / 48 * 48));
         int picHeight = Math.min(picWidth, (int)(192 * screenMetrics.density)); // Max Height is same as Contributions list
-        return new Point(picWidth, picHeight);
 
+        return new Point(picWidth, picHeight);
     }
 
     public void notifyDatasetChanged() {
@@ -144,7 +143,6 @@ public class MultipleUploadListFragment extends Fragment {
         photosGrid = (GridView)view.findViewById(R.id.multipleShareBackground);
         baseTitle = (EditText)view.findViewById(R.id.multipleBaseTitle);
 
-
         photosAdapter = new PhotoDisplayAdapter();
         photosGrid.setAdapter(photosAdapter);
         photosGrid.setOnItemClickListener((AdapterView.OnItemClickListener)getActivity());
@@ -169,7 +167,6 @@ public class MultipleUploadListFragment extends Fragment {
                     }
                 }
                 detailProvider.notifyDatasetChanged();
-
             }
 
             public void afterTextChanged(Editable editable) {
@@ -207,6 +204,5 @@ public class MultipleUploadListFragment extends Fragment {
 
         setHasOptionsMenu(true);
     }
-
-
+    
 }

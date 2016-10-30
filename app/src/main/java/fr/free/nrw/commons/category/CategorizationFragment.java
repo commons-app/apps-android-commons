@@ -627,8 +627,6 @@ public class CategorizationFragment extends Fragment {
         return super.onOptionsItemSelected(menuItem);
     }
 
-
-
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);

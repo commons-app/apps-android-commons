@@ -82,7 +82,6 @@ public class MediaDetailFragment extends Fragment {
     private AsyncTask<Void,Void,Boolean> detailFetchTask;
     private LicenseList licenseList;
 
-
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -175,7 +174,6 @@ public class MediaDetailFragment extends Fragment {
 
                     scrollView.scrollTo(0, initialListTop);
                 }
-
             }
         };
         view.getViewTreeObserver().addOnGlobalLayoutListener(layoutListener);

@@ -15,7 +15,6 @@ import org.mediawiki.api.*;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
 
-
 public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
     private static int COMMIT_THRESHOLD = 10;
     public ContributionsSyncAdapter(Context context, boolean autoInitialize) {
@@ -122,7 +121,5 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
         }
         prefs.edit().putString("lastSyncTimestamp", Utils.toMWDate(curTime)).apply();
         Log.d("Commons", "Oh hai, everyone! Look, a kitty!");
-
-
     }
 }

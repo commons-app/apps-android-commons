@@ -18,7 +18,6 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 
-
 public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
 
     public ModificationsSyncAdapter(Context context, boolean autoInitialize) {
@@ -65,7 +64,6 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
             Log.d("Commons", "Can not retreive edit token!");
             return;
         }
-
 
         allModifications.moveToFirst();
 
@@ -129,13 +127,11 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                     }
                 }
                 allModifications.moveToNext();
-
             }
         } finally {
             if(contributionsClient != null) {
                 contributionsClient.release();
             }
-
         }
     }
 }

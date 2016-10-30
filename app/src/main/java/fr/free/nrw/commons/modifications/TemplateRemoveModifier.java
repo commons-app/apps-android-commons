@@ -15,7 +15,6 @@ public class TemplateRemoveModifier extends PageModifier {
     public static final Pattern PATTERN_TEMPLATE_OPEN = Pattern.compile("\\{\\{");
     public static final Pattern PATTERN_TEMPLATE_CLOSE = Pattern.compile("\\}\\}");
 
-
     public TemplateRemoveModifier(String templateName) {
         super(MODIFIER_NAME);
         try {
@@ -86,7 +85,6 @@ public class TemplateRemoveModifier extends PageModifier {
         }
 
         return pageContents;
-
     }
 
     @Override

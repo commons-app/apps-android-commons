@@ -59,7 +59,6 @@ public class CommonsApplication extends Application {
     public static final Object[] EVENT_LOGIN_ATTEMPT = {"MobileAppLoginAttempts", 5257721L};
     public static final Object[] EVENT_SHARE_ATTEMPT = {"MobileAppShareAttempts", 5346170L};
     public static final Object[] EVENT_CATEGORIZATION_ATTEMPT = {"MobileAppCategorizationAttempts", 5359208L};
-    
 
     public static final String DEFAULT_EDIT_SUMMARY = "Uploaded using Android Commons app";
 
@@ -94,7 +93,6 @@ public class CommonsApplication extends Application {
         System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0");
         api = createMWApi();
 
-
         ImageLoaderConfiguration imageLoaderConfiguration = new ImageLoaderConfiguration.Builder(getApplicationContext())
                 .discCache(new TotalSizeLimitedDiscCache(StorageUtils.getCacheDirectory(this), 128 * 1024 * 1024))
                 .build();
@@ -110,7 +108,6 @@ public class CommonsApplication extends Application {
 
         // Initialize EventLogging
         EventLog.setApp(this);
-
 
         // based off https://developer.android.com/training/displaying-bitmaps/cache-bitmap.html
         // Cache for 1/8th of available VM memory
