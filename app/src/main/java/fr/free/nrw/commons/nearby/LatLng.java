@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.nearby;
 
-import android.os.Parcel;
-
 public class LatLng {
 
     public final double latitude;

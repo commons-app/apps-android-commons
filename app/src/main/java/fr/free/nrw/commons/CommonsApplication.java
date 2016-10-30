@@ -1,38 +1,45 @@
 package fr.free.nrw.commons;
 
-import java.io.IOException;
-
-import android.accounts.*;
+import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.accounts.AuthenticatorException;
+import android.accounts.OperationCanceledException;
 import android.app.Application;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Build;
-
 import android.support.v4.util.LruCache;
 import android.util.Log;
+
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.BasicNetwork;
+import com.android.volley.toolbox.DiskBasedCache;
+import com.android.volley.toolbox.HurlStack;
 import com.nostra13.universalimageloader.cache.disc.impl.TotalSizeLimitedDiscCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.utils.StorageUtils;
-import fr.free.nrw.commons.auth.WikiAccountAuthenticator;
+
 import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
-import org.apache.http.conn.*;
-import org.apache.http.conn.scheme.*;
-import org.apache.http.conn.ssl.*;
+import org.apache.http.conn.ClientConnectionManager;
+import org.apache.http.conn.scheme.PlainSocketFactory;
+import org.apache.http.conn.scheme.Scheme;
+import org.apache.http.conn.scheme.SchemeRegistry;
+import org.apache.http.conn.ssl.SSLSocketFactory;
+import org.apache.http.impl.client.AbstractHttpClient;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
-import org.mediawiki.api.*;
-import org.apache.http.impl.client.*;
 import org.apache.http.params.CoreProtocolPNames;
+import org.mediawiki.api.MWApi;
 
+import java.io.IOException;
+
+import fr.free.nrw.commons.auth.WikiAccountAuthenticator;
 import fr.free.nrw.commons.caching.CacheController;
-import fr.free.nrw.commons.data.*;
-
-import com.android.volley.toolbox.*;
 
 // TODO: Use ProGuard to rip out reporting when publishing
 @ReportsCrashes(

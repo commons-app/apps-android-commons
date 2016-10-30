@@ -1,21 +1,36 @@
 package fr.free.nrw.commons.upload;
 
-import android.content.*;
-import android.graphics.*;
-import android.net.*;
-import android.os.*;
+import android.content.Context;
+import android.graphics.Point;
+import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.*;
-import android.util.*;
-import android.view.*;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.*;
-import com.nostra13.universalimageloader.core.*;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.contributions.*;
-import fr.free.nrw.commons.media.*;
+import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 
 
 public class MultipleUploadListFragment extends Fragment {

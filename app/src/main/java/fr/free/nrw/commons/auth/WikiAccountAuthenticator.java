@@ -1,12 +1,18 @@
 package fr.free.nrw.commons.auth;
 
+import android.accounts.AbstractAccountAuthenticator;
+import android.accounts.Account;
+import android.accounts.AccountAuthenticatorResponse;
+import android.accounts.AccountManager;
+import android.accounts.NetworkErrorException;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+
+import org.mediawiki.api.MWApi;
+
 import java.io.IOException;
 
-import android.accounts.*;
-import android.content.*;
-import android.os.*;
-
-import org.mediawiki.api.*;
 import fr.free.nrw.commons.CommonsApplication;
 
 public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {

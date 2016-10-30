@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.text.TextUtils;
-import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

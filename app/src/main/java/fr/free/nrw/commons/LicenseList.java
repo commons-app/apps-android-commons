@@ -2,7 +2,6 @@ package fr.free.nrw.commons;
 
 import android.app.Activity;
 import android.content.res.Resources;
-import android.util.Log;
 
 import org.xmlpull.v1.XmlPullParser;
 

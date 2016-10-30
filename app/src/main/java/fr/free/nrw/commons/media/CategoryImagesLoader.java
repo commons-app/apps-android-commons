@@ -3,14 +3,16 @@ package fr.free.nrw.commons.media;
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
+
 import org.mediawiki.api.ApiResult;
-import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.Utils;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.Utils;
 
 public class CategoryImagesLoader extends AsyncTaskLoader<List<Media>>{
     private final CommonsApplication app;

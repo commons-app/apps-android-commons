@@ -1,35 +1,41 @@
 package fr.free.nrw.commons.upload;
 
-import java.util.*;
-
 import android.Manifest;
-import android.app.*;
-import android.content.*;
+import android.app.ProgressDialog;
+import android.content.ContentProviderClient;
+import android.content.ContentResolver;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.DataSetObserver;
-import android.net.*;
-import android.os.*;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.*;
+import android.view.MenuItem;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.*;
+import android.widget.AdapterView;
+import android.widget.Toast;
 
-import fr.free.nrw.commons.*;
-import fr.free.nrw.commons.auth.*;
+import java.util.ArrayList;
+
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.EventLog;
 import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.auth.AuthenticatedActivity;
+import fr.free.nrw.commons.auth.WikiAccountAuthenticator;
 import fr.free.nrw.commons.category.CategorizationFragment;
+import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.modifications.CategoryModifier;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
-import fr.free.nrw.commons.contributions.*;
-import fr.free.nrw.commons.media.*;
 
 public  class       MultipleShareActivity
         extends     AuthenticatedActivity

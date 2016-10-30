@@ -27,8 +27,9 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.auth.*;
-import fr.free.nrw.commons.media.*;
+import fr.free.nrw.commons.auth.AuthenticatedActivity;
+import fr.free.nrw.commons.auth.WikiAccountAuthenticator;
+import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.upload.UploadService;
 
 public  class       ContributionsActivity

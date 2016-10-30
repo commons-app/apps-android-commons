@@ -4,11 +4,12 @@ import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.R;
 
 import java.util.ArrayList;
+
+import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.R;
 
 public class MediaListAdapter extends BaseAdapter {
     private ArrayList<Media> mediaList;
