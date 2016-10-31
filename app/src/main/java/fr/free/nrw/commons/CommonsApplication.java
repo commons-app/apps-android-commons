@@ -1,5 +1,6 @@
 package fr.free.nrw.commons;
 
+import android.Manifest;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AuthenticatorException;
@@ -9,6 +10,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Build;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.util.LruCache;
 import android.util.Log;
 
@@ -144,7 +146,7 @@ public class CommonsApplication extends Application {
         }
 
         //For caching area -> categories
-        cacheData  = new CacheController();
+        cacheData = new CacheController();
 
         DiskBasedCache cache = new DiskBasedCache(getCacheDir(), 16 * 1024 * 1024);
         volleyQueue = new RequestQueue(cache, new BasicNetwork(new HurlStack()));
@@ -155,7 +157,7 @@ public class CommonsApplication extends Application {
     private LruCache<String, Bitmap> imageCache;
 
     public com.android.volley.toolbox.ImageLoader getImageLoader() {
-        if(imageLoader == null) {
+        if (imageLoader == null) {
             imageLoader = new com.android.volley.toolbox.ImageLoader(volleyQueue, new com.android.volley.toolbox.ImageLoader.ImageCache() {
                 public Bitmap getBitmap(String key) {
                     return imageCache.get(key);
@@ -169,14 +171,24 @@ public class CommonsApplication extends Application {
         }
         return imageLoader;
     }
-    
+
     public MWApi getApi() {
         return api;
     }
-    
+
     public Account getCurrentAccount() {
-        if(currentAccount == null) {
+        if (currentAccount == null) {
             AccountManager accountManager = AccountManager.get(this);
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.GET_ACCOUNTS) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return null;
+            }
             Account[] allAccounts = accountManager.getAccountsByType(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
             if(allAccounts.length != 0) {
                 currentAccount = allAccounts[0];
