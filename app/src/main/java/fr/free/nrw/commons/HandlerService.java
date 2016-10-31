@@ -32,7 +32,6 @@ public abstract class HandlerService<T> extends Service {
         public HandlerService getService() {
             return HandlerService.this;
         }
-
     }
 
     private final IBinder localBinder = new HandlerServiceLocalBinder();

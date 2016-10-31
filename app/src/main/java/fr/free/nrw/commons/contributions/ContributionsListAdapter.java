@@ -19,7 +19,6 @@ import fr.free.nrw.commons.R;
 
 class ContributionsListAdapter extends CursorAdapter {
 
-
     private DisplayImageOptions contributionDisplayOptions = Utils.getGenericDisplayOptions().build();
 
     private Activity activity;
@@ -111,6 +110,5 @@ class ContributionsListAdapter extends CursorAdapter {
                 views.progressView.setVisibility(View.GONE);
                 break;
         }
-
     }
 }

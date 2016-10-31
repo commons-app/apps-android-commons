@@ -90,7 +90,6 @@ public class Contribution extends Media {
         state = in.readInt();
         transferred = in.readLong();
         isMultiple = in.readInt() == 1;
-
     }
 
     public long getTransferred() {
@@ -100,7 +99,6 @@ public class Contribution extends Media {
     public void setTransferred(long transferred) {
         this.transferred = transferred;
     }
-
 
     public String getEditSummary() {
         return editSummary != null ? editSummary : CommonsApplication.DEFAULT_EDIT_SUMMARY;
@@ -266,7 +264,6 @@ public class Contribution extends Media {
     public void setLocalUri(Uri localUri) {
         this.localUri = localUri;
     }
-
 
     public static class Table {
         public static final String TABLE_NAME = "contributions";

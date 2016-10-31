@@ -108,7 +108,6 @@ public class ContributionsListFragment extends Fragment {
         }
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
@@ -210,7 +209,6 @@ public class ContributionsListFragment extends Fragment {
         }
 
         menu.findItem(R.id.menu_refresh).setVisible(false);
-
     }
 
     @Override

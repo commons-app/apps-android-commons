@@ -127,13 +127,11 @@ public class ModifierSequence {
                 COLUMN_DATA
         };
 
-
         private static final String CREATE_TABLE_STATEMENT = "CREATE TABLE " + TABLE_NAME + " ("
                 + "_id INTEGER PRIMARY KEY,"
                 + "mediauri STRING,"
                 + "data STRING"
                 + ");";
-
 
         public static void onCreate(SQLiteDatabase db) {
             db.execSQL(CREATE_TABLE_STATEMENT);

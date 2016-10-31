@@ -26,7 +26,6 @@ public class ModificationsContentProvider extends ContentProvider{
         uriMatcher.addURI(AUTHORITY, BASE_PATH + "/#", MODIFICATIONS_ID);
     }
 
-
     public static Uri uriForId(int id) {
         return Uri.parse(BASE_URI.toString() + "/" + id);
     }

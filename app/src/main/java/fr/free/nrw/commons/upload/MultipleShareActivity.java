@@ -78,7 +78,6 @@ public  class       MultipleShareActivity
 
     public void onItemClick(AdapterView<?> adapterView, View view, int index, long item) {
         showDetail(index);
-
     }
 
     public void OnMultipleUploadInitiated() {
@@ -201,9 +200,7 @@ public  class       MultipleShareActivity
 
         getSupportFragmentManager().addOnBackStackChangedListener(this);
         requestAuthToken();
-
     }
-
 
     @Override
     protected void onDestroy() {
@@ -262,9 +259,7 @@ public  class       MultipleShareActivity
             setTitle(getResources().getQuantityString(R.plurals.multiple_uploads_title, photosList.size(), photosList.size()));
             uploadController.prepareService();
         }
-
     }
-
 
     @Override
     protected void onAuthFailure() {

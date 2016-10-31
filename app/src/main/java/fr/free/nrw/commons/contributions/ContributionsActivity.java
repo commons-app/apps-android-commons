@@ -57,7 +57,6 @@ public  class       ContributionsActivity
      */
     private String CONTRIBUTION_SORT = Contribution.Table.COLUMN_STATE + " DESC, " + Contribution.Table.COLUMN_UPLOADED + " DESC , (" + Contribution.Table.COLUMN_TIMESTAMP + " * " + Contribution.Table.COLUMN_STATE + ")";
 
-
     public ContributionsActivity() {
         super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
     }
@@ -191,7 +190,6 @@ public  class       ContributionsActivity
         finish(); // If authentication failed, we just exit
     }
 
-
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long item) {
         showDetail(position);
     }
@@ -218,13 +216,10 @@ public  class       ContributionsActivity
 
         contributionsList.clearSyncMessage();
         notifyAndMigrateDataSetObservers();
-
     }
 
     public void onLoaderReset(Loader cursorLoader) {
-
         ((CursorAdapter) contributionsList.getAdapter()).swapCursor(null);
-
     }
 
     //FIXME: Potential cause of wrong image display bug

@@ -79,7 +79,6 @@ public class UploadController {
 
     public void startUpload(final Contribution contribution, final ContributionUploadProgress onComplete) {
 
-
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
 
         if(TextUtils.isEmpty(contribution.getCreator())) {
@@ -92,7 +91,6 @@ public class UploadController {
 
         String license = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA);
         contribution.setLicense(license);
-
 
         //FIXME: Add permission request here. Only executeAsyncTask if permission has been granted
         Utils.executeAsyncTask(new AsyncTask<Void, Void, Contribution>() {

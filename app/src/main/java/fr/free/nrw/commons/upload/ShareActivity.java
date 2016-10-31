@@ -241,8 +241,8 @@ public  class       ShareActivity
         if(savedInstanceState != null)  {
             contribution = savedInstanceState.getParcelable("contribution");
         }
-        requestAuthToken();
 
+        requestAuthToken();
 
         Log.d(TAG, "Uri: " + mediaUriString);
         Log.d(TAG, "Ext storage dir: " + Environment.getExternalStorageDirectory());

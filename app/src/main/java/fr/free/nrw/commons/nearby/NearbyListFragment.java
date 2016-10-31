@@ -354,7 +354,6 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
         return distanceRadians(Math.toRadians(from.latitude), Math.toRadians(from.longitude), Math.toRadians(to.latitude), Math.toRadians(to.longitude));
     }
 
-
     private static double distanceRadians(double lat1, double lng1, double lat2, double lng2) {
         return arcHav(havDistance(lat1, lat2, lng1 - lng2));
     }

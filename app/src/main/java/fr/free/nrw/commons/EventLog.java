@@ -24,7 +24,6 @@ public class EventLog {
             for(LogBuilder logBuilder: logBuilders) {
                 HttpURLConnection conn;
                 try {
-
                     URL url = logBuilder.toUrl();
                     HttpResponse response = Http.get(url.toString()).use(CommonsApplication.createHttpClient()).asResponse();
 
@@ -37,7 +36,6 @@ public class EventLog {
                     // Probably just ignore for now. Can be much more robust with a service, etc later on.
                     Log.d("Commons", "IO Error, EventLog hit skipped");
                 }
-
             }
 
             return allSuccess;
