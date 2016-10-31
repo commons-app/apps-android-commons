@@ -1,19 +1,21 @@
 package fr.free.nrw.commons.auth;
 
-import java.io.IOException;
-
+import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.accounts.AccountManagerFuture;
+import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
-
-import android.accounts.*;
-import android.os.*;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import java.io.IOException;
 
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
 
 public abstract class AuthenticatedActivity extends AppCompatActivity {
-    
-    
+
     String accountType;
     CommonsApplication app;
 
@@ -22,7 +24,6 @@ public abstract class AuthenticatedActivity extends AppCompatActivity {
     public AuthenticatedActivity(String accountType) {
        this.accountType = accountType;
     }
-
    
     private class GetAuthCookieTask extends AsyncTask<Void, String, String> {
         private Account account;
@@ -59,7 +60,6 @@ public abstract class AuthenticatedActivity extends AppCompatActivity {
             }
         }
     }
-   
     
     private class AddAccountTask extends AsyncTask<Void, String, String> {
         private AccountManager accountManager;
@@ -106,6 +106,7 @@ public abstract class AuthenticatedActivity extends AppCompatActivity {
             
         }
     }
+
     protected void requestAuthToken() {
         if(authCookie != null) {
             onAuthCookieAcquired(authCookie);

@@ -1,8 +1,8 @@
 package fr.free.nrw.commons.auth;
 
-import android.app.*;
-import android.content.*;
-import android.os.*;
+import android.app.Service;
+import android.content.Intent;
+import android.os.IBinder;
 
 public class WikiAccountAuthenticatorService extends Service{
 

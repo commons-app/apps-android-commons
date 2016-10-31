@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
-import fr.free.nrw.commons.CommonsApplication;
+
 import fr.free.nrw.commons.data.DBOpenHelper;
 
 public class CategoryContentProvider extends ContentProvider {
@@ -28,7 +28,6 @@ public class CategoryContentProvider extends ContentProvider {
         uriMatcher.addURI(AUTHORITY, BASE_PATH, CATEGORIES);
         uriMatcher.addURI(AUTHORITY, BASE_PATH + "/#", CATEGORIES_ID);
     }
-
 
     public static Uri uriForId(int id) {
         return Uri.parse(BASE_URI.toString() + "/" + id);

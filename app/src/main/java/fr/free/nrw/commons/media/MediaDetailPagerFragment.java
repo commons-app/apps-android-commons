@@ -269,7 +269,6 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
                                 // Default set of menu items works fine. Treat same as regular media object
                                 break;
                         }
-
                     }
                     return;
                 }

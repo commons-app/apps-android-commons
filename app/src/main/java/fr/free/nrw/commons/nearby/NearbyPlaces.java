@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.nearby;
 
-import android.net.Uri;
 import android.os.StrictMode;
 import android.util.Log;
 
@@ -25,7 +24,6 @@ public class NearbyPlaces {
                 places = new ArrayList<Place>();
                 StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
                 StrictMode.setThreadPolicy(policy);
-
 
                 URL file = new URL("https://tools.wmflabs.org/wiki-needs-pictures/data/data.csv");
 

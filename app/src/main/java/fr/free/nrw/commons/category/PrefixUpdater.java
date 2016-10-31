@@ -12,13 +12,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
-import java.util.List;
-
-import javax.net.ssl.SSLPeerUnverifiedException;
 
 import fr.free.nrw.commons.CommonsApplication;
-
-import static android.R.id.list;
 
 /**
  * Sends asynchronous queries to the Commons MediaWiki API to retrieve categories that share the

@@ -1,20 +1,27 @@
 package fr.free.nrw.commons.contributions;
 
-import android.content.*;
+import android.accounts.Account;
+import android.content.AbstractThreadedSyncAdapter;
+import android.content.ContentProviderClient;
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SyncResult;
 import android.database.Cursor;
+import android.os.Bundle;
 import android.os.RemoteException;
 import android.text.TextUtils;
 import android.util.Log;
-import android.accounts.Account;
-import android.os.Bundle;
 
-import java.io.*;
-import java.util.*;
+import org.mediawiki.api.ApiResult;
+import org.mediawiki.api.MWApi;
 
-import org.mediawiki.api.*;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
-
 
 public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
     private static int COMMIT_THRESHOLD = 10;
@@ -122,7 +129,5 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
         }
         prefs.edit().putString("lastSyncTimestamp", Utils.toMWDate(curTime)).apply();
         Log.d("Commons", "Oh hai, everyone! Look, a kitty!");
-
-
     }
 }

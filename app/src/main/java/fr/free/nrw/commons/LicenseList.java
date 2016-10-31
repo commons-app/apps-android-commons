@@ -2,7 +2,6 @@ package fr.free.nrw.commons;
 
 import android.app.Activity;
 import android.content.res.Resources;
-import android.util.Log;
 
 import org.xmlpull.v1.XmlPullParser;
 
@@ -28,7 +27,6 @@ public class LicenseList {
             fr.free.nrw.commons.License license = new fr.free.nrw.commons.License(id, template, url, name);
             licenses.put(id, license);
         }
-
     }
 
     public Set<String> keySet() {

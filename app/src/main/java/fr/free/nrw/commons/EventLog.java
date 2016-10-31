@@ -1,14 +1,21 @@
 package fr.free.nrw.commons;
 
 import android.content.SharedPreferences;
-import android.os.*;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.preference.PreferenceManager;
-import android.util.*;
-import in.yuvi.http.fluent.Http;
+import android.util.Log;
+
 import org.apache.http.HttpResponse;
-import org.json.*;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
-import java.net.*;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import in.yuvi.http.fluent.Http;
 
 public class EventLog {
 
@@ -24,7 +31,6 @@ public class EventLog {
             for(LogBuilder logBuilder: logBuilders) {
                 HttpURLConnection conn;
                 try {
-
                     URL url = logBuilder.toUrl();
                     HttpResponse response = Http.get(url.toString()).use(CommonsApplication.createHttpClient()).asResponse();
 
@@ -37,7 +43,6 @@ public class EventLog {
                     // Probably just ignore for now. Can be much more robust with a service, etc later on.
                     Log.d("Commons", "IO Error, EventLog hit skipped");
                 }
-
             }
 
             return allSuccess;

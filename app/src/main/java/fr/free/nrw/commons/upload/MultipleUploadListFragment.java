@@ -1,21 +1,36 @@
 package fr.free.nrw.commons.upload;
 
-import android.content.*;
-import android.graphics.*;
-import android.net.*;
-import android.os.*;
+import android.content.Context;
+import android.graphics.Point;
+import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.*;
-import android.util.*;
-import android.view.*;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.*;
-import com.nostra13.universalimageloader.core.*;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.contributions.*;
-import fr.free.nrw.commons.media.*;
+import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 
 
 public class MultipleUploadListFragment extends Fragment {
@@ -92,7 +107,6 @@ public class MultipleUploadListFragment extends Fragment {
             }
 
             return view;
-
         }
     }
 
@@ -117,8 +131,8 @@ public class MultipleUploadListFragment extends Fragment {
         int picWidth = Math.min((int) Math.sqrt(screenWidth * screenHeight / count), screenWidth);
         picWidth = Math.min((int)(192 * screenMetrics.density), Math.max((int) (120  * screenMetrics.density), picWidth / 48 * 48));
         int picHeight = Math.min(picWidth, (int)(192 * screenMetrics.density)); // Max Height is same as Contributions list
-        return new Point(picWidth, picHeight);
 
+        return new Point(picWidth, picHeight);
     }
 
     public void notifyDatasetChanged() {
@@ -144,7 +158,6 @@ public class MultipleUploadListFragment extends Fragment {
         photosGrid = (GridView)view.findViewById(R.id.multipleShareBackground);
         baseTitle = (EditText)view.findViewById(R.id.multipleBaseTitle);
 
-
         photosAdapter = new PhotoDisplayAdapter();
         photosGrid.setAdapter(photosAdapter);
         photosGrid.setOnItemClickListener((AdapterView.OnItemClickListener)getActivity());
@@ -169,7 +182,6 @@ public class MultipleUploadListFragment extends Fragment {
                     }
                 }
                 detailProvider.notifyDatasetChanged();
-
             }
 
             public void afterTextChanged(Editable editable) {
@@ -207,6 +219,5 @@ public class MultipleUploadListFragment extends Fragment {
 
         setHasOptionsMenu(true);
     }
-
-
+    
 }

@@ -27,8 +27,9 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.auth.*;
-import fr.free.nrw.commons.media.*;
+import fr.free.nrw.commons.auth.AuthenticatedActivity;
+import fr.free.nrw.commons.auth.WikiAccountAuthenticator;
+import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.upload.UploadService;
 
 public  class       ContributionsActivity
@@ -56,7 +57,6 @@ public  class       ContributionsActivity
         This is why Contribution.STATE_COMPLETED is -1.
      */
     private String CONTRIBUTION_SORT = Contribution.Table.COLUMN_STATE + " DESC, " + Contribution.Table.COLUMN_UPLOADED + " DESC , (" + Contribution.Table.COLUMN_TIMESTAMP + " * " + Contribution.Table.COLUMN_STATE + ")";
-
 
     public ContributionsActivity() {
         super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
@@ -191,7 +191,6 @@ public  class       ContributionsActivity
         finish(); // If authentication failed, we just exit
     }
 
-
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long item) {
         showDetail(position);
     }
@@ -218,13 +217,10 @@ public  class       ContributionsActivity
 
         contributionsList.clearSyncMessage();
         notifyAndMigrateDataSetObservers();
-
     }
 
     public void onLoaderReset(Loader cursorLoader) {
-
         ((CursorAdapter) contributionsList.getAdapter()).swapCursor(null);
-
     }
 
     //FIXME: Potential cause of wrong image display bug

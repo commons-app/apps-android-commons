@@ -27,9 +27,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageLoader.ImageContainer;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
+
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
-
 
 public class MediaWikiImageView extends ImageView {
 
@@ -88,7 +88,6 @@ public class MediaWikiImageView extends ImageView {
         if(mMedia == null) {
             return;
         }
-
 
         // Do not count for density when loading thumbnails.
         // FIXME: Use another 'algorithm' that doesn't punish low res devices
@@ -160,7 +159,6 @@ public class MediaWikiImageView extends ImageView {
                                 }
                             });
                         }
-
                     }
 
                     @Override

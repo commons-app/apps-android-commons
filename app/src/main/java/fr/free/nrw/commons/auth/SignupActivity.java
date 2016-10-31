@@ -1,19 +1,13 @@
 package fr.free.nrw.commons.auth;
 
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
-import android.webkit.CookieManager;
-import android.webkit.CookieSyncManager;
-import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
-
-import fr.free.nrw.commons.R;
 
 public class SignupActivity extends Activity {
 

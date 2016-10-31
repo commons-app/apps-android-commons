@@ -9,16 +9,17 @@ import android.support.v4.widget.CursorAdapter;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
+
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.MediaWikiImageView;
-import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
 
 class ContributionsListAdapter extends CursorAdapter {
-
 
     private DisplayImageOptions contributionDisplayOptions = Utils.getGenericDisplayOptions().build();
 
@@ -111,6 +112,5 @@ class ContributionsListAdapter extends CursorAdapter {
                 views.progressView.setVisibility(View.GONE);
                 break;
         }
-
     }
 }

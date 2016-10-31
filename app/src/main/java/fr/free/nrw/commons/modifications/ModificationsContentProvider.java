@@ -1,14 +1,16 @@
 package fr.free.nrw.commons.modifications;
 
-import android.content.*;
-import android.database.*;
-import android.database.sqlite.*;
-import android.net.*;
-import android.text.*;
-import android.util.*;
+import android.content.ContentProvider;
+import android.content.ContentValues;
+import android.content.UriMatcher;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteQueryBuilder;
+import android.net.Uri;
+import android.text.TextUtils;
+import android.util.Log;
 
-import fr.free.nrw.commons.data.*;
-import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.data.DBOpenHelper;
 
 public class ModificationsContentProvider extends ContentProvider{
 
@@ -25,7 +27,6 @@ public class ModificationsContentProvider extends ContentProvider{
         uriMatcher.addURI(AUTHORITY, BASE_PATH, MODIFICATIONS);
         uriMatcher.addURI(AUTHORITY, BASE_PATH + "/#", MODIFICATIONS_ID);
     }
-
 
     public static Uri uriForId(int id) {
         return Uri.parse(BASE_URI.toString() + "/" + id);

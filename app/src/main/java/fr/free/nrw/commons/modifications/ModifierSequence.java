@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.RemoteException;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -127,13 +128,11 @@ public class ModifierSequence {
                 COLUMN_DATA
         };
 
-
         private static final String CREATE_TABLE_STATEMENT = "CREATE TABLE " + TABLE_NAME + " ("
                 + "_id INTEGER PRIMARY KEY,"
                 + "mediauri STRING,"
                 + "data STRING"
                 + ");";
-
 
         public static void onCreate(SQLiteDatabase db) {
             db.execSQL(CREATE_TABLE_STATEMENT);

@@ -55,7 +55,6 @@ public class Utils {
         return String.format("%s/%s/%s/%s", CommonsApplication.IMAGE_URL_BASE, sha.substring(0, 1), sha.substring(0, 2), urlEncode(name));
     }
 
-
     public static String getStringFromDOM(Node dom) {
         javax.xml.transform.Transformer transformer = null;
         try {
@@ -101,7 +100,6 @@ public class Utils {
             task.execute(params);
         }
     }
-
 
     private static DisplayImageOptions.Builder defaultImageOptionsBuilder;
     public static DisplayImageOptions.Builder getGenericDisplayOptions() {

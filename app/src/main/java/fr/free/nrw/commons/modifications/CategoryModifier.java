@@ -6,7 +6,6 @@ import org.json.JSONObject;
 
 public class CategoryModifier extends PageModifier {
 
-
     public static String PARAM_CATEGORIES = "categories";
 
     public static String MODIFIER_NAME = "CategoriesModifier";

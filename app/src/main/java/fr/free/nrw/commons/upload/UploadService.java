@@ -1,30 +1,41 @@
 package fr.free.nrw.commons.upload;
 
-import java.io.*;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.ContentProviderClient;
+import android.content.ContentResolver;
+import android.content.ContentValues;
+import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
+import android.util.Log;
+import android.webkit.MimeTypeMap;
+import android.widget.Toast;
+
+import org.mediawiki.api.ApiResult;
+import org.mediawiki.api.MWApi;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import android.graphics.*;
-import android.os.Bundle;
-import fr.free.nrw.commons.*;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.EventLog;
-import org.mediawiki.api.*;
-import in.yuvi.http.fluent.ProgressListener;
-
-import android.app.*;
-import android.content.*;
-import android.support.v4.app.NotificationCompat;
-import android.util.*;
-import android.webkit.MimeTypeMap;
-import android.widget.*;
-
-import fr.free.nrw.commons.contributions.*;
 import fr.free.nrw.commons.HandlerService;
+import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.contributions.ContributionsActivity;
+import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
+import in.yuvi.http.fluent.ProgressListener;
 
 public class UploadService extends HandlerService<Contribution> {
 
@@ -146,7 +157,6 @@ public class UploadService extends HandlerService<Contribution> {
             default:
                 throw new IllegalArgumentException("Unknown value for what");
         }
-
     }
 
     private boolean freshStart = true;
@@ -235,7 +245,6 @@ public class UploadService extends HandlerService<Contribution> {
 
             curProgressNotification = null;
 
-
             String resultStatus = result.getString("/api/upload/@result");
             if(!resultStatus.equals("Success")) {
                 String errorCode = result.getString("/api/error/@code");
@@ -281,7 +290,6 @@ public class UploadService extends HandlerService<Contribution> {
                 stopForeground(true);
             }
         }
-
     }
 
     private void showFailedNotification(Contribution contribution) {
