@@ -1,10 +1,16 @@
 package fr.free.nrw.commons;
 
 import android.net.Uri;
-import android.os.*;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-import java.util.*;
-import java.util.regex.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Media implements Parcelable {
 

@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
-import fr.free.nrw.commons.CommonsApplication;
+
 import fr.free.nrw.commons.data.DBOpenHelper;
 
 public class CategoryContentProvider extends ContentProvider {

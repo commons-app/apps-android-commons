@@ -1,8 +1,13 @@
 package fr.free.nrw.commons;
 
-import android.app.*;
-import android.content.*;
-import android.os.*;
+import android.app.Service;
+import android.content.Intent;
+import android.os.Binder;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.Message;
 
 public abstract class HandlerService<T> extends Service {
     private volatile Looper threadLooper;

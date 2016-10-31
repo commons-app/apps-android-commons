@@ -3,6 +3,7 @@ package fr.free.nrw.commons.contributions;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.R;
 

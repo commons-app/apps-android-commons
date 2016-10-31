@@ -1,11 +1,12 @@
 package fr.free.nrw.commons.data;
 
-import android.content.*;
-import android.database.sqlite.*;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 
-import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.category.Category;
-import fr.free.nrw.commons.contributions.*;
+import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.modifications.ModifierSequence;
 
 public class DBOpenHelper  extends SQLiteOpenHelper{
 

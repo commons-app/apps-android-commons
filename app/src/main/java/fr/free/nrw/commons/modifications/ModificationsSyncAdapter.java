@@ -1,21 +1,26 @@
 package fr.free.nrw.commons.modifications;
 
+import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
-import android.content.*;
+import android.content.AbstractThreadedSyncAdapter;
+import android.content.ContentProviderClient;
+import android.content.Context;
+import android.content.SyncResult;
 import android.database.Cursor;
+import android.os.Bundle;
 import android.os.RemoteException;
 import android.util.Log;
-import android.accounts.Account;
-import android.os.Bundle;
 
-import java.io.*;
+import org.mediawiki.api.ApiResult;
+import org.mediawiki.api.MWApi;
 
-import fr.free.nrw.commons.contributions.Contribution;
-import org.mediawiki.api.*;
+import java.io.IOException;
+
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 
 public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {

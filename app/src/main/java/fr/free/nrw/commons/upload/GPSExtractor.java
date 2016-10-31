@@ -10,8 +10,8 @@ import android.media.ExifInterface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
+
 import java.io.IOException;
 
 /**
