@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="#AA000000"
-              android:paddingBottom="8dip"
-              android:paddingLeft="16dip"
-              android:paddingStart="16dip"
-              android:paddingRight="16dip"
-              android:paddingEnd="16dip"
-              android:paddingTop="8dip"
-        >
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#AA000000"
+    android:paddingBottom="8dip"
+    android:paddingLeft="16dip"
+    android:paddingStart="16dip"
+    android:paddingRight="16dip"
+    android:paddingEnd="16dip"
+    android:paddingTop="8dip"
+    >
 
     <FrameLayout
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         >
+
         <EditText
             android:id="@+id/categoriesSearchBox"
             android:layout_height="wrap_content"
@@ -25,6 +25,7 @@
             android:singleLine="true"
             android:imeOptions="flagNoExtractUi"
             />
+
         <ProgressBar
             android:id="@+id/categoriesSearchInProgress"
             android:layout_width="wrap_content"
@@ -40,12 +41,12 @@
     </FrameLayout>
 
     <TextView
-            android:id="@+id/categoriesNotFound"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:visibility="gone"
-            android:gravity="center"
-            />
+        android:id="@+id/categoriesNotFound"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:gravity="center"
+        />
 
     <TextView
         android:id="@+id/categoriesExplanation"

@@ -1,161 +1,192 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:orientation="vertical"
-             android:layout_width="fill_parent"
-             android:layout_height="fill_parent"
-             android:background="@android:color/background_dark"
-        >
-    <ProgressBar android:id="@+id/mediaDetailImageLoading"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_gravity="center"
-                 android:indeterminate="true"
-                 android:visibility="visible"
-                 />
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/background_dark"
+    >
 
-    <ImageView android:id="@+id/mediaDetailImageFailed"
-               android:layout_height="wrap_content"
-               android:layout_width="wrap_content"
-               android:layout_gravity="center"
-               android:src="@android:drawable/ic_menu_close_clear_cancel"
-               android:visibility="gone"
-               />
+    <ProgressBar
+        android:id="@+id/mediaDetailImageLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:visibility="visible"
+        />
 
-    <fr.free.nrw.commons.MediaWikiImageView android:id="@+id/mediaDetailImage"
-               android:layout_width="fill_parent"
-               android:layout_height="fill_parent"
-               android:scaleType="fitCenter"
-            />
+    <ImageView
+        android:id="@+id/mediaDetailImageFailed"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        android:visibility="gone"
+        />
+
+    <fr.free.nrw.commons.MediaWikiImageView
+        android:id="@+id/mediaDetailImage"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="fitCenter"
+        />
 
     <ScrollView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/mediaDetailScrollView"
-            android:fillViewport="true"
-            android:background="@android:color/transparent"
-            android:cacheColorHint="@android:color/transparent">
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/mediaDetailScrollView"
+        android:fillViewport="true"
+        android:background="@android:color/transparent"
+        android:cacheColorHint="@android:color/transparent"
+        >
 
-        <LinearLayout android:orientation="vertical"
-                      android:layout_width="fill_parent"
-                      android:layout_height="fill_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            >
 
             <!-- Placeholder. Height gets set at runtime based on container size; the initial value is a hack to keep
                  the detail info offscreen until it's placed properly. May be a better way to do this. -->
             <fr.free.nrw.commons.media.MediaDetailSpacer
-                    android:layout_width="fill_parent"
-                    android:layout_height="16dp"
-                    android:id="@+id/mediaDetailSpacer"/>
+                android:layout_width="fill_parent"
+                android:layout_height="16dp"
+                android:id="@+id/mediaDetailSpacer"
+                />
+
             <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#AA000000"
+                android:padding="16dp"
+                >
+
+                <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:background="#AA000000"
-                    android:padding="16dp">
-                <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="fill_parent"
+                    android:background="#20ffffff"
+                    android:padding="16dp"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColor="@android:color/white"
+                        android:text="Title"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:paddingBottom="6dp"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Title of the media"
+                        android:id="@+id/mediaDetailTitle"
+                        android:layout_gravity="left|start"
+                        android:textColor="@android:color/white"
                         android:background="#20ffffff"
-                        android:padding="16dp">
-                    <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@android:color/white"
-                            android:text="Title"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:paddingBottom="6dp"/>
-                    <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Title of the media"
-                            android:id="@+id/mediaDetailTitle"
-                            android:layout_gravity="left|start"
-                            android:textColor="@android:color/white"
-                            android:background="#20ffffff"
-                            android:textSize="14sp"
-                            android:padding="12dp"/>
+                        android:textSize="14sp"
+                        android:padding="12dp"
+                        />
                 </LinearLayout>
+
                 <fr.free.nrw.commons.media.MediaDetailSpacer
-                        android:layout_width="fill_parent"
-                        android:layout_height="8dp"/>
+                    android:layout_width="fill_parent"
+                    android:layout_height="8dp"
+                    />
+
                 <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="fill_parent"
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#20ffffff"
+                    android:padding="16dp"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:text="Description"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:paddingBottom="6dp"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Description of the media goes here. This can potentially be fairly long, and will need to wrap across multiple lines. We hope it looks nice though."
                         android:background="#20ffffff"
-                        android:padding="16dp">
-                    <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Description"
-                            android:textColor="@android:color/white"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:paddingBottom="6dp"/>
-                    <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Description of the media goes here. This can potentially be fairly long, and will need to wrap across multiple lines. We hope it looks nice though."
-                            android:background="#20ffffff"
-                            android:id="@+id/mediaDetailDesc"
-                            android:textColor="@android:color/white"
-                            android:layout_gravity="left|start"
-                            android:textSize="14sp"
-                            android:padding="12dp"/>
+                        android:id="@+id/mediaDetailDesc"
+                        android:textColor="@android:color/white"
+                        android:layout_gravity="left|start"
+                        android:textSize="14sp"
+                        android:padding="12dp"
+                        />
                 </LinearLayout>
+
                 <fr.free.nrw.commons.media.MediaDetailSpacer
-                        android:layout_width="fill_parent"
-                        android:layout_height="8dp"/>
+                    android:layout_width="fill_parent"
+                    android:layout_height="8dp"
+                    />
+
                 <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="fill_parent"
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#20ffffff"
+                    android:padding="16dp"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColor="@android:color/white"
+                        android:text="License"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:paddingBottom="6dp"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="License link"
+                        android:id="@+id/mediaDetailLicense"
+                        android:layout_gravity="left|start"
                         android:background="#20ffffff"
-                        android:padding="16dp">
-                    <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@android:color/white"
-                            android:text="License"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:paddingBottom="6dp"/>
-                    <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="License link"
-                            android:id="@+id/mediaDetailLicense"
-                            android:layout_gravity="left|start"
-                            android:background="#20ffffff"
-                            android:textColor="@android:color/white"
-                            android:textSize="14sp"
-                            android:padding="12dp"/>
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp"
+                        android:padding="12dp"
+                        />
                 </LinearLayout>
+
                 <fr.free.nrw.commons.media.MediaDetailSpacer
-                        android:layout_width="fill_parent"
-                        android:layout_height="8dp"/>
+                    android:layout_width="fill_parent"
+                    android:layout_height="8dp"
+                    />
+
                 <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:background="#20ffffff"
-                        android:padding="16dp"
-                        android:textStyle="bold">
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#20ffffff"
+                    android:padding="16dp"
+                    android:textStyle="bold"
+                    >
                     <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/detail_panel_cats_label"
-                            android:textSize="16sp"
-                            android:layout_gravity="left|start"
-                            android:textColor="@android:color/white"
-                            android:paddingBottom="6dp"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/detail_panel_cats_label"
+                        android:textSize="16sp"
+                        android:layout_gravity="left|start"
+                        android:textColor="@android:color/white"
+                        android:paddingBottom="6dp"
+                        />
                     <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/mediaDetailCategoryContainer"/>
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/mediaDetailCategoryContainer"
+                        />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
