@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    >
 
     <RelativeLayout 
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <ImageView
             android:id="@+id/commonsLogo"
@@ -14,7 +16,8 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
-            android:src="@drawable/commons_logo_large" />
+            android:src="@drawable/commons_logo_large"
+            />
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -23,33 +26,35 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:orientation="vertical"
-            android:padding="20dp" >
+            android:padding="20dp"
+            >
 
             <EditText
-               android:id="@+id/loginUsername"
-               android:layout_width="fill_parent"
-               android:layout_height="wrap_content"
-               android:hint="@string/username" >
+                android:id="@+id/loginUsername"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/username"
+                >
 
                <requestFocus />
-           </EditText>
+            </EditText>
 
-           <EditText
-	            android:id="@+id/loginPassword"
-               android:layout_width="fill_parent"
-               android:layout_height="wrap_content"
-               android:hint="@string/password"
-               android:inputType="textPassword" />
+            <EditText
+                android:id="@+id/loginPassword"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                />
 
            <Button
-               android:id="@+id/loginButton"
-               android:layout_width="fill_parent"
-               android:layout_height="wrap_content"
-               android:layout_margin="20dp"
-               android:text="@string/login" />
+                android:id="@+id/loginButton"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="@string/login"
+               />
             
         </LinearLayout>
-        
     </RelativeLayout>
-
 </FrameLayout>

@@ -2,11 +2,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:foreground="?attr/selectableItemBackground"
-    android:layout_height="@dimen/icon_size">
+    android:layout_height="@dimen/icon_size"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <ImageView
             android:id="@+id/icon"
@@ -14,7 +16,8 @@
             android:layout_height="match_parent"
             android:src="@drawable/empty_photo"
             android:background="#ffffff"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            />
 
         <TextView
             android:id="@+id/distance"
@@ -26,7 +29,8 @@
             style="?android:textAppearanceSmallInverse"
             android:textColor="#ffffff"
             android:background="@color/text_background"
-            tools:text="Overlay"/>
+            tools:text="Overlay"
+            />
 
         <TextView
             android:id="@+id/tvName"
@@ -40,7 +44,8 @@
             android:maxLines="1"
             android:ellipsize="none"
             style="?android:textAppearanceMedium"
-            tools:text="Name" />
+            tools:text="Name"
+            />
 
         <TextView
             android:id="@+id/tvDesc"
@@ -53,7 +58,8 @@
             android:ellipsize="none"
             android:maxLines="4"
             style="?android:textAppearanceSmall"
-            tools:text="Description" />
+            tools:text="Description"
+            />
 
     </RelativeLayout>
 </FrameLayout>

@@ -1,62 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="#0c609c"
-              android:gravity="center_vertical"
-        >
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0c609c"
+    android:gravity="center_vertical"
+    >
 
     <!-- Sorry about the hardcoded sizes here. They're image-related. -->
     <LinearLayout
-            android:layout_width="fill_parent"
+        android:layout_width="fill_parent"
+        android:layout_height="180dp"
+        android:gravity="center_horizontal"
+        >
+
+        <ImageView
+            android:layout_width="150dp"
             android:layout_height="180dp"
-            android:gravity="center_horizontal">
+            android:src="@drawable/welcome_wikipedia"
+            />
 
         <ImageView
-                android:layout_width="150dp"
-                android:layout_height="180dp"
-                android:src="@drawable/welcome_wikipedia"/>
-
-        <ImageView
-                android:layout_width="160dp"
-                android:layout_height="120dp"
-                android:layout_gravity="center"
-                android:src="@drawable/welcome_copyright"/>
+            android:layout_width="160dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:src="@drawable/welcome_copyright"
+            />
 
     </LinearLayout>
 
     <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxWidth="240dp"
-            android:text="@string/welcome_final_text"
-            android:layout_gravity="center"
-            android:textStyle="bold"
-            android:textAlignment="center"
-            android:gravity="center_horizontal"
-            android:textColor="@android:color/white"
-            android:singleLine="false"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="240dp"
+        android:text="@string/welcome_final_text"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:gravity="center_horizontal"
+        android:textColor="@android:color/white"
+        android:singleLine="false"
+        />
 
     <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxWidth="240dp"
-            android:layout_gravity="center"
-            android:textAlignment="center"
-            android:paddingTop="16dp"
-            android:gravity="center_horizontal"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="240dp"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:paddingTop="16dp"
+        android:gravity="center_horizontal"
+        />
 
     <Button
-            android:layout_width="120dp"
-            android:layout_height="40dp"
-            android:text="@string/welcome_final_button_text"
-            android:id="@+id/welcomeYesButton"
-            android:layout_gravity="center"
-            android:background="@android:color/white"
-            android:textColor="#0c609c"
-            android:textStyle="bold"
-            />
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:text="@string/welcome_final_button_text"
+        android:id="@+id/welcomeYesButton"
+        android:layout_gravity="center"
+        android:background="@android:color/white"
+        android:textColor="#0c609c"
+        android:textStyle="bold"
+        />
 
 </LinearLayout>
