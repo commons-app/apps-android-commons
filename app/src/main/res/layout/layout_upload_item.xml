@@ -1,35 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:orientation="vertical"
-             android:layout_width="fill_parent"
-             android:layout_height="wrap_content"
-             android:padding="2dp"
-             android:paddingBottom="0dp"
-             android:background="#000000"
-        >
-    <ImageView android:id="@+id/uploadImage"
-               android:layout_width="fill_parent"
-               android:layout_height="192dp"
-               android:scaleType="centerCrop"
-            />
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:padding="2dp"
+    android:paddingBottom="0dp"
+    android:background="#000000"
+    >
+
+    <ImageView
+        android:id="@+id/uploadImage"
+        android:layout_width="fill_parent"
+        android:layout_height="192dp"
+        android:scaleType="centerCrop"
+        />
 
     <RelativeLayout
-            android:id="@+id/uploadOverlay"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|bottom"
-            android:background="#77000000"
-            android:padding="4dp"
-            >
+        android:id="@+id/uploadOverlay"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|bottom"
+        android:background="#77000000"
+        android:padding="4dp"
+        >
 
         <TextView
-                android:id="@+id/uploadTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#FFFFFFFF"
-                style="?android:textAppearanceSmall"
-                />
+            android:id="@+id/uploadTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFFFF"
+            style="?android:textAppearanceSmall"
+            />
     </RelativeLayout>
 
 </FrameLayout>
