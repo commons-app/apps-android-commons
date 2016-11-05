@@ -15,18 +15,21 @@ import java.util.TreeSet;
 import fr.free.nrw.commons.R;
 
 public class CategoriesAdapter extends BaseAdapter {
-    private Context context;
-    private ArrayList<CategorizationFragment.CategoryItem> items;
-
-    private LayoutInflater mInflater;
-
     private static final int TYPE_ITEM = 0;
     private static final int TYPE_SEPARATOR = 1;
+
+    private Context context;
+    private LayoutInflater mInflater;
+
+    //FIXME: Might have issue here, headers need to be a String type so you can't just add them to an ArrayList of CategoryItem
+    private ArrayList<CategorizationFragment.CategoryItem> items;
+
     private TreeSet<Integer> sectionHeader = new TreeSet<Integer>();
 
     public CategoriesAdapter(Context context, ArrayList<CategorizationFragment.CategoryItem> items) {
         this.context = context;
         this.items = items;
+        mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     public int getCount() {
