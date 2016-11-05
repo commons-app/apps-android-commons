@@ -67,7 +67,7 @@ public class CategoriesAdapter extends BaseAdapter {
         CheckedTextView checkedView;
 
         if(view == null) {
-            checkedView = (CheckedTextView) getActivity().getLayoutInflater().inflate(R.layout.layout_categories_item, null);
+            checkedView = (CheckedTextView) mInflater.inflate(R.layout.layout_categories_item, null);
 
         } else {
             checkedView = (CheckedTextView) view;
@@ -81,6 +81,7 @@ public class CategoriesAdapter extends BaseAdapter {
         return checkedView;
     }
 
+    /*
     // TODO: Separator getView reference
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
@@ -110,4 +111,5 @@ public class CategoriesAdapter extends BaseAdapter {
     public static class ViewHolder {
         public TextView textView;
     }
+    */
 }
