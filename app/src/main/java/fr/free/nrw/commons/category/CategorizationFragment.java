@@ -265,7 +265,6 @@ public class CategorizationFragment extends Fragment {
     }
 
     private class CategoriesAdapter extends BaseAdapter {
-
         private Context context;
         private ArrayList<CategoryItem> items;
 
@@ -300,6 +299,7 @@ public class CategorizationFragment extends Fragment {
 
         @Override
         public int getItemViewType(int position) {
+            // If type is 1, the line is a header, otherwise it is an item
             return sectionHeader.contains(position) ? TYPE_SEPARATOR : TYPE_ITEM;
         }
 
