@@ -264,68 +264,6 @@ public class CategorizationFragment extends Fragment {
         }
     }
 
-    private class CategoriesAdapter extends BaseAdapter {
-        private Context context;
-        private ArrayList<CategoryItem> items;
-
-        private static final int TYPE_ITEM = 0;
-        private static final int TYPE_SEPARATOR = 1;
-        private TreeSet<Integer> sectionHeader = new TreeSet<Integer>();
-
-        private CategoriesAdapter(Context context, ArrayList<CategoryItem> items) {
-            this.context = context;
-            this.items = items;
-        }
-
-        public int getCount() {
-            return items.size();
-        }
-
-        public Object getItem(int i) {
-            return items.get(i);
-        }
-
-        public ArrayList<CategoryItem> getItems() {
-            return items;
-        }
-
-        public void setItems(ArrayList<CategoryItem> items) {
-            this.items = items;
-        }
-
-        public long getItemId(int i) {
-            return i;
-        }
-
-        @Override
-        public int getItemViewType(int position) {
-            // If type is 1, the line is a header, otherwise it is an item
-            return sectionHeader.contains(position) ? TYPE_SEPARATOR : TYPE_ITEM;
-        }
-
-        @Override
-        public int getViewTypeCount() {
-            return 2;
-        }
-
-        public View getView(int i, View view, ViewGroup viewGroup) {
-            CheckedTextView checkedView;
-
-            if(view == null) {
-                checkedView = (CheckedTextView) getActivity().getLayoutInflater().inflate(R.layout.layout_categories_item, null);
-
-            } else {
-                checkedView = (CheckedTextView) view;
-            }
-
-            CategoryItem item = (CategoryItem) this.getItem(i);
-            checkedView.setChecked(item.selected);
-            checkedView.setText(item.name);
-            checkedView.setTag(i);
-
-            return checkedView;
-        }
-    }
 
     /**
      * Makes asynchronous calls to the Commons MediaWiki API via anonymous subclasses of
