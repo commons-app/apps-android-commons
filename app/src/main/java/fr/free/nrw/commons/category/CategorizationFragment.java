@@ -39,6 +39,7 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -267,6 +268,10 @@ public class CategorizationFragment extends Fragment {
 
         private Context context;
         private ArrayList<CategoryItem> items;
+
+        private static final int TYPE_ITEM = 0;
+        private static final int TYPE_SEPARATOR = 1;
+        private TreeSet<Integer> sectionHeader = new TreeSet<Integer>();
 
         private CategoriesAdapter(Context context, ArrayList<CategoryItem> items) {
             this.context = context;
