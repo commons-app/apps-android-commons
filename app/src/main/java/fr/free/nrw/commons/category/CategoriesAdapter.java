@@ -2,6 +2,7 @@ package fr.free.nrw.commons.category;
 
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -17,11 +18,13 @@ public class CategoriesAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<CategorizationFragment.CategoryItem> items;
 
+    private LayoutInflater mInflater;
+
     private static final int TYPE_ITEM = 0;
     private static final int TYPE_SEPARATOR = 1;
     private TreeSet<Integer> sectionHeader = new TreeSet<Integer>();
 
-    private CategoriesAdapter(Context context, ArrayList<CategorizationFragment.CategoryItem> items) {
+    public CategoriesAdapter(Context context, ArrayList<CategorizationFragment.CategoryItem> items) {
         this.context = context;
         this.items = items;
     }
