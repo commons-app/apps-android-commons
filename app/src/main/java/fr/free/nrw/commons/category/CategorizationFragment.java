@@ -293,6 +293,16 @@ public class CategorizationFragment extends Fragment {
             return i;
         }
 
+        @Override
+        public int getItemViewType(int position) {
+            return sectionHeader.contains(position) ? TYPE_SEPARATOR : TYPE_ITEM;
+        }
+
+        @Override
+        public int getViewTypeCount() {
+            return 2;
+        }
+
         public View getView(int i, View view, ViewGroup viewGroup) {
             CheckedTextView checkedView;
 
