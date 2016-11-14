@@ -15,8 +15,6 @@ import java.util.TreeSet;
 import fr.free.nrw.commons.R;
 
 public class CategoriesAdapter extends BaseAdapter {
-    private static final int TYPE_ITEM = 0;
-    private static final int TYPE_SEPARATOR = 1;
 
     private Context context;
     private LayoutInflater mInflater;
