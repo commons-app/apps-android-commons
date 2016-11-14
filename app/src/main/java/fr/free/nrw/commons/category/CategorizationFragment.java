@@ -39,6 +39,7 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -263,53 +264,77 @@ public class CategorizationFragment extends Fragment {
         }
     }
 
-    private class CategoriesAdapter extends BaseAdapter {
 
-        private Context context;
-        private ArrayList<CategoryItem> items;
+    /**
+     * Makes asynchronous calls to the Commons MediaWiki API via anonymous subclasses of
+     * 'MethodAUpdater' and 'PrefixUpdater'. Some of their methods are overridden in order to
+     * aggregate the results. A CountDownLatch is used to ensure that MethodA results are shown
+     * above Prefix results.
+     */
+    private void requestSearchResults() {
 
-        private CategoriesAdapter(Context context, ArrayList<CategoryItem> items) {
-            this.context = context;
-            this.items = items;
-        }
+        final CountDownLatch latch = new CountDownLatch(1);
 
-        public int getCount() {
-            return items.size();
-        }
-
-        public Object getItem(int i) {
-            return items.get(i);
-        }
-
-        public ArrayList<CategoryItem> getItems() {
-            return items;
-        }
-
-        public void setItems(ArrayList<CategoryItem> items) {
-            this.items = items;
-        }
-
-        public long getItemId(int i) {
-            return i;
-        }
-
-        public View getView(int i, View view, ViewGroup viewGroup) {
-            CheckedTextView checkedView;
-
-            if(view == null) {
-                checkedView = (CheckedTextView) getActivity().getLayoutInflater().inflate(R.layout.layout_categories_item, null);
-
-            } else {
-                checkedView = (CheckedTextView) view;
+        prefixUpdaterSub = new PrefixUpdater(this) {
+            @Override
+            protected ArrayList<String> doInBackground(Void... voids) {
+                ArrayList<String> result = new ArrayList<String>();
+                try {
+                    result = super.doInBackground();
+                    latch.await();
+                }
+                catch (InterruptedException e) {
+                    Log.w(TAG, e);
+                    //Thread.currentThread().interrupt();
+                }
+                return result;
             }
 
-            CategoryItem item = (CategoryItem) this.getItem(i);
-            checkedView.setChecked(item.selected);
-            checkedView.setText(item.name);
-            checkedView.setTag(i);
+            @Override
+            protected void onPostExecute(ArrayList<String> result) {
+                super.onPostExecute(result);
 
-            return checkedView;
+                results.addAll(result);
+                Log.d(TAG, "Prefix result: " + result);
+
+                String filter = categoriesFilter.getText().toString();
+                ArrayList<String> resultsList = new ArrayList<String>(results);
+                categoriesCache.put(filter, resultsList);
+                Log.d(TAG, "Final results List: " + resultsList);
+
+                categoriesAdapter.notifyDataSetChanged();
+                setCatsAfterAsync(resultsList, filter);
+            }
+        };
+
+        methodAUpdaterSub = new MethodAUpdater(this) {
+            @Override
+            protected void onPostExecute(ArrayList<String> result) {
+                results.clear();
+                super.onPostExecute(result);
+
+                results.addAll(result);
+                Log.d(TAG, "Method A result: " + result);
+                categoriesAdapter.notifyDataSetChanged();
+
+                latch.countDown();
+            }
+        };
+        Utils.executeAsyncTask(prefixUpdaterSub);
+        Utils.executeAsyncTask(methodAUpdaterSub);
+    }
+
+    private void startUpdatingCategoryList() {
+
+        if (prefixUpdaterSub != null) {
+            prefixUpdaterSub.cancel(true);
         }
+
+        if (methodAUpdaterSub != null) {
+            methodAUpdaterSub.cancel(true);
+        }
+
+        requestSearchResults();
     }
 
     public int getCurrentSelectedCount() {
@@ -432,78 +457,6 @@ public class CategorizationFragment extends Fragment {
         startUpdatingCategoryList();
 
         return rootView;
-    }
-
-    /**
-     * Makes asynchronous calls to the Commons MediaWiki API via anonymous subclasses of
-     * 'MethodAUpdater' and 'PrefixUpdater'. Some of their methods are overridden in order to
-     * aggregate the results. A CountDownLatch is used to ensure that MethodA results are shown
-     * above Prefix results.
-     */
-    private void requestSearchResults() {
-
-        final CountDownLatch latch = new CountDownLatch(1);
-
-        prefixUpdaterSub = new PrefixUpdater(this) {
-            @Override
-            protected ArrayList<String> doInBackground(Void... voids) {
-                ArrayList<String> result = new ArrayList<String>();
-                try {
-                    result = super.doInBackground();
-                    latch.await();
-                }
-                catch (InterruptedException e) {
-                    Log.w(TAG, e);
-                    //Thread.currentThread().interrupt();
-                }
-                return result;
-            }
-
-            @Override
-            protected void onPostExecute(ArrayList<String> result) {
-                super.onPostExecute(result);
-
-                results.addAll(result);
-                Log.d(TAG, "Prefix result: " + result);
-
-                String filter = categoriesFilter.getText().toString();
-                ArrayList<String> resultsList = new ArrayList<String>(results);
-                categoriesCache.put(filter, resultsList);
-                Log.d(TAG, "Final results List: " + resultsList);
-
-                categoriesAdapter.notifyDataSetChanged();
-                setCatsAfterAsync(resultsList, filter);
-            }
-        };
-
-        methodAUpdaterSub = new MethodAUpdater(this) {
-            @Override
-            protected void onPostExecute(ArrayList<String> result) {
-                results.clear();
-                super.onPostExecute(result);
-
-                results.addAll(result);
-                Log.d(TAG, "Method A result: " + result);
-                categoriesAdapter.notifyDataSetChanged();
-
-                latch.countDown();
-            }
-        };
-        Utils.executeAsyncTask(prefixUpdaterSub);
-        Utils.executeAsyncTask(methodAUpdaterSub);
-    }
-
-    private void startUpdatingCategoryList() {
-
-        if (prefixUpdaterSub != null) {
-            prefixUpdaterSub.cancel(true);
-        }
-
-        if (methodAUpdaterSub != null) {
-            methodAUpdaterSub.cancel(true);
-        }
-        
-        requestSearchResults();
     }
 
     @Override
