@@ -79,21 +79,6 @@ public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
 
     @Override
     protected ArrayList<String> doInBackground(Void... voids) {
-        //If user hasn't typed anything in yet, get GPS and recent items
-        if(TextUtils.isEmpty(filter)) {
-            ArrayList<String> mergedItems = new ArrayList<String>(catFragment.mergeItems());
-            Log.d(TAG, "Merged items, waiting for filter");
-            ArrayList<String> filteredItems = new ArrayList<String>(filterYears(mergedItems));
-            return filteredItems;
-        }
-
-        //if user types in something that is in cache, return cached category
-        if(catFragment.categoriesCache.containsKey(filter)) {
-            ArrayList<String> cachedItems = new ArrayList<String>(catFragment.categoriesCache.get(filter));
-            Log.d(TAG, "Found cache items, waiting for filter");
-            ArrayList<String> filteredItems = new ArrayList<String>(filterYears(cachedItems));
-            return filteredItems;
-        }
 
         //otherwise if user has typed something in that isn't in cache, search API for matching categories
         MWApi api = CommonsApplication.createMWApi();
