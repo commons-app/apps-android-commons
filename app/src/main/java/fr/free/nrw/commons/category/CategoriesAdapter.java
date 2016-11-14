@@ -21,10 +21,7 @@ public class CategoriesAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater mInflater;
 
-    //FIXME: Might have issue here, headers need to be a String type so you can't just add them to an ArrayList of CategoryItem
     private ArrayList<CategorizationFragment.CategoryItem> items;
-
-    private TreeSet<Integer> sectionHeader = new TreeSet<Integer>();
 
     public CategoriesAdapter(Context context, ArrayList<CategorizationFragment.CategoryItem> items) {
         this.context = context;
@@ -52,17 +49,6 @@ public class CategoriesAdapter extends BaseAdapter {
         return i;
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        // If type is 1, the line is a header, otherwise it is an item
-        return sectionHeader.contains(position) ? TYPE_SEPARATOR : TYPE_ITEM;
-    }
-
-    @Override
-    public int getViewTypeCount() {
-        return 2;
-    }
-
     public View getView(int i, View view, ViewGroup viewGroup) {
         CheckedTextView checkedView;
 
@@ -80,36 +66,4 @@ public class CategoriesAdapter extends BaseAdapter {
 
         return checkedView;
     }
-
-    /*
-    // TODO: Separator getView reference
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder = null;
-        int rowType = getItemViewType(position);
-
-        if (convertView == null) {
-            holder = new ViewHolder();
-            switch (rowType) {
-                case TYPE_ITEM:
-                    convertView = mInflater.inflate(R.layout.snippet_item1, null);
-                    holder.textView = (TextView) convertView.findViewById(R.id.text);
-                    break;
-                case TYPE_SEPARATOR:
-                    convertView = mInflater.inflate(R.layout.snippet_item2, null);
-                    holder.textView = (TextView) convertView.findViewById(R.id.textSeparator);
-                    break;
-            }
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
-        }
-        holder.textView.setText(mData.get(position));
-
-        return convertView;
-    }
-
-    public static class ViewHolder {
-        public TextView textView;
-    }
-    */
 }
