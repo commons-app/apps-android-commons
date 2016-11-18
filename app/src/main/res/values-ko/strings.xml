@@ -43,7 +43,11 @@
   <string name="menu_upload_single">올리기</string>
   <string name="categories_search_text_hint">분류 검색</string>
   <string name="menu_save_categories">저장</string>
-  <plurals name="contributions_subtitle"/>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">아직 업로드가 없습니다</item>
+    <item quantity="one">1 업로드</item>
+    <item quantity="other">%d 업로드</item>
+  </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">한 장 업로드 시작</item>
     <item quantity="other">%d 장 업로드 시작</item>
