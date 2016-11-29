@@ -141,6 +141,9 @@
     <string name="license_name_attribution">Attribution</string>
     <string name="license_name_gfdl">GNU Free Documentation License</string>
 
+    <string name="tutorial_1_text">Wikimedia Commons hosts most of the images that are used in Wikipedia</string>
+    <string name="tutorial_1_subtext">Anyone can use Commons images without paying a copyright fee</string>
+
     <string name="welcome_wikipedia_text">Contribute your images. Help Wikipedia articles come to life!</string>
     <string name="welcome_wikipedia_subtext">Images on Wikipedia come from Wikimedia Commons.</string>
     <string name="welcome_copyright_text">Your images help educate people around the world.</string>
