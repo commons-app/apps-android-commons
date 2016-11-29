@@ -141,10 +141,10 @@
     <string name="license_name_attribution">Attribution</string>
     <string name="license_name_gfdl">GNU Free Documentation License</string>
 
-    <string name="tutorial_1_text">Please upload pictures that are taken or created entirely by yourself. Examples:</string>
-    <string name="tutorial_1_subtext">\u2022 Natural objects (flowers, animals, mountains) \u2022 Useful objects (bicycles, train stations) \u2022 Famous people (your mayor, Olympic athletes you met)</string>
-    <string name="tutorial_2_text">Wikimedia Commons hosts most of the images that are used in Wikipedia.</string>
-    <string name="tutorial_2_subtext">Your images help educate people around the world!</string>
+    <string name="tutorial_1_text">Wikimedia Commons hosts most of the images that are used in Wikipedia.</string>
+    <string name="tutorial_1_subtext">Your images help educate people around the world!</string>
+    <string name="tutorial_2_text">Please upload pictures that are taken or created entirely by yourself. Examples:</string>
+    <string name="tutorial_2_subtext">\u2022 Natural objects (flowers, animals, mountains) \u2022 Useful objects (bicycles, train stations) \u2022 Famous people (your mayor, Olympic athletes you met)</string>
 
     <string name="welcome_wikipedia_text">Contribute your images. Help Wikipedia articles come to life!</string>
     <string name="welcome_wikipedia_subtext">Images on Wikipedia come from Wikimedia Commons.</string>
