@@ -25,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxWidth="240dp"
-                android:text="@string/welcome_copyright_text"
+                android:text="@string/tutorial_2_text"
                 android:layout_gravity="center"
                 android:textStyle="bold"
                 android:textAlignment="center"
@@ -37,10 +37,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxWidth="240dp"
-                android:text="@string/welcome_copyright_subtext"
+                android:text="@string/tutorial_2_subtext"
                 android:layout_gravity="center"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
                 android:paddingTop="16dp"
-                android:gravity="center_horizontal"/>
+                android:gravity="start"/>
     </LinearLayout>
 </LinearLayout>

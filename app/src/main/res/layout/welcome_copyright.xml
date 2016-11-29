@@ -36,6 +36,6 @@
         android:layout_gravity="center"
         android:textAlignment="textStart"
         android:paddingTop="16dp"
-        android:gravity="center_horizontal"
+        android:gravity="start"
         />
 </LinearLayout>
