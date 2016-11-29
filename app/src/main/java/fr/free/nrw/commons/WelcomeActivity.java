@@ -16,7 +16,7 @@ public class WelcomeActivity extends Activity {
             PAGE_FINAL = 2;
     static final int[] pageLayouts = new int[] {
             R.layout.welcome_wikipedia,
-            R.layout.welcome_copyright,
+            R.layout.welcome_do_upload,
             R.layout.welcome_final
     };
 
