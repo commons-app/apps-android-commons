@@ -16,7 +16,7 @@
         />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="272dp"
         android:layout_height="wrap_content"
         android:maxWidth="240dp"
         android:text="@string/tutorial_2_text"
@@ -29,12 +29,12 @@
         />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="293dp"
         android:layout_height="wrap_content"
         android:maxWidth="240dp"
-        android:text="@string/welcome_copyright_subtext"
+        android:text="@string/tutorial_2_subtext"
         android:layout_gravity="center"
-        android:textAlignment="center"
+        android:textAlignment="textStart"
         android:paddingTop="16dp"
         android:gravity="center_horizontal"
         />
