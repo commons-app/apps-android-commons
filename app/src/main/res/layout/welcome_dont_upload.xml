@@ -29,7 +29,7 @@
         />
 
     <TextView
-        android:layout_width="293dp"
+        android:layout_width="278dp"
         android:layout_height="wrap_content"
         android:maxWidth="240dp"
         android:text="@string/tutorial_3_subtext"
