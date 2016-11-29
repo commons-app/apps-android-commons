@@ -14,11 +14,13 @@ public class WelcomeActivity extends Activity {
     static final int PAGE_WIKIPEDIA = 0,
             PAGE_DO_UPLOAD = 1,
             PAGE_DONT_UPLOAD = 2,
-            PAGE_FINAL = 3;
+            PAGE_IMAGE_DETAILS = 3,
+            PAGE_FINAL = 4;
     static final int[] pageLayouts = new int[] {
             R.layout.welcome_wikipedia,
             R.layout.welcome_do_upload,
             R.layout.welcome_dont_upload,
+            R.layout.welcome_image_details,
             R.layout.welcome_final
     };
 
