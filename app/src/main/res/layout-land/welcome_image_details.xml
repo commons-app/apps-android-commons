@@ -11,7 +11,11 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/welcome_copyright"
+        android:src="@drawable/sydney_opera_house"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="24dp"
         android:adjustViewBounds="true"
         android:layout_gravity="center"
         />
