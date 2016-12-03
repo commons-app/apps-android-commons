@@ -5,32 +5,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#0c609c"
-    android:gravity="center_vertical"
-    >
+    android:gravity="center"
+    android:weightSum="1"
+    android:layout_centerHorizontal="true">
 
     <GridLayout
-        android:gravity="center_horizontal"
-        android:layout_width="359dp"
-        android:layout_height="249dp">
+        android:layout_gravity="center"
+        android:layout_width="fill_parent"
+        android:layout_height="240dp"
+        android:layout_weight="0.09">
 
         <ImageView
             android:layout_width="176dp"
             android:layout_height="118dp"
             app:srcCompat="@drawable/mount_zao"
-            android:id="@+id/imageView3"
+            android:id="@+id/mount_zao"
             android:layout_row="4"
             android:layout_column="0" />
 
         <ImageView
             app:srcCompat="@drawable/llamas"
-            android:id="@+id/imageView6"
+            android:id="@+id/llamas"
             android:layout_width="176dp"
             android:layout_height="118dp" />
 
         <ImageView
             android:layout_width="176dp"
             app:srcCompat="@drawable/rainbow_bridge"
-            android:id="@+id/imageView4"
+            android:id="@+id/rainbow_bridge"
             android:layout_row="0"
             android:layout_column="0"
             android:layout_height="118dp" />
@@ -38,7 +40,7 @@
         <ImageView
             android:layout_width="176dp"
             app:srcCompat="@drawable/tulip"
-            android:id="@+id/imageView7"
+            android:id="@+id/tulip"
             android:layout_height="118dp" />
 
     </GridLayout>
