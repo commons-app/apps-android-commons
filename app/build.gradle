@@ -29,7 +29,7 @@ android {
 
     defaultConfig {
         applicationId "fr.free.nrw.commons"
-        minSdkVersion 11
+        minSdkVersion 14
         targetSdkVersion 23
 
         ndk {
