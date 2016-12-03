@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,6 +11,32 @@
     <GridLayout
         android:layout_width="397dp"
         android:layout_height="249dp">
+
+        <ImageView
+            android:layout_width="170dp"
+            android:layout_height="108dp"
+            app:srcCompat="@drawable/rainbow_bridge"
+            android:id="@+id/imageView4" />
+
+        <ImageView
+            android:layout_width="225dp"
+            android:layout_height="118dp"
+            app:srcCompat="@drawable/mount_zao"
+            android:id="@+id/imageView3"
+            android:layout_row="4"
+            android:layout_column="0" />
+
+        <ImageView
+            android:layout_width="177dp"
+            android:layout_height="126dp"
+            app:srcCompat="@drawable/llamas"
+            android:id="@+id/imageView6" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="74dp"
+            app:srcCompat="@drawable/tulip"
+            android:id="@+id/imageView7" />
 
     </GridLayout>
 
