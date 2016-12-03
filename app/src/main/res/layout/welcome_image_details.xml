@@ -13,7 +13,7 @@
         android:src="@drawable/welcome_copyright"
         android:adjustViewBounds="true"
         android:layout_gravity="center"
-        />
+        android:id="@+id/imageView" />
 
     <TextView
         android:layout_width="295dp"
