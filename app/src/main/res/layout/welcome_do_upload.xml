@@ -16,11 +16,10 @@
         >
 
         <ImageView
-            android:layout_width="176dp"
-            android:layout_height="118dp"
             app:srcCompat="@drawable/mount_zao"
             android:id="@+id/mount_zao"
-            />
+            android:layout_width="176dp"
+            android:layout_height="118dp" />
 
         <ImageView
             app:srcCompat="@drawable/llamas"
@@ -30,16 +29,18 @@
             android:layout_toRightOf="@+id/mount_zao"/>
 
         <ImageView
-            android:layout_width="176dp"
             app:srcCompat="@drawable/rainbow_bridge"
             android:id="@+id/rainbow_bridge"
+            android:layout_marginTop="10dp"
+            android:layout_width="176dp"
             android:layout_height="118dp"
-            android:layout_below="@+id/mount_zao"/>
+            android:layout_below="@+id/mount_zao" />
 
         <ImageView
-            android:layout_width="176dp"
             app:srcCompat="@drawable/tulip"
             android:id="@+id/tulip"
+            android:layout_marginTop="10dp"
+            android:layout_width="176dp"
             android:layout_height="118dp"
             android:layout_toRightOf="@+id/rainbow_bridge"
             android:layout_below="@+id/llamas"/>
