@@ -8,13 +8,57 @@
               android:gravity="center"
         >
 
-    <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/welcome_copyright"
-            android:adjustViewBounds="true"
-            android:layout_gravity="center"
+
+    <RelativeLayout
+        android:gravity="center"
+        android:layout_width="300dp"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        >
+
+        <ImageView
+            android:src="@drawable/mount_zao"
+            android:id="@+id/mount_zao"
+            android:layout_width="150dp"
+            android:layout_height="118dp"
+            android:scaleType="fitXY"
             />
+
+        <ImageView
+            android:src="@drawable/llamas"
+            android:id="@+id/llamas"
+            android:layout_width="150dp"
+            android:layout_height="118dp"
+            android:layout_toRightOf="@+id/mount_zao"
+            android:scaleType="fitXY"
+            />
+
+        <ImageView
+            android:src="@drawable/rainbow_bridge"
+            android:id="@+id/rainbow_bridge"
+            android:layout_width="150dp"
+            android:layout_height="118dp"
+            android:layout_below="@+id/mount_zao"
+
+            android:scaleType="fitXY"
+            />
+
+        <ImageView
+            android:src="@drawable/tulip"
+            android:id="@+id/tulip"
+
+            android:layout_width="150dp"
+            android:layout_height="118dp"
+            android:layout_toRightOf="@+id/rainbow_bridge"
+
+
+            android:layout_below="@+id/llamas"
+            android:scaleType="fitXY"
+            />
+
+    </RelativeLayout>
+
 
     <LinearLayout android:orientation="vertical"
                   android:layout_width="wrap_content"
