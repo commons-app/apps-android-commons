@@ -29,6 +29,7 @@
             android:layout_width="160dp"
             android:layout_height="118dp"
             android:layout_toRightOf="@+id/mount_zao"
+            android:layout_marginLeft="10dp"
             android:scaleType="fitXY"
             />
 
@@ -49,6 +50,7 @@
             android:layout_width="160dp"
             android:layout_height="118dp"
             android:layout_toRightOf="@+id/rainbow_bridge"
+            android:layout_marginLeft="10dp"
             android:layout_below="@+id/llamas"
             android:scaleType="fitXY"
             />
