@@ -16,41 +16,45 @@
         >
 
         <ImageView
-            app:srcCompat="@drawable/mount_zao"
+            android:src="@drawable/mount_zao"
             android:id="@+id/mount_zao"
             android:layout_width="160dp"
             android:layout_height="118dp"
-            android:scaleType="fitXY"
-            />
-
-        <ImageView
-            app:srcCompat="@drawable/llamas"
-            android:id="@+id/llamas"
-            android:layout_width="160dp"
-            android:layout_height="118dp"
-            android:layout_toRightOf="@+id/mount_zao"
             android:layout_marginLeft="10dp"
             android:scaleType="fitXY"
             />
 
         <ImageView
-            app:srcCompat="@drawable/rainbow_bridge"
+            android:src="@drawable/llamas"
+            android:id="@+id/llamas"
+            android:layout_width="160dp"
+            android:layout_height="118dp"
+            android:layout_toRightOf="@+id/mount_zao"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:scaleType="fitXY"
+            />
+
+        <ImageView
+            android:src="@drawable/rainbow_bridge"
             android:id="@+id/rainbow_bridge"
             android:layout_marginTop="10dp"
             android:layout_width="160dp"
             android:layout_height="118dp"
             android:layout_below="@+id/mount_zao"
+            android:layout_marginLeft="10dp"
             android:scaleType="fitXY"
             />
 
         <ImageView
-            app:srcCompat="@drawable/tulip"
+            android:src="@drawable/tulip"
             android:id="@+id/tulip"
             android:layout_marginTop="10dp"
             android:layout_width="160dp"
             android:layout_height="118dp"
             android:layout_toRightOf="@+id/rainbow_bridge"
             android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_below="@+id/llamas"
             android:scaleType="fitXY"
             />
