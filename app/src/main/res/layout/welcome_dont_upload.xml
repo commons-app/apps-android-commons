@@ -7,13 +7,32 @@
     android:gravity="center_vertical"
     >
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/welcome_copyright"
-        android:adjustViewBounds="true"
-        android:layout_gravity="center"
-        />
+    <RelativeLayout
+        android:gravity="center"
+        android:layout_width="fill_parent"
+        android:layout_height="240dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        >
+
+        <ImageView
+            android:src="@drawable/mount_zao"
+            android:id="@+id/mount_zao"
+            android:layout_width="150dp"
+            android:layout_height="118dp"
+            android:scaleType="fitXY"
+            />
+
+        <ImageView
+            android:src="@drawable/llamas"
+            android:id="@+id/llamas"
+            android:layout_width="150dp"
+            android:layout_height="118dp"
+            android:layout_toRightOf="@+id/mount_zao"
+            android:scaleType="fitXY"
+            />
+
+    </RelativeLayout>
 
     <TextView
         android:layout_width="295dp"
