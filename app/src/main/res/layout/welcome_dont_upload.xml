@@ -16,19 +16,19 @@
         >
 
         <ImageView
-            android:src="@drawable/mount_zao"
-            android:id="@+id/mount_zao"
+            android:src="@drawable/selfie_x"
+            android:id="@+id/selfie_x"
             android:layout_width="150dp"
-            android:layout_height="118dp"
+            android:layout_height="240dp"
             android:scaleType="fitXY"
             />
 
         <ImageView
-            android:src="@drawable/llamas"
-            android:id="@+id/llamas"
+            android:src="@drawable/proprietary_x"
+            android:id="@+id/proprietary_x"
             android:layout_width="150dp"
             android:layout_height="118dp"
-            android:layout_toRightOf="@+id/mount_zao"
+            android:layout_toRightOf="@+id/selfie_x"
             android:scaleType="fitXY"
             />
 
