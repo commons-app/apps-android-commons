@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0c609c"
+    android:gravity="center"
+    android:weightSum="1"
+    android:layout_centerHorizontal="true">
+
+    <RelativeLayout
+        android:gravity="center"
+        android:layout_width="fill_parent"
+        android:layout_height="240dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        >
+
+        <ImageView
+            android:src="@drawable/mount_zao"
+            android:id="@+id/mount_zao"
+            android:layout_width="150dp"
+            android:layout_height="118dp"
+            android:scaleType="fitXY"
+            />
+
+        <ImageView
+            android:src="@drawable/llamas"
+            android:id="@+id/llamas"
+            android:layout_width="150dp"
+            android:layout_height="118dp"
+            android:layout_toRightOf="@+id/mount_zao"
+            android:scaleType="fitXY"
+            />
+
+        <ImageView
+            android:src="@drawable/rainbow_bridge"
+            android:id="@+id/rainbow_bridge"
+            android:layout_width="150dp"
+            android:layout_height="118dp"
+            android:layout_below="@+id/mount_zao"
+
+            android:scaleType="fitXY"
+            />
+
+        <ImageView
+            android:src="@drawable/tulip"
+            android:id="@+id/tulip"
+
+            android:layout_width="150dp"
+            android:layout_height="118dp"
+            android:layout_toRightOf="@+id/rainbow_bridge"
+
+
+            android:layout_below="@+id/llamas"
+            android:scaleType="fitXY"
+            />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="295dp"
+        android:layout_height="wrap_content"
+        android:maxWidth="240dp"
+        android:text="@string/tutorial_2_text"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:paddingTop="24dp"
+        android:gravity="center_horizontal"
+        android:textColor="@android:color/white"
+        />
+
+    <TextView
+        android:layout_width="293dp"
+        android:layout_height="wrap_content"
+        android:maxWidth="240dp"
+        android:text="@string/tutorial_2_subtext"
+        android:layout_gravity="center"
+        android:textAlignment="textStart"
+        android:paddingTop="16dp"
+        android:gravity="start"
+        />
+</LinearLayout>

@@ -23,7 +23,7 @@ dependencies {
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "25.0.0"
+    buildToolsVersion '25'
 
     useLibrary  'org.apache.http.legacy'
 
