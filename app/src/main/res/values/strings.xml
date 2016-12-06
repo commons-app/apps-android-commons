@@ -141,6 +141,16 @@
     <string name="license_name_attribution">Attribution</string>
     <string name="license_name_gfdl">GNU Free Documentation License</string>
 
+    <string name="tutorial_1_text">Wikimedia Commons hosts most of the images that are used in Wikipedia.</string>
+    <string name="tutorial_1_subtext">Your images help educate people around the world!</string>
+    <string name="tutorial_2_text">Please upload pictures that are taken or created entirely by yourself:</string>
+    <string name="tutorial_2_subtext">\u2022 Natural objects (flowers, animals, mountains) \n\u2022 Useful objects (bicycles, train stations) \n\u2022 Famous people (your mayor, Olympic athletes you met)</string>
+    <string name="tutorial_3_text">Please do NOT upload:</string>
+    <string name="tutorial_3_subtext">\u2022 Selfies or pictures of your friends \n\u2022 Pictures you downloaded from the Internet \n\u2022 Screenshots of proprietary apps</string>
+    <string name="tutorial_4_text">Example upload:</string>
+    <string name="tutorial_4_subtext">\u2022 Title: Sydney Opera House \n\u2022 Description: Sydney Opera House as viewed from across the bay \n\u2022 Categories: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views </string>
+
+
     <string name="welcome_wikipedia_text">Contribute your images. Help Wikipedia articles come to life!</string>
     <string name="welcome_wikipedia_subtext">Images on Wikipedia come from Wikimedia Commons.</string>
     <string name="welcome_copyright_text">Your images help educate people around the world.</string>
