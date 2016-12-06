@@ -8,13 +8,32 @@
     android:gravity="center"
     >
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/welcome_copyright"
-        android:adjustViewBounds="true"
+    <RelativeLayout
         android:layout_gravity="center"
-        />
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        >
+
+        <ImageView
+            android:src="@drawable/selfie_x"
+            android:id="@+id/selfie_x"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            />
+
+        <ImageView
+            android:src="@drawable/proprietary_x"
+            android:id="@+id/proprietary_x"
+            android:layout_marginLeft="10dp"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/selfie_x"
+            />
+
+    </RelativeLayout>
+
 
     <LinearLayout android:orientation="vertical"
         android:layout_width="wrap_content"
