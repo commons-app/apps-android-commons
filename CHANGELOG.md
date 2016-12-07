@@ -1,5 +1,8 @@
 # Wikimedia Commons for Android
 
+##v1.40
+- Added new pages to tutorial
+
 ##v1.39
 - Fix for Korean translations crash
 - Various minor fixes
