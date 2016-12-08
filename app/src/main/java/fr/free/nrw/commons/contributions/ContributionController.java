@@ -74,7 +74,7 @@ public class ContributionController {
             case SELECT_FROM_GALLERY:
                 //Handles image picked from gallery
                 Uri imageData = data.getData();
-                //TODO: Check SHA1 hash of image data here?
+                //TODO: Check SHA1 hash of image data here or where the intent is received at ShareActivity
                 shareIntent.setType(activity.getContentResolver().getType(imageData));
                 shareIntent.putExtra(Intent.EXTRA_STREAM, imageData);
                 shareIntent.putExtra(UploadService.EXTRA_SOURCE, fr.free.nrw.commons.contributions.Contribution.SOURCE_GALLERY);
