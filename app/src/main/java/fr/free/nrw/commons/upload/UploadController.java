@@ -156,6 +156,8 @@ public class UploadController {
             @Override
             protected void onPostExecute(Contribution contribution) {
                 super.onPostExecute(contribution);
+                //Starts the upload. If commented out, user can proceed to next Fragment but upload doesn't happen
+                //TODO: Trail for duplicate task
                 uploadService.queue(UploadService.ACTION_UPLOAD_FILE, contribution);
                 onComplete.onUploadStarted(contribution);
             }
