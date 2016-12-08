@@ -74,6 +74,7 @@ public class UploadController {
         contribution.setTag("mimeType", mimeType);
         contribution.setSource(source);
 
+        //Calls the next overloaded method
         startUpload(contribution, onComplete);
     }
 
@@ -81,6 +82,7 @@ public class UploadController {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
 
+        //Set creator, desc, and license
         if(TextUtils.isEmpty(contribution.getCreator())) {
             contribution.setCreator(app.getCurrentAccount().name);
         }
