@@ -21,6 +21,9 @@ import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -236,6 +239,17 @@ public  class       ShareActivity
         if (mediaUri != null) {
             mediaUriString = mediaUri.toString();
             ImageLoader.getInstance().displayImage(mediaUriString, backgroundImageView);
+
+            try {
+                InputStream inputStream = getContentResolver().openInputStream(mediaUri);
+                Log.d(TAG, "Input stream created from " + mediaUriString);
+            } catch (IOException e) {
+                Log.d(TAG, "IO Exception: ", e);
+            }
+
+
+
+            //File imageFile = new File(mediaUri.getPath());
         }
 
         if(savedInstanceState != null)  {
