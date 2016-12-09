@@ -45,20 +45,12 @@ public class Utils {
 
     private static final String TAG = Utils.class.getName();
 
-    public static boolean testSHA1(String sha1, File file) {
+    public static boolean testSHA1(String sha1, InputStream is) {
         MessageDigest digest;
         try {
             digest = MessageDigest.getInstance("SHA1");
         } catch (NoSuchAlgorithmException e) {
             Log.e(TAG, "Exception while getting Digest", e);
-            return false;
-        }
-
-        InputStream is;
-        try {
-            is = new FileInputStream(file);
-        } catch (FileNotFoundException e) {
-            Log.e(TAG, "Exception while getting FileInputStream", e);
             return false;
         }
 
