@@ -220,6 +220,7 @@ public  class       ShareActivity
         app = (CommonsApplication)this.getApplicationContext();
         backgroundImageView = (ImageView)findViewById(R.id.backgroundImage);
 
+        //Receive intent from ContributionController.java when user selects picture to upload
         Intent intent = getIntent();
 
         if(intent.getAction().equals(Intent.ACTION_SEND)) {
