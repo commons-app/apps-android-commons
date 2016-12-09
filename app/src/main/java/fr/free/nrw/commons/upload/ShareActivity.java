@@ -242,11 +242,13 @@ public  class       ShareActivity
             mediaUriString = mediaUri.toString();
             ImageLoader.getInstance().displayImage(mediaUriString, backgroundImageView);
 
-            //Test SHA1 of image
+            //Test SHA1 of image to see if it matches existing SHA1
             try {
                 InputStream inputStream = getContentResolver().openInputStream(mediaUri);
                 Log.d(TAG, "Input stream created from " + mediaUriString);
 
+                //FIXME: Replace hardcoded string with call to Commons API instead (use TitleCategories.java as template)
+                // https://commons.wikimedia.org/w/api.php?action=query&list=allimages&aisha1=801957214aba50cb63bb6eb1b0effa50188900ba
                 boolean sha1Bool = Utils.testSHA1("801957214aba50cb63bb6eb1b0effa50188900ba", inputStream);
                 Log.d(TAG, "SHA1Bool returns " + sha1Bool);
 
