@@ -62,4 +62,10 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
         Log.d(TAG, "File already exists in Commons:" + fileExists);
         return fileExists;
     }
+
+    @Override
+    protected void onPostExecute(Boolean fileExists) {
+        super.onPostExecute(fileExists);
+
+    }
 }
