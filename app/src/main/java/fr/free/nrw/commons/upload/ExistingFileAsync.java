@@ -50,18 +50,17 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
             return false;
         }
 
-        ArrayList<ApiResult> resultNodes = result.getNodes("/api/query/allimages/");
+        ArrayList<ApiResult> resultNodes = result.getNodes("/api/query/allimages/img");
 
         Log.d(TAG, "Result nodes: " + resultNodes);
 
         boolean fileExists;
-        if (resultNodes!=null) {
+        if (!resultNodes.isEmpty()) {
             fileExists = true;
         } else {
             fileExists = false;
         }
-        
-        //FIXME: This always returns false even when file (and nodes) exists, why?
+
         Log.d(TAG, "File already exists in Commons:" + fileExists);
 
         return fileExists;
