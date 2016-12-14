@@ -15,7 +15,7 @@ import fr.free.nrw.commons.CommonsApplication;
 /**
  * Sends asynchronous queries to the Commons MediaWiki API to check that file doesn't already exist
  */
-public class ExistingFileAsync extends AsyncTask<Void, Void, ArrayList<String>> {
+public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
 
     private static final String TAG = fr.free.nrw.commons.upload.ExistingFileAsync.class.getName();
     private String fileSHA1;
@@ -31,25 +31,19 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, ArrayList<String>> 
     }
 
     @Override
-    protected ArrayList<String> doInBackground(Void... voids) {
+    protected Boolean doInBackground(Void... voids) {
 
         MWApi api = CommonsApplication.createMWApi();
         ApiResult result;
 
-        ArrayList<String> items = new ArrayList<>();
-
         // https://commons.wikimedia.org/w/api.php?action=query&list=allimages&aisha1=801957214aba50cb63bb6eb1b0effa50188900ba
-        
         try {
             result = api.action("query")
                     .param("format", "xml")
-                    .param("list", "search")
-                    .param("srwhat", "text")
-                    .param("srnamespace", "14")
-                    .param("srlimit", SEARCH_CATS_LIMIT)
-                    .param("srsearch", title)
+                    .param("list", "allimages")
+                    .param("aisha1", fileSHA1)
                     .get();
-            Log.d(TAG, "Searching for cats for title: " + result.toString());
+            Log.d(TAG, "Searching Commons API for existing file: " + result.toString());
         } catch (IOException e) {
             Log.e(TAG, "IO Exception: ", e);
             //Return empty arraylist
