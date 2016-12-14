@@ -246,11 +246,10 @@ public  class       ShareActivity
             try {
                 InputStream inputStream = getContentResolver().openInputStream(mediaUri);
                 Log.d(TAG, "Input stream created from " + mediaUriString);
+                String fileSHA1 = Utils.getSHA1(inputStream);
 
                 //FIXME: Replace hardcoded string with call to Commons API instead (use TitleCategories.java as template)
                 // https://commons.wikimedia.org/w/api.php?action=query&list=allimages&aisha1=801957214aba50cb63bb6eb1b0effa50188900ba
-
-                String fileSHA1 = Utils.getSHA1(inputStream);
                 String debugSHA1 = "801957214aba50cb63bb6eb1b0effa50188900ba";
 
                 boolean fileSHA1Found = fileSHA1.equals(debugSHA1);
