@@ -35,10 +35,11 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, ArrayList<String>> 
 
         MWApi api = CommonsApplication.createMWApi();
         ApiResult result;
-        
+
         ArrayList<String> items = new ArrayList<>();
 
-        //URL https://commons.wikimedia.org/w/api.php?action=query&format=xml&list=search&srwhat=text&srenablerewrites=1&srnamespace=14&srlimit=10&srsearch=
+        // https://commons.wikimedia.org/w/api.php?action=query&list=allimages&aisha1=801957214aba50cb63bb6eb1b0effa50188900ba
+        
         try {
             result = api.action("query")
                     .param("format", "xml")
