@@ -45,6 +45,43 @@ public class Utils {
 
     private static final String TAG = Utils.class.getName();
 
+    public static String getSHA1(InputStream is) {
+
+        MessageDigest digest;
+        try {
+            digest = MessageDigest.getInstance("SHA1");
+        } catch (NoSuchAlgorithmException e) {
+            Log.e(TAG, "Exception while getting Digest", e);
+            return "";
+        }
+
+        byte[] buffer = new byte[8192];
+        int read;
+        try {
+            while ((read = is.read(buffer)) > 0) {
+                digest.update(buffer, 0, read);
+            }
+            byte[] md5sum = digest.digest();
+            BigInteger bigInt = new BigInteger(1, md5sum);
+            String output = bigInt.toString(16);
+            // Fill to 40 chars
+            output = String.format("%40s", output).replace(' ', '0');
+            Log.i(TAG, "Generated: " + output);
+
+            return output;
+        } catch (IOException e) {
+            Log.e(TAG, "IO Exception", e);
+            return "";
+        }  finally {
+            try {
+                is.close();
+            } catch (IOException e) {
+                Log.e(TAG, "Exception on closing MD5 input stream", e);
+            }
+        }
+
+    }
+
     public static boolean testSHA1(String sha1, InputStream is) {
         MessageDigest digest;
         try {

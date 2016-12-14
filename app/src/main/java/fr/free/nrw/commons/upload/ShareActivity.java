@@ -249,8 +249,12 @@ public  class       ShareActivity
 
                 //FIXME: Replace hardcoded string with call to Commons API instead (use TitleCategories.java as template)
                 // https://commons.wikimedia.org/w/api.php?action=query&list=allimages&aisha1=801957214aba50cb63bb6eb1b0effa50188900ba
-                boolean sha1Bool = Utils.testSHA1("801957214aba50cb63bb6eb1b0effa50188900ba", inputStream);
-                Log.d(TAG, "SHA1Bool returns " + sha1Bool);
+
+                String fileSHA1 = Utils.getSHA1(inputStream);
+                String debugSHA1 = "801957214aba50cb63bb6eb1b0effa50188900ba";
+
+                boolean fileSHA1Found = fileSHA1.equals(debugSHA1);
+                Log.d(TAG, "SHA1Bool returns " + fileSHA1Found);
 
             } catch (IOException e) {
                 Log.d(TAG, "IO Exception: ", e);
