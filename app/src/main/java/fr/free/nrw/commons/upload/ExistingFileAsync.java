@@ -36,7 +36,7 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
         MWApi api = CommonsApplication.createMWApi();
         ApiResult result;
 
-        // https://commons.wikimedia.org/w/api.php?action=query&list=allimages&aisha1=801957214aba50cb63bb6eb1b0effa50188900ba
+        // https://commons.wikimedia.org/w/api.php?action=query&list=allimages&format=xml&aisha1=801957214aba50cb63bb6eb1b0effa50188900ba
         try {
             result = api.action("query")
                     .param("format", "xml")
@@ -47,7 +47,7 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
         } catch (IOException e) {
             Log.e(TAG, "IO Exception: ", e);
             //Return empty arraylist
-            return items;
+            return false;
         }
 
         ArrayList<ApiResult> categoryNodes = result.getNodes("/api/query/search/p/@title");
