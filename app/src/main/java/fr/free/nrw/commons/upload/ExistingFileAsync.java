@@ -50,16 +50,11 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
             return false;
         }
 
-        ArrayList<ApiResult> categoryNodes = result.getNodes("/api/query/search/p/@title");
-        for(ApiResult categoryNode: categoryNodes) {
-            String cat = categoryNode.getDocument().getTextContent();
-            String catString = cat.replace("Category:", "");
-            items.add(catString);
-        }
+        //ArrayList<ApiResult> categoryNodes = result.getNodes("/api/query/search/p/@title");
+        ArrayList<ApiResult> resultNodes = result.getNodes("/api/query/allimages/");
+        boolean fileExists = !resultNodes.isEmpty();
+        Log.d(TAG, "File already exists in Commons:" + fileExists);
 
-        Log.d(TAG, "Title cat query results: " + items);
-
-        return items;
+        return fileExists;
     }
-
 }
