@@ -66,6 +66,6 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
     @Override
     protected void onPostExecute(Boolean fileExists) {
         super.onPostExecute(fileExists);
-
+        //TODO: Add Dialog here to tell user file exists, do you want to continue? Yes/No
     }
 }
