@@ -250,6 +250,11 @@ public  class       ShareActivity
 
                 //FIXME: Replace hardcoded string with call to Commons API instead (use TitleCategories.java as template)
                 // https://commons.wikimedia.org/w/api.php?action=query&list=allimages&aisha1=801957214aba50cb63bb6eb1b0effa50188900ba
+                ExistingFileAsync fileAsyncTask = new ExistingFileAsync(fileSHA1);
+                fileAsyncTask.execute(url1, url2, url3);
+
+
+
                 String debugSHA1 = "801957214aba50cb63bb6eb1b0effa50188900ba";
 
                 boolean fileSHA1Found = fileSHA1.equals(debugSHA1);

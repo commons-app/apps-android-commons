@@ -19,11 +19,11 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, ArrayList<String>> 
 
     private final static int SEARCH_CATS_LIMIT = 25;
     private static final String TAG = fr.free.nrw.commons.upload.ExistingFileAsync.class.getName();
-    private String title;
+    private String fileSHA1;
 
-    public ExistingFileAsync(String title) {
+    public ExistingFileAsync(String fileSHA1) {
         super();
-        this.title = title;
+        this.fileSHA1 = fileSHA1;
     }
 
     @Override
