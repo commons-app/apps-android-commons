@@ -79,43 +79,6 @@ public class Utils {
                 Log.e(TAG, "Exception on closing MD5 input stream", e);
             }
         }
-
-    }
-
-    public static boolean testSHA1(String sha1, InputStream is) {
-        MessageDigest digest;
-        try {
-            digest = MessageDigest.getInstance("SHA1");
-        } catch (NoSuchAlgorithmException e) {
-            Log.e(TAG, "Exception while getting Digest", e);
-            return false;
-        }
-
-        byte[] buffer = new byte[8192];
-        int read;
-        try {
-            while ((read = is.read(buffer)) > 0) {
-                digest.update(buffer, 0, read);
-            }
-            byte[] md5sum = digest.digest();
-            BigInteger bigInt = new BigInteger(1, md5sum);
-            String output = bigInt.toString(16);
-            // Fill to 40 chars
-            output = String.format("%40s", output).replace(' ', '0');
-
-            Log.i(TAG, "Test: " + sha1);
-            Log.i(TAG, "Generated: " + output);
-
-            return (sha1.equals(output));
-        } catch (IOException e) {
-            throw new RuntimeException("Unable to process file for MD5", e);
-        } finally {
-            try {
-                is.close();
-            } catch (IOException e) {
-                Log.e(TAG, "Exception on closing MD5 input stream", e);
-            }
-        }
     }
 
     public static Date parseMWDate(String mwDate) {

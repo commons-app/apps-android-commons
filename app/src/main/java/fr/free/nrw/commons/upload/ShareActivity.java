@@ -259,10 +259,7 @@ public  class       ShareActivity
             } catch (IOException e) {
                 Log.d(TAG, "IO Exception: ", e);
             }
-
-
-
-            //File imageFile = new File(mediaUri.getPath());
+            
         }
 
         if(savedInstanceState != null)  {
