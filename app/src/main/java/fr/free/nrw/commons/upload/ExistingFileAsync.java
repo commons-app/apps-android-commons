@@ -33,7 +33,6 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
 
     @Override
     protected Boolean doInBackground(Void... voids) {
-
         MWApi api = CommonsApplication.createMWApi();
         ApiResult result;
 
@@ -51,7 +50,6 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
         }
 
         ArrayList<ApiResult> resultNodes = result.getNodes("/api/query/allimages/img");
-
         Log.d(TAG, "Result nodes: " + resultNodes);
 
         boolean fileExists;
@@ -62,7 +60,6 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
         }
 
         Log.d(TAG, "File already exists in Commons:" + fileExists);
-
         return fileExists;
     }
 }
