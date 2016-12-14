@@ -259,7 +259,7 @@ public  class       ShareActivity
             } catch (IOException e) {
                 Log.d(TAG, "IO Exception: ", e);
             }
-            
+
         }
 
         if(savedInstanceState != null)  {

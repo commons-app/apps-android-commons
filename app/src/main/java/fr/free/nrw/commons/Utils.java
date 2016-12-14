@@ -66,7 +66,7 @@ public class Utils {
             String output = bigInt.toString(16);
             // Fill to 40 chars
             output = String.format("%40s", output).replace(' ', '0');
-            Log.i(TAG, "Generated: " + output);
+            Log.i(TAG, "File SHA1: " + output);
 
             return output;
         } catch (IOException e) {
