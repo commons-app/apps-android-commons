@@ -247,6 +247,7 @@ public  class       ShareActivity
                 InputStream inputStream = getContentResolver().openInputStream(mediaUri);
                 Log.d(TAG, "Input stream created from " + mediaUriString);
                 String fileSHA1 = Utils.getSHA1(inputStream);
+                Log.d(TAG, "File SHA1 is: " + fileSHA1);
 
                 //FIXME: Replace hardcoded string with call to Commons API instead (use TitleCategories.java as template)
 

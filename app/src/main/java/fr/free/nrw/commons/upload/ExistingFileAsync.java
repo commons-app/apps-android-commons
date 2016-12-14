@@ -51,7 +51,7 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
         }
 
         ArrayList<ApiResult> resultNodes = result.getNodes("/api/query/allimages/");
-        boolean fileExists = !resultNodes.isEmpty();
+        boolean fileExists = resultNodes!=null;
         Log.d(TAG, "File already exists in Commons:" + fileExists);
 
         return fileExists;
