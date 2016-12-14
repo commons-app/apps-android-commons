@@ -18,7 +18,7 @@ import fr.free.nrw.commons.CommonsApplication;
 public class ExistingFileAsync extends AsyncTask<Void, Void, ArrayList<String>> {
 
     private final static int SEARCH_CATS_LIMIT = 25;
-    private static final String TAG = fr.free.nrw.commons.category.TitleCategories.class.getName();
+    private static final String TAG = fr.free.nrw.commons.upload.ExistingFileAsync.class.getName();
     private String title;
 
     public ExistingFileAsync(String title) {
