@@ -254,7 +254,7 @@ public  class       ShareActivity
                 String debugSHA1 = "801957214aba50cb63bb6eb1b0effa50188900ba";
 
                 boolean fileSHA1Found = fileSHA1.equals(debugSHA1);
-                Log.d(TAG, "SHA1Bool returns " + fileSHA1Found);
+                Log.d(TAG, "File found in Commons:  " + fileSHA1Found);
 
             } catch (IOException e) {
                 Log.d(TAG, "IO Exception: ", e);
