@@ -17,7 +17,6 @@ import fr.free.nrw.commons.CommonsApplication;
  */
 public class ExistingFileAsync extends AsyncTask<Void, Void, ArrayList<String>> {
 
-    private final static int SEARCH_CATS_LIMIT = 25;
     private static final String TAG = fr.free.nrw.commons.upload.ExistingFileAsync.class.getName();
     private String fileSHA1;
 
@@ -36,6 +35,7 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, ArrayList<String>> 
 
         MWApi api = CommonsApplication.createMWApi();
         ApiResult result;
+        
         ArrayList<String> items = new ArrayList<>();
 
         //URL https://commons.wikimedia.org/w/api.php?action=query&format=xml&list=search&srwhat=text&srenablerewrites=1&srnamespace=14&srlimit=10&srsearch=
