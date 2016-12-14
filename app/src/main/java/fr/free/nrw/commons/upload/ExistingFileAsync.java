@@ -14,6 +14,7 @@ import fr.free.nrw.commons.CommonsApplication;
 
 /**
  * Sends asynchronous queries to the Commons MediaWiki API to check that file doesn't already exist
+ * Returns true if file exists, false if it doesn't
  */
 public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
 
@@ -46,11 +47,9 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
             Log.d(TAG, "Searching Commons API for existing file: " + result.toString());
         } catch (IOException e) {
             Log.e(TAG, "IO Exception: ", e);
-            //Return empty arraylist
             return false;
         }
 
-        //ArrayList<ApiResult> categoryNodes = result.getNodes("/api/query/search/p/@title");
         ArrayList<ApiResult> resultNodes = result.getNodes("/api/query/allimages/");
         boolean fileExists = !resultNodes.isEmpty();
         Log.d(TAG, "File already exists in Commons:" + fileExists);
