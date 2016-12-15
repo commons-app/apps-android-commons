@@ -97,7 +97,7 @@
 
     <string name="menu_download">Download</string>
     <string name="preference_license">License</string>
-    <string name="use_previous">Use previous title/desc</string>
+    <string name="use_previous">Use previous title/description</string>
 
     <string name="allow_gps">Automatically get current location</string>
     <string name="allow_gps_summary">Retrieve current location to offer category suggestions if image is not geotagged</string>
