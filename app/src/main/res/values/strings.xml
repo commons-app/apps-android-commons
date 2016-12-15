@@ -79,7 +79,7 @@
 
     <string name="menu_about">About</string>
     <string name="about_license">Open Source software released under the &lt;a href="https://github.com/wikimedia/apps-android-commons/blob/master/COPYING">Apache License v2&lt;/a>. Wikimedia Commons and its logo are trademarks of the Wikimedia Foundation and are used with the permission of the Wikimedia Foundation. We are not endorsed by or affiliated with the Wikimedia Foundation.</string>
-    <string name="about_improve">&lt;a href="https://github.com/commons-app/apps-android-commons">Source&lt;/a> and &lt;a href="https://commons-app.github.io/">website&lt;/a> on GitHub&lt;/a>. Create a new &lt;a href="https://github.com/commons-app/apps-android-commons/issues">GitHub issue&lt;/a> for bug reports/suggestions.</string>
+    <string name="about_improve">&lt;a href="https://github.com/commons-app/apps-android-commons">Source&lt;/a> and &lt;a href="https://commons-app.github.io/">website&lt;/a> on GitHub&lt;/a>. Create a new &lt;a href="https://github.com/commons-app/apps-android-commons/issues">GitHub issue&lt;/a> for bug reports and suggestions.</string>
     <string name="about_privacy_policy">&lt;a href="https://wikimediafoundation.org/wiki/Privacy_policy">Privacy policy&lt;/a></string>
     <string name="title_activity_about">About</string>
 
