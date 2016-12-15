@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.upload;
 
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,7 +19,7 @@ import fr.free.nrw.commons.contributions.ContributionsActivity;
 
 /**
  * Sends asynchronous queries to the Commons MediaWiki API to check that file doesn't already exist
- * Returns true if file exists, false if it doesn't
+ * Displays a warning to the user if the file already exists on Commons
  */
 public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
 
@@ -75,12 +74,11 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
     @Override
     protected void onPostExecute(Boolean fileExists) {
         super.onPostExecute(fileExists);
-        //TODO: Add Dialog here to tell user file exists, do you want to continue? Yes/No
 
+        // If file exists, display warning to user.
+        // Use soft warning for now (user able to choose to proceed) until have determined that implementation works without bugs
         if (fileExists) {
-
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-
             builder.setMessage("This file already exists in Commons. Are you sure you want to proceed?")
                     .setTitle("Warning");
             builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
@@ -89,7 +87,6 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
                     Intent intent = new Intent(context, ContributionsActivity.class);
                     context.startActivity(intent);
                 }
-
             });
             builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
