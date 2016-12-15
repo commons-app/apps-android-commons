@@ -44,8 +44,7 @@
     <string name="login_failed_network">Unable to login - network failure</string>
     <string name="login_failed_username">Unable to login - please check your username</string>
     <string name="login_failed_password">Unable to login - please check your password</string>
-    <string name="login_failed_throttled">Too many unsuccessful attempts. Please try again in a few minutes
-    </string>
+    <string name="login_failed_throttled">Too many unsuccessful attempts. Please try again in a few minutes.</string>
     <string name="login_failed_blocked">Sorry, this user has been blocked on Commons</string>
     <string name="login_failed_generic">Login failed</string>
 
