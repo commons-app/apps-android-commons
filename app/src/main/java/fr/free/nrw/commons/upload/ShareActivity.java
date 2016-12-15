@@ -21,12 +21,17 @@ import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.EventLog;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.auth.WikiAccountAuthenticator;
 import fr.free.nrw.commons.category.CategorizationFragment;
@@ -117,7 +122,6 @@ public  class       ShareActivity
             Log.d(TAG, "Cache the categories found");
         }
 
-        //TODO: Pass in coords here? Need to be in format 37.51136|-77.602615 , which decimalCoords appears to be
         uploadController.startUpload(title, mediaUri, description, mimeType, source, decimalCoords, new UploadController.ContributionUploadProgress() {
             public void onUploadStarted(Contribution contribution) {
                 ShareActivity.this.contribution = contribution;
@@ -220,6 +224,7 @@ public  class       ShareActivity
         app = (CommonsApplication)this.getApplicationContext();
         backgroundImageView = (ImageView)findViewById(R.id.backgroundImage);
 
+        //Receive intent from ContributionController.java when user selects picture to upload
         Intent intent = getIntent();
 
         if(intent.getAction().equals(Intent.ACTION_SEND)) {
@@ -235,6 +240,20 @@ public  class       ShareActivity
         if (mediaUri != null) {
             mediaUriString = mediaUri.toString();
             ImageLoader.getInstance().displayImage(mediaUriString, backgroundImageView);
+
+            //Test SHA1 of image to see if it matches SHA1 of a file on Commons
+            try {
+                InputStream inputStream = getContentResolver().openInputStream(mediaUri);
+                Log.d(TAG, "Input stream created from " + mediaUriString);
+                String fileSHA1 = Utils.getSHA1(inputStream);
+                Log.d(TAG, "File SHA1 is: " + fileSHA1);
+
+                ExistingFileAsync fileAsyncTask = new ExistingFileAsync(fileSHA1, this);
+                fileAsyncTask.execute();
+
+            } catch (IOException e) {
+                Log.d(TAG, "IO Exception: ", e);
+            }
         }
 
         if(savedInstanceState != null)  {
