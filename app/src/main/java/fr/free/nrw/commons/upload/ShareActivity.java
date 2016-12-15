@@ -121,8 +121,7 @@ public  class       ShareActivity
             app.cacheData.cacheCategory();
             Log.d(TAG, "Cache the categories found");
         }
-
-        //TODO: Check for SHA1 hash of selected file
+        
         uploadController.startUpload(title, mediaUri, description, mimeType, source, decimalCoords, new UploadController.ContributionUploadProgress() {
             public void onUploadStarted(Contribution contribution) {
                 ShareActivity.this.contribution = contribution;
@@ -242,14 +241,12 @@ public  class       ShareActivity
             mediaUriString = mediaUri.toString();
             ImageLoader.getInstance().displayImage(mediaUriString, backgroundImageView);
 
-            //Test SHA1 of image to see if it matches existing SHA1
+            //Test SHA1 of image to see if it matches SHA1 of a file on Commons
             try {
                 InputStream inputStream = getContentResolver().openInputStream(mediaUri);
                 Log.d(TAG, "Input stream created from " + mediaUriString);
                 String fileSHA1 = Utils.getSHA1(inputStream);
                 Log.d(TAG, "File SHA1 is: " + fileSHA1);
-
-                //FIXME: Replace hardcoded string with call to Commons API instead (use TitleCategories.java as template)
 
                 ExistingFileAsync fileAsyncTask = new ExistingFileAsync(fileSHA1, this);
                 fileAsyncTask.execute();
@@ -257,7 +254,6 @@ public  class       ShareActivity
             } catch (IOException e) {
                 Log.d(TAG, "IO Exception: ", e);
             }
-
         }
 
         if(savedInstanceState != null)  {
