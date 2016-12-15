@@ -77,25 +77,28 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
         super.onPostExecute(fileExists);
         //TODO: Add Dialog here to tell user file exists, do you want to continue? Yes/No
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        if (fileExists) {
 
-        builder.setMessage("This file already exists in Commons. Are you sure you want to proceed?")
-                .setTitle("Warning");
-        builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                //Go back to ContributionsActivity
-                Intent intent = new Intent(context, ContributionsActivity.class);
-                context.startActivity(intent);
-            }
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
-        });
-        builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                //No need to do anything, user remains on upload screen
-            }
-        });
+            builder.setMessage("This file already exists in Commons. Are you sure you want to proceed?")
+                    .setTitle("Warning");
+            builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    //Go back to ContributionsActivity
+                    Intent intent = new Intent(context, ContributionsActivity.class);
+                    context.startActivity(intent);
+                }
 
-        AlertDialog dialog = builder.create();
-        dialog.show();
+            });
+            builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    //No need to do anything, user remains on upload screen
+                }
+            });
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
     }
 }
