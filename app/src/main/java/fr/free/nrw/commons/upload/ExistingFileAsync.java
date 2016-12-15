@@ -27,7 +27,7 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
     private String fileSHA1;
     private Context context;
 
-    private AlertDialog alertDialog;
+    private AlertDialog.Builder alertDialog;
 
     public ExistingFileAsync(String fileSHA1, Context context) {
         super();
@@ -38,7 +38,7 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        alertDialog = new AlertDialog.Builder(ExistingFileAsync.this);
+        alertDialog = new AlertDialog.Builder(context);
     }
 
     @Override
@@ -78,26 +78,14 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
         super.onPostExecute(fileExists);
         //TODO: Add Dialog here to tell user file exists, do you want to continue? Yes/No
 
-        alertDialog.setTitle("The Process");
-        alertDialog.setIcon(R.drawable.success);
-        alertDialog.setCanceledOnTouchOutside(false);
-        alertDialog.setMessage("All done!");
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent A = new Intent(DownloadActivity.this, Menu_activity.class);
-                        startActivity(A);
-                        finish();
-                    }
-                });
-        alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                Intent A = new Intent(DownloadActivity.this, Menu_activity.class);
-                startActivity(A);
-                finish();
+        alertDialog.setMessage("test");
+        alertDialog.setCancelable(false);
+        alertDialog.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
             }
         });
-        alertDialog.show();
+        AlertDialog alertLogin = alertDialog.create();
+        alertLogin.show();
     }
 }
