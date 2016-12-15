@@ -3,6 +3,7 @@ package fr.free.nrw.commons.upload;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import android.support.v7.app.AlertDialog;
 
 import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.contributions.ContributionsActivity;
 
 /**
  * Sends asynchronous queries to the Commons MediaWiki API to check that file doesn't already exist
@@ -27,8 +29,6 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
     private String fileSHA1;
     private Context context;
 
-    private AlertDialog.Builder alertDialog;
-
     public ExistingFileAsync(String fileSHA1, Context context) {
         super();
         this.fileSHA1 = fileSHA1;
@@ -38,7 +38,6 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        alertDialog = new AlertDialog.Builder(context);
     }
 
     @Override
@@ -78,14 +77,25 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
         super.onPostExecute(fileExists);
         //TODO: Add Dialog here to tell user file exists, do you want to continue? Yes/No
 
-        alertDialog.setMessage("test");
-        alertDialog.setCancelable(false);
-        alertDialog.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+        builder.setMessage("This file already exists in Commons. Are you sure you want to proceed?")
+                .setTitle("Warning");
+        builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
+                //Go back to ContributionsActivity
+                Intent intent = new Intent(context, ContributionsActivity.class);
+                context.startActivity(intent);
+            }
+
+        });
+        builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                //No need to do anything, user remains on upload screen
             }
         });
-        AlertDialog alertLogin = alertDialog.create();
-        alertLogin.show();
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }
