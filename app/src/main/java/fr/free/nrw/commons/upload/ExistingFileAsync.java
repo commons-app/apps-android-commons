@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import android.support.v7.app.AlertDialog;
 
 import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 
 /**
@@ -79,16 +80,16 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
         // Use soft warning for now (user able to choose to proceed) until have determined that implementation works without bugs
         if (fileExists) {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setMessage("This file already exists in Commons. Are you sure you want to proceed?")
-                    .setTitle("Warning");
-            builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
+            builder.setMessage(R.string.file_exists)
+                    .setTitle(R.string.warning);
+            builder.setPositiveButton(R.string.no, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     //Go back to ContributionsActivity
                     Intent intent = new Intent(context, ContributionsActivity.class);
                     context.startActivity(intent);
                 }
             });
-            builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+            builder.setNegativeButton(R.string.yes, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     //No need to do anything, user remains on upload screen
                 }
