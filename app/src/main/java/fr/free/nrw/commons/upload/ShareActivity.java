@@ -121,7 +121,7 @@ public  class       ShareActivity
             app.cacheData.cacheCategory();
             Log.d(TAG, "Cache the categories found");
         }
-        
+
         uploadController.startUpload(title, mediaUri, description, mimeType, source, decimalCoords, new UploadController.ContributionUploadProgress() {
             public void onUploadStarted(Contribution contribution) {
                 ShareActivity.this.contribution = contribution;

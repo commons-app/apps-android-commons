@@ -45,6 +45,7 @@ public class Utils {
 
     private static final String TAG = Utils.class.getName();
 
+    // Get SHA1 of file from input stream
     public static String getSHA1(InputStream is) {
 
         MessageDigest digest;
