@@ -251,7 +251,7 @@ public  class       ShareActivity
 
                 //FIXME: Replace hardcoded string with call to Commons API instead (use TitleCategories.java as template)
 
-                ExistingFileAsync fileAsyncTask = new ExistingFileAsync(fileSHA1);
+                ExistingFileAsync fileAsyncTask = new ExistingFileAsync(fileSHA1, this);
                 fileAsyncTask.execute();
 
             } catch (IOException e) {

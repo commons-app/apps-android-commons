@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.upload;
 
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -9,6 +11,8 @@ import org.mediawiki.api.MWApi;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
+import android.support.v7.app.AlertDialog;
 
 import fr.free.nrw.commons.CommonsApplication;
 
@@ -19,16 +23,22 @@ import fr.free.nrw.commons.CommonsApplication;
 public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
 
     private static final String TAG = fr.free.nrw.commons.upload.ExistingFileAsync.class.getName();
-    private String fileSHA1;
 
-    public ExistingFileAsync(String fileSHA1) {
+    private String fileSHA1;
+    private Context context;
+
+    private AlertDialog alertDialog;
+
+    public ExistingFileAsync(String fileSHA1, Context context) {
         super();
         this.fileSHA1 = fileSHA1;
+        this.context = context;
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        alertDialog = new AlertDialog.Builder(ExistingFileAsync.this);
     }
 
     @Override
@@ -67,5 +77,27 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
     protected void onPostExecute(Boolean fileExists) {
         super.onPostExecute(fileExists);
         //TODO: Add Dialog here to tell user file exists, do you want to continue? Yes/No
+
+        alertDialog.setTitle("The Process");
+        alertDialog.setIcon(R.drawable.success);
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.setMessage("All done!");
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent A = new Intent(DownloadActivity.this, Menu_activity.class);
+                        startActivity(A);
+                        finish();
+                    }
+                });
+        alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                Intent A = new Intent(DownloadActivity.this, Menu_activity.class);
+                startActivity(A);
+                finish();
+            }
+        });
+        alertDialog.show();
     }
 }
