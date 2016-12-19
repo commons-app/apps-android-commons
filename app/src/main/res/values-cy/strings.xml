@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Comin Wikimedia</string>
+  <string name="app_name" fuzzy="true">Comin Wikimedia</string>
   <string name="menu_settings">Gosodiadau</string>
   <string name="username">Enw defnyddiwr</string>
   <string name="password">Cyfrinair</string>
@@ -33,7 +33,7 @@
   <string name="login_failed_network">Yn methu mewngofnodi - methodd y rhwydwaith</string>
   <string name="login_failed_username">Yn methu mewngofnodi - gwirwch eich enw defnyddiwr</string>
   <string name="login_failed_password">Yn methu mewngofnodi - gwirwch eich cyfrinair</string>
-  <string name="login_failed_throttled">Cafwyd gormod o ymgeision aflwyddiannus. Oedwch ennyd cyn ceisio eto.</string>
+  <string name="login_failed_throttled" fuzzy="true">Cafwyd gormod o ymgeision aflwyddiannus. Oedwch ennyd cyn ceisio eto.</string>
   <string name="login_failed_blocked">Ymddiheurwn. Mae\'r defnyddiwr hwn wedi ei flocio ar Gomin Wikimedia</string>
   <string name="login_failed_generic">Methodd y mewngofnodi</string>
   <string name="share_upload_button">Uwchlwyther</string>
@@ -50,8 +50,8 @@ Cyffyrddwch y neges hon (neu ddewis Nôl) i fynd i\'r cam nesaf.</string>
   <string name="preference_tracking_summary">Danfonwch yr adroddiadau ar y defnydd i Wikimedia i\'n cynorthwyo i wella\'r ap</string>
   <string name="title_activity_settings">Gosodiadau</string>
   <string name="menu_about">Amdanom</string>
-  <string name="about_license">Meddalwedd Cynnwys Agored wedi\'i rhyddhau o dan &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Drwydded Apache v2&lt;/a&gt;</string>
-  <string name="about_improve">Y ffynhonell ar &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Bygiau ar &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_license" fuzzy="true">Meddalwedd Cynnwys Agored wedi\'i rhyddhau o dan &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Drwydded Apache v2&lt;/a&gt;</string>
+  <string name="about_improve" fuzzy="true">Y ffynhonell ar &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Bygiau ar &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Polisi preifatrwydd&lt;/a&gt;</string>
   <string name="title_activity_about">Amdanom</string>
   <string name="menu_feedback">Danfonwch Adborth (drwy Ebost)</string>
@@ -63,8 +63,8 @@ Cyffyrddwch y neges hon (neu ddewis Nôl) i fynd i\'r cam nesaf.</string>
   <string name="share_license_summary">Caiff y ddelwedd hon ei thrwyddedu yn ôl termau\'r drwydded %1$s.</string>
   <string name="menu_download">Lawrlwytho</string>
   <string name="preference_license">Trwydded</string>
-  <string name="license_name_cc_by_sa">CCu00A0Attribution-ShareAlikeu00A03.0</string>
-  <string name="license_name_cc_by">CCu00A0Attributionu00A03.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Attribution-ShareAlikeu00A03.0</string>
+  <string name="license_name_cc_by" fuzzy="true">CCu00A0Attributionu00A03.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Awstria)</string>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="crash_dialog_title">Kagrugaringan nagkagarabá</string>
+  <string name="crash_dialog_text">Oops. May bagay an napasala!</string>
+  <string name="crash_dialog_comment_prompt">Sabiha samuya kun ano saimong ginibo, isunod na ipagheras ini sa paagi kan e-surat sa samuya. Ini makakatabang samuya na hirahayon ini!</string>
+  <string name="crash_dialog_ok_toast">Mabalos po!</string>
+</resources>

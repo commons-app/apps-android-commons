@@ -5,10 +5,12 @@
   <string name="username">Имя пользователя</string>
   <string name="password">Пароль</string>
   <string name="login">Войти</string>
+  <string name="signup">Зарегистрироваться</string>
   <string name="logging_in_title">Вход в систему</string>
   <string name="logging_in_message">Пожалуйста, подождите…</string>
   <string name="login_success">Опознание прошло успешно</string>
   <string name="login_failed">Ошибка входа в систему!</string>
+  <string name="upload_failed">Файл не найден. Попробуйте другой файл.</string>
   <string name="authentication_failed">Ошибка аутентификации!</string>
   <string name="uploading_started">Загрузка началась!</string>
   <string name="upload_completed_notification_title">%1$s загружен!</string>
@@ -20,8 +22,7 @@
   <string name="upload_failed_notification_subtitle">Нажмите для просмотра</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">загружается 1 файл</item>
-    <item quantity="few">загружается %d файлов</item>
-    <item quantity="other">загружается %d файла</item>
+    <item quantity="other">идёт загрузка %d файлов</item>
   </plurals>
   <string name="title_activity_contributions">Мои загрузки</string>
   <string name="contribution_state_queued">Очередь</string>
@@ -30,6 +31,7 @@
   <string name="contribution_state_starting">Загрузка</string>
   <string name="menu_from_gallery">Из галереи</string>
   <string name="menu_from_camera">Сфотографировать</string>
+  <string name="menu_nearby">Поблизости</string>
   <string name="provider_contributions">Мои загрузки</string>
   <string name="menu_share">Поделиться</string>
   <string name="menu_open_in_browser">Открыть в браузере</string>
@@ -38,7 +40,7 @@
   <string name="login_failed_network">Не удаётся войти — сбой сети</string>
   <string name="login_failed_username">Не удалось войти — пожалуйста, проверьте своё имя пользователя</string>
   <string name="login_failed_password">Не удалось войти — пожалуйста, проверьте свой пароль</string>
-  <string name="login_failed_throttled">Слишком много неудачных попыток. Пожалуйста, попробуйте ещё раз через несколько минут</string>
+  <string name="login_failed_throttled">Слишком много неудачных попыток. Пожалуйста, попробуйте ещё раз через несколько минут.</string>
   <string name="login_failed_blocked">Извините, но участник с таким именем был заблокирован на Викискладе</string>
   <string name="login_failed_generic">Ошибка входа в систему!</string>
   <string name="share_upload_button">Загрузка</string>
@@ -72,12 +74,14 @@
   <string name="preference_tracking">Отчёты</string>
   <string name="preference_tracking_summary">Отправлять отчёты об использовании в Викимедиа, чтобы помочь нам улучшить приложение</string>
   <string name="title_activity_settings">Настройки</string>
+  <string name="title_activity_signup">Зарегистрироваться</string>
   <string name="menu_about">О приложении</string>
-  <string name="about_license">Приложение с открытым исходным кодом, выпущено по лицензии &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
-  <string name="about_improve">Исходный код на &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Ошибки на &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_license">Приложение с открытым исходным кодом, выпущено по лицензии &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Викисклад и его логотип являются товарными знаками Фонда Викимедиа и используются с разрешения Фонда Викимедиа. Мы не поддерживаемся и не связаны с Фондом Викимедиа.</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;Исходный код&lt;/a&gt; и &lt;a href=\"https://commons-app.github.io/\"&gt;сайт&lt;/a&gt; на GitHub. Создайте новый &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;запрос на GitHub&lt;/a&gt;, чтоб сообщить об ошибке или внести предложение.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy/ru\"&gt;Политика конфиденциальности&lt;/a&gt;</string>
   <string name="title_activity_about">О приложении</string>
   <string name="menu_feedback">Отправить отзыв (по эл. почте)</string>
+  <string name="no_email_client">Почтовый клиент не установлен</string>
   <string name="provider_categories">Недавно использованные категории</string>
   <string name="waiting_first_sync">Ожидание первой синхронизации...</string>
   <string name="no_uploads_yet">Вы еще не загрузили ни одной фотографии.</string>
@@ -86,6 +90,9 @@
   <string name="share_license_summary">Это изображение будет лицензировано под %1$s</string>
   <string name="menu_download">Скачать</string>
   <string name="preference_license">Лицензия</string>
+  <string name="use_previous">Использовать предыдущие заголовок/описание</string>
+  <string name="allow_gps">Автоматически получить текущее местоположение</string>
+  <string name="allow_gps_summary">Получить текущее местоположение, чтобы получить предложения категорий, если изображение не содержит геотеги</string>
   <string name="license_name_cc_by_sa">CCu00A0Attribution-ShareAlikeu00A03.0</string>
   <string name="license_name_cc_by">CCu00A0Attributionu00A03.0</string>
   <string name="license_name_cc0">CC0</string>
@@ -101,6 +108,8 @@
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Польша)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Румыния)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
+  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="license_name_own_pd">own-pd</string>
   <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
@@ -118,6 +127,11 @@
   <string name="license_name_pd_ineligible">Общественное достояние (не подлежит защите авторским правом)</string>
   <string name="license_name_attribution">Атрибуция</string>
   <string name="license_name_gfdl">Лицензия свободной документации GNU</string>
+  <string name="tutorial_1_text">Викисклад содержит большую часть изображений, которые используются в Википедии.</string>
+  <string name="tutorial_1_subtext">Ваши изображения помогают образованию людей во всём мире!</string>
+  <string name="tutorial_2_text">Пожалуйста, загрузите фотографии, которые были сняты или созданы исключительно вами:</string>
+  <string name="tutorial_3_text">Пожалуйста, НЕ загружайте:</string>
+  <string name="tutorial_4_text">Пример загрузки:</string>
   <string name="welcome_wikipedia_text">Загрузите свои изображения. Помогите Википедии оживить статьи!</string>
   <string name="welcome_wikipedia_subtext">Изображения в Википедии доступны на Викискладе.</string>
   <string name="welcome_copyright_text">Ваши изображения помогают образованию людей во всём мире.</string>
@@ -130,4 +144,10 @@
   <string name="detail_description_empty">Нет описания</string>
   <string name="detail_license_empty">Неизвестная лицензия</string>
   <string name="menu_refresh">Обновить</string>
+  <string name="ok">OK</string>
+  <string name="title_activity_nearby">Места поблизости</string>
+  <string name="warning">Внимание</string>
+  <string name="file_exists">Этот файл уже существует на Викискладе. Вы уверены, что хотите продолжить?</string>
+  <string name="yes">Да</string>
+  <string name="no">Нет</string>
 </resources>

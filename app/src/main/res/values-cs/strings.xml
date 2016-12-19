@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Wikimedia Commons</string>
+  <string name="app_name">Commons</string>
   <string name="menu_settings">Nastavení</string>
   <string name="username">Uživatelské jméno</string>
   <string name="password">Heslo</string>
@@ -33,7 +33,7 @@
   <string name="login_failed_network">Nelze se přihlásit - selhání sítě</string>
   <string name="login_failed_username">Nelze se přihlásit - prosím zkontrolujte své uživatelské jméno</string>
   <string name="login_failed_password">Nelze se přihlásit - zkontrolujte prosím své heslo</string>
-  <string name="login_failed_throttled">Příliš mnoho neúspěšných pokusů. Zkuste to prosím znovu za několik minut</string>
+  <string name="login_failed_throttled">Příliš mnoho neúspěšných pokusů. Zkuste to prosím znovu za několik minut.</string>
   <string name="login_failed_blocked">Omlouváme se, tento uživatel byl na Commons zablokován</string>
   <string name="login_failed_generic">Přihlášení se nezdařilo</string>
   <string name="share_upload_button">Nahrát</string>
@@ -49,8 +49,8 @@
   <string name="preference_tracking_summary">Odesílat hlášení o používání nadaci Wikimedia za účelem zlepšování aplikace</string>
   <string name="title_activity_settings">Nastavení</string>
   <string name="menu_about">O aplikaci</string>
-  <string name="about_license">Open-source software dostupný za podmínek &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
-  <string name="about_improve">Zdrojový text na &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHubu&lt;/a&gt;. Hlášení chyb v &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Bugzille&lt;/a&gt;.</string>
+  <string name="about_license">Open Source software dostupný za podmínek &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Wikimedia Commons a logo Wikimedia Commons jsou ochranné známky Wikimedia Foundation a jsou použity se svolením Wikimedia Foundation. Nejsme podporováni Wikimedia Foundation ani nejsme její součástí.</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Zdrojový kód&lt;/a&gt;, &lt;a href=\"https://commons-app.github.io/\"&gt;webová stránka&lt;/a&gt; a &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;hlášení chyb a sdílení nápadů&lt;/a&gt; na GitHubu.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Ochrana_osobních_údajů\"&gt;Ochrana osobních údajů&lt;/a&gt;</string>
   <string name="title_activity_about">O aplikaci</string>
   <string name="menu_feedback">Poslat názory (e-mailem)</string>

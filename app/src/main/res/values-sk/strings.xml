@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Wikimedia Commons</string>
+  <string name="app_name" fuzzy="true">Wikimedia Commons</string>
   <string name="menu_settings">Nastavenia</string>
   <string name="username">Používateľské meno</string>
   <string name="password">Heslo</string>
@@ -33,7 +33,7 @@
   <string name="login_failed_network">prihlásenie zlyhalo - zlyhanie siete</string>
   <string name="login_failed_username">Prihlásenie zlyhalo - skontrolujte vaše používateľské meno</string>
   <string name="login_failed_password">Prihlásenie zlyhalo - skontrolujte vaše heslo</string>
-  <string name="login_failed_throttled">Príliš veľa neúspešných pokusov. Skúste to znova o niekoľko minút</string>
+  <string name="login_failed_throttled" fuzzy="true">Príliš veľa neúspešných pokusov. Skúste to znova o niekoľko minút</string>
   <string name="login_failed_blocked">Ospravedlňujeme sa, tento užívateľ bol na Commons zablokovaný</string>
   <string name="login_failed_generic">Prihlásenie zlyhalo</string>
   <string name="share_upload_button">Nahrať</string>
@@ -52,8 +52,8 @@ Kliknite na tento odkaz (alebo na späť) ak chcete tento krok vynechať.</strin
   <string name="preference_tracking_summary">Pošlite hlásenie o požívaní nadácií Wikimédia za účelom vylepšovania aplikácie.</string>
   <string name="title_activity_settings">Nastavenia</string>
   <string name="menu_about">O aplikácii</string>
-  <string name="about_license">Open Source softvér dostupný za podmienok &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
-  <string name="about_improve">Zdroj na &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Bugy na &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_license" fuzzy="true">Open Source softvér dostupný za podmienok &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
+  <string name="about_improve" fuzzy="true">Zdroj na &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Bugy na &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Ochrana osobných údajov&lt;/a&gt;</string>
   <string name="title_activity_about">O aplikácii</string>
   <string name="menu_feedback">Odoslať spätnú väzbu (emailom)</string>
@@ -65,8 +65,8 @@ Kliknite na tento odkaz (alebo na späť) ak chcete tento krok vynechať.</strin
   <string name="share_license_summary">Tento obrázok bude licencovaný podľa %1$s</string>
   <string name="menu_download">Stiahnuť</string>
   <string name="preference_license">Licencia</string>
-  <string name="license_name_cc_by_sa">CCu00A0Attribution-ShareAlikeu00A03.0</string>
-  <string name="license_name_cc_by">CCu00A0Attributionu00A03.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Attribution-ShareAlikeu00A03.0</string>
+  <string name="license_name_cc_by" fuzzy="true">CCu00A0Attributionu00A03.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Rakúsko)</string>

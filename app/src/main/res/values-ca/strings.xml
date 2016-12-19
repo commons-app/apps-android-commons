@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Wikimedia Commons</string>
+  <string name="app_name" fuzzy="true">Wikimedia Commons</string>
   <string name="menu_settings">Configuració</string>
   <string name="username">Nom d\'usuari:</string>
   <string name="password">Contrasenya</string>
@@ -18,7 +18,7 @@
   <string name="upload_progress_notification_title_finishing">Acabant la càrrega al servidor de %1$s</string>
   <string name="upload_failed_notification_title">Error al carregar %1$s</string>
   <string name="upload_failed_notification_subtitle">Prem per veure-ho</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">s\'està carregant 1 fitxer</item>
     <item quantity="other">s\'estan carregant %d fitxers</item>
   </plurals>
@@ -37,7 +37,7 @@
   <string name="login_failed_network">No s\'ha pogut iniciar la sessió – error de xarxa</string>
   <string name="login_failed_username">No s\'ha pogut iniciar la sessió – siusplau comprova el teu nom d\'usuari</string>
   <string name="login_failed_password">No s’ha pogut iniciar la sessió. Comproveu la vostra contrasenya</string>
-  <string name="login_failed_throttled">Masses intents erronis – Siusplau prova-ho d\'aquí uns minuts</string>
+  <string name="login_failed_throttled" fuzzy="true">Masses intents erronis – Siusplau prova-ho d\'aquí uns minuts</string>
   <string name="login_failed_blocked">Ho sentim, aquest usuari ha estat blocat a Commons</string>
   <string name="login_failed_generic">Ha fallat l\'inici de sessió</string>
   <string name="share_upload_button">Carrega</string>
@@ -66,8 +66,8 @@
   <string name="preference_tracking_summary">Envia informes d\'ús a Wikimedia per ajudar-nos a millorar l\'aplicació</string>
   <string name="title_activity_settings">Paràmetres</string>
   <string name="menu_about">Quant a</string>
-  <string name="about_license">Programari de codi obert distribuït sota la &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;llicència Apache v2&lt;/a&gt;</string>
-  <string name="about_improve">Codi a &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Informes d\'error a &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_license" fuzzy="true">Programari de codi obert distribuït sota la &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;llicència Apache v2&lt;/a&gt;</string>
+  <string name="about_improve" fuzzy="true">Codi a &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Informes d\'error a &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">Wikimedia:Commons-android-texts-sobre privacitat/ca</string>
   <string name="title_activity_about">Quant a</string>
   <string name="menu_feedback">Envia comentaris (per correu)</string>
@@ -79,8 +79,8 @@
   <string name="share_license_summary">Aquesta imatge es llicenciarà sota %1$s</string>
   <string name="menu_download">Baixa</string>
   <string name="preference_license">Llicència</string>
-  <string name="license_name_cc_by_sa">CCu00A0Reconeixement-CompartirIgualu00A03.0</string>
-  <string name="license_name_cc_by">CCu00A0Reconeixementu00A03.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Reconeixement-CompartirIgualu00A03.0</string>
+  <string name="license_name_cc_by" fuzzy="true">CCu00A0Reconeixementu00A03.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Àustria)</string>

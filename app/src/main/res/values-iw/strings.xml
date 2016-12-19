@@ -5,10 +5,12 @@
   <string name="username">שם משתמש</string>
   <string name="password">ססמה</string>
   <string name="login">כניסה</string>
+  <string name="signup">רישום</string>
   <string name="logging_in_title">כניסה לחשבון</string>
   <string name="logging_in_message">נא להמתין...</string>
   <string name="login_success">הכניסה הצליחה</string>
   <string name="login_failed">הכניסה נכשלה!</string>
+  <string name="upload_failed">הקובץ לא נמצא. נא לנסות קובץ אחר.</string>
   <string name="authentication_failed">אימות הפרטים נכשל</string>
   <string name="uploading_started">ההעלאה התחילה!</string>
   <string name="upload_completed_notification_title">הקובץ %1$s הועלה!</string>
@@ -18,7 +20,10 @@
   <string name="upload_progress_notification_title_finishing">העלאת $1$s מסתיימת</string>
   <string name="upload_failed_notification_title">העלאת %1$s נכשלה</string>
   <string name="upload_failed_notification_subtitle">נא ללחוץ כדי להציג</string>
-  <string name="uploads_pending_notification_indicator" fuzzy="true">נשארו %d</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">קובץ אחד מועלה</item>
+    <item quantity="other">%d קבצים מועלים</item>
+  </plurals>
   <string name="title_activity_contributions">ההעלאות שלי</string>
   <string name="contribution_state_queued">בתור</string>
   <string name="contribution_state_failed">נכשלה</string>
@@ -26,6 +31,7 @@
   <string name="contribution_state_starting">העלאה</string>
   <string name="menu_from_gallery">מגלריה</string>
   <string name="menu_from_camera">צילום תמונה</string>
+  <string name="menu_nearby">בסביבה</string>
   <string name="provider_contributions">ההעלאות שלי</string>
   <string name="menu_share">שיתוף</string>
   <string name="menu_open_in_browser">הצגה בדפדפן</string>
@@ -34,7 +40,7 @@
   <string name="login_failed_network">לא ניתן להיכנס – כשל בתקשורת</string>
   <string name="login_failed_username">לא ניתן להיכנס – נא לבדוק את שם המשתמש שלך</string>
   <string name="login_failed_password">לא ניתן להיכנס – נא לבדוק את הססמה שלך</string>
-  <string name="login_failed_throttled">יותר מדי ניסיונות כושלים להיכנס. נא לנסות שוב בעוד מספר דקות</string>
+  <string name="login_failed_throttled">יותר מדי ניסיונות כושלים להיכנס. נא לנסות שוב בעוד מספר דקות.</string>
   <string name="login_failed_blocked">סליחה, החשבון הזה חסום בוויקישיתוף</string>
   <string name="login_failed_generic">ההעלאלה נכשלה</string>
   <string name="share_upload_button">העלאה</string>
@@ -43,6 +49,19 @@
   <string name="menu_upload_single">העלאה</string>
   <string name="categories_search_text_hint">חיפוש קטגוריות</string>
   <string name="menu_save_categories">שמירה</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">אין העלאות</item>
+    <item quantity="one">העלאה אחת</item>
+    <item quantity="other">%d העלאות</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">התחלת העלאה</item>
+    <item quantity="other">התחלת %d העלאות</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">העלאה אחת</item>
+    <item quantity="other">%d העלאות</item>
+  </plurals>
   <string name="categories_not_found">לא נמצאו קטגוריות בשם %1$s</string>
   <string name="categories_skip_explanation">נא להוסיף קטגוריות כדי שיהיה קל יותר למצוא את התמונות שלך בוויקישיתוף.
 
@@ -52,20 +71,27 @@
   <string name="preference_tracking">דוחות שימוש</string>
   <string name="preference_tracking_summary">לשלוח דוחות שימוש לויקימדיה כדי לעזור לנו לשפר את היישום</string>
   <string name="title_activity_settings">הגדרות</string>
+  <string name="title_activity_signup">רישום</string>
   <string name="menu_about">אודות</string>
-  <string name="about_license">תוכנת קוד-פתוח המשוחררת תחת רישיון &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;אפאצ\'י גרסה 2&lt;/a&gt;</string>
-  <string name="about_improve">קוד מקור ב־&lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. דיווחי באגים ב&lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;באגזילה&lt;/a&gt;.</string>
+  <string name="about_license">תכנת קוד פתוח המתפרסמת לפי תנאי &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. השם Wikimedia Commons והסמל שלו הם סימני מסחר של קרן ויקימדיה ומשמשים באישור קרן ויקימדיה. איננו נתמכים על־ידי קרן ויקימדיה או קשורים אליה בשותפות.</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;קוד מקור&lt;/a&gt; ו&lt;a href=\"https://commons-app.github.io/\"&gt;אתר&lt;/a&gt; בגיטהאב&lt;/a&gt;. נא ליצור &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;דיווח בגיטהאב&lt;/a&gt; בשביל באגים והצעות.</string>
   <string name="about_privacy_policy"/>
   <string name="title_activity_about">אודות</string>
   <string name="menu_feedback">שליחת משוב (בדוא\"ל)</string>
+  <string name="no_email_client">לא מותקן לקוח דואר אלקטרוני</string>
   <string name="provider_categories">קטגוריות בשימוש לאחרונה</string>
   <string name="waiting_first_sync">מחכה לסנכרון הראשון...</string>
   <string name="no_uploads_yet">עדיין לא העלית תמונות.</string>
   <string name="menu_retry_upload">לנסות שוב</string>
   <string name="menu_cancel_upload">ביטול</string>
-  <string name="share_license_summary">התמונה הזו היא תחת רשיון %1$s</string>
+  <string name="share_license_summary">התמונה הזאת היא תחת רשיון %1$s</string>
   <string name="menu_download">הורדה</string>
   <string name="preference_license">רישיון</string>
+  <string name="use_previous">להשתמש בכותרת ובתיאור קודמים</string>
+  <string name="allow_gps">לקבל אוטומטית את המיקום הנוכחי</string>
+  <string name="allow_gps_summary">לאחזר את המיקום הנוכחי כדי להציע קטגוריות אם בתמונה אין תגי מיקום</string>
+  <string name="license_name_cc_by_sa">ייחוס–שיתוף זהה 3.0</string>
+  <string name="license_name_cc_by">ייחוס 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (אוסטריה)</string>
@@ -79,6 +105,8 @@
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (פולין)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (רומניה)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
+  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="license_name_own_pd">own-pd</string>
   <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
@@ -96,6 +124,20 @@
   <string name="license_name_pd_ineligible">נחלת הכלל (לא מושא לזכויות יוצרים)</string>
   <string name="license_name_attribution">ייחוס</string>
   <string name="license_name_gfdl">הרישיון לשימוש חופשי במסמכים של גנו</string>
+  <string name="tutorial_1_text">ויקישיתוף מארח את רוב התמונות שמשמשות בוויקיפדיה.</string>
+  <string name="tutorial_1_subtext">התמונות שלכם עוזרות לתת השכלה לאנשים מסביב לעולם!</string>
+  <string name="tutorial_2_text">נא להעלות תמונות שצולמו או נוצרו באופן מלא על־ידיכם:</string>
+  <string name="tutorial_2_subtext">- עצמים טבעיים (פרחים, חיות, הרים)
+- חפצים שימושיים (אופניים, תחנות רכבת)
+- אנשים מפורסמים (ראש העיר שלכם, ספורטאים אולימפיים שפגשתם)</string>
+  <string name="tutorial_3_text">נא לא להעלות:</string>
+  <string name="tutorial_3_subtext">- תמונות עצמיות (\"סלפי\") או תמונות של חברים שלכם
+- תמונות שהורדתם מהאינטרנט
+- צילומי מסך של יישומים קנייניים</string>
+  <string name="tutorial_4_text">העלאה לדוגמה:</string>
+  <string name="tutorial_4_subtext">- כותרת: בית האופרה של סידני
+- תיאור: בית האופרה של סידני מהצד השני של המפרץ
+- קטגוריות: Sydney Opera House (בית האופרה של סידני), Sydney Opera House from the west (בית האופרה של סידני מהמערב), Sydney Opera House remote views (מראה מרחוק על בית האופרה של סידני)</string>
   <string name="welcome_wikipedia_text">תרמו את התמונות שלכם. עזרו לערכים בוויקיפדיה להתעורר לחיים!</string>
   <string name="welcome_wikipedia_subtext">התמונות בוויקיפדיה מגיעות מ־Wikimedia Commons.</string>
   <string name="welcome_copyright_text">התמונות שלכם עוזרות להעניק חינוך לאנשים מסביב לעולם.</string>
@@ -108,4 +150,12 @@
   <string name="detail_description_empty">אין תיאור</string>
   <string name="detail_license_empty">רישיון לא ידוע</string>
   <string name="menu_refresh">רענון</string>
+  <string name="storage_permission_rationale">הרשאה מחייבת: אחסון. היישום לא יכול לעבוד בלי זה.</string>
+  <string name="location_permission_rationale">הרשאה לא מחייבת: קבלת מיקום נוכחי בשביל הצעות קטגוריות</string>
+  <string name="ok">אישור</string>
+  <string name="title_activity_nearby">מקומות בסביבה</string>
+  <string name="warning">אזהרה</string>
+  <string name="file_exists">הקובץ הזה כבר קיים בוויקישיתוף. האם להמשיך?</string>
+  <string name="yes">כן</string>
+  <string name="no">לא</string>
 </resources>

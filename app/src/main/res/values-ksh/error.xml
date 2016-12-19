@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="crash_dialog_title">Wikkimeedija Common deihd et nit em Momang</string>
+  <string name="crash_dialog_text">Dä. Öhnzjät es scheif jejange!</string>
+  <string name="crash_dialog_comment_prompt">Schriiv ons övver de &lt;i lang=\"en\"&gt;e-mail&lt;/i&gt;, wat De aam donn wohrs. Dat heelv ons, et ze repareere.</string>
+  <string name="crash_dialog_ok_toast">Ene schöne Dangk och!</string>
+</resources>

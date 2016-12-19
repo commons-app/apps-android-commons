@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Commons</string>
+  <string name="app_name">コモンズ</string>
   <string name="menu_settings">設定</string>
   <string name="username">利用者名</string>
   <string name="password">パスワード</string>
@@ -18,7 +18,7 @@
   <string name="upload_progress_notification_title_finishing">%1$s のアップロードを完了中</string>
   <string name="upload_failed_notification_title">%1$s のアップロードに失敗しました</string>
   <string name="upload_failed_notification_subtitle">閲覧するにはタップしてください</string>
-  <string name="uploads_pending_notification_indicator">%d ファイルをアップロード中</string>
+  <string name="uploads_pending_notification_indicator" fuzzy="true">%d ファイルをアップロード中</string>
   <string name="title_activity_contributions">自分のアップロード</string>
   <string name="contribution_state_queued">順番待ち中</string>
   <string name="contribution_state_failed">失敗しました</string>
@@ -34,7 +34,7 @@
   <string name="login_failed_network">ログインできません - ネットワークのエラーです</string>
   <string name="login_failed_username">ログインできません - 利用者名を確認してください</string>
   <string name="login_failed_password">ログインできません - パスワードを確認してください</string>
-  <string name="login_failed_throttled">失敗した回数が多すぎます。数分でもう一度お試しください。</string>
+  <string name="login_failed_throttled" fuzzy="true">失敗した回数が多すぎます。数分でもう一度お試しください。</string>
   <string name="login_failed_blocked">申し訳ありませんが、この利用者はコモンズでブロックされています。</string>
   <string name="login_failed_generic">ログイン失敗</string>
   <string name="share_upload_button">アップロード</string>
@@ -51,8 +51,8 @@
   <string name="preference_tracking">使用状況の報告</string>
   <string name="preference_tracking_summary">アプリの改善を支援するために、使用状況の報告をウィキメディアに送信する</string>
   <string name="title_activity_settings">設定</string>
-  <string name="about_license">&lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache ライセンス v2&lt;/a&gt; のもとで公開されているオープン ソース ソフトウェア</string>
-  <string name="about_improve">ソースは &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt; にあります。バグは &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt; へ。</string>
+  <string name="about_license" fuzzy="true">&lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache ライセンス v2&lt;/a&gt; のもとで公開されているオープン ソース ソフトウェア</string>
+  <string name="about_improve" fuzzy="true">ソースは &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt; にあります。バグは &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt; へ。</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/プライバシー・ポリシー\"&gt;プライバシー・ポリシー&lt;/a&gt;</string>
   <string name="menu_feedback">フィードバックをメールで送信</string>
   <string name="provider_categories">最近使用したカテゴリ</string>
@@ -61,8 +61,8 @@
   <string name="menu_cancel_upload">キャンセル</string>
   <string name="menu_download">ダウンロード</string>
   <string name="preference_license">ライセンス</string>
-  <string name="license_name_cc_by_sa">CCu00A0表示-継承u00A03.0</string>
-  <string name="license_name_cc_by">CCu00A0表示u00A03.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0表示-継承u00A03.0</string>
+  <string name="license_name_cc_by" fuzzy="true">CCu00A0表示u00A03.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC 表示-継承 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC 表示-継承 3.0 (オーストリア)</string>

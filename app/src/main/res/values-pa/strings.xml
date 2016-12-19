@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼</string>
+  <string name="app_name" fuzzy="true">ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼</string>
   <string name="menu_settings">ਸੈਟਿੰਗ</string>
   <string name="username">ਵਰਤੋਂਕਾਰ ਨਾਂ</string>
   <string name="password">ਪਾਸਵਰਡ</string>
@@ -18,9 +18,9 @@
   <string name="upload_progress_notification_title_finishing">%1$s ਦਾ ਅੱਪਲੋਡ ਖ਼ਤਮ ਹੋ ਰਿਹਾ ਹੈ</string>
   <string name="upload_failed_notification_title">%1$s ਦਾ ਅੱਪਲੋਡ ਫੇਲ੍ਹ ਹੋਇਆ</string>
   <string name="upload_failed_notification_subtitle">ਵੇਖਣ ਲਈ ਥਪੇੜੋ</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">1 ਫਾਈਲ ਅੱਪਲੋਡ ਹੋ ਰਹੀ ਹੈ</item>
-    <item quantity="other">%d ਫਾਈਲਾਂ ਅੱਪਲੋਡ ਹੋ ਰਹੀਆਂ ਹਨ</item>
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
+    <item quantity="one">੧ ਫ਼ਾਈਲ ਚੜ੍ਹਾਈ ਜਾ ਰਹੀ ਹੈ</item>
+    <item quantity="other">%d ਫ਼ਾਈਲਾਂ ਚੜ੍ਹਾਈਆਂ ਜਾ ਰਹੀਆਂ ਹਨ</item>
   </plurals>
   <string name="title_activity_contributions">ਮੇਰੇ ਅੱਪਲੋਡ</string>
   <string name="contribution_state_queued">ਕਤਾਰ ਵਿਚ</string>
@@ -37,7 +37,7 @@
   <string name="login_failed_network">ਦਾਖ਼ਲਾ ਨਹੀਂ ਹੋ ਰਿਹਾ - ਨੈੱਟਵਰਕ ਫੇਲ੍ਹ ਹੋਇਆ ਹੈ</string>
   <string name="login_failed_username">ਦਾਖ਼ਲਾ ਨਹੀਂ ਹੋ ਰਿਹਾ - ਆਪਣਾ ਵਰਤੋਂਕਾਰ ਨਾਂ ਚੈੱਕ ਕਰੋ</string>
   <string name="login_failed_password">ਦਾਖ਼ਲਾ ਨਹੀਂ ਹੋ ਰਿਹਾ - ਆਪਣਾ ਪਾਸਵਰਡ ਚੈੱਕ ਕਰੋ ਜੀ</string>
-  <string name="login_failed_throttled">ਬਹੁਤ ਸਾਰੀਆਂ ਅਸਫ਼ਲ ਕੋਸ਼ਿਸ਼ਾਂ। ਥੋੜ੍ਹੀ ਦੇਰ ਬਾਅਦ ਕੋਸ਼ਿਸ਼ ਕਰੋ ਜੀ</string>
+  <string name="login_failed_throttled" fuzzy="true">ਬਹੁਤ ਸਾਰੀਆਂ ਅਸਫ਼ਲ ਕੋਸ਼ਿਸ਼ਾਂ। ਥੋੜ੍ਹੀ ਦੇਰ ਬਾਅਦ ਕੋਸ਼ਿਸ਼ ਕਰੋ ਜੀ</string>
   <string name="login_failed_blocked">ਅਫ਼ਸੋਸ, ਇਹ ਵਰਤੋਂਕਾਰ ਕਾਮਨਜ਼ ਉੱਤੇ ਬਲਾਕ ਕਰ ਦਿੱਤਾ ਗਿਆ ਹੈ</string>
   <string name="login_failed_generic">ਦਾਖ਼ਲਾ ਫੇਲ੍ਹ ਹੋਇਆ</string>
   <string name="share_upload_button">ਚੜ੍ਹਾਉ</string>
@@ -47,16 +47,17 @@
   <string name="categories_search_text_hint">ਸ਼੍ਰੇਣੀਆਂ ਖੋਜੋ</string>
   <string name="menu_save_categories">ਸਾਂਭੋ</string>
   <plurals name="contributions_subtitle">
-    <item quantity="one">ਅਜੇ ਕੋਈ ਅੱਪਲੋਡ ਨਹੀਂ</item>
-    <item quantity="other">1 ਅੱਪਲੋਡ</item>
+    <item quantity="zero">ਅਜੇ ਕੋਈ ਚੜ੍ਹਾਈ ਨਹੀਂ</item>
+    <item quantity="one">੧ ਚੜ੍ਹਾਈ</item>
+    <item quantity="other">%d ਚੜ੍ਹਾਈ</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">1 ਅੱਪਲੋਡ ਸ਼ੁਰੂ ਹੋ ਰਿਹਾ ਹੈ</item>
+    <item quantity="one">੧ ਚੜ੍ਹਾਈ ਸ਼ੁਰੂ ਹੋ ਰਹੀ ਹੈ</item>
     <item quantity="other">%d ਸ਼ੁਰੂ ਹੋ ਰਹੇ ਹਨ</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">1 ਅੱਪਲੋਡ</item>
-    <item quantity="other">%d ਅੱਪਲੋਡ</item>
+    <item quantity="one">੧ ਚੜ੍ਹਾਈ</item>
+    <item quantity="other">%d ਚੜ੍ਹਾਈਆਂ</item>
   </plurals>
   <string name="categories_not_found">%1$s ਨਾਲ਼ ਮੇਲ ਖਾਂਦੀ ਕੋਈ ਸ਼੍ਰੇਣੀ ਨਹੀਂ ਲੱਭੀ</string>
   <string name="categories_skip_explanation">ਆਪਣੀਆਂ ਤਸਵੀਰਾਂ ਨੂੰ ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼ ਵਿਚ ਜ਼ਿਆਦਾ ਲੱਭਣਯੋਗ ਬਣਾਉਣ ਲਈ ਸ਼੍ਰੇਣੀਆਂ ਜੋੜੋ।
@@ -68,8 +69,8 @@
   <string name="preference_tracking_summary">ਇਸ ਐਪ ਨੂੰ ਸੁਧਾਰਣ ਵਿਚ ਮਦਦ ਕਰਨ ਲਈ ਵਿਕੀਮੀਡੀਆ ਨੂੰ ਵਰਤੋਂ ਰਪਟਾਂ ਭੇਜੋ</string>
   <string name="title_activity_settings">ਸੈਟਿੰਗ</string>
   <string name="menu_about">ਇਸ ਬਾਰੇ</string>
-  <string name="about_license">ਅਜ਼ਾਦ ਸਰੋਤ ਸਾਫ਼ਟਵੇਅਰ ਨੂੰ &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; ਅਧੀਨ ਜਾਰੀ ਕੀਤਾ ਗਿਆ ਹੈ</string>
-  <string name="about_improve">ਸਰੋਤ &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt; ਉੱਤੇ। ਮੁਸ਼ਕਲਾਂ &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt; ਉੱਤੇ।</string>
+  <string name="about_license" fuzzy="true">ਅਜ਼ਾਦ ਸਰੋਤ ਸਾਫ਼ਟਵੇਅਰ ਨੂੰ &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; ਅਧੀਨ ਜਾਰੀ ਕੀਤਾ ਗਿਆ ਹੈ</string>
+  <string name="about_improve" fuzzy="true">ਸਰੋਤ &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt; ਉੱਤੇ। ਮੁਸ਼ਕਲਾਂ &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt; ਉੱਤੇ।</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privacy policy&lt;/a&gt;</string>
   <string name="title_activity_about">ਇਸ ਬਾਰੇ</string>
   <string name="menu_feedback">ਵਿਚਾਰ ਭੇਜੋ (ਈਮੇਲ ਰਾਹੀਂ)</string>
@@ -81,8 +82,8 @@
   <string name="share_license_summary">ਇਹ ਤਸਵੀਰ ਦਾ %1$s ਹੇਠ ਲਸੰਸ ਜਾਰੀ ਕੀਤੀ ਜਾਵੇਗਾ</string>
   <string name="menu_download">ਡਾਊਨਲੋਡ</string>
   <string name="preference_license">ਲਸੰਸ</string>
-  <string name="license_name_cc_by_sa">CCu00A0Attribution-ShareAlikeu00A03.0</string>
-  <string name="license_name_cc_by">CCu00A0Attributionu00A03.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Attribution-ShareAlikeu00A03.0</string>
+  <string name="license_name_cc_by" fuzzy="true">CCu00A0Attributionu00A03.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (ਅਸਟਰੀਆ)</string>

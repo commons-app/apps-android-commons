@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="crash_dialog_title">Ua haki ʻO Kahilehulehu</string>
+  <string name="crash_dialog_text">ʻAuwē. Loaʻa i ka pilikia!</string>
+  <string name="crash_dialog_comment_prompt">He aha kāu hana i kēlā manawa, a laila e ʻalo iā lekauila iā mākou. E kōkua ana kēlā lekauila no ke kāpili hou ʻana!</string>
+  <string name="crash_dialog_ok_toast">Mahalo nui loa!</string>
+</resources>

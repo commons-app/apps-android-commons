@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Wikimedia Commons</string>
-  <string name="menu_settings">Praeferentiae</string>
+  <string name="app_name" fuzzy="true">Wikimedia Commons</string>
+  <string name="menu_settings">Modi</string>
   <string name="username">Nomen usoris</string>
   <string name="password">Tessera</string>
-  <string name="login">Aperire</string>
+  <string name="login">Nomen dare</string>
   <string name="logging_in_title">Aperiens</string>
-  <string name="login_success">Conventum prospere apertum</string>
-  <string name="login_failed">Conventum aperiri non potuit</string>
+  <string name="login_success">Feliciter nomen dedisti</string>
+  <string name="login_failed">Non contingit nomen dare</string>
   <string name="uploading_started">Immissio incepta</string>
   <string name="upload_completed_notification_title">%1$s inmissum!</string>
   <string name="upload_completed_notification_text">Tangere ad conlationem tuam videndam</string>
@@ -43,7 +43,7 @@ Hanc notionem tangere ad id praetermittere.</string>
   <string name="categories_activity_title">Categoriae</string>
   <string name="preference_tracking">Relationes utendi</string>
   <string name="preference_tracking_summary">Relationes utendi ad Vicimediam mittere</string>
-  <string name="title_activity_settings">Praeferentiae</string>
+  <string name="title_activity_settings">Modi</string>
   <string name="menu_about">De</string>
   <string name="title_activity_about">De</string>
   <string name="menu_feedback">Relationem mittere</string>

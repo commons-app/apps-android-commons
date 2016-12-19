@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Wikimedia Commons</string>
+  <string name="app_name" fuzzy="true">Wikimedia Commons</string>
   <string name="menu_settings">Indstillinger</string>
   <string name="username">Brugernavn</string>
   <string name="password">Adgangskode</string>
@@ -33,7 +33,7 @@
   <string name="login_failed_network">Kan ikke logge på - netværksfejl</string>
   <string name="login_failed_username">Ude af stand til at logge på - tjek venligst dit brugernavn</string>
   <string name="login_failed_password">Ude af stand til at logge på - tjek venligst din adgangskode</string>
-  <string name="login_failed_throttled">Alt for mange mislykkede forsøg. Prøv igen om et par minutter</string>
+  <string name="login_failed_throttled" fuzzy="true">Alt for mange mislykkede forsøg. Prøv igen om et par minutter</string>
   <string name="login_failed_blocked">Beklager, denne bruger er blevet blokeret på Commons</string>
   <string name="login_failed_generic">Det mislykkedes at logge på</string>
   <string name="share_upload_button">Upload</string>
@@ -49,8 +49,8 @@
   <string name="preference_tracking_summary">Send brugsrapporter til Wikimedia, så vi kan forbedre denne app</string>
   <string name="title_activity_settings">Indstillinger</string>
   <string name="menu_about">Om</string>
-  <string name="about_license">Open Source-software frigivet under &lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
-  <string name="about_improve">Kildekode på &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Fejlmeldinger på &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_license" fuzzy="true">Open Source-software frigivet under &lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
+  <string name="about_improve" fuzzy="true">Kildekode på &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Fejlmeldinger på &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privacy policy&lt;/a&gt;</string>
   <string name="title_activity_about">Om</string>
   <string name="menu_feedback">Send tilbagemelding (med e-mail)</string>
@@ -62,8 +62,8 @@
   <string name="share_license_summary">Billedet vil blive licenseret under %1$s</string>
   <string name="menu_download">Hent</string>
   <string name="preference_license">Licens</string>
-  <string name="license_name_cc_by_sa">CCu00A0Navngivelse-DelPåSammeVilkåru00A03.0</string>
-  <string name="license_name_cc_by">CCu00A0Navngivelseu00A03.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Navngivelse-DelPåSammeVilkåru00A03.0</string>
+  <string name="license_name_cc_by" fuzzy="true">CCu00A0Navngivelseu00A03.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Østrig)</string>

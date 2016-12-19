@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Wikimedia Commons</string>
+  <string name="app_name" fuzzy="true">Wikimedia Commons</string>
   <string name="menu_settings">Setări</string>
   <string name="username">Nume de utilizator</string>
   <string name="password">Parolă</string>
@@ -18,7 +18,7 @@
   <string name="upload_progress_notification_title_finishing">Se finalizează încărcarea fișierului %1$s</string>
   <string name="upload_failed_notification_title">Încărcarea fișierului %1$s nu a reușit</string>
   <string name="upload_failed_notification_subtitle">Atingeți pentru a vizualiza</string>
-  <string name="uploads_pending_notification_indicator">%d fișiere se încarcă</string>
+  <string name="uploads_pending_notification_indicator" fuzzy="true">%d fișiere se încarcă</string>
   <string name="title_activity_contributions">Încărcările mele</string>
   <string name="contribution_state_queued">În așteptare</string>
   <string name="contribution_state_failed">Nu a reușit</string>
@@ -34,7 +34,7 @@
   <string name="login_failed_network">Autentificare nereușită – defecțiune de rețea</string>
   <string name="login_failed_username">Autentificare nereușită – verificați-vă numele de utilizator</string>
   <string name="login_failed_password">Autentificare nereușită – verificați-vă parola</string>
-  <string name="login_failed_throttled">Prea multe încercări nereușite. Încercați din nou peste câteva minute</string>
+  <string name="login_failed_throttled" fuzzy="true">Prea multe încercări nereușite. Încercați din nou peste câteva minute</string>
   <string name="login_failed_blocked">Ne pare rău, acest utilizator a fost blocat la Commons</string>
   <string name="login_failed_generic">Autentificare nereușită</string>
   <string name="share_upload_button">Încărcare</string>
@@ -69,8 +69,8 @@ Atingeți acest mesaj (sau mergeți înapoi) pentru a omite acest pas.</string>
   <string name="preference_tracking_summary">Trimiteți rapoarte de utilizare către Wikimedia pentru a ajuta la îmbunătățirea aplicației</string>
   <string name="title_activity_settings">Setări</string>
   <string name="menu_about">Despre</string>
-  <string name="about_license">Software cu sursă deschisă lansat sub &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Licența Apache v2&lt;/a&gt;</string>
-  <string name="about_improve">Sursa la &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Buguri la &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_license" fuzzy="true">Software cu sursă deschisă lansat sub &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Licența Apache v2&lt;/a&gt;</string>
+  <string name="about_improve" fuzzy="true">Sursa la &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Buguri la &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politica de confidențialitate&lt;/a&gt;</string>
   <string name="title_activity_about">Despre</string>
   <string name="menu_feedback">Trimitere reacții (prin e-mail)</string>
@@ -82,8 +82,8 @@ Atingeți acest mesaj (sau mergeți înapoi) pentru a omite acest pas.</string>
   <string name="share_license_summary">Această imagine va fi licențiată sub %1$s</string>
   <string name="menu_download">Descarcă</string>
   <string name="preference_license">Licență</string>
-  <string name="license_name_cc_by_sa">CCu00A0Atribuireu00A0șiu00A0distribuireu00A0înu00A0condițiiu00A0identiceu00A03.0</string>
-  <string name="license_name_cc_by">CCu00A0Atribuireu00A03.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Atribuireu00A0șiu00A0distribuireu00A0înu00A0condițiiu00A0identiceu00A03.0</string>
+  <string name="license_name_cc_by" fuzzy="true">CCu00A0Atribuireu00A03.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Austria)</string>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Wikimedia Commons програм</string>
+  <string name="app_name" fuzzy="true">Wikimedia Commons програм</string>
   <string name="menu_settings">Тохиргоо</string>
   <string name="username">Хэрэглэгчийн нэр</string>
   <string name="password">Нууц үг</string>
@@ -33,7 +33,7 @@
   <string name="login_failed_network">Нэвтрэхэд алдаа - сүлжээ</string>
   <string name="login_failed_username">Нэвтрэхэд алдаа - хэрэглэгчийн нэр</string>
   <string name="login_failed_password">Нэвтрэхэд алдаа - нууц үг</string>
-  <string name="login_failed_throttled">Алдаатай оролдлогуудын тоо гүйцсэн. Түр хүлээгээд дахин оролдоно уу.</string>
+  <string name="login_failed_throttled" fuzzy="true">Алдаатай оролдлогуудын тоо гүйцсэн. Түр хүлээгээд дахин оролдоно уу.</string>
   <string name="login_failed_blocked">Энэ хэрэглэгч Commons дээр блок хийгдсэн байна</string>
   <string name="login_failed_generic">Нэвтэрч чадсангүй!</string>
   <string name="share_upload_button">Оруулах</string>

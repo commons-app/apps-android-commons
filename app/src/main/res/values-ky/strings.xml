@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Уикиказына</string>
+  <string name="app_name" fuzzy="true">Уикиказына</string>
   <string name="menu_settings">Ырастоолор</string>
   <string name="username">Колдонуучунун аты</string>
   <string name="password">Сырсөз</string>
@@ -18,7 +18,7 @@
   <string name="upload_progress_notification_title_finishing">Жүктөө соңуна жетти %1$s</string>
   <string name="upload_failed_notification_title">Жүктөө %1$s иш жүзүнө ашкан жок</string>
   <string name="upload_failed_notification_subtitle">Көрүү үчүн басыңыз</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">1 файл жүктөлүүдө</item>
     <item quantity="other">%d файл жүктөлүүдө</item>
   </plurals>
@@ -37,7 +37,7 @@
   <string name="login_failed_network">Кирүүгө болбой жатат - тармакта үзгүлтүк бар</string>
   <string name="login_failed_username">Кирүүгө мүмкүн эмес - сураныч, колдонуучу ысымыңызды текшериңиз</string>
   <string name="login_failed_password">Кирүүгө мүмкүн эмес - сураныч, сыр сөзүңүздү текшериңиз</string>
-  <string name="login_failed_throttled">Өтө көп натыйжасыз иш аракет. Суранабыз, бир нече мүнөттөн кийин кайталаңыз</string>
+  <string name="login_failed_throttled" fuzzy="true">Өтө көп натыйжасыз иш аракет. Суранабыз, бир нече мүнөттөн кийин кайталаңыз</string>
   <string name="login_failed_blocked">Кечириңиз, бул кодонуучу Уикиказынада блокко алынган.</string>
   <string name="login_failed_generic">Системага кирүүдө катачылык бар!</string>
   <string name="share_upload_button">Жүктөө</string>
@@ -69,8 +69,8 @@
   <string name="preference_tracking_summary">Тиркемени жакшыртуу үчүн Уикимедианы колдонууда отчет жөнөтүү</string>
   <string name="title_activity_settings">Ырастоолор</string>
   <string name="menu_about">Тиркеме жөнүндө</string>
-  <string name="about_license">баштапкы коду ачык тиркемелер, &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; лицензиясынын негизинде чыгарылган</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt; шилтемесине баштапкы код. &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt; шилтемесиндеги катачылык.</string>
+  <string name="about_license" fuzzy="true">баштапкы коду ачык тиркемелер, &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; лицензиясынын негизинде чыгарылган</string>
+  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt; шилтемесине баштапкы код. &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt; шилтемесиндеги катачылык.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Конфиденциалдуулук_саясаты\"&gt;Конфиденциалдуулук саясаты&lt;/a&gt;</string>
   <string name="title_activity_about">Тиркеме жөнүндө</string>
   <string name="menu_feedback">Шарттуу жооп жөнөтүү (Email)</string>
@@ -82,8 +82,8 @@
   <string name="share_license_summary">Бул сүрөт %1$s лицензияланат</string>
   <string name="menu_download">Жүктөп алуу</string>
   <string name="preference_license">Лицензия</string>
-  <string name="license_name_cc_by_sa">CCu00A0Attribution-ShareAlikeu00A03.0</string>
-  <string name="license_name_cc_by">CCu00A0Attributionu00A03.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Attribution-ShareAlikeu00A03.0</string>
+  <string name="license_name_cc_by" fuzzy="true">CCu00A0Attributionu00A03.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Австрия)</string>

@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Wikimedia Commons</string>
+  <string name="app_name">Commons</string>
   <string name="menu_settings">Inställningar</string>
   <string name="username">Användarnamn</string>
   <string name="password">Lösenord</string>
   <string name="login">Logga in</string>
+  <string name="signup">Registrera</string>
   <string name="logging_in_title">Loggar in</string>
   <string name="logging_in_message">Var god vänta...</string>
   <string name="login_success">Inloggningen lyckades!</string>
   <string name="login_failed">Det gick inte att logga in!</string>
+  <string name="upload_failed">Filen hittades inte. Försök med en annan fil.</string>
   <string name="authentication_failed">Autentisering misslyckades!</string>
   <string name="uploading_started">Överföring påbörjad!</string>
   <string name="upload_completed_notification_title">%1$s överförd!</string>
@@ -29,6 +31,7 @@
   <string name="contribution_state_starting">Laddar upp</string>
   <string name="menu_from_gallery">Från galleri</string>
   <string name="menu_from_camera">Ta foto</string>
+  <string name="menu_nearby">I närheten</string>
   <string name="provider_contributions">Mina uppladdningar</string>
   <string name="menu_share">Dela</string>
   <string name="menu_open_in_browser">Visa i webbläsaren</string>
@@ -37,7 +40,7 @@
   <string name="login_failed_network">Det gick inte att logga in - nätverksfel</string>
   <string name="login_failed_username">Det gick inte att logga in - var god kontrollera ditt användarnamn</string>
   <string name="login_failed_password">Det gick inte att logga in - var god kontrollera ditt lösenord</string>
-  <string name="login_failed_throttled">För många misslyckade försök. Var god försök igen om några minuter</string>
+  <string name="login_failed_throttled">För många misslyckade försök. Var god försök igen om några minuter.</string>
   <string name="login_failed_blocked">Tyvärr, denna användare har blockerats på Commons</string>
   <string name="login_failed_generic">Inloggningen misslyckades</string>
   <string name="share_upload_button">Ladda upp</string>
@@ -68,12 +71,14 @@ Tryck på detta meddelande (eller gå tillbaka) för att hoppa över detta steg.
   <string name="preference_tracking">Användningsrapporter</string>
   <string name="preference_tracking_summary">Skicka användningsrapporter till Wikimedia för att hjälpa oss förbättra appen</string>
   <string name="title_activity_settings">Inställningar</string>
+  <string name="title_activity_signup">Registrera</string>
   <string name="menu_about">Om</string>
-  <string name="about_license">Programvara med öppen källkod släppt under &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;licensen Apache v2&lt;/a&gt;</string>
-  <string name="about_improve">Källa på &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Buggar på &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_license">Programvara med öppen källkod släppt under &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;licensen Apache v2&lt;/a&gt;. Wikimedia Commons och dess logotyp är varumärken av Wikimedia Foundation och används med tillstånd från Wikimedia Foundation. Vi varken stöds eller är kopplade med Wikimedia Foundation.</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Källkoden&lt;/a&gt; och &lt;a href=\"https://commons-app.github.io/\"&gt;webbplatsen&lt;/a&gt; på GitHub&lt;/a&gt;. Skapa ett nytt &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-ärende&lt;/a&gt; för att rapportera buggar och förslag.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Integritetspolicy&lt;/a&gt;</string>
   <string name="title_activity_about">Om</string>
   <string name="menu_feedback">Skicka feedback (via e-post)</string>
+  <string name="no_email_client">Ingen e-postklient är installerad</string>
   <string name="provider_categories">Nyligen använda kategorier</string>
   <string name="waiting_first_sync">Väntar på första synkroniseringen...</string>
   <string name="no_uploads_yet">Du har inte lagt upp några bilder ännu.</string>
@@ -82,8 +87,11 @@ Tryck på detta meddelande (eller gå tillbaka) för att hoppa över detta steg.
   <string name="share_license_summary">Denna bild kommer att licensieras under %1$s</string>
   <string name="menu_download">Ladda ned</string>
   <string name="preference_license">Licens</string>
-  <string name="license_name_cc_by_sa">CCu00A0Erkännande-DelaLikau00A03.0</string>
-  <string name="license_name_cc_by">CC Erkännande 3.0</string>
+  <string name="use_previous">Använd föregående titel/beskrivning</string>
+  <string name="allow_gps">Hämta aktuell plats automatiskt</string>
+  <string name="allow_gps_summary">Hämta aktuell plats för att erbjuda kategoriförslag om bilden inte är geotaggad</string>
+  <string name="license_name_cc_by_sa">Erkännande-DelaLika 3.0</string>
+  <string name="license_name_cc_by">Erkännande 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Österrike)</string>
@@ -97,6 +105,8 @@ Tryck på detta meddelande (eller gå tillbaka) för att hoppa över detta steg.
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polen)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Rumänien)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
+  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="license_name_own_pd">own-pd</string>
   <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
@@ -114,6 +124,21 @@ Tryck på detta meddelande (eller gå tillbaka) för att hoppa över detta steg.
   <string name="license_name_pd_ineligible">Allmän egendom (inte berättigad för upphovsrätt)</string>
   <string name="license_name_attribution">Erkännande</string>
   <string name="license_name_gfdl">GNU Free Documentation License</string>
+  <string name="tutorial_1_text">Wikimedia Commons lagrar de flesta bilderna som används på Wikipedia.</string>
+  <string name="tutorial_1_subtext">Dina bilder hjälper till att utbilda
+människor runt hela världen!</string>
+  <string name="tutorial_2_text">Ladda upp bilder som endast du har tagit eller skapat:</string>
+  <string name="tutorial_2_subtext">- Naturliga föremål (blommor, djur, berg)
+- Användbar föremål (cyklar, tågstationer)
+- Berömda personer (din borgmästare, olympiska atleter du har träffat)</string>
+  <string name="tutorial_3_text">Ladda INTE upp:</string>
+  <string name="tutorial_3_subtext">- Selfies eller bilder på dina vänner
+- Bilder som du har laddat ned från Internet
+- Skärmdumpar på proprietära appar</string>
+  <string name="tutorial_4_text">Uppladdningsexempel:</string>
+  <string name="tutorial_4_subtext">- Titel: Sydneys operahus
+- Beskrivning: Sydneys operahus sedd från andra sidan bukten
+- Kategorier: Sydneys operahus, Sydneys operahus från väst, Sydneys operahus utifrån</string>
   <string name="welcome_wikipedia_text">Bidra med dina bilder. Hjälp Wikipedia-artiklar att komma till liv!</string>
   <string name="welcome_wikipedia_subtext">Bilder på Wikipedia kommer från Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Dina bilder hjälper till att utbilda människor runt om i världen.</string>
@@ -126,4 +151,12 @@ Tryck på detta meddelande (eller gå tillbaka) för att hoppa över detta steg.
   <string name="detail_description_empty">Ingen beskrivning</string>
   <string name="detail_license_empty">Okänd licens</string>
   <string name="menu_refresh">Uppdatera</string>
+  <string name="storage_permission_rationale">Nödvändig behörighet: Läsa extern lagring. Appen fungerar inte utan detta.</string>
+  <string name="location_permission_rationale">Valfri behörighet: Hämta aktuell plats för kategoriförslag</string>
+  <string name="ok">OK</string>
+  <string name="title_activity_nearby">Platser i närheten</string>
+  <string name="warning">Varning</string>
+  <string name="file_exists">Denna fil finns redan på Commons. Är du säker på att du vill fortsätta?</string>
+  <string name="yes">Ja</string>
+  <string name="no">Nej</string>
 </resources>

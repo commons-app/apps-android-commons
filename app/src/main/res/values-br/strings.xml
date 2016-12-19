@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Wikimedia Commons</string>
+  <string name="app_name" fuzzy="true">Wikimedia Commons</string>
   <string name="menu_settings">Arventennoù</string>
   <string name="username">Anv implijer</string>
   <string name="password">Ger-tremen</string>
@@ -18,7 +18,7 @@
   <string name="upload_progress_notification_title_finishing">Oc\'h echuiñ enporzhiadenn %1$s</string>
   <string name="upload_failed_notification_title">C\'hwitet en deus enporzhiañ %1$s</string>
   <string name="upload_failed_notification_subtitle">Pouezit evit diskwel</string>
-  <string name="uploads_pending_notification_indicator">%d restr oc\'h enporzhiañ</string>
+  <string name="uploads_pending_notification_indicator" fuzzy="true">%d restr oc\'h enporzhiañ</string>
   <string name="title_activity_contributions">Ma enporzhiadennoù</string>
   <string name="contribution_state_queued">Lakaet el lostenn</string>
   <string name="contribution_state_failed">C\'hwitet</string>
@@ -34,7 +34,7 @@
   <string name="login_failed_network">Ne c\'haller ket kevreañ - rouedad sac\'het</string>
   <string name="login_failed_username">Ne c\'haller ket kevreañ - Gwiriit hoc\'h anv implijer, mar plij</string>
   <string name="login_failed_password">Ne c\'haller ket kevreañ - Gwiriit ho ker tremen, mar plij</string>
-  <string name="login_failed_throttled">Klasket ho peus re. Esaeit en-dro en ur pennadig</string>
+  <string name="login_failed_throttled" fuzzy="true">Klasket ho peus re. Esaeit en-dro en ur pennadig</string>
   <string name="login_failed_blocked">Hon digarezit, prennet eo bet an implijer-mañ e Commons</string>
   <string name="login_failed_generic">C\'hwitet eo ar c\'hevreañ</string>
   <string name="share_upload_button">Pellgargañ</string>
@@ -66,8 +66,8 @@ Pouezit war ar c\'hemenn-mañ (pe distroit en a-raok) evit mont dreist ar bazenn
   <string name="preference_tracking_summary">Kas danevelloù implij deomp evit ma c\'hallfemp gwellaat an arload.</string>
   <string name="title_activity_settings">Arventennoù</string>
   <string name="menu_about">Diwar-benn</string>
-  <string name="about_license">Meziant frank a wirioù embannet dindan &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;an Aotre-implijout Apache s2&lt;/a&gt;</string>
-  <string name="about_improve">Mammenn war &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Drein war &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_license" fuzzy="true">Meziant frank a wirioù embannet dindan &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;an Aotre-implijout Apache s2&lt;/a&gt;</string>
+  <string name="about_improve" fuzzy="true">Mammenn war &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Drein war &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Reolennoù prevezded&lt;/a&gt;</string>
   <string name="title_activity_about">Diwar-benn</string>
   <string name="menu_feedback">Kas ho soñj (dre bostel)</string>
@@ -79,8 +79,8 @@ Pouezit war ar c\'hemenn-mañ (pe distroit en a-raok) evit mont dreist ar bazenn
   <string name="share_license_summary">Gant an aotre-implijout %1$s e vo ar skeudenn-mañ</string>
   <string name="menu_download">Pellgargañ</string>
   <string name="preference_license">Aotre-implijout</string>
-  <string name="license_name_cc_by_sa">CCu00A0Dereiñ-RannañAlikeu00A03.0</string>
-  <string name="license_name_cc_by">CCu00A0Dereiñu00A03.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Dereiñ-RannañAlikeu00A03.0</string>
+  <string name="license_name_cc_by" fuzzy="true">CCu00A0Dereiñu00A03.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Aostria)</string>

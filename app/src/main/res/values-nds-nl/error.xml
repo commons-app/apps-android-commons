@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="crash_dialog_title">Commons is vasteleupen</string>
+  <string name="crash_dialog_text">Oeps. Der gung iets mis.</string>
+  <string name="crash_dialog_comment_prompt">Vertel ons wa\'j an t doon waren, en deel t in n netbreef mit ons. Dit helpt ons um t probleem op te lössen.</string>
+  <string name="crash_dialog_ok_toast">Bedankt!</string>
+</resources>

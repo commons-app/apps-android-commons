@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">ويکيمېډيا کامنز</string>
+  <string name="app_name" fuzzy="true">ويکيمېډيا کامنز</string>
   <string name="menu_settings">امستنې</string>
   <string name="username">کارن-نوم</string>
   <string name="password">پټنوم</string>
@@ -11,6 +11,7 @@
   <string name="login_failed">غونډال کې ننوتنه نابريالې شوه!</string>
   <string name="uploading_started">پورته کېدنه پيل شوه!</string>
   <string name="upload_completed_notification_title">%1$s پورته شوی!</string>
+  <string name="upload_progress_notification_title_in_progress">د %1$s پورته کول</string>
   <string name="title_activity_contributions">زما پورته کېدنې</string>
   <string name="contribution_state_in_progress">%1$d%% بشپړ</string>
   <string name="contribution_state_starting">د برسېرېدلو په حال کې...</string>
@@ -27,6 +28,10 @@
   <string name="menu_upload_single">پورته کول</string>
   <string name="categories_search_text_hint">وېشنيزې پلټل</string>
   <string name="menu_save_categories">خوندي کول</string>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">1 پورته کول</item>
+    <item quantity="other">%d پورته کول</item>
+  </plurals>
   <string name="categories_activity_title">وېشنيزې</string>
   <string name="preference_tracking">د کارېدنې راپورونه</string>
   <string name="title_activity_settings">امستنې</string>

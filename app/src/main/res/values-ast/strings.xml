@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name" fuzzy="true">Wikimedia Commons</string>
+  <string name="menu_settings">Configuración</string>
+  <string name="username">Nome d\'usuariu</string>
+  <string name="password">Contraseña</string>
+  <string name="login">Identificase</string>
+  <string name="logging_in_title">Aniciando sesión</string>
+  <string name="logging_in_message">Aguarde, por favor…</string>
+  <string name="login_success">¡Identificación correuta!</string>
+  <string name="login_failed">¡Falló l\'aniciu de sesión!</string>
+  <string name="authentication_failed">¡Falló la identificación!</string>
+  <string name="uploading_started">Principió la xuba</string>
+  <string name="upload_completed_notification_title">¡%1$s xubíu!</string>
+  <string name="upload_completed_notification_text">Toque pa ver la xuba</string>
+  <string name="upload_progress_notification_title_start">Principiando la xuba de %1$s</string>
+  <string name="upload_progress_notification_title_in_progress">%1$s ta xubiendo</string>
+  <string name="upload_progress_notification_title_finishing">Acabando de xubir %1$s</string>
+  <string name="upload_failed_notification_title">Falló la xuba de %1$s</string>
+  <string name="upload_failed_notification_subtitle">Toque pa velo</string>
+  <string name="uploads_pending_notification_indicator" fuzzy="true">Xubiendo %d ficheros</string>
+  <string name="title_activity_contributions">Les mios xubes</string>
+  <string name="contribution_state_queued">En cola</string>
+  <string name="contribution_state_failed">Falló</string>
+  <string name="contribution_state_in_progress">%1$d%% completao</string>
+  <string name="contribution_state_starting">Xubiendo</string>
+  <string name="menu_from_gallery">De la Galería</string>
+  <string name="menu_from_camera">Sacar foto</string>
+  <string name="provider_contributions">Les mios xubes</string>
+  <string name="menu_share">Compartir</string>
+  <string name="menu_open_in_browser">Ver nel navegador</string>
+  <string name="share_title_hint">Títulu</string>
+  <string name="share_description_hint">Descripción</string>
+  <string name="login_failed_network">Nun se pudo aniciar sesión – error de rede</string>
+  <string name="login_failed_username">Nun se pudo aniciar sesión – por favor compruebe\'l so nome d\'usuariu</string>
+  <string name="login_failed_password">Nun se pudo aniciar sesión – por favor compruebe la so contraseña</string>
+  <string name="login_failed_throttled" fuzzy="true">Demasiaos intentos incorreutos. Por favor, vuelva a intentalo en dellos minutos</string>
+  <string name="login_failed_blocked">Sentímoslo, esti usuariu ta bloquiáu en Commons</string>
+  <string name="login_failed_generic">Falló l\'aniciu de sesión</string>
+  <string name="share_upload_button">Xubir</string>
+  <string name="multiple_share_base_title">Da-y un nome al conxuntu</string>
+  <string name="provider_modifications">Cambeos</string>
+  <string name="menu_upload_single">Xubir</string>
+  <string name="categories_search_text_hint">Guetar categoríes</string>
+  <string name="menu_save_categories">Guardar</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">Inda nun hai cargues</item>
+    <item quantity="one">1 carga</item>
+    <item quantity="other">%d cargues</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Principiando 1 carga</item>
+    <item quantity="other">Principiando %d cargues</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">1 carga</item>
+    <item quantity="other">%d cargues</item>
+  </plurals>
+  <string name="categories_not_found">Nun s\'alcontró denguna categoría que case con %1$s</string>
+  <string name="categories_skip_explanation">Amieste categoríes pa facer les imaxes más fáciles d\'alcontrar en Wikimedia Commons.
+
+Principie a escribir p\'amestar categoríes.
+Toque nesti mensaxe (o calque atrás) pa saltar esti pasu.</string>
+  <string name="categories_activity_title">Categoríes</string>
+  <string name="preference_tracking">Informes d\'usu</string>
+  <string name="preference_tracking_summary">Unviar informes d\'usu a Wikimedia p\'ayudanos a ameyorar l\'aplicación</string>
+  <string name="title_activity_settings">Configuración</string>
+  <string name="menu_about">Tocante a</string>
+  <string name="about_license" fuzzy="true">Software de códigu abiertu lliberáu baxo la &lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;Llicencia Apache v2&lt;/a&gt;</string>
+  <string name="about_improve" fuzzy="true">Fonte en &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;. Fallos en &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
+  <string name="about_privacy_policy">Wikimedia:Commons-android-strings-about privacy policy/ast</string>
+  <string name="title_activity_about">Tocante a</string>
+  <string name="menu_feedback">Unviar comentarios (per corréu)</string>
+  <string name="provider_categories">Categoríes usaes de recién</string>
+  <string name="waiting_first_sync">Esperando pola primera sincronización...</string>
+  <string name="no_uploads_yet">Inda nun xubió denguna foto.</string>
+  <string name="menu_retry_upload">Reintentar</string>
+  <string name="menu_cancel_upload">Encaboxar</string>
+  <string name="share_license_summary">Esta imaxe quedará baxo la llicencia %1$s</string>
+  <string name="menu_download">Descargar</string>
+  <string name="preference_license">Llicencia</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Reconocimientu-CompartirIgualu00A03.0</string>
+  <string name="license_name_cc_by" fuzzy="true">CCu00A0Reconocimientuu00A03.0</string>
+  <string name="license_name_cc0">CC0</string>
+  <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Austria)</string>
+  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Alemaña)</string>
+  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonia)</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (España)</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Croacia)</string>
+  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxemburgu)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Paises Baxos)</string>
+  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Noruega)</string>
+  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polonia)</string>
+  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Rumania)</string>
+  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_zero">CC Zero</string>
+  <string name="license_name_own_pd">propiu-dominiu públicu</string>
+  <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
+  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
+  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
+  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
+  <string name="license_name_cc_2_0">CC BY 2.0</string>
+  <string name="license_name_fal">Llicencia artística llibre</string>
+  <string name="license_name_pd_old_100">Dominiu públicu (l\'autor morrió hai más de 100 años)</string>
+  <string name="license_name_pd_old">Dominiu públicu (drechos d\'autor caducaos)</string>
+  <string name="license_name_pd_art">Dominiu públicu (obra d\'arte)</string>
+  <string name="license_name_pd_us">Dominiu públicu (EE.XX.)</string>
+  <string name="license_name_pd_usgov">Dominiu públicu (gobiernu de los EE.XX.)</string>
+  <string name="license_name_pd_usgov_nasa">Dominiu públicu (NASA)</string>
+  <string name="license_name_pd_ineligible">Dominiu públicu (nun puen aplicase drechos d\'autor)</string>
+  <string name="license_name_attribution">Reconocimientu</string>
+  <string name="license_name_gfdl">Llicencia de documentación llibre de GNU</string>
+  <string name="welcome_wikipedia_text">Collabore coles sos imaxes. ¡Ayude a que los artículos de Wikipedia tengan vida!</string>
+  <string name="welcome_wikipedia_subtext">Les imaxes de Wikipedia vienen de
+Wikimedia Commons.</string>
+  <string name="welcome_copyright_text">Les sos imaxes ayuden a educar a la xente alredor del mundu.</string>
+  <string name="welcome_copyright_subtext">Evite los materiales con drechos d\'autor qu\'atopó per internet, lo mesmo qu\'imaxes de cartelos, portaes de llibros, etc.</string>
+  <string name="welcome_final_text">¿Cree que yá sabe cómo va?</string>
+  <string name="welcome_final_button_text">¡Si!</string>
+  <string name="detail_panel_cats_label">Categoríes</string>
+  <string name="detail_panel_cats_loading">Cargando...</string>
+  <string name="detail_panel_cats_none">Nenguna seleicionada</string>
+  <string name="detail_description_empty">Ensin descripción</string>
+  <string name="detail_license_empty">Llicencia desconocida</string>
+  <string name="menu_refresh">Refrescar</string>
+</resources>

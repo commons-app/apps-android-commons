@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Wikimedia Commons</string>
+  <string name="app_name">Commons</string>
   <string name="menu_settings">Impostazioni</string>
   <string name="username">Nome utente</string>
   <string name="password">Password</string>
@@ -9,6 +9,7 @@
   <string name="logging_in_message">Attendi per favore...</string>
   <string name="login_success">Accesso effettuato!</string>
   <string name="login_failed">Accesso non riuscito!</string>
+  <string name="upload_failed">File non trovato. Prova con un altro file.</string>
   <string name="authentication_failed">Autenticazione non riuscita!</string>
   <string name="uploading_started">Caricamento iniziato!</string>
   <string name="upload_completed_notification_title">%1$s caricato!</string>
@@ -18,7 +19,10 @@
   <string name="upload_progress_notification_title_finishing">Terminato il caricamento di %1$s</string>
   <string name="upload_failed_notification_title">Caricamento di %1$s non riuscito</string>
   <string name="upload_failed_notification_subtitle">Premi per visualizzare</string>
-  <string name="uploads_pending_notification_indicator">%d file in caricamento</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">1 file in caricamento</item>
+    <item quantity="other">%d file in caricamento</item>
+  </plurals>
   <string name="title_activity_contributions">I miei caricamenti</string>
   <string name="contribution_state_queued">In coda</string>
   <string name="contribution_state_failed">Non riuscito</string>
@@ -34,7 +38,7 @@
   <string name="login_failed_network">Impossibile effettuare l\'accesso - errore di rete</string>
   <string name="login_failed_username">Impossibile effettuare l\'accesso - controlla il nome utente</string>
   <string name="login_failed_password">Impossibile effettuare l\'accesso - controlla la password</string>
-  <string name="login_failed_throttled">Troppi tentativi falliti. Riprova tra alcuni minuti</string>
+  <string name="login_failed_throttled">Troppi tentativi falliti. Riprova tra alcuni minuti.</string>
   <string name="login_failed_blocked">Spiacente, questo utente è stato bloccato su Commons</string>
   <string name="login_failed_generic">Accesso non riuscito</string>
   <string name="share_upload_button">Carica</string>
@@ -66,8 +70,8 @@ Tocca questo messaggio (o premi Indietro) per saltare l\'aggiunta di categorie.<
   <string name="preference_tracking_summary">Invia report sull\'utilizzo a Wikimedia per aiutarci a migliorare l\'app</string>
   <string name="title_activity_settings">Impostazioni</string>
   <string name="menu_about">Informazioni</string>
-  <string name="about_license">Software open source rilasciato con &lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;licenza Apache v2&lt;/a&gt;</string>
-  <string name="about_improve">Codice sorgente su &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;. Errori su &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_license">Software open source rilasciato con &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;licenza Apache v2&lt;/a&gt;. Wikimedia Commons ed il suo logo sono marchi registrati della Wikimedia Foundation e sono utilizzati con il permesso della Wikimedia Foundation. Non siamo approvati o affiliati con la Wikimedia Foundation.</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Codice sorgente&lt;/a&gt; e &lt;a href=\"https://commons-app.github.io/\"&gt;sito web&lt;/a&gt; su GitHub&lt;/a&gt;. Crea una nuova &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;segnalazione GitHub&lt;/a&gt; per riportare errori e suggerimenti.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politica sulla privacy&lt;/a&gt;</string>
   <string name="title_activity_about">Informazioni</string>
   <string name="menu_feedback">Invia un commento (tramite email)</string>
@@ -79,8 +83,9 @@ Tocca questo messaggio (o premi Indietro) per saltare l\'aggiunta di categorie.<
   <string name="share_license_summary">Questa immagine sarà rilasciata in base alla licenza %1$s</string>
   <string name="menu_download">Scarica</string>
   <string name="preference_license">Licenza</string>
-  <string name="license_name_cc_by_sa">CCu00A0Attribuzione-Condividi allo stesso modo</string>
-  <string name="license_name_cc_by">CCu00A0Attribuzione</string>
+  <string name="use_previous">Utilizza titolo/descrizione precedente</string>
+  <string name="license_name_cc_by_sa">CCu00A0Attribuzione-Condividi allo stesso modou00A03.0</string>
+  <string name="license_name_cc_by">CCu00A0Attribuzioneu00A03.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Austria)</string>
@@ -94,6 +99,8 @@ Tocca questo messaggio (o premi Indietro) per saltare l\'aggiunta di categorie.<
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polonia)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romania)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
+  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="license_name_own_pd">Pubblico dominio (opera propria)</string>
   <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
@@ -113,7 +120,7 @@ Tocca questo messaggio (o premi Indietro) per saltare l\'aggiunta di categorie.<
   <string name="license_name_gfdl">GNU Free Documentation License</string>
   <string name="welcome_wikipedia_text">Contribuisci con le tue immagini. Aiuta a rendere vive le voci di Wikipedia!</string>
   <string name="welcome_wikipedia_subtext">Le immagini su Wikipedia provengono da Wikimedia Commons.</string>
-  <string name="welcome_copyright_text">Le tue immagini aiutano a educare persone in tutto il mondo.</string>
+  <string name="welcome_copyright_text">Le tue immagini aiutano l\'istruzione di persone in tutto il mondo.</string>
   <string name="welcome_copyright_subtext">Evita materiali protetti da copyright che hai trovato su Internet, come pure le immagini di poster, copertine di libri, ecc.</string>
   <string name="welcome_final_text">Pensi di aver capito?</string>
   <string name="welcome_final_button_text">Sì!</string>
@@ -123,4 +130,8 @@ Tocca questo messaggio (o premi Indietro) per saltare l\'aggiunta di categorie.<
   <string name="detail_description_empty">Nessuna descrizione</string>
   <string name="detail_license_empty">Licenza sconosciuta</string>
   <string name="menu_refresh">Aggiorna</string>
+  <string name="ok">OK</string>
+  <string name="warning">Attenzione</string>
+  <string name="yes">Sì</string>
+  <string name="no">No</string>
 </resources>

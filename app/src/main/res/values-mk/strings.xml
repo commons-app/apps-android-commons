@@ -5,10 +5,12 @@
   <string name="username">Корисничко име</string>
   <string name="password">Лозинка</string>
   <string name="login">Најава</string>
+  <string name="signup">Регистрација</string>
   <string name="logging_in_title">Најава</string>
   <string name="logging_in_message">Почекајте...</string>
   <string name="login_success">Најавата е успешна!</string>
   <string name="login_failed">Најавата не успеа!</string>
+  <string name="upload_failed">Не ја пронајдов податотеката. Пробајте со друга.</string>
   <string name="authentication_failed">Заверката не успеа!</string>
   <string name="uploading_started">Подигањето започна</string>
   <string name="upload_completed_notification_title">Податотеката „%1$s“ е подигната!</string>
@@ -18,7 +20,10 @@
   <string name="upload_progress_notification_title_finishing">Заврпувам со подигање на „%1$s“</string>
   <string name="upload_failed_notification_title">Подигањето на „%1$s“ не успеа</string>
   <string name="upload_failed_notification_subtitle">Допрете за да погледате</string>
-  <string name="uploads_pending_notification_indicator">Се подигаат %d податотеки</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">Се подига 1 податотека</item>
+    <item quantity="other">Се подигаат %d податотеки</item>
+  </plurals>
   <string name="title_activity_contributions">Мои подигања</string>
   <string name="contribution_state_queued">Чека ред</string>
   <string name="contribution_state_failed">Не успеа</string>
@@ -26,6 +31,7 @@
   <string name="contribution_state_starting">Подигање</string>
   <string name="menu_from_gallery">Од галеријата</string>
   <string name="menu_from_camera">Направи слика</string>
+  <string name="menu_nearby">Во близина</string>
   <string name="provider_contributions">Мои подигања</string>
   <string name="menu_share">Сподели</string>
   <string name="menu_open_in_browser">Погледај во прелистувач</string>
@@ -34,7 +40,7 @@
   <string name="login_failed_network">Не можам да Ве најавам — мрежата не работи</string>
   <string name="login_failed_username">Не можам да Ве најавам — проверете си го корисничкото име</string>
   <string name="login_failed_password">Не можам да Ве најавам — проверете си ја лозинката</string>
-  <string name="login_failed_throttled">Направени се премногу неуспешни обиди. Обидете се пак за некоја минута</string>
+  <string name="login_failed_throttled">Направени се премногу неуспешни обиди. Обидете се пак за некоја минута.</string>
   <string name="login_failed_blocked">Нажалост, корисникот е блокиран на Ризницата</string>
   <string name="login_failed_generic">Најавата не успеа</string>
   <string name="share_upload_button">Подигни</string>
@@ -63,14 +69,16 @@
 Допрете ја поракава (или стиснете на назад) за да го прескокнете овој чекор.</string>
   <string name="categories_activity_title">Категории</string>
   <string name="preference_tracking">Извештаи за употреба</string>
-  <string name="preference_tracking_summary">Испраќајте ѝ на Викимедија извештаи за употреба, со цел да го подобриме прилогов</string>
+  <string name="preference_tracking_summary">Испраќајте ѝ на Викимедија извештаи за употреба, со цел да го подобриме извршников</string>
   <string name="title_activity_settings">Нагодувања</string>
-  <string name="menu_about">За прилогот</string>
-  <string name="about_license">Програм со отворен код, издаден под лиценцата &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Апачи вер. 2&lt;/a&gt;</string>
-  <string name="about_improve">Изворот се наоѓа на &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Бубачките се на &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="title_activity_signup">Регистрација</string>
+  <string name="menu_about">За извршникот</string>
+  <string name="about_license">Програм со отворен код, издаден под лиценцата &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Апачи вер. 2&lt;/a&gt;. ризницата и нејзиното лого се заштитни знаци на Фондацијата Викимедија и се користат со нејзина дозвола. Ние не сме поддржани и поврзани со Фондацијата Викимедија.</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Извор&lt;/a&gt; и &lt;a href=\"https://commons-app.github.io/\"&gt;мреж. место&lt;/a&gt; на GitHub&lt;/a&gt;. Создајте нов &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;случај на GitHub&lt;/a&gt; за пријавување грешки и давање предлози.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Заштита на личните податоци\"&gt;Заштита_на_личните_податоци&lt;/a&gt;</string>
-  <string name="title_activity_about">За прилогот</string>
+  <string name="title_activity_about">За извршникот</string>
   <string name="menu_feedback">Испратете Ваше мислење (по е-пошта)</string>
+  <string name="no_email_client">Немате воспоставено клиент за е-пошта</string>
   <string name="provider_categories">Неодамна искористени категории</string>
   <string name="waiting_first_sync">Го чекам првото усогласување...</string>
   <string name="no_uploads_yet">Сè уште немате подигнато ниедна слика.</string>
@@ -79,8 +87,11 @@
   <string name="share_license_summary">Сликава ќе се води под лиценцата %1$s</string>
   <string name="menu_download">Преземи</string>
   <string name="preference_license">Лиценца</string>
-  <string name="license_name_cc_by_sa">CCu00A0НаведиИзвор-СподелиПодИстиУсловиu00A03.0</string>
-  <string name="license_name_cc_by">CCu00A0НаведиИзворu00A03.0</string>
+  <string name="use_previous" fuzzy="true">Користи претходен наслов/опис</string>
+  <string name="allow_gps">Автоматски давај ја тековната местоположба</string>
+  <string name="allow_gps_summary">Добивање на тековната местоположба за да се дадат предлози за категории, доколку сликата нема геоознаки</string>
+  <string name="license_name_cc_by_sa">CCu00A0Наведиu00A0извор-Споделиu00A0подu00A0истиu00A0условиu00A03.0</string>
+  <string name="license_name_cc_by">CCu00A0Наведиu00A0изворu00A03.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Австрија)</string>
@@ -94,6 +105,8 @@
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Полска)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Романија)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
+  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Нула</string>
   <string name="license_name_own_pd">own-pd</string>
   <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
@@ -111,6 +124,21 @@
   <string name="license_name_pd_ineligible">Јавна сопственост (не подлежи на заштита)</string>
   <string name="license_name_attribution">Наведи извор</string>
   <string name="license_name_gfdl">ГНУ-ова лиценца за слободна документација</string>
+  <string name="tutorial_1_text">Ризницата е вдомувач на највеќето слики што се користат на Википедија.</string>
+  <string name="tutorial_1_subtext">Со вашите слики помагате во образованието
+на луѓето ширум светот!</string>
+  <string name="tutorial_2_text">Подигајте слики кои се наполно ваше дело:</string>
+  <string name="tutorial_2_subtext">u2022 Природни објекти (цвеќиња, животни, планини) 
+u2022 Наменски објекти (велосипеди, железнички станици) 
+u2022 Познати личности (вашиот градоначалник, олимписки спортисти што ќе ги сретнете)</string>
+  <string name="tutorial_3_text">НЕ подигајте:</string>
+  <string name="tutorial_3_subtext">u2022 Слики од вас или вашите пријатели 
+u2022 Слики што сте ги презеле од семрежјето 
+u2022 Екрански снимки на неслободни прилози (апликации)</string>
+  <string name="tutorial_4_text">Пример за подигање:</string>
+  <string name="tutorial_4_subtext">u2022 Наслов: Сиднејска опера 
+u2022 Опис: Поглед на Сиднејската опера преку заливот
+u2022 Категорија: Сиднејска опера, Сиднејската опера од запад, Сиднејската опера од далеку</string>
   <string name="welcome_wikipedia_text">Споделете ги Вашите слики. Да ги оживееме статиите на Википедија!</string>
   <string name="welcome_wikipedia_subtext">Сликите на Википедија доаѓаат од Ризницата.</string>
   <string name="welcome_copyright_text">Со Вашите слики помагате во образованието на луѓето ширум светот.</string>
@@ -123,4 +151,12 @@
   <string name="detail_description_empty">Нема опис</string>
   <string name="detail_license_empty">Непозната лиценца</string>
   <string name="menu_refresh">Превчитај</string>
+  <string name="storage_permission_rationale">Потребна дозвола: Треба да се прочита од надворешен склад. Прилогот не може да работи без ова.</string>
+  <string name="location_permission_rationale">Дозвола по желба: Утврдување на тековната местоположба за предлагање категории</string>
+  <string name="ok">ОК</string>
+  <string name="title_activity_nearby">Околни места</string>
+  <string name="warning">Предупредување</string>
+  <string name="file_exists">Податотекава веќе постои на Ризницата. Дали сигурно сакате да продолжите?</string>
+  <string name="yes">Да</string>
+  <string name="no">Не</string>
 </resources>

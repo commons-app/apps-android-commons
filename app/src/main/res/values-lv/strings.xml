@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Wikimedija Commons</string>
+  <string name="app_name" fuzzy="true">Wikimedija Commons</string>
   <string name="menu_settings">Iestatījumi</string>
   <string name="username">Lietotājvārds</string>
   <string name="password">Parole</string>
   <string name="login">Pieslēgties</string>
+  <string name="signup">Reģistrēties</string>
   <string name="logging_in_title">Pieslēdzas</string>
   <string name="logging_in_message">Lūdzu, uzgaidiet...</string>
   <string name="login_success">Ieiešana veiksmīga</string>
@@ -12,7 +13,9 @@
   <string name="authentication_failed">Autentifikācija neizdevās!</string>
   <string name="uploading_started">Augšupielāde sākās!</string>
   <string name="upload_completed_notification_title">%1$s augšupielādēti!</string>
+  <string name="upload_progress_notification_title_start">Uzsāk %1$s augšupielādi</string>
   <string name="upload_progress_notification_title_in_progress">%1$s augšupielādēti</string>
+  <string name="upload_progress_notification_title_finishing">Pabeidz %1$s augšupielādi</string>
   <string name="title_activity_contributions">Manas augsupielades</string>
   <string name="contribution_state_queued">Rindā iekļauts</string>
   <string name="contribution_state_failed">Neizdevās</string>
@@ -20,6 +23,7 @@
   <string name="contribution_state_starting">Augšupielādē</string>
   <string name="menu_from_gallery">No galerijas</string>
   <string name="menu_from_camera">Uzņemt fotoattēlu</string>
+  <string name="menu_nearby">Tuvumā</string>
   <string name="provider_contributions">Manas augsupielades</string>
   <string name="menu_share">Dalīties</string>
   <string name="menu_open_in_browser">Skatīt pārlūkprogrammā</string>
@@ -35,7 +39,7 @@
   <string name="preference_tracking">Lietošanas atskaites</string>
   <string name="title_activity_settings">Iestatījumi</string>
   <string name="menu_about">Par</string>
-  <string name="about_improve">Izejas kods pieejams &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Kļūdas ziņot &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_improve" fuzzy="true">Izejas kods pieejams &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Kļūdas ziņot &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privātuma politika&lt;/a&gt;</string>
   <string name="title_activity_about">Par</string>
   <string name="menu_feedback">Nosūtīt atsauksmes (pa e-pastu)</string>
@@ -54,4 +58,5 @@
   <string name="detail_description_empty">Nav apraksta</string>
   <string name="detail_license_empty">Nezināma licence</string>
   <string name="menu_refresh">Atjaunināt</string>
+  <string name="ok">Labi</string>
 </resources>

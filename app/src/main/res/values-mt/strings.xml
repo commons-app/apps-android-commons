@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Wikimedia Commons</string>
+  <string name="app_name" fuzzy="true">Wikimedia Commons</string>
   <string name="username">Isem l-utent</string>
   <string name="password">Password</string>
   <string name="login">Idħol</string>
@@ -47,8 +47,8 @@ Agħfas fuq dan il-messaġġ (jew mur lura) sabiex taqbeż dan il-pass.</string>
   <string name="preference_tracking_summary">Ibgħat ir-rapporti tal-użu lill-Wikimedia sabiex tgħinna ntejbdu l-app</string>
   <string name="title_activity_settings">Issettjar</string>
   <string name="menu_about">Dwar</string>
-  <string name="about_license">Softwer ta\' sors miftuħ rilaxxat taħt il-&lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Liċenzja Apache v2&lt;/a&gt;</string>
-  <string name="about_improve">Sors fuq &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Żbalji fuq &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_license" fuzzy="true">Softwer ta\' sors miftuħ rilaxxat taħt il-&lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Liċenzja Apache v2&lt;/a&gt;</string>
+  <string name="about_improve" fuzzy="true">Sors fuq &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Żbalji fuq &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politika tal-privatezza&lt;/a&gt;</string>
   <string name="title_activity_about">Dwar</string>
   <string name="provider_categories">Kategoriji wżati riċentament</string>

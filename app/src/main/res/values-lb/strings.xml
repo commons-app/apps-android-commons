@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Wikimedia Commons</string>
+  <string name="app_name">Commons</string>
   <string name="menu_settings">Astellungen</string>
   <string name="username">Benotzernumm</string>
   <string name="password">Passwuert</string>
   <string name="login">Aloggen</string>
+  <string name="signup">Schreift Iech an</string>
   <string name="logging_in_title">Aloggen</string>
   <string name="logging_in_message">Waart w.e.g. ...</string>
   <string name="login_success">Umeldung huet geklappt!</string>
   <string name="login_failed">D\'Aloggen huet net funktionéiert</string>
+  <string name="upload_failed">Fichier net fonnt. probéiert w.e.g. en anere Fichier.</string>
   <string name="authentication_failed">Authentifizéierung huet net funktionéiert!</string>
   <string name="uploading_started">D\'Eroplueden huet ugefaang!</string>
   <string name="upload_completed_notification_title">%1$s eropgelueden!</string>
@@ -18,7 +20,10 @@
   <string name="upload_progress_notification_title_finishing">Eroplueden vu(n) %1$s ofschléissen</string>
   <string name="upload_failed_notification_title">D\'Eropluede vu(n) %1$s huet net funktionéiert</string>
   <string name="upload_failed_notification_subtitle">Dréckt fir nach eng Kéier ze probéieren</string>
-  <string name="uploads_pending_notification_indicator">%d Fichieren eroplueden</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">ee Fichier eroplueden</item>
+    <item quantity="other">%d Fichieren eroplueden</item>
+  </plurals>
   <string name="title_activity_contributions">Meng eropgeluede Fichieren</string>
   <string name="contribution_state_queued">An der Queue</string>
   <string name="contribution_state_failed">Huet net funktionéiert</string>
@@ -26,6 +31,7 @@
   <string name="contribution_state_starting">Eroplueden</string>
   <string name="menu_from_gallery">Vun der Gallerie</string>
   <string name="menu_from_camera">Foto maachen</string>
+  <string name="menu_nearby">Nobäi</string>
   <string name="provider_contributions">Meng eropgeluede Fichieren</string>
   <string name="menu_share">Deelen</string>
   <string name="menu_open_in_browser">Am Browser kucken</string>
@@ -34,7 +40,7 @@
   <string name="login_failed_network">Aloggen huet net funktionéiert - Feeler mam Reseau</string>
   <string name="login_failed_username">Login net méiglech - kuckt w.e.g. Äre Benotzernumm no</string>
   <string name="login_failed_password">Login net méiglech - kuckt w.e.g. Äert Passwuert no</string>
-  <string name="login_failed_throttled">Ze dacks ouni Succès probéiert. Probéiert w.e.g. an e puer Minutten nach eng Kéier</string>
+  <string name="login_failed_throttled">Ze dacks ouni Succès probéiert. Probéiert w.e.g. an e puer Minutten nach eng Kéier.</string>
   <string name="login_failed_blocked">Pardon, dëse Benotzer ass op Commons gespaart</string>
   <string name="login_failed_generic">Aloggen huet net funktionéiert</string>
   <string name="share_upload_button">Eroplueden</string>
@@ -63,12 +69,15 @@ Klickt op dëse Message (oder dréck op Zréck) fir dëse Schrëtt z\'iwwerspran
   <string name="preference_tracking">Rapporten iwwer de Gebrauch</string>
   <string name="preference_tracking_summary">Schéckt Rapporten iwwer de Gebrauch vu Wikimedia fir eis ze hëllefen d\'App ze verbesseren</string>
   <string name="title_activity_settings">Astellungen</string>
+  <string name="title_activity_signup">Mellt Iech un</string>
   <string name="menu_about">Iwwer</string>
-  <string name="about_license">\'Open-Source-Software\' verëffentlecht ënner der &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache Lizenz v2&lt;/a&gt;</string>
-  <string name="about_improve">Quell op &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Feeler op &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_license" fuzzy="true">\'Open-Source-Software\' verëffentlecht ënner der &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache Lizenz v2&lt;/a&gt;</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Quell&lt;/a&gt; an &lt;a href=\"https://commons-app.github.io/\"&gt;Internetsite&lt;/a&gt; vu GitHub.
+Leet w.e.g. &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt; e GitHub Problem&lt;/a&gt; fir Problemer ze mellen a Proposen ze maachen.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Dateschutzerklärung&lt;/a&gt;</string>
   <string name="title_activity_about">Iwwer</string>
   <string name="menu_feedback">Feedback schécken (per E-Mail)</string>
+  <string name="no_email_client">Keen E-Mail-Client installéiert</string>
   <string name="provider_categories">Rezent benotzt Kategorien</string>
   <string name="waiting_first_sync">Waarden op déi éischt Synchronisatioun...</string>
   <string name="no_uploads_yet">Dir hutt nach keng Fotoen eropgelueden.</string>
@@ -77,8 +86,9 @@ Klickt op dëse Message (oder dréck op Zréck) fir dëse Schrëtt z\'iwwerspran
   <string name="share_license_summary">Dëst Bild gëtt ënner %1$s lizenzéiert</string>
   <string name="menu_download">Eroflueden</string>
   <string name="preference_license">Lizenz</string>
+  <string name="allow_gps">Automatesch déi aktuell Plaz kréien</string>
   <string name="license_name_cc_by_sa">CCu00A0Attribution-ShareAlikeu00A03.0</string>
-  <string name="license_name_cc_by">CCu00A0Attribution00A03.0</string>
+  <string name="license_name_cc_by">CCu00A0Attributionu00A03.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Austria)</string>
@@ -92,6 +102,8 @@ Klickt op dëse Message (oder dréck op Zréck) fir dëse Schrëtt z\'iwwerspran
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Poland)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romania)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
+  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="license_name_own_pd">own-pd</string>
   <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
@@ -109,6 +121,9 @@ Klickt op dëse Message (oder dréck op Zréck) fir dëse Schrëtt z\'iwwerspran
   <string name="license_name_pd_ineligible">Public domain (net zoulässeg fir Copyright)</string>
   <string name="license_name_attribution">Attributioun</string>
   <string name="license_name_gfdl">GNU Fräi Dokumentatiouns Lizenz</string>
+  <string name="tutorial_1_subtext">Är Biller hëllefe Leit op der ganzer Welt ze forméieren!</string>
+  <string name="tutorial_3_text">W.e.g. NET eroplueden:</string>
+  <string name="tutorial_4_text">Beispill-Upload:</string>
   <string name="welcome_wikipedia_text">Maacht mat mat Äre Biller. Hëlleft Wikipedia-Artikele méi lieweg ze maachen!</string>
   <string name="welcome_wikipedia_subtext">Biller op Wikipedia komme vu Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Är Biller hëllefe Leit op der ganzer Welt ze forméieren.</string>
@@ -121,4 +136,10 @@ Klickt op dëse Message (oder dréck op Zréck) fir dëse Schrëtt z\'iwwerspran
   <string name="detail_description_empty">Keng Beschreiwung</string>
   <string name="detail_license_empty">Onbekannt Lizenz</string>
   <string name="menu_refresh">Aktualiséieren</string>
+  <string name="ok">OK</string>
+  <string name="title_activity_nearby">Plazen nobäi</string>
+  <string name="warning">Warnung</string>
+  <string name="file_exists">Dëse Fichier gëtt et schonn op Commons. Sidd Dir sécher datt Dir virufuere wëllt?</string>
+  <string name="yes">Jo</string>
+  <string name="no">Neen</string>
 </resources>

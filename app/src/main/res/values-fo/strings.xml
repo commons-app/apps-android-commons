@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Wikimedia Commons</string>
+  <string name="app_name" fuzzy="true">Wikimedia Commons</string>
   <string name="menu_settings">Innstillingar</string>
   <string name="username">Brúkaranavn</string>
   <string name="password">Loyniorð</string>
@@ -33,7 +33,7 @@
   <string name="login_failed_network">Ómøguligt at rita inn - feilur í netsambandinum</string>
   <string name="login_failed_username">Ómøguligt at rita inn - vinarliga eftirkanna títt brúkaranavn</string>
   <string name="login_failed_password">Ómøguligt at rita inn - vinarliga kanna eftir, um títt loyniorð er rætt</string>
-  <string name="login_failed_throttled">Ov nógv miseydnaðar royndir. Vinarliga royn aftur um fáir minuttir</string>
+  <string name="login_failed_throttled" fuzzy="true">Ov nógv miseydnaðar royndir. Vinarliga royn aftur um fáir minuttir</string>
   <string name="login_failed_blocked">Haldið okkum tilgóðar, hesin brúkari er blivin sperraður á Commons</string>
   <string name="login_failed_generic">Login miseydnaðist</string>
   <string name="share_upload_button">Legg út</string>
@@ -52,8 +52,8 @@ Trýst hetta boðið (ella vend aftur) fyri at droppa hetta stigið.</string>
   <string name="preference_tracking_summary">Send brúkarafrágreiðingar til Wikimedia fyri at hjálpa okkum at betra um appina</string>
   <string name="title_activity_settings">Innstillingar</string>
   <string name="menu_about">Um</string>
-  <string name="about_license">Open Source ritbúnaður útgivin undir &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
-  <string name="about_improve">Kelda á &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Lýs (bugs) á &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_license" fuzzy="true">Open Source ritbúnaður útgivin undir &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
+  <string name="about_improve" fuzzy="true">Kelda á &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Lýs (bugs) á &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privatlívs politikkur&lt;/a&gt;</string>
   <string name="title_activity_about">Um</string>
   <string name="menu_feedback">Send afturmelding (við T-posti)</string>
@@ -65,8 +65,8 @@ Trýst hetta boðið (ella vend aftur) fyri at droppa hetta stigið.</string>
   <string name="share_license_summary">Henda myndin kemur undir %1$s lisensin</string>
   <string name="menu_download">Tak niður</string>
   <string name="preference_license">Lisensur</string>
-  <string name="license_name_cc_by_sa">CCu00A0Navnageving-DeilLíkau00A03.0</string>
-  <string name="license_name_cc_by">CCu00A0Navnagevingu00A03.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Navnageving-DeilLíkau00A03.0</string>
+  <string name="license_name_cc_by" fuzzy="true">CCu00A0Navnagevingu00A03.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Eysturríki)</string>

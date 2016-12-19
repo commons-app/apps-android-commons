@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">ଉଇକିମିଡ଼ିଆ କମନ୍ସ</string>
+  <string name="app_name" fuzzy="true">ଉଇକିମିଡ଼ିଆ କମନ୍ସ</string>
   <string name="menu_settings">ସଂରଚନା</string>
   <string name="username">ସଭ୍ୟ ନାମ</string>
   <string name="password">ପାସୱାର୍ଡ଼</string>
@@ -33,7 +33,7 @@
   <string name="login_failed_network">ଲଗ ଇନ କରିବାରେ ବିଫଳ - ନେଟୱାର୍କରେ ଅସୁବିଧା</string>
   <string name="login_failed_username">ଲଗ ଇନ କରିବାରେ ବିଫଳ - ଦୟାକରି ନିଜର ସଭ୍ୟ ନାମ ପରଖିନିଅନ୍ତୁ</string>
   <string name="login_failed_password">ଲଗ ଇନ କରିବାରେ ବିଫଳ - ଦୟାକରି ନିଜର ପାସୱାର୍ଡ଼ ପରଖିନିଅନ୍ତୁ</string>
-  <string name="login_failed_throttled">ଖୁବ ଅଧିକ ଅସଫଳ ଚେଷ୍ଟା । ଦୟାକରି କେଇ ମିନିଟ ଛାଡ଼ି ଚେଷ୍ଟା କରନ୍ତୁ</string>
+  <string name="login_failed_throttled" fuzzy="true">ଖୁବ ଅଧିକ ଅସଫଳ ଚେଷ୍ଟା । ଦୟାକରି କେଇ ମିନିଟ ଛାଡ଼ି ଚେଷ୍ଟା କରନ୍ତୁ</string>
   <string name="login_failed_blocked">କ୍ଷମା ଘେନିବେ, ଏହି ସଭ୍ୟଙ୍କୁ କମନ୍ସରେ ଅଟକାଯାଇଛି</string>
   <string name="login_failed_generic">ଲଗଇନ ହେଲାନାହିଁ</string>
   <string name="share_upload_button">ଅପଲୋଡ଼</string>
@@ -50,8 +50,8 @@
   <string name="preference_tracking_summary">ଉଇକିମିଡ଼ିଆକୁ ବ୍ୟବହାର ବିବରଣୀ ପଠାଇ ଆମକୁ ଏହି ଆପ୍ଲିକେସନଟିକୁ ଉନ୍ନତ କରିବାରେ ସାହାଯ୍ୟ କରନ୍ତୁ</string>
   <string name="title_activity_settings">ସଂରଚନା</string>
   <string name="menu_about">ବାବଦରେ</string>
-  <string name="about_license">ଓପନ ସୋର୍ସ ସଫ୍ଟୱାର &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;ରେ ବିତରିତ</string>
-  <string name="about_improve">ମୂଳସବୁ &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;ରେ ରହିଛି । ଅସୁବିଧାସବୁ &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;ରେ ଜଣାଇବେ ।</string>
+  <string name="about_license" fuzzy="true">ଓପନ ସୋର୍ସ ସଫ୍ଟୱାର &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;ରେ ବିତରିତ</string>
+  <string name="about_improve" fuzzy="true">ମୂଳସବୁ &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;ରେ ରହିଛି । ଅସୁବିଧାସବୁ &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;ରେ ଜଣାଇବେ ।</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;ଗୋପନୀୟତା ନୀତି&lt;/a&gt;</string>
   <string name="title_activity_about">ବାବଦରେ</string>
   <string name="menu_feedback">ଇମେଲରେ ମତାମତ ପଠାଇବେ</string>
@@ -63,8 +63,8 @@
   <string name="share_license_summary">ଏହି ଛବିଟି %1$s ରେ ଲାଇସେନ୍ସକୃତ ହେବ</string>
   <string name="menu_download">ଡାଉନଲୋଡ଼</string>
   <string name="preference_license">ଲାଇସେନ୍ସ</string>
-  <string name="license_name_cc_by_sa">CCu00A0Attribution-ShareAlikeu00A03.0</string>
-  <string name="license_name_cc_by">CCu00A0Attributionu00A03.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Attribution-ShareAlikeu00A03.0</string>
+  <string name="license_name_cc_by" fuzzy="true">CCu00A0Attributionu00A03.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (ଅଷ୍ଟ୍ରିଆ)</string>
