@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="crash_dialog_title">Commons je spadnył</string>
+  <string name="crash_dialog_text">Hopla. Něšto je so nimokuliło!</string>
+  <string name="crash_dialog_comment_prompt">Powědaj nam, štož sy runje činił a zdźěl nam jo přez e-mejl. To budźe nam pomhać, problem wotstronić!</string>
+  <string name="crash_dialog_ok_toast">Wulki dźak!</string>
+</resources>

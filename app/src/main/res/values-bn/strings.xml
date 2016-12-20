@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">উইকিমিডিয়া কমন্স</string>
+  <string name="app_name">কমন্স</string>
   <string name="menu_settings">সেটিং</string>
   <string name="username">ব্যবহারকারী নাম</string>
   <string name="password">পাসওয়ার্ড</string>
   <string name="login">প্রবেশ</string>
+  <string name="signup">নিবন্ধন</string>
   <string name="logging_in_title">প্রবেশ হচ্ছে</string>
   <string name="logging_in_message">একটু অপেক্ষা করুন...</string>
   <string name="login_success">প্রবেশ সফল!</string>
   <string name="login_failed">প্রবেশ ব্যর্থ :(</string>
+  <string name="upload_failed">ফাইল পাওয়া যায়নি। আরেকটি ফাইল চেষ্টা করুন।</string>
   <string name="authentication_failed">প্রমাণীকরণ ব্যর্থ হয়েছে!</string>
   <string name="uploading_started"> আপলোড আরম্ভ হয়েছে!</string>
   <string name="upload_completed_notification_title">%1$s আপলোড হয়েছে!</string>
-  <string name="upload_completed_notification_text">আপনার আপলোড দেখতে ট্যাপ করুন</string>
+  <string name="upload_completed_notification_text">আপনার আপলোড দেখতে টোকা দিন</string>
   <string name="upload_progress_notification_title_start">%1$s আপলোড শুরু হচ্ছে</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s আপলোড হয়েছে</string>
+  <string name="upload_progress_notification_title_in_progress">%1$s আপলোড হচ্ছে</string>
   <string name="upload_progress_notification_title_finishing">%1$s আপলোড শেষ হয়েছে</string>
   <string name="upload_failed_notification_title">%1$s আপলোড ব্যর্থ</string>
-  <string name="upload_failed_notification_subtitle">দেখার জন্য ট্যাপ করুন</string>
+  <string name="upload_failed_notification_subtitle">দেখার জন্য টোকা দিন</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">১টি ফাইল আপলোড হচ্ছে</item>
     <item quantity="other">%dটি ফাইল আপলোড হচ্ছে</item>
@@ -27,8 +29,9 @@
   <string name="contribution_state_failed">ব্যর্থ</string>
   <string name="contribution_state_in_progress">%1$d%% সম্পন্ন</string>
   <string name="contribution_state_starting">আপলোড হচ্ছে</string>
-  <string name="menu_from_gallery">Gallery থেকে</string>
-  <string name="menu_from_camera">একটি ছবি তুলুন</string>
+  <string name="menu_from_gallery">গ্যালারি থেকে</string>
+  <string name="menu_from_camera">ছবি তুলুন</string>
+  <string name="menu_nearby">কাছাকাছি</string>
   <string name="provider_contributions">আমার আপলোড</string>
   <string name="menu_share">বণ্টন</string>
   <string name="menu_open_in_browser">ব্রাউজারে দেখুন</string>
@@ -37,8 +40,8 @@
   <string name="login_failed_network">প্রবেশ করা যাচ্ছে না - নেটওয়ার্ক ব্যর্থতা</string>
   <string name="login_failed_username">প্রবেশ করা যাচ্ছে না - অনুগ্রহ করে আপনার ব্যবহারকারী নাম পরীক্ষা করুন।</string>
   <string name="login_failed_password">প্রবেশ করা যাচ্ছে না - অনুগ্রহ করে আপনার পাসওয়ার্ড পরীক্ষা করুন</string>
-  <string name="login_failed_throttled">খুব বেশি ব্যর্থ প্রচেষ্টা। অনুগ্রহ করে কয়েক মিনিট পরে আবারও চেষ্টা করুন</string>
-  <string name="login_failed_blocked">দুঃখিত, এই ব্যবহারকারী কমন্সে ব্লক করা হয়েছে</string>
+  <string name="login_failed_throttled">খুব বেশি অসফল প্রচেষ্টা। অনুগ্রহ করে কয়েক মিনিট পরে আবারও চেষ্টা করুন।</string>
+  <string name="login_failed_blocked">দুঃখিত, এই ব্যবহারকারীকে কমন্সে বাধা দেয়া হয়েছে</string>
   <string name="login_failed_generic">প্রবেশ ব্যর্থ</string>
   <string name="share_upload_button">আপলোড</string>
   <string name="multiple_share_base_title">এই সেটের নাম</string>
@@ -59,21 +62,23 @@
     <item quantity="one">১টি আপলোড</item>
     <item quantity="other">%dটি আপলোড</item>
   </plurals>
-  <string name="categories_not_found">%1$s বিষয়শ্রেণী পাওয়া যায়নি</string>
+  <string name="categories_not_found">%1$s-এর সাথে মিলে এমন কোন বিষয়শ্রেণী পাওয়া যায়নি</string>
   <string name="categories_skip_explanation">উইকিমিডিয়া কমন্স থেকে আপনার মিডিয়া ফাইলটি সহজে খুঁজে পেতে বিষয়শ্রেণী যুক্ত করুন।
 
 বিষয়শ্রেণী যোগ করার জন্য টাইপিং শুরু করুন।
-এই ধাপটি বাতিল করতে এই বার্তা (বা ফিরে যান) ট্যাপ করুন।</string>
+এই ধাপটি বাতিল করতে এই বার্তাতে (বা ফিরে যান) টোকা দিন।</string>
   <string name="categories_activity_title">বিষয়শ্রেণীসমূহ</string>
   <string name="preference_tracking">ব্যবহারের প্রতিবেদন</string>
   <string name="preference_tracking_summary">আমাদের অ্যাপ্লিকেশন উন্নয়নে সহায়তা করতে উইকিমিডিয়ায় ব্যবহারের প্রতিবেদন পাঠান।</string>
-  <string name="title_activity_settings">সেটিংস</string>
+  <string name="title_activity_settings">সেটিং</string>
+  <string name="title_activity_signup">নিবন্ধন করুন</string>
   <string name="menu_about">পরিচিতি</string>
-  <string name="about_license">ওপেন সোর্স সফটওয়্যার &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;এ্যাপাচি লাইসেন্স v2&lt;/a&gt; অধীনে প্রকাশিত</string>
-  <string name="about_improve">উত্স &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;গিটহাব&lt;/a&gt;-এ। বাগ &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;বাগজিলা&lt;/a&gt;-এ।</string>
+  <string name="about_license" fuzzy="true">ওপেন সোর্স সফটওয়্যার &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;এ্যাপাচি লাইসেন্স v2&lt;/a&gt; অধীনে প্রকাশিত</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;উত্স&lt;/a&gt; ও &lt;a href=\"https://commons-app.github.io/\"&gt;ওয়েবসাইট&lt;/a&gt; গিটহাবে&lt;/a&gt;। কোন সমস্যা ও পরামর্শের জন্য &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;গিটহাব ইস্যু&lt;/a&gt; তৈরি করুন।</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;গোপনীয়তা নীতি&lt;/a&gt;</string>
   <string name="title_activity_about">পরিচিতি</string>
   <string name="menu_feedback">প্রতিক্রিয়া পাঠান (ইমেইলের মাধ্যমে)</string>
+  <string name="no_email_client">কোন ই-মেইল ক্লায়েন্ট ইনস্টল করা নেই</string>
   <string name="provider_categories">সাম্প্রতিক ব্যবহৃত বিষয়শ্রেণী</string>
   <string name="waiting_first_sync">প্রথম সমলয়নের জন্য অপেক্ষা করা হচ্ছে ...</string>
   <string name="no_uploads_yet">আপনি এখনও কোনো ছবি আপলোড করেননি।</string>
@@ -82,7 +87,10 @@
   <string name="share_license_summary">এই ছবিটি %1$s এর অধীনে লাইসেন্স করা হবে</string>
   <string name="menu_download">ডাউনলোড</string>
   <string name="preference_license">লাইসেন্স</string>
-  <string name="license_name_cc_by_sa">সিসিইউ০০এ০এঅ্যাট্রিবিউসন-শেয়ারঅ্যালাইকইউ০০এ০৩.০</string>
+  <string name="use_previous">পূর্ববর্তী শিরোনাম/বিবরণ ব্যবহার করুন</string>
+  <string name="allow_gps">স্বয়ংক্রিয়ভাবে বর্তমান অবস্থান পান</string>
+  <string name="allow_gps_summary">বিষয়শ্রেণীর পরামর্শ দিতে বর্তমান অবস্থান পান যদি ছবিতে ভূ-ট্যাগ না থেকে থাকে</string>
+  <string name="license_name_cc_by_sa">সিসিইউ০০এ০অ্যাট্রিবিউশন-শেয়ারঅ্যালাইকইউ০০এ০৩.০</string>
   <string name="license_name_cc_by">সিসিইউ০০এ০এঅ্যাট্রিবিউসনইউ০০এ০৩.০</string>
   <string name="license_name_cc0">সিসি০</string>
   <string name="license_name_cc_by_sa_3_0">সিসি বাই-এস ৩.০</string>
@@ -97,6 +105,8 @@
   <string name="license_name_cc_by_sa_3_0_pl">সিসি বাই-এসএ ৩.০ (পোল্যান্ড)</string>
   <string name="license_name_cc_by_sa_3_0_ro">সিসি বাই-এসএ ৩.০ (রোমানিয়া)</string>
   <string name="license_name_cc_by_3_0">সিসি বাই ৩.০</string>
+  <string name="license_name_cc_by_sa_4_0">সিসি বাই-এসএ ৪.০</string>
+  <string name="license_name_cc_by_4_0">সিসি বাই ৪.০</string>
   <string name="license_name_cc_zero">সিসি জিরো</string>
   <string name="license_name_own_pd">নিজের কাজ</string>
   <string name="license_name_cc_by_sa_2_5">সিসি বাই-এসএ ২.৫</string>
@@ -114,6 +124,20 @@
   <string name="license_name_pd_ineligible">পাবলিক ডোমেইন (কপিরাইটের অনুপযুক্ত)</string>
   <string name="license_name_attribution">স্বীকৃতিপ্রদান</string>
   <string name="license_name_gfdl">গনু ফ্রি ডকুমেন্টেশন লাইসেন্স</string>
+  <string name="tutorial_1_text">উইকিমিডিয়া কমন্স উইকিপিডিয়ায় ব্যবহৃত প্রায় সব ছবি হোস্ট করে।</string>
+  <string name="tutorial_1_subtext">আপনার ছবি সারা বিশ্বের মানুষকে শিক্ষিত করতে সাহায্য করবে!</string>
+  <string name="tutorial_2_text">দয়া করে যে ছবিটি আপনি নিজে তুলেছেন বা সম্পূর্ণভাবে নিজে তৈরি করেছে সে ছবি আপলোড করুন:</string>
+  <string name="tutorial_2_subtext">- প্রাকৃতিক বস্তু (ফুল, প্রাণী, পর্বত)
+- দরকারী বস্তু (সাইকেল, রেল স্টেশন)
+- বিখ্যাত ব্যক্তি (আপনার মেয়র, আপনার সাথে দেখা অলিম্পিক ক্রীড়াবিদ)</string>
+  <string name="tutorial_3_text">দয়া করে আপলোড করবেন না:</string>
+  <string name="tutorial_3_subtext">u2022 আপনার বন্ধুর সেলফি বা ছবি 
+u2022 ইন্টারনেট থেকে ডাউনলোড করা ছবি 
+u2022 মালিকানাযুক্ত অ্যাপসমূহের স্ক্রীনশট</string>
+  <string name="tutorial_4_text">আপলোডের উদাহরণ:</string>
+  <string name="tutorial_4_subtext">u2022 শিরোনাম: সিডনি অপেরা হাউস 
+u2022 বিবরণ: উপসাগর থেকে দেখা সিডনি অপেরা হাউস
+u2022 বিষয়শ্রেণী: সিডনি অপেরা হাউস, পশ্চিম দিক থেকে সিডনি অপেরা হাউস, সিডনি অপেরা হাউসের দূরবর্তী দৃশ্য</string>
   <string name="welcome_wikipedia_text">আপনার ছবি দিয়ে অবদান রাখুন। উইকিপিডিয়ার নিবন্ধগুলিকে নতুন রূপ দিতে সাহায্য করুন!</string>
   <string name="welcome_wikipedia_subtext">উইকিপিডিয়াতে চিত্র উইকিমিডিয়া কমন্স থেকে এসেছে।</string>
   <string name="welcome_copyright_text">আপনার ছবি সারা বিশ্বের শিক্ষিত মানুষকে সাহায্য করবে।</string>
@@ -121,9 +145,15 @@
   <string name="welcome_final_text">আপনি মনে করেন আপনি বুঝতে পেরেছেন?</string>
   <string name="welcome_final_button_text">হ্যাঁ!</string>
   <string name="detail_panel_cats_label">বিষয়শ্রেণীসমূহ</string>
-  <string name="detail_panel_cats_loading">লোডিং...</string>
+  <string name="detail_panel_cats_loading">লোড হচ্ছে...</string>
   <string name="detail_panel_cats_none">কিছুই নির্বাচন করা হয়নি</string>
   <string name="detail_description_empty">বিবরণ নেই</string>
   <string name="detail_license_empty">অজানা লাইসেন্স</string>
   <string name="menu_refresh">পুনঃসতেজ</string>
+  <string name="location_permission_rationale">ঐচ্ছিক অনুমতি: বিষয়শ্রেণী পরামর্শের জন্য বর্তমান অবস্থান নেয়</string>
+  <string name="ok">ঠিক আছে</string>
+  <string name="title_activity_nearby">কাছাকাছি স্থান</string>
+  <string name="warning">সতর্কীকরণ</string>
+  <string name="yes">হ্যাঁ</string>
+  <string name="no">না</string>
 </resources>

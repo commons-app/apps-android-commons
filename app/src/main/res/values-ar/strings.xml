@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">ويكيميديا كومنز</string>
+  <string name="app_name" fuzzy="true">ويكيميديا كومنز</string>
   <string name="menu_settings">الإعدادات</string>
   <string name="username">اسم المستخدم</string>
   <string name="password">كلمة السر</string>
@@ -34,7 +34,7 @@
   <string name="login_failed_network">لا يمكن تسجيل الدخول - فشل في شبكة الاتصال</string>
   <string name="login_failed_username">لا يمكن تسجيل الدخول - فضلا تحقق من اسم المستخدم</string>
   <string name="login_failed_password">لا يمكن تسجيل الدخول - فضلا تحقق من كلمة السر</string>
-  <string name="login_failed_throttled">الكثير من المحاولات غير الناجحة. الرجاء المحاولة مرة أخرى في بضع دقائق</string>
+  <string name="login_failed_throttled" fuzzy="true">الكثير من المحاولات غير الناجحة. الرجاء المحاولة مرة أخرى في بضع دقائق</string>
   <string name="login_failed_blocked">عذراً، لقد تم منع هذا المستخدم على كومنز</string>
   <string name="login_failed_generic">فشل تسجيل الدخول</string>
   <string name="share_upload_button">ارفع</string>
@@ -53,8 +53,8 @@
   <string name="preference_tracking_summary">إرسال تقارير الاستخدام إلى ويكيميديا لمساعدتنا على تحسين التطبيق</string>
   <string name="title_activity_settings">الإعدادات</string>
   <string name="menu_about">حول</string>
-  <string name="about_license">برنامج مفتوح المصدر منشور &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;برخصة أباتشي النسخة 2&lt;/a&gt;</string>
-  <string name="about_improve">المصدر على &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;غِتهب&lt;/a&gt;. العلل في &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;بغزِلا&lt;/a&gt;.</string>
+  <string name="about_license" fuzzy="true">برنامج مفتوح المصدر منشور &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;برخصة أباتشي النسخة 2&lt;/a&gt;</string>
+  <string name="about_improve" fuzzy="true">المصدر على &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;غِتهب&lt;/a&gt;. العلل في &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;بغزِلا&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;سياسة الخصوصية&lt;/a&gt;</string>
   <string name="title_activity_about">حول</string>
   <string name="menu_feedback">إرسال ملاحظات (عبر البريد الإلكتروني)</string>

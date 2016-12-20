@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Wikimedia Commons</string>
+  <string name="app_name" fuzzy="true">Wikimedia Commons</string>
   <string name="menu_settings">Innstillinger</string>
   <string name="username">Brukernavn</string>
   <string name="password">Passord</string>
@@ -18,7 +18,7 @@
   <string name="upload_progress_notification_title_finishing">Avslutter opplasting av %1$s</string>
   <string name="upload_failed_notification_title">Opplastingen av %1$s feilet</string>
   <string name="upload_failed_notification_subtitle">Trykk for å vise</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">1 fil lastes opp</item>
     <item quantity="other">%d filer lastes opp</item>
   </plurals>
@@ -37,7 +37,7 @@
   <string name="login_failed_network">Innlogging feilet - nettverksproblem</string>
   <string name="login_failed_username">Innlogging feilet - sjekk brukernavnet ditt</string>
   <string name="login_failed_password">Innlogging feilet - sjekk passordet ditt</string>
-  <string name="login_failed_throttled">For mange misslykkede forsøk. Vennligst vent et par minutter før du prøver igjen</string>
+  <string name="login_failed_throttled" fuzzy="true">For mange misslykkede forsøk. Vennligst vent et par minutter før du prøver igjen</string>
   <string name="login_failed_blocked">Beklager, denne brukeren har blitt blokkert på Commons</string>
   <string name="login_failed_generic">Innlogging feilet</string>
   <string name="share_upload_button">Last opp</string>
@@ -69,8 +69,8 @@ Trykk på denne meldingen (eller trykk tilbake) for å hoppe over dette steget.<
   <string name="preference_tracking_summary">Send bruksrapporter til Wikimedia for å hjelpe oss med å forbedre appen</string>
   <string name="title_activity_settings">Innstillinger</string>
   <string name="menu_about">Om</string>
-  <string name="about_license">Åpen kildekode programvare sluppet under &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
-  <string name="about_improve">Kildekode på &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Feilmeldinger på &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_license" fuzzy="true">Åpen kildekode programvare sluppet under &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
+  <string name="about_improve" fuzzy="true">Kildekode på &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Feilmeldinger på &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Personvernpolicy&lt;/a&gt;</string>
   <string name="title_activity_about">Om</string>
   <string name="menu_feedback">Send tilbakemelding (via Epost)</string>
@@ -82,8 +82,8 @@ Trykk på denne meldingen (eller trykk tilbake) for å hoppe over dette steget.<
   <string name="share_license_summary">Dette bildet vil bli lisensiert under %1$s</string>
   <string name="menu_download">Last ned</string>
   <string name="preference_license">Lisens</string>
-  <string name="license_name_cc_by_sa">CCu00A0Navngivelse-DelPåSammeVilkåru00A03.0</string>
-  <string name="license_name_cc_by">CCu00A0Navngivelseu00A03.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Navngivelse-DelPåSammeVilkåru00A03.0</string>
+  <string name="license_name_cc_by" fuzzy="true">CCu00A0Navngivelseu00A03.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Østerrike)</string>

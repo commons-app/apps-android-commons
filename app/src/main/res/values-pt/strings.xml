@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Wikimedia Commons</string>
+  <string name="app_name" fuzzy="true">Wikimedia Commons</string>
   <string name="menu_settings">Configurações</string>
   <string name="username">Nome de utilizador(a)</string>
   <string name="password">Palavra-passe</string>
@@ -18,7 +18,7 @@
   <string name="upload_progress_notification_title_finishing">A terminar o carregamento de %1$s</string>
   <string name="upload_failed_notification_title">O carregamento de %1$s falhou</string>
   <string name="upload_failed_notification_subtitle">Toque para ver</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">A carregar um ficheiro</item>
     <item quantity="other">A carregar %d ficheiros</item>
   </plurals>
@@ -37,7 +37,7 @@
   <string name="login_failed_network">Não foi possível iniciar sessão - falha de rede</string>
   <string name="login_failed_username">Não foi possível iniciar sessão - verifique o seu nome de utilizador(a)</string>
   <string name="login_failed_password">Não foi possível iniciar sessão - verifique a sua palavra-passe</string>
-  <string name="login_failed_throttled">Demasiadas tentativas mal sucedidas. Por favor, tente de novo dentro de alguns minutos</string>
+  <string name="login_failed_throttled" fuzzy="true">Demasiadas tentativas mal sucedidas. Por favor, tente de novo dentro de alguns minutos</string>
   <string name="login_failed_blocked">Desculpe, este utilizador foi bloqueado no Commons</string>
   <string name="login_failed_generic">Falha ao iniciar sessão</string>
   <string name="share_upload_button">Carregar</string>
@@ -69,8 +69,8 @@ Carregue nesta mensagem (ou carregue para voltar) para saltar este passo</string
   <string name="preference_tracking_summary">Enviar relatório de uso para a Wikimedia para ajudar-nos a melhorar a aplicação</string>
   <string name="title_activity_settings">Configurações</string>
   <string name="menu_about">Sobre</string>
-  <string name="about_license">Software em código aberto distribuído sob &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
-  <string name="about_improve">Código no &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;. Erros no &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_license" fuzzy="true">Software em código aberto distribuído sob &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
+  <string name="about_improve" fuzzy="true">Código no &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;. Erros no &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Política de privacidade&lt;/a&gt;</string>
   <string name="title_activity_about">Sobre</string>
   <string name="menu_feedback">Enviar comentários (por e-mail)</string>
@@ -82,8 +82,8 @@ Carregue nesta mensagem (ou carregue para voltar) para saltar este passo</string
   <string name="share_license_summary">Essa imagem será licenciada sob %1$s</string>
   <string name="menu_download">Descarregar</string>
   <string name="preference_license">Licença</string>
-  <string name="license_name_cc_by_sa">CCu00A0Atrubuição-CompartilhaIgualu00A03.0</string>
-  <string name="license_name_cc_by">CCu00A0Atribuiçãou00A03.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Atrubuição-CompartilhaIgualu00A03.0</string>
+  <string name="license_name_cc_by" fuzzy="true">CCu00A0Atribuiçãou00A03.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Áustria)</string>

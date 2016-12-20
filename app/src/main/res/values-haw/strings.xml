@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name" fuzzy="true">Kahilehulehu Wikimedia</string>
+  <string name="menu_settings">Makemake</string>
+  <string name="username">Inoa mea hoʻohana</string>
+  <string name="password">ʻŌlelo hūnā</string>
+  <string name="login">ʻEʻe</string>
+  <string name="logging_in_title">ʻEʻe nei</string>
+  <string name="logging_in_message">E kali ke ʻoluʻolu...</string>
+  <string name="login_success">ʻEʻe kūleʻa</string>
+  <string name="login_failed">Hāʻule ka ʻeʻena</string>
+  <string name="authentication_failed">Hāʻule ka hōʻoiaʻiʻo ʻike</string>
+  <string name="uploading_started">Ua hoʻomaka ka hoʻouka!</string>
+  <string name="upload_completed_notification_title">Ua hoʻouka ʻia ʻo %1$s</string>
+  <string name="upload_completed_notification_text">Kīkē no ka ʻike ʻana o kāu hoʻouka</string>
+  <string name="upload_progress_notification_title_start">Hoʻomaka nei i ka hoʻouka ʻana o %1$s</string>
+  <string name="upload_progress_notification_title_in_progress">Hoʻouka nei ʻo</string>
+  <string name="upload_progress_notification_title_finishing">Hele a pau ka hoʻouka ʻana o %1$s</string>
+  <string name="upload_failed_notification_title">Ua hāʻule ʻo %1$s i ka hoʻouka ʻana</string>
+  <string name="upload_failed_notification_subtitle">Kīkē no ka ʻike ʻana</string>
+  <string name="title_activity_contributions">Kaʻu hoʻouka</string>
+  <string name="contribution_state_queued">Kali</string>
+  <string name="contribution_state_failed">Hāʻule</string>
+  <string name="contribution_state_in_progress">%1$d%% pau</string>
+  <string name="contribution_state_starting">Hoʻouka nei</string>
+  <string name="menu_from_gallery">Mai ka Papakiʻi</string>
+  <string name="menu_from_camera">Paʻi kiʻi</string>
+  <string name="provider_contributions">Kaʻu hoʻouka</string>
+  <string name="menu_share">ʻAlo</string>
+  <string name="menu_open_in_browser">Wehe ma ka pōlamu pūnaewele</string>
+  <string name="share_title_hint">Poʻo Inoa</string>
+  <string name="share_description_hint">Hōʻike ʻAno</string>
+  <string name="login_failed_network">Hiki ʻole ke ʻeʻe - hāʻule pūnaewele</string>
+  <string name="login_failed_username">Hiki ʻole ke ʻeʻe - hōʻoiaʻiʻo i kāu inoa mea hoʻohana ke ʻoluʻolu</string>
+  <string name="login_failed_password">Hiki ʻole ke ʻeʻe - hōʻoiaʻiʻo i kāu ʻōlelo hūnā ke ʻoluʻolu</string>
+  <string name="login_failed_throttled" fuzzy="true">Hoʻāʻo ʻeʻe ʻole he nui kā. E ʻoluʻolu, e hana hou i ka wā hou aku</string>
+  <string name="login_failed_blocked">E kala mai, ua pale ʻia kēia mea hoʻohana ma ke Kahilehulehu</string>
+  <string name="login_failed_generic">Hāʻule ka ʻeʻena</string>
+  <string name="share_upload_button">Hoʻouka</string>
+  <string name="multiple_share_base_title">Hōʻinoa i kēia huikiʻi</string>
+  <string name="provider_modifications">Nā kāhuli</string>
+  <string name="menu_upload_single">Hoʻouka</string>
+  <string name="categories_search_text_hint">Huli i nā māhele</string>
+  <string name="menu_save_categories">Mālama</string>
+  <string name="categories_not_found">ʻAʻohe māhele e huli ʻia e like me %1$s</string>
+  <string name="categories_skip_explanation">Hoʻohui i nā māhele no ke kaunānā ʻana ma Kahilehulehu Wikimedia.</string>
+  <string name="categories_activity_title">Māhele</string>
+  <string name="preference_tracking">Hōʻike hana</string>
+  <string name="preference_tracking_summary">Hoʻouka i nā hōʻike hana iā Wikimedia no ka holomua ʻana o kēia pōlamu</string>
+  <string name="title_activity_settings">Makemake</string>
+  <string name="menu_about">Pilina</string>
+  <string name="about_license" fuzzy="true">Hāʻawi ʻia nā lako pōlamu kūmolenoa ma lalo o ka &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Laikini ʻApaki m2&lt;/a&gt;</string>
+  <string name="about_improve" fuzzy="true">Aia ke kūmole ma &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Aia nā mū ma &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Kulekele pilikino&lt;/a&gt;</string>
+  <string name="title_activity_about">Pilina</string>
+  <string name="menu_feedback">Hoʻouna Manaʻo (ia Lekauila)</string>
+  <string name="provider_categories">Nā māhele i hanawale</string>
+  <string name="waiting_first_sync">Ke kali nei no ka kaʻanakuʻi mualoa...</string>
+  <string name="no_uploads_yet">ʻAʻohe āu kiʻi.</string>
+  <string name="menu_retry_upload">Hana hou</string>
+  <string name="menu_cancel_upload">Hoʻōki</string>
+  <string name="share_license_summary">E laikini ana kēia kiʻi ma lalo o %1$s</string>
+  <string name="menu_download">Hoʻoili</string>
+  <string name="preference_license">Laikini</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Attribution-ShareAlikeu00A03.0</string>
+  <string name="license_name_cc_by" fuzzy="true">CCu00A0Attributionu00A03.0</string>
+  <string name="license_name_cc0">CC0</string>
+  <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (ʻAukekulia)</string>
+  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Kelemānia)</string>
+  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (ʻEsetonia)</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Kepania)</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Koloatia)</string>
+  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Lukemepōke)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Nekelana)</string>
+  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Nolewai)</string>
+  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Pōlani)</string>
+  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romania)</string>
+  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_zero">CC Zero</string>
+  <string name="license_name_own_pd">own-pd</string>
+  <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
+  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
+  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
+  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
+  <string name="license_name_cc_2_0">CC BY 2.0</string>
+  <string name="license_name_fal">Laikini Hana noʻeau Kūnoa</string>
+  <string name="license_name_pd_old_100">Kāʻei kapu lehulehu (ua hala ka mea kākau i 100 makahiki aku nei)</string>
+  <string name="license_name_pd_old">Kāʻei kapu lehulehu (ʻaʻohe ponokope)</string>
+  <string name="license_name_pd_art">Kāʻei kapu lehulehu (hana noʻeau)</string>
+  <string name="license_name_pd_us">Kāʻei kapu lehulehu (US)</string>
+  <string name="license_name_pd_usgov">Kāʻei kapu lehulehu (aupuni US)</string>
+  <string name="license_name_pd_usgov_nasa">Kāʻei kapu lehulehu (NASA)</string>
+  <string name="license_name_pd_ineligible">Kāʻei kapu lehulehu (hikiʻole no ka ponokope)</string>
+  <string name="license_name_attribution">ʻIʻike kumu</string>
+  <string name="license_name_gfdl">Laikini Palapala Kūnoa GNU</string>
+  <string name="welcome_wikipedia_text">Hāʻawi i kāu mau kiʻi. E kōkua i nā ʻatikala Wikipikia me ka hoʻohoihoi ʻana!</string>
+  <string name="welcome_wikipedia_subtext">No Kahilehulehu Wikimedia mai nā kiʻi ma Wikipikia.</string>
+  <string name="welcome_copyright_text">Kōkua kāu mau kiʻi i ke ʻao aku ʻana i nā kānaka a puni i ka hōnua.</string>
+  <string name="welcome_copyright_subtext">Mai waiho i nā mea ponokope mai ka pūnaewele a me na kiʻi mai nā pepa hoʻolaha, nā puke, a pēlā wale aku.</string>
+  <string name="welcome_final_text">Maopōpō?</string>
+  <string name="welcome_final_button_text">ʻAe@</string>
+  <string name="detail_panel_cats_label">Nā Māhele</string>
+  <string name="detail_panel_cats_loading">Hoʻouka nei...</string>
+  <string name="detail_panel_cats_none">ʻAʻohe mea e koho</string>
+  <string name="detail_description_empty">ʻAʻohe hōʻike ʻano</string>
+  <string name="detail_license_empty">Laikini ʻikeʻole</string>
+  <string name="menu_refresh">Hōʻano hou</string>
+</resources>

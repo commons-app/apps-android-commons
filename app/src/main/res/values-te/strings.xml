@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">వికీమీడియా కామన్స్</string>
+  <string name="app_name" fuzzy="true">వికీమీడియా కామన్స్</string>
   <string name="menu_settings">అమరికలు</string>
   <string name="username">వాడుకరిపేరు</string>
   <string name="password">సంకేతపదం</string>
@@ -33,7 +33,7 @@
   <string name="login_failed_network">లాగిన్ చెయ్యలేకపోయాం - నెట్‍వర్కు విఫలం</string>
   <string name="login_failed_username">లాగిన్ చెయ్యలేకపోయాం - మీ వాడుకరిపేరును సరిచూసుకోండి</string>
   <string name="login_failed_password">లాగిన్ చెయ్యలేకపోయాం - మీ సంకేతపదాన్ని సరిచూసుకోండి</string>
-  <string name="login_failed_throttled">మరీ ఎక్కువ విఫల యత్నాలు చేసారు. కొద్ది నిముషాలాగి ప్రయత్నించండి</string>
+  <string name="login_failed_throttled" fuzzy="true">మరీ ఎక్కువ విఫల యత్నాలు చేసారు. కొద్ది నిముషాలాగి ప్రయత్నించండి</string>
   <string name="login_failed_blocked">ఈ వాడుకరి కామన్స్ లో నిరోధించబడ్డారు, సారీ.</string>
   <string name="login_failed_generic">లాగిన్ విఫలమైంది</string>
   <string name="share_upload_button">ఎక్కింపు</string>
@@ -52,7 +52,7 @@
   <string name="preference_tracking_summary">వాడుక నివేదికలను వికీమీడియాకు పంపండి. యాప్‍ను మెరుగుపరచడంలో సాయపడండి.</string>
   <string name="title_activity_settings">అమరికలు</string>
   <string name="menu_about">గురించి</string>
-  <string name="about_license">ఓపెన్ సోర్సు సాఫ్టువేరు &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; కు లోబడి విడుదలైంది</string>
+  <string name="about_license" fuzzy="true">ఓపెన్ సోర్సు సాఫ్టువేరు &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; కు లోబడి విడుదలైంది</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;గోప్యతా విధానం&lt;/a&gt;</string>
   <string name="title_activity_about">గురించి</string>
   <string name="menu_feedback">ఫీడుబ్యాకును పంపండి (ఈమెయిలు ద్వారా)</string>
@@ -63,8 +63,8 @@
   <string name="share_license_summary">ఈ బొమ్మ %1$s లైసెన్సు కు లోబడి ఉంటుంది.</string>
   <string name="menu_download">దింపుకోండి</string>
   <string name="preference_license">లైసెన్సు</string>
-  <string name="license_name_cc_by_sa">CCu00A0Attribution-ShareAlikeu00A03.0</string>
-  <string name="license_name_cc_by">CCu00A0Attributionu00A03.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Attribution-ShareAlikeu00A03.0</string>
+  <string name="license_name_cc_by" fuzzy="true">CCu00A0Attributionu00A03.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (ఆస్ట్రియా)</string>

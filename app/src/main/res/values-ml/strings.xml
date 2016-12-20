@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">വിക്കിമീഡിയ കോമൺസ്</string>
+  <string name="app_name" fuzzy="true">വിക്കിമീഡിയ കോമൺസ്</string>
   <string name="menu_settings">സജ്ജീകരണങ്ങൾ</string>
   <string name="username">ഉപയോക്തൃനാമം</string>
   <string name="password">രഹസ്യവാക്ക്</string>
@@ -18,7 +18,7 @@
   <string name="upload_progress_notification_title_finishing">%1$s അപ്‌ലോഡിങ് പൂർത്തിയാക്കുന്നു</string>
   <string name="upload_failed_notification_title">%1$s അപ്‌ലോഡിങ് പരാജയപ്പെട്ടു</string>
   <string name="upload_failed_notification_subtitle">കാണാനായി ടാപ് ചെയ്യുക</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">1 പ്രമാണം അപ്‌ലോഡ് ചെയ്യുന്നു</item>
     <item quantity="other">%d പ്രമാണങ്ങൾ അപ്‌ലോഡ് ചെയ്യുന്നു</item>
   </plurals>
@@ -37,7 +37,7 @@
   <string name="login_failed_network">പ്രവേശിക്കാനായില്ല - നെറ്റ്‌വർക്ക് പരാജയപ്പെട്ടു</string>
   <string name="login_failed_username">പ്രവേശിക്കാനായില്ല - ദയവായി താങ്കളുടെ ഉപയോക്തൃനാമം പരിശോധിക്കുക</string>
   <string name="login_failed_password">പ്രവേശിക്കാനായില്ല - ദയവായി താങ്കളുടെ രഹസ്യവാക്ക് പരിശോധിക്കുക</string>
-  <string name="login_failed_throttled">നിരവധി വിജയകരമല്ലാത്ത ശ്രമങ്ങൾ നടന്നിരിക്കുന്നു. വീണ്ടും ശ്രമിക്കുന്നതിനു മുമ്പ് ഏതാനം മിനിറ്റുകൾ വിശ്രമിക്കുക</string>
+  <string name="login_failed_throttled" fuzzy="true">നിരവധി വിജയകരമല്ലാത്ത ശ്രമങ്ങൾ നടന്നിരിക്കുന്നു. വീണ്ടും ശ്രമിക്കുന്നതിനു മുമ്പ് ഏതാനം മിനിറ്റുകൾ വിശ്രമിക്കുക</string>
   <string name="login_failed_blocked">ക്ഷമിക്കുക, ഈ ഉപയോക്താവ് കോമൺസിൽ നിന്ന് തടയപ്പെട്ടിരിക്കുകയാണ്</string>
   <string name="login_failed_generic">പ്രവേശനം പരാജയപ്പെട്ടു</string>
   <string name="share_upload_button">അപ്‌ലോഡ്</string>
@@ -69,8 +69,8 @@
   <string name="preference_tracking_summary">ഈ ആപ് മെച്ചപ്പെടുത്തുന്നതിനായി ഉപയോഗം സംബന്ധിച്ച റിപ്പോർട്ടുകൾ വിക്കിമീഡിയയ്ക്ക് അയയ്ക്കുക</string>
   <string name="title_activity_settings">സജ്ജീകരണങ്ങൾ</string>
   <string name="menu_about">വിവരണം</string>
-  <string name="about_license">&lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;അപാച്ചേ അനുമതിപത്രം പതിപ്പ് 2&lt;/a&gt; പ്രകാരം പുറത്തിറക്കപ്പെട്ട ഓപ്പൺ സോഴ്സ് സോഫ്റ്റ്‌വേർ</string>
-  <string name="about_improve">സ്രോതസ്സ് രൂപം &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;ജിറ്റ്ഹബിൽ&lt;/a&gt; ലഭ്യമാണ്. 
+  <string name="about_license" fuzzy="true">&lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;അപാച്ചേ അനുമതിപത്രം പതിപ്പ് 2&lt;/a&gt; പ്രകാരം പുറത്തിറക്കപ്പെട്ട ഓപ്പൺ സോഴ്സ് സോഫ്റ്റ്‌വേർ</string>
+  <string name="about_improve" fuzzy="true">സ്രോതസ്സ് രൂപം &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;ജിറ്റ്ഹബിൽ&lt;/a&gt; ലഭ്യമാണ്. 
 പ്രശ്നങ്ങൾ &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;ബഗ്സില്ലയിൽ&lt;/a&gt; അറിയിക്കുക.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;സ്വകാര്യതാനയം&lt;/a&gt;</string>
   <string name="title_activity_about">വിവരണം</string>
@@ -83,8 +83,8 @@
   <string name="share_license_summary">ചിത്രം %1$s പ്രകാരം അനുമതി നൽകപ്പെടുന്നതാണ്</string>
   <string name="menu_download">ഡൗൺലോഡ്</string>
   <string name="preference_license">അനുമതി</string>
-  <string name="license_name_cc_by_sa">സി.സി.u00A0ആട്രിബ്യൂഷൻ-ഷെയർ‌എലൈക്u00A03.0</string>
-  <string name="license_name_cc_by">സി.സി.u00A0ആട്രിബ്യൂഷൻu00A03.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">സി.സി.u00A0ആട്രിബ്യൂഷൻ-ഷെയർ‌എലൈക്u00A03.0</string>
+  <string name="license_name_cc_by" fuzzy="true">സി.സി.u00A0ആട്രിബ്യൂഷൻu00A03.0</string>
   <string name="license_name_cc0">സി.സി.0</string>
   <string name="license_name_cc_by_sa_3_0">സി.സി. ബൈ-എസ്.എ. 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">സി.സി. ബൈ-എസ്.എ. 3.0 (ഓസ്ട്രിയ)</string>

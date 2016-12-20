@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Wikimedia Commons</string>
+  <string name="app_name" fuzzy="true">Wikimedia Commons</string>
   <string name="menu_settings">Thiết lập</string>
   <string name="username">Tên người dùng</string>
   <string name="password">Mật khẩu</string>
@@ -18,7 +18,7 @@
   <string name="upload_progress_notification_title_finishing">Đang hoàn thành việc tải lên tập tin %1$s</string>
   <string name="upload_failed_notification_title">Tải lên tập tin %1$s thất bại</string>
   <string name="upload_failed_notification_subtitle">Chạm để xem</string>
-  <string name="uploads_pending_notification_indicator">%d tập tin đang được tải lên</string>
+  <string name="uploads_pending_notification_indicator" fuzzy="true">%d tập tin đang được tải lên</string>
   <string name="title_activity_contributions">Tập tin do tôi tải lên</string>
   <string name="contribution_state_queued">Đang chờ</string>
   <string name="contribution_state_failed">Thất bại</string>
@@ -34,7 +34,7 @@
   <string name="login_failed_network">Không thể đăng nhập – có lỗi mạng</string>
   <string name="login_failed_username">Không thể đăng nhập – xin vui lòng kiểm tra tên người dùng</string>
   <string name="login_failed_password">Không thể đăng nhập – xin vui lòng kiểm tra mật khẩu</string>
-  <string name="login_failed_throttled">Đã đăng nhập thất bại quá nhiều lần. Xin vui lòng thử lại trong vòng vài phút.</string>
+  <string name="login_failed_throttled" fuzzy="true">Đã đăng nhập thất bại quá nhiều lần. Xin vui lòng thử lại trong vòng vài phút.</string>
   <string name="login_failed_blocked">Rất tiếc, người dùng này đã bị cấm tại Commons</string>
   <string name="login_failed_generic">Đăng nhập thất bại</string>
   <string name="share_upload_button">Tải lên</string>
@@ -59,8 +59,8 @@ Chạm vào thông điệp này (hoặc bấm Quay lại) để bỏ qua bước
   <string name="preference_tracking_summary">Gửi báo cáo sử dụng cho Wikimedia để giúp chúng tôi cải tiến ứng dụng</string>
   <string name="title_activity_settings">Cài đặt</string>
   <string name="menu_about">Giới thiệu</string>
-  <string name="about_license">Phần mềm mã nguồn mở được phát hành theo &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Giấy phép Apache v2&lt;/a&gt;</string>
-  <string name="about_improve">Mã nguồn có sẵn tại &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Báo cáo lỗi tại &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_license" fuzzy="true">Phần mềm mã nguồn mở được phát hành theo &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Giấy phép Apache v2&lt;/a&gt;</string>
+  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Mã nguồn&lt;/a&gt; và &lt;a href=\"https://commons-app.github.io/\"&gt;trang chủ&lt;/a&gt; tại GitHub. &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;Tạo vấn đề GitHub mới&lt;/a&gt; để báo cáo lỗi hoặc gợi ý thay đổi.</string>
   <string name="about_privacy_policy"/>
   <string name="title_activity_about">Giới thiệu</string>
   <string name="menu_feedback">Gửi Phản hồi (qua Thư điện tử)</string>
@@ -72,8 +72,8 @@ Chạm vào thông điệp này (hoặc bấm Quay lại) để bỏ qua bước
   <string name="share_license_summary">Hình này sẽ được phát hành theo giấy phép %1$s</string>
   <string name="menu_download">Tải về</string>
   <string name="preference_license">Giấy phép</string>
-  <string name="license_name_cc_by_sa">Creativeu00A0Commons Ghiu00A0công–Chiau00A0sẻ tươngu00A0tự 3.0</string>
-  <string name="license_name_cc_by">Creativeu00A0Commons Ghiu00A0công 3.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">Creativeu00A0Commons Ghiu00A0công–Chiau00A0sẻ tươngu00A0tự 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">Creativeu00A0Commons Ghiu00A0công 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Áo)</string>

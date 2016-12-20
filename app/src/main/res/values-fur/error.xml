@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="crash_dialog_text">Ops. Alc al è lât mal!</string>
+  <string name="crash_dialog_ok_toast">Graziis!</string>
+</resources>

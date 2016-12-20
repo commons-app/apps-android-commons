@@ -5,6 +5,7 @@
   <string name="username">نام کاربری</string>
   <string name="password">گذرواژه</string>
   <string name="login">ورود</string>
+  <string name="signup">ثبت نام</string>
   <string name="logging_in_title">واردشدن</string>
   <string name="logging_in_message">لطفاً صبر کنید...</string>
   <string name="login_success">ورود موفق!</string>
@@ -18,7 +19,7 @@
   <string name="upload_progress_notification_title_finishing">اتمام بارگذاری %1$s</string>
   <string name="upload_failed_notification_title">%1$s بارگذاری نشد</string>
   <string name="upload_failed_notification_subtitle">برای دیدن انگشت بزنید</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">یک پرونده در حال بارگذاری</item>
     <item quantity="other">%d پرونده در حال بارگذاری</item>
   </plurals>
@@ -29,6 +30,7 @@
   <string name="contribution_state_starting">در حال بارگذاری</string>
   <string name="menu_from_gallery">از نگارخانه</string>
   <string name="menu_from_camera">گرفتن عکس</string>
+  <string name="menu_nearby">در نزدیکی</string>
   <string name="provider_contributions">بارگذاری‌های من</string>
   <string name="menu_share">به اشتراک‌گذاشتن</string>
   <string name="menu_open_in_browser">مشاهده در مرورگر</string>
@@ -69,11 +71,11 @@
   <string name="preference_tracking_summary">برای کمک به بهبود نرم‌افزار، گزارش‌های استفاده را برای ویکی‌مدیا ارسال نمائید</string>
   <string name="title_activity_settings">تنظیمات</string>
   <string name="menu_about">درباره</string>
-  <string name="about_license">نرم‌افزار متن‌باز آزاد تحت &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;مجوز آپاچی نسخهٔ ۲&lt;/a&gt;</string>
-  <string name="about_improve">منبع در &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. اشکالات در &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;باگزیلا&lt;/a&gt;.</string>
+  <string name="about_license" fuzzy="true">نرم‌افزار متن‌باز آزاد تحت &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;مجوز آپاچی نسخهٔ ۲&lt;/a&gt;</string>
+  <string name="about_improve" fuzzy="true">منبع در &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. اشکالات در &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;باگزیلا&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;سیاست حفظ حریم خصوصی&lt;/a&gt;</string>
   <string name="title_activity_about">درباره</string>
-  <string name="menu_feedback">ارسال بازخورد (از طریق رایانامه)</string>
+  <string name="menu_feedback">ارسال بازخورد (از طریق ایمیل)</string>
   <string name="provider_categories">رده‌هایی که اخیراً استفاده شده‌اند</string>
   <string name="waiting_first_sync">در حال انتظار برای اولین همگام‌سازی...</string>
   <string name="no_uploads_yet">شما هنوز نگاره‌ای بارگذاری نکرده‌اید.</string>
@@ -97,6 +99,7 @@
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (لهستان)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (رمانی)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="license_name_own_pd">own-pd</string>
   <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
@@ -126,4 +129,8 @@
   <string name="detail_description_empty">بدون توضیحات</string>
   <string name="detail_license_empty">مجوز ناشناخته</string>
   <string name="menu_refresh">تازه‌کردن</string>
+  <string name="ok">تأیید</string>
+  <string name="warning">هشدار</string>
+  <string name="yes">بله</string>
+  <string name="no">خیر</string>
 </resources>

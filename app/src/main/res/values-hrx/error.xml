@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="crash_dialog_title">Commons (Allmend) ist abgestürzt</string>
+  <string name="crash_dialog_text">Huch! Etwas ist schiefgeloof.</string>
+  <string name="crash_dialog_comment_prompt">Verzähl uns, was du gemacht host und (schick) teil das doorrich en E-Mail mit uns. Das weard uns helfe, das Problem zu korregiere!</string>
+  <string name="crash_dialog_ok_toast">Dankschön!</string>
+</resources>

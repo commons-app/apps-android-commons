@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Wikimedia Commons</string>
+  <string name="app_name" fuzzy="true">Wikimedia Commons</string>
   <string name="menu_settings">Voorkeure</string>
   <string name="username">Gebruikersnaam</string>
   <string name="password">Wagwoord</string>
@@ -33,7 +33,7 @@
   <string name="login_failed_network">Aanmelding nie moontlik - probleem met netwerk</string>
   <string name="login_failed_username">Aanmelding nie moontlik - kontroleer gebruikersnaam</string>
   <string name="login_failed_password">Aanmelding nie moontlik - kontroleer wagwoord</string>
-  <string name="login_failed_throttled">Te veel mislukte probeerslae. Probeer weer oor \'n paar minute</string>
+  <string name="login_failed_throttled" fuzzy="true">Te veel mislukte probeerslae. Probeer weer oor \'n paar minute</string>
   <string name="login_failed_blocked">Die gebruiker is op Commons geblokkeer</string>
   <string name="login_failed_generic">Aanmelding het gefaal</string>
   <string name="share_upload_button">Laai op</string>

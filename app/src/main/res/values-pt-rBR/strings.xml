@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Wikimedia Commons</string>
+  <string name="app_name" fuzzy="true">Wikimedia Commons</string>
   <string name="menu_settings">Configurações</string>
   <string name="username">Nome de usuário</string>
   <string name="password">Senha</string>
@@ -18,7 +18,7 @@
   <string name="upload_progress_notification_title_finishing">Terminando o envio de %1$s</string>
   <string name="upload_failed_notification_title">Envio de %1$s falhou</string>
   <string name="upload_failed_notification_subtitle">Toque para ver</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">enviando 1 arquivo</item>
     <item quantity="other">enviando %d arquivos</item>
   </plurals>
@@ -37,7 +37,7 @@
   <string name="login_failed_network">Erro ao efetuar o login - falha na rede</string>
   <string name="login_failed_username">Erro ao efetuar o login - confira seu nome de usuário</string>
   <string name="login_failed_password">Erro ao efetuar o login - confira sua senha</string>
-  <string name="login_failed_throttled">Muitas tentativas malsucedidas. Tente de novo daqui alguns minutos</string>
+  <string name="login_failed_throttled" fuzzy="true">Muitas tentativas malsucedidas. Tente de novo daqui alguns minutos</string>
   <string name="login_failed_blocked">Desculpe, esse usuário foi banido do Commons</string>
   <string name="login_failed_generic">Erro ao efetuar o login</string>
   <string name="share_upload_button">Enviar</string>
@@ -61,8 +61,8 @@ Aperte nesta mensagem (ou aperte para voltar) para pular este passo</string>
   <string name="preference_tracking_summary">Enviar relatório de uso para a Wikimedia para nos ajudar a melhorar o aplicativo</string>
   <string name="title_activity_settings">Configurações</string>
   <string name="menu_about">Sobre</string>
-  <string name="about_license">Software livre distribuído sob a &lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;Licença Apache v2&lt;/a&gt;</string>
-  <string name="about_improve">Código no &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;. Bugs no &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_license" fuzzy="true">Software livre distribuído sob a &lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;Licença Apache v2&lt;/a&gt;</string>
+  <string name="about_improve" fuzzy="true">Código no &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;. Bugs no &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Política de privacidade&lt;/a&gt;</string>
   <string name="title_activity_about">Sobre</string>
   <string name="menu_feedback">Enviar comentários (por e-mail)</string>
@@ -74,8 +74,8 @@ Aperte nesta mensagem (ou aperte para voltar) para pular este passo</string>
   <string name="share_license_summary">Essa imagem será licenciada sob %1$s</string>
   <string name="menu_download">Download</string>
   <string name="preference_license">Licença</string>
-  <string name="license_name_cc_by_sa">CCu00A0Attribution-ShareAlikeu00A03.0</string>
-  <string name="license_name_cc_by">CCu00A0Attributionu00A03.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Attribution-ShareAlikeu00A03.0</string>
+  <string name="license_name_cc_by" fuzzy="true">CCu00A0Attributionu00A03.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Áustria)</string>

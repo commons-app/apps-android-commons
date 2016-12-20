@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Wikimedia Commons</string>
+  <string name="app_name" fuzzy="true">Wikimedia Commons</string>
   <string name="menu_settings">Ρυθμίσεις</string>
   <string name="username">Όνομα χρήστη</string>
   <string name="password">Κωδικός πρόσβασης</string>
@@ -16,9 +16,9 @@
   <string name="upload_progress_notification_title_start">Έναρξη  %1$s  επιφορτώθηκε</string>
   <string name="upload_progress_notification_title_in_progress">%1$s επιφορτώνεται</string>
   <string name="upload_progress_notification_title_finishing">Αποπεράτωση επιφόρτωσης %1$s</string>
-  <string name="upload_failed_notification_title">Επιφόρτωση του %1$s απέτυχε</string>
+  <string name="upload_failed_notification_title">Ανέβασμα του %1$s απέτυχε</string>
   <string name="upload_failed_notification_subtitle">Πατήστε για να δείτε</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">1 αρχείο επιφορτώνεται</item>
     <item quantity="other">%d αρχεία επιφορτώνονται</item>
   </plurals>
@@ -37,7 +37,7 @@
   <string name="login_failed_network">Δεν είναι δυνατή η σύνδεση - αποτυχία του δικτύου</string>
   <string name="login_failed_username">Δεν είναι δυνατή η σύνδεση - ελέγξτε το όνομα χρήστη σας</string>
   <string name="login_failed_password">Δεν είναι δυνατή η σύνδεση - παρακαλούμε ελέγξτε τον κωδικό σας</string>
-  <string name="login_failed_throttled">Πάρα πολλές αποτυχημένες προσπάθειες. Παρακαλώ δοκιμάστε ξανά σε λίγα λεπτά</string>
+  <string name="login_failed_throttled" fuzzy="true">Πάρα πολλές αποτυχημένες προσπάθειες. Παρακαλώ δοκιμάστε ξανά σε λίγα λεπτά</string>
   <string name="login_failed_blocked">Συγνώμη, αυτός ο χρήστης έχει αποκλειστεί από τα Commons</string>
   <string name="login_failed_generic">Η είσοδος απέτυχε</string>
   <string name="share_upload_button">Ανέβασμα</string>
@@ -69,8 +69,8 @@
   <string name="preference_tracking_summary">Στείλτε αναφορές σχετικά με την χρήση σας στο Wikimedia για να μας βοηθήσετε να βελτιώσουμε την εφαρμογή</string>
   <string name="title_activity_settings">Ρυθμίσεις</string>
   <string name="menu_about">Σχετικά</string>
-  <string name="about_license">Λογισμικό ανοικτού κώδικα και κυκλοφορεί υπό την &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Άδεια Apache v2&lt;/a&gt;</string>
-  <string name="about_improve">Ο πηγαίος κώδικας είναι στο &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Αναφορές σφάλματων στο &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_license" fuzzy="true">Λογισμικό ανοικτού κώδικα και κυκλοφορεί υπό την &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Άδεια Apache v2&lt;/a&gt;</string>
+  <string name="about_improve" fuzzy="true">Ο πηγαίος κώδικας είναι στο &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Αναφορές σφάλματων στο &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Πολιτική προσωπικών δεδομένων&lt;/a&gt;</string>
   <string name="title_activity_about">Σχετικά</string>
   <string name="menu_feedback">Αποστολή σχολίων (μέσω Email)</string>
@@ -82,8 +82,8 @@
   <string name="share_license_summary">Αυτή η εικόνα θα έχει άδεια στα πλαίσια του %1$s</string>
   <string name="menu_download">Λήψη</string>
   <string name="preference_license">Άδεια χρήσης</string>
-  <string name="license_name_cc_by_sa">CCu00A0Attribution-ShareAlikeu00A03.0</string>
-  <string name="license_name_cc_by">CCu00A0Attributionu00A03.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Attribution-ShareAlikeu00A03.0</string>
+  <string name="license_name_cc_by" fuzzy="true">CCu00A0Attributionu00A03.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Αυστρία)</string>

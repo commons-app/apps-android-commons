@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="crash_dialog_title">Commons mendadak kacau</string>
+  <string name="crash_dialog_text">Ups. Ada yang tidak beres!</string>
+  <string name="crash_dialog_comment_prompt">Beritahu kami apa yang Anda lakukan, lalu kirimkan lewat surel. Informasi Anda membantu kami memperbaikinya!</string>
+  <string name="crash_dialog_ok_toast">Terima kasih!</string>
+</resources>

@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Wikimedia Commons</string>
+  <string name="app_name">Commons</string>
   <string name="menu_settings">Beállítások</string>
   <string name="username">Felhasználónév</string>
   <string name="password">Jelszó</string>
   <string name="login">Bejelentkezés</string>
+  <string name="signup">Regisztráció</string>
   <string name="logging_in_title">Belépés...</string>
   <string name="logging_in_message">Kérlek várj…</string>
   <string name="login_success">Sikeres bejelentkezés</string>
   <string name="login_failed">A bejelentkezés nem sikerült.</string>
+  <string name="upload_failed" fuzzy="true">A fájl nem található, próbálkozz másik fájllal</string>
   <string name="authentication_failed">Sikertelen azonosítás.</string>
   <string name="uploading_started">Feltöltés indul.</string>
   <string name="upload_completed_notification_title">%1$s feltöltve!</string>
@@ -18,7 +20,10 @@
   <string name="upload_progress_notification_title_finishing">Feltöltés befejezve: %1$s</string>
   <string name="upload_failed_notification_title">%1$s feltöltése sikertelen</string>
   <string name="upload_failed_notification_subtitle">Kattints a megtekintéshez</string>
-  <string name="uploads_pending_notification_indicator" fuzzy="true">%d van hátra</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">Fájl feltöltése folyamatban</item>
+    <item quantity="other">%d fájl feltöltése folyamatban</item>
+  </plurals>
   <string name="title_activity_contributions">Feltöltéseim</string>
   <string name="contribution_state_queued">Várólistán</string>
   <string name="contribution_state_failed">Sikertelen.</string>
@@ -26,6 +31,7 @@
   <string name="contribution_state_starting">Feltöltés</string>
   <string name="menu_from_gallery">A galériából</string>
   <string name="menu_from_camera">Fényképezés</string>
+  <string name="menu_nearby">Közelben</string>
   <string name="provider_contributions">Feltöltéseim</string>
   <string name="menu_share">Megosztás</string>
   <string name="menu_open_in_browser">Megtekintés böngészőben</string>
@@ -34,7 +40,7 @@
   <string name="login_failed_network">Nem lehet bejelentkezni - hálózati hiba</string>
   <string name="login_failed_username">Nem lehet bejelentkezni - ellenőrizd a felhasználóneved</string>
   <string name="login_failed_password">Nem lehet bejelentkezni - ellenőrizd a jelszavad</string>
-  <string name="login_failed_throttled">Túl sok sikertelen próbálkozás. Próbálkozz újra pár perc múlva</string>
+  <string name="login_failed_throttled" fuzzy="true">Túl sok sikertelen próbálkozás. Próbálkozz újra pár perc múlva</string>
   <string name="login_failed_blocked">Sajnáljuk, ezt a felhasználót blokkolták a Commonson</string>
   <string name="login_failed_generic">Bejelentkezési hiba</string>
   <string name="share_upload_button">Feltöltés</string>
@@ -43,6 +49,11 @@
   <string name="menu_upload_single">Feltöltés</string>
   <string name="categories_search_text_hint">Keresés a kategóriák között</string>
   <string name="menu_save_categories">Mentés</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">Még nincs feltöltés</item>
+    <item quantity="one">1 feltöltés</item>
+    <item quantity="other">%d feltöltés</item>
+  </plurals>
   <string name="categories_not_found">Nincs a(z) „%1$s” keresési kifejezésnek megfelelő kategória</string>
   <string name="categories_skip_explanation">Adj kategóriákat a képekhez, hogy könnyebben meg lehessen találni őket a Commonson.
 
@@ -53,8 +64,8 @@ Kattints erre az üzenetre a lépés kihagyásához</string>
   <string name="preference_tracking_summary">Felhasználási jelentések küldése a Wikimédia részére az alkalmazás fejlesztése érdekében</string>
   <string name="title_activity_settings">Beállítások</string>
   <string name="menu_about">Névjegy</string>
-  <string name="about_license">Nyílt forráskódú szoftver &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; alatt kiadva</string>
-  <string name="about_improve">Forráskód a &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHubon&lt;/a&gt;. Hibabejelentés a &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Bugzillán&lt;/a&gt;.</string>
+  <string name="about_license" fuzzy="true">Nyílt forráskódú szoftver &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; alatt kiadva</string>
+  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Forráskód&lt;/a&gt; és &lt;a href=\"https://commons-app.github.io/\"&gt;weboldal&lt;/a&gt; a GitHubon. Nyiss egy új &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-problémát&lt;/a&gt; hibabejelentéssel vagy fejlesztési javaslattal.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Adatvédelmi_irányelv\"&gt;Adatvédelmi irányelvek&lt;/a&gt;</string>
   <string name="title_activity_about">Névjegy</string>
   <string name="menu_feedback">Visszajelzés küldése (email)</string>

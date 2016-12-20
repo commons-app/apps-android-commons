@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Wikimedia Commons</string>
+  <string name="app_name" fuzzy="true">Wikimedia Commons</string>
   <string name="menu_settings">Paramètres</string>
   <string name="username">Nom d\'utilizaire</string>
   <string name="password">Senhal</string>
@@ -33,7 +33,7 @@
   <string name="login_failed_network">Impossible de se connectar — pana de ret</string>
   <string name="login_failed_username">Impossible de se connectar — verificatz vòstre nom d’utilizaire</string>
   <string name="login_failed_password">Impossible de se connectar — verificatz vòstre senhal</string>
-  <string name="login_failed_throttled">Tròp de temptativas infructuosas. Ensajatz tornarmai dins qualques minutas</string>
+  <string name="login_failed_throttled" fuzzy="true">Tròp de temptativas infructuosas. Ensajatz tornarmai dins qualques minutas</string>
   <string name="login_failed_blocked">O planhèm, aqueste utilizaire es estat blocat dins Commons</string>
   <string name="login_failed_generic">Error de connexion</string>
   <string name="share_upload_button">Mandar</string>
@@ -60,7 +60,7 @@
   <string name="preference_tracking">Rapòrts d’utilizacion</string>
   <string name="title_activity_settings">Paramètres</string>
   <string name="menu_about">A prepaus</string>
-  <string name="about_improve">Font sus &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Bugs sus &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_improve" fuzzy="true">Font sus &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Bugs sus &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politica de confidencialitat&lt;/a&gt;</string>
   <string name="title_activity_about">A prepaus</string>
   <string name="menu_feedback">Mandar vòstres comentaris (per corrièl)</string>
@@ -72,8 +72,8 @@
   <string name="share_license_summary">Aqueste imatge serà jos licéncia %1$s</string>
   <string name="menu_download">Telecargar</string>
   <string name="preference_license">Licéncia</string>
-  <string name="license_name_cc_by_sa">CCu00A0Atribucionu00A0-u00A0Partimentu00A0dinsu00A0lasu00A0Meteissasu00A0Condicionsu00A03.0</string>
-  <string name="license_name_cc_by">CCu00A0Atribucionu00A03.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Atribucionu00A0-u00A0Partimentu00A0dinsu00A0lasu00A0Meteissasu00A0Condicionsu00A03.0</string>
+  <string name="license_name_cc_by" fuzzy="true">CCu00A0Atribucionu00A03.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Àustria)</string>
@@ -96,12 +96,12 @@
   <string name="license_name_cc_2_0">CC BY 2.0</string>
   <string name="license_name_fal">Licéncia Art Liure</string>
   <string name="license_name_pd_old_100">Domeni public (autor defuntat dempuèi mai de 100 ans)</string>
-  <string name="license_name_pd_old">Domeni public (drech d’autor expirat)</string>
+  <string name="license_name_pd_old">Domeni public (dreit d’autor expirat)</string>
   <string name="license_name_pd_art">Domeni public (art)</string>
   <string name="license_name_pd_us">Domeni public (Estats Units)</string>
   <string name="license_name_pd_usgov">Domeni public (govèrnament dels Estats Units)</string>
   <string name="license_name_pd_usgov_nasa">Domeni public (NASA)</string>
-  <string name="license_name_pd_ineligible">Domeni public (pas elegible al drech d’autor)</string>
+  <string name="license_name_pd_ineligible">Domeni public (pas elegible al dreit d’autor)</string>
   <string name="license_name_attribution">Atribucion</string>
   <string name="license_name_gfdl">Licéncia de documentacion liura GNU</string>
   <string name="welcome_wikipedia_subtext">Los imatges sus Wikipèdia venon de Wikimedia Commons.</string>

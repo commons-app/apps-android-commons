@@ -5,10 +5,12 @@
   <string name="username">Naudotojo vardas</string>
   <string name="password">Slaptažodis</string>
   <string name="login">Prisijungti</string>
+  <string name="signup">Užsiregistruoti</string>
   <string name="logging_in_title">Jungiama</string>
   <string name="logging_in_message">Prašome palaukti ...</string>
   <string name="login_success">Sėkmingai prisijungėte!</string>
   <string name="login_failed">Prisijungti nepavyko!</string>
+  <string name="upload_failed">Failas nerastas. Prašome pabandyti kitą failą.</string>
   <string name="authentication_failed">Autentifikavimas nepavyko!</string>
   <string name="uploading_started">Pradėta įkelti!</string>
   <string name="upload_completed_notification_title">%1$s įkelta!</string>
@@ -17,6 +19,10 @@
   <string name="upload_progress_notification_title_finishing">Baigiamas įkelti %1$s</string>
   <string name="upload_failed_notification_title">Įkelti %1$s nepavyko</string>
   <string name="upload_failed_notification_subtitle">Bakstelėkite norėdami Rodyti</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">1 keliamas failas</item>
+    <item quantity="other">%d keliamų failų</item>
+  </plurals>
   <string name="title_activity_contributions">Mano įkėlimai</string>
   <string name="contribution_state_queued">Eilėje</string>
   <string name="contribution_state_failed">Nepavyko</string>
@@ -24,20 +30,50 @@
   <string name="contribution_state_starting">Įkeliama</string>
   <string name="menu_from_gallery">Iš galerijos</string>
   <string name="menu_from_camera">Nufotografuoti</string>
+  <string name="menu_nearby">Netoliese</string>
   <string name="provider_contributions">Mano įkėlimai</string>
   <string name="menu_share">Dalintis</string>
   <string name="menu_open_in_browser">Atidaryti naršyklėje</string>
   <string name="share_description_hint">Aprašymas</string>
+  <string name="login_failed_throttled">Per daug nesėkmingų bandymų. Pabandykite dar kartą po keleto minučių.</string>
   <string name="share_upload_button">Įkelti</string>
   <string name="multiple_share_base_title">Pavadinkite šį rinkinį</string>
   <string name="provider_modifications">Pakeitimai</string>
   <string name="menu_upload_single">Įkelti</string>
   <string name="categories_search_text_hint">Ieškoti kategorijas</string>
   <string name="menu_save_categories">Išsaugoti</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">Dar nėra įkėlimų</item>
+    <item quantity="one">1 įkėlimas</item>
+    <item quantity="other">%d įkėlimai</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Pradedamas 1 įkėlimas</item>
+    <item quantity="other">Pradedami %d įkėlimai</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">1 įkėlimas</item>
+    <item quantity="other">%d įkėlimai</item>
+  </plurals>
   <string name="categories_activity_title">Kategorijos</string>
   <string name="title_activity_settings">Nustatymai</string>
+  <string name="title_activity_signup">Užsiregistruoti</string>
   <string name="menu_about">Apie</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privatumo politika&lt;/a&gt;</string>
   <string name="title_activity_about">Apie</string>
+  <string name="no_email_client">Nėra įdiegtos el. pašto tvarkyklės</string>
   <string name="menu_download">Parsisiųsti</string>
+  <string name="use_previous">Naudoti ankstesnį pavadinimą/aprašymą</string>
+  <string name="allow_gps">Automatiškai gauti dabartinę vietą</string>
+  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
+  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
+  <string name="tutorial_1_subtext">Jūsų paveikslėliai padeda šviesti žmones visame pasaulyje!</string>
+  <string name="tutorial_2_text">Prašome kelti nuotraukos, kurios yra padarytos ar sukurtos tik jūsų:</string>
+  <string name="tutorial_3_text">Prašome NEkelti:</string>
+  <string name="ok">Gerai</string>
+  <string name="title_activity_nearby">Netoliese Esančios Vietos</string>
+  <string name="warning">Įspėjimas</string>
+  <string name="file_exists">Šis failas jau egzistuoja Commons. Ar tikrai norite tęsti?</string>
+  <string name="yes">Taip</string>
+  <string name="no">Ne</string>
 </resources>

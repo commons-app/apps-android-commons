@@ -1,24 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Wikimedia Commons</string>
+  <string name="app_name">Communs</string>
   <string name="menu_settings">Paramètres</string>
   <string name="username">Nom d’utilisateur</string>
   <string name="password">Mot de passe</string>
   <string name="login">Se connecter</string>
+  <string name="signup">S’inscrire</string>
   <string name="logging_in_title">Connexion</string>
   <string name="logging_in_message">Veuillez patienter…</string>
   <string name="login_success">Connexion réussie !</string>
   <string name="login_failed">Échec de la connexion!</string>
+  <string name="upload_failed">Fichier non trouvé. Veuillez en essayer un autre.</string>
   <string name="authentication_failed">Échec de l’authentification!</string>
   <string name="uploading_started">Téléchargement démarré!</string>
-  <string name="upload_completed_notification_title">%1$s téléchargés!</string>
+  <string name="upload_completed_notification_title">%1$s téléversés!</string>
   <string name="upload_completed_notification_text">Appuyer pour voir votre téléchargement</string>
   <string name="upload_progress_notification_title_start">Début de téléchargement %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s téléchargés</string>
   <string name="upload_progress_notification_title_finishing">Fin du téléchargement %1$s</string>
   <string name="upload_failed_notification_title">Téléchargement échoué à %1$s</string>
   <string name="upload_failed_notification_subtitle">Appuyer pour afficher</string>
-  <string name="uploads_pending_notification_indicator">%d fichiers en téléchargement</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">1 fichier en téléchargement</item>
+    <item quantity="other">%d fichiers en téléchargement</item>
+  </plurals>
   <string name="title_activity_contributions">Mes téléchargements</string>
   <string name="contribution_state_queued">Mis en file d\'attente</string>
   <string name="contribution_state_failed">Échoué</string>
@@ -26,6 +31,7 @@
   <string name="contribution_state_starting">Téléchargement</string>
   <string name="menu_from_gallery">Depuis la galerie</string>
   <string name="menu_from_camera">Prendre une photo</string>
+  <string name="menu_nearby">À proximité</string>
   <string name="provider_contributions">Mes téléchargements</string>
   <string name="menu_share">Partager</string>
   <string name="menu_open_in_browser">Afficher dans le navigateur</string>
@@ -34,10 +40,10 @@
   <string name="login_failed_network">Impossible de se connecter — panne de réseau</string>
   <string name="login_failed_username">Impossible de se connecter — veuillez vérifier votre nom d’utilisateur</string>
   <string name="login_failed_password">Impossible de se connecter — veuillez vérifier votre mot de passe</string>
-  <string name="login_failed_throttled">Trop de tentatives infructueuses. Veuillez réessayer dans quelques minutes</string>
+  <string name="login_failed_throttled">Trop de tentatives infructueuses. Veuillez réessayer dans quelques minutes.</string>
   <string name="login_failed_blocked">Désolé, cet utilisateur a été bloqué dans Commons</string>
   <string name="login_failed_generic">Échec de connexion</string>
-  <string name="share_upload_button">Télécharger</string>
+  <string name="share_upload_button">Téléverser</string>
   <string name="multiple_share_base_title">Nommer ce jeu</string>
   <string name="provider_modifications">Modifications</string>
   <string name="menu_upload_single">Importer</string>
@@ -53,8 +59,8 @@
     <item quantity="other">%d téléchargements démarrés</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">1 téléchargement</item>
-    <item quantity="other">%d téléchargements</item>
+    <item quantity="one">1 Téléversement</item>
+    <item quantity="other">%d Téléversements</item>
   </plurals>
   <string name="categories_not_found">Aucune catégorie correspondant à %1$s trouvée</string>
   <string name="categories_skip_explanation">Ajoutez des catégories pour rendre vos images plus simple à trouver sur Wikimedia Commons. 
@@ -65,12 +71,14 @@ Appuyez sur ce message (ou retournez en arrière) pour sauter cette étape.</str
   <string name="preference_tracking">Rapports d’utilisation</string>
   <string name="preference_tracking_summary">Envoyer les rapports d’utilisation à Wikimedia pour nous aider à améliorer l’application</string>
   <string name="title_activity_settings">Paramètres</string>
+  <string name="title_activity_signup">S’inscrire</string>
   <string name="menu_about">À propos</string>
-  <string name="about_license">Les logiciels Open Source sont publié sous la &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;licence Apache v2&lt;/a&gt;</string>
-  <string name="about_improve">Source sur &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Bogues sur &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_license">Les logiciels Open Source sont publiés sous la &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;licence Apache v2&lt;/a&gt;. Wikimédia Commons et son logo sont des marques déposées de la Fondation Wikimédia et sont utilisées avec l’autorisation de la Fondation Wikimédia. Nous ne sommes pas approuvés par ou affiliés à la Fondation Wikimédia.</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sources&lt;/a&gt; et &lt;a href=\"https://commons-app.github.io/\"&gt;site web&lt;/a&gt; sur GitHub&lt;/a&gt;. Créer un nouveau &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;signalement GitHub&lt;/a&gt; pour indiquer un bogue et faire des suggestions.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politique de confidentialité&lt;/a&gt;</string>
   <string name="title_activity_about">À propos</string>
   <string name="menu_feedback">Envoyer vos commentaires (par courriel)</string>
+  <string name="no_email_client">Aucun client de courriel installé</string>
   <string name="provider_categories">Catégories utilisées récemment</string>
   <string name="waiting_first_sync">Attente de première synchronisation…</string>
   <string name="no_uploads_yet">Vous n’avez pas encore téléchargé de photo.</string>
@@ -79,6 +87,9 @@ Appuyez sur ce message (ou retournez en arrière) pour sauter cette étape.</str
   <string name="share_license_summary">Cette image sera sous licence %1$s</string>
   <string name="menu_download">Télécharger</string>
   <string name="preference_license">Licence</string>
+  <string name="use_previous" fuzzy="true">Utiliser le titre ou la description précédent</string>
+  <string name="allow_gps">Obtenir automatiquement l’emplacement actuel</string>
+  <string name="allow_gps_summary">Récupérer l’emplacement actuel pour proposer des suggestions de catégorie si l’image n’est pas marquée géographiquement</string>
   <string name="license_name_cc_by_sa">CCu00A0Attributionu00A0-u00A0Partageu00A0dansu00A0lesu00A0Mêmesu00A0Conditionsu00A03.0</string>
   <string name="license_name_cc_by">CCu00A0Attributionu00A03.0</string>
   <string name="license_name_cc0">CC0</string>
@@ -94,6 +105,8 @@ Appuyez sur ce message (ou retournez en arrière) pour sauter cette étape.</str
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Pologne)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Roumanie)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
+  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zéro</string>
   <string name="license_name_own_pd">own-pd</string>
   <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
@@ -111,6 +124,20 @@ Appuyez sur ce message (ou retournez en arrière) pour sauter cette étape.</str
   <string name="license_name_pd_ineligible">Domaine public (non éligible au droit d’auteur)</string>
   <string name="license_name_attribution">Attribution</string>
   <string name="license_name_gfdl">Licence de documentation libre GNU</string>
+  <string name="tutorial_1_text">Wikimédia Communs héberge la plupart des images qui sont utilisées dans Wikipédia</string>
+  <string name="tutorial_1_subtext">Vos images aident à éduquer les gens dans le monde entier !</string>
+  <string name="tutorial_2_text">Veuillez télécharger les images qui sont prises ou créées entièrement par vous :</string>
+  <string name="tutorial_2_subtext">- Objets naturels (fleurs, animaux, montagnes) 
+- Objets utiles (bicyclettes, gares ferroviaires) 
+- Personnes célèbres (votre maire, les athlètes olympiques que vous avez rencontrés)</string>
+  <string name="tutorial_3_text">Veuillez ne PAS télécharger :</string>
+  <string name="tutorial_3_subtext">- des selfies ou des images de vos amis 
+- des images téléchargées sur Internet
+- des copies d’écran d’applications propriétaires</string>
+  <string name="tutorial_4_text">Exemple de téléchargement :</string>
+  <string name="tutorial_4_subtext">- Titre : L’opéra de Sydney
+- Description : L’opéra de Sydney vu à travers la baie
+- Catégories : Opéra de Sydney, Opéra de Sydney depuis l’ouest, vues à distance de l’Opéra de Sydney</string>
   <string name="welcome_wikipedia_text">Contribuez avec vos images. Aidez les articles de Wikipédia à prendre vie !</string>
   <string name="welcome_wikipedia_subtext">Les images sur Wikipédia viennent de Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Vos images aident à éduquer les gens dans le monde entier.</string>
@@ -123,4 +150,12 @@ Appuyez sur ce message (ou retournez en arrière) pour sauter cette étape.</str
   <string name="detail_description_empty">Aucune description</string>
   <string name="detail_license_empty">Licence inconnue</string>
   <string name="menu_refresh">Rafraîchir</string>
+  <string name="storage_permission_rationale">Autorisation nécessaire : Lire un stockage externe. L’application ne peut pas fonctionner sans cela.</string>
+  <string name="location_permission_rationale">Autorisation facultative : Obtenir l’emplacement actuel pour des suggestions de catégorie</string>
+  <string name="ok">OK</string>
+  <string name="title_activity_nearby">Endroits à proximité</string>
+  <string name="warning">Avertissement</string>
+  <string name="file_exists">Ce fichier existe déjà sur Communs. Êtes-vous sûr de vouloir continuer ?</string>
+  <string name="yes">Oui</string>
+  <string name="no">Non</string>
 </resources>
