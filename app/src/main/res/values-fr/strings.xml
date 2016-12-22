@@ -87,7 +87,7 @@ Appuyez sur ce message (ou retournez en arrière) pour sauter cette étape.</str
   <string name="share_license_summary">Cette image sera sous licence %1$s</string>
   <string name="menu_download">Télécharger</string>
   <string name="preference_license">Licence</string>
-  <string name="use_previous" fuzzy="true">Utiliser le titre ou la description précédent</string>
+  <string name="use_previous">Utiliser le titre ou la description précédent</string>
   <string name="allow_gps">Obtenir automatiquement l’emplacement actuel</string>
   <string name="allow_gps_summary">Récupérer l’emplacement actuel pour proposer des suggestions de catégorie si l’image n’est pas marquée géographiquement</string>
   <string name="license_name_cc_by_sa">CCu00A0Attributionu00A0-u00A0Partageu00A0dansu00A0lesu00A0Mêmesu00A0Conditionsu00A03.0</string>

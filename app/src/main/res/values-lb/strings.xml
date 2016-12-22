@@ -71,7 +71,7 @@ Klickt op dëse Message (oder dréck op Zréck) fir dëse Schrëtt z\'iwwerspran
   <string name="title_activity_settings">Astellungen</string>
   <string name="title_activity_signup">Mellt Iech un</string>
   <string name="menu_about">Iwwer</string>
-  <string name="about_license" fuzzy="true">\'Open-Source-Software\' verëffentlecht ënner der &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache Lizenz v2&lt;/a&gt;</string>
+  <string name="about_license">\'Open-Source-Software\' verëffentlecht ënner der &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache Lizenz v2&lt;/a&gt;. wikimedia Commons a säi Logo si Markenzeeche vun der wikimedia Foundation a gi mat der Autorisatioun vun de rWikimedai Foundation benotzt. Mir sinn net confirméiert vun oder liéiert mat der Wikimedia Foundation.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Quell&lt;/a&gt; an &lt;a href=\"https://commons-app.github.io/\"&gt;Internetsite&lt;/a&gt; vu GitHub.
 Leet w.e.g. &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt; e GitHub Problem&lt;/a&gt; fir Problemer ze mellen a Proposen ze maachen.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Dateschutzerklärung&lt;/a&gt;</string>
@@ -86,6 +86,7 @@ Leet w.e.g. &lt;a href=\"https://github.com/commons-app/apps-android-commons/iss
   <string name="share_license_summary">Dëst Bild gëtt ënner %1$s lizenzéiert</string>
   <string name="menu_download">Eroflueden</string>
   <string name="preference_license">Lizenz</string>
+  <string name="use_previous">Viregen Titel/Beschreiwung benotzen</string>
   <string name="allow_gps">Automatesch déi aktuell Plaz kréien</string>
   <string name="license_name_cc_by_sa">CCu00A0Attribution-ShareAlikeu00A03.0</string>
   <string name="license_name_cc_by">CCu00A0Attributionu00A03.0</string>
@@ -122,6 +123,7 @@ Leet w.e.g. &lt;a href=\"https://github.com/commons-app/apps-android-commons/iss
   <string name="license_name_attribution">Attributioun</string>
   <string name="license_name_gfdl">GNU Fräi Dokumentatiouns Lizenz</string>
   <string name="tutorial_1_subtext">Är Biller hëllefe Leit op der ganzer Welt ze forméieren!</string>
+  <string name="tutorial_2_text">Lued w.e.g. Biller erop déi komplett vun Iech opgeholl oder gemaacht goufen:</string>
   <string name="tutorial_3_text">W.e.g. NET eroplueden:</string>
   <string name="tutorial_4_text">Beispill-Upload:</string>
   <string name="welcome_wikipedia_text">Maacht mat mat Äre Biller. Hëlleft Wikipedia-Artikele méi lieweg ze maachen!</string>

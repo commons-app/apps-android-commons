@@ -6,15 +6,16 @@
   <string name="password">Slaptažodis</string>
   <string name="login">Prisijungti</string>
   <string name="signup">Užsiregistruoti</string>
-  <string name="logging_in_title">Jungiama</string>
-  <string name="logging_in_message">Prašome palaukti ...</string>
+  <string name="logging_in_title">Jungiamasi</string>
+  <string name="logging_in_message">Prašome palaukti...</string>
   <string name="login_success">Sėkmingai prisijungėte!</string>
   <string name="login_failed">Prisijungti nepavyko!</string>
   <string name="upload_failed">Failas nerastas. Prašome pabandyti kitą failą.</string>
   <string name="authentication_failed">Autentifikavimas nepavyko!</string>
-  <string name="uploading_started">Pradėta įkelti!</string>
+  <string name="uploading_started">Įkėlimas prasidėjo!</string>
   <string name="upload_completed_notification_title">%1$s įkelta!</string>
   <string name="upload_completed_notification_text">Bakstelėkite norėdami peržiūrėti jūsų įkėlimą</string>
+  <string name="upload_progress_notification_title_start">Pradedamas įkėlimas %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s įkeliamas</string>
   <string name="upload_progress_notification_title_finishing">Baigiamas įkelti %1$s</string>
   <string name="upload_failed_notification_title">Įkelti %1$s nepavyko</string>
@@ -34,8 +35,14 @@
   <string name="provider_contributions">Mano įkėlimai</string>
   <string name="menu_share">Dalintis</string>
   <string name="menu_open_in_browser">Atidaryti naršyklėje</string>
+  <string name="share_title_hint">Pavadinimas</string>
   <string name="share_description_hint">Aprašymas</string>
+  <string name="login_failed_network">Negalima prisijungti - tinklo klaida</string>
+  <string name="login_failed_username">Negalima prisijungti - prašome patikrinti savo vartotojo vardą</string>
+  <string name="login_failed_password">Negalima prisijungti - prašome patikrinti savo slaptažodį</string>
   <string name="login_failed_throttled">Per daug nesėkmingų bandymų. Pabandykite dar kartą po keleto minučių.</string>
+  <string name="login_failed_blocked">Atsiprašome, šis vartotojas buvo užblokuotas Commons</string>
+  <string name="login_failed_generic">Prisijungti nepavyko</string>
   <string name="share_upload_button">Įkelti</string>
   <string name="multiple_share_base_title">Pavadinkite šį rinkinį</string>
   <string name="provider_modifications">Pakeitimai</string>
@@ -55,21 +62,63 @@
     <item quantity="one">1 įkėlimas</item>
     <item quantity="other">%d įkėlimai</item>
   </plurals>
+  <string name="categories_not_found">Nerasta kategorijų, atitinkančiu %1$s</string>
+  <string name="categories_skip_explanation">Pridėkite kategorijas, kad jūsų paveikslėliai būtų lengviau randami Vikimedija Commons.
+
+Pradėkite rašyti, kad pridėtumėte kategorijas.
+Paspauskite šią žinutę (ar paspauskite atgal), kad praleistumėte šį žingsnį.</string>
   <string name="categories_activity_title">Kategorijos</string>
+  <string name="preference_tracking">Naudojimo ataskaitos</string>
+  <string name="preference_tracking_summary">Siųsti naudojimo ataskaitas Vikimedijai, kad padėtumėte patobulinti aplikaciją</string>
   <string name="title_activity_settings">Nustatymai</string>
   <string name="title_activity_signup">Užsiregistruoti</string>
   <string name="menu_about">Apie</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privatumo politika&lt;/a&gt;</string>
   <string name="title_activity_about">Apie</string>
+  <string name="menu_feedback">Siųsti Atsiliepimą (El. paštu)</string>
   <string name="no_email_client">Nėra įdiegtos el. pašto tvarkyklės</string>
+  <string name="provider_categories">Neseniai naudotos kategorijos</string>
+  <string name="waiting_first_sync">Laukiama pirmo sinchronizavimo</string>
+  <string name="no_uploads_yet">Dar neįkėlėte jokių nuotraukų.</string>
+  <string name="menu_retry_upload">Bandykite dar kartą</string>
+  <string name="menu_cancel_upload">Atšaukti</string>
+  <string name="share_license_summary">Šio paveikslėlio licencija bus %1$s</string>
   <string name="menu_download">Parsisiųsti</string>
+  <string name="preference_license">Licencija</string>
   <string name="use_previous">Naudoti ankstesnį pavadinimą/aprašymą</string>
   <string name="allow_gps">Automatiškai gauti dabartinę vietą</string>
+  <string name="allow_gps_summary">Gauti dabartinę vietove, kad būtų pasiūlytos kategorijos, jei paveikslėlis neturi geografinės žymės</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
+  <string name="license_name_pd_old_100">Viešas domenas (autorius mirė prieš 100 metų)</string>
+  <string name="license_name_pd_old">Viešas domenas (autorinių teisių apsauga baigėsi)</string>
+  <string name="license_name_pd_art">Viešas domenas (menas)</string>
+  <string name="license_name_pd_us">Viešas domenas (JAV)</string>
+  <string name="license_name_pd_usgov">Viešas domenas (JAV vyriausybė)</string>
+  <string name="license_name_pd_usgov_nasa">Viešas domenas (NASA)</string>
+  <string name="license_name_pd_ineligible">Viešas domenas (autorinių teisių apsauga netaikoma)</string>
+  <string name="tutorial_1_text">Vikimedija Commons talpina daugumą paveikslėlių, kurie yra naudojami Vikipedijoje.</string>
   <string name="tutorial_1_subtext">Jūsų paveikslėliai padeda šviesti žmones visame pasaulyje!</string>
   <string name="tutorial_2_text">Prašome kelti nuotraukos, kurios yra padarytos ar sukurtos tik jūsų:</string>
+  <string name="tutorial_2_subtext">- Gamtos objektai (gėlės, gyvūnai, kalnai)
+- Naudingi objektai (dviračiai, traukinių stotys)
+- Įžymūs žmonės (merai, Olimpiniai atletai)</string>
   <string name="tutorial_3_text">Prašome NEkelti:</string>
+  <string name="tutorial_4_text">Pavyzdinis įkėlimas:</string>
+  <string name="welcome_wikipedia_text">Įkelkite savo paveikslėlius. Padėkite Vikipedijos straipsniams būti spalvingesniems!</string>
+  <string name="welcome_wikipedia_subtext">Paveikslėliai Vikipedijoje yra iš Vikimedija Commons.</string>
+  <string name="welcome_copyright_text">Jūsų paveikslėliai padeda šviesti žmones visame pasaulyje.</string>
+  <string name="welcome_copyright_subtext">Venkite autorinėmis teisėmis saugomos medžiagos, kurią radote internete, taip pat plakatų, knygų viršelių ir t.t.</string>
+  <string name="welcome_final_text">Ar viską supratote?</string>
+  <string name="welcome_final_button_text">Taip!</string>
+  <string name="detail_panel_cats_label">Kategorijos</string>
+  <string name="detail_panel_cats_loading">Įkeliama…</string>
+  <string name="detail_panel_cats_none">Niekas nepasirinkta</string>
+  <string name="detail_description_empty">Nėra aprašymo</string>
+  <string name="detail_license_empty">Nežinoma licencija</string>
+  <string name="menu_refresh">Atnaujinti</string>
+  <string name="storage_permission_rationale">Reikalinga teisė: Skaityti išorinę talpyklą. Programėle be to negali funkcionuoti.</string>
+  <string name="location_permission_rationale">Neprivaloma teisė: Gauti dabartinę vietovę, kad būtų pasiūlomos kategorijos</string>
   <string name="ok">Gerai</string>
   <string name="title_activity_nearby">Netoliese Esančios Vietos</string>
   <string name="warning">Įspėjimas</string>

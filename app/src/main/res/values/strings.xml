@@ -1,175 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="app_name">Commons</string>
+  <string name="menu_settings">Settings</string>
+  <string name="username">Username</string>
+  <string name="password">Password</string>
+  <string name="login">Log in</string>
+  <string name="signup">Sign up</string>
+  <string name="logging_in_title">Logging in</string>
+  <string name="logging_in_message">Please wait...</string>
+  <string name="login_success">Login success!</string>
+  <string name="login_failed">Login failed!</string>
+  <string name="upload_failed">File not found. Please try another file.</string>
+  <string name="authentication_failed">Authentication failed!</string>
+  <string name="uploading_started">Upload started!</string>
+  <string name="upload_completed_notification_title">%1$s uploaded!</string>
+  <string name="upload_completed_notification_text">Tap to view your upload</string>
+  <string name="upload_progress_notification_title_start">Starting %1$s upload</string>
+  <string name="upload_progress_notification_title_in_progress">%1$s uploading</string>
+  <string name="upload_progress_notification_title_finishing">Finishing uploading %1$s</string>
+  <string name="upload_failed_notification_title">Uploading %1$s failed</string>
+  <string name="upload_failed_notification_subtitle">Tap to view</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">1 file uploading</item>
+    <item quantity="other">%d files uploading</item>
+  </plurals>
+  <string name="title_activity_contributions">My uploads</string>
+  <string name="contribution_state_queued">Queued</string>
+  <string name="contribution_state_failed">Failed</string>
+  <string name="contribution_state_in_progress">%1$d%% complete</string>
+  <string name="contribution_state_starting">Uploading</string>
+  <string name="menu_from_gallery">From Gallery</string>
+  <string name="menu_from_camera">Take photo</string>
+  <string name="menu_nearby">Nearby</string>
+  <string name="provider_contributions">My uploads</string>
+  <string name="menu_share">Share</string>
+  <string name="menu_open_in_browser">View in Browser</string>
+  <string name="share_title_hint">Title</string>
+  <string name="share_description_hint">Description</string>
+  <string name="login_failed_network">Unable to login - network failure</string>
+  <string name="login_failed_username">Unable to login - please check your username</string>
+  <string name="login_failed_password">Unable to login - please check your password</string>
+  <string name="login_failed_throttled">Too many unsuccessful attempts. Please try again in a few minutes.</string>
+  <string name="login_failed_blocked">Sorry, this user has been blocked on Commons</string>
+  <string name="login_failed_generic">Login failed</string>
+  <string name="share_upload_button">Upload</string>
+  <string name="multiple_share_base_title">Name this set</string>
+  <string name="provider_modifications">Modifications</string>
+  <string name="menu_upload_single">Upload</string>
+  <string name="categories_search_text_hint">Search categories</string>
+  <string name="menu_save_categories">Save</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">No uploads yet</item>
+    <item quantity="one">1 upload</item>
+    <item quantity="other">%d uploads</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Starting 1 upload</item>
+    <item quantity="other">Starting %d uploads</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">1 upload</item>
+    <item quantity="other">%d uploads</item>
+  </plurals>
+  <string name="categories_not_found">No categories matching %1$s found</string>
+  <string name="categories_skip_explanation">Add categories to make your images more discoverable on Wikimedia Commons.
 
-    <string name="app_name">Commons</string>
-    <string name="menu_settings">Settings</string>
-    <string name="username">Username</string>
-    <string name="password">Password</string>
-    <string name="login">Log in</string>
-    <string name="signup">Sign up</string>
-    <string name="logging_in_title">Logging in</string>
-    <string name="logging_in_message">Please wait...</string>
-    <string name="login_success">Login success!</string>
-    <string name="login_failed">Login failed!</string>
-    <string name="upload_failed">File not found. Please try another file.</string>
-    <string name="authentication_failed">Authentication failed!</string>
-    <string name="uploading_started">Upload started!</string>
-
-    <string name="upload_completed_notification_title">%1$s uploaded!</string>
-    <string name="upload_completed_notification_text">Tap to view your upload</string>
-    <string name="upload_progress_notification_title_start">Starting %1$s upload</string>
-    <string name="upload_progress_notification_title_in_progress">%1$s uploading</string>
-    <string name="upload_progress_notification_title_finishing">Finishing uploading %1$s</string>
-    <string name="upload_failed_notification_title">Uploading %1$s failed</string>
-    <string name="upload_failed_notification_subtitle">Tap to view</string>
-    <plurals name="uploads_pending_notification_indicator">
-        <item quantity="one">1 file uploading</item>
-        <item quantity="other">%d files uploading</item>
-    </plurals>
-
-    <string name="title_activity_contributions">My uploads</string>
-    <string name="contribution_state_queued">Queued</string>
-    <string name="contribution_state_failed">Failed</string>
-    <string name="contribution_state_in_progress">%1$d%% complete</string>
-    <string name="contribution_state_starting">Uploading</string>
-    <string name="menu_from_gallery">From Gallery</string>
-    <string name="menu_from_camera">Take photo</string>
-    <string name="menu_nearby">Nearby</string>
-
-    <string name="provider_contributions">My uploads</string>
-    <string name="menu_share">Share</string>
-    <string name="menu_open_in_browser">View in Browser</string>
-    <string name="share_title_hint">Title</string>
-    <string name="share_description_hint">Description</string>
-
-    <string name="login_failed_network">Unable to login - network failure</string>
-    <string name="login_failed_username">Unable to login - please check your username</string>
-    <string name="login_failed_password">Unable to login - please check your password</string>
-    <string name="login_failed_throttled">Too many unsuccessful attempts. Please try again in a few minutes.</string>
-    <string name="login_failed_blocked">Sorry, this user has been blocked on Commons</string>
-    <string name="login_failed_generic">Login failed</string>
-
-    <string name="share_upload_button">Upload</string>
-    <string name="multiple_share_base_title">Name this set</string>
-    <string name="provider_modifications">Modifications</string>
-    <string name="menu_upload_single">Upload</string>
-    <string name="categories_search_text_hint">Search categories</string>
-    <string name="menu_save_categories">Save</string>
-
-    <plurals name="contributions_subtitle">
-        <item quantity="zero">No uploads yet</item>
-        <item quantity="one">1 upload</item>
-        <item quantity="other">%d uploads</item>
-    </plurals>
-    <plurals name="starting_multiple_uploads">
-        <item quantity="one">Starting 1 upload</item>
-        <item quantity="other">Starting %d uploads</item>
-    </plurals>
-    <plurals name="multiple_uploads_title">
-        <item quantity="one">1 upload</item>
-        <item quantity="other">%d uploads</item>
-    </plurals>
-
-    <string name="categories_not_found">No categories matching %1$s found</string>
-    <string name="categories_skip_explanation">Add categories to make your images more discoverable on Wikimedia Commons.\n\nStart typing to add categories.\nTap this message (or hit back) to skip this step.</string>
-    <string name="categories_activity_title">Categories</string>
-    <string name="preference_tracking">Usage reports</string>
-    <string name="preference_tracking_summary">Send usage reports to Wikimedia to help us improve the app</string>
-    <string name="title_activity_settings">Settings</string>
-    <string name="title_activity_signup">Sign Up</string>
-
-    <string name="menu_about">About</string>
-    <string name="about_license">Open Source software released under the &lt;a href="https://github.com/wikimedia/apps-android-commons/blob/master/COPYING">Apache License v2&lt;/a>. Wikimedia Commons and its logo are trademarks of the Wikimedia Foundation and are used with the permission of the Wikimedia Foundation. We are not endorsed by or affiliated with the Wikimedia Foundation.</string>
-    <string name="about_improve">&lt;a href="https://github.com/commons-app/apps-android-commons">Source&lt;/a> and &lt;a href="https://commons-app.github.io/">website&lt;/a> on GitHub&lt;/a>. Create a new &lt;a href="https://github.com/commons-app/apps-android-commons/issues">GitHub issue&lt;/a> for bug reports and suggestions.</string>
-    <string name="about_privacy_policy">&lt;a href="https://wikimediafoundation.org/wiki/Privacy_policy">Privacy policy&lt;/a></string>
-    <string name="title_activity_about">About</string>
-
-    <string name="menu_feedback">Send Feedback (via Email)</string>
-    <string name="no_email_client">No email client installed</string>
-    <string name="provider_categories">Recently used categories</string>
-
-    <string name="waiting_first_sync">Waiting for first sync...</string>
-    <string name="no_uploads_yet">You have not yet uploaded any photos.</string>
-
-    <string name="menu_retry_upload">Retry</string>
-    <string name="menu_cancel_upload">Cancel</string>
-
-    <string name="share_license_summary">This image will be licensed under %1$s</string>
-
-    <string name="menu_download">Download</string>
-    <string name="preference_license">License</string>
-    <string name="use_previous">Use previous title/description</string>
-
-    <string name="allow_gps">Automatically get current location</string>
-    <string name="allow_gps_summary">Retrieve current location to offer category suggestions if image is not geotagged</string>
-
-    <!-- These three are semi-legacy entries, and should be changed in future -->
-    <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
-    <string name="license_name_cc_by"> Attribution 3.0</string>
-    <string name="license_name_cc0">CC0</string>
-
-    <!-- Licenses from the default UploadWizard selection list -->
-    <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-    <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Austria)</string>
-    <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Germany)</string>
-    <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonia)</string>
-    <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Spain)</string>
-    <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Croatia)</string>
-    <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxembourg)</string>
-    <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Netherlands)</string>
-    <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norway)</string>
-    <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Poland)</string>
-    <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romania)</string>
-    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-    <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
-    <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-    <string name="license_name_cc_zero">CC Zero</string>
-    <string name="license_name_own_pd">own-pd</string>
-    <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
-    <string name="license_name_cc_by_2_5">CC BY 2.5</string>
-    <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
-    <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
-    <string name="license_name_cc_2_0">CC BY 2.0</string>
-    <string name="license_name_fal">Free Art License</string>
-    <string name="license_name_pd_old_100">Public domain (author died over 100 years ago)</string>
-    <string name="license_name_pd_old">Public domain (copyright expired)</string>
-    <string name="license_name_pd_art">Public domain (art)</string>
-    <string name="license_name_pd_us">Public domain (US)</string>
-    <string name="license_name_pd_usgov">Public domain (US government)</string>
-    <string name="license_name_pd_usgov_nasa">Public domain (NASA)</string>
-    <string name="license_name_pd_ineligible">Public domain (ineligible for copyright)</string>
-    <string name="license_name_attribution">Attribution</string>
-    <string name="license_name_gfdl">GNU Free Documentation License</string>
-
-    <string name="tutorial_1_text">Wikimedia Commons hosts most of the images that are used in Wikipedia.</string>
-    <string name="tutorial_1_subtext">Your images help educate people around the world!</string>
-    <string name="tutorial_2_text">Please upload pictures that are taken or created entirely by yourself:</string>
-    <string name="tutorial_2_subtext">- Natural objects (flowers, animals, mountains)\n- Useful objects (bicycles, train stations)\n- Famous people (your mayor, Olympic athletes you met)</string>
-    <string name="tutorial_3_text">Please do NOT upload:</string>
-    <string name="tutorial_3_subtext">- Selfies or pictures of your friends\n- Pictures you downloaded from the Internet\n- Screenshots of proprietary apps</string>
-    <string name="tutorial_4_text">Example upload:</string>
-    <string name="tutorial_4_subtext">- Title: Sydney Opera House\n- Description: Sydney Opera House as viewed from across the bay\n- Categories: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
-
-
-    <string name="welcome_wikipedia_text">Contribute your images. Help Wikipedia articles come to life!</string>
-    <string name="welcome_wikipedia_subtext">Images on Wikipedia come from Wikimedia Commons.</string>
-    <string name="welcome_copyright_text">Your images help educate people around the world.</string>
-    <string name="welcome_copyright_subtext">Avoid copyrighted materials you found from the Internet as well as images of posters, book covers, etc.</string>
-    <string name="welcome_final_text">You think you got it?</string>
-    <string name="welcome_final_button_text">Yes!</string>
-    <string name="detail_panel_cats_label">Categories</string>
-    <string name="detail_panel_cats_loading">Loading...</string>
-    <string name="detail_panel_cats_none">None selected</string>
-    <string name="detail_description_empty">No description</string>
-    <string name="detail_license_empty">Unknown license</string>
-    <string name="menu_refresh">Refresh</string>
-
-    <string name="storage_permission_rationale">Required permission: Read external storage. App cannot function without this.</string>
-    <string name="location_permission_rationale">Optional permission: Get current location for category suggestions</string>
-    <string name="ok">OK</string>
-    <string name="title_activity_nearby">Nearby Places</string>
-
-    <string name="warning">Warning</string>
-    <string name="file_exists">This file already exists on Commons. Are you sure you want to proceed?</string>
-    <string name="yes">Yes</string>
-    <string name="no">No</string>
+Start typing to add categories.
+Tap this message (or hit back) to skip this step.</string>
+  <string name="categories_activity_title">Categories</string>
+  <string name="preference_tracking">Usage reports</string>
+  <string name="preference_tracking_summary">Send usage reports to Wikimedia to help us improve the app</string>
+  <string name="title_activity_settings">Settings</string>
+  <string name="title_activity_signup">Sign Up</string>
+  <string name="menu_about">About</string>
+  <string name="about_license">Open Source software released under the &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Wikimedia Commons and its logo are trademarks of the Wikimedia Foundation and are used with the permission of the Wikimedia Foundation. We are not endorsed by or affiliated with the Wikimedia Foundation.</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Source&lt;/a&gt; and &lt;a href=\"https://commons-app.github.io/\"&gt;website&lt;/a&gt; on GitHub&lt;/a&gt;. Create a new &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub issue&lt;/a&gt; for bug reports and suggestions.</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privacy policy&lt;/a&gt;</string>
+  <string name="title_activity_about">About</string>
+  <string name="menu_feedback">Send Feedback (via Email)</string>
+  <string name="no_email_client">No email client installed</string>
+  <string name="provider_categories">Recently used categories</string>
+  <string name="waiting_first_sync">Waiting for first sync...</string>
+  <string name="no_uploads_yet">You have not yet uploaded any photos.</string>
+  <string name="menu_retry_upload">Retry</string>
+  <string name="menu_cancel_upload">Cancel</string>
+  <string name="share_license_summary">This image will be licensed under %1$s</string>
+  <string name="menu_download">Download</string>
+  <string name="preference_license">License</string>
+  <string name="use_previous">Use previous title/description</string>
+  <string name="allow_gps">Automatically get current location</string>
+  <string name="allow_gps_summary">Retrieve current location to offer category suggestions if image is not geotagged</string>
+  <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by"> Attribution 3.0</string>
+  <string name="license_name_cc0">CC0</string>
+  <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Austria)</string>
+  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Germany)</string>
+  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonia)</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Spain)</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Croatia)</string>
+  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxembourg)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Netherlands)</string>
+  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norway)</string>
+  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Poland)</string>
+  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romania)</string>
+  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
+  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
+  <string name="license_name_cc_zero">CC Zero</string>
+  <string name="license_name_own_pd">own-pd</string>
+  <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
+  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
+  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
+  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
+  <string name="license_name_cc_2_0">CC BY 2.0</string>
+  <string name="license_name_fal">Free Art License</string>
+  <string name="license_name_pd_old_100">Public domain (author died over 100 years ago)</string>
+  <string name="license_name_pd_old">Public domain (copyright expired)</string>
+  <string name="license_name_pd_art">Public domain (art)</string>
+  <string name="license_name_pd_us">Public domain (US)</string>
+  <string name="license_name_pd_usgov">Public domain (US government)</string>
+  <string name="license_name_pd_usgov_nasa">Public domain (NASA)</string>
+  <string name="license_name_pd_ineligible">Public domain (ineligible for copyright)</string>
+  <string name="license_name_attribution">Attribution</string>
+  <string name="license_name_gfdl">GNU Free Documentation License</string>
+  <string name="tutorial_1_text">Wikimedia Commons hosts most of the images that are used in Wikipedia.</string>
+  <string name="tutorial_1_subtext">Your images help educate people around the world!</string>
+  <string name="tutorial_2_text">Please upload pictures that are taken or created entirely by yourself:</string>
+  <string name="tutorial_2_subtext">- Natural objects (flowers, animals, mountains)
+- Useful objects (bicycles, train stations)
+- Famous people (your mayor, Olympic athletes you met)</string>
+  <string name="tutorial_3_text">Please do NOT upload:</string>
+  <string name="tutorial_3_subtext">- Selfies or pictures of your friends
+- Pictures you downloaded from the Internet
+- Screenshots of proprietary apps</string>
+  <string name="tutorial_4_text">Example upload:</string>
+  <string name="tutorial_4_subtext">- Title: Sydney Opera House
+- Description: Sydney Opera House as viewed from across the bay
+- Categories: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="welcome_wikipedia_text">Contribute your images. Help Wikipedia articles come to life!</string>
+  <string name="welcome_wikipedia_subtext">Images on Wikipedia come from Wikimedia Commons.</string>
+  <string name="welcome_copyright_text">Your images help educate people around the world.</string>
+  <string name="welcome_copyright_subtext">Avoid copyrighted materials you found from the Internet as well as images of posters, book covers, etc.</string>
+  <string name="welcome_final_text">You think you got it?</string>
+  <string name="welcome_final_button_text">Yes!</string>
+  <string name="detail_panel_cats_label">Categories</string>
+  <string name="detail_panel_cats_loading">Loading...</string>
+  <string name="detail_panel_cats_none">None selected</string>
+  <string name="detail_description_empty">No description</string>
+  <string name="detail_license_empty">Unknown license</string>
+  <string name="menu_refresh">Refresh</string>
+  <string name="storage_permission_rationale">Required permission: Read external storage. App cannot function without this.</string>
+  <string name="location_permission_rationale">Optional permission: Get current location for category suggestions</string>
+  <string name="ok">OK</string>
+  <string name="title_activity_nearby">Nearby Places</string>
+  <string name="warning">Warning</string>
+  <string name="file_exists">This file already exists on Commons. Are you sure you want to proceed?</string>
+  <string name="yes">Yes</string>
+  <string name="no">No</string>
 </resources>

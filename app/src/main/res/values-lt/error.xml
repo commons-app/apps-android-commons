@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="crash_dialog_title">Vikiteka užstrigo</string>
+  <string name="crash_dialog_text">Oi. Kažkas nutiko!</string>
+  <string name="crash_dialog_comment_prompt">Papasakokite ką darėte, tada pasidalinkite tuo su mumis el. paštu. Tai mums padės tobulinti programėlę!</string>
+  <string name="crash_dialog_ok_toast">Ačiū!</string>
+</resources>

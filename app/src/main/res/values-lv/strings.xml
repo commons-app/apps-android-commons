@@ -59,4 +59,7 @@
   <string name="detail_license_empty">Nezināma licence</string>
   <string name="menu_refresh">Atjaunināt</string>
   <string name="ok">Labi</string>
+  <string name="warning">Brīdinājums</string>
+  <string name="yes">Jā</string>
+  <string name="no">Nē</string>
 </resources>

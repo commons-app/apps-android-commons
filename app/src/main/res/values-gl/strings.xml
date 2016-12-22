@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name" fuzzy="true">Wikimedia Commons</string>
+  <string name="app_name">Commons</string>
   <string name="menu_settings">Configuracións</string>
   <string name="username">Nome de usuario</string>
   <string name="password">Contrasinal</string>
   <string name="login">Acceder ao sistema</string>
+  <string name="signup">Rexistrarse</string>
   <string name="logging_in_title">Accedendo ao sistema</string>
   <string name="logging_in_message">Por favor, agarde...</string>
   <string name="login_success">Accedeu correctamente!</string>
   <string name="login_failed">Erro durante o inición de sesión!</string>
+  <string name="upload_failed">Ficheiro non atopado. Por favor, probe con outro.</string>
   <string name="authentication_failed">Erro durante a autenticación!</string>
   <string name="uploading_started">A carga comezou!</string>
   <string name="upload_completed_notification_title">Cargouse \"%1$s\"!</string>
@@ -18,7 +20,10 @@
   <string name="upload_progress_notification_title_finishing">Rematando a carga de \"%1$s\"</string>
   <string name="upload_failed_notification_title">Erro ao cargar \"%1$s\"</string>
   <string name="upload_failed_notification_subtitle">Prema para mostralo</string>
-  <string name="uploads_pending_notification_indicator" fuzzy="true">Cargándose %d ficheiros</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">Cargando 1 ficheiro</item>
+    <item quantity="other">Cargando %d ficheiros</item>
+  </plurals>
   <string name="title_activity_contributions">As miñas subidas</string>
   <string name="contribution_state_queued">Na cola</string>
   <string name="contribution_state_failed">Erróneo</string>
@@ -26,6 +31,7 @@
   <string name="contribution_state_starting">Subindo</string>
   <string name="menu_from_gallery">Da galería</string>
   <string name="menu_from_camera">Tirar unha foto</string>
+  <string name="menu_nearby">Preto</string>
   <string name="provider_contributions">As miñas subidas</string>
   <string name="menu_share">Compartir</string>
   <string name="menu_open_in_browser">Mostrar no navegador</string>
@@ -34,7 +40,7 @@
   <string name="login_failed_network">Erro ao acceder ao sistema: Fallou a rede</string>
   <string name="login_failed_username">Erro ao acceder ao sistema: Comprobe o seu nome de usuario</string>
   <string name="login_failed_password">Erro ao acceder ao sistema: Comprobe o seu contrasinal</string>
-  <string name="login_failed_throttled" fuzzy="true">Demasiados intentos incorrectos. Inténteo de novo nuns minutos</string>
+  <string name="login_failed_throttled">Demasiados intentos incorrectos. Inténteo de novo nuns minutos.</string>
   <string name="login_failed_blocked">Sentímolo, este usuario está bloqueado en Commons</string>
   <string name="login_failed_generic">Erro durante o inición de sesión</string>
   <string name="share_upload_button">Subir</string>
@@ -65,12 +71,14 @@ Prema nesta mensaxe (ou no botón \"Atrás\") para saltar este paso.</string>
   <string name="preference_tracking">Informes de uso</string>
   <string name="preference_tracking_summary">Enviar informes de uso á Wikimedia para axudar a mellorar a aplicación</string>
   <string name="title_activity_settings">Configuracións</string>
+  <string name="title_activity_signup">Rexistrarse</string>
   <string name="menu_about">Acerca de</string>
-  <string name="about_license" fuzzy="true">Software de código aberto liberado baixo a &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;licenza Apache v2&lt;/a&gt;</string>
-  <string name="about_improve" fuzzy="true">Fonte en &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Erros en &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_license">Software de código aberto liberado baixo a &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;licenza Apache v2&lt;/a&gt;. Wikimedia Commons e o seu logo son marcas rexistradas da Fundación Wikimedia e úsanse coa súa autorización. Non fomos acreditados pola Fundación Wikimedia nin estamos afiliados con ela.</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Source&lt;/a&gt; e &lt;a href=\"https://commons-app.github.io/\"&gt;sitio web&lt;/a&gt; en GitHub&lt;/a&gt;. Crear unha nova &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;incidencia&lt;/a&gt; para informar de problemas e suxestións.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Política_de_protección_de_datos_(gl)\"&gt;Política de protección de datos&lt;/a&gt;</string>
   <string name="title_activity_about">Acerca de</string>
   <string name="menu_feedback">Enviar comentarios (por correo electrónico)</string>
+  <string name="no_email_client">Non hai instalado ningún cliente de correo</string>
   <string name="provider_categories">Categorías usadas recentemente</string>
   <string name="waiting_first_sync">Agardando pola primeira sincronización...</string>
   <string name="no_uploads_yet">Aínda non cargou ningunha foto.</string>
@@ -79,8 +87,11 @@ Prema nesta mensaxe (ou no botón \"Atrás\") para saltar este paso.</string>
   <string name="share_license_summary">Esta imaxe quedará baixo a licenza %1$s</string>
   <string name="menu_download">Descargar</string>
   <string name="preference_license">Licenza</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0recoñecementou00A0compartiru00A0igualu00A03.0</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0recoñecementou00A03.0</string>
+  <string name="use_previous">Usar o título ou a descrición anterior</string>
+  <string name="allow_gps">Obter automaticamente a localización actual</string>
+  <string name="allow_gps_summary">Obter a localización actual para ofrecer suxestións de categoría se a imaxe non está xeolocalizada</string>
+  <string name="license_name_cc_by_sa">Recoñecemento-CompartirIgual 3.0</string>
+  <string name="license_name_cc_by">Recoñecemento 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Austria)</string>
@@ -94,6 +105,8 @@ Prema nesta mensaxe (ou no botón \"Atrás\") para saltar este paso.</string>
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polonia)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romanía)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
+  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="license_name_own_pd">own-pd</string>
   <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
@@ -111,6 +124,20 @@ Prema nesta mensaxe (ou no botón \"Atrás\") para saltar este paso.</string>
   <string name="license_name_pd_ineligible">Dominio público (non apto para aplicarlle dereitos de autoría)</string>
   <string name="license_name_attribution">Recoñecemento</string>
   <string name="license_name_gfdl">Licenza de documentación libre de GNU</string>
+  <string name="tutorial_1_text">Wikimedia Commons alberga a maioría das imaxes usada en Wikipedia.</string>
+  <string name="tutorial_1_subtext">As súas imaxes axudan a educar a persoas de todo o mundoǃ</string>
+  <string name="tutorial_2_text">Por favor, suba unicamente imaxes capturadas ou creadas totalmente por vostedeː</string>
+  <string name="tutorial_2_subtext">- Obxectos naturais (flores, animais, montañas)
+- Obxectos útiles (bicicletas, estacións de tren)
+- Personaxes famosos (o seu alcalde, atletas olímpicos que coñeza)</string>
+  <string name="tutorial_3_text">Por favor, NON subaː</string>
+  <string name="tutorial_3_subtext">- Selfies ou imaxes dos seus amigos
+- Imaxes descargadas de Internet
+- Capturas de pantalla de aplicacións con dereitos de autor</string>
+  <string name="tutorial_4_text">Exemplo de subaː</string>
+  <string name="tutorial_4_subtext">- Título: Ópera de Sydney
+- Descrición: A Ópera de Sydney vista dende a baía
+- Categorías: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Achegue as súas imaxes. Axude a que os artigos da Wikipedia cobren vida!</string>
   <string name="welcome_wikipedia_subtext">As imaxes da Wikipedia veñen da Wikimedia Commons.</string>
   <string name="welcome_copyright_text">As súas imaxes axudan a educar xente de todo o mundo.</string>
@@ -123,4 +150,12 @@ Prema nesta mensaxe (ou no botón \"Atrás\") para saltar este paso.</string>
   <string name="detail_description_empty">Sen descrición</string>
   <string name="detail_license_empty">Licenza descoñecida</string>
   <string name="menu_refresh">Refrescar</string>
+  <string name="storage_permission_rationale">Permiso necesarioː ler un almacenamento externo. A aplicación non pode funcionar sen isto.</string>
+  <string name="location_permission_rationale">Permiso opcionalː obter a localización actual para suxerir categorías</string>
+  <string name="ok">Aceptar</string>
+  <string name="title_activity_nearby">Lugares próximos</string>
+  <string name="warning">Aviso</string>
+  <string name="file_exists">Este ficheiro xa existe en Commons. Está seguro de que quere continuar?</string>
+  <string name="yes">Si</string>
+  <string name="no">Non</string>
 </resources>
