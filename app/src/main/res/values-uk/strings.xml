@@ -10,7 +10,7 @@
   <string name="logging_in_message">Будь ласка, зачекайте…</string>
   <string name="login_success">Ви успішно увійшли!</string>
   <string name="login_failed">Не вдалося увійти</string>
-  <string name="upload_failed" fuzzy="true">Файл не знайдено, будь ласка, спробуйте інший файл</string>
+  <string name="upload_failed">Файл не знайдено. Будь ласка, спробуйте інший файл.</string>
   <string name="authentication_failed">Помилка автентифікації</string>
   <string name="uploading_started">Завантаження розпочато!</string>
   <string name="upload_completed_notification_title">Завантажено %1$s!</string>
@@ -42,7 +42,7 @@
   <string name="login_failed_network">Неможливо увійти — збій у мережі</string>
   <string name="login_failed_username">Неможливо увійти — будь ласка, перевірте своє ім\'я користувача</string>
   <string name="login_failed_password">Неможливо увійти — будь ласка, перевірте свій пароль</string>
-  <string name="login_failed_throttled" fuzzy="true">Надто багато невдалих спроб. Будь ласка, спробуйте знову через кілька хвилин</string>
+  <string name="login_failed_throttled">Надто багато невдалих спроб. Будь ласка, спробуйте знову через кілька хвилин.</string>
   <string name="login_failed_blocked">Вибачте, цього користувача було заблоковано на Вікісховищі</string>
   <string name="login_failed_generic">Не вдалося увійти</string>
   <string name="share_upload_button">Завантажити</string>
@@ -78,7 +78,7 @@
   <string name="title_activity_signup">Зареєструватися</string>
   <string name="menu_about">Про програму</string>
   <string name="about_license">Програмне забезпечення з відкритим кодом випущено під &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;ліцензією Apache в.2&lt;/a&gt;. Вікісховище і його логотип є товарними знаками Фонду Вікімедіа і використовуються за дозволом Фонду Вікімедіа. Ми не користуємось підтримкою Фонду Вікімедіа і не є його афіліатом.</string>
-  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Вихідний код&lt;/a&gt; і &lt;a href=\"https://commons-app.github.io/\"&gt;веб-сайт&lt;/a&gt; на GitHub&lt;/a&gt;. Створіть нове &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;завдання на GitHub&lt;/a&gt; для повідомлення про баги або для висловлення пропозицій.</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Вихідний код&lt;/a&gt; і &lt;a href=\"https://commons-app.github.io/\"&gt;веб-сайт&lt;/a&gt; на GitHub&lt;/a&gt;. Створіть нове &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;завдання на GitHub&lt;/a&gt; для повідомлення про баги або для висловлення пропозицій.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Політика приватності&lt;/a&gt;</string>
   <string name="title_activity_about">Про програму</string>
   <string name="menu_feedback">Надіслати відгук (електронною поштою)</string>
@@ -91,7 +91,7 @@
   <string name="share_license_summary">Це зображення буде ліцензоване згідно з %1$s</string>
   <string name="menu_download">Завантажити</string>
   <string name="preference_license">Ліцензія</string>
-  <string name="use_previous" fuzzy="true">Використати попередню назву й опис</string>
+  <string name="use_previous">Використати попередню назву/опис</string>
   <string name="allow_gps">Автоматично отримати поточне розташування</string>
   <string name="allow_gps_summary">Отримати поточне розташування, щоб з\'явилися підказки категорій, якщо зображення не має геотегів</string>
   <string name="license_name_cc_by_sa">CC Attribution-ShareAlike 3.0</string>
@@ -158,4 +158,8 @@ u2022 Категорії: Sydney Opera House, Sydney Opera House from the west, 
   <string name="location_permission_rationale">Додатковий дозвіл: отримувати поточне розташування для підказок категорій</string>
   <string name="ok">Гаразд</string>
   <string name="title_activity_nearby">Місця поблизу</string>
+  <string name="warning">Попередження</string>
+  <string name="file_exists">Цей файл вже існує на Вікісховищі. Ви впевнені, що хочете продовжити?</string>
+  <string name="yes">Так</string>
+  <string name="no">Ні</string>
 </resources>
