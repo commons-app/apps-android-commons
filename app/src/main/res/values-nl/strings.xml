@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name" fuzzy="true">Wikimedia Commons</string>
+  <string name="app_name">Commons</string>
   <string name="menu_settings">Instellingen</string>
   <string name="username">Gebruikersnaam</string>
   <string name="password">Wachtwoord</string>
@@ -9,6 +9,7 @@
   <string name="logging_in_message">Een ogenblik geduld...</string>
   <string name="login_success">Aanmelden geslaagd</string>
   <string name="login_failed">Aanmelden mislukt</string>
+  <string name="upload_failed">Bestand niet gevonden. Probeer een ander bestand.</string>
   <string name="authentication_failed">Verificatie is mislukt</string>
   <string name="uploading_started">Uploaden is begonnen</string>
   <string name="upload_completed_notification_title">%1$s geüpload</string>
@@ -26,6 +27,7 @@
   <string name="contribution_state_starting">Bezig met uploaden</string>
   <string name="menu_from_gallery">Uit galerij</string>
   <string name="menu_from_camera">Foto nemen</string>
+  <string name="menu_nearby">In de buurt</string>
   <string name="provider_contributions">Mijn uploads</string>
   <string name="menu_share">Delen</string>
   <string name="menu_open_in_browser">In browser bekijken</string>
@@ -66,12 +68,14 @@ Klik op dit bericht, of ga terug, om deze stap over te slaan.</string>
   <string name="preference_tracking">Gebruiksrapporten</string>
   <string name="preference_tracking_summary">Gebruiksrapporten verzenden naar Wikimedia om ons te helpen de app te verbeteren</string>
   <string name="title_activity_settings">Instellingen</string>
+  <string name="title_activity_signup">Registreren</string>
   <string name="menu_about">Over</string>
   <string name="about_license" fuzzy="true">Open sourcesoftware vrijgegeven onder de &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
   <string name="about_improve" fuzzy="true">Broncode op &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Bugs in &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privacybeleid&lt;/a&gt;</string>
   <string name="title_activity_about">Over</string>
   <string name="menu_feedback">Terugkoppeling geven (via e-mail)</string>
+  <string name="no_email_client">Geen e-mail-client geïnstalleerd</string>
   <string name="provider_categories">Recent gebruikte categorieën</string>
   <string name="waiting_first_sync">Wachten op de eerste synchronisatie...</string>
   <string name="no_uploads_yet">U hebt nog geen afbeeldingen geüpload.</string>
@@ -81,7 +85,7 @@ Klik op dit bericht, of ga terug, om deze stap over te slaan.</string>
   <string name="menu_download">Downloaden</string>
   <string name="preference_license">Licentie</string>
   <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Naamsvermelding-Gelijku00A0delenu00A03.0</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0Naamsvermeldingu00A03.0</string>
+  <string name="license_name_cc_by">Naamsvermelding 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Oostenrijk)</string>
@@ -95,6 +99,8 @@ Klik op dit bericht, of ga terug, om deze stap over te slaan.</string>
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polen)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Roemenië)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
+  <string name="license_name_cc_by_4_0">CC BY-4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="license_name_own_pd">eigen-pd</string>
   <string name="license_name_cc_by_sa_2_5">CC-BY-SA-2.5</string>
@@ -112,6 +118,7 @@ Klik op dit bericht, of ga terug, om deze stap over te slaan.</string>
   <string name="license_name_pd_ineligible">Publiek domein (komt niet in aanmerking voor auteursrechten)</string>
   <string name="license_name_attribution">Naamsvermelding</string>
   <string name="license_name_gfdl">GNU-licentie voor vrije documentatie</string>
+  <string name="tutorial_3_text">Gelieve NIET te uploaden:</string>
   <string name="welcome_wikipedia_text">Draag uw afbeelding bij. Help pagina\'s in Wikipedia tot leven te laten komen!</string>
   <string name="welcome_wikipedia_subtext">Afbeeldingen op Wikipedia komen van Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Uw afbeeldingen helpen mensen van over de hele wereld te leren.</string>
@@ -124,4 +131,9 @@ Klik op dit bericht, of ga terug, om deze stap over te slaan.</string>
   <string name="detail_description_empty">Geen beschrijving</string>
   <string name="detail_license_empty">Onbekende licentie</string>
   <string name="menu_refresh">Vernieuwen</string>
+  <string name="ok">OK</string>
+  <string name="warning">Waarschuwing</string>
+  <string name="file_exists">Dit bestand bestaat al op Commons. Weet u zeker dat u wilt doorgaan?</string>
+  <string name="yes">Ja</string>
+  <string name="no">Nee</string>
 </resources>

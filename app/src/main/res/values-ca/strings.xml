@@ -5,7 +5,7 @@
   <string name="username">Nom d\'usuari:</string>
   <string name="password">Contrasenya</string>
   <string name="login">Inicia una sessió</string>
-  <string name="logging_in_title">Iniciant sessió</string>
+  <string name="logging_in_title">S’està iniciant la sessió</string>
   <string name="logging_in_message">Espereu...</string>
   <string name="login_success">S\'ha iniciat sessió correctament !</string>
   <string name="login_failed">Error en iniciar la sessió!</string>

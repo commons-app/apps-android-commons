@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="crash_dialog_title">Commons crash hoe gais</string>
+  <string name="crash_dialog_text">Oops, Koi chij wrong hoe gais</string>
+  <string name="crash_dialog_comment_prompt">Ham ke batao ki tum konchi karataa rahaa, tab iske hamaar lage email se share karo. Ii hame fix kare me madat karii!</string>
+  <string name="crash_dialog_ok_toast">Dhanbaad!</string>
+</resources>

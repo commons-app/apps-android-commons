@@ -130,8 +130,17 @@
   <string name="tutorial_1_text">Викисклад содержит большую часть изображений, которые используются в Википедии.</string>
   <string name="tutorial_1_subtext">Ваши изображения помогают образованию людей во всём мире!</string>
   <string name="tutorial_2_text">Пожалуйста, загрузите фотографии, которые были сняты или созданы исключительно вами:</string>
+  <string name="tutorial_2_subtext">— Природные объекты (цветы, животные, горы)
+— Полезные предметы (велосипеды, вокзалах)
+— Известные люди (ваш мэр, спортсмены-олимпийцы, которых вы встретили)</string>
   <string name="tutorial_3_text">Пожалуйста, НЕ загружайте:</string>
+  <string name="tutorial_3_subtext">— Селфи или фотографии ваших друзей
+— Фотографии, которые вы скачали из Интернета
+— Скриншоты несвободных приложений</string>
   <string name="tutorial_4_text">Пример загрузки:</string>
+  <string name="tutorial_4_subtext">- Название: Сиднейский оперный театр
+- Описание: Сиднейский оперный театр, вид через залив
+- Категории: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Загрузите свои изображения. Помогите Википедии оживить статьи!</string>
   <string name="welcome_wikipedia_subtext">Изображения в Википедии доступны на Викискладе.</string>
   <string name="welcome_copyright_text">Ваши изображения помогают образованию людей во всём мире.</string>
@@ -144,6 +153,8 @@
   <string name="detail_description_empty">Нет описания</string>
   <string name="detail_license_empty">Неизвестная лицензия</string>
   <string name="menu_refresh">Обновить</string>
+  <string name="storage_permission_rationale">Требуемые разрешения: чтение с внешнего накопителя. Приложение не сможет функционировать без этого.</string>
+  <string name="location_permission_rationale">Необязательное разрешение: получение текущего местоположения для предложения категорий</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Места поблизости</string>
   <string name="warning">Внимание</string>
