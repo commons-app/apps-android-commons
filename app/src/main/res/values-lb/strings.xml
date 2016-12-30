@@ -88,6 +88,7 @@ Leet w.e.g. &lt;a href=\"https://github.com/commons-app/apps-android-commons/iss
   <string name="preference_license">Lizenz</string>
   <string name="use_previous">Viregen Titel/Beschreiwung benotzen</string>
   <string name="allow_gps">Automatesch déi aktuell Plaz kréien</string>
+  <string name="allow_gps_summary">Aktuell Plaz ofruffe fir Propose fir Kategorien ze erméigleche wann d\'Bild keng Geotaggen huet</string>
   <string name="license_name_cc_by_sa">CCu00A0Attribution-ShareAlikeu00A03.0</string>
   <string name="license_name_cc_by">CCu00A0Attributionu00A03.0</string>
   <string name="license_name_cc0">CC0</string>
@@ -122,10 +123,20 @@ Leet w.e.g. &lt;a href=\"https://github.com/commons-app/apps-android-commons/iss
   <string name="license_name_pd_ineligible">Public domain (net zoulässeg fir Copyright)</string>
   <string name="license_name_attribution">Attributioun</string>
   <string name="license_name_gfdl">GNU Fräi Dokumentatiouns Lizenz</string>
+  <string name="tutorial_1_text">Wikimedia Commons späichert déi meescht Biller, déi op Wikipedia benotzt ginn.</string>
   <string name="tutorial_1_subtext">Är Biller hëllefe Leit op der ganzer Welt ze forméieren!</string>
   <string name="tutorial_2_text">Lued w.e.g. Biller erop déi komplett vun Iech opgeholl oder gemaacht goufen:</string>
+  <string name="tutorial_2_subtext">- Natierlech Objeten (Blummen, Déieren, Bierger)
+- Nëtzlech Objeten (Vëloen, Garen)
+- Berühmt Persounen (Äre Buergermeeschter, olympesch Athleten, déi Dir begéint hutt)</string>
   <string name="tutorial_3_text">W.e.g. NET eroplueden:</string>
+  <string name="tutorial_3_subtext">- Selfien oder Biller vun Äre Frënn
+- Biller déi Dir aus dem Internet erofgelueden hutt
+- Screenshots vu proprietäre Programmer</string>
   <string name="tutorial_4_text">Beispill-Upload:</string>
+  <string name="tutorial_4_subtext">- Titel: Sydney Opera House
+- Beschreiwung: Sydney Opera House vun der Bay aus gesinn
+- Kategorien: Sydney Opera House, Sydney Opera House vu Westen, Sydney Opera House vu wäitem</string>
   <string name="welcome_wikipedia_text">Maacht mat mat Äre Biller. Hëlleft Wikipedia-Artikele méi lieweg ze maachen!</string>
   <string name="welcome_wikipedia_subtext">Biller op Wikipedia komme vu Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Är Biller hëllefe Leit op der ganzer Welt ze forméieren.</string>
@@ -138,6 +149,8 @@ Leet w.e.g. &lt;a href=\"https://github.com/commons-app/apps-android-commons/iss
   <string name="detail_description_empty">Keng Beschreiwung</string>
   <string name="detail_license_empty">Onbekannt Lizenz</string>
   <string name="menu_refresh">Aktualiséieren</string>
+  <string name="storage_permission_rationale">Obligatoresch Autorisatioun: Externe Späicher liesen. D\'App kann net ouni dat funktionéieren.</string>
+  <string name="location_permission_rationale">Fakultativ Autorisatioun: Déi aktuell Plaz kréie fir Propose fir Kategorien</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Plazen nobäi</string>
   <string name="warning">Warnung</string>

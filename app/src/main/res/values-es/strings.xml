@@ -6,7 +6,7 @@
   <string name="password">Contraseña</string>
   <string name="login">Acceder</string>
   <string name="signup">Regístrate</string>
-  <string name="logging_in_title">Iniciando sesión</string>
+  <string name="logging_in_title">Accediendo</string>
   <string name="logging_in_message">Espera un momento…</string>
   <string name="login_success">¡Inicio de sesión exitoso!</string>
   <string name="login_failed">¡Inicio de sesión fallido!</string>
@@ -18,7 +18,7 @@
   <string name="upload_progress_notification_title_start">Empezando la subida de %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Cargando «%1$s»</string>
   <string name="upload_progress_notification_title_finishing">Finalizando la subida de %1$s</string>
-  <string name="upload_failed_notification_title">Error al subir \"%1$s\"</string>
+  <string name="upload_failed_notification_title">Falló la carga de «%1$s»</string>
   <string name="upload_failed_notification_subtitle">Toca para ver</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Cargando 1 archivo</item>

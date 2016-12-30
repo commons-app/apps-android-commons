@@ -87,11 +87,11 @@
   <string name="share_license_summary">Сликава ќе се води под лиценцата %1$s</string>
   <string name="menu_download">Преземи</string>
   <string name="preference_license">Лиценца</string>
-  <string name="use_previous" fuzzy="true">Користи претходен наслов/опис</string>
+  <string name="use_previous">Користи претходен наслов/опис</string>
   <string name="allow_gps">Автоматски давај ја тековната местоположба</string>
   <string name="allow_gps_summary">Добивање на тековната местоположба за да се дадат предлози за категории, доколку сликата нема геоознаки</string>
-  <string name="license_name_cc_by_sa">CCu00A0Наведиu00A0извор-Споделиu00A0подu00A0истиu00A0условиu00A03.0</string>
-  <string name="license_name_cc_by">CCu00A0Наведиu00A0изворu00A03.0</string>
+  <string name="license_name_cc_by_sa">Наведи извор-Сподели под исти услови 3.0</string>
+  <string name="license_name_cc_by">Наведи извор 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Австрија)</string>

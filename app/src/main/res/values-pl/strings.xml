@@ -10,6 +10,7 @@
   <string name="logging_in_message">Proszę czekać...</string>
   <string name="login_success">Zalogowano pomyślnie</string>
   <string name="login_failed">Logowanie nie powiodło się!</string>
+  <string name="upload_failed">Pliku nie znaleziono. Spróbuj innego pliku.</string>
   <string name="authentication_failed">Błąd uwierzytelniania!</string>
   <string name="uploading_started">Wysyłanie rozpoczęte</string>
   <string name="upload_completed_notification_title">Przesłano %1$s!</string>
@@ -19,6 +20,10 @@
   <string name="upload_progress_notification_title_finishing">Zakończono wysyłanie pliku %1$s</string>
   <string name="upload_failed_notification_title">Wysyłanie %1$s zakończone porażką</string>
   <string name="upload_failed_notification_subtitle">Kliknij aby zobaczyć</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">Przesyłanie 1 pliku</item>
+    <item quantity="other">Przesyłanie %d plików</item>
+  </plurals>
   <string name="title_activity_contributions">Moje wysłane pliki</string>
   <string name="contribution_state_queued">W kolejce</string>
   <string name="contribution_state_failed">Porażka</string>
@@ -53,12 +58,14 @@ Dotknij tej wiadomości (lub naciśnij \"cofnij\") aby pominąć ten krok</strin
   <string name="preference_tracking">Raporty użycia</string>
   <string name="preference_tracking_summary">Wyślij raporty do Wikimedia, aby pomóc w ulepszeniu aplikacji</string>
   <string name="title_activity_settings">Ustawienia</string>
+  <string name="title_activity_signup">Zarejestruj się</string>
   <string name="menu_about">O aplikacji</string>
-  <string name="about_license" fuzzy="true">Oprogramowanie Open Source, wydane na licencji  &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
-  <string name="about_improve" fuzzy="true">Kod źródłowy na &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Błędy - &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_license">Oprogramowanie Open Source, wydane na licencji &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Wikimedia Commons i jego logo są znakami towarowymi Wikimedia Foundation i są wykorzystywane za zgodą Wikimedia Foundation. Nie jesteśmy powiązani z Wikimedia Foundation.</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kod źródłowy&lt;/a&gt; oraz &lt;a href=\"https://commons-app.github.io/\"&gt;strona internetowa&lt;/a&gt; na GitHub&lt;/a&gt;. Aby zgłosić błąd lub sugestię, utwórz nowe &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;zgłoszenie na GitHubie&lt;/a&gt;.</string>
   <string name="about_privacy_policy">Wikimedia:Commons-android-strings-about privacy policy/uk</string>
   <string name="title_activity_about">O aplikacji</string>
   <string name="menu_feedback">Wyślij opinię (przez e-mail)</string>
+  <string name="no_email_client">Klient e-mail nie jest zainstalowany</string>
   <string name="provider_categories">Niedawno używane Kategorie</string>
   <string name="waiting_first_sync">Oczekiwanie na pierwszą synchronizację ...</string>
   <string name="no_uploads_yet">Nie wgrałeś jeszcze żadnych zdjęć.</string>
@@ -67,6 +74,8 @@ Dotknij tej wiadomości (lub naciśnij \"cofnij\") aby pominąć ten krok</strin
   <string name="share_license_summary">Ten obraz będzie udostępniany na licencji %1$s</string>
   <string name="menu_download">Pobieranie</string>
   <string name="preference_license">Licencja</string>
+  <string name="use_previous">Użyj poprzedniego tytułu/opisu</string>
+  <string name="allow_gps">Automatycznie uzyskaj bieżącą lokalizację</string>
   <string name="license_name_cc_by_sa"> Uznanie autorstwa-Na tych samych warunkach 3.0</string>
   <string name="license_name_cc_by"> Uznanie autorstwa 3.0</string>
   <string name="license_name_cc0">CC0</string>
@@ -99,6 +108,14 @@ Dotknij tej wiadomości (lub naciśnij \"cofnij\") aby pominąć ten krok</strin
   <string name="license_name_pd_ineligible">Domena publiczna (nie podlega ochronie prawa autorskiego)</string>
   <string name="license_name_attribution">Uznanie autorstwa</string>
   <string name="license_name_gfdl">GNU Free Documentation License</string>
+  <string name="tutorial_2_text">Można przesyłać zdjęcia zrobione lub stworzone całkowicie przez Ciebie:</string>
+  <string name="tutorial_2_subtext">- Obiektów natury (kwiaty, zwierzęta, góry)
+- Przydatne obiekty (rowery, dworce)
+- Znani ludzie (burmistrz, olimpijczyków, z którymi się spotkałeś)</string>
+  <string name="tutorial_3_text">Prosimy NIE wysyłać:</string>
+  <string name="tutorial_3_subtext">- Zdjęć przedstawiających siebie lub znajomych
+- Zdjęć pobranych z Internetu
+- Zrzutów ekranów płatnych aplikacji</string>
   <string name="welcome_wikipedia_text">Dołóż swoje grafiki. Pomóż artykułom w Wikipedii ożywić się!</string>
   <string name="welcome_wikipedia_subtext">Ilustracje w Wikipedii pochodzą z Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Twoje ilustracje pomagają w edukacji ludzi na całym świecie.</string>
@@ -112,7 +129,9 @@ Dotknij tej wiadomości (lub naciśnij \"cofnij\") aby pominąć ten krok</strin
   <string name="detail_license_empty">Nieznana licencja</string>
   <string name="menu_refresh">Odśwież</string>
   <string name="ok">OK</string>
+  <string name="title_activity_nearby">Pobliskie miejsca</string>
   <string name="warning">Ostrzeżenie</string>
+  <string name="file_exists">Ten plik już istnieje na Commons. Jesteś pewien, że chcesz kontynuować?</string>
   <string name="yes">Tak</string>
   <string name="no">Nie</string>
 </resources>
