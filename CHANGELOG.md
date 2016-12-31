@@ -1,5 +1,9 @@
 # Wikimedia Commons for Android
 
+##v1.42
+- Fixed language mappings; successful translatewiki integration
+- Various translations added
+
 ##v1.41
 - Bumped min SDK and removed escaped characters for translatewiki.net integration
 - Added check for whether file already exists on Commons
