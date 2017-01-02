@@ -74,7 +74,7 @@ Toca este mensaje (o pulsa Anterior) para omitir este paso.</string>
   <string name="title_activity_signup">Regístrate</string>
   <string name="menu_about">Acerca de</string>
   <string name="about_license">Programa de código abierto publicado bajo la &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Licencia Apache ver. 2&lt;/a&gt;. Wikimedia Commons y su logotipo son marcas registradas de la Fundación Wikimedia y se utilizan con su permiso. No hemos sido acreditados por la Fundación Wikimedia ni estamos afiliados con ella.</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Código fuente&lt;/a&gt; y &lt;a href=\"https://commons-app.github.io/\"&gt;sitio web&lt;/a&gt; en GitHub&lt;/a&gt;. Crea &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;incidencias&lt;/a&gt; para informar de problemas y sugerencias.</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Código fuente&lt;/a&gt; y &lt;a href=\"https://commons-app.github.io/\"&gt;sitio web&lt;/a&gt; en GitHub. Crea &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;incidencias&lt;/a&gt; para informar de problemas y sugerencias.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Política de privacidad&lt;/a&gt;</string>
   <string name="title_activity_about">Acerca de</string>
   <string name="menu_feedback">Enviar comentarios (por e-mail)</string>
@@ -127,8 +127,17 @@ Toca este mensaje (o pulsa Anterior) para omitir este paso.</string>
   <string name="tutorial_1_text">Wikimedia Commons aloja la mayoría de las imágenes utilizadas en Wikipedia.</string>
   <string name="tutorial_1_subtext">¡Tus imágenes ayudan a instruir a personas de todo el mundo!</string>
   <string name="tutorial_2_text">Carga únicamente imágenes capturadas o creadas por ti.</string>
+  <string name="tutorial_2_subtext">- Objetos naturales (flores, animales, montañas)
+- Objetos útiles (bicicletas, estaciones de tren)
+- Personas famosas (tu alcalde, algún atleta olímpico que conociste)</string>
   <string name="tutorial_3_text">NO cargues:</string>
+  <string name="tutorial_3_subtext">- Selfies o fotos de tus amigos
+- Imágenes que has descargado de Internet
+- Capturas de pantalla de aplicaciones propietarias</string>
   <string name="tutorial_4_text">Ejemplo de carga:</string>
+  <string name="tutorial_4_subtext">- Título: Casa de la Ópera de Sídney
+- Descripción: Casa de la Ópera de Sídney vista desde el otro lado de la bahía
+- Categorías: Casa de la Ópera de Sídney, Casa de la Ópera de Sídney desde el oeste, Vistas a distancia de la Casa de la Ópera de Sídney</string>
   <string name="welcome_wikipedia_text">Contribuye con tus imágenes.
 ¡Ayuda a que los artículos de Wikipedia tengan vida!</string>
   <string name="welcome_wikipedia_subtext">Las imágenes en Wikipedia proceden de

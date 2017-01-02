@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name" fuzzy="true">Wikimedia Commons</string>
+  <string name="app_name">Wikimedia Commons</string>
   <string name="menu_settings">Configurações</string>
   <string name="username">Nome de utilizador(a)</string>
   <string name="password">Palavra-passe</string>
   <string name="login">Iniciar sessão</string>
+  <string name="signup">Registar-se</string>
   <string name="logging_in_title">A iniciar sessão</string>
   <string name="logging_in_message">Aguarde, por favor...</string>
   <string name="login_success">Inicio de sessão bem sucedido</string>
@@ -18,7 +19,7 @@
   <string name="upload_progress_notification_title_finishing">A terminar o carregamento de %1$s</string>
   <string name="upload_failed_notification_title">O carregamento de %1$s falhou</string>
   <string name="upload_failed_notification_subtitle">Toque para ver</string>
-  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
+  <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">A carregar um ficheiro</item>
     <item quantity="other">A carregar %d ficheiros</item>
   </plurals>
@@ -29,6 +30,7 @@
   <string name="contribution_state_starting">A carregar</string>
   <string name="menu_from_gallery">Da galeria</string>
   <string name="menu_from_camera">Tirar foto</string>
+  <string name="menu_nearby">Nas redondezas</string>
   <string name="provider_contributions">Meus carregamentos</string>
   <string name="menu_share">Partilhar</string>
   <string name="menu_open_in_browser">Ver no navegador</string>
@@ -69,7 +71,7 @@ Carregue nesta mensagem (ou carregue para voltar) para saltar este passo</string
   <string name="preference_tracking_summary">Enviar relatório de uso para a Wikimedia para ajudar-nos a melhorar a aplicação</string>
   <string name="title_activity_settings">Configurações</string>
   <string name="menu_about">Sobre</string>
-  <string name="about_license" fuzzy="true">Software em código aberto distribuído sob &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
+  <string name="about_license">Software em código aberto distribuído sob &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. O Wikimedia Commons e o seu logótipo são marcas registadas da Wikimedia Foundation e são usadas com permissão da Wikimedia Foundation. Não somos endossados ou afiliados à Wikimedia Foundation.</string>
   <string name="about_improve" fuzzy="true">Código no &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;. Erros no &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Política de privacidade&lt;/a&gt;</string>
   <string name="title_activity_about">Sobre</string>
@@ -82,7 +84,10 @@ Carregue nesta mensagem (ou carregue para voltar) para saltar este passo</string
   <string name="share_license_summary">Essa imagem será licenciada sob %1$s</string>
   <string name="menu_download">Descarregar</string>
   <string name="preference_license">Licença</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Atrubuição-CompartilhaIgualu00A03.0</string>
+  <string name="use_previous">Usar título/descrição anteriores</string>
+  <string name="allow_gps">Obter automaticamente a localização atual</string>
+  <string name="allow_gps_summary">Recuperar localização atual para oferecer sugestões da categoria se a imagem não é georreferenciada</string>
+  <string name="license_name_cc_by_sa">Atribuição – Compartilhamento pela mesma Licença</string>
   <string name="license_name_cc_by" fuzzy="true">CCu00A0Atribuiçãou00A03.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
@@ -97,6 +102,7 @@ Carregue nesta mensagem (ou carregue para voltar) para saltar este passo</string
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polónia)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Roménia)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_by_sa_4_0">CC-BY-SA 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="license_name_own_pd">own-pd</string>
   <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
@@ -114,6 +120,9 @@ Carregue nesta mensagem (ou carregue para voltar) para saltar este passo</string
   <string name="license_name_pd_ineligible">Domínio público (inelegível para direitos de autor)</string>
   <string name="license_name_attribution">Atribuição</string>
   <string name="license_name_gfdl">Licença de Documentação Livre GNU</string>
+  <string name="tutorial_1_text">Wikimedia Commons armazena a maioria das imagens que são usadas na Wikipédia.</string>
+  <string name="tutorial_1_subtext">As suas imagens ajudam a educar pessoas em todo o mundo!</string>
+  <string name="tutorial_4_text">Exemplo de carregamento:</string>
   <string name="welcome_wikipedia_text">Contribua com as suas imagens. Ajude os artigos da Wikipédia a ganhar vida!</string>
   <string name="welcome_wikipedia_subtext">As imagens na Wikipédia provêm do Wikimedia Commons.</string>
   <string name="welcome_copyright_text">As suas imagens ajudam a educar as pessoas em todo o mundo.</string>
@@ -126,4 +135,8 @@ Carregue nesta mensagem (ou carregue para voltar) para saltar este passo</string
   <string name="detail_description_empty">Sem descrição</string>
   <string name="detail_license_empty">Licença desconhecida</string>
   <string name="menu_refresh">Actualizar</string>
+  <string name="ok">OK</string>
+  <string name="title_activity_nearby">Locais Próximos</string>
+  <string name="yes">Sim</string>
+  <string name="no">Não</string>
 </resources>
