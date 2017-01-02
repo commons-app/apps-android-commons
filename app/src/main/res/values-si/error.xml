@@ -2,5 +2,6 @@
 <resources>
   <string name="crash_dialog_title">කොමන්ස් බිඳ වැටී ඇත</string>
   <string name="crash_dialog_text">අපොයි. යමක් වැරදිලා ගිහින්!</string>
+  <string name="crash_dialog_comment_prompt">ඔබ කරමින් සිටි දෙය අපට කියන්න, ඉන්පසු එය විද්‍යුත් තැපෑල හරහා අප සමග බෙදා හරින්න. එය නිවැරදි කිරීමට උපකාරයක් වනු ඇත.</string>
   <string name="crash_dialog_ok_toast">ස්තුතියි!</string>
 </resources>

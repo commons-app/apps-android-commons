@@ -124,6 +124,20 @@ Toque nesti mensaxe (o calque atrás) pa saltar esti pasu.</string>
   <string name="license_name_pd_ineligible">Dominiu públicu (nun puen aplicase drechos d\'autor)</string>
   <string name="license_name_attribution">Reconocimientu</string>
   <string name="license_name_gfdl">Llicencia de documentación llibre de GNU</string>
+  <string name="tutorial_1_text">Wikimedia Commons agospia la mayoría de les imáxenes que s\'usen en Wikipedia.</string>
+  <string name="tutorial_1_subtext">¡Les tos imáxenes ayuden a instruir a persones de tol mundu!</string>
+  <string name="tutorial_2_text">Xube namái imáxenes que tomasti o creasti tu mesmu:</string>
+  <string name="tutorial_2_subtext">- Oxetos naturales (flores, animales, montes)
+- Oxetos útiles (bicicletes, estaciones de tren)
+- Persones famoses (l\'alcalde, dalgún atleta olímpicu que conoces)</string>
+  <string name="tutorial_3_text">NUN xubas:</string>
+  <string name="tutorial_3_subtext">- Selfies o semeyes de los tos amigos
+- Imáxenes que descargasti d\'Internet
+- Imáxenes de pantalla d\'aplicaciones propietaries</string>
+  <string name="tutorial_4_text">Exemplu de carga:</string>
+  <string name="tutorial_4_subtext">- Títulu: Ópera de Sidney
+- Descripción: Teatru de la Ópera de Sidney vistu dende l\'otru llau de la badea
+- Categoríes: Ópera de Sidney, Ópera de Sidney dende l\'oeste, Vistes a distancia de la Ópera de Sidney</string>
   <string name="welcome_wikipedia_text">Collabore coles sos imaxes. ¡Ayude a que los artículos de Wikipedia tengan vida!</string>
   <string name="welcome_wikipedia_subtext">Les imaxes de Wikipedia vienen de
 Wikimedia Commons.</string>
@@ -137,6 +151,8 @@ Wikimedia Commons.</string>
   <string name="detail_description_empty">Ensin descripción</string>
   <string name="detail_license_empty">Llicencia desconocida</string>
   <string name="menu_refresh">Refrescar</string>
+  <string name="storage_permission_rationale">Permisu riquíu: llectura d\'almacenamientu esternu. L\'aplicación nun puede funcionar ensin él.</string>
+  <string name="location_permission_rationale">Permisu opcional: llograr l\'allugamientu actual pa suxerir categoríes</string>
   <string name="ok">Aceutar</string>
   <string name="title_activity_nearby">Llugares cercanos</string>
   <string name="warning">Avisu</string>
