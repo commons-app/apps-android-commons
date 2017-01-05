@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name" fuzzy="true">Wikimedia Commons</string>
+  <string name="app_name">Commons</string>
   <string name="menu_settings">Paramètres</string>
   <string name="username">Nom d\'utilizaire</string>
   <string name="password">Senhal</string>
@@ -33,7 +33,7 @@
   <string name="login_failed_network">Impossible de se connectar — pana de ret</string>
   <string name="login_failed_username">Impossible de se connectar — verificatz vòstre nom d’utilizaire</string>
   <string name="login_failed_password">Impossible de se connectar — verificatz vòstre senhal</string>
-  <string name="login_failed_throttled" fuzzy="true">Tròp de temptativas infructuosas. Ensajatz tornarmai dins qualques minutas</string>
+  <string name="login_failed_throttled">Tròp de temptativas infructuosas. Ensajatz tornarmai dins qualques minutas.</string>
   <string name="login_failed_blocked">O planhèm, aqueste utilizaire es estat blocat dins Commons</string>
   <string name="login_failed_generic">Error de connexion</string>
   <string name="share_upload_button">Mandar</string>
@@ -60,7 +60,7 @@
   <string name="preference_tracking">Rapòrts d’utilizacion</string>
   <string name="title_activity_settings">Paramètres</string>
   <string name="menu_about">A prepaus</string>
-  <string name="about_improve" fuzzy="true">Font sus &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Bugs sus &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Fonts&lt;/a&gt; e &lt;a href=\"https://commons-app.github.io/\"&gt;site web&lt;/a&gt; sus GitHub. Crear un novèl &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;senhalament GitHub&lt;/a&gt; per senhalar de bugs o de suggestions.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politica de confidencialitat&lt;/a&gt;</string>
   <string name="title_activity_about">A prepaus</string>
   <string name="menu_feedback">Mandar vòstres comentaris (per corrièl)</string>
@@ -72,8 +72,8 @@
   <string name="share_license_summary">Aqueste imatge serà jos licéncia %1$s</string>
   <string name="menu_download">Telecargar</string>
   <string name="preference_license">Licéncia</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Atribucionu00A0-u00A0Partimentu00A0dinsu00A0lasu00A0Meteissasu00A0Condicionsu00A03.0</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0Atribucionu00A03.0</string>
+  <string name="license_name_cc_by_sa">Atribucion-PartimentIdentic 3.0</string>
+  <string name="license_name_cc_by">Atribucion 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Àustria)</string>
