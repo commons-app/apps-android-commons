@@ -89,8 +89,8 @@
   <string name="use_previous">使用之前的标题/描述</string>
   <string name="allow_gps">自动获取当前位置</string>
   <string name="allow_gps_summary">如果图片没有地理标记的话，就取得当前位置以提供分类建议</string>
-  <string name="license_name_cc_by_sa">署名-相同方式分享u00A03.0</string>
-  <string name="license_name_cc_by">署名u00A03.0</string>
+  <string name="license_name_cc_by_sa">署名-相同方式分享3.0</string>
+  <string name="license_name_cc_by">署名3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0（奥地利）</string>
