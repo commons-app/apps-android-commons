@@ -87,7 +87,7 @@
   <string name="share_license_summary">此圖片將以%1$s協議授權下上載</string>
   <string name="menu_download">下載</string>
   <string name="preference_license">協議授權</string>
-  <string name="use_previous" fuzzy="true">使用先前標題/描述</string>
+  <string name="use_previous">使用先前標題/描述</string>
   <string name="allow_gps">自動獲取目前位置</string>
   <string name="allow_gps_summary">若圖片沒有地理標記的話以取得目前位置來作為分類建議。</string>
   <string name="license_name_cc_by_sa">姓名標示-相同方式分享3.0</string>

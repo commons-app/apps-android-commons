@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Commons</string>
-  <string name="menu_settings">Sazi</string>
-  <string name="username">Nameyê karberi</string>
+  <string name="menu_settings">Eyari</string>
+  <string name="username">Namey karberi</string>
   <string name="password">Parola</string>
   <string name="login">Cı kewe</string>
   <string name="signup">Qeyd be</string>
   <string name="logging_in_title">Cıkewtış</string>
-  <string name="logging_in_message">Tay pıpawe...</string>
-  <string name="login_success">Hesab abıya</string>
+  <string name="logging_in_message">Tay bıpawe</string>
+  <string name="login_success">Cıkewtış hewl bi.</string>
   <string name="login_failed">Nidekeweya de</string>
   <string name="upload_failed">Dosya nêvineya. Dosyê da bine bıcerebnê.</string>
   <string name="authentication_failed">Tesdiq kerdış nebı</string>
   <string name="uploading_started">Barkerdış sertera!</string>
   <string name="upload_completed_notification_title">%1$s bıbar!</string>
-  <string name="upload_completed_notification_text">Barkerdışane xo pıpawe</string>
+  <string name="upload_completed_notification_text">Barkerdışê xo pıro bıde.</string>
   <string name="upload_progress_notification_title_start">Barkerdışe %1$s sertera</string>
   <string name="upload_progress_notification_title_in_progress">%1$s beno bar!</string>
   <string name="upload_progress_notification_title_finishing">Barkerdışe %1$s qedya</string>
-  <string name="upload_failed_notification_title">%1$s bar nibeno</string>
+  <string name="upload_failed_notification_title">%1$s bar nêbeno.</string>
   <string name="upload_failed_notification_subtitle">pıpawane xo bıvin</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">1 dosye selagnayış</item>
@@ -30,13 +30,13 @@
   <string name="contribution_state_in_progress">%1$d%% temamya</string>
   <string name="contribution_state_starting">Bar beno</string>
   <string name="menu_from_gallery">Galeri ra</string>
-  <string name="menu_from_camera">Resım bıgê</string>
+  <string name="menu_from_camera">Resım bıgêre</string>
   <string name="menu_nearby">Nezdıra</string>
   <string name="provider_contributions">Barkerdışê mı</string>
   <string name="menu_share">Vıla ke</string>
   <string name="menu_open_in_browser">Rovıte dı akê</string>
   <string name="share_title_hint">Sername</string>
-  <string name="share_description_hint">Sılasnayış</string>
+  <string name="share_description_hint">Şınasnayış</string>
   <string name="login_failed_network">Xırabiya kewten-network xeta</string>
   <string name="login_failed_username">Ronıştışo abeno - Namey karberi ye xo kontrol kerë</string>
   <string name="login_failed_password">Ronıştışo nêabeno - Parolay xo kontrol kerë</string>
