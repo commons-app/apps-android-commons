@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name" fuzzy="true">Wikimedia Commons</string>
+  <string name="app_name">Commons</string>
   <string name="menu_settings">Ρυθμίσεις</string>
   <string name="username">Όνομα χρήστη</string>
   <string name="password">Κωδικός πρόσβασης</string>
   <string name="login">Σύνδεση</string>
+  <string name="signup">Εγγραφή</string>
   <string name="logging_in_title">Συνδέεται</string>
   <string name="logging_in_message">Παρακαλώ περιμένετε...</string>
   <string name="login_success">Επιτυχής σύνδεση!</string>
   <string name="login_failed">Η είσοδος απέτυχε!</string>
+  <string name="upload_failed">Το αρχείο δεν βρέθηκε. Παρακαλώ δοκιμάστε ένα άλλο αρχείο.</string>
   <string name="authentication_failed">Απέτυχε ο έλεγχος ταυτότητας!</string>
   <string name="uploading_started">Η αποστολή ξεκίνησε!</string>
   <string name="upload_completed_notification_title">%1$s επιφορτώθηκε!</string>
@@ -18,7 +20,7 @@
   <string name="upload_progress_notification_title_finishing">Αποπεράτωση επιφόρτωσης %1$s</string>
   <string name="upload_failed_notification_title">Ανέβασμα του %1$s απέτυχε</string>
   <string name="upload_failed_notification_subtitle">Πατήστε για να δείτε</string>
-  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
+  <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">1 αρχείο επιφορτώνεται</item>
     <item quantity="other">%d αρχεία επιφορτώνονται</item>
   </plurals>
@@ -29,6 +31,7 @@
   <string name="contribution_state_starting">Επιφορτώνει...</string>
   <string name="menu_from_gallery">Από τη Συλλογή</string>
   <string name="menu_from_camera">Τραβήξτε φωτογραφία</string>
+  <string name="menu_nearby">Κοντά</string>
   <string name="provider_contributions">Οι επιφορτώσεις μου</string>
   <string name="menu_share">Κοινοποίηση</string>
   <string name="menu_open_in_browser">Προβολή στον περιηγητή</string>
@@ -37,7 +40,7 @@
   <string name="login_failed_network">Δεν είναι δυνατή η σύνδεση - αποτυχία του δικτύου</string>
   <string name="login_failed_username">Δεν είναι δυνατή η σύνδεση - ελέγξτε το όνομα χρήστη σας</string>
   <string name="login_failed_password">Δεν είναι δυνατή η σύνδεση - παρακαλούμε ελέγξτε τον κωδικό σας</string>
-  <string name="login_failed_throttled" fuzzy="true">Πάρα πολλές αποτυχημένες προσπάθειες. Παρακαλώ δοκιμάστε ξανά σε λίγα λεπτά</string>
+  <string name="login_failed_throttled">Πάρα πολλές ανεπιτυχείς προσπάθειες. Παρακαλώ δοκιμάστε ξανά σε λίγα λεπτά.</string>
   <string name="login_failed_blocked">Συγνώμη, αυτός ο χρήστης έχει αποκλειστεί από τα Commons</string>
   <string name="login_failed_generic">Η είσοδος απέτυχε</string>
   <string name="share_upload_button">Ανέβασμα</string>
@@ -68,12 +71,14 @@
   <string name="preference_tracking">Αναφορές χρήσης</string>
   <string name="preference_tracking_summary">Στείλτε αναφορές σχετικά με την χρήση σας στο Wikimedia για να μας βοηθήσετε να βελτιώσουμε την εφαρμογή</string>
   <string name="title_activity_settings">Ρυθμίσεις</string>
+  <string name="title_activity_signup">Εγγραφή</string>
   <string name="menu_about">Σχετικά</string>
-  <string name="about_license" fuzzy="true">Λογισμικό ανοικτού κώδικα και κυκλοφορεί υπό την &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Άδεια Apache v2&lt;/a&gt;</string>
-  <string name="about_improve" fuzzy="true">Ο πηγαίος κώδικας είναι στο &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Αναφορές σφάλματων στο &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_license">Λογισμικό ανοικτού κώδικα και κυκλοφορεί υπό την &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Άδεια Apache v2&lt;/a&gt;. Το Wikimedia Commons και το λογότυπο είναι εμπορικά σήματα του Ιδρύματος Wikimedia και χρησιμοποιούνται με άδεια από το Ίδρυμα Wikimedia. Δεν προτεινόμαστε ή συνδεόμαστε με το Ίδρυμα Wikimedia.</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Πηγή&lt;/a&gt; και &lt;a href=\"https://commons-app.github.io/\"&gt;ιστοσελίδα&lt;/a&gt; στο GitHub. Δημιουργήστε ένα νέο &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub θέμα&lt;/a&gt; για αναφορές σφαλμάτων και προτάσεις.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Πολιτική προσωπικών δεδομένων&lt;/a&gt;</string>
   <string name="title_activity_about">Σχετικά</string>
   <string name="menu_feedback">Αποστολή σχολίων (μέσω Email)</string>
+  <string name="no_email_client">Δεν υπάρχει εγκατεστημένη εφαρμογή ηλεκτρονικού ταχυδρομείου</string>
   <string name="provider_categories">Κατηγορίες που χρησιμοποιήθηκαν πρόσφατα</string>
   <string name="waiting_first_sync">Αναμονή για τον πρώτο συγχρονισμό...</string>
   <string name="no_uploads_yet">Ακόμα δεν έχετε ανεβάσει φωτογραφίες.</string>
@@ -82,8 +87,11 @@
   <string name="share_license_summary">Αυτή η εικόνα θα έχει άδεια στα πλαίσια του %1$s</string>
   <string name="menu_download">Λήψη</string>
   <string name="preference_license">Άδεια χρήσης</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Attribution-ShareAlikeu00A03.0</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0Attributionu00A03.0</string>
+  <string name="use_previous">Χρήση προηγούμενου τίτλου/περιγραφής</string>
+  <string name="allow_gps">Αυτόματη ανάκτηση τρέχουσας θέσης</string>
+  <string name="allow_gps_summary">Ανάκτηση τρέχουσας τοποθεσία για να σας προσφέρουμε προτάσεις κατηγοριών αν η εικόνα δεν είναι γεωσεσημασμένη.</string>
+  <string name="license_name_cc_by_sa">Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by">Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Αυστρία)</string>
@@ -97,6 +105,8 @@
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Πολωνία)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Ρουμανία)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
+  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Μηδέν</string>
   <string name="license_name_own_pd">δική μου - κοινό κτήμα</string>
   <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
@@ -114,6 +124,20 @@
   <string name="license_name_pd_ineligible">Κοινό κτήμα (μη ικανό για πνευματικά δικαιώματα)</string>
   <string name="license_name_attribution">Απόδοση</string>
   <string name="license_name_gfdl">GNU Free Documentation License</string>
+  <string name="tutorial_1_text">Το Wikimedia Commons φιλοξενεί τις περισσότερες από τις εικόνες που χρησιμοποιούνται στη Wikipedia.</string>
+  <string name="tutorial_1_subtext">Οι εικόνες σας βοηθούν να μορφωθούν άνθρωποι σε όλο τον κόσμο!</string>
+  <string name="tutorial_2_text">Παρακαλούμε ανεβάστε εικόνες που έχουν ληφθεί ή δημιουργηθεί εξ ολοκλήρου από τον εαυτό σας:</string>
+  <string name="tutorial_2_subtext">- Φυσικά αντικείμενα (λουλούδια, ζώα, βουνά)
+- Χρήσιμα αντικείμενα (ποδήλατα, σταθμοί τρένων)
+- Διάσημοι άνθρωποι (ο δήμαρχος, αθλητές Ολυμπιακών αγώνων που συναντήσατε)</string>
+  <string name="tutorial_3_text">Παρακαλούμε ΜΗΝ ανεβάσετε:</string>
+  <string name="tutorial_3_subtext">- Selfies ή φωτογραφίες των φίλων σας
+- Εικόνες που έχετε κατεβάσει από το Internet
+- Στιγμιότυπα από ιδιοταγείς εφαρμογές</string>
+  <string name="tutorial_4_text">Παράδειγμα ανεβάσματος:</string>
+  <string name="tutorial_4_subtext">- Τίτλος: Όπερα Του Σίδνεϊ
+- Περιγραφή: Η Όπερα του Σίδνεϊ όπως φαίνεται απέναντι από τον κόλπο
+- Κατηγορίες: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Συνεισφέρετε τις εικόνες σας. Βοηθείστε τα λήμματα της Wikipedia να έρθουν στη ζωή!</string>
   <string name="welcome_wikipedia_subtext">Οι εικόνες στη Wikipedia προέρχονται από το Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Οι εικόνες σας βοηθούν να εκπαιδευτούν άνθρωποι σε όλο τον κόσμο.</string>
@@ -126,4 +150,12 @@
   <string name="detail_description_empty">Καμία περιγραφή</string>
   <string name="detail_license_empty">Άγνωστη άδεια</string>
   <string name="menu_refresh">Ανανέωση</string>
+  <string name="storage_permission_rationale">Απαιτούμενη άδεια: Ανάγνωση εξωτερικής αποθήκευσης. Η εφαρμογή δεν μπορεί να λειτουργήσει χωρίς αυτή.</string>
+  <string name="location_permission_rationale">Προαιρετική άδεια: Ανάκτηση τρέχουσας θέσης σας για προτάσεις κατηγοριών</string>
+  <string name="ok">Εντάξει</string>
+  <string name="title_activity_nearby">Κοντινοί Τόποι</string>
+  <string name="warning">Προειδοποίηση</string>
+  <string name="file_exists">Αυτό το αρχείο υπάρχει ήδη στα Commons. Είστε σίγουρος ότι θέλετε να συνεχίσετε;</string>
+  <string name="yes">Ναι</string>
+  <string name="no">Όχι</string>
 </resources>
