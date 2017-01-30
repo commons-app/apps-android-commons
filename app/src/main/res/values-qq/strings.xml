@@ -98,7 +98,7 @@ Source and Bugs</string>
 {{Identical|Download}}</string>
   <string name="preference_license">{{Identical|License}}</string>
   <string name="use_previous"/>
-  <string name="license_name_cc_by_sa">CC Attribution-Sharelike License display name.</string>
+  <string name="license_name_cc_by_sa"> Attribution-Sharelike License display name.</string>
   <string name="license_name_cc_by">CC Attribution License display name.</string>
   <string name="license_name_cc0">CC0 License display name.</string>
   <string name="license_name_cc_by_sa_3_0">{{Identical|CC BY-SA}}</string>
