@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="crash_dialog_title">Commons ruksak</string>
+  <string name="crash_dialog_text">Euh. Aya masalah!</string>
+  <string name="crash_dialog_ok_toast">Nuhun!</string>
+</resources>
