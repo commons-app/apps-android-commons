@@ -40,7 +40,7 @@
   <string name="login_failed_network">Kirjautuminen epäonnistui - verkkovirhe</string>
   <string name="login_failed_username">Kirjautuminen epäonnistui - tarkista käyttäjätunnus</string>
   <string name="login_failed_password">Kirjautuminen epäonnistui - tarkista salasana</string>
-  <string name="login_failed_throttled" fuzzy="true">Liikaa epäonnistuneita yrityksiä. Yritä uudelleen hetken kuluttua</string>
+  <string name="login_failed_throttled">Liikaa epäonnistuneita yrityksiä. Yritä uudelleen parin minuutin kuluttua.</string>
   <string name="login_failed_blocked">Pahoittelut, tämä käyttäjä on estetty Commonsissa</string>
   <string name="login_failed_generic">Kirjautuminen epäonnistui</string>
   <string name="share_upload_button">Tallenna</string>
@@ -58,6 +58,10 @@
     <item quantity="one">1 tallennus alkaa</item>
     <item quantity="other">%d tallennusta alkaa</item>
   </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">1 lataus</item>
+    <item quantity="other">%d latausta</item>
+  </plurals>
   <string name="categories_not_found">Luokkaa %1$s ei löytynyt</string>
   <string name="categories_skip_explanation">Lisää luokkia tehdäksesi kuvistasi helpommin löydettäviä.
 
@@ -69,8 +73,8 @@ Napauta tätä viestiä (tai paina takaisin) ohittaaksesi tämän vaiheen.</stri
   <string name="title_activity_settings">Asetukset</string>
   <string name="title_activity_signup">Rekisteröidy</string>
   <string name="menu_about">Tietoja</string>
-  <string name="about_license" fuzzy="true">Vapaan lähdekoodin ohjelmisto, joka on julkaistu &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; -lisenssin alaisena</string>
-  <string name="about_improve" fuzzy="true">Lähdekoodi saatavilla &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHubissa&lt;/a&gt;. Ohjelmavirheet &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Githubssa&lt;/a&gt;.</string>
+  <string name="about_license">Vapaan lähdekoodin ohjelmisto, joka on julkaistu &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; -lisenssin alaisena. Wikimedia Commons ja sen logo ovat Wikimedia Foundationin tavaramerkkejä ja niitä käytetään Wikimedia Foundationin luvalla. Emme ole hyväksyttyjä tai sidoksissa Wikimedia Foundationioniin.</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Lähde&lt;/a&gt; ja &lt;a href=\"https://commons-app.github.io/\"&gt;nettisivusto&lt;/a&gt; GitHubissa. Luo uusi &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-issue&lt;/a&gt; bugiraporteille ja ehdotuksille.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Yksityisyydensuoja&lt;/a&gt;</string>
   <string name="title_activity_about">Tietoja</string>
   <string name="menu_feedback">Lähetä palautetta (sähköpostitse)</string>
@@ -83,9 +87,11 @@ Napauta tätä viestiä (tai paina takaisin) ohittaaksesi tämän vaiheen.</stri
   <string name="share_license_summary">Tiedosto tallennetaan lisenssin %1$s ehtojen mukaisesti.</string>
   <string name="menu_download">Lataa</string>
   <string name="preference_license">Lisenssi</string>
+  <string name="use_previous">Käytä edellistä otsikkoa/kuvausta</string>
   <string name="allow_gps">Hae tämänhetkinen sijainti automaattisesti</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Nimeä-Jaau00A0samoinu00A03.0</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0Nimeäu00A03.0</string>
+  <string name="allow_gps_summary">Nouda nykyinen sijainti asettaaksesi käyttöön luokkaehdotuksia jos kuva ei ole paikkamerkitty</string>
+  <string name="license_name_cc_by_sa">Nimeä-JaaSamoin 3.0</string>
+  <string name="license_name_cc_by">Nimeä 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Itävalta)</string>
@@ -102,18 +108,23 @@ Napauta tätä viestiä (tai paina takaisin) ohittaaksesi tämän vaiheen.</stri
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC0</string>
+  <string name="license_name_own_pd">oma-pd</string>
   <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
   <string name="license_name_cc_by_2_5">CC BY 2.5</string>
   <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
   <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
   <string name="license_name_cc_2_0">CC BY 2.0</string>
+  <string name="license_name_fal">Free Art License</string>
   <string name="license_name_pd_old_100">Public domain (tekijä kuollut yli 100 vuotta sitten)</string>
   <string name="license_name_pd_old">Public domain (tekijänoikeudet vanhentuneet)</string>
   <string name="license_name_pd_art">Public domain (taide)</string>
   <string name="license_name_pd_us">Public domain (US)</string>
   <string name="license_name_pd_usgov">Public domain (Yhdysvaltain hallitus)</string>
   <string name="license_name_pd_usgov_nasa">Public domain (NASA)</string>
+  <string name="license_name_pd_ineligible">Public domain (kelpaamaton tekijänoikeuden vuoksi)</string>
+  <string name="license_name_attribution">Nimeä</string>
   <string name="license_name_gfdl">GNU Free Documentation License</string>
+  <string name="tutorial_1_text">Wikimedia Commons isännöi useimpia kuvia joita käytetään Wikipediassa.</string>
   <string name="tutorial_1_subtext">Kuvasi auttavat ihmisiä kaikkialta maailmasta ymmärtämään maailmaa!</string>
   <string name="tutorial_2_text">Tallenna kuvia, jotka sinä itse olet kuvannot tai luonut:</string>
   <string name="tutorial_2_subtext">- Luontokohteet (kukat, eläimet, vuoret)
@@ -124,6 +135,9 @@ Napauta tätä viestiä (tai paina takaisin) ohittaaksesi tämän vaiheen.</stri
 - Netistä ladatut kuvat
 - Kuvakaappaukset kaupallisista sovelluksista</string>
   <string name="tutorial_4_text">Tallennusesimerkki:</string>
+  <string name="tutorial_4_subtext">- Nimi: Sydneyn operatalo
+- Kuvaus: Sydneyn oopperatalo katsottuna lahden toisella puolella
+- Luokat: Sydneyn oopperatalo, Sydneyn oopperatalo lännestä, Sydneyn oopperatalo remote views</string>
   <string name="welcome_wikipedia_text">Herätä Wikipedia-artikkelit eloon kuvillasi! Tuo kuvasi Wikipediaan.</string>
   <string name="welcome_wikipedia_subtext">Wikipedian kuvat tulevat Wikimedia Commonsista.</string>
   <string name="welcome_copyright_text">Kuvat auttavat useita ihmisiä ympäri maailmaa artikkeleiden ymmärtämisessä.</string>
@@ -138,6 +152,7 @@ Napauta tätä viestiä (tai paina takaisin) ohittaaksesi tämän vaiheen.</stri
   <string name="menu_refresh">Päivitä</string>
   <string name="storage_permission_rationale">Vaadittu oikeus: Ulkoisen tallennustilan luku. Appi ei toimi ilman tätä oikeutta.</string>
   <string name="ok">OK</string>
+  <string name="title_activity_nearby">Läheiset paikat</string>
   <string name="warning">Varoitus</string>
   <string name="file_exists">Tämä tiedosto on jo Wikimedia Commonsissa. Haluatko varmasti jatkaa?</string>
   <string name="yes">Kyllä</string>

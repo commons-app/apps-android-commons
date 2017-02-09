@@ -7,7 +7,7 @@
   <string name="login">Σύνδεση</string>
   <string name="signup">Εγγραφή</string>
   <string name="logging_in_title">Συνδέεται</string>
-  <string name="logging_in_message">Παρακαλώ περιμένετε...</string>
+  <string name="logging_in_message">Παρακαλούμε περιμένετε...</string>
   <string name="login_success">Επιτυχής σύνδεση!</string>
   <string name="login_failed">Η είσοδος απέτυχε!</string>
   <string name="upload_failed">Το αρχείο δεν βρέθηκε. Παρακαλώ δοκιμάστε ένα άλλο αρχείο.</string>
