@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="crash_dialog_title">Commons se srušio</string>
+  <string name="crash_dialog_text">Ups. Nešto je pošlo po zlu!</string>
+  <string name="crash_dialog_comment_prompt">Recite nam šta ste radili, pa nam to podijelite putem e-pošte. Time ćete nam pomoći da riješimo problem!</string>
+  <string name="crash_dialog_ok_toast">Hvala Vam!</string>
+</resources>

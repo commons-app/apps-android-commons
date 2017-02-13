@@ -21,7 +21,7 @@
   <string name="upload_failed_notification_subtitle">Тапните да бисте видели</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">1 датотека се отпрема</item>
-    <item quantity="other">Отпрема се датотетека: %d</item>
+    <item quantity="other">Отпрема се датотека: %d</item>
   </plurals>
   <string name="title_activity_contributions">Моја отпремања</string>
   <string name="contribution_state_queued">На чекању</string>
