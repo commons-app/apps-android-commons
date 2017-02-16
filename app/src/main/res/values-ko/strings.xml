@@ -123,6 +123,7 @@
   <string name="license_name_pd_ineligible">퍼블릭 도메인 (저작권 보호에 부적합)</string>
   <string name="license_name_attribution">저작자표시</string>
   <string name="license_name_gfdl">GNU 자유 문서 라이선스</string>
+  <string name="tutorial_1_text">위키미디어 공용은 위키백과에 쓰이는 대부분의 이미지를 호스팅합니다.</string>
   <string name="tutorial_1_subtext">당신의 그림은 전 세계 사람들을 교육하는 데 도움이 됩니다!</string>
   <string name="tutorial_2_text">전적으로 자신이 찍거나 만든 사진만 업로드해 주십시오:</string>
   <string name="tutorial_3_text">업로드하지 마십시오:</string>
@@ -143,6 +144,7 @@
   <string name="detail_license_empty">알 수 없는 라이선스</string>
   <string name="menu_refresh">새로 고침</string>
   <string name="storage_permission_rationale">권한 필요: 외부 저장소 읽기. 이것이 없으면 앱은 동작하지 않습니다.</string>
+  <string name="location_permission_rationale">선택적 권한: 분류 추천을 위해 현재 위치 정보를 가져옵니다.</string>
   <string name="ok">확인</string>
   <string name="title_activity_nearby">근처의 장소</string>
   <string name="warning">경고</string>
