@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name" fuzzy="true">Wikimedia Commons</string>
+  <string name="app_name">Commons</string>
   <string name="menu_settings">Nastavenia</string>
   <string name="username">Používateľské meno</string>
   <string name="password">Heslo</string>
   <string name="login">Prihlásiť sa</string>
+  <string name="signup">Zaregistrovať sa</string>
   <string name="logging_in_title">Prihlasovanie</string>
   <string name="logging_in_message">Čakajte prosím...</string>
   <string name="login_success">Prihlásenie úspešné</string>
   <string name="login_failed">Prihlásenie zlyhalo!</string>
+  <string name="upload_failed">Súbor nebol nájdený. Skúste, prosím, iný súbor.</string>
   <string name="authentication_failed">Overenie zlyhalo!</string>
   <string name="uploading_started">Nahrávanie začalo!</string>
   <string name="upload_completed_notification_title">%1$s je nahraný!</string>
@@ -18,6 +20,10 @@
   <string name="upload_progress_notification_title_finishing">Dokončenie nahrávania %1$s</string>
   <string name="upload_failed_notification_title">Nahrávanie %1$s zlyhalo</string>
   <string name="upload_failed_notification_subtitle">Kliknutím zobrazíte</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">nahráva sa 1 súbor</item>
+    <item quantity="other">nahráva sa %d súborov</item>
+  </plurals>
   <string name="title_activity_contributions">Moje obrázky</string>
   <string name="contribution_state_queued">Nahrávanie je v poradí</string>
   <string name="contribution_state_failed">Nahrávanie zlyhalo</string>
@@ -25,6 +31,7 @@
   <string name="contribution_state_starting">Nahrávam</string>
   <string name="menu_from_gallery">Z galérie</string>
   <string name="menu_from_camera">Odfotiť</string>
+  <string name="menu_nearby">V okolí</string>
   <string name="provider_contributions">Moje obrázky</string>
   <string name="menu_share">Zdieľať</string>
   <string name="menu_open_in_browser">Otvoriť v prehliadači</string>
@@ -33,7 +40,7 @@
   <string name="login_failed_network">prihlásenie zlyhalo - zlyhanie siete</string>
   <string name="login_failed_username">Prihlásenie zlyhalo - skontrolujte vaše používateľské meno</string>
   <string name="login_failed_password">Prihlásenie zlyhalo - skontrolujte vaše heslo</string>
-  <string name="login_failed_throttled" fuzzy="true">Príliš veľa neúspešných pokusov. Skúste to znova o niekoľko minút</string>
+  <string name="login_failed_throttled">Príliš veľa neúspešných pokusov. Skúste to znova o niekoľko minút.</string>
   <string name="login_failed_blocked">Ospravedlňujeme sa, tento užívateľ bol na Commons zablokovaný</string>
   <string name="login_failed_generic">Prihlásenie zlyhalo</string>
   <string name="share_upload_button">Nahrať</string>
@@ -51,12 +58,14 @@ Kliknite na tento odkaz (alebo na späť) ak chcete tento krok vynechať.</strin
   <string name="preference_tracking">Hlásenie o používaní</string>
   <string name="preference_tracking_summary">Pošlite hlásenie o požívaní nadácií Wikimédia za účelom vylepšovania aplikácie.</string>
   <string name="title_activity_settings">Nastavenia</string>
+  <string name="title_activity_signup">Zaregistrovať sa</string>
   <string name="menu_about">O aplikácii</string>
   <string name="about_license" fuzzy="true">Open Source softvér dostupný za podmienok &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
   <string name="about_improve" fuzzy="true">Zdroj na &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Bugy na &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Ochrana osobných údajov&lt;/a&gt;</string>
   <string name="title_activity_about">O aplikácii</string>
   <string name="menu_feedback">Odoslať spätnú väzbu (emailom)</string>
+  <string name="no_email_client">Nemáte nainštalovaného žiadneho e-mailového klienta</string>
   <string name="provider_categories">Nedávno použité kategórie</string>
   <string name="waiting_first_sync">Čaká sa na prvú synchronizáciu...</string>
   <string name="no_uploads_yet">Ešte ste nenahrali žiadne fotografie.</string>
@@ -65,8 +74,10 @@ Kliknite na tento odkaz (alebo na späť) ak chcete tento krok vynechať.</strin
   <string name="share_license_summary">Tento obrázok bude licencovaný podľa %1$s</string>
   <string name="menu_download">Stiahnuť</string>
   <string name="preference_license">Licencia</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Attribution-ShareAlikeu00A03.0</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0Attributionu00A03.0</string>
+  <string name="use_previous">Použiť predchádzajúci názov/popis</string>
+  <string name="allow_gps">Automaticky získať súčasnú polohu</string>
+  <string name="license_name_cc_by_sa">Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by"> Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Rakúsko)</string>
@@ -80,6 +91,8 @@ Kliknite na tento odkaz (alebo na späť) ak chcete tento krok vynechať.</strin
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Poľsko)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Rumunsko)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
+  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="license_name_own_pd">vlastné-voľné dielo</string>
   <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
@@ -97,6 +110,20 @@ Kliknite na tento odkaz (alebo na späť) ak chcete tento krok vynechať.</strin
   <string name="license_name_pd_ineligible">Voľné dielo (nevhodné pre autorské práva)</string>
   <string name="license_name_attribution">Uveďte autora</string>
   <string name="license_name_gfdl">GNU Free Documentation License</string>
+  <string name="tutorial_1_text">Na Wikimedia Commons sa nachádza väčšina obrázkov, ktoré sa používajú na Wikipédii.</string>
+  <string name="tutorial_1_subtext">Váš obrázok pomáha vzdelávať ľudí po celom svete!</string>
+  <string name="tutorial_2_text">Prosím, nahrávajte obrázky, ktoré ste odfotili alebo vytvorili vy:</string>
+  <string name="tutorial_2_subtext">- Prírodu (kvety, zvieratá, hory)
+- Užitočné objekty (bicykle, železničné stanice)
+- Slávni ľudia (starosta, olympionici, s ktorými ste sa stretli)</string>
+  <string name="tutorial_3_text">Prosím NENAHRÁVAJTE:</string>
+  <string name="tutorial_3_subtext">- Selfies alebo fotky vašich priateľov
+- Obrázky prevzaté z internetu
+- Snímky obrazovky proprietárnych aplikácii</string>
+  <string name="tutorial_4_text">Príklad nahratia:</string>
+  <string name="tutorial_4_subtext">- Názov: Opera v Sydney
+- Popis: Opera v Sydney - pohľad spoza zátoky
+- Kategórie: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Prispejte svojimi obrázkami. Pomôžte oživiť články na Wikipédií.</string>
   <string name="welcome_wikipedia_subtext">Obrázky na Wikipédií pochádzajú z Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Vaše obrázky pomáhajú vzdelávať ľudí po celom svete.</string>
@@ -109,4 +136,10 @@ Kliknite na tento odkaz (alebo na späť) ak chcete tento krok vynechať.</strin
   <string name="detail_description_empty">Bez popisu</string>
   <string name="detail_license_empty">Neznáma licencia</string>
   <string name="menu_refresh">Obnoviť</string>
+  <string name="ok">OK</string>
+  <string name="title_activity_nearby">Miesta v okolí</string>
+  <string name="warning">Upozornenie</string>
+  <string name="file_exists">Tento súbor už na Commons existuje. Ste si istí, že chcete pokračovať?</string>
+  <string name="yes">Áno</string>
+  <string name="no">Nie</string>
 </resources>

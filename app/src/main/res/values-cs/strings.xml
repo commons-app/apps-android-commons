@@ -5,10 +5,12 @@
   <string name="username">Uživatelské jméno</string>
   <string name="password">Heslo</string>
   <string name="login">Přihlásit se</string>
+  <string name="signup">Zaregistrovat se</string>
   <string name="logging_in_title">Přihlášení</string>
   <string name="logging_in_message">Čekejte prosím...</string>
   <string name="login_success">Přihlášení uspělo!</string>
   <string name="login_failed">Přihlášení se nezdařilo!</string>
+  <string name="upload_failed">Soubor nebyl nalezen. Prosím, zkuste jiný soubor.</string>
   <string name="authentication_failed">Ověření se nezdařilo!</string>
   <string name="uploading_started">Nahrávání začalo!</string>
   <string name="upload_completed_notification_title">%1$s nahráno!</string>
@@ -25,6 +27,7 @@
   <string name="contribution_state_starting">Nahrávání</string>
   <string name="menu_from_gallery">Z galerie</string>
   <string name="menu_from_camera">Vyfotit</string>
+  <string name="menu_nearby">Poblíž</string>
   <string name="provider_contributions">Moje obrázky</string>
   <string name="menu_share">Sdílet</string>
   <string name="menu_open_in_browser">Zobrazit v prohlížeči</string>
@@ -48,6 +51,7 @@
   <string name="preference_tracking">Hlášení o používání</string>
   <string name="preference_tracking_summary">Odesílat hlášení o používání nadaci Wikimedia za účelem zlepšování aplikace</string>
   <string name="title_activity_settings">Nastavení</string>
+  <string name="title_activity_signup">Zaregistrovat se</string>
   <string name="menu_about">O aplikaci</string>
   <string name="about_license">Open Source software dostupný za podmínek &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Wikimedia Commons a logo Wikimedia Commons jsou ochranné známky Wikimedia Foundation a jsou použity se svolením Wikimedia Foundation. Nejsme podporováni Wikimedia Foundation ani nejsme její součástí.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Zdrojový kód&lt;/a&gt;, &lt;a href=\"https://commons-app.github.io/\"&gt;webová stránka&lt;/a&gt; a &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;hlášení chyb a sdílení nápadů&lt;/a&gt; na GitHubu.</string>
@@ -77,6 +81,8 @@
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polsko)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Rumunsko)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
+  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="license_name_own_pd">vlastní-volné dílo</string>
   <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
@@ -94,6 +100,15 @@
   <string name="license_name_pd_ineligible">Volné dílo (nezpůsobilé pro autorská práva)</string>
   <string name="license_name_attribution">Uveďte autora</string>
   <string name="license_name_gfdl">GNU Free Documentation License</string>
+  <string name="tutorial_1_subtext">Vaše obrázky pomáhají vzdělávat lidi po celém světě</string>
+  <string name="tutorial_2_text">Prosím, nahrávejte obrázky které jste vyfotil nebo nahrál sám:</string>
+  <string name="tutorial_2_subtext">- Přírodní objekty (květiny, zvířata, hory)
+- Užitkové předměty (jízdní kola, vlakové nádraží)
+- Slavní lidé (starosta, olympjští sportovci)</string>
+  <string name="tutorial_3_text">Prosím NENAHRÁVEJTE:</string>
+  <string name="tutorial_3_subtext">- Selfie nebo obrázky vašich přátel
+- Obrázky stažené z Internetu
+- Screenshoty z proprietárních aplikací</string>
   <string name="welcome_wikipedia_text">Přispějte svými obrázky. Pomozte oživit články na Wikipedii.</string>
   <string name="welcome_wikipedia_subtext">Obrázky na Wikipedii pochází 
 z Wikimedia Commons.</string>
@@ -107,4 +122,10 @@ z Wikimedia Commons.</string>
   <string name="detail_description_empty">Bez popisu</string>
   <string name="detail_license_empty">Neznámá licence</string>
   <string name="menu_refresh">Obnovit</string>
+  <string name="ok">OK</string>
+  <string name="title_activity_nearby">Místa v okolí</string>
+  <string name="warning">Upozornění</string>
+  <string name="file_exists">Tento soubor již na Commons existuje. Jste si jist, že chcete pokračovat?</string>
+  <string name="yes">Ano</string>
+  <string name="no">Ne</string>
 </resources>
