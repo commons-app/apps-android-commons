@@ -9,7 +9,7 @@
 
     <!-- Sorry about the hardcoded sizes here. They're image-related. -->
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="180dp"
         android:gravity="center_horizontal"
         >

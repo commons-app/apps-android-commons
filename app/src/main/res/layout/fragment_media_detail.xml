@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@android:color/background_dark"
     >
 
@@ -26,13 +26,13 @@
 
     <fr.free.nrw.commons.MediaWikiImageView
         android:id="@+id/mediaDetailImage"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:scaleType="fitCenter"
         />
 
     <ScrollView
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/mediaDetailScrollView"
         android:fillViewport="true"
@@ -42,21 +42,21 @@
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             >
 
             <!-- Placeholder. Height gets set at runtime based on container size; the initial value is a hack to keep
                  the detail info offscreen until it's placed properly. May be a better way to do this. -->
             <fr.free.nrw.commons.media.MediaDetailSpacer
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="16dp"
                 android:id="@+id/mediaDetailSpacer"
                 />
 
             <LinearLayout
                 android:orientation="vertical"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#AA000000"
                 android:padding="16dp"
@@ -64,7 +64,7 @@
 
                 <LinearLayout
                     android:orientation="vertical"
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#20ffffff"
                     android:padding="16dp"
@@ -92,13 +92,13 @@
                 </LinearLayout>
 
                 <fr.free.nrw.commons.media.MediaDetailSpacer
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="8dp"
                     />
 
                 <LinearLayout
                     android:orientation="vertical"
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#20ffffff"
                     android:padding="16dp"
@@ -126,13 +126,13 @@
                 </LinearLayout>
 
                 <fr.free.nrw.commons.media.MediaDetailSpacer
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="8dp"
                     />
 
                 <LinearLayout
                     android:orientation="vertical"
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#20ffffff"
                     android:padding="16dp"
@@ -160,13 +160,13 @@
                 </LinearLayout>
 
                 <fr.free.nrw.commons.media.MediaDetailSpacer
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="8dp"
                     />
 
                 <LinearLayout
                     android:orientation="vertical"
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#20ffffff"
                     android:padding="16dp"
