@@ -1,5 +1,0 @@
-<resources>
-
-    <style name="ProgressBar" parent="android:Widget.ProgressBar.Horizontal" />
-
-</resources>
