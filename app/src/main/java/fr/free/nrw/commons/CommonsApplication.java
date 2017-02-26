@@ -157,10 +157,12 @@ public class CommonsApplication extends Application {
     public com.android.volley.toolbox.ImageLoader getImageLoader() {
         if(imageLoader == null) {
             imageLoader = new com.android.volley.toolbox.ImageLoader(volleyQueue, new com.android.volley.toolbox.ImageLoader.ImageCache() {
+                @Override
                 public Bitmap getBitmap(String key) {
                     return imageCache.get(key);
                 }
 
+                @Override
                 public void putBitmap(String key, Bitmap bitmap) {
                     imageCache.put(key, bitmap);
                 }

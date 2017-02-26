@@ -132,6 +132,7 @@ public class MediaDetailFragment extends Fragment {
             // Ask the detail provider to ping us when we're ready
             Log.d("Commons", "MediaDetailFragment not yet ready to display details; registering observer");
             dataObserver = new DataSetObserver() {
+                @Override
                 public void onChanged() {
                     Log.d("Commons", "MediaDetailFragment ready to display delayed details!");
                     detailProvider.unregisterDataSetObserver(dataObserver);
@@ -147,6 +148,7 @@ public class MediaDetailFragment extends Fragment {
 
         // Progressively darken the image in the background when we scroll detail pane up
         scrollListener = new ViewTreeObserver.OnScrollChangedListener() {
+            @Override
             public void onScrollChanged() {
                 updateTheDarkness();
             }
@@ -158,6 +160,7 @@ public class MediaDetailFragment extends Fragment {
         layoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
             private int currentHeight = -1;
 
+            @Override
             public void onGlobalLayout() {
                 int viewHeight = view.getHeight();
                 //int textHeight = title.getLineHeight();
@@ -245,15 +248,18 @@ public class MediaDetailFragment extends Fragment {
             //Even if image is loaded from device storage, it will display, albeit with empty desc and cat.
             Log.d("Volley", "Actual URL does not start with http and is: " + actualUrl);
             com.nostra13.universalimageloader.core.ImageLoader.getInstance().displayImage(actualUrl, image, displayOptions, new ImageLoadingListener() {
+                @Override
                 public void onLoadingStarted(String s, View view) {
                     loadingProgress.setVisibility(View.VISIBLE);
                 }
 
+                @Override
                 public void onLoadingFailed(String s, View view, FailReason failReason) {
                     loadingProgress.setVisibility(View.GONE);
                     loadingFailed.setVisibility(View.VISIBLE);
                 }
 
+                @Override
                 public void onLoadingComplete(String s, View view, Bitmap bitmap) {
                     loadingProgress.setVisibility(View.GONE);
                     loadingFailed.setVisibility(View.GONE);
@@ -278,6 +284,7 @@ public class MediaDetailFragment extends Fragment {
                     rebuildCatList();
                 }
 
+                @Override
                 public void onLoadingCancelled(String s, View view) {
                     Log.e("Volley", "Image loading cancelled. But why?");
                 }
@@ -333,6 +340,7 @@ public class MediaDetailFragment extends Fragment {
         textView.setText(cat);
         if (categoriesLoaded && categoriesPresent) {
             textView.setOnClickListener(new View.OnClickListener() {
+                @Override
                 public void onClick(View view) {
                     String selectedCategoryTitle = "Category:" + catName;
                     Intent viewIntent = new Intent();

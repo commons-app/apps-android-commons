@@ -83,6 +83,7 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
             builder.setMessage(R.string.file_exists)
                     .setTitle(R.string.warning);
             builder.setPositiveButton(R.string.no, new DialogInterface.OnClickListener() {
+                @Override
                 public void onClick(DialogInterface dialog, int id) {
                     //Go back to ContributionsActivity
                     Intent intent = new Intent(context, ContributionsActivity.class);
@@ -90,6 +91,7 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
                 }
             });
             builder.setNegativeButton(R.string.yes, new DialogInterface.OnClickListener() {
+                @Override
                 public void onClick(DialogInterface dialog, int id) {
                     //No need to do anything, user remains on upload screen
                 }

@@ -27,10 +27,12 @@ public class CategoriesAdapter extends BaseAdapter {
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
+    @Override
     public int getCount() {
         return items.size();
     }
 
+    @Override
     public Object getItem(int i) {
         return items.get(i);
     }
@@ -43,10 +45,12 @@ public class CategoriesAdapter extends BaseAdapter {
         this.items = items;
     }
 
+    @Override
     public long getItemId(int i) {
         return i;
     }
 
+    @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         CheckedTextView checkedView;
 

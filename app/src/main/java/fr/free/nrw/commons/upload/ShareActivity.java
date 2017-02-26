@@ -88,6 +88,7 @@ public  class       ShareActivity
     /**
      * Called when user taps the submit button
      */
+    @Override
     public void uploadActionInitiated(String title, String description) {
 
         this.title = title;
@@ -123,6 +124,7 @@ public  class       ShareActivity
         }
 
         uploadController.startUpload(title, mediaUri, description, mimeType, source, decimalCoords, new UploadController.ContributionUploadProgress() {
+            @Override
             public void onUploadStarted(Contribution contribution) {
                 ShareActivity.this.contribution = contribution;
                 showPostUpload();
@@ -139,6 +141,7 @@ public  class       ShareActivity
                 .commit();
     }
 
+    @Override
     public void onCategoriesSave(ArrayList<String> categories) {
         if(categories.size() > 0) {
             ModifierSequence categoriesSequence = new ModifierSequence(contribution.getContentUri());

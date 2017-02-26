@@ -35,18 +35,22 @@ public class MediaListAdapter extends BaseAdapter {
             }
         }
     }
+    @Override
     public int getCount() {
         return mediaList.size();
     }
 
+    @Override
     public Object getItem(int i) {
         return mediaList.get(i);
     }
 
+    @Override
     public long getItemId(int i) {
         return i;
     }
 
+    @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         if(view == null) {
             view = activity.getLayoutInflater().inflate(R.layout.layout_contribution, null, false);
