@@ -21,10 +21,12 @@ import fr.free.nrw.commons.Utils;
 public class Contribution extends Media {
 
     public static Creator<Contribution> CREATOR = new Creator<Contribution>() {
+        @Override
         public Contribution createFromParcel(Parcel parcel) {
             return new Contribution(parcel);
         }
 
+        @Override
         public Contribution[] newArray(int i) {
             return new Contribution[0];
         }
@@ -212,6 +214,7 @@ public class Contribution extends Media {
         return cv;
     }
 
+    @Override
     public void setFilename(String filename) {
         this.filename = filename;
     }

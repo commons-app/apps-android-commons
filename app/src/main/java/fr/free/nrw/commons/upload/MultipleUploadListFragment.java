@@ -62,18 +62,22 @@ public class MultipleUploadListFragment extends Fragment {
 
     private class PhotoDisplayAdapter extends BaseAdapter {
 
+        @Override
         public int getCount() {
             return detailProvider.getTotalMediaCount();
         }
 
+        @Override
         public Object getItem(int i) {
             return detailProvider.getMediaAtPosition(i);
         }
 
+        @Override
         public long getItemId(int i) {
             return i;
         }
 
+        @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             UploadHolderView holder;
 
@@ -165,10 +169,12 @@ public class MultipleUploadListFragment extends Fragment {
         photosGrid.setColumnWidth(photoSize.x);
 
         baseTitle.addTextChangedListener(new TextWatcher() {
+            @Override
             public void beforeTextChanged(CharSequence charSequence, int i1, int i2, int i3) {
 
             }
 
+            @Override
             public void onTextChanged(CharSequence charSequence, int i1, int i2, int i3) {
                 for(int i = 0; i < detailProvider.getTotalMediaCount(); i++) {
                     Contribution up = (Contribution) detailProvider.getMediaAtPosition(i);
@@ -184,6 +190,7 @@ public class MultipleUploadListFragment extends Fragment {
                 detailProvider.notifyDatasetChanged();
             }
 
+            @Override
             public void afterTextChanged(Editable editable) {
 
             }

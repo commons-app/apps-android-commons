@@ -15,10 +15,12 @@ import java.util.regex.Pattern;
 public class Media implements Parcelable {
 
     public static Creator<Media> CREATOR = new Creator<Media>() {
+        @Override
         public Media createFromParcel(Parcel parcel) {
             return new Media(parcel);
         }
 
+        @Override
         public Media[] newArray(int i) {
             return new Media[0];
         }
@@ -204,10 +206,12 @@ public class Media implements Parcelable {
         this.creator = creator;
     }
 
+    @Override
     public int describeContents() {
         return 0;
     }
 
+    @Override
     public void writeToParcel(Parcel parcel, int flags) {
         parcel.writeParcelable(localUri, flags);
         parcel.writeString(imageUrl);

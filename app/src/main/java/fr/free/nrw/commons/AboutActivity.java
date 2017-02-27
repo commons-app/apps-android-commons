@@ -13,6 +13,7 @@ public class AboutActivity extends Activity {
     private TextView privacyPolicyText;
     private TextView uploadsToText;
 
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);

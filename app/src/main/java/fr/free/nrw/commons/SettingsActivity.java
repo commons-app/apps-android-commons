@@ -38,6 +38,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
 
         licensePreference.setSummary(getString(fr.free.nrw.commons.Utils.licenseNameFor(licensePreference.getValue())));
         licensePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 preference.setSummary(getString(fr.free.nrw.commons.Utils.licenseNameFor((String)newValue)));
                 return true;
@@ -61,6 +62,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
                 .unregisterOnSharedPreferenceChangeListener(this);
     }
 
+    @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 
     }
@@ -128,6 +130,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
         getDelegate().onDestroy();
     }
 
+    @Override
     public void invalidateOptionsMenu() {
         getDelegate().invalidateOptionsMenu();
     }

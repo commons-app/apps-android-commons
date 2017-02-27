@@ -154,6 +154,7 @@ public class MediaWikiImageView extends ImageView {
                     public void onErrorResponse(final VolleyError error) {
                         if(!tryOriginal) {
                             post(new Runnable() {
+                                @Override
                                 public void run() {
                                     loadImageIfNecessary(false, true);
                                 }

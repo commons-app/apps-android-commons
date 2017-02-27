@@ -65,6 +65,7 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
             if(i == 0) {
                 // See bug https://code.google.com/p/android/issues/detail?id=27526
                 pager.postDelayed(new Runnable() {
+                    @Override
                     public void run() {
                         getActivity().supportInvalidateOptionsMenu();
                     }
@@ -92,6 +93,7 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
             // Adapter doesn't seem to be loading immediately.
             // Dear God, please forgive us for our sins
             view.postDelayed(new Runnable() {
+                @Override
                 public void run() {
                     pager.setAdapter(adapter);
                     pager.setCurrentItem(pageNumber, false);
@@ -280,13 +282,16 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
         pager.setCurrentItem(i);
     }
 
+    @Override
     public void onPageScrolled(int i, float v, int i2) {
         getActivity().supportInvalidateOptionsMenu();
     }
 
+    @Override
     public void onPageSelected(int i) {
     }
 
+    @Override
     public void onPageScrollStateChanged(int i) {
 
     }

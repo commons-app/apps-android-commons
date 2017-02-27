@@ -41,11 +41,13 @@ public class UploadController {
 
     private boolean isUploadServiceConnected;
     private ServiceConnection uploadServiceConnection = new ServiceConnection() {
+        @Override
         public void onServiceConnected(ComponentName componentName, IBinder binder) {
             uploadService = (UploadService) ((HandlerService.HandlerServiceLocalBinder)binder).getService();
             isUploadServiceConnected = true;
         }
 
+        @Override
         public void onServiceDisconnected(ComponentName componentName) {
             // this should never happen
             throw new RuntimeException("UploadService died but the rest of the process did not!");

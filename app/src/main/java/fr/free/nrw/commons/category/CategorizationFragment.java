@@ -89,10 +89,12 @@ public class CategorizationFragment extends Fragment {
         public boolean selected;
 
         public static Creator<CategoryItem> CREATOR = new Creator<CategoryItem>() {
+            @Override
             public CategoryItem createFromParcel(Parcel parcel) {
                 return new CategoryItem(parcel);
             }
 
+            @Override
             public CategoryItem[] newArray(int i) {
                 return new CategoryItem[0];
             }
@@ -108,10 +110,12 @@ public class CategorizationFragment extends Fragment {
             selected = in.readInt() == 1;
         }
 
+        @Override
         public int describeContents() {
             return 0;
         }
 
+        @Override
         public void writeToParcel(Parcel parcel, int flags) {
             parcel.writeString(name);
             parcel.writeInt(selected ? 1 : 0);
@@ -411,6 +415,7 @@ public class CategorizationFragment extends Fragment {
         categoriesSkip = (TextView) rootView.findViewById(R.id.categoriesExplanation);
 
         categoriesSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 getActivity().onBackPressed();
                 getActivity().finish();
@@ -430,6 +435,7 @@ public class CategorizationFragment extends Fragment {
         categoriesList.setAdapter(categoriesAdapter);
 
         categoriesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int index, long id) {
                 CheckedTextView checkedView = (CheckedTextView) view;
                 CategoryItem item = (CategoryItem) adapterView.getAdapter().getItem(index);
@@ -442,13 +448,16 @@ public class CategorizationFragment extends Fragment {
         });
 
         categoriesFilter.addTextChangedListener(new TextWatcher() {
+            @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
             }
 
+            @Override
             public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
                 startUpdatingCategoryList();
             }
 
+            @Override
             public void afterTextChanged(Editable editable) {
 
             }
@@ -500,11 +509,13 @@ public class CategorizationFragment extends Fragment {
         builder.setMessage("Are you sure you want to go back? The image will not have any categories saved.")
                 .setTitle("Warning");
         builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int id) {
                 //No need to do anything, user remains on categorization screen
             }
         });
         builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int id) {
                 getActivity().finish();
             }
@@ -548,12 +559,14 @@ public class CategorizationFragment extends Fragment {
                     builder.setMessage("Images without categories are rarely usable. Are you sure you want to submit without selecting categories?")
                             .setTitle("No Categories Selected");
                     builder.setPositiveButton("No, go back", new DialogInterface.OnClickListener() {
+                        @Override
                         public void onClick(DialogInterface dialog, int id) {
                             //Exit menuItem so user can select their categories
                             return;
                         }
                     });
                     builder.setNegativeButton("Yes, submit", new DialogInterface.OnClickListener() {
+                        @Override
                         public void onClick(DialogInterface dialog, int id) {
                             //Proceed to submission
                             onCategoriesSaveHandler.onCategoriesSave(selectedCategories);
