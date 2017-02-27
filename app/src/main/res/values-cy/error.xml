@@ -2,6 +2,6 @@
 <resources>
   <string name="crash_dialog_title">Aeth rhywbeth o\'i le yn Comin</string>
   <string name="crash_dialog_text">Wwwwps. Aeth rhywbeth o\'i le!</string>
-  <string name="crash_dialog_comment_prompt">DEywedwch wrthym beth roeddech yn ei wneud, drwy ebost. Mi wneith hyn ein cynorthwyo i\'w drwsio!</string>
+  <string name="crash_dialog_comment_prompt">Dywedwch wrthym beth roeddech yn ei wneud, drwy ebost. Mi wneith hyn ein cynorthwyo i\'w drwsio!</string>
   <string name="crash_dialog_ok_toast">Diolch!</string>
 </resources>
