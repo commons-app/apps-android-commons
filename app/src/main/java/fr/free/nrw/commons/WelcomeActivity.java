@@ -51,6 +51,7 @@ public class WelcomeActivity extends Activity {
                 if (position == PAGE_FINAL) {
                     yesButton = (Button)view.findViewById(R.id.welcomeYesButton);
                     yesButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
                         public void onClick(View view) {
                             finish();
                         }

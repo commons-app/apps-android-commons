@@ -57,10 +57,12 @@ public  class       MultipleShareActivity
         super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
     }
 
+    @Override
     public Media getMediaAtPosition(int i) {
         return photosList.get(i);
     }
 
+    @Override
     public int getTotalMediaCount() {
         if(photosList == null) {
             return 0;
@@ -68,24 +70,29 @@ public  class       MultipleShareActivity
         return photosList.size();
     }
 
+    @Override
     public void notifyDatasetChanged() {
         if(uploadsList != null) {
             uploadsList.notifyDatasetChanged();
         }
     }
 
+    @Override
     public void registerDataSetObserver(DataSetObserver observer) {
         // fixme implement me if needed
     }
 
+    @Override
     public void unregisterDataSetObserver(DataSetObserver observer) {
         // fixme implement me if needed
     }
 
+    @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int index, long item) {
         showDetail(index);
     }
 
+    @Override
     public void OnMultipleUploadInitiated() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -125,6 +132,7 @@ public  class       MultipleShareActivity
             final int uploadCount = i + 1; // Goddamn Java
 
             uploadController.startUpload(up, new UploadController.ContributionUploadProgress() {
+                @Override
                 public void onUploadStarted(Contribution contribution) {
                     dialog.setProgress(uploadCount);
                     if(uploadCount == photosList.size()) {
@@ -154,6 +162,7 @@ public  class       MultipleShareActivity
         //See http://stackoverflow.com/questions/7469082/getting-exception-illegalstateexception-can-not-perform-this-action-after-onsa
     }
 
+    @Override
     public void onCategoriesSave(ArrayList<String> categories) {
         if(categories.size() > 0) {
         ContentProviderClient client = getContentResolver().acquireContentProviderClient(ModificationsContentProvider.AUTHORITY);
@@ -295,6 +304,7 @@ public  class       MultipleShareActivity
         }
     }
 
+    @Override
     public void onBackStackChanged() {
         if(mediaDetails != null && mediaDetails.isVisible()) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);

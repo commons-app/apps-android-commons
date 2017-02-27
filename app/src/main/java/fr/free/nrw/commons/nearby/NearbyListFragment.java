@@ -160,6 +160,7 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
             listview.setAdapter(mAdapter);
 
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                     Place place = places.get(position);

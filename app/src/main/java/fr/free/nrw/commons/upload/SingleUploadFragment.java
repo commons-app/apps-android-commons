@@ -82,6 +82,7 @@ public class SingleUploadFragment extends Fragment {
 
         titleDescButton.setOnClickListener(new View.OnClickListener()
         {
+            @Override
             public void onClick(View v)
             {
                 //Retrieve last title and desc entered
@@ -98,10 +99,13 @@ public class SingleUploadFragment extends Fragment {
         licenseSummaryView = (TextView)rootView.findViewById(R.id.share_license_summary);
 
         TextWatcher uploadEnabler = new TextWatcher() {
+            @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) { }
 
+            @Override
             public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {}
 
+            @Override
             public void afterTextChanged(Editable editable) {
                 if(getActivity() != null) {
                     getActivity().invalidateOptionsMenu();
@@ -117,6 +121,7 @@ public class SingleUploadFragment extends Fragment {
 
         // Open license page on touch
         licenseSummaryView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if (motionEvent.getActionMasked() == MotionEvent.ACTION_DOWN) {
                     Intent intent = new Intent();

@@ -161,10 +161,13 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         prefs = getSharedPreferences("fr.free.nrw.commons", MODE_PRIVATE);
 
         TextWatcher loginEnabler = new TextWatcher() {
+            @Override
             public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) { }
 
+            @Override
             public void onTextChanged(CharSequence charSequence, int start, int count, int after) { }
 
+            @Override
             public void afterTextChanged(Editable editable) {
                 if(usernameEdit.getText().length() != 0 && passwordEdit.getText().length() != 0) {
                     loginButton.setEnabled(true);
@@ -177,6 +180,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         usernameEdit.addTextChangedListener(loginEnabler);
         passwordEdit.addTextChangedListener(loginEnabler);
         passwordEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
                 if (loginButton.isEnabled()) {
                     if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -192,6 +196,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         });
 
         loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 that.performLogin();
             }
