@@ -40,7 +40,7 @@
   <string name="login_failed_network">Xırabiya kewten-network xeta</string>
   <string name="login_failed_username">Ronıştışo abeno - Namey karberi ye xo kontrol kerë</string>
   <string name="login_failed_password">Ronıştışo nêabeno - Parolay xo kontrol kerë</string>
-  <string name="login_failed_throttled">Şıma vêşi cerbnayış xırab kerd. Solığna fına dekewë de</string>
+  <string name="login_failed_throttled">Şıma xeylê rayi kerd ke cı kewê, a ser nêvıst. Şıma rê zehmet 2-3 deqey ra tepeya reyna bıcerrebnên.</string>
   <string name="login_failed_blocked">Qısur mewni rê, Karber commons dı bloqe biyo.</string>
   <string name="login_failed_generic">Nidekeweya de</string>
   <string name="share_upload_button">Bar ke</string>
@@ -66,11 +66,11 @@
   <string name="categories_skip_explanation">Kategori cı kerdışi rê nusnayış bıkeré. Ena gamer ravêrdışi rê mesaci bıpıloğnê yana peyd şırê.</string>
   <string name="categories_activity_title">Kategoriy</string>
   <string name="preference_tracking">Rapore karkerden</string>
-  <string name="preference_tracking_summary">Dezgeker vırazayışi rê desteg dayışi rê, raporanê karıyayışa bırışê Wikimedia</string>
+  <string name="preference_tracking_summary">Raporanê gırweynayışi Wikimedia rê bırışên ke wa ma dest bıdê ma ke programi (app) aver berime.</string>
   <string name="title_activity_settings">Sazi</string>
   <string name="title_activity_signup">Qeyd be</string>
   <string name="menu_about">Heq te cı</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Çıme&lt;/a&gt; u &lt;a href=\"https://commons-app.github.io/\"&gt;website&lt;/a&gt; on GitHub&lt;/a&gt;. Newe vıraz &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub mewzu &lt;/a&gt; U rapor bıweseynê</string>
+  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Çıme&lt;/a&gt; u &lt;a href=\"https://commons-app.github.io/\"&gt;website&lt;/a&gt; on GitHub&lt;/a&gt;. Newe vıraz &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub mewzu &lt;/a&gt; U rapor bıweseynê</string>
   <string name="about_privacy_policy">/</string>
   <string name="title_activity_about">Heq te cı</string>
   <string name="menu_feedback">Peyd rışten bırış (E-posta ra)</string>
