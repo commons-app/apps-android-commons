@@ -1,5 +1,9 @@
 # Wikimedia Commons for Android
 
+##v1.43
+- Added translations for multiple languages
+- Minor code optimization
+
 ##v1.42
 - Fixed language mappings; successful translatewiki integration
 - Various translations added
