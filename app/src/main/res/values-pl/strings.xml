@@ -5,26 +5,26 @@
   <string name="username">Nazwa użytkownika</string>
   <string name="password">Hasło</string>
   <string name="login">Zaloguj się</string>
-  <string name="signup">Zarejestruj się</string>
+  <string name="signup">Rejestracja</string>
   <string name="logging_in_title">Logowanie</string>
   <string name="logging_in_message">Proszę czekać...</string>
-  <string name="login_success">Zalogowano pomyślnie</string>
+  <string name="login_success">Zalogowano pomyślnie!</string>
   <string name="login_failed">Logowanie nie powiodło się!</string>
-  <string name="upload_failed">Pliku nie znaleziono. Spróbuj innego pliku.</string>
+  <string name="upload_failed">Nie znaleziono pliku. Spróbuj z innym.</string>
   <string name="authentication_failed">Błąd uwierzytelniania!</string>
   <string name="uploading_started">Wysyłanie rozpoczęte</string>
   <string name="upload_completed_notification_title">Przesłano %1$s!</string>
-  <string name="upload_completed_notification_text">Kliknij aby zobaczyć swój wysłany plik</string>
-  <string name="upload_progress_notification_title_start">Rozpoczęto wysyłanie pliku : %1$s</string>
+  <string name="upload_completed_notification_text">Kliknij, aby zobaczyć przesłany plik</string>
+  <string name="upload_progress_notification_title_start">Rozpoczęto przesyłanie pliku %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Wysyłanie %1$s</string>
   <string name="upload_progress_notification_title_finishing">Zakończono wysyłanie pliku %1$s</string>
-  <string name="upload_failed_notification_title">Wysyłanie %1$s zakończone porażką</string>
-  <string name="upload_failed_notification_subtitle">Kliknij aby zobaczyć</string>
+  <string name="upload_failed_notification_title">Wysyłanie %1$s nieudane</string>
+  <string name="upload_failed_notification_subtitle">Kliknij, aby zobaczyć</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Przesyłanie 1 pliku</item>
     <item quantity="other">Przesyłanie %d plików</item>
   </plurals>
-  <string name="title_activity_contributions">Moje wysłane pliki</string>
+  <string name="title_activity_contributions">Wysłane przeze mnie pliki</string>
   <string name="contribution_state_queued">W kolejce</string>
   <string name="contribution_state_failed">Porażka</string>
   <string name="contribution_state_in_progress">%1$d%% zakończone</string>
@@ -32,14 +32,14 @@
   <string name="menu_from_gallery">Z galerii</string>
   <string name="menu_from_camera">Zrób zdjęcie</string>
   <string name="menu_nearby">W pobliżu</string>
-  <string name="provider_contributions">Moje wysłane pliki</string>
+  <string name="provider_contributions">Wysłane przeze mnie pliki</string>
   <string name="menu_share">Udostępnij</string>
   <string name="menu_open_in_browser">Zobacz w przeglądarce</string>
   <string name="share_title_hint">Tytuł</string>
   <string name="share_description_hint">Opis</string>
   <string name="login_failed_network">Nie można zalogować - błąd sieci</string>
-  <string name="login_failed_username">Nie można zalogować - sprawdź swoją nazwę użytkownika</string>
-  <string name="login_failed_password">Nie można zalogować - sprawdź swoje hasło</string>
+  <string name="login_failed_username">Nie można zalogować - sprawdź nazwę użytkownika</string>
+  <string name="login_failed_password">Nie można zalogować - sprawdź hasło</string>
   <string name="login_failed_throttled">Zbyt wiele nieudanych prób zalogowania. Spróbuj ponownie za kilka minut.</string>
   <string name="login_failed_blocked">Przepraszamy, ten użytkownik został zablokowany na Commons</string>
   <string name="login_failed_generic">Logowanie nie powiodło się</string>
@@ -49,11 +49,24 @@
   <string name="menu_upload_single">Prześlij</string>
   <string name="categories_search_text_hint">Szukaj kategorii</string>
   <string name="menu_save_categories">Zapisz</string>
-  <string name="categories_not_found">Kategorii %1$s nie znaleziono</string>
-  <string name="categories_skip_explanation">Dodaj kategorię aby Twoje pliki były łatwiej wyszukiwalne na Commons.
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">Nie przesłano jeszcze żadnego pliku</item>
+    <item quantity="one">Przesłano 1 plik</item>
+    <item quantity="other">Przesłano %d plików</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Rozpoczęto 1 przesyłanie</item>
+    <item quantity="other">Rozpoczęto %d przesyłań</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">1 przesłanie</item>
+    <item quantity="other">%d przesłań</item>
+  </plurals>
+  <string name="categories_not_found">Nie znaleziono kategorii pasujących do %1$s</string>
+  <string name="categories_skip_explanation">Dodaj kategorie, aby ułatwić odnalezienie plików w Wikimedia Commons.
 
-Zacznij dobierać kategorię. 
-Dotknij tej wiadomości (lub naciśnij \"cofnij\") aby pominąć ten krok</string>
+Zacznij pisać, aby dodać kategorię.
+Kliknij ten komunikat lub naciśnij „cofnij”, aby pominąć ten krok.</string>
   <string name="categories_activity_title">Kategorie</string>
   <string name="preference_tracking">Raporty użycia</string>
   <string name="preference_tracking_summary">Wyślij raporty do Wikimedia, aby pomóc w ulepszeniu aplikacji</string>
@@ -62,13 +75,13 @@ Dotknij tej wiadomości (lub naciśnij \"cofnij\") aby pominąć ten krok</strin
   <string name="menu_about">O aplikacji</string>
   <string name="about_license">Oprogramowanie Open Source, wydane na licencji &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Wikimedia Commons i jego logo są znakami towarowymi Wikimedia Foundation i są wykorzystywane za zgodą Wikimedia Foundation. Nie jesteśmy powiązani z Wikimedia Foundation.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kod źródłowy&lt;/a&gt; oraz &lt;a href=\"https://commons-app.github.io/\"&gt;strona internetowa&lt;/a&gt; na GitHub. Aby zgłosić błąd lub sugestię, utwórz nowe &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;zgłoszenie na GitHub&lt;/a&gt;.</string>
-  <string name="about_privacy_policy">Wikimedia:Commons-android-strings-about privacy policy/uk</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Polityka prywatności&lt;/a&gt;</string>
   <string name="title_activity_about">O aplikacji</string>
   <string name="menu_feedback">Wyślij opinię (przez e-mail)</string>
   <string name="no_email_client">Klient e-mail nie jest zainstalowany</string>
   <string name="provider_categories">Niedawno używane Kategorie</string>
-  <string name="waiting_first_sync">Oczekiwanie na pierwszą synchronizację ...</string>
-  <string name="no_uploads_yet">Nie wgrałeś jeszcze żadnych zdjęć.</string>
+  <string name="waiting_first_sync">Oczekiwanie na pierwszą synchronizację...</string>
+  <string name="no_uploads_yet">Nie przesłałeś jeszcze żadnych zdjęć.</string>
   <string name="menu_retry_upload">Ponów próbę</string>
   <string name="menu_cancel_upload">Anuluj</string>
   <string name="share_license_summary">Ten obraz będzie udostępniany na licencji %1$s</string>
@@ -76,6 +89,7 @@ Dotknij tej wiadomości (lub naciśnij \"cofnij\") aby pominąć ten krok</strin
   <string name="preference_license">Licencja</string>
   <string name="use_previous">Użyj poprzedniego tytułu/opisu</string>
   <string name="allow_gps">Automatycznie uzyskaj bieżącą lokalizację</string>
+  <string name="allow_gps_summary">Pobierz aktualną lokalizację, aby uzyskać propozycje kategorii, jeśli obraz nie zawiera znaczników geograficznych</string>
   <string name="license_name_cc_by_sa"> Uznanie autorstwa-Na tych samych warunkach 3.0</string>
   <string name="license_name_cc_by"> Uznanie autorstwa 3.0</string>
   <string name="license_name_cc0">CC0</string>
@@ -94,11 +108,13 @@ Dotknij tej wiadomości (lub naciśnij \"cofnij\") aby pominąć ten krok</strin
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
+  <string name="license_name_own_pd">własny wolny utwór</string>
   <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
   <string name="license_name_cc_by_2_5">CC BY 2.5</string>
   <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
   <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
   <string name="license_name_cc_2_0">CC BY 2.0</string>
+  <string name="license_name_fal">Licencja Wolnej Sztuki</string>
   <string name="license_name_pd_old_100">Domena publiczna (autor zmarł ponad 100 lat temu)</string>
   <string name="license_name_pd_old">Domena publiczna (prawa autorskie wygasły)</string>
   <string name="license_name_pd_art">Domena publiczna (sztuka)</string>
@@ -108,19 +124,25 @@ Dotknij tej wiadomości (lub naciśnij \"cofnij\") aby pominąć ten krok</strin
   <string name="license_name_pd_ineligible">Domena publiczna (nie podlega ochronie prawa autorskiego)</string>
   <string name="license_name_attribution">Uznanie autorstwa</string>
   <string name="license_name_gfdl">GNU Free Documentation License</string>
-  <string name="tutorial_2_text">Można przesyłać zdjęcia zrobione lub stworzone całkowicie przez Ciebie:</string>
-  <string name="tutorial_2_subtext">- Obiektów natury (kwiaty, zwierzęta, góry)
-- Przydatne obiekty (rowery, dworce)
-- Znani ludzie (burmistrz, olimpijczyków, z którymi się spotkałeś)</string>
+  <string name="tutorial_1_text">Wikimedia Commons przechowuje większość ilustracji wykorzystywanych w Wikipedii.</string>
+  <string name="tutorial_1_subtext">Twoje ilustracje pomogą edukować ludzi na całym świecie!</string>
+  <string name="tutorial_2_text">Możesz przesyłać zdjęcia lub obrazy stworzone samodzielnie przez Ciebie:</string>
+  <string name="tutorial_2_subtext">- Natura (kwiaty, zwierzęta, góry)
+- Przydatne przedmioty (rowery, dworce kolejowe)
+- Znani ludzie, których spotkałeś (burmistrz, olimpijczyk)</string>
   <string name="tutorial_3_text">Prosimy NIE wysyłać:</string>
   <string name="tutorial_3_subtext">- Zdjęć przedstawiających siebie lub znajomych
 - Zdjęć pobranych z Internetu
 - Zrzutów ekranów płatnych aplikacji</string>
-  <string name="welcome_wikipedia_text">Dołóż swoje grafiki. Pomóż artykułom w Wikipedii ożywić się!</string>
+  <string name="tutorial_4_text">Przykład przesłania pliku:</string>
+  <string name="tutorial_4_subtext">- Nazwa: Zamek Królewski w Warszawie
+- Opis: Zamek Królewski w Warszawie, widok od strony kolumny Zygmunta
+- Kategorie: Western facade (Royal Castle, Warsaw), Southern facade (Royal Castle, Warsaw), Castle Square in Warsaw</string>
+  <string name="welcome_wikipedia_text">Dodaj swoje ilustracje. Pomóż ożyć artykułom w Wikipedii!</string>
   <string name="welcome_wikipedia_subtext">Ilustracje w Wikipedii pochodzą z Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Twoje ilustracje pomagają w edukacji ludzi na całym świecie.</string>
   <string name="welcome_copyright_subtext">Unikaj materiałów objętych prawami autorskimi znalezionych w Internecie, a także zdjęć plakatów, okładek książek itp.</string>
-  <string name="welcome_final_text">Uważasz że wszystko jasne?</string>
+  <string name="welcome_final_text">Czy wszystko jest jasne?</string>
   <string name="welcome_final_button_text">Tak!</string>
   <string name="detail_panel_cats_label">Kategorie</string>
   <string name="detail_panel_cats_loading">Ładowanie...</string>
@@ -128,6 +150,8 @@ Dotknij tej wiadomości (lub naciśnij \"cofnij\") aby pominąć ten krok</strin
   <string name="detail_description_empty">Brak opisu</string>
   <string name="detail_license_empty">Nieznana licencja</string>
   <string name="menu_refresh">Odśwież</string>
+  <string name="storage_permission_rationale">Wymagane uprawnienia: odczyt z dysku zewnętrznego. Aplikacja nie będzie w stanie funkcjonować bez tego.</string>
+  <string name="location_permission_rationale">Opcjonalne zezwolenie: uzyskiwanie bieżącej lokalizacji dla wygenerowania propozycji kategorii</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Pobliskie miejsca</string>
   <string name="warning">Ostrzeżenie</string>

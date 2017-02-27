@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name" fuzzy="true">Wikimedia Commons</string>
+  <string name="app_name">Commons</string>
   <string name="menu_settings">Configurações</string>
   <string name="username">Nome de usuário</string>
   <string name="password">Senha</string>
   <string name="login">Autenticar-se</string>
+  <string name="signup">Cadastre-se</string>
   <string name="logging_in_title">Efetuar login</string>
   <string name="logging_in_message">Aguarde...</string>
   <string name="login_success">Login bem sucedido</string>
   <string name="login_failed">Falha na identificação</string>
+  <string name="upload_failed">Arquivo não encontrado. Tente outro arquivo.</string>
   <string name="authentication_failed">Falha de autenticação!</string>
   <string name="uploading_started">Upload iniciado!</string>
   <string name="upload_completed_notification_title">%1$s enviado!</string>
@@ -18,9 +20,9 @@
   <string name="upload_progress_notification_title_finishing">Terminando o envio de %1$s</string>
   <string name="upload_failed_notification_title">Envio de %1$s falhou</string>
   <string name="upload_failed_notification_subtitle">Toque para ver</string>
-  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
-    <item quantity="one">enviando 1 arquivo</item>
-    <item quantity="other">enviando %d arquivos</item>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">carregando um arquivo</item>
+    <item quantity="other">carregando %d arquivos</item>
   </plurals>
   <string name="title_activity_contributions">Meus envios</string>
   <string name="contribution_state_queued">Na fila</string>
@@ -29,6 +31,7 @@
   <string name="contribution_state_starting">Enviando</string>
   <string name="menu_from_gallery">Da Galeria</string>
   <string name="menu_from_camera">Tirar foto</string>
+  <string name="menu_nearby">Próximo</string>
   <string name="provider_contributions">Meus envios</string>
   <string name="menu_share">Compartilhar</string>
   <string name="menu_open_in_browser">Ver no navegador</string>
@@ -37,7 +40,7 @@
   <string name="login_failed_network">Erro ao efetuar o login - falha na rede</string>
   <string name="login_failed_username">Erro ao efetuar o login - confira seu nome de usuário</string>
   <string name="login_failed_password">Erro ao efetuar o login - confira sua senha</string>
-  <string name="login_failed_throttled" fuzzy="true">Muitas tentativas malsucedidas. Tente de novo daqui alguns minutos</string>
+  <string name="login_failed_throttled">Muitas tentativas malsucedidas. Tente de novo daqui alguns minutos.</string>
   <string name="login_failed_blocked">Desculpe, esse usuário foi banido do Commons</string>
   <string name="login_failed_generic">Erro ao efetuar o login</string>
   <string name="share_upload_button">Enviar</string>
@@ -51,6 +54,14 @@
     <item quantity="one">1 envio</item>
     <item quantity="other">%d envios</item>
   </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Iniciando 1 carregamento</item>
+    <item quantity="other">Iniciando %d carregamentos</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">1 carregamento</item>
+    <item quantity="other">%d carregamentos</item>
+  </plurals>
   <string name="categories_not_found">Nenhuma categoria correspondente %1$s encontrada</string>
   <string name="categories_skip_explanation">Adicione categorias para fazer suas imagens mais vistas no Wikimedia Commons. 
 
@@ -60,12 +71,14 @@ Aperte nesta mensagem (ou aperte para voltar) para pular este passo</string>
   <string name="preference_tracking">Relatórios de uso</string>
   <string name="preference_tracking_summary">Enviar relatório de uso para a Wikimedia para nos ajudar a melhorar o aplicativo</string>
   <string name="title_activity_settings">Configurações</string>
+  <string name="title_activity_signup">Criar conta</string>
   <string name="menu_about">Sobre</string>
-  <string name="about_license" fuzzy="true">Software livre distribuído sob a &lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;Licença Apache v2&lt;/a&gt;</string>
-  <string name="about_improve" fuzzy="true">Código no &lt;a href=\"https://github.com/wikimedia/android-commons\"&gt;GitHub&lt;/a&gt;. Bugs no &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_license">Software livre distribuído sob a &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Wikimedia Commons e seu logotipo são marcas registradas da Wikimedia Foundation e são usadas com a permissão da Wikimedia Foundation. Não somos endossados nem afiliados à Wikimedia Foundation.</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Fonte&lt;/a&gt; e &lt;a href=\"https://commons-app.github.io/\"&gt;site&lt;/a&gt; em GitHub. Crie um novo &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub issue&lt;/a&gt; para relatórios de bugs e sugestões.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Política de privacidade&lt;/a&gt;</string>
   <string name="title_activity_about">Sobre</string>
   <string name="menu_feedback">Enviar comentários (por e-mail)</string>
+  <string name="no_email_client">Nenhum cliente de e-mail instalado</string>
   <string name="provider_categories">Categorias usadas recentemente</string>
   <string name="waiting_first_sync">Aguardando pela primeira sincronização...</string>
   <string name="no_uploads_yet">Você ainda não carregou nenhuma foto.</string>
@@ -74,8 +87,11 @@ Aperte nesta mensagem (ou aperte para voltar) para pular este passo</string>
   <string name="share_license_summary">Essa imagem será licenciada sob %1$s</string>
   <string name="menu_download">Download</string>
   <string name="preference_license">Licença</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Attribution-ShareAlikeu00A03.0</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0Attributionu00A03.0</string>
+  <string name="use_previous">Usar o título/descrição anterior</string>
+  <string name="allow_gps">Obter automaticamente a localização atual</string>
+  <string name="allow_gps_summary">Recuperar o local atual para oferecer sugestões de categoria se a imagem não tiver geo-tagged</string>
+  <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by"> Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Áustria)</string>
@@ -89,6 +105,8 @@ Aperte nesta mensagem (ou aperte para voltar) para pular este passo</string>
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polônia)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romênia)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
+  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="license_name_own_pd">own-pd</string>
   <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
@@ -106,6 +124,20 @@ Aperte nesta mensagem (ou aperte para voltar) para pular este passo</string>
   <string name="license_name_pd_ineligible">Domínio público (inelegível para direitos autorais)</string>
   <string name="license_name_attribution">Atribuição</string>
   <string name="license_name_gfdl">Licença de Documentação Livre GNU</string>
+  <string name="tutorial_1_text">Wikimedia Commons hospeda a maioria das imagens que são usadas na Wikipedia</string>
+  <string name="tutorial_1_subtext">Suas imagens ajudam a educar as pessoas ao redor do mundo!</string>
+  <string name="tutorial_2_text">Carregue as fotografias tiradas ou criadas inteiramente por você:</string>
+  <string name="tutorial_2_subtext">- Objetos naturais (flores, animais, montanhas)
+- Objetos úteis (bicicletas, estações de trem)
+- Pessoas famosas (seu prefeito, atletas olímpicos que você conheceu)</string>
+  <string name="tutorial_3_text">Por favor NÃO carregue:</string>
+  <string name="tutorial_3_subtext">- Selfies ou fotos de seus amigos
+- Imagens que você baixou da Internet
+- Imagens de aplicativos proprietários</string>
+  <string name="tutorial_4_text">Exemplo de upload:</string>
+  <string name="tutorial_4_subtext">- Título: Ópera de Sydney
+- Descrição: Ópera de Sydney como visto de toda a baía
+- =Categorias: =Ópera de Sydney, =Ópera de Sydney a partir do oeste, Ópera de Sydney vistas remotas</string>
   <string name="welcome_wikipedia_text">Contribua com suas imagens. Ajude artigos da Wikipédia a ganharem vida!</string>
   <string name="welcome_wikipedia_subtext">Imagens na Wikipédia vem do Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Suas imagens ajudam a educar pessoas pelo mundo.</string>
@@ -118,4 +150,12 @@ Aperte nesta mensagem (ou aperte para voltar) para pular este passo</string>
   <string name="detail_description_empty">Sem descrição</string>
   <string name="detail_license_empty">Licença desconhecida</string>
   <string name="menu_refresh">Atualizar</string>
+  <string name="storage_permission_rationale">Permissão necessária: Ler armazenamento externo. O aplicativo não pode funcionar sem isso.</string>
+  <string name="location_permission_rationale">Permissão opcional: Obter a localização atual de sugestões de categoria</string>
+  <string name="ok">OK</string>
+  <string name="title_activity_nearby">Lugares próximos</string>
+  <string name="warning">Alerta</string>
+  <string name="file_exists">Este arquivo já existe no Commons. Tem certeza de que deseja continuar?</string>
+  <string name="yes">Sim</string>
+  <string name="no">Não</string>
 </resources>

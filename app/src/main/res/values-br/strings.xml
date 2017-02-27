@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name" fuzzy="true">Wikimedia Commons</string>
+  <string name="app_name">Commons</string>
   <string name="menu_settings">Arventennoù</string>
   <string name="username">Anv implijer</string>
   <string name="password">Ger-tremen</string>
   <string name="login">Kevreañ</string>
+  <string name="signup">En em enskrivañ</string>
   <string name="logging_in_title">O kevreañ</string>
   <string name="logging_in_message">Gortozit mar plij...</string>
   <string name="login_success">Kevreet oc\'h !</string>
   <string name="login_failed">Kudenn gevreañ !</string>
+  <string name="upload_failed">N\'eo ket bet kavet ar restr. Klask gant unan all.</string>
   <string name="authentication_failed">Dilesadur c\'hwitet!</string>
   <string name="uploading_started">Kroget da enporzhiañ!</string>
   <string name="upload_completed_notification_title">%1$s bet enporzhiet !</string>
@@ -18,7 +20,10 @@
   <string name="upload_progress_notification_title_finishing">Oc\'h echuiñ enporzhiadenn %1$s</string>
   <string name="upload_failed_notification_title">C\'hwitet en deus enporzhiañ %1$s</string>
   <string name="upload_failed_notification_subtitle">Pouezit evit diskwel</string>
-  <string name="uploads_pending_notification_indicator" fuzzy="true">%d restr oc\'h enporzhiañ</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">Oc\'h enporzhiañ 1 restr</item>
+    <item quantity="other">Oc\'h enporzhiañ %d restr</item>
+  </plurals>
   <string name="title_activity_contributions">Ma enporzhiadennoù</string>
   <string name="contribution_state_queued">Lakaet el lostenn</string>
   <string name="contribution_state_failed">C\'hwitet</string>
@@ -26,6 +31,7 @@
   <string name="contribution_state_starting">Oc\'h enporzhiañ</string>
   <string name="menu_from_gallery">Adalek ar skeudennaoueg</string>
   <string name="menu_from_camera">Tapout ul luc\'hskeudenn</string>
+  <string name="menu_nearby">Nepell</string>
   <string name="provider_contributions">Ma enporzhiadennoù</string>
   <string name="menu_share">Rannañ</string>
   <string name="menu_open_in_browser">Diskwel er meerder</string>
@@ -34,7 +40,7 @@
   <string name="login_failed_network">Ne c\'haller ket kevreañ - rouedad sac\'het</string>
   <string name="login_failed_username">Ne c\'haller ket kevreañ - Gwiriit hoc\'h anv implijer, mar plij</string>
   <string name="login_failed_password">Ne c\'haller ket kevreañ - Gwiriit ho ker tremen, mar plij</string>
-  <string name="login_failed_throttled" fuzzy="true">Klasket ho peus re. Esaeit en-dro en ur pennadig</string>
+  <string name="login_failed_throttled">Re a daolioù-esae. Klaskit en-dro a-benn ur pennadig amzer.</string>
   <string name="login_failed_blocked">Hon digarezit, prennet eo bet an implijer-mañ e Commons</string>
   <string name="login_failed_generic">C\'hwitet eo ar c\'hevreañ</string>
   <string name="share_upload_button">Pellgargañ</string>
@@ -65,12 +71,14 @@ Pouezit war ar c\'hemenn-mañ (pe distroit en a-raok) evit mont dreist ar bazenn
   <string name="preference_tracking">Danevelloù implij</string>
   <string name="preference_tracking_summary">Kas danevelloù implij deomp evit ma c\'hallfemp gwellaat an arload.</string>
   <string name="title_activity_settings">Arventennoù</string>
+  <string name="title_activity_signup">En em enskrivañ</string>
   <string name="menu_about">Diwar-benn</string>
-  <string name="about_license" fuzzy="true">Meziant frank a wirioù embannet dindan &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;an Aotre-implijout Apache s2&lt;/a&gt;</string>
-  <string name="about_improve" fuzzy="true">Mammenn war &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Drein war &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_license">Meziant frank a wirioù embannet dindan &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;an Aotre-implijout Apache v2&lt;/a&gt;. Merkoù kenwerzhel eus Diazezadur Wikimedia eo Wikimedia Commons hag e logoioù. Gallout a reont bezaén implijet gant aotre an Diazezadur. N\'omp nag aprouet gant Diazezadur Wiikimedia na staget outañ.</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Mammenn&lt;/a&gt; ha &lt;a href=\"https://commons-app.github.io/\"&gt;lec\'hienn&lt;/a&gt; war GitHub. Krouiñ ur &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;gemennadenn GitHub nevez&lt;/a&gt; evit kelaouiñ a-zivout un draen bennak pe bet kinnigoù.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Reolennoù prevezded&lt;/a&gt;</string>
   <string name="title_activity_about">Diwar-benn</string>
   <string name="menu_feedback">Kas ho soñj (dre bostel)</string>
+  <string name="no_email_client">N\'eus bet staliet arval postel ebet</string>
   <string name="provider_categories">Rummadoù bet implijet n\'eus ket pell</string>
   <string name="waiting_first_sync">O c\'hortoz ar sinkroneladur kentañ...</string>
   <string name="no_uploads_yet">N\'ho peus ket enporzhiet skeudennoù c\'hoazh.</string>
@@ -79,8 +87,11 @@ Pouezit war ar c\'hemenn-mañ (pe distroit en a-raok) evit mont dreist ar bazenn
   <string name="share_license_summary">Gant an aotre-implijout %1$s e vo ar skeudenn-mañ</string>
   <string name="menu_download">Pellgargañ</string>
   <string name="preference_license">Aotre-implijout</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Dereiñ-RannañAlikeu00A03.0</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0Dereiñu00A03.0</string>
+  <string name="use_previous">Ober gant an titl/deskrivadur kent</string>
+  <string name="allow_gps">Tapout al lec\'hiadur red ent emgefre</string>
+  <string name="allow_gps_summary">Kavout al lec\'hiadur red evit pourchas kinnigoù rummadoù ma n\'eo ket douarlec\'hiet ar skeudenn.</string>
+  <string name="license_name_cc_by_sa"> Deroadur-RannañHeñvel 3.0</string>
+  <string name="license_name_cc_by">Deroadur 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Aostria)</string>
@@ -94,6 +105,8 @@ Pouezit war ar c\'hemenn-mañ (pe distroit en a-raok) evit mont dreist ar bazenn
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polonia)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Roumania)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
+  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="license_name_own_pd">own-pd</string>
   <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
@@ -111,6 +124,20 @@ Pouezit war ar c\'hemenn-mañ (pe distroit en a-raok) evit mont dreist ar bazenn
   <string name="license_name_pd_ineligible">Domani foran (ne c\'hall ket kaout gwirioù-eilañ)</string>
   <string name="license_name_attribution">Deroadenn</string>
   <string name="license_name_gfdl">Aotre-implijout teuliaouiñ frank GNU</string>
+  <string name="tutorial_1_text">Herberc\'hiañ a ra Wikipedia Commons ar pep brasañ eus ar skeudennoù implijet e Wikipedia.</string>
+  <string name="tutorial_1_subtext">Sikour a ra ho skeudennoù da ledañ deskamant er bed a-bezh !</string>
+  <string name="tutorial_2_text">Enporzhiañ hepken skeudennoù bet tapet pe krouet ganeoc\'h penn-da-benn :</string>
+  <string name="tutorial_2_subtext">- Traoù natur (bleunioù, loened, menezioù)
+- Traezoù talvoudus (marc\'hoù-houarn, tiez-gar)
+- Tud vrudet (ho maer, atletourien olimpek hoc\'h eus kejet ganto)</string>
+  <string name="tutorial_3_text">ARABAT enporzhiañ :</string>
+  <string name="tutorial_3_subtext">- Emskeudennoù pe skeudennoù eus ho mignoned
+- Skeudennoù pellgarget ganeoc\'h diwar an Internet
+- Tapadennoù-skramm arloadoù prevez</string>
+  <string name="tutorial_4_text">Skouer un enporzhiadenn :</string>
+  <string name="tutorial_4_subtext">- Titl : Ti opera Sydney
+- Desskrivadur : Ti opera Sydney gwelet eus tu all ar bae
+- Rummadoù : Ti opera Sydney, Ti opera Sydney gwelet eus ar c\'hornôg, Gweloù a-bell eus ti opera Sydney</string>
   <string name="welcome_wikipedia_text">Kemerit perzh gant ho skeudennoù. Sikourit pennadoù Wikipedia da zont da vev !</string>
   <string name="welcome_wikipedia_subtext">Dont a ra skeudennoù Wikipedia eus Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Ho skeudennoù a sikour an dud da zeskiñ traoù dre ar bed a-bezh.</string>
@@ -123,4 +150,12 @@ Pouezit war ar c\'hemenn-mañ (pe distroit en a-raok) evit mont dreist ar bazenn
   <string name="detail_description_empty">Deskrivadur ebet</string>
   <string name="detail_license_empty">Aotre-implijout dizanv</string>
   <string name="menu_refresh">Freskaat</string>
+  <string name="storage_permission_rationale">Aotre rekis : lenn ur stokañ diavaez. Hep se, n\'hall ket an arload mont en-dro.</string>
+  <string name="location_permission_rationale">Aotre diret : kaout al lec\'hiadur red evit kinnig rummadoù</string>
+  <string name="ok">Mat eo</string>
+  <string name="title_activity_nearby">Lec\'hioù nes</string>
+  <string name="warning">Diwallit</string>
+  <string name="file_exists">Emañ ar restr-mañ war Commons c\'hoazh. Ha sur oc\'h e fell deoc\'h kenderc\'hel ?</string>
+  <string name="yes">Ya</string>
+  <string name="no">Ket</string>
 </resources>

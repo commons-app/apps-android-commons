@@ -107,4 +107,7 @@
   <string name="detail_description_empty">వివరణ లేదు</string>
   <string name="detail_license_empty">తెలియని లైసెన్సు</string>
   <string name="menu_refresh">తాజాకరించు</string>
+  <string name="warning">హెచ్చరిక</string>
+  <string name="yes">అవును</string>
+  <string name="no">కాదు</string>
 </resources>

@@ -5,10 +5,12 @@
   <string name="username">Uživatelské jméno</string>
   <string name="password">Heslo</string>
   <string name="login">Přihlásit se</string>
+  <string name="signup">Zaregistrovat se</string>
   <string name="logging_in_title">Přihlášení</string>
   <string name="logging_in_message">Čekejte prosím...</string>
   <string name="login_success">Přihlášení uspělo!</string>
   <string name="login_failed">Přihlášení se nezdařilo!</string>
+  <string name="upload_failed">Soubor nebyl nalezen. Prosím, zkuste jiný soubor.</string>
   <string name="authentication_failed">Ověření se nezdařilo!</string>
   <string name="uploading_started">Nahrávání začalo!</string>
   <string name="upload_completed_notification_title">%1$s nahráno!</string>
@@ -18,6 +20,10 @@
   <string name="upload_progress_notification_title_finishing">Dokončení nahrávání %1$s</string>
   <string name="upload_failed_notification_title">Načítání souboru %1$s se nezdařilo</string>
   <string name="upload_failed_notification_subtitle">Klepnutím zobrazíte</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">1 soubor se nahrává</item>
+    <item quantity="other">%d souborů se nahrává</item>
+  </plurals>
   <string name="title_activity_contributions">Moje obrázky</string>
   <string name="contribution_state_queued">Ve frontě</string>
   <string name="contribution_state_failed">Selhalo</string>
@@ -25,6 +31,7 @@
   <string name="contribution_state_starting">Nahrávání</string>
   <string name="menu_from_gallery">Z galerie</string>
   <string name="menu_from_camera">Vyfotit</string>
+  <string name="menu_nearby">Poblíž</string>
   <string name="provider_contributions">Moje obrázky</string>
   <string name="menu_share">Sdílet</string>
   <string name="menu_open_in_browser">Zobrazit v prohlížeči</string>
@@ -42,18 +49,33 @@
   <string name="menu_upload_single">Načíst</string>
   <string name="categories_search_text_hint">Hledání kategorií</string>
   <string name="menu_save_categories">Uložit</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">Žádné nahrané soubory</item>
+    <item quantity="one">1 nahraný soubor</item>
+    <item quantity="other">%d nahraných souborů</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Spouští se nahrávání 1 souboru</item>
+    <item quantity="other">Spouští se nahrávání %d souborů</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">1 nahrávání</item>
+    <item quantity="other">%d nahrávání</item>
+  </plurals>
   <string name="categories_not_found">Žádné kategorie neodpovídají „%1$s“</string>
   <string name="categories_skip_explanation">Přidejte kategorie, aby bylo vaše obrázky možno na Wikimedia Commons najít.</string>
   <string name="categories_activity_title">Kategorie</string>
   <string name="preference_tracking">Hlášení o používání</string>
   <string name="preference_tracking_summary">Odesílat hlášení o používání nadaci Wikimedia za účelem zlepšování aplikace</string>
   <string name="title_activity_settings">Nastavení</string>
+  <string name="title_activity_signup">Zaregistrovat se</string>
   <string name="menu_about">O aplikaci</string>
   <string name="about_license">Open Source software dostupný za podmínek &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Wikimedia Commons a logo Wikimedia Commons jsou ochranné známky Wikimedia Foundation a jsou použity se svolením Wikimedia Foundation. Nejsme podporováni Wikimedia Foundation ani nejsme její součástí.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Zdrojový kód&lt;/a&gt;, &lt;a href=\"https://commons-app.github.io/\"&gt;webová stránka&lt;/a&gt; a &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;hlášení chyb a sdílení nápadů&lt;/a&gt; na GitHubu.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Ochrana_osobních_údajů\"&gt;Ochrana osobních údajů&lt;/a&gt;</string>
   <string name="title_activity_about">O aplikaci</string>
   <string name="menu_feedback">Poslat názory (e-mailem)</string>
+  <string name="no_email_client">Není nainstalován žádný e-mailový klient</string>
   <string name="provider_categories">Nedávno použité kategorie</string>
   <string name="waiting_first_sync">Čeká se na první synchronizaci...</string>
   <string name="no_uploads_yet">Zatím jste nenahrál žádné fotky.</string>
@@ -62,7 +84,10 @@
   <string name="share_license_summary">Tento obrázek bude zveřejněn pod licencí %1$s</string>
   <string name="menu_download">Stáhnout</string>
   <string name="preference_license">Licence</string>
-  <string name="license_name_cc_by_sa">CCu00A0Uveďte autora-Zachovejte licenciu00A03.0</string>
+  <string name="use_previous">Použít předchozí název a popis</string>
+  <string name="allow_gps">Automaticky získat aktuální polohu</string>
+  <string name="allow_gps_summary">Nabídnout kategorie na základě aktuální polohy (pokud není obrázek opatřen souřadnicemi)</string>
+  <string name="license_name_cc_by_sa"> Uveďte autora-Zachovejte licenci 3.0</string>
   <string name="license_name_cc_by">CCu00A0Uveďte autorau00A03.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
@@ -77,6 +102,8 @@
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polsko)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Rumunsko)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
+  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="license_name_own_pd">vlastní-volné dílo</string>
   <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
@@ -94,6 +121,20 @@
   <string name="license_name_pd_ineligible">Volné dílo (nezpůsobilé pro autorská práva)</string>
   <string name="license_name_attribution">Uveďte autora</string>
   <string name="license_name_gfdl">GNU Free Documentation License</string>
+  <string name="tutorial_1_text">Wikimedia Commons je úložištěm většiny obrázků, které jsou používány na Wikipedii.</string>
+  <string name="tutorial_1_subtext">Vaše obrázky pomáhají vzdělávat lidi po celém světě</string>
+  <string name="tutorial_2_text">Prosím, nahrávejte obrázky které jste vyfotil nebo nahrál sám:</string>
+  <string name="tutorial_2_subtext">- Přírodní objekty (květiny, zvířata, hory)
+- Užitkové předměty (jízdní kola, vlakové nádraží)
+- Slavní lidé (starosta, olympjští sportovci)</string>
+  <string name="tutorial_3_text">Prosím NENAHRÁVEJTE:</string>
+  <string name="tutorial_3_subtext">- Selfie nebo obrázky vašich přátel
+- Obrázky stažené z Internetu
+- Screenshoty z proprietárních aplikací</string>
+  <string name="tutorial_4_text">Příklad nahraného souboru:</string>
+  <string name="tutorial_4_subtext">- Název: Opera v Sydney
+- Popis: Opra v Sydney, pohled přes záliv
+- Kategorie: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Přispějte svými obrázky. Pomozte oživit články na Wikipedii.</string>
   <string name="welcome_wikipedia_subtext">Obrázky na Wikipedii pochází 
 z Wikimedia Commons.</string>
@@ -107,4 +148,12 @@ z Wikimedia Commons.</string>
   <string name="detail_description_empty">Bez popisu</string>
   <string name="detail_license_empty">Neznámá licence</string>
   <string name="menu_refresh">Obnovit</string>
+  <string name="storage_permission_rationale">Požadováno oprávnění ke čtení externího úložiště. Aplikace bez toho nemůže pracovat.</string>
+  <string name="location_permission_rationale">Volitelně: Umožněte aplikaci, aby získávala aktuální polohu a nabízela na jejím základě kategorie</string>
+  <string name="ok">OK</string>
+  <string name="title_activity_nearby">Místa v okolí</string>
+  <string name="warning">Upozornění</string>
+  <string name="file_exists">Tento soubor již na Commons existuje. Jste si jist, že chcete pokračovat?</string>
+  <string name="yes">Ano</string>
+  <string name="no">Ne</string>
 </resources>
