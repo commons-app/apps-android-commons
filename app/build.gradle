@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply from: 'quality.gradle'
 
 dependencies {
     compile ('com.github.nicolas-raoul:Quadtree:211b6fe59ac48f') {
