@@ -1,5 +1,8 @@
 # Wikimedia Commons for Android
 
+##v1.44
+- Attempted fix for GPS suggestions issue
+
 ##v1.43
 - Added translations for multiple languages
 - Minor code optimization
