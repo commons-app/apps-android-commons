@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class LicenseList {
-    Map<String, fr.free.nrw.commons.License> licenses = new HashMap<String, fr.free.nrw.commons.License>();
+    Map<String, fr.free.nrw.commons.License> licenses = new HashMap<>();
     Resources res;
 
     private static String XMLNS_LICENSE = "https://www.mediawiki.org/wiki/Extension:UploadWizard/xmlns/licenses";

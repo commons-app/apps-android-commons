@@ -92,7 +92,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
 
             ArrayList<ApiResult> uploads = result.getNodes("/api/query/logevents/item");
             Log.d("Commons", uploads.size() + " results!");
-            ArrayList<ContentValues> imageValues = new ArrayList<ContentValues>();
+            ArrayList<ContentValues> imageValues = new ArrayList<>();
             for(ApiResult image: uploads) {
                 String filename = image.getString("@title");
                 if(fileExists(contentProviderClient, filename)) {

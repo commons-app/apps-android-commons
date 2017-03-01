@@ -21,7 +21,7 @@ public class ModifierSequence {
 
     public ModifierSequence(Uri mediaUri) {
         this.mediaUri = mediaUri;
-        modifiers = new ArrayList<PageModifier>();
+        modifiers = new ArrayList<>();
     }
 
     public ModifierSequence(Uri mediaUri, JSONObject data) {

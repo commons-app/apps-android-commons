@@ -122,7 +122,7 @@ public class CommonsApplication extends Application {
         if (maxMem < 48L * 1024L * 1024L) {
             // Cache only one bitmap if VM memory is too small (such as Nexus One);
             Log.d("Commons", "Skipping bitmap cache; max mem is: " + maxMem);
-            imageCache = new LruCache<String, Bitmap>(1);
+            imageCache = new LruCache<>(1);
         } else {
             int cacheSize = (int) (maxMem / (1024 * 8));
             Log.d("Commons", "Bitmap cache size " + cacheSize + " from max mem " + maxMem);

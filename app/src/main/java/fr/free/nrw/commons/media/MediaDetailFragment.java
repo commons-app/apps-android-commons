@@ -108,7 +108,7 @@ public class MediaDetailFragment extends Fragment {
             index = getArguments().getInt("index");
             initialListTop = 0;
         }
-        categoryNames = new ArrayList<String>();
+        categoryNames = new ArrayList<>();
         categoryNames.add(getString(R.string.detail_panel_cats_loading));
 
         final View view = inflater.inflate(R.layout.fragment_media_detail, container, false);

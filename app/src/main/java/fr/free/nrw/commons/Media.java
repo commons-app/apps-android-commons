@@ -27,11 +27,11 @@ public class Media implements Parcelable {
     };
 
     protected Media() {
-        this.categories = new ArrayList<String>();
-        this.descriptions = new HashMap<String, String>();
+        this.categories = new ArrayList<>();
+        this.descriptions = new HashMap<>();
     }
 
-    private HashMap<String, Object> tags = new HashMap<String, Object>();
+    private HashMap<String, Object> tags = new HashMap<>();
 
     public Object getTag(String key) {
         return tags.get(key);

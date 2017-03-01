@@ -45,7 +45,7 @@ public  class       ContributionsActivity
     private MediaDetailPagerFragment mediaDetails;
     private UploadService uploadService;
     private boolean isUploadServiceConnected;
-    private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<DataSetObserver>();
+    private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<>();
     private String CONTRIBUTION_SELECTION = "";
     /*
         This sorts in the following order:
