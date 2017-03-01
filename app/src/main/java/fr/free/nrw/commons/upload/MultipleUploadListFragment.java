@@ -11,6 +11,7 @@ import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -200,7 +201,7 @@ public class MultipleUploadListFragment extends Fragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, android.view.MenuInflater inflater) {
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         menu.clear();
         inflater.inflate(R.menu.fragment_multiple_upload_list, menu);

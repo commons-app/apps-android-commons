@@ -165,7 +165,7 @@ public class Contribution extends Media {
     public void save() {
         try {
             if(contentUri == null) {
-                contentUri = client.insert(fr.free.nrw.commons.contributions.ContributionsContentProvider.BASE_URI, this.toContentValues());
+                contentUri = client.insert(ContributionsContentProvider.BASE_URI, this.toContentValues());
             } else {
                 client.update(contentUri, toContentValues(), null, null);
             }
@@ -234,7 +234,7 @@ public class Contribution extends Media {
 
         //Check that cursor has a value to avoid CursorIndexOutOfBoundsException
         if (cursor.getCount() > 0) {
-            c.contentUri = fr.free.nrw.commons.contributions.ContributionsContentProvider.uriForId(cursor.getInt(0));
+            c.contentUri = ContributionsContentProvider.uriForId(cursor.getInt(0));
             c.filename = cursor.getString(1);
             c.localUri = TextUtils.isEmpty(cursor.getString(2)) ? null : Uri.parse(cursor.getString(2));
             c.imageUrl = cursor.getString(3);

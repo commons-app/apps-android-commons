@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class LicenseList {
-    Map<String, fr.free.nrw.commons.License> licenses = new HashMap<>();
+    Map<String, License> licenses = new HashMap<>();
     Resources res;
 
     private static String XMLNS_LICENSE = "https://www.mediawiki.org/wiki/Extension:UploadWizard/xmlns/licenses";
@@ -19,12 +19,12 @@ public class LicenseList {
     public LicenseList(Activity activity) {
         res = activity.getResources();
         XmlPullParser parser = res.getXml(R.xml.wikimedia_licenses);
-        while (fr.free.nrw.commons.Utils.xmlFastForward(parser, XMLNS_LICENSE, "license")) {
+        while (Utils.xmlFastForward(parser, XMLNS_LICENSE, "license")) {
             String id = parser.getAttributeValue(null, "id");
             String template = parser.getAttributeValue(null, "template");
             String url = parser.getAttributeValue(null, "url");
             String name = nameForTemplate(template);
-            fr.free.nrw.commons.License license = new fr.free.nrw.commons.License(id, template, url, name);
+            License license = new License(id, template, url, name);
             licenses.put(id, license);
         }
     }
@@ -33,18 +33,18 @@ public class LicenseList {
         return licenses.keySet();
     }
 
-    public Collection<fr.free.nrw.commons.License> values() {
+    public Collection<License> values() {
         return licenses.values();
     }
 
-    public fr.free.nrw.commons.License get(String key) {
+    public License get(String key) {
         return licenses.get(key);
     }
 
-    public fr.free.nrw.commons.License licenseForTemplate(String template) {
-        String ucTemplate = fr.free.nrw.commons.Utils.capitalize(template);
-        for (fr.free.nrw.commons.License license : values()) {
-            if (ucTemplate.equals(fr.free.nrw.commons.Utils.capitalize(license.getTemplate()))) {
+    public License licenseForTemplate(String template) {
+        String ucTemplate = Utils.capitalize(template);
+        for (License license : values()) {
+            if (ucTemplate.equals(Utils.capitalize(license.getTemplate()))) {
                 return license;
             }
         }
