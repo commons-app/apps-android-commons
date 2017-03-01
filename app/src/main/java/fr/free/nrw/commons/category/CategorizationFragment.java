@@ -52,8 +52,8 @@ import fr.free.nrw.commons.upload.MwVolleyApi;
  * Displays the category suggestion and selection screen. Category search is initiated here.
  */
 public class CategorizationFragment extends Fragment {
-    public static interface OnCategoriesSaveHandler {
-        public void onCategoriesSave(ArrayList<String> categories);
+    public interface OnCategoriesSaveHandler {
+        void onCategoriesSave(ArrayList<String> categories);
     }
 
     ListView categoriesList;
