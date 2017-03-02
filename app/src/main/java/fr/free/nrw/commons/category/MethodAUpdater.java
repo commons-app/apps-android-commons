@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.category;
 
 import android.os.AsyncTask;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
