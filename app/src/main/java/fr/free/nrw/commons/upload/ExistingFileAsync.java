@@ -24,7 +24,7 @@ import fr.free.nrw.commons.contributions.ContributionsActivity;
  */
 public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
 
-    private static final String TAG = fr.free.nrw.commons.upload.ExistingFileAsync.class.getName();
+    private static final String TAG = ExistingFileAsync.class.getName();
 
     private String fileSHA1;
     private Context context;

@@ -71,7 +71,7 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
                     }
                 }, 5);
             }
-            return fr.free.nrw.commons.media.MediaDetailFragment.forMedia(i, editable);
+            return MediaDetailFragment.forMedia(i, editable);
         }
 
         @Override

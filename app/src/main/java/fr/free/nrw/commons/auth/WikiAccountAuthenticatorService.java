@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.auth;
 
+import android.accounts.AccountManager;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
@@ -10,7 +11,7 @@ public class WikiAccountAuthenticatorService extends Service{
     
     @Override
     public IBinder onBind(Intent intent) {
-        if (!intent.getAction().equals(android.accounts.AccountManager.ACTION_AUTHENTICATOR_INTENT)) {
+        if (!intent.getAction().equals(AccountManager.ACTION_AUTHENTICATOR_INTENT)) {
            return null; 
         }
 
