@@ -76,12 +76,12 @@ public class ContributionController {
                 Uri imageData = data.getData();
                 shareIntent.setType(activity.getContentResolver().getType(imageData));
                 shareIntent.putExtra(Intent.EXTRA_STREAM, imageData);
-                shareIntent.putExtra(UploadService.EXTRA_SOURCE, fr.free.nrw.commons.contributions.Contribution.SOURCE_GALLERY);
+                shareIntent.putExtra(UploadService.EXTRA_SOURCE, Contribution.SOURCE_GALLERY);
                 break;
             case SELECT_FROM_CAMERA:
                 shareIntent.setType("image/jpeg"); //FIXME: Find out appropriate mime type
                 shareIntent.putExtra(Intent.EXTRA_STREAM, lastGeneratedCaptureURI);
-                shareIntent.putExtra(UploadService.EXTRA_SOURCE, fr.free.nrw.commons.contributions.Contribution.SOURCE_CAMERA);
+                shareIntent.putExtra(UploadService.EXTRA_SOURCE, Contribution.SOURCE_CAMERA);
                 break;
         }
         Log.i("Image", "Image selected");

@@ -2,7 +2,6 @@ package fr.free.nrw.commons.category;
 
 import android.app.Activity;
 import android.content.ContentProviderClient;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -21,11 +20,11 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -39,7 +38,6 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -52,8 +50,8 @@ import fr.free.nrw.commons.upload.MwVolleyApi;
  * Displays the category suggestion and selection screen. Category search is initiated here.
  */
 public class CategorizationFragment extends Fragment {
-    public static interface OnCategoriesSaveHandler {
-        public void onCategoriesSave(ArrayList<String> categories);
+    public interface OnCategoriesSaveHandler {
+        void onCategoriesSave(ArrayList<String> categories);
     }
 
     ListView categoriesList;
@@ -69,14 +67,14 @@ public class CategorizationFragment extends Fragment {
 
     protected HashMap<String, ArrayList<String>> categoriesCache;
 
-    private ArrayList<String> selectedCategories = new ArrayList<String>();
+    private ArrayList<String> selectedCategories = new ArrayList<>();
 
     // LHS guarantees ordered insertions, allowing for prioritized method A results
-    private final Set<String> results = new LinkedHashSet<String>();
+    private final Set<String> results = new LinkedHashSet<>();
     PrefixUpdater prefixUpdaterSub;
     MethodAUpdater methodAUpdaterSub;
 
-    private final ArrayList<String> titleCatItems = new ArrayList<String>();
+    private final ArrayList<String> titleCatItems = new ArrayList<>();
     final CountDownLatch mergeLatch = new CountDownLatch(1);
 
     private ContentProviderClient client;
@@ -164,7 +162,7 @@ public class CategorizationFragment extends Fragment {
      * @return a list containing recent categories
      */
     protected ArrayList<String> recentCatQuery() {
-        ArrayList<String> items = new ArrayList<String>();
+        ArrayList<String> items = new ArrayList<>();
 
         try {
             Cursor cursor = client.query(
@@ -192,16 +190,16 @@ public class CategorizationFragment extends Fragment {
      */
     protected ArrayList<String> mergeItems() {
 
-        Set<String> mergedItems = new LinkedHashSet<String>();
+        Set<String> mergedItems = new LinkedHashSet<>();
 
         Log.d(TAG, "Calling APIs for GPS cats, title cats and recent cats...");
 
-        List<String> gpsItems = new ArrayList<String>();
+        List<String> gpsItems = new ArrayList<>();
         if (MwVolleyApi.GpsCatExists.getGpsCatExists()) {
             gpsItems.addAll(MwVolleyApi.getGpsCat());
         }
-        List<String> titleItems = new ArrayList<String>(titleCatQuery());
-        List<String> recentItems = new ArrayList<String>(recentCatQuery());
+        List<String> titleItems = new ArrayList<>(titleCatQuery());
+        List<String> recentItems = new ArrayList<>(recentCatQuery());
 
         //Await results of titleItems, which is likely to come in last
         try {
@@ -219,7 +217,7 @@ public class CategorizationFragment extends Fragment {
         Log.d(TAG, "Adding recent items: " + recentItems);
         
         //Needs to be an ArrayList and not a List unless we want to modify a big portion of preexisting code
-        ArrayList<String> mergedItemsList = new ArrayList<String>(mergedItems);
+        ArrayList<String> mergedItemsList = new ArrayList<>(mergedItems);
 
         Log.d(TAG, "Merged item list: " + mergedItemsList);
         return mergedItemsList;
@@ -233,8 +231,8 @@ public class CategorizationFragment extends Fragment {
     protected void setCatsAfterAsync(ArrayList<String> categories, String filter) {
 
         if (getActivity() != null) {
-            ArrayList<CategoryItem> items = new ArrayList<CategoryItem>();
-            HashSet<String> existingKeys = new HashSet<String>();
+            ArrayList<CategoryItem> items = new ArrayList<>();
+            HashSet<String> existingKeys = new HashSet<>();
             for (CategoryItem item : categoriesAdapter.getItems()) {
                 if (item.selected) {
                     items.add(item);
@@ -282,7 +280,7 @@ public class CategorizationFragment extends Fragment {
         prefixUpdaterSub = new PrefixUpdater(this) {
             @Override
             protected ArrayList<String> doInBackground(Void... voids) {
-                ArrayList<String> result = new ArrayList<String>();
+                ArrayList<String> result = new ArrayList<>();
                 try {
                     result = super.doInBackground();
                     latch.await();
@@ -302,7 +300,7 @@ public class CategorizationFragment extends Fragment {
                 Log.d(TAG, "Prefix result: " + result);
 
                 String filter = categoriesFilter.getText().toString();
-                ArrayList<String> resultsList = new ArrayList<String>(results);
+                ArrayList<String> resultsList = new ArrayList<>(results);
                 categoriesCache.put(filter, resultsList);
                 Log.d(TAG, "Final results List: " + resultsList);
 
@@ -424,8 +422,8 @@ public class CategorizationFragment extends Fragment {
 
         ArrayList<CategoryItem> items;
         if(savedInstanceState == null) {
-            items = new ArrayList<CategoryItem>();
-            categoriesCache = new HashMap<String, ArrayList<String>>();
+            items = new ArrayList<>();
+            categoriesCache = new HashMap<>();
         } else {
             items = savedInstanceState.getParcelableArrayList("currentCategories");
             categoriesCache = (HashMap<String, ArrayList<String>>) savedInstanceState.getSerializable("categoriesCache");
@@ -469,7 +467,7 @@ public class CategorizationFragment extends Fragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, android.view.MenuInflater inflater) {
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
         inflater.inflate(R.menu.fragment_categorization, menu);
     }

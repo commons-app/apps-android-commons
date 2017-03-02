@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.category;
 
 import android.os.AsyncTask;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
@@ -83,7 +82,7 @@ public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
         //otherwise if user has typed something in that isn't in cache, search API for matching categories
         MWApi api = CommonsApplication.createMWApi();
         ApiResult result;
-        ArrayList<String> categories = new ArrayList<String>();
+        ArrayList<String> categories = new ArrayList<>();
 
         //URL https://commons.wikimedia.org/w/api.php?action=query&format=xml&list=search&srwhat=text&srenablerewrites=1&srnamespace=14&srlimit=10&srsearch=
         try {
@@ -110,7 +109,7 @@ public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
         }
 
         Log.d(TAG, "Found categories from Method A search, waiting for filter");
-        ArrayList<String> filteredItems = new ArrayList<String>(filterYears(categories));
+        ArrayList<String> filteredItems = new ArrayList<>(filterYears(categories));
         return filteredItems;
     }
 }

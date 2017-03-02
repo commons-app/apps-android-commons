@@ -17,9 +17,6 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
@@ -34,12 +31,13 @@ import java.util.TimeZone;
 import java.util.concurrent.Executor;
 import java.util.regex.Pattern;
 
+import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.TransformerFactoryConfigurationError;
-
-import fr.free.nrw.commons.upload.ShareActivity;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 public class Utils {
 
@@ -104,7 +102,7 @@ public class Utils {
     }
 
     public static String getStringFromDOM(Node dom) {
-        javax.xml.transform.Transformer transformer = null;
+        Transformer transformer = null;
         try {
             transformer = TransformerFactory.newInstance().newTransformer();
         } catch (TransformerConfigurationException e) {
@@ -116,8 +114,8 @@ public class Utils {
         }
 
         StringWriter outputStream = new StringWriter();
-        javax.xml.transform.dom.DOMSource domSource = new javax.xml.transform.dom.DOMSource(dom);
-        javax.xml.transform.stream.StreamResult strResult = new javax.xml.transform.stream.StreamResult(outputStream);
+        DOMSource domSource = new DOMSource(dom);
+        StreamResult strResult = new StreamResult(outputStream);
 
         try {
             transformer.transform(domSource, strResult);

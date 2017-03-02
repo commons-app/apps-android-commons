@@ -32,7 +32,7 @@ public class CategoryImagesLoader extends AsyncTaskLoader<List<Media>>{
 
     @Override
     public List<Media> loadInBackground() {
-        ArrayList<Media> mediaList = new ArrayList<Media>();
+        ArrayList<Media> mediaList = new ArrayList<>();
         ApiResult result;
         try {
             result = app.getApi().action("query")

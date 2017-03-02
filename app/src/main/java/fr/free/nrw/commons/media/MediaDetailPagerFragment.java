@@ -46,11 +46,11 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
     }
 
     public interface MediaDetailProvider {
-        public Media getMediaAtPosition(int i);
-        public int getTotalMediaCount();
-        public void notifyDatasetChanged();
-        public void registerDataSetObserver(DataSetObserver observer);
-        public void unregisterDataSetObserver(DataSetObserver observer);
+        Media getMediaAtPosition(int i);
+        int getTotalMediaCount();
+        void notifyDatasetChanged();
+        void registerDataSetObserver(DataSetObserver observer);
+        void unregisterDataSetObserver(DataSetObserver observer);
     }
 
     //FragmentStatePagerAdapter allows user to swipe across collection of images (no. of images undetermined)
@@ -71,7 +71,7 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
                     }
                 }, 5);
             }
-            return fr.free.nrw.commons.media.MediaDetailFragment.forMedia(i, editable);
+            return MediaDetailFragment.forMedia(i, editable);
         }
 
         @Override

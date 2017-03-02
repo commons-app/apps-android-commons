@@ -42,7 +42,7 @@ public class MwVolleyApi {
 
     public MwVolleyApi(Context context) {
         this.context = context;
-        categorySet = new HashSet<String>();
+        categorySet = new HashSet<>();
     }
 
     public static List<String> getGpsCat() {
@@ -50,7 +50,7 @@ public class MwVolleyApi {
     }
 
     public static void setGpsCat(List cachedList) {
-        categoryList = new ArrayList<String>();
+        categoryList = new ArrayList<>();
         categoryList.addAll(cachedList);
         Log.d(TAG, "Setting GPS cats from cache: " + categoryList.toString());
     }
@@ -236,7 +236,7 @@ public class MwVolleyApi {
                 }
             }
 
-            categoryList = new ArrayList<String>(categorySet);
+            categoryList = new ArrayList<>(categorySet);
             builder.replace(builder.length() - 1, builder.length(), "");
             return builder.toString();
         }

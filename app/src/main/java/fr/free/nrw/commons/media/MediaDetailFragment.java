@@ -39,7 +39,7 @@ public class MediaDetailFragment extends Fragment {
 
     private boolean editable;
     private DisplayImageOptions displayOptions;
-    private fr.free.nrw.commons.media.MediaDetailPagerFragment.MediaDetailProvider detailProvider;
+    private MediaDetailPagerFragment.MediaDetailProvider detailProvider;
     private int index;
 
     public static MediaDetailFragment forMedia(int index) {
@@ -64,7 +64,7 @@ public class MediaDetailFragment extends Fragment {
     //private EditText title;
     private ProgressBar loadingProgress;
     private ImageView loadingFailed;
-    private fr.free.nrw.commons.media.MediaDetailSpacer spacer;
+    private MediaDetailSpacer spacer;
     private int initialListTop = 0;
 
     private TextView title;
@@ -97,7 +97,7 @@ public class MediaDetailFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        detailProvider = (fr.free.nrw.commons.media.MediaDetailPagerFragment.MediaDetailProvider)getActivity();
+        detailProvider = (MediaDetailPagerFragment.MediaDetailProvider)getActivity();
 
         if(savedInstanceState != null) {
             editable = savedInstanceState.getBoolean("editable");
@@ -108,7 +108,7 @@ public class MediaDetailFragment extends Fragment {
             index = getArguments().getInt("index");
             initialListTop = 0;
         }
-        categoryNames = new ArrayList<String>();
+        categoryNames = new ArrayList<>();
         categoryNames.add(getString(R.string.detail_panel_cats_loading));
 
         final View view = inflater.inflate(R.layout.fragment_media_detail, container, false);
@@ -119,7 +119,7 @@ public class MediaDetailFragment extends Fragment {
         scrollView = (ScrollView) view.findViewById(R.id.mediaDetailScrollView);
 
         // Detail consists of a list view with main pane in header view, plus category list.
-        spacer = (fr.free.nrw.commons.media.MediaDetailSpacer) view.findViewById(R.id.mediaDetailSpacer);
+        spacer = (MediaDetailSpacer) view.findViewById(R.id.mediaDetailSpacer);
         title = (TextView) view.findViewById(R.id.mediaDetailTitle);
         desc = (TextView) view.findViewById(R.id.mediaDetailDesc);
         license = (TextView) view.findViewById(R.id.mediaDetailLicense);
