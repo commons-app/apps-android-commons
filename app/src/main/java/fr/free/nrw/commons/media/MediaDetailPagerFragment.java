@@ -46,11 +46,11 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
     }
 
     public interface MediaDetailProvider {
-        public Media getMediaAtPosition(int i);
-        public int getTotalMediaCount();
-        public void notifyDatasetChanged();
-        public void registerDataSetObserver(DataSetObserver observer);
-        public void unregisterDataSetObserver(DataSetObserver observer);
+        Media getMediaAtPosition(int i);
+        int getTotalMediaCount();
+        void notifyDatasetChanged();
+        void registerDataSetObserver(DataSetObserver observer);
+        void unregisterDataSetObserver(DataSetObserver observer);
     }
 
     //FragmentStatePagerAdapter allows user to swipe across collection of images (no. of images undetermined)

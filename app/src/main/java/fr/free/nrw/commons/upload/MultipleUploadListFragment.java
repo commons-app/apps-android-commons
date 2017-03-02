@@ -36,7 +36,7 @@ import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 public class MultipleUploadListFragment extends Fragment {
 
     public interface OnMultipleUploadInitiatedHandler {
-        public void OnMultipleUploadInitiated();
+        void OnMultipleUploadInitiated();
     }
 
     private GridView photosGrid;
