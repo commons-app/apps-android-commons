@@ -46,8 +46,8 @@ public class MediaDataExtractor {
      */
     public MediaDataExtractor(String filename, LicenseList licenseList) {
         this.filename = filename;
-        categories = new ArrayList<String>();
-        descriptions = new HashMap<String, String>();
+        categories = new ArrayList<>();
+        descriptions = new HashMap<>();
         fetched = false;
         processed = false;
         this.licenseList = licenseList;
@@ -251,7 +251,7 @@ public class MediaDataExtractor {
     // Texts are wrapped in things like {{en|foo} or {{en|1=foo bar}}.
     // Text outside those wrappers is stuffed into a 'default' faux language key if present.
     private Map<String, String> getMultilingualText(Node parentNode) throws IOException {
-        Map<String, String> texts = new HashMap<String, String>();
+        Map<String, String> texts = new HashMap<>();
         StringBuilder localText = new StringBuilder();
 
         NodeList nodes = parentNode.getChildNodes();

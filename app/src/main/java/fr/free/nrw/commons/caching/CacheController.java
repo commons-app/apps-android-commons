@@ -33,7 +33,7 @@ public class CacheController {
     }
 
     public void cacheCategory() {
-        List<String> pointCatList = new ArrayList<String>();
+        List<String> pointCatList = new ArrayList<>();
         if (MwVolleyApi.GpsCatExists.getGpsCatExists() == true) {
              pointCatList.addAll(MwVolleyApi.getGpsCat());
             Log.d(TAG, "Categories being cached: " + pointCatList);
@@ -47,7 +47,7 @@ public class CacheController {
         //Convert decLatitude and decLongitude to a coordinate offset range
         convertCoordRange();
         pointsFound = quadTree.searchWithin(xMinus, yMinus, xPlus, yPlus);
-        List<String> displayCatList = new ArrayList<String>();
+        List<String> displayCatList = new ArrayList<>();
         Log.d(TAG, "Points found in quadtree: " + Arrays.asList(pointsFound));
 
         if (pointsFound.length != 0) {

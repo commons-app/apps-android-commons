@@ -249,7 +249,7 @@ public  class       MultipleShareActivity
 
         if(intent.getAction().equals(Intent.ACTION_SEND_MULTIPLE)) {
             if(photosList == null) {
-                photosList = new ArrayList<Contribution>();
+                photosList = new ArrayList<>();
                 ArrayList<Uri> urisList = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
                 for(int i=0; i < urisList.size(); i++) {
                     Contribution up = new Contribution();

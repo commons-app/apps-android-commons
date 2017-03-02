@@ -82,17 +82,17 @@ public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
     protected ArrayList<String> doInBackground(Void... voids) {
         //If user hasn't typed anything in yet, get GPS and recent items
         if(TextUtils.isEmpty(filter)) {
-            ArrayList<String> mergedItems = new ArrayList<String>(catFragment.mergeItems());
+            ArrayList<String> mergedItems = new ArrayList<>(catFragment.mergeItems());
             Log.d(TAG, "Merged items, waiting for filter");
-            ArrayList<String> filteredItems = new ArrayList<String>(filterYears(mergedItems));
+            ArrayList<String> filteredItems = new ArrayList<>(filterYears(mergedItems));
             return filteredItems;
         }
 
         //if user types in something that is in cache, return cached category
         if(catFragment.categoriesCache.containsKey(filter)) {
-            ArrayList<String> cachedItems = new ArrayList<String>(catFragment.categoriesCache.get(filter));
+            ArrayList<String> cachedItems = new ArrayList<>(catFragment.categoriesCache.get(filter));
             Log.d(TAG, "Found cache items, waiting for filter");
-            ArrayList<String> filteredItems = new ArrayList<String>(filterYears(cachedItems));
+            ArrayList<String> filteredItems = new ArrayList<>(filterYears(cachedItems));
             return filteredItems;
         }
 
@@ -100,7 +100,7 @@ public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
         //URL: https://commons.wikimedia.org/w/api.php?action=query&list=allcategories&acprefix=filter&aclimit=25
         MWApi api = CommonsApplication.createMWApi();
         ApiResult result;
-        ArrayList<String> categories = new ArrayList<String>();
+        ArrayList<String> categories = new ArrayList<>();
         try {
             result = api.action("query")
                     .param("list", "allcategories")
@@ -120,7 +120,7 @@ public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
         }
 
         Log.d(TAG, "Found categories from Prefix search, waiting for filter");
-        ArrayList<String> filteredItems = new ArrayList<String>(filterYears(categories));
+        ArrayList<String> filteredItems = new ArrayList<>(filterYears(categories));
         return filteredItems;
     }
 }
