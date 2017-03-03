@@ -12,21 +12,16 @@
         android:orientation="vertical"
         >
 
-        <ImageView
-            android:id="@+id/commonsLogo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/commons_logo_large"
-            />
-
         <TextView
             android:id="@+id/loginSubtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:text="@string/app_name"
             android:textAppearance="?android:attr/textAppearanceMedium"
+            android:drawableTop="@drawable/commons_logo_large"
+            android:gravity="center_horizontal"
+            android:drawablePadding="8dp"
             />
 
         <LinearLayout
