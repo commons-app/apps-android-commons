@@ -19,4 +19,6 @@
 
     <style name="NotificationProgress" parent="AppTheme" />
 
+    <style name="ProgressBar" parent="Widget.AppCompat.ProgressBar.Horizontal" />
+
 </resources>
