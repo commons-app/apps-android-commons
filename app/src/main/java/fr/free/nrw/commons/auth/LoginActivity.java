@@ -94,6 +94,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
                 Intent intent = new Intent(context, ContributionsActivity.class);
                 startActivity(intent);
+                finish();
 
             } else {
                 int response;
