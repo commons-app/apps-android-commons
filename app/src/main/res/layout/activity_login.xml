@@ -1,4 +1,5 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
@@ -42,25 +43,42 @@
                 android:layout_height="48dp"
                 />
 
-            <EditText
-                android:id="@+id/loginUsername"
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/username"
-                android:inputType="textNoSuggestions"
-                android:imeOptions="flagNoExtractUi"
                 >
-                <requestFocus />
-            </EditText>
 
-            <EditText
-                android:id="@+id/loginPassword"
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/loginUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/username"
+                    android:imeOptions="flagNoExtractUi"
+                    android:inputType="textNoSuggestions"
+                    >
+
+                    <requestFocus/>
+
+                </android.support.design.widget.TextInputEditText>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/password"
-                android:inputType="textPassword"
-                android:imeOptions="flagNoExtractUi"
-                />
+                app:passwordToggleEnabled="false"
+                >
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/loginPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/password"
+                    android:imeOptions="flagNoExtractUi"
+                    android:inputType="textPassword"
+                    />
+
+            </android.support.design.widget.TextInputLayout>
 
             <Button
                 android:id="@+id/loginButton"
