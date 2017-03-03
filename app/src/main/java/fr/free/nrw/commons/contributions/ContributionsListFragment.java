@@ -172,7 +172,7 @@ public class ContributionsListFragment extends Fragment {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
             // 1 = Storage allowed when gallery selected
             case 1: {

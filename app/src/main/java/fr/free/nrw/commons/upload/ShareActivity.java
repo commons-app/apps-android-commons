@@ -324,7 +324,7 @@ public  class       ShareActivity
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
+                                           String[] permissions, int[] grantResults) {
         switch (requestCode) {
             // 1 = Storage (from snackbar)
             case 1: {
