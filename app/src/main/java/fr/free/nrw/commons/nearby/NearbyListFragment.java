@@ -199,7 +199,7 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             // Get the data item for this position
-            Place place = (Place) getItem(position);
+            Place place = getItem(position);
             Log.d(TAG, "Place " + place.name);
 
             // Check if an existing view is being reused, otherwise inflate the view

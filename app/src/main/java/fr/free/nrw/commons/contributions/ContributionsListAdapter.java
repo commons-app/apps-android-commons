@@ -48,7 +48,7 @@ class ContributionsListAdapter extends CursorAdapter {
 
         if(views.url == null || !views.url.equals(actualUrl)) {
             if(actualUrl.startsWith("http")) {
-                MediaWikiImageView mwImageView = (MediaWikiImageView)views.imageView;
+                MediaWikiImageView mwImageView = views.imageView;
                 mwImageView.setMedia(contribution, ((CommonsApplication) activity.getApplicationContext()).getImageLoader());
                 // FIXME: For transparent images
             } else {
@@ -65,7 +65,7 @@ class ContributionsListAdapter extends CursorAdapter {
                     @Override
                     public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
                         super.onLoadingFailed(imageUri, view, failReason);
-                        MediaWikiImageView mwImageView = (MediaWikiImageView)views.imageView;
+                        MediaWikiImageView mwImageView = views.imageView;
                         mwImageView.setMedia(contribution, ((CommonsApplication) activity.getApplicationContext()).getImageLoader());
                     }
                 });

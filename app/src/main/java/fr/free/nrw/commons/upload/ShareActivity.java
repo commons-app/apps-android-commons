@@ -229,7 +229,7 @@ public  class       ShareActivity
         Intent intent = getIntent();
 
         if(intent.getAction().equals(Intent.ACTION_SEND)) {
-            mediaUri = (Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM);
+            mediaUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
             if(intent.hasExtra(UploadService.EXTRA_SOURCE)) {
                 source = intent.getStringExtra(UploadService.EXTRA_SOURCE);
             } else {

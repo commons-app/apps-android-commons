@@ -85,7 +85,7 @@ public class Contribution extends Media {
 
     public Contribution(Parcel in) {
         super(in);
-        contentUri = (Uri)in.readParcelable(Uri.class.getClassLoader());
+        contentUri = in.readParcelable(Uri.class.getClassLoader());
         source = in.readString();
         timestamp = (Date) in.readSerializable();
         state = in.readInt();
