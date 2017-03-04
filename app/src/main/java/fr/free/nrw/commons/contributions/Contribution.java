@@ -369,7 +369,7 @@ public class Contribution extends Media {
                 db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN height INTEGER;");
                 db.execSQL("UPDATE " + TABLE_NAME + " SET height = 0");
                 db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN license STRING;");
-                db.execSQL("UPDATE " + TABLE_NAME + " SET license='" + Prefs.Licenses.CC_BY_SA + "';");
+                db.execSQL("UPDATE " + TABLE_NAME + " SET license='" + Prefs.Licenses.CC_BY_SA_3 + "';");
                 from++;
                 onUpdate(db, from, to);
                 return;
