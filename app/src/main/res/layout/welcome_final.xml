@@ -7,27 +7,33 @@
     android:gravity="center_vertical"
     >
 
-    <!-- Sorry about the hardcoded sizes here. They're image-related. -->
-    <LinearLayout
+    <RelativeLayout
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        android:gravity="center_horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         >
 
         <ImageView
+            android:src="@drawable/welcome_wikipedia"
+            android:id="@+id/welcome_wikipedia"
             android:layout_width="150dp"
             android:layout_height="180dp"
-            android:src="@drawable/welcome_wikipedia"
+            android:layout_marginLeft="30dp"
             />
 
         <ImageView
+            android:src="@drawable/welcome_copyright"
             android:layout_width="160dp"
             android:layout_height="120dp"
             android:layout_gravity="center"
-            android:src="@drawable/welcome_copyright"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/welcome_wikipedia"
             />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <TextView
         android:layout_width="wrap_content"
