@@ -93,7 +93,7 @@ public class UploadController {
             contribution.setDescription("");
         }
 
-        String license = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA);
+        String license = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
         contribution.setLicense(license);
 
         //FIXME: Add permission request here. Only executeAsyncTask if permission has been granted
