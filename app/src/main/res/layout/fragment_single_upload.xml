@@ -32,6 +32,13 @@
         android:imeOptions="flagNoExtractUi"
         />
 
+    <Spinner
+        android:id="@+id/licenseSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+    </Spinner>
+
     <Button
         android:text="@string/use_previous"
         android:background="#90000000"
