@@ -8,95 +8,76 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
+        android:layout_margin="16dp"
         android:gravity="center"
         android:orientation="vertical"
         >
-
-        <ImageView
-            android:id="@+id/commonsLogo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/commons_logo_large"
-            />
 
         <TextView
             android:id="@+id/loginSubtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginBottom="48dp"
+            android:drawablePadding="8dp"
+            android:drawableTop="@drawable/commons_logo_large"
+            android:gravity="center_horizontal"
             android:text="@string/app_name"
             android:textAppearance="?android:attr/textAppearanceMedium"
             />
 
-        <LinearLayout
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="16dip"
-            android:gravity="center"
-            android:orientation="vertical"
+            android:layout_height="wrap_content"
             >
 
-            <FrameLayout
-                android:id="@+id/loginErrors"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                />
-
-            <android.support.design.widget.TextInputLayout
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/loginUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="@string/username"
+                android:imeOptions="flagNoExtractUi"
+                android:inputType="textNoSuggestions"
                 >
 
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/loginUsername"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/username"
-                    android:imeOptions="flagNoExtractUi"
-                    android:inputType="textNoSuggestions"
-                    >
+                <requestFocus/>
 
-                    <requestFocus/>
+            </android.support.design.widget.TextInputEditText>
 
-                </android.support.design.widget.TextInputEditText>
+        </android.support.design.widget.TextInputLayout>
 
-            </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="false"
+            >
 
-            <android.support.design.widget.TextInputLayout
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/loginPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:passwordToggleEnabled="false"
-                >
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/loginPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/password"
-                    android:imeOptions="flagNoExtractUi"
-                    android:inputType="textPassword"
-                    />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <Button
-                android:id="@+id/loginButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:text="@string/login"
+                android:hint="@string/password"
+                android:imeOptions="flagNoExtractUi"
+                android:inputType="textPassword"
                 />
 
-            <Button
-                android:id="@+id/signupButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/signup"
-                android:layout_gravity="center_horizontal"
-                android:onClick="signUp"
-                />
+        </android.support.design.widget.TextInputLayout>
 
-        </LinearLayout>
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:text="@string/login"
+            />
+
+        <Button
+            android:id="@+id/signupButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:onClick="signUp"
+            android:text="@string/signup"
+            />
+
     </LinearLayout>
 </ScrollView>
