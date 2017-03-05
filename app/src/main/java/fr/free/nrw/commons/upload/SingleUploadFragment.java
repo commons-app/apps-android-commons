@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.ListPreference;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -19,9 +20,15 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import fr.free.nrw.commons.Prefs;
 import fr.free.nrw.commons.R;
@@ -36,6 +43,7 @@ public class SingleUploadFragment extends Fragment {
     private EditText titleEdit;
     private EditText descEdit;
     private TextView licenseSummaryView;
+    private Spinner licenseSpinner;
 
     private OnUploadActionInitiated uploadActionInitiatedHandler;
 
@@ -79,6 +87,57 @@ public class SingleUploadFragment extends Fragment {
         titleEdit = (EditText)rootView.findViewById(R.id.titleEdit);
         descEdit = (EditText)rootView.findViewById(R.id.descEdit);
         Button titleDescButton = (Button) rootView.findViewById(R.id.titleDescButton);
+        licenseSpinner = (Spinner) rootView.findViewById(R.id.licenseSpinner);
+        licenseSummaryView = (TextView)rootView.findViewById(R.id.share_license_summary);
+
+        ArrayList<String> licenseItems = new ArrayList<>();
+        licenseItems.add(getString(R.string.license_name_cc0));
+        licenseItems.add(getString(R.string.license_name_cc_by));
+        licenseItems.add(getString(R.string.license_name_cc_by_sa));
+        licenseItems.add(getString(R.string.license_name_cc_by_four));
+        licenseItems.add(getString(R.string.license_name_cc_by_sa_four));
+
+        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        final String license = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
+
+        Log.d("Single Upload fragment", license);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, licenseItems);
+        licenseSpinner.setAdapter(adapter);
+
+        int position = licenseItems.indexOf(getString(Utils.licenseNameFor(license)));
+        Log.d("Single Upload fragment", "Position:"+position+" "+getString(Utils.licenseNameFor(license)));
+        licenseSpinner.setSelection(position);
+
+        licenseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String licenseName = parent.getItemAtPosition(position).toString();
+
+                String license = Prefs.Licenses.CC_BY_SA_3; // default value
+                if(getString(R.string.license_name_cc0).equals(licenseName)) {
+                    license = Prefs.Licenses.CC0;
+                } else if(getString(R.string.license_name_cc_by).equals(licenseName)) {
+                    license = Prefs.Licenses.CC_BY_3;
+                } else if(getString(R.string.license_name_cc_by_sa).equals(licenseName)) {
+                    license = Prefs.Licenses.CC_BY_SA_3;
+                } else if(getString(R.string.license_name_cc_by_four).equals(licenseName)) {
+                    license = Prefs.Licenses.CC_BY_4;
+                } else if(getString(R.string.license_name_cc_by_sa_four).equals(licenseName)) {
+                    license = Prefs.Licenses.CC_BY_SA_4;
+                }
+
+                setLicenseSummary(license);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString(Prefs.DEFAULT_LICENSE, license);
+                editor.commit();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         titleDescButton.setOnClickListener(new View.OnClickListener()
         {
@@ -95,8 +154,6 @@ public class SingleUploadFragment extends Fragment {
                 descEdit.setText(desc);
             }
         });
-
-        licenseSummaryView = (TextView)rootView.findViewById(R.id.share_license_summary);
 
         TextWatcher uploadEnabler = new TextWatcher() {
             @Override
@@ -115,9 +172,7 @@ public class SingleUploadFragment extends Fragment {
 
         titleEdit.addTextChangedListener(uploadEnabler);
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        final String license = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
-        licenseSummaryView.setText(getString(R.string.share_license_summary, getString(Utils.licenseNameFor(license))));
+        setLicenseSummary(license);
 
         // Open license page on touch
         licenseSummaryView.setOnTouchListener(new View.OnTouchListener() {
@@ -136,6 +191,10 @@ public class SingleUploadFragment extends Fragment {
         });
 
         return rootView;
+    }
+
+    private void setLicenseSummary(String license) {
+        licenseSummaryView.setText(getString(R.string.share_license_summary, getString(Utils.licenseNameFor(license))));
     }
 
     @Override
