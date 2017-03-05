@@ -15,7 +15,9 @@ import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.ShareActionProvider;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -130,27 +132,25 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
         Media m = provider.getMediaAtPosition(pager.getCurrentItem());
         switch(item.getItemId()) {
             case R.id.menu_share_current_image:
+                // Share - this is just logs it, intent set in onCreateOptionsMenu, around line 252
                 EventLog.schema(CommonsApplication.EVENT_SHARE_ATTEMPT)
                         .param("username", app.getCurrentAccount().name)
                         .param("filename", m.getFilename())
                         .log();
-                Intent shareIntent = new Intent();
-                shareIntent.setAction(Intent.ACTION_SEND);
-                shareIntent.setType("text/plain");
-                shareIntent.putExtra(Intent.EXTRA_TEXT, m.getDisplayTitle() + " " + m.getDescriptionUrl());
-                startActivity(shareIntent);
                 return true;
             case R.id.menu_browser_current_image:
+                // View in browser
                 Intent viewIntent = new Intent();
                 viewIntent.setAction(Intent.ACTION_VIEW);
                 viewIntent.setData(Uri.parse(m.getDescriptionUrl()));
                 startActivity(viewIntent);
                 return true;
             case R.id.menu_download_current_image:
+                // Download
                 downloadMedia(m);
                 return true;
             case R.id.menu_retry_current_image:
-                // Is this... sane? :)
+                // Retry
                 ((ContributionsActivity)getActivity()).retryUpload(pager.getCurrentItem());
                 getActivity().getSupportFragmentManager().popBackStack();
                 return true;
@@ -248,6 +248,13 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
                     menu.findItem(R.id.menu_browser_current_image).setEnabled(true).setVisible(true);
                     menu.findItem(R.id.menu_share_current_image).setEnabled(true).setVisible(true);
                     menu.findItem(R.id.menu_download_current_image).setEnabled(true).setVisible(true);
+
+                    // Set ShareActionProvider Intent
+                    ShareActionProvider mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menu.findItem(R.id.menu_share_current_image));
+                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                    shareIntent.setType("text/plain");
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, m.getDisplayTitle() + " " + m.getDescriptionUrl());
+                    mShareActionProvider.setShareIntent(shareIntent);
 
                     if(m instanceof Contribution) {
                         Contribution c = (Contribution)m;
