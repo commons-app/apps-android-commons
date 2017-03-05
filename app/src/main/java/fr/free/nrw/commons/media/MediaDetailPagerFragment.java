@@ -207,7 +207,7 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
                     ShareActionProvider mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menu.findItem(R.id.menu_share_current_image));
                     Intent shareIntent = new Intent(Intent.ACTION_SEND);
                     shareIntent.setType("text/plain");
-                    shareIntent.putExtra(Intent.EXTRA_TEXT, m.getDisplayTitle() + " " + m.getDescriptionUrl());
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, m.getDisplayTitle() + " \n" + m.getDescriptionUrl());
                     mShareActionProvider.setShareIntent(shareIntent);
 
                     if(m instanceof Contribution) {
