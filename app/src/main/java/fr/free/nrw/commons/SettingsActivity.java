@@ -28,12 +28,16 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
         licensePreference.setEntries(new String[]{
                 getString(R.string.license_name_cc0),
                 getString(R.string.license_name_cc_by),
-                getString(R.string.license_name_cc_by_sa)
+                getString(R.string.license_name_cc_by_four),
+                getString(R.string.license_name_cc_by_sa),
+                getString(R.string.license_name_cc_by_sa_four)
         });
         licensePreference.setEntryValues(new String[]{
                 Prefs.Licenses.CC0,
-                Prefs.Licenses.CC_BY,
-                Prefs.Licenses.CC_BY_SA
+                Prefs.Licenses.CC_BY_3,
+                Prefs.Licenses.CC_BY_4,
+                Prefs.Licenses.CC_BY_SA_3,
+                Prefs.Licenses.CC_BY_SA_4
         });
 
         licensePreference.setSummary(getString(Utils.licenseNameFor(licensePreference.getValue())));
