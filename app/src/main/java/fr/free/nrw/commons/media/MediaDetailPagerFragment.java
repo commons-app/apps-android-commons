@@ -2,21 +2,18 @@ package fr.free.nrw.commons.media;
 
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
+import android.support.v7.widget.ShareActionProvider;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -84,7 +81,7 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_media_detail_pager, container, false);
         pager = (ViewPager) view.findViewById(R.id.mediaDetailsPager);
-        pager.setOnPageChangeListener(this);
+        pager.addOnPageChangeListener(this);
 
         final MediaDetailAdapter adapter = new MediaDetailAdapter(getChildFragmentManager());
 
@@ -130,27 +127,25 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
         Media m = provider.getMediaAtPosition(pager.getCurrentItem());
         switch(item.getItemId()) {
             case R.id.menu_share_current_image:
+                // Share - this is just logs it, intent set in onCreateOptionsMenu, around line 252
                 EventLog.schema(CommonsApplication.EVENT_SHARE_ATTEMPT)
                         .param("username", app.getCurrentAccount().name)
                         .param("filename", m.getFilename())
                         .log();
-                Intent shareIntent = new Intent();
-                shareIntent.setAction(Intent.ACTION_SEND);
-                shareIntent.setType("text/plain");
-                shareIntent.putExtra(Intent.EXTRA_TEXT, m.getDisplayTitle() + " " + m.getDescriptionUrl());
-                startActivity(shareIntent);
                 return true;
             case R.id.menu_browser_current_image:
+                // View in browser
                 Intent viewIntent = new Intent();
                 viewIntent.setAction(Intent.ACTION_VIEW);
                 viewIntent.setData(Uri.parse(m.getDescriptionUrl()));
                 startActivity(viewIntent);
                 return true;
             case R.id.menu_download_current_image:
+                // Download
                 downloadMedia(m);
                 return true;
             case R.id.menu_retry_current_image:
-                // Is this... sane? :)
+                // Retry
                 ((ContributionsActivity)getActivity()).retryUpload(pager.getCurrentItem());
                 getActivity().getSupportFragmentManager().popBackStack();
                 return true;
@@ -168,19 +163,13 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
      * Start the media file downloading to the local SD card/storage.
      * The file can then be opened in Gallery or other apps.
      *
-     * @param m
+     * @param m Media file to download
      */
     private void downloadMedia(Media m) {
         String imageUrl = m.getImageUrl(),
                fileName = m.getFilename();
         // Strip 'File:' from beginning of filename, we really shouldn't store it
         fileName = fileName.replaceFirst("^File:", "");
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-            // Gingerbread DownloadManager has no HTTPS support...
-            // Download file over HTTP, there'll be no credentials
-            // sent so it should be safe-ish.
-            imageUrl = imageUrl.replaceFirst("^https://", "http://");
-        }
         Uri imageUri = Uri.parse(imageUrl);
 
         DownloadManager.Request req = new DownloadManager.Request(imageUri);
@@ -188,49 +177,14 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
         req.setDescription(getString(R.string.app_name));
         req.setTitle(m.getDisplayTitle());
         req.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            // Modern Android updates the gallery automatically. Yay!
-            req.allowScanningByMediaScanner();
 
-            // On HC/ICS/JB we can leave the download notification up when complete.
-            // This allows folks to open the file directly in gallery viewer.
-            // But for some reason it fails on Honeycomb (Google TV). Sigh.
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-                req.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-            }
-        }
+        // Modern Android updates the gallery automatically. Yay!
+        req.allowScanningByMediaScanner();
+        req.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 
+        // TODO: Check we have android.permission.WRITE_EXTERNAL_STORAGE
         final DownloadManager manager = (DownloadManager)getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
         final long downloadId = manager.enqueue(req);
-
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-            // For Gingerbread compatibility...
-            BroadcastReceiver onComplete = new BroadcastReceiver() {
-                @Override
-                public void onReceive(Context context, Intent intent) {
-                    // Check if the download has completed...
-                    Cursor c = manager.query(new DownloadManager.Query()
-                            .setFilterById(downloadId)
-                            .setFilterByStatus(DownloadManager.STATUS_SUCCESSFUL | DownloadManager.STATUS_FAILED)
-                    );
-                    if (c.moveToFirst()) {
-                        int status = c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS));
-                        Log.d("Commons", "Download completed with status " + status);
-                        if (status == DownloadManager.STATUS_SUCCESSFUL) {
-                            // Force Gallery to index the new file
-                            Uri mediaUri = Uri.parse("file://" + Environment.getExternalStorageDirectory());
-                            getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, mediaUri));
-
-                            // todo: show a persistent notification?
-                        }
-                    } else {
-                        Log.d("Commons", "Couldn't get download status for some reason");
-                    }
-                    getActivity().unregisterReceiver(this);
-                }
-            };
-            getActivity().registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
-        }
     }
 
     @Override
@@ -248,6 +202,13 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
                     menu.findItem(R.id.menu_browser_current_image).setEnabled(true).setVisible(true);
                     menu.findItem(R.id.menu_share_current_image).setEnabled(true).setVisible(true);
                     menu.findItem(R.id.menu_download_current_image).setEnabled(true).setVisible(true);
+
+                    // Set ShareActionProvider Intent
+                    ShareActionProvider mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menu.findItem(R.id.menu_share_current_image));
+                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                    shareIntent.setType("text/plain");
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, m.getDisplayTitle() + " \n" + m.getDescriptionUrl());
+                    mShareActionProvider.setShareIntent(shareIntent);
 
                     if(m instanceof Contribution) {
                         Contribution c = (Contribution)m;
@@ -272,7 +233,6 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
                                 break;
                         }
                     }
-                    return;
                 }
             }
         }
