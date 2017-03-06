@@ -5,10 +5,12 @@
   <string name="username">利用者名</string>
   <string name="password">パスワード</string>
   <string name="login">ログイン</string>
+  <string name="signup">利用者登録</string>
   <string name="logging_in_title">ログイン中</string>
   <string name="logging_in_message">お待ちください...</string>
   <string name="login_success">ログインしました!</string>
   <string name="login_failed">ログインに失敗しました!</string>
+  <string name="upload_failed">ファイルが見つかりません。別のファイルでお試しください。</string>
   <string name="authentication_failed">認証に失敗しました!</string>
   <string name="uploading_started">アップロードを開始しました!</string>
   <string name="upload_completed_notification_title">%1$s をアップロードしました!</string>
@@ -18,7 +20,9 @@
   <string name="upload_progress_notification_title_finishing">%1$s のアップロードを完了中</string>
   <string name="upload_failed_notification_title">%1$s のアップロードに失敗しました</string>
   <string name="upload_failed_notification_subtitle">閲覧するにはタップしてください</string>
-  <string name="uploads_pending_notification_indicator" fuzzy="true">%d ファイルをアップロード中</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="other">%d 件のファイルをアップロード中</item>
+  </plurals>
   <string name="title_activity_contributions">自分のアップロード</string>
   <string name="contribution_state_queued">順番待ち中</string>
   <string name="contribution_state_failed">失敗しました</string>
@@ -26,6 +30,7 @@
   <string name="contribution_state_starting">アップロード中</string>
   <string name="menu_from_gallery">ギャラリーから選択</string>
   <string name="menu_from_camera">写真を撮影</string>
+  <string name="menu_nearby">付近</string>
   <string name="provider_contributions">自分のアップロード</string>
   <string name="menu_share">共有</string>
   <string name="menu_open_in_browser">ブラウザーで表示</string>
@@ -34,7 +39,7 @@
   <string name="login_failed_network">ログインできません - ネットワークのエラーです</string>
   <string name="login_failed_username">ログインできません - 利用者名を確認してください</string>
   <string name="login_failed_password">ログインできません - パスワードを確認してください</string>
-  <string name="login_failed_throttled" fuzzy="true">失敗した回数が多すぎます。数分でもう一度お試しください。</string>
+  <string name="login_failed_throttled">失敗した回数が多すぎます。数分でもう一度お試しください。</string>
   <string name="login_failed_blocked">申し訳ありませんが、この利用者はコモンズでブロックされています。</string>
   <string name="login_failed_generic">ログイン失敗</string>
   <string name="share_upload_button">アップロード</string>
@@ -42,6 +47,16 @@
   <string name="menu_upload_single">アップロード</string>
   <string name="categories_search_text_hint">検索するカテゴリ</string>
   <string name="menu_save_categories">保存</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">アップロードしたファイルはありません</item>
+    <item quantity="other">%d 件のアップロード</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="other">%d 件のアップロードを開始中</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="other">%d 件のアップロード</item>
+  </plurals>
   <string name="categories_not_found">%1$s に一致するカテゴリが見つかりません</string>
   <string name="categories_skip_explanation">あなたの画像をウィキメディア・コモンズで見つけやすくするためにカテゴリを追加してください。
 
@@ -51,6 +66,7 @@
   <string name="preference_tracking">使用状況の報告</string>
   <string name="preference_tracking_summary">アプリの改善を支援するために、使用状況の報告をウィキメディアに送信する</string>
   <string name="title_activity_settings">設定</string>
+  <string name="title_activity_signup">利用者登録</string>
   <string name="about_license" fuzzy="true">&lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache ライセンス v2&lt;/a&gt; のもとで公開されているオープン ソース ソフトウェア</string>
   <string name="about_improve" fuzzy="true">ソースは &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt; にあります。バグは &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt; へ。</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/プライバシー・ポリシー\"&gt;プライバシー・ポリシー&lt;/a&gt;</string>

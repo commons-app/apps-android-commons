@@ -25,7 +25,7 @@
     <item quantity="other">%d个文件正在上传</item>
   </plurals>
   <string name="title_activity_contributions">我的上传</string>
-  <string name="contribution_state_queued">已加入队列</string>
+  <string name="contribution_state_queued">已入队列</string>
   <string name="contribution_state_failed">失败</string>
   <string name="contribution_state_in_progress">%1$d%%完成</string>
   <string name="contribution_state_starting">正在上传</string>
