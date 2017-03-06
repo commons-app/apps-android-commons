@@ -90,6 +90,8 @@
   <string name="use_previous">Користи претходен наслов/опис</string>
   <string name="allow_gps">Автоматски давај ја тековната местоположба</string>
   <string name="allow_gps_summary">Добивање на тековната местоположба за да се дадат предлози за категории, доколку сликата нема геоознаки</string>
+  <string name="license_name_cc_by_sa_four"> Наведи извор-Сподели под исти услови 4.0</string>
+  <string name="license_name_cc_by_four">Наведи извор 4.0</string>
   <string name="license_name_cc_by_sa"> Наведи извор-Сподели под исти услови 3.0</string>
   <string name="license_name_cc_by">Наведи извор 3.0</string>
   <string name="license_name_cc0">CC0</string>
