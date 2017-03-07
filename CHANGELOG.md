@@ -7,6 +7,7 @@
 - Switched to using material design for login form fields
 - Added Checkstyle support
 - Reenabled minify in Gradle
+- Other minor code optimizations
 
 ##v1.44
 - Attempted fix for GPS suggestions issue
