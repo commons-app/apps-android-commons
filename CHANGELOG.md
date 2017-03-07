@@ -1,5 +1,14 @@
 # Wikimedia Commons for Android
 
+##v2.0
+- Modified Share button in media details fragment to allow user to choose different apps
+- Added CC-BY 4.0 and CC-BY-SA 4.0 to license options
+- Added selection pane for licenses on title/desc screen
+- Switched to using material design for login form fields
+- Added Checkstyle support
+- Reenabled minify in Gradle
+- Other minor code optimizations
+
 ##v1.44
 - Attempted fix for GPS suggestions issue
 
