@@ -15,22 +15,18 @@
     <item android:id="@+id/menu_settings"
           android:title="@string/menu_settings"
           app:showAsAction="never"
-          android:icon="@android:drawable/ic_menu_preferences"
           />
     <item android:id="@+id/menu_about"
           android:title="@string/menu_about"
           app:showAsAction="never"
-          android:icon="@android:drawable/ic_menu_info_details"
           />
     <item android:id="@+id/menu_feedback"
           android:title="@string/menu_feedback"
           app:showAsAction="never"
-          android:icon="@android:drawable/ic_menu_send"
             />
     <item android:id="@+id/menu_nearby"
         android:title="@string/menu_nearby"
         app:showAsAction="never"
-        android:icon="@android:drawable/ic_menu_myplaces"
         />
     <item android:id="@+id/menu_refresh"
           android:title="@string/menu_refresh"
