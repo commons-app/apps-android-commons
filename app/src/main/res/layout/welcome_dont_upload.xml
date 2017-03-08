@@ -7,7 +7,7 @@
     android:gravity="center_vertical"
     >
 
-    <RelativeLayout
+    <LinearLayout
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="240dp"
@@ -31,7 +31,7 @@
             android:layout_toRightOf="@+id/selfie_x"
             />
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <TextView
         android:layout_width="295dp"
