@@ -32,6 +32,8 @@
         android:layout_marginTop="16dp"
         style="?android:textAppearanceSmall"
         android:gravity="center"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
         android:text="@string/about_license"
         />
 
@@ -42,6 +44,8 @@
         android:layout_marginTop="8dp"
         style="?android:textAppearanceSmall"
         android:gravity="center"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
         android:text="@string/about_improve"
         />
 
@@ -52,6 +56,8 @@
         android:layout_marginTop="16dp"
         style="?android:textAppearanceSmall"
         android:gravity="center"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
         android:text="@string/about_privacy_policy"
         />
 
