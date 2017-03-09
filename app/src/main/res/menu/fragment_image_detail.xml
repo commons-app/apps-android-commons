@@ -6,7 +6,7 @@
         android:id="@+id/menu_share_current_image"
         app:actionProviderClass="android.support.v7.widget.ShareActionProvider"
         android:title="@string/menu_share"
-        app:showAsAction="ifRoom|withText" />
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menu_browser_current_image"
         android:title="@string/menu_open_in_browser"
