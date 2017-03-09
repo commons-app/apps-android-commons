@@ -80,7 +80,9 @@
   <string name="title_activity_settings">{{Identical|Settings}}</string>
   <string name="title_activity_signup">{{Identical|Sign up}}</string>
   <string name="menu_about">{{Identical|About}}</string>
-  <string name="about_license">License</string>
+  <string name="about_license">\'\'\'The name \"Wikimedia Commons\" is a trademark in English, and must not be translated.\'\'\'
+
+License and legal notice.</string>
   <string name="about_improve">{{doc-important|Please make sure that your translation of \"source\" means \"source code\", not \"reference source\".}}
 Source and Bugs</string>
   <string name="about_privacy_policy">HTML fragment linking to Wikimedia\'s privacy policy. Note: avoid percent-encoding in the URL, as this causes problems with Android\'s resource compiler. Use accented/non-ASCII characters \"as is\" if possible. (We can fix it manually, so don\'t worry too much about it.)

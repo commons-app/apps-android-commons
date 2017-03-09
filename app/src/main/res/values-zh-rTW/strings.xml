@@ -90,6 +90,8 @@
   <string name="use_previous">使用先前標題/描述</string>
   <string name="allow_gps">自動獲取目前位置</string>
   <string name="allow_gps_summary">若圖片沒有地理標記的話以取得目前位置來作為分類建議。</string>
+  <string name="license_name_cc_by_sa_four"> 姓名標示-相同方式分享4.0</string>
+  <string name="license_name_cc_by_four">姓名標示4.0</string>
   <string name="license_name_cc_by_sa"> 姓名標示-相同方式分享3.0</string>
   <string name="license_name_cc_by">姓名標示3.0</string>
   <string name="license_name_cc0">CC0</string>

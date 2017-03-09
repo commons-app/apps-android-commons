@@ -90,6 +90,8 @@ Prema nesta mensaxe (ou no botón \"Atrás\") para saltar este paso.</string>
   <string name="use_previous">Usar o título ou a descrición anterior</string>
   <string name="allow_gps">Obter automaticamente a localización actual</string>
   <string name="allow_gps_summary">Obter a localización actual para ofrecer suxestións de categoría se a imaxe non está xeolocalizada</string>
+  <string name="license_name_cc_by_sa_four"> Recoñecemento-CompartirIgual 4.0</string>
+  <string name="license_name_cc_by_four">Recoñecemento 4.0</string>
   <string name="license_name_cc_by_sa"> Recoñecemento-CompartirIgual 3.0</string>
   <string name="license_name_cc_by">Recoñecemento 3.0</string>
   <string name="license_name_cc0">CC0</string>
