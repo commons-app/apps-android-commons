@@ -11,6 +11,7 @@ import android.text.TextUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.EventLog;
@@ -131,7 +132,7 @@ public class Contribution extends Media {
 
     public String getPageContents() {
         StringBuffer buffer = new StringBuffer();
-        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         
         buffer
             .append("== {{int:filedesc}} ==\n")

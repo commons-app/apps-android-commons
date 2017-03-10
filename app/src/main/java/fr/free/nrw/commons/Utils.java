@@ -82,7 +82,7 @@ public class Utils {
     }
 
     public static Date parseMWDate(String mwDate) {
-        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"); // Assuming MW always gives me UTC
+        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US); // Assuming MW always gives me UTC
         try {
             return isoFormat.parse(mwDate);
         } catch (ParseException e) {
@@ -91,7 +91,7 @@ public class Utils {
     }
 
     public static String toMWDate(Date date) {
-        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"); // Assuming MW always gives me UTC
+        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US); // Assuming MW always gives me UTC
         isoFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
         return isoFormat.format(date);
     }
