@@ -29,7 +29,6 @@
             android:layout_height="120dp"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/welcome_wikipedia"
             />
 
     </LinearLayout>
