@@ -130,7 +130,7 @@ public class SingleUploadFragment extends Fragment {
                 setLicenseSummary(license);
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString(Prefs.DEFAULT_LICENSE, license);
-                editor.commit();
+                editor.apply();
             }
 
             @Override
