@@ -143,7 +143,7 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
                 // View in browser
                 Intent viewIntent = new Intent();
                 viewIntent.setAction(Intent.ACTION_VIEW);
-                viewIntent.setData(Uri.parse(m.getDescriptionUrl()));
+                viewIntent.setData(Uri.parse(m.getMobileDescriptionUrl()));
                 startActivity(viewIntent);
                 return true;
             case R.id.menu_download_current_image:

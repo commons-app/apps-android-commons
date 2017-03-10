@@ -61,6 +61,10 @@ public class Media implements Parcelable {
         return CommonsApplication.HOME_URL + "File:" + Utils.urlEncode(getFilename().replace("File:", "").replace(" ", "_"));
     }
 
+    public String getMobileDescriptionUrl() {
+        return CommonsApplication.MOBILE_HOME_URL + "File:" + Utils.urlEncode(getFilename().replace("File:", "").replace(" ", "_"));
+    }
+
     public Uri getLocalUri() {
         return localUri;
     }
