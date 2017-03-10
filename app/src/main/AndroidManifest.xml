@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="fr.free.nrw.commons"
     android:versionCode="65"
     android:versionName="2.0.2" >
@@ -85,7 +86,7 @@
         <activity
             android:name=".nearby.NearbyActivity"
             android:label="@string/title_activity_nearby"
-            android:parentActivityName=".contributions.ContributionsActivity"/>
+            android:parentActivityName=".contributions.ContributionsActivity" />
 
         <service android:name=".upload.UploadService" >
         </service>
