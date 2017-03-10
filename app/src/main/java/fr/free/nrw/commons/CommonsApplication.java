@@ -59,6 +59,7 @@ public class CommonsApplication extends Application {
     public static final String API_URL = "https://commons.wikimedia.org/w/api.php";
     public static final String IMAGE_URL_BASE = "https://upload.wikimedia.org/wikipedia/commons";
     public static final String HOME_URL = "https://commons.wikimedia.org/wiki/";
+    public static final String MOBILE_HOME_URL = "https://commons.m.wikimedia.org/wiki/";
     public static final String EVENTLOG_URL = "https://www.wikimedia.org/beacon/event";
     public static final String EVENTLOG_WIKI = "commonswiki";
 
