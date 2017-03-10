@@ -27,6 +27,7 @@ import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 import java.util.concurrent.Executor;
 import java.util.regex.Pattern;
@@ -201,7 +202,7 @@ public class Utils {
     }
 
     public static String capitalize(String string) {
-        return string.substring(0,1).toUpperCase() + string.substring(1);
+        return string.substring(0,1).toUpperCase(Locale.getDefault()) + string.substring(1);
     }
 
     public static String licenseTemplateFor(String license) {
@@ -303,11 +304,11 @@ public class Utils {
         Pattern jpegPattern = Pattern.compile("\\.jpeg$", Pattern.CASE_INSENSITIVE);
 
         // People are used to ".jpg" more than ".jpeg" which the system gives us.
-        if (extension != null && extension.toLowerCase().equals("jpeg")) {
+        if (extension != null && extension.toLowerCase(Locale.US).equals("jpeg")) {
             extension = "jpg";
         }
         title = jpegPattern.matcher(title).replaceFirst(".jpg");
-        if (extension != null && !title.toLowerCase().endsWith("." + extension.toLowerCase())) {
+        if (extension != null && !title.toLowerCase(Locale.US).endsWith("." + extension.toLowerCase(Locale.US))) {
             title += "." + extension;
         }
         return title;
