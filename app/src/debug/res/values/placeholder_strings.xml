@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="placeholder_place_distance">Overlay</string>
+  <string name="placeholder_place_name">Name</string>
+  <string name="placeholder_place_description">Description</string>
+</resources>
