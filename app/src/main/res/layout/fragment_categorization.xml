@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:hint="@string/categories_search_text_hint"
-            android:singleLine="true"
+            android:maxLines="1"
             android:imeOptions="flagNoExtractUi"
             />
 
