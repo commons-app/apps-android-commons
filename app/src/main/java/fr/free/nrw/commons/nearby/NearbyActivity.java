@@ -67,8 +67,8 @@ public class NearbyActivity extends AppCompatActivity {
 
     protected void refreshView()
     {
-        this.finish();
-        startActivity(getIntent());
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, new NearbyListFragment()).commit();
     }
     protected LatLng getmLatestLocation() {
         return mLatestLocation;
