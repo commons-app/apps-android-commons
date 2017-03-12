@@ -1,6 +1,6 @@
 # Wikimedia Commons for Android
 
-##v2.0.2 (beta)
+##v2.0.2 
 - Make "View in browser" direct to mobile website 
 
 ##v2.0.1
