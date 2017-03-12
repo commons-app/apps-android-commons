@@ -31,6 +31,7 @@ import java.util.Locale;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.EventLog;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
@@ -221,7 +222,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     private void performLogin() {
         String username = usernameEdit.getText().toString();
         // Because Mediawiki is upercase-first-char-then-case-sensitive :)
-        String canonicalUsername = username.substring(0,1).toUpperCase(Locale.getDefault()) + username.substring(1);
+        String canonicalUsername = Utils.capitalize(username.substring(0,1)) + username.substring(1);
 
         String password = passwordEdit.getText().toString();
 

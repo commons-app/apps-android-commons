@@ -55,7 +55,7 @@ public class LicenseList {
     public String nameIdForTemplate(String template) {
         // hack :D (converts dashes and periods to underscores)
         // cc-by-sa-3.0 -> cc_by_sa_3_0
-        return "license_name_" + template.toLowerCase(Locale.US).replace("-", "_").replace(".", "_");
+        return "license_name_" + template.toLowerCase(Locale.ENGLISH).replace("-", "_").replace(".", "_");
     }
 
     private int stringIdByName(String stringId) {

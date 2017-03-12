@@ -132,7 +132,7 @@ public class Contribution extends Media {
 
     public String getPageContents() {
         StringBuffer buffer = new StringBuffer();
-        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
         
         buffer
             .append("== {{int:filedesc}} ==\n")

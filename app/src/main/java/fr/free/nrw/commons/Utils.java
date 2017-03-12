@@ -82,7 +82,7 @@ public class Utils {
     }
 
     public static Date parseMWDate(String mwDate) {
-        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US); // Assuming MW always gives me UTC
+        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH); // Assuming MW always gives me UTC
         try {
             return isoFormat.parse(mwDate);
         } catch (ParseException e) {
@@ -91,7 +91,7 @@ public class Utils {
     }
 
     public static String toMWDate(Date date) {
-        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US); // Assuming MW always gives me UTC
+        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH); // Assuming MW always gives me UTC
         isoFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
         return isoFormat.format(date);
     }
@@ -304,11 +304,11 @@ public class Utils {
         Pattern jpegPattern = Pattern.compile("\\.jpeg$", Pattern.CASE_INSENSITIVE);
 
         // People are used to ".jpg" more than ".jpeg" which the system gives us.
-        if (extension != null && extension.toLowerCase(Locale.US).equals("jpeg")) {
+        if (extension != null && extension.toLowerCase(Locale.ENGLISH).equals("jpeg")) {
             extension = "jpg";
         }
         title = jpegPattern.matcher(title).replaceFirst(".jpg");
-        if (extension != null && !title.toLowerCase(Locale.US).endsWith("." + extension.toLowerCase(Locale.US))) {
+        if (extension != null && !title.toLowerCase(Locale.getDefault()).endsWith("." + extension.toLowerCase(Locale.ENGLISH))) {
             title += "." + extension;
         }
         return title;
