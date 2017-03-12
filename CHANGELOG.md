@@ -1,5 +1,12 @@
 # Wikimedia Commons for Android
 
+##v2.0.2 (beta)
+- Make "View in browser" direct to mobile website 
+
+##v2.0.1
+- Disabled minify again (reenabling test failed)
+- Hotfix for ShareAction bug
+
 ##v2.0
 - Modified Share button in media details fragment to allow user to choose different apps
 - Added CC-BY 4.0 and CC-BY-SA 4.0 to license options

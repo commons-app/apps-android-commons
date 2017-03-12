@@ -82,7 +82,7 @@ Wikimedia Commons an det Wikimedia-Commons-Logo san markintiaken faan\'t Wikimed
   <string name="no_uploads_yet">Dü heest noch nian bilen huuchschüürd.</string>
   <string name="menu_retry_upload">Noch ans ferschük</string>
   <string name="menu_cancel_upload">Ufbreeg</string>
-  <string name="share_license_summary">Detdiar bil feit det lisens %$1 .</string>
+  <string name="share_license_summary">Detdiar bil feit det lisens %1$s</string>
   <string name="menu_download">Deelloose</string>
   <string name="preference_license">Lisens</string>
   <string name="use_previous">Ual tiitel/beskriiwang brük</string>

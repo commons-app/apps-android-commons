@@ -90,6 +90,8 @@
   <string name="use_previous">পূর্ববর্তী শিরোনাম/বিবরণ ব্যবহার করুন</string>
   <string name="allow_gps">স্বয়ংক্রিয়ভাবে বর্তমান অবস্থান পান</string>
   <string name="allow_gps_summary">বিষয়শ্রেণীর পরামর্শ দিতে বর্তমান অবস্থান পান যদি ছবিতে ভূ-ট্যাগ না থেকে থাকে</string>
+  <string name="license_name_cc_by_sa_four">অ্যাট্রিবিউশন-শেয়ারঅ্যালাইক ৪.০</string>
+  <string name="license_name_cc_by_four">অ্যাট্রিবিউশন ৪.০</string>
   <string name="license_name_cc_by_sa">অ্যাট্রিবিউশন-শেয়ারঅ্যালাইক ৩.০</string>
   <string name="license_name_cc_by">সিসিইউ০০এ০এঅ্যাট্রিবিউসনইউ০০এ০৩.০</string>
   <string name="license_name_cc0">সিসি০</string>

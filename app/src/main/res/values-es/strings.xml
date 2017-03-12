@@ -90,6 +90,8 @@ Toca este mensaje (o pulsa Anterior) para omitir este paso.</string>
   <string name="use_previous">Usar título/descripción anteriores</string>
   <string name="allow_gps">Obtener ubicación actual automáticamente</string>
   <string name="allow_gps_summary">Recuperar ubicación actual para ofrecer sugerencias de categorías si la imagen no tiene etiquetas geográficas</string>
+  <string name="license_name_cc_by_sa_four"> Atribución-CompartirIgual 4.0</string>
+  <string name="license_name_cc_by_four">Atribución 4.0</string>
   <string name="license_name_cc_by_sa"> Atribución-CompartirIgual 3.0</string>
   <string name="license_name_cc_by">Atribución 3.0</string>
   <string name="license_name_cc0">CC0</string>

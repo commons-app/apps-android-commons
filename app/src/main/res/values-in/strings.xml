@@ -86,8 +86,12 @@ Tekan pesan ini (atau tekan kembali) untuk melewatkan langkah ini.</string>
   <string name="share_license_summary">Gambar ini akan diberi lisensi %1$s</string>
   <string name="menu_download">Unduh</string>
   <string name="preference_license">Lisensi</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Attribution-ShareAlikeu00A03.0</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0Attributionu00A03.0</string>
+  <string name="use_previous">Gunakan judul/deskripsi sebelumnya</string>
+  <string name="allow_gps">Dapatkan lokasi secara otomatis</string>
+  <string name="license_name_cc_by_sa_four">Atribusi-BerbagiSerupa 4.0</string>
+  <string name="license_name_cc_by_four">Atribusi 4.0</string>
+  <string name="license_name_cc_by_sa">Atribusi-BerbagiSerupa 3.0</string>
+  <string name="license_name_cc_by">Atribusi 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Austria)</string>
@@ -101,6 +105,8 @@ Tekan pesan ini (atau tekan kembali) untuk melewatkan langkah ini.</string>
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polandia)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Rumania)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
+  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Nol</string>
   <string name="license_name_own_pd">own-pd</string>
   <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
@@ -118,6 +124,7 @@ Tekan pesan ini (atau tekan kembali) untuk melewatkan langkah ini.</string>
   <string name="license_name_pd_ineligible">Domain umum (tidak memenuhi syarat untuk hak cipta)</string>
   <string name="license_name_attribution">Atribusi</string>
   <string name="license_name_gfdl">Lisensi Dokumentasi Bebas GNU</string>
+  <string name="tutorial_1_subtext">Gambar Anda membatu mendidik orang-orang di seluruh dunia!</string>
   <string name="welcome_wikipedia_text">Sumbangkan gambar-gambar Anda. Bantu hidupkan artikel Wikipedia!</string>
   <string name="welcome_wikipedia_subtext">Gambar di Wikipedia diambil dari Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Gambar Anda membantu mendidik orang-orang di seluruh dunia</string>
@@ -130,4 +137,7 @@ Tekan pesan ini (atau tekan kembali) untuk melewatkan langkah ini.</string>
   <string name="detail_description_empty">Tidak ada keterangan</string>
   <string name="detail_license_empty">Lisensi tidak diketahui</string>
   <string name="menu_refresh">Segarkan</string>
+  <string name="title_activity_nearby">Tempat disekitar</string>
+  <string name="yes">Ya</string>
+  <string name="no">Tidak</string>
 </resources>

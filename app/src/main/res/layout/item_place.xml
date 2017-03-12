@@ -29,7 +29,7 @@
             style="?android:textAppearanceSmallInverse"
             android:textColor="#ffffff"
             android:background="@color/text_background"
-            tools:text="Overlay"
+            tools:text="@string/placeholder_place_distance"
             />
 
         <TextView
@@ -44,7 +44,7 @@
             android:maxLines="1"
             android:ellipsize="none"
             style="?android:textAppearanceMedium"
-            tools:text="Name"
+            tools:text="@string/placeholder_place_name"
             />
 
         <TextView
@@ -58,7 +58,7 @@
             android:ellipsize="none"
             android:maxLines="4"
             style="?android:textAppearanceSmall"
-            tools:text="Description"
+            tools:text="@string/placeholder_place_description"
             />
 
     </RelativeLayout>

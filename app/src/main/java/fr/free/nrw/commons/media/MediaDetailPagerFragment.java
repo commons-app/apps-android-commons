@@ -143,7 +143,7 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
                 // View in browser
                 Intent viewIntent = new Intent();
                 viewIntent.setAction(Intent.ACTION_VIEW);
-                viewIntent.setData(Uri.parse(m.getDescriptionUrl()));
+                viewIntent.setData(Uri.parse(m.getMobileDescriptionUrl()));
                 startActivity(viewIntent);
                 return true;
             case R.id.menu_download_current_image:
@@ -222,10 +222,14 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
 
                     // Set ShareActionProvider Intent
                     ShareActionProvider mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menu.findItem(R.id.menu_share_current_image));
-                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                    shareIntent.setType("text/plain");
-                    shareIntent.putExtra(Intent.EXTRA_TEXT, m.getDisplayTitle() + " \n" + m.getDescriptionUrl());
-                    mShareActionProvider.setShareIntent(shareIntent);
+                    // On some phones null is returned for some reason:
+                    // https://github.com/commons-app/apps-android-commons/issues/413
+                    if(mShareActionProvider != null) {
+                        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                        shareIntent.setType("text/plain");
+                        shareIntent.putExtra(Intent.EXTRA_TEXT, m.getDisplayTitle() + " \n" + m.getDescriptionUrl());
+                        mShareActionProvider.setShareIntent(shareIntent);
+                    }
 
                     if(m instanceof Contribution) {
                         Contribution c = (Contribution)m;
