@@ -312,4 +312,8 @@ public class Utils {
         }
         return title;
     }
+
+    public static boolean isNullOrWhiteSpace(String value) {
+        return value == null || value.trim().isEmpty();
+    }
 }
