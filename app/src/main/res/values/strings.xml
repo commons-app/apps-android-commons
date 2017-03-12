@@ -158,4 +158,6 @@ Tap this message (or hit back) to skip this step.</string>
   <string name="media_detail_media_title">Title of the media</string>
   <string name="media_detail_description">Description</string>
   <string name="media_detail_description_explanation">Description of the media goes here. This can potentially be fairly long, and will need to wrap across multiple lines. We hope it looks nice though.</string>
+  <string name="become_a_tester">Become a Tester</string>
+  <string name="beta_opt_in_link">https://play.google.com/apps/testing/fr.free.nrw.commons</string>
 </resources>

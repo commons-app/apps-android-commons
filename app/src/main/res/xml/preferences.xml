@@ -13,5 +13,10 @@
         android:summary="@string/allow_gps_summary"
         android:key="allowGps" />
 
+    <Preference android:title="@string/become_a_tester" >
+        <intent android:action="android.intent.action.VIEW"
+            android:data="@string/beta_opt_in_link" />
+    </Preference>
+
 
 </PreferenceScreen>
