@@ -41,8 +41,7 @@
                 android:textStyle="bold"
                 android:textAlignment="center"
                 android:gravity="center_horizontal"
-                android:textColor="@android:color/white"
-                android:singleLine="false"/>
+                android:textColor="@android:color/white"/>
 
         <Button
                 android:layout_width="120dp"

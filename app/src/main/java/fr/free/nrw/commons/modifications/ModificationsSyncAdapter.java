@@ -49,13 +49,16 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
         String authCookie;
         try {
              authCookie = AccountManager.get(getContext()).blockingGetAuthToken(account, "", false);
-        } catch (OperationCanceledException e) {
+        } catch (OperationCanceledException | AuthenticatorException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
             Log.d("Commons", "Could not authenticate :(");
             return;
-        } catch (AuthenticatorException e) {
-            throw new RuntimeException(e);
+        }
+
+        if(Utils.isNullOrWhiteSpace(authCookie)) {
+            Log.d("Commons", "Could not authenticate :(");
+            return;
         }
 
         MWApi api = CommonsApplication.createMWApi();

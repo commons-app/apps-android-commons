@@ -43,7 +43,7 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             >
 
             <!-- Placeholder. Height gets set at runtime based on container size; the initial value is a hack to keep
@@ -73,7 +73,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@android:color/white"
-                        android:text="Title"
+                        android:text="@string/media_detail_title"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:paddingBottom="6dp"
@@ -81,7 +81,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Title of the media"
+                        android:text="@string/media_detail_media_title"
                         android:id="@+id/mediaDetailTitle"
                         android:layout_gravity="left|start"
                         android:textColor="@android:color/white"
@@ -106,7 +106,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Description"
+                        android:text="@string/media_detail_description"
                         android:textColor="@android:color/white"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -115,7 +115,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Description of the media goes here. This can potentially be fairly long, and will need to wrap across multiple lines. We hope it looks nice though."
+                        android:text="@string/media_detail_description_explanation"
                         android:background="#20ffffff"
                         android:id="@+id/mediaDetailDesc"
                         android:textColor="@android:color/white"
