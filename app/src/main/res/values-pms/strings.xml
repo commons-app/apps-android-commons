@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Comun</string>
+  <string name="menu_settings">Paràmeter</string>
+  <string name="username">Stranòm</string>
+  <string name="password">Ciav</string>
+  <string name="login">Intré ant ël sistema</string>
+  <string name="signup">Anscriv-se</string>
+  <string name="logging_in_title">Conession</string>
+  <string name="logging_in_message">Ch\'a l\'abia passiensa...</string>
+  <string name="login_success">A l\'é intrà ant ël sistema!</string>
+  <string name="login_failed">Falì a rintré ant ël sistema!</string>
+  <string name="upload_failed">Archivi nen trovà. Për piasì, ch\'a preuva con n\'àutr.</string>
+  <string name="authentication_failed">Autentificassion falìa!</string>
+  <string name="uploading_started">Cariament ancaminà!</string>
+  <string name="upload_completed_notification_title">%1$s carià!</string>
+  <string name="upload_completed_notification_text">Sgnaché për vëdde sò cariament</string>
+  <string name="upload_progress_notification_title_start">Inissi dël cariament %1$s</string>
+  <string name="upload_progress_notification_title_in_progress">%1$s carià</string>
+  <string name="upload_progress_notification_title_finishing">Fin dël cariament %1$s</string>
+  <string name="upload_failed_notification_title">Cariament falì a %1$s</string>
+  <string name="upload_failed_notification_subtitle">Sgnaché për ësmon-e</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">1 archivi an camin ch\'as caria</item>
+    <item quantity="other">%d archivi an camin ch\'as cario</item>
+  </plurals>
+  <string name="title_activity_contributions">Ij mè cariament</string>
+  <string name="contribution_state_queued">An coa</string>
+  <string name="contribution_state_failed">Falì</string>
+  <string name="contribution_state_in_progress">%1$d%% completà</string>
+  <string name="contribution_state_starting">Cariament</string>
+  <string name="menu_from_gallery">Da la galarìa</string>
+  <string name="menu_from_camera">Fé na fòto</string>
+  <string name="menu_nearby">Davzin</string>
+  <string name="provider_contributions">Ij mè cariament</string>
+  <string name="menu_share">Partagé</string>
+  <string name="menu_open_in_browser">Smon-e ant ël navigador</string>
+  <string name="share_title_hint">Tìtol</string>
+  <string name="share_description_hint">Descrission</string>
+  <string name="login_failed_network">Impossìbil rintré ant ël sistema - la rej a marcia nen</string>
+  <string name="login_failed_username">Impossìbil rintré ant ël sistema - për piasì, ch\'a verìfica sò stranòm</string>
+  <string name="login_failed_password">Impossìbil rintré ant ël sistema - për piasì, ch\'a contròla soa ciav</string>
+  <string name="login_failed_throttled">Tròpi tentativ falì. Për piasì, ch\'a preuva torna da-sì chèiche minute.</string>
+  <string name="login_failed_blocked">An dëspias, s\'utent-sì a l\'é stàit blocà ansima a Commons</string>
+  <string name="login_failed_generic">Falì a rintré ant ël sistema</string>
+  <string name="share_upload_button">Carié</string>
+  <string name="multiple_share_base_title">Deje un nòm a s\'ansem</string>
+  <string name="provider_modifications">Modìfiche</string>
+  <string name="menu_upload_single">Carié</string>
+  <string name="categories_search_text_hint">Sërché dle categorìe</string>
+  <string name="menu_save_categories">Argistré</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">Ancor gnun cariament</item>
+    <item quantity="one">1 cariament</item>
+    <item quantity="other">%d cariament</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">1 cariament ancaminà</item>
+    <item quantity="other">%d cariament ancaminà</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">1 cariament</item>
+    <item quantity="other">%d cariament</item>
+  </plurals>
+  <string name="categories_not_found">Gnun-e categorìe rëspondente a %1$s trovà</string>
+  <string name="categories_skip_explanation">Ch\'a gionta dle categorìe, për ch\'a sia pi belfé trové soe plance su Wikimedia Commons.
+
+Ch\'a ancamin-a a scrive për gionté dle categorìe.
+Ch\'a sgnaca an s\'ën mëssage (o ch\'a sgnaca ël boton andaré) për sauté \'s pass.</string>
+  <string name="categories_activity_title">Categorìe</string>
+  <string name="preference_tracking">Rapòrt d\'utilisassion</string>
+  <string name="preference_tracking_summary">Mandé ij rapòrt d\'usagi a Wikimedia për giutene a amelioré l\'aplicassion</string>
+  <string name="title_activity_settings">Paràmeter</string>
+  <string name="title_activity_signup">Marchesse</string>
+  <string name="menu_about">A propòsit</string>
+  <string name="about_license">Ij programa Open Source a son publicà sota la &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;licensa Apache v2&lt;/a&gt;. Wikimedia Commons e sò sìmbol a son dle marche argistrà dla Fondassion Wikimedia e a son dovrà con ël përmess ëd la Fondassion Wikimedia. Nojàutri i soma nen aprovà da o afilià a la Fondassion Wikimedia.</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sorgiss&lt;/a&gt; e &lt;a href=\"https://commons-app.github.io/\"&gt;sit an sl\'aragnà&lt;/a&gt; su GitHub. Creé na neuva &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;signalassion GitHub&lt;/a&gt; për signalé dij givo e dij sugeriment.</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Régole ëd confidensialità&lt;/a&gt;</string>
+  <string name="title_activity_about">A propòsit</string>
+  <string name="menu_feedback">Mandé dij coment (për pòsta eletrònica)</string>
+  <string name="no_email_client">Gnun clien ëd pòsta eletrònica anstalà</string>
+  <string name="provider_categories">Categorìe dovrà ëd recent</string>
+  <string name="waiting_first_sync">Atèisa ëd prima sincronisassion...</string>
+  <string name="no_uploads_yet">A l\'ha ancor nen carià ëd fòto.</string>
+  <string name="menu_retry_upload">Prové torna</string>
+  <string name="menu_cancel_upload">Anulé</string>
+  <string name="share_license_summary">Costa plancia a sarà sota la licensa %1$s</string>
+  <string name="menu_download">Dëscarié</string>
+</resources>

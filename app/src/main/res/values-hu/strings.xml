@@ -45,7 +45,7 @@
   <string name="login_failed_generic">Bejelentkezési hiba</string>
   <string name="share_upload_button">Feltöltés</string>
   <string name="multiple_share_base_title">Nevezd el a gyűjteményt</string>
-  <string name="provider_modifications">Értesítések</string>
+  <string name="provider_modifications">Változtatások</string>
   <string name="menu_upload_single">Feltöltés</string>
   <string name="categories_search_text_hint">Keresés a kategóriák között</string>
   <string name="menu_save_categories">Mentés</string>
@@ -77,7 +77,7 @@ Kattints erre az üzenetre a lépés kihagyásához</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Forráskód&lt;/a&gt; és &lt;a href=\"https://commons-app.github.io/\"&gt;weboldal&lt;/a&gt; a GitHubon. Nyiss egy új &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-problémát&lt;/a&gt; hibabejelentéssel vagy fejlesztési javaslattal.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Adatvédelmi_irányelv\"&gt;Adatvédelmi irányelvek&lt;/a&gt;</string>
   <string name="title_activity_about">Névjegy</string>
-  <string name="menu_feedback">Visszajelzés küldése (email)</string>
+  <string name="menu_feedback">Visszajelzés küldése (e-mailben)</string>
   <string name="no_email_client">Nincs telepített levelezőprogram</string>
   <string name="provider_categories">Legutóbb használt kategóriák</string>
   <string name="waiting_first_sync">Várakozás az első szinkronizálásra...</string>
@@ -90,6 +90,8 @@ Kattints erre az üzenetre a lépés kihagyásához</string>
   <string name="use_previous">Előző cím/leírás használata</string>
   <string name="allow_gps">Automatikusan megkapja a jelenlegi helyet</string>
   <string name="allow_gps_summary">Lekéri a jelenlegi helyet, hogy lehetőség legyen kategóriajavaslatokra a nem földrajzi címkézett képeknél.</string>
+  <string name="license_name_cc_by_sa_four">Nevezd meg! – Így add tovább! 4.0</string>
+  <string name="license_name_cc_by_four">Nevezd meg! 4.0</string>
   <string name="license_name_cc_by_sa">Nevezd meg! – Így add tovább! 3.0</string>
   <string name="license_name_cc_by">Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
@@ -158,4 +160,8 @@ Kattints erre az üzenetre a lépés kihagyásához</string>
   <string name="file_exists">Ez a fájl már létezik a Commons-on. Biztos, hogy folytatni akarod?</string>
   <string name="yes">Igen</string>
   <string name="no">Nem</string>
+  <string name="media_detail_title">Cím</string>
+  <string name="media_detail_media_title">Média címe</string>
+  <string name="media_detail_description">Leírás</string>
+  <string name="media_detail_description_explanation">A média leírása kerül ide. Ez akár egészen hosszú is lehet, és több sorba fog kerülni. Azért reméljük, jól néz majd ki.</string>
 </resources>

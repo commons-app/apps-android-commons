@@ -160,4 +160,8 @@
   <string name="file_exists">此檔案已存在於共享資源上。您確定要繼續嗎？</string>
   <string name="yes">是</string>
   <string name="no">否</string>
+  <string name="media_detail_title">標題</string>
+  <string name="media_detail_media_title">多媒體標體</string>
+  <string name="media_detail_description">描述</string>
+  <string name="media_detail_description_explanation">描述使用在此的多媒體。若內容可能會很長的話請斷開換行。我們希望這樣可以讓內容看起來較好些。</string>
 </resources>
