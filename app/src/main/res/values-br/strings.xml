@@ -160,4 +160,8 @@ Pouezit war ar c\'hemenn-mañ (pe distroit en a-raok) evit mont dreist ar bazenn
   <string name="file_exists">Emañ ar restr-mañ war Commons c\'hoazh. Ha sur oc\'h e fell deoc\'h kenderc\'hel ?</string>
   <string name="yes">Ya</string>
   <string name="no">Ket</string>
+  <string name="media_detail_title">Titl</string>
+  <string name="media_detail_media_title">Titl ar media</string>
+  <string name="media_detail_description">Deskrivadur</string>
+  <string name="media_detail_description_explanation">Amañ e lakaer titl ar media. Gallout a ra bezañ hir-mat ha mont dre meur a linenn. Spi hon eus e vo bravik an disoc\'h koulskoude.</string>
 </resources>

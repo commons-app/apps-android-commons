@@ -160,4 +160,8 @@
   <string name="file_exists">הקובץ הזה כבר קיים בוויקישיתוף. האם להמשיך?</string>
   <string name="yes">כן</string>
   <string name="no">לא</string>
+  <string name="media_detail_title">כותרת</string>
+  <string name="media_detail_media_title">כותרת המדיה</string>
+  <string name="media_detail_description">תיאור</string>
+  <string name="media_detail_description_explanation">תיאור המדיה יהיה כאן. זה יכול להיות ארוך למדי, ולהתפרס על מספר שורות. אנחנו מקווים שזה נראה טוב.</string>
 </resources>
