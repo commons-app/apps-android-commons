@@ -1,6 +1,5 @@
 package fr.free.nrw.commons;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -10,7 +9,7 @@ import android.widget.Button;
 
 import com.viewpagerindicator.CirclePageIndicator;
 
-public class WelcomeActivity extends Activity {
+public class WelcomeActivity extends BaseActivity {
     static final int PAGE_WIKIPEDIA = 0,
             PAGE_DO_UPLOAD = 1,
             PAGE_DONT_UPLOAD = 2,

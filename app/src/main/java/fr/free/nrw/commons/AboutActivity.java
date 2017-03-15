@@ -1,12 +1,11 @@
 package fr.free.nrw.commons;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
 
-public class AboutActivity extends Activity {
+public class AboutActivity extends BaseActivity {
     private TextView versionText;
     private TextView licenseText;
     private TextView improveText;

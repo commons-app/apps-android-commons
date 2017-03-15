@@ -7,12 +7,12 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import fr.free.nrw.commons.BaseAppCompatActivity;
 import fr.free.nrw.commons.R;
 
-public class NearbyActivity extends AppCompatActivity {
+public class NearbyActivity extends BaseAppCompatActivity {
 
     private MyLocationListener myLocationListener;
     private LocationManager locationManager;

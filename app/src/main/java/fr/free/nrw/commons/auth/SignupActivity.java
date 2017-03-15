@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.auth;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,7 +8,9 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
-public class SignupActivity extends Activity {
+import fr.free.nrw.commons.BaseActivity;
+
+public class SignupActivity extends BaseActivity {
 
     private WebView webView;
 

@@ -1,8 +1,29 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat" />
+    <style name="DarkAppTheme" parent="Theme.AppCompat">
+        <item name="mainBackground">@color/main_background_dark</item>
+        <item name="semitransparentText">@color/commons_app_blue_dark</item>
+        <item name="commonsAppBlue">@color/activity_welcome_background_dark</item>
+        <item name="subBackground">@color/sub_background_dark</item>
+        <item name="fragmentCategorisationBackground">@color/fragment_categorisation_background_dark</item>
+        <item name="buttonBackground">@color/button_background_dark</item>
+        <item name="uploadOverlayBackground">@color/upload_overlay_background_dark</item>
+        <item name="toggleButtonIcon">@drawable/toggle_inverse</item>
 
-    <style name="NoTitle" parent="AppTheme">
+    </style>
+
+    <style name="LightAppTheme" parent="Theme.AppCompat.Light">
+        <item name="mainBackground">@color/main_background_light</item>
+        <item name="semitransparentText">@color/commons_app_blue_light</item>
+        <item name="commonsAppBlue">@color/activity_welcome_background_light</item>
+        <item name="subBackground">@color/sub_background_light</item>
+        <item name="fragmentCategorisationBackground">@color/fragment_categorisation_background_light</item>
+        <item name="buttonBackground">@color/button_background_light</item>
+        <item name="uploadOverlayBackground">@color/upload_overlay_background_light</item>
+        <item name="toggleButtonIcon">@drawable/toggle</item>
+    </style>
+
+    <style name="NoTitle" parent="DarkAppTheme">
         <item name="android:windowNoTitle">true</item>
     </style>
 
