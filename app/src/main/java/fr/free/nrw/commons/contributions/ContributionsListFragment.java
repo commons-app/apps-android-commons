@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.IntentCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,6 +23,8 @@ import android.widget.GridView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.lang.reflect.Method;
 
 import fr.free.nrw.commons.AboutActivity;
 import fr.free.nrw.commons.CommonsApplication;
@@ -163,6 +166,27 @@ public class ContributionsListFragment extends Fragment {
                     startActivity(nearbyIntent);
                     return true;
                 }
+            case R.id.menu_theme_toggle:
+                final SharedPreferences prefs = getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+                prefs.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
+                    @Override
+                    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+                        if(s.equals("theme")){
+                            //http://stackoverflow.com/questions/5659742/onsharedpreferencechanged-called-multiple-times-why
+                            prefs.unregisterOnSharedPreferenceChangeListener(this);
+                            //Finish current activity and tart new one with selected theme
+                            Intent intent = getActivity().getIntent();
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | IntentCompat.FLAG_ACTIVITY_CLEAR_TASK);
+                            getActivity().finish();
+                            startActivity(intent);
+                        }
+                    }
+                });
+                SharedPreferences.Editor editor = prefs.edit();
+                //put inverse of selected boolean
+                editor.putBoolean("theme", !prefs.getBoolean("theme", false));
+                editor.commit();
+                return true;
             case R.id.menu_refresh:
                 ((SourceRefresher)getActivity()).refreshSource();
                 return true;
@@ -206,6 +230,31 @@ public class ContributionsListFragment extends Fragment {
 
         menu.findItem(R.id.menu_refresh).setVisible(false);
     }
+
+    /*http://stackoverflow.com/questions/30076392/how-does-this-strange-condition-happens-when-show-menu-item-icon-in-toolbar-over/30337653#30337653
+    Overriden to show toggle_layout button on overlay menu
+    */
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        if(menu != null){
+            if(menu.getClass().getSimpleName().equals("MenuBuilder")){
+                try{
+                    Method m = menu.getClass().getDeclaredMethod(
+                            "setOptionalIconsVisible", Boolean.TYPE);
+                    m.setAccessible(true);
+                    m.invoke(menu, true);
+                }
+                catch(NoSuchMethodException e){
+                    Log.e(TAG, "onMenuOpened", e);
+                }
+                catch(Exception e){
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+        super.onPrepareOptionsMenu(menu);
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

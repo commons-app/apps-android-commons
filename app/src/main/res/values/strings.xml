@@ -33,6 +33,7 @@
   <string name="menu_from_camera">Take photo</string>
   <string name="menu_nearby">Nearby</string>
   <string name="provider_contributions">My uploads</string>
+  <string name="menu_theme_toggle">Night mode</string>
   <string name="menu_share">Share</string>
   <string name="menu_open_in_browser">View in Browser</string>
   <string name="share_title_hint">Title</string>
@@ -90,6 +91,8 @@ Tap this message (or hit back) to skip this step.</string>
   <string name="use_previous">Use previous title/description</string>
   <string name="allow_gps">Automatically get current location</string>
   <string name="allow_gps_summary">Retrieve current location to offer category suggestions if image is not geotagged</string>
+  <string name="preference_theme">Select theme</string>
+  <string name="preference_theme_summary">Select application theme as light/dark</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>

@@ -1,5 +1,6 @@
 package fr.free.nrw.commons;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -21,6 +22,13 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
     protected void onCreate(Bundle savedInstanceState) {
         getDelegate().installViewFactory();
         getDelegate().onCreate(savedInstanceState);
+        //Check prefs on every activity starts
+        if (getSharedPreferences("prefs", Context.MODE_PRIVATE).getBoolean("theme", false)) {
+            setTheme(R.style.LightAppTheme);
+        }else {
+            setTheme(R.style.DarkAppTheme); //default
+        }
+        super.onCreate(savedInstanceState);
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
         ListPreference licensePreference = (ListPreference) findPreference(Prefs.DEFAULT_LICENSE);
