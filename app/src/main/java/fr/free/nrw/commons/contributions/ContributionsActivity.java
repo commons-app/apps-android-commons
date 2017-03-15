@@ -125,6 +125,7 @@ public  class       ContributionsActivity
             if (mediaDetails != null && savedInstanceState.getBoolean("mediaDetailsVisible")) {
                 // Feels awful that we have to reset this manually!
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                getSupportActionBar().setDisplayShowCustomEnabled(true);
             }
         }
         requestAuthToken();
