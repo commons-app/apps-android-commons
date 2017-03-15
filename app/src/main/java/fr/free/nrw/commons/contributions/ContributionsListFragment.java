@@ -229,6 +229,7 @@ public class ContributionsListFragment extends Fragment {
         }
 
         menu.findItem(R.id.menu_refresh).setVisible(false);
+        menu.findItem(R.id.menu_theme_toggle).setActionView(R.layout.theme_toggle_layout);
     }
 
     /*http://stackoverflow.com/questions/30076392/how-does-this-strange-condition-happens-when-show-menu-item-icon-in-toolbar-over/30337653#30337653
