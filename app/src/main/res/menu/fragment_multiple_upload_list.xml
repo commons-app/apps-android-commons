@@ -6,6 +6,6 @@
     <item android:id="@+id/menu_upload_multiple"
           android:title="@string/share_upload_button"
           app:showAsAction="always|withText"
-          android:icon="@android:drawable/ic_menu_send"
+          android:icon="@drawable/ic_send_white_24dp"
         />
 </menu>
