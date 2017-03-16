@@ -30,6 +30,7 @@
         />
     <item android:id="@+id/menu_theme_toggle"
         android:title="Night mode"
+        android:icon="?attr/toggleButtonIcon"
         app:actionLayout="@layout/theme_toggle_layout"
         app:showAsAction="never"
         />
