@@ -146,4 +146,7 @@ Tocca questo messaggio (o premi Indietro) per saltare l\'aggiunta di categorie.<
   <string name="file_exists">Questo file esiste già su Commons. Sei sicuro di voler continuare?</string>
   <string name="yes">Sì</string>
   <string name="no">No</string>
+  <string name="media_detail_title">Titolo</string>
+  <string name="media_detail_media_title">Titolo del file multimediale</string>
+  <string name="media_detail_description">Descrizione</string>
 </resources>

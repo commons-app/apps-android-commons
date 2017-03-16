@@ -164,4 +164,7 @@ Pouezit war ar c\'hemenn-mañ (pe distroit en a-raok) evit mont dreist ar bazenn
   <string name="media_detail_media_title">Titl ar media</string>
   <string name="media_detail_description">Deskrivadur</string>
   <string name="media_detail_description_explanation">Amañ e lakaer titl ar media. Gallout a ra bezañ hir-mat ha mont dre meur a linenn. Spi hon eus e vo bravik an disoc\'h koulskoude.</string>
+  <string name="become_a_tester_title">Deuit da vezañ un amprouer beta</string>
+  <string name="become_a_tester_description">En em enskrivañ en hor c\'hanol beta war Google Play ha kaout ur rakmoned d\'an arc\'hwelioù nevez d\'an drein difaziet</string>
+  <string name="beta_opt_in_link">https://play.google.com/apps/testing/fr.free.nrw.commons</string>
 </resources>

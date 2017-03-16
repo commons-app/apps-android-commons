@@ -164,4 +164,6 @@
   <string name="media_detail_media_title">כותרת המדיה</string>
   <string name="media_detail_description">תיאור</string>
   <string name="media_detail_description_explanation">תיאור המדיה יהיה כאן. זה יכול להיות ארוך למדי, ולהתפרס על מספר שורות. אנחנו מקווים שזה נראה טוב.</string>
+  <string name="become_a_tester_title">להפוך לבודק בטא</string>
+  <string name="become_a_tester_description">להירשם לערוץ הבטא שלנו בחנות גוגל Play ולקבל גישה מוקדמת לאפשרויות חדשות ותיקוני באגים</string>
 </resources>

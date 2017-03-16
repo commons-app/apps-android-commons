@@ -164,6 +164,10 @@
   <string name="yes">Да</string>
   <string name="no">Нет</string>
   <string name="media_detail_title">Название</string>
+  <string name="media_detail_media_title">Заголовок носителя информации</string>
   <string name="media_detail_description">Описание</string>
+  <string name="media_detail_description_explanation">Здесь располагается описание носителя информации. Оно потенциально может быть весьма длинным и даже располагаться в несколько строк. Однако мы надеемся, что это выглядит симпатично</string>
   <string name="become_a_tester_title">Стать бета-тестером</string>
+  <string name="become_a_tester_description">Подпишитесь на наш канал бета-версии на Google Play и получите ранний доступ к новым функциям и исправлениям ошибок</string>
+  <string name="beta_opt_in_link">https://play.google.com/apps/testing/fr.free.nrw.commons</string>
 </resources>

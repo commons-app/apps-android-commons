@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name" fuzzy="true">Wikimedia Commons</string>
+  <string name="app_name">Commons</string>
   <string name="menu_settings">Setări</string>
   <string name="username">Nume de utilizator</string>
   <string name="password">Parolă</string>
   <string name="login">Autentificare</string>
+  <string name="signup">Înregistrare</string>
   <string name="logging_in_title">Se conectează</string>
   <string name="logging_in_message">Așteptați...</string>
   <string name="login_success">Autentificare reușită!</string>
   <string name="login_failed">Autentificare nereușită!</string>
+  <string name="upload_failed">Fișierul nu a fost găsit. Încercați cu un alt fișier.</string>
   <string name="authentication_failed">Certificare nereușită!</string>
   <string name="uploading_started">Încărcarea a început!</string>
   <string name="upload_completed_notification_title">%1$s s-a încărcat!</string>
@@ -18,7 +20,9 @@
   <string name="upload_progress_notification_title_finishing">Se finalizează încărcarea fișierului %1$s</string>
   <string name="upload_failed_notification_title">Încărcarea fișierului %1$s nu a reușit</string>
   <string name="upload_failed_notification_subtitle">Atingeți pentru a vizualiza</string>
-  <string name="uploads_pending_notification_indicator" fuzzy="true">%d fișiere se încarcă</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="other">1 fișier se încarcă</item>
+  </plurals>
   <string name="title_activity_contributions">Încărcările mele</string>
   <string name="contribution_state_queued">În așteptare</string>
   <string name="contribution_state_failed">Nu a reușit</string>
@@ -26,6 +30,7 @@
   <string name="contribution_state_starting">Se încarcă</string>
   <string name="menu_from_gallery">Din galerie</string>
   <string name="menu_from_camera">Faceți o poză</string>
+  <string name="menu_nearby">În apropiere</string>
   <string name="provider_contributions">Încărcările mele</string>
   <string name="menu_share">Partajare</string>
   <string name="menu_open_in_browser">Afișează în navigator</string>
@@ -68,6 +73,7 @@ Atingeți acest mesaj (sau mergeți înapoi) pentru a omite acest pas.</string>
   <string name="preference_tracking">Rapoarte de utilizare</string>
   <string name="preference_tracking_summary">Trimiteți rapoarte de utilizare către Wikimedia pentru a ajuta la îmbunătățirea aplicației</string>
   <string name="title_activity_settings">Setări</string>
+  <string name="title_activity_signup">Înregistrare</string>
   <string name="menu_about">Despre</string>
   <string name="about_license" fuzzy="true">Software cu sursă deschisă lansat sub &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Licența Apache v2&lt;/a&gt;</string>
   <string name="about_improve" fuzzy="true">Sursa la &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Buguri la &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
@@ -82,8 +88,11 @@ Atingeți acest mesaj (sau mergeți înapoi) pentru a omite acest pas.</string>
   <string name="share_license_summary">Această imagine va fi licențiată sub %1$s</string>
   <string name="menu_download">Descarcă</string>
   <string name="preference_license">Licență</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Atribuireu00A0șiu00A0distribuireu00A0înu00A0condițiiu00A0identiceu00A03.0</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0Atribuireu00A03.0</string>
+  <string name="allow_gps">Obține în mod automat locația curentă</string>
+  <string name="license_name_cc_by_sa_four">Atribuire și distribuire în condiții identice 4.0</string>
+  <string name="license_name_cc_by_four">Atribuire 4.0</string>
+  <string name="license_name_cc_by_sa">Atribuire și distribuire în condiții identice 3.0</string>
+  <string name="license_name_cc_by">Atribuire 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Austria)</string>
@@ -97,6 +106,8 @@ Atingeți acest mesaj (sau mergeți înapoi) pentru a omite acest pas.</string>
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polonia)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (România)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
+  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="license_name_own_pd">own-pd</string>
   <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
@@ -114,6 +125,11 @@ Atingeți acest mesaj (sau mergeți înapoi) pentru a omite acest pas.</string>
   <string name="license_name_pd_ineligible">Domeniul public (nu intră sub protecția drepturilor de autor)</string>
   <string name="license_name_attribution">Atribuire</string>
   <string name="license_name_gfdl">Licența GNU pentru Documentare Liberă</string>
+  <string name="tutorial_3_text">Vă rugăm să NU încărcați:</string>
+  <string name="tutorial_3_subtext">— Selfies sau poze cu prietenii
+— Fotografii descărcate de pe Internet
+— Capturi de ecran din programe sau aplicații proprietare</string>
+  <string name="tutorial_4_text">Exemplu de încărcare:</string>
   <string name="welcome_wikipedia_text">Contribuiți cu imagini personale. Faceți ca articolele Wikipediei să prindă viață!</string>
   <string name="welcome_wikipedia_subtext">Imaginile de pe Wikipedia provin de la Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Imaginile dumneavoastră ajută la educarea oamenilor din întreaga lume.</string>
@@ -126,4 +142,15 @@ Atingeți acest mesaj (sau mergeți înapoi) pentru a omite acest pas.</string>
   <string name="detail_description_empty">Fără descriere</string>
   <string name="detail_license_empty">Licență necunoscută</string>
   <string name="menu_refresh">Reîncarcă</string>
+  <string name="ok">OK</string>
+  <string name="warning">Avertisment</string>
+  <string name="yes">Da</string>
+  <string name="no">Nu</string>
+  <string name="media_detail_title">Titlu</string>
+  <string name="media_detail_media_title">Titlul fișierului</string>
+  <string name="media_detail_description">Descriere</string>
+  <string name="media_detail_description_explanation">Descrierea fișierului vine aici. Aceasta poate fi destul de lungă și va trebuie distribuită pe mai multe linii. Sperăm totuși că arată bine.</string>
+  <string name="become_a_tester_title">Deveniți beta-tester</string>
+  <string name="become_a_tester_description">Abonați-vă la canalul nostru beta pe Google Play și a obține acces rapid la noi caracteristici și corecții de erori</string>
+  <string name="beta_opt_in_link">https://play.google.com/apps/testing/fr.free.nrw.commons</string>
 </resources>
