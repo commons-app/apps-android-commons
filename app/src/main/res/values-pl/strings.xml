@@ -160,4 +160,6 @@ Kliknij ten komunikat lub naciśnij „cofnij”, aby pominąć ten krok.</strin
   <string name="file_exists">Ten plik już istnieje na Commons. Jesteś pewien, że chcesz kontynuować?</string>
   <string name="yes">Tak</string>
   <string name="no">Nie</string>
+  <string name="media_detail_title">Tytuł</string>
+  <string name="media_detail_description">Opis</string>
 </resources>

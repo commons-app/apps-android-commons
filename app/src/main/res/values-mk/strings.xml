@@ -161,4 +161,11 @@ u2022 Категорија: Сиднејска опера, Сиднејскат�
   <string name="file_exists">Податотекава веќе постои на Ризницата. Дали сигурно сакате да продолжите?</string>
   <string name="yes">Да</string>
   <string name="no">Не</string>
+  <string name="media_detail_title">Наслов</string>
+  <string name="media_detail_media_title">Наслов на податотеката</string>
+  <string name="media_detail_description">Опис</string>
+  <string name="media_detail_description_explanation">Тука оди описот на податотеката. Ова потенцијално може да биде прилично долго, и ќе треба да се преломи во неколку реда. Се надеваме дека ќе изгледа добро.</string>
+  <string name="become_a_tester_title">Станете бета-испробувач</string>
+  <string name="become_a_tester_description">Пријавете се на нашиот бета-канал на Google Play и добивајте ран пристап до нови можности и исправки на грешки</string>
+  <string name="beta_opt_in_link">https://play.google.com/apps/testing/fr.free.nrw.commons</string>
 </resources>

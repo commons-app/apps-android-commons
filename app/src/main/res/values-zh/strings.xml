@@ -36,7 +36,7 @@
   <string name="menu_share">分享</string>
   <string name="menu_open_in_browser">在浏览器中查看</string>
   <string name="share_title_hint">标题</string>
-  <string name="share_description_hint">描述</string>
+  <string name="share_description_hint">说明</string>
   <string name="login_failed_network">无法登录 - 网络故障</string>
   <string name="login_failed_username">无法登录 - 请检查您的用户名</string>
   <string name="login_failed_password">无法登录 - 请检查您的密码</string>
@@ -159,4 +159,8 @@
   <string name="file_exists">此文件在共享资源已存在。您确定要继续么？</string>
   <string name="yes">是</string>
   <string name="no">否</string>
+  <string name="media_detail_title">标题</string>
+  <string name="media_detail_media_title">媒体的标题</string>
+  <string name="media_detail_description">说明</string>
+  <string name="media_detail_description_explanation">在此填写媒体的说明。这可能会相当长，并将需要包裹在多行中。我们希望它看起来很好。</string>
 </resources>

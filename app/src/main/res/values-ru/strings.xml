@@ -163,4 +163,7 @@
   <string name="file_exists">Этот файл уже существует на Викискладе. Вы уверены, что хотите продолжить?</string>
   <string name="yes">Да</string>
   <string name="no">Нет</string>
+  <string name="media_detail_title">Название</string>
+  <string name="media_detail_description">Описание</string>
+  <string name="become_a_tester_title">Стать бета-тестером</string>
 </resources>
