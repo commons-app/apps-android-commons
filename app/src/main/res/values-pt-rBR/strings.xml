@@ -158,4 +158,9 @@ Aperte nesta mensagem (ou aperte para voltar) para pular este passo</string>
   <string name="file_exists">Este arquivo já existe no Commons. Tem certeza de que deseja continuar?</string>
   <string name="yes">Sim</string>
   <string name="no">Não</string>
+  <string name="media_detail_title">Título</string>
+  <string name="media_detail_media_title">Título da mídia</string>
+  <string name="media_detail_description">Descrição</string>
+  <string name="media_detail_description_explanation">Descrição da mídia aqui. Isso pode ser potencialmente longo e precisará envolver múltiplas linhas. Esperamos que seja agradável.</string>
+  <string name="become_a_tester_title">Seja um Testador Beta</string>
 </resources>
