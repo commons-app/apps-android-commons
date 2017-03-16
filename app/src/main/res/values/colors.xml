@@ -16,7 +16,7 @@
     <color name="fragment_categorisation_background_dark">#AA000000</color>
     <color name="fragment_categorisation_background_light">#44ffffff</color>
     <color name="button_background_dark">#90000000</color>
-    <color name="button_background_light">#60000000</color>
+    <color name="button_background_light">#B0000000</color>
     <color name="upload_overlay_background_dark">#77000000</color>
     <color name="upload_overlay_background_light">#44000000</color>
 
