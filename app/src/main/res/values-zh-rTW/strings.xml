@@ -12,41 +12,41 @@
   <string name="login_failed">登入失敗！</string>
   <string name="upload_failed">找不到檔案。請嘗試其它檔案看看。</string>
   <string name="authentication_failed">驗證失敗 ！</string>
-  <string name="uploading_started">開始上載！</string>
-  <string name="upload_completed_notification_title">已%1$s上載！</string>
-  <string name="upload_completed_notification_text">點選檢視您的上載</string>
-  <string name="upload_progress_notification_title_start">開始上載%1$s</string>
-  <string name="upload_progress_notification_title_in_progress">正在上載%1$s</string>
-  <string name="upload_progress_notification_title_finishing">正在完成上載%1$s</string>
-  <string name="upload_failed_notification_title">上載%1$s失敗</string>
-  <string name="upload_failed_notification_subtitle">點選檢視</string>
+  <string name="uploading_started">開始上傳！</string>
+  <string name="upload_completed_notification_title">已上傳%1$s！</string>
+  <string name="upload_completed_notification_text">點選檢視您上傳的項目</string>
+  <string name="upload_progress_notification_title_start">開始上傳%1$s</string>
+  <string name="upload_progress_notification_title_in_progress">正在上傳%1$s</string>
+  <string name="upload_progress_notification_title_finishing">正在完成上傳%1$s</string>
+  <string name="upload_failed_notification_title">上傳%1$s失敗</string>
+  <string name="upload_failed_notification_subtitle">輕觸檢視</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">正在上載一個檔案</item>
     <item quantity="other">正在上載%d檔案</item>
   </plurals>
-  <string name="title_activity_contributions">我的上載</string>
-  <string name="contribution_state_queued">隊列</string>
+  <string name="title_activity_contributions">我的上傳</string>
+  <string name="contribution_state_queued">已佇列</string>
   <string name="contribution_state_failed">失敗</string>
   <string name="contribution_state_in_progress">%1$d%%完成</string>
-  <string name="contribution_state_starting">上載中</string>
+  <string name="contribution_state_starting">上傳中</string>
   <string name="menu_from_gallery">從圖庫</string>
   <string name="menu_from_camera">拍照</string>
   <string name="menu_nearby">附近</string>
-  <string name="provider_contributions">我的上載</string>
+  <string name="provider_contributions">我的上傳</string>
   <string name="menu_share">分享</string>
   <string name="menu_open_in_browser">在瀏覽器中開啟</string>
   <string name="share_title_hint">標題</string>
   <string name="share_description_hint">描述</string>
-  <string name="login_failed_network">無法登入-網路故障</string>
-  <string name="login_failed_username">無法登入-請檢查您的使用者名稱</string>
-  <string name="login_failed_password">無法登入-請檢查您的密碼</string>
-  <string name="login_failed_throttled">太多次不成功的嘗試。請於幾分鐘後再嘗試。</string>
+  <string name="login_failed_network">無法登入－網路故障</string>
+  <string name="login_failed_username">無法登入－請檢查您的使用者名稱</string>
+  <string name="login_failed_password">無法登入－請檢查您的密碼</string>
+  <string name="login_failed_throttled">失敗次數過多。請於幾分鐘後重試。</string>
   <string name="login_failed_blocked">很抱歉，該使用者在維基共享資源上已被封禁</string>
   <string name="login_failed_generic">登入失敗</string>
-  <string name="share_upload_button">上載</string>
+  <string name="share_upload_button">上傳</string>
   <string name="multiple_share_base_title">命名此組</string>
   <string name="provider_modifications">修改</string>
-  <string name="menu_upload_single">上載</string>
+  <string name="menu_upload_single">上傳</string>
   <string name="categories_search_text_hint">搜尋分類</string>
   <string name="menu_save_categories">儲存</string>
   <plurals name="contributions_subtitle">
@@ -62,35 +62,37 @@
     <item quantity="one">1 上傳</item>
     <item quantity="other">%d 上傳</item>
   </plurals>
-  <string name="categories_not_found">沒有發現與 %1$s 匹配的分類</string>
-  <string name="categories_skip_explanation">添加分類使您的相片在維基共享資源上更容易發現。
+  <string name="categories_not_found">沒有發現與 %1$s 相符的分類</string>
+  <string name="categories_skip_explanation">添加分類使您的圖片在維基共享資源上更容易被找到。
 
-開始輸入要添加的分類。
+開始輸入以添加分類。
 按此（或按返回）跳過此步驟。</string>
   <string name="categories_activity_title">分類</string>
   <string name="preference_tracking">使用報告</string>
-  <string name="preference_tracking_summary">向維基媒體傳送使用報告，幫助我們改進此程式</string>
+  <string name="preference_tracking_summary">向維基媒體傳送使用報告，協助我們改進此應用程式</string>
   <string name="title_activity_settings">設定</string>
   <string name="title_activity_signup">註冊</string>
   <string name="menu_about">關於</string>
   <string name="about_license">以&lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache許可證 v2&lt;/a&gt;釋放的開放源碼軟體。維基媒體共享資源和其標誌圖像是維基媒體基金會的標記；並在維基媒體基金會的許可下使用。我們並非由維基媒體基金會所認可、也不隸屬於維基媒體基金會。</string>
-  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;原始碼&lt;/a&gt;和&lt;a href=\"https://commons-app.github.io/\"&gt;網站&lt;/a&gt;位於GitHub上&lt;/a&gt;。建立一個新的&lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub問題&lt;/a&gt;來回報問題和提出建議。</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;原始碼&lt;/a&gt;和&lt;a href=\"https://commons-app.github.io/\"&gt;網站&lt;/a&gt;位於GitHub上。建立一個新的&lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub問題&lt;/a&gt;來回報問題和提出建議。</string>
   <string name="about_privacy_policy">&lt;a href=\"http://wikimediafoundation.org/wiki/Privacy_policy\"&gt;私隱政策&lt;/a&gt;</string>
   <string name="title_activity_about">關於</string>
   <string name="menu_feedback">傳送回饋 （通過電子郵件）</string>
   <string name="no_email_client">未安裝電子郵件客戶端</string>
   <string name="provider_categories">最近使用過的分類</string>
   <string name="waiting_first_sync">等待首次同步…</string>
-  <string name="no_uploads_yet">你尚未上傳任何照片。</string>
+  <string name="no_uploads_yet">您尚未上傳任何照片。</string>
   <string name="menu_retry_upload">重試</string>
   <string name="menu_cancel_upload">取消</string>
   <string name="share_license_summary">此圖片將以%1$s協議授權下上載</string>
   <string name="menu_download">下載</string>
   <string name="preference_license">協議授權</string>
-  <string name="use_previous" fuzzy="true">使用先前標題/描述</string>
+  <string name="use_previous">使用先前標題/描述</string>
   <string name="allow_gps">自動獲取目前位置</string>
   <string name="allow_gps_summary">若圖片沒有地理標記的話以取得目前位置來作為分類建議。</string>
-  <string name="license_name_cc_by_sa">姓名標示-相同方式分享3.0</string>
+  <string name="license_name_cc_by_sa_four"> 姓名標示-相同方式分享4.0</string>
+  <string name="license_name_cc_by_four">姓名標示4.0</string>
+  <string name="license_name_cc_by_sa"> 姓名標示-相同方式分享3.0</string>
   <string name="license_name_cc_by">姓名標示3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC姓名標示-相同方式分享3.0</string>
@@ -142,7 +144,7 @@
   <string name="welcome_wikipedia_subtext">維基百科上的圖像來自維基共享資源。</string>
   <string name="welcome_copyright_text">您的圖片可以幫助教育世界各地的人。</string>
   <string name="welcome_copyright_subtext">避免受版權保護的材料，例如從互聯網的圖片、海報、書籍封面等</string>
-  <string name="welcome_final_text">你覺得你明白了嗎？</string>
+  <string name="welcome_final_text">您明白了嗎？</string>
   <string name="welcome_final_button_text">是！</string>
   <string name="detail_panel_cats_label">分類</string>
   <string name="detail_panel_cats_loading">載入中…</string>

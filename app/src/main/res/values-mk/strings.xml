@@ -74,7 +74,7 @@
   <string name="title_activity_signup">Регистрација</string>
   <string name="menu_about">За извршникот</string>
   <string name="about_license">Програм со отворен код, издаден под лиценцата &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Апачи вер. 2&lt;/a&gt;. ризницата и нејзиното лого се заштитни знаци на Фондацијата Викимедија и се користат со нејзина дозвола. Ние не сме поддржани и поврзани со Фондацијата Викимедија.</string>
-  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Извор&lt;/a&gt; и &lt;a href=\"https://commons-app.github.io/\"&gt;мреж. место&lt;/a&gt; на GitHub&lt;/a&gt;. Создајте нов &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;случај на GitHub&lt;/a&gt; за пријавување грешки и давање предлози.</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Извор&lt;/a&gt; и &lt;a href=\"https://commons-app.github.io/\"&gt;мреж. место&lt;/a&gt; на GitHub&lt;/a&gt;. Создајте нов &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;случај на GitHub&lt;/a&gt; за пријавување грешки и давање предлози.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Заштита на личните податоци\"&gt;Заштита_на_личните_податоци&lt;/a&gt;</string>
   <string name="title_activity_about">За извршникот</string>
   <string name="menu_feedback">Испратете Ваше мислење (по е-пошта)</string>
@@ -90,7 +90,9 @@
   <string name="use_previous">Користи претходен наслов/опис</string>
   <string name="allow_gps">Автоматски давај ја тековната местоположба</string>
   <string name="allow_gps_summary">Добивање на тековната местоположба за да се дадат предлози за категории, доколку сликата нема геоознаки</string>
-  <string name="license_name_cc_by_sa">Наведи извор-Сподели под исти услови 3.0</string>
+  <string name="license_name_cc_by_sa_four"> Наведи извор-Сподели под исти услови 4.0</string>
+  <string name="license_name_cc_by_four">Наведи извор 4.0</string>
+  <string name="license_name_cc_by_sa"> Наведи извор-Сподели под исти услови 3.0</string>
   <string name="license_name_cc_by">Наведи извор 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>

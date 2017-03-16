@@ -78,7 +78,7 @@
   <string name="title_activity_signup">Зареєструватися</string>
   <string name="menu_about">Про програму</string>
   <string name="about_license">Програмне забезпечення з відкритим кодом випущено під &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;ліцензією Apache в.2&lt;/a&gt;. Вікісховище і його логотип є товарними знаками Фонду Вікімедіа і використовуються за дозволом Фонду Вікімедіа. Ми не користуємось підтримкою Фонду Вікімедіа і не є його афіліатом.</string>
-  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Вихідний код&lt;/a&gt; і &lt;a href=\"https://commons-app.github.io/\"&gt;веб-сайт&lt;/a&gt; на GitHub&lt;/a&gt;. Створіть нове &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;завдання на GitHub&lt;/a&gt; для повідомлення про баги або для висловлення пропозицій.</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Вихідний код&lt;/a&gt; і &lt;a href=\"https://commons-app.github.io/\"&gt;веб-сайт&lt;/a&gt; на GitHub. Створіть нове &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;завдання на GitHub&lt;/a&gt; для повідомлення про баги або для висловлення пропозицій.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Політика приватності&lt;/a&gt;</string>
   <string name="title_activity_about">Про програму</string>
   <string name="menu_feedback">Надіслати відгук (електронною поштою)</string>
@@ -94,7 +94,9 @@
   <string name="use_previous">Використати попередню назву/опис</string>
   <string name="allow_gps">Автоматично отримати поточне розташування</string>
   <string name="allow_gps_summary">Отримати поточне розташування, щоб з\'явилися підказки категорій, якщо зображення не має геотегів</string>
-  <string name="license_name_cc_by_sa">CC Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four"> Attribution 4.0</string>
+  <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
   <string name="license_name_cc_by">CCu00A0Attributionu00A03.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>

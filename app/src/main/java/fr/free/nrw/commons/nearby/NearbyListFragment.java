@@ -160,6 +160,7 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
             listview.setAdapter(mAdapter);
 
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                     Place place = places.get(position);
@@ -198,7 +199,7 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             // Get the data item for this position
-            Place place = (Place) getItem(position);
+            Place place = getItem(position);
             Log.d(TAG, "Place " + place.name);
 
             // Check if an existing view is being reused, otherwise inflate the view

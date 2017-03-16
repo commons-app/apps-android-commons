@@ -13,6 +13,7 @@ public class AboutActivity extends Activity {
     private TextView privacyPolicyText;
     private TextView uploadsToText;
 
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
@@ -23,8 +24,8 @@ public class AboutActivity extends Activity {
         privacyPolicyText = (TextView) findViewById(R.id.about_privacy_policy);
         uploadsToText = (TextView) findViewById(R.id.about_uploads_to);
 
-        uploadsToText.setText(fr.free.nrw.commons.CommonsApplication.EVENTLOG_WIKI);
-        versionText.setText(fr.free.nrw.commons.CommonsApplication.APPLICATION_VERSION);
+        uploadsToText.setText(CommonsApplication.EVENTLOG_WIKI);
+        versionText.setText(CommonsApplication.APPLICATION_VERSION);
 
         // We can't use formatted strings directly because it breaks with
         // our localization tools. Grab an HTML string and turn it into

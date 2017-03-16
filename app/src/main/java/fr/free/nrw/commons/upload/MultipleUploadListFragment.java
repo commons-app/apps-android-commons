@@ -11,6 +11,7 @@ import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,7 @@ import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 public class MultipleUploadListFragment extends Fragment {
 
     public interface OnMultipleUploadInitiatedHandler {
-        public void OnMultipleUploadInitiated();
+        void OnMultipleUploadInitiated();
     }
 
     private GridView photosGrid;
@@ -62,18 +63,22 @@ public class MultipleUploadListFragment extends Fragment {
 
     private class PhotoDisplayAdapter extends BaseAdapter {
 
+        @Override
         public int getCount() {
             return detailProvider.getTotalMediaCount();
         }
 
+        @Override
         public Object getItem(int i) {
             return detailProvider.getMediaAtPosition(i);
         }
 
+        @Override
         public long getItemId(int i) {
             return i;
         }
 
+        @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             UploadHolderView holder;
 
@@ -165,10 +170,12 @@ public class MultipleUploadListFragment extends Fragment {
         photosGrid.setColumnWidth(photoSize.x);
 
         baseTitle.addTextChangedListener(new TextWatcher() {
+            @Override
             public void beforeTextChanged(CharSequence charSequence, int i1, int i2, int i3) {
 
             }
 
+            @Override
             public void onTextChanged(CharSequence charSequence, int i1, int i2, int i3) {
                 for(int i = 0; i < detailProvider.getTotalMediaCount(); i++) {
                     Contribution up = (Contribution) detailProvider.getMediaAtPosition(i);
@@ -184,6 +191,7 @@ public class MultipleUploadListFragment extends Fragment {
                 detailProvider.notifyDatasetChanged();
             }
 
+            @Override
             public void afterTextChanged(Editable editable) {
 
             }
@@ -193,7 +201,7 @@ public class MultipleUploadListFragment extends Fragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, android.view.MenuInflater inflater) {
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         menu.clear();
         inflater.inflate(R.menu.fragment_multiple_upload_list, menu);

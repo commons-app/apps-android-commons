@@ -15,22 +15,29 @@
 
     <EditText
         android:id="@+id/titleEdit"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollHorizontally="false"
-        android:singleLine="true"
+        android:maxLines="1"
         android:hint="@string/share_title_hint"
         android:imeOptions="flagNoExtractUi"
         />
 
     <EditText
         android:id="@+id/descEdit"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:hint="@string/share_description_hint"
         android:imeOptions="flagNoExtractUi"
         />
+
+    <Spinner
+        android:id="@+id/licenseSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+    </Spinner>
 
     <Button
         android:text="@string/use_previous"

@@ -41,11 +41,13 @@ public class UploadController {
 
     private boolean isUploadServiceConnected;
     private ServiceConnection uploadServiceConnection = new ServiceConnection() {
+        @Override
         public void onServiceConnected(ComponentName componentName, IBinder binder) {
             uploadService = (UploadService) ((HandlerService.HandlerServiceLocalBinder)binder).getService();
             isUploadServiceConnected = true;
         }
 
+        @Override
         public void onServiceDisconnected(ComponentName componentName) {
             // this should never happen
             throw new RuntimeException("UploadService died but the rest of the process did not!");
@@ -91,7 +93,7 @@ public class UploadController {
             contribution.setDescription("");
         }
 
-        String license = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA);
+        String license = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
         contribution.setLicense(license);
 
         //FIXME: Add permission request here. Only executeAsyncTask if permission has been granted

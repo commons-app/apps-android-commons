@@ -39,7 +39,7 @@ public class MediaDetailFragment extends Fragment {
 
     private boolean editable;
     private DisplayImageOptions displayOptions;
-    private fr.free.nrw.commons.media.MediaDetailPagerFragment.MediaDetailProvider detailProvider;
+    private MediaDetailPagerFragment.MediaDetailProvider detailProvider;
     private int index;
 
     public static MediaDetailFragment forMedia(int index) {
@@ -64,7 +64,7 @@ public class MediaDetailFragment extends Fragment {
     //private EditText title;
     private ProgressBar loadingProgress;
     private ImageView loadingFailed;
-    private fr.free.nrw.commons.media.MediaDetailSpacer spacer;
+    private MediaDetailSpacer spacer;
     private int initialListTop = 0;
 
     private TextView title;
@@ -97,7 +97,7 @@ public class MediaDetailFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        detailProvider = (fr.free.nrw.commons.media.MediaDetailPagerFragment.MediaDetailProvider)getActivity();
+        detailProvider = (MediaDetailPagerFragment.MediaDetailProvider)getActivity();
 
         if(savedInstanceState != null) {
             editable = savedInstanceState.getBoolean("editable");
@@ -108,7 +108,7 @@ public class MediaDetailFragment extends Fragment {
             index = getArguments().getInt("index");
             initialListTop = 0;
         }
-        categoryNames = new ArrayList<String>();
+        categoryNames = new ArrayList<>();
         categoryNames.add(getString(R.string.detail_panel_cats_loading));
 
         final View view = inflater.inflate(R.layout.fragment_media_detail, container, false);
@@ -119,7 +119,7 @@ public class MediaDetailFragment extends Fragment {
         scrollView = (ScrollView) view.findViewById(R.id.mediaDetailScrollView);
 
         // Detail consists of a list view with main pane in header view, plus category list.
-        spacer = (fr.free.nrw.commons.media.MediaDetailSpacer) view.findViewById(R.id.mediaDetailSpacer);
+        spacer = (MediaDetailSpacer) view.findViewById(R.id.mediaDetailSpacer);
         title = (TextView) view.findViewById(R.id.mediaDetailTitle);
         desc = (TextView) view.findViewById(R.id.mediaDetailDesc);
         license = (TextView) view.findViewById(R.id.mediaDetailLicense);
@@ -132,6 +132,7 @@ public class MediaDetailFragment extends Fragment {
             // Ask the detail provider to ping us when we're ready
             Log.d("Commons", "MediaDetailFragment not yet ready to display details; registering observer");
             dataObserver = new DataSetObserver() {
+                @Override
                 public void onChanged() {
                     Log.d("Commons", "MediaDetailFragment ready to display delayed details!");
                     detailProvider.unregisterDataSetObserver(dataObserver);
@@ -147,6 +148,7 @@ public class MediaDetailFragment extends Fragment {
 
         // Progressively darken the image in the background when we scroll detail pane up
         scrollListener = new ViewTreeObserver.OnScrollChangedListener() {
+            @Override
             public void onScrollChanged() {
                 updateTheDarkness();
             }
@@ -158,6 +160,7 @@ public class MediaDetailFragment extends Fragment {
         layoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
             private int currentHeight = -1;
 
+            @Override
             public void onGlobalLayout() {
                 int viewHeight = view.getHeight();
                 //int textHeight = title.getLineHeight();
@@ -245,15 +248,18 @@ public class MediaDetailFragment extends Fragment {
             //Even if image is loaded from device storage, it will display, albeit with empty desc and cat.
             Log.d("Volley", "Actual URL does not start with http and is: " + actualUrl);
             com.nostra13.universalimageloader.core.ImageLoader.getInstance().displayImage(actualUrl, image, displayOptions, new ImageLoadingListener() {
+                @Override
                 public void onLoadingStarted(String s, View view) {
                     loadingProgress.setVisibility(View.VISIBLE);
                 }
 
+                @Override
                 public void onLoadingFailed(String s, View view, FailReason failReason) {
                     loadingProgress.setVisibility(View.GONE);
                     loadingFailed.setVisibility(View.VISIBLE);
                 }
 
+                @Override
                 public void onLoadingComplete(String s, View view, Bitmap bitmap) {
                     loadingProgress.setVisibility(View.GONE);
                     loadingFailed.setVisibility(View.GONE);
@@ -278,6 +284,7 @@ public class MediaDetailFragment extends Fragment {
                     rebuildCatList();
                 }
 
+                @Override
                 public void onLoadingCancelled(String s, View view) {
                     Log.e("Volley", "Image loading cancelled. But why?");
                 }
@@ -333,6 +340,7 @@ public class MediaDetailFragment extends Fragment {
         textView.setText(cat);
         if (categoriesLoaded && categoriesPresent) {
             textView.setOnClickListener(new View.OnClickListener() {
+                @Override
                 public void onClick(View view) {
                     String selectedCategoryTitle = "Category:" + catName;
                     Intent viewIntent = new Intent();

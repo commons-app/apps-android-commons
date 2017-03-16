@@ -7,9 +7,9 @@
     android:gravity="center_vertical"
     >
 
-    <RelativeLayout
+    <LinearLayout
         android:gravity="center"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="240dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -27,11 +27,9 @@
             android:id="@+id/proprietary_x"
             android:layout_marginLeft="10dp"
             android:layout_width="140dp"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/selfie_x"
-            />
+            android:layout_height="wrap_content" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <TextView
         android:layout_width="295dp"

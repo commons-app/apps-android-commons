@@ -5,6 +5,7 @@
   <string name="username">Gebruikersnaam</string>
   <string name="password">Wachtwoord</string>
   <string name="login">Aanmelden</string>
+  <string name="signup">Registreren</string>
   <string name="logging_in_title">Bezig met aanmelden</string>
   <string name="logging_in_message">Een ogenblik geduld...</string>
   <string name="login_success">Aanmelden geslaagd</string>
@@ -19,7 +20,10 @@
   <string name="upload_progress_notification_title_finishing">Het uploaden van %1$s is afgerond</string>
   <string name="upload_failed_notification_title">Het uploaden van %1$s is mislukt</string>
   <string name="upload_failed_notification_subtitle">Wijs aan om te bekijken</string>
-  <string name="uploads_pending_notification_indicator" fuzzy="true">%d bestanden aan het uploaden</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%d bestand aan het uploaden</item>
+    <item quantity="other">%d bestanden aan het uploaden</item>
+  </plurals>
   <string name="title_activity_contributions">Mijn uploads</string>
   <string name="contribution_state_queued">In wachtrij</string>
   <string name="contribution_state_failed">Mislukt</string>
@@ -36,7 +40,7 @@
   <string name="login_failed_network">Aanmelden niet mogelijk. Er is een probleem met het netwerk</string>
   <string name="login_failed_username">Aanmelden niet mogelijk. Controleer uw gebruikersnaam</string>
   <string name="login_failed_password">Aanmelden niet mogelijk. Controleer uw wachtwoord</string>
-  <string name="login_failed_throttled" fuzzy="true">U hebt te vaak geprobeerd aan te melden. Probeer het over een aantal minuten opnieuw</string>
+  <string name="login_failed_throttled">U hebt te vaak geprobeerd aan te melden. Probeer het over een aantal minuten opnieuw.</string>
   <string name="login_failed_blocked">Deze gebruiker is helaas geblokkeerd op Wikimedia Commons</string>
   <string name="login_failed_generic">Aanmelden mislukt</string>
   <string name="share_upload_button">Uploaden</string>
@@ -70,8 +74,8 @@ Klik op dit bericht, of ga terug, om deze stap over te slaan.</string>
   <string name="title_activity_settings">Instellingen</string>
   <string name="title_activity_signup">Registreren</string>
   <string name="menu_about">Over</string>
-  <string name="about_license" fuzzy="true">Open sourcesoftware vrijgegeven onder de &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
-  <string name="about_improve" fuzzy="true">Broncode op &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Bugs in &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_license">Open sourcesoftware vrijgegeven onder de &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Wikimedia Commons en haar logo zijn handelsmerken van de Wikimedia Foundation en worden gebruikt met toestemming van de Wikimedia Foundation. We worden niet bekrachtigd door en zijn niet verbonden met de Wikimedia Foundation.</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Broncode&lt;/a&gt; en &lt;a href=\"https://commons-app.github.io/\"&gt;website&lt;/a&gt; op GitHub. Maak een nieuwe &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;melding op GitHub&lt;/a&gt; voor bugs en suggesties.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privacybeleid&lt;/a&gt;</string>
   <string name="title_activity_about">Over</string>
   <string name="menu_feedback">Terugkoppeling geven (via e-mail)</string>
@@ -84,7 +88,10 @@ Klik op dit bericht, of ga terug, om deze stap over te slaan.</string>
   <string name="share_license_summary">Deze afbeelding wordt gelicenseerd onder %1$s</string>
   <string name="menu_download">Downloaden</string>
   <string name="preference_license">Licentie</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Naamsvermelding-Gelijku00A0delenu00A03.0</string>
+  <string name="use_previous">Vorige naam/beschrijving gebruiken</string>
+  <string name="allow_gps">Automatisch huidige locatie ophalen</string>
+  <string name="allow_gps_summary">Huidige locatie ophalen om categoriesuggesties te maken als het beeld geen geotags heeft</string>
+  <string name="license_name_cc_by_sa"> Naamsvermelding-GelijkDelen 3.0</string>
   <string name="license_name_cc_by">Naamsvermelding 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
@@ -118,7 +125,20 @@ Klik op dit bericht, of ga terug, om deze stap over te slaan.</string>
   <string name="license_name_pd_ineligible">Publiek domein (komt niet in aanmerking voor auteursrechten)</string>
   <string name="license_name_attribution">Naamsvermelding</string>
   <string name="license_name_gfdl">GNU-licentie voor vrije documentatie</string>
+  <string name="tutorial_1_text">Op Wikimedia Commons staan de meeste afbeeldingen die worden gebruikt in Wikipedia.</string>
+  <string name="tutorial_1_subtext">Uw afbeeldingen helpen mensen over de hele wereld met kennis opdoen!</string>
+  <string name="tutorial_2_text">Upload alstublieft alleen afbeeldingen die volledig door uzelf gemaakt zijn:</string>
+  <string name="tutorial_2_subtext">- Natuurlijke objecten (bloemen, dieren, bergen)
+- Nuttige objecten (fietsen, treinstations)
+- Beroemde mensen (uw burgemeester, Olympische atleten u hebt ontmoet)</string>
   <string name="tutorial_3_text">Gelieve NIET te uploaden:</string>
+  <string name="tutorial_3_subtext">- Selfies of foto\'s van uw vrienden
+- Foto\'s die u hebt gedownload van het Internet
+- Screenshots van eigen apps</string>
+  <string name="tutorial_4_text">Voorbeeld van een upload:</string>
+  <string name="tutorial_4_subtext">- Titel: Sydney Opera House
+- Beschrijving: het Sydney Opera House gezien vanaf de overkant van de baai
+- Categorieën: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Draag uw afbeelding bij. Help pagina\'s in Wikipedia tot leven te laten komen!</string>
   <string name="welcome_wikipedia_subtext">Afbeeldingen op Wikipedia komen van Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Uw afbeeldingen helpen mensen van over de hele wereld te leren.</string>
@@ -131,7 +151,10 @@ Klik op dit bericht, of ga terug, om deze stap over te slaan.</string>
   <string name="detail_description_empty">Geen beschrijving</string>
   <string name="detail_license_empty">Onbekende licentie</string>
   <string name="menu_refresh">Vernieuwen</string>
+  <string name="storage_permission_rationale">Benodigde toestemming: Lees externe opslag. Zonder deze toestemming kan de app niet functioneren.</string>
+  <string name="location_permission_rationale">Optionele toestemming: Huidige locatie ophalen voor categoriesuggesties</string>
   <string name="ok">OK</string>
+  <string name="title_activity_nearby">Plaatsen in de buurt</string>
   <string name="warning">Waarschuwing</string>
   <string name="file_exists">Dit bestand bestaat al op Commons. Weet u zeker dat u wilt doorgaan?</string>
   <string name="yes">Ja</string>

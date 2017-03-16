@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">The name of the application.
+  <string name="app_name">The name of the application. A short form of \"Wikimedia Commons\". It is used in the app\'s launcher icon.
 {{Identical|Wikimedia Commons}}</string>
   <string name="menu_settings">Label for menu item to show settings.
 {{Identical|Settings}}</string>
@@ -80,7 +80,9 @@
   <string name="title_activity_settings">{{Identical|Settings}}</string>
   <string name="title_activity_signup">{{Identical|Sign up}}</string>
   <string name="menu_about">{{Identical|About}}</string>
-  <string name="about_license">License</string>
+  <string name="about_license">\'\'\'The name \"Wikimedia Commons\" is a trademark in English, and must not be translated.\'\'\'
+
+License and legal notice.</string>
   <string name="about_improve">{{doc-important|Please make sure that your translation of \"source\" means \"source code\", not \"reference source\".}}
 Source and Bugs</string>
   <string name="about_privacy_policy">HTML fragment linking to Wikimedia\'s privacy policy. Note: avoid percent-encoding in the URL, as this causes problems with Android\'s resource compiler. Use accented/non-ASCII characters \"as is\" if possible. (We can fix it manually, so don\'t worry too much about it.)
@@ -97,8 +99,9 @@ Source and Bugs</string>
   <string name="menu_download">Menu item text prompting user to download a selected photo or media file locally.
 {{Identical|Download}}</string>
   <string name="preference_license">{{Identical|License}}</string>
-  <string name="license_name_cc_by_sa">CC Attribution-Sharelike License display name. Use the non-breaking space character(u00A0) between \'CC\' and \'Attribution-Sharealike\'</string>
-  <string name="license_name_cc_by">CC Attribution License display name. Use the non-breaking space character(u00A0) between \'CC\' and \'Attribution\'</string>
+  <string name="use_previous">This is a button text. Concise wording is preferred (e.g. \"&amp;\" instead of \"and\"), where possible. It should ideally be rendered in one line, even on small devices.</string>
+  <string name="license_name_cc_by_sa"> Attribution-Sharelike License display name.</string>
+  <string name="license_name_cc_by">CC Attribution License display name.</string>
   <string name="license_name_cc0">CC0 License display name.</string>
   <string name="license_name_cc_by_sa_3_0">{{Identical|CC BY-SA}}</string>
   <string name="license_name_cc_by_3_0">{{Identical|CC BY}}</string>

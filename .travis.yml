@@ -3,10 +3,10 @@ android:
   components:
     - platform-tools
     - tools
-    - build-tools-25.0.0
+    - build-tools-25.0.1
     - extra-google-m2repository
     - extra-android-m2repository
-    - android-23
+    - android-25
     - sys-img-x86-android-18
 jdk:
   # - openjdk8 # not yet available

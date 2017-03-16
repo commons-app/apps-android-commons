@@ -90,8 +90,10 @@ Tippe auf diese Nachricht oder drücke „Zurück“, um diesen Schritt zu über
   <string name="use_previous">Vorherige(n) Titel/Beschreibung verwenden</string>
   <string name="allow_gps">Aktuellen Standort automatisch abrufen</string>
   <string name="allow_gps_summary">Ruft den aktuellen Standort ab, um Kategorievorschläge anzubieten, falls das Bild keine Geotags hat.</string>
-  <string name="license_name_cc_by_sa">CCu00A0Attribution-ShareAlikeu00A03.0</string>
-  <string name="license_name_cc_by">CCu00A0Attributionu00A03.0</string>
+  <string name="license_name_cc_by_sa_four">Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four">Attribution 4.0</string>
+  <string name="license_name_cc_by_sa">Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by">Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC-BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC-BY-SA 3.0 (Österreich)</string>

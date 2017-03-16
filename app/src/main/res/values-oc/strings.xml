@@ -72,7 +72,7 @@
   <string name="share_license_summary">Aqueste imatge serà jos licéncia %1$s</string>
   <string name="menu_download">Telecargar</string>
   <string name="preference_license">Licéncia</string>
-  <string name="license_name_cc_by_sa">Atribucion-PartimentIdentic 3.0</string>
+  <string name="license_name_cc_by_sa"> Atribucion-PartimentIdentic 3.0</string>
   <string name="license_name_cc_by">Atribucion 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>

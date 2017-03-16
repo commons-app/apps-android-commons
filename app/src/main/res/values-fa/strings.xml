@@ -10,6 +10,7 @@
   <string name="logging_in_message">لطفاً صبر کنید...</string>
   <string name="login_success">ورود موفق!</string>
   <string name="login_failed">ورود ناموفق!</string>
+  <string name="upload_failed">پرونده یافت نشد لطفاً پرونده دیگری را امتحان کنید.</string>
   <string name="authentication_failed">تأیید اعتبار انجام نشد!</string>
   <string name="uploading_started">بارگذاری آغاز شد!</string>
   <string name="upload_completed_notification_title">%1$s بارگذاری شد!</string>
@@ -19,7 +20,7 @@
   <string name="upload_progress_notification_title_finishing">اتمام بارگذاری %1$s</string>
   <string name="upload_failed_notification_title">%1$s بارگذاری نشد</string>
   <string name="upload_failed_notification_subtitle">برای دیدن انگشت بزنید</string>
-  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
+  <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">یک پرونده در حال بارگذاری</item>
     <item quantity="other">%d پرونده در حال بارگذاری</item>
   </plurals>
@@ -70,12 +71,16 @@
   <string name="preference_tracking">گزارش‌های استفاده</string>
   <string name="preference_tracking_summary">برای کمک به بهبود نرم‌افزار، گزارش‌های استفاده را برای ویکی‌مدیا ارسال نمائید</string>
   <string name="title_activity_settings">تنظیمات</string>
+  <string name="title_activity_signup">ثبت نام</string>
   <string name="menu_about">درباره</string>
-  <string name="about_license" fuzzy="true">نرم‌افزار متن‌باز آزاد تحت &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;مجوز آپاچی نسخهٔ ۲&lt;/a&gt;</string>
-  <string name="about_improve" fuzzy="true">منبع در &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. اشکالات در &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;باگزیلا&lt;/a&gt;.</string>
+  <string name="about_license">نرم‌افزار متن‌باز آزاد تحت &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;مجوز آپاچی نسخهٔ ۲&lt;/a&gt;
+
+ویکی‌انبار و نشانش یک نشان تجاری‌ست و با اجازهٔ بنیاد ویکی‌مدیا استفاده می‌شود. ما زیرمجموعه یا شعبهٔ بنیاد نیستیم.</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Source&lt;/a&gt; and &lt;a href=\"https://commons-app.github.io/\"&gt;وب‌سایت&lt;/a&gt; در گیت‌هاب. ایجاد یک &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;درخواست در گیت‌هاب&lt;/a&gt; برای گزارش باگ و یا پیشنهاد یک خصوصیت جدید.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;سیاست حفظ حریم خصوصی&lt;/a&gt;</string>
   <string name="title_activity_about">درباره</string>
   <string name="menu_feedback">ارسال بازخورد (از طریق ایمیل)</string>
+  <string name="no_email_client">نرم‌افزار ایمیل نصب نیست</string>
   <string name="provider_categories">رده‌هایی که اخیراً استفاده شده‌اند</string>
   <string name="waiting_first_sync">در حال انتظار برای اولین همگام‌سازی...</string>
   <string name="no_uploads_yet">شما هنوز نگاره‌ای بارگذاری نکرده‌اید.</string>
@@ -84,6 +89,9 @@
   <string name="share_license_summary">این نگاره تحت مجوز %1$s است</string>
   <string name="menu_download">دریافت</string>
   <string name="preference_license">مجوز</string>
+  <string name="use_previous">از عنوان/توضیحات پیشین استفاده کنید</string>
+  <string name="allow_gps">دریافت خودکار موقعیت کنونی</string>
+  <string name="allow_gps_summary">درحال دریافت موقعیت برای پیشنهاد رده در صورتی که برچسب جغرافیایی وجود نداشته باشد.</string>
   <string name="license_name_cc_by_sa">CC Attribution-ShareAlike 3.0</string>
   <string name="license_name_cc_by">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
@@ -99,6 +107,7 @@
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (لهستان)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (رمانی)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="license_name_own_pd">own-pd</string>
@@ -117,6 +126,20 @@
   <string name="license_name_pd_ineligible">مالکیت عمومی (فاقد شرایط لازم برای حق تکثیر)</string>
   <string name="license_name_attribution">انتساب</string>
   <string name="license_name_gfdl">مجوز اسناد آزاد گنو</string>
+  <string name="tutorial_1_text">ویکی‌انبار اکثر پرونده‌هایی که در ویکی‌پدیا استفاده می‌شوند را در خود نگه می‌دارد.</string>
+  <string name="tutorial_1_subtext">تصاویر شما به مردم در اقصی نقاط دنیا کمک می‌کند!</string>
+  <string name="tutorial_2_text">لطفاً تصاویری که توسط خودتان گرفته شده‌اند یا ایجاد شده‌اند را بارگذاری کنید:</string>
+  <string name="tutorial_2_subtext">-اجسام طبیعی (گیاه، جانور، کوه)
+-اجسام کاربردی (دوچرخه، ایستگاه قطار)
+-افراد مشهور (شهردار، قهرمانان المپیک)</string>
+  <string name="tutorial_3_text">لطفاً بارگذاری نکنید:</string>
+  <string name="tutorial_3_subtext">-سلفی خودتان یا تصویر دوستانتان
+-تصاویری که از اینترنت دانلود کردید
+-نماگرفت از دیگر اپلیکیشن‌‌ها</string>
+  <string name="tutorial_4_text">نمونه بارگذاری:</string>
+  <string name="tutorial_4_subtext">-عنوان: خانهٔ اپرای سیدنی
+-توضیحات: خانهٔ اپرای سیدنی از آن طرف خلیج
+-رده‌ها: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">عکس‌های خود را به اشتراک بگذارید. به ویکی‌پدیا کمک کنید تا مقالاتش زنده شوند!</string>
   <string name="welcome_wikipedia_subtext">ویکی‌پدیا از تصویرهای ویکی‌انبار استفاده می‌کند.</string>
   <string name="welcome_copyright_text">تصویرهای شما به مطالعهٔ مردم در سراسر دنیا کمک می‌کنند.</string>
@@ -129,8 +152,12 @@
   <string name="detail_description_empty">بدون توضیحات</string>
   <string name="detail_license_empty">مجوز ناشناخته</string>
   <string name="menu_refresh">تازه‌کردن</string>
+  <string name="storage_permission_rationale">اجازه‌های مورد نیاز: مطالعهٔ حافظهٔ خارجی. اپلیکیشن بدون آن نمی‌تواند کار کند.</string>
+  <string name="location_permission_rationale">اجازه‌های اختیاری: دریافت موقعیت برای پیشنهاد رده</string>
   <string name="ok">تأیید</string>
+  <string name="title_activity_nearby">مکان‌‌های اطراف</string>
   <string name="warning">هشدار</string>
+  <string name="file_exists">پرونده در ویکی‌انبار موجود است. آیا مطمئنید که می‌خواهید ادامه دهید؟</string>
   <string name="yes">بله</string>
   <string name="no">خیر</string>
 </resources>

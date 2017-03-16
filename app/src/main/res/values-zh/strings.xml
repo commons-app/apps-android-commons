@@ -25,7 +25,7 @@
     <item quantity="other">%d个文件正在上传</item>
   </plurals>
   <string name="title_activity_contributions">我的上传</string>
-  <string name="contribution_state_queued">已加入队列</string>
+  <string name="contribution_state_queued">已入队列</string>
   <string name="contribution_state_failed">失败</string>
   <string name="contribution_state_in_progress">%1$d%%完成</string>
   <string name="contribution_state_starting">正在上传</string>
@@ -89,8 +89,10 @@
   <string name="use_previous">使用之前的标题/描述</string>
   <string name="allow_gps">自动获取当前位置</string>
   <string name="allow_gps_summary">如果图片没有地理标记的话，就取得当前位置以提供分类建议</string>
-  <string name="license_name_cc_by_sa">署名-相同方式分享u00A03.0</string>
-  <string name="license_name_cc_by">署名u00A03.0</string>
+  <string name="license_name_cc_by_sa_four">署名-相同方式共享4.0</string>
+  <string name="license_name_cc_by_four">署名4.0</string>
+  <string name="license_name_cc_by_sa">署名-相同方式共享3.0</string>
+  <string name="license_name_cc_by">署名3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0（奥地利）</string>
@@ -126,17 +128,17 @@
   <string name="tutorial_1_text">维基共享资源存储大量用于维基百科的图片。</string>
   <string name="tutorial_1_subtext">您的图像会帮助教育全世界的人！</string>
   <string name="tutorial_2_text">请上传完全由您拍摄或创作的图片：</string>
-  <string name="tutorial_2_subtext">u2022 自然事物（花卉、动物、山峰）
-u2022 有用事物（自行车、火车站）
-u2022 知名人物（您的长官、您见到的奥运会运动员）</string>
+  <string name="tutorial_2_subtext">- 自然事物（花卉、动物、山峰）
+- 有用事物（自行车、火车站）
+- 知名人物（您的长官、您见到的奥运会运动员）</string>
   <string name="tutorial_3_text">请不要上传：</string>
-  <string name="tutorial_3_subtext">u2022 您朋友的自拍照或图片
-u2022 您从互联网下载的图片
-u2022 专利应用的截图</string>
+  <string name="tutorial_3_subtext">- 您朋友的自拍照或图片
+- 您从互联网下载的图片
+- 专利应用的截图</string>
   <string name="tutorial_4_text">示例上传：</string>
-  <string name="tutorial_4_subtext">u2022 标题：悉尼歌剧院
-u2022 描述：从海湾对面看到的悉尼歌剧院
-u2022 分类：Sydney Opera House、Sydney Opera House from the west、Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext">- 标题：悉尼歌剧院
+- 描述：从海湾对面看到的悉尼歌剧院
+- 分类：Sydney Opera House、Sydney Opera House from the west、Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">贡献您的图像。使维基百科的条目更加生动！</string>
   <string name="welcome_wikipedia_subtext">维基百科上的图像来自维基共享资源。</string>
   <string name="welcome_copyright_text">您的图像可以帮助教育世界各地的人。</string>

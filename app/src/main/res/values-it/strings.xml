@@ -5,6 +5,7 @@
   <string name="username">Nome utente</string>
   <string name="password">Password</string>
   <string name="login">Entra</string>
+  <string name="signup">Registrati</string>
   <string name="logging_in_title">Accesso in corso</string>
   <string name="logging_in_message">Attendi per favore...</string>
   <string name="login_success">Accesso effettuato!</string>
@@ -30,6 +31,7 @@
   <string name="contribution_state_starting">Caricamento in corso</string>
   <string name="menu_from_gallery">Dalla galleria</string>
   <string name="menu_from_camera">Scatta foto</string>
+  <string name="menu_nearby">Nelle vicinanze</string>
   <string name="provider_contributions">I miei caricamenti</string>
   <string name="menu_share">Condividi</string>
   <string name="menu_open_in_browser">Visualizza nel browser</string>
@@ -69,12 +71,14 @@ Tocca questo messaggio (o premi Indietro) per saltare l\'aggiunta di categorie.<
   <string name="preference_tracking">Report sull\'utilizzo</string>
   <string name="preference_tracking_summary">Invia report sull\'utilizzo a Wikimedia per aiutarci a migliorare l\'app</string>
   <string name="title_activity_settings">Impostazioni</string>
+  <string name="title_activity_signup">Registrati</string>
   <string name="menu_about">Informazioni</string>
   <string name="about_license">Software open source rilasciato con &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;licenza Apache v2&lt;/a&gt;. Wikimedia Commons ed il suo logo sono marchi registrati della Wikimedia Foundation e sono utilizzati con il permesso della Wikimedia Foundation. Non siamo approvati o affiliati con la Wikimedia Foundation.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Codice sorgente&lt;/a&gt; e &lt;a href=\"https://commons-app.github.io/\"&gt;sito web&lt;/a&gt; su GitHub. Crea una nuova &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;segnalazione GitHub&lt;/a&gt; per riportare errori e suggerimenti.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politica sulla privacy&lt;/a&gt;</string>
   <string name="title_activity_about">Informazioni</string>
   <string name="menu_feedback">Invia un commento (tramite email)</string>
+  <string name="no_email_client">Nessun client di posta elettronica installato</string>
   <string name="provider_categories">Categorie utilizzate recentemente</string>
   <string name="waiting_first_sync">Attendi per la prima sincronizzazione...</string>
   <string name="no_uploads_yet">Non hai ancora caricato alcuna foto.</string>
@@ -84,7 +88,10 @@ Tocca questo messaggio (o premi Indietro) per saltare l\'aggiunta di categorie.<
   <string name="menu_download">Scarica</string>
   <string name="preference_license">Licenza</string>
   <string name="use_previous">Utilizza titolo/descrizione precedente</string>
-  <string name="license_name_cc_by_sa">CCu00A0Attribuzione-Condividi allo stesso modou00A03.0</string>
+  <string name="allow_gps">Ottieni automaticamente l\'attuale posizione</string>
+  <string name="license_name_cc_by_sa_four"> Attribuzione-Condividi allo stesso modo 4.0</string>
+  <string name="license_name_cc_by_four"> Attribuzione 4.0</string>
+  <string name="license_name_cc_by_sa"> Attribuzione-Condividi allo stesso modo 3.0</string>
   <string name="license_name_cc_by">CCu00A0Attribuzioneu00A03.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
@@ -118,6 +125,9 @@ Tocca questo messaggio (o premi Indietro) per saltare l\'aggiunta di categorie.<
   <string name="license_name_pd_ineligible">Pubblico dominio (ineleggibile per il copyright)</string>
   <string name="license_name_attribution">Attribuzione</string>
   <string name="license_name_gfdl">GNU Free Documentation License</string>
+  <string name="tutorial_1_text">Wikimedia Commons ospita la maggior parte delle immagini che vengono utilizzate in Wikipedia.</string>
+  <string name="tutorial_1_subtext">Le tue immagini aiutano l\'istruzione di persone in tutto il mondo!</string>
+  <string name="tutorial_4_text">Esempi di caricamento:</string>
   <string name="welcome_wikipedia_text">Contribuisci con le tue immagini. Aiuta a rendere vive le voci di Wikipedia!</string>
   <string name="welcome_wikipedia_subtext">Le immagini su Wikipedia provengono da Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Le tue immagini aiutano l\'istruzione di persone in tutto il mondo.</string>
@@ -131,7 +141,9 @@ Tocca questo messaggio (o premi Indietro) per saltare l\'aggiunta di categorie.<
   <string name="detail_license_empty">Licenza sconosciuta</string>
   <string name="menu_refresh">Aggiorna</string>
   <string name="ok">OK</string>
+  <string name="title_activity_nearby">Luoghi nelle vicinanze</string>
   <string name="warning">Attenzione</string>
+  <string name="file_exists">Questo file esiste già su Commons. Sei sicuro di voler continuare?</string>
   <string name="yes">Sì</string>
   <string name="no">No</string>
 </resources>

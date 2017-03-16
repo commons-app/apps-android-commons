@@ -6,17 +6,6 @@
         <item name="android:windowNoTitle">true</item>
     </style>
 
-    <style name="LightNoTitle" parent="Theme.AppCompat.Light.NoActionBar"/>
-
-    <style name="NotificationText" parent="android:TextAppearance.DeviceDefault.Small">
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
-    </style>
-
-    <style name="NotificationTitle">
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="NotificationProgress" parent="AppTheme" />
+    <style name="ProgressBar" parent="Widget.AppCompat.ProgressBar.Horizontal" />
 
 </resources>

@@ -21,10 +21,8 @@ import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,6 +86,7 @@ public  class       ShareActivity
     /**
      * Called when user taps the submit button
      */
+    @Override
     public void uploadActionInitiated(String title, String description) {
 
         this.title = title;
@@ -123,6 +122,7 @@ public  class       ShareActivity
         }
 
         uploadController.startUpload(title, mediaUri, description, mimeType, source, decimalCoords, new UploadController.ContributionUploadProgress() {
+            @Override
             public void onUploadStarted(Contribution contribution) {
                 ShareActivity.this.contribution = contribution;
                 showPostUpload();
@@ -139,6 +139,7 @@ public  class       ShareActivity
                 .commit();
     }
 
+    @Override
     public void onCategoriesSave(ArrayList<String> categories) {
         if(categories.size() > 0) {
             ModifierSequence categoriesSequence = new ModifierSequence(contribution.getContentUri());
@@ -228,7 +229,7 @@ public  class       ShareActivity
         Intent intent = getIntent();
 
         if(intent.getAction().equals(Intent.ACTION_SEND)) {
-            mediaUri = (Uri) intent.getParcelableExtra(Intent.EXTRA_STREAM);
+            mediaUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
             if(intent.hasExtra(UploadService.EXTRA_SOURCE)) {
                 source = intent.getStringExtra(UploadService.EXTRA_SOURCE);
             } else {
@@ -323,7 +324,7 @@ public  class       ShareActivity
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
+                                           String[] permissions, int[] grantResults) {
         switch (requestCode) {
             // 1 = Storage (from snackbar)
             case 1: {

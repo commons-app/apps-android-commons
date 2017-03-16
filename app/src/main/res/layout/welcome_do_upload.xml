@@ -9,12 +9,13 @@
     android:weightSum="1"
     android:layout_centerHorizontal="true">
 
-    <RelativeLayout
-        android:gravity="center"
-        android:layout_width="fill_parent"
+    <GridLayout
+        android:layout_width="wrap_content"
         android:layout_height="240dp"
+        android:layout_gravity="center_horizontal"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:columnCount="2"
         >
 
         <ImageView
@@ -30,7 +31,6 @@
             android:id="@+id/llamas"
             android:layout_width="150dp"
             android:layout_height="118dp"
-            android:layout_toRightOf="@+id/mount_zao"
             android:scaleType="fitXY"
             />
 
@@ -39,25 +39,18 @@
             android:id="@+id/rainbow_bridge"
             android:layout_width="150dp"
             android:layout_height="118dp"
-            android:layout_below="@+id/mount_zao"
-
             android:scaleType="fitXY"
             />
 
         <ImageView
             android:src="@drawable/tulip"
             android:id="@+id/tulip"
-
             android:layout_width="150dp"
             android:layout_height="118dp"
-            android:layout_toRightOf="@+id/rainbow_bridge"
-
-
-            android:layout_below="@+id/llamas"
             android:scaleType="fitXY"
             />
 
-    </RelativeLayout>
+    </GridLayout>
 
     <TextView
         android:layout_width="295dp"

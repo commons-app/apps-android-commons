@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 
@@ -47,11 +48,11 @@ class ContributionsListAdapter extends CursorAdapter {
 
         if(views.url == null || !views.url.equals(actualUrl)) {
             if(actualUrl.startsWith("http")) {
-                MediaWikiImageView mwImageView = (MediaWikiImageView)views.imageView;
+                MediaWikiImageView mwImageView = views.imageView;
                 mwImageView.setMedia(contribution, ((CommonsApplication) activity.getApplicationContext()).getImageLoader());
                 // FIXME: For transparent images
             } else {
-                com.nostra13.universalimageloader.core.ImageLoader.getInstance().displayImage(actualUrl, views.imageView, contributionDisplayOptions, new SimpleImageLoadingListener() {
+                ImageLoader.getInstance().displayImage(actualUrl, views.imageView, contributionDisplayOptions, new SimpleImageLoadingListener() {
 
                     @Override
                     public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
@@ -64,7 +65,7 @@ class ContributionsListAdapter extends CursorAdapter {
                     @Override
                     public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
                         super.onLoadingFailed(imageUri, view, failReason);
-                        MediaWikiImageView mwImageView = (MediaWikiImageView)views.imageView;
+                        MediaWikiImageView mwImageView = views.imageView;
                         mwImageView.setMedia(contribution, ((CommonsApplication) activity.getApplicationContext()).getImageLoader());
                     }
                 });

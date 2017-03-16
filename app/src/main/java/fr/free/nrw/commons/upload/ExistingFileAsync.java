@@ -24,7 +24,7 @@ import fr.free.nrw.commons.contributions.ContributionsActivity;
  */
 public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
 
-    private static final String TAG = fr.free.nrw.commons.upload.ExistingFileAsync.class.getName();
+    private static final String TAG = ExistingFileAsync.class.getName();
 
     private String fileSHA1;
     private Context context;
@@ -83,6 +83,7 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
             builder.setMessage(R.string.file_exists)
                     .setTitle(R.string.warning);
             builder.setPositiveButton(R.string.no, new DialogInterface.OnClickListener() {
+                @Override
                 public void onClick(DialogInterface dialog, int id) {
                     //Go back to ContributionsActivity
                     Intent intent = new Intent(context, ContributionsActivity.class);
@@ -90,6 +91,7 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
                 }
             });
             builder.setNegativeButton(R.string.yes, new DialogInterface.OnClickListener() {
+                @Override
                 public void onClick(DialogInterface dialog, int id) {
                     //No need to do anything, user remains on upload screen
                 }

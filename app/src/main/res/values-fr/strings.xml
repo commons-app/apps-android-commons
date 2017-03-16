@@ -90,7 +90,9 @@ Appuyez sur ce message (ou retournez en arrière) pour sauter cette étape.</str
   <string name="use_previous">Utiliser le titre ou la description précédent</string>
   <string name="allow_gps">Obtenir automatiquement l’emplacement actuel</string>
   <string name="allow_gps_summary">Récupérer l’emplacement actuel pour proposer des suggestions de catégorie si l’image n’est pas marquée géographiquement</string>
-  <string name="license_name_cc_by_sa">CCu00A0Attributionu00A0-u00A0Partageu00A0dansu00A0lesu00A0Mêmesu00A0Conditionsu00A03.0</string>
+  <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four"> Attribution 4.0</string>
+  <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
   <string name="license_name_cc_by">CCu00A0Attributionu00A03.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>

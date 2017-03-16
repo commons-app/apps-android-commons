@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name" fuzzy="true">Comin Wikimedia</string>
+  <string name="app_name">Comin Wicimedia</string>
   <string name="menu_settings">Gosodiadau</string>
   <string name="username">Enw defnyddiwr</string>
   <string name="password">Cyfrinair</string>
   <string name="login">Mewngofnodi</string>
+  <string name="signup">Cofrestru</string>
   <string name="logging_in_title">Wrthi\'n mewngofnodi</string>
   <string name="logging_in_message">Disgwyliwch...</string>
   <string name="login_success">Llwyddodd y mewngofnodi!</string>
   <string name="login_failed">Methodd y mewngofnodi!</string>
+  <string name="upload_failed">Ni chafwyd hyd i\'r ffeil. Ceisiwch un arall.</string>
   <string name="authentication_failed">Methodd y dilysu!</string>
   <string name="uploading_started">Dechreuodd yr uwchlwytho!</string>
   <string name="upload_completed_notification_title">Uwchlwythwyd %1$s!</string>
@@ -18,6 +20,10 @@
   <string name="upload_progress_notification_title_finishing">Yn gorffen uwchlwytho %1$s</string>
   <string name="upload_failed_notification_title">Methwyd uwchlwytho %1$s</string>
   <string name="upload_failed_notification_subtitle">Tapiwch i weld</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">1 ffeil yn uwchlwytho</item>
+    <item quantity="other">%d ffeil yn uwchlwytho</item>
+  </plurals>
   <string name="title_activity_contributions">Fy uwchlwythiadau</string>
   <string name="contribution_state_queued">Yn y ciw</string>
   <string name="contribution_state_failed">Methiant</string>
@@ -25,6 +31,7 @@
   <string name="contribution_state_starting">Ar fin uwchlwytho</string>
   <string name="menu_from_gallery">O\'r galeri</string>
   <string name="menu_from_camera">Tynnu llun</string>
+  <string name="menu_nearby">Gerllaw</string>
   <string name="provider_contributions">Fy uwchlwythiadau</string>
   <string name="menu_share">Rhannu</string>
   <string name="menu_open_in_browser">Agor yn y Porwr</string>
@@ -33,7 +40,7 @@
   <string name="login_failed_network">Yn methu mewngofnodi - methodd y rhwydwaith</string>
   <string name="login_failed_username">Yn methu mewngofnodi - gwirwch eich enw defnyddiwr</string>
   <string name="login_failed_password">Yn methu mewngofnodi - gwirwch eich cyfrinair</string>
-  <string name="login_failed_throttled" fuzzy="true">Cafwyd gormod o ymgeision aflwyddiannus. Oedwch ennyd cyn ceisio eto.</string>
+  <string name="login_failed_throttled">Cafwyd gormod o ymgeision aflwyddiannus. Oedwch ennyd cyn ceisio eto.</string>
   <string name="login_failed_blocked">Ymddiheurwn. Mae\'r defnyddiwr hwn wedi ei flocio ar Gomin Wikimedia</string>
   <string name="login_failed_generic">Methodd y mewngofnodi</string>
   <string name="share_upload_button">Uwchlwyther</string>
@@ -42,6 +49,19 @@
   <string name="menu_upload_single">Uwchlwytho</string>
   <string name="categories_search_text_hint">Archwilio\'r categorïau</string>
   <string name="menu_save_categories">Cadw</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">Dim Uwchlwythiadau eto</item>
+    <item quantity="one">1 uwchlwythiad</item>
+    <item quantity="other">%d uwchlwythiad</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Cychwyn uwchlwytho 1 ffeil</item>
+    <item quantity="other">Cychwyn uwchlwytho %d ffeil</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">1 uwchlwythiad</item>
+    <item quantity="other">%d uwchlwythiad</item>
+  </plurals>
   <string name="categories_not_found">Dim categori\'n cyfateb i %1$s ar gael</string>
   <string name="categories_skip_explanation">Cychwynwch deipio i ychwanegu categoriau.
 Cyffyrddwch y neges hon (neu ddewis Nôl) i fynd i\'r cam nesaf.</string>
@@ -49,12 +69,14 @@ Cyffyrddwch y neges hon (neu ddewis Nôl) i fynd i\'r cam nesaf.</string>
   <string name="preference_tracking">Adroddiadau ar y defnydd</string>
   <string name="preference_tracking_summary">Danfonwch yr adroddiadau ar y defnydd i Wikimedia i\'n cynorthwyo i wella\'r ap</string>
   <string name="title_activity_settings">Gosodiadau</string>
+  <string name="title_activity_signup">Cofrestru</string>
   <string name="menu_about">Amdanom</string>
-  <string name="about_license" fuzzy="true">Meddalwedd Cynnwys Agored wedi\'i rhyddhau o dan &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Drwydded Apache v2&lt;/a&gt;</string>
-  <string name="about_improve" fuzzy="true">Y ffynhonell ar &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Bygiau ar &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_license">Meddalwedd Cynnwys Agored wedi\'i rhyddhau o dan &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Drwydded Apache v2&lt;/a&gt; Mae logo a nod masnach Comin Wicimedia yn eiddo i Sefydliad Wicimedia ac fe\'u defnyddir gyda chaniatad y Sefydliad hwnnw. Nid ydym ni wedi cael sêl bendith y sefydliad nac yn perthyn iddyn nhw.</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Mae\'r codau ffynhonnell ar wefanau&lt;/a&gt; Comin a &lt;a href=\"https://commons-app.github.io/\"&gt;gwefan &lt;/a&gt; GitHub. Gellwch greu &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;Ymholiad Github&lt;/a&gt; os gwelwch byg, neu i awgrymu gwelliannau.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Polisi preifatrwydd&lt;/a&gt;</string>
   <string name="title_activity_about">Amdanom</string>
   <string name="menu_feedback">Danfonwch Adborth (drwy Ebost)</string>
+  <string name="no_email_client">Dim ebost client wedi\'i ganfod</string>
   <string name="provider_categories">Categorïau a ddefnyddiwyd yn ddiweddar</string>
   <string name="waiting_first_sync">Yn aros am y sync cyntaf...</string>
   <string name="no_uploads_yet">Nid ydych wedi uwchlwytho ffotograffau eto.</string>
@@ -63,8 +85,10 @@ Cyffyrddwch y neges hon (neu ddewis Nôl) i fynd i\'r cam nesaf.</string>
   <string name="share_license_summary">Caiff y ddelwedd hon ei thrwyddedu yn ôl termau\'r drwydded %1$s.</string>
   <string name="menu_download">Lawrlwytho</string>
   <string name="preference_license">Trwydded</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Attribution-ShareAlikeu00A03.0</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0Attributionu00A03.0</string>
+  <string name="use_previous">Defnydiwch y teitl/disgrifiad blaenorol</string>
+  <string name="allow_gps">Defnyddiwch y lleoliad cyfredol</string>
+  <string name="license_name_cc_by_sa">CCu00A0Attribution-ShareAlikeu00A03.0</string>
+  <string name="license_name_cc_by">CCu00A0Attributionu00A03.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Awstria)</string>

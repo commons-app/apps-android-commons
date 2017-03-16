@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="2dp"
     android:paddingBottom="0dp"
@@ -20,14 +20,14 @@
 
     <fr.free.nrw.commons.MediaWikiImageView
         android:id="@+id/contributionImage"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="240dp"
         android:scaleType="centerCrop"
         custom:isThumbnail="true"
         />
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center|bottom"
         android:background="#AA000000"
@@ -36,7 +36,7 @@
         >
         <ProgressBar
             android:id="@+id/contributionProgress"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/ProgressBar"
             android:indeterminateOnly="false"

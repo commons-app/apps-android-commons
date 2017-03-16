@@ -74,7 +74,7 @@
   <string name="title_activity_signup">নিবন্ধন করুন</string>
   <string name="menu_about">পরিচিতি</string>
   <string name="about_license" fuzzy="true">ওপেন সোর্স সফটওয়্যার &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;এ্যাপাচি লাইসেন্স v2&lt;/a&gt; অধীনে প্রকাশিত</string>
-  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;উত্স&lt;/a&gt; ও &lt;a href=\"https://commons-app.github.io/\"&gt;ওয়েবসাইট&lt;/a&gt; গিটহাবে&lt;/a&gt;। কোন সমস্যা ও পরামর্শের জন্য &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;গিটহাব ইস্যু&lt;/a&gt; তৈরি করুন।</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;উৎস&lt;/a&gt; ও &lt;a href=\"https://commons-app.github.io/\"&gt;ওয়েবসাইট&lt;/a&gt; GitHub এ&lt;/a&gt;। কোন সমস্যা ও পরামর্শের জন্য &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;গিটহাব ইস্যু&lt;/a&gt; তৈরি করুন।</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;গোপনীয়তা নীতি&lt;/a&gt;</string>
   <string name="title_activity_about">পরিচিতি</string>
   <string name="menu_feedback">প্রতিক্রিয়া পাঠান (ইমেইলের মাধ্যমে)</string>
@@ -90,7 +90,9 @@
   <string name="use_previous">পূর্ববর্তী শিরোনাম/বিবরণ ব্যবহার করুন</string>
   <string name="allow_gps">স্বয়ংক্রিয়ভাবে বর্তমান অবস্থান পান</string>
   <string name="allow_gps_summary">বিষয়শ্রেণীর পরামর্শ দিতে বর্তমান অবস্থান পান যদি ছবিতে ভূ-ট্যাগ না থেকে থাকে</string>
-  <string name="license_name_cc_by_sa">সিসিইউ০০এ০অ্যাট্রিবিউশন-শেয়ারঅ্যালাইকইউ০০এ০৩.০</string>
+  <string name="license_name_cc_by_sa_four">অ্যাট্রিবিউশন-শেয়ারঅ্যালাইক ৪.০</string>
+  <string name="license_name_cc_by_four">অ্যাট্রিবিউশন ৪.০</string>
+  <string name="license_name_cc_by_sa">অ্যাট্রিবিউশন-শেয়ারঅ্যালাইক ৩.০</string>
   <string name="license_name_cc_by">সিসিইউ০০এ০এঅ্যাট্রিবিউসনইউ০০এ০৩.০</string>
   <string name="license_name_cc0">সিসি০</string>
   <string name="license_name_cc_by_sa_3_0">সিসি বাই-এস ৩.০</string>
@@ -150,10 +152,12 @@ u2022 বিষয়শ্রেণী: সিডনি অপেরা হা�
   <string name="detail_description_empty">বিবরণ নেই</string>
   <string name="detail_license_empty">অজানা লাইসেন্স</string>
   <string name="menu_refresh">পুনঃসতেজ</string>
+  <string name="storage_permission_rationale">প্রয়োজনীয় অনুমতি: বহিঃস্ত সঞ্চয়স্থান পড়া। এটি ছাড়া অ্যাপ কাজ করবে না।</string>
   <string name="location_permission_rationale">ঐচ্ছিক অনুমতি: বিষয়শ্রেণী পরামর্শের জন্য বর্তমান অবস্থান নেয়</string>
   <string name="ok">ঠিক আছে</string>
   <string name="title_activity_nearby">কাছাকাছি স্থান</string>
   <string name="warning">সতর্কীকরণ</string>
+  <string name="file_exists">এই ফাইলটি ইতিমধ্যে কমন্সে বিদ্যমান। আপনি কি নিশ্চিত আপনি সামনে এগুতে চান?</string>
   <string name="yes">হ্যাঁ</string>
   <string name="no">না</string>
 </resources>

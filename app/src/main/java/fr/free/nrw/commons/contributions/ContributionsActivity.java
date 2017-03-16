@@ -45,7 +45,7 @@ public  class       ContributionsActivity
     private MediaDetailPagerFragment mediaDetails;
     private UploadService uploadService;
     private boolean isUploadServiceConnected;
-    private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<DataSetObserver>();
+    private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<>();
     private String CONTRIBUTION_SELECTION = "";
     /*
         This sorts in the following order:
@@ -63,11 +63,13 @@ public  class       ContributionsActivity
     }
 
     private ServiceConnection uploadServiceConnection = new ServiceConnection() {
+        @Override
         public void onServiceConnected(ComponentName componentName, IBinder binder) {
             uploadService = (UploadService) ((HandlerService.HandlerServiceLocalBinder)binder).getService();
             isUploadServiceConnected = true;
         }
 
+        @Override
         public void onServiceDisconnected(ComponentName componentName) {
             // this should never happen
             throw new RuntimeException("UploadService died but the rest of the process did not!");
@@ -191,6 +193,7 @@ public  class       ContributionsActivity
         finish(); // If authentication failed, we just exit
     }
 
+    @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long item) {
         showDetail(position);
     }
@@ -200,10 +203,12 @@ public  class       ContributionsActivity
         return super.onCreateOptionsMenu(menu);
     }
 
+    @Override
     public Loader onCreateLoader(int i, Bundle bundle) {
         return new CursorLoader(this, ContributionsContentProvider.BASE_URI, Contribution.Table.ALL_FIELDS, CONTRIBUTION_SELECTION, null, CONTRIBUTION_SORT);
     }
 
+    @Override
     public void onLoadFinished(Loader cursorLoader, Object result) {
 
         Cursor cursor = (Cursor) result;
@@ -219,11 +224,13 @@ public  class       ContributionsActivity
         notifyAndMigrateDataSetObservers();
     }
 
+    @Override
     public void onLoaderReset(Loader cursorLoader) {
         ((CursorAdapter) contributionsList.getAdapter()).swapCursor(null);
     }
 
     //FIXME: Potential cause of wrong image display bug
+    @Override
     public Media getMediaAtPosition(int i) {
         if (contributionsList.getAdapter() == null) {
             // not yet ready to return data
@@ -233,6 +240,7 @@ public  class       ContributionsActivity
         }
     }
 
+    @Override
     public int getTotalMediaCount() {
         if(contributionsList.getAdapter() == null) {
             return 0;
@@ -240,6 +248,7 @@ public  class       ContributionsActivity
         return contributionsList.getAdapter().getCount();
     }
 
+    @Override
     public void notifyDatasetChanged() {
         // Do nothing for now
     }
@@ -259,6 +268,7 @@ public  class       ContributionsActivity
         }
     }
 
+    @Override
     public void registerDataSetObserver(DataSetObserver observer) {
         Adapter adapter = contributionsList.getAdapter();
         if (adapter == null) {
@@ -268,6 +278,7 @@ public  class       ContributionsActivity
         }
     }
 
+    @Override
     public void unregisterDataSetObserver(DataSetObserver observer) {
         Adapter adapter = contributionsList.getAdapter();
         if (adapter == null) {
@@ -277,6 +288,7 @@ public  class       ContributionsActivity
         }
     }
 
+    @Override
     public void onBackStackChanged() {
         if(mediaDetails != null && mediaDetails.isVisible()) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -285,6 +297,7 @@ public  class       ContributionsActivity
         }
     }
 
+    @Override
     public void refreshSource() {
         getSupportLoaderManager().restartLoader(0, null, this);
     }

@@ -17,9 +17,6 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
@@ -30,16 +27,18 @@ import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 import java.util.concurrent.Executor;
 import java.util.regex.Pattern;
 
+import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.TransformerFactoryConfigurationError;
-
-import fr.free.nrw.commons.upload.ShareActivity;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 public class Utils {
 
@@ -83,7 +82,7 @@ public class Utils {
     }
 
     public static Date parseMWDate(String mwDate) {
-        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"); // Assuming MW always gives me UTC
+        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH); // Assuming MW always gives me UTC
         try {
             return isoFormat.parse(mwDate);
         } catch (ParseException e) {
@@ -92,7 +91,7 @@ public class Utils {
     }
 
     public static String toMWDate(Date date) {
-        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"); // Assuming MW always gives me UTC
+        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH); // Assuming MW always gives me UTC
         isoFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
         return isoFormat.format(date);
     }
@@ -104,7 +103,7 @@ public class Utils {
     }
 
     public static String getStringFromDOM(Node dom) {
-        javax.xml.transform.Transformer transformer = null;
+        Transformer transformer = null;
         try {
             transformer = TransformerFactory.newInstance().newTransformer();
         } catch (TransformerConfigurationException e) {
@@ -116,8 +115,8 @@ public class Utils {
         }
 
         StringWriter outputStream = new StringWriter();
-        javax.xml.transform.dom.DOMSource domSource = new javax.xml.transform.dom.DOMSource(dom);
-        javax.xml.transform.stream.StreamResult strResult = new javax.xml.transform.stream.StreamResult(outputStream);
+        DOMSource domSource = new DOMSource(dom);
+        StreamResult strResult = new StreamResult(outputStream);
 
         try {
             transformer.transform(domSource, strResult);
@@ -203,14 +202,18 @@ public class Utils {
     }
 
     public static String capitalize(String string) {
-        return string.substring(0,1).toUpperCase() + string.substring(1);
+        return string.substring(0,1).toUpperCase(Locale.getDefault()) + string.substring(1);
     }
 
     public static String licenseTemplateFor(String license) {
-        if(license.equals(Prefs.Licenses.CC_BY)) {
+        if(license.equals(Prefs.Licenses.CC_BY_3)) {
             return "{{self|cc-by-3.0}}";
-        } else if(license.equals(Prefs.Licenses.CC_BY_SA)) {
+        } else if(license.equals(Prefs.Licenses.CC_BY_4)) {
+            return "{{self|cc-by-4.0}}";
+        } else if(license.equals(Prefs.Licenses.CC_BY_SA_3)) {
             return "{{self|cc-by-sa-3.0}}";
+        } else if(license.equals(Prefs.Licenses.CC_BY_SA_4)) {
+            return "{{self|cc-by-sa-4.0}}";
         } else if(license.equals(Prefs.Licenses.CC0)) {
             return "{{self|cc-zero}}";
         }
@@ -218,10 +221,14 @@ public class Utils {
     }
 
     public static int licenseNameFor(String license) {
-        if(license.equals(Prefs.Licenses.CC_BY)) {
+        if(license.equals(Prefs.Licenses.CC_BY_3)) {
             return R.string.license_name_cc_by;
-        } else if(license.equals(Prefs.Licenses.CC_BY_SA)) {
+        } else if(license.equals(Prefs.Licenses.CC_BY_4)) {
+            return R.string.license_name_cc_by_four;
+        } else if(license.equals(Prefs.Licenses.CC_BY_SA_3)) {
             return R.string.license_name_cc_by_sa;
+        } else if(license.equals(Prefs.Licenses.CC_BY_SA_4)) {
+            return R.string.license_name_cc_by_sa_four;
         } else if(license.equals(Prefs.Licenses.CC0)) {
             return R.string.license_name_cc0;
         }
@@ -229,11 +236,16 @@ public class Utils {
     }
 
     public static String licenseUrlFor(String license) {
-        if(license.equals(Prefs.Licenses.CC_BY)) {
+        if(license.equals(Prefs.Licenses.CC_BY_3)) {
             return "https://creativecommons.org/licenses/by/3.0/";
-        } else if(license.equals(Prefs.Licenses.CC_BY_SA)) {
+        } else if(license.equals(Prefs.Licenses.CC_BY_4)) {
+            return "https://creativecommons.org/licenses/by/4.0/";
+        } else if(license.equals(Prefs.Licenses.CC_BY_SA_3)) {
             return "https://creativecommons.org/licenses/by-sa/3.0/";
-        } else if(license.equals(Prefs.Licenses.CC0)) {
+        } else if(license.equals(Prefs.Licenses.CC_BY_SA_4)) {
+            return "https://creativecommons.org/licenses/by-sa/4.0/";
+        }
+        else if(license.equals(Prefs.Licenses.CC0)) {
             return "https://creativecommons.org/publicdomain/zero/1.0/";
         }
         throw new RuntimeException("Unrecognized license value");
@@ -292,13 +304,17 @@ public class Utils {
         Pattern jpegPattern = Pattern.compile("\\.jpeg$", Pattern.CASE_INSENSITIVE);
 
         // People are used to ".jpg" more than ".jpeg" which the system gives us.
-        if (extension != null && extension.toLowerCase().equals("jpeg")) {
+        if (extension != null && extension.toLowerCase(Locale.ENGLISH).equals("jpeg")) {
             extension = "jpg";
         }
         title = jpegPattern.matcher(title).replaceFirst(".jpg");
-        if (extension != null && !title.toLowerCase().endsWith("." + extension.toLowerCase())) {
+        if (extension != null && !title.toLowerCase(Locale.getDefault()).endsWith("." + extension.toLowerCase(Locale.ENGLISH))) {
             title += "." + extension;
         }
         return title;
+    }
+
+    public static boolean isNullOrWhiteSpace(String value) {
+        return value == null || value.trim().isEmpty();
     }
 }

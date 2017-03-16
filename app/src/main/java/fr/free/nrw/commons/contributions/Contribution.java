@@ -11,6 +11,7 @@ import android.text.TextUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.EventLog;
@@ -21,10 +22,12 @@ import fr.free.nrw.commons.Utils;
 public class Contribution extends Media {
 
     public static Creator<Contribution> CREATOR = new Creator<Contribution>() {
+        @Override
         public Contribution createFromParcel(Parcel parcel) {
             return new Contribution(parcel);
         }
 
+        @Override
         public Contribution[] newArray(int i) {
             return new Contribution[0];
         }
@@ -83,7 +86,7 @@ public class Contribution extends Media {
 
     public Contribution(Parcel in) {
         super(in);
-        contentUri = (Uri)in.readParcelable(Uri.class.getClassLoader());
+        contentUri = in.readParcelable(Uri.class.getClassLoader());
         source = in.readString();
         timestamp = (Date) in.readSerializable();
         state = in.readInt();
@@ -129,7 +132,7 @@ public class Contribution extends Media {
 
     public String getPageContents() {
         StringBuffer buffer = new StringBuffer();
-        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
         
         buffer
             .append("== {{int:filedesc}} ==\n")
@@ -163,7 +166,7 @@ public class Contribution extends Media {
     public void save() {
         try {
             if(contentUri == null) {
-                contentUri = client.insert(fr.free.nrw.commons.contributions.ContributionsContentProvider.BASE_URI, this.toContentValues());
+                contentUri = client.insert(ContributionsContentProvider.BASE_URI, this.toContentValues());
             } else {
                 client.update(contentUri, toContentValues(), null, null);
             }
@@ -212,6 +215,7 @@ public class Contribution extends Media {
         return cv;
     }
 
+    @Override
     public void setFilename(String filename) {
         this.filename = filename;
     }
@@ -231,7 +235,7 @@ public class Contribution extends Media {
 
         //Check that cursor has a value to avoid CursorIndexOutOfBoundsException
         if (cursor.getCount() > 0) {
-            c.contentUri = fr.free.nrw.commons.contributions.ContributionsContentProvider.uriForId(cursor.getInt(0));
+            c.contentUri = ContributionsContentProvider.uriForId(cursor.getInt(0));
             c.filename = cursor.getString(1);
             c.localUri = TextUtils.isEmpty(cursor.getString(2)) ? null : Uri.parse(cursor.getString(2));
             c.imageUrl = cursor.getString(3);
@@ -366,7 +370,7 @@ public class Contribution extends Media {
                 db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN height INTEGER;");
                 db.execSQL("UPDATE " + TABLE_NAME + " SET height = 0");
                 db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN license STRING;");
-                db.execSQL("UPDATE " + TABLE_NAME + " SET license='" + Prefs.Licenses.CC_BY_SA + "';");
+                db.execSQL("UPDATE " + TABLE_NAME + " SET license='" + Prefs.Licenses.CC_BY_SA_3 + "';");
                 from++;
                 onUpdate(db, from, to);
                 return;

@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class SettingsActivity extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
-    fr.free.nrw.commons.CommonsApplication app;
+    CommonsApplication app;
 
     private AppCompatDelegate mDelegate;
 
@@ -23,28 +23,33 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
         getDelegate().onCreate(savedInstanceState);
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
-        ListPreference licensePreference = (ListPreference) findPreference(fr.free.nrw.commons.Prefs.DEFAULT_LICENSE);
+        ListPreference licensePreference = (ListPreference) findPreference(Prefs.DEFAULT_LICENSE);
         // WARNING: ORDERING NEEDS TO MATCH FOR THE LICENSE NAMES AND DISPLAY VALUES
         licensePreference.setEntries(new String[]{
                 getString(R.string.license_name_cc0),
                 getString(R.string.license_name_cc_by),
-                getString(R.string.license_name_cc_by_sa)
+                getString(R.string.license_name_cc_by_four),
+                getString(R.string.license_name_cc_by_sa),
+                getString(R.string.license_name_cc_by_sa_four)
         });
         licensePreference.setEntryValues(new String[]{
-                fr.free.nrw.commons.Prefs.Licenses.CC0,
-                fr.free.nrw.commons.Prefs.Licenses.CC_BY,
-                fr.free.nrw.commons.Prefs.Licenses.CC_BY_SA
+                Prefs.Licenses.CC0,
+                Prefs.Licenses.CC_BY_3,
+                Prefs.Licenses.CC_BY_4,
+                Prefs.Licenses.CC_BY_SA_3,
+                Prefs.Licenses.CC_BY_SA_4
         });
 
-        licensePreference.setSummary(getString(fr.free.nrw.commons.Utils.licenseNameFor(licensePreference.getValue())));
+        licensePreference.setSummary(getString(Utils.licenseNameFor(licensePreference.getValue())));
         licensePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
-                preference.setSummary(getString(fr.free.nrw.commons.Utils.licenseNameFor((String)newValue)));
+                preference.setSummary(getString(Utils.licenseNameFor((String)newValue)));
                 return true;
             }
         });
 
-        app = (fr.free.nrw.commons.CommonsApplication)getApplicationContext();
+        app = (CommonsApplication)getApplicationContext();
     }
 
     @Override
@@ -61,6 +66,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
                 .unregisterOnSharedPreferenceChangeListener(this);
     }
 
+    @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 
     }
@@ -128,6 +134,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
         getDelegate().onDestroy();
     }
 
+    @Override
     public void invalidateOptionsMenu() {
         getDelegate().invalidateOptionsMenu();
     }

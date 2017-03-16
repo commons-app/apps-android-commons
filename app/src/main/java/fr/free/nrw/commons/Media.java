@@ -15,21 +15,23 @@ import java.util.regex.Pattern;
 public class Media implements Parcelable {
 
     public static Creator<Media> CREATOR = new Creator<Media>() {
+        @Override
         public Media createFromParcel(Parcel parcel) {
             return new Media(parcel);
         }
 
+        @Override
         public Media[] newArray(int i) {
             return new Media[0];
         }
     };
 
     protected Media() {
-        this.categories = new ArrayList<String>();
-        this.descriptions = new HashMap<String, String>();
+        this.categories = new ArrayList<>();
+        this.descriptions = new HashMap<>();
     }
 
-    private HashMap<String, Object> tags = new HashMap<String, Object>();
+    private HashMap<String, Object> tags = new HashMap<>();
 
     public Object getTag(String key) {
         return tags.get(key);
@@ -57,6 +59,10 @@ public class Media implements Parcelable {
     public String getDescriptionUrl() {
         // HACK! Geez
         return CommonsApplication.HOME_URL + "File:" + Utils.urlEncode(getFilename().replace("File:", "").replace(" ", "_"));
+    }
+
+    public String getMobileDescriptionUrl() {
+        return CommonsApplication.MOBILE_HOME_URL + "File:" + Utils.urlEncode(getFilename().replace("File:", "").replace(" ", "_"));
     }
 
     public Uri getLocalUri() {
@@ -204,10 +210,12 @@ public class Media implements Parcelable {
         this.creator = creator;
     }
 
+    @Override
     public int describeContents() {
         return 0;
     }
 
+    @Override
     public void writeToParcel(Parcel parcel, int flags) {
         parcel.writeParcelable(localUri, flags);
         parcel.writeString(imageUrl);
@@ -226,7 +234,7 @@ public class Media implements Parcelable {
     }
 
     public Media(Parcel in) {
-        localUri = (Uri)in.readParcelable(Uri.class.getClassLoader());
+        localUri = in.readParcelable(Uri.class.getClassLoader());
         imageUrl = in.readString();
         filename = in.readString();
         description = in.readString();
