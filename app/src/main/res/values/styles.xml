@@ -16,7 +16,7 @@
         <item name="iconUndo">@drawable/ic_undo_white_24dp</item>
     </style>
 
-    <style name="LightAppTheme" parent="Theme.AppCompat.Light">
+    <style name="LightAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="mainBackground">@color/main_background_light</item>
         <item name="semitransparentText">@color/commons_app_blue_light</item>
         <item name="commonsAppBlue">@color/activity_welcome_background_light</item>
@@ -25,11 +25,14 @@
         <item name="buttonBackground">@color/button_background_light</item>
         <item name="uploadOverlayBackground">@color/upload_overlay_background_light</item>
         <item name="toggleButtonIcon">@drawable/toggle</item>
-        <item name="iconSend">@drawable/ic_send_black_24dp</item>
-        <item name="iconSave">@drawable/ic_save_black_24dp</item>
-        <item name="iconCamera">@drawable/ic_photo_camera_black_24dp</item>
-        <item name="iconPhoto">@drawable/ic_photo_black_24dp</item>
-        <item name="iconUndo">@drawable/ic_undo_black_24dp</item>
+        <item name="iconSend">@drawable/ic_send_white_24dp</item>
+        <item name="iconSave">@drawable/ic_save_white_24dp</item>
+        <item name="iconCamera">@drawable/ic_photo_camera_white_24dp</item>
+        <item name="iconPhoto">@drawable/ic_photo_white_24dp</item>
+        <item name="iconUndo">@drawable/ic_undo_white_24dp</item>
+
+        <item name="colorPrimary">@color/action_bar_blue</item>
+        <item name="colorPrimaryDark">@color/status_bar_blue</item>
     </style>
 
     <style name="NoTitle" parent="DarkAppTheme">
