@@ -110,4 +110,6 @@
   <string name="warning">హెచ్చరిక</string>
   <string name="yes">అవును</string>
   <string name="no">కాదు</string>
+  <string name="media_detail_title">శీర్షిక</string>
+  <string name="media_detail_description">వివరణ</string>
 </resources>

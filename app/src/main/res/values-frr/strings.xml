@@ -72,7 +72,7 @@
   <string name="menu_about">Auer</string>
   <string name="about_license">Open Source software ütjden oner det lisens &lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;.
 Wikimedia Commons an det Wikimedia-Commons-Logo san markintiaken faan\'t Wikimedia Foundation an wurd mä ferloof faan\'t Wikimedia Foundation brükt. Wi hiar ei tu\'t Wikimedia Foundation.</string>
-  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Code&lt;/a&gt; an &lt;a href=\"https://commons-app.github.io/\"&gt;Wääbsteed&lt;/a&gt; üüb GitHub. En neien &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-iindrach&lt;/a&gt; för feelern of föörslacher maage.</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Code&lt;/a&gt; an &lt;a href=\"https://commons-app.github.io/\"&gt;Wääbsteed&lt;/a&gt; üüb GitHub&lt;/a&gt;. En neien &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-iindrach&lt;/a&gt; för feelern of föörslacher maage.</string>
   <string name="about_privacy_policy">Brükerreegeln</string>
   <string name="title_activity_about">Auer</string>
   <string name="menu_feedback">Wat wel dü üs sai ? (auer e-mail)</string>
@@ -88,6 +88,8 @@ Wikimedia Commons an det Wikimedia-Commons-Logo san markintiaken faan\'t Wikimed
   <string name="use_previous">Ual tiitel/beskriiwang brük</string>
   <string name="allow_gps">Aktuel plak automaatisk ufrep</string>
   <string name="allow_gps_summary">Rept di aktuel plak uf, am kategoriin föörtuslauen, wan det bil nian geotags hää.</string>
+  <string name="license_name_cc_by_sa_four">Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four">Attribution 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
   <string name="license_name_cc_by">Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
@@ -156,4 +158,11 @@ Wikimedia Commons an det Wikimedia-Commons-Logo san markintiaken faan\'t Wikimed
   <string name="file_exists">Detdiar datei jaft det al üüb Commons. Beest dü seeker, dat dü widjer maage wel?</string>
   <string name="yes">Ja</string>
   <string name="no">Naan</string>
+  <string name="media_detail_title">Tiitel</string>
+  <string name="media_detail_media_title">Tiitel faan\'t meedium</string>
+  <string name="media_detail_description">Beskriiwang</string>
+  <string name="media_detail_description_explanation">Beskriiwang faan\'t meedium.</string>
+  <string name="become_a_tester_title">Beta-Tester wurd</string>
+  <string name="become_a_tester_description">Melde di bi üüs beta-kanool üüb Google Play uun, an fu ääder tugang tu nei funktjuunen.</string>
+  <string name="beta_opt_in_link">https://play.google.com/apps/testing/fr.free.nrw.commons</string>
 </resources>

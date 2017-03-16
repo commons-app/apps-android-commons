@@ -160,6 +160,7 @@ Leet w.e.g. &lt;a href=\"https://github.com/commons-app/apps-android-commons/iss
   <string name="yes">Jo</string>
   <string name="no">Neen</string>
   <string name="media_detail_title">Titel</string>
+  <string name="media_detail_media_title">Titel vum Medium</string>
   <string name="media_detail_description">Beschreiwung</string>
   <string name="become_a_tester_title">Beta-Tester ginn</string>
 </resources>

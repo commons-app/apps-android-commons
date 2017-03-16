@@ -49,6 +49,7 @@
   <string name="menu_upload_single">Carié</string>
   <string name="categories_search_text_hint">Sërché dle categorìe</string>
   <string name="menu_save_categories">Argistré</string>
+  <string name="refresh_button">Agiorné</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">Ancor gnun cariament</item>
     <item quantity="one">1 cariament</item>
@@ -86,4 +87,15 @@ Ch\'a sgnaca an s\'ën mëssage (o ch\'a sgnaca ël boton andaré) për sauté \
   <string name="menu_cancel_upload">Anulé</string>
   <string name="share_license_summary">Costa plancia a sarà sota la licensa %1$s</string>
   <string name="menu_download">Dëscarié</string>
+  <string name="preference_license">Licensa</string>
+  <string name="use_previous">Dovré ël tìtol o la descrission precedent</string>
+  <string name="allow_gps">Oten-e an automàtich la posission atual</string>
+  <string name="allow_gps_summary">Arcuperé la posission atual për propon-e dij sugeriment ëd categorìa si la plancia a l\'é nen marcà da na mira geogràfica</string>
+  <string name="license_name_cc_by_sa_four">Atribussion-Partagi ugual 4.0</string>
+  <string name="license_name_cc_by_four">Atribussion 4.0</string>
+  <string name="license_name_cc_by_sa">Atribussion-partagi ugual 3.0</string>
+  <string name="license_name_cc_by">Atribussion 3.0</string>
+  <string name="license_name_cc0">CC0</string>
+  <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
+  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Àustria)</string>
 </resources>
