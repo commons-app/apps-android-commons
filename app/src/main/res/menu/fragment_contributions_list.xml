@@ -4,13 +4,13 @@
           android:title="@string/menu_from_camera"
           android:orderInCategory="100"
           app:showAsAction="ifRoom|withText"
-          android:icon="@android:drawable/ic_menu_camera"
+          android:icon="@drawable/ic_photo_camera_white_24dp"
             />
     <item android:id="@+id/menu_from_gallery"
         android:title="@string/menu_from_gallery"
         android:orderInCategory="200"
         app:showAsAction="ifRoom|withText"
-        android:icon="@android:drawable/ic_menu_gallery"
+        android:icon="@drawable/ic_photo_white_24dp"
             />
     <item android:id="@+id/menu_settings"
           android:title="@string/menu_settings"
