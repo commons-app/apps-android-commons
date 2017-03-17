@@ -7,7 +7,7 @@
     <attr name="fragmentCategorisationBackground" format="reference"/>
     <attr name="buttonBackground" format="reference"/>
     <attr name="uploadOverlayBackground" format="reference"/>
-    <attr name="toggleButtonIcon" format="reference"/>
+    <attr name="spinnerTheme" format="reference"/>
     <attr name="iconSend" format="reference"/>
     <attr name="iconSave" format="reference"/>
     <attr name="iconCamera" format="reference"/>

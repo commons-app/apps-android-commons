@@ -11,11 +11,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 
 import java.io.IOException;
 
-import fr.free.nrw.commons.BaseAppCompatActivity;
+import fr.free.nrw.commons.theme.BaseAppCompatActivity;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
 

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.ListPreference;
@@ -116,7 +117,7 @@ public class SingleUploadFragment extends Fragment {
 
                 //Set selected color to white because it should be readable on random images.
                 TextView selectedText = (TextView) licenseSpinner.getChildAt(0);
-                if (selectedText != null) {
+                if (selectedText != null ) {
                     selectedText.setTextColor(Color.WHITE);
                 }
 

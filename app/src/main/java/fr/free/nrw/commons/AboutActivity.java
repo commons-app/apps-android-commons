@@ -5,6 +5,8 @@ import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
 
+import fr.free.nrw.commons.theme.BaseActivity;
+
 public class AboutActivity extends BaseActivity {
     private TextView versionText;
     private TextView licenseText;

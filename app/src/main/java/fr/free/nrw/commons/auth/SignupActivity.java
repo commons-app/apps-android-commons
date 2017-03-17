@@ -8,7 +8,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
-import fr.free.nrw.commons.BaseActivity;
+import fr.free.nrw.commons.theme.BaseActivity;
 
 public class SignupActivity extends BaseActivity {
 

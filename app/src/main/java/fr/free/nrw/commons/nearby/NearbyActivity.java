@@ -12,7 +12,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import fr.free.nrw.commons.BaseAppCompatActivity;
+import fr.free.nrw.commons.theme.BaseAppCompatActivity;
 import fr.free.nrw.commons.R;
 
 public class NearbyActivity extends BaseAppCompatActivity {

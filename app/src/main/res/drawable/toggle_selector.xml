@@ -1,9 +1,0 @@
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:drawable="@drawable/toggle"
-        android:state_checked="true"/>
-
-    <item
-        android:drawable="@drawable/toggle_inverse"
-        android:state_checked="false"/>
-</selector>

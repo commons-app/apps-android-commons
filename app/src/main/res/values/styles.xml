@@ -8,12 +8,12 @@
         <item name="fragmentCategorisationBackground">@color/fragment_categorisation_background_dark</item>
         <item name="buttonBackground">@color/button_background_dark</item>
         <item name="uploadOverlayBackground">@color/upload_overlay_background_dark</item>
-        <item name="toggleButtonIcon">@drawable/toggle_inverse</item>
         <item name="iconSend">@drawable/ic_send_white_24dp</item>
         <item name="iconSave">@drawable/ic_save_white_24dp</item>
         <item name="iconCamera">@drawable/ic_photo_camera_white_24dp</item>
         <item name="iconPhoto">@drawable/ic_photo_white_24dp</item>
         <item name="iconUndo">@drawable/ic_undo_white_24dp</item>
+        <item name="spinnerTheme">@style/DarkSpinnerTheme</item>
     </style>
 
     <style name="LightAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -24,7 +24,6 @@
         <item name="fragmentCategorisationBackground">@color/fragment_categorisation_background_light</item>
         <item name="buttonBackground">@color/button_background_light</item>
         <item name="uploadOverlayBackground">@color/upload_overlay_background_light</item>
-        <item name="toggleButtonIcon">@drawable/toggle</item>
         <item name="iconSend">@drawable/ic_send_white_24dp</item>
         <item name="iconSave">@drawable/ic_save_white_24dp</item>
         <item name="iconCamera">@drawable/ic_photo_camera_white_24dp</item>
@@ -33,9 +32,14 @@
 
         <item name="colorPrimary">@color/action_bar_blue</item>
         <item name="colorPrimaryDark">@color/status_bar_blue</item>
+        <item name="spinnerTheme">@style/LightSpinnerTheme</item>
     </style>
 
-    <style name="SpinnerTheme" parent="LightAppTheme">
+    <style name="DarkSpinnerTheme" parent="DarkAppTheme">
+        <item name="colorControlNormal">#ffffff</item>
+    </style>
+
+    <style name="LightSpinnerTheme" parent="LightAppTheme">
         <item name="colorControlNormal">#ffffff</item>
     </style>
 

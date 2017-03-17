@@ -93,7 +93,7 @@ Tap this message (or hit back) to skip this step.</string>
   <string name="allow_gps">Automatically get current location</string>
   <string name="allow_gps_summary">Retrieve current location to offer category suggestions if image is not geotagged</string>
   <string name="preference_theme">Select theme</string>
-  <string name="preference_theme_summary">Select application theme as light/dark</string>
+  <string name="preference_theme_summary">Select if you prefer night mode</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>

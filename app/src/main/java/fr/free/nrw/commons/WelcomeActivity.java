@@ -9,6 +9,8 @@ import android.widget.Button;
 
 import com.viewpagerindicator.CirclePageIndicator;
 
+import fr.free.nrw.commons.theme.BaseActivity;
+
 public class WelcomeActivity extends BaseActivity {
     static final int PAGE_WIKIPEDIA = 0,
             PAGE_DO_UPLOAD = 1,
