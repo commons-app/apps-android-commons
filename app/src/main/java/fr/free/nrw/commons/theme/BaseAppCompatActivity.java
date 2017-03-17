@@ -14,7 +14,7 @@ public class BaseAppCompatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("theme",false)) {
-            currentTheme = true;g
+            currentTheme = true;
             setTheme(R.style.DarkAppTheme);
         }else {
             currentTheme = false;
