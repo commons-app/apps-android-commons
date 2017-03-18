@@ -70,5 +70,8 @@ public class WelcomeActivity extends BaseActivity {
 
         CirclePageIndicator indicator = (CirclePageIndicator)findViewById(R.id.welcomePagerIndicator);
         indicator.setViewPager(pager);
+
+        // Set default preferences
+        // PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
     }
 }

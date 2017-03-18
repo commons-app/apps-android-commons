@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.preference.ListPreference;
-import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.support.annotation.LayoutRes;
@@ -21,58 +19,21 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getDelegate().installViewFactory();
-        getDelegate().onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
+
         // Check prefs on every activity starts
         if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("theme",false)) {
             setTheme(R.style.DarkAppTheme);
-        }else {
+        } else {
             setTheme(R.style.LightAppTheme); // default
         }
-        super.onCreate(savedInstanceState);
-        super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.preferences);
-        ListPreference licensePreference = (ListPreference) findPreference(Prefs.DEFAULT_LICENSE);
-        // WARNING: ORDERING NEEDS TO MATCH FOR THE LICENSE NAMES AND DISPLAY VALUES
-        licensePreference.setEntries(new String[]{
-                getString(R.string.license_name_cc0),
-                getString(R.string.license_name_cc_by),
-                getString(R.string.license_name_cc_by_four),
-                getString(R.string.license_name_cc_by_sa),
-                getString(R.string.license_name_cc_by_sa_four)
-        });
-        licensePreference.setEntryValues(new String[]{
-                Prefs.Licenses.CC0,
-                Prefs.Licenses.CC_BY_3,
-                Prefs.Licenses.CC_BY_4,
-                Prefs.Licenses.CC_BY_SA_3,
-                Prefs.Licenses.CC_BY_SA_4
-        });
 
-        licensePreference.setSummary(getString(Utils.licenseNameFor(licensePreference.getValue())));
-        licensePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                preference.setSummary(getString(Utils.licenseNameFor((String)newValue)));
-                return true;
-            }
-        });
+        // Display the fragment as the main content.
+        getFragmentManager().beginTransaction()
+                .replace(android.R.id.content, new SettingsFragment())
+                .commit();
 
-        app = (CommonsApplication)getApplicationContext();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        getPreferenceScreen().getSharedPreferences()
-                .registerOnSharedPreferenceChangeListener(this);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        getPreferenceScreen().getSharedPreferences()
-                .unregisterOnSharedPreferenceChangeListener(this);
+        app = (CommonsApplication) getApplicationContext();
     }
 
     @Override

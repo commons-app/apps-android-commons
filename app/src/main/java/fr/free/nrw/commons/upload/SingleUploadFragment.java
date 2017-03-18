@@ -97,7 +97,7 @@ public class SingleUploadFragment extends Fragment {
         licenseItems.add(getString(R.string.license_name_cc_by_sa_four));
 
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        final String license = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
+        final String license = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.FALLBACK_LICENSE);
 
         Log.d("Single Upload fragment", license);
 
@@ -112,7 +112,7 @@ public class SingleUploadFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                //Set selected color to white because it should be readable on random images.
+                // Set selected color to white because it should be readable on random images.
                 TextView selectedText = (TextView) licenseSpinner.getChildAt(0);
                 if (selectedText != null ) {
                     selectedText.setTextColor(Color.WHITE);
@@ -120,17 +120,17 @@ public class SingleUploadFragment extends Fragment {
 
                 String licenseName = parent.getItemAtPosition(position).toString();
 
-                String license = Prefs.Licenses.CC_BY_SA_3; // default value
+                String license = Prefs.FALLBACK_LICENSE; // default value
                 if(getString(R.string.license_name_cc0).equals(licenseName)) {
-                    license = Prefs.Licenses.CC0;
+                    license = getString(R.string.license_name_cc0);
                 } else if(getString(R.string.license_name_cc_by).equals(licenseName)) {
-                    license = Prefs.Licenses.CC_BY_3;
+                    license = getString(R.string.license_name_cc_by_3_0);
                 } else if(getString(R.string.license_name_cc_by_sa).equals(licenseName)) {
-                    license = Prefs.Licenses.CC_BY_SA_3;
+                    license = getString(R.string.license_name_cc_by_sa_3_0);
                 } else if(getString(R.string.license_name_cc_by_four).equals(licenseName)) {
-                    license = Prefs.Licenses.CC_BY_4;
+                    license = getString(R.string.license_name_cc_by_4_0);
                 } else if(getString(R.string.license_name_cc_by_sa_four).equals(licenseName)) {
-                    license = Prefs.Licenses.CC_BY_SA_4;
+                    license = getString(R.string.license_name_cc_by_sa_4_0);
                 }
 
                 setLicenseSummary(license);

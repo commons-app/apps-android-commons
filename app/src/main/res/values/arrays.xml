@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="pref_defaultLicense_entries">
+        <item>@string/license_name_cc0</item>
+        <item>@string/license_name_cc_by</item>
+        <item>@string/license_name_cc_by_four</item>
+        <item>@string/license_name_cc_by_sa</item>
+        <item>@string/license_name_cc_by_sa_four</item>
+    </array>
+    <array name="pref_defaultLicense_values">
+        <item>@string/license_name_cc0</item>
+        <item>@string/license_name_cc_by</item>
+        <item>@string/license_name_cc_by_four</item>
+        <item>@string/license_name_cc_by_sa</item>
+        <item>@string/license_name_cc_by_sa_four</item>
+    </array>
+</resources>
