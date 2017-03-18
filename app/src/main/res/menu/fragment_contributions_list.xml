@@ -12,10 +12,6 @@
         app:showAsAction="ifRoom|withText"
         android:icon="?attr/iconPhoto"
             />
-    <item android:id="@+id/menu_settings"
-          android:title="@string/menu_settings"
-          app:showAsAction="never"
-          />
     <item android:id="@+id/menu_about"
           android:title="@string/menu_about"
           app:showAsAction="never"
@@ -32,5 +28,8 @@
           android:title="@string/menu_refresh"
           app:showAsAction="never"
           />
-
+    <item android:id="@+id/menu_settings"
+        android:title="@string/menu_settings"
+        app:showAsAction="never"
+        />
 </menu>
