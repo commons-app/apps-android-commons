@@ -14,7 +14,6 @@
         <item name="iconPhoto">@drawable/ic_photo_white_24dp</item>
         <item name="iconUndo">@drawable/ic_undo_white_24dp</item>
         <item name="spinnerTheme">@style/DarkSpinnerTheme</item>
-        <item name="detailsBackground">@android:color/background_dark</item>
     </style>
 
     <style name="LightAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -34,7 +33,6 @@
         <item name="colorPrimary">@color/action_bar_blue</item>
         <item name="colorPrimaryDark">@color/status_bar_blue</item>
         <item name="spinnerTheme">@style/LightSpinnerTheme</item>
-        <item name="detailsBackground">@android:color/background_light</item>
     </style>
 
     <style name="DarkSpinnerTheme" parent="DarkAppTheme">
