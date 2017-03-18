@@ -1,6 +1,5 @@
 package fr.free.nrw.commons;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -10,7 +9,6 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.support.annotation.LayoutRes;
-import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatDelegate;
 import android.view.MenuInflater;
 import android.view.View;
@@ -25,11 +23,11 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
     protected void onCreate(Bundle savedInstanceState) {
         getDelegate().installViewFactory();
         getDelegate().onCreate(savedInstanceState);
-        //Check prefs on every activity starts
+        // Check prefs on every activity starts
         if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("theme",false)) {
             setTheme(R.style.DarkAppTheme);
         }else {
-            setTheme(R.style.LightAppTheme); //default
+            setTheme(R.style.LightAppTheme); // default
         }
         super.onCreate(savedInstanceState);
         super.onCreate(savedInstanceState);
@@ -80,7 +78,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if(key.equals("theme")){
-            //Finish current activity and tart new one with selected theme
+            // Finish current activity and start new one with selected theme
             Intent intent = getIntent();
             finish();
             startActivity(intent);
