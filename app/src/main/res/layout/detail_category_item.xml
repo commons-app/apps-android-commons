@@ -14,7 +14,7 @@
         android:id="@+id/mediaDetailCategoryItemText"
         android:textSize="14sp"
         android:textColor="@android:color/white"
-        android:background="#20ffffff"
+        android:background="?attr/subBackground"
         />
 
     <fr.free.nrw.commons.media.MediaDetailSpacer

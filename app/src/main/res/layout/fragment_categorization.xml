@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#AA000000"
+    android:background="?attr/fragmentCategorisationBackground"
     android:paddingBottom="8dip"
     android:paddingLeft="16dip"
     android:paddingStart="16dip"

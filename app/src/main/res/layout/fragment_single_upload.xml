@@ -4,13 +4,14 @@
     android:layout_height="match_parent"
     android:layout_gravity="fill"
     android:orientation="vertical"
-    android:background="#AA000000"
+    android:background="?attr/fragmentCategorisationBackground"
     android:paddingBottom="8dip"
     android:paddingLeft="16dip"
     android:paddingStart="16dip"
     android:paddingRight="16dip"
     android:paddingEnd="16dip"
     android:paddingTop="8dip"
+    android:theme="@style/DarkAppTheme"
     >
 
     <EditText
@@ -36,12 +37,12 @@
         android:id="@+id/licenseSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
-    </Spinner>
+        android:theme="?attr/spinnerTheme"
+        />
 
     <Button
         android:text="@string/use_previous"
-        android:background="#90000000"
+        android:background="?attr/buttonBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/titleDescButton"
