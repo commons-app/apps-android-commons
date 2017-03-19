@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/background_dark"
+    android:background="?attr/mainBackground"
     >
 
     <ProgressBar
@@ -58,7 +58,7 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#AA000000"
+                android:background="?attr/fragmentCategorisationBackground"
                 android:padding="16dp"
                 >
 
@@ -66,7 +66,7 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#20ffffff"
+                    android:background="?attr/subBackground"
                     android:padding="16dp"
                     >
                     <TextView
@@ -85,7 +85,7 @@
                         android:id="@+id/mediaDetailTitle"
                         android:layout_gravity="left|start"
                         android:textColor="@android:color/white"
-                        android:background="#20ffffff"
+                        android:background="?attr/subBackground"
                         android:textSize="14sp"
                         android:padding="12dp"
                         />
@@ -100,7 +100,7 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#20ffffff"
+                    android:background="?attr/subBackground"
                     android:padding="16dp"
                     >
                     <TextView
@@ -116,7 +116,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/media_detail_description_explanation"
-                        android:background="#20ffffff"
+                        android:background="?attr/subBackground"
                         android:id="@+id/mediaDetailDesc"
                         android:textColor="@android:color/white"
                         android:layout_gravity="left|start"
@@ -134,7 +134,7 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#20ffffff"
+                    android:background="?attr/subBackground"
                     android:padding="16dp"
                     >
                     <TextView
@@ -152,7 +152,7 @@
                         android:text="License link"
                         android:id="@+id/mediaDetailLicense"
                         android:layout_gravity="left|start"
-                        android:background="#20ffffff"
+                        android:background="?attr/subBackground"
                         android:textColor="@android:color/white"
                         android:textSize="14sp"
                         android:padding="12dp"
@@ -168,7 +168,7 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#20ffffff"
+                    android:background="?attr/subBackground"
                     android:padding="16dp"
                     android:textStyle="bold"
                     >

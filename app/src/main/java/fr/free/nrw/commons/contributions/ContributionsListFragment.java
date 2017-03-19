@@ -23,6 +23,8 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Method;
+
 import fr.free.nrw.commons.AboutActivity;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
@@ -206,6 +208,31 @@ public class ContributionsListFragment extends Fragment {
 
         menu.findItem(R.id.menu_refresh).setVisible(false);
     }
+
+    /*http://stackoverflow.com/questions/30076392/how-does-this-strange-condition-happens-when-show-menu-item-icon-in-toolbar-over/30337653#30337653
+    Overriden to show toggle_layout button on overlay menu
+    */
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        if(menu != null){
+            if(menu.getClass().getSimpleName().equals("MenuBuilder")){
+                try{
+                    Method m = menu.getClass().getDeclaredMethod(
+                            "setOptionalIconsVisible", Boolean.TYPE);
+                    m.setAccessible(true);
+                    m.invoke(menu, true);
+                }
+                catch(NoSuchMethodException e){
+                    Log.e(TAG, "onMenuOpened", e);
+                }
+                catch(Exception e){
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+        super.onPrepareOptionsMenu(menu);
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -4,9 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.ListPreference;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -28,7 +28,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import fr.free.nrw.commons.Prefs;
 import fr.free.nrw.commons.R;
@@ -112,6 +111,13 @@ public class SingleUploadFragment extends Fragment {
         licenseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                //Set selected color to white because it should be readable on random images.
+                TextView selectedText = (TextView) licenseSpinner.getChildAt(0);
+                if (selectedText != null ) {
+                    selectedText.setTextColor(Color.WHITE);
+                }
+
                 String licenseName = parent.getItemAtPosition(position).toString();
 
                 String license = Prefs.Licenses.CC_BY_SA_3; // default value
