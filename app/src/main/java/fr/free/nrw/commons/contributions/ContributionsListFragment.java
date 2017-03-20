@@ -6,11 +6,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -32,6 +37,7 @@ import fr.free.nrw.commons.SettingsActivity;
 import fr.free.nrw.commons.nearby.NearbyActivity;
 
 import static android.app.Activity.RESULT_OK;
+import static android.content.Context.LOCATION_SERVICE;
 
 public class ContributionsListFragment extends Fragment {
 
@@ -227,6 +233,28 @@ public class ContributionsListFragment extends Fragment {
                 }
                 catch(Exception e){
                     throw new RuntimeException(e);
+                }
+            }
+
+            MenuItem galleryMenu = menu.findItem(R.id.menu_from_gallery);
+
+            // Get background resource id to recognize current themes
+            TypedArray typedArray = getActivity().getTheme().obtainStyledAttributes(new int[] {R.attr.mainBackground});
+            int galleryIconResourceId = typedArray.getResourceId(0, 0);
+            typedArray.recycle();
+
+            // Get width in dp http://stackoverflow.com/questions/11999260/check-if-menuitem-is-in-actionbar-overflow
+            DisplayMetrics metrics = new DisplayMetrics();
+            Display display = getActivity().getWindowManager().getDefaultDisplay();
+            display.getMetrics(metrics);
+            float logicalDensity = metrics.density;
+            int dp = (int) (metrics.widthPixels / logicalDensity + 0.5);
+
+            if(dp < 360) { // only two icons, there is no room
+                if(galleryIconResourceId==getActivity().obtainStyledAttributes(R.style.LightAppTheme, new int[] {R.attr.mainBackground}).getResourceId(0, 0)){
+                    galleryMenu.setIcon(R.drawable.ic_photo_black_24dp); //If theme is light, display dark icon on overlay menu
+                }else{
+                    galleryMenu.setIcon(R.drawable.ic_photo_white_24dp); //If theme is dark, display light icon on overlay menu
                 }
             }
         }
