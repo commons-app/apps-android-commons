@@ -49,6 +49,7 @@
   <string name="menu_upload_single">Ladda upp</string>
   <string name="categories_search_text_hint">Sök kategorier</string>
   <string name="menu_save_categories">Spara</string>
+  <string name="refresh_button">Uppdatera</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">Inga uppladdningar ännu</item>
     <item quantity="one">1 uppladdning</item>
@@ -90,6 +91,8 @@ Tryck på detta meddelande (eller gå tillbaka) för att hoppa över detta steg.
   <string name="use_previous">Använd föregående titel/beskrivning</string>
   <string name="allow_gps">Hämta aktuell plats automatiskt</string>
   <string name="allow_gps_summary">Hämta aktuell plats för att erbjuda kategoriförslag om bilden inte är geotaggad</string>
+  <string name="license_name_cc_by_sa_four">Erkännande-DelaLika 4.0</string>
+  <string name="license_name_cc_by_four">Erkännande 4.0</string>
   <string name="license_name_cc_by_sa"> Erkännande-DelaLika 3.0</string>
   <string name="license_name_cc_by">Erkännande 3.0</string>
   <string name="license_name_cc0">CC0</string>
@@ -159,4 +162,11 @@ människor runt hela världen!</string>
   <string name="file_exists">Denna fil finns redan på Commons. Är du säker på att du vill fortsätta?</string>
   <string name="yes">Ja</string>
   <string name="no">Nej</string>
+  <string name="media_detail_title">Titel</string>
+  <string name="media_detail_media_title">Mediatitel</string>
+  <string name="media_detail_description">Beskrivning</string>
+  <string name="media_detail_description_explanation">Beskrivningen för mediafilen ska vara här. Den kan vara riktig lång och kommer att behöva sträcka sig över flera rader. Vi hoppas i alla fall att det kommer se bra ut.</string>
+  <string name="become_a_tester_title">Bli en betatestare</string>
+  <string name="become_a_tester_description">Registrera dig på våra betakanal på Google Play och få tidig åtkomst till nya funktioner och buggfixar</string>
+  <string name="beta_opt_in_link">https://play.google.com/apps/testing/fr.free.nrw.commons</string>
 </resources>

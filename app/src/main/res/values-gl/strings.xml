@@ -49,6 +49,7 @@
   <string name="menu_upload_single">Subir</string>
   <string name="categories_search_text_hint">Procurar categorías</string>
   <string name="menu_save_categories">Gardar</string>
+  <string name="refresh_button">Refrescar</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">Aínda non hai ningunha carga</item>
     <item quantity="one">1 carga</item>
@@ -90,6 +91,8 @@ Prema nesta mensaxe (ou no botón \"Atrás\") para saltar este paso.</string>
   <string name="use_previous">Usar o título ou a descrición anterior</string>
   <string name="allow_gps">Obter automaticamente a localización actual</string>
   <string name="allow_gps_summary">Obter a localización actual para ofrecer suxestións de categoría se a imaxe non está xeolocalizada</string>
+  <string name="preference_theme">Modo nocturno</string>
+  <string name="preference_theme_summary">Usar tema escuro</string>
   <string name="license_name_cc_by_sa_four"> Recoñecemento-CompartirIgual 4.0</string>
   <string name="license_name_cc_by_four">Recoñecemento 4.0</string>
   <string name="license_name_cc_by_sa"> Recoñecemento-CompartirIgual 3.0</string>
@@ -160,4 +163,8 @@ Prema nesta mensaxe (ou no botón \"Atrás\") para saltar este paso.</string>
   <string name="file_exists">Este ficheiro xa existe en Commons. Está seguro de que quere continuar?</string>
   <string name="yes">Si</string>
   <string name="no">Non</string>
+  <string name="media_detail_title">Título</string>
+  <string name="media_detail_media_title">Título do ficheiro multimedia</string>
+  <string name="media_detail_description">Descrición</string>
+  <string name="beta_opt_in_link">https://play.google.com/apps/testing/fr.free.nrw.commons</string>
 </resources>

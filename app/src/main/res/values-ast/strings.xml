@@ -49,6 +49,7 @@
   <string name="menu_upload_single">Xubir</string>
   <string name="categories_search_text_hint">Guetar categoríes</string>
   <string name="menu_save_categories">Guardar</string>
+  <string name="refresh_button">Refrescar</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">Inda nun hai cargues</item>
     <item quantity="one">1 carga</item>
@@ -90,6 +91,8 @@ Toque nesti mensaxe (o calque atrás) pa saltar esti pasu.</string>
   <string name="use_previous">Usar un títulu/descripción anterior</string>
   <string name="allow_gps">Llograr automáticamente l\'allugamientu actual</string>
   <string name="allow_gps_summary">Recuperar l\'allugamientu actual pa ufiertar suxerencies de categoríes si la imaxe nun tien etiquetes xeográfiques</string>
+  <string name="preference_theme">Mou nocherniegu</string>
+  <string name="preference_theme_summary">Usar tema escuru</string>
   <string name="license_name_cc_by_sa_four"> Reconocimientu-CompartirIgual 4.0</string>
   <string name="license_name_cc_by_four"> Reconocimientu 4.0</string>
   <string name="license_name_cc_by_sa"> Reconocimientu-CompartirIgual 3.0</string>
@@ -161,4 +164,11 @@ Wikimedia Commons.</string>
   <string name="file_exists">Esti ficheru yá esiste\'n Commons. ¿Confirmes que quies siguir?</string>
   <string name="yes">Sí</string>
   <string name="no">Non</string>
+  <string name="media_detail_title">Títulu</string>
+  <string name="media_detail_media_title">Títulu del mediu</string>
+  <string name="media_detail_description">Descripción</string>
+  <string name="media_detail_description_explanation">Equí va la descripción del mediu. Posiblemente pué ser llargo enforma, y necesitará espardese per delles llinies. Sicasí, esperamos que se vea guapo.</string>
+  <string name="become_a_tester_title">Faete probador beta</string>
+  <string name="become_a_tester_description">Escueye\'l nuesu canal beta en Google Play y ten accesu tempranu a carauterístiques nueves ya igües de fallos</string>
+  <string name="beta_opt_in_link">https://play.google.com/apps/testing/fr.free.nrw.commons</string>
 </resources>
