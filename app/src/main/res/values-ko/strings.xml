@@ -49,6 +49,7 @@
   <string name="menu_upload_single">올리기</string>
   <string name="categories_search_text_hint">분류 검색</string>
   <string name="menu_save_categories">저장</string>
+  <string name="refresh_button">새로 고침</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">아직 업로드 없음</item>
     <item quantity="one">1개 업로드</item>
@@ -89,6 +90,8 @@
   <string name="preference_license">라이선스</string>
   <string name="use_previous">이전의 제목/설명을 사용하기</string>
   <string name="allow_gps">자동으로 현재 위치 가져오기</string>
+  <string name="preference_theme">야간 모드</string>
+  <string name="preference_theme_summary">어두운 테마 사용</string>
   <string name="license_name_cc_by_sa"> 저작자표시-동일조건변경허락 3.0</string>
   <string name="license_name_cc_by">저작자표시 3.0</string>
   <string name="license_name_cc0">CC0</string>

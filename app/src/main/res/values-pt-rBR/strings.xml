@@ -49,6 +49,7 @@
   <string name="menu_upload_single">Enviar</string>
   <string name="categories_search_text_hint">Procurar categorias</string>
   <string name="menu_save_categories">Salvar</string>
+  <string name="refresh_button">Atualizar</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">Nenhum envio</item>
     <item quantity="one">1 envio</item>
@@ -90,6 +91,10 @@ Aperte nesta mensagem (ou aperte para voltar) para pular este passo</string>
   <string name="use_previous">Usar o título/descrição anterior</string>
   <string name="allow_gps">Obter automaticamente a localização atual</string>
   <string name="allow_gps_summary">Recuperar o local atual para oferecer sugestões de categoria se a imagem não tiver geo-tagged</string>
+  <string name="preference_theme">Modo noturno</string>
+  <string name="preference_theme_summary">Usar tema escuro</string>
+  <string name="license_name_cc_by_sa_four">Atribuição-CompartilhaIgual 4.0</string>
+  <string name="license_name_cc_by_four">Atribuição 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
   <string name="license_name_cc_by"> Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
@@ -163,4 +168,6 @@ Aperte nesta mensagem (ou aperte para voltar) para pular este passo</string>
   <string name="media_detail_description">Descrição</string>
   <string name="media_detail_description_explanation">Descrição da mídia aqui. Isso pode ser potencialmente longo e precisará envolver múltiplas linhas. Esperamos que seja agradável.</string>
   <string name="become_a_tester_title">Seja um Testador Beta</string>
+  <string name="become_a_tester_description">Entre no nosso canal beta no Google Play e receba acesso prévio a novos recursos e correções de erros</string>
+  <string name="beta_opt_in_link">https://play.google.com/apps/testing/fr.free.nrw.commons</string>
 </resources>

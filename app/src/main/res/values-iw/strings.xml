@@ -49,6 +49,7 @@
   <string name="menu_upload_single">העלאה</string>
   <string name="categories_search_text_hint">חיפוש קטגוריות</string>
   <string name="menu_save_categories">שמירה</string>
+  <string name="refresh_button">רענון</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">אין העלאות</item>
     <item quantity="one">העלאה אחת</item>
@@ -90,6 +91,8 @@
   <string name="use_previous">להשתמש בכותרת ובתיאור קודמים</string>
   <string name="allow_gps">לקבל אוטומטית את המיקום הנוכחי</string>
   <string name="allow_gps_summary">לאחזר את המיקום הנוכחי כדי להציע קטגוריות אם בתמונה אין תגי מיקום</string>
+  <string name="preference_theme">מצב לילה</string>
+  <string name="preference_theme_summary">שימוש במצב לילה</string>
   <string name="license_name_cc_by_sa_four">ייחוס–שיתוף זהה 4.0</string>
   <string name="license_name_cc_by_four">ייחוס 4.0</string>
   <string name="license_name_cc_by_sa">ייחוס–שיתוף זהה 3.0</string>

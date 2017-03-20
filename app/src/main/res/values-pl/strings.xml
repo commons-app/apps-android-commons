@@ -49,6 +49,7 @@
   <string name="menu_upload_single">Prześlij</string>
   <string name="categories_search_text_hint">Szukaj kategorii</string>
   <string name="menu_save_categories">Zapisz</string>
+  <string name="refresh_button">Odśwież</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">Nie przesłano jeszcze żadnego pliku</item>
     <item quantity="one">Przesłano 1 plik</item>
@@ -90,6 +91,7 @@ Kliknij ten komunikat lub naciśnij „cofnij”, aby pominąć ten krok.</strin
   <string name="use_previous">Użyj poprzedniego tytułu/opisu</string>
   <string name="allow_gps">Automatycznie uzyskaj bieżącą lokalizację</string>
   <string name="allow_gps_summary">Pobierz aktualną lokalizację, aby uzyskać propozycje kategorii, jeśli obraz nie zawiera znaczników geograficznych</string>
+  <string name="preference_theme">Tryb nocny</string>
   <string name="license_name_cc_by_sa_four">Uznanie autorstwa-Na tych samych warunkach 4.0</string>
   <string name="license_name_cc_by_four">Uznanie autorstwa 4.0</string>
   <string name="license_name_cc_by_sa"> Uznanie autorstwa-Na tych samych warunkach 3.0</string>

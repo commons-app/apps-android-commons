@@ -49,6 +49,7 @@
   <string name="menu_upload_single">Huuchschüür</string>
   <string name="categories_search_text_hint">Schük uun kategoriin</string>
   <string name="menu_save_categories">Seekre</string>
+  <string name="refresh_button">Nei loose</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">Noch nian huuchschüürd datein</item>
     <item quantity="one">Ian huuchschüürd datei</item>

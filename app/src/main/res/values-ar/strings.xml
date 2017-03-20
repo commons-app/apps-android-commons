@@ -5,6 +5,7 @@
   <string name="username">اسم المستخدم</string>
   <string name="password">كلمة السر</string>
   <string name="login">تسجيل الدخول</string>
+  <string name="signup">أنشئ حسابًا</string>
   <string name="logging_in_title">يجري الدخول</string>
   <string name="logging_in_message">الرجاء الانتظار...</string>
   <string name="login_success">تم الدخول بشكل صحيح</string>
@@ -77,4 +78,7 @@
   <string name="detail_panel_cats_none">لا شيء محدد</string>
   <string name="detail_license_empty">ترخيص غير معلوم</string>
   <string name="menu_refresh">تحديث</string>
+  <string name="yes">نعم</string>
+  <string name="no">لا</string>
+  <string name="media_detail_description">الوصف</string>
 </resources>
