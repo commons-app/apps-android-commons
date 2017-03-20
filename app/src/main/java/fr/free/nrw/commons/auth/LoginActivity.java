@@ -69,7 +69,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                     .log();
 
             if (result.equals("Success")) {
-                //dialog.dismiss();
                 if (dialog != null && dialog.isShowing()) {
                     dialog.dismiss();
                 }
