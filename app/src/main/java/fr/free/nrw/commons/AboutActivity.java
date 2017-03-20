@@ -7,23 +7,21 @@ import android.widget.TextView;
 
 import fr.free.nrw.commons.theme.BaseActivity;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class AboutActivity extends BaseActivity {
-    private TextView versionText;
-    private TextView licenseText;
-    private TextView improveText;
-    private TextView privacyPolicyText;
-    private TextView uploadsToText;
+    @BindView(R.id.about_version) TextView versionText;
+    @BindView(R.id.about_license) TextView licenseText;
+    @BindView(R.id.about_improve) TextView improveText;
+    @BindView(R.id.about_privacy_policy) TextView privacyPolicyText;
+    @BindView(R.id.about_uploads_to) TextView uploadsToText;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-
-        versionText = (TextView) findViewById(R.id.about_version);
-        licenseText = (TextView) findViewById(R.id.about_license);
-        improveText = (TextView) findViewById(R.id.about_improve);
-        privacyPolicyText = (TextView) findViewById(R.id.about_privacy_policy);
-        uploadsToText = (TextView) findViewById(R.id.about_uploads_to);
+        ButterKnife.bind(this);
 
         uploadsToText.setText(CommonsApplication.EVENTLOG_WIKI);
         versionText.setText(CommonsApplication.APPLICATION_VERSION);
