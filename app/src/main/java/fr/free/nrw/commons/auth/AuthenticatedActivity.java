@@ -1,16 +1,12 @@
 package fr.free.nrw.commons.auth;
 
-import android.Manifest;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AccountManagerFuture;
 import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
-import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 
 import java.io.IOException;
 
@@ -24,24 +20,23 @@ public abstract class AuthenticatedActivity extends BaseAppCompatActivity {
     CommonsApplication app;
 
     private String authCookie;
-
+    
     public AuthenticatedActivity(String accountType) {
-        this.accountType = accountType;
+       this.accountType = accountType;
     }
-
+   
     private class GetAuthCookieTask extends AsyncTask<Void, String, String> {
         private Account account;
         private AccountManager accountManager;
-
         public GetAuthCookieTask(Account account, AccountManager accountManager) {
             this.account = account;
             this.accountManager = accountManager;
         }
-
+        
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            if (result != null) {
+            if(result != null) {
                 authCookie = result;
                 onAuthCookieAcquired(result);
             } else {
@@ -65,36 +60,24 @@ public abstract class AuthenticatedActivity extends BaseAppCompatActivity {
             }
         }
     }
-
+    
     private class AddAccountTask extends AsyncTask<Void, String, String> {
         private AccountManager accountManager;
-
         public AddAccountTask(AccountManager accountManager) {
             this.accountManager = accountManager;
         }
-
+        
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            if (result != null) {
-                Account curAccount = getCurrentAccount();
+            if(result != null) {
+                Account[] allAccounts =accountManager.getAccountsByType(accountType);
+                Account curAccount = allAccounts[0];
                 GetAuthCookieTask getCookieTask = new GetAuthCookieTask(curAccount, accountManager);
                 getCookieTask.execute();
             } else {
                 onAuthFailure();
             }
-        }
-
-        @Nullable
-        private Account getCurrentAccount() {
-            if (ActivityCompat.checkSelfPermission(AuthenticatedActivity.this, Manifest.permission.GET_ACCOUNTS) != PackageManager.PERMISSION_GRANTED) {
-                return null;
-            }
-            Account[] allAccounts = accountManager.getAccountsByType(accountType);
-            if (allAccounts == null) {
-                return null;
-            }
-            return allAccounts[0];
         }
 
         @Override
