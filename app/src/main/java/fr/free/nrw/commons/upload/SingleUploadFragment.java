@@ -4,13 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.support.v7.view.ContextThemeWrapper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -26,7 +24,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -115,11 +112,6 @@ public class SingleUploadFragment extends Fragment {
         }
 
         licenseSpinner.setAdapter(adapter);
-
-        // Get background resource id to recognize current themes
-        TypedArray typedArray = getActivity().getTheme().obtainStyledAttributes(new int[] {R.attr.mainBackground});
-        int themeBackgroundID = typedArray.getResourceId(0, 0);
-        typedArray.recycle();
 
         int position = licenseItems.indexOf(getString(Utils.licenseNameFor(license)));
         Log.d("Single Upload fragment", "Position:"+position+" "+getString(Utils.licenseNameFor(license)));
