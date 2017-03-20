@@ -58,6 +58,16 @@
         />
 
     <TextView
+        android:id="@+id/about_credits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        style="?android:textAppearanceSmall"
+        android:gravity="center"
+        android:text="@string/about_credits"
+        />
+
+    <TextView
         android:id="@+id/about_uploads_to"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
