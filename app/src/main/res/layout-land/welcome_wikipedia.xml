@@ -40,6 +40,8 @@
                 android:layout_gravity="center"
                 android:textAlignment="center"
                 android:paddingTop="16dp"
-                android:gravity="center_horizontal"/>
+                android:gravity="center_horizontal"
+                android:textColor="@android:color/white"
+            />
     </LinearLayout>
 </LinearLayout>

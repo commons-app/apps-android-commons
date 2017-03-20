@@ -74,5 +74,6 @@
         android:textAlignment="textStart"
         android:paddingTop="16dp"
         android:gravity="start"
+        android:textColor="@android:color/white"
         />
 </LinearLayout>
