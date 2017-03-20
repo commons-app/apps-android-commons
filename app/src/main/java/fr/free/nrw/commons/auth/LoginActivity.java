@@ -69,7 +69,10 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                     .log();
 
             if (result.equals("Success")) {
-                dialog.dismiss();
+                //dialog.dismiss();
+                if (dialog != null && dialog.isShowing()) {
+                    dialog.dismiss();
+                }
                 Toast successToast = Toast.makeText(context, R.string.login_success, Toast.LENGTH_SHORT);
                 successToast.show();
                 Account account = new Account(username, WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
