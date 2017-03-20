@@ -1,13 +1,12 @@
 package fr.free.nrw.commons;
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.util.Log;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -106,10 +105,7 @@ public class Utils {
         Transformer transformer = null;
         try {
             transformer = TransformerFactory.newInstance().newTransformer();
-        } catch (TransformerConfigurationException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (TransformerFactoryConfigurationError e) {
+        } catch (TransformerConfigurationException | TransformerFactoryConfigurationError e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
@@ -127,25 +123,12 @@ public class Utils {
         return outputStream.toString();
     }
 
-    static public <T> void executeAsyncTask(AsyncTask<T, ?, ?> task,
-                                            T... params) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
-        }
-        else {
+    static public <T> void executeAsyncTask(AsyncTask<T, ?, ?> task, T... params) {
             task.execute(params);
-        }
     }
 
-    static public <T> void executeAsyncTask(AsyncTask<T, ?, ?> task, Executor executor,
-                                            T... params) {
-        // FIXME: We're simply ignoring the executor on older androids
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            task.executeOnExecutor(executor, params);
-        }
-        else {
-            task.execute(params);
-        }
+    static public <T> void executeAsyncTask(AsyncTask<T, ?, ?> task, Executor executor, T... params) {
+        task.execute(params);
     }
 
     private static DisplayImageOptions.Builder defaultImageOptionsBuilder;
@@ -153,13 +136,6 @@ public class Utils {
         if(defaultImageOptionsBuilder == null) {
             defaultImageOptionsBuilder = new DisplayImageOptions.Builder().cacheInMemory()
                     .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                // List views flicker badly during data updates on Android 2.3; we
-                // haven't quite figured out why but cells seem to be rearranged oddly.
-                // Disable the fade-in on 2.3 to reduce the effect.
-                defaultImageOptionsBuilder = defaultImageOptionsBuilder
-                        .displayer(new FadeInBitmapDisplayer(300));
-            }
             defaultImageOptionsBuilder = defaultImageOptionsBuilder
                     .cacheInMemory()
                     .resetViewBeforeLoading();
@@ -205,63 +181,49 @@ public class Utils {
         return string.substring(0,1).toUpperCase(Locale.getDefault()) + string.substring(1);
     }
 
-    public static String licenseTemplateFor(String license) {
-        if(license.equals(R.string.license_name_cc_by_3_0)) {
+    public static String licenseTemplateFor(String license, Context ctx) {
+        if(license.equals(ctx.getString(R.string.license_name_cc_by_3_0))) {
             return "{{self|cc-by-3.0}}";
-        } else if(license.equals(R.string.license_name_cc_by_4_0)) {
+        } else if(license.equals(ctx.getString(R.string.license_name_cc_by_4_0))) {
             return "{{self|cc-by-4.0}}";
-        } else if(license.equals(R.string.license_name_cc_by_sa_3_0)) {
+        } else if(license.equals(ctx.getString(R.string.license_name_cc_by_sa_3_0))) {
             return "{{self|cc-by-sa-3.0}}";
-        } else if(license.equals(R.string.license_name_cc_by_sa_4_0)) {
+        } else if(license.equals(ctx.getString(R.string.license_name_cc_by_sa_4_0))) {
             return "{{self|cc-by-sa-4.0}}";
-        } else if(license.equals(R.string.license_name_cc0)) {
+        } else if(license.equals(ctx.getString(R.string.license_name_cc0))) {
             return "{{self|cc-zero}}";
         }
         throw new RuntimeException("Unrecognized license value");
     }
 
-    public static int licenseNameFor(String license) {
-        if(license.equals(R.string.license_name_cc_by_3_0)) {
+    public static int licenseNameFor(String license, Context ctx) {
+        if(license.equals(ctx.getString(R.string.license_name_cc_by_3_0))) {
             return R.string.license_name_cc_by;
-        } else if(license.equals(R.string.license_name_cc_by_4_0)) {
+        } else if(license.equals(ctx.getString(R.string.license_name_cc_by_4_0))) {
             return R.string.license_name_cc_by_four;
-        } else if(license.equals(R.string.license_name_cc_by_sa_3_0)) {
+        } else if(license.equals(ctx.getString(R.string.license_name_cc_by_sa_3_0))) {
             return R.string.license_name_cc_by_sa;
-        } else if(license.equals(R.string.license_name_cc_by_sa_4_0)) {
+        } else if(license.equals(ctx.getString(R.string.license_name_cc_by_sa_4_0))) {
             return R.string.license_name_cc_by_sa_four;
-        } else if(license.equals(R.string.license_name_cc0)) {
+        } else if(license.equals(ctx.getString(R.string.license_name_cc0))) {
             return R.string.license_name_cc0;
         }
         throw new RuntimeException("Unrecognized license value");
     }
 
-    public static String licenseUrlFor(String license) {
-        if(license.equals(R.string.license_name_cc_by_3_0)) {
+    public static String licenseUrlFor(String license, Context ctx) {
+        if(license.equals(ctx.getString(R.string.license_name_cc_by_3_0))) {
             return "https://creativecommons.org/licenses/by/3.0/";
-        } else if(license.equals(R.string.license_name_cc_by_4_0)) {
+        } else if(license.equals(ctx.getString(R.string.license_name_cc_by_4_0))) {
             return "https://creativecommons.org/licenses/by/4.0/";
-        } else if(license.equals(R.string.license_name_cc_by_sa_3_0)) {
+        } else if(license.equals(ctx.getString(R.string.license_name_cc_by_sa_3_0))) {
             return "https://creativecommons.org/licenses/by-sa/3.0/";
-        } else if(license.equals(R.string.license_name_cc_by_sa_4_0)) {
+        } else if(license.equals(ctx.getString(R.string.license_name_cc_by_sa_4_0))) {
             return "https://creativecommons.org/licenses/by-sa/4.0/";
-        } else if(license.equals(R.string.license_name_cc0)) {
+        } else if(license.equals(ctx.getString(R.string.license_name_cc0))) {
             return "https://creativecommons.org/publicdomain/zero/1.0/";
         }
         throw new RuntimeException("Unrecognized license value");
-    }
-
-    public static String implode(String glue, Iterable<String> pieces) {
-        StringBuffer buffer = new StringBuffer();
-        boolean first = true;
-        for (String piece : pieces) {
-            if (first) {
-                first = false;
-            } else {
-                buffer.append(glue);
-            }
-            buffer.append(pieces);
-        }
-        return buffer.toString();
     }
 
     public static Uri uriForWikiPage(String name) {

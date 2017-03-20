@@ -2,6 +2,7 @@ package fr.free.nrw.commons;
 
 import android.os.Bundle;
 import android.preference.ListPreference;
+import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
@@ -18,23 +19,21 @@ public class SettingsFragment extends PreferenceFragment {
 
         ListPreference licensePreference = (ListPreference) findPreference(Prefs.DEFAULT_LICENSE);
 
-        /*
-        licensePreference.setSummary(getString(Utils.licenseNameFor(licensePreference.getValue())));
+        licensePreference.setSummary(licensePreference.getValue());
         licensePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
-                preference.setSummary(getString(Utils.licenseNameFor((String)newValue)));
+                preference.setSummary((String) newValue);
                 return true;
             }
         });
-        */
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
         if(view != null) {
-            if (PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean("theme", false)) {
+            if (PreferenceManager.getDefaultSharedPreferences(getActivity()).getBoolean("theme", false)) {
                 view.setBackgroundColor(getResources().getColor(android.R.color.background_dark));
             } else {
                 view.setBackgroundColor(getResources().getColor(android.R.color.background_light));

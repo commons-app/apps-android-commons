@@ -13,16 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class SettingsActivity extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
-    CommonsApplication app;
-
     private AppCompatDelegate mDelegate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Check prefs on every activity starts
-        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("theme",false)) {
+        // Set theme
+        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("theme", false)) {
             setTheme(R.style.DarkAppTheme);
         } else {
             setTheme(R.style.LightAppTheme); // default
@@ -32,8 +30,6 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
         getFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new SettingsFragment())
                 .commit();
-
-        app = (CommonsApplication) getApplicationContext();
     }
 
     @Override

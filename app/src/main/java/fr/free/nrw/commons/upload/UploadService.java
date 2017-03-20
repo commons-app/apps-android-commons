@@ -240,7 +240,7 @@ public class UploadService extends HandlerService<Contribution> {
                     String.format(getString(R.string.upload_progress_notification_title_finishing), contribution.getDisplayTitle()),
                     contribution
             );
-            result = api.upload(filename, file, contribution.getDataLength(), contribution.getPageContents(), contribution.getEditSummary(), notificationUpdater);
+            result = api.upload(filename, file, contribution.getDataLength(), contribution.getPageContents(getApplicationContext()), contribution.getEditSummary(), notificationUpdater);
 
             Log.d("Commons", "Response is" + Utils.getStringFromDOM(result.getDocument()));
 

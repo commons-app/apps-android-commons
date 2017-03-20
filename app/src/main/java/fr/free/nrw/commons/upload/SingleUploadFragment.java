@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
+import android.content.res.TypedArray;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -21,13 +21,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-
-import java.util.ArrayList;
 
 import fr.free.nrw.commons.Prefs;
 import fr.free.nrw.commons.R;
@@ -89,35 +86,27 @@ public class SingleUploadFragment extends Fragment {
         licenseSpinner = (Spinner) rootView.findViewById(R.id.licenseSpinner);
         licenseSummaryView = (TextView)rootView.findViewById(R.id.share_license_summary);
 
-        ArrayList<String> licenseItems = new ArrayList<>();
-        licenseItems.add(getString(R.string.license_name_cc0));
-        licenseItems.add(getString(R.string.license_name_cc_by));
-        licenseItems.add(getString(R.string.license_name_cc_by_sa));
-        licenseItems.add(getString(R.string.license_name_cc_by_four));
-        licenseItems.add(getString(R.string.license_name_cc_by_sa_four));
-
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         final String license = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.FALLBACK_LICENSE);
 
         Log.d("Single Upload fragment", license);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, licenseItems);
-        licenseSpinner.setAdapter(adapter);
+        int position = 4;
+        TypedArray license_entries = getResources().obtainTypedArray(R.array.pref_defaultLicense_entries);
+        for(int i = 0; i < license_entries.length(); i++) {
+            if(license.equals(license_entries.getString(i))) {
+                position = i;
+                break;
+            }
+        }
+        license_entries.recycle();
 
-        int position = licenseItems.indexOf(getString(Utils.licenseNameFor(license)));
-        Log.d("Single Upload fragment", "Position:"+position+" "+getString(Utils.licenseNameFor(license)));
+        Log.d("Single Upload fragment", "Spinner Position: "+ position +", License: "+license);
         licenseSpinner.setSelection(position);
 
         licenseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                // Set selected color to white because it should be readable on random images.
-                TextView selectedText = (TextView) licenseSpinner.getChildAt(0);
-                if (selectedText != null ) {
-                    selectedText.setTextColor(Color.WHITE);
-                }
-
                 String licenseName = parent.getItemAtPosition(position).toString();
 
                 String license = Prefs.FALLBACK_LICENSE; // default value
@@ -187,7 +176,7 @@ public class SingleUploadFragment extends Fragment {
                 if (motionEvent.getActionMasked() == MotionEvent.ACTION_DOWN) {
                     Intent intent = new Intent();
                     intent.setAction(Intent.ACTION_VIEW);
-                    intent.setData(Uri.parse(Utils.licenseUrlFor(license)));
+                    intent.setData(Uri.parse(Utils.licenseUrlFor(license, getContext())));
                     startActivity(intent);
                     return true;
                 } else {
@@ -200,7 +189,7 @@ public class SingleUploadFragment extends Fragment {
     }
 
     private void setLicenseSummary(String license) {
-        licenseSummaryView.setText(getString(R.string.share_license_summary, getString(Utils.licenseNameFor(license))));
+        licenseSummaryView.setText(getString(R.string.share_license_summary, license));
     }
 
     @Override
