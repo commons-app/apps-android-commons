@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import fr.free.nrw.commons.R;
 
-public class BaseAppCompatActivity extends AppCompatActivity {
+public class BaseActivity extends AppCompatActivity {
     boolean currentTheme;
 
     @Override

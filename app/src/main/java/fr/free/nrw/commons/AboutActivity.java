@@ -5,12 +5,12 @@ import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
 
-import fr.free.nrw.commons.theme.BaseAppCompatActivity;
+import fr.free.nrw.commons.theme.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AboutActivity extends BaseAppCompatActivity {
+public class AboutActivity extends BaseActivity {
     @BindView(R.id.about_version) TextView versionText;
     @BindView(R.id.about_license) TextView licenseText;
     @BindView(R.id.about_improve) TextView improveText;
