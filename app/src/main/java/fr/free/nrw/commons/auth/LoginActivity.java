@@ -50,11 +50,11 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     Button signupButton;
     EditText usernameEdit;
     EditText passwordEdit;
+    ProgressDialog dialog;
 
     private class LoginTask extends AsyncTask<String, String, String> {
 
         Activity context;
-        ProgressDialog dialog;
         String username;
         String password;
 
@@ -69,7 +69,9 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                     .log();
 
             if (result.equals("Success")) {
-                dialog.dismiss();
+                if (dialog != null && dialog.isShowing()) {
+                    dialog.dismiss();
+                }
                 Toast successToast = Toast.makeText(context, R.string.login_success, Toast.LENGTH_SHORT);
                 successToast.show();
                 Account account = new Account(username, WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
@@ -217,6 +219,20 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             startActivity(welcomeIntent);
             prefs.edit().putBoolean("firstrun", false).apply();
         }
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        try {
+            // To prevent leaked window when finish() is called, see http://stackoverflow.com/questions/32065854/activity-has-leaked-window-at-alertdialog-show-method
+            if (dialog != null && dialog.isShowing()) {
+                dialog.dismiss();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        super.onDestroy();
     }
 
     private void performLogin() {
