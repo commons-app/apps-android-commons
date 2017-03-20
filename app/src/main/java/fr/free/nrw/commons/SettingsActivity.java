@@ -24,7 +24,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
         getDelegate().installViewFactory();
         getDelegate().onCreate(savedInstanceState);
         // Check prefs on every activity starts
-        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("theme",false)) {
+        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("theme",true)) {
             setTheme(R.style.DarkAppTheme);
         }else {
             setTheme(R.style.LightAppTheme); // default
