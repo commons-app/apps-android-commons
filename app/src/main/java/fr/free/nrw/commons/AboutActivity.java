@@ -5,12 +5,12 @@ import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
 
-import fr.free.nrw.commons.theme.BaseActivity;
+import fr.free.nrw.commons.theme.BaseAppCompatActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AboutActivity extends BaseActivity {
+public class AboutActivity extends BaseAppCompatActivity {
     @BindView(R.id.about_version) TextView versionText;
     @BindView(R.id.about_license) TextView licenseText;
     @BindView(R.id.about_improve) TextView improveText;
@@ -21,6 +21,9 @@ public class AboutActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+
+        getSupportActionBar().hide();
+
         ButterKnife.bind(this);
 
         uploadsToText.setText(CommonsApplication.EVENTLOG_WIKI);

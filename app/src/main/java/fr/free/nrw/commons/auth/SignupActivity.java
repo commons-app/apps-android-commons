@@ -8,9 +8,9 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
-import fr.free.nrw.commons.theme.BaseActivity;
+import fr.free.nrw.commons.theme.BaseAppCompatActivity;
 
-public class SignupActivity extends BaseActivity {
+public class SignupActivity extends BaseAppCompatActivity {
 
     private WebView webView;
 
@@ -18,6 +18,8 @@ public class SignupActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d("SignupActivity", "Signup Activity started");
+
+        getSupportActionBar().hide();
 
         webView = new WebView(this);
         setContentView(webView);

@@ -9,9 +9,9 @@ import android.widget.Button;
 
 import com.viewpagerindicator.CirclePageIndicator;
 
-import fr.free.nrw.commons.theme.BaseActivity;
+import fr.free.nrw.commons.theme.BaseAppCompatActivity;
 
-public class WelcomeActivity extends BaseActivity {
+public class WelcomeActivity extends BaseAppCompatActivity {
     static final int PAGE_WIKIPEDIA = 0,
             PAGE_DO_UPLOAD = 1,
             PAGE_DONT_UPLOAD = 2,
@@ -32,6 +32,8 @@ public class WelcomeActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+
+        getSupportActionBar().hide();
 
         pager = (ViewPager)findViewById(R.id.welcomePager);
         pager.setAdapter(new PagerAdapter() {
