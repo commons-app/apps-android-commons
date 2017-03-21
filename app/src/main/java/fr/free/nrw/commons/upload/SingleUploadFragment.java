@@ -56,7 +56,7 @@ public class SingleUploadFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.activity_share, menu);
-        if(titleEdit != null) {
+        if (titleEdit != null) {
             menu.findItem(R.id.menu_upload_single).setEnabled(titleEdit.getText().length() != 0);
         }
     }
@@ -95,16 +95,16 @@ public class SingleUploadFragment extends Fragment {
         Log.d("Single Upload fragment", license);
 
         int position = 4;
-        TypedArray license_entries = getResources().obtainTypedArray(R.array.pref_defaultLicense_entries);
-        for(int i = 0; i < license_entries.length(); i++) {
-            if(license.equals(license_entries.getString(i))) {
+        TypedArray licenseEntries = getResources().obtainTypedArray(R.array.pref_defaultLicense_entries);
+        for (int i = 0; i < licenseEntries.length(); i++) {
+            if (license.equals(licenseEntries.getString(i))) {
                 position = i;
                 break;
             }
         }
-        license_entries.recycle();
+        licenseEntries.recycle();
 
-        Log.d("Single Upload fragment", "Spinner Position: "+ position +", License: "+license);
+        Log.d("Single Upload fragment", "Spinner Position: " + position + ", License: " + license);
         licenseSpinner.setSelection(position);
 
         TextWatcher uploadEnabler = new TextWatcher() {
@@ -116,7 +116,7 @@ public class SingleUploadFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if(getActivity() != null) {
+                if (getActivity() != null) {
                     getActivity().invalidateOptionsMenu();
                 }
             }
@@ -132,15 +132,15 @@ public class SingleUploadFragment extends Fragment {
     @OnItemSelected(R.id.licenseSpinner) void onLicenseSelected(AdapterView<?> parent, View view, int position, long id) {
         String licenseName = parent.getItemAtPosition(position).toString();
 
-        if(licenseName.equals(getString(R.string.license_name_cc0))) {
+        if (licenseName.equals(getString(R.string.license_name_cc0))) {
             license = getString(R.string.license_name_cc0);
-        } else if(licenseName.equals(getString(R.string.license_name_cc_by))) {
+        } else if (licenseName.equals(getString(R.string.license_name_cc_by))) {
             license = getString(R.string.license_name_cc_by_3_0);
-        } else if(licenseName.equals(getString(R.string.license_name_cc_by_sa))) {
+        } else if (licenseName.equals(getString(R.string.license_name_cc_by_sa))) {
             license = getString(R.string.license_name_cc_by_sa_3_0);
-        } else if(licenseName.equals(getString(R.string.license_name_cc_by_four))) {
+        } else if (licenseName.equals(getString(R.string.license_name_cc_by_four))) {
             license = getString(R.string.license_name_cc_by_4_0);
-        } else if(licenseName.equals(getString(R.string.license_name_cc_by_sa_four))) {
+        } else if (licenseName.equals(getString(R.string.license_name_cc_by_sa_four))) {
             license = getString(R.string.license_name_cc_by_sa_4_0);
         } else {
             license = Prefs.FALLBACK_LICENSE;

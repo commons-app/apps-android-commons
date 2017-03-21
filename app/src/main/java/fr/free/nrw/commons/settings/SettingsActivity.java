@@ -1,9 +1,11 @@
-package fr.free.nrw.commons;
+package fr.free.nrw.commons.settings;
 
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatDelegate;
+
+import fr.free.nrw.commons.R;
 
 public class SettingsActivity extends PreferenceActivity {
     private AppCompatDelegate mDelegate;
@@ -18,7 +20,8 @@ public class SettingsActivity extends PreferenceActivity {
         }
 
         // Display the fragment as the main content.
-        getFragmentManager().beginTransaction().replace(android.R.id.content, new SettingsFragment()).commit();
+        getFragmentManager().beginTransaction()
+                .replace(android.R.id.content, new SettingsFragment()).commit();
 
         super.onCreate(savedInstanceState);
     }
