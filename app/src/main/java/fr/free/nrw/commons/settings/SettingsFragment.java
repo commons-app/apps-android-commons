@@ -22,7 +22,7 @@ public class SettingsFragment extends PreferenceFragment {
         ListPreference licensePreference = (ListPreference) findPreference(Prefs.DEFAULT_LICENSE);
         licensePreference.setSummary(Utils.licenseNameFor(licensePreference.getValue(),
                 getActivity().getApplicationContext()));
-        licensePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener(){
+        licensePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 preference.setSummary(Utils.licenseNameFor(((String) newValue),
