@@ -204,17 +204,17 @@ public class Utils {
         throw new RuntimeException("Unrecognized license value");
     }
 
-    public static int licenseNameFor(String license, Context ctx) {
+    public static String licenseNameFor(String license, Context ctx) {
         if(license.equals(ctx.getString(R.string.license_name_cc_by_3_0))) {
-            return R.string.license_name_cc_by;
+            return ctx.getString(R.string.license_name_cc_by);
         } else if(license.equals(ctx.getString(R.string.license_name_cc_by_4_0))) {
-            return R.string.license_name_cc_by_four;
+            return ctx.getString(R.string.license_name_cc_by_four);
         } else if(license.equals(ctx.getString(R.string.license_name_cc_by_sa_3_0))) {
-            return R.string.license_name_cc_by_sa;
+            return ctx.getString(R.string.license_name_cc_by_sa);
         } else if(license.equals(ctx.getString(R.string.license_name_cc_by_sa_4_0))) {
-            return R.string.license_name_cc_by_sa_four;
+            return ctx.getString(R.string.license_name_cc_by_sa_four);
         } else if(license.equals(ctx.getString(R.string.license_name_cc0))) {
-            return R.string.license_name_cc0;
+            return ctx.getString(R.string.license_name_cc0);
         }
         throw new RuntimeException("Unrecognized license value");
     }

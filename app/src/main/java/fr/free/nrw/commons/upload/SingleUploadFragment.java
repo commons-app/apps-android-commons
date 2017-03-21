@@ -176,7 +176,7 @@ public class SingleUploadFragment extends Fragment {
     }
 
     private void setLicenseSummary(String license) {
-        licenseSummaryView.setText(getString(R.string.share_license_summary, license));
+        licenseSummaryView.setText(getString(R.string.share_license_summary, Utils.licenseNameFor(license, getContext())));
     }
 
     @Override
