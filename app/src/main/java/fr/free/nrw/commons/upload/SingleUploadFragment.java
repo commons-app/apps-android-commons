@@ -132,17 +132,18 @@ public class SingleUploadFragment extends Fragment {
     @OnItemSelected(R.id.licenseSpinner) void onLicenseSelected(AdapterView<?> parent, View view, int position, long id) {
         String licenseName = parent.getItemAtPosition(position).toString();
 
-        String license = Prefs.FALLBACK_LICENSE; // default value
-        if(getString(R.string.license_name_cc0).equals(licenseName)) {
+        if(licenseName.equals(getString(R.string.license_name_cc0))) {
             license = getString(R.string.license_name_cc0);
-        } else if(getString(R.string.license_name_cc_by).equals(licenseName)) {
+        } else if(licenseName.equals(getString(R.string.license_name_cc_by))) {
             license = getString(R.string.license_name_cc_by_3_0);
-        } else if(getString(R.string.license_name_cc_by_sa).equals(licenseName)) {
+        } else if(licenseName.equals(getString(R.string.license_name_cc_by_sa))) {
             license = getString(R.string.license_name_cc_by_sa_3_0);
-        } else if(getString(R.string.license_name_cc_by_four).equals(licenseName)) {
+        } else if(licenseName.equals(getString(R.string.license_name_cc_by_four))) {
             license = getString(R.string.license_name_cc_by_4_0);
-        } else if(getString(R.string.license_name_cc_by_sa_four).equals(licenseName)) {
+        } else if(licenseName.equals(getString(R.string.license_name_cc_by_sa_four))) {
             license = getString(R.string.license_name_cc_by_sa_4_0);
+        } else {
+            license = Prefs.FALLBACK_LICENSE;
         }
 
         setLicenseSummary(license);

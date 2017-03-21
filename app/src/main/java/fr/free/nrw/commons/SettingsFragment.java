@@ -1,6 +1,7 @@
 package fr.free.nrw.commons;
 
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -17,13 +18,22 @@ public class SettingsFragment extends PreferenceFragment {
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preferences);
 
+        // Update spinner to show selected value as summary
         ListPreference licensePreference = (ListPreference) findPreference(Prefs.DEFAULT_LICENSE);
-
-        licensePreference.setSummary(licensePreference.getValue());
+        licensePreference.setSummary(Utils.licenseNameFor(licensePreference.getValue(), getActivity().getApplicationContext()));
         licensePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
-                preference.setSummary((String) newValue);
+                preference.setSummary(Utils.licenseNameFor(((String) newValue), getActivity().getApplicationContext()));
+                return true;
+            }
+        });
+
+        CheckBoxPreference themePreference = (CheckBoxPreference) findPreference("theme");
+        themePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                getActivity().recreate();
                 return true;
             }
         });
