@@ -21,6 +21,9 @@ public class AboutActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+
+        getSupportActionBar().hide();
+
         ButterKnife.bind(this);
 
         uploadsToText.setText(CommonsApplication.EVENTLOG_WIKI);

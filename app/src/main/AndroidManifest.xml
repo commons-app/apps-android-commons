@@ -32,11 +32,11 @@
 
         <activity
             android:name=".auth.LoginActivity"
-            android:theme="@style/NoTitle" >
+            >
         </activity>
         <activity
             android:name=".WelcomeActivity"
-            android:theme="@style/NoTitle" >
+            >
         </activity>
         <activity
             android:name=".upload.ShareActivity"
