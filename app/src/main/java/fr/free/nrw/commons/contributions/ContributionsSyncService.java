@@ -12,6 +12,7 @@ public class ContributionsSyncService extends Service {
 
     @Override
     public void onCreate() {
+        super.onCreate();
         synchronized (sSyncAdapterLock) {
             if (sSyncAdapter == null) {
                 sSyncAdapter = new ContributionsSyncAdapter(getApplicationContext(), true);
