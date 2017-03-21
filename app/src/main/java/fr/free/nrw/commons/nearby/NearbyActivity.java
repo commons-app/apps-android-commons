@@ -12,10 +12,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import fr.free.nrw.commons.theme.BaseAppCompatActivity;
+import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.R;
 
-public class NearbyActivity extends BaseAppCompatActivity {
+public class NearbyActivity extends BaseActivity {
 
     private MyLocationListener myLocationListener;
     private LocationManager locationManager;

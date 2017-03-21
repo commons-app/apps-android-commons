@@ -10,11 +10,11 @@ import android.os.Bundle;
 
 import java.io.IOException;
 
-import fr.free.nrw.commons.theme.BaseAppCompatActivity;
+import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
 
-public abstract class AuthenticatedActivity extends BaseAppCompatActivity {
+public abstract class AuthenticatedActivity extends BaseActivity {
 
     String accountType;
     CommonsApplication app;

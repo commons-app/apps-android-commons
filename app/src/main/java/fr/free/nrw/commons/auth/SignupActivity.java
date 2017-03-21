@@ -19,6 +19,8 @@ public class SignupActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         Log.d("SignupActivity", "Signup Activity started");
 
+        getSupportActionBar().hide();
+
         webView = new WebView(this);
         setContentView(webView);
 

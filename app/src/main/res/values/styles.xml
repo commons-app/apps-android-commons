@@ -43,10 +43,6 @@
         <item name="colorControlNormal">#ffffff</item>
     </style>
 
-    <style name="NoTitle" parent="DarkAppTheme">
-        <item name="android:windowNoTitle">true</item>
-    </style>
-
     <style name="ProgressBar" parent="Widget.AppCompat.ProgressBar.Horizontal" />
 
 </resources>

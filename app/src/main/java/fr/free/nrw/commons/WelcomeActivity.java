@@ -33,6 +33,8 @@ public class WelcomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
+        getSupportActionBar().hide();
+
         pager = (ViewPager)findViewById(R.id.welcomePager);
         pager.setAdapter(new PagerAdapter() {
             @Override
