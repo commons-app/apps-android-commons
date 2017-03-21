@@ -49,6 +49,7 @@
   <string name="menu_upload_single">Uploaden</string>
   <string name="categories_search_text_hint">Categorieën zoeken</string>
   <string name="menu_save_categories">Opslaan</string>
+  <string name="refresh_button">Vernieuwen</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">Nog geen uploads</item>
     <item quantity="one">1 upload</item>
@@ -91,6 +92,10 @@ Klik op dit bericht, of ga terug, om deze stap over te slaan.</string>
   <string name="use_previous">Vorige naam/beschrijving gebruiken</string>
   <string name="allow_gps">Automatisch huidige locatie ophalen</string>
   <string name="allow_gps_summary">Huidige locatie ophalen om categoriesuggesties te maken als het beeld geen geotags heeft</string>
+  <string name="preference_theme">Nachtmodus</string>
+  <string name="preference_theme_summary">Gebruik donker thema</string>
+  <string name="license_name_cc_by_sa_four"> Naamsvermelding-GelijkDelen 4.0</string>
+  <string name="license_name_cc_by_four">Naamsvermelding 4.0</string>
   <string name="license_name_cc_by_sa"> Naamsvermelding-GelijkDelen 3.0</string>
   <string name="license_name_cc_by">Naamsvermelding 3.0</string>
   <string name="license_name_cc0">CC0</string>
@@ -159,4 +164,7 @@ Klik op dit bericht, of ga terug, om deze stap over te slaan.</string>
   <string name="file_exists">Dit bestand bestaat al op Commons. Weet u zeker dat u wilt doorgaan?</string>
   <string name="yes">Ja</string>
   <string name="no">Nee</string>
+  <string name="media_detail_title">Titel</string>
+  <string name="media_detail_media_title">Titel van het bestand</string>
+  <string name="media_detail_description">Beschrijving</string>
 </resources>

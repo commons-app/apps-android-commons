@@ -49,6 +49,7 @@
   <string name="menu_upload_single">上傳</string>
   <string name="categories_search_text_hint">搜尋分類</string>
   <string name="menu_save_categories">儲存</string>
+  <string name="refresh_button">重新整理</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">尚未上傳</item>
     <item quantity="one">1次上傳</item>
@@ -90,6 +91,8 @@
   <string name="use_previous">使用先前標題/描述</string>
   <string name="allow_gps">自動獲取目前位置</string>
   <string name="allow_gps_summary">若圖片沒有地理標記的話以取得目前位置來作為分類建議。</string>
+  <string name="preference_theme">夜間模式</string>
+  <string name="preference_theme_summary">使用暗黑佈景主題</string>
   <string name="license_name_cc_by_sa_four"> 姓名標示-相同方式分享4.0</string>
   <string name="license_name_cc_by_four">姓名標示4.0</string>
   <string name="license_name_cc_by_sa"> 姓名標示-相同方式分享3.0</string>

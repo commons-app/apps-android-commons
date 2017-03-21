@@ -49,6 +49,7 @@
   <string name="menu_upload_single">Подигни</string>
   <string name="categories_search_text_hint">Пребарај категории</string>
   <string name="menu_save_categories">Зачувај</string>
+  <string name="refresh_button">Превчитај</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">Засега нема ништо подигнато</item>
     <item quantity="one">Едно подигање</item>
@@ -90,6 +91,8 @@
   <string name="use_previous">Користи претходен наслов/опис</string>
   <string name="allow_gps">Автоматски давај ја тековната местоположба</string>
   <string name="allow_gps_summary">Добивање на тековната местоположба за да се дадат предлози за категории, доколку сликата нема геоознаки</string>
+  <string name="preference_theme">Ноќен режим</string>
+  <string name="preference_theme_summary">Користи темен изглед</string>
   <string name="license_name_cc_by_sa_four"> Наведи извор-Сподели под исти услови 4.0</string>
   <string name="license_name_cc_by_four">Наведи извор 4.0</string>
   <string name="license_name_cc_by_sa"> Наведи извор-Сподели под исти услови 3.0</string>

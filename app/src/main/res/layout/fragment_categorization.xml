@@ -10,6 +10,7 @@
     android:paddingRight="16dip"
     android:paddingEnd="16dip"
     android:paddingTop="8dip"
+    android:theme="@style/DarkAppTheme"
     >
 
     <FrameLayout

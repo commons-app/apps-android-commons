@@ -49,6 +49,7 @@
   <string name="menu_upload_single">Importer</string>
   <string name="categories_search_text_hint">Rechercher des catégories</string>
   <string name="menu_save_categories">Enregistrer</string>
+  <string name="refresh_button">Rafraîchir</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">Encore aucun téléchargement</item>
     <item quantity="one">1 téléchargement</item>
@@ -90,6 +91,8 @@ Appuyez sur ce message (ou retournez en arrière) pour sauter cette étape.</str
   <string name="use_previous">Utiliser le titre ou la description précédent</string>
   <string name="allow_gps">Obtenir automatiquement l’emplacement actuel</string>
   <string name="allow_gps_summary">Récupérer l’emplacement actuel pour proposer des suggestions de catégorie si l’image n’est pas marquée géographiquement</string>
+  <string name="preference_theme">Mode de nuit</string>
+  <string name="preference_theme_summary">Utiliser un thème sombre</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>

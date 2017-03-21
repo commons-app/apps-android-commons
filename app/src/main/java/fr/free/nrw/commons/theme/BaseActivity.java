@@ -13,7 +13,7 @@ public class BaseActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("theme",false)) {
+        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("theme",true)) {
             currentTheme = true;
             setTheme(R.style.DarkAppTheme);
         } else {
@@ -26,7 +26,7 @@ public class BaseActivity extends Activity {
     @Override
     protected void onResume() {
         // Restart activity if theme is changed
-        boolean newTheme = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("theme",false);
+        boolean newTheme = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("theme",true);
         if(currentTheme!=newTheme){ // is activity theme changed
             Intent intent = getIntent();
             finish();

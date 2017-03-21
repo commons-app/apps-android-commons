@@ -49,6 +49,7 @@
   <string name="menu_upload_single">Carica</string>
   <string name="categories_search_text_hint">Cerca categorie</string>
   <string name="menu_save_categories">Salva</string>
+  <string name="refresh_button">Aggiorna</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">Nessun caricamento ancora</item>
     <item quantity="one">1 caricamento</item>

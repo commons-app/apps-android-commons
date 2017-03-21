@@ -49,6 +49,7 @@
   <string name="menu_upload_single">Eroplueden</string>
   <string name="categories_search_text_hint">Kategorie sichen</string>
   <string name="menu_save_categories">Späicheren</string>
+  <string name="refresh_button">Aktualiséieren</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">Nach näischt eropgelueden</item>
     <item quantity="one">1 Fichier eropgelueden</item>
@@ -89,6 +90,7 @@ Leet w.e.g. &lt;a href=\"https://github.com/commons-app/apps-android-commons/iss
   <string name="use_previous">Viregen Titel/Beschreiwung benotzen</string>
   <string name="allow_gps">Automatesch déi aktuell Plaz kréien</string>
   <string name="allow_gps_summary">Aktuell Plaz ofruffe fir Propose fir Kategorien ze erméigleche wann d\'Bild keng Geotaggen huet</string>
+  <string name="preference_theme">Nuetsmodus</string>
   <string name="license_name_cc_by_sa_four">Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four">Attribution 4.0</string>
   <string name="license_name_cc_by_sa">CCu00A0Attribution-ShareAlikeu00A03.0</string>

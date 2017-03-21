@@ -49,6 +49,7 @@
   <string name="menu_upload_single">Subir</string>
   <string name="categories_search_text_hint">Buscar categorías</string>
   <string name="menu_save_categories">Guardar</string>
+  <string name="refresh_button">Actualizar</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">No hay ninguna carga</item>
     <item quantity="one">1 carga</item>
@@ -90,6 +91,8 @@ Toca este mensaje (o pulsa Anterior) para omitir este paso.</string>
   <string name="use_previous">Usar título/descripción anteriores</string>
   <string name="allow_gps">Obtener ubicación actual automáticamente</string>
   <string name="allow_gps_summary">Recuperar ubicación actual para ofrecer sugerencias de categorías si la imagen no tiene etiquetas geográficas</string>
+  <string name="preference_theme">Modo nocturno</string>
+  <string name="preference_theme_summary">Usar tema oscuro</string>
   <string name="license_name_cc_by_sa_four"> Atribución-CompartirIgual 4.0</string>
   <string name="license_name_cc_by_four">Atribución 4.0</string>
   <string name="license_name_cc_by_sa"> Atribución-CompartirIgual 3.0</string>
@@ -169,4 +172,7 @@ imágenes de carteles, portadas de libro, etc.</string>
   <string name="media_detail_media_title">Título del multimedia</string>
   <string name="media_detail_description">Descripción</string>
   <string name="media_detail_description_explanation">Aquí va la descripción del multimedia. Potencialmente, puede ser bastante largo, y deberá agruparse en múltiples líneas. De todas formas, esperamos que se ve bien.</string>
+  <string name="become_a_tester_title">Prueba la versión beta</string>
+  <string name="become_a_tester_description">Opta por nuestro canal beta en Google Play y obtén acceso a funcionalidades nuevas y correcciones de errores</string>
+  <string name="beta_opt_in_link">https://play.google.com/apps/testing/fr.free.nrw.commons</string>
 </resources>

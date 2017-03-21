@@ -70,6 +70,7 @@
 {{Identical|Search category}}</string>
   <string name="menu_save_categories">Hint text on menu item to save selected categories.
 {{Identical|Save}}</string>
+  <string name="refresh_button">{{Identical|Refresh}}</string>
   <string name="multiple_uploads_title">{{Identical|Upload}}</string>
   <string name="categories_not_found">Message shown to the user when no category matching what they searched for was found. %1$s represents the category name</string>
   <string name="categories_skip_explanation">Text explaining to users why and how to add categories to images. Users can also tap this message to skip adding categories.</string>
@@ -143,4 +144,6 @@ Followed by {{msg-wm|Commons-android-strings-welcome wikipedia subtext}}.</strin
   <string name="warning">{{Identical|Warning}}</string>
   <string name="yes">{{Identical|Yes}}</string>
   <string name="no">{{Identical|No}}</string>
+  <string name="media_detail_title">{{Identical|Title}}</string>
+  <string name="media_detail_description">{{Identical|Description}}</string>
 </resources>

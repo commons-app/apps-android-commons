@@ -49,6 +49,7 @@
   <string name="menu_upload_single">چاڙھيو</string>
   <string name="categories_search_text_hint">زمرا ڳوليو</string>
   <string name="menu_save_categories">سانڍيو</string>
+  <string name="refresh_button">تازو ڪيو</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">اڃان تائين ڪو چاڙھ ناھي</item>
     <item quantity="one">1 چاڙھ</item>
@@ -88,6 +89,7 @@
   <string name="use_previous">گذريل عنوان/تشريح استعمال ڪريو</string>
   <string name="allow_gps">خوبخود ھاڻوڪي مڪانيت وٺو</string>
   <string name="allow_gps_summary">ھاڻوڪي مڪانيت لھو زمرن جون تجويزون پيش ڪرڻ لاءِ جيڪڏھن عڪس تي جيوٽيگ ناھي لڳل</string>
+  <string name="license_name_cc_by_four">گڻ (وصف) 4.0</string>
   <string name="license_name_cc_by_sa">ڪڪu00A0انتساب-ھڪجھڙي_ڀاڱيداريu00A03.0</string>
   <string name="license_name_cc_by">ڪڪu00A0انتسابu00A03.0</string>
   <string name="license_name_cc0">ڪڪ0</string>
@@ -151,4 +153,6 @@ u2022 زمرا: سڊني اوپيرا گھر، سڊني اوپيرا گھر او
   <string name="location_permission_rationale">چونڊ اجازت: زمرن جي تجويزن لاءِ ھاڻوڪي مڪانيت وٺو</string>
   <string name="ok">ٺيڪ</string>
   <string name="title_activity_nearby">ويجھڙائيءَ ۾ جڳھون</string>
+  <string name="media_detail_title">عنوان</string>
+  <string name="media_detail_description">تفصيل (تشريح)</string>
 </resources>
