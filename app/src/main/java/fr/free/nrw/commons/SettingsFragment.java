@@ -5,10 +5,6 @@ import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 public class SettingsFragment extends PreferenceFragment {
     @Override
@@ -37,19 +33,5 @@ public class SettingsFragment extends PreferenceFragment {
                 return true;
             }
         });
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = super.onCreateView(inflater, container, savedInstanceState);
-        if(view != null) {
-            if (PreferenceManager.getDefaultSharedPreferences(getActivity()).getBoolean("theme", false)) {
-                view.setBackgroundColor(getResources().getColor(android.R.color.background_dark));
-            } else {
-                view.setBackgroundColor(getResources().getColor(android.R.color.background_light));
-            }
-        }
-
-        return view;
     }
 }
