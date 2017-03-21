@@ -120,60 +120,6 @@ public class SingleUploadFragment extends Fragment {
         Log.d("Single Upload fragment", "Position:"+position+" "+getString(Utils.licenseNameFor(license)));
         licenseSpinner.setSelection(position);
 
-        licenseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                //Set selected color to white because it should be readable on random images.
-                TextView selectedText = (TextView) licenseSpinner.getChildAt(0);
-                if (selectedText != null ) {
-                    selectedText.setTextColor(Color.WHITE);
-                    selectedText.setBackgroundColor(Color.TRANSPARENT);
-                }
-
-                String licenseName = parent.getItemAtPosition(position).toString();
-
-                String license = Prefs.Licenses.CC_BY_SA_3; // default value
-                if(getString(R.string.license_name_cc0).equals(licenseName)) {
-                    license = Prefs.Licenses.CC0;
-                } else if(getString(R.string.license_name_cc_by).equals(licenseName)) {
-                    license = Prefs.Licenses.CC_BY_3;
-                } else if(getString(R.string.license_name_cc_by_sa).equals(licenseName)) {
-                    license = Prefs.Licenses.CC_BY_SA_3;
-                } else if(getString(R.string.license_name_cc_by_four).equals(licenseName)) {
-                    license = Prefs.Licenses.CC_BY_4;
-                } else if(getString(R.string.license_name_cc_by_sa_four).equals(licenseName)) {
-                    license = Prefs.Licenses.CC_BY_SA_4;
-                }
-
-                setLicenseSummary(license);
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putString(Prefs.DEFAULT_LICENSE, license);
-                editor.apply();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        titleDescButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                //Retrieve last title and desc entered
-                SharedPreferences titleDesc = PreferenceManager.getDefaultSharedPreferences(getActivity());
-                String title = titleDesc.getString("Title", "");
-                String desc = titleDesc.getString("Desc", "");
-                Log.d(TAG, "Title: " + title + ", Desc: " + desc);
-
-                titleEdit.setText(title);
-                descEdit.setText(desc);
-            }
-        });
-
         TextWatcher uploadEnabler = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) { }
@@ -198,6 +144,13 @@ public class SingleUploadFragment extends Fragment {
 
     @OnItemSelected(R.id.licenseSpinner) void onLicenseSelected(AdapterView<?> parent, View view, int position, long id) {
         String licenseName = parent.getItemAtPosition(position).toString();
+
+        // Set selected color to white because it should be readable on random images.
+        TextView selectedText = (TextView) licenseSpinner.getChildAt(0);
+        if (selectedText != null ) {
+            selectedText.setTextColor(Color.WHITE);
+            selectedText.setBackgroundColor(Color.TRANSPARENT);
+        }
 
         String license = Prefs.Licenses.CC_BY_SA_3; // default value
         if(getString(R.string.license_name_cc0).equals(licenseName)) {
