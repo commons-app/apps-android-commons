@@ -1,7 +1,5 @@
 package fr.free.nrw.commons;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
@@ -12,7 +10,9 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class SettingsActivity extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class SettingsActivity extends PreferenceActivity {
+    CommonsApplication app;
+
     private AppCompatDelegate mDelegate;
 
     @Override
@@ -32,16 +32,8 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
                 .commit();
 
         super.onCreate(savedInstanceState);
-    }
 
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if(key.equals("theme")){
-            // Finish current activity and start new one with selected theme
-            Intent intent = getIntent();
-            finish();
-            startActivity(intent);
-        }
+        app = (CommonsApplication)getApplicationContext();
     }
 
     // All the stuff below is just to get a actionbar that says settings...

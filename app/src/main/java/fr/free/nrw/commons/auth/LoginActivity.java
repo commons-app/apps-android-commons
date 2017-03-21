@@ -11,7 +11,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.NavUtils;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -216,7 +215,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         if (prefs.getBoolean("firstrun", true)) {
 
             // Set default preferences
-            PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+            // PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
             // Launch welcome activity
             Intent welcomeIntent = new Intent(this, WelcomeActivity.class);

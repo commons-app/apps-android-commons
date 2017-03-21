@@ -89,14 +89,8 @@ public class SingleUploadFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_single_upload, null);
         ButterKnife.bind(this, rootView);
 
-        titleEdit = (EditText)rootView.findViewById(R.id.titleEdit);
-        descEdit = (EditText)rootView.findViewById(R.id.descEdit);
-        Button titleDescButton = (Button) rootView.findViewById(R.id.titleDescButton);
-        licenseSpinner = (Spinner) rootView.findViewById(R.id.licenseSpinner);
-        licenseSummaryView = (TextView)rootView.findViewById(R.id.share_license_summary);
-
-        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        final String license = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.FALLBACK_LICENSE);
+        prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        license = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.FALLBACK_LICENSE);
 
         Log.d("Single Upload fragment", license);
 
