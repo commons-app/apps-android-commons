@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -124,11 +125,11 @@ public class Utils {
     }
 
     static public <T> void executeAsyncTask(AsyncTask<T, ?, ?> task, T... params) {
-            task.execute(params);
+        task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
     }
 
     static public <T> void executeAsyncTask(AsyncTask<T, ?, ?> task, Executor executor, T... params) {
-        task.execute(params);
+        task.executeOnExecutor(executor, params);
     }
 
     private static DisplayImageOptions.Builder defaultImageOptionsBuilder;
@@ -136,6 +137,13 @@ public class Utils {
         if(defaultImageOptionsBuilder == null) {
             defaultImageOptionsBuilder = new DisplayImageOptions.Builder().cacheInMemory()
                     .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2);
+
+            // List views flicker badly during data updates on Android 2.3; we
+            // haven't quite figured out why but cells seem to be rearranged oddly.
+            // Disable the fade-in on 2.3 to reduce the effect.
+            defaultImageOptionsBuilder = defaultImageOptionsBuilder
+                    .displayer(new FadeInBitmapDisplayer(300));
+
             defaultImageOptionsBuilder = defaultImageOptionsBuilder
                     .cacheInMemory()
                     .resetViewBeforeLoading();

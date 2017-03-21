@@ -11,8 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class SettingsActivity extends PreferenceActivity {
-    CommonsApplication app;
-
     private AppCompatDelegate mDelegate;
 
     @Override
@@ -32,8 +30,6 @@ public class SettingsActivity extends PreferenceActivity {
                 .commit();
 
         super.onCreate(savedInstanceState);
-
-        app = (CommonsApplication)getApplicationContext();
     }
 
     // All the stuff below is just to get a actionbar that says settings...
