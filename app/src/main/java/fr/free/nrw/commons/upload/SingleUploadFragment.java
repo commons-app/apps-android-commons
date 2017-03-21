@@ -26,8 +26,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -115,52 +113,6 @@ public class SingleUploadFragment extends Fragment {
         Log.d("Single Upload fragment", "Spinner Position: "+ position +", License: "+license);
         licenseSpinner.setSelection(position);
 
-        licenseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String licenseName = parent.getItemAtPosition(position).toString();
-
-                String license = Prefs.FALLBACK_LICENSE; // default value
-                if(getString(R.string.license_name_cc0).equals(licenseName)) {
-                    license = getString(R.string.license_name_cc0);
-                } else if(getString(R.string.license_name_cc_by).equals(licenseName)) {
-                    license = getString(R.string.license_name_cc_by_3_0);
-                } else if(getString(R.string.license_name_cc_by_sa).equals(licenseName)) {
-                    license = getString(R.string.license_name_cc_by_sa_3_0);
-                } else if(getString(R.string.license_name_cc_by_four).equals(licenseName)) {
-                    license = getString(R.string.license_name_cc_by_4_0);
-                } else if(getString(R.string.license_name_cc_by_sa_four).equals(licenseName)) {
-                    license = getString(R.string.license_name_cc_by_sa_4_0);
-                }
-
-                setLicenseSummary(license);
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putString(Prefs.DEFAULT_LICENSE, license);
-                editor.apply();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        titleDescButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                //Retrieve last title and desc entered
-                SharedPreferences titleDesc = PreferenceManager.getDefaultSharedPreferences(getActivity());
-                String title = titleDesc.getString("Title", "");
-                String desc = titleDesc.getString("Desc", "");
-                Log.d(TAG, "Title: " + title + ", Desc: " + desc);
-
-                titleEdit.setText(title);
-                descEdit.setText(desc);
-            }
-        });
-
         TextWatcher uploadEnabler = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) { }
@@ -180,52 +132,36 @@ public class SingleUploadFragment extends Fragment {
 
         setLicenseSummary(license);
 
-        // Open license page on touch
-        licenseSummaryView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (motionEvent.getActionMasked() == MotionEvent.ACTION_DOWN) {
-                    Intent intent = new Intent();
-                    intent.setAction(Intent.ACTION_VIEW);
-                    intent.setData(Uri.parse(Utils.licenseUrlFor(license, getContext())));
-                    startActivity(intent);
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        });
-
         return rootView;
     }
 
     @OnItemSelected(R.id.licenseSpinner) void onLicenseSelected(AdapterView<?> parent, View view, int position, long id) {
         String licenseName = parent.getItemAtPosition(position).toString();
 
-        String license = Prefs.Licenses.CC_BY_SA_3; // default value
+        String license = Prefs.FALLBACK_LICENSE; // default value
         if(getString(R.string.license_name_cc0).equals(licenseName)) {
-            license = Prefs.Licenses.CC0;
+            license = getString(R.string.license_name_cc0);
         } else if(getString(R.string.license_name_cc_by).equals(licenseName)) {
-            license = Prefs.Licenses.CC_BY_3;
+            license = getString(R.string.license_name_cc_by_3_0);
         } else if(getString(R.string.license_name_cc_by_sa).equals(licenseName)) {
-            license = Prefs.Licenses.CC_BY_SA_3;
+            license = getString(R.string.license_name_cc_by_sa_3_0);
         } else if(getString(R.string.license_name_cc_by_four).equals(licenseName)) {
-            license = Prefs.Licenses.CC_BY_4;
+            license = getString(R.string.license_name_cc_by_4_0);
         } else if(getString(R.string.license_name_cc_by_sa_four).equals(licenseName)) {
-            license = Prefs.Licenses.CC_BY_SA_4;
+            license = getString(R.string.license_name_cc_by_sa_4_0);
         }
 
         setLicenseSummary(license);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(Prefs.DEFAULT_LICENSE, license);
-        editor.commit();
+        editor.apply();
     }
 
     @OnTouch(R.id.share_license_summary) boolean showLicence(View view, MotionEvent motionEvent) {
         if (motionEvent.getActionMasked() == MotionEvent.ACTION_DOWN) {
             Intent intent = new Intent();
             intent.setAction(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(Utils.licenseUrlFor(license)));
+            intent.setData(Uri.parse(Utils.licenseUrlFor(license, getContext())));
             startActivity(intent);
             return true;
         } else {

@@ -30,6 +30,8 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
         getFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new SettingsFragment())
                 .commit();
+
+        super.onCreate(savedInstanceState);
     }
 
     @Override
