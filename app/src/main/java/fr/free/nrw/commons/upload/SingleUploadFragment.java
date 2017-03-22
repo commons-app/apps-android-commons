@@ -92,6 +92,7 @@ public class SingleUploadFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_single_upload, null);
         ButterKnife.bind(this, rootView);
 
+
         ArrayList<String> licenseItems = new ArrayList<>();
         licenseItems.add(getString(R.string.license_name_cc0));
         licenseItems.add(getString(R.string.license_name_cc_by));
@@ -104,7 +105,15 @@ public class SingleUploadFragment extends Fragment {
 
         Log.d("Single Upload fragment", license);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, licenseItems);
+        ArrayAdapter<String> adapter;
+        if (PreferenceManager.getDefaultSharedPreferences(getActivity()).getBoolean("theme",true)) {
+            // dark theme
+            adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, licenseItems);
+        }else {
+            // light theme
+            adapter = new ArrayAdapter<>(getActivity(), R.layout.light_simple_spinner_dropdown_item, licenseItems);
+        }
+
         licenseSpinner.setAdapter(adapter);
 
         int position = licenseItems.indexOf(getString(Utils.licenseNameFor(license)));
@@ -135,6 +144,13 @@ public class SingleUploadFragment extends Fragment {
 
     @OnItemSelected(R.id.licenseSpinner) void onLicenseSelected(AdapterView<?> parent, View view, int position, long id) {
         String licenseName = parent.getItemAtPosition(position).toString();
+
+        // Set selected color to white because it should be readable on random images.
+        TextView selectedText = (TextView) licenseSpinner.getChildAt(0);
+        if (selectedText != null ) {
+            selectedText.setTextColor(Color.WHITE);
+            selectedText.setBackgroundColor(Color.TRANSPARENT);
+        }
 
         String license = Prefs.Licenses.CC_BY_SA_3; // default value
         if(getString(R.string.license_name_cc0).equals(licenseName)) {

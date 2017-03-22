@@ -1,5 +1,7 @@
 package fr.free.nrw.commons;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
@@ -16,6 +18,7 @@ public class AboutActivity extends BaseActivity {
     @BindView(R.id.about_improve) TextView improveText;
     @BindView(R.id.about_privacy_policy) TextView privacyPolicyText;
     @BindView(R.id.about_uploads_to) TextView uploadsToText;
+    @BindView(R.id.about_credits) TextView creditsText;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,10 +38,12 @@ public class AboutActivity extends BaseActivity {
         fixFormatting(licenseText, R.string.about_license);
         fixFormatting(improveText, R.string.about_improve);
         fixFormatting(privacyPolicyText, R.string.about_privacy_policy);
+        fixFormatting(creditsText, R.string.about_credits);
 
         licenseText.setMovementMethod(LinkMovementMethod.getInstance());
         improveText.setMovementMethod(LinkMovementMethod.getInstance());
         privacyPolicyText.setMovementMethod(LinkMovementMethod.getInstance());
+        creditsText.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     private void fixFormatting(TextView textView, int resource) {
