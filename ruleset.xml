@@ -11,4 +11,5 @@
 
     <rule ref="rulesets/java/android.xml" />
     <rule ref="rulesets/java/basic.xml" />
+    <rule ref="rulesets/java/unusedcode.xml" />
 </ruleset>
