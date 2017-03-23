@@ -8,7 +8,7 @@
         android:title="@string/preference_license"
         android:entries="@array/pref_defaultLicense_entries"
         android:entryValues="@array/pref_defaultLicense_values"
-        android:defaultValue="@string/license_name_cc_by_sa_four"
+        android:defaultValue="@string/license_name_cc_by_sa_4_0"
         />
 
     <CheckBoxPreference

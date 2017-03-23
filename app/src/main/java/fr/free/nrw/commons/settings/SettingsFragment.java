@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.settings;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -14,19 +15,19 @@ public class SettingsFragment extends PreferenceFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        final Context context = getActivity().getApplicationContext();
 
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preferences);
 
         // Update spinner to show selected value as summary
         ListPreference licensePreference = (ListPreference) findPreference(Prefs.DEFAULT_LICENSE);
-        licensePreference.setSummary(Utils.licenseNameFor(licensePreference.getValue(),
-                getActivity().getApplicationContext()));
+        licensePreference.setSummary(Utils.licenseNameFor(licensePreference.getValue(), context));
         licensePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
-                preference.setSummary(Utils.licenseNameFor(((String) newValue),
-                        getActivity().getApplicationContext()));
+                preference.setSummary(Utils.licenseNameFor(((String) newValue), context));
                 return true;
             }
         });
