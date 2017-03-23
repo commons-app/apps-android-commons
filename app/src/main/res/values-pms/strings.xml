@@ -77,6 +77,7 @@ Ch\'a sgnaca an s\'ën mëssage (o ch\'a sgnaca ël boton andaré) për sauté \
   <string name="about_license">Ij programa Open Source a son publicà sota la &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;licensa Apache v2&lt;/a&gt;. Wikimedia Commons e sò sìmbol a son dle marche argistrà dla Fondassion Wikimedia e a son dovrà con ël përmess ëd la Fondassion Wikimedia. Nojàutri i soma nen aprovà da o afilià a la Fondassion Wikimedia.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sorgiss&lt;/a&gt; e &lt;a href=\"https://commons-app.github.io/\"&gt;sit an sl\'aragnà&lt;/a&gt; su GitHub. Creé na neuva &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;signalassion GitHub&lt;/a&gt; për signalé dij givo e dij sugeriment.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Régole ëd confidensialità&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;RINGRASSIAMENT&lt;/a&gt;</string>
   <string name="title_activity_about">A propòsit</string>
   <string name="menu_feedback">Mandé dij coment (për pòsta eletrònica)</string>
   <string name="no_email_client">Gnun clien ëd pòsta eletrònica anstalà</string>
@@ -91,6 +92,8 @@ Ch\'a sgnaca an s\'ën mëssage (o ch\'a sgnaca ël boton andaré) për sauté \
   <string name="use_previous">Dovré ël tìtol o la descrission precedent</string>
   <string name="allow_gps">Oten-e an automàtich la posission atual</string>
   <string name="allow_gps_summary">Arcuperé la posission atual për propon-e dij sugeriment ëd categorìa si la plancia a l\'é nen marcà da na mira geogràfica</string>
+  <string name="preference_theme">Meud nuité</string>
+  <string name="preference_theme_summary">Dovré un tema sombr</string>
   <string name="license_name_cc_by_sa_four">Atribussion-Partagi ugual 4.0</string>
   <string name="license_name_cc_by_four">Atribussion 4.0</string>
   <string name="license_name_cc_by_sa">Atribussion-partagi ugual 3.0</string>
@@ -106,4 +109,13 @@ Ch\'a sgnaca an s\'ën mëssage (o ch\'a sgnaca ël boton andaré) për sauté \
   <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Pais Bass)</string>
   <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norvegia)</string>
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polònia)</string>
+  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romanìa)</string>
+  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
+  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
+  <string name="license_name_cc_zero">CC Zero</string>
+  <string name="license_name_own_pd">own-pd</string>
+  <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
+  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
+  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
 </resources>

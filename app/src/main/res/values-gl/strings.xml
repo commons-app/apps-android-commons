@@ -77,6 +77,7 @@ Prema nesta mensaxe (ou no botón \"Atrás\") para saltar este paso.</string>
   <string name="about_license">Software de código aberto liberado baixo a &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;licenza Apache v2&lt;/a&gt;. Wikimedia Commons e o seu logo son marcas rexistradas da Fundación Wikimedia e úsanse coa súa autorización. Non fomos acreditados pola Fundación Wikimedia nin estamos afiliados con ela.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Código fonte&lt;/a&gt; e &lt;a href=\"https://commons-app.github.io/\"&gt;sitio web&lt;/a&gt; en GitHub. Crear unha nova &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;incidencia&lt;/a&gt; para informar de problemas e suxestións.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Política_de_protección_de_datos_(gl)\"&gt;Política de protección de datos&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;CRÉDITOS&lt;/a&gt;</string>
   <string name="title_activity_about">Acerca de</string>
   <string name="menu_feedback">Enviar comentarios (por correo electrónico)</string>
   <string name="no_email_client">Non hai instalado ningún cliente de correo</string>
@@ -166,5 +167,7 @@ Prema nesta mensaxe (ou no botón \"Atrás\") para saltar este paso.</string>
   <string name="media_detail_title">Título</string>
   <string name="media_detail_media_title">Título do ficheiro multimedia</string>
   <string name="media_detail_description">Descrición</string>
-  <string name="beta_opt_in_link">https://play.google.com/apps/testing/fr.free.nrw.commons</string>
+  <string name="media_detail_description_explanation">Aquí vai a descrición do ficheiro multimedia. Potencialmente, pode ser bastante longo, e necesitará agruparse en múltiples liñas. De tódolos xeitos esperamos que se vexa ben.</string>
+  <string name="become_a_tester_title">Converterse en beta-tester</string>
+  <string name="become_a_tester_description">Siga a nosa canle beta en Google Play e obteña acceso a novas funcionalidades e correccións de erros</string>
 </resources>

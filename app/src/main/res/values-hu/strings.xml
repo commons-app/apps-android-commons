@@ -91,6 +91,8 @@ Kattints erre az üzenetre a lépés kihagyásához</string>
   <string name="use_previous">Előző cím/leírás használata</string>
   <string name="allow_gps">Automatikusan megkapja a jelenlegi helyet</string>
   <string name="allow_gps_summary">Lekéri a jelenlegi helyet, hogy lehetőség legyen kategóriajavaslatokra a nem földrajzi címkézett képeknél.</string>
+  <string name="preference_theme">Éjszakai mód</string>
+  <string name="preference_theme_summary">Sötét téma használata</string>
   <string name="license_name_cc_by_sa_four">Nevezd meg! – Így add tovább! 4.0</string>
   <string name="license_name_cc_by_four">Nevezd meg! 4.0</string>
   <string name="license_name_cc_by_sa">Nevezd meg! – Így add tovább! 3.0</string>
@@ -156,7 +158,7 @@ Kattints erre az üzenetre a lépés kihagyásához</string>
   <string name="storage_permission_rationale">Szükséges engedély: Külső tárhely olvasása. Az alkalmazás nem működik enélkül.</string>
   <string name="location_permission_rationale">Lehetséges engedély: Jelenlegi hely megszerzése, a kategóriajavaslatok lehetőségéért.</string>
   <string name="ok">OK</string>
-  <string name="title_activity_nearby">Közeli Helyek</string>
+  <string name="title_activity_nearby">Közeli helyek</string>
   <string name="warning">Figyelmeztetés</string>
   <string name="file_exists">Ez a fájl már létezik a Commons-on. Biztos, hogy folytatni akarod?</string>
   <string name="yes">Igen</string>
@@ -167,5 +169,4 @@ Kattints erre az üzenetre a lépés kihagyásához</string>
   <string name="media_detail_description_explanation">A média leírása kerül ide. Ez akár egészen hosszú is lehet, és több sorba fog kerülni. Azért reméljük, jól néz majd ki.</string>
   <string name="become_a_tester_title">Béta tesztelővé válás</string>
   <string name="become_a_tester_description">Jelentkezz a béta csatornánkra a Google Playen hogy hamarabb megkapd a hibajavításokat és az új funkciókat</string>
-  <string name="beta_opt_in_link">https://play.google.com/apps/testing/fr.free.nrw.commons</string>
 </resources>

@@ -170,5 +170,4 @@ u2022 Категорії: Sydney Opera House, Sydney Opera House from the west, 
   <string name="media_detail_description_explanation">Сюди потрапляє опис медіафайлу. Він потенційно може бути досить довгим і розтягнутися на декілька рядків. Однак ми сподіваємось, що він виглядатиме гарно.</string>
   <string name="become_a_tester_title">Станьте бета-тестером</string>
   <string name="become_a_tester_description">Увійдіть на наш бета-канал на Google Play і отримайте ранній доступ до нових функцій та виправлень багів</string>
-  <string name="beta_opt_in_link">https://play.google.com/apps/testing/fr.free.nrw.commons</string>
 </resources>

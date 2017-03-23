@@ -169,5 +169,4 @@ Aperte nesta mensagem (ou aperte para voltar) para pular este passo</string>
   <string name="media_detail_description_explanation">Descrição da mídia aqui. Isso pode ser potencialmente longo e precisará envolver múltiplas linhas. Esperamos que seja agradável.</string>
   <string name="become_a_tester_title">Seja um Testador Beta</string>
   <string name="become_a_tester_description">Entre no nosso canal beta no Google Play e receba acesso prévio a novos recursos e correções de erros</string>
-  <string name="beta_opt_in_link">https://play.google.com/apps/testing/fr.free.nrw.commons</string>
 </resources>

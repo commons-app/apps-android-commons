@@ -43,6 +43,7 @@
   <string name="menu_upload_single">אַרויפֿלאָדן</string>
   <string name="categories_search_text_hint">זוכן קאטעגאריעס</string>
   <string name="menu_save_categories">אויפֿהיטן</string>
+  <string name="refresh_button">דערפֿרישן</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">נאך נישט קיין ארויפֿלאדן </item>
     <item quantity="one">1 ארויפֿלאד</item>
