@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatDelegate;
 import fr.free.nrw.commons.R;
 
 public class SettingsActivity extends PreferenceActivity {
-    private AppCompatDelegate mDelegate;
+    private AppCompatDelegate settingsDelegate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +30,9 @@ public class SettingsActivity extends PreferenceActivity {
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        if (mDelegate == null) {
-            mDelegate = AppCompatDelegate.create(this, null);
+        if (settingsDelegate == null) {
+            settingsDelegate = AppCompatDelegate.create(this, null);
         }
-        mDelegate.onPostCreate(savedInstanceState);
+        settingsDelegate.onPostCreate(savedInstanceState);
     }
 }

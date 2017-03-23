@@ -191,6 +191,13 @@ public class Utils {
         return string.substring(0,1).toUpperCase(Locale.getDefault()) + string.substring(1);
     }
 
+    /**
+     * Returns a string for the Wikimedia copyright tag template from a short license string
+     * Example: "CC BY 3.0"-> "{{self|cc-by-3.0}}"
+     * @param license The short code for the license you want the template for
+     * @param ctx A context in order to use getString()
+     * @return A Wikimedia copyright tag
+     */
     public static String licenseTemplateFor(String license, Context ctx) {
         if (license.equals(ctx.getString(R.string.license_name_cc_by_3_0))) {
             return "{{self|cc-by-3.0}}";
@@ -206,6 +213,13 @@ public class Utils {
         throw new RuntimeException("Unrecognized license value");
     }
 
+    /**
+     * Returns a more human readable longer license string from a short license string
+     * Example: "CC BY 3.0"-> "Attribution 3.0"
+     * @param license The short code for the license you want the template for
+     * @param ctx A context in order to use getString()
+     * @return A human readable longer license string
+     */
     public static String licenseNameFor(String license, Context ctx) {
         if (license.equals(ctx.getString(R.string.license_name_cc_by_3_0))) {
             return ctx.getString(R.string.license_name_cc_by);
@@ -221,6 +235,13 @@ public class Utils {
         throw new RuntimeException("Unrecognized license value");
     }
 
+    /**
+     * Returns a string of the URL to the associated CC license page from a short license string
+     * Example: "CC BY 3.0"-> "https://creativecommons.org/licenses/by/3.0"
+     * @param license The short code for the license you want the template for
+     * @param ctx A context in order to use getString()
+     * @return A string of a URL to a human-readable summary of the Creative Commons License
+     */
     public static String licenseUrlFor(String license, Context ctx) {
         if (license.equals(ctx.getString(R.string.license_name_cc_by_3_0))) {
             return "https://creativecommons.org/licenses/by/3.0/";
