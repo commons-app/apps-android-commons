@@ -168,5 +168,4 @@ människor runt hela världen!</string>
   <string name="media_detail_description_explanation">Beskrivningen för mediafilen ska vara här. Den kan vara riktig lång och kommer att behöva sträcka sig över flera rader. Vi hoppas i alla fall att det kommer se bra ut.</string>
   <string name="become_a_tester_title">Bli en betatestare</string>
   <string name="become_a_tester_description">Registrera dig på våra betakanal på Google Play och få tidig åtkomst till nya funktioner och buggfixar</string>
-  <string name="beta_opt_in_link">https://play.google.com/apps/testing/fr.free.nrw.commons</string>
 </resources>

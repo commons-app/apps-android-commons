@@ -158,5 +158,4 @@
   <string name="media_detail_media_title">미디어 제목</string>
   <string name="media_detail_description">설명</string>
   <string name="become_a_tester_title">베타 테스터가 되세요</string>
-  <string name="beta_opt_in_link">https://play.google.com/apps/testing/fr.free.nrw.commons</string>
 </resources>

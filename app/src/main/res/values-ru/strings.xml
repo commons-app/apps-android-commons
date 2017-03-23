@@ -80,6 +80,7 @@
   <string name="about_license">Приложение с открытым исходным кодом, выпущено по лицензии &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Викисклад и его логотип являются товарными знаками Фонда Викимедиа и используются с разрешения Фонда Викимедиа. Мы не поддерживаемся и не связаны с Фондом Викимедиа.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;Исходный код&lt;/a&gt; и &lt;a href=\"https://commons-app.github.io/\"&gt;сайт&lt;/a&gt; на GitHub. Создайте новый &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;запрос на GitHub&lt;/a&gt;, чтоб сообщить об ошибке или внести предложение.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy/ru\"&gt;Политика конфиденциальности&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Благодарности&lt;/a&gt;</string>
   <string name="title_activity_about">О приложении</string>
   <string name="menu_feedback">Отправить отзыв (по эл. почте)</string>
   <string name="no_email_client">Почтовый клиент не установлен</string>
@@ -95,6 +96,7 @@
   <string name="allow_gps">Автоматически получить текущее местоположение</string>
   <string name="allow_gps_summary">Получить текущее местоположение, чтобы получить предложения категорий, если изображение не содержит геотеги</string>
   <string name="preference_theme">Ночной режим</string>
+  <string name="preference_theme_summary">Использовать тёмную тему</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
@@ -171,5 +173,4 @@
   <string name="media_detail_description_explanation">Здесь располагается описание носителя информации. Оно потенциально может быть весьма длинным и даже располагаться в несколько строк. Однако мы надеемся, что это выглядит симпатично</string>
   <string name="become_a_tester_title">Стать бета-тестером</string>
   <string name="become_a_tester_description">Подпишитесь на наш канал бета-версии на Google Play и получите ранний доступ к новым функциям и исправлениям ошибок</string>
-  <string name="beta_opt_in_link">https://play.google.com/apps/testing/fr.free.nrw.commons</string>
 </resources>

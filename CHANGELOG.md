@@ -1,5 +1,15 @@
 # Wikimedia Commons for Android
 
+##v2.1 beta
+- Added beta opt in link to Settings
+- Added Codacy and Butterknife support
+- Added Light theme for day/outdoor use
+- Added Material icons
+- Reordered overflow menu items
+- Added credits to About page
+- Fixed lint issues
+- Fixed various crashes
+
 ##v2.0.2 
 - Make "View in browser" direct to mobile website 
 
