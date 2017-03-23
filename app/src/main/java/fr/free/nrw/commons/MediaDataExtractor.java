@@ -225,17 +225,15 @@ public class MediaDataExtractor {
                 NodeList childNodes = node.getChildNodes();
                 for (int j = 0, childNodesLength = childNodes.getLength(); j < childNodesLength; j++) {
                     Node childNode = childNodes.item(j);
-                    if (childNode.getNodeName().equals("name")) {
-                        if (comparator.match(childNode)) {
-                            // yay! Now fetch the value node.
-                            for (int k = j + 1; k < childNodesLength; k++) {
-                                Node siblingNode = childNodes.item(k);
-                                if (siblingNode.getNodeName().equals("value")) {
-                                    return siblingNode;
-                                }
+                    if (childNode.getNodeName().equals("name") && comparator.match(childNode)) {
+                        // yay! Now fetch the value node.
+                        for (int k = j + 1; k < childNodesLength; k++) {
+                            Node siblingNode = childNodes.item(k);
+                            if (siblingNode.getNodeName().equals("value")) {
+                                return siblingNode;
                             }
-                            throw new IOException("No value node found for matched template parameter.");
                         }
+                        throw new IOException("No value node found for matched template parameter.");
                     }
                 }
             }

@@ -85,8 +85,7 @@ public class CommonsApplication extends Application {
         schemeRegistry.register(new Scheme("https", sslSocketFactory, 443));
         ClientConnectionManager cm = new ThreadSafeClientConnManager(params, schemeRegistry);
         params.setParameter(CoreProtocolPNames.USER_AGENT, "Commons/" + APPLICATION_VERSION + " (https://mediawiki.org/wiki/Apps/Commons) Android/" + Build.VERSION.RELEASE);
-        DefaultHttpClient httpclient = new DefaultHttpClient(cm, params);
-        return httpclient;
+        return new DefaultHttpClient(cm, params);
     }
 
     public static MWApi createMWApi() {
@@ -95,8 +94,8 @@ public class CommonsApplication extends Application {
 
     @Override
     public void onCreate() {
-        ACRA.init(this);
         super.onCreate();
+        ACRA.init(this);
         // Fire progress callbacks for every 3% of uploaded content
         System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0");
         api = createMWApi();
@@ -130,15 +129,10 @@ public class CommonsApplication extends Application {
             imageCache = new LruCache<String, Bitmap>(cacheSize) {
                 @Override
                 protected int sizeOf(String key, Bitmap bitmap) {
-                    // bitmap.getByteCount() not available on older androids
                     int bitmapSize;
-                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB_MR1) {
-                        bitmapSize = bitmap.getRowBytes() * bitmap.getHeight();
-                    } else {
-                        bitmapSize = bitmap.getByteCount();
-                    }
-                    // The cache size will be measured in kilobytes rather than
-                    // number of items.
+                    bitmapSize = bitmap.getByteCount();
+
+                    // The cache size will be measured in kilobytes rather than number of items.
                     return bitmapSize / 1024;
                 }
             };

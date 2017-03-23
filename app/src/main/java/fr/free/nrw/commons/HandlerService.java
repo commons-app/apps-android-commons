@@ -29,8 +29,8 @@ public abstract class HandlerService<T> extends Service {
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         threadLooper.quit();
+        super.onDestroy();
     }
 
     public class HandlerServiceLocalBinder extends Binder {
