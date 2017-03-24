@@ -12,7 +12,6 @@ import java.io.IOException;
 
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.Utils;
 
 public abstract class AuthenticatedActivity extends BaseActivity {
 
@@ -122,7 +121,7 @@ public abstract class AuthenticatedActivity extends BaseActivity {
             // returns, we have a deadlock!
             // Fixed by explicitly asking this to be executed in parallel
             // See: https://groups.google.com/forum/?fromgroups=#!topic/android-developers/8M0RTFfO7-M
-            Utils.executeAsyncTask(addAccountTask);
+            addAccountTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         } else {
             GetAuthCookieTask task = new GetAuthCookieTask(curAccount, accountManager);
             task.execute();

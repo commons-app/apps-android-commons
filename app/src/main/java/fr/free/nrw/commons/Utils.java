@@ -1,7 +1,6 @@
 package fr.free.nrw.commons;
 
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.util.Log;
 
@@ -29,7 +28,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
-import java.util.concurrent.Executor;
 import java.util.regex.Pattern;
 
 import javax.xml.transform.Transformer;
@@ -125,27 +123,6 @@ public class Utils {
             e.printStackTrace();
         }
         return outputStream.toString();
-    }
-
-    static public <T> void executeAsyncTask(AsyncTask<T, ?, ?> task,
-                                            T... params) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
-        }
-        else {
-            task.execute(params);
-        }
-    }
-
-    static public <T> void executeAsyncTask(AsyncTask<T, ?, ?> task, Executor executor,
-                                            T... params) {
-        // FIXME: We're simply ignoring the executor on older androids
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            task.executeOnExecutor(executor, params);
-        }
-        else {
-            task.execute(params);
-        }
     }
 
     private static DisplayImageOptions.Builder defaultImageOptionsBuilder;
