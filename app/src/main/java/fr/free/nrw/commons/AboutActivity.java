@@ -30,7 +30,7 @@ public class AboutActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         uploadsToText.setText(CommonsApplication.EVENTLOG_WIKI);
-        versionText.setText(CommonsApplication.APPLICATION_VERSION);
+        versionText.setText(BuildConfig.VERSION_NAME);
 
         // We can't use formatted strings directly because it breaks with
         // our localization tools. Grab an HTML string and turn it into

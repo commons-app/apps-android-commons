@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.EventLog;
 import fr.free.nrw.commons.Media;
@@ -154,7 +155,7 @@ public class Contribution extends Media {
 
         buffer.append("== {{int:license-header}} ==\n")
                 .append(Utils.licenseTemplateFor(getLicense())).append("\n\n")
-            .append("{{Uploaded from Mobile|platform=Android|version=").append(CommonsApplication.APPLICATION_VERSION).append("}}\n")
+            .append("{{Uploaded from Mobile|platform=Android|version=").append(BuildConfig.VERSION_NAME).append("}}\n")
             .append(getTrackingTemplates());
         return buffer.toString();
     }

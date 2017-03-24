@@ -90,7 +90,7 @@ public class EventLog {
                 fullData.put("wiki", CommonsApplication.EVENTLOG_WIKI);
                 data.put("device", DEVICE);
                 data.put("platform", "Android/" + Build.VERSION.RELEASE);
-                data.put("appversion", "Android/" + CommonsApplication.APPLICATION_VERSION);
+                data.put("appversion", "Android/" + BuildConfig.VERSION_NAME);
                 fullData.put("event", data);
                 return new URL(CommonsApplication.EVENTLOG_URL + "?" + Utils.urlEncode(fullData.toString()) + ";");
             } catch (MalformedURLException e) {
