@@ -97,7 +97,7 @@ public class UploadController {
         contribution.setLicense(license);
 
         //FIXME: Add permission request here. Only executeAsyncTask if permission has been granted
-        Utils.executeAsyncTask(new AsyncTask<Void, Void, Contribution>() {
+        new AsyncTask<Void, Void, Contribution>() {
 
             // Fills up missing information about Contributions
             // Only does things that involve some form of IO
@@ -162,6 +162,6 @@ public class UploadController {
                 uploadService.queue(UploadService.ACTION_UPLOAD_FILE, contribution);
                 onComplete.onUploadStarted(contribution);
             }
-        });
+        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 }

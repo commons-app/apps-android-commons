@@ -242,7 +242,7 @@ public class MediaDetailFragment extends Fragment {
                     }
                 }
             };
-            Utils.executeAsyncTask(detailFetchTask);
+            detailFetchTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         } else {
             //This should not usually happen, image along with associated details should always be loaded from Internet, but keeping this for now for backup.
             //Even if image is loaded from device storage, it will display, albeit with empty desc and cat.

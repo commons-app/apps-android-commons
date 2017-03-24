@@ -43,7 +43,6 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.upload.MwVolleyApi;
 
 /**
@@ -145,7 +144,7 @@ public class CategorizationFragment extends Fragment {
             }
         };
 
-        Utils.executeAsyncTask(titleCategoriesSub);
+        titleCategoriesSub.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         Log.d(TAG, "TitleCatItems in titleCatQuery: " + titleCatItems);
 
         //Only return titleCatItems after API call has finished
@@ -322,8 +321,8 @@ public class CategorizationFragment extends Fragment {
                 latch.countDown();
             }
         };
-        Utils.executeAsyncTask(prefixUpdaterSub);
-        Utils.executeAsyncTask(methodAUpdaterSub);
+        prefixUpdaterSub.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        methodAUpdaterSub.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     private void startUpdatingCategoryList() {
@@ -400,7 +399,7 @@ public class CategorizationFragment extends Fragment {
     }
 
     private void updateCategoryCount(String name) {
-        Utils.executeAsyncTask(new CategoryCountUpdater(name), executor);
+        new CategoryCountUpdater(name).executeOnExecutor(executor);
     }
 
     @Override

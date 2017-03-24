@@ -109,7 +109,7 @@ public class EventLog {
                 return; // User has disabled tracking
             }
             LogTask logTask = new LogTask();
-            Utils.executeAsyncTask(logTask, this);
+            logTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, this);
         }
 
         public void log() {
