@@ -6,11 +6,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.TypedArray;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,8 +30,8 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.AboutActivity;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.SettingsActivity;
 import fr.free.nrw.commons.nearby.NearbyActivity;
+import fr.free.nrw.commons.settings.SettingsActivity;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -129,7 +131,7 @@ public class ContributionsListFragment extends Fragment {
                 startActivity(settingsIntent);
                 return true;
             case R.id.menu_about:
-                Intent aboutIntent = new Intent(getActivity(),  AboutActivity.class);
+                Intent aboutIntent = new Intent(getActivity(), AboutActivity.class);
                 startActivity(aboutIntent);
                 return true;
             case R.id.menu_feedback:

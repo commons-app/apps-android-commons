@@ -5,12 +5,5 @@ public class Prefs {
 
     public static String TRACKING_ENABLED = "eventLogging";
     public static final String DEFAULT_LICENSE = "defaultLicense";
-
-    public static class Licenses {
-        public static final String CC_BY_SA_3 = "CC BY-SA";
-        public static final String CC_BY_3 = "CC BY";
-        public static final String CC_BY_SA_4 = "CC BY-SA 4.0";
-        public static final String CC_BY_4 = "CC BY 4.0";
-        public static final String CC0 = "CC0";
-    }
+    public static final String FALLBACK_LICENSE = "CC BY-SA 4.0";
 }

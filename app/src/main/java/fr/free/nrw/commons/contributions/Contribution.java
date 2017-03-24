@@ -2,6 +2,7 @@ package fr.free.nrw.commons.contributions;
 
 import android.content.ContentProviderClient;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
@@ -130,7 +131,7 @@ public class Contribution extends Media {
         return "{{subst:unc}}";  // Remove when we have categorization
     }
 
-    public String getPageContents() {
+    public String getPageContents(Context ctx) {
         StringBuffer buffer = new StringBuffer();
         SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
         
@@ -153,7 +154,7 @@ public class Contribution extends Media {
         }
 
         buffer.append("== {{int:license-header}} ==\n")
-                .append(Utils.licenseTemplateFor(getLicense())).append("\n\n")
+            .append(Utils.licenseTemplateFor(getLicense(), ctx)).append("\n\n")
             .append("{{Uploaded from Mobile|platform=Android|version=").append(CommonsApplication.APPLICATION_VERSION).append("}}\n")
             .append(getTrackingTemplates());
         return buffer.toString();
@@ -370,7 +371,7 @@ public class Contribution extends Media {
                 db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN height INTEGER;");
                 db.execSQL("UPDATE " + TABLE_NAME + " SET height = 0");
                 db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN license STRING;");
-                db.execSQL("UPDATE " + TABLE_NAME + " SET license='" + Prefs.Licenses.CC_BY_SA_3 + "';");
+                db.execSQL("UPDATE " + TABLE_NAME + " SET license='" + Prefs.FALLBACK_LICENSE + "';");
                 from++;
                 onUpdate(db, from, to);
                 return;

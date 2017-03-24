@@ -1,8 +1,8 @@
 package fr.free.nrw.commons;
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.util.Log;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -99,17 +99,15 @@ public class Utils {
     public static String makeThumbBaseUrl(String filename) {
         String name = filename.replaceFirst("File:", "").replace(" ", "_");
         String sha = new String(Hex.encodeHex(DigestUtils.md5(name)));
-        return String.format("%s/%s/%s/%s", CommonsApplication.IMAGE_URL_BASE, sha.substring(0, 1), sha.substring(0, 2), urlEncode(name));
+        return String.format("%s/%s/%s/%s", CommonsApplication.IMAGE_URL_BASE, sha.substring(0, 1),
+                sha.substring(0, 2), urlEncode(name));
     }
 
     public static String getStringFromDOM(Node dom) {
         Transformer transformer = null;
         try {
             transformer = TransformerFactory.newInstance().newTransformer();
-        } catch (TransformerConfigurationException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (TransformerFactoryConfigurationError e) {
+        } catch (TransformerConfigurationException | TransformerFactoryConfigurationError e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
@@ -127,39 +125,27 @@ public class Utils {
         return outputStream.toString();
     }
 
-    static public <T> void executeAsyncTask(AsyncTask<T, ?, ?> task,
-                                            T... params) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
-        }
-        else {
-            task.execute(params);
-        }
+    public static <T> void executeAsyncTask(AsyncTask<T, ?, ?> task, T... params) {
+        task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
     }
 
-    static public <T> void executeAsyncTask(AsyncTask<T, ?, ?> task, Executor executor,
-                                            T... params) {
-        // FIXME: We're simply ignoring the executor on older androids
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            task.executeOnExecutor(executor, params);
-        }
-        else {
-            task.execute(params);
-        }
+    public static <T> void executeAsyncTask(AsyncTask<T, ?, ?> task,
+                                            Executor executor, T... params) {
+        task.executeOnExecutor(executor, params);
     }
 
     private static DisplayImageOptions.Builder defaultImageOptionsBuilder;
     public static DisplayImageOptions.Builder getGenericDisplayOptions() {
-        if(defaultImageOptionsBuilder == null) {
+        if (defaultImageOptionsBuilder == null) {
             defaultImageOptionsBuilder = new DisplayImageOptions.Builder().cacheInMemory()
                     .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                // List views flicker badly during data updates on Android 2.3; we
-                // haven't quite figured out why but cells seem to be rearranged oddly.
-                // Disable the fade-in on 2.3 to reduce the effect.
-                defaultImageOptionsBuilder = defaultImageOptionsBuilder
-                        .displayer(new FadeInBitmapDisplayer(300));
-            }
+
+            // List views flicker badly during data updates on Android 2.3; we
+            // haven't quite figured out why but cells seem to be rearranged oddly.
+            // Disable the fade-in on 2.3 to reduce the effect.
+            defaultImageOptionsBuilder = defaultImageOptionsBuilder
+                    .displayer(new FadeInBitmapDisplayer(300));
+
             defaultImageOptionsBuilder = defaultImageOptionsBuilder
                     .cacheInMemory()
                     .resetViewBeforeLoading();
@@ -189,11 +175,11 @@ public class Utils {
     public static String makeThumbUrl(String imageUrl, String filename, int width) {
         // Ugly Hack!
         // Update: OH DEAR GOD WHAT A HORRIBLE HACK I AM SO SORRY
-        if(imageUrl.endsWith("webm")) {
+        if (imageUrl.endsWith("webm")) {
             return imageUrl.replaceFirst("test/", "test/thumb/").replace("commons/", "commons/thumb/") + "/" + width + "px--" + filename.replaceAll("File:", "").replaceAll(" ", "_") + ".jpg";
         } else {
             String thumbUrl = imageUrl.replaceFirst("test/", "test/thumb/").replace("commons/", "commons/thumb/") + "/" + width + "px-" + filename.replaceAll("File:", "").replaceAll(" ", "_");
-            if(thumbUrl.endsWith("jpg") || thumbUrl.endsWith("png") || thumbUrl.endsWith("jpeg")) {
+            if (thumbUrl.endsWith("jpg") || thumbUrl.endsWith("png") || thumbUrl.endsWith("jpeg")) {
                 return thumbUrl;
             } else {
                 return thumbUrl + ".png";
@@ -205,47 +191,67 @@ public class Utils {
         return string.substring(0,1).toUpperCase(Locale.getDefault()) + string.substring(1);
     }
 
-    public static String licenseTemplateFor(String license) {
-        if(license.equals(Prefs.Licenses.CC_BY_3)) {
+    /**
+     * Returns a string for the Wikimedia copyright tag template from a short license string
+     * Example: "CC BY 3.0"-> "{{self|cc-by-3.0}}"
+     * @param license The short code for the license you want the template for
+     * @param ctx A context in order to use getString()
+     * @return A Wikimedia copyright tag
+     */
+    public static String licenseTemplateFor(String license, Context ctx) {
+        if (license.equals(ctx.getString(R.string.license_name_cc_by_3_0))) {
             return "{{self|cc-by-3.0}}";
-        } else if(license.equals(Prefs.Licenses.CC_BY_4)) {
+        } else if (license.equals(ctx.getString(R.string.license_name_cc_by_4_0))) {
             return "{{self|cc-by-4.0}}";
-        } else if(license.equals(Prefs.Licenses.CC_BY_SA_3)) {
+        } else if (license.equals(ctx.getString(R.string.license_name_cc_by_sa_3_0))) {
             return "{{self|cc-by-sa-3.0}}";
-        } else if(license.equals(Prefs.Licenses.CC_BY_SA_4)) {
+        } else if (license.equals(ctx.getString(R.string.license_name_cc_by_sa_4_0))) {
             return "{{self|cc-by-sa-4.0}}";
-        } else if(license.equals(Prefs.Licenses.CC0)) {
+        } else if (license.equals(ctx.getString(R.string.license_name_cc0))) {
             return "{{self|cc-zero}}";
         }
         throw new RuntimeException("Unrecognized license value");
     }
 
-    public static int licenseNameFor(String license) {
-        if(license.equals(Prefs.Licenses.CC_BY_3)) {
-            return R.string.license_name_cc_by;
-        } else if(license.equals(Prefs.Licenses.CC_BY_4)) {
-            return R.string.license_name_cc_by_four;
-        } else if(license.equals(Prefs.Licenses.CC_BY_SA_3)) {
-            return R.string.license_name_cc_by_sa;
-        } else if(license.equals(Prefs.Licenses.CC_BY_SA_4)) {
-            return R.string.license_name_cc_by_sa_four;
-        } else if(license.equals(Prefs.Licenses.CC0)) {
-            return R.string.license_name_cc0;
+    /**
+     * Returns a more human readable longer license string from a short license string
+     * Example: "CC BY 3.0"-> "Attribution 3.0"
+     * @param license The short code for the license you want the template for
+     * @param ctx A context in order to use getString()
+     * @return A human readable longer license string
+     */
+    public static String licenseNameFor(String license, Context ctx) {
+        if (license.equals(ctx.getString(R.string.license_name_cc_by_3_0))) {
+            return ctx.getString(R.string.license_name_cc_by);
+        } else if (license.equals(ctx.getString(R.string.license_name_cc_by_4_0))) {
+            return ctx.getString(R.string.license_name_cc_by_four);
+        } else if (license.equals(ctx.getString(R.string.license_name_cc_by_sa_3_0))) {
+            return ctx.getString(R.string.license_name_cc_by_sa);
+        } else if (license.equals(ctx.getString(R.string.license_name_cc_by_sa_4_0))) {
+            return ctx.getString(R.string.license_name_cc_by_sa_four);
+        } else if (license.equals(ctx.getString(R.string.license_name_cc0))) {
+            return ctx.getString(R.string.license_name_cc0);
         }
         throw new RuntimeException("Unrecognized license value");
     }
 
-    public static String licenseUrlFor(String license) {
-        if(license.equals(Prefs.Licenses.CC_BY_3)) {
+    /**
+     * Returns a string of the URL to the associated CC license page from a short license string
+     * Example: "CC BY 3.0"-> "https://creativecommons.org/licenses/by/3.0"
+     * @param license The short code for the license you want the template for
+     * @param ctx A context in order to use getString()
+     * @return A string of a URL to a human-readable summary of the Creative Commons License
+     */
+    public static String licenseUrlFor(String license, Context ctx) {
+        if (license.equals(ctx.getString(R.string.license_name_cc_by_3_0))) {
             return "https://creativecommons.org/licenses/by/3.0/";
-        } else if(license.equals(Prefs.Licenses.CC_BY_4)) {
+        } else if (license.equals(ctx.getString(R.string.license_name_cc_by_4_0))) {
             return "https://creativecommons.org/licenses/by/4.0/";
-        } else if(license.equals(Prefs.Licenses.CC_BY_SA_3)) {
+        } else if (license.equals(ctx.getString(R.string.license_name_cc_by_sa_3_0))) {
             return "https://creativecommons.org/licenses/by-sa/3.0/";
-        } else if(license.equals(Prefs.Licenses.CC_BY_SA_4)) {
+        } else if (license.equals(ctx.getString(R.string.license_name_cc_by_sa_4_0))) {
             return "https://creativecommons.org/licenses/by-sa/4.0/";
-        }
-        else if(license.equals(Prefs.Licenses.CC0)) {
+        } else if (license.equals(ctx.getString(R.string.license_name_cc0))) {
             return "https://creativecommons.org/publicdomain/zero/1.0/";
         }
         throw new RuntimeException("Unrecognized license value");

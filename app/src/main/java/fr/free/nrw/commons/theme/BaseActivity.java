@@ -15,7 +15,7 @@ public class BaseActivity extends AppCompatActivity {
         if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("theme",true)) {
             currentTheme = true;
             setTheme(R.style.DarkAppTheme);
-        }else {
+        } else {
             currentTheme = false;
             setTheme(R.style.LightAppTheme); // default
         }

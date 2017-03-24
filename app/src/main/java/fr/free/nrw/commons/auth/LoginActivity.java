@@ -11,12 +11,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NavUtils;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -26,7 +26,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.util.Locale;
 
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.EventLog;
@@ -213,10 +212,16 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     protected void onResume() {
         super.onResume();
 
+        // Do first run stuff here then set 'firstrun' as false
         if (prefs.getBoolean("firstrun", true)) {
-            // Do first run stuff here then set 'firstrun' as false
+
+            // Set default preferences
+            PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+
+            // Launch welcome activity
             Intent welcomeIntent = new Intent(this, WelcomeActivity.class);
             startActivity(welcomeIntent);
+
             prefs.edit().putBoolean("firstrun", false).apply();
         }
     }
@@ -237,7 +242,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
     private void performLogin() {
         String username = usernameEdit.getText().toString();
-        // Because Mediawiki is upercase-first-char-then-case-sensitive :)
+        // Because Mediawiki is uppercase-first-char-then-case-sensitive :)
         String canonicalUsername = Utils.capitalize(username.substring(0,1)) + username.substring(1);
 
         String password = passwordEdit.getText().toString();

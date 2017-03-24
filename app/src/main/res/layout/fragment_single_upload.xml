@@ -37,6 +37,9 @@
         android:id="@+id/licenseSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="@dimen/small_margin"
+        android:paddingBottom="@dimen/small_margin"
+        android:entries="@array/pref_defaultLicense_entries"
         android:theme="?attr/spinnerTheme"
         />
 
@@ -53,6 +56,7 @@
         android:layout_height="wrap_content"
         android:text="@string/share_license_summary"
         android:id="@+id/share_license_summary"
+        android:layout_gravity="center"
         android:gravity="center"
         android:layout_marginTop="16dp"
         />
