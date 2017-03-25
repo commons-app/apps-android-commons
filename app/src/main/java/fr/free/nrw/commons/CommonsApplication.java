@@ -5,7 +5,6 @@ import android.accounts.AccountManager;
 import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
 import android.app.Application;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Build;
@@ -52,8 +51,6 @@ import fr.free.nrw.commons.caching.CacheController;
 )
 public class CommonsApplication extends Application {
 
-    public static String APPLICATION_VERSION; // Populated in onCreate. Race conditions theoretically possible, but practically not?
-
     private MWApi api;
     private Account currentAccount = null; // Unlike a savings account...
     public static final String API_URL = "https://commons.wikimedia.org/w/api.php";
@@ -84,7 +81,7 @@ public class CommonsApplication extends Application {
         final SSLSocketFactory sslSocketFactory = SSLSocketFactory.getSocketFactory();
         schemeRegistry.register(new Scheme("https", sslSocketFactory, 443));
         ClientConnectionManager cm = new ThreadSafeClientConnManager(params, schemeRegistry);
-        params.setParameter(CoreProtocolPNames.USER_AGENT, "Commons/" + APPLICATION_VERSION + " (https://mediawiki.org/wiki/Apps/Commons) Android/" + Build.VERSION.RELEASE);
+        params.setParameter(CoreProtocolPNames.USER_AGENT, "Commons/" + BuildConfig.VERSION_NAME + " (https://mediawiki.org/wiki/Apps/Commons) Android/" + Build.VERSION.RELEASE);
         return new DefaultHttpClient(cm, params);
     }
 
@@ -104,14 +101,6 @@ public class CommonsApplication extends Application {
                 .discCache(new TotalSizeLimitedDiscCache(StorageUtils.getCacheDirectory(this), 128 * 1024 * 1024))
                 .build();
         ImageLoader.getInstance().init(imageLoaderConfiguration);
-
-        try {
-            PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-            APPLICATION_VERSION = pInfo.versionName;
-        } catch (PackageManager.NameNotFoundException e) {
-            // LET US WIN THE AWARD FOR DUMBEST CHECKED EXCEPTION EVER!
-            throw new RuntimeException(e);
-        }
 
         // Initialize EventLogging
         EventLog.setApp(this);
