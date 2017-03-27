@@ -49,6 +49,7 @@
   <string name="menu_upload_single">Last opp</string>
   <string name="categories_search_text_hint">Søk kategorier</string>
   <string name="menu_save_categories">Lagre</string>
+  <string name="refresh_button">Oppdater</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">Ingen opplastinger enda</item>
     <item quantity="one">1 opplasting</item>
@@ -76,6 +77,7 @@ Trykk på denne meldingen (eller trykk tilbake) for å hoppe over dette steget.<
   <string name="about_license">Programvare med åpen kildekode sluppet under &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Wikimedia Commons og dets logo er varemerker fra Wikimedia Foundation og brukes med tillatelse fra dem. Vi er verken støttet av eller koblet til Wikimedia Foundation.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kildekode&lt;/a&gt; og &lt;a href=\"https://commons-app.github.io/\"&gt;nettside&lt;/a&gt; på GitHub. Opprett en ny &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-sak&lt;/a&gt; for feilrapporter og forslag.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Personvernpolicy&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-comons/blob/master/CREDITS\"&gt;CREDITS&lt;/a&gt;</string>
   <string name="title_activity_about">Om</string>
   <string name="menu_feedback">Send tilbakemelding (via Epost)</string>
   <string name="no_email_client">Ingen epostklient installert</string>
@@ -90,6 +92,10 @@ Trykk på denne meldingen (eller trykk tilbake) for å hoppe over dette steget.<
   <string name="use_previous">Bruk forrige tittel/beskrivelse</string>
   <string name="allow_gps">Hent automatisk nåværende plassering</string>
   <string name="allow_gps_summary">Hent nåværende plassering for å tilby kategoriforslag om bildet ikke er geotagget</string>
+  <string name="preference_theme">Nattmodus</string>
+  <string name="preference_theme_summary">Bruk mørk drakt</string>
+  <string name="license_name_cc_by_sa_four">Navngivelse-Del på samme vilkår 4.0</string>
+  <string name="license_name_cc_by_four">Navngivelse 4.0</string>
   <string name="license_name_cc_by_sa"> Navngivelse-Del på samme vilkår 3.0</string>
   <string name="license_name_cc_by">Navngivelse 3.0</string>
   <string name="license_name_cc0">CC0</string>
@@ -158,4 +164,10 @@ Trykk på denne meldingen (eller trykk tilbake) for å hoppe over dette steget.<
   <string name="file_exists">Denne filen eksisterer allerede på Commons. Er du sikker på at du vil fortsette?</string>
   <string name="yes">Ja</string>
   <string name="no">Nei</string>
+  <string name="media_detail_title">Tittel</string>
+  <string name="media_detail_media_title">Medietittel</string>
+  <string name="media_detail_description">Beskrivelse</string>
+  <string name="media_detail_description_explanation">Beskrivelse av mediet skal være her. Denne kan potensielt være ganske lang, og vil trenge å strekke seg over flere linjer. Vi håper det ser bra nok ut.</string>
+  <string name="become_a_tester_title">Bli betatester</string>
+  <string name="become_a_tester_description">Registrer deg på vår betakanal på Google Play og få tidlig tilgang til nye funksjoner og feilrettinger</string>
 </resources>

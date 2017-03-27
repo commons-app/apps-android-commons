@@ -167,7 +167,7 @@ Appuyez sur ce message (ou retournez en arrière) pour sauter cette étape.</str
   <string name="media_detail_title">Titre</string>
   <string name="media_detail_media_title">Titre du média</string>
   <string name="media_detail_description">Description</string>
-  <string name="media_detail_description_explanation">La description du média va ici. Cela peut être potentiellement assez long, et devra être réparti sur plusieurs lignes. Nous espérons que cela reste ^quand même joli.</string>
+  <string name="media_detail_description_explanation">La description du média vient ici. Cela peut être potentiellement assez long, et devra être réparti sur plusieurs lignes. Nous espérons que cela restera joli néanmoins.</string>
   <string name="become_a_tester_title">Devenir un bêta-testeur</string>
   <string name="become_a_tester_description">S’inscrire à notre canal bêta sur Google Play et obtenir un accès anticipé aux nouvelles fonctionnalités et corrections de bogue</string>
 </resources>

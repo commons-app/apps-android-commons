@@ -90,6 +90,8 @@ Napauta tätä viestiä (tai paina takaisin) ohittaaksesi tämän vaiheen.</stri
   <string name="use_previous">Käytä edellistä otsikkoa/kuvausta</string>
   <string name="allow_gps">Hae tämänhetkinen sijainti automaattisesti</string>
   <string name="allow_gps_summary">Nouda nykyinen sijainti asettaaksesi käyttöön luokkaehdotuksia jos kuva ei ole paikkamerkitty</string>
+  <string name="preference_theme">Yötila</string>
+  <string name="preference_theme_summary">Käytä tummaa teemaa</string>
   <string name="license_name_cc_by_sa">Nimeä-JaaSamoin 3.0</string>
   <string name="license_name_cc_by">Nimeä 3.0</string>
   <string name="license_name_cc0">CC0</string>
@@ -157,4 +159,7 @@ Napauta tätä viestiä (tai paina takaisin) ohittaaksesi tämän vaiheen.</stri
   <string name="file_exists">Tämä tiedosto on jo Wikimedia Commonsissa. Haluatko varmasti jatkaa?</string>
   <string name="yes">Kyllä</string>
   <string name="no">Ei</string>
+  <string name="media_detail_title">Otsikko</string>
+  <string name="media_detail_description">Kuvaus</string>
+  <string name="become_a_tester_title">Ryhdy beetatestaajaksi</string>
 </resources>

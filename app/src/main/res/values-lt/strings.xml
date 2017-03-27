@@ -89,6 +89,8 @@ Paspauskite šią žinutę (ar paspauskite atgal), kad praleistumėte šį žing
   <string name="use_previous">Naudoti ankstesnį pavadinimą/aprašymą</string>
   <string name="allow_gps">Automatiškai gauti dabartinę vietą</string>
   <string name="allow_gps_summary">Gauti dabartinę vietove, kad būtų pasiūlytos kategorijos, jei paveikslėlis neturi geografinės žymės</string>
+  <string name="preference_theme">Naktinis režimas</string>
+  <string name="preference_theme_summary">Naudoti tamsią temą</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_pd_old_100">Viešas domenas (autorius mirė prieš 100 metų)</string>
