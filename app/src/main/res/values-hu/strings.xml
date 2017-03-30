@@ -129,24 +129,24 @@ Kattints erre az üzenetre a lépés kihagyásához</string>
   <string name="license_name_pd_ineligible">Közkincs (szerzői jogra nem jogosult)</string>
   <string name="license_name_attribution">Nevezd meg!</string>
   <string name="license_name_gfdl">GNU Szabad Dokumentációs Licenc</string>
-  <string name="tutorial_1_text">A Wikimédia Commons tárolja a Wikipédián használt képek nagyrészét.</string>
-  <string name="tutorial_1_subtext">A képeid segítik az emberek ismertetését az egész világon!</string>
-  <string name="tutorial_2_text">Kérjük, tölts fel képeket, amelyeket te fotóztál vagy készítettél magad:</string>
+  <string name="tutorial_1_text">A Wikimédia Commons tárolja a Wikipédián használt képek többségét.</string>
+  <string name="tutorial_1_subtext">A képeid segítik az ismeretterjesztést az egész világon!</string>
+  <string name="tutorial_2_text">Kérjük, tölts fel képeket, amelyeket teljes mértékben te fotóztál vagy készítettél:</string>
   <string name="tutorial_2_subtext">- Természeti tárgyak (virágok, állatok, hegyek)
 - Hasznos tárgyak (kerékpárok, vasútállomások)
-- Híres emberek (a polgármestered, híres Olimpikonok akiket ismersz)</string>
+- Híres emberek (a polgármestered, olimpikonok, akikkel találkoztál)</string>
   <string name="tutorial_3_text">Kérjük, NE tölts fel:</string>
   <string name="tutorial_3_subtext">- Szelfiket vagy képeket a barátaidról
-- Képeket, amelyeket az Internetről töltöttél le
-- Szabadalmazott alkalmazások képernyőforóit</string>
+- Internetröl letöltött képeket
+- Kereskedelmi alkalmazások képernyőképeit</string>
   <string name="tutorial_4_text">Példa feltöltés:</string>
   <string name="tutorial_4_subtext">- Cím: Sydney-i Operaház
-- Leírás: Sydney-i Operaház az öböl túlsó oldaláról
+- Leírás: A Sydney-i Operaház az öböl túlpartjáról
 - Kategóriák: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
-  <string name="welcome_wikipedia_text">Tedd közzé a képeidet! Segíts, hogy a Wikipédia szócikkek életre keljenek!</string>
+  <string name="welcome_wikipedia_text">Tedd közzé a képeidet! Segíts életre kelteni a Wikipédia-szócikkeket!</string>
   <string name="welcome_wikipedia_subtext">A Wikipédián található képek a Wikimédia Commonsből származnak.</string>
   <string name="welcome_copyright_text">A képeid segítenek a világ minden táján élő emberek oktatásában.</string>
-  <string name="welcome_copyright_subtext">Kerüld az internetről származó szerzői joggal védett anyagokat, mint a poszterek, könyvborítók, stb.</string>
+  <string name="welcome_copyright_subtext">Kerüld az internetről származó szerzői joggal védett anyagokat, valamint a posztereket, könyvborítókat stb.</string>
   <string name="welcome_final_text">Megértetted?</string>
   <string name="welcome_final_button_text">Igen!</string>
   <string name="detail_panel_cats_label">Kategóriák</string>
@@ -168,5 +168,5 @@ Kattints erre az üzenetre a lépés kihagyásához</string>
   <string name="media_detail_description">Leírás</string>
   <string name="media_detail_description_explanation">A média leírása kerül ide. Ez akár egészen hosszú is lehet, és több sorba fog kerülni. Azért reméljük, jól néz majd ki.</string>
   <string name="become_a_tester_title">Béta tesztelővé válás</string>
-  <string name="become_a_tester_description">Jelentkezz a béta csatornánkra a Google Playen hogy hamarabb megkapd a hibajavításokat és az új funkciókat</string>
+  <string name="become_a_tester_description">Jelentkezz a béta csatornánkra a Google Playen, hogy hamarabb megkapd a hibajavításokat és az új funkciókat</string>
 </resources>

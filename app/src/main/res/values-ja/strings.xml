@@ -47,6 +47,7 @@
   <string name="menu_upload_single">アップロード</string>
   <string name="categories_search_text_hint">検索するカテゴリ</string>
   <string name="menu_save_categories">保存</string>
+  <string name="refresh_button">更新</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">アップロードしたファイルはありません</item>
     <item quantity="other">%d 件のアップロード</item>
@@ -67,16 +68,22 @@
   <string name="preference_tracking_summary">アプリの改善を支援するために、使用状況の報告をウィキメディアに送信する</string>
   <string name="title_activity_settings">設定</string>
   <string name="title_activity_signup">利用者登録</string>
+  <string name="menu_about">このアプリについて</string>
   <string name="about_license" fuzzy="true">&lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache ライセンス v2&lt;/a&gt; のもとで公開されているオープン ソース ソフトウェア</string>
-  <string name="about_improve" fuzzy="true">ソースは &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt; にあります。バグは &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt; へ。</string>
+  <string name="about_improve">ソースは &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt; にあります。バグとアイディアは &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt; へ。</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/プライバシー・ポリシー\"&gt;プライバシー・ポリシー&lt;/a&gt;</string>
+  <string name="title_activity_about">このアプリについて</string>
   <string name="menu_feedback">フィードバックをメールで送信</string>
+  <string name="no_email_client">メールアプリケーションが見つかりません</string>
   <string name="provider_categories">最近使用したカテゴリ</string>
   <string name="no_uploads_yet">まだ写真をアップロードしていません。</string>
   <string name="menu_retry_upload">再試行</string>
   <string name="menu_cancel_upload">キャンセル</string>
+  <string name="share_license_summary">この画像が %1$s ライセンスでアップロードされます。</string>
   <string name="menu_download">ダウンロード</string>
   <string name="preference_license">ライセンス</string>
+  <string name="use_previous">前回のタイトルと記述を使用</string>
+  <string name="preference_theme">夜モード</string>
   <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0表示-継承u00A03.0</string>
   <string name="license_name_cc_by" fuzzy="true">CCu00A0表示u00A03.0</string>
   <string name="license_name_cc0">CC0</string>
@@ -116,4 +123,14 @@
   <string name="detail_description_empty">説明なし</string>
   <string name="detail_license_empty">不明なライセンス</string>
   <string name="menu_refresh">更新</string>
+  <string name="ok">承認</string>
+  <string name="title_activity_nearby">周りの場所</string>
+  <string name="warning">警告</string>
+  <string name="file_exists">このファイルが既にコモンズにあります。本当にアップロードしますか？</string>
+  <string name="yes">はい</string>
+  <string name="no">いいえ</string>
+  <string name="media_detail_title">タイトル</string>
+  <string name="media_detail_media_title">メディアのタイトル</string>
+  <string name="media_detail_description">記述</string>
+  <string name="become_a_tester_title">ベータ版を使ってみましょう！</string>
 </resources>

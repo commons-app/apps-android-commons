@@ -5,10 +5,12 @@
   <string name="username">Nom d\'utilizaire</string>
   <string name="password">Senhal</string>
   <string name="login">Se connectar</string>
+  <string name="signup">S\'inscriure</string>
   <string name="logging_in_title">Connexion</string>
   <string name="logging_in_message">Pacientatz...</string>
   <string name="login_success">Identificacion capitada !</string>
   <string name="login_failed">Error de connexion !</string>
+  <string name="upload_failed">Fichièr pas trobat. Ensajatz-ne un autre.</string>
   <string name="authentication_failed">Fracàs de l’autentificacion !</string>
   <string name="uploading_started">Telecargament aviat !</string>
   <string name="upload_completed_notification_title">%1$s telecargats !</string>
@@ -18,6 +20,10 @@
   <string name="upload_progress_notification_title_finishing">Fin del telecargament %1$s</string>
   <string name="upload_failed_notification_title">Telecargament fracassat a %1$s</string>
   <string name="upload_failed_notification_subtitle">Quichar per afichar</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">1 fichièr en telecargament</item>
+    <item quantity="other">%d fichièrs en telecargament</item>
+  </plurals>
   <string name="title_activity_contributions">Mos telecargaments</string>
   <string name="contribution_state_queued">Mes en fila d\'espèra</string>
   <string name="contribution_state_failed">Fracàs</string>
@@ -25,6 +31,7 @@
   <string name="contribution_state_starting">Telecargament</string>
   <string name="menu_from_gallery">Dempuèi la galariá</string>
   <string name="menu_from_camera">Prene una fòto</string>
+  <string name="menu_nearby">A proximitat</string>
   <string name="provider_contributions">Mos telecargaments</string>
   <string name="menu_share">Partejar</string>
   <string name="menu_open_in_browser">Afichar dins lo navigador</string>
@@ -42,6 +49,7 @@
   <string name="menu_upload_single">Telecargar</string>
   <string name="categories_search_text_hint">Recercar de categorias</string>
   <string name="menu_save_categories">Enregistrar</string>
+  <string name="refresh_button">Refrescar</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">Pas mai cap de telecargament</item>
     <item quantity="one">1 telecargament</item>
@@ -59,11 +67,13 @@
   <string name="categories_activity_title">Categorias</string>
   <string name="preference_tracking">Rapòrts d’utilizacion</string>
   <string name="title_activity_settings">Paramètres</string>
+  <string name="title_activity_signup">S’inscriure</string>
   <string name="menu_about">A prepaus</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Fonts&lt;/a&gt; e &lt;a href=\"https://commons-app.github.io/\"&gt;site web&lt;/a&gt; sus GitHub. Crear un novèl &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;senhalament GitHub&lt;/a&gt; per senhalar de bugs o de suggestions.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politica de confidencialitat&lt;/a&gt;</string>
   <string name="title_activity_about">A prepaus</string>
   <string name="menu_feedback">Mandar vòstres comentaris (per corrièl)</string>
+  <string name="no_email_client">Cap de client de corrièl pas installat</string>
   <string name="provider_categories">Categorias utilizadas recentament</string>
   <string name="waiting_first_sync">Espèra de primièra sincronizacion…</string>
   <string name="no_uploads_yet">Avètz pas encara telecargat cap de fòto.</string>
@@ -72,6 +82,10 @@
   <string name="share_license_summary">Aqueste imatge serà jos licéncia %1$s</string>
   <string name="menu_download">Telecargar</string>
   <string name="preference_license">Licéncia</string>
+  <string name="preference_theme">Mòde de nuèit</string>
+  <string name="preference_theme_summary">Utilizar un tèma escur</string>
+  <string name="license_name_cc_by_sa_four"> Atribucion-PartimentIdentic 4.0</string>
+  <string name="license_name_cc_by_four">Atribucion 4.0</string>
   <string name="license_name_cc_by_sa"> Atribucion-PartimentIdentic 3.0</string>
   <string name="license_name_cc_by">Atribucion 3.0</string>
   <string name="license_name_cc0">CC0</string>
@@ -87,6 +101,8 @@
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polonha)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romania)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
+  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zèro</string>
   <string name="license_name_own_pd">own-pd</string>
   <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
@@ -104,6 +120,8 @@
   <string name="license_name_pd_ineligible">Domeni public (pas elegible al dreit d’autor)</string>
   <string name="license_name_attribution">Atribucion</string>
   <string name="license_name_gfdl">Licéncia de documentacion liura GNU</string>
+  <string name="tutorial_3_text">Telecarguetz PAS :</string>
+  <string name="tutorial_4_text">Exemple de telecargament :</string>
   <string name="welcome_wikipedia_subtext">Los imatges sus Wikipèdia venon de Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Vòstres imatges ajudan a educar lo monde dins lo monde entièr.</string>
   <string name="welcome_final_text">Pensatz qu’es bon ?</string>
@@ -114,4 +132,13 @@
   <string name="detail_description_empty">Pas cap de descripcion</string>
   <string name="detail_license_empty">Licéncia desconeguda</string>
   <string name="menu_refresh">Refrescar</string>
+  <string name="ok">D\'acòrdi</string>
+  <string name="title_activity_nearby">Endreits a proximitat</string>
+  <string name="warning">Avertiment</string>
+  <string name="yes">Òc</string>
+  <string name="no">Non</string>
+  <string name="media_detail_title">Títol</string>
+  <string name="media_detail_media_title">Títol del mèdia</string>
+  <string name="media_detail_description">Descripcion</string>
+  <string name="become_a_tester_title">Venir un bèta-testaire</string>
 </resources>

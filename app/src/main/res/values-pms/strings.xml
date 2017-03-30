@@ -118,4 +118,12 @@ Ch\'a sgnaca an s\'ën mëssage (o ch\'a sgnaca ël boton andaré) për sauté \
   <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
   <string name="license_name_cc_by_2_5">CC BY 2.5</string>
   <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
+  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
+  <string name="license_name_cc_2_0">CC BY 2.0</string>
+  <string name="license_name_fal">Licensa Art lìbera</string>
+  <string name="license_name_pd_old_100">Domini pùblich (autor mòrt da pi che 100 agn)</string>
+  <string name="license_name_pd_old">Domini pùblich (drit d\'autor ëscadù)</string>
+  <string name="license_name_pd_art">Domini pùblich (art)</string>
+  <string name="license_name_pd_us">Domini pùblich (Stat Unì)</string>
+  <string name="license_name_pd_usgov">Domini pùblich (goern ëd jë Stat Unì)</string>
 </resources>

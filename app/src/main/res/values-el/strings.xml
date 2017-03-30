@@ -49,6 +49,7 @@
   <string name="menu_upload_single">Ανέβασμα</string>
   <string name="categories_search_text_hint">Αναζήτηση κατηγοριών</string>
   <string name="menu_save_categories">Αποθήκευση</string>
+  <string name="refresh_button">Ανανέωση</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">Δεν υπάρχουν επιφορτώσεις ακόμη</item>
     <item quantity="one">1 επιφόρτωση</item>
@@ -76,6 +77,7 @@
   <string name="about_license">Λογισμικό ανοικτού κώδικα και κυκλοφορεί υπό την &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Άδεια Apache v2&lt;/a&gt;. Το Wikimedia Commons και το λογότυπο είναι εμπορικά σήματα του Ιδρύματος Wikimedia και χρησιμοποιούνται με άδεια από το Ίδρυμα Wikimedia. Δεν προτεινόμαστε ή συνδεόμαστε με το Ίδρυμα Wikimedia.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Πηγή&lt;/a&gt; και &lt;a href=\"https://commons-app.github.io/\"&gt;ιστοσελίδα&lt;/a&gt; στο GitHub. Δημιουργήστε ένα νέο &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub θέμα&lt;/a&gt; για αναφορές σφαλμάτων και προτάσεις.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Πολιτική προσωπικών δεδομένων&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;CREDITS&lt;/a&gt;</string>
   <string name="title_activity_about">Σχετικά</string>
   <string name="menu_feedback">Αποστολή σχολίων (μέσω Email)</string>
   <string name="no_email_client">Δεν υπάρχει εγκατεστημένη εφαρμογή ηλεκτρονικού ταχυδρομείου</string>
@@ -90,6 +92,10 @@
   <string name="use_previous">Χρήση προηγούμενου τίτλου/περιγραφής</string>
   <string name="allow_gps">Αυτόματη ανάκτηση τρέχουσας θέσης</string>
   <string name="allow_gps_summary">Ανάκτηση τρέχουσας τοποθεσία για να σας προσφέρουμε προτάσεις κατηγοριών αν η εικόνα δεν είναι γεωσεσημασμένη.</string>
+  <string name="preference_theme">Νυχτερινή λειτουργία</string>
+  <string name="preference_theme_summary">Χρήση σκοτεινού θέματος</string>
+  <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
   <string name="license_name_cc_by">Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
@@ -158,4 +164,10 @@
   <string name="file_exists">Αυτό το αρχείο υπάρχει ήδη στα Commons. Είστε σίγουρος ότι θέλετε να συνεχίσετε;</string>
   <string name="yes">Ναι</string>
   <string name="no">Όχι</string>
+  <string name="media_detail_title">Τίτλος</string>
+  <string name="media_detail_media_title">Τίτλος πολυμέσου</string>
+  <string name="media_detail_description">Περιγραφή</string>
+  <string name="media_detail_description_explanation">Η περιγραφή του πολυμέσου μπαίνει εδώ. Αυτή μπορεί να είναι σχετικά μεγάλη, και θα χρειαστεί να αναδιπλωθεί σε πολλές γραμμές. Ελπίζουμε ωστόσο ότι θα φαίνεται όμορφα.</string>
+  <string name="become_a_tester_title">Γίνετε Δοκιμαστής Beta</string>
+  <string name="become_a_tester_description">Συμμετέχετε στο κανάλι beta μας στο Google Play και αποκτήστε πρώιμη πρόσβαση σε νέες λειτουργίες και διορθώσεις σφαλμάτων</string>
 </resources>
