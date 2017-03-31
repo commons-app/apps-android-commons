@@ -49,7 +49,7 @@ public class MwVolleyApi {
         return categoryList;
     }
 
-    public static void setGpsCat(List cachedList) {
+    public static void setGpsCat(List<String> cachedList) {
         categoryList = new ArrayList<>();
         categoryList.addAll(cachedList);
         Log.d(TAG, "Setting GPS cats from cache: " + categoryList.toString());

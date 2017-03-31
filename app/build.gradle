@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply from: 'quality.gradle'
 
 dependencies {
-    compile ('com.github.nicolas-raoul:Quadtree:211b6fe59ac48f') {
+    compile ('com.github.nicolas-raoul:Quadtree:349eb842356bae') {
         exclude module: 'junit'
     }
     compile 'fr.avianey.com.viewpagerindicator:library:2.4.1.1@aar'

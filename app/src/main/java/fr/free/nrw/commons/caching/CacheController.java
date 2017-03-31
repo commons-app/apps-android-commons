@@ -14,15 +14,15 @@ import fr.free.nrw.commons.upload.MwVolleyApi;
 public class CacheController {
 
     private double x, y;
-    private QuadTree quadTree;
-    private Point[] pointsFound;
+    private QuadTree<List<String>> quadTree;
+    private Point<List<String>>[] pointsFound;
     private double xMinus, xPlus, yMinus, yPlus;
 
     private static final String TAG = CacheController.class.getName();
     private static final int EARTH_RADIUS = 6378137;
 
     public CacheController() {
-        quadTree = new QuadTree(-180, -90, +180, +90);
+        quadTree = new QuadTree<>(-180, -90, +180, +90);
     }
 
     public void setQtPoint(double decLongitude, double decLatitude) {
@@ -43,7 +43,7 @@ public class CacheController {
         quadTree.set(x, y, pointCatList);
     }
 
-    public List findCategory() {
+    public List<String> findCategory() {
         //Convert decLatitude and decLongitude to a coordinate offset range
         convertCoordRange();
         pointsFound = quadTree.searchWithin(xMinus, yMinus, xPlus, yPlus);
@@ -53,9 +53,9 @@ public class CacheController {
         if (pointsFound.length != 0) {
             Log.d(TAG, "Entering for loop");
 
-            for (Point point : pointsFound) {
+            for (Point<List<String>> point : pointsFound) {
                 Log.d(TAG, "Nearby point: " + point.toString());
-                displayCatList = (List<String>)point.getValue();
+                displayCatList = point.getValue();
                 Log.d(TAG, "Nearby cat: " + point.getValue());
             }
 
