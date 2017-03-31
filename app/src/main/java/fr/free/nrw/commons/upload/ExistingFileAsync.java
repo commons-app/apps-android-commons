@@ -30,7 +30,6 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
     private Context context;
 
     public ExistingFileAsync(String fileSHA1, Context context) {
-        super();
         this.fileSHA1 = fileSHA1;
         this.context = context;
     }

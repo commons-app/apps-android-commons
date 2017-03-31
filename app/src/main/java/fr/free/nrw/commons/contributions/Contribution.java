@@ -226,7 +226,6 @@ public class Contribution extends Media {
     }
 
     public Contribution() {
-        super();
         timestamp = new Date(System.currentTimeMillis());
     }
 
