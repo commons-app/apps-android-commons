@@ -17,7 +17,7 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.EventLog;
 import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.Prefs;
+import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.Utils;
 
 public class Contribution extends Media {

@@ -38,6 +38,8 @@ import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import fr.free.nrw.commons.settings.Prefs;
+
 public class Utils {
 
     private static final String TAG = Utils.class.getName();
