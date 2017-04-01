@@ -204,7 +204,7 @@ public  class       ShareActivity
                 this.getSupportFragmentManager()
                         .beginTransaction()
                         .add(R.id.single_upload_fragment_container, shareView, "shareView")
-                        .commit();
+                        .commitAllowingStateLoss();
         }
         uploadController.prepareService();
     }
