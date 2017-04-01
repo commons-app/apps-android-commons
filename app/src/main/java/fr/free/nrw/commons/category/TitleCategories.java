@@ -23,7 +23,6 @@ public class TitleCategories extends AsyncTask<Void, Void, ArrayList<String>> {
     private String title;
 
     public TitleCategories(String title) {
-        super();
         this.title = title;
     }
 
