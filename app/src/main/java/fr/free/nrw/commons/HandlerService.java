@@ -59,9 +59,9 @@ public abstract class HandlerService<T> extends Service {
         threadHandler = new ServiceHandler(threadLooper);
     }
 
-    private void postMessage(int type, Object obj) {
+    private void postMessage(int type, T t) {
         Message msg = threadHandler.obtainMessage(type);
-        msg.obj = obj;
+        msg.obj = t;
         threadHandler.sendMessage(msg);
     }
 

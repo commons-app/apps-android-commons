@@ -408,7 +408,7 @@ public  class       ShareActivity
 
             MwVolleyApi apiCall = new MwVolleyApi(this);
 
-            List displayCatList = app.cacheData.findCategory();
+            List<String> displayCatList = app.cacheData.findCategory();
             boolean catListEmpty = displayCatList.isEmpty();
 
             // If no categories found in cache, call MediaWiki API to match image coords with nearby Commons categories

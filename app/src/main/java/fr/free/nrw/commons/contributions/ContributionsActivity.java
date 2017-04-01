@@ -22,6 +22,7 @@ import android.widget.Adapter;
 import android.widget.AdapterView;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
@@ -34,7 +35,7 @@ import fr.free.nrw.commons.upload.UploadService;
 
 public  class       ContributionsActivity
         extends     AuthenticatedActivity
-        implements  LoaderManager.LoaderCallbacks<Object>,
+        implements  LoaderManager.LoaderCallbacks<Cursor>,
                     AdapterView.OnItemClickListener,
                     MediaDetailPagerFragment.MediaDetailProvider,
                     FragmentManager.OnBackStackChangedListener,
@@ -204,14 +205,12 @@ public  class       ContributionsActivity
     }
 
     @Override
-    public Loader onCreateLoader(int i, Bundle bundle) {
+    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         return new CursorLoader(this, ContributionsContentProvider.BASE_URI, Contribution.Table.ALL_FIELDS, CONTRIBUTION_SELECTION, null, CONTRIBUTION_SORT);
     }
 
     @Override
-    public void onLoadFinished(Loader cursorLoader, Object result) {
-
-        Cursor cursor = (Cursor) result;
+    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
         if(contributionsList.getAdapter() == null) {
             contributionsList.setAdapter(new ContributionsListAdapter(this, cursor, 0));
         } else {
@@ -225,7 +224,7 @@ public  class       ContributionsActivity
     }
 
     @Override
-    public void onLoaderReset(Loader cursorLoader) {
+    public void onLoaderReset(Loader<Cursor> cursorLoader) {
         ((CursorAdapter) contributionsList.getAdapter()).swapCursor(null);
     }
 
