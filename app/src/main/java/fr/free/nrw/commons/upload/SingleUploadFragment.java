@@ -101,7 +101,7 @@ public class SingleUploadFragment extends Fragment {
         licenseItems.add(getString(R.string.license_name_cc_by_sa_four));
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        license = prefs.getString(Prefs.DEFAULT_LICENSE, null);
+        license = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
 
         Log.d("Single Upload fragment", license);
 
