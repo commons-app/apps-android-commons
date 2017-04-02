@@ -23,6 +23,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnItemClick;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.utils.ResourceUtils;
 
@@ -164,29 +165,26 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
 
             listview.setAdapter(mAdapter);
 
-            listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                    Place place = places.get(position);
-                    LatLng placeLatLng = place.location;
-
-                    double latitude = placeLatLng.latitude;
-                    double longitude = placeLatLng.longitude;
-
-                    Log.d(TAG, "Item at position " + position + " has coords: Lat: " + latitude + " Long: " + longitude);
-
-                    //Open map app at given position
-                    Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + latitude + "," + longitude);
-                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-
-                    if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-                        startActivity(mapIntent);
-                    }
-                }
-            });
             listener.onTaskFinished(result);
             mAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @OnItemClick(R.id.listview) void onItemClicked(int position) {
+        Place place = places.get(position);
+        LatLng placeLatLng = place.location;
+
+        double latitude = placeLatLng.latitude;
+        double longitude = placeLatLng.longitude;
+
+        Log.d(TAG, "Item at position " + position + " has coords: Lat: " + latitude + " Long: " + longitude);
+
+        //Open map app at given position
+        Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + latitude + "," + longitude);
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+
+        if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivity(mapIntent);
         }
     }
 
