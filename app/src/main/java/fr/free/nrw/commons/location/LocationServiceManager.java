@@ -23,7 +23,7 @@ public class LocationServiceManager implements LocationListener {
         return latestLocation;
     }
 
-    /** Registers a LocationManager to listen for current location
+    /** Registers a LocationManager to listen for current location.
      */
     public void registerLocationManager() {
         try {
@@ -42,7 +42,7 @@ public class LocationServiceManager implements LocationListener {
         }
     }
 
-    /** Unregisters location manager
+    /** Unregisters location manager.
      */
     public void unregisterLocationManager() {
         try {

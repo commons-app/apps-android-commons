@@ -5,10 +5,10 @@ import fr.free.nrw.commons.location.LatLng;
 import java.text.NumberFormat;
 
 public class LengthUtils {
-    /** Returns a formatted distance string between two points
-     * @param point1
-     * @param point2
-     * @return
+    /** Returns a formatted distance string between two points.
+     * @param point1 LatLng type point1
+     * @param point2 LatLng type point2
+     * @return string distance
      */
     public static String formatDistanceBetween(LatLng point1, LatLng point2) {
         if (point1 == null || point2 == null) {

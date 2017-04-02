@@ -7,9 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
-import java.util.List;
-
 import fr.free.nrw.commons.R;
+
+import java.util.List;
 
 public class NearbyAdapter extends ArrayAdapter<Place> {
     private List<Place> placesList;
@@ -19,9 +19,9 @@ public class NearbyAdapter extends ArrayAdapter<Place> {
         return placesList;
     }
 
-    /** Accepts activity context and list of places
-     * @param context
-     * @param places
+    /** Accepts activity context and list of places.
+     * @param context activity context
+     * @param places list of places
      */
     public NearbyAdapter(Context context, List<Place> places) {
         super(context, R.layout.item_place, places);
