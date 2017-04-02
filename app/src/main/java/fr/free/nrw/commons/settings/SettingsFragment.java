@@ -19,11 +19,11 @@ public class SettingsFragment extends PreferenceFragment {
 
         // Update spinner to show selected value as summary
         ListPreference licensePreference = (ListPreference) findPreference(Prefs.DEFAULT_LICENSE);
-        licensePreference.setSummary(Utils.licenseNameFor(licensePreference.getValue()));
+        licensePreference.setSummary(getString(Utils.licenseNameFor(licensePreference.getValue())));
         licensePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
-                preference.setSummary(Utils.licenseNameFor((String) newValue));
+                preference.setSummary(getString(Utils.licenseNameFor((String) newValue)));
                 return true;
             }
         });
