@@ -10,6 +10,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.free.nrw.commons.location.LatLng;
+
 public class NearbyPlaces {
 
     private static final String TAG = NearbyPlaces.class.getName();

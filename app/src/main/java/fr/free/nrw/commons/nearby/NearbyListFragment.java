@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.nearby;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -10,12 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -25,7 +20,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.utils.ResourceUtils;
+import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.location.LocationServiceManager;
 
 import static fr.free.nrw.commons.utils.LengthUtils.computeDistanceBetween;
 import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
@@ -69,7 +65,7 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
 
         //Check that this is the first time view is created, to avoid double list when screen orientation changed
         if(savedInstanceState == null) {
-            mLatestLocation = ((NearbyActivity) getActivity()).getmLatestLocation();
+            mLatestLocation = new LocationServiceManager(getActivity()).getLatestLocation();
             nearbyAsyncTask = new NearbyAsyncTask(this);
             nearbyAsyncTask.execute();
             progressBar.setVisibility(View.VISIBLE);

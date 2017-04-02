@@ -2,7 +2,7 @@ package fr.free.nrw.commons.utils;
 
 import java.text.NumberFormat;
 
-import fr.free.nrw.commons.nearby.LatLng;
+import fr.free.nrw.commons.location.LatLng;
 
 public class LengthUtils {
     public static String formatDistanceBetween(LatLng point1, LatLng point2) {
