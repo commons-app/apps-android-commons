@@ -12,12 +12,20 @@ import java.util.List;
 import fr.free.nrw.commons.R;
 
 public class NearbyAdapter extends ArrayAdapter<Place> {
-    public List<Place> placesList;
-    private Context mContext;
+    private List<Place> placesList;
+    private Context context;
 
+    public List<Place> getPlacesList() {
+        return placesList;
+    }
+
+    /** Accepts activity context and list of places
+     * @param context
+     * @param places
+     */
     public NearbyAdapter(Context context, List<Place> places) {
         super(context, R.layout.item_place, places);
-        this.mContext = context;
+        this.context = context;
         placesList = places;
     }
 
@@ -29,11 +37,12 @@ public class NearbyAdapter extends ArrayAdapter<Place> {
 
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_place, parent, false);
+            convertView = LayoutInflater.from(getContext())
+                    .inflate(R.layout.item_place, parent, false);
         }
 
         NearbyViewHolder viewHolder = new NearbyViewHolder(convertView);
-        viewHolder.bindModel(mContext, place);
+        viewHolder.bindModel(context, place);
         // Return the completed view to render on screen
         return convertView;
     }

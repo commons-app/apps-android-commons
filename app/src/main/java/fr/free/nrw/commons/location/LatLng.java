@@ -5,6 +5,11 @@ public class LatLng {
     public final double latitude;
     public final double longitude;
 
+    /**
+     * Accepts latitude and longitude
+     * @param latitude
+     * @param longitude
+     */
     public LatLng(double latitude, double longitude) {
         if(-180.0D <= longitude && longitude < 180.0D) {
             this.longitude = longitude;

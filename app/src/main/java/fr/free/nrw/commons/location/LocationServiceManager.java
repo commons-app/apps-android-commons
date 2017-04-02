@@ -12,7 +12,7 @@ public class LocationServiceManager implements LocationListener {
     public static final String TAG = "LocationServiceManager";
     private String provider;
     private LocationManager locationManager;
-    private LatLng mLatestLocation;
+    private LatLng latestLocation;
 
     public LocationServiceManager(Context context) {
         this.locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
@@ -20,17 +20,17 @@ public class LocationServiceManager implements LocationListener {
     }
 
     public LatLng getLatestLocation() {
-        return mLatestLocation;
+        return latestLocation;
     }
 
-    /**
-     * Registers a LocationManager to listen for current location
+    /** Registers a LocationManager to listen for current location
      */
     public void registerLocationManager() {
         try {
             locationManager.requestLocationUpdates(provider, 400, 1, this);
             Location location = locationManager.getLastKnownLocation(provider);
-            //Location works, just need to 'send' GPS coords via emulator extended controls if testing on emulator
+            //Location works, just need to 'send' GPS coords
+            // via emulator extended controls if testing on emulator
             Log.d(TAG, "Checking for location...");
             if (location != null) {
                 this.onLocationChanged(location);
@@ -42,6 +42,8 @@ public class LocationServiceManager implements LocationListener {
         }
     }
 
+    /** Unregisters location manager
+     */
     public void unregisterLocationManager() {
         try {
             locationManager.removeUpdates(this);
@@ -54,9 +56,10 @@ public class LocationServiceManager implements LocationListener {
     public void onLocationChanged(Location location) {
         double currentLatitude = location.getLatitude();
         double currentLongitude = location.getLongitude();
-        Log.d(TAG, "Latitude: " + String.valueOf(currentLatitude) + " Longitude: " + String.valueOf(currentLongitude));
+        Log.d(TAG, "Latitude: " + String.valueOf(currentLatitude)
+                + " Longitude: " + String.valueOf(currentLongitude));
 
-        mLatestLocation = new LatLng(currentLatitude, currentLongitude);
+        latestLocation = new LatLng(currentLatitude, currentLongitude);
     }
 
     @Override

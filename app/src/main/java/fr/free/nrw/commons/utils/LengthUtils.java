@@ -1,10 +1,15 @@
 package fr.free.nrw.commons.utils;
 
-import java.text.NumberFormat;
-
 import fr.free.nrw.commons.location.LatLng;
 
+import java.text.NumberFormat;
+
 public class LengthUtils {
+    /** Returns a formatted distance string between two points
+     * @param point1
+     * @param point2
+     * @return
+     */
     public static String formatDistanceBetween(LatLng point1, LatLng point2) {
         if (point1 == null || point2 == null) {
             return null;
@@ -27,7 +32,10 @@ public class LengthUtils {
     }
 
     private static double computeAngleBetween(LatLng from, LatLng to) {
-        return distanceRadians(Math.toRadians(from.latitude), Math.toRadians(from.longitude), Math.toRadians(to.latitude), Math.toRadians(to.longitude));
+        return distanceRadians(Math.toRadians(from.latitude),
+                Math.toRadians(from.longitude),
+                Math.toRadians(to.latitude),
+                Math.toRadians(to.longitude));
     }
 
     private static double distanceRadians(double lat1, double lng1, double lat2, double lng2) {
@@ -38,8 +46,8 @@ public class LengthUtils {
         return 2.0D * Math.asin(Math.sqrt(x));
     }
 
-    private static double havDistance(double lat1, double lat2, double dLng) {
-        return hav(lat1 - lat2) + hav(dLng) * Math.cos(lat1) * Math.cos(lat2);
+    private static double havDistance(double lat1, double lat2, double longitude) {
+        return hav(lat1 - lat2) + hav(longitude) * Math.cos(lat1) * Math.cos(lat2);
     }
 
     private static double hav(double x) {

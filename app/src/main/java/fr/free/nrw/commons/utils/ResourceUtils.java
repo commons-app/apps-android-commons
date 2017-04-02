@@ -8,15 +8,16 @@ public class ResourceUtils {
 
     /**
      * See https://github.com/commons-app/apps-android-commons/issues/250
-     * Most common types of desc: building, house, cottage, farmhouse, village, civil parish, church, railway station,
+     * Most common types of desc: building, house, cottage, farmhouse,
+     * village, civil parish, church, railway station,
      * gatehouse, milestone, inn, secondary school, hotel
      * @param description Place description
-     * @return
+     * @return icon res id
      */
     @DrawableRes
     public static int getDescriptionIcon(String description) {
         int resourceId;
-        switch(description) {
+        switch (description) {
             case "building":
                 resourceId = R.drawable.round_icon_generic_building;
                 break;

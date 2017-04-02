@@ -12,10 +12,6 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;
@@ -25,6 +21,10 @@ import fr.free.nrw.commons.location.LocationServiceManager;
 
 import static fr.free.nrw.commons.utils.LengthUtils.computeDistanceBetween;
 import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
+
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class NearbyListFragment extends ListFragment implements TaskListener {
 
@@ -166,14 +166,18 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
         }
     }
 
-    @OnItemClick(R.id.listview) void onItemClicked(int position) {
+    @OnItemClick(R.id.listview)
+    void onItemClicked(int position) {
         Place place = places.get(position);
         LatLng placeLatLng = place.location;
 
         double latitude = placeLatLng.latitude;
         double longitude = placeLatLng.longitude;
 
-        Log.d(TAG, "Item at position " + position + " has coords: Lat: " + latitude + " Long: " + longitude);
+        Log.d(TAG, "Item at position "
+                + position + " has coords: Lat: "
+                + latitude + " Long: "
+                + longitude);
 
         //Open map app at given position
         Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + latitude + "," + longitude);
