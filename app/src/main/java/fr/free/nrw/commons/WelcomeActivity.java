@@ -2,14 +2,11 @@ package fr.free.nrw.commons;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
-import android.view.View;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 import com.viewpagerindicator.CirclePageIndicator;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import fr.free.nrw.commons.theme.BaseActivity;
 
 public class WelcomeActivity extends BaseActivity {
@@ -21,11 +18,10 @@ public class WelcomeActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View view = LayoutInflater.from(this).inflate(R.layout.activity_welcome, null);
-        setContentView(view);
+        setContentView(R.layout.activity_welcome);
 
         getSupportActionBar().hide();
-        ButterKnife.bind(this, view);
+        ButterKnife.bind(this);
 
         setUpAdapter();
     }

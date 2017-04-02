@@ -66,7 +66,7 @@ public class WelcomePagerAdapter extends PagerAdapter {
 
         @OnClick(R.id.welcomeYesButton)
         void onClicked() {
-            ((Activity)context).finish();
+            ((Activity) context).finish();
         }
     }
 }
