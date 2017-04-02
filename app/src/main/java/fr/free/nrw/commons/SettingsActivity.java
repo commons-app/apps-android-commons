@@ -30,7 +30,6 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
             setTheme(R.style.LightAppTheme); // default
         }
         super.onCreate(savedInstanceState);
-        super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
         ListPreference licensePreference = (ListPreference) findPreference(Prefs.DEFAULT_LICENSE);
         // WARNING: ORDERING NEEDS TO MATCH FOR THE LICENSE NAMES AND DISPLAY VALUES
