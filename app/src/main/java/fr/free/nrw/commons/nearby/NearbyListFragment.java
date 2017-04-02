@@ -17,20 +17,26 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import java.text.NumberFormat;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.utils.ResourceUtils;
+
+import static fr.free.nrw.commons.utils.LengthUtils.computeDistanceBetween;
+import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
 public class NearbyListFragment extends ListFragment implements TaskListener {
 
     private NearbyAsyncTask nearbyAsyncTask;
     private NearbyAdapter mAdapter;
-    private ListView listview;
 
-    private ProgressBar progressBar;
+    @BindView(R.id.listview) ListView listview;
+    @BindView(R.id.progressBar) ProgressBar progressBar;
+
     private boolean isTaskRunning = false;
 
     private List<Place> places;
@@ -53,7 +59,7 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
 
         Log.d(TAG, "NearbyListFragment created");
         View view = inflater.inflate(R.layout.fragment_nearby, container, false);
-        progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
+        ButterKnife.bind(this, view);
         return view;
     }
 
@@ -63,7 +69,6 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
         //Check that this is the first time view is created, to avoid double list when screen orientation changed
         if(savedInstanceState == null) {
             mLatestLocation = ((NearbyActivity) getActivity()).getmLatestLocation();
-            listview = (ListView) getView().findViewById(R.id.listview);
             nearbyAsyncTask = new NearbyAsyncTask(this);
             nearbyAsyncTask.execute();
             progressBar.setVisibility(View.VISIBLE);
@@ -220,76 +225,7 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
             tvDesc.setText(place.description);
             distance.setText(place.distance);
 
-            // See https://github.com/commons-app/apps-android-commons/issues/250
-            // Most common types of desc: building, house, cottage, farmhouse, village, civil parish, church, railway station,
-            // gatehouse, milestone, inn, secondary school, hotel
-            switch(place.description) {
-                case "building":
-                    icon.setImageResource(R.drawable.round_icon_generic_building);
-                    break;
-                case "house":
-                    icon.setImageResource(R.drawable.round_icon_house);
-                    break;
-                case "cottage":
-                    icon.setImageResource(R.drawable.round_icon_house);
-                    break;
-                case "farmhouse":
-                    icon.setImageResource(R.drawable.round_icon_house);
-                    break;
-                case "church":
-                    icon.setImageResource(R.drawable.round_icon_church);
-                    break;
-                case "railway station":
-                    icon.setImageResource(R.drawable.round_icon_railway_station);
-                    break;
-                case "gatehouse":
-                    icon.setImageResource(R.drawable.round_icon_gatehouse);
-                    break;
-                case "milestone":
-                    icon.setImageResource(R.drawable.round_icon_milestone);
-                    break;
-                case "inn":
-                    icon.setImageResource(R.drawable.round_icon_house);
-                    break;
-                case "city":
-                    icon.setImageResource(R.drawable.round_icon_city);
-                    break;
-                case "secondary school":
-                    icon.setImageResource(R.drawable.round_icon_school);
-                    break;
-                case "edu":
-                    icon.setImageResource(R.drawable.round_icon_school);
-                    break;
-                case "isle":
-                    icon.setImageResource(R.drawable.round_icon_island);
-                    break;
-                case "mountain":
-                    icon.setImageResource(R.drawable.round_icon_mountain);
-                    break;
-                case "airport":
-                    icon.setImageResource(R.drawable.round_icon_airport);
-                    break;
-                case "bridge":
-                    icon.setImageResource(R.drawable.round_icon_bridge);
-                    break;
-                case "road":
-                    icon.setImageResource(R.drawable.round_icon_road);
-                    break;
-                case "forest":
-                    icon.setImageResource(R.drawable.round_icon_forest);
-                    break;
-                case "park":
-                    icon.setImageResource(R.drawable.round_icon_park);
-                    break;
-                case "river":
-                    icon.setImageResource(R.drawable.round_icon_river);
-                    break;
-                case "waterfall":
-                    icon.setImageResource(R.drawable.round_icon_waterfall);
-                    break;
-                default:
-                    icon.setImageResource(R.drawable.round_icon_unknown);
-            }
+            icon.setImageResource(ResourceUtils.getDescriptionIcon(place.description));
 
             // Return the completed view to render on screen
             return convertView;
@@ -329,47 +265,4 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
         }
         return places;
     }
-
-    private String formatDistanceBetween(LatLng point1, LatLng point2) {
-        if (point1 == null || point2 == null) {
-            return null;
-        }
-
-        NumberFormat numberFormat = NumberFormat.getNumberInstance();
-        double distance = Math.round(computeDistanceBetween(point1, point2));
-
-        // Adjust to KM if M goes over 1000 (see javadoc of method for note
-        // on only supporting metric)
-        if (distance >= 1000) {
-            numberFormat.setMaximumFractionDigits(1);
-            return numberFormat.format(distance / 1000) + "km";
-        }
-        return numberFormat.format(distance) + "m";
-    }
-
-    private static double computeDistanceBetween(LatLng from, LatLng to) {
-        return computeAngleBetween(from, to) * 6371009.0D;
-    }
-
-    private static double computeAngleBetween(LatLng from, LatLng to) {
-        return distanceRadians(Math.toRadians(from.latitude), Math.toRadians(from.longitude), Math.toRadians(to.latitude), Math.toRadians(to.longitude));
-    }
-
-    private static double distanceRadians(double lat1, double lng1, double lat2, double lng2) {
-        return arcHav(havDistance(lat1, lat2, lng1 - lng2));
-    }
-
-    private static double arcHav(double x) {
-        return 2.0D * Math.asin(Math.sqrt(x));
-    }
-
-    private static double havDistance(double lat1, double lat2, double dLng) {
-        return hav(lat1 - lat2) + hav(dLng) * Math.cos(lat1) * Math.cos(lat2);
-    }
-
-    private static double hav(double x) {
-        double sinHalf = Math.sin(x * 0.5D);
-        return sinHalf * sinHalf;
-    }
-
 }
