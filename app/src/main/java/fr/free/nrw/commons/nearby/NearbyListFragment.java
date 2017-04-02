@@ -190,53 +190,6 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
         }
     }
 
-    private class NearbyAdapter extends ArrayAdapter<Place> {
-
-        public List<Place> placesList;
-        private Context mContext;
-
-        public NearbyAdapter(Context context, List<Place> places) {
-            super(context, R.layout.item_place, places);
-            mContext = context;
-            placesList = places;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            // Get the data item for this position
-            Place place = getItem(position);
-            Log.d(TAG, "Place " + place.name);
-
-            // Check if an existing view is being reused, otherwise inflate the view
-            if (convertView == null) {
-                convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_place, parent, false);
-            }
-
-            // Lookup view for data population
-            TextView tvName = (TextView) convertView.findViewById(R.id.tvName);
-            TextView tvDesc = (TextView) convertView.findViewById(R.id.tvDesc);
-            TextView distance = (TextView) convertView.findViewById(R.id.distance);
-            ImageView icon = (ImageView) convertView.findViewById(R.id.icon);
-
-            String quotelessName = place.name.replaceAll("^\"|\"$", "");
-
-            // Populate the data into the template view using the data object
-            tvName.setText(quotelessName);
-            tvDesc.setText(place.description);
-            distance.setText(place.distance);
-
-            icon.setImageResource(ResourceUtils.getDescriptionIcon(place.description));
-
-            // Return the completed view to render on screen
-            return convertView;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-    }
-
     private List<Place> loadAttractionsFromLocation(final LatLng curLatLng) {
 
         List<Place> places = NearbyPlaces.get();
