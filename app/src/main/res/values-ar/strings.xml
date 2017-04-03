@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name" fuzzy="true">ويكيميديا كومنز</string>
+  <string name="app_name">كومنز</string>
   <string name="menu_settings">الإعدادات</string>
   <string name="username">اسم المستخدم</string>
   <string name="password">كلمة السر</string>
@@ -27,6 +27,7 @@
   <string name="contribution_state_starting">يجري الرفع</string>
   <string name="menu_from_gallery">من المعرض</string>
   <string name="menu_from_camera">التقط صورة</string>
+  <string name="menu_nearby">بالقرب من هنا</string>
   <string name="provider_contributions">مرفوعاتي</string>
   <string name="menu_share">انشرها</string>
   <string name="menu_open_in_browser">افتح في المتصفح</string>
@@ -35,7 +36,7 @@
   <string name="login_failed_network">لا يمكن تسجيل الدخول - فشل في شبكة الاتصال</string>
   <string name="login_failed_username">لا يمكن تسجيل الدخول - فضلا تحقق من اسم المستخدم</string>
   <string name="login_failed_password">لا يمكن تسجيل الدخول - فضلا تحقق من كلمة السر</string>
-  <string name="login_failed_throttled" fuzzy="true">الكثير من المحاولات غير الناجحة. الرجاء المحاولة مرة أخرى في بضع دقائق</string>
+  <string name="login_failed_throttled">الكثير من المحاولات غير الناجحة. الرجاء المحاولة مرة أخرى في بضع دقائق.</string>
   <string name="login_failed_blocked">عذراً، لقد تم منع هذا المستخدم على كومنز</string>
   <string name="login_failed_generic">فشل تسجيل الدخول</string>
   <string name="share_upload_button">ارفع</string>
@@ -44,6 +45,7 @@
   <string name="menu_upload_single">ارفع</string>
   <string name="categories_search_text_hint">تصنيفات البحث</string>
   <string name="menu_save_categories">احفظ</string>
+  <string name="refresh_button">أنعش</string>
   <string name="categories_not_found">لا توجد تصنيفات تطابق %1$s</string>
   <string name="categories_skip_explanation">أضف التصانيف لتسهل اكتشاف صورك على ويكيميديا كومنز.
 
@@ -53,10 +55,12 @@
   <string name="preference_tracking">تقارير الاستخدام</string>
   <string name="preference_tracking_summary">إرسال تقارير الاستخدام إلى ويكيميديا لمساعدتنا على تحسين التطبيق</string>
   <string name="title_activity_settings">الإعدادات</string>
+  <string name="title_activity_signup">سجّل</string>
   <string name="menu_about">حول</string>
   <string name="about_license" fuzzy="true">برنامج مفتوح المصدر منشور &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;برخصة أباتشي النسخة 2&lt;/a&gt;</string>
   <string name="about_improve" fuzzy="true">المصدر على &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;غِتهب&lt;/a&gt;. العلل في &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;بغزِلا&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;سياسة الخصوصية&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;CREDITS&lt;/a&gt;</string>
   <string name="title_activity_about">حول</string>
   <string name="menu_feedback">إرسال ملاحظات (عبر البريد الإلكتروني)</string>
   <string name="provider_categories">التصانيف المستخدمة مؤخرا</string>
@@ -67,6 +71,8 @@
   <string name="share_license_summary">ستُرخص الصورة برخصة %1$s.</string>
   <string name="menu_download">نزّل</string>
   <string name="preference_license">الرخصة</string>
+  <string name="preference_theme">الوضع الليلي</string>
+  <string name="license_name_attribution">النسبة</string>
   <string name="welcome_wikipedia_text">ساهم بصورك. أنعش مقالات ويكيبيديا!</string>
   <string name="welcome_wikipedia_subtext">تأتي صور ويكيبيديا من ويكيميديا كومنز.</string>
   <string name="welcome_copyright_text">صورك تساعد الناس في شتى أنحاء العالم على التعلم.</string>
@@ -76,9 +82,13 @@
   <string name="detail_panel_cats_label">تصنيفات</string>
   <string name="detail_panel_cats_loading">جارٍ التحميل...</string>
   <string name="detail_panel_cats_none">لا شيء محدد</string>
+  <string name="detail_description_empty">لا وصف</string>
   <string name="detail_license_empty">ترخيص غير معلوم</string>
   <string name="menu_refresh">تحديث</string>
+  <string name="ok">موافق</string>
+  <string name="warning">تحذير</string>
   <string name="yes">نعم</string>
   <string name="no">لا</string>
+  <string name="media_detail_title">العنوان</string>
   <string name="media_detail_description">الوصف</string>
 </resources>

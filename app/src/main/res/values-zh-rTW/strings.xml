@@ -74,7 +74,7 @@
   <string name="title_activity_settings">設定</string>
   <string name="title_activity_signup">註冊</string>
   <string name="menu_about">關於</string>
-  <string name="about_license">以&lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache許可證 v2&lt;/a&gt;釋放的開放源碼軟體。維基媒體共享資源和其標誌圖像是維基媒體基金會的標記；並在維基媒體基金會的許可下使用。我們並非由維基媒體基金會所認可、也不隸屬於維基媒體基金會。</string>
+  <string name="about_license">以&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache許可證 v2&lt;/a&gt;釋放的開放源碼軟體。Wikimedia Commons和其標誌圖像是維基媒體基金會的標記；並在維基媒體基金會的許可下使用。我們並非由維基媒體基金會所認可、也不隸屬於維基媒體基金會。</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;原始碼&lt;/a&gt;和&lt;a href=\"https://commons-app.github.io/\"&gt;網站&lt;/a&gt;位於GitHub上。建立一個新的&lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub問題&lt;/a&gt;來回報問題和提出建議。</string>
   <string name="about_privacy_policy">&lt;a href=\"http://wikimediafoundation.org/wiki/Privacy_policy\"&gt;私隱政策&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;製作群&lt;/a&gt;</string>

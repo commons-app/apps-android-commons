@@ -88,6 +88,7 @@ License and legal notice.</string>
 Source and Bugs</string>
   <string name="about_privacy_policy">HTML fragment linking to Wikimedia\'s privacy policy. Note: avoid percent-encoding in the URL, as this causes problems with Android\'s resource compiler. Use accented/non-ASCII characters \"as is\" if possible. (We can fix it manually, so don\'t worry too much about it.)
 {{Identical|Privacy policy}}</string>
+  <string name="about_credits">{{Identical|Credit}}</string>
   <string name="title_activity_about">{{Identical|About}}</string>
   <string name="menu_feedback">Menu item text that prompts user to send feedback to WMF via email</string>
   <string name="waiting_first_sync">Message shown on contributions list during first sync.</string>

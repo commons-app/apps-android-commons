@@ -74,7 +74,7 @@ Ch\'a sgnaca an s\'ën mëssage (o ch\'a sgnaca ël boton andaré) për sauté \
   <string name="title_activity_settings">Paràmeter</string>
   <string name="title_activity_signup">Marchesse</string>
   <string name="menu_about">A propòsit</string>
-  <string name="about_license">Ij programa Open Source a son publicà sota la &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;licensa Apache v2&lt;/a&gt;. Wikimedia Commons e sò sìmbol a son dle marche argistrà dla Fondassion Wikimedia e a son dovrà con ël përmess ëd la Fondassion Wikimedia. Nojàutri i soma nen aprovà da o afilià a la Fondassion Wikimedia.</string>
+  <string name="about_license">Ij programa Open Source a son publicà sota la &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;licensa Apache v2&lt;/a&gt;. Wikimedia Commons e sò sìmbol a son dle marche argistrà dla Fondassion Wikimedia e a son dovrà con ël përmess ëd la Fondassion Wikimedia. Nojàutri i soma nen aprovà da o afilià a la Fondassion Wikimedia.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sorgiss&lt;/a&gt; e &lt;a href=\"https://commons-app.github.io/\"&gt;sit an sl\'aragnà&lt;/a&gt; su GitHub. Creé na neuva &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;signalassion GitHub&lt;/a&gt; për signalé dij givo e dij sugeriment.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Régole ëd confidensialità&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;RINGRASSIAMENT&lt;/a&gt;</string>
@@ -126,4 +126,27 @@ Ch\'a sgnaca an s\'ën mëssage (o ch\'a sgnaca ël boton andaré) për sauté \
   <string name="license_name_pd_art">Domini pùblich (art)</string>
   <string name="license_name_pd_us">Domini pùblich (Stat Unì)</string>
   <string name="license_name_pd_usgov">Domini pùblich (goern ëd jë Stat Unì)</string>
+  <string name="license_name_pd_usgov_nasa">Domini pùblich (NASA)</string>
+  <string name="license_name_pd_ineligible">Domini pùblich (nen soget ai drit d\'autor)</string>
+  <string name="license_name_attribution">Atribussion</string>
+  <string name="license_name_gfdl">Licensa ëd documentassion lìbera GNU</string>
+  <string name="tutorial_1_text">Wikimedia Comun a òspita la pipart ëd le plance ch\'a son dovrà an Wikipedia.</string>
+  <string name="tutorial_1_subtext">Soe plance a giuto a eduché la gent daspërtut ant ël mond!</string>
+  <string name="tutorial_2_text">Për piasì, ch\'a caria dle fòto ch\'a son ëstàite scatà o creà tute da chiel:</string>
+  <string name="tutorial_2_subtext">- Oget naturaj (fior, animaj, montagne) 
+- Oget ùtij (biciclëtte, stassion feroviarie)
+- Përson-e arnomà (sò sìndich, j\'atleta olìmpich che chiel a l\'ha rancontrà)</string>
+  <string name="tutorial_3_text">Për piasì, ch\'a caria NEN:</string>
+  <string name="tutorial_3_subtext">- dj\'àuto-scat o dle fòto dij sò amis
+- dle fòto ch\'a l\'ha dëscarià d\'an sl\'Aragnà
+- Plance d\'aplicassion sota drit d\'autor</string>
+  <string name="tutorial_4_text">Esempi ëd cariament:</string>
+  <string name="tutorial_4_subtext">- Tìtol: Ël teatro dl\'òpera ëd Sidney
+- Descrission: Ël teatro dl\'òpera ëd Sidney s-ciairà dëdlà dl\'ansen
+- Categorìe: Teatro dl\'òpera ëd Sidney, Teatro dl\'òpera ëd Sidney da ponent, viste a distansa dël Teatro dl\'òpera ëd Sydney</string>
+  <string name="welcome_wikipedia_text">Ch\'a contribuissa con soe plance. Ch\'a giuta a j\'artìcoj ëd Wikipedia a pijé vita!</string>
+  <string name="welcome_wikipedia_subtext">Le plance su Wikipedia a ven-o da Wikimedia Commons.</string>
+  <string name="welcome_copyright_text">Soe plance a giuto a eduché la gent daspërtut ant ël mond.</string>
+  <string name="welcome_copyright_subtext">Ch\'a évita ij materiaj coatà da drit d\'autor ch\'a peul trové an sl\'Aragnà parèj coma le plance ëd tilèt, le cuvertin-e dij lìber e via fòrt.</string>
+  <string name="welcome_final_text">Second chiel, a va bin?</string>
 </resources>
