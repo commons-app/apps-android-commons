@@ -1,5 +1,8 @@
 package fr.free.nrw.commons.nearby;
 
+import static fr.free.nrw.commons.utils.LengthUtils.computeDistanceBetween;
+import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -22,9 +25,6 @@ import fr.free.nrw.commons.location.LocationServiceManager;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import static fr.free.nrw.commons.utils.LengthUtils.computeDistanceBetween;
-import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
 public class NearbyListFragment extends ListFragment implements TaskListener {
 
