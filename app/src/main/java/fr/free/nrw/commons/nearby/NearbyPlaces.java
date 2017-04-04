@@ -3,12 +3,15 @@ package fr.free.nrw.commons.nearby;
 import android.os.StrictMode;
 import android.util.Log;
 
+import fr.free.nrw.commons.location.LatLng;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class NearbyPlaces {
 
