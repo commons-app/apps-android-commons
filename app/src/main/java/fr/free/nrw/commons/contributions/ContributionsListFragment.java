@@ -29,7 +29,7 @@ import fr.free.nrw.commons.AboutActivity;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.SettingsActivity;
+import fr.free.nrw.commons.settings.SettingsActivity;
 import fr.free.nrw.commons.nearby.NearbyActivity;
 
 import static android.app.Activity.RESULT_OK;

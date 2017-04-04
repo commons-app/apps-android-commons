@@ -15,6 +15,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import fr.free.nrw.commons.settings.Prefs;
 import in.yuvi.http.fluent.Http;
 
 public class EventLog {
