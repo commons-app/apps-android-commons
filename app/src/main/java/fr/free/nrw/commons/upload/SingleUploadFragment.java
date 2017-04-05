@@ -152,7 +152,7 @@ public class SingleUploadFragment extends Fragment {
             selectedText.setBackgroundColor(Color.TRANSPARENT);
         }
 
-        String license = Prefs.Licenses.CC_BY_SA_3; // default value
+        String license;
         if(getString(R.string.license_name_cc0).equals(licenseName)) {
             license = Prefs.Licenses.CC0;
         } else if(getString(R.string.license_name_cc_by).equals(licenseName)) {
@@ -163,6 +163,8 @@ public class SingleUploadFragment extends Fragment {
             license = Prefs.Licenses.CC_BY_4;
         } else if(getString(R.string.license_name_cc_by_sa_four).equals(licenseName)) {
             license = Prefs.Licenses.CC_BY_SA_4;
+        } else {
+            throw new IllegalStateException("Unknown licenseName: " + licenseName);
         }
 
         setLicenseSummary(license);
