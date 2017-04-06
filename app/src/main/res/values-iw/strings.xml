@@ -74,7 +74,7 @@
   <string name="title_activity_settings">הגדרות</string>
   <string name="title_activity_signup">רישום</string>
   <string name="menu_about">אודות</string>
-  <string name="about_license" fuzzy="true">תכנת קוד פתוח המתפרסמת לפי תנאי &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. השם Wikimedia Commons והסמל שלו הם סימני מסחר של קרן ויקימדיה ומשמשים באישור קרן ויקימדיה. איננו נתמכים על־ידי קרן ויקימדיה או קשורים אליה בשותפות.</string>
+  <string name="about_license">תכנת קוד פתוח המתפרסמת לפי תנאי &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. השם Wikimedia Commons והסמל שלו הם סימני מסחר של קרן ויקימדיה ומשמשים באישור קרן ויקימדיה. איננו נתמכים על־ידי קרן ויקימדיה או קשורים אליה בשותפות.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;קוד מקור&lt;/a&gt; ו&lt;a href=\"https://commons-app.github.io/\"&gt;אתר&lt;/a&gt; בגיטהאב. נא ליצור &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;דיווח בגיטהאב&lt;/a&gt; בשביל באגים והצעות.</string>
   <string name="about_privacy_policy"/>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;יוצרים&lt;/a&gt;</string>

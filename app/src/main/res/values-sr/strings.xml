@@ -30,6 +30,7 @@
   <string name="contribution_state_starting">Отпремам</string>
   <string name="menu_from_gallery">Из галерије</string>
   <string name="menu_from_camera">Фотографиши</string>
+  <string name="menu_nearby">У близини</string>
   <string name="provider_contributions">Моја отпремања</string>
   <string name="menu_share">Дели</string>
   <string name="menu_open_in_browser">Отвори у прегледачу</string>
@@ -38,7 +39,7 @@
   <string name="login_failed_network">Не могу да вас пријавим – мрежа не ради</string>
   <string name="login_failed_username">Не могу да вас пријавим – проверите своје корисничко име</string>
   <string name="login_failed_password">Не могу да вас пријавим – проверите своју лозинку</string>
-  <string name="login_failed_throttled" fuzzy="true">Превише неуспешних покушаја. Пробајте поново за неколико минута</string>
+  <string name="login_failed_throttled">Превише неуспешних покушаја. Пробајте поново за неколико минута.</string>
   <string name="login_failed_blocked">Нажалост, корисник је блокиран на Остави</string>
   <string name="login_failed_generic">Пријава није успела</string>
   <string name="share_upload_button">Отпреми</string>
@@ -47,6 +48,20 @@
   <string name="menu_upload_single">Отпреми</string>
   <string name="categories_search_text_hint">Претражи категорије</string>
   <string name="menu_save_categories">Сачувај</string>
+  <string name="refresh_button">Освежи</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">Нема још отпремања</item>
+    <item quantity="one">једно отпремање</item>
+    <item quantity="other">%d отпремања</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Започни једно отпремање</item>
+    <item quantity="other">Започни %d отпремања</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">1 отпремање</item>
+    <item quantity="other">%d отпремања</item>
+  </plurals>
   <string name="categories_not_found">Нема категорија које одговарају %1$s</string>
   <string name="categories_skip_explanation">Додајте категорије на слике да бисте олакшали корисницима њихово проналажење на Остави.
 
@@ -56,12 +71,14 @@
   <string name="preference_tracking">Извештаји о употреби</string>
   <string name="preference_tracking_summary">Шаљите извештаје о употреби на Викимедију ради побољшања апликације</string>
   <string name="title_activity_settings">Поставке</string>
+  <string name="title_activity_signup">Отвори налог</string>
   <string name="menu_about">О апликацији</string>
-  <string name="about_license" fuzzy="true">Софтвер отвореног кода доступан под лиценцом &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache вер. 2&lt;/a&gt;</string>
+  <string name="about_license">Софтвер отвореног кода доступан под лиценцом &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache вер. 2&lt;/a&gt; Викимедијина Остава и њен лого су заштитни знаци Викимедијине Фондације и користе се са дозволом Викимедијине Фондацине. Ми не одобравамо или подржавмо Викимедијину Фондацију.</string>
   <string name="about_improve" fuzzy="true">Изворни кôд се налази на &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub-у&lt;/a&gt;. Програмске грешке су на сајту &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Политика приватности&lt;/a&gt;</string>
   <string name="title_activity_about">О апликацији</string>
   <string name="menu_feedback">Пошаљите повратне информације (путем е-поште)</string>
+  <string name="no_email_client">Није инсталиран имејл клијент</string>
   <string name="provider_categories">Недавно коришћене категорије</string>
   <string name="waiting_first_sync">Чекам на прву синхронизацију…</string>
   <string name="no_uploads_yet">Још нисте отпремили ниједну фотографију.</string>
@@ -70,8 +87,15 @@
   <string name="share_license_summary">Слика ће се водити под лиценцом %1$s</string>
   <string name="menu_download">Преузми</string>
   <string name="preference_license">Лиценца</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Ауторство-Делити под истим условимаu00A03.0</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0Ауторствоu00A03.0</string>
+  <string name="use_previous">Користи претходан наслов/опис</string>
+  <string name="allow_gps">Аутоматски прими тренутну локацију</string>
+  <string name="allow_gps_summary">Прими тренутну локацију да би предложили категорију ако слика није географски означена</string>
+  <string name="preference_theme">Ноћни режим</string>
+  <string name="preference_theme_summary">Користити тамну тему</string>
+  <string name="license_name_cc_by_sa_four">Ауторство-Делити под истим условима 4.0</string>
+  <string name="license_name_cc_by_four">Ауторство 4.0</string>
+  <string name="license_name_cc_by_sa">Ауторство-Делити под истим условимаu 3.0</string>
+  <string name="license_name_cc_by">Ауторство 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Аустрија)</string>
@@ -86,6 +110,7 @@
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Румунија)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
+  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Нула</string>
   <string name="license_name_own_pd">own-pd</string>
   <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
@@ -103,6 +128,17 @@
   <string name="license_name_pd_ineligible">Јавно власништво (не подлеже заштити)</string>
   <string name="license_name_attribution">Ауторство</string>
   <string name="license_name_gfdl">ГНУ-ова лиценца за слободну документацију</string>
+  <string name="tutorial_1_text">Викимедијина Остава садржи већину слика која се користи на Википедији.</string>
+  <string name="tutorial_1_subtext">Ваше слике помажу у образовању људи широм света.</string>
+  <string name="tutorial_2_text">Молимо Вас да поставите слике које сте преузели или креирали у потпуности сами:</string>
+  <string name="tutorial_2_subtext">- Природне објекте (цвеће, животиње, планине)
+- Корисне објекте (бицикле, железничке станице)
+- Познате људе (ваш градоначелник, Олимпијце које сте срели)</string>
+  <string name="tutorial_3_text">Молимо НЕ отпремајте:</string>
+  <string name="tutorial_3_subtext">- Селфије и слике твојих пријатеља
+- Слике које сте преузели са интернета
+- Скриншотове из сопствених апликација</string>
+  <string name="tutorial_4_text">Пример отпремања:</string>
   <string name="welcome_wikipedia_text">Делите своје слике. Оживите чланке на Википедији!</string>
   <string name="welcome_wikipedia_subtext">Слике на Википедији долазе из Оставе.</string>
   <string name="welcome_copyright_text">Са вашим сликама помажете у образовању људи широм света.</string>
@@ -115,5 +151,16 @@
   <string name="detail_description_empty">Нема описа</string>
   <string name="detail_license_empty">Непозната лиценца</string>
   <string name="menu_refresh">Освежи</string>
+  <string name="storage_permission_rationale">Потребна дозвола: Провера спољње меморије. Апликација без овога не може да функционише.</string>
+  <string name="location_permission_rationale">Опцијална дозволна: Преузми тренутну локацију за сугестију категорија</string>
   <string name="ok">У реду</string>
+  <string name="title_activity_nearby">Места у близини</string>
+  <string name="warning">Упозорење</string>
+  <string name="file_exists">Ова датотека је већ доступна на Остави. Да ли сте сигурни да желите да наставите?</string>
+  <string name="yes">Да</string>
+  <string name="no">Не</string>
+  <string name="media_detail_title">Наслов</string>
+  <string name="media_detail_media_title">Наслов медија</string>
+  <string name="media_detail_description">Опис</string>
+  <string name="become_a_tester_title">Постани Бета Тестер</string>
 </resources>

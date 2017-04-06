@@ -74,9 +74,10 @@ Kattints erre az üzenetre a lépés kihagyásához</string>
   <string name="title_activity_settings">Beállítások</string>
   <string name="title_activity_signup">Regisztráció</string>
   <string name="menu_about">Névjegy</string>
-  <string name="about_license" fuzzy="true">Nyílt forráskódú szoftver &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; alatt kiadva. A Wikimédia Commons és a logója a Wikimédia Alapítvány védjegyei, és a Wikimédia Alapítvány engedélyével vannak használva.</string>
+  <string name="about_license">Nyílt forráskódú szoftver &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; alatt kiadva. A Wikimédia Commons és a logója a Wikimédia Alapítvány védjegyei, és a Wikimédia Alapítvány engedélyével vannak használva. Az alkalmazás fejlesztői nincsenek semmilyen kapcsolatban Wikimédia Alapítvánnyal.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Forráskód&lt;/a&gt; és &lt;a href=\"https://commons-app.github.io/\"&gt;weboldal&lt;/a&gt; a GitHubon. Nyiss egy új &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-problémát&lt;/a&gt; hibabejelentéssel vagy fejlesztési javaslattal.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Adatvédelmi_irányelv\"&gt;Adatvédelmi irányelvek&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;KÖSZÖNETNYILVÁNÍTÁS&lt;/a&gt;</string>
   <string name="title_activity_about">Névjegy</string>
   <string name="menu_feedback">Visszajelzés küldése (e-mailben)</string>
   <string name="no_email_client">Nincs telepített levelezőprogram</string>
