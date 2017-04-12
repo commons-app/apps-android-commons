@@ -15,7 +15,7 @@
   <string name="upload_completed_notification_text">ללחוץ כאן כדי לצפות בהעלאה שלך</string>
   <string name="upload_progress_notification_title_start">התחלת העלאת %1$s</string>
   <string name="upload_progress_notification_title_in_progress">מתבצעת העלאת %1$s</string>
-  <string name="upload_progress_notification_title_finishing">העלאת $1$s מסתיימת</string>
+  <string name="upload_progress_notification_title_finishing">העלאת %1$s מסתיימת</string>
   <string name="upload_failed_notification_title">העלאת %1$s נכשלה</string>
   <string name="upload_failed_notification_subtitle">נא ללחוץ כדי להציג</string>
   <string name="uploads_pending_notification_indicator" fuzzy="true">נשארו %d</string>
