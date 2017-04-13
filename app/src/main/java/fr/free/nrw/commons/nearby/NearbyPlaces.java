@@ -32,18 +32,13 @@ public class NearbyPlaces {
 
                 BufferedReader in = new BufferedReader(new InputStreamReader(file.openStream()));
 
-                boolean firstLine = true;
+                // Skip CSV header.
+                in.readLine();
+
                 String line;
                 Log.d(TAG, "Reading from CSV file...");
 
                 while ((line = in.readLine()) != null) {
-
-                    // Skip CSV header.
-                    if (firstLine) {
-                        firstLine = false;
-                        continue;
-                    }
-
                     String[] fields = line.split(",");
                     String name = fields[0];
 
