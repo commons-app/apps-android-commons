@@ -3,8 +3,6 @@ package fr.free.nrw.commons.nearby;
 import android.graphics.Bitmap;
 import android.net.Uri;
 
-import fr.free.nrw.commons.location.LatLng;
-
 public class Place {
 
     public String name;
