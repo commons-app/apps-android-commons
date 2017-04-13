@@ -8,12 +8,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
-import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.codec.net.URLCodec;
-import org.w3c.dom.Node;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
+import fr.free.nrw.commons.settings.Prefs;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -28,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.xml.transform.Transformer;
@@ -38,7 +34,13 @@ import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import fr.free.nrw.commons.settings.Prefs;
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.codec.net.URLCodec;
+import org.w3c.dom.Node;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 
 public class Utils {
 
@@ -72,12 +74,28 @@ public class Utils {
         } catch (IOException e) {
             Log.e(TAG, "IO Exception", e);
             return "";
-        }  finally {
+        } finally {
             try {
                 is.close();
             } catch (IOException e) {
                 Log.e(TAG, "Exception on closing MD5 input stream", e);
             }
+        }
+    }
+
+    /**
+     * Strips localization symbols from a string.
+     * Removes the suffix after "@" and quotes.
+     *
+     * @param s string possibly containing localization symbols
+     * @return stripped string
+     */
+    public static String stripLocalizedString(String s) {
+        Matcher matcher = Pattern.compile("\\\"(.*)\\\"(@\\w+)?").matcher(s);
+        if (matcher.find()) {
+            return matcher.group(1);
+        } else {
+            return s;
         }
     }
 
@@ -128,8 +146,9 @@ public class Utils {
     }
 
     private static DisplayImageOptions.Builder defaultImageOptionsBuilder;
+
     public static DisplayImageOptions.Builder getGenericDisplayOptions() {
-        if(defaultImageOptionsBuilder == null) {
+        if (defaultImageOptionsBuilder == null) {
             defaultImageOptionsBuilder = new DisplayImageOptions.Builder().cacheInMemory()
                     .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
@@ -159,7 +178,7 @@ public class Utils {
     public static long countBytes(InputStream stream) throws IOException {
         long count = 0;
         BufferedInputStream bis = new BufferedInputStream(stream);
-        while(bis.read() != -1) {
+        while (bis.read() != -1) {
             count++;
         }
         return count;
@@ -168,11 +187,11 @@ public class Utils {
     public static String makeThumbUrl(String imageUrl, String filename, int width) {
         // Ugly Hack!
         // Update: OH DEAR GOD WHAT A HORRIBLE HACK I AM SO SORRY
-        if(imageUrl.endsWith("webm")) {
+        if (imageUrl.endsWith("webm")) {
             return imageUrl.replaceFirst("test/", "test/thumb/").replace("commons/", "commons/thumb/") + "/" + width + "px--" + filename.replaceAll("File:", "").replaceAll(" ", "_") + ".jpg";
         } else {
             String thumbUrl = imageUrl.replaceFirst("test/", "test/thumb/").replace("commons/", "commons/thumb/") + "/" + width + "px-" + filename.replaceAll("File:", "").replaceAll(" ", "_");
-            if(thumbUrl.endsWith("jpg") || thumbUrl.endsWith("png") || thumbUrl.endsWith("jpeg")) {
+            if (thumbUrl.endsWith("jpg") || thumbUrl.endsWith("png") || thumbUrl.endsWith("jpeg")) {
                 return thumbUrl;
             } else {
                 return thumbUrl + ".png";
@@ -181,50 +200,49 @@ public class Utils {
     }
 
     public static String capitalize(String string) {
-        return string.substring(0,1).toUpperCase(Locale.getDefault()) + string.substring(1);
+        return string.substring(0, 1).toUpperCase(Locale.getDefault()) + string.substring(1);
     }
 
     public static String licenseTemplateFor(String license) {
-        if(license.equals(Prefs.Licenses.CC_BY_3)) {
+        if (license.equals(Prefs.Licenses.CC_BY_3)) {
             return "{{self|cc-by-3.0}}";
-        } else if(license.equals(Prefs.Licenses.CC_BY_4)) {
+        } else if (license.equals(Prefs.Licenses.CC_BY_4)) {
             return "{{self|cc-by-4.0}}";
-        } else if(license.equals(Prefs.Licenses.CC_BY_SA_3)) {
+        } else if (license.equals(Prefs.Licenses.CC_BY_SA_3)) {
             return "{{self|cc-by-sa-3.0}}";
-        } else if(license.equals(Prefs.Licenses.CC_BY_SA_4)) {
+        } else if (license.equals(Prefs.Licenses.CC_BY_SA_4)) {
             return "{{self|cc-by-sa-4.0}}";
-        } else if(license.equals(Prefs.Licenses.CC0)) {
+        } else if (license.equals(Prefs.Licenses.CC0)) {
             return "{{self|cc-zero}}";
         }
         throw new RuntimeException("Unrecognized license value");
     }
 
     public static int licenseNameFor(String license) {
-        if(license.equals(Prefs.Licenses.CC_BY_3)) {
+        if (license.equals(Prefs.Licenses.CC_BY_3)) {
             return R.string.license_name_cc_by;
-        } else if(license.equals(Prefs.Licenses.CC_BY_4)) {
+        } else if (license.equals(Prefs.Licenses.CC_BY_4)) {
             return R.string.license_name_cc_by_four;
-        } else if(license.equals(Prefs.Licenses.CC_BY_SA_3)) {
+        } else if (license.equals(Prefs.Licenses.CC_BY_SA_3)) {
             return R.string.license_name_cc_by_sa;
-        } else if(license.equals(Prefs.Licenses.CC_BY_SA_4)) {
+        } else if (license.equals(Prefs.Licenses.CC_BY_SA_4)) {
             return R.string.license_name_cc_by_sa_four;
-        } else if(license.equals(Prefs.Licenses.CC0)) {
+        } else if (license.equals(Prefs.Licenses.CC0)) {
             return R.string.license_name_cc0;
         }
         throw new RuntimeException("Unrecognized license value");
     }
 
     public static String licenseUrlFor(String license) {
-        if(license.equals(Prefs.Licenses.CC_BY_3)) {
+        if (license.equals(Prefs.Licenses.CC_BY_3)) {
             return "https://creativecommons.org/licenses/by/3.0/";
-        } else if(license.equals(Prefs.Licenses.CC_BY_4)) {
+        } else if (license.equals(Prefs.Licenses.CC_BY_4)) {
             return "https://creativecommons.org/licenses/by/4.0/";
-        } else if(license.equals(Prefs.Licenses.CC_BY_SA_3)) {
+        } else if (license.equals(Prefs.Licenses.CC_BY_SA_3)) {
             return "https://creativecommons.org/licenses/by-sa/3.0/";
-        } else if(license.equals(Prefs.Licenses.CC_BY_SA_4)) {
+        } else if (license.equals(Prefs.Licenses.CC_BY_SA_4)) {
             return "https://creativecommons.org/licenses/by-sa/4.0/";
-        }
-        else if(license.equals(Prefs.Licenses.CC0)) {
+        } else if (license.equals(Prefs.Licenses.CC0)) {
             return "https://creativecommons.org/publicdomain/zero/1.0/";
         }
         throw new RuntimeException("Unrecognized license value");

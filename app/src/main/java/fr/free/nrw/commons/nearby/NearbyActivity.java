@@ -32,12 +32,14 @@ public class NearbyActivity extends BaseActivity {
         ft.add(R.id.container, fragment);
         ft.commit();
     }
+
     @Override
-    public boolean onCreateOptionsMenu (Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_nearby, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
@@ -49,19 +51,23 @@ public class NearbyActivity extends BaseActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
     }
 
-    protected void refreshView()
-    {
+    protected void refreshView() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, new NearbyListFragment()).commit();
     }
 
+    public LocationServiceManager getLocationManager() {
+        return locationManager;
+    }
+
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
         locationManager.unregisterLocationManager();
     }

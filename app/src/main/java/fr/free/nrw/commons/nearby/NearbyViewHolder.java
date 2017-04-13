@@ -23,10 +23,8 @@ public class NearbyViewHolder implements ViewHolder<Place> {
 
     @Override
     public void bindModel(Context context, Place place) {
-        String quotelessName = place.name.replaceAll("^\"|\"$", "");
-
         // Populate the data into the template view using the data object
-        tvName.setText(quotelessName);
+        tvName.setText(place.name);
         tvDesc.setText(place.description);
         distance.setText(place.distance);
 
