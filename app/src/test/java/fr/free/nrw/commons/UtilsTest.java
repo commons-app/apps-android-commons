@@ -1,8 +1,8 @@
 package fr.free.nrw.commons;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.*;
 
 
 public class UtilsTest {
@@ -11,7 +11,7 @@ public class UtilsTest {
         assertThat(Utils.fixExtension("SampleFile.jpeg", "jpeg"), is("SampleFile.jpg"));
     }
 
-    @Test public void fixExtensionJPEGToJpg() {
+    @Test public void fixExtensionJpegToJpg() {
         assertThat(Utils.fixExtension("SampleFile.JPEG", null), is("SampleFile.jpg"));
     }
 
@@ -45,5 +45,13 @@ public class UtilsTest {
 
     @Test public void fixExtensionJpegNotExtension() {
         assertThat(Utils.fixExtension("SAMPLE.jpeg.SAMPLE", "jpg"), is("SAMPLE.jpeg.SAMPLE.jpg"));
+    }
+
+    @Test public void stripLocalizedStringPass() {
+        assertThat(Utils.stripLocalizedString("Hello"), is("Hello"));
+    }
+
+    @Test public void stripLocalizedStringJa() {
+        assertThat(Utils.stripLocalizedString("\"こんにちは\"@ja"), is("こんにちは"));
     }
 }

@@ -27,8 +27,14 @@ public class LengthUtils {
         return numberFormat.format(distance) + "m";
     }
 
+    /**
+     * Computes the distance between two points.
+     * @param from one of the two end points
+     * @param to one of the two end points
+     * @return distance between the points in meter
+     */
     public static double computeDistanceBetween(LatLng from, LatLng to) {
-        return computeAngleBetween(from, to) * 6371009.0D;
+        return computeAngleBetween(from, to) * 6371009.0D; // Earth's radius in meter
     }
 
     private static double computeAngleBetween(LatLng from, LatLng to) {

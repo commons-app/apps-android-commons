@@ -4,9 +4,11 @@ import static fr.free.nrw.commons.utils.LengthUtils.computeDistanceBetween;
 import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,16 +22,18 @@ import butterknife.ButterKnife;
 import butterknife.OnItemClick;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.location.LocationServiceManager;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 public class NearbyListFragment extends ListFragment implements TaskListener {
 
+    private static final int MAX_RESULTS = 1000;
     private NearbyAsyncTask nearbyAsyncTask;
-    private NearbyAdapter mAdapter;
 
     @BindView(R.id.listview) ListView listview;
     @BindView(R.id.progressBar) ProgressBar progressBar;
@@ -37,7 +41,6 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
     private boolean isTaskRunning = false;
 
     private List<Place> places;
-    private LatLng mLatestLocation;
 
     private static final String TAG = NearbyListFragment.class.getName();
 
@@ -64,8 +67,7 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
         //Check that this is the first time view is created, to avoid double list when screen orientation changed
-        if(savedInstanceState == null) {
-            mLatestLocation = new LocationServiceManager(getActivity()).getLatestLocation();
+        if (savedInstanceState == null) {
             nearbyAsyncTask = new NearbyAsyncTask(this);
             nearbyAsyncTask.execute();
             progressBar.setVisibility(View.VISIBLE);
@@ -116,7 +118,7 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
         super.onDestroy();
 
         // See http://stackoverflow.com/questions/18264408/incomplete-asynctask-crashes-my-app
-        if(nearbyAsyncTask != null && nearbyAsyncTask.getStatus() != AsyncTask.Status.FINISHED) {
+        if (nearbyAsyncTask != null && nearbyAsyncTask.getStatus() != AsyncTask.Status.FINISHED) {
             nearbyAsyncTask.cancel(true);
         }
     }
@@ -125,7 +127,7 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
 
         private final TaskListener listener;
 
-        public NearbyAsyncTask (TaskListener listener) {
+        public NearbyAsyncTask(TaskListener listener) {
             this.listener = listener;
         }
 
@@ -143,7 +145,9 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
 
         @Override
         protected List<Place> doInBackground(Void... params) {
-            places = loadAttractionsFromLocation(mLatestLocation);
+            places = loadAttractionsFromLocation(
+                    ((NearbyActivity)getActivity()).getLocationManager().getLatestLocation()
+            );
             return places;
         }
 
@@ -151,18 +155,17 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
         protected void onPostExecute(List<Place> result) {
             super.onPostExecute(result);
 
-            if(isCancelled()) {
+            if (isCancelled()) {
                 return;
             }
 
             progressBar.setVisibility(View.GONE);
+            NearbyAdapter adapter = new NearbyAdapter(getActivity(), places);
 
-            mAdapter = new NearbyAdapter(getActivity(), places);
-
-            listview.setAdapter(mAdapter);
+            listview.setAdapter(adapter);
 
             listener.onTaskFinished(result);
-            mAdapter.notifyDataSetChanged();
+            adapter.notifyDataSetChanged();
         }
     }
 
@@ -188,31 +191,38 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
         }
     }
 
-    private List<Place> loadAttractionsFromLocation(final LatLng curLatLng) {
-
-        List<Place> places = NearbyPlaces.get();
+    private List<Place> loadAttractionsFromLocation(LatLng curLatLng) {
+        Log.d(TAG, "Loading attractions near " + curLatLng);
+        if (curLatLng == null) {
+            return Collections.emptyList();
+        }
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        List<Place> places = prefs.getBoolean("useWikidata", true)
+                ? NearbyPlaces.getInstance().getFromWikidataQuery(
+                        curLatLng, Locale.getDefault().getLanguage())
+                : NearbyPlaces.getInstance().getFromWikiNeedsPictures();
         if (curLatLng != null) {
             Log.d(TAG, "Sorting places by distance...");
+            final Map<Place, Double> distances = new HashMap<>();
+            for (Place place: places) {
+                distances.put(place, computeDistanceBetween(place.location, curLatLng));
+            }
             Collections.sort(places,
                     new Comparator<Place>() {
                         @Override
                         public int compare(Place lhs, Place rhs) {
-                            double lhsDistance = computeDistanceBetween(
-                                    lhs.location, curLatLng);
-                            double rhsDistance = computeDistanceBetween(
-                                    rhs.location, curLatLng);
+                            double lhsDistance = distances.get(lhs);
+                            double rhsDistance = distances.get(rhs);
                             return (int) (lhsDistance - rhsDistance);
                         }
                     }
             );
         }
 
-        if (places.size() > 0) {
-            for (int i = 0; i < 100; i++) {
-                Place place = places.get(i);
-                String distance = formatDistanceBetween(mLatestLocation, place.location);
-                place.setDistance(distance);
-            }
+        places = places.subList(0, Math.min(places.size(), MAX_RESULTS));
+        for (Place place: places) {
+            String distance = formatDistanceBetween(curLatLng, place.location);
+            place.setDistance(distance);
         }
         return places;
     }

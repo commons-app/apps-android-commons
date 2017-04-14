@@ -33,7 +33,7 @@ public class NearbyAdapter extends ArrayAdapter<Place> {
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
         Place place = getItem(position);
-        Log.d("NearbyAdapter", "Place " + place.name);
+        Log.v("NearbyAdapter", "" + place);
 
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
