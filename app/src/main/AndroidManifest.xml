@@ -77,7 +77,8 @@
             />
         <activity
             android:name=".AboutActivity"
-            android:label="@string/title_activity_about"/>
+            android:label="@string/title_activity_about"
+            android:parentActivityName=".contributions.ContributionsActivity" />
         <activity
             android:name=".auth.SignupActivity"
             android:label="@string/title_activity_signup"/>
