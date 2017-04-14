@@ -1,15 +1,11 @@
-package fr.free.nrw.commons.location;
+package fr.free.nrw.commons.nearby;
 
 public class LatLng {
 
     public final double latitude;
     public final double longitude;
 
-    /** Accepts latitude and longitude.
-     * @param latitude double value
-     * @param longitude double value
-     */
-    public LatLng(double latitude, double longitude) {
+    LatLng(double latitude, double longitude) {
         if(-180.0D <= longitude && longitude < 180.0D) {
             this.longitude = longitude;
         } else {
