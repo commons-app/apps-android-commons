@@ -1,6 +1,13 @@
 # Wikimedia Commons for Android
 
-##v2.1 beta
+##v2.2 beta
+- Revamped Nearby to query Wikidata by default instead of Wiki Needs Pictures
+- Added action bar to About screen
+- Fixed crash related to fragment transaction state loss
+- Moved Feedback menu item below Settings
+- Various code optimizations and refactoring
+
+##v2.1
 - Added beta opt in link to Settings
 - Added Codacy and Butterknife support
 - Added Light theme for day/outdoor use
