@@ -1,6 +1,9 @@
 # Wikimedia Commons for Android
 
-##v2.2 beta
+##v2.21 beta 
+- Hotfix for Settings crash
+
+##v2.2 beta (will not be released to Production due to bugs with Settings)
 - Revamped Nearby to query Wikidata by default instead of Wiki Needs Pictures
 - Added action bar to About screen
 - Fixed crash related to fragment transaction state loss
