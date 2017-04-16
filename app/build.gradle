@@ -28,8 +28,8 @@ android {
 
     defaultConfig {
         applicationId 'fr.free.nrw.commons'
-        versionCode 67
-        versionName '2.2'
+        versionCode 68
+        versionName '2.21'
         minSdkVersion project.minSdkVersion
         targetSdkVersion project.targetSdkVersion
     }
