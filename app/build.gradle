@@ -13,11 +13,14 @@ dependencies {
     compile "com.android.support:support-v4:${project.supportLibVersion}"
     compile "com.android.support:appcompat-v7:${project.supportLibVersion}"
     compile "com.android.support:design:${project.supportLibVersion}"
+    compile "com.android.support:support-annotations:${project.supportLibVersion}"
     compile 'com.google.code.gson:gson:2.7'
     compile "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
     annotationProcessor "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
 
     testCompile 'junit:junit:4.12'
+    androidTestCompile "com.android.support:support-annotations:${project.supportLibVersion}"
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
 }
 
 android {
@@ -32,6 +35,7 @@ android {
         versionName '2.2'
         minSdkVersion project.minSdkVersion
         targetSdkVersion project.targetSdkVersion
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {

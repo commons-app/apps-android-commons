@@ -1,0 +1,117 @@
+package fr.free.nrw.commons;
+
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.anyOf;
+import static org.hamcrest.Matchers.anything;
+
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.support.test.espresso.Espresso;
+import android.support.test.espresso.action.ViewActions;
+import android.support.test.espresso.assertion.ViewAssertions;
+import android.support.test.espresso.matcher.ViewMatchers;
+import android.support.test.filters.LargeTest;
+import android.support.test.rule.ActivityTestRule;
+import android.support.test.runner.AndroidJUnit4;
+import android.view.View;
+
+import fr.free.nrw.commons.settings.SettingsActivity;
+
+import java.util.Map;
+
+import org.hamcrest.Matcher;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+@LargeTest
+@RunWith(AndroidJUnit4.class)
+public class SettingsActivityTest {
+    private SharedPreferences prefs;
+    private Map<String,?> prefValues;
+
+    @Rule
+    public ActivityTestRule<SettingsActivity> activityRule =
+            new ActivityTestRule<SettingsActivity>(SettingsActivity.class,
+                    false /* Initial touch mode */, true /*  launch activity */) {
+
+                @Override
+                protected void afterActivityLaunched() {
+                    // save preferences
+                    prefs = PreferenceManager.getDefaultSharedPreferences(this.getActivity());
+                    prefValues = prefs.getAll();
+                }
+
+                @Override
+                protected void afterActivityFinished() {
+                    // restore preferences
+                    SharedPreferences.Editor editor = prefs.edit();
+                    for (Map.Entry<String,?> entry: prefValues.entrySet()) {
+                        String key = entry.getKey();
+                        Object val = entry.getValue();
+                        if (val instanceof String) {
+                            editor.putString(key, (String)val);
+                        } else if (val instanceof Boolean) {
+                            editor.putBoolean(key, (Boolean)val);
+                        } else if (val instanceof Integer) {
+                            editor.putInt(key, (Integer)val);
+                        } else {
+                            throw new RuntimeException("type not implemented: " + entry);
+                        }
+                    }
+                    editor.apply();
+                }
+            };
+
+    @Test
+    public void oneLicenseIsChecked() {
+        // click "License" (the first item)
+        Espresso.onData(anything())
+                .inAdapterView(findPreferenceList())
+                .atPosition(0)
+                .perform(ViewActions.click());
+
+        // test the selected item
+        Espresso.onView(ViewMatchers.isChecked())
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+    }
+
+    @Test
+    public void afterClickingCcby4ItWillStay() {
+        // click "License" (the first item)
+        Espresso.onData(anything())
+                .inAdapterView(findPreferenceList())
+                .atPosition(0)
+                .perform(ViewActions.click());
+
+        // click "CC BY-4.0"
+        Espresso.onView(
+                // FIXME: just R.string.license_name_cc_by_four should be fine but fails on Travis
+                textAnyOf(R.string.license_name_cc_by_four, R.string.license_name_cc_by_4_0)
+        ).perform(ViewActions.click());
+
+        // click "License" (the first item)
+        Espresso.onData(anything())
+                .inAdapterView(findPreferenceList())
+                .atPosition(0)
+                .perform(ViewActions.click());
+
+        // test the value remains "CC BY-4.0"
+        Espresso.onView(ViewMatchers.isChecked())
+                .check(ViewAssertions.matches(
+                        textAnyOf(R.string.license_name_cc_by_four, R.string.license_name_cc_by_4_0)
+                ));
+    }
+
+    private Matcher<View> textAnyOf(int id1, int id2) {
+        return anyOf(ViewMatchers.withText(id1), ViewMatchers.withText(id2));
+    }
+
+    private static Matcher<View> findPreferenceList() {
+        return allOf(
+                ViewMatchers.isDescendantOfA(ViewMatchers.withId(android.R.id.content)),
+                ViewMatchers.withId(android.R.id.list),
+                ViewMatchers.hasFocus()
+        );
+    }
+}
