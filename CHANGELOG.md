@@ -1,6 +1,6 @@
 # Wikimedia Commons for Android
 
-## v2.21 beta 
+## v2.2.1 beta 
 - Hotfix for Settings crash
 
 ## v2.2 beta (will not be released to Production due to bugs with Settings)
