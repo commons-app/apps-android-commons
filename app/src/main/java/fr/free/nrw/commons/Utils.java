@@ -214,6 +214,10 @@ public class Utils {
             return "{{self|cc-by-sa-4.0}}";
         } else if (license.equals(Prefs.Licenses.CC0)) {
             return "{{self|cc-zero}}";
+        } else if (license.equals(Prefs.Licenses.CC_BY)) {
+            return "{{self|cc-by-3.0}}";
+        } else if (license.equals(Prefs.Licenses.CC_BY_SA)) {
+            return "{{self|cc-by-sa-3.0}}";
         }
         throw new RuntimeException("Unrecognized license value");
     }
@@ -229,6 +233,10 @@ public class Utils {
             return R.string.license_name_cc_by_sa_four;
         } else if (license.equals(Prefs.Licenses.CC0)) {
             return R.string.license_name_cc0;
+        } else if (license.equals(Prefs.Licenses.CC_BY)) { // for backward compatibility to v2.1
+            return R.string.license_name_cc_by_3_0;
+        } else if (license.equals(Prefs.Licenses.CC_BY_SA)) { // for backward compatibility to v2.1
+            return R.string.license_name_cc_by_sa_3_0;
         }
         throw new RuntimeException("Unrecognized license value");
     }
