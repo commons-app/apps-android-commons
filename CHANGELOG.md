@@ -1,13 +1,16 @@
 # Wikimedia Commons for Android
 
-##v2.2 beta
+## v2.2.1 beta 
+- Hotfix for Settings crash
+
+## v2.2 beta (will not be released to Production due to bugs with Settings)
 - Revamped Nearby to query Wikidata by default instead of Wiki Needs Pictures
 - Added action bar to About screen
 - Fixed crash related to fragment transaction state loss
 - Moved Feedback menu item below Settings
 - Various code optimizations and refactoring
 
-##v2.1
+## v2.1
 - Added beta opt in link to Settings
 - Added Codacy and Butterknife support
 - Added Light theme for day/outdoor use
@@ -17,14 +20,14 @@
 - Fixed lint issues
 - Fixed various crashes
 
-##v2.0.2 
+## v2.0.2 
 - Make "View in browser" direct to mobile website 
 
-##v2.0.1
+## v2.0.1
 - Disabled minify again (reenabling test failed)
 - Hotfix for ShareAction bug
 
-##v2.0
+## v2.0
 - Modified Share button in media details fragment to allow user to choose different apps
 - Added CC-BY 4.0 and CC-BY-SA 4.0 to license options
 - Added selection pane for licenses on title/desc screen
@@ -33,98 +36,98 @@
 - Reenabled minify in Gradle
 - Other minor code optimizations
 
-##v1.44
+## v1.44
 - Attempted fix for GPS suggestions issue
 
-##v1.43
+## v1.43
 - Added translations for multiple languages
 - Minor code optimization
 
-##v1.42
+## v1.42
 - Fixed language mappings; successful translatewiki integration
 - Various translations added
 
-##v1.41
+## v1.41
 - Bumped min SDK and removed escaped characters for translatewiki.net integration
 - Added check for whether file already exists on Commons
 
-##v1.40
+## v1.40
 - Added new pages to tutorial
 
-##v1.39
+## v1.39
 - Fix for Korean translations crash
 - Various minor fixes
 
-##v1.38
+## v1.38
 - Added filter for suggested categories containing years (other than current or previous year)
 - Attempted fix for issues with categories not being saved
 
-##v1.37
+## v1.37
 - Added category suggestions based on entered title
 
-##v1.36
+## v1.36
 - Fixed Ukranian translations
 
-##v1.35
+## v1.35
 - Fixed issues with GPS category suggestions
 
-##v1.34
+## v1.34
 - Added button to use previous title/desc
 
-##v1.33
+## v1.33
 - Fixed crash when back button pressed before Nearby list is loaded
 - Fixed crash when Nearby list is loaded without network connection
 - Added no args constructor for GPS category suggestions
 
-##v1.32
+## v1.32
 - Use Quadtree source instead of JAR, for F-Droid compatibility
 - Fixed GPS extractor not being called
 
-##v1.31
+## v1.31
 - Fixed bug with geolocation category suggestions not being displayed
 - Fixed bug with (0,0) being recorded as image location occasionally
 
-##v1.30
+## v1.30
 - Fixed {{Location|null}} template bug
 
-##v1.29
+## v1.29
 - Added new icons to Nearby
 - Added link to website on About
 
-##v1.28
+## v1.28
 - Added geocoding template from GPS data stored in image
 - Fixed bug with doubled list view in Nearby
 - Further attempts to reduce overwrites
 
-##v1.27
+## v1.27
 - New feature: List of nearby places without photos
 
-##v1.26
+## v1.26
 - Fixed bug with overwriting files when multiple images selected
 
-##v1.25
+## v1.25
 - Added in-app signup feature for new users
 - Fixed crash when reading GPS coordinates
 
-##v1.24
+## v1.24
 - Moved  from bits/event.gif to wikimedia/beacon
 - Fixed issue with needing to tap gallery again after giving permissions
 
-##v1.23
+## v1.23
 - Added warning if image is submitted without categories
 - Added check if back button is pressed at category selection screen
 
-##v1.22
+## v1.22
 - Fixed various crashes
 - Crash reports now go to private mailing list to protect user info
 
-##v1.21
+## v1.21
 - Fixed Google Photos multiple share crash
 
-##v1.20
+## v1.20
 - Hotfix for data=null crash
 
-##v1.19
+## v1.19
 - Fixed adapter crash
 - Attempt at fixing Google Photos crash
 
