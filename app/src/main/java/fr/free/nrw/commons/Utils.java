@@ -2,13 +2,13 @@ package fr.free.nrw.commons;
 
 import android.net.Uri;
 import android.os.Build;
-import android.util.Log;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 import fr.free.nrw.commons.settings.Prefs;
+import timber.log.Timber;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -44,8 +44,6 @@ import org.xmlpull.v1.XmlPullParserException;
 
 public class Utils {
 
-    private static final String TAG = Utils.class.getName();
-
     // Get SHA1 of file from input stream
     public static String getSHA1(InputStream is) {
 
@@ -53,7 +51,7 @@ public class Utils {
         try {
             digest = MessageDigest.getInstance("SHA1");
         } catch (NoSuchAlgorithmException e) {
-            Log.e(TAG, "Exception while getting Digest", e);
+            Timber.e(e, "Exception while getting Digest");
             return "";
         }
 
@@ -68,17 +66,17 @@ public class Utils {
             String output = bigInt.toString(16);
             // Fill to 40 chars
             output = String.format("%40s", output).replace(' ', '0');
-            Log.i(TAG, "File SHA1: " + output);
+            Timber.i("File SHA1: %s", output);
 
             return output;
         } catch (IOException e) {
-            Log.e(TAG, "IO Exception", e);
+            Timber.e(e, "IO Exception");
             return "";
         } finally {
             try {
                 is.close();
             } catch (IOException e) {
-                Log.e(TAG, "Exception on closing MD5 input stream", e);
+                Timber.e(e, "Exception on closing MD5 input stream");
             }
         }
     }

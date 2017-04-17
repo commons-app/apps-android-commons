@@ -16,7 +16,6 @@ import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -44,6 +43,7 @@ import java.util.concurrent.TimeUnit;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.upload.MwVolleyApi;
+import timber.log.Timber;
 
 /**
  * Displays the category suggestion and selection screen. Category search is initiated here.
@@ -79,7 +79,6 @@ public class CategorizationFragment extends Fragment {
     private ContentProviderClient client;
 
     protected final static int SEARCH_CATS_LIMIT = 25;
-    private static final String TAG = CategorizationFragment.class.getName();
 
     public static class CategoryItem implements Parcelable {
         public String name;
@@ -130,28 +129,28 @@ public class CategorizationFragment extends Fragment {
         //Retrieve the title that was saved when user tapped submit icon
         SharedPreferences titleDesc = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String title = titleDesc.getString("Title", "");
-        Log.d(TAG, "Title: " + title);
+        Timber.d("Title: %s", title);
 
         //Override onPostExecute to access the results of async API call
         titleCategoriesSub = new TitleCategories(title) {
             @Override
             protected void onPostExecute(ArrayList<String> result) {
                 super.onPostExecute(result);
-                Log.d(TAG, "Results in onPostExecute: " + result);
+                Timber.d("Results in onPostExecute: %s", result);
                 titleCatItems.addAll(result);
-                Log.d(TAG, "TitleCatItems in onPostExecute: " + titleCatItems);
+                Timber.d("TitleCatItems in onPostExecute: %s", titleCatItems);
                 mergeLatch.countDown();
             }
         };
 
         titleCategoriesSub.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-        Log.d(TAG, "TitleCatItems in titleCatQuery: " + titleCatItems);
+        Timber.d("TitleCatItems in titleCatQuery: %s", titleCatItems);
 
         //Only return titleCatItems after API call has finished
         try {
             mergeLatch.await(5L, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
-            Log.e(TAG, "Interrupted exception: ", e);
+            Timber.e(e, "Interrupted exception: ");
         }
         return titleCatItems;
     }
@@ -191,7 +190,7 @@ public class CategorizationFragment extends Fragment {
 
         Set<String> mergedItems = new LinkedHashSet<>();
 
-        Log.d(TAG, "Calling APIs for GPS cats, title cats and recent cats...");
+        Timber.d("Calling APIs for GPS cats, title cats and recent cats...");
 
         List<String> gpsItems = new ArrayList<>();
         if (MwVolleyApi.GpsCatExists.getGpsCatExists()) {
@@ -203,22 +202,22 @@ public class CategorizationFragment extends Fragment {
         //Await results of titleItems, which is likely to come in last
         try {
             mergeLatch.await(5L, TimeUnit.SECONDS);
-            Log.d(TAG, "Waited for merge");
+            Timber.d("Waited for merge");
         } catch (InterruptedException e) {
-            Log.e(TAG, "Interrupted Exception: ", e);
+            Timber.e(e, "Interrupted Exception: ");
         }
 
         mergedItems.addAll(gpsItems);
-        Log.d(TAG, "Adding GPS items: " + gpsItems);
+        Timber.d("Adding GPS items: %s", gpsItems);
         mergedItems.addAll(titleItems);
-        Log.d(TAG, "Adding title items: " + titleItems);
+        Timber.d("Adding title items: %s", titleItems);
         mergedItems.addAll(recentItems);
-        Log.d(TAG, "Adding recent items: " + recentItems);
+        Timber.d("Adding recent items: %s", recentItems);
         
         //Needs to be an ArrayList and not a List unless we want to modify a big portion of preexisting code
         ArrayList<String> mergedItemsList = new ArrayList<>(mergedItems);
 
-        Log.d(TAG, "Merged item list: " + mergedItemsList);
+        Timber.d("Merged item list: %s", mergedItemsList);
         return mergedItemsList;
     }
 
@@ -261,7 +260,7 @@ public class CategorizationFragment extends Fragment {
             }
         }
         else {
-            Log.e(TAG, "Error: Fragment is null");
+            Timber.e("Error: Fragment is null");
         }
     }
 
@@ -285,7 +284,7 @@ public class CategorizationFragment extends Fragment {
                     latch.await();
                 }
                 catch (InterruptedException e) {
-                    Log.w(TAG, e);
+                    Timber.w(e);
                     //Thread.currentThread().interrupt();
                 }
                 return result;
@@ -296,12 +295,12 @@ public class CategorizationFragment extends Fragment {
                 super.onPostExecute(result);
 
                 results.addAll(result);
-                Log.d(TAG, "Prefix result: " + result);
+                Timber.d("Prefix result: %s", result);
 
                 String filter = categoriesFilter.getText().toString();
                 ArrayList<String> resultsList = new ArrayList<>(results);
                 categoriesCache.put(filter, resultsList);
-                Log.d(TAG, "Final results List: " + resultsList);
+                Timber.d("Final results List: %s", resultsList);
 
                 categoriesAdapter.notifyDataSetChanged();
                 setCatsAfterAsync(resultsList, filter);
@@ -315,7 +314,7 @@ public class CategorizationFragment extends Fragment {
                 super.onPostExecute(result);
 
                 results.addAll(result);
-                Log.d(TAG, "Method A result: " + result);
+                Timber.d("Method A result: %s", result);
                 categoriesAdapter.notifyDataSetChanged();
 
                 latch.countDown();

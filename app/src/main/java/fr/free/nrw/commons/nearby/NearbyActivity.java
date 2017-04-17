@@ -14,8 +14,6 @@ public class NearbyActivity extends BaseActivity {
 
     private LocationServiceManager locationManager;
 
-    private static final String TAG = NearbyActivity.class.getName();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

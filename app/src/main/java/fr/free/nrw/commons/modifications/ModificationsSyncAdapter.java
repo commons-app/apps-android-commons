@@ -11,7 +11,6 @@ import android.content.SyncResult;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.RemoteException;
-import android.util.Log;
 
 import org.mediawiki.api.ApiResult;
 import org.mediawiki.api.MWApi;
@@ -22,6 +21,7 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
+import timber.log.Timber;
 
 public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
 
@@ -42,7 +42,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
 
         // Exit early if nothing to do
         if(allModifications == null || allModifications.getCount() == 0) {
-            Log.d("Commons", "No modifications to perform");
+            Timber.d("No modifications to perform");
             return;
         }
 
@@ -52,12 +52,12 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
         } catch (OperationCanceledException | AuthenticatorException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
-            Log.d("Commons", "Could not authenticate :(");
+            Timber.d("Could not authenticate :(");
             return;
         }
 
         if(Utils.isNullOrWhiteSpace(authCookie)) {
-            Log.d("Commons", "Could not authenticate :(");
+            Timber.d("Could not authenticate :(");
             return;
         }
 
@@ -69,13 +69,13 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
         try {
             editToken = api.getEditToken();
         } catch (IOException e) {
-            Log.d("Commons", "Can not retreive edit token!");
+            Timber.d("Can not retreive edit token!");
             return;
         }
 
         allModifications.moveToFirst();
 
-        Log.d("Commons", "Found " + allModifications.getCount() + " modifications to execute");
+        Timber.d("Found %d modifications to execute", allModifications.getCount());
 
         ContentProviderClient contributionsClient = null;
         try {
@@ -104,11 +104,11 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                                 .param("titles", contrib.getFilename())
                                 .get();
                     } catch (IOException e) {
-                        Log.d("Commons", "Network fuckup on modifications sync!");
+                        Timber.d("Network fuckup on modifications sync!");
                         continue;
                     }
 
-                    Log.d("Commons", "Page content is " + Utils.getStringFromDOM(requestResult.getDocument()));
+                    Timber.d("Page content is %s", Utils.getStringFromDOM(requestResult.getDocument()));
                     String pageContent = requestResult.getString("/api/query/pages/page/revisions/rev");
                     String processedPageContent = sequence.executeModifications(contrib.getFilename(),  pageContent);
 
@@ -120,16 +120,16 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                                 .param("summary", sequence.getEditSummary())
                                 .post();
                     } catch (IOException e) {
-                        Log.d("Commons", "Network fuckup on modifications sync!");
+                        Timber.d("Network fuckup on modifications sync!");
                         continue;
                     }
 
-                    Log.d("Commons", "Response is" + Utils.getStringFromDOM(responseResult.getDocument()));
+                    Timber.d("Response is %s", Utils.getStringFromDOM(responseResult.getDocument()));
 
                     String result = responseResult.getString("/api/edit/@result");
                     if(!result.equals("Success")) {
                         // FIXME: Log this somewhere else
-                        Log.d("Commons", "Non success result!" + result);
+                        Timber.d("Non success result! %s", result);
                     } else {
                         sequence.delete();
                     }

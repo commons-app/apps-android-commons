@@ -10,7 +10,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +21,7 @@ import butterknife.ButterKnife;
 import butterknife.OnItemClick;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
+import timber.log.Timber;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -40,8 +40,6 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
 
     private boolean isTaskRunning = false;
 
-    private static final String TAG = NearbyListFragment.class.getName();
-
     public NearbyListFragment() {
     }
 
@@ -55,7 +53,7 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        Log.d(TAG, "NearbyListFragment created");
+        Timber.d("NearbyListFragment created");
         View view = inflater.inflate(R.layout.fragment_nearby, container, false);
         ButterKnife.bind(this, view);
         return view;
@@ -69,7 +67,7 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
             nearbyAsyncTask = new NearbyAsyncTask(this);
             nearbyAsyncTask.execute();
             progressBar.setVisibility(View.VISIBLE);
-            Log.d(TAG, "Saved instance state is null, populating ListView");
+            Timber.d("Saved instance state is null, populating ListView");
         } else {
             progressBar.setVisibility(View.GONE);
         }
@@ -174,10 +172,7 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
         double latitude = placeLatLng.latitude;
         double longitude = placeLatLng.longitude;
 
-        Log.d(TAG, "Item at position "
-                + position + " has coords: Lat: "
-                + latitude + " Long: "
-                + longitude);
+        Timber.d("Item at position %d has coords: Lat: %f Long: %f", position, latitude, longitude);
 
         //Open map app at given position
         Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + latitude + "," + longitude);
@@ -189,7 +184,7 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
     }
 
     private List<Place> loadAttractionsFromLocation(LatLng curLatLng) {
-        Log.d(TAG, "Loading attractions near " + curLatLng);
+        Timber.d("Loading attractions near %s", curLatLng);
         if (curLatLng == null) {
             return Collections.emptyList();
         }
@@ -199,7 +194,7 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
                         curLatLng, Locale.getDefault().getLanguage())
                 : NearbyPlaces.getInstance().getFromWikiNeedsPictures();
         if (curLatLng != null) {
-            Log.d(TAG, "Sorting places by distance...");
+            Timber.d("Sorting places by distance...");
             final Map<Place, Double> distances = new HashMap<>();
             for (Place place: places) {
                 distances.put(place, computeDistanceBetween(place.location, curLatLng));

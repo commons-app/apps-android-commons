@@ -4,7 +4,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import org.apache.http.HttpResponse;
 import org.json.JSONException;
@@ -17,6 +16,7 @@ import java.net.URL;
 
 import fr.free.nrw.commons.settings.Prefs;
 import in.yuvi.http.fluent.Http;
+import timber.log.Timber;
 
 public class EventLog {
 
@@ -38,11 +38,11 @@ public class EventLog {
                     if(response.getStatusLine().getStatusCode() != 204) {
                         allSuccess = false;
                     }
-                    Log.d("Commons", "EventLog hit " + url.toString());
+                    Timber.d("EventLog hit %s", url);
 
                 } catch (IOException e) {
                     // Probably just ignore for now. Can be much more robust with a service, etc later on.
-                    Log.d("Commons", "IO Error, EventLog hit skipped");
+                    Timber.d("IO Error, EventLog hit skipped");
                 }
             }
 

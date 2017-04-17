@@ -9,7 +9,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.support.v4.util.LruCache;
-import android.util.Log;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.BasicNetwork;
@@ -39,6 +38,7 @@ import java.io.IOException;
 
 import fr.free.nrw.commons.auth.WikiAccountAuthenticator;
 import fr.free.nrw.commons.caching.CacheController;
+import timber.log.Timber;
 
 // TODO: Use ProGuard to rip out reporting when publishing
 @ReportsCrashes(
@@ -92,6 +92,9 @@ public class CommonsApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        Timber.plant(new Timber.DebugTree());
+
         if (!BuildConfig.DEBUG) {
             ACRA.init(this);
         }
@@ -112,11 +115,11 @@ public class CommonsApplication extends Application {
         long maxMem = Runtime.getRuntime().maxMemory();
         if (maxMem < 48L * 1024L * 1024L) {
             // Cache only one bitmap if VM memory is too small (such as Nexus One);
-            Log.d("Commons", "Skipping bitmap cache; max mem is: " + maxMem);
+            Timber.d("Skipping bitmap cache; max mem is: %d", maxMem);
             imageCache = new LruCache<>(1);
         } else {
             int cacheSize = (int) (maxMem / (1024 * 8));
-            Log.d("Commons", "Bitmap cache size " + cacheSize + " from max mem " + maxMem);
+            Timber.d("Bitmap cache size %d from max mem %d", cacheSize, maxMem);
             imageCache = new LruCache<String, Bitmap>(cacheSize) {
                 @Override
                 protected int sizeOf(String key, Bitmap bitmap) {

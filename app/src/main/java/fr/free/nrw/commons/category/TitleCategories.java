@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.category;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import org.mediawiki.api.ApiResult;
 import org.mediawiki.api.MWApi;
@@ -10,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import fr.free.nrw.commons.CommonsApplication;
+import timber.log.Timber;
 
 /**
  * Sends asynchronous queries to the Commons MediaWiki API to retrieve categories that are related to
@@ -19,7 +19,7 @@ import fr.free.nrw.commons.CommonsApplication;
 public class TitleCategories extends AsyncTask<Void, Void, ArrayList<String>> {
 
     private final static int SEARCH_CATS_LIMIT = 25;
-    private static final String TAG = TitleCategories.class.getName();
+
     private String title;
 
     public TitleCategories(String title) {
@@ -48,9 +48,9 @@ public class TitleCategories extends AsyncTask<Void, Void, ArrayList<String>> {
                     .param("srlimit", SEARCH_CATS_LIMIT)
                     .param("srsearch", title)
                     .get();
-            Log.d(TAG, "Searching for cats for title: " + result.toString());
+            Timber.d("Searching for cats for title: %s", result);
         } catch (IOException e) {
-            Log.e(TAG, "IO Exception: ", e);
+            Timber.e(e, "IO Exception: ");
             //Return empty arraylist
             return items;
         }
@@ -62,7 +62,7 @@ public class TitleCategories extends AsyncTask<Void, Void, ArrayList<String>> {
             items.add(catString);
         }
 
-        Log.d(TAG, "Title cat query results: " + items);
+        Timber.d("Title cat query results: %s", items);
 
         return items;
     }

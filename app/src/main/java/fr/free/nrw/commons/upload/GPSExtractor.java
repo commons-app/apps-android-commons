@@ -10,9 +10,10 @@ import android.media.ExifInterface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import java.io.IOException;
+
+import timber.log.Timber;
 
 /**
  * Extracts geolocation to be passed to API for category suggestions. If a picture with geolocation
@@ -20,8 +21,6 @@ import java.io.IOException;
  * geolocation is uploaded, retrieve user's location (if enabled in Settings).
  */
 public class GPSExtractor {
-
-    private static final String TAG = GPSExtractor.class.getName();
 
     private String filePath;
     private double decLatitude, decLongitude;
@@ -46,7 +45,7 @@ public class GPSExtractor {
     private boolean gpsPreferenceEnabled() {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         boolean gpsPref = sharedPref.getBoolean("allowGps", false);
-        Log.d(TAG, "Gps pref set to: " + gpsPref);
+        Timber.d("Gps pref set to: %b", gpsPref);
         return gpsPref;
     }
 
@@ -66,9 +65,9 @@ public class GPSExtractor {
                 myLocationListener.onLocationChanged(location);
             }
         } catch (IllegalArgumentException e) {
-            Log.e(TAG, "Illegal argument exception", e);
+            Timber.e(e, "Illegal argument exception");
         } catch (SecurityException e) {
-            Log.e(TAG, "Security exception", e);
+            Timber.e(e, "Security exception");
         }
     }
 
@@ -76,7 +75,7 @@ public class GPSExtractor {
         try {
             locationManager.removeUpdates(myLocationListener);
         } catch (SecurityException e) {
-            Log.e(TAG, "Security exception", e);
+            Timber.e(e, "Security exception");
         }
     }
 
@@ -98,10 +97,10 @@ public class GPSExtractor {
         try {
             exif = new ExifInterface(filePath);
         } catch (IOException e) {
-            Log.w(TAG, e);
+            Timber.w(e);
             return null;
         } catch (IllegalArgumentException e) {
-            Log.w(TAG, e);
+            Timber.w(e);
             return null;
         }
 
@@ -110,14 +109,15 @@ public class GPSExtractor {
             registerLocationManager();
 
             imageCoordsExists = false;
-            Log.d(TAG, "EXIF data has no location info");
+            Timber.d("EXIF data has no location info");
 
             //Check what user's preference is for automatic location detection
             boolean gpsPrefEnabled = gpsPreferenceEnabled();
 
             //Check that currentLatitude and currentLongitude have been explicitly set by MyLocationListener and do not default to (0.0,0.0)
             if (gpsPrefEnabled && currentLatitude != null && currentLongitude != null) {
-                Log.d(TAG, "Current location values: Lat = " + currentLatitude + " Long = " + currentLongitude);
+                Timber.d("Current location values: Lat = %f Long = %f",
+                        currentLatitude, currentLongitude);
                 return String.valueOf(currentLatitude) + "|" + String.valueOf(currentLongitude);
             } else {
                 // No coords found
@@ -128,7 +128,7 @@ public class GPSExtractor {
         } else {
             //If image has EXIF data, extract image coords
             imageCoordsExists = true;
-            Log.d(TAG, "EXIF data has location info");
+            Timber.d("EXIF data has location info");
 
             latitude = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE);
             latitude_ref = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE_REF);
@@ -136,8 +136,8 @@ public class GPSExtractor {
             longitude_ref = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE_REF);
 
             if (latitude!=null && latitude_ref!=null && longitude!=null && longitude_ref!=null) {
-                Log.d(TAG, "Latitude: " + latitude + " " + latitude_ref);
-                Log.d(TAG, "Longitude: " + longitude + " " + longitude_ref);
+                Timber.d("Latitude: %s %s", latitude, latitude_ref);
+                Timber.d("Longitude: %s %s", longitude, longitude_ref);
 
                 decimalCoords = getDecimalCoords(latitude, latitude_ref, longitude, longitude_ref);
                 return decimalCoords;
@@ -160,17 +160,17 @@ public class GPSExtractor {
 
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {
-            Log.d(TAG, provider + "'s status changed to " + status);
+            Timber.d("%s's status changed to %d", provider, status);
         }
 
         @Override
         public void onProviderEnabled(String provider) {
-            Log.d(TAG, "Provider " + provider + " enabled");
+            Timber.d("Provider %s enabled", provider);
         }
 
         @Override
         public void onProviderDisabled(String provider) {
-            Log.d(TAG, "Provider " + provider + " disabled");
+            Timber.d("Provider %s disabled", provider);
         }
     }
 
@@ -201,7 +201,7 @@ public class GPSExtractor {
         }
 
         String decimalCoords = String.valueOf(decLatitude) + "|" + String.valueOf(decLongitude);
-        Log.d(TAG, "Latitude and Longitude are " + decimalCoords);
+        Timber.d("Latitude and Longitude are %s", decimalCoords);
         return decimalCoords;
     }
 

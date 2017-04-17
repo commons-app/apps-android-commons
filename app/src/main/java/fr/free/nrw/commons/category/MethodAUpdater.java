@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.category;
 
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.View;
 
 import org.mediawiki.api.ApiResult;
@@ -13,6 +12,7 @@ import java.util.Calendar;
 import java.util.Iterator;
 
 import fr.free.nrw.commons.CommonsApplication;
+import timber.log.Timber;
 
 /**
  * Sends asynchronous queries to the Commons MediaWiki API to retrieve categories that are close to
@@ -22,7 +22,6 @@ import fr.free.nrw.commons.CommonsApplication;
 public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
 
     private String filter;
-    private static final String TAG = MethodAUpdater.class.getName();
     CategorizationFragment catFragment;
 
     public MethodAUpdater(CategorizationFragment catFragment) {
@@ -54,11 +53,11 @@ public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
         Calendar now = Calendar.getInstance();
         int year = now.get(Calendar.YEAR);
         String yearInString = String.valueOf(year);
-        Log.d(TAG, "Year: " + yearInString);
+        Timber.d("Year: %s", yearInString);
 
         int prevYear = year - 1;
         String prevYearInString = String.valueOf(prevYear);
-        Log.d(TAG, "Previous year: " + prevYearInString);
+        Timber.d("Previous year: %s", prevYearInString);
 
         //Copy to Iterator to prevent ConcurrentModificationException when removing item
         for(iterator = items.iterator(); iterator.hasNext();) {
@@ -67,12 +66,12 @@ public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
             //Check if s contains a 4-digit word anywhere within the string (.* is wildcard)
             //And that s does not equal the current year or previous year
             if(s.matches(".*(19|20)\\d{2}.*") && !s.contains(yearInString) && !s.contains(prevYearInString)) {
-                Log.d(TAG, "Filtering out year " + s);
+                Timber.d("Filtering out year %s", s);
                 iterator.remove();
             }
         }
 
-        Log.d(TAG, "Items: " + items.toString());
+        Timber.d("Items: %s", items);
         return items;
     }
 
@@ -94,9 +93,9 @@ public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
                     .param("srlimit", catFragment.SEARCH_CATS_LIMIT)
                     .param("srsearch", filter)
                     .get();
-            Log.d(TAG, "Method A URL filter" + result.toString());
+            Timber.d("Method A URL filter %s", result);
         } catch (IOException e) {
-            Log.e(TAG, "IO Exception: ", e);
+            Timber.e(e, "IO Exception: ");
             //Return empty arraylist
             return categories;
         }
@@ -108,7 +107,7 @@ public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
             categories.add(catString);
         }
 
-        Log.d(TAG, "Found categories from Method A search, waiting for filter");
+        Timber.d("Found categories from Method A search, waiting for filter");
         ArrayList<String> filteredItems = new ArrayList<>(filterYears(categories));
         return filteredItems;
     }

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.util.Log;
+import android.support.v7.app.AlertDialog;
 
 import org.mediawiki.api.ApiResult;
 import org.mediawiki.api.MWApi;
@@ -12,19 +12,16 @@ import org.mediawiki.api.MWApi;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import android.support.v7.app.AlertDialog;
-
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
+import timber.log.Timber;
 
 /**
  * Sends asynchronous queries to the Commons MediaWiki API to check that file doesn't already exist
  * Displays a warning to the user if the file already exists on Commons
  */
 public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
-
-    private static final String TAG = ExistingFileAsync.class.getName();
 
     private String fileSHA1;
     private Context context;
@@ -51,14 +48,14 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
                     .param("list", "allimages")
                     .param("aisha1", fileSHA1)
                     .get();
-            Log.d(TAG, "Searching Commons API for existing file: " + result.toString());
+            Timber.d("Searching Commons API for existing file: %s", result);
         } catch (IOException e) {
-            Log.e(TAG, "IO Exception: ", e);
+            Timber.e(e, "IO Exception: ");
             return false;
         }
 
         ArrayList<ApiResult> resultNodes = result.getNodes("/api/query/allimages/img");
-        Log.d(TAG, "Result nodes: " + resultNodes);
+        Timber.d("Result nodes: %s", resultNodes);
 
         boolean fileExists;
         if (!resultNodes.isEmpty()) {
@@ -67,7 +64,7 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
             fileExists = false;
         }
 
-        Log.d(TAG, "File already exists in Commons:" + fileExists);
+        Timber.d("File already exists in Commons: %s", fileExists);
         return fileExists;
     }
 

@@ -14,9 +14,7 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -26,7 +24,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.util.Locale;
 
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.EventLog;
@@ -36,6 +33,7 @@ import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
+import timber.log.Timber;
 
 
 public class LoginActivity extends AccountAuthenticatorActivity {
@@ -61,7 +59,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Log.d("Commons", "Login done!");
+            Timber.d("Login done!");
 
             EventLog.schema(CommonsApplication.EVENT_LOGIN_ATTEMPT)
                     .param("username", username)
@@ -80,7 +78,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 Bundle extras = context.getIntent().getExtras();
 
                 if (extras != null) {
-                    Log.d("LoginActivity", "Bundle of extras: " + extras.toString());
+                    Timber.d("Bundle of extras: %s", extras);
                     if (accountCreated) { // Pass the new account back to the account manager
                         AccountAuthenticatorResponse response = extras.getParcelable(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE);
                         Bundle authResult = new Bundle();
@@ -116,7 +114,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                     response = R.string.login_failed_blocked;
                 } else {
                     // Should never really happen
-                    Log.d("Commons", "Login failed with reason: " + result);
+                    Timber.d("Login failed with reason: %s", result);
                     response = R.string.login_failed_generic;
                 }
                 Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
@@ -242,7 +240,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
         String password = passwordEdit.getText().toString();
 
-        Log.d("Commons", "Login to start!");
+        Timber.d("Login to start!");
         LoginTask task = new LoginTask(this);
         task.execute(canonicalUsername, password);
     }

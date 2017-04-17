@@ -2,7 +2,6 @@ package fr.free.nrw.commons.nearby;
 
 import android.net.Uri;
 import android.os.StrictMode;
-import android.util.Log;
 
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.location.LatLng;
@@ -20,10 +19,10 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import timber.log.Timber;
 
 public class NearbyPlaces {
 
-    private static final String TAG = NearbyPlaces.class.getName();
     private static final int MIN_RESULTS = 40;
     private static final double INITIAL_RADIUS = 1.0;
     private static final double MAX_RADIUS = 300.0;
@@ -81,7 +80,7 @@ public class NearbyPlaces {
             // increase the radius gradually to find a satisfactory number of nearby places
             while (radius < MAX_RADIUS) {
                 places = getFromWikidataQuery(curLatLng, lang, radius);
-                Log.d(TAG, places.size() + " results at radius: " + radius);
+                Timber.d("%d results at radius: %f", places.size(), radius);
                 if (places.size() >= MIN_RESULTS) {
                     break;
                 } else {
@@ -89,10 +88,10 @@ public class NearbyPlaces {
                 }
             }
         } catch (IOException e) {
-            Log.d(TAG, "" + e.toString());
+            Timber.d(e.toString());
             // errors tend to be caused by too many results (and time out)
             // try a small radius next time
-            Log.d(TAG, "back to initial radius: " + radius);
+            Timber.d("back to initial radius: %f", radius);
             radius = INITIAL_RADIUS;
         }
         return places;
@@ -107,15 +106,15 @@ public class NearbyPlaces {
                 .replace("${LANG}", "" + lang);
         query = URLEncoder.encode(query, "utf-8").replace("+", "%20");
         String url = WIKIDATA_QUERY_URL.replace("${QUERY}", query);
-        Log.d(TAG, url);
+        Timber.d(url);
         URLConnection conn = new URL(url).openConnection();
         conn.setRequestProperty("Accept", "text/tab-separated-values");
         BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 
         String line;
-        Log.d(TAG, "Reading from query result...");
+        Timber.d("Reading from query result...");
         while ((line = in.readLine()) != null) {
-            Log.v(TAG, line);
+            Timber.v(line);
             line = line + "\n"; // to pad columns and make fields a fixed size
             if (!line.startsWith("\"Point")) {
                 continue;
@@ -170,7 +169,7 @@ public class NearbyPlaces {
 
                 boolean firstLine = true;
                 String line;
-                Log.d(TAG, "Reading from CSV file...");
+                Timber.d("Reading from CSV file...");
 
                 while ((line = in.readLine()) != null) {
 
@@ -209,7 +208,7 @@ public class NearbyPlaces {
                 in.close();
 
             } catch (IOException e) {
-                Log.d(TAG, e.toString());
+                Timber.d(e.toString());
             }
         }
         return places;

@@ -8,9 +8,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.text.TextUtils;
-import android.util.Log;
 
 import fr.free.nrw.commons.data.DBOpenHelper;
+import timber.log.Timber;
 
 public class ContributionsContentProvider extends ContentProvider{
 
@@ -102,7 +102,7 @@ public class ContributionsContentProvider extends ContentProvider{
 
         switch(uriType) {
             case CONTRIBUTIONS_ID:
-                Log.d("Commons", "Deleting contribution id " + uri.getLastPathSegment());
+                Timber.d("Deleting contribution id %s", uri.getLastPathSegment());
                 rows = db.delete(Contribution.Table.TABLE_NAME,
                         "_id = ?",
                         new String[] { uri.getLastPathSegment() }
@@ -117,14 +117,14 @@ public class ContributionsContentProvider extends ContentProvider{
 
     @Override
     public int bulkInsert(Uri uri, ContentValues[] values) {
-        Log.d("Commons", "Hello, bulk insert! (ContributionsContentProvider)");
+        Timber.d("Hello, bulk insert! (ContributionsContentProvider)");
         int uriType = uriMatcher.match(uri);
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         sqlDB.beginTransaction();
         switch (uriType) {
             case CONTRIBUTIONS:
                 for(ContentValues value: values) {
-                    Log.d("Commons", "Inserting! " + value.toString());
+                    Timber.d("Inserting! %s", value);
                     sqlDB.insert(Contribution.Table.TABLE_NAME, null, value);
                 }
                 break;
