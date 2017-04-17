@@ -158,4 +158,6 @@
   <string name="media_detail_media_title">미디어 제목</string>
   <string name="media_detail_description">설명</string>
   <string name="become_a_tester_title">베타 테스터가 되세요</string>
+  <string name="use_wikidata">위키데이터 사용</string>
+  <string name="use_wikidata_summary">(경고: 이것을 끄면 대량의 모바일 데이터를 소비할 수 있습니다)</string>
 </resources>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="crash_dialog_text">ಉಸಬ್ಬಾ. ದಾದೋನಾ ತೊಂದರೆ ಅಂಡ್!</string>
+  <string name="crash_dialog_ok_toast">ಸೊಲ್ಮೆಲೋ</string>
+</resources>

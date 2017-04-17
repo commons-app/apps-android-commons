@@ -2,5 +2,6 @@
 <resources>
   <string name="crash_dialog_title">Commons ruksak</string>
   <string name="crash_dialog_text">Euh. Aya masalah!</string>
+  <string name="crash_dialog_comment_prompt">Bébéja ka kami naon baé nu ku anjeun dipilampah, tuluy kirimkeun liwat surélék. Béwara ti anjeun nulungan pisan pikeun mermanakeunna!</string>
   <string name="crash_dialog_ok_toast">Nuhun!</string>
 </resources>

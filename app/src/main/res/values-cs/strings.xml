@@ -16,8 +16,8 @@
   <string name="upload_completed_notification_title">%1$s nahráno!</string>
   <string name="upload_completed_notification_text">Klepnutím zobrazíte upload</string>
   <string name="upload_progress_notification_title_start">Spouští se načítání souboru %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">%1$s nahrávání</string>
-  <string name="upload_progress_notification_title_finishing">Dokončení nahrávání %1$s</string>
+  <string name="upload_progress_notification_title_in_progress">Nahrává se soubor %1$s</string>
+  <string name="upload_progress_notification_title_finishing">Dokončení nahrávání souboru %1$s</string>
   <string name="upload_failed_notification_title">Načítání souboru %1$s se nezdařilo</string>
   <string name="upload_failed_notification_subtitle">Klepnutím zobrazíte</string>
   <plurals name="uploads_pending_notification_indicator">
@@ -49,6 +49,7 @@
   <string name="menu_upload_single">Načíst</string>
   <string name="categories_search_text_hint">Hledání kategorií</string>
   <string name="menu_save_categories">Uložit</string>
+  <string name="refresh_button">Obnovit</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">Žádné nahrané soubory</item>
     <item quantity="one">1 nahraný soubor</item>
@@ -73,6 +74,7 @@
   <string name="about_license">Open Source software dostupný za podmínek &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Wikimedia Commons a logo Wikimedia Commons jsou ochranné známky Wikimedia Foundation a jsou použity se svolením Wikimedia Foundation. Nejsme podporováni Wikimedia Foundation ani nejsme její součástí.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Zdrojový kód&lt;/a&gt;, &lt;a href=\"https://commons-app.github.io/\"&gt;webová stránka&lt;/a&gt; a &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;hlášení chyb a sdílení nápadů&lt;/a&gt; na GitHubu.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Ochrana_osobních_údajů\"&gt;Ochrana osobních údajů&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;AUTOŘI&lt;/a&gt;</string>
   <string name="title_activity_about">O aplikaci</string>
   <string name="menu_feedback">Poslat názory (e-mailem)</string>
   <string name="no_email_client">Není nainstalován žádný e-mailový klient</string>
@@ -87,6 +89,10 @@
   <string name="use_previous">Použít předchozí název a popis</string>
   <string name="allow_gps">Automaticky získat aktuální polohu</string>
   <string name="allow_gps_summary">Nabídnout kategorie na základě aktuální polohy (pokud není obrázek opatřen souřadnicemi)</string>
+  <string name="preference_theme">Noční režim</string>
+  <string name="preference_theme_summary">Použít tmavý režim</string>
+  <string name="license_name_cc_by_sa_four">Uveďte autora-Zachovejte licenci 4.0</string>
+  <string name="license_name_cc_by_four">Uveďte autora 4.0</string>
   <string name="license_name_cc_by_sa"> Uveďte autora-Zachovejte licenci 3.0</string>
   <string name="license_name_cc_by">CCu00A0Uveďte autorau00A03.0</string>
   <string name="license_name_cc0">CC0</string>
@@ -156,4 +162,12 @@ z Wikimedia Commons.</string>
   <string name="file_exists">Tento soubor již na Commons existuje. Jste si jist, že chcete pokračovat?</string>
   <string name="yes">Ano</string>
   <string name="no">Ne</string>
+  <string name="media_detail_title">Název</string>
+  <string name="media_detail_media_title">Název média</string>
+  <string name="media_detail_description">Popis</string>
+  <string name="media_detail_description_explanation">Sem patří popis média. Může být potenciálně velmi dlouhý, takže zabere několik řádků. Přesto doufáme, že to vypadá hezky.</string>
+  <string name="become_a_tester_title">Staňte se beta testery</string>
+  <string name="become_a_tester_description">Přihlásit se do našeho beta kanálu na Google Play a dostávat včasný přístup k novinkám a opravám chyb</string>
+  <string name="use_wikidata">Použít Wikidata</string>
+  <string name="use_wikidata_summary">(Varování: vypnutí tohoto režimu může vést k velké spotřebě dat)</string>
 </resources>

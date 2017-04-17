@@ -169,4 +169,6 @@
   <string name="media_detail_description_explanation">在此填写媒体的说明。这可能会相当长，并将需要包裹在多行中。我们希望它看起来很好。</string>
   <string name="become_a_tester_title">成为测试版的测试者</string>
   <string name="become_a_tester_description">加入我们在Google Play上的测试频道，并更早获取新功能以及错误修复</string>
+  <string name="use_wikidata">使用维基数据</string>
+  <string name="use_wikidata_summary">（警告：禁用此功能可能导致大量的移动数据流量费用）</string>
 </resources>

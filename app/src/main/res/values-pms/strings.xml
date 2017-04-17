@@ -162,4 +162,12 @@ Ch\'a sgnaca an s\'ën mëssage (o ch\'a sgnaca ël boton andaré) për sauté \
   <string name="title_activity_nearby">Pòst davzin</string>
   <string name="warning">Avertensa</string>
   <string name="file_exists">S\'archivi a esist già su Comun. É-lo sigur ëd vorèj andé anans?</string>
+  <string name="yes">Bò</string>
+  <string name="no">Nò</string>
+  <string name="media_detail_title">Tìtol</string>
+  <string name="media_detail_media_title">Tìtol dël mojen</string>
+  <string name="media_detail_description">Descrission</string>
+  <string name="media_detail_description_explanation">La descrission dël mojen a va ambelessì. Sòn a podrìa esse potensialman longh, e a dovrà esse spantià su vàire linie. I speroma comsëssìa ch\'a ven-a grassios.</string>
+  <string name="become_a_tester_title">Dventé në sperimentador Beta</string>
+  <string name="become_a_tester_description">Anscriv-se a nòstr canal beta su Google Play a oten-e n\'acess antissipà a le neuve fonsionalità e coression ëd givo</string>
 </resources>

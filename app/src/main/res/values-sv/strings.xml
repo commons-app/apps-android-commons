@@ -74,7 +74,7 @@ Tryck på detta meddelande (eller gå tillbaka) för att hoppa över detta steg.
   <string name="title_activity_settings">Inställningar</string>
   <string name="title_activity_signup">Registrera</string>
   <string name="menu_about">Om</string>
-  <string name="about_license" fuzzy="true">Programvara med öppen källkod släppt under &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;licensen Apache v2&lt;/a&gt;. Wikimedia Commons och dess logotyp är varumärken av Wikimedia Foundation och används med tillstånd från Wikimedia Foundation. Vi varken stöds eller är kopplade med Wikimedia Foundation.</string>
+  <string name="about_license">Programvara med öppen källkod släppt under &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;licensen Apache v2&lt;/a&gt;. Wikimedia Commons och dess logotyp är varumärken av Wikimedia Foundation och används med tillstånd från Wikimedia Foundation. Vi varken stöds eller är kopplade med Wikimedia Foundation.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Källkoden&lt;/a&gt; och &lt;a href=\"https://commons-app.github.io/\"&gt;webbplatsen&lt;/a&gt; på GitHub. Skapa ett nytt &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-ärende&lt;/a&gt; för att rapportera buggar och förslag.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Integritetspolicy&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;ERKÄNNANDE&lt;/a&gt;</string>
@@ -171,4 +171,6 @@ människor runt hela världen!</string>
   <string name="media_detail_description_explanation">Beskrivningen för mediafilen ska vara här. Den kan vara riktig lång och kommer att behöva sträcka sig över flera rader. Vi hoppas i alla fall att det kommer se bra ut.</string>
   <string name="become_a_tester_title">Bli en betatestare</string>
   <string name="become_a_tester_description">Registrera dig på våra betakanal på Google Play och få tidig åtkomst till nya funktioner och buggfixar</string>
+  <string name="use_wikidata">Använd Wikidata</string>
+  <string name="use_wikidata_summary">(Varning: Stora mängder mobildata kan förekomma om detta inaktiveras)</string>
 </resources>
