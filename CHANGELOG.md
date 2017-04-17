@@ -1,5 +1,8 @@
 # Wikimedia Commons for Android
 
+## v2.2.2 beta
+- Hotfix for Nearby localization issue
+
 ## v2.2.1 beta 
 - Hotfix for Settings crash
 
