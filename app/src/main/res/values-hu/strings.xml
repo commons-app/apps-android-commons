@@ -170,4 +170,6 @@ Kattints erre az üzenetre a lépés kihagyásához</string>
   <string name="media_detail_description_explanation">A média leírása kerül ide. Ez akár egészen hosszú is lehet, és több sorba fog kerülni. Azért reméljük, jól néz majd ki.</string>
   <string name="become_a_tester_title">Béta tesztelővé válás</string>
   <string name="become_a_tester_description">Jelentkezz a béta csatornánkra a Google Playen, hogy hamarabb megkapd a hibajavításokat és az új funkciókat</string>
+  <string name="use_wikidata">Wikidata használata</string>
+  <string name="use_wikidata_summary">(Figyelmeztetés: a kikapcsolása nagy mobiladat-forgalmat eredményezhet)</string>
 </resources>

@@ -5,21 +5,21 @@
   <string name="username">Nazwa użytkownika</string>
   <string name="password">Hasło</string>
   <string name="login">Zaloguj się</string>
-  <string name="signup">Rejestracja</string>
+  <string name="signup">Zarejestruj się</string>
   <string name="logging_in_title">Logowanie</string>
   <string name="logging_in_message">Proszę czekać...</string>
   <string name="login_success">Zalogowano pomyślnie!</string>
   <string name="login_failed">Logowanie nie powiodło się!</string>
-  <string name="upload_failed">Nie znaleziono pliku. Spróbuj z innym.</string>
+  <string name="upload_failed">Nie znaleziono pliku. Spróbuj znaleźć inny.</string>
   <string name="authentication_failed">Błąd uwierzytelniania!</string>
-  <string name="uploading_started">Wysyłanie rozpoczęte</string>
+  <string name="uploading_started">Wysyłanie rozpoczęte!</string>
   <string name="upload_completed_notification_title">Przesłano %1$s!</string>
-  <string name="upload_completed_notification_text">Kliknij, aby zobaczyć przesłany plik</string>
+  <string name="upload_completed_notification_text">Dotknij, aby zobaczyć przesłany plik</string>
   <string name="upload_progress_notification_title_start">Rozpoczęto przesyłanie pliku %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Wysyłanie %1$s</string>
   <string name="upload_progress_notification_title_finishing">Zakończono wysyłanie pliku %1$s</string>
   <string name="upload_failed_notification_title">Wysyłanie %1$s nieudane</string>
-  <string name="upload_failed_notification_subtitle">Kliknij, aby zobaczyć</string>
+  <string name="upload_failed_notification_subtitle">Dotknij, aby zobaczyć</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Przesyłanie 1 pliku</item>
     <item quantity="other">Przesyłanie %d plików</item>
@@ -77,10 +77,11 @@ Kliknij ten komunikat lub naciśnij „cofnij”, aby pominąć ten krok.</strin
   <string name="about_license">Oprogramowanie Open Source, wydane na licencji &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Wikimedia Commons i jego logo są znakami towarowymi Wikimedia Foundation i są wykorzystywane za zgodą Wikimedia Foundation. Nie jesteśmy powiązani z Wikimedia Foundation.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kod źródłowy&lt;/a&gt; oraz &lt;a href=\"https://commons-app.github.io/\"&gt;strona internetowa&lt;/a&gt; na GitHub. Aby zgłosić błąd lub sugestię, utwórz nowe &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;zgłoszenie na GitHub&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Polityka prywatności&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Twórcy&lt;/a&gt;</string>
   <string name="title_activity_about">O aplikacji</string>
   <string name="menu_feedback">Wyślij opinię (przez e-mail)</string>
   <string name="no_email_client">Klient e-mail nie jest zainstalowany</string>
-  <string name="provider_categories">Niedawno używane Kategorie</string>
+  <string name="provider_categories">Niedawno używane kategorie</string>
   <string name="waiting_first_sync">Oczekiwanie na pierwszą synchronizację...</string>
   <string name="no_uploads_yet">Nie przesłałeś jeszcze żadnych zdjęć.</string>
   <string name="menu_retry_upload">Ponów próbę</string>
@@ -92,6 +93,7 @@ Kliknij ten komunikat lub naciśnij „cofnij”, aby pominąć ten krok.</strin
   <string name="allow_gps">Automatycznie uzyskaj bieżącą lokalizację</string>
   <string name="allow_gps_summary">Pobierz aktualną lokalizację, aby uzyskać propozycje kategorii, jeśli obraz nie zawiera znaczników geograficznych</string>
   <string name="preference_theme">Tryb nocny</string>
+  <string name="preference_theme_summary">Użyj ciemnej skórki</string>
   <string name="license_name_cc_by_sa_four">Uznanie autorstwa-Na tych samych warunkach 4.0</string>
   <string name="license_name_cc_by_four">Uznanie autorstwa 4.0</string>
   <string name="license_name_cc_by_sa"> Uznanie autorstwa-Na tych samych warunkach 3.0</string>
@@ -163,6 +165,10 @@ Kliknij ten komunikat lub naciśnij „cofnij”, aby pominąć ten krok.</strin
   <string name="yes">Tak</string>
   <string name="no">Nie</string>
   <string name="media_detail_title">Tytuł</string>
+  <string name="media_detail_media_title">Tytuł pliku</string>
   <string name="media_detail_description">Opis</string>
+  <string name="media_detail_description_explanation">Tu jest miejsce na opis pliku. Mogą być dość długie i wymagać przewijania podczas czytania. Chcemy, by wszystko wyglądało dobrze.</string>
   <string name="become_a_tester_title">Zostań beta-testerem</string>
+  <string name="become_a_tester_description">Dołącz do kanału bety w Google Play i dostań wczesny dostęp do nowych funkcji i łatek</string>
+  <string name="use_wikidata">Użyj Wikidanych</string>
 </resources>

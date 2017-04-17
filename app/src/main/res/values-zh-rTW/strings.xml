@@ -170,4 +170,6 @@
   <string name="media_detail_description_explanation">描述使用在此的多媒體。若內容可能會很長的話請斷開換行。我們希望這樣可以讓內容看起來較好些。</string>
   <string name="become_a_tester_title">成為測試人員</string>
   <string name="become_a_tester_description">選擇加入我們在 Google Play 上的 beta channel 來早期獲得新功能並修正程式臭蟲</string>
+  <string name="use_wikidata">使用維基數據</string>
+  <string name="use_wikidata_summary">（警告：停用此項可能會導致耗費大量行動數據）</string>
 </resources>

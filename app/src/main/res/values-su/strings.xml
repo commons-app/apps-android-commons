@@ -74,9 +74,10 @@ Toél ieu talatah (atawa toél deui) pikeun ngaliwatkeun ieu bagęan.</string>
   <string name="title_activity_settings">Séting</string>
   <string name="title_activity_signup">Daptar</string>
   <string name="menu_about">Ngeunaan</string>
-  <string name="about_license">Pakakas lemes kodeu kabuka dirilis di handapeun &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Lisénsi Apache v2&lt;/a&gt;. Wikimedia Commons sarta logona téh mérk dagang anu Yayasan Wikimédia ogé dipakéna kudu meunang widi ti Yayasan Wikimédia. Kami teu disatujuan ku atawa digawé bareng jeung Yayasan Wikimédia.</string>
+  <string name="about_license">Pakakas lemes kodeu nembrak dirilis di handapeun &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Lisénsi Apache v2&lt;/a&gt;. Wikimedia Commons sarta logona téh mérk dagang anu Yayasan Wikimédia ogé dipakéna kudu meunang widi ti Yayasan Wikimédia. Kami teu disatujuan ku atawa digawé bareng jeung Yayasan Wikimédia.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sumber&lt;/a&gt; sarta &lt;a href=\"https://commons-app.github.io/\"&gt;situ wéb&lt;/a&gt; dina GitHub. Jieun anyar &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;perkara GitHub&lt;/a&gt; pikeun saran jeung laporan kutu.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Kawijakan privasi&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;PANGAJÉN&lt;/a&gt;</string>
   <string name="title_activity_about">Ngeunaan</string>
   <string name="menu_feedback">Kirim eupan balik (via Surélék)</string>
   <string name="no_email_client">Tanpa klayen surélék kapasang</string>
@@ -90,6 +91,7 @@ Toél ieu talatah (atawa toél deui) pikeun ngaliwatkeun ieu bagęan.</string>
   <string name="preference_license">Lisénsi</string>
   <string name="use_previous">Paké baé judul/pedaran saméméhna</string>
   <string name="allow_gps">Comot lokasi sacara otomatis</string>
+  <string name="allow_gps_summary">Catet lokasi ayeuna pikeun nawarkeun usulan kategori lamun gambar tanpa géotag</string>
   <string name="preference_theme">Modus peuting</string>
   <string name="preference_theme_summary">Gunakeun téma cakueum</string>
   <string name="license_name_cc_by_sa_four">Atribusi-BabagiSarupa 4.0</string>
@@ -128,10 +130,24 @@ Toél ieu talatah (atawa toél deui) pikeun ngaliwatkeun ieu bagęan.</string>
   <string name="license_name_pd_ineligible">Domain balaréa (teu nyumponan sarat ajang hak cipta)</string>
   <string name="license_name_attribution">Atribusi</string>
   <string name="license_name_gfdl">Lisénsi Dokuméntasi Bébas GNU</string>
+  <string name="tutorial_1_text">Wikimedia Commons ngimahan ampir sakabéh gambar anu dipaké di Wikipédia.</string>
+  <string name="tutorial_1_subtext">Gambar-gambar anjeun ngabantu ngatik jalma di sakuliah dunya!</string>
+  <string name="tutorial_2_text">Mangga unggahkeun gambar-gambar jieunan anjeun:</string>
+  <string name="tutorial_2_subtext">- Obyék alam (kekembangan, sasatoan, gunung, jsb.)
+- Obyék mangpaat (sapédah, stasiun karéta, jsb.)
+- Inohong (bupati, atlit nasional, jsb.)</string>
   <string name="tutorial_3_text">Wayahna ULAH ngunjal:</string>
+  <string name="tutorial_3_subtext">- Sélpi atawa poto sobat anjeun
+- Poto anu diundeur ti Internét
+- Poto layar aplikasi</string>
   <string name="tutorial_4_text">Conto unjalan:</string>
+  <string name="tutorial_4_subtext">- Judul: Gedung Opera Sydney
+- Pedaran: Gedung Opera Sydney (Sydney Opera House) ditempo ti basisir peuntas
+- Kategori: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Sumbangkeun gambar Anjeun. Bantuan ngahirupkeun artikel Wikipédia!</string>
   <string name="welcome_wikipedia_subtext">Gambar di Wikipédia asalna ti Wikimedia Commons.</string>
+  <string name="welcome_copyright_text">Gambar-gambar anjeun ngabantu ngatik jalma di sakuliah dunya.</string>
+  <string name="welcome_copyright_subtext">Singkahan bahan-bahan ti Internét anu boga hak cipta, kaasup poto poster, jilid buku, jsb.</string>
   <string name="welcome_final_text">Anjeun geus ngarti?</string>
   <string name="welcome_final_button_text">Enya</string>
   <string name="detail_panel_cats_label">Kategori</string>
@@ -140,9 +156,12 @@ Toél ieu talatah (atawa toél deui) pikeun ngaliwatkeun ieu bagęan.</string>
   <string name="detail_description_empty">Tanpa pedaran</string>
   <string name="detail_license_empty">Lisénsi teu dipikanyaho</string>
   <string name="menu_refresh">Segerkeun</string>
+  <string name="storage_permission_rationale">Merlukeun widi: Baca simpenan éksternal. Aplikasi teu bisa jalan tanpa ieu.</string>
+  <string name="location_permission_rationale">Idin pilihan: Paké lokasi kiwari pikeun usulan kategori</string>
   <string name="ok">Oké</string>
   <string name="title_activity_nearby">Tempat Sabudeureun</string>
   <string name="warning">Mangkahadé</string>
+  <string name="file_exists">Ieu berkas geus aya di Commons. Rék diteruskeun baé ieu téh?</string>
   <string name="yes">Nya</string>
   <string name="no">Henteu</string>
   <string name="media_detail_title">Judul</string>
@@ -150,4 +169,7 @@ Toél ieu talatah (atawa toél deui) pikeun ngaliwatkeun ieu bagęan.</string>
   <string name="media_detail_description">Déskripsi</string>
   <string name="media_detail_description_explanation">Pedaran berkas nyangkaruk didieu. Bisa jadi matak ngalikakeun, sarta ngempladkeun kana sawatara baris. Sanajan kitu, muga bisa katémbong écés.</string>
   <string name="become_a_tester_title">Jadi tukang ngetés Béta</string>
+  <string name="become_a_tester_description">Pilihan asup kana saluran béta kami di Google Play sarta meunangkeun aksés munggaran pikeun fitur anyar jeung pameneran kutu</string>
+  <string name="use_wikidata">Paké Wikidata</string>
+  <string name="use_wikidata_summary">(Mankahadé: maéhan ieu bisa ngakibatkeun pamakéan data sélulér nu pohara gedéna)</string>
 </resources>

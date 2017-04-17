@@ -16,6 +16,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -101,12 +102,12 @@ public class NearbyPlaces {
             throws IOException {
         List<Place> places = new ArrayList<>();
         String query = WIKIDATA_QUERY_TEMPLATE.replace("${RADIUS}", "" + radius)
-                .replace("${LAT}", "" + String.format("%.3f", cur.latitude))
-                .replace("${LONG}", "" + String.format("%.3f", cur.longitude))
+                .replace("${LAT}", "" + String.format(Locale.ROOT, "%.3f", cur.latitude))
+                .replace("${LONG}", "" + String.format(Locale.ROOT, "%.3f", cur.longitude))
                 .replace("${LANG}", "" + lang);
         query = URLEncoder.encode(query, "utf-8").replace("+", "%20");
         String url = WIKIDATA_QUERY_URL.replace("${QUERY}", query);
-        Log.d(TAG, url.toString());
+        Log.d(TAG, url);
         URLConnection conn = new URL(url).openConnection();
         conn.setRequestProperty("Accept", "text/tab-separated-values");
         BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));

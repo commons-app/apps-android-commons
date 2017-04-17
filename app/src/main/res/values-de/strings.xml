@@ -170,4 +170,6 @@ u2022 Kategorien: Opernhaus von Sydney, Opernhaus von Sydney von Westen, Opernha
   <string name="media_detail_description_explanation">Hier folgt die Beschreibung des Mediums. Diese kann möglicherweise ziemlich lang sein und erfordert dann einen Umbruch auf mehreren Zeilen. Wir hoffen, dass sie dennoch gut aussieht.</string>
   <string name="become_a_tester_title">Beta-Tester werden</string>
   <string name="become_a_tester_description">Melde dich bei unserem Beta-Kanal auf Google Play an und erhalte frühen Zugriff auf neue Funktionen und Fehlerbehebungen</string>
+  <string name="use_wikidata">Wikidata verwenden</string>
+  <string name="use_wikidata_summary">(Warnung: Die Deaktivierung kann einen hohen Verbrauch an mobilen Daten verursachen)</string>
 </resources>

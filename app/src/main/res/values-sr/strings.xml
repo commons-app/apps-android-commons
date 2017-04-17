@@ -88,7 +88,7 @@
   <string name="menu_download">Преузми</string>
   <string name="preference_license">Лиценца</string>
   <string name="use_previous">Користи претходан наслов/опис</string>
-  <string name="allow_gps">Аутоматски прими тренутну локацију</string>
+  <string name="allow_gps">Аутоматски дохвати тренутну локацију</string>
   <string name="allow_gps_summary">Прими тренутну локацију да би предложили категорију ако слика није географски означена</string>
   <string name="preference_theme">Ноћни режим</string>
   <string name="preference_theme_summary">Користити тамну тему</string>
@@ -151,8 +151,8 @@
   <string name="detail_description_empty">Нема описа</string>
   <string name="detail_license_empty">Непозната лиценца</string>
   <string name="menu_refresh">Освежи</string>
-  <string name="storage_permission_rationale">Потребна дозвола: Провера спољње меморије. Апликација без овога не може да функционише.</string>
-  <string name="location_permission_rationale">Опцијална дозволна: Преузми тренутну локацију за сугестију категорија</string>
+  <string name="storage_permission_rationale">Потребна дозвола: Провера спољашње меморије. Апликација без овога не може да функционише.</string>
+  <string name="location_permission_rationale">Опциона дозвола: Преузми тренутну локацију за предлоге категорија</string>
   <string name="ok">У реду</string>
   <string name="title_activity_nearby">Места у близини</string>
   <string name="warning">Упозорење</string>
