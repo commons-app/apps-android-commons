@@ -40,8 +40,6 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
 
     private boolean isTaskRunning = false;
 
-    private List<Place> places;
-
     private static final String TAG = NearbyListFragment.class.getName();
 
     public NearbyListFragment() {
@@ -145,15 +143,14 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
 
         @Override
         protected List<Place> doInBackground(Void... params) {
-            places = loadAttractionsFromLocation(
+            return loadAttractionsFromLocation(
                     ((NearbyActivity)getActivity()).getLocationManager().getLatestLocation()
             );
-            return places;
         }
 
         @Override
-        protected void onPostExecute(List<Place> result) {
-            super.onPostExecute(result);
+        protected void onPostExecute(List<Place> places) {
+            super.onPostExecute(places);
 
             if (isCancelled()) {
                 return;
@@ -164,14 +161,14 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
 
             listview.setAdapter(adapter);
 
-            listener.onTaskFinished(result);
+            listener.onTaskFinished(places);
             adapter.notifyDataSetChanged();
         }
     }
 
     @OnItemClick(R.id.listview)
     void onItemClicked(int position) {
-        Place place = places.get(position);
+        Place place = (Place) listview.getItemAtPosition(position);
         LatLng placeLatLng = place.location;
 
         double latitude = placeLatLng.latitude;
