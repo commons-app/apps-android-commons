@@ -14,7 +14,6 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -36,6 +35,7 @@ import fr.free.nrw.commons.modifications.CategoryModifier;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
+import timber.log.Timber;
 
 public  class       MultipleShareActivity
         extends     AuthenticatedActivity
@@ -116,7 +116,7 @@ public  class       MultipleShareActivity
 
     private void multipleUploadBegins() {
 
-        Log.d("MultipleShareActivity", "Multiple upload begins");
+        Timber.d("Multiple upload begins");
 
         final ProgressDialog dialog = new ProgressDialog(MultipleShareActivity.this);
         dialog.setIndeterminate(false);

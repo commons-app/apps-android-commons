@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +33,7 @@ import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import timber.log.Timber;
 
 public class MediaDetailFragment extends Fragment {
 
@@ -130,11 +130,11 @@ public class MediaDetailFragment extends Fragment {
         Media media = detailProvider.getMediaAtPosition(index);
         if (media == null) {
             // Ask the detail provider to ping us when we're ready
-            Log.d("Commons", "MediaDetailFragment not yet ready to display details; registering observer");
+            Timber.d("MediaDetailFragment not yet ready to display details; registering observer");
             dataObserver = new DataSetObserver() {
                 @Override
                 public void onChanged() {
-                    Log.d("Commons", "MediaDetailFragment ready to display delayed details!");
+                    Timber.d("MediaDetailFragment ready to display delayed details!");
                     detailProvider.unregisterDataSetObserver(dataObserver);
                     dataObserver = null;
                     displayMediaDetails(detailProvider.getMediaAtPosition(index));
@@ -142,7 +142,7 @@ public class MediaDetailFragment extends Fragment {
             };
             detailProvider.registerDataSetObserver(dataObserver);
         } else {
-            Log.d("Commons", "MediaDetailFragment ready to display details");
+            Timber.d("MediaDetailFragment ready to display details");
             displayMediaDetails(media);
         }
 
@@ -186,7 +186,7 @@ public class MediaDetailFragment extends Fragment {
         //Always load image from Internet to allow viewing the desc, license, and cats
         String actualUrl = media.getThumbnailUrl(640);
         if(actualUrl.startsWith("http")) {
-            Log.d("Volley", "Actual URL starts with http and is: " + actualUrl);
+            Timber.d("Actual URL starts with http and is: %s", actualUrl);
 
             ImageLoader loader = ((CommonsApplication)getActivity().getApplicationContext()).getImageLoader();
             MediaWikiImageView mwImage = (MediaWikiImageView)image;
@@ -238,7 +238,7 @@ public class MediaDetailFragment extends Fragment {
                         }
                         rebuildCatList();
                     } else {
-                        Log.d("Commons", "Failed to load photo details.");
+                        Timber.d("Failed to load photo details.");
                     }
                 }
             };
@@ -246,7 +246,7 @@ public class MediaDetailFragment extends Fragment {
         } else {
             //This should not usually happen, image along with associated details should always be loaded from Internet, but keeping this for now for backup.
             //Even if image is loaded from device storage, it will display, albeit with empty desc and cat.
-            Log.d("Volley", "Actual URL does not start with http and is: " + actualUrl);
+            Timber.d("Actual URL does not start with http and is: %s", actualUrl);
             com.nostra13.universalimageloader.core.ImageLoader.getInstance().displayImage(actualUrl, image, displayOptions, new ImageLoadingListener() {
                 @Override
                 public void onLoadingStarted(String s, View view) {
@@ -286,7 +286,7 @@ public class MediaDetailFragment extends Fragment {
 
                 @Override
                 public void onLoadingCancelled(String s, View view) {
-                    Log.e("Volley", "Image loading cancelled. But why?");
+                    Timber.e("Image loading cancelled. But why?");
                 }
             });
         }
@@ -377,7 +377,7 @@ public class MediaDetailFragment extends Fragment {
 
     private String prettyLicense(Media media) {
         String licenseKey = media.getLicense();
-        Log.d("Commons", "Media license is: " + licenseKey);
+        Timber.d("Media license is: %s", licenseKey);
         if (licenseKey == null || licenseKey.equals("")) {
             return getString(R.string.detail_license_empty);
         }

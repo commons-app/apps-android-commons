@@ -10,7 +10,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -29,8 +28,9 @@ import fr.free.nrw.commons.AboutActivity;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.settings.SettingsActivity;
 import fr.free.nrw.commons.nearby.NearbyActivity;
+import fr.free.nrw.commons.settings.SettingsActivity;
+import timber.log.Timber;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -45,7 +45,6 @@ public class ContributionsListFragment extends Fragment {
     @BindView(R.id.emptyMessage) TextView emptyMessage;
 
     private ContributionController controller;
-    private static final String TAG = "ContributionsList";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,14 +53,14 @@ public class ContributionsListFragment extends Fragment {
 
         contributionsList.setOnItemClickListener((AdapterView.OnItemClickListener)getActivity());
         if(savedInstanceState != null) {
-            Log.d(TAG, "Scrolling to " + savedInstanceState.getInt("grid-position"));
+            Timber.d("Scrolling to %d", savedInstanceState.getInt("grid-position"));
             contributionsList.setSelection(savedInstanceState.getInt("grid-position"));
         }
 
         //TODO: Should this be in onResume?
         SharedPreferences prefs = this.getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
         String lastModified = prefs.getString("lastSyncTimestamp", "");
-        Log.d(TAG, "Last Sync Timestamp: " + lastModified);
+        Timber.d("Last Sync Timestamp: %s", lastModified);
 
         if (lastModified.equals("")) {
             waitingMessage.setVisibility(View.VISIBLE);
@@ -96,10 +95,12 @@ public class ContributionsListFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
 
         if ( resultCode == RESULT_OK ) {
-            Log.d("Contributions", "OnActivityResult() parameters: Req code: " + requestCode + " Result code: " + resultCode + " Data: " + data);
+            Timber.d("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
+                    requestCode, resultCode, data);
             controller.handleImagePicked(requestCode, data);
         } else {
-            Log.e("Contributions", "OnActivityResult() parameters: Req code: " + requestCode + " Result code: " + resultCode + " Data: " + data);
+            Timber.e("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
+                    requestCode, resultCode, data);
         }
     }
 
@@ -176,7 +177,7 @@ public class ContributionsListFragment extends Fragment {
             // 1 = Storage allowed when gallery selected
             case 1: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Log.d("ContributionsList", "Call controller.startGalleryPick()");
+                    Timber.d("Call controller.startGalleryPick()");
                     controller.startGalleryPick();
                 }
             }
@@ -184,7 +185,7 @@ public class ContributionsListFragment extends Fragment {
             // 2 = Location allowed when 'nearby places' selected
             case 2: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Log.d("ContributionsList", "Location permission granted");
+                    Timber.d("Location permission granted");
                     Intent nearbyIntent = new Intent(getActivity(), NearbyActivity.class);
                     startActivity(nearbyIntent);
                 }

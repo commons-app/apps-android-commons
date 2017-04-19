@@ -44,8 +44,6 @@ public class Contribution extends Media {
     public static final String SOURCE_GALLERY = "gallery";
     public static final String SOURCE_EXTERNAL = "external";
 
-    private static final String TAG = "Contribution";
-
     private ContentProviderClient client;
     private Uri contentUri;
     private String source;

@@ -16,6 +16,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.7'
     compile "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
     annotationProcessor "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
+    compile 'com.jakewharton.timber:timber:4.5.1'
 
     testCompile 'junit:junit:4.12'
 }

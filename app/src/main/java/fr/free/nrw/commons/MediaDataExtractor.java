@@ -1,7 +1,5 @@
 package fr.free.nrw.commons;
 
-import android.util.Log;
-
 import org.mediawiki.api.ApiResult;
 import org.mediawiki.api.MWApi;
 import org.w3c.dom.Document;
@@ -22,6 +20,8 @@ import java.util.regex.Pattern;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+
+import timber.log.Timber;
 
 /**
  * Fetch additional media data from the network that we don't store locally.
@@ -131,20 +131,20 @@ public class MediaDataExtractor {
             * look for 'self' template and check its first parameter
             * if none, look for any of the known templates
          */
-        Log.d("Commons", "MediaDataExtractor searching for license");
+        Timber.d("MediaDataExtractor searching for license");
         Node selfLicenseNode = findTemplate(doc.getDocumentElement(), "self");
         if (selfLicenseNode != null) {
             Node firstNode = findTemplateParameter(selfLicenseNode, 1);
             String licenseTemplate = getFlatText(firstNode);
             License license = licenseList.licenseForTemplate(licenseTemplate);
             if (license == null) {
-                Log.d("Commons", "MediaDataExtractor found no matching license for self parameter: " + licenseTemplate + "; faking it");
+                Timber.d("MediaDataExtractor found no matching license for self parameter: %s; faking it", licenseTemplate);
                 this.license = licenseTemplate; // hack hack! For non-selectable licenses that are still in the system.
             } else {
                 // fixme: record the self-ness in here too... sigh
                 // all this needs better server-side metadata
                 this.license = license.getKey();
-                Log.d("Commons", "MediaDataExtractor found self-license " + this.license);
+                Timber.d("MediaDataExtractor found self-license %s", this.license);
             }
         } else {
             for (License license : licenseList.values()) {
@@ -153,7 +153,7 @@ public class MediaDataExtractor {
                 if (template != null) {
                     // Found!
                     this.license = license.getKey();
-                    Log.d("Commons", "MediaDataExtractor found non-self license " + this.license);
+                    Timber.d("MediaDataExtractor found non-self license %s", this.license);
                     break;
                 }
             }

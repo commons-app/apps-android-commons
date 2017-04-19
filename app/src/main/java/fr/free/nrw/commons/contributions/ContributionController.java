@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,6 +14,7 @@ import java.util.Date;
 
 import fr.free.nrw.commons.upload.ShareActivity;
 import fr.free.nrw.commons.upload.UploadService;
+import timber.log.Timber;
 
 public class ContributionController {
     private Fragment fragment;
@@ -44,7 +44,7 @@ public class ContributionController {
                 }
 
             } catch (IOException e) {
-                Log.e("Commons", "Could not create file: " + path, e);
+                Timber.e(e, "Could not create file: %s", path);
             }
 
             return Uri.fromFile(_photoFile);
@@ -84,11 +84,11 @@ public class ContributionController {
                 shareIntent.putExtra(UploadService.EXTRA_SOURCE, Contribution.SOURCE_CAMERA);
                 break;
         }
-        Log.i("Image", "Image selected");
+        Timber.i("Image selected");
         try {
             activity.startActivity(shareIntent);
         } catch (SecurityException e) {
-            Log.e("ContributionController", "Security Exception", e);
+            Timber.e(e, "Security Exception");
         }
     }
 

@@ -6,10 +6,11 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
+
+import timber.log.Timber;
 
 public class LocationServiceManager implements LocationListener {
-    public static final String TAG = "LocationServiceManager";
+
     private String provider;
     private LocationManager locationManager;
     private LatLng latestLocation;
@@ -31,14 +32,14 @@ public class LocationServiceManager implements LocationListener {
             Location location = locationManager.getLastKnownLocation(provider);
             //Location works, just need to 'send' GPS coords
             // via emulator extended controls if testing on emulator
-            Log.d(TAG, "Checking for location...");
+            Timber.d("Checking for location...");
             if (location != null) {
                 this.onLocationChanged(location);
             }
         } catch (IllegalArgumentException e) {
-            Log.e(TAG, "Illegal argument exception", e);
+            Timber.e(e, "Illegal argument exception");
         } catch (SecurityException e) {
-            Log.e(TAG, "Security exception", e);
+            Timber.e(e, "Security exception");
         }
     }
 
@@ -48,7 +49,7 @@ public class LocationServiceManager implements LocationListener {
         try {
             locationManager.removeUpdates(this);
         } catch (SecurityException e) {
-            Log.e(TAG, "Security exception", e);
+            Timber.e(e, "Security exception");
         }
     }
 
@@ -56,24 +57,23 @@ public class LocationServiceManager implements LocationListener {
     public void onLocationChanged(Location location) {
         double currentLatitude = location.getLatitude();
         double currentLongitude = location.getLongitude();
-        Log.d(TAG, "Latitude: " + String.valueOf(currentLatitude)
-                + " Longitude: " + String.valueOf(currentLongitude));
+        Timber.d("Latitude: %f Longitude: %f", currentLatitude, currentLongitude);
 
         latestLocation = new LatLng(currentLatitude, currentLongitude);
     }
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
-        Log.d(TAG, provider + "'s status changed to " + status);
+        Timber.d("%s's status changed to %d", provider, status);
     }
 
     @Override
     public void onProviderEnabled(String provider) {
-        Log.d(TAG, "Provider " + provider + " enabled");
+        Timber.d("Provider %s enabled", provider);
     }
 
     @Override
     public void onProviderDisabled(String provider) {
-        Log.d(TAG, "Provider " + provider + " disabled");
+        Timber.d("Provider %s disabled", provider);
     }
 }

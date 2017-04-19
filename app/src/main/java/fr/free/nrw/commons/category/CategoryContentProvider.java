@@ -8,9 +8,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.text.TextUtils;
-import android.util.Log;
 
 import fr.free.nrw.commons.data.DBOpenHelper;
+import timber.log.Timber;
 
 public class CategoryContentProvider extends ContentProvider {
 
@@ -101,14 +101,14 @@ public class CategoryContentProvider extends ContentProvider {
 
     @Override
     public int bulkInsert(Uri uri, ContentValues[] values) {
-        Log.d("Commons", "Hello, bulk insert! (CategoryContentProvider)");
+        Timber.d("Hello, bulk insert! (CategoryContentProvider)");
         int uriType = uriMatcher.match(uri);
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         sqlDB.beginTransaction();
         switch (uriType) {
             case CATEGORIES:
                 for(ContentValues value: values) {
-                    Log.d("Commons", "Inserting! " + value.toString());
+                    Timber.d("Inserting! %s", value);
                     sqlDB.insert(Category.Table.TABLE_NAME, null, value);
                 }
                 break;

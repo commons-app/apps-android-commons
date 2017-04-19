@@ -11,7 +11,6 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -37,6 +36,7 @@ import butterknife.OnTouch;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import timber.log.Timber;
 
 public class SingleUploadFragment extends Fragment {
     private SharedPreferences prefs;
@@ -53,8 +53,6 @@ public class SingleUploadFragment extends Fragment {
     @BindView(R.id.licenseSpinner) Spinner licenseSpinner;
 
     private OnUploadActionInitiated uploadActionInitiatedHandler;
-
-    private static final String TAG = SingleUploadFragment.class.getName();
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -103,7 +101,7 @@ public class SingleUploadFragment extends Fragment {
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         license = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
 
-        Log.d("Single Upload fragment", license);
+        Timber.d(license);
 
         ArrayAdapter<String> adapter;
         if (PreferenceManager.getDefaultSharedPreferences(getActivity()).getBoolean("theme",true)) {
@@ -117,7 +115,7 @@ public class SingleUploadFragment extends Fragment {
         licenseSpinner.setAdapter(adapter);
 
         int position = licenseItems.indexOf(getString(Utils.licenseNameFor(license)));
-        Log.d("Single Upload fragment", "Position:"+position+" "+getString(Utils.licenseNameFor(license)));
+        Timber.d("Position: %d %s", position, getString(Utils.licenseNameFor(license)));
         licenseSpinner.setSelection(position);
 
         TextWatcher uploadEnabler = new TextWatcher() {
@@ -190,7 +188,7 @@ public class SingleUploadFragment extends Fragment {
         SharedPreferences titleDesc = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String title = titleDesc.getString("Title", "");
         String desc = titleDesc.getString("Desc", "");
-        Log.d(TAG, "Title: " + title + ", Desc: " + desc);
+        Timber.d("Title: %s, Desc: %s", title, desc);
 
         titleEdit.setText(title);
         descEdit.setText(desc);

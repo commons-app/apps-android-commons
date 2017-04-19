@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +9,8 @@ import android.widget.ArrayAdapter;
 import fr.free.nrw.commons.R;
 
 import java.util.List;
+
+import timber.log.Timber;
 
 public class NearbyAdapter extends ArrayAdapter<Place> {
     private List<Place> placesList;
@@ -33,7 +34,7 @@ public class NearbyAdapter extends ArrayAdapter<Place> {
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
         Place place = getItem(position);
-        Log.v("NearbyAdapter", "" + place);
+        Timber.v(String.valueOf(place));
 
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {

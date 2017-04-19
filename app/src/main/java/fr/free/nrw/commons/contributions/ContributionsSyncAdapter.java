@@ -11,7 +11,6 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.text.TextUtils;
-import android.util.Log;
 
 import org.mediawiki.api.ApiResult;
 import org.mediawiki.api.MWApi;
@@ -22,6 +21,7 @@ import java.util.Date;
 
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
+import timber.log.Timber;
 
 public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
     private static int COMMIT_THRESHOLD = 10;
@@ -85,18 +85,18 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                 // There isn't really much we can do, eh?
                 // FIXME: Perhaps add EventLogging?
                 syncResult.stats.numIoExceptions += 1; // Not sure if this does anything. Shitty docs
-                Log.d("Commons", "Syncing failed due to " + e.toString());
+                Timber.d("Syncing failed due to %s", e);
                 return;
             }
-            Log.d("Commons", "Last modified at " + lastModified);
+            Timber.d("Last modified at %s", lastModified);
 
             ArrayList<ApiResult> uploads = result.getNodes("/api/query/logevents/item");
-            Log.d("Commons", uploads.size() + " results!");
+            Timber.d("%d results!", uploads.size());
             ArrayList<ContentValues> imageValues = new ArrayList<>();
             for(ApiResult image: uploads) {
                 String filename = image.getString("@title");
                 if(fileExists(contentProviderClient, filename)) {
-                    Log.d("Commons", "Skipping " + filename);
+                    Timber.d("Skipping %s", filename);
                     continue;
                 }
                 String thumbUrl = Utils.makeThumbBaseUrl(filename);
@@ -128,6 +128,6 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
             }
         }
         prefs.edit().putString("lastSyncTimestamp", Utils.toMWDate(curTime)).apply();
-        Log.d("Commons", "Oh hai, everyone! Look, a kitty!");
+        Timber.d("Oh hai, everyone! Look, a kitty!");
     }
 }

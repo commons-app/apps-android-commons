@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.caching;
 
-import android.util.Log;
-
 import com.github.varunpant.quadtree.Point;
 import com.github.varunpant.quadtree.QuadTree;
 
@@ -10,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import fr.free.nrw.commons.upload.MwVolleyApi;
+import timber.log.Timber;
 
 public class CacheController {
 
@@ -18,7 +17,6 @@ public class CacheController {
     private Point<List<String>>[] pointsFound;
     private double xMinus, xPlus, yMinus, yPlus;
 
-    private static final String TAG = CacheController.class.getName();
     private static final int EARTH_RADIUS = 6378137;
 
     public CacheController() {
@@ -28,17 +26,17 @@ public class CacheController {
     public void setQtPoint(double decLongitude, double decLatitude) {
         x = decLongitude;
         y = decLatitude;
-        Log.d(TAG, "New QuadTree created");
-        Log.d(TAG, "X (longitude) value: " + x + ", Y (latitude) value: " + y);
+        Timber.d("New QuadTree created");
+        Timber.d("X (longitude) value: %f, Y (latitude) value: %f", x, y);
     }
 
     public void cacheCategory() {
         List<String> pointCatList = new ArrayList<>();
         if (MwVolleyApi.GpsCatExists.getGpsCatExists() == true) {
              pointCatList.addAll(MwVolleyApi.getGpsCat());
-            Log.d(TAG, "Categories being cached: " + pointCatList);
+            Timber.d("Categories being cached: %s", pointCatList);
         } else {
-            Log.d(TAG, "No categories found, so no categories cached");
+            Timber.d("No categories found, so no categories cached");
         }
         quadTree.set(x, y, pointCatList);
     }
@@ -48,20 +46,20 @@ public class CacheController {
         convertCoordRange();
         pointsFound = quadTree.searchWithin(xMinus, yMinus, xPlus, yPlus);
         List<String> displayCatList = new ArrayList<>();
-        Log.d(TAG, "Points found in quadtree: " + Arrays.asList(pointsFound));
+        Timber.d("Points found in quadtree: %s", Arrays.toString(pointsFound));
 
         if (pointsFound.length != 0) {
-            Log.d(TAG, "Entering for loop");
+            Timber.d("Entering for loop");
 
             for (Point<List<String>> point : pointsFound) {
-                Log.d(TAG, "Nearby point: " + point.toString());
+                Timber.d("Nearby point: %s", point);
                 displayCatList = point.getValue();
-                Log.d(TAG, "Nearby cat: " + point.getValue());
+                Timber.d("Nearby cat: %s", point.getValue());
             }
 
-            Log.d(TAG, "Categories found in cache: " + displayCatList.toString());
+            Timber.d("Categories found in cache: %s", displayCatList);
         } else {
-            Log.d(TAG, "No categories found in cache");
+            Timber.d("No categories found in cache");
         }
         return displayCatList;
     }
@@ -84,6 +82,7 @@ public class CacheController {
         yMinus = lat - dLat * 180/Math.PI;
         xPlus = lon + dLon * 180/Math.PI;
         xMinus = lon - dLon * 180/Math.PI;
-        Log.d(TAG, "Search within: xMinus=" + xMinus + ", yMinus=" + yMinus + ", xPlus=" + xPlus + ", yPlus=" + yPlus);
+        Timber.d("Search within: xMinus=%s, yMinus=%s, xPlus=%s, yPlus=%s",
+                xMinus, yMinus, xPlus, yPlus);
     }
 }

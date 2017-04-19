@@ -14,7 +14,6 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,7 +21,6 @@ import android.widget.Adapter;
 import android.widget.AdapterView;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
@@ -32,6 +30,7 @@ import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.auth.WikiAccountAuthenticator;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.upload.UploadService;
+import timber.log.Timber;
 
 public  class       ContributionsActivity
         extends     AuthenticatedActivity
@@ -158,9 +157,9 @@ public  class       ContributionsActivity
         Contribution c = Contribution.fromCursor(allContributions);
         if(c.getState() == Contribution.STATE_FAILED) {
             uploadService.queue(UploadService.ACTION_UPLOAD_FILE, c);
-            Log.d("Commons", "Restarting for" + c.toContentValues().toString());
+            Timber.d("Restarting for %s", c.toContentValues());
         } else {
-            Log.d("Commons", "Skipping re-upload for non-failed " + c.toContentValues().toString());
+            Timber.d("Skipping re-upload for non-failed %s", c.toContentValues());
         }
     }
 
@@ -168,11 +167,11 @@ public  class       ContributionsActivity
         allContributions.moveToPosition(i);
         Contribution c = Contribution.fromCursor(allContributions);
         if(c.getState() == Contribution.STATE_FAILED) {
-            Log.d("Commons", "Deleting failed contrib " + c.toContentValues().toString());
+            Timber.d("Deleting failed contrib %s", c.toContentValues());
             c.setContentProviderClient(getContentResolver().acquireContentProviderClient(ContributionsContentProvider.AUTHORITY));
             c.delete();
         } else {
-            Log.d("Commons", "Skipping deletion for non-failed contrib " + c.toContentValues().toString());
+            Timber.d("Skipping deletion for non-failed contrib %s", c.toContentValues());
         }
     }
 
