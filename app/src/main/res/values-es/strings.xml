@@ -175,4 +175,6 @@ imágenes de carteles, portadas de libro, etc.</string>
   <string name="media_detail_description_explanation">Aquí va la descripción del multimedia. Potencialmente, puede ser bastante largo, y deberá agruparse en múltiples líneas. De todas formas, esperamos que se ve bien.</string>
   <string name="become_a_tester_title">Prueba la versión beta</string>
   <string name="become_a_tester_description">Opta por nuestro canal beta en Google Play y obtén acceso a funcionalidades nuevas y correcciones de errores</string>
+  <string name="use_wikidata">Usa Wikidata</string>
+  <string name="use_wikidata_summary">(Advertencia: desactivar esto puede ocasionar un gran consumo de datos del móvil)</string>
 </resources>

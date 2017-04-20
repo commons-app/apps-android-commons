@@ -170,4 +170,6 @@ Appuyez sur ce message (ou retournez en arrière) pour sauter cette étape.</str
   <string name="media_detail_description_explanation">La description du média vient ici. Cela peut être potentiellement assez long, et devra être réparti sur plusieurs lignes. Nous espérons que cela restera joli néanmoins.</string>
   <string name="become_a_tester_title">Devenir un bêta-testeur</string>
   <string name="become_a_tester_description">S’inscrire à notre canal bêta sur Google Play et obtenir un accès anticipé aux nouvelles fonctionnalités et corrections de bogue</string>
+  <string name="use_wikidata">Utiliser Wikidata</string>
+  <string name="use_wikidata_summary">(Attention : désactiver cela pourrait provoquer une consommation importante de données par mobile)</string>
 </resources>

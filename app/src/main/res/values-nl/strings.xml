@@ -167,4 +167,5 @@ Klik op dit bericht, of ga terug, om deze stap over te slaan.</string>
   <string name="media_detail_title">Titel</string>
   <string name="media_detail_media_title">Titel van het bestand</string>
   <string name="media_detail_description">Beschrijving</string>
+  <string name="use_wikidata">Wikidata gebruiken</string>
 </resources>

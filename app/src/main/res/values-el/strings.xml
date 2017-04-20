@@ -170,4 +170,6 @@
   <string name="media_detail_description_explanation">Η περιγραφή του πολυμέσου μπαίνει εδώ. Αυτή μπορεί να είναι σχετικά μεγάλη, και θα χρειαστεί να αναδιπλωθεί σε πολλές γραμμές. Ελπίζουμε ωστόσο ότι θα φαίνεται όμορφα.</string>
   <string name="become_a_tester_title">Γίνετε Δοκιμαστής Beta</string>
   <string name="become_a_tester_description">Συμμετέχετε στο κανάλι beta μας στο Google Play και αποκτήστε πρώιμη πρόσβαση σε νέες λειτουργίες και διορθώσεις σφαλμάτων</string>
+  <string name="use_wikidata">χρήση wikidata</string>
+  <string name="use_wikidata_summary">(Προσοχή: η απενεργοποίηση αυτή μπορεί να προκαλέσει μεγάλη κατανάλωση κινητὠν δεδομένων)</string>
 </resources>

@@ -74,7 +74,7 @@ Pouezit war ar c\'hemenn-mañ (pe distroit en a-raok) evit mont dreist ar bazenn
   <string name="title_activity_settings">Arventennoù</string>
   <string name="title_activity_signup">En em enskrivañ</string>
   <string name="menu_about">Diwar-benn</string>
-  <string name="about_license" fuzzy="true">Meziant frank a wirioù embannet dindan &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;an Aotre-implijout Apache v2&lt;/a&gt;. Merkoù kenwerzhel eus Diazezadur Wikimedia eo Wikimedia Commons hag e logoioù. Gallout a reont bezaén implijet gant aotre an Diazezadur. N\'omp nag aprouet gant Diazezadur Wiikimedia na staget outañ.</string>
+  <string name="about_license">Meziant frank a wirioù embannet dindan &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;an Aotre-implijout Apache v2&lt;/a&gt;. Merkoù kenwerzhel eus Diazezadur Wikimedia eo Wikimedia Commons hag e logoioù. Gallout a reont bezañ implijet gant aotre an Diazezadur. N\'omp nag aprouet gant Diazezadur Wiikimedia na stag outañ.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Mammenn&lt;/a&gt; ha &lt;a href=\"https://commons-app.github.io/\"&gt;lec\'hienn&lt;/a&gt; war GitHub. Krouiñ ur &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;gemennadenn GitHub nevez&lt;/a&gt; evit kelaouiñ a-zivout un draen bennak pe bet kinnigoù.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Reolennoù prevezded&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;TRUGAREKADENNOÙ&lt;/a&gt;</string>
@@ -170,4 +170,6 @@ Pouezit war ar c\'hemenn-mañ (pe distroit en a-raok) evit mont dreist ar bazenn
   <string name="media_detail_description_explanation">Amañ e lakaer titl ar media. Gallout a ra bezañ hir-mat ha mont dre meur a linenn. Spi hon eus e vo bravik an disoc\'h koulskoude.</string>
   <string name="become_a_tester_title">Deuit da vezañ un amprouer beta</string>
   <string name="become_a_tester_description">En em enskrivañ en hor c\'hanol beta war Google Play ha kaout ur rakmoned d\'an arc\'hwelioù nevez d\'an drein difaziet</string>
+  <string name="use_wikidata">Ober gant Wikidata</string>
+  <string name="use_wikidata_summary">(Diwallit mat : ma tiweredekait an dra-mañ e c\'hallfe kreskiñ kalz ar beveziñ roadennoù gant ho hezoug)</string>
 </resources>
