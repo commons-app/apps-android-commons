@@ -86,8 +86,7 @@ public class SettingsActivityTest {
 
         // click "CC BY-4.0"
         Espresso.onView(
-                // FIXME: just R.string.license_name_cc_by_four should be fine but fails on Travis
-                textAnyOf(R.string.license_name_cc_by_four, R.string.license_name_cc_by_4_0)
+                ViewMatchers.withText(R.string.license_name_cc_by_4_0)
         ).perform(ViewActions.click());
 
         // click "License" (the first item)
@@ -99,12 +98,8 @@ public class SettingsActivityTest {
         // test the value remains "CC BY-4.0"
         Espresso.onView(ViewMatchers.isChecked())
                 .check(ViewAssertions.matches(
-                        textAnyOf(R.string.license_name_cc_by_four, R.string.license_name_cc_by_4_0)
+                        ViewMatchers.withText(R.string.license_name_cc_by_4_0)
                 ));
-    }
-
-    private Matcher<View> textAnyOf(int id1, int id2) {
-        return anyOf(ViewMatchers.withText(id1), ViewMatchers.withText(id2));
     }
 
     private static Matcher<View> findPreferenceList() {
