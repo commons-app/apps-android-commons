@@ -80,7 +80,8 @@
 
         <module name="VisibilityModifier">
             <property name="packageAllowed" value="false"/>
-
+            <!-- Espresso -->
+             <property name="ignoreAnnotationCanonicalNames" value="Rule" />
             <!-- Butter Knife -->
             <property name="ignoreAnnotationCanonicalNames" value="BindArray" />
             <property name="ignoreAnnotationCanonicalNames" value="BindBitmap" />
