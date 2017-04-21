@@ -21,7 +21,6 @@ import butterknife.ButterKnife;
 import butterknife.OnItemClick;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
-import timber.log.Timber;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -30,15 +29,17 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class NearbyListFragment extends ListFragment implements TaskListener {
+import timber.log.Timber;
+
+public class NearbyListFragment extends ListFragment  {
 
     private static final int MAX_RESULTS = 1000;
     private NearbyAsyncTask nearbyAsyncTask;
 
-    @BindView(R.id.listview) ListView listview;
+    @BindView(R.id.listView) ListView listview;
     @BindView(R.id.progressBar) ProgressBar progressBar;
 
-    private boolean isTaskRunning = false;
+    private NearbyAdapter adapter;
 
     public NearbyListFragment() {
     }
@@ -56,15 +57,19 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
         Timber.d("NearbyListFragment created");
         View view = inflater.inflate(R.layout.fragment_nearby, container, false);
         ButterKnife.bind(this, view);
+        adapter = new NearbyAdapter(getActivity());
+        listview.setAdapter(adapter);
         return view;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
-        //Check that this is the first time view is created, to avoid double list when screen orientation changed
+        // Check that this is the first time view is created,
+        // to avoid double list when screen orientation changed
         if (savedInstanceState == null) {
-            nearbyAsyncTask = new NearbyAsyncTask(this);
+            adapter.clear();
+            nearbyAsyncTask = new NearbyAsyncTask();
             nearbyAsyncTask.execute();
             progressBar.setVisibility(View.VISIBLE);
             Timber.d("Saved instance state is null, populating ListView");
@@ -74,29 +79,13 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
 
         // If we are returning here from a screen orientation and the AsyncTask is still working,
         // re-create and display the progress dialog.
-        if (isTaskRunning) {
+        if (isTaskRunning()) {
             progressBar.setVisibility(View.VISIBLE);
         }
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outInstanceState) {
-        // See http://stackoverflow.com/questions/8942135/listview-added-dublicate-item-in-list-when-screen-orientation-changes
-        outInstanceState.putInt("value", 1);
-    }
-
-    @Override
-    public void onTaskStarted() {
-        isTaskRunning = true;
-        progressBar.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void onTaskFinished(List<Place> result) {
-        if (progressBar != null) {
-            progressBar.setVisibility(View.GONE);
-        }
-        isTaskRunning = false;
+    private boolean isTaskRunning() {
+        return nearbyAsyncTask != null && nearbyAsyncTask.getStatus() != AsyncTask.Status.FINISHED;
     }
 
     @Override
@@ -114,23 +103,17 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
         super.onDestroy();
 
         // See http://stackoverflow.com/questions/18264408/incomplete-asynctask-crashes-my-app
-        if (nearbyAsyncTask != null && nearbyAsyncTask.getStatus() != AsyncTask.Status.FINISHED) {
+        if (isTaskRunning()) {
             nearbyAsyncTask.cancel(true);
         }
     }
 
     private class NearbyAsyncTask extends AsyncTask<Void, Integer, List<Place>> {
 
-        private final TaskListener listener;
-
-        public NearbyAsyncTask(TaskListener listener) {
-            this.listener = listener;
-        }
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            listener.onTaskStarted();
+            progressBar.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -154,17 +137,16 @@ public class NearbyListFragment extends ListFragment implements TaskListener {
                 return;
             }
 
-            progressBar.setVisibility(View.GONE);
-            NearbyAdapter adapter = new NearbyAdapter(getActivity(), places);
-
-            listview.setAdapter(adapter);
-
-            listener.onTaskFinished(places);
+            if (progressBar != null) {
+                progressBar.setVisibility(View.GONE);
+            }
+            adapter.clear();
+            adapter.addAll(places);
             adapter.notifyDataSetChanged();
         }
     }
 
-    @OnItemClick(R.id.listview)
+    @OnItemClick(R.id.listView)
     void onItemClicked(int position) {
         Place place = (Place) listview.getItemAtPosition(position);
         LatLng placeLatLng = place.location;
