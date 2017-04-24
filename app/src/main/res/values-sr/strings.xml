@@ -76,6 +76,7 @@
   <string name="about_license">Софтвер отвореног кода доступан под лиценцом &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache вер. 2&lt;/a&gt; Викимедијина Остава и њен лого су заштитни знаци Викимедијине Фондације и користе се са дозволом Викимедијине Фондацине. Ми не одобравамо или подржавмо Викимедијину Фондацију.</string>
   <string name="about_improve" fuzzy="true">Изворни кôд се налази на &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub-у&lt;/a&gt;. Програмске грешке су на сајту &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Политика приватности&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;ЗАСЛУГЕ&lt;/a&gt;</string>
   <string name="title_activity_about">О апликацији</string>
   <string name="menu_feedback">Пошаљите повратне информације (путем е-поште)</string>
   <string name="no_email_client">Није инсталиран имејл клијент</string>
@@ -163,4 +164,6 @@
   <string name="media_detail_media_title">Наслов медија</string>
   <string name="media_detail_description">Опис</string>
   <string name="become_a_tester_title">Постани Бета Тестер</string>
+  <string name="use_wikidata">Користи Википодатке</string>
+  <string name="use_wikidata_summary">(Упозорење: онемогућавањем овога може се изазвати велика потрошња мобилних података)</string>
 </resources>
