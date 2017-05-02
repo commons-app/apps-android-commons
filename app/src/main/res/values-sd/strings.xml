@@ -89,6 +89,9 @@
   <string name="use_previous">گذريل عنوان/تشريح استعمال ڪريو</string>
   <string name="allow_gps">خوبخود ھاڻوڪي مڪانيت وٺو</string>
   <string name="allow_gps_summary">ھاڻوڪي مڪانيت لھو زمرن جون تجويزون پيش ڪرڻ لاءِ جيڪڏھن عڪس تي جيوٽيگ ناھي لڳل</string>
+  <string name="preference_theme">رات جو ڏيک</string>
+  <string name="preference_theme_summary">گھرو نظارو استعمال ڪريو</string>
+  <string name="license_name_cc_by_sa_four">انتساب-ھجھڙي ڀاڱيداري 4.0</string>
   <string name="license_name_cc_by_four">وصف 4.0</string>
   <string name="license_name_cc_by_sa">ڪڪu00A0انتساب-ھڪجھڙي_ڀاڱيداريu00A03.0</string>
   <string name="license_name_cc_by">ڪڪu00A0انتسابu00A03.0</string>
@@ -154,8 +157,12 @@ u2022 زمرا: سڊني اوپيرا گھر، سڊني اوپيرا گھر او
   <string name="ok">ٺيڪ</string>
   <string name="title_activity_nearby">ويجھڙائيءَ ۾ جڳھون</string>
   <string name="warning">چتاءُ</string>
+  <string name="file_exists">فائل اڳ ئي العام ۾ موجود آھي. ڇا توھان کي پڪ آھي تہ توھان اڳتي وڌڻ ٿا چاھيو؟</string>
   <string name="yes">ها</string>
   <string name="no">نہ</string>
   <string name="media_detail_title">عنوان</string>
+  <string name="media_detail_media_title">ابلاغ جو عنوان</string>
   <string name="media_detail_description">تشريح</string>
+  <string name="become_a_tester_title">آزمائشي آزمائيندڙ ٿيو</string>
+  <string name="use_wikidata">وڪيڊيٽا استعماڪ ڪريو</string>
 </resources>
