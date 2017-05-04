@@ -5,10 +5,21 @@
   <string name="username">მომხმარებლის სახელი</string>
   <string name="password">პაროლი</string>
   <string name="login">შესვლა</string>
+  <string name="signup">რეგისტრაცია</string>
   <string name="logging_in_title">სისტემაში შესვლა</string>
   <string name="logging_in_message">გთხოვთ მოიცადოთ...</string>
   <string name="login_success">სისტემაში შესვლა წარმატებით განხორციელდა!</string>
   <string name="login_failed">სისტემაში შესვლა ვერ განხორციელდა!</string>
+  <string name="upload_failed">ფაილი არ მოიძებნა. გთხოვთ, სცადოთ სხვა ფაილი.</string>
+  <string name="authentication_failed">ავთენტიფიკაცია ვერ მოხერხდა!</string>
+  <string name="uploading_started">ატვირთვა დაიწყო!</string>
+  <string name="upload_completed_notification_title">%1$ ატვირთულია!</string>
+  <string name="upload_completed_notification_text">დააჭირეთ თქვენი ატვირთვის სანახავად</string>
+  <string name="upload_progress_notification_title_start">დაიწყო %1$ ატვირთვა</string>
+  <string name="upload_progress_notification_title_in_progress">%1$ ატვირთვა</string>
+  <string name="upload_progress_notification_title_finishing">ატვირთვის დასრულება %1$</string>
+  <string name="upload_failed_notification_title">%1$ ატვირთვა ვერ მოხერხდა</string>
+  <string name="upload_failed_notification_subtitle">დააჭირეთ სანახავად</string>
   <string name="title_activity_contributions">ჩემი ატვირთვები</string>
   <string name="contribution_state_in_progress">%1$d%% დასრულდა</string>
   <string name="menu_from_gallery">გალერეიდან</string>
@@ -61,6 +72,6 @@
   <string name="license_name_pd_usgov_nasa">საზოგადოებრივი საკუთრება (ნასა)</string>
   <string name="license_name_pd_ineligible">საზოგადოებრივი საკუთრება (არ ექვემდებარება საავტორო უფლებების დაცვას)</string>
   <string name="welcome_final_button_text">დიახ!</string>
-  <string name="detail_panel_cats_label">კატეგორია</string>
+  <string name="detail_panel_cats_label">კატეგორიები</string>
   <string name="detail_panel_cats_loading">იტვირთება...</string>
 </resources>
