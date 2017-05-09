@@ -8,10 +8,10 @@
         <item>@string/license_name_cc_by_sa_four</item>
     </array>
     <array name="pref_defaultLicense_values">
-        <item>@string/license_name_cc0</item>
-        <item>@string/license_name_cc_by_3_0</item>
-        <item>@string/license_name_cc_by_4_0</item>
-        <item>@string/license_name_cc_by_sa_3_0</item>
-        <item>@string/license_name_cc_by_sa_4_0</item>
+        <item>CC0</item>
+        <item>CC BY 3.0</item>
+        <item>CC BY 4.0</item>
+        <item>CC BY-SA 3.0</item>
+        <item>CC BY-SA 4.0</item>
     </array>
 </resources>
