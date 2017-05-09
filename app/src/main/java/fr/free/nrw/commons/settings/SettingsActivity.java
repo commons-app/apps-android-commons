@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatDelegate;
+import android.view.MenuItem;
 
 import fr.free.nrw.commons.R;
 
@@ -34,5 +35,21 @@ public class SettingsActivity extends PreferenceActivity {
             settingsDelegate = AppCompatDelegate.create(this, null);
         }
         settingsDelegate.onPostCreate(savedInstanceState);
+
+        //Add an up button
+        settingsDelegate.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    //Handle actions for action bar
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
