@@ -84,9 +84,9 @@ public class SettingsActivityTest {
                 .atPosition(0)
                 .perform(ViewActions.click());
 
-        // click "CC BY-4.0"
+        // click "Attribution 4.0"
         Espresso.onView(
-                ViewMatchers.withText(R.string.license_name_cc_by_4_0)
+                ViewMatchers.withText(R.string.license_name_cc_by_four)
         ).perform(ViewActions.click());
 
         // click "License" (the first item)
@@ -95,10 +95,10 @@ public class SettingsActivityTest {
                 .atPosition(0)
                 .perform(ViewActions.click());
 
-        // test the value remains "CC BY-4.0"
+        // test the value remains "Attribution 4.0"
         Espresso.onView(ViewMatchers.isChecked())
                 .check(ViewAssertions.matches(
-                        ViewMatchers.withText(R.string.license_name_cc_by_4_0)
+                        ViewMatchers.withText(R.string.license_name_cc_by_four)
                 ));
     }
 
