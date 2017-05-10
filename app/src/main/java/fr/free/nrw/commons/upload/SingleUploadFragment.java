@@ -115,6 +115,13 @@ public class SingleUploadFragment extends Fragment {
         licenseSpinner.setAdapter(adapter);
 
         int position = licenseItems.indexOf(getString(Utils.licenseNameFor(license)));
+
+        // Check position is valid
+        if(position < 0) {
+            Timber.d("Invalid position: %d. Using default license", position);
+            position = 4;
+        }
+
         Timber.d("Position: %d %s", position, getString(Utils.licenseNameFor(license)));
         licenseSpinner.setSelection(position);
 
