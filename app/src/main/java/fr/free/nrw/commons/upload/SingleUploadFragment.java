@@ -117,7 +117,7 @@ public class SingleUploadFragment extends Fragment {
         int position = licenseItems.indexOf(getString(Utils.licenseNameFor(license)));
 
         // Check position is valid
-        if(position < 0) {
+        if (position < 0) {
             Timber.d("Invalid position: %d. Using default license", position);
             position = 4;
         }
