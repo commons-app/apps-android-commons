@@ -216,6 +216,7 @@ public  class       ContributionsActivity
             ((CursorAdapter)contributionsList.getAdapter()).swapCursor(cursor);
         }
 
+        //// FIXME: 11/5/17 support for zero text using if condition
         getSupportActionBar().setSubtitle(getResources().getQuantityString(R.plurals.contributions_subtitle, cursor.getCount(), cursor.getCount()));
 
         contributionsList.clearSyncMessage();
