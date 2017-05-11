@@ -10,6 +10,7 @@
   <string name="logging_in_message">Сачекајте…</string>
   <string name="login_success">Успешно сте пријављени.</string>
   <string name="login_failed">Пријављивање није успело.</string>
+  <string name="upload_failed">Датотека није пронађена. Покушајте са другом датотеком.</string>
   <string name="authentication_failed">Провера идентитета није успела.</string>
   <string name="uploading_started">Отпремање је започето.</string>
   <string name="upload_completed_notification_title">Датотека „%1$s“ је отпремљена.</string>
@@ -74,7 +75,7 @@
   <string name="title_activity_signup">Отвори налог</string>
   <string name="menu_about">О апликацији</string>
   <string name="about_license">Софтвер отвореног кода доступан под лиценцом &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache вер. 2&lt;/a&gt; Викимедијина Остава и њен лого су заштитни знаци Викимедијине Фондације и користе се са дозволом Викимедијине Фондацине. Ми не одобравамо или подржавмо Викимедијину Фондацију.</string>
-  <string name="about_improve" fuzzy="true">Изворни кôд се налази на &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub-у&lt;/a&gt;. Програмске грешке су на сајту &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Изворни кôд&lt;/a&gt; и &lt;a href=\"https://commons-app.github.io/\"&gt;веб-сајт&lt;/a&gt; на GitHub-у. Направите нови &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;захтев на GitHub-у&lt;/a&gt; да бисте пријавили грешке или дали предлоге.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Политика приватности&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;ЗАСЛУГЕ&lt;/a&gt;</string>
   <string name="title_activity_about">О апликацији</string>
@@ -89,7 +90,7 @@
   <string name="menu_download">Преузми</string>
   <string name="preference_license">Лиценца</string>
   <string name="use_previous">Користи претходан наслов/опис</string>
-  <string name="allow_gps">Аутоматски дохвати тренутну локацију</string>
+  <string name="allow_gps">Аутоматски детектуј тренутну локацију</string>
   <string name="allow_gps_summary">Прими тренутну локацију да би предложили категорију ако слика није географски означена</string>
   <string name="preference_theme">Ноћни режим</string>
   <string name="preference_theme_summary">Користити тамну тему</string>
@@ -140,6 +141,9 @@
 - Слике које сте преузели са интернета
 - Скриншотове из сопствених апликација</string>
   <string name="tutorial_4_text">Пример отпремања:</string>
+  <string name="tutorial_4_subtext">— Наслов: Сиднејска опера
+— Опис: Сиднејска опера, поглед преко залива
+— Категорије: Сиднејска опера, Сиднејска опера са запада, погледи на Сиднејксу оперу из даљине</string>
   <string name="welcome_wikipedia_text">Делите своје слике. Оживите чланке на Википедији!</string>
   <string name="welcome_wikipedia_subtext">Слике на Википедији долазе из Оставе.</string>
   <string name="welcome_copyright_text">Са вашим сликама помажете у образовању људи широм света.</string>
@@ -163,7 +167,9 @@
   <string name="media_detail_title">Наслов</string>
   <string name="media_detail_media_title">Наслов медија</string>
   <string name="media_detail_description">Опис</string>
+  <string name="media_detail_description_explanation">Опис датотеке иде овде. Може да буде поприлично дуг и приказиваће се у више редова. Надамо се да ће изгледати лепо.</string>
   <string name="become_a_tester_title">Постани Бета Тестер</string>
+  <string name="become_a_tester_description">Прикључите се на наш бета канал на Гугл плеју и приступајте новим информацијама и поправкама багова</string>
   <string name="use_wikidata">Користи Википодатке</string>
   <string name="use_wikidata_summary">(Упозорење: онемогућавањем овога може се изазвати велика потрошња мобилних података)</string>
 </resources>
