@@ -217,11 +217,12 @@ public  class       ContributionsActivity
             ((CursorAdapter)contributionsList.getAdapter()).swapCursor(cursor);
         }
 
-        //// FIXME: 11/5/17 support for zero text using if condition
         if (cursor.getCount() == 0
                 && Locale.getDefault().getISO3Language().equals(Locale.ENGLISH.getISO3Language())) {
-            //cursor count is zero and language is english - we need to set the message for 0 case explicitly.
-            getSupportActionBar().setSubtitle(getResources().getString(R.string.contributions_subtitle_zero));
+            //cursor count is zero and language is english -
+            // we need to set the message for 0 case explicitly.
+            getSupportActionBar().setSubtitle(getResources()
+                    .getString(R.string.contributions_subtitle_zero));
         } else {
             getSupportActionBar().setSubtitle(getResources().getQuantityString(R.plurals.contributions_subtitle, cursor.getCount(), cursor.getCount()));
         }
