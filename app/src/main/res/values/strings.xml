@@ -50,8 +50,10 @@
   <string name="categories_search_text_hint">Search categories</string>
   <string name="menu_save_categories">Save</string>
   <string name="refresh_button">Refresh</string>
+  <string name="contributions_subtitle_zero">No uploads yet</string>
   <plurals name="contributions_subtitle">
-    <item quantity="zero">No uploads yet</item>
+    <!--zero is not used in english. Category mentioned here for easy reference in future-->
+    <item quantity="zero">@string/contributions_subtitle_zero</item>
     <item quantity="one">%d upload</item>
     <item quantity="other">%d uploads</item>
   </plurals>
@@ -167,4 +169,5 @@ Tap this message (or hit back) to skip this step.</string>
   <string name="beta_opt_in_link">https://play.google.com/apps/testing/fr.free.nrw.commons</string>
   <string name="use_wikidata">Use Wikidata</string>
   <string name="use_wikidata_summary">(Warning: disabling this may cause large mobile data consumption)</string>
+  <string name="mapbox_commons_app_token">pk.eyJ1IjoibWFza2FyYXZpdmVrIiwiYSI6ImNqMmxvdzFjMTAwMHYzM283ZWM3eW5tcDAifQ.ib5SZ9EVjwJe6GSKve0bcg</string>
 </resources>

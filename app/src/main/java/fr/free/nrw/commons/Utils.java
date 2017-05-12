@@ -217,7 +217,7 @@ public class Utils {
         } else if (license.equals(Prefs.Licenses.CC_BY_SA)) {
             return "{{self|cc-by-sa-3.0}}";
         }
-        throw new RuntimeException("Unrecognized license value");
+        throw new RuntimeException("Unrecognized license value: " + license);
     }
 
     public static int licenseNameFor(String license) {
@@ -236,7 +236,7 @@ public class Utils {
         } else if (license.equals(Prefs.Licenses.CC_BY_SA)) { // for backward compatibility to v2.1
             return R.string.license_name_cc_by_sa_3_0;
         }
-        throw new RuntimeException("Unrecognized license value");
+        throw new RuntimeException("Unrecognized license value: " + license);
     }
 
     public static String licenseUrlFor(String license) {
@@ -251,7 +251,7 @@ public class Utils {
         } else if (license.equals(Prefs.Licenses.CC0)) {
             return "https://creativecommons.org/publicdomain/zero/1.0/";
         }
-        throw new RuntimeException("Unrecognized license value");
+        throw new RuntimeException("Unrecognized license value: " + license);
     }
 
     public static Uri uriForWikiPage(String name) {

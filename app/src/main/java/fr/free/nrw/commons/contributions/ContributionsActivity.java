@@ -21,6 +21,7 @@ import android.widget.Adapter;
 import android.widget.AdapterView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
@@ -216,7 +217,15 @@ public  class       ContributionsActivity
             ((CursorAdapter)contributionsList.getAdapter()).swapCursor(cursor);
         }
 
-        getSupportActionBar().setSubtitle(getResources().getQuantityString(R.plurals.contributions_subtitle, cursor.getCount(), cursor.getCount()));
+        if (cursor.getCount() == 0
+                && Locale.getDefault().getISO3Language().equals(Locale.ENGLISH.getISO3Language())) {
+            //cursor count is zero and language is english -
+            // we need to set the message for 0 case explicitly.
+            getSupportActionBar().setSubtitle(getResources()
+                    .getString(R.string.contributions_subtitle_zero));
+        } else {
+            getSupportActionBar().setSubtitle(getResources().getQuantityString(R.plurals.contributions_subtitle, cursor.getCount(), cursor.getCount()));
+        }
 
         contributionsList.clearSyncMessage();
         notifyAndMigrateDataSetObservers();

@@ -12,8 +12,8 @@ import android.os.Bundle;
 import android.os.RemoteException;
 import android.text.TextUtils;
 
+import fr.free.nrw.commons.MWApi;
 import org.mediawiki.api.ApiResult;
-import org.mediawiki.api.MWApi;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,7 +30,10 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
     }
 
     private int getLimit() {
-        return 500; // FIXME: Parameterize!
+
+        int limit = 100;
+        Timber.d("Max number of uploads set to %d", limit);
+        return limit; // FIXME: Parameterize!
     }
 
     private static final String[] existsQuery = { Contribution.Table.COLUMN_FILENAME };
@@ -68,6 +71,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
         while(!done) {
 
             try {
+                Timber.d("Example API query: https://commons.wikimedia.org/w/api.php?action=query&list=logevents&letype=upload&leuser=Sandaru&lelimit=5");
                 MWApi.RequestBuilder builder = api.action("query")
                         .param("list", "logevents")
                         .param("letype", "upload")
