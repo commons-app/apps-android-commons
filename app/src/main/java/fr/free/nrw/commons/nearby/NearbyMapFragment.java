@@ -48,8 +48,6 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_nearby_map, container, false);
-        ButterKnife.bind(this, view);
         MapboxMapOptions options = new MapboxMapOptions()
                 .styleUrl(Style.OUTDOORS)
                 .camera(new CameraPosition.Builder()
@@ -60,9 +58,8 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         // create map
         mapView = new MapView(getActivity(), options);
         mapView.onCreate(savedInstanceState);
-        getActivity().setContentView(mapView);
         setHasOptionsMenu(false);
-        return view;
+        return mapView;
     }
 
     @Override
