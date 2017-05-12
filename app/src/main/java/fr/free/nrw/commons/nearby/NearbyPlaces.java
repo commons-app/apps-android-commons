@@ -3,9 +3,6 @@ package fr.free.nrw.commons.nearby;
 import android.net.Uri;
 import android.os.StrictMode;
 
-import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.location.LatLng;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -19,6 +16,8 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.location.LatLng;
 import timber.log.Timber;
 
 public class NearbyPlaces {
