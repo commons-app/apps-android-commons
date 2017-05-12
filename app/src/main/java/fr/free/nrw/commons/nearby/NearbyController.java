@@ -24,6 +24,7 @@ import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
 public class NearbyController {
     private static final int MAX_RESULTS = 1000;
+
     private static List<Place> loadAttractionsFromLocation(LatLng curLatLng, Context context) {
         Timber.d("Loading attractions near %s", curLatLng);
         if (curLatLng == null) {
@@ -53,7 +54,15 @@ public class NearbyController {
         }
         return places;
     }
-    public static List<Place> loadAttractionsFromLocationToPlaces(LatLng curLatLng, Context context){
+
+    /**
+     * Loads attractions from location for list view, we need to return Place data type
+     * @param curLatLng
+     * @param context
+     * @return
+     */
+
+    public static List<Place> loadAttractionsFromLocationToPlaces(LatLng curLatLng, Context context) {
 
         List<Place> places = loadAttractionsFromLocation(curLatLng,context);
         places = places.subList(0, Math.min(places.size(), MAX_RESULTS));
@@ -63,7 +72,16 @@ public class NearbyController {
         }
         return places;
     }
-    public static List<BaseMarkerOptions> loadAttractionsFromLocationToBaseMarkerOptions(LatLng curLatLng, Context context){
+
+    /**
+     *Loads attractions from location for map view, we need to return BaseMarkerOption data type
+     * @param curLatLng
+     * @param context
+     * @return
+     */
+    public static List<BaseMarkerOptions> loadAttractionsFromLocationToBaseMarkerOptions(
+            LatLng curLatLng,
+            Context context) {
         List<BaseMarkerOptions> baseMarkerOptionses = new ArrayList<>();
         List<Place> places = loadAttractionsFromLocation(curLatLng,context);
         places = places.subList(0, Math.min(places.size(), MAX_RESULTS));
@@ -71,7 +89,8 @@ public class NearbyController {
             String distance = formatDistanceBetween(curLatLng, place.location);
             place.setDistance(distance);
             baseMarkerOptionses.add(new MarkerOptions()
-            .position(new com.mapbox.mapboxsdk.geometry.LatLng(place.location.latitude,place.location.longitude))
+            .position(new com.mapbox.mapboxsdk.geometry
+                    .LatLng(place.location.latitude,place.location.longitude))
             .title(place.name)
             .snippet(place.description));
         }

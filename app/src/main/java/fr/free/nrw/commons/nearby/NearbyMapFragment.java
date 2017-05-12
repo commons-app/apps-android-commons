@@ -108,7 +108,8 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
 
         @Override
         protected List<BaseMarkerOptions> doInBackground(Void... params) {
-            return NearbyController.loadAttractionsFromLocationToBaseMarkerOptions(currentLocation, getActivity()
+            return NearbyController
+                    .loadAttractionsFromLocationToBaseMarkerOptions(currentLocation, getActivity()
             );
         }
 

@@ -113,7 +113,9 @@ public class NearbyListFragment extends ListFragment  {
         @Override
         protected List<Place> doInBackground(Void... params) {
             return NearbyController.loadAttractionsFromLocationToPlaces(
-                    ((NearbyActivity)getActivity()).getLocationManager().getLatestLocation(), getActivity()
+                    ((NearbyActivity)getActivity())
+                            .getLocationManager()
+                            .getLatestLocation(), getActivity()
             );
         }
 
