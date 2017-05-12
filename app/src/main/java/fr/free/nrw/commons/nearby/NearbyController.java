@@ -1,5 +1,8 @@
 package fr.free.nrw.commons.nearby;
 
+import static fr.free.nrw.commons.utils.LengthUtils.computeDistanceBetween;
+import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -18,9 +21,6 @@ import java.util.Locale;
 import java.util.Map;
 
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.utils.LengthUtils.computeDistanceBetween;
-import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
 
 public class NearbyController {
@@ -60,7 +60,7 @@ public class NearbyController {
      * Loads attractions from location for list view, we need to return Place data type.
      * @param curLatLng users current location
      * @param context current activity
-     * @return
+     * @return Place list that holds nearby places
      */
 
     public static List<Place> loadAttractionsFromLocationToPlaces(LatLng curLatLng,
@@ -79,7 +79,7 @@ public class NearbyController {
      *Loads attractions from location for map view, we need to return BaseMarkerOption data type.
      * @param curLatLng users current location
      * @param context the activity
-     * @return
+     * @return BaseMarkerOprions list that holds nearby places
      */
     public static List<BaseMarkerOptions> loadAttractionsFromLocationToBaseMarkerOptions(
             LatLng curLatLng,
