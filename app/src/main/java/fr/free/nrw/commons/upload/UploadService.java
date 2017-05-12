@@ -13,8 +13,8 @@ import android.support.v4.app.NotificationCompat;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
+import fr.free.nrw.commons.*;
 import org.mediawiki.api.ApiResult;
-import org.mediawiki.api.MWApi;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -25,11 +25,6 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.EventLog;
-import fr.free.nrw.commons.HandlerService;
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
