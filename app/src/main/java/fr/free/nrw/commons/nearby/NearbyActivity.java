@@ -2,7 +2,6 @@ package fr.free.nrw.commons.nearby;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -12,6 +11,7 @@ import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.theme.BaseActivity;
 
 public class NearbyActivity extends BaseActivity {
+    private boolean isMapViewActive = false;
 
     private LocationServiceManager locationManager;
 
@@ -47,11 +47,17 @@ public class NearbyActivity extends BaseActivity {
                 refreshView();
                 return true;
             case R.id.action_map:
-                Log.d("Nearby","map is clicked");
+                showMapView();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void showMapView() {
+        isMapViewActive = true;
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, new NearbyMapFragment()).commit();
     }
 
     @Override
@@ -60,8 +66,13 @@ public class NearbyActivity extends BaseActivity {
     }
 
     protected void refreshView() {
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, new NearbyListFragment()).commit();
+        if (isMapViewActive) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, new NearbyMapFragment()).commit();
+        } else {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, new NearbyListFragment()).commit();
+        }
     }
 
     public LocationServiceManager getLocationManager() {
