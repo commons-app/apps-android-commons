@@ -2,6 +2,7 @@ package fr.free.nrw.commons.nearby;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -44,6 +45,9 @@ public class NearbyActivity extends BaseActivity {
         switch (item.getItemId()) {
             case R.id.action_refresh:
                 refreshView();
+                return true;
+            case R.id.action_map:
+                Log.d("Nearby","map is clicked");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
