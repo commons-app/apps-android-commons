@@ -12,8 +12,8 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.os.RemoteException;
 
+import fr.free.nrw.commons.MWApi;
 import org.mediawiki.api.ApiResult;
-import org.mediawiki.api.MWApi;
 
 import java.io.IOException;
 

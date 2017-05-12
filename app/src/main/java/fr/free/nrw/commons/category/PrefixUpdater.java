@@ -4,8 +4,8 @@ import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.view.View;
 
+import fr.free.nrw.commons.MWApi;
 import org.mediawiki.api.ApiResult;
-import org.mediawiki.api.MWApi;
 
 import java.io.IOException;
 import java.util.ArrayList;

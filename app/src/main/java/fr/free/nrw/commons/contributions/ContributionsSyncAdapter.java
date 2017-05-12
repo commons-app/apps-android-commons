@@ -12,8 +12,8 @@ import android.os.Bundle;
 import android.os.RemoteException;
 import android.text.TextUtils;
 
+import fr.free.nrw.commons.MWApi;
 import org.mediawiki.api.ApiResult;
-import org.mediawiki.api.MWApi;
 
 import java.io.IOException;
 import java.util.ArrayList;

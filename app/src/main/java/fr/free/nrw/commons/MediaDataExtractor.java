@@ -1,7 +1,6 @@
 package fr.free.nrw.commons;
 
 import org.mediawiki.api.ApiResult;
-import org.mediawiki.api.MWApi;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
