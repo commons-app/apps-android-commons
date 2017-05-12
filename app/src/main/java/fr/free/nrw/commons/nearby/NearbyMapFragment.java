@@ -1,10 +1,12 @@
 package fr.free.nrw.commons.nearby;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -12,8 +14,6 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.services.android.telemetry.MapboxTelemetry;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 
 public class NearbyMapFragment extends android.support.v4.app.Fragment {
@@ -33,7 +33,8 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_nearby_map, container, false);
         ButterKnife.bind(this, view);
 
