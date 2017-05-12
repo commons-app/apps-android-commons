@@ -19,3 +19,9 @@ their contribution to the product.
 * Veyndan Stuart
 * Vivek Maskara
 * Neslihan Turan
+
+3rd party open source libraries used:
+* Butterknife
+* GSON
+* Timber
+* MapBox
