@@ -7,6 +7,8 @@ import android.preference.PreferenceManager;
 import com.mapbox.mapboxsdk.annotations.BaseMarkerOptions;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 
+import fr.free.nrw.commons.location.LatLng;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -15,7 +17,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import fr.free.nrw.commons.location.LatLng;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.utils.LengthUtils.computeDistanceBetween;
@@ -56,13 +57,14 @@ public class NearbyController {
     }
 
     /**
-     * Loads attractions from location for list view, we need to return Place data type
-     * @param curLatLng
-     * @param context
+     * Loads attractions from location for list view, we need to return Place data type.
+     * @param curLatLng users current location
+     * @param context current activity
      * @return
      */
 
-    public static List<Place> loadAttractionsFromLocationToPlaces(LatLng curLatLng, Context context) {
+    public static List<Place> loadAttractionsFromLocationToPlaces(LatLng curLatLng,
+                                                                  Context context) {
 
         List<Place> places = loadAttractionsFromLocation(curLatLng,context);
         places = places.subList(0, Math.min(places.size(), MAX_RESULTS));
@@ -74,9 +76,9 @@ public class NearbyController {
     }
 
     /**
-     *Loads attractions from location for map view, we need to return BaseMarkerOption data type
-     * @param curLatLng
-     * @param context
+     *Loads attractions from location for map view, we need to return BaseMarkerOption data type.
+     * @param curLatLng users current location
+     * @param context the activity
      * @return
      */
     public static List<BaseMarkerOptions> loadAttractionsFromLocationToBaseMarkerOptions(
@@ -89,10 +91,10 @@ public class NearbyController {
             String distance = formatDistanceBetween(curLatLng, place.location);
             place.setDistance(distance);
             baseMarkerOptionses.add(new MarkerOptions()
-            .position(new com.mapbox.mapboxsdk.geometry
+                    .position(new com.mapbox.mapboxsdk.geometry
                     .LatLng(place.location.latitude,place.location.longitude))
-            .title(place.name)
-            .snippet(place.description));
+                    .title(place.name)
+                    .snippet(place.description));
         }
         return baseMarkerOptionses;
     }
