@@ -14,8 +14,12 @@ import butterknife.ButterKnife;
 
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.BaseMarkerOptions;
+import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.constants.Style;
+import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
+import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.services.android.telemetry.MapboxTelemetry;
 
@@ -25,10 +29,8 @@ import fr.free.nrw.commons.R;
 
 public class NearbyMapFragment extends android.support.v4.app.Fragment {
     private NearbyAsyncTask nearbyAsyncTask;
-
-    @BindView(R.id.mapview) MapView mapView;
-    @BindView(R.id.progressBar)
-    ProgressBar progressBar;
+    private fr.free.nrw.commons.location.LatLng currentLocation;
+    private MapView mapView;
 
     public NearbyMapFragment() {
 
@@ -37,7 +39,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        currentLocation = ((NearbyActivity)getActivity()).getLocationManager().getLatestLocation();
         Mapbox.getInstance(getActivity(),
                 getString(R.string.mapbox_commons_app_token));
         MapboxTelemetry.getInstance().setTelemetryEnabled(false);
@@ -48,9 +50,17 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_nearby_map, container, false);
         ButterKnife.bind(this, view);
+        MapboxMapOptions options = new MapboxMapOptions()
+                .styleUrl(Style.OUTDOORS)
+                .camera(new CameraPosition.Builder()
+                        .target(new LatLng(currentLocation.latitude, currentLocation.longitude))
+                        .zoom(11)
+                        .build());
 
+        // create map
+        mapView = new MapView(getActivity(), options);
         mapView.onCreate(savedInstanceState);
-
+        getActivity().setContentView(mapView);
         setHasOptionsMenu(false);
         return view;
     }
@@ -97,19 +107,16 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressBar.setVisibility(View.VISIBLE);
         }
 
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
-            progressBar.setProgress(values[0]);
         }
 
         @Override
         protected List<BaseMarkerOptions> doInBackground(Void... params) {
-            return NearbyController.loadAttractionsFromLocationToBaseMarkerOptions(
-                    ((NearbyActivity)getActivity()).getLocationManager().getLatestLocation(), getActivity()
+            return NearbyController.loadAttractionsFromLocationToBaseMarkerOptions(currentLocation, getActivity()
             );
         }
 
