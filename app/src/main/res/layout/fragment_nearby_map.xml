@@ -13,4 +13,11 @@
         mapbox:mapbox_cameraTargetLat="50.0755"
         mapbox:mapbox_cameraTargetLng="14.4378"
         mapbox:mapbox_styleUrl="@string/style_mapbox_streets" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        />
 </LinearLayout>
