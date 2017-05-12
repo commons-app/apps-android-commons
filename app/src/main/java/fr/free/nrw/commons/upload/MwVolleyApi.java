@@ -21,6 +21,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import fr.free.nrw.commons.CommonsApplication;
 import timber.log.Timber;
 
 /**
@@ -37,8 +38,6 @@ public class MwVolleyApi {
 
     protected static Set<String> categorySet;
     private static List<String> categoryList;
-
-    private static final String MWURL = "https://commons.wikimedia.org/";
 
     public MwVolleyApi(Context context) {
         this.context = context;
@@ -73,11 +72,9 @@ public class MwVolleyApi {
      */
     private String buildUrl (String coords){
 
-        Uri.Builder builder = Uri.parse(MWURL).buildUpon();
+        Uri.Builder builder = Uri.parse(CommonsApplication.API_URL).buildUpon();
 
-        builder.appendPath("w")
-                .appendPath("api.php")
-                .appendQueryParameter("action", "query")
+        builder.appendQueryParameter("action", "query")
                 .appendQueryParameter("prop", "categories|coordinates|pageprops")
                 .appendQueryParameter("format", "json")
                 .appendQueryParameter("clshow", "!hidden")
