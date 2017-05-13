@@ -195,7 +195,7 @@ public class Contribution extends Media {
             cv.put(Table.COLUMN_LOCAL_URI, getLocalUri().toString());
         }
         if(getImageUrl() != null) {
-            cv.put(Table.COLUMN_IMAGE_URL, getImageUrl().toString());
+            cv.put(Table.COLUMN_IMAGE_URL, getImageUrl());
         }
         if(getDateUploaded() != null) {
             cv.put(Table.COLUMN_UPLOADED, getDateUploaded().getTime());

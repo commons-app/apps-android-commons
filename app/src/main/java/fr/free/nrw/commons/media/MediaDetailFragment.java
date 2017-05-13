@@ -220,7 +220,7 @@ public class MediaDetailFragment extends Fragment {
                 protected void onPostExecute(Boolean success) {
                     detailFetchTask = null;
 
-                    if (success.booleanValue()) {
+                    if (success) {
                         extractor.fill(media);
 
                         // Set text of desc, license, and categories

@@ -94,9 +94,7 @@ public class EventLog {
                 data.put("appversion", "Android/" + BuildConfig.VERSION_NAME);
                 fullData.put("event", data);
                 return new URL(CommonsApplication.EVENTLOG_URL + "?" + Utils.urlEncode(fullData.toString()) + ";");
-            } catch (MalformedURLException e) {
-                throw new RuntimeException(e);
-            } catch (JSONException e) {
+            } catch (MalformedURLException | JSONException e) {
                 throw new RuntimeException(e);
             }
         }
