@@ -122,10 +122,7 @@ public class Utils {
         Transformer transformer = null;
         try {
             transformer = TransformerFactory.newInstance().newTransformer();
-        } catch (TransformerConfigurationException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (TransformerFactoryConfigurationError e) {
+        } catch (TransformerConfigurationException | TransformerFactoryConfigurationError e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }

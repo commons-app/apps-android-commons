@@ -110,9 +110,7 @@ public class MediaDataExtractor {
             doc = docBuilder.parse(new ByteArrayInputStream(source.getBytes("UTF-8")));
         } catch (ParserConfigurationException e) {
             throw new RuntimeException(e);
-        } catch (IllegalStateException e) {
-            throw new IOException(e);
-        } catch (SAXException e) {
+        } catch (IllegalStateException | SAXException e) {
             throw new IOException(e);
         }
         Node templateNode = findTemplate(doc.getDocumentElement(), "information");
