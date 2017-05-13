@@ -55,9 +55,11 @@ public class NearbyActivity extends BaseActivity {
     }
 
     private void showMapView() {
-        isMapViewActive = true;
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, new NearbyMapFragment()).commit();
+        if (!isMapViewActive) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, new NearbyMapFragment()).commit();
+            isMapViewActive = true;
+        }
     }
 
     @Override
