@@ -113,7 +113,7 @@ public  class       ShareActivity
         Toast startingToast = Toast.makeText(getApplicationContext(), R.string.uploading_started, Toast.LENGTH_LONG);
         startingToast.show();
 
-        if (cacheFound == false) {
+        if (!cacheFound) {
             //Has to be called after apiCall.request()
             app.cacheData.cacheCategory();
             Timber.d("Cache the categories found");
