@@ -119,6 +119,8 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 } else if (result.toLowerCase().contains("userblocked".toLowerCase())) {
                     // Matches login-userblocked
                     response = R.string.login_failed_blocked;
+                } else if (result.equals("2FA")){
+                    response = R.string.login_failed_2fa_not_supported;
                 } else {
                     // Occurs with unhandled login failure codes
                     Timber.d("Login failed with reason: %s", result);

@@ -42,6 +42,7 @@
   <string name="login_failed_password">Unable to login - please check your password</string>
   <string name="login_failed_throttled">Too many unsuccessful attempts. Please try again in a few minutes.</string>
   <string name="login_failed_blocked">Sorry, this user has been blocked on Commons</string>
+  <string name="login_failed_2fa_not_supported">The app doesn\'t currently support 2 Factor Authentication.</string>
   <string name="login_failed_generic">Login failed</string>
   <string name="share_upload_button">Upload</string>
   <string name="multiple_share_base_title">Name this set</string>

@@ -18,7 +18,8 @@ public class MWApi extends org.mediawiki.api.MWApi {
      * @param username String
      * @param password String
      * @return String On success: "PASS"
-     *                   failure: A failure message code (deifned by mediawiki)
+     *                   continue: "2FA" (More information required for 2FA)
+     *                   failure: A failure message code (defined by mediawiki)
      *                   misc:    genericerror-UI, genericerror-REDIRECT, genericerror-RESTART
      * @throws IOException On api request IO issue
      */
@@ -45,9 +46,14 @@ public class MWApi extends org.mediawiki.api.MWApi {
         if (status.equals("PASS")) {
             this.isLoggedIn = true;
             return status;
-
         } else if (status.equals("FAIL")) {
             return loginData.getString("/api/clientlogin/@messagecode");
+        } else if (
+                status.equals("UI")
+                && loginData.getString("/api/clientlogin/requests/_v/@id").equals("TOTPAuthenticationRequest")
+                && loginData.getString("/api/clientlogin/requests/_v/@provider").equals("Two-factor authentication (OATH).")
+                ) {
+            return "2FA";
         }
 
         // UI, REDIRECT, RESTART
