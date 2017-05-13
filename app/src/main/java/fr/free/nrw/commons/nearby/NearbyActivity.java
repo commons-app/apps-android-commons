@@ -21,7 +21,6 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.theme.BaseActivity;
-import fr.free.nrw.commons.utils.UriDeserializer;
 import fr.free.nrw.commons.utils.UriSerializer;
 
 public class NearbyActivity extends BaseActivity {
@@ -46,6 +45,7 @@ public class NearbyActivity extends BaseActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+        bundle = new Bundle();
         locationManager = new LocationServiceManager(this);
         locationManager.registerLocationManager();
         curLatLang = locationManager.getLatestLocation();
@@ -78,15 +78,7 @@ public class NearbyActivity extends BaseActivity {
 
     private void showMapView() {
         if (!isMapViewActive) {
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            NearbyMapFragment fragment = new NearbyMapFragment();
-            fragment.setArguments(bundle);
-            ft.add(R.id.container, fragment);
-            ft.commit();
-
-            //NearbyController.loadAttractionsFromLocationToBaseMarkerOptions(curLatLang, placeList);
-            /*getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, new NearbyMapFragment()).commit();*/
+            setMapFragment();
             isMapViewActive = true;
         }
     }
@@ -97,15 +89,8 @@ public class NearbyActivity extends BaseActivity {
     }
 
     protected void refreshView() {
-        //placeList = NearbyController.loadAttractionsFromLocation(curLatLang, this);
+        nearbyAsyncTask = new NearbyAsyncTask();
         nearbyAsyncTask.execute();
-        if (isMapViewActive) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, new NearbyMapFragment()).commit();
-        } else {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, new NearbyListFragment()).commit();
-        }
     }
 
     public LocationServiceManager getLocationManager() {
@@ -144,27 +129,44 @@ public class NearbyActivity extends BaseActivity {
             if (isCancelled()) {
                 return;
             }
-            //placeList = NearbyController.loadAttractionsFromLocation(curLatLang, getApplicationContext());
-            Gson gson = new GsonBuilder()
+
+            gson = new GsonBuilder()
                     .registerTypeAdapter(Uri.class, new UriSerializer())
                     .create();
             gsonPlaceList = gson.toJson(placeList);
             gsonCurLatLng = gson.toJson(curLatLang);
 
-            bundle = new Bundle();
+            bundle.clear();
             bundle.putString("PlaceList", gsonPlaceList);
             bundle.putString("CurLatLng", gsonCurLatLng);
 
             // Begin the transaction
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            NearbyListFragment fragment = new NearbyListFragment();
-            fragment.setArguments(bundle);
-            ft.add(R.id.container, fragment);
-            ft.commit();
+            if (isMapViewActive) {
+                setMapFragment();
+            } else {
+                setListFragment();
+            }
 
             if (progressBar != null) {
                 progressBar.setVisibility(View.GONE);
             }
         }
     }
+
+    public void setMapFragment() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        NearbyMapFragment fragment = new NearbyMapFragment();
+        fragment.setArguments(bundle);
+        ft.add(R.id.container, fragment);
+        ft.commit();
+    }
+
+    public void setListFragment() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        NearbyListFragment fragment = new NearbyListFragment();
+        fragment.setArguments(bundle);
+        ft.add(R.id.container, fragment);
+        ft.commit();
+    }
+
 }
