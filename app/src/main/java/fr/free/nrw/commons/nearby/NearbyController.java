@@ -26,6 +26,12 @@ import timber.log.Timber;
 public class NearbyController {
     private static final int MAX_RESULTS = 1000;
 
+    /**
+     * Prepares Place list to make their distance information update later.
+     * @param curLatLng current location for user
+     * @param context context
+     * @return Place list without distance information
+     */
     public static List<Place> loadAttractionsFromLocation(LatLng curLatLng, Context context) {
         Timber.d("Loading attractions near %s", curLatLng);
         if (curLatLng == null) {
@@ -62,7 +68,6 @@ public class NearbyController {
      * @param placeList list of nearby places in Place data type
      * @return Place list that holds nearby places
      */
-
     public static List<Place> loadAttractionsFromLocationToPlaces(
             LatLng curLatLng,
             List<Place> placeList) {
@@ -80,7 +85,7 @@ public class NearbyController {
      * @param placeList list of nearby places in Place data type
      * @return BaseMarkerOprions list that holds nearby places
      */
-    public static List<BaseMarkerOptions> loadAttractionsFromLocationToBaseMarkerOptions (
+    public static List<BaseMarkerOptions> loadAttractionsFromLocationToBaseMarkerOptions(
             LatLng curLatLng,
             List<Place> placeList) {
         List<BaseMarkerOptions> baseMarkerOptionses = new ArrayList<>();

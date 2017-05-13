@@ -10,24 +10,24 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
+import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.UriSerializer;
+
+import java.util.List;
 
 public class NearbyActivity extends BaseActivity {
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
     private boolean isMapViewActive = false;
-    //public List<Place> placeList;
 
     private LocationServiceManager locationManager;
     private LatLng curLatLang;
@@ -153,6 +153,9 @@ public class NearbyActivity extends BaseActivity {
         }
     }
 
+    /**
+     * Calls fragment for map view
+     */
     public void setMapFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         NearbyMapFragment fragment = new NearbyMapFragment();
@@ -161,6 +164,9 @@ public class NearbyActivity extends BaseActivity {
         ft.commit();
     }
 
+    /**
+     * Calls fragment for list view
+     */
     public void setListFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         NearbyListFragment fragment = new NearbyListFragment();

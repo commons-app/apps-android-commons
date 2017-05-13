@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.utils;
 
-
 import android.net.Uri;
 
 import com.google.gson.JsonDeserializationContext;

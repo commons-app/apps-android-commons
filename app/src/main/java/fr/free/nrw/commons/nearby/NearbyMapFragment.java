@@ -46,7 +46,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         gson = new GsonBuilder()
                 .registerTypeAdapter(Uri.class, new UriDeserializer())
                 .create();
-        if (bundle != null){
+        if (bundle != null) {
             String gsonPlaceList = bundle.getString("PlaceList");
             String gsonLatLng = bundle.getString("CurLatLng");
             Type listType = new TypeToken<List<Place>>() {}.getType();

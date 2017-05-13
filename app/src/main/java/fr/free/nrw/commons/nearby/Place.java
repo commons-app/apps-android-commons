@@ -5,7 +5,7 @@ import android.net.Uri;
 
 import fr.free.nrw.commons.location.LatLng;
 
-public class Place{
+public class Place {
 
     public final String name;
     public final String description;
