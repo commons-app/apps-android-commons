@@ -108,7 +108,6 @@ public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
         }
 
         Timber.d("Found categories from Method A search, waiting for filter");
-        ArrayList<String> filteredItems = new ArrayList<>(filterYears(categories));
-        return filteredItems;
+        return new ArrayList<>(filterYears(categories));
     }
 }

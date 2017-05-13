@@ -69,9 +69,8 @@ public class LicenseList {
         int nameId = stringIdByName(stringId);
         //Log.d("Commons", "LicenseList.nameForTemplate: nameId: " + nameId);
         if(nameId != 0) {
-            String name = res.getString(nameId);
             //Log.d("Commons", "LicenseList.nameForTemplate: name: " + name);
-            return name;
+            return res.getString(nameId);
         }
         return template;
     }
