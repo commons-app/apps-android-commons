@@ -48,6 +48,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     Button signupButton;
     EditText usernameEdit;
     EditText passwordEdit;
+    EditText twoFactorEdit;
     ProgressDialog dialog;
 
     private class LoginTask extends AsyncTask<String, String, String> {
@@ -55,6 +56,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         Activity context;
         String username;
         String password;
+        String twoFactorCode = "";
 
         @Override
         protected void onPostExecute(String result) {
@@ -107,12 +109,11 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 } else if (result.toLowerCase().contains("nosuchuser".toLowerCase()) || result.toLowerCase().contains("noname".toLowerCase())) {
                     // Matches nosuchuser, nosuchusershort, noname
                     response = R.string.login_failed_username;
-                    passwordEdit.setText("");
-
+                    emptySensitiveEditFields();
                 } else if (result.toLowerCase().contains("wrongpassword".toLowerCase())) {
                     // Matches wrongpassword, wrongpasswordempty
                     response = R.string.login_failed_password;
-                    passwordEdit.setText("");
+                    emptySensitiveEditFields();
                 } else if (result.toLowerCase().contains("throttle".toLowerCase())) {
                     // Matches unknown throttle error codes
                     response = R.string.login_failed_throttled;
@@ -120,7 +121,8 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                     // Matches login-userblocked
                     response = R.string.login_failed_blocked;
                 } else if (result.equals("2FA")){
-                    response = R.string.login_failed_2fa_not_supported;
+                    twoFactorEdit.setVisibility(View.VISIBLE);
+                    response = R.string.login_failed_2fa_needed;
                 } else {
                     // Occurs with unhandled login failure codes
                     Timber.d("Login failed with reason: %s", result);
@@ -129,6 +131,11 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
                 dialog.cancel();
             }
+        }
+
+        private void emptySensitiveEditFields() {
+            passwordEdit.setText("");
+            twoFactorEdit.setText("");
         }
 
         @Override
@@ -150,8 +157,16 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         protected String doInBackground(String... params) {
             username = params[0];
             password = params[1];
+            if(params.length > 2) {
+                twoFactorCode = params[2];
+            }
+
             try {
-                return app.getApi().login(username, password);
+                if(twoFactorCode.isEmpty()) {
+                    return app.getApi().login(username, password);
+                } else {
+                    return app.getApi().login(username, password, twoFactorCode);
+                }
             } catch (IOException e) {
                 // Do something better!
                 return "NetworkFailure";
@@ -168,6 +183,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         signupButton = (Button) findViewById(R.id.signupButton);
         usernameEdit = (EditText) findViewById(R.id.loginUsername);
         passwordEdit = (EditText) findViewById(R.id.loginPassword);
+        twoFactorEdit = (EditText) findViewById(R.id.loginTwoFactor);
         final LoginActivity that = this;
 
         prefs = getSharedPreferences("fr.free.nrw.commons", MODE_PRIVATE);
@@ -181,7 +197,11 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if(usernameEdit.getText().length() != 0 && passwordEdit.getText().length() != 0) {
+                if(
+                        usernameEdit.getText().length() != 0 &&
+                        passwordEdit.getText().length() != 0 &&
+                        ( twoFactorEdit.getText().length() != 0 || twoFactorEdit.getVisibility() != View.VISIBLE )
+                        ) {
                     loginButton.setEnabled(true);
                 } else {
                     loginButton.setEnabled(false);
@@ -191,6 +211,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
         usernameEdit.addTextChangedListener(loginEnabler);
         passwordEdit.addTextChangedListener(loginEnabler);
+        twoFactorEdit.addTextChangedListener(loginEnabler);
         passwordEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
@@ -249,9 +270,15 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
         String password = passwordEdit.getText().toString();
 
+        String twoFactorCode = twoFactorEdit.getText().toString();
+
         Timber.d("Login to start!");
         LoginTask task = new LoginTask(this);
-        task.execute(canonicalUsername, password);
+        if(twoFactorCode.isEmpty()) {
+            task.execute(canonicalUsername, password);
+        } else {
+            task.execute(canonicalUsername, password, twoFactorCode);
+        }
     }
 
     @Override

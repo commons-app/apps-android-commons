@@ -10,6 +10,9 @@ import org.mediawiki.api.ApiResult;
  */
 public class MWApi extends org.mediawiki.api.MWApi {
 
+    /** We don't actually use this but need to pass it in requests */
+    private static String LOGIN_RETURN_TO_URL = "https://commons.wikimedia.org";
+
     public MWApi(String apiURL, AbstractHttpClient client) {
         super(apiURL, client);
     }
@@ -17,41 +20,69 @@ public class MWApi extends org.mediawiki.api.MWApi {
     /**
      * @param username String
      * @param password String
-     * @return String On success: "PASS"
-     *                   continue: "2FA" (More information required for 2FA)
-     *                   failure: A failure message code (defined by mediawiki)
-     *                   misc:    genericerror-UI, genericerror-REDIRECT, genericerror-RESTART
+     * @return String as returned by this.getErrorCodeToReturn()
      * @throws IOException On api request IO issue
      */
     public String login(String username, String password) throws IOException {
-
-        /** Request a login token to be used later to log in. */
-        ApiResult tokenData = this.action("query")
-                .param("action", "query")
-                .param("meta", "tokens")
-                .param("type", "login")
-                .post();
-        String token = tokenData.getString("/api/query/tokens/@logintoken");
-
-        /** Actually log in. */
-        ApiResult loginData = this.action("clientlogin")
+        String token = this.getLoginToken();
+        ApiResult loginApiResult = this.action("clientlogin")
                 .param("rememberMe", "1")
                 .param("username", username)
                 .param("password", password)
                 .param("logintoken", token)
-                .param("loginreturnurl", "http://example.com/")//TODO return to url?
+                .param("loginreturnurl", LOGIN_RETURN_TO_URL)
                 .post();
-        String status = loginData.getString("/api/clientlogin/@status");
+        return this.getErrorCodeToReturn( loginApiResult );
+    }
 
+    /**
+     * @param username String
+     * @param password String
+     * @param twoFactorCode String
+     * @return String as returned by this.getErrorCodeToReturn()
+     * @throws IOException On api request IO issue
+     */
+    public String login(String username, String password, String twoFactorCode) throws IOException {
+        String token = this.getLoginToken();//TODO cache this instead of calling again when 2FAing
+        ApiResult loginApiResult = this.action("clientlogin")
+                .param("rememberMe", "1")
+                .param("username", username)
+                .param("password", password)
+                .param("logintoken", token)
+                .param("logincontinue", "1")
+                .param("OATHToken", twoFactorCode)
+                .post();
+
+        return this.getErrorCodeToReturn( loginApiResult );
+    }
+
+    private String getLoginToken() throws IOException {
+        ApiResult tokenResult = this.action("query")
+                .param("action", "query")
+                .param("meta", "tokens")
+                .param("type", "login")
+                .post();
+        return tokenResult.getString("/api/query/tokens/@logintoken");
+    }
+
+    /**
+     * @param loginApiResult ApiResult Any clientlogin api result
+     * @return String On success: "PASS"
+     *                   continue: "2FA" (More information required for 2FA)
+     *                   failure: A failure message code (defined by mediawiki)
+     *                   misc:    genericerror-UI, genericerror-REDIRECT, genericerror-RESTART
+     */
+    private String getErrorCodeToReturn( ApiResult loginApiResult ) {
+        String status = loginApiResult.getString("/api/clientlogin/@status");
         if (status.equals("PASS")) {
             this.isLoggedIn = true;
             return status;
         } else if (status.equals("FAIL")) {
-            return loginData.getString("/api/clientlogin/@messagecode");
+            return loginApiResult.getString("/api/clientlogin/@messagecode");
         } else if (
                 status.equals("UI")
-                && loginData.getString("/api/clientlogin/requests/_v/@id").equals("TOTPAuthenticationRequest")
-                && loginData.getString("/api/clientlogin/requests/_v/@provider").equals("Two-factor authentication (OATH).")
+                        && loginApiResult.getString("/api/clientlogin/requests/_v/@id").equals("TOTPAuthenticationRequest")
+                        && loginApiResult.getString("/api/clientlogin/requests/_v/@provider").equals("Two-factor authentication (OATH).")
                 ) {
             return "2FA";
         }
@@ -59,6 +90,5 @@ public class MWApi extends org.mediawiki.api.MWApi {
         // UI, REDIRECT, RESTART
         return "genericerror-" + status;
     }
-
 
 }
