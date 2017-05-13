@@ -271,7 +271,7 @@ public class MediaDataExtractor {
      *
      * @param parentNode The node of the coordinates template.
      * @return Pretty formatted coordinates.
-     * @throws IOException
+     * @throws IOException Parsing failed.
      */
     private String getCoordinates(Node parentNode) throws IOException {
         NodeList childNodes = parentNode.getChildNodes();

@@ -163,7 +163,7 @@ public class Media implements Parcelable {
     protected int width;
     protected int height;
     protected String license;
-    protected String coordinates;
+    private String coordinates;
     protected String creator;
     protected ArrayList<String> categories; // as loaded at runtime?
     protected Map<String, String> descriptions; // multilingual descriptions as loaded
