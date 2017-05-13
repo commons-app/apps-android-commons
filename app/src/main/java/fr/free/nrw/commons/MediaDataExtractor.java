@@ -20,6 +20,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import fr.free.nrw.commons.location.LatLng;
 import timber.log.Timber;
 
 /**
@@ -252,18 +253,6 @@ public class MediaDataExtractor {
     }
 
     /**
-     * Rounds the float to 4 digits.
-     *
-     * @param coordinate A coordinate value as string.
-     * @return String of the rounded number.
-     */
-    private String formatCoordinate(String coordinate) {
-        Float floatNumber = Float.parseFloat(coordinate);
-        double roundedNumber = Math.round(floatNumber * 10000d) / 10000d;
-        return String.valueOf(roundedNumber);
-    }
-
-    /**
      * Extracts the coordinates from the template and returns them as pretty formatted string.
      * Loops over the children of the coordinate template:
      *      {{Location|47.50111007666667|19.055700301944444}}
@@ -275,9 +264,11 @@ public class MediaDataExtractor {
      */
     private String getCoordinates(Node parentNode) throws IOException {
         NodeList childNodes = parentNode.getChildNodes();
-        String latitudeText = formatCoordinate(childNodes.item(1).getTextContent());
-        String longitudeText = formatCoordinate(childNodes.item(2).getTextContent());
-        return latitudeText + " N," + longitudeText + " E";
+        double latitudeText = Double.parseDouble(childNodes.item(1).getTextContent());
+        double longitudeText = Double.parseDouble(childNodes.item(2).getTextContent());
+        LatLng coordinates = new LatLng(latitudeText, longitudeText);
+
+        return coordinates.getPrettyCoordinateString();
     }
 
     // Extract a dictionary of multilingual texts from a subset of the parse tree.

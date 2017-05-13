@@ -42,4 +42,52 @@ public class LatLng {
     public String toString() {
         return "lat/lng: (" + this.latitude + "," + this.longitude + ")";
     }
+
+    /**
+     * Rounds the float to 4 digits.
+     *
+     * @param coordinate A coordinate value as string.
+     * @return String of the rounded number.
+     */
+    private String formatCoordinate(double coordinate) {
+        double roundedNumber = Math.round(coordinate * 10000d) / 10000d;
+        return String.valueOf(roundedNumber);
+    }
+
+    /**
+     * Returns "N" or "S" depending on the latitude.
+     *
+     * @return "N" or "S".
+     */
+    private String getNorthSouth() {
+        if (this.latitude < 0) {
+            return "S";
+        }
+
+        return "N";
+    }
+
+    /**
+     * Returns "E" or "W" depending on the longitude.
+     *
+     * @return "E" or "W".
+     */
+    private String getEastWest() {
+        if (this.longitude < 180) {
+            return "E";
+        }
+
+        return "W";
+    }
+
+    /**
+     * Returns a nicely formatted coordinate string. Used e.g. in
+     * the detail view.
+     *
+     * @return The formatted string.
+     */
+    public String getPrettyCoordinateString() {
+        return formatCoordinate(this.latitude) + " " + this.getNorthSouth() + ", " +
+               formatCoordinate(this.longitude) + " " + this.getEastWest();
+    }
 }
