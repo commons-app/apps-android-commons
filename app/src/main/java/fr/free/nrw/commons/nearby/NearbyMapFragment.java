@@ -21,11 +21,11 @@ import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.services.android.telemetry.MapboxTelemetry;
 
-import java.lang.reflect.Type;
-import java.util.List;
-
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.utils.UriDeserializer;
+
+import java.lang.reflect.Type;
+import java.util.List;
 
 public class NearbyMapFragment extends android.support.v4.app.Fragment {
     //private NearbyAsyncTask nearbyAsyncTask;

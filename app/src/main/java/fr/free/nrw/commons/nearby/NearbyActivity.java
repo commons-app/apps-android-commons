@@ -18,9 +18,10 @@ import com.google.gson.GsonBuilder;
 
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
-import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.UriSerializer;
+
+import fr.free.nrw.commons.R;
 
 import java.util.List;
 
@@ -154,7 +155,7 @@ public class NearbyActivity extends BaseActivity {
     }
 
     /**
-     * Calls fragment for map view
+     * Calls fragment for map view.
      */
     public void setMapFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -165,7 +166,7 @@ public class NearbyActivity extends BaseActivity {
     }
 
     /**
-     * Calls fragment for list view
+     * Calls fragment for list view.
      */
     public void setListFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
