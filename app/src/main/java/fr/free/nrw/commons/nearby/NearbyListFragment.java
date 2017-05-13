@@ -11,6 +11,12 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -18,14 +24,18 @@ import butterknife.ButterKnife;
 import butterknife.OnItemClick;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.utils.UriDeserializer;
 import timber.log.Timber;
 
 public class NearbyListFragment extends ListFragment  {
 
-    private NearbyAsyncTask nearbyAsyncTask;
+    //private NearbyAsyncTask nearbyAsyncTask;
+    private Gson gson;
+    private List<Place> placeList;
+    private LatLng curLatLng;
 
     @BindView(R.id.listView) ListView listview;
-    @BindView(R.id.progressBar) ProgressBar progressBar;
+
 
     private NearbyAdapter adapter;
 
@@ -35,6 +45,19 @@ public class NearbyListFragment extends ListFragment  {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle bundle = this.getArguments();
+        gson = new GsonBuilder()
+                .registerTypeAdapter(Uri.class, new UriDeserializer())
+                .create();
+        if (bundle != null){
+            String gsonPlaceList = bundle.getString("PlaceList");
+            String gsonLatLng = bundle.getString("CurLatLng");
+            Type listType = new TypeToken<List<Place>>() {}.getType();
+            placeList = gson.fromJson(gsonPlaceList, listType);
+            Type curLatLngType = new TypeToken<LatLng>() {}.getType();
+            curLatLng = gson.fromJson(gsonLatLng, curLatLngType);
+            NearbyController.loadAttractionsFromLocationToPlaces(curLatLng, placeList);
+        }
         setRetainInstance(true);
     }
 
@@ -57,32 +80,37 @@ public class NearbyListFragment extends ListFragment  {
         // to avoid double list when screen orientation changed
         if (savedInstanceState == null) {
             adapter.clear();
-            nearbyAsyncTask = new NearbyAsyncTask();
-            nearbyAsyncTask.execute();
-            progressBar.setVisibility(View.VISIBLE);
+            //nearbyAsyncTask = new NearbyAsyncTask();
+            //nearbyAsyncTask.execute();
+            //progressBar.setVisibility(View.VISIBLE);
             Timber.d("Saved instance state is null, populating ListView");
         } else {
-            progressBar.setVisibility(View.GONE);
+            //progressBar.setVisibility(View.GONE);
         }
 
         // If we are returning here from a screen orientation and the AsyncTask is still working,
         // re-create and display the progress dialog.
         if (isTaskRunning()) {
-            progressBar.setVisibility(View.VISIBLE);
+            //progressBar.setVisibility(View.VISIBLE);
         }
+
+        adapter.clear();
+        adapter.addAll(placeList);
+        adapter.notifyDataSetChanged();
     }
 
     private boolean isTaskRunning() {
-        return nearbyAsyncTask != null && nearbyAsyncTask.getStatus() != AsyncTask.Status.FINISHED;
+        //return nearbyAsyncTask != null && nearbyAsyncTask.getStatus() != AsyncTask.Status.FINISHED;
+        return false;
     }
 
     @Override
     public void onDetach() {
         // All dialogs should be closed before leaving the activity in order to avoid
         // the: Activity has leaked window com.android.internal.policy... exception
-        if (progressBar != null && progressBar.isShown()) {
+       /* if (progressBar != null && progressBar.isShown()) {
             progressBar.setVisibility(View.GONE);
-        }
+        }*/
         super.onDetach();
     }
 
@@ -92,10 +120,10 @@ public class NearbyListFragment extends ListFragment  {
 
         // See http://stackoverflow.com/questions/18264408/incomplete-asynctask-crashes-my-app
         if (isTaskRunning()) {
-            nearbyAsyncTask.cancel(true);
+            //nearbyAsyncTask.cancel(true);
         }
     }
-
+/*
     private class NearbyAsyncTask extends AsyncTask<Void, Integer, List<Place>> {
 
         @Override
@@ -135,6 +163,7 @@ public class NearbyListFragment extends ListFragment  {
             adapter.notifyDataSetChanged();
         }
     }
+    */
 
     @OnItemClick(R.id.listView)
     void onItemClicked(int position) {

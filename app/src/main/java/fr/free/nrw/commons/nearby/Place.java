@@ -5,7 +5,7 @@ import android.net.Uri;
 
 import fr.free.nrw.commons.location.LatLng;
 
-public class Place {
+public class Place{
 
     public final String name;
     public final String description;
@@ -16,6 +16,7 @@ public class Place {
     public Bitmap image;
     public Bitmap secondaryImage;
     public String distance;
+
 
     public Place(String name, String description, String longDescription,
                  Uri secondaryImageUrl, LatLng location) {

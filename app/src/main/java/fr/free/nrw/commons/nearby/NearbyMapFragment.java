@@ -23,7 +23,7 @@ import java.util.List;
 import fr.free.nrw.commons.R;
 
 public class NearbyMapFragment extends android.support.v4.app.Fragment {
-    private NearbyAsyncTask nearbyAsyncTask;
+    //private NearbyAsyncTask nearbyAsyncTask;
     private fr.free.nrw.commons.location.LatLng currentLocation;
     private MapView mapView;
 
@@ -60,8 +60,8 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        nearbyAsyncTask = new NearbyAsyncTask();
-        nearbyAsyncTask.execute();
+        //nearbyAsyncTask = new NearbyAsyncTask();
+        //nearbyAsyncTask.execute();
     }
 
     @Override
@@ -93,7 +93,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         mapView.onDestroy();
         super.onDestroyView();
     }
-
+/*
     private class NearbyAsyncTask extends AsyncTask<Void, Integer, List<BaseMarkerOptions>> {
 
         @Override
@@ -128,4 +128,5 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
             });
         }
     }
+    */
 }

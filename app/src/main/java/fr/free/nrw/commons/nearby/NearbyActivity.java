@@ -1,35 +1,57 @@
 package fr.free.nrw.commons.nearby;
 
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.theme.BaseActivity;
+import fr.free.nrw.commons.utils.UriDeserializer;
+import fr.free.nrw.commons.utils.UriSerializer;
 
 public class NearbyActivity extends BaseActivity {
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
     private boolean isMapViewActive = false;
+    //public List<Place> placeList;
 
     private LocationServiceManager locationManager;
+    private LatLng curLatLang;
+    private Gson gson;
+    private String gsonPlaceList;
+    private String gsonCurLatLng;
+    private Bundle bundle;
+    private NearbyAsyncTask nearbyAsyncTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nearby);
+        ButterKnife.bind(this);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         locationManager = new LocationServiceManager(this);
         locationManager.registerLocationManager();
+        curLatLang = locationManager.getLatestLocation();
+        nearbyAsyncTask = new NearbyAsyncTask();
+        nearbyAsyncTask.execute();
 
-        // Begin the transaction
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        NearbyListFragment fragment = new NearbyListFragment();
-        ft.add(R.id.container, fragment);
-        ft.commit();
     }
 
     @Override
@@ -56,8 +78,15 @@ public class NearbyActivity extends BaseActivity {
 
     private void showMapView() {
         if (!isMapViewActive) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, new NearbyMapFragment()).commit();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            NearbyMapFragment fragment = new NearbyMapFragment();
+            fragment.setArguments(bundle);
+            ft.add(R.id.container, fragment);
+            ft.commit();
+
+            //NearbyController.loadAttractionsFromLocationToBaseMarkerOptions(curLatLang, placeList);
+            /*getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, new NearbyMapFragment()).commit();*/
             isMapViewActive = true;
         }
     }
@@ -68,6 +97,8 @@ public class NearbyActivity extends BaseActivity {
     }
 
     protected void refreshView() {
+        //placeList = NearbyController.loadAttractionsFromLocation(curLatLang, this);
+        nearbyAsyncTask.execute();
         if (isMapViewActive) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, new NearbyMapFragment()).commit();
@@ -85,5 +116,55 @@ public class NearbyActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         locationManager.unregisterLocationManager();
+    }
+
+    private class NearbyAsyncTask extends AsyncTask<Void, Integer, List<Place>> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected List<Place> doInBackground(Void... params) {
+            return NearbyController
+                    .loadAttractionsFromLocation(curLatLang, getApplicationContext()
+                    );
+        }
+
+        @Override
+        protected void onPostExecute(List<Place> placeList) {
+            super.onPostExecute(placeList);
+
+            if (isCancelled()) {
+                return;
+            }
+            //placeList = NearbyController.loadAttractionsFromLocation(curLatLang, getApplicationContext());
+            Gson gson = new GsonBuilder()
+                    .registerTypeAdapter(Uri.class, new UriSerializer())
+                    .create();
+            gsonPlaceList = gson.toJson(placeList);
+            gsonCurLatLng = gson.toJson(curLatLang);
+
+            bundle = new Bundle();
+            bundle.putString("PlaceList", gsonPlaceList);
+            bundle.putString("CurLatLng", gsonCurLatLng);
+
+            // Begin the transaction
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            NearbyListFragment fragment = new NearbyListFragment();
+            fragment.setArguments(bundle);
+            ft.add(R.id.container, fragment);
+            ft.commit();
+
+            if (progressBar != null) {
+                progressBar.setVisibility(View.GONE);
+            }
+        }
     }
 }
