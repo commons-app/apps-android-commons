@@ -38,6 +38,7 @@ public class MediaDataExtractor {
     private String author;
     private Date date;
     private String license;
+    private String coordinates;
     private LicenseList licenseList;
 
     /**
@@ -120,6 +121,14 @@ public class MediaDataExtractor {
 
             Node authorNode = findTemplateParameter(templateNode, "author");
             author = getFlatText(authorNode);
+        }
+
+        Node coordinateTemplateNode = findTemplate(doc.getDocumentElement(), "location");
+
+        if (coordinateTemplateNode != null) {
+            coordinates = getCoordinates(coordinateTemplateNode);
+        } else {
+            coordinates = "No coordinates found";
         }
 
         /*
@@ -242,6 +251,35 @@ public class MediaDataExtractor {
         return parentNode.getTextContent();
     }
 
+    /**
+     * Rounds the float to 4 digits.
+     *
+     * @param coordinate A coordinate value as string.
+     * @return String of the rounded number.
+     */
+    private String formatCoordinate(String coordinate) {
+        Float floatNumber = Float.parseFloat(coordinate);
+        double roundedNumber = Math.round(floatNumber * 10000d) / 10000d;
+        return String.valueOf(roundedNumber);
+    }
+
+    /**
+     * Extracts the coordinates from the template and returns them as pretty formatted string.
+     * Loops over the children of the coordinate template:
+     *      {{Location|47.50111007666667|19.055700301944444}}
+     * and extracts the latitude and longitude as a pretty string.
+     *
+     * @param parentNode The node of the coordinates template.
+     * @return Pretty formatted coordinates.
+     * @throws IOException
+     */
+    private String getCoordinates(Node parentNode) throws IOException {
+        NodeList childNodes = parentNode.getChildNodes();
+        String latitudeText = formatCoordinate(childNodes.item(1).getTextContent());
+        String longitudeText = formatCoordinate(childNodes.item(2).getTextContent());
+        return latitudeText + " N," + longitudeText + " E";
+    }
+
     // Extract a dictionary of multilingual texts from a subset of the parse tree.
     // Texts are wrapped in things like {{en|foo} or {{en|1=foo bar}}.
     // Text outside those wrappers is stuffed into a 'default' faux language key if present.
@@ -287,6 +325,7 @@ public class MediaDataExtractor {
 
         media.setCategories(categories);
         media.setDescriptions(descriptions);
+        media.setCoordinates(coordinates);
         if (license != null) {
             media.setLicense(license);
         }
