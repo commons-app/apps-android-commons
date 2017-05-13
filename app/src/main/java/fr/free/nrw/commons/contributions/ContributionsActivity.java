@@ -42,7 +42,8 @@ public  class       ContributionsActivity
                     AdapterView.OnItemClickListener,
                     MediaDetailPagerFragment.MediaDetailProvider,
                     FragmentManager.OnBackStackChangedListener,
-                    ContributionsListFragment.SourceRefresher {
+                    ContributionsListFragment.SourceRefresher
+{
 
     private Cursor allContributions;
     private ContributionsListFragment contributionsList;
@@ -209,9 +210,12 @@ public  class       ContributionsActivity
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences sharedPref =
+                PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         int uploads = sharedPref.getInt(Prefs.UPLOADS_SHOWING, 100);
-        return new CursorLoader(this, ContributionsContentProvider.BASE_URI, Contribution.Table.ALL_FIELDS, CONTRIBUTION_SELECTION, null, CONTRIBUTION_SORT+ "LIMIT "+uploads);
+        return new CursorLoader(this, ContributionsContentProvider.BASE_URI,
+                Contribution.Table.ALL_FIELDS, CONTRIBUTION_SELECTION, null,
+                CONTRIBUTION_SORT + "LIMIT " + uploads);
     }
 
     @Override
