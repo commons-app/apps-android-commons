@@ -17,6 +17,7 @@ public class Place {
     public Bitmap secondaryImage;
     public String distance;
 
+
     public Place(String name, String description, String longDescription,
                  Uri secondaryImageUrl, LatLng location) {
         this.name = name;

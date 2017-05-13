@@ -26,7 +26,13 @@ import timber.log.Timber;
 public class NearbyController {
     private static final int MAX_RESULTS = 1000;
 
-    private static List<Place> loadAttractionsFromLocation(LatLng curLatLng, Context context) {
+    /**
+     * Prepares Place list to make their distance information update later.
+     * @param curLatLng current location for user
+     * @param context context
+     * @return Place list without distance information
+     */
+    public static List<Place> loadAttractionsFromLocation(LatLng curLatLng, Context context) {
         Timber.d("Loading attractions near %s", curLatLng);
         if (curLatLng == null) {
             return Collections.emptyList();
@@ -59,35 +65,32 @@ public class NearbyController {
     /**
      * Loads attractions from location for list view, we need to return Place data type.
      * @param curLatLng users current location
-     * @param context current activity
+     * @param placeList list of nearby places in Place data type
      * @return Place list that holds nearby places
      */
-
-    public static List<Place> loadAttractionsFromLocationToPlaces(LatLng curLatLng,
-                                                                  Context context) {
-
-        List<Place> places = loadAttractionsFromLocation(curLatLng,context);
-        places = places.subList(0, Math.min(places.size(), MAX_RESULTS));
-        for (Place place: places) {
+    public static List<Place> loadAttractionsFromLocationToPlaces(
+            LatLng curLatLng,
+            List<Place> placeList) {
+        placeList = placeList.subList(0, Math.min(placeList.size(), MAX_RESULTS));
+        for (Place place: placeList) {
             String distance = formatDistanceBetween(curLatLng, place.location);
             place.setDistance(distance);
         }
-        return places;
+        return placeList;
     }
 
     /**
      *Loads attractions from location for map view, we need to return BaseMarkerOption data type.
      * @param curLatLng users current location
-     * @param context the activity
+     * @param placeList list of nearby places in Place data type
      * @return BaseMarkerOprions list that holds nearby places
      */
     public static List<BaseMarkerOptions> loadAttractionsFromLocationToBaseMarkerOptions(
             LatLng curLatLng,
-            Context context) {
+            List<Place> placeList) {
         List<BaseMarkerOptions> baseMarkerOptionses = new ArrayList<>();
-        List<Place> places = loadAttractionsFromLocation(curLatLng,context);
-        places = places.subList(0, Math.min(places.size(), MAX_RESULTS));
-        for (Place place: places) {
+        placeList = placeList.subList(0, Math.min(placeList.size(), MAX_RESULTS));
+        for (Place place: placeList) {
             String distance = formatDistanceBetween(curLatLng, place.location);
             place.setDistance(distance);
             baseMarkerOptionses.add(new MarkerOptions()
