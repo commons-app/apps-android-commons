@@ -79,8 +79,10 @@ public class NearbyActivity extends BaseActivity {
 
     private void showMapView() {
         if (!isMapViewActive) {
-            setMapFragment();
             isMapViewActive = true;
+            if (nearbyAsyncTask.getStatus() == AsyncTask.Status.FINISHED) {
+                setMapFragment();
+            }
         }
     }
 
