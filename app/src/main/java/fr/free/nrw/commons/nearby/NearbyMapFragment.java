@@ -84,7 +84,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         });
         if (PreferenceManager.getDefaultSharedPreferences(getActivity()).getBoolean("theme",true)) {
             mapView.setStyleUrl(getResources().getString(R.string.map_theme_dark));
-        }else {
+        } else {
             mapView.setStyleUrl(getResources().getString(R.string.map_theme_light));
         }
         setHasOptionsMenu(false);
