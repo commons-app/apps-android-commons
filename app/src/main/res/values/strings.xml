@@ -24,7 +24,7 @@
     <item quantity="one">%d file uploading</item>
     <item quantity="other">%d files uploading</item>
   </plurals>
-  <string name="title_activity_contributions">My uploads</string>
+  <string name="title_activity_contributions">My Recent Uploads</string>
   <string name="contribution_state_queued">Queued</string>
   <string name="contribution_state_failed">Failed</string>
   <string name="contribution_state_in_progress">%1$d%% complete</string>
@@ -173,4 +173,9 @@ Tap this message (or hit back) to skip this step.</string>
   <string name="map_theme_light">mapbox://styles/mapbox/traffic-day-v2</string>
   <string name="map_theme_dark">mapbox://styles/mapbox/traffic-night-v2</string>
   <string name="mapbox_commons_app_token">pk.eyJ1IjoibWFza2FyYXZpdmVrIiwiYSI6ImNqMmxvdzFjMTAwMHYzM283ZWM3eW5tcDAifQ.ib5SZ9EVjwJe6GSKve0bcg</string>
+  <string name="number_of_uploads">My Recent Upload Limit</string>
+  <string name="maximum_limit">Maximum Limit</string>
+  <string name="maximum_limit_alert">Maximum limit should be 500</string>
+  <string name="set_limit">Set Recent Upload Limit</string>
+
 </resources>
