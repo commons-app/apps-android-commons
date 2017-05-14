@@ -173,7 +173,7 @@ Tap this message (or hit back) to skip this step.</string>
   <string name="mapbox_commons_app_token">pk.eyJ1IjoibWFza2FyYXZpdmVrIiwiYSI6ImNqMmxvdzFjMTAwMHYzM283ZWM3eW5tcDAifQ.ib5SZ9EVjwJe6GSKve0bcg</string>
   <string name="number_of_uploads">My Recent Upload Limit</string>
   <string name="maximum_limit">Maximum Limit</string>
-  <string name="maximum_limit_alert">Maximum limit should be 500</string>
+  <string name="maximum_limit_alert">Unable to display more than 500</string>
   <string name="set_limit">Set Recent Upload Limit</string>
 
 </resources>

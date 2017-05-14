@@ -41,12 +41,13 @@ public class SettingsFragment extends PreferenceFragment {
         });
 
         licensePreference.setSummary(getString(Utils.licenseNameFor(licensePreference.getValue())));
-        licensePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener(){
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                preference.setSummary(getString(Utils.licenseNameFor((String) newValue)));
-                return true;
-            }
+        licensePreference
+                .setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener(){
+                    @Override
+                    public boolean onPreferenceChange(Preference preference, Object newValue) {
+                        preference.setSummary(getString(Utils.licenseNameFor((String) newValue)));
+                        return true;
+                    }
         });
 
         CheckBoxPreference themePreference = (CheckBoxPreference) findPreference("theme");
@@ -59,17 +60,16 @@ public class SettingsFragment extends PreferenceFragment {
         });
 
         final EditTextPreference uploadLimit = (EditTextPreference) findPreference("uploads");
-        SharedPreferences sharedPref = PreferenceManager
+        final SharedPreferences sharedPref = PreferenceManager
                 .getDefaultSharedPreferences(getActivity().getApplicationContext());
         int uploads = sharedPref.getInt(Prefs.UPLOADS_SHOWING, 100);
+        uploadLimit.setText(uploads + "");
         uploadLimit.setSummary(uploads + "");
         uploadLimit.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
 
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 int value = Integer.parseInt(newValue.toString());
-                final SharedPreferences sharedPref = PreferenceManager
-                        .getDefaultSharedPreferences(getActivity().getApplicationContext());
                 final SharedPreferences.Editor editor = sharedPref.edit();
                 if (value > 500) {
                     new AlertDialog.Builder(getActivity())
@@ -83,10 +83,12 @@ public class SettingsFragment extends PreferenceFragment {
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .show();
                     editor.putInt(Prefs.UPLOADS_SHOWING, 500);
+                    editor.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED,true);
                     uploadLimit.setSummary(500 + "");
                     uploadLimit.setText(500 + "");
                 } else {
                     editor.putInt(Prefs.UPLOADS_SHOWING, Integer.parseInt(newValue.toString()));
+                    editor.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED,true);
                     uploadLimit.setSummary(newValue.toString());
                 }
                 editor.apply();
