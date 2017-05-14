@@ -102,9 +102,7 @@ Tap this message (or hit back) to skip this step.</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
   <string name="license_name_cc_by"> Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
-  <string name="license_pref_cc0" translatable="false">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_pref_cc_by_sa_3_0" translatable="false">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Austria)</string>
   <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Germany)</string>
   <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonia)</string>
@@ -116,11 +114,8 @@ Tap this message (or hit back) to skip this step.</string>
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Poland)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romania)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_pref_cc_by_3_0" translatable="false">CC BY 3.0</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
-  <string name="license_pref_cc_by_sa_4_0" translatable="false">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_pref_cc_by_4_0" translatable="false">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="license_name_own_pd">own-pd</string>
   <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
