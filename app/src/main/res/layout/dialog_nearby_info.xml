@@ -9,6 +9,7 @@
     app:behavior_peekHeight="@dimen/bottom_peak_height">
 
     <LinearLayout
+        android:orientation="vertical"
         android:id="@+id/emptyLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -11,14 +11,12 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import fr.free.nrw.commons.R;
-
 public abstract class OverlayDialog extends DialogFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStyle(STYLE_NORMAL, R.style.borderless_dialog);
+        setStyle(STYLE_NO_FRAME, android.R.style.Theme_Holo_Light);
     }
 
     @Override
