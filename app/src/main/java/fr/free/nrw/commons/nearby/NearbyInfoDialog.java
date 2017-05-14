@@ -107,4 +107,9 @@ public class NearbyInfoDialog extends OverlayDialog {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, articleLink);
         startActivity(browserIntent);
     }
+
+    @OnClick(R.id.emptyLayout)
+    void onCloseClicked() {
+        dismissAllowingStateLoss();
+    }
 }
