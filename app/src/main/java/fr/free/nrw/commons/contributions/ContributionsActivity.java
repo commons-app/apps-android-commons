@@ -5,10 +5,12 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -30,6 +32,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.auth.WikiAccountAuthenticator;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
+import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
 import timber.log.Timber;
 
@@ -206,7 +209,12 @@ public  class       ContributionsActivity
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        return new CursorLoader(this, ContributionsContentProvider.BASE_URI, Contribution.Table.ALL_FIELDS, CONTRIBUTION_SELECTION, null, CONTRIBUTION_SORT);
+        SharedPreferences sharedPref =
+                PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        int uploads = sharedPref.getInt(Prefs.UPLOADS_SHOWING, 100);
+        return new CursorLoader(this, ContributionsContentProvider.BASE_URI,
+                Contribution.Table.ALL_FIELDS, CONTRIBUTION_SELECTION, null,
+                CONTRIBUTION_SORT + "LIMIT " + uploads);
     }
 
     @Override
