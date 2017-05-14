@@ -357,8 +357,7 @@ public class CategorizationFragment extends Fragment {
                     new String[] {name},
                     null);
             if (cursor.moveToFirst()) {
-                Category cat = Category.fromCursor(cursor);
-                return cat;
+                return Category.fromCursor(cursor);
             }
         } catch (RemoteException e) {
             // This feels lazy, but to hell with checked exceptions. :)

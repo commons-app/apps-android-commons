@@ -122,10 +122,7 @@ public class Utils {
         Transformer transformer = null;
         try {
             transformer = TransformerFactory.newInstance().newTransformer();
-        } catch (TransformerConfigurationException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (TransformerFactoryConfigurationError e) {
+        } catch (TransformerConfigurationException | TransformerFactoryConfigurationError e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
@@ -202,54 +199,57 @@ public class Utils {
     }
 
     public static String licenseTemplateFor(String license) {
-        if (license.equals(Prefs.Licenses.CC_BY_3)) {
-            return "{{self|cc-by-3.0}}";
-        } else if (license.equals(Prefs.Licenses.CC_BY_4)) {
-            return "{{self|cc-by-4.0}}";
-        } else if (license.equals(Prefs.Licenses.CC_BY_SA_3)) {
-            return "{{self|cc-by-sa-3.0}}";
-        } else if (license.equals(Prefs.Licenses.CC_BY_SA_4)) {
-            return "{{self|cc-by-sa-4.0}}";
-        } else if (license.equals(Prefs.Licenses.CC0)) {
-            return "{{self|cc-zero}}";
-        } else if (license.equals(Prefs.Licenses.CC_BY)) {
-            return "{{self|cc-by-3.0}}";
-        } else if (license.equals(Prefs.Licenses.CC_BY_SA)) {
-            return "{{self|cc-by-sa-3.0}}";
+        switch (license) {
+            case Prefs.Licenses.CC_BY_3:
+                return "{{self|cc-by-3.0}}";
+            case Prefs.Licenses.CC_BY_4:
+                return "{{self|cc-by-4.0}}";
+            case Prefs.Licenses.CC_BY_SA_3:
+                return "{{self|cc-by-sa-3.0}}";
+            case Prefs.Licenses.CC_BY_SA_4:
+                return "{{self|cc-by-sa-4.0}}";
+            case Prefs.Licenses.CC0:
+                return "{{self|cc-zero}}";
+            case Prefs.Licenses.CC_BY:
+                return "{{self|cc-by-3.0}}";
+            case Prefs.Licenses.CC_BY_SA:
+                return "{{self|cc-by-sa-3.0}}";
         }
         throw new RuntimeException("Unrecognized license value: " + license);
     }
 
     public static int licenseNameFor(String license) {
-        if (license.equals(Prefs.Licenses.CC_BY_3)) {
-            return R.string.license_name_cc_by;
-        } else if (license.equals(Prefs.Licenses.CC_BY_4)) {
-            return R.string.license_name_cc_by_four;
-        } else if (license.equals(Prefs.Licenses.CC_BY_SA_3)) {
-            return R.string.license_name_cc_by_sa;
-        } else if (license.equals(Prefs.Licenses.CC_BY_SA_4)) {
-            return R.string.license_name_cc_by_sa_four;
-        } else if (license.equals(Prefs.Licenses.CC0)) {
-            return R.string.license_name_cc0;
-        } else if (license.equals(Prefs.Licenses.CC_BY)) { // for backward compatibility to v2.1
-            return R.string.license_name_cc_by_3_0;
-        } else if (license.equals(Prefs.Licenses.CC_BY_SA)) { // for backward compatibility to v2.1
-            return R.string.license_name_cc_by_sa_3_0;
+        switch (license) {
+            case Prefs.Licenses.CC_BY_3:
+                return R.string.license_name_cc_by;
+            case Prefs.Licenses.CC_BY_4:
+                return R.string.license_name_cc_by_four;
+            case Prefs.Licenses.CC_BY_SA_3:
+                return R.string.license_name_cc_by_sa;
+            case Prefs.Licenses.CC_BY_SA_4:
+                return R.string.license_name_cc_by_sa_four;
+            case Prefs.Licenses.CC0:
+                return R.string.license_name_cc0;
+            case Prefs.Licenses.CC_BY:  // for backward compatibility to v2.1
+                return R.string.license_name_cc_by_3_0;
+            case Prefs.Licenses.CC_BY_SA:  // for backward compatibility to v2.1
+                return R.string.license_name_cc_by_sa_3_0;
         }
         throw new RuntimeException("Unrecognized license value: " + license);
     }
 
     public static String licenseUrlFor(String license) {
-        if (license.equals(Prefs.Licenses.CC_BY_3)) {
-            return "https://creativecommons.org/licenses/by/3.0/";
-        } else if (license.equals(Prefs.Licenses.CC_BY_4)) {
-            return "https://creativecommons.org/licenses/by/4.0/";
-        } else if (license.equals(Prefs.Licenses.CC_BY_SA_3)) {
-            return "https://creativecommons.org/licenses/by-sa/3.0/";
-        } else if (license.equals(Prefs.Licenses.CC_BY_SA_4)) {
-            return "https://creativecommons.org/licenses/by-sa/4.0/";
-        } else if (license.equals(Prefs.Licenses.CC0)) {
-            return "https://creativecommons.org/publicdomain/zero/1.0/";
+        switch (license) {
+            case Prefs.Licenses.CC_BY_3:
+                return "https://creativecommons.org/licenses/by/3.0/";
+            case Prefs.Licenses.CC_BY_4:
+                return "https://creativecommons.org/licenses/by/4.0/";
+            case Prefs.Licenses.CC_BY_SA_3:
+                return "https://creativecommons.org/licenses/by-sa/3.0/";
+            case Prefs.Licenses.CC_BY_SA_4:
+                return "https://creativecommons.org/licenses/by-sa/4.0/";
+            case Prefs.Licenses.CC0:
+                return "https://creativecommons.org/publicdomain/zero/1.0/";
         }
         throw new RuntimeException("Unrecognized license value: " + license);
     }

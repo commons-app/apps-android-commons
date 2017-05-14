@@ -70,6 +70,7 @@ public class MediaDetailFragment extends Fragment {
     private TextView title;
     private TextView desc;
     private TextView license;
+    private TextView coordinates;
     private LinearLayout categoryContainer;
     private ScrollView scrollView;
     private ArrayList<String> categoryNames;
@@ -123,6 +124,7 @@ public class MediaDetailFragment extends Fragment {
         title = (TextView) view.findViewById(R.id.mediaDetailTitle);
         desc = (TextView) view.findViewById(R.id.mediaDetailDesc);
         license = (TextView) view.findViewById(R.id.mediaDetailLicense);
+        coordinates = (TextView) view.findViewById(R.id.mediaDetailCoordinates);
         categoryContainer = (LinearLayout) view.findViewById(R.id.mediaDetailCategoryContainer);
 
         licenseList = new LicenseList(getActivity());
@@ -220,12 +222,13 @@ public class MediaDetailFragment extends Fragment {
                 protected void onPostExecute(Boolean success) {
                     detailFetchTask = null;
 
-                    if (success.booleanValue()) {
+                    if (success) {
                         extractor.fill(media);
 
                         // Set text of desc, license, and categories
                         desc.setText(prettyDescription(media));
                         license.setText(prettyLicense(media));
+                        coordinates.setText(prettyCoordinates(media));
 
                         categoryNames.removeAll(categoryNames);
                         categoryNames.addAll(media.getCategories());
@@ -387,5 +390,16 @@ public class MediaDetailFragment extends Fragment {
         } else {
             return licenseObj.getName();
         }
+    }
+
+    /**
+     * Returns the coordinates nicely formatted.
+     *
+     * @return Coordinates as text.
+     */
+    private String prettyCoordinates(Media media) {
+        String coordinates = media.getCoordinates();
+
+        return coordinates;
     }
 }

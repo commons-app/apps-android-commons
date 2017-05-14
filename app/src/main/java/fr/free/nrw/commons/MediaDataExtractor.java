@@ -1,5 +1,7 @@
 package fr.free.nrw.commons;
 
+import fr.free.nrw.commons.location.LatLng;
+
 import org.mediawiki.api.ApiResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -38,6 +40,7 @@ public class MediaDataExtractor {
     private String author;
     private Date date;
     private String license;
+    private String coordinates;
     private LicenseList licenseList;
 
     /**
@@ -110,9 +113,7 @@ public class MediaDataExtractor {
             doc = docBuilder.parse(new ByteArrayInputStream(source.getBytes("UTF-8")));
         } catch (ParserConfigurationException e) {
             throw new RuntimeException(e);
-        } catch (IllegalStateException e) {
-            throw new IOException(e);
-        } catch (SAXException e) {
+        } catch (IllegalStateException | SAXException e) {
             throw new IOException(e);
         }
         Node templateNode = findTemplate(doc.getDocumentElement(), "information");
@@ -122,6 +123,14 @@ public class MediaDataExtractor {
 
             Node authorNode = findTemplateParameter(templateNode, "author");
             author = getFlatText(authorNode);
+        }
+
+        Node coordinateTemplateNode = findTemplate(doc.getDocumentElement(), "location");
+
+        if (coordinateTemplateNode != null) {
+            coordinates = getCoordinates(coordinateTemplateNode);
+        } else {
+            coordinates = "No coordinates found";
         }
 
         /*
@@ -244,6 +253,25 @@ public class MediaDataExtractor {
         return parentNode.getTextContent();
     }
 
+    /**
+     * Extracts the coordinates from the template and returns them as pretty formatted string.
+     * Loops over the children of the coordinate template:
+     *      {{Location|47.50111007666667|19.055700301944444}}
+     * and extracts the latitude and longitude as a pretty string.
+     *
+     * @param parentNode The node of the coordinates template.
+     * @return Pretty formatted coordinates.
+     * @throws IOException Parsing failed.
+     */
+    private String getCoordinates(Node parentNode) throws IOException {
+        NodeList childNodes = parentNode.getChildNodes();
+        double latitudeText = Double.parseDouble(childNodes.item(1).getTextContent());
+        double longitudeText = Double.parseDouble(childNodes.item(2).getTextContent());
+        LatLng coordinates = new LatLng(latitudeText, longitudeText);
+
+        return coordinates.getPrettyCoordinateString();
+    }
+
     // Extract a dictionary of multilingual texts from a subset of the parse tree.
     // Texts are wrapped in things like {{en|foo} or {{en|1=foo bar}}.
     // Text outside those wrappers is stuffed into a 'default' faux language key if present.
@@ -289,6 +317,7 @@ public class MediaDataExtractor {
 
         media.setCategories(categories);
         media.setDescriptions(descriptions);
+        media.setCoordinates(coordinates);
         if (license != null) {
             media.setLicense(license);
         }

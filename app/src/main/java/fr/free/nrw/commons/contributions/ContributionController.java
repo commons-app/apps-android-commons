@@ -38,7 +38,7 @@ public class ContributionController {
             String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Commons/images/" + new Date().getTime() + ".jpg";
             File _photoFile = new File(path);
             try {
-                if(_photoFile.exists() == false) {
+                if(!_photoFile.exists()) {
                     _photoFile.getParentFile().mkdirs();
                     _photoFile.createNewFile();
                 }
