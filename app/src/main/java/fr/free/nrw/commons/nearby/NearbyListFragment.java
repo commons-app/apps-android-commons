@@ -28,8 +28,6 @@ import java.util.List;
 import timber.log.Timber;
 
 public class NearbyListFragment extends ListFragment  {
-
-    //private NearbyAsyncTask nearbyAsyncTask;
     private Gson gson;
     private List<Place> placeList;
     private LatLng curLatLng;
@@ -98,12 +96,6 @@ public class NearbyListFragment extends ListFragment  {
 
         Timber.d("Item at position %d has coords: Lat: %f Long: %f", position, latitude, longitude);
 
-        //Open map app at given position
-        Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + latitude + "," + longitude);
-        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-
-        if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-            startActivity(mapIntent);
-        }
+        NearbyInfoDialog.showYourself(getActivity(), place);
     }
 }

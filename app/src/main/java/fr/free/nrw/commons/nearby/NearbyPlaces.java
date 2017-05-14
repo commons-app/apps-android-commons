@@ -1,10 +1,8 @@
 package fr.free.nrw.commons.nearby;
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.StrictMode;
-
-import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.location.LatLng;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,6 +17,9 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.utils.FileUtils;
 import timber.log.Timber;
 
 public class NearbyPlaces {
@@ -28,44 +29,6 @@ public class NearbyPlaces {
     private static final double MAX_RADIUS = 300.0;
     private static final double RADIUS_MULTIPLIER = 1.618;
     private static final String WIKIDATA_QUERY_URL = "https://query.wikidata.org/sparql?query=${QUERY}";
-    private static final String WIKIDATA_QUERY_TEMPLATE = "SELECT\n" +
-                    "  (SAMPLE(?location) as ?location)\n" +
-                    "  ?item\n" +
-                    "  (SAMPLE(COALESCE(?item_label_preferred_language, ?item_label_any_language)) as ?label)\n" +
-                    "  (SAMPLE(?classId) as ?class)\n" +
-                    "  (SAMPLE(COALESCE(?class_label_preferred_language, ?class_label_any_language, \"?\")) as ?class_label)\n" +
-                    "  (SAMPLE(COALESCE(?icon0, ?icon1)) as ?icon)\n" +
-                    "  (SAMPLE(COALESCE(?emoji0, ?emoji1)) as ?emoji)\n" +
-                    "WHERE {\n" +
-                    "  # Around given location...\n" +
-                    "  SERVICE wikibase:around {\n" +
-                    "    ?item wdt:P625 ?location.\n" +
-                    "    bd:serviceParam wikibase:center \"Point(${LONG} ${LAT})\"^^geo:wktLiteral. \n" +
-                    "    bd:serviceParam wikibase:radius \"${RADIUS}\" . # Radius in kilometers.\n" +
-                    "  }\n" +
-                    "  \n" +
-                    "  # ... and without an image.\n" +
-                    "  MINUS {?item wdt:P18 []}\n" +
-                    "  \n" +
-                    "  # Get the label in the preferred language of the user, or any other language if no label is available in that language.\n" +
-                    "  OPTIONAL {?item rdfs:label ?item_label_preferred_language. FILTER (lang(?item_label_preferred_language) = \"${LANG}\")}\n" +
-                    "  OPTIONAL {?item rdfs:label ?item_label_any_language}\n" +
-                    "  \n" +
-                    "  # Get the class label in the preferred language of the user, or any other language if no label is available in that language.\n" +
-                    "  OPTIONAL {\n" +
-                    "    ?item p:P31/ps:P31 ?classId.\n" +
-                    "    OPTIONAL {?classId rdfs:label ?class_label_preferred_language. FILTER (lang(?class_label_preferred_language) = \"${LANG}\")}\n" +
-                    "    OPTIONAL {?classId rdfs:label ?class_label_any_language}\n" +
-                    "\n" +
-                    "    # Get icon\n" +
-                    "    OPTIONAL { ?classId wdt:P2910 ?icon0. }\n" +
-                    "    OPTIONAL { ?classId wdt:P279*/wdt:P2910 ?icon1. }\n" +
-                    "    # Get emoji\n" +
-                    "    OPTIONAL { ?classId wdt:P487 ?emoji0. }\n" +
-                    "    OPTIONAL { ?classId wdt:P279*/wdt:P487 ?emoji1. }\n" +
-                    "  }\n" +
-                    "}\n" +
-                    "GROUP BY ?item\n";
     private static NearbyPlaces singleton;
     private double radius = INITIAL_RADIUS;
     private List<Place> places;
@@ -73,13 +36,15 @@ public class NearbyPlaces {
     private NearbyPlaces(){
     }
 
-    List<Place> getFromWikidataQuery(LatLng curLatLng, String lang) {
+    List<Place> getFromWikidataQuery(Context context,
+                                     LatLng curLatLng,
+                                     String lang) {
         List<Place> places = Collections.emptyList();
 
         try {
             // increase the radius gradually to find a satisfactory number of nearby places
             while (radius < MAX_RADIUS) {
-                places = getFromWikidataQuery(curLatLng, lang, radius);
+                places = getFromWikidataQuery(context, curLatLng, lang, radius);
                 Timber.d("%d results at radius: %f", places.size(), radius);
                 if (places.size() >= MIN_RESULTS) {
                     break;
@@ -97,10 +62,18 @@ public class NearbyPlaces {
         return places;
     }
 
-    private List<Place> getFromWikidataQuery(LatLng cur, String lang, double radius)
+    private List<Place> getFromWikidataQuery(Context context,
+                                             LatLng cur,
+                                             String lang,
+                                             double radius)
             throws IOException {
         List<Place> places = new ArrayList<>();
-        String query = WIKIDATA_QUERY_TEMPLATE.replace("${RADIUS}", "" + radius)
+
+        String query = FileUtils.readFromFile(context, "queries/nearby_query.txt");
+
+        Timber.d(query);
+
+        query = query.replace("${RADIUS}", "" + radius)
                 .replace("${LAT}", "" + String.format(Locale.ROOT, "%.3f", cur.latitude))
                 .replace("${LONG}", "" + String.format(Locale.ROOT, "%.3f", cur.longitude))
                 .replace("${LANG}", "" + lang);
@@ -124,6 +97,8 @@ public class NearbyPlaces {
             String point = fields[0];
             String name = Utils.stripLocalizedString(fields[2]);
             String type = Utils.stripLocalizedString(fields[4]);
+            String sitelink = Utils.stripLocalizedString(fields[7]);
+            String wikiDataLink = Utils.stripLocalizedString(fields[3]);
             String icon = fields[5];
 
             double latitude = 0;
@@ -145,7 +120,9 @@ public class NearbyPlaces {
                     type, // list
                     type, // details
                     Uri.parse(icon),
-                    new LatLng(latitude, longitude)
+                    new LatLng(latitude, longitude),
+                    Uri.parse(sitelink),
+                    Uri.parse(wikiDataLink)
             ));
         }
         in.close();
@@ -202,7 +179,9 @@ public class NearbyPlaces {
                             type, // list
                             type, // details
                             null,
-                            new LatLng(latitude, longitude)
+                            new LatLng(latitude, longitude),
+                            null,
+                            null
                     ));
                 }
                 in.close();
