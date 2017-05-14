@@ -162,4 +162,5 @@ Napauta tätä viestiä (tai paina takaisin) ohittaaksesi tämän vaiheen.</stri
   <string name="media_detail_title">Otsikko</string>
   <string name="media_detail_description">Kuvaus</string>
   <string name="become_a_tester_title">Ryhdy beetatestaajaksi</string>
+  <string name="use_wikidata">Käytä Wikidataa</string>
 </resources>

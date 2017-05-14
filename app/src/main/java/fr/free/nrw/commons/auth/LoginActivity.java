@@ -66,7 +66,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                     .param("result", result)
                     .log();
 
-            if (result.equals("Success")) {
+            if (result.equals("PASS")) {
                 if (dialog != null && dialog.isShowing()) {
                     dialog.dismiss();
                 }
@@ -100,20 +100,29 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
             } else {
                 int response;
+                // Match known failure message codes and provide messages
                 if(result.equals("NetworkFailure")) {
+                    // Matches NetworkFailure which is created by the doInBackground method
                     response = R.string.login_failed_network;
-                } else if(result.equals("NotExists") || result.equals("Illegal") || result.equals("NotExists")) {
+                } else if (result.toLowerCase().contains("nosuchuser".toLowerCase()) || result.toLowerCase().contains("noname".toLowerCase())) {
+                    // Matches nosuchuser, nosuchusershort, noname
                     response = R.string.login_failed_username;
                     passwordEdit.setText("");
-                } else if(result.equals("EmptyPass") || result.equals("WrongPass") || result.equals("WrongPluginPass")) {
+
+                } else if (result.toLowerCase().contains("wrongpassword".toLowerCase())) {
+                    // Matches wrongpassword, wrongpasswordempty
                     response = R.string.login_failed_password;
                     passwordEdit.setText("");
-                } else if(result.equals("Throttled")) {
+                } else if (result.toLowerCase().contains("throttle".toLowerCase())) {
+                    // Matches unknown throttle error codes
                     response = R.string.login_failed_throttled;
-                } else if(result.equals("Blocked")) {
+                } else if (result.toLowerCase().contains("userblocked".toLowerCase())) {
+                    // Matches login-userblocked
                     response = R.string.login_failed_blocked;
+                } else if (result.equals("2FA")){
+                    response = R.string.login_failed_2fa_not_supported;
                 } else {
-                    // Should never really happen
+                    // Occurs with unhandled login failure codes
                     Timber.d("Login failed with reason: %s", result);
                     response = R.string.login_failed_generic;
                 }

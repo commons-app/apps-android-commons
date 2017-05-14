@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import fr.free.nrw.commons.R;
-
 import timber.log.Timber;
 
 public class NearbyAdapter extends ArrayAdapter<Place> {

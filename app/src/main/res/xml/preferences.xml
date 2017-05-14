@@ -38,4 +38,12 @@
         android:summary="@string/use_wikidata_summary"
         />
 
+    <EditTextPreference
+        android:key="uploads"
+        android:defaultValue="100"
+        android:title= "@string/set_limit"
+        android:inputType="numberDecimal"
+        android:maxLength="3"
+        />
+
 </PreferenceScreen>

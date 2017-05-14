@@ -9,11 +9,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import org.mediawiki.api.MWApi;
-
 import java.io.IOException;
 
 import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.MWApi;
 
 public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
 
@@ -46,7 +45,7 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
     private String getAuthCookie(String username, String password) throws IOException {
         MWApi api = CommonsApplication.createMWApi();
         String result = api.login(username, password);
-        if(result.equals("Success")) {
+        if(result.equals("PASS")) {
             return api.getAuthCookie();
         } else {
             return null;

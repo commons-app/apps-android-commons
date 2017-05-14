@@ -3,8 +3,8 @@ package fr.free.nrw.commons.category;
 import android.os.AsyncTask;
 import android.view.View;
 
+import fr.free.nrw.commons.MWApi;
 import org.mediawiki.api.ApiResult;
-import org.mediawiki.api.MWApi;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -108,7 +108,6 @@ public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
         }
 
         Timber.d("Found categories from Method A search, waiting for filter");
-        ArrayList<String> filteredItems = new ArrayList<>(filterYears(categories));
-        return filteredItems;
+        return new ArrayList<>(filterYears(categories));
     }
 }

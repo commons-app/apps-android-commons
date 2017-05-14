@@ -4,8 +4,8 @@ import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.view.View;
 
+import fr.free.nrw.commons.MWApi;
 import org.mediawiki.api.ApiResult;
-import org.mediawiki.api.MWApi;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -83,16 +83,14 @@ public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
         if(TextUtils.isEmpty(filter)) {
             ArrayList<String> mergedItems = new ArrayList<>(catFragment.mergeItems());
             Timber.d("Merged items, waiting for filter");
-            ArrayList<String> filteredItems = new ArrayList<>(filterYears(mergedItems));
-            return filteredItems;
+            return new ArrayList<>(filterYears(mergedItems));
         }
 
         //if user types in something that is in cache, return cached category
         if(catFragment.categoriesCache.containsKey(filter)) {
             ArrayList<String> cachedItems = new ArrayList<>(catFragment.categoriesCache.get(filter));
             Timber.d("Found cache items, waiting for filter");
-            ArrayList<String> filteredItems = new ArrayList<>(filterYears(cachedItems));
-            return filteredItems;
+            return new ArrayList<>(filterYears(cachedItems));
         }
 
         //otherwise if user has typed something in that isn't in cache, search API for matching categories
@@ -119,7 +117,6 @@ public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
         }
 
         Timber.d("Found categories from Prefix search, waiting for filter");
-        ArrayList<String> filteredItems = new ArrayList<>(filterYears(categories));
-        return filteredItems;
+        return new ArrayList<>(filterYears(categories));
     }
 }
