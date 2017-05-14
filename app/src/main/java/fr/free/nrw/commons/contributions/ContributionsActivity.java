@@ -97,7 +97,7 @@ public  class       ContributionsActivity
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED,false);
         editor.apply();
-        if(isSettingsChanged){
+        if (isSettingsChanged) {
             refreshSource();
         }
     }
