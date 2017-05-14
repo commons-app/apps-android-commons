@@ -1,0 +1,145 @@
+package fr.free.nrw.commons.auth;
+
+import android.accounts.Account;
+import android.accounts.AccountAuthenticatorResponse;
+import android.accounts.AccountManager;
+import android.app.ProgressDialog;
+import android.content.ContentResolver;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.EventLog;
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.contributions.ContributionsActivity;
+import fr.free.nrw.commons.contributions.ContributionsContentProvider;
+import fr.free.nrw.commons.modifications.ModificationsContentProvider;
+import timber.log.Timber;
+
+import java.io.IOException;
+
+class LoginTask extends AsyncTask<String, String, String> {
+
+    private LoginActivity loginActivity;
+    private String username;
+    private String password;
+    private String twoFactorCode = "";
+    private CommonsApplication app;
+
+    public LoginTask(LoginActivity loginActivity, String username, String password, String twoFactorCode) {
+        this.loginActivity = loginActivity;
+        this.username = username;
+        this.password = password;
+        this.twoFactorCode = twoFactorCode;
+        app = (CommonsApplication) loginActivity.getApplicationContext();
+    }
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        loginActivity.progressDialog = new ProgressDialog(loginActivity);
+        loginActivity.progressDialog.setIndeterminate(true);
+        loginActivity.progressDialog.setTitle(loginActivity.getString(R.string.logging_in_title));
+        loginActivity.progressDialog.setMessage(loginActivity.getString(R.string.logging_in_message));
+        loginActivity.progressDialog.setCanceledOnTouchOutside(false);
+        loginActivity.progressDialog.show();
+    }
+
+    @Override
+    protected String doInBackground(String... params) {
+        try {
+            if (twoFactorCode.isEmpty()) {
+                return app.getApi().login(username, password);
+            } else {
+                return app.getApi().login(username, password, twoFactorCode);
+            }
+        } catch (IOException e) {
+            // Do something better!
+            return "NetworkFailure";
+        }
+    }
+
+    @Override
+    protected void onPostExecute(String result) {
+        super.onPostExecute(result);
+        Timber.d("Login done!");
+
+        EventLog.schema(CommonsApplication.EVENT_LOGIN_ATTEMPT)
+                .param("username", username)
+                .param("result", result)
+                .log();
+
+        if (result.equals("PASS")) {
+            handlePassResult();
+        } else {
+            handleOtherResults( result );
+        }
+    }
+
+    private void handlePassResult() {
+        loginActivity.showSuccessToastAndDismissDialog();
+
+        Account account = new Account(username, WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
+
+
+        boolean accountCreated = AccountManager.get(loginActivity).addAccount(account, password, null);
+
+
+        boolean accountCreated = AccountManager.get(loginActivity).addAccountExplicitly(account, password, null);
+
+        Bundle extras = loginActivity.getIntent().getExtras();
+
+        if (extras != null) {
+            Timber.d("Bundle of extras: %s", extras);
+            if (accountCreated) { // Pass the new account back to the account manager
+                AccountAuthenticatorResponse response = extras.getParcelable(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE);
+                Bundle authResult = new Bundle();
+                authResult.putString(AccountManager.KEY_ACCOUNT_NAME, username);
+                authResult.putString(AccountManager.KEY_ACCOUNT_TYPE, WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
+
+                if (response != null) {
+                    response.onResult(authResult);
+                }
+            }
+        }
+
+        // FIXME: If the user turns it off, it shouldn't be auto turned back on
+        ContentResolver.setSyncAutomatically(account, ContributionsContentProvider.AUTHORITY, true); // Enable sync by default!
+        ContentResolver.setSyncAutomatically(account, ModificationsContentProvider.AUTHORITY, true); // Enable sync by default!
+
+        Intent intent = new Intent(loginActivity, ContributionsActivity.class);
+        loginActivity.startActivity(intent);
+        loginActivity.finish();
+    }
+
+    /**
+     * Match known failure message codes and provide messages
+     * @param result String
+     */
+    private void handleOtherResults( String result ) {
+        if (result.equals("NetworkFailure")) {
+            // Matches NetworkFailure which is created by the doInBackground method
+            loginActivity.showUserToastAndCancelDialog( R.string.login_failed_network );
+        } else if (result.toLowerCase().contains("nosuchuser".toLowerCase()) || result.toLowerCase().contains("noname".toLowerCase())) {
+            // Matches nosuchuser, nosuchusershort, noname
+            loginActivity.showUserToastAndCancelDialog( R.string.login_failed_username );
+            loginActivity.emptySensitiveEditFields();
+        } else if (result.toLowerCase().contains("wrongpassword".toLowerCase())) {
+            // Matches wrongpassword, wrongpasswordempty
+            loginActivity.showUserToastAndCancelDialog( R.string.login_failed_password );
+            loginActivity.emptySensitiveEditFields();
+        } else if (result.toLowerCase().contains("throttle".toLowerCase())) {
+            // Matches unknown throttle error codes
+            loginActivity.showUserToastAndCancelDialog( R.string.login_failed_throttled );
+        } else if (result.toLowerCase().contains("userblocked".toLowerCase())) {
+            // Matches login-userblocked
+            loginActivity.showUserToastAndCancelDialog( R.string.login_failed_blocked );
+        } else if (result.equals("2FA")) {
+            loginActivity.askUserForTwoFactorAuth();
+        } else {
+            // Occurs with unhandled login failure codes
+            Timber.d("Login failed with reason: %s", result);
+            loginActivity.showUserToastAndCancelDialog( R.string.login_failed_generic );
+        }
+    }
+}
