@@ -27,7 +27,6 @@ import fr.free.nrw.commons.EventLog;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
-import fr.free.nrw.commons.auth.WikiAccountAuthenticator;
 import fr.free.nrw.commons.category.CategorizationFragment;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
@@ -52,10 +51,6 @@ public  class       MultipleShareActivity
     private CategorizationFragment categorizationFragment;
 
     private UploadController uploadController;
-
-    public MultipleShareActivity() {
-        super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
-    }
 
     @Override
     public Media getMediaAtPosition(int i) {

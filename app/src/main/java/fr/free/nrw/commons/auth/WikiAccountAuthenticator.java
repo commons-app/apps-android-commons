@@ -18,8 +18,6 @@ import fr.free.nrw.commons.MWApi;
 
 public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
 
-    public static final String COMMONS_ACCOUNT_TYPE = "fr.free.nrw.commons";
-
     private Context context;
 
     public WikiAccountAuthenticator(Context context) {
@@ -38,7 +36,7 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
     }
 
     private boolean supportedAccountType(@Nullable String type) {
-        return COMMONS_ACCOUNT_TYPE.equals(type);
+        return AccountUtil.accountType().equals(type);
     }
 
     @Override
@@ -104,7 +102,7 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
             if (authCookie != null) {
                 final Bundle result = new Bundle();
                 result.putString(AccountManager.KEY_ACCOUNT_NAME, account.name);
-                result.putString(AccountManager.KEY_ACCOUNT_TYPE, COMMONS_ACCOUNT_TYPE);
+                result.putString(AccountManager.KEY_ACCOUNT_TYPE, AccountUtil.accountType());
                 result.putString(AccountManager.KEY_AUTHTOKEN, authCookie);
                 return result;
             }

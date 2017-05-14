@@ -1,10 +1,8 @@
 package fr.free.nrw.commons.auth;
 
-import android.accounts.Account;
 import android.accounts.AccountAuthenticatorResponse;
 import android.accounts.AccountManager;
 import android.app.ProgressDialog;
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -12,8 +10,6 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.EventLog;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
-import fr.free.nrw.commons.contributions.ContributionsContentProvider;
-import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import timber.log.Timber;
 
 import java.io.IOException;
@@ -79,33 +75,21 @@ class LoginTask extends AsyncTask<String, String, String> {
     private void handlePassResult() {
         loginActivity.showSuccessToastAndDismissDialog();
 
-        Account account = new Account(username, WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
-
-
-        boolean accountCreated = AccountManager.get(loginActivity).addAccount(account, password, null);
-
-
-        boolean accountCreated = AccountManager.get(loginActivity).addAccountExplicitly(account, password, null);
+        AccountAuthenticatorResponse response = null;
 
         Bundle extras = loginActivity.getIntent().getExtras();
-
         if (extras != null) {
             Timber.d("Bundle of extras: %s", extras);
-            if (accountCreated) { // Pass the new account back to the account manager
-                AccountAuthenticatorResponse response = extras.getParcelable(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE);
+            response = extras.getParcelable(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE);
+            if (response != null) {
                 Bundle authResult = new Bundle();
                 authResult.putString(AccountManager.KEY_ACCOUNT_NAME, username);
-                authResult.putString(AccountManager.KEY_ACCOUNT_TYPE, WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
-
-                if (response != null) {
-                    response.onResult(authResult);
-                }
+                authResult.putString(AccountManager.KEY_ACCOUNT_TYPE, AccountUtil.accountType());
+                response.onResult(authResult);
             }
         }
 
-        // FIXME: If the user turns it off, it shouldn't be auto turned back on
-        ContentResolver.setSyncAutomatically(account, ContributionsContentProvider.AUTHORITY, true); // Enable sync by default!
-        ContentResolver.setSyncAutomatically(account, ModificationsContentProvider.AUTHORITY, true); // Enable sync by default!
+        AccountUtil.createAccount( response, username, password );
 
         Intent intent = new Intent(loginActivity, ContributionsActivity.class);
         loginActivity.startActivity(intent);
