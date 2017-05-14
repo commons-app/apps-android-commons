@@ -309,7 +309,7 @@ public class Utils {
         return value == null || value.trim().isEmpty();
     }
 
-    public static boolean isDarkTheme(Context context){
+    public static boolean isDarkTheme(Context context) {
         if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("theme",true)) {
             return true;
         }else {

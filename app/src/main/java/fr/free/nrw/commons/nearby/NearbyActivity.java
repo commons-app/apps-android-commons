@@ -98,7 +98,6 @@ public class NearbyActivity extends BaseActivity {
         }
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -190,5 +189,4 @@ public class NearbyActivity extends BaseActivity {
         fragmentTransaction.replace(R.id.container, fragment);
         fragmentTransaction.commit();
     }
-
 }
