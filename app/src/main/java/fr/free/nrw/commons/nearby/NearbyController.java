@@ -1,16 +1,9 @@
 package fr.free.nrw.commons.nearby;
 
-import static fr.free.nrw.commons.utils.LengthUtils.computeDistanceBetween;
-import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
-
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Icon;
 import android.preference.PreferenceManager;
-
-import com.mapbox.mapboxsdk.annotations.BaseMarkerOptions;
-import com.mapbox.mapboxsdk.annotations.MarkerOptions;
-
-import fr.free.nrw.commons.location.LatLng;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,7 +13,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import fr.free.nrw.commons.location.LatLng;
 import timber.log.Timber;
+
+import static fr.free.nrw.commons.utils.LengthUtils.computeDistanceBetween;
+import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
 
 public class NearbyController {
@@ -40,7 +37,9 @@ public class NearbyController {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         List<Place> places = prefs.getBoolean("useWikidata", true)
                 ? NearbyPlaces.getInstance().getFromWikidataQuery(
-                curLatLng, Locale.getDefault().getLanguage())
+                context,
+                curLatLng,
+                Locale.getDefault().getLanguage())
                 : NearbyPlaces.getInstance().getFromWikiNeedsPictures();
         if (curLatLng != null) {
             Timber.d("Sorting places by distance...");
@@ -85,19 +84,24 @@ public class NearbyController {
      * @param placeList list of nearby places in Place data type
      * @return BaseMarkerOprions list that holds nearby places
      */
-    public static List<BaseMarkerOptions> loadAttractionsFromLocationToBaseMarkerOptions(
+    public static List<NearbyBaseMarker> loadAttractionsFromLocationToBaseMarkerOptions(
             LatLng curLatLng,
             List<Place> placeList) {
-        List<BaseMarkerOptions> baseMarkerOptionses = new ArrayList<>();
+        List<NearbyBaseMarker> baseMarkerOptionses = new ArrayList<>();
         placeList = placeList.subList(0, Math.min(placeList.size(), MAX_RESULTS));
         for (Place place: placeList) {
             String distance = formatDistanceBetween(curLatLng, place.location);
             place.setDistance(distance);
-            baseMarkerOptionses.add(new MarkerOptions()
-                    .position(new com.mapbox.mapboxsdk.geometry
-                    .LatLng(place.location.latitude,place.location.longitude))
-                    .title(place.name)
-                    .snippet(place.description));
+
+            NearbyBaseMarker nearbyBaseMarker = new NearbyBaseMarker();
+            nearbyBaseMarker.title(place.name);
+            nearbyBaseMarker.position(
+                    new com.mapbox.mapboxsdk.geometry.LatLng(
+                            place.location.latitude,
+                            place.location.longitude));
+            nearbyBaseMarker.place(place);
+
+            baseMarkerOptionses.add(nearbyBaseMarker);
         }
         return baseMarkerOptionses;
     }

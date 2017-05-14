@@ -16,15 +16,19 @@ public class Place {
     public Bitmap image;
     public Bitmap secondaryImage;
     public String distance;
+    public Uri siteLink;
+    public Uri wikiDataLink;
 
 
     public Place(String name, String description, String longDescription,
-                 Uri secondaryImageUrl, LatLng location) {
+                 Uri secondaryImageUrl, LatLng location, Uri siteLink, Uri wikiDataLink) {
         this.name = name;
         this.description = description;
         this.longDescription = longDescription;
         this.secondaryImageUrl = secondaryImageUrl;
         this.location = location;
+        this.siteLink = siteLink;
+        this.wikiDataLink = wikiDataLink;
     }
 
     public void setDistance(String distance) {
