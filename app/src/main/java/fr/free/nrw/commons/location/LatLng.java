@@ -87,7 +87,7 @@ public class LatLng {
      * @return The formatted string.
      */
     public String getPrettyCoordinateString() {
-        return formatCoordinate(this.latitude) + " " + this.getNorthSouth() + ", " +
-               formatCoordinate(this.longitude) + " " + this.getEastWest();
+        return formatCoordinate(this.latitude) + " " + this.getNorthSouth() + ", "
+               + formatCoordinate(this.longitude) + " " + this.getEastWest();
     }
 }

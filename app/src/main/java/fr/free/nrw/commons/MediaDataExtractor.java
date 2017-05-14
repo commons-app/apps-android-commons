@@ -1,5 +1,7 @@
 package fr.free.nrw.commons;
 
+import fr.free.nrw.commons.location.LatLng;
+
 import org.mediawiki.api.ApiResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -20,7 +22,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import fr.free.nrw.commons.location.LatLng;
 import timber.log.Timber;
 
 /**
