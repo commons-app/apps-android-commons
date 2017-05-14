@@ -25,6 +25,8 @@ public class SettingsFragment extends PreferenceFragment {
         // Update spinner to show selected value as summary
         ListPreference licensePreference = (ListPreference) findPreference(Prefs.DEFAULT_LICENSE);
         licensePreference.setSummary(getString(Utils.licenseNameFor(licensePreference.getValue())));
+
+        // Keep summary updated when changing value
         licensePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
