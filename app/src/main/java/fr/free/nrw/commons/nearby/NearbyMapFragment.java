@@ -66,6 +66,17 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        if (curLatLng != null) {
+            setupMapView(savedInstanceState);
+        }
+
+        setHasOptionsMenu(false);
+
+        return mapView;
+    }
+
+    private void setupMapView(Bundle savedInstanceState) {
         MapboxMapOptions options = new MapboxMapOptions()
                 .styleUrl(Style.OUTDOORS)
                 .camera(new CameraPosition.Builder()
@@ -99,10 +110,6 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         } else {
             mapView.setStyleUrl(getResources().getString(R.string.map_theme_light));
         }
-
-        setHasOptionsMenu(false);
-
-        return mapView;
     }
 
     @Override
@@ -112,31 +119,41 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
 
     @Override
     public void onStart() {
-        mapView.onStart();
+        if (mapView != null) {
+            mapView.onStart();
+        }
         super.onStart();
     }
 
     @Override
     public void onPause() {
-        mapView.onPause();
+        if (mapView != null) {
+            mapView.onPause();
+        }
         super.onPause();
     }
 
     @Override
     public void onResume() {
-        mapView.onResume();
+        if (mapView != null) {
+            mapView.onResume();
+        }
         super.onResume();
     }
 
     @Override
     public void onStop() {
-        mapView.onStop();
+        if (mapView != null) {
+            mapView.onStop();
+        }
         super.onStop();
     }
 
     @Override
     public void onDestroyView() {
-        mapView.onDestroy();
+        if (mapView != null) {
+            mapView.onDestroy();
+        }
         super.onDestroyView();
     }
 }
