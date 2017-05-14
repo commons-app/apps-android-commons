@@ -178,5 +178,6 @@ Tap this message (or hit back) to skip this step.</string>
   <string name="maximum_limit">Maximum Limit</string>
   <string name="maximum_limit_alert">Maximum limit should be 500</string>
   <string name="set_limit">Set Recent Upload Limit</string>
+  <string name="login_failed_2fa_not_supported">Two factor authentication is currently not supported.</string>
 
 </resources>

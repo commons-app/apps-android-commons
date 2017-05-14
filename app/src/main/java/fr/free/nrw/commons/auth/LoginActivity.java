@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import android.widget.Toast;
+import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.WelcomeActivity;
@@ -81,7 +82,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 if(
                         usernameEdit.getText().length() != 0 &&
                                 passwordEdit.getText().length() != 0 &&
-                                ( twoFactorEdit.getText().length() != 0 || twoFactorEdit.getVisibility() != View.VISIBLE )
+                                ( BuildConfig.DEBUG || twoFactorEdit.getText().length() != 0 || twoFactorEdit.getVisibility() != View.VISIBLE )
                         ) {
                     loginButton.setEnabled(true);
                 } else {
@@ -179,8 +180,12 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     }
 
     public void askUserForTwoFactorAuth() {
-        twoFactorEdit.setVisibility(View.VISIBLE);
-        showUserToastAndCancelDialog( R.string.login_failed_2fa_needed );
+        if(BuildConfig.DEBUG) {
+            twoFactorEdit.setVisibility(View.VISIBLE);
+            showUserToastAndCancelDialog( R.string.login_failed_2fa_needed );
+        }else{
+            showUserToastAndCancelDialog( R.string.login_failed_2fa_not_supported );
+        }
     }
 
     public void showUserToastAndCancelDialog( int resId ) {
