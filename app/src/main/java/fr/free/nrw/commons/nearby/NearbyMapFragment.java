@@ -55,8 +55,9 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
             Type curLatLngType = new TypeToken<fr.free.nrw.commons.location.LatLng>() {}.getType();
             curLatLng = gson.fromJson(gsonLatLng, curLatLngType);
             baseMarkerOptionses = NearbyController
-                    .loadAttractionsFromLocationToBaseMarkerOptions(curLatLng, placeList);
-
+                    .loadAttractionsFromLocationToBaseMarkerOptions(curLatLng,
+                            placeList,
+                            getActivity());
         }
         Mapbox.getInstance(getActivity(),
                 getString(R.string.mapbox_commons_app_token));
