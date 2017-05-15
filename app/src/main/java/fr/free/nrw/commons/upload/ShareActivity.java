@@ -30,7 +30,6 @@ import fr.free.nrw.commons.EventLog;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
-import fr.free.nrw.commons.auth.WikiAccountAuthenticator;
 import fr.free.nrw.commons.category.CategorizationFragment;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.modifications.CategoryModifier;
@@ -76,10 +75,6 @@ public  class       ShareActivity
     private String title;
     private String description;
     private Snackbar snackbar;
-
-    public ShareActivity() {
-        super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
-    }
 
     /**
      * Called when user taps the submit button

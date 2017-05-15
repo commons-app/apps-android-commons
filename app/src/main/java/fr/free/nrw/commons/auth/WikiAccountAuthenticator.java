@@ -11,39 +11,72 @@ import android.os.Bundle;
 
 import java.io.IOException;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.MWApi;
 
 public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
 
-    public static final String COMMONS_ACCOUNT_TYPE = "fr.free.nrw.commons";
     private Context context;
+
     public WikiAccountAuthenticator(Context context) {
         super(context);
         this.context = context;
     }
 
+    private Bundle unsupportedOperation() {
+        Bundle bundle = new Bundle();
+        bundle.putInt(AccountManager.KEY_ERROR_CODE, AccountManager.ERROR_CODE_UNSUPPORTED_OPERATION);
+
+        // HACK: the docs indicate that this is a required key bit it's not displayed to the user.
+        bundle.putString(AccountManager.KEY_ERROR_MESSAGE, "");
+
+        return bundle;
+    }
+
+    private boolean supportedAccountType(@Nullable String type) {
+        return AccountUtil.accountType().equals(type);
+    }
+
     @Override
-    public Bundle addAccount(AccountAuthenticatorResponse response, String accountType, String authTokenType, String[] requiredFeatures, Bundle options) throws NetworkErrorException {
-        final Intent intent = new Intent(context, LoginActivity.class);
-        intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
-        final Bundle bundle = new Bundle();
-        bundle.putParcelable(AccountManager.KEY_INTENT, intent);
+    public Bundle addAccount(@NonNull AccountAuthenticatorResponse response,
+                             @NonNull String accountType, @Nullable String authTokenType,
+                             @Nullable String[] requiredFeatures, @Nullable Bundle options)
+            throws NetworkErrorException {
+
+        if (!supportedAccountType(accountType)) {
+            return unsupportedOperation();
+        }
+
+        return addAccount(response);
+    }
+
+    private Bundle addAccount(AccountAuthenticatorResponse response) {
+        Intent Intent = new Intent(context, LoginActivity.class);
+        Intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
+
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(AccountManager.KEY_INTENT, Intent);
+
         return bundle;
     }
 
     @Override
-    public Bundle confirmCredentials(AccountAuthenticatorResponse response, Account account, Bundle options) throws NetworkErrorException {
-        return null;
+    public Bundle confirmCredentials(@NonNull AccountAuthenticatorResponse response,
+                                     @NonNull Account account, @Nullable Bundle options)
+            throws NetworkErrorException {
+        return unsupportedOperation();
     }
 
     @Override
     public Bundle editProperties(AccountAuthenticatorResponse response, String accountType) {
-        return null;
+        return unsupportedOperation();
     }
 
     private String getAuthCookie(String username, String password) throws IOException {
         MWApi api = CommonsApplication.createMWApi();
+        //TODO add 2fa support here
         String result = api.login(username, password);
         if(result.equals("PASS")) {
             return api.getAuthCookie();
@@ -69,7 +102,7 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
             if (authCookie != null) {
                 final Bundle result = new Bundle();
                 result.putString(AccountManager.KEY_ACCOUNT_NAME, account.name);
-                result.putString(AccountManager.KEY_ACCOUNT_TYPE, COMMONS_ACCOUNT_TYPE);
+                result.putString(AccountManager.KEY_ACCOUNT_TYPE, AccountUtil.accountType());
                 result.putString(AccountManager.KEY_AUTHTOKEN, authCookie);
                 return result;
             }
@@ -86,21 +119,31 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
         return bundle;
     }
 
+    @Nullable
     @Override
-    public String getAuthTokenLabel(String authTokenType) {
+    public String getAuthTokenLabel(@NonNull String authTokenType) {
+        //Note: the wikipedia app actually returns a string here....
+        //return supportedAccountType(authTokenType) ? context.getString(R.string.wikimedia) : null;
         return null;
     }
 
+    @Nullable
     @Override
-    public Bundle hasFeatures(AccountAuthenticatorResponse response, Account account, String[] features) throws NetworkErrorException {
-        final Bundle result = new Bundle();
-        result.putBoolean(AccountManager.KEY_BOOLEAN_RESULT, false);
-        return result;
+    public Bundle hasFeatures(@NonNull AccountAuthenticatorResponse response,
+                              @NonNull Account account, @NonNull String[] features)
+            throws NetworkErrorException {
+        Bundle bundle = new Bundle();
+        bundle.putBoolean(AccountManager.KEY_BOOLEAN_RESULT, false);
+        return bundle;
     }
 
+    @Nullable
     @Override
-    public Bundle updateCredentials(AccountAuthenticatorResponse response, Account account, String authTokenType, Bundle options) throws NetworkErrorException {
-        return null;
+    public Bundle updateCredentials(@NonNull AccountAuthenticatorResponse response,
+                                    @NonNull Account account, @Nullable String authTokenType,
+                                    @Nullable Bundle options)
+            throws NetworkErrorException {
+        return unsupportedOperation();
     }
 
 }
