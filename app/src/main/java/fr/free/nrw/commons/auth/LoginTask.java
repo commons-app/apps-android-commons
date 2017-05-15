@@ -3,15 +3,15 @@ package fr.free.nrw.commons.auth;
 import android.accounts.AccountAuthenticatorResponse;
 import android.accounts.AccountManager;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+
+import java.io.IOException;
+
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.EventLog;
 import fr.free.nrw.commons.R;
 import timber.log.Timber;
-
-import java.io.IOException;
 
 class LoginTask extends AsyncTask<String, String, String> {
 
