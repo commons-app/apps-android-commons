@@ -57,7 +57,7 @@ public class NearbyActivity extends BaseActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        checkGps();
+
         bundle = new Bundle();
         locationManager = new LocationServiceManager(this);
         locationManager.registerLocationManager();
@@ -150,6 +150,7 @@ public class NearbyActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        checkGps();
     }
 
     protected void refreshView() {
