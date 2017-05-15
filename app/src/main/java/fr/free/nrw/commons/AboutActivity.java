@@ -10,7 +10,6 @@ import butterknife.ButterKnife;
 
 public class AboutActivity extends BaseActivity {
     @BindView(R.id.about_version) TextView versionText;
-    @BindView(R.id.about_uploads_to) TextView uploadsToText;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -19,7 +18,6 @@ public class AboutActivity extends BaseActivity {
 
         ButterKnife.bind(this);
 
-        uploadsToText.setText(CommonsApplication.EVENTLOG_WIKI);
         versionText.setText(BuildConfig.VERSION_NAME);
     }
 }
