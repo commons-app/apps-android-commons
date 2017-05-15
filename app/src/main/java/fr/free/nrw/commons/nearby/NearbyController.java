@@ -2,8 +2,10 @@ package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Icon;
 import android.preference.PreferenceManager;
+
+import com.mapbox.mapboxsdk.annotations.Icon;
+import com.mapbox.mapboxsdk.annotations.IconFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,6 +15,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
 import timber.log.Timber;
 
@@ -86,12 +89,16 @@ public class NearbyController {
      */
     public static List<NearbyBaseMarker> loadAttractionsFromLocationToBaseMarkerOptions(
             LatLng curLatLng,
-            List<Place> placeList) {
+            List<Place> placeList,
+            Context context) {
         List<NearbyBaseMarker> baseMarkerOptionses = new ArrayList<>();
         placeList = placeList.subList(0, Math.min(placeList.size(), MAX_RESULTS));
         for (Place place: placeList) {
             String distance = formatDistanceBetween(curLatLng, place.location);
             place.setDistance(distance);
+
+            Icon icon = IconFactory.getInstance(context)
+                    .fromResource(R.drawable.custom_map_marker);
 
             NearbyBaseMarker nearbyBaseMarker = new NearbyBaseMarker();
             nearbyBaseMarker.title(place.name);
@@ -100,6 +107,7 @@ public class NearbyController {
                             place.location.latitude,
                             place.location.longitude));
             nearbyBaseMarker.place(place);
+            nearbyBaseMarker.icon(icon);
 
             baseMarkerOptionses.add(nearbyBaseMarker);
         }

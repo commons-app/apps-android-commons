@@ -1,11 +1,18 @@
 package fr.free.nrw.commons.nearby;
 
+
 import android.content.Context;
+
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.location.LocationManager;
+
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,6 +32,7 @@ import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.UriSerializer;
 
 import fr.free.nrw.commons.R;
+import timber.log.Timber;
 
 import java.util.List;
 
@@ -49,6 +57,7 @@ public class NearbyActivity extends BaseActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+        checkGps();
         bundle = new Bundle();
         locationManager = new LocationServiceManager(this);
         locationManager.registerLocationManager();
@@ -82,6 +91,44 @@ public class NearbyActivity extends BaseActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    protected void checkGps() {
+        LocationManager manager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            Timber.d("GPS is not enabled");
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setMessage(R.string.gps_disabled)
+                    .setCancelable(false)
+                    .setPositiveButton(R.string.enable_gps,
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    Intent callGPSSettingIntent = new Intent(
+                                            android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                    Timber.d("Loaded settings page");
+                                    startActivityForResult(callGPSSettingIntent, 1);
+                                }
+                            });
+            alertDialogBuilder.setNegativeButton("Cancel",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alert = alertDialogBuilder.create();
+            alert.show();
+        } else {
+            Timber.d("GPS is enabled");
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            Timber.d("User is back from Settings page");
+            refreshView();
         }
     }
 
