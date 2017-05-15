@@ -10,25 +10,25 @@
         app:showAsAction="ifRoom|withText"
         android:icon="?attr/iconPhoto"
             />
-    <item android:id="@+id/menu_nearby"
-        android:title="@string/menu_nearby"
-        app:showAsAction="never"
-        />
-    <item android:id="@+id/menu_refresh"
-          android:title="@string/menu_refresh"
-          app:showAsAction="never"
-          />
-    <item android:id="@+id/menu_about"
-          android:title="@string/menu_about"
-          app:showAsAction="never"
-        />
-    <item android:id="@+id/menu_settings"
-          android:title="@string/menu_settings"
-          app:showAsAction="never"
-        />
-    <item android:id="@+id/menu_feedback"
-          android:title="@string/menu_feedback"
-          app:showAsAction="never"
-        />
+    <!--<item android:id="@+id/menu_nearby"-->
+        <!--android:title="@string/menu_nearby"-->
+        <!--app:showAsAction="never"-->
+        <!--/>-->
+    <!--<item android:id="@+id/menu_refresh"-->
+          <!--android:title="@string/menu_refresh"-->
+          <!--app:showAsAction="never"-->
+          <!--/>-->
+    <!--<item android:id="@+id/menu_about"-->
+          <!--android:title="@string/menu_about"-->
+          <!--app:showAsAction="never"-->
+        <!--/>-->
+    <!--<item android:id="@+id/menu_settings"-->
+          <!--android:title="@string/menu_settings"-->
+          <!--app:showAsAction="never"-->
+        <!--/>-->
+    <!--<item android:id="@+id/menu_feedback"-->
+          <!--android:title="@string/menu_feedback"-->
+          <!--app:showAsAction="never"-->
+        <!--/>-->
 
 </menu>

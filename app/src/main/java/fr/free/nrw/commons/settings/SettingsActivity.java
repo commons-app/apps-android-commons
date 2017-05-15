@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.settings;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
@@ -50,5 +52,10 @@ public class SettingsActivity extends PreferenceActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public static void startYourself(Context context) {
+        Intent settingsIntent = new Intent(context, SettingsActivity.class);
+        context.startActivity(settingsIntent);
     }
 }

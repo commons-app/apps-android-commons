@@ -185,6 +185,8 @@ Tap this message (or hit back) to skip this step.</string>
   <string name="login_failed_2fa_not_supported">Two factor authentication is currently not supported.</string>
 
   <string name="cancel">Cancel</string>
+  <string name="navigation_drawer_open">Open</string>
+  <string name="navigation_drawer_close">Close</string>
   <string name="navigation_item_home">Home</string>
   <string name="navigation_item_upload">Upload</string>
   <string name="navigation_item_nearby">Nearby</string>

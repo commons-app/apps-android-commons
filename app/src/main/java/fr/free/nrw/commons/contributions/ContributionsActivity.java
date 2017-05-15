@@ -18,6 +18,7 @@ import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +29,8 @@ import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.Media;
@@ -60,8 +63,14 @@ public  class       ContributionsActivity
     private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<>();
     private String CONTRIBUTION_SELECTION = "";
 
-    private DrawerLayout drawerLayout;
-    private RelativeLayout drawerPane;
+    @BindView(R.id.contributions_toolbar)
+    Toolbar toolbar;
+
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawerLayout;
+
+    @BindView(R.id.drawer_pane)
+    RelativeLayout drawerPane;
 
     /*
         This sorts in the following order:
@@ -133,6 +142,11 @@ public  class       ContributionsActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contributions);
+        ButterKnife.bind(this);
+
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         initSubviews();
 
@@ -158,15 +172,21 @@ public  class       ContributionsActivity
     }
 
     private void initSubviews() {
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawerPane = (RelativeLayout) findViewById(R.id.drawer_pane);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
+                drawerLayout,
+                toolbar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
+        drawerLayout.setDrawerListener(toggle);
+        toggle.setDrawerIndicatorEnabled(true);
+        toggle.syncState();
         setDrawerPaneWidth();
     }
 
     private void setDrawerPaneWidth() {
         ViewGroup.LayoutParams params = drawerPane.getLayoutParams();
         // set width to lowerBound of 80% of the screen size
-        params.width = (getResources().getDisplayMetrics().widthPixels * 80) / 100;
+        params.width = (getResources().getDisplayMetrics().widthPixels * 70) / 100;
         drawerPane.setLayoutParams(params);
     }
 
@@ -370,5 +390,10 @@ public  class       ContributionsActivity
     @Override
     public boolean isDrawerVisible() {
         return drawerLayout.isDrawerVisible(START);
+    }
+
+    public static void startYourself(Context context) {
+        Intent settingsIntent = new Intent(context, ContributionsActivity.class);
+        context.startActivity(settingsIntent);
     }
 }

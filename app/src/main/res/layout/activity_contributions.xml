@@ -5,21 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/contributionsFragmentContainer"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
+        <include
+            android:id="@+id/contributions_toolbar"
+            layout="@layout/contributions_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-        <fragment
-            android:id="@+id/contributionsListFragment"
-            android:name="fr.free.nrw.commons.contributions.ContributionsListFragment"
+        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:layout="@layout/fragment_contributions" />
+            android:id="@+id/contributionsFragmentContainer"
+            android:orientation="horizontal"
+            android:layout_below="@id/contributions_toolbar">
 
-    </FrameLayout>
+            <fragment
+                android:id="@+id/contributionsListFragment"
+                android:name="fr.free.nrw.commons.contributions.ContributionsListFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout="@layout/fragment_contributions" />
+
+        </FrameLayout>
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/drawer_pane"

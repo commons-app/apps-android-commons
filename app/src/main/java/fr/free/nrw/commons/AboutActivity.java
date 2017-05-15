@@ -1,12 +1,13 @@
 package fr.free.nrw.commons;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import fr.free.nrw.commons.theme.BaseActivity;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import fr.free.nrw.commons.theme.BaseActivity;
 
 public class AboutActivity extends BaseActivity {
     @BindView(R.id.about_version) TextView versionText;
@@ -19,5 +20,10 @@ public class AboutActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         versionText.setText(BuildConfig.VERSION_NAME);
+    }
+
+    public static void startYourself(Context context) {
+        Intent settingsIntent = new Intent(context, AboutActivity.class);
+        context.startActivity(settingsIntent);
     }
 }
