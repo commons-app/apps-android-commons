@@ -52,11 +52,17 @@ public class CommonsApplication extends Application {
 
     private MWApi api;
     private Account currentAccount = null; // Unlike a savings account...
-    public static final String API_URL = "https://commons.wikimedia.org/w/api.php";
-    public static final String IMAGE_URL_BASE = "https://upload.wikimedia.org/wikipedia/commons";
-    public static final String HOME_URL = "https://commons.wikimedia.org/wiki/";
-    public static final String MOBILE_HOME_URL = "https://commons.m.wikimedia.org/wiki/";
-    public static final String EVENTLOG_URL = "https://www.wikimedia.org/beacon/event";
+
+    public static String ROOT_URL = "https://commons.wikimedia.org";
+    public static String ROOT_MOBILE_URL = "https://commons.m.wikimedia.org";
+    public static String IMAGE_URL_BASE = "https://upload.wikimedia.org/wikipedia/commons";
+    // Set dynamically from ROOT_URL and ROOT_MOBILE_URL
+    public static String API_URL;
+    public static String SCRIPT_URL;
+    public static String HOME_URL;
+    public static String MOBILE_HOME_URL;
+    public static String EVENTLOG_URL;
+
     public static final String EVENTLOG_WIKI = "commonswiki";
 
     public static final Object[] EVENT_UPLOAD_ATTEMPT = {"MobileAppUploadAttempts", 5334329L};
@@ -97,9 +103,22 @@ public class CommonsApplication extends Application {
 
         Timber.plant(new Timber.DebugTree());
 
-        if (!BuildConfig.DEBUG) {
+        if (BuildConfig.DEBUG) {
+            ROOT_URL = "https://commons.wikimedia.beta.wmflabs.org";
+            ROOT_MOBILE_URL = "https://commons.m.wikimedia.beta.wmflabs.org";
+            IMAGE_URL_BASE = "https://upload.beta.wmflabs.org/wikipedia/commons";
+        } else {
+            // Not debugging
             ACRA.init(this);
         }
+
+        HOME_URL = ROOT_URL + "/wiki/";
+        MOBILE_HOME_URL = ROOT_MOBILE_URL + "/wiki/";
+        SCRIPT_URL = ROOT_URL + "/w/";
+        API_URL = SCRIPT_URL + "api.php";
+        // Defined in https://noc.wikimedia.org/conf/CommonSettings.php.txt
+        EVENTLOG_URL = ROOT_URL + "/beacon/event";
+
         // Fire progress callbacks for every 3% of uploaded content
         System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0");
         api = createMWApi();

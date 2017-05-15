@@ -7,6 +7,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.theme.BaseActivity;
 import timber.log.Timber;
 
@@ -29,13 +30,13 @@ public class SignupActivity extends BaseActivity {
         //Needed to refresh Captcha. Might introduce XSS vulnerabilities, but we can trust Wikimedia's site... right?
         webSettings.setJavaScriptEnabled(true);
 
-        webView.loadUrl("https://commons.m.wikimedia.org/w/index.php?title=Special:CreateAccount&returnto=Main+Page&returntoquery=welcome%3Dyes");
+        webView.loadUrl(CommonsApplication.ROOT_MOBILE_URL + "/w/index.php?title=Special:CreateAccount&returnto=Main+Page&returntoquery=welcome%3Dyes");
     }
 
     private class MyWebViewClient extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            if (url.equals("https://commons.m.wikimedia.org/w/index.php?title=Main_Page&welcome=yes")) {
+            if (url.equals(CommonsApplication.ROOT_MOBILE_URL + "/w/index.php?title=Main_Page&welcome=yes")) {
                 //Signup success, so clear cookies, notify user, and load LoginActivity again
                 Timber.d("Overriding URL %s", url);
 
