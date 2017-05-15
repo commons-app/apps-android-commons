@@ -166,7 +166,10 @@ public class CommonsApplication extends Application {
     public MWApi getApi() {
         return api;
     }
-    
+
+    /**
+     * @return Accout|null
+     */
     public Account getCurrentAccount() {
         if(currentAccount == null) {
             AccountManager accountManager = AccountManager.get(this);
