@@ -14,6 +14,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
+import com.facebook.stetho.Stetho;
 import com.nostra13.universalimageloader.cache.disc.impl.TotalSizeLimitedDiscCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -96,6 +97,8 @@ public class CommonsApplication extends Application {
         app = this;
 
         Timber.plant(new Timber.DebugTree());
+
+        Stetho.initializeWithDefaults(this);
 
         if (!BuildConfig.DEBUG) {
             ACRA.init(this);
