@@ -160,10 +160,8 @@ public class NearbyActivity extends BaseActivity {
             gsonCurLatLng = gson.toJson(curLatLang);
 
             if (placeList.size() == 0) {
-                CharSequence text = "No nearby places found";
                 int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(mContext, text, duration);
+                Toast toast = Toast.makeText(mContext, R.string.no_nearby, duration);
                 toast.show();
             }
 

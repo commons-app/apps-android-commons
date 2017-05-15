@@ -157,6 +157,7 @@ Tap this message (or hit back) to skip this step.</string>
   <string name="location_permission_rationale">Optional permission: Get current location for category suggestions</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Nearby Places</string>
+  <string name="no_nearby">No nearby places found</string>
   <string name="warning">Warning</string>
   <string name="file_exists">This file already exists on Commons. Are you sure you want to proceed?</string>
   <string name="yes">Yes</string>
