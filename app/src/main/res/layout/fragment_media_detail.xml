@@ -159,6 +159,35 @@
                         />
                 </LinearLayout>
 
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/subBackground"
+                    android:padding="16dp"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/white"
+                        android:text="Coordinates"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:paddingBottom="6dp"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="License link"
+                        android:id="@+id/mediaDetailCoordinates"
+                        android:layout_gravity="left|start"
+                        android:background="?attr/subBackground"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp"
+                        android:padding="12dp"
+                        />
+                </LinearLayout>
+
                 <fr.free.nrw.commons.media.MediaDetailSpacer
                     android:layout_width="match_parent"
                     android:layout_height="8dp"

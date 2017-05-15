@@ -3,6 +3,7 @@ package fr.free.nrw.commons.nearby;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -71,6 +72,11 @@ public class NearbyActivity extends BaseActivity {
                 return true;
             case R.id.action_map:
                 showMapView();
+                if (isMapViewActive) {
+                    item.setIcon(R.drawable.ic_list_white_24dp);
+                } else {
+                    item.setIcon(R.drawable.ic_map_white_24dp);
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -82,6 +88,12 @@ public class NearbyActivity extends BaseActivity {
             isMapViewActive = true;
             if (nearbyAsyncTask.getStatus() == AsyncTask.Status.FINISHED) {
                 setMapFragment();
+            }
+
+        } else {
+            isMapViewActive = false;
+            if (nearbyAsyncTask.getStatus() == AsyncTask.Status.FINISHED) {
+                setListFragment();
             }
         }
     }
@@ -160,22 +172,21 @@ public class NearbyActivity extends BaseActivity {
      * Calls fragment for map view.
      */
     public void setMapFragment() {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        NearbyMapFragment fragment = new NearbyMapFragment();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        Fragment fragment = new NearbyMapFragment();
         fragment.setArguments(bundle);
-        ft.add(R.id.container, fragment);
-        ft.commit();
+        fragmentTransaction.replace(R.id.container, fragment);
+        fragmentTransaction.commit();
     }
 
     /**
      * Calls fragment for list view.
      */
     public void setListFragment() {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        NearbyListFragment fragment = new NearbyListFragment();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        Fragment fragment = new NearbyListFragment();
         fragment.setArguments(bundle);
-        ft.add(R.id.container, fragment);
-        ft.commit();
+        fragmentTransaction.replace(R.id.container, fragment);
+        fragmentTransaction.commit();
     }
-
 }

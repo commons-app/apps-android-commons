@@ -144,6 +144,14 @@ public class Media implements Parcelable {
         this.license = license;
     }
 
+    public String getCoordinates() {
+        return coordinates;
+    }
+
+    public void setCoordinates(String coordinates) {
+        this.coordinates = coordinates;
+    }
+
     // Primary metadata fields
     protected Uri localUri;
     protected String imageUrl;
@@ -155,6 +163,7 @@ public class Media implements Parcelable {
     protected int width;
     protected int height;
     protected String license;
+    private String coordinates;
     protected String creator;
     protected ArrayList<String> categories; // as loaded at runtime?
     protected Map<String, String> descriptions; // multilingual descriptions as loaded

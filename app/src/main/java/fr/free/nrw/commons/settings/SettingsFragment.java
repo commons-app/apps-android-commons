@@ -24,30 +24,15 @@ public class SettingsFragment extends PreferenceFragment {
 
         // Update spinner to show selected value as summary
         ListPreference licensePreference = (ListPreference) findPreference(Prefs.DEFAULT_LICENSE);
-        // WARNING: ORDERING NEEDS TO MATCH FOR THE LICENSE NAMES AND DISPLAY VALUES
-        licensePreference.setEntries(new String[]{
-                getString(R.string.license_name_cc0),
-                getString(R.string.license_name_cc_by_3_0),
-                getString(R.string.license_name_cc_by_4_0),
-                getString(R.string.license_name_cc_by_sa_3_0),
-                getString(R.string.license_name_cc_by_sa_4_0)
-        });
-        licensePreference.setEntryValues(new String[]{
-                Prefs.Licenses.CC0,
-                Prefs.Licenses.CC_BY_3,
-                Prefs.Licenses.CC_BY_4,
-                Prefs.Licenses.CC_BY_SA_3,
-                Prefs.Licenses.CC_BY_SA_4
-        });
-
         licensePreference.setSummary(getString(Utils.licenseNameFor(licensePreference.getValue())));
-        licensePreference
-                .setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-                    @Override
-                    public boolean onPreferenceChange(Preference preference, Object newValue) {
-                        preference.setSummary(getString(Utils.licenseNameFor((String) newValue)));
-                        return true;
-                    }
+
+        // Keep summary updated when changing value
+        licensePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                preference.setSummary(getString(Utils.licenseNameFor((String) newValue)));
+                return true;
+            }
         });
 
         CheckBoxPreference themePreference = (CheckBoxPreference) findPreference("theme");

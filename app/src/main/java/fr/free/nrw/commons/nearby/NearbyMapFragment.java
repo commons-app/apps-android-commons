@@ -2,6 +2,8 @@ package fr.free.nrw.commons.nearby;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +13,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.annotations.BaseMarkerOptions;
+import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.constants.Style;
 import com.mapbox.mapboxsdk.geometry.LatLng;
@@ -21,18 +23,17 @@ import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.services.android.telemetry.MapboxTelemetry;
 
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.utils.UriDeserializer;
-
 import java.lang.reflect.Type;
 import java.util.List;
 
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.utils.UriDeserializer;
+
 public class NearbyMapFragment extends android.support.v4.app.Fragment {
-    //private NearbyAsyncTask nearbyAsyncTask;
     private MapView mapView;
     private Gson gson;
     private List<Place> placeList;
-    private List<BaseMarkerOptions> baseMarkerOptionses;
+    private List<NearbyBaseMarker> baseMarkerOptionses;
     private fr.free.nrw.commons.location.LatLng curLatLng;
 
     public NearbyMapFragment() {
@@ -65,6 +66,17 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        if (curLatLng != null) {
+            setupMapView(savedInstanceState);
+        }
+
+        setHasOptionsMenu(false);
+
+        return mapView;
+    }
+
+    private void setupMapView(Bundle savedInstanceState) {
         MapboxMapOptions options = new MapboxMapOptions()
                 .styleUrl(Style.OUTDOORS)
                 .camera(new CameraPosition.Builder()
@@ -79,10 +91,25 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
             @Override
             public void onMapReady(MapboxMap mapboxMap) {
                 mapboxMap.addMarkers(baseMarkerOptionses);
+
+                mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(@NonNull Marker marker) {
+                        if (marker instanceof NearbyMarker) {
+                            NearbyMarker nearbyMarker = (NearbyMarker) marker;
+                            Place place = nearbyMarker.getNearbyBaseMarker().getPlace();
+                            NearbyInfoDialog.showYourself(getActivity(), place);
+                        }
+                        return false;
+                    }
+                });
             }
         });
-        setHasOptionsMenu(false);
-        return mapView;
+        if (PreferenceManager.getDefaultSharedPreferences(getActivity()).getBoolean("theme",true)) {
+            mapView.setStyleUrl(getResources().getString(R.string.map_theme_dark));
+        } else {
+            mapView.setStyleUrl(getResources().getString(R.string.map_theme_light));
+        }
     }
 
     @Override
@@ -92,31 +119,41 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
 
     @Override
     public void onStart() {
-        mapView.onStart();
+        if (mapView != null) {
+            mapView.onStart();
+        }
         super.onStart();
     }
 
     @Override
     public void onPause() {
-        mapView.onPause();
+        if (mapView != null) {
+            mapView.onPause();
+        }
         super.onPause();
     }
 
     @Override
     public void onResume() {
-        mapView.onResume();
+        if (mapView != null) {
+            mapView.onResume();
+        }
         super.onResume();
     }
 
     @Override
     public void onStop() {
-        mapView.onStop();
+        if (mapView != null) {
+            mapView.onStop();
+        }
         super.onStop();
     }
 
     @Override
     public void onDestroyView() {
-        mapView.onDestroy();
+        if (mapView != null) {
+            mapView.onDestroy();
+        }
         super.onDestroyView();
     }
 }

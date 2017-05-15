@@ -1,7 +1,9 @@
 package fr.free.nrw.commons;
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.Build;
+import android.preference.PreferenceManager;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
@@ -305,5 +307,13 @@ public class Utils {
 
     public static boolean isNullOrWhiteSpace(String value) {
         return value == null || value.trim().isEmpty();
+    }
+
+    public static boolean isDarkTheme(Context context) {
+        if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("theme",true)) {
+            return true;
+        }else {
+            return false;
+        }
     }
 }
