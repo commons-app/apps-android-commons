@@ -30,10 +30,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
     }
 
     private int getLimit() {
-
-        int limit = 100;
-        Timber.d("Max number of uploads set to %d", limit);
-        return limit; // FIXME: Parameterize!
+        return 500; // FIXME: Parameterize!
     }
 
     private static final String[] existsQuery = { Contribution.Table.COLUMN_FILENAME };
