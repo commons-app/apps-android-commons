@@ -42,8 +42,7 @@ public  class       ContributionsActivity
                     AdapterView.OnItemClickListener,
                     MediaDetailPagerFragment.MediaDetailProvider,
                     FragmentManager.OnBackStackChangedListener,
-                    ContributionsListFragment.SourceRefresher
-{
+                    ContributionsListFragment.SourceRefresher {
 
     private Cursor allContributions;
     private ContributionsListFragment contributionsList;
@@ -92,6 +91,15 @@ public  class       ContributionsActivity
     @Override
     protected void onResume() {
         super.onResume();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean isSettingsChanged =
+                sharedPreferences.getBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED,false);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED,false);
+        editor.apply();
+        if (isSettingsChanged) {
+            refreshSource();
+        }
     }
 
     @Override
