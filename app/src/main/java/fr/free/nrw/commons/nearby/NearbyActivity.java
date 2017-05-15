@@ -91,24 +91,23 @@ public class NearbyActivity extends BaseActivity {
 
 
     protected void checkGps() {
-        LocationManager manager = (LocationManager)
-                getSystemService(LOCATION_SERVICE);
-        if(!manager.isProviderEnabled( LocationManager.GPS_PROVIDER )) {
+        LocationManager manager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             Timber.d("GPS is not enabled");
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-            alertDialogBuilder.setMessage("GPS is disabled in your device. Would you like to enable it?")
+            alertDialogBuilder.setMessage(R.string.gps_disabled)
                     .setCancelable(false)
-                    .setPositiveButton("Enable GPS",
-                            new DialogInterface.OnClickListener(){
-                                public void onClick(DialogInterface dialog, int id){
+                    .setPositiveButton(R.string.enable_gps,
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
                                     Intent callGPSSettingIntent = new Intent(
                                             android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                                     startActivity(callGPSSettingIntent);
                                 }
                             });
             alertDialogBuilder.setNegativeButton("Cancel",
-                    new DialogInterface.OnClickListener(){
-                        public void onClick(DialogInterface dialog, int id){
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
                             dialog.cancel();
                         }
                     });
