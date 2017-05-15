@@ -57,7 +57,7 @@ public class NearbyActivity extends BaseActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        checkGps();
+
         bundle = new Bundle();
         locationManager = new LocationServiceManager(this);
         locationManager.registerLocationManager();
@@ -110,7 +110,7 @@ public class NearbyActivity extends BaseActivity {
                                     startActivityForResult(callGPSSettingIntent, 1);
                                 }
                             });
-            alertDialogBuilder.setNegativeButton("Cancel",
+            alertDialogBuilder.setNegativeButton(R.string.menu_cancel_upload,
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             dialog.cancel();
@@ -150,6 +150,7 @@ public class NearbyActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        checkGps();
     }
 
     protected void refreshView() {
