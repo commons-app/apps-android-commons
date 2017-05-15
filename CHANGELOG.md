@@ -1,6 +1,6 @@
 # Wikimedia Commons for Android
 
-## v2.3
+## v2.3 beta
 - Add map of Nearby places
 - Add overlay dialog when a Nearby place is tapped
 - Set default number of uploads to display in Main activity as 100, and add option in Settings to change it
