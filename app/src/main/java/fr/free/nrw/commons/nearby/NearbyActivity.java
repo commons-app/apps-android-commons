@@ -102,6 +102,7 @@ public class NearbyActivity extends BaseActivity {
                                 public void onClick(DialogInterface dialog, int id) {
                                     Intent callGPSSettingIntent = new Intent(
                                             android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                    Timber.d("Loaded settings page");
                                     startActivityForResult(callGPSSettingIntent, 1);
                                 }
                             });
@@ -123,6 +124,7 @@ public class NearbyActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
+            Timber.d("User is back from Settings page");
             refreshView();
         }
     }
