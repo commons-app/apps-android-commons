@@ -89,7 +89,6 @@ public class NearbyActivity extends BaseActivity {
         }
     }
 
-
     protected void checkGps() {
         LocationManager manager = (LocationManager) getSystemService(LOCATION_SERVICE);
         if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
@@ -114,7 +113,6 @@ public class NearbyActivity extends BaseActivity {
                     });
             AlertDialog alert = alertDialogBuilder.create();
             alert.show();
-
         } else {
             Timber.d("GPS is enabled");
         }
