@@ -217,6 +217,41 @@
                         android:id="@+id/mediaDetailCategoryContainer"
                         />
                 </LinearLayout>
+
+                <fr.free.nrw.commons.media.MediaDetailSpacer
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/subBackground"
+                    android:padding="16dp"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/media_detail_uploaded_date"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:paddingBottom="6dp"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/media_detail_uploaded_date"
+                        android:background="?attr/subBackground"
+                        android:id="@+id/mediaDetailuploadeddate"
+                        android:textColor="@android:color/white"
+                        android:layout_gravity="left|start"
+                        android:textSize="14sp"
+                        android:padding="12dp"
+                        />
+                </LinearLayout>
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

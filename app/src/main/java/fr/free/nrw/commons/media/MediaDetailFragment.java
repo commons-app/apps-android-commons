@@ -23,7 +23,9 @@ import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.License;
@@ -71,6 +73,7 @@ public class MediaDetailFragment extends Fragment {
     private TextView desc;
     private TextView license;
     private TextView coordinates;
+    private TextView uploadedDate;
     private LinearLayout categoryContainer;
     private ScrollView scrollView;
     private ArrayList<String> categoryNames;
@@ -125,6 +128,7 @@ public class MediaDetailFragment extends Fragment {
         desc = (TextView) view.findViewById(R.id.mediaDetailDesc);
         license = (TextView) view.findViewById(R.id.mediaDetailLicense);
         coordinates = (TextView) view.findViewById(R.id.mediaDetailCoordinates);
+        uploadedDate = (TextView) view.findViewById(R.id.mediaDetailuploadeddate);
         categoryContainer = (LinearLayout) view.findViewById(R.id.mediaDetailCategoryContainer);
 
         licenseList = new LicenseList(getActivity());
@@ -229,6 +233,7 @@ public class MediaDetailFragment extends Fragment {
                         desc.setText(prettyDescription(media));
                         license.setText(prettyLicense(media));
                         coordinates.setText(prettyCoordinates(media));
+                        uploadedDate.setText(prettyUploadedDate(media));
 
                         categoryNames.removeAll(categoryNames);
                         categoryNames.addAll(media.getCategories());
@@ -390,6 +395,17 @@ public class MediaDetailFragment extends Fragment {
         } else {
             return licenseObj.getName();
         }
+    }
+
+    private String prettyUploadedDate(Media media) {
+        Date date = media.getDateUploaded();
+        if(date.toString() == null || date.toString().isEmpty()) {
+            return "Uploaded date not available";
+        }
+        SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+        String formattedDate = formatter.format(date);
+       // Timber.d("Media uploaded date is: s%", formattedDate);
+        return formattedDate;
     }
 
     /**
