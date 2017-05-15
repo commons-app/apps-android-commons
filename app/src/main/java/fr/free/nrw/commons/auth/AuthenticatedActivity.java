@@ -20,8 +20,8 @@ public abstract class AuthenticatedActivity extends BaseActivity {
 
     private String authCookie;
     
-    public AuthenticatedActivity(String accountType) {
-       this.accountType = accountType;
+    public AuthenticatedActivity() {
+        this.accountType = AccountUtil.accountType();
     }
    
     private class GetAuthCookieTask extends AsyncTask<Void, String, String> {

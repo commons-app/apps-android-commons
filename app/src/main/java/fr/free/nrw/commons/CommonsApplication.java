@@ -14,11 +14,13 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
+import com.facebook.stetho.Stetho;
 import com.nostra13.universalimageloader.cache.disc.impl.TotalSizeLimitedDiscCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.utils.StorageUtils;
 
+import fr.free.nrw.commons.auth.AccountUtil;
 import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
@@ -35,7 +37,6 @@ import org.apache.http.params.CoreProtocolPNames;
 
 import java.io.IOException;
 
-import fr.free.nrw.commons.auth.WikiAccountAuthenticator;
 import fr.free.nrw.commons.caching.CacheController;
 import timber.log.Timber;
 
@@ -73,6 +74,8 @@ public class CommonsApplication extends Application {
 
     public CacheController cacheData;
 
+    public static CommonsApplication app;
+
     public static AbstractHttpClient createHttpClient() {
         BasicHttpParams params = new BasicHttpParams();
         SchemeRegistry schemeRegistry = new SchemeRegistry();
@@ -91,8 +94,11 @@ public class CommonsApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        app = this;
 
         Timber.plant(new Timber.DebugTree());
+
+        Stetho.initializeWithDefaults(this);
 
         if (!BuildConfig.DEBUG) {
             ACRA.init(this);
@@ -163,11 +169,14 @@ public class CommonsApplication extends Application {
     public MWApi getApi() {
         return api;
     }
-    
+
+    /**
+     * @return Accout|null
+     */
     public Account getCurrentAccount() {
         if(currentAccount == null) {
             AccountManager accountManager = AccountManager.get(this);
-            Account[] allAccounts = accountManager.getAccountsByType(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
+            Account[] allAccounts = accountManager.getAccountsByType(AccountUtil.accountType());
             if(allAccounts.length != 0) {
                 currentAccount = allAccounts[0];
             }
@@ -183,7 +192,7 @@ public class CommonsApplication extends Application {
             return false; // This should never happen
         }
         
-        accountManager.invalidateAuthToken(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE, api.getAuthCookie());
+        accountManager.invalidateAuthToken(AccountUtil.accountType(), api.getAuthCookie());
         try {
             String authCookie = accountManager.blockingGetAuthToken(curAccount, "", false);
             api.setAuthCookie(authCookie);

@@ -42,7 +42,7 @@
   <string name="login_failed_password">Unable to login - please check your password</string>
   <string name="login_failed_throttled">Too many unsuccessful attempts. Please try again in a few minutes.</string>
   <string name="login_failed_blocked">Sorry, this user has been blocked on Commons</string>
-  <string name="login_failed_2fa_not_supported">The app doesn\'t currently support 2 Factor Authentication.</string>
+  <string name="login_failed_2fa_needed">You must provide your two factor authentication code.</string>
   <string name="login_failed_generic">Login failed</string>
   <string name="share_upload_button">Upload</string>
   <string name="multiple_share_base_title">Name this set</string>
@@ -177,9 +177,11 @@ Tap this message (or hit back) to skip this step.</string>
   <string name="map_theme_light">mapbox://styles/mapbox/traffic-day-v2</string>
   <string name="map_theme_dark">mapbox://styles/mapbox/traffic-night-v2</string>
   <string name="mapbox_commons_app_token">pk.eyJ1IjoibWFza2FyYXZpdmVrIiwiYSI6ImNqMmxvdzFjMTAwMHYzM283ZWM3eW5tcDAifQ.ib5SZ9EVjwJe6GSKve0bcg</string>
+  <string name="_2fa_code">2FA Code</string>
   <string name="number_of_uploads">My Recent Upload Limit</string>
   <string name="maximum_limit">Maximum Limit</string>
   <string name="maximum_limit_alert">Unable to display more than 500</string>
   <string name="set_limit">Set Recent Upload Limit</string>
+  <string name="login_failed_2fa_not_supported">Two factor authentication is currently not supported.</string>
 
 </resources>
