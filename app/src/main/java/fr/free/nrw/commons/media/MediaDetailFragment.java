@@ -399,12 +399,11 @@ public class MediaDetailFragment extends Fragment {
 
     private String prettyUploadedDate(Media media) {
         Date date = media.getDateUploaded();
-        if(date.toString() == null || date.toString().isEmpty()) {
+        if (date.toString() == null || date.toString().isEmpty()) {
             return "Uploaded date not available";
         }
         SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
         String formattedDate = formatter.format(date);
-       // Timber.d("Media uploaded date is: s%", formattedDate);
         return formattedDate;
     }
 
