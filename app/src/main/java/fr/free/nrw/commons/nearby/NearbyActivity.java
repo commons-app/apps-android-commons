@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.nearby;
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,7 +53,7 @@ public class NearbyActivity extends BaseActivity {
         locationManager = new LocationServiceManager(this);
         locationManager.registerLocationManager();
         curLatLang = locationManager.getLatestLocation();
-        nearbyAsyncTask = new NearbyAsyncTask();
+        nearbyAsyncTask = new NearbyAsyncTask(this);
         nearbyAsyncTask.execute();
 
     }
@@ -104,7 +106,7 @@ public class NearbyActivity extends BaseActivity {
     }
 
     protected void refreshView() {
-        nearbyAsyncTask = new NearbyAsyncTask();
+        nearbyAsyncTask = new NearbyAsyncTask(this);
         nearbyAsyncTask.execute();
     }
 
@@ -119,6 +121,12 @@ public class NearbyActivity extends BaseActivity {
     }
 
     private class NearbyAsyncTask extends AsyncTask<Void, Integer, List<Place>> {
+
+        private Context mContext;
+
+        private NearbyAsyncTask (Context context) {
+            mContext = context;
+        }
 
         @Override
         protected void onPreExecute() {
@@ -150,6 +158,14 @@ public class NearbyActivity extends BaseActivity {
                     .create();
             gsonPlaceList = gson.toJson(placeList);
             gsonCurLatLng = gson.toJson(curLatLang);
+
+            if (placeList.size() == 0) {
+                CharSequence text = "No nearby places found";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(mContext, text, duration);
+                toast.show();
+            }
 
             bundle.clear();
             bundle.putString("PlaceList", gsonPlaceList);
