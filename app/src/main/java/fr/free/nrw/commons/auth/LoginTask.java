@@ -9,7 +9,6 @@ import android.os.Bundle;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.EventLog;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.contributions.ContributionsActivity;
 import timber.log.Timber;
 
 import java.io.IOException;
@@ -90,10 +89,7 @@ class LoginTask extends AsyncTask<String, String, String> {
         }
 
         AccountUtil.createAccount( response, username, password );
-
-        Intent intent = new Intent(loginActivity, ContributionsActivity.class);
-        loginActivity.startActivity(intent);
-        loginActivity.finish();
+        loginActivity.startMainActivity();
     }
 
     /**

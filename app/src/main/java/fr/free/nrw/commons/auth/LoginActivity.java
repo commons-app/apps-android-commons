@@ -17,10 +17,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import android.widget.Toast;
-import fr.free.nrw.commons.BuildConfig;
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.WelcomeActivity;
+import fr.free.nrw.commons.*;
+import fr.free.nrw.commons.contributions.ContributionsActivity;
 import timber.log.Timber;
 
 
@@ -36,9 +34,13 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     EditText twoFactorEdit;
     ProgressDialog progressDialog;
 
+    private CommonsApplication app;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        app = (CommonsApplication) getApplicationContext();
 
         setContentView(R.layout.activity_login);
         final LoginActivity that = this;
@@ -115,6 +117,9 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         if (prefs.getBoolean("firstrun", true)) {
             this.startWelcomeIntent();
             prefs.edit().putBoolean("firstrun", false).apply();
+        }
+        if (app.getCurrentAccount() != null) {
+            startMainActivity();
         }
     }
 
@@ -206,6 +211,12 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     public void emptySensitiveEditFields() {
         passwordEdit.setText("");
         twoFactorEdit.setText("");
+    }
+
+    public void startMainActivity() {
+        Intent intent = new Intent(this, ContributionsActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 }
