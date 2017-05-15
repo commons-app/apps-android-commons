@@ -9,8 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <include
-            android:id="@+id/contributions_toolbar"
-            layout="@layout/contributions_toolbar"
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -20,7 +20,7 @@
             android:layout_height="match_parent"
             android:id="@+id/contributionsFragmentContainer"
             android:orientation="horizontal"
-            android:layout_below="@id/contributions_toolbar">
+            android:layout_below="@id/toolbar">
 
             <fragment
                 android:id="@+id/contributionsListFragment"

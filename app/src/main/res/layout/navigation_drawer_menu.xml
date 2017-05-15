@@ -28,16 +28,6 @@
                 android:background="@android:color/black"/>
 
             <TextView
-                android:id="@+id/home_item"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:textColor="@android:color/black"
-                android:text="@string/navigation_item_home"/>
-
-            <TextView
                 android:id="@+id/upload_item"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

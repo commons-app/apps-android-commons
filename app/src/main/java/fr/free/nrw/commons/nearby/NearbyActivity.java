@@ -27,11 +27,11 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
-import fr.free.nrw.commons.theme.BaseActivity;
+import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.UriSerializer;
 import timber.log.Timber;
 
-public class NearbyActivity extends BaseActivity {
+public class NearbyActivity extends NavigationBaseActivity {
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
     private boolean isMapViewActive = false;
@@ -59,7 +59,7 @@ public class NearbyActivity extends BaseActivity {
         curLatLang = locationManager.getLatestLocation();
         nearbyAsyncTask = new NearbyAsyncTask(this);
         nearbyAsyncTask.execute();
-
+        initDrawer();
     }
 
     @Override

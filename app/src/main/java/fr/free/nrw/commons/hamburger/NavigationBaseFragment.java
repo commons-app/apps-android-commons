@@ -30,9 +30,6 @@ public class NavigationBaseFragment extends Fragment {
     @BindView(R.id.pictureOfTheDay)
     ImageView pictureOfTheDay;
 
-    @BindView(R.id.home_item)
-    TextView homeItem;
-
     @BindView(R.id.upload_item)
     TextView uploadItem;
 
@@ -83,7 +80,7 @@ public class NavigationBaseFragment extends Fragment {
     }
 
     @OnClick(R.id.upload_item)
-    protected void onHomeItemClicked() {
+    protected void onUploadItemClicked() {
         closeDrawer();
         ContributionsActivity.startYourself(getActivity());
     }

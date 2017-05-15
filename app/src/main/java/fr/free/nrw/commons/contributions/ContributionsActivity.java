@@ -16,20 +16,15 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.AdapterView;
-import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
@@ -37,14 +32,10 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.hamburger.HamburgerMenuContainer;
-import fr.free.nrw.commons.hamburger.NavigationBaseFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
-import fr.free.nrw.commons.utils.FragmentUtils;
 import timber.log.Timber;
-
-import static android.support.v4.view.GravityCompat.START;
 
 public  class       ContributionsActivity
         extends     AuthenticatedActivity
@@ -62,15 +53,6 @@ public  class       ContributionsActivity
     private boolean isUploadServiceConnected;
     private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<>();
     private String CONTRIBUTION_SELECTION = "";
-
-    @BindView(R.id.contributions_toolbar)
-    Toolbar toolbar;
-
-    @BindView(R.id.drawer_layout)
-    DrawerLayout drawerLayout;
-
-    @BindView(R.id.drawer_pane)
-    RelativeLayout drawerPane;
 
     /*
         This sorts in the following order:
@@ -144,12 +126,6 @@ public  class       ContributionsActivity
         setContentView(R.layout.activity_contributions);
         ButterKnife.bind(this);
 
-        setSupportActionBar(toolbar);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        initSubviews();
-
         // Activity can call methods in the fragment by acquiring a reference to the Fragment from FragmentManager, using findFragmentById()
         contributionsList = (ContributionsListFragment)getSupportFragmentManager().findFragmentById(R.id.contributionsListFragment);
 
@@ -164,30 +140,7 @@ public  class       ContributionsActivity
             }
         }
         requestAuthToken();
-        NavigationBaseFragment baseFragment = new NavigationBaseFragment();
-        baseFragment.setDrawerLayout(drawerLayout, drawerPane);
-        FragmentUtils.addAndCommitFragmentWithImmediateExecution(getSupportFragmentManager(),
-                R.id.drawer_fragment,
-                baseFragment);
-    }
-
-    private void initSubviews() {
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
-                drawerLayout,
-                toolbar,
-                R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close);
-        drawerLayout.setDrawerListener(toggle);
-        toggle.setDrawerIndicatorEnabled(true);
-        toggle.syncState();
-        setDrawerPaneWidth();
-    }
-
-    private void setDrawerPaneWidth() {
-        ViewGroup.LayoutParams params = drawerPane.getLayoutParams();
-        // set width to lowerBound of 80% of the screen size
-        params.width = (getResources().getDisplayMetrics().widthPixels * 70) / 100;
-        drawerPane.setLayoutParams(params);
+        initDrawer();
     }
 
     @Override
@@ -281,15 +234,15 @@ public  class       ContributionsActivity
             ((CursorAdapter)contributionsList.getAdapter()).swapCursor(cursor);
         }
 
-//        if (cursor.getCount() == 0
-//                && Locale.getDefault().getISO3Language().equals(Locale.ENGLISH.getISO3Language())) {
-//            //cursor count is zero and language is english -
-//            // we need to set the message for 0 case explicitly.
-//            getSupportActionBar().setSubtitle(getResources()
-//                    .getString(R.string.contributions_subtitle_zero));
-//        } else {
-//            getSupportActionBar().setSubtitle(getResources().getQuantityString(R.plurals.contributions_subtitle, cursor.getCount(), cursor.getCount()));
-//        }
+        if (cursor.getCount() == 0
+                && Locale.getDefault().getISO3Language().equals(Locale.ENGLISH.getISO3Language())) {
+            //cursor count is zero and language is english -
+            // we need to set the message for 0 case explicitly.
+            getSupportActionBar().setSubtitle(getResources()
+                    .getString(R.string.contributions_subtitle_zero));
+        } else {
+            getSupportActionBar().setSubtitle(getResources().getQuantityString(R.plurals.contributions_subtitle, cursor.getCount(), cursor.getCount()));
+        }
 
         contributionsList.clearSyncMessage();
         notifyAndMigrateDataSetObservers();
@@ -371,25 +324,6 @@ public  class       ContributionsActivity
     @Override
     public void refreshSource() {
         getSupportLoaderManager().restartLoader(0, null, this);
-    }
-
-    @Override
-    public void setDrawerListener(ActionBarDrawerToggle listener) {
-        drawerLayout.setDrawerListener(listener);
-    }
-
-    @Override
-    public void toggleDrawer() {
-        if (drawerLayout.isDrawerVisible(START)) {
-            drawerLayout.closeDrawer(START);
-        } else {
-            drawerLayout.openDrawer(START);
-        }
-    }
-
-    @Override
-    public boolean isDrawerVisible() {
-        return drawerLayout.isDrawerVisible(START);
     }
 
     public static void startYourself(Context context) {

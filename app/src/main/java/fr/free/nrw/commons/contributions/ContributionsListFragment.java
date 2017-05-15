@@ -126,46 +126,6 @@ public class ContributionsListFragment extends Fragment {
             case R.id.menu_from_camera:
                 controller.startCameraCapture();
                 return true;
-//            case R.id.menu_settings:
-//                Intent settingsIntent = new Intent(getActivity(), SettingsActivity.class);
-//                startActivity(settingsIntent);
-//                return true;
-//            case R.id.menu_about:
-//                Intent aboutIntent = new Intent(getActivity(),  AboutActivity.class);
-//                startActivity(aboutIntent);
-//                return true;
-//            case R.id.menu_feedback:
-//                Intent feedbackIntent = new Intent(Intent.ACTION_SEND);
-//                feedbackIntent.setType("message/rfc822");
-//                feedbackIntent.putExtra(Intent.EXTRA_EMAIL, new String[] { CommonsApplication.FEEDBACK_EMAIL });
-//                feedbackIntent.putExtra(Intent.EXTRA_SUBJECT, String.format(CommonsApplication.FEEDBACK_EMAIL_SUBJECT, BuildConfig.VERSION_NAME));
-//                try {
-//                    startActivity(feedbackIntent);
-//                }
-//                catch (ActivityNotFoundException e) {
-//                    Toast.makeText(getActivity(), R.string.no_email_client, Toast.LENGTH_SHORT).show();
-//                }
-//                return true;
-//            case R.id.menu_nearby:
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//                    if (ContextCompat.checkSelfPermission(this.getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//                        //See http://stackoverflow.com/questions/33169455/onrequestpermissionsresult-not-being-called-in-dialog-fragment
-//                        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 2);
-//                        return true;
-//                    } else {
-//                        Intent nearbyIntent = new Intent(getActivity(), NearbyActivity.class);
-//                        startActivity(nearbyIntent);
-//                        return true;
-//                    }
-//                }
-//                else {
-//                    Intent nearbyIntent = new Intent(getActivity(), NearbyActivity.class);
-//                    startActivity(nearbyIntent);
-//                    return true;
-//                }
-//            case R.id.menu_refresh:
-//                ((SourceRefresher)getActivity()).refreshSource();
-//                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -203,8 +163,6 @@ public class ContributionsListFragment extends Fragment {
         if (!app.deviceHasCamera()) {
             menu.findItem(R.id.menu_from_camera).setEnabled(false);
         }
-
-        //menu.findItem(R.id.menu_refresh).setVisible(false);
     }
 
     @Override
