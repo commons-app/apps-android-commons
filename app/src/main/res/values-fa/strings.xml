@@ -73,7 +73,7 @@
   <string name="title_activity_settings">تنظیمات</string>
   <string name="title_activity_signup">ثبت نام</string>
   <string name="menu_about">درباره</string>
-  <string name="about_license" fuzzy="true">نرم‌افزار متن‌باز آزاد تحت &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;مجوز آپاچی نسخهٔ ۲&lt;/a&gt;
+  <string name="about_license" fuzzy="true">نرم‌افزار متن‌باز آزاد تحت &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;مجوز آپاچی نسخهٔ ۲&lt;/a&gt;
 
 ویکی‌انبار و نشانش یک نشان تجاری‌ست و با اجازهٔ بنیاد ویکی‌مدیا استفاده می‌شود. ما زیرمجموعه یا شعبهٔ بنیاد نیستیم.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Source&lt;/a&gt; and &lt;a href=\"https://commons-app.github.io/\"&gt;وب‌سایت&lt;/a&gt; در گیت‌هاب. ایجاد یک &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;درخواست در گیت‌هاب&lt;/a&gt; برای گزارش باگ و یا پیشنهاد یک خصوصیت جدید.</string>
