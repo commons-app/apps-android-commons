@@ -14,7 +14,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.ui.widget.OverlayDialog;
 import fr.free.nrw.commons.utils.DialogUtil;
@@ -25,8 +24,7 @@ public class NearbyInfoDialog extends OverlayDialog {
     private final static String ARG_DESC = "placeDesc";
     private final static String ARG_LATITUDE = "latitude";
     private final static String ARG_LONGITUDE = "longitude";
-    private final static String ARG_ARTICLE_LINK = "articleLink";
-    private final static String ARG_WIKI_DATA_LINK = "wikiDataLink";
+    private final static String ARG_SITE_LINK = "sitelink";
 
     @BindView(R.id.link_preview_title)
     TextView placeTitle;
@@ -58,15 +56,10 @@ public class NearbyInfoDialog extends OverlayDialog {
     }
 
     private void getArticleLink(Bundle bundle) {
-        String articleLink = bundle.getString(ARG_ARTICLE_LINK);
-        articleLink = articleLink.replace("<", "").replace(">", "");
+        Sitelinks sitelinks = bundle.getParcelable(ARG_SITE_LINK);
 
-        if (Utils.isNullOrWhiteSpace(articleLink) || articleLink == "\n") {
-            articleLink = bundle.getString(ARG_WIKI_DATA_LINK).replace("<", "").replace(">", "");
-        }
-
-        if (!Utils.isNullOrWhiteSpace(articleLink) && articleLink != "\n") {
-            this.articleLink = Uri.parse(articleLink);
+        if (sitelinks.getWikipediaLink() != null) {
+            this.articleLink = sitelinks.getWikipediaLink();
         } else {
             goToButton.setVisibility(View.GONE);
         }
@@ -79,8 +72,7 @@ public class NearbyInfoDialog extends OverlayDialog {
         bundle.putString(ARG_DESC, place.description);
         bundle.putDouble(ARG_LATITUDE, place.location.latitude);
         bundle.putDouble(ARG_LONGITUDE, place.location.longitude);
-        bundle.putString(ARG_ARTICLE_LINK, place.siteLink.toString());
-        bundle.putString(ARG_WIKI_DATA_LINK, place.wikiDataLink.toString());
+        bundle.putParcelable(ARG_SITE_LINK, place.siteLinks);
         mDialog.setArguments(bundle);
         DialogUtil.showSafely(fragmentActivity, mDialog);
     }

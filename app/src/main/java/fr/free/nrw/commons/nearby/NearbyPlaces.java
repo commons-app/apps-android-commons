@@ -70,17 +70,19 @@ public class NearbyPlaces {
         List<Place> places = new ArrayList<>();
 
         String query = FileUtils.readFromFile(context, "queries/nearby_query.rq")
-                .replace("${RAD}", String.format(Locale.ROOT, "%.2f", radius))
+                .replace("${RADIUS}", String.format(Locale.ROOT, "%.2f", radius))
                 .replace("${LAT}", String.format(Locale.ROOT, "%.4f", cur.latitude))
                 .replace("${LONG}", String.format(Locale.ROOT, "%.4f", cur.longitude))
                 .replace("${LANG}", lang);
-        Timber.v(query);
+
+        Timber.d("Wikidata query "+ query);
 
         // format as a URL
         String url = WIKIDATA_QUERY_URL.replace(
                 "${QUERY}",
                 URLEncoder.encode(query, "utf-8").replace("+", "%20")
         );
+
         Timber.d(url);
         URLConnection conn = new URL(url).openConnection();
         conn.setRequestProperty("Accept", "text/tab-separated-values");
@@ -99,8 +101,9 @@ public class NearbyPlaces {
             String point = fields[0];
             String name = Utils.stripLocalizedString(fields[2]);
             String type = Utils.stripLocalizedString(fields[4]);
-            String sitelink = Utils.stripLocalizedString(fields[7]);
-            String wikiDataLink = Utils.stripLocalizedString(fields[3]);
+            String wikipediaSitelink = Utils.stripLocalizedString(fields[7]);
+            String commonsSitelink = Utils.stripLocalizedString(fields[8]);
+            String wikiDataLink = Utils.stripLocalizedString(fields[1]);
             String icon = fields[5];
 
             double latitude = 0;
@@ -123,8 +126,11 @@ public class NearbyPlaces {
                     type, // details
                     Uri.parse(icon),
                     new LatLng(latitude, longitude),
-                    Uri.parse(sitelink),
-                    Uri.parse(wikiDataLink)
+                    new Sitelinks.Builder()
+                            .setWikipediaLink(wikipediaSitelink)
+                            .setCommonsLink(commonsSitelink)
+                            .setWikidataLink(wikiDataLink)
+                            .build()
             ));
         }
         in.close();
@@ -182,8 +188,7 @@ public class NearbyPlaces {
                             type, // details
                             null,
                             new LatLng(latitude, longitude),
-                            null,
-                            null
+                            new Sitelinks.Builder().build()
                     ));
                 }
                 in.close();
