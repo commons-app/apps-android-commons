@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="license_pref_cc0" translatable="false">CC0</string>
+    <string name="license_pref_cc_by_3_0" translatable="false">CC BY 3.0</string>
+    <string name="license_pref_cc_by_sa_3_0" translatable="false">CC BY-SA 3.0</string>
+    <string name="license_pref_cc_by_4_0" translatable="false">CC BY 4.0</string>
+    <string name="license_pref_cc_by_sa_4_0" translatable="false">CC BY-SA 4.0</string>
+</resources>

@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.os.RemoteException;
 import android.text.TextUtils;
 
-import fr.free.nrw.commons.MWApi;
 import org.mediawiki.api.ApiResult;
 
 import java.io.IOException;
@@ -20,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.MWApi;
 import fr.free.nrw.commons.Utils;
 import timber.log.Timber;
 
@@ -31,7 +31,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
 
     private int getLimit() {
 
-        int limit = 100;
+        int limit = 500;
         Timber.d("Max number of uploads set to %d", limit);
         return limit; // FIXME: Parameterize!
     }
