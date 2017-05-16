@@ -69,7 +69,7 @@ public class NearbyPlaces {
             throws IOException {
         List<Place> places = new ArrayList<>();
 
-        String query = FileUtils.readFromFile(context, "queries/nearby_query.txt");
+        String query = FileUtils.readFromFile(context, "queries/nearby_query.rq");
 
         Timber.d(query);
 
