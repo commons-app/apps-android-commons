@@ -30,6 +30,7 @@ import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.auth.AccountUtil;
+import fr.free.nrw.commons.nearby.NearbyPlaces;
 
 import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
@@ -85,6 +86,8 @@ public class CommonsApplication extends Application {
     private MWApi api = null;
     private CacheController cacheData = null;
     private RequestQueue volleyQueue = null;
+    private DBOpenHelper dbOpenHelper = null;
+    private NearbyPlaces nearbyPlaces = null;
 
     /**
      * This should not be called by ANY application code (other than the magic Android glue)
@@ -144,6 +147,20 @@ public class CommonsApplication extends Application {
             volleyQueue.start();
         }
         return volleyQueue;
+    }
+
+    public synchronized DBOpenHelper getDBOpenHelper() {
+        if(dbOpenHelper == null) {
+            dbOpenHelper = new DBOpenHelper(this);
+        }
+        return dbOpenHelper;
+    }
+
+    public synchronized NearbyPlaces getNearbyPlaces() {
+        if (nearbyPlaces == null) {
+            nearbyPlaces = new NearbyPlaces();
+        }
+        return nearbyPlaces;
     }
 
     @Override
