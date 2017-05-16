@@ -26,7 +26,7 @@ class LoginTask extends AsyncTask<String, String, String> {
         this.username = username;
         this.password = password;
         this.twoFactorCode = twoFactorCode;
-        app = (CommonsApplication) loginActivity.getApplicationContext();
+        app = CommonsApplication.getInstance();
     }
 
     @Override
@@ -44,9 +44,9 @@ class LoginTask extends AsyncTask<String, String, String> {
     protected String doInBackground(String... params) {
         try {
             if (twoFactorCode.isEmpty()) {
-                return app.getApi().login(username, password);
+                return app.getMWApi().login(username, password);
             } else {
-                return app.getApi().login(username, password, twoFactorCode);
+                return app.getMWApi().login(username, password, twoFactorCode);
             }
         } catch (IOException e) {
             // Do something better!

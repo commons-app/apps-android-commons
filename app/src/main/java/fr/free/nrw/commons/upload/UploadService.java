@@ -115,7 +115,7 @@ public class UploadService extends HandlerService<Contribution> {
         super.onCreate();
 
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        app = (CommonsApplication) this.getApplicationContext();
+        app = CommonsApplication.getInstance();
         contributionsProviderClient = this.getContentResolver().acquireContentProviderClient(ContributionsContentProvider.AUTHORITY);
     }
 
@@ -176,7 +176,7 @@ public class UploadService extends HandlerService<Contribution> {
     }
 
     private void uploadContribution(Contribution contribution) {
-        MWApi api = app.getApi();
+        MWApi api = app.getMWApi();
 
         ApiResult result;
         InputStream file = null;
@@ -201,7 +201,7 @@ public class UploadService extends HandlerService<Contribution> {
                 .setContentText(getResources().getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload))
                 .setOngoing(true)
                 .setProgress(100, 0, true)
-                .setContentIntent(PendingIntent.getActivity(getApplicationContext(), 0, new Intent(this, ContributionsActivity.class), 0))
+                .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, ContributionsActivity.class), 0))
                 .setTicker(getString(R.string.upload_progress_notification_title_in_progress, contribution.getDisplayTitle()));
 
         this.startForeground(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification.build());
@@ -282,7 +282,7 @@ public class UploadService extends HandlerService<Contribution> {
             toUpload--;
             if(toUpload == 0) {
                 // Sync modifications right after all uplaods are processed
-                ContentResolver.requestSync(((CommonsApplication) getApplicationContext()).getCurrentAccount(), ModificationsContentProvider.AUTHORITY, new Bundle());
+                ContentResolver.requestSync((CommonsApplication.getInstance()).getCurrentAccount(), ModificationsContentProvider.AUTHORITY, new Bundle());
                 stopForeground(true);
             }
         }
@@ -304,7 +304,7 @@ public class UploadService extends HandlerService<Contribution> {
     }
 
     private String findUniqueFilename(String fileName) throws IOException {
-        MWApi api = app.getApi();
+        MWApi api = app.getMWApi();
         String sequenceFileName;
         for ( int sequenceNumber = 1; true; sequenceNumber++ ) {
             if (sequenceNumber == 1) {

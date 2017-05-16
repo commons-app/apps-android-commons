@@ -194,7 +194,7 @@ public class MediaDetailFragment extends Fragment {
         if(actualUrl.startsWith("http")) {
             Timber.d("Actual URL starts with http and is: %s", actualUrl);
 
-            ImageLoader loader = ((CommonsApplication)getActivity().getApplicationContext()).getImageLoader();
+            ImageLoader loader = CommonsApplication.getInstance().getImageLoader();
             MediaWikiImageView mwImage = (MediaWikiImageView)image;
             mwImage.setLoadingView(loadingProgress); //FIXME: Set this as an attribute
             mwImage.setMedia(media, loader);

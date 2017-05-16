@@ -79,7 +79,7 @@ public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
     protected ArrayList<String> doInBackground(Void... voids) {
 
         //otherwise if user has typed something in that isn't in cache, search API for matching categories
-        MWApi api = CommonsApplication.createMWApi();
+        MWApi api = CommonsApplication.getInstance().getMWApi();
         ApiResult result;
         ArrayList<String> categories = new ArrayList<>();
 

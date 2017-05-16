@@ -6,6 +6,7 @@ import android.os.Build;
 import android.preference.PreferenceManager;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.impl.client.AbstractHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,10 +31,10 @@ public class EventLog {
             boolean  allSuccess = true;
             // Not using the default URL connection, since that seems to have different behavior than the rest of the code
             for(LogBuilder logBuilder: logBuilders) {
-                HttpURLConnection conn;
                 try {
                     URL url = logBuilder.toUrl();
-                    HttpResponse response = Http.get(url.toString()).use(CommonsApplication.createHttpClient()).asResponse();
+                    AbstractHttpClient httpClient = CommonsApplication.getInstance().getHttpClient();
+                    HttpResponse response = Http.get(url.toString()).use(httpClient).asResponse();
 
                     if(response.getStatusLine().getStatusCode() != 204) {
                         allSuccess = false;

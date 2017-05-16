@@ -132,7 +132,7 @@ public abstract class AuthenticatedActivity extends NavigationBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        app = (CommonsApplication)this.getApplicationContext();
+        app = CommonsApplication.getInstance();
         if(savedInstanceState != null) {
             authCookie = savedInstanceState.getString("authCookie");
         }

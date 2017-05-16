@@ -11,6 +11,7 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 
@@ -46,7 +47,7 @@ public class SettingsFragment extends PreferenceFragment {
 
         final EditTextPreference uploadLimit = (EditTextPreference) findPreference("uploads");
         final SharedPreferences sharedPref = PreferenceManager
-                .getDefaultSharedPreferences(getActivity().getApplicationContext());
+                .getDefaultSharedPreferences(CommonsApplication.getInstance());
         int uploads = sharedPref.getInt(Prefs.UPLOADS_SHOWING, 100);
         uploadLimit.setText(uploads + "");
         uploadLimit.setSummary(uploads + "");

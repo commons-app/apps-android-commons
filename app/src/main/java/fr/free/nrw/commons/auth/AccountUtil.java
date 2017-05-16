@@ -55,7 +55,7 @@ public class AccountUtil {
 
     @NonNull
     private static CommonsApplication app() {
-        return CommonsApplication.app;
+        return CommonsApplication.getInstance();
     }
 
 }

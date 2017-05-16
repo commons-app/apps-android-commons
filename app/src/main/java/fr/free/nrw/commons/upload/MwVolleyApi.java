@@ -101,7 +101,7 @@ public class MwVolleyApi {
 
     private static RequestQueue getQueue(Context context) {
         if (REQUEST_QUEUE == null) {
-            REQUEST_QUEUE = Volley.newRequestQueue(context.getApplicationContext());
+            REQUEST_QUEUE = Volley.newRequestQueue(context);
         }
         return REQUEST_QUEUE;
     }

@@ -62,7 +62,6 @@ import timber.log.Timber;
 )
 public class CommonsApplication extends Application {
 
-    private MWApi api;
     private Account currentAccount = null; // Unlike a savings account...
     public static final String API_URL = "https://commons.wikimedia.org/w/api.php";
     public static final String IMAGE_URL_BASE = "https://upload.wikimedia.org/wikipedia/commons";
@@ -81,13 +80,35 @@ public class CommonsApplication extends Application {
     public static final String FEEDBACK_EMAIL = "commons-app-android@googlegroups.com";
     public static final String FEEDBACK_EMAIL_SUBJECT = "Commons Android App (%s) Feedback";
 
-    public RequestQueue volleyQueue;
+    private static CommonsApplication instance = null;
+    private AbstractHttpClient httpClient = null;
+    private MWApi api = null;
+    private CacheController cacheData = null;
+    private RequestQueue volleyQueue = null;
 
-    public CacheController cacheData;
+    /**
+     * This should not be called by ANY application code (other than the magic Android glue)
+     * Use CommonsApplication.getInstance() instead to get the singleton.
+     */
+    public CommonsApplication() {
+        CommonsApplication.instance = this;
+    }
 
-    public static CommonsApplication app;
+    public static CommonsApplication getInstance() {
+        if(instance == null) {
+            instance = new CommonsApplication();
+        }
+        return instance;
+    }
 
-    public static AbstractHttpClient createHttpClient() {
+    public AbstractHttpClient getHttpClient() {
+        if(httpClient == null) {
+            httpClient = newHttpClient();
+        }
+        return httpClient;
+    }
+
+    private AbstractHttpClient newHttpClient() {
         BasicHttpParams params = new BasicHttpParams();
         SchemeRegistry schemeRegistry = new SchemeRegistry();
         schemeRegistry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
@@ -98,14 +119,36 @@ public class CommonsApplication extends Application {
         return new DefaultHttpClient(cm, params);
     }
 
-    public static MWApi createMWApi() {
-        return new MWApi(API_URL, createHttpClient());
+    public MWApi getMWApi() {
+        if(api == null) {
+            api = newMWApi();
+        }
+        return api;
+    }
+
+    private MWApi newMWApi() {
+        return new MWApi(API_URL, getHttpClient());
+    }
+
+    public CacheController getCacheData() {
+        if(cacheData == null) {
+            cacheData = new CacheController();
+        }
+        return cacheData;
+    }
+
+    public RequestQueue getVolleyQueue() {
+        if(volleyQueue == null) {
+            DiskBasedCache cache = new DiskBasedCache(getCacheDir(), 16 * 1024 * 1024);
+            volleyQueue = new RequestQueue(cache, new BasicNetwork(new HurlStack()));
+            volleyQueue.start();
+        }
+        return volleyQueue;
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        app = this;
 
         Timber.plant(new Timber.DebugTree());
 
@@ -116,9 +159,8 @@ public class CommonsApplication extends Application {
         }
         // Fire progress callbacks for every 3% of uploaded content
         System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0");
-        api = createMWApi();
 
-        ImageLoaderConfiguration imageLoaderConfiguration = new ImageLoaderConfiguration.Builder(getApplicationContext())
+        ImageLoaderConfiguration imageLoaderConfiguration = new ImageLoaderConfiguration.Builder(this)
                 .discCache(new TotalSizeLimitedDiscCache(StorageUtils.getCacheDirectory(this), 128 * 1024 * 1024))
                 .build();
         ImageLoader.getInstance().init(imageLoaderConfiguration);
@@ -147,13 +189,6 @@ public class CommonsApplication extends Application {
                 }
             };
         }
-
-        //For caching area -> categories
-        cacheData  = new CacheController();
-
-        DiskBasedCache cache = new DiskBasedCache(getCacheDir(), 16 * 1024 * 1024);
-        volleyQueue = new RequestQueue(cache, new BasicNetwork(new HurlStack()));
-        volleyQueue.start();
     }
 
     private com.android.volley.toolbox.ImageLoader imageLoader;
@@ -161,7 +196,7 @@ public class CommonsApplication extends Application {
 
     public com.android.volley.toolbox.ImageLoader getImageLoader() {
         if(imageLoader == null) {
-            imageLoader = new com.android.volley.toolbox.ImageLoader(volleyQueue, new com.android.volley.toolbox.ImageLoader.ImageCache() {
+            imageLoader = new com.android.volley.toolbox.ImageLoader(getVolleyQueue(), new com.android.volley.toolbox.ImageLoader.ImageCache() {
                 @Override
                 public Bitmap getBitmap(String key) {
                     return imageCache.get(key);
@@ -176,13 +211,9 @@ public class CommonsApplication extends Application {
         }
         return imageLoader;
     }
-    
-    public MWApi getApi() {
-        return api;
-    }
 
     /**
-     * @return Accout|null
+     * @return Account|null
      */
     public Account getCurrentAccount() {
         if(currentAccount == null) {
@@ -203,21 +234,12 @@ public class CommonsApplication extends Application {
             return false; // This should never happen
         }
         
-        accountManager.invalidateAuthToken(AccountUtil.accountType(), api.getAuthCookie());
+        accountManager.invalidateAuthToken(AccountUtil.accountType(), getMWApi().getAuthCookie());
         try {
             String authCookie = accountManager.blockingGetAuthToken(curAccount, "", false);
-            api.setAuthCookie(authCookie);
+            getMWApi().setAuthCookie(authCookie);
             return true;
-        } catch (OperationCanceledException e) {
-            e.printStackTrace();
-            return false;
-        } catch (AuthenticatorException e) {
-            e.printStackTrace();
-            return false;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        } catch (NullPointerException e) {
+        } catch (OperationCanceledException | NullPointerException | IOException | AuthenticatorException e) {
             e.printStackTrace();
             return false;
         }

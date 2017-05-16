@@ -132,7 +132,11 @@ public  class       MultipleShareActivity
                     dialog.setProgress(uploadCount);
                     if(uploadCount == photosList.size()) {
                         dialog.dismiss();
-                        Toast startingToast = Toast.makeText(getApplicationContext(), R.string.uploading_started, Toast.LENGTH_LONG);
+                        Toast startingToast = Toast.makeText(
+                                CommonsApplication.getInstance(),
+                                R.string.uploading_started,
+                                Toast.LENGTH_LONG
+                        );
                         startingToast.show();
                     }
                 }
@@ -202,9 +206,9 @@ public  class       MultipleShareActivity
         uploadController = new UploadController(this);
 
         setContentView(R.layout.activity_multiple_uploads);
+        app = CommonsApplication.getInstance();
         ButterKnife.bind(this);
         initDrawer();
-        app = (CommonsApplication)this.getApplicationContext();
 
         if(savedInstanceState != null) {
             photosList = savedInstanceState.getParcelableArrayList("uploadsList");
@@ -241,7 +245,7 @@ public  class       MultipleShareActivity
 
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
-        app.getApi().setAuthCookie(authCookie);
+        app.getMWApi().setAuthCookie(authCookie);
         Intent intent = getIntent();
 
         if(intent.getAction().equals(Intent.ACTION_SEND_MULTIPLE)) {
