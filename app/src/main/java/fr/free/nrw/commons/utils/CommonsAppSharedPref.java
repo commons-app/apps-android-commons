@@ -6,17 +6,19 @@ import android.preference.PreferenceManager;
 
 import java.util.Map;
 
+import fr.free.nrw.commons.CommonsApplication;
+
 public class CommonsAppSharedPref {
     private SharedPreferences sharedPreferences;
     private static CommonsAppSharedPref instance;
 
-    private CommonsAppSharedPref(Context context){
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+    private CommonsAppSharedPref(){
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(CommonsApplication.app);
     }
 
-    public static CommonsAppSharedPref getInstance(Context context){
+    public static CommonsAppSharedPref getInstance(){
         if (instance == null) {
-            instance =  new CommonsAppSharedPref(context);
+            instance =  new CommonsAppSharedPref();
         }
         return instance;
     }
