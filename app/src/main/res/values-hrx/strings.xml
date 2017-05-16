@@ -52,8 +52,8 @@ Tippe uff die Nachricht orrer drücke \"Zurück\", um den Schritt zu üwerspring
   <string name="preference_tracking_summary">Nutzungsberichte an Wikimedia schicke, um der App sein  Verbessrung beizutroohn.</string>
   <string name="title_activity_settings">Instellunge</string>
   <string name="menu_about">Üwer</string>
-  <string name="about_license" fuzzy="true">Open-Source-Software veröffentlicht unner der &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
-  <string name="about_improve" fuzzy="true">Quellcode uff &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Fehler unner &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
+  <string name="about_license" fuzzy="true">Open-Source-Software veröffentlicht unner der &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
+  <string name="about_improve" fuzzy="true">Quellcode uff &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Fehler unner &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"//de.wikipedia.org/wiki/Wikipedia:Datenschutz\"&gt;Dateschutzrichtlinie&lt;/a&gt;</string>
   <string name="title_activity_about">Üwer</string>
   <string name="menu_feedback">Rückmeldung doorrich E-Mail schicke</string>
