@@ -7,7 +7,7 @@
   <string name="login">Войти</string>
   <string name="signup">Зарегистрироваться</string>
   <string name="logging_in_title">Вход в систему</string>
-  <string name="logging_in_message">Пожалуйста, подождите…</string>
+  <string name="logging_in_message">Подождите…</string>
   <string name="login_success">Опознание прошло успешно</string>
   <string name="login_failed">Ошибка входа в систему!</string>
   <string name="upload_failed">Файл не найден. Попробуйте другой файл.</string>
@@ -37,9 +37,9 @@
   <string name="menu_open_in_browser">Открыть в браузере</string>
   <string name="share_title_hint">Название</string>
   <string name="share_description_hint">Описание</string>
-  <string name="login_failed_network">Не удаётся войти — сбой сети</string>
-  <string name="login_failed_username">Не удалось войти — пожалуйста, проверьте своё имя пользователя</string>
-  <string name="login_failed_password">Не удалось войти — пожалуйста, проверьте свой пароль</string>
+  <string name="login_failed_network">Не удалось войти — сбой сети</string>
+  <string name="login_failed_username">Не удалось войти — проверьте своё имя пользователя</string>
+  <string name="login_failed_password">Не удалось войти — проверьте свой пароль</string>
   <string name="login_failed_throttled">Слишком много неудачных попыток. Пожалуйста, попробуйте ещё раз через несколько минут.</string>
   <string name="login_failed_blocked">Извините, но участник с таким именем был заблокирован на Викискладе</string>
   <string name="login_failed_generic">Ошибка входа в систему!</string>
