@@ -98,14 +98,14 @@ public class CommonsApplication extends Application {
     }
 
     public static CommonsApplication getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new CommonsApplication();
         }
         return instance;
     }
 
     public AbstractHttpClient getHttpClient() {
-        if(httpClient == null) {
+        if (httpClient == null) {
             httpClient = newHttpClient();
         }
         return httpClient;
@@ -123,7 +123,7 @@ public class CommonsApplication extends Application {
     }
 
     public MWApi getMWApi() {
-        if(api == null) {
+        if (api == null) {
             api = newMWApi();
         }
         return api;
@@ -134,14 +134,14 @@ public class CommonsApplication extends Application {
     }
 
     public CacheController getCacheData() {
-        if(cacheData == null) {
+        if (cacheData == null) {
             cacheData = new CacheController();
         }
         return cacheData;
     }
 
     public RequestQueue getVolleyQueue() {
-        if(volleyQueue == null) {
+        if (volleyQueue == null) {
             DiskBasedCache cache = new DiskBasedCache(getCacheDir(), 16 * 1024 * 1024);
             volleyQueue = new RequestQueue(cache, new BasicNetwork(new HurlStack()));
             volleyQueue.start();
@@ -150,7 +150,7 @@ public class CommonsApplication extends Application {
     }
 
     public synchronized DBOpenHelper getDBOpenHelper() {
-        if(dbOpenHelper == null) {
+        if (dbOpenHelper == null) {
             dbOpenHelper = new DBOpenHelper(this);
         }
         return dbOpenHelper;
