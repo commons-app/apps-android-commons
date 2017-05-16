@@ -20,9 +20,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
+import butterknife.ButterKnife;
+
 import java.util.ArrayList;
 
-import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.EventLog;
 import fr.free.nrw.commons.Media;
