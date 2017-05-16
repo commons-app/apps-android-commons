@@ -25,8 +25,8 @@ import timber.log.Timber;
 public class NearbyPlaces {
 
     private static final int MIN_RESULTS = 40;
-    private static final double INITIAL_RADIUS = 1.0;
-    private static final double MAX_RADIUS = 300.0;
+    private static final double INITIAL_RADIUS = 1.0; // in kilometer
+    private static final double MAX_RADIUS = 300.0; // in kilometer
     private static final double RADIUS_MULTIPLIER = 1.618;
     private static final String WIKIDATA_QUERY_URL = "https://query.wikidata.org/sparql?query=${QUERY}";
     private static NearbyPlaces singleton;
@@ -69,16 +69,18 @@ public class NearbyPlaces {
             throws IOException {
         List<Place> places = new ArrayList<>();
 
-        String query = FileUtils.readFromFile(context, "queries/nearby_query.rq");
+        String query = FileUtils.readFromFile(context, "queries/nearby_query.rq")
+                .replace("${RAD}", String.format(Locale.ROOT, "%.2f", radius))
+                .replace("${LAT}", String.format(Locale.ROOT, "%.4f", cur.latitude))
+                .replace("${LONG}", String.format(Locale.ROOT, "%.4f", cur.longitude))
+                .replace("${LANG}", lang);
+        Timber.v(query);
 
-        Timber.d(query);
-
-        query = query.replace("${RADIUS}", "" + radius)
-                .replace("${LAT}", "" + String.format(Locale.ROOT, "%.3f", cur.latitude))
-                .replace("${LONG}", "" + String.format(Locale.ROOT, "%.3f", cur.longitude))
-                .replace("${LANG}", "" + lang);
-        query = URLEncoder.encode(query, "utf-8").replace("+", "%20");
-        String url = WIKIDATA_QUERY_URL.replace("${QUERY}", query);
+        // format as a URL
+        String url = WIKIDATA_QUERY_URL.replace(
+                "${QUERY}",
+                URLEncoder.encode(query, "utf-8").replace("+", "%20")
+        );
         Timber.d(url);
         URLConnection conn = new URL(url).openConnection();
         conn.setRequestProperty("Accept", "text/tab-separated-values");
