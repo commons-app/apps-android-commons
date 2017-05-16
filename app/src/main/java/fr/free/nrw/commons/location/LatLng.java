@@ -6,6 +6,8 @@ public class LatLng {
     public final double longitude;
 
     /** Accepts latitude and longitude.
+     * North and South values are cut off at 90°
+     *
      * @param latitude double value
      * @param longitude double value
      */
@@ -44,14 +46,15 @@ public class LatLng {
     }
 
     /**
-     * Rounds the float to 4 digits.
+     * Rounds the float to 4 digits and returns absolute value.
      *
      * @param coordinate A coordinate value as string.
      * @return String of the rounded number.
      */
     private String formatCoordinate(double coordinate) {
         double roundedNumber = Math.round(coordinate * 10000d) / 10000d;
-        return String.valueOf(roundedNumber);
+        double absoluteNumber = Math.abs(roundedNumber);
+        return String.valueOf(absoluteNumber);
     }
 
     /**
@@ -73,7 +76,7 @@ public class LatLng {
      * @return "E" or "W".
      */
     private String getEastWest() {
-        if (this.longitude < 180) {
+        if (this.longitude >= 0 && this.longitude < 180) {
             return "E";
         }
 
