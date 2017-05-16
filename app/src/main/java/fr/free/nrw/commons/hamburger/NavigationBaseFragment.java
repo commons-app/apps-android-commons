@@ -1,11 +1,13 @@
 package fr.free.nrw.commons.hamburger;
 
 import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,7 @@ import fr.free.nrw.commons.AboutActivity;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.nearby.NearbyActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
@@ -118,6 +121,32 @@ public class NavigationBaseFragment extends Fragment {
         } catch (ActivityNotFoundException e) {
             Toast.makeText(getActivity(), R.string.no_email_client, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @OnClick(R.id.logout_item)
+    protected void onLogoutItemClicked() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+        alertDialogBuilder.setMessage(R.string.logout_verification)
+                .setCancelable(false)
+                .setPositiveButton(R.string.yes,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                ((CommonsApplication)getActivity().getApplicationContext()).clearApplicationData(getContext());
+                                Intent nearbyIntent = new Intent(getActivity(), LoginActivity.class);
+                                nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(nearbyIntent);
+                                getActivity().finish();
+                            }
+                        });
+        alertDialogBuilder.setNegativeButton(R.string.no,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
     }
 
     private void closeDrawer() {
