@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,22 +32,22 @@ public class NavigationBaseFragment extends Fragment {
     ImageView pictureOfTheDay;
 
     @BindView(R.id.upload_item)
-    TextView uploadItem;
+    LinearLayout uploadItem;
 
     @BindView(R.id.nearby_item)
-    TextView nearbyItem;
+    LinearLayout nearbyItem;
 
     @BindView(R.id.about_item)
-    TextView aboutItem;
+    LinearLayout aboutItem;
 
     @BindView(R.id.settings_item)
-    TextView settingsItem;
+    LinearLayout settingsItem;
 
     @BindView(R.id.feedback_item)
-    TextView feedbackItem;
+    LinearLayout feedbackItem;
 
     @BindView(R.id.logout_item)
-    TextView logoutItem;
+    LinearLayout logoutItem;
 
     private DrawerLayout drawerLayout;
     private RelativeLayout drawerPane;
