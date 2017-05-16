@@ -255,8 +255,7 @@ public class CommonsApplication extends Application {
         currentAccount = null;
     }
 
-    public void updateAllDatabases(Context context)
-    {
+    public void updateAllDatabases(Context context) {
         DBOpenHelper dbOpenHelper = DBOpenHelper.getInstance(context);
         dbOpenHelper.getReadableDatabase().close();
         SQLiteDatabase db = dbOpenHelper.getWritableDatabase();

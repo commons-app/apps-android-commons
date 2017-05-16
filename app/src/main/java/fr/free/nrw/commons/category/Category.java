@@ -115,6 +115,11 @@ public class Category {
             db.execSQL(CREATE_TABLE_STATEMENT);
         }
 
+        public static void onDelete(SQLiteDatabase db) {
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+            onCreate(db);
+        }
+
         public static void onUpdate(SQLiteDatabase db, int from, int to) {
             if(from == to) {
                 return;
