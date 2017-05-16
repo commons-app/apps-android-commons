@@ -287,7 +287,7 @@ public class CommonsApplication extends Application {
         }
 
         //TODO: fix preference manager 
-        PreferenceManager.getDefaultSharedPreferences(app).edit().clear().commit();
+        PreferenceManager.getDefaultSharedPreferences(getInstance()).edit().clear().commit();
         SharedPreferences preferences = context
                 .getSharedPreferences("fr.free.nrw.commons", MODE_PRIVATE);
         preferences.edit().clear().commit();
@@ -302,7 +302,7 @@ public class CommonsApplication extends Application {
      * @param context context
      */
     public void updateAllDatabases(Context context) {
-        DBOpenHelper dbOpenHelper = DBOpenHelper.getInstance(context);
+        DBOpenHelper dbOpenHelper = CommonsApplication.getInstance().getDBOpenHelper();
         dbOpenHelper.getReadableDatabase().close();
         SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
 
