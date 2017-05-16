@@ -5,9 +5,13 @@ import android.accounts.AccountManager;
 import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.support.v4.util.LruCache;
 
 import com.android.volley.RequestQueue;
@@ -20,7 +24,13 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.utils.StorageUtils;
 
+import fr.free.nrw.commons.caching.CacheController;
+import fr.free.nrw.commons.category.Category;
+import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.data.DBOpenHelper;
+import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.auth.AccountUtil;
+
 import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
@@ -35,9 +45,10 @@ import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.CoreProtocolPNames;
 
+import java.io.File;
 import java.io.IOException;
 
-import fr.free.nrw.commons.caching.CacheController;
+import fr.free.nrw.commons.utils.FileUtils;
 import timber.log.Timber;
 
 // TODO: Use ProGuard to rip out reporting when publishing
@@ -216,5 +227,48 @@ public class CommonsApplication extends Application {
         PackageManager pm = getPackageManager();
         return pm.hasSystemFeature(PackageManager.FEATURE_CAMERA) ||
                 pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT);
+    }
+
+    public void clearApplicationData(Context context) {
+        File cacheDirectory = context.getCacheDir();
+        File applicationDirectory = new File(cacheDirectory.getParent());
+        if (applicationDirectory.exists()) {
+            String[] fileNames = applicationDirectory.list();
+            for (String fileName : fileNames) {
+                if (!fileName.equals("lib")) {
+                    FileUtils.deleteFile(new File(applicationDirectory, fileName));
+                }
+            }
+        }
+
+        AccountManager accountManager = AccountManager.get(this);
+        Account[] allAccounts = accountManager.getAccountsByType(AccountUtil.accountType());
+        for (int index = 0; index < allAccounts.length; index++) {
+            accountManager.removeAccount(allAccounts[index], null, null);
+        }
+
+        //TODO: fix preference manager 
+        PreferenceManager.getDefaultSharedPreferences(app).edit().clear().commit();
+        SharedPreferences preferences = context
+                .getSharedPreferences("fr.free.nrw.commons", MODE_PRIVATE);
+        preferences.edit().clear().commit();
+        context.getSharedPreferences("prefs", Context.MODE_PRIVATE).edit().clear().commit();
+        preferences.edit().putBoolean("firstrun", false).apply();
+        updateAllDatabases(context);
+        currentAccount = null;
+    }
+
+    /**
+     * Deletes all tables and re-creates them.
+     * @param context context
+     */
+    public void updateAllDatabases(Context context) {
+        DBOpenHelper dbOpenHelper = DBOpenHelper.getInstance(context);
+        dbOpenHelper.getReadableDatabase().close();
+        SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
+
+        ModifierSequence.Table.onDelete(db);
+        Category.Table.onDelete(db);
+        Contribution.Table.onDelete(db);
     }
 }

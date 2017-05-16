@@ -3,6 +3,7 @@ package fr.free.nrw.commons.utils;
 import android.content.Context;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -32,4 +33,26 @@ public class FileUtils {
         }
         return stringBuilder;
     }
+
+    /**
+     * Deletes files.
+     * @param file context
+     */
+    public static boolean deleteFile(File file) {
+        boolean deletedAll = true;
+        if (file != null) {
+            if (file.isDirectory()) {
+                String[] children = file.list();
+                for (int i = 0; i < children.length; i++) {
+                    deletedAll = deleteFile(new File(file, children[i])) && deletedAll;
+                }
+            } else {
+                deletedAll = file.delete();
+            }
+        }
+
+        return deletedAll;
+    }
+
+
 }
