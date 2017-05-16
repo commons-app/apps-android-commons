@@ -25,6 +25,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.EventLog;
 import fr.free.nrw.commons.R;
@@ -214,7 +215,8 @@ public  class       ShareActivity
         super.onCreate(savedInstanceState);
         uploadController = new UploadController(this);
         setContentView(R.layout.activity_share);
-
+        ButterKnife.bind(this);
+        initDrawer();
         app = (CommonsApplication)this.getApplicationContext();
         backgroundImageView = (ImageView)findViewById(R.id.backgroundImage);
 

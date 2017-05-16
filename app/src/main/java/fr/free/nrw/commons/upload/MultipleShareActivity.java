@@ -20,6 +20,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
+import butterknife.ButterKnife;
+
 import java.util.ArrayList;
 
 import fr.free.nrw.commons.CommonsApplication;
@@ -200,6 +202,8 @@ public  class       MultipleShareActivity
         uploadController = new UploadController(this);
 
         setContentView(R.layout.activity_multiple_uploads);
+        ButterKnife.bind(this);
+        initDrawer();
         app = (CommonsApplication)this.getApplicationContext();
 
         if(savedInstanceState != null) {
