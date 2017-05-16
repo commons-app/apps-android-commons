@@ -60,7 +60,10 @@ public class Sitelinks implements Parcelable {
 
     @Nullable
     private Uri sanitiseString(String stringUrl) {
-        stringUrl = stringUrl.replace("<", "").replace(">", "");
+        stringUrl = stringUrl
+                .replaceAll("<", "")
+                .replaceAll(">", "")
+                .replaceAll("\n", "");
         if (!Utils.isNullOrWhiteSpace(stringUrl) && stringUrl != null) {
             return Uri.parse(stringUrl);
         }
