@@ -38,7 +38,7 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
 
     @Override
     protected Boolean doInBackground(Void... voids) {
-        MWApi api = CommonsApplication.createMWApi();
+        MWApi api = CommonsApplication.getInstance().getMWApi();
         ApiResult result;
 
         // https://commons.wikimedia.org/w/api.php?action=query&list=allimages&format=xml&aisha1=801957214aba50cb63bb6eb1b0effa50188900ba

@@ -29,12 +29,8 @@ public class NearbyPlaces {
     private static final double MAX_RADIUS = 300.0; // in kilometer
     private static final double RADIUS_MULTIPLIER = 1.618;
     private static final String WIKIDATA_QUERY_URL = "https://query.wikidata.org/sparql?query=${QUERY}";
-    private static NearbyPlaces singleton;
     private double radius = INITIAL_RADIUS;
     private List<Place> places;
-
-    private NearbyPlaces(){
-    }
 
     List<Place> getFromWikidataQuery(Context context,
                                      LatLng curLatLng,
@@ -198,18 +194,5 @@ public class NearbyPlaces {
             }
         }
         return places;
-    }
-
-    /**
-     * Get the singleton instance of this class.
-     * The instance is created upon the first invocation of this method, and then reused.
-     *
-     * @return The singleton instance
-     */
-    public static synchronized NearbyPlaces getInstance() {
-        if (singleton == null) {
-            singleton = new NearbyPlaces();
-        }
-        return singleton;
     }
 }

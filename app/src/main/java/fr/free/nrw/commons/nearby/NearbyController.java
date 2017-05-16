@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
 import timber.log.Timber;
@@ -37,13 +38,14 @@ public class NearbyController {
         if (curLatLng == null) {
             return Collections.emptyList();
         }
+        NearbyPlaces nearbyPlaces = CommonsApplication.getInstance().getNearbyPlaces();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         List<Place> places = prefs.getBoolean("useWikidata", true)
-                ? NearbyPlaces.getInstance().getFromWikidataQuery(
+                ? nearbyPlaces.getFromWikidataQuery(
                 context,
                 curLatLng,
                 Locale.getDefault().getLanguage())
-                : NearbyPlaces.getInstance().getFromWikiNeedsPictures();
+                : nearbyPlaces.getFromWikiNeedsPictures();
         if (curLatLng != null) {
             Timber.d("Sorting places by distance...");
             final Map<Place, Double> distances = new HashMap<>();

@@ -34,7 +34,7 @@ public class TitleCategories extends AsyncTask<Void, Void, ArrayList<String>> {
     @Override
     protected ArrayList<String> doInBackground(Void... voids) {
 
-        MWApi api = CommonsApplication.createMWApi();
+        MWApi api = CommonsApplication.getInstance().getMWApi();
         ApiResult result;
         ArrayList<String> items = new ArrayList<>();
 

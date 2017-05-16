@@ -66,7 +66,7 @@ public class MediaDataExtractor {
             throw new IllegalStateException("Tried to call MediaDataExtractor.fetch() again.");
         }
 
-        MWApi api = CommonsApplication.createMWApi();
+        MWApi api = CommonsApplication.getInstance().getMWApi();
         ApiResult result = api.action("query")
                 .param("prop", "revisions")
                 .param("titles", filename)

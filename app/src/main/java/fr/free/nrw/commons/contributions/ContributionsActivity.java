@@ -109,7 +109,7 @@ public  class       ContributionsActivity
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
         // Do a sync everytime we get here!
-        ContentResolver.requestSync(((CommonsApplication) getApplicationContext()).getCurrentAccount(), ContributionsContentProvider.AUTHORITY, new Bundle());
+        ContentResolver.requestSync(CommonsApplication.getInstance().getCurrentAccount(), ContributionsContentProvider.AUTHORITY, new Bundle());
         Intent uploadServiceIntent = new Intent(this, UploadService.class);
         uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
         startService(uploadServiceIntent);
@@ -219,7 +219,7 @@ public  class       ContributionsActivity
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         SharedPreferences sharedPref =
-                PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                PreferenceManager.getDefaultSharedPreferences(this);
         int uploads = sharedPref.getInt(Prefs.UPLOADS_SHOWING, 100);
         return new CursorLoader(this, ContributionsContentProvider.BASE_URI,
                 Contribution.Table.ALL_FIELDS, CONTRIBUTION_SELECTION, null,

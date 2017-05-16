@@ -25,6 +25,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
@@ -184,7 +185,7 @@ public class NearbyActivity extends NavigationBaseActivity {
         @Override
         protected List<Place> doInBackground(Void... params) {
             return NearbyController
-                    .loadAttractionsFromLocation(curLatLang, getApplicationContext()
+                    .loadAttractionsFromLocation(curLatLang, CommonsApplication.getInstance()
                     );
         }
 
