@@ -3,14 +3,18 @@ package fr.free.nrw.commons.settings;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatDelegate;
 import android.view.MenuItem;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.theme.NavigationBaseActivity;
 
-public class SettingsActivity extends PreferenceActivity {
+public class SettingsActivity extends NavigationBaseActivity {
+    private SettingsFragment settingsFragment;
+
     private AppCompatDelegate settingsDelegate;
 
     @Override
@@ -22,11 +26,13 @@ public class SettingsActivity extends PreferenceActivity {
             setTheme(R.style.LightAppTheme);
         }
 
-        // Display the fragment as the main content.
-        getFragmentManager().beginTransaction()
-                .replace(android.R.id.content, new SettingsFragment()).commit();
+        settingsFragment = (SettingsFragment) getFragmentManager().findFragmentById(R.id.settingsFragment);
 
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_settings);
+
+        ButterKnife.bind(this);
+        initDrawer();
     }
 
     // Get an action bar
@@ -39,7 +45,7 @@ public class SettingsActivity extends PreferenceActivity {
         settingsDelegate.onPostCreate(savedInstanceState);
 
         //Get an up button
-        settingsDelegate.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //settingsDelegate.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     //Handle action-bar clicks
