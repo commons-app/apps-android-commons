@@ -1,12 +1,9 @@
 package fr.free.nrw.commons.nearby;
 
-
 import android.content.Context;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.LocationManager;
-
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -20,23 +17,21 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.location.LocationServiceManager;
-import fr.free.nrw.commons.theme.BaseActivity;
-import fr.free.nrw.commons.utils.UriSerializer;
-
-import fr.free.nrw.commons.R;
-import timber.log.Timber;
-
 import java.util.List;
 
-public class NearbyActivity extends BaseActivity {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.location.LocationServiceManager;
+import fr.free.nrw.commons.theme.NavigationBaseActivity;
+import fr.free.nrw.commons.utils.UriSerializer;
+import timber.log.Timber;
+
+public class NearbyActivity extends NavigationBaseActivity {
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
     private boolean isMapViewActive = false;
@@ -64,7 +59,7 @@ public class NearbyActivity extends BaseActivity {
         curLatLang = locationManager.getLatestLocation();
         nearbyAsyncTask = new NearbyAsyncTask(this);
         nearbyAsyncTask.execute();
-
+        initDrawer();
     }
 
     @Override
@@ -250,5 +245,10 @@ public class NearbyActivity extends BaseActivity {
         fragment.setArguments(bundle);
         fragmentTransaction.replace(R.id.container, fragment);
         fragmentTransaction.commit();
+    }
+
+    public static void startYourself(Context context) {
+        Intent settingsIntent = new Intent(context, NearbyActivity.class);
+        context.startActivity(settingsIntent);
     }
 }
