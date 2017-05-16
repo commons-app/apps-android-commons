@@ -131,8 +131,10 @@ public class NavigationBaseFragment extends Fragment {
                 .setPositiveButton(R.string.yes,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                ((CommonsApplication)getActivity().getApplicationContext()).clearApplicationData(getContext());
-                                Intent nearbyIntent = new Intent(getActivity(), LoginActivity.class);
+                                ((CommonsApplication)getActivity().getApplicationContext())
+                                        .clearApplicationData(getContext());
+                                Intent nearbyIntent = new Intent
+                                        (getActivity(), LoginActivity.class);
                                 nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(nearbyIntent);

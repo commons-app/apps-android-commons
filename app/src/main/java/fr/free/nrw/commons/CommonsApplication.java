@@ -24,7 +24,13 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.utils.StorageUtils;
 
+import fr.free.nrw.commons.caching.CacheController;
+import fr.free.nrw.commons.category.Category;
+import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.data.DBOpenHelper;
+import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.auth.AccountUtil;
+
 import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
@@ -42,11 +48,7 @@ import org.apache.http.params.CoreProtocolPNames;
 import java.io.File;
 import java.io.IOException;
 
-import fr.free.nrw.commons.caching.CacheController;
-import fr.free.nrw.commons.category.Category;
-import fr.free.nrw.commons.contributions.Contribution;
-import fr.free.nrw.commons.data.DBOpenHelper;
-import fr.free.nrw.commons.modifications.ModifierSequence;
+import fr.free.nrw.commons.utils.FileUtils;
 import timber.log.Timber;
 
 // TODO: Use ProGuard to rip out reporting when publishing
@@ -234,7 +236,7 @@ public class CommonsApplication extends Application {
             String[] fileNames = applicationDirectory.list();
             for (String fileName : fileNames) {
                 if (!fileName.equals("lib")) {
-                    deleteFile(new File(applicationDirectory, fileName));
+                    FileUtils.deleteFile(new File(applicationDirectory, fileName));
                 }
             }
         }
@@ -247,14 +249,19 @@ public class CommonsApplication extends Application {
 
         //TODO: fix preference manager 
         PreferenceManager.getDefaultSharedPreferences(app).edit().clear().commit();
-        SharedPreferences preferences = context.getSharedPreferences("fr.free.nrw.commons", MODE_PRIVATE);
+        SharedPreferences preferences = context
+                .getSharedPreferences("fr.free.nrw.commons", MODE_PRIVATE);
         preferences.edit().clear().commit();
-        context.getSharedPreferences("prefs", Context.MODE_PRIVATE).edit().clear().commit();;
+        context.getSharedPreferences("prefs", Context.MODE_PRIVATE).edit().clear().commit();
         preferences.edit().putBoolean("firstrun", false).apply();
         updateAllDatabases(context);
         currentAccount = null;
     }
 
+    /**
+     * Deletes all tables and re-creates them.
+     * @param context context
+     */
     public void updateAllDatabases(Context context) {
         DBOpenHelper dbOpenHelper = DBOpenHelper.getInstance(context);
         dbOpenHelper.getReadableDatabase().close();
@@ -263,21 +270,5 @@ public class CommonsApplication extends Application {
         ModifierSequence.Table.onDelete(db);
         Category.Table.onDelete(db);
         Contribution.Table.onDelete(db);
-    }
-
-    public static boolean deleteFile(File file) {
-        boolean deletedAll = true;
-        if (file != null) {
-            if (file.isDirectory()) {
-                String[] children = file.list();
-                for (int i = 0; i < children.length; i++) {
-                    deletedAll = deleteFile(new File(file, children[i])) && deletedAll;
-                }
-            } else {
-                deletedAll = file.delete();
-            }
-        }
-
-        return deletedAll;
     }
 }
