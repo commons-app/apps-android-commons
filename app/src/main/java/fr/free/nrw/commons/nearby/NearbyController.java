@@ -1,8 +1,6 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
@@ -17,6 +15,7 @@ import java.util.Map;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.utils.CommonsAppSharedPref;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.utils.LengthUtils.computeDistanceBetween;
@@ -37,8 +36,8 @@ public class NearbyController {
         if (curLatLng == null) {
             return Collections.emptyList();
         }
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        List<Place> places = prefs.getBoolean("useWikidata", true)
+        List<Place> places = CommonsAppSharedPref.getInstance(context)
+                .getPreferenceBoolean("useWikidata", true)
                 ? NearbyPlaces.getInstance().getFromWikidataQuery(
                 context,
                 curLatLng,

@@ -2,9 +2,7 @@ package fr.free.nrw.commons.contributions;
 
 import android.Manifest;
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -30,6 +28,7 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.nearby.NearbyActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
+import fr.free.nrw.commons.utils.CommonsAppSharedPref;
 import timber.log.Timber;
 
 import static android.app.Activity.RESULT_OK;
@@ -58,8 +57,8 @@ public class ContributionsListFragment extends Fragment {
         }
 
         //TODO: Should this be in onResume?
-        SharedPreferences prefs = this.getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
-        String lastModified = prefs.getString("lastSyncTimestamp", "");
+        String lastModified = CommonsAppSharedPref.getInstance(this.getActivity())
+                .getPreferenceString("lastSyncTimestamp", "");
         Timber.d("Last Sync Timestamp: %s", lastModified);
 
         if (lastModified.equals("")) {

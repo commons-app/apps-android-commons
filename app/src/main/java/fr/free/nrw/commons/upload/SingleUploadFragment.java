@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -36,6 +35,7 @@ import butterknife.OnTouch;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.utils.CommonsAppSharedPref;
 import timber.log.Timber;
 
 public class SingleUploadFragment extends Fragment {
@@ -71,12 +71,8 @@ public class SingleUploadFragment extends Fragment {
                 String title = titleEdit.getText().toString();
                 String desc = descEdit.getText().toString();
 
-                //Save the title/desc in short-lived cache so next time this fragment is loaded, we can access these
-                SharedPreferences titleDesc = PreferenceManager.getDefaultSharedPreferences(getActivity());
-                SharedPreferences.Editor editor = titleDesc.edit();
-                editor.putString("Title", title);
-                editor.putString("Desc", desc);
-                editor.apply();
+                CommonsAppSharedPref.getInstance(getActivity()).putPreferenceString("Title", title);
+                CommonsAppSharedPref.getInstance(getActivity()).putPreferenceString("Desc", desc);
 
                 uploadActionInitiatedHandler.uploadActionInitiated(title, desc);
                 return true;
@@ -98,13 +94,13 @@ public class SingleUploadFragment extends Fragment {
         licenseItems.add(getString(R.string.license_name_cc_by_four));
         licenseItems.add(getString(R.string.license_name_cc_by_sa_four));
 
-        prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        license = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
+        license = CommonsAppSharedPref.getInstance(getActivity()).getPreferenceString
+                (Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
 
         Timber.d(license);
 
         ArrayAdapter<String> adapter;
-        if (PreferenceManager.getDefaultSharedPreferences(getActivity()).getBoolean("theme",true)) {
+        if (CommonsAppSharedPref.getInstance(getActivity()).getPreferenceBoolean("theme",true)) {
             // dark theme
             adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, licenseItems);
         }else {
@@ -173,9 +169,8 @@ public class SingleUploadFragment extends Fragment {
         }
 
         setLicenseSummary(license);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(Prefs.DEFAULT_LICENSE, license);
-        editor.commit();
+        CommonsAppSharedPref.getInstance(getActivity())
+                .putPreferenceString(Prefs.DEFAULT_LICENSE, license);
     }
 
     @OnTouch(R.id.share_license_summary) boolean showLicence(View view, MotionEvent motionEvent) {
@@ -192,9 +187,9 @@ public class SingleUploadFragment extends Fragment {
 
     @OnClick(R.id.titleDescButton) void setTitleDescButton() {
         //Retrieve last title and desc entered
-        SharedPreferences titleDesc = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String title = titleDesc.getString("Title", "");
-        String desc = titleDesc.getString("Desc", "");
+        CommonsAppSharedPref prefs = CommonsAppSharedPref.getInstance(getActivity());
+        String title = prefs.getPreferenceString("Title", "");
+        String desc = prefs.getPreferenceString("Desc", "");
         Timber.d("Title: %s, Desc: %s", title, desc);
 
         titleEdit.setText(title);

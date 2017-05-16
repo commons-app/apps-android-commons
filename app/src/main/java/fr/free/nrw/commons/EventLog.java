@@ -1,9 +1,7 @@
 package fr.free.nrw.commons;
 
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.preference.PreferenceManager;
 
 import org.apache.http.HttpResponse;
 import org.json.JSONException;
@@ -15,6 +13,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import fr.free.nrw.commons.settings.Prefs;
+import fr.free.nrw.commons.utils.CommonsAppSharedPref;
 import in.yuvi.http.fluent.Http;
 import timber.log.Timber;
 
@@ -103,8 +102,8 @@ public class EventLog {
         // Use *only* for tracking the user preference change for EventLogging
         // Attempting to use anywhere else will cause kitten explosions
         public void log(boolean force) {
-            SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(app);
-            if(!settings.getBoolean(Prefs.TRACKING_ENABLED, true) && !force) {
+            if(!CommonsAppSharedPref.getInstance(app)
+                    .getPreferenceBoolean(Prefs.TRACKING_ENABLED, true) && !force) {
                 return; // User has disabled tracking
             }
             LogTask logTask = new LogTask();

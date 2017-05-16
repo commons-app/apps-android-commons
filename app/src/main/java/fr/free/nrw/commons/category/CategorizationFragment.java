@@ -3,14 +3,12 @@ package fr.free.nrw.commons.category;
 import android.app.Activity;
 import android.content.ContentProviderClient;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
@@ -43,6 +41,7 @@ import java.util.concurrent.TimeUnit;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.upload.MwVolleyApi;
+import fr.free.nrw.commons.utils.CommonsAppSharedPref;
 import timber.log.Timber;
 
 /**
@@ -127,8 +126,7 @@ public class CategorizationFragment extends Fragment {
         TitleCategories titleCategoriesSub;
 
         //Retrieve the title that was saved when user tapped submit icon
-        SharedPreferences titleDesc = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String title = titleDesc.getString("Title", "");
+        String title = CommonsAppSharedPref.getInstance(getActivity()).getPreferenceString("Title", "");
         Timber.d("Title: %s", title);
 
         //Override onPostExecute to access the results of async API call

@@ -70,7 +70,7 @@ public class NearbyPlaces {
         List<Place> places = new ArrayList<>();
 
         String query = FileUtils.readFromFile(context, "queries/nearby_query.rq")
-                .replace("${RAD}", String.format(Locale.ROOT, "%.2f", radius))
+                .replace("${RADIUS}", String.format(Locale.ROOT, "%.2f", radius))
                 .replace("${LAT}", String.format(Locale.ROOT, "%.4f", cur.latitude))
                 .replace("${LONG}", String.format(Locale.ROOT, "%.4f", cur.longitude))
                 .replace("${LANG}", lang);

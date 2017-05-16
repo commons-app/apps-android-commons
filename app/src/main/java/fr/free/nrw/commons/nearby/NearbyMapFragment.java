@@ -2,7 +2,6 @@ package fr.free.nrw.commons.nearby;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -27,6 +26,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.utils.CommonsAppSharedPref;
 import fr.free.nrw.commons.utils.UriDeserializer;
 
 public class NearbyMapFragment extends android.support.v4.app.Fragment {
@@ -106,7 +106,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
                 });
             }
         });
-        if (PreferenceManager.getDefaultSharedPreferences(getActivity()).getBoolean("theme",true)) {
+        if (CommonsAppSharedPref.getInstance(getActivity()).getPreferenceBoolean("theme",true)) {
             mapView.setStyleUrl(getResources().getString(R.string.map_theme_dark));
         } else {
             mapView.setStyleUrl(getResources().getString(R.string.map_theme_light));

@@ -1,11 +1,8 @@
 package fr.free.nrw.commons;
 
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.anyOf;
 import static org.hamcrest.Matchers.anything;
 
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.assertion.ViewAssertions;
@@ -16,6 +13,7 @@ import android.support.test.runner.AndroidJUnit4;
 import android.view.View;
 
 import fr.free.nrw.commons.settings.SettingsActivity;
+import fr.free.nrw.commons.utils.CommonsAppSharedPref;
 
 import java.util.Map;
 
@@ -27,7 +25,7 @@ import org.junit.runner.RunWith;
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class SettingsActivityTest {
-    private SharedPreferences prefs;
+    private CommonsAppSharedPref prefs;
     private Map<String,?> prefValues;
 
     @Rule
@@ -38,28 +36,26 @@ public class SettingsActivityTest {
                 @Override
                 protected void afterActivityLaunched() {
                     // save preferences
-                    prefs = PreferenceManager.getDefaultSharedPreferences(this.getActivity());
-                    prefValues = prefs.getAll();
+                    prefs = CommonsAppSharedPref.getInstance(getActivity());
+                    prefValues = prefs.getAllPreferences();
                 }
 
                 @Override
                 protected void afterActivityFinished() {
                     // restore preferences
-                    SharedPreferences.Editor editor = prefs.edit();
                     for (Map.Entry<String,?> entry: prefValues.entrySet()) {
                         String key = entry.getKey();
                         Object val = entry.getValue();
                         if (val instanceof String) {
-                            editor.putString(key, (String)val);
+                            prefs.putPreferenceString(key, (String)val);
                         } else if (val instanceof Boolean) {
-                            editor.putBoolean(key, (Boolean)val);
+                            prefs.putPreferenceBoolean(key, (Boolean)val);
                         } else if (val instanceof Integer) {
-                            editor.putInt(key, (Integer)val);
+                            prefs.putPreferenceInt(key, (Integer)val);
                         } else {
                             throw new RuntimeException("type not implemented: " + entry);
                         }
                     }
-                    editor.apply();
                 }
             };
 

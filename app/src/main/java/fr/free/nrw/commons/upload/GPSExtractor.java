@@ -1,18 +1,17 @@
 package fr.free.nrw.commons.upload;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.ExifInterface;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 
 import java.io.IOException;
 
+import fr.free.nrw.commons.utils.CommonsAppSharedPref;
 import timber.log.Timber;
 
 /**
@@ -43,8 +42,7 @@ public class GPSExtractor {
      * @return true if enabled, false if disabled
      */
     private boolean gpsPreferenceEnabled() {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
-        boolean gpsPref = sharedPref.getBoolean("allowGps", false);
+        boolean gpsPref = CommonsAppSharedPref.getInstance(context).getPreferenceBoolean("allowGps", false);
         Timber.d("Gps pref set to: %b", gpsPref);
         return gpsPref;
     }

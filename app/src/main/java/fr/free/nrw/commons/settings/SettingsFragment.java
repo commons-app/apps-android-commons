@@ -2,17 +2,16 @@ package fr.free.nrw.commons.settings;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.utils.CommonsAppSharedPref;
 
 public class SettingsFragment extends PreferenceFragment {
     @Override
@@ -45,9 +44,9 @@ public class SettingsFragment extends PreferenceFragment {
         });
 
         final EditTextPreference uploadLimit = (EditTextPreference) findPreference("uploads");
-        final SharedPreferences sharedPref = PreferenceManager
-                .getDefaultSharedPreferences(getActivity().getApplicationContext());
-        int uploads = sharedPref.getInt(Prefs.UPLOADS_SHOWING, 100);
+        final CommonsAppSharedPref commonsAppSharedPref = CommonsAppSharedPref
+                .getInstance(getActivity());
+        int uploads = commonsAppSharedPref.getPreferenceInt(Prefs.UPLOADS_SHOWING, 100);
         uploadLimit.setText(uploads + "");
         uploadLimit.setSummary(uploads + "");
         uploadLimit.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
@@ -55,7 +54,6 @@ public class SettingsFragment extends PreferenceFragment {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 int value = Integer.parseInt(newValue.toString());
-                final SharedPreferences.Editor editor = sharedPref.edit();
                 if (value > 500) {
                     new AlertDialog.Builder(getActivity())
                             .setTitle(R.string.maximum_limit)
@@ -67,16 +65,15 @@ public class SettingsFragment extends PreferenceFragment {
                                     })
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .show();
-                    editor.putInt(Prefs.UPLOADS_SHOWING, 500);
-                    editor.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED,true);
+                    commonsAppSharedPref.putPreferenceInt(Prefs.UPLOADS_SHOWING, 500);
+                    commonsAppSharedPref.putPreferenceBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED,true);
                     uploadLimit.setSummary(500 + "");
                     uploadLimit.setText(500 + "");
                 } else {
-                    editor.putInt(Prefs.UPLOADS_SHOWING, Integer.parseInt(newValue.toString()));
-                    editor.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED,true);
+                    commonsAppSharedPref.putPreferenceInt(Prefs.UPLOADS_SHOWING, Integer.parseInt(newValue.toString()));
+                    commonsAppSharedPref.putPreferenceBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED,true);
                     uploadLimit.setSummary(newValue.toString());
                 }
-                editor.apply();
                 return true;
             }
 

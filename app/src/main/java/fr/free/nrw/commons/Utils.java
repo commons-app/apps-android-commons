@@ -3,13 +3,13 @@ package fr.free.nrw.commons;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Build;
-import android.preference.PreferenceManager;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 import fr.free.nrw.commons.settings.Prefs;
+import fr.free.nrw.commons.utils.CommonsAppSharedPref;
 import timber.log.Timber;
 
 import java.io.BufferedInputStream;
@@ -310,7 +310,7 @@ public class Utils {
     }
 
     public static boolean isDarkTheme(Context context) {
-        if (PreferenceManager.getDefaultSharedPreferences(context).getBoolean("theme",true)) {
+        if (CommonsAppSharedPref.getInstance(context).getPreferenceBoolean("theme",true)) {
             return true;
         }else {
             return false;

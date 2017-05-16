@@ -5,7 +5,6 @@ import android.content.AbstractThreadedSyncAdapter;
 import android.content.ContentProviderClient;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.SyncResult;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -21,6 +20,7 @@ import java.util.Date;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.MWApi;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.utils.CommonsAppSharedPref;
 import timber.log.Timber;
 
 public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
@@ -62,8 +62,8 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
         // This code is fraught with possibilities of race conditions, but lalalalala I can't hear you!
         String user = account.name;
         MWApi api = CommonsApplication.createMWApi();
-        SharedPreferences prefs = this.getContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
-        String lastModified = prefs.getString("lastSyncTimestamp", "");
+        String lastModified = CommonsAppSharedPref.getInstance(this.getContext())
+                .getPreferenceString("lastSyncTimestamp", "");
         Date curTime = new Date();
         ApiResult result;
         Boolean done = false;
@@ -131,7 +131,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                 done = true;
             }
         }
-        prefs.edit().putString("lastSyncTimestamp", Utils.toMWDate(curTime)).apply();
+        CommonsAppSharedPref.getInstance(this.getContext()).putPreferenceString("lastSyncTimestamp", Utils.toMWDate(curTime));
         Timber.d("Oh hai, everyone! Look, a kitty!");
     }
 }

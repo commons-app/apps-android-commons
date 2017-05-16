@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import fr.free.nrw.commons.*;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
+import fr.free.nrw.commons.utils.CommonsAppSharedPref;
 import timber.log.Timber;
 
 
@@ -26,7 +27,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
     public static final String PARAM_USERNAME = "fr.free.nrw.commons.login.username";
 
-    private SharedPreferences prefs = null;
+    private CommonsAppSharedPref prefs;
 
     private Button loginButton;
     private EditText usernameEdit;
@@ -51,7 +52,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         passwordEdit = (EditText) findViewById(R.id.loginPassword);
         twoFactorEdit = (EditText) findViewById(R.id.loginTwoFactor);
 
-        prefs = getSharedPreferences("fr.free.nrw.commons", MODE_PRIVATE);
+        prefs = CommonsAppSharedPref.getInstance(this);
 
         TextWatcher loginEnabler = newLoginTextWatcher();
         usernameEdit.addTextChangedListener(loginEnabler);
@@ -114,9 +115,9 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
     protected void onResume() {
         super.onResume();
-        if (prefs.getBoolean("firstrun", true)) {
+        if (prefs.getPreferenceBoolean("firstrun", true)) {
             this.startWelcomeIntent();
-            prefs.edit().putBoolean("firstrun", false).apply();
+            prefs.putPreferenceBoolean("firstrun", false);
         }
         if (app.getCurrentAccount() != null) {
             startMainActivity();
