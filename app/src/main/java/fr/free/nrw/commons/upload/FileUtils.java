@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload;
 
+import android.annotation.SuppressLint;
 import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
@@ -20,6 +21,8 @@ public class FileUtils {
      * @param uri The Uri to query.
      * @author paulburke
      */
+    // Can be safely suppressed, checks for isKitKat before running isDocumentUri
+    @SuppressLint("NewApi")
     public static String getPath(final Context context, final Uri uri) {
 
         final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;

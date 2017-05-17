@@ -21,7 +21,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
@@ -31,7 +30,7 @@ import com.android.volley.toolbox.ImageLoader.ImageListener;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 
-public class MediaWikiImageView extends ImageView {
+public class MediaWikiImageView extends android.support.v7.widget.AppCompatImageView {
 
     private Media mMedia;
 
