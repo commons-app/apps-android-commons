@@ -235,7 +235,7 @@ public class MediaDetailFragment extends Fragment {
                         coordinates.setText(prettyCoordinates(media));
                         uploadedDate.setText(prettyUploadedDate(media));
 
-                        categoryNames.removeAll(categoryNames);
+                        categoryNames.clear();
                         categoryNames.addAll(media.getCategories());
 
                         categoriesLoaded = true;
@@ -280,7 +280,7 @@ public class MediaDetailFragment extends Fragment {
                     desc.setText(prettyDescription(media));
                     license.setText(prettyLicense(media));
 
-                    categoryNames.removeAll(categoryNames);
+                    categoryNames.clear();
                     categoryNames.addAll(media.getCategories());
 
                     categoriesLoaded = true;
