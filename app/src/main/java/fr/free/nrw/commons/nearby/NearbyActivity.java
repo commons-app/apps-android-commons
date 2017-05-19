@@ -149,6 +149,12 @@ public class NearbyActivity extends NavigationBaseActivity {
         checkGps();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        nearbyAsyncTask.cancel(true);
+    }
+
     protected void refreshView() {
         nearbyAsyncTask = new NearbyAsyncTask(this);
         nearbyAsyncTask.execute();
