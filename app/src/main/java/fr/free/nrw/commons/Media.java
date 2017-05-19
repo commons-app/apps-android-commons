@@ -116,10 +116,6 @@ public class Media implements Parcelable {
         this.creator = creator;
     }
 
-    public String getThumbnailUrl(int width) {
-        return Utils.makeThumbUrl(getImageUrl(), getFilename(), width);
-    }
-
     public int getWidth() {
         return width;
     }

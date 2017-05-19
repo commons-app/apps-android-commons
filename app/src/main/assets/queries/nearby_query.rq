@@ -13,7 +13,7 @@ SELECT
      SERVICE wikibase:around {
        ?item wdt:P625 ?location.
        bd:serviceParam wikibase:center "Point(${LONG} ${LAT})"^^geo:wktLiteral.
-       bd:serviceParam wikibase:radius "${RADIUS}" . # Radius in kilometers.
+       bd:serviceParam wikibase:radius "${RAD}" . # Radius in kilometers.
      }
 
      # ... and without an image.

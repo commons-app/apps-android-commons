@@ -12,16 +12,17 @@ import android.os.Build;
 import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.BasicNetwork;
-import com.android.volley.toolbox.DiskBasedCache;
-import com.android.volley.toolbox.HurlStack;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.stetho.Stetho;
-import com.nostra13.universalimageloader.cache.disc.impl.TotalSizeLimitedDiscCache;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.utils.StorageUtils;
+
+import fr.free.nrw.commons.caching.CacheController;
+import fr.free.nrw.commons.category.Category;
+import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.data.DBOpenHelper;
+import fr.free.nrw.commons.modifications.ModifierSequence;
+import fr.free.nrw.commons.auth.AccountUtil;
+import fr.free.nrw.commons.nearby.NearbyPlaces;
+
 import com.squareup.leakcanary.LeakCanary;
 
 import org.acra.ACRA;
@@ -84,7 +85,6 @@ public class CommonsApplication extends Application {
     private AbstractHttpClient httpClient = null;
     private MWApi api = null;
     private CacheController cacheData = null;
-    private RequestQueue volleyQueue = null;
     private DBOpenHelper dbOpenHelper = null;
     private NearbyPlaces nearbyPlaces = null;
 
@@ -139,15 +139,6 @@ public class CommonsApplication extends Application {
         return cacheData;
     }
 
-    public RequestQueue getVolleyQueue() {
-        if (volleyQueue == null) {
-            DiskBasedCache cache = new DiskBasedCache(getCacheDir(), 16 * 1024 * 1024);
-            volleyQueue = new RequestQueue(cache, new BasicNetwork(new HurlStack()));
-            volleyQueue.start();
-        }
-        return volleyQueue;
-    }
-
     public synchronized DBOpenHelper getDBOpenHelper() {
         if (dbOpenHelper == null) {
             dbOpenHelper = new DBOpenHelper(this);
@@ -182,11 +173,6 @@ public class CommonsApplication extends Application {
         // Fire progress callbacks for every 3% of uploaded content
         System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0");
 
-        ImageLoaderConfiguration imageLoaderConfiguration = new ImageLoaderConfiguration.Builder(this)
-                .discCache(new TotalSizeLimitedDiscCache(StorageUtils.getCacheDirectory(this), 128 * 1024 * 1024))
-                .build();
-        ImageLoader.getInstance().init(imageLoaderConfiguration);
-
         Fresco.initialize(this);
 
         // Initialize EventLogging
@@ -194,14 +180,6 @@ public class CommonsApplication extends Application {
 
         //For caching area -> categories
         cacheData  = new CacheController();
-
-        DiskBasedCache cache = new DiskBasedCache(getCacheDir(), 16 * 1024 * 1024);
-        volleyQueue = new RequestQueue(cache, new BasicNetwork(new HurlStack()));
-        volleyQueue.start();
-    }
-
-    public MWApi getApi() {
-        return api;
     }
 
     /**
@@ -268,15 +246,14 @@ public class CommonsApplication extends Application {
         preferences.edit().clear().commit();
         context.getSharedPreferences("prefs", Context.MODE_PRIVATE).edit().clear().commit();
         preferences.edit().putBoolean("firstrun", false).apply();
-        updateAllDatabases(context);
+        updateAllDatabases();
         currentAccount = null;
     }
 
     /**
      * Deletes all tables and re-creates them.
-     * @param context context
      */
-    public void updateAllDatabases(Context context) {
+    public void updateAllDatabases() {
         DBOpenHelper dbOpenHelper = CommonsApplication.getInstance().getDBOpenHelper();
         dbOpenHelper.getReadableDatabase().close();
         SQLiteDatabase db = dbOpenHelper.getWritableDatabase();

@@ -3,25 +3,13 @@ package fr.free.nrw.commons.contributions;
 import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.support.v4.widget.CursorAdapter;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
-
-import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
 
 class ContributionsListAdapter extends CursorAdapter {
-
-    private DisplayImageOptions contributionDisplayOptions = Utils.getGenericDisplayOptions().build();
-
     private Activity activity;
 
     public ContributionsListAdapter(Activity activity, Cursor c, int flags) {
@@ -42,36 +30,7 @@ class ContributionsListAdapter extends CursorAdapter {
         final ContributionViewHolder views = (ContributionViewHolder)view.getTag();
         final Contribution contribution = Contribution.fromCursor(cursor);
 
-        String actualUrl = (contribution.getLocalUri() != null && !TextUtils.isEmpty(contribution.getLocalUri().toString())) ? contribution.getLocalUri().toString() : contribution.getThumbnailUrl(640);
-
-        if(views.url == null || !views.url.equals(actualUrl)) {
-            if(actualUrl.startsWith("http")) {
-                MediaWikiImageView mwImageView = views.imageView;
-                mwImageView.setMedia(contribution);
-                // FIXME: For transparent images
-            } else {
-
-                ImageLoader.getInstance().displayImage(actualUrl, views.imageView, contributionDisplayOptions, new SimpleImageLoadingListener() {
-
-                    @Override
-                    public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                        if(loadedImage.hasAlpha()) {
-                            views.imageView.setBackgroundResource(android.R.color.white);
-                        }
-                        views.seqNumView.setVisibility(View.GONE);
-                    }
-
-                    @Override
-                    public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
-                        super.onLoadingFailed(imageUri, view, failReason);
-                        MediaWikiImageView mwImageView = views.imageView;
-                        mwImageView.setMedia(contribution);
-                    }
-                });
-            }
-            views.url = actualUrl;
-        }
-
+        views.imageView.setMedia(contribution);
         views.titleView.setText(contribution.getDisplayTitle());
 
         views.seqNumView.setText(String.valueOf(cursor.getPosition() + 1));

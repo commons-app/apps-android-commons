@@ -14,11 +14,10 @@ import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -59,7 +58,7 @@ public  class       ShareActivity
 
     private Uri mediaUri;
     private Contribution contribution;
-    private ImageView backgroundImageView;
+    private SimpleDraweeView backgroundImageView;
     private UploadController uploadController;
 
     private CommonsApplication cacheObj;
@@ -222,7 +221,7 @@ public  class       ShareActivity
         ButterKnife.bind(this);
         initDrawer();
         app = CommonsApplication.getInstance();
-        backgroundImageView = (ImageView)findViewById(R.id.backgroundImage);
+        backgroundImageView = (SimpleDraweeView)findViewById(R.id.backgroundImage);
 
         //Receive intent from ContributionController.java when user selects picture to upload
         Intent intent = getIntent();
@@ -239,7 +238,7 @@ public  class       ShareActivity
 
         if (mediaUri != null) {
             mediaUriString = mediaUri.toString();
-            ImageLoader.getInstance().displayImage(mediaUriString, backgroundImageView);
+            backgroundImageView.setImageURI(mediaUriString);
 
             //Test SHA1 of image to see if it matches SHA1 of a file on Commons
             try {
