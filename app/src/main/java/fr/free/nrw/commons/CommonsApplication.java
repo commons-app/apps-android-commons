@@ -12,16 +12,8 @@ import android.os.Build;
 import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.BasicNetwork;
-import com.android.volley.toolbox.DiskBasedCache;
-import com.android.volley.toolbox.HurlStack;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.stetho.Stetho;
-import com.nostra13.universalimageloader.cache.disc.impl.TotalSizeLimitedDiscCache;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.utils.StorageUtils;
 
 import fr.free.nrw.commons.caching.CacheController;
 import fr.free.nrw.commons.category.Category;
@@ -166,11 +158,6 @@ public class CommonsApplication extends Application {
         // Fire progress callbacks for every 3% of uploaded content
         System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0");
 
-        ImageLoaderConfiguration imageLoaderConfiguration = new ImageLoaderConfiguration.Builder(this)
-                .discCache(new TotalSizeLimitedDiscCache(StorageUtils.getCacheDirectory(this), 128 * 1024 * 1024))
-                .build();
-        ImageLoader.getInstance().init(imageLoaderConfiguration);
-
         Fresco.initialize(this);
 
         // Initialize EventLogging
@@ -178,9 +165,6 @@ public class CommonsApplication extends Application {
 
         //For caching area -> categories
         cacheData  = new CacheController();
-
-        DiskBasedCache cache = new DiskBasedCache(getCacheDir(), 16 * 1024 * 1024);
-        new RequestQueue(cache, new BasicNetwork(new HurlStack())).start();
     }
 
     /**

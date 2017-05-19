@@ -2,12 +2,7 @@ package fr.free.nrw.commons;
 
 import android.content.Context;
 import android.net.Uri;
-import android.os.Build;
 import android.preference.PreferenceManager;
-
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 import fr.free.nrw.commons.settings.Prefs;
 import timber.log.Timber;
@@ -142,26 +137,6 @@ public class Utils {
         return outputStream.toString();
     }
 
-    private static DisplayImageOptions.Builder defaultImageOptionsBuilder;
-
-    public static DisplayImageOptions.Builder getGenericDisplayOptions() {
-        if (defaultImageOptionsBuilder == null) {
-            defaultImageOptionsBuilder = new DisplayImageOptions.Builder().cacheInMemory()
-                    .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                // List views flicker badly during data updates on Android 2.3; we
-                // haven't quite figured out why but cells seem to be rearranged oddly.
-                // Disable the fade-in on 2.3 to reduce the effect.
-                defaultImageOptionsBuilder = defaultImageOptionsBuilder
-                        .displayer(new FadeInBitmapDisplayer(300));
-            }
-            defaultImageOptionsBuilder = defaultImageOptionsBuilder
-                    .cacheInMemory()
-                    .resetViewBeforeLoading();
-        }
-        return defaultImageOptionsBuilder;
-    }
-
     private static final URLCodec urlCodec = new URLCodec();
 
     public static String urlEncode(String url) {
@@ -179,21 +154,6 @@ public class Utils {
             count++;
         }
         return count;
-    }
-
-    public static String makeThumbUrl(String imageUrl, String filename, int width) {
-        // Ugly Hack!
-        // Update: OH DEAR GOD WHAT A HORRIBLE HACK I AM SO SORRY
-        if (imageUrl.endsWith("webm")) {
-            return imageUrl.replaceFirst("test/", "test/thumb/").replace("commons/", "commons/thumb/") + "/" + width + "px--" + filename.replaceAll("File:", "").replaceAll(" ", "_") + ".jpg";
-        } else {
-            String thumbUrl = imageUrl.replaceFirst("test/", "test/thumb/").replace("commons/", "commons/thumb/") + "/" + width + "px-" + filename.replaceAll("File:", "").replaceAll(" ", "_");
-            if (thumbUrl.endsWith("jpg") || thumbUrl.endsWith("png") || thumbUrl.endsWith("jpeg")) {
-                return thumbUrl;
-            } else {
-                return thumbUrl + ".png";
-            }
-        }
     }
 
     public static String capitalize(String string) {
