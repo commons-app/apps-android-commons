@@ -1,11 +1,17 @@
 package fr.free.nrw.commons;
 
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 
 import org.mediawiki.api.ApiResult;
 
 class MediaThumbnailFetchTask extends AsyncTask<String, String, String> {
     private static final String THUMB_SIZE = "640";
+    protected final Media media;
+
+    public MediaThumbnailFetchTask(@NonNull Media media) {
+        this.media = media;
+    }
 
     @Override
     protected String doInBackground(String... params) {

@@ -84,7 +84,6 @@ public class CommonsApplication extends Application {
     private AbstractHttpClient httpClient = null;
     private MWApi api = null;
     private CacheController cacheData = null;
-    private RequestQueue volleyQueue = null;
     private DBOpenHelper dbOpenHelper = null;
     private NearbyPlaces nearbyPlaces = null;
 
@@ -139,15 +138,6 @@ public class CommonsApplication extends Application {
         return cacheData;
     }
 
-    public RequestQueue getVolleyQueue() {
-        if (volleyQueue == null) {
-            DiskBasedCache cache = new DiskBasedCache(getCacheDir(), 16 * 1024 * 1024);
-            volleyQueue = new RequestQueue(cache, new BasicNetwork(new HurlStack()));
-            volleyQueue.start();
-        }
-        return volleyQueue;
-    }
-
     public synchronized DBOpenHelper getDBOpenHelper() {
         if (dbOpenHelper == null) {
             dbOpenHelper = new DBOpenHelper(this);
@@ -190,12 +180,7 @@ public class CommonsApplication extends Application {
         cacheData  = new CacheController();
 
         DiskBasedCache cache = new DiskBasedCache(getCacheDir(), 16 * 1024 * 1024);
-        volleyQueue = new RequestQueue(cache, new BasicNetwork(new HurlStack()));
-        volleyQueue.start();
-    }
-
-    public MWApi getApi() {
-        return api;
+        new RequestQueue(cache, new BasicNetwork(new HurlStack())).start();
     }
 
     /**
@@ -262,15 +247,14 @@ public class CommonsApplication extends Application {
         preferences.edit().clear().commit();
         context.getSharedPreferences("prefs", Context.MODE_PRIVATE).edit().clear().commit();
         preferences.edit().putBoolean("firstrun", false).apply();
-        updateAllDatabases(context);
+        updateAllDatabases();
         currentAccount = null;
     }
 
     /**
      * Deletes all tables and re-creates them.
-     * @param context context
      */
-    public void updateAllDatabases(Context context) {
+    public void updateAllDatabases() {
         DBOpenHelper dbOpenHelper = CommonsApplication.getInstance().getDBOpenHelper();
         dbOpenHelper.getReadableDatabase().close();
         SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
