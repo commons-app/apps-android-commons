@@ -1,37 +1,36 @@
 package fr.free.nrw.commons.utils;
 
-import android.content.Context;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import timber.log.Timber;
+import fr.free.nrw.commons.CommonsApplication;
 
 public class FileUtils {
-    public static String readFromFile(Context context, String fileName) {
-        String stringBuilder = "";
+    /**
+     * Read and return the content of a resource file as string.
+     *
+     * @param fileName asset file's path (e.g. "/assets/queries/nearby_query.rq")
+     * @return the content of the file
+     */
+    public static String readFromResource(String fileName) throws IOException {
+        StringBuffer buffer = new StringBuffer();
         BufferedReader reader = null;
         try {
             reader = new BufferedReader(
-                    new InputStreamReader(context.getAssets().open(fileName)));
-            String mLine;
-            while ((mLine = reader.readLine()) != null) {
-                stringBuilder += mLine + "\n";
+                    new InputStreamReader(
+                            CommonsApplication.class.getResourceAsStream(fileName), "UTF-8"));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                buffer.append(line + "\n");
             }
-        } catch (IOException e) {
-            Timber.e("File not found exception", e);
         } finally {
             if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException e) {
-                    //log the exception
-                }
+                reader.close();
             }
         }
-        return stringBuilder;
+        return buffer.toString();
     }
 
     /**
