@@ -126,18 +126,15 @@ public  class       ContributionsActivity
         setContentView(R.layout.activity_contributions);
         ButterKnife.bind(this);
 
-        // Activity can call methods in the fragment by acquiring a reference to the Fragment from FragmentManager, using findFragmentById()
-        contributionsList = (ContributionsListFragment)getSupportFragmentManager().findFragmentById(R.id.contributionsListFragment);
+        // Activity can call methods in the fragment by acquiring a
+        // reference to the Fragment from FragmentManager, using findFragmentById()
+        contributionsList = (ContributionsListFragment)getSupportFragmentManager()
+                .findFragmentById(R.id.contributionsListFragment);
 
         getSupportFragmentManager().addOnBackStackChangedListener(this);
         if (savedInstanceState != null) {
-            mediaDetails = (MediaDetailPagerFragment)getSupportFragmentManager().findFragmentById(R.id.contributionsFragmentContainer);
-            // onBackStackChanged uses mediaDetails.isVisible() but this returns false now.
-            // Use the saved value from before pause or orientation change.
-            if (mediaDetails != null && savedInstanceState.getBoolean("mediaDetailsVisible")) {
-                // Feels awful that we have to reset this manually!
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            }
+            mediaDetails = (MediaDetailPagerFragment)getSupportFragmentManager()
+                    .findFragmentById(R.id.contributionsFragmentContainer);
         }
         requestAuthToken();
         initDrawer();
@@ -241,7 +238,10 @@ public  class       ContributionsActivity
             getSupportActionBar().setSubtitle(getResources()
                     .getString(R.string.contributions_subtitle_zero));
         } else {
-            getSupportActionBar().setSubtitle(getResources().getQuantityString(R.plurals.contributions_subtitle, cursor.getCount(), cursor.getCount()));
+            getSupportActionBar().setSubtitle(getResources()
+                    .getQuantityString(R.plurals.contributions_subtitle,
+                            cursor.getCount(),
+                            cursor.getCount()));
         }
 
         contributionsList.clearSyncMessage();
@@ -314,11 +314,7 @@ public  class       ContributionsActivity
 
     @Override
     public void onBackStackChanged() {
-        if(mediaDetails != null && mediaDetails.isVisible()) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        } else {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        }
+        initBackButton();
     }
 
     @Override
