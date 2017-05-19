@@ -3,14 +3,12 @@ package fr.free.nrw.commons;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.util.LruCache;
 import android.util.AttributeSet;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
 public class MediaWikiImageView extends SimpleDraweeView {
     private ThumbnailFetchTask currentThumbnailTask;
-    LruCache<String, String> thumbnailUrlCache = new LruCache<>(1024);
 
     public MediaWikiImageView(Context context) {
         this(context, null);
@@ -29,14 +27,13 @@ public class MediaWikiImageView extends SimpleDraweeView {
             currentThumbnailTask.cancel(true);
         }
         if(media == null) {
-            setImageURI((String) null);
             return;
         }
 
-        if (thumbnailUrlCache.get(media.getFilename()) != null) {
-            setImageUrl(thumbnailUrlCache.get(media.getFilename()));
+        if (CommonsApplication.getInstance().getThumbnailUrlCache().get(media.getFilename()) != null) {
+            setImageUrl(CommonsApplication.getInstance().getThumbnailUrlCache().get(media.getFilename()));
         } else {
-            setImageURI((String) null);
+            setImageUrl(null);
             currentThumbnailTask = new ThumbnailFetchTask(media);
             currentThumbnailTask.execute(media.getFilename());
         }
@@ -64,7 +61,7 @@ public class MediaWikiImageView extends SimpleDraweeView {
             if (isCancelled()) {
                 return;
             }
-            thumbnailUrlCache.put(media.getFilename(), result);
+            CommonsApplication.getInstance().getThumbnailUrlCache().put(media.getFilename(), result);
             setImageUrl(result);
         }
     }

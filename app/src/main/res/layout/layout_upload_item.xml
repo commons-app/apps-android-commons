@@ -14,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="192dp"
         app:actualImageScaleType="centerCrop"
-        />
+        app:placeholderImage="@drawable/ic_image_black_24dp"
+        app:failureImage="@drawable/ic_error_outline_black_24dp" />
 
     <RelativeLayout
         android:id="@+id/uploadOverlay"
