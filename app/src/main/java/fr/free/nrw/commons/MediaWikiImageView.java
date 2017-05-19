@@ -1,6 +1,7 @@
 package fr.free.nrw.commons;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.util.LruCache;
 import android.util.AttributeSet;
@@ -27,15 +28,16 @@ public class MediaWikiImageView extends SimpleDraweeView {
         if (currentThumbnailTask != null) {
             currentThumbnailTask.cancel(true);
         }
-        setImageURI((String) null);
         if(media == null) {
+            setImageURI((String) null);
             return;
         }
 
         if (thumbnailUrlCache.get(media.getFilename()) != null) {
             setImageUrl(thumbnailUrlCache.get(media.getFilename()));
         } else {
-            currentThumbnailTask = new ThumbnailFetchTask();
+            setImageURI((String) null);
+            currentThumbnailTask = new ThumbnailFetchTask(media);
             currentThumbnailTask.execute(media.getFilename());
         }
     }
@@ -53,11 +55,16 @@ public class MediaWikiImageView extends SimpleDraweeView {
     }
 
     private class ThumbnailFetchTask extends MediaThumbnailFetchTask {
+        ThumbnailFetchTask(@NonNull Media media) {
+            super(media);
+        }
+
         @Override
         protected void onPostExecute(String result) {
             if (isCancelled()) {
                 return;
             }
+            thumbnailUrlCache.put(media.getFilename(), result);
             setImageUrl(result);
         }
     }

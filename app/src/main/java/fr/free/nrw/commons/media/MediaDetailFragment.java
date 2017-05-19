@@ -2,7 +2,6 @@ package fr.free.nrw.commons.media;
 
 import android.content.Intent;
 import android.database.DataSetObserver;
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,10 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
-
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -38,13 +33,8 @@ import timber.log.Timber;
 public class MediaDetailFragment extends Fragment {
 
     private boolean editable;
-    private DisplayImageOptions displayOptions;
     private MediaDetailPagerFragment.MediaDetailProvider detailProvider;
     private int index;
-
-    public static MediaDetailFragment forMedia(int index) {
-        return forMedia(index, false);
-    }
 
     public static MediaDetailFragment forMedia(int index, boolean editable) {
         MediaDetailFragment mf = new MediaDetailFragment();
@@ -188,93 +178,44 @@ public class MediaDetailFragment extends Fragment {
 
     private void displayMediaDetails(final Media media) {
         //Always load image from Internet to allow viewing the desc, license, and cats
-        String actualUrl = media.getThumbnailUrl(640);
-        if(actualUrl.startsWith("http")) {
-            Timber.d("Actual URL starts with http and is: %s", actualUrl);
+        MediaWikiImageView mwImage = (MediaWikiImageView) image;
+        mwImage.setMedia(media);
 
-            MediaWikiImageView mwImage = (MediaWikiImageView)image;
-            mwImage.setMedia(media);
+        // FIXME: For transparent images
+        // FIXME: keep the spinner going while we load data
+        // FIXME: cache this data
+        // Load image metadata: desc, license, categories
+        detailFetchTask = new AsyncTask<Void, Void, Boolean>() {
+            private MediaDataExtractor extractor;
 
-            // FIXME: For transparent images
-            // FIXME: keep the spinner going while we load data
-            // FIXME: cache this data
-            // Load image metadata: desc, license, categories
-            detailFetchTask = new AsyncTask<Void, Void, Boolean>() {
-                private MediaDataExtractor extractor;
+            @Override
+            protected void onPreExecute() {
+                extractor = new MediaDataExtractor(media.getFilename(), licenseList);
+            }
 
-                @Override
-                protected void onPreExecute() {
-                    extractor = new MediaDataExtractor(media.getFilename(), licenseList);
+            @Override
+            protected Boolean doInBackground(Void... voids) {
+                try {
+                    extractor.fetch();
+                    return Boolean.TRUE;
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
+                return Boolean.FALSE;
+            }
 
-                @Override
-                protected Boolean doInBackground(Void... voids) {
-                    try {
-                        extractor.fetch();
-                        return Boolean.TRUE;
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    return Boolean.FALSE;
-                }
+            @Override
+            protected void onPostExecute(Boolean success) {
+                detailFetchTask = null;
 
-                @Override
-                protected void onPostExecute(Boolean success) {
-                    detailFetchTask = null;
-
-                    if (success) {
-                        extractor.fill(media);
-
-                        // Set text of desc, license, and categories
-                        desc.setText(prettyDescription(media));
-                        license.setText(prettyLicense(media));
-                        coordinates.setText(prettyCoordinates(media));
-                        uploadedDate.setText(prettyUploadedDate(media));
-
-                        categoryNames.clear();
-                        categoryNames.addAll(media.getCategories());
-
-                        categoriesLoaded = true;
-                        categoriesPresent = (categoryNames.size() > 0);
-                        if (!categoriesPresent) {
-                            // Stick in a filler element.
-                            categoryNames.add(getString(R.string.detail_panel_cats_none));
-                        }
-                        rebuildCatList();
-                    } else {
-                        Timber.d("Failed to load photo details.");
-                    }
-                }
-            };
-            detailFetchTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-        } else {
-            //This should not usually happen, image along with associated details should always be loaded from Internet, but keeping this for now for backup.
-            //Even if image is loaded from device storage, it will display, albeit with empty desc and cat.
-            Timber.d("Actual URL does not start with http and is: %s", actualUrl);
-            com.nostra13.universalimageloader.core.ImageLoader.getInstance().displayImage(actualUrl, image, displayOptions, new ImageLoadingListener() {
-                @Override
-                public void onLoadingStarted(String s, View view) {
-                    loadingProgress.setVisibility(View.VISIBLE);
-                }
-
-                @Override
-                public void onLoadingFailed(String s, View view, FailReason failReason) {
-                    loadingProgress.setVisibility(View.GONE);
-                    loadingFailed.setVisibility(View.VISIBLE);
-                }
-
-                @Override
-                public void onLoadingComplete(String s, View view, Bitmap bitmap) {
-                    loadingProgress.setVisibility(View.GONE);
-                    loadingFailed.setVisibility(View.GONE);
-                    image.setVisibility(View.VISIBLE);
-                    if(bitmap.hasAlpha()) {
-                        image.setBackgroundResource(android.R.color.white);
-                    }
+                if (success) {
+                    extractor.fill(media);
 
                     // Set text of desc, license, and categories
                     desc.setText(prettyDescription(media));
                     license.setText(prettyLicense(media));
+                    coordinates.setText(prettyCoordinates(media));
+                    uploadedDate.setText(prettyUploadedDate(media));
 
                     categoryNames.clear();
                     categoryNames.addAll(media.getCategories());
@@ -286,25 +227,16 @@ public class MediaDetailFragment extends Fragment {
                         categoryNames.add(getString(R.string.detail_panel_cats_none));
                     }
                     rebuildCatList();
+                } else {
+                    Timber.d("Failed to load photo details.");
                 }
-
-                @Override
-                public void onLoadingCancelled(String s, View view) {
-                    Timber.e("Image loading cancelled. But why?");
-                }
-            });
-        }
+            }
+        };
+        detailFetchTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
         title.setText(media.getDisplayTitle());
         desc.setText(""); // fill in from network...
         license.setText(""); // fill in from network...
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        displayOptions = Utils.getGenericDisplayOptions().build();
     }
 
     @Override
