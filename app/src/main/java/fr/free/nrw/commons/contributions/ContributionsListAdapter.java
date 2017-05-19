@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.widget.CursorAdapter;
 import android.text.TextUtils;
 import android.view.View;
@@ -15,7 +14,6 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
 
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
@@ -49,9 +47,10 @@ class ContributionsListAdapter extends CursorAdapter {
         if(views.url == null || !views.url.equals(actualUrl)) {
             if(actualUrl.startsWith("http")) {
                 MediaWikiImageView mwImageView = views.imageView;
-                mwImageView.setMedia(contribution, CommonsApplication.getInstance().getImageLoader());
+                mwImageView.setMedia(contribution);
                 // FIXME: For transparent images
             } else {
+
                 ImageLoader.getInstance().displayImage(actualUrl, views.imageView, contributionDisplayOptions, new SimpleImageLoadingListener() {
 
                     @Override
@@ -66,18 +65,11 @@ class ContributionsListAdapter extends CursorAdapter {
                     public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
                         super.onLoadingFailed(imageUri, view, failReason);
                         MediaWikiImageView mwImageView = views.imageView;
-                        mwImageView.setMedia(contribution, CommonsApplication.getInstance().getImageLoader());
+                        mwImageView.setMedia(contribution);
                     }
                 });
             }
             views.url = actualUrl;
-        }
-
-        BitmapDrawable actualImageDrawable = (BitmapDrawable)views.imageView.getDrawable();
-        if(actualImageDrawable != null && actualImageDrawable.getBitmap() != null && actualImageDrawable.getBitmap().hasAlpha()) {
-            views.imageView.setBackgroundResource(android.R.color.white);
-        } else {
-            views.imageView.setBackgroundDrawable(null);
         }
 
         views.titleView.setText(contribution.getDisplayTitle());
