@@ -23,6 +23,8 @@ import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.nearby.NearbyPlaces;
 
+import com.squareup.leakcanary.LeakCanary;
+
 import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
@@ -40,6 +42,13 @@ import org.apache.http.params.CoreProtocolPNames;
 import java.io.File;
 import java.io.IOException;
 
+import fr.free.nrw.commons.auth.AccountUtil;
+import fr.free.nrw.commons.caching.CacheController;
+import fr.free.nrw.commons.category.Category;
+import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.data.DBOpenHelper;
+import fr.free.nrw.commons.modifications.ModifierSequence;
+import fr.free.nrw.commons.nearby.NearbyPlaces;
 import fr.free.nrw.commons.utils.FileUtils;
 import timber.log.Timber;
 
@@ -147,6 +156,12 @@ public class CommonsApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
+        LeakCanary.install(this);
 
         Timber.plant(new Timber.DebugTree());
 

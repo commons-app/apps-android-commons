@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.nearby;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.StrictMode;
 
@@ -9,7 +8,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -25,22 +23,32 @@ import timber.log.Timber;
 public class NearbyPlaces {
 
     private static final int MIN_RESULTS = 40;
-    private static final double INITIAL_RADIUS = 1.0; // in kilometer
-    private static final double MAX_RADIUS = 300.0; // in kilometer
+    private static final double INITIAL_RADIUS = 1.0; // in kilometers
+    private static final double MAX_RADIUS = 300.0; // in kilometers
     private static final double RADIUS_MULTIPLIER = 1.618;
-    private static final String WIKIDATA_QUERY_URL = "https://query.wikidata.org/sparql?query=${QUERY}";
+    private static final Uri WIKIDATA_QUERY_URL = Uri.parse("https://query.wikidata.org/sparql");
+    private static final Uri WIKIDATA_QUERY_UI_URL = Uri.parse("https://query.wikidata.org/");
+    private final String wikidataQuery;
     private double radius = INITIAL_RADIUS;
     private List<Place> places;
 
-    List<Place> getFromWikidataQuery(Context context,
-                                     LatLng curLatLng,
-                                     String lang) {
+    public NearbyPlaces() {
+        try {
+            String query = FileUtils.readFromResource("/assets/queries/nearby_query.rq");
+            wikidataQuery = query;
+            Timber.v(wikidataQuery);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    List<Place> getFromWikidataQuery(LatLng curLatLng, String lang) {
         List<Place> places = Collections.emptyList();
 
         try {
             // increase the radius gradually to find a satisfactory number of nearby places
             while (radius < MAX_RADIUS) {
-                places = getFromWikidataQuery(context, curLatLng, lang, radius);
+                places = getFromWikidataQuery(curLatLng, lang, radius);
                 Timber.d("%d results at radius: %f", places.size(), radius);
                 if (places.size() >= MIN_RESULTS) {
                     break;
@@ -58,28 +66,24 @@ public class NearbyPlaces {
         return places;
     }
 
-    private List<Place> getFromWikidataQuery(Context context,
-                                             LatLng cur,
+    private List<Place> getFromWikidataQuery(LatLng cur,
                                              String lang,
                                              double radius)
             throws IOException {
         List<Place> places = new ArrayList<>();
 
-        String query = FileUtils.readFromFile(context, "queries/nearby_query.rq")
-                .replace("${RADIUS}", String.format(Locale.ROOT, "%.2f", radius))
+        String query = wikidataQuery
+                .replace("${RAD}", String.format(Locale.ROOT, "%.2f", radius))
                 .replace("${LAT}", String.format(Locale.ROOT, "%.4f", cur.latitude))
                 .replace("${LONG}", String.format(Locale.ROOT, "%.4f", cur.longitude))
                 .replace("${LANG}", lang);
 
-        Timber.d("Wikidata query "+ query);
+        Timber.v("# Wikidata query: \n" + query);
 
         // format as a URL
-        String url = WIKIDATA_QUERY_URL.replace(
-                "${QUERY}",
-                URLEncoder.encode(query, "utf-8").replace("+", "%20")
-        );
-
-        Timber.d(url);
+        Timber.d(WIKIDATA_QUERY_UI_URL.buildUpon().fragment(query).build().toString());
+        String url = WIKIDATA_QUERY_URL.buildUpon()
+                .appendQueryParameter("query", query).build().toString();
         URLConnection conn = new URL(url).openConnection();
         conn.setRequestProperty("Accept", "text/tab-separated-values");
         BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
