@@ -25,6 +25,10 @@ dependencies {
     testCompile 'junit:junit:4.12'
     androidTestCompile "com.android.support:support-annotations:${project.supportLibVersion}"
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
+
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
 }
 
 android {
