@@ -74,7 +74,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                 MWApi.RequestBuilder builder = api.action("query")
                         .param("list", "logevents")
                         .param("letype", "upload")
-                        .param("leprop", "title|timestamp")
+                        .param("leprop", "title|timestamp|ids")
                         .param("leuser", user)
                         .param("lelimit", getLimit());
                 if(!TextUtils.isEmpty(lastModified)) {
@@ -97,6 +97,11 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
             Timber.d("%d results!", uploads.size());
             ArrayList<ContentValues> imageValues = new ArrayList<>();
             for(ApiResult image: uploads) {
+                String pageId = image.getString("@pageid");
+                if (pageId.equals("0")) {
+                    // means that this upload was deleted.
+                    continue;
+                }
                 String filename = image.getString("@title");
                 if(fileExists(contentProviderClient, filename)) {
                     Timber.d("Skipping %s", filename);
