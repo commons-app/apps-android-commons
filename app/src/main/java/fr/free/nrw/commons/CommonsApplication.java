@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
+import android.support.v4.util.LruCache;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.stetho.Stetho;
@@ -84,6 +85,7 @@ public class CommonsApplication extends Application {
     private static CommonsApplication instance = null;
     private AbstractHttpClient httpClient = null;
     private MWApi api = null;
+    LruCache<String, String> thumbnailUrlCache = new LruCache<>(1024);
     private CacheController cacheData = null;
     private DBOpenHelper dbOpenHelper = null;
     private NearbyPlaces nearbyPlaces = null;
@@ -137,6 +139,10 @@ public class CommonsApplication extends Application {
             cacheData = new CacheController();
         }
         return cacheData;
+    }
+
+    public LruCache<String, String> getThumbnailUrlCache() {
+        return thumbnailUrlCache;
     }
 
     public synchronized DBOpenHelper getDBOpenHelper() {
