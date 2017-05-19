@@ -4,11 +4,11 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.hamburger.HamburgerMenuContainer;
 import fr.free.nrw.commons.hamburger.NavigationBaseFragment;
@@ -26,6 +26,8 @@ public class NavigationBaseActivity extends BaseActivity implements HamburgerMen
     @BindView(R.id.drawer_pane)
     RelativeLayout drawerPane;
 
+    private ActionBarDrawerToggle toggle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,10 +42,10 @@ public class NavigationBaseActivity extends BaseActivity implements HamburgerMen
                 baseFragment);
     }
 
-    private void initSubviews() {
+    public void initSubviews() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
+        toggle = new ActionBarDrawerToggle(this,
                 drawerLayout,
                 toolbar,
                 R.string.navigation_drawer_open,
@@ -52,6 +54,17 @@ public class NavigationBaseActivity extends BaseActivity implements HamburgerMen
         toggle.setDrawerIndicatorEnabled(true);
         toggle.syncState();
         setDrawerPaneWidth();
+    }
+
+    public void initBackButton() {
+        int backStackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
+        toggle.setDrawerIndicatorEnabled(backStackEntryCount == 0);
+        toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     private void setDrawerPaneWidth() {
