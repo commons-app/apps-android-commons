@@ -11,7 +11,6 @@ public class MediaWikiImageView extends SimpleDraweeView {
     private ThumbnailFetchTask currentThumbnailTask;
     LruCache<String, String> thumbnailUrlCache = new LruCache<>(1024);
 
-
     public MediaWikiImageView(Context context) {
         this(context, null);
     }

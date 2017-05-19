@@ -231,7 +231,7 @@ public class MediaDetailFragment extends Fragment {
                         coordinates.setText(prettyCoordinates(media));
                         uploadedDate.setText(prettyUploadedDate(media));
 
-                        categoryNames.removeAll(categoryNames);
+                        categoryNames.clear();
                         categoryNames.addAll(media.getCategories());
 
                         categoriesLoaded = true;
@@ -276,7 +276,7 @@ public class MediaDetailFragment extends Fragment {
                     desc.setText(prettyDescription(media));
                     license.setText(prettyLicense(media));
 
-                    categoryNames.removeAll(categoryNames);
+                    categoryNames.clear();
                     categoryNames.addAll(media.getCategories());
 
                     categoriesLoaded = true;
@@ -399,8 +399,7 @@ public class MediaDetailFragment extends Fragment {
             return "Uploaded date not available";
         }
         SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
-        String formattedDate = formatter.format(date);
-        return formattedDate;
+        return formatter.format(date);
     }
 
     /**
@@ -409,8 +408,6 @@ public class MediaDetailFragment extends Fragment {
      * @return Coordinates as text.
      */
     private String prettyCoordinates(Media media) {
-        String coordinates = media.getCoordinates();
-
-        return coordinates;
+        return media.getCoordinates();
     }
 }

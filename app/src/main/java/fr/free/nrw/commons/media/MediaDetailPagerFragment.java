@@ -123,7 +123,7 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
         if(savedInstanceState != null) {
             editable = savedInstanceState.getBoolean("editable");
         }
-        app = (CommonsApplication)getActivity().getApplicationContext();
+        app = CommonsApplication.getInstance();
         setHasOptionsMenu(true);
     }
 

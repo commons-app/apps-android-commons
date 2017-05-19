@@ -61,7 +61,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
             return;
         }
 
-        MWApi api = CommonsApplication.createMWApi();
+        MWApi api = CommonsApplication.getInstance().getMWApi();
         api.setAuthCookie(authCookie);
         String editToken;
 

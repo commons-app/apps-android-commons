@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.text.TextUtils;
 
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import timber.log.Timber;
 
@@ -36,7 +37,7 @@ public class CategoryContentProvider extends ContentProvider {
     private DBOpenHelper dbOpenHelper;
     @Override
     public boolean onCreate() {
-        dbOpenHelper = DBOpenHelper.getInstance(getContext());
+        dbOpenHelper = CommonsApplication.getInstance().getDBOpenHelper();
         return false;
     }
 
