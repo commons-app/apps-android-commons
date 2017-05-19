@@ -10,9 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -50,10 +48,7 @@ public class MediaDetailFragment extends Fragment {
         return mf;
     }
 
-    private ImageView image;
-    //private EditText title;
-    private ProgressBar loadingProgress;
-    private ImageView loadingFailed;
+    private MediaWikiImageView image;
     private MediaDetailSpacer spacer;
     private int initialListTop = 0;
 
@@ -105,9 +100,7 @@ public class MediaDetailFragment extends Fragment {
 
         final View view = inflater.inflate(R.layout.fragment_media_detail, container, false);
 
-        image = (ImageView) view.findViewById(R.id.mediaDetailImage);
-        loadingProgress = (ProgressBar) view.findViewById(R.id.mediaDetailImageLoading);
-        loadingFailed = (ImageView) view.findViewById(R.id.mediaDetailImageFailed);
+        image = (MediaWikiImageView) view.findViewById(R.id.mediaDetailImage);
         scrollView = (ScrollView) view.findViewById(R.id.mediaDetailScrollView);
 
         // Detail consists of a list view with main pane in header view, plus category list.
@@ -178,8 +171,7 @@ public class MediaDetailFragment extends Fragment {
 
     private void displayMediaDetails(final Media media) {
         //Always load image from Internet to allow viewing the desc, license, and cats
-        MediaWikiImageView mwImage = (MediaWikiImageView) image;
-        mwImage.setMedia(media);
+        image.setMedia(media);
 
         // FIXME: For transparent images
         // FIXME: keep the spinner going while we load data

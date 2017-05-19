@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/mainBackground"
     >
-
-    <ProgressBar
-        android:id="@+id/mediaDetailImageLoading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:indeterminate="true"
-        android:visibility="visible"
-        />
 
     <ImageView
         android:id="@+id/mediaDetailImageFailed"
@@ -28,7 +20,9 @@
         android:id="@+id/mediaDetailImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="fitCenter"
+        app:actualImageScaleType="fitCenter"
+        app:placeholderImage="@drawable/ic_image_black_24dp"
+        app:failureImage="@drawable/ic_image_black_24dp"
         />
 
     <ScrollView
