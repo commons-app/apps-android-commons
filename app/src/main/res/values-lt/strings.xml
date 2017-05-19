@@ -93,13 +93,6 @@ Paspauskite šią žinutę (ar paspauskite atgal), kad praleistumėte šį žing
   <string name="preference_theme_summary">Naudoti tamsią temą</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_pd_old_100">Viešas domenas (autorius mirė prieš 100 metų)</string>
-  <string name="license_name_pd_old">Viešas domenas (autorinių teisių apsauga baigėsi)</string>
-  <string name="license_name_pd_art">Viešas domenas (menas)</string>
-  <string name="license_name_pd_us">Viešas domenas (JAV)</string>
-  <string name="license_name_pd_usgov">Viešas domenas (JAV vyriausybė)</string>
-  <string name="license_name_pd_usgov_nasa">Viešas domenas (NASA)</string>
-  <string name="license_name_pd_ineligible">Viešas domenas (autorinių teisių apsauga netaikoma)</string>
   <string name="tutorial_1_text">Vikimedija Commons talpina daugumą paveikslėlių, kurie yra naudojami Vikipedijoje.</string>
   <string name="tutorial_1_subtext">Jūsų paveikslėliai padeda šviesti žmones visame pasaulyje!</string>
   <string name="tutorial_2_text">Prašome kelti nuotraukos, kurios yra padarytos ar sukurtos tik jūsų:</string>

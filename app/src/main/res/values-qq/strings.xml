@@ -109,19 +109,6 @@ Source and Bugs</string>
   <string name="license_name_cc_by_3_0">{{Identical|CC BY}}</string>
   <string name="license_name_cc_by_sa_4_0">{{Identical|CC BY-SA}}</string>
   <string name="license_name_cc_by_4_0">{{Identical|CC BY}}</string>
-  <string name="license_name_cc_by_sa_2_5">{{Identical|CC BY-SA}}</string>
-  <string name="license_name_cc_by_2_5">{{Identical|CC BY}}</string>
-  <string name="license_name_cc_by_sa_2_0">{{Identical|CC BY-SA}}</string>
-  <string name="license_name_cc_by_2_0">{{Identical|CC BY-SA}}</string>
-  <string name="license_name_cc_2_0">{{Identical|CC BY}}</string>
-  <string name="license_name_pd_old_100">Unused at this time.</string>
-  <string name="license_name_pd_old">Unused at this time.</string>
-  <string name="license_name_pd_art">Unused at this time.</string>
-  <string name="license_name_pd_us">Unused at this moment.</string>
-  <string name="license_name_pd_usgov">Unused at this time.</string>
-  <string name="license_name_pd_usgov_nasa">Unused at this time.</string>
-  <string name="license_name_pd_ineligible">Unused at this time.</string>
-  <string name="license_name_attribution">{{Identical|Attribution}}</string>
   <string name="tutorial_3_text">Capitals not required</string>
   <string name="welcome_wikipedia_text">Message inviting users to contribute their images.
 

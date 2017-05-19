@@ -114,22 +114,6 @@ Tryck på detta meddelande (eller gå tillbaka) för att hoppa över detta steg.
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
-  <string name="license_name_own_pd">own-pd</string>
-  <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
-  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
-  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_2_0">CC BY 2.0</string>
-  <string name="license_name_fal">Free Art License</string>
-  <string name="license_name_pd_old_100">Allmän egendom (författaren dog för över 100 år sedan)</string>
-  <string name="license_name_pd_old">Allmän egendom (upphovsrätten har löpt ut)</string>
-  <string name="license_name_pd_art">Allmän egendom (konst)</string>
-  <string name="license_name_pd_us">Allmän egendom (USA)</string>
-  <string name="license_name_pd_usgov">Allmän egendom (USA:s regering)</string>
-  <string name="license_name_pd_usgov_nasa">Allmän egendom (NASA)</string>
-  <string name="license_name_pd_ineligible">Allmän egendom (inte berättigad för upphovsrätt)</string>
-  <string name="license_name_attribution">Erkännande</string>
-  <string name="license_name_gfdl">GNU Free Documentation License</string>
   <string name="tutorial_1_text">Wikimedia Commons lagrar de flesta bilderna som används på Wikipedia.</string>
   <string name="tutorial_1_subtext">Dina bilder hjälper till att utbilda
 människor runt hela världen!</string>

@@ -114,22 +114,6 @@
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Нула</string>
-  <string name="license_name_own_pd">own-pd</string>
-  <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
-  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
-  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_2_0">CC BY 2.0</string>
-  <string name="license_name_fal">Лиценца за слободна уметност</string>
-  <string name="license_name_pd_old_100">Јавна сопственост (авторот починал барем пред 100 години)</string>
-  <string name="license_name_pd_old">Јавна сопственост (правата истекле)</string>
-  <string name="license_name_pd_art">Јавна сопственост (уметност)</string>
-  <string name="license_name_pd_us">Јавна сопственост (САД)</string>
-  <string name="license_name_pd_usgov">Јавна сопственост (Влада на САД)</string>
-  <string name="license_name_pd_usgov_nasa">Јавна сопственост (НАСА)</string>
-  <string name="license_name_pd_ineligible">Јавна сопственост (не подлежи на заштита)</string>
-  <string name="license_name_attribution">Наведи извор</string>
-  <string name="license_name_gfdl">ГНУ-ова лиценца за слободна документација</string>
   <string name="tutorial_1_text">Ризницата е вдомувач на највеќето слики што се користат на Википедија.</string>
   <string name="tutorial_1_subtext">Со вашите слики помагате во образованието
 на луѓето ширум светот!</string>

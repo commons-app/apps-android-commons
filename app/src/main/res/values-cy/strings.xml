@@ -103,22 +103,6 @@ Cyffyrddwch y neges hon (neu ddewis Nôl) i fynd i\'r cam nesaf.</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romania)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
-  <string name="license_name_own_pd">parth y cyhoedd (hunan-waith)</string>
-  <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
-  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
-  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_2_0">CC BY 2.0</string>
-  <string name="license_name_fal">Trwydded Celfyddyd Rhydd</string>
-  <string name="license_name_pd_old_100">Parth y cyhoedd (bu farw\'r awdur mwy na 100 mlynedd yn ôl)</string>
-  <string name="license_name_pd_old">Parth y cyhoedd (yr hawlfraint wedi dod i ben)</string>
-  <string name="license_name_pd_art">Parth y cyhoedd (celfyddyd gain)</string>
-  <string name="license_name_pd_us">Parth y cyhoedd (UDA)</string>
-  <string name="license_name_pd_usgov">Parth y cyhoedd (Llywodraeth UDA)</string>
-  <string name="license_name_pd_usgov_nasa">Parth y cyhoedd (NASA)</string>
-  <string name="license_name_pd_ineligible">Y parth cyhoeddus (gosod hawlfraint ddim yn gymwys)</string>
-  <string name="license_name_attribution">Cydnabyddiaeth</string>
-  <string name="license_name_gfdl">GNU Free Documentation License</string>
   <string name="welcome_wikipedia_text">Cyfranwch luniau. Cynorthwywch Wicipedia i roi bywyd yn yr erthyglau!</string>
   <string name="welcome_wikipedia_subtext">Mae\'r delweddau ar Wicipedia\'n dod o
 Gomin Wikimedia.</string>
