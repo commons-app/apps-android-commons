@@ -25,6 +25,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.EventLog;
 import fr.free.nrw.commons.R;
@@ -105,12 +106,16 @@ public  class       ShareActivity
             getFileMetadata(false);
         }
 
-        Toast startingToast = Toast.makeText(getApplicationContext(), R.string.uploading_started, Toast.LENGTH_LONG);
+        Toast startingToast = Toast.makeText(
+                CommonsApplication.getInstance(),
+                R.string.uploading_started,
+                Toast.LENGTH_LONG
+        );
         startingToast.show();
 
         if (!cacheFound) {
             //Has to be called after apiCall.request()
-            app.cacheData.cacheCategory();
+            app.getCacheData().cacheCategory();
             Timber.d("Cache the categories found");
         }
 
@@ -188,7 +193,7 @@ public  class       ShareActivity
 
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
-        app.getApi().setAuthCookie(authCookie);
+        app.getMWApi().setAuthCookie(authCookie);
 
         shareView = (SingleUploadFragment) getSupportFragmentManager().findFragmentByTag("shareView");
         categorizationFragment = (CategorizationFragment) getSupportFragmentManager().findFragmentByTag("categorization");
@@ -214,8 +219,9 @@ public  class       ShareActivity
         super.onCreate(savedInstanceState);
         uploadController = new UploadController(this);
         setContentView(R.layout.activity_share);
-
-        app = (CommonsApplication)this.getApplicationContext();
+        ButterKnife.bind(this);
+        initDrawer();
+        app = CommonsApplication.getInstance();
         backgroundImageView = (ImageView)findViewById(R.id.backgroundImage);
 
         //Receive intent from ContributionController.java when user selects picture to upload
@@ -396,12 +402,12 @@ public  class       ShareActivity
             if (imageObj.imageCoordsExists) {
                 double decLongitude = imageObj.getDecLongitude();
                 double decLatitude = imageObj.getDecLatitude();
-                app.cacheData.setQtPoint(decLongitude, decLatitude);
+                app.getCacheData().setQtPoint(decLongitude, decLatitude);
             }
 
             MwVolleyApi apiCall = new MwVolleyApi(this);
 
-            List<String> displayCatList = app.cacheData.findCategory();
+            List<String> displayCatList = app.getCacheData().findCategory();
             boolean catListEmpty = displayCatList.isEmpty();
 
             // If no categories found in cache, call MediaWiki API to match image coords with nearby Commons categories

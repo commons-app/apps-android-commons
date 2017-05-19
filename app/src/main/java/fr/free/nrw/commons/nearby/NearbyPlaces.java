@@ -25,16 +25,12 @@ import timber.log.Timber;
 public class NearbyPlaces {
 
     private static final int MIN_RESULTS = 40;
-    private static final double INITIAL_RADIUS = 1.0;
-    private static final double MAX_RADIUS = 300.0;
+    private static final double INITIAL_RADIUS = 1.0; // in kilometer
+    private static final double MAX_RADIUS = 300.0; // in kilometer
     private static final double RADIUS_MULTIPLIER = 1.618;
     private static final String WIKIDATA_QUERY_URL = "https://query.wikidata.org/sparql?query=${QUERY}";
-    private static NearbyPlaces singleton;
     private double radius = INITIAL_RADIUS;
     private List<Place> places;
-
-    private NearbyPlaces(){
-    }
 
     List<Place> getFromWikidataQuery(Context context,
                                      LatLng curLatLng,
@@ -69,16 +65,20 @@ public class NearbyPlaces {
             throws IOException {
         List<Place> places = new ArrayList<>();
 
-        String query = FileUtils.readFromFile(context, "queries/nearby_query.txt");
+        String query = FileUtils.readFromFile(context, "queries/nearby_query.rq")
+                .replace("${RADIUS}", String.format(Locale.ROOT, "%.2f", radius))
+                .replace("${LAT}", String.format(Locale.ROOT, "%.4f", cur.latitude))
+                .replace("${LONG}", String.format(Locale.ROOT, "%.4f", cur.longitude))
+                .replace("${LANG}", lang);
 
-        Timber.d(query);
+        Timber.d("Wikidata query "+ query);
 
-        query = query.replace("${RADIUS}", "" + radius)
-                .replace("${LAT}", "" + String.format(Locale.ROOT, "%.3f", cur.latitude))
-                .replace("${LONG}", "" + String.format(Locale.ROOT, "%.3f", cur.longitude))
-                .replace("${LANG}", "" + lang);
-        query = URLEncoder.encode(query, "utf-8").replace("+", "%20");
-        String url = WIKIDATA_QUERY_URL.replace("${QUERY}", query);
+        // format as a URL
+        String url = WIKIDATA_QUERY_URL.replace(
+                "${QUERY}",
+                URLEncoder.encode(query, "utf-8").replace("+", "%20")
+        );
+
         Timber.d(url);
         URLConnection conn = new URL(url).openConnection();
         conn.setRequestProperty("Accept", "text/tab-separated-values");
@@ -97,8 +97,9 @@ public class NearbyPlaces {
             String point = fields[0];
             String name = Utils.stripLocalizedString(fields[2]);
             String type = Utils.stripLocalizedString(fields[4]);
-            String sitelink = Utils.stripLocalizedString(fields[7]);
-            String wikiDataLink = Utils.stripLocalizedString(fields[3]);
+            String wikipediaSitelink = Utils.stripLocalizedString(fields[7]);
+            String commonsSitelink = Utils.stripLocalizedString(fields[8]);
+            String wikiDataLink = Utils.stripLocalizedString(fields[1]);
             String icon = fields[5];
 
             double latitude = 0;
@@ -121,8 +122,11 @@ public class NearbyPlaces {
                     type, // details
                     Uri.parse(icon),
                     new LatLng(latitude, longitude),
-                    Uri.parse(sitelink),
-                    Uri.parse(wikiDataLink)
+                    new Sitelinks.Builder()
+                            .setWikipediaLink(wikipediaSitelink)
+                            .setCommonsLink(commonsSitelink)
+                            .setWikidataLink(wikiDataLink)
+                            .build()
             ));
         }
         in.close();
@@ -180,8 +184,7 @@ public class NearbyPlaces {
                             type, // details
                             null,
                             new LatLng(latitude, longitude),
-                            null,
-                            null
+                            new Sitelinks.Builder().build()
                     ));
                 }
                 in.close();
@@ -191,18 +194,5 @@ public class NearbyPlaces {
             }
         }
         return places;
-    }
-
-    /**
-     * Get the singleton instance of this class.
-     * The instance is created upon the first invocation of this method, and then reused.
-     *
-     * @return The singleton instance
-     */
-    public static synchronized NearbyPlaces getInstance() {
-        if (singleton == null) {
-            singleton = new NearbyPlaces();
-        }
-        return singleton;
     }
 }

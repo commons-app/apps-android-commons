@@ -7,6 +7,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.theme.BaseActivity;
 import timber.log.Timber;
 
@@ -39,10 +40,14 @@ public class SignupActivity extends BaseActivity {
                 //Signup success, so clear cookies, notify user, and load LoginActivity again
                 Timber.d("Overriding URL %s", url);
 
-                Toast toast = Toast.makeText(getApplicationContext(), "Account created!", Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(
+                        CommonsApplication.getInstance(),
+                        "Account created!",
+                        Toast.LENGTH_LONG
+                );
                 toast.show();
 
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                Intent intent = new Intent(CommonsApplication.getInstance(), LoginActivity.class);
                 startActivity(intent);
                 return true;
             } else {

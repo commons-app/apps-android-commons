@@ -173,7 +173,7 @@ public class Media implements Parcelable {
     }
 
     public void setCategories(List<String> categories) {
-        this.categories.removeAll(this.categories);
+        this.categories.clear();
         this.categories.addAll(categories);
     }
 

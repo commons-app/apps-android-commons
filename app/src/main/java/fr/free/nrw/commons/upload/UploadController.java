@@ -36,7 +36,7 @@ public class UploadController {
 
     public UploadController(Activity activity) {
         this.activity = activity;
-        app = (CommonsApplication)activity.getApplicationContext();
+        app = CommonsApplication.getInstance();
     }
 
     private boolean isUploadServiceConnected;
@@ -55,7 +55,7 @@ public class UploadController {
     };
 
     public void prepareService() {
-        Intent uploadServiceIntent = new Intent(activity.getApplicationContext(), UploadService.class);
+        Intent uploadServiceIntent = new Intent(activity, UploadService.class);
         uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
         activity.startService(uploadServiceIntent);
         activity.bindService(uploadServiceIntent, uploadServiceConnection, Context.BIND_AUTO_CREATE);

@@ -49,7 +49,7 @@ class ContributionsListAdapter extends CursorAdapter {
         if(views.url == null || !views.url.equals(actualUrl)) {
             if(actualUrl.startsWith("http")) {
                 MediaWikiImageView mwImageView = views.imageView;
-                mwImageView.setMedia(contribution, ((CommonsApplication) activity.getApplicationContext()).getImageLoader());
+                mwImageView.setMedia(contribution, CommonsApplication.getInstance().getImageLoader());
                 // FIXME: For transparent images
             } else {
                 ImageLoader.getInstance().displayImage(actualUrl, views.imageView, contributionDisplayOptions, new SimpleImageLoadingListener() {
@@ -66,7 +66,7 @@ class ContributionsListAdapter extends CursorAdapter {
                     public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
                         super.onLoadingFailed(imageUri, view, failReason);
                         MediaWikiImageView mwImageView = views.imageView;
-                        mwImageView.setMedia(contribution, ((CommonsApplication) activity.getApplicationContext()).getImageLoader());
+                        mwImageView.setMedia(contribution, CommonsApplication.getInstance().getImageLoader());
                     }
                 });
             }

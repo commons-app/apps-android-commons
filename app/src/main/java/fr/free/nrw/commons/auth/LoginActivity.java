@@ -40,7 +40,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        app = (CommonsApplication) getApplicationContext();
+        app = CommonsApplication.getInstance();
 
         setContentView(R.layout.activity_login);
         final LoginActivity that = this;
@@ -199,7 +199,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     }
 
     private void showUserToast( int resId ) {
-        Toast.makeText(getApplicationContext(), resId, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, resId, Toast.LENGTH_LONG).show();
     }
 
     public void showSuccessToastAndDismissDialog() {

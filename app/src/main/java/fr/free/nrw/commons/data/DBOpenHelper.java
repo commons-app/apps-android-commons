@@ -12,16 +12,11 @@ public class DBOpenHelper  extends SQLiteOpenHelper{
 
     private static final String DATABASE_NAME = "commons.db";
     private static final int DATABASE_VERSION = 6;
-    private static DBOpenHelper singleton = null;
 
-    public static synchronized DBOpenHelper getInstance(Context context) {
-        if ( singleton == null ) {
-            singleton = new DBOpenHelper(context);
-        }
-        return singleton;
-    }
-
-    private DBOpenHelper(Context context) {
+    /**
+     * Do not use, please call CommonsApplication.getDBOpenHelper()
+     */
+    public DBOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 

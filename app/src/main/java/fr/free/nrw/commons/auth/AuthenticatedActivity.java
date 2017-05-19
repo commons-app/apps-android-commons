@@ -12,8 +12,9 @@ import java.io.IOException;
 
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.theme.NavigationBaseActivity;
 
-public abstract class AuthenticatedActivity extends BaseActivity {
+public abstract class AuthenticatedActivity extends NavigationBaseActivity {
 
     String accountType;
     CommonsApplication app;
@@ -131,7 +132,7 @@ public abstract class AuthenticatedActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        app = (CommonsApplication)this.getApplicationContext();
+        app = CommonsApplication.getInstance();
         if(savedInstanceState != null) {
             authCookie = savedInstanceState.getString("authCookie");
         }

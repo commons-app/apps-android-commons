@@ -6,7 +6,8 @@ SELECT
      (SAMPLE(COALESCE(?class_label_preferred_language, ?class_label_any_language, "?")) as ?class_label)
      (SAMPLE(COALESCE(?icon0, ?icon1)) as ?icon)
      (SAMPLE(COALESCE(?emoji0, ?emoji1)) as ?emoji)
-     (SAMPLE(?sitelink) as ?sitelink)
+     ?wikipediaArticle
+     ?commonsArticle
    WHERE {
      # Around given location...
      SERVICE wikibase:around {
@@ -37,7 +38,18 @@ SELECT
        OPTIONAL {
           ?sitelink schema:about ?item .
           ?sitelink schema:inLanguage "en"
-        }
+       }
+       OPTIONAL {
+           ?wikipediaArticle   schema:about ?item ;
+                               schema:isPartOf <https://en.wikipedia.org/> .
+           SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
+         }
+
+         OPTIONAL {
+           ?commonsArticle   schema:about ?item ;
+                               schema:isPartOf <https://commons.wikimedia.org/> .
+           SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
+         }
      }
    }
-   GROUP BY ?item
+   GROUP BY ?item ?wikipediaArticle ?commonsArticle
