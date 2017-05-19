@@ -10,7 +10,7 @@ class MediaThumbnailFetchTask extends AsyncTask<String, String, String> {
     @Override
     protected String doInBackground(String... params) {
         try {
-            MWApi api = CommonsApplication.app.getApi();
+            MWApi api = CommonsApplication.getInstance().getMWApi();
             ApiResult result =api.action("query")
                     .param("format", "xml")
                     .param("prop", "imageinfo")
