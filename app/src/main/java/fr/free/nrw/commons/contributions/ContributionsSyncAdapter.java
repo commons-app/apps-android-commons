@@ -71,7 +71,6 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
         while(!done) {
 
             try {
-                Timber.d("Example API query: https://commons.wikimedia.org/w/api.php?action=query&list=logevents&letype=upload&leuser=Sandaru&lelimit=5");
                 MWApi.RequestBuilder builder = api.action("query")
                         .param("list", "logevents")
                         .param("letype", "upload")

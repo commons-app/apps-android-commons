@@ -8,29 +8,21 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
 import android.os.Build;
+import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
-import android.support.v4.util.LruCache;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.stetho.Stetho;
 import com.nostra13.universalimageloader.cache.disc.impl.TotalSizeLimitedDiscCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.utils.StorageUtils;
-
-import fr.free.nrw.commons.caching.CacheController;
-import fr.free.nrw.commons.category.Category;
-import fr.free.nrw.commons.contributions.Contribution;
-import fr.free.nrw.commons.data.DBOpenHelper;
-import fr.free.nrw.commons.modifications.ModifierSequence;
-import fr.free.nrw.commons.auth.AccountUtil;
-import fr.free.nrw.commons.nearby.NearbyPlaces;
+import com.squareup.leakcanary.LeakCanary;
 
 import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
@@ -49,6 +41,13 @@ import org.apache.http.params.CoreProtocolPNames;
 import java.io.File;
 import java.io.IOException;
 
+import fr.free.nrw.commons.auth.AccountUtil;
+import fr.free.nrw.commons.caching.CacheController;
+import fr.free.nrw.commons.category.Category;
+import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.data.DBOpenHelper;
+import fr.free.nrw.commons.modifications.ModifierSequence;
+import fr.free.nrw.commons.nearby.NearbyPlaces;
 import fr.free.nrw.commons.utils.FileUtils;
 import timber.log.Timber;
 
@@ -166,6 +165,12 @@ public class CommonsApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
+        LeakCanary.install(this);
 
         Timber.plant(new Timber.DebugTree());
 
@@ -182,51 +187,21 @@ public class CommonsApplication extends Application {
                 .build();
         ImageLoader.getInstance().init(imageLoaderConfiguration);
 
+        Fresco.initialize(this);
+
         // Initialize EventLogging
         EventLog.setApp(this);
 
-        // based off https://developer.android.com/training/displaying-bitmaps/cache-bitmap.html
-        // Cache for 1/8th of available VM memory
-        long maxMem = Runtime.getRuntime().maxMemory();
-        if (maxMem < 48L * 1024L * 1024L) {
-            // Cache only one bitmap if VM memory is too small (such as Nexus One);
-            Timber.d("Skipping bitmap cache; max mem is: %d", maxMem);
-            imageCache = new LruCache<>(1);
-        } else {
-            int cacheSize = (int) (maxMem / (1024 * 8));
-            Timber.d("Bitmap cache size %d from max mem %d", cacheSize, maxMem);
-            imageCache = new LruCache<String, Bitmap>(cacheSize) {
-                @Override
-                protected int sizeOf(String key, Bitmap bitmap) {
-                    int bitmapSize;
-                    bitmapSize = bitmap.getByteCount();
+        //For caching area -> categories
+        cacheData  = new CacheController();
 
-                    // The cache size will be measured in kilobytes rather than number of items.
-                    return bitmapSize / 1024;
-                }
-            };
-        }
+        DiskBasedCache cache = new DiskBasedCache(getCacheDir(), 16 * 1024 * 1024);
+        volleyQueue = new RequestQueue(cache, new BasicNetwork(new HurlStack()));
+        volleyQueue.start();
     }
 
-    private com.android.volley.toolbox.ImageLoader imageLoader;
-    private LruCache<String, Bitmap> imageCache;
-
-    public com.android.volley.toolbox.ImageLoader getImageLoader() {
-        if(imageLoader == null) {
-            imageLoader = new com.android.volley.toolbox.ImageLoader(getVolleyQueue(), new com.android.volley.toolbox.ImageLoader.ImageCache() {
-                @Override
-                public Bitmap getBitmap(String key) {
-                    return imageCache.get(key);
-                }
-
-                @Override
-                public void putBitmap(String key, Bitmap bitmap) {
-                    imageCache.put(key, bitmap);
-                }
-            });
-            imageLoader.setBatchedResponseDelay(0);
-        }
-        return imageLoader;
+    public MWApi getApi() {
+        return api;
     }
 
     /**

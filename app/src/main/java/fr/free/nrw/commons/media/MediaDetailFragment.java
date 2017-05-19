@@ -17,7 +17,6 @@ import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.android.volley.toolbox.ImageLoader;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
@@ -27,7 +26,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.License;
 import fr.free.nrw.commons.LicenseList;
 import fr.free.nrw.commons.Media;
@@ -194,10 +192,8 @@ public class MediaDetailFragment extends Fragment {
         if(actualUrl.startsWith("http")) {
             Timber.d("Actual URL starts with http and is: %s", actualUrl);
 
-            ImageLoader loader = CommonsApplication.getInstance().getImageLoader();
             MediaWikiImageView mwImage = (MediaWikiImageView)image;
-            mwImage.setLoadingView(loadingProgress); //FIXME: Set this as an attribute
-            mwImage.setMedia(media, loader);
+            mwImage.setMedia(media);
 
             // FIXME: For transparent images
             // FIXME: keep the spinner going while we load data
