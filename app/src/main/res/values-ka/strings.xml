@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name" fuzzy="true">ვიკისაწყობი</string>
+  <string name="app_name">ვიკისაწყობი</string>
   <string name="menu_settings">კონფიგურაცია</string>
   <string name="username">მომხმარებლის სახელი</string>
   <string name="password">პაროლი</string>
@@ -20,7 +20,7 @@
   <string name="upload_progress_notification_title_finishing">ატვირთვის დასრულება %1$</string>
   <string name="upload_failed_notification_title">%1$ ატვირთვა ვერ მოხერხდა</string>
   <string name="upload_failed_notification_subtitle">დააჭირეთ სანახავად</string>
-  <string name="title_activity_contributions">ჩემი ატვირთვები</string>
+  <string name="title_activity_contributions" fuzzy="true">ჩემი ატვირთვები</string>
   <string name="contribution_state_in_progress">%1$d%% დასრულდა</string>
   <string name="menu_from_gallery">გალერეიდან</string>
   <string name="menu_from_camera">ფოტოს გადაღება</string>
@@ -30,10 +30,14 @@
   <string name="share_title_hint">სათაური</string>
   <string name="share_description_hint">აღწერა</string>
   <string name="share_upload_button">ატვირთვა</string>
+  <string name="provider_modifications">მოდიფიკაციები</string>
   <string name="menu_upload_single">ატვირთვა</string>
+  <string name="categories_search_text_hint">კატეგორიის არჩევა</string>
   <string name="menu_save_categories">შენახვა</string>
+  <string name="refresh_button">განახლება</string>
   <string name="categories_activity_title">კატეგორია</string>
   <string name="title_activity_settings">კონფიგურაცია</string>
+  <string name="title_activity_signup">რეგისტრაცია</string>
   <string name="menu_about">პროგრამის შესახებ</string>
   <string name="title_activity_about">პროგრამის შესახებ</string>
   <string name="menu_feedback">გამოხმაურების გაგზავნა (ელ.ფოსტით)</string>
@@ -41,8 +45,12 @@
   <string name="menu_cancel_upload">გაუქმება</string>
   <string name="menu_download">ჩამოტვირთვა</string>
   <string name="preference_license">ლიცენზია</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Attribution-ShareAlikeu00A03.0</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0Attributionu00A03.0</string>
+  <string name="preference_theme">ღამის რეჟიმი</string>
+  <string name="preference_theme_summary">მუქი თემის გამოყენება</string>
+  <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four"> Attribution 4.0</string>
+  <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by"> Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (ავსტრია)</string>
@@ -56,6 +64,8 @@
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (პოლონეთი)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (რუმინეთი)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
+  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="license_name_own_pd">own-pd</string>
   <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
@@ -74,4 +84,17 @@
   <string name="welcome_final_button_text">დიახ!</string>
   <string name="detail_panel_cats_label">კატეგორიები</string>
   <string name="detail_panel_cats_loading">იტვირთება...</string>
+  <string name="detail_description_empty">არ არის აღწერა</string>
+  <string name="detail_license_empty">უცნობი ლიცენზია</string>
+  <string name="menu_refresh">განახლება</string>
+  <string name="ok">კარგი</string>
+  <string name="title_activity_nearby">ახლომდებარე ადგილები</string>
+  <string name="warning">გაფრთხილება</string>
+  <string name="yes">დიახ</string>
+  <string name="no">არა</string>
+  <string name="media_detail_title">სათაური</string>
+  <string name="media_detail_media_title">მედიაფაილის სათაური</string>
+  <string name="media_detail_description">აღწერა</string>
+  <string name="become_a_tester_title">ბეტა ტესტირებაში მონაწილეობა</string>
+  <string name="use_wikidata">ვიკიმონაცემების გამოყენება</string>
 </resources>

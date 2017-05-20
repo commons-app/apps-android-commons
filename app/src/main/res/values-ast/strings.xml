@@ -20,11 +20,11 @@
   <string name="upload_progress_notification_title_finishing">Acabando de xubir %1$s</string>
   <string name="upload_failed_notification_title">Falló la xuba de %1$s</string>
   <string name="upload_failed_notification_subtitle">Toque pa velo</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">Xubiendo 1 ficheru</item>
     <item quantity="other">Xubiendo %d ficheros</item>
   </plurals>
-  <string name="title_activity_contributions">Les mios xubes</string>
+  <string name="title_activity_contributions" fuzzy="true">Les mios xubes</string>
   <string name="contribution_state_queued">En cola</string>
   <string name="contribution_state_failed">Falló</string>
   <string name="contribution_state_in_progress">%1$d%% completao</string>
@@ -50,24 +50,21 @@
   <string name="categories_search_text_hint">Guetar categoríes</string>
   <string name="menu_save_categories">Guardar</string>
   <string name="refresh_button">Refrescar</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Inda nun hai cargues</item>
     <item quantity="one">1 carga</item>
     <item quantity="other">%d cargues</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Principiando 1 carga</item>
     <item quantity="other">Principiando %d cargues</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 carga</item>
     <item quantity="other">%d cargues</item>
   </plurals>
   <string name="categories_not_found">Nun s\'alcontró denguna categoría que case con %1$s</string>
-  <string name="categories_skip_explanation">Amieste categoríes pa facer les imaxes más fáciles d\'alcontrar en Wikimedia Commons.
-
-Principie a escribir p\'amestar categoríes.
-Toque nesti mensaxe (o calque atrás) pa saltar esti pasu.</string>
+  <string name="categories_skip_explanation">Amieste categoríes pa facer les imaxes más fáciles d\'alcontrar en Wikimedia Commons.\n\nPrincipie a escribir p\'amestar categoríes.\nToque nesti mensaxe (o calque atrás) pa saltar esti pasu.</string>
   <string name="categories_activity_title">Categoríes</string>
   <string name="preference_tracking">Informes d\'usu</string>
   <string name="preference_tracking_summary">Unviar informes d\'usu a Wikimedia p\'ayudanos a ameyorar l\'aplicación</string>
@@ -77,7 +74,7 @@ Toque nesti mensaxe (o calque atrás) pa saltar esti pasu.</string>
   <string name="about_license">Software de códigu abiertu lliberáu baxo la &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Llicencia Apache v2&lt;/a&gt;. Wikimedia Commons ya\'l so logotipu son marques rexistraes de la Fundación Wikimedia y utilícense col so permisu. Nun tamos acreditaos pola Fundación Wikimedia nin tamos afiliaos con ella.</string>
   <string name="about_improve">El &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;códigu fonte&lt;/a&gt; ya\'l &lt;a href=\"https://commons-app.github.io/\"&gt;sitiu web&lt;/a&gt; tán en GitHub. Crea una nueva &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;incidencia en GitHub&lt;/a&gt; pa informar de problemes y suxerencies.</string>
   <string name="about_privacy_policy">Wikimedia:Commons-android-strings-about privacy policy/ast</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;CRÉDITOS&lt;/a&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;CRÉDITOS&lt;/a&gt;</string>
   <string name="title_activity_about">Tocante a</string>
   <string name="menu_feedback">Unviar comentarios (per corréu)</string>
   <string name="no_email_client">Nun s\'instaló nengún veceru de corréu</string>
@@ -133,20 +130,13 @@ Toque nesti mensaxe (o calque atrás) pa saltar esti pasu.</string>
   <string name="tutorial_1_text">Wikimedia Commons agospia la mayoría de les imáxenes que s\'usen en Wikipedia.</string>
   <string name="tutorial_1_subtext">¡Les tos imáxenes ayuden a instruir a persones de tol mundu!</string>
   <string name="tutorial_2_text">Xube namái imáxenes que tomasti o creasti tu mesmu:</string>
-  <string name="tutorial_2_subtext">- Oxetos naturales (flores, animales, montes)
-- Oxetos útiles (bicicletes, estaciones de tren)
-- Persones famoses (l\'alcalde, dalgún atleta olímpicu que conoces)</string>
+  <string name="tutorial_2_subtext">- Oxetos naturales (flores, animales, montes)\n- Oxetos útiles (bicicletes, estaciones de tren)\n- Persones famoses (l\'alcalde, dalgún atleta olímpicu que conoces)</string>
   <string name="tutorial_3_text">NUN xubas:</string>
-  <string name="tutorial_3_subtext">- Selfies o semeyes de los tos amigos
-- Imáxenes que descargasti d\'Internet
-- Imáxenes de pantalla d\'aplicaciones propietaries</string>
+  <string name="tutorial_3_subtext">- Selfies o semeyes de los tos amigos\n- Imáxenes que descargasti d\'Internet\n- Imáxenes de pantalla d\'aplicaciones propietaries</string>
   <string name="tutorial_4_text">Exemplu de carga:</string>
-  <string name="tutorial_4_subtext">- Títulu: Ópera de Sidney
-- Descripción: Teatru de la Ópera de Sidney vistu dende l\'otru llau de la badea
-- Categoríes: Ópera de Sidney, Ópera de Sidney dende l\'oeste, Vistes a distancia de la Ópera de Sidney</string>
+  <string name="tutorial_4_subtext">- Títulu: Ópera de Sidney\n- Descripción: Teatru de la Ópera de Sidney vistu dende l\'otru llau de la badea\n- Categoríes: Ópera de Sidney, Ópera de Sidney dende l\'oeste, Vistes a distancia de la Ópera de Sidney</string>
   <string name="welcome_wikipedia_text">Collabore coles sos imaxes. ¡Ayude a que los artículos de Wikipedia tengan vida!</string>
-  <string name="welcome_wikipedia_subtext">Les imaxes de Wikipedia vienen de
-Wikimedia Commons.</string>
+  <string name="welcome_wikipedia_subtext">Les imaxes de Wikipedia vienen de\nWikimedia Commons.</string>
   <string name="welcome_copyright_text">Les sos imaxes ayuden a educar a la xente alredor del mundu.</string>
   <string name="welcome_copyright_subtext">Evite los materiales con drechos d\'autor qu\'atopó per internet, lo mesmo qu\'imaxes de cartelos, portaes de llibros, etc.</string>
   <string name="welcome_final_text">¿Cree que yá sabe cómo va?</string>

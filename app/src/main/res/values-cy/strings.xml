@@ -20,11 +20,11 @@
   <string name="upload_progress_notification_title_finishing">Yn gorffen uwchlwytho %1$s</string>
   <string name="upload_failed_notification_title">Methwyd uwchlwytho %1$s</string>
   <string name="upload_failed_notification_subtitle">Tapiwch i weld</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">1 ffeil yn uwchlwytho</item>
     <item quantity="other">%d ffeil yn uwchlwytho</item>
   </plurals>
-  <string name="title_activity_contributions">Fy uwchlwythiadau</string>
+  <string name="title_activity_contributions" fuzzy="true">Fy uwchlwythiadau</string>
   <string name="contribution_state_queued">Yn y ciw</string>
   <string name="contribution_state_failed">Methiant</string>
   <string name="contribution_state_in_progress">Wedi cwblhau %1$d%%</string>
@@ -49,22 +49,21 @@
   <string name="menu_upload_single">Uwchlwytho</string>
   <string name="categories_search_text_hint">Archwilio\'r categorïau</string>
   <string name="menu_save_categories">Cadw</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Dim Uwchlwythiadau eto</item>
     <item quantity="one">1 uwchlwythiad</item>
     <item quantity="other">%d uwchlwythiad</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Cychwyn uwchlwytho 1 ffeil</item>
     <item quantity="other">Cychwyn uwchlwytho %d ffeil</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 uwchlwythiad</item>
     <item quantity="other">%d uwchlwythiad</item>
   </plurals>
   <string name="categories_not_found">Dim categori\'n cyfateb i %1$s ar gael</string>
-  <string name="categories_skip_explanation">Cychwynwch deipio i ychwanegu categoriau.
-Cyffyrddwch y neges hon (neu ddewis Nôl) i fynd i\'r cam nesaf.</string>
+  <string name="categories_skip_explanation">Cychwynwch deipio i ychwanegu categoriau.\nCyffyrddwch y neges hon (neu ddewis Nôl) i fynd i\'r cam nesaf.</string>
   <string name="categories_activity_title">Categorïau</string>
   <string name="preference_tracking">Adroddiadau ar y defnydd</string>
   <string name="preference_tracking_summary">Danfonwch yr adroddiadau ar y defnydd i Wikimedia i\'n cynorthwyo i wella\'r ap</string>
@@ -120,8 +119,7 @@ Cyffyrddwch y neges hon (neu ddewis Nôl) i fynd i\'r cam nesaf.</string>
   <string name="license_name_attribution">Cydnabyddiaeth</string>
   <string name="license_name_gfdl">GNU Free Documentation License</string>
   <string name="welcome_wikipedia_text">Cyfranwch luniau. Cynorthwywch Wicipedia i roi bywyd yn yr erthyglau!</string>
-  <string name="welcome_wikipedia_subtext">Mae\'r delweddau ar Wicipedia\'n dod o
-Gomin Wikimedia.</string>
+  <string name="welcome_wikipedia_subtext">Mae\'r delweddau ar Wicipedia\'n dod o\nGomin Wikimedia.</string>
   <string name="welcome_copyright_text">Mae eich delweddau\'n cynorthwyo i addysgu pobl ledled y byd.</string>
   <string name="welcome_copyright_subtext">Cadwch yn glir o ddeunydd a hawlfraint arno a ganfyddwch ar y we, ac hefyd lluniau o bosteri, cloriau llyfrau, ayb.</string>
   <string name="welcome_final_text">Ydych chi wedi deall?</string>

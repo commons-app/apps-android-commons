@@ -18,7 +18,7 @@
   <string name="upload_progress_notification_title_finishing">កំពុងបញ្ចប់ការផ្ទុកឡើង  %1$s</string>
   <string name="upload_failed_notification_title">ការផ្ទុកឡើង %1$s បានបរាជ័យ</string>
   <string name="upload_failed_notification_subtitle">Tap ដើម្បីមើល</string>
-  <string name="title_activity_contributions">ការផ្ទុកឡើងរបស់ខ្ញុំ</string>
+  <string name="title_activity_contributions" fuzzy="true">ការផ្ទុកឡើងរបស់ខ្ញុំ</string>
   <string name="contribution_state_queued">បានដាក់ក្នុងជួររង់ចាំ</string>
   <string name="contribution_state_failed">បានបរាជ័យ</string>
   <string name="contribution_state_in_progress">%1$d%% រួចរាល់</string>
@@ -43,9 +43,7 @@
   <string name="categories_search_text_hint">ស្វែងរកចំណាត់ថ្នាក់ក្រុម</string>
   <string name="menu_save_categories">រក្សាទុក</string>
   <string name="categories_not_found">រកមិនឃើញចំណាត់ថ្នាក់ក្រុមដែលត្រូវនឹង %1$s ទេ</string>
-  <string name="categories_skip_explanation">បន្ថែមចំណាត់ថ្នាក់ក្រុមអោយរូបភាពរបស់អ្នកដើម្បីអោយងាយស្រួលស្វែងរក្នុង Wikimedia Commons។
-ចាប់ផ្ដើមវាយបញ្ចូលឈ្មោះចំណាត់ថ្នាក់ក្រុម។
-ចុចលើសារនេះ (ឬចុចប៊ូតុងត្រលប់ក្រោយ)ដើម្បីរំលងជំហ៊ាននេះ។</string>
+  <string name="categories_skip_explanation">បន្ថែមចំណាត់ថ្នាក់ក្រុមអោយរូបភាពរបស់អ្នកដើម្បីអោយងាយស្រួលស្វែងរក្នុង Wikimedia Commons។\nចាប់ផ្ដើមវាយបញ្ចូលឈ្មោះចំណាត់ថ្នាក់ក្រុម។\nចុចលើសារនេះ (ឬចុចប៊ូតុងត្រលប់ក្រោយ)ដើម្បីរំលងជំហ៊ាននេះ។</string>
   <string name="categories_activity_title">ចំណាត់ថ្នាក់ក្រុម</string>
   <string name="preference_tracking">របាយការណ៍ស្ដីពីបម្រើបម្រាស់</string>
   <string name="preference_tracking_summary">ផ្ញើរបាយការណ៍ស្ដីពីបម្រើបម្រាស់ទៅ Wikimedia ដើម្បីជួយកែលម្អកម្មវិធីយើងខ្ញុំ</string>

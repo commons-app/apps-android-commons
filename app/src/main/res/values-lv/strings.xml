@@ -16,7 +16,7 @@
   <string name="upload_progress_notification_title_start">Uzsāk %1$s augšupielādi</string>
   <string name="upload_progress_notification_title_in_progress">%1$s augšupielādēti</string>
   <string name="upload_progress_notification_title_finishing">Pabeidz %1$s augšupielādi</string>
-  <string name="title_activity_contributions">Manas augsupielades</string>
+  <string name="title_activity_contributions" fuzzy="true">Manas augsupielades</string>
   <string name="contribution_state_queued">Rindā iekļauts</string>
   <string name="contribution_state_failed">Neizdevās</string>
   <string name="contribution_state_in_progress">%1$d%% pabeigti</string>
@@ -34,7 +34,9 @@
   <string name="share_upload_button">Augšupielādēt</string>
   <string name="provider_modifications">Izmaiņas</string>
   <string name="menu_upload_single">Augšupielādēt</string>
+  <string name="categories_search_text_hint">Meklēt kategorijas</string>
   <string name="menu_save_categories">Saglabāt</string>
+  <string name="refresh_button">Atjaunināt</string>
   <string name="categories_activity_title">Kategorijas</string>
   <string name="preference_tracking">Lietošanas atskaites</string>
   <string name="title_activity_settings">Iestatījumi</string>

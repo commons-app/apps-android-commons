@@ -20,11 +20,11 @@
   <string name="upload_progress_notification_title_finishing">%1$s 파일 올리기를 끝내는 중</string>
   <string name="upload_failed_notification_title">%1$s 파일 올리기 실패</string>
   <string name="upload_failed_notification_subtitle">보려면 탭하세요</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">1개 파일 올리는 중</item>
     <item quantity="other">파일 %d개 올리는 중</item>
   </plurals>
-  <string name="title_activity_contributions">내 올린 파일</string>
+  <string name="title_activity_contributions">내 최근 업로드</string>
   <string name="contribution_state_queued">대기 중</string>
   <string name="contribution_state_failed">실패</string>
   <string name="contribution_state_in_progress">%1$d%% 완료</string>
@@ -42,6 +42,7 @@
   <string name="login_failed_password">로그인할 수 없습니다 - 비밀번호를 확인하세요</string>
   <string name="login_failed_throttled">실패한 시도가 너무 많습니다. 몇 분 후에 다시 시도하세요.</string>
   <string name="login_failed_blocked">죄송합니다, 이 사용자는 공용에서 차단되었습니다</string>
+  <string name="login_failed_2fa_needed">2요소 인증 코드를 제공해야 합니다.</string>
   <string name="login_failed_generic">로그인 실패</string>
   <string name="share_upload_button">올리기</string>
   <string name="multiple_share_base_title">이 집합의 이름 짓기</string>
@@ -50,24 +51,23 @@
   <string name="categories_search_text_hint">분류 검색</string>
   <string name="menu_save_categories">저장</string>
   <string name="refresh_button">새로 고침</string>
-  <plurals name="contributions_subtitle">
+  <string name="gps_disabled">장치에서 GPS가 꺼져 있습니다. 켜시겠습니까?</string>
+  <string name="enable_gps">GPS 사용</string>
+  <string name="contributions_subtitle_zero">아직 올린 항목이 없습니다</string>
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">아직 업로드 없음</item>
     <item quantity="one">1개 업로드</item>
     <item quantity="other">%d개 업로드</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">한 장 업로드 시작</item>
     <item quantity="other">%d 장 업로드 시작</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">한 장 업로드</item>
-    <item quantity="other">%d 장 업로드</item>
+    <item quantity="one">%d개 업로드</item>
   </plurals>
   <string name="categories_not_found">%1$s와(과) 일치하는 분류를 찾을 수 없습니다</string>
-  <string name="categories_skip_explanation">위키미디어 공용에 그림을 더 찾을 수 있도록 분류를 추가합니다.
-
-분류를 추가하려면 입력을 시작하세요.
-이 단계를 건너뛰려면 이 메시지를 탭하세요(또는 뒤로를 누르세요).</string>
+  <string name="categories_skip_explanation">위키미디어 공용에 그림을 더 찾을 수 있도록 분류를 추가합니다.\n\n분류를 추가하려면 입력을 시작하세요.\n이 단계를 건너뛰려면 이 메시지를 탭하세요(또는 뒤로를 누르세요).</string>
   <string name="categories_activity_title">분류</string>
   <string name="preference_tracking">사용 보고서</string>
   <string name="preference_tracking_summary">애플리케이션을 향상시킬 수 있도록 돕기 위해 위키미디어에 사용 보고서를 보냅니다</string>
@@ -131,9 +131,7 @@
   <string name="tutorial_1_subtext">당신의 그림은 전 세계 사람들을 교육하는 데 도움이 됩니다!</string>
   <string name="tutorial_2_text">전적으로 자신이 찍거나 만든 사진만 업로드해 주십시오:</string>
   <string name="tutorial_3_text">업로드하지 마십시오:</string>
-  <string name="tutorial_3_subtext">- 자기 자신 또는 친구의 사진
-- 인터넷에서 다운로드한 사진
-- 사유 앱의 스크린샷</string>
+  <string name="tutorial_3_subtext">- 자기 자신 또는 친구의 사진\n- 인터넷에서 다운로드한 사진\n- 사유 앱의 스크린샷</string>
   <string name="tutorial_4_text">업로드 예시:</string>
   <string name="welcome_wikipedia_text">당신의 그림을 기여하세요. 위키백과 문서의 생명이 오는 데 도와주세요!</string>
   <string name="welcome_wikipedia_subtext">위키백과의 그림은 위키미디어 공용에서 옵니다.</string>
@@ -151,6 +149,7 @@
   <string name="location_permission_rationale">선택적 권한: 분류 추천을 위해 현재 위치 정보를 가져옵니다.</string>
   <string name="ok">확인</string>
   <string name="title_activity_nearby">근처의 장소</string>
+  <string name="no_nearby">근처에 장소가 없습니다</string>
   <string name="warning">경고</string>
   <string name="file_exists">이 파일은 이미 공용에 존재합니다. 계속하시겠습니까?</string>
   <string name="yes">예</string>
@@ -158,7 +157,28 @@
   <string name="media_detail_title">제목</string>
   <string name="media_detail_media_title">미디어 제목</string>
   <string name="media_detail_description">설명</string>
+  <string name="media_detail_uploaded_date">올린 날짜</string>
   <string name="become_a_tester_title">베타 테스터가 되세요</string>
   <string name="use_wikidata">위키데이터 사용</string>
   <string name="use_wikidata_summary">(경고: 이것을 끄면 대량의 모바일 데이터를 소비할 수 있습니다)</string>
+  <string name="map_theme_light">mapbox://styles/mapbox/traffic-day-v2</string>
+  <string name="map_theme_dark">mapbox://styles/mapbox/traffic-night-v2</string>
+  <string name="mapbox_commons_app_token">pk.eyJ1IjoibWFza2FyYXZpdmVrIiwiYSI6ImNqMmxvdzFjMTAwMHYzM283ZWM3eW5tcDAifQ.ib5SZ9EVjwJe6GSKve0bcg</string>
+  <string name="_2fa_code">2FA 코드</string>
+  <string name="number_of_uploads">내 최근 업로드 제한</string>
+  <string name="maximum_limit">최대 제한</string>
+  <string name="maximum_limit_alert">500개를 초과하여 표시할 수 없습니다</string>
+  <string name="set_limit">최근 업로드 제한 설정</string>
+  <string name="login_failed_2fa_not_supported">2요소 인증은 현재 지원하지 않습니다.</string>
+  <string name="logout_verification">정말 로그아웃하시겠습니까?</string>
+  <string name="cancel">취소</string>
+  <string name="navigation_drawer_open">열기</string>
+  <string name="navigation_drawer_close">닫기</string>
+  <string name="navigation_item_home">홈</string>
+  <string name="navigation_item_upload">업로드</string>
+  <string name="navigation_item_nearby">근처</string>
+  <string name="navigation_item_about">정보</string>
+  <string name="navigation_item_settings">설정</string>
+  <string name="navigation_item_feedback">피드백</string>
+  <string name="navigation_item_logout">로그아웃</string>
 </resources>

@@ -21,10 +21,10 @@
   <string name="upload_failed_notification_title">Загрузка %1$s не удалась</string>
   <string name="upload_failed_notification_subtitle">Нажмите для просмотра</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">загружается 1 файл</item>
+    <item quantity="one">загружается %d файл</item>
     <item quantity="other">идёт загрузка %d файлов</item>
   </plurals>
-  <string name="title_activity_contributions">Мои загрузки</string>
+  <string name="title_activity_contributions">Мои текущие загрузки</string>
   <string name="contribution_state_queued">Очередь</string>
   <string name="contribution_state_failed">Ошибка загрузки.</string>
   <string name="contribution_state_in_progress">Завершено %1$d%%</string>
@@ -42,6 +42,7 @@
   <string name="login_failed_password">Не удалось войти — пожалуйста, проверьте свой пароль</string>
   <string name="login_failed_throttled">Слишком много неудачных попыток. Пожалуйста, попробуйте ещё раз через несколько минут.</string>
   <string name="login_failed_blocked">Извините, но участник с таким именем был заблокирован на Викискладе</string>
+  <string name="login_failed_2fa_needed">Вы должны ввести код двухфакторной аутентификации.</string>
   <string name="login_failed_generic">Ошибка входа в систему!</string>
   <string name="share_upload_button">Загрузка</string>
   <string name="multiple_share_base_title">Введите название для этой группы файлов</string>
@@ -50,27 +51,27 @@
   <string name="categories_search_text_hint">Выбор категорий</string>
   <string name="menu_save_categories">Сохранить</string>
   <string name="refresh_button">Обновить</string>
+  <string name="gps_disabled">GPS отключен в вашем устройстве. Вы хотите включить его?</string>
+  <string name="enable_gps">Включить GPS</string>
+  <string name="contributions_subtitle_zero">пока загрузки отсутствуют</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">Нет загрузок</item>
-    <item quantity="one">1 загрузка</item>
+    <item quantity="one">%d загрузка</item>
     <item quantity="few">%d загрузок</item>
     <item quantity="other">%d загрузки</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Начинается 1 загрузка</item>
+    <item quantity="one">Начинается %d загрузка</item>
     <item quantity="few">Начинается %d загрузок</item>
     <item quantity="other">Начинается %d загрузки</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">1 загрузка</item>
+    <item quantity="one">%d загрузка</item>
     <item quantity="few">%d загрузок</item>
     <item quantity="other">%d загрузки</item>
   </plurals>
   <string name="categories_not_found">Категории, соответствующие %1$s, не найдены</string>
-  <string name="categories_skip_explanation">Добавьте категории, чтобы ваши изображения можно было легко найти на Викискладе.
-
-Начните вводить название для добавления категорий.
-Нажмите на это сообщение (или за ним), чтобы пропустить этот шаг.</string>
+  <string name="categories_skip_explanation">Добавьте категории, чтобы ваши изображения можно было легко найти на Викискладе.\n\nНачните вводить название для добавления категорий.\nНажмите на это сообщение (или за ним), чтобы пропустить этот шаг.</string>
   <string name="categories_activity_title">Категории</string>
   <string name="preference_tracking">Отчёты</string>
   <string name="preference_tracking_summary">Отправлять отчёты об использовании в Викимедиа, чтобы помочь нам улучшить приложение</string>
@@ -136,17 +137,11 @@
   <string name="tutorial_1_text">Викисклад содержит большую часть изображений, которые используются в Википедии.</string>
   <string name="tutorial_1_subtext">Ваши изображения помогают образованию людей во всём мире!</string>
   <string name="tutorial_2_text">Пожалуйста, загрузите фотографии, которые были сняты или созданы исключительно вами:</string>
-  <string name="tutorial_2_subtext">— Природные объекты (цветы, животные, горы)
-— Полезные предметы (велосипеды, вокзалы)
-— Известные люди (ваш мэр, спортсмены-олимпийцы, которых вы встретили)</string>
+  <string name="tutorial_2_subtext">— Природные объекты (цветы, животные, горы)\n— Полезные предметы (велосипеды, вокзалы)\n— Известные люди (ваш мэр, спортсмены-олимпийцы, которых вы встретили)</string>
   <string name="tutorial_3_text">Пожалуйста, НЕ загружайте:</string>
-  <string name="tutorial_3_subtext">— Селфи или фотографии ваших друзей
-— Фотографии, которые вы скачали из Интернета
-— Скриншоты несвободных приложений</string>
+  <string name="tutorial_3_subtext">— Селфи или фотографии ваших друзей\n— Фотографии, которые вы скачали из Интернета\n— Скриншоты несвободных приложений</string>
   <string name="tutorial_4_text">Пример загрузки:</string>
-  <string name="tutorial_4_subtext">— Название: Сиднейский оперный театр
-— Описание: Сиднейский оперный театр, вид через залив
-— Категории: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext">— Название: Сиднейский оперный театр\n— Описание: Сиднейский оперный театр, вид через залив\n— Категории: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Загрузите свои изображения. Помогите Википедии оживить статьи!</string>
   <string name="welcome_wikipedia_subtext">Изображения в Википедии хранятся на Викискладе.</string>
   <string name="welcome_copyright_text">Ваши изображения помогают образованию людей во всём мире.</string>
@@ -163,6 +158,7 @@
   <string name="location_permission_rationale">Необязательное разрешение: получение текущего местоположения для предложения категорий</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Места поблизости</string>
+  <string name="no_nearby">Места поблизости не найдены</string>
   <string name="warning">Внимание</string>
   <string name="file_exists">Этот файл уже существует на Викискладе. Вы уверены, что хотите продолжить?</string>
   <string name="yes">Да</string>
@@ -171,8 +167,29 @@
   <string name="media_detail_media_title">Заголовок носителя информации</string>
   <string name="media_detail_description">Описание</string>
   <string name="media_detail_description_explanation">Здесь располагается описание носителя информации. Оно потенциально может быть весьма длинным и даже располагаться в несколько строк. Однако мы надеемся, что это выглядит симпатично</string>
+  <string name="media_detail_uploaded_date">Дата загрузки</string>
   <string name="become_a_tester_title">Стать бета-тестером</string>
   <string name="become_a_tester_description">Подпишитесь на наш канал бета-версии на Google Play и получите ранний доступ к новым функциям и исправлениям ошибок</string>
   <string name="use_wikidata">Использовать Викиданные</string>
   <string name="use_wikidata_summary">(Предупреждение: отключение может привести к большому потреблению мобильных данных)</string>
+  <string name="map_theme_light">mapbox://styles/mapbox/traffic-day-v2</string>
+  <string name="map_theme_dark">mapbox://styles/mapbox/traffic-night-v2</string>
+  <string name="mapbox_commons_app_token">pk.eyJ1IjoibWFza2FyYXZpdmVrIiwiYSI6ImNqMmxvdzFjMTAwMHYzM283ZWM3eW5tcDAifQ.ib5SZ9EVjwJe6GSKve0bcg</string>
+  <string name="_2fa_code">Код 2ФА</string>
+  <string name="number_of_uploads">мой нынешний лимит по загрузке</string>
+  <string name="maximum_limit">максимальный лимит</string>
+  <string name="maximum_limit_alert">Невозможно отобразить более 500</string>
+  <string name="set_limit">установить текущий лимит по загрузке</string>
+  <string name="login_failed_2fa_not_supported">Двухфакторная аутентификация в настоящее время не поддерживается.</string>
+  <string name="logout_verification">Вы действительно хотите выйти?</string>
+  <string name="cancel">Отмена</string>
+  <string name="navigation_drawer_open">Открыть</string>
+  <string name="navigation_drawer_close">Закрыть</string>
+  <string name="navigation_item_home">Главная</string>
+  <string name="navigation_item_upload">Загрузить</string>
+  <string name="navigation_item_nearby">Поблизости</string>
+  <string name="navigation_item_about">О приложении</string>
+  <string name="navigation_item_settings">Настройки</string>
+  <string name="navigation_item_feedback">Обратная связь</string>
+  <string name="navigation_item_logout">Выйти</string>
 </resources>

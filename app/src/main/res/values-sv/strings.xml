@@ -20,11 +20,11 @@
   <string name="upload_progress_notification_title_finishing">Avslutar uppladdning av %1$s</string>
   <string name="upload_failed_notification_title">Uppladdning av %1$s misslyckades</string>
   <string name="upload_failed_notification_subtitle">Tryck för att visa</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">1 filuppladdning</item>
     <item quantity="other">%d filuppladdningar</item>
   </plurals>
-  <string name="title_activity_contributions">Mina uppladdningar</string>
+  <string name="title_activity_contributions" fuzzy="true">Mina uppladdningar</string>
   <string name="contribution_state_queued">Köade</string>
   <string name="contribution_state_failed">Misslyckades</string>
   <string name="contribution_state_in_progress">%1$d%% färdigt</string>
@@ -50,24 +50,21 @@
   <string name="categories_search_text_hint">Sök kategorier</string>
   <string name="menu_save_categories">Spara</string>
   <string name="refresh_button">Uppdatera</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Inga uppladdningar ännu</item>
     <item quantity="one">1 uppladdning</item>
     <item quantity="other">%d uppladdningar</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Startar 1 uppladdning</item>
     <item quantity="other">Startar %d uppladdningar</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 uppladdning</item>
     <item quantity="other">%d uppladdningar</item>
   </plurals>
   <string name="categories_not_found">Inga kategorier som stämmer överens med %1$s hittades</string>
-  <string name="categories_skip_explanation">Lägg till kategorier för att göra dina bilder synliga på Wikimedia Commons.
-
-Börja skriva för att lägga till kategorier.
-Tryck på detta meddelande (eller gå tillbaka) för att hoppa över detta steg.</string>
+  <string name="categories_skip_explanation">Lägg till kategorier för att göra dina bilder synliga på Wikimedia Commons.\n\nBörja skriva för att lägga till kategorier.\nTryck på detta meddelande (eller gå tillbaka) för att hoppa över detta steg.</string>
   <string name="categories_activity_title">Kategorier</string>
   <string name="preference_tracking">Användningsrapporter</string>
   <string name="preference_tracking_summary">Skicka användningsrapporter till Wikimedia för att hjälpa oss förbättra appen</string>
@@ -77,7 +74,7 @@ Tryck på detta meddelande (eller gå tillbaka) för att hoppa över detta steg.
   <string name="about_license">Programvara med öppen källkod släppt under &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;licensen Apache v2&lt;/a&gt;. Wikimedia Commons och dess logotyp är varumärken av Wikimedia Foundation och används med tillstånd från Wikimedia Foundation. Vi varken stöds eller är kopplade med Wikimedia Foundation.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Källkoden&lt;/a&gt; och &lt;a href=\"https://commons-app.github.io/\"&gt;webbplatsen&lt;/a&gt; på GitHub. Skapa ett nytt &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-ärende&lt;/a&gt; för att rapportera buggar och förslag.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Integritetspolicy&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;ERKÄNNANDE&lt;/a&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;ERKÄNNANDE&lt;/a&gt;</string>
   <string name="title_activity_about">Om</string>
   <string name="menu_feedback">Skicka feedback (via e-post)</string>
   <string name="no_email_client">Ingen e-postklient är installerad</string>
@@ -131,20 +128,13 @@ Tryck på detta meddelande (eller gå tillbaka) för att hoppa över detta steg.
   <string name="license_name_attribution">Erkännande</string>
   <string name="license_name_gfdl">GNU Free Documentation License</string>
   <string name="tutorial_1_text">Wikimedia Commons lagrar de flesta bilderna som används på Wikipedia.</string>
-  <string name="tutorial_1_subtext">Dina bilder hjälper till att utbilda
-människor runt hela världen!</string>
+  <string name="tutorial_1_subtext">Dina bilder hjälper till att utbilda\nmänniskor runt hela världen!</string>
   <string name="tutorial_2_text">Ladda upp bilder som endast du har tagit eller skapat:</string>
-  <string name="tutorial_2_subtext">- Naturliga föremål (blommor, djur, berg)
-- Användbar föremål (cyklar, tågstationer)
-- Berömda personer (din borgmästare, olympiska atleter du har träffat)</string>
+  <string name="tutorial_2_subtext">- Naturliga föremål (blommor, djur, berg)\n- Användbar föremål (cyklar, tågstationer)\n- Berömda personer (din borgmästare, olympiska atleter du har träffat)</string>
   <string name="tutorial_3_text">Ladda INTE upp:</string>
-  <string name="tutorial_3_subtext">- Selfies eller bilder på dina vänner
-- Bilder som du har laddat ned från Internet
-- Skärmdumpar på proprietära appar</string>
+  <string name="tutorial_3_subtext">- Selfies eller bilder på dina vänner\n- Bilder som du har laddat ned från Internet\n- Skärmdumpar på proprietära appar</string>
   <string name="tutorial_4_text">Uppladdningsexempel:</string>
-  <string name="tutorial_4_subtext">- Titel: Sydneys operahus
-- Beskrivning: Sydneys operahus sedd från andra sidan bukten
-- Kategorier: Sydneys operahus, Sydneys operahus från väst, Sydneys operahus utifrån</string>
+  <string name="tutorial_4_subtext">- Titel: Sydneys operahus\n- Beskrivning: Sydneys operahus sedd från andra sidan bukten\n- Kategorier: Sydneys operahus, Sydneys operahus från väst, Sydneys operahus utifrån</string>
   <string name="welcome_wikipedia_text">Bidra med dina bilder. Hjälp Wikipedia-artiklar att komma till liv!</string>
   <string name="welcome_wikipedia_subtext">Bilder på Wikipedia kommer från Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Dina bilder hjälper till att utbilda människor runt om i världen.</string>

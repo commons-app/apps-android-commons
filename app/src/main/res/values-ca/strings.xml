@@ -20,11 +20,11 @@
   <string name="upload_progress_notification_title_finishing">Acabant la càrrega al servidor de %1$s</string>
   <string name="upload_failed_notification_title">Error al carregar %1$s</string>
   <string name="upload_failed_notification_subtitle">Prem per veure-ho</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">s\'està carregant 1 fitxer</item>
     <item quantity="other">s\'estan carregant %d fitxers</item>
   </plurals>
-  <string name="title_activity_contributions">Les meves càrregues</string>
+  <string name="title_activity_contributions" fuzzy="true">Les meves càrregues</string>
   <string name="contribution_state_queued">En cua</string>
   <string name="contribution_state_failed">Ha fallat</string>
   <string name="contribution_state_in_progress">%1$d%% completat</string>
@@ -49,16 +49,16 @@
   <string name="menu_upload_single">Carrega</string>
   <string name="categories_search_text_hint">Categories de cerca</string>
   <string name="menu_save_categories">Desa</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">No hi ha cap càrrega encara</item>
     <item quantity="one">1 càrrega</item>
     <item quantity="other">%d càrregues</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">S\'està iniciant 1 càrrega</item>
     <item quantity="other">S\'estan iniciant %d càrregues</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 càrrega</item>
     <item quantity="other">%d càrregues</item>
   </plurals>

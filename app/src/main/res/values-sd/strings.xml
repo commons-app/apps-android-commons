@@ -20,11 +20,11 @@
   <string name="upload_progress_notification_title_finishing">%1$s جو چاڙھ مڪمل ٿيندي</string>
   <string name="upload_failed_notification_title">%1$s جو چاڙھڻ ناڪام ويو</string>
   <string name="upload_failed_notification_subtitle">ڏسڻ لاءِ ٺونگيو</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">1 فائيل چاڙھيندي</item>
     <item quantity="other">%d فائيلَ چاڙھيندي</item>
   </plurals>
-  <string name="title_activity_contributions">منھنجا چاڙھ</string>
+  <string name="title_activity_contributions" fuzzy="true">منھنجا چاڙھ</string>
   <string name="contribution_state_queued">قطار ۾</string>
   <string name="contribution_state_failed">ناڪام</string>
   <string name="contribution_state_in_progress">%1$d%% مڪمل</string>
@@ -50,24 +50,21 @@
   <string name="categories_search_text_hint">زمرا ڳوليو</string>
   <string name="menu_save_categories">سانڍيو</string>
   <string name="refresh_button">تازو ڪيو</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">اڃان تائين ڪو چاڙھ ناھي</item>
     <item quantity="one">1 چاڙھ</item>
     <item quantity="other">%d چاڙھَ</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">ھڪ 1 چاڙھ شروع ڪندي</item>
     <item quantity="other">چاڙھَ %d شروع ڪندي</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 چاڙھ</item>
     <item quantity="other">%d چاڙھَ</item>
   </plurals>
   <string name="categories_not_found">%1$s سان ملندڙ ڪوبہ زمرو نہ لڌو</string>
-  <string name="categories_skip_explanation">پنھنجي عڪسن ۾ زمرا وجھو تہ جيئن وڪيميڊيا العام تي وڌيڪ ڳولا لائق ٿي سگھن.
-
-زمرا وجھڻ لاءِ لکڻ شروع ڪريو.
-ھن پيغام تي ٺونگو ھڻو (يا پوئتي ڌڪ ھڻو) ھي قدم ڇڏڻ لاءِ.</string>
+  <string name="categories_skip_explanation">پنھنجي عڪسن ۾ زمرا وجھو تہ جيئن وڪيميڊيا العام تي وڌيڪ ڳولا لائق ٿي سگھن.\n\nزمرا وجھڻ لاءِ لکڻ شروع ڪريو.\nھن پيغام تي ٺونگو ھڻو (يا پوئتي ڌڪ ھڻو) ھي قدم ڇڏڻ لاءِ.</string>
   <string name="categories_activity_title">زمرا</string>
   <string name="preference_tracking">استعمال جو رپورٽون</string>
   <string name="preference_tracking_summary">اسان کي ايپ بھتر بڻائڻ ۾ مدد ڪرڻ لاءِ وڪيميڊيا ڏي استعمال جون رپورٽون موڪليو</string>
@@ -129,17 +126,11 @@
   <string name="tutorial_1_text">وڪيپيڊيا تي استعمال ٿيندڙ گھڻن عڪسن جي وڪيميڊيا العام ميزباني ڪري ٿو.</string>
   <string name="tutorial_1_subtext">توھان جا عڪس سڄي دنيا جي ماڻھن کي تعليم يافتا ڪرڻ ۾ مدد ڪن ٿا</string>
   <string name="tutorial_2_text">براءِ مھرباني اھي تصويرون چاڙھيو مڪمل طور تي توھان پاران ڪڍيل يا تخليقيل آھن:</string>
-  <string name="tutorial_2_subtext">u2022 قدرتي شيون (گل، جانور، جبل) 
-u2022 استعمال جوڳيون شيون (سائيڪلون، ٽرين اسٽيشنون) 
-u2022 مشھور شخصيتون (توھان جو ناظم، اولمپڪ رانديگر جنھن سان توھان مليئو)</string>
+  <string name="tutorial_2_subtext">u2022 قدرتي شيون (گل، جانور، جبل) \nu2022 استعمال جوڳيون شيون (سائيڪلون، ٽرين اسٽيشنون) \nu2022 مشھور شخصيتون (توھان جو ناظم، اولمپڪ رانديگر جنھن سان توھان مليئو)</string>
   <string name="tutorial_3_text">براءِ مھرباني نہ چاڙھيو:</string>
-  <string name="tutorial_3_subtext">u2022 سيلفيون يا پنھنجي دوستن جو تصويرون 
-u2022 اھي تصويرون جيڪي توھان انٽرنيٽ تان ڊائونلوڊ ڪيون 
-u2022 پروپرائيٽري ايپس جا اسڪرين شاٽ</string>
+  <string name="tutorial_3_subtext">u2022 سيلفيون يا پنھنجي دوستن جو تصويرون \nu2022 اھي تصويرون جيڪي توھان انٽرنيٽ تان ڊائونلوڊ ڪيون \nu2022 پروپرائيٽري ايپس جا اسڪرين شاٽ</string>
   <string name="tutorial_4_text">مثال چاڙھ:</string>
-  <string name="tutorial_4_subtext">u2022 عنوان: سڊني اوپيرا گھر 
-u2022 تشريح: سڊني اوپيرا گھر نھر جي پاسي کان ڏيک 
-u2022 زمرا: سڊني اوپيرا گھر، سڊني اوپيرا گھر اولھ کان، سڊني اوپيرا گھر ڏورانھان ڏيک</string>
+  <string name="tutorial_4_subtext">u2022 عنوان: سڊني اوپيرا گھر \nu2022 تشريح: سڊني اوپيرا گھر نھر جي پاسي کان ڏيک \nu2022 زمرا: سڊني اوپيرا گھر، سڊني اوپيرا گھر اولھ کان، سڊني اوپيرا گھر ڏورانھان ڏيک</string>
   <string name="welcome_wikipedia_text">پنھنجي عڪسن جي ڀاڱيداري ڪريو. وڪيپيڊيا ڪي مضمونن ۾ زندگي آڻيو!</string>
   <string name="welcome_wikipedia_subtext">وڪيپيڊيا تي عڪس وڪيميڊيا العام تان اچن ٿا.</string>
   <string name="welcome_copyright_text">توھان جا عڪس سڄي دنيا ۾ ماڻھن کي تعليم يافتا ڪرڻ ۾ مدد ڪن ٿا.</string>

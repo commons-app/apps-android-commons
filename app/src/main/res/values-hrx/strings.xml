@@ -18,7 +18,7 @@
   <string name="upload_progress_notification_title_finishing">Hochloode von „%1$s“ abschliesse</string>
   <string name="upload_failed_notification_title">Hochloode von „%1$s“ fehlgeschlooht</string>
   <string name="upload_failed_notification_subtitle">Tipp mit deine Fingerspitze für se siehn</string>
-  <string name="title_activity_contributions">Mein hochgeloodne Dateie</string>
+  <string name="title_activity_contributions" fuzzy="true">Mein hochgeloodne Dateie</string>
   <string name="contribution_state_queued">In der Woorteschlang</string>
   <string name="contribution_state_failed">Fehlgeschlooht</string>
   <string name="contribution_state_in_progress">%1$d%% abgeschloss</string>
@@ -43,10 +43,7 @@
   <string name="categories_search_text_hint">Kategorie dorrichsuche</string>
   <string name="menu_save_categories">Speichre</string>
   <string name="categories_not_found">Die Kategorie „%1$s“ woard net gefunn</string>
-  <string name="categories_skip_explanation">Füch Kategoriee hinzu, um deine Bilder auf Wikimedia Commons ufffindbarer se mache.
-
-Beginn zu schreibe, um Kategoriee hinzuzufüchen.
-Tippe uff die Nachricht orrer drücke \"Zurück\", um den Schritt zu üwerspringe.</string>
+  <string name="categories_skip_explanation">Füch Kategoriee hinzu, um deine Bilder auf Wikimedia Commons ufffindbarer se mache.\n\nBeginn zu schreibe, um Kategoriee hinzuzufüchen.\nTippe uff die Nachricht orrer drücke \"Zurück\", um den Schritt zu üwerspringe.</string>
   <string name="categories_activity_title">Kategoriee</string>
   <string name="preference_tracking">Nutzungsberichte</string>
   <string name="preference_tracking_summary">Nutzungsberichte an Wikimedia schicke, um der App sein  Verbessrung beizutroohn.</string>

@@ -21,10 +21,10 @@
   <string name="upload_failed_notification_title">Le téléversement de %1$s a échoué</string>
   <string name="upload_failed_notification_subtitle">Appuyer pour afficher</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">1 fichier en téléversement</item>
-    <item quantity="other">%d fichiers en téléversement</item>
+    <item quantity="one">%d fichier en cours de téléversement</item>
+    <item quantity="other">%d fichiers en cours de téléversement</item>
   </plurals>
-  <string name="title_activity_contributions">Mes téléversements</string>
+  <string name="title_activity_contributions">Mes téléversements récents</string>
   <string name="contribution_state_queued">Mis en file d\'attente</string>
   <string name="contribution_state_failed">Échoué</string>
   <string name="contribution_state_in_progress">%1$d%% effectué</string>
@@ -42,6 +42,7 @@
   <string name="login_failed_password">Impossible de se connecter — veuillez vérifier votre mot de passe</string>
   <string name="login_failed_throttled">Trop de tentatives infructueuses. Veuillez réessayer dans quelques minutes.</string>
   <string name="login_failed_blocked">Désolé, cet utilisateur a été bloqué dans Commons</string>
+  <string name="login_failed_2fa_needed">Vous devez fournir votre code d’authentification à deux facteurs.</string>
   <string name="login_failed_generic">Échec de connexion</string>
   <string name="share_upload_button">Téléverser</string>
   <string name="multiple_share_base_title">Nommer ce jeu</string>
@@ -50,24 +51,24 @@
   <string name="categories_search_text_hint">Rechercher des catégories</string>
   <string name="menu_save_categories">Enregistrer</string>
   <string name="refresh_button">Rafraîchir</string>
+  <string name="gps_disabled">Le GPS est désactivé sur votre appareil. Voulez-vous l’activer ?</string>
+  <string name="enable_gps">Activer le GPS</string>
+  <string name="contributions_subtitle_zero">Encore aucun téléversement</string>
   <plurals name="contributions_subtitle">
-    <item quantity="zero">Encore aucun téléversement</item>
-    <item quantity="one">1 téléversement</item>
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%d téléversement</item>
     <item quantity="other">%d téléversements</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">1 téléversement démarré</item>
+    <item quantity="one">%d téléversement démarré</item>
     <item quantity="other">%d téléversements démarrés</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">1 Téléversement</item>
-    <item quantity="other">%d Téléversements</item>
+    <item quantity="one">%d téléversement</item>
+    <item quantity="other">%d téléversements</item>
   </plurals>
   <string name="categories_not_found">Aucune catégorie correspondant à %1$s trouvée</string>
-  <string name="categories_skip_explanation">Ajoutez des catégories pour rendre vos images plus simple à trouver sur Wikimedia Commons. 
-
-Commencer à ajouter des catégories. 
-Appuyez sur ce message (ou retournez en arrière) pour sauter cette étape.</string>
+  <string name="categories_skip_explanation">Ajoutez des catégories pour rendre vos images plus simple à trouver sur Wikimedia Commons. \n\nCommencer à ajouter des catégories. \nAppuyez sur ce message (ou retournez en arrière) pour sauter cette étape.</string>
   <string name="categories_activity_title">Catégories</string>
   <string name="preference_tracking">Rapports d’utilisation</string>
   <string name="preference_tracking_summary">Envoyer les rapports d’utilisation à Wikimedia pour nous aider à améliorer l’application</string>
@@ -77,7 +78,7 @@ Appuyez sur ce message (ou retournez en arrière) pour sauter cette étape.</str
   <string name="about_license">Les logiciels Open Source sont publiés sous la &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;licence Apache v2&lt;/a&gt;. Wikimédia Commons et son logo sont des marques déposées de la Fondation Wikimédia et sont utilisées avec l’autorisation de la Fondation Wikimédia. Nous ne sommes pas approuvés par ou affiliés à la Fondation Wikimédia.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sources&lt;/a&gt; et &lt;a href=\"https://commons-app.github.io/\"&gt;site web&lt;/a&gt; sur GitHub. Créer un nouveau &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;signalement GitHub&lt;/a&gt; pour signales des bogues ou des suggestions.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politique de confidentialité&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;REMERCIEMENTS&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Remerciements&lt;/a&gt;</string>
   <string name="title_activity_about">À propos</string>
   <string name="menu_feedback">Envoyer vos commentaires (par courriel)</string>
   <string name="no_email_client">Aucun client de courriel installé</string>
@@ -133,17 +134,11 @@ Appuyez sur ce message (ou retournez en arrière) pour sauter cette étape.</str
   <string name="tutorial_1_text">Wikimédia Communs héberge la plupart des images qui sont utilisées dans Wikipédia</string>
   <string name="tutorial_1_subtext">Vos images aident à éduquer les gens dans le monde entier !</string>
   <string name="tutorial_2_text">Veuillez télécharger les images qui sont prises ou créées entièrement par vous :</string>
-  <string name="tutorial_2_subtext">- Objets naturels (fleurs, animaux, montagnes) 
-- Objets utiles (bicyclettes, gares ferroviaires) 
-- Personnes célèbres (votre maire, les athlètes olympiques que vous avez rencontrés)</string>
+  <string name="tutorial_2_subtext">- Objets naturels (fleurs, animaux, montagnes) \n- Objets utiles (bicyclettes, gares ferroviaires) \n- Personnes célèbres (votre maire, les athlètes olympiques que vous avez rencontrés)</string>
   <string name="tutorial_3_text">Veuillez ne PAS télécharger :</string>
-  <string name="tutorial_3_subtext">- des selfies ou des images de vos amis 
-- des images téléchargées sur Internet
-- des copies d’écran d’applications propriétaires</string>
+  <string name="tutorial_3_subtext">- des selfies ou des images de vos amis \n- des images téléchargées sur Internet\n- des copies d’écran d’applications propriétaires</string>
   <string name="tutorial_4_text">Exemple de téléchargement :</string>
-  <string name="tutorial_4_subtext">- Titre : L’opéra de Sydney
-- Description : L’opéra de Sydney vu à travers la baie
-- Catégories : Opéra de Sydney, Opéra de Sydney depuis l’ouest, vues à distance de l’Opéra de Sydney</string>
+  <string name="tutorial_4_subtext">- Titre : L’opéra de Sydney\n- Description : L’opéra de Sydney vu à travers la baie\n- Catégories : Opéra de Sydney, Opéra de Sydney depuis l’ouest, vues à distance de l’Opéra de Sydney</string>
   <string name="welcome_wikipedia_text">Contribuez avec vos images. Aidez les articles de Wikipédia à prendre vie !</string>
   <string name="welcome_wikipedia_subtext">Les images sur Wikipédia viennent de Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Vos images aident à éduquer les gens dans le monde entier.</string>
@@ -160,6 +155,7 @@ Appuyez sur ce message (ou retournez en arrière) pour sauter cette étape.</str
   <string name="location_permission_rationale">Autorisation facultative : Obtenir l’emplacement actuel pour des suggestions de catégorie</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Endroits à proximité</string>
+  <string name="no_nearby">Rien trouvé dans le voisinage</string>
   <string name="warning">Avertissement</string>
   <string name="file_exists">Ce fichier existe déjà sur Communs. Êtes-vous sûr de vouloir continuer ?</string>
   <string name="yes">Oui</string>
@@ -168,8 +164,29 @@ Appuyez sur ce message (ou retournez en arrière) pour sauter cette étape.</str
   <string name="media_detail_media_title">Titre du média</string>
   <string name="media_detail_description">Description</string>
   <string name="media_detail_description_explanation">La description du média vient ici. Cela peut être potentiellement assez long, et devra être réparti sur plusieurs lignes. Nous espérons que cela restera joli néanmoins.</string>
+  <string name="media_detail_uploaded_date">Date de téléchargement</string>
   <string name="become_a_tester_title">Devenir un bêta-testeur</string>
   <string name="become_a_tester_description">S’inscrire à notre canal bêta sur Google Play et obtenir un accès anticipé aux nouvelles fonctionnalités et corrections de bogue</string>
   <string name="use_wikidata">Utiliser Wikidata</string>
   <string name="use_wikidata_summary">(Attention : désactiver cela pourrait provoquer une consommation importante de données par mobile)</string>
+  <string name="map_theme_light">mapbox://styles/mapbox/traffic-day-v2</string>
+  <string name="map_theme_dark">mapbox://styles/mapbox/traffic-night-v2</string>
+  <string name="mapbox_commons_app_token">pk.eyJ1IjoibWFza2FyYXZpdmVrIiwiYSI6ImNqMmxvdzFjMTAwMHYzM283ZWM3eW5tcDAifQ.ib5SZ9EVjwJe6GSKve0bcg</string>
+  <string name="_2fa_code">Code 2FA</string>
+  <string name="number_of_uploads">Ma limite de téléversements récents</string>
+  <string name="maximum_limit">Limite maximale</string>
+  <string name="maximum_limit_alert">Impossible d’afficher plus de 500</string>
+  <string name="set_limit">Fixer la limite de téléversement récent</string>
+  <string name="login_failed_2fa_not_supported">L’authentification à deux facteurs n’est pas supportée pour le moment.</string>
+  <string name="logout_verification">Voulez-vous vraiment vous déconnecter ?</string>
+  <string name="cancel">Annuler</string>
+  <string name="navigation_drawer_open">Ouvrir</string>
+  <string name="navigation_drawer_close">Fermer</string>
+  <string name="navigation_item_home">Accueil</string>
+  <string name="navigation_item_upload">Téléverser</string>
+  <string name="navigation_item_nearby">À proximité</string>
+  <string name="navigation_item_about">À propos</string>
+  <string name="navigation_item_settings">Paramètres</string>
+  <string name="navigation_item_feedback">Commentaire</string>
+  <string name="navigation_item_logout">Déconnexion</string>
 </resources>

@@ -2,5 +2,6 @@
 <resources>
   <string name="crash_dialog_title">Commons lagi kaco</string>
   <string name="crash_dialog_text">Wadhuh. Ana sing luput!</string>
+  <string name="crash_dialog_comment_prompt">Caritakaké apa sing panjenengan tembé lakoni, dumana lumantar layang-èl. Sing mangkono mbiyantu kita ndandani iki!</string>
   <string name="crash_dialog_ok_toast">Matur nuwun!</string>
 </resources>

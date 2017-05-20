@@ -19,7 +19,7 @@
   <string name="upload_failed_notification_title">%1$s gagal dimuat naik</string>
   <string name="upload_failed_notification_subtitle">Ketik untuk lihat</string>
   <string name="uploads_pending_notification_indicator" fuzzy="true">%d fail sedang dimuat naik</string>
-  <string name="title_activity_contributions">Muatan naik saya</string>
+  <string name="title_activity_contributions" fuzzy="true">Muatan naik saya</string>
   <string name="contribution_state_queued">Dibaris gilir</string>
   <string name="contribution_state_failed">Gagal</string>
   <string name="contribution_state_in_progress">%1$d%% lengkap</string>
@@ -43,18 +43,15 @@
   <string name="menu_upload_single">Muat naik</string>
   <string name="categories_search_text_hint">Cari dalam kategori</string>
   <string name="menu_save_categories">Simpan</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Belum ada muatnaikan</item>
     <item quantity="one">%d muatnaikan</item>
     <item quantity="other">%d muatnaikan</item>
   </plurals>
-  <string name="starting_multiple_uploads">Memulakan %d kerja muat naik</string>
-  <string name="multiple_uploads_title">1 muatnaikan</string>
+  <string name="starting_multiple_uploads" fuzzy="true">Memulakan %d kerja muat naik</string>
+  <string name="multiple_uploads_title" fuzzy="true">1 muatnaikan</string>
   <string name="categories_not_found">Tiada kategori yang sepadan dengan %1$s dijumpai</string>
-  <string name="categories_skip_explanation">Tambahkan kategori supaya gambar-gambar anda lebih senang ditemui di Wikimedia Commons.
-
-Mula menaip untuk menambahkan kategori.
-Ketik mesej ini (atau tekan butang undur) untuk melangkau langkah ini.</string>
+  <string name="categories_skip_explanation">Tambahkan kategori supaya gambar-gambar anda lebih senang ditemui di Wikimedia Commons.\n\nMula menaip untuk menambahkan kategori.\nKetik mesej ini (atau tekan butang undur) untuk melangkau langkah ini.</string>
   <string name="categories_activity_title">Kategori</string>
   <string name="preference_tracking">Laporan penggunaan</string>
   <string name="preference_tracking_summary">Hantar laporan penggunaan kepada Wikimedia untuk membantu kami menambah baik app ini</string>
@@ -105,8 +102,7 @@ Ketik mesej ini (atau tekan butang undur) untuk melangkau langkah ini.</string>
   <string name="license_name_pd_ineligible">Domain awam (tidak layak untuk hak cipta)</string>
   <string name="license_name_attribution">Pengiktirafan</string>
   <string name="license_name_gfdl">Lesen Dokumentasi Bebas GNU</string>
-  <string name="welcome_wikipedia_text">Sumbangkan gambar-gambar anda.
-Hidupkan rencana-rencana di Wikipedia!</string>
+  <string name="welcome_wikipedia_text">Sumbangkan gambar-gambar anda.\nHidupkan rencana-rencana di Wikipedia!</string>
   <string name="welcome_wikipedia_subtext">Gambar-gambar di Wikipedia datang dari Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Gambar-gambar anda akan membantu mendidik masyarakat seluruh dunia.</string>
   <string name="welcome_copyright_subtext">Elakkan bahan-bahan terhak cipta yang anda jumpai di Internet dan juga gambar-gambar poster, kulit buku, dsb.</string>
