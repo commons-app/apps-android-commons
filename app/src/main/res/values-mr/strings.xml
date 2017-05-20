@@ -20,11 +20,11 @@
   <string name="upload_progress_notification_title_finishing">%1$s अपभारण पूर्ण करीत आहे</string>
   <string name="upload_failed_notification_title">%1$s अपभारण अयशस्वी</string>
   <string name="upload_failed_notification_subtitle">बघण्यास अलगद टपली मारा</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">१ संचिका अपभारीत आहे</item>
     <item quantity="other">%d संचिका अपभारीत आहे</item>
   </plurals>
-  <string name="title_activity_contributions">माझी अपभारणे</string>
+  <string name="title_activity_contributions" fuzzy="true">माझी अपभारणे</string>
   <string name="contribution_state_queued">प्रतिक्षावलीत ठेवले</string>
   <string name="contribution_state_failed">अपयशी</string>
   <string name="contribution_state_in_progress">%1$d%% पूर्ण</string>
@@ -49,24 +49,21 @@
   <string name="menu_upload_single">अपभारण करा</string>
   <string name="categories_search_text_hint">वर्ग शोधा</string>
   <string name="menu_save_categories">जतन करा</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">अद्याप अपभारणे नाहीत</item>
     <item quantity="one">एक अपभारण</item>
     <item quantity="other">%d अपभारणे</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">१ अपभारण सुरू करीत आहे upload</item>
     <item quantity="other">%d अपभारणे सुरू करीत आहे</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">१ अपभारण</item>
     <item quantity="other">%d अपभारणे</item>
   </plurals>
   <string name="categories_not_found">%1$s शी जुळणारे कोणतेच वर्ग सापडले नाहीत</string>
-  <string name="categories_skip_explanation">विकिमिडिया कॉमन्सवर आपल्या संचिकांना शोधणे सोपी जाण्यासाठी त्यांना वर्ग जोडा.
-
-वर्ग जोडण्यास टंकन सुरू करा.
-ही पायरी चुकविण्यास या संदेशावर अलगद टिचका (किंवा बॅक कळ टिचका)</string>
+  <string name="categories_skip_explanation">विकिमिडिया कॉमन्सवर आपल्या संचिकांना शोधणे सोपी जाण्यासाठी त्यांना वर्ग जोडा.\n\nवर्ग जोडण्यास टंकन सुरू करा.\nही पायरी चुकविण्यास या संदेशावर अलगद टिचका (किंवा बॅक कळ टिचका)</string>
   <string name="categories_activity_title">वर्ग</string>
   <string name="preference_tracking">वापराचे अहवाल</string>
   <string name="preference_tracking_summary">या अॲपला सुधरविण्यास आपले वापराचे अहवाल विकिमिडियाला पाठवा</string>
@@ -120,17 +117,11 @@
   <string name="tutorial_1_text">विकिपीडियात वापरल्या जाणाऱ्या बहुतेक चित्रांचे यजमानत्व विकिमिडिया कॉमन्स स्वीकारते.</string>
   <string name="tutorial_1_subtext">जगातल्या अनेक लोकांना आपल्या चित्राद्वारे शिकता येते!</string>
   <string name="tutorial_2_text">कृपया निव्वळ आपण घेतलेल्या किंवा तयार केलेल्या चित्रांचेच अपभारण करा:</string>
-  <string name="tutorial_2_subtext">- नैसर्गिक गोष्टी (फुले, प्राणी, पर्वत)
-- नित्योपयोगी गोष्टी (दुचाकी, रेल्वे स्थानके)
-- प्रसिद्ध व्यक्ति (आपले महापौर, आपणास भेटलेले ऑलिंपिक खेळाडू)</string>
+  <string name="tutorial_2_subtext">- नैसर्गिक गोष्टी (फुले, प्राणी, पर्वत)\n- नित्योपयोगी गोष्टी (दुचाकी, रेल्वे स्थानके)\n- प्रसिद्ध व्यक्ति (आपले महापौर, आपणास भेटलेले ऑलिंपिक खेळाडू)</string>
   <string name="tutorial_3_text">कृपया अपभारण करू \'\'\'नका\'\'\':</string>
-  <string name="tutorial_3_subtext">-आपल्या किंवा मित्रांच्या सेल्फी
--आपण आंतरजाल (इंटरनेट) वरुन अधिभारण केलेली चित्रे
--प्रोप्रायटरी अॲप्सचे स्क्रिनशॉट</string>
+  <string name="tutorial_3_subtext">-आपल्या किंवा मित्रांच्या सेल्फी\n-आपण आंतरजाल (इंटरनेट) वरुन अधिभारण केलेली चित्रे\n-प्रोप्रायटरी अॲप्सचे स्क्रिनशॉट</string>
   <string name="tutorial_4_text">उदाहरणादाखल अपभारण:</string>
-  <string name="tutorial_4_subtext">- शीर्षक: Sydney Opera House
-- वर्णन: Sydney Opera House as viewed from across the bay
-- वर्ग: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext">- शीर्षक: Sydney Opera House\n- वर्णन: Sydney Opera House as viewed from across the bay\n- वर्ग: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">आपली चित्रे सहभागा. विकिपीडियावरील लेखात जीवंतपणा आणा!</string>
   <string name="welcome_wikipedia_subtext">विकिपीडियावरची चित्रे विकिमिडिया कॉमन्सवरुन येतात.</string>
   <string name="welcome_copyright_text">जगातल्या अनेक लोकांना आपल्या चित्राद्वारे शिकता येते.</string>

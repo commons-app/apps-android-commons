@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="crash_dialog_title">Неуспех с Общомедия</string>
+  <string name="crash_dialog_text">Опа. Нещо се обърка!</string>
+  <string name="crash_dialog_comment_prompt">Кажете ни какво правите, а след това го споделете с нас по имейл. Това ще ни помогне да го оправим!</string>
+  <string name="crash_dialog_ok_toast">Благодарности!</string>
+</resources>

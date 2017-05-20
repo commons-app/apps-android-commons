@@ -10,7 +10,7 @@
   <string name="login_failed">ಲಾಗಿನ್ ಅಯಿಜಾತ್ತ!</string>
   <string name="uploading_started">ದಿಂಜಪುನಾ ಸುರು ಅಂಡ್!</string>
   <string name="upload_failed_notification_subtitle">ತುಯಾರ ಮೆಲ್ಲ ಒತ್ತುಲೆ</string>
-  <string name="title_activity_contributions">ಎನ್ನ ದಿಂಜಯೀನಾ ವಿಚಾರೊಳು</string>
+  <string name="title_activity_contributions" fuzzy="true">ಎನ್ನ ದಿಂಜಯೀನಾ ವಿಚಾರೊಳು</string>
   <string name="contribution_state_queued">ದಿಂಜೊಂತುಂಡು</string>
   <string name="contribution_state_failed">ದಿಂಜಿಜಿ</string>
   <string name="contribution_state_starting">ದಿಂಜೊಂತುಂಡು...</string>

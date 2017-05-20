@@ -24,7 +24,7 @@
     <item quantity="one">קובץ אחד מועלה</item>
     <item quantity="other">%d קבצים מועלים</item>
   </plurals>
-  <string name="title_activity_contributions">ההעלאות שלי</string>
+  <string name="title_activity_contributions">ההעלאות האחרונות שלי</string>
   <string name="contribution_state_queued">בתור</string>
   <string name="contribution_state_failed">נכשלה</string>
   <string name="contribution_state_in_progress">%1$d%% הושלמו</string>
@@ -42,6 +42,7 @@
   <string name="login_failed_password">לא ניתן להיכנס – נא לבדוק את הססמה שלך</string>
   <string name="login_failed_throttled">יותר מדי ניסיונות כושלים להיכנס. נא לנסות שוב בעוד מספר דקות.</string>
   <string name="login_failed_blocked">סליחה, החשבון הזה חסום בוויקישיתוף</string>
+  <string name="login_failed_2fa_needed">יש לספק את קוד האימות הדו־שלבי שלך.</string>
   <string name="login_failed_generic">ההעלאלה נכשלה</string>
   <string name="share_upload_button">העלאה</string>
   <string name="multiple_share_base_title">שם האוסף</string>
@@ -50,8 +51,10 @@
   <string name="categories_search_text_hint">חיפוש קטגוריות</string>
   <string name="menu_save_categories">שמירה</string>
   <string name="refresh_button">רענון</string>
-  <plurals name="contributions_subtitle">
-    <item quantity="zero">אין העלאות</item>
+  <string name="gps_disabled">ה־GPS במכשיר שלך אינו מופעל. האם להפעיל אותו?</string>
+  <string name="enable_gps">הפעלת GPS</string>
+  <string name="contributions_subtitle_zero">לא הועלה עדיין שום דבר</string>
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="one">העלאה אחת</item>
     <item quantity="other">%d העלאות</item>
   </plurals>
@@ -64,10 +67,7 @@
     <item quantity="other">%d העלאות</item>
   </plurals>
   <string name="categories_not_found">לא נמצאו קטגוריות בשם %1$s</string>
-  <string name="categories_skip_explanation">נא להוסיף קטגוריות כדי שיהיה קל יותר למצוא את התמונות שלך בוויקישיתוף.
-
-כדי להוסיף קטגוריה יש להתחיל לכתוב.
-יש ללחוץ על ההודעה הזאת או על כפתור \"חזרה\" כדי לדלג על הצעד הזה.</string>
+  <string name="categories_skip_explanation">נא להוסיף קטגוריות כדי שיהיה קל יותר למצוא את התמונות שלך בוויקישיתוף.\n\nכדי להוסיף קטגוריה יש להתחיל לכתוב.\nיש ללחוץ על ההודעה הזאת או על כפתור \"חזרה\" כדי לדלג על הצעד הזה.</string>
   <string name="categories_activity_title">קטגוריות</string>
   <string name="preference_tracking">דוחות שימוש</string>
   <string name="preference_tracking_summary">לשלוח דוחות שימוש לויקימדיה כדי לעזור לנו לשפר את היישום</string>
@@ -133,17 +133,11 @@
   <string name="tutorial_1_text">ויקישיתוף מארח את רוב התמונות שמשמשות בוויקיפדיה.</string>
   <string name="tutorial_1_subtext">התמונות שלכם עוזרות לתת השכלה לאנשים מסביב לעולם!</string>
   <string name="tutorial_2_text">נא להעלות תמונות שצולמו או נוצרו באופן מלא על־ידיכם:</string>
-  <string name="tutorial_2_subtext">- עצמים טבעיים (פרחים, חיות, הרים)
-- חפצים שימושיים (אופניים, תחנות רכבת)
-- אנשים מפורסמים (ראש העיר שלכם, ספורטאים אולימפיים שפגשתם)</string>
+  <string name="tutorial_2_subtext">- עצמים טבעיים (פרחים, חיות, הרים)\n- חפצים שימושיים (אופניים, תחנות רכבת)\n- אנשים מפורסמים (ראש העיר שלכם, ספורטאים אולימפיים שפגשתם)</string>
   <string name="tutorial_3_text">נא לא להעלות:</string>
-  <string name="tutorial_3_subtext">- תמונות עצמיות (\"סלפי\") או תמונות של חברים שלכם
-- תמונות שהורדתם מהאינטרנט
-- צילומי מסך של יישומים קנייניים</string>
+  <string name="tutorial_3_subtext">- תמונות עצמיות (\"סלפי\") או תמונות של חברים שלכם\n- תמונות שהורדתם מהאינטרנט\n- צילומי מסך של יישומים קנייניים</string>
   <string name="tutorial_4_text">העלאה לדוגמה:</string>
-  <string name="tutorial_4_subtext">- כותרת: בית האופרה של סידני
-- תיאור: בית האופרה של סידני מהצד השני של המפרץ
-- קטגוריות: Sydney Opera House (בית האופרה של סידני), Sydney Opera House from the west (בית האופרה של סידני מהמערב), Sydney Opera House remote views (מראה מרחוק על בית האופרה של סידני)</string>
+  <string name="tutorial_4_subtext">- כותרת: בית האופרה של סידני\n- תיאור: בית האופרה של סידני מהצד השני של המפרץ\n- קטגוריות: Sydney Opera House (בית האופרה של סידני), Sydney Opera House from the west (בית האופרה של סידני מהמערב), Sydney Opera House remote views (מראה מרחוק על בית האופרה של סידני)</string>
   <string name="welcome_wikipedia_text">תרמו את התמונות שלכם. עזרו לערכים בוויקיפדיה להתעורר לחיים!</string>
   <string name="welcome_wikipedia_subtext">התמונות בוויקיפדיה מגיעות מ־Wikimedia Commons.</string>
   <string name="welcome_copyright_text">התמונות שלכם עוזרות להעניק חינוך לאנשים מסביב לעולם.</string>
@@ -160,6 +154,7 @@
   <string name="location_permission_rationale">הרשאה לא מחייבת: קבלת מיקום נוכחי בשביל הצעות קטגוריות</string>
   <string name="ok">אישור</string>
   <string name="title_activity_nearby">מקומות בסביבה</string>
+  <string name="no_nearby">לא נמצאו מקומות בסביבה</string>
   <string name="warning">אזהרה</string>
   <string name="file_exists">הקובץ הזה כבר קיים בוויקישיתוף. האם להמשיך?</string>
   <string name="yes">כן</string>
@@ -168,8 +163,26 @@
   <string name="media_detail_media_title">כותרת המדיה</string>
   <string name="media_detail_description">תיאור</string>
   <string name="media_detail_description_explanation">תיאור המדיה יהיה כאן. זה יכול להיות ארוך למדי, ולהתפרס על מספר שורות. אנחנו מקווים שזה נראה טוב.</string>
+  <string name="media_detail_uploaded_date">תאריך העלאה</string>
   <string name="become_a_tester_title">להפוך לבודק בטא</string>
   <string name="become_a_tester_description">להירשם לערוץ הבטא שלנו בחנות גוגל Play ולקבל גישה מוקדמת לאפשרויות חדשות ותיקוני באגים</string>
   <string name="use_wikidata">להשתמש בוויקינתונים</string>
   <string name="use_wikidata_summary">(אזהרה: כיבוי של זה עלול לגרום לצריכת נתונים ניידים גבוהה)</string>
+  <string name="_2fa_code">קוד אימות דו־שלבי</string>
+  <string name="number_of_uploads">הגבלת ההעלאות האחרונה שלי</string>
+  <string name="maximum_limit">מגבלה מרבית</string>
+  <string name="maximum_limit_alert">לא ניתן להציג יותר מ־500</string>
+  <string name="set_limit">הגדרת מגבלת העלאות אחרונות</string>
+  <string name="login_failed_2fa_not_supported">אימות דו־שלבי אינו נתמך כעת.</string>
+  <string name="logout_verification">האם באמת לצאת מהחשבון?</string>
+  <string name="cancel">ביטול</string>
+  <string name="navigation_drawer_open">פתיחה</string>
+  <string name="navigation_drawer_close">סגירה</string>
+  <string name="navigation_item_home">דף הבית</string>
+  <string name="navigation_item_upload">העלאה</string>
+  <string name="navigation_item_nearby">בסביבה</string>
+  <string name="navigation_item_about">אודות</string>
+  <string name="navigation_item_settings">הגדרות</string>
+  <string name="navigation_item_feedback">משוב</string>
+  <string name="navigation_item_logout">יציאה</string>
 </resources>

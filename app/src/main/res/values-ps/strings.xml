@@ -14,7 +14,7 @@
   <string name="uploading_started">پورته کېدنه پيل شوه!</string>
   <string name="upload_completed_notification_title">%1$s پورته شوی!</string>
   <string name="upload_progress_notification_title_in_progress">د %1$s پورته کول</string>
-  <string name="title_activity_contributions">زما پورته کېدنې</string>
+  <string name="title_activity_contributions" fuzzy="true">زما پورته کېدنې</string>
   <string name="contribution_state_in_progress">%1$d%% بشپړ</string>
   <string name="contribution_state_starting">د برسېرېدلو په حال کې...</string>
   <string name="menu_from_gallery">له انځورتون څخه</string>
@@ -31,7 +31,7 @@
   <string name="menu_upload_single">پورته کول</string>
   <string name="categories_search_text_hint">وېشنيزې پلټل</string>
   <string name="menu_save_categories">خوندي کول</string>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 پورته کول</item>
     <item quantity="other">%d پورته کول</item>
   </plurals>

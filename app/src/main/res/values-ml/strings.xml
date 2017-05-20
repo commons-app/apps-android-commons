@@ -22,7 +22,7 @@
     <item quantity="one">1 പ്രമാണം അപ്‌ലോഡ് ചെയ്യുന്നു</item>
     <item quantity="other">%d പ്രമാണങ്ങൾ അപ്‌ലോഡ് ചെയ്യുന്നു</item>
   </plurals>
-  <string name="title_activity_contributions">എന്റെ അപ്‌ലോഡുകൾ</string>
+  <string name="title_activity_contributions" fuzzy="true">എന്റെ അപ്‌ലോഡുകൾ</string>
   <string name="contribution_state_queued">നിരയായി വെച്ചു</string>
   <string name="contribution_state_failed">പരാജയപ്പെട്ടു</string>
   <string name="contribution_state_in_progress">%1$d%% പൂർണ്ണം</string>
@@ -46,32 +46,28 @@
   <string name="menu_upload_single">അപ്‌ലോഡ്</string>
   <string name="categories_search_text_hint">വർഗ്ഗങ്ങളിൽ തിരയുക</string>
   <string name="menu_save_categories">സേവ് ചെയ്യുക</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">ഒരു അപ്‌ലോഡും ചെയ്തില്ല</item>
     <item quantity="one">ഒരു അപ്‌ലോഡ്</item>
     <item quantity="other">%d അപ്‌ലോഡുകൾ</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">ഒരു അപ്‌ലോഡ് തുടങ്ങുന്നു</item>
     <item quantity="other">%d അപ്‌ലോഡുകൾ തുടങ്ങുന്നു</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">ഒരു അപ്‌ലോഡ്</item>
     <item quantity="other">%d അപ്‌ലോഡുകൾ</item>
   </plurals>
   <string name="categories_not_found">%1$s എന്നതുമായി പൊരുത്തമുള്ള ഒരു വർഗ്ഗവും കണ്ടെത്താനായില്ല</string>
-  <string name="categories_skip_explanation">താങ്കളുടെ ചിത്രങ്ങൾ വിക്കിമീഡിയ കോമൺസിൽ കൂടുതൽ എളുപ്പത്തിൽ കണ്ടെത്തപ്പെടാനായി വർഗ്ഗങ്ങൾ ചേർക്കുക.
-
-വർഗ്ഗങ്ങൾ ചേർക്കാനായി ടൈപ്പ് ചെയ്ത് തുടങ്ങുക.
-ഈ ഘട്ടം ഒഴിവാക്കാൻ ടാപ് ചെയ്യുക (അല്ലെങ്കിൽ പിന്നോട്ട് പോവുക).</string>
+  <string name="categories_skip_explanation">താങ്കളുടെ ചിത്രങ്ങൾ വിക്കിമീഡിയ കോമൺസിൽ കൂടുതൽ എളുപ്പത്തിൽ കണ്ടെത്തപ്പെടാനായി വർഗ്ഗങ്ങൾ ചേർക്കുക.\n\nവർഗ്ഗങ്ങൾ ചേർക്കാനായി ടൈപ്പ് ചെയ്ത് തുടങ്ങുക.\nഈ ഘട്ടം ഒഴിവാക്കാൻ ടാപ് ചെയ്യുക (അല്ലെങ്കിൽ പിന്നോട്ട് പോവുക).</string>
   <string name="categories_activity_title">വർഗ്ഗങ്ങൾ</string>
   <string name="preference_tracking">ഉപയോഗം സംബന്ധിച്ച റിപ്പോർട്ടുകൾ</string>
   <string name="preference_tracking_summary">ഈ ആപ് മെച്ചപ്പെടുത്തുന്നതിനായി ഉപയോഗം സംബന്ധിച്ച റിപ്പോർട്ടുകൾ വിക്കിമീഡിയയ്ക്ക് അയയ്ക്കുക</string>
   <string name="title_activity_settings">സജ്ജീകരണങ്ങൾ</string>
   <string name="menu_about">വിവരണം</string>
   <string name="about_license" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;അപാച്ചേ അനുമതിപത്രം പതിപ്പ് 2&lt;/a&gt; പ്രകാരം പുറത്തിറക്കപ്പെട്ട ഓപ്പൺ സോഴ്സ് സോഫ്റ്റ്‌വേർ</string>
-  <string name="about_improve" fuzzy="true">സ്രോതസ്സ് രൂപം &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;ജിറ്റ്ഹബിൽ&lt;/a&gt; ലഭ്യമാണ്.
-പ്രശ്നങ്ങൾ &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;ബഗ്സില്ലയിൽ&lt;/a&gt; അറിയിക്കുക.</string>
+  <string name="about_improve" fuzzy="true">സ്രോതസ്സ് രൂപം &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;ജിറ്റ്ഹബിൽ&lt;/a&gt; ലഭ്യമാണ്.\nപ്രശ്നങ്ങൾ &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;ബഗ്സില്ലയിൽ&lt;/a&gt; അറിയിക്കുക.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;സ്വകാര്യതാനയം&lt;/a&gt;</string>
   <string name="title_activity_about">വിവരണം</string>
   <string name="menu_feedback">പ്രതികരണം അറിയിക്കുക (ഇമെയിൽ വഴി)</string>

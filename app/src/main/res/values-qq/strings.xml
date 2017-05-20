@@ -1,56 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">The name of the application. A short form of \"Wikimedia Commons\". It is used in the app\'s launcher icon.
-{{Identical|Wikimedia Commons}}</string>
-  <string name="menu_settings">Label for menu item to show settings.
-{{Identical|Settings}}</string>
+  <string name="app_name">The name of the application. A short form of \"Wikimedia Commons\". It is used in the app\'s launcher icon.\n{{Identical|Wikimedia Commons}}</string>
+  <string name="menu_settings">Label for menu item to show settings.\n{{Identical|Settings}}</string>
   <string name="username">{{Identical|Username}}</string>
   <string name="password">{{Identical|Password}}</string>
-  <string name="login">Button to have people log in.
-{{Identical|Log in}}</string>
+  <string name="login">Button to have people log in.\n{{Identical|Log in}}</string>
   <string name="signup">{{Identical|Sign up}}</string>
-  <string name="logging_in_title">Title of dialog box shown while logging in.
-{{Identical|Logging in}}</string>
-  <string name="logging_in_message">Contents of dialog box shown while logging in.
-{{Identical|Please wait}}</string>
-  <string name="login_success">Message when login has succeeded.
-{{Identical|Login successful}}</string>
-  <string name="login_failed">Message when login has failed.
-{{Identical|Login failed}}</string>
+  <string name="logging_in_title">Title of dialog box shown while logging in.\n{{Identical|Logging in}}</string>
+  <string name="logging_in_message">Contents of dialog box shown while logging in.\n{{Identical|Please wait}}</string>
+  <string name="login_success">Message when login has succeeded.\n{{Identical|Login successful}}</string>
+  <string name="login_failed">Message when login has failed.\n{{Identical|Login failed}}</string>
   <string name="authentication_failed">Message shown to user when authentication to Commons fails. Shown as a small toast that disappears after a while.</string>
   <string name="uploading_started">Toast message when uploading has started</string>
-  <string name="upload_completed_notification_title">Title for notification about upload being completed. %1$s represents file name.
-{{Identical|Uploaded}}</string>
+  <string name="upload_completed_notification_title">Title for notification about upload being completed. %1$s represents file name.\n{{Identical|Uploaded}}</string>
   <string name="upload_completed_notification_text">Text for notification about upload being completed.</string>
   <string name="upload_progress_notification_title_start">Title for notificiation about upload being started. %1$s represents file name</string>
-  <string name="upload_progress_notification_title_in_progress">Title for notification about upload being in progress. %1$s represents file name
-{{Identical|Uploading}}</string>
+  <string name="upload_progress_notification_title_in_progress">Title for notification about upload being in progress. %1$s represents file name\n{{Identical|Uploading}}</string>
   <string name="upload_progress_notification_title_finishing">Title for notification about upload being completed. %1$s represents file name</string>
   <string name="upload_failed_notification_title">Title for notification about upload failing. %1$s represents file name</string>
   <string name="upload_failed_notification_subtitle">Text for notification about upload being completed.</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">Status text about number of uploads left.
-* %d represents number of uploads left, including current one
-</item>
-    <item quantity="other">Status text about number of uploads left.
-* %d represents number of uploads left, including current one
-</item>
+    <item quantity="one">Status text about number of uploads left.\n* %d represents number of uploads left, including current one\n</item>
+    <item quantity="other">Status text about number of uploads left.\n* %d represents number of uploads left, including current one\n</item>
   </plurals>
-  <string name="title_activity_contributions">Title for screen showing my contributions.
-{{Identical|My upload}}</string>
-  <string name="contribution_state_queued">Show status of upload as currently queued.
-{{Identical|Queue}}</string>
-  <string name="contribution_state_failed">Show status of upload as failed.
-{{Identical|Failed}}</string>
-  <string name="contribution_state_in_progress">Show status of upload as currently in progress. &lt;code&gt;%1$d%%&lt;/code&gt; represents percentage of current file that has been uploaded; &lt;code&gt;%%&lt;/code&gt; is rendered \"%%\", because &lt;code&gt;%%&lt;/code&gt; is a special character here so to render one you have to write two.
-{{Identical|Complete}}</string>
-  <string name="contribution_state_starting">Show status of upload as about to start.
-{{Identical|Uploading}}</string>
+  <string name="title_activity_contributions">Title for screen showing my contributions.</string>
+  <string name="contribution_state_queued">Show status of upload as currently queued.\n{{Identical|Queue}}</string>
+  <string name="contribution_state_failed">Show status of upload as failed.\n{{Identical|Failed}}</string>
+  <string name="contribution_state_in_progress">Show status of upload as currently in progress. &lt;code&gt;%1$d%%&lt;/code&gt; represents percentage of current file that has been uploaded; &lt;code&gt;%%&lt;/code&gt; is rendered \"%%\", because &lt;code&gt;%%&lt;/code&gt; is a special character here so to render one you have to write two.\n{{Identical|Complete}}</string>
+  <string name="contribution_state_starting">Show status of upload as about to start.\n{{Identical|Uploading}}</string>
   <string name="menu_from_gallery">Action bar item to prompt the user to pick a picture from the phone to upload</string>
   <string name="menu_from_camera">Action bar item to allow the user to take a picture to upload</string>
   <string name="menu_nearby">{{Identical|Nearby}}</string>
-  <string name="provider_contributions">Display name for user\'s contributions in the phone\'s settings sync screen.
-{{Identical|My upload}}</string>
+  <string name="provider_contributions">Display name for user\'s contributions in the phone\'s settings sync screen.\n{{Identical|My upload}}</string>
   <string name="menu_share">{{Identical|Share}}</string>
   <string name="menu_open_in_browser">Menu item that opens image in the browser.</string>
   <string name="share_title_hint">{{Identical|Title}}</string>
@@ -64,42 +45,31 @@
   <string name="share_upload_button">{{Identical|Upload}}</string>
   <string name="multiple_share_base_title">Hint for the textbox that lets user type the Base title for the set of multiple images being uploaded. Example: If the user types \'Visit to Kolkata\' in this text box, the images will all be titled as \'Visit to Kolkata - 1\', \'Visit to Kolkata - 2\', etc.</string>
   <string name="provider_modifications">{{Identical|Modification}}</string>
-  <string name="menu_upload_single">Hint text on menu item to upload a single image.
-{{Identical|Upload}}</string>
-  <string name="categories_search_text_hint">This message is followed by a list of the categories.
-{{Identical|Search category}}</string>
-  <string name="menu_save_categories">Hint text on menu item to save selected categories.
-{{Identical|Save}}</string>
+  <string name="menu_upload_single">Hint text on menu item to upload a single image.\n{{Identical|Upload}}</string>
+  <string name="categories_search_text_hint">This message is followed by a list of the categories.\n{{Identical|Search category}}</string>
+  <string name="menu_save_categories">Hint text on menu item to save selected categories.\n{{Identical|Save}}</string>
   <string name="refresh_button">{{Identical|Refresh}}</string>
   <string name="multiple_uploads_title">{{Identical|Upload}}</string>
   <string name="categories_not_found">Message shown to the user when no category matching what they searched for was found. %1$s represents the category name</string>
   <string name="categories_skip_explanation">Text explaining to users why and how to add categories to images. Users can also tap this message to skip adding categories.</string>
-  <string name="categories_activity_title">Title for the activity where Categories are being selected to add to the Image.
-{{Identical|Category}}</string>
+  <string name="categories_activity_title">Title for the activity where Categories are being selected to add to the Image.\n{{Identical|Category}}</string>
   <string name="preference_tracking">Text for preference that enables the user to enable or disable collection of data about the user\'s usage patterns.</string>
   <string name="preference_tracking_summary">Help text for preference that enables the user to enable or disable collection of data about the user\'s usage patterns.</string>
   <string name="title_activity_settings">{{Identical|Settings}}</string>
   <string name="title_activity_signup">{{Identical|Sign up}}</string>
   <string name="menu_about">{{Identical|About}}</string>
-  <string name="about_license">\'\'\'The name \"Wikimedia Commons\" is a trademark in English, and must not be translated.\'\'\'
-
-License and legal notice.</string>
-  <string name="about_improve">{{doc-important|Please make sure that your translation of \"source\" means \"source code\", not \"reference source\".}}
-Source and Bugs</string>
-  <string name="about_privacy_policy">HTML fragment linking to Wikimedia\'s privacy policy. Note: avoid percent-encoding in the URL, as this causes problems with Android\'s resource compiler. Use accented/non-ASCII characters \"as is\" if possible. (We can fix it manually, so don\'t worry too much about it.)
-{{Identical|Privacy policy}}</string>
+  <string name="about_license">\'\'\'The name \"Wikimedia Commons\" is a trademark in English, and must not be translated.\'\'\'\n\nLicense and legal notice.</string>
+  <string name="about_improve">{{doc-important|Please make sure that your translation of \"source\" means \"source code\", not \"reference source\".}}\nSource and Bugs</string>
+  <string name="about_privacy_policy">HTML fragment linking to Wikimedia\'s privacy policy. Note: avoid percent-encoding in the URL, as this causes problems with Android\'s resource compiler. Use accented/non-ASCII characters \"as is\" if possible. (We can fix it manually, so don\'t worry too much about it.)\n{{Identical|Privacy policy}}</string>
   <string name="about_credits">{{Identical|Credit}}</string>
   <string name="title_activity_about">{{Identical|About}}</string>
   <string name="menu_feedback">Menu item text that prompts user to send feedback to WMF via email</string>
   <string name="waiting_first_sync">Message shown on contributions list during first sync.</string>
   <string name="no_uploads_yet">Message shown on contribution list during non-first sync if no uploads present.</string>
-  <string name="menu_retry_upload">Menu item text prompting user to retry a failed upload.
-{{Identical|Retry}}</string>
-  <string name="menu_cancel_upload">Menu item text prompting user to cancel and delete a failed upload.
-{{Identical|Cancel}}</string>
+  <string name="menu_retry_upload">Menu item text prompting user to retry a failed upload.\n{{Identical|Retry}}</string>
+  <string name="menu_cancel_upload">Menu item text prompting user to cancel and delete a failed upload.\n{{Identical|Cancel}}</string>
   <string name="share_license_summary">Text label telling user the license of the current upload in progress. %1$s refers to appropriate display text for the chosen CC license</string>
-  <string name="menu_download">Menu item text prompting user to download a selected photo or media file locally.
-{{Identical|Download}}</string>
+  <string name="menu_download">Menu item text prompting user to download a selected photo or media file locally.\n{{Identical|Download}}</string>
   <string name="preference_license">{{Identical|License}}</string>
   <string name="use_previous">This is a button text. Concise wording is preferred (e.g. \"&amp;\" instead of \"and\"), where possible. It should ideally be rendered in one line, even on small devices.</string>
   <string name="license_name_cc_by_sa"> Attribution-Sharelike License display name.</string>
@@ -123,28 +93,27 @@ Source and Bugs</string>
   <string name="license_name_pd_ineligible">Unused at this time.</string>
   <string name="license_name_attribution">{{Identical|Attribution}}</string>
   <string name="tutorial_3_text">Capitals not required</string>
-  <string name="welcome_wikipedia_text">Message inviting users to contribute their images.
-
-Followed by {{msg-wm|Commons-android-strings-welcome wikipedia subtext}}.</string>
+  <string name="welcome_wikipedia_text">Message inviting users to contribute their images.\n\nFollowed by {{msg-wm|Commons-android-strings-welcome wikipedia subtext}}.</string>
   <string name="welcome_wikipedia_subtext">Preceded by {{msg-wm|Commons-android-strings-welcome wikipedia text}}.</string>
   <string name="welcome_copyright_text">Message explaining the educational benefit of contributing images.</string>
   <string name="welcome_copyright_subtext">Message explaining what kind of images not to submit.</string>
   <string name="welcome_final_text">Message asking user if they understand what kinds of images to upload.</string>
-  <string name="welcome_final_button_text">Button text for confirming the user understands what kinds of images to upload.
-{{Identical|Yes}}</string>
-  <string name="detail_panel_cats_label">Label for categories list in media detail panel.
-{{Identical|Category}}</string>
-  <string name="detail_panel_cats_loading">Placeholder for categories list in media detail panel, while loading from network.
-{{Identical|Loading}}</string>
-  <string name="detail_panel_cats_none">Placeholder for categories list in media detail panel, if no categories found.
-{{Identical|None selected}}</string>
+  <string name="welcome_final_button_text">Button text for confirming the user understands what kinds of images to upload.\n{{Identical|Yes}}</string>
+  <string name="detail_panel_cats_label">Label for categories list in media detail panel.\n{{Identical|Category}}</string>
+  <string name="detail_panel_cats_loading">Placeholder for categories list in media detail panel, while loading from network.\n{{Identical|Loading}}</string>
+  <string name="detail_panel_cats_none">Placeholder for categories list in media detail panel, if no categories found.\n{{Identical|None selected}}</string>
   <string name="detail_description_empty">{{Identical|No description}}</string>
-  <string name="menu_refresh">Label for menu item that refreshes current list of images.
-{{Identical|Refresh}}</string>
+  <string name="menu_refresh">Label for menu item that refreshes current list of images.\n{{Identical|Refresh}}</string>
   <string name="ok">{{Identical|OK}}</string>
   <string name="warning">{{Identical|Warning}}</string>
   <string name="yes">{{Identical|Yes}}</string>
   <string name="no">{{Identical|No}}</string>
   <string name="media_detail_title">{{Identical|Title}}</string>
   <string name="media_detail_description">{{Identical|Description}}</string>
+  <string name="cancel">{{Identical|Cancel}}</string>
+  <string name="navigation_drawer_open">{{Identical|Open}}</string>
+  <string name="navigation_drawer_close">{{Identical|Close}}</string>
+  <string name="navigation_item_home">{{Identical|Home}}</string>
+  <string name="navigation_item_upload">{{Identical|Upload}}</string>
+  <string name="navigation_item_nearby">{{Identical|Nearby}}</string>
 </resources>

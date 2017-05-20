@@ -21,10 +21,10 @@
   <string name="upload_failed_notification_title">Не могу да отпремим „%1$s“</string>
   <string name="upload_failed_notification_subtitle">Тапните да бисте видели</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">1 датотека се отпрема</item>
-    <item quantity="other">Отпрема се датотека: %d</item>
+    <item quantity="one">%d датотека се отпрема</item>
+    <item quantity="other">%d датотеке се отпремају</item>
   </plurals>
-  <string name="title_activity_contributions">Моја отпремања</string>
+  <string name="title_activity_contributions">Моја скорашња отпремања</string>
   <string name="contribution_state_queued">На чекању</string>
   <string name="contribution_state_failed">Није успело</string>
   <string name="contribution_state_in_progress">%1$d%% отпремљено</string>
@@ -51,23 +51,20 @@
   <string name="menu_save_categories">Сачувај</string>
   <string name="refresh_button">Освежи</string>
   <plurals name="contributions_subtitle">
-    <item quantity="zero">Нема још отпремања</item>
-    <item quantity="one">једно отпремање</item>
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%d отпремање</item>
     <item quantity="other">%d отпремања</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Започни једно отпремање</item>
+    <item quantity="one">Започни %d отпремање</item>
     <item quantity="other">Започни %d отпремања</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">1 отпремање</item>
+    <item quantity="one">%d отпремање</item>
     <item quantity="other">%d отпремања</item>
   </plurals>
   <string name="categories_not_found">Нема категорија које одговарају %1$s</string>
-  <string name="categories_skip_explanation">Додајте категорије на слике да бисте олакшали корисницима њихово проналажење на Остави.
-
-Да бисте додали категорију, почните са писањем њеног имена.
-Тапните на ову поруку (или притисните назад) да бисте прескочили овај корак.</string>
+  <string name="categories_skip_explanation">Додајте категорије на слике да бисте олакшали корисницима њихово проналажење на Остави.\n\nДа бисте додали категорију, почните са писањем њеног имена.\nТапните на ову поруку (или притисните назад) да бисте прескочили овај корак.</string>
   <string name="categories_activity_title">Категорије</string>
   <string name="preference_tracking">Извештаји о употреби</string>
   <string name="preference_tracking_summary">Шаљите извештаје о употреби на Викимедију ради побољшања апликације</string>
@@ -77,7 +74,7 @@
   <string name="about_license">Софтвер отвореног кода доступан под лиценцом &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache вер. 2&lt;/a&gt; Викимедијина Остава и њен лого су заштитни знаци Викимедијине Фондације и користе се са дозволом Викимедијине Фондацине. Ми не одобравамо или подржавмо Викимедијину Фондацију.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Изворни кôд&lt;/a&gt; и &lt;a href=\"https://commons-app.github.io/\"&gt;веб-сајт&lt;/a&gt; на GitHub-у. Направите нови &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;захтев на GitHub-у&lt;/a&gt; да бисте пријавили грешке или дали предлоге.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Политика приватности&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;ЗАСЛУГЕ&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Заслуге&lt;/a&gt;</string>
   <string name="title_activity_about">О апликацији</string>
   <string name="menu_feedback">Пошаљите повратне информације (путем е-поште)</string>
   <string name="no_email_client">Није инсталиран имејл клијент</string>
@@ -133,17 +130,11 @@
   <string name="tutorial_1_text">Викимедијина Остава садржи већину слика која се користи на Википедији.</string>
   <string name="tutorial_1_subtext">Ваше слике помажу у образовању људи широм света.</string>
   <string name="tutorial_2_text">Молимо Вас да поставите слике које сте преузели или креирали у потпуности сами:</string>
-  <string name="tutorial_2_subtext">- Природне објекте (цвеће, животиње, планине)
-- Корисне објекте (бицикле, железничке станице)
-- Познате људе (ваш градоначелник, Олимпијце које сте срели)</string>
+  <string name="tutorial_2_subtext">- Природне објекте (цвеће, животиње, планине)\n- Корисне објекте (бицикле, железничке станице)\n- Познате људе (ваш градоначелник, Олимпијце које сте срели)</string>
   <string name="tutorial_3_text">Молимо НЕ отпремајте:</string>
-  <string name="tutorial_3_subtext">- Селфије и слике твојих пријатеља
-- Слике које сте преузели са интернета
-- Скриншотове из сопствених апликација</string>
+  <string name="tutorial_3_subtext">- Селфије и слике твојих пријатеља\n- Слике које сте преузели са интернета\n- Скриншотове из сопствених апликација</string>
   <string name="tutorial_4_text">Пример отпремања:</string>
-  <string name="tutorial_4_subtext">— Наслов: Сиднејска опера
-— Опис: Сиднејска опера, поглед преко залива
-— Категорије: Сиднејска опера, Сиднејска опера са запада, погледи на Сиднејксу оперу из даљине</string>
+  <string name="tutorial_4_subtext">— Наслов: Сиднејска опера\n— Опис: Сиднејска опера, поглед преко залива\n— Категорије: Сиднејска опера, Сиднејска опера са запада, погледи на Сиднејксу оперу из даљине</string>
   <string name="welcome_wikipedia_text">Делите своје слике. Оживите чланке на Википедији!</string>
   <string name="welcome_wikipedia_subtext">Слике на Википедији долазе из Оставе.</string>
   <string name="welcome_copyright_text">Са вашим сликама помажете у образовању људи широм света.</string>

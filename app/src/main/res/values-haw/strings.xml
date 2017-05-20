@@ -18,7 +18,7 @@
   <string name="upload_progress_notification_title_finishing">Hele a pau ka hoʻouka ʻana o %1$s</string>
   <string name="upload_failed_notification_title">Ua hāʻule ʻo %1$s i ka hoʻouka ʻana</string>
   <string name="upload_failed_notification_subtitle">Kīkē no ka ʻike ʻana</string>
-  <string name="title_activity_contributions">Kaʻu hoʻouka</string>
+  <string name="title_activity_contributions" fuzzy="true">Kaʻu hoʻouka</string>
   <string name="contribution_state_queued">Kali</string>
   <string name="contribution_state_failed">Hāʻule</string>
   <string name="contribution_state_in_progress">%1$d%% pau</string>

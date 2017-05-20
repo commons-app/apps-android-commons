@@ -21,10 +21,10 @@
   <string name="upload_failed_notification_title">Falló la carga de «%1$s»</string>
   <string name="upload_failed_notification_subtitle">Toca para ver</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">Cargando 1 archivo</item>
-    <item quantity="other">Cargando %d archivos</item>
+    <item quantity="one">Subiendo %d archivo</item>
+    <item quantity="other">Subiendo %d archivos</item>
   </plurals>
-  <string name="title_activity_contributions">Mis subidas</string>
+  <string name="title_activity_contributions">Mis subidas recientes</string>
   <string name="contribution_state_queued">En la cola</string>
   <string name="contribution_state_failed">Fallido</string>
   <string name="contribution_state_in_progress">%1$d %% completado</string>
@@ -42,6 +42,7 @@
   <string name="login_failed_password">No se pudo iniciar sesión: revisa tu contraseña</string>
   <string name="login_failed_throttled">Demasiados intentos fallidos. Inténtalo de nuevo en unos minutos.</string>
   <string name="login_failed_blocked">Lo sentimos, este usuario ha sido bloqueado en Commons</string>
+  <string name="login_failed_2fa_needed">Debes proporcionar tu código de auntenticación de dos factores.</string>
   <string name="login_failed_generic">Falló el inicio de sesión</string>
   <string name="share_upload_button">Subir</string>
   <string name="multiple_share_base_title">Nombrar este conjunto</string>
@@ -50,24 +51,24 @@
   <string name="categories_search_text_hint">Buscar categorías</string>
   <string name="menu_save_categories">Guardar</string>
   <string name="refresh_button">Actualizar</string>
+  <string name="gps_disabled">El GPS está desactivado en tu dispositivo. ¿Quieres activarlo?</string>
+  <string name="enable_gps">Activar GPS</string>
+  <string name="contributions_subtitle_zero">No hay subidas aún</string>
   <plurals name="contributions_subtitle">
-    <item quantity="zero">No hay ninguna carga</item>
-    <item quantity="one">1 carga</item>
-    <item quantity="other">%d cargas</item>
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%d subida</item>
+    <item quantity="other">%d subidas</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Iniciando 1 carga</item>
-    <item quantity="other">Iniciando %d cargas</item>
+    <item quantity="one">Iniciando 1 subida</item>
+    <item quantity="other">Iniciando %d subidas</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">1 carga</item>
-    <item quantity="other">%d cargas</item>
+    <item quantity="one">%d subida</item>
+    <item quantity="other">%d subidas</item>
   </plurals>
   <string name="categories_not_found">No se encontraron categorías que coincidieran con %1$s</string>
-  <string name="categories_skip_explanation">Añade categorías para hacer que tus imágenes sean más fáciles de encontrar en Wikimedia Commons.
-
-Comienza a escribir para añadir categorías.
-Toca este mensaje (o pulsa Anterior) para omitir este paso.</string>
+  <string name="categories_skip_explanation">Añade categorías para hacer que tus imágenes sean más fáciles de encontrar en Wikimedia Commons.\n\nComienza a escribir para añadir categorías.\nToca este mensaje (o pulsa Anterior) para omitir este paso.</string>
   <string name="categories_activity_title">Categorías</string>
   <string name="preference_tracking">Informes de uso</string>
   <string name="preference_tracking_summary">Enviar informes de uso a Wikimedia para ayudar a mejorar la aplicación</string>
@@ -77,7 +78,7 @@ Toca este mensaje (o pulsa Anterior) para omitir este paso.</string>
   <string name="about_license">Programa de código abierto publicado bajo la &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Licencia Apache ver. 2&lt;/a&gt;. Wikimedia Commons y su logotipo son marcas registradas de la Fundación Wikimedia y se utilizan con su permiso. No hemos sido acreditados por la Fundación Wikimedia ni estamos afiliados con ella.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Código fuente&lt;/a&gt; y &lt;a href=\"https://commons-app.github.io/\"&gt;sitio web&lt;/a&gt; en GitHub. Crea &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;incidencias&lt;/a&gt; para informar de problemas y sugerencias.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Política de privacidad&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;CRÉDITOS&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Créditos&lt;/a&gt;</string>
   <string name="title_activity_about">Acerca de</string>
   <string name="menu_feedback">Enviar comentarios (por e-mail)</string>
   <string name="no_email_client">No se ha instalado ningún cliente de correo</string>
@@ -133,26 +134,15 @@ Toca este mensaje (o pulsa Anterior) para omitir este paso.</string>
   <string name="tutorial_1_text">Wikimedia Commons aloja la mayoría de las imágenes utilizadas en Wikipedia.</string>
   <string name="tutorial_1_subtext">¡Tus imágenes ayudan a instruir a personas de todo el mundo!</string>
   <string name="tutorial_2_text">Carga únicamente imágenes capturadas o creadas por ti.</string>
-  <string name="tutorial_2_subtext">- Objetos naturales (flores, animales, montañas)
-- Objetos útiles (bicicletas, estaciones de tren)
-- Personas famosas (tu alcalde, algún atleta olímpico que conociste)</string>
+  <string name="tutorial_2_subtext">- Objetos naturales (flores, animales, montañas)\n- Objetos útiles (bicicletas, estaciones de tren)\n- Personas famosas (tu alcalde, algún atleta olímpico que conociste)</string>
   <string name="tutorial_3_text">NO cargues:</string>
-  <string name="tutorial_3_subtext">- Selfies o fotos de tus amigos
-- Imágenes que has descargado de Internet
-- Capturas de pantalla de aplicaciones propietarias</string>
+  <string name="tutorial_3_subtext">- Selfies o fotos de tus amigos\n- Imágenes que has descargado de Internet\n- Capturas de pantalla de aplicaciones propietarias</string>
   <string name="tutorial_4_text">Ejemplo de carga:</string>
-  <string name="tutorial_4_subtext">- Título: Casa de la Ópera de Sídney
-- Descripción: Casa de la Ópera de Sídney vista desde el otro lado de la bahía
-- Categorías: Casa de la Ópera de Sídney, Casa de la Ópera de Sídney desde el oeste, Vistas a distancia de la Casa de la Ópera de Sídney</string>
-  <string name="welcome_wikipedia_text">Contribuye con tus imágenes.
-¡Ayuda a que los artículos de Wikipedia tengan vida!</string>
-  <string name="welcome_wikipedia_subtext">Las imágenes en Wikipedia proceden de
-Wikimedia Commons.</string>
-  <string name="welcome_copyright_text">Tus imágenes ayudan a educar a la gente
-alrededor del mundo.</string>
-  <string name="welcome_copyright_subtext">Evita materiales con derechos de autor
-que hayas encontrado en Internet, así como
-imágenes de carteles, portadas de libro, etc.</string>
+  <string name="tutorial_4_subtext">- Título: Casa de la Ópera de Sídney\n- Descripción: Casa de la Ópera de Sídney vista desde el otro lado de la bahía\n- Categorías: Casa de la Ópera de Sídney, Casa de la Ópera de Sídney desde el oeste, Vistas a distancia de la Casa de la Ópera de Sídney</string>
+  <string name="welcome_wikipedia_text">Contribuye con tus imágenes.\n¡Ayuda a que los artículos de Wikipedia tengan vida!</string>
+  <string name="welcome_wikipedia_subtext">Las imágenes en Wikipedia proceden de\nWikimedia Commons.</string>
+  <string name="welcome_copyright_text">Tus imágenes ayudan a educar a la gente\nalrededor del mundo.</string>
+  <string name="welcome_copyright_subtext">Evita materiales con derechos de autor\nque hayas encontrado en Internet, así como\nimágenes de carteles, portadas de libro, etc.</string>
   <string name="welcome_final_text">¿Crees que ya lo tienes?</string>
   <string name="welcome_final_button_text">¡Sí!</string>
   <string name="detail_panel_cats_label">Categorías</string>
@@ -165,6 +155,7 @@ imágenes de carteles, portadas de libro, etc.</string>
   <string name="location_permission_rationale">Permiso opcional: obtener la ubicación actual para sugerir categorías</string>
   <string name="ok">Aceptar</string>
   <string name="title_activity_nearby">Lugares cercanos</string>
+  <string name="no_nearby">No se encontraron lugares cercanos</string>
   <string name="warning">Atención</string>
   <string name="file_exists">Este archivo ya existe en Commons. ¿Confirmas que quieres continuar?</string>
   <string name="yes">Sí</string>
@@ -173,8 +164,29 @@ imágenes de carteles, portadas de libro, etc.</string>
   <string name="media_detail_media_title">Título del multimedia</string>
   <string name="media_detail_description">Descripción</string>
   <string name="media_detail_description_explanation">Aquí va la descripción del multimedia. Potencialmente, puede ser bastante largo, y deberá agruparse en múltiples líneas. De todas formas, esperamos que se ve bien.</string>
+  <string name="media_detail_uploaded_date">Fecha de subida</string>
   <string name="become_a_tester_title">Prueba la versión beta</string>
   <string name="become_a_tester_description">Opta por nuestro canal beta en Google Play y obtén acceso a funcionalidades nuevas y correcciones de errores</string>
   <string name="use_wikidata">Utilizar Wikidata</string>
   <string name="use_wikidata_summary">(Advertencia: desactivar esto puede ocasionar un gran consumo de datos del móvil)</string>
+  <string name="map_theme_light">mapbox://styles/mapbox/traffic-day-v2</string>
+  <string name="map_theme_dark">mapbox://styles/mapbox/traffic-night-v2</string>
+  <string name="mapbox_commons_app_token">pk.eyJ1IjoibWFza2FyYXZpdmVrIiwiYSI6ImNqMmxvdzFjMTAwMHYzM283ZWM3eW5tcDAifQ.ib5SZ9EVjwJe6GSKve0bcg</string>
+  <string name="_2fa_code">Código de autenticación de 2 pasos</string>
+  <string name="number_of_uploads">Mi límite de subidas recientes</string>
+  <string name="maximum_limit">Límite máximo</string>
+  <string name="maximum_limit_alert">No se pueden mostrar más de 500</string>
+  <string name="set_limit">Establecer el límite de subidas recientes</string>
+  <string name="login_failed_2fa_not_supported">Actualmente no se admite la auntenticación de dos factores.</string>
+  <string name="logout_verification">¿Confirmas que quieres salir?</string>
+  <string name="cancel">Cancelar</string>
+  <string name="navigation_drawer_open">Abrir</string>
+  <string name="navigation_drawer_close">Cerrar</string>
+  <string name="navigation_item_home">Inicio</string>
+  <string name="navigation_item_upload">Subir</string>
+  <string name="navigation_item_nearby">Cercanos</string>
+  <string name="navigation_item_about">Acerca de</string>
+  <string name="navigation_item_settings">Configuración</string>
+  <string name="navigation_item_feedback">Comentarios</string>
+  <string name="navigation_item_logout">Salir</string>
 </resources>
