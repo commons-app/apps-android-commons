@@ -63,7 +63,7 @@ public class Sitelinks implements Parcelable {
         stringUrl = stringUrl
                 .replaceAll("<", "")
                 .replaceAll(">", "")
-                .replaceAll("\n", "");
+                .replaceAll("[\n\r]", "");
         if (!Utils.isNullOrWhiteSpace(stringUrl) && stringUrl != null) {
             return Uri.parse(stringUrl);
         }

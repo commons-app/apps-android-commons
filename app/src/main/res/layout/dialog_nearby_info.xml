@@ -33,7 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackground"
-                android:clickable="true"
+                android:orientation="horizontal"
                 android:minHeight="64dp">
 
                 <TextView
@@ -52,6 +52,16 @@
                     android:textColor="@android:color/black"
                     android:textSize="20sp"
                     tools:text="Lorem ipsum" />
+
+                <ImageView
+                    android:id="@+id/link_preview_overflow_button"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center_vertical"
+                    android:padding="12dp"
+                    android:background="@android:color/white"
+                    android:contentDescription="@string/abc_action_menu_overflow_description"
+                    app:srcCompat="@drawable/ic_more_vert_white_24dp" />
             </LinearLayout>
 
             <View
