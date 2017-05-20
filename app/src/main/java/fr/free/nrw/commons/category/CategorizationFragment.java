@@ -498,7 +498,7 @@ public class CategorizationFragment extends Fragment {
         }
     }
 
-    private void backButtonDialog() {
+    public void backButtonDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         builder.setMessage("Are you sure you want to go back? The image will not have any categories saved.")

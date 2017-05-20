@@ -21,10 +21,10 @@
   <string name="upload_failed_notification_title">Postavljanje datoteke %1$s nije uspjelo</string>
   <string name="upload_failed_notification_subtitle">Dodirnite da biste vidjeli</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">postavlja se jedna datoteka</item>
+    <item quantity="one">postavlja se %d datoteka</item>
     <item quantity="other">postavlja se %d datoteka</item>
   </plurals>
-  <string name="title_activity_contributions">Moje postavljene datoteke</string>
+  <string name="title_activity_contributions">Moje nedavno postavljene datoteke</string>
   <string name="contribution_state_queued">Na čekanju</string>
   <string name="contribution_state_failed">Nije uspjelo</string>
   <string name="contribution_state_in_progress">%1$d%% postavljeno</string>
@@ -42,6 +42,7 @@
   <string name="login_failed_password">Ne mogu Vas prijaviti – provjerite svoje lozinku</string>
   <string name="login_failed_throttled">Napravili ste previše grešaka u prijavi. Pokušajte ponovo za nekoliko minuta.</string>
   <string name="login_failed_blocked">Žao nam je, korisnik je blokiran na Commonsu</string>
+  <string name="login_failed_2fa_needed">Morate upisati kôd za potvrdu u 2 koraka.</string>
   <string name="login_failed_generic">Prijava nije uspjela</string>
   <string name="share_upload_button">Postavi</string>
   <string name="multiple_share_base_title">Dajte ime ovom kompletu</string>
@@ -49,24 +50,25 @@
   <string name="menu_upload_single">Postavi</string>
   <string name="categories_search_text_hint">Pretraži kategorije</string>
   <string name="menu_save_categories">Sačuvaj</string>
+  <string name="refresh_button">Osvježi</string>
+  <string name="gps_disabled">GPS je onemogućen na Vašem uređaju. Želite li ga omogućiti?</string>
+  <string name="enable_gps">Omogući GPS</string>
+  <string name="contributions_subtitle_zero">Zasad nema postavljenih datoteka</string>
   <plurals name="contributions_subtitle">
-    <item quantity="zero">Zasad nema postavljenih datoteki</item>
-    <item quantity="one">1 postavljena datoteka</item>
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">postavljena %d datoteka</item>
     <item quantity="other">postavljenih datoteka: %d</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Započinjem postavljanje 1 datoteke</item>
+    <item quantity="one">Započinjem postavljanje %d datoteke</item>
     <item quantity="other">Započinjem postavljanje %d datoteka/-e</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">1 postavljanje</item>
+    <item quantity="one">%d postavljanje</item>
     <item quantity="other">%d postavljanja</item>
   </plurals>
   <string name="categories_not_found">Nema kategorija koje odgovoraju %1$s</string>
-  <string name="categories_skip_explanation">Dodajte kategorije da biste korisnicima olakšali pronalaženje slika na Wikimedia Commonsu.
-
-Počnite pisati da biste dodali kategoriju.
-Dodirnite ovu poruku (ili pritisnite dugme \"nazad\") da biste preskočili ovaj korak.</string>
+  <string name="categories_skip_explanation">Dodajte kategorije da biste korisnicima olakšali pronalaženje slika na Wikimedia Commonsu.\n\nPočnite pisati da biste dodali kategoriju.\nDodirnite ovu poruku (ili pritisnite dugme \"nazad\") da biste preskočili ovaj korak.</string>
   <string name="categories_activity_title">Kategorije</string>
   <string name="preference_tracking">Izvještaji o upotrebi</string>
   <string name="preference_tracking_summary">Šaljite Wikimediji izvještaje o upotrebi da biste poboljšali aplikaciju</string>
@@ -76,6 +78,7 @@ Dodirnite ovu poruku (ili pritisnite dugme \"nazad\") da biste preskočili ovaj 
   <string name="about_license">Program otvorenog kod objavljen pod licencom &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache v2&lt;/a&gt;. Wikimedia Commons i njen logo zaštitni su znaci Zadužbine Wikimedia i koriste se s njenom dozvolom. Nismo povezani niti nas podržava Zadužbina Wikimedia.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Izvorni kod&lt;/a&gt; i &lt;a href=\"https://commons-app.github.io/\"&gt;veb-sajt&lt;/a&gt; na GitHubu. Započnite novi &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;slučaj na GitHubu&lt;/a&gt; da biste prijavili greške i dali prijedloge.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politika privatnosti&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Zasluge&lt;/a&gt;</string>
   <string name="title_activity_about">O</string>
   <string name="menu_feedback">Pošalji povratne informacije (putem e-pošte)</string>
   <string name="no_email_client">Nemate instaliranu aplikaciju za e-poštu</string>
@@ -90,6 +93,10 @@ Dodirnite ovu poruku (ili pritisnite dugme \"nazad\") da biste preskočili ovaj 
   <string name="use_previous">Koristi prethodni naziv/opis</string>
   <string name="allow_gps">Automatski dobavi trenutnu lokaciju</string>
   <string name="allow_gps_summary">Dobavi trenutnu lokaciju za davanje prijedloga o kategorijama ako nema geooznaku</string>
+  <string name="preference_theme">Noćni režim</string>
+  <string name="preference_theme_summary">Koristi tamnu temu</string>
+  <string name="license_name_cc_by_sa_four">Autorstvo-Dijeliti pod istim uslovima 4.0</string>
+  <string name="license_name_cc_by_four">Autorstvo 4.0</string>
   <string name="license_name_cc_by_sa">Autorstvo-Dijeliti pod istim uvjetima 3.0</string>
   <string name="license_name_cc_by">Autorstvo 3.0</string>
   <string name="license_name_cc0">CC0</string>
@@ -111,17 +118,11 @@ Dodirnite ovu poruku (ili pritisnite dugme \"nazad\") da biste preskočili ovaj 
   <string name="tutorial_1_text">Wikimedia Commons skladišti većinu slika koje se koriste na Wikipediji.</string>
   <string name="tutorial_1_subtext">Vaše slike pomažu u obrazovanju ljudi širom svijeta!</string>
   <string name="tutorial_2_text">Postavljajte slike koje su u potpunosti Vaše djelo:</string>
-  <string name="tutorial_2_subtext">– Stvari iz prirode (cvijeće, životinje, planine)
-– Korisne stvari (bicikli, željezničke stanice)
-– Poznate osobe (Vaš gradonačelnik, olimpijski sportisti koje sretnete)</string>
+  <string name="tutorial_2_subtext">– Stvari iz prirode (cvijeće, životinje, planine)\n– Korisne stvari (bicikli, željezničke stanice)\n– Poznate osobe (Vaš gradonačelnik, olimpijski sportisti koje sretnete)</string>
   <string name="tutorial_3_text">NE postavljajte:</string>
-  <string name="tutorial_3_subtext">– Vlastite slike ili slike svojih prijatelja
-– Slike koje ste preuzeli s interneta
-– Slike ekrana neslobodnih aplikacija</string>
+  <string name="tutorial_3_subtext">– Vlastite slike ili slike svojih prijatelja\n– Slike koje ste preuzeli s interneta\n– Slike ekrana neslobodnih aplikacija</string>
   <string name="tutorial_4_text">Primjer postavljanja:</string>
-  <string name="tutorial_4_subtext">– Naziv: Sidnejska opera
-– Opis: Pogled na Sidnejsku operu sa zaliva
-– Kategorije: Sidnejska opera, Sidnejska opera sa zapada, Sidnejska opera iz daleka</string>
+  <string name="tutorial_4_subtext">– Naziv: Sidnejska opera\n– Opis: Pogled na Sidnejsku operu sa zaliva\n– Kategorije: Sidnejska opera, Sidnejska opera sa zapada, Sidnejska opera iz daleka</string>
   <string name="welcome_wikipedia_text">Podijelite vaše slike. Pomozite člancima na Wikipediji da zažive!</string>
   <string name="welcome_wikipedia_subtext">Slike na Wikipediji se uzimaju sa Wikimedia Commonsa.</string>
   <string name="welcome_copyright_text">Vaše slike pomažu u obrazovanju ljudi širom svijeta.</string>
@@ -138,8 +139,38 @@ Dodirnite ovu poruku (ili pritisnite dugme \"nazad\") da biste preskočili ovaj 
   <string name="location_permission_rationale">Neobavezna dozvola: Dobavljanje trenutne lokacije za predlaganje kategorija</string>
   <string name="ok">U redu</string>
   <string name="title_activity_nearby">Mjesta u blizini</string>
+  <string name="no_nearby">Nema okolnih mjesta</string>
   <string name="warning">Upozorenje</string>
   <string name="file_exists">Ova datoteka već postoji na Commonsu. Jeste li sigurni da želite nastaviti?</string>
   <string name="yes">Da</string>
   <string name="no">Ne</string>
+  <string name="media_detail_title">Naslov</string>
+  <string name="media_detail_media_title">Naslov datoteke</string>
+  <string name="media_detail_description">Opis</string>
+  <string name="media_detail_description_explanation">Ovdje ide opis datoteke. Mogao bi biti poprilično dug i trebat će se prelomiti u nekoliko redova. Nadamo se da će fino izgledati.</string>
+  <string name="media_detail_uploaded_date">Datum postavljanja</string>
+  <string name="become_a_tester_title">Postanite beta-tester</string>
+  <string name="become_a_tester_description">Prijavite se na naš beta-kanal na Google Playu i dobijte raniji pristup novim mogućnostima i ispravkama grešaka</string>
+  <string name="use_wikidata">Koristi Wikipodatke</string>
+  <string name="use_wikidata_summary">(Upozorenje: isključivanje ovoga moglo bi dovesti do velike potrošnje mobilnih podataka)</string>
+  <string name="map_theme_light">mapbox://styles/mapbox/traffic-day-v2</string>
+  <string name="map_theme_dark">mapbox://styles/mapbox/traffic-night-v2</string>
+  <string name="mapbox_commons_app_token">pk.eyJ1IjoibWFza2FyYXZpdmVrIiwiYSI6ImNqMmxvdzFjMTAwMHYzM283ZWM3eW5tcDAifQ.ib5SZ9EVjwJe6GSKve0bcg</string>
+  <string name="_2fa_code">Kôd za provjeru u 2 koraka</string>
+  <string name="number_of_uploads">Moje ograničenje za nedavna postavljanja</string>
+  <string name="maximum_limit">Krajnja granica</string>
+  <string name="maximum_limit_alert">Ne mogu prikazati više od 500</string>
+  <string name="set_limit">Postavi ograničenje za nedavna postavljanja</string>
+  <string name="login_failed_2fa_not_supported">Potvrda u 2 koraka trenutno nije podržana.</string>
+  <string name="logout_verification">Želite li se zaista odjaviti?</string>
+  <string name="cancel">Otkaži</string>
+  <string name="navigation_drawer_open">Otvori</string>
+  <string name="navigation_drawer_close">Zatvori</string>
+  <string name="navigation_item_home">Početna</string>
+  <string name="navigation_item_upload">Postavi</string>
+  <string name="navigation_item_nearby">U blizini</string>
+  <string name="navigation_item_about">O</string>
+  <string name="navigation_item_settings">Postavke</string>
+  <string name="navigation_item_feedback">Povratne informacije</string>
+  <string name="navigation_item_logout">Odjavi me</string>
 </resources>

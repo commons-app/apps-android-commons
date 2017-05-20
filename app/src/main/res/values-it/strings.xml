@@ -21,10 +21,10 @@
   <string name="upload_failed_notification_title">Caricamento di %1$s non riuscito</string>
   <string name="upload_failed_notification_subtitle">Premi per visualizzare</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">1 file in caricamento</item>
+    <item quantity="one">%d file in caricamento</item>
     <item quantity="other">%d file in caricamento</item>
   </plurals>
-  <string name="title_activity_contributions">I miei caricamenti</string>
+  <string name="title_activity_contributions">I miei ultimi caricamenti</string>
   <string name="contribution_state_queued">In coda</string>
   <string name="contribution_state_failed">Non riuscito</string>
   <string name="contribution_state_in_progress">%1$d%% completo</string>
@@ -42,6 +42,7 @@
   <string name="login_failed_password">Impossibile effettuare l\'accesso - controlla la password</string>
   <string name="login_failed_throttled">Troppi tentativi falliti. Riprova tra alcuni minuti.</string>
   <string name="login_failed_blocked">Spiacente, questo utente è stato bloccato su Commons</string>
+  <string name="login_failed_2fa_needed">Devi fornire il tuo codice di autenticazione a due fattori.</string>
   <string name="login_failed_generic">Accesso non riuscito</string>
   <string name="share_upload_button">Carica</string>
   <string name="multiple_share_base_title">Nome di questo set</string>
@@ -50,24 +51,24 @@
   <string name="categories_search_text_hint">Cerca categorie</string>
   <string name="menu_save_categories">Salva</string>
   <string name="refresh_button">Aggiorna</string>
+  <string name="gps_disabled">Il GPS è disabilitato nel dispositivo. Vuoi attivarlo?</string>
+  <string name="enable_gps">Attiva GPS</string>
+  <string name="contributions_subtitle_zero">Non è stato ancora caricato niente</string>
   <plurals name="contributions_subtitle">
-    <item quantity="zero">Nessun caricamento ancora</item>
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">1 caricamento</item>
     <item quantity="other">%d caricamenti</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Iniziato 1 caricamento</item>
+    <item quantity="one">Iniziato %d caricamento</item>
     <item quantity="other">Iniziati %d caricamenti</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">1 caricamento</item>
+    <item quantity="one">%d caricamento</item>
     <item quantity="other">%d caricamenti</item>
   </plurals>
   <string name="categories_not_found">Non è stata trovata alcuna categoria che contiene %1$s</string>
-  <string name="categories_skip_explanation">Aggiungi categorie per rendere le tue immagini più facilmente individuabili su Wikimedia Commons.
-
-Inizia a digitare per aggiungere categorie.
-Tocca questo messaggio (o premi Indietro) per saltare l\'aggiunta di categorie.</string>
+  <string name="categories_skip_explanation">Aggiungi categorie per rendere le tue immagini più facilmente individuabili su Wikimedia Commons.\n\nInizia a digitare per aggiungere categorie.\nTocca questo messaggio (o premi Indietro) per saltare l\'aggiunta di categorie.</string>
   <string name="categories_activity_title">Categorie</string>
   <string name="preference_tracking">Report sull\'utilizzo</string>
   <string name="preference_tracking_summary">Invia report sull\'utilizzo a Wikimedia per aiutarci a migliorare l\'app</string>
@@ -77,6 +78,7 @@ Tocca questo messaggio (o premi Indietro) per saltare l\'aggiunta di categorie.<
   <string name="about_license">Software open source rilasciato con &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;licenza Apache v2&lt;/a&gt;. Wikimedia Commons ed il suo logo sono marchi registrati della Wikimedia Foundation e sono utilizzati con il permesso della Wikimedia Foundation. Non siamo approvati o affiliati con la Wikimedia Foundation.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Codice sorgente&lt;/a&gt; e &lt;a href=\"https://commons-app.github.io/\"&gt;sito web&lt;/a&gt; su GitHub. Crea una nuova &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;segnalazione GitHub&lt;/a&gt; per riportare errori e suggerimenti.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politica sulla privacy&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Crediti&lt;/a&gt;</string>
   <string name="title_activity_about">Informazioni</string>
   <string name="menu_feedback">Invia un commento (tramite email)</string>
   <string name="no_email_client">Nessun client di posta elettronica installato</string>
@@ -129,6 +131,7 @@ Tocca questo messaggio (o premi Indietro) per saltare l\'aggiunta di categorie.<
   <string name="menu_refresh">Aggiorna</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Luoghi nelle vicinanze</string>
+  <string name="no_nearby">Nessun luogo trovato nelle vicinanze</string>
   <string name="warning">Attenzione</string>
   <string name="file_exists">Questo file esiste già su Commons. Sei sicuro di voler continuare?</string>
   <string name="yes">Sì</string>
@@ -136,5 +139,21 @@ Tocca questo messaggio (o premi Indietro) per saltare l\'aggiunta di categorie.<
   <string name="media_detail_title">Titolo</string>
   <string name="media_detail_media_title">Titolo del file multimediale</string>
   <string name="media_detail_description">Descrizione</string>
+  <string name="media_detail_uploaded_date">Data di caricamento</string>
   <string name="use_wikidata">Usa Wikidata</string>
+  <string name="_2fa_code">Codice 2FA</string>
+  <string name="maximum_limit">Limite massimo</string>
+  <string name="maximum_limit_alert">Non è possibile mostrarne più di 500</string>
+  <string name="login_failed_2fa_not_supported">L\'autenticazione a due fattori non è attualmente supportata.</string>
+  <string name="logout_verification">Vuoi veramente uscire?</string>
+  <string name="cancel">Annulla</string>
+  <string name="navigation_drawer_open">Apri</string>
+  <string name="navigation_drawer_close">Chiudi</string>
+  <string name="navigation_item_home">Pagina principale</string>
+  <string name="navigation_item_upload">Carica</string>
+  <string name="navigation_item_nearby">Nelle vicinanze</string>
+  <string name="navigation_item_about">Informazioni</string>
+  <string name="navigation_item_settings">Impostazioni</string>
+  <string name="navigation_item_feedback">Commenti</string>
+  <string name="navigation_item_logout">Esci</string>
 </resources>

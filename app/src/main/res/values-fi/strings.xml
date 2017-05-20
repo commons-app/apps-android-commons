@@ -20,11 +20,11 @@
   <string name="upload_progress_notification_title_finishing">%1$s tallennettu</string>
   <string name="upload_failed_notification_title">Tiedoston %1$s lataaminen epäonnistui</string>
   <string name="upload_failed_notification_subtitle">Napauta katsoaksesi</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">1 tiedosto tallentuu</item>
     <item quantity="other">%d tiedostoa tallentuu</item>
   </plurals>
-  <string name="title_activity_contributions">Omat tallennukset</string>
+  <string name="title_activity_contributions" fuzzy="true">Omat tallennukset</string>
   <string name="contribution_state_queued">Jonossa</string>
   <string name="contribution_state_failed">Epäonnistui</string>
   <string name="contribution_state_in_progress">%1$d%% valmis</string>
@@ -49,24 +49,21 @@
   <string name="menu_upload_single">Tallenna</string>
   <string name="categories_search_text_hint">Etsi luokkia</string>
   <string name="menu_save_categories">Tallenna</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Ei tallennuksia</item>
     <item quantity="one">1 tallennus</item>
     <item quantity="other">%d tallennusta</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">1 tallennus alkaa</item>
     <item quantity="other">%d tallennusta alkaa</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 lataus</item>
     <item quantity="other">%d latausta</item>
   </plurals>
   <string name="categories_not_found">Luokkaa %1$s ei löytynyt</string>
-  <string name="categories_skip_explanation">Lisää luokkia tehdäksesi kuvistasi helpommin löydettäviä.
-
-Aloita kirjoittaminen lisätäksesi luokkia.
-Napauta tätä viestiä (tai paina takaisin) ohittaaksesi tämän vaiheen.</string>
+  <string name="categories_skip_explanation">Lisää luokkia tehdäksesi kuvistasi helpommin löydettäviä.\n\nAloita kirjoittaminen lisätäksesi luokkia.\nNapauta tätä viestiä (tai paina takaisin) ohittaaksesi tämän vaiheen.</string>
   <string name="categories_activity_title">Luokat</string>
   <string name="preference_tracking">Käyttöraportit</string>
   <string name="preference_tracking_summary">Lähetä käyttöraportteja Wikimedialle auttaaksesi ohjelman kehityksessä</string>
@@ -113,17 +110,11 @@ Napauta tätä viestiä (tai paina takaisin) ohittaaksesi tämän vaiheen.</stri
   <string name="tutorial_1_text">Wikimedia Commons isännöi useimpia kuvia joita käytetään Wikipediassa.</string>
   <string name="tutorial_1_subtext">Kuvasi auttavat ihmisiä kaikkialta maailmasta ymmärtämään maailmaa!</string>
   <string name="tutorial_2_text">Tallenna kuvia, jotka sinä itse olet kuvannot tai luonut:</string>
-  <string name="tutorial_2_subtext">- Luontokohteet (kukat, eläimet, vuoret)
-- Hyödylliset esineet (polkupyörät, rautatieasemat)
-- Kuuluisat henkilöt (kaupunginjohtajasi, tapaamasi olympiaurheilijat)</string>
+  <string name="tutorial_2_subtext">- Luontokohteet (kukat, eläimet, vuoret)\n- Hyödylliset esineet (polkupyörät, rautatieasemat)\n- Kuuluisat henkilöt (kaupunginjohtajasi, tapaamasi olympiaurheilijat)</string>
   <string name="tutorial_3_text">Älä tallenna seuraavia:</string>
-  <string name="tutorial_3_subtext">- Selfiet tai kuvat ystävistäsi
-- Netistä ladatut kuvat
-- Kuvakaappaukset kaupallisista sovelluksista</string>
+  <string name="tutorial_3_subtext">- Selfiet tai kuvat ystävistäsi\n- Netistä ladatut kuvat\n- Kuvakaappaukset kaupallisista sovelluksista</string>
   <string name="tutorial_4_text">Tallennusesimerkki:</string>
-  <string name="tutorial_4_subtext">- Nimi: Sydneyn operatalo
-- Kuvaus: Sydneyn oopperatalo katsottuna lahden toisella puolella
-- Luokat: Sydneyn oopperatalo, Sydneyn oopperatalo lännestä, Sydneyn oopperatalo remote views</string>
+  <string name="tutorial_4_subtext">- Nimi: Sydneyn operatalo\n- Kuvaus: Sydneyn oopperatalo katsottuna lahden toisella puolella\n- Luokat: Sydneyn oopperatalo, Sydneyn oopperatalo lännestä, Sydneyn oopperatalo remote views</string>
   <string name="welcome_wikipedia_text">Herätä Wikipedia-artikkelit eloon kuvillasi! Tuo kuvasi Wikipediaan.</string>
   <string name="welcome_wikipedia_subtext">Wikipedian kuvat tulevat Wikimedia Commonsista.</string>
   <string name="welcome_copyright_text">Kuvat auttavat useita ihmisiä ympäri maailmaa artikkeleiden ymmärtämisessä.</string>

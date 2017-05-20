@@ -18,7 +18,7 @@
   <string name="upload_progress_notification_title_finishing">Afslutter uploadning af %1$s</string>
   <string name="upload_failed_notification_title">Overførsel af %1$s mislykkedes</string>
   <string name="upload_failed_notification_subtitle">Klik for at se</string>
-  <string name="title_activity_contributions">Mine uploads</string>
+  <string name="title_activity_contributions" fuzzy="true">Mine uploads</string>
   <string name="contribution_state_queued">I kø</string>
   <string name="contribution_state_failed">Mislykkedes</string>
   <string name="contribution_state_in_progress">%1$d%% færdig</string>

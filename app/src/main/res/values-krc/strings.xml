@@ -17,7 +17,7 @@
   <string name="upload_progress_notification_title_in_progress">%1$s джюклене турады</string>
   <string name="upload_progress_notification_title_finishing">%1$s джюклениб бошалды</string>
   <string name="upload_failed_notification_subtitle">Къарар ючюн басыгъыз</string>
-  <string name="title_activity_contributions">Джюклегенлерим</string>
+  <string name="title_activity_contributions" fuzzy="true">Джюклегенлерим</string>
   <string name="contribution_state_failed">Джюклениу халат</string>
   <string name="contribution_state_in_progress">%1$d%% тамамланды</string>
   <string name="contribution_state_starting">Джюклениу</string>

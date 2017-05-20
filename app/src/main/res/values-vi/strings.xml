@@ -20,8 +20,8 @@
   <string name="upload_progress_notification_title_finishing">Đang hoàn thành việc tải lên tập tin %1$s</string>
   <string name="upload_failed_notification_title">Tải lên tập tin %1$s thất bại</string>
   <string name="upload_failed_notification_subtitle">Chạm để xem</string>
-  <string name="uploads_pending_notification_indicator">%d tập tin đang được tải lên</string>
-  <string name="title_activity_contributions">Tập tin do tôi tải lên</string>
+  <string name="uploads_pending_notification_indicator" fuzzy="true">%d tập tin đang được tải lên</string>
+  <string name="title_activity_contributions" fuzzy="true">Tập tin do tôi tải lên</string>
   <string name="contribution_state_queued">Đang chờ</string>
   <string name="contribution_state_failed">Thất bại</string>
   <string name="contribution_state_in_progress">Hoàn tất %1$d%%</string>
@@ -47,17 +47,14 @@
   <string name="categories_search_text_hint">Tìm thể loại</string>
   <string name="menu_save_categories">Lưu</string>
   <string name="refresh_button">Làm mới</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Chưa tải lên tập tin</item>
     <item quantity="other">%d tập tin tải lên</item>
   </plurals>
-  <string name="starting_multiple_uploads">Đang bắt đầu tải lên %d tập tin</string>
-  <string name="multiple_uploads_title">%d tập tin tải lên</string>
+  <string name="starting_multiple_uploads" fuzzy="true">Đang bắt đầu tải lên %d tập tin</string>
+  <string name="multiple_uploads_title" fuzzy="true">%d tập tin tải lên</string>
   <string name="categories_not_found">Không tìm thấy thể loại khớp với %1$s</string>
-  <string name="categories_skip_explanation">Xếp các hình ảnh vào thể loại để cho chúng dễ tìm kiếm hơn trên Wikimedia Commons.
-
-Hãy bắt đầu nhập tên thể loại để tìm kiếm.
-Chạm vào thông điệp này (hoặc bấm Quay lại) để bỏ qua bước này.</string>
+  <string name="categories_skip_explanation">Xếp các hình ảnh vào thể loại để cho chúng dễ tìm kiếm hơn trên Wikimedia Commons.\n\nHãy bắt đầu nhập tên thể loại để tìm kiếm.\nChạm vào thông điệp này (hoặc bấm Quay lại) để bỏ qua bước này.</string>
   <string name="categories_activity_title">Thể loại</string>
   <string name="preference_tracking">Báo cáo sử dụng</string>
   <string name="preference_tracking_summary">Gửi báo cáo sử dụng cho Wikimedia để giúp chúng tôi cải tiến ứng dụng</string>
@@ -67,7 +64,7 @@ Chạm vào thông điệp này (hoặc bấm Quay lại) để bỏ qua bước
   <string name="about_license">Phần mềm mã nguồn mở được phát hành theo &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Giấy phép Apache v2&lt;/a&gt;. Wikimedia Commons và biểu trưng của nó là nhãn hiệu của Quỹ Wikimedia và được sử dụng do Quỹ Wikimedia cho phép. Chúng tôi không được Quỹ Wikimedia ủng hộ hoặc nhận làm chi nhánh.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Mã nguồn&lt;/a&gt; và &lt;a href=\"https://commons-app.github.io/\"&gt;trang chủ&lt;/a&gt; tại GitHub. &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;Tạo vấn đề GitHub mới&lt;/a&gt; để báo cáo lỗi hoặc gợi ý thay đổi.</string>
   <string name="about_privacy_policy"/>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;CÔNG TRẠNG&lt;/a&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;CÔNG TRẠNG&lt;/a&gt;</string>
   <string name="title_activity_about">Giới thiệu</string>
   <string name="menu_feedback">Gửi Phản hồi (qua Thư điện tử)</string>
   <string name="no_email_client">Không có chương trình thư điện tử nào được cài đặt</string>
@@ -107,17 +104,11 @@ Chạm vào thông điệp này (hoặc bấm Quay lại) để bỏ qua bước
   <string name="tutorial_1_text">Wikimedia Commons là nơi lưu giữ phần nhiều hình ảnh xuất hiện trong Wikipedia.</string>
   <string name="tutorial_1_subtext">Các hình ảnh của bạn giúp giáo dục người dân trên khắp thế giới!</string>
   <string name="tutorial_2_text">Xin hãy tải lên các hình ảnh do chính bạn chụp hoặc vẽ:</string>
-  <string name="tutorial_2_subtext">- Thiên nhiên (bông hoa, thú vật, cảnh núi)
-- Vật nhân tạo (xe đạp, nhà ga, món ăn)
-- Nhân vật nổi tiếng (thị trưởng của bạn, cầu thủ đội tuyển mà bạn gặp)</string>
+  <string name="tutorial_2_subtext">- Thiên nhiên (bông hoa, thú vật, cảnh núi)\n- Vật nhân tạo (xe đạp, nhà ga, món ăn)\n- Nhân vật nổi tiếng (thị trưởng của bạn, cầu thủ đội tuyển mà bạn gặp)</string>
   <string name="tutorial_3_text">Xin DỪNG tải lên:</string>
-  <string name="tutorial_3_subtext">- Hình tự sướng hoặc hình bạn bè
-- Hình ảnh tải về từ Internet
-- Ảnh chụp màn hình của ứng dụng thương mại</string>
+  <string name="tutorial_3_subtext">- Hình tự sướng hoặc hình bạn bè\n- Hình ảnh tải về từ Internet\n- Ảnh chụp màn hình của ứng dụng thương mại</string>
   <string name="tutorial_4_text">Tập tin tải lên ví dụ:</string>
-  <string name="tutorial_4_subtext">- Tiêu đề: Nhà hát Opera Sydney
-- Miêu tả: Nhà hát Opera Sydney nhìn qua cảng
-- Thể loại: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext">- Tiêu đề: Nhà hát Opera Sydney\n- Miêu tả: Nhà hát Opera Sydney nhìn qua cảng\n- Thể loại: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Đóng góp hình ảnh của bạn. Làm sinh động các bài viết Wikipedia!</string>
   <string name="welcome_wikipedia_subtext">Các hình ảnh trên Wikipedia được cung cấp bởi Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Các hình ảnh của bạn giúp giáo dục người dân trên khắp thế giới.</string>

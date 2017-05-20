@@ -20,11 +20,11 @@
   <string name="upload_progress_notification_title_finishing">Barkerdışe %1$s qedya</string>
   <string name="upload_failed_notification_title">%1$s bar nêbeno.</string>
   <string name="upload_failed_notification_subtitle">pıpawane xo bıvin</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">1 dosye selagnayış</item>
     <item quantity="other">%d dosye Selagnayışi</item>
   </plurals>
-  <string name="title_activity_contributions">Barkerdışê mı</string>
+  <string name="title_activity_contributions" fuzzy="true">Barkerdışê mı</string>
   <string name="contribution_state_queued">Ratneya</string>
   <string name="contribution_state_failed">Nêbı</string>
   <string name="contribution_state_in_progress">%1$d%% temamya</string>
@@ -49,16 +49,16 @@
   <string name="menu_upload_single">Bar ke</string>
   <string name="categories_search_text_hint">Kategoriyan dı cı geyr</string>
   <string name="menu_save_categories">Star ke</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Theba bar nêbı</item>
     <item quantity="one">1 bar kerdış</item>
     <item quantity="other">%d bar kerdışi</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Sergendış 1 bar kerdış</item>
     <item quantity="other">Sergendış %d bar kerdışi </item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 bar kerdış</item>
     <item quantity="other">%d bar kerdışi </item>
   </plurals>

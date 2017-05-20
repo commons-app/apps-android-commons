@@ -21,10 +21,10 @@
   <string name="upload_failed_notification_title">上傳%1$s失敗</string>
   <string name="upload_failed_notification_subtitle">輕觸檢視</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">正在上載一個檔案</item>
+    <item quantity="one">正在上載%d個檔案</item>
     <item quantity="other">正在上載%d檔案</item>
   </plurals>
-  <string name="title_activity_contributions">我的上傳</string>
+  <string name="title_activity_contributions">我的最近上傳</string>
   <string name="contribution_state_queued">已佇列</string>
   <string name="contribution_state_failed">失敗</string>
   <string name="contribution_state_in_progress">%1$d%%完成</string>
@@ -42,6 +42,7 @@
   <string name="login_failed_password">無法登入－請檢查您的密碼</string>
   <string name="login_failed_throttled">失敗次數過多。請於幾分鐘後重試。</string>
   <string name="login_failed_blocked">很抱歉，該使用者在維基共享資源上已被封禁</string>
+  <string name="login_failed_2fa_needed">您必須提供您的雙重因素認證代碼。</string>
   <string name="login_failed_generic">登入失敗</string>
   <string name="share_upload_button">上傳</string>
   <string name="multiple_share_base_title">命名此組</string>
@@ -50,24 +51,24 @@
   <string name="categories_search_text_hint">搜尋分類</string>
   <string name="menu_save_categories">儲存</string>
   <string name="refresh_button">重新整理</string>
+  <string name="gps_disabled">您的設備停用了 GPS。您要啟用嗎？</string>
+  <string name="enable_gps">啟用 GPS</string>
+  <string name="contributions_subtitle_zero">尚未上傳</string>
   <plurals name="contributions_subtitle">
-    <item quantity="zero">尚未上傳</item>
-    <item quantity="one">1次上傳</item>
-    <item quantity="other">%d次上傳</item>
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%d 次上傳</item>
+    <item quantity="other">%d 次上傳</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">開始第1次上傳</item>
-    <item quantity="other">開始第%d次上傳</item>
+    <item quantity="one">開始 %d 次上傳</item>
+    <item quantity="other">開始 %d 次上傳</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">1 上傳</item>
-    <item quantity="other">%d 上傳</item>
+    <item quantity="one">%d 次上傳</item>
+    <item quantity="other">%d 次上傳</item>
   </plurals>
   <string name="categories_not_found">沒有發現與 %1$s 相符的分類</string>
-  <string name="categories_skip_explanation">添加分類使您的圖片在維基共享資源上更容易被找到。
-
-開始輸入以添加分類。
-按此（或按返回）跳過此步驟。</string>
+  <string name="categories_skip_explanation">添加分類使您的圖片在維基共享資源上更容易被找到。\n\n開始輸入以添加分類。\n按此（或按返回）跳過此步驟。</string>
   <string name="categories_activity_title">分類</string>
   <string name="preference_tracking">使用報告</string>
   <string name="preference_tracking_summary">向維基媒體傳送使用報告，協助我們改進此應用程式</string>
@@ -117,17 +118,11 @@
   <string name="tutorial_1_text">維基共享資源管理大部份使用在維基百科的圖片。</string>
   <string name="tutorial_1_subtext">您的圖片幫助教育了世界上的人們！</string>
   <string name="tutorial_2_text">請上傳完全由您自己拍攝或創作的圖片：</string>
-  <string name="tutorial_2_subtext">- 自然事物（花草、動物、山峰）
-- 有用事物（單車、車站）
-- 知名人物（您的市長、您所見過的奧運選手）</string>
+  <string name="tutorial_2_subtext">- 自然事物（花草、動物、山峰）\n- 有用事物（單車、車站）\n- 知名人物（您的市長、您所見過的奧運選手）</string>
   <string name="tutorial_3_text">請不要上傳：</string>
-  <string name="tutorial_3_subtext">- 您自己或您朋友的圖片
-- 您從網路下載來的圖片
-- 專利應用程式的截取圖片</string>
+  <string name="tutorial_3_subtext">- 您自己或您朋友的圖片\n- 您從網路下載來的圖片\n- 專利應用程式的截取圖片</string>
   <string name="tutorial_4_text">範例上傳：</string>
-  <string name="tutorial_4_subtext">- 標題：雪梨歌劇院
-- 描述：從對面海灣所看到的雪梨歌劇院
-- 分類：Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext">- 標題：雪梨歌劇院\n- 描述：從對面海灣所看到的雪梨歌劇院\n- 分類：Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">貢獻您的圖片。使維基百科的文章來到現實！</string>
   <string name="welcome_wikipedia_subtext">維基百科上的圖像來自維基共享資源。</string>
   <string name="welcome_copyright_text">您的圖片可以幫助教育世界各地的人。</string>
@@ -144,6 +139,7 @@
   <string name="location_permission_rationale">選用權限：獲取目前位置用於分類建議</string>
   <string name="ok">好</string>
   <string name="title_activity_nearby">附近地點</string>
+  <string name="no_nearby">找不到附近地點</string>
   <string name="warning">警告</string>
   <string name="file_exists">此檔案已存在於共享資源上。您確定要繼續嗎？</string>
   <string name="yes">是</string>
@@ -152,8 +148,29 @@
   <string name="media_detail_media_title">多媒體標體</string>
   <string name="media_detail_description">描述</string>
   <string name="media_detail_description_explanation">描述使用在此的多媒體。若內容可能會很長的話請斷開換行。我們希望這樣可以讓內容看起來較好些。</string>
+  <string name="media_detail_uploaded_date">上傳日期</string>
   <string name="become_a_tester_title">成為測試人員</string>
   <string name="become_a_tester_description">選擇加入我們在 Google Play 上的 beta channel 來早期獲得新功能並修正程式臭蟲</string>
   <string name="use_wikidata">使用維基數據</string>
   <string name="use_wikidata_summary">（警告：停用此項可能會導致耗費大量行動數據）</string>
+  <string name="map_theme_light">mapbox://styles/mapbox/traffic-day-v2</string>
+  <string name="map_theme_dark">mapbox://styles/mapbox/traffic-night-v2</string>
+  <string name="mapbox_commons_app_token">pk.eyJ1IjoibWFza2FyYXZpdmVrIiwiYSI6ImNqMmxvdzFjMTAwMHYzM283ZWM3eW5tcDAifQ.ib5SZ9EVjwJe6GSKve0bcg</string>
+  <string name="_2fa_code">雙重因素認證代碼</string>
+  <string name="number_of_uploads">我的最近上傳限制</string>
+  <string name="maximum_limit">最大限制</string>
+  <string name="maximum_limit_alert">無法顯示超過 500 項</string>
+  <string name="set_limit">設定最近上傳限制</string>
+  <string name="login_failed_2fa_not_supported">雙重因素認證目前不支援。</string>
+  <string name="logout_verification">你真的想要登出嗎？</string>
+  <string name="cancel">取消</string>
+  <string name="navigation_drawer_open">開啟</string>
+  <string name="navigation_drawer_close">關閉</string>
+  <string name="navigation_item_home">首頁</string>
+  <string name="navigation_item_upload">上傳</string>
+  <string name="navigation_item_nearby">附近</string>
+  <string name="navigation_item_about">關於</string>
+  <string name="navigation_item_settings">設定</string>
+  <string name="navigation_item_feedback">意見回饋</string>
+  <string name="navigation_item_logout">登出</string>
 </resources>

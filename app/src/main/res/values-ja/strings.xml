@@ -20,10 +20,10 @@
   <string name="upload_progress_notification_title_finishing">%1$s のアップロードを完了中</string>
   <string name="upload_failed_notification_title">%1$s のアップロードに失敗しました</string>
   <string name="upload_failed_notification_subtitle">閲覧するにはタップしてください</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="other">%d 件のファイルをアップロード中</item>
   </plurals>
-  <string name="title_activity_contributions">自分のアップロード</string>
+  <string name="title_activity_contributions" fuzzy="true">自分のアップロード</string>
   <string name="contribution_state_queued">順番待ち中</string>
   <string name="contribution_state_failed">失敗しました</string>
   <string name="contribution_state_in_progress">%1$d%% 完了</string>
@@ -49,21 +49,18 @@
   <string name="categories_search_text_hint">検索するカテゴリ</string>
   <string name="menu_save_categories">保存</string>
   <string name="refresh_button">更新</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">アップロードしたファイルはありません</item>
     <item quantity="other">%d 件のアップロード</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="other">%d 件のアップロードを開始中</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="other">%d 件のアップロード</item>
   </plurals>
   <string name="categories_not_found">%1$s に一致するカテゴリが見つかりません</string>
-  <string name="categories_skip_explanation">あなたの画像をウィキメディア・コモンズで見つけやすくするためにカテゴリを追加してください。
-
-カテゴリ名の入力を開始してください。
-この手順をスキップするにはこのメッセージをタップしてください(または戻るボタン)。</string>
+  <string name="categories_skip_explanation">あなたの画像をウィキメディア・コモンズで見つけやすくするためにカテゴリを追加してください。\n\nカテゴリ名の入力を開始してください。\nこの手順をスキップするにはこのメッセージをタップしてください(または戻るボタン)。</string>
   <string name="categories_activity_title">カテゴリ</string>
   <string name="preference_tracking">使用状況の報告</string>
   <string name="preference_tracking_summary">アプリの改善を支援するために、使用状況の報告をウィキメディアに送信する</string>
@@ -73,7 +70,7 @@
   <string name="about_license">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache ライセンス v2&lt;/a&gt; のもとで公開されているオープン ソース ソフトウェアです。Wikimedia Commons ならびにそのロゴはウィキメディア財団の商標であり、ウィキメディア財団の許可により使用しています。このサイトはウィキメディア財団の公認3でも提携先でもありません。</string>
   <string name="about_improve">ソースは &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt; にあります。バグとアイディアは &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt; へ。</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/プライバシー・ポリシー\"&gt;プライバシー・ポリシー&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;CREDITS&lt;/a&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;CREDITS&lt;/a&gt;</string>
   <string name="title_activity_about">このアプリについて</string>
   <string name="menu_feedback">フィードバックをメールで送信</string>
   <string name="no_email_client">メールアプリケーションが見つかりません</string>
@@ -113,17 +110,11 @@
   <string name="tutorial_1_text">ウィキメディア・コモンズにはウィキペディアで使用する画像のほぼすべてが保管されています。</string>
   <string name="tutorial_1_subtext">あなたの画像は世界中の人々が学習する助けになります!</string>
   <string name="tutorial_2_text">アップロードする画像はあなたご本人が撮影したものかあなたが単独で制作したものに限定します。</string>
-  <string name="tutorial_2_subtext">- 自然物 (動植物、山)
-- 道具 (自転車、駅)
-- 著名人 (市区村長・都道府県知事、自分が会ったオリンピック選手)</string>
+  <string name="tutorial_2_subtext">- 自然物 (動植物、山)\n- 道具 (自転車、駅)\n- 著名人 (市区村長・都道府県知事、自分が会ったオリンピック選手)</string>
   <string name="tutorial_3_text">アップロードが《禁止》のもの:</string>
-  <string name="tutorial_3_subtext">- あなたの友人の自撮り写真や画像
-- インターネットからダウンロードした画像
-- 著作権のあるアプリのスクリーンショット</string>
+  <string name="tutorial_3_subtext">- あなたの友人の自撮り写真や画像\n- インターネットからダウンロードした画像\n- 著作権のあるアプリのスクリーンショット</string>
   <string name="tutorial_4_text">アップロードの例:</string>
-  <string name="tutorial_4_subtext">- 題名: シドニー・オペラハウス
-- 説明: 湾の向こうから見たシドニー・オペラハウス
-- カテゴリ: シドニー・オペラハウス、シドニー・オペラハウスの西側、遠くから見たシドニー・オペラハウス</string>
+  <string name="tutorial_4_subtext">- 題名: シドニー・オペラハウス\n- 説明: 湾の向こうから見たシドニー・オペラハウス\n- カテゴリ: シドニー・オペラハウス、シドニー・オペラハウスの西側、遠くから見たシドニー・オペラハウス</string>
   <string name="welcome_wikipedia_text">画像を投稿してください。ウィキペディアの記事に彩りを！</string>
   <string name="welcome_wikipedia_subtext">ウィキペディアの画像はウィキメディア・コモンズに保管されています。</string>
   <string name="welcome_copyright_text">あなたの画像は世界中の人々が学習する助けになります</string>

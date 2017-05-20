@@ -10,7 +10,7 @@
   <string name="login_success">Вуруд бо муваффақият!</string>
   <string name="login_failed">Вуруд номуваффақ шуд!</string>
   <string name="upload_failed_notification_subtitle">Барои дидан нохун занед</string>
-  <string name="title_activity_contributions">Боргузориҳои ман</string>
+  <string name="title_activity_contributions" fuzzy="true">Боргузориҳои ман</string>
   <string name="contribution_state_queued">Дар саф</string>
   <string name="contribution_state_failed">Номуваффақ шуд</string>
   <string name="contribution_state_in_progress">%1$d%% комил шуд</string>

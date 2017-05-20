@@ -22,7 +22,7 @@
     <item quantity="one">1 dosya yükleniyor</item>
     <item quantity="other">%d dosya yükleniyor</item>
   </plurals>
-  <string name="title_activity_contributions">Yüklemelerim</string>
+  <string name="title_activity_contributions" fuzzy="true">Yüklemelerim</string>
   <string name="contribution_state_queued">Sırada</string>
   <string name="contribution_state_failed">Başarısız</string>
   <string name="contribution_state_in_progress">%1$d%% tamamlandı</string>
@@ -46,33 +46,28 @@
   <string name="menu_upload_single">Yükle</string>
   <string name="categories_search_text_hint">Kategorileri ara</string>
   <string name="menu_save_categories">Kaydet</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Henüz yükleme yok</item>
     <item quantity="one">1 yükleme</item>
     <item quantity="other">%d yükleme</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">1 yüklemeye başlanıyor</item>
     <item quantity="other">%d yüklemeye başlanıyor</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 yükleme</item>
     <item quantity="other">%d yükleme</item>
   </plurals>
   <string name="categories_not_found">%1$s ile eşleşen bir kategori bulunamadı</string>
-  <string name="categories_skip_explanation">Resimlerinizi Wikimedia Commons\'ta daha bulunabilir duruma getirmek için kategoriler ekleyin.
-
-Kategori eklemek için yazmaya başlayın.
-Bu adımı atlamak için bu iletiye dokunun ya da geri tıklayın.</string>
+  <string name="categories_skip_explanation">Resimlerinizi Wikimedia Commons\'ta daha bulunabilir duruma getirmek için kategoriler ekleyin.\n\nKategori eklemek için yazmaya başlayın.\nBu adımı atlamak için bu iletiye dokunun ya da geri tıklayın.</string>
   <string name="categories_activity_title">Kategoriler</string>
   <string name="preference_tracking">Kullanım raporları</string>
   <string name="preference_tracking_summary">Uygulamayı geliştirmemize yardımcı olmak için kullanım raporlarını Wikimedia\'ya gönder</string>
   <string name="title_activity_settings">Ayarlar</string>
   <string name="menu_about">Hakkında</string>
   <string name="about_license" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache Lisansı s2&lt;/a&gt; altında yayımlanan Açık Kaynak yazılımı</string>
-  <string name="about_improve" fuzzy="true">Kaynak: &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;
-
-Yazılım hataları: &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;</string>
+  <string name="about_improve" fuzzy="true">Kaynak: &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;\n\nYazılım hataları: &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Gizlilik Politikası&lt;/a&gt;</string>
   <string name="title_activity_about">Hakkında</string>
   <string name="menu_feedback">Geri Bildirim Gönder (E-posta ile)</string>

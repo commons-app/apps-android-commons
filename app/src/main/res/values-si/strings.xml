@@ -20,11 +20,11 @@
   <string name="upload_progress_notification_title_finishing"> %1$s උඩුගතකිරීම් අවසන් කරමින්</string>
   <string name="upload_failed_notification_title">උදුගතකරමින්  %1$s අසාර්ථකයි</string>
   <string name="upload_failed_notification_subtitle">පෙන්වන්න තට්ටු කරන්න.</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">1 ගොනුවක් උඩුගත කෙරේ</item>
     <item quantity="other">ගොනු %d ක් උඩුගත කෙරේ</item>
   </plurals>
-  <string name="title_activity_contributions">මගේ උඩුගතකිරීම්</string>
+  <string name="title_activity_contributions" fuzzy="true">මගේ උඩුගතකිරීම්</string>
   <string name="contribution_state_queued">පෝලිමට එක්වූවා</string>
   <string name="contribution_state_failed">අසාර්ථකයි</string>
   <string name="contribution_state_in_progress">%1$d%% ක් සම්පුර්ණයි</string>
@@ -49,16 +49,16 @@
   <string name="menu_upload_single">උඩුගත කරන්න</string>
   <string name="categories_search_text_hint">සෙවුම් ප්‍රවර්ග</string>
   <string name="menu_save_categories">සුරකින්න</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">තවමත් කිසිදු උඩුගත කිරීමක් නැත</item>
     <item quantity="one">එක් උඩුගත කිරීමක්</item>
     <item quantity="other">උඩුගත කිරීම් %d ක්</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">1 උඩුගත කිරීමක් ආරම්භ කරමින්</item>
     <item quantity="other">උඩුගත කිරීම් %d ක් ආරම්භ කරමින්</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 උඩුගත කිරීමක්</item>
     <item quantity="other">උඩුගත කිරීම් %d ක්</item>
   </plurals>

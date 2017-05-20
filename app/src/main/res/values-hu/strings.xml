@@ -21,10 +21,10 @@
   <string name="upload_failed_notification_title">%1$s feltöltése sikertelen</string>
   <string name="upload_failed_notification_subtitle">Érintsd meg a megtekintéshez</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">1 fájl feltöltése folyamatban</item>
+    <item quantity="one">%d fájl feltöltése folyamatban</item>
     <item quantity="other">%d fájl feltöltése folyamatban</item>
   </plurals>
-  <string name="title_activity_contributions">Feltöltéseim</string>
+  <string name="title_activity_contributions">Legutóbbi feltöltéseim</string>
   <string name="contribution_state_queued">Várólistán</string>
   <string name="contribution_state_failed">Sikertelen.</string>
   <string name="contribution_state_in_progress">%1$d%% kész</string>
@@ -42,6 +42,7 @@
   <string name="login_failed_password">Nem lehet bejelentkezni - ellenőrizd a jelszavad</string>
   <string name="login_failed_throttled">Túl sok sikertelen próbálkozás. Próbálkozz újra pár perc múlva.</string>
   <string name="login_failed_blocked">Sajnáljuk, ezt a felhasználót blokkolták a Commonson</string>
+  <string name="login_failed_2fa_needed">Meg kell adnia a kétlépcsős hitelesítő kódját.</string>
   <string name="login_failed_generic">Bejelentkezési hiba</string>
   <string name="share_upload_button">Feltöltés</string>
   <string name="multiple_share_base_title">Nevezd el a gyűjteményt</string>
@@ -50,24 +51,23 @@
   <string name="categories_search_text_hint">Keresés a kategóriák között</string>
   <string name="menu_save_categories">Mentés</string>
   <string name="refresh_button">Frissítés</string>
-  <plurals name="contributions_subtitle">
+  <string name="gps_disabled">A GPS le van tiltva az eszközén. Szeretné engedélyezni?</string>
+  <string name="enable_gps">GPS engedélyezése</string>
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Még nincs feltöltés</item>
     <item quantity="one">1 feltöltés</item>
     <item quantity="other">%d feltöltés</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">1 feltöltés kezdése</item>
+    <item quantity="one">%d feltöltés kezdése</item>
     <item quantity="other">%d feltöltés kezdése</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">1 feltöltés</item>
+    <item quantity="one">%d feltöltés</item>
     <item quantity="other">%d feltöltés</item>
   </plurals>
   <string name="categories_not_found">Nincs a(z) „%1$s” keresési kifejezésnek megfelelő kategória</string>
-  <string name="categories_skip_explanation">Adj kategóriákat a képekhez, hogy könnyebben meg lehessen találni őket a Commonson.
-
-Kezdd el beírni a kategória nevét, hogy hozzáadd.
-Kattints erre az üzenetre a lépés kihagyásához</string>
+  <string name="categories_skip_explanation">Adj kategóriákat a képekhez, hogy könnyebben meg lehessen találni őket a Commonson.\n\nKezdd el beírni a kategória nevét, hogy hozzáadd.\nKattints erre az üzenetre a lépés kihagyásához</string>
   <string name="categories_activity_title">Kategóriák</string>
   <string name="preference_tracking">Felhasználási jelentések</string>
   <string name="preference_tracking_summary">Felhasználási jelentések küldése a Wikimédia részére az alkalmazás fejlesztése érdekében</string>
@@ -77,7 +77,7 @@ Kattints erre az üzenetre a lépés kihagyásához</string>
   <string name="about_license">Nyílt forráskódú szoftver &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; alatt kiadva. A Wikimédia Commons és a logója a Wikimédia Alapítvány védjegyei, és a Wikimédia Alapítvány engedélyével vannak használva. Az alkalmazás fejlesztői nincsenek semmilyen kapcsolatban Wikimédia Alapítvánnyal.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Forráskód&lt;/a&gt; és &lt;a href=\"https://commons-app.github.io/\"&gt;weboldal&lt;/a&gt; a GitHubon. Nyiss egy új &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-problémát&lt;/a&gt; hibabejelentéssel vagy fejlesztési javaslattal.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Adatvédelmi_irányelv\"&gt;Adatvédelmi irányelvek&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;KÖSZÖNETNYILVÁNÍTÁS&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Köszönetnyilvánítás&lt;/a&gt;</string>
   <string name="title_activity_about">Névjegy</string>
   <string name="menu_feedback">Visszajelzés küldése (e-mailben)</string>
   <string name="no_email_client">Nincs telepített levelezőprogram</string>
@@ -117,17 +117,11 @@ Kattints erre az üzenetre a lépés kihagyásához</string>
   <string name="tutorial_1_text">A Wikimédia Commons tárolja a Wikipédián használt képek többségét.</string>
   <string name="tutorial_1_subtext">A képeid segítik az ismeretterjesztést az egész világon!</string>
   <string name="tutorial_2_text">Kérjük, tölts fel képeket, amelyeket teljes mértékben te fotóztál vagy készítettél:</string>
-  <string name="tutorial_2_subtext">- Természeti tárgyak (virágok, állatok, hegyek)
-- Hasznos tárgyak (kerékpárok, vasútállomások)
-- Híres emberek (a polgármestered, olimpikonok, akikkel találkoztál)</string>
+  <string name="tutorial_2_subtext">- Természeti tárgyak (virágok, állatok, hegyek)\n- Hasznos tárgyak (kerékpárok, vasútállomások)\n- Híres emberek (a polgármestered, olimpikonok, akikkel találkoztál)</string>
   <string name="tutorial_3_text">Kérjük, NE tölts fel:</string>
-  <string name="tutorial_3_subtext">- Szelfiket vagy képeket a barátaidról
-- Internetröl letöltött képeket
-- Kereskedelmi alkalmazások képernyőképeit</string>
+  <string name="tutorial_3_subtext">- Szelfiket vagy képeket a barátaidról\n- Internetröl letöltött képeket\n- Kereskedelmi alkalmazások képernyőképeit</string>
   <string name="tutorial_4_text">Példa feltöltés:</string>
-  <string name="tutorial_4_subtext">- Cím: Sydney-i Operaház
-- Leírás: A Sydney-i Operaház az öböl túlpartjáról
-- Kategóriák: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext">- Cím: Sydney-i Operaház\n- Leírás: A Sydney-i Operaház az öböl túlpartjáról\n- Kategóriák: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Tedd közzé a képeidet! Segíts életre kelteni a Wikipédia-szócikkeket!</string>
   <string name="welcome_wikipedia_subtext">A Wikipédián található képek a Wikimédia Commonsből származnak.</string>
   <string name="welcome_copyright_text">A képeid segítenek a világ minden táján élő emberek oktatásában.</string>
@@ -144,6 +138,7 @@ Kattints erre az üzenetre a lépés kihagyásához</string>
   <string name="location_permission_rationale">Lehetséges engedély: Jelenlegi hely megszerzése, a kategóriajavaslatok lehetőségéért.</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Közeli helyek</string>
+  <string name="no_nearby">Nem találhatók közeli helyek</string>
   <string name="warning">Figyelmeztetés</string>
   <string name="file_exists">Ez a fájl már létezik a Commons-on. Biztos, hogy folytatni akarod?</string>
   <string name="yes">Igen</string>
@@ -152,8 +147,22 @@ Kattints erre az üzenetre a lépés kihagyásához</string>
   <string name="media_detail_media_title">Média címe</string>
   <string name="media_detail_description">Leírás</string>
   <string name="media_detail_description_explanation">A média leírása kerül ide. Ez akár egészen hosszú is lehet, és több sorba fog kerülni. Azért reméljük, jól néz majd ki.</string>
+  <string name="media_detail_uploaded_date">Feltöltési dátum</string>
   <string name="become_a_tester_title">Béta tesztelővé válás</string>
   <string name="become_a_tester_description">Jelentkezz a béta csatornánkra a Google Playen, hogy hamarabb megkapd a hibajavításokat és az új funkciókat</string>
   <string name="use_wikidata">Wikidata használata</string>
   <string name="use_wikidata_summary">(Figyelmeztetés: a kikapcsolása nagy mobiladat-forgalmat eredményezhet)</string>
+  <string name="_2fa_code">2LH kód</string>
+  <string name="maximum_limit_alert">Nem lehet 500-nál többet megjeleníteni</string>
+  <string name="login_failed_2fa_not_supported">A kétlépcsős hitelesítés jelenleg nem támogatott.</string>
+  <string name="cancel">Mégse</string>
+  <string name="navigation_drawer_open">Megnyitás</string>
+  <string name="navigation_drawer_close">Bezárás</string>
+  <string name="navigation_item_home">Kezdőlap</string>
+  <string name="navigation_item_upload">Feltöltés</string>
+  <string name="navigation_item_nearby">Közelben</string>
+  <string name="navigation_item_about">Névjegy</string>
+  <string name="navigation_item_settings">Beállítások</string>
+  <string name="navigation_item_feedback">Visszajelzés</string>
+  <string name="navigation_item_logout">Kijelentkezés</string>
 </resources>

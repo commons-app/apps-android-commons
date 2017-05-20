@@ -21,10 +21,10 @@
   <string name="upload_failed_notification_title">Načítání souboru %1$s se nezdařilo</string>
   <string name="upload_failed_notification_subtitle">Klepnutím zobrazíte</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">1 soubor se nahrává</item>
+    <item quantity="one">%d soubor se nahrává</item>
     <item quantity="other">%d souborů se nahrává</item>
   </plurals>
-  <string name="title_activity_contributions">Moje obrázky</string>
+  <string name="title_activity_contributions">Moje nedávné obrázky</string>
   <string name="contribution_state_queued">Ve frontě</string>
   <string name="contribution_state_failed">Selhalo</string>
   <string name="contribution_state_in_progress">%1$d%% kompletní</string>
@@ -42,6 +42,7 @@
   <string name="login_failed_password">Nelze se přihlásit - zkontrolujte prosím své heslo</string>
   <string name="login_failed_throttled">Příliš mnoho neúspěšných pokusů. Zkuste to prosím znovu za několik minut.</string>
   <string name="login_failed_blocked">Omlouváme se, tento uživatel byl na Commons zablokován</string>
+  <string name="login_failed_2fa_needed">Prosím vložte kód pro své dvoufázové ověření.</string>
   <string name="login_failed_generic">Přihlášení se nezdařilo</string>
   <string name="share_upload_button">Nahrát</string>
   <string name="multiple_share_base_title">Pojmenujte tuto sadu</string>
@@ -50,17 +51,20 @@
   <string name="categories_search_text_hint">Hledání kategorií</string>
   <string name="menu_save_categories">Uložit</string>
   <string name="refresh_button">Obnovit</string>
+  <string name="gps_disabled">GPS ve vašem zařízení není povoleno. Chtěli byste ho spustit?</string>
+  <string name="enable_gps">Spustit GPS</string>
+  <string name="contributions_subtitle_zero">Žádné nahrané soubory</string>
   <plurals name="contributions_subtitle">
-    <item quantity="zero">Žádné nahrané soubory</item>
-    <item quantity="one">1 nahraný soubor</item>
-    <item quantity="other">%d nahraných souborů</item>
+    <item quantity="zero">Žádné soubory</item>
+    <item quantity="one">1 soubor</item>
+    <item quantity="other">%d souborů</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Spouští se nahrávání 1 souboru</item>
+    <item quantity="one">Spouští se nahrávání %d souboru</item>
     <item quantity="other">Spouští se nahrávání %d souborů</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">1 nahrávání</item>
+    <item quantity="one">%d nahrávání</item>
     <item quantity="other">%d nahrávání</item>
   </plurals>
   <string name="categories_not_found">Žádné kategorie neodpovídají „%1$s“</string>
@@ -74,7 +78,7 @@
   <string name="about_license">Open Source software dostupný za podmínek &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Wikimedia Commons a logo Wikimedia Commons jsou ochranné známky Wikimedia Foundation a jsou použity se svolením Wikimedia Foundation. Nejsme podporováni Wikimedia Foundation ani nejsme její součástí.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Zdrojový kód&lt;/a&gt;, &lt;a href=\"https://commons-app.github.io/\"&gt;webová stránka&lt;/a&gt; a &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;hlášení chyb a sdílení nápadů&lt;/a&gt; na GitHubu.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Ochrana_osobních_údajů\"&gt;Ochrana osobních údajů&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;AUTOŘI&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Autoři&lt;/a&gt;</string>
   <string name="title_activity_about">O aplikaci</string>
   <string name="menu_feedback">Poslat názory (e-mailem)</string>
   <string name="no_email_client">Není nainstalován žádný e-mailový klient</string>
@@ -114,20 +118,13 @@
   <string name="tutorial_1_text">Wikimedia Commons je úložištěm většiny obrázků, které jsou používány na Wikipedii.</string>
   <string name="tutorial_1_subtext">Vaše obrázky pomáhají vzdělávat lidi po celém světě</string>
   <string name="tutorial_2_text">Prosím, nahrávejte obrázky které jste vyfotil nebo nahrál sám:</string>
-  <string name="tutorial_2_subtext">- Přírodní objekty (květiny, zvířata, hory)
-- Užitkové předměty (jízdní kola, vlakové nádraží)
-- Slavní lidé (starosta, olympjští sportovci)</string>
+  <string name="tutorial_2_subtext">- Přírodní objekty (květiny, zvířata, hory)\n- Užitkové předměty (jízdní kola, vlakové nádraží)\n- Slavní lidé (starosta, olympjští sportovci)</string>
   <string name="tutorial_3_text">Prosím NENAHRÁVEJTE:</string>
-  <string name="tutorial_3_subtext">- Selfie nebo obrázky vašich přátel
-- Obrázky stažené z Internetu
-- Screenshoty z proprietárních aplikací</string>
+  <string name="tutorial_3_subtext">- Selfie nebo obrázky vašich přátel\n- Obrázky stažené z Internetu\n- Screenshoty z proprietárních aplikací</string>
   <string name="tutorial_4_text">Příklad nahraného souboru:</string>
-  <string name="tutorial_4_subtext">- Název: Opera v Sydney
-- Popis: Opra v Sydney, pohled přes záliv
-- Kategorie: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext">- Název: Opera v Sydney\n- Popis: Opra v Sydney, pohled přes záliv\n- Kategorie: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Přispějte svými obrázky. Pomozte oživit články na Wikipedii.</string>
-  <string name="welcome_wikipedia_subtext">Obrázky na Wikipedii pochází 
-z Wikimedia Commons.</string>
+  <string name="welcome_wikipedia_subtext">Obrázky na Wikipedii pochází \nz Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Vaše obrázky pomáhají vzdělávat lidi po celém světě.</string>
   <string name="welcome_copyright_subtext">Vyhněte se dílům chráněným autorským právem, která jste našli na internetu, jako i obrázkům plakátů, přebalů knih apod.</string>
   <string name="welcome_final_text">Myslíte, že rozumíte?</string>
@@ -142,6 +139,7 @@ z Wikimedia Commons.</string>
   <string name="location_permission_rationale">Volitelně: Umožněte aplikaci, aby získávala aktuální polohu a nabízela na jejím základě kategorie</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Místa v okolí</string>
+  <string name="no_nearby">Poblíž nebylo nic nalezeno</string>
   <string name="warning">Upozornění</string>
   <string name="file_exists">Tento soubor již na Commons existuje. Jste si jist, že chcete pokračovat?</string>
   <string name="yes">Ano</string>
@@ -150,8 +148,29 @@ z Wikimedia Commons.</string>
   <string name="media_detail_media_title">Název média</string>
   <string name="media_detail_description">Popis</string>
   <string name="media_detail_description_explanation">Sem patří popis média. Může být potenciálně velmi dlouhý, takže zabere několik řádků. Přesto doufáme, že to vypadá hezky.</string>
+  <string name="media_detail_uploaded_date">Datum nahrání souboru</string>
   <string name="become_a_tester_title">Staňte se beta testery</string>
   <string name="become_a_tester_description">Přihlásit se do našeho beta kanálu na Google Play a dostávat včasný přístup k novinkám a opravám chyb</string>
   <string name="use_wikidata">Použít Wikidata</string>
   <string name="use_wikidata_summary">(Varování: vypnutí tohoto režimu může vést k velké spotřebě dat)</string>
+  <string name="map_theme_light">mapbox://styles/mapbox/traffic-day-v2</string>
+  <string name="map_theme_dark">mapbox://styles/mapbox/traffic-night-v2</string>
+  <string name="mapbox_commons_app_token">pk.eyJ1IjoibWFza2FyYXZpdmVrIiwiYSI6ImNqMmxvdzFjMTAwMHYzM283ZWM3eW5tcDAifQ.ib5SZ9EVjwJe6GSKve0bcg</string>
+  <string name="_2fa_code">Kód pro dvoufázové ověření (2FA)</string>
+  <string name="number_of_uploads">Můj limit zobrazených souborů</string>
+  <string name="maximum_limit">Maximum</string>
+  <string name="maximum_limit_alert">Není možné zobrazit více než 500</string>
+  <string name="set_limit">Počet nahraných souborů, které se zobrazí</string>
+  <string name="login_failed_2fa_not_supported">Tato aplikace zatím nepodporuje tzv. dvoufázové ověření.</string>
+  <string name="logout_verification">Opravdu se chcete odhlásit?</string>
+  <string name="cancel">Zrušit</string>
+  <string name="navigation_drawer_open">Otevřít</string>
+  <string name="navigation_drawer_close">Zavřít</string>
+  <string name="navigation_item_home">Domů</string>
+  <string name="navigation_item_upload">Nahrát</string>
+  <string name="navigation_item_nearby">Poblíž</string>
+  <string name="navigation_item_about">O aplikaci</string>
+  <string name="navigation_item_settings">Nastavení</string>
+  <string name="navigation_item_feedback">Zpětná vazba</string>
+  <string name="navigation_item_logout">Odhlášení</string>
 </resources>

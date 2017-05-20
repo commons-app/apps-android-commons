@@ -20,7 +20,7 @@
   <string name="upload_failed_notification_title">فشل رفع %1$s</string>
   <string name="upload_failed_notification_subtitle">انقر لتشاهد</string>
   <string name="uploads_pending_notification_indicator" fuzzy="true">متبقى %d</string>
-  <string name="title_activity_contributions">مرفوعاتي</string>
+  <string name="title_activity_contributions" fuzzy="true">مرفوعاتي</string>
   <string name="contribution_state_queued">في قائمة الانتظار</string>
   <string name="contribution_state_failed">فشل</string>
   <string name="contribution_state_in_progress">انتهاء %1$d%%</string>
@@ -47,10 +47,7 @@
   <string name="menu_save_categories">احفظ</string>
   <string name="refresh_button">أنعش</string>
   <string name="categories_not_found">لا توجد تصنيفات تطابق %1$s</string>
-  <string name="categories_skip_explanation">أضف التصانيف لتسهل اكتشاف صورك على ويكيميديا كومنز.
-
-ابدأ الكتاب لتضيف التصانيف.
-انقر هذه الرسالة لتتجاوز هذه الخطوة.</string>
+  <string name="categories_skip_explanation">أضف التصانيف لتسهل اكتشاف صورك على ويكيميديا كومنز.\n\nابدأ الكتاب لتضيف التصانيف.\nانقر هذه الرسالة لتتجاوز هذه الخطوة.</string>
   <string name="categories_activity_title">تصنيفات</string>
   <string name="preference_tracking">تقارير الاستخدام</string>
   <string name="preference_tracking_summary">إرسال تقارير الاستخدام إلى ويكيميديا لمساعدتنا على تحسين التطبيق</string>
@@ -60,7 +57,7 @@
   <string name="about_license" fuzzy="true">برنامج مفتوح المصدر منشور &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;برخصة أباتشي النسخة 2&lt;/a&gt;</string>
   <string name="about_improve" fuzzy="true">المصدر على &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;غِتهب&lt;/a&gt;. العلل في &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;بغزِلا&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;سياسة الخصوصية&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;CREDITS&lt;/a&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;CREDITS&lt;/a&gt;</string>
   <string name="title_activity_about">حول</string>
   <string name="menu_feedback">إرسال ملاحظات (عبر البريد الإلكتروني)</string>
   <string name="provider_categories">التصانيف المستخدمة مؤخرا</string>
@@ -90,4 +87,5 @@
   <string name="no">لا</string>
   <string name="media_detail_title">العنوان</string>
   <string name="media_detail_description">الوصف</string>
+  <string name="navigation_item_settings">الإعدادات</string>
 </resources>

@@ -219,7 +219,7 @@ public  class       ShareActivity
         uploadController = new UploadController(this);
         setContentView(R.layout.activity_share);
         ButterKnife.bind(this);
-        initDrawer();
+        initBack();
         app = CommonsApplication.getInstance();
         backgroundImageView = (SimpleDraweeView)findViewById(R.id.backgroundImage);
 
@@ -444,7 +444,11 @@ public  class       ShareActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
+                if(categorizationFragment!=null && categorizationFragment.isVisible()) {
+                    categorizationFragment.backButtonDialog();
+                } else {
+                    onBackPressed();
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);

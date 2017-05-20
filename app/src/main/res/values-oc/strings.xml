@@ -20,11 +20,11 @@
   <string name="upload_progress_notification_title_finishing">Fin del telecargament %1$s</string>
   <string name="upload_failed_notification_title">Telecargament fracassat a %1$s</string>
   <string name="upload_failed_notification_subtitle">Quichar per afichar</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">1 fichièr en telecargament</item>
     <item quantity="other">%d fichièrs en telecargament</item>
   </plurals>
-  <string name="title_activity_contributions">Mos telecargaments</string>
+  <string name="title_activity_contributions" fuzzy="true">Mos telecargaments</string>
   <string name="contribution_state_queued">Mes en fila d\'espèra</string>
   <string name="contribution_state_failed">Fracàs</string>
   <string name="contribution_state_in_progress">%1$d%% efectuat</string>
@@ -50,16 +50,16 @@
   <string name="categories_search_text_hint">Recercar de categorias</string>
   <string name="menu_save_categories">Enregistrar</string>
   <string name="refresh_button">Refrescar</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Pas mai cap de telecargament</item>
     <item quantity="one">1 telecargament</item>
     <item quantity="other">%d telecargaments</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">1 telecargament aviat</item>
     <item quantity="other">%d telecargaments aviats</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 telecargament</item>
     <item quantity="other">%d telecargaments</item>
   </plurals>

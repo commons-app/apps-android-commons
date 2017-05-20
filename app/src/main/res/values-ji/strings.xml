@@ -21,10 +21,10 @@
   <string name="upload_failed_notification_title">ארויפֿלאדן %1$s דורכגעפֿאלן</string>
   <string name="upload_failed_notification_subtitle">דרוקט צו באקוקן</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">1 טעקע לאדט אן</item>
+    <item quantity="one">%d טעקע לאדט אן</item>
     <item quantity="other">%d טעקעס לאדן אן</item>
   </plurals>
-  <string name="title_activity_contributions">מײַנע ארויפלאדן</string>
+  <string name="title_activity_contributions" fuzzy="true">מײַנע ארויפלאדן</string>
   <string name="contribution_state_queued">אין ריי</string>
   <string name="contribution_state_failed">דורכגעפֿאַלן</string>
   <string name="contribution_state_in_progress">%1$d%% דערגאנצט</string>
@@ -44,10 +44,14 @@
   <string name="categories_search_text_hint">זוכן קאטעגאריעס</string>
   <string name="menu_save_categories">אויפֿהיטן</string>
   <string name="refresh_button">דערפֿרישן</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">נאך נישט קיין ארויפֿלאדן </item>
-    <item quantity="one">1 ארויפֿלאד</item>
+    <item quantity="one">איין ארויפֿלאד</item>
     <item quantity="other">%d ארויפֿלאדן</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">אנהייבן %d ארויפֿלאד</item>
+    <item quantity="other"> אנהייבן %d ארויפֿלאדן</item>
   </plurals>
   <string name="categories_activity_title">קאַטעגאריעס</string>
   <string name="preference_tracking">באניץ באריכטן</string>
@@ -84,4 +88,11 @@
   <string name="detail_description_empty">קיין באַשרײַבונג</string>
   <string name="detail_license_empty">אומבאקאנטער ליצענץ</string>
   <string name="menu_refresh">דערפֿרישן</string>
+  <string name="cancel">אַנולירן</string>
+  <string name="navigation_drawer_close">שליסן</string>
+  <string name="navigation_item_upload">אַרויפֿלאָדן</string>
+  <string name="navigation_item_nearby">דערבײ</string>
+  <string name="navigation_item_about">וועגן</string>
+  <string name="navigation_item_settings">איינשטעלונגען</string>
+  <string name="navigation_item_logout">אַרויסלאָגירן</string>
 </resources>

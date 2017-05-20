@@ -20,11 +20,11 @@
   <string name="upload_progress_notification_title_finishing">Rematando a carga de \"%1$s\"</string>
   <string name="upload_failed_notification_title">Erro ao cargar \"%1$s\"</string>
   <string name="upload_failed_notification_subtitle">Prema para mostralo</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">Cargando 1 ficheiro</item>
     <item quantity="other">Cargando %d ficheiros</item>
   </plurals>
-  <string name="title_activity_contributions">As miñas subidas</string>
+  <string name="title_activity_contributions" fuzzy="true">As miñas subidas</string>
   <string name="contribution_state_queued">Na cola</string>
   <string name="contribution_state_failed">Erróneo</string>
   <string name="contribution_state_in_progress">%1$d%% completado</string>
@@ -50,24 +50,21 @@
   <string name="categories_search_text_hint">Procurar categorías</string>
   <string name="menu_save_categories">Gardar</string>
   <string name="refresh_button">Refrescar</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Aínda non hai ningunha carga</item>
     <item quantity="one">1 carga</item>
     <item quantity="other">%d cargas</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Iniciando 1 carga</item>
     <item quantity="other">Iniciando %d cargas</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 carga</item>
     <item quantity="other">%d cargas</item>
   </plurals>
   <string name="categories_not_found">Non se atopou ningunha categoría que coincidise con \"%1$s\"</string>
-  <string name="categories_skip_explanation">Engada categorías para facer máis accesibles as súas imaxes na Wikimedia Commons.
-
-Comece a escribir para engadir categorías.
-Prema nesta mensaxe (ou no botón \"Atrás\") para saltar este paso.</string>
+  <string name="categories_skip_explanation">Engada categorías para facer máis accesibles as súas imaxes na Wikimedia Commons.\n\nComece a escribir para engadir categorías.\nPrema nesta mensaxe (ou no botón \"Atrás\") para saltar este paso.</string>
   <string name="categories_activity_title">Categorías</string>
   <string name="preference_tracking">Informes de uso</string>
   <string name="preference_tracking_summary">Enviar informes de uso á Wikimedia para axudar a mellorar a aplicación</string>
@@ -77,7 +74,7 @@ Prema nesta mensaxe (ou no botón \"Atrás\") para saltar este paso.</string>
   <string name="about_license">Software de código aberto liberado baixo a &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;licenza Apache v2&lt;/a&gt;. Wikimedia Commons e o seu logo son marcas rexistradas da Fundación Wikimedia e úsanse coa súa autorización. Non fomos acreditados pola Fundación Wikimedia nin estamos afiliados con ela.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Código fonte&lt;/a&gt; e &lt;a href=\"https://commons-app.github.io/\"&gt;sitio web&lt;/a&gt; en GitHub. Crear unha nova &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;incidencia&lt;/a&gt; para informar de problemas e suxestións.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Política_de_protección_de_datos_(gl)\"&gt;Política de protección de datos&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;CRÉDITOS&lt;/a&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;CRÉDITOS&lt;/a&gt;</string>
   <string name="title_activity_about">Acerca de</string>
   <string name="menu_feedback">Enviar comentarios (por correo electrónico)</string>
   <string name="no_email_client">Non hai instalado ningún cliente de correo</string>
@@ -117,17 +114,11 @@ Prema nesta mensaxe (ou no botón \"Atrás\") para saltar este paso.</string>
   <string name="tutorial_1_text">Wikimedia Commons alberga a maioría das imaxes usada en Wikipedia.</string>
   <string name="tutorial_1_subtext">As súas imaxes axudan a educar a persoas de todo o mundoǃ</string>
   <string name="tutorial_2_text">Por favor, suba unicamente imaxes capturadas ou creadas totalmente por vostedeː</string>
-  <string name="tutorial_2_subtext">- Obxectos naturais (flores, animais, montañas)
-- Obxectos útiles (bicicletas, estacións de tren)
-- Personaxes famosos (o seu alcalde, atletas olímpicos que coñeza)</string>
+  <string name="tutorial_2_subtext">- Obxectos naturais (flores, animais, montañas)\n- Obxectos útiles (bicicletas, estacións de tren)\n- Personaxes famosos (o seu alcalde, atletas olímpicos que coñeza)</string>
   <string name="tutorial_3_text">Por favor, NON subaː</string>
-  <string name="tutorial_3_subtext">- Selfies ou imaxes dos seus amigos
-- Imaxes descargadas de Internet
-- Capturas de pantalla de aplicacións con dereitos de autor</string>
+  <string name="tutorial_3_subtext">- Selfies ou imaxes dos seus amigos\n- Imaxes descargadas de Internet\n- Capturas de pantalla de aplicacións con dereitos de autor</string>
   <string name="tutorial_4_text">Exemplo de subaː</string>
-  <string name="tutorial_4_subtext">- Título: Ópera de Sydney
-- Descrición: A Ópera de Sydney vista dende a baía
-- Categorías: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext">- Título: Ópera de Sydney\n- Descrición: A Ópera de Sydney vista dende a baía\n- Categorías: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Achegue as súas imaxes. Axude a que os artigos da Wikipedia cobren vida!</string>
   <string name="welcome_wikipedia_subtext">As imaxes da Wikipedia veñen da Wikimedia Commons.</string>
   <string name="welcome_copyright_text">As súas imaxes axudan a educar xente de todo o mundo.</string>

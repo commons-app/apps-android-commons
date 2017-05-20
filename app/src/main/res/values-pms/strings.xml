@@ -20,11 +20,11 @@
   <string name="upload_progress_notification_title_finishing">Fin dël cariament %1$s</string>
   <string name="upload_failed_notification_title">Cariament falì a %1$s</string>
   <string name="upload_failed_notification_subtitle">Sgnaché për ësmon-e</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">1 archivi an camin ch\'as caria</item>
     <item quantity="other">%d archivi an camin ch\'as cario</item>
   </plurals>
-  <string name="title_activity_contributions">Ij mè cariament</string>
+  <string name="title_activity_contributions" fuzzy="true">Ij mè cariament</string>
   <string name="contribution_state_queued">An coa</string>
   <string name="contribution_state_failed">Falì</string>
   <string name="contribution_state_in_progress">%1$d%% completà</string>
@@ -50,24 +50,21 @@
   <string name="categories_search_text_hint">Sërché dle categorìe</string>
   <string name="menu_save_categories">Argistré</string>
   <string name="refresh_button">Agiorné</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Ancor gnun cariament</item>
     <item quantity="one">1 cariament</item>
     <item quantity="other">%d cariament</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">1 cariament ancaminà</item>
     <item quantity="other">%d cariament ancaminà</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 cariament</item>
     <item quantity="other">%d cariament</item>
   </plurals>
   <string name="categories_not_found">Gnun-e categorìe rëspondente a %1$s trovà</string>
-  <string name="categories_skip_explanation">Ch\'a gionta dle categorìe, për ch\'a sia pi belfé trové soe plance su Wikimedia Commons.
-
-Ch\'a ancamin-a a scrive për gionté dle categorìe.
-Ch\'a sgnaca an s\'ën mëssage (o ch\'a sgnaca ël boton andaré) për sauté \'s pass.</string>
+  <string name="categories_skip_explanation">Ch\'a gionta dle categorìe, për ch\'a sia pi belfé trové soe plance su Wikimedia Commons.\n\nCh\'a ancamin-a a scrive për gionté dle categorìe.\nCh\'a sgnaca an s\'ën mëssage (o ch\'a sgnaca ël boton andaré) për sauté \'s pass.</string>
   <string name="categories_activity_title">Categorìe</string>
   <string name="preference_tracking">Rapòrt d\'utilisassion</string>
   <string name="preference_tracking_summary">Mandé ij rapòrt d\'usagi a Wikimedia për giutene a amelioré l\'aplicassion</string>
@@ -77,7 +74,7 @@ Ch\'a sgnaca an s\'ën mëssage (o ch\'a sgnaca ël boton andaré) për sauté \
   <string name="about_license">Ij programa Open Source a son publicà sota la &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;licensa Apache v2&lt;/a&gt;. Wikimedia Commons e sò sìmbol a son dle marche argistrà dla Fondassion Wikimedia e a son dovrà con ël përmess ëd la Fondassion Wikimedia. Nojàutri i soma nen aprovà da o afilià a la Fondassion Wikimedia.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sorgiss&lt;/a&gt; e &lt;a href=\"https://commons-app.github.io/\"&gt;sit an sl\'aragnà&lt;/a&gt; su GitHub. Creé na neuva &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;signalassion GitHub&lt;/a&gt; për signalé dij givo e dij sugeriment.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Régole ëd confidensialità&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;RINGRASSIAMENT&lt;/a&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;RINGRASSIAMENT&lt;/a&gt;</string>
   <string name="title_activity_about">A propòsit</string>
   <string name="menu_feedback">Mandé dij coment (për pòsta eletrònica)</string>
   <string name="no_email_client">Gnun clien ëd pòsta eletrònica anstalà</string>
@@ -117,17 +114,11 @@ Ch\'a sgnaca an s\'ën mëssage (o ch\'a sgnaca ël boton andaré) për sauté \
   <string name="tutorial_1_text">Wikimedia Comun a òspita la pipart ëd le plance ch\'a son dovrà an Wikipedia.</string>
   <string name="tutorial_1_subtext">Soe plance a giuto a eduché la gent daspërtut ant ël mond!</string>
   <string name="tutorial_2_text">Për piasì, ch\'a caria dle fòto ch\'a son ëstàite scatà o creà tute da chiel:</string>
-  <string name="tutorial_2_subtext">- Oget naturaj (fior, animaj, montagne) 
-- Oget ùtij (biciclëtte, stassion feroviarie)
-- Përson-e arnomà (sò sìndich, j\'atleta olìmpich che chiel a l\'ha rancontrà)</string>
+  <string name="tutorial_2_subtext">- Oget naturaj (fior, animaj, montagne) \n- Oget ùtij (biciclëtte, stassion feroviarie)\n- Përson-e arnomà (sò sìndich, j\'atleta olìmpich che chiel a l\'ha rancontrà)</string>
   <string name="tutorial_3_text">Për piasì, ch\'a caria NEN:</string>
-  <string name="tutorial_3_subtext">- dj\'àuto-scat o dle fòto dij sò amis
-- dle fòto ch\'a l\'ha dëscarià d\'an sl\'Aragnà
-- Plance d\'aplicassion sota drit d\'autor</string>
+  <string name="tutorial_3_subtext">- dj\'àuto-scat o dle fòto dij sò amis\n- dle fòto ch\'a l\'ha dëscarià d\'an sl\'Aragnà\n- Plance d\'aplicassion sota drit d\'autor</string>
   <string name="tutorial_4_text">Esempi ëd cariament:</string>
-  <string name="tutorial_4_subtext">- Tìtol: Ël teatro dl\'òpera ëd Sidney
-- Descrission: Ël teatro dl\'òpera ëd Sidney s-ciairà dëdlà dl\'ansen
-- Categorìe: Teatro dl\'òpera ëd Sidney, Teatro dl\'òpera ëd Sidney da ponent, viste a distansa dël Teatro dl\'òpera ëd Sydney</string>
+  <string name="tutorial_4_subtext">- Tìtol: Ël teatro dl\'òpera ëd Sidney\n- Descrission: Ël teatro dl\'òpera ëd Sidney s-ciairà dëdlà dl\'ansen\n- Categorìe: Teatro dl\'òpera ëd Sidney, Teatro dl\'òpera ëd Sidney da ponent, viste a distansa dël Teatro dl\'òpera ëd Sydney</string>
   <string name="welcome_wikipedia_text">Ch\'a contribuissa con soe plance. Ch\'a giuta a j\'artìcoj ëd Wikipedia a pijé vita!</string>
   <string name="welcome_wikipedia_subtext">Le plance su Wikipedia a ven-o da Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Soe plance a giuto a eduché la gent daspërtut ant ël mond.</string>

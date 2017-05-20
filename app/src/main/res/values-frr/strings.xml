@@ -20,11 +20,11 @@
   <string name="upload_progress_notification_title_finishing">Huuchschüüren faan „%1$s“ klaar fu</string>
   <string name="upload_failed_notification_title">Huuchschüüren faan „%1$s“ skiaf gingen</string>
   <string name="upload_failed_notification_subtitle">Tipe, am det uuntulukin</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">Ian datei woort huuchschüürd</item>
     <item quantity="other">%d datein wurd huuchschüürd</item>
   </plurals>
-  <string name="title_activity_contributions">Min huuchschüürd datein</string>
+  <string name="title_activity_contributions" fuzzy="true">Min huuchschüürd datein</string>
   <string name="contribution_state_queued">Skal noch teew</string>
   <string name="contribution_state_failed">Skiaf gingen</string>
   <string name="contribution_state_in_progress">%1$d%% klaar</string>
@@ -50,16 +50,16 @@
   <string name="categories_search_text_hint">Schük uun kategoriin</string>
   <string name="menu_save_categories">Seekre</string>
   <string name="refresh_button">Nei loose</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Noch nian huuchschüürd datein</item>
     <item quantity="one">Ian huuchschüürd datei</item>
     <item quantity="other">%d huuchschüürd datein</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Began en upload</item>
     <item quantity="other">Began %d uploads</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">Ian huuchschüürd datei</item>
     <item quantity="other">%d huuchschüürd datein</item>
   </plurals>
@@ -71,11 +71,10 @@
   <string name="title_activity_settings">Iinstelangen</string>
   <string name="title_activity_signup">Iinskriiw</string>
   <string name="menu_about">Auer</string>
-  <string name="about_license" fuzzy="true">Open Source software ütjden oner det lisens &lt;a href=\"https://github.com/commons-app/android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;.
-Wikimedia Commons an det Wikimedia-Commons-Logo san markintiaken faan\'t Wikimedia Foundation an wurd mä ferloof faan\'t Wikimedia Foundation brükt. Wi hiar ei tu\'t Wikimedia Foundation.</string>
+  <string name="about_license" fuzzy="true">Open Source software ütjden oner det lisens &lt;a href=\"https://github.com/commons-app/android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;.\nWikimedia Commons an det Wikimedia-Commons-Logo san markintiaken faan\'t Wikimedia Foundation an wurd mä ferloof faan\'t Wikimedia Foundation brükt. Wi hiar ei tu\'t Wikimedia Foundation.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Code&lt;/a&gt; an &lt;a href=\"https://commons-app.github.io/\"&gt;Wääbsteed&lt;/a&gt; üüb GitHub&lt;/a&gt;. En neien &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-iindrach&lt;/a&gt; för feelern of föörslacher maage.</string>
   <string name="about_privacy_policy">Brükerreegeln</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;SOONK&lt;/a&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;SOONK&lt;/a&gt;</string>
   <string name="title_activity_about">Auer</string>
   <string name="menu_feedback">Wat wel dü üs sai ? (auer e-mail)</string>
   <string name="no_email_client">Diar as nään e-mail-client instaliaret</string>
@@ -115,17 +114,11 @@ Wikimedia Commons an det Wikimedia-Commons-Logo san markintiaken faan\'t Wikimed
   <string name="tutorial_1_text">A miast bilen uun Wikipedia lei bi Wikimedia Commons.</string>
   <string name="tutorial_1_subtext">Mä din bilen halepst dü minsken üüb a hialer welt.</string>
   <string name="tutorial_2_text">Wees so gud an schüür bilen huuch, diar dü salew maaget heest:</string>
-  <string name="tutorial_2_subtext">- Natüürelk objekten (bluumen, diarten, berger)
-- Natelk objekten (welen, boonhoofer)
-- Uunsen minsken (dan bürgermääster, olympisk atleeten, diar dü määt heest)</string>
+  <string name="tutorial_2_subtext">- Natüürelk objekten (bluumen, diarten, berger)\n- Natelk objekten (welen, boonhoofer)\n- Uunsen minsken (dan bürgermääster, olympisk atleeten, diar dü määt heest)</string>
   <string name="tutorial_3_text">Oober schüür EI huuch:</string>
-  <string name="tutorial_3_subtext">- Selfies of bilen faan din frinjer
-- Bilen, diar dü ütj at internet deellooset heest
-- Bilskirembilen faan ünfrei software</string>
+  <string name="tutorial_3_subtext">- Selfies of bilen faan din frinjer\n- Bilen, diar dü ütj at internet deellooset heest\n- Bilskirembilen faan ünfrei software</string>
   <string name="tutorial_4_text">Bispal:</string>
-  <string name="tutorial_4_subtext">- Tiitel: Sydney Opernhüs
-- Beskriiwang: Opernhüs fan Sydney, faan\'t bocht ütj sen
-- Kategoriin: Sydney Opernhüs, Sydney Opernhüs faan waasten, Sydney Opernhüs faan widj wech</string>
+  <string name="tutorial_4_subtext">- Tiitel: Sydney Opernhüs\n- Beskriiwang: Opernhüs fan Sydney, faan\'t bocht ütj sen\n- Kategoriin: Sydney Opernhüs, Sydney Opernhüs faan waasten, Sydney Opernhüs faan widj wech</string>
   <string name="welcome_wikipedia_text">Skaft din bilen. Halep mä an maage artiikler üüb Wikipedia labener!</string>
   <string name="welcome_wikipedia_subtext">A bilen üüb Wikipedia kem faan Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Mä din bilen halepst dü minsken üüb a hialer welt.</string>

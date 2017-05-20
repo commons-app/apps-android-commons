@@ -18,7 +18,7 @@
   <string name="upload_progress_notification_title_finishing"> %1$s अपलोड सकाउँदै</string>
   <string name="upload_failed_notification_title"> %1$s अपलोड असफल भयो</string>
   <string name="upload_failed_notification_subtitle">हेर्नको लागि ट्याप गर्नुहोस्</string>
-  <string name="title_activity_contributions">मेरा अपलोडहरू</string>
+  <string name="title_activity_contributions" fuzzy="true">मेरा अपलोडहरू</string>
   <string name="contribution_state_queued">लाममा राखियो</string>
   <string name="contribution_state_failed">असफल भयो</string>
   <string name="contribution_state_in_progress">%1$d%% पूरा भयो</string>
@@ -43,10 +43,7 @@
   <string name="categories_search_text_hint">खोज श्रेणीहरू</string>
   <string name="menu_save_categories">संग्रह गर्ने</string>
   <string name="categories_not_found">मिल्दो वर्ग %1$s फेला परेन</string>
-  <string name="categories_skip_explanation">विकिमीडिया कमन्समा आफ्नो तस्वीरहरू थप भेट्टाउने बनाउन वर्नहरू थप्नुहोस।
-
-वर्गहरू थप्नको लागि टाइप गर्न सुरु गर्नुहोस्।
-यो चरण छोड्न यो सन्देशमा ट्याप गर्नुहोस् (वा पछाडि जाने थिच्नुहोस्)।</string>
+  <string name="categories_skip_explanation">विकिमीडिया कमन्समा आफ्नो तस्वीरहरू थप भेट्टाउने बनाउन वर्नहरू थप्नुहोस।\n\nवर्गहरू थप्नको लागि टाइप गर्न सुरु गर्नुहोस्।\nयो चरण छोड्न यो सन्देशमा ट्याप गर्नुहोस् (वा पछाडि जाने थिच्नुहोस्)।</string>
   <string name="categories_activity_title">श्रेणीहरू</string>
   <string name="preference_tracking">उपयोग प्रतिवेदन</string>
   <string name="preference_tracking_summary">हामीलाई अनुप्रयोग सुधार गर्न सहयोग गर्न विकिमीडियामा प्रयोग रिपोर्ट पठाउनुहोस्</string>
