@@ -22,9 +22,14 @@ before_script:
   - emulator -avd test -no-audio -no-window &
   - android-wait-for-emulator
 script:
-  - ./gradlew test connectedAndroidTest -stacktrace
+  - ./gradlew check connectedCheck jacocoTestReport -stacktrace
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 after_failure:
+  - echo '*** Connected Test Rsults ***'
   - w3m -dump ${TRAVIS_BUILD_DIR}/app/build/reports/androidTests/connected/*Test.html
+  - echo '*** Lint Results ***'
+  - cat ${TRAVIS_BUILD_DIR}/app/build/reports/lint-results.xml
 jdk:
   # - openjdk8 # not yet available
   - oraclejdk8
