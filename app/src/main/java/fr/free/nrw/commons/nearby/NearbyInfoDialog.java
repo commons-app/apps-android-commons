@@ -4,9 +4,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -34,10 +37,13 @@ public class NearbyInfoDialog extends OverlayDialog {
     @BindView(R.id.link_preview_go_button)
     TextView goToButton;
 
+    @BindView(R.id.link_preview_overflow_button)
+    ImageView overflowButton;
+
     private Unbinder unbinder;
 
     private LatLng location;
-    private Uri articleLink;
+    private Sitelinks sitelinks;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,14 +62,60 @@ public class NearbyInfoDialog extends OverlayDialog {
     }
 
     private void getArticleLink(Bundle bundle) {
-        Sitelinks sitelinks = bundle.getParcelable(ARG_SITE_LINK);
+        this.sitelinks = bundle.getParcelable(ARG_SITE_LINK);
 
-        if (sitelinks.getWikipediaLink() != null) {
-            this.articleLink = sitelinks.getWikipediaLink();
-        } else {
+        if (sitelinks.getWikipediaLink() == null) {
             goToButton.setVisibility(View.GONE);
         }
+
+        overflowButton.setVisibility(showMenu() ? View.VISIBLE : View.GONE);
+
+        overflowButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupMenuListener();
+            }
+        });
     }
+
+    private void popupMenuListener() {
+        PopupMenu popupMenu = new PopupMenu(getActivity(), overflowButton);
+        popupMenu.inflate(R.menu.nearby_info_dialog_options);
+
+        MenuItem commonsArticle = popupMenu.getMenu()
+                .findItem(R.id.nearby_info_menu_commons_article);
+        MenuItem wikiDataArticle = popupMenu.getMenu()
+                .findItem(R.id.nearby_info_menu_wikidata_article);
+
+        commonsArticle.setEnabled(sitelinks.getCommonsLink() != null);
+        wikiDataArticle.setEnabled(sitelinks.getWikidataLink() != null);
+
+        popupMenu.setOnMenuItemClickListener(menuListener);
+        popupMenu.show();
+    }
+
+    private boolean showMenu() {
+        return sitelinks.getCommonsLink() != null
+                || sitelinks.getWikidataLink() != null;
+    }
+
+    private PopupMenu.OnMenuItemClickListener menuListener = new PopupMenu
+            .OnMenuItemClickListener() {
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.nearby_info_menu_commons_article:
+                    openWebView(sitelinks.getCommonsLink());
+                    return true;
+                case R.id.nearby_info_menu_wikidata_article:
+                    openWebView(sitelinks.getWikidataLink());
+                    return true;
+                default:
+                    break;
+            }
+            return false;
+        }
+    };
 
     public static void showYourself(FragmentActivity fragmentActivity, Place place) {
         NearbyInfoDialog mDialog = new NearbyInfoDialog();
@@ -96,7 +148,11 @@ public class NearbyInfoDialog extends OverlayDialog {
 
     @OnClick(R.id.link_preview_go_button)
     void onReadArticleClick() {
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, articleLink);
+        openWebView(sitelinks.getWikipediaLink());
+    }
+
+    private void openWebView(Uri link) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, link);
         startActivity(browserIntent);
     }
 

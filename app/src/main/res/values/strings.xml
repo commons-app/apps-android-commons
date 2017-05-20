@@ -119,22 +119,6 @@ Tap this message (or hit back) to skip this step.</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
-  <string name="license_name_own_pd">own-pd</string>
-  <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
-  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
-  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_2_0">CC BY 2.0</string>
-  <string name="license_name_fal">Free Art License</string>
-  <string name="license_name_pd_old_100">Public domain (author died over 100 years ago)</string>
-  <string name="license_name_pd_old">Public domain (copyright expired)</string>
-  <string name="license_name_pd_art">Public domain (art)</string>
-  <string name="license_name_pd_us">Public domain (US)</string>
-  <string name="license_name_pd_usgov">Public domain (US government)</string>
-  <string name="license_name_pd_usgov_nasa">Public domain (NASA)</string>
-  <string name="license_name_pd_ineligible">Public domain (ineligible for copyright)</string>
-  <string name="license_name_attribution">Attribution</string>
-  <string name="license_name_gfdl">GNU Free Documentation License</string>
   <string name="tutorial_1_text">Wikimedia Commons hosts most of the images that are used in Wikipedia.</string>
   <string name="tutorial_1_subtext">Your images help educate people around the world!</string>
   <string name="tutorial_2_text">Please upload pictures that are taken or created entirely by yourself:</string>
@@ -195,4 +179,7 @@ Tap this message (or hit back) to skip this step.</string>
   <string name="navigation_item_settings">Settings</string>
   <string name="navigation_item_feedback">Feedback</string>
   <string name="navigation_item_logout">Logout</string>
+
+  <string name="nearby_info_menu_commons_article">Commons Article</string>
+  <string name="nearby_info_menu_wikidata_article">WikiData Article</string>
 </resources>
