@@ -27,11 +27,6 @@
   <string name="menu_download">داگرتن</string>
   <string name="preference_license">مۆڵەتنامە</string>
   <string name="preference_theme">مۆدی شەو</string>
-  <string name="license_name_fal">مۆڵەتنامەی ھونەری ئازاد</string>
-  <string name="license_name_pd_old_100">پاوانی گشتی (دروستکەر ١٠٠ ساڵ لەمەوبەر مردووە)</string>
-  <string name="license_name_pd_old">پاوانی گشتی (مافی لەبەرگرتنەوە بەسەرچووە)</string>
-  <string name="license_name_pd_art">پاوانی گشتی (ھونەر)</string>
-  <string name="license_name_pd_us">پاوانی گشتی (ویلایەتە یەکگرتووەکان)</string>
   <string name="welcome_wikipedia_subtext">وێنەکانی سەر ویکیپیدیا لە ویکیمیدیا کۆمنزەوە دەھێندرێن.</string>
   <string name="welcome_copyright_text">وێنەکانت یارمەتی فێرکردنی خەڵکی دەدات لە سەرانسەری جیھان دا.</string>
   <string name="welcome_copyright_subtext">خۆت لەو کارانە لابدە کە مافی بڵاوکردنەوەیان پارێزراوە وەک ئەو شتانەی کە لەسەر ئینتەرنێت دەیان دۆزیتەوە، بە تایبەتی وێنەی پۆستەر، بەرگی کتێب و یاری، ھتد...</string>
