@@ -69,8 +69,8 @@
   <string name="preference_tracking_summary">向维基媒体发送使用报告，帮助我们改进应用</string>
   <string name="title_activity_settings">设置</string>
   <string name="menu_about">关于</string>
-  <string name="about_license">开放源码软件在&lt;a href=\"https://github.com/commons-app/android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;下释放</string>
-  <string name="about_improve">源代码位于&lt;a href=\"https://github.com/commons-app/android-commons\"&gt;GitHub&lt;/a&gt;。在&lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;报告错误。</string>
+  <string name="about_license">开放源码软件在&lt;a href=\" https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;下释放</string>
+  <string name="about_improve">源代码位于&lt;a href=\"https://github.com/commons-app/android-commons\"&gt;GitHub&lt;/a&gt;。在&lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;报告错误。</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;隐私政策&lt;/a&gt;</string>
   <string name="title_activity_about">关于</string>
   <string name="menu_feedback">反馈（通过电子邮件）</string>

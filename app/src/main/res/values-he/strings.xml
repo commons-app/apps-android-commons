@@ -54,7 +54,7 @@
   <string name="title_activity_settings">הגדרות</string>
   <string name="menu_about">אודות</string>
   <string name="about_license">תוכנת קוד-פתוח המשוחררת תחת רישיון &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;אפאצ\'י גרסה 2&lt;/a&gt;</string>
-  <string name="about_improve">קוד מקור ב־&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. דיווחי באגים ב&lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;באגזילה&lt;/a&gt;.</string>
+  <string name="about_improve">קוד מקור ב־&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. דיווחי באגים ב&lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;באגזילה&lt;/a&gt;.</string>
   <string name="about_privacy_policy"/>
   <string name="title_activity_about">אודות</string>
   <string name="menu_feedback">שליחת משוב (בדוא\"ל)</string>

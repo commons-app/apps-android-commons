@@ -42,7 +42,7 @@
   <string name="title_activity_settings">Iestatījumi</string>
   <string name="title_activity_signup">Reģistrēties</string>
   <string name="menu_about">Par</string>
-  <string name="about_improve" fuzzy="true">Izejas kods pieejams &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Kļūdas ziņot &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_improve" fuzzy="true">Izejas kods pieejams &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Kļūdas ziņot &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privātuma politika&lt;/a&gt;</string>
   <string name="title_activity_about">Par</string>
   <string name="menu_feedback">Nosūtīt atsauksmes (pa e-pastu)</string>

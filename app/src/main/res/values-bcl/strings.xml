@@ -49,7 +49,7 @@
   <string name="preference_tracking_summary">Ipadara an mga talaan nin paggagamit sa Wikimidya sa pagtabang samuya na mapakarhay an app</string>
   <string name="title_activity_settings">Mga Panuytoy</string>
   <string name="menu_about">Panunungod</string>
-  <string name="about_license" fuzzy="true">Bukas na Ginikanang panuklob ipinaghaya na sa lindong kan  &lt;a href=\"https://github.com/commons-app/android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
+  <string name="about_license" fuzzy="true">Bukas na Ginikanang panuklob ipinaghaya na sa lindong kan  &lt;a href=\" https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
   <string name="about_improve" fuzzy="true">Ginikanan sa &lt;a href=\"https://github.com/commons-app/android-commons\"&gt;GitHub&lt;/a&gt;. Mga kubol sa &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
   <string name="about_privacy_policy">Ano ini?</string>
   <string name="title_activity_about">Panunungod</string>

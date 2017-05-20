@@ -50,7 +50,7 @@
   <string name="title_activity_settings">ការកំណត់</string>
   <string name="menu_about">អំពី</string>
   <string name="about_license" fuzzy="true">សូហ្វវែរប្រភពបើកទូលាយត្រូវបានចេញផ្សាយក្រោមអាជ្ញាបណ្ណ &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
-  <string name="about_improve" fuzzy="true">ប្រភពកូដមាននៅ &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Bugs មាននៅ &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_improve" fuzzy="true">ប្រភពកូដមាននៅ &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Bugs មាននៅ &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;គោលការភាពជាឯកជន&lt;/a&gt;</string>
   <string name="title_activity_about">អំពី</string>
   <string name="menu_feedback">ផ្ញើមតិកែលម្អ (តាមអ៊ីមែល)</string>

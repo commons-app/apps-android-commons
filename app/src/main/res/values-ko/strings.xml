@@ -75,7 +75,7 @@
   <string name="title_activity_signup">가입하기</string>
   <string name="menu_about">정보</string>
   <string name="about_license" fuzzy="true">오픈 소스 소프트웨어는 &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;아파치 라이선스 v2&lt;/a&gt;에 따라 공개됩니다</string>
-  <string name="about_improve" fuzzy="true">소스 코드는 &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;에 있으며, 버그는&lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;버그질라&lt;/a&gt;에 보고하세요.</string>
+  <string name="about_improve" fuzzy="true">소스 코드는 &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;에 있으며, 버그는&lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;버그질라&lt;/a&gt;에 보고하세요.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy/ko\"&gt;개인정보 정책&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;제작진&lt;/a&gt;</string>
   <string name="title_activity_about">정보</string>
