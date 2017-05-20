@@ -67,6 +67,12 @@ public class NavigationBaseActivity extends BaseActivity implements HamburgerMen
         });
     }
 
+    public void initBack() {
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+    }
+
     private void setDrawerPaneWidth() {
         ViewGroup.LayoutParams params = drawerPane.getLayoutParams();
         // set width to lowerBound of 80% of the screen size
