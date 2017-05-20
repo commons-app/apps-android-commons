@@ -64,8 +64,10 @@ public class MediaWikiImageView extends SimpleDraweeView {
             }
             if (TextUtils.isEmpty(result) && media.getLocalUri() != null) {
                 result = media.getLocalUri().toString();
+            } else {
+                // only cache meaningful thumbnails received from network.
+                CommonsApplication.getInstance().getThumbnailUrlCache().put(media.getFilename(), result);
             }
-            CommonsApplication.getInstance().getThumbnailUrlCache().put(media.getFilename(), result);
             setImageUrl(result);
         }
     }
