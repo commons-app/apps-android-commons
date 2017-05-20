@@ -10,7 +10,6 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.theme.BaseActivity;
 
 public class WelcomeActivity extends BaseActivity {
-    private WelcomePagerAdapter adapter;
 
     @BindView(R.id.welcomePager) ViewPager pager;
     @BindView(R.id.welcomePagerIndicator) CirclePageIndicator indicator;
@@ -27,7 +26,7 @@ public class WelcomeActivity extends BaseActivity {
     }
 
     private void setUpAdapter() {
-        adapter = new WelcomePagerAdapter(this);
+        WelcomePagerAdapter adapter = new WelcomePagerAdapter(this);
         pager.setAdapter(adapter);
         indicator.setViewPager(pager);
     }

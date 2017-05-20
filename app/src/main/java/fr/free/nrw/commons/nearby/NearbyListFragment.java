@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.nearby;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -9,28 +8,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnItemClick;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.utils.UriDeserializer;
-
 import java.lang.reflect.Type;
 import java.util.List;
 
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnItemClick;
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.utils.UriDeserializer;
 import timber.log.Timber;
 
 public class NearbyListFragment extends ListFragment  {
-    private Gson gson;
     private List<Place> placeList;
-    private LatLng curLatLng;
 
     @BindView(R.id.listView) ListView listview;
 
@@ -64,7 +58,7 @@ public class NearbyListFragment extends ListFragment  {
         // Check that this is the first time view is created,
         // to avoid double list when screen orientation changed
         Bundle bundle = this.getArguments();
-        gson = new GsonBuilder()
+        Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Uri.class, new UriDeserializer())
                 .create();
         if (bundle != null) {
@@ -73,7 +67,7 @@ public class NearbyListFragment extends ListFragment  {
             Type listType = new TypeToken<List<Place>>() {}.getType();
             placeList = gson.fromJson(gsonPlaceList, listType);
             Type curLatLngType = new TypeToken<LatLng>() {}.getType();
-            curLatLng = gson.fromJson(gsonLatLng, curLatLngType);
+            LatLng curLatLng = gson.fromJson(gsonLatLng, curLatLngType);
             placeList = NearbyController.loadAttractionsFromLocationToPlaces(curLatLng, placeList);
         }
         if (savedInstanceState == null) {

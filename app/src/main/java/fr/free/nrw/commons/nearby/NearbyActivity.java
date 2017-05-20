@@ -2,11 +2,9 @@ package fr.free.nrw.commons.nearby;
 
 
 import android.content.Context;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.LocationManager;
-
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -20,21 +18,19 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.utils.UriSerializer;
-
-import fr.free.nrw.commons.R;
 import timber.log.Timber;
-
-import java.util.List;
 
 public class NearbyActivity extends BaseActivity {
     @BindView(R.id.progressBar)
@@ -43,9 +39,6 @@ public class NearbyActivity extends BaseActivity {
 
     private LocationServiceManager locationManager;
     private LatLng curLatLang;
-    private Gson gson;
-    private String gsonPlaceList;
-    private String gsonCurLatLng;
     private Bundle bundle;
     private NearbyAsyncTask nearbyAsyncTask;
 
@@ -201,11 +194,11 @@ public class NearbyActivity extends BaseActivity {
                 return;
             }
 
-            gson = new GsonBuilder()
+            Gson gson = new GsonBuilder()
                     .registerTypeAdapter(Uri.class, new UriSerializer())
                     .create();
-            gsonPlaceList = gson.toJson(placeList);
-            gsonCurLatLng = gson.toJson(curLatLang);
+            String gsonPlaceList = gson.toJson(placeList);
+            String gsonCurLatLng = gson.toJson(curLatLang);
 
             if (placeList.size() == 0) {
                 int duration = Toast.LENGTH_SHORT;

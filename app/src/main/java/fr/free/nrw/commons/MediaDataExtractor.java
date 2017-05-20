@@ -1,7 +1,5 @@
 package fr.free.nrw.commons;
 
-import fr.free.nrw.commons.location.LatLng;
-
 import org.mediawiki.api.ApiResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -22,6 +20,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import fr.free.nrw.commons.location.LatLng;
 import timber.log.Timber;
 
 /**
@@ -32,12 +31,10 @@ import timber.log.Timber;
  */
 public class MediaDataExtractor {
     private boolean fetched;
-    private boolean processed;
 
     private String filename;
     private ArrayList<String> categories;
     private Map<String, String> descriptions;
-    private String author;
     private Date date;
     private String license;
     private String coordinates;
@@ -51,7 +48,7 @@ public class MediaDataExtractor {
         categories = new ArrayList<>();
         descriptions = new HashMap<>();
         fetched = false;
-        processed = false;
+        boolean processed = false;
         this.licenseList = licenseList;
     }
 
@@ -122,7 +119,7 @@ public class MediaDataExtractor {
             descriptions = getMultilingualText(descriptionNode);
 
             Node authorNode = findTemplateParameter(templateNode, "author");
-            author = getFlatText(authorNode);
+            String author = getFlatText(authorNode);
         }
 
         Node coordinateTemplateNode = findTemplate(doc.getDocumentElement(), "location");

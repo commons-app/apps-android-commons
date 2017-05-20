@@ -14,7 +14,6 @@ public class CacheController {
 
     private double x, y;
     private QuadTree<List<String>> quadTree;
-    private Point<List<String>>[] pointsFound;
     private double xMinus, xPlus, yMinus, yPlus;
 
     private static final int EARTH_RADIUS = 6378137;
@@ -42,6 +41,7 @@ public class CacheController {
     }
 
     public List<String> findCategory() {
+        Point<List<String>>[] pointsFound;
         //Convert decLatitude and decLongitude to a coordinate offset range
         convertCoordRange();
         pointsFound = quadTree.searchWithin(xMinus, yMinus, xPlus, yPlus);
