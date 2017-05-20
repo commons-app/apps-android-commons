@@ -17,6 +17,7 @@
             android:src="@drawable/empty_photo"
             android:background="#ffffff"
             android:scaleType="centerCrop"
+            android:contentDescription="@string/no_image_found"
             />
 
         <TextView

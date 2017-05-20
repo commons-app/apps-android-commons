@@ -23,6 +23,7 @@
             android:layout_width="150dp"
             android:layout_height="118dp"
             android:scaleType="fitXY"
+            android:contentDescription="@string/welcome_image_mount_zao"
             />
 
         <ImageView
@@ -31,6 +32,7 @@
             android:layout_width="150dp"
             android:layout_height="118dp"
             android:scaleType="fitXY"
+            android:contentDescription="@string/welcome_image_llamas"
             />
 
         <ImageView
@@ -39,6 +41,7 @@
             android:layout_width="150dp"
             android:layout_height="118dp"
             android:scaleType="fitXY"
+            android:contentDescription="@string/welcome_image_rainbow_bridge"
             />
 
         <ImageView
@@ -47,6 +50,7 @@
             android:layout_width="150dp"
             android:layout_height="118dp"
             android:scaleType="fitXY"
+            android:contentDescription="@string/welcome_image_tulip"
             />
 
     </GridLayout>

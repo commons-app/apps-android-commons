@@ -13,6 +13,7 @@
         android:layout_gravity="center"
         android:src="@drawable/welcome_wikipedia"
         android:adjustViewBounds="true"
+        android:contentDescription="@string/welcome_image_welcome_wikipedia"
         />
 
     <TextView
