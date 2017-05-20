@@ -19,8 +19,6 @@ public class CategoriesAdapter extends BaseAdapter {
     private ArrayList<CategorizationFragment.CategoryItem> items;
 
     public CategoriesAdapter(Context context, ArrayList<CategorizationFragment.CategoryItem> items) {
-        Context localcontext;
-        localcontext = context;
         this.items = items;
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }

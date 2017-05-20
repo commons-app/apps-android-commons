@@ -55,7 +55,6 @@ public class MwVolleyApi {
     }
 
     public void request(String coords) {
-        String coordsLog = coords;
         String apiUrl = buildUrl(coords);
         Timber.d("URL: %s", apiUrl);
 

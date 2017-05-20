@@ -48,7 +48,6 @@ public class MediaDataExtractor {
         categories = new ArrayList<>();
         descriptions = new HashMap<>();
         fetched = false;
-        boolean processed = false;
         this.licenseList = licenseList;
     }
 
@@ -119,7 +118,6 @@ public class MediaDataExtractor {
             descriptions = getMultilingualText(descriptionNode);
 
             Node authorNode = findTemplateParameter(templateNode, "author");
-            String author = getFlatText(authorNode);
         }
 
         Node coordinateTemplateNode = findTemplate(doc.getDocumentElement(), "location");
