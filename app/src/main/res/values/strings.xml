@@ -168,7 +168,20 @@ Tap this message (or hit back) to skip this step.</string>
   <string name="set_limit">Set Recent Upload Limit</string>
   <string name="login_failed_2fa_not_supported">Two factor authentication is currently not supported.</string>
   <string name="logout_verification">Do you really want to logout?</string>
-
+  <string name="commons_logo">Commons Logo</string>
+  <string name="background_image">Background Image</string>
+  <string name="mediaimage_failed">Media Image Failed</string>
+  <string name="no_image_found">No Image Found</string>
+  <string name="upload_image">Upload Image</string>
+  <string name="welcome_image_mount_zao">Mount Zao</string>
+  <string name="welcome_image_llamas">Llamas</string>
+  <string name="welcome_image_rainbow_bridge">Rainbow Bridge</string>
+  <string name="welcome_image_tulip">Tulip</string>
+  <string name="welcome_image_no_selfies">No Selfies</string>
+  <string name="welcome_image_proprietary">Proprietary Image</string>
+  <string name="welcome_image_welcome_wikipedia">Welcome Wikipedia</string>
+  <string name="welcome_image_welcome_copyright">Welcome Copyright</string>
+  <string name="welcome_image_sydney_opera_house">Sydney Opera House</string>
   <string name="cancel">Cancel</string>
   <string name="navigation_drawer_open">Open</string>
   <string name="navigation_drawer_close">Close</string>

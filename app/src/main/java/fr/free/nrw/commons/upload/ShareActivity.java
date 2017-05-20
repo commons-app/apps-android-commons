@@ -47,7 +47,6 @@ public  class       ShareActivity
         implements  SingleUploadFragment.OnUploadActionInitiated,
         CategorizationFragment.OnCategoriesSaveHandler {
 
-    private SingleUploadFragment shareView;
     private CategorizationFragment categorizationFragment;
 
     private CommonsApplication app;
@@ -59,13 +58,13 @@ public  class       ShareActivity
     private Uri mediaUri;
     private Contribution contribution;
     private SimpleDraweeView backgroundImageView;
+
     private UploadController uploadController;
 
     private CommonsApplication cacheObj;
     private boolean cacheFound;
 
     private GPSExtractor imageObj;
-    private String filePath;
     private String decimalCoords;
 
     private boolean useNewPermissions = false;
@@ -194,7 +193,7 @@ public  class       ShareActivity
     protected void onAuthCookieAcquired(String authCookie) {
         app.getMWApi().setAuthCookie(authCookie);
 
-        shareView = (SingleUploadFragment) getSupportFragmentManager().findFragmentByTag("shareView");
+        SingleUploadFragment shareView = (SingleUploadFragment) getSupportFragmentManager().findFragmentByTag("shareView");
         categorizationFragment = (CategorizationFragment) getSupportFragmentManager().findFragmentByTag("categorization");
         if(shareView == null && categorizationFragment == null) {
                 shareView = new SingleUploadFragment();
@@ -375,7 +374,7 @@ public  class       ShareActivity
      * @param gpsEnabled
      */
     public void getFileMetadata(boolean gpsEnabled) {
-        filePath = FileUtils.getPath(this, mediaUri);
+        String filePath = FileUtils.getPath(this, mediaUri);
         Timber.d("Filepath: %s", filePath);
         Timber.d("Calling GPSExtractor");
         if(imageObj == null) {
