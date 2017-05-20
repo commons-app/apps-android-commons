@@ -138,6 +138,7 @@ public  class       ContributionsActivity
         }
         requestAuthToken();
         initDrawer();
+        setTitle(getString(R.string.title_activity_contributions));
     }
 
     @Override
