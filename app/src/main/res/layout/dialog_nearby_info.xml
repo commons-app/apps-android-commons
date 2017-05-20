@@ -55,8 +55,8 @@
 
                 <ImageView
                     android:id="@+id/link_preview_overflow_button"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="@dimen/overflow_button_dimen"
+                    android:layout_height="@dimen/overflow_button_dimen"
                     android:layout_gravity="center_vertical"
                     android:padding="12dp"
                     android:background="@android:color/white"
