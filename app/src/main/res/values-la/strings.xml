@@ -52,8 +52,8 @@ Hanc notionem tangere ad id praetermittere.</string>
   <string name="share_license_summary">Haec imago sub licentia %1$s communicabitur.</string>
   <string name="menu_download">Inmissio</string>
   <string name="preference_license">Licentia</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Attribution-ShareAlike</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0Attribution</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CC Attribution-ShareAlike</string>
+  <string name="license_name_cc_by" fuzzy="true">CC Attribution</string>
   <string name="license_name_cc0">CC0</string>
   <string name="welcome_wikipedia_text">Locupleta Vicipaediam imaginibus tuis!</string>
   <string name="welcome_wikipedia_subtext">Imagines Vicipaediae a Wikimedia Commons praebentur.</string>

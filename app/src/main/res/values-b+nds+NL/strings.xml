@@ -60,8 +60,8 @@
   <string name="share_license_summary">Disse aofbeelding völt onder de lisensie %1$s</string>
   <string name="menu_download">Neerlaojen</string>
   <string name="preference_license">Lisensie</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Naamsvermelding-Geliekeu00A0Delen</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0Naamsvermelding</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CC Naamsvermelding-Gelieke Delen</string>
+  <string name="license_name_cc_by" fuzzy="true">CC Naamsvermelding</string>
   <string name="license_name_cc0">CC0</string>
   <string name="welcome_wikipedia_text">Deel joew aofbeeldingen. Help ziejen in Wikipedie tot leven te laoten koemen!</string>
   <string name="welcome_wikipedia_subtext">Aofbeeldingen op Wikipedie koemen van Wikimedia Commons.</string>

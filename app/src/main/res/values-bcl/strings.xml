@@ -60,8 +60,8 @@
   <string name="share_license_summary">Ining imahe magin lisensiyada sa lindong kan %1$s</string>
   <string name="menu_download">Kargahon</string>
   <string name="preference_license">Lisensiya</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Panungdanan-HerasPararehas</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0Panungdanan</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CC Panungdanan-HerasPararehas</string>
+  <string name="license_name_cc_by" fuzzy="true">CC Panungdanan</string>
   <string name="license_name_cc0">CC0</string>
   <string name="welcome_wikipedia_text">Mag-ambag kan saimong mga imahe. Magtabang sa mga artikulo nin Wikipedia na magka-igwa nin buhay!</string>
   <string name="welcome_wikipedia_subtext">An mga imahe sa Wikipedia naggigikan sa mga Karugaringan nin Wikimedia.</string>

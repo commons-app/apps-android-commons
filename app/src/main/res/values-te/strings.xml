@@ -60,8 +60,8 @@
   <string name="share_license_summary">ఈ బొమ్మ %1$s లైసెన్సు కు లోబడి ఉంటుంది.</string>
   <string name="menu_download">దింపుకోండి</string>
   <string name="preference_license">లైసెన్సు</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Attribution-ShareAlikeu00A03.0</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0Attributionu00A03.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CC Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (ఆస్ట్రియా)</string>
