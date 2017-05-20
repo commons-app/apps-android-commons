@@ -114,25 +114,6 @@ public class MediaDetailFragment extends Fragment {
 
         licenseList = new LicenseList(getActivity());
 
-        Media media = detailProvider.getMediaAtPosition(index);
-        if (media == null) {
-            // Ask the detail provider to ping us when we're ready
-            Timber.d("MediaDetailFragment not yet ready to display details; registering observer");
-            dataObserver = new DataSetObserver() {
-                @Override
-                public void onChanged() {
-                    Timber.d("MediaDetailFragment ready to display delayed details!");
-                    detailProvider.unregisterDataSetObserver(dataObserver);
-                    dataObserver = null;
-                    displayMediaDetails(detailProvider.getMediaAtPosition(index));
-                }
-            };
-            detailProvider.registerDataSetObserver(dataObserver);
-        } else {
-            Timber.d("MediaDetailFragment ready to display details");
-            displayMediaDetails(media);
-        }
-
         // Progressively darken the image in the background when we scroll detail pane up
         scrollListener = new ViewTreeObserver.OnScrollChangedListener() {
             @Override
@@ -169,6 +150,31 @@ public class MediaDetailFragment extends Fragment {
         return view;
     }
 
+    @Override public void onResume() {
+        super.onResume();
+        Media media = detailProvider.getMediaAtPosition(index);
+        if (media == null) {
+            // Ask the detail provider to ping us when we're ready
+            Timber.d("MediaDetailFragment not yet ready to display details; registering observer");
+            dataObserver = new DataSetObserver() {
+                @Override
+                public void onChanged() {
+                    if (!isAdded()) {
+                        return;
+                    }
+                    Timber.d("MediaDetailFragment ready to display delayed details!");
+                    detailProvider.unregisterDataSetObserver(dataObserver);
+                    dataObserver = null;
+                    displayMediaDetails(detailProvider.getMediaAtPosition(index));
+                }
+            };
+            detailProvider.registerDataSetObserver(dataObserver);
+        } else {
+            Timber.d("MediaDetailFragment ready to display details");
+            displayMediaDetails(media);
+        }
+    }
+
     private void displayMediaDetails(final Media media) {
         //Always load image from Internet to allow viewing the desc, license, and cats
         image.setMedia(media);
@@ -199,6 +205,9 @@ public class MediaDetailFragment extends Fragment {
             @Override
             protected void onPostExecute(Boolean success) {
                 detailFetchTask = null;
+                if (!isAdded()) {
+                    return;
+                }
 
                 if (success) {
                     extractor.fill(media);
