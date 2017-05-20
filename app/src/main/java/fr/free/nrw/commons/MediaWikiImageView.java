@@ -3,6 +3,7 @@ package fr.free.nrw.commons;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -60,6 +61,9 @@ public class MediaWikiImageView extends SimpleDraweeView {
         protected void onPostExecute(String result) {
             if (isCancelled()) {
                 return;
+            }
+            if (TextUtils.isEmpty(result) && media.getLocalUri() != null) {
+                result = media.getLocalUri().toString();
             }
             CommonsApplication.getInstance().getThumbnailUrlCache().put(media.getFilename(), result);
             setImageUrl(result);
