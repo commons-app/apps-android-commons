@@ -1,5 +1,13 @@
 # Wikimedia Commons for Android
 
+## v2.4 beta
+- Fixed memory issue with loading contributions on main screen
+- Deleted images don't show up on contributions list 
+- Added Fresco library for image loading and LeakCanary for memory profiling
+- Added navigation drawer and overhauled action bar
+- Added logout functionality
+- Fixed various issues with map of Nearby places
+
 ## v2.3 beta
 - Add map of Nearby places
 - Add overlay dialog when a Nearby place is tapped
