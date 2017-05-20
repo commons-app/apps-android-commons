@@ -183,10 +183,7 @@ Tap this message (or hit back) to skip this step.</string>
   <string name="maximum_limit_alert">Unable to display more than 500</string>
   <string name="set_limit">Set Recent Upload Limit</string>
   <string name="login_failed_2fa_not_supported">Two factor authentication is currently not supported.</string>
-<<<<<<< HEAD
   <string name="logout_verification">Do you really want to logout?</string>
-=======
->>>>>>> origin/fix_lint_issues
   <string name="commons_logo">Commons Logo</string>
   <string name="background_image">Background Image</string>
   <string name="mediaimage_failed">Media Image Failed</string>
@@ -201,11 +198,6 @@ Tap this message (or hit back) to skip this step.</string>
   <string name="welcome_image_welcome_wikipedia">Welcome Wikipedia</string>
   <string name="welcome_image_welcome_copyright">Welcome Copyright</string>
   <string name="welcome_image_sydney_opera_house">Sydney Opera House</string>
-<<<<<<< HEAD
->>>>>>> [Lint] Add content description to image views
-=======
->>>>>>> origin/fix_lint_issues
-
   <string name="cancel">Cancel</string>
   <string name="navigation_drawer_open">Open</string>
   <string name="navigation_drawer_close">Close</string>
