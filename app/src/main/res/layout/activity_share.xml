@@ -7,7 +7,14 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+<<<<<<< HEAD
         android:layout_height="match_parent">
+=======
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/background_image"
+        />
+>>>>>>> origin/fix_lint_issues
 
         <include
             android:id="@+id/toolbar"
