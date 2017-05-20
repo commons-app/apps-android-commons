@@ -73,12 +73,12 @@ public class NearbyInfoDialog extends OverlayDialog {
         overflowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                popupMenuListener(v);
+                popupMenuListener();
             }
         });
     }
 
-    private void popupMenuListener(View v) {
+    private void popupMenuListener() {
         PopupMenu popupMenu = new PopupMenu(getActivity(), overflowButton);
         popupMenu.inflate(R.menu.nearby_info_dialog_options);
 
@@ -95,11 +95,12 @@ public class NearbyInfoDialog extends OverlayDialog {
     }
 
     private boolean showMenu() {
-        return sitelinks.getCommonsLink() != null ||
-                sitelinks.getWikidataLink() != null;
+        return sitelinks.getCommonsLink() != null
+                || sitelinks.getWikidataLink() != null;
     }
 
-    private PopupMenu.OnMenuItemClickListener menuListener = new PopupMenu.OnMenuItemClickListener() {
+    private PopupMenu.OnMenuItemClickListener menuListener = new PopupMenu
+            .OnMenuItemClickListener() {
         @Override
         public boolean onMenuItemClick(MenuItem item) {
             switch (item.getItemId()) {
