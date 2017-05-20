@@ -24,7 +24,15 @@ dependencies {
 
     testCompile 'junit:junit:4.12'
     androidTestCompile "com.android.support:support-annotations:${project.supportLibVersion}"
-    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
+   // androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
+
+    androidTestCompile ('com.android.support.test.espresso:espresso-contrib:2.2.2'){
+        exclude module: 'support-annotations'
+        exclude module: 'support-v4'
+        exclude module: 'support-v13'
+        exclude module: 'recyclerview-v7'
+        exclude module: 'design'
+    }
 
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
