@@ -7,7 +7,7 @@
   <string name="login">Pieslēgties</string>
   <string name="signup">Reģistrēties</string>
   <string name="logging_in_title">Pieslēdzas</string>
-  <string name="logging_in_message">Lūdzu, uzgaidiet...</string>
+  <string name="logging_in_message">Lūdzu, uzgaidiet…</string>
   <string name="login_success">Ieiešana veiksmīga</string>
   <string name="login_failed">Pieteikšanās neizdevās.</string>
   <string name="authentication_failed">Autentifikācija neizdevās!</string>
@@ -47,7 +47,7 @@
   <string name="title_activity_about">Par</string>
   <string name="menu_feedback">Nosūtīt atsauksmes (pa e-pastu)</string>
   <string name="provider_categories">Nesen lietotās kategorijas</string>
-  <string name="waiting_first_sync">Gaida pirmo sinhronizāciju...</string>
+  <string name="waiting_first_sync">Gaida pirmo sinhronizāciju…</string>
   <string name="no_uploads_yet">Jūs vēl neesat augšupielādējis nevienu fotogrāfiju.</string>
   <string name="menu_retry_upload">Mēģināt vēlreiz</string>
   <string name="menu_cancel_upload">Atcelt</string>

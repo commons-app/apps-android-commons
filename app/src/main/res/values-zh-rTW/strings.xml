@@ -7,7 +7,7 @@
   <string name="login">登入</string>
   <string name="signup">註冊</string>
   <string name="logging_in_title">登入中</string>
-  <string name="logging_in_message">請稍候...</string>
+  <string name="logging_in_message">請稍候…</string>
   <string name="login_success">登入成功！</string>
   <string name="login_failed">登入失敗！</string>
   <string name="upload_failed">找不到檔案。請嘗試其它檔案看看。</string>

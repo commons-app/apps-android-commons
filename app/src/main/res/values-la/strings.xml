@@ -61,6 +61,6 @@ Hanc notionem tangere ad id praetermittere.</string>
   <string name="welcome_final_text">Intellexistine?</string>
   <string name="welcome_final_button_text">Pergere</string>
   <string name="detail_panel_cats_label">Categoriae</string>
-  <string name="detail_panel_cats_loading">Depromens...</string>
+  <string name="detail_panel_cats_loading">Depromens…</string>
   <string name="detail_panel_cats_none">Nulla selecta</string>
 </resources>

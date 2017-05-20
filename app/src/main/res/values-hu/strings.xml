@@ -6,7 +6,7 @@
   <string name="password">Jelszó</string>
   <string name="login">Bejelentkezés</string>
   <string name="signup">Regisztráció</string>
-  <string name="logging_in_title">Belépés...</string>
+  <string name="logging_in_title">Belépés…</string>
   <string name="logging_in_message">Kérlek várj…</string>
   <string name="login_success">Sikeres bejelentkezés</string>
   <string name="login_failed">A bejelentkezés nem sikerült.</string>
@@ -82,7 +82,7 @@
   <string name="menu_feedback">Visszajelzés küldése (e-mailben)</string>
   <string name="no_email_client">Nincs telepített levelezőprogram</string>
   <string name="provider_categories">Legutóbb használt kategóriák</string>
-  <string name="waiting_first_sync">Várakozás az első szinkronizálásra...</string>
+  <string name="waiting_first_sync">Várakozás az első szinkronizálásra…</string>
   <string name="no_uploads_yet">Még nem töltöttél fel fotókat.</string>
   <string name="menu_retry_upload">Újra</string>
   <string name="menu_cancel_upload">Mégse</string>

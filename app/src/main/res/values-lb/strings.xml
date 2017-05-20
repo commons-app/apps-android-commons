@@ -7,7 +7,7 @@
   <string name="login">Aloggen</string>
   <string name="signup">Schreift Iech an</string>
   <string name="logging_in_title">Aloggen</string>
-  <string name="logging_in_message">Waart w.e.g. ...</string>
+  <string name="logging_in_message">Waart w.e.g. …</string>
   <string name="login_success">Umeldung huet geklappt!</string>
   <string name="login_failed">D\'Aloggen huet net funktionéiert</string>
   <string name="upload_failed">Fichier net fonnt. probéiert w.e.g. en anere Fichier.</string>
@@ -81,7 +81,7 @@
   <string name="menu_feedback">Feedback schécken (per E-Mail)</string>
   <string name="no_email_client">Keen E-Mail-Client installéiert</string>
   <string name="provider_categories">Rezent benotzt Kategorien</string>
-  <string name="waiting_first_sync">Waarden op déi éischt Synchronisatioun...</string>
+  <string name="waiting_first_sync">Waarden op déi éischt Synchronisatioun…</string>
   <string name="no_uploads_yet">Dir hutt nach keng Fotoen eropgelueden.</string>
   <string name="menu_retry_upload">Nach eng Kéier probéieren</string>
   <string name="menu_cancel_upload">Ofbriechen</string>
@@ -128,7 +128,7 @@
   <string name="welcome_final_text">Dir mengt Dir huet et verstan?</string>
   <string name="welcome_final_button_text">Jo!</string>
   <string name="detail_panel_cats_label">Kategorien</string>
-  <string name="detail_panel_cats_loading">Lueden...</string>
+  <string name="detail_panel_cats_loading">Lueden…</string>
   <string name="detail_panel_cats_none">Näischt ausgewielt</string>
   <string name="detail_description_empty">Keng Beschreiwung</string>
   <string name="detail_license_empty">Onbekannt Lizenz</string>

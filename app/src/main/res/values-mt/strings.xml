@@ -5,7 +5,7 @@
   <string name="password">Password</string>
   <string name="login">Idħol</string>
   <string name="logging_in_title">Dieħel</string>
-  <string name="logging_in_message">Jekk jogħġbok stenna...</string>
+  <string name="logging_in_message">Jekk jogħġbok stenna…</string>
   <string name="login_success">Dħalt b\'suċċess!</string>
   <string name="login_failed">Id-dħul fil-kont ma rnexxiex!</string>
   <string name="authentication_failed">L-awtentikar falla!</string>

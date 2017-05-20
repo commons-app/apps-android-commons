@@ -6,7 +6,7 @@
   <string name="password">ʻŌlelo hūnā</string>
   <string name="login">ʻEʻe</string>
   <string name="logging_in_title">ʻEʻe nei</string>
-  <string name="logging_in_message">E kali ke ʻoluʻolu...</string>
+  <string name="logging_in_message">E kali ke ʻoluʻolu…</string>
   <string name="login_success">ʻEʻe kūleʻa</string>
   <string name="login_failed">Hāʻule ka ʻeʻena</string>
   <string name="authentication_failed">Hāʻule ka hōʻoiaʻiʻo ʻike</string>
@@ -55,7 +55,7 @@
   <string name="title_activity_about">Pilina</string>
   <string name="menu_feedback">Hoʻouna Manaʻo (ia Lekauila)</string>
   <string name="provider_categories">Nā māhele i hanawale</string>
-  <string name="waiting_first_sync">Ke kali nei no ka kaʻanakuʻi mualoa...</string>
+  <string name="waiting_first_sync">Ke kali nei no ka kaʻanakuʻi mualoa…</string>
   <string name="no_uploads_yet">ʻAʻohe āu kiʻi.</string>
   <string name="menu_retry_upload">Hana hou</string>
   <string name="menu_cancel_upload">Hoʻōki</string>
@@ -85,7 +85,7 @@
   <string name="welcome_final_text">Maopōpō?</string>
   <string name="welcome_final_button_text">ʻAe@</string>
   <string name="detail_panel_cats_label">Nā Māhele</string>
-  <string name="detail_panel_cats_loading">Hoʻouka nei...</string>
+  <string name="detail_panel_cats_loading">Hoʻouka nei…</string>
   <string name="detail_panel_cats_none">ʻAʻohe mea e koho</string>
   <string name="detail_description_empty">ʻAʻohe hōʻike ʻano</string>
   <string name="detail_license_empty">Laikini ʻikeʻole</string>

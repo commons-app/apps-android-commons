@@ -7,7 +7,7 @@
   <string name="login">כניסה</string>
   <string name="signup">רישום</string>
   <string name="logging_in_title">כניסה לחשבון</string>
-  <string name="logging_in_message">נא להמתין...</string>
+  <string name="logging_in_message">נא להמתין…</string>
   <string name="login_success">הכניסה הצליחה</string>
   <string name="login_failed">הכניסה נכשלה!</string>
   <string name="upload_failed">הקובץ לא נמצא. נא לנסות קובץ אחר.</string>
@@ -82,7 +82,7 @@
   <string name="menu_feedback">שליחת משוב (בדוא\"ל)</string>
   <string name="no_email_client">לא מותקן לקוח דואר אלקטרוני</string>
   <string name="provider_categories">קטגוריות בשימוש לאחרונה</string>
-  <string name="waiting_first_sync">מחכה לסנכרון הראשון...</string>
+  <string name="waiting_first_sync">מחכה לסנכרון הראשון…</string>
   <string name="no_uploads_yet">עדיין לא העלית תמונות.</string>
   <string name="menu_retry_upload">לנסות שוב</string>
   <string name="menu_cancel_upload">ביטול</string>
@@ -129,7 +129,7 @@
   <string name="welcome_final_text">נראה לך שקלטת?</string>
   <string name="welcome_final_button_text">כן!</string>
   <string name="detail_panel_cats_label">קטגוריות</string>
-  <string name="detail_panel_cats_loading">טעינה...</string>
+  <string name="detail_panel_cats_loading">טעינה…</string>
   <string name="detail_panel_cats_none">לא נבחר דבר</string>
   <string name="detail_description_empty">אין תיאור</string>
   <string name="detail_license_empty">רישיון לא ידוע</string>

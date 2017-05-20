@@ -6,7 +6,7 @@
   <string name="password">पासवर्ड</string>
   <string name="login">प्रवेश</string>
   <string name="logging_in_title">प्रवेश गर्दै</string>
-  <string name="logging_in_message">कृपया प्रतिक्षा गर्नुहोस् ...</string>
+  <string name="logging_in_message">कृपया प्रतिक्षा गर्नुहोस् …</string>
   <string name="login_success">प्रवेश सफल!</string>
   <string name="login_failed">प्रवेश सफल हुन सकेन!</string>
   <string name="authentication_failed">प्रमाणिकरण असफल भयो!</string>
@@ -55,7 +55,7 @@
   <string name="title_activity_about">बारेमा</string>
   <string name="menu_feedback">सुझाव पठाउने (इमेल मार्फत)</string>
   <string name="provider_categories">हालै प्रयोग भएका श्रेणीहरू</string>
-  <string name="waiting_first_sync">पहिलो सिङ्कको लागि प्रतिक्षा गर्दै...</string>
+  <string name="waiting_first_sync">पहिलो सिङ्कको लागि प्रतिक्षा गर्दै…</string>
   <string name="no_uploads_yet">तपाईंले हालसम्म कुनै पनि फोटो अपलोड गर्नुभएको छैन</string>
   <string name="menu_retry_upload">पुन: प्रयास गर्नुहोस्</string>
   <string name="menu_cancel_upload">रद्द गर्नुहोस्</string>
@@ -85,7 +85,7 @@
   <string name="welcome_final_text">के तपाईंले कुरा बुझ्नु भए जस्तो लाग्छ ?</string>
   <string name="welcome_final_button_text">हो !</string>
   <string name="detail_panel_cats_label">श्रेणीहरू</string>
-  <string name="detail_panel_cats_loading">लोड हुदैछ...</string>
+  <string name="detail_panel_cats_loading">लोड हुदैछ…</string>
   <string name="detail_panel_cats_none">केहि पनि छानिएन</string>
   <string name="detail_description_empty">वर्णन छैन</string>
   <string name="detail_license_empty">अज्ञान अनुमतिपत्र</string>

@@ -6,7 +6,7 @@
   <string name="password">രഹസ്യവാക്ക്</string>
   <string name="login">പ്രവേശിക്കുക</string>
   <string name="logging_in_title">പ്രവേശിക്കുന്നു</string>
-  <string name="logging_in_message">ദയവായി കാത്തിരിക്കുക...</string>
+  <string name="logging_in_message">ദയവായി കാത്തിരിക്കുക…</string>
   <string name="login_success">പ്രവേശനം വിജയകരം!</string>
   <string name="login_failed">പ്രവേശനം പരാജയപ്പെട്ടു!</string>
   <string name="authentication_failed">സാധുതാനിർണ്ണയം പരാജയപ്പെട്ടു!</string>
@@ -72,7 +72,7 @@
   <string name="title_activity_about">വിവരണം</string>
   <string name="menu_feedback">പ്രതികരണം അറിയിക്കുക (ഇമെയിൽ വഴി)</string>
   <string name="provider_categories">സമീപകാലത്ത് ഉപയോഗിച്ച വർഗ്ഗങ്ങൾ</string>
-  <string name="waiting_first_sync">ആദ്യ സമീകരണത്തിനായി കാത്തിരിക്കുന്നു...</string>
+  <string name="waiting_first_sync">ആദ്യ സമീകരണത്തിനായി കാത്തിരിക്കുന്നു…</string>
   <string name="no_uploads_yet">താങ്കളിതുവരെ ചിത്രങ്ങളൊന്നും അപ്‌ലോഡ് ചെയ്തിട്ടില്ല.</string>
   <string name="menu_retry_upload">വീണ്ടും ശ്രമിക്കുക</string>
   <string name="menu_cancel_upload">റദ്ദാക്കുക</string>
@@ -102,7 +102,7 @@
   <string name="welcome_final_text">മനസ്സിലായോ?</string>
   <string name="welcome_final_button_text">ശരി!</string>
   <string name="detail_panel_cats_label">വർഗ്ഗങ്ങൾ</string>
-  <string name="detail_panel_cats_loading">ശേഖരിക്കുന്നു...</string>
+  <string name="detail_panel_cats_loading">ശേഖരിക്കുന്നു…</string>
   <string name="detail_panel_cats_none">ഒന്നും തിരഞ്ഞെടുത്തിട്ടില്ല</string>
   <string name="detail_description_empty">വിവരണമൊന്നുമില്ല</string>
   <string name="detail_license_empty">അജ്ഞാതമായ അനുമതി</string>

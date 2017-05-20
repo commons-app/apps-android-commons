@@ -7,7 +7,7 @@
   <string name="login">प्रवेश</string>
   <string name="signup">खाता बनायें</string>
   <string name="logging_in_title">प्रवेश हो रहा</string>
-  <string name="logging_in_message">प्रतीक्षा करें...</string>
+  <string name="logging_in_message">प्रतीक्षा करें…</string>
   <string name="login_success">प्रवेश में सफल हुआ!</string>
   <string name="login_failed">प्रवेश विफल हुआ</string>
   <string name="upload_failed">फ़ाइल नहीं मिला, कृपया अन्य फ़ाइल से कोशिश करें।</string>
@@ -79,7 +79,7 @@
   <string name="menu_feedback">प्रतिक्रिया दें (ईमेल द्वारा)</string>
   <string name="no_email_client">कोई ईमेल ग्राहक स्थापित नहीं</string>
   <string name="provider_categories">हाल ही उपयोग में ली गयी श्रेणियाँ</string>
-  <string name="waiting_first_sync">पहले सिंक हेतु प्रतीक्षा में...</string>
+  <string name="waiting_first_sync">पहले सिंक हेतु प्रतीक्षा में…</string>
   <string name="no_uploads_yet">आपने अब तक कोई फोटो अपलोड नहीं किया है।</string>
   <string name="menu_retry_upload">फिर प्रयास करें</string>
   <string name="menu_cancel_upload">रद्द करें</string>
@@ -126,7 +126,7 @@
   <string name="welcome_final_text">जो आपने सोचा वो मिला?</string>
   <string name="welcome_final_button_text">हाँ!</string>
   <string name="detail_panel_cats_label">श्रेणियाँ</string>
-  <string name="detail_panel_cats_loading">लोड हो रहा है...</string>
+  <string name="detail_panel_cats_loading">लोड हो रहा है…</string>
   <string name="detail_panel_cats_none">कुछ चयनित नहीं</string>
   <string name="detail_description_empty">कोई विवरण नहीं</string>
   <string name="detail_license_empty">अज्ञात लाइसेन्स</string>

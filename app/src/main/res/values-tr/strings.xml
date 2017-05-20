@@ -6,7 +6,7 @@
   <string name="password">Parola</string>
   <string name="login">Oturum aç</string>
   <string name="logging_in_title">Oturum açılıyor</string>
-  <string name="logging_in_message">Lütfen bekleyin...</string>
+  <string name="logging_in_message">Lütfen bekleyin…</string>
   <string name="login_success">Oturum açma başarılı!</string>
   <string name="login_failed">Oturum açma başarısız oldu!</string>
   <string name="authentication_failed">Kimlik doğrulama başarısız oldu!</string>
@@ -72,7 +72,7 @@
   <string name="title_activity_about">Hakkında</string>
   <string name="menu_feedback">Geri Bildirim Gönder (E-posta ile)</string>
   <string name="provider_categories">Son kullanılan kategoriler</string>
-  <string name="waiting_first_sync">İlk eşitleme için bekleniyor...</string>
+  <string name="waiting_first_sync">İlk eşitleme için bekleniyor…</string>
   <string name="no_uploads_yet">Henüz yüklenmiş hiç fotoğrafınız yok.</string>
   <string name="menu_retry_upload">Tekrar dene</string>
   <string name="menu_cancel_upload">İptal</string>
@@ -102,7 +102,7 @@
   <string name="welcome_final_text">Bunu anladınız mı?</string>
   <string name="welcome_final_button_text">Evet!</string>
   <string name="detail_panel_cats_label">Kategoriler</string>
-  <string name="detail_panel_cats_loading">Yükleniyor...</string>
+  <string name="detail_panel_cats_loading">Yükleniyor…</string>
   <string name="detail_panel_cats_none">Hiçbir şey seçilmedi</string>
   <string name="detail_description_empty">Açıklama yok</string>
   <string name="detail_license_empty">Bilinmeyen lisans</string>

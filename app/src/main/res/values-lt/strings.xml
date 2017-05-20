@@ -7,7 +7,7 @@
   <string name="login">Prisijungti</string>
   <string name="signup">Užsiregistruoti</string>
   <string name="logging_in_title">Jungiamasi</string>
-  <string name="logging_in_message">Prašome palaukti...</string>
+  <string name="logging_in_message">Prašome palaukti…</string>
   <string name="login_success">Sėkmingai prisijungėte!</string>
   <string name="login_failed">Prisijungti nepavyko!</string>
   <string name="upload_failed">Failas nerastas. Prašome pabandyti kitą failą.</string>

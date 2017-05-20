@@ -7,7 +7,7 @@
   <string name="login">Uunmelde</string>
   <string name="signup">Iinskriiw</string>
   <string name="logging_in_title">Uunmeldin lääpt</string>
-  <string name="logging_in_message">Wees so gud an teew ...</string>
+  <string name="logging_in_message">Wees so gud an teew …</string>
   <string name="login_success">Uunmeldin hää loket!</string>
   <string name="login_failed">Bi\'t uunmeldin as wat skiaf gingen.</string>
   <string name="upload_failed">Datei ei fünjen. Ferschük det mä en ööder datei.</string>
@@ -79,7 +79,7 @@
   <string name="menu_feedback">Wat wel dü üs sai ? (auer e-mail)</string>
   <string name="no_email_client">Diar as nään e-mail-client instaliaret</string>
   <string name="provider_categories">Tuleetst brükt kategoriin</string>
-  <string name="waiting_first_sync">Teew üüb det iarst synchronisiarin ...</string>
+  <string name="waiting_first_sync">Teew üüb det iarst synchronisiarin …</string>
   <string name="no_uploads_yet">Dü heest noch nian bilen huuchschüürd.</string>
   <string name="menu_retry_upload">Noch ans ferschük</string>
   <string name="menu_cancel_upload">Ufbreeg</string>
@@ -126,7 +126,7 @@
   <string name="welcome_final_text">Witjst beskias?</string>
   <string name="welcome_final_button_text">Ja!</string>
   <string name="detail_panel_cats_label">Kategoriin</string>
-  <string name="detail_panel_cats_loading">Loose ...</string>
+  <string name="detail_panel_cats_loading">Loose …</string>
   <string name="detail_panel_cats_none">Nian ütjwool</string>
   <string name="detail_description_empty">Nian beskriiwang</string>
   <string name="detail_license_empty">Ünbekäänd lisens</string>

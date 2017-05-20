@@ -6,7 +6,7 @@
   <string name="password">సంకేతపదం</string>
   <string name="login">లాగినవండి</string>
   <string name="logging_in_title">లాగినవుతున్నారు</string>
-  <string name="logging_in_message">వేచివుండండి...</string>
+  <string name="logging_in_message">వేచివుండండి…</string>
   <string name="login_success">లాగిన్ విజయవంతమైంది!</string>
   <string name="login_failed">లాగిన్ విఫలమైంది!</string>
   <string name="authentication_failed">ఆథెంటికేషను విఫలమైంది!</string>
@@ -83,7 +83,7 @@
   <string name="welcome_final_text">అర్థమైందనుకుంటున్నారా?</string>
   <string name="welcome_final_button_text">అయింది!</string>
   <string name="detail_panel_cats_label">వర్గాలు</string>
-  <string name="detail_panel_cats_loading">లోడవుతోంది...</string>
+  <string name="detail_panel_cats_loading">లోడవుతోంది…</string>
   <string name="detail_panel_cats_none">దేన్నీ ఎంచుకోలేదు</string>
   <string name="detail_description_empty">వివరణ లేదు</string>
   <string name="detail_license_empty">తెలియని లైసెన్సు</string>

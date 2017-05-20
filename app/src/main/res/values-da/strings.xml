@@ -6,7 +6,7 @@
   <string name="password">Adgangskode</string>
   <string name="login">Log på</string>
   <string name="logging_in_title">Logger på</string>
-  <string name="logging_in_message">Vent...</string>
+  <string name="logging_in_message">Vent…</string>
   <string name="login_success">Du er nu logget på!</string>
   <string name="login_failed">Det mislykkedes at logge på!</string>
   <string name="authentication_failed">Godkendelse mislykkedes!</string>
@@ -55,7 +55,7 @@
   <string name="title_activity_about">Om</string>
   <string name="menu_feedback">Send tilbagemelding (med e-mail)</string>
   <string name="provider_categories">Nyligt anvendte kategorier</string>
-  <string name="waiting_first_sync">Venter på den første synkronisering...</string>
+  <string name="waiting_first_sync">Venter på den første synkronisering…</string>
   <string name="no_uploads_yet">Du har endnu ikke uploadet nogen billeder.</string>
   <string name="menu_retry_upload">Forsøg igen</string>
   <string name="menu_cancel_upload">Annullér</string>
@@ -85,7 +85,7 @@
   <string name="welcome_final_text">Forstået?</string>
   <string name="welcome_final_button_text">Ja!</string>
   <string name="detail_panel_cats_label">Kategorier</string>
-  <string name="detail_panel_cats_loading">Indlæser...</string>
+  <string name="detail_panel_cats_loading">Indlæser…</string>
   <string name="detail_panel_cats_none">Ingen valgt</string>
   <string name="detail_description_empty">Ingen beskrivelse</string>
   <string name="detail_license_empty">Ukendt licens</string>

@@ -7,7 +7,7 @@
   <string name="login">Saioa hasi</string>
   <string name="signup">Eman izena</string>
   <string name="logging_in_title">Saioa hasten</string>
-  <string name="logging_in_message">Mesedez itxaron...</string>
+  <string name="logging_in_message">Mesedez itxaron…</string>
   <string name="login_success">Saio hasiera egina</string>
   <string name="login_failed">Saio hasieran akatsa!</string>
   <string name="upload_failed">Fitxategia ez da aurkitu. Mesedez saiatu beste batekin.</string>
@@ -66,7 +66,7 @@
   <string name="menu_feedback">Bidali zure iritzia (e-posta bidez)</string>
   <string name="no_email_client">Posta bezerorik ez da instalatu</string>
   <string name="provider_categories">Berriki erabilitako kategoriak</string>
-  <string name="waiting_first_sync">Itxoiten lehenengo sinkronizaziora...</string>
+  <string name="waiting_first_sync">Itxoiten lehenengo sinkronizaziora…</string>
   <string name="no_uploads_yet">Oraindik ez duzu argazkirik igo.</string>
   <string name="menu_retry_upload">Berriz saiatu</string>
   <string name="menu_cancel_upload">Utzi</string>
@@ -100,7 +100,7 @@
   <string name="welcome_final_text">Lortu duzula uste duzu?</string>
   <string name="welcome_final_button_text">Bai!</string>
   <string name="detail_panel_cats_label">Kategoriak</string>
-  <string name="detail_panel_cats_loading">Kargatzen...</string>
+  <string name="detail_panel_cats_loading">Kargatzen…</string>
   <string name="detail_panel_cats_none">Bat ere ez da aukeratu</string>
   <string name="detail_description_empty">Deskribapenik ez</string>
   <string name="detail_license_empty">Lizentzia ezezaguna</string>

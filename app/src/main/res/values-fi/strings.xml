@@ -7,7 +7,7 @@
   <string name="login">Kirjaudu sisään</string>
   <string name="signup">Rekisteröidy</string>
   <string name="logging_in_title">Kirjaudutaan</string>
-  <string name="logging_in_message">Odota...</string>
+  <string name="logging_in_message">Odota…</string>
   <string name="login_success">Kirjautuminen onnistui!</string>
   <string name="login_failed">Kirjautuminen epäonnistui!</string>
   <string name="upload_failed">Tiedostoa ei löytynyt. Yritä toista tiedostoa.</string>
@@ -122,7 +122,7 @@
   <string name="welcome_final_text">Luuletko ymmärtäneesi tämän?</string>
   <string name="welcome_final_button_text">Kyllä!</string>
   <string name="detail_panel_cats_label">Luokat</string>
-  <string name="detail_panel_cats_loading">Ladataan...</string>
+  <string name="detail_panel_cats_loading">Ladataan…</string>
   <string name="detail_panel_cats_none">Ei yhtään valittu</string>
   <string name="detail_description_empty">Ei kuvausta</string>
   <string name="detail_license_empty">Tuntematon lisenssi</string>

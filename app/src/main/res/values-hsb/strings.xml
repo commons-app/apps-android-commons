@@ -6,7 +6,7 @@
   <string name="password">Hesło</string>
   <string name="login">Přizjewić</string>
   <string name="logging_in_title">Přizjewjenje</string>
-  <string name="logging_in_message">Prošu čakaj...</string>
+  <string name="logging_in_message">Prošu čakaj…</string>
   <string name="login_success">Přizjewjenje wuspěšne!</string>
   <string name="login_failed">Přizjewjenje je so njeporadźiło!</string>
   <string name="authentication_failed">Awtentifikacija je so njeporadźiła!</string>
@@ -54,7 +54,7 @@
   <string name="title_activity_about">Wo</string>
   <string name="menu_feedback">Komentar pósłać (přez e-mejl)</string>
   <string name="provider_categories">Njedawno wužite kategorije</string>
-  <string name="waiting_first_sync">Čaka so na prěnju synchronizaciju...</string>
+  <string name="waiting_first_sync">Čaka so na prěnju synchronizaciju…</string>
   <string name="no_uploads_yet">Hišće njejsy žane fota nahrał.</string>
   <string name="menu_retry_upload">Hišće raz spytać</string>
   <string name="menu_cancel_upload">Přetorhnyć</string>
@@ -83,7 +83,7 @@
   <string name="welcome_final_text">Sy zrozumił?</string>
   <string name="welcome_final_button_text">Haj!</string>
   <string name="detail_panel_cats_label">Kategorije</string>
-  <string name="detail_panel_cats_loading">Začituje so...</string>
+  <string name="detail_panel_cats_loading">Začituje so…</string>
   <string name="detail_panel_cats_none">Ničo wubrane</string>
   <string name="detail_description_empty">Žane wopisanje</string>
   <string name="detail_license_empty">Njeznata licenca</string>

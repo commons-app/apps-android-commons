@@ -6,7 +6,7 @@
   <string name="password">Wachtwoord</string>
   <string name="login">Anmelden</string>
   <string name="logging_in_title">Bezig mit anmelden</string>
-  <string name="logging_in_message">Effen wachten heur...</string>
+  <string name="logging_in_message">Effen wachten heur…</string>
   <string name="login_success">Suksesvol an-emeld</string>
   <string name="login_failed">Anmelden mislokt</string>
   <string name="authentication_failed">Verifikasie is mislokt</string>
@@ -55,7 +55,7 @@
   <string name="title_activity_about">Informasie</string>
   <string name="menu_feedback">Wat wi\'j ons vertellen? (per netpost)</string>
   <string name="provider_categories">Kortens gebruukten kategorieën</string>
-  <string name="waiting_first_sync">Wachten op de eerste synchronisasie...</string>
+  <string name="waiting_first_sync">Wachten op de eerste synchronisasie…</string>
   <string name="no_uploads_yet">Je hebben nog gien aofbeeldingen op-estuurd.</string>
   <string name="share_license_summary">Disse aofbeelding völt onder de lisensie %1$s</string>
   <string name="menu_download">Neerlaojen</string>

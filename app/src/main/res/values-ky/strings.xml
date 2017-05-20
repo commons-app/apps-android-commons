@@ -6,7 +6,7 @@
   <string name="password">Сырсөз</string>
   <string name="login">Кирүү</string>
   <string name="logging_in_title">Системага кирүү</string>
-  <string name="logging_in_message">Сураныч, күтө туруңуз...</string>
+  <string name="logging_in_message">Сураныч, күтө туруңуз…</string>
   <string name="login_success">Сиз ийгиликтүү кирдиңиз</string>
   <string name="login_failed">Системага кирүүдө катачылык бар!</string>
   <string name="authentication_failed">Таану катачылыгы!</string>
@@ -72,7 +72,7 @@
   <string name="title_activity_about">Тиркеме жөнүндө</string>
   <string name="menu_feedback">Шарттуу жооп жөнөтүү (Email)</string>
   <string name="provider_categories">Жакында колдонулган түрмөктөр</string>
-  <string name="waiting_first_sync">Алгачкы мезгилдештирүүнү күтүү...</string>
+  <string name="waiting_first_sync">Алгачкы мезгилдештирүүнү күтүү…</string>
   <string name="no_uploads_yet">Сиз бир дагы сүрөт жүктөй элексиз.</string>
   <string name="menu_retry_upload">Кайра аракет кылуу</string>
   <string name="menu_cancel_upload">Жокко чыгаруу</string>
@@ -102,7 +102,7 @@
   <string name="welcome_final_text">Сизге бул түшүнүктүүбү?</string>
   <string name="welcome_final_button_text">Ооба!</string>
   <string name="detail_panel_cats_label">Түрмөктөр</string>
-  <string name="detail_panel_cats_loading">Жүктөлүүдө...</string>
+  <string name="detail_panel_cats_loading">Жүктөлүүдө…</string>
   <string name="detail_panel_cats_none">Тандалган жок</string>
   <string name="menu_refresh">Жаңылоо</string>
 </resources>

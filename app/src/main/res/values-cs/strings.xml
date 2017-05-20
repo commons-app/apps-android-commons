@@ -7,7 +7,7 @@
   <string name="login">Přihlásit se</string>
   <string name="signup">Zaregistrovat se</string>
   <string name="logging_in_title">Přihlášení</string>
-  <string name="logging_in_message">Čekejte prosím...</string>
+  <string name="logging_in_message">Čekejte prosím…</string>
   <string name="login_success">Přihlášení uspělo!</string>
   <string name="login_failed">Přihlášení se nezdařilo!</string>
   <string name="upload_failed">Soubor nebyl nalezen. Prosím, zkuste jiný soubor.</string>
@@ -83,7 +83,7 @@
   <string name="menu_feedback">Poslat názory (e-mailem)</string>
   <string name="no_email_client">Není nainstalován žádný e-mailový klient</string>
   <string name="provider_categories">Nedávno použité kategorie</string>
-  <string name="waiting_first_sync">Čeká se na první synchronizaci...</string>
+  <string name="waiting_first_sync">Čeká se na první synchronizaci…</string>
   <string name="no_uploads_yet">Zatím jste nenahrál žádné fotky.</string>
   <string name="menu_retry_upload">Opakovat</string>
   <string name="menu_cancel_upload">Zrušit</string>

@@ -7,7 +7,7 @@
   <string name="login">Asup log</string>
   <string name="signup">Daptar</string>
   <string name="logging_in_title">Asup log</string>
-  <string name="logging_in_message">Mangga diantos...</string>
+  <string name="logging_in_message">Mangga diantos…</string>
   <string name="login_success">Asup log suksés!</string>
   <string name="login_failed">Asup log Gagal!</string>
   <string name="upload_failed">Berkas teu kapanggih. Coba berkas séjén.</string>
@@ -82,7 +82,7 @@
   <string name="menu_feedback">Kirim eupan balik (via Surélék)</string>
   <string name="no_email_client">Tanpa klayen surélék kapasang</string>
   <string name="provider_categories">Kategori anu anyar dipaké</string>
-  <string name="waiting_first_sync">Nungguan sinkronisasi munggaran...</string>
+  <string name="waiting_first_sync">Nungguan sinkronisasi munggaran…</string>
   <string name="no_uploads_yet">Anjeun can ngunjal foto hiji-hiji acan</string>
   <string name="menu_retry_upload">Cobaan deui</string>
   <string name="menu_cancel_upload">Bolay</string>
