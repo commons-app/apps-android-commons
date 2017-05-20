@@ -22,6 +22,7 @@
         android:layout_gravity="center"
         android:src="@android:drawable/ic_menu_close_clear_cancel"
         android:visibility="gone"
+        android:contentDescription="@string/mediaimage_failed"
         />
 
     <fr.free.nrw.commons.MediaWikiImageView

@@ -15,7 +15,8 @@
         android:src="@drawable/sydney_opera_house"
         android:adjustViewBounds="true"
         android:layout_gravity="center"
-        android:id="@+id/imageView" />
+        android:id="@+id/imageView"
+        android:contentDescription="@string/welcome_image_sydney_opera_house"/>
 
     <TextView
         android:layout_width="295dp"

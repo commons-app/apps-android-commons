@@ -21,6 +21,7 @@
             android:id="@+id/selfie_x"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/welcome_image_no_selfies"
             />
 
         <ImageView
@@ -30,6 +31,7 @@
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/selfie_x"
+            android:contentDescription="@string/welcome_image_proprietary"
             />
 
     </RelativeLayout>
