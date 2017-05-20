@@ -32,16 +32,15 @@ import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.UriSerializer;
 import timber.log.Timber;
 
+
 public class NearbyActivity extends NavigationBaseActivity {
+
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
     private boolean isMapViewActive = false;
 
     private LocationServiceManager locationManager;
     private LatLng curLatLang;
-    private Gson gson;
-    private String gsonPlaceList;
-    private String gsonCurLatLng;
     private Bundle bundle;
     private NearbyAsyncTask nearbyAsyncTask;
 
@@ -203,11 +202,11 @@ public class NearbyActivity extends NavigationBaseActivity {
                 return;
             }
 
-            gson = new GsonBuilder()
+            Gson gson = new GsonBuilder()
                     .registerTypeAdapter(Uri.class, new UriSerializer())
                     .create();
-            gsonPlaceList = gson.toJson(placeList);
-            gsonCurLatLng = gson.toJson(curLatLang);
+            String gsonPlaceList = gson.toJson(placeList);
+            String gsonCurLatLng = gson.toJson(curLatLang);
 
             if (placeList.size() == 0) {
                 int duration = Toast.LENGTH_SHORT;
