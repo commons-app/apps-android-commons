@@ -5,7 +5,7 @@
   <string name="password">ಪ್ರವೇಸೊ ಪದೊ</string>
   <string name="login">ಲಾಗ್ ಇನ್</string>
   <string name="logging_in_title">ಇರ್ ಲಾಗ್-ಇನ್ ಅವೊಂತುಲ್ಲಾರ್</string>
-  <string name="logging_in_message">ದಯಾದಿತ್ ವಂತೆ ಕಾಪುಲೆ...</string>
+  <string name="logging_in_message">ದಯಾದಿತ್ ವಂತೆ ಕಾಪುಲೆ…</string>
   <string name="login_success">ಲಾಗಿನ್ ಅಂಡ್!</string>
   <string name="login_failed">ಲಾಗಿನ್ ಅಯಿಜಾತ್ತ!</string>
   <string name="uploading_started">ದಿಂಜಪುನಾ ಸುರು ಅಂಡ್!</string>
@@ -13,7 +13,7 @@
   <string name="title_activity_contributions" fuzzy="true">ಎನ್ನ ದಿಂಜಯೀನಾ ವಿಚಾರೊಳು</string>
   <string name="contribution_state_queued">ದಿಂಜೊಂತುಂಡು</string>
   <string name="contribution_state_failed">ದಿಂಜಿಜಿ</string>
-  <string name="contribution_state_starting">ದಿಂಜೊಂತುಂಡು...</string>
+  <string name="contribution_state_starting">ದಿಂಜೊಂತುಂಡು…</string>
   <string name="menu_from_gallery">ಛಾಯಾಂಕಣತ್</string>
   <string name="menu_from_camera">ಪಟ ದೆಪ್ಪುಲೇ</string>
   <string name="menu_nearby">ಕೈತಲ್‍ದ</string>
@@ -50,7 +50,7 @@
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="welcome_final_button_text">ಅಂದ್!</string>
   <string name="detail_panel_cats_label">ವರ್ಗೊಲು</string>
-  <string name="detail_panel_cats_loading">ದಿಂಜಾವೊಂದುಂಡು......</string>
+  <string name="detail_panel_cats_loading">ದಿಂಜಾವೊಂದುಂಡು……</string>
   <string name="menu_refresh">ರಿಫ್ರೆಶ್ ಮಲ್ಪುಲೆ</string>
   <string name="ok">ಅವು</string>
   <string name="title_activity_nearby">ಕೈದಲ್ತಾ ಜಾಗೆಲು</string>

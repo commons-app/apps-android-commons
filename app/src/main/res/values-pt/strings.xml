@@ -7,7 +7,7 @@
   <string name="login">Iniciar sessão</string>
   <string name="signup">Registar-se</string>
   <string name="logging_in_title">A iniciar sessão</string>
-  <string name="logging_in_message">Aguarde, por favor...</string>
+  <string name="logging_in_message">Aguarde, por favor…</string>
   <string name="login_success">Inicio de sessão bem sucedido</string>
   <string name="login_failed">O início de sessão falhou!</string>
   <string name="authentication_failed">Falha de autenticação!</string>
@@ -69,12 +69,12 @@
   <string name="title_activity_settings">Configurações</string>
   <string name="menu_about">Sobre</string>
   <string name="about_license" fuzzy="true">Software em código aberto distribuído sob &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. O Wikimedia Commons e o seu logótipo são marcas registadas da Wikimedia Foundation e são usadas com permissão da Wikimedia Foundation. Não somos endossados ou afiliados à Wikimedia Foundation.</string>
-  <string name="about_improve" fuzzy="true">Código no &lt;a href=\"https://github.com/commons-app/android-commons\"&gt;GitHub&lt;/a&gt;. Erros no &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_improve" fuzzy="true">Código no &lt;a href=\"https://github.com/commons-app/android-commons\"&gt;GitHub&lt;/a&gt;. Erros no &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Política de privacidade&lt;/a&gt;</string>
   <string name="title_activity_about">Sobre</string>
   <string name="menu_feedback">Enviar comentários (por e-mail)</string>
   <string name="provider_categories">Categorias usadas recentemente</string>
-  <string name="waiting_first_sync">A aguardar pela primeira sincronização...</string>
+  <string name="waiting_first_sync">A aguardar pela primeira sincronização…</string>
   <string name="no_uploads_yet">Não carregou ainda nenhuma foto.</string>
   <string name="menu_retry_upload">Tente novamente</string>
   <string name="menu_cancel_upload">Cancelar</string>
@@ -85,7 +85,7 @@
   <string name="allow_gps">Obter automaticamente a localização atual</string>
   <string name="allow_gps_summary">Recuperar localização atual para oferecer sugestões da categoria se a imagem não é georreferenciada</string>
   <string name="license_name_cc_by_sa"> Atribuição – Compartilhamento pela mesma Licença</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0Atribuiçãou00A03.0</string>
+  <string name="license_name_cc_by" fuzzy="true">CC Atribuição 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Áustria)</string>
@@ -111,7 +111,7 @@
   <string name="welcome_final_text">Acha que conseguiu?</string>
   <string name="welcome_final_button_text">Sim!</string>
   <string name="detail_panel_cats_label">Categorias</string>
-  <string name="detail_panel_cats_loading">A carregar...</string>
+  <string name="detail_panel_cats_loading">A carregar…</string>
   <string name="detail_panel_cats_none">Nenhuma selecionada</string>
   <string name="detail_description_empty">Sem descrição</string>
   <string name="detail_license_empty">Licença desconhecida</string>

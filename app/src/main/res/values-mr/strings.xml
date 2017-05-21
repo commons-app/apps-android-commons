@@ -7,7 +7,7 @@
   <string name="login">सनोंद-प्रवेश करा</string>
   <string name="signup">नोंदणी करा</string>
   <string name="logging_in_title">सनोंद प्रवेश करीत आहे</string>
-  <string name="logging_in_message">कृपया थांबा...</string>
+  <string name="logging_in_message">कृपया थांबा…</string>
   <string name="login_success">सनोंद प्रवेश यशस्वी!</string>
   <string name="login_failed">सनोंद प्रवेश अयशस्वी!</string>
   <string name="upload_failed">संचिका सापडली नाही. कृपया दुसऱ्या संचिकेसाठी प्रयत्न करा.</string>
@@ -114,7 +114,7 @@
   <string name="welcome_final_text">हवे ते मिळाले काय?</string>
   <string name="welcome_final_button_text">होय!</string>
   <string name="detail_panel_cats_label">वर्ग</string>
-  <string name="detail_panel_cats_loading">प्रभारण करीत आहे...</string>
+  <string name="detail_panel_cats_loading">प्रभारण करीत आहे…</string>
   <string name="detail_panel_cats_none">कोणतेही निवडले नाही</string>
   <string name="detail_description_empty">वर्णन नाही.</string>
   <string name="detail_license_empty">अनोळखी परवाना</string>

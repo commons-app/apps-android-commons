@@ -7,7 +7,7 @@
   <string name="login">Intré ant ël sistema</string>
   <string name="signup">Anscriv-se</string>
   <string name="logging_in_title">Conession</string>
-  <string name="logging_in_message">Ch\'a l\'abia passiensa...</string>
+  <string name="logging_in_message">Ch\'a l\'abia passiensa…</string>
   <string name="login_success">A l\'é intrà ant ël sistema!</string>
   <string name="login_failed">Falì a rintré ant ël sistema!</string>
   <string name="upload_failed">Archivi nen trovà. Për piasì, ch\'a preuva con n\'àutr.</string>
@@ -79,7 +79,7 @@
   <string name="menu_feedback">Mandé dij coment (për pòsta eletrònica)</string>
   <string name="no_email_client">Gnun clien ëd pòsta eletrònica anstalà</string>
   <string name="provider_categories">Categorìe dovrà ëd recent</string>
-  <string name="waiting_first_sync">Atèisa ëd prima sincronisassion...</string>
+  <string name="waiting_first_sync">Atèisa ëd prima sincronisassion…</string>
   <string name="no_uploads_yet">A l\'ha ancor nen carià ëd fòto.</string>
   <string name="menu_retry_upload">Prové torna</string>
   <string name="menu_cancel_upload">Anulé</string>
@@ -126,7 +126,7 @@
   <string name="welcome_final_text">Second chiel, a va bin?</string>
   <string name="welcome_final_button_text">É!</string>
   <string name="detail_panel_cats_label">Categorìe</string>
-  <string name="detail_panel_cats_loading">Cariament...</string>
+  <string name="detail_panel_cats_loading">Cariament…</string>
   <string name="detail_panel_cats_none">Gnun-a selession</string>
   <string name="detail_description_empty">Gnun-a descrission</string>
   <string name="detail_license_empty">Licensa sconossùa</string>

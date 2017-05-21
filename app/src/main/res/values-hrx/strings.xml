@@ -62,8 +62,8 @@
   <string name="share_license_summary">Das Bild weard lizenziert unner %1$s</string>
   <string name="menu_download">Herunnerloode</string>
   <string name="preference_license">Lizenz</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Attribution-ShareAlikeu00A03.0</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0Attributionu00A03.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CC Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC-BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC-BY-SA 3.0 (Österreich)</string>

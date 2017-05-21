@@ -6,7 +6,7 @@
   <string name="password">पासवर्ड</string>
   <string name="login">प्रवेश</string>
   <string name="logging_in_title">प्रवेश गर्दै</string>
-  <string name="logging_in_message">कृपया प्रतिक्षा गर्नुहोस् ...</string>
+  <string name="logging_in_message">कृपया प्रतिक्षा गर्नुहोस् …</string>
   <string name="login_success">प्रवेश सफल!</string>
   <string name="login_failed">प्रवेश सफल हुन सकेन!</string>
   <string name="authentication_failed">प्रमाणिकरण असफल भयो!</string>
@@ -50,20 +50,20 @@
   <string name="title_activity_settings">सेटिङ्गहरू</string>
   <string name="menu_about">बारेमा</string>
   <string name="about_license" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;अपाचे लाइसेन्स संस्करण२&lt;/a&gt; को अाधारमा खुला स्रोत सफ्टवेयर जारी</string>
-  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;गिटहब&lt;/a&gt; मा स्रोत। &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;बगजिल्ला&lt;/a&gt; मा बग छ।</string>
+  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;गिटहब&lt;/a&gt; मा स्रोत। &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;बगजिल्ला&lt;/a&gt; मा बग छ।</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;गोपनीयता नीति&lt;/a&gt;</string>
   <string name="title_activity_about">बारेमा</string>
   <string name="menu_feedback">सुझाव पठाउने (इमेल मार्फत)</string>
   <string name="provider_categories">हालै प्रयोग भएका श्रेणीहरू</string>
-  <string name="waiting_first_sync">पहिलो सिङ्कको लागि प्रतिक्षा गर्दै...</string>
+  <string name="waiting_first_sync">पहिलो सिङ्कको लागि प्रतिक्षा गर्दै…</string>
   <string name="no_uploads_yet">तपाईंले हालसम्म कुनै पनि फोटो अपलोड गर्नुभएको छैन</string>
   <string name="menu_retry_upload">पुन: प्रयास गर्नुहोस्</string>
   <string name="menu_cancel_upload">रद्द गर्नुहोस्</string>
   <string name="share_license_summary">यो तस्विर  %1$s अनुमतिपत्र अनुसार प्राप्त हुनेछ</string>
   <string name="menu_download">डाउनलोड गर्ने</string>
   <string name="preference_license">इजाजतपत्र</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0एट्रिब्युसन-सेयर अलाइकu00A0३.०</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0एट्रिब्युसनu00A0३.०</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CC एट्रिब्युसन-सेयर अलाइक ३.०</string>
+  <string name="license_name_cc_by" fuzzy="true">CC एट्रिब्युसन ३.०</string>
   <string name="license_name_cc0">CC०</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA ३.०</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA ३.० (अस्ट्रिया)</string>
@@ -85,7 +85,7 @@
   <string name="welcome_final_text">के तपाईंले कुरा बुझ्नु भए जस्तो लाग्छ ?</string>
   <string name="welcome_final_button_text">हो !</string>
   <string name="detail_panel_cats_label">श्रेणीहरू</string>
-  <string name="detail_panel_cats_loading">लोड हुदैछ...</string>
+  <string name="detail_panel_cats_loading">लोड हुदैछ…</string>
   <string name="detail_panel_cats_none">केहि पनि छानिएन</string>
   <string name="detail_description_empty">वर्णन छैन</string>
   <string name="detail_license_empty">अज्ञान अनुमतिपत्र</string>

@@ -83,7 +83,7 @@
   <string name="menu_feedback">Enviar comentarios (por e-mail)</string>
   <string name="no_email_client">No se ha instalado ningún cliente de correo</string>
   <string name="provider_categories">Categorías usadas recientemente</string>
-  <string name="waiting_first_sync">Esperando la primera sincronización...</string>
+  <string name="waiting_first_sync">Esperando la primera sincronización…</string>
   <string name="no_uploads_yet">Aún no has subido ninguna foto.</string>
   <string name="menu_retry_upload">Reintentar</string>
   <string name="menu_cancel_upload">Cancelar</string>

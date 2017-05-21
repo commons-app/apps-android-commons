@@ -7,7 +7,7 @@
   <string name="login">تسجيل الدخول</string>
   <string name="signup">أنشئ حسابًا</string>
   <string name="logging_in_title">يجري الدخول</string>
-  <string name="logging_in_message">الرجاء الانتظار...</string>
+  <string name="logging_in_message">الرجاء الانتظار…</string>
   <string name="login_success">تم الدخول بشكل صحيح</string>
   <string name="login_failed">فشل تسجيل الدخول</string>
   <string name="authentication_failed">فشل الاستيقان!</string>
@@ -55,13 +55,13 @@
   <string name="title_activity_signup">سجّل</string>
   <string name="menu_about">حول</string>
   <string name="about_license" fuzzy="true">برنامج مفتوح المصدر منشور &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;برخصة أباتشي النسخة 2&lt;/a&gt;</string>
-  <string name="about_improve" fuzzy="true">المصدر على &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;غِتهب&lt;/a&gt;. العلل في &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;بغزِلا&lt;/a&gt;.</string>
+  <string name="about_improve" fuzzy="true">المصدر على &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;غِتهب&lt;/a&gt;. العلل في &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;بغزِلا&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;سياسة الخصوصية&lt;/a&gt;</string>
   <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;CREDITS&lt;/a&gt;</string>
   <string name="title_activity_about">حول</string>
   <string name="menu_feedback">إرسال ملاحظات (عبر البريد الإلكتروني)</string>
   <string name="provider_categories">التصانيف المستخدمة مؤخرا</string>
-  <string name="waiting_first_sync">ينتظر أول مزامنة...</string>
+  <string name="waiting_first_sync">ينتظر أول مزامنة…</string>
   <string name="no_uploads_yet">لم ترفع بعد أية صور.</string>
   <string name="menu_retry_upload">إعادة المحاولة</string>
   <string name="menu_cancel_upload">إلغاء</string>
@@ -76,7 +76,7 @@
   <string name="welcome_final_text">هل تظن أنك فهمت؟</string>
   <string name="welcome_final_button_text">نعم!</string>
   <string name="detail_panel_cats_label">تصنيفات</string>
-  <string name="detail_panel_cats_loading">جارٍ التحميل...</string>
+  <string name="detail_panel_cats_loading">جارٍ التحميل…</string>
   <string name="detail_panel_cats_none">لا شيء محدد</string>
   <string name="detail_description_empty">لا وصف</string>
   <string name="detail_license_empty">ترخيص غير معلوم</string>

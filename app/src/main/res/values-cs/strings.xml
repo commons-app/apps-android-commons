@@ -7,7 +7,7 @@
   <string name="login">Přihlásit se</string>
   <string name="signup">Zaregistrovat se</string>
   <string name="logging_in_title">Přihlášení</string>
-  <string name="logging_in_message">Čekejte prosím...</string>
+  <string name="logging_in_message">Čekejte prosím…</string>
   <string name="login_success">Přihlášení uspělo!</string>
   <string name="login_failed">Přihlášení se nezdařilo!</string>
   <string name="upload_failed">Soubor nebyl nalezen. Prosím, zkuste jiný soubor.</string>
@@ -83,7 +83,7 @@
   <string name="menu_feedback">Poslat názory (e-mailem)</string>
   <string name="no_email_client">Není nainstalován žádný e-mailový klient</string>
   <string name="provider_categories">Nedávno použité kategorie</string>
-  <string name="waiting_first_sync">Čeká se na první synchronizaci...</string>
+  <string name="waiting_first_sync">Čeká se na první synchronizaci…</string>
   <string name="no_uploads_yet">Zatím jste nenahrál žádné fotky.</string>
   <string name="menu_retry_upload">Opakovat</string>
   <string name="menu_cancel_upload">Zrušit</string>
@@ -98,7 +98,7 @@
   <string name="license_name_cc_by_sa_four">Uveďte autora-Zachovejte licenci 4.0</string>
   <string name="license_name_cc_by_four">Uveďte autora 4.0</string>
   <string name="license_name_cc_by_sa"> Uveďte autora-Zachovejte licenci 3.0</string>
-  <string name="license_name_cc_by">CCu00A0Uveďte autorau00A03.0</string>
+  <string name="license_name_cc_by">CC Uveďte autora 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Rakousko)</string>

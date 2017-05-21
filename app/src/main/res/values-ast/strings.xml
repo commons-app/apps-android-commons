@@ -79,7 +79,7 @@
   <string name="menu_feedback">Unviar comentarios (per corréu)</string>
   <string name="no_email_client">Nun s\'instaló nengún veceru de corréu</string>
   <string name="provider_categories">Categoríes usaes de recién</string>
-  <string name="waiting_first_sync">Esperando pola primera sincronización...</string>
+  <string name="waiting_first_sync">Esperando pola primera sincronización…</string>
   <string name="no_uploads_yet">Inda nun xubió denguna foto.</string>
   <string name="menu_retry_upload">Reintentar</string>
   <string name="menu_cancel_upload">Encaboxar</string>
@@ -126,7 +126,7 @@
   <string name="welcome_final_text">¿Cree que yá sabe cómo va?</string>
   <string name="welcome_final_button_text">¡Si!</string>
   <string name="detail_panel_cats_label">Categoríes</string>
-  <string name="detail_panel_cats_loading">Cargando...</string>
+  <string name="detail_panel_cats_loading">Cargando…</string>
   <string name="detail_panel_cats_none">Nenguna seleicionada</string>
   <string name="detail_description_empty">Ensin descripción</string>
   <string name="detail_license_empty">Llicencia desconocida</string>

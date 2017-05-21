@@ -7,7 +7,7 @@
   <string name="login">Најава</string>
   <string name="signup">Регистрација</string>
   <string name="logging_in_title">Најава</string>
-  <string name="logging_in_message">Почекајте...</string>
+  <string name="logging_in_message">Почекајте…</string>
   <string name="login_success">Најавата е успешна!</string>
   <string name="login_failed">Најавата не успеа!</string>
   <string name="upload_failed">Не ја пронајдов податотеката. Пробајте со друга.</string>
@@ -83,7 +83,7 @@
   <string name="menu_feedback">Испратете Ваше мислење (по е-пошта)</string>
   <string name="no_email_client">Немате воспоставено клиент за е-пошта</string>
   <string name="provider_categories">Неодамна искористени категории</string>
-  <string name="waiting_first_sync">Го чекам првото усогласување...</string>
+  <string name="waiting_first_sync">Го чекам првото усогласување…</string>
   <string name="no_uploads_yet">Сè уште немате подигнато ниедна слика.</string>
   <string name="menu_retry_upload">Пробај пак</string>
   <string name="menu_cancel_upload">Откажи</string>
@@ -130,7 +130,7 @@
   <string name="welcome_final_text">Објаснивме добро?</string>
   <string name="welcome_final_button_text">Да!</string>
   <string name="detail_panel_cats_label">Категории</string>
-  <string name="detail_panel_cats_loading">Вчитувам...</string>
+  <string name="detail_panel_cats_loading">Вчитувам…</string>
   <string name="detail_panel_cats_none">Ништо не е одбрано</string>
   <string name="detail_description_empty">Нема опис</string>
   <string name="detail_license_empty">Непозната лиценца</string>

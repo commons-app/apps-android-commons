@@ -7,7 +7,7 @@
   <string name="login">Zaloguj się</string>
   <string name="signup">Zarejestruj się</string>
   <string name="logging_in_title">Logowanie</string>
-  <string name="logging_in_message">Proszę czekać...</string>
+  <string name="logging_in_message">Proszę czekać…</string>
   <string name="login_success">Zalogowano pomyślnie!</string>
   <string name="login_failed">Logowanie nie powiodło się!</string>
   <string name="upload_failed">Nie znaleziono pliku. Spróbuj znaleźć inny.</string>
@@ -79,7 +79,7 @@
   <string name="menu_feedback">Wyślij opinię (przez e-mail)</string>
   <string name="no_email_client">Klient e-mail nie jest zainstalowany</string>
   <string name="provider_categories">Niedawno używane kategorie</string>
-  <string name="waiting_first_sync">Oczekiwanie na pierwszą synchronizację...</string>
+  <string name="waiting_first_sync">Oczekiwanie na pierwszą synchronizację…</string>
   <string name="no_uploads_yet">Nie przesłałeś jeszcze żadnych zdjęć.</string>
   <string name="menu_retry_upload">Ponów próbę</string>
   <string name="menu_cancel_upload">Anuluj</string>
@@ -126,7 +126,7 @@
   <string name="welcome_final_text">Czy wszystko jest jasne?</string>
   <string name="welcome_final_button_text">Tak!</string>
   <string name="detail_panel_cats_label">Kategorie</string>
-  <string name="detail_panel_cats_loading">Ładowanie...</string>
+  <string name="detail_panel_cats_loading">Ładowanie…</string>
   <string name="detail_panel_cats_none">Nic nie zaznaczono</string>
   <string name="detail_description_empty">Brak opisu</string>
   <string name="detail_license_empty">Nieznana licencja</string>

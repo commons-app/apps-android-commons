@@ -7,7 +7,7 @@
   <string name="login">Log in</string>
   <string name="signup">Sign up</string>
   <string name="logging_in_title">Logging in</string>
-  <string name="logging_in_message">Please wait...</string>
+  <string name="logging_in_message">Please wait…</string>
   <string name="login_success">Login success!</string>
   <string name="login_failed">Login failed!</string>
   <string name="upload_failed">File not found. Please try another file.</string>
@@ -87,7 +87,7 @@ Tap this message (or hit back) to skip this step.</string>
   <string name="menu_feedback">Send Feedback (via Email)</string>
   <string name="no_email_client">No email client installed</string>
   <string name="provider_categories">Recently used categories</string>
-  <string name="waiting_first_sync">Waiting for first sync...</string>
+  <string name="waiting_first_sync">Waiting for first sync…</string>
   <string name="no_uploads_yet">You have not yet uploaded any photos.</string>
   <string name="menu_retry_upload">Retry</string>
   <string name="menu_cancel_upload">Cancel</string>
@@ -134,7 +134,7 @@ Tap this message (or hit back) to skip this step.</string>
   <string name="welcome_final_text">You think you got it?</string>
   <string name="welcome_final_button_text">Yes!</string>
   <string name="detail_panel_cats_label">Categories</string>
-  <string name="detail_panel_cats_loading">Loading...</string>
+  <string name="detail_panel_cats_loading">Loading…</string>
   <string name="detail_panel_cats_none">None selected</string>
   <string name="detail_description_empty">No description</string>
   <string name="detail_license_empty">Unknown license</string>

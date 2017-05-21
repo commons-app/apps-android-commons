@@ -7,7 +7,7 @@
   <string name="login">Entra</string>
   <string name="signup">Registrati</string>
   <string name="logging_in_title">Accesso in corso</string>
-  <string name="logging_in_message">Attendi per favore...</string>
+  <string name="logging_in_message">Attendi per favore…</string>
   <string name="login_success">Accesso effettuato!</string>
   <string name="login_failed">Accesso non riuscito!</string>
   <string name="upload_failed">File non trovato. Prova con un altro file.</string>
@@ -83,7 +83,7 @@
   <string name="menu_feedback">Invia un commento (tramite email)</string>
   <string name="no_email_client">Nessun client di posta elettronica installato</string>
   <string name="provider_categories">Categorie utilizzate recentemente</string>
-  <string name="waiting_first_sync">Attendi per la prima sincronizzazione...</string>
+  <string name="waiting_first_sync">Attendi per la prima sincronizzazione…</string>
   <string name="no_uploads_yet">Non hai ancora caricato alcuna foto.</string>
   <string name="menu_retry_upload">Riprova</string>
   <string name="menu_cancel_upload">Annulla</string>
@@ -97,7 +97,7 @@
   <string name="license_name_cc_by_sa_four"> Attribuzione-Condividi allo stesso modo 4.0</string>
   <string name="license_name_cc_by_four"> Attribuzione 4.0</string>
   <string name="license_name_cc_by_sa"> Attribuzione-Condividi allo stesso modo 3.0</string>
-  <string name="license_name_cc_by">CCu00A0Attribuzioneu00A03.0</string>
+  <string name="license_name_cc_by">CC Attribuzione 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Austria)</string>
@@ -124,7 +124,7 @@
   <string name="welcome_final_text">Pensi di aver capito?</string>
   <string name="welcome_final_button_text">Sì!</string>
   <string name="detail_panel_cats_label">Categorie</string>
-  <string name="detail_panel_cats_loading">Caricamento...</string>
+  <string name="detail_panel_cats_loading">Caricamento…</string>
   <string name="detail_panel_cats_none">Nessuna selezione</string>
   <string name="detail_description_empty">Nessuna descrizione</string>
   <string name="detail_license_empty">Licenza sconosciuta</string>

@@ -7,7 +7,7 @@
   <string name="login">Prihlásiť sa</string>
   <string name="signup">Zaregistrovať sa</string>
   <string name="logging_in_title">Prihlasovanie</string>
-  <string name="logging_in_message">Čakajte prosím...</string>
+  <string name="logging_in_message">Čakajte prosím…</string>
   <string name="login_success">Prihlásenie úspešné</string>
   <string name="login_failed">Prihlásenie zlyhalo!</string>
   <string name="upload_failed">Súbor nebol nájdený. Skúste, prosím, iný súbor.</string>
@@ -58,13 +58,13 @@
   <string name="title_activity_signup">Zaregistrovať sa</string>
   <string name="menu_about">O aplikácii</string>
   <string name="about_license" fuzzy="true">Open Source softvér dostupný za podmienok &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
-  <string name="about_improve" fuzzy="true">Zdroj na &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Bugy na &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_improve" fuzzy="true">Zdroj na &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Bugy na &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Ochrana osobných údajov&lt;/a&gt;</string>
   <string name="title_activity_about">O aplikácii</string>
   <string name="menu_feedback">Odoslať spätnú väzbu (emailom)</string>
   <string name="no_email_client">Nemáte nainštalovaného žiadneho e-mailového klienta</string>
   <string name="provider_categories">Nedávno použité kategórie</string>
-  <string name="waiting_first_sync">Čaká sa na prvú synchronizáciu...</string>
+  <string name="waiting_first_sync">Čaká sa na prvú synchronizáciu…</string>
   <string name="no_uploads_yet">Ešte ste nenahrali žiadne fotografie.</string>
   <string name="menu_retry_upload">Znova</string>
   <string name="menu_cancel_upload">Zrušiť</string>
@@ -106,7 +106,7 @@
   <string name="welcome_final_text">Myslíte, že rozumiete?</string>
   <string name="welcome_final_button_text">Áno!</string>
   <string name="detail_panel_cats_label">Kategórie</string>
-  <string name="detail_panel_cats_loading">Načítava sa...</string>
+  <string name="detail_panel_cats_loading">Načítava sa…</string>
   <string name="detail_panel_cats_none">Nič nebolo vybrané</string>
   <string name="detail_description_empty">Bez popisu</string>
   <string name="detail_license_empty">Neznáma licencia</string>

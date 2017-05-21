@@ -7,7 +7,7 @@
   <string name="login">Uunmelde</string>
   <string name="signup">Iinskriiw</string>
   <string name="logging_in_title">Uunmeldin lääpt</string>
-  <string name="logging_in_message">Wees so gud an teew ...</string>
+  <string name="logging_in_message">Wees so gud an teew …</string>
   <string name="login_success">Uunmeldin hää loket!</string>
   <string name="login_failed">Bi\'t uunmeldin as wat skiaf gingen.</string>
   <string name="upload_failed">Datei ei fünjen. Ferschük det mä en ööder datei.</string>
@@ -71,7 +71,7 @@
   <string name="title_activity_settings">Iinstelangen</string>
   <string name="title_activity_signup">Iinskriiw</string>
   <string name="menu_about">Auer</string>
-  <string name="about_license" fuzzy="true">Open Source software ütjden oner det lisens &lt;a href=\"https://github.com/commons-app/android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;.\nWikimedia Commons an det Wikimedia-Commons-Logo san markintiaken faan\'t Wikimedia Foundation an wurd mä ferloof faan\'t Wikimedia Foundation brükt. Wi hiar ei tu\'t Wikimedia Foundation.</string>
+  <string name="about_license" fuzzy="true">Open Source software ütjden oner det lisens &lt;a href=\" https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;.\nWikimedia Commons an det Wikimedia-Commons-Logo san markintiaken faan\'t Wikimedia Foundation an wurd mä ferloof faan\'t Wikimedia Foundation brükt. Wi hiar ei tu\'t Wikimedia Foundation.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Code&lt;/a&gt; an &lt;a href=\"https://commons-app.github.io/\"&gt;Wääbsteed&lt;/a&gt; üüb GitHub&lt;/a&gt;. En neien &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-iindrach&lt;/a&gt; för feelern of föörslacher maage.</string>
   <string name="about_privacy_policy">Brükerreegeln</string>
   <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;SOONK&lt;/a&gt;</string>
@@ -79,7 +79,7 @@
   <string name="menu_feedback">Wat wel dü üs sai ? (auer e-mail)</string>
   <string name="no_email_client">Diar as nään e-mail-client instaliaret</string>
   <string name="provider_categories">Tuleetst brükt kategoriin</string>
-  <string name="waiting_first_sync">Teew üüb det iarst synchronisiarin ...</string>
+  <string name="waiting_first_sync">Teew üüb det iarst synchronisiarin …</string>
   <string name="no_uploads_yet">Dü heest noch nian bilen huuchschüürd.</string>
   <string name="menu_retry_upload">Noch ans ferschük</string>
   <string name="menu_cancel_upload">Ufbreeg</string>
@@ -126,7 +126,7 @@
   <string name="welcome_final_text">Witjst beskias?</string>
   <string name="welcome_final_button_text">Ja!</string>
   <string name="detail_panel_cats_label">Kategoriin</string>
-  <string name="detail_panel_cats_loading">Loose ...</string>
+  <string name="detail_panel_cats_loading">Loose …</string>
   <string name="detail_panel_cats_none">Nian ütjwool</string>
   <string name="detail_description_empty">Nian beskriiwang</string>
   <string name="detail_license_empty">Ünbekäänd lisens</string>

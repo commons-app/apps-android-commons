@@ -7,7 +7,7 @@
   <string name="login">登录</string>
   <string name="signup">注册</string>
   <string name="logging_in_title">正在登录</string>
-  <string name="logging_in_message">请等待...</string>
+  <string name="logging_in_message">请等待…</string>
   <string name="login_success">登录成功！</string>
   <string name="login_failed">登录失败！</string>
   <string name="upload_failed">找不到文件。请尝试其他文件。</string>
@@ -83,7 +83,7 @@
   <string name="menu_feedback">发送反馈（通过电子邮件）</string>
   <string name="no_email_client">未安装电子邮件客户端</string>
   <string name="provider_categories">最近使用的分类</string>
-  <string name="waiting_first_sync">等待第一次同步...</string>
+  <string name="waiting_first_sync">等待第一次同步…</string>
   <string name="no_uploads_yet">您还没有上传任何照片。</string>
   <string name="menu_retry_upload">重试</string>
   <string name="menu_cancel_upload">取消</string>
@@ -130,7 +130,7 @@
   <string name="welcome_final_text">您明白了吗？</string>
   <string name="welcome_final_button_text">是！</string>
   <string name="detail_panel_cats_label">分类</string>
-  <string name="detail_panel_cats_loading">正在载入...</string>
+  <string name="detail_panel_cats_loading">正在载入…</string>
   <string name="detail_panel_cats_none">未选择</string>
   <string name="detail_description_empty">没有说明</string>
   <string name="detail_license_empty">未知许可协议</string>
