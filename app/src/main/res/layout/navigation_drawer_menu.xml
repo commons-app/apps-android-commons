@@ -40,13 +40,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:src="@drawable/ic_file_upload_black_24dp" />
+                    android:src="@drawable/ic_home_black_24dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12dp"
-                    android:text="@string/navigation_item_upload"
+                    android:text="@string/navigation_item_home"
                     android:letterSpacing="0.02"
                     android:textColor="@color/main_background_dark"
                     android:textSize="@dimen/hamburger_menu_item" />
