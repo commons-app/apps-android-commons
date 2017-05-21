@@ -6,8 +6,8 @@
   <string name="password">تێپەڕوشە</string>
   <string name="login">چوونە ژوورەوە</string>
   <string name="signup">خۆ تۆمارکردن</string>
-  <string name="logging_in_title">چوونە ژوورەوە...</string>
-  <string name="logging_in_message">تکایە چاوەڕوان بە...</string>
+  <string name="logging_in_title">چوونە ژوورەوە…</string>
+  <string name="logging_in_message">تکایە چاوەڕوان بە…</string>
   <string name="login_success">بە سەرکەوتووانە چوویتە ژوورەوە!</string>
   <string name="login_failed">چوونە ژوورەوە شکستی ھێنا!</string>
   <string name="upload_failed">پەڕگە نەدۆزرایەوە. تکایە پەڕگەیەکی تر تاقی بکەرەوە.</string>
@@ -29,13 +29,13 @@
   <string name="preference_theme">مۆدی شەو</string>
   <string name="welcome_wikipedia_subtext">وێنەکانی سەر ویکیپیدیا لە ویکیمیدیا کۆمنزەوە دەھێندرێن.</string>
   <string name="welcome_copyright_text">وێنەکانت یارمەتی فێرکردنی خەڵکی دەدات لە سەرانسەری جیھان دا.</string>
-  <string name="welcome_copyright_subtext">خۆت لەو کارانە لابدە کە مافی بڵاوکردنەوەیان پارێزراوە وەک ئەو شتانەی کە لەسەر ئینتەرنێت دەیان دۆزیتەوە، بە تایبەتی وێنەی پۆستەر، بەرگی کتێب و یاری، ھتد...</string>
+  <string name="welcome_copyright_subtext">خۆت لەو کارانە لابدە کە مافی بڵاوکردنەوەیان پارێزراوە وەک ئەو شتانەی کە لەسەر ئینتەرنێت دەیان دۆزیتەوە، بە تایبەتی وێنەی پۆستەر، بەرگی کتێب و یاری، ھتد…</string>
   <string name="welcome_final_text">پێت وایە تێگەیشتوویت؟</string>
   <string name="welcome_final_button_text">بەڵێ!</string>
   <string name="detail_panel_cats_label">پۆلەكان</string>
-  <string name="detail_panel_cats_loading">باركردن‌...</string>
+  <string name="detail_panel_cats_loading">باركردن‌…</string>
   <string name="detail_panel_cats_none">ھیچ ھەڵنەبژێردراوە</string>
-  <string name="detail_description_empty">بێ وەسف...</string>
+  <string name="detail_description_empty">بێ وەسف…</string>
   <string name="detail_license_empty">مۆڵەتنامە نەزانراوە</string>
   <string name="menu_refresh">نوێکردنەوە</string>
   <string name="ok">باشە</string>

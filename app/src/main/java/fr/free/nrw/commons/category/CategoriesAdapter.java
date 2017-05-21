@@ -14,13 +14,11 @@ import fr.free.nrw.commons.R;
 
 public class CategoriesAdapter extends BaseAdapter {
 
-    private Context context;
     private LayoutInflater mInflater;
 
     private ArrayList<CategorizationFragment.CategoryItem> items;
 
     public CategoriesAdapter(Context context, ArrayList<CategorizationFragment.CategoryItem> items) {
-        this.context = context;
         this.items = items;
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }

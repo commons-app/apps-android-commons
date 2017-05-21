@@ -20,6 +20,7 @@
             android:id="@+id/selfie_x"
             android:layout_width="140dp"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/welcome_image_no_selfies"
             />
 
         <ImageView
@@ -27,7 +28,9 @@
             android:id="@+id/proprietary_x"
             android:layout_marginLeft="10dp"
             android:layout_width="140dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/welcome_image_proprietary"
+            />
 
     </LinearLayout>
 

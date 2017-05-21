@@ -6,7 +6,7 @@
   <string name="password">Contrasigno</string>
   <string name="login">Aperir session</string>
   <string name="logging_in_title">Apertura de session</string>
-  <string name="logging_in_message">Un momento...</string>
+  <string name="logging_in_message">Un momento…</string>
   <string name="login_success">Session aperite!</string>
   <string name="login_failed">Session fallite!</string>
   <string name="authentication_failed">Authentication fallite!</string>

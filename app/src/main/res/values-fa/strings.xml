@@ -7,7 +7,7 @@
   <string name="login">ورود</string>
   <string name="signup">ثبت نام</string>
   <string name="logging_in_title">واردشدن</string>
-  <string name="logging_in_message">لطفاً صبر کنید...</string>
+  <string name="logging_in_message">لطفاً صبر کنید…</string>
   <string name="login_success">ورود موفق!</string>
   <string name="login_failed">ورود ناموفق!</string>
   <string name="upload_failed">پرونده یافت نشد لطفاً پرونده دیگری را امتحان کنید.</string>
@@ -77,7 +77,7 @@
   <string name="menu_feedback">ارسال بازخورد (از طریق ایمیل)</string>
   <string name="no_email_client">نرم‌افزار ایمیل نصب نیست</string>
   <string name="provider_categories">رده‌هایی که اخیراً استفاده شده‌اند</string>
-  <string name="waiting_first_sync">در حال انتظار برای اولین همگام‌سازی...</string>
+  <string name="waiting_first_sync">در حال انتظار برای اولین همگام‌سازی…</string>
   <string name="no_uploads_yet">شما هنوز نگاره‌ای بارگذاری نکرده‌اید.</string>
   <string name="menu_retry_upload">تلاش مجدد</string>
   <string name="menu_cancel_upload">لغو</string>
@@ -120,7 +120,7 @@
   <string name="welcome_final_text">آیا متوجه منظور شدید؟</string>
   <string name="welcome_final_button_text">بله!</string>
   <string name="detail_panel_cats_label">رده‌ها</string>
-  <string name="detail_panel_cats_loading">در حال بارگیری...</string>
+  <string name="detail_panel_cats_loading">در حال بارگیری…</string>
   <string name="detail_panel_cats_none">هیچ‌کدام انتخاب‌نشده</string>
   <string name="detail_description_empty">بدون توضیحات</string>
   <string name="detail_license_empty">مجوز ناشناخته</string>

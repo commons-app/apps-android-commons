@@ -7,7 +7,7 @@
   <string name="login">Se connectar</string>
   <string name="signup">S\'inscriure</string>
   <string name="logging_in_title">Connexion</string>
-  <string name="logging_in_message">Pacientatz...</string>
+  <string name="logging_in_message">Pacientatz…</string>
   <string name="login_success">Identificacion capitada !</string>
   <string name="login_failed">Error de connexion !</string>
   <string name="upload_failed">Fichièr pas trobat. Ensajatz-ne un autre.</string>
@@ -75,7 +75,7 @@
   <string name="menu_feedback">Mandar vòstres comentaris (per corrièl)</string>
   <string name="no_email_client">Cap de client de corrièl pas installat</string>
   <string name="provider_categories">Categorias utilizadas recentament</string>
-  <string name="waiting_first_sync">Espèra de primièra sincronizacion…</string>
+  <string name="waiting_first_sync" fuzzy="true">Espèra de primièra sincronizacion…</string>
   <string name="no_uploads_yet">Avètz pas encara telecargat cap de fòto.</string>
   <string name="menu_retry_upload">Tornar ensajar</string>
   <string name="menu_cancel_upload">Anullar</string>
@@ -111,7 +111,7 @@
   <string name="welcome_final_text">Pensatz qu’es bon ?</string>
   <string name="welcome_final_button_text">Òc !</string>
   <string name="detail_panel_cats_label">Categorias</string>
-  <string name="detail_panel_cats_loading">Cargament...</string>
+  <string name="detail_panel_cats_loading">Cargament…</string>
   <string name="detail_panel_cats_none">Cap de categoria pas seleccionada</string>
   <string name="detail_description_empty">Pas cap de descripcion</string>
   <string name="detail_license_empty">Licéncia desconeguda</string>

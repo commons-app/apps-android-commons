@@ -7,7 +7,7 @@
   <string name="login">ログイン</string>
   <string name="signup">利用者登録</string>
   <string name="logging_in_title">ログイン中</string>
-  <string name="logging_in_message">お待ちください...</string>
+  <string name="logging_in_message" fuzzy="true">お待ちください…</string>
   <string name="login_success">ログインしました!</string>
   <string name="login_failed">ログインに失敗しました!</string>
   <string name="upload_failed">ファイルが見つかりません。別のファイルでお試しください。</string>
@@ -75,7 +75,7 @@
   <string name="menu_feedback">フィードバックをメールで送信</string>
   <string name="no_email_client">メールアプリケーションが見つかりません</string>
   <string name="provider_categories">最近使用したカテゴリ</string>
-  <string name="waiting_first_sync">同期を待機中...</string>
+  <string name="waiting_first_sync">同期を待機中…</string>
   <string name="no_uploads_yet">まだ写真をアップロードしていません。</string>
   <string name="menu_retry_upload">再試行</string>
   <string name="menu_cancel_upload">キャンセル</string>
@@ -122,7 +122,7 @@
   <string name="welcome_final_text">ご理解いただけましたか?</string>
   <string name="welcome_final_button_text">はい</string>
   <string name="detail_panel_cats_label">カテゴリ</string>
-  <string name="detail_panel_cats_loading">読み込み中...</string>
+  <string name="detail_panel_cats_loading">読み込み中…</string>
   <string name="detail_panel_cats_none">ファイルを選択していません</string>
   <string name="detail_description_empty">説明はありません。</string>
   <string name="detail_license_empty">不明なライセンス</string>

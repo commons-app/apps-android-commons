@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="crash_dialog_title">Commons kohtasi virheen</string>
+  <string name="crash_dialog_title">Commons app on kaatunut</string>
   <string name="crash_dialog_text">Pahoittelemme, virhe tapahtui.</string>
-  <string name="crash_dialog_comment_prompt">Kerro meille, mitä teit äsken, sähköpostitse. Se auttaa meitä korjaamaan ongelman!</string>
+  <string name="crash_dialog_comment_prompt">Kerro meille mitä teit äsken, sähköpostitse. Se auttaa meitä korjaamaan ongelman!</string>
   <string name="crash_dialog_ok_toast">Kiitos!</string>
 </resources>

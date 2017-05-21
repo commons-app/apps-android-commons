@@ -7,7 +7,7 @@
   <string name="login">පිවිසෙන්න</string>
   <string name="signup">ලියාපදිංචි වන්න</string>
   <string name="logging_in_title">පිවිසෙමින්</string>
-  <string name="logging_in_message">මදක් රැදීසිටින්න...</string>
+  <string name="logging_in_message">මදක් රැදීසිටින්න…</string>
   <string name="login_success">පිවිසුම සාර්ථකයි!</string>
   <string name="login_failed">පිවිසීම අසාර්ථකයි!</string>
   <string name="upload_failed">ගොනුව හමු නොවිණි. තවත් ගොනුවක් උත්සාහ කරන්න.</string>
@@ -73,7 +73,7 @@
   <string name="menu_feedback">අදහස් යවන්න (විද්‍යුත් තැපෑල හරහා)</string>
   <string name="no_email_client">විද්‍යුත් තැපැල් සේවාදායකයා ස්ථාපනය කර නැත</string>
   <string name="provider_categories">මෑතකදී භාවිතා කල ප්‍රවර්ග</string>
-  <string name="waiting_first_sync">පළමු සමමුහුර්තය සඳහා රැඳී සිටිමින්...</string>
+  <string name="waiting_first_sync">පළමු සමමුහුර්තය සඳහා රැඳී සිටිමින්…</string>
   <string name="no_uploads_yet">ඔබ තවමත් කිසිදු ඡායාරුපයක් උඩුගත කර නැත.</string>
   <string name="menu_retry_upload">නැවත උත්සහ කරන්න</string>
   <string name="menu_cancel_upload">අවලංගු කරන්න</string>
@@ -105,7 +105,7 @@
   <string name="tutorial_4_text">උදාහරණ උඩුගත කිරීම:</string>
   <string name="welcome_final_button_text">ඔව්!</string>
   <string name="detail_panel_cats_label">ප්‍රවර්ග</string>
-  <string name="detail_panel_cats_loading">ප්‍රවේශනය වෙමින් පවතී...</string>
+  <string name="detail_panel_cats_loading" fuzzy="true">ප්‍රවේශනය වෙමින් පවතී…</string>
   <string name="detail_panel_cats_none">කිසිවක් තෝරාගෙන නැත</string>
   <string name="detail_description_empty">විස්තරයක් නැත</string>
   <string name="detail_license_empty">නොදන්නා බලපත්‍රය</string>

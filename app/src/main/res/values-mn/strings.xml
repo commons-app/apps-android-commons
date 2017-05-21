@@ -6,7 +6,7 @@
   <string name="password">Нууц үг</string>
   <string name="login">Нэвтрэх</string>
   <string name="logging_in_title">Нэвтэрч байна</string>
-  <string name="logging_in_message">Түр хүлээнэ үү ...</string>
+  <string name="logging_in_message">Түр хүлээнэ үү …</string>
   <string name="login_success">Нэвтрэлт амжилттай боллоо!</string>
   <string name="login_failed">Нэвтэрч чадсангүй!</string>
   <string name="authentication_failed">Таныг танихад алдаа гарлаа!</string>
@@ -52,7 +52,7 @@
   <string name="preference_license">Зохиогчийн эрх:</string>
   <string name="welcome_final_button_text">Тийм!</string>
   <string name="detail_panel_cats_label">Нэр төрөл</string>
-  <string name="detail_panel_cats_loading">Уншиж байна...</string>
+  <string name="detail_panel_cats_loading">Уншиж байна…</string>
   <string name="detail_panel_cats_none">Алиныг ч сонгоогүй байна</string>
   <string name="detail_description_empty">Тайлбаргүй</string>
 </resources>

@@ -7,7 +7,7 @@
   <string name="login">Mewngofnodi</string>
   <string name="signup">Cofrestru</string>
   <string name="logging_in_title">Wrthi\'n mewngofnodi</string>
-  <string name="logging_in_message">Disgwyliwch...</string>
+  <string name="logging_in_message">Disgwyliwch…</string>
   <string name="login_success">Llwyddodd y mewngofnodi!</string>
   <string name="login_failed">Methodd y mewngofnodi!</string>
   <string name="upload_failed">Ni chafwyd hyd i\'r ffeil. Ceisiwch un arall.</string>
@@ -77,7 +77,7 @@
   <string name="menu_feedback">Danfonwch Adborth (drwy Ebost)</string>
   <string name="no_email_client">Dim ebost client wedi\'i ganfod</string>
   <string name="provider_categories">Categorïau a ddefnyddiwyd yn ddiweddar</string>
-  <string name="waiting_first_sync">Yn aros am y sync cyntaf...</string>
+  <string name="waiting_first_sync">Yn aros am y sync cyntaf…</string>
   <string name="no_uploads_yet">Nid ydych wedi uwchlwytho ffotograffau eto.</string>
   <string name="menu_retry_upload">Ailgynnig</string>
   <string name="menu_cancel_upload">Diddymer</string>
@@ -86,8 +86,8 @@
   <string name="preference_license">Trwydded</string>
   <string name="use_previous">Defnydiwch y teitl/disgrifiad blaenorol</string>
   <string name="allow_gps">Defnyddiwch y lleoliad cyfredol</string>
-  <string name="license_name_cc_by_sa">CCu00A0Attribution-ShareAlikeu00A03.0</string>
-  <string name="license_name_cc_by">CCu00A0Attributionu00A03.0</string>
+  <string name="license_name_cc_by_sa">CC Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Awstria)</string>
@@ -109,7 +109,7 @@
   <string name="welcome_final_text">Ydych chi wedi deall?</string>
   <string name="welcome_final_button_text">Do!</string>
   <string name="detail_panel_cats_label">Categorïau</string>
-  <string name="detail_panel_cats_loading">Wrthi\'n llwytho...</string>
+  <string name="detail_panel_cats_loading">Wrthi\'n llwytho…</string>
   <string name="detail_panel_cats_none">Dim categorïau wedi eu dewis</string>
   <string name="detail_description_empty">Dim disgrifiad</string>
   <string name="detail_license_empty">Trwydded anhysbys</string>

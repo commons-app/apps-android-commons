@@ -7,7 +7,7 @@
   <string name="login">داخل ٿيو</string>
   <string name="signup">کاتو کوليو</string>
   <string name="logging_in_title">داخل ٿيندي</string>
-  <string name="logging_in_message">براءِ مھرباني انتظار ڪريو...</string>
+  <string name="logging_in_message">براءِ مھرباني انتظار ڪريو…</string>
   <string name="login_success">داخل ٿيڻ ڪامياب!</string>
   <string name="login_failed">داخل ٿيڻ ناڪام!</string>
   <string name="upload_failed">فائيل نہ لڌو. براءِ مھرباني ٻيو ڪو فائيل آزمايو.</string>
@@ -76,7 +76,7 @@
   <string name="menu_feedback">پذيرائي موڪليو (برقٽپال ذريعي)</string>
   <string name="no_email_client">ڪوبہ برقٽپال ڪلائينٽ تنصيبيل ناھي</string>
   <string name="provider_categories">تازو استعمال ڪيل زمرا</string>
-  <string name="waiting_first_sync">پھرين سائنڪ جو انتظار ڪندي...</string>
+  <string name="waiting_first_sync">پھرين سائنڪ جو انتظار ڪندي…</string>
   <string name="no_uploads_yet">توھان اڃان تائين ڪي بہ فوٽو انہ چاڙھيا آھن.</string>
   <string name="menu_retry_upload">ٻيھر ڪوشش ڪريو</string>
   <string name="menu_cancel_upload">رد</string>
@@ -90,8 +90,8 @@
   <string name="preference_theme_summary">گھرو نظارو استعمال ڪريو</string>
   <string name="license_name_cc_by_sa_four">انتساب-ھجھڙي ڀاڱيداري 4.0</string>
   <string name="license_name_cc_by_four">وصف 4.0</string>
-  <string name="license_name_cc_by_sa">ڪڪu00A0انتساب-ھڪجھڙي_ڀاڱيداريu00A03.0</string>
-  <string name="license_name_cc_by">ڪڪu00A0انتسابu00A03.0</string>
+  <string name="license_name_cc_by_sa">ڪڪ انتساب-ھڪجھڙي_ڀاڱيداري 3.0</string>
+  <string name="license_name_cc_by">ڪڪ انتساب 3.0</string>
   <string name="license_name_cc0">ڪڪ0</string>
   <string name="license_name_cc_by_sa_3_0">ڪڪ BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">ڪڪ BY-SA 3.0 (آسٽريا)</string>
@@ -123,7 +123,7 @@
   <string name="welcome_final_text">توھان سمجھو ٿا توھان سمجھي ويئو؟</string>
   <string name="welcome_final_button_text">ھا!</string>
   <string name="detail_panel_cats_label">زمرا</string>
-  <string name="detail_panel_cats_loading">اتاريندي...</string>
+  <string name="detail_panel_cats_loading" fuzzy="true">اتاريندي…</string>
   <string name="detail_panel_cats_none">ڪوبہ چونڊيل ناھي</string>
   <string name="detail_description_empty">ڪا تشريح ناھي</string>
   <string name="detail_license_empty">اڻڄاتل لائسنس</string>

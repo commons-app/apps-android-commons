@@ -6,7 +6,7 @@
   <string name="password">Сырсөз</string>
   <string name="login">Кирүү</string>
   <string name="logging_in_title">Системага кирүү</string>
-  <string name="logging_in_message">Сураныч, күтө туруңуз...</string>
+  <string name="logging_in_message">Сураныч, күтө туруңуз…</string>
   <string name="login_success">Сиз ийгиликтүү кирдиңиз</string>
   <string name="login_failed">Системага кирүүдө катачылык бар!</string>
   <string name="authentication_failed">Таану катачылыгы!</string>
@@ -67,20 +67,20 @@
   <string name="title_activity_settings">Ырастоолор</string>
   <string name="menu_about">Тиркеме жөнүндө</string>
   <string name="about_license" fuzzy="true">баштапкы коду ачык тиркемелер, &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; лицензиясынын негизинде чыгарылган</string>
-  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt; шилтемесине баштапкы код. &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt; шилтемесиндеги катачылык.</string>
+  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt; шилтемесине баштапкы код. &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt; шилтемесиндеги катачылык.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Конфиденциалдуулук_саясаты\"&gt;Конфиденциалдуулук саясаты&lt;/a&gt;</string>
   <string name="title_activity_about">Тиркеме жөнүндө</string>
   <string name="menu_feedback">Шарттуу жооп жөнөтүү (Email)</string>
   <string name="provider_categories">Жакында колдонулган түрмөктөр</string>
-  <string name="waiting_first_sync">Алгачкы мезгилдештирүүнү күтүү...</string>
+  <string name="waiting_first_sync">Алгачкы мезгилдештирүүнү күтүү…</string>
   <string name="no_uploads_yet">Сиз бир дагы сүрөт жүктөй элексиз.</string>
   <string name="menu_retry_upload">Кайра аракет кылуу</string>
   <string name="menu_cancel_upload">Жокко чыгаруу</string>
   <string name="share_license_summary">Бул сүрөт %1$s лицензияланат</string>
   <string name="menu_download">Жүктөп алуу</string>
   <string name="preference_license">Лицензия</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Attribution-ShareAlikeu00A03.0</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0Attributionu00A03.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CC Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Австрия)</string>
@@ -102,7 +102,7 @@
   <string name="welcome_final_text">Сизге бул түшүнүктүүбү?</string>
   <string name="welcome_final_button_text">Ооба!</string>
   <string name="detail_panel_cats_label">Түрмөктөр</string>
-  <string name="detail_panel_cats_loading">Жүктөлүүдө...</string>
+  <string name="detail_panel_cats_loading" fuzzy="true">Жүктөлүүдө…</string>
   <string name="detail_panel_cats_none">Тандалган жок</string>
   <string name="menu_refresh">Жаңылоо</string>
 </resources>

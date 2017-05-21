@@ -18,6 +18,7 @@
         android:paddingBottom="24dp"
         android:adjustViewBounds="true"
         android:layout_gravity="center"
+        android:contentDescription="@string/welcome_image_sydney_opera_house"
         />
 
     <LinearLayout android:orientation="vertical"

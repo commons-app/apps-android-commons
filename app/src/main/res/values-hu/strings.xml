@@ -6,8 +6,8 @@
   <string name="password">Jelszó</string>
   <string name="login">Bejelentkezés</string>
   <string name="signup">Regisztráció</string>
-  <string name="logging_in_title">Belépés...</string>
-  <string name="logging_in_message">Kérlek várj…</string>
+  <string name="logging_in_title">Belépés…</string>
+  <string name="logging_in_message" fuzzy="true">Kérlek várj…</string>
   <string name="login_success">Sikeres bejelentkezés</string>
   <string name="login_failed">A bejelentkezés nem sikerült.</string>
   <string name="upload_failed">A fájl nem található. Próbálkozz másik fájllal.</string>
@@ -53,9 +53,10 @@
   <string name="refresh_button">Frissítés</string>
   <string name="gps_disabled">A GPS le van tiltva az eszközén. Szeretné engedélyezni?</string>
   <string name="enable_gps">GPS engedélyezése</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">Még nincs feltöltés</item>
-    <item quantity="one">1 feltöltés</item>
+  <string name="contributions_subtitle_zero">Még nincsenek feltöltések</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%d feltöltés</item>
     <item quantity="other">%d feltöltés</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
@@ -82,7 +83,7 @@
   <string name="menu_feedback">Visszajelzés küldése (e-mailben)</string>
   <string name="no_email_client">Nincs telepített levelezőprogram</string>
   <string name="provider_categories">Legutóbb használt kategóriák</string>
-  <string name="waiting_first_sync">Várakozás az első szinkronizálásra...</string>
+  <string name="waiting_first_sync">Várakozás az első szinkronizálásra…</string>
   <string name="no_uploads_yet">Még nem töltöttél fel fotókat.</string>
   <string name="menu_retry_upload">Újra</string>
   <string name="menu_cancel_upload">Mégse</string>
@@ -129,7 +130,7 @@
   <string name="welcome_final_text">Megértetted?</string>
   <string name="welcome_final_button_text">Igen!</string>
   <string name="detail_panel_cats_label">Kategóriák</string>
-  <string name="detail_panel_cats_loading">Betöltés…</string>
+  <string name="detail_panel_cats_loading" fuzzy="true">Betöltés…</string>
   <string name="detail_panel_cats_none">Nincs kijelölés</string>
   <string name="detail_description_empty">Nincs leírás</string>
   <string name="detail_license_empty">Ismeretlen licenc</string>
@@ -153,7 +154,10 @@
   <string name="use_wikidata">Wikidata használata</string>
   <string name="use_wikidata_summary">(Figyelmeztetés: a kikapcsolása nagy mobiladat-forgalmat eredményezhet)</string>
   <string name="_2fa_code">2LH kód</string>
+  <string name="number_of_uploads">Legutóbbi feltöltéseim korlátja</string>
+  <string name="maximum_limit">Legnagyobb korlát</string>
   <string name="maximum_limit_alert">Nem lehet 500-nál többet megjeleníteni</string>
+  <string name="set_limit">Legutóbbi feltöltési korlát beállítása</string>
   <string name="login_failed_2fa_not_supported">A kétlépcsős hitelesítés jelenleg nem támogatott.</string>
   <string name="cancel">Mégse</string>
   <string name="navigation_drawer_open">Megnyitás</string>

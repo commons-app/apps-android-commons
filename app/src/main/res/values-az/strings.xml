@@ -6,7 +6,7 @@
   <string name="password">Parol</string>
   <string name="login">Daxil ol</string>
   <string name="logging_in_title">Giriş edilir</string>
-  <string name="logging_in_message">Lütfən gözləyin...</string>
+  <string name="logging_in_message">Lütfən gözləyin…</string>
   <string name="login_success">Daxil oldunuz!</string>
   <string name="login_failed">Giriş baş tutmadı!</string>
   <string name="authentication_failed">Şəxsiyyət təsdiqləmə uğursuz oldu!</string>

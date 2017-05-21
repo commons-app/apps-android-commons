@@ -58,7 +58,7 @@
   <string name="title_activity_settings">{{Identical|Settings}}</string>
   <string name="title_activity_signup">{{Identical|Sign up}}</string>
   <string name="menu_about">{{Identical|About}}</string>
-  <string name="about_license">\'\'\'The name \"Wikimedia Commons\" is a trademark in English, and must not be translated.\'\'\'\n\nLicense and legal notice.</string>
+  <string name="about_license">{{doc-important|The name \"Wikimedia Commons\" is a trademark in English, and in most cases you should not translate that. You should only translate \"Wikimedia Commons\" here, however, if you agree that your translation of \"Wikimedia Commons\" is also registered as trademark in countries which your language is commonly used. This means that, for example, by translating \"Wikimedia Commons\" to Macedonian \"Фондацијата Викимедија\", you agree that \"Фондацијата Викимедија\" is also a trademark in the Republic of Macedonia.}}\n\nLicense and legal notice.</string>
   <string name="about_improve">{{doc-important|Please make sure that your translation of \"source\" means \"source code\", not \"reference source\".}}\nSource and Bugs</string>
   <string name="about_privacy_policy">HTML fragment linking to Wikimedia\'s privacy policy. Note: avoid percent-encoding in the URL, as this causes problems with Android\'s resource compiler. Use accented/non-ASCII characters \"as is\" if possible. (We can fix it manually, so don\'t worry too much about it.)\n{{Identical|Privacy policy}}</string>
   <string name="about_credits">{{Identical|Credit}}</string>
@@ -97,6 +97,7 @@
   <string name="no">{{Identical|No}}</string>
   <string name="media_detail_title">{{Identical|Title}}</string>
   <string name="media_detail_description">{{Identical|Description}}</string>
+  <string name="welcome_image_mount_zao">This is a mountain between Yamagata and Miyagi Prefectures in Japan, see [[d:Q167951]] for details.</string>
   <string name="cancel">{{Identical|Cancel}}</string>
   <string name="navigation_drawer_open">{{Identical|Open}}</string>
   <string name="navigation_drawer_close">{{Identical|Close}}</string>

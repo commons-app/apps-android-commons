@@ -7,7 +7,7 @@
   <string name="login">შესვლა</string>
   <string name="signup">რეგისტრაცია</string>
   <string name="logging_in_title">სისტემაში შესვლა</string>
-  <string name="logging_in_message">გთხოვთ მოიცადოთ...</string>
+  <string name="logging_in_message">გთხოვთ მოიცადოთ…</string>
   <string name="login_success">სისტემაში შესვლა წარმატებით განხორციელდა!</string>
   <string name="login_failed">სისტემაში შესვლა ვერ განხორციელდა!</string>
   <string name="upload_failed">ფაილი არ მოიძებნა. გთხოვთ, სცადოთ სხვა ფაილი.</string>
@@ -69,7 +69,7 @@
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="welcome_final_button_text">დიახ!</string>
   <string name="detail_panel_cats_label">კატეგორიები</string>
-  <string name="detail_panel_cats_loading">იტვირთება...</string>
+  <string name="detail_panel_cats_loading">იტვირთება…</string>
   <string name="detail_description_empty">არ არის აღწერა</string>
   <string name="detail_license_empty">უცნობი ლიცენზია</string>
   <string name="menu_refresh">განახლება</string>

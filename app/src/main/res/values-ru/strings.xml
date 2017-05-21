@@ -7,7 +7,7 @@
   <string name="login">Войти</string>
   <string name="signup">Зарегистрироваться</string>
   <string name="logging_in_title">Вход в систему</string>
-  <string name="logging_in_message">Пожалуйста, подождите…</string>
+  <string name="logging_in_message" fuzzy="true">Пожалуйста, подождите…</string>
   <string name="login_success">Опознание прошло успешно</string>
   <string name="login_failed">Ошибка входа в систему!</string>
   <string name="upload_failed">Файл не найден. Попробуйте другой файл.</string>
@@ -21,10 +21,11 @@
   <string name="upload_failed_notification_title">Загрузка %1$s не удалась</string>
   <string name="upload_failed_notification_subtitle">Нажмите для просмотра</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">загружается %d файл</item>
-    <item quantity="other">идёт загрузка %d файлов</item>
+    <item quantity="one">%d файл загружается</item>
+    <item quantity="few">%d файла загружается</item>
+    <item quantity="other">%d файлов загружается</item>
   </plurals>
-  <string name="title_activity_contributions">Мои текущие загрузки</string>
+  <string name="title_activity_contributions">Мои недавние загрузки</string>
   <string name="contribution_state_queued">Очередь</string>
   <string name="contribution_state_failed">Ошибка загрузки.</string>
   <string name="contribution_state_in_progress">Завершено %1$d%%</string>
@@ -53,22 +54,22 @@
   <string name="refresh_button">Обновить</string>
   <string name="gps_disabled">GPS отключен в вашем устройстве. Вы хотите включить его?</string>
   <string name="enable_gps">Включить GPS</string>
-  <string name="contributions_subtitle_zero">пока загрузки отсутствуют</string>
+  <string name="contributions_subtitle_zero">Загрузок пока нет</string>
   <plurals name="contributions_subtitle">
-    <item quantity="zero">Нет загрузок</item>
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%d загрузка</item>
-    <item quantity="few">%d загрузок</item>
-    <item quantity="other">%d загрузки</item>
+    <item quantity="few">%d загрузки</item>
+    <item quantity="other">%d загрузок</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Начинается %d загрузка</item>
-    <item quantity="few">Начинается %d загрузок</item>
-    <item quantity="other">Начинается %d загрузки</item>
+    <item quantity="few">Начинается %d загрузки</item>
+    <item quantity="other">Начинается %d загрузок</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">%d загрузка</item>
-    <item quantity="few">%d загрузок</item>
-    <item quantity="other">%d загрузки</item>
+    <item quantity="few">%d загрузки</item>
+    <item quantity="other">%d загрузок</item>
   </plurals>
   <string name="categories_not_found">Категории, соответствующие %1$s, не найдены</string>
   <string name="categories_skip_explanation">Добавьте категории, чтобы ваши изображения можно было легко найти на Викискладе.\n\nНачните вводить название для добавления категорий.\nНажмите на это сообщение (или за ним), чтобы пропустить этот шаг.</string>
@@ -86,7 +87,7 @@
   <string name="menu_feedback">Отправить отзыв (по эл. почте)</string>
   <string name="no_email_client">Почтовый клиент не установлен</string>
   <string name="provider_categories">Недавно использованные категории</string>
-  <string name="waiting_first_sync">Ожидание первой синхронизации…</string>
+  <string name="waiting_first_sync" fuzzy="true">Ожидание первой синхронизации…</string>
   <string name="no_uploads_yet">Вы ещё не загрузили ни одной фотографии.</string>
   <string name="menu_retry_upload">Повторить</string>
   <string name="menu_cancel_upload">Отмена</string>
@@ -133,7 +134,7 @@
   <string name="welcome_final_text">Вам это понятно?</string>
   <string name="welcome_final_button_text">Да!</string>
   <string name="detail_panel_cats_label">Категории</string>
-  <string name="detail_panel_cats_loading">Загрузка…</string>
+  <string name="detail_panel_cats_loading" fuzzy="true">Загрузка…</string>
   <string name="detail_panel_cats_none">Ничего не выбрано</string>
   <string name="detail_description_empty">Нет описания</string>
   <string name="detail_license_empty">Неизвестная лицензия</string>
@@ -156,16 +157,19 @@
   <string name="become_a_tester_description">Подпишитесь на наш канал бета-версии на Google Play и получите ранний доступ к новым функциям и исправлениям ошибок</string>
   <string name="use_wikidata">Использовать Викиданные</string>
   <string name="use_wikidata_summary">(Предупреждение: отключение может привести к большому потреблению мобильных данных)</string>
-  <string name="map_theme_light">mapbox://styles/mapbox/traffic-day-v2</string>
-  <string name="map_theme_dark">mapbox://styles/mapbox/traffic-night-v2</string>
-  <string name="mapbox_commons_app_token">pk.eyJ1IjoibWFza2FyYXZpdmVrIiwiYSI6ImNqMmxvdzFjMTAwMHYzM283ZWM3eW5tcDAifQ.ib5SZ9EVjwJe6GSKve0bcg</string>
   <string name="_2fa_code">Код 2ФА</string>
-  <string name="number_of_uploads">мой нынешний лимит по загрузке</string>
-  <string name="maximum_limit">максимальный лимит</string>
+  <string name="number_of_uploads">Лимит моих недавних загрузок</string>
+  <string name="maximum_limit">Максимальный лимит</string>
   <string name="maximum_limit_alert">Невозможно отобразить более 500</string>
-  <string name="set_limit">установить текущий лимит по загрузке</string>
+  <string name="set_limit">Установить лимит недавних загрузок</string>
   <string name="login_failed_2fa_not_supported">Двухфакторная аутентификация в настоящее время не поддерживается.</string>
   <string name="logout_verification">Вы действительно хотите выйти?</string>
+  <string name="commons_logo">Логотип Викисклада</string>
+  <string name="welcome_image_mount_zao">Гора Зао</string>
+  <string name="welcome_image_llamas">Ламы</string>
+  <string name="welcome_image_rainbow_bridge">Радужный мост</string>
+  <string name="welcome_image_tulip">Тюльпан</string>
+  <string name="welcome_image_sydney_opera_house">Сиднейский оперный театр</string>
   <string name="cancel">Отмена</string>
   <string name="navigation_drawer_open">Открыть</string>
   <string name="navigation_drawer_close">Закрыть</string>

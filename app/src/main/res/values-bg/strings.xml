@@ -7,7 +7,7 @@
   <string name="login">Влизане</string>
   <string name="signup">Регистриране</string>
   <string name="logging_in_title">Влизане в системата</string>
-  <string name="logging_in_message">Изчакайте...</string>
+  <string name="logging_in_message">Изчакайте…</string>
   <string name="login_success">Успешно вписване.</string>
   <string name="login_failed">Неуспешно вписване!</string>
   <string name="upload_failed">Файлът не е намерен. Моля, опитайте друг файл.</string>
@@ -60,24 +60,12 @@
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
-  <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
-  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
-  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_2_0">CC BY 2.0</string>
-  <string name="license_name_pd_old_100">Обществено достояние (автор, починал преди повече от 100 години)</string>
-  <string name="license_name_pd_old">Обществено достояние (изтекло авторско право)</string>
-  <string name="license_name_pd_art">Обществено достояние (произведение на изкуството)</string>
-  <string name="license_name_pd_us">Обществено достояние (САЩ)</string>
-  <string name="license_name_pd_usgov">Обществено достояние (правителство на САЩ)</string>
-  <string name="license_name_pd_usgov_nasa">Обществено достояние (НАСА)</string>
-  <string name="license_name_gfdl">Лиценз за свободна документация на GNU</string>
   <string name="tutorial_1_text">В Общомедия се намират повечето изображения, използвани в Уикипедия.</string>
   <string name="tutorial_1_subtext">Вашите изображения помагат за образоването на хората по целия свят!</string>
   <string name="tutorial_3_text">Моля, НЕ качвайте:</string>
   <string name="welcome_final_button_text">Да!</string>
   <string name="detail_panel_cats_label">Категории</string>
-  <string name="detail_panel_cats_loading">Зареждане...</string>
+  <string name="detail_panel_cats_loading" fuzzy="true">Зареждане…</string>
   <string name="detail_description_empty">Няма описание</string>
   <string name="detail_license_empty">Непознат лиценз</string>
   <string name="menu_refresh">Обновяване</string>

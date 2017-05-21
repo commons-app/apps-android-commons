@@ -7,7 +7,7 @@
   <string name="login">Kevreañ</string>
   <string name="signup">En em enskrivañ</string>
   <string name="logging_in_title">O kevreañ</string>
-  <string name="logging_in_message">Gortozit mar plij...</string>
+  <string name="logging_in_message">Gortozit mar plij…</string>
   <string name="login_success">Kevreet oc\'h !</string>
   <string name="login_failed">Kudenn gevreañ !</string>
   <string name="upload_failed">N\'eo ket bet kavet ar restr. Klask gant unan all.</string>
@@ -82,7 +82,7 @@
   <string name="menu_feedback">Kas ho soñj (dre bostel)</string>
   <string name="no_email_client">N\'eus bet staliet arval postel ebet</string>
   <string name="provider_categories">Rummadoù bet implijet n\'eus ket pell</string>
-  <string name="waiting_first_sync">O c\'hortoz ar sinkroneladur kentañ...</string>
+  <string name="waiting_first_sync">O c\'hortoz ar sinkroneladur kentañ…</string>
   <string name="no_uploads_yet">N\'ho peus ket enporzhiet skeudennoù c\'hoazh.</string>
   <string name="menu_retry_upload">Klask en-dro</string>
   <string name="menu_cancel_upload">Nullañ</string>
@@ -125,11 +125,11 @@
   <string name="welcome_wikipedia_text">Kemerit perzh gant ho skeudennoù. Sikourit pennadoù Wikipedia da zont da vev !</string>
   <string name="welcome_wikipedia_subtext">Dont a ra skeudennoù Wikipedia eus Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Ho skeudennoù a sikour an dud da zeskiñ traoù dre ar bed a-bezh.</string>
-  <string name="welcome_copyright_subtext">Diarbenn an dafar gwarezet a vez kavet ganeoc\'h war ar Genrouedad, hag ivez ar skeudennoù skritelloù, ar goloioù levrioù ha kement zo...</string>
+  <string name="welcome_copyright_subtext">Diarbenn an dafar gwarezet a vez kavet ganeoc\'h war ar Genrouedad, hag ivez ar skeudennoù skritelloù, ar goloioù levrioù ha kement zo…</string>
   <string name="welcome_final_text">Ha soñjal a rit eo mat ?</string>
   <string name="welcome_final_button_text">Ya !</string>
   <string name="detail_panel_cats_label">Rummadoù</string>
-  <string name="detail_panel_cats_loading">O kargañ...</string>
+  <string name="detail_panel_cats_loading" fuzzy="true">O kargañ…</string>
   <string name="detail_panel_cats_none">Hini ebet diuzet</string>
   <string name="detail_description_empty">Deskrivadur ebet</string>
   <string name="detail_license_empty">Aotre-implijout dizanv</string>
@@ -152,9 +152,6 @@
   <string name="become_a_tester_description">En em enskrivañ en hor c\'hanol beta war Google Play ha kaout ur rakmoned d\'an arc\'hwelioù nevez d\'an drein difaziet</string>
   <string name="use_wikidata">Ober gant Wikidata</string>
   <string name="use_wikidata_summary">(Diwallit mat : ma tiweredekait an dra-mañ e c\'hallfe kreskiñ kalz ar beveziñ roadennoù gant ho hezoug)</string>
-  <string name="map_theme_light">mapbox://styles/mapbox/traffic-day-v2</string>
-  <string name="map_theme_dark">mapbox://styles/mapbox/traffic-night-v2</string>
-  <string name="mapbox_commons_app_token">pk.eyJ1IjoibWFza2FyYXZpdmVrIiwiYSI6ImNqMmxvdzFjMTAwMHYzM283ZWM3eW5tcDAifQ.ib5SZ9EVjwJe6GSKve0bcg</string>
   <string name="_2fa_code">Kod 2FA</string>
   <string name="maximum_limit">Bevenn uc\'hek</string>
   <string name="maximum_limit_alert">Ne c\'haller ket diskwel ouzhpenn 500</string>

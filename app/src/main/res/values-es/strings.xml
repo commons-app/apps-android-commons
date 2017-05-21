@@ -7,7 +7,7 @@
   <string name="login">Acceder</string>
   <string name="signup">Regístrate</string>
   <string name="logging_in_title">Accediendo</string>
-  <string name="logging_in_message">Espera un momento…</string>
+  <string name="logging_in_message" fuzzy="true">Espera un momento…</string>
   <string name="login_success">¡Inicio de sesión exitoso!</string>
   <string name="login_failed">¡Inicio de sesión fallido!</string>
   <string name="upload_failed">No se encontró el archivo. Prueba con otro.</string>
@@ -83,7 +83,7 @@
   <string name="menu_feedback">Enviar comentarios (por e-mail)</string>
   <string name="no_email_client">No se ha instalado ningún cliente de correo</string>
   <string name="provider_categories">Categorías usadas recientemente</string>
-  <string name="waiting_first_sync">Esperando la primera sincronización...</string>
+  <string name="waiting_first_sync">Esperando la primera sincronización…</string>
   <string name="no_uploads_yet">Aún no has subido ninguna foto.</string>
   <string name="menu_retry_upload">Reintentar</string>
   <string name="menu_cancel_upload">Cancelar</string>
@@ -130,7 +130,7 @@
   <string name="welcome_final_text">¿Crees que ya lo tienes?</string>
   <string name="welcome_final_button_text">¡Sí!</string>
   <string name="detail_panel_cats_label">Categorías</string>
-  <string name="detail_panel_cats_loading">Cargando…</string>
+  <string name="detail_panel_cats_loading" fuzzy="true">Cargando…</string>
   <string name="detail_panel_cats_none">No hay nada seleccionado</string>
   <string name="detail_description_empty">Sin descripción</string>
   <string name="detail_license_empty">Licencia desconocida</string>
@@ -153,9 +153,6 @@
   <string name="become_a_tester_description">Opta por nuestro canal beta en Google Play y obtén acceso a funcionalidades nuevas y correcciones de errores</string>
   <string name="use_wikidata">Utilizar Wikidata</string>
   <string name="use_wikidata_summary">(Advertencia: desactivar esto puede ocasionar un gran consumo de datos del móvil)</string>
-  <string name="map_theme_light">mapbox://styles/mapbox/traffic-day-v2</string>
-  <string name="map_theme_dark">mapbox://styles/mapbox/traffic-night-v2</string>
-  <string name="mapbox_commons_app_token">pk.eyJ1IjoibWFza2FyYXZpdmVrIiwiYSI6ImNqMmxvdzFjMTAwMHYzM283ZWM3eW5tcDAifQ.ib5SZ9EVjwJe6GSKve0bcg</string>
   <string name="_2fa_code">Código de autenticación de 2 pasos</string>
   <string name="number_of_uploads">Mi límite de subidas recientes</string>
   <string name="maximum_limit">Límite máximo</string>

@@ -33,7 +33,6 @@ public class MwVolleyApi {
     private static RequestQueue REQUEST_QUEUE;
     private static final Gson GSON = new GsonBuilder().create();
     private Context context;
-    private String coordsLog;
 
     protected static Set<String> categorySet;
     private static List<String> categoryList;
@@ -56,7 +55,6 @@ public class MwVolleyApi {
     }
 
     public void request(String coords) {
-        coordsLog = coords;
         String apiUrl = buildUrl(coords);
         Timber.d("URL: %s", apiUrl);
 

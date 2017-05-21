@@ -30,8 +30,7 @@ public class GPSExtractor {
     public boolean imageCoordsExists;
     private MyLocationListener myLocationListener;
     private LocationManager locationManager;
-    private String provider;
-    private Criteria criteria;
+
 
     public GPSExtractor(String filePath, Context context){
         this.filePath = filePath;
@@ -54,8 +53,8 @@ public class GPSExtractor {
      */
     protected void registerLocationManager() {
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-        criteria = new Criteria();
-        provider = locationManager.getBestProvider(criteria, true);
+        Criteria criteria = new Criteria();
+        String provider = locationManager.getBestProvider(criteria, true);
         myLocationListener = new MyLocationListener();
 
         try {

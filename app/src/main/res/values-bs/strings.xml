@@ -7,7 +7,7 @@
   <string name="login">Prijavi se</string>
   <string name="signup">Napravi korisnički račun</string>
   <string name="logging_in_title">Prijavljivanje</string>
-  <string name="logging_in_message">Sačekajte...</string>
+  <string name="logging_in_message">Sačekajte…</string>
   <string name="login_success">Prijavljivanje uspješno!</string>
   <string name="login_failed">Prijavljivanje nije uspjelo!</string>
   <string name="upload_failed">Datoteka nije pronađena. Pokušajte drugu.</string>
@@ -83,7 +83,7 @@
   <string name="menu_feedback">Pošalji povratne informacije (putem e-pošte)</string>
   <string name="no_email_client">Nemate instaliranu aplikaciju za e-poštu</string>
   <string name="provider_categories">Nedavno korištene kategorije</string>
-  <string name="waiting_first_sync">Čekam na prvu sinhronizaciju...</string>
+  <string name="waiting_first_sync">Čekam na prvu sinhronizaciju…</string>
   <string name="no_uploads_yet">Još niste postavili nijednu fotografiju.</string>
   <string name="menu_retry_upload">Pokušaj ponovo</string>
   <string name="menu_cancel_upload">Otkaži</string>
@@ -130,7 +130,7 @@
   <string name="welcome_final_text">Jeste li razumjeli?</string>
   <string name="welcome_final_button_text">Da!</string>
   <string name="detail_panel_cats_label">Kategorije</string>
-  <string name="detail_panel_cats_loading">Učitavam...</string>
+  <string name="detail_panel_cats_loading">Učitavam…</string>
   <string name="detail_panel_cats_none">Ništa nije izabrano</string>
   <string name="detail_description_empty">Nema opisa</string>
   <string name="detail_license_empty">Nepoznata licenca</string>
@@ -153,9 +153,6 @@
   <string name="become_a_tester_description">Prijavite se na naš beta-kanal na Google Playu i dobijte raniji pristup novim mogućnostima i ispravkama grešaka</string>
   <string name="use_wikidata">Koristi Wikipodatke</string>
   <string name="use_wikidata_summary">(Upozorenje: isključivanje ovoga moglo bi dovesti do velike potrošnje mobilnih podataka)</string>
-  <string name="map_theme_light">mapbox://styles/mapbox/traffic-day-v2</string>
-  <string name="map_theme_dark">mapbox://styles/mapbox/traffic-night-v2</string>
-  <string name="mapbox_commons_app_token">pk.eyJ1IjoibWFza2FyYXZpdmVrIiwiYSI6ImNqMmxvdzFjMTAwMHYzM283ZWM3eW5tcDAifQ.ib5SZ9EVjwJe6GSKve0bcg</string>
   <string name="_2fa_code">Kôd za provjeru u 2 koraka</string>
   <string name="number_of_uploads">Moje ograničenje za nedavna postavljanja</string>
   <string name="maximum_limit">Krajnja granica</string>

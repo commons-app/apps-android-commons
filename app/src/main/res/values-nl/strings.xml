@@ -7,7 +7,7 @@
   <string name="login">Aanmelden</string>
   <string name="signup">Registreren</string>
   <string name="logging_in_title">Bezig met aanmelden</string>
-  <string name="logging_in_message">Een ogenblik geduld...</string>
+  <string name="logging_in_message">Een ogenblik geduld…</string>
   <string name="login_success">Aanmelden geslaagd</string>
   <string name="login_failed">Aanmelden mislukt</string>
   <string name="upload_failed">Bestand niet gevonden. Probeer een ander bestand.</string>
@@ -78,7 +78,7 @@
   <string name="menu_feedback">Terugkoppeling geven (via e-mail)</string>
   <string name="no_email_client">Geen e-mail-client geïnstalleerd</string>
   <string name="provider_categories">Recent gebruikte categorieën</string>
-  <string name="waiting_first_sync">Wachten op de eerste synchronisatie...</string>
+  <string name="waiting_first_sync">Wachten op de eerste synchronisatie…</string>
   <string name="no_uploads_yet">U hebt nog geen afbeeldingen geüpload.</string>
   <string name="menu_retry_upload">Opnieuw proberen</string>
   <string name="menu_cancel_upload">Annuleren</string>
@@ -125,7 +125,7 @@
   <string name="welcome_final_text">Begrijpt u het?</string>
   <string name="welcome_final_button_text">Ja!</string>
   <string name="detail_panel_cats_label">Categorieën</string>
-  <string name="detail_panel_cats_loading">Bezig met laden…</string>
+  <string name="detail_panel_cats_loading" fuzzy="true">Bezig met laden…</string>
   <string name="detail_panel_cats_none">Geen selectie</string>
   <string name="detail_description_empty">Geen beschrijving</string>
   <string name="detail_license_empty">Onbekende licentie</string>

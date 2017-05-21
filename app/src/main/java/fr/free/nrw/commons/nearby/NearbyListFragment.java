@@ -24,9 +24,7 @@ import fr.free.nrw.commons.utils.UriDeserializer;
 import timber.log.Timber;
 
 public class NearbyListFragment extends ListFragment  {
-    private Gson gson;
     private List<Place> placeList;
-    private LatLng curLatLng;
 
     @BindView(R.id.listView) ListView listview;
 
@@ -60,7 +58,7 @@ public class NearbyListFragment extends ListFragment  {
         // Check that this is the first time view is created,
         // to avoid double list when screen orientation changed
         Bundle bundle = this.getArguments();
-        gson = new GsonBuilder()
+        Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Uri.class, new UriDeserializer())
                 .create();
         if (bundle != null) {
@@ -69,7 +67,7 @@ public class NearbyListFragment extends ListFragment  {
             Type listType = new TypeToken<List<Place>>() {}.getType();
             placeList = gson.fromJson(gsonPlaceList, listType);
             Type curLatLngType = new TypeToken<LatLng>() {}.getType();
-            curLatLng = gson.fromJson(gsonLatLng, curLatLngType);
+            LatLng curLatLng = gson.fromJson(gsonLatLng, curLatLngType);
             placeList = NearbyController.loadAttractionsFromLocationToPlaces(curLatLng, placeList);
         }
         if (savedInstanceState == null) {

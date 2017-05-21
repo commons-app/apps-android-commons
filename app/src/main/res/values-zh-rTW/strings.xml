@@ -7,7 +7,7 @@
   <string name="login">登入</string>
   <string name="signup">註冊</string>
   <string name="logging_in_title">登入中</string>
-  <string name="logging_in_message">請稍候...</string>
+  <string name="logging_in_message">請稍候…</string>
   <string name="login_success">登入成功！</string>
   <string name="login_failed">登入失敗！</string>
   <string name="upload_failed">找不到檔案。請嘗試其它檔案看看。</string>
@@ -83,7 +83,7 @@
   <string name="menu_feedback">傳送回饋 （通過電子郵件）</string>
   <string name="no_email_client">未安裝電子郵件客戶端</string>
   <string name="provider_categories">最近使用過的分類</string>
-  <string name="waiting_first_sync">等待首次同步…</string>
+  <string name="waiting_first_sync" fuzzy="true">等待首次同步…</string>
   <string name="no_uploads_yet">您尚未上傳任何照片。</string>
   <string name="menu_retry_upload">重試</string>
   <string name="menu_cancel_upload">取消</string>
@@ -130,7 +130,7 @@
   <string name="welcome_final_text">您明白了嗎？</string>
   <string name="welcome_final_button_text">是！</string>
   <string name="detail_panel_cats_label">分類</string>
-  <string name="detail_panel_cats_loading">載入中…</string>
+  <string name="detail_panel_cats_loading" fuzzy="true">載入中…</string>
   <string name="detail_panel_cats_none">未選擇</string>
   <string name="detail_description_empty">無說明</string>
   <string name="detail_license_empty">未知許可</string>
@@ -153,9 +153,6 @@
   <string name="become_a_tester_description">選擇加入我們在 Google Play 上的 beta channel 來早期獲得新功能並修正程式臭蟲</string>
   <string name="use_wikidata">使用維基數據</string>
   <string name="use_wikidata_summary">（警告：停用此項可能會導致耗費大量行動數據）</string>
-  <string name="map_theme_light">mapbox://styles/mapbox/traffic-day-v2</string>
-  <string name="map_theme_dark">mapbox://styles/mapbox/traffic-night-v2</string>
-  <string name="mapbox_commons_app_token">pk.eyJ1IjoibWFza2FyYXZpdmVrIiwiYSI6ImNqMmxvdzFjMTAwMHYzM283ZWM3eW5tcDAifQ.ib5SZ9EVjwJe6GSKve0bcg</string>
   <string name="_2fa_code">雙重因素認證代碼</string>
   <string name="number_of_uploads">我的最近上傳限制</string>
   <string name="maximum_limit">最大限制</string>
@@ -163,6 +160,20 @@
   <string name="set_limit">設定最近上傳限制</string>
   <string name="login_failed_2fa_not_supported">雙重因素認證目前不支援。</string>
   <string name="logout_verification">你真的想要登出嗎？</string>
+  <string name="commons_logo">共享資源標誌</string>
+  <string name="background_image">背景圖片</string>
+  <string name="mediaimage_failed">多媒體圖片失敗</string>
+  <string name="no_image_found">找不到圖片</string>
+  <string name="upload_image">上傳圖片</string>
+  <string name="welcome_image_mount_zao">藏王連峰</string>
+  <string name="welcome_image_llamas">大羊駝</string>
+  <string name="welcome_image_rainbow_bridge">彩虹橋</string>
+  <string name="welcome_image_tulip">鬱金香</string>
+  <string name="welcome_image_no_selfies">沒有自拍</string>
+  <string name="welcome_image_proprietary">專有圖片</string>
+  <string name="welcome_image_welcome_wikipedia">歡迎維基百科</string>
+  <string name="welcome_image_welcome_copyright">歡迎版權</string>
+  <string name="welcome_image_sydney_opera_house">雪梨歌劇院</string>
   <string name="cancel">取消</string>
   <string name="navigation_drawer_open">開啟</string>
   <string name="navigation_drawer_close">關閉</string>
@@ -173,4 +184,6 @@
   <string name="navigation_item_settings">設定</string>
   <string name="navigation_item_feedback">意見回饋</string>
   <string name="navigation_item_logout">登出</string>
+  <string name="nearby_info_menu_commons_article">共享資源條目</string>
+  <string name="nearby_info_menu_wikidata_article">維基數據條目</string>
 </resources>

@@ -130,7 +130,7 @@
   <string name="welcome_final_text">Verstanden?</string>
   <string name="welcome_final_button_text">Ja!</string>
   <string name="detail_panel_cats_label">Kategorien</string>
-  <string name="detail_panel_cats_loading">Lade …</string>
+  <string name="detail_panel_cats_loading" fuzzy="true">Lade …</string>
   <string name="detail_panel_cats_none">Keine ausgewählt</string>
   <string name="detail_description_empty">Keine Beschreibung</string>
   <string name="detail_license_empty">Unbekannte Lizenz</string>
@@ -153,9 +153,6 @@
   <string name="become_a_tester_description">Melde dich bei unserem Beta-Kanal auf Google Play an und erhalte frühen Zugriff auf neue Funktionen und Fehlerbehebungen</string>
   <string name="use_wikidata">Wikidata verwenden</string>
   <string name="use_wikidata_summary">(Warnung: Die Deaktivierung kann einen hohen Verbrauch an mobilen Daten verursachen)</string>
-  <string name="map_theme_light">mapbox://styles/mapbox/traffic-day-v2</string>
-  <string name="map_theme_dark">mapbox://styles/mapbox/traffic-night-v2</string>
-  <string name="mapbox_commons_app_token">pk.eyJ1IjoibWFza2FyYXZpdmVrIiwiYSI6ImNqMmxvdzFjMTAwMHYzM283ZWM3eW5tcDAifQ.ib5SZ9EVjwJe6GSKve0bcg</string>
   <string name="_2fa_code">2FA-Code</string>
   <string name="number_of_uploads">Meine Grenze für kürzlich hochgeladene Dateien</string>
   <string name="maximum_limit">Maximale Grenze</string>
@@ -163,6 +160,20 @@
   <string name="set_limit">Grenze für kürzlich hochgeladene Dateien festlegen</string>
   <string name="login_failed_2fa_not_supported">Die Zwei-Faktor-Authentifikation wird derzeit nicht unterstützt.</string>
   <string name="logout_verification">Möchtest du dich wirklich abmelden?</string>
+  <string name="commons_logo">Commons-Logo</string>
+  <string name="background_image">Hintergrundbild</string>
+  <string name="mediaimage_failed">Medienbild fehlgeschlagen</string>
+  <string name="no_image_found">Kein Bild gefunden</string>
+  <string name="upload_image">Bild hochladen</string>
+  <string name="welcome_image_mount_zao">Zaō</string>
+  <string name="welcome_image_llamas">Lamas</string>
+  <string name="welcome_image_rainbow_bridge">Rainbow Bridge</string>
+  <string name="welcome_image_tulip">Tulpe</string>
+  <string name="welcome_image_no_selfies">Keine Selfies</string>
+  <string name="welcome_image_proprietary">Geschütztes Bild</string>
+  <string name="welcome_image_welcome_wikipedia">Willkommen Wikipedia</string>
+  <string name="welcome_image_welcome_copyright">Willkommen Urheberrecht</string>
+  <string name="welcome_image_sydney_opera_house">Sydney Opera House</string>
   <string name="cancel">Abbrechen</string>
   <string name="navigation_drawer_open">Öffnen</string>
   <string name="navigation_drawer_close">Schließen</string>
@@ -173,4 +184,6 @@
   <string name="navigation_item_settings">Einstellungen</string>
   <string name="navigation_item_feedback">Rückmeldungen</string>
   <string name="navigation_item_logout">Abmelden</string>
+  <string name="nearby_info_menu_commons_article">Commons-Artikel</string>
+  <string name="nearby_info_menu_wikidata_article">Wikidata-Artikel</string>
 </resources>

@@ -7,7 +7,7 @@
   <string name="login">Mlebu log</string>
   <string name="signup">Dhaftar</string>
   <string name="logging_in_title">Lagi mlebu log</string>
-  <string name="logging_in_message">Entènana sadhela...</string>
+  <string name="logging_in_message">Entènana sadhela…</string>
   <string name="login_success">Kasil mlebu log!</string>
   <string name="login_failed">Wurung mlebu log!</string>
   <string name="upload_failed">Barkas ora katemu. Jajalana barkas liyané.</string>
@@ -73,7 +73,7 @@
   <string name="menu_feedback">Kirim Pamrayoga (lumantar Layang-Èl)</string>
   <string name="no_email_client">Ora ana klièn layang-èl sing dipasang</string>
   <string name="provider_categories">Kategori sing mentas dianggo</string>
-  <string name="waiting_first_sync">Nunggu sinkronisasi pisanan...</string>
+  <string name="waiting_first_sync">Nunggu sinkronisasi pisanan…</string>
   <string name="no_uploads_yet">Panjenengan durung tau ngunggah foto.</string>
   <string name="menu_retry_upload">Jajal manèh</string>
   <string name="menu_cancel_upload">Wurung</string>
@@ -107,7 +107,7 @@
   <string name="welcome_final_text">Panjenengan sumerep, ta?</string>
   <string name="welcome_final_button_text">Iya!</string>
   <string name="detail_panel_cats_label">Kategori</string>
-  <string name="detail_panel_cats_loading">Ngamot...</string>
+  <string name="detail_panel_cats_loading">Ngamot…</string>
   <string name="detail_panel_cats_none">Ora ana sing dipilih</string>
   <string name="detail_description_empty">Tanpa katerangan</string>
   <string name="detail_license_empty">Lisènsi ora kaweruhan</string>
@@ -127,9 +127,6 @@
   <string name="media_detail_uploaded_date">Tanggal ngunggah</string>
   <string name="become_a_tester_title">Dadi Pangetès Béta</string>
   <string name="use_wikidata">Anggo Wikidata</string>
-  <string name="map_theme_light">mapbox://styles/mapbox/traffic-day-v2</string>
-  <string name="map_theme_dark">mapbox://styles/mapbox/traffic-night-v2</string>
-  <string name="mapbox_commons_app_token">pk.eyJ1IjoibWFza2FyYXZpdmVrIiwiYSI6ImNqMmxvdzFjMTAwMHYzM283ZWM3eW5tcDAifQ.ib5SZ9EVjwJe6GSKve0bcg</string>
   <string name="_2fa_code">Kodhe 2FA</string>
   <string name="number_of_uploads">Watesan Unggahan Anyarku</string>
   <string name="maximum_limit">Watesan Akèh Dhéwé</string>
