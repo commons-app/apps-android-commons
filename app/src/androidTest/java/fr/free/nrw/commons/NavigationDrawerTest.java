@@ -13,9 +13,12 @@ import org.junit.runner.RunWith;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.contrib.DrawerActions.open;
+import static android.support.test.espresso.contrib.DrawerActions.close;
 import static android.support.test.espresso.contrib.DrawerMatchers.isClosed;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
 @RunWith(AndroidJUnit4.class)
@@ -32,6 +35,23 @@ public class NavigationDrawerTest {
         onView(withId(R.id.drawer_layout))
                 .check(matches(isClosed(Gravity.LEFT)))
                 .perform(open());
+
+        //test the settings fragment is displayed
+        onView(withId(R.id.settings_item)).perform(click());
+        onView(withId(R.id.settingsFragment)).check(matches(isDisplayed()));
+
+        onView(withId(R.id.drawer_layout))
+                .perform(close());
+
+        //test the nearby item fragment is displayed
+        onView(withId(R.id.drawer_layout))
+                .perform(open());
+        onView(withId(R.id.nearby_item)).perform(click());
+        onView(withId(R.id.listView)).check(matches(isDisplayed()));
+
+        onView(withId(R.id.drawer_layout))
+                .perform(close());
+
 
     }
 
