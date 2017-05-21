@@ -130,7 +130,7 @@
   <string name="welcome_final_text">Myslíte, že rozumíte?</string>
   <string name="welcome_final_button_text">Ano!</string>
   <string name="detail_panel_cats_label">Kategorie</string>
-  <string name="detail_panel_cats_loading">Načítá se…</string>
+  <string name="detail_panel_cats_loading" fuzzy="true">Načítá se…</string>
   <string name="detail_panel_cats_none">Nevybrány</string>
   <string name="detail_description_empty">Bez popisu</string>
   <string name="detail_license_empty">Neznámá licence</string>
@@ -153,9 +153,6 @@
   <string name="become_a_tester_description">Přihlásit se do našeho beta kanálu na Google Play a dostávat včasný přístup k novinkám a opravám chyb</string>
   <string name="use_wikidata">Použít Wikidata</string>
   <string name="use_wikidata_summary">(Varování: vypnutí tohoto režimu může vést k velké spotřebě dat)</string>
-  <string name="map_theme_light">mapbox://styles/mapbox/traffic-day-v2</string>
-  <string name="map_theme_dark">mapbox://styles/mapbox/traffic-night-v2</string>
-  <string name="mapbox_commons_app_token">pk.eyJ1IjoibWFza2FyYXZpdmVrIiwiYSI6ImNqMmxvdzFjMTAwMHYzM283ZWM3eW5tcDAifQ.ib5SZ9EVjwJe6GSKve0bcg</string>
   <string name="_2fa_code">Kód pro dvoufázové ověření (2FA)</string>
   <string name="number_of_uploads">Můj limit zobrazených souborů</string>
   <string name="maximum_limit">Maximum</string>

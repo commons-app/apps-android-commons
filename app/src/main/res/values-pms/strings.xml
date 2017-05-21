@@ -20,11 +20,11 @@
   <string name="upload_progress_notification_title_finishing">Fin dël cariament %1$s</string>
   <string name="upload_failed_notification_title">Cariament falì a %1$s</string>
   <string name="upload_failed_notification_subtitle">Sgnaché për ësmon-e</string>
-  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
-    <item quantity="one">1 archivi an camin ch\'as caria</item>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%d archivi an camin ch\'as caria</item>
     <item quantity="other">%d archivi an camin ch\'as cario</item>
   </plurals>
-  <string name="title_activity_contributions" fuzzy="true">Ij mè cariament</string>
+  <string name="title_activity_contributions">Ij mè cariament recent</string>
   <string name="contribution_state_queued">An coa</string>
   <string name="contribution_state_failed">Falì</string>
   <string name="contribution_state_in_progress">%1$d%% completà</string>
@@ -42,6 +42,7 @@
   <string name="login_failed_password">Impossìbil rintré ant ël sistema - për piasì, ch\'a contròla soa ciav</string>
   <string name="login_failed_throttled">Tròpi tentativ falì. Për piasì, ch\'a preuva torna da-sì chèiche minute.</string>
   <string name="login_failed_blocked">An dëspias, s\'utent-sì a l\'é stàit blocà ansima a Commons</string>
+  <string name="login_failed_2fa_needed">A dev fornì sò còdes d\'autentificassion a doi fator.</string>
   <string name="login_failed_generic">Falì a rintré ant ël sistema</string>
   <string name="share_upload_button">Carié</string>
   <string name="multiple_share_base_title">Deje un nòm a s\'ansem</string>
@@ -50,6 +51,8 @@
   <string name="categories_search_text_hint">Sërché dle categorìe</string>
   <string name="menu_save_categories">Argistré</string>
   <string name="refresh_button">Agiorné</string>
+  <string name="gps_disabled">Ël GPS a l\'é disabilità su sò angign. Veul-lo ativelo?</string>
+  <string name="enable_gps">Ativé ël GPS</string>
   <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Ancor gnun cariament</item>
     <item quantity="one">1 cariament</item>

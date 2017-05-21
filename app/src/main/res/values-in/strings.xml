@@ -113,7 +113,7 @@
   <string name="welcome_final_text">Apakah Anda paham?</string>
   <string name="welcome_final_button_text">Ya!</string>
   <string name="detail_panel_cats_label">Kategori</string>
-  <string name="detail_panel_cats_loading">Memuat…</string>
+  <string name="detail_panel_cats_loading" fuzzy="true">Memuat…</string>
   <string name="detail_panel_cats_none">Tidak ada yang dipilih</string>
   <string name="detail_description_empty">Tidak ada keterangan</string>
   <string name="detail_license_empty">Lisensi tidak diketahui</string>

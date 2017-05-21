@@ -63,7 +63,7 @@
   <string name="license_name_cc_zero">CC صفر</string>
   <string name="welcome_final_button_text">هو</string>
   <string name="detail_panel_cats_label">وېشنيزې</string>
-  <string name="detail_panel_cats_loading">برسېرېدنې کې دی…</string>
+  <string name="detail_panel_cats_loading" fuzzy="true">برسېرېدنې کې دی…</string>
   <string name="ok">ښه</string>
   <string name="yes">هو</string>
   <string name="no">نه</string>

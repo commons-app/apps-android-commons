@@ -153,9 +153,6 @@
   <string name="become_a_tester_description">Пријавете се на нашиот бета-канал на Google Play и добивајте ран пристап до нови можности и исправки на грешки</string>
   <string name="use_wikidata">Користи Википодатоци</string>
   <string name="use_wikidata_summary">(Предупредување: исклучувањето може да доведе до голема потрошувачка на мобилни податоци)</string>
-  <string name="map_theme_light">mapbox://styles/mapbox/traffic-day-v2</string>
-  <string name="map_theme_dark">mapbox://styles/mapbox/traffic-night-v2</string>
-  <string name="mapbox_commons_app_token">pk.eyJ1IjoibWFza2FyYXZpdmVrIiwiYSI6ImNqMmxvdzFjMTAwMHYzM283ZWM3eW5tcDAifQ.ib5SZ9EVjwJe6GSKve0bcg</string>
   <string name="_2fa_code">2ЧЗ-код</string>
   <string name="number_of_uploads">Мое ограничување на скорешните подигања</string>
   <string name="maximum_limit">Крајна граница</string>
@@ -163,6 +160,20 @@
   <string name="set_limit">Задај ограничување на скорешни подигања</string>
   <string name="login_failed_2fa_not_supported">Двочинителската заверка засега не е поддржана.</string>
   <string name="logout_verification">Дали навистина сакате да се одјавите?</string>
+  <string name="commons_logo">Лого на Ризницата</string>
+  <string name="background_image">Заднинска слика</string>
+  <string name="mediaimage_failed">Сликата не успеа</string>
+  <string name="no_image_found">Не најдов слики</string>
+  <string name="upload_image">Подигни слика</string>
+  <string name="welcome_image_mount_zao">Зао</string>
+  <string name="welcome_image_llamas">Лами</string>
+  <string name="welcome_image_rainbow_bridge">Виножитен мост</string>
+  <string name="welcome_image_tulip">Лале</string>
+  <string name="welcome_image_no_selfies">Без самослици</string>
+  <string name="welcome_image_proprietary">Сопственичка слика</string>
+  <string name="welcome_image_welcome_wikipedia">Добре дојде Википедија</string>
+  <string name="welcome_image_welcome_copyright">Добре дојде Авторски права</string>
+  <string name="welcome_image_sydney_opera_house">Сиднејска опера</string>
   <string name="cancel">Откажи</string>
   <string name="navigation_drawer_open">Отвори</string>
   <string name="navigation_drawer_close">Затвори</string>
@@ -173,4 +184,6 @@
   <string name="navigation_item_settings">Нагодувања</string>
   <string name="navigation_item_feedback">Мислења</string>
   <string name="navigation_item_logout">Одјава</string>
+  <string name="nearby_info_menu_commons_article">Статија на Ризницата</string>
+  <string name="nearby_info_menu_wikidata_article">Статија на Википодатоците</string>
 </resources>

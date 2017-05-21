@@ -7,7 +7,7 @@
   <string name="login">Увійти</string>
   <string name="signup">Зареєструватися</string>
   <string name="logging_in_title">Вхід до системи</string>
-  <string name="logging_in_message">Будь ласка, зачекайте…</string>
+  <string name="logging_in_message" fuzzy="true">Будь ласка, зачекайте…</string>
   <string name="login_success">Ви успішно увійшли!</string>
   <string name="login_failed">Не вдалося увійти</string>
   <string name="upload_failed">Файл не знайдено. Будь ласка, спробуйте інший файл.</string>
@@ -83,7 +83,7 @@
   <string name="menu_feedback">Надіслати відгук (електронною поштою)</string>
   <string name="no_email_client">Не встановлено програми електронної пошти</string>
   <string name="provider_categories">Недавно використані категорії</string>
-  <string name="waiting_first_sync">Очікується перша синхронізація…</string>
+  <string name="waiting_first_sync" fuzzy="true">Очікується перша синхронізація…</string>
   <string name="no_uploads_yet">Ви ще не завантажили жодної світлини.</string>
   <string name="menu_retry_upload">Повторити</string>
   <string name="menu_cancel_upload">Скасувати</string>
@@ -130,7 +130,7 @@
   <string name="welcome_final_text">Ви це зрозуміли?</string>
   <string name="welcome_final_button_text">Так!</string>
   <string name="detail_panel_cats_label">Категорії</string>
-  <string name="detail_panel_cats_loading">Вантажиться…</string>
+  <string name="detail_panel_cats_loading" fuzzy="true">Вантажиться…</string>
   <string name="detail_panel_cats_none">Нічого не обрано</string>
   <string name="detail_description_empty">Немає опису</string>
   <string name="detail_license_empty">Невідома ліцензія</string>

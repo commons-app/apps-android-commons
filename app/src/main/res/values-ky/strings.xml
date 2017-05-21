@@ -102,7 +102,7 @@
   <string name="welcome_final_text">Сизге бул түшүнүктүүбү?</string>
   <string name="welcome_final_button_text">Ооба!</string>
   <string name="detail_panel_cats_label">Түрмөктөр</string>
-  <string name="detail_panel_cats_loading">Жүктөлүүдө…</string>
+  <string name="detail_panel_cats_loading" fuzzy="true">Жүктөлүүдө…</string>
   <string name="detail_panel_cats_none">Тандалган жок</string>
   <string name="menu_refresh">Жаңылоо</string>
 </resources>

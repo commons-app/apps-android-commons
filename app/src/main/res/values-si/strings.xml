@@ -105,7 +105,7 @@
   <string name="tutorial_4_text">උදාහරණ උඩුගත කිරීම:</string>
   <string name="welcome_final_button_text">ඔව්!</string>
   <string name="detail_panel_cats_label">ප්‍රවර්ග</string>
-  <string name="detail_panel_cats_loading">ප්‍රවේශනය වෙමින් පවතී…</string>
+  <string name="detail_panel_cats_loading" fuzzy="true">ප්‍රවේශනය වෙමින් පවතී…</string>
   <string name="detail_panel_cats_none">කිසිවක් තෝරාගෙන නැත</string>
   <string name="detail_description_empty">විස්තරයක් නැත</string>
   <string name="detail_license_empty">නොදන්නා බලපත්‍රය</string>

@@ -6,7 +6,7 @@
   <string name="password">Passwort</string>
   <string name="login">Oonmelde</string>
   <string name="logging_in_title">Oonmelde</string>
-  <string name="logging_in_message">Bittschön woorte …</string>
+  <string name="logging_in_message" fuzzy="true">Bittschön woorte …</string>
   <string name="login_success">Oonmeldung erfollichreich!</string>
   <string name="login_failed">Oonmeldung fehlgeschlooht!</string>
   <string name="authentication_failed">Authentifizierung fehlgeschlooht!</string>
@@ -55,7 +55,7 @@
   <string name="title_activity_about">Üwer</string>
   <string name="menu_feedback">Rückmeldung doorrich E-Mail schicke</string>
   <string name="provider_categories">Keerzlich verwennete Kategorie</string>
-  <string name="waiting_first_sync">Warte uff die earschte Synchronisierung …</string>
+  <string name="waiting_first_sync" fuzzy="true">Warte uff die earschte Synchronisierung …</string>
   <string name="no_uploads_yet">Du host noch keh Fotos hochgelood.</string>
   <string name="menu_retry_upload">Wieder erneit versuche</string>
   <string name="menu_cancel_upload">Abbreche</string>
@@ -85,7 +85,7 @@
   <string name="welcome_final_text">Verstand?</string>
   <string name="welcome_final_button_text">Jo</string>
   <string name="detail_panel_cats_label">Kategoriee</string>
-  <string name="detail_panel_cats_loading">Am loode …</string>
+  <string name="detail_panel_cats_loading" fuzzy="true">Am loode …</string>
   <string name="detail_panel_cats_none">Ken ausgewählt</string>
   <string name="detail_description_empty">Ken Beschreibung</string>
   <string name="detail_license_empty">Unbekannte Lizenz</string>

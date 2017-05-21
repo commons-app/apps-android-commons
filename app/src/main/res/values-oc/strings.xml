@@ -75,7 +75,7 @@
   <string name="menu_feedback">Mandar vòstres comentaris (per corrièl)</string>
   <string name="no_email_client">Cap de client de corrièl pas installat</string>
   <string name="provider_categories">Categorias utilizadas recentament</string>
-  <string name="waiting_first_sync">Espèra de primièra sincronizacion…</string>
+  <string name="waiting_first_sync" fuzzy="true">Espèra de primièra sincronizacion…</string>
   <string name="no_uploads_yet">Avètz pas encara telecargat cap de fòto.</string>
   <string name="menu_retry_upload">Tornar ensajar</string>
   <string name="menu_cancel_upload">Anullar</string>

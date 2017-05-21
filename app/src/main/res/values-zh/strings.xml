@@ -153,9 +153,6 @@
   <string name="become_a_tester_description">加入我们在Google Play上的测试频道，并更早获取新功能以及错误修复</string>
   <string name="use_wikidata">使用维基数据</string>
   <string name="use_wikidata_summary">（警告：禁用此功能可能导致大量的移动数据流量费用）</string>
-  <string name="map_theme_light">mapbox://styles/mapbox/traffic-day-v2</string>
-  <string name="map_theme_dark">mapbox://styles/mapbox/traffic-night-v2</string>
-  <string name="mapbox_commons_app_token">pk.eyJ1IjoibWFza2FyYXZpdmVrIiwiYSI6ImNqMmxvdzFjMTAwMHYzM283ZWM3eW5tcDAifQ.ib5SZ9EVjwJe6GSKve0bcg</string>
   <string name="_2fa_code">2FA代码</string>
   <string name="number_of_uploads">我的最近上传限制</string>
   <string name="maximum_limit">最大限制</string>
@@ -163,6 +160,20 @@
   <string name="set_limit">设置最近上传限制</string>
   <string name="login_failed_2fa_not_supported">目前不支持双因素验证。</string>
   <string name="logout_verification">您真的想要退出么？</string>
+  <string name="commons_logo">共享资源标志</string>
+  <string name="background_image">背景图片</string>
+  <string name="mediaimage_failed">媒体图片失败</string>
+  <string name="no_image_found">找不到图片</string>
+  <string name="upload_image">上传图片</string>
+  <string name="welcome_image_mount_zao">藏王连峰</string>
+  <string name="welcome_image_llamas">大羊驼</string>
+  <string name="welcome_image_rainbow_bridge">彩虹桥</string>
+  <string name="welcome_image_tulip">郁金香</string>
+  <string name="welcome_image_no_selfies">没有自拍</string>
+  <string name="welcome_image_proprietary">专有图片</string>
+  <string name="welcome_image_welcome_wikipedia">欢迎维基百科</string>
+  <string name="welcome_image_welcome_copyright">欢迎版权</string>
+  <string name="welcome_image_sydney_opera_house">悉尼歌剧院</string>
   <string name="cancel">取消</string>
   <string name="navigation_drawer_open">打开</string>
   <string name="navigation_drawer_close">关闭</string>
@@ -173,4 +184,6 @@
   <string name="navigation_item_settings">设置</string>
   <string name="navigation_item_feedback">反馈</string>
   <string name="navigation_item_logout">退出</string>
+  <string name="nearby_info_menu_commons_article">共享资源条目</string>
+  <string name="nearby_info_menu_wikidata_article">维基数据条目</string>
 </resources>

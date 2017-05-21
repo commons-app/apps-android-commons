@@ -7,7 +7,7 @@
   <string name="login">Se connecter</string>
   <string name="signup">S’inscrire</string>
   <string name="logging_in_title">Connexion</string>
-  <string name="logging_in_message">Veuillez patienter…</string>
+  <string name="logging_in_message" fuzzy="true">Veuillez patienter…</string>
   <string name="login_success">Connexion réussie !</string>
   <string name="login_failed">Échec de la connexion !</string>
   <string name="upload_failed">Fichier non trouvé. Veuillez en essayer un autre.</string>
@@ -83,7 +83,7 @@
   <string name="menu_feedback">Envoyer vos commentaires (par courriel)</string>
   <string name="no_email_client">Aucun client de courriel installé</string>
   <string name="provider_categories">Catégories utilisées récemment</string>
-  <string name="waiting_first_sync">Attente de première synchronisation…</string>
+  <string name="waiting_first_sync" fuzzy="true">Attente de première synchronisation…</string>
   <string name="no_uploads_yet">Vous n’avez pas encore téléchargé de photo.</string>
   <string name="menu_retry_upload">Réessayer</string>
   <string name="menu_cancel_upload">Annuler</string>
@@ -130,7 +130,7 @@
   <string name="welcome_final_text">Vous pensez que c’est bon ?</string>
   <string name="welcome_final_button_text">Oui !</string>
   <string name="detail_panel_cats_label">Catégories</string>
-  <string name="detail_panel_cats_loading">Chargement…</string>
+  <string name="detail_panel_cats_loading" fuzzy="true">Chargement…</string>
   <string name="detail_panel_cats_none">Aucune catégorie sélectionnée</string>
   <string name="detail_description_empty">Aucune description</string>
   <string name="detail_license_empty">Licence inconnue</string>
@@ -153,9 +153,6 @@
   <string name="become_a_tester_description">S’inscrire à notre canal bêta sur Google Play et obtenir un accès anticipé aux nouvelles fonctionnalités et corrections de bogue</string>
   <string name="use_wikidata">Utiliser Wikidata</string>
   <string name="use_wikidata_summary">(Attention : désactiver cela pourrait provoquer une consommation importante de données par mobile)</string>
-  <string name="map_theme_light">mapbox://styles/mapbox/traffic-day-v2</string>
-  <string name="map_theme_dark">mapbox://styles/mapbox/traffic-night-v2</string>
-  <string name="mapbox_commons_app_token">pk.eyJ1IjoibWFza2FyYXZpdmVrIiwiYSI6ImNqMmxvdzFjMTAwMHYzM283ZWM3eW5tcDAifQ.ib5SZ9EVjwJe6GSKve0bcg</string>
   <string name="_2fa_code">Code 2FA</string>
   <string name="number_of_uploads">Ma limite de téléversements récents</string>
   <string name="maximum_limit">Limite maximale</string>

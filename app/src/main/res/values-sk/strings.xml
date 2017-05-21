@@ -106,7 +106,7 @@
   <string name="welcome_final_text">Myslíte, že rozumiete?</string>
   <string name="welcome_final_button_text">Áno!</string>
   <string name="detail_panel_cats_label">Kategórie</string>
-  <string name="detail_panel_cats_loading">Načítava sa…</string>
+  <string name="detail_panel_cats_loading" fuzzy="true">Načítava sa…</string>
   <string name="detail_panel_cats_none">Nič nebolo vybrané</string>
   <string name="detail_description_empty">Bez popisu</string>
   <string name="detail_license_empty">Neznáma licencia</string>

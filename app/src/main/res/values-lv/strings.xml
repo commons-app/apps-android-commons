@@ -57,7 +57,7 @@
   <string name="welcome_final_text">Jums šķiet, ka sapratāt?</string>
   <string name="welcome_final_button_text">Jā!</string>
   <string name="detail_panel_cats_label">Kategorijas</string>
-  <string name="detail_panel_cats_loading">Ielādē…</string>
+  <string name="detail_panel_cats_loading" fuzzy="true">Ielādē…</string>
   <string name="detail_description_empty">Nav apraksta</string>
   <string name="detail_license_empty">Nezināma licence</string>
   <string name="menu_refresh">Atjaunināt</string>

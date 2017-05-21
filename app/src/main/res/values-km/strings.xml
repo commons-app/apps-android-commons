@@ -85,7 +85,7 @@
   <string name="welcome_final_text">តើលោកអ្នកយល់ហើយ?</string>
   <string name="welcome_final_button_text">បាទ/ចាស៎!</string>
   <string name="detail_panel_cats_label">ចំណាត់ថ្នាក់ក្រុម</string>
-  <string name="detail_panel_cats_loading">កំពុងផ្ទុក…</string>
+  <string name="detail_panel_cats_loading" fuzzy="true">កំពុងផ្ទុក…</string>
   <string name="detail_panel_cats_none">គ្មានអ្វីត្រូវបានជ្រើសយកទេ</string>
   <string name="detail_description_empty">គ្មាន​ការ​ពណ៌នា</string>
   <string name="detail_license_empty">Unknown license</string>

@@ -124,7 +124,7 @@
   <string name="welcome_final_text">이해하셨습니까?</string>
   <string name="welcome_final_button_text">예!</string>
   <string name="detail_panel_cats_label">분류</string>
-  <string name="detail_panel_cats_loading">불러오는 중…</string>
+  <string name="detail_panel_cats_loading" fuzzy="true">불러오는 중…</string>
   <string name="detail_panel_cats_none">선택하지 않음</string>
   <string name="detail_description_empty">설명 없음</string>
   <string name="detail_license_empty">알 수 없는 라이선스</string>
@@ -145,9 +145,6 @@
   <string name="become_a_tester_title">베타 테스터가 되세요</string>
   <string name="use_wikidata">위키데이터 사용</string>
   <string name="use_wikidata_summary">(경고: 이것을 끄면 대량의 모바일 데이터를 소비할 수 있습니다)</string>
-  <string name="map_theme_light">mapbox://styles/mapbox/traffic-day-v2</string>
-  <string name="map_theme_dark">mapbox://styles/mapbox/traffic-night-v2</string>
-  <string name="mapbox_commons_app_token">pk.eyJ1IjoibWFza2FyYXZpdmVrIiwiYSI6ImNqMmxvdzFjMTAwMHYzM283ZWM3eW5tcDAifQ.ib5SZ9EVjwJe6GSKve0bcg</string>
   <string name="_2fa_code">2FA 코드</string>
   <string name="number_of_uploads">내 최근 업로드 제한</string>
   <string name="maximum_limit">최대 제한</string>

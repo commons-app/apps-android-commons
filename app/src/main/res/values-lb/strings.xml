@@ -7,7 +7,7 @@
   <string name="login">Aloggen</string>
   <string name="signup">Schreift Iech an</string>
   <string name="logging_in_title">Aloggen</string>
-  <string name="logging_in_message">Waart w.e.g. …</string>
+  <string name="logging_in_message" fuzzy="true">Waart w.e.g. …</string>
   <string name="login_success">Umeldung huet geklappt!</string>
   <string name="login_failed">D\'Aloggen huet net funktionéiert</string>
   <string name="upload_failed">Fichier net fonnt. probéiert w.e.g. en anere Fichier.</string>
@@ -151,7 +151,6 @@
   <string name="become_a_tester_description">Schreift Iech op GooglePlay a fir eise Beta-Kanal a kritt fréi Zougang zu neie Funktiounen a Verbesserunge vu Feeler</string>
   <string name="use_wikidata">Wikidata benotzen</string>
   <string name="use_wikidata_summary">(Opgepasst: D\'Ausschalte kann zu engem héije mobilen Date-Konsum féieren)</string>
-  <string name="mapbox_commons_app_token">pk.eyJ1IjoibWFza2FyYXZpdmVrIiwiYSI6ImNqMmxvdzFjMTAwMHYzM283ZWM3eW5tcDAifQ.ib5SZ9EVjwJe6GSKve0bcg</string>
   <string name="_2fa_code">2FA-Code</string>
   <string name="maximum_limit">Maximal Limite</string>
   <string name="maximum_limit_alert">Et kënnen der net méi wéi 500 gewise ginn</string>

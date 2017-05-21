@@ -7,7 +7,7 @@
   <string name="login">Cı kewe</string>
   <string name="signup">Qeyd be</string>
   <string name="logging_in_title">Cıkewtış</string>
-  <string name="logging_in_message">Tay bıpawe</string>
+  <string name="logging_in_message" fuzzy="true">Tay bıpawe</string>
   <string name="login_success">Cıkewtış hewl bi.</string>
   <string name="login_failed">Nidekeweya de</string>
   <string name="upload_failed">Dosya nêvineya. Dosyê da bine bıcerebnê.</string>

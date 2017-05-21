@@ -123,7 +123,7 @@
   <string name="welcome_final_text">توھان سمجھو ٿا توھان سمجھي ويئو؟</string>
   <string name="welcome_final_button_text">ھا!</string>
   <string name="detail_panel_cats_label">زمرا</string>
-  <string name="detail_panel_cats_loading">اتاريندي…</string>
+  <string name="detail_panel_cats_loading" fuzzy="true">اتاريندي…</string>
   <string name="detail_panel_cats_none">ڪوبہ چونڊيل ناھي</string>
   <string name="detail_description_empty">ڪا تشريح ناھي</string>
   <string name="detail_license_empty">اڻڄاتل لائسنس</string>

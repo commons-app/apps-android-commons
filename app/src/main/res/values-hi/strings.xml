@@ -144,8 +144,5 @@
   <string name="media_detail_description">विवरण</string>
   <string name="become_a_tester_title">बीटा परीक्षक बनें</string>
   <string name="use_wikidata">विकिडेटा का प्रयोग करें</string>
-  <string name="map_theme_light">mapbox://styles/mapbox/traffic-day-v2</string>
-  <string name="map_theme_dark">mapbox://styles/mapbox/traffic-night-v2</string>
-  <string name="mapbox_commons_app_token">pk.eyJ1IjoibWFza2FyYXZpdmVrIiwiYSI6ImNqMmxvdzFjMTAwMHYzM283ZWM3eW5tcDAifQ.ib5SZ9EVjwJe6GSKve0bcg</string>
   <string name="maximum_limit">अधिकतम सीमा</string>
 </resources>

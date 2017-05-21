@@ -7,7 +7,7 @@
   <string name="login">Đăng nhập</string>
   <string name="signup">Mở tài khoản</string>
   <string name="logging_in_title">Đang đăng nhập</string>
-  <string name="logging_in_message">Vui lòng chờ…</string>
+  <string name="logging_in_message" fuzzy="true">Vui lòng chờ…</string>
   <string name="login_success">Đã đăng nhập thành công!</string>
   <string name="login_failed">Đăng nhập thất bại!</string>
   <string name="upload_failed">Không tìm thấy tập tin. Xin vui lòng thử tập tin khác.</string>
@@ -69,7 +69,7 @@
   <string name="menu_feedback">Gửi Phản hồi (qua Thư điện tử)</string>
   <string name="no_email_client">Không có chương trình thư điện tử nào được cài đặt</string>
   <string name="provider_categories">Thể loại được sử dụng gần đây</string>
-  <string name="waiting_first_sync">Đang chờ đồng bộ lần đầu tiên…</string>
+  <string name="waiting_first_sync" fuzzy="true">Đang chờ đồng bộ lần đầu tiên…</string>
   <string name="no_uploads_yet">Bạn chưa tải lên hình nào.</string>
   <string name="menu_retry_upload">Thử lại</string>
   <string name="menu_cancel_upload">Hủy bỏ</string>
@@ -116,7 +116,7 @@
   <string name="welcome_final_text">Bạn hiểu rồi chứ?</string>
   <string name="welcome_final_button_text">Có!</string>
   <string name="detail_panel_cats_label">Thể loại</string>
-  <string name="detail_panel_cats_loading">Đang tải…</string>
+  <string name="detail_panel_cats_loading" fuzzy="true">Đang tải…</string>
   <string name="detail_panel_cats_none">Chưa chọn</string>
   <string name="detail_description_empty">Không miêu tả</string>
   <string name="detail_license_empty">Giấy phép không rõ</string>
