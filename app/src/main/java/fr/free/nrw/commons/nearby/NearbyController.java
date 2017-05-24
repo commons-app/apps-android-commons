@@ -84,14 +84,20 @@ public class NearbyController {
      *Loads attractions from location for map view, we need to return BaseMarkerOption data type.
      * @param curLatLng users current location
      * @param placeList list of nearby places in Place data type
-     * @return BaseMarkerOprions list that holds nearby places
+     * @return BaseMarkerOptions list that holds nearby places
      */
     public static List<NearbyBaseMarker> loadAttractionsFromLocationToBaseMarkerOptions(
             LatLng curLatLng,
             List<Place> placeList,
             Context context) {
-        List<NearbyBaseMarker> baseMarkerOptionses = new ArrayList<>();
+        List<NearbyBaseMarker> baseMarkerOptions = new ArrayList<>();
+
+        if (placeList == null) {
+            return baseMarkerOptions;
+        }
+
         placeList = placeList.subList(0, Math.min(placeList.size(), MAX_RESULTS));
+
         for (Place place: placeList) {
             String distance = formatDistanceBetween(curLatLng, place.location);
             place.setDistance(distance);
@@ -108,8 +114,8 @@ public class NearbyController {
             nearbyBaseMarker.place(place);
             nearbyBaseMarker.icon(icon);
 
-            baseMarkerOptionses.add(nearbyBaseMarker);
+            baseMarkerOptions.add(nearbyBaseMarker);
         }
-        return baseMarkerOptionses;
+        return baseMarkerOptions;
     }
 }
