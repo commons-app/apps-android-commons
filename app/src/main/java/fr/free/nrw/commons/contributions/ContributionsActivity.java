@@ -227,7 +227,7 @@ public  class       ContributionsActivity
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
         if(contributionsList.getAdapter() == null) {
-            contributionsList.setAdapter(new ContributionsListAdapter(this, cursor, 0));
+            contributionsList.setAdapter(new ContributionsListAdapter(getApplicationContext(), cursor, 0));
         } else {
             ((CursorAdapter)contributionsList.getAdapter()).swapCursor(cursor);
         }
