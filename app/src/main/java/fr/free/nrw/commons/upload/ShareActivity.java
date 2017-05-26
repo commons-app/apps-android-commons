@@ -60,7 +60,6 @@ public  class       ShareActivity
 
     private UploadController uploadController;
 
-    private CommonsApplication cacheObj;
     private boolean cacheFound;
 
     private GPSExtractor imageObj;
@@ -195,11 +194,11 @@ public  class       ShareActivity
         SingleUploadFragment shareView = (SingleUploadFragment) getSupportFragmentManager().findFragmentByTag("shareView");
         categorizationFragment = (CategorizationFragment) getSupportFragmentManager().findFragmentByTag("categorization");
         if(shareView == null && categorizationFragment == null) {
-                shareView = new SingleUploadFragment();
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .add(R.id.single_upload_fragment_container, shareView, "shareView")
-                        .commitAllowingStateLoss();
+            shareView = new SingleUploadFragment();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.single_upload_fragment_container, shareView, "shareView")
+                    .commitAllowingStateLoss();
         }
         uploadController.prepareService();
     }

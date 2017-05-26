@@ -103,10 +103,13 @@ public class UploadController {
                 long length;
                 try {
                     if(contribution.getDataLength() <= 0) {
-                        length = app.getContentResolver().openAssetFileDescriptor(contribution.getLocalUri(), "r").getLength();
+                        length = app.getContentResolver()
+                                .openAssetFileDescriptor(contribution.getLocalUri(), "r")
+                                .getLength();
                         if(length == -1) {
                             // Let us find out the long way!
-                            length = Utils.countBytes(app.getContentResolver().openInputStream(contribution.getLocalUri()));
+                            length = Utils.countBytes(app.getContentResolver()
+                                    .openInputStream(contribution.getLocalUri()));
                         }
                         contribution.setDataLength(length);
                     }

@@ -17,7 +17,8 @@ class ContributionsListAdapter extends CursorAdapter {
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
-        View parent = LayoutInflater.from(context).inflate(R.layout.layout_contribution, viewGroup, false);
+        View parent = LayoutInflater.from(context)
+                .inflate(R.layout.layout_contribution, viewGroup, false);
         parent.setTag(new ContributionViewHolder(parent));
         return parent;
     }

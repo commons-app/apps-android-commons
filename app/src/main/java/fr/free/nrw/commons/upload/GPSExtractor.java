@@ -32,7 +32,7 @@ public class GPSExtractor {
     private LocationManager locationManager;
 
 
-    public GPSExtractor(String filePath){
+    public GPSExtractor(String filePath) {
         this.filePath = filePath;
     }
 
@@ -41,7 +41,8 @@ public class GPSExtractor {
      * @return true if enabled, false if disabled
      */
     private boolean gpsPreferenceEnabled() {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(CommonsApplication.getInstance());
+        SharedPreferences sharedPref
+                = PreferenceManager.getDefaultSharedPreferences(CommonsApplication.getInstance());
         boolean gpsPref = sharedPref.getBoolean("allowGps", false);
         Timber.d("Gps pref set to: %b", gpsPref);
         return gpsPref;
@@ -51,7 +52,8 @@ public class GPSExtractor {
      * Registers a LocationManager to listen for current location
      */
     protected void registerLocationManager() {
-        locationManager = (LocationManager) CommonsApplication.getInstance().getSystemService(Context.LOCATION_SERVICE);
+        locationManager = (LocationManager) CommonsApplication.getInstance()
+                .getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
         String provider = locationManager.getBestProvider(criteria, true);
         myLocationListener = new MyLocationListener();
