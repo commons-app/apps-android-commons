@@ -32,11 +32,11 @@ public class NearbyControllerTest {
         LatLng location = new LatLng(0, 0);
 
         List<NearbyBaseMarker> options =
-            NearbyController.loadAttractionsFromLocationToBaseMarkerOptions(
-                location,
-                null,
-                instrumentationContext
-        );
+                NearbyController.loadAttractionsFromLocationToBaseMarkerOptions(
+                        location,
+                        null,
+                        instrumentationContext
+                );
 
         Assert.assertThat(options.size(), is(0));
     }
