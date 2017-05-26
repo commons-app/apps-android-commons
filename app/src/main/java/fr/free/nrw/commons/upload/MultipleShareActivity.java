@@ -115,7 +115,7 @@ public  class       MultipleShareActivity
 
         Timber.d("Multiple upload begins");
 
-        final ProgressDialog dialog = new ProgressDialog(MultipleShareActivity.this);
+        final ProgressDialog dialog = new ProgressDialog(this);
         dialog.setIndeterminate(false);
         dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         dialog.setMax(photosList.size());
@@ -145,12 +145,12 @@ public  class       MultipleShareActivity
 
         uploadsList.setImageOnlyMode(true);
 
-        categorizationFragment = (CategorizationFragment) this.getSupportFragmentManager().findFragmentByTag("categorization");
+        categorizationFragment = (CategorizationFragment) getSupportFragmentManager().findFragmentByTag("categorization");
         if(categorizationFragment == null) {
             categorizationFragment = new CategorizationFragment();
         }
         // FIXME: Stops the keyboard from being shown 'stale' while moving out of this fragment into the next
-        View target = this.getCurrentFocus();
+        View target = getCurrentFocus();
         if (target != null) {
             InputMethodManager imm = (InputMethodManager) target.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(target.getWindowToken(), 0);
@@ -221,18 +221,19 @@ public  class       MultipleShareActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        getSupportFragmentManager().removeOnBackStackChangedListener(this);
         uploadController.cleanup();
     }
 
     private void showDetail(int i) {
         if(mediaDetails == null ||!mediaDetails.isVisible()) {
             mediaDetails = new MediaDetailPagerFragment(true);
-            this.getSupportFragmentManager()
+            getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.uploadsFragmentContainer, mediaDetails)
                     .addToBackStack(null)
                     .commit();
-            this.getSupportFragmentManager().executePendingTransactions();
+            getSupportFragmentManager().executePendingTransactions();
         }
         mediaDetails.showImage(i);
     }
@@ -267,7 +268,7 @@ public  class       MultipleShareActivity
             uploadsList = (MultipleUploadListFragment) getSupportFragmentManager().findFragmentByTag("uploadsList");
             if(uploadsList == null) {
                 uploadsList =  new MultipleUploadListFragment();
-                this.getSupportFragmentManager()
+                getSupportFragmentManager()
                         .beginTransaction()
                         .add(R.id.uploadsFragmentContainer, uploadsList, "uploadsList")
                         .commit();

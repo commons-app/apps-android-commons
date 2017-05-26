@@ -81,6 +81,7 @@ public  class       ContributionsActivity
 
     @Override
     protected void onDestroy() {
+        getSupportFragmentManager().removeOnBackStackChangedListener(this);
         super.onDestroy();
         if(isUploadServiceConnected) {
             unbindService(uploadServiceConnection);
