@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.Snackbar;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.view.MenuItem;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.io.IOException;
@@ -219,6 +221,13 @@ public  class       ShareActivity
         initBack();
         app = CommonsApplication.getInstance();
         backgroundImageView = (SimpleDraweeView)findViewById(R.id.backgroundImage);
+        backgroundImageView.setHierarchy(GenericDraweeHierarchyBuilder
+                .newInstance(getResources())
+                .setPlaceholderImage(VectorDrawableCompat.create(getResources(),
+                        R.drawable.ic_image_black_24dp, getTheme()))
+                .setFailureImage(VectorDrawableCompat.create(getResources(),
+                        R.drawable.ic_error_outline_black_24dp, getTheme()))
+                .build());
 
         //Receive intent from ContributionController.java when user selects picture to upload
         Intent intent = getIntent();

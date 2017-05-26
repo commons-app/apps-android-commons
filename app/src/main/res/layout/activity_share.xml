@@ -26,9 +26,7 @@
                 android:id="@+id/backgroundImage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:actualImageScaleType="centerCrop"
-                app:placeholderImage="@drawable/ic_image_black_24dp"
-                app:failureImage="@drawable/ic_error_outline_black_24dp" />
+                app:actualImageScaleType="centerCrop" />
 
             <FrameLayout
                 android:id="@+id/single_upload_fragment_container"

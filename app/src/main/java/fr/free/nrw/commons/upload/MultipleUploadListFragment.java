@@ -4,7 +4,9 @@ import android.content.Context;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -24,6 +26,7 @@ import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import fr.free.nrw.commons.R;
@@ -82,7 +85,13 @@ public class MultipleUploadListFragment extends Fragment {
                 holder.overlay = (RelativeLayout) view.findViewById(R.id.uploadOverlay);
 
                 holder.image.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, photoSize.y));
-
+                holder.image.setHierarchy(GenericDraweeHierarchyBuilder
+                        .newInstance(getResources())
+                        .setPlaceholderImage(VectorDrawableCompat.create(getResources(),
+                                R.drawable.ic_image_black_24dp, getContext().getTheme()))
+                        .setFailureImage(VectorDrawableCompat.create(getResources(),
+                                R.drawable.ic_error_outline_black_24dp, getContext().getTheme()))
+                        .build());
                 view.setTag(holder);
             } else {
                 holder = (UploadHolderView)view.getTag();
