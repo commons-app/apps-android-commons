@@ -10,7 +10,6 @@ import android.os.Bundle;
 
 import java.io.IOException;
 
-import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 

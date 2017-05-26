@@ -20,16 +20,12 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import fr.free.nrw.commons.AboutActivity;
-import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.nearby.NearbyActivity;
-import fr.free.nrw.commons.settings.SettingsActivity;
 import timber.log.Timber;
 
 import static android.app.Activity.RESULT_OK;
