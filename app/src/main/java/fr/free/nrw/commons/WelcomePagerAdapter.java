@@ -1,6 +1,6 @@
 package fr.free.nrw.commons;
 
-import android.app.Activity;
+import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +11,11 @@ import butterknife.OnClick;
 
 public class WelcomePagerAdapter extends PagerAdapter {
     private static final int PAGE_FINAL = 4;
+    private Callback callback;
+
+    public interface Callback {
+        void onYesClicked();
+    }
 
     static final int[] PAGE_LAYOUTS = new int[]{
             R.layout.welcome_wikipedia,
@@ -19,6 +24,10 @@ public class WelcomePagerAdapter extends PagerAdapter {
             R.layout.welcome_image_details,
             R.layout.welcome_final
     };
+
+    public void setCallback(@Nullable Callback callback) {
+        this.callback = callback;
+    }
 
     @Override
     public int getCount() {
@@ -48,14 +57,16 @@ public class WelcomePagerAdapter extends PagerAdapter {
         container.removeView((View) obj);
     }
 
-    public static class ViewHolder {
-        public ViewHolder(View view) {
+    class ViewHolder {
+        ViewHolder(View view) {
             ButterKnife.bind(this, view);
         }
 
         @OnClick(R.id.welcomeYesButton)
-        void onClicked(View view) {
-            ((Activity) view.getContext()).finish();
+        void onClicked() {
+            if (callback != null) {
+                callback.onYesClicked();
+            }
         }
     }
 }

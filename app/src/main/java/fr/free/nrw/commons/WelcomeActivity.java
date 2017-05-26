@@ -13,6 +13,7 @@ public class WelcomeActivity extends BaseActivity {
 
     @BindView(R.id.welcomePager) ViewPager pager;
     @BindView(R.id.welcomePagerIndicator) CirclePageIndicator indicator;
+    private WelcomePagerAdapter adapter = new WelcomePagerAdapter();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -24,11 +25,19 @@ public class WelcomeActivity extends BaseActivity {
         }
         ButterKnife.bind(this);
 
-        setUpAdapter();
+        pager.setAdapter(adapter);
+        indicator.setViewPager(pager);
+        adapter.setCallback(new WelcomePagerAdapter.Callback() {
+            @Override
+            public void onYesClicked() {
+                finish();
+            }
+        });
     }
 
-    private void setUpAdapter() {
-        pager.setAdapter(new WelcomePagerAdapter());
-        indicator.setViewPager(pager);
+    @Override
+    public void onDestroy() {
+        adapter.setCallback(null);
+        super.onDestroy();
     }
 }
