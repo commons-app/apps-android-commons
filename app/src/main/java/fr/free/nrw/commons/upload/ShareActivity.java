@@ -402,7 +402,7 @@ public  class       ShareActivity
                 app.getCacheData().setQtPoint(decLongitude, decLatitude);
             }
 
-            MwVolleyApi apiCall = new MwVolleyApi(this);
+            MwVolleyApi apiCall = new MwVolleyApi();
 
             List<String> displayCatList = app.getCacheData().findCategory();
             boolean catListEmpty = displayCatList.isEmpty();
