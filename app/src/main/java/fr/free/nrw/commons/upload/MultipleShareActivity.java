@@ -203,7 +203,7 @@ public  class       MultipleShareActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        uploadController = new UploadController(this);
+        uploadController = new UploadController();
 
         setContentView(R.layout.activity_multiple_uploads);
         app = CommonsApplication.getInstance();

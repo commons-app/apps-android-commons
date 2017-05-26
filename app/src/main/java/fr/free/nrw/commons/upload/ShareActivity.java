@@ -214,7 +214,7 @@ public  class       ShareActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        uploadController = new UploadController(this);
+        uploadController = new UploadController();
         setContentView(R.layout.activity_share);
         ButterKnife.bind(this);
         initBack();
