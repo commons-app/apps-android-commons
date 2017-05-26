@@ -196,7 +196,7 @@ public  class       ShareActivity
         categorizationFragment = (CategorizationFragment) getSupportFragmentManager().findFragmentByTag("categorization");
         if(shareView == null && categorizationFragment == null) {
                 shareView = new SingleUploadFragment();
-                this.getSupportFragmentManager()
+                getSupportFragmentManager()
                         .beginTransaction()
                         .add(R.id.single_upload_fragment_container, shareView, "shareView")
                         .commitAllowingStateLoss();
@@ -373,11 +373,11 @@ public  class       ShareActivity
      * @param gpsEnabled
      */
     public void getFileMetadata(boolean gpsEnabled) {
-        String filePath = FileUtils.getPath(this, mediaUri);
+        String filePath = FileUtils.getPath(getApplicationContext(), mediaUri);
         Timber.d("Filepath: %s", filePath);
         Timber.d("Calling GPSExtractor");
         if(imageObj == null) {
-            imageObj = new GPSExtractor(filePath, this);
+            imageObj = new GPSExtractor(filePath);
         }
 
         if (filePath != null && !filePath.equals("")) {

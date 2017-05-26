@@ -13,6 +13,7 @@ import android.support.annotation.Nullable;
 
 import java.io.IOException;
 
+import fr.free.nrw.commons.CommonsApplication;
 import timber.log.Timber;
 
 /**
@@ -26,15 +27,13 @@ public class GPSExtractor {
     private double decLatitude, decLongitude;
     private Double currentLatitude = null;
     private Double currentLongitude = null;
-    private Context context;
     public boolean imageCoordsExists;
     private MyLocationListener myLocationListener;
     private LocationManager locationManager;
 
 
-    public GPSExtractor(String filePath, Context context){
+    public GPSExtractor(String filePath){
         this.filePath = filePath;
-        this.context = context;
     }
 
     /**
@@ -42,7 +41,7 @@ public class GPSExtractor {
      * @return true if enabled, false if disabled
      */
     private boolean gpsPreferenceEnabled() {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(CommonsApplication.getInstance());
         boolean gpsPref = sharedPref.getBoolean("allowGps", false);
         Timber.d("Gps pref set to: %b", gpsPref);
         return gpsPref;
@@ -52,7 +51,7 @@ public class GPSExtractor {
      * Registers a LocationManager to listen for current location
      */
     protected void registerLocationManager() {
-        locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        locationManager = (LocationManager) CommonsApplication.getInstance().getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
         String provider = locationManager.getBestProvider(criteria, true);
         myLocationListener = new MyLocationListener();
