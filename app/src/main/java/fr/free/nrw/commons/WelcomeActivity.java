@@ -28,8 +28,7 @@ public class WelcomeActivity extends BaseActivity {
     }
 
     private void setUpAdapter() {
-        WelcomePagerAdapter adapter = new WelcomePagerAdapter(this);
-        pager.setAdapter(adapter);
+        pager.setAdapter(new WelcomePagerAdapter());
         indicator.setViewPager(pager);
     }
 }

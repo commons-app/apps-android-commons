@@ -1,7 +1,6 @@
 package fr.free.nrw.commons;
 
 import android.app.Activity;
-import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,9 +10,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class WelcomePagerAdapter extends PagerAdapter {
-
-    private Context context;
-
     private static final int PAGE_FINAL = 4;
 
     static final int[] PAGE_LAYOUTS = new int[]{
@@ -23,10 +19,6 @@ public class WelcomePagerAdapter extends PagerAdapter {
             R.layout.welcome_image_details,
             R.layout.welcome_final
     };
-
-    public WelcomePagerAdapter(Context context) {
-        this.context = context;
-    }
 
     @Override
     public int getCount() {
@@ -40,11 +32,11 @@ public class WelcomePagerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        LayoutInflater inflater = LayoutInflater.from(context);
+        LayoutInflater inflater = LayoutInflater.from(container.getContext());
         ViewGroup layout = (ViewGroup) inflater.inflate(PAGE_LAYOUTS[position], container, false);
 
         if (position == PAGE_FINAL) {
-            ViewHolder holder = new ViewHolder(layout, context);
+            ViewHolder holder = new ViewHolder(layout);
             layout.setTag(holder);
         }
         container.addView(layout);
@@ -57,16 +49,13 @@ public class WelcomePagerAdapter extends PagerAdapter {
     }
 
     public static class ViewHolder {
-        private Context context;
-
-        public ViewHolder(View view, Context context) {
+        public ViewHolder(View view) {
             ButterKnife.bind(this, view);
-            this.context = context;
         }
 
         @OnClick(R.id.welcomeYesButton)
-        void onClicked() {
-            ((Activity) context).finish();
+        void onClicked(View view) {
+            ((Activity) view.getContext()).finish();
         }
     }
 }
