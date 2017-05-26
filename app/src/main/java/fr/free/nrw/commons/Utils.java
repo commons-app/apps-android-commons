@@ -2,7 +2,10 @@ package fr.free.nrw.commons;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.Build;
 import android.preference.PreferenceManager;
+import android.text.Html;
+import android.text.Spanned;
 
 import fr.free.nrw.commons.settings.Prefs;
 import timber.log.Timber;
@@ -75,6 +78,19 @@ public class Utils {
             } catch (IOException e) {
                 Timber.e(e, "Exception on closing MD5 input stream");
             }
+        }
+    }
+
+    /** Fix Html.fromHtml is deprecated problem
+     * @param source provided Html string
+     * @return returned Spanned of appropriate method according to version check
+     * */
+    public static Spanned fromHtml(String source) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return Html.fromHtml(source, Html.FROM_HTML_MODE_LEGACY);
+        } else {
+            //noinspection deprecation
+            return Html.fromHtml(source);
         }
     }
 
