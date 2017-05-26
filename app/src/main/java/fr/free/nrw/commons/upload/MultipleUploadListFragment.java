@@ -24,11 +24,11 @@ import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import fr.free.nrw.commons.MediaWikiImageView;
+import com.facebook.drawee.view.SimpleDraweeView;
+
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
-
 
 public class MultipleUploadListFragment extends Fragment {
 
@@ -47,12 +47,10 @@ public class MultipleUploadListFragment extends Fragment {
     private boolean imageOnlyMode;
 
     private static class UploadHolderView {
-        Uri imageUri;
-
-        MediaWikiImageView image;
-        TextView title;
-
-        RelativeLayout overlay;
+        private Uri imageUri;
+        private SimpleDraweeView image;
+        private TextView title;
+        private RelativeLayout overlay;
     }
 
     private class PhotoDisplayAdapter extends BaseAdapter {
@@ -79,7 +77,7 @@ public class MultipleUploadListFragment extends Fragment {
             if(view == null) {
                 view = getLayoutInflater(null).inflate(R.layout.layout_upload_item, null);
                 holder = new UploadHolderView();
-                holder.image = (MediaWikiImageView) view.findViewById(R.id.uploadImage);
+                holder.image = (SimpleDraweeView) view.findViewById(R.id.uploadImage);
                 holder.title = (TextView) view.findViewById(R.id.uploadTitle);
                 holder.overlay = (RelativeLayout) view.findViewById(R.id.uploadOverlay);
 
