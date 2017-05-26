@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.category;
 
-import android.app.Activity;
 import android.content.ContentProviderClient;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -58,6 +57,7 @@ public class CategorizationFragment extends Fragment {
     ProgressBar categoriesSearchInProgress;
     TextView categoriesNotFoundView;
     TextView categoriesSkip;
+    private CategoryTextWatcher textWatcher = new CategoryTextWatcher();
 
     CategoriesAdapter categoriesAdapter;
     ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(2);
@@ -442,21 +442,7 @@ public class CategorizationFragment extends Fragment {
             }
         });
 
-        categoriesFilter.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-                startUpdatingCategoryList();
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
+        categoriesFilter.addTextChangedListener(textWatcher);
 
         startUpdatingCategoryList();
 
@@ -467,14 +453,6 @@ public class CategorizationFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
         inflater.inflate(R.menu.fragment_categorization, menu);
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-        getActivity().setTitle(R.string.categories_activity_title);
-        client = getActivity().getContentResolver().acquireContentProviderClient(CategoryContentProvider.AUTHORITY);
     }
 
     @Override
@@ -496,6 +474,12 @@ public class CategorizationFragment extends Fragment {
                 }
             });
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        categoriesFilter.removeTextChangedListener(textWatcher);
+        super.onDestroyView();
     }
 
     public void backButtonDialog() {
@@ -581,8 +565,27 @@ public class CategorizationFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        onCategoriesSaveHandler = (OnCategoriesSaveHandler) activity;
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setHasOptionsMenu(true);
+        onCategoriesSaveHandler = (OnCategoriesSaveHandler) getActivity();
+        getActivity().setTitle(R.string.categories_activity_title);
+        client = getActivity().getContentResolver().acquireContentProviderClient(CategoryContentProvider.AUTHORITY);
+    }
+
+    private class CategoryTextWatcher implements TextWatcher {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+            startUpdatingCategoryList();
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+
+        }
     }
 }
