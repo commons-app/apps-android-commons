@@ -57,12 +57,7 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
         ArrayList<ApiResult> resultNodes = result.getNodes("/api/query/allimages/img");
         Timber.d("Result nodes: %s", resultNodes);
 
-        boolean fileExists;
-        if (!resultNodes.isEmpty()) {
-            fileExists = true;
-        } else {
-            fileExists = false;
-        }
+        boolean fileExists = !resultNodes.isEmpty();
 
         Timber.d("File already exists in Commons: %s", fileExists);
         return fileExists;
