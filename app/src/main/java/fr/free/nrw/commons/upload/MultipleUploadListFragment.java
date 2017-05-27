@@ -21,18 +21,14 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
-
 
 public class MultipleUploadListFragment extends Fragment {
 
@@ -48,17 +44,13 @@ public class MultipleUploadListFragment extends Fragment {
     private MediaDetailPagerFragment.MediaDetailProvider detailProvider;
     private OnMultipleUploadInitiatedHandler multipleUploadInitiatedHandler;
 
-    private DisplayImageOptions uploadDisplayOptions;
-
     private boolean imageOnlyMode;
 
     private static class UploadHolderView {
-        Uri imageUri;
-
-        ImageView image;
-        TextView title;
-
-        RelativeLayout overlay;
+        private Uri imageUri;
+        private SimpleDraweeView image;
+        private TextView title;
+        private RelativeLayout overlay;
     }
 
     private class PhotoDisplayAdapter extends BaseAdapter {
@@ -85,7 +77,7 @@ public class MultipleUploadListFragment extends Fragment {
             if(view == null) {
                 view = getLayoutInflater(null).inflate(R.layout.layout_upload_item, null);
                 holder = new UploadHolderView();
-                holder.image = (ImageView) view.findViewById(R.id.uploadImage);
+                holder.image = (SimpleDraweeView) view.findViewById(R.id.uploadImage);
                 holder.title = (TextView) view.findViewById(R.id.uploadTitle);
                 holder.overlay = (RelativeLayout) view.findViewById(R.id.uploadOverlay);
 
@@ -100,7 +92,7 @@ public class MultipleUploadListFragment extends Fragment {
             Contribution up = (Contribution)this.getItem(i);
 
             if(holder.imageUri == null || !holder.imageUri.equals(up.getLocalUri())) {
-                ImageLoader.getInstance().displayImage(up.getLocalUri().toString(), holder.image, uploadDisplayOptions);
+                holder.image.setImageURI(up.getLocalUri().toString());
                 holder.imageUri = up.getLocalUri();
             }
 
@@ -221,7 +213,6 @@ public class MultipleUploadListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        uploadDisplayOptions = Utils.getGenericDisplayOptions().build();
         detailProvider = (MediaDetailPagerFragment.MediaDetailProvider)getActivity();
         multipleUploadInitiatedHandler = (OnMultipleUploadInitiatedHandler) getActivity();
 

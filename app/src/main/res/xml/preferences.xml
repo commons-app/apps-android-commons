@@ -8,7 +8,7 @@
         android:title="@string/preference_license"
         android:entries="@array/pref_defaultLicense_entries"
         android:entryValues="@array/pref_defaultLicense_values"
-        android:defaultValue="@string/license_name_cc_by_sa_4_0"
+        android:defaultValue="@string/license_pref_cc_by_sa_4_0"
         />
 
     <CheckBoxPreference
@@ -36,6 +36,14 @@
         android:title="@string/use_wikidata"
         android:defaultValue="true"
         android:summary="@string/use_wikidata_summary"
+        />
+
+    <EditTextPreference
+        android:key="uploads"
+        android:defaultValue="100"
+        android:title= "@string/set_limit"
+        android:inputType="numberDecimal"
+        android:maxLength="3"
         />
 
 </PreferenceScreen>

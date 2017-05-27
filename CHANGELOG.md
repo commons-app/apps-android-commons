@@ -1,9 +1,25 @@
 # Wikimedia Commons for Android
 
-## v2.2.2 beta
+## v2.4 beta
+- Fixed memory issue with loading contributions on main screen
+- Deleted images don't show up on contributions list 
+- Added Fresco library for image loading and LeakCanary for memory profiling
+- Added navigation drawer and overhauled action bar
+- Added logout functionality
+- Fixed various issues with map of Nearby places
+
+## v2.3 beta
+- Add map of Nearby places
+- Add overlay dialog when a Nearby place is tapped
+- Set default number of uploads to display in Main activity as 100, and add option in Settings to change it
+- Detect when 2FA is used for login and display message
+- Display date uploaded and image coordinates in image details page
+- Display message when GPS is turned off, and when no Nearby items are found
+
+## v2.2.2
 - Hotfix for Nearby localization issue
 
-## v2.2.1 beta 
+## v2.2.1
 - Hotfix for Settings crash
 
 ## v2.2 beta (will not be released to Production due to bugs with Settings)

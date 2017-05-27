@@ -25,7 +25,7 @@ task checkstyle(type: Checkstyle) {
 
 task pmd(type: Pmd) {
     ignoreFailures = true
-    ruleSetFiles = files("${project.rootDir}/ruleset.xml")
+    ruleSetFiles = files("${project.rootDir}/script/style/ruleset.xml")
     ruleSets = []
 
     source 'src'

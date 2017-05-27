@@ -7,7 +7,7 @@
   <string name="login">प्रवेश</string>
   <string name="signup">खाता बनायें</string>
   <string name="logging_in_title">प्रवेश हो रहा</string>
-  <string name="logging_in_message">प्रतीक्षा करें...</string>
+  <string name="logging_in_message">प्रतीक्षा करें…</string>
   <string name="login_success">प्रवेश में सफल हुआ!</string>
   <string name="login_failed">प्रवेश विफल हुआ</string>
   <string name="upload_failed">फ़ाइल नहीं मिला, कृपया अन्य फ़ाइल से कोशिश करें।</string>
@@ -21,10 +21,10 @@
   <string name="upload_failed_notification_title">%1$s का अपलोड विफल हुआ</string>
   <string name="upload_failed_notification_subtitle">देखने हेतु टैप करें</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">1 फ़ाइल अपलोड हो रहा</item>
-    <item quantity="other">%d फ़ाइलें अपलोड हो रहीं</item>
+    <item quantity="one">%d फ़ाइल अपलोड हो रहा</item>
+    <item quantity="other">%d फ़ाइलें अपलोड हो रहीं</item>
   </plurals>
-  <string name="title_activity_contributions">मेरे अपलोड</string>
+  <string name="title_activity_contributions" fuzzy="true">मेरे अपलोड</string>
   <string name="contribution_state_queued">प्रतीक्षा में</string>
   <string name="contribution_state_failed">विफल</string>
   <string name="contribution_state_in_progress">%1$d%% पूरा हुआ</string>
@@ -50,39 +50,36 @@
   <string name="categories_search_text_hint">श्रेणियाँ खोजें</string>
   <string name="menu_save_categories">सहेजें</string>
   <string name="refresh_button">ताजा करें</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">कोई अपलोड नहीं</item>
-    <item quantity="one">1 अपलोड</item>
+    <item quantity="one">%d अपलोड</item>
     <item quantity="other">%d अपलोड</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">एक अपलोड शुरू</item>
+    <item quantity="one">%d अपलोड शुरू</item>
     <item quantity="other">%d अपलोड शुरू</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">1 अपलोड</item>
+    <item quantity="one">%d अपलोड</item>
     <item quantity="other">%d अपलोड</item>
   </plurals>
   <string name="categories_not_found">%1$s से कोई श्रेणी मेल नहीं खाती</string>
-  <string name="categories_skip_explanation">अपने छवियों को विकिमीडिया कॉमन्स में अधिक ढूँढने लायक बनाने हेतु श्रेणियाँ लगायें। 
-
-श्रेणी जोड़ने हेतु लिखना शुरू करें।
-इसे न करने हेतु इस संदेश को टैप करें या पीछे का बटन दबायें।</string>
+  <string name="categories_skip_explanation">अपने छवियों को विकिमीडिया कॉमन्स में अधिक ढूँढने लायक बनाने हेतु श्रेणियाँ लगायें। \n\nश्रेणी जोड़ने हेतु लिखना शुरू करें।\nइसे न करने हेतु इस संदेश को टैप करें या पीछे का बटन दबायें।</string>
   <string name="categories_activity_title">श्रेणियाँ</string>
   <string name="preference_tracking">उपयोग की जानकारी</string>
   <string name="preference_tracking_summary">एप के उपयोग की जानकारी विकिमीडिया को भेजें, जिससे इसमें सुधार किया जा सके</string>
   <string name="title_activity_settings">पसंद</string>
   <string name="title_activity_signup">खाता खोलें</string>
   <string name="menu_about">परिचय</string>
-  <string name="about_license" fuzzy="true">मुक्त स्रोत सॉफ्टवेयर जो &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;अपाचे लाइसेन्स&lt;/a&gt; के अंतर्गत जारी किया गया है। विकिमीडिया कॉमन्स और इसका लोगो विकिमीडिया संस्था का व्यापारिक चिह्न है और इसके मर्जी से ही उपयोग किया जाना चाहिए। हम किसी भी प्रकार से विकिमीडिया संस्था से जुड़े नहीं हैं।</string>
+  <string name="about_license" fuzzy="true">मुक्त स्रोत सॉफ्टवेयर जो &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;अपाचे लाइसेन्स&lt;/a&gt; के अंतर्गत जारी किया गया है। विकिमीडिया कॉमन्स और इसका लोगो विकिमीडिया संस्था का व्यापारिक चिह्न है और इसके मर्जी से ही उपयोग किया जाना चाहिए। हम किसी भी प्रकार से विकिमीडिया संस्था से जुड़े नहीं हैं।</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;स्रोत&lt;/a&gt; और &lt;a href=\"https://commons-app.github.io/\"&gt;वेबसाइट&lt;/a&gt; गिटहब में है और त्रुटि व सुझाव हेतु &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;गिटहब समस्या&lt;/a&gt; देखें।</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;गोपनियता नीति&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;श्रेय&lt;/a&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;श्रेय&lt;/a&gt;</string>
   <string name="title_activity_about">परिचय</string>
   <string name="menu_feedback">प्रतिक्रिया दें (ईमेल द्वारा)</string>
   <string name="no_email_client">कोई ईमेल ग्राहक स्थापित नहीं</string>
   <string name="provider_categories">हाल ही उपयोग में ली गयी श्रेणियाँ</string>
-  <string name="waiting_first_sync">पहले सिंक हेतु प्रतीक्षा में...</string>
+  <string name="waiting_first_sync">पहले सिंक हेतु प्रतीक्षा में…</string>
   <string name="no_uploads_yet">आपने अब तक कोई फोटो अपलोड नहीं किया है।</string>
   <string name="menu_retry_upload">फिर प्रयास करें</string>
   <string name="menu_cancel_upload">रद्द करें</string>
@@ -92,6 +89,9 @@
   <string name="use_previous">पिछले शीर्षक/विवरण का उपयोग करें</string>
   <string name="allow_gps">वर्तमान स्थान स्वतः ज्ञात करें</string>
   <string name="allow_gps_summary">यदि छवि जियोटैगेड नहीं है तो श्रेणियों के सुझाव हेतु वर्तमान स्थान ज्ञात करें।</string>
+  <string name="preference_theme">रात्रि मोड</string>
+  <string name="preference_theme_summary">डार्क थीम का प्रयोग करें</string>
+  <string name="license_name_cc_by_sa_four">विशेषता-साझेदारी 4.0</string>
   <string name="license_name_cc_by_four">एट्रिब्यूशन 4.0</string>
   <string name="license_name_cc_by_sa">एट्रीबुसन-शेयरअलाइक 3.0</string>
   <string name="license_name_cc_by">एट्रीबुसन 3.0</string>
@@ -111,36 +111,14 @@
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
-  <string name="license_name_own_pd">own-pd</string>
-  <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
-  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
-  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_2_0">CC BY 2.0</string>
-  <string name="license_name_fal">मुक्त कला लाइसेन्स</string>
-  <string name="license_name_pd_old_100">सार्वजनिक डोमेन (लेखक की 100 वर्ष पूर्व मृत्यु हो गई)</string>
-  <string name="license_name_pd_old">सार्वजनिक डोमेन (कॉपीराइट समाप्त हो गई है)</string>
-  <string name="license_name_pd_art">सार्वजनिक डोमेन (कला)</string>
-  <string name="license_name_pd_us">सार्वजनिक डोमेन (संयुक्त राष्ट्र)</string>
-  <string name="license_name_pd_usgov">सार्वजनिक डोमेन (संयुक्त राष्ट्र सरकार)</string>
-  <string name="license_name_pd_usgov_nasa">सार्वजनिक डोमेन (नासा)</string>
-  <string name="license_name_pd_ineligible">सार्वजनिक डोमेन (कॉपीराइट के लिए अयोग्य)</string>
-  <string name="license_name_attribution">एट्रीब्यूसन</string>
-  <string name="license_name_gfdl">GNU मुक्त प्रलेखन अनुज्ञापत्र</string>
   <string name="tutorial_1_text">विकिपीडिया में उपयोग होने वाले कई चित्रों को होस्ट विकिमीडिया कॉमन्स करता है।</string>
   <string name="tutorial_1_subtext">आपके लिए चित्र पूरे विश्व के लोगों को शिक्षित करेंगे!</string>
   <string name="tutorial_2_text">कृपया उन तस्वीरों को डालें, जो आपने ली है या केवल आपके द्वारा बनाई गई है:</string>
-  <string name="tutorial_2_subtext">- प्राकृतिक वस्तुओं (फूल, पशु, पहाड़ों)
-- उपयोगी वस्तुओं (साइकिल, रेलवे स्टेशन)
-- प्रसिद्ध लोगों (आपके महापौर, ओलंपिक एथलीटों जिनसे आप मिले हो)</string>
+  <string name="tutorial_2_subtext">- प्राकृतिक वस्तुओं (फूल, पशु, पहाड़ों)\n- उपयोगी वस्तुओं (साइकिल, रेलवे स्टेशन)\n- प्रसिद्ध लोगों (आपके महापौर, ओलंपिक एथलीटों जिनसे आप मिले हो)</string>
   <string name="tutorial_3_text">कृपया अपलोड न करें:</string>
-  <string name="tutorial_3_subtext">- सेल्फी या अपने दोस्तों की तस्वीरें
-- इंटरनेट से डाउनलोड की गई तस्वीरें
-- किसी निजी एप का स्क्रीनशॉट</string>
+  <string name="tutorial_3_subtext">- सेल्फी या अपने दोस्तों की तस्वीरें\n- इंटरनेट से डाउनलोड की गई तस्वीरें\n- किसी निजी एप का स्क्रीनशॉट</string>
   <string name="tutorial_4_text">अपलोड का उदाहरण:</string>
-  <string name="tutorial_4_subtext">- शीर्षक: सिडनी ओपेरा हाउस
-- विवरण: सिडनी ओपेरा हाउस खाड़ी के पार से देखा गया
-- श्रेणियाँ: सिडनी ओपेरा हाउस, पश्चिम से सिडनी ओपेरा हाउस, सिडनी ओपेरा हाउस दूर से</string>
+  <string name="tutorial_4_subtext">- शीर्षक: सिडनी ओपेरा हाउस\n- विवरण: सिडनी ओपेरा हाउस खाड़ी के पार से देखा गया\n- श्रेणियाँ: सिडनी ओपेरा हाउस, पश्चिम से सिडनी ओपेरा हाउस, सिडनी ओपेरा हाउस दूर से</string>
   <string name="welcome_wikipedia_text">अपने छवियों का योगदान करें और विकिपीडिया के लेखों को जीवित करने में सहायता करें।</string>
   <string name="welcome_wikipedia_subtext">विकिपीडिया में छवि विकिमीडिया कॉमन्स से आती है।</string>
   <string name="welcome_copyright_text">आपके लिए चित्र पूरे विश्व के लोगों को शिक्षित करेंगे।</string>
@@ -148,7 +126,7 @@
   <string name="welcome_final_text">जो आपने सोचा वो मिला?</string>
   <string name="welcome_final_button_text">हाँ!</string>
   <string name="detail_panel_cats_label">श्रेणियाँ</string>
-  <string name="detail_panel_cats_loading">लोड हो रहा है...</string>
+  <string name="detail_panel_cats_loading">लोड हो रहा है…</string>
   <string name="detail_panel_cats_none">कुछ चयनित नहीं</string>
   <string name="detail_description_empty">कोई विवरण नहीं</string>
   <string name="detail_license_empty">अज्ञात लाइसेन्स</string>
@@ -165,4 +143,6 @@
   <string name="media_detail_media_title">मीडिया का शीर्षक</string>
   <string name="media_detail_description">विवरण</string>
   <string name="become_a_tester_title">बीटा परीक्षक बनें</string>
+  <string name="use_wikidata">विकिडेटा का प्रयोग करें</string>
+  <string name="maximum_limit">अधिकतम सीमा</string>
 </resources>

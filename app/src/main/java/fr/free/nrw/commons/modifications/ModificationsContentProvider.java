@@ -8,9 +8,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.text.TextUtils;
-import android.util.Log;
 
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.data.DBOpenHelper;
+import timber.log.Timber;
 
 public class ModificationsContentProvider extends ContentProvider{
 
@@ -35,7 +36,7 @@ public class ModificationsContentProvider extends ContentProvider{
     private DBOpenHelper dbOpenHelper;
     @Override
     public boolean onCreate() {
-        dbOpenHelper = DBOpenHelper.getInstance(getContext());
+        dbOpenHelper = CommonsApplication.getInstance().getDBOpenHelper();
         return false;
     }
 
@@ -101,14 +102,14 @@ public class ModificationsContentProvider extends ContentProvider{
 
     @Override
     public int bulkInsert(Uri uri, ContentValues[] values) {
-        Log.d("Commons", "Hello, bulk insert! (ModificationsContentProvider)");
+        Timber.d("Hello, bulk insert! (ModificationsContentProvider)");
         int uriType = uriMatcher.match(uri);
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         sqlDB.beginTransaction();
         switch (uriType) {
             case MODIFICATIONS:
                 for(ContentValues value: values) {
-                    Log.d("Commons", "Inserting! " + value.toString());
+                    Timber.d("Inserting! %s", value);
                     sqlDB.insert(ModifierSequence.Table.TABLE_NAME, null, value);
                 }
                 break;

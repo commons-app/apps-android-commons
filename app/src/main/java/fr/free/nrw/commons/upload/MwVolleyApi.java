@@ -2,7 +2,6 @@ package fr.free.nrw.commons.upload;
 
 import android.content.Context;
 import android.net.Uri;
-import android.util.Log;
 
 import com.android.volley.Cache;
 import com.android.volley.NetworkResponse;
@@ -22,6 +21,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import timber.log.Timber;
+
 /**
  * Uses the Volley library to implement asynchronous calls to the Commons MediaWiki API to match
  * GPS coordinates with nearby Commons categories. Parses the results using GSON to obtain a list
@@ -32,13 +33,11 @@ public class MwVolleyApi {
     private static RequestQueue REQUEST_QUEUE;
     private static final Gson GSON = new GsonBuilder().create();
     private Context context;
-    private String coordsLog;
 
     protected static Set<String> categorySet;
     private static List<String> categoryList;
 
     private static final String MWURL = "https://commons.wikimedia.org/";
-    private static final String TAG = MwVolleyApi.class.getName();
 
     public MwVolleyApi(Context context) {
         this.context = context;
@@ -52,13 +51,12 @@ public class MwVolleyApi {
     public static void setGpsCat(List<String> cachedList) {
         categoryList = new ArrayList<>();
         categoryList.addAll(cachedList);
-        Log.d(TAG, "Setting GPS cats from cache: " + categoryList.toString());
+        Timber.d("Setting GPS cats from cache: %s", categoryList);
     }
 
     public void request(String coords) {
-        coordsLog = coords;
         String apiUrl = buildUrl(coords);
-        Log.d(TAG, "URL: " + apiUrl);
+        Timber.d("URL: %s", apiUrl);
 
         JsonRequest<QueryResponse> request = new QueryRequest(apiUrl,
                 new LogResponseListener<QueryResponse>(), new LogResponseErrorListener());
@@ -101,7 +99,7 @@ public class MwVolleyApi {
 
     private static RequestQueue getQueue(Context context) {
         if (REQUEST_QUEUE == null) {
-            REQUEST_QUEUE = Volley.newRequestQueue(context.getApplicationContext());
+            REQUEST_QUEUE = Volley.newRequestQueue(context);
         }
         return REQUEST_QUEUE;
     }
@@ -110,7 +108,7 @@ public class MwVolleyApi {
 
         @Override
         public void onResponse(T response) {
-            Log.d(TAG, response.toString());
+            Timber.d(response.toString());
         }
     }
 
@@ -118,12 +116,11 @@ public class MwVolleyApi {
 
         @Override
         public void onErrorResponse(VolleyError error) {
-            Log.e(TAG, error.toString());
+            Timber.e(error.toString());
         }
     }
 
     private static class QueryRequest extends JsonRequest<QueryResponse> {
-        private static final String TAG = QueryRequest.class.getName();
 
         public QueryRequest(String url,
                             Response.Listener<QueryResponse> listener,
@@ -169,11 +166,11 @@ public class MwVolleyApi {
         private String printSet() {
             if (categorySet == null || categorySet.isEmpty()) {
                 GpsCatExists.setGpsCatExists(false);
-                Log.d(TAG, "gpsCatExists=" + GpsCatExists.getGpsCatExists());
+                Timber.d("gpsCatExists=%b", GpsCatExists.getGpsCatExists());
                 return "No collection of categories";
             } else {
                 GpsCatExists.setGpsCatExists(true);
-                Log.d(TAG, "gpsCatExists=" + GpsCatExists.getGpsCatExists());
+                Timber.d("gpsCatExists=%b", GpsCatExists.getGpsCatExists());
                 return "CATEGORIES FOUND" + categorySet.toString();
             }
 

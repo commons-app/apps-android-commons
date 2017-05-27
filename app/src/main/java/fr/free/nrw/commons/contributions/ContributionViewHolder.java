@@ -14,8 +14,6 @@ class ContributionViewHolder {
     final TextView seqNumView;
     final ProgressBar progressView;
 
-    String url;
-
     ContributionViewHolder(View parent) {
         imageView = (MediaWikiImageView) parent.findViewById(R.id.contributionImage);
         titleView = (TextView)parent.findViewById(R.id.contributionTitle);

@@ -2,13 +2,14 @@ package fr.free.nrw.commons.auth;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.theme.BaseActivity;
+import timber.log.Timber;
 
 public class SignupActivity extends BaseActivity {
 
@@ -17,9 +18,7 @@ public class SignupActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("SignupActivity", "Signup Activity started");
-
-        getSupportActionBar().hide();
+        Timber.d("Signup Activity started");
 
         webView = new WebView(this);
         setContentView(webView);
@@ -37,17 +36,21 @@ public class SignupActivity extends BaseActivity {
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             if (url.equals("https://commons.m.wikimedia.org/w/index.php?title=Main_Page&welcome=yes")) {
                 //Signup success, so clear cookies, notify user, and load LoginActivity again
-                Log.d("SignupActivity", "Overriding URL" + url);
+                Timber.d("Overriding URL %s", url);
 
-                Toast toast = Toast.makeText(getApplicationContext(), "Account created!", Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(
+                        CommonsApplication.getInstance(),
+                        "Account created!",
+                        Toast.LENGTH_LONG
+                );
                 toast.show();
 
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                Intent intent = new Intent(CommonsApplication.getInstance(), LoginActivity.class);
                 startActivity(intent);
                 return true;
             } else {
                 //If user clicks any other links in the webview
-                Log.d("SignupActivity", "Not overriding URL, URL is: " + url);
+                Timber.d("Not overriding URL, URL is: %s", url);
                 return false;
             }
         }

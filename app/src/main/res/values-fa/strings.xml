@@ -7,7 +7,7 @@
   <string name="login">ورود</string>
   <string name="signup">ثبت نام</string>
   <string name="logging_in_title">واردشدن</string>
-  <string name="logging_in_message">لطفاً صبر کنید...</string>
+  <string name="logging_in_message">لطفاً صبر کنید…</string>
   <string name="login_success">ورود موفق!</string>
   <string name="login_failed">ورود ناموفق!</string>
   <string name="upload_failed">پرونده یافت نشد لطفاً پرونده دیگری را امتحان کنید.</string>
@@ -20,11 +20,11 @@
   <string name="upload_progress_notification_title_finishing">اتمام بارگذاری %1$s</string>
   <string name="upload_failed_notification_title">%1$s بارگذاری نشد</string>
   <string name="upload_failed_notification_subtitle">برای دیدن انگشت بزنید</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">یک پرونده در حال بارگذاری</item>
     <item quantity="other">%d پرونده در حال بارگذاری</item>
   </plurals>
-  <string name="title_activity_contributions">بارگذاری‌های من</string>
+  <string name="title_activity_contributions" fuzzy="true">بارگذاری‌های من</string>
   <string name="contribution_state_queued">در صف</string>
   <string name="contribution_state_failed">ناموفق بود</string>
   <string name="contribution_state_in_progress">%1$d٪ کامل شد</string>
@@ -49,40 +49,35 @@
   <string name="menu_upload_single">بارگذاری</string>
   <string name="categories_search_text_hint">جستجوی رده‌ها</string>
   <string name="menu_save_categories">ذخیره</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">هنوز بارگذاری نشده است</item>
     <item quantity="one">یک بارگذاری شد</item>
     <item quantity="other">%d بارگذاری شد</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">شروع بارگذاری پرونده</item>
     <item quantity="other">شروع بارگذاری %d  پرونده</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">۱ بارگذاری</item>
     <item quantity="other">%d بارگذاری</item>
   </plurals>
   <string name="categories_not_found">رده‌ای منطبق با %1$s یافت نشد</string>
-  <string name="categories_skip_explanation">برای دسترسی آسان‌تر در ویکی‌انبار به تصویرهایتان رده بیافزائید.
-
-شروع به افزودن رده.
-این پیام (یا دکمه بازگشت) را لمس کنید تا این مرحله پایان پذیرد.</string>
+  <string name="categories_skip_explanation">برای دسترسی آسان‌تر در ویکی‌انبار به تصویرهایتان رده بیافزائید.\n\nشروع به افزودن رده.\nاین پیام (یا دکمه بازگشت) را لمس کنید تا این مرحله پایان پذیرد.</string>
   <string name="categories_activity_title">رده‌ها</string>
   <string name="preference_tracking">گزارش‌های استفاده</string>
   <string name="preference_tracking_summary">برای کمک به بهبود نرم‌افزار، گزارش‌های استفاده را برای ویکی‌مدیا ارسال نمائید</string>
   <string name="title_activity_settings">تنظیمات</string>
   <string name="title_activity_signup">ثبت نام</string>
   <string name="menu_about">درباره</string>
-  <string name="about_license" fuzzy="true">نرم‌افزار متن‌باز آزاد تحت &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;مجوز آپاچی نسخهٔ ۲&lt;/a&gt;
-
-ویکی‌انبار و نشانش یک نشان تجاری‌ست و با اجازهٔ بنیاد ویکی‌مدیا استفاده می‌شود. ما زیرمجموعه یا شعبهٔ بنیاد نیستیم.</string>
+  <string name="about_license" fuzzy="true">نرم‌افزار متن‌باز آزاد تحت &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;مجوز آپاچی نسخهٔ ۲&lt;/a&gt;\n\nویکی‌انبار و نشانش یک نشان تجاری‌ست و با اجازهٔ بنیاد ویکی‌مدیا استفاده می‌شود. ما زیرمجموعه یا شعبهٔ بنیاد نیستیم.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Source&lt;/a&gt; and &lt;a href=\"https://commons-app.github.io/\"&gt;وب‌سایت&lt;/a&gt; در گیت‌هاب. ایجاد یک &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;درخواست در گیت‌هاب&lt;/a&gt; برای گزارش باگ و یا پیشنهاد یک خصوصیت جدید.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;سیاست حفظ حریم خصوصی&lt;/a&gt;</string>
   <string name="title_activity_about">درباره</string>
   <string name="menu_feedback">ارسال بازخورد (از طریق ایمیل)</string>
   <string name="no_email_client">نرم‌افزار ایمیل نصب نیست</string>
   <string name="provider_categories">رده‌هایی که اخیراً استفاده شده‌اند</string>
-  <string name="waiting_first_sync">در حال انتظار برای اولین همگام‌سازی...</string>
+  <string name="waiting_first_sync">در حال انتظار برای اولین همگام‌سازی…</string>
   <string name="no_uploads_yet">شما هنوز نگاره‌ای بارگذاری نکرده‌اید.</string>
   <string name="menu_retry_upload">تلاش مجدد</string>
   <string name="menu_cancel_upload">لغو</string>
@@ -110,36 +105,14 @@
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
-  <string name="license_name_own_pd">own-pd</string>
-  <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
-  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
-  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_2_0">CC BY 2.0</string>
-  <string name="license_name_fal">مجوز هنر آزاد</string>
-  <string name="license_name_pd_old_100">مالکیت عمومی (صاحب اثر بیش از ۱۰۰ سال مرده‌است)</string>
-  <string name="license_name_pd_old">مالکیت عمومی (حق تکثیر منقضی‌شده‌است)</string>
-  <string name="license_name_pd_art">مالکیت عمومی (اثر هنری)</string>
-  <string name="license_name_pd_us">مالکیت عمومی (آمریکا)</string>
-  <string name="license_name_pd_usgov">مالکیت عمومی (دولت آمریکا)</string>
-  <string name="license_name_pd_usgov_nasa">مالکیت عمومی (ناسا)</string>
-  <string name="license_name_pd_ineligible">مالکیت عمومی (فاقد شرایط لازم برای حق تکثیر)</string>
-  <string name="license_name_attribution">انتساب</string>
-  <string name="license_name_gfdl">مجوز اسناد آزاد گنو</string>
   <string name="tutorial_1_text">ویکی‌انبار اکثر پرونده‌هایی که در ویکی‌پدیا استفاده می‌شوند را در خود نگه می‌دارد.</string>
   <string name="tutorial_1_subtext">تصاویر شما به مردم در اقصی نقاط دنیا کمک می‌کند!</string>
   <string name="tutorial_2_text">لطفاً تصاویری که توسط خودتان گرفته شده‌اند یا ایجاد شده‌اند را بارگذاری کنید:</string>
-  <string name="tutorial_2_subtext">-اجسام طبیعی (گیاه، جانور، کوه)
--اجسام کاربردی (دوچرخه، ایستگاه قطار)
--افراد مشهور (شهردار، قهرمانان المپیک)</string>
+  <string name="tutorial_2_subtext">-اجسام طبیعی (گیاه، جانور، کوه)\n-اجسام کاربردی (دوچرخه، ایستگاه قطار)\n-افراد مشهور (شهردار، قهرمانان المپیک)</string>
   <string name="tutorial_3_text">لطفاً بارگذاری نکنید:</string>
-  <string name="tutorial_3_subtext">-سلفی خودتان یا تصویر دوستانتان
--تصاویری که از اینترنت دانلود کردید
--نماگرفت از دیگر اپلیکیشن‌‌ها</string>
+  <string name="tutorial_3_subtext">-سلفی خودتان یا تصویر دوستانتان\n-تصاویری که از اینترنت دانلود کردید\n-نماگرفت از دیگر اپلیکیشن‌‌ها</string>
   <string name="tutorial_4_text">نمونه بارگذاری:</string>
-  <string name="tutorial_4_subtext">-عنوان: خانهٔ اپرای سیدنی
--توضیحات: خانهٔ اپرای سیدنی از آن طرف خلیج
--رده‌ها: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext">-عنوان: خانهٔ اپرای سیدنی\n-توضیحات: خانهٔ اپرای سیدنی از آن طرف خلیج\n-رده‌ها: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">عکس‌های خود را به اشتراک بگذارید. به ویکی‌پدیا کمک کنید تا مقالاتش زنده شوند!</string>
   <string name="welcome_wikipedia_subtext">ویکی‌پدیا از تصویرهای ویکی‌انبار استفاده می‌کند.</string>
   <string name="welcome_copyright_text">تصویرهای شما به مطالعهٔ مردم در سراسر دنیا کمک می‌کنند.</string>
@@ -147,7 +120,7 @@
   <string name="welcome_final_text">آیا متوجه منظور شدید؟</string>
   <string name="welcome_final_button_text">بله!</string>
   <string name="detail_panel_cats_label">رده‌ها</string>
-  <string name="detail_panel_cats_loading">در حال بارگیری...</string>
+  <string name="detail_panel_cats_loading">در حال بارگیری…</string>
   <string name="detail_panel_cats_none">هیچ‌کدام انتخاب‌نشده</string>
   <string name="detail_description_empty">بدون توضیحات</string>
   <string name="detail_license_empty">مجوز ناشناخته</string>

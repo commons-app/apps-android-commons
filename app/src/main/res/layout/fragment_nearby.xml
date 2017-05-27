@@ -4,15 +4,8 @@
     android:orientation="vertical"
     >
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        />
-
     <ListView
-        android:id="@+id/listview"
+        android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />

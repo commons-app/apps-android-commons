@@ -15,7 +15,7 @@ public class ContributionsSyncService extends Service {
         super.onCreate();
         synchronized (sSyncAdapterLock) {
             if (sSyncAdapter == null) {
-                sSyncAdapter = new ContributionsSyncAdapter(getApplicationContext(), true);
+                sSyncAdapter = new ContributionsSyncAdapter(this, true);
             }
         }
     }

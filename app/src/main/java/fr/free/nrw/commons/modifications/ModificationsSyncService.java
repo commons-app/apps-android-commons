@@ -15,7 +15,7 @@ public class ModificationsSyncService extends Service {
         super.onCreate();
         synchronized (sSyncAdapterLock) {
             if (sSyncAdapter == null) {
-                sSyncAdapter = new ModificationsSyncAdapter(getApplicationContext(), true);
+                sSyncAdapter = new ModificationsSyncAdapter(this, true);
             }
         }
     }

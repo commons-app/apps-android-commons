@@ -15,19 +15,4 @@
   <license id="cc-by-sa-3.0-ro" template="cc-by-sa-3.0-ro" url="https://creativecommons.org/licenses/by-sa/3.0/ro/deed.$lang"/>
   <license id="cc-by-3.0" template="cc-by-3.0" url="https://creativecommons.org/licenses/by/3.0/deed.$lang"/>
   <license id="cc-zero" template="cc-zero" url="https://creativecommons.org/publicdomain/zero/1.0/deed.$lang"/>
-  <license id="own-pd" template="cc-zero"/>
-  <license id="cc-by-sa-2.5" template="cc-by-sa-2.5" url="https://creativecommons.org/licenses/by-sa/2.5/deed.$lang"/>
-  <license id="cc-by-2.5" template="cc-by-2.5" url="https://creativecommons.org/licenses/by/2.5/deed.$lang"/>
-  <license id="cc-by-sa-2.0" template="cc-by-sa-2.0" url="https://creativecommons.org/licenses/by-sa/2.0/deed.$lang"/>
-  <license id="cc-by-2.0" template="cc-by-2.0" url="https://creativecommons.org/licenses/by/2.0/deed.$lang"/>
-  <license id="fal" template="FAL"/>
-  <license id="pd-old-100" template="PD-old-100"/>
-  <license id="pd-old" template="PD-old"/>
-  <license id="pd-art" template="PD-Art"/>
-  <license id="pd-us" template="PD-US"/>
-  <license id="pd-usgov" template="PD-USGov"/>
-  <license id="pd-usgov-nasa" template="PD-USGov-NASA"/>
-  <license id="pd-ineligible" template="pd-ineligible"/>
-  <license id="attribution" template="attribution"/>
-  <license id="gfdl" template="GFDL"/>
 </licenses>

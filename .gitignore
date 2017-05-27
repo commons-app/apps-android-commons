@@ -23,3 +23,7 @@ local.properties
 # OS files
 *.DS_Store
 Thumbs.db
+app/gradle/wrapper/gradle-wrapper.jar
+app/gradlew
+app/gradlew.bat
+app/gradle/wrapper/gradle-wrapper.properties

@@ -80,7 +80,8 @@
 
         <module name="VisibilityModifier">
             <property name="packageAllowed" value="false"/>
-
+            <!-- Espresso -->
+             <property name="ignoreAnnotationCanonicalNames" value="Rule" />
             <!-- Butter Knife -->
             <property name="ignoreAnnotationCanonicalNames" value="BindArray" />
             <property name="ignoreAnnotationCanonicalNames" value="BindBitmap" />
@@ -196,9 +197,10 @@
         <module name="OverloadMethodsDeclarationOrder"/>
         <module name="VariableDeclarationUsageDistance"/>
         <module name="CustomImportOrder">
-            <property name="sortImportsInGroupAlphabetically" value="true"/>
+            <property name="sortImportsInGroupAlphabetically" value="false"/>
             <property name="separateLineBetweenGroups" value="true"/>
-            <property name="customImportOrderRules" value="STATIC###THIRD_PARTY_PACKAGE"/>
+            <property name="standardPackageRegExp" value="^(android|com|junit|net|org|java|javax)\."/>
+            <property name="customImportOrderRules" value="STANDARD_JAVA_PACKAGE###THIRD_PARTY_PACKAGE###STATIC"/>
         </module>
         <module name="MethodParamPad"/>
         <module name="ParenPad"/>

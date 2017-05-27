@@ -7,16 +7,16 @@
   <string name="login">ننوتل</string>
   <string name="signup">نومليکنه</string>
   <string name="logging_in_title">په ننوتلو کې دی</string>
-  <string name="logging_in_message">لطفاً تم شۍ ...</string>
+  <string name="logging_in_message">لطفاً تم شۍ …</string>
   <string name="login_success">غونډال کې بريالی ورننوتلۍ!</string>
   <string name="login_failed">غونډال کې ننوتنه نابريالې شوه!</string>
   <string name="upload_failed">دوتنه و نه موندل شوه. لطفاً د يوې بلې دوتنې د موندلو هڅه وکړئ.</string>
   <string name="uploading_started">پورته کېدنه پيل شوه!</string>
   <string name="upload_completed_notification_title">%1$s پورته شوی!</string>
   <string name="upload_progress_notification_title_in_progress">د %1$s پورته کول</string>
-  <string name="title_activity_contributions">زما پورته کېدنې</string>
+  <string name="title_activity_contributions" fuzzy="true">زما پورته کېدنې</string>
   <string name="contribution_state_in_progress">%1$d%% بشپړ</string>
-  <string name="contribution_state_starting">د برسېرېدلو په حال کې...</string>
+  <string name="contribution_state_starting">د برسېرېدلو په حال کې…</string>
   <string name="menu_from_gallery">له انځورتون څخه</string>
   <string name="menu_from_camera">انځور اخيستل</string>
   <string name="menu_nearby">نژدې</string>
@@ -31,7 +31,7 @@
   <string name="menu_upload_single">پورته کول</string>
   <string name="categories_search_text_hint">وېشنيزې پلټل</string>
   <string name="menu_save_categories">خوندي کول</string>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 پورته کول</item>
     <item quantity="other">%d پورته کول</item>
   </plurals>
@@ -61,12 +61,9 @@
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (رومانيا)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_zero">CC صفر</string>
-  <string name="license_name_fal">د وړيا هنر منښتليک</string>
-  <string name="license_name_pd_old_100">ټولگړی شپول (ليکوال يې 100 کاله دمخه مړ شوی)</string>
-  <string name="license_name_attribution">اړوندېدنه</string>
   <string name="welcome_final_button_text">هو</string>
   <string name="detail_panel_cats_label">وېشنيزې</string>
-  <string name="detail_panel_cats_loading">برسېرېدنې کې دی...</string>
+  <string name="detail_panel_cats_loading" fuzzy="true">برسېرېدنې کې دی…</string>
   <string name="ok">ښه</string>
   <string name="yes">هو</string>
   <string name="no">نه</string>

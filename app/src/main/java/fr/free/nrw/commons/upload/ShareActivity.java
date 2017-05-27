@@ -10,34 +10,32 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.EventLog;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
-import fr.free.nrw.commons.auth.WikiAccountAuthenticator;
 import fr.free.nrw.commons.category.CategorizationFragment;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.modifications.CategoryModifier;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
+import timber.log.Timber;
 
 /**
  * Activity for the title/desc screen after image is selected. Also starts processing image
@@ -48,9 +46,6 @@ public  class       ShareActivity
         implements  SingleUploadFragment.OnUploadActionInitiated,
         CategorizationFragment.OnCategoriesSaveHandler {
 
-    private static final String TAG = ShareActivity.class.getName();
-
-    private SingleUploadFragment shareView;
     private CategorizationFragment categorizationFragment;
 
     private CommonsApplication app;
@@ -61,14 +56,14 @@ public  class       ShareActivity
 
     private Uri mediaUri;
     private Contribution contribution;
-    private ImageView backgroundImageView;
+    private SimpleDraweeView backgroundImageView;
+
     private UploadController uploadController;
 
     private CommonsApplication cacheObj;
     private boolean cacheFound;
 
     private GPSExtractor imageObj;
-    private String filePath;
     private String decimalCoords;
 
     private boolean useNewPermissions = false;
@@ -78,10 +73,6 @@ public  class       ShareActivity
     private String title;
     private String description;
     private Snackbar snackbar;
-
-    public ShareActivity() {
-        super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
-    }
 
     /**
      * Called when user taps the submit button
@@ -112,13 +103,17 @@ public  class       ShareActivity
             getFileMetadata(false);
         }
 
-        Toast startingToast = Toast.makeText(getApplicationContext(), R.string.uploading_started, Toast.LENGTH_LONG);
+        Toast startingToast = Toast.makeText(
+                CommonsApplication.getInstance(),
+                R.string.uploading_started,
+                Toast.LENGTH_LONG
+        );
         startingToast.show();
 
-        if (cacheFound == false) {
+        if (!cacheFound) {
             //Has to be called after apiCall.request()
-            app.cacheData.cacheCategory();
-            Log.d(TAG, "Cache the categories found");
+            app.getCacheData().cacheCategory();
+            Timber.d("Cache the categories found");
         }
 
         uploadController.startUpload(title, mediaUri, description, mimeType, source, decimalCoords, new UploadController.ContributionUploadProgress() {
@@ -195,9 +190,9 @@ public  class       ShareActivity
 
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
-        app.getApi().setAuthCookie(authCookie);
+        app.getMWApi().setAuthCookie(authCookie);
 
-        shareView = (SingleUploadFragment) getSupportFragmentManager().findFragmentByTag("shareView");
+        SingleUploadFragment shareView = (SingleUploadFragment) getSupportFragmentManager().findFragmentByTag("shareView");
         categorizationFragment = (CategorizationFragment) getSupportFragmentManager().findFragmentByTag("categorization");
         if(shareView == null && categorizationFragment == null) {
                 shareView = new SingleUploadFragment();
@@ -221,9 +216,10 @@ public  class       ShareActivity
         super.onCreate(savedInstanceState);
         uploadController = new UploadController(this);
         setContentView(R.layout.activity_share);
-
-        app = (CommonsApplication)this.getApplicationContext();
-        backgroundImageView = (ImageView)findViewById(R.id.backgroundImage);
+        ButterKnife.bind(this);
+        initBack();
+        app = CommonsApplication.getInstance();
+        backgroundImageView = (SimpleDraweeView)findViewById(R.id.backgroundImage);
 
         //Receive intent from ContributionController.java when user selects picture to upload
         Intent intent = getIntent();
@@ -240,20 +236,20 @@ public  class       ShareActivity
 
         if (mediaUri != null) {
             mediaUriString = mediaUri.toString();
-            ImageLoader.getInstance().displayImage(mediaUriString, backgroundImageView);
+            backgroundImageView.setImageURI(mediaUriString);
 
             //Test SHA1 of image to see if it matches SHA1 of a file on Commons
             try {
                 InputStream inputStream = getContentResolver().openInputStream(mediaUri);
-                Log.d(TAG, "Input stream created from " + mediaUriString);
+                Timber.d("Input stream created from %s", mediaUriString);
                 String fileSHA1 = Utils.getSHA1(inputStream);
-                Log.d(TAG, "File SHA1 is: " + fileSHA1);
+                Timber.d("File SHA1 is: %s", fileSHA1);
 
                 ExistingFileAsync fileAsyncTask = new ExistingFileAsync(fileSHA1, this);
                 fileAsyncTask.execute();
 
             } catch (IOException e) {
-                Log.d(TAG, "IO Exception: ", e);
+                Timber.d(e, "IO Exception: ");
             }
         }
 
@@ -263,8 +259,8 @@ public  class       ShareActivity
 
         requestAuthToken();
 
-        Log.d(TAG, "Uri: " + mediaUriString);
-        Log.d(TAG, "Ext storage dir: " + Environment.getExternalStorageDirectory());
+        Timber.d("Uri: %s", mediaUriString);
+        Timber.d("Ext storage dir: %s", Environment.getExternalStorageDirectory());
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             useNewPermissions = true;
@@ -377,9 +373,9 @@ public  class       ShareActivity
      * @param gpsEnabled
      */
     public void getFileMetadata(boolean gpsEnabled) {
-        filePath = FileUtils.getPath(this, mediaUri);
-        Log.d(TAG, "Filepath: " + filePath);
-        Log.d(TAG, "Calling GPSExtractor");
+        String filePath = FileUtils.getPath(this, mediaUri);
+        Timber.d("Filepath: %s", filePath);
+        Timber.d("Calling GPSExtractor");
         if(imageObj == null) {
             imageObj = new GPSExtractor(filePath, this);
         }
@@ -397,28 +393,28 @@ public  class       ShareActivity
      */
     public void useImageCoords() {
         if(decimalCoords != null) {
-            Log.d(TAG, "Decimal coords of image: " + decimalCoords);
+            Timber.d("Decimal coords of image: %s", decimalCoords);
 
             // Only set cache for this point if image has coords
             if (imageObj.imageCoordsExists) {
                 double decLongitude = imageObj.getDecLongitude();
                 double decLatitude = imageObj.getDecLatitude();
-                app.cacheData.setQtPoint(decLongitude, decLatitude);
+                app.getCacheData().setQtPoint(decLongitude, decLatitude);
             }
 
             MwVolleyApi apiCall = new MwVolleyApi(this);
 
-            List<String> displayCatList = app.cacheData.findCategory();
+            List<String> displayCatList = app.getCacheData().findCategory();
             boolean catListEmpty = displayCatList.isEmpty();
 
             // If no categories found in cache, call MediaWiki API to match image coords with nearby Commons categories
             if (catListEmpty) {
                 cacheFound = false;
                 apiCall.request(decimalCoords);
-                Log.d(TAG, "displayCatList size 0, calling MWAPI" + displayCatList.toString());
+                Timber.d("displayCatList size 0, calling MWAPI %s", displayCatList);
             } else {
                 cacheFound = true;
-                Log.d(TAG, "Cache found, setting categoryList in MwVolleyApi to " + displayCatList.toString());
+                Timber.d("Cache found, setting categoryList in MwVolleyApi to %s", displayCatList);
                 MwVolleyApi.setGpsCat(displayCatList);
             }
         }
@@ -429,10 +425,10 @@ public  class       ShareActivity
         super.onPause();
         try {
             imageObj.unregisterLocationManager();
-            Log.d(TAG, "Unregistered locationManager");
+            Timber.d("Unregistered locationManager");
         }
         catch (NullPointerException e) {
-            Log.d(TAG, "locationManager does not exist, not unregistered");
+            Timber.d("locationManager does not exist, not unregistered");
         }
     }
 
@@ -446,7 +442,11 @@ public  class       ShareActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
+                if(categorizationFragment!=null && categorizationFragment.isVisible()) {
+                    categorizationFragment.backButtonDialog();
+                } else {
+                    onBackPressed();
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);

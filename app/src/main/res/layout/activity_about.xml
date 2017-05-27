@@ -1,80 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:layout_marginLeft="12dp"
-    android:layout_marginRight="12dp"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:src="@drawable/ic_launcher"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="@string/app_name"
-        style="?android:textAppearanceLarge"
-        />
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <TextView
-        android:id="@+id/about_version"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:gravity="center"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/about_license"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        style="?android:textAppearanceSmall"
-        android:gravity="center"
-        android:text="@string/about_license"
-        />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_launcher"
+                android:contentDescription= "@string/commons_logo"
+                />
 
-    <TextView
-        android:id="@+id/about_improve"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        style="?android:textAppearanceSmall"
-        android:gravity="center"
-        android:text="@string/about_improve"
-        />
+            <TextView
+                style="?android:textAppearanceLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name" />
 
-    <TextView
-        android:id="@+id/about_privacy_policy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        style="?android:textAppearanceSmall"
-        android:gravity="center"
-        android:text="@string/about_privacy_policy"
-        />
+            <TextView
+                android:id="@+id/about_version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-    <TextView
-        android:id="@+id/about_credits"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        style="?android:textAppearanceSmall"
-        android:gravity="center"
-        android:text="@string/about_credits"
-        />
+            <fr.free.nrw.commons.ui.widget.HtmlTextView
+                android:id="@+id/about_license"
+                style="?android:textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="@string/about_license" />
 
-    <TextView
-        android:id="@+id/about_uploads_to"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        style="?android:textAppearanceSmall"
-        android:gravity="center"
-        android:alpha="0.2"
-        />
+            <fr.free.nrw.commons.ui.widget.HtmlTextView
+                android:id="@+id/about_improve"
+                style="?android:textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="@string/about_improve" />
 
-</LinearLayout>
+            <fr.free.nrw.commons.ui.widget.HtmlTextView
+                android:id="@+id/about_privacy_policy"
+                style="?android:textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="@string/about_privacy_policy" />
+
+            <fr.free.nrw.commons.ui.widget.HtmlTextView
+                android:id="@+id/about_credits"
+                style="?android:textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="@string/about_credits" />
+
+            <TextView
+                android:id="@+id/about_uploads_to"
+                style="?android:textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:alpha="0.2"
+                android:gravity="center" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/drawer_pane"
+        android:layout_width="320dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@android:color/white">
+
+        <FrameLayout
+            android:id="@+id/drawer_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+
+</android.support.v4.widget.DrawerLayout>

@@ -31,8 +31,8 @@
   <string name="menu_about">ھەققىدە</string>
   <string name="menu_download">چۈشۈرۈڭ</string>
   <string name="preference_license">ئىجازەتنامە</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Attribution-ShareAlikeu00A03.0</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0Attributionu00A03.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CC Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (ئاۋستىرىيە)</string>
@@ -45,12 +45,6 @@
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (رومىنىيە)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_zero">CC0</string>
-  <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
-  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
-  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_2_0">CC BY 2.0</string>
-  <string name="license_name_fal">ھەقسىز سەنئەت ئىجازەتنامىسى</string>
   <string name="welcome_final_button_text">ھەئە!</string>
   <string name="detail_panel_cats_label">كاتېگورىيە</string>
   <string name="detail_panel_cats_loading">يۈكلەۋاتىدۇ…</string>

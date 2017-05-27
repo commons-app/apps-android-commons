@@ -7,7 +7,7 @@
   <string name="login">Најава</string>
   <string name="signup">Регистрација</string>
   <string name="logging_in_title">Најава</string>
-  <string name="logging_in_message">Почекајте...</string>
+  <string name="logging_in_message">Почекајте…</string>
   <string name="login_success">Најавата е успешна!</string>
   <string name="login_failed">Најавата не успеа!</string>
   <string name="upload_failed">Не ја пронајдов податотеката. Пробајте со друга.</string>
@@ -21,10 +21,10 @@
   <string name="upload_failed_notification_title">Подигањето на „%1$s“ не успеа</string>
   <string name="upload_failed_notification_subtitle">Допрете за да погледате</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">Се подига 1 податотека</item>
+    <item quantity="one">Се подига %d податотека</item>
     <item quantity="other">Се подигаат %d податотеки</item>
   </plurals>
-  <string name="title_activity_contributions">Мои подигања</string>
+  <string name="title_activity_contributions">Мои скорешни подигања</string>
   <string name="contribution_state_queued">Чека ред</string>
   <string name="contribution_state_failed">Не успеа</string>
   <string name="contribution_state_in_progress">%1$d%% подигнато</string>
@@ -42,6 +42,7 @@
   <string name="login_failed_password">Не можам да Ве најавам — проверете си ја лозинката</string>
   <string name="login_failed_throttled">Направени се премногу неуспешни обиди. Обидете се пак за некоја минута.</string>
   <string name="login_failed_blocked">Нажалост, корисникот е блокиран на Ризницата</string>
+  <string name="login_failed_2fa_needed">Мора да го укажете вашиот код за двочинителска заверка.</string>
   <string name="login_failed_generic">Најавата не успеа</string>
   <string name="share_upload_button">Подигни</string>
   <string name="multiple_share_base_title">Дајте му име на овој комплет</string>
@@ -50,24 +51,24 @@
   <string name="categories_search_text_hint">Пребарај категории</string>
   <string name="menu_save_categories">Зачувај</string>
   <string name="refresh_button">Превчитај</string>
+  <string name="gps_disabled">ГПС е исклучен на уредов. Дали сакате да го вклучите?</string>
+  <string name="enable_gps">Вклучи ГПС</string>
+  <string name="contributions_subtitle_zero">Сè уште нема подигања</string>
   <plurals name="contributions_subtitle">
-    <item quantity="zero">Засега нема ништо подигнато</item>
-    <item quantity="one">Едно подигање</item>
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%d подигање</item>
     <item quantity="other">%d подигања</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Го заапочнувам подигањето подигање</item>
+    <item quantity="one">Започнувам %d подигање</item>
     <item quantity="other">Започнувам %d подигања</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">Едно подигање</item>
+    <item quantity="one">%d подигање</item>
     <item quantity="other">%d подигања</item>
   </plurals>
   <string name="categories_not_found">Нема категории што одговараат на %1$s</string>
-  <string name="categories_skip_explanation">Ставете им категории на сликите, за да можат корисниците полесно да ги најдат на Ризницата.
-
-За да ставите категорија, почнете со пишување на нејзиното име.
-Допрете ја поракава (или стиснете на назад) за да го прескокнете овој чекор.</string>
+  <string name="categories_skip_explanation">Ставете им категории на сликите, за да можат корисниците полесно да ги најдат на Ризницата.\n\nЗа да ставите категорија, почнете со пишување на нејзиното име.\nДопрете ја поракава (или стиснете на назад) за да го прескокнете овој чекор.</string>
   <string name="categories_activity_title">Категории</string>
   <string name="preference_tracking">Извештаи за употреба</string>
   <string name="preference_tracking_summary">Испраќајте ѝ на Викимедија извештаи за употреба, со цел да го подобриме извршников</string>
@@ -77,12 +78,12 @@
   <string name="about_license">Програм со отворен код, издаден под лиценцата &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Апачи вер. 2&lt;/a&gt;. ризницата и нејзиното лого се заштитни знаци на Фондацијата Викимедија и се користат со нејзина дозвола. Ние не сме поддржани и поврзани со Фондацијата Викимедија.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Извор&lt;/a&gt; и &lt;a href=\"https://commons-app.github.io/\"&gt;мреж. место&lt;/a&gt; на GitHub&lt;/a&gt;. Создајте нов &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;случај на GitHub&lt;/a&gt; за пријавување грешки и давање предлози.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Заштита на личните податоци\"&gt;Заштита_на_личните_податоци&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;ЗАСЛУГИ&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Заслуги&lt;/a&gt;</string>
   <string name="title_activity_about">За извршникот</string>
   <string name="menu_feedback">Испратете Ваше мислење (по е-пошта)</string>
   <string name="no_email_client">Немате воспоставено клиент за е-пошта</string>
   <string name="provider_categories">Неодамна искористени категории</string>
-  <string name="waiting_first_sync">Го чекам првото усогласување...</string>
+  <string name="waiting_first_sync">Го чекам првото усогласување…</string>
   <string name="no_uploads_yet">Сè уште немате подигнато ниедна слика.</string>
   <string name="menu_retry_upload">Пробај пак</string>
   <string name="menu_cancel_upload">Откажи</string>
@@ -114,37 +115,14 @@
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Нула</string>
-  <string name="license_name_own_pd">own-pd</string>
-  <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
-  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
-  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_2_0">CC BY 2.0</string>
-  <string name="license_name_fal">Лиценца за слободна уметност</string>
-  <string name="license_name_pd_old_100">Јавна сопственост (авторот починал барем пред 100 години)</string>
-  <string name="license_name_pd_old">Јавна сопственост (правата истекле)</string>
-  <string name="license_name_pd_art">Јавна сопственост (уметност)</string>
-  <string name="license_name_pd_us">Јавна сопственост (САД)</string>
-  <string name="license_name_pd_usgov">Јавна сопственост (Влада на САД)</string>
-  <string name="license_name_pd_usgov_nasa">Јавна сопственост (НАСА)</string>
-  <string name="license_name_pd_ineligible">Јавна сопственост (не подлежи на заштита)</string>
-  <string name="license_name_attribution">Наведи извор</string>
-  <string name="license_name_gfdl">ГНУ-ова лиценца за слободна документација</string>
   <string name="tutorial_1_text">Ризницата е вдомувач на највеќето слики што се користат на Википедија.</string>
-  <string name="tutorial_1_subtext">Со вашите слики помагате во образованието
-на луѓето ширум светот!</string>
+  <string name="tutorial_1_subtext">Со вашите слики помагате во образованието\nна луѓето ширум светот!</string>
   <string name="tutorial_2_text">Подигајте слики кои се наполно ваше дело:</string>
-  <string name="tutorial_2_subtext">u2022 Природни објекти (цвеќиња, животни, планини) 
-u2022 Наменски објекти (велосипеди, железнички станици) 
-u2022 Познати личности (вашиот градоначалник, олимписки спортисти што ќе ги сретнете)</string>
+  <string name="tutorial_2_subtext">u2022 Природни објекти (цвеќиња, животни, планини) \nu2022 Наменски објекти (велосипеди, железнички станици) \nu2022 Познати личности (вашиот градоначалник, олимписки спортисти што ќе ги сретнете)</string>
   <string name="tutorial_3_text">НЕ подигајте:</string>
-  <string name="tutorial_3_subtext">u2022 Слики од вас или вашите пријатели 
-u2022 Слики што сте ги презеле од семрежјето 
-u2022 Екрански снимки на неслободни прилози (апликации)</string>
+  <string name="tutorial_3_subtext">u2022 Слики од вас или вашите пријатели \nu2022 Слики што сте ги презеле од семрежјето \nu2022 Екрански снимки на неслободни прилози (апликации)</string>
   <string name="tutorial_4_text">Пример за подигање:</string>
-  <string name="tutorial_4_subtext">u2022 Наслов: Сиднејска опера 
-u2022 Опис: Поглед на Сиднејската опера преку заливот
-u2022 Категорија: Сиднејска опера, Сиднејската опера од запад, Сиднејската опера од далеку</string>
+  <string name="tutorial_4_subtext">u2022 Наслов: Сиднејска опера \nu2022 Опис: Поглед на Сиднејската опера преку заливот\nu2022 Категорија: Сиднејска опера, Сиднејската опера од запад, Сиднејската опера од далеку</string>
   <string name="welcome_wikipedia_text">Споделете ги Вашите слики. Да ги оживееме статиите на Википедија!</string>
   <string name="welcome_wikipedia_subtext">Сликите на Википедија доаѓаат од Ризницата.</string>
   <string name="welcome_copyright_text">Со Вашите слики помагате во образованието на луѓето ширум светот.</string>
@@ -152,7 +130,7 @@ u2022 Категорија: Сиднејска опера, Сиднејскат�
   <string name="welcome_final_text">Објаснивме добро?</string>
   <string name="welcome_final_button_text">Да!</string>
   <string name="detail_panel_cats_label">Категории</string>
-  <string name="detail_panel_cats_loading">Вчитувам...</string>
+  <string name="detail_panel_cats_loading">Вчитувам…</string>
   <string name="detail_panel_cats_none">Ништо не е одбрано</string>
   <string name="detail_description_empty">Нема опис</string>
   <string name="detail_license_empty">Непозната лиценца</string>
@@ -161,6 +139,7 @@ u2022 Категорија: Сиднејска опера, Сиднејскат�
   <string name="location_permission_rationale">Дозвола по желба: Утврдување на тековната местоположба за предлагање категории</string>
   <string name="ok">ОК</string>
   <string name="title_activity_nearby">Околни места</string>
+  <string name="no_nearby">Не најдов околни места</string>
   <string name="warning">Предупредување</string>
   <string name="file_exists">Податотекава веќе постои на Ризницата. Дали сигурно сакате да продолжите?</string>
   <string name="yes">Да</string>
@@ -169,8 +148,42 @@ u2022 Категорија: Сиднејска опера, Сиднејскат�
   <string name="media_detail_media_title">Наслов на податотеката</string>
   <string name="media_detail_description">Опис</string>
   <string name="media_detail_description_explanation">Тука оди описот на податотеката. Ова потенцијално може да биде прилично долго, и ќе треба да се преломи во неколку реда. Се надеваме дека ќе изгледа добро.</string>
+  <string name="media_detail_uploaded_date">Датум на подигање</string>
   <string name="become_a_tester_title">Станете бета-испробувач</string>
   <string name="become_a_tester_description">Пријавете се на нашиот бета-канал на Google Play и добивајте ран пристап до нови можности и исправки на грешки</string>
   <string name="use_wikidata">Користи Википодатоци</string>
   <string name="use_wikidata_summary">(Предупредување: исклучувањето може да доведе до голема потрошувачка на мобилни податоци)</string>
+  <string name="_2fa_code">2ЧЗ-код</string>
+  <string name="number_of_uploads">Мое ограничување на скорешните подигања</string>
+  <string name="maximum_limit">Крајна граница</string>
+  <string name="maximum_limit_alert">Не можам да прикажам повеќе од 500</string>
+  <string name="set_limit">Задај ограничување на скорешни подигања</string>
+  <string name="login_failed_2fa_not_supported">Двочинителската заверка засега не е поддржана.</string>
+  <string name="logout_verification">Дали навистина сакате да се одјавите?</string>
+  <string name="commons_logo">Лого на Ризницата</string>
+  <string name="background_image">Заднинска слика</string>
+  <string name="mediaimage_failed">Сликата не успеа</string>
+  <string name="no_image_found">Не најдов слики</string>
+  <string name="upload_image">Подигни слика</string>
+  <string name="welcome_image_mount_zao">Зао</string>
+  <string name="welcome_image_llamas">Лами</string>
+  <string name="welcome_image_rainbow_bridge">Виножитен мост</string>
+  <string name="welcome_image_tulip">Лале</string>
+  <string name="welcome_image_no_selfies">Без самослици</string>
+  <string name="welcome_image_proprietary">Сопственичка слика</string>
+  <string name="welcome_image_welcome_wikipedia">Добре дојде Википедија</string>
+  <string name="welcome_image_welcome_copyright">Добре дојде Авторски права</string>
+  <string name="welcome_image_sydney_opera_house">Сиднејска опера</string>
+  <string name="cancel">Откажи</string>
+  <string name="navigation_drawer_open">Отвори</string>
+  <string name="navigation_drawer_close">Затвори</string>
+  <string name="navigation_item_home">Почетна</string>
+  <string name="navigation_item_upload">Подигни</string>
+  <string name="navigation_item_nearby">Во близина</string>
+  <string name="navigation_item_about">За прилогот</string>
+  <string name="navigation_item_settings">Нагодувања</string>
+  <string name="navigation_item_feedback">Мислења</string>
+  <string name="navigation_item_logout">Одјава</string>
+  <string name="nearby_info_menu_commons_article">Статија на Ризницата</string>
+  <string name="nearby_info_menu_wikidata_article">Статија на Википодатоците</string>
 </resources>

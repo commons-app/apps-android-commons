@@ -7,7 +7,7 @@
   <string name="login">Mewngofnodi</string>
   <string name="signup">Cofrestru</string>
   <string name="logging_in_title">Wrthi\'n mewngofnodi</string>
-  <string name="logging_in_message">Disgwyliwch...</string>
+  <string name="logging_in_message">Disgwyliwch…</string>
   <string name="login_success">Llwyddodd y mewngofnodi!</string>
   <string name="login_failed">Methodd y mewngofnodi!</string>
   <string name="upload_failed">Ni chafwyd hyd i\'r ffeil. Ceisiwch un arall.</string>
@@ -20,11 +20,11 @@
   <string name="upload_progress_notification_title_finishing">Yn gorffen uwchlwytho %1$s</string>
   <string name="upload_failed_notification_title">Methwyd uwchlwytho %1$s</string>
   <string name="upload_failed_notification_subtitle">Tapiwch i weld</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">1 ffeil yn uwchlwytho</item>
     <item quantity="other">%d ffeil yn uwchlwytho</item>
   </plurals>
-  <string name="title_activity_contributions">Fy uwchlwythiadau</string>
+  <string name="title_activity_contributions" fuzzy="true">Fy uwchlwythiadau</string>
   <string name="contribution_state_queued">Yn y ciw</string>
   <string name="contribution_state_failed">Methiant</string>
   <string name="contribution_state_in_progress">Wedi cwblhau %1$d%%</string>
@@ -49,36 +49,35 @@
   <string name="menu_upload_single">Uwchlwytho</string>
   <string name="categories_search_text_hint">Archwilio\'r categorïau</string>
   <string name="menu_save_categories">Cadw</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Dim Uwchlwythiadau eto</item>
     <item quantity="one">1 uwchlwythiad</item>
     <item quantity="other">%d uwchlwythiad</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Cychwyn uwchlwytho 1 ffeil</item>
     <item quantity="other">Cychwyn uwchlwytho %d ffeil</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 uwchlwythiad</item>
     <item quantity="other">%d uwchlwythiad</item>
   </plurals>
   <string name="categories_not_found">Dim categori\'n cyfateb i %1$s ar gael</string>
-  <string name="categories_skip_explanation">Cychwynwch deipio i ychwanegu categoriau.
-Cyffyrddwch y neges hon (neu ddewis Nôl) i fynd i\'r cam nesaf.</string>
+  <string name="categories_skip_explanation">Cychwynwch deipio i ychwanegu categoriau.\nCyffyrddwch y neges hon (neu ddewis Nôl) i fynd i\'r cam nesaf.</string>
   <string name="categories_activity_title">Categorïau</string>
   <string name="preference_tracking">Adroddiadau ar y defnydd</string>
   <string name="preference_tracking_summary">Danfonwch yr adroddiadau ar y defnydd i Wikimedia i\'n cynorthwyo i wella\'r ap</string>
   <string name="title_activity_settings">Gosodiadau</string>
   <string name="title_activity_signup">Cofrestru</string>
   <string name="menu_about">Amdanom</string>
-  <string name="about_license" fuzzy="true">Meddalwedd Cynnwys Agored wedi\'i rhyddhau o dan &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Drwydded Apache v2&lt;/a&gt; Mae logo a nod masnach Comin Wicimedia yn eiddo i Sefydliad Wicimedia ac fe\'u defnyddir gyda chaniatad y Sefydliad hwnnw. Nid ydym ni wedi cael sêl bendith y sefydliad nac yn perthyn iddyn nhw.</string>
+  <string name="about_license" fuzzy="true">Meddalwedd Cynnwys Agored wedi\'i rhyddhau o dan &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Drwydded Apache v2&lt;/a&gt; Mae logo a nod masnach Comin Wicimedia yn eiddo i Sefydliad Wicimedia ac fe\'u defnyddir gyda chaniatad y Sefydliad hwnnw. Nid ydym ni wedi cael sêl bendith y sefydliad nac yn perthyn iddyn nhw.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Mae\'r codau ffynhonnell ar wefanau&lt;/a&gt; Comin a &lt;a href=\"https://commons-app.github.io/\"&gt;gwefan &lt;/a&gt; GitHub. Gellwch greu &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;Ymholiad Github&lt;/a&gt; os gwelwch byg, neu i awgrymu gwelliannau.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Polisi preifatrwydd&lt;/a&gt;</string>
   <string name="title_activity_about">Amdanom</string>
   <string name="menu_feedback">Danfonwch Adborth (drwy Ebost)</string>
   <string name="no_email_client">Dim ebost client wedi\'i ganfod</string>
   <string name="provider_categories">Categorïau a ddefnyddiwyd yn ddiweddar</string>
-  <string name="waiting_first_sync">Yn aros am y sync cyntaf...</string>
+  <string name="waiting_first_sync">Yn aros am y sync cyntaf…</string>
   <string name="no_uploads_yet">Nid ydych wedi uwchlwytho ffotograffau eto.</string>
   <string name="menu_retry_upload">Ailgynnig</string>
   <string name="menu_cancel_upload">Diddymer</string>
@@ -87,8 +86,8 @@ Cyffyrddwch y neges hon (neu ddewis Nôl) i fynd i\'r cam nesaf.</string>
   <string name="preference_license">Trwydded</string>
   <string name="use_previous">Defnydiwch y teitl/disgrifiad blaenorol</string>
   <string name="allow_gps">Defnyddiwch y lleoliad cyfredol</string>
-  <string name="license_name_cc_by_sa">CCu00A0Attribution-ShareAlikeu00A03.0</string>
-  <string name="license_name_cc_by">CCu00A0Attributionu00A03.0</string>
+  <string name="license_name_cc_by_sa">CC Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Awstria)</string>
@@ -103,31 +102,14 @@ Cyffyrddwch y neges hon (neu ddewis Nôl) i fynd i\'r cam nesaf.</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romania)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
-  <string name="license_name_own_pd">parth y cyhoedd (hunan-waith)</string>
-  <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
-  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
-  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_2_0">CC BY 2.0</string>
-  <string name="license_name_fal">Trwydded Celfyddyd Rhydd</string>
-  <string name="license_name_pd_old_100">Parth y cyhoedd (bu farw\'r awdur mwy na 100 mlynedd yn ôl)</string>
-  <string name="license_name_pd_old">Parth y cyhoedd (yr hawlfraint wedi dod i ben)</string>
-  <string name="license_name_pd_art">Parth y cyhoedd (celfyddyd gain)</string>
-  <string name="license_name_pd_us">Parth y cyhoedd (UDA)</string>
-  <string name="license_name_pd_usgov">Parth y cyhoedd (Llywodraeth UDA)</string>
-  <string name="license_name_pd_usgov_nasa">Parth y cyhoedd (NASA)</string>
-  <string name="license_name_pd_ineligible">Y parth cyhoeddus (gosod hawlfraint ddim yn gymwys)</string>
-  <string name="license_name_attribution">Cydnabyddiaeth</string>
-  <string name="license_name_gfdl">GNU Free Documentation License</string>
   <string name="welcome_wikipedia_text">Cyfranwch luniau. Cynorthwywch Wicipedia i roi bywyd yn yr erthyglau!</string>
-  <string name="welcome_wikipedia_subtext">Mae\'r delweddau ar Wicipedia\'n dod o
-Gomin Wikimedia.</string>
+  <string name="welcome_wikipedia_subtext">Mae\'r delweddau ar Wicipedia\'n dod o\nGomin Wikimedia.</string>
   <string name="welcome_copyright_text">Mae eich delweddau\'n cynorthwyo i addysgu pobl ledled y byd.</string>
   <string name="welcome_copyright_subtext">Cadwch yn glir o ddeunydd a hawlfraint arno a ganfyddwch ar y we, ac hefyd lluniau o bosteri, cloriau llyfrau, ayb.</string>
   <string name="welcome_final_text">Ydych chi wedi deall?</string>
   <string name="welcome_final_button_text">Do!</string>
   <string name="detail_panel_cats_label">Categorïau</string>
-  <string name="detail_panel_cats_loading">Wrthi\'n llwytho...</string>
+  <string name="detail_panel_cats_loading">Wrthi\'n llwytho…</string>
   <string name="detail_panel_cats_none">Dim categorïau wedi eu dewis</string>
   <string name="detail_description_empty">Dim disgrifiad</string>
   <string name="detail_license_empty">Trwydded anhysbys</string>

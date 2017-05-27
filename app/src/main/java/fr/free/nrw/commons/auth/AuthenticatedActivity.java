@@ -10,18 +10,18 @@ import android.os.Bundle;
 
 import java.io.IOException;
 
-import fr.free.nrw.commons.theme.BaseActivity;
 import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.theme.NavigationBaseActivity;
 
-public abstract class AuthenticatedActivity extends BaseActivity {
+public abstract class AuthenticatedActivity extends NavigationBaseActivity {
 
     String accountType;
     CommonsApplication app;
 
     private String authCookie;
     
-    public AuthenticatedActivity(String accountType) {
-       this.accountType = accountType;
+    public AuthenticatedActivity() {
+        this.accountType = AccountUtil.accountType();
     }
    
     private class GetAuthCookieTask extends AsyncTask<Void, String, String> {
@@ -131,7 +131,7 @@ public abstract class AuthenticatedActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        app = (CommonsApplication)this.getApplicationContext();
+        app = CommonsApplication.getInstance();
         if(savedInstanceState != null) {
             authCookie = savedInstanceState.getString("authCookie");
         }

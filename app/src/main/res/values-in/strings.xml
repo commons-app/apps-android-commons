@@ -7,7 +7,7 @@
   <string name="login">Masuk log</string>
   <string name="signup">Daftar</string>
   <string name="logging_in_title">Memasuki log</string>
-  <string name="logging_in_message">Silakan tunggu...</string>
+  <string name="logging_in_message">Silakan tunggu…</string>
   <string name="login_success">Berhasil masuk log!</string>
   <string name="login_failed">Masuk log gagal!</string>
   <string name="upload_failed" fuzzy="true">Berkas tidak ditemukan, silakan coba berkas lain</string>
@@ -20,11 +20,11 @@
   <string name="upload_progress_notification_title_finishing">Menyelesaikan pengunggahan %1$s</string>
   <string name="upload_failed_notification_title">Mengunggah %1$s gagal</string>
   <string name="upload_failed_notification_subtitle">Tekan untuk melihat</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">mengunggah 1 berkas</item>
     <item quantity="other">mengunggah %d berkas</item>
   </plurals>
-  <string name="title_activity_contributions">Unggahan saya</string>
+  <string name="title_activity_contributions" fuzzy="true">Unggahan saya</string>
   <string name="contribution_state_queued">Antrean</string>
   <string name="contribution_state_failed">Gagal</string>
   <string name="contribution_state_in_progress">%1$d%% selesai</string>
@@ -49,37 +49,34 @@
   <string name="menu_upload_single">Unggah</string>
   <string name="categories_search_text_hint">Telusuri kategori</string>
   <string name="menu_save_categories">Simpan</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Tidak ada unggahan</item>
     <item quantity="one">1 unggahan</item>
     <item quantity="other">%d unggahan</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Memulai 1 unggahan</item>
     <item quantity="other">Memulai %d unggahan</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 unggahan</item>
     <item quantity="other">%d unggahan</item>
   </plurals>
   <string name="categories_not_found">Tidak ada kategori yang cocok dengan %1$s</string>
-  <string name="categories_skip_explanation">Tambahkan kategori agar foto Anda lebih mudah ditemukan di Wikimedia Commons.
-
-Mulai mengetik untuk menambahkan kategori.
-Tekan pesan ini (atau tekan kembali) untuk melewatkan langkah ini.</string>
+  <string name="categories_skip_explanation">Tambahkan kategori agar foto Anda lebih mudah ditemukan di Wikimedia Commons.\n\nMulai mengetik untuk menambahkan kategori.\nTekan pesan ini (atau tekan kembali) untuk melewatkan langkah ini.</string>
   <string name="categories_activity_title">Kategori</string>
   <string name="preference_tracking">Laporan penggunaan</string>
   <string name="preference_tracking_summary">Kirimkan laporan penggunaan ke Wikimedia untuk membantu kami memperbaiki aplikasi</string>
   <string name="title_activity_settings">Pengaturan</string>
   <string name="title_activity_signup">Mendaftar</string>
   <string name="menu_about">Tentang</string>
-  <string name="about_license" fuzzy="true">Perangkat lunak sumber terbuka dirilis di bawah &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;lisensi Apache v2&lt;/a&gt;. Wikimedia Commons dan logonya merupakan merek dagang dari Wikimedia Foundation dan digunakan dengan izin dari Wikimedia Foundation. Kami tidak disetujui oleh atau berafiliasi dengan Wikimedia Foundation.</string>
-  <string name="about_improve" fuzzy="true">Bersumber di &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Bug di &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
+  <string name="about_license" fuzzy="true">Perangkat lunak sumber terbuka dirilis di bawah &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;lisensi Apache v2&lt;/a&gt;. Wikimedia Commons dan logonya merupakan merek dagang dari Wikimedia Foundation dan digunakan dengan izin dari Wikimedia Foundation. Kami tidak disetujui oleh atau berafiliasi dengan Wikimedia Foundation.</string>
+  <string name="about_improve" fuzzy="true">Bersumber di &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Bug di &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy/id\"&gt;Kebijakan privasi&lt;/a&gt;</string>
   <string name="title_activity_about">Tentang</string>
   <string name="menu_feedback">Kirim umpan balik (via Surel)</string>
   <string name="provider_categories">Kategori yang terakhir digunakan</string>
-  <string name="waiting_first_sync">Menunggu sinkronisasi pertama...</string>
+  <string name="waiting_first_sync">Menunggu sinkronisasi pertama…</string>
   <string name="no_uploads_yet">Anda belum mengunggah foto apapun.</string>
   <string name="menu_retry_upload">Coba lagi</string>
   <string name="menu_cancel_upload">Batal</string>
@@ -108,22 +105,6 @@ Tekan pesan ini (atau tekan kembali) untuk melewatkan langkah ini.</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Nol</string>
-  <string name="license_name_own_pd">own-pd</string>
-  <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
-  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
-  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_2_0">CC BY 2.0</string>
-  <string name="license_name_fal">Lisensi Artistik Bebas</string>
-  <string name="license_name_pd_old_100">Domain umum (penulis meninggal lebih dari 100 tahun yang lalu)</string>
-  <string name="license_name_pd_old">Domain umum (hak cipta kedaluwarsa)</string>
-  <string name="license_name_pd_art">Domain umum (seni)</string>
-  <string name="license_name_pd_us">Domain umum (AS)</string>
-  <string name="license_name_pd_usgov">Domain umum (pemerintah AS)</string>
-  <string name="license_name_pd_usgov_nasa">Domain umum (NASA)</string>
-  <string name="license_name_pd_ineligible">Domain umum (tidak memenuhi syarat untuk hak cipta)</string>
-  <string name="license_name_attribution">Atribusi</string>
-  <string name="license_name_gfdl">Lisensi Dokumentasi Bebas GNU</string>
   <string name="tutorial_1_subtext">Gambar Anda membatu mendidik orang-orang di seluruh dunia!</string>
   <string name="welcome_wikipedia_text">Sumbangkan gambar-gambar Anda. Bantu hidupkan artikel Wikipedia!</string>
   <string name="welcome_wikipedia_subtext">Gambar di Wikipedia diambil dari Wikimedia Commons.</string>
@@ -132,7 +113,7 @@ Tekan pesan ini (atau tekan kembali) untuk melewatkan langkah ini.</string>
   <string name="welcome_final_text">Apakah Anda paham?</string>
   <string name="welcome_final_button_text">Ya!</string>
   <string name="detail_panel_cats_label">Kategori</string>
-  <string name="detail_panel_cats_loading">Memuat...</string>
+  <string name="detail_panel_cats_loading" fuzzy="true">Memuat…</string>
   <string name="detail_panel_cats_none">Tidak ada yang dipilih</string>
   <string name="detail_description_empty">Tidak ada keterangan</string>
   <string name="detail_license_empty">Lisensi tidak diketahui</string>

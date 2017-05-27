@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="DarkAppTheme" parent="Theme.AppCompat">
+    <style name="DarkAppTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="mainBackground">@color/main_background_dark</item>
         <item name="semitransparentText">@color/commons_app_blue_dark</item>
         <item name="commonsAppBlue">@color/activity_welcome_background_dark</item>
@@ -16,7 +16,7 @@
         <item name="spinnerTheme">@style/DarkSpinnerTheme</item>
     </style>
 
-    <style name="LightAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="LightAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="mainBackground">@color/main_background_light</item>
         <item name="semitransparentText">@color/commons_app_blue_light</item>
         <item name="commonsAppBlue">@color/activity_welcome_background_light</item>
@@ -44,5 +44,11 @@
     </style>
 
     <style name="ProgressBar" parent="Widget.AppCompat.ProgressBar.Horizontal" />
+
+    <style name="borderless_dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
 
 </resources>

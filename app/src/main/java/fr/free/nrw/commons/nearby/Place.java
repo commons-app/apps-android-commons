@@ -16,14 +16,17 @@ public class Place {
     public Bitmap image;
     public Bitmap secondaryImage;
     public String distance;
+    public Sitelinks siteLinks;
+
 
     public Place(String name, String description, String longDescription,
-                 Uri secondaryImageUrl, LatLng location) {
+                 Uri secondaryImageUrl, LatLng location, Sitelinks siteLinks) {
         this.name = name;
         this.description = description;
         this.longDescription = longDescription;
         this.secondaryImageUrl = secondaryImageUrl;
         this.location = location;
+        this.siteLinks = siteLinks;
     }
 
     public void setDistance(String distance) {

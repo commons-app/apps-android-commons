@@ -24,7 +24,7 @@
     <item quantity="one">Eine Datei wird hochgeladen</item>
     <item quantity="other">%d Dateien werden hochgeladen</item>
   </plurals>
-  <string name="title_activity_contributions">Meine hochgeladenen Dateien</string>
+  <string name="title_activity_contributions">Meine kürzlich hochgeladenen Dateien</string>
   <string name="contribution_state_queued">In der Warteschlange</string>
   <string name="contribution_state_failed">Fehlgeschlagen</string>
   <string name="contribution_state_in_progress">%1$d%% abgeschlossen</string>
@@ -42,6 +42,7 @@
   <string name="login_failed_password">Anmeldung fehlgeschlagen – Bitte Passwort überprüfen</string>
   <string name="login_failed_throttled">Zu viele erfolglose Versuche. Bitte in einigen Minuten erneut versuchen.</string>
   <string name="login_failed_blocked">Dieser Benutzer wurde leider auf Commons gesperrt</string>
+  <string name="login_failed_2fa_needed">Du musst deinen Code zur Zwei-Faktor-Authentifizierung angeben.</string>
   <string name="login_failed_generic">Anmeldung fehlgeschlagen</string>
   <string name="share_upload_button">Hochladen</string>
   <string name="multiple_share_base_title">Benenne diesen Satz</string>
@@ -50,8 +51,11 @@
   <string name="categories_search_text_hint">Kategorien durchsuchen</string>
   <string name="menu_save_categories">Speichern</string>
   <string name="refresh_button">Aktualisieren</string>
+  <string name="gps_disabled">GPS ist auf deinem Gerät deaktiviert. Möchtest du es aktivieren?</string>
+  <string name="enable_gps">GPS aktivieren</string>
+  <string name="contributions_subtitle_zero">Noch keine hochgeladenen Dateien</string>
   <plurals name="contributions_subtitle">
-    <item quantity="zero">Noch keine hochgeladenen Dateien</item>
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">Eine hochgeladene Datei</item>
     <item quantity="other">%d hochgeladene Dateien</item>
   </plurals>
@@ -64,10 +68,7 @@
     <item quantity="other">%d hochgeladene Dateien</item>
   </plurals>
   <string name="categories_not_found">Die Kategorie „%1$s“ wurde nicht gefunden</string>
-  <string name="categories_skip_explanation">Füge Kategorien hinzu, um deine Bilder auf Wikimedia Commons auffindbarer zu machen.
-
-Beginn zu schreiben, um Kategorien hinzuzufügen.
-Tippe auf diese Nachricht oder drücke „Zurück“, um diesen Schritt zu überspringen.</string>
+  <string name="categories_skip_explanation">Füge Kategorien hinzu, um deine Bilder auf Wikimedia Commons auffindbarer zu machen.\n\nBeginn zu schreiben, um Kategorien hinzuzufügen.\nTippe auf diese Nachricht oder drücke „Zurück“, um diesen Schritt zu überspringen.</string>
   <string name="categories_activity_title">Kategorien</string>
   <string name="preference_tracking">Nutzungsberichte</string>
   <string name="preference_tracking_summary">Nutzungsberichte an Wikimedia senden, um zur Verbesserung der App beizutragen</string>
@@ -77,7 +78,7 @@ Tippe auf diese Nachricht oder drücke „Zurück“, um diesen Schritt zu über
   <string name="about_license">Die Open-Source-Software wurde veröffentlicht unter der &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache-Lizenz v2&lt;/a&gt;. Wikimedia Commons und das Wikimedia-Commons-Logo sind Markenzeichen der Wikimedia Foundation und wurden mit Genehmigung der Wikimedia Foundation verwendet. Wir wurden nicht von der Wikimedia Foundation bestätigt oder sind nicht mit ihr verbunden.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Quellcode&lt;/a&gt; und &lt;a href=\"https://commons-app.github.io/\"&gt;Website&lt;/a&gt; auf GitHub. Einen neuen &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-Eintrag&lt;/a&gt; für Fehlerberichte und Vorschläge erstellen.</string>
   <string name="about_privacy_policy">&lt;a href=\"//de.wikipedia.org/wiki/Wikipedia:Datenschutz\"&gt;Datenschutzrichtlinie&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;DANKSAGUNGEN&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Danksagungen&lt;/a&gt;</string>
   <string name="title_activity_about">Über</string>
   <string name="menu_feedback">Rückmeldung per E-Mail senden</string>
   <string name="no_email_client">Es ist kein E-Mail-Client installiert</string>
@@ -114,36 +115,14 @@ Tippe auf diese Nachricht oder drücke „Zurück“, um diesen Schritt zu über
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
-  <string name="license_name_own_pd">Gemeinfrei (eigenes Werk)</string>
-  <string name="license_name_cc_by_sa_2_5">CC-BY-SA 2.5</string>
-  <string name="license_name_cc_by_2_5">CC-BY 2.5</string>
-  <string name="license_name_cc_by_sa_2_0">CC-BY-SA 2.0</string>
-  <string name="license_name_cc_by_2_0">CC-BY-SA 2.0</string>
-  <string name="license_name_cc_2_0">CC-BY 2.0</string>
-  <string name="license_name_fal">Lizenz Freie Kunst</string>
-  <string name="license_name_pd_old_100">Gemeinfrei (Urheber starb vor über 100 Jahren)</string>
-  <string name="license_name_pd_old">Gemeinfrei (Urheberrecht abgelaufen)</string>
-  <string name="license_name_pd_art">Gemeinfrei (Kunst)</string>
-  <string name="license_name_pd_us">Gemeinfrei (US)</string>
-  <string name="license_name_pd_usgov">Gemeinfrei (US-Regierung)</string>
-  <string name="license_name_pd_usgov_nasa">Gemeinfrei (NASA)</string>
-  <string name="license_name_pd_ineligible">Gemeinfrei (geringe Schöpfungshöhe)</string>
-  <string name="license_name_attribution">Namensnennung</string>
-  <string name="license_name_gfdl">GNU-Lizenz für freie Dokumentation</string>
   <string name="tutorial_1_text">Wikimedia Commons speichert die meisten Bilder, die in Wikipedia verwendet werden.</string>
   <string name="tutorial_1_subtext">Deine Bilder helfen bei der Ausbildung von Menschen auf der ganzen Welt!</string>
   <string name="tutorial_2_text">Bitte lade Bilder hoch, die du völlig selbst aufgenommen oder erstellt hast:</string>
-  <string name="tutorial_2_subtext">u2022 Natürliche Objekte (Blumen, Tiere, Berge)
-u2022 Nützliche Objekte (Fahrräder, Bahnhöfe)
-u2022 Berühmte Personen (deinen Bürgermeister, olympische Athleten, die du getroffen hast)</string>
+  <string name="tutorial_2_subtext">u2022 Natürliche Objekte (Blumen, Tiere, Berge)\nu2022 Nützliche Objekte (Fahrräder, Bahnhöfe)\nu2022 Berühmte Personen (deinen Bürgermeister, olympische Athleten, die du getroffen hast)</string>
   <string name="tutorial_3_text">Bitte NICHT hochladen:</string>
-  <string name="tutorial_3_subtext">u2022 Selfies oder Bilder deiner Freunde
-u2022 Bilder, die du aus dem Internet heruntergeladen hast
-u2022 Screenshots von proprietären Softwareanwendungen</string>
+  <string name="tutorial_3_subtext">u2022 Selfies oder Bilder deiner Freunde\nu2022 Bilder, die du aus dem Internet heruntergeladen hast\nu2022 Screenshots von proprietären Softwareanwendungen</string>
   <string name="tutorial_4_text">Beispiel-Upload:</string>
-  <string name="tutorial_4_subtext">u2022 Titel: Opernhaus von Sydney
-u2022 Beschreibung: Opernhaus von Sydney, von der Bucht aus gesehen
-u2022 Kategorien: Opernhaus von Sydney, Opernhaus von Sydney von Westen, Opernhaus von Sydney (Fernansicht)</string>
+  <string name="tutorial_4_subtext">u2022 Titel: Opernhaus von Sydney\nu2022 Beschreibung: Opernhaus von Sydney, von der Bucht aus gesehen\nu2022 Kategorien: Opernhaus von Sydney, Opernhaus von Sydney von Westen, Opernhaus von Sydney (Fernansicht)</string>
   <string name="welcome_wikipedia_text">Teile deine Bilder. Erwecke Wikipedia-Artikel zum Leben!</string>
   <string name="welcome_wikipedia_subtext">Die Bilder auf Wikipedia kommen von Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Deine Bilder helfen dabei, Menschen auf der ganzen Welt zu bilden.</string>
@@ -151,7 +130,7 @@ u2022 Kategorien: Opernhaus von Sydney, Opernhaus von Sydney von Westen, Opernha
   <string name="welcome_final_text">Verstanden?</string>
   <string name="welcome_final_button_text">Ja!</string>
   <string name="detail_panel_cats_label">Kategorien</string>
-  <string name="detail_panel_cats_loading">Lade …</string>
+  <string name="detail_panel_cats_loading" fuzzy="true">Lade …</string>
   <string name="detail_panel_cats_none">Keine ausgewählt</string>
   <string name="detail_description_empty">Keine Beschreibung</string>
   <string name="detail_license_empty">Unbekannte Lizenz</string>
@@ -160,6 +139,7 @@ u2022 Kategorien: Opernhaus von Sydney, Opernhaus von Sydney von Westen, Opernha
   <string name="location_permission_rationale">Optionale Berechtigung: Ruft den aktuellen Standort für Kategorievorschläge ab</string>
   <string name="ok">Okay</string>
   <string name="title_activity_nearby">Orte in der Nähe</string>
+  <string name="no_nearby">Keine Orte in der Nähe gefunden</string>
   <string name="warning">Warnung</string>
   <string name="file_exists">Diese Datei ist bereits auf Commons vorhanden. Bist du sicher, dass du fortfahren möchtest?</string>
   <string name="yes">Ja</string>
@@ -168,8 +148,42 @@ u2022 Kategorien: Opernhaus von Sydney, Opernhaus von Sydney von Westen, Opernha
   <string name="media_detail_media_title">Titel des Mediums</string>
   <string name="media_detail_description">Beschreibung</string>
   <string name="media_detail_description_explanation">Hier folgt die Beschreibung des Mediums. Diese kann möglicherweise ziemlich lang sein und erfordert dann einen Umbruch auf mehreren Zeilen. Wir hoffen, dass sie dennoch gut aussieht.</string>
+  <string name="media_detail_uploaded_date">Hochgeladen am</string>
   <string name="become_a_tester_title">Beta-Tester werden</string>
   <string name="become_a_tester_description">Melde dich bei unserem Beta-Kanal auf Google Play an und erhalte frühen Zugriff auf neue Funktionen und Fehlerbehebungen</string>
   <string name="use_wikidata">Wikidata verwenden</string>
   <string name="use_wikidata_summary">(Warnung: Die Deaktivierung kann einen hohen Verbrauch an mobilen Daten verursachen)</string>
+  <string name="_2fa_code">2FA-Code</string>
+  <string name="number_of_uploads">Meine Grenze für kürzlich hochgeladene Dateien</string>
+  <string name="maximum_limit">Maximale Grenze</string>
+  <string name="maximum_limit_alert">Mehr als 500 Einträge können nicht angezeigt werden</string>
+  <string name="set_limit">Grenze für kürzlich hochgeladene Dateien festlegen</string>
+  <string name="login_failed_2fa_not_supported">Die Zwei-Faktor-Authentifikation wird derzeit nicht unterstützt.</string>
+  <string name="logout_verification">Möchtest du dich wirklich abmelden?</string>
+  <string name="commons_logo">Commons-Logo</string>
+  <string name="background_image">Hintergrundbild</string>
+  <string name="mediaimage_failed">Medienbild fehlgeschlagen</string>
+  <string name="no_image_found">Kein Bild gefunden</string>
+  <string name="upload_image">Bild hochladen</string>
+  <string name="welcome_image_mount_zao">Zaō</string>
+  <string name="welcome_image_llamas">Lamas</string>
+  <string name="welcome_image_rainbow_bridge">Rainbow Bridge</string>
+  <string name="welcome_image_tulip">Tulpe</string>
+  <string name="welcome_image_no_selfies">Keine Selfies</string>
+  <string name="welcome_image_proprietary">Geschütztes Bild</string>
+  <string name="welcome_image_welcome_wikipedia">Willkommen Wikipedia</string>
+  <string name="welcome_image_welcome_copyright">Willkommen Urheberrecht</string>
+  <string name="welcome_image_sydney_opera_house">Sydney Opera House</string>
+  <string name="cancel">Abbrechen</string>
+  <string name="navigation_drawer_open">Öffnen</string>
+  <string name="navigation_drawer_close">Schließen</string>
+  <string name="navigation_item_home">Start</string>
+  <string name="navigation_item_upload">Hochladen</string>
+  <string name="navigation_item_nearby">In der Nähe</string>
+  <string name="navigation_item_about">Über</string>
+  <string name="navigation_item_settings">Einstellungen</string>
+  <string name="navigation_item_feedback">Rückmeldungen</string>
+  <string name="navigation_item_logout">Abmelden</string>
+  <string name="nearby_info_menu_commons_article">Commons-Artikel</string>
+  <string name="nearby_info_menu_wikidata_article">Wikidata-Artikel</string>
 </resources>

@@ -2,31 +2,23 @@ package fr.free.nrw.commons.media;
 
 import android.content.Intent;
 import android.database.DataSetObserver;
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.android.volley.toolbox.ImageLoader;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
-
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.License;
 import fr.free.nrw.commons.LicenseList;
 import fr.free.nrw.commons.Media;
@@ -34,17 +26,13 @@ import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import timber.log.Timber;
 
 public class MediaDetailFragment extends Fragment {
 
     private boolean editable;
-    private DisplayImageOptions displayOptions;
     private MediaDetailPagerFragment.MediaDetailProvider detailProvider;
     private int index;
-
-    public static MediaDetailFragment forMedia(int index) {
-        return forMedia(index, false);
-    }
 
     public static MediaDetailFragment forMedia(int index, boolean editable) {
         MediaDetailFragment mf = new MediaDetailFragment();
@@ -60,16 +48,15 @@ public class MediaDetailFragment extends Fragment {
         return mf;
     }
 
-    private ImageView image;
-    //private EditText title;
-    private ProgressBar loadingProgress;
-    private ImageView loadingFailed;
+    private MediaWikiImageView image;
     private MediaDetailSpacer spacer;
     private int initialListTop = 0;
 
     private TextView title;
     private TextView desc;
     private TextView license;
+    private TextView coordinates;
+    private TextView uploadedDate;
     private LinearLayout categoryContainer;
     private ScrollView scrollView;
     private ArrayList<String> categoryNames;
@@ -113,9 +100,7 @@ public class MediaDetailFragment extends Fragment {
 
         final View view = inflater.inflate(R.layout.fragment_media_detail, container, false);
 
-        image = (ImageView) view.findViewById(R.id.mediaDetailImage);
-        loadingProgress = (ProgressBar) view.findViewById(R.id.mediaDetailImageLoading);
-        loadingFailed = (ImageView) view.findViewById(R.id.mediaDetailImageFailed);
+        image = (MediaWikiImageView) view.findViewById(R.id.mediaDetailImage);
         scrollView = (ScrollView) view.findViewById(R.id.mediaDetailScrollView);
 
         // Detail consists of a list view with main pane in header view, plus category list.
@@ -123,28 +108,11 @@ public class MediaDetailFragment extends Fragment {
         title = (TextView) view.findViewById(R.id.mediaDetailTitle);
         desc = (TextView) view.findViewById(R.id.mediaDetailDesc);
         license = (TextView) view.findViewById(R.id.mediaDetailLicense);
+        coordinates = (TextView) view.findViewById(R.id.mediaDetailCoordinates);
+        uploadedDate = (TextView) view.findViewById(R.id.mediaDetailuploadeddate);
         categoryContainer = (LinearLayout) view.findViewById(R.id.mediaDetailCategoryContainer);
 
         licenseList = new LicenseList(getActivity());
-
-        Media media = detailProvider.getMediaAtPosition(index);
-        if (media == null) {
-            // Ask the detail provider to ping us when we're ready
-            Log.d("Commons", "MediaDetailFragment not yet ready to display details; registering observer");
-            dataObserver = new DataSetObserver() {
-                @Override
-                public void onChanged() {
-                    Log.d("Commons", "MediaDetailFragment ready to display delayed details!");
-                    detailProvider.unregisterDataSetObserver(dataObserver);
-                    dataObserver = null;
-                    displayMediaDetails(detailProvider.getMediaAtPosition(index));
-                }
-            };
-            detailProvider.registerDataSetObserver(dataObserver);
-        } else {
-            Log.d("Commons", "MediaDetailFragment ready to display details");
-            displayMediaDetails(media);
-        }
 
         // Progressively darken the image in the background when we scroll detail pane up
         scrollListener = new ViewTreeObserver.OnScrollChangedListener() {
@@ -182,97 +150,75 @@ public class MediaDetailFragment extends Fragment {
         return view;
     }
 
-    private void displayMediaDetails(final Media media) {
-        //Always load image from Internet to allow viewing the desc, license, and cats
-        String actualUrl = media.getThumbnailUrl(640);
-        if(actualUrl.startsWith("http")) {
-            Log.d("Volley", "Actual URL starts with http and is: " + actualUrl);
-
-            ImageLoader loader = ((CommonsApplication)getActivity().getApplicationContext()).getImageLoader();
-            MediaWikiImageView mwImage = (MediaWikiImageView)image;
-            mwImage.setLoadingView(loadingProgress); //FIXME: Set this as an attribute
-            mwImage.setMedia(media, loader);
-
-            // FIXME: For transparent images
-            // FIXME: keep the spinner going while we load data
-            // FIXME: cache this data
-            // Load image metadata: desc, license, categories
-            detailFetchTask = new AsyncTask<Void, Void, Boolean>() {
-                private MediaDataExtractor extractor;
-
+    @Override public void onResume() {
+        super.onResume();
+        Media media = detailProvider.getMediaAtPosition(index);
+        if (media == null) {
+            // Ask the detail provider to ping us when we're ready
+            Timber.d("MediaDetailFragment not yet ready to display details; registering observer");
+            dataObserver = new DataSetObserver() {
                 @Override
-                protected void onPreExecute() {
-                    extractor = new MediaDataExtractor(media.getFilename(), licenseList);
-                }
-
-                @Override
-                protected Boolean doInBackground(Void... voids) {
-                    try {
-                        extractor.fetch();
-                        return Boolean.TRUE;
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                public void onChanged() {
+                    if (!isAdded()) {
+                        return;
                     }
-                    return Boolean.FALSE;
-                }
-
-                @Override
-                protected void onPostExecute(Boolean success) {
-                    detailFetchTask = null;
-
-                    if (success.booleanValue()) {
-                        extractor.fill(media);
-
-                        // Set text of desc, license, and categories
-                        desc.setText(prettyDescription(media));
-                        license.setText(prettyLicense(media));
-
-                        categoryNames.removeAll(categoryNames);
-                        categoryNames.addAll(media.getCategories());
-
-                        categoriesLoaded = true;
-                        categoriesPresent = (categoryNames.size() > 0);
-                        if (!categoriesPresent) {
-                            // Stick in a filler element.
-                            categoryNames.add(getString(R.string.detail_panel_cats_none));
-                        }
-                        rebuildCatList();
-                    } else {
-                        Log.d("Commons", "Failed to load photo details.");
-                    }
+                    Timber.d("MediaDetailFragment ready to display delayed details!");
+                    detailProvider.unregisterDataSetObserver(dataObserver);
+                    dataObserver = null;
+                    displayMediaDetails(detailProvider.getMediaAtPosition(index));
                 }
             };
-            detailFetchTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            detailProvider.registerDataSetObserver(dataObserver);
         } else {
-            //This should not usually happen, image along with associated details should always be loaded from Internet, but keeping this for now for backup.
-            //Even if image is loaded from device storage, it will display, albeit with empty desc and cat.
-            Log.d("Volley", "Actual URL does not start with http and is: " + actualUrl);
-            com.nostra13.universalimageloader.core.ImageLoader.getInstance().displayImage(actualUrl, image, displayOptions, new ImageLoadingListener() {
-                @Override
-                public void onLoadingStarted(String s, View view) {
-                    loadingProgress.setVisibility(View.VISIBLE);
+            Timber.d("MediaDetailFragment ready to display details");
+            displayMediaDetails(media);
+        }
+    }
+
+    private void displayMediaDetails(final Media media) {
+        //Always load image from Internet to allow viewing the desc, license, and cats
+        image.setMedia(media);
+
+        // FIXME: For transparent images
+        // FIXME: keep the spinner going while we load data
+        // FIXME: cache this data
+        // Load image metadata: desc, license, categories
+        detailFetchTask = new AsyncTask<Void, Void, Boolean>() {
+            private MediaDataExtractor extractor;
+
+            @Override
+            protected void onPreExecute() {
+                extractor = new MediaDataExtractor(media.getFilename(), licenseList);
+            }
+
+            @Override
+            protected Boolean doInBackground(Void... voids) {
+                try {
+                    extractor.fetch();
+                    return Boolean.TRUE;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return Boolean.FALSE;
+            }
+
+            @Override
+            protected void onPostExecute(Boolean success) {
+                detailFetchTask = null;
+                if (!isAdded()) {
+                    return;
                 }
 
-                @Override
-                public void onLoadingFailed(String s, View view, FailReason failReason) {
-                    loadingProgress.setVisibility(View.GONE);
-                    loadingFailed.setVisibility(View.VISIBLE);
-                }
-
-                @Override
-                public void onLoadingComplete(String s, View view, Bitmap bitmap) {
-                    loadingProgress.setVisibility(View.GONE);
-                    loadingFailed.setVisibility(View.GONE);
-                    image.setVisibility(View.VISIBLE);
-                    if(bitmap.hasAlpha()) {
-                        image.setBackgroundResource(android.R.color.white);
-                    }
+                if (success) {
+                    extractor.fill(media);
 
                     // Set text of desc, license, and categories
                     desc.setText(prettyDescription(media));
                     license.setText(prettyLicense(media));
+                    coordinates.setText(prettyCoordinates(media));
+                    uploadedDate.setText(prettyUploadedDate(media));
 
-                    categoryNames.removeAll(categoryNames);
+                    categoryNames.clear();
                     categoryNames.addAll(media.getCategories());
 
                     categoriesLoaded = true;
@@ -282,25 +228,16 @@ public class MediaDetailFragment extends Fragment {
                         categoryNames.add(getString(R.string.detail_panel_cats_none));
                     }
                     rebuildCatList();
+                } else {
+                    Timber.d("Failed to load photo details.");
                 }
-
-                @Override
-                public void onLoadingCancelled(String s, View view) {
-                    Log.e("Volley", "Image loading cancelled. But why?");
-                }
-            });
-        }
+            }
+        };
+        detailFetchTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
         title.setText(media.getDisplayTitle());
         desc.setText(""); // fill in from network...
         license.setText(""); // fill in from network...
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        displayOptions = Utils.getGenericDisplayOptions().build();
     }
 
     @Override
@@ -377,7 +314,7 @@ public class MediaDetailFragment extends Fragment {
 
     private String prettyLicense(Media media) {
         String licenseKey = media.getLicense();
-        Log.d("Commons", "Media license is: " + licenseKey);
+        Timber.d("Media license is: %s", licenseKey);
         if (licenseKey == null || licenseKey.equals("")) {
             return getString(R.string.detail_license_empty);
         }
@@ -387,5 +324,23 @@ public class MediaDetailFragment extends Fragment {
         } else {
             return licenseObj.getName();
         }
+    }
+
+    private String prettyUploadedDate(Media media) {
+        Date date = media.getDateUploaded();
+        if (date.toString() == null || date.toString().isEmpty()) {
+            return "Uploaded date not available";
+        }
+        SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+        return formatter.format(date);
+    }
+
+    /**
+     * Returns the coordinates nicely formatted.
+     *
+     * @return Coordinates as text.
+     */
+    private String prettyCoordinates(Media media) {
+        return media.getCoordinates();
     }
 }

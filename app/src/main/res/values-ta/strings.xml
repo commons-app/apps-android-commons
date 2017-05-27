@@ -5,7 +5,7 @@
   <string name="username">பயனர் பெயர்</string>
   <string name="password">கடவுச்சொல்</string>
   <string name="login">புகுபதிகை</string>
-  <string name="logging_in_message">தயவுசெய்து காத்திருங்கள்...</string>
+  <string name="logging_in_message">தயவுசெய்து காத்திருங்கள்…</string>
   <string name="login_success">புகுபதிகை வெற்றி</string>
   <string name="login_failed">புகுபதிகை தோல்வியடைந்தது</string>
   <string name="upload_completed_notification_title">%1$s பதிவேற்றப்பட்டது!</string>

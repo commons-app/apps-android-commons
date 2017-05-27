@@ -5,7 +5,7 @@
   <string name="password">Password</string>
   <string name="login">Idħol</string>
   <string name="logging_in_title">Dieħel</string>
-  <string name="logging_in_message">Jekk jogħġbok stenna...</string>
+  <string name="logging_in_message">Jekk jogħġbok stenna…</string>
   <string name="login_success">Dħalt b\'suċċess!</string>
   <string name="login_failed">Id-dħul fil-kont ma rnexxiex!</string>
   <string name="authentication_failed">L-awtentikar falla!</string>
@@ -47,8 +47,8 @@ Agħfas fuq dan il-messaġġ (jew mur lura) sabiex taqbeż dan il-pass.</string>
   <string name="preference_tracking_summary">Ibgħat ir-rapporti tal-użu lill-Wikimedia sabiex tgħinna ntejbdu l-app</string>
   <string name="title_activity_settings">Issettjar</string>
   <string name="menu_about">Dwar</string>
-  <string name="about_license" fuzzy="true">Softwer ta\' sors miftuħ rilaxxat taħt il-&lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Liċenzja Apache v2&lt;/a&gt;</string>
-  <string name="about_improve" fuzzy="true">Sors fuq &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Żbalji fuq &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_license" fuzzy="true">Softwer ta\' sors miftuħ rilaxxat taħt il-&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Liċenzja Apache v2&lt;/a&gt;</string>
+  <string name="about_improve" fuzzy="true">Sors fuq &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Żbalji fuq &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politika tal-privatezza&lt;/a&gt;</string>
   <string name="title_activity_about">Dwar</string>
   <string name="provider_categories">Kategoriji wżati riċentament</string>
@@ -56,8 +56,8 @@ Agħfas fuq dan il-messaġġ (jew mur lura) sabiex taqbeż dan il-pass.</string>
   <string name="share_license_summary">Din l-istampa se tiġi liċenzjata taħt %1$s</string>
   <string name="menu_download">Niżżel</string>
   <string name="preference_license">Liċenzja</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Attribution-ShareAlike</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0Attribution</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CC Attribution-ShareAlike</string>
+  <string name="license_name_cc_by" fuzzy="true">CC Attribution</string>
   <string name="license_name_cc0">CC0</string>
   <string name="welcome_wikipedia_text">Ikkontribwixxi l-istampi tiegħek. Agħti l-ħajja lill-artikli tal-Wikipedija!</string>
   <string name="welcome_wikipedia_subtext">L-istampi fuq il-Wikipedija ġejjin mill-Wikimedia Commons.</string>

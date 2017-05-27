@@ -1,4 +1,12 @@
 language: android
+addons:
+  apt:
+    packages:
+      - w3m
+env:
+  global:
+    - ANDROID_TARGET=android-22
+    - ANDROID_ABI=armeabi-v7a
 android:
   components:
     - platform-tools
@@ -6,8 +14,17 @@ android:
     - build-tools-25.0.1
     - extra-google-m2repository
     - extra-android-m2repository
+    - ${ANDROID_TARGET}
     - android-25
-    - sys-img-x86-android-18
+    - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
+before_script:
+  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
+  - emulator -avd test -no-audio -no-window &
+  - android-wait-for-emulator
+script:
+  - ./gradlew test connectedAndroidTest -stacktrace
+after_failure:
+  - w3m -dump ${TRAVIS_BUILD_DIR}/app/build/reports/androidTests/connected/*Test.html
 jdk:
   # - openjdk8 # not yet available
   - oraclejdk8

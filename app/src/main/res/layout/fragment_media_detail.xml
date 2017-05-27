@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/mainBackground"
     >
-
-    <ProgressBar
-        android:id="@+id/mediaDetailImageLoading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:indeterminate="true"
-        android:visibility="visible"
-        />
 
     <ImageView
         android:id="@+id/mediaDetailImageFailed"
@@ -22,13 +14,16 @@
         android:layout_gravity="center"
         android:src="@android:drawable/ic_menu_close_clear_cancel"
         android:visibility="gone"
+        android:contentDescription="@string/mediaimage_failed"
         />
 
     <fr.free.nrw.commons.MediaWikiImageView
         android:id="@+id/mediaDetailImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="fitCenter"
+        app:actualImageScaleType="fitCenter"
+        app:placeholderImage="@drawable/ic_image_black_24dp"
+        app:failureImage="@drawable/ic_image_black_24dp"
         />
 
     <ScrollView
@@ -159,6 +154,35 @@
                         />
                 </LinearLayout>
 
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/subBackground"
+                    android:padding="16dp"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/white"
+                        android:text="Coordinates"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:paddingBottom="6dp"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="License link"
+                        android:id="@+id/mediaDetailCoordinates"
+                        android:layout_gravity="left|start"
+                        android:background="?attr/subBackground"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp"
+                        android:padding="12dp"
+                        />
+                </LinearLayout>
+
                 <fr.free.nrw.commons.media.MediaDetailSpacer
                     android:layout_width="match_parent"
                     android:layout_height="8dp"
@@ -188,6 +212,41 @@
                         android:id="@+id/mediaDetailCategoryContainer"
                         />
                 </LinearLayout>
+
+                <fr.free.nrw.commons.media.MediaDetailSpacer
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/subBackground"
+                    android:padding="16dp"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/media_detail_uploaded_date"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:paddingBottom="6dp"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/media_detail_uploaded_date"
+                        android:background="?attr/subBackground"
+                        android:id="@+id/mediaDetailuploadeddate"
+                        android:textColor="@android:color/white"
+                        android:layout_gravity="left|start"
+                        android:textSize="14sp"
+                        android:padding="12dp"
+                        />
+                </LinearLayout>
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

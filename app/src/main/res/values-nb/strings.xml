@@ -7,7 +7,7 @@
   <string name="login">Logg inn</string>
   <string name="signup">Registrer deg</string>
   <string name="logging_in_title">Logger inn</string>
-  <string name="logging_in_message">Vennligst vent...</string>
+  <string name="logging_in_message" fuzzy="true">Vennligst vent…</string>
   <string name="login_success">Innloggingen var vellykket!</string>
   <string name="login_failed">Innloggingen feilet!</string>
   <string name="upload_failed">Filen ble ikke funnet. Forsøk med en annen fil.</string>
@@ -20,11 +20,11 @@
   <string name="upload_progress_notification_title_finishing">Avslutter opplasting av %1$s</string>
   <string name="upload_failed_notification_title">Opplastingen av %1$s feilet</string>
   <string name="upload_failed_notification_subtitle">Trykk for å vise</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">1 fil lastes opp</item>
     <item quantity="other">%d filer lastes opp</item>
   </plurals>
-  <string name="title_activity_contributions">Mine opplastinger</string>
+  <string name="title_activity_contributions" fuzzy="true">Mine opplastinger</string>
   <string name="contribution_state_queued">I ventekø</string>
   <string name="contribution_state_failed">Feilet</string>
   <string name="contribution_state_in_progress">%1$d%% ferdig</string>
@@ -50,39 +50,36 @@
   <string name="categories_search_text_hint">Søk kategorier</string>
   <string name="menu_save_categories">Lagre</string>
   <string name="refresh_button">Oppdater</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Ingen opplastinger enda</item>
     <item quantity="one">1 opplasting</item>
     <item quantity="other">%d opplastinger</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Starter 1 opplasting</item>
     <item quantity="other">Starter %d opplastinger</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 opplasting</item>
     <item quantity="other">%d opplastinger</item>
   </plurals>
   <string name="categories_not_found">Ingen kategorier som stemte overens med %1$s funnet</string>
-  <string name="categories_skip_explanation">Legg til kategorier for å gjøre bildene dine lettere å finne på Wikimedia Commons.
-
-Begynn å skrive navnet på kategoriene.
-Trykk på denne meldingen (eller trykk tilbake) for å hoppe over dette steget.</string>
+  <string name="categories_skip_explanation">Legg til kategorier for å gjøre bildene dine lettere å finne på Wikimedia Commons.\n\nBegynn å skrive navnet på kategoriene.\nTrykk på denne meldingen (eller trykk tilbake) for å hoppe over dette steget.</string>
   <string name="categories_activity_title">Kategorier</string>
   <string name="preference_tracking">Bruksrapporter</string>
   <string name="preference_tracking_summary">Send bruksrapporter til Wikimedia for å hjelpe oss med å forbedre appen</string>
   <string name="title_activity_settings">Innstillinger</string>
   <string name="title_activity_signup">Registrer deg</string>
   <string name="menu_about">Om</string>
-  <string name="about_license" fuzzy="true">Programvare med åpen kildekode sluppet under &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Wikimedia Commons og dets logo er varemerker fra Wikimedia Foundation og brukes med tillatelse fra dem. Vi er verken støttet av eller koblet til Wikimedia Foundation.</string>
+  <string name="about_license">Programvare med åpen kildekode sluppet under &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Wikimedia Commons og dets logo er varemerker fra Wikimedia Foundation og brukes med tillatelse fra dem. Vi er verken støttet av eller koblet til Wikimedia Foundation.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kildekode&lt;/a&gt; og &lt;a href=\"https://commons-app.github.io/\"&gt;nettside&lt;/a&gt; på GitHub. Opprett en ny &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-sak&lt;/a&gt; for feilrapporter og forslag.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Personvernpolicy&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-comons/blob/master/CREDITS\"&gt;CREDITS&lt;/a&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-comons/blob/master/CREDITS\"&gt;CREDITS&lt;/a&gt;</string>
   <string name="title_activity_about">Om</string>
   <string name="menu_feedback">Send tilbakemelding (via Epost)</string>
   <string name="no_email_client">Ingen epostklient installert</string>
   <string name="provider_categories">Nylig brukte kategorier</string>
-  <string name="waiting_first_sync">Venter på første synkronisering...</string>
+  <string name="waiting_first_sync">Venter på første synkronisering…</string>
   <string name="no_uploads_yet">Du har ikke lastet opp nøn bilder ennå.</string>
   <string name="menu_retry_upload">Prøv igjen</string>
   <string name="menu_cancel_upload">Avbryt</string>
@@ -114,36 +111,14 @@ Trykk på denne meldingen (eller trykk tilbake) for å hoppe over dette steget.<
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
-  <string name="license_name_own_pd">own-pd</string>
-  <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
-  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
-  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_2_0">CC BY 2.0</string>
-  <string name="license_name_fal">Licence Art Libre</string>
-  <string name="license_name_pd_old_100">Offentlig eiendom (opphavsperson døde for over 100 år siden)</string>
-  <string name="license_name_pd_old">Offentlig eiendom (opphavsretten er utløpt)</string>
-  <string name="license_name_pd_art">Offentlig eiendom (kunst)</string>
-  <string name="license_name_pd_us">Offentlig eiendom (USA)</string>
-  <string name="license_name_pd_usgov">Offentlig eiendom (USAs regjering)</string>
-  <string name="license_name_pd_usgov_nasa">Offentlig eiendom (NASA)</string>
-  <string name="license_name_pd_ineligible">Offentlig eiendom (ikke mulig å opphavsrettsbeskytte)</string>
-  <string name="license_name_attribution">Navngivelse</string>
-  <string name="license_name_gfdl">GNU fri dokumentasjonslisens</string>
   <string name="tutorial_1_text">Wikimedia Commons lagrer de fleste bildene som brukes på Wikipedia.</string>
   <string name="tutorial_1_subtext">Dine bilder hjelper til å utdanne mennesker verden over!</string>
   <string name="tutorial_2_text">Last opp bilder som er tatt eller skapt av deg:</string>
-  <string name="tutorial_2_subtext">– Naturlige objekter (blomster, dyr, fjell)
-– Nyttige objekter (sykler, togstasjoner)
-– Berømte personer (ordføreren din, OL-deltakere du har møtt)</string>
+  <string name="tutorial_2_subtext">– Naturlige objekter (blomster, dyr, fjell)\n– Nyttige objekter (sykler, togstasjoner)\n– Berømte personer (ordføreren din, OL-deltakere du har møtt)</string>
   <string name="tutorial_3_text">Vennligst IKKE last opp:</string>
-  <string name="tutorial_3_subtext">- Selfies eller bilder av dine venner
-- Bilder som du har lastet ned ifra Internet
-- Skjermbilder tatt ifra proprietære apper</string>
+  <string name="tutorial_3_subtext">- Selfies eller bilder av dine venner\n- Bilder som du har lastet ned ifra Internet\n- Skjermbilder tatt ifra proprietære apper</string>
   <string name="tutorial_4_text">Opplastingseksempel:</string>
-  <string name="tutorial_4_subtext">- Tittel: Sydneys Operahus
-- Beskrivelse: Sydneys Operahus sett ifra andre siden av bukten
-- Kategorier: Sydneys Operahus, Sydneys Operahus ifra vest, Sydneys Operahus utenfra</string>
+  <string name="tutorial_4_subtext">- Tittel: Sydneys Operahus\n- Beskrivelse: Sydneys Operahus sett ifra andre siden av bukten\n- Kategorier: Sydneys Operahus, Sydneys Operahus ifra vest, Sydneys Operahus utenfra</string>
   <string name="welcome_wikipedia_text">Bidra med dine bilder. Hjelp til med å blåse liv i Wikipedias artikler!</string>
   <string name="welcome_wikipedia_subtext">Bilder på Wikipedia kommer fra Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Bildene dine kan være til hjelp for mennesker over hele verden som søker kunnskap og dannelse.</string>
@@ -151,7 +126,7 @@ Trykk på denne meldingen (eller trykk tilbake) for å hoppe over dette steget.<
   <string name="welcome_final_text">Forstått?</string>
   <string name="welcome_final_button_text">Ja!</string>
   <string name="detail_panel_cats_label">Kategorier</string>
-  <string name="detail_panel_cats_loading">Laster...</string>
+  <string name="detail_panel_cats_loading" fuzzy="true">Laster…</string>
   <string name="detail_panel_cats_none">Ingen valgt</string>
   <string name="detail_description_empty">Ingen beskrivelse</string>
   <string name="detail_license_empty">Ukjent lisens</string>
@@ -170,4 +145,6 @@ Trykk på denne meldingen (eller trykk tilbake) for å hoppe over dette steget.<
   <string name="media_detail_description_explanation">Beskrivelse av mediet skal være her. Denne kan potensielt være ganske lang, og vil trenge å strekke seg over flere linjer. Vi håper det ser bra nok ut.</string>
   <string name="become_a_tester_title">Bli betatester</string>
   <string name="become_a_tester_description">Registrer deg på vår betakanal på Google Play og få tidlig tilgang til nye funksjoner og feilrettinger</string>
+  <string name="use_wikidata">Bruk Wikidata</string>
+  <string name="use_wikidata_summary">(Advarsel: Store mengder mobildata kan bli brukt om denne slås av)</string>
 </resources>

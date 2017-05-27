@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -8,11 +9,15 @@
     android:background="#000000"
     >
 
-    <ImageView
+    <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/uploadImage"
         android:layout_width="match_parent"
         android:layout_height="192dp"
+        app:actualImageScaleType="centerCrop"
+        app:placeholderImage="@drawable/ic_image_black_24dp"
+        app:failureImage="@drawable/ic_error_outline_black_24dp"
         android:scaleType="centerCrop"
+        android:contentDescription="@string/upload_image"
         />
 
     <RelativeLayout

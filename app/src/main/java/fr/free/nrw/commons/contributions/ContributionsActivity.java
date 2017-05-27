@@ -5,16 +5,17 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,16 +23,19 @@ import android.widget.Adapter;
 import android.widget.AdapterView;
 
 import java.util.ArrayList;
-import java.util.Objects;
+import java.util.Locale;
 
+import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
-import fr.free.nrw.commons.auth.WikiAccountAuthenticator;
+import fr.free.nrw.commons.hamburger.HamburgerMenuContainer;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
+import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
+import timber.log.Timber;
 
 public  class       ContributionsActivity
         extends     AuthenticatedActivity
@@ -39,7 +43,8 @@ public  class       ContributionsActivity
                     AdapterView.OnItemClickListener,
                     MediaDetailPagerFragment.MediaDetailProvider,
                     FragmentManager.OnBackStackChangedListener,
-                    ContributionsListFragment.SourceRefresher {
+                    ContributionsListFragment.SourceRefresher,
+                    HamburgerMenuContainer {
 
     private Cursor allContributions;
     private ContributionsListFragment contributionsList;
@@ -48,6 +53,7 @@ public  class       ContributionsActivity
     private boolean isUploadServiceConnected;
     private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<>();
     private String CONTRIBUTION_SELECTION = "";
+
     /*
         This sorts in the following order:
         Currently Uploading
@@ -58,10 +64,6 @@ public  class       ContributionsActivity
         This is why Contribution.STATE_COMPLETED is -1.
      */
     private String CONTRIBUTION_SORT = Contribution.Table.COLUMN_STATE + " DESC, " + Contribution.Table.COLUMN_UPLOADED + " DESC , (" + Contribution.Table.COLUMN_TIMESTAMP + " * " + Contribution.Table.COLUMN_STATE + ")";
-
-    public ContributionsActivity() {
-        super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
-    }
 
     private ServiceConnection uploadServiceConnection = new ServiceConnection() {
         @Override
@@ -88,6 +90,15 @@ public  class       ContributionsActivity
     @Override
     protected void onResume() {
         super.onResume();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean isSettingsChanged =
+                sharedPreferences.getBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED,false);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED,false);
+        editor.apply();
+        if (isSettingsChanged) {
+            refreshSource();
+        }
     }
 
     @Override
@@ -98,7 +109,7 @@ public  class       ContributionsActivity
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
         // Do a sync everytime we get here!
-        ContentResolver.requestSync(((CommonsApplication) getApplicationContext()).getCurrentAccount(), ContributionsContentProvider.AUTHORITY, new Bundle());
+        ContentResolver.requestSync(CommonsApplication.getInstance().getCurrentAccount(), ContributionsContentProvider.AUTHORITY, new Bundle());
         Intent uploadServiceIntent = new Intent(this, UploadService.class);
         uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
         startService(uploadServiceIntent);
@@ -112,23 +123,22 @@ public  class       ContributionsActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle(R.string.title_activity_contributions);
         setContentView(R.layout.activity_contributions);
+        ButterKnife.bind(this);
 
-        // Activity can call methods in the fragment by acquiring a reference to the Fragment from FragmentManager, using findFragmentById()
-        contributionsList = (ContributionsListFragment)getSupportFragmentManager().findFragmentById(R.id.contributionsListFragment);
+        // Activity can call methods in the fragment by acquiring a
+        // reference to the Fragment from FragmentManager, using findFragmentById()
+        contributionsList = (ContributionsListFragment)getSupportFragmentManager()
+                .findFragmentById(R.id.contributionsListFragment);
 
         getSupportFragmentManager().addOnBackStackChangedListener(this);
         if (savedInstanceState != null) {
-            mediaDetails = (MediaDetailPagerFragment)getSupportFragmentManager().findFragmentById(R.id.contributionsFragmentContainer);
-            // onBackStackChanged uses mediaDetails.isVisible() but this returns false now.
-            // Use the saved value from before pause or orientation change.
-            if (mediaDetails != null && savedInstanceState.getBoolean("mediaDetailsVisible")) {
-                // Feels awful that we have to reset this manually!
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            }
+            mediaDetails = (MediaDetailPagerFragment)getSupportFragmentManager()
+                    .findFragmentById(R.id.contributionsFragmentContainer);
         }
         requestAuthToken();
+        initDrawer();
+        setTitle(getString(R.string.title_activity_contributions));
     }
 
     @Override
@@ -158,9 +168,9 @@ public  class       ContributionsActivity
         Contribution c = Contribution.fromCursor(allContributions);
         if(c.getState() == Contribution.STATE_FAILED) {
             uploadService.queue(UploadService.ACTION_UPLOAD_FILE, c);
-            Log.d("Commons", "Restarting for" + c.toContentValues().toString());
+            Timber.d("Restarting for %s", c.toContentValues());
         } else {
-            Log.d("Commons", "Skipping re-upload for non-failed " + c.toContentValues().toString());
+            Timber.d("Skipping re-upload for non-failed %s", c.toContentValues());
         }
     }
 
@@ -168,11 +178,11 @@ public  class       ContributionsActivity
         allContributions.moveToPosition(i);
         Contribution c = Contribution.fromCursor(allContributions);
         if(c.getState() == Contribution.STATE_FAILED) {
-            Log.d("Commons", "Deleting failed contrib " + c.toContentValues().toString());
+            Timber.d("Deleting failed contrib %s", c.toContentValues());
             c.setContentProviderClient(getContentResolver().acquireContentProviderClient(ContributionsContentProvider.AUTHORITY));
             c.delete();
         } else {
-            Log.d("Commons", "Skipping deletion for non-failed contrib " + c.toContentValues().toString());
+            Timber.d("Skipping deletion for non-failed contrib %s", c.toContentValues());
         }
     }
 
@@ -206,7 +216,12 @@ public  class       ContributionsActivity
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        return new CursorLoader(this, ContributionsContentProvider.BASE_URI, Contribution.Table.ALL_FIELDS, CONTRIBUTION_SELECTION, null, CONTRIBUTION_SORT);
+        SharedPreferences sharedPref =
+                PreferenceManager.getDefaultSharedPreferences(this);
+        int uploads = sharedPref.getInt(Prefs.UPLOADS_SHOWING, 100);
+        return new CursorLoader(this, ContributionsContentProvider.BASE_URI,
+                Contribution.Table.ALL_FIELDS, CONTRIBUTION_SELECTION, null,
+                CONTRIBUTION_SORT + "LIMIT " + uploads);
     }
 
     @Override
@@ -217,7 +232,18 @@ public  class       ContributionsActivity
             ((CursorAdapter)contributionsList.getAdapter()).swapCursor(cursor);
         }
 
-        getSupportActionBar().setSubtitle(getResources().getQuantityString(R.plurals.contributions_subtitle, cursor.getCount(), cursor.getCount()));
+        if (cursor.getCount() == 0
+                && Locale.getDefault().getISO3Language().equals(Locale.ENGLISH.getISO3Language())) {
+            //cursor count is zero and language is english -
+            // we need to set the message for 0 case explicitly.
+            getSupportActionBar().setSubtitle(getResources()
+                    .getString(R.string.contributions_subtitle_zero));
+        } else {
+            getSupportActionBar().setSubtitle(getResources()
+                    .getQuantityString(R.plurals.contributions_subtitle,
+                            cursor.getCount(),
+                            cursor.getCount()));
+        }
 
         contributionsList.clearSyncMessage();
         notifyAndMigrateDataSetObservers();
@@ -289,15 +315,16 @@ public  class       ContributionsActivity
 
     @Override
     public void onBackStackChanged() {
-        if(mediaDetails != null && mediaDetails.isVisible()) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        } else {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        }
+        initBackButton();
     }
 
     @Override
     public void refreshSource() {
         getSupportLoaderManager().restartLoader(0, null, this);
+    }
+
+    public static void startYourself(Context context) {
+        Intent settingsIntent = new Intent(context, ContributionsActivity.class);
+        context.startActivity(settingsIntent);
     }
 }

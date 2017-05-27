@@ -6,7 +6,7 @@
   <string name="password">Parol</string>
   <string name="login">Daxil ol</string>
   <string name="logging_in_title">Giriş edilir</string>
-  <string name="logging_in_message">Lütfən gözləyin...</string>
+  <string name="logging_in_message">Lütfən gözləyin…</string>
   <string name="login_success">Daxil oldunuz!</string>
   <string name="login_failed">Giriş baş tutmadı!</string>
   <string name="authentication_failed">Şəxsiyyət təsdiqləmə uğursuz oldu!</string>
@@ -40,9 +40,4 @@
   <string name="categories_not_found">%1$s axtarışına uyğun kateqoriya tapılmadı</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_zero">CC0</string>
-  <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
-  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
-  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_2_0">CC BY 2.0</string>
 </resources>

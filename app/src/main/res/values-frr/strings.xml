@@ -7,7 +7,7 @@
   <string name="login">Uunmelde</string>
   <string name="signup">Iinskriiw</string>
   <string name="logging_in_title">Uunmeldin lääpt</string>
-  <string name="logging_in_message">Wees so gud an teew ...</string>
+  <string name="logging_in_message">Wees so gud an teew …</string>
   <string name="login_success">Uunmeldin hää loket!</string>
   <string name="login_failed">Bi\'t uunmeldin as wat skiaf gingen.</string>
   <string name="upload_failed">Datei ei fünjen. Ferschük det mä en ööder datei.</string>
@@ -21,10 +21,10 @@
   <string name="upload_failed_notification_title">Huuchschüüren faan „%1$s“ skiaf gingen</string>
   <string name="upload_failed_notification_subtitle">Tipe, am det uuntulukin</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">Ian datei woort huuchschüürd</item>
+    <item quantity="one">%d datei woort huuchschüürd</item>
     <item quantity="other">%d datein wurd huuchschüürd</item>
   </plurals>
-  <string name="title_activity_contributions">Min huuchschüürd datein</string>
+  <string name="title_activity_contributions">Min tuleetst huuchschüürd datein</string>
   <string name="contribution_state_queued">Skal noch teew</string>
   <string name="contribution_state_failed">Skiaf gingen</string>
   <string name="contribution_state_in_progress">%1$d%% klaar</string>
@@ -42,6 +42,7 @@
   <string name="login_failed_password">Bi\'t uunmeldin as wat skiaf gingen - luke ans efter det paaswurd</string>
   <string name="login_failed_throttled">Tu fölsis fersoocht saner lok. Ferschük det uun hög minüüten noch ans nei.</string>
   <string name="login_failed_blocked">Didiar brüker as üüb Commons speret wurden.</string>
+  <string name="login_failed_2fa_needed">Dü skel dan code för\'t tau-straal-gudkäänen (2FA) uundu.</string>
   <string name="login_failed_generic">Bi\'t uunmeldin as wat skiaf gingen.</string>
   <string name="share_upload_button">Huuchschüür</string>
   <string name="multiple_share_base_title">Nööm för jodiar bilen</string>
@@ -50,17 +51,20 @@
   <string name="categories_search_text_hint">Schük uun kategoriin</string>
   <string name="menu_save_categories">Seekre</string>
   <string name="refresh_button">Nei loose</string>
+  <string name="gps_disabled">GPS as üüb dan aperoot ei uun. Wel dü det nü aktiwiare?</string>
+  <string name="enable_gps">GPS aktiwiare</string>
+  <string name="contributions_subtitle_zero">Bit nü nian uploads</string>
   <plurals name="contributions_subtitle">
-    <item quantity="zero">Noch nian huuchschüürd datein</item>
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">Ian huuchschüürd datei</item>
     <item quantity="other">%d huuchschüürd datein</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Began en upload</item>
+    <item quantity="one">Began %d upload</item>
     <item quantity="other">Began %d uploads</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">Ian huuchschüürd datei</item>
+    <item quantity="one">%d huuchschüürd datei</item>
     <item quantity="other">%d huuchschüürd datein</item>
   </plurals>
   <string name="categories_not_found">Det kategorii „%1$s“ küd ei fünjen wurd.</string>
@@ -71,16 +75,15 @@
   <string name="title_activity_settings">Iinstelangen</string>
   <string name="title_activity_signup">Iinskriiw</string>
   <string name="menu_about">Auer</string>
-  <string name="about_license" fuzzy="true">Open Source software ütjden oner det lisens &lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;.
-Wikimedia Commons an det Wikimedia-Commons-Logo san markintiaken faan\'t Wikimedia Foundation an wurd mä ferloof faan\'t Wikimedia Foundation brükt. Wi hiar ei tu\'t Wikimedia Foundation.</string>
+  <string name="about_license" fuzzy="true">Open Source software ütjden oner det lisens &lt;a href=\" https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;.\nWikimedia Commons an det Wikimedia-Commons-Logo san markintiaken faan\'t Wikimedia Foundation an wurd mä ferloof faan\'t Wikimedia Foundation brükt. Wi hiar ei tu\'t Wikimedia Foundation.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Code&lt;/a&gt; an &lt;a href=\"https://commons-app.github.io/\"&gt;Wääbsteed&lt;/a&gt; üüb GitHub&lt;/a&gt;. En neien &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-iindrach&lt;/a&gt; för feelern of föörslacher maage.</string>
   <string name="about_privacy_policy">Brükerreegeln</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;SOONK&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Soonk&lt;/a&gt;</string>
   <string name="title_activity_about">Auer</string>
   <string name="menu_feedback">Wat wel dü üs sai ? (auer e-mail)</string>
   <string name="no_email_client">Diar as nään e-mail-client instaliaret</string>
   <string name="provider_categories">Tuleetst brükt kategoriin</string>
-  <string name="waiting_first_sync">Teew üüb det iarst synchronisiarin ...</string>
+  <string name="waiting_first_sync">Teew üüb det iarst synchronisiarin …</string>
   <string name="no_uploads_yet">Dü heest noch nian bilen huuchschüürd.</string>
   <string name="menu_retry_upload">Noch ans ferschük</string>
   <string name="menu_cancel_upload">Ufbreeg</string>
@@ -112,36 +115,14 @@ Wikimedia Commons an det Wikimedia-Commons-Logo san markintiaken faan\'t Wikimed
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
-  <string name="license_name_own_pd">freijiwen (aanj werk)</string>
-  <string name="license_name_cc_by_sa_2_5">CC-BY-SA 2.5</string>
-  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
-  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_2_0">CC BY 2.0</string>
-  <string name="license_name_fal">Frei konst lisens</string>
-  <string name="license_name_pd_old_100">Freijiwen (skriiwer/konstler al muar üs 100 juar duad)</string>
-  <string name="license_name_pd_old">Freijiwen (copyright as uflepen)</string>
-  <string name="license_name_pd_art">Freijiwen (konst)</string>
-  <string name="license_name_pd_us">Freijiwen (US)</string>
-  <string name="license_name_pd_usgov">Freijiwen (US-regiarang)</string>
-  <string name="license_name_pd_usgov_nasa">Freijiwen (NASA)</string>
-  <string name="license_name_pd_ineligible">Freijiwen (ei so konstfol)</string>
-  <string name="license_name_attribution">nööm nääm</string>
-  <string name="license_name_gfdl">GNU-lisens för frei dokumentatjuun</string>
   <string name="tutorial_1_text">A miast bilen uun Wikipedia lei bi Wikimedia Commons.</string>
   <string name="tutorial_1_subtext">Mä din bilen halepst dü minsken üüb a hialer welt.</string>
   <string name="tutorial_2_text">Wees so gud an schüür bilen huuch, diar dü salew maaget heest:</string>
-  <string name="tutorial_2_subtext">- Natüürelk objekten (bluumen, diarten, berger)
-- Natelk objekten (welen, boonhoofer)
-- Uunsen minsken (dan bürgermääster, olympisk atleeten, diar dü määt heest)</string>
+  <string name="tutorial_2_subtext">- Natüürelk objekten (bluumen, diarten, berger)\n- Natelk objekten (welen, boonhoofer)\n- Uunsen minsken (dan bürgermääster, olympisk atleeten, diar dü määt heest)</string>
   <string name="tutorial_3_text">Oober schüür EI huuch:</string>
-  <string name="tutorial_3_subtext">- Selfies of bilen faan din frinjer
-- Bilen, diar dü ütj at internet deellooset heest
-- Bilskirembilen faan ünfrei software</string>
+  <string name="tutorial_3_subtext">- Selfies of bilen faan din frinjer\n- Bilen, diar dü ütj at internet deellooset heest\n- Bilskirembilen faan ünfrei software</string>
   <string name="tutorial_4_text">Bispal:</string>
-  <string name="tutorial_4_subtext">- Tiitel: Sydney Opernhüs
-- Beskriiwang: Opernhüs fan Sydney, faan\'t bocht ütj sen
-- Kategoriin: Sydney Opernhüs, Sydney Opernhüs faan waasten, Sydney Opernhüs faan widj wech</string>
+  <string name="tutorial_4_subtext">- Tiitel: Sydney Opernhüs\n- Beskriiwang: Opernhüs fan Sydney, faan\'t bocht ütj sen\n- Kategoriin: Sydney Opernhüs, Sydney Opernhüs faan waasten, Sydney Opernhüs faan widj wech</string>
   <string name="welcome_wikipedia_text">Skaft din bilen. Halep mä an maage artiikler üüb Wikipedia labener!</string>
   <string name="welcome_wikipedia_subtext">A bilen üüb Wikipedia kem faan Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Mä din bilen halepst dü minsken üüb a hialer welt.</string>
@@ -149,7 +130,7 @@ Wikimedia Commons an det Wikimedia-Commons-Logo san markintiaken faan\'t Wikimed
   <string name="welcome_final_text">Witjst beskias?</string>
   <string name="welcome_final_button_text">Ja!</string>
   <string name="detail_panel_cats_label">Kategoriin</string>
-  <string name="detail_panel_cats_loading">Loose ...</string>
+  <string name="detail_panel_cats_loading">Loose …</string>
   <string name="detail_panel_cats_none">Nian ütjwool</string>
   <string name="detail_description_empty">Nian beskriiwang</string>
   <string name="detail_license_empty">Ünbekäänd lisens</string>
@@ -158,6 +139,7 @@ Wikimedia Commons an det Wikimedia-Commons-Logo san markintiaken faan\'t Wikimed
   <string name="location_permission_rationale">Mögelk rocht: Rept di aktuel plak för kategoriiföörslacher ap.</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Steeden naibi</string>
+  <string name="no_nearby">Nian steeden uun a naite fünjen</string>
   <string name="warning">Wäärnang</string>
   <string name="file_exists">Detdiar datei jaft det al üüb Commons. Beest dü seeker, dat dü widjer maage wel?</string>
   <string name="yes">Ja</string>
@@ -166,6 +148,28 @@ Wikimedia Commons an det Wikimedia-Commons-Logo san markintiaken faan\'t Wikimed
   <string name="media_detail_media_title">Tiitel faan\'t meedium</string>
   <string name="media_detail_description">Beskriiwang</string>
   <string name="media_detail_description_explanation">Beskriiwang faan\'t meedium.</string>
+  <string name="media_detail_uploaded_date">Dai faan\'t huuchschüüren</string>
   <string name="become_a_tester_title">Beta-Tester wurd</string>
   <string name="become_a_tester_description">Melde di bi üüs beta-kanool üüb Google Play uun, an fu ääder tugang tu nei funktjuunen.</string>
+  <string name="use_wikidata">WikiData brük</string>
+  <string name="use_wikidata_summary">(Wäärnang: At deaktiwiarin koon en huugen ferbrük faan mobiil dooten ütjliase)</string>
+  <string name="_2fa_code">2FA-code</string>
+  <string name="number_of_uploads">Min grens för huuchschüürd datein</string>
+  <string name="maximum_limit">Boowergrens</string>
+  <string name="maximum_limit_alert">Muar üs 500 iindracher kön ei uunwiset wurd</string>
+  <string name="set_limit">Grens för huuchschüürd datein fäästlei</string>
+  <string name="login_failed_2fa_not_supported">Tau-straal-gudkäänen (2FA) wal uun uugenblak ei.</string>
+  <string name="logout_verification">Wel dü di würelk ufmelde?</string>
+  <string name="cancel">Ufbreeg</string>
+  <string name="navigation_drawer_open">Wise</string>
+  <string name="navigation_drawer_close">Slütj</string>
+  <string name="navigation_item_home">Began</string>
+  <string name="navigation_item_upload">Huuchschüür</string>
+  <string name="navigation_item_nearby">Naibi</string>
+  <string name="navigation_item_about">Auer</string>
+  <string name="navigation_item_settings">Iinstelangen</string>
+  <string name="navigation_item_feedback">Ragmeldang</string>
+  <string name="navigation_item_logout">Ufmelde</string>
+  <string name="nearby_info_menu_commons_article">Commons-artiikel</string>
+  <string name="nearby_info_menu_wikidata_article">WikiData-artiikel</string>
 </resources>

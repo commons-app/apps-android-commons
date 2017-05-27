@@ -7,7 +7,7 @@
   <string name="login">Asup log</string>
   <string name="signup">Daptar</string>
   <string name="logging_in_title">Asup log</string>
-  <string name="logging_in_message">Mangga diantos...</string>
+  <string name="logging_in_message">Mangga diantos…</string>
   <string name="login_success">Asup log suksés!</string>
   <string name="login_failed">Asup log Gagal!</string>
   <string name="upload_failed">Berkas teu kapanggih. Coba berkas séjén.</string>
@@ -20,11 +20,11 @@
   <string name="upload_progress_notification_title_finishing">Méréskeun unjalan %1$s</string>
   <string name="upload_failed_notification_title">Ngunjal %1$s gagal</string>
   <string name="upload_failed_notification_subtitle">Toél pikeun nempo</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">ngunjal 1 berkas</item>
     <item quantity="other">ngunjal %d berkas</item>
   </plurals>
-  <string name="title_activity_contributions">Unjalan kuring</string>
+  <string name="title_activity_contributions" fuzzy="true">Unjalan kuring</string>
   <string name="contribution_state_queued">Antrian</string>
   <string name="contribution_state_failed">Gagal</string>
   <string name="contribution_state_in_progress">%1$d%% bérés</string>
@@ -42,6 +42,7 @@
   <string name="login_failed_password">Teu bisa login - pariksa kecap sandi</string>
   <string name="login_failed_throttled">Loba teuing nu gagalna. Mangga cobian sababaraha menit deui mah</string>
   <string name="login_failed_blocked">Punten, ieu kontributor geus diblokir di Commons</string>
+  <string name="login_failed_2fa_needed">Anjeun kudu nyadiakeun dua kode faktor asli</string>
   <string name="login_failed_generic">Gagal login</string>
   <string name="share_upload_button">Unjal</string>
   <string name="multiple_share_base_title">Ngaranan ieu sét</string>
@@ -50,24 +51,23 @@
   <string name="categories_search_text_hint">Paluruh kategori</string>
   <string name="menu_save_categories">Simpen</string>
   <string name="refresh_button">Segerkeun</string>
-  <plurals name="contributions_subtitle">
+  <string name="enable_gps">Teu bisa maké GPS</string>
+  <string name="contributions_subtitle_zero">Can aya nu diunjal</string>
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Taya unjalan</item>
     <item quantity="one">1 unjalan</item>
     <item quantity="other">%d unjalan</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Ngamimitian 1 unjalan</item>
     <item quantity="other">Ngamimitian %d unggahan</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 unjalan</item>
     <item quantity="other">%d unjalan</item>
   </plurals>
   <string name="categories_not_found">Teu mendak kategori anu cocog jeung %1$s</string>
-  <string name="categories_skip_explanation">Tambahkeun kategori hambéh gambar anjeun beuki gampang katarana di Wikimédia Commons.
-
-Mimitian ku ngetik kategori.
-Toél ieu talatah (atawa toél deui) pikeun ngaliwatkeun ieu bagęan.</string>
+  <string name="categories_skip_explanation">Tambahkeun kategori hambéh gambar anjeun beuki gampang katarana di Wikimédia Commons.\n\nMimitian ku ngetik kategori.\nToél ieu talatah (atawa toél deui) pikeun ngaliwatkeun ieu bagęan.</string>
   <string name="categories_activity_title">Kategori</string>
   <string name="preference_tracking">Laporan pamakéan</string>
   <string name="preference_tracking_summary">Kirim laporan pamakéan ka Wikimédia sangkan bisa rumojong ka kami dina mekarkeun ieu aplikasi</string>
@@ -77,12 +77,12 @@ Toél ieu talatah (atawa toél deui) pikeun ngaliwatkeun ieu bagęan.</string>
   <string name="about_license">Pakakas lemes kodeu nembrak dirilis di handapeun &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Lisénsi Apache v2&lt;/a&gt;. Wikimedia Commons sarta logona téh mérk dagang anu Yayasan Wikimédia ogé dipakéna kudu meunang widi ti Yayasan Wikimédia. Kami teu disatujuan ku atawa digawé bareng jeung Yayasan Wikimédia.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sumber&lt;/a&gt; sarta &lt;a href=\"https://commons-app.github.io/\"&gt;situ wéb&lt;/a&gt; dina GitHub. Jieun anyar &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;perkara GitHub&lt;/a&gt; pikeun saran jeung laporan kutu.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Kawijakan privasi&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;PANGAJÉN&lt;/a&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;PANGAJÉN&lt;/a&gt;</string>
   <string name="title_activity_about">Ngeunaan</string>
   <string name="menu_feedback">Kirim eupan balik (via Surélék)</string>
   <string name="no_email_client">Tanpa klayen surélék kapasang</string>
   <string name="provider_categories">Kategori anu anyar dipaké</string>
-  <string name="waiting_first_sync">Nungguan sinkronisasi munggaran...</string>
+  <string name="waiting_first_sync">Nungguan sinkronisasi munggaran…</string>
   <string name="no_uploads_yet">Anjeun can ngunjal foto hiji-hiji acan</string>
   <string name="menu_retry_upload">Cobaan deui</string>
   <string name="menu_cancel_upload">Bolay</string>
@@ -114,36 +114,14 @@ Toél ieu talatah (atawa toél deui) pikeun ngaliwatkeun ieu bagęan.</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
-  <string name="license_name_own_pd">own-pd</string>
-  <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
-  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
-  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_2_0">CC BY 2.0</string>
-  <string name="license_name_fal">Lisénsi Seni Bébas</string>
-  <string name="license_name_pd_old_100">Domain umum (pangarang geus maot leuwih ti 100 taun)</string>
-  <string name="license_name_pd_old">Domain umum (hak cipta kadaluwarsa)</string>
-  <string name="license_name_pd_art">Domain umum (seni)</string>
-  <string name="license_name_pd_us">Domain umum (AS)</string>
-  <string name="license_name_pd_usgov">Domain umum (pamaréntah AS)</string>
-  <string name="license_name_pd_usgov_nasa">Domain umum (NASA)</string>
-  <string name="license_name_pd_ineligible">Domain balaréa (teu nyumponan sarat ajang hak cipta)</string>
-  <string name="license_name_attribution">Atribusi</string>
-  <string name="license_name_gfdl">Lisénsi Dokuméntasi Bébas GNU</string>
   <string name="tutorial_1_text">Wikimedia Commons ngimahan ampir sakabéh gambar anu dipaké di Wikipédia.</string>
   <string name="tutorial_1_subtext">Gambar-gambar anjeun ngabantu ngatik jalma di sakuliah dunya!</string>
-  <string name="tutorial_2_text">Mangga unggahkeun gambar-gambar jieunan anjeun:</string>
-  <string name="tutorial_2_subtext">- Obyék alam (kekembangan, sasatoan, gunung, jsb.)
-- Obyék mangpaat (sapédah, stasiun karéta, jsb.)
-- Inohong (bupati, atlit nasional, jsb.)</string>
+  <string name="tutorial_2_text">Mangga unjalkeun gambar-gambar jieunan anjeun:</string>
+  <string name="tutorial_2_subtext">- Obyék alam (kekembangan, sasatoan, gunung, jsb.)\n- Obyék mangpaat (sapédah, stasiun karéta, jsb.)\n- Inohong (bupati, atlit nasional, jsb.)</string>
   <string name="tutorial_3_text">Wayahna ULAH ngunjal:</string>
-  <string name="tutorial_3_subtext">- Sélpi atawa poto sobat anjeun
-- Poto anu diundeur ti Internét
-- Poto layar aplikasi</string>
+  <string name="tutorial_3_subtext">- Sélpi atawa poto sobat anjeun\n- Poto anu diundeur ti Internét\n- Poto layar aplikasi</string>
   <string name="tutorial_4_text">Conto unjalan:</string>
-  <string name="tutorial_4_subtext">- Judul: Gedung Opera Sydney
-- Pedaran: Gedung Opera Sydney (Sydney Opera House) ditempo ti basisir peuntas
-- Kategori: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext">- Judul: Gedung Opera Sydney\n- Pedaran: Gedung Opera Sydney (Sydney Opera House) ditempo ti basisir peuntas\n- Kategori: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Sumbangkeun gambar Anjeun. Bantuan ngahirupkeun artikel Wikipédia!</string>
   <string name="welcome_wikipedia_subtext">Gambar di Wikipédia asalna ti Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Gambar-gambar anjeun ngabantu ngatik jalma di sakuliah dunya.</string>
@@ -151,7 +129,7 @@ Toél ieu talatah (atawa toél deui) pikeun ngaliwatkeun ieu bagęan.</string>
   <string name="welcome_final_text">Anjeun geus ngarti?</string>
   <string name="welcome_final_button_text">Enya</string>
   <string name="detail_panel_cats_label">Kategori</string>
-  <string name="detail_panel_cats_loading">Keur muat…</string>
+  <string name="detail_panel_cats_loading" fuzzy="true">Keur muat…</string>
   <string name="detail_panel_cats_none">Taya nu dipilih</string>
   <string name="detail_description_empty">Tanpa pedaran</string>
   <string name="detail_license_empty">Lisénsi teu dipikanyaho</string>
@@ -168,8 +146,21 @@ Toél ieu talatah (atawa toél deui) pikeun ngaliwatkeun ieu bagęan.</string>
   <string name="media_detail_media_title">Judul berkas</string>
   <string name="media_detail_description">Déskripsi</string>
   <string name="media_detail_description_explanation">Pedaran berkas nyangkaruk didieu. Bisa jadi matak ngalikakeun, sarta ngempladkeun kana sawatara baris. Sanajan kitu, muga bisa katémbong écés.</string>
+  <string name="media_detail_uploaded_date">Kaping ngunjal</string>
   <string name="become_a_tester_title">Jadi tukang ngetés Béta</string>
   <string name="become_a_tester_description">Pilihan asup kana saluran béta kami di Google Play sarta meunangkeun aksés munggaran pikeun fitur anyar jeung pameneran kutu</string>
   <string name="use_wikidata">Paké Wikidata</string>
   <string name="use_wikidata_summary">(Mankahadé: maéhan ieu bisa ngakibatkeun pamakéan data sélulér nu pohara gedéna)</string>
+  <string name="_2fa_code">Kode 2FA</string>
+  <string name="maximum_limit">Wates maksimum</string>
+  <string name="cancel">Bolay</string>
+  <string name="navigation_drawer_open">Buka</string>
+  <string name="navigation_drawer_close">Tutup</string>
+  <string name="navigation_item_home">Tepas</string>
+  <string name="navigation_item_upload">Unjal</string>
+  <string name="navigation_item_nearby">Sabudeureun</string>
+  <string name="navigation_item_about">Ngeunaan</string>
+  <string name="navigation_item_settings">Pangaturan</string>
+  <string name="navigation_item_feedback">Eupan balik</string>
+  <string name="navigation_item_logout">Kaluar</string>
 </resources>

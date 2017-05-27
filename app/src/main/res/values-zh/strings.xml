@@ -7,7 +7,7 @@
   <string name="login">登录</string>
   <string name="signup">注册</string>
   <string name="logging_in_title">正在登录</string>
-  <string name="logging_in_message">请等待...</string>
+  <string name="logging_in_message">请等待…</string>
   <string name="login_success">登录成功！</string>
   <string name="login_failed">登录失败！</string>
   <string name="upload_failed">找不到文件。请尝试其他文件。</string>
@@ -21,10 +21,10 @@
   <string name="upload_failed_notification_title">上传%1$s失败</string>
   <string name="upload_failed_notification_subtitle">点击查看</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">1个文件正在上传</item>
+    <item quantity="one">%d个文件正在上传</item>
     <item quantity="other">%d个文件正在上传</item>
   </plurals>
-  <string name="title_activity_contributions">我的上传</string>
+  <string name="title_activity_contributions">我的最近上传</string>
   <string name="contribution_state_queued">已入队列</string>
   <string name="contribution_state_failed">失败</string>
   <string name="contribution_state_in_progress">%1$d%%完成</string>
@@ -42,6 +42,7 @@
   <string name="login_failed_password">无法登录 - 请检查您的密码</string>
   <string name="login_failed_throttled">失败次数过多。请在几分钟后重试。</string>
   <string name="login_failed_blocked">对不起，该用户已经被共享资源封禁</string>
+  <string name="login_failed_2fa_needed">您必须提供您的双因素验证代码。</string>
   <string name="login_failed_generic">登录失败</string>
   <string name="share_upload_button">上传</string>
   <string name="multiple_share_base_title">命名该组图像</string>
@@ -50,23 +51,24 @@
   <string name="categories_search_text_hint">搜索分类</string>
   <string name="menu_save_categories">保存</string>
   <string name="refresh_button">刷新</string>
+  <string name="gps_disabled">您的设备禁用了GPS。您是否要启用它？</string>
+  <string name="enable_gps">启用GPS</string>
+  <string name="contributions_subtitle_zero">尚无上传</string>
   <plurals name="contributions_subtitle">
-    <item quantity="zero">没有上传</item>
-    <item quantity="one">1次上传</item>
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%d次上传</item>
     <item quantity="other">%d次上传</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">开始1次上传</item>
+    <item quantity="one">开始%d次上传</item>
     <item quantity="other">开始%d次上传</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">1次上传</item>
+    <item quantity="one">%d次上传</item>
     <item quantity="other">%d次上传</item>
   </plurals>
   <string name="categories_not_found">没有找到匹配%1$s的分类</string>
-  <string name="categories_skip_explanation">添加分类使您的图像更容易在维基共享资源被找到。
-
-开始输入以添加分类。点击该信息（或按返回）以跳过此步。</string>
+  <string name="categories_skip_explanation">添加分类使您的图像更容易在维基共享资源被找到。\n\n开始输入以添加分类。点击该信息（或按返回）以跳过此步。</string>
   <string name="categories_activity_title">分类</string>
   <string name="preference_tracking">使用报告</string>
   <string name="preference_tracking_summary">发送使用报告至维基媒体以帮助我们改进该应用</string>
@@ -81,7 +83,7 @@
   <string name="menu_feedback">发送反馈（通过电子邮件）</string>
   <string name="no_email_client">未安装电子邮件客户端</string>
   <string name="provider_categories">最近使用的分类</string>
-  <string name="waiting_first_sync">等待第一次同步...</string>
+  <string name="waiting_first_sync">等待第一次同步…</string>
   <string name="no_uploads_yet">您还没有上传任何照片。</string>
   <string name="menu_retry_upload">重试</string>
   <string name="menu_cancel_upload">取消</string>
@@ -113,36 +115,14 @@
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC0</string>
-  <string name="license_name_own_pd">自己的公有领域作品</string>
-  <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
-  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
-  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_2_0">CC BY 2.0</string>
-  <string name="license_name_fal">自由艺术许可协议</string>
-  <string name="license_name_pd_old_100">公有领域（作者去世于100年前）</string>
-  <string name="license_name_pd_old">公有领域（著作权过期）</string>
-  <string name="license_name_pd_art">公有领域（艺术）</string>
-  <string name="license_name_pd_us">公有领域（美国）</string>
-  <string name="license_name_pd_usgov">公有领域（美国政府）</string>
-  <string name="license_name_pd_usgov_nasa">公有领域（NASA）</string>
-  <string name="license_name_pd_ineligible">公有领域（不受著作权保护）</string>
-  <string name="license_name_attribution">署名</string>
-  <string name="license_name_gfdl">GNU自由文档许可协议</string>
   <string name="tutorial_1_text">维基共享资源存储大量用于维基百科的图片。</string>
   <string name="tutorial_1_subtext">您的图像会帮助教育全世界的人！</string>
   <string name="tutorial_2_text">请上传完全由您拍摄或创作的图片：</string>
-  <string name="tutorial_2_subtext">- 自然事物（花卉、动物、山峰）
-- 有用事物（自行车、火车站）
-- 知名人物（您的长官、您见到的奥运会运动员）</string>
+  <string name="tutorial_2_subtext">- 自然事物（花卉、动物、山峰）\n- 有用事物（自行车、火车站）\n- 知名人物（您的长官、您见到的奥运会运动员）</string>
   <string name="tutorial_3_text">请不要上传：</string>
-  <string name="tutorial_3_subtext">- 您朋友的自拍照或图片
-- 您从互联网下载的图片
-- 专利应用的截图</string>
+  <string name="tutorial_3_subtext">- 您朋友的自拍照或图片\n- 您从互联网下载的图片\n- 专利应用的截图</string>
   <string name="tutorial_4_text">示例上传：</string>
-  <string name="tutorial_4_subtext">- 标题：悉尼歌剧院
-- 描述：从海湾对面看到的悉尼歌剧院
-- 分类：Sydney Opera House、Sydney Opera House from the west、Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext">- 标题：悉尼歌剧院\n- 描述：从海湾对面看到的悉尼歌剧院\n- 分类：Sydney Opera House、Sydney Opera House from the west、Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">贡献您的图像。使维基百科的条目更加生动！</string>
   <string name="welcome_wikipedia_subtext">维基百科上的图像来自维基共享资源。</string>
   <string name="welcome_copyright_text">您的图像可以帮助教育世界各地的人。</string>
@@ -150,7 +130,7 @@
   <string name="welcome_final_text">您明白了吗？</string>
   <string name="welcome_final_button_text">是！</string>
   <string name="detail_panel_cats_label">分类</string>
-  <string name="detail_panel_cats_loading">正在载入...</string>
+  <string name="detail_panel_cats_loading">正在载入…</string>
   <string name="detail_panel_cats_none">未选择</string>
   <string name="detail_description_empty">没有说明</string>
   <string name="detail_license_empty">未知许可协议</string>
@@ -159,6 +139,7 @@
   <string name="location_permission_rationale">可选权限：获取当前位置以提供分类建议</string>
   <string name="ok">确定</string>
   <string name="title_activity_nearby">附近地点</string>
+  <string name="no_nearby">找不到附近地点</string>
   <string name="warning">警告</string>
   <string name="file_exists">此文件在共享资源已存在。您确定要继续么？</string>
   <string name="yes">是</string>
@@ -167,8 +148,42 @@
   <string name="media_detail_media_title">媒体的标题</string>
   <string name="media_detail_description">说明</string>
   <string name="media_detail_description_explanation">在此填写媒体的说明。这可能会相当长，并将需要包裹在多行中。我们希望它看起来很好。</string>
+  <string name="media_detail_uploaded_date">上传日期</string>
   <string name="become_a_tester_title">成为测试版的测试者</string>
   <string name="become_a_tester_description">加入我们在Google Play上的测试频道，并更早获取新功能以及错误修复</string>
   <string name="use_wikidata">使用维基数据</string>
   <string name="use_wikidata_summary">（警告：禁用此功能可能导致大量的移动数据流量费用）</string>
+  <string name="_2fa_code">2FA代码</string>
+  <string name="number_of_uploads">我的最近上传限制</string>
+  <string name="maximum_limit">最大限制</string>
+  <string name="maximum_limit_alert">无法显示超过500张</string>
+  <string name="set_limit">设置最近上传限制</string>
+  <string name="login_failed_2fa_not_supported">目前不支持双因素验证。</string>
+  <string name="logout_verification">您真的想要退出么？</string>
+  <string name="commons_logo">共享资源标志</string>
+  <string name="background_image">背景图片</string>
+  <string name="mediaimage_failed">媒体图片失败</string>
+  <string name="no_image_found">找不到图片</string>
+  <string name="upload_image">上传图片</string>
+  <string name="welcome_image_mount_zao">藏王连峰</string>
+  <string name="welcome_image_llamas">大羊驼</string>
+  <string name="welcome_image_rainbow_bridge">彩虹桥</string>
+  <string name="welcome_image_tulip">郁金香</string>
+  <string name="welcome_image_no_selfies">没有自拍</string>
+  <string name="welcome_image_proprietary">专有图片</string>
+  <string name="welcome_image_welcome_wikipedia">欢迎维基百科</string>
+  <string name="welcome_image_welcome_copyright">欢迎版权</string>
+  <string name="welcome_image_sydney_opera_house">悉尼歌剧院</string>
+  <string name="cancel">取消</string>
+  <string name="navigation_drawer_open">打开</string>
+  <string name="navigation_drawer_close">关闭</string>
+  <string name="navigation_item_home">首页</string>
+  <string name="navigation_item_upload">上传</string>
+  <string name="navigation_item_nearby">附近</string>
+  <string name="navigation_item_about">关于</string>
+  <string name="navigation_item_settings">设置</string>
+  <string name="navigation_item_feedback">反馈</string>
+  <string name="navigation_item_logout">退出</string>
+  <string name="nearby_info_menu_commons_article">共享资源条目</string>
+  <string name="nearby_info_menu_wikidata_article">维基数据条目</string>
 </resources>

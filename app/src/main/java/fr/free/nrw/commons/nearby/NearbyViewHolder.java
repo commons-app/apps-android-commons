@@ -25,9 +25,12 @@ public class NearbyViewHolder implements ViewHolder<Place> {
     public void bindModel(Context context, Place place) {
         // Populate the data into the template view using the data object
         tvName.setText(place.name);
-        tvDesc.setText(place.description);
+        String description = place.description;
+        if ( description == null || description.isEmpty() || description.equals("?")) {
+            description = "No Description Found";
+        }
+        tvDesc.setText(description);
         distance.setText(place.distance);
-
         icon.setImageResource(ResourceUtils.getDescriptionIcon(place.description));
     }
 }

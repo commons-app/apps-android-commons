@@ -7,7 +7,7 @@
   <string name="login">ログイン</string>
   <string name="signup">利用者登録</string>
   <string name="logging_in_title">ログイン中</string>
-  <string name="logging_in_message">お待ちください...</string>
+  <string name="logging_in_message" fuzzy="true">お待ちください…</string>
   <string name="login_success">ログインしました!</string>
   <string name="login_failed">ログインに失敗しました!</string>
   <string name="upload_failed">ファイルが見つかりません。別のファイルでお試しください。</string>
@@ -20,10 +20,10 @@
   <string name="upload_progress_notification_title_finishing">%1$s のアップロードを完了中</string>
   <string name="upload_failed_notification_title">%1$s のアップロードに失敗しました</string>
   <string name="upload_failed_notification_subtitle">閲覧するにはタップしてください</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="other">%d 件のファイルをアップロード中</item>
   </plurals>
-  <string name="title_activity_contributions">自分のアップロード</string>
+  <string name="title_activity_contributions" fuzzy="true">自分のアップロード</string>
   <string name="contribution_state_queued">順番待ち中</string>
   <string name="contribution_state_failed">失敗しました</string>
   <string name="contribution_state_in_progress">%1$d%% 完了</string>
@@ -43,39 +43,39 @@
   <string name="login_failed_blocked">申し訳ありませんが、この利用者はコモンズでブロックされています。</string>
   <string name="login_failed_generic">ログイン失敗</string>
   <string name="share_upload_button">アップロード</string>
+  <string name="multiple_share_base_title">このセットに名前をつけてください</string>
   <string name="provider_modifications">変更</string>
   <string name="menu_upload_single">アップロード</string>
   <string name="categories_search_text_hint">検索するカテゴリ</string>
   <string name="menu_save_categories">保存</string>
   <string name="refresh_button">更新</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">アップロードしたファイルはありません</item>
     <item quantity="other">%d 件のアップロード</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="other">%d 件のアップロードを開始中</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="other">%d 件のアップロード</item>
   </plurals>
   <string name="categories_not_found">%1$s に一致するカテゴリが見つかりません</string>
-  <string name="categories_skip_explanation">あなたの画像をウィキメディア・コモンズで見つけやすくするためにカテゴリを追加してください。
-
-カテゴリ名の入力を開始してください。
-この手順をスキップするにはこのメッセージをタップしてください(または戻るボタン)。</string>
+  <string name="categories_skip_explanation">あなたの画像をウィキメディア・コモンズで見つけやすくするためにカテゴリを追加してください。\n\nカテゴリ名の入力を開始してください。\nこの手順をスキップするにはこのメッセージをタップしてください(または戻るボタン)。</string>
   <string name="categories_activity_title">カテゴリ</string>
   <string name="preference_tracking">使用状況の報告</string>
   <string name="preference_tracking_summary">アプリの改善を支援するために、使用状況の報告をウィキメディアに送信する</string>
   <string name="title_activity_settings">設定</string>
   <string name="title_activity_signup">利用者登録</string>
   <string name="menu_about">このアプリについて</string>
-  <string name="about_license" fuzzy="true">&lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache ライセンス v2&lt;/a&gt; のもとで公開されているオープン ソース ソフトウェア</string>
+  <string name="about_license">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache ライセンス v2&lt;/a&gt; のもとで公開されているオープン ソース ソフトウェアです。Wikimedia Commons ならびにそのロゴはウィキメディア財団の商標であり、ウィキメディア財団の許可により使用しています。このサイトはウィキメディア財団の公認3でも提携先でもありません。</string>
   <string name="about_improve">ソースは &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt; にあります。バグとアイディアは &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt; へ。</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/プライバシー・ポリシー\"&gt;プライバシー・ポリシー&lt;/a&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;CREDITS&lt;/a&gt;</string>
   <string name="title_activity_about">このアプリについて</string>
   <string name="menu_feedback">フィードバックをメールで送信</string>
   <string name="no_email_client">メールアプリケーションが見つかりません</string>
   <string name="provider_categories">最近使用したカテゴリ</string>
+  <string name="waiting_first_sync">同期を待機中…</string>
   <string name="no_uploads_yet">まだ写真をアップロードしていません。</string>
   <string name="menu_retry_upload">再試行</string>
   <string name="menu_cancel_upload">キャンセル</string>
@@ -83,9 +83,14 @@
   <string name="menu_download">ダウンロード</string>
   <string name="preference_license">ライセンス</string>
   <string name="use_previous">前回のタイトルと記述を使用</string>
+  <string name="allow_gps">現在の位置を自動的に取得</string>
+  <string name="allow_gps_summary">画像にジオタグが付いていない場合、現在の位置を取得してカテゴリを提案</string>
   <string name="preference_theme">夜モード</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0表示-継承u00A03.0</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0表示u00A03.0</string>
+  <string name="preference_theme_summary">暗いテーマを使う</string>
+  <string name="license_name_cc_by_sa_four">表示-継承 4.0</string>
+  <string name="license_name_cc_by_four">表示 4.0</string>
+  <string name="license_name_cc_by_sa">表示-継承 3.0</string>
+  <string name="license_name_cc_by">表示 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC 表示-継承 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC 表示-継承 3.0 (オーストリア)</string>
@@ -99,30 +104,31 @@
   <string name="license_name_cc_by_sa_3_0_pl">CC 表示-継承 3.0 (ポーランド)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC 表示-継承 3.0 (ルーマニア)</string>
   <string name="license_name_cc_by_3_0">CC 表示 3.0</string>
+  <string name="license_name_cc_by_sa_4_0">CC 表示-継承 4.0</string>
+  <string name="license_name_cc_by_4_0">CC 表示 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
-  <string name="license_name_own_pd">own-pd</string>
-  <string name="license_name_cc_by_sa_2_5">CC 表示-継承 2.5</string>
-  <string name="license_name_cc_by_2_5">CC 表示 2.5</string>
-  <string name="license_name_cc_by_sa_2_0">CC 表示-継承 2.0</string>
-  <string name="license_name_cc_by_2_0">CC 表示-継承 2.0</string>
-  <string name="license_name_cc_2_0">CC 表示 2.0</string>
-  <string name="license_name_pd_old">パブリックドメイン (著作権期限切れ)</string>
-  <string name="license_name_pd_us">パブリック・ドメイン (アメリカ合衆国)</string>
-  <string name="license_name_pd_usgov">パブリックドメイン (米国政府作成物)</string>
-  <string name="license_name_pd_usgov_nasa">パブリック・ドメイン (NASA)</string>
-  <string name="license_name_pd_ineligible">パブリックドメイン (著作権の対象外)</string>
-  <string name="license_name_attribution">帰属</string>
-  <string name="license_name_gfdl">GNUフリー文書利用許諾契約書 (GNU Free Documentation License)</string>
+  <string name="tutorial_1_text">ウィキメディア・コモンズにはウィキペディアで使用する画像のほぼすべてが保管されています。</string>
+  <string name="tutorial_1_subtext">あなたの画像は世界中の人々が学習する助けになります!</string>
+  <string name="tutorial_2_text">アップロードする画像はあなたご本人が撮影したものかあなたが単独で制作したものに限定します。</string>
+  <string name="tutorial_2_subtext">- 自然物 (動植物、山)\n- 道具 (自転車、駅)\n- 著名人 (市区村長・都道府県知事、自分が会ったオリンピック選手)</string>
+  <string name="tutorial_3_text">アップロードが《禁止》のもの:</string>
+  <string name="tutorial_3_subtext">- あなたの友人の自撮り写真や画像\n- インターネットからダウンロードした画像\n- 著作権のあるアプリのスクリーンショット</string>
+  <string name="tutorial_4_text">アップロードの例:</string>
+  <string name="tutorial_4_subtext">- 題名: シドニー・オペラハウス\n- 説明: 湾の向こうから見たシドニー・オペラハウス\n- カテゴリ: シドニー・オペラハウス、シドニー・オペラハウスの西側、遠くから見たシドニー・オペラハウス</string>
   <string name="welcome_wikipedia_text">画像を投稿してください。ウィキペディアの記事に彩りを！</string>
+  <string name="welcome_wikipedia_subtext">ウィキペディアの画像はウィキメディア・コモンズに保管されています。</string>
+  <string name="welcome_copyright_text">あなたの画像は世界中の人々が学習する助けになります</string>
   <string name="welcome_copyright_subtext">インターネットで見つけた画像、ポスター、書籍の表紙など著作権のある素材は避けてください。</string>
   <string name="welcome_final_text">ご理解いただけましたか?</string>
   <string name="welcome_final_button_text">はい</string>
   <string name="detail_panel_cats_label">カテゴリ</string>
-  <string name="detail_panel_cats_loading">読み込み中...</string>
-  <string name="detail_panel_cats_none">選択なし</string>
-  <string name="detail_description_empty">説明なし</string>
+  <string name="detail_panel_cats_loading">読み込み中…</string>
+  <string name="detail_panel_cats_none">ファイルを選択していません</string>
+  <string name="detail_description_empty">説明はありません。</string>
   <string name="detail_license_empty">不明なライセンス</string>
   <string name="menu_refresh">更新</string>
+  <string name="storage_permission_rationale">必要な権限：外部ストレージを読み込みます。これがなければアプリは機能しません。</string>
+  <string name="location_permission_rationale">オプションの権限：カテゴリ候補の現在の位置を取得する</string>
   <string name="ok">承認</string>
   <string name="title_activity_nearby">周りの場所</string>
   <string name="warning">警告</string>
@@ -132,5 +138,9 @@
   <string name="media_detail_title">タイトル</string>
   <string name="media_detail_media_title">メディアのタイトル</string>
   <string name="media_detail_description">記述</string>
+  <string name="media_detail_description_explanation">ここにメディアの説明が入ります。かなり長文になる場合には数行にわたることがあります。それでも見栄えがよいと願っています。</string>
   <string name="become_a_tester_title">ベータ版を使ってみましょう！</string>
+  <string name="become_a_tester_description">Google Playのベータ版チャンネルにオプトインして、新機能やバグ修正プログラムに早期にアクセス</string>
+  <string name="use_wikidata">ウィキデータを使用してください</string>
+  <string name="use_wikidata_summary">（警告：これを無効にすると、モバイルデータを大量に消費する可能性があります）</string>
 </resources>

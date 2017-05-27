@@ -7,7 +7,7 @@
   <string name="login">Inicia una sessió</string>
   <string name="signup">Registre</string>
   <string name="logging_in_title">S’està iniciant la sessió</string>
-  <string name="logging_in_message">Espereu...</string>
+  <string name="logging_in_message">Espereu…</string>
   <string name="login_success">S\'ha iniciat sessió correctament !</string>
   <string name="login_failed">Error en iniciar la sessió!</string>
   <string name="upload_failed">No s\'ha trobat el fitxer. Proveu-ho amb un altre fitxer.</string>
@@ -20,11 +20,11 @@
   <string name="upload_progress_notification_title_finishing">Acabant la càrrega al servidor de %1$s</string>
   <string name="upload_failed_notification_title">Error al carregar %1$s</string>
   <string name="upload_failed_notification_subtitle">Prem per veure-ho</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">s\'està carregant 1 fitxer</item>
     <item quantity="other">s\'estan carregant %d fitxers</item>
   </plurals>
-  <string name="title_activity_contributions">Les meves càrregues</string>
+  <string name="title_activity_contributions" fuzzy="true">Les meves càrregues</string>
   <string name="contribution_state_queued">En cua</string>
   <string name="contribution_state_failed">Ha fallat</string>
   <string name="contribution_state_in_progress">%1$d%% completat</string>
@@ -49,16 +49,16 @@
   <string name="menu_upload_single">Carrega</string>
   <string name="categories_search_text_hint">Categories de cerca</string>
   <string name="menu_save_categories">Desa</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">No hi ha cap càrrega encara</item>
     <item quantity="one">1 càrrega</item>
     <item quantity="other">%d càrregues</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">S\'està iniciant 1 càrrega</item>
     <item quantity="other">S\'estan iniciant %d càrregues</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 càrrega</item>
     <item quantity="other">%d càrregues</item>
   </plurals>
@@ -70,21 +70,21 @@
   <string name="title_activity_settings">Paràmetres</string>
   <string name="title_activity_signup">Registre</string>
   <string name="menu_about">Quant a</string>
-  <string name="about_license" fuzzy="true">Programari de codi obert distribuït sota la &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;llicència Apache v2&lt;/a&gt;</string>
-  <string name="about_improve" fuzzy="true">Codi a &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Informes d\'error a &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_license" fuzzy="true">Programari de codi obert distribuït sota la &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;llicència Apache v2&lt;/a&gt;</string>
+  <string name="about_improve" fuzzy="true">Codi a &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Informes d\'error a &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">Wikimedia:Commons-android-texts-sobre privacitat/ca</string>
   <string name="title_activity_about">Quant a</string>
   <string name="menu_feedback">Envia comentaris (per correu)</string>
   <string name="provider_categories">Categories usades recentment</string>
-  <string name="waiting_first_sync">S\'està esperant la primera sincronització…</string>
+  <string name="waiting_first_sync" fuzzy="true">S\'està esperant la primera sincronització…</string>
   <string name="no_uploads_yet">Encara no heu carregat cap foto.</string>
   <string name="menu_retry_upload">Reintenta</string>
   <string name="menu_cancel_upload">Cancel·la</string>
   <string name="share_license_summary">Aquesta imatge es llicenciarà sota %1$s</string>
   <string name="menu_download">Baixa</string>
   <string name="preference_license">Llicència</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Reconeixement-CompartirIgualu00A03.0</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0Reconeixementu00A03.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CC Reconeixement-CompartirIgual 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">CC Reconeixement 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Àustria)</string>
@@ -99,22 +99,6 @@
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romania)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
-  <string name="license_name_own_pd">own-pd</string>
-  <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
-  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
-  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_2_0">CC BY 2.0</string>
-  <string name="license_name_fal">Llicència artística lliure</string>
-  <string name="license_name_pd_old_100">Domini públic (l\'autor va morir fa més de 100 anys)</string>
-  <string name="license_name_pd_old">Domini públic (copyright expirat)</string>
-  <string name="license_name_pd_art">Domini públic (art)</string>
-  <string name="license_name_pd_us">Domini públic (EUA)</string>
-  <string name="license_name_pd_usgov">Domini públic (govern dels EUA)</string>
-  <string name="license_name_pd_usgov_nasa">Domini públic (NASA)</string>
-  <string name="license_name_pd_ineligible">Domini públic (copyright no aplicable)</string>
-  <string name="license_name_attribution">Reconeixement</string>
-  <string name="license_name_gfdl">Llicència de Documentació Lliure de GNU</string>
   <string name="welcome_wikipedia_text">Doneu les vostres imatges. Ajudeu a donar vida als articles de la Viquipèdia!</string>
   <string name="welcome_wikipedia_subtext">Les imatges de la Viquipèdia vénen de la Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Les vostres imatges ajuden a educar gent d\'arreu del món.</string>
@@ -122,7 +106,7 @@
   <string name="welcome_final_text">Creieu que ho heu entès?</string>
   <string name="welcome_final_button_text">Sí!</string>
   <string name="detail_panel_cats_label">Categories</string>
-  <string name="detail_panel_cats_loading">Carregant...</string>
+  <string name="detail_panel_cats_loading">Carregant…</string>
   <string name="detail_panel_cats_none">No se n\'ha seleccionat cap</string>
   <string name="detail_description_empty">Sense descripció</string>
   <string name="detail_license_empty">Llicència desconeguda</string>

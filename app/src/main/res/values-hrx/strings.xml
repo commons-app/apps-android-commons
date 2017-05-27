@@ -6,7 +6,7 @@
   <string name="password">Passwort</string>
   <string name="login">Oonmelde</string>
   <string name="logging_in_title">Oonmelde</string>
-  <string name="logging_in_message">Bittschön woorte …</string>
+  <string name="logging_in_message" fuzzy="true">Bittschön woorte …</string>
   <string name="login_success">Oonmeldung erfollichreich!</string>
   <string name="login_failed">Oonmeldung fehlgeschlooht!</string>
   <string name="authentication_failed">Authentifizierung fehlgeschlooht!</string>
@@ -18,7 +18,7 @@
   <string name="upload_progress_notification_title_finishing">Hochloode von „%1$s“ abschliesse</string>
   <string name="upload_failed_notification_title">Hochloode von „%1$s“ fehlgeschlooht</string>
   <string name="upload_failed_notification_subtitle">Tipp mit deine Fingerspitze für se siehn</string>
-  <string name="title_activity_contributions">Mein hochgeloodne Dateie</string>
+  <string name="title_activity_contributions" fuzzy="true">Mein hochgeloodne Dateie</string>
   <string name="contribution_state_queued">In der Woorteschlang</string>
   <string name="contribution_state_failed">Fehlgeschlooht</string>
   <string name="contribution_state_in_progress">%1$d%% abgeschloss</string>
@@ -43,30 +43,27 @@
   <string name="categories_search_text_hint">Kategorie dorrichsuche</string>
   <string name="menu_save_categories">Speichre</string>
   <string name="categories_not_found">Die Kategorie „%1$s“ woard net gefunn</string>
-  <string name="categories_skip_explanation">Füch Kategoriee hinzu, um deine Bilder auf Wikimedia Commons ufffindbarer se mache.
-
-Beginn zu schreibe, um Kategoriee hinzuzufüchen.
-Tippe uff die Nachricht orrer drücke \"Zurück\", um den Schritt zu üwerspringe.</string>
+  <string name="categories_skip_explanation">Füch Kategoriee hinzu, um deine Bilder auf Wikimedia Commons ufffindbarer se mache.\n\nBeginn zu schreibe, um Kategoriee hinzuzufüchen.\nTippe uff die Nachricht orrer drücke \"Zurück\", um den Schritt zu üwerspringe.</string>
   <string name="categories_activity_title">Kategoriee</string>
   <string name="preference_tracking">Nutzungsberichte</string>
   <string name="preference_tracking_summary">Nutzungsberichte an Wikimedia schicke, um der App sein  Verbessrung beizutroohn.</string>
   <string name="title_activity_settings">Instellunge</string>
   <string name="menu_about">Üwer</string>
-  <string name="about_license" fuzzy="true">Open-Source-Software veröffentlicht unner der &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
-  <string name="about_improve" fuzzy="true">Quellcode uff &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Fehler unner &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
+  <string name="about_license" fuzzy="true">Open-Source-Software veröffentlicht unner der &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
+  <string name="about_improve" fuzzy="true">Quellcode uff &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Fehler unner &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"//de.wikipedia.org/wiki/Wikipedia:Datenschutz\"&gt;Dateschutzrichtlinie&lt;/a&gt;</string>
   <string name="title_activity_about">Üwer</string>
   <string name="menu_feedback">Rückmeldung doorrich E-Mail schicke</string>
   <string name="provider_categories">Keerzlich verwennete Kategorie</string>
-  <string name="waiting_first_sync">Warte uff die earschte Synchronisierung …</string>
+  <string name="waiting_first_sync" fuzzy="true">Warte uff die earschte Synchronisierung …</string>
   <string name="no_uploads_yet">Du host noch keh Fotos hochgelood.</string>
   <string name="menu_retry_upload">Wieder erneit versuche</string>
   <string name="menu_cancel_upload">Abbreche</string>
   <string name="share_license_summary">Das Bild weard lizenziert unner %1$s</string>
   <string name="menu_download">Herunnerloode</string>
   <string name="preference_license">Lizenz</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Attribution-ShareAlikeu00A03.0</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0Attributionu00A03.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CC Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC-BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC-BY-SA 3.0 (Österreich)</string>
@@ -81,22 +78,6 @@ Tippe uff die Nachricht orrer drücke \"Zurück\", um den Schritt zu üwerspring
   <string name="license_name_cc_by_sa_3_0_ro">CC-BY-SA 3.0 (Rumänie)</string>
   <string name="license_name_cc_by_3_0">CC-BY 3.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
-  <string name="license_name_own_pd">Gemeinfrei (eignes Werk)</string>
-  <string name="license_name_cc_by_sa_2_5">CC-BY-SA 2.5</string>
-  <string name="license_name_cc_by_2_5">CC-BY 2.5</string>
-  <string name="license_name_cc_by_sa_2_0">CC-BY-SA 2.0</string>
-  <string name="license_name_cc_by_2_0">CC-BY-SA 2.0</string>
-  <string name="license_name_cc_2_0">CC-BY 2.0</string>
-  <string name="license_name_fal">Lizenz Frei Kunst</string>
-  <string name="license_name_pd_old_100">Gemeinfrei (Uarheber starreb voar üwer 100 Johre)</string>
-  <string name="license_name_pd_old">Gemeinfrei (Uarheberrecht abgeloof)</string>
-  <string name="license_name_pd_art">Gemeinfrei (Kunst)</string>
-  <string name="license_name_pd_us">Gemeinfrei (USA)</string>
-  <string name="license_name_pd_usgov">Gemeinfrei (USA-Rechierung)</string>
-  <string name="license_name_pd_usgov_nasa">Gemeinfrei (NASA)</string>
-  <string name="license_name_pd_ineligible">Gemeinfrei (geringe Schöpungshöch)</string>
-  <string name="license_name_attribution">Noomenennung</string>
-  <string name="license_name_gfdl">GNU-Lizenz für freie Dokumentation</string>
   <string name="welcome_wikipedia_text">Teil deine Bilder. Erweck Wikipedia-Artikel zum Lewe!</string>
   <string name="welcome_wikipedia_subtext">Die Bilder uff Wikipedia komme von Wikimedia Commons (Wikimedia Allmend).</string>
   <string name="welcome_copyright_text">Deine Bilder helfe dabei, Mensche uff der ganze Welt zu bilde.</string>
@@ -104,7 +85,7 @@ Tippe uff die Nachricht orrer drücke \"Zurück\", um den Schritt zu üwerspring
   <string name="welcome_final_text">Verstand?</string>
   <string name="welcome_final_button_text">Jo</string>
   <string name="detail_panel_cats_label">Kategoriee</string>
-  <string name="detail_panel_cats_loading">Am loode …</string>
+  <string name="detail_panel_cats_loading" fuzzy="true">Am loode …</string>
   <string name="detail_panel_cats_none">Ken ausgewählt</string>
   <string name="detail_description_empty">Ken Beschreibung</string>
   <string name="detail_license_empty">Unbekannte Lizenz</string>

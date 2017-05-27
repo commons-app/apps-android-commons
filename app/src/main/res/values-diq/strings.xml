@@ -7,7 +7,7 @@
   <string name="login">Cı kewe</string>
   <string name="signup">Qeyd be</string>
   <string name="logging_in_title">Cıkewtış</string>
-  <string name="logging_in_message">Tay bıpawe</string>
+  <string name="logging_in_message" fuzzy="true">Tay bıpawe</string>
   <string name="login_success">Cıkewtış hewl bi.</string>
   <string name="login_failed">Nidekeweya de</string>
   <string name="upload_failed">Dosya nêvineya. Dosyê da bine bıcerebnê.</string>
@@ -20,11 +20,11 @@
   <string name="upload_progress_notification_title_finishing">Barkerdışe %1$s qedya</string>
   <string name="upload_failed_notification_title">%1$s bar nêbeno.</string>
   <string name="upload_failed_notification_subtitle">pıpawane xo bıvin</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">1 dosye selagnayış</item>
     <item quantity="other">%d dosye Selagnayışi</item>
   </plurals>
-  <string name="title_activity_contributions">Barkerdışê mı</string>
+  <string name="title_activity_contributions" fuzzy="true">Barkerdışê mı</string>
   <string name="contribution_state_queued">Ratneya</string>
   <string name="contribution_state_failed">Nêbı</string>
   <string name="contribution_state_in_progress">%1$d%% temamya</string>
@@ -49,16 +49,16 @@
   <string name="menu_upload_single">Bar ke</string>
   <string name="categories_search_text_hint">Kategoriyan dı cı geyr</string>
   <string name="menu_save_categories">Star ke</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Theba bar nêbı</item>
     <item quantity="one">1 bar kerdış</item>
     <item quantity="other">%d bar kerdışi</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Sergendış 1 bar kerdış</item>
     <item quantity="other">Sergendış %d bar kerdışi </item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 bar kerdış</item>
     <item quantity="other">%d bar kerdışi </item>
   </plurals>
@@ -98,28 +98,12 @@
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
-  <string name="license_name_own_pd">Mala şari (ğebiyayışa mına)</string>
-  <string name="license_name_cc_by_sa_2_5">CC-BY-SA 2.5</string>
-  <string name="license_name_cc_by_2_5">CC-BY 2.5</string>
-  <string name="license_name_cc_by_sa_2_0">CC-BY-SA 2.0</string>
-  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_2_0">CC BY 2.0</string>
-  <string name="license_name_fal">Lisansê Xoseri Zagoni</string>
-  <string name="license_name_pd_old_100">Mala şari ( verde 100 sero ke merdo)</string>
-  <string name="license_name_pd_old">Mala şari( heqa telifiya qedyaya)</string>
-  <string name="license_name_pd_art">Mala şari (Zagon)</string>
-  <string name="license_name_pd_us">Mala şari (ZDA)</string>
-  <string name="license_name_pd_usgov">Mala şari( Hukumata ZDA)</string>
-  <string name="license_name_pd_usgov_nasa">Mala şari (NASA)</string>
-  <string name="license_name_pd_ineligible">Mala şari (heqa telifiye çıniya)</string>
-  <string name="license_name_attribution">Gırêdayış</string>
-  <string name="license_name_gfdl">GNU Perekerdışê xoseri lisans</string>
   <string name="tutorial_3_text">Bar mekeri:</string>
   <string name="tutorial_4_text">Misal bar kerden:</string>
   <string name="welcome_final_text">Şıma fam kerdê?</string>
   <string name="welcome_final_button_text">E!</string>
   <string name="detail_panel_cats_label">Kategoriy</string>
-  <string name="detail_panel_cats_loading">Bar beno...</string>
+  <string name="detail_panel_cats_loading">Bar beno…</string>
   <string name="detail_panel_cats_none">Theba nêweçineya</string>
   <string name="detail_description_empty">Akerdenayış çıniyo</string>
   <string name="detail_license_empty">Lisans nizaneyeno</string>

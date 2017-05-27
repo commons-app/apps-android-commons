@@ -6,7 +6,7 @@
   <string name="password">Adgangskode</string>
   <string name="login">Log på</string>
   <string name="logging_in_title">Logger på</string>
-  <string name="logging_in_message">Vent...</string>
+  <string name="logging_in_message">Vent…</string>
   <string name="login_success">Du er nu logget på!</string>
   <string name="login_failed">Det mislykkedes at logge på!</string>
   <string name="authentication_failed">Godkendelse mislykkedes!</string>
@@ -18,7 +18,7 @@
   <string name="upload_progress_notification_title_finishing">Afslutter uploadning af %1$s</string>
   <string name="upload_failed_notification_title">Overførsel af %1$s mislykkedes</string>
   <string name="upload_failed_notification_subtitle">Klik for at se</string>
-  <string name="title_activity_contributions">Mine uploads</string>
+  <string name="title_activity_contributions" fuzzy="true">Mine uploads</string>
   <string name="contribution_state_queued">I kø</string>
   <string name="contribution_state_failed">Mislykkedes</string>
   <string name="contribution_state_in_progress">%1$d%% færdig</string>
@@ -49,21 +49,21 @@
   <string name="preference_tracking_summary">Send brugsrapporter til Wikimedia, så vi kan forbedre denne app</string>
   <string name="title_activity_settings">Indstillinger</string>
   <string name="menu_about">Om</string>
-  <string name="about_license" fuzzy="true">Open Source-software frigivet under &lt;a href=\"https://github.com/wikimedia/android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
-  <string name="about_improve" fuzzy="true">Kildekode på &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Fejlmeldinger på &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_license" fuzzy="true">Open Source-software frigivet under &lt;a href=\" https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
+  <string name="about_improve" fuzzy="true">Kildekode på &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Fejlmeldinger på &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privacy policy&lt;/a&gt;</string>
   <string name="title_activity_about">Om</string>
   <string name="menu_feedback">Send tilbagemelding (med e-mail)</string>
   <string name="provider_categories">Nyligt anvendte kategorier</string>
-  <string name="waiting_first_sync">Venter på den første synkronisering...</string>
+  <string name="waiting_first_sync">Venter på den første synkronisering…</string>
   <string name="no_uploads_yet">Du har endnu ikke uploadet nogen billeder.</string>
   <string name="menu_retry_upload">Forsøg igen</string>
   <string name="menu_cancel_upload">Annullér</string>
   <string name="share_license_summary">Billedet vil blive licenseret under %1$s</string>
   <string name="menu_download">Hent</string>
   <string name="preference_license">Licens</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Navngivelse-DelPåSammeVilkåru00A03.0</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0Navngivelseu00A03.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CC Navngivelse-DelPåSammeVilkår 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">CC Navngivelse 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Østrig)</string>
@@ -78,22 +78,6 @@
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Rumænien)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
-  <string name="license_name_own_pd">Offentlig ejendom (eget værk)</string>
-  <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
-  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
-  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_2_0">CC BY 2.0</string>
-  <string name="license_name_fal">Fri Kunst Licens</string>
-  <string name="license_name_pd_old_100">Offentlig ejendom (forfatteren døde for over 100 år siden)</string>
-  <string name="license_name_pd_old">Offentlig ejendom (ophavsretten er udløbet)</string>
-  <string name="license_name_pd_art">Offentlig ejendom (kunst)</string>
-  <string name="license_name_pd_us">Offentlig ejendom (USA)</string>
-  <string name="license_name_pd_usgov">Offentlig ejendom (USAs regering)</string>
-  <string name="license_name_pd_usgov_nasa">Offentlig ejendom (NASA)</string>
-  <string name="license_name_pd_ineligible">Offentlig ejendom (ikke muligt at ophavsretsbeskytte)</string>
-  <string name="license_name_attribution">Navngivelse</string>
-  <string name="license_name_gfdl">GNU Free Documentation License</string>
   <string name="welcome_wikipedia_text">Bidrag med dine billeder. Hjælp Wikipedias artikler med at komme til live!</string>
   <string name="welcome_wikipedia_subtext">Billeder på Wikipedia kommer fra Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Dine billeder hjælper med til at uddanne folk rundt om i verden.</string>
@@ -101,7 +85,7 @@
   <string name="welcome_final_text">Forstået?</string>
   <string name="welcome_final_button_text">Ja!</string>
   <string name="detail_panel_cats_label">Kategorier</string>
-  <string name="detail_panel_cats_loading">Indlæser...</string>
+  <string name="detail_panel_cats_loading">Indlæser…</string>
   <string name="detail_panel_cats_none">Ingen valgt</string>
   <string name="detail_description_empty">Ingen beskrivelse</string>
   <string name="detail_license_empty">Ukendt licens</string>

@@ -6,7 +6,7 @@
   <string name="password">ਪਾਸਵਰਡ</string>
   <string name="login">ਦਾਖ਼ਲ ਹੋਵੋ</string>
   <string name="logging_in_title">ਦਾਖ਼ਲਾ ਹੋ ਰਿਹਾ ਹੈ</string>
-  <string name="logging_in_message">ਉਡੀਕੋ ਜੀ...</string>
+  <string name="logging_in_message">ਉਡੀਕੋ ਜੀ…</string>
   <string name="login_success">ਦਾਖ਼ਲਾ ਸਫ਼ਲ ਹੋਇਆ!</string>
   <string name="login_failed">ਦਾਖ਼ਲਾ ਫੇਲ੍ਹ ਹੋਇਆ!</string>
   <string name="authentication_failed">ਪ੍ਰਮਾਣਤਾ ਫੇਲ੍ਹ ਹੋਈ!</string>
@@ -22,7 +22,7 @@
     <item quantity="one">੧ ਫ਼ਾਈਲ ਚੜ੍ਹਾਈ ਜਾ ਰਹੀ ਹੈ</item>
     <item quantity="other">%d ਫ਼ਾਈਲਾਂ ਚੜ੍ਹਾਈਆਂ ਜਾ ਰਹੀਆਂ ਹਨ</item>
   </plurals>
-  <string name="title_activity_contributions">ਮੇਰੇ ਅੱਪਲੋਡ</string>
+  <string name="title_activity_contributions" fuzzy="true">ਮੇਰੇ ਅੱਪਲੋਡ</string>
   <string name="contribution_state_queued">ਕਤਾਰ ਵਿਚ</string>
   <string name="contribution_state_failed">ਫੇਲ੍ਹ ਹੋਇਆ</string>
   <string name="contribution_state_in_progress">%1$d%% ਪੂਰਾ ਹੋਇਆ</string>
@@ -46,44 +46,41 @@
   <string name="menu_upload_single">ਅੱਪਲੋਡ</string>
   <string name="categories_search_text_hint">ਸ਼੍ਰੇਣੀਆਂ ਖੋਜੋ</string>
   <string name="menu_save_categories">ਸਾਂਭੋ</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">ਅਜੇ ਕੋਈ ਚੜ੍ਹਾਈ ਨਹੀਂ</item>
     <item quantity="one">੧ ਚੜ੍ਹਾਈ</item>
     <item quantity="other">%d ਚੜ੍ਹਾਈ</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">੧ ਚੜ੍ਹਾਈ ਸ਼ੁਰੂ ਹੋ ਰਹੀ ਹੈ</item>
     <item quantity="other">%d ਸ਼ੁਰੂ ਹੋ ਰਹੇ ਹਨ</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">੧ ਚੜ੍ਹਾਈ</item>
     <item quantity="other">%d ਚੜ੍ਹਾਈਆਂ</item>
   </plurals>
   <string name="categories_not_found">%1$s ਨਾਲ਼ ਮੇਲ ਖਾਂਦੀ ਕੋਈ ਸ਼੍ਰੇਣੀ ਨਹੀਂ ਲੱਭੀ</string>
-  <string name="categories_skip_explanation">ਆਪਣੀਆਂ ਤਸਵੀਰਾਂ ਨੂੰ ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼ ਵਿਚ ਜ਼ਿਆਦਾ ਲੱਭਣਯੋਗ ਬਣਾਉਣ ਲਈ ਸ਼੍ਰੇਣੀਆਂ ਜੋੜੋ।
-
-ਸ਼੍ਰੇਣੀਆਂ ਜੋੜਨ ਲਈ ਟਾਈਪ ਕਰਨ ਅਰੰਭ ਕਰੋ।
-ਇਸ ਕਾਰਜ ਨੂੰ ਅਣਡਿੱਠਾ ਕਰਨ ਲਈ ਇਹ ਸੁਨੇਹਾ ਥਪੇੜੋ (ਜਾਂ ਵਾਪਸੀ ਬਟਨ ਦਬਾਓ)।</string>
+  <string name="categories_skip_explanation">ਆਪਣੀਆਂ ਤਸਵੀਰਾਂ ਨੂੰ ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼ ਵਿਚ ਜ਼ਿਆਦਾ ਲੱਭਣਯੋਗ ਬਣਾਉਣ ਲਈ ਸ਼੍ਰੇਣੀਆਂ ਜੋੜੋ।\n\nਸ਼੍ਰੇਣੀਆਂ ਜੋੜਨ ਲਈ ਟਾਈਪ ਕਰਨ ਅਰੰਭ ਕਰੋ।\nਇਸ ਕਾਰਜ ਨੂੰ ਅਣਡਿੱਠਾ ਕਰਨ ਲਈ ਇਹ ਸੁਨੇਹਾ ਥਪੇੜੋ (ਜਾਂ ਵਾਪਸੀ ਬਟਨ ਦਬਾਓ)।</string>
   <string name="categories_activity_title">ਸ਼੍ਰੇਣੀਆਂ</string>
   <string name="preference_tracking">ਵਰਤੋਂ ਰਪਟਾਂ</string>
   <string name="preference_tracking_summary">ਇਸ ਐਪ ਨੂੰ ਸੁਧਾਰਣ ਵਿਚ ਮਦਦ ਕਰਨ ਲਈ ਵਿਕੀਮੀਡੀਆ ਨੂੰ ਵਰਤੋਂ ਰਪਟਾਂ ਭੇਜੋ</string>
   <string name="title_activity_settings">ਸੈਟਿੰਗ</string>
   <string name="menu_about">ਇਸ ਬਾਰੇ</string>
-  <string name="about_license" fuzzy="true">ਅਜ਼ਾਦ ਸਰੋਤ ਸਾਫ਼ਟਵੇਅਰ ਨੂੰ &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; ਅਧੀਨ ਜਾਰੀ ਕੀਤਾ ਗਿਆ ਹੈ</string>
-  <string name="about_improve" fuzzy="true">ਸਰੋਤ &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt; ਉੱਤੇ। ਮੁਸ਼ਕਲਾਂ &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt; ਉੱਤੇ।</string>
+  <string name="about_license" fuzzy="true">ਅਜ਼ਾਦ ਸਰੋਤ ਸਾਫ਼ਟਵੇਅਰ ਨੂੰ &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; ਅਧੀਨ ਜਾਰੀ ਕੀਤਾ ਗਿਆ ਹੈ</string>
+  <string name="about_improve" fuzzy="true">ਸਰੋਤ &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt; ਉੱਤੇ। ਮੁਸ਼ਕਲਾਂ &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt; ਉੱਤੇ।</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privacy policy&lt;/a&gt;</string>
   <string name="title_activity_about">ਇਸ ਬਾਰੇ</string>
   <string name="menu_feedback">ਵਿਚਾਰ ਭੇਜੋ (ਈਮੇਲ ਰਾਹੀਂ)</string>
   <string name="provider_categories">ਹਾਲ \'ਚ ਵਰਤੀਆਂ ਗਈਆਂ ਸ਼੍ਰੇਣੀਆਂ</string>
-  <string name="waiting_first_sync">ਪਹਿਲੀ ਸਿੰਕ ਲਈ ਉਡੀਕ...</string>
+  <string name="waiting_first_sync">ਪਹਿਲੀ ਸਿੰਕ ਲਈ ਉਡੀਕ…</string>
   <string name="no_uploads_yet">ਤੁਸੀਂ ਹਾਲੇ ਤੱਕ ਕੋਈ ਤਸਵੀਰਾਂ ਅੱਪਲੋਡ ਨਹੀਂ ਕੀਤੀਆਂ</string>
   <string name="menu_retry_upload">ਮੁੜ-ਕੋਸ਼ਿਸ਼ ਕਰੋ</string>
   <string name="menu_cancel_upload">ਰੱਦ ਕਰੋ</string>
   <string name="share_license_summary">ਇਹ ਤਸਵੀਰ ਦਾ %1$s ਹੇਠ ਲਸੰਸ ਜਾਰੀ ਕੀਤੀ ਜਾਵੇਗਾ</string>
   <string name="menu_download">ਡਾਊਨਲੋਡ</string>
   <string name="preference_license">ਲਸੰਸ</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CCu00A0Attribution-ShareAlikeu00A03.0</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0Attributionu00A03.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">CC Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (ਅਸਟਰੀਆ)</string>
@@ -98,22 +95,6 @@
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (ਰੋਮਾਨੀਆ)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_zero">CC ਸਿਫ਼ਰ</string>
-  <string name="license_name_own_pd">own-pd</string>
-  <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
-  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
-  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_2_0">CC BY 2.0</string>
-  <string name="license_name_fal">ਮੁਫ਼ਤ ਕਲਾ ਲਾਇਸੰਸ</string>
-  <string name="license_name_pd_old_100">ਜਨਤਕ ਖੇਤਰ (ਲੇਖਕ 100 ਕੁ ਸਾਲ ਪਹਿਲਾਂ ਮਰ ਗਿਆ)</string>
-  <string name="license_name_pd_old">ਜਨਤਕ ਖੇਤਰ (ਨਕਲ-ਹੱਕ ਮੁੱਕ ਚੁੱਕਾ)</string>
-  <string name="license_name_pd_art">ਜਨਤਕ ਖੇਤਰ (ਕਲਾ)</string>
-  <string name="license_name_pd_us">ਜਨਤਕ ਖੇਤਰ (US)</string>
-  <string name="license_name_pd_usgov">ਜਨਤਕ ਖੇਤਰ (US ਸਰਕਾਰ)</string>
-  <string name="license_name_pd_usgov_nasa">ਜਨਤਕ ਖੇਤਰ (NASA)</string>
-  <string name="license_name_pd_ineligible">ਜਨਤਕ ਖੇਤਰ (ਨਕਲ-ਹੱਕ ਦੇ ਅਯੋਗ)</string>
-  <string name="license_name_attribution">ਗੁਣਾਂ ਦੀ ਦੱਸ</string>
-  <string name="license_name_gfdl">GNU ਮੁਫ਼ਤ ਦਸਤਾਵੇਜੀਕਰਣ ਲਾਇਸੰਸ</string>
   <string name="welcome_wikipedia_text">ਆਪਣੀਆਂ ਤਸਵੀਰਾਂ ਦਾ ਯੋਗਦਾਨ ਪਾਓ। ਵਿਕੀਪੀਡੀਆ ਲੇਖਾਂ ਨੂੰ ਸੁਰਜੀਤ ਕਰ ਦਿਓ!</string>
   <string name="welcome_wikipedia_subtext">ਵਿਕੀਪੀਡੀਆ ਉਤਲੀਆਂ ਤਸਵੀਰਾਂ ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼ ਤੋਂ ਆਉਂਦੀਆਂ ਹਨ</string>
   <string name="welcome_copyright_text">ਤੁਹਾਡੀਆਂ ਤਸਵੀਰਾਂ ਦੁਨੀਆਂ ਭਰ ਦੇ ਲੋਕਾਂ ਨੂੰ ਪੜ੍ਹਨ ਵਿਚ ਮਦਦ ਕਰਦੀਆਂ ਹਨ।</string>
@@ -121,7 +102,7 @@
   <string name="welcome_final_text">ਤੁਹਾਨੂੰ ਲੱਗਦਾ ਹੈ ਕਿ ਤੁਹਾਡੇ ਕੋਲ ਹੈ?</string>
   <string name="welcome_final_button_text">ਹਾਂ!</string>
   <string name="detail_panel_cats_label">ਸ਼੍ਰੇਣੀਆਂ</string>
-  <string name="detail_panel_cats_loading">...ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ</string>
+  <string name="detail_panel_cats_loading" fuzzy="true">…ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ</string>
   <string name="detail_panel_cats_none">ਕੋਈ ਵੀ ਨਹੀਂ ਚੁਣਿਆ</string>
   <string name="detail_description_empty">ਕੋਈ ਵੇਰਵਾ ਨਹੀਂ</string>
   <string name="detail_license_empty">ਅਣਜਾਣ ਲਸੰਸ</string>

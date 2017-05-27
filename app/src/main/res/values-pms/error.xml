@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="crash_dialog_title">Commons a l\'é piantasse</string>
+  <string name="crash_dialog_text">Contacc! Cheicòs a l\'é andàit mal!</string>
+  <string name="crash_dialog_comment_prompt">Ch\'an disa lòn ch\'a l\'era an camin a fé, peui ch\'a lo partagia për pòsta eletrònica con noi. Sòn an giutrà a rangelo!</string>
+  <string name="crash_dialog_ok_toast">Mersì!</string>
+</resources>

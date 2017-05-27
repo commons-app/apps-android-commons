@@ -44,8 +44,6 @@ public class Contribution extends Media {
     public static final String SOURCE_GALLERY = "gallery";
     public static final String SOURCE_EXTERNAL = "external";
 
-    private static final String TAG = "Contribution";
-
     private ContentProviderClient client;
     private Uri contentUri;
     private String source;
@@ -197,7 +195,7 @@ public class Contribution extends Media {
             cv.put(Table.COLUMN_LOCAL_URI, getLocalUri().toString());
         }
         if(getImageUrl() != null) {
-            cv.put(Table.COLUMN_IMAGE_URL, getImageUrl().toString());
+            cv.put(Table.COLUMN_IMAGE_URL, getImageUrl());
         }
         if(getDateUploaded() != null) {
             cv.put(Table.COLUMN_UPLOADED, getDateUploaded().getTime());
@@ -331,6 +329,11 @@ public class Contribution extends Media {
 
         public static void onCreate(SQLiteDatabase db) {
             db.execSQL(CREATE_TABLE_STATEMENT);
+        }
+
+        public static void onDelete(SQLiteDatabase db) {
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+            onCreate(db);
         }
 
         public static void onUpdate(SQLiteDatabase db, int from, int to) {

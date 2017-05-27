@@ -14,12 +14,13 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Toast;
+
+import butterknife.ButterKnife;
 
 import java.util.ArrayList;
 
@@ -28,7 +29,6 @@ import fr.free.nrw.commons.EventLog;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
-import fr.free.nrw.commons.auth.WikiAccountAuthenticator;
 import fr.free.nrw.commons.category.CategorizationFragment;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
@@ -36,6 +36,7 @@ import fr.free.nrw.commons.modifications.CategoryModifier;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
+import timber.log.Timber;
 
 public  class       MultipleShareActivity
         extends     AuthenticatedActivity
@@ -52,10 +53,6 @@ public  class       MultipleShareActivity
     private CategorizationFragment categorizationFragment;
 
     private UploadController uploadController;
-
-    public MultipleShareActivity() {
-        super(WikiAccountAuthenticator.COMMONS_ACCOUNT_TYPE);
-    }
 
     @Override
     public Media getMediaAtPosition(int i) {
@@ -116,7 +113,7 @@ public  class       MultipleShareActivity
 
     private void multipleUploadBegins() {
 
-        Log.d("MultipleShareActivity", "Multiple upload begins");
+        Timber.d("Multiple upload begins");
 
         final ProgressDialog dialog = new ProgressDialog(MultipleShareActivity.this);
         dialog.setIndeterminate(false);
@@ -135,7 +132,11 @@ public  class       MultipleShareActivity
                     dialog.setProgress(uploadCount);
                     if(uploadCount == photosList.size()) {
                         dialog.dismiss();
-                        Toast startingToast = Toast.makeText(getApplicationContext(), R.string.uploading_started, Toast.LENGTH_LONG);
+                        Toast startingToast = Toast.makeText(
+                                CommonsApplication.getInstance(),
+                                R.string.uploading_started,
+                                Toast.LENGTH_LONG
+                        );
                         startingToast.show();
                     }
                 }
@@ -205,7 +206,9 @@ public  class       MultipleShareActivity
         uploadController = new UploadController(this);
 
         setContentView(R.layout.activity_multiple_uploads);
-        app = (CommonsApplication)this.getApplicationContext();
+        app = CommonsApplication.getInstance();
+        ButterKnife.bind(this);
+        initDrawer();
 
         if(savedInstanceState != null) {
             photosList = savedInstanceState.getParcelableArrayList("uploadsList");
@@ -242,7 +245,7 @@ public  class       MultipleShareActivity
 
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
-        app.getApi().setAuthCookie(authCookie);
+        app.getMWApi().setAuthCookie(authCookie);
         Intent intent = getIntent();
 
         if(intent.getAction().equals(Intent.ACTION_SEND_MULTIPLE)) {

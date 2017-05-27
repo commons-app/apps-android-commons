@@ -6,7 +6,7 @@
   <string name="password">ಪ್ರವೇಶಪದ</string>
   <string name="login">ಲಾಗ್ ಇನ್</string>
   <string name="logging_in_title">ಲಾಗಿನ್ ಆಗುತ್ತಿದ್ದೀರಿ</string>
-  <string name="logging_in_message">ದಯವಿಟ್ಟು ನಿರೀಕ್ಷಿಸಿ...</string>
+  <string name="logging_in_message">ದಯವಿಟ್ಟು ನಿರೀಕ್ಷಿಸಿ…</string>
   <string name="login_success">ಲಾಗಿನ್ ಯಶಸ್ವಿ!</string>
   <string name="login_failed">ಲಾಗಿನ್ ಸಾಧ್ಯವಾಗಿಲ್ಲ!</string>
   <string name="authentication_failed">ದೃಢೀಕರಣ ವಿಫಲ!</string>
@@ -45,5 +45,5 @@
   <string name="preference_license">ಪರವಾನಗಿ</string>
   <string name="welcome_final_button_text">ಹೌದು!</string>
   <string name="detail_panel_cats_label">ವರ್ಗಗಳು</string>
-  <string name="detail_panel_cats_loading">ತುಂಬಿಸಲಾಗುತ್ತಿದೆ....</string>
+  <string name="detail_panel_cats_loading">ತುಂಬಿಸಲಾಗುತ್ತಿದೆ….</string>
 </resources>

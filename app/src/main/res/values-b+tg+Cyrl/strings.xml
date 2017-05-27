@@ -6,11 +6,11 @@
   <string name="password">Гузарвожа</string>
   <string name="login">Вуруд</string>
   <string name="logging_in_title">Дар ҳоли вуруд</string>
-  <string name="logging_in_message">Лутфан мунтазир шавед...</string>
+  <string name="logging_in_message">Лутфан мунтазир шавед…</string>
   <string name="login_success">Вуруд бо муваффақият!</string>
   <string name="login_failed">Вуруд номуваффақ шуд!</string>
   <string name="upload_failed_notification_subtitle">Барои дидан нохун занед</string>
-  <string name="title_activity_contributions">Боргузориҳои ман</string>
+  <string name="title_activity_contributions" fuzzy="true">Боргузориҳои ман</string>
   <string name="contribution_state_queued">Дар саф</string>
   <string name="contribution_state_failed">Номуваффақ шуд</string>
   <string name="contribution_state_in_progress">%1$d%% комил шуд</string>
@@ -38,7 +38,7 @@
   <string name="menu_cancel_upload">Лағв</string>
   <string name="menu_download">Дарёфт</string>
   <string name="preference_license">Иҷозатнома</string>
-  <string name="license_name_cc_by" fuzzy="true">CCu00A0Attributionu00A03.0</string>
+  <string name="license_name_cc_by" fuzzy="true">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Утриш)</string>
@@ -53,25 +53,11 @@
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Руминия)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
-  <string name="license_name_own_pd">own-pd</string>
-  <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
-  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
-  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_2_0">CC BY 2.0</string>
-  <string name="license_name_fal">Иҷозатномаи Санъати Озод</string>
-  <string name="license_name_pd_old_100">Моликияти омма (муаллиф беш аз 100 сол қабл фавтидааст)</string>
-  <string name="license_name_pd_old">Моликияти омма (эътибои ҳаққи таксир сипарӣ шудааст)</string>
-  <string name="license_name_pd_art">Моликияти омма (санъат)</string>
-  <string name="license_name_pd_us">Моликияти омма (ИМА)</string>
-  <string name="license_name_pd_usgov_nasa">Моликияти омма (НАСА)</string>
-  <string name="license_name_pd_ineligible">Моликияти омма (барои ҳакки таксир ҷавобгӯ нест)</string>
-  <string name="license_name_attribution">Нисбатдиҳӣ</string>
   <string name="welcome_copyright_text">Аксҳои шумо барои таълими одамон аз тамоми ҷаҳон кӯмак мерасонанд.</string>
   <string name="welcome_final_text">Фикр мекунед дарк кардед?</string>
   <string name="welcome_final_button_text">Бале!</string>
   <string name="detail_panel_cats_label">Гурӯҳҳо</string>
-  <string name="detail_panel_cats_loading">Дар ҳоли кушодашавӣ...</string>
+  <string name="detail_panel_cats_loading">Дар ҳоли кушодашавӣ…</string>
   <string name="detail_panel_cats_none">Ҳеҷ яке интихоб нашудааст</string>
   <string name="detail_license_empty">Иҷозатномаи ношинос</string>
 </resources>

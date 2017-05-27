@@ -1,9 +1,6 @@
 package fr.free.nrw.commons;
 
-import android.util.Log;
-
 import org.mediawiki.api.ApiResult;
-import org.mediawiki.api.MWApi;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -23,6 +20,9 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import fr.free.nrw.commons.location.LatLng;
+import timber.log.Timber;
+
 /**
  * Fetch additional media data from the network that we don't store locally.
  *
@@ -31,14 +31,13 @@ import javax.xml.parsers.ParserConfigurationException;
  */
 public class MediaDataExtractor {
     private boolean fetched;
-    private boolean processed;
 
     private String filename;
     private ArrayList<String> categories;
     private Map<String, String> descriptions;
-    private String author;
     private Date date;
     private String license;
+    private String coordinates;
     private LicenseList licenseList;
 
     /**
@@ -49,7 +48,6 @@ public class MediaDataExtractor {
         categories = new ArrayList<>();
         descriptions = new HashMap<>();
         fetched = false;
-        processed = false;
         this.licenseList = licenseList;
     }
 
@@ -64,7 +62,7 @@ public class MediaDataExtractor {
             throw new IllegalStateException("Tried to call MediaDataExtractor.fetch() again.");
         }
 
-        MWApi api = CommonsApplication.createMWApi();
+        MWApi api = CommonsApplication.getInstance().getMWApi();
         ApiResult result = api.action("query")
                 .param("prop", "revisions")
                 .param("titles", filename)
@@ -111,9 +109,7 @@ public class MediaDataExtractor {
             doc = docBuilder.parse(new ByteArrayInputStream(source.getBytes("UTF-8")));
         } catch (ParserConfigurationException e) {
             throw new RuntimeException(e);
-        } catch (IllegalStateException e) {
-            throw new IOException(e);
-        } catch (SAXException e) {
+        } catch (IllegalStateException | SAXException e) {
             throw new IOException(e);
         }
         Node templateNode = findTemplate(doc.getDocumentElement(), "information");
@@ -122,7 +118,14 @@ public class MediaDataExtractor {
             descriptions = getMultilingualText(descriptionNode);
 
             Node authorNode = findTemplateParameter(templateNode, "author");
-            author = getFlatText(authorNode);
+        }
+
+        Node coordinateTemplateNode = findTemplate(doc.getDocumentElement(), "location");
+
+        if (coordinateTemplateNode != null) {
+            coordinates = getCoordinates(coordinateTemplateNode);
+        } else {
+            coordinates = "No coordinates found";
         }
 
         /*
@@ -131,20 +134,20 @@ public class MediaDataExtractor {
             * look for 'self' template and check its first parameter
             * if none, look for any of the known templates
          */
-        Log.d("Commons", "MediaDataExtractor searching for license");
+        Timber.d("MediaDataExtractor searching for license");
         Node selfLicenseNode = findTemplate(doc.getDocumentElement(), "self");
         if (selfLicenseNode != null) {
             Node firstNode = findTemplateParameter(selfLicenseNode, 1);
             String licenseTemplate = getFlatText(firstNode);
             License license = licenseList.licenseForTemplate(licenseTemplate);
             if (license == null) {
-                Log.d("Commons", "MediaDataExtractor found no matching license for self parameter: " + licenseTemplate + "; faking it");
+                Timber.d("MediaDataExtractor found no matching license for self parameter: %s; faking it", licenseTemplate);
                 this.license = licenseTemplate; // hack hack! For non-selectable licenses that are still in the system.
             } else {
                 // fixme: record the self-ness in here too... sigh
                 // all this needs better server-side metadata
                 this.license = license.getKey();
-                Log.d("Commons", "MediaDataExtractor found self-license " + this.license);
+                Timber.d("MediaDataExtractor found self-license %s", this.license);
             }
         } else {
             for (License license : licenseList.values()) {
@@ -153,7 +156,7 @@ public class MediaDataExtractor {
                 if (template != null) {
                     // Found!
                     this.license = license.getKey();
-                    Log.d("Commons", "MediaDataExtractor found non-self license " + this.license);
+                    Timber.d("MediaDataExtractor found non-self license %s", this.license);
                     break;
                 }
             }
@@ -245,6 +248,25 @@ public class MediaDataExtractor {
         return parentNode.getTextContent();
     }
 
+    /**
+     * Extracts the coordinates from the template and returns them as pretty formatted string.
+     * Loops over the children of the coordinate template:
+     *      {{Location|47.50111007666667|19.055700301944444}}
+     * and extracts the latitude and longitude as a pretty string.
+     *
+     * @param parentNode The node of the coordinates template.
+     * @return Pretty formatted coordinates.
+     * @throws IOException Parsing failed.
+     */
+    private String getCoordinates(Node parentNode) throws IOException {
+        NodeList childNodes = parentNode.getChildNodes();
+        double latitudeText = Double.parseDouble(childNodes.item(1).getTextContent());
+        double longitudeText = Double.parseDouble(childNodes.item(2).getTextContent());
+        LatLng coordinates = new LatLng(latitudeText, longitudeText);
+
+        return coordinates.getPrettyCoordinateString();
+    }
+
     // Extract a dictionary of multilingual texts from a subset of the parse tree.
     // Texts are wrapped in things like {{en|foo} or {{en|1=foo bar}}.
     // Text outside those wrappers is stuffed into a 'default' faux language key if present.
@@ -290,6 +312,7 @@ public class MediaDataExtractor {
 
         media.setCategories(categories);
         media.setDescriptions(descriptions);
+        media.setCoordinates(coordinates);
         if (license != null) {
             media.setLicense(license);
         }

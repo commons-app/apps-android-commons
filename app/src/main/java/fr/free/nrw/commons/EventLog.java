@@ -4,19 +4,19 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.impl.client.AbstractHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 import fr.free.nrw.commons.settings.Prefs;
 import in.yuvi.http.fluent.Http;
+import timber.log.Timber;
 
 public class EventLog {
 
@@ -30,19 +30,19 @@ public class EventLog {
             boolean  allSuccess = true;
             // Not using the default URL connection, since that seems to have different behavior than the rest of the code
             for(LogBuilder logBuilder: logBuilders) {
-                HttpURLConnection conn;
                 try {
                     URL url = logBuilder.toUrl();
-                    HttpResponse response = Http.get(url.toString()).use(CommonsApplication.createHttpClient()).asResponse();
+                    AbstractHttpClient httpClient = CommonsApplication.getInstance().getHttpClient();
+                    HttpResponse response = Http.get(url.toString()).use(httpClient).asResponse();
 
                     if(response.getStatusLine().getStatusCode() != 204) {
                         allSuccess = false;
                     }
-                    Log.d("Commons", "EventLog hit " + url.toString());
+                    Timber.d("EventLog hit %s", url);
 
                 } catch (IOException e) {
                     // Probably just ignore for now. Can be much more robust with a service, etc later on.
-                    Log.d("Commons", "IO Error, EventLog hit skipped");
+                    Timber.d("IO Error, EventLog hit skipped");
                 }
             }
 
@@ -94,9 +94,7 @@ public class EventLog {
                 data.put("appversion", "Android/" + BuildConfig.VERSION_NAME);
                 fullData.put("event", data);
                 return new URL(CommonsApplication.EVENTLOG_URL + "?" + Utils.urlEncode(fullData.toString()) + ";");
-            } catch (MalformedURLException e) {
-                throw new RuntimeException(e);
-            } catch (JSONException e) {
+            } catch (MalformedURLException | JSONException e) {
                 throw new RuntimeException(e);
             }
         }

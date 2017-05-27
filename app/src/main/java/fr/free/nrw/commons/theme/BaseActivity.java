@@ -6,16 +6,18 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
 
 public class BaseActivity extends AppCompatActivity {
     boolean currentTheme;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("theme",true)) {
+        if(Utils.isDarkTheme(this)){
             currentTheme = true;
             setTheme(R.style.DarkAppTheme);
-        }else {
+        } else {
             currentTheme = false;
             setTheme(R.style.LightAppTheme); // default
         }

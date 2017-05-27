@@ -116,10 +116,6 @@ public class Media implements Parcelable {
         this.creator = creator;
     }
 
-    public String getThumbnailUrl(int width) {
-        return Utils.makeThumbUrl(getImageUrl(), getFilename(), width);
-    }
-
     public int getWidth() {
         return width;
     }
@@ -144,6 +140,14 @@ public class Media implements Parcelable {
         this.license = license;
     }
 
+    public String getCoordinates() {
+        return coordinates;
+    }
+
+    public void setCoordinates(String coordinates) {
+        this.coordinates = coordinates;
+    }
+
     // Primary metadata fields
     protected Uri localUri;
     protected String imageUrl;
@@ -155,6 +159,7 @@ public class Media implements Parcelable {
     protected int width;
     protected int height;
     protected String license;
+    private String coordinates;
     protected String creator;
     protected ArrayList<String> categories; // as loaded at runtime?
     protected Map<String, String> descriptions; // multilingual descriptions as loaded
@@ -164,7 +169,7 @@ public class Media implements Parcelable {
     }
 
     public void setCategories(List<String> categories) {
-        this.categories.removeAll(this.categories);
+        this.categories.clear();
         this.categories.addAll(categories);
     }
 

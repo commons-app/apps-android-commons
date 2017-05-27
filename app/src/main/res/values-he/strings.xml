@@ -6,7 +6,7 @@
   <string name="password">ססמה</string>
   <string name="login">כניסה</string>
   <string name="logging_in_title">כניסה לחשבון</string>
-  <string name="logging_in_message">נא להמתין...</string>
+  <string name="logging_in_message">נא להמתין…</string>
   <string name="login_success">הכניסה הצליחה</string>
   <string name="login_failed">הכניסה נכשלה!</string>
   <string name="authentication_failed">אימות הפרטים נכשל</string>
@@ -53,13 +53,13 @@
   <string name="preference_tracking_summary">לשלוח דוחות שימוש לויקימדיה כדי לעזור לנו לשפר את היישום</string>
   <string name="title_activity_settings">הגדרות</string>
   <string name="menu_about">אודות</string>
-  <string name="about_license">תוכנת קוד-פתוח המשוחררת תחת רישיון &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;אפאצ\'י גרסה 2&lt;/a&gt;</string>
-  <string name="about_improve">קוד מקור ב־&lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. דיווחי באגים ב&lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;באגזילה&lt;/a&gt;.</string>
+  <string name="about_license">תוכנת קוד-פתוח המשוחררת תחת רישיון &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;אפאצ\'י גרסה 2&lt;/a&gt;</string>
+  <string name="about_improve">קוד מקור ב־&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. דיווחי באגים ב&lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;באגזילה&lt;/a&gt;.</string>
   <string name="about_privacy_policy"/>
   <string name="title_activity_about">אודות</string>
   <string name="menu_feedback">שליחת משוב (בדוא\"ל)</string>
   <string name="provider_categories">קטגוריות בשימוש לאחרונה</string>
-  <string name="waiting_first_sync">מחכה לסנכרון הראשון...</string>
+  <string name="waiting_first_sync">מחכה לסנכרון הראשון…</string>
   <string name="no_uploads_yet">עדיין לא העלית תמונות.</string>
   <string name="menu_retry_upload">לנסות שוב</string>
   <string name="menu_cancel_upload">ביטול</string>
@@ -80,22 +80,6 @@
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (רומניה)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
-  <string name="license_name_own_pd">own-pd</string>
-  <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
-  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
-  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_2_0">CC BY 2.0</string>
-  <string name="license_name_fal">רישיון אמנות חופשית</string>
-  <string name="license_name_pd_old_100">נחלת הכלל (המחבר נפטר לפני יותר מ-100 שנים)</string>
-  <string name="license_name_pd_old">נחלת הכלל (זכויות היוצרים פקעו)</string>
-  <string name="license_name_pd_art">נחלת הכלל (אמנות)</string>
-  <string name="license_name_pd_us">נחלת הכלל (ארה\"ב)</string>
-  <string name="license_name_pd_usgov">נחלת הכלל (ממשלת ארה\"ב)</string>
-  <string name="license_name_pd_usgov_nasa">נחלת הכלל (נאסא)</string>
-  <string name="license_name_pd_ineligible">נחלת הכלל (לא מושא לזכויות יוצרים)</string>
-  <string name="license_name_attribution">ייחוס</string>
-  <string name="license_name_gfdl">הרישיון לשימוש חופשי במסמכים של גנו</string>
   <string name="welcome_wikipedia_text">תרמו את התמונות שלכם. עזרו לערכים בוויקיפדיה להתעורר לחיים!</string>
   <string name="welcome_wikipedia_subtext">התמונות בוויקיפדיה מגיעות מ־Wikimedia Commons.</string>
   <string name="welcome_copyright_text">התמונות שלכם עוזרות להעניק חינוך לאנשים מסביב לעולם.</string>
@@ -103,7 +87,7 @@
   <string name="welcome_final_text">נראה לך שקלטת?</string>
   <string name="welcome_final_button_text">כן!</string>
   <string name="detail_panel_cats_label">קטגוריות</string>
-  <string name="detail_panel_cats_loading">טעינה...</string>
+  <string name="detail_panel_cats_loading">טעינה…</string>
   <string name="detail_panel_cats_none">לא נבחר דבר</string>
   <string name="detail_description_empty">אין תיאור</string>
   <string name="detail_license_empty">רישיון לא ידוע</string>

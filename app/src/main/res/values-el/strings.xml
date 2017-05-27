@@ -7,7 +7,7 @@
   <string name="login">Σύνδεση</string>
   <string name="signup">Εγγραφή</string>
   <string name="logging_in_title">Συνδέεται</string>
-  <string name="logging_in_message">Παρακαλούμε περιμένετε...</string>
+  <string name="logging_in_message">Παρακαλούμε περιμένετε…</string>
   <string name="login_success">Επιτυχής σύνδεση!</string>
   <string name="login_failed">Η είσοδος απέτυχε!</string>
   <string name="upload_failed">Το αρχείο δεν βρέθηκε. Παρακαλώ δοκιμάστε ένα άλλο αρχείο.</string>
@@ -20,15 +20,15 @@
   <string name="upload_progress_notification_title_finishing">Αποπεράτωση επιφόρτωσης %1$s</string>
   <string name="upload_failed_notification_title">Ανέβασμα του %1$s απέτυχε</string>
   <string name="upload_failed_notification_subtitle">Πατήστε για να δείτε</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">1 αρχείο επιφορτώνεται</item>
     <item quantity="other">%d αρχεία επιφορτώνονται</item>
   </plurals>
-  <string name="title_activity_contributions">Οι επιφορτώσεις μου</string>
+  <string name="title_activity_contributions" fuzzy="true">Οι επιφορτώσεις μου</string>
   <string name="contribution_state_queued">Στην ουρά</string>
   <string name="contribution_state_failed">Απέτυχε</string>
   <string name="contribution_state_in_progress">%1$d%% ολοκληρώθηκε</string>
-  <string name="contribution_state_starting">Επιφορτώνει...</string>
+  <string name="contribution_state_starting">Επιφορτώνει…</string>
   <string name="menu_from_gallery">Από τη Συλλογή</string>
   <string name="menu_from_camera">Τραβήξτε φωτογραφία</string>
   <string name="menu_nearby">Κοντά</string>
@@ -50,39 +50,36 @@
   <string name="categories_search_text_hint">Αναζήτηση κατηγοριών</string>
   <string name="menu_save_categories">Αποθήκευση</string>
   <string name="refresh_button">Ανανέωση</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Δεν υπάρχουν επιφορτώσεις ακόμη</item>
     <item quantity="one">1 επιφόρτωση</item>
     <item quantity="other">%d επιφορτώσεις</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Έναρξη 1 επιφόρτωσης</item>
     <item quantity="other">Έναρτξη %d επιφορτώσεων</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 επιφόρτωση</item>
     <item quantity="other">%d επιφορτώσεις</item>
   </plurals>
   <string name="categories_not_found">Δεν βρέθηκαν κατηγορίες που ταιριάζουν %1$s</string>
-  <string name="categories_skip_explanation">Προσθέστε κατηγορίες για να κάνετε τις εικόνες σας πιο ανιχνεύσιμες στα Wikimedia Commons.
-
-Αρχίστε να γράφετε για να προσθέσετε κατηγορίες.
-Πατήστε αυτό το μήνυμα (ή πατήστε επιστροφή) για να παραλείψετε αυτό το βήμα.</string>
+  <string name="categories_skip_explanation">Προσθέστε κατηγορίες για να κάνετε τις εικόνες σας πιο ανιχνεύσιμες στα Wikimedia Commons.\n\nΑρχίστε να γράφετε για να προσθέσετε κατηγορίες.\nΠατήστε αυτό το μήνυμα (ή πατήστε επιστροφή) για να παραλείψετε αυτό το βήμα.</string>
   <string name="categories_activity_title">Κατηγορίες</string>
   <string name="preference_tracking">Αναφορές χρήσης</string>
   <string name="preference_tracking_summary">Στείλτε αναφορές σχετικά με την χρήση σας στο Wikimedia για να μας βοηθήσετε να βελτιώσουμε την εφαρμογή</string>
   <string name="title_activity_settings">Ρυθμίσεις</string>
   <string name="title_activity_signup">Εγγραφή</string>
   <string name="menu_about">Σχετικά</string>
-  <string name="about_license" fuzzy="true">Λογισμικό ανοικτού κώδικα και κυκλοφορεί υπό την &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Άδεια Apache v2&lt;/a&gt;. Το Wikimedia Commons και το λογότυπο είναι εμπορικά σήματα του Ιδρύματος Wikimedia και χρησιμοποιούνται με άδεια από το Ίδρυμα Wikimedia. Δεν προτεινόμαστε ή συνδεόμαστε με το Ίδρυμα Wikimedia.</string>
+  <string name="about_license" fuzzy="true">Λογισμικό ανοικτού κώδικα και κυκλοφορεί υπό την &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Άδεια Apache v2&lt;/a&gt;. Το Wikimedia Commons και το λογότυπο είναι εμπορικά σήματα του Ιδρύματος Wikimedia και χρησιμοποιούνται με άδεια από το Ίδρυμα Wikimedia. Δεν προτεινόμαστε ή συνδεόμαστε με το Ίδρυμα Wikimedia.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Πηγή&lt;/a&gt; και &lt;a href=\"https://commons-app.github.io/\"&gt;ιστοσελίδα&lt;/a&gt; στο GitHub. Δημιουργήστε ένα νέο &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub θέμα&lt;/a&gt; για αναφορές σφαλμάτων και προτάσεις.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Πολιτική προσωπικών δεδομένων&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;CREDITS&lt;/a&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;CREDITS&lt;/a&gt;</string>
   <string name="title_activity_about">Σχετικά</string>
   <string name="menu_feedback">Αποστολή σχολίων (μέσω Email)</string>
   <string name="no_email_client">Δεν υπάρχει εγκατεστημένη εφαρμογή ηλεκτρονικού ταχυδρομείου</string>
   <string name="provider_categories">Κατηγορίες που χρησιμοποιήθηκαν πρόσφατα</string>
-  <string name="waiting_first_sync">Αναμονή για τον πρώτο συγχρονισμό...</string>
+  <string name="waiting_first_sync">Αναμονή για τον πρώτο συγχρονισμό…</string>
   <string name="no_uploads_yet">Ακόμα δεν έχετε ανεβάσει φωτογραφίες.</string>
   <string name="menu_retry_upload">Ξαναπροσπαθήστε</string>
   <string name="menu_cancel_upload">Ακύρωση</string>
@@ -114,36 +111,14 @@
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Μηδέν</string>
-  <string name="license_name_own_pd">δική μου - κοινό κτήμα</string>
-  <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
-  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
-  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_2_0">CC BY 2.0</string>
-  <string name="license_name_fal">Ελεύθερη Άδεια Τέχνης</string>
-  <string name="license_name_pd_old_100">Κοινό κτήμα (ο δημιουργός πέθανε πάνω από 100 χρόνια πριν)</string>
-  <string name="license_name_pd_old">Κοινό κτήμα (τα πνευματικά δικαιώματα έχουν λήξει)</string>
-  <string name="license_name_pd_art">Κοινό κτήμα (τέχνη)</string>
-  <string name="license_name_pd_us">Κοινό κτήμα (ΗΠΑ)</string>
-  <string name="license_name_pd_usgov">Κοινό κτήμα (κυβέρνηση ΗΠΑ)</string>
-  <string name="license_name_pd_usgov_nasa">Κοινό κτήμα (NASA)</string>
-  <string name="license_name_pd_ineligible">Κοινό κτήμα (μη ικανό για πνευματικά δικαιώματα)</string>
-  <string name="license_name_attribution">Απόδοση</string>
-  <string name="license_name_gfdl">GNU Free Documentation License</string>
   <string name="tutorial_1_text">Το Wikimedia Commons φιλοξενεί τις περισσότερες από τις εικόνες που χρησιμοποιούνται στη Wikipedia.</string>
   <string name="tutorial_1_subtext">Οι εικόνες σας βοηθούν να μορφωθούν άνθρωποι σε όλο τον κόσμο!</string>
   <string name="tutorial_2_text">Παρακαλούμε ανεβάστε εικόνες που έχουν ληφθεί ή δημιουργηθεί εξ ολοκλήρου από τον εαυτό σας:</string>
-  <string name="tutorial_2_subtext">- Φυσικά αντικείμενα (λουλούδια, ζώα, βουνά)
-- Χρήσιμα αντικείμενα (ποδήλατα, σταθμοί τρένων)
-- Διάσημοι άνθρωποι (ο δήμαρχος, αθλητές Ολυμπιακών αγώνων που συναντήσατε)</string>
+  <string name="tutorial_2_subtext">- Φυσικά αντικείμενα (λουλούδια, ζώα, βουνά)\n- Χρήσιμα αντικείμενα (ποδήλατα, σταθμοί τρένων)\n- Διάσημοι άνθρωποι (ο δήμαρχος, αθλητές Ολυμπιακών αγώνων που συναντήσατε)</string>
   <string name="tutorial_3_text">Παρακαλούμε ΜΗΝ ανεβάσετε:</string>
-  <string name="tutorial_3_subtext">- Selfies ή φωτογραφίες των φίλων σας
-- Εικόνες που έχετε κατεβάσει από το Internet
-- Στιγμιότυπα από ιδιοταγείς εφαρμογές</string>
+  <string name="tutorial_3_subtext">- Selfies ή φωτογραφίες των φίλων σας\n- Εικόνες που έχετε κατεβάσει από το Internet\n- Στιγμιότυπα από ιδιοταγείς εφαρμογές</string>
   <string name="tutorial_4_text">Παράδειγμα ανεβάσματος:</string>
-  <string name="tutorial_4_subtext">- Τίτλος: Όπερα Του Σίδνεϊ
-- Περιγραφή: Η Όπερα του Σίδνεϊ όπως φαίνεται απέναντι από τον κόλπο
-- Κατηγορίες: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext">- Τίτλος: Όπερα Του Σίδνεϊ\n- Περιγραφή: Η Όπερα του Σίδνεϊ όπως φαίνεται απέναντι από τον κόλπο\n- Κατηγορίες: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Συνεισφέρετε τις εικόνες σας. Βοηθείστε τα λήμματα της Wikipedia να έρθουν στη ζωή!</string>
   <string name="welcome_wikipedia_subtext">Οι εικόνες στη Wikipedia προέρχονται από το Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Οι εικόνες σας βοηθούν να εκπαιδευτούν άνθρωποι σε όλο τον κόσμο.</string>
@@ -151,7 +126,7 @@
   <string name="welcome_final_text">Νομίζεις ότι έχεις;</string>
   <string name="welcome_final_button_text">Ναι!</string>
   <string name="detail_panel_cats_label">Κατηγορίες</string>
-  <string name="detail_panel_cats_loading">Φόρτωση...</string>
+  <string name="detail_panel_cats_loading" fuzzy="true">Φόρτωση…</string>
   <string name="detail_panel_cats_none">Καμία επιλεγμένη</string>
   <string name="detail_description_empty">Καμία περιγραφή</string>
   <string name="detail_license_empty">Άγνωστη άδεια</string>
@@ -170,4 +145,6 @@
   <string name="media_detail_description_explanation">Η περιγραφή του πολυμέσου μπαίνει εδώ. Αυτή μπορεί να είναι σχετικά μεγάλη, και θα χρειαστεί να αναδιπλωθεί σε πολλές γραμμές. Ελπίζουμε ωστόσο ότι θα φαίνεται όμορφα.</string>
   <string name="become_a_tester_title">Γίνετε Δοκιμαστής Beta</string>
   <string name="become_a_tester_description">Συμμετέχετε στο κανάλι beta μας στο Google Play και αποκτήστε πρώιμη πρόσβαση σε νέες λειτουργίες και διορθώσεις σφαλμάτων</string>
+  <string name="use_wikidata">χρήση wikidata</string>
+  <string name="use_wikidata_summary">(Προσοχή: η απενεργοποίηση αυτή μπορεί να προκαλέσει μεγάλη κατανάλωση κινητὠν δεδομένων)</string>
 </resources>

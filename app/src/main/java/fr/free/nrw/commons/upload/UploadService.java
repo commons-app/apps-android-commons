@@ -10,12 +10,11 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
+import fr.free.nrw.commons.*;
 import org.mediawiki.api.ApiResult;
-import org.mediawiki.api.MWApi;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -26,16 +25,12 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.EventLog;
-import fr.free.nrw.commons.HandlerService;
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import in.yuvi.http.fluent.ProgressListener;
+import timber.log.Timber;
 
 public class UploadService extends HandlerService<Contribution> {
 
@@ -87,7 +82,7 @@ public class UploadService extends HandlerService<Contribution> {
 
         @Override
         public void onProgress(long transferred, long total) {
-            Log.d("Commons", String.format("Uploaded %d of %d", transferred, total));
+            Timber.d("Uploaded %d of %d", transferred, total);
             if(!notificationTitleChanged) {
                 curProgressNotification.setContentTitle(notificationProgressTitle);
                 notificationTitleChanged = true;
@@ -112,7 +107,7 @@ public class UploadService extends HandlerService<Contribution> {
     public void onDestroy() {
         super.onDestroy();
         contributionsProviderClient.release();
-        Log.d("Commons", "UploadService.onDestroy; " + unfinishedUploads + " are yet to be uploaded");
+        Timber.d("UploadService.onDestroy; %s are yet to be uploaded", unfinishedUploads);
     }
 
     @Override
@@ -120,7 +115,7 @@ public class UploadService extends HandlerService<Contribution> {
         super.onCreate();
 
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        app = (CommonsApplication) this.getApplicationContext();
+        app = CommonsApplication.getInstance();
         contributionsProviderClient = this.getContentResolver().acquireContentProviderClient(ContributionsContentProvider.AUTHORITY);
     }
 
@@ -149,7 +144,7 @@ public class UploadService extends HandlerService<Contribution> {
                 toUpload++;
                 if (curProgressNotification != null && toUpload != 1) {
                     curProgressNotification.setContentText(getResources().getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload));
-                    Log.d("Commons", String.format("%d uploads left", toUpload));
+                    Timber.d("%d uploads left", toUpload);
                     this.startForeground(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification.build());
                 }
 
@@ -173,15 +168,15 @@ public class UploadService extends HandlerService<Contribution> {
                     Contribution.Table.COLUMN_STATE + " = ? OR " + Contribution.Table.COLUMN_STATE + " = ?",
                     new String[]{ String.valueOf(Contribution.STATE_QUEUED), String.valueOf(Contribution.STATE_IN_PROGRESS) }
             );
-            Log.d("Commons", "Set " + updated + " uploads to failed");
-            Log.d("Commons", "Flags is" + flags + " id is" + startId);
+            Timber.d("Set %d uploads to failed", updated);
+            Timber.d("Flags is %d id is %d", flags, startId);
             freshStart = false;
         }
         return START_REDELIVER_INTENT;
     }
 
     private void uploadContribution(Contribution contribution) {
-        MWApi api = app.getApi();
+        MWApi api = app.getMWApi();
 
         ApiResult result;
         InputStream file = null;
@@ -192,12 +187,12 @@ public class UploadService extends HandlerService<Contribution> {
             //FIXME: Google Photos bug
             file = this.getContentResolver().openInputStream(contribution.getLocalUri());
         } catch(FileNotFoundException e) {
-            Log.d("Exception", "File not found");
+            Timber.d("File not found");
             Toast fileNotFound = Toast.makeText(this, R.string.upload_failed, Toast.LENGTH_LONG);
             fileNotFound.show();
         }
 
-        Log.d("Commons", "Before execution!");
+        Timber.d("Before execution!");
         curProgressNotification = new NotificationCompat.Builder(this).setAutoCancel(true)
                 .setSmallIcon(R.drawable.ic_launcher)
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher))
@@ -206,7 +201,7 @@ public class UploadService extends HandlerService<Contribution> {
                 .setContentText(getResources().getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload))
                 .setOngoing(true)
                 .setProgress(100, 0, true)
-                .setContentIntent(PendingIntent.getActivity(getApplicationContext(), 0, new Intent(this, ContributionsActivity.class), 0))
+                .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, ContributionsActivity.class), 0))
                 .setTicker(getString(R.string.upload_progress_notification_title_in_progress, contribution.getDisplayTitle()));
 
         this.startForeground(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification.build());
@@ -218,16 +213,16 @@ public class UploadService extends HandlerService<Contribution> {
                     MimeTypeMap.getSingleton().getExtensionFromMimeType((String)contribution.getTag("mimeType")));
 
             synchronized (unfinishedUploads) {
-                Log.d("Commons", "making sure of uniqueness of name: " + filename);
+                Timber.d("making sure of uniqueness of name: %s", filename);
                 filename = findUniqueFilename(filename);
                 unfinishedUploads.add(filename);
             }
             if(!api.validateLogin()) {
                 // Need to revalidate!
                 if(app.revalidateAuthToken()) {
-                    Log.d("Commons", "Successfully revalidated token!");
+                    Timber.d("Successfully revalidated token!");
                 } else {
-                    Log.d("Commons", "Unable to revalidate :(");
+                    Timber.d("Unable to revalidate :(");
                     // TODO: Put up a new notification, ask them to re-login
                     stopForeground(true);
                     Toast failureToast = Toast.makeText(this, R.string.authentication_failed, Toast.LENGTH_LONG);
@@ -242,7 +237,7 @@ public class UploadService extends HandlerService<Contribution> {
             );
             result = api.upload(filename, file, contribution.getDataLength(), contribution.getPageContents(), contribution.getEditSummary(), notificationUpdater);
 
-            Log.d("Commons", "Response is" + Utils.getStringFromDOM(result.getDocument()));
+            Timber.d("Response is %s", Utils.getStringFromDOM(result.getDocument()));
 
             curProgressNotification = null;
 
@@ -277,7 +272,7 @@ public class UploadService extends HandlerService<Contribution> {
                         .log();
             }
         } catch(IOException e) {
-            Log.d("Commons", "I have a network fuckup");
+            Timber.d("I have a network fuckup");
             showFailedNotification(contribution);
             return;
         } finally {
@@ -287,7 +282,7 @@ public class UploadService extends HandlerService<Contribution> {
             toUpload--;
             if(toUpload == 0) {
                 // Sync modifications right after all uplaods are processed
-                ContentResolver.requestSync(((CommonsApplication) getApplicationContext()).getCurrentAccount(), ModificationsContentProvider.AUTHORITY, new Bundle());
+                ContentResolver.requestSync((CommonsApplication.getInstance()).getCurrentAccount(), ModificationsContentProvider.AUTHORITY, new Bundle());
                 stopForeground(true);
             }
         }
@@ -309,7 +304,7 @@ public class UploadService extends HandlerService<Contribution> {
     }
 
     private String findUniqueFilename(String fileName) throws IOException {
-        MWApi api = app.getApi();
+        MWApi api = app.getMWApi();
         String sequenceFileName;
         for ( int sequenceNumber = 1; true; sequenceNumber++ ) {
             if (sequenceNumber == 1) {

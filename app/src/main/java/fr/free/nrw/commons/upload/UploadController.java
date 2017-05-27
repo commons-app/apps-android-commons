@@ -13,7 +13,6 @@ import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.util.Log;
 
 import java.io.IOException;
 import java.util.Date;
@@ -23,6 +22,7 @@ import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.contributions.Contribution;
+import timber.log.Timber;
 
 public class UploadController {
     private UploadService uploadService;
@@ -36,7 +36,7 @@ public class UploadController {
 
     public UploadController(Activity activity) {
         this.activity = activity;
-        app = (CommonsApplication)activity.getApplicationContext();
+        app = CommonsApplication.getInstance();
     }
 
     private boolean isUploadServiceConnected;
@@ -55,7 +55,7 @@ public class UploadController {
     };
 
     public void prepareService() {
-        Intent uploadServiceIntent = new Intent(activity.getApplicationContext(), UploadService.class);
+        Intent uploadServiceIntent = new Intent(activity, UploadService.class);
         uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
         activity.startService(uploadServiceIntent);
         activity.bindService(uploadServiceIntent, uploadServiceConnection, Context.BIND_AUTO_CREATE);
@@ -115,11 +115,11 @@ public class UploadController {
                         contribution.setDataLength(length);
                     }
                 } catch(IOException e) {
-                    Log.e("UploadController", "IO Exception: ", e);
+                    Timber.e(e, "IO Exception: ");
                 } catch(NullPointerException e) {
-                    Log.e("UploadController", "Null Pointer Exception: ", e);
+                    Timber.e(e, "Null Pointer Exception: ");
                 } catch(SecurityException e) {
-                    Log.e("UploadController", "Security Exception: ", e);
+                    Timber.e(e, "Security Exception: ");
                 }
 
                 String mimeType = (String)contribution.getTag("mimeType");
@@ -132,7 +132,7 @@ public class UploadController {
                 if(mimeType != null) {
                     contribution.setTag("mimeType", mimeType);
                     imagePrefix = mimeType.startsWith("image/");
-                    Log.d("UploadController", "MimeType is: " + mimeType);
+                    Timber.d("MimeType is: %s", mimeType);
                 }
 
                 if(imagePrefix && contribution.getDateCreated() == null) {

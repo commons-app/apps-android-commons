@@ -11,17 +11,17 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.text.TextUtils;
-import android.util.Log;
 
 import org.mediawiki.api.ApiResult;
-import org.mediawiki.api.MWApi;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
 import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.MWApi;
 import fr.free.nrw.commons.Utils;
+import timber.log.Timber;
 
 public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
     private static int COMMIT_THRESHOLD = 10;
@@ -30,7 +30,10 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
     }
 
     private int getLimit() {
-        return 500; // FIXME: Parameterize!
+
+        int limit = 500;
+        Timber.d("Max number of uploads set to %d", limit);
+        return limit; // FIXME: Parameterize!
     }
 
     private static final String[] existsQuery = { Contribution.Table.COLUMN_FILENAME };
@@ -58,7 +61,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
     public void onPerformSync(Account account, Bundle bundle, String s, ContentProviderClient contentProviderClient, SyncResult syncResult) {
         // This code is fraught with possibilities of race conditions, but lalalalala I can't hear you!
         String user = account.name;
-        MWApi api = CommonsApplication.createMWApi();
+        MWApi api = CommonsApplication.getInstance().getMWApi();
         SharedPreferences prefs = this.getContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
         String lastModified = prefs.getString("lastSyncTimestamp", "");
         Date curTime = new Date();
@@ -71,7 +74,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                 MWApi.RequestBuilder builder = api.action("query")
                         .param("list", "logevents")
                         .param("letype", "upload")
-                        .param("leprop", "title|timestamp")
+                        .param("leprop", "title|timestamp|ids")
                         .param("leuser", user)
                         .param("lelimit", getLimit());
                 if(!TextUtils.isEmpty(lastModified)) {
@@ -85,18 +88,23 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                 // There isn't really much we can do, eh?
                 // FIXME: Perhaps add EventLogging?
                 syncResult.stats.numIoExceptions += 1; // Not sure if this does anything. Shitty docs
-                Log.d("Commons", "Syncing failed due to " + e.toString());
+                Timber.d("Syncing failed due to %s", e);
                 return;
             }
-            Log.d("Commons", "Last modified at " + lastModified);
+            Timber.d("Last modified at %s", lastModified);
 
             ArrayList<ApiResult> uploads = result.getNodes("/api/query/logevents/item");
-            Log.d("Commons", uploads.size() + " results!");
+            Timber.d("%d results!", uploads.size());
             ArrayList<ContentValues> imageValues = new ArrayList<>();
             for(ApiResult image: uploads) {
+                String pageId = image.getString("@pageid");
+                if (pageId.equals("0")) {
+                    // means that this upload was deleted.
+                    continue;
+                }
                 String filename = image.getString("@title");
                 if(fileExists(contentProviderClient, filename)) {
-                    Log.d("Commons", "Skipping " + filename);
+                    Timber.d("Skipping %s", filename);
                     continue;
                 }
                 String thumbUrl = Utils.makeThumbBaseUrl(filename);
@@ -128,6 +136,6 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
             }
         }
         prefs.edit().putString("lastSyncTimestamp", Utils.toMWDate(curTime)).apply();
-        Log.d("Commons", "Oh hai, everyone! Look, a kitty!");
+        Timber.d("Oh hai, everyone! Look, a kitty!");
     }
 }

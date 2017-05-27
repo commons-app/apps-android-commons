@@ -7,7 +7,7 @@
   <string name="login">Se connectar</string>
   <string name="signup">S\'inscriure</string>
   <string name="logging_in_title">Connexion</string>
-  <string name="logging_in_message">Pacientatz...</string>
+  <string name="logging_in_message">Pacientatz…</string>
   <string name="login_success">Identificacion capitada !</string>
   <string name="login_failed">Error de connexion !</string>
   <string name="upload_failed">Fichièr pas trobat. Ensajatz-ne un autre.</string>
@@ -20,11 +20,11 @@
   <string name="upload_progress_notification_title_finishing">Fin del telecargament %1$s</string>
   <string name="upload_failed_notification_title">Telecargament fracassat a %1$s</string>
   <string name="upload_failed_notification_subtitle">Quichar per afichar</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">1 fichièr en telecargament</item>
     <item quantity="other">%d fichièrs en telecargament</item>
   </plurals>
-  <string name="title_activity_contributions">Mos telecargaments</string>
+  <string name="title_activity_contributions" fuzzy="true">Mos telecargaments</string>
   <string name="contribution_state_queued">Mes en fila d\'espèra</string>
   <string name="contribution_state_failed">Fracàs</string>
   <string name="contribution_state_in_progress">%1$d%% efectuat</string>
@@ -50,16 +50,16 @@
   <string name="categories_search_text_hint">Recercar de categorias</string>
   <string name="menu_save_categories">Enregistrar</string>
   <string name="refresh_button">Refrescar</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Pas mai cap de telecargament</item>
     <item quantity="one">1 telecargament</item>
     <item quantity="other">%d telecargaments</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">1 telecargament aviat</item>
     <item quantity="other">%d telecargaments aviats</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 telecargament</item>
     <item quantity="other">%d telecargaments</item>
   </plurals>
@@ -75,7 +75,7 @@
   <string name="menu_feedback">Mandar vòstres comentaris (per corrièl)</string>
   <string name="no_email_client">Cap de client de corrièl pas installat</string>
   <string name="provider_categories">Categorias utilizadas recentament</string>
-  <string name="waiting_first_sync">Espèra de primièra sincronizacion…</string>
+  <string name="waiting_first_sync" fuzzy="true">Espèra de primièra sincronizacion…</string>
   <string name="no_uploads_yet">Avètz pas encara telecargat cap de fòto.</string>
   <string name="menu_retry_upload">Tornar ensajar</string>
   <string name="menu_cancel_upload">Anullar</string>
@@ -104,22 +104,6 @@
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zèro</string>
-  <string name="license_name_own_pd">own-pd</string>
-  <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
-  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
-  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_2_0">CC BY 2.0</string>
-  <string name="license_name_fal">Licéncia Art Liure</string>
-  <string name="license_name_pd_old_100">Domeni public (autor defuntat dempuèi mai de 100 ans)</string>
-  <string name="license_name_pd_old">Domeni public (dreit d’autor expirat)</string>
-  <string name="license_name_pd_art">Domeni public (art)</string>
-  <string name="license_name_pd_us">Domeni public (Estats Units)</string>
-  <string name="license_name_pd_usgov">Domeni public (govèrnament dels Estats Units)</string>
-  <string name="license_name_pd_usgov_nasa">Domeni public (NASA)</string>
-  <string name="license_name_pd_ineligible">Domeni public (pas elegible al dreit d’autor)</string>
-  <string name="license_name_attribution">Atribucion</string>
-  <string name="license_name_gfdl">Licéncia de documentacion liura GNU</string>
   <string name="tutorial_3_text">Telecarguetz PAS :</string>
   <string name="tutorial_4_text">Exemple de telecargament :</string>
   <string name="welcome_wikipedia_subtext">Los imatges sus Wikipèdia venon de Wikimedia Commons.</string>
@@ -127,7 +111,7 @@
   <string name="welcome_final_text">Pensatz qu’es bon ?</string>
   <string name="welcome_final_button_text">Òc !</string>
   <string name="detail_panel_cats_label">Categorias</string>
-  <string name="detail_panel_cats_loading">Cargament...</string>
+  <string name="detail_panel_cats_loading">Cargament…</string>
   <string name="detail_panel_cats_none">Cap de categoria pas seleccionada</string>
   <string name="detail_description_empty">Pas cap de descripcion</string>
   <string name="detail_license_empty">Licéncia desconeguda</string>

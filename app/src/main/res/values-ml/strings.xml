@@ -6,7 +6,7 @@
   <string name="password">രഹസ്യവാക്ക്</string>
   <string name="login">പ്രവേശിക്കുക</string>
   <string name="logging_in_title">പ്രവേശിക്കുന്നു</string>
-  <string name="logging_in_message">ദയവായി കാത്തിരിക്കുക...</string>
+  <string name="logging_in_message">ദയവായി കാത്തിരിക്കുക…</string>
   <string name="login_success">പ്രവേശനം വിജയകരം!</string>
   <string name="login_failed">പ്രവേശനം പരാജയപ്പെട്ടു!</string>
   <string name="authentication_failed">സാധുതാനിർണ്ണയം പരാജയപ്പെട്ടു!</string>
@@ -22,7 +22,7 @@
     <item quantity="one">1 പ്രമാണം അപ്‌ലോഡ് ചെയ്യുന്നു</item>
     <item quantity="other">%d പ്രമാണങ്ങൾ അപ്‌ലോഡ് ചെയ്യുന്നു</item>
   </plurals>
-  <string name="title_activity_contributions">എന്റെ അപ്‌ലോഡുകൾ</string>
+  <string name="title_activity_contributions" fuzzy="true">എന്റെ അപ്‌ലോഡുകൾ</string>
   <string name="contribution_state_queued">നിരയായി വെച്ചു</string>
   <string name="contribution_state_failed">പരാജയപ്പെട്ടു</string>
   <string name="contribution_state_in_progress">%1$d%% പൂർണ്ണം</string>
@@ -46,45 +46,41 @@
   <string name="menu_upload_single">അപ്‌ലോഡ്</string>
   <string name="categories_search_text_hint">വർഗ്ഗങ്ങളിൽ തിരയുക</string>
   <string name="menu_save_categories">സേവ് ചെയ്യുക</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">ഒരു അപ്‌ലോഡും ചെയ്തില്ല</item>
     <item quantity="one">ഒരു അപ്‌ലോഡ്</item>
     <item quantity="other">%d അപ്‌ലോഡുകൾ</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">ഒരു അപ്‌ലോഡ് തുടങ്ങുന്നു</item>
     <item quantity="other">%d അപ്‌ലോഡുകൾ തുടങ്ങുന്നു</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">ഒരു അപ്‌ലോഡ്</item>
     <item quantity="other">%d അപ്‌ലോഡുകൾ</item>
   </plurals>
   <string name="categories_not_found">%1$s എന്നതുമായി പൊരുത്തമുള്ള ഒരു വർഗ്ഗവും കണ്ടെത്താനായില്ല</string>
-  <string name="categories_skip_explanation">താങ്കളുടെ ചിത്രങ്ങൾ വിക്കിമീഡിയ കോമൺസിൽ കൂടുതൽ എളുപ്പത്തിൽ കണ്ടെത്തപ്പെടാനായി വർഗ്ഗങ്ങൾ ചേർക്കുക.
-
-വർഗ്ഗങ്ങൾ ചേർക്കാനായി ടൈപ്പ് ചെയ്ത് തുടങ്ങുക.
-ഈ ഘട്ടം ഒഴിവാക്കാൻ ടാപ് ചെയ്യുക (അല്ലെങ്കിൽ പിന്നോട്ട് പോവുക).</string>
+  <string name="categories_skip_explanation">താങ്കളുടെ ചിത്രങ്ങൾ വിക്കിമീഡിയ കോമൺസിൽ കൂടുതൽ എളുപ്പത്തിൽ കണ്ടെത്തപ്പെടാനായി വർഗ്ഗങ്ങൾ ചേർക്കുക.\n\nവർഗ്ഗങ്ങൾ ചേർക്കാനായി ടൈപ്പ് ചെയ്ത് തുടങ്ങുക.\nഈ ഘട്ടം ഒഴിവാക്കാൻ ടാപ് ചെയ്യുക (അല്ലെങ്കിൽ പിന്നോട്ട് പോവുക).</string>
   <string name="categories_activity_title">വർഗ്ഗങ്ങൾ</string>
   <string name="preference_tracking">ഉപയോഗം സംബന്ധിച്ച റിപ്പോർട്ടുകൾ</string>
   <string name="preference_tracking_summary">ഈ ആപ് മെച്ചപ്പെടുത്തുന്നതിനായി ഉപയോഗം സംബന്ധിച്ച റിപ്പോർട്ടുകൾ വിക്കിമീഡിയയ്ക്ക് അയയ്ക്കുക</string>
   <string name="title_activity_settings">സജ്ജീകരണങ്ങൾ</string>
   <string name="menu_about">വിവരണം</string>
-  <string name="about_license" fuzzy="true">&lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;അപാച്ചേ അനുമതിപത്രം പതിപ്പ് 2&lt;/a&gt; പ്രകാരം പുറത്തിറക്കപ്പെട്ട ഓപ്പൺ സോഴ്സ് സോഫ്റ്റ്‌വേർ</string>
-  <string name="about_improve" fuzzy="true">സ്രോതസ്സ് രൂപം &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;ജിറ്റ്ഹബിൽ&lt;/a&gt; ലഭ്യമാണ്. 
-പ്രശ്നങ്ങൾ &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;ബഗ്സില്ലയിൽ&lt;/a&gt; അറിയിക്കുക.</string>
+  <string name="about_license" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;അപാച്ചേ അനുമതിപത്രം പതിപ്പ് 2&lt;/a&gt; പ്രകാരം പുറത്തിറക്കപ്പെട്ട ഓപ്പൺ സോഴ്സ് സോഫ്റ്റ്‌വേർ</string>
+  <string name="about_improve" fuzzy="true">സ്രോതസ്സ് രൂപം &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;ജിറ്റ്ഹബിൽ&lt;/a&gt; ലഭ്യമാണ്.\nപ്രശ്നങ്ങൾ &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;ബഗ്സില്ലയിൽ&lt;/a&gt; അറിയിക്കുക.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;സ്വകാര്യതാനയം&lt;/a&gt;</string>
   <string name="title_activity_about">വിവരണം</string>
   <string name="menu_feedback">പ്രതികരണം അറിയിക്കുക (ഇമെയിൽ വഴി)</string>
   <string name="provider_categories">സമീപകാലത്ത് ഉപയോഗിച്ച വർഗ്ഗങ്ങൾ</string>
-  <string name="waiting_first_sync">ആദ്യ സമീകരണത്തിനായി കാത്തിരിക്കുന്നു...</string>
+  <string name="waiting_first_sync">ആദ്യ സമീകരണത്തിനായി കാത്തിരിക്കുന്നു…</string>
   <string name="no_uploads_yet">താങ്കളിതുവരെ ചിത്രങ്ങളൊന്നും അപ്‌ലോഡ് ചെയ്തിട്ടില്ല.</string>
   <string name="menu_retry_upload">വീണ്ടും ശ്രമിക്കുക</string>
   <string name="menu_cancel_upload">റദ്ദാക്കുക</string>
   <string name="share_license_summary">ചിത്രം %1$s പ്രകാരം അനുമതി നൽകപ്പെടുന്നതാണ്</string>
   <string name="menu_download">ഡൗൺലോഡ്</string>
   <string name="preference_license">അനുമതി</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">സി.സി.u00A0ആട്രിബ്യൂഷൻ-ഷെയർ‌എലൈക്u00A03.0</string>
-  <string name="license_name_cc_by" fuzzy="true">സി.സി.u00A0ആട്രിബ്യൂഷൻu00A03.0</string>
+  <string name="license_name_cc_by_sa" fuzzy="true">സി.സി. ആട്രിബ്യൂഷൻ-ഷെയർ‌എലൈക് 3.0</string>
+  <string name="license_name_cc_by" fuzzy="true">സി.സി. ആട്രിബ്യൂഷൻ 3.0</string>
   <string name="license_name_cc0">സി.സി.0</string>
   <string name="license_name_cc_by_sa_3_0">സി.സി. ബൈ-എസ്.എ. 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">സി.സി. ബൈ-എസ്.എ. 3.0 (ഓസ്ട്രിയ)</string>
@@ -99,22 +95,6 @@
   <string name="license_name_cc_by_sa_3_0_ro">സി.സി. ബൈ-എസ്.എ. 3.0 (റൊമേനിയ)</string>
   <string name="license_name_cc_by_3_0">സി.സി. ബൈ 3.0</string>
   <string name="license_name_cc_zero">സി.സി. സീറോ</string>
-  <string name="license_name_own_pd">സ്വന്തം-പി.ഡി.</string>
-  <string name="license_name_cc_by_sa_2_5">സി.സി. ബൈ-എസ്.എ. 2.5</string>
-  <string name="license_name_cc_by_2_5">സി.സി. ബൈ 2.5</string>
-  <string name="license_name_cc_by_sa_2_0">സി.സി. ബൈ-എസ്.എ. 2.0</string>
-  <string name="license_name_cc_by_2_0">സി.സി. ബൈ-എസ്.എ. 2.0</string>
-  <string name="license_name_cc_2_0">സി.സി. ബൈ 2.0</string>
-  <string name="license_name_fal">സ്വതന്ത്ര കലാസൃഷ്ടി അനുമതി</string>
-  <string name="license_name_pd_old_100">പൊതുസഞ്ചയം (സ്രഷ്ടാവ് മരിച്ചിട്ട് നൂറിലധികം വർഷങ്ങൾ)</string>
-  <string name="license_name_pd_old">പൊതുസഞ്ചയം (പകർപ്പവകാശം കാലഹരണപ്പെട്ടവ)</string>
-  <string name="license_name_pd_art">പൊതുസഞ്ചയം (കല)</string>
-  <string name="license_name_pd_us">പൊതുസഞ്ചയം (അമേരിക്കൻ ഐക്യനാടുകൾ)</string>
-  <string name="license_name_pd_usgov">പൊതുസഞ്ചയം (യു.എസ്. ഭരണകൂടം)</string>
-  <string name="license_name_pd_usgov_nasa">പൊതുസഞ്ചയം (നാസ)</string>
-  <string name="license_name_pd_ineligible">പൊതുസഞ്ചയം (പകർപ്പവകാശത്തിന് അർഹമല്ലാത്തവ)</string>
-  <string name="license_name_attribution">കടപ്പാട്</string>
-  <string name="license_name_gfdl">ഗ്നൂ സ്വതന്ത്ര പ്രസിദ്ധീകരണാനുമതി</string>
   <string name="welcome_wikipedia_text">താങ്കളെടുക്കുന്ന ചിത്രങ്ങൾ സംഭാവന ചെയ്യുക. വിക്കിപീഡിയ ലേഖനങ്ങൾ ജീവസ്സുറ്റതാക്കിത്തീർക്കുക!</string>
   <string name="welcome_wikipedia_subtext">വിക്കിപീഡിയയിലുള്ള ചിത്രങ്ങൾ വിക്കിമീഡിയ കോമൺസിൽ നിന്നാണ്</string>
   <string name="welcome_copyright_text">താങ്കളെടുക്കുന്ന ചിത്രങ്ങൾ ലോകമെമ്പാടുമുള്ള ജനങ്ങൾക്ക് വിജ്ഞാനദായകമായിത്തീരുന്നതാണ്.</string>
@@ -122,7 +102,7 @@
   <string name="welcome_final_text">മനസ്സിലായോ?</string>
   <string name="welcome_final_button_text">ശരി!</string>
   <string name="detail_panel_cats_label">വർഗ്ഗങ്ങൾ</string>
-  <string name="detail_panel_cats_loading">ശേഖരിക്കുന്നു...</string>
+  <string name="detail_panel_cats_loading" fuzzy="true">ശേഖരിക്കുന്നു…</string>
   <string name="detail_panel_cats_none">ഒന്നും തിരഞ്ഞെടുത്തിട്ടില്ല</string>
   <string name="detail_description_empty">വിവരണമൊന്നുമില്ല</string>
   <string name="detail_license_empty">അജ്ഞാതമായ അനുമതി</string>

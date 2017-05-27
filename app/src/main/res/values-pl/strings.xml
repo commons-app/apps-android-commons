@@ -7,7 +7,7 @@
   <string name="login">Zaloguj się</string>
   <string name="signup">Zarejestruj się</string>
   <string name="logging_in_title">Logowanie</string>
-  <string name="logging_in_message">Proszę czekać...</string>
+  <string name="logging_in_message">Proszę czekać…</string>
   <string name="login_success">Zalogowano pomyślnie!</string>
   <string name="login_failed">Logowanie nie powiodło się!</string>
   <string name="upload_failed">Nie znaleziono pliku. Spróbuj znaleźć inny.</string>
@@ -21,10 +21,10 @@
   <string name="upload_failed_notification_title">Wysyłanie %1$s nieudane</string>
   <string name="upload_failed_notification_subtitle">Dotknij, aby zobaczyć</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">Przesyłanie 1 pliku</item>
+    <item quantity="one">Przesyłanie %d pliku</item>
     <item quantity="other">Przesyłanie %d plików</item>
   </plurals>
-  <string name="title_activity_contributions">Wysłane przeze mnie pliki</string>
+  <string name="title_activity_contributions" fuzzy="true">Wysłane przeze mnie pliki</string>
   <string name="contribution_state_queued">W kolejce</string>
   <string name="contribution_state_failed">Porażka</string>
   <string name="contribution_state_in_progress">%1$d%% zakończone</string>
@@ -51,23 +51,20 @@
   <string name="menu_save_categories">Zapisz</string>
   <string name="refresh_button">Odśwież</string>
   <plurals name="contributions_subtitle">
-    <item quantity="zero">Nie przesłano jeszcze żadnego pliku</item>
-    <item quantity="one">Przesłano 1 plik</item>
-    <item quantity="other">Przesłano %d plików</item>
+    <item quantity="zero">Przesłano @string/contributions_subtitle_zero</item>
+    <item quantity="one">Przesłano %d plik</item>
+    <item quantity="other">Przesłano %d pliki</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Rozpoczęto 1 przesyłanie</item>
-    <item quantity="other">Rozpoczęto %d przesyłań</item>
+    <item quantity="one">Rozpoczęto %d przesyłanie</item>
+    <item quantity="other">Rozpoczęto %d przesyłania</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">1 przesłanie</item>
-    <item quantity="other">%d przesłań</item>
+    <item quantity="one">%d przesłanie</item>
+    <item quantity="other">%d przesłania</item>
   </plurals>
   <string name="categories_not_found">Nie znaleziono kategorii pasujących do %1$s</string>
-  <string name="categories_skip_explanation">Dodaj kategorie, aby ułatwić odnalezienie plików w Wikimedia Commons.
-
-Zacznij pisać, aby dodać kategorię.
-Kliknij ten komunikat lub naciśnij „cofnij”, aby pominąć ten krok.</string>
+  <string name="categories_skip_explanation">Dodaj kategorie, aby ułatwić odnalezienie plików w Wikimedia Commons.\n\nZacznij pisać, aby dodać kategorię.\nKliknij ten komunikat lub naciśnij „cofnij”, aby pominąć ten krok.</string>
   <string name="categories_activity_title">Kategorie</string>
   <string name="preference_tracking">Raporty użycia</string>
   <string name="preference_tracking_summary">Wyślij raporty do Wikimedia, aby pomóc w ulepszeniu aplikacji</string>
@@ -77,12 +74,12 @@ Kliknij ten komunikat lub naciśnij „cofnij”, aby pominąć ten krok.</strin
   <string name="about_license">Oprogramowanie Open Source, wydane na licencji &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Wikimedia Commons i jego logo są znakami towarowymi Wikimedia Foundation i są wykorzystywane za zgodą Wikimedia Foundation. Nie jesteśmy powiązani z Wikimedia Foundation.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kod źródłowy&lt;/a&gt; oraz &lt;a href=\"https://commons-app.github.io/\"&gt;strona internetowa&lt;/a&gt; na GitHub. Aby zgłosić błąd lub sugestię, utwórz nowe &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;zgłoszenie na GitHub&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Polityka prywatności&lt;/a&gt;</string>
-  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Twórcy&lt;/a&gt;</string>
+  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Twórcy&lt;/a&gt;</string>
   <string name="title_activity_about">O aplikacji</string>
   <string name="menu_feedback">Wyślij opinię (przez e-mail)</string>
   <string name="no_email_client">Klient e-mail nie jest zainstalowany</string>
   <string name="provider_categories">Niedawno używane kategorie</string>
-  <string name="waiting_first_sync">Oczekiwanie na pierwszą synchronizację...</string>
+  <string name="waiting_first_sync">Oczekiwanie na pierwszą synchronizację…</string>
   <string name="no_uploads_yet">Nie przesłałeś jeszcze żadnych zdjęć.</string>
   <string name="menu_retry_upload">Ponów próbę</string>
   <string name="menu_cancel_upload">Anuluj</string>
@@ -114,36 +111,14 @@ Kliknij ten komunikat lub naciśnij „cofnij”, aby pominąć ten krok.</strin
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
-  <string name="license_name_own_pd">własny wolny utwór</string>
-  <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
-  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
-  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_2_0">CC BY 2.0</string>
-  <string name="license_name_fal">Licencja Wolnej Sztuki</string>
-  <string name="license_name_pd_old_100">Domena publiczna (autor zmarł ponad 100 lat temu)</string>
-  <string name="license_name_pd_old">Domena publiczna (prawa autorskie wygasły)</string>
-  <string name="license_name_pd_art">Domena publiczna (sztuka)</string>
-  <string name="license_name_pd_us">Domena publiczna (USA)</string>
-  <string name="license_name_pd_usgov">Domena publiczna (rząd Stanów Zjednoczonych)</string>
-  <string name="license_name_pd_usgov_nasa">Domena publiczna (NASA)</string>
-  <string name="license_name_pd_ineligible">Domena publiczna (nie podlega ochronie prawa autorskiego)</string>
-  <string name="license_name_attribution">Uznanie autorstwa</string>
-  <string name="license_name_gfdl">GNU Free Documentation License</string>
   <string name="tutorial_1_text">Wikimedia Commons przechowuje większość ilustracji wykorzystywanych w Wikipedii.</string>
   <string name="tutorial_1_subtext">Twoje ilustracje pomogą edukować ludzi na całym świecie!</string>
   <string name="tutorial_2_text">Możesz przesyłać zdjęcia lub obrazy stworzone samodzielnie przez Ciebie:</string>
-  <string name="tutorial_2_subtext">- Natura (kwiaty, zwierzęta, góry)
-- Przydatne przedmioty (rowery, dworce kolejowe)
-- Znani ludzie, których spotkałeś (burmistrz, olimpijczyk)</string>
+  <string name="tutorial_2_subtext">- Natura (kwiaty, zwierzęta, góry)\n- Przydatne przedmioty (rowery, dworce kolejowe)\n- Znani ludzie, których spotkałeś (burmistrz, olimpijczyk)</string>
   <string name="tutorial_3_text">Prosimy NIE wysyłać:</string>
-  <string name="tutorial_3_subtext">- Zdjęć przedstawiających siebie lub znajomych
-- Zdjęć pobranych z Internetu
-- Zrzutów ekranów płatnych aplikacji</string>
+  <string name="tutorial_3_subtext">- Zdjęć przedstawiających siebie lub znajomych\n- Zdjęć pobranych z Internetu\n- Zrzutów ekranów płatnych aplikacji</string>
   <string name="tutorial_4_text">Przykład przesłania pliku:</string>
-  <string name="tutorial_4_subtext">- Nazwa: Zamek Królewski w Warszawie
-- Opis: Zamek Królewski w Warszawie, widok od strony kolumny Zygmunta
-- Kategorie: Western facade (Royal Castle, Warsaw), Southern facade (Royal Castle, Warsaw), Castle Square in Warsaw</string>
+  <string name="tutorial_4_subtext">- Nazwa: Zamek Królewski w Warszawie\n- Opis: Zamek Królewski w Warszawie, widok od strony kolumny Zygmunta\n- Kategorie: Western facade (Royal Castle, Warsaw), Southern facade (Royal Castle, Warsaw), Castle Square in Warsaw</string>
   <string name="welcome_wikipedia_text">Dodaj swoje ilustracje. Pomóż ożyć artykułom w Wikipedii!</string>
   <string name="welcome_wikipedia_subtext">Ilustracje w Wikipedii pochodzą z Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Twoje ilustracje pomagają w edukacji ludzi na całym świecie.</string>
@@ -151,7 +126,7 @@ Kliknij ten komunikat lub naciśnij „cofnij”, aby pominąć ten krok.</strin
   <string name="welcome_final_text">Czy wszystko jest jasne?</string>
   <string name="welcome_final_button_text">Tak!</string>
   <string name="detail_panel_cats_label">Kategorie</string>
-  <string name="detail_panel_cats_loading">Ładowanie...</string>
+  <string name="detail_panel_cats_loading" fuzzy="true">Ładowanie…</string>
   <string name="detail_panel_cats_none">Nic nie zaznaczono</string>
   <string name="detail_description_empty">Brak opisu</string>
   <string name="detail_license_empty">Nieznana licencja</string>

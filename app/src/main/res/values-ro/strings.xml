@@ -7,7 +7,7 @@
   <string name="login">Autentificare</string>
   <string name="signup">Înregistrare</string>
   <string name="logging_in_title">Se conectează</string>
-  <string name="logging_in_message">Așteptați...</string>
+  <string name="logging_in_message">Așteptați…</string>
   <string name="login_success">Autentificare reușită!</string>
   <string name="login_failed">Autentificare nereușită!</string>
   <string name="upload_failed">Fișierul nu a fost găsit. Încercați cu un alt fișier.</string>
@@ -21,9 +21,11 @@
   <string name="upload_failed_notification_title">Încărcarea fișierului %1$s nu a reușit</string>
   <string name="upload_failed_notification_subtitle">Atingeți pentru a vizualiza</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="other">1 fișier se încarcă</item>
+    <item quantity="one">1 fișier se încarcă</item>
+    <item quantity="few">%d fișiere se încarcă</item>
+    <item quantity="other">%d de fișiere se încarcă</item>
   </plurals>
-  <string name="title_activity_contributions">Încărcările mele</string>
+  <string name="title_activity_contributions" fuzzy="true">Încărcările mele</string>
   <string name="contribution_state_queued">În așteptare</string>
   <string name="contribution_state_failed">Nu a reușit</string>
   <string name="contribution_state_in_progress">%1$d%% finalizat</string>
@@ -49,8 +51,8 @@
   <string name="categories_search_text_hint">Căutare categorii</string>
   <string name="menu_save_categories">Salvare</string>
   <plurals name="contributions_subtitle">
-    <item quantity="zero">Nicio încărcare încă</item>
-    <item quantity="one">1 încărcare</item>
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%d încărcare</item>
     <item quantity="few">%d încărcări</item>
     <item quantity="other">%d de încărcări</item>
   </plurals>
@@ -65,23 +67,20 @@
     <item quantity="other">%d de încărcări</item>
   </plurals>
   <string name="categories_not_found">Nu s-a găsit nicio categorie corespunzătoare cu %1$s</string>
-  <string name="categories_skip_explanation">Adăugați categorii pentru a facilita găsirea imaginilor dumneavoastră la Wikimedia Commons.
-
-Începeți să tastați pentru a adăuga categorii.
-Atingeți acest mesaj (sau mergeți înapoi) pentru a omite acest pas.</string>
+  <string name="categories_skip_explanation">Adăugați categorii pentru a facilita găsirea imaginilor dumneavoastră la Wikimedia Commons.\n\nÎncepeți să tastați pentru a adăuga categorii.\nAtingeți acest mesaj (sau mergeți înapoi) pentru a omite acest pas.</string>
   <string name="categories_activity_title">Categorii</string>
   <string name="preference_tracking">Rapoarte de utilizare</string>
   <string name="preference_tracking_summary">Trimiteți rapoarte de utilizare către Wikimedia pentru a ajuta la îmbunătățirea aplicației</string>
   <string name="title_activity_settings">Setări</string>
   <string name="title_activity_signup">Înregistrare</string>
   <string name="menu_about">Despre</string>
-  <string name="about_license" fuzzy="true">Software cu sursă deschisă lansat sub &lt;a href=\"https://github.com/wikimedia/apps-android-commons/blob/master/COPYING\"&gt;Licența Apache v2&lt;/a&gt;</string>
-  <string name="about_improve" fuzzy="true">Sursa la &lt;a href=\"https://github.com/wikimedia/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Buguri la &lt;a href=\"https://github.com/nicolas-raoul/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+  <string name="about_license" fuzzy="true">Software cu sursă deschisă lansat sub &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Licența Apache v2&lt;/a&gt;</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sursa&lt;/a&gt; și &lt;a href=\"https://commons-app.github.io/\"&gt;pagina web&lt;/a&gt; pe GitHub. Deschide un nou &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;ticket pe GitHub&lt;/a&gt; pentru a raporta un bug sau a oferi o sugestie.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politica de confidențialitate&lt;/a&gt;</string>
   <string name="title_activity_about">Despre</string>
   <string name="menu_feedback">Trimitere reacții (prin e-mail)</string>
   <string name="provider_categories">Categorii utilizate recent</string>
-  <string name="waiting_first_sync">Se așteaptă prima sincronizare...</string>
+  <string name="waiting_first_sync">Se așteaptă prima sincronizare…</string>
   <string name="no_uploads_yet">Încă nu ați încărcat nicio fotografie.</string>
   <string name="menu_retry_upload">Reîncercare</string>
   <string name="menu_cancel_upload">Revocare</string>
@@ -109,26 +108,8 @@ Atingeți acest mesaj (sau mergeți înapoi) pentru a omite acest pas.</string>
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
-  <string name="license_name_own_pd">own-pd</string>
-  <string name="license_name_cc_by_sa_2_5">CC BY-SA 2.5</string>
-  <string name="license_name_cc_by_2_5">CC BY 2.5</string>
-  <string name="license_name_cc_by_sa_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_by_2_0">CC BY-SA 2.0</string>
-  <string name="license_name_cc_2_0">CC BY 2.0</string>
-  <string name="license_name_fal">Free Art License</string>
-  <string name="license_name_pd_old_100">Domeniul public (autorul a decedat cu peste 100 de ani în urmă)</string>
-  <string name="license_name_pd_old">Domeniul public (drepturi de autor expirate)</string>
-  <string name="license_name_pd_art">Domeniul public (artă)</string>
-  <string name="license_name_pd_us">Domeniul public (SUA)</string>
-  <string name="license_name_pd_usgov">Domeniul public (Guvernul SUA)</string>
-  <string name="license_name_pd_usgov_nasa">Domeniul public (NASA)</string>
-  <string name="license_name_pd_ineligible">Domeniul public (nu intră sub protecția drepturilor de autor)</string>
-  <string name="license_name_attribution">Atribuire</string>
-  <string name="license_name_gfdl">Licența GNU pentru Documentare Liberă</string>
   <string name="tutorial_3_text">Vă rugăm să NU încărcați:</string>
-  <string name="tutorial_3_subtext">— Selfies sau poze cu prietenii
-— Fotografii descărcate de pe Internet
-— Capturi de ecran din programe sau aplicații proprietare</string>
+  <string name="tutorial_3_subtext">— Selfies sau poze cu prietenii\n— Fotografii descărcate de pe Internet\n— Capturi de ecran din programe sau aplicații proprietare</string>
   <string name="tutorial_4_text">Exemplu de încărcare:</string>
   <string name="welcome_wikipedia_text">Contribuiți cu imagini personale. Faceți ca articolele Wikipediei să prindă viață!</string>
   <string name="welcome_wikipedia_subtext">Imaginile de pe Wikipedia provin de la Wikimedia Commons.</string>
@@ -137,7 +118,7 @@ Atingeți acest mesaj (sau mergeți înapoi) pentru a omite acest pas.</string>
   <string name="welcome_final_text">Credeți că ați înțeles?</string>
   <string name="welcome_final_button_text">Da!</string>
   <string name="detail_panel_cats_label">Categorii</string>
-  <string name="detail_panel_cats_loading">Se încarcă...</string>
+  <string name="detail_panel_cats_loading">Se încarcă…</string>
   <string name="detail_panel_cats_none">Niciuna selectată</string>
   <string name="detail_description_empty">Fără descriere</string>
   <string name="detail_license_empty">Licență necunoscută</string>
