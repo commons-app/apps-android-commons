@@ -3,9 +3,11 @@ package fr.free.nrw.commons;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 
+import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 public class MediaWikiImageView extends SimpleDraweeView {
@@ -13,14 +15,17 @@ public class MediaWikiImageView extends SimpleDraweeView {
 
     public MediaWikiImageView(Context context) {
         this(context, null);
+        init();
     }
 
     public MediaWikiImageView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
+        init();
     }
 
     public MediaWikiImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        init();
     }
 
     public void setMedia(Media media) {
@@ -46,6 +51,16 @@ public class MediaWikiImageView extends SimpleDraweeView {
             currentThumbnailTask.cancel(true);
         }
         super.onDetachedFromWindow();
+    }
+
+    private void init() {
+        setHierarchy(GenericDraweeHierarchyBuilder
+                .newInstance(getResources())
+                .setPlaceholderImage(VectorDrawableCompat.create(getResources(),
+                        R.drawable.ic_image_black_24dp, getContext().getTheme()))
+                .setFailureImage(VectorDrawableCompat.create(getResources(),
+                        R.drawable.ic_image_black_24dp, getContext().getTheme()))
+                .build());
     }
 
     private void setImageUrl(@Nullable String url) {

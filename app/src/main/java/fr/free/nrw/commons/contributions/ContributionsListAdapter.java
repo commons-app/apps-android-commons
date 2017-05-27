@@ -1,25 +1,24 @@
 package fr.free.nrw.commons.contributions;
 
-import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.widget.CursorAdapter;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import fr.free.nrw.commons.R;
 
 class ContributionsListAdapter extends CursorAdapter {
-    private Activity activity;
 
-    public ContributionsListAdapter(Activity activity, Cursor c, int flags) {
-        super(activity, c, flags);
-        this.activity = activity;
+    public ContributionsListAdapter(Context context, Cursor c, int flags) {
+        super(context, c, flags);
     }
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
-        View parent = activity.getLayoutInflater().inflate(R.layout.layout_contribution, viewGroup, false);
+        View parent = LayoutInflater.from(context)
+                .inflate(R.layout.layout_contribution, viewGroup, false);
         parent.setTag(new ContributionViewHolder(parent));
         return parent;
     }

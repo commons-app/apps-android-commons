@@ -22,8 +22,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:actualImageScaleType="fitCenter"
-        app:placeholderImage="@drawable/ic_image_black_24dp"
-        app:failureImage="@drawable/ic_image_black_24dp"
         />
 
     <ScrollView

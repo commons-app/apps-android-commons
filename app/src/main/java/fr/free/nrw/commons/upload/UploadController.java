@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.upload;
 
-import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -26,16 +25,13 @@ import timber.log.Timber;
 
 public class UploadController {
     private UploadService uploadService;
-
-    private final Activity activity;
-    final CommonsApplication app;
+    private final CommonsApplication app;
 
     public interface ContributionUploadProgress {
         void onUploadStarted(Contribution contribution);
     }
 
-    public UploadController(Activity activity) {
-        this.activity = activity;
+    public UploadController() {
         app = CommonsApplication.getInstance();
     }
 
@@ -55,15 +51,15 @@ public class UploadController {
     };
 
     public void prepareService() {
-        Intent uploadServiceIntent = new Intent(activity, UploadService.class);
+        Intent uploadServiceIntent = new Intent(app, UploadService.class);
         uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
-        activity.startService(uploadServiceIntent);
-        activity.bindService(uploadServiceIntent, uploadServiceConnection, Context.BIND_AUTO_CREATE);
+        app.startService(uploadServiceIntent);
+        app.bindService(uploadServiceIntent, uploadServiceConnection, Context.BIND_AUTO_CREATE);
     }
 
     public void cleanup() {
         if(isUploadServiceConnected) {
-            activity.unbindService(uploadServiceConnection);
+            app.unbindService(uploadServiceConnection);
         }
     }
 
@@ -82,7 +78,7 @@ public class UploadController {
 
     public void startUpload(final Contribution contribution, final ContributionUploadProgress onComplete) {
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(app);
 
         //Set creator, desc, and license
         if(TextUtils.isEmpty(contribution.getCreator())) {
@@ -107,10 +103,13 @@ public class UploadController {
                 long length;
                 try {
                     if(contribution.getDataLength() <= 0) {
-                        length = activity.getContentResolver().openAssetFileDescriptor(contribution.getLocalUri(), "r").getLength();
+                        length = app.getContentResolver()
+                                .openAssetFileDescriptor(contribution.getLocalUri(), "r")
+                                .getLength();
                         if(length == -1) {
                             // Let us find out the long way!
-                            length = Utils.countBytes(activity.getContentResolver().openInputStream(contribution.getLocalUri()));
+                            length = Utils.countBytes(app.getContentResolver()
+                                    .openInputStream(contribution.getLocalUri()));
                         }
                         contribution.setDataLength(length);
                     }
@@ -126,7 +125,7 @@ public class UploadController {
                 Boolean imagePrefix = false;
 
                 if(mimeType == null || TextUtils.isEmpty(mimeType) || mimeType.endsWith("*")) {
-                    mimeType = activity.getContentResolver().getType(contribution.getLocalUri());
+                    mimeType = app.getContentResolver().getType(contribution.getLocalUri());
                 }
 
                 if(mimeType != null) {
@@ -136,7 +135,7 @@ public class UploadController {
                 }
 
                 if(imagePrefix && contribution.getDateCreated() == null) {
-                    Cursor cursor = activity.getContentResolver().query(contribution.getLocalUri(),
+                    Cursor cursor = app.getContentResolver().query(contribution.getLocalUri(),
                             new String[]{MediaStore.Images.ImageColumns.DATE_TAKEN}, null, null, null);
                     if(cursor != null && cursor.getCount() != 0) {
                         cursor.moveToFirst();

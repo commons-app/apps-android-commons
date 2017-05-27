@@ -43,7 +43,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         app = CommonsApplication.getInstance();
 
         setContentView(R.layout.activity_login);
-        final LoginActivity that = this;
 
         loginButton = (Button) findViewById(R.id.loginButton);
         Button signupButton = (Button) findViewById(R.id.signupButton);
@@ -62,12 +61,14 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                that.performLogin();
+                performLogin();
             }
         });
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { that.signUp(v); }
+            public void onClick(View v) {
+                signUp(v);
+            }
         });
     }
 
@@ -115,7 +116,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     protected void onResume() {
         super.onResume();
         if (prefs.getBoolean("firstrun", true)) {
-            this.startWelcomeIntent();
+            startWelcomeIntent();
             prefs.edit().putBoolean("firstrun", false).apply();
         }
         if (app.getCurrentAccount() != null) {
