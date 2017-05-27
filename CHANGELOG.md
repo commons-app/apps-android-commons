@@ -1,6 +1,11 @@
 # Wikimedia Commons for Android
 
-## v2.4 beta
+## v2.4.1 beta
+- Fixed crash with uploading multiple photos
+- Fixed memory leaks
+- Fixed issues with Nearby places list and map
+
+## v2.4
 - Fixed memory issue with loading contributions on main screen
 - Deleted images don't show up on contributions list 
 - Added Fresco library for image loading and LeakCanary for memory profiling
