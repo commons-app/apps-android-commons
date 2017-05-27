@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.Snackbar;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.view.MenuItem;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.io.IOException;
@@ -60,7 +62,6 @@ public  class       ShareActivity
 
     private UploadController uploadController;
 
-    private CommonsApplication cacheObj;
     private boolean cacheFound;
 
     private GPSExtractor imageObj;
@@ -195,11 +196,11 @@ public  class       ShareActivity
         SingleUploadFragment shareView = (SingleUploadFragment) getSupportFragmentManager().findFragmentByTag("shareView");
         categorizationFragment = (CategorizationFragment) getSupportFragmentManager().findFragmentByTag("categorization");
         if(shareView == null && categorizationFragment == null) {
-                shareView = new SingleUploadFragment();
-                this.getSupportFragmentManager()
-                        .beginTransaction()
-                        .add(R.id.single_upload_fragment_container, shareView, "shareView")
-                        .commitAllowingStateLoss();
+            shareView = new SingleUploadFragment();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.single_upload_fragment_container, shareView, "shareView")
+                    .commitAllowingStateLoss();
         }
         uploadController.prepareService();
     }
@@ -214,12 +215,19 @@ public  class       ShareActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        uploadController = new UploadController(this);
+        uploadController = new UploadController();
         setContentView(R.layout.activity_share);
         ButterKnife.bind(this);
         initBack();
         app = CommonsApplication.getInstance();
         backgroundImageView = (SimpleDraweeView)findViewById(R.id.backgroundImage);
+        backgroundImageView.setHierarchy(GenericDraweeHierarchyBuilder
+                .newInstance(getResources())
+                .setPlaceholderImage(VectorDrawableCompat.create(getResources(),
+                        R.drawable.ic_image_black_24dp, getTheme()))
+                .setFailureImage(VectorDrawableCompat.create(getResources(),
+                        R.drawable.ic_error_outline_black_24dp, getTheme()))
+                .build());
 
         //Receive intent from ContributionController.java when user selects picture to upload
         Intent intent = getIntent();
@@ -373,11 +381,11 @@ public  class       ShareActivity
      * @param gpsEnabled
      */
     public void getFileMetadata(boolean gpsEnabled) {
-        String filePath = FileUtils.getPath(this, mediaUri);
+        String filePath = FileUtils.getPath(getApplicationContext(), mediaUri);
         Timber.d("Filepath: %s", filePath);
         Timber.d("Calling GPSExtractor");
         if(imageObj == null) {
-            imageObj = new GPSExtractor(filePath, this);
+            imageObj = new GPSExtractor(filePath);
         }
 
         if (filePath != null && !filePath.equals("")) {
@@ -402,7 +410,7 @@ public  class       ShareActivity
                 app.getCacheData().setQtPoint(decLongitude, decLatitude);
             }
 
-            MwVolleyApi apiCall = new MwVolleyApi(this);
+            MwVolleyApi apiCall = new MwVolleyApi();
 
             List<String> displayCatList = app.getCacheData().findCategory();
             boolean catListEmpty = displayCatList.isEmpty();

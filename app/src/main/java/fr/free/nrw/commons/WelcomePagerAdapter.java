@@ -1,7 +1,6 @@
 package fr.free.nrw.commons;
 
-import android.app.Activity;
-import android.content.Context;
+import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,10 +10,12 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class WelcomePagerAdapter extends PagerAdapter {
-
-    private Context context;
-
     private static final int PAGE_FINAL = 4;
+    private Callback callback;
+
+    public interface Callback {
+        void onYesClicked();
+    }
 
     static final int[] PAGE_LAYOUTS = new int[]{
             R.layout.welcome_wikipedia,
@@ -24,8 +25,8 @@ public class WelcomePagerAdapter extends PagerAdapter {
             R.layout.welcome_final
     };
 
-    public WelcomePagerAdapter(Context context) {
-        this.context = context;
+    public void setCallback(@Nullable Callback callback) {
+        this.callback = callback;
     }
 
     @Override
@@ -40,11 +41,11 @@ public class WelcomePagerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        LayoutInflater inflater = LayoutInflater.from(context);
+        LayoutInflater inflater = LayoutInflater.from(container.getContext());
         ViewGroup layout = (ViewGroup) inflater.inflate(PAGE_LAYOUTS[position], container, false);
 
         if (position == PAGE_FINAL) {
-            ViewHolder holder = new ViewHolder(layout, context);
+            ViewHolder holder = new ViewHolder(layout);
             layout.setTag(holder);
         }
         container.addView(layout);
@@ -56,17 +57,16 @@ public class WelcomePagerAdapter extends PagerAdapter {
         container.removeView((View) obj);
     }
 
-    public static class ViewHolder {
-        private Context context;
-
-        public ViewHolder(View view, Context context) {
+    class ViewHolder {
+        ViewHolder(View view) {
             ButterKnife.bind(this, view);
-            this.context = context;
         }
 
         @OnClick(R.id.welcomeYesButton)
         void onClicked() {
-            ((Activity) context).finish();
+            if (callback != null) {
+                callback.onYesClicked();
+            }
         }
     }
 }

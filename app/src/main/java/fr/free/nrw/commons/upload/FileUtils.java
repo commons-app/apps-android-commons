@@ -23,7 +23,7 @@ public class FileUtils {
      */
     // Can be safely suppressed, checks for isKitKat before running isDocumentUri
     @SuppressLint("NewApi")
-    public static String getPath(final Context context, final Uri uri) {
+    public static String getPath(Context context, Uri uri) {
 
         final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
 
