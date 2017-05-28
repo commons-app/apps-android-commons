@@ -12,8 +12,6 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 
 public class SettingsActivity extends NavigationBaseActivity {
-    private SettingsFragment settingsFragment;
-
     private AppCompatDelegate settingsDelegate;
 
     @Override
@@ -24,8 +22,6 @@ public class SettingsActivity extends NavigationBaseActivity {
         } else {
             setTheme(R.style.LightAppTheme);
         }
-
-        settingsFragment = (SettingsFragment) getFragmentManager().findFragmentById(R.id.settingsFragment);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
