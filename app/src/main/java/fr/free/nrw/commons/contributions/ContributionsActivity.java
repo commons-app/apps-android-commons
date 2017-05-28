@@ -11,6 +11,7 @@ import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -22,8 +23,11 @@ import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+
 import java.util.ArrayList;
-import java.util.Locale;
 
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
@@ -35,6 +39,7 @@ import fr.free.nrw.commons.hamburger.HamburgerMenuContainer;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
+import fr.free.nrw.commons.utils.ExecutorUtils;
 import timber.log.Timber;
 
 public  class       ContributionsActivity
@@ -234,18 +239,7 @@ public  class       ContributionsActivity
             ((CursorAdapter)contributionsList.getAdapter()).swapCursor(cursor);
         }
 
-        if (cursor.getCount() == 0
-                && Locale.getDefault().getISO3Language().equals(Locale.ENGLISH.getISO3Language())) {
-            //cursor count is zero and language is english -
-            // we need to set the message for 0 case explicitly.
-            getSupportActionBar().setSubtitle(getResources()
-                    .getString(R.string.contributions_subtitle_zero));
-        } else {
-            getSupportActionBar().setSubtitle(getResources()
-                    .getQuantityString(R.plurals.contributions_subtitle,
-                            cursor.getCount(),
-                            cursor.getCount()));
-        }
+        setUploadCount();
 
         contributionsList.clearSyncMessage();
         notifyAndMigrateDataSetObservers();
@@ -273,6 +267,27 @@ public  class       ContributionsActivity
             return 0;
         }
         return contributionsList.getAdapter().getCount();
+    }
+
+    private void setUploadCount() {
+        UploadCountClient uploadCountClient = new UploadCountClient();
+        CommonsApplication application = CommonsApplication.getInstance();
+        ListenableFuture<Integer> future = uploadCountClient
+                .getUploadCount(application.getCurrentAccount().name);
+        Futures.addCallback(future, new FutureCallback<Integer>() {
+            @Override
+            public void onSuccess(Integer uploadCount) {
+                getSupportActionBar().setSubtitle(getResources()
+                        .getQuantityString(R.plurals.contributions_subtitle,
+                                uploadCount,
+                                uploadCount));
+            }
+
+            @Override
+            public void onFailure(@NonNull Throwable t) {
+                Timber.e(t, "Fetching upload count failed");
+            }
+        }, ExecutorUtils.uiExecutor());
     }
 
     @Override
