@@ -25,3 +25,6 @@ their contribution to the product.
 * GSON
 * Timber
 * MapBox
+
+3rd party open source apps from which significant code has been reused:
+* Android Wikipedia app https://github.com/wikimedia/apps-android-wikipedia
