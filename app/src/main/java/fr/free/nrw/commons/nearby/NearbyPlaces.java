@@ -125,7 +125,7 @@ public class NearbyPlaces {
                     type, // list
                     type, // details
                     Uri.parse(icon),
-                    new LatLng(latitude, longitude),
+                    new LatLng(latitude, longitude, 0),
                     new Sitelinks.Builder()
                             .setWikipediaLink(wikipediaSitelink)
                             .setCommonsLink(commonsSitelink)
@@ -187,7 +187,7 @@ public class NearbyPlaces {
                             type, // list
                             type, // details
                             null,
-                            new LatLng(latitude, longitude),
+                            new LatLng(latitude, longitude, 0),
                             new Sitelinks.Builder().build()
                     ));
                 }

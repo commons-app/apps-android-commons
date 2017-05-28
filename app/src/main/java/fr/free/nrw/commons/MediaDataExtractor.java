@@ -262,7 +262,7 @@ public class MediaDataExtractor {
         NodeList childNodes = parentNode.getChildNodes();
         double latitudeText = Double.parseDouble(childNodes.item(1).getTextContent());
         double longitudeText = Double.parseDouble(childNodes.item(2).getTextContent());
-        LatLng coordinates = new LatLng(latitudeText, longitudeText);
+        LatLng coordinates = new LatLng(latitudeText, longitudeText, 0);
 
         return coordinates.getPrettyCoordinateString();
     }

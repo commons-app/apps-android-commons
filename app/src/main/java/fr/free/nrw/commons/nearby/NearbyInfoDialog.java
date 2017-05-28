@@ -57,7 +57,7 @@ public class NearbyInfoDialog extends OverlayDialog {
         Bundle bundle = getArguments();
         placeTitle.setText(bundle.getString(ARG_TITLE));
         placeDescription.setText(bundle.getString(ARG_DESC));
-        location = new LatLng(bundle.getDouble(ARG_LATITUDE), bundle.getDouble(ARG_LONGITUDE));
+        location = new LatLng(bundle.getDouble(ARG_LATITUDE), bundle.getDouble(ARG_LONGITUDE), 0);
         getArticleLink(bundle);
     }
 

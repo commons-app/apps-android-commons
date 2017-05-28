@@ -14,6 +14,7 @@ public class LocationServiceManager implements LocationListener {
     private String provider;
     private LocationManager locationManager;
     private LatLng latestLocation;
+    private Float latestLocationAccuracy;
 
     public LocationServiceManager(Context context) {
         this.locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
@@ -22,6 +23,16 @@ public class LocationServiceManager implements LocationListener {
 
     public LatLng getLatestLocation() {
         return latestLocation;
+    }
+
+    /**
+     * Returns the accuracy of the location. The measurement is
+     * given as a radius in meter of 68 % confidence.
+     *
+     * @return Float
+     */
+    public Float getLatestLocationAccuracy() {
+        return latestLocationAccuracy;
     }
 
     /** Registers a LocationManager to listen for current location.
@@ -57,9 +68,10 @@ public class LocationServiceManager implements LocationListener {
     public void onLocationChanged(Location location) {
         double currentLatitude = location.getLatitude();
         double currentLongitude = location.getLongitude();
-        Timber.d("Latitude: %f Longitude: %f", currentLatitude, currentLongitude);
+        latestLocationAccuracy = location.getAccuracy();
+        Timber.d("Latitude: %f Longitude: %f Accuracy %f", currentLatitude, currentLongitude, latestLocationAccuracy);
 
-        latestLocation = new LatLng(currentLatitude, currentLongitude);
+        latestLocation = new LatLng(currentLatitude, currentLongitude, latestLocationAccuracy);
     }
 
     @Override
