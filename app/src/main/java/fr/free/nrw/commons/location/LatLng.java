@@ -4,7 +4,7 @@ public class LatLng {
 
     public final double latitude;
     public final double longitude;
-    public final float accuracy;
+    private final float accuracy;
 
     /** Accepts latitude and longitude.
      * North and South values are cut off at 90°

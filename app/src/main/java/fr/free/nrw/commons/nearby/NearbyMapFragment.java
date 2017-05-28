@@ -146,11 +146,12 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
      *
      * @return List List of LatLng points of the circle.
      */
-    public List<LatLng> createCircleArray(double centerLat, double centerLong, float radius, int nodes) {
+    public List<LatLng> createCircleArray(
+            double centerLat, double centerLong, float radius, int nodes) {
         List<LatLng> circle = new ArrayList<>();
         float radiusKilometer = radius / 1000;
-        double radiusLong = radiusKilometer /
-                (111.320 * Math.cos(centerLat * Math.PI / 180));
+        double radiusLong = radiusKilometer
+                / (111.320 * Math.cos(centerLat * Math.PI / 180));
         double radiusLat = radiusKilometer / 110.574;
 
         for (int i = 0; i < nodes; i++) {

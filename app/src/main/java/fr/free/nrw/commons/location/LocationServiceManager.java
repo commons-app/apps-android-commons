@@ -69,7 +69,8 @@ public class LocationServiceManager implements LocationListener {
         double currentLatitude = location.getLatitude();
         double currentLongitude = location.getLongitude();
         latestLocationAccuracy = location.getAccuracy();
-        Timber.d("Latitude: %f Longitude: %f Accuracy %f", currentLatitude, currentLongitude, latestLocationAccuracy);
+        Timber.d("Latitude: %f Longitude: %f Accuracy %f",
+                currentLatitude, currentLongitude, latestLocationAccuracy);
 
         latestLocation = new LatLng(currentLatitude, currentLongitude, latestLocationAccuracy);
     }
