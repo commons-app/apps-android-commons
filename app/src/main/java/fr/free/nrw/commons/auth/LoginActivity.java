@@ -113,17 +113,12 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     protected void onResume() {
         super.onResume();
         if (prefs.getBoolean("firstrun", true)) {
-            startWelcomeIntent();
+            WelcomeActivity.startYourself(this);
             prefs.edit().putBoolean("firstrun", false).apply();
         }
         if (app.getCurrentAccount() != null) {
             startMainActivity();
         }
-    }
-
-    private void startWelcomeIntent() {
-        Intent welcomeIntent = new Intent(this, WelcomeActivity.class);
-        startActivity(welcomeIntent);
     }
 
     @Override
@@ -215,8 +210,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     }
 
     public void startMainActivity() {
-        Intent intent = new Intent(this, ContributionsActivity.class);
-        startActivity(intent);
+        ContributionsActivity.startYourself(this);
         finish();
     }
 
