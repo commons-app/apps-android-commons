@@ -122,8 +122,8 @@ public class NearbyInfoDialog extends OverlayDialog {
         Bundle bundle = new Bundle();
         bundle.putString(ARG_TITLE, place.name);
         bundle.putString(ARG_DESC, place.description);
-        bundle.putDouble(ARG_LATITUDE, place.location.latitude);
-        bundle.putDouble(ARG_LONGITUDE, place.location.longitude);
+        bundle.putDouble(ARG_LATITUDE, place.location.getLatitude());
+        bundle.putDouble(ARG_LONGITUDE, place.location.getLongitude());
         bundle.putParcelable(ARG_SITE_LINK, place.siteLinks);
         mDialog.setArguments(bundle);
         DialogUtil.showSafely(fragmentActivity, mDialog);
@@ -138,7 +138,8 @@ public class NearbyInfoDialog extends OverlayDialog {
     @OnClick(R.id.link_preview_directions_button)
     void onDirectionsClick() {
         //Open map app at given position
-        Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + location.latitude + "," + location.longitude);
+        Uri gmmIntentUri = Uri.parse(
+                "geo:0,0?q=" + location.getLatitude() + "," + location.getLongitude());
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
 
         if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {

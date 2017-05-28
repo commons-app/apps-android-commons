@@ -2,8 +2,8 @@ package fr.free.nrw.commons.location;
 
 public class LatLng {
 
-    public final double latitude;
-    public final double longitude;
+    private final double latitude;
+    private final double longitude;
     private final float accuracy;
 
     /** Accepts latitude and longitude.
@@ -94,5 +94,32 @@ public class LatLng {
     public String getPrettyCoordinateString() {
         return formatCoordinate(this.latitude) + " " + this.getNorthSouth() + ", "
                + formatCoordinate(this.longitude) + " " + this.getEastWest();
+    }
+
+    /**
+     * Return the location accuracy in meter.
+     *
+     * @return float
+     */
+    public float getAccuracy() {
+        return accuracy;
+    }
+
+    /**
+     * Return the longitude in degrees.
+     *
+     * @return double
+     */
+    public double getLongitude() {
+        return longitude;
+    }
+
+    /**
+     * Return the latitude in degrees.
+     *
+     * @return double
+     */
+    public double getLatitude() {
+        return latitude;
     }
 }

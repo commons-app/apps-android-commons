@@ -109,8 +109,8 @@ public class NearbyController {
             nearbyBaseMarker.title(place.name);
             nearbyBaseMarker.position(
                     new com.mapbox.mapboxsdk.geometry.LatLng(
-                            place.location.latitude,
-                            place.location.longitude));
+                            place.location.getLatitude(),
+                            place.location.getLongitude()));
             nearbyBaseMarker.place(place);
             nearbyBaseMarker.icon(icon);
 

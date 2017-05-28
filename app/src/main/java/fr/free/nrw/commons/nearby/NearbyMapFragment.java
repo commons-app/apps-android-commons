@@ -83,7 +83,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         MapboxMapOptions options = new MapboxMapOptions()
                 .styleUrl(Style.OUTDOORS)
                 .camera(new CameraPosition.Builder()
-                        .target(new LatLng(curLatLng.latitude, curLatLng.longitude))
+                        .target(new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude()))
                         .zoom(11)
                         .build());
 
@@ -125,11 +125,11 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
      */
     public void addCurrentLocationMarker(MapboxMap mapboxMap) {
         MarkerOptions currentLocationMarker = new MarkerOptions()
-                .position(new LatLng(curLatLng.latitude, curLatLng.longitude));
+                .position(new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude()));
         mapboxMap.addMarker(currentLocationMarker);
 
-        List<LatLng> circle = createCircleArray(curLatLng.latitude, curLatLng.longitude,
-                curLatLng.accuracy * 2, 100);
+        List<LatLng> circle = createCircleArray(curLatLng.getLatitude(), curLatLng.getLongitude(),
+                curLatLng.getAccuracy() * 2, 100);
 
         mapboxMap.addPolygon(
                 new PolygonOptions()

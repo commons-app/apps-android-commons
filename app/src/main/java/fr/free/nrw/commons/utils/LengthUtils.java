@@ -38,10 +38,10 @@ public class LengthUtils {
     }
 
     private static double computeAngleBetween(LatLng from, LatLng to) {
-        return distanceRadians(Math.toRadians(from.latitude),
-                Math.toRadians(from.longitude),
-                Math.toRadians(to.latitude),
-                Math.toRadians(to.longitude));
+        return distanceRadians(Math.toRadians(from.getLatitude()),
+                Math.toRadians(from.getLongitude()),
+                Math.toRadians(to.getLatitude()),
+                Math.toRadians(to.getLongitude()));
     }
 
     private static double distanceRadians(double lat1, double lng1, double lat2, double lng2) {
