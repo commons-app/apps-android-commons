@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.upload;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -53,6 +52,7 @@ public class SingleUploadFragment extends Fragment {
     @BindView(R.id.licenseSpinner) Spinner licenseSpinner;
 
     private OnUploadActionInitiated uploadActionInitiatedHandler;
+    private TitleTextWatcher textWatcher = new TitleTextWatcher();
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -125,26 +125,17 @@ public class SingleUploadFragment extends Fragment {
         Timber.d("Position: %d %s", position, getString(Utils.licenseNameFor(license)));
         licenseSpinner.setSelection(position);
 
-        TextWatcher uploadEnabler = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) { }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {}
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                if(getActivity() != null) {
-                    getActivity().invalidateOptionsMenu();
-                }
-            }
-        };
-
-        titleEdit.addTextChangedListener(uploadEnabler);
+        titleEdit.addTextChangedListener(textWatcher);
 
         setLicenseSummary(license);
 
         return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        titleEdit.removeTextChangedListener(textWatcher);
+        super.onDestroyView();
     }
 
     @OnItemSelected(R.id.licenseSpinner) void onLicenseSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -206,9 +197,10 @@ public class SingleUploadFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        uploadActionInitiatedHandler = (OnUploadActionInitiated) activity;
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setHasOptionsMenu(true);
+        uploadActionInitiatedHandler = (OnUploadActionInitiated) getActivity();
     }
 
     @Override
@@ -223,9 +215,18 @@ public class SingleUploadFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
+    private class TitleTextWatcher implements TextWatcher {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) { }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) { }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            if(getActivity() != null) {
+                getActivity().invalidateOptionsMenu();
+            }
+        }
     }
 }
