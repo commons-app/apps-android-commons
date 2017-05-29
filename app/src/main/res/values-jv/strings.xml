@@ -33,7 +33,7 @@
   <string name="menu_nearby">Cedhak kéné</string>
   <string name="provider_contributions">Unggahanku</string>
   <string name="menu_share">Dum</string>
-  <string name="menu_open_in_browser">Delok ing Pangluru</string>
+  <string name="menu_open_in_browser">Deleng ing Pangluru</string>
   <string name="share_title_hint">Sesirah</string>
   <string name="share_description_hint">Wedharan</string>
   <string name="login_failed_network">Ora bisa mlebu log - jaringané gagal</string>
@@ -41,6 +41,7 @@
   <string name="login_failed_password">Ora bisa mlebu log - tiliki tembung wadiné panjenengan</string>
   <string name="login_failed_throttled">Kakèhan upaya sing gagal. Jajalana manèh mengko.</string>
   <string name="login_failed_blocked">Ngapunten, panganggo iki wis diblokir ing Commons</string>
+  <string name="login_failed_2fa_needed">Panjenengan kudu ngisi kodhe otèntifikasi rong faktoré panjenengan</string>
   <string name="login_failed_generic">Wurung mlebu log</string>
   <string name="share_upload_button">Unggah</string>
   <string name="multiple_share_base_title">Jenengi sèt iki</string>
@@ -49,6 +50,9 @@
   <string name="categories_search_text_hint">Golèk kategori</string>
   <string name="menu_save_categories">Simpen</string>
   <string name="refresh_button">Anyarana</string>
+  <string name="gps_disabled">GPS dipatèni ing pirantiné panjenengan. Panjenengan arep ngurubaké?</string>
+  <string name="enable_gps">Urubaké GPS</string>
+  <string name="contributions_subtitle_zero">Durung ana unggahan</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%d unggahan</item>
@@ -104,6 +108,8 @@
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Nul</string>
+  <string name="tutorial_3_text">Tulung AJA ngunggah:</string>
+  <string name="tutorial_4_text">Contoné unggahan:</string>
   <string name="welcome_final_text">Panjenengan sumerep, ta?</string>
   <string name="welcome_final_button_text">Iya!</string>
   <string name="detail_panel_cats_label">Kategori</string>
@@ -134,14 +140,28 @@
   <string name="set_limit">Setèl Watesan Unggahan Anyar</string>
   <string name="login_failed_2fa_not_supported">Otèntifikasi rong faktor saiki durung bisa.</string>
   <string name="logout_verification">Panjenengan yakin arep metu log?</string>
+  <string name="commons_logo">Logo Commons</string>
+  <string name="background_image">Gambar Latar Wuri</string>
+  <string name="mediaimage_failed">Gambar Médhia Wurung</string>
+  <string name="no_image_found">Gambar Ora Katemu</string>
+  <string name="upload_image">Unggah Gambar</string>
+  <string name="welcome_image_mount_zao">Gunung Zao</string>
+  <string name="welcome_image_llamas">Llama</string>
+  <string name="welcome_image_rainbow_bridge">Kreteg Kluwung</string>
+  <string name="welcome_image_tulip">Tulip</string>
+  <string name="welcome_image_no_selfies">Ora Ana Swafoto</string>
+  <string name="welcome_image_welcome_wikipedia">Sugeng Rawuh ing Wikipédia</string>
+  <string name="welcome_image_sydney_opera_house">Wisma Opera Sydney</string>
   <string name="cancel">Wurung</string>
   <string name="navigation_drawer_open">Bukak</string>
   <string name="navigation_drawer_close">Tutup</string>
   <string name="navigation_item_home">Tepas</string>
   <string name="navigation_item_upload">Unggah</string>
   <string name="navigation_item_nearby">Cedhak kéné</string>
-  <string name="navigation_item_about">Bab</string>
+  <string name="navigation_item_about">Ngenani</string>
   <string name="navigation_item_settings">Setèlan</string>
   <string name="navigation_item_feedback">Pamrayoga</string>
   <string name="navigation_item_logout">Metu log</string>
+  <string name="nearby_info_menu_commons_article">Artikel Commons</string>
+  <string name="nearby_info_menu_wikidata_article">Artikel WikiData</string>
 </resources>

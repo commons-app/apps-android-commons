@@ -7,12 +7,12 @@
   <string name="login">Se connecter</string>
   <string name="signup">S’inscrire</string>
   <string name="logging_in_title">Connexion</string>
-  <string name="logging_in_message" fuzzy="true">Veuillez patienter…</string>
+  <string name="logging_in_message">Veuillez patienter…</string>
   <string name="login_success">Connexion réussie !</string>
   <string name="login_failed">Échec de la connexion !</string>
   <string name="upload_failed">Fichier non trouvé. Veuillez en essayer un autre.</string>
   <string name="authentication_failed">Échec de l’authentification !</string>
-  <string name="uploading_started">Téléchargement démarré !</string>
+  <string name="uploading_started">Téléversement démarré !</string>
   <string name="upload_completed_notification_title">%1$s téléversés !</string>
   <string name="upload_completed_notification_text">Appuyer pour voir votre téléversement</string>
   <string name="upload_progress_notification_title_start">Début de téléversement %1$s</string>
@@ -83,7 +83,7 @@
   <string name="menu_feedback">Envoyer vos commentaires (par courriel)</string>
   <string name="no_email_client">Aucun client de courriel installé</string>
   <string name="provider_categories">Catégories utilisées récemment</string>
-  <string name="waiting_first_sync" fuzzy="true">Attente de première synchronisation…</string>
+  <string name="waiting_first_sync">Attente de première synchronisation…</string>
   <string name="no_uploads_yet">Vous n’avez pas encore téléchargé de photo.</string>
   <string name="menu_retry_upload">Réessayer</string>
   <string name="menu_cancel_upload">Annuler</string>
@@ -117,11 +117,11 @@
   <string name="license_name_cc_zero">CC Zéro</string>
   <string name="tutorial_1_text">Wikimédia Communs héberge la plupart des images qui sont utilisées dans Wikipédia</string>
   <string name="tutorial_1_subtext">Vos images aident à éduquer les gens dans le monde entier !</string>
-  <string name="tutorial_2_text">Veuillez télécharger les images qui sont prises ou créées entièrement par vous :</string>
+  <string name="tutorial_2_text">Veuillez téléverser des images qui sont prises ou créées entièrement par vous :</string>
   <string name="tutorial_2_subtext">- Objets naturels (fleurs, animaux, montagnes) \n- Objets utiles (bicyclettes, gares ferroviaires) \n- Personnes célèbres (votre maire, les athlètes olympiques que vous avez rencontrés)</string>
-  <string name="tutorial_3_text">Veuillez ne PAS télécharger :</string>
+  <string name="tutorial_3_text">Veuillez ne PAS téléverser :</string>
   <string name="tutorial_3_subtext">- des selfies ou des images de vos amis \n- des images téléchargées sur Internet\n- des copies d’écran d’applications propriétaires</string>
-  <string name="tutorial_4_text">Exemple de téléchargement :</string>
+  <string name="tutorial_4_text">Exemple de téléversement :</string>
   <string name="tutorial_4_subtext">- Titre : L’opéra de Sydney\n- Description : L’opéra de Sydney vu à travers la baie\n- Catégories : Opéra de Sydney, Opéra de Sydney depuis l’ouest, vues à distance de l’Opéra de Sydney</string>
   <string name="welcome_wikipedia_text">Contribuez avec vos images. Aidez les articles de Wikipédia à prendre vie !</string>
   <string name="welcome_wikipedia_subtext">Les images sur Wikipédia viennent de Wikimedia Commons.</string>
@@ -130,7 +130,7 @@
   <string name="welcome_final_text">Vous pensez que c’est bon ?</string>
   <string name="welcome_final_button_text">Oui !</string>
   <string name="detail_panel_cats_label">Catégories</string>
-  <string name="detail_panel_cats_loading" fuzzy="true">Chargement…</string>
+  <string name="detail_panel_cats_loading">Chargement…</string>
   <string name="detail_panel_cats_none">Aucune catégorie sélectionnée</string>
   <string name="detail_description_empty">Aucune description</string>
   <string name="detail_license_empty">Licence inconnue</string>
@@ -148,7 +148,7 @@
   <string name="media_detail_media_title">Titre du média</string>
   <string name="media_detail_description">Description</string>
   <string name="media_detail_description_explanation">La description du média vient ici. Cela peut être potentiellement assez long, et devra être réparti sur plusieurs lignes. Nous espérons que cela restera joli néanmoins.</string>
-  <string name="media_detail_uploaded_date">Date de téléchargement</string>
+  <string name="media_detail_uploaded_date">Date de téléversement</string>
   <string name="become_a_tester_title">Devenir un bêta-testeur</string>
   <string name="become_a_tester_description">S’inscrire à notre canal bêta sur Google Play et obtenir un accès anticipé aux nouvelles fonctionnalités et corrections de bogue</string>
   <string name="use_wikidata">Utiliser Wikidata</string>
@@ -158,8 +158,22 @@
   <string name="maximum_limit">Limite maximale</string>
   <string name="maximum_limit_alert">Impossible d’afficher plus de 500</string>
   <string name="set_limit">Fixer la limite de téléversement récent</string>
-  <string name="login_failed_2fa_not_supported">L’authentification à deux facteurs n’est pas supportée pour le moment.</string>
+  <string name="login_failed_2fa_not_supported">L’authentification à deux facteurs n’est pas prise en charge pour le moment.</string>
   <string name="logout_verification">Voulez-vous vraiment vous déconnecter ?</string>
+  <string name="commons_logo">Logo de Communs</string>
+  <string name="background_image">Image de fond</string>
+  <string name="mediaimage_failed">Échec de l’image du média</string>
+  <string name="no_image_found">Aucune image trouvée</string>
+  <string name="upload_image">Téléverser une image</string>
+  <string name="welcome_image_mount_zao">Mont Zao</string>
+  <string name="welcome_image_llamas">Lamas</string>
+  <string name="welcome_image_rainbow_bridge">Pont Arc-en-ciel</string>
+  <string name="welcome_image_tulip">Tulipe</string>
+  <string name="welcome_image_no_selfies">Pas d’autoportrait</string>
+  <string name="welcome_image_proprietary">Image privée</string>
+  <string name="welcome_image_welcome_wikipedia">Bienvenue de Wikipédia</string>
+  <string name="welcome_image_welcome_copyright">Droit d’auteur de bienvenue</string>
+  <string name="welcome_image_sydney_opera_house">Maison de l’opéra de Sydney</string>
   <string name="cancel">Annuler</string>
   <string name="navigation_drawer_open">Ouvrir</string>
   <string name="navigation_drawer_close">Fermer</string>
@@ -170,4 +184,6 @@
   <string name="navigation_item_settings">Paramètres</string>
   <string name="navigation_item_feedback">Commentaire</string>
   <string name="navigation_item_logout">Déconnexion</string>
+  <string name="nearby_info_menu_commons_article">Article de Communs</string>
+  <string name="nearby_info_menu_wikidata_article">Article de WikiData</string>
 </resources>

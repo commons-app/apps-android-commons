@@ -130,7 +130,7 @@
   <string name="welcome_final_text">Verstanden?</string>
   <string name="welcome_final_button_text">Ja!</string>
   <string name="detail_panel_cats_label">Kategorien</string>
-  <string name="detail_panel_cats_loading" fuzzy="true">Lade …</string>
+  <string name="detail_panel_cats_loading">Lade …</string>
   <string name="detail_panel_cats_none">Keine ausgewählt</string>
   <string name="detail_description_empty">Keine Beschreibung</string>
   <string name="detail_license_empty">Unbekannte Lizenz</string>

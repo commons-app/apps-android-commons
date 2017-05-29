@@ -20,11 +20,11 @@
   <string name="upload_progress_notification_title_finishing">Avslutar uppladdning av %1$s</string>
   <string name="upload_failed_notification_title">Uppladdning av %1$s misslyckades</string>
   <string name="upload_failed_notification_subtitle">Tryck för att visa</string>
-  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
-    <item quantity="one">1 filuppladdning</item>
-    <item quantity="other">%d filuppladdningar</item>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%d fil laddas upp</item>
+    <item quantity="other">%d filer laddas upp</item>
   </plurals>
-  <string name="title_activity_contributions" fuzzy="true">Mina uppladdningar</string>
+  <string name="title_activity_contributions">Mina senaste uppladdningar</string>
   <string name="contribution_state_queued">Köade</string>
   <string name="contribution_state_failed">Misslyckades</string>
   <string name="contribution_state_in_progress">%1$d%% färdigt</string>
@@ -42,6 +42,7 @@
   <string name="login_failed_password">Det gick inte att logga in - var god kontrollera ditt lösenord</string>
   <string name="login_failed_throttled">För många misslyckade försök. Var god försök igen om några minuter.</string>
   <string name="login_failed_blocked">Tyvärr, denna användare har blockerats på Commons</string>
+  <string name="login_failed_2fa_needed">Du måste ange din tvåstegsverifieringskod.</string>
   <string name="login_failed_generic">Inloggningen misslyckades</string>
   <string name="share_upload_button">Ladda upp</string>
   <string name="multiple_share_base_title">Namnge denna uppsättning</string>
@@ -50,17 +51,20 @@
   <string name="categories_search_text_hint">Sök kategorier</string>
   <string name="menu_save_categories">Spara</string>
   <string name="refresh_button">Uppdatera</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">Inga uppladdningar ännu</item>
-    <item quantity="one">1 uppladdning</item>
+  <string name="gps_disabled">GPS:en är inaktiverad på denna enhet. Vill du aktivera den?</string>
+  <string name="enable_gps">Aktivera GPS</string>
+  <string name="contributions_subtitle_zero">Inga uppladdningar ännu</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%d uppladdning</item>
     <item quantity="other">%d uppladdningar</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">Startar 1 uppladdning</item>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Startar %d uppladdning</item>
     <item quantity="other">Startar %d uppladdningar</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">1 uppladdning</item>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%d uppladdning</item>
     <item quantity="other">%d uppladdningar</item>
   </plurals>
   <string name="categories_not_found">Inga kategorier som stämmer överens med %1$s hittades</string>
@@ -74,7 +78,7 @@
   <string name="about_license">Programvara med öppen källkod släppt under &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;licensen Apache v2&lt;/a&gt;. Wikimedia Commons och dess logotyp är varumärken av Wikimedia Foundation och används med tillstånd från Wikimedia Foundation. Vi varken stöds eller är kopplade med Wikimedia Foundation.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Källkoden&lt;/a&gt; och &lt;a href=\"https://commons-app.github.io/\"&gt;webbplatsen&lt;/a&gt; på GitHub. Skapa ett nytt &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-ärende&lt;/a&gt; för att rapportera buggar och förslag.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Integritetspolicy&lt;/a&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;ERKÄNNANDE&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Erkännande&lt;/a&gt;</string>
   <string name="title_activity_about">Om</string>
   <string name="menu_feedback">Skicka feedback (via e-post)</string>
   <string name="no_email_client">Ingen e-postklient är installerad</string>
@@ -135,6 +139,7 @@
   <string name="location_permission_rationale">Valfri behörighet: Hämta aktuell plats för kategoriförslag</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Platser i närheten</string>
+  <string name="no_nearby">Inga platser i närheten hittades</string>
   <string name="warning">Varning</string>
   <string name="file_exists">Denna fil finns redan på Commons. Är du säker på att du vill fortsätta?</string>
   <string name="yes">Ja</string>
@@ -143,8 +148,42 @@
   <string name="media_detail_media_title">Mediatitel</string>
   <string name="media_detail_description">Beskrivning</string>
   <string name="media_detail_description_explanation">Beskrivningen för mediafilen ska vara här. Den kan vara riktig lång och kommer att behöva sträcka sig över flera rader. Vi hoppas i alla fall att det kommer se bra ut.</string>
+  <string name="media_detail_uploaded_date">Uppladdningsdatum</string>
   <string name="become_a_tester_title">Bli en betatestare</string>
   <string name="become_a_tester_description">Registrera dig på våra betakanal på Google Play och få tidig åtkomst till nya funktioner och buggfixar</string>
   <string name="use_wikidata">Använd Wikidata</string>
   <string name="use_wikidata_summary">(Varning: Stora mängder mobildata kan förekomma om detta inaktiveras)</string>
+  <string name="_2fa_code">2-stegsverif.kod</string>
+  <string name="number_of_uploads">Gräns för mina senaste uppladdningar</string>
+  <string name="maximum_limit">Maxgräns</string>
+  <string name="maximum_limit_alert">Kan inte visa fler än 500</string>
+  <string name="set_limit">Ändra gräns för senaste uppladdningar</string>
+  <string name="login_failed_2fa_not_supported">Tvåstegsverifiering stöds för tillfället inte.</string>
+  <string name="logout_verification">Vill du verkligen logga ut?</string>
+  <string name="commons_logo">Commons-logotyp</string>
+  <string name="background_image">Bakgrundsbild</string>
+  <string name="mediaimage_failed">Mediabild misslyckades</string>
+  <string name="no_image_found">Ingen bild hittades</string>
+  <string name="upload_image">Ladda upp bild</string>
+  <string name="welcome_image_mount_zao">Zao</string>
+  <string name="welcome_image_llamas">Lamor</string>
+  <string name="welcome_image_rainbow_bridge">Regnbågsbro</string>
+  <string name="welcome_image_tulip">Tulpan</string>
+  <string name="welcome_image_no_selfies">Inga selfies</string>
+  <string name="welcome_image_proprietary">Proprietär bild</string>
+  <string name="welcome_image_welcome_wikipedia">Välkommen Wikipedia</string>
+  <string name="welcome_image_welcome_copyright">Välkommen upphovsrätt</string>
+  <string name="welcome_image_sydney_opera_house">Sydneys operahus</string>
+  <string name="cancel">Avbryt</string>
+  <string name="navigation_drawer_open">Öppna</string>
+  <string name="navigation_drawer_close">Stäng</string>
+  <string name="navigation_item_home">Hem</string>
+  <string name="navigation_item_upload">Ladda upp</string>
+  <string name="navigation_item_nearby">I närheten</string>
+  <string name="navigation_item_about">Om</string>
+  <string name="navigation_item_settings">Inställningar</string>
+  <string name="navigation_item_feedback">Återkoppling</string>
+  <string name="navigation_item_logout">Logga ut</string>
+  <string name="nearby_info_menu_commons_article">Commons-artikel</string>
+  <string name="nearby_info_menu_wikidata_article">WikiData-artikel</string>
 </resources>

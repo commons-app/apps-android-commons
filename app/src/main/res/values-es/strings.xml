@@ -7,7 +7,7 @@
   <string name="login">Acceder</string>
   <string name="signup">Regístrate</string>
   <string name="logging_in_title">Accediendo</string>
-  <string name="logging_in_message" fuzzy="true">Espera un momento…</string>
+  <string name="logging_in_message">Espera un momento…</string>
   <string name="login_success">¡Inicio de sesión exitoso!</string>
   <string name="login_failed">¡Inicio de sesión fallido!</string>
   <string name="upload_failed">No se encontró el archivo. Prueba con otro.</string>
@@ -130,7 +130,7 @@
   <string name="welcome_final_text">¿Crees que ya lo tienes?</string>
   <string name="welcome_final_button_text">¡Sí!</string>
   <string name="detail_panel_cats_label">Categorías</string>
-  <string name="detail_panel_cats_loading" fuzzy="true">Cargando…</string>
+  <string name="detail_panel_cats_loading">Cargando…</string>
   <string name="detail_panel_cats_none">No hay nada seleccionado</string>
   <string name="detail_description_empty">Sin descripción</string>
   <string name="detail_license_empty">Licencia desconocida</string>
@@ -160,6 +160,20 @@
   <string name="set_limit">Establecer el límite de subidas recientes</string>
   <string name="login_failed_2fa_not_supported">Actualmente no se admite la auntenticación de dos factores.</string>
   <string name="logout_verification">¿Confirmas que quieres salir?</string>
+  <string name="commons_logo">Logo de Commons</string>
+  <string name="background_image">Imagen de fondo</string>
+  <string name="mediaimage_failed">Falló la imagen de multimedia</string>
+  <string name="no_image_found">No se encontró imagen</string>
+  <string name="upload_image">Subir imagen</string>
+  <string name="welcome_image_mount_zao">Monte Zao</string>
+  <string name="welcome_image_llamas">Llamas</string>
+  <string name="welcome_image_rainbow_bridge">Puente del Arco Iris</string>
+  <string name="welcome_image_tulip">Tulipa</string>
+  <string name="welcome_image_no_selfies">No selfies</string>
+  <string name="welcome_image_proprietary">Imagen propietaria</string>
+  <string name="welcome_image_welcome_wikipedia">Wikipedia de bienvenida</string>
+  <string name="welcome_image_welcome_copyright">Derechos de autor de bienvenida</string>
+  <string name="welcome_image_sydney_opera_house">Ópera de Sídney</string>
   <string name="cancel">Cancelar</string>
   <string name="navigation_drawer_open">Abrir</string>
   <string name="navigation_drawer_close">Cerrar</string>
@@ -170,4 +184,6 @@
   <string name="navigation_item_settings">Configuración</string>
   <string name="navigation_item_feedback">Comentarios</string>
   <string name="navigation_item_logout">Salir</string>
+  <string name="nearby_info_menu_commons_article">Artículo en Commons</string>
+  <string name="nearby_info_menu_wikidata_article">Artículo en WikiData</string>
 </resources>

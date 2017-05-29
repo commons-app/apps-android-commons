@@ -98,6 +98,10 @@
   <string name="media_detail_title">{{Identical|Title}}</string>
   <string name="media_detail_description">{{Identical|Description}}</string>
   <string name="welcome_image_mount_zao">This is a mountain between Yamagata and Miyagi Prefectures in Japan, see [[d:Q167951]] for details.</string>
+  <string name="welcome_image_llamas">An animal. See [[:d:Q42569|Wikidata item Q42569]] for a list of possible translations.</string>
+  <string name="welcome_image_rainbow_bridge">A bridge in Japan. See [[:d:Q1046736|Wikidata item Q1046736]] for a list of possible translations.</string>
+  <string name="welcome_image_tulip">A flower. See [[:d:Q93201|Wikidata item Q93201]] for a list of possible translations.</string>
+  <string name="welcome_image_sydney_opera_house">A building in the city of Sydney. See [[:d:Q45178|Wikidata item Q45178]] for a list of possible translations.</string>
   <string name="cancel">{{Identical|Cancel}}</string>
   <string name="navigation_drawer_open">{{Identical|Open}}</string>
   <string name="navigation_drawer_close">{{Identical|Close}}</string>

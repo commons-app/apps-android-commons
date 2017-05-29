@@ -91,7 +91,7 @@
   <string name="menu_download">Преземи</string>
   <string name="preference_license">Лиценца</string>
   <string name="use_previous">Користи претходен наслов/опис</string>
-  <string name="allow_gps">Автоматски давај ја тековната местоположба</string>
+  <string name="allow_gps">Автоматски давај тековна местоположба</string>
   <string name="allow_gps_summary">Добивање на тековната местоположба за да се дадат предлози за категории, доколку сликата нема геоознаки</string>
   <string name="preference_theme">Ноќен режим</string>
   <string name="preference_theme_summary">Користи темен изглед</string>

@@ -54,7 +54,7 @@
   <string name="gps_disabled">ה־GPS במכשיר שלך אינו מופעל. האם להפעיל אותו?</string>
   <string name="enable_gps">הפעלת GPS</string>
   <string name="contributions_subtitle_zero">לא הועלה עדיין שום דבר</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
+  <plurals name="contributions_subtitle">
     <item quantity="one">העלאה אחת</item>
     <item quantity="other">%d העלאות</item>
   </plurals>
@@ -129,7 +129,7 @@
   <string name="welcome_final_text">נראה לך שקלטת?</string>
   <string name="welcome_final_button_text">כן!</string>
   <string name="detail_panel_cats_label">קטגוריות</string>
-  <string name="detail_panel_cats_loading" fuzzy="true">טעינה…</string>
+  <string name="detail_panel_cats_loading">טעינה...</string>
   <string name="detail_panel_cats_none">לא נבחר דבר</string>
   <string name="detail_description_empty">אין תיאור</string>
   <string name="detail_license_empty">רישיון לא ידוע</string>
@@ -159,6 +159,17 @@
   <string name="set_limit">הגדרת מגבלת העלאות אחרונות</string>
   <string name="login_failed_2fa_not_supported">אימות דו־שלבי אינו נתמך כעת.</string>
   <string name="logout_verification">האם באמת לצאת מהחשבון?</string>
+  <string name="commons_logo">סמל ויקישיתוף</string>
+  <string name="background_image">תמונת רקע</string>
+  <string name="no_image_found">לא נמצאה תמונה</string>
+  <string name="upload_image">העלאת תמונה</string>
+  <string name="welcome_image_mount_zao">הר זאו</string>
+  <string name="welcome_image_llamas">לאמות</string>
+  <string name="welcome_image_rainbow_bridge">גשר הקשת בענן</string>
+  <string name="welcome_image_tulip">צבעוני</string>
+  <string name="welcome_image_no_selfies">בלי תמונות סלפי</string>
+  <string name="welcome_image_proprietary">תמונה קניינית</string>
+  <string name="welcome_image_sydney_opera_house">בית האופרה של סידני</string>
   <string name="cancel">ביטול</string>
   <string name="navigation_drawer_open">פתיחה</string>
   <string name="navigation_drawer_close">סגירה</string>
