@@ -30,9 +30,10 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
     private Button loginButton;
     private EditText usernameEdit;
-    EditText passwordEdit;
-    EditText twoFactorEdit;
+    private EditText passwordEdit;
+    private EditText twoFactorEdit;
     ProgressDialog progressDialog;
+    private LoginTextWatcher textWatcher = new LoginTextWatcher();
 
     private CommonsApplication app;
 
@@ -52,10 +53,9 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
         prefs = getSharedPreferences("fr.free.nrw.commons", MODE_PRIVATE);
 
-        TextWatcher loginEnabler = newLoginTextWatcher();
-        usernameEdit.addTextChangedListener(loginEnabler);
-        passwordEdit.addTextChangedListener(loginEnabler);
-        twoFactorEdit.addTextChangedListener(loginEnabler);
+        usernameEdit.addTextChangedListener(textWatcher);
+        passwordEdit.addTextChangedListener(textWatcher);
+        twoFactorEdit.addTextChangedListener(textWatcher);
         passwordEdit.setOnEditorActionListener( newLoginInputActionListener() );
 
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -72,27 +72,24 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         });
     }
 
-    private TextWatcher newLoginTextWatcher() {
-        return new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) { }
+    private class LoginTextWatcher implements TextWatcher {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
+        }
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int start, int count, int after) { }
+        @Override
+        public void onTextChanged(CharSequence charSequence, int start, int count, int after) {
+        }
 
-            @Override
-            public void afterTextChanged(Editable editable) {
-                if(
-                        usernameEdit.getText().length() != 0 &&
-                                passwordEdit.getText().length() != 0 &&
-                                ( BuildConfig.DEBUG || twoFactorEdit.getText().length() != 0 || twoFactorEdit.getVisibility() != View.VISIBLE )
-                        ) {
-                    loginButton.setEnabled(true);
-                } else {
-                    loginButton.setEnabled(false);
-                }
+        @Override
+        public void afterTextChanged(Editable editable) {
+            if (usernameEdit.getText().length() != 0 && passwordEdit.getText().length() != 0 &&
+                    (BuildConfig.DEBUG || twoFactorEdit.getText().length() != 0 || twoFactorEdit.getVisibility() != View.VISIBLE)) {
+                loginButton.setEnabled(true);
+            } else {
+                loginButton.setEnabled(false);
             }
-        };
+        }
     }
 
     private TextView.OnEditorActionListener newLoginInputActionListener() {
@@ -139,6 +136,9 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        usernameEdit.removeTextChangedListener(textWatcher);
+        passwordEdit.removeTextChangedListener(textWatcher);
+        twoFactorEdit.removeTextChangedListener(textWatcher);
         super.onDestroy();
     }
 

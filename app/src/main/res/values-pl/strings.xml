@@ -50,6 +50,8 @@
   <string name="categories_search_text_hint">Szukaj kategorii</string>
   <string name="menu_save_categories">Zapisz</string>
   <string name="refresh_button">Odśwież</string>
+  <string name="gps_disabled">GPS w twoim urządzeniu jest wyłączony. Czy chcesz go włączyć?</string>
+  <string name="enable_gps">Włącz GPS</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">Przesłano @string/contributions_subtitle_zero</item>
     <item quantity="one">Przesłano %d plik</item>
@@ -74,7 +76,7 @@
   <string name="about_license">Oprogramowanie Open Source, wydane na licencji &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Wikimedia Commons i jego logo są znakami towarowymi Wikimedia Foundation i są wykorzystywane za zgodą Wikimedia Foundation. Nie jesteśmy powiązani z Wikimedia Foundation.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kod źródłowy&lt;/a&gt; oraz &lt;a href=\"https://commons-app.github.io/\"&gt;strona internetowa&lt;/a&gt; na GitHub. Aby zgłosić błąd lub sugestię, utwórz nowe &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;zgłoszenie na GitHub&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Polityka prywatności&lt;/a&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Twórcy&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Twórcy&lt;/a&gt;</string>
   <string name="title_activity_about">O aplikacji</string>
   <string name="menu_feedback">Wyślij opinię (przez e-mail)</string>
   <string name="no_email_client">Klient e-mail nie jest zainstalowany</string>
@@ -126,7 +128,7 @@
   <string name="welcome_final_text">Czy wszystko jest jasne?</string>
   <string name="welcome_final_button_text">Tak!</string>
   <string name="detail_panel_cats_label">Kategorie</string>
-  <string name="detail_panel_cats_loading" fuzzy="true">Ładowanie…</string>
+  <string name="detail_panel_cats_loading">Ładowanie…</string>
   <string name="detail_panel_cats_none">Nic nie zaznaczono</string>
   <string name="detail_description_empty">Brak opisu</string>
   <string name="detail_license_empty">Nieznana licencja</string>
@@ -146,4 +148,12 @@
   <string name="become_a_tester_title">Zostań beta-testerem</string>
   <string name="become_a_tester_description">Dołącz do kanału bety w Google Play i dostań wczesny dostęp do nowych funkcji i łatek</string>
   <string name="use_wikidata">Użyj Wikidanych</string>
+  <string name="_2fa_code">Kod 2FA</string>
+  <string name="login_failed_2fa_not_supported">Uwierzytelnianie dwuskładnikowe obecnie nie jest obsługiwane.</string>
+  <string name="cancel">Anuluj</string>
+  <string name="navigation_drawer_open">Otwórz</string>
+  <string name="navigation_drawer_close">Zamknij</string>
+  <string name="navigation_item_upload">Prześlij</string>
+  <string name="navigation_item_settings">Ustawienia</string>
+  <string name="navigation_item_logout">Wyloguj</string>
 </resources>

@@ -7,7 +7,7 @@
   <string name="login">Войти</string>
   <string name="signup">Зарегистрироваться</string>
   <string name="logging_in_title">Вход в систему</string>
-  <string name="logging_in_message" fuzzy="true">Пожалуйста, подождите…</string>
+  <string name="logging_in_message">Пожалуйста, подождите…</string>
   <string name="login_success">Опознание прошло успешно</string>
   <string name="login_failed">Ошибка входа в систему!</string>
   <string name="upload_failed">Файл не найден. Попробуйте другой файл.</string>
@@ -87,7 +87,7 @@
   <string name="menu_feedback">Отправить отзыв (по эл. почте)</string>
   <string name="no_email_client">Почтовый клиент не установлен</string>
   <string name="provider_categories">Недавно использованные категории</string>
-  <string name="waiting_first_sync" fuzzy="true">Ожидание первой синхронизации…</string>
+  <string name="waiting_first_sync">Ожидание первой синхронизации…</string>
   <string name="no_uploads_yet">Вы ещё не загрузили ни одной фотографии.</string>
   <string name="menu_retry_upload">Повторить</string>
   <string name="menu_cancel_upload">Отмена</string>
@@ -134,7 +134,7 @@
   <string name="welcome_final_text">Вам это понятно?</string>
   <string name="welcome_final_button_text">Да!</string>
   <string name="detail_panel_cats_label">Категории</string>
-  <string name="detail_panel_cats_loading" fuzzy="true">Загрузка…</string>
+  <string name="detail_panel_cats_loading">Загрузка…</string>
   <string name="detail_panel_cats_none">Ничего не выбрано</string>
   <string name="detail_description_empty">Нет описания</string>
   <string name="detail_license_empty">Неизвестная лицензия</string>
@@ -165,6 +165,9 @@
   <string name="login_failed_2fa_not_supported">Двухфакторная аутентификация в настоящее время не поддерживается.</string>
   <string name="logout_verification">Вы действительно хотите выйти?</string>
   <string name="commons_logo">Логотип Викисклада</string>
+  <string name="background_image">Фоновое изображение</string>
+  <string name="no_image_found">Изображение не найден</string>
+  <string name="upload_image">Загрузить изображение</string>
   <string name="welcome_image_mount_zao">Гора Зао</string>
   <string name="welcome_image_llamas">Ламы</string>
   <string name="welcome_image_rainbow_bridge">Радужный мост</string>
@@ -180,4 +183,5 @@
   <string name="navigation_item_settings">Настройки</string>
   <string name="navigation_item_feedback">Обратная связь</string>
   <string name="navigation_item_logout">Выйти</string>
+  <string name="nearby_info_menu_commons_article">Статья на Викискладе</string>
 </resources>

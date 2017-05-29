@@ -10,7 +10,7 @@
   <string name="logging_in_message">Изчакайте…</string>
   <string name="login_success">Успешно вписване.</string>
   <string name="login_failed">Неуспешно вписване!</string>
-  <string name="upload_failed">Файлът не е намерен. Моля, опитайте друг файл.</string>
+  <string name="upload_failed">Файлът не е намерен. Моля, опитайте с друг файл.</string>
   <string name="authentication_failed">Неуспешен опит за удостоверяване!</string>
   <string name="uploading_started">Качването започна!</string>
   <string name="upload_completed_notification_title">Файл %1$s е качен!</string>
@@ -24,9 +24,9 @@
   <string name="menu_open_in_browser">Преглед в браузъра</string>
   <string name="share_title_hint">Заглавие</string>
   <string name="share_description_hint">Описание</string>
-  <string name="login_failed_network">Неуспешно влизане - проблем в мрежата</string>
-  <string name="login_failed_username">Неуспешно влизане - моля проверете потребителското си име</string>
-  <string name="login_failed_password">Неуспешно влизане - моля проверете паролата си</string>
+  <string name="login_failed_network">Неуспешно влизане – проблем в мрежата</string>
+  <string name="login_failed_username">Неуспешно влизане – моля проверете потребителското си име</string>
+  <string name="login_failed_password">Неуспешно влизане – моля проверете паролата си</string>
   <string name="share_upload_button">Качване</string>
   <string name="provider_modifications">Изменения</string>
   <string name="menu_upload_single">Качване</string>
@@ -65,7 +65,7 @@
   <string name="tutorial_3_text">Моля, НЕ качвайте:</string>
   <string name="welcome_final_button_text">Да!</string>
   <string name="detail_panel_cats_label">Категории</string>
-  <string name="detail_panel_cats_loading" fuzzy="true">Зареждане…</string>
+  <string name="detail_panel_cats_loading">Зареждане…</string>
   <string name="detail_description_empty">Няма описание</string>
   <string name="detail_license_empty">Непознат лиценз</string>
   <string name="menu_refresh">Обновяване</string>
@@ -76,4 +76,17 @@
   <string name="no">Не</string>
   <string name="media_detail_title">Заглавие</string>
   <string name="media_detail_description">Описание</string>
+  <string name="media_detail_uploaded_date">Дата на качване</string>
+  <string name="welcome_image_llamas">Лами</string>
+  <string name="welcome_image_tulip">Лале</string>
+  <string name="cancel">Отказ</string>
+  <string name="navigation_drawer_open">Отваряне</string>
+  <string name="navigation_drawer_close">Затваряне</string>
+  <string name="navigation_item_home">Начало</string>
+  <string name="navigation_item_upload">Качване</string>
+  <string name="navigation_item_nearby">Наблизо</string>
+  <string name="navigation_item_about">За приложението</string>
+  <string name="navigation_item_settings">Настройки</string>
+  <string name="navigation_item_feedback">Обратна връзка</string>
+  <string name="navigation_item_logout">Излизане</string>
 </resources>

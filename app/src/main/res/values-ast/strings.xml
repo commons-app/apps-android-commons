@@ -7,7 +7,7 @@
   <string name="login">Identificase</string>
   <string name="signup">Date d\'alta</string>
   <string name="logging_in_title">Aniciando sesión</string>
-  <string name="logging_in_message" fuzzy="true">Aguarde, por favor…</string>
+  <string name="logging_in_message">Espera…</string>
   <string name="login_success">¡Identificación correuta!</string>
   <string name="login_failed">¡Falló l\'aniciu de sesión!</string>
   <string name="upload_failed">Nun s\'alcontró\'l ficheru. Tenta con otru.</string>
@@ -20,11 +20,11 @@
   <string name="upload_progress_notification_title_finishing">Acabando de xubir %1$s</string>
   <string name="upload_failed_notification_title">Falló la xuba de %1$s</string>
   <string name="upload_failed_notification_subtitle">Toque pa velo</string>
-  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
-    <item quantity="one">Xubiendo 1 ficheru</item>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">Xubiendo un ficheru</item>
     <item quantity="other">Xubiendo %d ficheros</item>
   </plurals>
-  <string name="title_activity_contributions" fuzzy="true">Les mios xubes</string>
+  <string name="title_activity_contributions">Les mios xubes recién</string>
   <string name="contribution_state_queued">En cola</string>
   <string name="contribution_state_failed">Falló</string>
   <string name="contribution_state_in_progress">%1$d%% completao</string>
@@ -42,6 +42,7 @@
   <string name="login_failed_password">Nun se pudo aniciar sesión – por favor compruebe la so contraseña</string>
   <string name="login_failed_throttled">Demasiaos intentos incorreutos. Téntalo otra vuelta n\'unos minutos.</string>
   <string name="login_failed_blocked">Sentímoslo, esti usuariu ta bloquiáu en Commons</string>
+  <string name="login_failed_2fa_needed">Tienes de dar el códigu d\'identificación de dos factores.</string>
   <string name="login_failed_generic">Falló l\'aniciu de sesión</string>
   <string name="share_upload_button">Xubir</string>
   <string name="multiple_share_base_title">Da-y un nome al conxuntu</string>
@@ -50,16 +51,19 @@
   <string name="categories_search_text_hint">Guetar categoríes</string>
   <string name="menu_save_categories">Guardar</string>
   <string name="refresh_button">Refrescar</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">Inda nun hai cargues</item>
+  <string name="gps_disabled">El GPS ta desactiváu nel preséu. ¿Quiés activalu?</string>
+  <string name="enable_gps">Activar GPS</string>
+  <string name="contributions_subtitle_zero">Inda nun hai xubes</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">1 carga</item>
     <item quantity="other">%d cargues</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
+  <plurals name="starting_multiple_uploads">
     <item quantity="one">Principiando 1 carga</item>
     <item quantity="other">Principiando %d cargues</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
+  <plurals name="multiple_uploads_title">
     <item quantity="one">1 carga</item>
     <item quantity="other">%d cargues</item>
   </plurals>
@@ -74,7 +78,7 @@
   <string name="about_license">Software de códigu abiertu lliberáu baxo la &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Llicencia Apache v2&lt;/a&gt;. Wikimedia Commons ya\'l so logotipu son marques rexistraes de la Fundación Wikimedia y utilícense col so permisu. Nun tamos acreditaos pola Fundación Wikimedia nin tamos afiliaos con ella.</string>
   <string name="about_improve">El &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;códigu fonte&lt;/a&gt; ya\'l &lt;a href=\"https://commons-app.github.io/\"&gt;sitiu web&lt;/a&gt; tán en GitHub. Crea una nueva &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;incidencia en GitHub&lt;/a&gt; pa informar de problemes y suxerencies.</string>
   <string name="about_privacy_policy">Wikimedia:Commons-android-strings-about privacy policy/ast</string>
-  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;CRÉDITOS&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Créditos&lt;/a&gt;</string>
   <string name="title_activity_about">Tocante a</string>
   <string name="menu_feedback">Unviar comentarios (per corréu)</string>
   <string name="no_email_client">Nun s\'instaló nengún veceru de corréu</string>
@@ -126,7 +130,7 @@
   <string name="welcome_final_text">¿Cree que yá sabe cómo va?</string>
   <string name="welcome_final_button_text">¡Si!</string>
   <string name="detail_panel_cats_label">Categoríes</string>
-  <string name="detail_panel_cats_loading" fuzzy="true">Cargando…</string>
+  <string name="detail_panel_cats_loading">Cargando…</string>
   <string name="detail_panel_cats_none">Nenguna seleicionada</string>
   <string name="detail_description_empty">Ensin descripción</string>
   <string name="detail_license_empty">Llicencia desconocida</string>
@@ -135,6 +139,7 @@
   <string name="location_permission_rationale">Permisu opcional: llograr l\'allugamientu actual pa suxerir categoríes</string>
   <string name="ok">Aceutar</string>
   <string name="title_activity_nearby">Llugares cercanos</string>
+  <string name="no_nearby">Nun s\'alcontraron llugares cercanos</string>
   <string name="warning">Avisu</string>
   <string name="file_exists">Esti ficheru yá esiste\'n Commons. ¿Confirmes que quies siguir?</string>
   <string name="yes">Sí</string>
@@ -143,8 +148,42 @@
   <string name="media_detail_media_title">Títulu del mediu</string>
   <string name="media_detail_description">Descripción</string>
   <string name="media_detail_description_explanation">Equí va la descripción del mediu. Posiblemente pué ser llargo enforma, y necesitará espardese per delles llinies. Sicasí, esperamos que se vea guapo.</string>
+  <string name="media_detail_uploaded_date">Data d\'unviu</string>
   <string name="become_a_tester_title">Faete probador beta</string>
   <string name="become_a_tester_description">Escueye\'l nuesu canal beta en Google Play y ten accesu tempranu a carauterístiques nueves ya igües de fallos</string>
   <string name="use_wikidata">Usar Wikidata</string>
   <string name="use_wikidata_summary">(Avisu: desactivar esto pue causar un gran consumu de datos nel móvil)</string>
+  <string name="_2fa_code">Códigu I2F</string>
+  <string name="number_of_uploads">Mio llende de xubes recién</string>
+  <string name="maximum_limit">Llende máxima</string>
+  <string name="maximum_limit_alert">Nun pueden vese más de 500</string>
+  <string name="set_limit">Configurar la llende de xubíes recién</string>
+  <string name="login_failed_2fa_not_supported">Anguaño nun hai encontu pa autenticación de dos factores.</string>
+  <string name="logout_verification">¿Confirmes que quies salir?</string>
+  <string name="commons_logo">Logo de Commons</string>
+  <string name="background_image">Imaxe de fondu</string>
+  <string name="mediaimage_failed">Falló la imaxe multimedia</string>
+  <string name="no_image_found">Nun s\'atopó nenguna imaxe</string>
+  <string name="upload_image">Xubir imaxe</string>
+  <string name="welcome_image_mount_zao">Monte Zao</string>
+  <string name="welcome_image_llamas">Llames</string>
+  <string name="welcome_image_rainbow_bridge">Ponte del Arcu la Vieya</string>
+  <string name="welcome_image_tulip">Tulipa</string>
+  <string name="welcome_image_no_selfies">Non selfies</string>
+  <string name="welcome_image_proprietary">Imaxe privativa</string>
+  <string name="welcome_image_welcome_wikipedia">Bienvenida a Wikipedia</string>
+  <string name="welcome_image_welcome_copyright">Bienvenida a Derechos d\'autor</string>
+  <string name="welcome_image_sydney_opera_house">Ópera de Sidney</string>
+  <string name="cancel">Encaboxar</string>
+  <string name="navigation_drawer_open">Abrir</string>
+  <string name="navigation_drawer_close">Zarrar</string>
+  <string name="navigation_item_home">Entamu</string>
+  <string name="navigation_item_upload">Xubir</string>
+  <string name="navigation_item_nearby">Cercanu</string>
+  <string name="navigation_item_about">Tocante a</string>
+  <string name="navigation_item_settings">Configuración</string>
+  <string name="navigation_item_feedback">La to opinión</string>
+  <string name="navigation_item_logout">Salir</string>
+  <string name="nearby_info_menu_commons_article">Artículu en Commons</string>
+  <string name="nearby_info_menu_wikidata_article">Artículu en WikiData</string>
 </resources>

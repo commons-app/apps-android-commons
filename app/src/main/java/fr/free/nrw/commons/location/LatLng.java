@@ -2,8 +2,9 @@ package fr.free.nrw.commons.location;
 
 public class LatLng {
 
-    public final double latitude;
-    public final double longitude;
+    private final double latitude;
+    private final double longitude;
+    private final float accuracy;
 
     /** Accepts latitude and longitude.
      * North and South values are cut off at 90°
@@ -11,13 +12,14 @@ public class LatLng {
      * @param latitude double value
      * @param longitude double value
      */
-    public LatLng(double latitude, double longitude) {
+    public LatLng(double latitude, double longitude, float accuracy) {
         if(-180.0D <= longitude && longitude < 180.0D) {
             this.longitude = longitude;
         } else {
             this.longitude = ((longitude - 180.0D) % 360.0D + 360.0D) % 360.0D - 180.0D;
         }
         this.latitude = Math.max(-90.0D, Math.min(90.0D, latitude));
+        this.accuracy = accuracy;
     }
 
     public int hashCode() {
@@ -92,5 +94,32 @@ public class LatLng {
     public String getPrettyCoordinateString() {
         return formatCoordinate(this.latitude) + " " + this.getNorthSouth() + ", "
                + formatCoordinate(this.longitude) + " " + this.getEastWest();
+    }
+
+    /**
+     * Return the location accuracy in meter.
+     *
+     * @return float
+     */
+    public float getAccuracy() {
+        return accuracy;
+    }
+
+    /**
+     * Return the longitude in degrees.
+     *
+     * @return double
+     */
+    public double getLongitude() {
+        return longitude;
+    }
+
+    /**
+     * Return the latitude in degrees.
+     *
+     * @return double
+     */
+    public double getLatitude() {
+        return latitude;
     }
 }

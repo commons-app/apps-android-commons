@@ -53,17 +53,18 @@
   <string name="refresh_button">Agiorné</string>
   <string name="gps_disabled">Ël GPS a l\'é disabilità su sò angign. Veul-lo ativelo?</string>
   <string name="enable_gps">Ativé ël GPS</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">Ancor gnun cariament</item>
-    <item quantity="one">1 cariament</item>
+  <string name="contributions_subtitle_zero">Ancor gnun cariament</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%d cariament</item>
     <item quantity="other">%d cariament</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">1 cariament ancaminà</item>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">%d cariament ancaminà</item>
     <item quantity="other">%d cariament ancaminà</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">1 cariament</item>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%d cariament</item>
     <item quantity="other">%d cariament</item>
   </plurals>
   <string name="categories_not_found">Gnun-e categorìe rëspondente a %1$s trovà</string>
@@ -77,7 +78,7 @@
   <string name="about_license">Ij programa Open Source a son publicà sota la &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;licensa Apache v2&lt;/a&gt;. Wikimedia Commons e sò sìmbol a son dle marche argistrà dla Fondassion Wikimedia e a son dovrà con ël përmess ëd la Fondassion Wikimedia. Nojàutri i soma nen aprovà da o afilià a la Fondassion Wikimedia.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sorgiss&lt;/a&gt; e &lt;a href=\"https://commons-app.github.io/\"&gt;sit an sl\'aragnà&lt;/a&gt; su GitHub. Creé na neuva &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;signalassion GitHub&lt;/a&gt; për signalé dij givo e dij sugeriment.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Régole ëd confidensialità&lt;/a&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;RINGRASSIAMENT&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Ringrassiament&lt;/a&gt;</string>
   <string name="title_activity_about">A propòsit</string>
   <string name="menu_feedback">Mandé dij coment (për pòsta eletrònica)</string>
   <string name="no_email_client">Gnun clien ëd pòsta eletrònica anstalà</string>
@@ -138,6 +139,7 @@
   <string name="location_permission_rationale">Autorisassion facoltativa: Oten-e la posission atual për dij sugeriment ëd categorìa</string>
   <string name="ok">Va bin</string>
   <string name="title_activity_nearby">Pòst davzin</string>
+  <string name="no_nearby">Trovà gnente ant ij parage</string>
   <string name="warning">Avertensa</string>
   <string name="file_exists">S\'archivi a esist già su Comun. É-lo sigur ëd vorèj andé anans?</string>
   <string name="yes">Bò</string>
@@ -146,8 +148,33 @@
   <string name="media_detail_media_title">Tìtol dël mojen</string>
   <string name="media_detail_description">Descrission</string>
   <string name="media_detail_description_explanation">La descrission dël mojen a va ambelessì. Sòn a podrìa esse potensialman longh, e a dovrà esse spantià su vàire linie. I speroma comsëssìa ch\'a ven-a grassios.</string>
+  <string name="media_detail_uploaded_date">Dàita ëd cariament</string>
   <string name="become_a_tester_title">Dventé në sperimentador Beta</string>
   <string name="become_a_tester_description">Anscriv-se a nòstr canal beta su Google Play a oten-e n\'acess antissipà a le neuve fonsionalità e coression ëd givo</string>
   <string name="use_wikidata">Dovré Wikidàit</string>
   <string name="use_wikidata_summary">(Atension: disabilité sòn a podrìa provoché un gròss consum ëd dàit con ël sacociàbil)</string>
+  <string name="_2fa_code">Còdes 2FA</string>
+  <string name="number_of_uploads">Mè lìmit ëd cariament recent</string>
+  <string name="maximum_limit">Lìmit màssim</string>
+  <string name="maximum_limit_alert">Impossìbil ësmon-e pi che 500</string>
+  <string name="set_limit">Fissé la limitassion ëd cariament recent</string>
+  <string name="login_failed_2fa_not_supported">L\'autentificassion a doi fator për ël moment a l\'é nen sostnùa.</string>
+  <string name="logout_verification">Veul-lo për da bon seurte dal sistema?</string>
+  <string name="commons_logo">Marca ëd Comun</string>
+  <string name="background_image">Plancia dë sfond</string>
+  <string name="mediaimage_failed">Faliment ëd la plancia dël mojen</string>
+  <string name="no_image_found">Gnun-a plancia trovà</string>
+  <string name="upload_image">Carié na plancia</string>
+  <string name="welcome_image_mount_zao">Mont Zao</string>
+  <string name="welcome_image_llamas">Lama</string>
+  <string name="welcome_image_rainbow_bridge">Pont Arcansiel</string>
+  <string name="welcome_image_tulip">Tulipan</string>
+  <string name="welcome_image_no_selfies">Gnun autoscat</string>
+  <string name="welcome_image_proprietary">Plancia privà</string>
+  <string name="welcome_image_welcome_wikipedia">Bin-ëvnù ëd Wikipedia</string>
+  <string name="welcome_image_welcome_copyright">Drit d\'autor ëd bin-ëvnù</string>
+  <string name="welcome_image_sydney_opera_house">Ca dl\'òpera ëd Sidney</string>
+  <string name="cancel">Anulé</string>
+  <string name="navigation_drawer_open">Duverté</string>
+  <string name="navigation_drawer_close">Saré</string>
 </resources>

@@ -83,7 +83,7 @@
   <string name="menu_feedback">傳送回饋 （通過電子郵件）</string>
   <string name="no_email_client">未安裝電子郵件客戶端</string>
   <string name="provider_categories">最近使用過的分類</string>
-  <string name="waiting_first_sync" fuzzy="true">等待首次同步…</string>
+  <string name="waiting_first_sync">等待首次同步…</string>
   <string name="no_uploads_yet">您尚未上傳任何照片。</string>
   <string name="menu_retry_upload">重試</string>
   <string name="menu_cancel_upload">取消</string>
@@ -130,7 +130,7 @@
   <string name="welcome_final_text">您明白了嗎？</string>
   <string name="welcome_final_button_text">是！</string>
   <string name="detail_panel_cats_label">分類</string>
-  <string name="detail_panel_cats_loading" fuzzy="true">載入中…</string>
+  <string name="detail_panel_cats_loading">載入中…</string>
   <string name="detail_panel_cats_none">未選擇</string>
   <string name="detail_description_empty">無說明</string>
   <string name="detail_license_empty">未知許可</string>

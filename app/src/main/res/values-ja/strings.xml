@@ -7,7 +7,7 @@
   <string name="login">ログイン</string>
   <string name="signup">利用者登録</string>
   <string name="logging_in_title">ログイン中</string>
-  <string name="logging_in_message" fuzzy="true">お待ちください…</string>
+  <string name="logging_in_message">お待ちください…</string>
   <string name="login_success">ログインしました!</string>
   <string name="login_failed">ログインに失敗しました!</string>
   <string name="upload_failed">ファイルが見つかりません。別のファイルでお試しください。</string>

@@ -19,9 +19,17 @@ their contribution to the product.
 * Veyndan Stuart
 * Vivek Maskara
 * Neslihan Turan
+* Wikimedia Czech Republic (host for the Prague pre-hackathon 2017)
+* Dinu Kumarasiri
+* Dmitry Brant
+* Adam Shorland
+* John Lubbock
 
 3rd party open source libraries used:
 * Butterknife
 * GSON
 * Timber
 * MapBox
+
+3rd party open source apps from which significant code has been reused:
+* Android Wikipedia app https://github.com/wikimedia/apps-android-wikipedia

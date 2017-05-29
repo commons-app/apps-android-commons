@@ -7,7 +7,7 @@
   <string name="login">Aloggen</string>
   <string name="signup">Schreift Iech an</string>
   <string name="logging_in_title">Aloggen</string>
-  <string name="logging_in_message" fuzzy="true">Waart w.e.g. …</string>
+  <string name="logging_in_message">Waart w.e.g. …</string>
   <string name="login_success">Umeldung huet geklappt!</string>
   <string name="login_failed">D\'Aloggen huet net funktionéiert</string>
   <string name="upload_failed">Fichier net fonnt. probéiert w.e.g. en anere Fichier.</string>
@@ -50,6 +50,7 @@
   <string name="categories_search_text_hint">Kategorie sichen</string>
   <string name="menu_save_categories">Späicheren</string>
   <string name="refresh_button">Aktualiséieren</string>
+  <string name="gps_disabled">GPS ass op Ärem Apparat ausgeschalt. Wëllt Dir en aktivéieren?</string>
   <string name="enable_gps">GPS aktivéieren</string>
   <string name="contributions_subtitle_zero">Nach keng eropgeluede Fichieren</string>
   <plurals name="contributions_subtitle">
@@ -154,6 +155,20 @@
   <string name="_2fa_code">2FA-Code</string>
   <string name="maximum_limit">Maximal Limite</string>
   <string name="maximum_limit_alert">Et kënnen der net méi wéi 500 gewise ginn</string>
+  <string name="logout_verification">Wëllt dir Iech wierklech ausloggen?</string>
+  <string name="commons_logo">Commons-Logo</string>
+  <string name="background_image">Hannergrondbild</string>
+  <string name="no_image_found">Kee Bild fonnt</string>
+  <string name="upload_image">Bild eroplueden</string>
+  <string name="welcome_image_mount_zao">Bierg Zao</string>
+  <string name="welcome_image_llamas">Lamaen</string>
+  <string name="welcome_image_rainbow_bridge">Rainbow Bridge</string>
+  <string name="welcome_image_tulip">Tulp</string>
+  <string name="welcome_image_no_selfies">Keng Selfien</string>
+  <string name="welcome_image_proprietary">Geschützt Bild</string>
+  <string name="welcome_image_welcome_wikipedia">Wëllkomm Wikipedia</string>
+  <string name="welcome_image_welcome_copyright">Wëllkomm Copyright</string>
+  <string name="welcome_image_sydney_opera_house">Oper vu Sydney</string>
   <string name="cancel">Ofbriechen</string>
   <string name="navigation_drawer_open">Opmaachen</string>
   <string name="navigation_drawer_close">Zoumaachen</string>
@@ -164,4 +179,6 @@
   <string name="navigation_item_settings">Astellungen</string>
   <string name="navigation_item_feedback">Feedback</string>
   <string name="navigation_item_logout">Ausloggen</string>
+  <string name="nearby_info_menu_commons_article">Commons-Artikel</string>
+  <string name="nearby_info_menu_wikidata_article">Wikidata-Artikel</string>
 </resources>

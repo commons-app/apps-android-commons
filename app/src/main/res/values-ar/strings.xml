@@ -10,6 +10,7 @@
   <string name="logging_in_message">الرجاء الانتظار…</string>
   <string name="login_success">تم الدخول بشكل صحيح</string>
   <string name="login_failed">فشل تسجيل الدخول</string>
+  <string name="upload_failed">الملف غير موجود. فضلا اختر ملفا آخر.</string>
   <string name="authentication_failed">فشل الاستيقان!</string>
   <string name="uploading_started">بدأ الرفع!</string>
   <string name="upload_completed_notification_title">رُفع %1$s!</string>
@@ -20,7 +21,7 @@
   <string name="upload_failed_notification_title">فشل رفع %1$s</string>
   <string name="upload_failed_notification_subtitle">انقر لتشاهد</string>
   <string name="uploads_pending_notification_indicator" fuzzy="true">متبقى %d</string>
-  <string name="title_activity_contributions" fuzzy="true">مرفوعاتي</string>
+  <string name="title_activity_contributions">مرفوعاتي الأخيرة</string>
   <string name="contribution_state_queued">في قائمة الانتظار</string>
   <string name="contribution_state_failed">فشل</string>
   <string name="contribution_state_in_progress">انتهاء %1$d%%</string>
@@ -76,7 +77,7 @@
   <string name="welcome_final_text">هل تظن أنك فهمت؟</string>
   <string name="welcome_final_button_text">نعم!</string>
   <string name="detail_panel_cats_label">تصنيفات</string>
-  <string name="detail_panel_cats_loading" fuzzy="true">جارٍ التحميل…</string>
+  <string name="detail_panel_cats_loading">جارٍ التحميل…</string>
   <string name="detail_panel_cats_none">لا شيء محدد</string>
   <string name="detail_description_empty">لا وصف</string>
   <string name="detail_license_empty">ترخيص غير معلوم</string>

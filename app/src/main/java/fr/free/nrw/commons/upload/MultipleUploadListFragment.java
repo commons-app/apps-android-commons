@@ -42,6 +42,7 @@ public class MultipleUploadListFragment extends Fragment {
     private GridView photosGrid;
     private PhotoDisplayAdapter photosAdapter;
     private EditText baseTitle;
+    private TitleTextWatcher textWatcher = new TitleTextWatcher();
 
     private Point photoSize;
     private MediaDetailPagerFragment.MediaDetailProvider detailProvider;
@@ -96,7 +97,6 @@ public class MultipleUploadListFragment extends Fragment {
             } else {
                 holder = (UploadHolderView)view.getTag();
             }
-
 
             Contribution up = (Contribution)this.getItem(i);
 
@@ -170,35 +170,14 @@ public class MultipleUploadListFragment extends Fragment {
         photoSize = calculatePicDimension(detailProvider.getTotalMediaCount());
         photosGrid.setColumnWidth(photoSize.x);
 
-        baseTitle.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i1, int i2, int i3) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i1, int i2, int i3) {
-                for(int i = 0; i < detailProvider.getTotalMediaCount(); i++) {
-                    Contribution up = (Contribution) detailProvider.getMediaAtPosition(i);
-                    Boolean isDirty = (Boolean)up.getTag("isDirty");
-                    if(isDirty == null || !isDirty) {
-                        if(!TextUtils.isEmpty(charSequence)) {
-                            up.setFilename(charSequence.toString() + " - " + ((Integer)up.getTag("sequence") + 1));
-                        } else {
-                            up.setFilename("");
-                        }
-                    }
-                }
-                detailProvider.notifyDatasetChanged();
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-
+        baseTitle.addTextChangedListener(textWatcher);
         return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        baseTitle.removeTextChangedListener(textWatcher);
+        super.onDestroyView();
     }
 
     @Override
@@ -227,5 +206,30 @@ public class MultipleUploadListFragment extends Fragment {
 
         setHasOptionsMenu(true);
     }
-    
+
+    private class TitleTextWatcher implements TextWatcher {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i1, int i2, int i3) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i1, int i2, int i3) {
+            for(int i = 0; i < detailProvider.getTotalMediaCount(); i++) {
+                Contribution up = (Contribution) detailProvider.getMediaAtPosition(i);
+                Boolean isDirty = (Boolean)up.getTag("isDirty");
+                if(isDirty == null || !isDirty) {
+                    if(!TextUtils.isEmpty(charSequence)) {
+                        up.setFilename(charSequence.toString() + " - " + ((Integer)up.getTag("sequence") + 1));
+                    } else {
+                        up.setFilename("");
+                    }
+                }
+            }
+            detailProvider.notifyDatasetChanged();
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+        }
+    }
 }

@@ -130,7 +130,7 @@
   <string name="welcome_final_text">Myslíte, že rozumíte?</string>
   <string name="welcome_final_button_text">Ano!</string>
   <string name="detail_panel_cats_label">Kategorie</string>
-  <string name="detail_panel_cats_loading" fuzzy="true">Načítá se…</string>
+  <string name="detail_panel_cats_loading">Načítá se…</string>
   <string name="detail_panel_cats_none">Nevybrány</string>
   <string name="detail_description_empty">Bez popisu</string>
   <string name="detail_license_empty">Neznámá licence</string>
@@ -160,6 +160,19 @@
   <string name="set_limit">Počet nahraných souborů, které se zobrazí</string>
   <string name="login_failed_2fa_not_supported">Tato aplikace zatím nepodporuje tzv. dvoufázové ověření.</string>
   <string name="logout_verification">Opravdu se chcete odhlásit?</string>
+  <string name="commons_logo">Logo Wikimedia Commons</string>
+  <string name="background_image">Obrázek na pozadí</string>
+  <string name="no_image_found">Nebyl nalezen žádný obrázek</string>
+  <string name="upload_image">Nahrát obrázek</string>
+  <string name="welcome_image_mount_zao">Hora Zao</string>
+  <string name="welcome_image_llamas">Lamy</string>
+  <string name="welcome_image_rainbow_bridge">Duhový most</string>
+  <string name="welcome_image_tulip">Tulipán</string>
+  <string name="welcome_image_no_selfies">Žádná selfíčka</string>
+  <string name="welcome_image_proprietary">Autorskoprávně chráněný obrázek</string>
+  <string name="welcome_image_welcome_wikipedia">Vítejte na Wikipedii</string>
+  <string name="welcome_image_welcome_copyright">Úvod k autorským právům</string>
+  <string name="welcome_image_sydney_opera_house">Opera v Sydney</string>
   <string name="cancel">Zrušit</string>
   <string name="navigation_drawer_open">Otevřít</string>
   <string name="navigation_drawer_close">Zavřít</string>
@@ -170,4 +183,6 @@
   <string name="navigation_item_settings">Nastavení</string>
   <string name="navigation_item_feedback">Zpětná vazba</string>
   <string name="navigation_item_logout">Odhlášení</string>
+  <string name="nearby_info_menu_commons_article">Článek na Commons</string>
+  <string name="nearby_info_menu_wikidata_article">Článek na Wikidatech</string>
 </resources>
