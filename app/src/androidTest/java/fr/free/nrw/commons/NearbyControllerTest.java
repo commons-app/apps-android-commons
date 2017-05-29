@@ -29,7 +29,7 @@ public class NearbyControllerTest {
     }
 
     @Test public void testNullAttractions() {
-        LatLng location = new LatLng(0, 0);
+        LatLng location = new LatLng(0, 0, 0);
 
         List<NearbyBaseMarker> options =
                 NearbyController.loadAttractionsFromLocationToBaseMarkerOptions(
@@ -42,7 +42,7 @@ public class NearbyControllerTest {
     }
 
     @Test public void testEmptyList() {
-        LatLng location = new LatLng(0, 0);
+        LatLng location = new LatLng(0, 0, 0);
         List<Place> emptyList = new ArrayList<>();
 
         List<NearbyBaseMarker> options =

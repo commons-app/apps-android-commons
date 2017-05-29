@@ -85,8 +85,8 @@ public class NearbyListFragment extends ListFragment  {
         Place place = (Place) listview.getItemAtPosition(position);
         LatLng placeLatLng = place.location;
 
-        double latitude = placeLatLng.latitude;
-        double longitude = placeLatLng.longitude;
+        double latitude = placeLatLng.getLatitude();
+        double longitude = placeLatLng.getLongitude();
 
         Timber.d("Item at position %d has coords: Lat: %f Long: %f", position, latitude, longitude);
 

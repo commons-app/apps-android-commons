@@ -74,8 +74,8 @@ public class NearbyPlaces {
 
         String query = wikidataQuery
                 .replace("${RAD}", String.format(Locale.ROOT, "%.2f", radius))
-                .replace("${LAT}", String.format(Locale.ROOT, "%.4f", cur.latitude))
-                .replace("${LONG}", String.format(Locale.ROOT, "%.4f", cur.longitude))
+                .replace("${LAT}", String.format(Locale.ROOT, "%.4f", cur.getLatitude()))
+                .replace("${LONG}", String.format(Locale.ROOT, "%.4f", cur.getLongitude()))
                 .replace("${LANG}", lang);
 
         Timber.v("# Wikidata query: \n" + query);
@@ -125,7 +125,7 @@ public class NearbyPlaces {
                     type, // list
                     type, // details
                     Uri.parse(icon),
-                    new LatLng(latitude, longitude),
+                    new LatLng(latitude, longitude, 0),
                     new Sitelinks.Builder()
                             .setWikipediaLink(wikipediaSitelink)
                             .setCommonsLink(commonsSitelink)
@@ -187,7 +187,7 @@ public class NearbyPlaces {
                             type, // list
                             type, // details
                             null,
-                            new LatLng(latitude, longitude),
+                            new LatLng(latitude, longitude, 0),
                             new Sitelinks.Builder().build()
                     ));
                 }
