@@ -23,6 +23,7 @@ import fr.free.nrw.commons.AboutActivity;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.nearby.NearbyActivity;
@@ -50,6 +51,9 @@ public class NavigationBaseFragment extends Fragment {
 
     @BindView(R.id.logout_item)
     LinearLayout logoutItem;
+
+    @BindView(R.id.introduction_item)
+    LinearLayout introductionItem;
 
     private DrawerLayout drawerLayout;
     private RelativeLayout drawerPane;
@@ -104,6 +108,12 @@ public class NavigationBaseFragment extends Fragment {
     protected void onNearbyItemClicked() {
         closeDrawer();
         NearbyActivity.startYourself(getActivity());
+    }
+
+    @OnClick(R.id.introduction_item)
+    protected void onInfoItemClicked() {
+        closeDrawer();
+        WelcomeActivity.startYourself(getActivity());
     }
 
     @OnClick(R.id.feedback_item)

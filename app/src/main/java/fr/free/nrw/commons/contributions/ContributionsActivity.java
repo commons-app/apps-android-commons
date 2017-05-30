@@ -341,7 +341,7 @@ public  class       ContributionsActivity
     }
 
     public static void startYourself(Context context) {
-        Intent settingsIntent = new Intent(context, ContributionsActivity.class);
-        context.startActivity(settingsIntent);
+        Intent contributionsIntent = new Intent(context, ContributionsActivity.class);
+        context.startActivity(contributionsIntent);
     }
 }
