@@ -35,7 +35,7 @@ import fr.free.nrw.commons.utils.UriDeserializer;
 
 public class NearbyMapFragment extends android.support.v4.app.Fragment {
     private MapView mapView;
-    private List<NearbyBaseMarker> baseMarkerOptionses;
+    private List<NearbyBaseMarker> baseMarkerOptions;
     private fr.free.nrw.commons.location.LatLng curLatLng;
 
     public NearbyMapFragment() {
@@ -56,7 +56,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
             List<Place> placeList = gson.fromJson(gsonPlaceList, listType);
             Type curLatLngType = new TypeToken<fr.free.nrw.commons.location.LatLng>() {}.getType();
             curLatLng = gson.fromJson(gsonLatLng, curLatLngType);
-            baseMarkerOptionses = NearbyController
+            baseMarkerOptions = NearbyController
                     .loadAttractionsFromLocationToBaseMarkerOptions(curLatLng,
                             placeList,
                             getActivity());
@@ -93,7 +93,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(MapboxMap mapboxMap) {
-                mapboxMap.addMarkers(baseMarkerOptionses);
+                mapboxMap.addMarkers(baseMarkerOptions);
 
                 mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
                     @Override
