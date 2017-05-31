@@ -43,6 +43,7 @@ public class NearbyActivity extends NavigationBaseActivity {
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
     private boolean isMapViewActive = false;
+    private static final int LOCATION_REQUEST = 1;
 
     private LocationServiceManager locationManager;
     private LatLng curLatLang;
@@ -100,7 +101,7 @@ public class NearbyActivity extends NavigationBaseActivity {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 //Request permission and display notification that Nearby places cannot be shown without permission
                 ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQUEST);
             }
         }
     }
