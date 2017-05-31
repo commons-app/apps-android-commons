@@ -58,6 +58,7 @@ public class NearbyActivity extends NavigationBaseActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
+        checkLocationPermission();
         bundle = new Bundle();
         locationManager = new LocationServiceManager(this);
         locationManager.registerLocationManager();
