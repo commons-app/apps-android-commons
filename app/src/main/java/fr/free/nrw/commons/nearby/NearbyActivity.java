@@ -189,7 +189,9 @@ public class NearbyActivity extends NavigationBaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        nearbyAsyncTask.cancel(true);
+        if (nearbyAsyncTask != null) {
+            nearbyAsyncTask.cancel(true);
+        }
     }
 
     protected void refreshView() {
