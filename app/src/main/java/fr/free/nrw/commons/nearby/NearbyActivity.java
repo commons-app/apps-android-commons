@@ -109,7 +109,9 @@ public class NearbyActivity extends NavigationBaseActivity {
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
             case LOCATION_REQUEST: {
-                if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    refreshView();
+                } else {
                     //If permission not granted, display notification that Nearby Places cannot be displayed
                     int duration = Toast.LENGTH_LONG;
                     Toast toast = Toast.makeText(this, "Nearby places cannot be found without location permissions", duration);
