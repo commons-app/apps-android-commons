@@ -99,12 +99,26 @@ public class NearbyActivity extends NavigationBaseActivity {
     private void checkLocationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                //Request permission and display notification that Nearby places cannot be shown without permission
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQUEST);
             }
         }
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case LOCATION_REQUEST: {
+                if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    //If permission not granted, display notification that Nearby Places cannot be displayed
+                    int duration = Toast.LENGTH_LONG;
+                    Toast toast = Toast.makeText(this, "Nearby places cannot be found without location permissions", duration);
+                    toast.show();
+                }
+            }
+        }
+    }
+
 
     protected void checkGps() {
         LocationManager manager = (LocationManager) getSystemService(LOCATION_SERVICE);
