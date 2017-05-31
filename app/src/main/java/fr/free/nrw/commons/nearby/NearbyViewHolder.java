@@ -27,7 +27,7 @@ public class NearbyViewHolder implements ViewHolder<Place> {
         tvName.setText(place.name);
         String description = place.description;
         if ( description == null || description.isEmpty() || description.equals("?")) {
-            description = "No Description Found";
+            description = context.getString(R.string.no_description_found);
         }
         tvDesc.setText(description);
         distance.setText(place.distance);
