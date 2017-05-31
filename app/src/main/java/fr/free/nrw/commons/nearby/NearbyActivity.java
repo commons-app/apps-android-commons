@@ -61,11 +61,6 @@ public class NearbyActivity extends NavigationBaseActivity {
 
         checkLocationPermission();
         bundle = new Bundle();
-        locationManager = new LocationServiceManager(this);
-        locationManager.registerLocationManager();
-        curLatLang = locationManager.getLatestLocation();
-        nearbyAsyncTask = new NearbyAsyncTask(this);
-        nearbyAsyncTask.execute();
         initDrawer();
     }
 
@@ -96,11 +91,23 @@ public class NearbyActivity extends NavigationBaseActivity {
         }
     }
 
+    private void startLookingForNearby() {
+        locationManager = new LocationServiceManager(this);
+        locationManager.registerLocationManager();
+        curLatLang = locationManager.getLatestLocation();
+        nearbyAsyncTask = new NearbyAsyncTask(this);
+        nearbyAsyncTask.execute();
+    }
+
     private void checkLocationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                startLookingForNearby();
+            } else {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQUEST);
             }
+        } else {
+            startLookingForNearby();
         }
     }
 
@@ -109,11 +116,7 @@ public class NearbyActivity extends NavigationBaseActivity {
         switch (requestCode) {
             case LOCATION_REQUEST: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    locationManager = new LocationServiceManager(this);
-                    locationManager.registerLocationManager();
-                    curLatLang = locationManager.getLatestLocation();
-                    nearbyAsyncTask = new NearbyAsyncTask(this);
-                    nearbyAsyncTask.execute();
+                    startLookingForNearby();
                 } else {
                     //If permission not granted, display notification that Nearby Places cannot be displayed
                     int duration = Toast.LENGTH_LONG;
