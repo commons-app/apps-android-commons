@@ -194,6 +194,7 @@ Tap this message (or hit back) to skip this step.</string>
   <string name="navigation_item_logout">Logout</string>
   <string name="navigation_item_info">Tutorial</string>
 
+  <string name="no_location_permission">Nearby places cannot be found without location permissions</string>
   <string name="no_description_found">no description found</string>
   <string name="nearby_info_menu_commons_article">Commons Article</string>
   <string name="nearby_info_menu_wikidata_article">WikiData Article</string>

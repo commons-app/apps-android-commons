@@ -120,13 +120,12 @@ public class NearbyActivity extends NavigationBaseActivity {
                 } else {
                     //If permission not granted, display notification that Nearby Places cannot be displayed
                     int duration = Toast.LENGTH_LONG;
-                    Toast toast = Toast.makeText(this, "Nearby places cannot be found without location permissions", duration);
+                    Toast toast = Toast.makeText(this, R.string.no_location_permission, duration);
                     toast.show();
                 }
             }
         }
     }
-
 
     protected void checkGps() {
         LocationManager manager = (LocationManager) getSystemService(LOCATION_SERVICE);
