@@ -198,4 +198,7 @@ Tap this message (or hit back) to skip this step.</string>
   <string name="no_description_found">no description found</string>
   <string name="nearby_info_menu_commons_article">Commons Article</string>
   <string name="nearby_info_menu_wikidata_article">WikiData Article</string>
+
+  <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
