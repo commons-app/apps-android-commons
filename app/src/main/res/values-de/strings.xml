@@ -184,6 +184,8 @@
   <string name="navigation_item_settings">Einstellungen</string>
   <string name="navigation_item_feedback">Rückmeldungen</string>
   <string name="navigation_item_logout">Abmelden</string>
+  <string name="navigation_item_info">Anleitung</string>
+  <string name="no_description_found">Keine Beschreibung gefunden</string>
   <string name="nearby_info_menu_commons_article">Commons-Artikel</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata-Artikel</string>
 </resources>

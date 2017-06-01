@@ -184,6 +184,8 @@
   <string name="navigation_item_settings">Configuración</string>
   <string name="navigation_item_feedback">Comentarios</string>
   <string name="navigation_item_logout">Salir</string>
+  <string name="navigation_item_info">Tutorial</string>
+  <string name="no_description_found">no se encontró descripción</string>
   <string name="nearby_info_menu_commons_article">Artículo en Commons</string>
   <string name="nearby_info_menu_wikidata_article">Artículo en WikiData</string>
 </resources>

@@ -175,6 +175,7 @@
   <string name="navigation_item_settings">설정</string>
   <string name="navigation_item_feedback">피드백</string>
   <string name="navigation_item_logout">로그아웃</string>
+  <string name="navigation_item_info" fuzzy="true">소개</string>
   <string name="nearby_info_menu_commons_article">공용 문서</string>
   <string name="nearby_info_menu_wikidata_article">위키데이터 문서</string>
 </resources>

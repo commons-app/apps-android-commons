@@ -160,6 +160,20 @@
   <string name="set_limit">Postavi ograničenje za nedavna postavljanja</string>
   <string name="login_failed_2fa_not_supported">Potvrda u 2 koraka trenutno nije podržana.</string>
   <string name="logout_verification">Želite li se zaista odjaviti?</string>
+  <string name="commons_logo">Logo Commonsa</string>
+  <string name="background_image">Pozadinska slika</string>
+  <string name="mediaimage_failed">Slika nije uspjela</string>
+  <string name="no_image_found">Nije pronađena slika</string>
+  <string name="upload_image">Postavi sliku</string>
+  <string name="welcome_image_mount_zao">Zao</string>
+  <string name="welcome_image_llamas">Ljame</string>
+  <string name="welcome_image_rainbow_bridge">Dugin most</string>
+  <string name="welcome_image_tulip">Tulipan</string>
+  <string name="welcome_image_no_selfies">Bez selfija</string>
+  <string name="welcome_image_proprietary">Vlasnička slika</string>
+  <string name="welcome_image_welcome_wikipedia">Dobro došli (Wikipedia)</string>
+  <string name="welcome_image_welcome_copyright">Dobro došli (autorska prava)</string>
+  <string name="welcome_image_sydney_opera_house">Sidnejska opera</string>
   <string name="cancel">Otkaži</string>
   <string name="navigation_drawer_open">Otvori</string>
   <string name="navigation_drawer_close">Zatvori</string>
@@ -170,4 +184,7 @@
   <string name="navigation_item_settings">Postavke</string>
   <string name="navigation_item_feedback">Povratne informacije</string>
   <string name="navigation_item_logout">Odjavi me</string>
+  <string name="navigation_item_info" fuzzy="true">Uvod</string>
+  <string name="nearby_info_menu_commons_article">Članak na Commonsu</string>
+  <string name="nearby_info_menu_wikidata_article">Članak na Wikipodacima</string>
 </resources>

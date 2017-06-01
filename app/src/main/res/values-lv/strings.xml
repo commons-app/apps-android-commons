@@ -37,6 +37,7 @@
   <string name="categories_search_text_hint">Meklēt kategorijas</string>
   <string name="menu_save_categories">Saglabāt</string>
   <string name="refresh_button">Atjaunināt</string>
+  <string name="enable_gps">Iespējot GPS</string>
   <string name="categories_activity_title">Kategorijas</string>
   <string name="preference_tracking">Lietošanas atskaites</string>
   <string name="title_activity_settings">Iestatījumi</string>
@@ -57,7 +58,7 @@
   <string name="welcome_final_text">Jums šķiet, ka sapratāt?</string>
   <string name="welcome_final_button_text">Jā!</string>
   <string name="detail_panel_cats_label">Kategorijas</string>
-  <string name="detail_panel_cats_loading" fuzzy="true">Ielādē…</string>
+  <string name="detail_panel_cats_loading">Ielādē…</string>
   <string name="detail_description_empty">Nav apraksta</string>
   <string name="detail_license_empty">Nezināma licence</string>
   <string name="menu_refresh">Atjaunināt</string>
@@ -65,4 +66,18 @@
   <string name="warning">Brīdinājums</string>
   <string name="yes">Jā</string>
   <string name="no">Nē</string>
+  <string name="welcome_image_llamas">Lama</string>
+  <string name="welcome_image_tulip">Tulpe</string>
+  <string name="cancel">Atcelt</string>
+  <string name="navigation_drawer_open">Atvērt</string>
+  <string name="navigation_drawer_close">Aizvērt</string>
+  <string name="navigation_item_home">Sākums</string>
+  <string name="navigation_item_upload">Augšupielādēt</string>
+  <string name="navigation_item_nearby">Tuvumā</string>
+  <string name="navigation_item_about">Par</string>
+  <string name="navigation_item_settings">Iestatījumi</string>
+  <string name="navigation_item_feedback">Atsauksmes</string>
+  <string name="navigation_item_logout">Iziet</string>
+  <string name="navigation_item_info" fuzzy="true">Ievads</string>
+  <string name="no_description_found">apraksts nav atrasts</string>
 </resources>
