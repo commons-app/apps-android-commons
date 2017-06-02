@@ -121,16 +121,19 @@ public class NearbyActivity extends NavigationBaseActivity {
                     startLookingForNearby();
                 } else {
                     //If permission not granted, display notification that Nearby Places cannot be displayed
-                    /**
+/**
                     int duration = Toast.LENGTH_LONG;
                     Toast toast = Toast.makeText(this, R.string.no_location_permission, duration);
-                    toast.show();*/
-
+                    toast.show();
+*/
                     //TODO: Open a fragment saying permissions not granted instead
+                    if (nearbyAsyncTask != null) {
+                        nearbyAsyncTask.cancel(true);
+                    }
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                    Fragment fragment = new NoPermissionsFragment();
-                    fragment.setArguments(bundle);
-                    fragmentTransaction.replace(R.id.container, fragment);
+                    Fragment noPermissionsFragment = new NoPermissionsFragment();
+                    fragmentTransaction.replace(R.id.container, noPermissionsFragment);
+                    fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
                 }
             }
