@@ -7,7 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
+import timber.log.Timber;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,7 +26,11 @@ public class NoPermissionsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_no_permissions, container, false);
+        Timber.d("NoPermissionsFragment created");
+        View view = inflater.inflate(R.layout.fragment_no_permissions, container, false);
+        ButterKnife.bind(this, view);
+
+        return view;
     }
 
 }
