@@ -59,6 +59,7 @@ public  class       ContributionsActivity
                     MediaDetailPagerFragment.MediaDetailProvider,
                     FragmentManager.OnBackStackChangedListener,
                     ContributionsListFragment.SourceRefresher,
+                    OnTabFragmentsCreatedCallback,
                     HamburgerMenuContainer {
 
     private Cursor allContributions;
@@ -158,7 +159,7 @@ public  class       ContributionsActivity
             mediaDetails = (MediaDetailPagerFragment)getSupportFragmentManager()
                     .findFragmentById(R.id.containerView);
         }
-        requestAuthToken();
+        //requestAuthToken();
         initDrawer();
         setTitle(getString(R.string.title_activity_contributions));
         initFragment();
@@ -366,21 +367,26 @@ public  class       ContributionsActivity
         Intent contributionsIntent = new Intent(context, ContributionsActivity.class);
         context.startActivity(contributionsIntent);
     }
+
+    @Override
+    public void onTabFragmentsCreated() {
+        requestAuthToken();
+
+    }
+
     public static class TabFragment extends Fragment {
         private TabLayout tabLayout;
         private ViewPager viewPager;
         private static int int_items = 2 ;
-        //private TabChangedCallback tabChangedCallback;
-
 
         @Nullable
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
             setRetainInstance(true);
-            View x =  inflater.inflate(R.layout.tab_layout,null);
-            tabLayout = (TabLayout) x.findViewById(R.id.tabs);
-            viewPager = (ViewPager) x.findViewById(R.id.viewpager);
+            View view =  inflater.inflate(R.layout.tab_layout,null);
+            tabLayout = (TabLayout) view.findViewById(R.id.tabs);
+            viewPager = (ViewPager) view.findViewById(R.id.viewpager);
 
             viewPager.setAdapter(new TabFragment.TabAdapter(getChildFragmentManager()));
 
@@ -391,7 +397,7 @@ public  class       ContributionsActivity
                 }
             });
 
-            return x;
+            return view;
 
         }
 
@@ -418,7 +424,7 @@ public  class       ContributionsActivity
 
             @Override
             public int getCount() {
-                return registeredFragments.size();
+                return int_items;
             }
 
             public Fragment getRegisteredFragment(int position) {
@@ -438,4 +444,8 @@ public  class       ContributionsActivity
             }
         }
     }
+}
+
+interface OnTabFragmentsCreatedCallback{
+    void onTabFragmentsCreated();
 }

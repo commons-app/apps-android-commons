@@ -1,20 +1,14 @@
 package fr.free.nrw.commons.contributions;
 
-import android.Manifest;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -24,7 +18,6 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.nearby.NearbyActivity;
 import timber.log.Timber;
@@ -32,6 +25,8 @@ import timber.log.Timber;
 import static android.app.Activity.RESULT_OK;
 
 public class ContributionsListFragment extends Fragment {
+
+    OnTabFragmentsCreatedCallback callback;
 
     public interface SourceRefresher {
         void refreshSource();
@@ -72,6 +67,13 @@ public class ContributionsListFragment extends Fragment {
         }
 
         return v;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        callback = (OnTabFragmentsCreatedCallback) getActivity();
+        callback.onTabFragmentsCreated();
     }
 
     public ListAdapter getAdapter() {
