@@ -4,10 +4,16 @@
     android:layout_height="match_parent"
     tools:context="fr.free.nrw.commons.nearby.NoPermissionsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:gravity="center"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:text="@string/nearby_needs_permissions"
+        android:textAlignment="center"
+        android:textSize="18sp" />
+
 
 </FrameLayout>
