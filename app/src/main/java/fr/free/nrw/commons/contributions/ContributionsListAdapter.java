@@ -10,7 +10,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.CursorAdapter;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 
 import fr.free.nrw.commons.R;
 
@@ -31,8 +31,8 @@ class ContributionsListAdapter extends CursorAdapter {
         if (convertView!=null) {
             /*We need to recreate views
                 -if it doesnt suppose to be upload button or notification view, but attempts to use existing upload layout
-                -if it supposed to be upload button or notification view, but attempts to use existing image layout
-              set convertView to null so that it will be recreated in super method implementation.
+                -if it supposed to be upload button or notification view, but attempts to use existing image layout.
+              Set convertView to null so that it will be recreated in super method implementation.
              */
             if ((position != 0 && convertView.getId() == R.id.upload_grid)
                     || (position == 0 && convertView.getId() != R.id.upload_grid)
@@ -64,7 +64,7 @@ class ContributionsListAdapter extends CursorAdapter {
 
         if (cursor.getPosition() == UPLOAD_BUTTON) {
 
-            Button galleryButton = (Button) view.findViewById(R.id.galerry_button);
+            ImageButton galleryButton = (ImageButton) view.findViewById(R.id.galerry_button);
             galleryButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -82,7 +82,7 @@ class ContributionsListAdapter extends CursorAdapter {
                 }
             });
 
-            Button uploadButton = (Button) view.findViewById(R.id.upload_button);
+            ImageButton uploadButton = (ImageButton) view.findViewById(R.id.upload_button);
             uploadButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -91,7 +91,7 @@ class ContributionsListAdapter extends CursorAdapter {
             });
 
         } else if (cursor.getPosition() == NOTIFICATIONS) {
-
+            //get notification here
         } else {
 
             final ContributionViewHolder views = (ContributionViewHolder) view.getTag();

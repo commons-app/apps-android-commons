@@ -1,32 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <fr.free.nrw.commons.contributions.SquareLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/notification_grid"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_gravity="center"
-    android:background="@android:color/white"
-    >
+    android:orientation="horizontal"
+    android:weightSum="4"
+    android:padding="25dp"
+    android:background="@color/upload_overlay_background_light">
+        <LinearLayout
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            >
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_flag_white_48dp"
+                    android:background="@android:color/transparent"
+                    />
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/grid_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:textStyle="bold"
-        android:text="New notification!"
-        android:textColor="@android:color/black"
-        >
-    </TextView>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+                <TextView
+                    android:id="@+id/grid_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:paddingLeft="25dp"
+                    android:text="New notification!"
+                    android:textColor="@android:color/white"
+                    >
+                </TextView>
 
-    <TextView
-        android:id="@+id/grid_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:text="Discover nearby place."
-        android:textColor="@android:color/black"
-        >
-    </TextView>
-
+                <TextView
+                    android:id="@+id/grid_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="15dp"
+                    android:text="Discover nearby place that has no photo(Distance 1 km)"
+                    android:textColor="@android:color/white"
+                    android:layout_below="@id/grid_text"
+                    >
+                </TextView>
+        </LinearLayout>
 </fr.free.nrw.commons.contributions.SquareLinearLayout>

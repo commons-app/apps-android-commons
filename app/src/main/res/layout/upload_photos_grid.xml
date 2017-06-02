@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <fr.free.nrw.commons.contributions.SquareLinearLayout android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/upload_grid"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <Button
+    <ImageButton
         android:id="@+id/upload_button"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:background="@drawable/ic_photo_camera_white_24dp">
-    </Button>
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/ic_photo_camera_white_96dp"
+        >
 
-    <Button
+    </ImageButton>
+
+    <ImageButton
         android:id="@+id/galerry_button"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:background="@drawable/ic_photo_white_24dp">
-    </Button>
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/ic_photo_white_96dp"
+        >
+    </ImageButton>
 
 </fr.free.nrw.commons.contributions.SquareLinearLayout>
