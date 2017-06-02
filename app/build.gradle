@@ -65,6 +65,7 @@ android {
         abortOnError false
     }
 
+    //FIXME: Temporary fix for https://github.com/commons-app/apps-android-commons/issues/709
     configurations.all {
         resolutionStrategy.force 'com.android.support:support-annotations:25.2.0'
     }
