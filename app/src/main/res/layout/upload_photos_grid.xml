@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<fr.free.nrw.commons.upload.UploadButtonLinearLayout android:layout_width="match_parent"
+<fr.free.nrw.commons.contributions.SquareLinearLayout android:layout_width="match_parent"
     android:id="@+id/upload_grid"
     android:layout_height="match_parent"
     android:gravity="center"
@@ -20,4 +20,4 @@
         android:background="@drawable/ic_photo_white_24dp">
     </Button>
 
-</fr.free.nrw.commons.upload.UploadButtonLinearLayout>
+</fr.free.nrw.commons.contributions.SquareLinearLayout>

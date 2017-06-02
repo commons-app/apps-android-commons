@@ -1,27 +1,26 @@
-package fr.free.nrw.commons.upload;
-
+package fr.free.nrw.commons.contributions;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
-public class UploadButtonLinearLayout extends LinearLayout {
+public class SquareLinearLayout extends LinearLayout {
 
 
-    public UploadButtonLinearLayout(Context context) {
+    public SquareLinearLayout(Context context) {
         super(context);
     }
 
-    public UploadButtonLinearLayout(Context context, @Nullable AttributeSet attrs) {
+    public SquareLinearLayout(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public UploadButtonLinearLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public SquareLinearLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
-    public UploadButtonLinearLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public SquareLinearLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
@@ -29,6 +28,6 @@ public class UploadButtonLinearLayout extends LinearLayout {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         int width = getMeasuredWidth();
-        setMeasuredDimension(width, width);
+        setMeasuredDimension(width, width/2);
     }
 }

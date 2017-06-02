@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.MatrixCursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -42,12 +43,6 @@ public class ContributionsListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_contributions, container, false);
         ButterKnife.bind(this, v);
-
-        if (this.getAdapter() == null) {
-            this.setAdapter(new ContributionsListAdapter(getActivity(), null, 0, controller));
-        } else {
-            ((CursorAdapter)this.getAdapter()).swapCursor(null);
-        }
 
         contributionsList.setOnItemClickListener((AdapterView.OnItemClickListener)getActivity());
         if(savedInstanceState != null) {

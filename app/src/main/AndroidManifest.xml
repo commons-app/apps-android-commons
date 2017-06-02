@@ -67,7 +67,6 @@
         <activity
                 android:name=".contributions.ContributionsActivity"
                 android:icon="@drawable/ic_launcher"
-                android:configChanges="keyboardHidden|orientation|screenSize"
                 android:label="@string/app_name"
                  >
         </activity>

@@ -8,6 +8,8 @@ import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.DataSetObserver;
+import android.database.MatrixCursor;
+import android.database.MergeCursor;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
@@ -133,16 +135,7 @@ public  class       ContributionsActivity
         startService(uploadServiceIntent);
         bindService(uploadServiceIntent, uploadServiceConnection, Context.BIND_AUTO_CREATE);
 
-        if(fragment==null)
-            initFragment();
-
         contributionsList = (ContributionsListFragment)((TabFragment.TabAdapter)((TabFragment)fragment).viewPager.getAdapter()).getRegisteredFragment(0);
-
-        if (((TabFragment)fragment).viewPager.getCurrentItem() == 0) {
-            Log.d("deneme","ilk ekran");
-        } else {
-            Log.d("deneme","ikinci ekran");
-        }
         allContributions = getContentResolver().query(ContributionsContentProvider.BASE_URI, Contribution.Table.ALL_FIELDS, CONTRIBUTION_SELECTION, null, CONTRIBUTION_SORT);
 
         getSupportLoaderManager().initLoader(0, null, this);
@@ -170,7 +163,6 @@ public  class       ContributionsActivity
         FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
         fragment = new TabFragment();
         mFragmentTransaction.replace(R.id.containerView,fragment).commit();
-
     }
 
     @Override
@@ -258,10 +250,17 @@ public  class       ContributionsActivity
 
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
+
+        //Add empty rows to cursor to use them later as upload button and notification grids. Thanks to: https://stackoverflow.com/questions/6754973/how-to-insert-extra-elements-into-a-simplecursoradapter-or-cursor-for-a-spinner/14622789#14622789
+        MatrixCursor extras = new MatrixCursor(new String[] { "_id", "title" });
+        extras.addRow(new String[] { "-1", "Empty row for upload button" });
+        extras.addRow(new String[] { "-2", "Empty row for notifications" });
+        Cursor[] cursors = { extras, cursor };
+        Cursor extendedCursor = new MergeCursor(cursors);
         if (contributionsList.getAdapter() == null) {
-            contributionsList.setAdapter(new ContributionsListAdapter(this, cursor, 0, contributionsList.controller));
+            contributionsList.setAdapter(new ContributionsListAdapter(this, extendedCursor, 0, contributionsList.controller));
         } else {
-            ((CursorAdapter)contributionsList.getAdapter()).swapCursor(cursor);
+            ((CursorAdapter)contributionsList.getAdapter()).swapCursor(extendedCursor);
         }
 
         contributionsList.clearSyncMessage();

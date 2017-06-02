@@ -18,6 +18,7 @@ class ContributionsListAdapter extends CursorAdapter {
     private Activity activity;
     private ContributionController controller;
     private final int UPLOAD_BUTTON = 0;
+    private final int NOTIFICATIONS = 1;
 
     public ContributionsListAdapter(Activity activity, Cursor c, int flags, ContributionController controller) {
         super(activity, c, flags);
@@ -28,14 +29,18 @@ class ContributionsListAdapter extends CursorAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView!=null) {
-
-            if (position != 0 && convertView.getId()== R.id.upload_grid) { //if it doesnt suppose to be upload button, but attempts to use existing upload layout
-                convertView = null; //according to source implementation, if convertview is null, it will be recreated on super method
-            } else if (position == 0 && convertView.getId() != R.id.upload_grid) { //if it supposed to be upload button, but attempts to use existing image layout
+            /*We need to recreate views
+                -if it doesnt suppose to be upload button or notification view, but attempts to use existing upload layout
+                -if it supposed to be upload button or notification view, but attempts to use existing image layout
+              set convertView to null so that it will be recreated in super method implementation.
+             */
+            if ((position != 0 && convertView.getId() == R.id.upload_grid)
+                    || (position == 0 && convertView.getId() != R.id.upload_grid)
+                    || (position != 1 && convertView.getId() == R.id.notification_grid)
+                    || (position == 1 && convertView.getId() != R.id.notification_grid)) {
                 convertView = null;
             }
         }
-
         return super.getView(position, convertView, parent);
     }
 
@@ -44,7 +49,10 @@ class ContributionsListAdapter extends CursorAdapter {
         if (cursor.getPosition() == UPLOAD_BUTTON) {
             View uploadLayout = activity.getLayoutInflater().inflate(R.layout.upload_photos_grid, null, false);
             return uploadLayout;
-        }else {
+        } else if (cursor.getPosition() == NOTIFICATIONS) {
+            View notificationLayout = activity.getLayoutInflater().inflate(R.layout.notification_grid, null, false);
+            return notificationLayout;
+        } else {
             View parent = activity.getLayoutInflater().inflate(R.layout.layout_contribution, viewGroup, false);
             parent.setTag(new ContributionViewHolder(parent));
             return parent;
@@ -81,6 +89,8 @@ class ContributionsListAdapter extends CursorAdapter {
                     controller.startCameraCapture();
                 }
             });
+
+        } else if (cursor.getPosition() == NOTIFICATIONS) {
 
         } else {
 
