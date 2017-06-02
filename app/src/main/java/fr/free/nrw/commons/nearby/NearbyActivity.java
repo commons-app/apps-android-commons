@@ -136,7 +136,6 @@ public class NearbyActivity extends NavigationBaseActivity {
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                     Fragment noPermissionsFragment = new NoPermissionsFragment();
                     fragmentTransaction.replace(R.id.container, noPermissionsFragment);
-                    fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
                 }
             }
