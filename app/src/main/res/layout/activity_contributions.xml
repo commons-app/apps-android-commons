@@ -14,22 +14,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
+        <FrameLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/contributionsFragmentContainer"
-            android:orientation="horizontal"
-            android:layout_below="@id/toolbar">
-
-            <fragment
-                android:id="@+id/contributionsListFragment"
-                android:name="fr.free.nrw.commons.contributions.ContributionsListFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:layout="@layout/fragment_contributions" />
-
+            android:id="@+id/containerView"
+            android:layout_below="@id/toolbar"
+            >
         </FrameLayout>
+
     </RelativeLayout>
 
     <RelativeLayout

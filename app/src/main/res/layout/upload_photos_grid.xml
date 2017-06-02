@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fr.free.nrw.commons.UploadButtonLinearLayout android:layout_width="match_parent"
+    android:id="@+id/upload_grid"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Button
+        android:id="@+id/upload_button"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/ic_photo_camera_white_24dp">
+    </Button>
+
+    <Button
+        android:id="@+id/galerry_button"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/ic_photo_white_24dp">
+    </Button>
+
+</fr.free.nrw.commons.UploadButtonLinearLayout>
