@@ -130,6 +130,9 @@ public class NearbyActivity extends NavigationBaseActivity {
                     if (nearbyAsyncTask != null) {
                         nearbyAsyncTask.cancel(true);
                     }
+                    if (progressBar != null) {
+                        progressBar.setVisibility(View.GONE);
+                    }
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                     Fragment noPermissionsFragment = new NoPermissionsFragment();
                     fragmentTransaction.replace(R.id.container, noPermissionsFragment);
@@ -219,7 +222,9 @@ public class NearbyActivity extends NavigationBaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        locationManager.unregisterLocationManager();
+        if (locationManager != null) {
+            locationManager.unregisterLocationManager();
+        }
     }
 
     private class NearbyAsyncTask extends AsyncTask<Void, Integer, List<Place>> {
