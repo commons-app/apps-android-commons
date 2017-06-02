@@ -3,18 +3,6 @@ apply plugin: 'jacoco-android'
 apply from: 'quality.gradle'
 
 dependencies {
-    compile "com.android.support:support-v4:${project.supportLibVersion}"
-    compile "com.android.support:appcompat-v7:${project.supportLibVersion}"
-    compile "com.android.support:design:${project.supportLibVersion}"
-    compile "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
-    annotationProcessor "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
-    compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.0.2@aar') {
-        transitive = true
-    }
-    compile "com.google.guava:guava:${GUAVA_VERSION}"
-
-    androidTestCompile "com.android.support:support-annotations:${project.supportLibVersion}"
-
     compile 'com.github.nicolas-raoul:Quadtree:ac16ea8035bf07'
     compile 'fr.avianey.com.viewpagerindicator:library:2.4.1.1@aar'
     compile 'in.yuvi:http.fluent:1.3'
@@ -22,18 +10,27 @@ dependencies {
     compile 'ch.acra:acra:4.7.0'
     compile 'org.mediawiki:api:1.3'
     compile 'commons-codec:commons-codec:1.10'
+    compile "com.android.support:support-v4:${project.supportLibVersion}"
+    compile "com.android.support:appcompat-v7:${project.supportLibVersion}"
+    compile "com.android.support:design:${project.supportLibVersion}"
     compile 'com.google.code.gson:gson:2.7'
+    compile "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
     compile 'com.jakewharton.timber:timber:4.5.1'
+    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:5.0.2@aar'){
+        transitive=true
+    }
     compile 'com.facebook.fresco:fresco:1.3.0'
     compile 'com.facebook.stetho:stetho:1.5.0'
-    compile 'com.android.support:support-v4:25.3.1'
+    compile "com.google.guava:guava:${GUAVA_VERSION}"
+
     testCompile 'junit:junit:4.12'
-    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
-    androidTestCompile ('com.android.support.test.espresso:espresso-core:2.2.2') {
-        exclude module: 'support-annotations'
-    }
+    androidTestCompile "com.android.support:support-annotations:${project.supportLibVersion}"
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
+
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
 }
 
 android {
@@ -54,8 +51,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
-            // See https://stackoverflow.com/questions/40232404/google-play-apk-and-android-studio-apk-usb-debug-behaving-differently - proguard.cfg modification alone insufficient.
+            minifyEnabled false // See https://stackoverflow.com/questions/40232404/google-play-apk-and-android-studio-apk-usb-debug-behaving-differently - proguard.cfg modification alone insufficient.
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
         debug {
