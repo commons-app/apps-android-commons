@@ -120,13 +120,7 @@ public class NearbyActivity extends NavigationBaseActivity {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     startLookingForNearby();
                 } else {
-                    //If permission not granted, display notification that Nearby Places cannot be displayed
-/**
-                    int duration = Toast.LENGTH_LONG;
-                    Toast toast = Toast.makeText(this, R.string.no_location_permission, duration);
-                    toast.show();
-*/
-                    //TODO: Open a fragment saying permissions not granted instead
+                    //If permission not granted, go to page that says Nearby Places cannot be displayed
                     if (nearbyAsyncTask != null) {
                         nearbyAsyncTask.cancel(true);
                     }
