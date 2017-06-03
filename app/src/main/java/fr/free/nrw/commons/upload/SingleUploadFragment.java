@@ -189,8 +189,8 @@ public class SingleUploadFragment extends Fragment {
         Timber.d("Title: %s, Desc: %s", title, desc);
 
         if (title.trim().length() > 0 && desc.trim().length() > 0) {
-            titleEdit.setText(title);
             descEdit.setText(desc);
+            titleEdit.setText(title);
         }
     }
 
