@@ -16,6 +16,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
@@ -43,8 +44,9 @@ public class ExploreListFragment extends Fragment {
         locationManager.registerLocationManager();
         curLatLang = locationManager.getLatestLocation();
         adapter = new ExploreAdapter(getActivity(),R.layout.item_place);
-        exploreList.setAdapter(adapter);
-        return inflater.inflate(R.layout.fragment_explore,null);
+        View view = inflater.inflate(R.layout.fragment_explore,null);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
@@ -56,9 +58,6 @@ public class ExploreListFragment extends Fragment {
             adapter.clear();
             Timber.d("Saved instance state is null, populating ListView");
         }
-
-        adapter.clear();
-        adapter.notifyDataSetChanged();
     }
 
     /*
@@ -106,7 +105,11 @@ public class ExploreListFragment extends Fragment {
             if (progressBar != null) {
                 progressBar.setVisibility(View.GONE);
             }
+
+            exploreList.setAdapter(adapter);
+            adapter.clear();
             adapter.addAll(placeList);
+            adapter.notifyDataSetChanged();
         }
     }
 }

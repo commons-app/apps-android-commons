@@ -2,7 +2,6 @@ package fr.free.nrw.commons.nearby;
 
 
 import android.net.Uri;
-import android.os.StrictMode;
 
 import java.io.BufferedReader;
 import java.io.IOException;
