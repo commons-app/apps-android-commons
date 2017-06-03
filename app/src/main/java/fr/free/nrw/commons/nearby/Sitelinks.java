@@ -11,12 +11,14 @@ public class Sitelinks implements Parcelable {
     private final String wikipediaLink;
     private final String commonsLink;
     private final String wikidataLink;
+    private final String imageLink;
 
 
     protected Sitelinks(Parcel in) {
         wikipediaLink = in.readString();
         commonsLink = in.readString();
         wikidataLink = in.readString();
+        imageLink = in.readString();
     }
 
     @Override
@@ -24,6 +26,7 @@ public class Sitelinks implements Parcelable {
         dest.writeString(wikipediaLink);
         dest.writeString(commonsLink);
         dest.writeString(wikidataLink);
+        dest.writeString(imageLink);
     }
 
     @Override
@@ -59,6 +62,11 @@ public class Sitelinks implements Parcelable {
     }
 
     @Nullable
+    public Uri getImageLink() {
+        return sanitiseString(imageLink);
+    }
+
+    @Nullable
     private Uri sanitiseString(String stringUrl) {
         stringUrl = stringUrl
                 .replaceAll("<", "")
@@ -74,12 +82,14 @@ public class Sitelinks implements Parcelable {
         this.wikidataLink = builder.wikidataLink;
         this.wikipediaLink = builder.wikipediaLink;
         this.commonsLink = builder.commonsLink;
+        this.imageLink = builder.imageLink;
     }
 
     public static class Builder {
         private String wikidataLink;
         private String commonsLink;
         private String wikipediaLink;
+        private String imageLink;
 
         public Builder() {
         }
@@ -96,6 +106,11 @@ public class Sitelinks implements Parcelable {
 
         public Sitelinks.Builder setCommonsLink(@Nullable String link) {
             this.commonsLink = link;
+            return this;
+        }
+
+        public Sitelinks.Builder setImageLink(@Nullable String link) {
+            this.imageLink = link;
             return this;
         }
 
