@@ -188,8 +188,10 @@ public class SingleUploadFragment extends Fragment {
         String desc = titleDesc.getString("Desc", "");
         Timber.d("Title: %s, Desc: %s", title, desc);
 
-        titleEdit.setText(title);
-        descEdit.setText(desc);
+        if (title.trim().length() > 0 && desc.trim().length() > 0) {
+            titleEdit.setText(title);
+            descEdit.setText(desc);
+        }
     }
 
     private void setLicenseSummary(String license) {
