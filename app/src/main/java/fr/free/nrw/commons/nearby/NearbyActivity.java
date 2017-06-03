@@ -175,16 +175,18 @@ public class NearbyActivity extends NavigationBaseActivity {
     }
 
     private void showMapView() {
-        if (!isMapViewActive) {
-            isMapViewActive = true;
-            if (nearbyAsyncTask.getStatus() == AsyncTask.Status.FINISHED) {
-                setMapFragment();
-            }
+        if (nearbyAsyncTask != null) {
+            if (!isMapViewActive) {
+                isMapViewActive = true;
+                if (nearbyAsyncTask.getStatus() == AsyncTask.Status.FINISHED) {
+                    setMapFragment();
+                }
 
-        } else {
-            isMapViewActive = false;
-            if (nearbyAsyncTask.getStatus() == AsyncTask.Status.FINISHED) {
-                setListFragment();
+            } else {
+                isMapViewActive = false;
+                if (nearbyAsyncTask.getStatus() == AsyncTask.Status.FINISHED) {
+                    setListFragment();
+                }
             }
         }
     }
