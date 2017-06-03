@@ -22,7 +22,7 @@ import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.auth.AccountUtil;
-import fr.free.nrw.commons.nearby.NearbyPlaces;
+import fr.free.nrw.commons.nearby.NonPhotographedNearbyPlaces;
 
 import com.squareup.leakcanary.LeakCanary;
 
@@ -43,6 +43,7 @@ import org.apache.http.params.CoreProtocolPNames;
 import java.io.File;
 import java.io.IOException;
 
+import fr.free.nrw.commons.nearby.PhotographedNearbyPlaces;
 import fr.free.nrw.commons.utils.FileUtils;
 import timber.log.Timber;
 
@@ -81,7 +82,8 @@ public class CommonsApplication extends Application {
     LruCache<String, String> thumbnailUrlCache = new LruCache<>(1024);
     private CacheController cacheData = null;
     private DBOpenHelper dbOpenHelper = null;
-    private NearbyPlaces nearbyPlaces = null;
+    private NonPhotographedNearbyPlaces nonPhotographedNearbyPlaces = null;
+    private PhotographedNearbyPlaces photographedNearbyPlaces = null;
 
     /**
      * This should not be called by ANY application code (other than the magic Android glue)
@@ -145,11 +147,18 @@ public class CommonsApplication extends Application {
         return dbOpenHelper;
     }
 
-    public synchronized NearbyPlaces getNearbyPlaces() {
-        if (nearbyPlaces == null) {
-            nearbyPlaces = new NearbyPlaces();
+    public synchronized NonPhotographedNearbyPlaces getNonPhotographedNearbyPlaces() {
+        if (nonPhotographedNearbyPlaces == null) {
+            nonPhotographedNearbyPlaces = new NonPhotographedNearbyPlaces();
         }
-        return nearbyPlaces;
+        return nonPhotographedNearbyPlaces;
+    }
+
+    public synchronized PhotographedNearbyPlaces getPhotographedNearbyPlaces() {
+        if (photographedNearbyPlaces == null) {
+            photographedNearbyPlaces = new PhotographedNearbyPlaces();
+        }
+        return photographedNearbyPlaces;
     }
 
     @Override

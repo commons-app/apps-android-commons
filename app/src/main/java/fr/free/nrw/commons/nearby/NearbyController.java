@@ -28,7 +28,7 @@ public class NearbyController {
     private static final int MAX_RESULTS = 1000;
 
     /**
-     * Prepares Place list to make their distance information update later.
+     * Prepares Non Photographed Place list to make their distance information update later.
      * @param curLatLng current location for user
      * @param context context
      * @return Place list without distance information
@@ -38,16 +38,55 @@ public class NearbyController {
         if (curLatLng == null) {
             return Collections.emptyList();
         }
-        NearbyPlaces nearbyPlaces = CommonsApplication.getInstance().getNearbyPlaces();
+        NonPhotographedNearbyPlaces nonPhotographedNearbyPlaces = CommonsApplication.getInstance().getNonPhotographedNearbyPlaces();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         List<Place> places = prefs.getBoolean("useWikidata", true)
-                ? nearbyPlaces.getFromWikidataQuery(curLatLng, Locale.getDefault().getLanguage())
-                : nearbyPlaces.getFromWikiNeedsPictures();
+                ? nonPhotographedNearbyPlaces.getFromWikidataQuery(curLatLng, Locale.getDefault().getLanguage())
+                : nonPhotographedNearbyPlaces.getFromWikiNeedsPictures();
         if (curLatLng != null) {
             Timber.d("Sorting places by distance...");
             final Map<Place, Double> distances = new HashMap<>();
             for (Place place: places) {
                 distances.put(place, computeDistanceBetween(place.location, curLatLng));
+            }
+            Collections.sort(places,
+                    new Comparator<Place>() {
+                        @Override
+                        public int compare(Place lhs, Place rhs) {
+                            double lhsDistance = distances.get(lhs);
+                            double rhsDistance = distances.get(rhs);
+                            return (int) (lhsDistance - rhsDistance);
+                        }
+                    }
+            );
+        }
+        return places;
+    }
+
+    /**
+     * Prepares Photographed Place list to make their distance information update later.
+     * @param curLatLng current location for user
+     * @param context context
+     * @return Place list without distance information
+     */
+    public static List<Place> loadPhotographedAttractionsFromLocation(LatLng curLatLng, Context context) {
+        Timber.d("Loading attractions near %s", curLatLng);
+        if (curLatLng == null) {
+            return Collections.emptyList();
+        }
+        PhotographedNearbyPlaces photographedNearbyPlaces = CommonsApplication.getInstance().getPhotographedNearbyPlaces();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        List<Place> places = photographedNearbyPlaces.getFromWikidataQuery(curLatLng, Locale.getDefault().getLanguage());
+        if (curLatLng != null) {
+            Timber.d("Sorting places by distance...");
+            final Map<Place, Double> distances = new HashMap<>();
+            double distanceMetre;
+            float distanceKilometre;
+            for (Place place: places) {
+                distanceMetre = computeDistanceBetween(place.location, curLatLng);
+                distanceKilometre = (float)(distanceMetre/1000);
+                place.setDistance(String.format("%.1f",distanceKilometre)+"km");
+                distances.put(place, distanceMetre);
             }
             Collections.sort(places,
                     new Comparator<Place>() {

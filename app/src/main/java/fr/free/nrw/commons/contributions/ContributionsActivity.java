@@ -8,18 +8,29 @@ import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.DataSetObserver;
+import android.database.MatrixCursor;
+import android.database.MergeCursor;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.CursorAdapter;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 
@@ -35,6 +46,7 @@ import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
+import fr.free.nrw.commons.explore.ExploreListFragment;
 import fr.free.nrw.commons.hamburger.HamburgerMenuContainer;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.settings.Prefs;
@@ -49,6 +61,7 @@ public  class       ContributionsActivity
                     MediaDetailPagerFragment.MediaDetailProvider,
                     FragmentManager.OnBackStackChangedListener,
                     ContributionsListFragment.SourceRefresher,
+                    OnTabFragmentsCreatedCallback,
                     HamburgerMenuContainer {
 
     private Cursor allContributions;
@@ -58,6 +71,7 @@ public  class       ContributionsActivity
     private boolean isUploadServiceConnected;
     private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<>();
     private String CONTRIBUTION_SELECTION = "";
+    private Fragment fragment;
 
     /*
         This sorts in the following order:
@@ -121,6 +135,7 @@ public  class       ContributionsActivity
         startService(uploadServiceIntent);
         bindService(uploadServiceIntent, uploadServiceConnection, Context.BIND_AUTO_CREATE);
 
+        contributionsList = (ContributionsListFragment)((TabFragment.TabAdapter)((TabFragment)fragment).viewPager.getAdapter()).getRegisteredFragment(0);
         allContributions = getContentResolver().query(ContributionsContentProvider.BASE_URI, Contribution.Table.ALL_FIELDS, CONTRIBUTION_SELECTION, null, CONTRIBUTION_SORT);
 
         getSupportLoaderManager().initLoader(0, null, this);
@@ -132,19 +147,22 @@ public  class       ContributionsActivity
         setContentView(R.layout.activity_contributions);
         ButterKnife.bind(this);
 
-        // Activity can call methods in the fragment by acquiring a
-        // reference to the Fragment from FragmentManager, using findFragmentById()
-        contributionsList = (ContributionsListFragment)getSupportFragmentManager()
-                .findFragmentById(R.id.contributionsListFragment);
-
         getSupportFragmentManager().addOnBackStackChangedListener(this);
         if (savedInstanceState != null) {
             mediaDetails = (MediaDetailPagerFragment)getSupportFragmentManager()
-                    .findFragmentById(R.id.contributionsFragmentContainer);
+                    .findFragmentById(R.id.containerView);
         }
-        requestAuthToken();
+        //requestAuthToken();
         initDrawer();
         setTitle(getString(R.string.title_activity_contributions));
+        initFragment();
+    }
+
+    private void initFragment(){
+        FragmentManager mFragmentManager = getSupportFragmentManager();
+        FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
+        fragment = new TabFragment();
+        mFragmentTransaction.replace(R.id.containerView,fragment).commit();
     }
 
     @Override
@@ -161,7 +179,7 @@ public  class       ContributionsActivity
             mediaDetails = new MediaDetailPagerFragment();
             this.getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.contributionsFragmentContainer, mediaDetails)
+                    .replace(R.id.containerView, mediaDetails)
                     .addToBackStack(null)
                     .commit();
             this.getSupportFragmentManager().executePendingTransactions();
@@ -232,14 +250,18 @@ public  class       ContributionsActivity
 
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
-        if(contributionsList.getAdapter() == null) {
-            contributionsList
-                    .setAdapter(new ContributionsListAdapter(getApplicationContext(), cursor, 0));
-        } else {
-            ((CursorAdapter)contributionsList.getAdapter()).swapCursor(cursor);
-        }
 
-        setUploadCount();
+        //Add empty rows to cursor to use them later as upload button and notification grids. Thanks to: https://stackoverflow.com/questions/6754973/how-to-insert-extra-elements-into-a-simplecursoradapter-or-cursor-for-a-spinner/14622789#14622789
+        MatrixCursor extras = new MatrixCursor(new String[] { "_id", "title" });
+        extras.addRow(new String[] { "-1", "Empty row for upload button" });
+        extras.addRow(new String[] { "-2", "Empty row for notifications" });
+        Cursor[] cursors = { extras, cursor };
+        Cursor extendedCursor = new MergeCursor(cursors);
+        if (contributionsList.getAdapter() == null) {
+            contributionsList.setAdapter(new ContributionsListAdapter(this, extendedCursor, 0, contributionsList.controller));
+        } else {
+            ((CursorAdapter)contributionsList.getAdapter()).swapCursor(extendedCursor);
+        }
 
         contributionsList.clearSyncMessage();
         notifyAndMigrateDataSetObservers();
@@ -344,4 +366,85 @@ public  class       ContributionsActivity
         Intent contributionsIntent = new Intent(context, ContributionsActivity.class);
         context.startActivity(contributionsIntent);
     }
+
+    @Override
+    public void onTabFragmentsCreated() {
+        requestAuthToken();
+
+    }
+
+    public static class TabFragment extends Fragment {
+        private TabLayout tabLayout;
+        private ViewPager viewPager;
+        private static int int_items = 2 ;
+
+        @Nullable
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+            setRetainInstance(true);
+            View view =  inflater.inflate(R.layout.tab_layout,null);
+            tabLayout = (TabLayout) view.findViewById(R.id.tabs);
+            viewPager = (ViewPager) view.findViewById(R.id.viewpager);
+
+            viewPager.setAdapter(new TabFragment.TabAdapter(getChildFragmentManager()));
+
+            tabLayout.post(new Runnable() {
+                @Override
+                public void run() {
+                    tabLayout.setupWithViewPager(viewPager);
+                }
+            });
+
+            return view;
+
+        }
+
+        public static class TabAdapter extends FragmentStatePagerAdapter {
+            private ArrayList<Fragment> registeredFragments = new ArrayList<>();
+            public TabAdapter(FragmentManager fragmentManager) {
+                super(fragmentManager);
+            }
+
+            @Override
+            public Fragment getItem(int position)
+            {
+                registeredFragments.add(new ContributionsListFragment());
+                registeredFragments.add(new ExploreListFragment());
+                switch (position){
+                    case 0 :
+                        return registeredFragments.get(0);
+
+                    case 1 :
+                        return registeredFragments.get(1);
+                }
+                return null;
+            }
+
+            @Override
+            public int getCount() {
+                return int_items;
+            }
+
+            public Fragment getRegisteredFragment(int position) {
+                return registeredFragments.get(position);
+            }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+
+                switch (position){
+                    case 0 :
+                        return "Contributions";
+                    case 1 :
+                        return "Explore";
+                }
+                return null;
+            }
+        }
+    }
+}
+
+interface OnTabFragmentsCreatedCallback{
+    void onTabFragmentsCreated();
 }

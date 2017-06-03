@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="2dp"
+    android:paddingBottom="0dp"
+    >
+
+    <TextView
+        android:id="@+id/exploreSequenceNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="98sp"
+        android:textColor="#33FFFFFF"
+        android:typeface="serif"
+        android:layout_gravity="end|bottom"
+        />
+
+    <fr.free.nrw.commons.MediaWikiImageView
+        android:id="@+id/exploreImage"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        app:actualImageScaleType="centerCrop"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|bottom"
+        android:background="#AA000000"
+        android:orientation="vertical"
+        android:padding="8dp"
+        >
+        <ProgressBar
+            android:id="@+id/exploreProgress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/ProgressBar"
+            android:indeterminateOnly="false"
+            android:max="100"
+            android:visibility="gone"
+            />
+
+        <TextView
+            android:id="@+id/exploreTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFFFF"
+            style="?android:textAppearanceMedium"
+            android:maxLines="1"
+            android:ellipsize="end"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:id="@+id/exploreDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFFFF"
+                style="?android:textAppearanceSmall"
+                android:maxLines="1"
+                android:ellipsize="end"
+                />
+
+            <TextView
+                android:id="@+id/exploreDistance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFFFF"
+                android:maxLines="1"
+                android:gravity="right"
+                android:ellipsize="end"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

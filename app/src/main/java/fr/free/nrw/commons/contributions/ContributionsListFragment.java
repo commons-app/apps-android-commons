@@ -1,19 +1,15 @@
 package fr.free.nrw.commons.contributions;
 
-import android.Manifest;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.os.Build;
+import android.database.MatrixCursor;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -23,7 +19,6 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.nearby.NearbyActivity;
 import timber.log.Timber;
@@ -31,6 +26,8 @@ import timber.log.Timber;
 import static android.app.Activity.RESULT_OK;
 
 public class ContributionsListFragment extends Fragment {
+
+    OnTabFragmentsCreatedCallback callback;
 
     public interface SourceRefresher {
         void refreshSource();
@@ -40,7 +37,7 @@ public class ContributionsListFragment extends Fragment {
     @BindView(R.id.waitingMessage) TextView waitingMessage;
     @BindView(R.id.emptyMessage) TextView emptyMessage;
 
-    private ContributionController controller;
+    public ContributionController controller;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -65,6 +62,13 @@ public class ContributionsListFragment extends Fragment {
         }
 
         return v;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        callback = (OnTabFragmentsCreatedCallback) getActivity();
+        callback.onTabFragmentsCreated();
     }
 
     public ListAdapter getAdapter() {
@@ -101,33 +105,6 @@ public class ContributionsListFragment extends Fragment {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
-            case R.id.menu_from_gallery:
-                //Gallery crashes before reach ShareActivity screen so must implement permissions check here
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if (ContextCompat.checkSelfPermission(this.getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                        //See http://stackoverflow.com/questions/33169455/onrequestpermissionsresult-not-being-called-in-dialog-fragment
-                        requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-                        return true;
-                    } else {
-                        controller.startGalleryPick();
-                        return true;
-                    }
-                }
-                else {
-                    controller.startGalleryPick();
-                    return true;
-                }
-            case R.id.menu_from_camera:
-                controller.startCameraCapture();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
             // 1 = Storage allowed when gallery selected
@@ -147,16 +124,6 @@ public class ContributionsListFragment extends Fragment {
                 }
             }
             break;
-        }
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.clear(); // See http://stackoverflow.com/a/8495697/17865
-        inflater.inflate(R.menu.fragment_contributions_list, menu);
-
-        if (!CommonsApplication.getInstance().deviceHasCamera()) {
-            menu.findItem(R.id.menu_from_camera).setEnabled(false);
         }
     }
 

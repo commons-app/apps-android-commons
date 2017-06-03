@@ -20,7 +20,7 @@ import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.utils.FileUtils;
 import timber.log.Timber;
 
-public class NearbyPlaces {
+public class NonPhotographedNearbyPlaces{
 
     private static final int MIN_RESULTS = 40;
     private static final double INITIAL_RADIUS = 1.0; // in kilometers
@@ -32,7 +32,7 @@ public class NearbyPlaces {
     private double radius = INITIAL_RADIUS;
     private List<Place> places;
 
-    public NearbyPlaces() {
+    public NonPhotographedNearbyPlaces() {
         try {
             String query = FileUtils.readFromResource("/assets/queries/nearby_query.rq");
             wikidataQuery = query;
