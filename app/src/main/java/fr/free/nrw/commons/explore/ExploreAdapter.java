@@ -32,10 +32,10 @@ public class ExploreAdapter extends ArrayAdapter<Place> {
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext())
-                    .inflate(R.layout.item_place, parent, false);
+                    .inflate(R.layout.layout_explore, parent, false);
         }
 
-        NearbyViewHolder viewHolder = new NearbyViewHolder(convertView);
+        ExploreViewHolder viewHolder = new ExploreViewHolder(convertView, position);
         viewHolder.bindModel(getContext(), place);
         // Return the completed view to render on screen
         return convertView;

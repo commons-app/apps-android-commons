@@ -80,8 +80,13 @@ public class NearbyController {
         if (curLatLng != null) {
             Timber.d("Sorting places by distance...");
             final Map<Place, Double> distances = new HashMap<>();
+            double distanceMetre;
+            float distanceKilometre;
             for (Place place: places) {
-                distances.put(place, computeDistanceBetween(place.location, curLatLng));
+                distanceMetre = computeDistanceBetween(place.location, curLatLng);
+                distanceKilometre = (float)(distanceMetre/1000);
+                place.setDistance(String.format("%.1f",distanceKilometre)+"km");
+                distances.put(place, distanceMetre);
             }
             Collections.sort(places,
                     new Comparator<Place>() {

@@ -43,7 +43,7 @@ public class ExploreListFragment extends Fragment {
         locationManager = new LocationServiceManager(getActivity());
         locationManager.registerLocationManager();
         curLatLang = locationManager.getLatestLocation();
-        adapter = new ExploreAdapter(getActivity(),R.layout.item_place);
+        adapter = new ExploreAdapter(getActivity(),R.layout.layout_explore);
         View view = inflater.inflate(R.layout.fragment_explore,null);
         ButterKnife.bind(this, view);
         return view;
@@ -105,6 +105,8 @@ public class ExploreListFragment extends Fragment {
             if (progressBar != null) {
                 progressBar.setVisibility(View.GONE);
             }
+
+
 
             exploreList.setAdapter(adapter);
             adapter.clear();
