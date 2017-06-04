@@ -1,14 +1,20 @@
 package fr.free.nrw.commons.nearby;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -38,6 +44,7 @@ public class NearbyActivity extends NavigationBaseActivity {
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
     private boolean isMapViewActive = false;
+    private static final int LOCATION_REQUEST = 1;
 
     private LocationServiceManager locationManager;
     private LatLng curLatLang;
@@ -52,13 +59,8 @@ public class NearbyActivity extends NavigationBaseActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-
+        checkLocationPermission();
         bundle = new Bundle();
-        locationManager = new LocationServiceManager(this);
-        locationManager.registerLocationManager();
-        curLatLang = locationManager.getLatestLocation();
-        nearbyAsyncTask = new NearbyAsyncTask(this);
-        nearbyAsyncTask.execute();
         initDrawer();
     }
 
@@ -86,6 +88,51 @@ public class NearbyActivity extends NavigationBaseActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void startLookingForNearby() {
+        locationManager = new LocationServiceManager(this);
+        locationManager.registerLocationManager();
+        curLatLang = locationManager.getLatestLocation();
+        nearbyAsyncTask = new NearbyAsyncTask(this);
+        nearbyAsyncTask.execute();
+    }
+
+    private void checkLocationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                startLookingForNearby();
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQUEST);
+            }
+        } else {
+            startLookingForNearby();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case LOCATION_REQUEST: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    startLookingForNearby();
+                } else {
+                    //If permission not granted, go to page that says Nearby Places cannot be displayed
+                    if (nearbyAsyncTask != null) {
+                        nearbyAsyncTask.cancel(true);
+                    }
+                    if (progressBar != null) {
+                        progressBar.setVisibility(View.GONE);
+                    }
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    Fragment noPermissionsFragment = new NoPermissionsFragment();
+                    fragmentTransaction.replace(R.id.container, noPermissionsFragment);
+                    fragmentTransaction.commit();
+                }
+            }
         }
     }
 
@@ -128,16 +175,18 @@ public class NearbyActivity extends NavigationBaseActivity {
     }
 
     private void showMapView() {
-        if (!isMapViewActive) {
-            isMapViewActive = true;
-            if (nearbyAsyncTask.getStatus() == AsyncTask.Status.FINISHED) {
-                setMapFragment();
-            }
+        if (nearbyAsyncTask != null) {
+            if (!isMapViewActive) {
+                isMapViewActive = true;
+                if (nearbyAsyncTask.getStatus() == AsyncTask.Status.FINISHED) {
+                    setMapFragment();
+                }
 
-        } else {
-            isMapViewActive = false;
-            if (nearbyAsyncTask.getStatus() == AsyncTask.Status.FINISHED) {
-                setListFragment();
+            } else {
+                isMapViewActive = false;
+                if (nearbyAsyncTask.getStatus() == AsyncTask.Status.FINISHED) {
+                    setListFragment();
+                }
             }
         }
     }
@@ -151,7 +200,9 @@ public class NearbyActivity extends NavigationBaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        nearbyAsyncTask.cancel(true);
+        if (nearbyAsyncTask != null) {
+            nearbyAsyncTask.cancel(true);
+        }
     }
 
     protected void refreshView() {
@@ -166,7 +217,9 @@ public class NearbyActivity extends NavigationBaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        locationManager.unregisterLocationManager();
+        if (locationManager != null) {
+            locationManager.unregisterLocationManager();
+        }
     }
 
     private class NearbyAsyncTask extends AsyncTask<Void, Integer, List<Place>> {
