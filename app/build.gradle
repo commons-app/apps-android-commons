@@ -44,7 +44,7 @@ android {
         versionCode 72
         versionName '2.4.1'
         minSdkVersion project.minSdkVersion
-        targetSdkVersion 23
+        targetSdkVersion project.targetSdkVersion
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
