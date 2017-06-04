@@ -184,6 +184,7 @@
   <string name="navigation_item_settings">Нагодувања</string>
   <string name="navigation_item_feedback">Мислења</string>
   <string name="navigation_item_logout">Одјава</string>
+  <string name="navigation_item_info" fuzzy="true">Вовед</string>
   <string name="nearby_info_menu_commons_article">Статија на Ризницата</string>
   <string name="nearby_info_menu_wikidata_article">Статија на Википодатоците</string>
 </resources>

@@ -98,7 +98,7 @@
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four"> Attribution 4.0</string>
   <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by">CC Attribution 3.0</string>
+  <string name="license_name_cc_by">Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Autriche)</string>
@@ -169,7 +169,7 @@
   <string name="welcome_image_llamas">Lamas</string>
   <string name="welcome_image_rainbow_bridge">Pont Arc-en-ciel</string>
   <string name="welcome_image_tulip">Tulipe</string>
-  <string name="welcome_image_no_selfies">Pas d’autoportrait</string>
+  <string name="welcome_image_no_selfies">Pas d’égoportraits</string>
   <string name="welcome_image_proprietary">Image privée</string>
   <string name="welcome_image_welcome_wikipedia">Bienvenue de Wikipédia</string>
   <string name="welcome_image_welcome_copyright">Droit d’auteur de bienvenue</string>
@@ -184,6 +184,8 @@
   <string name="navigation_item_settings">Paramètres</string>
   <string name="navigation_item_feedback">Commentaire</string>
   <string name="navigation_item_logout">Déconnexion</string>
+  <string name="navigation_item_info">Tutoriel</string>
+  <string name="no_description_found">aucune description trouvée</string>
   <string name="nearby_info_menu_commons_article">Article de Communs</string>
   <string name="nearby_info_menu_wikidata_article">Article de WikiData</string>
 </resources>

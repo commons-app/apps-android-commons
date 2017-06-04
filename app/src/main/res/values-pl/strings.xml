@@ -150,10 +150,16 @@
   <string name="use_wikidata">Użyj Wikidanych</string>
   <string name="_2fa_code">Kod 2FA</string>
   <string name="login_failed_2fa_not_supported">Uwierzytelnianie dwuskładnikowe obecnie nie jest obsługiwane.</string>
+  <string name="welcome_image_welcome_wikipedia">Witaj na Wikipedii</string>
+  <string name="welcome_image_welcome_copyright" fuzzy="true">Witaj w prawach autorskich.</string>
   <string name="cancel">Anuluj</string>
   <string name="navigation_drawer_open">Otwórz</string>
   <string name="navigation_drawer_close">Zamknij</string>
+  <string name="navigation_item_home">Dom</string>
   <string name="navigation_item_upload">Prześlij</string>
+  <string name="navigation_item_about">O aplikacji</string>
   <string name="navigation_item_settings">Ustawienia</string>
+  <string name="navigation_item_feedback">Opinie</string>
   <string name="navigation_item_logout">Wyloguj</string>
+  <string name="navigation_item_info">Samouczek</string>
 </resources>

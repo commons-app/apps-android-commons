@@ -20,7 +20,7 @@
   <string name="upload_progress_notification_title_finishing">%1$s igotzen bukatzen</string>
   <string name="upload_failed_notification_title">%1$s igotzean akatsa</string>
   <string name="upload_failed_notification_subtitle">Ukitu ikusteko</string>
-  <string name="title_activity_contributions" fuzzy="true">Nire igoerak</string>
+  <string name="title_activity_contributions">Nire azken igoerak</string>
   <string name="contribution_state_queued">Itxoite-zerrendan</string>
   <string name="contribution_state_failed">Hutsegitea</string>
   <string name="contribution_state_in_progress">%1$d%% egina</string>
@@ -46,6 +46,8 @@
   <string name="categories_search_text_hint">Kategoriak bilatu</string>
   <string name="menu_save_categories">Gorde</string>
   <string name="refresh_button">Eguneratu</string>
+  <string name="enable_gps">GPSa gaitu</string>
+  <string name="contributions_subtitle_zero">Oraindik ez da ezer igo</string>
   <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Oraindik igoerarik ez</item>
     <item quantity="one">igoera 1</item>
@@ -117,8 +119,19 @@
   <string name="become_a_tester_title">Beta testatzaile bihurtu</string>
   <string name="use_wikidata">Wikidata erabili</string>
   <string name="use_wikidata_summary">(Erne:hau kentzeak mugikorrak datu asko kontsumitzea ekar dezake)</string>
+  <string name="commons_logo">Commonsen logoa</string>
+  <string name="background_image">Atzealdeko irudia</string>
+  <string name="welcome_image_no_selfies">Selfirik ez</string>
+  <string name="cancel">Utzi</string>
   <string name="navigation_drawer_open">Ireki</string>
   <string name="navigation_drawer_close">Itxi</string>
+  <string name="navigation_item_home">Hasiera</string>
+  <string name="navigation_item_upload">Igo</string>
+  <string name="navigation_item_nearby">Gertukoak</string>
   <string name="navigation_item_about">Honi buruz</string>
   <string name="navigation_item_settings">Ezarpenak</string>
+  <string name="navigation_item_logout">Saioa itxi</string>
+  <string name="navigation_item_info" fuzzy="true">Sarrera</string>
+  <string name="nearby_info_menu_commons_article">Commons Artikulua</string>
+  <string name="nearby_info_menu_wikidata_article">WikiData Artikulua</string>
 </resources>
