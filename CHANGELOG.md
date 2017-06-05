@@ -1,5 +1,14 @@
 # Wikimedia Commons for Android
 
+## v2.4.2 beta
+- Added option to launch tutorial again from nav drawer
+- Added marker for current location in Nearby map
+- Fixed various strings
+- Added check for location permissions when launching Nearby
+- Temporary fix for API 25 camera crash
+- App should now display accurate upload count
+- Updated Gradle from 3.3 to 4.0
+
 ## v2.4.1 beta
 - Fixed crash with uploading multiple photos
 - Fixed memory leaks
