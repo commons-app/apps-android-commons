@@ -187,5 +187,5 @@
   <string name="navigation_item_info">Cors d\'antrodussion</string>
   <string name="no_description_found">gnun-a descrission trovà</string>
   <string name="nearby_info_menu_commons_article">Artìcol ëd Comun</string>
-  <string name="nearby_info_menu_wikidata_article">Artìcol ëd WikiData</string>
+  <string name="nearby_info_menu_wikidata_article" fuzzy="true">Artìcol ëd WikiData</string>
 </resources>

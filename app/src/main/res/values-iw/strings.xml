@@ -180,4 +180,6 @@
   <string name="navigation_item_settings">הגדרות</string>
   <string name="navigation_item_feedback">משוב</string>
   <string name="navigation_item_logout">יציאה</string>
+  <string name="navigation_item_info">מדריך</string>
+  <string name="no_description_found">לא נמצא תיאור</string>
 </resources>

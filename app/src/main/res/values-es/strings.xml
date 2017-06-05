@@ -77,7 +77,7 @@
   <string name="menu_about">Acerca de</string>
   <string name="about_license">Programa de código abierto publicado bajo la &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Licencia Apache ver. 2&lt;/a&gt;. Wikimedia Commons y su logotipo son marcas registradas de la Fundación Wikimedia y se utilizan con su permiso. No hemos sido acreditados por la Fundación Wikimedia ni estamos afiliados con ella.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Código fuente&lt;/a&gt; y &lt;a href=\"https://commons-app.github.io/\"&gt;sitio web&lt;/a&gt; en GitHub. Crea &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;incidencias&lt;/a&gt; para informar de problemas y sugerencias.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Política de privacidad&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Normativa de privacidad&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Créditos&lt;/a&gt;</string>
   <string name="title_activity_about">Acerca de</string>
   <string name="menu_feedback">Enviar comentarios (por e-mail)</string>
@@ -120,7 +120,7 @@
   <string name="tutorial_2_text">Carga únicamente imágenes capturadas o creadas por ti.</string>
   <string name="tutorial_2_subtext">- Objetos naturales (flores, animales, montañas)\n- Objetos útiles (bicicletas, estaciones de tren)\n- Personas famosas (tu alcalde, algún atleta olímpico que conociste)</string>
   <string name="tutorial_3_text">NO cargues:</string>
-  <string name="tutorial_3_subtext">- Selfies o fotos de tus amigos\n- Imágenes que has descargado de Internet\n- Capturas de pantalla de aplicaciones propietarias</string>
+  <string name="tutorial_3_subtext">- Autorretratos o fotos de tus amigos\n- Imágenes que hayas descargado de Internet\n- Capturas de pantalla de aplicaciones privativas</string>
   <string name="tutorial_4_text">Ejemplo de carga:</string>
   <string name="tutorial_4_subtext">- Título: Casa de la Ópera de Sídney\n- Descripción: Casa de la Ópera de Sídney vista desde el otro lado de la bahía\n- Categorías: Casa de la Ópera de Sídney, Casa de la Ópera de Sídney desde el oeste, Vistas a distancia de la Casa de la Ópera de Sídney</string>
   <string name="welcome_wikipedia_text">Contribuye con tus imágenes.\n¡Ayuda a que los artículos de Wikipedia tengan vida!</string>
@@ -158,19 +158,19 @@
   <string name="maximum_limit">Límite máximo</string>
   <string name="maximum_limit_alert">No se pueden mostrar más de 500</string>
   <string name="set_limit">Establecer el límite de subidas recientes</string>
-  <string name="login_failed_2fa_not_supported">Actualmente no se admite la auntenticación de dos factores.</string>
+  <string name="login_failed_2fa_not_supported">Por el momento no se admite la autenticación de dos factores.</string>
   <string name="logout_verification">¿Confirmas que quieres salir?</string>
   <string name="commons_logo">Logo de Commons</string>
   <string name="background_image">Imagen de fondo</string>
   <string name="mediaimage_failed">Falló la imagen de multimedia</string>
-  <string name="no_image_found">No se encontró imagen</string>
+  <string name="no_image_found">No se encontró ninguna imagen</string>
   <string name="upload_image">Subir imagen</string>
   <string name="welcome_image_mount_zao">Monte Zao</string>
   <string name="welcome_image_llamas">Llamas</string>
   <string name="welcome_image_rainbow_bridge">Puente del Arco Iris</string>
   <string name="welcome_image_tulip">Tulipa</string>
-  <string name="welcome_image_no_selfies">No selfies</string>
-  <string name="welcome_image_proprietary">Imagen propietaria</string>
+  <string name="welcome_image_no_selfies">Nada de autorretratos</string>
+  <string name="welcome_image_proprietary">Imagen privativa</string>
   <string name="welcome_image_welcome_wikipedia">Wikipedia de bienvenida</string>
   <string name="welcome_image_welcome_copyright">Derechos de autor de bienvenida</string>
   <string name="welcome_image_sydney_opera_house">Ópera de Sídney</string>
@@ -185,7 +185,8 @@
   <string name="navigation_item_feedback">Comentarios</string>
   <string name="navigation_item_logout">Salir</string>
   <string name="navigation_item_info">Tutorial</string>
-  <string name="no_description_found">no se encontró descripción</string>
+  <string name="nearby_needs_permissions">Los sitios cercanos no pueden mostrarse sin los permisos de ubicación</string>
+  <string name="no_description_found">no se encontró ninguna descripción</string>
   <string name="nearby_info_menu_commons_article">Artículo en Commons</string>
-  <string name="nearby_info_menu_wikidata_article">Artículo en WikiData</string>
+  <string name="nearby_info_menu_wikidata_article">Elemento de Wikidata</string>
 </resources>

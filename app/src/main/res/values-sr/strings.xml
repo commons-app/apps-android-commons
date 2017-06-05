@@ -7,7 +7,7 @@
   <string name="login">Пријави ме</string>
   <string name="signup">Отвори налог</string>
   <string name="logging_in_title">Пријављивање</string>
-  <string name="logging_in_message" fuzzy="true">Сачекајте…</string>
+  <string name="logging_in_message">Сачекајте…</string>
   <string name="login_success">Успешно сте пријављени.</string>
   <string name="login_failed">Пријављивање није успело.</string>
   <string name="upload_failed">Датотека није пронађена. Покушајте са другом датотеком.</string>
@@ -83,7 +83,7 @@
   <string name="menu_feedback">Пошаљите повратне информације (путем е-поште)</string>
   <string name="no_email_client">Није инсталиран имејл клијент</string>
   <string name="provider_categories">Недавно коришћене категорије</string>
-  <string name="waiting_first_sync" fuzzy="true">Чекам на прву синхронизацију…</string>
+  <string name="waiting_first_sync">Чекам на прву синхронизацију…</string>
   <string name="no_uploads_yet">Још нисте отпремили ниједну фотографију.</string>
   <string name="menu_retry_upload">Покушај поново</string>
   <string name="menu_cancel_upload">Откажи</string>
@@ -130,7 +130,7 @@
   <string name="welcome_final_text">Јесте ли разумели?</string>
   <string name="welcome_final_button_text">Јесам!</string>
   <string name="detail_panel_cats_label">Категорије</string>
-  <string name="detail_panel_cats_loading" fuzzy="true">Учитавам…</string>
+  <string name="detail_panel_cats_loading">Учитавам…</string>
   <string name="detail_panel_cats_none">Ништа није изабрано</string>
   <string name="detail_description_empty">Нема описа</string>
   <string name="detail_license_empty">Непозната лиценца</string>
@@ -185,5 +185,5 @@
   <string name="navigation_item_feedback">Повратне информације</string>
   <string name="navigation_item_logout">Одјави ме</string>
   <string name="nearby_info_menu_commons_article">Чланак на Остави</string>
-  <string name="nearby_info_menu_wikidata_article">Чланак на Википодацима</string>
+  <string name="nearby_info_menu_wikidata_article" fuzzy="true">Чланак на Википодацима</string>
 </resources>

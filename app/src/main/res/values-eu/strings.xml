@@ -133,5 +133,5 @@
   <string name="navigation_item_logout">Saioa itxi</string>
   <string name="navigation_item_info" fuzzy="true">Sarrera</string>
   <string name="nearby_info_menu_commons_article">Commons Artikulua</string>
-  <string name="nearby_info_menu_wikidata_article">WikiData Artikulua</string>
+  <string name="nearby_info_menu_wikidata_article" fuzzy="true">WikiData Artikulua</string>
 </resources>

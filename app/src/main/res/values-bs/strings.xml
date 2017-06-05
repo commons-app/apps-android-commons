@@ -184,7 +184,8 @@
   <string name="navigation_item_settings">Postavke</string>
   <string name="navigation_item_feedback">Povratne informacije</string>
   <string name="navigation_item_logout">Odjavi me</string>
-  <string name="navigation_item_info" fuzzy="true">Uvod</string>
+  <string name="navigation_item_info">Uputstva</string>
+  <string name="no_description_found">nema opisa</string>
   <string name="nearby_info_menu_commons_article">Članak na Commonsu</string>
-  <string name="nearby_info_menu_wikidata_article">Članak na Wikipodacima</string>
+  <string name="nearby_info_menu_wikidata_article" fuzzy="true">Članak na Wikipodacima</string>
 </resources>

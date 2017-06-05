@@ -184,7 +184,8 @@
   <string name="navigation_item_settings">Configuración</string>
   <string name="navigation_item_feedback">Comentarios</string>
   <string name="navigation_item_logout">Saír</string>
-  <string name="navigation_item_info" fuzzy="true">Introdución</string>
+  <string name="navigation_item_info">Titorial</string>
+  <string name="no_description_found">non se atopou descrición</string>
   <string name="nearby_info_menu_commons_article">Artigo en Commons</string>
-  <string name="nearby_info_menu_wikidata_article">Artigo en WikiData</string>
+  <string name="nearby_info_menu_wikidata_article" fuzzy="true">Artigo en WikiData</string>
 </resources>

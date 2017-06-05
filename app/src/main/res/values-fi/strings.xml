@@ -161,5 +161,5 @@
   <string name="navigation_item_feedback">Palaute</string>
   <string name="navigation_item_logout">Kirjaudu ulos</string>
   <string name="nearby_info_menu_commons_article">Commons-artikkeli</string>
-  <string name="nearby_info_menu_wikidata_article">WikiData-artikkeli</string>
+  <string name="nearby_info_menu_wikidata_article" fuzzy="true">WikiData-artikkeli</string>
 </resources>

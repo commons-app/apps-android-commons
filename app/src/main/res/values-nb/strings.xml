@@ -7,7 +7,7 @@
   <string name="login">Logg inn</string>
   <string name="signup">Registrer deg</string>
   <string name="logging_in_title">Logger inn</string>
-  <string name="logging_in_message" fuzzy="true">Vennligst vent…</string>
+  <string name="logging_in_message">Vennligst vent …</string>
   <string name="login_success">Innloggingen var vellykket!</string>
   <string name="login_failed">Innloggingen feilet!</string>
   <string name="upload_failed">Filen ble ikke funnet. Forsøk med en annen fil.</string>
@@ -20,11 +20,11 @@
   <string name="upload_progress_notification_title_finishing">Avslutter opplasting av %1$s</string>
   <string name="upload_failed_notification_title">Opplastingen av %1$s feilet</string>
   <string name="upload_failed_notification_subtitle">Trykk for å vise</string>
-  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
-    <item quantity="one">1 fil lastes opp</item>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%d fil lastes opp</item>
     <item quantity="other">%d filer lastes opp</item>
   </plurals>
-  <string name="title_activity_contributions" fuzzy="true">Mine opplastinger</string>
+  <string name="title_activity_contributions">Mine nylige opplastinger</string>
   <string name="contribution_state_queued">I ventekø</string>
   <string name="contribution_state_failed">Feilet</string>
   <string name="contribution_state_in_progress">%1$d%% ferdig</string>
@@ -42,6 +42,7 @@
   <string name="login_failed_password">Innlogging feilet - sjekk passordet ditt</string>
   <string name="login_failed_throttled">For mange misslykkede forsøk. Vennligst prøv igjen om noen få minutter.</string>
   <string name="login_failed_blocked">Beklager, denne brukeren har blitt blokkert på Commons</string>
+  <string name="login_failed_2fa_needed">Du må oppgi tofaktorautentiseringskoden din.</string>
   <string name="login_failed_generic">Innlogging feilet</string>
   <string name="share_upload_button">Last opp</string>
   <string name="multiple_share_base_title">Navngi dette settet</string>
@@ -50,6 +51,9 @@
   <string name="categories_search_text_hint">Søk kategorier</string>
   <string name="menu_save_categories">Lagre</string>
   <string name="refresh_button">Oppdater</string>
+  <string name="gps_disabled">GPS er slått av på denne enheten. Ønsker du å slå den på?</string>
+  <string name="enable_gps">Slå på GPS</string>
+  <string name="contributions_subtitle_zero">Ingen opplastinger ennå</string>
   <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Ingen opplastinger enda</item>
     <item quantity="one">1 opplasting</item>
@@ -116,9 +120,9 @@
   <string name="tutorial_2_text">Last opp bilder som er tatt eller skapt av deg:</string>
   <string name="tutorial_2_subtext">– Naturlige objekter (blomster, dyr, fjell)\n– Nyttige objekter (sykler, togstasjoner)\n– Berømte personer (ordføreren din, OL-deltakere du har møtt)</string>
   <string name="tutorial_3_text">Vennligst IKKE last opp:</string>
-  <string name="tutorial_3_subtext">- Selfies eller bilder av dine venner\n- Bilder som du har lastet ned ifra Internet\n- Skjermbilder tatt ifra proprietære apper</string>
+  <string name="tutorial_3_subtext">- Selfies eller bilder av vennene dine\n- Bilder som du har lastet ned fra internet\n- Skjermbilder tatt fra proprietære apper</string>
   <string name="tutorial_4_text">Opplastingseksempel:</string>
-  <string name="tutorial_4_subtext">- Tittel: Sydneys Operahus\n- Beskrivelse: Sydneys Operahus sett ifra andre siden av bukten\n- Kategorier: Sydneys Operahus, Sydneys Operahus ifra vest, Sydneys Operahus utenfra</string>
+  <string name="tutorial_4_subtext">- Tittel: Sydneys Operahus\n- Beskrivelse: Operahuset i Sydney sett fra andre siden av bukten\n- Kategorier: Operahuset i Sydney, Operahuset i Sydney ifra vest, Operahuset i Sydney utenfra</string>
   <string name="welcome_wikipedia_text">Bidra med dine bilder. Hjelp til med å blåse liv i Wikipedias artikler!</string>
   <string name="welcome_wikipedia_subtext">Bilder på Wikipedia kommer fra Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Bildene dine kan være til hjelp for mennesker over hele verden som søker kunnskap og dannelse.</string>
@@ -126,7 +130,7 @@
   <string name="welcome_final_text">Forstått?</string>
   <string name="welcome_final_button_text">Ja!</string>
   <string name="detail_panel_cats_label">Kategorier</string>
-  <string name="detail_panel_cats_loading" fuzzy="true">Laster…</string>
+  <string name="detail_panel_cats_loading">Laster …</string>
   <string name="detail_panel_cats_none">Ingen valgt</string>
   <string name="detail_description_empty">Ingen beskrivelse</string>
   <string name="detail_license_empty">Ukjent lisens</string>
@@ -135,6 +139,7 @@
   <string name="location_permission_rationale">Valgfri tillatelse: Hent nåværende posisjon for kategoriforslag</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Plasser i nærheten</string>
+  <string name="no_nearby">Ingen steder i nærheten funnet</string>
   <string name="warning">Advarsel</string>
   <string name="file_exists">Denne filen eksisterer allerede på Commons. Er du sikker på at du vil fortsette?</string>
   <string name="yes">Ja</string>
@@ -143,8 +148,10 @@
   <string name="media_detail_media_title">Medietittel</string>
   <string name="media_detail_description">Beskrivelse</string>
   <string name="media_detail_description_explanation">Beskrivelse av mediet skal være her. Denne kan potensielt være ganske lang, og vil trenge å strekke seg over flere linjer. Vi håper det ser bra nok ut.</string>
+  <string name="media_detail_uploaded_date">Opplastingsdato</string>
   <string name="become_a_tester_title">Bli betatester</string>
   <string name="become_a_tester_description">Registrer deg på vår betakanal på Google Play og få tidlig tilgang til nye funksjoner og feilrettinger</string>
   <string name="use_wikidata">Bruk Wikidata</string>
   <string name="use_wikidata_summary">(Advarsel: Store mengder mobildata kan bli brukt om denne slås av)</string>
+  <string name="_2fa_code">2FA-kode</string>
 </resources>

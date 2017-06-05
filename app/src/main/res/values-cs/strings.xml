@@ -184,5 +184,5 @@
   <string name="navigation_item_feedback">Zpětná vazba</string>
   <string name="navigation_item_logout">Odhlášení</string>
   <string name="nearby_info_menu_commons_article">Článek na Commons</string>
-  <string name="nearby_info_menu_wikidata_article">Článek na Wikidatech</string>
+  <string name="nearby_info_menu_wikidata_article" fuzzy="true">Článek na Wikidatech</string>
 </resources>

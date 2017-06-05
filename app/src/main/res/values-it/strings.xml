@@ -162,5 +162,6 @@
   <string name="navigation_item_settings">Impostazioni</string>
   <string name="navigation_item_feedback">Commenti</string>
   <string name="navigation_item_logout">Esci</string>
-  <string name="navigation_item_info" fuzzy="true">Introduzione</string>
+  <string name="navigation_item_info">Tutorial</string>
+  <string name="no_description_found">nessuna descrizione trovata</string>
 </resources>

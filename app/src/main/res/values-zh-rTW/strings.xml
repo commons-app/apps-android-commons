@@ -187,5 +187,5 @@
   <string name="navigation_item_info">教程</string>
   <string name="no_description_found">找不到描述</string>
   <string name="nearby_info_menu_commons_article">共享資源條目</string>
-  <string name="nearby_info_menu_wikidata_article">維基數據條目</string>
+  <string name="nearby_info_menu_wikidata_article" fuzzy="true">維基數據條目</string>
 </resources>

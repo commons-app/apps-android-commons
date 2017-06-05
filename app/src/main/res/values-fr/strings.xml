@@ -162,7 +162,7 @@
   <string name="logout_verification">Voulez-vous vraiment vous déconnecter ?</string>
   <string name="commons_logo">Logo de Communs</string>
   <string name="background_image">Image de fond</string>
-  <string name="mediaimage_failed">Échec de l’image du média</string>
+  <string name="mediaimage_failed">Échec sur l’image du média</string>
   <string name="no_image_found">Aucune image trouvée</string>
   <string name="upload_image">Téléverser une image</string>
   <string name="welcome_image_mount_zao">Mont Zao</string>
@@ -187,5 +187,5 @@
   <string name="navigation_item_info">Tutoriel</string>
   <string name="no_description_found">aucune description trouvée</string>
   <string name="nearby_info_menu_commons_article">Article de Communs</string>
-  <string name="nearby_info_menu_wikidata_article">Article de WikiData</string>
+  <string name="nearby_info_menu_wikidata_article" fuzzy="true">Article de WikiData</string>
 </resources>

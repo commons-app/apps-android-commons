@@ -180,6 +180,7 @@
   <string name="navigation_item_feedback">প্রতিক্রিয়া</string>
   <string name="navigation_item_logout">প্রস্থান</string>
   <string name="navigation_item_info" fuzzy="true">ভূমিকা</string>
+  <string name="no_description_found">কোন বিবরণ পাওয়া যায়নি</string>
   <string name="nearby_info_menu_commons_article">কমন্স নিবন্ধ</string>
-  <string name="nearby_info_menu_wikidata_article">উইকিউপাত্ত নিবন্ধ</string>
+  <string name="nearby_info_menu_wikidata_article" fuzzy="true">উইকিউপাত্ত নিবন্ধ</string>
 </resources>
