@@ -103,9 +103,8 @@ public class SettingsActivityTest {
 
     private static Matcher<View> findPreferenceList() {
         return allOf(
-                ViewMatchers.isDescendantOfA(ViewMatchers.withId(R.id.settingsFragment)),
-                ViewMatchers.withResourceName("list"),
-                ViewMatchers.hasFocus()
+                ViewMatchers.withParent(ViewMatchers.withId(R.id.settingsFragment)),
+                ViewMatchers.withId(android.R.id.list)
         );
     }
 }
