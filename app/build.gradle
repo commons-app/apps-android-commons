@@ -41,8 +41,8 @@ android {
 
     defaultConfig {
         applicationId 'fr.free.nrw.commons'
-        versionCode 72
-        versionName '2.4.1'
+        versionCode 73
+        versionName '2.4.2'
         minSdkVersion project.minSdkVersion
         targetSdkVersion project.targetSdkVersion
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
