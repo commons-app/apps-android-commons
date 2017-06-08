@@ -185,7 +185,8 @@
   <string name="navigation_item_feedback">Мислења</string>
   <string name="navigation_item_logout">Одјава</string>
   <string name="navigation_item_info">Упатства</string>
+  <string name="nearby_needs_permissions">Местата во близина не можат да се прикажат без дозволи за местоположба.</string>
   <string name="no_description_found">не најдов описи</string>
   <string name="nearby_info_menu_commons_article">Статија на Ризницата</string>
-  <string name="nearby_info_menu_wikidata_article" fuzzy="true">Статија на Википодатоците</string>
+  <string name="nearby_info_menu_wikidata_article">Предмет на Википодатоците</string>
 </resources>

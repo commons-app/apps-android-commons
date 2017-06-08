@@ -186,5 +186,5 @@
   <string name="navigation_item_info">Руководство</string>
   <string name="no_description_found">описание не найдено</string>
   <string name="nearby_info_menu_commons_article">Статья на Викискладе</string>
-  <string name="nearby_info_menu_wikidata_article" fuzzy="true">Статья на Викиданных</string>
+  <string name="nearby_info_menu_wikidata_article">Элемент Викиданных</string>
 </resources>
