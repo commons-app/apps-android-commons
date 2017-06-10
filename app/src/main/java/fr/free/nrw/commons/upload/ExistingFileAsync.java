@@ -25,17 +25,19 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
     interface Callback {
         void onResult(Result result);
     }
+
     public enum Result {
         NO_DUPLICATE,
         DUPLICATE_PROCEED,
         DUPLICATE_CANCELLED
     }
-    private final String fileSHA1;
+
+    private final String fileSha1;
     private final Context context;
     private final Callback callback;
 
-    public ExistingFileAsync(String fileSHA1, Context context, Callback callback) {
-        this.fileSHA1 = fileSHA1;
+    public ExistingFileAsync(String fileSha1, Context context, Callback callback) {
+        this.fileSha1 = fileSha1;
         this.context = context;
         this.callback = callback;
     }
@@ -55,7 +57,7 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
             result = api.action("query")
                     .param("format", "xml")
                     .param("list", "allimages")
-                    .param("aisha1", fileSHA1)
+                    .param("aisha1", fileSha1)
                     .get();
             Timber.d("Searching Commons API for existing file: %s", result);
         } catch (IOException e) {

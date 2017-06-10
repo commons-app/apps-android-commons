@@ -291,7 +291,9 @@ public  class       ShareActivity
                                 + getResources().getString(R.string.location_permission_rationale);
                 snackbar = requestPermissionUsingSnackBar(
                         permissionRationales,
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION},
+                        new String[]{
+                                Manifest.permission.READ_EXTERNAL_STORAGE,
+                                Manifest.permission.ACCESS_FINE_LOCATION},
                         REQUEST_PERM_ON_CREATE_STORAGE_AND_LOCATION);
                 View snackbarView = snackbar.getView();
                 TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
@@ -308,7 +310,7 @@ public  class       ShareActivity
                         REQUEST_PERM_ON_CREATE_LOCATION);
             }
         }
-        preuploadProcessingOfFile();
+        performPreuploadProcessingOfFile();
     }
 
     @Override
@@ -320,7 +322,7 @@ public  class       ShareActivity
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     backgroundImageView.setImageURI(mediaUri);
                     storagePermitted = true;
-                    preuploadProcessingOfFile();
+                    performPreuploadProcessingOfFile();
                 }
                 return;
             }
@@ -328,7 +330,7 @@ public  class       ShareActivity
                 if (grantResults.length >= 1
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     locationPermitted = true;
-                    preuploadProcessingOfFile();
+                    performPreuploadProcessingOfFile();
                 }
                 return;
             }
@@ -337,12 +339,12 @@ public  class       ShareActivity
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     backgroundImageView.setImageURI(mediaUri);
                     storagePermitted = true;
-                    preuploadProcessingOfFile();
+                    performPreuploadProcessingOfFile();
                 }
                 if (grantResults.length >= 2
                         && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                     locationPermitted = true;
-                    preuploadProcessingOfFile();
+                    performPreuploadProcessingOfFile();
                 }
                 return;
             }
@@ -353,7 +355,7 @@ public  class       ShareActivity
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     //It is OK to call this at both (1) and (4) because if perm had been granted at
                     //snackbar, user should not be prompted at submit button
-                    preuploadProcessingOfFile();
+                    performPreuploadProcessingOfFile();
 
                     //Uploading only begins if storage permission granted from arrow icon
                     uploadBegins();
@@ -364,9 +366,8 @@ public  class       ShareActivity
         }
     }
 
-    private void preuploadProcessingOfFile() {
-        if(!useNewPermissions || storagePermitted) {
-
+    private void performPreuploadProcessingOfFile() {
+        if (!useNewPermissions || storagePermitted) {
             if (!duplicateCheckPassed) {
                 //Test SHA1 of image to see if it matches SHA1 of a file on Commons
                 try {
@@ -375,15 +376,16 @@ public  class       ShareActivity
                     String fileSHA1 = Utils.getSHA1(inputStream);
                     Timber.d("File SHA1 is: %s", fileSHA1);
 
-                    ExistingFileAsync fileAsyncTask = new ExistingFileAsync(fileSHA1, this, new ExistingFileAsync.Callback() {
-                        @Override
-                        public void onResult(ExistingFileAsync.Result result) {
-                            Timber.d("%s duplicate check: %s", mediaUri.toString(), result);
-                            duplicateCheckPassed =
-                                    result == ExistingFileAsync.Result.DUPLICATE_PROCEED
-                                            || result == ExistingFileAsync.Result.NO_DUPLICATE;
-                        }
-                    });
+                    ExistingFileAsync fileAsyncTask =
+                            new ExistingFileAsync(fileSHA1, this, new ExistingFileAsync.Callback() {
+                                @Override
+                                public void onResult(ExistingFileAsync.Result result) {
+                                    Timber.d("%s duplicate check: %s", mediaUri.toString(), result);
+                                    duplicateCheckPassed =
+                                            result == ExistingFileAsync.Result.DUPLICATE_PROCEED
+                                                    || result == ExistingFileAsync.Result.NO_DUPLICATE;
+                                }
+                            });
                     fileAsyncTask.execute();
                 } catch (IOException e) {
                     Timber.d(e, "IO Exception: ");
@@ -392,12 +394,13 @@ public  class       ShareActivity
 
             getFileMetadata(locationPermitted);
         } else {
-            Timber.w("not ready for preprocess: useNewPermissions=%s storage=%s location=%s",
+            Timber.w("not ready for preprocessing: useNewPermissions=%s storage=%s location=%s",
                     useNewPermissions, storagePermitted, locationPermitted);
         }
     }
 
-    private Snackbar requestPermissionUsingSnackBar(String rationale, final String[] perms, final int code) {
+    private Snackbar requestPermissionUsingSnackBar(
+            String rationale, final String[] perms, final int code) {
         Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), rationale,
                 Snackbar.LENGTH_INDEFINITE)
                 .setAction(R.string.ok, new View.OnClickListener() {

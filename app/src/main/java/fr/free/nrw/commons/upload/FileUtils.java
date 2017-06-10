@@ -166,10 +166,11 @@ public class FileUtils {
      * @param destination stream copied to
      * @throws IOException thrown when failing to read source or opening destination file
      */
-    public static void copy(@NonNull FileInputStream source, @NonNull FileOutputStream destination) throws IOException {
-        FileChannel source_ = source.getChannel();
-        FileChannel dest_ = destination.getChannel();
-        source_.transferTo(0, source_.size(), dest_);
+    public static void copy(@NonNull FileInputStream source, @NonNull FileOutputStream destination)
+            throws IOException {
+        FileChannel sourceChannel = source.getChannel();
+        FileChannel destinationChannel = destination.getChannel();
+        sourceChannel.transferTo(0, sourceChannel.size(), destinationChannel);
     }
 
     /**
@@ -178,7 +179,8 @@ public class FileUtils {
      * @param destination file path copied to
      * @throws IOException thrown when failing to read source or opening destination file
      */
-    public static void copy(@NonNull FileDescriptor source, @NonNull String destination) throws IOException {
+    public static void copy(@NonNull FileDescriptor source, @NonNull String destination)
+            throws IOException {
         copy(new FileInputStream(source), new FileOutputStream(destination));
     }
 
