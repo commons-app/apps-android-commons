@@ -113,35 +113,36 @@ public class UploadController {
                         }
                         contribution.setDataLength(length);
                     }
-                } catch(IOException e) {
+                } catch (IOException e) {
                     Timber.e(e, "IO Exception: ");
-                } catch(NullPointerException e) {
+                } catch (NullPointerException e) {
                     Timber.e(e, "Null Pointer Exception: ");
-                } catch(SecurityException e) {
+                } catch (SecurityException e) {
                     Timber.e(e, "Security Exception: ");
                 }
 
                 String mimeType = (String)contribution.getTag("mimeType");
                 Boolean imagePrefix = false;
 
-                if(mimeType == null || TextUtils.isEmpty(mimeType) || mimeType.endsWith("*")) {
+                if (mimeType == null || TextUtils.isEmpty(mimeType) || mimeType.endsWith("*")) {
                     mimeType = app.getContentResolver().getType(contribution.getLocalUri());
                 }
 
-                if(mimeType != null) {
+                if (mimeType != null) {
                     contribution.setTag("mimeType", mimeType);
                     imagePrefix = mimeType.startsWith("image/");
                     Timber.d("MimeType is: %s", mimeType);
                 }
 
-                if(imagePrefix && contribution.getDateCreated() == null) {
+                if (imagePrefix && contribution.getDateCreated() == null) {
+                    Timber.d("local uri   " + contribution.getLocalUri());
                     Cursor cursor = app.getContentResolver().query(contribution.getLocalUri(),
                             new String[]{MediaStore.Images.ImageColumns.DATE_TAKEN}, null, null, null);
-                    if(cursor != null && cursor.getCount() != 0) {
+                    if (cursor != null && cursor.getCount() != 0 && cursor.getColumnCount() != 0) {
                         cursor.moveToFirst();
                         Date dateCreated = new Date(cursor.getLong(0));
                         Date epochStart = new Date(0);
-                        if(dateCreated.equals(epochStart) || dateCreated.before(epochStart)) {
+                        if (dateCreated.equals(epochStart) || dateCreated.before(epochStart)) {
                             // If date is incorrect (1st second of unix time) then set it to the current date
                             dateCreated = new Date();
                         }

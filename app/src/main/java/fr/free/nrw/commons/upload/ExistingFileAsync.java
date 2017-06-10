@@ -6,13 +6,13 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 
-import fr.free.nrw.commons.MWApi;
 import org.mediawiki.api.ApiResult;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.MWApi;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import timber.log.Timber;
@@ -22,13 +22,22 @@ import timber.log.Timber;
  * Displays a warning to the user if the file already exists on Commons
  */
 public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
+    interface Callback {
+        void onResult(Result result);
+    }
+    public enum Result {
+        NO_DUPLICATE,
+        DUPLICATE_PROCEED,
+        DUPLICATE_CANCELLED
+    }
+    private final String fileSHA1;
+    private final Context context;
+    private final Callback callback;
 
-    private String fileSHA1;
-    private Context context;
-
-    public ExistingFileAsync(String fileSHA1, Context context) {
+    public ExistingFileAsync(String fileSHA1, Context context, Callback callback) {
         this.fileSHA1 = fileSHA1;
         this.context = context;
+        this.callback = callback;
     }
 
     @Override
@@ -79,17 +88,20 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
                     //Go back to ContributionsActivity
                     Intent intent = new Intent(context, ContributionsActivity.class);
                     context.startActivity(intent);
+                    callback.onResult(Result.DUPLICATE_CANCELLED);
                 }
             });
             builder.setNegativeButton(R.string.yes, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int id) {
-                    //No need to do anything, user remains on upload screen
+                    callback.onResult(Result.DUPLICATE_PROCEED);
                 }
             });
 
             AlertDialog dialog = builder.create();
             dialog.show();
+        } else {
+            callback.onResult(Result.NO_DUPLICATE);
         }
     }
 }
