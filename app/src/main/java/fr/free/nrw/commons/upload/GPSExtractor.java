@@ -7,10 +7,14 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.ExifInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 
+import java.io.FileDescriptor;
 import java.io.IOException;
 
 import fr.free.nrw.commons.CommonsApplication;
@@ -23,17 +27,38 @@ import timber.log.Timber;
  */
 public class GPSExtractor {
 
-    private String filePath;
-    private double decLatitude, decLongitude;
+    private ExifInterface exif;
+    private double decLatitude;
+    private double decLongitude;
     private Double currentLatitude = null;
     private Double currentLongitude = null;
     public boolean imageCoordsExists;
     private MyLocationListener myLocationListener;
     private LocationManager locationManager;
 
+    /**
+     * Construct from the file descriptor of the image (only for API 24 or newer).
+     * @param fileDescriptor the file descriptor of the image
+     */
+    @RequiresApi(24)
+    public GPSExtractor(@NonNull FileDescriptor fileDescriptor) {
+        try {
+            exif = new ExifInterface(fileDescriptor);
+        } catch (IOException | IllegalArgumentException e) {
+            Timber.w(e);
+        }
+    }
 
-    public GPSExtractor(String filePath) {
-        this.filePath = filePath;
+    /**
+     * Construct from the file path of the image.
+     * @param path file path of the image
+     */
+    public GPSExtractor(@NonNull String path) {
+        try {
+            exif = new ExifInterface(path);
+        } catch (IOException | IllegalArgumentException e) {
+            Timber.w(e);
+        }
     }
 
     /**
@@ -86,45 +111,37 @@ public class GPSExtractor {
      */
     @Nullable
     public String getCoords(boolean useGPS) {
-
-        ExifInterface exif;
         String latitude = "";
         String longitude = "";
         String latitude_ref = "";
         String longitude_ref = "";
         String decimalCoords = "";
 
-        try {
-            exif = new ExifInterface(filePath);
-        } catch (IOException e) {
-            Timber.w(e);
-            return null;
-        } catch (IllegalArgumentException e) {
-            Timber.w(e);
-            return null;
-        }
-
         //If image has no EXIF data and user has enabled GPS setting, get user's location
-        if (exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE) == null && useGPS) {
-            registerLocationManager();
+        if (exif == null || exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE) == null) {
+            if (useGPS) {
+                registerLocationManager();
 
-            imageCoordsExists = false;
-            Timber.d("EXIF data has no location info");
+                imageCoordsExists = false;
+                Timber.d("EXIF data has no location info");
 
-            //Check what user's preference is for automatic location detection
-            boolean gpsPrefEnabled = gpsPreferenceEnabled();
+                //Check what user's preference is for automatic location detection
+                boolean gpsPrefEnabled = gpsPreferenceEnabled();
 
-            //Check that currentLatitude and currentLongitude have been explicitly set by MyLocationListener and do not default to (0.0,0.0)
-            if (gpsPrefEnabled && currentLatitude != null && currentLongitude != null) {
-                Timber.d("Current location values: Lat = %f Long = %f",
-                        currentLatitude, currentLongitude);
-                return String.valueOf(currentLatitude) + "|" + String.valueOf(currentLongitude);
+                //Check that currentLatitude and currentLongitude have been
+                // explicitly set by MyLocationListener
+                // and do not default to (0.0,0.0)
+                if (gpsPrefEnabled && currentLatitude != null && currentLongitude != null) {
+                    Timber.d("Current location values: Lat = %f Long = %f",
+                            currentLatitude, currentLongitude);
+                    return String.valueOf(currentLatitude) + "|" + String.valueOf(currentLongitude);
+                } else {
+                    // No coords found
+                    return null;
+                }
             } else {
-                // No coords found
                 return null;
             }
-        } else if (exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE) == null) {
-            return null;
         } else {
             //If image has EXIF data, extract image coords
             imageCoordsExists = true;

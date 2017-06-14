@@ -9,6 +9,16 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
+import java.io.FileDescriptor;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
+
+import timber.log.Timber;
 
 public class FileUtils {
 
@@ -23,6 +33,7 @@ public class FileUtils {
      */
     // Can be safely suppressed, checks for isKitKat before running isDocumentUri
     @SuppressLint("NewApi")
+    @Nullable
     public static String getPath(Context context, Uri uri) {
 
         final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
@@ -93,6 +104,7 @@ public class FileUtils {
      * @param selectionArgs (Optional) Selection arguments used in the query.
      * @return The value of the _data column, which is typically a file path.
      */
+    @Nullable
     public static String getDataColumn(Context context, Uri uri, String selection,
                                        String[] selectionArgs) {
 
@@ -108,6 +120,8 @@ public class FileUtils {
                 final int column_index = cursor.getColumnIndexOrThrow(column);
                 return cursor.getString(column_index);
             }
+        } catch (IllegalArgumentException e) {
+            Timber.d(e);
         } finally {
             if (cursor != null)
                 cursor.close();
@@ -119,7 +133,7 @@ public class FileUtils {
      * @param uri The Uri to check.
      * @return Whether the Uri authority is ExternalStorageProvider.
      */
-    public static boolean isExternalStorageDocument(Uri uri) {
+    private static boolean isExternalStorageDocument(Uri uri) {
         return "com.android.externalstorage.documents".equals(uri.getAuthority());
     }
 
@@ -127,7 +141,7 @@ public class FileUtils {
      * @param uri The Uri to check.
      * @return Whether the Uri authority is DownloadsProvider.
      */
-    public static boolean isDownloadsDocument(Uri uri) {
+    private static boolean isDownloadsDocument(Uri uri) {
         return "com.android.providers.downloads.documents".equals(uri.getAuthority());
     }
 
@@ -135,7 +149,39 @@ public class FileUtils {
      * @param uri The Uri to check.
      * @return Whether the Uri authority is MediaProvider.
      */
-    public static boolean isMediaDocument(Uri uri) {
+    private static boolean isMediaDocument(Uri uri) {
         return "com.android.providers.media.documents".equals(uri.getAuthority());
     }
+
+    /**
+     * Check if the URI is owned by the current app.
+     */
+    public static boolean isSelfOwned(Context context, Uri uri) {
+        return uri.getAuthority().equals(context.getPackageName() + ".provider");
+    }
+
+    /**
+     * Copy content from source file to destination file.
+     * @param source stream copied from
+     * @param destination stream copied to
+     * @throws IOException thrown when failing to read source or opening destination file
+     */
+    public static void copy(@NonNull FileInputStream source, @NonNull FileOutputStream destination)
+            throws IOException {
+        FileChannel sourceChannel = source.getChannel();
+        FileChannel destinationChannel = destination.getChannel();
+        sourceChannel.transferTo(0, sourceChannel.size(), destinationChannel);
+    }
+
+    /**
+     * Copy content from source file to destination file.
+     * @param source file descriptor copied from
+     * @param destination file path copied to
+     * @throws IOException thrown when failing to read source or opening destination file
+     */
+    public static void copy(@NonNull FileDescriptor source, @NonNull String destination)
+            throws IOException {
+        copy(new FileInputStream(source), new FileOutputStream(destination));
+    }
+
 }
