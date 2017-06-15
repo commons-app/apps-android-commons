@@ -15,9 +15,13 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import android.widget.Toast;
-import fr.free.nrw.commons.*;
+
+import fr.free.nrw.commons.BuildConfig;
+import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.PageTitle;
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import timber.log.Timber;
 
@@ -158,7 +162,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
      * @return String canonicial username
      */
     private String canonicializeUsername( String username ) {
-        return Utils.capitalize(username.substring(0,1)) + username.substring(1);
+        return new PageTitle(username).getText();
     }
 
     @Override

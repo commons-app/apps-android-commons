@@ -24,8 +24,8 @@ import fr.free.nrw.commons.LicenseList;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.MediaWikiImageView;
+import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
 import timber.log.Timber;
 
 public class MediaDetailFragment extends Fragment {
@@ -86,7 +86,7 @@ public class MediaDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         detailProvider = (MediaDetailPagerFragment.MediaDetailProvider)getActivity();
 
-        if(savedInstanceState != null) {
+        if (savedInstanceState != null) {
             editable = savedInstanceState.getBoolean("editable");
             index = savedInstanceState.getInt("index");
             initialListTop = savedInstanceState.getInt("listTop");
@@ -269,12 +269,11 @@ public class MediaDetailFragment extends Fragment {
         }
     }
 
-    private View buildCatLabel(String cat) {
-        final String catName = cat;
+    private View buildCatLabel(final String catName) {
         final View item = getLayoutInflater(null).inflate(R.layout.detail_category_item, null, false);
         final TextView textView = (TextView)item.findViewById(R.id.mediaDetailCategoryItemText);
 
-        textView.setText(cat);
+        textView.setText(catName);
         if (categoriesLoaded && categoriesPresent) {
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -282,7 +281,7 @@ public class MediaDetailFragment extends Fragment {
                     String selectedCategoryTitle = "Category:" + catName;
                     Intent viewIntent = new Intent();
                     viewIntent.setAction(Intent.ACTION_VIEW);
-                    viewIntent.setData(Utils.uriForWikiPage(selectedCategoryTitle));
+                    viewIntent.setData(new PageTitle(selectedCategoryTitle).getCanonicalUri());
                     startActivity(viewIntent);
                 }
             });

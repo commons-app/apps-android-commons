@@ -9,7 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Locale;
 
-import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.concurrency.BackgroundPoolExceptionHandler;
 import fr.free.nrw.commons.concurrency.ThreadPoolExecutorService;
 import timber.log.Timber;
@@ -34,7 +34,8 @@ public class UploadCountClient {
             public void run() {
                 URL url;
                 try {
-                    url = new URL(String.format(Locale.ENGLISH, UPLOAD_COUNT_URL_TEMPLATE, userName));
+                    url = new URL(String.format(Locale.ENGLISH, UPLOAD_COUNT_URL_TEMPLATE,
+                            new PageTitle(userName).getText()));
                     HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                     try {
                         BufferedReader bufferedReader = new BufferedReader(new
