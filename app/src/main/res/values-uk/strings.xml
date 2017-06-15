@@ -7,7 +7,7 @@
   <string name="login">Увійти</string>
   <string name="signup">Зареєструватися</string>
   <string name="logging_in_title">Вхід до системи</string>
-  <string name="logging_in_message" fuzzy="true">Будь ласка, зачекайте…</string>
+  <string name="logging_in_message">Будь ласка, зачекайте…</string>
   <string name="login_success">Ви успішно увійшли!</string>
   <string name="login_failed">Не вдалося увійти</string>
   <string name="upload_failed">Файл не знайдено. Будь ласка, спробуйте інший файл.</string>
@@ -20,13 +20,13 @@
   <string name="upload_progress_notification_title_finishing">Завершення завантаження %1$s</string>
   <string name="upload_failed_notification_title">Не вдалося завантажити %1$s</string>
   <string name="upload_failed_notification_subtitle">Торкніться, щоб переглянути</string>
-  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
+  <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Завантажується %d файл</item>
     <item quantity="few">Завантажуються %d файли</item>
     <item quantity="many">Завантажується %d файлів</item>
     <item quantity="other">Завантажується %d файлів</item>
   </plurals>
-  <string name="title_activity_contributions" fuzzy="true">Мої завантаження</string>
+  <string name="title_activity_contributions">Мої останні завантаження</string>
   <string name="contribution_state_queued">У черзі</string>
   <string name="contribution_state_failed">Не вдалося</string>
   <string name="contribution_state_in_progress">%1$d%% завершено</string>
@@ -44,6 +44,7 @@
   <string name="login_failed_password">Неможливо увійти — будь ласка, перевірте свій пароль</string>
   <string name="login_failed_throttled">Надто багато невдалих спроб. Будь ласка, спробуйте знову через кілька хвилин.</string>
   <string name="login_failed_blocked">Вибачте, цього користувача було заблоковано на Вікісховищі</string>
+  <string name="login_failed_2fa_needed">Ви повинні надати код двофакторної автентифікації.</string>
   <string name="login_failed_generic">Не вдалося увійти</string>
   <string name="share_upload_button">Завантажити</string>
   <string name="multiple_share_base_title">Назвіть цю серію</string>
@@ -52,10 +53,14 @@
   <string name="categories_search_text_hint">Пошук категорій</string>
   <string name="menu_save_categories">Зберегти</string>
   <string name="refresh_button">Оновити</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">Наразі нема завантажень</item>
-    <item quantity="one">1 завантаження</item>
+  <string name="gps_disabled">GPS вимкнено на Вашому пристрої. Чи хотіли б Ви його увімкнути?</string>
+  <string name="enable_gps">Увімкнути GPS</string>
+  <string name="contributions_subtitle_zero">Ще нема завантажень</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%d завантаження</item>
     <item quantity="few">%d завантаження</item>
+    <item quantity="many">%d завантажень</item>
     <item quantity="other">%d завантажень</item>
   </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">

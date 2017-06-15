@@ -7,7 +7,7 @@
   <string name="login">אַרײַנלאָגירן</string>
   <string name="signup">אײַנשרייבן</string>
   <string name="logging_in_title">ארײַנלאגירן</string>
-  <string name="logging_in_message" fuzzy="true">ביטע ווארטן…</string>
+  <string name="logging_in_message">ביטע ווארטן</string>
   <string name="login_success">אריינלאגירט מיט הצלחה!</string>
   <string name="login_failed">ארײַנלאגירן אדורכגעפאלן!</string>
   <string name="upload_failed">טעקע נישט געראפן.  פרובירט אפשר אן אנדער טעקע.</string>
@@ -24,7 +24,7 @@
     <item quantity="one">%d טעקע לאדט אן</item>
     <item quantity="other">%d טעקעס לאדן אן</item>
   </plurals>
-  <string name="title_activity_contributions" fuzzy="true">מײַנע ארויפלאדן</string>
+  <string name="title_activity_contributions">מײַנע לעצטיקע ארויפֿלאדן</string>
   <string name="contribution_state_queued">אין ריי</string>
   <string name="contribution_state_failed">דורכגעפֿאַלן</string>
   <string name="contribution_state_in_progress">%1$d%% דערגאנצט</string>
@@ -37,6 +37,7 @@
   <string name="menu_open_in_browser">באקוקן אין בלעטערער</string>
   <string name="share_title_hint">טיטל</string>
   <string name="share_description_hint">באַשרײַבונג</string>
+  <string name="login_failed_network">נישט מעגלעך אריינלאגירן – נעצווערק פֿעלער</string>
   <string name="login_failed_generic">ארײַנלאגירן אדורכגעפאלן!</string>
   <string name="share_upload_button">אַרויפֿלאָדן</string>
   <string name="provider_modifications">פֿארענדערונגען</string>
@@ -44,8 +45,8 @@
   <string name="categories_search_text_hint">זוכן קאטעגאריעס</string>
   <string name="menu_save_categories">אויפֿהיטן</string>
   <string name="refresh_button">דערפֿרישן</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">נאך נישט קיין ארויפֿלאדן </item>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero </item>
     <item quantity="one">איין ארויפֿלאד</item>
     <item quantity="other">%d ארויפֿלאדן</item>
   </plurals>
@@ -83,16 +84,24 @@
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="welcome_final_button_text">יא!</string>
   <string name="detail_panel_cats_label">קאַטעגאריעס</string>
-  <string name="detail_panel_cats_loading" fuzzy="true">לאָדט…</string>
+  <string name="detail_panel_cats_loading">לאָדט…</string>
   <string name="detail_panel_cats_none">גארנישט געקליבן</string>
   <string name="detail_description_empty">קיין באַשרײַבונג</string>
   <string name="detail_license_empty">אומבאקאנטער ליצענץ</string>
   <string name="menu_refresh">דערפֿרישן</string>
+  <string name="ok">יאָ</string>
+  <string name="warning">ווארענונג</string>
+  <string name="yes">יא</string>
+  <string name="no">ניין</string>
+  <string name="welcome_image_tulip">טולפאן</string>
   <string name="cancel">אַנולירן</string>
+  <string name="navigation_drawer_open">אפֿן</string>
   <string name="navigation_drawer_close">שליסן</string>
+  <string name="navigation_item_home">היים</string>
   <string name="navigation_item_upload">אַרויפֿלאָדן</string>
   <string name="navigation_item_nearby">דערבײ</string>
   <string name="navigation_item_about">וועגן</string>
   <string name="navigation_item_settings">איינשטעלונגען</string>
+  <string name="navigation_item_feedback">פֿידבעק</string>
   <string name="navigation_item_logout">אַרויסלאָגירן</string>
 </resources>

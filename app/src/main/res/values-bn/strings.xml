@@ -7,7 +7,7 @@
   <string name="login">প্রবেশ</string>
   <string name="signup">নিবন্ধন</string>
   <string name="logging_in_title">প্রবেশ হচ্ছে</string>
-  <string name="logging_in_message">একটু অপেক্ষা করুন…</string>
+  <string name="logging_in_message">অনুগ্রহ করে অপেক্ষা করুন...</string>
   <string name="login_success">প্রবেশ সফল!</string>
   <string name="login_failed">প্রবেশ ব্যর্থ :(</string>
   <string name="upload_failed">ফাইল পাওয়া যায়নি। আরেকটি ফাইল চেষ্টা করুন।</string>
@@ -176,7 +176,7 @@
   <string name="navigation_item_upload">আপলোড</string>
   <string name="navigation_item_nearby">কাছাকাছি</string>
   <string name="navigation_item_about">সম্পর্কে</string>
-  <string name="navigation_item_settings">সেটিং</string>
+  <string name="navigation_item_settings">সেটিংস</string>
   <string name="navigation_item_feedback">প্রতিক্রিয়া</string>
   <string name="navigation_item_logout">প্রস্থান</string>
   <string name="navigation_item_info">ভূমিকা</string>

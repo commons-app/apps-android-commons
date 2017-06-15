@@ -14,7 +14,7 @@
   <string name="authentication_failed">Wurung otèntifikasi!</string>
   <string name="uploading_started">Wiwit ngunggah!</string>
   <string name="upload_completed_notification_title">%1$s kaunggah!</string>
-  <string name="upload_completed_notification_text">Dudulana kanggo ndeleng sing kokunggah</string>
+  <string name="upload_completed_notification_text">Dudul saperlu ndeleng unggahané panjenengan</string>
   <string name="upload_progress_notification_title_start">Wiwit nguggah %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Ngunggah %1$s</string>
   <string name="upload_progress_notification_title_finishing">Rampung ngunggah %1$s</string>
@@ -73,6 +73,9 @@
   <string name="title_activity_settings">Setèlan</string>
   <string name="title_activity_signup">Ndhaftar</string>
   <string name="menu_about">Ngenani</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sumber&lt;/a&gt; lan &lt;a href=\"https://commons-app.github.io/\"&gt;situs jaringan&lt;/a&gt; ing GitHub. Gawé anyar &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;bab GitHub&lt;/a&gt; ngenani lapuran ama lan saran.</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Pranatan priangga&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Krèdhit&lt;/a&gt;</string>
   <string name="title_activity_about">Ngenani</string>
   <string name="menu_feedback">Kirim Pamrayoga (lumantar Layang-Èl)</string>
   <string name="no_email_client">Ora ana klièn layang-èl sing dipasang</string>
@@ -163,5 +166,5 @@
   <string name="navigation_item_feedback">Pamrayoga</string>
   <string name="navigation_item_logout">Metu log</string>
   <string name="nearby_info_menu_commons_article">Artikel Commons</string>
-  <string name="nearby_info_menu_wikidata_article" fuzzy="true">Artikel WikiData</string>
+  <string name="nearby_info_menu_wikidata_article">Wiji Wikidata</string>
 </resources>
