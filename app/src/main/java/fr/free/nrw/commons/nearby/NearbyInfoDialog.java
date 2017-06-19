@@ -64,7 +64,7 @@ public class NearbyInfoDialog extends OverlayDialog {
     private void getArticleLink(Bundle bundle) {
         this.sitelinks = bundle.getParcelable(ARG_SITE_LINK);
 
-        if (sitelinks.getWikipediaLink() == null) {
+        if (sitelinks.getWikipediaLink().equals(Uri.EMPTY)) {
             goToButton.setVisibility(View.GONE);
         }
 
@@ -87,16 +87,16 @@ public class NearbyInfoDialog extends OverlayDialog {
         MenuItem wikiDataArticle = popupMenu.getMenu()
                 .findItem(R.id.nearby_info_menu_wikidata_article);
 
-        commonsArticle.setEnabled(sitelinks.getCommonsLink() != null);
-        wikiDataArticle.setEnabled(sitelinks.getWikidataLink() != null);
+        commonsArticle.setEnabled(!sitelinks.getCommonsLink().equals(Uri.EMPTY));
+        wikiDataArticle.setEnabled(!sitelinks.getWikidataLink().equals(Uri.EMPTY));
 
         popupMenu.setOnMenuItemClickListener(menuListener);
         popupMenu.show();
     }
 
     private boolean showMenu() {
-        return sitelinks.getCommonsLink() != null
-                || sitelinks.getWikidataLink() != null;
+        return !sitelinks.getCommonsLink().equals(Uri.EMPTY)
+                || !sitelinks.getWikidataLink().equals(Uri.EMPTY);
     }
 
     private PopupMenu.OnMenuItemClickListener menuListener = new PopupMenu
