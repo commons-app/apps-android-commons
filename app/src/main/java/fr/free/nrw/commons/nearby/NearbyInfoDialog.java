@@ -121,7 +121,7 @@ public class NearbyInfoDialog extends OverlayDialog {
         NearbyInfoDialog mDialog = new NearbyInfoDialog();
         Bundle bundle = new Bundle();
         bundle.putString(ARG_TITLE, place.name);
-        bundle.putString(ARG_DESC, place.description);
+        bundle.putString(ARG_DESC, place.getDescription().getText());
         bundle.putDouble(ARG_LATITUDE, place.location.getLatitude());
         bundle.putDouble(ARG_LONGITUDE, place.location.getLongitude());
         bundle.putParcelable(ARG_SITE_LINK, place.siteLinks);
