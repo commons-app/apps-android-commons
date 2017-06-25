@@ -70,7 +70,7 @@ public class Sitelinks implements Parcelable {
         return null;
     }
 
-    public Sitelinks(Sitelinks.Builder builder) {
+    private Sitelinks(Sitelinks.Builder builder) {
         this.wikidataLink = builder.wikidataLink;
         this.wikipediaLink = builder.wikipediaLink;
         this.commonsLink = builder.commonsLink;
