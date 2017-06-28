@@ -35,7 +35,6 @@ import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
-import fr.free.nrw.commons.hamburger.HamburgerMenuContainer;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
@@ -48,8 +47,7 @@ public  class       ContributionsActivity
                     AdapterView.OnItemClickListener,
                     MediaDetailPagerFragment.MediaDetailProvider,
                     FragmentManager.OnBackStackChangedListener,
-                    ContributionsListFragment.SourceRefresher,
-                    HamburgerMenuContainer {
+                    ContributionsListFragment.SourceRefresher {
 
     private Cursor allContributions;
     private ContributionsListFragment contributionsList;
