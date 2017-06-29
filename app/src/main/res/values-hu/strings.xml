@@ -7,7 +7,7 @@
   <string name="login">Bejelentkezés</string>
   <string name="signup">Regisztráció</string>
   <string name="logging_in_title">Belépés…</string>
-  <string name="logging_in_message" fuzzy="true">Kérlek várj…</string>
+  <string name="logging_in_message">Kérlek várj…</string>
   <string name="login_success">Sikeres bejelentkezés</string>
   <string name="login_failed">A bejelentkezés nem sikerült.</string>
   <string name="upload_failed">A fájl nem található. Próbálkozz másik fájllal.</string>
@@ -130,7 +130,7 @@
   <string name="welcome_final_text">Megértetted?</string>
   <string name="welcome_final_button_text">Igen!</string>
   <string name="detail_panel_cats_label">Kategóriák</string>
-  <string name="detail_panel_cats_loading" fuzzy="true">Betöltés…</string>
+  <string name="detail_panel_cats_loading">Betöltés…</string>
   <string name="detail_panel_cats_none">Nincs kijelölés</string>
   <string name="detail_description_empty">Nincs leírás</string>
   <string name="detail_license_empty">Ismeretlen licenc</string>
@@ -159,6 +159,12 @@
   <string name="maximum_limit_alert">Nem lehet 500-nál többet megjeleníteni</string>
   <string name="set_limit">Legutóbbi feltöltési korlát beállítása</string>
   <string name="login_failed_2fa_not_supported">A kétlépcsős hitelesítés jelenleg nem támogatott.</string>
+  <string name="logout_verification">Kilépsz?</string>
+  <string name="commons_logo">Commons Logo</string>
+  <string name="background_image">Háttérkép</string>
+  <string name="no_image_found">Nem található kép</string>
+  <string name="upload_image">Kép feltöltése</string>
+  <string name="welcome_image_sydney_opera_house">Sydney Operaház</string>
   <string name="cancel">Mégse</string>
   <string name="navigation_drawer_open">Megnyitás</string>
   <string name="navigation_drawer_close">Bezárás</string>
@@ -169,4 +175,8 @@
   <string name="navigation_item_settings">Beállítások</string>
   <string name="navigation_item_feedback">Visszajelzés</string>
   <string name="navigation_item_logout">Kijelentkezés</string>
+  <string name="navigation_item_info">Bevezető</string>
+  <string name="no_description_found">nincs leírás</string>
+  <string name="nearby_info_menu_commons_article">Commons szócikk</string>
+  <string name="nearby_info_menu_wikidata_article">Wikidata tétel</string>
 </resources>

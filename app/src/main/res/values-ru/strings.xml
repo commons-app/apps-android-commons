@@ -166,12 +166,17 @@
   <string name="logout_verification">Вы действительно хотите выйти?</string>
   <string name="commons_logo">Логотип Викисклада</string>
   <string name="background_image">Фоновое изображение</string>
+  <string name="mediaimage_failed">Ошибка медиаизображения</string>
   <string name="no_image_found">Изображение не найдено</string>
   <string name="upload_image">Загрузить изображение</string>
   <string name="welcome_image_mount_zao">Гора Зао</string>
   <string name="welcome_image_llamas">Ламы</string>
   <string name="welcome_image_rainbow_bridge">Радужный мост</string>
   <string name="welcome_image_tulip">Тюльпан</string>
+  <string name="welcome_image_no_selfies">Нет сэлфи</string>
+  <string name="welcome_image_proprietary">Несвободное изображение</string>
+  <string name="welcome_image_welcome_wikipedia">Добро пожаловать в Википедию</string>
+  <string name="welcome_image_welcome_copyright">Добро пожаловать — авторские права</string>
   <string name="welcome_image_sydney_opera_house">Сиднейский оперный театр</string>
   <string name="cancel">Отмена</string>
   <string name="navigation_drawer_open">Открыть</string>
@@ -184,7 +189,8 @@
   <string name="navigation_item_feedback">Обратная связь</string>
   <string name="navigation_item_logout">Выйти</string>
   <string name="navigation_item_info">Руководство</string>
+  <string name="nearby_needs_permissions">Ближайшие места не могут быть отображены без разрешения на геолокацию</string>
   <string name="no_description_found">описание не найдено</string>
   <string name="nearby_info_menu_commons_article">Статья на Викискладе</string>
-  <string name="nearby_info_menu_wikidata_article" fuzzy="true">Статья на Викиданных</string>
+  <string name="nearby_info_menu_wikidata_article">Элемент Викиданных</string>
 </resources>

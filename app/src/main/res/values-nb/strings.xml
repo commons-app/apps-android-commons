@@ -54,17 +54,17 @@
   <string name="gps_disabled">GPS er slått av på denne enheten. Ønsker du å slå den på?</string>
   <string name="enable_gps">Slå på GPS</string>
   <string name="contributions_subtitle_zero">Ingen opplastinger ennå</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">Ingen opplastinger enda</item>
-    <item quantity="one">1 opplasting</item>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%d opplasting</item>
     <item quantity="other">%d opplastinger</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">Starter 1 opplasting</item>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Starter %d opplasting</item>
     <item quantity="other">Starter %d opplastinger</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">1 opplasting</item>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%d opplasting</item>
     <item quantity="other">%d opplastinger</item>
   </plurals>
   <string name="categories_not_found">Ingen kategorier som stemte overens med %1$s funnet</string>
@@ -78,7 +78,7 @@
   <string name="about_license">Programvare med åpen kildekode sluppet under &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Wikimedia Commons og dets logo er varemerker fra Wikimedia Foundation og brukes med tillatelse fra dem. Vi er verken støttet av eller koblet til Wikimedia Foundation.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kildekode&lt;/a&gt; og &lt;a href=\"https://commons-app.github.io/\"&gt;nettside&lt;/a&gt; på GitHub. Opprett en ny &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-sak&lt;/a&gt; for feilrapporter og forslag.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Personvernpolicy&lt;/a&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-comons/blob/master/CREDITS\"&gt;CREDITS&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-comons/blob/master/CREDITS\"&gt;Bidragsytere&lt;/a&gt;</string>
   <string name="title_activity_about">Om</string>
   <string name="menu_feedback">Send tilbakemelding (via Epost)</string>
   <string name="no_email_client">Ingen epostklient installert</string>
@@ -154,4 +154,39 @@
   <string name="use_wikidata">Bruk Wikidata</string>
   <string name="use_wikidata_summary">(Advarsel: Store mengder mobildata kan bli brukt om denne slås av)</string>
   <string name="_2fa_code">2FA-kode</string>
+  <string name="number_of_uploads">Grense for mine seneste opplastinger</string>
+  <string name="maximum_limit">Maksimumsgrense</string>
+  <string name="maximum_limit_alert">Kan ikke vise mer enn 500</string>
+  <string name="set_limit">Sett grense for seneste opplastinger</string>
+  <string name="login_failed_2fa_not_supported">Tofaktorautentisering støttes ikke ennå.</string>
+  <string name="logout_verification">Ønsker du virkelig å logge ut?</string>
+  <string name="commons_logo">Commons-logo</string>
+  <string name="background_image">Bakgrunnsbilde</string>
+  <string name="mediaimage_failed">Mediebilde feilet</string>
+  <string name="no_image_found">Intet bilde funnet</string>
+  <string name="upload_image">Last opp bilde</string>
+  <string name="welcome_image_mount_zao">Zao</string>
+  <string name="welcome_image_llamas">Lamaer</string>
+  <string name="welcome_image_rainbow_bridge">Regnbuebrua</string>
+  <string name="welcome_image_tulip">Tulipan</string>
+  <string name="welcome_image_no_selfies">Ingen selfier</string>
+  <string name="welcome_image_proprietary">Proprietært bilde</string>
+  <string name="welcome_image_welcome_wikipedia">Velkommen til Wikipedia</string>
+  <string name="welcome_image_welcome_copyright">Velkommen opphavsrett</string>
+  <string name="welcome_image_sydney_opera_house">Operahuset i Sydney</string>
+  <string name="cancel">Avbryt</string>
+  <string name="navigation_drawer_open">Åpne</string>
+  <string name="navigation_drawer_close">Lukk</string>
+  <string name="navigation_item_home">Hjem</string>
+  <string name="navigation_item_upload">Last opp</string>
+  <string name="navigation_item_nearby">I nærheten</string>
+  <string name="navigation_item_about">Om</string>
+  <string name="navigation_item_settings">Innstillinger</string>
+  <string name="navigation_item_feedback">Tilbakemeldinger</string>
+  <string name="navigation_item_logout">Logg ut</string>
+  <string name="navigation_item_info">Veiviser</string>
+  <string name="nearby_needs_permissions">Steder i nærheten kan ikke vises uten tillatelse for stedsbestemmelse</string>
+  <string name="no_description_found">ingen beskrivelse funnet</string>
+  <string name="nearby_info_menu_commons_article">Commons-artikkel</string>
+  <string name="nearby_info_menu_wikidata_article">Wikidata-element</string>
 </resources>

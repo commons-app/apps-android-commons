@@ -7,7 +7,7 @@
   <string name="login">Asup log</string>
   <string name="signup">Daptar</string>
   <string name="logging_in_title">Asup log</string>
-  <string name="logging_in_message">Mangga diantos…</string>
+  <string name="logging_in_message">Tungguan heula…</string>
   <string name="login_success">Asup log suksés!</string>
   <string name="login_failed">Asup log Gagal!</string>
   <string name="upload_failed">Berkas teu kapanggih. Coba berkas séjén.</string>
@@ -20,11 +20,11 @@
   <string name="upload_progress_notification_title_finishing">Méréskeun unjalan %1$s</string>
   <string name="upload_failed_notification_title">Ngunjal %1$s gagal</string>
   <string name="upload_failed_notification_subtitle">Toél pikeun nempo</string>
-  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
-    <item quantity="one">ngunjal 1 berkas</item>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">ngunjal %d berkas</item>
     <item quantity="other">ngunjal %d berkas</item>
   </plurals>
-  <string name="title_activity_contributions" fuzzy="true">Unjalan kuring</string>
+  <string name="title_activity_contributions">Unjalan panungtung kuring</string>
   <string name="contribution_state_queued">Antrian</string>
   <string name="contribution_state_failed">Gagal</string>
   <string name="contribution_state_in_progress">%1$d%% bérés</string>
@@ -42,7 +42,7 @@
   <string name="login_failed_password">Teu bisa login - pariksa kecap sandi</string>
   <string name="login_failed_throttled">Loba teuing nu gagalna. Mangga cobian sababaraha menit deui mah</string>
   <string name="login_failed_blocked">Punten, ieu kontributor geus diblokir di Commons</string>
-  <string name="login_failed_2fa_needed">Anjeun kudu nyadiakeun dua kode faktor asli</string>
+  <string name="login_failed_2fa_needed">Anjeun kudu nyayagakeun kodeu oténtikasi dua faktor.</string>
   <string name="login_failed_generic">Gagal login</string>
   <string name="share_upload_button">Unjal</string>
   <string name="multiple_share_base_title">Ngaranan ieu sét</string>
@@ -51,19 +51,20 @@
   <string name="categories_search_text_hint">Paluruh kategori</string>
   <string name="menu_save_categories">Simpen</string>
   <string name="refresh_button">Segerkeun</string>
-  <string name="enable_gps">Teu bisa maké GPS</string>
+  <string name="gps_disabled">GPS dipareuman na parangkat anjeun. Rék dihurungkeun waé atuh?</string>
+  <string name="enable_gps">Hirupan GPS</string>
   <string name="contributions_subtitle_zero">Can aya nu diunjal</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">Taya unjalan</item>
-    <item quantity="one">1 unjalan</item>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%d unjalan</item>
     <item quantity="other">%d unjalan</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">Ngamimitian 1 unjalan</item>
-    <item quantity="other">Ngamimitian %d unggahan</item>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Ngamimitian saunjalan</item>
+    <item quantity="other">Ngamimitian %d unjalan</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">1 unjalan</item>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">saunjalan</item>
     <item quantity="other">%d unjalan</item>
   </plurals>
   <string name="categories_not_found">Teu mendak kategori anu cocog jeung %1$s</string>
@@ -77,7 +78,7 @@
   <string name="about_license">Pakakas lemes kodeu nembrak dirilis di handapeun &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Lisénsi Apache v2&lt;/a&gt;. Wikimedia Commons sarta logona téh mérk dagang anu Yayasan Wikimédia ogé dipakéna kudu meunang widi ti Yayasan Wikimédia. Kami teu disatujuan ku atawa digawé bareng jeung Yayasan Wikimédia.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sumber&lt;/a&gt; sarta &lt;a href=\"https://commons-app.github.io/\"&gt;situ wéb&lt;/a&gt; dina GitHub. Jieun anyar &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;perkara GitHub&lt;/a&gt; pikeun saran jeung laporan kutu.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Kawijakan privasi&lt;/a&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;PANGAJÉN&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Pangajén&lt;/a&gt;</string>
   <string name="title_activity_about">Ngeunaan</string>
   <string name="menu_feedback">Kirim eupan balik (via Surélék)</string>
   <string name="no_email_client">Tanpa klayen surélék kapasang</string>
@@ -129,7 +130,7 @@
   <string name="welcome_final_text">Anjeun geus ngarti?</string>
   <string name="welcome_final_button_text">Enya</string>
   <string name="detail_panel_cats_label">Kategori</string>
-  <string name="detail_panel_cats_loading" fuzzy="true">Keur muat…</string>
+  <string name="detail_panel_cats_loading">Keur muat…</string>
   <string name="detail_panel_cats_none">Taya nu dipilih</string>
   <string name="detail_description_empty">Tanpa pedaran</string>
   <string name="detail_license_empty">Lisénsi teu dipikanyaho</string>
@@ -138,6 +139,7 @@
   <string name="location_permission_rationale">Idin pilihan: Paké lokasi kiwari pikeun usulan kategori</string>
   <string name="ok">Oké</string>
   <string name="title_activity_nearby">Tempat Sabudeureun</string>
+  <string name="no_nearby">Teu kapanggih tempat sabudeureun</string>
   <string name="warning">Mangkahadé</string>
   <string name="file_exists">Ieu berkas geus aya di Commons. Rék diteruskeun baé ieu téh?</string>
   <string name="yes">Nya</string>
@@ -146,13 +148,32 @@
   <string name="media_detail_media_title">Judul berkas</string>
   <string name="media_detail_description">Déskripsi</string>
   <string name="media_detail_description_explanation">Pedaran berkas nyangkaruk didieu. Bisa jadi matak ngalikakeun, sarta ngempladkeun kana sawatara baris. Sanajan kitu, muga bisa katémbong écés.</string>
-  <string name="media_detail_uploaded_date">Kaping ngunjal</string>
+  <string name="media_detail_uploaded_date">Tanggal ngunjal</string>
   <string name="become_a_tester_title">Jadi tukang ngetés Béta</string>
   <string name="become_a_tester_description">Pilihan asup kana saluran béta kami di Google Play sarta meunangkeun aksés munggaran pikeun fitur anyar jeung pameneran kutu</string>
   <string name="use_wikidata">Paké Wikidata</string>
   <string name="use_wikidata_summary">(Mankahadé: maéhan ieu bisa ngakibatkeun pamakéan data sélulér nu pohara gedéna)</string>
   <string name="_2fa_code">Kode 2FA</string>
-  <string name="maximum_limit">Wates maksimum</string>
+  <string name="number_of_uploads">Water Unjal Panungtung Kuring</string>
+  <string name="maximum_limit">Wates Maksimum</string>
+  <string name="maximum_limit_alert">Teu bisa midangkeun leuwih ti 500</string>
+  <string name="set_limit">Atur Wates Unjal Panungtung</string>
+  <string name="login_failed_2fa_not_supported">Oténtikasi dua faktor kiwari teu dirojong.</string>
+  <string name="logout_verification">Yakin anjeun rék kaluar?</string>
+  <string name="commons_logo">Logo Commons</string>
+  <string name="background_image">Gambar Kasang Tukang</string>
+  <string name="mediaimage_failed">Gambar Média Gagal</string>
+  <string name="no_image_found">Gambar Teu Kapanggih</string>
+  <string name="upload_image">Unjal Gambar</string>
+  <string name="welcome_image_mount_zao">Mount Zao</string>
+  <string name="welcome_image_llamas">Llamas</string>
+  <string name="welcome_image_rainbow_bridge">Sasak Katumbiri</string>
+  <string name="welcome_image_tulip">Tulip</string>
+  <string name="welcome_image_no_selfies">Tanpa Sélpi</string>
+  <string name="welcome_image_proprietary">Gambar Komérsial</string>
+  <string name="welcome_image_welcome_wikipedia">Wilujeng Sumping Wikipédia</string>
+  <string name="welcome_image_welcome_copyright">Wilujeng Sumping Hak Cipta</string>
+  <string name="welcome_image_sydney_opera_house">Imah Opérét Sydney</string>
   <string name="cancel">Bolay</string>
   <string name="navigation_drawer_open">Buka</string>
   <string name="navigation_drawer_close">Tutup</string>
@@ -163,4 +184,9 @@
   <string name="navigation_item_settings">Pangaturan</string>
   <string name="navigation_item_feedback">Eupan balik</string>
   <string name="navigation_item_logout">Kaluar</string>
+  <string name="navigation_item_info">Pituduh</string>
+  <string name="nearby_needs_permissions">Tempat sabudeureun teu bisa ditémbongkeun tanpa idin lokasi</string>
+  <string name="no_description_found">teu manggihan pedaran</string>
+  <string name="nearby_info_menu_commons_article">Artikel Common</string>
+  <string name="nearby_info_menu_wikidata_article">item Wikidata</string>
 </resources>

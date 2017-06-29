@@ -184,6 +184,9 @@
   <string name="navigation_item_settings">Inställningar</string>
   <string name="navigation_item_feedback">Återkoppling</string>
   <string name="navigation_item_logout">Logga ut</string>
+  <string name="navigation_item_info">Guide</string>
+  <string name="nearby_needs_permissions">Platser i närheten kan inte visas utan platsbehörigheter</string>
+  <string name="no_description_found">ingen beskrivning hittades</string>
   <string name="nearby_info_menu_commons_article">Commons-artikel</string>
-  <string name="nearby_info_menu_wikidata_article" fuzzy="true">WikiData-artikel</string>
+  <string name="nearby_info_menu_wikidata_article">Wikidata-objekt</string>
 </resources>

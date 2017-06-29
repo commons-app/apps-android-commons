@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="crash_dialog_title">ვიკისაწყობი გაითიშა</string>
+  <string name="crash_dialog_text">ვაი. რაღაც მოხდა!</string>
+  <string name="crash_dialog_comment_prompt">გვითხარით რას აკეთებდით და გამოგვიგზავნეთ ელექტრონული ფოსტით. ეს ჩვენ პრობლემის გამოსწორებაში დაგვეხმარება!</string>
+  <string name="crash_dialog_ok_toast">გმადლობთ!</string>
+</resources>

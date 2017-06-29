@@ -3,10 +3,12 @@ package fr.free.nrw.commons.contributions;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,34 +31,24 @@ public class ContributionController {
     }
 
     // See http://stackoverflow.com/a/5054673/17865 for why this is done
-    private Uri lastGeneratedCaptureURI;
+    private Uri lastGeneratedCaptureUri;
 
-    private Uri reGenerateImageCaptureURI() {
-        String storageState = Environment.getExternalStorageState();
-        if(storageState.equals(Environment.MEDIA_MOUNTED)) {
-
-            String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Commons/images/" + new Date().getTime() + ".jpg";
-            File _photoFile = new File(path);
-            try {
-                if(!_photoFile.exists()) {
-                    _photoFile.getParentFile().mkdirs();
-                    _photoFile.createNewFile();
-                }
-
-            } catch (IOException e) {
-                Timber.e(e, "Could not create file: %s", path);
-            }
-
-            return Uri.fromFile(_photoFile);
-        }   else {
-            throw new RuntimeException("No external storage found!");
-        }
+    private Uri reGenerateImageCaptureUriInCache() {
+        File photoFile = new File(fragment.getContext().getCacheDir() + "/images",
+                new Date().getTime() + ".jpg");
+        photoFile.getParentFile().mkdirs();
+        return FileProvider.getUriForFile(
+                fragment.getContext(),
+                fragment.getActivity().getApplicationContext().getPackageName() + ".provider",
+                photoFile);
     }
 
     public void startCameraCapture() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        lastGeneratedCaptureURI = reGenerateImageCaptureURI();
-        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, lastGeneratedCaptureURI);
+        lastGeneratedCaptureUri = reGenerateImageCaptureUriInCache();
+        takePictureIntent.setFlags(
+                Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, lastGeneratedCaptureUri);
         fragment.startActivityForResult(takePictureIntent, SELECT_FROM_CAMERA);
     }
 
@@ -80,7 +72,7 @@ public class ContributionController {
                 break;
             case SELECT_FROM_CAMERA:
                 shareIntent.setType("image/jpeg"); //FIXME: Find out appropriate mime type
-                shareIntent.putExtra(Intent.EXTRA_STREAM, lastGeneratedCaptureURI);
+                shareIntent.putExtra(Intent.EXTRA_STREAM, lastGeneratedCaptureUri);
                 shareIntent.putExtra(UploadService.EXTRA_SOURCE, Contribution.SOURCE_CAMERA);
                 break;
         }
@@ -93,12 +85,12 @@ public class ContributionController {
     }
 
     public void saveState(Bundle outState) {
-        outState.putParcelable("lastGeneratedCaptureURI", lastGeneratedCaptureURI);
+        outState.putParcelable("lastGeneratedCaptureURI", lastGeneratedCaptureUri);
     }
 
     public void loadState(Bundle savedInstanceState) {
         if(savedInstanceState != null) {
-            lastGeneratedCaptureURI = savedInstanceState.getParcelable("lastGeneratedCaptureURI");
+            lastGeneratedCaptureUri = savedInstanceState.getParcelable("lastGeneratedCaptureURI");
         }
     }
 

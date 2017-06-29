@@ -101,6 +101,12 @@ public class SingleUploadFragment extends Fragment {
         prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         license = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
 
+        // check if this is the first time we have uploaded
+        if (prefs.getString("Title", "").trim().length() == 0
+                && prefs.getString("Desc", "").trim().length() == 0) {
+            titleDescButton.setVisibility(View.GONE);
+        }
+
         Timber.d(license);
 
         ArrayAdapter<String> adapter;

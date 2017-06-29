@@ -126,6 +126,16 @@
         </service>
 
         <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
+
+        <provider
                 android:name=".contributions.ContributionsContentProvider"
                 android:label="@string/provider_contributions"
                 android:syncable="true"

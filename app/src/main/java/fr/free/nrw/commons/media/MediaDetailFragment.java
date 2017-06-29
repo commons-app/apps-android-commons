@@ -197,7 +197,7 @@ public class MediaDetailFragment extends Fragment {
                     extractor.fetch();
                     return Boolean.TRUE;
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Timber.d(e);
                 }
                 return Boolean.FALSE;
             }

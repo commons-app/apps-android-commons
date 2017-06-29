@@ -5,8 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 
-import fr.free.nrw.commons.Utils;
-
 public class Sitelinks implements Parcelable {
     private final String wikipediaLink;
     private final String commonsLink;
@@ -43,34 +41,24 @@ public class Sitelinks implements Parcelable {
         }
     };
 
-    @Nullable
     public Uri getWikipediaLink() {
         return sanitiseString(wikipediaLink);
     }
 
-    @Nullable
     public Uri getCommonsLink() {
         return sanitiseString(commonsLink);
     }
 
-    @Nullable
     public Uri getWikidataLink() {
         return sanitiseString(wikidataLink);
     }
 
-    @Nullable
-    private Uri sanitiseString(String stringUrl) {
-        stringUrl = stringUrl
-                .replaceAll("<", "")
-                .replaceAll(">", "")
-                .replaceAll("[\n\r]", "");
-        if (!Utils.isNullOrWhiteSpace(stringUrl) && stringUrl != null) {
-            return Uri.parse(stringUrl);
-        }
-        return null;
+    private static Uri sanitiseString(String stringUrl) {
+        String sanitisedStringUrl = stringUrl.replaceAll("[<>\n\r]", "").trim();
+        return Uri.parse(sanitisedStringUrl);
     }
 
-    public Sitelinks(Sitelinks.Builder builder) {
+    private Sitelinks(Sitelinks.Builder builder) {
         this.wikidataLink = builder.wikidataLink;
         this.wikipediaLink = builder.wikipediaLink;
         this.commonsLink = builder.commonsLink;

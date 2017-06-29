@@ -7,7 +7,7 @@
   <string name="login">Увійти</string>
   <string name="signup">Зареєструватися</string>
   <string name="logging_in_title">Вхід до системи</string>
-  <string name="logging_in_message" fuzzy="true">Будь ласка, зачекайте…</string>
+  <string name="logging_in_message">Будь ласка, зачекайте…</string>
   <string name="login_success">Ви успішно увійшли!</string>
   <string name="login_failed">Не вдалося увійти</string>
   <string name="upload_failed">Файл не знайдено. Будь ласка, спробуйте інший файл.</string>
@@ -20,13 +20,13 @@
   <string name="upload_progress_notification_title_finishing">Завершення завантаження %1$s</string>
   <string name="upload_failed_notification_title">Не вдалося завантажити %1$s</string>
   <string name="upload_failed_notification_subtitle">Торкніться, щоб переглянути</string>
-  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
+  <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Завантажується %d файл</item>
     <item quantity="few">Завантажуються %d файли</item>
     <item quantity="many">Завантажується %d файлів</item>
     <item quantity="other">Завантажується %d файлів</item>
   </plurals>
-  <string name="title_activity_contributions" fuzzy="true">Мої завантаження</string>
+  <string name="title_activity_contributions">Мої останні завантаження</string>
   <string name="contribution_state_queued">У черзі</string>
   <string name="contribution_state_failed">Не вдалося</string>
   <string name="contribution_state_in_progress">%1$d%% завершено</string>
@@ -44,6 +44,7 @@
   <string name="login_failed_password">Неможливо увійти — будь ласка, перевірте свій пароль</string>
   <string name="login_failed_throttled">Надто багато невдалих спроб. Будь ласка, спробуйте знову через кілька хвилин.</string>
   <string name="login_failed_blocked">Вибачте, цього користувача було заблоковано на Вікісховищі</string>
+  <string name="login_failed_2fa_needed">Ви повинні надати код двофакторної автентифікації.</string>
   <string name="login_failed_generic">Не вдалося увійти</string>
   <string name="share_upload_button">Завантажити</string>
   <string name="multiple_share_base_title">Назвіть цю серію</string>
@@ -52,19 +53,26 @@
   <string name="categories_search_text_hint">Пошук категорій</string>
   <string name="menu_save_categories">Зберегти</string>
   <string name="refresh_button">Оновити</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">Наразі нема завантажень</item>
-    <item quantity="one">1 завантаження</item>
+  <string name="gps_disabled">GPS вимкнено на Вашому пристрої. Чи хотіли б Ви його увімкнути?</string>
+  <string name="enable_gps">Увімкнути GPS</string>
+  <string name="contributions_subtitle_zero">Ще нема завантажень</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%d завантаження</item>
     <item quantity="few">%d завантаження</item>
+    <item quantity="many">%d завантажень</item>
     <item quantity="other">%d завантажень</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">Розпочати 1 завантаження</item>
-    <item quantity="few">Розпочати %d завантаження</item>
-    <item quantity="other">Розпочати %d завантажень</item>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Починається %d завантаження</item>
+    <item quantity="few">Починаються %d завантаження</item>
+    <item quantity="many">Починаються %d завантажень</item>
+    <item quantity="other">Починаються %d завантажень</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">1 завантаження</item>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%d завантаження</item>
+    <item quantity="few">%d завантаження</item>
+    <item quantity="many">%d завантажень</item>
     <item quantity="other">%d завантажень</item>
   </plurals>
   <string name="categories_not_found">Категорій, відповідних %1$s, не знайдено</string>
@@ -78,12 +86,12 @@
   <string name="about_license">Програмне забезпечення з відкритим кодом випущено під &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;ліцензією Apache в.2&lt;/a&gt;. Вікісховище і його логотип є товарними знаками Фонду Вікімедіа і використовуються за дозволом Фонду Вікімедіа. Ми не користуємось підтримкою Фонду Вікімедіа і не є його афіліатом.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Вихідний код&lt;/a&gt; і &lt;a href=\"https://commons-app.github.io/\"&gt;веб-сайт&lt;/a&gt; на GitHub. Створіть нове &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;завдання на GitHub&lt;/a&gt; для повідомлення про баги або для висловлення пропозицій.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Політика приватності&lt;/a&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;АВТОРИ&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Автори&lt;/a&gt;</string>
   <string name="title_activity_about">Про програму</string>
   <string name="menu_feedback">Надіслати відгук (електронною поштою)</string>
   <string name="no_email_client">Не встановлено програми електронної пошти</string>
   <string name="provider_categories">Недавно використані категорії</string>
-  <string name="waiting_first_sync" fuzzy="true">Очікується перша синхронізація…</string>
+  <string name="waiting_first_sync">Очікується перша синхронізація…</string>
   <string name="no_uploads_yet">Ви ще не завантажили жодної світлини.</string>
   <string name="menu_retry_upload">Повторити</string>
   <string name="menu_cancel_upload">Скасувати</string>
@@ -130,7 +138,7 @@
   <string name="welcome_final_text">Ви це зрозуміли?</string>
   <string name="welcome_final_button_text">Так!</string>
   <string name="detail_panel_cats_label">Категорії</string>
-  <string name="detail_panel_cats_loading" fuzzy="true">Вантажиться…</string>
+  <string name="detail_panel_cats_loading">Завантаження…</string>
   <string name="detail_panel_cats_none">Нічого не обрано</string>
   <string name="detail_description_empty">Немає опису</string>
   <string name="detail_license_empty">Невідома ліцензія</string>
@@ -139,6 +147,7 @@
   <string name="location_permission_rationale">Додатковий дозвіл: отримувати поточне розташування для підказок категорій</string>
   <string name="ok">Гаразд</string>
   <string name="title_activity_nearby">Місця поблизу</string>
+  <string name="no_nearby">Не знайдено місць поблизу</string>
   <string name="warning">Попередження</string>
   <string name="file_exists">Цей файл вже існує на Вікісховищі. Ви впевнені, що хочете продовжити?</string>
   <string name="yes">Так</string>
@@ -147,8 +156,45 @@
   <string name="media_detail_media_title">Назва медіафайлу</string>
   <string name="media_detail_description">Опис</string>
   <string name="media_detail_description_explanation">Сюди потрапляє опис медіафайлу. Він потенційно може бути досить довгим і розтягнутися на декілька рядків. Однак ми сподіваємось, що він виглядатиме гарно.</string>
+  <string name="media_detail_uploaded_date">Дата завантаження</string>
   <string name="become_a_tester_title">Станьте бета-тестером</string>
   <string name="become_a_tester_description">Увійдіть на наш бета-канал на Google Play і отримайте ранній доступ до нових функцій та виправлень багів</string>
   <string name="use_wikidata">Використати Вікідані</string>
   <string name="use_wikidata_summary">(Попередження: вимкнення цього може спричинити використання значного обсягу мобільних даних)</string>
+  <string name="_2fa_code">Код 2FA</string>
+  <string name="number_of_uploads">Ліміт моїх останніх завантажень</string>
+  <string name="maximum_limit">Максимальний ліміт</string>
+  <string name="maximum_limit_alert">Неможливо показати понад 500</string>
+  <string name="set_limit">Встановити ліміт останніх завантажень</string>
+  <string name="login_failed_2fa_not_supported">Двофакторна автентифікація наразі не підтримується.</string>
+  <string name="logout_verification">Ви справді хочете вийти із системи?</string>
+  <string name="commons_logo">Логотип Вікісховища</string>
+  <string name="background_image">Фонове зображення</string>
+  <string name="mediaimage_failed">Помилка медіазображення</string>
+  <string name="no_image_found">Не знайдено зображення</string>
+  <string name="upload_image">Завантажити зображення</string>
+  <string name="welcome_image_mount_zao">Гора Зао</string>
+  <string name="welcome_image_llamas">Лами</string>
+  <string name="welcome_image_rainbow_bridge">Веселка</string>
+  <string name="welcome_image_tulip">Тюльпан</string>
+  <string name="welcome_image_no_selfies">Жодних селфі</string>
+  <string name="welcome_image_proprietary">Невільне зображення</string>
+  <string name="welcome_image_welcome_wikipedia">Ласкаво просимо — Вікіпедія</string>
+  <string name="welcome_image_welcome_copyright">Ласкаво просимо — авторські права</string>
+  <string name="welcome_image_sydney_opera_house">Сіднейський оперний театр</string>
+  <string name="cancel">Скасувати</string>
+  <string name="navigation_drawer_open">Відкрити</string>
+  <string name="navigation_drawer_close">Закрити</string>
+  <string name="navigation_item_home">Головна</string>
+  <string name="navigation_item_upload">Завантажити</string>
+  <string name="navigation_item_nearby">Поблизу</string>
+  <string name="navigation_item_about">Опис</string>
+  <string name="navigation_item_settings">Налаштування</string>
+  <string name="navigation_item_feedback">Зворотний зв\'язок</string>
+  <string name="navigation_item_logout">Вийти</string>
+  <string name="navigation_item_info">Посібник</string>
+  <string name="nearby_needs_permissions">Місця поблизу неможливо показати без дозволу на визначення місця розташування.</string>
+  <string name="no_description_found">опис не знайдено</string>
+  <string name="nearby_info_menu_commons_article">Стаття на Вікісховищі</string>
+  <string name="nearby_info_menu_wikidata_article">Елемент Вікіданих</string>
 </resources>

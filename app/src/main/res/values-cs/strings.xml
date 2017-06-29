@@ -183,6 +183,9 @@
   <string name="navigation_item_settings">Nastavení</string>
   <string name="navigation_item_feedback">Zpětná vazba</string>
   <string name="navigation_item_logout">Odhlášení</string>
+  <string name="navigation_item_info">Průvodce</string>
+  <string name="nearby_needs_permissions">Místa poblíž nebude možné zobrazit, neuvedete-li svojí polohu.</string>
+  <string name="no_description_found">nebyl nalezen žádný popisek</string>
   <string name="nearby_info_menu_commons_article">Článek na Commons</string>
-  <string name="nearby_info_menu_wikidata_article" fuzzy="true">Článek na Wikidatech</string>
+  <string name="nearby_info_menu_wikidata_article">Položka Wikidat</string>
 </resources>

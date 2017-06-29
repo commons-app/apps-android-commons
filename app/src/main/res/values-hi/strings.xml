@@ -24,7 +24,7 @@
     <item quantity="one">%d फ़ाइल अपलोड हो रहा</item>
     <item quantity="other">%d फ़ाइलें अपलोड हो रहीं</item>
   </plurals>
-  <string name="title_activity_contributions" fuzzy="true">मेरे अपलोड</string>
+  <string name="title_activity_contributions">मेरे ताज़ा अपलोड</string>
   <string name="contribution_state_queued">प्रतीक्षा में</string>
   <string name="contribution_state_failed">विफल</string>
   <string name="contribution_state_in_progress">%1$d%% पूरा हुआ</string>

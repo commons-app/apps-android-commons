@@ -7,7 +7,7 @@
   <string name="login">ورود</string>
   <string name="signup">ثبت نام</string>
   <string name="logging_in_title">واردشدن</string>
-  <string name="logging_in_message">لطفاً صبر کنید…</string>
+  <string name="logging_in_message">شکیبا باشید...</string>
   <string name="login_success">ورود موفق!</string>
   <string name="login_failed">ورود ناموفق!</string>
   <string name="upload_failed">پرونده یافت نشد لطفاً پرونده دیگری را امتحان کنید.</string>

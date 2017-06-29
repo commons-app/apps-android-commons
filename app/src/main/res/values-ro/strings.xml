@@ -7,7 +7,7 @@
   <string name="login">Autentificare</string>
   <string name="signup">Înregistrare</string>
   <string name="logging_in_title">Se conectează</string>
-  <string name="logging_in_message">Așteptați…</string>
+  <string name="logging_in_message">Vă rugăm să așteptați ...</string>
   <string name="login_success">Autentificare reușită!</string>
   <string name="login_failed">Autentificare nereușită!</string>
   <string name="upload_failed">Fișierul nu a fost găsit. Încercați cu un alt fișier.</string>

@@ -8,7 +8,7 @@
   <string name="signup">أنشئ حسابًا</string>
   <string name="logging_in_title">يجري الدخول</string>
   <string name="logging_in_message">الرجاء الانتظار…</string>
-  <string name="login_success">تم الدخول بشكل صحيح</string>
+  <string name="login_success">تم الدخول بشكل صحيح!</string>
   <string name="login_failed">فشل تسجيل الدخول</string>
   <string name="upload_failed">الملف غير موجود. فضلا اختر ملفا آخر.</string>
   <string name="authentication_failed">فشل الاستيقان!</string>
