@@ -48,7 +48,7 @@ public class NearbyActivity extends NavigationBaseActivity {
 
     private LocationServiceManager locationManager;
     private LatLng curLatLang;
-    private Bundle bundle;
+    private final Bundle bundle = new Bundle();
     private NearbyAsyncTask nearbyAsyncTask;
 
     @Override
@@ -60,7 +60,6 @@ public class NearbyActivity extends NavigationBaseActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         checkLocationPermission();
-        bundle = new Bundle();
         initDrawer();
     }
 
