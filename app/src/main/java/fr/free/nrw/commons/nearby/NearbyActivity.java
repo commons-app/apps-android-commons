@@ -68,7 +68,7 @@ public class NearbyActivity extends NavigationBaseActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_nearby, menu);
-        return super.onCreateOptionsMenu(menu);
+        return true;
     }
 
     @Override
