@@ -9,7 +9,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.ViewHolder;
-import fr.free.nrw.commons.utils.ResourceUtils;
 
 public class NearbyViewHolder implements ViewHolder<Place> {
     @BindView(R.id.tvName) TextView tvName;
@@ -25,12 +24,12 @@ public class NearbyViewHolder implements ViewHolder<Place> {
     public void bindModel(Context context, Place place) {
         // Populate the data into the template view using the data object
         tvName.setText(place.name);
-        String description = place.description;
-        if ( description == null || description.isEmpty() || description.equals("?")) {
-            description = context.getString(R.string.no_description_found);
+        String descriptionText = place.getDescription().getText();
+        if (descriptionText.equals("?")) {
+            descriptionText = context.getString(R.string.no_description_found);
         }
-        tvDesc.setText(description);
+        tvDesc.setText(descriptionText);
         distance.setText(place.distance);
-        icon.setImageResource(ResourceUtils.getDescriptionIcon(place.description));
+        icon.setImageResource(place.getDescription().getIcon());
     }
 }
