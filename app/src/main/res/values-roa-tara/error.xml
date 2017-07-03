@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="crash_dialog_title">Commons ha sckattate</string>
+  <string name="crash_dialog_text">Mudu. Quacchecose ha sciute male!</string>
+  <string name="crash_dialog_comment_prompt">Fanne sapé ce ste facive e mannale pe email. Quiste ne pò dà \'na màne a resolvere \'u probbleme!</string>
+  <string name="crash_dialog_ok_toast">Grazie \'mbà</string>
+</resources>
