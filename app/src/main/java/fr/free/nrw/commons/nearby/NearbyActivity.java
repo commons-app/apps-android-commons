@@ -56,9 +56,6 @@ public class NearbyActivity extends NavigationBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nearby);
         ButterKnife.bind(this);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
         checkLocationPermission();
         bundle = new Bundle();
         initDrawer();
