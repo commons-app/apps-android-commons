@@ -5,7 +5,6 @@ import android.text.TextUtils;
 import android.view.View;
 
 import fr.free.nrw.commons.MWApi;
-import org.mediawiki.api.ApiResult;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,7 +12,9 @@ import java.util.Calendar;
 import java.util.Iterator;
 
 import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.libs.mediawiki_api.ApiResult;
 import timber.log.Timber;
+import fr.free.nrw.commons.libs.mediawiki_api.MWApi.RequestBuilder;
 
 /**
  * Sends asynchronous queries to the Commons MediaWiki API to retrieve categories that share the
@@ -21,10 +22,7 @@ import timber.log.Timber;
  * for this purpose. This class should be subclassed in CategorizationFragment.java to aggregate
  * the results.
  */
-public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
-
-    private String filter;
-    private CategorizationFragment catFragment;
+public class PrefixUpdater extends UpdaterTask{
 
     public PrefixUpdater(CategorizationFragment catFragment) {
         this.catFragment = catFragment;
@@ -99,11 +97,12 @@ public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
         ApiResult result;
         ArrayList<String> categories = new ArrayList<>();
         try {
-            result = api.action("query")
+            requestBuilder = api.action("query")
                     .param("list", "allcategories")
                     .param("acprefix", filter)
                     .param("aclimit", catFragment.SEARCH_CATS_LIMIT)
-                    .get();
+                    .prepareHttpRequestBuilder("GET");
+            result = requestBuilder.request();
             Timber.d("Prefix URL filter %s", result);
         } catch (IOException e) {
             Timber.e(e, "IO Exception: ");

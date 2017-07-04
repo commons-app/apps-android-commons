@@ -4,7 +4,6 @@ import android.os.AsyncTask;
 import android.view.View;
 
 import fr.free.nrw.commons.MWApi;
-import org.mediawiki.api.ApiResult;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,6 +11,8 @@ import java.util.Calendar;
 import java.util.Iterator;
 
 import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.libs.mediawiki_api.ApiResult;
+import fr.free.nrw.commons.libs.mediawiki_api.MWApi.RequestBuilder;
 import timber.log.Timber;
 
 /**
@@ -19,10 +20,7 @@ import timber.log.Timber;
  * the keyword typed in by the user. The 'srsearch' action-specific parameter is used for this
  * purpose. This class should be subclassed in CategorizationFragment.java to aggregate the results.
  */
-public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
-
-    private String filter;
-    CategorizationFragment catFragment;
+public class MethodAUpdater extends UpdaterTask {
 
     public MethodAUpdater(CategorizationFragment catFragment) {
         this.catFragment = catFragment;
@@ -85,14 +83,15 @@ public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
 
         //URL https://commons.wikimedia.org/w/api.php?action=query&format=xml&list=search&srwhat=text&srenablerewrites=1&srnamespace=14&srlimit=10&srsearch=
         try {
-            result = api.action("query")
+            requestBuilder = api.action("query")
                     .param("format", "xml")
                     .param("list", "search")
                     .param("srwhat", "text")
                     .param("srnamespace", "14")
                     .param("srlimit", catFragment.SEARCH_CATS_LIMIT)
                     .param("srsearch", filter)
-                    .get();
+                    .prepareHttpRequestBuilder("GET");
+            result = requestBuilder.request();
             Timber.d("Method A URL filter %s", result);
         } catch (IOException e) {
             Timber.e(e, "IO Exception: ");

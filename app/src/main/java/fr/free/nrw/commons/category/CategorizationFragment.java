@@ -327,14 +327,40 @@ public class CategorizationFragment extends Fragment {
     private void startUpdatingCategoryList() {
 
         if (prefixUpdaterSub != null) {
-            prefixUpdaterSub.cancel(true);
+            cancelTask(prefixUpdaterSub);
         }
 
         if (methodAUpdaterSub != null) {
-            methodAUpdaterSub.cancel(true);
+            cancelTask(methodAUpdaterSub);
         }
 
         requestSearchResults();
+    }
+
+    /**
+     * It cancels the task and kills the request if is there any
+     * @param task task will be cancelled
+     */
+    private void cancelTask(final UpdaterTask task){
+
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    task.requestBuilder.httpRequestBuilder.request.abort();
+                }catch (NullPointerException e){
+
+                }
+            }
+        };
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        task.cancel(true);
+
     }
 
     public int getCurrentSelectedCount() {

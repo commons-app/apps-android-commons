@@ -3,12 +3,12 @@ package fr.free.nrw.commons.category;
 import android.os.AsyncTask;
 
 import fr.free.nrw.commons.MWApi;
-import org.mediawiki.api.ApiResult;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.libs.mediawiki_api.ApiResult;
 import timber.log.Timber;
 
 /**
@@ -47,7 +47,8 @@ public class TitleCategories extends AsyncTask<Void, Void, ArrayList<String>> {
                     .param("srnamespace", "14")
                     .param("srlimit", SEARCH_CATS_LIMIT)
                     .param("srsearch", title)
-                    .get();
+                    .prepareHttpRequestBuilder("GET")
+                    .request();
             Timber.d("Searching for cats for title: %s", result);
         } catch (IOException e) {
             Timber.e(e, "IO Exception: ");
