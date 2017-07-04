@@ -21,6 +21,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
 /**
@@ -62,16 +63,8 @@ public class MediaDataExtractor {
             throw new IllegalStateException("Tried to call MediaDataExtractor.fetch() again.");
         }
 
-        MWApi api = CommonsApplication.getInstance().getMWApi();
-        ApiResult result = api.action("query")
-                .param("prop", "revisions")
-                .param("titles", filename)
-                .param("rvprop", "content")
-                .param("rvlimit", 1)
-                .param("rvgeneratexml", 1)
-                .get();
-
-        processResult(result);
+        MediaWikiApi api = CommonsApplication.getInstance().getMWApi();
+        processResult(api.fetchMediaByFilename(filename));
         fetched = true;
     }
 

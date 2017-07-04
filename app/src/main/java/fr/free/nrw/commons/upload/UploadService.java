@@ -13,7 +13,6 @@ import android.support.v4.app.NotificationCompat;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
-import fr.free.nrw.commons.*;
 import org.mediawiki.api.ApiResult;
 
 import java.io.FileNotFoundException;
@@ -25,10 +24,16 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.HandlerService;
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
+import fr.free.nrw.commons.mwapi.EventLog;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import in.yuvi.http.fluent.ProgressListener;
 import timber.log.Timber;
 
@@ -176,7 +181,7 @@ public class UploadService extends HandlerService<Contribution> {
     }
 
     private void uploadContribution(Contribution contribution) {
-        MWApi api = app.getMWApi();
+        MediaWikiApi api = app.getMWApi();
 
         ApiResult result;
         InputStream file = null;
@@ -304,7 +309,7 @@ public class UploadService extends HandlerService<Contribution> {
     }
 
     private String findUniqueFilename(String fileName) throws IOException {
-        MWApi api = app.getMWApi();
+        MediaWikiApi api = app.getMWApi();
         String sequenceFileName;
         for ( int sequenceNumber = 1; true; sequenceNumber++ ) {
             if (sequenceNumber == 1) {
@@ -320,23 +325,12 @@ public class UploadService extends HandlerService<Contribution> {
                     sequenceFileName = regexMatcher.replaceAll("$1 " + sequenceNumber + "$2");
                 }
             }
-            if ( fileExistsWithName(api, sequenceFileName) || unfinishedUploads.contains(sequenceFileName) ) {
+            if ( api.fileExistsWithName(sequenceFileName) || unfinishedUploads.contains(sequenceFileName) ) {
                 continue;
             } else {
                 break;
             }
         }
         return sequenceFileName;
-    }
-
-    private static boolean fileExistsWithName(MWApi api, String fileName) throws IOException {
-        ApiResult result;
-
-        result = api.action("query")
-                .param("prop", "imageinfo")
-                .param("titles", "File:" + fileName)
-                .get();
-
-        return result.getNodes("/api/query/pages/page/imageinfo").size() > 0;
     }
 }

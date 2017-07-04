@@ -3,7 +3,6 @@ package fr.free.nrw.commons.category;
 import android.os.AsyncTask;
 import android.view.View;
 
-import fr.free.nrw.commons.MWApi;
 import org.mediawiki.api.ApiResult;
 
 import java.io.IOException;
@@ -12,6 +11,7 @@ import java.util.Calendar;
 import java.util.Iterator;
 
 import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
 /**
@@ -79,20 +79,13 @@ public class MethodAUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
     protected ArrayList<String> doInBackground(Void... voids) {
 
         //otherwise if user has typed something in that isn't in cache, search API for matching categories
-        MWApi api = CommonsApplication.getInstance().getMWApi();
+        MediaWikiApi api = CommonsApplication.getInstance().getMWApi();
         ApiResult result;
         ArrayList<String> categories = new ArrayList<>();
 
         //URL https://commons.wikimedia.org/w/api.php?action=query&format=xml&list=search&srwhat=text&srenablerewrites=1&srnamespace=14&srlimit=10&srsearch=
         try {
-            result = api.action("query")
-                    .param("format", "xml")
-                    .param("list", "search")
-                    .param("srwhat", "text")
-                    .param("srnamespace", "14")
-                    .param("srlimit", catFragment.SEARCH_CATS_LIMIT)
-                    .param("srsearch", filter)
-                    .get();
+            result = api.searchCategories(CategorizationFragment.SEARCH_CATS_LIMIT, filter);
             Timber.d("Method A URL filter %s", result);
         } catch (IOException e) {
             Timber.e(e, "IO Exception: ");

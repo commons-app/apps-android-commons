@@ -4,7 +4,6 @@ import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.view.View;
 
-import fr.free.nrw.commons.MWApi;
 import org.mediawiki.api.ApiResult;
 
 import java.io.IOException;
@@ -13,6 +12,7 @@ import java.util.Calendar;
 import java.util.Iterator;
 
 import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
 /**
@@ -95,15 +95,11 @@ public class PrefixUpdater extends AsyncTask<Void, Void, ArrayList<String>> {
 
         //otherwise if user has typed something in that isn't in cache, search API for matching categories
         //URL: https://commons.wikimedia.org/w/api.php?action=query&list=allcategories&acprefix=filter&aclimit=25
-        MWApi api = CommonsApplication.getInstance().getMWApi();
+        MediaWikiApi api = CommonsApplication.getInstance().getMWApi();
         ApiResult result;
         ArrayList<String> categories = new ArrayList<>();
         try {
-            result = api.action("query")
-                    .param("list", "allcategories")
-                    .param("acprefix", filter)
-                    .param("aclimit", catFragment.SEARCH_CATS_LIMIT)
-                    .get();
+            result = api.allCategories(CategorizationFragment.SEARCH_CATS_LIMIT, this.filter);
             Timber.d("Prefix URL filter %s", result);
         } catch (IOException e) {
             Timber.e(e, "IO Exception: ");

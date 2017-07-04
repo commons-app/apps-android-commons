@@ -12,7 +12,6 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.os.RemoteException;
 
-import fr.free.nrw.commons.MWApi;
 import org.mediawiki.api.ApiResult;
 
 import java.io.IOException;
@@ -21,6 +20,7 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
 public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
@@ -61,7 +61,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
             return;
         }
 
-        MWApi api = CommonsApplication.getInstance().getMWApi();
+        MediaWikiApi api = CommonsApplication.getInstance().getMWApi();
         api.setAuthCookie(authCookie);
         String editToken;
 
@@ -98,11 +98,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                 if(contrib.getState() == Contribution.STATE_COMPLETED) {
 
                     try {
-                        requestResult = api.action("query")
-                                .param("prop", "revisions")
-                                .param("rvprop", "timestamp|content")
-                                .param("titles", contrib.getFilename())
-                                .get();
+                        requestResult = api.revisionsByFilename(contrib.getFilename());
                     } catch (IOException e) {
                         Timber.d("Network fuckup on modifications sync!");
                         continue;
@@ -113,12 +109,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                     String processedPageContent = sequence.executeModifications(contrib.getFilename(),  pageContent);
 
                     try {
-                        responseResult = api.action("edit")
-                                .param("title", contrib.getFilename())
-                                .param("token", editToken)
-                                .param("text", processedPageContent)
-                                .param("summary", sequence.getEditSummary())
-                                .post();
+                        responseResult = api.edit(editToken, processedPageContent, contrib.getFilename(), sequence.getEditSummary());
                     } catch (IOException e) {
                         Timber.d("Network fuckup on modifications sync!");
                         continue;

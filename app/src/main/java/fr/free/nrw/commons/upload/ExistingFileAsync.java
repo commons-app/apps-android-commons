@@ -12,9 +12,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.MWApi;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
 /**
@@ -49,16 +49,13 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
 
     @Override
     protected Boolean doInBackground(Void... voids) {
-        MWApi api = CommonsApplication.getInstance().getMWApi();
+        MediaWikiApi api = CommonsApplication.getInstance().getMWApi();
         ApiResult result;
 
         // https://commons.wikimedia.org/w/api.php?action=query&list=allimages&format=xml&aisha1=801957214aba50cb63bb6eb1b0effa50188900ba
         try {
-            result = api.action("query")
-                    .param("format", "xml")
-                    .param("list", "allimages")
-                    .param("aisha1", fileSha1)
-                    .get();
+            String fileSha1 = this.fileSha1;
+            result = api.existingFile(fileSha1);
             Timber.d("Searching Commons API for existing file: %s", result);
         } catch (IOException e) {
             Timber.e(e, "IO Exception: ");

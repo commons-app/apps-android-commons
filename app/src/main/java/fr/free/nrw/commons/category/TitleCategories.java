@@ -2,13 +2,13 @@ package fr.free.nrw.commons.category;
 
 import android.os.AsyncTask;
 
-import fr.free.nrw.commons.MWApi;
 import org.mediawiki.api.ApiResult;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
 /**
@@ -34,20 +34,13 @@ public class TitleCategories extends AsyncTask<Void, Void, ArrayList<String>> {
     @Override
     protected ArrayList<String> doInBackground(Void... voids) {
 
-        MWApi api = CommonsApplication.getInstance().getMWApi();
+        MediaWikiApi api = CommonsApplication.getInstance().getMWApi();
         ApiResult result;
         ArrayList<String> items = new ArrayList<>();
 
         //URL https://commons.wikimedia.org/w/api.php?action=query&format=xml&list=search&srwhat=text&srenablerewrites=1&srnamespace=14&srlimit=10&srsearch=
         try {
-            result = api.action("query")
-                    .param("format", "xml")
-                    .param("list", "search")
-                    .param("srwhat", "text")
-                    .param("srnamespace", "14")
-                    .param("srlimit", SEARCH_CATS_LIMIT)
-                    .param("srsearch", title)
-                    .get();
+            result = api.searchTitles(SEARCH_CATS_LIMIT, this.title);
             Timber.d("Searching for cats for title: %s", result);
         } catch (IOException e) {
             Timber.e(e, "IO Exception: ");
