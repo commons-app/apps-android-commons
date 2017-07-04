@@ -9,8 +9,8 @@ import android.os.Bundle;
 import java.io.IOException;
 
 import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.EventLog;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.mwapi.EventLog;
 import timber.log.Timber;
 
 class LoginTask extends AsyncTask<String, String, String> {

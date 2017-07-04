@@ -7,8 +7,12 @@ import android.preference.PreferenceManager;
 import android.text.Html;
 import android.text.Spanned;
 
-import fr.free.nrw.commons.settings.Prefs;
-import timber.log.Timber;
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.codec.net.URLCodec;
+import org.w3c.dom.Node;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -34,12 +38,8 @@ import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.codec.net.URLCodec;
-import org.w3c.dom.Node;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
+import fr.free.nrw.commons.settings.Prefs;
+import timber.log.Timber;
 
 
 public class Utils {

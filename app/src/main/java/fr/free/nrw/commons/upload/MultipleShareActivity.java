@@ -20,12 +20,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
-import butterknife.ButterKnife;
-
 import java.util.ArrayList;
 
+import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.EventLog;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
@@ -36,6 +34,7 @@ import fr.free.nrw.commons.modifications.CategoryModifier;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
+import fr.free.nrw.commons.mwapi.EventLog;
 import timber.log.Timber;
 
 public  class       MultipleShareActivity
