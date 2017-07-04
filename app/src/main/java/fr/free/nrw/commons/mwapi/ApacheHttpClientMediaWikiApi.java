@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.mwapi;
 
 import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import org.apache.http.HttpResponse;
@@ -15,33 +17,30 @@ import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.CoreProtocolPNames;
 import org.mediawiki.api.ApiResult;
+import org.mediawiki.api.MWApi;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
 import fr.free.nrw.commons.BuildConfig;
+import fr.free.nrw.commons.Utils;
 import in.yuvi.http.fluent.Http;
 import timber.log.Timber;
 
 /**
  * @author Addshore
  */
-public class ApacheHttpClientMediaWikiApi extends org.mediawiki.api.MWApi implements MediaWikiApi {
+public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     private static final String THUMB_SIZE = "640";
-    private static AbstractHttpClient httpClient;
+    private AbstractHttpClient httpClient;
+    private MWApi api;
 
     public ApacheHttpClientMediaWikiApi(String apiURL) {
-        super(apiURL, getHttpClient());
-    }
-
-    private static AbstractHttpClient getHttpClient() {
-        if (httpClient == null) {
-            httpClient = newHttpClient();
-        }
-        return httpClient;
-    }
-
-    private static AbstractHttpClient newHttpClient() {
         BasicHttpParams params = new BasicHttpParams();
         SchemeRegistry schemeRegistry = new SchemeRegistry();
         schemeRegistry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
@@ -49,9 +48,9 @@ public class ApacheHttpClientMediaWikiApi extends org.mediawiki.api.MWApi implem
         schemeRegistry.register(new Scheme("https", sslSocketFactory, 443));
         ClientConnectionManager cm = new ThreadSafeClientConnManager(params, schemeRegistry);
         params.setParameter(CoreProtocolPNames.USER_AGENT, "Commons/" + BuildConfig.VERSION_NAME + " (https://mediawiki.org/wiki/Apps/Commons) Android/" + Build.VERSION.RELEASE);
-        return new DefaultHttpClient(cm, params);
+        httpClient = new DefaultHttpClient(cm, params);
+        api = new MWApi(apiURL, httpClient);
     }
-
 
     /**
      * @param username String
@@ -60,7 +59,7 @@ public class ApacheHttpClientMediaWikiApi extends org.mediawiki.api.MWApi implem
      * @throws IOException On api request IO issue
      */
     public String login(String username, String password) throws IOException {
-        return getErrorCodeToReturn(action("clientlogin")
+        return getErrorCodeToReturn(api.action("clientlogin")
                 .param("rememberMe", "1")
                 .param("username", username)
                 .param("password", password)
@@ -77,7 +76,7 @@ public class ApacheHttpClientMediaWikiApi extends org.mediawiki.api.MWApi implem
      * @throws IOException On api request IO issue
      */
     public String login(String username, String password, String twoFactorCode) throws IOException {
-        return getErrorCodeToReturn(action("clientlogin")
+        return getErrorCodeToReturn(api.action("clientlogin")
                 .param("rememberMe", "1")
                 .param("username", username)
                 .param("password", password)
@@ -88,7 +87,7 @@ public class ApacheHttpClientMediaWikiApi extends org.mediawiki.api.MWApi implem
     }
 
     private String getLoginToken() throws IOException {
-        return this.action("query")
+        return api.action("query")
                 .param("action", "query")
                 .param("meta", "tokens")
                 .param("type", "login")
@@ -106,7 +105,7 @@ public class ApacheHttpClientMediaWikiApi extends org.mediawiki.api.MWApi implem
     private String getErrorCodeToReturn(ApiResult loginApiResult) {
         String status = loginApiResult.getString("/api/clientlogin/@status");
         if (status.equals("PASS")) {
-            this.isLoggedIn = true;
+            api.isLoggedIn = true;
             return status;
         } else if (status.equals("FAIL")) {
             return loginApiResult.getString("/api/clientlogin/@messagecode");
@@ -122,10 +121,29 @@ public class ApacheHttpClientMediaWikiApi extends org.mediawiki.api.MWApi implem
         return "genericerror-" + status;
     }
 
-    // Moved / consolidated methods
+    @Override
+    public String getAuthCookie() {
+        return api.getAuthCookie();
+    }
+
+    @Override
+    public void setAuthCookie(String authCookie) {
+        api.setAuthCookie(authCookie);
+    }
+
+    @Override
+    public boolean validateLogin() throws IOException {
+        return api.validateLogin();
+    }
+
+    @Override
+    public String getEditToken() throws IOException {
+        return api.getEditToken();
+    }
+
     @Override
     public boolean fileExistsWithName(String fileName) throws IOException {
-        return action("query")
+        return api.action("query")
                 .param("prop", "imageinfo")
                 .param("titles", "File:" + fileName)
                 .get()
@@ -133,18 +151,20 @@ public class ApacheHttpClientMediaWikiApi extends org.mediawiki.api.MWApi implem
     }
 
     @Override
-    public ApiResult edit(String editToken, String processedPageContent, String filename, String summary) throws IOException {
-        return action("edit")
+    @Nullable
+    public String edit(String editToken, String processedPageContent, String filename, String summary) throws IOException {
+        return api.action("edit")
                 .param("title", filename)
                 .param("token", editToken)
                 .param("text", processedPageContent)
                 .param("summary", summary)
-                .post();
+                .post()
+                .getString("/api/edit/@result");
     }
 
     @Override
     public String findThumbnailByFilename(String filename) throws IOException {
-        return action("query")
+        return api.action("query")
                 .param("format", "xml")
                 .param("prop", "imageinfo")
                 .param("iiprop", "url")
@@ -155,52 +175,101 @@ public class ApacheHttpClientMediaWikiApi extends org.mediawiki.api.MWApi implem
     }
 
     @Override
-    public ApiResult fetchMediaByFilename(String filename) throws IOException {
-        return action("query")
+    @NonNull
+    public MediaResult fetchMediaByFilename(String filename) throws IOException {
+        ApiResult apiResult = api.action("query")
                 .param("prop", "revisions")
                 .param("titles", filename)
                 .param("rvprop", "content")
                 .param("rvlimit", 1)
                 .param("rvgeneratexml", 1)
                 .get();
+
+        return new MediaResult(
+                apiResult.getString("/api/query/pages/page/revisions/rev"),
+                apiResult.getString("/api/query/pages/page/revisions/rev/@parsetree"));
     }
 
     @Override
-    public ApiResult searchCategories(int searchCatsLimit, String filterValue) throws IOException {
-        return action("query")
+    @NonNull
+    public List<String> searchCategories(int searchCatsLimit, String filterValue) throws IOException {
+        List<ApiResult> categoryNodes = api.action("query")
                 .param("format", "xml")
                 .param("list", "search")
                 .param("srwhat", "text")
                 .param("srnamespace", "14")
                 .param("srlimit", searchCatsLimit)
                 .param("srsearch", filterValue)
-                .get();
+                .get()
+                .getNodes("/api/query/search/p/@title");
+
+        if (categoryNodes == null) {
+            return Collections.emptyList();
+        }
+
+        List<String> categories = new ArrayList<>();
+        for (ApiResult categoryNode : categoryNodes) {
+            String cat = categoryNode.getDocument().getTextContent();
+            String catString = cat.replace("Category:", "");
+            categories.add(catString);
+        }
+
+        return categories;
     }
 
     @Override
-    public ApiResult allCategories(int searchCatsLimit, String filterValue) throws IOException {
-        return action("query")
+    @NonNull
+    public List<String> allCategories(int searchCatsLimit, String filterValue) throws IOException {
+        ArrayList<ApiResult> categoryNodes = api.action("query")
                 .param("list", "allcategories")
                 .param("acprefix", filterValue)
                 .param("aclimit", searchCatsLimit)
-                .get();
+                .get()
+                .getNodes("/api/query/allcategories/c");
+
+        if (categoryNodes == null) {
+            return Collections.emptyList();
+        }
+
+        List<String> categories = new ArrayList<>();
+        for (ApiResult categoryNode : categoryNodes) {
+            categories.add(categoryNode.getDocument().getTextContent());
+        }
+
+        return categories;
     }
 
     @Override
-    public ApiResult searchTitles(int searchCatsLimit, String title) throws IOException {
-        return action("query")
+    @NonNull
+    public List<String> searchTitles(int searchCatsLimit, String title) throws IOException {
+        ArrayList<ApiResult> categoryNodes = api.action("query")
                 .param("format", "xml")
                 .param("list", "search")
                 .param("srwhat", "text")
                 .param("srnamespace", "14")
                 .param("srlimit", searchCatsLimit)
                 .param("srsearch", title)
-                .get();
+                .get()
+                .getNodes("/api/query/search/p/@title");
+
+        if (categoryNodes == null) {
+            return Collections.emptyList();
+        }
+
+        List<String> titleCategories = new ArrayList<>();
+        for (ApiResult categoryNode : categoryNodes) {
+            String cat = categoryNode.getDocument().getTextContent();
+            String catString = cat.replace("Category:", "");
+            titleCategories.add(catString);
+        }
+
+        return titleCategories;
     }
 
     @Override
-    public ApiResult logEvents(String user, String lastModified, String queryContinue, int limit) throws IOException {
-        org.mediawiki.api.MWApi.RequestBuilder builder = action("query")
+    @NonNull
+    public LogEventResult logEvents(String user, String lastModified, String queryContinue, int limit) throws IOException {
+        org.mediawiki.api.MWApi.RequestBuilder builder = api.action("query")
                 .param("list", "logevents")
                 .param("letype", "upload")
                 .param("leprop", "title|timestamp|ids")
@@ -212,25 +281,47 @@ public class ApacheHttpClientMediaWikiApi extends org.mediawiki.api.MWApi implem
         if (!TextUtils.isEmpty(queryContinue)) {
             builder.param("lestart", queryContinue);
         }
-        return builder.get();
+        ApiResult result = builder.get();
+
+        return new LogEventResult(
+                getLogEventsFromResult(result),
+                result.getString("/api/query-continue/logevents/@lestart"));
+    }
+
+    @NonNull
+    private ArrayList<LogEventResult.LogEvent> getLogEventsFromResult(ApiResult result) {
+        ArrayList<ApiResult> uploads = result.getNodes("/api/query/logevents/item");
+        Timber.d("%d results!", uploads.size());
+        ArrayList<LogEventResult.LogEvent> logEvents = new ArrayList<>();
+        for (ApiResult image : uploads) {
+            logEvents.add(new LogEventResult.LogEvent(
+                    image.getString("@pageid"),
+                    image.getString("@title"),
+                    Utils.parseMWDate(image.getString("@timestamp")))
+            );
+        }
+        return logEvents;
     }
 
     @Override
-    public ApiResult revisionsByFilename(String filename) throws IOException {
-        return action("query")
+    @Nullable
+    public String revisionsByFilename(String filename) throws IOException {
+        return api.action("query")
                 .param("prop", "revisions")
                 .param("rvprop", "timestamp|content")
                 .param("titles", filename)
-                .get();
+                .get()
+                .getString("/api/query/pages/page/revisions/rev");
     }
 
     @Override
-    public ApiResult existingFile(String fileSha1) throws IOException {
-        return action("query")
+    public boolean existingFile(String fileSha1) throws IOException {
+        return api.action("query")
                 .param("format", "xml")
                 .param("list", "allimages")
                 .param("aisha1", fileSha1)
-                .get();
+                .get()
+                .getNodes("/api/query/allimages/img").size() > 0;
     }
 
     @Override
@@ -254,5 +345,26 @@ public class ApacheHttpClientMediaWikiApi extends org.mediawiki.api.MWApi implem
         }
 
         return allSuccess;
+    }
+
+    @Override
+    @NonNull
+    public UploadResult uploadFile(String filename, InputStream file, long dataLength, String pageContents, String editSummary, final ProgressListener progressListener) throws IOException {
+        ApiResult result = api.upload(filename, file, dataLength, pageContents, editSummary, new in.yuvi.http.fluent.ProgressListener() {
+            @Override
+            public void onProgress(long transferred, long total) {
+                progressListener.onProgress(transferred, total);
+            }
+        });
+        String resultStatus = result.getString("/api/upload/@result");
+        if (!resultStatus.equals("Success")) {
+            String errorCode = result.getString("/api/error/@code");
+            return new UploadResult(resultStatus, errorCode);
+        } else {
+            Date dateUploaded = Utils.parseMWDate(result.getString("/api/upload/imageinfo/@timestamp"));
+            String canonicalFilename = "File:" + result.getString("/api/upload/@filename").replace("_", " "); // Title vs Filename
+            String imageUrl = result.getString("/api/upload/imageinfo/@url");
+            return new UploadResult(dateUploaded, canonicalFilename, imageUrl);
+        }
     }
 }

@@ -6,10 +6,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 
-import org.mediawiki.api.ApiResult;
-
 import java.io.IOException;
-import java.util.ArrayList;
 
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
@@ -50,22 +47,16 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
     @Override
     protected Boolean doInBackground(Void... voids) {
         MediaWikiApi api = CommonsApplication.getInstance().getMWApi();
-        ApiResult result;
 
         // https://commons.wikimedia.org/w/api.php?action=query&list=allimages&format=xml&aisha1=801957214aba50cb63bb6eb1b0effa50188900ba
+        boolean fileExists;
         try {
             String fileSha1 = this.fileSha1;
-            result = api.existingFile(fileSha1);
-            Timber.d("Searching Commons API for existing file: %s", result);
+            fileExists = api.existingFile(fileSha1);
         } catch (IOException e) {
             Timber.e(e, "IO Exception: ");
             return false;
         }
-
-        ArrayList<ApiResult> resultNodes = result.getNodes("/api/query/allimages/img");
-        Timber.d("Result nodes: %s", resultNodes);
-
-        boolean fileExists = !resultNodes.isEmpty();
 
         Timber.d("File already exists in Commons: %s", fileExists);
         return fileExists;

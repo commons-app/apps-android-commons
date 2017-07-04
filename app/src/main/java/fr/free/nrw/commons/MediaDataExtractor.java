@@ -1,6 +1,5 @@
 package fr.free.nrw.commons;
 
-import org.mediawiki.api.ApiResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -21,6 +20,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.mwapi.MediaResult;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
@@ -64,20 +64,14 @@ public class MediaDataExtractor {
         }
 
         MediaWikiApi api = CommonsApplication.getInstance().getMWApi();
-        processResult(api.fetchMediaByFilename(filename));
-        fetched = true;
-    }
-
-    private void processResult(ApiResult result) throws IOException {
-
-        String wikiSource = result.getString("/api/query/pages/page/revisions/rev");
-        String parseTreeXmlSource = result.getString("/api/query/pages/page/revisions/rev/@parsetree");
+        MediaResult result = api.fetchMediaByFilename(filename);
 
         // In-page category links are extracted from source, as XML doesn't cover [[links]]
-        extractCategories(wikiSource);
+        extractCategories(result.getWikiSource());
 
         // Description template info is extracted from preprocessor XML
-        processWikiParseTree(parseTreeXmlSource);
+        processWikiParseTree(result.getParseTreeXmlSource());
+        fetched = true;
     }
 
     /**
