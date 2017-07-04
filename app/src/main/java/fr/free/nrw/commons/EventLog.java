@@ -14,8 +14,8 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import fr.free.nrw.commons.libs.http_fluent.Http;
 import fr.free.nrw.commons.settings.Prefs;
-import in.yuvi.http.fluent.Http;
 import timber.log.Timber;
 
 public class EventLog {

@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 
-import org.mediawiki.api.ApiResult;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -15,6 +13,7 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.MWApi;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
+import fr.free.nrw.commons.libs.mediawiki_api.ApiResult;
 import timber.log.Timber;
 
 /**
@@ -58,7 +57,8 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
                     .param("format", "xml")
                     .param("list", "allimages")
                     .param("aisha1", fileSha1)
-                    .get();
+                    .prepareHttpRequestBuilder("GET")
+                    .request();;
             Timber.d("Searching Commons API for existing file: %s", result);
         } catch (IOException e) {
             Timber.e(e, "IO Exception: ");

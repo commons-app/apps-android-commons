@@ -14,7 +14,6 @@ import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
 import fr.free.nrw.commons.*;
-import org.mediawiki.api.ApiResult;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -28,8 +27,9 @@ import java.util.regex.Pattern;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
+import fr.free.nrw.commons.libs.http_fluent.ProgressListener;
+import fr.free.nrw.commons.libs.mediawiki_api.ApiResult;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
-import in.yuvi.http.fluent.ProgressListener;
 import timber.log.Timber;
 
 public class UploadService extends HandlerService<Contribution> {
@@ -335,7 +335,8 @@ public class UploadService extends HandlerService<Contribution> {
         result = api.action("query")
                 .param("prop", "imageinfo")
                 .param("titles", "File:" + fileName)
-                .get();
+                .prepareHttpRequestBuilder("GET")
+                .request();
 
         return result.getNodes("/api/query/pages/page/imageinfo").size() > 0;
     }

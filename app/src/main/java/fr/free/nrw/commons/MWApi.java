@@ -3,12 +3,14 @@ package fr.free.nrw.commons;
 import java.io.IOException;
 
 import org.apache.http.impl.client.AbstractHttpClient;
-import org.mediawiki.api.ApiResult;
+
+import fr.free.nrw.commons.libs.mediawiki_api.ApiResult;
+
 
 /**
  * @author Addshore
  */
-public class MWApi extends org.mediawiki.api.MWApi {
+public class MWApi extends fr.free.nrw.commons.libs.mediawiki_api.MWApi {
 
     /** We don't actually use this but need to pass it in requests */
     private static String LOGIN_RETURN_TO_URL = "https://commons.wikimedia.org";
@@ -31,7 +33,8 @@ public class MWApi extends org.mediawiki.api.MWApi {
                 .param("password", password)
                 .param("logintoken", token)
                 .param("loginreturnurl", LOGIN_RETURN_TO_URL)
-                .post();
+                .prepareHttpRequestBuilder("POST")
+                .request();
         return this.getErrorCodeToReturn( loginApiResult );
     }
 
@@ -51,7 +54,8 @@ public class MWApi extends org.mediawiki.api.MWApi {
                 .param("logintoken", token)
                 .param("logincontinue", "1")
                 .param("OATHToken", twoFactorCode)
-                .post();
+                .prepareHttpRequestBuilder("POST")
+                .request();
 
         return this.getErrorCodeToReturn( loginApiResult );
     }
@@ -61,7 +65,8 @@ public class MWApi extends org.mediawiki.api.MWApi {
                 .param("action", "query")
                 .param("meta", "tokens")
                 .param("type", "login")
-                .post();
+                .prepareHttpRequestBuilder("POST")
+                .request();
         return tokenResult.getString("/api/query/tokens/@logintoken");
     }
 

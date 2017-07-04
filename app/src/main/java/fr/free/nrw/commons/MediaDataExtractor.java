@@ -1,6 +1,5 @@
 package fr.free.nrw.commons;
 
-import org.mediawiki.api.ApiResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -20,6 +19,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import fr.free.nrw.commons.libs.mediawiki_api.ApiResult;
 import fr.free.nrw.commons.location.LatLng;
 import timber.log.Timber;
 
@@ -69,7 +69,8 @@ public class MediaDataExtractor {
                 .param("rvprop", "content")
                 .param("rvlimit", 1)
                 .param("rvgeneratexml", 1)
-                .get();
+                .prepareHttpRequestBuilder("GET")
+                .request();
 
         processResult(result);
         fetched = true;
