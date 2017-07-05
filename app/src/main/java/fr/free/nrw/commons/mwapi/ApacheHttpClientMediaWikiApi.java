@@ -63,7 +63,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 .param("rememberMe", "1")
                 .param("username", username)
                 .param("password", password)
-                .param("logintoken", this.getLoginToken())
+                .param("logintoken", getLoginToken())
                 .param("loginreturnurl", "https://commons.wikimedia.org")
                 .post());
     }
