@@ -1,12 +1,13 @@
 package fr.free.nrw.commons.mwapi;
 
 import android.os.Build;
-import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -25,11 +26,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-/*
- *  XML for individual tests was captured by hand from the API sandbox -
- *  https://en.wikipedia.org/wiki/Special:ApiSandbox
- */
-@RunWith(AndroidJUnit4.class)
+@RunWith(RobolectricTestRunner.class)
+@Config(constants = BuildConfig.class)
 public class ApacheHttpClientMediaWikiApiTest {
 
     private ApacheHttpClientMediaWikiApi testObject;

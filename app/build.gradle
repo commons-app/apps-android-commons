@@ -28,6 +28,11 @@ dependencies {
     compile "com.google.guava:guava:${GUAVA_VERSION}"
 
     testCompile 'junit:junit:4.12'
+    testCompile ('org.robolectric:robolectric:3.3.2') {
+        exclude module: 'guava'
+    }
+
+    testCompile 'com.squareup.okhttp3:mockwebserver:3.8.1'
     androidTestCompile 'com.squareup.okhttp3:mockwebserver:3.8.1'
     androidTestCompile "com.android.support:support-annotations:${project.supportLibVersion}"
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
