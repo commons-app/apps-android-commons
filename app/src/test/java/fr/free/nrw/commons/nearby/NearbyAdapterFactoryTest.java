@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.nearby;
 
+import android.support.annotation.NonNull;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -63,21 +64,23 @@ public class NearbyAdapterFactoryTest {
         NearbyAdapterFactory testObject = new NearbyAdapterFactory(null);
         RVRendererAdapter<Place> result = testObject.create(Collections.singletonList(PLACE));
 
-        RendererViewHolder viewHolder = result.onCreateViewHolder(new FrameLayout(RuntimeEnvironment.application), result.getItemViewType(0));
-        assertNotNull(viewHolder);
-        result.bindViewHolder(viewHolder, 0);
+        RendererViewHolder viewHolder = renderComponent(result);
 
         assertNotNull(viewHolder.itemView.findViewById(R.id.tvName));
-        assertEquals("name", ((TextView) viewHolder.itemView.findViewById(R.id.tvName)).getText().toString());
+        assertEquals("name",
+                ((TextView) viewHolder.itemView.findViewById(R.id.tvName)).getText().toString());
 
         assertNotNull(viewHolder.itemView.findViewById(R.id.tvDesc));
-        assertEquals("airport", ((TextView) viewHolder.itemView.findViewById(R.id.tvDesc)).getText().toString());
+        assertEquals("airport",
+                ((TextView) viewHolder.itemView.findViewById(R.id.tvDesc)).getText().toString());
 
         assertNotNull(viewHolder.itemView.findViewById(R.id.distance));
-        assertEquals("", ((TextView) viewHolder.itemView.findViewById(R.id.distance)).getText().toString());
+        assertEquals("",
+                ((TextView) viewHolder.itemView.findViewById(R.id.distance)).getText().toString());
 
         assertNotNull(viewHolder.itemView.findViewById(R.id.icon));
-        ShadowDrawable shadow  = Shadows.shadowOf(((ImageView) viewHolder.itemView.findViewById(R.id.icon)).getDrawable());
+        ImageView imageView = (ImageView) viewHolder.itemView.findViewById(R.id.icon);
+        ShadowDrawable shadow  = Shadows.shadowOf(imageView.getDrawable());
         assertEquals(R.drawable.round_icon_airport, shadow.getCreatedFromResId());
     }
 
@@ -86,36 +89,23 @@ public class NearbyAdapterFactoryTest {
         NearbyAdapterFactory testObject = new NearbyAdapterFactory(null);
         RVRendererAdapter<Place> result = testObject.create(Collections.singletonList(UNKNOWN_PLACE));
 
-        RendererViewHolder viewHolder = result.onCreateViewHolder(new FrameLayout(RuntimeEnvironment.application), result.getItemViewType(0));
-        assertNotNull(viewHolder);
-        result.bindViewHolder(viewHolder, 0);
-
-        assertNotNull(viewHolder.itemView.findViewById(R.id.tvName));
-        assertEquals("name", ((TextView) viewHolder.itemView.findViewById(R.id.tvName)).getText().toString());
+        RendererViewHolder viewHolder = renderComponent(result);
 
         assertNotNull(viewHolder.itemView.findViewById(R.id.tvDesc));
-        assertEquals("no description found", ((TextView) viewHolder.itemView.findViewById(R.id.tvDesc)).getText().toString());
-
-        assertNotNull(viewHolder.itemView.findViewById(R.id.distance));
-        assertEquals("", ((TextView) viewHolder.itemView.findViewById(R.id.distance)).getText().toString());
+        assertEquals("no description found",
+                ((TextView) viewHolder.itemView.findViewById(R.id.tvDesc)).getText().toString());
 
         assertNotNull(viewHolder.itemView.findViewById(R.id.icon));
-        ShadowDrawable shadow  = Shadows.shadowOf(((ImageView) viewHolder.itemView.findViewById(R.id.icon)).getDrawable());
+        ImageView imageView = (ImageView) viewHolder.itemView.findViewById(R.id.icon);
+        ShadowDrawable shadow  = Shadows.shadowOf(imageView.getDrawable());
         assertEquals(R.drawable.round_icon_unknown, shadow.getCreatedFromResId());
     }
 
     @Test
     public void clickView() {
-        NearbyAdapterFactory testObject = new NearbyAdapterFactory(new PlaceRenderer.PlaceClickedListener() {
-            @Override
-            public void placeClicked(Place place) {
-                clickedPlace = place;
-            }
-        });
+        NearbyAdapterFactory testObject = new NearbyAdapterFactory(new MockPlaceClickedListener());
         RVRendererAdapter<Place> result = testObject.create(Collections.singletonList(PLACE));
-        RendererViewHolder viewHolder = result.onCreateViewHolder(new FrameLayout(RuntimeEnvironment.application), result.getItemViewType(0));
-        assertNotNull(viewHolder);
-        result.bindViewHolder(viewHolder, 0);
+        RendererViewHolder viewHolder = renderComponent(result);
 
         viewHolder.itemView.performClick();
 
@@ -126,10 +116,24 @@ public class NearbyAdapterFactoryTest {
     public void clickViewHandlesMisconfiguredListener() {
         NearbyAdapterFactory testObject = new NearbyAdapterFactory(null);
         RVRendererAdapter<Place> result = testObject.create(Collections.singletonList(PLACE));
-        RendererViewHolder viewHolder = result.onCreateViewHolder(new FrameLayout(RuntimeEnvironment.application), result.getItemViewType(0));
+        RendererViewHolder viewHolder = renderComponent(result);
+        viewHolder.itemView.performClick();
+    }
+
+    @NonNull
+    private RendererViewHolder renderComponent(RVRendererAdapter<Place> result) {
+        FrameLayout viewGroup = new FrameLayout(RuntimeEnvironment.application);
+        int itemViewType = result.getItemViewType(0);
+        RendererViewHolder viewHolder = result.onCreateViewHolder(viewGroup, itemViewType);
         assertNotNull(viewHolder);
         result.bindViewHolder(viewHolder, 0);
+        return viewHolder;
+    }
 
-        viewHolder.itemView.performClick();
+    private class MockPlaceClickedListener implements PlaceRenderer.PlaceClickedListener {
+        @Override
+        public void placeClicked(Place place) {
+            clickedPlace = place;
+        }
     }
 }
