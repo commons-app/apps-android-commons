@@ -24,7 +24,7 @@
     <item quantity="one">Przesyłanie %d pliku</item>
     <item quantity="other">Przesyłanie %d plików</item>
   </plurals>
-  <string name="title_activity_contributions" fuzzy="true">Wysłane przeze mnie pliki</string>
+  <string name="title_activity_contributions">Niedawno przesłane</string>
   <string name="contribution_state_queued">W kolejce</string>
   <string name="contribution_state_failed">Porażka</string>
   <string name="contribution_state_in_progress">%1$d%% zakończone</string>

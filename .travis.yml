@@ -3,10 +3,15 @@ addons:
   apt:
     packages:
       - w3m
+cache:
+  directories:
+    - ${TRAVIS_BUILD_DIR}/gradle/caches/
+    - ${TRAVIS_BUILD_DIR}/gradle/wrapper/dists/
 env:
   global:
     - ANDROID_TARGET=android-22
     - ANDROID_ABI=armeabi-v7a
+    - ADB_INSTALL_TIMEOUT=12 # in minutes
 android:
   components:
     - platform-tools
@@ -19,10 +24,10 @@ android:
     - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
 before_script:
   - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
-  - emulator -avd test -no-audio -no-window &
+  - emulator -avd test -no-audio -no-window -no-boot-anim &
   - android-wait-for-emulator
 script:
-  - ./gradlew check connectedCheck jacocoTestReport -stacktrace
+  - ./gradlew clean check connectedCheck jacocoTestReport --stacktrace
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 after_failure:

@@ -21,6 +21,4 @@
     <color name="button_background_light">#B0000000</color>
     <color name="upload_overlay_background_dark">#77000000</color>
     <color name="upload_overlay_background_light">#44000000</color>
-
-    <color name="hamburger_item_pressed_color">#f5f5f5</color>
 </resources>
