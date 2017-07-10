@@ -4,6 +4,7 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.conn.ClientConnectionManager;
@@ -356,6 +357,9 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 progressListener.onProgress(transferred, total);
             }
         });
+
+        Log.e("WTF", "Result: "+result.toString());
+
         String resultStatus = result.getString("/api/upload/@result");
         if (!resultStatus.equals("Success")) {
             String errorCode = result.getString("/api/error/@code");
@@ -364,7 +368,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             Date dateUploaded = Utils.parseMWDate(result.getString("/api/upload/imageinfo/@timestamp"));
             String canonicalFilename = "File:" + result.getString("/api/upload/@filename").replace("_", " "); // Title vs Filename
             String imageUrl = result.getString("/api/upload/imageinfo/@url");
-            return new UploadResult(dateUploaded, canonicalFilename, imageUrl);
+            return new UploadResult(resultStatus, dateUploaded, canonicalFilename, imageUrl);
         }
     }
 }

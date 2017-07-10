@@ -14,7 +14,8 @@ public class UploadResult {
         this.errorCode = errorCode;
     }
 
-    UploadResult(Date dateUploaded, String canonicalFilename, String imageUrl) {
+    UploadResult(String resultStatus, Date dateUploaded, String canonicalFilename, String imageUrl) {
+        this.resultStatus = resultStatus;
         this.dateUploaded = dateUploaded;
         this.canonicalFilename = canonicalFilename;
         this.imageUrl = imageUrl;
