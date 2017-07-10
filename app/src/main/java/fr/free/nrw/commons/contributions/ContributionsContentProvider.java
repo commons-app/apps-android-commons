@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.text.TextUtils;
 
 import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.data.DBOpenHelper;
 import timber.log.Timber;
 
 public class ContributionsContentProvider extends ContentProvider{
@@ -33,10 +32,8 @@ public class ContributionsContentProvider extends ContentProvider{
         return Uri.parse(BASE_URI.toString() + "/" + id);
     }
 
-    private DBOpenHelper dbOpenHelper;
     @Override
     public boolean onCreate() {
-        dbOpenHelper = CommonsApplication.getInstance().getDBOpenHelper();
         return false;
     }
 
@@ -47,7 +44,7 @@ public class ContributionsContentProvider extends ContentProvider{
 
         int uriType = uriMatcher.match(uri);
 
-        SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
+        SQLiteDatabase db = CommonsApplication.getInstance().getDBOpenHelper().getReadableDatabase();
         Cursor cursor;
 
         switch(uriType) {
@@ -81,7 +78,7 @@ public class ContributionsContentProvider extends ContentProvider{
     @Override
     public Uri insert(Uri uri, ContentValues contentValues) {
         int uriType = uriMatcher.match(uri);
-        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
+        SQLiteDatabase sqlDB = CommonsApplication.getInstance().getDBOpenHelper().getWritableDatabase();
         long id = 0;
         switch (uriType) {
             case CONTRIBUTIONS:
@@ -99,7 +96,7 @@ public class ContributionsContentProvider extends ContentProvider{
         int rows = 0;
         int uriType = uriMatcher.match(uri);
 
-        SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
+        SQLiteDatabase db = CommonsApplication.getInstance().getDBOpenHelper().getReadableDatabase();
 
         switch(uriType) {
             case CONTRIBUTIONS_ID:
@@ -120,7 +117,7 @@ public class ContributionsContentProvider extends ContentProvider{
     public int bulkInsert(Uri uri, ContentValues[] values) {
         Timber.d("Hello, bulk insert! (ContributionsContentProvider)");
         int uriType = uriMatcher.match(uri);
-        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
+        SQLiteDatabase sqlDB = CommonsApplication.getInstance().getDBOpenHelper().getWritableDatabase();
         sqlDB.beginTransaction();
         switch (uriType) {
             case CONTRIBUTIONS:
@@ -148,7 +145,7 @@ public class ContributionsContentProvider extends ContentProvider{
         In here, the only concat created argument is for id. It is cast to an int, and will error out otherwise.
          */
         int uriType = uriMatcher.match(uri);
-        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
+        SQLiteDatabase sqlDB = CommonsApplication.getInstance().getDBOpenHelper().getWritableDatabase();
         int rowsUpdated = 0;
         switch (uriType) {
             case CONTRIBUTIONS:
