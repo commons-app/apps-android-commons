@@ -326,14 +326,6 @@ public class CategorizationFragment extends Fragment {
 
     private void startUpdatingCategoryList() {
 
-        if (prefixUpdaterSub != null) {
-            prefixUpdaterSub.cancel(true);
-        }
-
-        if (methodAUpdaterSub != null) {
-            methodAUpdaterSub.cancel(true);
-        }
-
         requestSearchResults();
     }
 
@@ -443,8 +435,6 @@ public class CategorizationFragment extends Fragment {
         });
 
         categoriesFilter.addTextChangedListener(textWatcher);
-
-        startUpdatingCategoryList();
 
         return rootView;
     }
@@ -576,16 +566,22 @@ public class CategorizationFragment extends Fragment {
     private class CategoryTextWatcher implements TextWatcher {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+            if (prefixUpdaterSub != null) {
+                prefixUpdaterSub.cancel(true);
+            }
+
+            if (methodAUpdaterSub != null) {
+                methodAUpdaterSub.cancel(true);
+            }
         }
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-            startUpdatingCategoryList();
         }
 
         @Override
         public void afterTextChanged(Editable editable) {
-
+            startUpdatingCategoryList();
         }
     }
 }
