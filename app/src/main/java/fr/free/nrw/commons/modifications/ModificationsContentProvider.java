@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.text.TextUtils;
 
 import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.data.DBOpenHelper;
 import timber.log.Timber;
 
 public class ModificationsContentProvider extends ContentProvider{
@@ -33,10 +32,9 @@ public class ModificationsContentProvider extends ContentProvider{
         return Uri.parse(BASE_URI.toString() + "/" + id);
     }
 
-    private DBOpenHelper dbOpenHelper;
+
     @Override
     public boolean onCreate() {
-        dbOpenHelper = CommonsApplication.getInstance().getDBOpenHelper();
         return false;
     }
 
@@ -54,7 +52,7 @@ public class ModificationsContentProvider extends ContentProvider{
                 throw new IllegalArgumentException("Unknown URI" + uri);
         }
 
-        SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
+        SQLiteDatabase db = CommonsApplication.getInstance().getDBOpenHelper().getReadableDatabase();
 
         Cursor cursor = queryBuilder.query(db, projection, selection, selectionArgs, null, null, sortOrder);
         cursor.setNotificationUri(getContext().getContentResolver(), uri);
@@ -70,7 +68,7 @@ public class ModificationsContentProvider extends ContentProvider{
     @Override
     public Uri insert(Uri uri, ContentValues contentValues) {
         int uriType = uriMatcher.match(uri);
-        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
+        SQLiteDatabase sqlDB = CommonsApplication.getInstance().getDBOpenHelper().getWritableDatabase();
         long id = 0;
         switch (uriType) {
             case MODIFICATIONS:
@@ -86,7 +84,7 @@ public class ModificationsContentProvider extends ContentProvider{
     @Override
     public int delete(Uri uri, String s, String[] strings) {
         int uriType = uriMatcher.match(uri);
-        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
+        SQLiteDatabase sqlDB = CommonsApplication.getInstance().getDBOpenHelper().getWritableDatabase();
         switch (uriType) {
             case MODIFICATIONS_ID:
                 String id = uri.getLastPathSegment();
@@ -104,7 +102,7 @@ public class ModificationsContentProvider extends ContentProvider{
     public int bulkInsert(Uri uri, ContentValues[] values) {
         Timber.d("Hello, bulk insert! (ModificationsContentProvider)");
         int uriType = uriMatcher.match(uri);
-        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
+        SQLiteDatabase sqlDB = CommonsApplication.getInstance().getDBOpenHelper().getWritableDatabase();
         sqlDB.beginTransaction();
         switch (uriType) {
             case MODIFICATIONS:
@@ -132,7 +130,7 @@ public class ModificationsContentProvider extends ContentProvider{
         In here, the only concat created argument is for id. It is cast to an int, and will error out otherwise.
          */
         int uriType = uriMatcher.match(uri);
-        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
+        SQLiteDatabase sqlDB = CommonsApplication.getInstance().getDBOpenHelper().getWritableDatabase();
         int rowsUpdated = 0;
         switch (uriType) {
             case MODIFICATIONS:

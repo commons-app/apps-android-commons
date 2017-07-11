@@ -34,8 +34,7 @@ public class NearbyPlaces {
 
     public NearbyPlaces() {
         try {
-            String query = FileUtils.readFromResource("/assets/queries/nearby_query.rq");
-            wikidataQuery = query;
+            wikidataQuery = FileUtils.readFromResource("/assets/queries/nearby_query.rq");
             Timber.v(wikidataQuery);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -106,8 +105,8 @@ public class NearbyPlaces {
             String wikiDataLink = Utils.stripLocalizedString(fields[1]);
             String icon = fields[5];
 
-            double latitude = 0;
-            double longitude = 0;
+            double latitude;
+            double longitude;
             Matcher matcher =
                     Pattern.compile("Point\\(([^ ]+) ([^ ]+)\\)").matcher(point);
             if (!matcher.find()) {

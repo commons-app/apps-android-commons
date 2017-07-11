@@ -27,7 +27,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(constants = BuildConfig.class, sdk = 21)
 public class ApacheHttpClientMediaWikiApiTest {
 
     private ApacheHttpClientMediaWikiApi testObject;
@@ -36,7 +36,7 @@ public class ApacheHttpClientMediaWikiApiTest {
     @Before
     public void setUp() throws Exception {
         server = new MockWebServer();
-        testObject = new ApacheHttpClientMediaWikiApi("http://localhost:" + server.getPort() + "/");
+        testObject = new ApacheHttpClientMediaWikiApi("http://" + server.getHostName() + ":" + server.getPort() + "/");
     }
 
     @After
@@ -163,7 +163,7 @@ public class ApacheHttpClientMediaWikiApiTest {
     }
 
     @Test
-    public void editToken() throws Exception{
+    public void editToken() throws Exception {
         server.enqueue(new MockResponse().setBody("<?xml version=\"1.0\"?><api><tokens edittoken=\"baz\" /></api>"));
 
         String result = testObject.getEditToken();
