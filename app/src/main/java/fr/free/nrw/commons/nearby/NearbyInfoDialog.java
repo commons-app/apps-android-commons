@@ -29,19 +29,12 @@ public class NearbyInfoDialog extends OverlayDialog {
     private final static String ARG_LONGITUDE = "longitude";
     private final static String ARG_SITE_LINK = "sitelink";
 
-    @BindView(R.id.link_preview_title)
-    TextView placeTitle;
-    @BindView(R.id.link_preview_extract)
-    TextView placeDescription;
-
-    @BindView(R.id.link_preview_go_button)
-    TextView goToButton;
-
-    @BindView(R.id.link_preview_overflow_button)
-    ImageView overflowButton;
+    @BindView(R.id.link_preview_title) TextView placeTitle;
+    @BindView(R.id.link_preview_extract) TextView placeDescription;
+    @BindView(R.id.link_preview_go_button) TextView goToButton;
+    @BindView(R.id.link_preview_overflow_button) ImageView overflowButton;
 
     private Unbinder unbinder;
-
     private LatLng location;
     private Sitelinks sitelinks;
 
@@ -64,7 +57,7 @@ public class NearbyInfoDialog extends OverlayDialog {
     private void getArticleLink(Bundle bundle) {
         this.sitelinks = bundle.getParcelable(ARG_SITE_LINK);
 
-        if (sitelinks.getWikipediaLink().equals(Uri.EMPTY)) {
+        if (sitelinks == null || Uri.EMPTY.equals(sitelinks.getWikipediaLink())) {
             goToButton.setVisibility(View.GONE);
         }
 
@@ -99,7 +92,7 @@ public class NearbyInfoDialog extends OverlayDialog {
                 || !sitelinks.getWikidataLink().equals(Uri.EMPTY);
     }
 
-    private PopupMenu.OnMenuItemClickListener menuListener = new PopupMenu
+    private final PopupMenu.OnMenuItemClickListener menuListener = new PopupMenu
             .OnMenuItemClickListener() {
         @Override
         public boolean onMenuItemClick(MenuItem item) {

@@ -30,8 +30,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
@@ -41,8 +41,7 @@ import timber.log.Timber;
 
 public class NearbyActivity extends NavigationBaseActivity {
 
-    @BindView(R.id.progressBar)
-    ProgressBar progressBar;
+    @BindView(R.id.progressBar) ProgressBar progressBar;
     private boolean isMapViewActive = false;
     private static final int LOCATION_REQUEST = 1;
 
@@ -133,7 +132,7 @@ public class NearbyActivity extends NavigationBaseActivity {
         }
     }
 
-    protected void checkGps() {
+    private void checkGps() {
         LocationManager manager = (LocationManager) getSystemService(LOCATION_SERVICE);
         if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             Timber.d("GPS is not enabled");
@@ -202,13 +201,9 @@ public class NearbyActivity extends NavigationBaseActivity {
         }
     }
 
-    protected void refreshView() {
+    private void refreshView() {
         nearbyAsyncTask = new NearbyAsyncTask(this);
         nearbyAsyncTask.execute();
-    }
-
-    public LocationServiceManager getLocationManager() {
-        return locationManager;
     }
 
     @Override
@@ -221,15 +216,10 @@ public class NearbyActivity extends NavigationBaseActivity {
 
     private class NearbyAsyncTask extends AsyncTask<Void, Integer, List<Place>> {
 
-        private Context mContext;
+        private final Context mContext;
 
         private NearbyAsyncTask (Context context) {
             mContext = context;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
         }
 
         @Override
@@ -284,7 +274,7 @@ public class NearbyActivity extends NavigationBaseActivity {
     /**
      * Calls fragment for map view.
      */
-    public void setMapFragment() {
+    private void setMapFragment() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         Fragment fragment = new NearbyMapFragment();
         fragment.setArguments(bundle);
@@ -295,7 +285,7 @@ public class NearbyActivity extends NavigationBaseActivity {
     /**
      * Calls fragment for list view.
      */
-    public void setListFragment() {
+    private void setListFragment() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         Fragment fragment = new NearbyListFragment();
         fragment.setArguments(bundle);

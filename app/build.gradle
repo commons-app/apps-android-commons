@@ -15,6 +15,7 @@ dependencies {
     compile "com.android.support:design:${project.supportLibVersion}"
     compile 'com.google.code.gson:gson:2.7'
     compile "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
+    compile 'com.github.pedrovgs:renderers:3.3.0'
     annotationProcessor "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
     compile 'com.jakewharton.timber:timber:4.5.1'
     compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:5.1.0@aar'){
@@ -25,6 +26,9 @@ dependencies {
     compile "com.google.guava:guava:${GUAVA_VERSION}"
 
     testCompile 'junit:junit:4.12'
+    testCompile ('org.robolectric:robolectric:3.3.2') {
+        exclude module: 'guava'
+    }
     androidTestCompile "com.android.support:support-annotations:${project.supportLibVersion}"
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
 

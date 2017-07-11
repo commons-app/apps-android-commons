@@ -14,14 +14,14 @@ public class Place {
 
     public final String name;
     private final Description description;
-    public final String longDescription;
-    public final Uri secondaryImageUrl;
+    private final String longDescription;
+    private final Uri secondaryImageUrl;
     public final LatLng location;
 
     public Bitmap image;
     public Bitmap secondaryImage;
     public String distance;
-    public Sitelinks siteLinks;
+    public final Sitelinks siteLinks;
 
 
     public Place(String name, Description description, String longDescription,

@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +38,6 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     private fr.free.nrw.commons.location.LatLng curLatLng;
 
     public NearbyMapFragment() {
-
     }
 
     @Override
@@ -123,7 +121,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
      * which represents the user's position with an accuracy
      * of 95%.
      */
-    public void addCurrentLocationMarker(MapboxMap mapboxMap) {
+    private void addCurrentLocationMarker(MapboxMap mapboxMap) {
         MarkerOptions currentLocationMarker = new MarkerOptions()
                 .position(new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude()));
         mapboxMap.addMarker(currentLocationMarker);
@@ -146,7 +144,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
      *
      * @return List List of LatLng points of the circle.
      */
-    public List<LatLng> createCircleArray(
+    private List<LatLng> createCircleArray(
             double centerLat, double centerLong, float radius, int nodes) {
         List<LatLng> circle = new ArrayList<>();
         float radiusKilometer = radius / 1000;
@@ -162,11 +160,6 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         }
 
         return circle;
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
