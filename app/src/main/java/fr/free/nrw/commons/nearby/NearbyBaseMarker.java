@@ -17,16 +17,11 @@ import fr.free.nrw.commons.utils.UriSerializer;
 
 public class NearbyBaseMarker extends BaseMarkerOptions<NearbyMarker, NearbyBaseMarker> {
     private Place place;
-    public NearbyBaseMarker() {
 
+    NearbyBaseMarker() {
     }
 
-    public NearbyBaseMarker place(Place place) {
-        this.place = place;
-        return getThis();
-    }
-
-    public NearbyBaseMarker(Parcel in) {
+    private NearbyBaseMarker(Parcel in) {
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Uri.class, new UriDeserializer())
                 .create();
@@ -42,6 +37,11 @@ public class NearbyBaseMarker extends BaseMarkerOptions<NearbyMarker, NearbyBase
         place(gson.fromJson(gsonString, Place.class));
     }
 
+    public NearbyBaseMarker place(Place place) {
+        this.place = place;
+        return this;
+    }
+
     @Override
     public NearbyBaseMarker getThis() {
         return this;
@@ -50,6 +50,10 @@ public class NearbyBaseMarker extends BaseMarkerOptions<NearbyMarker, NearbyBase
     @Override
     public NearbyMarker getMarker() {
         return new NearbyMarker(this, place);
+    }
+
+    public Place getPlace() {
+        return place;
     }
 
     @Override
@@ -69,10 +73,6 @@ public class NearbyBaseMarker extends BaseMarkerOptions<NearbyMarker, NearbyBase
         dest.writeParcelable(icon.getBitmap(), flags);
         dest.writeString(title);
         dest.writeString(gson.toJson(place));
-    }
-
-    public Place getPlace() {
-        return place;
     }
 
     public static final Parcelable.Creator<NearbyBaseMarker> CREATOR
