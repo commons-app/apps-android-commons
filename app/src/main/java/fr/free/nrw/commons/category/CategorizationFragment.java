@@ -10,6 +10,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
 import android.preference.PreferenceManager;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
@@ -319,6 +320,12 @@ public class CategorizationFragment extends Fragment {
 
                 latch.countDown();
             }
+
+            @Override
+            protected void onCancelled() {
+                super.onCancelled();
+                latch.countDown();
+            }
         };
         prefixUpdaterSub.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         methodAUpdaterSub.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -437,6 +444,13 @@ public class CategorizationFragment extends Fragment {
         categoriesFilter.addTextChangedListener(textWatcher);
 
         return rootView;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        requestSearchResults();
     }
 
     @Override
@@ -568,10 +582,12 @@ public class CategorizationFragment extends Fragment {
         public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
             if (prefixUpdaterSub != null) {
                 prefixUpdaterSub.cancel(true);
+                prefixUpdaterSub = null;
             }
 
             if (methodAUpdaterSub != null) {
                 methodAUpdaterSub.cancel(true);
+                methodAUpdaterSub = null;
             }
         }
 
