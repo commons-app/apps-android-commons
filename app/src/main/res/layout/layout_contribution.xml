@@ -1,66 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="240dp"
+    android:orientation="vertical"
     android:padding="2dp"
-    android:paddingBottom="0dp"
-    >
-
-    <TextView
-        android:id="@+id/contributionSequenceNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="98sp"
-        android:textColor="#33FFFFFF"
-        android:typeface="serif"
-        android:layout_gravity="end|bottom"
-        />
+    android:paddingBottom="0dp">
 
     <fr.free.nrw.commons.MediaWikiImageView
         android:id="@+id/contributionImage"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
-        app:actualImageScaleType="centerCrop"
-        />
+        android:layout_height="match_parent"
+        app:actualImageScaleType="centerCrop" />
 
     <LinearLayout
+        android:id="@+id/progress_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center|bottom"
+        android:layout_alignParentBottom="true"
         android:background="#AA000000"
         android:orientation="vertical"
-        android:padding="8dp"
-        >
+        android:padding="8dp">
+
         <ProgressBar
             android:id="@+id/contributionProgress"
+            style="@style/ProgressBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/ProgressBar"
             android:indeterminateOnly="false"
             android:max="100"
-            android:visibility="gone"
-            />
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/contributionState"
+            style="?android:textAppearanceSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="?android:textAppearanceSmall"
             android:textColor="#FFFFFFFF"
-            android:visibility="gone"
-            />
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/contributionTitle"
+            style="?android:textAppearanceMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#FFFFFFFF"
-            style="?android:textAppearanceMedium"
-            android:maxLines="2"
             android:ellipsize="end"
-            />
+            android:maxLines="2"
+            android:textColor="#FFFFFFFF" />
     </LinearLayout>
 
-</FrameLayout>
+    <TextView
+        android:layout_margin="4dp"
+        android:layout_above="@id/progress_layout"
+        android:id="@+id/contributionSequenceNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:textColor="#80FFFFFF"
+        android:textSize="98sp"
+        android:typeface="serif"
+        android:layout_alignParentRight="true"/>
+
+</RelativeLayout>
