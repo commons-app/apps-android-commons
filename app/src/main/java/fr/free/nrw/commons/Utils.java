@@ -1,14 +1,16 @@
 package fr.free.nrw.commons;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.text.Html;
 import android.text.Spanned;
 
-import fr.free.nrw.commons.settings.Prefs;
-import timber.log.Timber;
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.w3c.dom.Node;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -16,6 +18,7 @@ import java.io.InputStream;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
+import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
@@ -34,12 +37,8 @@ import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.codec.net.URLCodec;
-import org.w3c.dom.Node;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
+import fr.free.nrw.commons.settings.Prefs;
+import timber.log.Timber;
 
 
 public class Utils {
@@ -126,7 +125,7 @@ public class Utils {
     }
 
     public static String makeThumbBaseUrl(String filename) {
-        String name = filename.replaceFirst("File:", "").replace(" ", "_");
+        String name = new PageTitle(filename).getPrefixedText();
         String sha = new String(Hex.encodeHex(DigestUtils.md5(name)));
         return String.format("%s/%s/%s/%s", CommonsApplication.IMAGE_URL_BASE, sha.substring(0, 1), sha.substring(0, 2), urlEncode(name));
     }
@@ -153,11 +152,9 @@ public class Utils {
         return outputStream.toString();
     }
 
-    private static final URLCodec urlCodec = new URLCodec();
-
     public static String urlEncode(String url) {
         try {
-            return urlCodec.encode(url, "utf-8");
+            return URLEncoder.encode(url, "utf-8");
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
@@ -230,12 +227,6 @@ public class Utils {
                 return "https://creativecommons.org/publicdomain/zero/1.0/";
         }
         throw new RuntimeException("Unrecognized license value: " + license);
-    }
-
-    public static Uri uriForWikiPage(String name) {
-        String underscored = name.trim().replace(" ", "_");
-        String uriStr = CommonsApplication.HOME_URL + urlEncode(underscored);
-        return Uri.parse(uriStr);
     }
 
     /**

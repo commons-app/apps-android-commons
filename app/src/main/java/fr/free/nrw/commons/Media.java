@@ -47,7 +47,7 @@ public class Media implements Parcelable {
             return "";
         }
         // FIXME: Gross hack bercause my regex skills suck maybe or I am too lazy who knows
-        String title = filename.replaceFirst("^File:", "");
+        String title = getFilePageTitle().getDisplayText().replaceFirst("^File:", "");
         Matcher matcher = displayTitlePattern.matcher(title);
         if(matcher.matches()) {
             return matcher.group(1);
@@ -56,13 +56,8 @@ public class Media implements Parcelable {
         }
     }
 
-    public String getDescriptionUrl() {
-        // HACK! Geez
-        return CommonsApplication.HOME_URL + "File:" + Utils.urlEncode(getFilename().replace("File:", "").replace(" ", "_"));
-    }
-
-    public String getMobileDescriptionUrl() {
-        return CommonsApplication.MOBILE_HOME_URL + "File:" + Utils.urlEncode(getFilename().replace("File:", "").replace(" ", "_"));
+    public PageTitle getFilePageTitle() {
+        return new PageTitle("File:" + getFilename().replaceFirst("^File:", ""));
     }
 
     public Uri getLocalUri() {
