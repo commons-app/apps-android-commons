@@ -6,9 +6,12 @@ import android.support.annotation.Nullable;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.widget.Toast;
 
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
+
+import timber.log.Timber;
 
 public class MediaWikiImageView extends SimpleDraweeView {
     private ThumbnailFetchTask currentThumbnailTask;
@@ -81,7 +84,13 @@ public class MediaWikiImageView extends SimpleDraweeView {
                 result = media.getLocalUri().toString();
             } else {
                 // only cache meaningful thumbnails received from network.
-                CommonsApplication.getInstance().getThumbnailUrlCache().put(media.getFilename(), result);
+                try {
+                    CommonsApplication.getInstance().getThumbnailUrlCache().put(media.getFilename(), result);
+                } catch (NullPointerException npe) {
+                    Timber.e("error when adding pic to cache " + npe);
+
+                    Toast.makeText(getContext(), R.string.error_while_cache, Toast.LENGTH_SHORT).show();
+                }
             }
             setImageUrl(result);
         }
