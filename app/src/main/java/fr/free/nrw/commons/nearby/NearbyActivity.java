@@ -318,7 +318,7 @@ public class NearbyActivity extends NavigationBaseActivity {
         Fragment fragment = new NearbyMapFragment();
         fragment.setArguments(bundle);
         fragmentTransaction.replace(R.id.container, fragment);
-        fragmentTransaction.commit();
+        fragmentTransaction.commitAllowingStateLoss();
     }
 
     /**
@@ -329,7 +329,7 @@ public class NearbyActivity extends NavigationBaseActivity {
         Fragment fragment = new NearbyListFragment();
         fragment.setArguments(bundle);
         fragmentTransaction.replace(R.id.container, fragment);
-        fragmentTransaction.commit();
+        fragmentTransaction.commitAllowingStateLoss();
     }
 
     public static void startYourself(Context context) {
