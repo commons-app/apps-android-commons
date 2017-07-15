@@ -4,21 +4,36 @@
   <string name="username">ಸದಸ್ಯೆರ್ನ ಪುದರ್</string>
   <string name="password">ಪ್ರವೇಸೊ ಪದೊ</string>
   <string name="login">ಲಾಗ್ ಇನ್</string>
+  <string name="signup">ಖಾತೆ ಸುರು ಮಲ್ಪುಲೆ</string>
   <string name="logging_in_title">ಇರ್ ಲಾಗ್-ಇನ್ ಅವೊಂತುಲ್ಲಾರ್</string>
   <string name="logging_in_message">ದಯಾದಿತ್ ವಂತೆ ಕಾಪುಲೆ…</string>
   <string name="login_success">ಲಾಗಿನ್ ಅಂಡ್!</string>
   <string name="login_failed">ಲಾಗಿನ್ ಅಯಿಜಾತ್ತ!</string>
+  <string name="upload_failed">ಈ ಕಡತ ತಿಕ್ಕಿಜಿ. ದಯಮಲ್ತ್ ಕುಡೊಂಜಿ ಕಡತೊನು ಪ್ರಯತ್ನ ಮಲ್ಪುಲೆ.</string>
+  <string name="authentication_failed">ದೃಢೀಕರಣ ಸರಿ ಆಯಿಜಿ!</string>
   <string name="uploading_started">ದಿಂಜಪುನಾ ಸುರು ಅಂಡ್!</string>
+  <string name="upload_completed_notification_title">%1$s ಅಪ್ಲೋಡ್ ಆಂಡ್!</string>
+  <string name="upload_completed_notification_text">ಇರೆನ ಅಪ್ಲೋಡ್ ತೂಯೆರೆ ಒತ್ತುಲೆ</string>
+  <string name="upload_progress_notification_title_start">%1$s ಅಪ್ಲೋಡ್ ಸುರು ಆವೊಂದುಂಡು</string>
+  <string name="upload_progress_notification_title_in_progress">%1$s ಅಪ್ಲೋಡ್ ಆವೊಂದುಂಡು</string>
+  <string name="upload_progress_notification_title_finishing">%1$s ಅಪ್ಲೋಡ್ ಕೈದ್ ಆವೊಂದುಂಡು.</string>
+  <string name="upload_failed_notification_title">%1$s ಅಪ್ಲೋಡ್ ಸರಿ ಆತಿಜಿ</string>
   <string name="upload_failed_notification_subtitle">ತುಯಾರ ಮೆಲ್ಲ ಒತ್ತುಲೆ</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%d ಕಡತ ಅಪ್ಲೊಡ್ ಆವೊಂದುಂಡು</item>
+    <item quantity="other">%d ಕಡತೊಲು ಅಪ್ಲೋಡ್ ಆವೊಂದುಂಡು</item>
+  </plurals>
   <string name="title_activity_contributions" fuzzy="true">ಎನ್ನ ದಿಂಜಯೀನಾ ವಿಚಾರೊಳು</string>
   <string name="contribution_state_queued">ದಿಂಜೊಂತುಂಡು</string>
   <string name="contribution_state_failed">ದಿಂಜಿಜಿ</string>
+  <string name="contribution_state_in_progress">%1$d%% ಮುಗಿಂಡ್</string>
   <string name="contribution_state_starting">ದಿಂಜೊಂತುಂಡು…</string>
   <string name="menu_from_gallery">ಛಾಯಾಂಕಣತ್</string>
   <string name="menu_from_camera">ಪಟ ದೆಪ್ಪುಲೇ</string>
   <string name="menu_nearby">ಕೈತಲ್‍ದ</string>
   <string name="provider_contributions">ಎನ್ನ ದಿಂಜಯೀನಾ ವಿಚಾರೊಲು</string>
   <string name="menu_share">ಪಟ್ಟುಲೆ</string>
+  <string name="menu_open_in_browser">ಬ್ರೌಸರ್‌ಡ್ ತೂಲೆ</string>
   <string name="share_title_hint">ತರೆಬರವು</string>
   <string name="share_description_hint">ವಿವರಣೆ</string>
   <string name="login_failed_generic">ಲಾಗಿನ್ ಆಯಾರಾ ಅಯಿಜಿ</string>

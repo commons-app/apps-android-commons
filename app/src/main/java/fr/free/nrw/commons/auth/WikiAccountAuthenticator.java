@@ -8,13 +8,13 @@ import android.accounts.NetworkErrorException;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.io.IOException;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.MWApi;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 
 public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
 
@@ -75,7 +75,7 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
     }
 
     private String getAuthCookie(String username, String password) throws IOException {
-        MWApi api = CommonsApplication.getInstance().getMWApi();
+        MediaWikiApi api = CommonsApplication.getInstance().getMWApi();
         //TODO add 2fa support here
         String result = api.login(username, password);
         if(result.equals("PASS")) {

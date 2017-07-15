@@ -8,41 +8,30 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
 import android.support.v4.util.LruCache;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.stetho.Stetho;
-
-import fr.free.nrw.commons.caching.CacheController;
-import fr.free.nrw.commons.category.Category;
-import fr.free.nrw.commons.contributions.Contribution;
-import fr.free.nrw.commons.data.DBOpenHelper;
-import fr.free.nrw.commons.modifications.ModifierSequence;
-import fr.free.nrw.commons.auth.AccountUtil;
-import fr.free.nrw.commons.nearby.NearbyPlaces;
-
 import com.squareup.leakcanary.LeakCanary;
 
 import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
-import org.apache.http.conn.ClientConnectionManager;
-import org.apache.http.conn.scheme.PlainSocketFactory;
-import org.apache.http.conn.scheme.Scheme;
-import org.apache.http.conn.scheme.SchemeRegistry;
-import org.apache.http.conn.ssl.SSLSocketFactory;
-import org.apache.http.impl.client.AbstractHttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.CoreProtocolPNames;
 
 import java.io.File;
 import java.io.IOException;
 
+import fr.free.nrw.commons.auth.AccountUtil;
+import fr.free.nrw.commons.caching.CacheController;
+import fr.free.nrw.commons.category.Category;
+import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.data.DBOpenHelper;
+import fr.free.nrw.commons.modifications.ModifierSequence;
+import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.nearby.NearbyPlaces;
 import fr.free.nrw.commons.utils.FileUtils;
 import timber.log.Timber;
 
@@ -76,9 +65,8 @@ public class CommonsApplication extends Application {
     public static final String FEEDBACK_EMAIL_SUBJECT = "Commons Android App (%s) Feedback";
 
     private static CommonsApplication instance = null;
-    private AbstractHttpClient httpClient = null;
-    private MWApi api = null;
-    LruCache<String, String> thumbnailUrlCache = new LruCache<>(1024);
+    private MediaWikiApi api = null;
+    private LruCache<String, String> thumbnailUrlCache = new LruCache<>(1024);
     private CacheController cacheData = null;
     private DBOpenHelper dbOpenHelper = null;
     private NearbyPlaces nearbyPlaces = null;
@@ -98,33 +86,11 @@ public class CommonsApplication extends Application {
         return instance;
     }
 
-    public AbstractHttpClient getHttpClient() {
-        if (httpClient == null) {
-            httpClient = newHttpClient();
-        }
-        return httpClient;
-    }
-
-    private AbstractHttpClient newHttpClient() {
-        BasicHttpParams params = new BasicHttpParams();
-        SchemeRegistry schemeRegistry = new SchemeRegistry();
-        schemeRegistry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
-        final SSLSocketFactory sslSocketFactory = SSLSocketFactory.getSocketFactory();
-        schemeRegistry.register(new Scheme("https", sslSocketFactory, 443));
-        ClientConnectionManager cm = new ThreadSafeClientConnManager(params, schemeRegistry);
-        params.setParameter(CoreProtocolPNames.USER_AGENT, "Commons/" + BuildConfig.VERSION_NAME + " (https://mediawiki.org/wiki/Apps/Commons) Android/" + Build.VERSION.RELEASE);
-        return new DefaultHttpClient(cm, params);
-    }
-
-    public MWApi getMWApi() {
+    public MediaWikiApi getMWApi() {
         if (api == null) {
-            api = newMWApi();
+            api = new ApacheHttpClientMediaWikiApi(API_URL);
         }
         return api;
-    }
-
-    private MWApi newMWApi() {
-        return new MWApi(API_URL, getHttpClient());
     }
 
     public CacheController getCacheData() {
@@ -173,9 +139,6 @@ public class CommonsApplication extends Application {
         System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0");
 
         Fresco.initialize(this);
-
-        // Initialize EventLogging
-        EventLog.setApp(this);
 
         //For caching area -> categories
         cacheData  = new CacheController();

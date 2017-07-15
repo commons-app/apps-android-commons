@@ -42,6 +42,7 @@
   <string name="login_failed_password">Ne c\'haller ket kevreañ - Gwiriit ho ker tremen, mar plij</string>
   <string name="login_failed_throttled">Re a daolioù-esae. Klaskit en-dro a-benn ur pennadig amzer.</string>
   <string name="login_failed_blocked">Hon digarezit, prennet eo bet an implijer-mañ e Commons</string>
+  <string name="login_failed_2fa_needed">Rankout a rit reiñ ho kod dilesa gant daou faktor.</string>
   <string name="login_failed_generic">C\'hwitet eo ar c\'hevreañ</string>
   <string name="share_upload_button">Pellgargañ</string>
   <string name="multiple_share_base_title">Envel ar rikoù-mañ</string>
@@ -129,7 +130,7 @@
   <string name="welcome_final_text">Ha soñjal a rit eo mat ?</string>
   <string name="welcome_final_button_text">Ya !</string>
   <string name="detail_panel_cats_label">Rummadoù</string>
-  <string name="detail_panel_cats_loading" fuzzy="true">O kargañ…</string>
+  <string name="detail_panel_cats_loading">O kargañ…</string>
   <string name="detail_panel_cats_none">Hini ebet diuzet</string>
   <string name="detail_description_empty">Deskrivadur ebet</string>
   <string name="detail_license_empty">Aotre-implijout dizanv</string>
@@ -155,7 +156,20 @@
   <string name="_2fa_code">Kod 2FA</string>
   <string name="maximum_limit">Bevenn uc\'hek</string>
   <string name="maximum_limit_alert">Ne c\'haller ket diskwel ouzhpenn 500</string>
+  <string name="login_failed_2fa_not_supported">Ne vez ket embreget an dilesadur gant daou faktor evit ar mare.</string>
   <string name="logout_verification">Sur oc\'h e fell deoc\'h digevreañ ?</string>
+  <string name="commons_logo">Logo Commons</string>
+  <string name="no_image_found">N\'eus bet kavet skeudenn ebet</string>
+  <string name="upload_image">Kargañ ur skeudenn</string>
+  <string name="welcome_image_mount_zao">Menez Zao</string>
+  <string name="welcome_image_llamas">Lamaed</string>
+  <string name="welcome_image_rainbow_bridge">Pont Gwareg-ar-glav</string>
+  <string name="welcome_image_tulip">Tulipez</string>
+  <string name="welcome_image_no_selfies">Emboltred ebet</string>
+  <string name="welcome_image_proprietary">Skeudenn brevez</string>
+  <string name="welcome_image_welcome_wikipedia">Donemat e Wikipedia</string>
+  <string name="welcome_image_welcome_copyright">Gwirioù oberour donemat</string>
+  <string name="welcome_image_sydney_opera_house">Ti Opera Sydney</string>
   <string name="cancel">Nullañ</string>
   <string name="navigation_drawer_open">Digeriñ</string>
   <string name="navigation_drawer_close">Serriñ</string>
@@ -166,4 +180,9 @@
   <string name="navigation_item_settings">Arventennoù</string>
   <string name="navigation_item_feedback">Evezhiadennoù</string>
   <string name="navigation_item_logout">Digevreañ</string>
+  <string name="navigation_item_info">Tutorial</string>
+  <string name="nearby_needs_permissions">Ne c\'haller ket diskwel al lec\'hioù tost ma ne rannit ket ho lec\'hiadur</string>
+  <string name="no_description_found">N\'eus bet kavet deskrivadur ebet</string>
+  <string name="nearby_info_menu_commons_article">Pennad Commons</string>
+  <string name="nearby_info_menu_wikidata_article">Elfenn Wikidata</string>
 </resources>

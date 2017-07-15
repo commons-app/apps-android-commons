@@ -12,15 +12,13 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.os.RemoteException;
 
-import fr.free.nrw.commons.MWApi;
-import org.mediawiki.api.ApiResult;
-
 import java.io.IOException;
 
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
 public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
@@ -41,14 +39,14 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
         }
 
         // Exit early if nothing to do
-        if(allModifications == null || allModifications.getCount() == 0) {
+        if (allModifications == null || allModifications.getCount() == 0) {
             Timber.d("No modifications to perform");
             return;
         }
 
         String authCookie;
         try {
-             authCookie = AccountManager.get(getContext()).blockingGetAuthToken(account, "", false);
+            authCookie = AccountManager.get(getContext()).blockingGetAuthToken(account, "", false);
         } catch (OperationCanceledException | AuthenticatorException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
@@ -56,16 +54,15 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
             return;
         }
 
-        if(Utils.isNullOrWhiteSpace(authCookie)) {
+        if (Utils.isNullOrWhiteSpace(authCookie)) {
             Timber.d("Could not authenticate :(");
             return;
         }
 
-        MWApi api = CommonsApplication.getInstance().getMWApi();
+        MediaWikiApi api = CommonsApplication.getInstance().getMWApi();
         api.setAuthCookie(authCookie);
         String editToken;
 
-        ApiResult requestResult, responseResult;
         try {
             editToken = api.getEditToken();
         } catch (IOException e) {
@@ -81,7 +78,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
         try {
             contributionsClient = getContext().getContentResolver().acquireContentProviderClient(ContributionsContentProvider.AUTHORITY);
 
-            while(!allModifications.isAfterLast()) {
+            while (!allModifications.isAfterLast()) {
                 ModifierSequence sequence = ModifierSequence.fromCursor(allModifications);
                 sequence.setContentProviderClient(contentProviderClient);
                 Contribution contrib;
@@ -95,41 +92,31 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                 contributionCursor.moveToFirst();
                 contrib = Contribution.fromCursor(contributionCursor);
 
-                if(contrib.getState() == Contribution.STATE_COMPLETED) {
-
+                if (contrib.getState() == Contribution.STATE_COMPLETED) {
+                    String pageContent;
                     try {
-                        requestResult = api.action("query")
-                                .param("prop", "revisions")
-                                .param("rvprop", "timestamp|content")
-                                .param("titles", contrib.getFilename())
-                                .get();
+                        pageContent = api.revisionsByFilename(contrib.getFilename());
                     } catch (IOException e) {
                         Timber.d("Network fuckup on modifications sync!");
                         continue;
                     }
 
-                    Timber.d("Page content is %s", Utils.getStringFromDOM(requestResult.getDocument()));
-                    String pageContent = requestResult.getString("/api/query/pages/page/revisions/rev");
-                    String processedPageContent = sequence.executeModifications(contrib.getFilename(),  pageContent);
+                    Timber.d("Page content is %s", pageContent);
+                    String processedPageContent = sequence.executeModifications(contrib.getFilename(), pageContent);
 
+                    String editResult;
                     try {
-                        responseResult = api.action("edit")
-                                .param("title", contrib.getFilename())
-                                .param("token", editToken)
-                                .param("text", processedPageContent)
-                                .param("summary", sequence.getEditSummary())
-                                .post();
+                        editResult = api.edit(editToken, processedPageContent, contrib.getFilename(), sequence.getEditSummary());
                     } catch (IOException e) {
                         Timber.d("Network fuckup on modifications sync!");
                         continue;
                     }
 
-                    Timber.d("Response is %s", Utils.getStringFromDOM(responseResult.getDocument()));
+                    Timber.d("Response is %s", editResult);
 
-                    String result = responseResult.getString("/api/edit/@result");
-                    if(!result.equals("Success")) {
+                    if (!editResult.equals("Success")) {
                         // FIXME: Log this somewhere else
-                        Timber.d("Non success result! %s", result);
+                        Timber.d("Non success result! %s", editResult);
                     } else {
                         sequence.delete();
                     }
@@ -137,7 +124,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                 allModifications.moveToNext();
             }
         } finally {
-            if(contributionsClient != null) {
+            if (contributionsClient != null) {
                 contributionsClient.release();
             }
         }

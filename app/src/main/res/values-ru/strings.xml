@@ -193,4 +193,5 @@
   <string name="no_description_found">описание не найдено</string>
   <string name="nearby_info_menu_commons_article">Статья на Викискладе</string>
   <string name="nearby_info_menu_wikidata_article">Элемент Викиданных</string>
+  <string name="error_while_cache">Ошибка при кэшировании картинок</string>
 </resources>

@@ -189,4 +189,5 @@
   <string name="no_description_found">ingen beskrivning hittades</string>
   <string name="nearby_info_menu_commons_article">Commons-artikel</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata-objekt</string>
+  <string name="error_while_cache">Fel uppstod när bilder cachelagras</string>
 </resources>

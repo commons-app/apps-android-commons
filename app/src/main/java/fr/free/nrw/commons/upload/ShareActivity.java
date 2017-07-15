@@ -32,7 +32,6 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.EventLog;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
@@ -42,6 +41,7 @@ import fr.free.nrw.commons.modifications.CategoryModifier;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
+import fr.free.nrw.commons.mwapi.EventLog;
 import timber.log.Timber;
 
 /**
@@ -209,16 +209,6 @@ public  class       ShareActivity
     protected void onAuthCookieAcquired(String authCookie) {
         app.getMWApi().setAuthCookie(authCookie);
 
-        SingleUploadFragment shareView = (SingleUploadFragment) getSupportFragmentManager().findFragmentByTag("shareView");
-        categorizationFragment = (CategorizationFragment) getSupportFragmentManager().findFragmentByTag("categorization");
-        if(shareView == null && categorizationFragment == null) {
-            shareView = new SingleUploadFragment();
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .add(R.id.single_upload_fragment_container, shareView, "shareView")
-                    .commitAllowingStateLoss();
-        }
-        uploadController.prepareService();
     }
 
     @Override
@@ -311,6 +301,18 @@ public  class       ShareActivity
             }
         }
         performPreuploadProcessingOfFile();
+
+
+        SingleUploadFragment shareView = (SingleUploadFragment) getSupportFragmentManager().findFragmentByTag("shareView");
+        categorizationFragment = (CategorizationFragment) getSupportFragmentManager().findFragmentByTag("categorization");
+        if(shareView == null && categorizationFragment == null) {
+            shareView = new SingleUploadFragment();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.single_upload_fragment_container, shareView, "shareView")
+                    .commitAllowingStateLoss();
+        }
+        uploadController.prepareService();
     }
 
     @Override

@@ -1,8 +1,8 @@
 package fr.free.nrw.commons.utils;
 
-import fr.free.nrw.commons.location.LatLng;
-
 import java.text.NumberFormat;
+
+import fr.free.nrw.commons.location.LatLng;
 
 public class LengthUtils {
     /** Returns a formatted distance string between two points.
