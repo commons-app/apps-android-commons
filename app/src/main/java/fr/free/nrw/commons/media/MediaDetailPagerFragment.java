@@ -91,7 +91,7 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
 
         final MediaDetailAdapter adapter = new MediaDetailAdapter(getChildFragmentManager());
 
-        if(savedInstanceState != null) {
+        if (savedInstanceState != null) {
             final int pageNumber = savedInstanceState.getInt("current-page");
             // Adapter doesn't seem to be loading immediately.
             // Dear God, please forgive us for our sins
@@ -143,7 +143,7 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
                 // View in browser
                 Intent viewIntent = new Intent();
                 viewIntent.setAction(Intent.ACTION_VIEW);
-                viewIntent.setData(Uri.parse(m.getMobileDescriptionUrl()));
+                viewIntent.setData(m.getFilePageTitle().getMobileUri());
                 startActivity(viewIntent);
                 return true;
             case R.id.menu_download_current_image:
@@ -224,14 +224,15 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
                     ShareActionProvider mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menu.findItem(R.id.menu_share_current_image));
                     // On some phones null is returned for some reason:
                     // https://github.com/commons-app/apps-android-commons/issues/413
-                    if(mShareActionProvider != null) {
+                    if (mShareActionProvider != null) {
                         Intent shareIntent = new Intent(Intent.ACTION_SEND);
                         shareIntent.setType("text/plain");
-                        shareIntent.putExtra(Intent.EXTRA_TEXT, m.getDisplayTitle() + " \n" + m.getDescriptionUrl());
+                        shareIntent.putExtra(Intent.EXTRA_TEXT,
+                                m.getDisplayTitle() + " \n" + m.getFilePageTitle().getCanonicalUri());
                         mShareActionProvider.setShareIntent(shareIntent);
                     }
 
-                    if(m instanceof Contribution) {
+                    if (m instanceof Contribution) {
                         Contribution c = (Contribution)m;
                         switch(c.getState()) {
                             case Contribution.STATE_FAILED:

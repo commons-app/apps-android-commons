@@ -2,6 +2,7 @@ package fr.free.nrw.commons;
 
 import android.app.Activity;
 import android.content.res.Resources;
+import android.support.annotation.Nullable;
 
 import org.xmlpull.v1.XmlPullParser;
 
@@ -42,10 +43,11 @@ public class LicenseList {
         return licenses.get(key);
     }
 
+    @Nullable
     public License licenseForTemplate(String template) {
-        String ucTemplate = Utils.capitalize(template);
+        String ucTemplate = new PageTitle(template).getDisplayText();
         for (License license : values()) {
-            if (ucTemplate.equals(Utils.capitalize(license.getTemplate()))) {
+            if (ucTemplate.equals(new PageTitle(license.getTemplate()).getDisplayText())) {
                 return license;
             }
         }

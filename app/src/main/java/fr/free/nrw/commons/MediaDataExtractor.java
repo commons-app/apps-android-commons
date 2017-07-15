@@ -150,14 +150,14 @@ public class MediaDataExtractor {
         }
     }
 
-    private Node findTemplate(Element parentNode, String title) throws IOException {
-        String ucTitle= Utils.capitalize(title);
+    private Node findTemplate(Element parentNode, String title_) throws IOException {
+        String title= new PageTitle(title_).getDisplayText();
         NodeList nodes = parentNode.getChildNodes();
         for (int i = 0, length = nodes.getLength(); i < length; i++) {
             Node node = nodes.item(i);
             if (node.getNodeName().equals("template")) {
                 String foundTitle = getTemplateTitle(node);
-                if (Utils.capitalize(foundTitle).equals(ucTitle)) {
+                if (title.equals(new PageTitle(foundTitle).getDisplayText())) {
                     return node;
                 }
             }
