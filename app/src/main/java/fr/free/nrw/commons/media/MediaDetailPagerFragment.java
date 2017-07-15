@@ -28,11 +28,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.EventLog;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
+import fr.free.nrw.commons.mwapi.EventLog;
 
 public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPageChangeListener {
     private ViewPager pager;
