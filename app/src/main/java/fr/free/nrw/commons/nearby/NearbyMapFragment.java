@@ -25,6 +25,15 @@ import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.services.android.telemetry.MapboxTelemetry;
 
+import com.mapbox.mapboxsdk.style.functions.stops.IdentityStops;
+import com.mapbox.mapboxsdk.style.functions.Function;
+import com.mapbox.mapboxsdk.style.layers.FillExtrusionLayer;
+import static com.mapbox.mapboxsdk.style.layers.Filter.eq;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionBase;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionColor;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionHeight;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionOpacity;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -106,6 +115,21 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
                 });
 
                 addCurrentLocationMarker(mapboxMap);
+
+                // Create fill extrusion layer
+                FillExtrusionLayer fillExtrusionLayer = new FillExtrusionLayer("3d-buildings", "composite");
+                fillExtrusionLayer.setSourceLayer("building");
+                fillExtrusionLayer.setFilter(eq("extrude", "true"));
+                fillExtrusionLayer.setMinZoom(15);
+
+                // Set data-driven styling properties
+                fillExtrusionLayer.setProperties(
+                        fillExtrusionColor(Color.LTGRAY),
+                        fillExtrusionHeight(Function.property("height", new IdentityStops<Float>())),
+                        fillExtrusionBase(Function.property("min_height", new IdentityStops<Float>())),
+                        fillExtrusionOpacity(0.6f)
+                );
+                mapboxMap.addLayer(fillExtrusionLayer);
             }
         });
         if (PreferenceManager.getDefaultSharedPreferences(getActivity()).getBoolean("theme",true)) {
