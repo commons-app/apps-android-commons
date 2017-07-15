@@ -1,5 +1,7 @@
 package fr.free.nrw.commons;
 
+import android.support.annotation.Nullable;
+
 public class License {
     String key;
     String template;
@@ -36,7 +38,7 @@ public class License {
         }
     }
 
-    public String getUrl(String language) {
+    public @Nullable String getUrl(String language) {
         if (url == null) {
             return null;
         } else {

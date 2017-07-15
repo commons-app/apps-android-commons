@@ -2,8 +2,10 @@ package fr.free.nrw.commons.media;
 
 import android.content.Intent;
 import android.database.DataSetObserver;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -18,6 +20,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 import fr.free.nrw.commons.License;
 import fr.free.nrw.commons.LicenseList;
@@ -228,6 +231,14 @@ public class MediaDetailFragment extends Fragment {
                         categoryNames.add(getString(R.string.detail_panel_cats_none));
                     }
                     rebuildCatList();
+
+                    // Set hyperlinks
+                    license.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            openWebBrowser(licenseLink(media));
+                        }
+                    });
                 } else {
                     Timber.d("Failed to load photo details.");
                 }
@@ -341,5 +352,23 @@ public class MediaDetailFragment extends Fragment {
      */
     private String prettyCoordinates(Media media) {
         return media.getCoordinates();
+    }
+
+    private @Nullable String licenseLink(Media media) {
+        String licenseKey = media.getLicense();
+        if (licenseKey == null || licenseKey.equals("")) {
+            return null;
+        }
+        License licenseObj = licenseList.get(licenseKey);
+        if (licenseObj == null) {
+            return null;
+        } else {
+            return licenseObj.getUrl(Locale.getDefault().getLanguage());
+        }
+    }
+
+    private void openWebBrowser(String url) {
+        Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(browser);
     }
 }
