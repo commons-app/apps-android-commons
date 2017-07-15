@@ -3,6 +3,7 @@ package fr.free.nrw.commons;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -101,7 +102,7 @@ public class Media implements Parcelable {
         this.dateCreated = date;
     }
 
-    public Date getDateUploaded() {
+    public @Nullable Date getDateUploaded() {
         return dateUploaded;
     }
 
@@ -137,7 +138,7 @@ public class Media implements Parcelable {
         this.license = license;
     }
 
-    public LatLng getCoordinates() {
+    public @Nullable LatLng getCoordinates() {
         return coordinates;
     }
 
@@ -152,11 +153,11 @@ public class Media implements Parcelable {
     protected String description; // monolingual description on input...
     protected long dataLength;
     protected Date dateCreated;
-    protected Date dateUploaded;
+    protected @Nullable Date dateUploaded;
     protected int width;
     protected int height;
     protected String license;
-    private LatLng coordinates;
+    private @Nullable LatLng coordinates;
     protected String creator;
     protected ArrayList<String> categories; // as loaded at runtime?
     protected Map<String, String> descriptions; // multilingual descriptions as loaded
