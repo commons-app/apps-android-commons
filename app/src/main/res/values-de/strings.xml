@@ -189,4 +189,5 @@
   <string name="no_description_found">Keine Beschreibung gefunden</string>
   <string name="nearby_info_menu_commons_article">Commons-Artikel</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata-Objekt</string>
+  <string name="error_while_cache">Fehler beim Zwischenspeichern der Bilder</string>
 </resources>
