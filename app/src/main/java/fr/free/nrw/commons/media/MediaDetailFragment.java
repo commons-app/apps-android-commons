@@ -29,6 +29,7 @@ import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.location.LatLng;
 import timber.log.Timber;
 
 public class MediaDetailFragment extends Fragment {
@@ -215,31 +216,9 @@ public class MediaDetailFragment extends Fragment {
                 if (success) {
                     extractor.fill(media);
 
-                    // Set text of desc, license, and categories
-                    desc.setText(prettyDescription(media));
-                    license.setText(prettyLicense(media));
-                    coordinates.setText(prettyCoordinates(media));
-                    uploadedDate.setText(prettyUploadedDate(media));
-
-                    categoryNames.clear();
-                    categoryNames.addAll(media.getCategories());
-
-                    categoriesLoaded = true;
-                    categoriesPresent = (categoryNames.size() > 0);
-                    if (!categoriesPresent) {
-                        // Stick in a filler element.
-                        categoryNames.add(getString(R.string.detail_panel_cats_none));
-                    }
-                    rebuildCatList();
-
-                    // Set hyperlinks
-                    license.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            openWebBrowser(licenseLink(media));
-                        }
-                    });
-                } else {
+                    setTextFields(media);
+                    setOnClickListeners(media);
+                    } else {
                     Timber.d("Failed to load photo details.");
                 }
             }
@@ -270,6 +249,41 @@ public class MediaDetailFragment extends Fragment {
             dataObserver = null;
         }
         super.onDestroyView();
+    }
+
+    private void setTextFields(Media media) {
+        desc.setText(prettyDescription(media));
+        license.setText(prettyLicense(media));
+        coordinates.setText(prettyCoordinates(media));
+        uploadedDate.setText(prettyUploadedDate(media));
+
+        categoryNames.clear();
+        categoryNames.addAll(media.getCategories());
+
+        categoriesLoaded = true;
+        categoriesPresent = (categoryNames.size() > 0);
+        if (!categoriesPresent) {
+            // Stick in a filler element.
+            categoryNames.add(getString(R.string.detail_panel_cats_none));
+        }
+        rebuildCatList();
+    }
+
+    private void setOnClickListeners(final Media media) {
+        license.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openWebBrowser(licenseLink(media));
+            }
+        });
+        if (media.getCoordinates() != null) {
+            coordinates.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    openMap(media.getCoordinates());
+                }
+            });
+        }
     }
 
     private void rebuildCatList() {
@@ -338,7 +352,7 @@ public class MediaDetailFragment extends Fragment {
 
     private String prettyUploadedDate(Media media) {
         Date date = media.getDateUploaded();
-        if (date.toString() == null || date.toString().isEmpty()) {
+        if (date == null || date.toString() == null || date.toString().isEmpty()) {
             return "Uploaded date not available";
         }
         SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
@@ -351,7 +365,10 @@ public class MediaDetailFragment extends Fragment {
      * @return Coordinates as text.
      */
     private String prettyCoordinates(Media media) {
-        return media.getCoordinates();
+        if (media.getCoordinates() == null) {
+            return getString(R.string.media_detail_coordinates_empty);
+        }
+        return media.getCoordinates().getPrettyCoordinateString();
     }
 
     private @Nullable String licenseLink(Media media) {
@@ -370,5 +387,16 @@ public class MediaDetailFragment extends Fragment {
     private void openWebBrowser(String url) {
         Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(browser);
+    }
+
+    private void openMap(LatLng coordinates) {
+        //Open map app at given position
+        Uri gmmIntentUri = Uri.parse(
+                "geo:0,0?q=" + coordinates.getLatitude() + "," + coordinates.getLatitude());
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+
+        if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivity(mapIntent);
+        }
     }
 }

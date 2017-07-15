@@ -12,6 +12,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import fr.free.nrw.commons.location.LatLng;
+
 public class Media implements Parcelable {
 
     public static Creator<Media> CREATOR = new Creator<Media>() {
@@ -135,11 +137,11 @@ public class Media implements Parcelable {
         this.license = license;
     }
 
-    public String getCoordinates() {
+    public LatLng getCoordinates() {
         return coordinates;
     }
 
-    public void setCoordinates(String coordinates) {
+    public void setCoordinates(LatLng coordinates) {
         this.coordinates = coordinates;
     }
 
@@ -154,7 +156,7 @@ public class Media implements Parcelable {
     protected int width;
     protected int height;
     protected String license;
-    private String coordinates;
+    private LatLng coordinates;
     protected String creator;
     protected ArrayList<String> categories; // as loaded at runtime?
     protected Map<String, String> descriptions; // multilingual descriptions as loaded

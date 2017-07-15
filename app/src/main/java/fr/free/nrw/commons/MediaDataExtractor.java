@@ -1,5 +1,7 @@
 package fr.free.nrw.commons;
 
+import android.support.annotation.Nullable;
+
 import org.mediawiki.api.ApiResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -37,7 +39,7 @@ public class MediaDataExtractor {
     private Map<String, String> descriptions;
     private Date date;
     private String license;
-    private String coordinates;
+    private @Nullable LatLng coordinates;
     private LicenseList licenseList;
 
     /**
@@ -125,7 +127,7 @@ public class MediaDataExtractor {
         if (coordinateTemplateNode != null) {
             coordinates = getCoordinates(coordinateTemplateNode);
         } else {
-            coordinates = "No coordinates found";
+            coordinates = null;
         }
 
         /*
@@ -249,22 +251,20 @@ public class MediaDataExtractor {
     }
 
     /**
-     * Extracts the coordinates from the template and returns them as pretty formatted string.
+     * Extracts the coordinates from the template.
      * Loops over the children of the coordinate template:
      *      {{Location|47.50111007666667|19.055700301944444}}
-     * and extracts the latitude and longitude as a pretty string.
+     * and extracts the latitude and longitude.
      *
      * @param parentNode The node of the coordinates template.
-     * @return Pretty formatted coordinates.
+     * @return Extracted coordinates.
      * @throws IOException Parsing failed.
      */
-    private String getCoordinates(Node parentNode) throws IOException {
+    private LatLng getCoordinates(Node parentNode) throws IOException {
         NodeList childNodes = parentNode.getChildNodes();
         double latitudeText = Double.parseDouble(childNodes.item(1).getTextContent());
         double longitudeText = Double.parseDouble(childNodes.item(2).getTextContent());
-        LatLng coordinates = new LatLng(latitudeText, longitudeText, 0);
-
-        return coordinates.getPrettyCoordinateString();
+        return new LatLng(latitudeText, longitudeText, 0);
     }
 
     // Extract a dictionary of multilingual texts from a subset of the parse tree.
