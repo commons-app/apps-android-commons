@@ -287,6 +287,7 @@ public class MediaDetailFragment extends Fragment {
     }
 
     private void rebuildCatList() {
+        categoryContainer.removeAllViews();
         // @fixme add the category items
         for (String cat : categoryNames) {
             View catLabel = buildCatLabel(cat);
