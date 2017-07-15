@@ -12,8 +12,6 @@ import android.os.Bundle;
 import android.os.RemoteException;
 import android.text.TextUtils;
 
-import org.mediawiki.api.ApiResult;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,6 +19,7 @@ import java.util.Date;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.MWApi;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.libs.mediawiki_api.ApiResult;
 import timber.log.Timber;
 
 public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
@@ -83,7 +82,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                 if(!TextUtils.isEmpty(queryContinue)) {
                     builder.param("lestart", queryContinue);
                 }
-                result = builder.get();
+                result = builder.prepareHttpRequestBuilder("GET").request();
             } catch (IOException e) {
                 // There isn't really much we can do, eh?
                 // FIXME: Perhaps add EventLogging?

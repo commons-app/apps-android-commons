@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.os.RemoteException;
 
 import fr.free.nrw.commons.MWApi;
-import org.mediawiki.api.ApiResult;
 
 import java.io.IOException;
 
@@ -21,6 +20,7 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
+import fr.free.nrw.commons.libs.mediawiki_api.ApiResult;
 import timber.log.Timber;
 
 public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
@@ -102,7 +102,8 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                                 .param("prop", "revisions")
                                 .param("rvprop", "timestamp|content")
                                 .param("titles", contrib.getFilename())
-                                .get();
+                                .prepareHttpRequestBuilder("GET")
+                                .request();;
                     } catch (IOException e) {
                         Timber.d("Network fuckup on modifications sync!");
                         continue;
@@ -118,7 +119,8 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                                 .param("token", editToken)
                                 .param("text", processedPageContent)
                                 .param("summary", sequence.getEditSummary())
-                                .post();
+                                .prepareHttpRequestBuilder("POST")
+                                .request();
                     } catch (IOException e) {
                         Timber.d("Network fuckup on modifications sync!");
                         continue;

@@ -3,7 +3,7 @@ package fr.free.nrw.commons;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
-import org.mediawiki.api.ApiResult;
+import fr.free.nrw.commons.libs.mediawiki_api.ApiResult;
 
 class MediaThumbnailFetchTask extends AsyncTask<String, String, String> {
     private static final String THUMB_SIZE = "640";
@@ -23,7 +23,8 @@ class MediaThumbnailFetchTask extends AsyncTask<String, String, String> {
                     .param("iiprop", "url")
                     .param("iiurlwidth", THUMB_SIZE)
                     .param("titles", params[0])
-                    .get();
+                    .prepareHttpRequestBuilder("GET")
+                    .request();;
             return result.getString("/api/query/pages/page/imageinfo/ii/@thumburl");
         } catch (Exception e) {
             // Do something better!
