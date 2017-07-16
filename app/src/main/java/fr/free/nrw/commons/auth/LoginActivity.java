@@ -61,7 +61,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         usernameEdit.addTextChangedListener(textWatcher);
         passwordEdit.addTextChangedListener(textWatcher);
         twoFactorEdit.addTextChangedListener(textWatcher);
-        passwordEdit.setOnEditorActionListener( newLoginInputActionListener() );
+        passwordEdit.setOnEditorActionListener(newLoginInputActionListener());
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,7 +151,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     private LoginTask getLoginTask() {
         return new LoginTask(
                 this,
-                canonicializeUsername( usernameEdit.getText().toString() ),
+                canonicializeUsername(usernameEdit.getText().toString()),
                 passwordEdit.getText().toString(),
                 twoFactorEdit.getText().toString()
         );
@@ -162,16 +162,16 @@ public class LoginActivity extends AccountAuthenticatorActivity {
      * @param username String
      * @return String canonicial username
      */
-    private String canonicializeUsername( String username ) {
+    private String canonicializeUsername(String username) {
         return new PageTitle(username).getText();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-        case android.R.id.home:
-            NavUtils.navigateUpFromSameTask(this);
-            return true;
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -186,20 +186,20 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     }
 
     public void askUserForTwoFactorAuth() {
-        if(BuildConfig.DEBUG) {
+        if (BuildConfig.DEBUG) {
             twoFactorEdit.setVisibility(View.VISIBLE);
-            showUserToastAndCancelDialog( R.string.login_failed_2fa_needed );
-        }else{
-            showUserToastAndCancelDialog( R.string.login_failed_2fa_not_supported );
+            showUserToastAndCancelDialog(R.string.login_failed_2fa_needed);
+        } else {
+            showUserToastAndCancelDialog(R.string.login_failed_2fa_not_supported);
         }
     }
 
-    public void showUserToastAndCancelDialog( int resId ) {
-        showUserToast( resId );
+    public void showUserToastAndCancelDialog(int resId) {
+        showUserToast(resId);
         progressDialog.cancel();
     }
 
-    private void showUserToast( int resId ) {
+    private void showUserToast(int resId) {
         Toast.makeText(this, resId, Toast.LENGTH_LONG).show();
     }
 

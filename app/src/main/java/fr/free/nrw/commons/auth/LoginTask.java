@@ -67,7 +67,7 @@ class LoginTask extends AsyncTask<String, String, String> {
         if (result.equals("PASS")) {
             handlePassResult();
         } else {
-            handleOtherResults( result );
+            handleOtherResults(result);
         }
     }
 
@@ -88,38 +88,38 @@ class LoginTask extends AsyncTask<String, String, String> {
             }
         }
 
-        AccountUtil.createAccount( response, username, password );
+        AccountUtil.createAccount(response, username, password);
         loginActivity.startMainActivity();
     }
 
     /**
-     * Match known failure message codes and provide messages
+     * Match known failure message codes and provide messages.
      * @param result String
      */
-    private void handleOtherResults( String result ) {
+    private void handleOtherResults(String result) {
         if (result.equals("NetworkFailure")) {
             // Matches NetworkFailure which is created by the doInBackground method
-            loginActivity.showUserToastAndCancelDialog( R.string.login_failed_network );
+            loginActivity.showUserToastAndCancelDialog(R.string.login_failed_network);
         } else if (result.toLowerCase().contains("nosuchuser".toLowerCase()) || result.toLowerCase().contains("noname".toLowerCase())) {
             // Matches nosuchuser, nosuchusershort, noname
-            loginActivity.showUserToastAndCancelDialog( R.string.login_failed_username );
+            loginActivity.showUserToastAndCancelDialog(R.string.login_failed_username);
             loginActivity.emptySensitiveEditFields();
         } else if (result.toLowerCase().contains("wrongpassword".toLowerCase())) {
             // Matches wrongpassword, wrongpasswordempty
-            loginActivity.showUserToastAndCancelDialog( R.string.login_failed_password );
+            loginActivity.showUserToastAndCancelDialog(R.string.login_failed_password);
             loginActivity.emptySensitiveEditFields();
         } else if (result.toLowerCase().contains("throttle".toLowerCase())) {
             // Matches unknown throttle error codes
-            loginActivity.showUserToastAndCancelDialog( R.string.login_failed_throttled );
+            loginActivity.showUserToastAndCancelDialog(R.string.login_failed_throttled);
         } else if (result.toLowerCase().contains("userblocked".toLowerCase())) {
             // Matches login-userblocked
-            loginActivity.showUserToastAndCancelDialog( R.string.login_failed_blocked );
+            loginActivity.showUserToastAndCancelDialog(R.string.login_failed_blocked);
         } else if (result.equals("2FA")) {
             loginActivity.askUserForTwoFactorAuth();
         } else {
             // Occurs with unhandled login failure codes
             Timber.d("Login failed with reason: %s", result);
-            loginActivity.showUserToastAndCancelDialog( R.string.login_failed_generic );
+            loginActivity.showUserToastAndCancelDialog(R.string.login_failed_generic);
         }
     }
 }
