@@ -16,6 +16,17 @@ import fr.free.nrw.commons.utils.UriDeserializer;
 import fr.free.nrw.commons.utils.UriSerializer;
 
 public class NearbyBaseMarker extends BaseMarkerOptions<NearbyMarker, NearbyBaseMarker> {
+
+    public static final Parcelable.Creator<NearbyBaseMarker> CREATOR = new Parcelable.Creator<NearbyBaseMarker>() {
+        public NearbyBaseMarker createFromParcel(Parcel in) {
+            return new NearbyBaseMarker(in);
+        }
+
+        public NearbyBaseMarker[] newArray(int size) {
+            return new NearbyBaseMarker[size];
+        }
+    };
+
     private Place place;
 
     NearbyBaseMarker() {
@@ -74,15 +85,4 @@ public class NearbyBaseMarker extends BaseMarkerOptions<NearbyMarker, NearbyBase
         dest.writeString(title);
         dest.writeString(gson.toJson(place));
     }
-
-    public static final Parcelable.Creator<NearbyBaseMarker> CREATOR
-            = new Parcelable.Creator<NearbyBaseMarker>() {
-        public NearbyBaseMarker createFromParcel(Parcel in) {
-            return new NearbyBaseMarker(in);
-        }
-
-        public NearbyBaseMarker[] newArray(int size) {
-            return new NearbyBaseMarker[size];
-        }
-    };
 }
