@@ -50,7 +50,7 @@ public interface MediaWikiApi {
     @Nullable
     String revisionsByFilename(String filename) throws IOException;
 
-    boolean existingFile(String fileSha1) throws IOException;
+    Observable<Boolean> existingFile(String fileSha1);
 
     @NonNull
     LogEventResult logEvents(String user, String lastModified, String queryContinue, int limit) throws IOException;

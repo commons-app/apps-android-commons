@@ -34,6 +34,9 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.Utils;
 import in.yuvi.http.fluent.Http;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Single;
 import io.reactivex.SingleEmitter;
 import io.reactivex.SingleOnSubscribe;
@@ -355,13 +358,23 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     }
 
     @Override
-    public boolean existingFile(String fileSha1) throws IOException {
-        return api.action("query")
-                .param("format", "xml")
-                .param("list", "allimages")
-                .param("aisha1", fileSha1)
-                .get()
-                .getNodes("/api/query/allimages/img").size() > 0;
+    public Observable<Boolean> existingFile(final String fileSha1) {
+        return Observable.create(new ObservableOnSubscribe<Boolean>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<Boolean> emitter) throws Exception {
+                try {
+                    emitter.onNext(api.action("query")
+                            .param("format", "xml")
+                            .param("list", "allimages")
+                            .param("aisha1", fileSha1)
+                            .get()
+                            .getNodes("/api/query/allimages/img").size() > 0);
+                } catch (Exception e) {
+                    emitter.onError(e);
+                }
+                emitter.onComplete();
+            }
+        });
     }
 
     @Override

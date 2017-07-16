@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload;
 
 import android.Manifest;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -15,6 +16,7 @@ import android.support.design.widget.Snackbar;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -25,7 +27,6 @@ import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,10 +34,10 @@ import java.util.List;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.category.CategorizationFragment;
 import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.modifications.CategoryModifier;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.modifications.ModifierSequence;
@@ -48,9 +49,10 @@ import timber.log.Timber;
  * Activity for the title/desc screen after image is selected. Also starts processing image
  * GPS coordinates or user location (if enabled in Settings) for category suggestions.
  */
-public  class       ShareActivity
-        extends     AuthenticatedActivity
-        implements  SingleUploadFragment.OnUploadActionInitiated,
+public class ShareActivity
+        extends AuthenticatedActivity
+        implements ShareView,
+        SingleUploadFragment.OnUploadActionInitiated,
         CategorizationFragment.OnCategoriesSaveHandler {
 
     private static final int REQUEST_PERM_ON_CREATE_STORAGE = 1;
@@ -83,6 +85,7 @@ public  class       ShareActivity
     private String description;
     private Snackbar snackbar;
     private boolean duplicateCheckPassed = false;
+    private SharePresenter presenter;
 
     /**
      * Called when user taps the submit button.
@@ -114,7 +117,7 @@ public  class       ShareActivity
         // and permission is not obtained.
         return !FileUtils.isSelfOwned(getApplicationContext(), mediaUri)
                 && (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
-                        != PackageManager.PERMISSION_GRANTED);
+                != PackageManager.PERMISSION_GRANTED);
     }
 
     private void uploadBegins() {
@@ -143,7 +146,7 @@ public  class       ShareActivity
     }
 
     private void showPostUpload() {
-        if(categorizationFragment == null) {
+        if (categorizationFragment == null) {
             categorizationFragment = new CategorizationFragment();
         }
         getSupportFragmentManager().beginTransaction()
@@ -153,7 +156,7 @@ public  class       ShareActivity
 
     @Override
     public void onCategoriesSave(ArrayList<String> categories) {
-        if(categories.size() > 0) {
+        if (categories.size() > 0) {
             ModifierSequence categoriesSequence = new ModifierSequence(contribution.getContentUri());
 
             categoriesSequence.queueModifier(new CategoryModifier(categories.toArray(new String[]{})));
@@ -179,7 +182,7 @@ public  class       ShareActivity
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        if(contribution != null) {
+        if (contribution != null) {
             outState.putParcelable("contribution", contribution);
         }
     }
@@ -187,7 +190,7 @@ public  class       ShareActivity
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if(categorizationFragment != null && categorizationFragment.isVisible()) {
+        if (categorizationFragment != null && categorizationFragment.isVisible()) {
             EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT)
                     .param("username", app.getCurrentAccount().name)
                     .param("categories-count", categorizationFragment.getCurrentSelectedCount())
@@ -221,12 +224,13 @@ public  class       ShareActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        app = CommonsApplication.getInstance();
         uploadController = new UploadController();
         setContentView(R.layout.activity_share);
         ButterKnife.bind(this);
+        presenter = new SharePresenter(app.getMWApi());
         initBack();
-        app = CommonsApplication.getInstance();
-        backgroundImageView = (SimpleDraweeView)findViewById(R.id.backgroundImage);
+        backgroundImageView = (SimpleDraweeView) findViewById(R.id.backgroundImage);
         backgroundImageView.setHierarchy(GenericDraweeHierarchyBuilder
                 .newInstance(getResources())
                 .setPlaceholderImage(VectorDrawableCompat.create(getResources(),
@@ -252,7 +256,7 @@ public  class       ShareActivity
             backgroundImageView.setImageURI(mediaUri);
         }
 
-        if (savedInstanceState != null)  {
+        if (savedInstanceState != null) {
             contribution = savedInstanceState.getParcelable("contribution");
         }
 
@@ -305,7 +309,7 @@ public  class       ShareActivity
 
         SingleUploadFragment shareView = (SingleUploadFragment) getSupportFragmentManager().findFragmentByTag("shareView");
         categorizationFragment = (CategorizationFragment) getSupportFragmentManager().findFragmentByTag("categorization");
-        if(shareView == null && categorizationFragment == null) {
+        if (shareView == null && categorizationFragment == null) {
             shareView = new SingleUploadFragment();
             getSupportFragmentManager()
                     .beginTransaction()
@@ -368,32 +372,41 @@ public  class       ShareActivity
         }
     }
 
+    @Override
+    public void fileIsDuplicate() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.file_exists)
+                .setTitle(R.string.warning);
+        builder.setPositiveButton(R.string.no, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                //Go back to ContributionsActivity
+                Intent intent = new Intent(ShareActivity.this, ContributionsActivity.class);
+                ShareActivity.this.startActivity(intent);
+                duplicateCheckPassed = false;
+            }
+        });
+        builder.setNegativeButton(R.string.yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                duplicateCheckPassed = true;
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    @Override
+    public void fileIsNotDuplicate() {
+        duplicateCheckPassed = true;
+    }
+
     private void performPreuploadProcessingOfFile() {
         if (!useNewPermissions || storagePermitted) {
             if (!duplicateCheckPassed) {
-                //Test SHA1 of image to see if it matches SHA1 of a file on Commons
-                try {
-                    InputStream inputStream = getContentResolver().openInputStream(mediaUri);
-                    Timber.d("Input stream created from %s", mediaUri.toString());
-                    String fileSHA1 = Utils.getSHA1(inputStream);
-                    Timber.d("File SHA1 is: %s", fileSHA1);
-
-                    ExistingFileAsync fileAsyncTask =
-                            new ExistingFileAsync(fileSHA1, this, new ExistingFileAsync.Callback() {
-                                @Override
-                                public void onResult(ExistingFileAsync.Result result) {
-                                    Timber.d("%s duplicate check: %s", mediaUri.toString(), result);
-                                    duplicateCheckPassed =
-                                            result == ExistingFileAsync.Result.DUPLICATE_PROCEED
-                                                    || result == ExistingFileAsync.Result.NO_DUPLICATE;
-                                }
-                            });
-                    fileAsyncTask.execute();
-                } catch (IOException e) {
-                    Timber.d(e, "IO Exception: ");
-                }
+                presenter.checkIfFileExists(getContentResolver(), mediaUri, this);
             }
-
             getFileMetadata(locationPermitted);
         } else {
             Timber.w("not ready for preprocessing: useNewPermissions=%s storage=%s location=%s",
@@ -446,6 +459,7 @@ public  class       ShareActivity
 
     /**
      * Gets coordinates for category suggestions, either from EXIF data or user location
+     *
      * @param gpsEnabled if true use GPS
      */
     private void getFileMetadata(boolean gpsEnabled) {
@@ -481,7 +495,7 @@ public  class       ShareActivity
      * Then initiates the calls to MediaWiki API through an instance of MwVolleyApi.
      */
     public void useImageCoords() {
-        if(decimalCoords != null) {
+        if (decimalCoords != null) {
             Timber.d("Decimal coords of image: %s", decimalCoords);
 
             // Only set cache for this point if image has coords
@@ -515,8 +529,7 @@ public  class       ShareActivity
         try {
             imageObj.unregisterLocationManager();
             Timber.d("Unregistered locationManager");
-        }
-        catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             Timber.d("locationManager does not exist, not unregistered");
         }
     }
@@ -531,7 +544,7 @@ public  class       ShareActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                if(categorizationFragment!=null && categorizationFragment.isVisible()) {
+                if (categorizationFragment != null && categorizationFragment.isVisible()) {
                     categorizationFragment.backButtonDialog();
                 } else {
                     onBackPressed();
