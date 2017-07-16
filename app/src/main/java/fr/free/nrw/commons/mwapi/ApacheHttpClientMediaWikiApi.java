@@ -1,8 +1,6 @@
 package fr.free.nrw.commons.mwapi;
 
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -20,23 +18,36 @@ import org.apache.http.params.CoreProtocolPNames;
 import org.mediawiki.api.ApiResult;
 import org.mediawiki.api.MWApi;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import fr.free.nrw.commons.BuildConfig;
+import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.Utils;
 import in.yuvi.http.fluent.Http;
+import io.reactivex.Single;
+import io.reactivex.SingleEmitter;
+import io.reactivex.SingleOnSubscribe;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.annotations.Nullable;
 import timber.log.Timber;
 
 /**
  * @author Addshore
  */
 public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
+    private static final String UPLOAD_COUNT_URL_TEMPLATE =
+            "https://tools.wmflabs.org/urbanecmbot/uploadsbyuser/uploadsbyuser.py?user=%s";
+
     private static final String THUMB_SIZE = "640";
     private AbstractHttpClient httpClient;
     private MWApi api;
@@ -48,7 +59,10 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         final SSLSocketFactory sslSocketFactory = SSLSocketFactory.getSocketFactory();
         schemeRegistry.register(new Scheme("https", sslSocketFactory, 443));
         ClientConnectionManager cm = new ThreadSafeClientConnManager(params, schemeRegistry);
-        params.setParameter(CoreProtocolPNames.USER_AGENT, "Commons/" + BuildConfig.VERSION_NAME + " (https://mediawiki.org/wiki/Apps/Commons) Android/" + Build.VERSION.RELEASE);
+        params.setParameter(CoreProtocolPNames.USER_AGENT, "Commons/" +
+                BuildConfig.VERSION_NAME +
+                " (https://mediawiki.org/wiki/Apps/Commons) Android/" +
+                Build.VERSION.RELEASE);
         httpClient = new DefaultHttpClient(cm, params);
         api = new MWApi(apiURL, httpClient);
     }
@@ -289,6 +303,31 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 result.getString("/api/query-continue/logevents/@lestart"));
     }
 
+    public Single<Integer> getUploadCount(final String userName) {
+        return Single.create(new SingleOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(@NonNull SingleEmitter<Integer> emitter) throws Exception {
+                URL url;
+                try {
+                    url = new URL(String.format(Locale.ENGLISH, UPLOAD_COUNT_URL_TEMPLATE,
+                            new PageTitle(userName).getText()));
+                    HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                    try {
+                        BufferedReader bufferedReader = new BufferedReader(new
+                                InputStreamReader(urlConnection.getInputStream()));
+                        String uploadCount = bufferedReader.readLine();
+                        bufferedReader.close();
+                        emitter.onSuccess(Integer.parseInt(uploadCount));
+                    } finally {
+                        urlConnection.disconnect();
+                    }
+                } catch (Throwable e) {
+                    Timber.e("Error getting upload count", e);
+                }
+            }
+        });
+    }
+
     @NonNull
     private ArrayList<LogEventResult.LogEvent> getLogEventsFromResult(ApiResult result) {
         ArrayList<ApiResult> uploads = result.getNodes("/api/query/logevents/item");
@@ -358,7 +397,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             }
         });
 
-        Log.e("WTF", "Result: "+result.toString());
+        Log.e("WTF", "Result: " + result.toString());
 
         String resultStatus = result.getString("/api/upload/@result");
         if (!resultStatus.equals("Success")) {

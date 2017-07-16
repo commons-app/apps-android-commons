@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 apply plugin: 'jacoco-android'
 apply from: 'quality.gradle'
 apply plugin: 'com.getkeepsafe.dexcount'
@@ -26,7 +27,6 @@ dependencies {
     }
     compile 'com.facebook.fresco:fresco:1.3.0'
     compile 'com.facebook.stetho:stetho:1.5.0'
-    compile "com.google.guava:guava:${GUAVA_VERSION}"
 
     testCompile 'junit:junit:4.12'
     testCompile ('org.robolectric:robolectric:3.3.2') {
@@ -41,6 +41,9 @@ dependencies {
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    compile "io.reactivex.rxjava2:rxkotlin:$rx_version"
+    compile "io.reactivex.rxjava2:rxandroid:$rx_android_version"
 }
 
 android {
@@ -79,4 +82,7 @@ android {
     configurations.all {
         resolutionStrategy.force 'com.android.support:support-annotations:25.2.0'
     }
+}
+repositories {
+    mavenCentral()
 }
