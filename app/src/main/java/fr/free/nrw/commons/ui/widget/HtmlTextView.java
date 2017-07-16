@@ -19,4 +19,8 @@ public class HtmlTextView extends AppCompatTextView {
         setMovementMethod(LinkMovementMethod.getInstance());
         setText(Utils.fromHtml(getText().toString()));
     }
+
+    public void setHtmlText(String newText){
+        setText(Utils.fromHtml(newText));
+    }
 }
