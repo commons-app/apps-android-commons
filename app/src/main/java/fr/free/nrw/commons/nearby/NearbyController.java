@@ -3,7 +3,6 @@ package fr.free.nrw.commons.nearby;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.preference.PreferenceManager;
 import android.support.graphics.drawable.VectorDrawableCompat;
 
@@ -20,7 +19,7 @@ import java.util.Map;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.utils.UIUtils;
+import fr.free.nrw.commons.utils.UiUtils;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.utils.LengthUtils.computeDistanceBetween;
@@ -101,7 +100,10 @@ public class NearbyController {
 
         placeList = placeList.subList(0, Math.min(placeList.size(), MAX_RESULTS));
 
-        Bitmap icon = UIUtils.getBitmap(VectorDrawableCompat.create(context.getResources(), R.drawable.ic_custom_map_marker, context.getTheme()));
+        Bitmap icon = UiUtils.getBitmap(
+                VectorDrawableCompat.create(
+                        context.getResources(), R.drawable.ic_custom_map_marker, context.getTheme()
+                ));
 
         for (Place place: placeList) {
             String distance = formatDistanceBetween(curLatLng, place.location);
