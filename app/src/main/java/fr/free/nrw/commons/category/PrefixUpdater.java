@@ -68,7 +68,7 @@ public class PrefixUpdater extends AsyncTask<Void, Void, List<String>> {
             //Check if s contains a 4-digit word anywhere within the string (.* is wildcard)
             //And that s does not equal the current year or previous year
             //And if it is an irrelevant category such as Media_needing_categories_as_of_16_June_2017(Issue #750)
-            if(s.matches(".*(19|20)\\d{2}.*") && !s.contains(yearInString) && !s.contains(prevYearInString)
+            if((s.matches(".*(19|20)\\d{2}.*") && !s.contains(yearInString) && !s.contains(prevYearInString))
                     ||s.matches("(.*)needing(.*)")||s.matches("(.*)taken on(.*)")) {
                 Timber.d("Filtering out irrelevant result: %s", s);
                 iterator.remove();
