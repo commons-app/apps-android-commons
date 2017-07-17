@@ -20,7 +20,7 @@ public class HtmlTextView extends AppCompatTextView {
         setText(Utils.fromHtml(getText().toString()));
     }
 
-    public void setHtmlText(String newText){
+    public void setHtmlText(String newText) {
         setText(Utils.fromHtml(newText));
     }
 }
