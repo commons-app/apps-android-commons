@@ -179,6 +179,7 @@
                         android:id="@+id/mediaDetailCoordinates"
                         android:layout_gravity="start"
                         android:background="?attr/subBackground"
+                        android:foreground="?attr/selectableItemBackground"
                         android:textColor="@android:color/white"
                         android:textSize="14sp"
                         android:padding="12dp"
