@@ -197,7 +197,7 @@ Tap this message (or hit back) to skip this step.</string>
 
   <string name="nearby_needs_permissions">Nearby places cannot be displayed without location permissions</string>
   <string name="no_description_found">no description found</string>
-  <string name="nearby_info_menu_commons_article">Commons Article</string>
+  <string name="nearby_info_menu_commons_article">Commons file page</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata item</string>
     <string name="error_while_cache">Error while caching pictures</string>
 
