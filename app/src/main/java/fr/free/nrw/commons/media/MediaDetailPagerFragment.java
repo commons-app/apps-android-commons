@@ -28,13 +28,26 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.EventLog;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
+import fr.free.nrw.commons.mwapi.EventLog;
 
 public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPageChangeListener {
+
+    public interface MediaDetailProvider {
+        Media getMediaAtPosition(int i);
+
+        int getTotalMediaCount();
+
+        void notifyDatasetChanged();
+
+        void registerDataSetObserver(DataSetObserver observer);
+
+        void unregisterDataSetObserver(DataSetObserver observer);
+    }
+
     private ViewPager pager;
     private Boolean editable;
     private CommonsApplication app;
@@ -48,14 +61,6 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
         this.editable = editable;
     }
 
-    public interface MediaDetailProvider {
-        Media getMediaAtPosition(int i);
-        int getTotalMediaCount();
-        void notifyDatasetChanged();
-        void registerDataSetObserver(DataSetObserver observer);
-        void unregisterDataSetObserver(DataSetObserver observer);
-    }
-
     //FragmentStatePagerAdapter allows user to swipe across collection of images (no. of images undetermined)
     private class MediaDetailAdapter extends FragmentStatePagerAdapter {
 
@@ -65,7 +70,7 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
 
         @Override
         public Fragment getItem(int i) {
-            if(i == 0) {
+            if (i == 0) {
                 // See bug https://code.google.com/p/android/issues/detail?id=27526
                 pager.postDelayed(new Runnable() {
                     @Override
@@ -120,7 +125,7 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(savedInstanceState != null) {
+        if (savedInstanceState != null) {
             editable = savedInstanceState.getBoolean("editable");
         }
         app = CommonsApplication.getInstance();
@@ -206,13 +211,13 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if(!editable) { // Disable menu options for editable views
+        if (!editable) { // Disable menu options for editable views
             menu.clear(); // see http://stackoverflow.com/a/8495697/17865
             inflater.inflate(R.menu.fragment_image_detail, menu);
-            if(pager != null) {
+            if (pager != null) {
                 MediaDetailProvider provider = (MediaDetailProvider)getActivity();
                 Media m = provider.getMediaAtPosition(pager.getCurrentItem());
-                if(m != null) {
+                if (m != null) {
                     // Enable default set of actions, then re-enable different set of actions only if it is a failed contrib
                     menu.findItem(R.id.menu_retry_current_image).setEnabled(false).setVisible(false);
                     menu.findItem(R.id.menu_cancel_current_image).setEnabled(false).setVisible(false);

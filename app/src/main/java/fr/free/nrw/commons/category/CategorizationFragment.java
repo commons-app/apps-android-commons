@@ -134,7 +134,7 @@ public class CategorizationFragment extends Fragment {
         //Override onPostExecute to access the results of async API call
         titleCategoriesSub = new TitleCategories(title) {
             @Override
-            protected void onPostExecute(ArrayList<String> result) {
+            protected void onPostExecute(List<String> result) {
                 super.onPostExecute(result);
                 Timber.d("Results in onPostExecute: %s", result);
                 titleCatItems.addAll(result);
@@ -277,8 +277,8 @@ public class CategorizationFragment extends Fragment {
 
         prefixUpdaterSub = new PrefixUpdater(this) {
             @Override
-            protected ArrayList<String> doInBackground(Void... voids) {
-                ArrayList<String> result = new ArrayList<>();
+            protected List<String> doInBackground(Void... voids) {
+                List<String> result = new ArrayList<>();
                 try {
                     result = super.doInBackground();
                     latch.await();
@@ -291,7 +291,7 @@ public class CategorizationFragment extends Fragment {
             }
 
             @Override
-            protected void onPostExecute(ArrayList<String> result) {
+            protected void onPostExecute(List<String> result) {
                 super.onPostExecute(result);
 
                 results.addAll(result);
@@ -309,7 +309,7 @@ public class CategorizationFragment extends Fragment {
 
         methodAUpdaterSub = new MethodAUpdater(this) {
             @Override
-            protected void onPostExecute(ArrayList<String> result) {
+            protected void onPostExecute(List<String> result) {
                 results.clear();
                 super.onPostExecute(result);
 

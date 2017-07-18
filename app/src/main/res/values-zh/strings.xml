@@ -189,4 +189,5 @@
   <string name="no_description_found">找不到描述</string>
   <string name="nearby_info_menu_commons_article">共享资源条目</string>
   <string name="nearby_info_menu_wikidata_article">维基数据项</string>
+  <string name="error_while_cache">缓存图片时出错</string>
 </resources>

@@ -18,9 +18,9 @@ import java.util.Date;
 
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
-import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.settings.Prefs;
 import timber.log.Timber;
 
 public class UploadController {

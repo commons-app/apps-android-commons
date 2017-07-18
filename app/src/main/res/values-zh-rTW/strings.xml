@@ -189,4 +189,5 @@
   <string name="no_description_found">找不到描述</string>
   <string name="nearby_info_menu_commons_article">共享資源條目</string>
   <string name="nearby_info_menu_wikidata_article">維基數據項目</string>
+  <string name="error_while_cache">在快取圖片時發生錯誤</string>
 </resources>

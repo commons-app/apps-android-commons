@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -13,23 +14,25 @@ import android.support.v4.app.NotificationCompat;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
-import fr.free.nrw.commons.*;
-import org.mediawiki.api.ApiResult;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.HandlerService;
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
-import in.yuvi.http.fluent.ProgressListener;
+import fr.free.nrw.commons.mwapi.EventLog;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.mwapi.UploadResult;
 import timber.log.Timber;
 
 public class UploadService extends HandlerService<Contribution> {
@@ -64,7 +67,7 @@ public class UploadService extends HandlerService<Contribution> {
         super("UploadService");
     }
 
-    private class NotificationUpdateProgressListener implements ProgressListener {
+    private class NotificationUpdateProgressListener implements MediaWikiApi.ProgressListener {
 
         String notificationTag;
         boolean notificationTitleChanged;
@@ -83,12 +86,12 @@ public class UploadService extends HandlerService<Contribution> {
         @Override
         public void onProgress(long transferred, long total) {
             Timber.d("Uploaded %d of %d", transferred, total);
-            if(!notificationTitleChanged) {
+            if (!notificationTitleChanged) {
                 curProgressNotification.setContentTitle(notificationProgressTitle);
                 notificationTitleChanged = true;
                 contribution.setState(Contribution.STATE_IN_PROGRESS);
             }
-            if(transferred == total) {
+            if (transferred == total) {
                 // Completed!
                 curProgressNotification.setContentTitle(notificationFinishingTitle);
                 curProgressNotification.setProgress(0, 100, true);
@@ -121,7 +124,7 @@ public class UploadService extends HandlerService<Contribution> {
 
     @Override
     protected void handle(int what, Contribution contribution) {
-        switch(what) {
+        switch (what) {
             case ACTION_UPLOAD_FILE:
                 //FIXME: Google Photos bug
                 uploadContribution(contribution);
@@ -159,7 +162,7 @@ public class UploadService extends HandlerService<Contribution> {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if(intent.getAction().equals(ACTION_START_SERVICE) && freshStart) {
+        if (intent.getAction().equals(ACTION_START_SERVICE) && freshStart) {
             ContentValues failedValues = new ContentValues();
             failedValues.put(Contribution.Table.COLUMN_STATE, Contribution.STATE_FAILED);
 
@@ -175,10 +178,10 @@ public class UploadService extends HandlerService<Contribution> {
         return START_REDELIVER_INTENT;
     }
 
+    @SuppressLint("StringFormatInvalid")
     private void uploadContribution(Contribution contribution) {
-        MWApi api = app.getMWApi();
+        MediaWikiApi api = app.getMWApi();
 
-        ApiResult result;
         InputStream file = null;
 
         String notificationTag = contribution.getLocalUri().toString();
@@ -186,7 +189,7 @@ public class UploadService extends HandlerService<Contribution> {
         try {
             //FIXME: Google Photos bug
             file = this.getContentResolver().openInputStream(contribution.getLocalUri());
-        } catch(FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             Timber.d("File not found");
             Toast fileNotFound = Toast.makeText(this, R.string.upload_failed, Toast.LENGTH_LONG);
             fileNotFound.show();
@@ -217,9 +220,9 @@ public class UploadService extends HandlerService<Contribution> {
                 filename = findUniqueFilename(filename);
                 unfinishedUploads.add(filename);
             }
-            if(!api.validateLogin()) {
+            if (!api.validateLogin()) {
                 // Need to revalidate!
-                if(app.revalidateAuthToken()) {
+                if (app.revalidateAuthToken()) {
                     Timber.d("Successfully revalidated token!");
                 } else {
                     Timber.d("Unable to revalidate :(");
@@ -235,32 +238,27 @@ public class UploadService extends HandlerService<Contribution> {
                     getString(R.string.upload_progress_notification_title_finishing, contribution.getDisplayTitle()),
                     contribution
             );
-            result = api.upload(filename, file, contribution.getDataLength(), contribution.getPageContents(), contribution.getEditSummary(), notificationUpdater);
+            UploadResult uploadResult = api.uploadFile(filename, file, contribution.getDataLength(), contribution.getPageContents(), contribution.getEditSummary(), notificationUpdater);
 
-            Timber.d("Response is %s", Utils.getStringFromDOM(result.getDocument()));
+            Timber.d("Response is %s", uploadResult.toString());
 
             curProgressNotification = null;
 
-            String resultStatus = result.getString("/api/upload/@result");
-            if(!resultStatus.equals("Success")) {
-                String errorCode = result.getString("/api/error/@code");
+            String resultStatus = uploadResult.getResultStatus();
+            if (!resultStatus.equals("Success")) {
                 showFailedNotification(contribution);
                 EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT)
                         .param("username", app.getCurrentAccount().name)
                         .param("source", contribution.getSource())
                         .param("multiple", contribution.getMultiple())
-                        .param("result", errorCode)
+                        .param("result", uploadResult.getErrorCode())
                         .param("filename", contribution.getFilename())
                         .log();
             } else {
-                Date dateUploaded = null;
-                dateUploaded = Utils.parseMWDate(result.getString("/api/upload/imageinfo/@timestamp"));
-                String canonicalFilename = "File:" + result.getString("/api/upload/@filename").replace("_", " "); // Title vs Filename
-                String imageUrl = result.getString("/api/upload/imageinfo/@url");
-                contribution.setFilename(canonicalFilename);
-                contribution.setImageUrl(imageUrl);
+                contribution.setFilename(uploadResult.getCanonicalFilename());
+                contribution.setImageUrl(uploadResult.getImageUrl());
                 contribution.setState(Contribution.STATE_COMPLETED);
-                contribution.setDateUploaded(dateUploaded);
+                contribution.setDateUploaded(uploadResult.getDateUploaded());
                 contribution.save();
 
                 EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT)
@@ -271,16 +269,15 @@ public class UploadService extends HandlerService<Contribution> {
                         .param("result", "success")
                         .log();
             }
-        } catch(IOException e) {
+        } catch (IOException e) {
             Timber.d("I have a network fuckup");
             showFailedNotification(contribution);
-            return;
         } finally {
-            if ( filename != null ) {
+            if (filename != null) {
                 unfinishedUploads.remove(filename);
             }
             toUpload--;
-            if(toUpload == 0) {
+            if (toUpload == 0) {
                 // Sync modifications right after all uplaods are processed
                 ContentResolver.requestSync((CommonsApplication.getInstance()).getCurrentAccount(), ModificationsContentProvider.AUTHORITY, new Bundle());
                 stopForeground(true);
@@ -288,6 +285,7 @@ public class UploadService extends HandlerService<Contribution> {
         }
     }
 
+    @SuppressLint("StringFormatInvalid")
     private void showFailedNotification(Contribution contribution) {
         Notification failureNotification = new NotificationCompat.Builder(this).setAutoCancel(true)
                 .setSmallIcon(R.drawable.ic_launcher)
@@ -304,9 +302,9 @@ public class UploadService extends HandlerService<Contribution> {
     }
 
     private String findUniqueFilename(String fileName) throws IOException {
-        MWApi api = app.getMWApi();
+        MediaWikiApi api = app.getMWApi();
         String sequenceFileName;
-        for ( int sequenceNumber = 1; true; sequenceNumber++ ) {
+        for (int sequenceNumber = 1; true; sequenceNumber++) {
             if (sequenceNumber == 1) {
                 sequenceFileName = fileName;
             } else {
@@ -320,23 +318,11 @@ public class UploadService extends HandlerService<Contribution> {
                     sequenceFileName = regexMatcher.replaceAll("$1 " + sequenceNumber + "$2");
                 }
             }
-            if ( fileExistsWithName(api, sequenceFileName) || unfinishedUploads.contains(sequenceFileName) ) {
-                continue;
-            } else {
+            if (!api.fileExistsWithName(sequenceFileName)
+                    && !unfinishedUploads.contains(sequenceFileName)) {
                 break;
             }
         }
         return sequenceFileName;
-    }
-
-    private static boolean fileExistsWithName(MWApi api, String fileName) throws IOException {
-        ApiResult result;
-
-        result = api.action("query")
-                .param("prop", "imageinfo")
-                .param("titles", "File:" + fileName)
-                .get();
-
-        return result.getNodes("/api/query/pages/page/imageinfo").size() > 0;
     }
 }

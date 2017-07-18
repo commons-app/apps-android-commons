@@ -184,4 +184,5 @@
   <string name="nearby_needs_permissions">אי־אפשר להציג מקומות בסביבה ללא הרשאות מיקום</string>
   <string name="no_description_found">לא נמצא תיאור</string>
   <string name="nearby_info_menu_wikidata_article">פריט ויקינתונים</string>
+  <string name="error_while_cache">שגיאה במשירת תמונות במטמון</string>
 </resources>

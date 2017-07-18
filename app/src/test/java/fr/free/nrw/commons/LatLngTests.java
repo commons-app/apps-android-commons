@@ -1,11 +1,11 @@
 package fr.free.nrw.commons;
 
-import static org.hamcrest.CoreMatchers.is;
+import org.junit.Assert;
+import org.junit.Test;
 
 import fr.free.nrw.commons.location.LatLng;
 
-import org.junit.Assert;
-import org.junit.Test;
+import static org.hamcrest.CoreMatchers.is;
 
 public class LatLngTests {
     @Test public void testZeroZero() {

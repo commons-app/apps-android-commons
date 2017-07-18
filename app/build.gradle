@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'jacoco-android'
 apply from: 'quality.gradle'
+apply plugin: 'com.getkeepsafe.dexcount'
 
 dependencies {
     compile 'com.github.nicolas-raoul:Quadtree:ac16ea8035bf07'
@@ -13,11 +14,13 @@ dependencies {
     compile "com.android.support:support-v4:${project.supportLibVersion}"
     compile "com.android.support:appcompat-v7:${project.supportLibVersion}"
     compile "com.android.support:design:${project.supportLibVersion}"
-    compile 'com.google.code.gson:gson:2.7'
+    compile 'com.google.code.gson:gson:2.8.0'
     compile "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
     compile 'com.github.pedrovgs:renderers:3.3.0'
     annotationProcessor "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
     compile 'com.jakewharton.timber:timber:4.5.1'
+    compile 'com.squareup.okhttp3:okhttp:3.8.1'
+    compile 'com.squareup.okio:okio:1.13.0'
     compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:5.1.0@aar'){
         transitive=true
     }
@@ -29,6 +32,9 @@ dependencies {
     testCompile ('org.robolectric:robolectric:3.3.2') {
         exclude module: 'guava'
     }
+
+    testCompile 'com.squareup.okhttp3:mockwebserver:3.8.1'
+    androidTestCompile 'com.squareup.okhttp3:mockwebserver:3.8.1'
     androidTestCompile "com.android.support:support-annotations:${project.supportLibVersion}"
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
 

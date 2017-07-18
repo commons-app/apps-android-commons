@@ -189,4 +189,5 @@
   <string name="no_description_found">не најдов описи</string>
   <string name="nearby_info_menu_commons_article">Статија на Ризницата</string>
   <string name="nearby_info_menu_wikidata_article">Предмет на Википодатоците</string>
+  <string name="error_while_cache">Грешка при меѓускладирање на сликите</string>
 </resources>

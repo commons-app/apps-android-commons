@@ -12,15 +12,15 @@ import android.os.Bundle;
 import android.os.RemoteException;
 import android.text.TextUtils;
 
-import org.mediawiki.api.ApiResult;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.MWApi;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.mwapi.LogEventResult;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
 public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
@@ -61,29 +61,17 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
     public void onPerformSync(Account account, Bundle bundle, String s, ContentProviderClient contentProviderClient, SyncResult syncResult) {
         // This code is fraught with possibilities of race conditions, but lalalalala I can't hear you!
         String user = account.name;
-        MWApi api = CommonsApplication.getInstance().getMWApi();
+        MediaWikiApi api = CommonsApplication.getInstance().getMWApi();
         SharedPreferences prefs = this.getContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
         String lastModified = prefs.getString("lastSyncTimestamp", "");
         Date curTime = new Date();
-        ApiResult result;
+        LogEventResult result;
         Boolean done = false;
         String queryContinue = null;
         while(!done) {
 
             try {
-                MWApi.RequestBuilder builder = api.action("query")
-                        .param("list", "logevents")
-                        .param("letype", "upload")
-                        .param("leprop", "title|timestamp|ids")
-                        .param("leuser", user)
-                        .param("lelimit", getLimit());
-                if(!TextUtils.isEmpty(lastModified)) {
-                    builder.param("leend", lastModified);
-                }
-                if(!TextUtils.isEmpty(queryContinue)) {
-                    builder.param("lestart", queryContinue);
-                }
-                result = builder.get();
+                result = api.logEvents(user, lastModified, queryContinue, getLimit());
             } catch (IOException e) {
                 // There isn't really much we can do, eh?
                 // FIXME: Perhaps add EventLogging?
@@ -93,22 +81,21 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
             }
             Timber.d("Last modified at %s", lastModified);
 
-            ArrayList<ApiResult> uploads = result.getNodes("/api/query/logevents/item");
-            Timber.d("%d results!", uploads.size());
+            List<LogEventResult.LogEvent> logEvents = result.getLogEvents();
+            Timber.d("%d results!", logEvents.size());
             ArrayList<ContentValues> imageValues = new ArrayList<>();
-            for(ApiResult image: uploads) {
-                String pageId = image.getString("@pageid");
-                if (pageId.equals("0")) {
+            for (LogEventResult.LogEvent image : logEvents) {
+                if (image.isDeleted()) {
                     // means that this upload was deleted.
                     continue;
                 }
-                String filename = image.getString("@title");
+                String filename = image.getFilename();
                 if(fileExists(contentProviderClient, filename)) {
                     Timber.d("Skipping %s", filename);
                     continue;
                 }
                 String thumbUrl = Utils.makeThumbBaseUrl(filename);
-                Date dateUpdated = Utils.parseMWDate(image.getString("@timestamp"));
+                Date dateUpdated = image.getDateUpdated();
                 Contribution contrib = new Contribution(null, thumbUrl, filename, "", -1, dateUpdated, dateUpdated, user, "", "");
                 contrib.setState(Contribution.STATE_COMPLETED);
                 imageValues.add(contrib.toContentValues());
@@ -130,7 +117,8 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                     throw new RuntimeException(e);
                 }
             }
-            queryContinue = result.getString("/api/query-continue/logevents/@lestart");
+
+            queryContinue = result.getQueryContinue();
             if(TextUtils.isEmpty(queryContinue)) {
                 done = true;
             }

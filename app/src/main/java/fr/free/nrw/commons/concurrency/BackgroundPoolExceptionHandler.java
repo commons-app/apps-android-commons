@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.concurrency;
 
 import android.support.annotation.NonNull;
+
 import fr.free.nrw.commons.BuildConfig;
 
 public class BackgroundPoolExceptionHandler implements ExceptionHandler {
