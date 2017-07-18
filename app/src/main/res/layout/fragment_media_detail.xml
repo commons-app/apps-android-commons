@@ -148,7 +148,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
                         android:background="?attr/subBackground"
-                        android:foreground="?attr/selectableItemBackground"
                         android:text="@string/media_detail_license"
                         android:textColor="@android:color/white"
                         android:textSize="14sp"
