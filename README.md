@@ -4,10 +4,13 @@ The Wikimedia Commons Android app allows users to upload pictures from their And
 
 Initially started by the Wikimedia Foundation, this app is now maintained by volunteers. Anyone is welcome to improve it, just choose among the [open issues](https://github.com/commons-app/apps-android-commons/issues) and send us a pull request :-) 
 
+We are currently applying for an [IEG renewal][15] to work on the app for the next 6 months. Feedback is very much welcomed.
+
 <a href="https://f-droid.org/repository/browse/?fdid=fr.free.nrw.commons" target="_blank">
 <img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="90"/></a>
 <a href="https://play.google.com/store/apps/details?id=fr.free.nrw.commons" target="_blank">
 <img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="90"/></a>
+
 
 ## Develop with Android Studio or IntelliJ ##
 
@@ -105,3 +108,4 @@ The translations from the translatewiki project are [periodically committed dire
 [12]: https://github.com/commons-app/apps-android-commons/commits/master?author=translatewiki
 [13]: https://translatewiki.net/wiki/Special:TranslationStash?
 [14]: https://translatewiki.net/wiki/Special:WebChat
+[15]: https://meta.wikimedia.org/wiki/Grants:Project/Improve_%27Upload_to_Commons%27_Android_App/Renewal
