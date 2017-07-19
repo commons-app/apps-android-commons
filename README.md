@@ -80,6 +80,16 @@ Captured files are not currently stored within the app, but are passed by conten
 
 Thumbnail images are not currently cached.
 
+## Translating the app ## 
+
+Thanks to the translation work of many volunteers this app is available in a multitude of languages.
+
+Translation of the text content of the Wikimedia Commons Android app happens on the [Commons Android App project][10] on [translatewiki.net][11]. If you want to help translate the app please create an account there (to get "translate rights" edit 20 [random keys][13] or ask in their [chat][14]). 
+
+The translations from the translatewiki project are [periodically committed directly to this project][12] by the translatewiki team and later released with the normal updates to the Play Store.
+
+
+
 
 [1]: https://developer.android.com/studio/index.html
 [2]: http://www.jetbrains.com/idea/download/index.html
@@ -90,3 +100,8 @@ Thumbnail images are not currently cached.
 [7]: https://github.com/commons-app/apps-android-commons/issues
 [8]: https://play.google.com/store/apps/details?id=fr.free.nrw.commons
 [9]: https://commons-app.github.io/
+[10]: https://translatewiki.net/w/i.php?title=Special:Translate&group=commons-android
+[11]: https://translatewiki.net
+[12]: https://github.com/commons-app/apps-android-commons/commits/master?author=translatewiki
+[13]: https://translatewiki.net/wiki/Special:TranslationStash?
+[14]: https://translatewiki.net/wiki/Special:WebChat
