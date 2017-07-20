@@ -7,7 +7,7 @@ import android.support.graphics.drawable.VectorDrawableCompat;
 public class UiUtils {
 
     /**
-     * Draws a vectorial image onto a bitmap
+     * Draws a vectorial image onto a bitmap.
      * @param vectorDrawable vectorial image
      * @return bitmap representation of the vectorial image
      */
