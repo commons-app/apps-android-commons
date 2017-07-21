@@ -25,7 +25,7 @@ import fr.free.nrw.commons.location.LatLng;
 import static org.junit.Assert.*;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(constants = BuildConfig.class, sdk = 21)
 public class NearbyAdapterFactoryTest {
 
     private static final Place PLACE = new Place("name", Place.Description.AIRPORT,

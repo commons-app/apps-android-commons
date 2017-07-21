@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
+apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'jacoco-android'
 apply from: 'quality.gradle'
 apply plugin: 'com.getkeepsafe.dexcount'
@@ -29,9 +29,7 @@ dependencies {
     compile 'com.facebook.stetho:stetho:1.5.0'
 
     testCompile 'junit:junit:4.12'
-    testCompile ('org.robolectric:robolectric:3.3.2') {
-        exclude module: 'guava'
-    }
+    testCompile ('org.robolectric:robolectric:3.3.2')
 
     testCompile 'com.squareup.okhttp3:mockwebserver:3.8.1'
     androidTestCompile 'com.squareup.okhttp3:mockwebserver:3.8.1'
@@ -41,7 +39,7 @@ dependencies {
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
     compile "io.reactivex.rxjava2:rxkotlin:$rx_version"
     compile "io.reactivex.rxjava2:rxandroid:$rx_android_version"
 }
@@ -76,6 +74,11 @@ android {
         disable 'MissingTranslation'
         disable 'ExtraTranslation'
         abortOnError false
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     //FIXME: Temporary fix for https://github.com/commons-app/apps-android-commons/issues/709
