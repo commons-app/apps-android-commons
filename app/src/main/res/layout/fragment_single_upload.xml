@@ -56,4 +56,14 @@
         android:gravity="center"
         android:layout_marginTop="16dp"
         />
+
+    <fr.free.nrw.commons.ui.widget.HtmlTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/media_upload_policy"
+        android:text="@string/media_upload_policy"
+        android:gravity="start"
+        android:layout_marginTop="16dp"
+        />
+
 </LinearLayout>
