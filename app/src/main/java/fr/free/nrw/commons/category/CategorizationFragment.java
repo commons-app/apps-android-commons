@@ -42,13 +42,18 @@ import java.util.concurrent.TimeUnit;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.category.CategoriesRenderer.CategoryClickedListener;
 import fr.free.nrw.commons.upload.MwVolleyApi;
 import timber.log.Timber;
+
+import static android.view.KeyEvent.ACTION_UP;
+import static android.view.KeyEvent.KEYCODE_BACK;
+import static fr.free.nrw.commons.category.CategoryContentProvider.AUTHORITY;
 
 /**
  * Displays the category suggestion and selection screen. Category search is initiated here.
  */
-public class CategorizationFragment extends Fragment implements CategoriesRenderer.CategoryClickedListener {
+public class CategorizationFragment extends Fragment implements CategoryClickedListener {
     public static final int SEARCH_CATS_LIMIT = 25;
 
     @BindView(R.id.categoriesListBox) RecyclerView categoriesList;
@@ -74,7 +79,8 @@ public class CategorizationFragment extends Fragment implements CategoriesRender
 
     @SuppressWarnings("unchecked")
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_categorization, container, false);
         ButterKnife.bind(this, rootView);
 
@@ -94,7 +100,8 @@ public class CategorizationFragment extends Fragment implements CategoriesRender
             categoriesCache = new HashMap<>();
         } else {
             items = savedInstanceState.getParcelableArrayList("currentCategories");
-            categoriesCache = (HashMap<String, ArrayList<String>>) savedInstanceState.getSerializable("categoriesCache");
+            categoriesCache = (HashMap<String, ArrayList<String>>) savedInstanceState
+                    .getSerializable("categoriesCache");
         }
 
         categoriesAdapter = adapterFactory.create(items);
@@ -123,7 +130,7 @@ public class CategorizationFragment extends Fragment implements CategoriesRender
             rootView.setOnKeyListener(new View.OnKeyListener() {
                 @Override
                 public boolean onKey(View v, int keyCode, KeyEvent event) {
-                    if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+                    if (event.getAction() == ACTION_UP && keyCode == KEYCODE_BACK) {
                         backButtonDialog();
                         return true;
                     }
@@ -168,8 +175,8 @@ public class CategorizationFragment extends Fragment implements CategoriesRender
                 int count = categoriesAdapter.getItemCount();
                 for (int i = 0; i < count; i++) {
                     CategoryItem item = categoriesAdapter.getItem(i);
-                    if (item.selected) {
-                        selectedCategories.add(item.name);
+                    if (item.isSelected()) {
+                        selectedCategories.add(item.getName());
                         numberSelected++;
                     }
                 }
@@ -177,7 +184,9 @@ public class CategorizationFragment extends Fragment implements CategoriesRender
                 //If no categories selected, display warning to user
                 if (numberSelected == 0) {
                     new AlertDialog.Builder(getActivity())
-                            .setMessage("Images without categories are rarely usable. Are you sure you want to submit without selecting categories?")
+                            .setMessage("Images without categories are rarely usable. "
+                                    + "Are you sure you want to submit without selecting "
+                                    + "categories?")
                             .setTitle("No Categories Selected")
                             .setPositiveButton("No, go back", new DialogInterface.OnClickListener() {
                                 @Override
@@ -209,7 +218,7 @@ public class CategorizationFragment extends Fragment implements CategoriesRender
         setHasOptionsMenu(true);
         onCategoriesSaveHandler = (OnCategoriesSaveHandler) getActivity();
         getActivity().setTitle(R.string.categories_activity_title);
-        client = getActivity().getContentResolver().acquireContentProviderClient(CategoryContentProvider.AUTHORITY);
+        client = getActivity().getContentResolver().acquireContentProviderClient(AUTHORITY);
     }
 
     public HashMap<String, ArrayList<String>> getCategoriesCache() {
@@ -285,7 +294,8 @@ public class CategorizationFragment extends Fragment implements CategoriesRender
     }
 
     /**
-     * Merges nearby categories, categories suggested based on title, and recent categories... without duplicates.
+     * Merges nearby categories, categories suggested based on title, and recent categories...
+     * without duplicates.
      *
      * @return a list containing merged categories
      */
@@ -316,7 +326,8 @@ public class CategorizationFragment extends Fragment implements CategoriesRender
         mergedItems.addAll(recentItems);
         Timber.d("Adding recent items: %s", recentItems);
 
-        //Needs to be an ArrayList and not a List unless we want to modify a big portion of preexisting code
+        // Needs to be an ArrayList and not a List unless we want to modify a big portion
+        // of preexisting code
         ArrayList<String> mergedItemsList = new ArrayList<>(mergedItems);
 
         Timber.d("Merged item list: %s", mergedItemsList);
@@ -336,9 +347,9 @@ public class CategorizationFragment extends Fragment implements CategoriesRender
             int count = categoriesAdapter.getItemCount();
             for (int i = 0; i < count; i++) {
                 CategoryItem item = categoriesAdapter.getItem(i);
-                if (item.selected) {
+                if (item.isSelected()) {
                     items.add(item);
-                    existingKeys.add(item.name);
+                    existingKeys.add(item.getName());
                 }
             }
             for (String category : categories) {
@@ -442,7 +453,7 @@ public class CategorizationFragment extends Fragment implements CategoriesRender
         int numberOfItems = categoriesAdapter.getItemCount();
         for (int i = 0; i < numberOfItems; i++) {
             CategoryItem item = categoriesAdapter.getItem(i);
-            if (item.selected) {
+            if (item.isSelected()) {
                 count++;
             }
         }
@@ -451,7 +462,8 @@ public class CategorizationFragment extends Fragment implements CategoriesRender
 
     public void backButtonDialog() {
         new AlertDialog.Builder(getActivity())
-                .setMessage("Are you sure you want to go back? The image will not have any categories saved.")
+                .setMessage("Are you sure you want to go back? The image will not " 
+                        + "have any categories saved.")
                 .setTitle("Warning")
                 .setPositiveButton("No", new DialogInterface.OnClickListener() {
                     @Override
@@ -471,8 +483,8 @@ public class CategorizationFragment extends Fragment implements CategoriesRender
 
     @Override
     public void categoryClicked(CategoryItem item) {
-        if (item.selected) {
-            new CategoryCountUpdater(item.name, client).executeOnExecutor(executor);
+        if (item.isSelected()) {
+            new CategoryCountUpdater(item.getName(), client).executeOnExecutor(executor);
         }
     }
 

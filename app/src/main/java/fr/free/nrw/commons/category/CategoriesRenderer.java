@@ -35,8 +35,8 @@ class CategoriesRenderer extends Renderer<CategoryItem> {
             @Override
             public void onClick(View v) {
                 CategoryItem item = getContent();
-                item.selected = !item.selected;
-                checkedView.setChecked(item.selected);
+                item.setSelected(!item.isSelected());
+                checkedView.setChecked(item.isSelected());
                 if (listener != null) {
                     listener.categoryClicked(item);
                 }
@@ -47,8 +47,8 @@ class CategoriesRenderer extends Renderer<CategoryItem> {
     @Override
     public void render() {
         CategoryItem item = getContent();
-        checkedView.setChecked(item.selected);
-        checkedView.setText(item.name);
+        checkedView.setChecked(item.isSelected());
+        checkedView.setText(item.getName());
     }
 
     interface CategoryClickedListener {

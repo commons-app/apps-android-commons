@@ -4,8 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 class CategoryItem implements Parcelable {
-    public final String name;
-    public boolean selected;
+    private final String name;
+    private boolean selected;
 
     public static Creator<CategoryItem> CREATOR = new Creator<CategoryItem>() {
         @Override
@@ -27,6 +27,18 @@ class CategoryItem implements Parcelable {
     private CategoryItem(Parcel in) {
         name = in.readString();
         selected = in.readInt() == 1;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 
     @Override

@@ -44,7 +44,8 @@ public class CategoryContentProvider extends ContentProvider {
 
     @SuppressWarnings("ConstantConditions")
     @Override
-    public Cursor query(@NonNull Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    public Cursor query(@NonNull Uri uri, String[] projection, String selection,
+                        String[] selectionArgs, String sortOrder) {
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
         queryBuilder.setTables(Category.Table.TABLE_NAME);
 
@@ -55,7 +56,8 @@ public class CategoryContentProvider extends ContentProvider {
 
         switch(uriType) {
             case CATEGORIES:
-                cursor = queryBuilder.query(db, projection, selection, selectionArgs, null, null, sortOrder);
+                cursor = queryBuilder.query(db, projection, selection, selectionArgs,
+                        null, null, sortOrder);
                 break;
             case CATEGORIES_ID:
                 cursor = queryBuilder.query(db,
@@ -128,7 +130,8 @@ public class CategoryContentProvider extends ContentProvider {
 
     @SuppressWarnings("ConstantConditions")
     @Override
-    public int update(@NonNull Uri uri, ContentValues contentValues, String selection, String[] selectionArgs) {
+    public int update(@NonNull Uri uri, ContentValues contentValues, String selection,
+                      String[] selectionArgs) {
         /*
         SQL Injection warnings: First, note that we're not exposing this to the outside world (exported="false")
         Even then, we should make sure to sanitize all user input appropriately. Input that passes through ContentValues
@@ -149,7 +152,8 @@ public class CategoryContentProvider extends ContentProvider {
                             Category.Table.COLUMN_ID + " = ?",
                             new String[] { String.valueOf(id) } );
                 } else {
-                    throw new IllegalArgumentException("Parameter `selection` should be empty when updating an ID");
+                    throw new IllegalArgumentException(
+                            "Parameter `selection` should be empty when updating an ID");
                 }
                 break;
             default:
