@@ -36,6 +36,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.category.CategorizationFragment;
+import fr.free.nrw.commons.category.OnCategoriesSaveHandler;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.modifications.CategoryModifier;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
@@ -51,7 +52,7 @@ import timber.log.Timber;
 public  class       ShareActivity
         extends     AuthenticatedActivity
         implements  SingleUploadFragment.OnUploadActionInitiated,
-        CategorizationFragment.OnCategoriesSaveHandler {
+        OnCategoriesSaveHandler {
 
     private static final int REQUEST_PERM_ON_CREATE_STORAGE = 1;
     private static final int REQUEST_PERM_ON_CREATE_LOCATION = 2;
