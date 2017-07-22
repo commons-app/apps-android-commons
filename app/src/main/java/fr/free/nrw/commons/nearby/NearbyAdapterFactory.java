@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.nearby;
 
+import android.support.annotation.NonNull;
+
 import com.pedrogomez.renderers.ListAdapteeCollection;
 import com.pedrogomez.renderers.RVRendererAdapter;
 import com.pedrogomez.renderers.RendererBuilder;
@@ -10,7 +12,7 @@ import java.util.List;
 class NearbyAdapterFactory {
     private PlaceRenderer.PlaceClickedListener listener;
 
-    NearbyAdapterFactory(PlaceRenderer.PlaceClickedListener listener) {
+    NearbyAdapterFactory(@NonNull PlaceRenderer.PlaceClickedListener listener) {
         this.listener = listener;
     }
 
