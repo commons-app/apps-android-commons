@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.Single;
+
 public interface MediaWikiApi {
     String getAuthCookie();
 
@@ -47,10 +50,12 @@ public interface MediaWikiApi {
     @Nullable
     String revisionsByFilename(String filename) throws IOException;
 
-    boolean existingFile(String fileSha1) throws IOException;
+    Observable<Boolean> existingFile(String fileSha1);
 
     @NonNull
     LogEventResult logEvents(String user, String lastModified, String queryContinue, int limit) throws IOException;
+
+    Single<Integer> getUploadCount(String username);
 
     interface ProgressListener {
         void onProgress(long transferred, long total);

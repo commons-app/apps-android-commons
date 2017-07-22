@@ -11,7 +11,6 @@ import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -22,10 +21,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
-
-import com.google.common.util.concurrent.FutureCallback;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListenableFuture;
 
 import java.util.ArrayList;
 
@@ -38,16 +33,17 @@ import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
-import fr.free.nrw.commons.utils.ExecutorUtils;
+import io.reactivex.annotations.NonNull;
 import timber.log.Timber;
 
-public  class       ContributionsActivity
-        extends     AuthenticatedActivity
-        implements  LoaderManager.LoaderCallbacks<Cursor>,
-                    AdapterView.OnItemClickListener,
-                    MediaDetailPagerFragment.MediaDetailProvider,
-                    FragmentManager.OnBackStackChangedListener,
-                    ContributionsListFragment.SourceRefresher {
+public class ContributionsActivity
+        extends AuthenticatedActivity
+        implements ContributionsView,
+        LoaderManager.LoaderCallbacks<Cursor>,
+        AdapterView.OnItemClickListener,
+        MediaDetailPagerFragment.MediaDetailProvider,
+        FragmentManager.OnBackStackChangedListener,
+        ContributionsListFragment.SourceRefresher {
 
     private Cursor allContributions;
     private ContributionsListFragment contributionsList;
@@ -56,6 +52,7 @@ public  class       ContributionsActivity
     private boolean isUploadServiceConnected;
     private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<>();
     private String CONTRIBUTION_SELECTION = "";
+    private ContributionsPresenter presenter;
 
     /*
         This sorts in the following order:
@@ -71,7 +68,7 @@ public  class       ContributionsActivity
     private ServiceConnection uploadServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder binder) {
-            uploadService = (UploadService) ((HandlerService.HandlerServiceLocalBinder)binder).getService();
+            uploadService = (UploadService) ((HandlerService.HandlerServiceLocalBinder) binder).getService();
             isUploadServiceConnected = true;
         }
 
@@ -86,7 +83,8 @@ public  class       ContributionsActivity
     protected void onDestroy() {
         getSupportFragmentManager().removeOnBackStackChangedListener(this);
         super.onDestroy();
-        if(isUploadServiceConnected) {
+        presenter.dispose();
+        if (isUploadServiceConnected) {
             unbindService(uploadServiceConnection);
         }
     }
@@ -96,9 +94,9 @@ public  class       ContributionsActivity
         super.onResume();
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         boolean isSettingsChanged =
-                sharedPreferences.getBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED,false);
+                sharedPreferences.getBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, false);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED,false);
+        editor.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, false);
         editor.apply();
         if (isSettingsChanged) {
             refreshSource();
@@ -129,15 +127,19 @@ public  class       ContributionsActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contributions);
         ButterKnife.bind(this);
+        if (presenter != null) {
+            presenter.dispose();
+        }
+        presenter = new ContributionsPresenter(CommonsApplication.getInstance().getMWApi());
 
         // Activity can call methods in the fragment by acquiring a
         // reference to the Fragment from FragmentManager, using findFragmentById()
-        contributionsList = (ContributionsListFragment)getSupportFragmentManager()
+        contributionsList = (ContributionsListFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.contributionsListFragment);
 
         getSupportFragmentManager().addOnBackStackChangedListener(this);
         if (savedInstanceState != null) {
-            mediaDetails = (MediaDetailPagerFragment)getSupportFragmentManager()
+            mediaDetails = (MediaDetailPagerFragment) getSupportFragmentManager()
                     .findFragmentById(R.id.contributionsFragmentContainer);
         }
         requestAuthToken();
@@ -151,11 +153,13 @@ public  class       ContributionsActivity
         outState.putBoolean("mediaDetailsVisible", (mediaDetails != null && mediaDetails.isVisible()));
     }
 
-    /** Replace whatever is in the current contributionsFragmentContainer view with mediaDetailPagerFragment,
-    /   and preserve previous state in back stack.
-    /   Called when user selects a contribution. */
+    /**
+     * Replace whatever is in the current contributionsFragmentContainer view with mediaDetailPagerFragment,
+     * /   and preserve previous state in back stack.
+     * /   Called when user selects a contribution.
+     */
     private void showDetail(int i) {
-        if(mediaDetails == null ||!mediaDetails.isVisible()) {
+        if (mediaDetails == null || !mediaDetails.isVisible()) {
             mediaDetails = new MediaDetailPagerFragment();
             this.getSupportFragmentManager()
                     .beginTransaction()
@@ -170,7 +174,7 @@ public  class       ContributionsActivity
     public void retryUpload(int i) {
         allContributions.moveToPosition(i);
         Contribution c = Contribution.fromCursor(allContributions);
-        if(c.getState() == Contribution.STATE_FAILED) {
+        if (c.getState() == Contribution.STATE_FAILED) {
             uploadService.queue(UploadService.ACTION_UPLOAD_FILE, c);
             Timber.d("Restarting for %s", c.toContentValues());
         } else {
@@ -181,7 +185,7 @@ public  class       ContributionsActivity
     public void deleteUpload(int i) {
         allContributions.moveToPosition(i);
         Contribution c = Contribution.fromCursor(allContributions);
-        if(c.getState() == Contribution.STATE_FAILED) {
+        if (c.getState() == Contribution.STATE_FAILED) {
             Timber.d("Deleting failed contrib %s", c.toContentValues());
             c.setContentProviderClient(getContentResolver().acquireContentProviderClient(ContributionsContentProvider.AUTHORITY));
             c.delete();
@@ -192,9 +196,9 @@ public  class       ContributionsActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case android.R.id.home:
-                if(mediaDetails.isVisible()) {
+                if (mediaDetails.isVisible()) {
                     getSupportFragmentManager().popBackStack();
                 }
                 return true;
@@ -230,14 +234,14 @@ public  class       ContributionsActivity
 
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
-        if(contributionsList.getAdapter() == null) {
+        if (contributionsList.getAdapter() == null) {
             contributionsList
                     .setAdapter(new ContributionsListAdapter(getApplicationContext(), cursor, 0));
         } else {
-            ((CursorAdapter)contributionsList.getAdapter()).swapCursor(cursor);
+            ((CursorAdapter) contributionsList.getAdapter()).swapCursor(cursor);
         }
 
-        setUploadCount();
+        presenter.getUploadCount(this, CommonsApplication.getInstance().getCurrentAccount().name);
 
         contributionsList.clearSyncMessage();
         notifyAndMigrateDataSetObservers();
@@ -254,38 +258,25 @@ public  class       ContributionsActivity
         if (contributionsList.getAdapter() == null) {
             // not yet ready to return data
             return null;
-        } else  {
+        } else {
             return Contribution.fromCursor((Cursor) contributionsList.getAdapter().getItem(i));
         }
     }
 
     @Override
     public int getTotalMediaCount() {
-        if(contributionsList.getAdapter() == null) {
+        if (contributionsList.getAdapter() == null) {
             return 0;
         }
         return contributionsList.getAdapter().getCount();
     }
 
-    private void setUploadCount() {
-        UploadCountClient uploadCountClient = new UploadCountClient();
-        CommonsApplication application = CommonsApplication.getInstance();
-        ListenableFuture<Integer> future = uploadCountClient
-                .getUploadCount(application.getCurrentAccount().name);
-        Futures.addCallback(future, new FutureCallback<Integer>() {
-            @Override
-            public void onSuccess(Integer uploadCount) {
-                getSupportActionBar().setSubtitle(getResources()
-                        .getQuantityString(R.plurals.contributions_subtitle,
-                                uploadCount,
-                                uploadCount));
-            }
-
-            @Override
-            public void onFailure(@NonNull Throwable t) {
-                Timber.e(t, "Fetching upload count failed");
-            }
-        }, ExecutorUtils.uiExecutor());
+    @Override
+    public void showUpdateCount(@NonNull int uploadCount) {
+        getSupportActionBar().setSubtitle(getResources()
+                .getQuantityString(R.plurals.contributions_subtitle,
+                        uploadCount,
+                        uploadCount));
     }
 
     @Override
