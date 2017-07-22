@@ -75,7 +75,7 @@
   <string name="title_activity_settings">Поставке</string>
   <string name="title_activity_signup">Отвори налог</string>
   <string name="menu_about">О апликацији</string>
-  <string name="about_license">Софтвер отвореног кода доступан под лиценцом &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache вер. 2&lt;/a&gt; Викимедијина Остава и њен лого су заштитни знаци Викимедијине Фондације и користе се са дозволом Викимедијине Фондацине. Ми не одобравамо или подржавмо Викимедијину Фондацију.</string>
+  <string name="about_license" fuzzy="true">Софтвер отвореног кода доступан под лиценцом &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache вер. 2&lt;/a&gt; Викимедијина Остава и њен лого су заштитни знаци Викимедијине Фондације и користе се са дозволом Викимедијине Фондацине. Ми не одобравамо или подржавмо Викимедијину Фондацију.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Изворни кôд&lt;/a&gt; и &lt;a href=\"https://commons-app.github.io/\"&gt;веб-сајт&lt;/a&gt; на GitHub-у. Направите нови &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;захтев на GitHub-у&lt;/a&gt; да бисте пријавили грешке или дали предлоге.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Политика приватности&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Заслуге&lt;/a&gt;</string>
@@ -184,6 +184,6 @@
   <string name="navigation_item_settings">Подешавања</string>
   <string name="navigation_item_feedback">Повратне информације</string>
   <string name="navigation_item_logout">Одјави ме</string>
-  <string name="nearby_info_menu_commons_article">Чланак на Остави</string>
+  <string name="nearby_info_menu_commons_article" fuzzy="true">Чланак на Остави</string>
   <string name="nearby_info_menu_wikidata_article" fuzzy="true">Чланак на Википодацима</string>
 </resources>

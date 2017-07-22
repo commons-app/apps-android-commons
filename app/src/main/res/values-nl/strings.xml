@@ -155,4 +155,5 @@
   <string name="navigation_item_settings">Instellingen</string>
   <string name="navigation_item_feedback">Terugkoppeling</string>
   <string name="navigation_item_logout">Afmelden</string>
+  <string name="error_while_cache">Error tijdens het laden van de afbeeldingen</string>
 </resources>

@@ -182,6 +182,6 @@
   <string name="navigation_item_info">ভূমিকা</string>
   <string name="nearby_needs_permissions">অবস্থানের অনুমতি ছাড়া কাছাকাছি জায়গাগুলি প্রদর্শন করা যাবে না</string>
   <string name="no_description_found">কোন বিবরণ পাওয়া যায়নি</string>
-  <string name="nearby_info_menu_commons_article">কমন্স নিবন্ধ</string>
+  <string name="nearby_info_menu_commons_article" fuzzy="true">কমন্স নিবন্ধ</string>
   <string name="nearby_info_menu_wikidata_article">উইকিউপাত্ত পদ</string>
 </resources>

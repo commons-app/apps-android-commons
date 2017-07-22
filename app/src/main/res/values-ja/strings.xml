@@ -67,7 +67,7 @@
   <string name="title_activity_settings">設定</string>
   <string name="title_activity_signup">利用者登録</string>
   <string name="menu_about">このアプリについて</string>
-  <string name="about_license">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache ライセンス v2&lt;/a&gt; のもとで公開されているオープン ソース ソフトウェアです。Wikimedia Commons ならびにそのロゴはウィキメディア財団の商標であり、ウィキメディア財団の許可により使用しています。このサイトはウィキメディア財団の公認3でも提携先でもありません。</string>
+  <string name="about_license" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache ライセンス v2&lt;/a&gt; のもとで公開されているオープン ソース ソフトウェアです。Wikimedia Commons ならびにそのロゴはウィキメディア財団の商標であり、ウィキメディア財団の許可により使用しています。このサイトはウィキメディア財団の公認3でも提携先でもありません。</string>
   <string name="about_improve">ソースは &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt; にあります。バグとアイディアは &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt; へ。</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/プライバシー・ポリシー\"&gt;プライバシー・ポリシー&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;クレジット&lt;/a&gt;</string>

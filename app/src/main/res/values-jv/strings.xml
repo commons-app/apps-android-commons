@@ -165,6 +165,6 @@
   <string name="navigation_item_settings">Setèlan</string>
   <string name="navigation_item_feedback">Pamrayoga</string>
   <string name="navigation_item_logout">Metu log</string>
-  <string name="nearby_info_menu_commons_article">Artikel Commons</string>
+  <string name="nearby_info_menu_commons_article" fuzzy="true">Artikel Commons</string>
   <string name="nearby_info_menu_wikidata_article">Wiji Wikidata</string>
 </resources>

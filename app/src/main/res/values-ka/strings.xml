@@ -71,7 +71,7 @@
   <string name="title_activity_settings">კონფიგურაცია</string>
   <string name="title_activity_signup">რეგისტრაცია</string>
   <string name="menu_about">პროგრამის შესახებ</string>
-  <string name="about_license">ღია კოდის მქონე აპლიკაცია, ვრცელდება ლიცენზიით &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. ვიკისაწყობი და მისი ლოგო ფონდი ვიკიმედიის სავაჭრო ნიშნებია და ფონდი ვიკიმედიის ნებართვით გამოიყენება. ჩვენ არ ვართ დაკავშირებული ფონდ ვიკიმედიასთან.</string>
+  <string name="about_license" fuzzy="true">ღია კოდის მქონე აპლიკაცია, ვრცელდება ლიცენზიით &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. ვიკისაწყობი და მისი ლოგო ფონდი ვიკიმედიის სავაჭრო ნიშნებია და ფონდი ვიკიმედიის ნებართვით გამოიყენება. ჩვენ არ ვართ დაკავშირებული ფონდ ვიკიმედიასთან.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;წყარო&lt;/a&gt; და &lt;a href=\"https://commons-app.github.io/\"&gt;საიტი&lt;/a&gt; GitHub-ზე. შეცდომის შესატყობინებლად ან წინადადებისათვის შექმენით ახალი &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;მოთხოვნა GitHub-ზე&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;კონფიდენციალურობის პოლიტიკა&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;მადლობები&lt;/a&gt;</string>
@@ -170,6 +170,6 @@
   <string name="navigation_item_info">სახელმძღვანელო</string>
   <string name="nearby_needs_permissions">ახლომდებარე ადგილების ჩვენება მდებარეობის განსაზღვრის ნებართვის გარეშე შეუძლებელია</string>
   <string name="no_description_found">აღწერა ვერ მოიძებნა</string>
-  <string name="nearby_info_menu_commons_article">ვიკისაწყობის სტატია</string>
+  <string name="nearby_info_menu_commons_article" fuzzy="true">ვიკისაწყობის სტატია</string>
   <string name="nearby_info_menu_wikidata_article">ვიკიმონაცემების ელემენტი</string>
 </resources>

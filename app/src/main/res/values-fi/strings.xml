@@ -75,7 +75,8 @@
   <string name="title_activity_settings">Asetukset</string>
   <string name="title_activity_signup">Rekisteröidy</string>
   <string name="menu_about">Tietoja</string>
-  <string name="about_license">Tämä on vapaan lähdekoodin ohjelmisto, joka on julkaistu &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; -lisenssin alaisena. Wikimedia Commons ja sen logo ovat Wikimedia Foundationin tavaramerkkejä ja niitä käytetään Wikimedia Foundationin luvalla. Emme ole hyväksyttyjä tai sidoksissa Wikimedia Foundationioniin.</string>
+  <string name="about_license" fuzzy="true">Tämä on vapaan lähdekoodin ohjelmisto, joka on julkaistu &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; -lisenssin alaisena. Wikimedia Commons ja sen logo ovat Wikimedia Foundationin tavaramerkkejä ja niitä käytetään Wikimedia Foundationin luvalla. Emme ole hyväksyttyjä tai sidoksissa Wikimedia Foundationioniin.</string>
+  <string name="trademarked_name">Wikimedia Commons</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Lähde&lt;/a&gt; ja &lt;a href=\"https://commons-app.github.io/\"&gt;nettisivusto&lt;/a&gt; GitHubissa. Luo uusi &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-issue&lt;/a&gt; bugiraporteille ja ehdotuksille.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Yksityisyydensuoja&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Tekijät&lt;/a&gt;</string>
@@ -95,6 +96,7 @@
   <string name="allow_gps_summary">Nouda nykyinen sijainti asettaaksesi käyttöön luokkaehdotuksia jos kuva ei ole paikkamerkitty</string>
   <string name="preference_theme">Yötila</string>
   <string name="preference_theme_summary">Käytä tummaa teemaa</string>
+  <string name="license_name_cc_by_sa_four">Nimeä-JaaSamoin 4.0</string>
   <string name="license_name_cc_by_four">Nimeä 4.0</string>
   <string name="license_name_cc_by_sa">Nimeä-JaaSamoin 3.0</string>
   <string name="license_name_cc_by">Nimeä 3.0</string>
@@ -160,6 +162,6 @@
   <string name="navigation_item_settings">Asetukset</string>
   <string name="navigation_item_feedback">Palaute</string>
   <string name="navigation_item_logout">Kirjaudu ulos</string>
-  <string name="nearby_info_menu_commons_article">Commons-artikkeli</string>
+  <string name="nearby_info_menu_commons_article" fuzzy="true">Commons-artikkeli</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata-kohde</string>
 </resources>

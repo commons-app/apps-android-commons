@@ -75,7 +75,8 @@
   <string name="title_activity_settings">设置</string>
   <string name="title_activity_signup">注册</string>
   <string name="menu_about">关于</string>
-  <string name="about_license">本开源软件采用&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache许可证第二版&lt;/a&gt;授权。Wikimedia Commons及其标志是维基媒体基金会的商标，并在维基媒体基金会的许可下使用。我们并不被维基媒体基金会认可，也不与基金会有任何联系。</string>
+  <string name="about_license">本开源软件采用&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache许可证第二版&lt;/a&gt;授权。%1$s及其标志是维基媒体基金会的商标，并在维基媒体基金会的许可下使用。我们并不被维基媒体基金会认可，也不与基金会有任何联系。</string>
+  <string name="trademarked_name">维基共享资源</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;源代码&lt;/a&gt;和&lt;a href=\"https://commons-app.github.io/\"&gt;网站&lt;/a&gt;位于GitHub。创建新的&lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub问题&lt;/a&gt;以发送错误报告和建议。</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;隐私政策&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;制作人员&lt;/a&gt;</string>
@@ -149,6 +150,9 @@
   <string name="media_detail_description">说明</string>
   <string name="media_detail_description_explanation">在此填写媒体的说明。这可能会相当长，并将需要包裹在多行中。我们希望它看起来很好。</string>
   <string name="media_detail_uploaded_date">上传日期</string>
+  <string name="media_detail_license">许可协议</string>
+  <string name="media_detail_coordinates">坐标</string>
+  <string name="media_detail_coordinates_empty">未提供</string>
   <string name="become_a_tester_title">成为测试版的测试者</string>
   <string name="become_a_tester_description">加入我们在Google Play上的测试频道，并更早获取新功能以及错误修复</string>
   <string name="use_wikidata">使用维基数据</string>
@@ -187,7 +191,7 @@
   <string name="navigation_item_info">教程</string>
   <string name="nearby_needs_permissions">附近地点不能在没有位置权限的情况下显示</string>
   <string name="no_description_found">找不到描述</string>
-  <string name="nearby_info_menu_commons_article">共享资源条目</string>
+  <string name="nearby_info_menu_commons_article">共享资源文件页面</string>
   <string name="nearby_info_menu_wikidata_article">维基数据项</string>
   <string name="error_while_cache">缓存图片时出错</string>
 </resources>

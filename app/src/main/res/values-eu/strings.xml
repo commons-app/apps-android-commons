@@ -62,6 +62,7 @@
   <string name="title_activity_signup">Eman izena</string>
   <string name="menu_about">Honi buruz</string>
   <string name="about_license">Open Source softwarea &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache v2 Lizentziaren&lt;/a&gt; pean egina. Wikimedia Commons eta bere logoa Wikimedia Fundazioaren marka erregistratuak dira eta Wikimedia Fundazioaren baimenarekin erabiltzen dira. Ez gaude Wikimedia Fundaziora afiliatuta.</string>
+  <string name="trademarked_name">Wikimedia Commons</string>
   <string name="about_improve">GitHub-eko &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Iturria&lt;/a&gt; eta &lt;a href=\"https://commons-app.github.io/\"&gt;webgunea&lt;/a&gt;. &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-eko gai&lt;/a&gt; berria sortu erroreen berri emateko.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Pribatutasun politika&lt;/a&gt;</string>
   <string name="title_activity_about">Honi buruz</string>
@@ -116,6 +117,9 @@
   <string name="media_detail_title">Izenburua</string>
   <string name="media_detail_media_title">Fitxategiaren izenburua</string>
   <string name="media_detail_description">Deskribapena</string>
+  <string name="media_detail_license">Lizentzia</string>
+  <string name="media_detail_coordinates">Koordenatuak</string>
+  <string name="media_detail_coordinates_empty">Ez da eskeini</string>
   <string name="become_a_tester_title">Beta testatzaile bihurtu</string>
   <string name="use_wikidata">Wikidata erabili</string>
   <string name="use_wikidata_summary">(Erne:hau kentzeak mugikorrak datu asko kontsumitzea ekar dezake)</string>
@@ -132,6 +136,7 @@
   <string name="navigation_item_settings">Ezarpenak</string>
   <string name="navigation_item_logout">Saioa itxi</string>
   <string name="navigation_item_info" fuzzy="true">Sarrera</string>
-  <string name="nearby_info_menu_commons_article">Commons Artikulua</string>
+  <string name="nearby_info_menu_commons_article">Artxibo orrialde komuna</string>
   <string name="nearby_info_menu_wikidata_article" fuzzy="true">WikiData Artikulua</string>
+  <string name="error_while_cache">Argazkiak hartzerakoan sortutako akatsa</string>
 </resources>

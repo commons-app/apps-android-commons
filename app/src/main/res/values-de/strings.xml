@@ -75,7 +75,8 @@
   <string name="title_activity_settings">Einstellungen</string>
   <string name="title_activity_signup">Registrieren</string>
   <string name="menu_about">Über</string>
-  <string name="about_license">Die Open-Source-Software wurde veröffentlicht unter der &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache-Lizenz v2&lt;/a&gt;. Wikimedia Commons und das Wikimedia-Commons-Logo sind Markenzeichen der Wikimedia Foundation und wurden mit Genehmigung der Wikimedia Foundation verwendet. Wir wurden nicht von der Wikimedia Foundation bestätigt oder sind nicht mit ihr verbunden.</string>
+  <string name="about_license">Die Open-Source-Software wurde veröffentlicht unter der &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache-Lizenz v2&lt;/a&gt;. %1$s und das entsprechende Logo sind Markenzeichen der Wikimedia Foundation und wurden mit Genehmigung der Wikimedia Foundation verwendet. Wir wurden nicht von der Wikimedia Foundation bestätigt oder sind nicht mit ihr verbunden.</string>
+  <string name="trademarked_name">Wikimedia Commons</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Quellcode&lt;/a&gt; und &lt;a href=\"https://commons-app.github.io/\"&gt;Website&lt;/a&gt; auf GitHub. Einen neuen &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-Eintrag&lt;/a&gt; für Fehlerberichte und Vorschläge erstellen.</string>
   <string name="about_privacy_policy">&lt;a href=\"//de.wikipedia.org/wiki/Wikipedia:Datenschutz\"&gt;Datenschutzrichtlinie&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Danksagungen&lt;/a&gt;</string>
@@ -118,11 +119,11 @@
   <string name="tutorial_1_text">Wikimedia Commons speichert die meisten Bilder, die in Wikipedia verwendet werden.</string>
   <string name="tutorial_1_subtext">Deine Bilder helfen bei der Ausbildung von Menschen auf der ganzen Welt!</string>
   <string name="tutorial_2_text">Bitte lade Bilder hoch, die du völlig selbst aufgenommen oder erstellt hast:</string>
-  <string name="tutorial_2_subtext">u2022 Natürliche Objekte (Blumen, Tiere, Berge)\nu2022 Nützliche Objekte (Fahrräder, Bahnhöfe)\nu2022 Berühmte Personen (deinen Bürgermeister, olympische Athleten, die du getroffen hast)</string>
+  <string name="tutorial_2_subtext">- Natürliche Objekte (Blumen, Tiere, Berge)\n- Nützliche Objekte (Fahrräder, Bahnhöfe)\n- Berühmte Personen (deinen Bürgermeister, olympische Athleten, die du getroffen hast)</string>
   <string name="tutorial_3_text">Bitte NICHT hochladen:</string>
-  <string name="tutorial_3_subtext">u2022 Selfies oder Bilder deiner Freunde\nu2022 Bilder, die du aus dem Internet heruntergeladen hast\nu2022 Screenshots von proprietären Softwareanwendungen</string>
+  <string name="tutorial_3_subtext">- Selfies oder Bilder deiner Freunde\n- Bilder, die du aus dem Internet heruntergeladen hast\n- Screenshots von proprietären Softwareanwendungen</string>
   <string name="tutorial_4_text">Beispiel-Upload:</string>
-  <string name="tutorial_4_subtext">u2022 Titel: Opernhaus von Sydney\nu2022 Beschreibung: Opernhaus von Sydney, von der Bucht aus gesehen\nu2022 Kategorien: Opernhaus von Sydney, Opernhaus von Sydney von Westen, Opernhaus von Sydney (Fernansicht)</string>
+  <string name="tutorial_4_subtext">- Titel: Opernhaus von Sydney\n- Beschreibung: Opernhaus von Sydney, von der Bucht aus gesehen\n- Kategorien: Opernhaus von Sydney, Opernhaus von Sydney von Westen, Opernhaus von Sydney (Fernansicht)</string>
   <string name="welcome_wikipedia_text">Teile deine Bilder. Erwecke Wikipedia-Artikel zum Leben!</string>
   <string name="welcome_wikipedia_subtext">Die Bilder auf Wikipedia kommen von Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Deine Bilder helfen dabei, Menschen auf der ganzen Welt zu bilden.</string>
@@ -149,6 +150,9 @@
   <string name="media_detail_description">Beschreibung</string>
   <string name="media_detail_description_explanation">Hier folgt die Beschreibung des Mediums. Diese kann möglicherweise ziemlich lang sein und erfordert dann einen Umbruch auf mehreren Zeilen. Wir hoffen, dass sie dennoch gut aussieht.</string>
   <string name="media_detail_uploaded_date">Hochgeladen am</string>
+  <string name="media_detail_license">Lizenz</string>
+  <string name="media_detail_coordinates">Koordinaten</string>
+  <string name="media_detail_coordinates_empty">Keine angegeben</string>
   <string name="become_a_tester_title">Beta-Tester werden</string>
   <string name="become_a_tester_description">Melde dich bei unserem Beta-Kanal auf Google Play an und erhalte frühen Zugriff auf neue Funktionen und Fehlerbehebungen</string>
   <string name="use_wikidata">Wikidata verwenden</string>
@@ -187,7 +191,7 @@
   <string name="navigation_item_info">Anleitung</string>
   <string name="nearby_needs_permissions">Orte in der Nähe können ohne Berechtigung zur Standortbestimmung nicht ermittelt werden</string>
   <string name="no_description_found">Keine Beschreibung gefunden</string>
-  <string name="nearby_info_menu_commons_article">Commons-Artikel</string>
+  <string name="nearby_info_menu_commons_article">Commons-Dateiseite</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata-Objekt</string>
   <string name="error_while_cache">Fehler beim Zwischenspeichern der Bilder</string>
 </resources>
