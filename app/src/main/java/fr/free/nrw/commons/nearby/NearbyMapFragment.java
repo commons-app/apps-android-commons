@@ -88,25 +88,19 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         // create map
         mapView = new MapView(getActivity(), options);
         mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(MapboxMap mapboxMap) {
-                mapboxMap.addMarkers(baseMarkerOptions);
+        mapView.getMapAsync(mapboxMap -> {
+            mapboxMap.addMarkers(baseMarkerOptions);
 
-                mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
-                    @Override
-                    public boolean onMarkerClick(@NonNull Marker marker) {
-                        if (marker instanceof NearbyMarker) {
-                            NearbyMarker nearbyMarker = (NearbyMarker) marker;
-                            Place place = nearbyMarker.getNearbyBaseMarker().getPlace();
-                            NearbyInfoDialog.showYourself(getActivity(), place);
-                        }
-                        return false;
-                    }
-                });
+            mapboxMap.setOnMarkerClickListener(marker -> {
+                if (marker instanceof NearbyMarker) {
+                    NearbyMarker nearbyMarker = (NearbyMarker) marker;
+                    Place place = nearbyMarker.getNearbyBaseMarker().getPlace();
+                    NearbyInfoDialog.showYourself(getActivity(), place);
+                }
+                return false;
+            });
 
-                addCurrentLocationMarker(mapboxMap);
-            }
+            addCurrentLocationMarker(mapboxMap);
         });
         if (PreferenceManager.getDefaultSharedPreferences(getActivity()).getBoolean("theme",true)) {
             mapView.setStyleUrl(getResources().getString(R.string.map_theme_dark));

@@ -27,12 +27,7 @@ public class WelcomeActivity extends BaseActivity {
 
         pager.setAdapter(adapter);
         indicator.setViewPager(pager);
-        adapter.setCallback(new WelcomePagerAdapter.Callback() {
-            @Override
-            public void onYesClicked() {
-                finish();
-            }
-        });
+        adapter.setCallback(this::finish);
     }
 
     @Override

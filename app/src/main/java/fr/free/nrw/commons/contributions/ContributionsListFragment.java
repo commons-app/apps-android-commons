@@ -29,6 +29,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.nearby.NearbyActivity;
 import timber.log.Timber;
 
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.app.Activity.RESULT_OK;
 
 public class ContributionsListFragment extends Fragment {
@@ -110,11 +111,11 @@ public class ContributionsListFragment extends Fragment {
 
                     // Here, thisActivity is the current activity
                     if (ContextCompat.checkSelfPermission(getActivity(),
-                            Manifest.permission.READ_EXTERNAL_STORAGE)
+                            READ_EXTERNAL_STORAGE)
                             != PackageManager.PERMISSION_GRANTED) {
 
                         // Should we show an explanation?
-                        if (shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                        if (shouldShowRequestPermissionRationale(READ_EXTERNAL_STORAGE)) {
 
                             // Show an explanation to the user *asynchronously* -- don't block
                             // this thread waiting for the user's response! After the user
@@ -122,15 +123,9 @@ public class ContributionsListFragment extends Fragment {
 
                             new AlertDialog.Builder(getActivity())
                                     .setMessage(getString(R.string.storage_permission_rationale))
-                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-
-                                            requestPermissions(
-                                                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                                                    1);
-                                            dialog.dismiss();
-                                        }
+                                    .setPositiveButton("OK", (dialog, which) -> {
+                                        requestPermissions(new String[]{READ_EXTERNAL_STORAGE}, 1);
+                                        dialog.dismiss();
                                     })
                                     .setNegativeButton("Cancel", null)
                                     .create()
@@ -140,7 +135,7 @@ public class ContributionsListFragment extends Fragment {
 
                             // No explanation needed, we can request the permission.
 
-                            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                            requestPermissions(new String[]{READ_EXTERNAL_STORAGE},
                                     1);
 
                             // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an

@@ -125,19 +125,16 @@ public  class       MultipleShareActivity
             Contribution up = photosList.get(i);
             final int uploadCount = i + 1; // Goddamn Java
 
-            uploadController.startUpload(up, new UploadController.ContributionUploadProgress() {
-                @Override
-                public void onUploadStarted(Contribution contribution) {
-                    dialog.setProgress(uploadCount);
-                    if(uploadCount == photosList.size()) {
-                        dialog.dismiss();
-                        Toast startingToast = Toast.makeText(
-                                CommonsApplication.getInstance(),
-                                R.string.uploading_started,
-                                Toast.LENGTH_LONG
-                        );
-                        startingToast.show();
-                    }
+            uploadController.startUpload(up, contribution -> {
+                dialog.setProgress(uploadCount);
+                if (uploadCount == photosList.size()) {
+                    dialog.dismiss();
+                    Toast startingToast = Toast.makeText(
+                            CommonsApplication.getInstance(),
+                            R.string.uploading_started,
+                            Toast.LENGTH_LONG
+                    );
+                    startingToast.show();
                 }
             });
         }
