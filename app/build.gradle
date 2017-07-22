@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'jacoco-android'
 apply from: 'quality.gradle'
 apply plugin: 'com.getkeepsafe.dexcount'
@@ -73,6 +74,11 @@ android {
         disable 'MissingTranslation'
         disable 'ExtraTranslation'
         abortOnError false
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     //FIXME: Temporary fix for https://github.com/commons-app/apps-android-commons/issues/709
