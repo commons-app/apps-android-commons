@@ -30,7 +30,10 @@ import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
@@ -116,41 +119,7 @@ public  class       ContributionsActivity
     @Override
     protected void onStart() {
         super.onStart();
-        if (true) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle(getResources().getString(R.string.feedback_popup_title));
-            builder.setMessage(getResources().getString(R.string.feedback_popup_description));
-            builder.setPositiveButton(getResources().getString(R.string.feedback_popup_accept)
-                    , new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    // Go to the page
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources()
-                            .getString(R.string.feedback_page_url)));
-                    startActivity(browserIntent);
-                    dialog.dismiss();
-                }
-            });
-            builder.setNeutralButton(getResources().getString(R.string.feedback_popup_remind)
-                    ,new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    // Dismiss the dialog to show it later
-                    dialog.dismiss();
-                }
-            });
-            builder.setNegativeButton(getResources().getString(R.string.feedback_popup_decline)
-                    , new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    // Dismiss the dialog and not to show it later
-                    dialog.dismiss();
-                }
-            });
-            AlertDialog alert = builder.create();
-            alert.show();
-        } else {
-
-        }
+        displayFeedbackPopup();
     }
 
     @Override
@@ -384,5 +353,69 @@ public  class       ContributionsActivity
     public static void startYourself(Context context) {
         Intent contributionsIntent = new Intent(context, ContributionsActivity.class);
         context.startActivity(contributionsIntent);
+    }
+
+    private void displayFeedbackPopup(){
+
+        Date strDate = null;
+        try {
+            String valid_until = "23/08/2017";
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            strDate = sdf.parse(valid_until);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        final SharedPreferences prefs =  PreferenceManager.getDefaultSharedPreferences
+                (CommonsApplication.getInstance());
+
+        // boolean to save users request about displaying popup
+        boolean displayFeedbackPopup = prefs.getBoolean("display_feedbak_popup", true);
+
+        // boolean to recognize is application re-started. Will be used for "remind me later" option
+        boolean isApplicationStarted = prefs.getBoolean("is_app_started" , true);
+
+        // if time is valid and shared pref says display
+        if (new Date().before(strDate) && displayFeedbackPopup && isApplicationStarted) {
+            // The window will be displayed once per application start
+            prefs.edit().putBoolean("is_app_started" , false).commit();
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(getResources().getString(R.string.feedback_popup_title));
+            builder.setMessage(getResources().getString(R.string.feedback_popup_description));
+            builder.setPositiveButton(getResources().getString(R.string.feedback_popup_accept)
+                    , new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Go to the page
+                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri
+                                    .parse(getResources()
+                                    .getString(R.string.feedback_page_url)));
+                            startActivity(browserIntent);
+                            // No need to dislay this window to the user again.
+                            prefs.edit().putBoolean("display_feedbak_popup" , false).commit();
+                            dialog.dismiss();
+                        }
+                    });
+            builder.setNeutralButton(getResources().getString(R.string.feedback_popup_remind)
+                    ,new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Dismiss the dialog to show it later,
+                            // don't set "display_feedbak_popup" to false, user wants to see it latr
+                            dialog.dismiss();
+                        }
+                    });
+            builder.setNegativeButton(getResources().getString(R.string.feedback_popup_decline)
+                    , new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Dismiss the dialog and not to show it later
+                            prefs.edit().putBoolean("display_feedbak_popup", false).commit();
+                            dialog.dismiss();
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
     }
 }
