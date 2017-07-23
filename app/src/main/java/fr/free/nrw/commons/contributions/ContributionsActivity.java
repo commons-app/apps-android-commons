@@ -355,19 +355,19 @@ public  class       ContributionsActivity
         context.startActivity(contributionsIntent);
     }
 
-    private void displayFeedbackPopup(){
+    private void displayFeedbackPopup() {
 
         Date strDate = null;
         try {
-            String valid_until = "23/08/2017";
+            String validUntil = "23/08/2017";
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            strDate = sdf.parse(valid_until);
+            strDate = sdf.parse(validUntil);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        final SharedPreferences prefs =  PreferenceManager.getDefaultSharedPreferences
-                (CommonsApplication.getInstance());
+        final SharedPreferences prefs =  PreferenceManager.getDefaultSharedPreferences(
+                CommonsApplication.getInstance());
 
         // boolean to save users request about displaying popup
         boolean displayFeedbackPopup = prefs.getBoolean("display_feedbak_popup", true);
@@ -383,8 +383,8 @@ public  class       ContributionsActivity
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle(getResources().getString(R.string.feedback_popup_title));
             builder.setMessage(getResources().getString(R.string.feedback_popup_description));
-            builder.setPositiveButton(getResources().getString(R.string.feedback_popup_accept)
-                    , new DialogInterface.OnClickListener() {
+            builder.setPositiveButton(getResources().getString(R.string.feedback_popup_accept),
+                    new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             // Go to the page
                             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri
