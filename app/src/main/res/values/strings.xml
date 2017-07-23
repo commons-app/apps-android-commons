@@ -202,6 +202,12 @@ Tap this message (or hit back) to skip this step.</string>
   <string name="no_description_found">no description found</string>
   <string name="nearby_info_menu_commons_article">Commons file page</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata item</string>
-    <string name="error_while_cache">Error while caching pictures</string>
+  <string name="error_while_cache">Error while caching pictures</string>
+  <string name="feedback_popup_title">We need your feedbacks</string>
+  <string name="feedback_popup_description">We are planning several new features and improvements for the app! Have your say.</string>
+  <string name="feedback_popup_decline">Decline</string>
+  <string name="feedback_popup_remind">Remind me later</string>
+  <string name="feedback_popup_accept">Join to discussion</string>
+  <string name="feedback_page_url">https://meta.wikimedia.org/wiki/Grants:Project/Improve_\'Upload_to_Commons\'_Android_App/Renewal/User_feedback</string>
 
 </resources>
