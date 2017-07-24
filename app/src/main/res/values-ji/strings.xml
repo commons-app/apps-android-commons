@@ -93,6 +93,8 @@
   <string name="warning">ווארענונג</string>
   <string name="yes">יא</string>
   <string name="no">ניין</string>
+  <string name="media_detail_license">ליצענץ</string>
+  <string name="media_detail_coordinates">קאארדינאטן</string>
   <string name="welcome_image_tulip">טולפאן</string>
   <string name="cancel">אַנולירן</string>
   <string name="navigation_drawer_open">אפֿן</string>
