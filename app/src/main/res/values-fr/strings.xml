@@ -76,7 +76,6 @@
   <string name="title_activity_signup">S’inscrire</string>
   <string name="menu_about">À propos</string>
   <string name="about_license">Les logiciels Open Source sont publiés sous la &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;licence Apache v2&lt;/a&gt;. %1$s et son logo sont des marques déposées de la Fondation Wikimédia qui sont utilisées avec l’autorisation de la Fondation Wikimédia. Nous ne sommes pas approuvés par ou affiliés à la Fondation Wikimédia.</string>
-  <string name="trademarked_name">Wikimédia Communs</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sources&lt;/a&gt; et &lt;a href=\"https://commons-app.github.io/\"&gt;site web&lt;/a&gt; sur GitHub. Créer un nouveau &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;signalement GitHub&lt;/a&gt; pour signales des bogues ou des suggestions.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politique de confidentialité&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Remerciements&lt;/a&gt;</string>

@@ -76,7 +76,6 @@
   <string name="title_activity_signup">注册</string>
   <string name="menu_about">关于</string>
   <string name="about_license">本开源软件采用&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache许可证第二版&lt;/a&gt;授权。%1$s及其标志是维基媒体基金会的商标，并在维基媒体基金会的许可下使用。我们并不被维基媒体基金会认可，也不与基金会有任何联系。</string>
-  <string name="trademarked_name">维基共享资源</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;源代码&lt;/a&gt;和&lt;a href=\"https://commons-app.github.io/\"&gt;网站&lt;/a&gt;位于GitHub。创建新的&lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub问题&lt;/a&gt;以发送错误报告和建议。</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;隐私政策&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;制作人员&lt;/a&gt;</string>
