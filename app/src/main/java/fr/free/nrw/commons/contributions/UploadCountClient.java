@@ -14,10 +14,10 @@ import fr.free.nrw.commons.concurrency.BackgroundPoolExceptionHandler;
 import fr.free.nrw.commons.concurrency.ThreadPoolExecutorService;
 import timber.log.Timber;
 
-public class UploadCountClient {
+class UploadCountClient {
     private ThreadPoolExecutorService threadPoolExecutor;
 
-    public UploadCountClient() {
+    UploadCountClient() {
         threadPoolExecutor = new ThreadPoolExecutorService.Builder("bg-pool")
                 .setPoolSize(Runtime.getRuntime().availableProcessors())
                 .setExceptionHandler(new BackgroundPoolExceptionHandler())
@@ -27,29 +27,26 @@ public class UploadCountClient {
     private static final String UPLOAD_COUNT_URL_TEMPLATE =
             "https://tools.wmflabs.org/urbanecmbot/uploadsbyuser/uploadsbyuser.py?user=%s";
 
-    public ListenableFuture<Integer> getUploadCount(final String userName) {
+    ListenableFuture<Integer> getUploadCount(final String userName) {
         final SettableFuture<Integer> future = SettableFuture.create();
-        threadPoolExecutor.schedule(new Runnable() {
-            @Override
-            public void run() {
-                URL url;
+        threadPoolExecutor.schedule(() -> {
+            URL url;
+            try {
+                url = new URL(String.format(Locale.ENGLISH, UPLOAD_COUNT_URL_TEMPLATE,
+                        new PageTitle(userName).getText()));
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 try {
-                    url = new URL(String.format(Locale.ENGLISH, UPLOAD_COUNT_URL_TEMPLATE,
-                            new PageTitle(userName).getText()));
-                    HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                    try {
-                        BufferedReader bufferedReader = new BufferedReader(new
-                                InputStreamReader(urlConnection.getInputStream()));
-                        String uploadCount = bufferedReader.readLine();
-                        bufferedReader.close();
-                        future.set(Integer.parseInt(uploadCount));
-                    } finally {
-                        urlConnection.disconnect();
-                    }
-                } catch (Exception e) {
-                    Timber.e("Error getting upload count Error", e);
-                    future.setException(e);
+                    BufferedReader bufferedReader = new BufferedReader(new
+                            InputStreamReader(urlConnection.getInputStream()));
+                    String uploadCount = bufferedReader.readLine();
+                    bufferedReader.close();
+                    future.set(Integer.parseInt(uploadCount));
+                } finally {
+                    urlConnection.disconnect();
                 }
+            } catch (Exception e) {
+                Timber.e("Error getting upload count Error", e);
+                future.setException(e);
             }
         });
         return future;

@@ -409,12 +409,9 @@ public class CategorizationFragment extends Fragment {
         categoriesNotFoundView = (TextView) rootView.findViewById(R.id.categoriesNotFound);
         categoriesSkip = (TextView) rootView.findViewById(R.id.categoriesExplanation);
 
-        categoriesSkip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().onBackPressed();
-                getActivity().finish();
-            }
+        categoriesSkip.setOnClickListener(view -> {
+            getActivity().onBackPressed();
+            getActivity().finish();
         });
 
         ArrayList<CategoryItem> items;
@@ -429,16 +426,13 @@ public class CategorizationFragment extends Fragment {
         categoriesAdapter = new CategoriesAdapter(getActivity(), items);
         categoriesList.setAdapter(categoriesAdapter);
 
-        categoriesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int index, long id) {
-                CheckedTextView checkedView = (CheckedTextView) view;
-                CategoryItem item = (CategoryItem) adapterView.getAdapter().getItem(index);
-                item.selected = !item.selected;
-                checkedView.setChecked(item.selected);
-                if (item.selected) {
-                    updateCategoryCount(item.name);
-                }
+        categoriesList.setOnItemClickListener((adapterView, view, index, id) -> {
+            CheckedTextView checkedView = (CheckedTextView) view;
+            CategoryItem item = (CategoryItem) adapterView.getAdapter().getItem(index);
+            item.selected = !item.selected;
+            checkedView.setChecked(item.selected);
+            if (item.selected) {
+                updateCategoryCount(item.name);
             }
         });
 
@@ -463,15 +457,12 @@ public class CategorizationFragment extends Fragment {
         if (rootView != null) {
             rootView.setFocusableInTouchMode(true);
             rootView.requestFocus();
-            rootView.setOnKeyListener(new View.OnKeyListener() {
-                @Override
-                public boolean onKey(View v, int keyCode, KeyEvent event) {
-                    if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
-                        backButtonDialog();
-                        return true;
-                    }
-                    return false;
+            rootView.setOnKeyListener((v, keyCode, event) -> {
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+                    backButtonDialog();
+                    return true;
                 }
+                return false;
             });
         }
     }
@@ -487,18 +478,10 @@ public class CategorizationFragment extends Fragment {
 
         builder.setMessage("Are you sure you want to go back? The image will not have any categories saved.")
                 .setTitle("Warning");
-        builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                //No need to do anything, user remains on categorization screen
-            }
+        builder.setPositiveButton("No", (dialog, id) -> {
+            //No need to do anything, user remains on categorization screen
         });
-        builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                getActivity().finish();
-            }
-        });
+        builder.setNegativeButton("Yes", (dialog, id) -> getActivity().finish());
 
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -537,20 +520,12 @@ public class CategorizationFragment extends Fragment {
 
                     builder.setMessage("Images without categories are rarely usable. Are you sure you want to submit without selecting categories?")
                             .setTitle("No Categories Selected");
-                    builder.setPositiveButton("No, go back", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
-                            //Exit menuItem so user can select their categories
-                            return;
-                        }
+                    builder.setPositiveButton("No, go back", (dialog, id) -> {
+                        //Exit menuItem so user can select their categories
                     });
-                    builder.setNegativeButton("Yes, submit", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
-                            //Proceed to submission
-                            onCategoriesSaveHandler.onCategoriesSave(selectedCategories);
-                            return;
-                        }
+                    builder.setNegativeButton("Yes, submit", (dialog, id) -> {
+                        //Proceed to submission
+                        onCategoriesSaveHandler.onCategoriesSave(selectedCategories);
                     });
 
                     AlertDialog dialog = builder.create();

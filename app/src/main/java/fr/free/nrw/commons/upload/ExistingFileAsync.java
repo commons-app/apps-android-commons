@@ -72,21 +72,13 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setMessage(R.string.file_exists)
                     .setTitle(R.string.warning);
-            builder.setPositiveButton(R.string.no, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int id) {
-                    //Go back to ContributionsActivity
-                    Intent intent = new Intent(context, ContributionsActivity.class);
-                    context.startActivity(intent);
-                    callback.onResult(Result.DUPLICATE_CANCELLED);
-                }
+            builder.setPositiveButton(R.string.no, (dialog, id) -> {
+                //Go back to ContributionsActivity
+                Intent intent = new Intent(context, ContributionsActivity.class);
+                context.startActivity(intent);
+                callback.onResult(Result.DUPLICATE_CANCELLED);
             });
-            builder.setNegativeButton(R.string.yes, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int id) {
-                    callback.onResult(Result.DUPLICATE_PROCEED);
-                }
-            });
+            builder.setNegativeButton(R.string.yes, (dialog, id) -> callback.onResult(Result.DUPLICATE_PROCEED));
 
             AlertDialog dialog = builder.create();
             dialog.show();
