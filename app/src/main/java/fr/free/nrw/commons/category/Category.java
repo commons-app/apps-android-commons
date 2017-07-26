@@ -26,7 +26,7 @@ public class Category {
         this.name = name;
     }
 
-    public Date getLastUsed() {
+    private Date getLastUsed() {
         // warning: Date objects are mutable.
         return (Date)lastUsed.clone();
     }
@@ -36,11 +36,11 @@ public class Category {
         this.lastUsed = (Date)lastUsed.clone();
     }
 
-    public void touch() {
+    private void touch() {
         lastUsed = new Date();
     }
 
-    public int getTimesUsed() {
+    private int getTimesUsed() {
         return timesUsed;
     }
 
@@ -70,7 +70,7 @@ public class Category {
         }
     }
 
-    public ContentValues toContentValues() {
+    private ContentValues toContentValues() {
         ContentValues cv = new ContentValues();
         cv.put(Table.COLUMN_NAME, getName());
         cv.put(Table.COLUMN_LAST_USED, getLastUsed().getTime());

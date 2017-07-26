@@ -7,6 +7,7 @@ import android.view.View;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -14,18 +15,20 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
+import static fr.free.nrw.commons.category.CategorizationFragment.SEARCH_CATS_LIMIT;
+
 /**
  * Sends asynchronous queries to the Commons MediaWiki API to retrieve categories that share the
  * same prefix as the keyword typed in by the user. The 'acprefix' action-specific parameter is used
  * for this purpose. This class should be subclassed in CategorizationFragment.java to aggregate
  * the results.
  */
-public class PrefixUpdater extends AsyncTask<Void, Void, List<String>> {
+class PrefixUpdater extends AsyncTask<Void, Void, List<String>> {
 
+    private final CategorizationFragment catFragment;
     private String filter;
-    private CategorizationFragment catFragment;
 
-    public PrefixUpdater(CategorizationFragment catFragment) {
+    PrefixUpdater(CategorizationFragment catFragment) {
         this.catFragment = catFragment;
     }
 
@@ -90,8 +93,9 @@ public class PrefixUpdater extends AsyncTask<Void, Void, List<String>> {
         }
 
         //if user types in something that is in cache, return cached category
-        if (catFragment.categoriesCache.containsKey(filter)) {
-            ArrayList<String> cachedItems = new ArrayList<>(catFragment.categoriesCache.get(filter));
+        HashMap<String, ArrayList<String>> categoriesCache = catFragment.getCategoriesCache();
+        if (categoriesCache.containsKey(filter)) {
+            ArrayList<String> cachedItems = new ArrayList<>(categoriesCache.get(filter));
             Timber.d("Found cache items, waiting for filter");
             return new ArrayList<>(filterIrrelevantResults(cachedItems));
         }
@@ -101,7 +105,7 @@ public class PrefixUpdater extends AsyncTask<Void, Void, List<String>> {
         MediaWikiApi api = CommonsApplication.getInstance().getMWApi();
         List<String> categories = new ArrayList<>();
         try {
-            categories = api.allCategories(CategorizationFragment.SEARCH_CATS_LIMIT, this.filter);
+            categories = api.allCategories(SEARCH_CATS_LIMIT, this.filter);
             Timber.d("Prefix URL filter %s", categories);
         } catch (IOException e) {
             Timber.e(e, "IO Exception: ");
