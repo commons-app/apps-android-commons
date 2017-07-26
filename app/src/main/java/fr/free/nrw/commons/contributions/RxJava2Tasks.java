@@ -16,15 +16,15 @@ class RxJava2Tasks {
 
     static Single<Integer> getUploadCount(String userName) {
         return Single.fromCallable(() -> {
-                    URL url = new URL(String.format(Locale.ENGLISH, UPLOAD_COUNT_URL_TEMPLATE,
-                                new PageTitle(userName).getText()));
-                    HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                    BufferedReader bufferedReader = new BufferedReader(new
-                            InputStreamReader(urlConnection.getInputStream()));
-                    String uploadCount = bufferedReader.readLine();
-                    bufferedReader.close();
-                    urlConnection.disconnect();
-                    return Integer.parseInt(uploadCount);
+            URL url = new URL(String.format(Locale.ENGLISH, UPLOAD_COUNT_URL_TEMPLATE,
+                    new PageTitle(userName).getText()));
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            BufferedReader bufferedReader = new BufferedReader(new
+                    InputStreamReader(urlConnection.getInputStream()));
+            String uploadCount = bufferedReader.readLine();
+            bufferedReader.close();
+            urlConnection.disconnect();
+            return Integer.parseInt(uploadCount);
         });
     }
 }
