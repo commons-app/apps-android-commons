@@ -357,11 +357,11 @@ public  class       ContributionsActivity
 
     private void displayFeedbackPopup() {
 
-        Date strDate = null;
+        Date popupMessageEndDate = null;
         try {
             String validUntil = "23/08/2017";
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            strDate = sdf.parse(validUntil);
+            popupMessageEndDate = sdf.parse(validUntil);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -376,12 +376,12 @@ public  class       ContributionsActivity
         int appStartCounter = prefs.getInt("app_start_counter" ,0);
 
         // if time is valid and shared pref says display
-        if (new Date().before(strDate) && displayFeedbackPopup && (appStartCounter == 4)) {
+        if (new Date().before(popupMessageEndDate) && displayFeedbackPopup && (appStartCounter == 4)) {
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle(getResources().getString(R.string.feedback_popup_title));
-            builder.setMessage(getResources().getString(R.string.feedback_popup_description));
-            builder.setPositiveButton(getResources().getString(R.string.feedback_popup_accept),
+            new AlertDialog.Builder(this)
+            .setTitle(getResources().getString(R.string.feedback_popup_title))
+            .setMessage(getResources().getString(R.string.feedback_popup_description))
+            .setPositiveButton(getResources().getString(R.string.feedback_popup_accept),
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             // Go to the page
@@ -393,8 +393,8 @@ public  class       ContributionsActivity
                             prefs.edit().putBoolean("display_feedbak_popup" , false).commit();
                             dialog.dismiss();
                         }
-                    });
-            builder.setNegativeButton(getResources().getString(R.string.feedback_popup_decline),
+                    })
+            .setNegativeButton(getResources().getString(R.string.feedback_popup_decline),
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -402,9 +402,8 @@ public  class       ContributionsActivity
                             prefs.edit().putBoolean("display_feedbak_popup", false).commit();
                             dialog.dismiss();
                         }
-                    });
-            AlertDialog alert = builder.create();
-            alert.show();
+                    })
+            .create().show();
         }
     }
 }
