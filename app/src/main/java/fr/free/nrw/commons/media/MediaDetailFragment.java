@@ -119,12 +119,7 @@ public class MediaDetailFragment extends Fragment {
         licenseList = new LicenseList(getActivity());
 
         // Progressively darken the image in the background when we scroll detail pane up
-        scrollListener = new ViewTreeObserver.OnScrollChangedListener() {
-            @Override
-            public void onScrollChanged() {
-                updateTheDarkness();
-            }
-        };
+        scrollListener = this::updateTheDarkness;
         view.getViewTreeObserver().addOnScrollChangedListener(scrollListener);
 
         // Layout layoutListener to size the spacer item relative to the available space.
@@ -280,15 +275,12 @@ public class MediaDetailFragment extends Fragment {
 
         textView.setText(catName);
         if (categoriesLoaded && categoriesPresent) {
-            textView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    String selectedCategoryTitle = "Category:" + catName;
-                    Intent viewIntent = new Intent();
-                    viewIntent.setAction(Intent.ACTION_VIEW);
-                    viewIntent.setData(new PageTitle(selectedCategoryTitle).getCanonicalUri());
-                    startActivity(viewIntent);
-                }
+            textView.setOnClickListener(view -> {
+                String selectedCategoryTitle = "Category:" + catName;
+                Intent viewIntent = new Intent();
+                viewIntent.setAction(Intent.ACTION_VIEW);
+                viewIntent.setData(new PageTitle(selectedCategoryTitle).getCanonicalUri());
+                startActivity(viewIntent);
             });
         }
         return item;

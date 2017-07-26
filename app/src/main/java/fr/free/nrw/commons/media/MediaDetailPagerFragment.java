@@ -72,12 +72,7 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
         public Fragment getItem(int i) {
             if (i == 0) {
                 // See bug https://code.google.com/p/android/issues/detail?id=27526
-                pager.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        getActivity().supportInvalidateOptionsMenu();
-                    }
-                }, 5);
+                pager.postDelayed(() -> getActivity().supportInvalidateOptionsMenu(), 5);
             }
             return MediaDetailFragment.forMedia(i, editable);
         }
@@ -100,14 +95,11 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
             final int pageNumber = savedInstanceState.getInt("current-page");
             // Adapter doesn't seem to be loading immediately.
             // Dear God, please forgive us for our sins
-            view.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    pager.setAdapter(adapter);
-                    pager.setCurrentItem(pageNumber, false);
-                    getActivity().supportInvalidateOptionsMenu();
-                    adapter.notifyDataSetChanged();
-                }
+            view.postDelayed(() -> {
+                pager.setAdapter(adapter);
+                pager.setCurrentItem(pageNumber, false);
+                getActivity().supportInvalidateOptionsMenu();
+                adapter.notifyDataSetChanged();
             }, 100);
         } else {
             pager.setAdapter(adapter);
@@ -196,13 +188,8 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !(ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)) {
             Snackbar.make(getView(), R.string.storage_permission_rationale,
                     Snackbar.LENGTH_INDEFINITE)
-                    .setAction(R.string.ok, new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            ActivityCompat.requestPermissions(getActivity(),
-                                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-                        }
-                    }).show();
+                    .setAction(R.string.ok, view -> ActivityCompat.requestPermissions(getActivity(),
+                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1)).show();
         } else {
             final DownloadManager manager = (DownloadManager)getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
             manager.enqueue(req);

@@ -197,8 +197,8 @@ public class CommonsApplication extends Application {
 
         AccountManager accountManager = AccountManager.get(this);
         Account[] allAccounts = accountManager.getAccountsByType(AccountUtil.accountType());
-        for (int index = 0; index < allAccounts.length; index++) {
-            accountManager.removeAccount(allAccounts[index], null, null);
+        for (Account allAccount : allAccounts) {
+            accountManager.removeAccount(allAccount, null, null);
         }
 
         //TODO: fix preference manager 

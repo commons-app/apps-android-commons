@@ -86,12 +86,9 @@ public class CategorizationFragment extends Fragment implements CategoryClickedL
 
         categoriesList.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        categoriesSkip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().onBackPressed();
-                getActivity().finish();
-            }
+        categoriesSkip.setOnClickListener(view -> {
+            getActivity().onBackPressed();
+            getActivity().finish();
         });
 
         ArrayList<CategoryItem> items;
@@ -127,15 +124,12 @@ public class CategorizationFragment extends Fragment implements CategoryClickedL
         if (rootView != null) {
             rootView.setFocusableInTouchMode(true);
             rootView.requestFocus();
-            rootView.setOnKeyListener(new View.OnKeyListener() {
-                @Override
-                public boolean onKey(View v, int keyCode, KeyEvent event) {
-                    if (event.getAction() == ACTION_UP && keyCode == KEYCODE_BACK) {
-                        backButtonDialog();
-                        return true;
-                    }
-                    return false;
+            rootView.setOnKeyListener((v, keyCode, event) -> {
+                if (event.getAction() == ACTION_UP && keyCode == KEYCODE_BACK) {
+                    backButtonDialog();
+                    return true;
                 }
+                return false;
             });
         }
     }
@@ -188,18 +182,12 @@ public class CategorizationFragment extends Fragment implements CategoryClickedL
                                     + "Are you sure you want to submit without selecting "
                                     + "categories?")
                             .setTitle("No Categories Selected")
-                            .setPositiveButton("No, go back", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int id) {
-                                    //Exit menuItem so user can select their categories
-                                }
+                            .setPositiveButton("No, go back", (dialog, id) -> {
+                                //Exit menuItem so user can select their categories
                             })
-                            .setNegativeButton("Yes, submit", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int id) {
-                                    //Proceed to submission
-                                    onCategoriesSaveHandler.onCategoriesSave(selectedCategories);
-                                }
+                            .setNegativeButton("Yes, submit", (dialog, id) -> {
+                                //Proceed to submission
+                                onCategoriesSaveHandler.onCategoriesSave(selectedCategories);
                             })
                             .create()
                             .show();
@@ -465,18 +453,10 @@ public class CategorizationFragment extends Fragment implements CategoryClickedL
                 .setMessage("Are you sure you want to go back? The image will not " 
                         + "have any categories saved.")
                 .setTitle("Warning")
-                .setPositiveButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        //No need to do anything, user remains on categorization screen
-                    }
+                .setPositiveButton("No", (dialog, id) -> {
+                    //No need to do anything, user remains on categorization screen
                 })
-                .setNegativeButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        getActivity().finish();
-                    }
-                })
+                .setNegativeButton("Yes", (dialog, id) -> getActivity().finish())
                 .create()
                 .show();
     }

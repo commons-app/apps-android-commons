@@ -55,12 +55,7 @@ public class NavigationBaseActivity extends BaseActivity
     public void initBackButton() {
         int backStackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
         toggle.setDrawerIndicatorEnabled(backStackEntryCount == 0);
-        toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        toggle.setToolbarNavigationClickListener(v -> onBackPressed());
     }
 
     public void initBack() {
@@ -118,25 +113,17 @@ public class NavigationBaseActivity extends BaseActivity
                 new AlertDialog.Builder(this)
                         .setMessage(R.string.logout_verification)
                         .setCancelable(false)
-                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                ((CommonsApplication) getApplicationContext())
-                                        .clearApplicationData(NavigationBaseActivity.this);
-                                Intent nearbyIntent = new Intent(
-                                        NavigationBaseActivity.this, LoginActivity.class);
-                                nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(nearbyIntent);
-                                finish();
-                            }
+                        .setPositiveButton(R.string.yes, (dialog, which) -> {
+                            ((CommonsApplication) getApplicationContext())
+                                    .clearApplicationData(NavigationBaseActivity.this);
+                            Intent nearbyIntent = new Intent(
+                                    NavigationBaseActivity.this, LoginActivity.class);
+                            nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(nearbyIntent);
+                            finish();
                         })
-                        .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        })
+                        .setNegativeButton(R.string.no, (dialog, which) -> dialog.cancel())
                         .show();
                 return true;
             default:
