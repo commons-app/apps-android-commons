@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.category;
 
 import android.content.ContentProviderClient;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.AsyncTask;
@@ -15,7 +14,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -56,11 +54,16 @@ import static fr.free.nrw.commons.category.CategoryContentProvider.AUTHORITY;
 public class CategorizationFragment extends Fragment implements CategoryClickedListener {
     public static final int SEARCH_CATS_LIMIT = 25;
 
-    @BindView(R.id.categoriesListBox) RecyclerView categoriesList;
-    @BindView(R.id.categoriesSearchBox) EditText categoriesFilter;
-    @BindView(R.id.categoriesSearchInProgress) ProgressBar categoriesSearchInProgress;
-    @BindView(R.id.categoriesNotFound) TextView categoriesNotFoundView;
-    @BindView(R.id.categoriesExplanation) TextView categoriesSkip;
+    @BindView(R.id.categoriesListBox)
+    RecyclerView categoriesList;
+    @BindView(R.id.categoriesSearchBox)
+    EditText categoriesFilter;
+    @BindView(R.id.categoriesSearchInProgress)
+    ProgressBar categoriesSearchInProgress;
+    @BindView(R.id.categoriesNotFound)
+    TextView categoriesNotFoundView;
+    @BindView(R.id.categoriesExplanation)
+    TextView categoriesSkip;
 
     private RVRendererAdapter<CategoryItem> categoriesAdapter;
     private OnCategoriesSaveHandler onCategoriesSaveHandler;
@@ -450,7 +453,7 @@ public class CategorizationFragment extends Fragment implements CategoryClickedL
 
     public void backButtonDialog() {
         new AlertDialog.Builder(getActivity())
-                .setMessage("Are you sure you want to go back? The image will not " 
+                .setMessage("Are you sure you want to go back? The image will not "
                         + "have any categories saved.")
                 .setTitle("Warning")
                 .setPositiveButton("No", (dialog, id) -> {
