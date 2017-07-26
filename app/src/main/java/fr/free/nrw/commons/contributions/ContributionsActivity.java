@@ -373,12 +373,10 @@ public  class       ContributionsActivity
         boolean displayFeedbackPopup = prefs.getBoolean("display_feedbak_popup", true);
 
         // boolean to recognize is application re-started. Will be used for "remind me later" option
-        boolean isApplicationStarted = prefs.getBoolean("is_app_started" , true);
+        int appStartCounter = prefs.getInt("app_start_counter" ,0);
 
         // if time is valid and shared pref says display
-        if (new Date().before(strDate) && displayFeedbackPopup && isApplicationStarted) {
-            // The window will be displayed once per application start
-            prefs.edit().putBoolean("is_app_started" , false).commit();
+        if (new Date().before(strDate) && displayFeedbackPopup && (appStartCounter == 4)) {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle(getResources().getString(R.string.feedback_popup_title));
@@ -393,15 +391,6 @@ public  class       ContributionsActivity
                             startActivity(browserIntent);
                             // No need to dislay this window to the user again.
                             prefs.edit().putBoolean("display_feedbak_popup" , false).commit();
-                            dialog.dismiss();
-                        }
-                    });
-            builder.setNeutralButton(getResources().getString(R.string.feedback_popup_remind)
-                    ,new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            // Dismiss the dialog to show it later,
-                            // don't set "display_feedbak_popup" to false, user wants to see it latr
                             dialog.dismiss();
                         }
                     });
