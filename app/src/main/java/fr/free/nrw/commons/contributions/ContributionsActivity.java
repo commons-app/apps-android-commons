@@ -394,8 +394,8 @@ public  class       ContributionsActivity
                             dialog.dismiss();
                         }
                     });
-            builder.setNegativeButton(getResources().getString(R.string.feedback_popup_decline)
-                    , new DialogInterface.OnClickListener() {
+            builder.setNegativeButton(getResources().getString(R.string.feedback_popup_decline),
+                    new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             // Dismiss the dialog and not to show it later
