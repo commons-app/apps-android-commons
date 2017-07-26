@@ -208,6 +208,6 @@ Tap this message (or hit back) to skip this step.</string>
   <string name="feedback_popup_description">We are planning several new features and improvements for the app! Would you like to review them and provide feedback? \n\n(You can always access this by selecting "Developer plans" in the navigation drawer)</string>
   <string name="feedback_popup_decline">No thanks</string>
   <string name="feedback_popup_accept">Sure, take me there!</string>
-  <string name="feedback_page_url">https://meta.wikimedia.org/wiki/Grants:Project/Improve_\'Upload_to_Commons\'_Android_App/Renewal</string>
+  <string name="feedback_page_url">https://meta.wikimedia.org/wiki/Grants:Project/Improve_\'Upload_to_Commons\'_Android_App/Renewal/User_feedback</string>
 
 </resources>
