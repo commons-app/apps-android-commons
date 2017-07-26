@@ -2,8 +2,10 @@ package fr.free.nrw.commons.media;
 
 import android.content.Intent;
 import android.database.DataSetObserver;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -18,6 +20,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 import fr.free.nrw.commons.License;
 import fr.free.nrw.commons.LicenseList;
@@ -26,6 +29,7 @@ import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.location.LatLng;
 import timber.log.Timber;
 
 public class MediaDetailFragment extends Fragment {
@@ -115,12 +119,7 @@ public class MediaDetailFragment extends Fragment {
         licenseList = new LicenseList(getActivity());
 
         // Progressively darken the image in the background when we scroll detail pane up
-        scrollListener = new ViewTreeObserver.OnScrollChangedListener() {
-            @Override
-            public void onScrollChanged() {
-                updateTheDarkness();
-            }
-        };
+        scrollListener = this::updateTheDarkness;
         view.getViewTreeObserver().addOnScrollChangedListener(scrollListener);
 
         // Layout layoutListener to size the spacer item relative to the available space.
@@ -262,6 +261,7 @@ public class MediaDetailFragment extends Fragment {
     }
 
     private void rebuildCatList() {
+        categoryContainer.removeAllViews();
         // @fixme add the category items
         for (String cat : categoryNames) {
             View catLabel = buildCatLabel(cat);
@@ -275,15 +275,12 @@ public class MediaDetailFragment extends Fragment {
 
         textView.setText(catName);
         if (categoriesLoaded && categoriesPresent) {
-            textView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    String selectedCategoryTitle = "Category:" + catName;
-                    Intent viewIntent = new Intent();
-                    viewIntent.setAction(Intent.ACTION_VIEW);
-                    viewIntent.setData(new PageTitle(selectedCategoryTitle).getCanonicalUri());
-                    startActivity(viewIntent);
-                }
+            textView.setOnClickListener(view -> {
+                String selectedCategoryTitle = "Category:" + catName;
+                Intent viewIntent = new Intent();
+                viewIntent.setAction(Intent.ACTION_VIEW);
+                viewIntent.setData(new PageTitle(selectedCategoryTitle).getCanonicalUri());
+                startActivity(viewIntent);
             });
         }
         return item;
@@ -327,7 +324,7 @@ public class MediaDetailFragment extends Fragment {
 
     private String prettyUploadedDate(Media media) {
         Date date = media.getDateUploaded();
-        if (date.toString() == null || date.toString().isEmpty()) {
+        if (date == null || date.toString() == null || date.toString().isEmpty()) {
             return "Uploaded date not available";
         }
         SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
@@ -340,6 +337,9 @@ public class MediaDetailFragment extends Fragment {
      * @return Coordinates as text.
      */
     private String prettyCoordinates(Media media) {
-        return media.getCoordinates();
+        if (media.getCoordinates() == null) {
+            return getString(R.string.media_detail_coordinates_empty);
+        }
+        return media.getCoordinates().getPrettyCoordinateString();
     }
 }

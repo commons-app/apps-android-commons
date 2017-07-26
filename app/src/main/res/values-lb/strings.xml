@@ -74,7 +74,7 @@
   <string name="title_activity_settings">Astellungen</string>
   <string name="title_activity_signup">Mellt Iech un</string>
   <string name="menu_about">Iwwer</string>
-  <string name="about_license">\'Open-Source-Software\' verëffentlecht ënner der &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache Lizenz v2&lt;/a&gt;. Wikimedia Commons a säi Logo si Markenzeeche vun der Wikimedia Foundation a gi mat der Autorisatioun vun der Wikimedia Foundation benotzt. Mir sinn net confirméiert vun oder liéiert mat der Wikimedia Foundation.</string>
+  <string name="about_license">\'Open-Source-Software\' verëffentlecht ënner der &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache Lizenz v2&lt;/a&gt;. %1$s a säi Logo si Markenzeeche vun der Wikimedia Foundation a gi mat der Autorisatioun vun der Wikimedia Foundation benotzt. Mir sinn net confirméiert vun oder liéiert mat der Wikimedia Foundation.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Quell&lt;/a&gt; an &lt;a href=\"https://commons-app.github.io/\"&gt;Internetsite&lt;/a&gt; vu GitHub.\nLeet w.e.g. &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt; e GitHub Problem&lt;/a&gt; fir Problemer ze mellen a Proposen ze maachen.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Dateschutzerklärung&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Merci&lt;/a&gt;</string>
@@ -148,6 +148,9 @@
   <string name="media_detail_description">Beschreiwung</string>
   <string name="media_detail_description_explanation">D\' Beschreiwung vum Medium kënnt hei. Dëst ka méiglecherweis laang sinn a gëtt eventuell op méi Zeile verdeelt. Mir hoffen et gesäit trotzdeem gutt aus.</string>
   <string name="media_detail_uploaded_date">Datum vum Eroplueden</string>
+  <string name="media_detail_license">Lizenz</string>
+  <string name="media_detail_coordinates">Koordinaten</string>
+  <string name="media_detail_coordinates_empty">Keng uginn</string>
   <string name="become_a_tester_title">Beta-Tester ginn</string>
   <string name="become_a_tester_description">Schreift Iech op GooglePlay a fir eise Beta-Kanal a kritt fréi Zougang zu neie Funktiounen a Verbesserunge vu Feeler</string>
   <string name="use_wikidata">Wikidata benotzen</string>
@@ -182,6 +185,6 @@
   <string name="navigation_item_info">Uleedung</string>
   <string name="nearby_needs_permissions">Plazen nobäi kënnen net gewise ginn ouni Rechter fir d\'Lokalisatioun</string>
   <string name="no_description_found">keng Beschreiwung fonnt</string>
-  <string name="nearby_info_menu_commons_article">Commons-Artikel</string>
+  <string name="nearby_info_menu_commons_article">Commons-Fichierssäit</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata-Element</string>
 </resources>

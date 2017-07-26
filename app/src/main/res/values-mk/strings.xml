@@ -75,7 +75,7 @@
   <string name="title_activity_settings">Нагодувања</string>
   <string name="title_activity_signup">Регистрација</string>
   <string name="menu_about">За извршникот</string>
-  <string name="about_license">Програм со отворен код, издаден под лиценцата &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Апачи вер. 2&lt;/a&gt;. ризницата и нејзиното лого се заштитни знаци на Фондацијата Викимедија и се користат со нејзина дозвола. Ние не сме поддржани и поврзани со Фондацијата Викимедија.</string>
+  <string name="about_license">Програм со отворен код, издаден под лиценцата &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Апачи вер. 2&lt;/a&gt;. %1$s и нејзиното лого се заштитни знаци на Фондацијата Викимедија и се користат со нејзина дозвола. Ние не сме поддржани и поврзани со Фондацијата Викимедија.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Извор&lt;/a&gt; и &lt;a href=\"https://commons-app.github.io/\"&gt;мреж. место&lt;/a&gt; на GitHub&lt;/a&gt;. Создајте нов &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;случај на GitHub&lt;/a&gt; за пријавување грешки и давање предлози.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Заштита на личните податоци\"&gt;Заштита_на_личните_податоци&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Заслуги&lt;/a&gt;</string>
@@ -149,6 +149,9 @@
   <string name="media_detail_description">Опис</string>
   <string name="media_detail_description_explanation">Тука оди описот на податотеката. Ова потенцијално може да биде прилично долго, и ќе треба да се преломи во неколку реда. Се надеваме дека ќе изгледа добро.</string>
   <string name="media_detail_uploaded_date">Датум на подигање</string>
+  <string name="media_detail_license">Лиценца</string>
+  <string name="media_detail_coordinates">Координати</string>
+  <string name="media_detail_coordinates_empty">не се укажани</string>
   <string name="become_a_tester_title">Станете бета-испробувач</string>
   <string name="become_a_tester_description">Пријавете се на нашиот бета-канал на Google Play и добивајте ран пристап до нови можности и исправки на грешки</string>
   <string name="use_wikidata">Користи Википодатоци</string>
@@ -187,7 +190,7 @@
   <string name="navigation_item_info">Упатства</string>
   <string name="nearby_needs_permissions">Местата во близина не можат да се прикажат без дозволи за местоположба.</string>
   <string name="no_description_found">не најдов описи</string>
-  <string name="nearby_info_menu_commons_article">Статија на Ризницата</string>
+  <string name="nearby_info_menu_commons_article">Податотечна страница</string>
   <string name="nearby_info_menu_wikidata_article">Предмет на Википодатоците</string>
   <string name="error_while_cache">Грешка при меѓускладирање на сликите</string>
 </resources>

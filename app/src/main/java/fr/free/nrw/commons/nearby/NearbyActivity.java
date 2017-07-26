@@ -2,7 +2,6 @@ package fr.free.nrw.commons.nearby;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
@@ -41,7 +40,8 @@ import timber.log.Timber;
 
 public class NearbyActivity extends NavigationBaseActivity {
 
-    @BindView(R.id.progressBar) ProgressBar progressBar;
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
     private boolean isMapViewActive = false;
     private static final int LOCATION_REQUEST = 1;
 
@@ -115,15 +115,11 @@ public class NearbyActivity extends NavigationBaseActivity {
 
                         new AlertDialog.Builder(this)
                                 .setMessage(getString(R.string.location_permission_rationale))
-                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-
-                                        ActivityCompat.requestPermissions(NearbyActivity.this,
-                                                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                                                LOCATION_REQUEST);
-                                        dialog.dismiss();
-                                    }
+                                .setPositiveButton("OK", (dialog, which) -> {
+                                    ActivityCompat.requestPermissions(NearbyActivity.this,
+                                            new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                                            LOCATION_REQUEST);
+                                    dialog.dismiss();
                                 })
                                 .setNegativeButton("Cancel", null)
                                 .create()
@@ -175,26 +171,19 @@ public class NearbyActivity extends NavigationBaseActivity {
         LocationManager manager = (LocationManager) getSystemService(LOCATION_SERVICE);
         if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             Timber.d("GPS is not enabled");
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-            alertDialogBuilder.setMessage(R.string.gps_disabled)
+            new AlertDialog.Builder(this)
+                    .setMessage(R.string.gps_disabled)
                     .setCancelable(false)
                     .setPositiveButton(R.string.enable_gps,
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    Intent callGPSSettingIntent = new Intent(
-                                            android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                                    Timber.d("Loaded settings page");
-                                    startActivityForResult(callGPSSettingIntent, 1);
-                                }
-                            });
-            alertDialogBuilder.setNegativeButton(R.string.menu_cancel_upload,
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    });
-            AlertDialog alert = alertDialogBuilder.create();
-            alert.show();
+                            (dialog, id) -> {
+                                Intent callGPSSettingIntent = new Intent(
+                                        android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                Timber.d("Loaded settings page");
+                                startActivityForResult(callGPSSettingIntent, 1);
+                            })
+                    .setNegativeButton(R.string.menu_cancel_upload, (dialog, id) -> dialog.cancel())
+                    .create()
+                    .show();
         } else {
             Timber.d("GPS is enabled");
         }
@@ -257,7 +246,7 @@ public class NearbyActivity extends NavigationBaseActivity {
 
         private final Context mContext;
 
-        private NearbyAsyncTask (Context context) {
+        private NearbyAsyncTask(Context context) {
             mContext = context;
         }
 

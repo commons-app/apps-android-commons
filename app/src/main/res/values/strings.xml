@@ -93,6 +93,7 @@ Tap this message (or hit back) to skip this step.</string>
   <string name="menu_retry_upload">Retry</string>
   <string name="menu_cancel_upload">Cancel</string>
   <string name="share_license_summary">This image will be licensed under %1$s</string>
+  <string name="media_upload_policy">By submitting this picture, I declare that this is my own work, that it does not contain copyrighted material or selfies, and otherwise adheres to &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons policies&lt;/a&gt;.</string>
   <string name="menu_download">Download</string>
   <string name="preference_license">License</string>
   <string name="use_previous">Use previous title/description</string>
@@ -153,7 +154,10 @@ Tap this message (or hit back) to skip this step.</string>
   <string name="media_detail_media_title">Title of the media</string>
   <string name="media_detail_description">Description</string>
   <string name="media_detail_description_explanation">Description of the media goes here. This can potentially be fairly long, and will need to wrap across multiple lines. We hope it looks nice though.</string>
-  <string name="media_detail_uploaded_date">Uploaded date</string>>
+  <string name="media_detail_uploaded_date">Uploaded date</string>
+  <string name="media_detail_license">License</string>
+  <string name="media_detail_coordinates">Coordinates</string>
+  <string name="media_detail_coordinates_empty">None provided</string>
   <string name="become_a_tester_title">Become a Beta Tester</string>
   <string name="become_a_tester_description">Opt-in to our beta channel on Google Play and get early access to new features and bug fixes</string>
   <string name="beta_opt_in_link">https://play.google.com/apps/testing/fr.free.nrw.commons</string>
@@ -197,7 +201,7 @@ Tap this message (or hit back) to skip this step.</string>
 
   <string name="nearby_needs_permissions">Nearby places cannot be displayed without location permissions</string>
   <string name="no_description_found">no description found</string>
-  <string name="nearby_info_menu_commons_article">Commons Article</string>
+  <string name="nearby_info_menu_commons_article">Commons file page</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata item</string>
     <string name="error_while_cache">Error while caching pictures</string>
 

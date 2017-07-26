@@ -57,7 +57,7 @@ public class MwVolleyApi {
         Timber.d("URL: %s", apiUrl);
 
         JsonRequest<QueryResponse> request = new QueryRequest(apiUrl,
-                new LogResponseListener<QueryResponse>(), new LogResponseErrorListener());
+                new LogResponseListener<>(), new LogResponseErrorListener());
         getQueue().add(request);
     }
 

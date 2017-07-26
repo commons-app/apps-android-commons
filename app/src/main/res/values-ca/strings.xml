@@ -144,6 +144,6 @@
   <string name="navigation_item_feedback">Comentaris</string>
   <string name="navigation_item_logout">Finalitza la sessió</string>
   <string name="no_description_found">no s\'ha trobat cap descripció</string>
-  <string name="nearby_info_menu_commons_article">Article al Commons</string>
+  <string name="nearby_info_menu_commons_article" fuzzy="true">Article al Commons</string>
   <string name="nearby_info_menu_wikidata_article">Element del Wikidata</string>
 </resources>

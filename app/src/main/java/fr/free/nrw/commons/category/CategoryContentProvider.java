@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import fr.free.nrw.commons.CommonsApplication;
@@ -41,8 +42,10 @@ public class CategoryContentProvider extends ContentProvider {
         return false;
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
-    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    public Cursor query(@NonNull Uri uri, String[] projection, String selection,
+                        String[] selectionArgs, String sortOrder) {
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
         queryBuilder.setTables(Category.Table.TABLE_NAME);
 
@@ -53,7 +56,8 @@ public class CategoryContentProvider extends ContentProvider {
 
         switch(uriType) {
             case CATEGORIES:
-                cursor = queryBuilder.query(db, projection, selection, selectionArgs, null, null, sortOrder);
+                cursor = queryBuilder.query(db, projection, selection, selectionArgs,
+                        null, null, sortOrder);
                 break;
             case CATEGORIES_ID:
                 cursor = queryBuilder.query(db,
@@ -75,15 +79,16 @@ public class CategoryContentProvider extends ContentProvider {
     }
 
     @Override
-    public String getType(Uri uri) {
+    public String getType(@NonNull Uri uri) {
         return null;
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
-    public Uri insert(Uri uri, ContentValues contentValues) {
+    public Uri insert(@NonNull Uri uri, ContentValues contentValues) {
         int uriType = uriMatcher.match(uri);
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
-        long id = 0;
+        long id;
         switch (uriType) {
             case CATEGORIES:
                 id = sqlDB.insert(Category.Table.TABLE_NAME, null, contentValues);
@@ -96,12 +101,13 @@ public class CategoryContentProvider extends ContentProvider {
     }
 
     @Override
-    public int delete(Uri uri, String s, String[] strings) {
+    public int delete(@NonNull Uri uri, String s, String[] strings) {
         return 0;
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
-    public int bulkInsert(Uri uri, ContentValues[] values) {
+    public int bulkInsert(@NonNull Uri uri, @NonNull ContentValues[] values) {
         Timber.d("Hello, bulk insert! (CategoryContentProvider)");
         int uriType = uriMatcher.match(uri);
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
@@ -122,8 +128,10 @@ public class CategoryContentProvider extends ContentProvider {
         return values.length;
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
-    public int update(Uri uri, ContentValues contentValues, String selection, String[] selectionArgs) {
+    public int update(@NonNull Uri uri, ContentValues contentValues, String selection,
+                      String[] selectionArgs) {
         /*
         SQL Injection warnings: First, note that we're not exposing this to the outside world (exported="false")
         Even then, we should make sure to sanitize all user input appropriately. Input that passes through ContentValues
@@ -133,7 +141,7 @@ public class CategoryContentProvider extends ContentProvider {
          */
         int uriType = uriMatcher.match(uri);
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
-        int rowsUpdated = 0;
+        int rowsUpdated;
         switch (uriType) {
             case CATEGORIES_ID:
                 int id = Integer.valueOf(uri.getLastPathSegment());
@@ -144,7 +152,8 @@ public class CategoryContentProvider extends ContentProvider {
                             Category.Table.COLUMN_ID + " = ?",
                             new String[] { String.valueOf(id) } );
                 } else {
-                    throw new IllegalArgumentException("Parameter `selection` should be empty when updating an ID");
+                    throw new IllegalArgumentException(
+                            "Parameter `selection` should be empty when updating an ID");
                 }
                 break;
             default:

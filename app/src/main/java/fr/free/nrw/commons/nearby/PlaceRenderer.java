@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.nearby;
 
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,7 @@ class PlaceRenderer extends Renderer<Place> {
     @BindView(R.id.icon) ImageView icon;
     private final PlaceClickedListener listener;
 
-    PlaceRenderer(PlaceClickedListener listener) {
+    PlaceRenderer(@NonNull PlaceClickedListener listener) {
         this.listener = listener;
     }
 
@@ -35,14 +36,7 @@ class PlaceRenderer extends Renderer<Place> {
 
     @Override
     protected void hookListeners(View view) {
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (listener != null) {
-                    listener.placeClicked(getContent());
-                }
-            }
-        });
+        view.setOnClickListener(v -> listener.placeClicked(getContent()));
     }
 
     @Override

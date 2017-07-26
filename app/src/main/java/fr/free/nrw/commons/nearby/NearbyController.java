@@ -2,9 +2,10 @@ package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.preference.PreferenceManager;
+import android.support.graphics.drawable.VectorDrawableCompat;
 
-import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import java.util.Map;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.utils.UiUtils;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.utils.LengthUtils.computeDistanceBetween;
@@ -50,13 +52,10 @@ public class NearbyController {
                 distances.put(place, computeDistanceBetween(place.location, curLatLng));
             }
             Collections.sort(places,
-                    new Comparator<Place>() {
-                        @Override
-                        public int compare(Place lhs, Place rhs) {
-                            double lhsDistance = distances.get(lhs);
-                            double rhsDistance = distances.get(rhs);
-                            return (int) (lhsDistance - rhsDistance);
-                        }
+                    (lhs, rhs) -> {
+                        double lhsDistance = distances.get(lhs);
+                        double rhsDistance = distances.get(rhs);
+                        return (int) (lhsDistance - rhsDistance);
                     }
             );
         }
@@ -98,12 +97,14 @@ public class NearbyController {
 
         placeList = placeList.subList(0, Math.min(placeList.size(), MAX_RESULTS));
 
+        Bitmap icon = UiUtils.getBitmap(
+                VectorDrawableCompat.create(
+                        context.getResources(), R.drawable.ic_custom_map_marker, context.getTheme()
+                ));
+
         for (Place place: placeList) {
             String distance = formatDistanceBetween(curLatLng, place.location);
             place.setDistance(distance);
-
-            Icon icon = IconFactory.getInstance(context)
-                    .fromResource(R.drawable.custom_map_marker);
 
             NearbyBaseMarker nearbyBaseMarker = new NearbyBaseMarker();
             nearbyBaseMarker.title(place.name);
@@ -112,7 +113,8 @@ public class NearbyController {
                             place.location.getLatitude(),
                             place.location.getLongitude()));
             nearbyBaseMarker.place(place);
-            nearbyBaseMarker.icon(icon);
+            nearbyBaseMarker.icon(IconFactory.getInstance(context)
+                    .fromBitmap(icon));
 
             baseMarkerOptions.add(nearbyBaseMarker);
         }
