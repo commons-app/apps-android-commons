@@ -3,6 +3,7 @@ package fr.free.nrw.commons.mwapi;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -41,6 +42,8 @@ import timber.log.Timber;
  * @author Addshore
  */
 public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
+    private String wikiMediaToolforgeUrl = "https://tools.wmflabs.org/";
+
     private static final String THUMB_SIZE = "640";
     private AbstractHttpClient httpClient;
     private MWApi api;
@@ -55,6 +58,11 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         params.setParameter(CoreProtocolPNames.USER_AGENT, "Commons/" + BuildConfig.VERSION_NAME + " (https://mediawiki.org/wiki/Apps/Commons) Android/" + Build.VERSION.RELEASE);
         httpClient = new DefaultHttpClient(cm, params);
         api = new MWApi(apiURL, httpClient);
+    }
+
+    @VisibleForTesting
+    public void setWikiMediaToolforgeUrl(String wikiMediaToolforgeUrl) {
+        this.wikiMediaToolforgeUrl = wikiMediaToolforgeUrl;
     }
 
     /**
@@ -376,14 +384,16 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @NonNull
     public Single<Integer> getUploadCount(String userName) {
         final String uploadCountUrlTemplate =
-                "https://tools.wmflabs.org/urbanecmbot/uploadsbyuser/uploadsbyuser.py?user=%s";
+                wikiMediaToolforgeUrl + "urbanecmbot/uploadsbyuser/uploadsbyuser.py";
 
         return Single.fromCallable(() -> {
             String url = String.format(
                     Locale.ENGLISH,
                     uploadCountUrlTemplate,
                     new PageTitle(userName).getText());
-            HttpResponse response = Http.get(url).use(httpClient).asResponse();
+            HttpResponse response = Http.get(url).use(httpClient)
+                    .data("user", userName)
+                    .asResponse();
             String uploadCount = EntityUtils.toString(response.getEntity()).trim();
             return Integer.parseInt(uploadCount);
         });

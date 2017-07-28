@@ -41,6 +41,7 @@ public class ApacheHttpClientMediaWikiApiTest {
     public void setUp() throws Exception {
         server = new MockWebServer();
         testObject = new ApacheHttpClientMediaWikiApi("http://" + server.getHostName() + ":" + server.getPort() + "/");
+        testObject.setWikiMediaToolforgeUrl("http://" + server.getHostName() + ":" + server.getPort() + "/");
     }
 
     @After
@@ -198,10 +199,14 @@ public class ApacheHttpClientMediaWikiApiTest {
     }
 
     @Test
-    public void getUploadCount() {
+    public void getUploadCount() throws InterruptedException {
         server.enqueue(new MockResponse().setBody("23\n"));
 
-        TestObserver<Integer> testObserver = testObject.getUploadCount("username").test();
+        TestObserver<Integer> testObserver = testObject.getUploadCount("testUsername").test();
+
+        RecordedRequest request = server.takeRequest();
+        Map<String, String> params = parseQueryParams(request);
+        assertEquals("testUsername", params.get("user"));
 
         assertEquals(1, testObserver.valueCount());
         assertEquals(23, (int)testObserver.values().get(0));
