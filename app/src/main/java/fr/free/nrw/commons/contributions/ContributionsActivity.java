@@ -273,7 +273,8 @@ public  class       ContributionsActivity
         CommonsApplication application = CommonsApplication.getInstance();
 
         compositeDisposable.add(
-                RxJava2Tasks.getUploadCount(application.getCurrentAccount().name)
+                CommonsApplication.getInstance().getMWApi()
+                        .getUploadCount(application.getCurrentAccount().name)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(

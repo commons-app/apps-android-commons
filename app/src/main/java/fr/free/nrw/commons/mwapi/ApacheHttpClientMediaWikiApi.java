@@ -17,6 +17,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.CoreProtocolPNames;
+import org.apache.http.util.EntityUtils;
 import org.mediawiki.api.ApiResult;
 import org.mediawiki.api.MWApi;
 
@@ -27,10 +28,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import fr.free.nrw.commons.BuildConfig;
+import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.Utils;
 import in.yuvi.http.fluent.Http;
+import io.reactivex.Single;
 import timber.log.Timber;
 
 /**
@@ -365,5 +369,23 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             String imageUrl = result.getString("/api/upload/imageinfo/@url");
             return new UploadResult(resultStatus, dateUploaded, canonicalFilename, imageUrl);
         }
+    }
+
+
+    @Override
+    @NonNull
+    public Single<Integer> getUploadCount(String userName) {
+        final String UPLOAD_COUNT_URL_TEMPLATE =
+                "https://tools.wmflabs.org/urbanecmbot/uploadsbyuser/uploadsbyuser.py?user=%s";
+
+        return Single.fromCallable(() -> {
+            String url = String.format(
+                    Locale.ENGLISH,
+                    UPLOAD_COUNT_URL_TEMPLATE,
+                    new PageTitle(userName).getText());
+            HttpResponse response = Http.get(url).use(httpClient).asResponse();
+            String uploadCount = EntityUtils.toString(response.getEntity()).trim();
+            return Integer.parseInt(uploadCount);
+        });
     }
 }
