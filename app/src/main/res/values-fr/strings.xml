@@ -88,6 +88,7 @@
   <string name="menu_retry_upload">Réessayer</string>
   <string name="menu_cancel_upload">Annuler</string>
   <string name="share_license_summary">Cette image sera sous licence %1$s</string>
+  <string name="media_upload_policy">En soumettant cette image, je déclare qu\'elle est l\'oeuvre de mon travail, qu\'elle ne contient pas d\'élément protégé par les droits d\'auteurs ni de portraits, et qu\'elle est par ailleur conforme à  &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;la politique de Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Télécharger</string>
   <string name="preference_license">Licence</string>
   <string name="use_previous">Utiliser le titre ou la description précédent</string>

@@ -88,6 +88,7 @@
   <string name="menu_retry_upload">重试</string>
   <string name="menu_cancel_upload">取消</string>
   <string name="share_license_summary">该图像会采用%1$s授权</string>
+  <string name="media_upload_policy">通过提交该图片，我声明这是我自己的作品，其不包含受版权保护的材料或自拍像，并遵循&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;维基共享资源&lt;/a&gt;方针。</string>
   <string name="menu_download">下载</string>
   <string name="preference_license">许可协议</string>
   <string name="use_previous">使用之前的标题/描述</string>
