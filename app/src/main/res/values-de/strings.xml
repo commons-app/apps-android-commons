@@ -88,6 +88,7 @@
   <string name="menu_retry_upload">Erneut versuchen</string>
   <string name="menu_cancel_upload">Abbrechen</string>
   <string name="share_license_summary">Dieses Bild wird lizenziert unter %1$s</string>
+  <string name="media_upload_policy">Durch das Hochladen dieses Bildes erkläre ich, dass dies mein eigenes Werk ist, das kein urheberrechtlich geschütztes Material oder Selfies enthält und das auch sonst die &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/de\"&gt;Wikimedia-Commons-Richtlinien&lt;/a&gt; einhält.</string>
   <string name="menu_download">Herunterladen</string>
   <string name="preference_license">Lizenz</string>
   <string name="use_previous">Vorherige(n) Titel/Beschreibung verwenden</string>

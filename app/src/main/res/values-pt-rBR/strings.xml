@@ -75,7 +75,7 @@
   <string name="title_activity_settings">Configurações</string>
   <string name="title_activity_signup">Criar conta</string>
   <string name="menu_about">Sobre</string>
-  <string name="about_license" fuzzy="true">Software livre distribuído sob a &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Wikimedia Commons e seu logotipo são marcas registradas da Wikimedia Foundation e são usadas com a permissão da Wikimedia Foundation. Não somos endossados nem afiliados à Wikimedia Foundation.</string>
+  <string name="about_license">Software livre distribuído sob a &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. %1$s e seu logotipo são marcas registradas da Wikimedia Foundation e são usadas com a permissão da Wikimedia Foundation. Não somos endossados nem afiliados à Wikimedia Foundation.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Fonte&lt;/a&gt; e &lt;a href=\"https://commons-app.github.io/\"&gt;site&lt;/a&gt; em GitHub. Crie um novo &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub issue&lt;/a&gt; para relatórios de bugs e sugestões.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Política de privacidade&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Créditos&lt;/a&gt;</string>
@@ -88,6 +88,7 @@
   <string name="menu_retry_upload">Repetir</string>
   <string name="menu_cancel_upload">Cancelar</string>
   <string name="share_license_summary">Essa imagem será licenciada sob %1$s</string>
+  <string name="media_upload_policy">Ao enviar esta imagem, declaro que este é o meu próprio trabalho, que não contém material protegido ou selfies, e, de outra forma, adere a &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Políticas do Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Download</string>
   <string name="preference_license">Licença</string>
   <string name="use_previous">Usar o título/descrição anterior</string>
@@ -149,6 +150,9 @@
   <string name="media_detail_description">Descrição</string>
   <string name="media_detail_description_explanation">Descrição da mídia aqui. Isso pode ser potencialmente longo e precisará envolver múltiplas linhas. Esperamos que seja agradável.</string>
   <string name="media_detail_uploaded_date">Data de envio.</string>
+  <string name="media_detail_license">Licença</string>
+  <string name="media_detail_coordinates">Coordenadas</string>
+  <string name="media_detail_coordinates_empty">Nenhum fornecido</string>
   <string name="become_a_tester_title">Seja um Testador Beta</string>
   <string name="become_a_tester_description">Entre no nosso canal beta no Google Play e receba acesso prévio a novos recursos e correções de erros</string>
   <string name="use_wikidata">Usa Wikidata</string>
@@ -187,7 +191,7 @@
   <string name="navigation_item_info">Tutorial</string>
   <string name="nearby_needs_permissions">Os locais próximos não podem ser exibidos sem permissões de localização</string>
   <string name="no_description_found">Nenhuma descrição encontrada</string>
-  <string name="nearby_info_menu_commons_article" fuzzy="true">Artigo de Commons</string>
+  <string name="nearby_info_menu_commons_article">Página de arquivo do Commons</string>
   <string name="nearby_info_menu_wikidata_article">Item do Wikidata</string>
   <string name="error_while_cache">Erro durante o cache de imagens</string>
 </resources>
