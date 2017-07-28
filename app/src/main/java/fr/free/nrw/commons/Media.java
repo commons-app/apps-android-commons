@@ -142,7 +142,7 @@ public class Media implements Parcelable {
         return coordinates;
     }
 
-    public void setCoordinates(LatLng coordinates) {
+    public void setCoordinates(@Nullable LatLng coordinates) {
         this.coordinates = coordinates;
     }
 
@@ -201,7 +201,7 @@ public class Media implements Parcelable {
         this.filename = filename;
     }
 
-    public Media(Uri localUri, String imageUrl, String filename, String description, long dataLength, Date dateCreated, Date dateUploaded, String creator) {
+    public Media(Uri localUri, String imageUrl, String filename, String description, long dataLength, Date dateCreated, @Nullable Date dateUploaded, String creator) {
         this();
         this.localUri = localUri;
         this.imageUrl = imageUrl;

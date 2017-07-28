@@ -148,6 +148,8 @@
   <string name="media_detail_description">বিবরণ</string>
   <string name="media_detail_description_explanation">মিডিয়ার বিবরণ এখানে যাবে। এই মোটামুটি দীর্ঘ হতে পারে এবং একাধিক লাইনে লিখতে হতে পারে। আমরা আশা করি এটি দেখতে সুন্দর হবে।</string>
   <string name="media_detail_uploaded_date">আপলোডের তারিখ</string>
+  <string name="media_detail_license">লাইসেন্স</string>
+  <string name="media_detail_coordinates">স্থানাঙ্কসমূহ</string>
   <string name="become_a_tester_title">বিটা টেস্টার হোন</string>
   <string name="use_wikidata">উইকিউপাত্ত ব্যবহার করুন</string>
   <string name="use_wikidata_summary">(সতর্কতা: এটি নিষ্ক্রিয় করা অধিক পরিমাণে মোবাইল ডেটা খরচ হওয়ার কারণ হতে পারে)</string>
@@ -182,6 +184,6 @@
   <string name="navigation_item_info">ভূমিকা</string>
   <string name="nearby_needs_permissions">অবস্থানের অনুমতি ছাড়া কাছাকাছি জায়গাগুলি প্রদর্শন করা যাবে না</string>
   <string name="no_description_found">কোন বিবরণ পাওয়া যায়নি</string>
-  <string name="nearby_info_menu_commons_article" fuzzy="true">কমন্স নিবন্ধ</string>
+  <string name="nearby_info_menu_commons_article">কমন্সে ফাইলের পাতা</string>
   <string name="nearby_info_menu_wikidata_article">উইকিউপাত্ত পদ</string>
 </resources>

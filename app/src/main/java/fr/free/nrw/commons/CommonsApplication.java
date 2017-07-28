@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
 import android.support.v4.util.LruCache;
+import android.util.Log;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.stetho.Stetho;
@@ -139,6 +140,10 @@ public class CommonsApplication extends Application {
         System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0");
 
         Fresco.initialize(this);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(
+                CommonsApplication.getInstance());
+        // Increase counter by one, starts from 1
+        prefs.edit().putInt("app_start_counter", prefs.getInt("app_start_counter" ,0) + 1).commit();
 
         //For caching area -> categories
         cacheData  = new CacheController();
