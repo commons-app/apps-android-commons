@@ -375,13 +375,13 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @Override
     @NonNull
     public Single<Integer> getUploadCount(String userName) {
-        final String UPLOAD_COUNT_URL_TEMPLATE =
+        final String uploadCountUrlTemplate =
                 "https://tools.wmflabs.org/urbanecmbot/uploadsbyuser/uploadsbyuser.py?user=%s";
 
         return Single.fromCallable(() -> {
             String url = String.format(
                     Locale.ENGLISH,
-                    UPLOAD_COUNT_URL_TEMPLATE,
+                    uploadCountUrlTemplate,
                     new PageTitle(userName).getText());
             HttpResponse response = Http.get(url).use(httpClient).asResponse();
             String uploadCount = EntityUtils.toString(response.getEntity()).trim();
