@@ -18,20 +18,22 @@
         android:id="@+id/titleEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableEnd="@drawable/mapbox_info_icon_default"
+        android:drawableRight="@drawable/mapbox_info_icon_default"
         android:scrollHorizontally="false"
         android:maxLines="1"
         android:hint="@string/share_title_hint"
-        android:imeOptions="flagNoExtractUi"
-        />
+        android:imeOptions="flagNoExtractUi" />
 
     <EditText
         android:id="@+id/descEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableEnd="@drawable/mapbox_info_icon_default"
+        android:drawableRight="@drawable/mapbox_info_icon_default"
         android:inputType="textMultiLine"
         android:hint="@string/share_description_hint"
-        android:imeOptions="flagNoExtractUi"
-        />
+        android:imeOptions="flagNoExtractUi" />
 
     <Spinner
         android:id="@+id/licenseSpinner"

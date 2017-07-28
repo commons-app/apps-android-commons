@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -8,8 +9,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,8 +25,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -175,6 +180,8 @@ public class SingleUploadFragment extends Fragment {
         editor.commit();
     }
 
+
+
     @OnTouch(R.id.share_license_summary) boolean showLicence(View view, MotionEvent motionEvent) {
         if (motionEvent.getActionMasked() == MotionEvent.ACTION_DOWN) {
             Intent intent = new Intent();
@@ -197,6 +204,65 @@ public class SingleUploadFragment extends Fragment {
         titleEdit.setText(title);
         descEdit.setText(desc);
     }
+
+    /**
+     * Copied from https://stackoverflow.com/a/26269435/8065933
+     * @param view
+     * @param motionEvent
+     * @return
+     */
+    @OnTouch(R.id.titleEdit) boolean titleInfo(View view, MotionEvent motionEvent){
+
+        final int DRAWABLE_RIGHT = 2;
+
+        if(motionEvent.getAction() == MotionEvent.ACTION_UP) {
+            if(motionEvent.getRawX() >= (titleEdit.getRight() - titleEdit.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle(R.string.media_detail_title);
+                builder.setMessage(R.string.title_info);
+                builder.setCancelable(true);
+                builder.setNeutralButton(android.R.string.ok,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alert = builder.create();
+                alert.show();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @OnTouch(R.id.descEdit) boolean descriptionInfo(View view, MotionEvent motionEvent){
+
+        final int DRAWABLE_RIGHT = 2;
+
+        if(motionEvent.getAction() == MotionEvent.ACTION_UP) {
+            if(motionEvent.getRawX() >= (titleEdit.getRight() - titleEdit.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle(R.string.media_detail_description);
+                builder.setMessage(R.string.description_info);
+                builder.setCancelable(true);
+                builder.setNeutralButton(android.R.string.ok,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alert = builder.create();
+                alert.show();
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     private void setLicenseSummary(String license) {
         licenseSummaryView.setText(getString(R.string.share_license_summary, getString(Utils.licenseNameFor(license))));
