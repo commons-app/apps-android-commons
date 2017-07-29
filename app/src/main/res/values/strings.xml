@@ -74,8 +74,6 @@
 Start typing to add categories.
 Tap this message (or hit back) to skip this step.</string>
   <string name="categories_activity_title">Categories</string>
-  <string name="preference_tracking">Usage reports</string>
-  <string name="preference_tracking_summary">Send usage reports to Wikimedia to help us improve the app</string>
   <string name="title_activity_settings">Settings</string>
   <string name="title_activity_signup">Sign Up</string>
   <string name="menu_about">About</string>
