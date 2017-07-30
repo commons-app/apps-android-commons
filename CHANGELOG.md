@@ -1,5 +1,19 @@
 # Wikimedia Commons for Android
 
+## v2.5.0 beta
+- Added one-time popup for beta users to provide feedback on IEG renewal proposal
+- Added link to Commons policies in ShareActivity
+- Various string fixes
+- Switched to using vector icons for map markers
+- Added filter for irrelevant categories
+- Fixed various crashes
+- Incremented target SDK to 25
+- Improved appearance of navigation drawer
+- Replaced proprietary app image in tutorial with one that isn't Telegram
+- Fixed camera issue with FileProvider
+- Added RxJava library, migrated to Java 8
+- Various code and continuous integration optimizations
+
 ## v2.4.2 beta
 - Added option to launch tutorial again from nav drawer
 - Added marker for current location in Nearby map

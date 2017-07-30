@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.ParcelFileDescriptor;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
@@ -36,6 +37,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.category.CategorizationFragment;
+import fr.free.nrw.commons.category.OnCategoriesSaveHandler;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.modifications.CategoryModifier;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
@@ -44,6 +46,9 @@ import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
 import fr.free.nrw.commons.mwapi.EventLog;
 import timber.log.Timber;
 
+import static fr.free.nrw.commons.upload.ExistingFileAsync.Result.DUPLICATE_PROCEED;
+import static fr.free.nrw.commons.upload.ExistingFileAsync.Result.NO_DUPLICATE;
+
 /**
  * Activity for the title/desc screen after image is selected. Also starts processing image
  * GPS coordinates or user location (if enabled in Settings) for category suggestions.
@@ -51,7 +56,7 @@ import timber.log.Timber;
 public  class       ShareActivity
         extends     AuthenticatedActivity
         implements  SingleUploadFragment.OnUploadActionInitiated,
-        CategorizationFragment.OnCategoriesSaveHandler {
+        OnCategoriesSaveHandler {
 
     private static final int REQUEST_PERM_ON_CREATE_STORAGE = 1;
     private static final int REQUEST_PERM_ON_CREATE_LOCATION = 2;
@@ -133,12 +138,9 @@ public  class       ShareActivity
             Timber.d("Cache the categories found");
         }
 
-        uploadController.startUpload(title, mediaUri, description, mimeType, source, decimalCoords, new UploadController.ContributionUploadProgress() {
-            @Override
-            public void onUploadStarted(Contribution contribution) {
-                ShareActivity.this.contribution = contribution;
-                showPostUpload();
-            }
+        uploadController.startUpload(title, mediaUri, description, mimeType, source, decimalCoords, c -> {
+            ShareActivity.this.contribution = c;
+            showPostUpload();
         });
     }
 
@@ -317,7 +319,7 @@ public  class       ShareActivity
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                           String[] permissions, int[] grantResults) {
+                                           @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
             case REQUEST_PERM_ON_CREATE_STORAGE: {
                 if (grantResults.length >= 1
@@ -379,14 +381,10 @@ public  class       ShareActivity
                     Timber.d("File SHA1 is: %s", fileSHA1);
 
                     ExistingFileAsync fileAsyncTask =
-                            new ExistingFileAsync(fileSHA1, this, new ExistingFileAsync.Callback() {
-                                @Override
-                                public void onResult(ExistingFileAsync.Result result) {
-                                    Timber.d("%s duplicate check: %s", mediaUri.toString(), result);
-                                    duplicateCheckPassed =
-                                            result == ExistingFileAsync.Result.DUPLICATE_PROCEED
-                                                    || result == ExistingFileAsync.Result.NO_DUPLICATE;
-                                }
+                            new ExistingFileAsync(fileSHA1, this, result -> {
+                                Timber.d("%s duplicate check: %s", mediaUri.toString(), result);
+                                duplicateCheckPassed = (result == DUPLICATE_PROCEED
+                                        || result == NO_DUPLICATE);
                             });
                     fileAsyncTask.execute();
                 } catch (IOException e) {
@@ -401,17 +399,12 @@ public  class       ShareActivity
         }
     }
 
-    private Snackbar requestPermissionUsingSnackBar(
-            String rationale, final String[] perms, final int code) {
+    private Snackbar requestPermissionUsingSnackBar(String rationale,
+                                                    final String[] perms,
+                                                    final int code) {
         Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), rationale,
-                Snackbar.LENGTH_INDEFINITE)
-                .setAction(R.string.ok, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        ActivityCompat.requestPermissions(ShareActivity.this,
-                                perms, code);
-                    }
-                });
+                Snackbar.LENGTH_INDEFINITE).setAction(R.string.ok,
+                view -> ActivityCompat.requestPermissions(ShareActivity.this, perms, code));
         snackbar.show();
         return snackbar;
     }

@@ -62,7 +62,6 @@
   <string name="title_activity_signup">Eman izena</string>
   <string name="menu_about">Honi buruz</string>
   <string name="about_license">Open Source softwarea &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache v2 Lizentziaren&lt;/a&gt; pean egina. Wikimedia Commons eta bere logoa Wikimedia Fundazioaren marka erregistratuak dira eta Wikimedia Fundazioaren baimenarekin erabiltzen dira. Ez gaude Wikimedia Fundaziora afiliatuta.</string>
-  <string name="trademarked_name">Wikimedia Commons</string>
   <string name="about_improve">GitHub-eko &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Iturria&lt;/a&gt; eta &lt;a href=\"https://commons-app.github.io/\"&gt;webgunea&lt;/a&gt;. &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-eko gai&lt;/a&gt; berria sortu erroreen berri emateko.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Pribatutasun politika&lt;/a&gt;</string>
   <string name="title_activity_about">Honi buruz</string>
@@ -74,6 +73,7 @@
   <string name="menu_retry_upload">Berriz saiatu</string>
   <string name="menu_cancel_upload">Utzi</string>
   <string name="share_license_summary">Irudi hau %1$s lizentziapean egongo da</string>
+  <string name="media_upload_policy">Irudi hau bidaltzen, nire lan propioa dela aitortzen dut, copyrighta duten materiala edo selfiak ez duela, eta beste motatakoak &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Ohikoaren arauak&lt;/a&gt;</string>
   <string name="menu_download">Jaitsi</string>
   <string name="preference_license">Lizentzia</string>
   <string name="use_previous">Aurreko izenburu/deskribapena erabili</string>

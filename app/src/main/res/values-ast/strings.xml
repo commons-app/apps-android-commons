@@ -76,7 +76,6 @@
   <string name="title_activity_signup">Date d\'alta</string>
   <string name="menu_about">Tocante a</string>
   <string name="about_license">Software de códigu abiertu lliberáu baxo la &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Llicencia Apache v2&lt;/a&gt;. %1$s ya\'l so logotipu son marques rexistraes de la Fundación Wikimedia y utilícense col so permisu. Nun tamos acreditaos pola Fundación Wikimedia nin tamos afiliaos con ella.</string>
-  <string name="trademarked_name">Wikimedia Commons</string>
   <string name="about_improve">El &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;códigu fonte&lt;/a&gt; ya\'l &lt;a href=\"https://commons-app.github.io/\"&gt;sitiu web&lt;/a&gt; tán en GitHub. Crea una nueva &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;incidencia en GitHub&lt;/a&gt; pa informar de problemes y suxerencies.</string>
   <string name="about_privacy_policy">Wikimedia:Commons-android-strings-about privacy policy/ast</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Créditos&lt;/a&gt;</string>

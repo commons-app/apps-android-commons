@@ -54,6 +54,7 @@
   <string name="menu_cancel_upload">Atcelt</string>
   <string name="menu_download">Lejupielādēt</string>
   <string name="preference_license">Licence</string>
+  <string name="preference_theme">Nakts režīms</string>
   <string name="license_name_cc0">CC0</string>
   <string name="welcome_final_text">Jums šķiet, ka sapratāt?</string>
   <string name="welcome_final_button_text">Jā!</string>
@@ -66,6 +67,7 @@
   <string name="warning">Brīdinājums</string>
   <string name="yes">Jā</string>
   <string name="no">Nē</string>
+  <string name="upload_image">Augšupielādēt attēlu</string>
   <string name="welcome_image_llamas">Lama</string>
   <string name="welcome_image_tulip">Tulpe</string>
   <string name="cancel">Atcelt</string>

@@ -26,6 +26,9 @@ import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import timber.log.Timber;
 
+import static android.view.KeyEvent.KEYCODE_ENTER;
+import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
+
 
 public class LoginActivity extends AccountAuthenticatorActivity {
 
@@ -63,18 +66,8 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         twoFactorEdit.addTextChangedListener(textWatcher);
         passwordEdit.setOnEditorActionListener(newLoginInputActionListener());
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                performLogin();
-            }
-        });
-        signupButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signUp(v);
-            }
-        });
+        loginButton.setOnClickListener(this::performLogin);
+        signupButton.setOnClickListener(this::signUp);
     }
 
     private class LoginTextWatcher implements TextWatcher {
@@ -98,20 +91,17 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     }
 
     private TextView.OnEditorActionListener newLoginInputActionListener() {
-        return new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-                if (loginButton.isEnabled()) {
-                    if (actionId == EditorInfo.IME_ACTION_DONE) {
-                        performLogin();
-                        return true;
-                    } else if ((keyEvent != null) && keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
-                        performLogin();
-                        return true;
-                    }
+        return (textView, actionId, keyEvent) -> {
+            if (loginButton.isEnabled()) {
+                if (actionId == IME_ACTION_DONE) {
+                    performLogin(textView);
+                    return true;
+                } else if ((keyEvent != null) && keyEvent.getKeyCode() == KEYCODE_ENTER) {
+                    performLogin(textView);
+                    return true;
                 }
-                return false;
             }
+            return false;
         };
     }
 
@@ -142,7 +132,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         super.onDestroy();
     }
 
-    private void performLogin() {
+    private void performLogin(View view) {
         Timber.d("Login to start!");
         LoginTask task = getLoginTask();
         task.execute();

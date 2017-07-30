@@ -113,14 +113,6 @@ public class NearbyAdapterFactoryTest {
         assertEquals(PLACE, clickedPlace);
     }
 
-    @Test
-    public void clickViewHandlesMisconfiguredListener() {
-        NearbyAdapterFactory testObject = new NearbyAdapterFactory(null);
-        RVRendererAdapter<Place> result = testObject.create(Collections.singletonList(PLACE));
-        RendererViewHolder viewHolder = renderComponent(result);
-        viewHolder.itemView.performClick();
-    }
-
     @NonNull
     private RendererViewHolder renderComponent(RVRendererAdapter<Place> result) {
         FrameLayout viewGroup = new FrameLayout(RuntimeEnvironment.application);

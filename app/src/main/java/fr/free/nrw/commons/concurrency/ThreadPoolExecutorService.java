@@ -39,7 +39,7 @@ public class ThreadPoolExecutorService implements Executor {
     }
 
     @Override
-    public void execute(Runnable command) {
+    public void execute(@NonNull Runnable command) {
         backgroundPool.execute(command);
     }
 

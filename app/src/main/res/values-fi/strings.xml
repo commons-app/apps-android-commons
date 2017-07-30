@@ -76,7 +76,6 @@
   <string name="title_activity_signup">Rekisteröidy</string>
   <string name="menu_about">Tietoja</string>
   <string name="about_license" fuzzy="true">Tämä on vapaan lähdekoodin ohjelmisto, joka on julkaistu &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; -lisenssin alaisena. Wikimedia Commons ja sen logo ovat Wikimedia Foundationin tavaramerkkejä ja niitä käytetään Wikimedia Foundationin luvalla. Emme ole hyväksyttyjä tai sidoksissa Wikimedia Foundationioniin.</string>
-  <string name="trademarked_name">Wikimedia Commons</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Lähde&lt;/a&gt; ja &lt;a href=\"https://commons-app.github.io/\"&gt;nettisivusto&lt;/a&gt; GitHubissa. Luo uusi &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-issue&lt;/a&gt; bugiraporteille ja ehdotuksille.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Yksityisyydensuoja&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Tekijät&lt;/a&gt;</string>
