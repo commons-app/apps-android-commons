@@ -1,10 +1,8 @@
 package fr.free.nrw.commons.theme;
 
-import android.accounts.AccountManager;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
