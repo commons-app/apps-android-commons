@@ -58,7 +58,7 @@ class LoginTask extends AsyncTask<String, String, String> {
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
         Timber.d("Login done!");
-
+        loginActivity.getSharedPreferences("fr.free.nrw.commons", LoginActivity.MODE_PRIVATE).edit().putString("username", username).apply();
         EventLog.schema(CommonsApplication.EVENT_LOGIN_ATTEMPT)
                 .param("username", username)
                 .param("result", result)

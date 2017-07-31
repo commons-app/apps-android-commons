@@ -1,8 +1,10 @@
 package fr.free.nrw.commons.theme;
 
+import android.accounts.AccountManager;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -13,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import butterknife.BindView;
@@ -42,7 +45,7 @@ public class NavigationBaseActivity extends BaseActivity
 
     public void initDrawer() {
         navigationView.setNavigationItemSelectedListener(this);
-
+        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.userNameText)).setText(getSharedPreferences("fr.free.nrw.commons", MODE_PRIVATE).getString("username", ""));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
@@ -125,6 +128,7 @@ public class NavigationBaseActivity extends BaseActivity
                         .setPositiveButton(R.string.yes, (dialog, which) -> {
                             ((CommonsApplication) getApplicationContext())
                                     .clearApplicationData(NavigationBaseActivity.this);
+                            getSharedPreferences("fr.free.nrw.commons", MODE_PRIVATE).edit().remove("username").apply();
                             Intent nearbyIntent = new Intent(
                                     NavigationBaseActivity.this, LoginActivity.class);
                             nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
