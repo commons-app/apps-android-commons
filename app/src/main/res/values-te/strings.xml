@@ -45,8 +45,6 @@
   <string name="categories_not_found">%1$s తో సరిపోలే వర్గాలేమీ లేవు</string>
   <string name="categories_skip_explanation">వికీమీడియా కామన్స్ లో వెతికేటపుడు మీ బొమ్మలు మరింత సులువుగా కనబడేందుకు వాటికి వర్గాలను చేర్చండి.\n\nవర్గాలను చేర్చేందుకు టైపండి.\nఈ అంగను దాటేసి ముందుకు పోయేందుకు, ఈ సందేశాన్ని నొక్కండి (లేదా ’బ్యాక్’ నొక్కండి)</string>
   <string name="categories_activity_title">వర్గాలు</string>
-  <string name="preference_tracking">వాడుక నివేదికలు</string>
-  <string name="preference_tracking_summary">వాడుక నివేదికలను వికీమీడియాకు పంపండి. యాప్‍ను మెరుగుపరచడంలో సాయపడండి.</string>
   <string name="title_activity_settings">అమరికలు</string>
   <string name="menu_about">గురించి</string>
   <string name="about_license" fuzzy="true">ఓపెన్ సోర్సు సాఫ్టువేరు &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; కు లోబడి విడుదలైంది</string>

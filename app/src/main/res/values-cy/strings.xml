@@ -65,8 +65,6 @@
   <string name="categories_not_found">Dim categori\'n cyfateb i %1$s ar gael</string>
   <string name="categories_skip_explanation">Cychwynwch deipio i ychwanegu categoriau.\nCyffyrddwch y neges hon (neu ddewis Nôl) i fynd i\'r cam nesaf.</string>
   <string name="categories_activity_title">Categorïau</string>
-  <string name="preference_tracking">Adroddiadau ar y defnydd</string>
-  <string name="preference_tracking_summary">Danfonwch yr adroddiadau ar y defnydd i Wikimedia i\'n cynorthwyo i wella\'r ap</string>
   <string name="title_activity_settings">Gosodiadau</string>
   <string name="title_activity_signup">Cofrestru</string>
   <string name="menu_about">Amdanom</string>

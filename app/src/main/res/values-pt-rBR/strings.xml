@@ -70,8 +70,6 @@
   <string name="categories_not_found">Nenhuma categoria correspondente %1$s encontrada</string>
   <string name="categories_skip_explanation">Adicione categorias para fazer suas imagens mais vistas no Wikimedia Commons. \n\nComece a digitar para adicionar categorias.\nAperte nesta mensagem (ou aperte para voltar) para pular este passo</string>
   <string name="categories_activity_title">Categorias</string>
-  <string name="preference_tracking">Relatórios de uso</string>
-  <string name="preference_tracking_summary">Enviar relatório de uso para a Wikimedia para nos ajudar a melhorar o aplicativo</string>
   <string name="title_activity_settings">Configurações</string>
   <string name="title_activity_signup">Criar conta</string>
   <string name="menu_about">Sobre</string>
@@ -194,4 +192,10 @@
   <string name="nearby_info_menu_commons_article">Página de arquivo do Commons</string>
   <string name="nearby_info_menu_wikidata_article">Item do Wikidata</string>
   <string name="error_while_cache">Erro durante o cache de imagens</string>
+  <string name="feedback_popup_title">Feedback desejado</string>
+  <string name="feedback_popup_description">Estamos planejando vários novos recursos e melhorias para o aplicativo! Gostaria de revisá-los e fornecer feedback?\n\n(Você sempre pode acessar isso selecionando \"Planos do desenvolvedor\" na gaveta de navegação)</string>
+  <string name="feedback_popup_decline">Não, obrigado</string>
+  <string name="feedback_popup_accept">Claro, leve-me lá!</string>
+  <string name="feedback_page_url">https://meta.wikimedia.org/wiki/Grants:Project/Improve_\'Upload_to_Commons\'_Android_App/Renewal/User_feedback</string>
+  <string name="navigation_item_developer_plans">Planos de desenvolvedor</string>
 </resources>

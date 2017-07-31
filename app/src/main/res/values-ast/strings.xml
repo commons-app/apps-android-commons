@@ -70,8 +70,6 @@
   <string name="categories_not_found">Nun s\'alcontró denguna categoría que case con %1$s</string>
   <string name="categories_skip_explanation">Amieste categoríes pa facer les imaxes más fáciles d\'alcontrar en Wikimedia Commons.\n\nPrincipie a escribir p\'amestar categoríes.\nToque nesti mensaxe (o calque atrás) pa saltar esti pasu.</string>
   <string name="categories_activity_title">Categoríes</string>
-  <string name="preference_tracking">Informes d\'usu</string>
-  <string name="preference_tracking_summary">Unviar informes d\'usu a Wikimedia p\'ayudanos a ameyorar l\'aplicación</string>
   <string name="title_activity_settings">Configuración</string>
   <string name="title_activity_signup">Date d\'alta</string>
   <string name="menu_about">Tocante a</string>

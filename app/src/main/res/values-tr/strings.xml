@@ -62,8 +62,6 @@
   <string name="categories_not_found">%1$s ile eşleşen bir kategori bulunamadı</string>
   <string name="categories_skip_explanation">Resimlerinizi Wikimedia Commons\'ta daha bulunabilir duruma getirmek için kategoriler ekleyin.\n\nKategori eklemek için yazmaya başlayın.\nBu adımı atlamak için bu iletiye dokunun ya da geri tıklayın.</string>
   <string name="categories_activity_title">Kategoriler</string>
-  <string name="preference_tracking">Kullanım raporları</string>
-  <string name="preference_tracking_summary">Uygulamayı geliştirmemize yardımcı olmak için kullanım raporlarını Wikimedia\'ya gönder</string>
   <string name="title_activity_settings">Ayarlar</string>
   <string name="menu_about">Hakkında</string>
   <string name="about_license" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache Lisansı s2&lt;/a&gt; altında yayımlanan Açık Kaynak yazılımı</string>

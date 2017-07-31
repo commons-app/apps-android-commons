@@ -70,8 +70,6 @@
   <string name="categories_not_found">Inga kategorier som stämmer överens med %1$s hittades</string>
   <string name="categories_skip_explanation">Lägg till kategorier för att göra dina bilder synliga på Wikimedia Commons.\n\nBörja skriva för att lägga till kategorier.\nTryck på detta meddelande (eller gå tillbaka) för att hoppa över detta steg.</string>
   <string name="categories_activity_title">Kategorier</string>
-  <string name="preference_tracking">Användningsrapporter</string>
-  <string name="preference_tracking_summary">Skicka användningsrapporter till Wikimedia för att hjälpa oss förbättra appen</string>
   <string name="title_activity_settings">Inställningar</string>
   <string name="title_activity_signup">Registrera</string>
   <string name="menu_about">Om</string>
@@ -194,4 +192,12 @@
   <string name="nearby_info_menu_commons_article">Commons-filsida</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata-objekt</string>
   <string name="error_while_cache">Fel uppstod när bilder cachelagras</string>
+  <string name="title_info">En unik beskrivande titel för filen, som kommer att fungera som ett filnamn. Du kan använda klarspråk med mellanslag. Ta inte med filändelsen</string>
+  <string name="description_info">Beskriv mediafilen så mycket som möjligt. Var togs den? Vad visar den? Vad är sammanhanget? Beskriv föremålen eller personerna. Ge information som inte kan gissas fram, t.ex. tidpunkten om det är ett landskap. Om mediafilen visar någonting ovanligt, förklara vad som gör den ovanlig.</string>
+  <string name="feedback_popup_title">Återkoppling önskas</string>
+  <string name="feedback_popup_description">Vi planerar flera nya funktioner och förbättringar för appen! Vill du prova dem och ge återkoppling?\n\n(Kan kan alltid komma åt detta genom att markera \"Utvecklarplaner\" i navigeringsmenyn).</string>
+  <string name="feedback_popup_decline">Nej tack</string>
+  <string name="feedback_popup_accept">Visst, ta mig dit!</string>
+  <string name="feedback_page_url">https://meta.wikimedia.org/wiki/Grants:Project/Improve_\'Upload_to_Commons\'_Android_App/Renewal/User_feedback</string>
+  <string name="navigation_item_developer_plans">Utvecklarplaner</string>
 </resources>

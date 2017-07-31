@@ -20,7 +20,8 @@
   <string name="upload_progress_notification_title_finishing">اكتمال رفع %1$s</string>
   <string name="upload_failed_notification_title">فشل رفع %1$s</string>
   <string name="upload_failed_notification_subtitle">انقر لتشاهد</string>
-    <string name="title_activity_contributions">مرفوعاتي الأخيرة</string>
+  <string name="uploads_pending_notification_indicator" fuzzy="true">متبقى %d</string>
+  <string name="title_activity_contributions">مرفوعاتي الأخيرة</string>
   <string name="contribution_state_queued">في قائمة الانتظار</string>
   <string name="contribution_state_failed">فشل</string>
   <string name="contribution_state_in_progress">انتهاء %1$d%%</string>
@@ -49,8 +50,6 @@
   <string name="categories_not_found">لا توجد تصنيفات تطابق %1$s</string>
   <string name="categories_skip_explanation">أضف التصانيف لتسهل اكتشاف صورك على ويكيميديا كومنز.\n\nابدأ الكتاب لتضيف التصانيف.\nانقر هذه الرسالة لتتجاوز هذه الخطوة.</string>
   <string name="categories_activity_title">تصنيفات</string>
-  <string name="preference_tracking">تقارير الاستخدام</string>
-  <string name="preference_tracking_summary">إرسال تقارير الاستخدام إلى ويكيميديا لمساعدتنا على تحسين التطبيق</string>
   <string name="title_activity_settings">الإعدادات</string>
   <string name="title_activity_signup">سجّل</string>
   <string name="menu_about">حول</string>

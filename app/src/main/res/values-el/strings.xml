@@ -66,8 +66,6 @@
   <string name="categories_not_found">Δεν βρέθηκαν κατηγορίες που ταιριάζουν %1$s</string>
   <string name="categories_skip_explanation">Προσθέστε κατηγορίες για να κάνετε τις εικόνες σας πιο ανιχνεύσιμες στα Wikimedia Commons.\n\nΑρχίστε να γράφετε για να προσθέσετε κατηγορίες.\nΠατήστε αυτό το μήνυμα (ή πατήστε επιστροφή) για να παραλείψετε αυτό το βήμα.</string>
   <string name="categories_activity_title">Κατηγορίες</string>
-  <string name="preference_tracking">Αναφορές χρήσης</string>
-  <string name="preference_tracking_summary">Στείλτε αναφορές σχετικά με την χρήση σας στο Wikimedia για να μας βοηθήσετε να βελτιώσουμε την εφαρμογή</string>
   <string name="title_activity_settings">Ρυθμίσεις</string>
   <string name="title_activity_signup">Εγγραφή</string>
   <string name="menu_about">Σχετικά</string>

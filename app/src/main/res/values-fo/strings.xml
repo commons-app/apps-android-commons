@@ -45,8 +45,6 @@
   <string name="categories_not_found">Ongin bólkur sum passaði saman við %1$s varð funnin</string>
   <string name="categories_skip_explanation">Legg bólkar til fyri at tínar myndir verða lættari at finna á Wikimedia Commons.\n\nByrja við at skriva fyri at leggja bólkar til.\nTrýst hetta boðið (ella vend aftur) fyri at droppa hetta stigið.</string>
   <string name="categories_activity_title">Bólkar</string>
-  <string name="preference_tracking">Brúkara frágreiðingar</string>
-  <string name="preference_tracking_summary">Send brúkarafrágreiðingar til Wikimedia fyri at hjálpa okkum at betra um appina</string>
   <string name="title_activity_settings">Innstillingar</string>
   <string name="menu_about">Um</string>
   <string name="about_license" fuzzy="true">Open Source ritbúnaður útgivin undir &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
