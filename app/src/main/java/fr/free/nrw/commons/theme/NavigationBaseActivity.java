@@ -77,19 +77,27 @@ public class NavigationBaseActivity extends BaseActivity
         switch (item.getItemId()) {
             case R.id.action_home:
                 drawerLayout.closeDrawer(navigationView);
-                ContributionsActivity.startYourself(this);
+                if (!(this instanceof ContributionsActivity)) {
+                    ContributionsActivity.startYourself(this);
+                }
                 return true;
             case R.id.action_nearby:
                 drawerLayout.closeDrawer(navigationView);
-                NearbyActivity.startYourself(this);
+                if (!(this instanceof NearbyActivity)) {
+                    NearbyActivity.startYourself(this);
+                }
                 return true;
             case R.id.action_about:
                 drawerLayout.closeDrawer(navigationView);
-                AboutActivity.startYourself(this);
+                if (!(this instanceof AboutActivity)) {
+                    AboutActivity.startYourself(this);
+                }
                 return true;
             case R.id.action_settings:
                 drawerLayout.closeDrawer(navigationView);
-                SettingsActivity.startYourself(this);
+                if (!(this instanceof SettingsActivity)) {
+                    SettingsActivity.startYourself(this);
+                }
                 return true;
             case R.id.action_introduction:
                 drawerLayout.closeDrawer(navigationView);
