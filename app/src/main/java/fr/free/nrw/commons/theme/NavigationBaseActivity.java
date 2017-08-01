@@ -43,7 +43,8 @@ public class NavigationBaseActivity extends BaseActivity
 
     public void initDrawer() {
         navigationView.setNavigationItemSelectedListener(this);
-        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.userNameText)).setText(getSharedPreferences("fr.free.nrw.commons", MODE_PRIVATE).getString("username", ""));
+        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.userNameText))
+                .setText(getSharedPreferences("prefs", MODE_PRIVATE).getString("username", ""));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
@@ -126,7 +127,8 @@ public class NavigationBaseActivity extends BaseActivity
                         .setPositiveButton(R.string.yes, (dialog, which) -> {
                             ((CommonsApplication) getApplicationContext())
                                     .clearApplicationData(NavigationBaseActivity.this);
-                            getSharedPreferences("fr.free.nrw.commons", MODE_PRIVATE).edit().remove("username").apply();
+                            getSharedPreferences("prefs", MODE_PRIVATE)
+                                    .edit().remove("username").apply();
                             Intent nearbyIntent = new Intent(
                                     NavigationBaseActivity.this, LoginActivity.class);
                             nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
