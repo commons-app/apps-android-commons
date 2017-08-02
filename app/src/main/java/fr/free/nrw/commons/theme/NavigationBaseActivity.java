@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.theme;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,11 +43,15 @@ public class NavigationBaseActivity extends BaseActivity
     DrawerLayout drawerLayout;
 
     private ActionBarDrawerToggle toggle;
+    private String username;
+    private TextView usernameTextView;
 
     public void initDrawer() {
         navigationView.setNavigationItemSelectedListener(this);
-        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.userNameText))
-                .setText(getSharedPreferences("prefs", MODE_PRIVATE).getString("username", ""));
+        username = CommonsApplication.getInstance().getCurrentAccount().name;
+        usernameTextView = ((TextView) navigationView.getHeaderView(0).findViewById(R.id.userNameText));
+        usernameTextView.setText(username != null ? username : "");
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
@@ -127,8 +134,6 @@ public class NavigationBaseActivity extends BaseActivity
                         .setPositiveButton(R.string.yes, (dialog, which) -> {
                             ((CommonsApplication) getApplicationContext())
                                     .clearApplicationData(NavigationBaseActivity.this);
-                            getSharedPreferences("prefs", MODE_PRIVATE)
-                                    .edit().remove("username").apply();
                             Intent nearbyIntent = new Intent(
                                     NavigationBaseActivity.this, LoginActivity.class);
                             nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

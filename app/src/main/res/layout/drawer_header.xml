@@ -9,24 +9,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/darker_gray"
-        android:padding="16dp"
+        android:padding="20dp"
         android:src="@drawable/commons_logo_large" />
+
     <TextView
         android:id="@+id/userNameText"
+        style="?android:textAppearanceLargeInverse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/pictureOfTheDay"
-        android:layout_alignStart="@id/pictureOfTheDay"
-        android:layout_alignTop="@id/pictureOfTheDay"
-        android:layout_alignRight="@id/pictureOfTheDay"
-        android:layout_alignEnd="@id/pictureOfTheDay"
-        android:layout_alignBottom="@id/pictureOfTheDay"
-        android:layout_margin="5dp"
-        android:gravity="center"
-        android:maxLines="2"
-        android:ellipsize="end"
-        style="?android:textAppearanceMedium"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:ellipsize="none"
+        android:maxLines="1"
         android:text="@string/placeholder_place_name"
-        android:textSize="40sp"
-        android:textColor="#fff" />
+        android:textColor="@android:color/white" />
 </RelativeLayout>
