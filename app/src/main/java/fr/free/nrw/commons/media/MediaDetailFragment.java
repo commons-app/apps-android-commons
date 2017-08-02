@@ -289,7 +289,11 @@ public class MediaDetailFragment extends Fragment {
 
         textView.setText(catName);
         if (categoriesLoaded && categoriesPresent) {
-            textView.setCompoundDrawablesWithIntrinsicBounds(AppCompatResources.getDrawable(getContext(), R.drawable.ic_info_outline_white_24dp), null, null, null);
+            textView.setCompoundDrawablesWithIntrinsicBounds(
+                    AppCompatResources.getDrawable(
+                            getContext(),
+                            R.drawable.ic_info_outline_white_24dp),
+                    null, null, null);
             textView.setCompoundDrawablePadding((int) UiUtils.convertDpToPixel(6, getContext()));
             textView.setGravity(Gravity.CENTER_VERTICAL);
             textView.setOnClickListener(view -> {
