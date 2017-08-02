@@ -40,4 +40,15 @@ public class UploadResult {
     public String getResultStatus() {
         return resultStatus;
     }
+
+    @Override
+    public String toString() {
+        return "UploadResult{" +
+                "errorCode='" + errorCode + '\'' +
+                ", resultStatus='" + resultStatus + '\'' +
+                ", dateUploaded=" + dateUploaded +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", canonicalFilename='" + canonicalFilename + '\'' +
+                '}';
+    }
 }
