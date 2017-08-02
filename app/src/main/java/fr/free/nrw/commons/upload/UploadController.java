@@ -15,6 +15,7 @@ import android.text.TextUtils;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.concurrent.Executors;
 
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
@@ -162,6 +163,6 @@ public class UploadController {
                 uploadService.queue(UploadService.ACTION_UPLOAD_FILE, contribution);
                 onComplete.onUploadStarted(contribution);
             }
-        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        }.executeOnExecutor(Executors.newFixedThreadPool(1)); // TODO remove this by using a sensible thread handling strategy
     }
 }
