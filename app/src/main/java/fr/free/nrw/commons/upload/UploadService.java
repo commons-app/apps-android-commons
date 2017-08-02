@@ -86,12 +86,12 @@ public class UploadService extends HandlerService<Contribution> {
         @Override
         public void onProgress(long transferred, long total) {
             Timber.d("Uploaded %d of %d", transferred, total);
-            if(!notificationTitleChanged) {
+            if (!notificationTitleChanged) {
                 curProgressNotification.setContentTitle(notificationProgressTitle);
                 notificationTitleChanged = true;
                 contribution.setState(Contribution.STATE_IN_PROGRESS);
             }
-            if(transferred == total) {
+            if (transferred == total) {
                 // Completed!
                 curProgressNotification.setContentTitle(notificationFinishingTitle);
                 curProgressNotification.setProgress(0, 100, true);
@@ -124,7 +124,7 @@ public class UploadService extends HandlerService<Contribution> {
 
     @Override
     protected void handle(int what, Contribution contribution) {
-        switch(what) {
+        switch (what) {
             case ACTION_UPLOAD_FILE:
                 //FIXME: Google Photos bug
                 uploadContribution(contribution);
@@ -162,7 +162,7 @@ public class UploadService extends HandlerService<Contribution> {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if(intent.getAction().equals(ACTION_START_SERVICE) && freshStart) {
+        if (intent.getAction().equals(ACTION_START_SERVICE) && freshStart) {
             ContentValues failedValues = new ContentValues();
             failedValues.put(Contribution.Table.COLUMN_STATE, Contribution.STATE_FAILED);
 
@@ -189,7 +189,7 @@ public class UploadService extends HandlerService<Contribution> {
         try {
             //FIXME: Google Photos bug
             file = this.getContentResolver().openInputStream(contribution.getLocalUri());
-        } catch(FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             Timber.d("File not found");
             Toast fileNotFound = Toast.makeText(this, R.string.upload_failed, Toast.LENGTH_LONG);
             fileNotFound.show();
@@ -220,9 +220,9 @@ public class UploadService extends HandlerService<Contribution> {
                 filename = findUniqueFilename(filename);
                 unfinishedUploads.add(filename);
             }
-            if(!api.validateLogin()) {
+            if (!api.validateLogin()) {
                 // Need to revalidate!
-                if(app.revalidateAuthToken()) {
+                if (app.revalidateAuthToken()) {
                     Timber.d("Successfully revalidated token!");
                 } else {
                     Timber.d("Unable to revalidate :(");
@@ -245,7 +245,7 @@ public class UploadService extends HandlerService<Contribution> {
             curProgressNotification = null;
 
             String resultStatus = uploadResult.getResultStatus();
-            if(!resultStatus.equals("Success")) {
+            if (!resultStatus.equals("Success")) {
                 showFailedNotification(contribution);
                 EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT)
                         .param("username", app.getCurrentAccount().name)
@@ -269,15 +269,15 @@ public class UploadService extends HandlerService<Contribution> {
                         .param("result", "success")
                         .log();
             }
-        } catch(IOException e) {
+        } catch (IOException e) {
             Timber.d("I have a network fuckup");
             showFailedNotification(contribution);
         } finally {
-            if ( filename != null ) {
+            if (filename != null) {
                 unfinishedUploads.remove(filename);
             }
             toUpload--;
-            if(toUpload == 0) {
+            if (toUpload == 0) {
                 // Sync modifications right after all uplaods are processed
                 ContentResolver.requestSync((CommonsApplication.getInstance()).getCurrentAccount(), ModificationsContentProvider.AUTHORITY, new Bundle());
                 stopForeground(true);
@@ -287,7 +287,7 @@ public class UploadService extends HandlerService<Contribution> {
 
     @SuppressLint("StringFormatInvalid")
     private void showFailedNotification(Contribution contribution) {
-         Notification failureNotification = new NotificationCompat.Builder(this).setAutoCancel(true)
+        Notification failureNotification = new NotificationCompat.Builder(this).setAutoCancel(true)
                 .setSmallIcon(R.drawable.ic_launcher)
                 .setAutoCancel(true)
                 .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, ContributionsActivity.class), 0))
@@ -304,7 +304,7 @@ public class UploadService extends HandlerService<Contribution> {
     private String findUniqueFilename(String fileName) throws IOException {
         MediaWikiApi api = app.getMWApi();
         String sequenceFileName;
-        for ( int sequenceNumber = 1; true; sequenceNumber++ ) {
+        for (int sequenceNumber = 1; true; sequenceNumber++) {
             if (sequenceNumber == 1) {
                 sequenceFileName = fileName;
             } else {
@@ -318,9 +318,8 @@ public class UploadService extends HandlerService<Contribution> {
                     sequenceFileName = regexMatcher.replaceAll("$1 " + sequenceNumber + "$2");
                 }
             }
-            if ( api.fileExistsWithName(sequenceFileName) || unfinishedUploads.contains(sequenceFileName) ) {
-                continue;
-            } else {
+            if (!api.fileExistsWithName(sequenceFileName)
+                    && !unfinishedUploads.contains(sequenceFileName)) {
                 break;
             }
         }

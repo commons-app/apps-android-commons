@@ -22,10 +22,11 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(constants = BuildConfig.class, sdk = 21)
 public class NearbyAdapterFactoryTest {
 
     private static final Place PLACE = new Place("name", Place.Description.AIRPORT,
@@ -110,14 +111,6 @@ public class NearbyAdapterFactoryTest {
         viewHolder.itemView.performClick();
 
         assertEquals(PLACE, clickedPlace);
-    }
-
-    @Test
-    public void clickViewHandlesMisconfiguredListener() {
-        NearbyAdapterFactory testObject = new NearbyAdapterFactory(null);
-        RVRendererAdapter<Place> result = testObject.create(Collections.singletonList(PLACE));
-        RendererViewHolder viewHolder = renderComponent(result);
-        viewHolder.itemView.performClick();
     }
 
     @NonNull

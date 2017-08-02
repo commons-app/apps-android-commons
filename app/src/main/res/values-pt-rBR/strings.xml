@@ -24,7 +24,7 @@
     <item quantity="one">carregando arquivo</item>
     <item quantity="other">carregando %d arquivos</item>
   </plurals>
-  <string name="title_activity_contributions" fuzzy="true">Meus envios</string>
+  <string name="title_activity_contributions">Meus envios recentes</string>
   <string name="contribution_state_queued">Na fila</string>
   <string name="contribution_state_failed">Falhou</string>
   <string name="contribution_state_in_progress">%1$d%% concluída</string>
@@ -53,9 +53,10 @@
   <string name="refresh_button">Atualizar</string>
   <string name="gps_disabled">O GPS está desligado no seu aparelho. Gostarias de ligá-lo ?</string>
   <string name="enable_gps">GPS inapto.</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">Nenhum envio</item>
-    <item quantity="one">1 envio</item>
+  <string name="contributions_subtitle_zero">Ainda não carregado</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%d envio</item>
     <item quantity="other">%d envios</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
@@ -74,10 +75,10 @@
   <string name="title_activity_settings">Configurações</string>
   <string name="title_activity_signup">Criar conta</string>
   <string name="menu_about">Sobre</string>
-  <string name="about_license">Software livre distribuído sob a &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Wikimedia Commons e seu logotipo são marcas registradas da Wikimedia Foundation e são usadas com a permissão da Wikimedia Foundation. Não somos endossados nem afiliados à Wikimedia Foundation.</string>
+  <string name="about_license">Software livre distribuído sob a &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. %1$s e seu logotipo são marcas registradas da Wikimedia Foundation e são usadas com a permissão da Wikimedia Foundation. Não somos endossados nem afiliados à Wikimedia Foundation.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Fonte&lt;/a&gt; e &lt;a href=\"https://commons-app.github.io/\"&gt;site&lt;/a&gt; em GitHub. Crie um novo &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub issue&lt;/a&gt; para relatórios de bugs e sugestões.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Política de privacidade&lt;/a&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;CRÉDITOS&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Créditos&lt;/a&gt;</string>
   <string name="title_activity_about">Sobre</string>
   <string name="menu_feedback">Enviar comentários (por e-mail)</string>
   <string name="no_email_client">Nenhum cliente de e-mail instalado</string>
@@ -87,6 +88,7 @@
   <string name="menu_retry_upload">Repetir</string>
   <string name="menu_cancel_upload">Cancelar</string>
   <string name="share_license_summary">Essa imagem será licenciada sob %1$s</string>
+  <string name="media_upload_policy">Ao enviar esta imagem, declaro que este é o meu próprio trabalho, que não contém material protegido ou selfies, e, de outra forma, adere a &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Políticas do Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Download</string>
   <string name="preference_license">Licença</string>
   <string name="use_previous">Usar o título/descrição anterior</string>
@@ -129,7 +131,7 @@
   <string name="welcome_final_text">Você acha que conseguiu?</string>
   <string name="welcome_final_button_text">Sim!</string>
   <string name="detail_panel_cats_label">Categorias</string>
-  <string name="detail_panel_cats_loading" fuzzy="true">Carregando…</string>
+  <string name="detail_panel_cats_loading">Carregando…</string>
   <string name="detail_panel_cats_none">Nenhum selecionado</string>
   <string name="detail_description_empty">Sem descrição</string>
   <string name="detail_license_empty">Licença desconhecida</string>
@@ -148,14 +150,34 @@
   <string name="media_detail_description">Descrição</string>
   <string name="media_detail_description_explanation">Descrição da mídia aqui. Isso pode ser potencialmente longo e precisará envolver múltiplas linhas. Esperamos que seja agradável.</string>
   <string name="media_detail_uploaded_date">Data de envio.</string>
+  <string name="media_detail_license">Licença</string>
+  <string name="media_detail_coordinates">Coordenadas</string>
+  <string name="media_detail_coordinates_empty">Nenhum fornecido</string>
   <string name="become_a_tester_title">Seja um Testador Beta</string>
   <string name="become_a_tester_description">Entre no nosso canal beta no Google Play e receba acesso prévio a novos recursos e correções de erros</string>
   <string name="use_wikidata">Usa Wikidata</string>
   <string name="use_wikidata_summary">(Aviso: desabilitar isso pode causar grande consumo de dados móveis)</string>
   <string name="_2fa_code">Código 2FA</string>
+  <string name="number_of_uploads">Meu limite de upload recente</string>
+  <string name="maximum_limit">Limite máximo</string>
   <string name="maximum_limit_alert">Incapaz de exibir mais de 500.</string>
+  <string name="set_limit">Definir o limite de carregamento recente</string>
   <string name="login_failed_2fa_not_supported">Dois fatores de autenticação não são suportados.</string>
   <string name="logout_verification">Quer realmente sair ?</string>
+  <string name="commons_logo">Logotipo do Commons</string>
+  <string name="background_image">Imagem de fundo</string>
+  <string name="mediaimage_failed">Falha na imagem de mídia</string>
+  <string name="no_image_found">Nenhuma imagem encontrada</string>
+  <string name="upload_image">Enviar Imagem</string>
+  <string name="welcome_image_mount_zao">Mount Zao</string>
+  <string name="welcome_image_llamas">Llamas</string>
+  <string name="welcome_image_rainbow_bridge">Ponte de Arco-Íris</string>
+  <string name="welcome_image_tulip">Tulipa</string>
+  <string name="welcome_image_no_selfies">Sem Selfies</string>
+  <string name="welcome_image_proprietary">Imagem proprietária</string>
+  <string name="welcome_image_welcome_wikipedia">Bem-vindo à Wikipédia</string>
+  <string name="welcome_image_welcome_copyright">Direitos de autor são bem vindo</string>
+  <string name="welcome_image_sydney_opera_house">Ópera de Sydney</string>
   <string name="cancel">Cancelar</string>
   <string name="navigation_drawer_open">Abrir</string>
   <string name="navigation_drawer_close">Fechar</string>
@@ -166,4 +188,10 @@
   <string name="navigation_item_settings">Configurações</string>
   <string name="navigation_item_feedback">Comentários</string>
   <string name="navigation_item_logout">Sair</string>
+  <string name="navigation_item_info">Tutorial</string>
+  <string name="nearby_needs_permissions">Os locais próximos não podem ser exibidos sem permissões de localização</string>
+  <string name="no_description_found">Nenhuma descrição encontrada</string>
+  <string name="nearby_info_menu_commons_article">Página de arquivo do Commons</string>
+  <string name="nearby_info_menu_wikidata_article">Item do Wikidata</string>
+  <string name="error_while_cache">Erro durante o cache de imagens</string>
 </resources>

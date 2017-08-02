@@ -1,9 +1,9 @@
 package fr.free.nrw.commons;
 
-import static org.hamcrest.CoreMatchers.is;
-
 import org.junit.Assert;
 import org.junit.Test;
+
+import static org.hamcrest.CoreMatchers.is;
 
 public class UtilsFixExtensionTest {
 

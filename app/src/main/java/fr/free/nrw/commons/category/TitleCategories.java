@@ -19,15 +19,10 @@ class TitleCategories extends AsyncTask<Void, Void, List<String>> {
 
     private final static int SEARCH_CATS_LIMIT = 25;
 
-    private String title;
+    private final String title;
 
     TitleCategories(String title) {
         this.title = title;
-    }
-
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
     }
 
     @Override

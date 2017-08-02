@@ -83,7 +83,7 @@
   <string name="title_activity_settings">Налаштування</string>
   <string name="title_activity_signup">Зареєструватися</string>
   <string name="menu_about">Про програму</string>
-  <string name="about_license">Програмне забезпечення з відкритим кодом випущено під &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;ліцензією Apache в.2&lt;/a&gt;. Вікісховище і його логотип є товарними знаками Фонду Вікімедіа і використовуються за дозволом Фонду Вікімедіа. Ми не користуємось підтримкою Фонду Вікімедіа і не є його афіліатом.</string>
+  <string name="about_license" fuzzy="true">Програмне забезпечення з відкритим кодом випущено під &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;ліцензією Apache в.2&lt;/a&gt;. Вікісховище і його логотип є товарними знаками Фонду Вікімедіа і використовуються за дозволом Фонду Вікімедіа. Ми не користуємось підтримкою Фонду Вікімедіа і не є його афіліатом.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Вихідний код&lt;/a&gt; і &lt;a href=\"https://commons-app.github.io/\"&gt;веб-сайт&lt;/a&gt; на GitHub. Створіть нове &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;завдання на GitHub&lt;/a&gt; для повідомлення про баги або для висловлення пропозицій.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Політика приватності&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Автори&lt;/a&gt;</string>
@@ -157,6 +157,9 @@
   <string name="media_detail_description">Опис</string>
   <string name="media_detail_description_explanation">Сюди потрапляє опис медіафайлу. Він потенційно може бути досить довгим і розтягнутися на декілька рядків. Однак ми сподіваємось, що він виглядатиме гарно.</string>
   <string name="media_detail_uploaded_date">Дата завантаження</string>
+  <string name="media_detail_license">Ліцензія</string>
+  <string name="media_detail_coordinates">Координати</string>
+  <string name="media_detail_coordinates_empty">Не передбачено</string>
   <string name="become_a_tester_title">Станьте бета-тестером</string>
   <string name="become_a_tester_description">Увійдіть на наш бета-канал на Google Play і отримайте ранній доступ до нових функцій та виправлень багів</string>
   <string name="use_wikidata">Використати Вікідані</string>
@@ -195,6 +198,6 @@
   <string name="navigation_item_info">Посібник</string>
   <string name="nearby_needs_permissions">Місця поблизу неможливо показати без дозволу на визначення місця розташування.</string>
   <string name="no_description_found">опис не знайдено</string>
-  <string name="nearby_info_menu_commons_article">Стаття на Вікісховищі</string>
+  <string name="nearby_info_menu_commons_article" fuzzy="true">Стаття на Вікісховищі</string>
   <string name="nearby_info_menu_wikidata_article">Елемент Вікіданих</string>
 </resources>

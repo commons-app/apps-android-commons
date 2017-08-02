@@ -25,7 +25,7 @@ public class NearbyControllerTest {
 
     @Before
     public void setup() {
-        instrumentationContext = InstrumentationRegistry.getContext();
+        instrumentationContext = InstrumentationRegistry.getTargetContext();
     }
 
     @Test public void testNullAttractions() {

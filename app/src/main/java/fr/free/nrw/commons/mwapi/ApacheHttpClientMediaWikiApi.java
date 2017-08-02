@@ -351,12 +351,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     @Override
     @NonNull
     public UploadResult uploadFile(String filename, InputStream file, long dataLength, String pageContents, String editSummary, final ProgressListener progressListener) throws IOException {
-        ApiResult result = api.upload(filename, file, dataLength, pageContents, editSummary, new in.yuvi.http.fluent.ProgressListener() {
-            @Override
-            public void onProgress(long transferred, long total) {
-                progressListener.onProgress(transferred, total);
-            }
-        });
+        ApiResult result = api.upload(filename, file, dataLength, pageContents, editSummary, progressListener::onProgress);
 
         Log.e("WTF", "Result: "+result.toString());
 

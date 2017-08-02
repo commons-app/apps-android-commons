@@ -142,6 +142,9 @@
   <string name="media_detail_media_title">미디어 제목</string>
   <string name="media_detail_description">설명</string>
   <string name="media_detail_uploaded_date">올린 날짜</string>
+  <string name="media_detail_license">라이선스</string>
+  <string name="media_detail_coordinates">좌표</string>
+  <string name="media_detail_coordinates_empty">제공되지 않음</string>
   <string name="become_a_tester_title">베타 테스터가 되세요</string>
   <string name="use_wikidata">위키데이터 사용</string>
   <string name="use_wikidata_summary">(경고: 이것을 끄면 대량의 모바일 데이터를 소비할 수 있습니다)</string>
@@ -178,7 +181,7 @@
   <string name="navigation_item_info">강좌</string>
   <string name="nearby_needs_permissions">위치 권한이 없으면 주변 장소를 표시할 수 없습니다</string>
   <string name="no_description_found">설명이 없습니다</string>
-  <string name="nearby_info_menu_commons_article">공용 문서</string>
+  <string name="nearby_info_menu_commons_article">공용 파일 문서</string>
   <string name="nearby_info_menu_wikidata_article">위키데이터 항목</string>
   <string name="error_while_cache">그림 캐시 처리 오류</string>
 </resources>

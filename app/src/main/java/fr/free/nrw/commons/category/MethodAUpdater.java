@@ -13,6 +13,8 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
+import static fr.free.nrw.commons.category.CategorizationFragment.SEARCH_CATS_LIMIT;
+
 /**
  * Sends asynchronous queries to the Commons MediaWiki API to retrieve categories that are close to
  * the keyword typed in by the user. The 'srsearch' action-specific parameter is used for this
@@ -20,8 +22,8 @@ import timber.log.Timber;
  */
 class MethodAUpdater extends AsyncTask<Void, Void, List<String>> {
 
+    private final CategorizationFragment catFragment;
     private String filter;
-    private CategorizationFragment catFragment;
 
     MethodAUpdater(CategorizationFragment catFragment) {
         this.catFragment = catFragment;
@@ -84,7 +86,7 @@ class MethodAUpdater extends AsyncTask<Void, Void, List<String>> {
 
         //URL https://commons.wikimedia.org/w/api.php?action=query&format=xml&list=search&srwhat=text&srenablerewrites=1&srnamespace=14&srlimit=10&srsearch=
         try {
-            categories = api.searchCategories(CategorizationFragment.SEARCH_CATS_LIMIT, filter);
+            categories = api.searchCategories(SEARCH_CATS_LIMIT, filter);
             Timber.d("Method A URL filter %s", categories);
         } catch (IOException e) {
             Timber.e(e, "IO Exception: ");

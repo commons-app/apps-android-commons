@@ -75,7 +75,7 @@
   <string name="title_activity_settings">Impostazioni</string>
   <string name="title_activity_signup">Registrati</string>
   <string name="menu_about">Informazioni</string>
-  <string name="about_license">Software open source rilasciato con &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;licenza Apache v2&lt;/a&gt;. Wikimedia Commons ed il suo logo sono marchi registrati della Wikimedia Foundation e sono utilizzati con il permesso della Wikimedia Foundation. Non siamo approvati o affiliati con la Wikimedia Foundation.</string>
+  <string name="about_license">Software open source rilasciato con &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;licenza Apache v2&lt;/a&gt;. %1$s ed il suo logo sono marchi registrati della Wikimedia Foundation e sono utilizzati con il permesso della Wikimedia Foundation. Non siamo approvati o affiliati con la Wikimedia Foundation.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Codice sorgente&lt;/a&gt; e &lt;a href=\"https://commons-app.github.io/\"&gt;sito web&lt;/a&gt; su GitHub. Crea una nuova &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;segnalazione GitHub&lt;/a&gt; per riportare errori e suggerimenti.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politica sulla privacy&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Crediti&lt;/a&gt;</string>
@@ -140,6 +140,8 @@
   <string name="media_detail_media_title">Titolo del file multimediale</string>
   <string name="media_detail_description">Descrizione</string>
   <string name="media_detail_uploaded_date">Data di caricamento</string>
+  <string name="media_detail_license">Licenza</string>
+  <string name="media_detail_coordinates">Coordinate</string>
   <string name="use_wikidata">Usa Wikidata</string>
   <string name="_2fa_code">Codice 2FA</string>
   <string name="maximum_limit">Limite massimo</string>
@@ -164,5 +166,6 @@
   <string name="navigation_item_logout">Esci</string>
   <string name="navigation_item_info">Tutorial</string>
   <string name="no_description_found">nessuna descrizione trovata</string>
+  <string name="nearby_info_menu_commons_article">Pagina di Commons del file</string>
   <string name="nearby_info_menu_wikidata_article">Elemento Wikidata</string>
 </resources>

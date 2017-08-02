@@ -26,7 +26,7 @@ public class Category {
         this.name = name;
     }
 
-    public Date getLastUsed() {
+    private Date getLastUsed() {
         // warning: Date objects are mutable.
         return (Date)lastUsed.clone();
     }
@@ -36,11 +36,11 @@ public class Category {
         this.lastUsed = (Date)lastUsed.clone();
     }
 
-    public void touch() {
+    private void touch() {
         lastUsed = new Date();
     }
 
-    public int getTimesUsed() {
+    private int getTimesUsed() {
         return timesUsed;
     }
 
@@ -60,17 +60,17 @@ public class Category {
 
     public void save() {
         try {
-            if(contentUri == null) {
+            if (contentUri == null) {
                 contentUri = client.insert(CategoryContentProvider.BASE_URI, this.toContentValues());
             } else {
                 client.update(contentUri, toContentValues(), null, null);
             }
-        } catch(RemoteException e) {
+        } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public ContentValues toContentValues() {
+    private ContentValues toContentValues() {
         ContentValues cv = new ContentValues();
         cv.put(Table.COLUMN_NAME, getName());
         cv.put(Table.COLUMN_LAST_USED, getLastUsed().getTime());
@@ -121,23 +121,23 @@ public class Category {
         }
 
         public static void onUpdate(SQLiteDatabase db, int from, int to) {
-            if(from == to) {
+            if (from == to) {
                 return;
             }
-            if(from < 4) {
+            if (from < 4) {
                 // doesn't exist yet
                 from++;
                 onUpdate(db, from, to);
                 return;
             }
-            if(from == 4) {
+            if (from == 4) {
                 // table added in version 5
                 onCreate(db);
                 from++;
                 onUpdate(db, from, to);
                 return;
             }
-            if(from == 5) {
+            if (from == 5) {
                 from++;
                 onUpdate(db, from, to);
                 return;

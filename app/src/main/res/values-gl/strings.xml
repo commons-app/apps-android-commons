@@ -75,7 +75,7 @@
   <string name="title_activity_settings">Configuracións</string>
   <string name="title_activity_signup">Rexistrarse</string>
   <string name="menu_about">Acerca de</string>
-  <string name="about_license">Software de código aberto liberado baixo a &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;licenza Apache v2&lt;/a&gt;. Wikimedia Commons e o seu logo son marcas rexistradas da Fundación Wikimedia e úsanse coa súa autorización. Non fomos acreditados pola Fundación Wikimedia nin estamos afiliados con ela.</string>
+  <string name="about_license">Software de código aberto liberado baixo a &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;licenza Apache v2&lt;/a&gt;. %1$s e o seu logo son marcas rexistradas da Fundación Wikimedia e úsanse coa súa autorización. Non fomos acreditados pola Fundación Wikimedia nin estamos afiliados con ela.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Código fonte&lt;/a&gt; e &lt;a href=\"https://commons-app.github.io/\"&gt;sitio web&lt;/a&gt; en GitHub. Crear unha nova &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;incidencia&lt;/a&gt; para informar de problemas e suxestións.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Política_de_protección_de_datos_(gl)\"&gt;Política de protección de datos&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Créditos&lt;/a&gt;</string>
@@ -149,6 +149,9 @@
   <string name="media_detail_description">Descrición</string>
   <string name="media_detail_description_explanation">Aquí vai a descrición do ficheiro multimedia. Potencialmente, pode ser bastante longo, e necesitará agruparse en múltiples liñas. De tódolos xeitos esperamos que se vexa ben.</string>
   <string name="media_detail_uploaded_date">Data de suba</string>
+  <string name="media_detail_license">Licenza</string>
+  <string name="media_detail_coordinates">Coordenadas</string>
+  <string name="media_detail_coordinates_empty">Non proporcionado</string>
   <string name="become_a_tester_title">Converterse en beta-tester</string>
   <string name="become_a_tester_description">Siga a nosa canle beta en Google Play e obteña acceso a novas funcionalidades e correccións de erros</string>
   <string name="use_wikidata">Usar Wikidata</string>
@@ -187,6 +190,7 @@
   <string name="navigation_item_info">Titorial</string>
   <string name="nearby_needs_permissions">Os sitios situados preto non poden visualizarse sen permisos de localización</string>
   <string name="no_description_found">non se atopou descrición</string>
-  <string name="nearby_info_menu_commons_article">Artigo en Commons</string>
+  <string name="nearby_info_menu_commons_article">Páxina do ficheiro en Commons</string>
   <string name="nearby_info_menu_wikidata_article">Elemento en Wikidata</string>
+  <string name="error_while_cache">Erro mentras se gardaban as imaxes na caché</string>
 </resources>

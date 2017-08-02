@@ -7,6 +7,7 @@ import android.view.View;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -14,18 +15,20 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
+import static fr.free.nrw.commons.category.CategorizationFragment.SEARCH_CATS_LIMIT;
+
 /**
  * Sends asynchronous queries to the Commons MediaWiki API to retrieve categories that share the
  * same prefix as the keyword typed in by the user. The 'acprefix' action-specific parameter is used
  * for this purpose. This class should be subclassed in CategorizationFragment.java to aggregate
  * the results.
  */
-public class PrefixUpdater extends AsyncTask<Void, Void, List<String>> {
+class PrefixUpdater extends AsyncTask<Void, Void, List<String>> {
 
+    private final CategorizationFragment catFragment;
     private String filter;
-    private CategorizationFragment catFragment;
 
-    public PrefixUpdater(CategorizationFragment catFragment) {
+    PrefixUpdater(CategorizationFragment catFragment) {
         this.catFragment = catFragment;
     }
 
@@ -47,7 +50,7 @@ public class PrefixUpdater extends AsyncTask<Void, Void, List<String>> {
      * @param items Unfiltered list of categories
      * @return Filtered category list
      */
-    private List<String> filterYears(List<String> items) {
+    private List<String> filterIrrelevantResults(List<String> items) {
 
         Iterator<String> iterator;
 
@@ -62,15 +65,18 @@ public class PrefixUpdater extends AsyncTask<Void, Void, List<String>> {
         Timber.d("Previous year: %s", prevYearInString);
 
         //Copy to Iterator to prevent ConcurrentModificationException when removing item
-        for (iterator = items.iterator(); iterator.hasNext(); ) {
+        for (iterator = items.iterator(); iterator.hasNext();) {
             String s = iterator.next();
 
             //Check if s contains a 4-digit word anywhere within the string (.* is wildcard)
             //And that s does not equal the current year or previous year
-            if (s.matches(".*(19|20)\\d{2}.*") && !s.contains(yearInString) && !s.contains(prevYearInString)) {
-                Timber.d("Filtering out year %s", s);
+            //And if it is an irrelevant category such as Media_needing_categories_as_of_16_June_2017(Issue #750)
+            if ((s.matches(".*(19|20)\\d{2}.*") && !s.contains(yearInString) && !s.contains(prevYearInString))
+                    || s.matches("(.*)needing(.*)")||s.matches("(.*)taken on(.*)")) {
+                Timber.d("Filtering out irrelevant result: %s", s);
                 iterator.remove();
             }
+
         }
 
         Timber.d("Items: %s", items);
@@ -83,14 +89,15 @@ public class PrefixUpdater extends AsyncTask<Void, Void, List<String>> {
         if (TextUtils.isEmpty(filter)) {
             ArrayList<String> mergedItems = new ArrayList<>(catFragment.mergeItems());
             Timber.d("Merged items, waiting for filter");
-            return new ArrayList<>(filterYears(mergedItems));
+            return new ArrayList<>(filterIrrelevantResults(mergedItems));
         }
 
         //if user types in something that is in cache, return cached category
-        if (catFragment.categoriesCache.containsKey(filter)) {
-            ArrayList<String> cachedItems = new ArrayList<>(catFragment.categoriesCache.get(filter));
+        HashMap<String, ArrayList<String>> categoriesCache = catFragment.getCategoriesCache();
+        if (categoriesCache.containsKey(filter)) {
+            ArrayList<String> cachedItems = new ArrayList<>(categoriesCache.get(filter));
             Timber.d("Found cache items, waiting for filter");
-            return new ArrayList<>(filterYears(cachedItems));
+            return new ArrayList<>(filterIrrelevantResults(cachedItems));
         }
 
         //otherwise if user has typed something in that isn't in cache, search API for matching categories
@@ -98,7 +105,7 @@ public class PrefixUpdater extends AsyncTask<Void, Void, List<String>> {
         MediaWikiApi api = CommonsApplication.getInstance().getMWApi();
         List<String> categories = new ArrayList<>();
         try {
-            categories = api.allCategories(CategorizationFragment.SEARCH_CATS_LIMIT, this.filter);
+            categories = api.allCategories(SEARCH_CATS_LIMIT, this.filter);
             Timber.d("Prefix URL filter %s", categories);
         } catch (IOException e) {
             Timber.e(e, "IO Exception: ");
@@ -107,6 +114,6 @@ public class PrefixUpdater extends AsyncTask<Void, Void, List<String>> {
         }
 
         Timber.d("Found categories from Prefix search, waiting for filter");
-        return new ArrayList<>(filterYears(categories));
+        return new ArrayList<>(filterIrrelevantResults(categories));
     }
 }

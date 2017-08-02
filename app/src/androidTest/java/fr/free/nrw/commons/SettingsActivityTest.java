@@ -9,9 +9,8 @@ import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
-import android.view.View;
 
-import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,9 +18,6 @@ import org.junit.runner.RunWith;
 import java.util.Map;
 
 import fr.free.nrw.commons.settings.SettingsActivity;
-
-import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.anything;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
@@ -65,8 +61,8 @@ public class SettingsActivityTest {
     @Test
     public void oneLicenseIsChecked() {
         // click "License" (the first item)
-        Espresso.onData(anything())
-                .inAdapterView(findPreferenceList())
+        Espresso.onData(Matchers.anything())
+                .inAdapterView(ViewMatchers.withId(android.R.id.list))
                 .atPosition(0)
                 .perform(ViewActions.click());
 
@@ -78,8 +74,8 @@ public class SettingsActivityTest {
     @Test
     public void afterClickingCcby4ItWillStay() {
         // click "License" (the first item)
-        Espresso.onData(anything())
-                .inAdapterView(findPreferenceList())
+        Espresso.onData(Matchers.anything())
+                .inAdapterView(ViewMatchers.withId(android.R.id.list))
                 .atPosition(0)
                 .perform(ViewActions.click());
 
@@ -89,8 +85,8 @@ public class SettingsActivityTest {
         ).perform(ViewActions.click());
 
         // click "License" (the first item)
-        Espresso.onData(anything())
-                .inAdapterView(findPreferenceList())
+        Espresso.onData(Matchers.anything())
+                .inAdapterView(ViewMatchers.withId(android.R.id.list))
                 .atPosition(0)
                 .perform(ViewActions.click());
 
@@ -99,13 +95,5 @@ public class SettingsActivityTest {
                 .check(ViewAssertions.matches(
                         ViewMatchers.withText(R.string.license_name_cc_by_four)
                 ));
-    }
-
-    private static Matcher<View> findPreferenceList() {
-        return allOf(
-                ViewMatchers.isDescendantOfA(ViewMatchers.withId(R.id.settingsFragment)),
-                ViewMatchers.withResourceName("list"),
-                ViewMatchers.hasFocus()
-        );
     }
 }

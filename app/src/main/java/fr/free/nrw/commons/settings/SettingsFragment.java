@@ -28,21 +28,15 @@ public class SettingsFragment extends PreferenceFragment {
         licensePreference.setSummary(getString(Utils.licenseNameFor(licensePreference.getValue())));
 
         // Keep summary updated when changing value
-        licensePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                preference.setSummary(getString(Utils.licenseNameFor((String) newValue)));
-                return true;
-            }
+        licensePreference.setOnPreferenceChangeListener((preference, newValue) -> {
+            preference.setSummary(getString(Utils.licenseNameFor((String) newValue)));
+            return true;
         });
 
         CheckBoxPreference themePreference = (CheckBoxPreference) findPreference("theme");
-        themePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                getActivity().recreate();
-                return true;
-            }
+        themePreference.setOnPreferenceChangeListener((preference, newValue) -> {
+            getActivity().recreate();
+            return true;
         });
 
         final EditTextPreference uploadLimit = (EditTextPreference) findPreference("uploads");
@@ -51,36 +45,27 @@ public class SettingsFragment extends PreferenceFragment {
         int uploads = sharedPref.getInt(Prefs.UPLOADS_SHOWING, 100);
         uploadLimit.setText(uploads + "");
         uploadLimit.setSummary(uploads + "");
-        uploadLimit.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                int value = Integer.parseInt(newValue.toString());
-                final SharedPreferences.Editor editor = sharedPref.edit();
-                if (value > 500) {
-                    new AlertDialog.Builder(getActivity())
-                            .setTitle(R.string.maximum_limit)
-                            .setMessage(R.string.maximum_limit_alert)
-                            .setPositiveButton(android.R.string.yes,
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int which) {
-                                        }
-                                    })
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show();
-                    editor.putInt(Prefs.UPLOADS_SHOWING, 500);
-                    editor.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED,true);
-                    uploadLimit.setSummary(500 + "");
-                    uploadLimit.setText(500 + "");
-                } else {
-                    editor.putInt(Prefs.UPLOADS_SHOWING, Integer.parseInt(newValue.toString()));
-                    editor.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED,true);
-                    uploadLimit.setSummary(newValue.toString());
-                }
-                editor.apply();
-                return true;
+        uploadLimit.setOnPreferenceChangeListener((preference, newValue) -> {
+            int value = Integer.parseInt(newValue.toString());
+            final SharedPreferences.Editor editor = sharedPref.edit();
+            if (value > 500) {
+                new AlertDialog.Builder(getActivity())
+                        .setTitle(R.string.maximum_limit)
+                        .setMessage(R.string.maximum_limit_alert)
+                        .setPositiveButton(android.R.string.yes, (dialog, which) -> {})
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+                editor.putInt(Prefs.UPLOADS_SHOWING, 500);
+                editor.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED,true);
+                uploadLimit.setSummary(500 + "");
+                uploadLimit.setText(500 + "");
+            } else {
+                editor.putInt(Prefs.UPLOADS_SHOWING, Integer.parseInt(newValue.toString()));
+                editor.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED,true);
+                uploadLimit.setSummary(newValue.toString());
             }
-
+            editor.apply();
+            return true;
         });
 
 

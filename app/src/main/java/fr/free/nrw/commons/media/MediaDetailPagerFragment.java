@@ -35,6 +35,19 @@ import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.mwapi.EventLog;
 
 public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPageChangeListener {
+
+    public interface MediaDetailProvider {
+        Media getMediaAtPosition(int i);
+
+        int getTotalMediaCount();
+
+        void notifyDatasetChanged();
+
+        void registerDataSetObserver(DataSetObserver observer);
+
+        void unregisterDataSetObserver(DataSetObserver observer);
+    }
+
     private ViewPager pager;
     private Boolean editable;
     private CommonsApplication app;
@@ -48,14 +61,6 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
         this.editable = editable;
     }
 
-    public interface MediaDetailProvider {
-        Media getMediaAtPosition(int i);
-        int getTotalMediaCount();
-        void notifyDatasetChanged();
-        void registerDataSetObserver(DataSetObserver observer);
-        void unregisterDataSetObserver(DataSetObserver observer);
-    }
-
     //FragmentStatePagerAdapter allows user to swipe across collection of images (no. of images undetermined)
     private class MediaDetailAdapter extends FragmentStatePagerAdapter {
 
@@ -65,14 +70,9 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
 
         @Override
         public Fragment getItem(int i) {
-            if(i == 0) {
+            if (i == 0) {
                 // See bug https://code.google.com/p/android/issues/detail?id=27526
-                pager.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        getActivity().supportInvalidateOptionsMenu();
-                    }
-                }, 5);
+                pager.postDelayed(() -> getActivity().supportInvalidateOptionsMenu(), 5);
             }
             return MediaDetailFragment.forMedia(i, editable);
         }
@@ -95,14 +95,11 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
             final int pageNumber = savedInstanceState.getInt("current-page");
             // Adapter doesn't seem to be loading immediately.
             // Dear God, please forgive us for our sins
-            view.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    pager.setAdapter(adapter);
-                    pager.setCurrentItem(pageNumber, false);
-                    getActivity().supportInvalidateOptionsMenu();
-                    adapter.notifyDataSetChanged();
-                }
+            view.postDelayed(() -> {
+                pager.setAdapter(adapter);
+                pager.setCurrentItem(pageNumber, false);
+                getActivity().supportInvalidateOptionsMenu();
+                adapter.notifyDataSetChanged();
             }, 100);
         } else {
             pager.setAdapter(adapter);
@@ -120,7 +117,7 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(savedInstanceState != null) {
+        if (savedInstanceState != null) {
             editable = savedInstanceState.getBoolean("editable");
         }
         app = CommonsApplication.getInstance();
@@ -191,13 +188,8 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !(ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)) {
             Snackbar.make(getView(), R.string.storage_permission_rationale,
                     Snackbar.LENGTH_INDEFINITE)
-                    .setAction(R.string.ok, new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            ActivityCompat.requestPermissions(getActivity(),
-                                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-                        }
-                    }).show();
+                    .setAction(R.string.ok, view -> ActivityCompat.requestPermissions(getActivity(),
+                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1)).show();
         } else {
             final DownloadManager manager = (DownloadManager)getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
             manager.enqueue(req);
@@ -206,13 +198,13 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if(!editable) { // Disable menu options for editable views
+        if (!editable) { // Disable menu options for editable views
             menu.clear(); // see http://stackoverflow.com/a/8495697/17865
             inflater.inflate(R.menu.fragment_image_detail, menu);
-            if(pager != null) {
+            if (pager != null) {
                 MediaDetailProvider provider = (MediaDetailProvider)getActivity();
                 Media m = provider.getMediaAtPosition(pager.getCurrentItem());
-                if(m != null) {
+                if (m != null) {
                     // Enable default set of actions, then re-enable different set of actions only if it is a failed contrib
                     menu.findItem(R.id.menu_retry_current_image).setEnabled(false).setVisible(false);
                     menu.findItem(R.id.menu_cancel_current_image).setEnabled(false).setVisible(false);

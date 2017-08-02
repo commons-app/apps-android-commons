@@ -73,6 +73,7 @@
   <string name="menu_retry_upload">Berriz saiatu</string>
   <string name="menu_cancel_upload">Utzi</string>
   <string name="share_license_summary">Irudi hau %1$s lizentziapean egongo da</string>
+  <string name="media_upload_policy">Irudi hau bidaltzen, nire lan propioa dela aitortzen dut, copyrighta duten materiala edo selfiak ez duela, eta beste motatakoak &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Ohikoaren arauak&lt;/a&gt;</string>
   <string name="menu_download">Jaitsi</string>
   <string name="preference_license">Lizentzia</string>
   <string name="use_previous">Aurreko izenburu/deskribapena erabili</string>
@@ -116,6 +117,9 @@
   <string name="media_detail_title">Izenburua</string>
   <string name="media_detail_media_title">Fitxategiaren izenburua</string>
   <string name="media_detail_description">Deskribapena</string>
+  <string name="media_detail_license">Lizentzia</string>
+  <string name="media_detail_coordinates">Koordenatuak</string>
+  <string name="media_detail_coordinates_empty">Ez da eskeini</string>
   <string name="become_a_tester_title">Beta testatzaile bihurtu</string>
   <string name="use_wikidata">Wikidata erabili</string>
   <string name="use_wikidata_summary">(Erne:hau kentzeak mugikorrak datu asko kontsumitzea ekar dezake)</string>
@@ -132,6 +136,7 @@
   <string name="navigation_item_settings">Ezarpenak</string>
   <string name="navigation_item_logout">Saioa itxi</string>
   <string name="navigation_item_info" fuzzy="true">Sarrera</string>
-  <string name="nearby_info_menu_commons_article">Commons Artikulua</string>
+  <string name="nearby_info_menu_commons_article">Artxibo orrialde komuna</string>
   <string name="nearby_info_menu_wikidata_article" fuzzy="true">WikiData Artikulua</string>
+  <string name="error_while_cache">Argazkiak hartzerakoan sortutako akatsa</string>
 </resources>

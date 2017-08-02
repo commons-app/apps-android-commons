@@ -119,12 +119,7 @@ public class MediaDetailFragment extends Fragment {
         licenseList = new LicenseList(getActivity());
 
         // Progressively darken the image in the background when we scroll detail pane up
-        scrollListener = new ViewTreeObserver.OnScrollChangedListener() {
-            @Override
-            public void onScrollChanged() {
-                updateTheDarkness();
-            }
-        };
+        scrollListener = this::updateTheDarkness;
         view.getViewTreeObserver().addOnScrollChangedListener(scrollListener);
 
         // Layout layoutListener to size the spacer item relative to the available space.
@@ -216,9 +211,23 @@ public class MediaDetailFragment extends Fragment {
                 if (success) {
                     extractor.fill(media);
 
-                    setTextFields(media);
-                    setOnClickListeners(media);
-                    } else {
+                    // Set text of desc, license, and categories
+                    desc.setText(prettyDescription(media));
+                    license.setText(prettyLicense(media));
+                    coordinates.setText(prettyCoordinates(media));
+                    uploadedDate.setText(prettyUploadedDate(media));
+
+                    categoryNames.clear();
+                    categoryNames.addAll(media.getCategories());
+
+                    categoriesLoaded = true;
+                    categoriesPresent = (categoryNames.size() > 0);
+                    if (!categoriesPresent) {
+                        // Stick in a filler element.
+                        categoryNames.add(getString(R.string.detail_panel_cats_none));
+                    }
+                    rebuildCatList();
+                } else {
                     Timber.d("Failed to load photo details.");
                 }
             }
@@ -251,41 +260,6 @@ public class MediaDetailFragment extends Fragment {
         super.onDestroyView();
     }
 
-    private void setTextFields(Media media) {
-        desc.setText(prettyDescription(media));
-        license.setText(prettyLicense(media));
-        coordinates.setText(prettyCoordinates(media));
-        uploadedDate.setText(prettyUploadedDate(media));
-
-        categoryNames.clear();
-        categoryNames.addAll(media.getCategories());
-
-        categoriesLoaded = true;
-        categoriesPresent = (categoryNames.size() > 0);
-        if (!categoriesPresent) {
-            // Stick in a filler element.
-            categoryNames.add(getString(R.string.detail_panel_cats_none));
-        }
-        rebuildCatList();
-    }
-
-    private void setOnClickListeners(final Media media) {
-        license.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openWebBrowser(licenseLink(media));
-            }
-        });
-        if (media.getCoordinates() != null) {
-            coordinates.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    openMap(media.getCoordinates());
-                }
-            });
-        }
-    }
-
     private void rebuildCatList() {
         categoryContainer.removeAllViews();
         // @fixme add the category items
@@ -301,15 +275,12 @@ public class MediaDetailFragment extends Fragment {
 
         textView.setText(catName);
         if (categoriesLoaded && categoriesPresent) {
-            textView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    String selectedCategoryTitle = "Category:" + catName;
-                    Intent viewIntent = new Intent();
-                    viewIntent.setAction(Intent.ACTION_VIEW);
-                    viewIntent.setData(new PageTitle(selectedCategoryTitle).getCanonicalUri());
-                    startActivity(viewIntent);
-                }
+            textView.setOnClickListener(view -> {
+                String selectedCategoryTitle = "Category:" + catName;
+                Intent viewIntent = new Intent();
+                viewIntent.setAction(Intent.ACTION_VIEW);
+                viewIntent.setData(new PageTitle(selectedCategoryTitle).getCanonicalUri());
+                startActivity(viewIntent);
             });
         }
         return item;
@@ -370,34 +341,5 @@ public class MediaDetailFragment extends Fragment {
             return getString(R.string.media_detail_coordinates_empty);
         }
         return media.getCoordinates().getPrettyCoordinateString();
-    }
-
-    private @Nullable String licenseLink(Media media) {
-        String licenseKey = media.getLicense();
-        if (licenseKey == null || licenseKey.equals("")) {
-            return null;
-        }
-        License licenseObj = licenseList.get(licenseKey);
-        if (licenseObj == null) {
-            return null;
-        } else {
-            return licenseObj.getUrl(Locale.getDefault().getLanguage());
-        }
-    }
-
-    private void openWebBrowser(String url) {
-        Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        startActivity(browser);
-    }
-
-    private void openMap(LatLng coordinates) {
-        //Open map app at given position
-        Uri gmmIntentUri = Uri.parse(
-                "geo:0,0?q=" + coordinates.getLatitude() + "," + coordinates.getLatitude());
-        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-
-        if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-            startActivity(mapIntent);
-        }
     }
 }

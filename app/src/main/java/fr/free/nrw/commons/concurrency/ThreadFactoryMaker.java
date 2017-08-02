@@ -11,17 +11,13 @@ class ThreadFactoryMaker {
             private int count = 0;
 
             @Override
-            public Thread newThread(final Runnable runnable) {
+            public Thread newThread(@NonNull final Runnable runnable) {
                 count++;
-                Runnable wrapperRunnable = new Runnable() {
-                    @Override
-                    public void run() {
-                        Process.setThreadPriority(priority);
-                        runnable.run();
-                    }
+                Runnable wrapperRunnable = () -> {
+                    Process.setThreadPriority(priority);
+                    runnable.run();
                 };
-                Thread t = new Thread(wrapperRunnable, String.format("%s-%s", name, count));
-                return t;
+                return new Thread(wrapperRunnable, String.format("%s-%s", name, count));
             }
         };
     }

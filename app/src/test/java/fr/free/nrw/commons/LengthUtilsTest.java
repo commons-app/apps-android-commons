@@ -1,12 +1,12 @@
 package fr.free.nrw.commons;
 
-import static org.hamcrest.CoreMatchers.is;
+import org.junit.Assert;
+import org.junit.Test;
 
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.utils.LengthUtils;
 
-import org.junit.Assert;
-import org.junit.Test;
+import static org.hamcrest.CoreMatchers.is;
 
 public class LengthUtilsTest {
     @Test public void testZeroDistance() {

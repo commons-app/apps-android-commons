@@ -7,7 +7,7 @@
 
     <item
         android:id="@+id/action_nearby"
-        android:icon="@drawable/ic_location_on_black_24dp"
+        android:icon="@drawable/ic_location_black_24dp"
         android:title="@string/navigation_item_nearby"/>
 
     <item
@@ -29,6 +29,11 @@
         android:id="@+id/action_feedback"
         android:icon="@drawable/ic_feedback_black_24dp"
         android:title="@string/navigation_item_feedback"/>
+
+    <item
+        android:id="@+id/action_developer_plans"
+        android:icon="@drawable/ic_help_outline_black_24dp"
+        android:title="@string/navigation_item_developer_plans"/>
 
     <item
         android:id="@+id/action_logout"

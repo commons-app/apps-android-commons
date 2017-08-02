@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'jacoco-android'
 apply from: 'quality.gradle'
 apply plugin: 'com.getkeepsafe.dexcount'
@@ -51,8 +52,8 @@ android {
 
     defaultConfig {
         applicationId 'fr.free.nrw.commons'
-        versionCode 73
-        versionName '2.4.2'
+        versionCode 74
+        versionName '2.5.0'
         minSdkVersion project.minSdkVersion
         targetSdkVersion project.targetSdkVersion
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -73,6 +74,11 @@ android {
         disable 'MissingTranslation'
         disable 'ExtraTranslation'
         abortOnError false
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     //FIXME: Temporary fix for https://github.com/commons-app/apps-android-commons/issues/709

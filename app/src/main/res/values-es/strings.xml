@@ -16,9 +16,9 @@
   <string name="upload_completed_notification_title">¡Se subieron %1$s!</string>
   <string name="upload_completed_notification_text">Pulsa para ver tu subida</string>
   <string name="upload_progress_notification_title_start">Empezando la subida de %1$s</string>
-  <string name="upload_progress_notification_title_in_progress">Cargando «%1$s»</string>
+  <string name="upload_progress_notification_title_in_progress">Cargando %1$s</string>
   <string name="upload_progress_notification_title_finishing">Finalizando la subida de %1$s</string>
-  <string name="upload_failed_notification_title">Falló la carga de «%1$s»</string>
+  <string name="upload_failed_notification_title">Falló la carga de %1$s</string>
   <string name="upload_failed_notification_subtitle">Toca para ver</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Subiendo %d archivo</item>
@@ -27,7 +27,7 @@
   <string name="title_activity_contributions">Mis subidas recientes</string>
   <string name="contribution_state_queued">En la cola</string>
   <string name="contribution_state_failed">Fallido</string>
-  <string name="contribution_state_in_progress">%1$d %% completado</string>
+  <string name="contribution_state_in_progress">%1$d%% completado</string>
   <string name="contribution_state_starting">Subiendo</string>
   <string name="menu_from_gallery">De la galería</string>
   <string name="menu_from_camera">Tomar una foto</string>
@@ -75,7 +75,7 @@
   <string name="title_activity_settings">Ajustes</string>
   <string name="title_activity_signup">Regístrate</string>
   <string name="menu_about">Acerca de</string>
-  <string name="about_license">Programa de código abierto publicado bajo la &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Licencia Apache ver. 2&lt;/a&gt;. Wikimedia Commons y su logotipo son marcas registradas de la Fundación Wikimedia y se utilizan con su permiso. No hemos sido acreditados por la Fundación Wikimedia ni estamos afiliados con ella.</string>
+  <string name="about_license">Programa de código abierto publicado bajo la &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Licencia Apache ver. 2&lt;/a&gt;. %1$s y su logotipo son marcas registradas de la Fundación Wikimedia y se utilizan con su permiso. No hemos sido acreditados por la Fundación Wikimedia ni estamos afiliados con ella.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Código fuente&lt;/a&gt; y &lt;a href=\"https://commons-app.github.io/\"&gt;sitio web&lt;/a&gt; en GitHub. Crea &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;incidencias&lt;/a&gt; para informar de problemas y sugerencias.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Normativa de privacidad&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Créditos&lt;/a&gt;</string>
@@ -149,6 +149,9 @@
   <string name="media_detail_description">Descripción</string>
   <string name="media_detail_description_explanation">Aquí va la descripción del multimedia. Potencialmente, puede ser bastante largo, y deberá agruparse en múltiples líneas. De todas formas, esperamos que se ve bien.</string>
   <string name="media_detail_uploaded_date">Fecha de subida</string>
+  <string name="media_detail_license">Licencia</string>
+  <string name="media_detail_coordinates">Coordenadas</string>
+  <string name="media_detail_coordinates_empty">No se proporcionaron</string>
   <string name="become_a_tester_title">Prueba la versión beta</string>
   <string name="become_a_tester_description">Opta por nuestro canal beta en Google Play y obtén acceso a funcionalidades nuevas y correcciones de errores</string>
   <string name="use_wikidata">Utilizar Wikidata</string>
@@ -187,6 +190,7 @@
   <string name="navigation_item_info">Tutorial</string>
   <string name="nearby_needs_permissions">Los sitios cercanos no pueden mostrarse sin los permisos de ubicación</string>
   <string name="no_description_found">no se encontró ninguna descripción</string>
-  <string name="nearby_info_menu_commons_article">Artículo en Commons</string>
+  <string name="nearby_info_menu_commons_article">Página del archivo en Commons</string>
   <string name="nearby_info_menu_wikidata_article">Elemento de Wikidata</string>
+  <string name="error_while_cache">Error mientras se guardaban imágenes en la caché</string>
 </resources>

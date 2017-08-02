@@ -4,10 +4,13 @@ The Wikimedia Commons Android app allows users to upload pictures from their And
 
 Initially started by the Wikimedia Foundation, this app is now maintained by volunteers. Anyone is welcome to improve it, just choose among the [open issues](https://github.com/commons-app/apps-android-commons/issues) and send us a pull request :-) 
 
+We are currently applying for an [IEG renewal][15] to work on the app for the next 6 months. Feedback is very much welcomed.
+
 <a href="https://f-droid.org/repository/browse/?fdid=fr.free.nrw.commons" target="_blank">
 <img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="90"/></a>
 <a href="https://play.google.com/store/apps/details?id=fr.free.nrw.commons" target="_blank">
 <img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="90"/></a>
+
 
 ## Develop with Android Studio or IntelliJ ##
 
@@ -80,6 +83,32 @@ Captured files are not currently stored within the app, but are passed by conten
 
 Thumbnail images are not currently cached.
 
+## Volunteers welcome! ## 
+
+We are always looking for volunteers, feel free to step in! It is very easy:
+
+1. Fork the repository and clone it to your computer, then follow the build instructions above.
+2. Choose an [unassigned issue](https://github.com/commons-app/apps-android-commons/issues?q=is%3Aopen+is%3Aissue+no%3Aassignee) that sounds interesting to you.
+3. Read the issue's comments to make sure you understand what is the bug, or what feature is being proposed.
+4. Write a "I start working on this" comment on the issue
+5. Write the code :-)
+6. Commit and push
+7. Go to your fork's Github webpage, select the "Pull Requests" tab and click "create a pull request", as a comment, write something like "Fix for issue #12345 crash when rotating screen", then submit the pull request.
+8. Within a few hours or days, a core developer will review your patch, and either merge it or suggest a few corrections.
+9. If you change your mind, or if it is too difficult, no problem, just write "Sorry I don't work on this anymore" on the issue, if possible including feedback (for instance what approaches failed) and ideas.
+
+Thanks a lot!
+
+## Translating the app ## 
+
+Thanks to the translation work of many volunteers this app is available in a multitude of languages.
+
+Translation of the text content of the Wikimedia Commons Android app happens on the [Commons Android App project][10] on [translatewiki.net][11]. If you want to help translate the app please create an account there (to get "translate rights" edit 20 [random keys][13] or ask in their [chat][14]). 
+
+The translations from the translatewiki project are [periodically committed directly to this project][12] by the translatewiki team and later released with the normal updates to the Play Store.
+
+
+
 
 [1]: https://developer.android.com/studio/index.html
 [2]: http://www.jetbrains.com/idea/download/index.html
@@ -90,3 +119,9 @@ Thumbnail images are not currently cached.
 [7]: https://github.com/commons-app/apps-android-commons/issues
 [8]: https://play.google.com/store/apps/details?id=fr.free.nrw.commons
 [9]: https://commons-app.github.io/
+[10]: https://translatewiki.net/w/i.php?title=Special:Translate&group=commons-android
+[11]: https://translatewiki.net
+[12]: https://github.com/commons-app/apps-android-commons/commits/master?author=translatewiki
+[13]: https://translatewiki.net/wiki/Special:TranslationStash?
+[14]: https://translatewiki.net/wiki/Special:WebChat
+[15]: https://meta.wikimedia.org/wiki/Grants:Project/Improve_%27Upload_to_Commons%27_Android_App/Renewal
