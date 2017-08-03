@@ -65,8 +65,6 @@
   <string name="categories_not_found">%1$s शी जुळणारे कोणतेच वर्ग सापडले नाहीत</string>
   <string name="categories_skip_explanation">विकिमिडिया कॉमन्सवर आपल्या संचिकांना शोधणे सोपी जाण्यासाठी त्यांना वर्ग जोडा.\n\nवर्ग जोडण्यास टंकन सुरू करा.\nही पायरी चुकविण्यास या संदेशावर अलगद टिचका (किंवा बॅक कळ टिचका)</string>
   <string name="categories_activity_title">वर्ग</string>
-  <string name="preference_tracking">वापराचे अहवाल</string>
-  <string name="preference_tracking_summary">या अॲपला सुधरविण्यास आपले वापराचे अहवाल विकिमिडियाला पाठवा</string>
   <string name="title_activity_settings">मांडण्या</string>
   <string name="title_activity_signup">नोंदणी करा</string>
   <string name="menu_about">आमच्याबद्दल</string>

@@ -70,8 +70,6 @@
   <string name="categories_not_found">Luokkaa %1$s ei löytynyt</string>
   <string name="categories_skip_explanation">Lisää luokkia tehdäksesi kuvistasi helpommin löydettäviä.\n\nAloita kirjoittaminen lisätäksesi luokkia.\nNapauta tätä viestiä (tai paina takaisin) ohittaaksesi tämän vaiheen.</string>
   <string name="categories_activity_title">Luokat</string>
-  <string name="preference_tracking">Käyttöraportit</string>
-  <string name="preference_tracking_summary">Lähetä käyttöraportteja Wikimedialle auttaaksesi ohjelman kehityksessä</string>
   <string name="title_activity_settings">Asetukset</string>
   <string name="title_activity_signup">Rekisteröidy</string>
   <string name="menu_about">Tietoja</string>

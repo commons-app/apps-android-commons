@@ -74,8 +74,6 @@
 Start typing to add categories.
 Tap this message (or hit back) to skip this step.</string>
   <string name="categories_activity_title">Categories</string>
-  <string name="preference_tracking">Usage reports</string>
-  <string name="preference_tracking_summary">Send usage reports to Wikimedia to help us improve the app</string>
   <string name="title_activity_settings">Settings</string>
   <string name="title_activity_signup">Sign Up</string>
   <string name="menu_about">About</string>
@@ -198,17 +196,17 @@ Tap this message (or hit back) to skip this step.</string>
   <string name="navigation_item_feedback">Feedback</string>
   <string name="navigation_item_logout">Logout</string>
   <string name="navigation_item_info">Tutorial</string>
-  <string name="navigation_item_developer_plans">Developer plans</string>
-
   <string name="nearby_needs_permissions">Nearby places cannot be displayed without location permissions</string>
   <string name="no_description_found">no description found</string>
   <string name="nearby_info_menu_commons_article">Commons file page</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata item</string>
   <string name="error_while_cache">Error while caching pictures</string>
+  <string name="title_info">A unique descriptive title for the file, which will serve as a filename. You may use plain language with spaces. Do not include the file extension</string>
+  <string name="description_info">Please describe the media as much as possible: Where was it taken? What does it show? What is the context? Please describe the objects or persons. Reveal information that can not be easily guessed, for instance the time of day if it is a landscape. If the media shows something unusual, please explain what makes it unusual.</string>
   <string name="feedback_popup_title">Feedback wanted</string>
   <string name="feedback_popup_description">We are planning several new features and improvements for the app! Would you like to review them and provide feedback? \n\n(You can always access this by selecting "Developer plans" in the navigation drawer)</string>
   <string name="feedback_popup_decline">No thanks</string>
   <string name="feedback_popup_accept">Sure, take me there!</string>
   <string name="feedback_page_url">https://meta.wikimedia.org/wiki/Grants:Project/Improve_\'Upload_to_Commons\'_Android_App/Renewal/User_feedback</string>
-
+  <string name="navigation_item_developer_plans">Developer plans</string>
 </resources>

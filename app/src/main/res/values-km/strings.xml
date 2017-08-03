@@ -45,8 +45,6 @@
   <string name="categories_not_found">រកមិនឃើញចំណាត់ថ្នាក់ក្រុមដែលត្រូវនឹង %1$s ទេ</string>
   <string name="categories_skip_explanation">បន្ថែមចំណាត់ថ្នាក់ក្រុមអោយរូបភាពរបស់អ្នកដើម្បីអោយងាយស្រួលស្វែងរក្នុង Wikimedia Commons។\nចាប់ផ្ដើមវាយបញ្ចូលឈ្មោះចំណាត់ថ្នាក់ក្រុម។\nចុចលើសារនេះ (ឬចុចប៊ូតុងត្រលប់ក្រោយ)ដើម្បីរំលងជំហ៊ាននេះ។</string>
   <string name="categories_activity_title">ចំណាត់ថ្នាក់ក្រុម</string>
-  <string name="preference_tracking">របាយការណ៍ស្ដីពីបម្រើបម្រាស់</string>
-  <string name="preference_tracking_summary">ផ្ញើរបាយការណ៍ស្ដីពីបម្រើបម្រាស់ទៅ Wikimedia ដើម្បីជួយកែលម្អកម្មវិធីយើងខ្ញុំ</string>
   <string name="title_activity_settings">ការកំណត់</string>
   <string name="menu_about">អំពី</string>
   <string name="about_license" fuzzy="true">សូហ្វវែរប្រភពបើកទូលាយត្រូវបានចេញផ្សាយក្រោមអាជ្ញាបណ្ណ &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>

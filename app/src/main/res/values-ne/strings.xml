@@ -45,8 +45,6 @@
   <string name="categories_not_found">मिल्दो वर्ग %1$s फेला परेन</string>
   <string name="categories_skip_explanation">विकिमीडिया कमन्समा आफ्नो तस्वीरहरू थप भेट्टाउने बनाउन वर्नहरू थप्नुहोस।\n\nवर्गहरू थप्नको लागि टाइप गर्न सुरु गर्नुहोस्।\nयो चरण छोड्न यो सन्देशमा ट्याप गर्नुहोस् (वा पछाडि जाने थिच्नुहोस्)।</string>
   <string name="categories_activity_title">श्रेणीहरू</string>
-  <string name="preference_tracking">उपयोग प्रतिवेदन</string>
-  <string name="preference_tracking_summary">हामीलाई अनुप्रयोग सुधार गर्न सहयोग गर्न विकिमीडियामा प्रयोग रिपोर्ट पठाउनुहोस्</string>
   <string name="title_activity_settings">सेटिङ्गहरू</string>
   <string name="menu_about">बारेमा</string>
   <string name="about_license" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;अपाचे लाइसेन्स संस्करण२&lt;/a&gt; को अाधारमा खुला स्रोत सफ्टवेयर जारी</string>

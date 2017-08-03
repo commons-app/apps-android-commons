@@ -64,8 +64,6 @@
   <string name="categories_not_found">Nenhuma categoria correspondente %1$s encontrada</string>
   <string name="categories_skip_explanation">Adicione categorias para tornar as suas imagens mais fáceis de encontrar no Wikimedia Commons. \n\nComece a digitar para adicionar categorias.\nCarregue nesta mensagem (ou carregue para voltar) para saltar este passo</string>
   <string name="categories_activity_title">Categorias</string>
-  <string name="preference_tracking">Relatórios de uso</string>
-  <string name="preference_tracking_summary">Enviar relatório de uso para a Wikimedia para ajudar-nos a melhorar a aplicação</string>
   <string name="title_activity_settings">Configurações</string>
   <string name="menu_about">Sobre</string>
   <string name="about_license" fuzzy="true">Software em código aberto distribuído sob &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. O Wikimedia Commons e o seu logótipo são marcas registadas da Wikimedia Foundation e são usadas com permissão da Wikimedia Foundation. Não somos endossados ou afiliados à Wikimedia Foundation.</string>

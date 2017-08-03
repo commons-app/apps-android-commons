@@ -20,6 +20,7 @@
   <string name="upload_progress_notification_title_finishing">Đang hoàn thành việc tải lên tập tin %1$s</string>
   <string name="upload_failed_notification_title">Tải lên tập tin %1$s thất bại</string>
   <string name="upload_failed_notification_subtitle">Chạm để xem</string>
+  <string name="uploads_pending_notification_indicator" fuzzy="true">%d tập tin đang được tải lên</string>
   <string name="title_activity_contributions" fuzzy="true">Tập tin do tôi tải lên</string>
   <string name="contribution_state_queued">Đang chờ</string>
   <string name="contribution_state_failed">Thất bại</string>
@@ -50,11 +51,11 @@
     <item quantity="zero">Chưa tải lên tập tin</item>
     <item quantity="other">%d tập tin tải lên</item>
   </plurals>
+  <string name="starting_multiple_uploads" fuzzy="true">Đang bắt đầu tải lên %d tập tin</string>
+  <string name="multiple_uploads_title" fuzzy="true">%d tập tin tải lên</string>
   <string name="categories_not_found">Không tìm thấy thể loại khớp với %1$s</string>
   <string name="categories_skip_explanation">Xếp các hình ảnh vào thể loại để cho chúng dễ tìm kiếm hơn trên Wikimedia Commons.\n\nHãy bắt đầu nhập tên thể loại để tìm kiếm.\nChạm vào thông điệp này (hoặc bấm Quay lại) để bỏ qua bước này.</string>
   <string name="categories_activity_title">Thể loại</string>
-  <string name="preference_tracking">Báo cáo sử dụng</string>
-  <string name="preference_tracking_summary">Gửi báo cáo sử dụng cho Wikimedia để giúp chúng tôi cải tiến ứng dụng</string>
   <string name="title_activity_settings">Cài đặt</string>
   <string name="title_activity_signup">Mở tài khoản</string>
   <string name="menu_about">Giới thiệu</string>

@@ -55,7 +55,6 @@
     <item quantity="other"> אנהייבן %d ארויפֿלאדן</item>
   </plurals>
   <string name="categories_activity_title">קאַטעגאריעס</string>
-  <string name="preference_tracking">באניץ באריכטן</string>
   <string name="title_activity_settings">איינשטעלונגען</string>
   <string name="menu_about">וועגן</string>
   <string name="title_activity_about">וועגן</string>

@@ -45,8 +45,6 @@
   <string name="categories_not_found">ʻAʻohe māhele e huli ʻia e like me %1$s</string>
   <string name="categories_skip_explanation">Hoʻohui i nā māhele no ke kaunānā ʻana ma Kahilehulehu Wikimedia.</string>
   <string name="categories_activity_title">Māhele</string>
-  <string name="preference_tracking">Hōʻike hana</string>
-  <string name="preference_tracking_summary">Hoʻouka i nā hōʻike hana iā Wikimedia no ka holomua ʻana o kēia pōlamu</string>
   <string name="title_activity_settings">Makemake</string>
   <string name="menu_about">Pilina</string>
   <string name="about_license" fuzzy="true">Hāʻawi ʻia nā lako pōlamu kūmolenoa ma lalo o ka &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Laikini ʻApaki m2&lt;/a&gt;</string>

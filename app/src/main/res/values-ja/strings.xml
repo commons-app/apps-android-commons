@@ -62,8 +62,6 @@
   <string name="categories_not_found">%1$s に一致するカテゴリが見つかりません</string>
   <string name="categories_skip_explanation">あなたの画像をウィキメディア・コモンズで見つけやすくするためにカテゴリを追加してください。\n\nカテゴリ名の入力を開始してください。\nこの手順をスキップするにはこのメッセージをタップしてください(または戻るボタン)。</string>
   <string name="categories_activity_title">カテゴリ</string>
-  <string name="preference_tracking">使用状況の報告</string>
-  <string name="preference_tracking_summary">アプリの改善を支援するために、使用状況の報告をウィキメディアに送信する</string>
   <string name="title_activity_settings">設定</string>
   <string name="title_activity_signup">利用者登録</string>
   <string name="menu_about">このアプリについて</string>

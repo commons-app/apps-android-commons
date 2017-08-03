@@ -65,7 +65,6 @@
   </plurals>
   <string name="categories_not_found">Cap de categoria que correspond a %1$s pas trobada</string>
   <string name="categories_activity_title">Categorias</string>
-  <string name="preference_tracking">Rapòrts d’utilizacion</string>
   <string name="title_activity_settings">Paramètres</string>
   <string name="title_activity_signup">S’inscriure</string>
   <string name="menu_about">A prepaus</string>

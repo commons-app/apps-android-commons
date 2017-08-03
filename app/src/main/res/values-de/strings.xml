@@ -70,8 +70,6 @@
   <string name="categories_not_found">Die Kategorie „%1$s“ wurde nicht gefunden</string>
   <string name="categories_skip_explanation">Füge Kategorien hinzu, um deine Bilder auf Wikimedia Commons auffindbarer zu machen.\n\nBeginn zu schreiben, um Kategorien hinzuzufügen.\nTippe auf diese Nachricht oder drücke „Zurück“, um diesen Schritt zu überspringen.</string>
   <string name="categories_activity_title">Kategorien</string>
-  <string name="preference_tracking">Nutzungsberichte</string>
-  <string name="preference_tracking_summary">Nutzungsberichte an Wikimedia senden, um zur Verbesserung der App beizutragen</string>
   <string name="title_activity_settings">Einstellungen</string>
   <string name="title_activity_signup">Registrieren</string>
   <string name="menu_about">Über</string>
@@ -194,4 +192,12 @@
   <string name="nearby_info_menu_commons_article">Commons-Dateiseite</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata-Objekt</string>
   <string name="error_while_cache">Fehler beim Zwischenspeichern der Bilder</string>
+  <string name="title_info">Ein eindeutiger beschreibender Titel für die Datei, der als Dateiname dient. Du kannst Klartext mit Leerzeichen verwenden. Gib nicht die Dateierweiterung mit an.</string>
+  <string name="description_info">Bitte beschreibe das Medium so gut wie möglich: Wo wurde es aufgenommen? Was zeigt es? Was ist der Kontext? Bitte beschreibe die Objekte oder Personen. Zeige Informationen auf, die nicht einfach erraten werden können, zum Beispiel die Tageszeit, falls es eine Landschaft ist. Falls das Medium etwas Ungewöhnliches zeigt, erkläre bitte, was es ungewöhnlich macht.</string>
+  <string name="feedback_popup_title">Rückmeldung erwünscht</string>
+  <string name="feedback_popup_description">Wir planen mehrere neue Funktionen und Verbesserungen für die App! Möchtest du sie dir anschauen und eine Rückmeldung geben?\n\nDu kannst immer auf diese Meldung zugreifen, indem du in der Navigation „Entwicklerpläne“ auswählst.</string>
+  <string name="feedback_popup_decline">Nein danke</string>
+  <string name="feedback_popup_accept">Sicher, bring mich dorthin!</string>
+  <string name="feedback_page_url">https://meta.wikimedia.org/wiki/Grants:Project/Improve_\'Upload_to_Commons\'_Android_App/Renewal/User_feedback</string>
+  <string name="navigation_item_developer_plans">Entwicklerpläne</string>
 </resources>

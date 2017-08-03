@@ -18,6 +18,7 @@
   <string name="upload_progress_notification_title_finishing">%1$s akan siap dimuat naik</string>
   <string name="upload_failed_notification_title">%1$s gagal dimuat naik</string>
   <string name="upload_failed_notification_subtitle">Ketik untuk lihat</string>
+  <string name="uploads_pending_notification_indicator" fuzzy="true">%d fail sedang dimuat naik</string>
   <string name="title_activity_contributions">Muat Naik Terbaru Saya</string>
   <string name="contribution_state_queued">Dibaris gilir</string>
   <string name="contribution_state_failed">Gagal</string>
@@ -47,15 +48,14 @@
     <item quantity="one">%d muatnaik</item>
     <item quantity="other">%d muatnaik</item>
   </plurals>
-    <plurals name="multiple_uploads_title">
+  <string name="starting_multiple_uploads" fuzzy="true">Memulakan %d kerja muat naik</string>
+  <plurals name="multiple_uploads_title">
     <item quantity="one">%d muatnaik</item>
     <item quantity="other">%d muatnaik</item>
   </plurals>
   <string name="categories_not_found">Tiada kategori yang sepadan dengan %1$s dijumpai</string>
   <string name="categories_skip_explanation">Tambahkan kategori supaya gambar-gambar anda lebih senang ditemui di Wikimedia Commons.\n\nMula menaip untuk menambahkan kategori.\nKetik mesej ini (atau tekan butang undur) untuk melangkau langkah ini.</string>
   <string name="categories_activity_title">Kategori</string>
-  <string name="preference_tracking">Laporan penggunaan</string>
-  <string name="preference_tracking_summary">Hantar laporan penggunaan kepada Wikimedia untuk membantu kami menambah baik app ini</string>
   <string name="title_activity_settings">Tetapan</string>
   <string name="menu_about">Perihal</string>
   <string name="about_license" fuzzy="true">Perisian Sumber Terbuka yang dikeluarkan dengan &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Lesen Apache v2&lt;/a&gt;</string>

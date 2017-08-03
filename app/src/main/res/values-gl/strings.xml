@@ -70,8 +70,6 @@
   <string name="categories_not_found">Non se atopou ningunha categoría que coincidise con \"%1$s\"</string>
   <string name="categories_skip_explanation">Engada categorías para facer máis accesibles as súas imaxes na Wikimedia Commons.\n\nComece a escribir para engadir categorías.\nPrema nesta mensaxe (ou no botón \"Atrás\") para saltar este paso.</string>
   <string name="categories_activity_title">Categorías</string>
-  <string name="preference_tracking">Informes de uso</string>
-  <string name="preference_tracking_summary">Enviar informes de uso á Wikimedia para axudar a mellorar a aplicación</string>
   <string name="title_activity_settings">Configuracións</string>
   <string name="title_activity_signup">Rexistrarse</string>
   <string name="menu_about">Acerca de</string>
@@ -88,6 +86,7 @@
   <string name="menu_retry_upload">Reintentar</string>
   <string name="menu_cancel_upload">Cancelar</string>
   <string name="share_license_summary">Esta imaxe quedará baixo a licenza %1$s</string>
+  <string name="media_upload_policy">Publicando esta imaxe, declaro que é da miña obra, que non contén material con dereitos de autor ou selfies e que se adhire ás &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Políticas de Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Descargar</string>
   <string name="preference_license">Licenza</string>
   <string name="use_previous">Usar o título ou a descrición anterior</string>
@@ -193,4 +192,12 @@
   <string name="nearby_info_menu_commons_article">Páxina do ficheiro en Commons</string>
   <string name="nearby_info_menu_wikidata_article">Elemento en Wikidata</string>
   <string name="error_while_cache">Erro mentras se gardaban as imaxes na caché</string>
+  <string name="title_info">Un título único descritivo para o ficheiro, que servirá como un nome de ficheiro. Pode usar unha linguaxe clara con espazos. Non inclúa a extensión do ficheiro</string>
+  <string name="description_info">Por favor, describa o ficheiro todo o posibleː Onde se gravou? Cal é o contexto? Por favor, describa os obxectos ou persoas. Indique información que non pode ser adiviñada de forma doada, por exemplo, a hora do día se é unha paisaxe. Se o ficheiro amosa algo pouco habitual, por favor, explique que é o que o fai excepcional.</string>
+  <string name="feedback_popup_title">Aprécianse comentarios</string>
+  <string name="feedback_popup_description">Estamos planeando moitas funcionalidades novas e melloras para a aplicaciónǃ Gustaríalle revisalas e comentar a súa opinión?\n\n(Sempre pode acceder a isto seleccionando \"Plans dos desenvolvedores\" no panel de navegación)</string>
+  <string name="feedback_popup_decline">Non, grazas</string>
+  <string name="feedback_popup_accept">Claro, lévame alí!</string>
+  <string name="feedback_page_url">https://meta.wikimedia.org/wiki/Grants:Project/Improve_\'Upload_to_Commons\'_Android_App/Renewal/User_feedback</string>
+  <string name="navigation_item_developer_plans">Plans de desenvolvedor</string>
 </resources>

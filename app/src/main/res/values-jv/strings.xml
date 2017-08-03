@@ -68,8 +68,6 @@
   </plurals>
   <string name="categories_not_found">Ora ana kategori sing cocog karo %1$s</string>
   <string name="categories_activity_title">Kategori</string>
-  <string name="preference_tracking">Lapuran pangguna</string>
-  <string name="preference_tracking_summary">Kirim lapurané pangguna nyang Wikimedia supaya kita kabantu ngapikaké aplikasiné</string>
   <string name="title_activity_settings">Setèlan</string>
   <string name="title_activity_signup">Ndhaftar</string>
   <string name="menu_about">Ngenani</string>

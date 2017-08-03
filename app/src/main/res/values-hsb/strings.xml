@@ -44,8 +44,6 @@
   <string name="menu_save_categories">Składować</string>
   <string name="categories_not_found">Kategorija %1$s njeje so namakała</string>
   <string name="categories_activity_title">Kategorije</string>
-  <string name="preference_tracking">Wužiwanske rozprawy</string>
-  <string name="preference_tracking_summary">Pósćel nam wužiwanske rozprawy, zo by nam pomhał, nałoženje polěpšić</string>
   <string name="title_activity_settings">Nastajenja</string>
   <string name="menu_about">Wo</string>
   <string name="about_license" fuzzy="true">Software zjawneho žórła wozjewjena pod licencu &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>

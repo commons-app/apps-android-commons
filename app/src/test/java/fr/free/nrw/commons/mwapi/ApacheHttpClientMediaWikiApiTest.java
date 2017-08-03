@@ -14,9 +14,13 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Observer;
 import java.util.Set;
 
 import fr.free.nrw.commons.BuildConfig;
+import io.reactivex.Single;
+import io.reactivex.observers.TestObserver;
+import io.reactivex.subscribers.TestSubscriber;
 import okhttp3.HttpUrl;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
@@ -37,6 +41,7 @@ public class ApacheHttpClientMediaWikiApiTest {
     public void setUp() throws Exception {
         server = new MockWebServer();
         testObject = new ApacheHttpClientMediaWikiApi("http://" + server.getHostName() + ":" + server.getPort() + "/");
+        testObject.setWikiMediaToolforgeUrl("http://" + server.getHostName() + ":" + server.getPort() + "/");
     }
 
     @After
@@ -193,6 +198,19 @@ public class ApacheHttpClientMediaWikiApiTest {
         assertFalse(result);
     }
 
+    @Test
+    public void getUploadCount() throws InterruptedException {
+        server.enqueue(new MockResponse().setBody("23\n"));
+
+        TestObserver<Integer> testObserver = testObject.getUploadCount("testUsername").test();
+
+        RecordedRequest request = server.takeRequest();
+        Map<String, String> params = parseQueryParams(request);
+        assertEquals("testUsername", params.get("user"));
+
+        assertEquals(1, testObserver.valueCount());
+        assertEquals(23, (int)testObserver.values().get(0));
+    }
 
     private RecordedRequest assertBasicRequestParameters(MockWebServer server, String method) throws InterruptedException {
         RecordedRequest request = server.takeRequest();

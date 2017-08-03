@@ -69,8 +69,6 @@
   <string name="categories_not_found">D\'Kategorie %1$s gouf net fonnt</string>
   <string name="categories_skip_explanation">Fänkt u mat Tippen fir Kategorien derbäizesetzen.\nKlickt op dëse Message (oder dréck op Zréck) fir dëse Schrëtt z\'iwwersprangen.</string>
   <string name="categories_activity_title">Kategorien</string>
-  <string name="preference_tracking">Rapporten iwwer de Gebrauch</string>
-  <string name="preference_tracking_summary">Schéckt Rapporten iwwer de Gebrauch vu Wikimedia fir eis ze hëllefen d\'App ze verbesseren</string>
   <string name="title_activity_settings">Astellungen</string>
   <string name="title_activity_signup">Mellt Iech un</string>
   <string name="menu_about">Iwwer</string>
@@ -187,4 +185,7 @@
   <string name="no_description_found">keng Beschreiwung fonnt</string>
   <string name="nearby_info_menu_commons_article">Commons-Fichierssäit</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata-Element</string>
+  <string name="feedback_popup_title">Feedback gewënscht</string>
+  <string name="feedback_popup_decline">Nee, merci</string>
+  <string name="feedback_popup_accept">Sécher, bréngt mech dohin!</string>
 </resources>

@@ -69,8 +69,6 @@
   <string name="categories_not_found">Nu s-a găsit nicio categorie corespunzătoare cu %1$s</string>
   <string name="categories_skip_explanation">Adăugați categorii pentru a facilita găsirea imaginilor dumneavoastră la Wikimedia Commons.\n\nÎncepeți să tastați pentru a adăuga categorii.\nAtingeți acest mesaj (sau mergeți înapoi) pentru a omite acest pas.</string>
   <string name="categories_activity_title">Categorii</string>
-  <string name="preference_tracking">Rapoarte de utilizare</string>
-  <string name="preference_tracking_summary">Trimiteți rapoarte de utilizare către Wikimedia pentru a ajuta la îmbunătățirea aplicației</string>
   <string name="title_activity_settings">Setări</string>
   <string name="title_activity_signup">Înregistrare</string>
   <string name="menu_about">Despre</string>

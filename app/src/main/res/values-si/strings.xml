@@ -64,7 +64,6 @@
   </plurals>
   <string name="categories_not_found">ප්‍රවර්ග සැසඳේන්නේ නැත %1$s හමුවිsය</string>
   <string name="categories_activity_title">ප්‍රවර්ග</string>
-  <string name="preference_tracking">භාවිත වාර්තා</string>
   <string name="title_activity_settings">සැකසුම්</string>
   <string name="title_activity_signup">ලියාපදිංචි වන්න</string>
   <string name="menu_about">පිළිබඳ</string>
