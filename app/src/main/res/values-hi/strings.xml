@@ -140,7 +140,10 @@
   <string name="media_detail_title">शीर्षक</string>
   <string name="media_detail_media_title">मीडिया का शीर्षक</string>
   <string name="media_detail_description">विवरण</string>
+  <string name="media_detail_license">लाइसेंस</string>
+  <string name="media_detail_coordinates">निर्देशांक</string>
   <string name="become_a_tester_title">बीटा परीक्षक बनें</string>
   <string name="use_wikidata">विकिडेटा का प्रयोग करें</string>
   <string name="maximum_limit">अधिकतम सीमा</string>
+  <string name="feedback_popup_decline">नहीं, धन्यवाद</string>
 </resources>

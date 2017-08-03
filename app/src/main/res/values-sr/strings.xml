@@ -147,6 +147,8 @@
   <string name="media_detail_description">Опис</string>
   <string name="media_detail_description_explanation">Опис датотеке иде овде. Може да буде поприлично дуг и приказиваће се у више редова. Надамо се да ће изгледати лепо.</string>
   <string name="media_detail_uploaded_date">Датум отпремања</string>
+  <string name="media_detail_license">Лиценца</string>
+  <string name="media_detail_coordinates">Координате</string>
   <string name="become_a_tester_title">Постани Бета Тестер</string>
   <string name="become_a_tester_description">Прикључите се на наш бета канал на Гугл плеју и приступајте новим информацијама и поправкама багова</string>
   <string name="use_wikidata">Користи Википодатке</string>
@@ -184,4 +186,5 @@
   <string name="navigation_item_logout">Одјави ме</string>
   <string name="nearby_info_menu_commons_article" fuzzy="true">Чланак на Остави</string>
   <string name="nearby_info_menu_wikidata_article" fuzzy="true">Чланак на Википодацима</string>
+  <string name="feedback_popup_decline">Не, хвала</string>
 </resources>

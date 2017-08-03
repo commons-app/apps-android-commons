@@ -192,6 +192,8 @@
   <string name="nearby_info_menu_commons_article">共享資源檔案頁面</string>
   <string name="nearby_info_menu_wikidata_article">維基數據項目</string>
   <string name="error_while_cache">在快取圖片時發生錯誤</string>
+  <string name="title_info">用於本檔案的唯一描述性標題。您可以使用帶有空格的簡明語言，另外請不要包含副檔名。</string>
+  <string name="description_info">請盡可能描述出媒體內容：是拍攝於何處？是顯示什麼事物？有什麼脈絡？請描述對象或人物。透露出一些較不易猜測的訊息，例如是風景的話；可以是一天裡的時間。如果媒體顯示出一些不正常的事物，請說明出造成不正常原因。</string>
   <string name="feedback_popup_title">需要意見回饋</string>
   <string name="feedback_popup_description">我們正計劃替應用程式添加數種新功能以及改進！您是否有意想檢閱看看並提供回饋意見？\n\n（您可以隨時透過導覽選單選擇「開發者計劃」來存取那些內容）</string>
   <string name="feedback_popup_decline">不用了，謝謝</string>
