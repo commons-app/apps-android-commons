@@ -13,7 +13,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -25,10 +24,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
-
-import com.google.common.util.concurrent.FutureCallback;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListenableFuture;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -44,7 +39,9 @@ import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
-import fr.free.nrw.commons.utils.ExecutorUtils;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 public  class       ContributionsActivity
@@ -74,6 +71,8 @@ public  class       ContributionsActivity
      */
     private String CONTRIBUTION_SORT = Contribution.Table.COLUMN_STATE + " DESC, " + Contribution.Table.COLUMN_UPLOADED + " DESC , (" + Contribution.Table.COLUMN_TIMESTAMP + " * " + Contribution.Table.COLUMN_STATE + ")";
 
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+
     private ServiceConnection uploadServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder binder) {
@@ -90,6 +89,7 @@ public  class       ContributionsActivity
 
     @Override
     protected void onDestroy() {
+        compositeDisposable.clear();
         getSupportFragmentManager().removeOnBackStackChangedListener(this);
         super.onDestroy();
         if(isUploadServiceConnected) {
@@ -115,6 +115,8 @@ public  class       ContributionsActivity
     protected void onPause() {
         super.onPause();
     }
+
+
 
     @Override
     protected void onStart() {
@@ -280,24 +282,22 @@ public  class       ContributionsActivity
     }
 
     private void setUploadCount() {
-        UploadCountClient uploadCountClient = new UploadCountClient();
         CommonsApplication application = CommonsApplication.getInstance();
-        ListenableFuture<Integer> future = uploadCountClient
-                .getUploadCount(application.getCurrentAccount().name);
-        Futures.addCallback(future, new FutureCallback<Integer>() {
-            @Override
-            public void onSuccess(Integer uploadCount) {
-                getSupportActionBar().setSubtitle(getResources()
-                        .getQuantityString(R.plurals.contributions_subtitle,
-                                uploadCount,
-                                uploadCount));
-            }
 
-            @Override
-            public void onFailure(@NonNull Throwable t) {
-                Timber.e(t, "Fetching upload count failed");
-            }
-        }, ExecutorUtils.uiExecutor());
+        compositeDisposable.add(
+                CommonsApplication.getInstance().getMWApi()
+                        .getUploadCount(application.getCurrentAccount().name)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                uploadCount ->
+                                        getSupportActionBar().setSubtitle(getResources()
+                                                .getQuantityString(R.plurals.contributions_subtitle,
+                                                        uploadCount,
+                                                        uploadCount)),
+                                throwable -> Timber.e(throwable, "Fetching upload count failed")
+                        )
+        );
     }
 
     @Override
