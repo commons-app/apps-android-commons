@@ -76,7 +76,6 @@
   <string name="title_activity_signup">Marchesse</string>
   <string name="menu_about">A propòsit</string>
   <string name="about_license">Ij programa Open Source a son publicà sota la &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;licensa Apache v2&lt;/a&gt;. %1$s e sò sìmbol a son dle marche argistrà dla Fondassion Wikimedia e a son dovrà con ël përmess ëd la Fondassion Wikimedia. Nojàutri i soma nen aprovà da o afilià a la Fondassion Wikimedia.</string>
-  <string name="trademarked_name">Wikimedia Comun</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sorgiss&lt;/a&gt; e &lt;a href=\"https://commons-app.github.io/\"&gt;sit an sl\'aragnà&lt;/a&gt; su GitHub. Creé na neuva &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;signalassion GitHub&lt;/a&gt; për signalé dij givo e dij sugeriment.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Régole ëd confidensialità&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Ringrassiament&lt;/a&gt;</string>
@@ -89,6 +88,7 @@
   <string name="menu_retry_upload">Prové torna</string>
   <string name="menu_cancel_upload">Anulé</string>
   <string name="share_license_summary">Costa plancia a sarà sota la licensa %1$s</string>
+  <string name="media_upload_policy">An mandand costa plancia, i diciaro ch\'a l\'é euvra ëd mè travaj, ch\'a conten nen d\'element sota drit d\'autor o d\'àutoscat, e che comsëssìa a l\'é conforma a &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;le régole ëd Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Dëscarié</string>
   <string name="preference_license">Licensa</string>
   <string name="use_previous">Dovré ël tìtol o la descrission precedent</string>

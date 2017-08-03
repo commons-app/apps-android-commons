@@ -52,13 +52,10 @@ public class NearbyController {
                 distances.put(place, computeDistanceBetween(place.location, curLatLng));
             }
             Collections.sort(places,
-                    new Comparator<Place>() {
-                        @Override
-                        public int compare(Place lhs, Place rhs) {
-                            double lhsDistance = distances.get(lhs);
-                            double rhsDistance = distances.get(rhs);
-                            return (int) (lhsDistance - rhsDistance);
-                        }
+                    (lhs, rhs) -> {
+                        double lhsDistance = distances.get(lhs);
+                        double rhsDistance = distances.get(rhs);
+                        return (int) (lhsDistance - rhsDistance);
                     }
             );
         }

@@ -9,11 +9,8 @@ public class BackgroundPoolExceptionHandler implements ExceptionHandler {
     public void onException(@NonNull final Throwable t) {
         //Crash for debug build
         if (BuildConfig.DEBUG) {
-            Thread thread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    throw new RuntimeException(t);
-                }
+            Thread thread = new Thread(() -> {
+                throw new RuntimeException(t);
             });
             thread.start();
         }

@@ -3,6 +3,7 @@ package fr.free.nrw.commons.theme;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -55,12 +56,7 @@ public class NavigationBaseActivity extends BaseActivity
     public void initBackButton() {
         int backStackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
         toggle.setDrawerIndicatorEnabled(backStackEntryCount == 0);
-        toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        toggle.setToolbarNavigationClickListener(v -> onBackPressed());
     }
 
     public void initBack() {
@@ -114,29 +110,29 @@ public class NavigationBaseActivity extends BaseActivity
                     Toast.makeText(this, R.string.no_email_client, Toast.LENGTH_SHORT).show();
                 }
                 return true;
+            case R.id.action_developer_plans:
+                drawerLayout.closeDrawer(navigationView);
+                // Go to the page
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri
+                        .parse(getResources()
+                                .getString(R.string.feedback_page_url)));
+                startActivity(browserIntent);
+                return true;
             case R.id.action_logout:
                 new AlertDialog.Builder(this)
                         .setMessage(R.string.logout_verification)
                         .setCancelable(false)
-                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                ((CommonsApplication) getApplicationContext())
-                                        .clearApplicationData(NavigationBaseActivity.this);
-                                Intent nearbyIntent = new Intent(
-                                        NavigationBaseActivity.this, LoginActivity.class);
-                                nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(nearbyIntent);
-                                finish();
-                            }
+                        .setPositiveButton(R.string.yes, (dialog, which) -> {
+                            ((CommonsApplication) getApplicationContext())
+                                    .clearApplicationData(NavigationBaseActivity.this);
+                            Intent nearbyIntent = new Intent(
+                                    NavigationBaseActivity.this, LoginActivity.class);
+                            nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(nearbyIntent);
+                            finish();
                         })
-                        .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        })
+                        .setNegativeButton(R.string.no, (dialog, which) -> dialog.cancel())
                         .show();
                 return true;
             default:

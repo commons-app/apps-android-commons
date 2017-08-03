@@ -11,6 +11,7 @@ import android.database.DataSetObserver;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
@@ -28,6 +29,7 @@ import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.category.CategorizationFragment;
+import fr.free.nrw.commons.category.OnCategoriesSaveHandler;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.modifications.CategoryModifier;
@@ -43,7 +45,7 @@ public  class       MultipleShareActivity
                     AdapterView.OnItemClickListener,
                     FragmentManager.OnBackStackChangedListener,
                     MultipleUploadListFragment.OnMultipleUploadInitiatedHandler,
-        CategorizationFragment.OnCategoriesSaveHandler {
+        OnCategoriesSaveHandler {
     private CommonsApplication app;
     private ArrayList<Contribution> photosList = null;
 
@@ -104,7 +106,7 @@ public  class       MultipleShareActivity
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == 1 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             multipleUploadBegins();
         }
@@ -125,19 +127,16 @@ public  class       MultipleShareActivity
             Contribution up = photosList.get(i);
             final int uploadCount = i + 1; // Goddamn Java
 
-            uploadController.startUpload(up, new UploadController.ContributionUploadProgress() {
-                @Override
-                public void onUploadStarted(Contribution contribution) {
-                    dialog.setProgress(uploadCount);
-                    if(uploadCount == photosList.size()) {
-                        dialog.dismiss();
-                        Toast startingToast = Toast.makeText(
-                                CommonsApplication.getInstance(),
-                                R.string.uploading_started,
-                                Toast.LENGTH_LONG
-                        );
-                        startingToast.show();
-                    }
+            uploadController.startUpload(up, contribution -> {
+                dialog.setProgress(uploadCount);
+                if (uploadCount == photosList.size()) {
+                    dialog.dismiss();
+                    Toast startingToast = Toast.makeText(
+                            CommonsApplication.getInstance(),
+                            R.string.uploading_started,
+                            Toast.LENGTH_LONG
+                    );
+                    startingToast.show();
                 }
             });
         }

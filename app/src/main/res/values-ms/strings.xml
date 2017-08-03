@@ -18,7 +18,6 @@
   <string name="upload_progress_notification_title_finishing">%1$s akan siap dimuat naik</string>
   <string name="upload_failed_notification_title">%1$s gagal dimuat naik</string>
   <string name="upload_failed_notification_subtitle">Ketik untuk lihat</string>
-  <string name="uploads_pending_notification_indicator" fuzzy="true">%d fail sedang dimuat naik</string>
   <string name="title_activity_contributions">Muat Naik Terbaru Saya</string>
   <string name="contribution_state_queued">Dibaris gilir</string>
   <string name="contribution_state_failed">Gagal</string>
@@ -48,8 +47,7 @@
     <item quantity="one">%d muatnaik</item>
     <item quantity="other">%d muatnaik</item>
   </plurals>
-  <string name="starting_multiple_uploads" fuzzy="true">Memulakan %d kerja muat naik</string>
-  <plurals name="multiple_uploads_title">
+    <plurals name="multiple_uploads_title">
     <item quantity="one">%d muatnaik</item>
     <item quantity="other">%d muatnaik</item>
   </plurals>

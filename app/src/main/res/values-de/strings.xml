@@ -76,7 +76,6 @@
   <string name="title_activity_signup">Registrieren</string>
   <string name="menu_about">Über</string>
   <string name="about_license">Die Open-Source-Software wurde veröffentlicht unter der &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache-Lizenz v2&lt;/a&gt;. %1$s und das entsprechende Logo sind Markenzeichen der Wikimedia Foundation und wurden mit Genehmigung der Wikimedia Foundation verwendet. Wir wurden nicht von der Wikimedia Foundation bestätigt oder sind nicht mit ihr verbunden.</string>
-  <string name="trademarked_name">Wikimedia Commons</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Quellcode&lt;/a&gt; und &lt;a href=\"https://commons-app.github.io/\"&gt;Website&lt;/a&gt; auf GitHub. Einen neuen &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-Eintrag&lt;/a&gt; für Fehlerberichte und Vorschläge erstellen.</string>
   <string name="about_privacy_policy">&lt;a href=\"//de.wikipedia.org/wiki/Wikipedia:Datenschutz\"&gt;Datenschutzrichtlinie&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Danksagungen&lt;/a&gt;</string>
@@ -89,6 +88,7 @@
   <string name="menu_retry_upload">Erneut versuchen</string>
   <string name="menu_cancel_upload">Abbrechen</string>
   <string name="share_license_summary">Dieses Bild wird lizenziert unter %1$s</string>
+  <string name="media_upload_policy">Durch das Hochladen dieses Bildes erkläre ich, dass dies mein eigenes Werk ist, das kein urheberrechtlich geschütztes Material oder Selfies enthält und das auch sonst die &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/de\"&gt;Wikimedia-Commons-Richtlinien&lt;/a&gt; einhält.</string>
   <string name="menu_download">Herunterladen</string>
   <string name="preference_license">Lizenz</string>
   <string name="use_previous">Vorherige(n) Titel/Beschreibung verwenden</string>

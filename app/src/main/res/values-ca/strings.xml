@@ -8,7 +8,7 @@
   <string name="signup">Registre</string>
   <string name="logging_in_title">S’està iniciant la sessió</string>
   <string name="logging_in_message">Espereu…</string>
-  <string name="login_success">S\'ha iniciat sessió correctament !</string>
+  <string name="login_success">S\'ha iniciat sessió correctament!</string>
   <string name="login_failed">Error en iniciar la sessió!</string>
   <string name="upload_failed">No s\'ha trobat el fitxer. Proveu-ho amb un altre fitxer.</string>
   <string name="authentication_failed">L\'autenticació ha fallat!</string>
@@ -38,9 +38,9 @@
   <string name="share_title_hint">Títol</string>
   <string name="share_description_hint">Descripció</string>
   <string name="login_failed_network">No s\'ha pogut iniciar la sessió – error de xarxa</string>
-  <string name="login_failed_username">No s\'ha pogut iniciar la sessió – siusplau comprova el teu nom d\'usuari</string>
+  <string name="login_failed_username">No s\'ha pogut iniciar la sessió – si et plau comprova el teu nom d\'usuari</string>
   <string name="login_failed_password">No s’ha pogut iniciar la sessió. Comproveu la vostra contrasenya</string>
-  <string name="login_failed_throttled">Masses intents erronis – Proveu-ho de nou d\'aquí uns minuts.</string>
+  <string name="login_failed_throttled">Massa intents erronis – Proveu-ho de nou d\'aquí uns minuts.</string>
   <string name="login_failed_blocked">Ho sentim, aquest usuari ha estat blocat a Commons</string>
   <string name="login_failed_generic">Ha fallat l\'inici de sessió</string>
   <string name="share_upload_button">Carrega</string>
