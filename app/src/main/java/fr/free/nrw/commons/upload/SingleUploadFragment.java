@@ -112,7 +112,7 @@ public class SingleUploadFragment extends Fragment {
         Timber.d(license);
 
         ArrayAdapter<String> adapter;
-        if (PreferenceManager.getDefaultSharedPreferences(getActivity()).getBoolean("theme",true)) {
+        if (PreferenceManager.getDefaultSharedPreferences(getActivity()).getBoolean("theme",false)) {
             // dark theme
             adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, licenseItems);
         }else {
