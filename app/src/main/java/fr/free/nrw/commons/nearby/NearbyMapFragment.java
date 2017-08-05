@@ -102,7 +102,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
 
             addCurrentLocationMarker(mapboxMap);
         });
-        if (PreferenceManager.getDefaultSharedPreferences(getActivity()).getBoolean("theme",true)) {
+        if (PreferenceManager.getDefaultSharedPreferences(getActivity()).getBoolean("theme",false)) {
             mapView.setStyleUrl(getResources().getString(R.string.map_theme_dark));
         } else {
             mapView.setStyleUrl(getResources().getString(R.string.map_theme_light));

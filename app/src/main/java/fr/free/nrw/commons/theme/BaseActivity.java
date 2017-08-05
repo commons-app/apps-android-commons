@@ -27,7 +27,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         // Restart activity if theme is changed
-        boolean newTheme = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("theme",true);
+        boolean newTheme = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("theme",false);
         if(currentTheme!=newTheme){ //is activity theme changed
             Intent intent = getIntent();
             finish();
