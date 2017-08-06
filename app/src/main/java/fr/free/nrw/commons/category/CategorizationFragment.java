@@ -68,6 +68,7 @@ public class CategorizationFragment extends Fragment {
     private HashMap<String, ArrayList<String>> categoriesCache;
     private List<CategoryItem> selectedCategories = new ArrayList<>();
     private ContentProviderClient databaseClient;
+
     private final CategoriesAdapterFactory adapterFactory = new CategoriesAdapterFactory(item -> {
         if (item.isSelected()) {
             selectedCategories.add(item);
@@ -76,26 +77,6 @@ public class CategorizationFragment extends Fragment {
             selectedCategories.remove(item);
         }
     });
-
-    private void updateCategoryCount(CategoryItem item, ContentProviderClient client) {
-        Category cat = lookupCategory(item.getName());
-        cat.incTimesUsed();
-        cat.save(client);
-    }
-
-    private Category lookupCategory(String name) {
-        Category cat = Category.find(databaseClient, name);
-
-        if (cat == null) {
-            // Newly used category...
-            cat = new Category();
-            cat.setName(name);
-            cat.setLastUsed(new Date());
-            cat.setTimesUsed(0);
-        }
-
-        return cat;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -129,50 +110,6 @@ public class CategorizationFragment extends Fragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(filter -> updateCategoryList(filter.toString()));
         return rootView;
-    }
-
-    private void updateCategoryList(String filter) {
-        Observable.fromIterable(selectedCategories)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(disposable -> {
-                    categoriesSearchInProgress.setVisibility(View.VISIBLE);
-                    categoriesNotFoundView.setVisibility(View.GONE);
-                    categoriesSkip.setVisibility(View.GONE);
-                    categoriesAdapter.clear();
-                })
-                .observeOn(Schedulers.io())
-                .concatWith(
-                        search(filter)
-                                .mergeWith(search2(filter))
-                                .filter(categoryItem -> !selectedCategories.contains(categoryItem))
-                                .switchIfEmpty(
-                                        gpsCategories()
-                                                .concatWith(titleCategories())
-                                                .concatWith(recentCategories())
-                                                .filter(categoryItem -> !selectedCategories.contains(categoryItem))
-                                )
-                )
-                .filter(categoryItem -> !containsYear(categoryItem.getName()))
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        s -> categoriesAdapter.add(s),
-                        throwable -> Timber.e(throwable),
-                        () -> {
-                            categoriesAdapter.notifyDataSetChanged();
-                            categoriesSearchInProgress.setVisibility(View.GONE);
-
-                            if (categoriesAdapter.getItemCount() == 0) {
-                                if (TextUtils.isEmpty(filter)) {
-                                    // If we found no recent cats, show the skip message!
-                                    categoriesSkip.setVisibility(View.VISIBLE);
-                                } else {
-                                    categoriesNotFoundView.setText(getString(R.string.categories_not_found, filter));
-                                    categoriesNotFoundView.setVisibility(View.VISIBLE);
-                                }
-                            }
-                        }
-                );
     }
 
     @Override
@@ -243,6 +180,50 @@ public class CategorizationFragment extends Fragment {
         databaseClient = getActivity().getContentResolver().acquireContentProviderClient(AUTHORITY);
     }
 
+    private void updateCategoryList(String filter) {
+        Observable.fromIterable(selectedCategories)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable -> {
+                    categoriesSearchInProgress.setVisibility(View.VISIBLE);
+                    categoriesNotFoundView.setVisibility(View.GONE);
+                    categoriesSkip.setVisibility(View.GONE);
+                    categoriesAdapter.clear();
+                })
+                .observeOn(Schedulers.io())
+                .concatWith(
+                        searchAll(filter)
+                                .mergeWith(searchCategories(filter))
+                                .filter(categoryItem -> !selectedCategories.contains(categoryItem))
+                                .switchIfEmpty(
+                                        gpsCategories()
+                                                .concatWith(titleCategories())
+                                                .concatWith(recentCategories())
+                                                .filter(categoryItem -> !selectedCategories.contains(categoryItem))
+                                )
+                )
+                .filter(categoryItem -> !containsYear(categoryItem.getName()))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        s -> categoriesAdapter.add(s),
+                        throwable -> Timber.e(throwable),
+                        () -> {
+                            categoriesAdapter.notifyDataSetChanged();
+                            categoriesSearchInProgress.setVisibility(View.GONE);
+
+                            if (categoriesAdapter.getItemCount() == 0) {
+                                if (TextUtils.isEmpty(filter)) {
+                                    // If we found no recent cats, show the skip message!
+                                    categoriesSkip.setVisibility(View.VISIBLE);
+                                } else {
+                                    categoriesNotFoundView.setText(getString(R.string.categories_not_found, filter));
+                                    categoriesNotFoundView.setVisibility(View.VISIBLE);
+                                }
+                            }
+                        }
+                );
+    }
+
     private List<String> getStringList(List<CategoryItem> input) {
         List<String> output = new ArrayList<>();
         for (CategoryItem item : input) {
@@ -273,7 +254,7 @@ public class CategorizationFragment extends Fragment {
                 .map(s -> new CategoryItem(s, false));
     }
 
-    private Observable<CategoryItem> search(String term) {
+    private Observable<CategoryItem> searchAll(String term) {
         //If user hasn't typed anything in yet, get GPS and recent items
         if (TextUtils.isEmpty(term)) {
             return Observable.empty();
@@ -291,7 +272,7 @@ public class CategorizationFragment extends Fragment {
                 .map(name -> new CategoryItem(name, false));
     }
 
-    private Observable<CategoryItem> search2(String term) {
+    private Observable<CategoryItem> searchCategories(String term) {
         //If user hasn't typed anything in yet, get GPS and recent items
         if (TextUtils.isEmpty(term)) {
             return Observable.empty();
@@ -319,6 +300,26 @@ public class CategorizationFragment extends Fragment {
                 || items.matches("(.*)needing(.*)") || items.matches("(.*)taken on(.*)"));
     }
 
+    private void updateCategoryCount(CategoryItem item, ContentProviderClient client) {
+        Category cat = lookupCategory(item.getName());
+        cat.incTimesUsed();
+        cat.save(client);
+    }
+
+    private Category lookupCategory(String name) {
+        Category cat = Category.find(databaseClient, name);
+
+        if (cat == null) {
+            // Newly used category...
+            cat = new Category();
+            cat.setName(name);
+            cat.setLastUsed(new Date());
+            cat.setTimesUsed(0);
+        }
+
+        return cat;
+    }
+
     public int getCurrentSelectedCount() {
         return selectedCategories.size();
     }
@@ -336,7 +337,7 @@ public class CategorizationFragment extends Fragment {
                 .show();
     }
 
-    public void showConfirmationDialog() {
+    private void showConfirmationDialog() {
         new AlertDialog.Builder(getActivity())
                 .setMessage("Images without categories are rarely usable. "
                         + "Are you sure you want to submit without selecting "

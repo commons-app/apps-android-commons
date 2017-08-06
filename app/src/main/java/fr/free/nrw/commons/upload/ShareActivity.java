@@ -525,7 +525,7 @@ public  class       ShareActivity
         switch (item.getItemId()) {
             case android.R.id.home:
                 if(categorizationFragment!=null && categorizationFragment.isVisible()) {
-                    categorizationFragment.backButtonDialog();
+                    categorizationFragment.showBackButtonDialog();
                 } else {
                     onBackPressed();
                 }
