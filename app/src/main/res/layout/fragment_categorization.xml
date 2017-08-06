@@ -24,6 +24,7 @@
             android:layout_width="match_parent"
             android:hint="@string/categories_search_text_hint"
             android:maxLines="1"
+            android:inputType="text"
             android:imeOptions="flagNoExtractUi"
             />
 
