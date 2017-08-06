@@ -2,9 +2,7 @@ package fr.free.nrw.commons.category;
 
 import android.content.ContentProviderClient;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.os.RemoteException;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -37,6 +35,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.data.Category;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.upload.MwVolleyApi;
 import io.reactivex.Observable;
@@ -71,11 +70,11 @@ public class CategorizationFragment extends Fragment {
     private OnCategoriesSaveHandler onCategoriesSaveHandler;
     private HashMap<String, ArrayList<String>> categoriesCache;
     private List<CategoryItem> selectedCategories = new ArrayList<>();
-    private ContentProviderClient client;
+    private ContentProviderClient databaseClient;
     private final CategoriesAdapterFactory adapterFactory = new CategoriesAdapterFactory(item -> {
         if (item.isSelected()) {
             selectedCategories.add(item);
-            updateCategoryCount(item, client);
+            updateCategoryCount(item, databaseClient);
         } else {
             selectedCategories.remove(item);
         }
@@ -84,37 +83,20 @@ public class CategorizationFragment extends Fragment {
     private void updateCategoryCount(CategoryItem item, ContentProviderClient client) {
         Category cat = lookupCategory(item.getName());
         cat.incTimesUsed();
-
-        cat.setContentProviderClient(client);
-        cat.save();
+        cat.save(client);
     }
 
     private Category lookupCategory(String name) {
-        Cursor cursor = null;
-        try {
-            cursor = client.query(
-                    CategoryContentProvider.BASE_URI,
-                    Category.Table.ALL_FIELDS,
-                    Category.Table.COLUMN_NAME + "=?",
-                    new String[]{name},
-                    null);
-            if (cursor != null && cursor.moveToFirst()) {
-                return Category.fromCursor(cursor);
-            }
-        } catch (RemoteException e) {
-            // This feels lazy, but to hell with checked exceptions. :)
-            throw new RuntimeException(e);
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
+        Category cat = Category.find(databaseClient, name);
+
+        if (cat == null) {
+            // Newly used category...
+            cat = new Category();
+            cat.setName(name);
+            cat.setLastUsed(new Date());
+            cat.setTimesUsed(0);
         }
 
-        // Newly used category...
-        Category cat = new Category();
-        cat.setName(name);
-        cat.setLastUsed(new Date());
-        cat.setTimesUsed(0);
         return cat;
     }
 
@@ -223,7 +205,7 @@ public class CategorizationFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        client.release();
+        databaseClient.release();
     }
 
     @Override
@@ -274,7 +256,7 @@ public class CategorizationFragment extends Fragment {
         setHasOptionsMenu(true);
         onCategoriesSaveHandler = (OnCategoriesSaveHandler) getActivity();
         getActivity().setTitle(R.string.categories_activity_title);
-        client = getActivity().getContentResolver().acquireContentProviderClient(AUTHORITY);
+        databaseClient = getActivity().getContentResolver().acquireContentProviderClient(AUTHORITY);
     }
 
     private List<String> getStringList(List<CategoryItem> input) {
@@ -283,53 +265,6 @@ public class CategorizationFragment extends Fragment {
             output.add(item.getName());
         }
         return output;
-    }
-
-    /**
-     * Retrieves category suggestions from title input
-     *
-     * @return a list containing title-related categories
-     */
-    private List<String> titleCatQuery(String title) {
-        MediaWikiApi api = CommonsApplication.getInstance().getMWApi();
-        //URL https://commons.wikimedia.org/w/api.php?action=query&format=xml&list=search&srwhat=text&srenablerewrites=1&srnamespace=14&srlimit=10&srsearch=
-        try {
-            return api.searchTitles(SEARCH_CATS_LIMIT, title);
-        } catch (IOException e) {
-            Timber.e(e, "IO Exception: ");
-            return new ArrayList<>();
-        }
-    }
-
-    /**
-     * Retrieves recently-used categories
-     *
-     * @return a list containing recent categories
-     */
-    private ArrayList<String> recentCatQuery() {
-        ArrayList<String> items = new ArrayList<>();
-        Cursor cursor = null;
-        try {
-            cursor = client.query(
-                    CategoryContentProvider.BASE_URI,
-                    Category.Table.ALL_FIELDS,
-                    null,
-                    new String[]{},
-                    Category.Table.COLUMN_LAST_USED + " DESC");
-            // fixme add a limit on the original query instead of falling out of the loop?
-            while (cursor != null && cursor.moveToNext()
-                    && cursor.getPosition() < SEARCH_CATS_LIMIT) {
-                Category cat = Category.fromCursor(cursor);
-                items.add(cat.getName());
-            }
-        } catch (RemoteException e) {
-            throw new RuntimeException(e);
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
-        }
-        return items;
     }
 
     private Observable<CategoryItem> gpsCategories() {
@@ -351,7 +286,7 @@ public class CategorizationFragment extends Fragment {
     }
 
     private Observable<CategoryItem> recentCategories() {
-        return Observable.fromIterable(recentCatQuery())
+        return Observable.fromIterable(Category.recentCategories(databaseClient, SEARCH_CATS_LIMIT))
                 .map(s -> new CategoryItem(s, false));
     }
 

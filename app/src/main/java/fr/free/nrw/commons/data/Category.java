@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.category;
+package fr.free.nrw.commons.data;
 
 import android.content.ContentProviderClient;
 import android.content.ContentValues;
@@ -6,11 +6,15 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.RemoteException;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.Date;
 
+import fr.free.nrw.commons.category.CategoryContentProvider;
+
 public class Category {
-    private ContentProviderClient client;
     private Uri contentUri;
 
     private String name;
@@ -54,11 +58,7 @@ public class Category {
     }
 
     // Database/content-provider stuff
-    public void setContentProviderClient(ContentProviderClient client) {
-        this.client = client;
-    }
-
-    public void save() {
+    public void save(ContentProviderClient client) {
         try {
             if (contentUri == null) {
                 contentUri = client.insert(CategoryContentProvider.BASE_URI, this.toContentValues());
@@ -86,6 +86,60 @@ public class Category {
         c.lastUsed = new Date(cursor.getLong(2));
         c.timesUsed = cursor.getInt(3);
         return c;
+    }
+
+    public static @Nullable Category find(ContentProviderClient client, String name) {
+        Cursor cursor = null;
+        try {
+            cursor = client.query(
+                    CategoryContentProvider.BASE_URI,
+                    Category.Table.ALL_FIELDS,
+                    Category.Table.COLUMN_NAME + "=?",
+                    new String[]{name},
+                    null);
+            if (cursor != null && cursor.moveToFirst()) {
+                return Category.fromCursor(cursor);
+            }
+        } catch (RemoteException e) {
+            // This feels lazy, but to hell with checked exceptions. :)
+            throw new RuntimeException(e);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Retrieves recently-used categories
+     *
+     * @return a list containing recent categories
+     */
+    public static @NonNull ArrayList<String> recentCategories(ContentProviderClient client, int limit) {
+        ArrayList<String> items = new ArrayList<>();
+        Cursor cursor = null;
+        try {
+            cursor = client.query(
+                    CategoryContentProvider.BASE_URI,
+                    Category.Table.ALL_FIELDS,
+                    null,
+                    new String[]{},
+                    Category.Table.COLUMN_LAST_USED + " DESC");
+            // fixme add a limit on the original query instead of falling out of the loop?
+            while (cursor != null && cursor.moveToNext()
+                    && cursor.getPosition() < limit) {
+                Category cat = Category.fromCursor(cursor);
+                items.add(cat.getName());
+            }
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return items;
     }
 
     public static class Table {
