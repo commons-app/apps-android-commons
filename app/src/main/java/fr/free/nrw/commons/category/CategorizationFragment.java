@@ -234,8 +234,8 @@ public class CategorizationFragment extends Fragment {
 
     private Observable<CategoryItem> gpsCategories() {
         return Observable.fromIterable(
-                MwVolleyApi.GpsCatExists.getGpsCatExists() ?
-                        MwVolleyApi.getGpsCat() : new ArrayList<>())
+                MwVolleyApi.GpsCatExists.getGpsCatExists()
+                        ? MwVolleyApi.getGpsCat() : new ArrayList<>())
                 .map(name -> new CategoryItem(name, false));
     }
 
@@ -266,7 +266,7 @@ public class CategorizationFragment extends Fragment {
                     .map(name -> new CategoryItem(name, false));
         }
 
-        //otherwise if user has typed something in that isn't in cache, search API for matching categories
+        //otherwise, search API for matching categories
         return CommonsApplication.getInstance().getMWApi()
                 .allCategories(term, SEARCH_CATS_LIMIT)
                 .map(name -> new CategoryItem(name, false));
@@ -283,7 +283,7 @@ public class CategorizationFragment extends Fragment {
                 .map(s -> new CategoryItem(s, false));
     }
 
-    private boolean containsYear(String items) {
+    private boolean containsYear(String item) {
         //Check for current and previous year to exclude these categories from removal
         Calendar now = Calendar.getInstance();
         int year = now.get(Calendar.YEAR);
@@ -293,11 +293,11 @@ public class CategorizationFragment extends Fragment {
         String prevYearInString = String.valueOf(prevYear);
         Timber.d("Previous year: %s", prevYearInString);
 
-        //Check if s contains a 4-digit word anywhere within the string (.* is wildcard)
-        //And that s does not equal the current year or previous year
+        //Check if item contains a 4-digit word anywhere within the string (.* is wildcard)
+        //And that item does not equal the current year or previous year
         //And if it is an irrelevant category such as Media_needing_categories_as_of_16_June_2017(Issue #750)
-        return ((items.matches(".*(19|20)\\d{2}.*") && !items.contains(yearInString) && !items.contains(prevYearInString))
-                || items.matches("(.*)needing(.*)") || items.matches("(.*)taken on(.*)"));
+        return ((item.matches(".*(19|20)\\d{2}.*") && !item.contains(yearInString) && !item.contains(prevYearInString))
+                || item.matches("(.*)needing(.*)") || item.matches("(.*)taken on(.*)"));
     }
 
     private void updateCategoryCount(CategoryItem item, ContentProviderClient client) {
@@ -324,6 +324,9 @@ public class CategorizationFragment extends Fragment {
         return selectedCategories.size();
     }
 
+    /**
+     * Show dialog asking for confirmation to leave without saving categories.
+     */
     public void showBackButtonDialog() {
         new AlertDialog.Builder(getActivity())
                 .setMessage("Are you sure you want to go back? The image will not "

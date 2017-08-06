@@ -57,7 +57,12 @@ public class Category {
         touch();
     }
 
-    // Database/content-provider stuff
+    //region Database/content-provider stuff
+
+    /**
+     * Persist category.
+     * @param client ContentProviderClient to handle DB connection
+     */
     public void save(ContentProviderClient client) {
         try {
             if (contentUri == null) {
@@ -78,7 +83,7 @@ public class Category {
         return cv;
     }
 
-    public static Category fromCursor(Cursor cursor) {
+    private static Category fromCursor(Cursor cursor) {
         // Hardcoding column positions!
         Category c = new Category();
         c.contentUri = CategoryContentProvider.uriForId(cursor.getInt(0));
@@ -88,6 +93,12 @@ public class Category {
         return c;
     }
 
+    /**
+     * Find persisted category in database, based on its name.
+     * @param client ContentProviderClient to handle DB connection
+     * @param name Category's name
+     * @return category from database, or null if not found
+     */
     public static @Nullable Category find(ContentProviderClient client, String name) {
         Cursor cursor = null;
         try {
@@ -112,8 +123,7 @@ public class Category {
     }
 
     /**
-     * Retrieves recently-used categories
-     *
+     * Retrieve recently-used categories, ordered by descending date.
      * @return a list containing recent categories
      */
     public static @NonNull ArrayList<String> recentCategories(ContentProviderClient client, int limit) {
@@ -198,4 +208,5 @@ public class Category {
             }
         }
     }
+    //endregion
 }
