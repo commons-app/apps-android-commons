@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import io.reactivex.Observable;
 import io.reactivex.Single;
 
 public interface MediaWikiApi {
@@ -38,13 +39,13 @@ public interface MediaWikiApi {
     MediaResult fetchMediaByFilename(String filename) throws IOException;
 
     @NonNull
-    List<String> searchCategories(int searchCatsLimit, String filterValue) throws IOException;
+    Observable<String> searchCategories(String filterValue, int searchCatsLimit);
 
     @NonNull
-    List<String> allCategories(int searchCatsLimit, String filter) throws IOException;
+    Observable<String> allCategories(String filter, int searchCatsLimit);
 
     @NonNull
-    List<String> searchTitles(int searchCatsLimit, String title) throws IOException;
+    Observable<String> searchTitles(String title, int searchCatsLimit);
 
     @Nullable
     String revisionsByFilename(String filename) throws IOException;

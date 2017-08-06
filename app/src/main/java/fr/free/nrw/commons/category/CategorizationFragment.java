@@ -23,7 +23,6 @@ import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.pedrogomez.renderers.RVRendererAdapter;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -36,10 +35,8 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.data.Category;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.upload.MwVolleyApi;
 import io.reactivex.Observable;
-import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
@@ -194,7 +191,7 @@ public class CategorizationFragment extends Fragment {
             rootView.requestFocus();
             rootView.setOnKeyListener((v, keyCode, event) -> {
                 if (event.getAction() == ACTION_UP && keyCode == KEYCODE_BACK) {
-                    backButtonDialog();
+                    showBackButtonDialog();
                     return true;
                 }
                 return false;
@@ -224,25 +221,12 @@ public class CategorizationFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.menu_save_categories:
-                //If no categories selected, display warning to user
-                if (selectedCategories.size() == 0) {
-                    new AlertDialog.Builder(getActivity())
-                            .setMessage("Images without categories are rarely usable. "
-                                    + "Are you sure you want to submit without selecting "
-                                    + "categories?")
-                            .setTitle("No Categories Selected")
-                            .setPositiveButton("No, go back", (dialog, id) -> {
-                                //Exit menuItem so user can select their categories
-                            })
-                            .setNegativeButton("Yes, submit", (dialog, id) -> {
-                                //Proceed to submission
-                                onCategoriesSaveHandler.onCategoriesSave(getStringList(selectedCategories));
-                            })
-                            .create()
-                            .show();
-                } else {
-                    //Proceed to submission
+                if (selectedCategories.size() > 0) {
+                    //Some categories selected, proceed to submission
                     onCategoriesSaveHandler.onCategoriesSave(getStringList(selectedCategories));
+                } else {
+                    //No categories selected, prompt the user to select some
+                    showConfirmationDialog();
                 }
                 return true;
             default:
@@ -271,7 +255,7 @@ public class CategorizationFragment extends Fragment {
         return Observable.fromIterable(
                 MwVolleyApi.GpsCatExists.getGpsCatExists() ?
                         MwVolleyApi.getGpsCat() : new ArrayList<>())
-                .map(s -> new CategoryItem(s, false));
+                .map(name -> new CategoryItem(name, false));
     }
 
     private Observable<CategoryItem> titleCategories() {
@@ -279,10 +263,9 @@ public class CategorizationFragment extends Fragment {
         SharedPreferences titleDesc = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String title = titleDesc.getString("Title", "");
 
-        return Observable.just(title)
-                .observeOn(Schedulers.io())
-                .flatMapIterable(s -> titleCatQuery(s))
-                .map(s -> new CategoryItem(s, false));
+        return CommonsApplication.getInstance().getMWApi()
+                .searchTitles(title, SEARCH_CATS_LIMIT)
+                .map(name -> new CategoryItem(name, false));
     }
 
     private Observable<CategoryItem> recentCategories() {
@@ -291,62 +274,35 @@ public class CategorizationFragment extends Fragment {
     }
 
     private Observable<CategoryItem> search(String term) {
-        return Single.just(term)
-                .map(s -> {
-                    //If user hasn't typed anything in yet, get GPS and recent items
-                    if (TextUtils.isEmpty(s)) {
-                        return new ArrayList<String>();
-                    }
+        //If user hasn't typed anything in yet, get GPS and recent items
+        if (TextUtils.isEmpty(term)) {
+            return Observable.empty();
+        }
 
-                    //if user types in something that is in cache, return cached category
-                    if (categoriesCache.containsKey(s)) {
-                        return categoriesCache.get(s);
-                    }
+        //if user types in something that is in cache, return cached category
+        if (categoriesCache.containsKey(term)) {
+            return Observable.fromIterable(categoriesCache.get(term))
+                    .map(name -> new CategoryItem(name, false));
+        }
 
-                    //otherwise if user has typed something in that isn't in cache, search API for matching categories
-                    //URL: https://commons.wikimedia.org/w/api.php?action=query&list=allcategories&acprefix=filter&aclimit=25
-                    MediaWikiApi api = CommonsApplication.getInstance().getMWApi();
-                    List<String> categories = new ArrayList<>();
-                    try {
-                        categories = api.allCategories(SEARCH_CATS_LIMIT, s);
-                        Timber.d("Prefix URL filter %s", categories);
-                    } catch (IOException e) {
-                        Timber.e(e, "IO Exception: ");
-                        //Return empty arraylist
-                        return categories;
-                    }
-
-                    Timber.d("Found categories from Prefix search, waiting for filter");
-                    return categories;
-                })
-                .flatMapObservable(Observable::fromIterable)
-                .map(s -> new CategoryItem(s, false));
+        //otherwise if user has typed something in that isn't in cache, search API for matching categories
+        return CommonsApplication.getInstance().getMWApi()
+                .allCategories(term, SEARCH_CATS_LIMIT)
+                .map(name -> new CategoryItem(name, false));
     }
 
     private Observable<CategoryItem> search2(String term) {
-        return Single.just(term)
-                .map(s -> {
-                    //If user hasn't typed anything in yet, get GPS and recent items
-                    if (TextUtils.isEmpty(s)) {
-                        return new ArrayList<String>();
-                    }
+        //If user hasn't typed anything in yet, get GPS and recent items
+        if (TextUtils.isEmpty(term)) {
+            return Observable.empty();
+        }
 
-                    MediaWikiApi api = CommonsApplication.getInstance().getMWApi();
-
-                    //URL https://commons.wikimedia.org/w/api.php?action=query&format=xml&list=search&srwhat=text&srenablerewrites=1&srnamespace=14&srlimit=10&srsearch=
-                    try {
-                        return api.searchCategories(SEARCH_CATS_LIMIT, term);
-                    } catch (IOException e) {
-                        Timber.e(e, "IO Exception: ");
-                        return new ArrayList<String>();
-                    }
-                })
-                .flatMapObservable(Observable::fromIterable)
+        return CommonsApplication.getInstance().getMWApi()
+                .searchCategories(term, SEARCH_CATS_LIMIT)
                 .map(s -> new CategoryItem(s, false));
     }
 
     private boolean containsYear(String items) {
-
         //Check for current and previous year to exclude these categories from removal
         Calendar now = Calendar.getInstance();
         int year = now.get(Calendar.YEAR);
@@ -355,7 +311,6 @@ public class CategorizationFragment extends Fragment {
         int prevYear = year - 1;
         String prevYearInString = String.valueOf(prevYear);
         Timber.d("Previous year: %s", prevYearInString);
-
 
         //Check if s contains a 4-digit word anywhere within the string (.* is wildcard)
         //And that s does not equal the current year or previous year
@@ -368,7 +323,7 @@ public class CategorizationFragment extends Fragment {
         return selectedCategories.size();
     }
 
-    public void backButtonDialog() {
+    public void showBackButtonDialog() {
         new AlertDialog.Builder(getActivity())
                 .setMessage("Are you sure you want to go back? The image will not "
                         + "have any categories saved.")
@@ -377,6 +332,23 @@ public class CategorizationFragment extends Fragment {
                     //No need to do anything, user remains on categorization screen
                 })
                 .setNegativeButton("Yes", (dialog, id) -> getActivity().finish())
+                .create()
+                .show();
+    }
+
+    public void showConfirmationDialog() {
+        new AlertDialog.Builder(getActivity())
+                .setMessage("Images without categories are rarely usable. "
+                        + "Are you sure you want to submit without selecting "
+                        + "categories?")
+                .setTitle("No Categories Selected")
+                .setPositiveButton("No, go back", (dialog, id) -> {
+                    //Exit menuItem so user can select their categories
+                })
+                .setNegativeButton("Yes, submit", (dialog, id) -> {
+                    //Proceed to submission
+                    onCategoriesSaveHandler.onCategoriesSave(getStringList(selectedCategories));
+                })
                 .create()
                 .show();
     }
