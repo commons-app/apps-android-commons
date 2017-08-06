@@ -17,7 +17,7 @@ dependencies {
     compile "com.android.support:design:${project.supportLibVersion}"
     compile 'com.google.code.gson:gson:2.8.0'
     compile "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
-    compile 'com.github.pedrovgs:renderers:3.3.0'
+    compile 'com.github.pedrovgs:renderers:3.3.3'
     annotationProcessor "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
     compile 'com.jakewharton.timber:timber:4.5.1'
     compile 'com.squareup.okhttp3:okhttp:3.8.1'
