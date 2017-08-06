@@ -22,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
@@ -160,7 +161,7 @@ public  class       MultipleShareActivity
     }
 
     @Override
-    public void onCategoriesSave(ArrayList<String> categories) {
+    public void onCategoriesSave(List<String> categories) {
         if(categories.size() > 0) {
         ContentProviderClient client = getContentResolver().acquireContentProviderClient(ModificationsContentProvider.AUTHORITY);
             for(Contribution contribution: photosList) {

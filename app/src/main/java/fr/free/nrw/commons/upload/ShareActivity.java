@@ -154,7 +154,7 @@ public  class       ShareActivity
     }
 
     @Override
-    public void onCategoriesSave(ArrayList<String> categories) {
+    public void onCategoriesSave(List<String> categories) {
         if(categories.size() > 0) {
             ModifierSequence categoriesSequence = new ModifierSequence(contribution.getContentUri());
 

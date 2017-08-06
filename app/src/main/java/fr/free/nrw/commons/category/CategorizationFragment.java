@@ -3,7 +3,6 @@ package fr.free.nrw.commons.category;
 import android.content.ContentProviderClient;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.preference.PreferenceManager;
@@ -11,9 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,24 +21,28 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.pedrogomez.renderers.ListAdapteeCollection;
+import com.jakewharton.rxbinding2.view.RxView;
+import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.pedrogomez.renderers.RVRendererAdapter;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.category.CategoriesRenderer.CategoryClickedListener;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.upload.MwVolleyApi;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 import static android.view.KeyEvent.ACTION_UP;
@@ -51,7 +52,8 @@ import static fr.free.nrw.commons.category.CategoryContentProvider.AUTHORITY;
 /**
  * Displays the category suggestion and selection screen. Category search is initiated here.
  */
-public class CategorizationFragment extends Fragment implements CategoryClickedListener {
+public class CategorizationFragment extends Fragment {
+
     public static final int SEARCH_CATS_LIMIT = 25;
 
     @BindView(R.id.categoriesListBox)
@@ -68,19 +70,54 @@ public class CategorizationFragment extends Fragment implements CategoryClickedL
     private RVRendererAdapter<CategoryItem> categoriesAdapter;
     private OnCategoriesSaveHandler onCategoriesSaveHandler;
     private HashMap<String, ArrayList<String>> categoriesCache;
-    private ArrayList<String> selectedCategories = new ArrayList<>();
+    private List<CategoryItem> selectedCategories = new ArrayList<>();
     private ContentProviderClient client;
-    private PrefixUpdater prefixUpdaterSub;
-    private MethodAUpdater methodAUpdaterSub;
-    private final CategoryTextWatcher textWatcher = new CategoryTextWatcher();
-    private final CategoriesAdapterFactory adapterFactory = new CategoriesAdapterFactory(this);
-    private final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(2);
-    private final ArrayList<String> titleCatItems = new ArrayList<>();
-    private final CountDownLatch mergeLatch = new CountDownLatch(1);
-    // LHS guarantees ordered insertions, allowing for prioritized method A results
-    private final Set<String> results = new LinkedHashSet<>();
+    private final CategoriesAdapterFactory adapterFactory = new CategoriesAdapterFactory(item -> {
+        if (item.isSelected()) {
+            selectedCategories.add(item);
+            updateCategoryCount(item, client);
+        } else {
+            selectedCategories.remove(item);
+        }
+    });
 
-    @SuppressWarnings("unchecked")
+    private void updateCategoryCount(CategoryItem item, ContentProviderClient client) {
+        Category cat = lookupCategory(item.getName());
+        cat.incTimesUsed();
+
+        cat.setContentProviderClient(client);
+        cat.save();
+    }
+
+    private Category lookupCategory(String name) {
+        Cursor cursor = null;
+        try {
+            cursor = client.query(
+                    CategoryContentProvider.BASE_URI,
+                    Category.Table.ALL_FIELDS,
+                    Category.Table.COLUMN_NAME + "=?",
+                    new String[]{name},
+                    null);
+            if (cursor != null && cursor.moveToFirst()) {
+                return Category.fromCursor(cursor);
+            }
+        } catch (RemoteException e) {
+            // This feels lazy, but to hell with checked exceptions. :)
+            throw new RuntimeException(e);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+
+        // Newly used category...
+        Category cat = new Category();
+        cat.setName(name);
+        cat.setLastUsed(new Date());
+        cat.setTimesUsed(0);
+        return cat;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -89,28 +126,74 @@ public class CategorizationFragment extends Fragment implements CategoryClickedL
 
         categoriesList.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        categoriesSkip.setOnClickListener(view -> {
-            getActivity().onBackPressed();
-            getActivity().finish();
-        });
+        RxView.clicks(categoriesSkip)
+                .takeUntil(RxView.detaches(categoriesSkip))
+                .subscribe(o -> {
+                    getActivity().onBackPressed();
+                    getActivity().finish();
+                });
 
-        ArrayList<CategoryItem> items;
-        if (savedInstanceState == null) {
-            items = new ArrayList<>();
-            categoriesCache = new HashMap<>();
-        } else {
-            items = savedInstanceState.getParcelableArrayList("currentCategories");
-            categoriesCache = (HashMap<String, ArrayList<String>>) savedInstanceState
-                    .getSerializable("categoriesCache");
+        ArrayList<CategoryItem> items = new ArrayList<>();
+        categoriesCache = new HashMap<>();
+        if (savedInstanceState != null) {
+            items.addAll(savedInstanceState.getParcelableArrayList("currentCategories"));
+            categoriesCache.putAll((HashMap<String, ArrayList<String>>) savedInstanceState
+                    .getSerializable("categoriesCache"));
         }
 
         categoriesAdapter = adapterFactory.create(items);
         categoriesList.setAdapter(categoriesAdapter);
-        categoriesFilter.addTextChangedListener(textWatcher);
 
-        startUpdatingCategoryList();
-
+        RxTextView.textChanges(categoriesFilter)
+                .takeUntil(RxView.detaches(categoriesFilter))
+                .debounce(300, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(filter -> updateCategoryList(filter.toString()));
         return rootView;
+    }
+
+    private void updateCategoryList(String filter) {
+        Observable.fromIterable(selectedCategories)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable -> {
+                    categoriesSearchInProgress.setVisibility(View.VISIBLE);
+                    categoriesNotFoundView.setVisibility(View.GONE);
+                    categoriesSkip.setVisibility(View.GONE);
+                    categoriesAdapter.clear();
+                })
+                .observeOn(Schedulers.io())
+                .concatWith(
+                        search(filter)
+                                .mergeWith(search2(filter))
+                                .filter(categoryItem -> !selectedCategories.contains(categoryItem))
+                                .switchIfEmpty(
+                                        gpsCategories()
+                                                .concatWith(titleCategories())
+                                                .concatWith(recentCategories())
+                                                .filter(categoryItem -> !selectedCategories.contains(categoryItem))
+                                )
+                )
+                .filter(categoryItem -> !containsYear(categoryItem.getName()))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        s -> categoriesAdapter.add(s),
+                        throwable -> Timber.e(throwable),
+                        () -> {
+                            categoriesAdapter.notifyDataSetChanged();
+                            categoriesSearchInProgress.setVisibility(View.GONE);
+
+                            if (categoriesAdapter.getItemCount() == 0) {
+                                if (TextUtils.isEmpty(filter)) {
+                                    // If we found no recent cats, show the skip message!
+                                    categoriesSkip.setVisibility(View.VISIBLE);
+                                } else {
+                                    categoriesNotFoundView.setText(getString(R.string.categories_not_found, filter));
+                                    categoriesNotFoundView.setVisibility(View.VISIBLE);
+                                }
+                            }
+                        }
+                );
     }
 
     @Override
@@ -138,12 +221,6 @@ public class CategorizationFragment extends Fragment implements CategoryClickedL
     }
 
     @Override
-    public void onDestroyView() {
-        categoriesFilter.removeTextChangedListener(textWatcher);
-        super.onDestroyView();
-    }
-
-    @Override
     public void onDestroy() {
         super.onDestroy();
         client.release();
@@ -165,21 +242,8 @@ public class CategorizationFragment extends Fragment implements CategoryClickedL
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.menu_save_categories:
-
-                int numberSelected = 0;
-
-                selectedCategories = new ArrayList<>();
-                int count = categoriesAdapter.getItemCount();
-                for (int i = 0; i < count; i++) {
-                    CategoryItem item = categoriesAdapter.getItem(i);
-                    if (item.isSelected()) {
-                        selectedCategories.add(item.getName());
-                        numberSelected++;
-                    }
-                }
-
                 //If no categories selected, display warning to user
-                if (numberSelected == 0) {
+                if (selectedCategories.size() == 0) {
                     new AlertDialog.Builder(getActivity())
                             .setMessage("Images without categories are rarely usable. "
                                     + "Are you sure you want to submit without selecting "
@@ -190,17 +254,18 @@ public class CategorizationFragment extends Fragment implements CategoryClickedL
                             })
                             .setNegativeButton("Yes, submit", (dialog, id) -> {
                                 //Proceed to submission
-                                onCategoriesSaveHandler.onCategoriesSave(selectedCategories);
+                                onCategoriesSaveHandler.onCategoriesSave(getStringList(selectedCategories));
                             })
                             .create()
                             .show();
                 } else {
                     //Proceed to submission
-                    onCategoriesSaveHandler.onCategoriesSave(selectedCategories);
-                    return true;
+                    onCategoriesSaveHandler.onCategoriesSave(getStringList(selectedCategories));
                 }
+                return true;
+            default:
+                return super.onOptionsItemSelected(menuItem);
         }
-        return super.onOptionsItemSelected(menuItem);
     }
 
     @Override
@@ -212,8 +277,12 @@ public class CategorizationFragment extends Fragment implements CategoryClickedL
         client = getActivity().getContentResolver().acquireContentProviderClient(AUTHORITY);
     }
 
-    public HashMap<String, ArrayList<String>> getCategoriesCache() {
-        return categoriesCache;
+    private List<String> getStringList(List<CategoryItem> input) {
+        List<String> output = new ArrayList<>();
+        for (CategoryItem item : input) {
+            output.add(item.getName());
+        }
+        return output;
     }
 
     /**
@@ -221,36 +290,15 @@ public class CategorizationFragment extends Fragment implements CategoryClickedL
      *
      * @return a list containing title-related categories
      */
-    private ArrayList<String> titleCatQuery() {
-        TitleCategories titleCategoriesSub;
-
-        //Retrieve the title that was saved when user tapped submit icon
-        SharedPreferences titleDesc = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String title = titleDesc.getString("Title", "");
-        Timber.d("Title: %s", title);
-
-        //Override onPostExecute to access the results of async API call
-        titleCategoriesSub = new TitleCategories(title) {
-            @Override
-            protected void onPostExecute(List<String> result) {
-                super.onPostExecute(result);
-                Timber.d("Results in onPostExecute: %s", result);
-                titleCatItems.addAll(result);
-                Timber.d("TitleCatItems in onPostExecute: %s", titleCatItems);
-                mergeLatch.countDown();
-            }
-        };
-
-        titleCategoriesSub.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-        Timber.d("TitleCatItems in titleCatQuery: %s", titleCatItems);
-
-        //Only return titleCatItems after API call has finished
+    private List<String> titleCatQuery(String title) {
+        MediaWikiApi api = CommonsApplication.getInstance().getMWApi();
+        //URL https://commons.wikimedia.org/w/api.php?action=query&format=xml&list=search&srwhat=text&srenablerewrites=1&srnamespace=14&srlimit=10&srsearch=
         try {
-            mergeLatch.await(5L, TimeUnit.SECONDS);
-        } catch (InterruptedException e) {
-            Timber.e(e, "Interrupted exception: ");
+            return api.searchTitles(SEARCH_CATS_LIMIT, title);
+        } catch (IOException e) {
+            Timber.e(e, "IO Exception: ");
+            return new ArrayList<>();
         }
-        return titleCatItems;
     }
 
     /**
@@ -284,171 +332,105 @@ public class CategorizationFragment extends Fragment implements CategoryClickedL
         return items;
     }
 
-    /**
-     * Merges nearby categories, categories suggested based on title, and recent categories...
-     * without duplicates.
-     *
-     * @return a list containing merged categories
-     */
-    ArrayList<String> mergeItems() {
-        Set<String> mergedItems = new LinkedHashSet<>();
-
-        Timber.d("Calling APIs for GPS cats, title cats and recent cats...");
-
-        List<String> gpsItems = new ArrayList<>();
-        if (MwVolleyApi.GpsCatExists.getGpsCatExists()) {
-            gpsItems.addAll(MwVolleyApi.getGpsCat());
-        }
-        List<String> titleItems = new ArrayList<>(titleCatQuery());
-        List<String> recentItems = new ArrayList<>(recentCatQuery());
-
-        //Await results of titleItems, which is likely to come in last
-        try {
-            mergeLatch.await(5L, TimeUnit.SECONDS);
-            Timber.d("Waited for merge");
-        } catch (InterruptedException e) {
-            Timber.e(e, "Interrupted Exception: ");
-        }
-
-        mergedItems.addAll(gpsItems);
-        Timber.d("Adding GPS items: %s", gpsItems);
-        mergedItems.addAll(titleItems);
-        Timber.d("Adding title items: %s", titleItems);
-        mergedItems.addAll(recentItems);
-        Timber.d("Adding recent items: %s", recentItems);
-
-        // Needs to be an ArrayList and not a List unless we want to modify a big portion
-        // of preexisting code
-        ArrayList<String> mergedItemsList = new ArrayList<>(mergedItems);
-
-        Timber.d("Merged item list: %s", mergedItemsList);
-        return mergedItemsList;
+    private Observable<CategoryItem> gpsCategories() {
+        return Observable.fromIterable(
+                MwVolleyApi.GpsCatExists.getGpsCatExists() ?
+                        MwVolleyApi.getGpsCat() : new ArrayList<>())
+                .map(s -> new CategoryItem(s, false));
     }
 
-    /**
-     * Displays categories found to the user as they type in the search box
-     *
-     * @param categories a list of all categories found for the search string
-     * @param filter     the search string
-     */
-    private void setCatsAfterAsync(ArrayList<String> categories, String filter) {
-        if (getActivity() != null) {
-            ArrayList<CategoryItem> items = new ArrayList<>();
-            HashSet<String> existingKeys = new HashSet<>();
-            int count = categoriesAdapter.getItemCount();
-            for (int i = 0; i < count; i++) {
-                CategoryItem item = categoriesAdapter.getItem(i);
-                if (item.isSelected()) {
-                    items.add(item);
-                    existingKeys.add(item.getName());
-                }
-            }
-            for (String category : categories) {
-                if (!existingKeys.contains(category)) {
-                    items.add(new CategoryItem(category, false));
-                }
-            }
+    private Observable<CategoryItem> titleCategories() {
+        //Retrieve the title that was saved when user tapped submit icon
+        SharedPreferences titleDesc = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String title = titleDesc.getString("Title", "");
 
-            categoriesAdapter.setCollection(new ListAdapteeCollection<>(items));
-            categoriesAdapter.notifyDataSetChanged();
-            categoriesSearchInProgress.setVisibility(View.GONE);
-
-            if (categories.isEmpty()) {
-                if (TextUtils.isEmpty(filter)) {
-                    // If we found no recent cats, show the skip message!
-                    categoriesSkip.setVisibility(View.VISIBLE);
-                } else {
-                    categoriesNotFoundView.setText(getString(R.string.categories_not_found, filter));
-                    categoriesNotFoundView.setVisibility(View.VISIBLE);
-                }
-            } else {
-                categoriesList.smoothScrollToPosition(existingKeys.size());
-            }
-        } else {
-            Timber.e("Error: Fragment is null");
-        }
+        return Observable.just(title)
+                .observeOn(Schedulers.io())
+                .flatMapIterable(s -> titleCatQuery(s))
+                .map(s -> new CategoryItem(s, false));
     }
 
-
-    /**
-     * Makes asynchronous calls to the Commons MediaWiki API via anonymous subclasses of
-     * 'MethodAUpdater' and 'PrefixUpdater'. Some of their methods are overridden in order to
-     * aggregate the results. A CountDownLatch is used to ensure that MethodA results are shown
-     * above Prefix results.
-     */
-    private void requestSearchResults() {
-        final CountDownLatch latch = new CountDownLatch(1);
-
-        prefixUpdaterSub = new PrefixUpdater(this) {
-            @Override
-            protected List<String> doInBackground(Void... voids) {
-                List<String> result = new ArrayList<>();
-                try {
-                    result = super.doInBackground();
-                    latch.await();
-                } catch (InterruptedException e) {
-                    Timber.w(e);
-                    //Thread.currentThread().interrupt();
-                }
-                return result;
-            }
-
-            @Override
-            protected void onPostExecute(List<String> result) {
-                super.onPostExecute(result);
-
-                results.addAll(result);
-                Timber.d("Prefix result: %s", result);
-
-                String filter = categoriesFilter.getText().toString();
-                ArrayList<String> resultsList = new ArrayList<>(results);
-                categoriesCache.put(filter, resultsList);
-                Timber.d("Final results List: %s", resultsList);
-
-                categoriesAdapter.notifyDataSetChanged();
-                setCatsAfterAsync(resultsList, filter);
-            }
-        };
-
-        methodAUpdaterSub = new MethodAUpdater(this) {
-            @Override
-            protected void onPostExecute(List<String> result) {
-                results.clear();
-                super.onPostExecute(result);
-
-                results.addAll(result);
-                Timber.d("Method A result: %s", result);
-                categoriesAdapter.notifyDataSetChanged();
-
-                latch.countDown();
-            }
-        };
-        prefixUpdaterSub.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-        methodAUpdaterSub.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+    private Observable<CategoryItem> recentCategories() {
+        return Observable.fromIterable(recentCatQuery())
+                .map(s -> new CategoryItem(s, false));
     }
 
-    private void startUpdatingCategoryList() {
-        if (prefixUpdaterSub != null) {
-            prefixUpdaterSub.cancel(true);
-        }
+    private Observable<CategoryItem> search(String term) {
+        return Single.just(term)
+                .map(s -> {
+                    //If user hasn't typed anything in yet, get GPS and recent items
+                    if (TextUtils.isEmpty(s)) {
+                        return new ArrayList<String>();
+                    }
 
-        if (methodAUpdaterSub != null) {
-            methodAUpdaterSub.cancel(true);
-        }
+                    //if user types in something that is in cache, return cached category
+                    if (categoriesCache.containsKey(s)) {
+                        return categoriesCache.get(s);
+                    }
 
-        requestSearchResults();
+                    //otherwise if user has typed something in that isn't in cache, search API for matching categories
+                    //URL: https://commons.wikimedia.org/w/api.php?action=query&list=allcategories&acprefix=filter&aclimit=25
+                    MediaWikiApi api = CommonsApplication.getInstance().getMWApi();
+                    List<String> categories = new ArrayList<>();
+                    try {
+                        categories = api.allCategories(SEARCH_CATS_LIMIT, s);
+                        Timber.d("Prefix URL filter %s", categories);
+                    } catch (IOException e) {
+                        Timber.e(e, "IO Exception: ");
+                        //Return empty arraylist
+                        return categories;
+                    }
+
+                    Timber.d("Found categories from Prefix search, waiting for filter");
+                    return categories;
+                })
+                .flatMapObservable(Observable::fromIterable)
+                .map(s -> new CategoryItem(s, false));
+    }
+
+    private Observable<CategoryItem> search2(String term) {
+        return Single.just(term)
+                .map(s -> {
+                    //If user hasn't typed anything in yet, get GPS and recent items
+                    if (TextUtils.isEmpty(s)) {
+                        return new ArrayList<String>();
+                    }
+
+                    MediaWikiApi api = CommonsApplication.getInstance().getMWApi();
+
+                    //URL https://commons.wikimedia.org/w/api.php?action=query&format=xml&list=search&srwhat=text&srenablerewrites=1&srnamespace=14&srlimit=10&srsearch=
+                    try {
+                        return api.searchCategories(SEARCH_CATS_LIMIT, term);
+                    } catch (IOException e) {
+                        Timber.e(e, "IO Exception: ");
+                        return new ArrayList<String>();
+                    }
+                })
+                .flatMapObservable(Observable::fromIterable)
+                .map(s -> new CategoryItem(s, false));
+    }
+
+    private boolean containsYear(String items) {
+
+        //Check for current and previous year to exclude these categories from removal
+        Calendar now = Calendar.getInstance();
+        int year = now.get(Calendar.YEAR);
+        String yearInString = String.valueOf(year);
+
+        int prevYear = year - 1;
+        String prevYearInString = String.valueOf(prevYear);
+        Timber.d("Previous year: %s", prevYearInString);
+
+
+        //Check if s contains a 4-digit word anywhere within the string (.* is wildcard)
+        //And that s does not equal the current year or previous year
+        //And if it is an irrelevant category such as Media_needing_categories_as_of_16_June_2017(Issue #750)
+        return ((items.matches(".*(19|20)\\d{2}.*") && !items.contains(yearInString) && !items.contains(prevYearInString))
+                || items.matches("(.*)needing(.*)") || items.matches("(.*)taken on(.*)"));
     }
 
     public int getCurrentSelectedCount() {
-        int count = 0;
-        int numberOfItems = categoriesAdapter.getItemCount();
-        for (int i = 0; i < numberOfItems; i++) {
-            CategoryItem item = categoriesAdapter.getItem(i);
-            if (item.isSelected()) {
-                count++;
-            }
-        }
-        return count;
+        return selectedCategories.size();
     }
 
     public void backButtonDialog() {
@@ -462,28 +444,5 @@ public class CategorizationFragment extends Fragment implements CategoryClickedL
                 .setNegativeButton("Yes", (dialog, id) -> getActivity().finish())
                 .create()
                 .show();
-    }
-
-    @Override
-    public void categoryClicked(CategoryItem item) {
-        if (item.isSelected()) {
-            new CategoryCountUpdater(item.getName(), client).executeOnExecutor(executor);
-        }
-    }
-
-    private class CategoryTextWatcher implements TextWatcher {
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-        }
-
-        @Override
-        public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
-            startUpdatingCategoryList();
-        }
-
-        @Override
-        public void afterTextChanged(Editable editable) {
-
-        }
     }
 }
