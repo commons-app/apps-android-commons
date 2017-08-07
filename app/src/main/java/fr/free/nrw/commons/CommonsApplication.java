@@ -11,7 +11,6 @@ import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
 import android.support.v4.util.LruCache;
-import android.util.Log;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.stetho.Stetho;
@@ -131,11 +130,14 @@ public class CommonsApplication extends Application {
 
         Timber.plant(new Timber.DebugTree());
 
-        Stetho.initializeWithDefaults(this);
+
 
         if (!BuildConfig.DEBUG) {
             ACRA.init(this);
+        } else {
+            Stetho.initializeWithDefaults(this);
         }
+
         // Fire progress callbacks for every 3% of uploaded content
         System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0");
 
