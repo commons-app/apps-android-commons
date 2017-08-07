@@ -194,15 +194,11 @@ public class CategorizationFragment extends Fragment {
                 .concatWith(
                         searchAll(filter)
                                 .mergeWith(searchCategories(filter))
-                                .filter(categoryItem -> !selectedCategories.contains(categoryItem))
-                                .switchIfEmpty(
-                                        gpsCategories()
-                                                .concatWith(titleCategories())
-                                                .concatWith(recentCategories())
-                                                .filter(categoryItem -> !selectedCategories.contains(categoryItem))
-                                )
+                                .concatWith( TextUtils.isEmpty(filter)
+                                        ? defaultCategories() : Observable.empty())
                 )
                 .filter(categoryItem -> !containsYear(categoryItem.getName()))
+                .distinct()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         s -> categoriesAdapter.add(s),
@@ -211,11 +207,13 @@ public class CategorizationFragment extends Fragment {
                             categoriesAdapter.notifyDataSetChanged();
                             categoriesSearchInProgress.setVisibility(View.GONE);
 
-                            if (categoriesAdapter.getItemCount() == 0) {
+                            if (categoriesAdapter.getItemCount() == selectedCategories.size()) {
+                                // There are no suggestions
                                 if (TextUtils.isEmpty(filter)) {
-                                    // If we found no recent cats, show the skip message!
+                                    // Allow to send image with no categories
                                     categoriesSkip.setVisibility(View.VISIBLE);
                                 } else {
+                                    // Inform the user that the searched term matches  no category
                                     categoriesNotFoundView.setText(getString(R.string.categories_not_found, filter));
                                     categoriesNotFoundView.setVisibility(View.VISIBLE);
                                 }
@@ -230,6 +228,12 @@ public class CategorizationFragment extends Fragment {
             output.add(item.getName());
         }
         return output;
+    }
+
+    private Observable<CategoryItem> defaultCategories() {
+        return gpsCategories()
+                .concatWith(titleCategories())
+                .concatWith(recentCategories());
     }
 
     private Observable<CategoryItem> gpsCategories() {
