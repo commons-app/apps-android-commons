@@ -50,12 +50,16 @@ public class CompatTextView extends AppCompatTextView {
             int endDrawableRes = a.getResourceId(R.styleable.CompatTextView_drawableEnd, 0);
             int bottomDrawableRes = a.getResourceId(R.styleable.CompatTextView_drawableBottom, 0);
 
-            // Load the used drawables, falling back to whatever may be set in an "android:" namespace attribute
+            // Load the used drawables, fall back to whatever was set in an "android:"
             Drawable[] currentDrawables = getCompoundDrawables();
-            Drawable left = startDrawableRes != 0 ? dm.getDrawable(context, startDrawableRes) : currentDrawables[0];
-            Drawable right = endDrawableRes != 0 ? dm.getDrawable(context, endDrawableRes) : currentDrawables[1];
-            Drawable top = topDrawableRes != 0 ? dm.getDrawable(context, topDrawableRes) : currentDrawables[2];
-            Drawable bottom = bottomDrawableRes != 0 ? dm.getDrawable(context, bottomDrawableRes) : currentDrawables[3];
+            Drawable left = startDrawableRes != 0
+                    ? dm.getDrawable(context, startDrawableRes) : currentDrawables[0];
+            Drawable right = endDrawableRes != 0
+                    ? dm.getDrawable(context, endDrawableRes) : currentDrawables[1];
+            Drawable top = topDrawableRes != 0
+                    ? dm.getDrawable(context, topDrawableRes) : currentDrawables[2];
+            Drawable bottom = bottomDrawableRes != 0
+                    ? dm.getDrawable(context, bottomDrawableRes) : currentDrawables[3];
 
             // Account for RTL and apply the compound Drawables
             Drawable start = rtl ? right : left;
