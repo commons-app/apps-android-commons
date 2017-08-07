@@ -32,6 +32,7 @@ import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.ui.widget.CompatTextView;
 import fr.free.nrw.commons.utils.UiUtils;
 import timber.log.Timber;
 
@@ -285,17 +286,10 @@ public class MediaDetailFragment extends Fragment {
 
     private View buildCatLabel(final String catName) {
         final View item = getLayoutInflater(null).inflate(R.layout.detail_category_item, null, false);
-        final TextView textView = (TextView)item.findViewById(R.id.mediaDetailCategoryItemText);
+        final CompatTextView textView = (CompatTextView)item.findViewById(R.id.mediaDetailCategoryItemText);
 
         textView.setText(catName);
         if (categoriesLoaded && categoriesPresent) {
-            textView.setCompoundDrawablesWithIntrinsicBounds(
-                    AppCompatResources.getDrawable(
-                            getContext(),
-                            R.drawable.ic_info_outline_white_24dp),
-                    null, null, null);
-            textView.setCompoundDrawablePadding((int) UiUtils.convertDpToPixel(6, getContext()));
-            textView.setGravity(Gravity.CENTER_VERTICAL);
             textView.setOnClickListener(view -> {
                 String selectedCategoryTitle = "Category:" + catName;
                 Intent viewIntent = new Intent();

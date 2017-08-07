@@ -132,21 +132,20 @@
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <fr.free.nrw.commons.ui.widget.CompatTextView
                         android:id="@+id/mediaDetailLicense"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
                         android:background="?attr/subBackground"
                         android:foreground="?attr/selectableItemBackground"
-                        android:drawableLeft="@drawable/ic_info_outline_white_24dp"
-                        android:drawablePadding="6dp"
-                        android:drawableStart="@drawable/ic_info_outline_white_24dp"
                         android:gravity="center_vertical"
                         android:padding="12dp"
                         android:text="@string/media_detail_license"
                         android:textColor="@android:color/white"
                         android:textSize="14sp"
+                        app:drawablePadding="6dp"
+                        app:drawableStart="@drawable/ic_info_outline_white_24dp"
                         tools:text="License link" />
                 </LinearLayout>
 
@@ -166,21 +165,20 @@
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <fr.free.nrw.commons.ui.widget.CompatTextView
                         android:id="@+id/mediaDetailCoordinates"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
                         android:background="?attr/subBackground"
-                        android:drawableLeft="@drawable/ic_map_white_24dp"
-                        android:drawablePadding="6dp"
-                        android:drawableStart="@drawable/ic_map_white_24dp"
                         android:foreground="?attr/selectableItemBackground"
                         android:gravity="center_vertical"
                         android:padding="12dp"
                         android:text="@string/media_detail_coordinates"
                         android:textColor="@android:color/white"
                         android:textSize="14sp"
+                        app:drawablePadding="6dp"
+                        app:drawableStart="@drawable/ic_map_white_24dp"
                         tools:text="Coordinates link" />
                 </LinearLayout>
 
