@@ -198,6 +198,5 @@
   <string name="feedback_popup_description">Nous planifions plusieurs nouvelles fonctionnalités et améliorations pour l’application ! Voudriez-vous les voir et donner votre avis ? \n\n(Vous pouvez toujours accéder à cela en sélectionnant « Plans du développeur » dans le panneau de navigation)</string>
   <string name="feedback_popup_decline">Non merci</string>
   <string name="feedback_popup_accept">Bien sûr, amenez-y-moi !</string>
-  <string name="feedback_page_url">https://meta.wikimedia.org/wiki/Grants:Project/Improve_\'Upload_to_Commons\'_Android_App/Renewal/User_feedback</string>
   <string name="navigation_item_developer_plans">Plans du développeur</string>
 </resources>

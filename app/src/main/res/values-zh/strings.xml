@@ -198,6 +198,5 @@
   <string name="feedback_popup_description">我们正在计划为应用添加多个新功能，以及进行多方面改进！您是否需要查阅它们，并提供反馈？\n\n（您随时都可以通过选择导航菜单的“开发人员计划”访问它）</string>
   <string name="feedback_popup_decline">不用了，谢谢</string>
   <string name="feedback_popup_accept">好的，带我看看！</string>
-  <string name="feedback_page_url">https://meta.wikimedia.org/wiki/Grants:Project/Improve_\'Upload_to_Commons\'_Android_App/Renewal/User_feedback</string>
   <string name="navigation_item_developer_plans">开发人员计划</string>
 </resources>

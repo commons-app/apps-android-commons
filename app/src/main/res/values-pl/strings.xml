@@ -135,6 +135,7 @@
   <string name="location_permission_rationale">Opcjonalne zezwolenie: uzyskiwanie bieżącej lokalizacji dla wygenerowania propozycji kategorii</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Pobliskie miejsca</string>
+  <string name="no_nearby">Nie znaleziono niczego w pobliżu</string>
   <string name="warning">Ostrzeżenie</string>
   <string name="file_exists">Ten plik już istnieje na Commons. Jesteś pewien, że chcesz kontynuować?</string>
   <string name="yes">Tak</string>
@@ -143,6 +144,7 @@
   <string name="media_detail_media_title">Tytuł pliku</string>
   <string name="media_detail_description">Opis</string>
   <string name="media_detail_description_explanation">Tu jest miejsce na opis pliku. Mogą być dość długie i wymagać przewijania podczas czytania. Chcemy, by wszystko wyglądało dobrze.</string>
+  <string name="media_detail_uploaded_date">Data przesłania</string>
   <string name="media_detail_license">Licencja</string>
   <string name="media_detail_coordinates">Współrzędne</string>
   <string name="become_a_tester_title">Zostań beta-testerem</string>
@@ -150,6 +152,14 @@
   <string name="use_wikidata">Użyj Wikidanych</string>
   <string name="_2fa_code">Kod 2FA</string>
   <string name="login_failed_2fa_not_supported">Uwierzytelnianie dwuskładnikowe obecnie nie jest obsługiwane.</string>
+  <string name="logout_verification">Czy na pewno wylogować?</string>
+  <string name="commons_logo">Logo Commons</string>
+  <string name="background_image">Obraz w tle</string>
+  <string name="upload_image">Załaduj zdjęcie</string>
+  <string name="welcome_image_mount_zao">Zaō</string>
+  <string name="welcome_image_llamas">Lamy</string>
+  <string name="welcome_image_rainbow_bridge">Rainbow Bridge</string>
+  <string name="welcome_image_tulip">Tulipan</string>
   <string name="welcome_image_welcome_wikipedia">Witaj na Wikipedii</string>
   <string name="welcome_image_welcome_copyright" fuzzy="true">Witaj w prawach autorskich.</string>
   <string name="cancel">Anuluj</string>
@@ -157,11 +167,15 @@
   <string name="navigation_drawer_close">Zamknij</string>
   <string name="navigation_item_home">Dom</string>
   <string name="navigation_item_upload">Prześlij</string>
+  <string name="navigation_item_nearby">W pobliżu</string>
   <string name="navigation_item_about">O aplikacji</string>
   <string name="navigation_item_settings">Ustawienia</string>
   <string name="navigation_item_feedback">Opinie</string>
   <string name="navigation_item_logout">Wyloguj</string>
   <string name="navigation_item_info">Samouczek</string>
+  <string name="no_description_found">nie znaleziono opisu</string>
   <string name="nearby_info_menu_wikidata_article">Element Wikidanych</string>
+  <string name="title_info">Podaj krótką, opisową i unikalną nazwę, która będzie służyła jako nazwa pliku. Możesz używać prostego języka i spacji. Nie dodawaj rozszerzenia pliku.</string>
   <string name="feedback_popup_decline">Nie, dziękuję</string>
+  <string name="feedback_popup_accept">Chętnie!</string>
 </resources>

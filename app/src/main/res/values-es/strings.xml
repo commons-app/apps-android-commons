@@ -192,10 +192,11 @@
   <string name="nearby_info_menu_commons_article">Página del archivo en Commons</string>
   <string name="nearby_info_menu_wikidata_article">Elemento de Wikidata</string>
   <string name="error_while_cache">Error mientras se guardaban imágenes en la caché</string>
+  <string name="title_info">Un título único descriptivo para el archivo, que servirá como un nombre de archivo. Puede usar un lenguaje claro con espacios. No incluya la extensión del archivo.</string>
+  <string name="description_info">Por favor, describa el elemento multimedia tanto como sea posible: ¿dónde fue tomado?, ¿qué muestra?, ¿cuál es el contexto? Por favor, describa los objetos o personas. Ofrezca la información que no puede ser inferida tan facilmente, por ejemplo el momento del día si es un paisaje. Si el medio muestra algo inusual, explique qué lo hace insual.</string>
   <string name="feedback_popup_title">Se aprecian comentarios</string>
   <string name="feedback_popup_description">Estamos planeando muchas funcionalidades nuevas y mejoras para la aplicación. ¿Te gustaría reseñarlas y comentar tu opinión?\n\n(Siempre puedas acceder a esto seleccionando \"Planes de los desarrolladores\" en el cajón de navegación)</string>
   <string name="feedback_popup_decline">No, gracias</string>
   <string name="feedback_popup_accept">Seguro, ¡vamos ahí!</string>
-  <string name="feedback_page_url">https://meta.wikimedia.org/wiki/Grants:Project/Improve_\'Upload_to_Commons\'_Android_App/Renewal/User_feedback</string>
   <string name="navigation_item_developer_plans">Planes de los desarrolladores</string>
 </resources>

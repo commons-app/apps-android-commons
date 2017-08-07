@@ -198,6 +198,5 @@
   <string name="feedback_popup_description">Планираме неколку нови можности и подобрувања на прилогот! Дали би сакале да ги прегледате и да ни дадете ваше мислење? \n\n(Ова можете да го сторите во секое време, избирајќи го „Планови за развој“ во изборникот)</string>
   <string name="feedback_popup_decline">Не, благодарам</string>
   <string name="feedback_popup_accept">Секако, ајде да видам!</string>
-  <string name="feedback_page_url">https://meta.wikimedia.org/wiki/Grants:Project/Improve_\'Upload_to_Commons\'_Android_App/Renewal/User_feedback</string>
   <string name="navigation_item_developer_plans">Планови за развој</string>
 </resources>

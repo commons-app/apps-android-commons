@@ -141,6 +141,5 @@
   <string name="feedback_popup_description">Aplikaziorako karakteristika eta hobekuntza berriak prestatzen ari gara! Zure iritzia eman nahi diguzu hauen inguruan?\n\n(\"Garatzaile planak\" hautatuz sartu zaitezke)</string>
   <string name="feedback_popup_decline">Ez, eskerrik asko</string>
   <string name="feedback_popup_accept">Noski, eraman nazazu hara!</string>
-  <string name="feedback_page_url">https://meta.wikimedia.org/wiki/Grants:Project/Improve_\'Upload_to_Commons\'_Android_App/Renewal/User_feedback</string>
   <string name="navigation_item_developer_plans">Garatzaile planak</string>
 </resources>
