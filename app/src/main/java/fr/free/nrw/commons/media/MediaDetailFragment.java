@@ -30,6 +30,7 @@ import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.ui.widget.CompatTextView;
 import timber.log.Timber;
 
 public class MediaDetailFragment extends Fragment {
@@ -211,22 +212,8 @@ public class MediaDetailFragment extends Fragment {
                 if (success) {
                     extractor.fill(media);
 
-                    // Set text of desc, license, and categories
-                    desc.setText(prettyDescription(media));
-                    license.setText(prettyLicense(media));
-                    coordinates.setText(prettyCoordinates(media));
-                    uploadedDate.setText(prettyUploadedDate(media));
-
-                    categoryNames.clear();
-                    categoryNames.addAll(media.getCategories());
-
-                    categoriesLoaded = true;
-                    categoriesPresent = (categoryNames.size() > 0);
-                    if (!categoriesPresent) {
-                        // Stick in a filler element.
-                        categoryNames.add(getString(R.string.detail_panel_cats_none));
-                    }
-                    rebuildCatList();
+                    setTextFields(media);
+                    setOnClickListeners(media);
                 } else {
                     Timber.d("Failed to load photo details.");
                 }
@@ -260,6 +247,31 @@ public class MediaDetailFragment extends Fragment {
         super.onDestroyView();
     }
 
+    private void setTextFields(Media media) {
+        desc.setText(prettyDescription(media));
+        license.setText(prettyLicense(media));
+        coordinates.setText(prettyCoordinates(media));
+        uploadedDate.setText(prettyUploadedDate(media));
+
+        categoryNames.clear();
+        categoryNames.addAll(media.getCategories());
+
+        categoriesLoaded = true;
+        categoriesPresent = (categoryNames.size() > 0);
+        if (!categoriesPresent) {
+            // Stick in a filler element.
+            categoryNames.add(getString(R.string.detail_panel_cats_none));
+        }
+        rebuildCatList();
+    }
+
+    private void setOnClickListeners(final Media media) {
+        license.setOnClickListener(v -> openWebBrowser(licenseLink(media)));
+        if (media.getCoordinates() != null) {
+            coordinates.setOnClickListener(v -> openMap(media.getCoordinates()));
+        }
+    }
+
     private void rebuildCatList() {
         categoryContainer.removeAllViews();
         // @fixme add the category items
@@ -271,7 +283,7 @@ public class MediaDetailFragment extends Fragment {
 
     private View buildCatLabel(final String catName) {
         final View item = getLayoutInflater(null).inflate(R.layout.detail_category_item, null, false);
-        final TextView textView = (TextView)item.findViewById(R.id.mediaDetailCategoryItemText);
+        final CompatTextView textView = (CompatTextView)item.findViewById(R.id.mediaDetailCategoryItemText);
 
         textView.setText(catName);
         if (categoriesLoaded && categoriesPresent) {
@@ -341,5 +353,35 @@ public class MediaDetailFragment extends Fragment {
             return getString(R.string.media_detail_coordinates_empty);
         }
         return media.getCoordinates().getPrettyCoordinateString();
+    }
+
+
+    private @Nullable String licenseLink(Media media) {
+        String licenseKey = media.getLicense();
+        if (licenseKey == null || licenseKey.equals("")) {
+            return null;
+        }
+        License licenseObj = licenseList.get(licenseKey);
+        if (licenseObj == null) {
+            return null;
+        } else {
+            return licenseObj.getUrl(Locale.getDefault().getLanguage());
+        }
+    }
+
+    private void openWebBrowser(String url) {
+        Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(browser);
+    }
+
+    private void openMap(LatLng coordinates) {
+        //Open map app at given position
+        Uri gmmIntentUri = Uri.parse(
+                "geo:0,0?q=" + coordinates.getLatitude() + "," + coordinates.getLatitude());
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+
+        if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivity(mapIntent);
+        }
     }
 }

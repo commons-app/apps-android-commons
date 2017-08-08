@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     >
 
-    <TextView
+    <fr.free.nrw.commons.ui.widget.CompatTextView
+        android:id="@+id/mediaDetailCategoryItemText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?attr/subBackground"
+        android:foreground="?attr/selectableItemBackground"
+        android:gravity="center_vertical"
         android:minHeight="48dp"
         android:padding="12dp"
-        android:gravity="center_vertical"
-        android:id="@+id/mediaDetailCategoryItemText"
-        android:textSize="14sp"
         android:textColor="@android:color/white"
-        android:background="?attr/subBackground"
+        android:textSize="14sp"
+        app:drawablePadding="6dp"
+        app:drawableStart="@drawable/ic_info_outline_white_24dp"
         />
 
     <fr.free.nrw.commons.media.MediaDetailSpacer

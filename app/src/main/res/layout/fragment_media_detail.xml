@@ -26,227 +26,221 @@
         />
 
     <ScrollView
+        android:id="@+id/mediaDetailScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/mediaDetailScrollView"
-        android:fillViewport="true"
         android:background="@android:color/transparent"
         android:cacheColorHint="@android:color/transparent"
-        >
+        android:fillViewport="true">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            >
+            android:orientation="vertical">
 
             <!-- Placeholder. Height gets set at runtime based on container size; the initial value is a hack to keep
                  the detail info offscreen until it's placed properly. May be a better way to do this. -->
             <fr.free.nrw.commons.media.MediaDetailSpacer
-                android:layout_width="match_parent"
-                android:layout_height="16dp"
                 android:id="@+id/mediaDetailSpacer"
-                />
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/fragmentCategorisationBackground"
-                android:padding="16dp"
-                >
+                android:orientation="vertical"
+                android:padding="16dp">
 
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?attr/subBackground"
-                    android:padding="16dp"
-                    >
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@android:color/white"
-                        android:text="@string/media_detail_title"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
                         android:paddingBottom="6dp"
-                        />
+                        android:text="@string/media_detail_title"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
                     <TextView
+                        android:id="@+id/mediaDetailTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/media_detail_media_title"
-                        android:id="@+id/mediaDetailTitle"
                         android:layout_gravity="start"
-                        android:textColor="@android:color/white"
                         android:background="?attr/subBackground"
-                        android:textSize="14sp"
                         android:padding="12dp"
-                        />
+                        android:text="@string/media_detail_media_title"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <fr.free.nrw.commons.media.MediaDetailSpacer
                     android:layout_width="match_parent"
-                    android:layout_height="8dp"
-                    />
+                    android:layout_height="8dp" />
 
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?attr/subBackground"
-                    android:padding="16dp"
-                    >
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:paddingBottom="6dp"
                         android:text="@string/media_detail_description"
                         android:textColor="@android:color/white"
                         android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:paddingBottom="6dp"
-                        />
+                        android:textStyle="bold" />
+
                     <TextView
+                        android:id="@+id/mediaDetailDesc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/media_detail_description_explanation"
-                        android:background="?attr/subBackground"
-                        android:id="@+id/mediaDetailDesc"
-                        android:textColor="@android:color/white"
                         android:layout_gravity="start"
-                        android:textSize="14sp"
+                        android:background="?attr/subBackground"
                         android:padding="12dp"
-                        />
+                        android:text="@string/media_detail_description_explanation"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <fr.free.nrw.commons.media.MediaDetailSpacer
                     android:layout_width="match_parent"
-                    android:layout_height="8dp"
-                    />
+                    android:layout_height="8dp" />
 
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?attr/subBackground"
-                    android:padding="16dp"
-                    >
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:paddingBottom="6dp"
                         android:text="@string/media_detail_license"
                         android:textColor="@android:color/white"
                         android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:paddingBottom="6dp"
-                        />
+                        android:textStyle="bold" />
 
-                    <TextView
+                    <fr.free.nrw.commons.ui.widget.CompatTextView
                         android:id="@+id/mediaDetailLicense"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
                         android:background="?attr/subBackground"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:gravity="center_vertical"
+                        android:padding="12dp"
                         android:text="@string/media_detail_license"
                         android:textColor="@android:color/white"
                         android:textSize="14sp"
-                        android:padding="12dp"
+                        app:drawablePadding="6dp"
+                        app:drawableStart="@drawable/ic_info_outline_white_24dp"
                         tools:text="License link" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?attr/subBackground"
-                    android:padding="16dp"
-                    >
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@android:color/white"
-                        android:text="@string/media_detail_coordinates"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
                         android:paddingBottom="6dp"
-                        />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
                         android:text="@string/media_detail_coordinates"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <fr.free.nrw.commons.ui.widget.CompatTextView
                         android:id="@+id/mediaDetailCoordinates"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="start"
                         android:background="?attr/subBackground"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:gravity="center_vertical"
+                        android:padding="12dp"
+                        android:text="@string/media_detail_coordinates"
                         android:textColor="@android:color/white"
                         android:textSize="14sp"
-                        android:padding="12dp"
-                        tools:text="Coordinates link"
-                        />
+                        app:drawablePadding="6dp"
+                        app:drawableStart="@drawable/ic_map_white_24dp"
+                        tools:text="Coordinates link" />
                 </LinearLayout>
 
                 <fr.free.nrw.commons.media.MediaDetailSpacer
                     android:layout_width="match_parent"
-                    android:layout_height="8dp"
-                    />
+                    android:layout_height="8dp" />
 
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?attr/subBackground"
+                    android:orientation="vertical"
                     android:padding="16dp"
-                    android:textStyle="bold"
-                    >
+                    android:textStyle="bold">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:paddingBottom="6dp"
                         android:text="@string/detail_panel_cats_label"
-                        android:textSize="16sp"
-                        android:layout_gravity="start"
                         android:textColor="@android:color/white"
-                        android:paddingBottom="6dp"
-                        />
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
                     <LinearLayout
-                        android:orientation="vertical"
+                        android:id="@+id/mediaDetailCategoryContainer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/mediaDetailCategoryContainer"
-                        />
+                        android:orientation="vertical" />
                 </LinearLayout>
 
                 <fr.free.nrw.commons.media.MediaDetailSpacer
                     android:layout_width="match_parent"
-                    android:layout_height="8dp"
-                    />
+                    android:layout_height="8dp" />
 
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?attr/subBackground"
-                    android:padding="16dp"
-                    >
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:paddingBottom="6dp"
                         android:text="@string/media_detail_uploaded_date"
                         android:textColor="@android:color/white"
                         android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:paddingBottom="6dp"
-                        />
+                        android:textStyle="bold" />
+
                     <TextView
+                        android:id="@+id/mediaDetailuploadeddate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/media_detail_uploaded_date"
-                        android:background="?attr/subBackground"
-                        android:id="@+id/mediaDetailuploadeddate"
-                        android:textColor="@android:color/white"
                         android:layout_gravity="start"
-                        android:textSize="14sp"
+                        android:background="?attr/subBackground"
                         android:padding="12dp"
-                        />
+                        android:text="@string/media_detail_uploaded_date"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp" />
                 </LinearLayout>
 
             </LinearLayout>
