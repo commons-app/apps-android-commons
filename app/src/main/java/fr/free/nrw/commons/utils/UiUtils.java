@@ -1,16 +1,10 @@
 package fr.free.nrw.commons.utils;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
 import android.support.graphics.drawable.VectorDrawableCompat;
-import android.support.v7.content.res.AppCompatResources;
 import android.util.DisplayMetrics;
-
-import fr.free.nrw.commons.R;
 
 public class UiUtils {
 
