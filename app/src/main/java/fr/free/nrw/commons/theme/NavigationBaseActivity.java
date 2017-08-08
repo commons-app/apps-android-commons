@@ -49,7 +49,8 @@ public class NavigationBaseActivity extends BaseActivity
     public void initDrawer() {
         navigationView.setNavigationItemSelectedListener(this);
         username = CommonsApplication.getInstance().getCurrentAccount().name;
-        usernameTextView = ((TextView) navigationView.getHeaderView(0).findViewById(R.id.userNameText));
+        usernameTextView = ((TextView) navigationView.getHeaderView(0)
+                .findViewById(R.id.userNameText));
         usernameTextView.setText(username != null ? username : "");
 
         setSupportActionBar(toolbar);
