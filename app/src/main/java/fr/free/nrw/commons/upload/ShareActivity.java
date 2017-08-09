@@ -154,7 +154,7 @@ public  class       ShareActivity
     }
 
     @Override
-    public void onCategoriesSave(ArrayList<String> categories) {
+    public void onCategoriesSave(List<String> categories) {
         if(categories.size() > 0) {
             ModifierSequence categoriesSequence = new ModifierSequence(contribution.getContentUri());
 
@@ -525,7 +525,7 @@ public  class       ShareActivity
         switch (item.getItemId()) {
             case android.R.id.home:
                 if(categorizationFragment!=null && categorizationFragment.isVisible()) {
-                    categorizationFragment.backButtonDialog();
+                    categorizationFragment.showBackButtonDialog();
                 } else {
                     onBackPressed();
                 }

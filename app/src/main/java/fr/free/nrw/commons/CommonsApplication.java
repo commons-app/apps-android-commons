@@ -25,8 +25,8 @@ import java.io.IOException;
 
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.caching.CacheController;
-import fr.free.nrw.commons.category.Category;
 import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.data.Category;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;

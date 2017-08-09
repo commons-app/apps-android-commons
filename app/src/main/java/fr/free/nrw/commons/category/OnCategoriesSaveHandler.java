@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.category;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface OnCategoriesSaveHandler {
-    void onCategoriesSave(ArrayList<String> categories);
+    void onCategoriesSave(List<String> categories);
 }

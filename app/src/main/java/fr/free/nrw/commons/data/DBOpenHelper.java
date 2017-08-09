@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import fr.free.nrw.commons.category.Category;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 

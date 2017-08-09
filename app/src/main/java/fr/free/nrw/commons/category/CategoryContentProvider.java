@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.data.Category;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import timber.log.Timber;
 
