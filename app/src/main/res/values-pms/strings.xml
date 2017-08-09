@@ -198,6 +198,5 @@
   <string name="feedback_popup_description">I antivëddoma vàire neuve fonsionalità e ameliorassion për l\'aplicassion! Vorij-lo vëddje e dene soa opinion?\n\n(A peul sempe acede a sòn an selessionand «Pian dël dësvlupador» ant la plancia ëd navigassion)</string>
   <string name="feedback_popup_decline">Nò, mersì</string>
   <string name="feedback_popup_accept">Bò, mneme ambelelà!</string>
-  <string name="feedback_page_url">https://meta.wikimedia.org/wiki/Grants:Project/Improve_\'Upload_to_Commons\'_Android_App/Renewal/User_feedback</string>
   <string name="navigation_item_developer_plans">Pian dël dësvlupador</string>
 </resources>

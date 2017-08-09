@@ -35,6 +35,7 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.Utils;
 import in.yuvi.http.fluent.Http;
+import io.reactivex.Observable;
 import io.reactivex.Single;
 import timber.log.Timber;
 
@@ -205,78 +206,104 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
 
     @Override
     @NonNull
-    public List<String> searchCategories(int searchCatsLimit, String filterValue) throws IOException {
-        List<ApiResult> categoryNodes = api.action("query")
-                .param("format", "xml")
-                .param("list", "search")
-                .param("srwhat", "text")
-                .param("srnamespace", "14")
-                .param("srlimit", searchCatsLimit)
-                .param("srsearch", filterValue)
-                .get()
-                .getNodes("/api/query/search/p/@title");
+    public Observable<String> searchCategories(String filterValue, int searchCatsLimit) {
+        return Single.fromCallable(() -> {
+            List<ApiResult> categoryNodes = null;
+            try {
+                categoryNodes = api.action("query")
+                        .param("format", "xml")
+                        .param("list", "search")
+                        .param("srwhat", "text")
+                        .param("srnamespace", "14")
+                        .param("srlimit", searchCatsLimit)
+                        .param("srsearch", filterValue)
+                        .get()
+                        .getNodes("/api/query/search/p/@title");
+            } catch (IOException e) {
+                Timber.e("Failed to obtain searchCategories", e);
+            }
 
-        if (categoryNodes == null) {
-            return Collections.emptyList();
-        }
+            if (categoryNodes == null) {
+                return new ArrayList<String>();
+            }
 
-        List<String> categories = new ArrayList<>();
-        for (ApiResult categoryNode : categoryNodes) {
-            String cat = categoryNode.getDocument().getTextContent();
-            String catString = cat.replace("Category:", "");
-            categories.add(catString);
-        }
+            List<String> categories = new ArrayList<>();
+            for (ApiResult categoryNode : categoryNodes) {
+                String cat = categoryNode.getDocument().getTextContent();
+                String catString = cat.replace("Category:", "");
+                categories.add(catString);
+            }
 
-        return categories;
+            return categories;
+        })
+                .flatMapObservable(list -> Observable.fromIterable(list));
     }
 
     @Override
     @NonNull
-    public List<String> allCategories(int searchCatsLimit, String filterValue) throws IOException {
-        ArrayList<ApiResult> categoryNodes = api.action("query")
-                .param("list", "allcategories")
-                .param("acprefix", filterValue)
-                .param("aclimit", searchCatsLimit)
-                .get()
-                .getNodes("/api/query/allcategories/c");
+    public Observable<String> allCategories(String filterValue, int searchCatsLimit) {
+        return Single.fromCallable(() -> {
+            ArrayList<ApiResult> categoryNodes = null;
+            try {
+                categoryNodes = api.action("query")
+                        .param("list", "allcategories")
+                        .param("acprefix", filterValue)
+                        .param("aclimit", searchCatsLimit)
+                        .get()
+                        .getNodes("/api/query/allcategories/c");
+            } catch (IOException e) {
+                Timber.e("Failed to obtain allCategories", e);
+            }
 
-        if (categoryNodes == null) {
-            return Collections.emptyList();
-        }
+            if (categoryNodes == null) {
+                return new ArrayList<String>();
+            }
 
-        List<String> categories = new ArrayList<>();
-        for (ApiResult categoryNode : categoryNodes) {
-            categories.add(categoryNode.getDocument().getTextContent());
-        }
+            List<String> categories = new ArrayList<>();
+            for (ApiResult categoryNode : categoryNodes) {
+                categories.add(categoryNode.getDocument().getTextContent());
+            }
 
-        return categories;
+            return categories;
+        })
+                .flatMapObservable(list -> Observable.fromIterable(list));
     }
 
     @Override
     @NonNull
-    public List<String> searchTitles(int searchCatsLimit, String title) throws IOException {
-        ArrayList<ApiResult> categoryNodes = api.action("query")
-                .param("format", "xml")
-                .param("list", "search")
-                .param("srwhat", "text")
-                .param("srnamespace", "14")
-                .param("srlimit", searchCatsLimit)
-                .param("srsearch", title)
-                .get()
-                .getNodes("/api/query/search/p/@title");
+    public Observable<String> searchTitles(String title, int searchCatsLimit) {
+        return Single.fromCallable(() -> {
+            ArrayList<ApiResult> categoryNodes = null;
 
-        if (categoryNodes == null) {
-            return Collections.emptyList();
-        }
+            try {
+                categoryNodes = api.action("query")
+                        .param("format", "xml")
+                        .param("list", "search")
+                        .param("srwhat", "text")
+                        .param("srnamespace", "14")
+                        .param("srlimit", searchCatsLimit)
+                        .param("srsearch", title)
+                        .get()
+                        .getNodes("/api/query/search/p/@title");
+            } catch (IOException e) {
+                Timber.e("Failed to obtain searchTitles", e);
+                return new ArrayList();
+            }
 
-        List<String> titleCategories = new ArrayList<>();
-        for (ApiResult categoryNode : categoryNodes) {
-            String cat = categoryNode.getDocument().getTextContent();
-            String catString = cat.replace("Category:", "");
-            titleCategories.add(catString);
-        }
+            if (categoryNodes == null) {
+                return Collections.emptyList();
+            }
 
-        return titleCategories;
+            List<String> titleCategories = new ArrayList<>();
+            for (ApiResult categoryNode : categoryNodes) {
+                String cat = categoryNode.getDocument().getTextContent();
+                String catString = cat.replace("Category:", "");
+                titleCategories.add(catString);
+            }
+
+            return titleCategories;
+        })
+                .flatMapObservable(list -> Observable.fromIterable(list));
     }
 
     @Override

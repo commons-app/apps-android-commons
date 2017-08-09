@@ -13,4 +13,12 @@
     <attr name="iconCamera" format="reference"/>
     <attr name="iconPhoto" format="reference"/>
     <attr name="iconUndo" format="reference"/>
+
+    <declare-styleable name="CompatTextView">
+        <attr name="drawablePadding" format="dimension"/>
+        <attr name="drawableStart" format="reference"/>
+        <attr name="drawableTop" format="reference"/>
+        <attr name="drawableEnd" format="reference"/>
+        <attr name="drawableBottom" format="reference"/>
+    </declare-styleable>
 </resources>

@@ -66,6 +66,12 @@
   <string name="warning">Brīdinājums</string>
   <string name="yes">Jā</string>
   <string name="no">Nē</string>
+  <string name="media_detail_title">Nosaukums</string>
+  <string name="media_detail_uploaded_date">Augšupielādēšanas datums</string>
+  <string name="media_detail_license">Licence</string>
+  <string name="media_detail_coordinates">Koordinātas</string>
+  <string name="media_detail_coordinates_empty">Nav norādītas</string>
+  <string name="_2fa_code">2FA kods</string>
   <string name="upload_image">Augšupielādēt attēlu</string>
   <string name="welcome_image_llamas">Lama</string>
   <string name="welcome_image_tulip">Tulpe</string>
@@ -81,4 +87,6 @@
   <string name="navigation_item_logout">Iziet</string>
   <string name="navigation_item_info" fuzzy="true">Ievads</string>
   <string name="no_description_found">apraksts nav atrasts</string>
+  <string name="feedback_popup_decline">Nē, paldies</string>
+  <string name="navigation_item_developer_plans">Izstrādātāju plāni</string>
 </resources>

@@ -17,7 +17,7 @@ public class SettingsActivity extends NavigationBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // Check prefs on every activity starts
-        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("theme",true)) {
+        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("theme",false)) {
             setTheme(R.style.DarkAppTheme);
         } else {
             setTheme(R.style.LightAppTheme);

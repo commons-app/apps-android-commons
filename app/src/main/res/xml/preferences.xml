@@ -26,7 +26,7 @@
 
     <CheckBoxPreference
         android:title="@string/preference_theme"
-        android:defaultValue="true"
+        android:defaultValue="false"
         android:summary="@string/preference_theme_summary"
         android:key="theme"
         />

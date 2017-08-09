@@ -277,6 +277,6 @@ public class Utils {
     }
 
     public static boolean isDarkTheme(Context context) {
-        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean("theme",true);
+        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean("theme",false);
     }
 }

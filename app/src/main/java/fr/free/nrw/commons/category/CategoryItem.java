@@ -51,4 +51,24 @@ class CategoryItem implements Parcelable {
         parcel.writeString(name);
         parcel.writeInt(selected ? 1 : 0);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        CategoryItem that = (CategoryItem) o;
+
+        return name.equals(that.name);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode();
+    }
 }
