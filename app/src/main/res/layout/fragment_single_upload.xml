@@ -21,7 +21,7 @@
         android:drawableEnd="@drawable/mapbox_info_icon_default"
         android:drawableRight="@drawable/mapbox_info_icon_default"
         android:scrollHorizontally="false"
-        android:maxLines="1"
+        android:inputType="textMultiLine"
         android:hint="@string/share_title_hint"
         android:imeOptions="flagNoExtractUi" />
 
