@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.theme;
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,11 +10,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import butterknife.BindView;
@@ -43,15 +39,9 @@ public class NavigationBaseActivity extends BaseActivity
     DrawerLayout drawerLayout;
 
     private ActionBarDrawerToggle toggle;
-    private String username;
-    private TextView usernameTextView;
 
     public void initDrawer() {
         navigationView.setNavigationItemSelectedListener(this);
-        username = CommonsApplication.getInstance().getCurrentAccount().name;
-        usernameTextView = ((TextView) navigationView.getHeaderView(0)
-                .findViewById(R.id.userNameText));
-        usernameTextView.setText(username != null ? username : "");
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

@@ -58,6 +58,7 @@ class LoginTask extends AsyncTask<String, String, String> {
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
         Timber.d("Login done!");
+
         EventLog.schema(CommonsApplication.EVENT_LOGIN_ATTEMPT)
                 .param("username", username)
                 .param("result", result)

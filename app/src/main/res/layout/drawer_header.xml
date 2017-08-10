@@ -1,27 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pictureOfTheDay"
     android:layout_width="match_parent"
+    android:layout_height="172dp"
     android:background="@android:color/darker_gray"
-    android:layout_height="172dp">
-
-    <ImageView
-        android:id="@+id/pictureOfTheDay"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.8"
-        android:paddingTop="5dp"
-        android:src="@drawable/commons_logo_large" />
-
-    <TextView
-        android:id="@+id/userNameText"
-        style="?android:textAppearanceLargeInverse"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.2"
-        android:maxLines="1"
-        android:textAlignment="center"
-        android:text="@string/placeholder_place_name"
-        android:textColor="@android:color/white" />
-</LinearLayout>
+    android:padding="16dp"
+    android:src="@drawable/commons_logo_large"/>
