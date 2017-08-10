@@ -134,7 +134,7 @@
   <string name="detail_description_empty">Keine Beschreibung</string>
   <string name="detail_license_empty">Unbekannte Lizenz</string>
   <string name="menu_refresh">Aktualisieren</string>
-  <string name="storage_permission_rationale">Erforderliche Berechtigung: Externen Speicher lesen. Die App funktioniert ohne diese Berechtigung nicht.</string>
+  <string name="read_storage_permission_rationale">Erforderliche Berechtigung: Externen Speicher lesen. Die App funktioniert ohne diese Berechtigung nicht.</string>
   <string name="location_permission_rationale">Optionale Berechtigung: Ruft den aktuellen Standort für Kategorievorschläge ab</string>
   <string name="ok">Okay</string>
   <string name="title_activity_nearby">Orte in der Nähe</string>

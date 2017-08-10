@@ -139,7 +139,8 @@ Tap this message (or hit back) to skip this step.</string>
   <string name="detail_description_empty">No description</string>
   <string name="detail_license_empty">Unknown license</string>
   <string name="menu_refresh">Refresh</string>
-  <string name="storage_permission_rationale">Required permission: Read external storage. App cannot function without this.</string>
+  <string name="read_storage_permission_rationale">Required permission: Read external storage. App cannot function without this.</string>
+  <string name="write_storage_permission_rationale">Required permission: Write external storage. App cannot function without this.</string>
   <string name="location_permission_rationale">Optional permission: Get current location for category suggestions</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Nearby Places</string>
@@ -209,4 +210,7 @@ Tap this message (or hit back) to skip this step.</string>
   <string name="feedback_popup_accept">Sure, take me there!</string>
   <string name="feedback_page_url">https://meta.wikimedia.org/wiki/Grants:Project/Improve_\'Upload_to_Commons\'_Android_App/Renewal/User_feedback</string>
   <string name="navigation_item_developer_plans">Developer plans</string>
+  <string name="use_external_storage">Use external storage</string>
+  <string name="use_external_storage_summary">Save pictures taken with the in-app camera on your device</string>
+    <string name="album_name">Commons App</string>
 </resources>

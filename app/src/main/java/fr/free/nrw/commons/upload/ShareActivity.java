@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload;
 
 import android.Manifest;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -24,10 +25,10 @@ import android.widget.Toast;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -279,7 +280,7 @@ public  class       ShareActivity
         if (useNewPermissions && (!storagePermitted || !locationPermitted)) {
             if (!storagePermitted && !locationPermitted) {
                 String permissionRationales =
-                        getResources().getString(R.string.storage_permission_rationale) + "\n"
+                        getResources().getString(R.string.read_storage_permission_rationale) + "\n"
                                 + getResources().getString(R.string.location_permission_rationale);
                 snackbar = requestPermissionUsingSnackBar(
                         permissionRationales,
@@ -292,7 +293,7 @@ public  class       ShareActivity
                 textView.setMaxLines(3);
             } else if (!storagePermitted) {
                 requestPermissionUsingSnackBar(
-                        getString(R.string.storage_permission_rationale),
+                        getString(R.string.read_storage_permission_rationale),
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                         REQUEST_PERM_ON_CREATE_STORAGE);
             } else if (!locationPermitted) {
@@ -417,12 +418,24 @@ public  class       ShareActivity
             // in older devices getPath() may fail depending on the source URI
             // creating and using a copy of the file seems to work instead.
             // TODO: there might be a more proper solution than this
-            String copyPath = getApplicationContext().getCacheDir().getAbsolutePath()
-                    + "/" + new Date().getTime() + ".jpg";
+            String copyPath=null;
             try {
                 ParcelFileDescriptor descriptor
                         = getContentResolver().openFileDescriptor(mediaUri, "r");
                 if (descriptor != null) {
+                    if(getSharedPreferences("prefs", Context.MODE_PRIVATE).getBoolean("useExternalStorage", true)){
+                        copyPath = Environment.getExternalStorageDirectory().toString()
+                                + "/CommonsApp/" + new Date().getTime() + ".jpg";
+                        File newFile = new File(Environment.getExternalStorageDirectory().toString()+"/CommonsApp");
+                        newFile.mkdir();
+                        FileUtils.copy(
+                                descriptor.getFileDescriptor(),
+                                copyPath);
+                        Timber.d("Filepath (copied): %s", copyPath);
+                        return copyPath;
+                    }
+                    copyPath = getApplicationContext().getCacheDir().getAbsolutePath()
+                            + "/" + new Date().getTime() + ".jpg";
                     FileUtils.copy(
                             descriptor.getFileDescriptor(),
                             copyPath);
