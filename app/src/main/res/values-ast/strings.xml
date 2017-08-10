@@ -133,7 +133,7 @@
   <string name="detail_description_empty">Ensin descripción</string>
   <string name="detail_license_empty">Llicencia desconocida</string>
   <string name="menu_refresh">Refrescar</string>
-  <string name="storage_permission_rationale">Permisu riquíu: llectura d\'almacenamientu esternu. L\'aplicación nun puede funcionar ensin él.</string>
+  <string name="read_storage_permission_rationale">Permisu riquíu: llectura d\'almacenamientu esternu. L\'aplicación nun puede funcionar ensin él.</string>
   <string name="location_permission_rationale">Permisu opcional: llograr l\'allugamientu actual pa suxerir categoríes</string>
   <string name="ok">Aceutar</string>
   <string name="title_activity_nearby">Llugares cercanos</string>

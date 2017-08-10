@@ -3,12 +3,14 @@ package fr.free.nrw.commons.upload;
 import android.Manifest;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.ParcelFileDescriptor;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -24,10 +26,10 @@ import android.widget.Toast;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -53,9 +55,9 @@ import static fr.free.nrw.commons.upload.ExistingFileAsync.Result.NO_DUPLICATE;
  * Activity for the title/desc screen after image is selected. Also starts processing image
  * GPS coordinates or user location (if enabled in Settings) for category suggestions.
  */
-public  class       ShareActivity
-        extends     AuthenticatedActivity
-        implements  SingleUploadFragment.OnUploadActionInitiated,
+public  class      ShareActivity
+        extends    AuthenticatedActivity
+        implements SingleUploadFragment.OnUploadActionInitiated,
         OnCategoriesSaveHandler {
 
     private static final int REQUEST_PERM_ON_CREATE_STORAGE = 1;
@@ -119,7 +121,7 @@ public  class       ShareActivity
         // and permission is not obtained.
         return !FileUtils.isSelfOwned(getApplicationContext(), mediaUri)
                 && (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
-                        != PackageManager.PERMISSION_GRANTED);
+                != PackageManager.PERMISSION_GRANTED);
     }
 
     private void uploadBegins() {
@@ -145,7 +147,7 @@ public  class       ShareActivity
     }
 
     private void showPostUpload() {
-        if(categorizationFragment == null) {
+        if (categorizationFragment == null) {
             categorizationFragment = new CategorizationFragment();
         }
         getSupportFragmentManager().beginTransaction()
@@ -155,7 +157,7 @@ public  class       ShareActivity
 
     @Override
     public void onCategoriesSave(List<String> categories) {
-        if(categories.size() > 0) {
+        if (categories.size() > 0) {
             ModifierSequence categoriesSequence = new ModifierSequence(contribution.getContentUri());
 
             categoriesSequence.queueModifier(new CategoryModifier(categories.toArray(new String[]{})));
@@ -181,7 +183,7 @@ public  class       ShareActivity
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        if(contribution != null) {
+        if (contribution != null) {
             outState.putParcelable("contribution", contribution);
         }
     }
@@ -189,7 +191,7 @@ public  class       ShareActivity
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if(categorizationFragment != null && categorizationFragment.isVisible()) {
+        if (categorizationFragment != null && categorizationFragment.isVisible()) {
             EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT)
                     .param("username", app.getCurrentAccount().name)
                     .param("categories-count", categorizationFragment.getCurrentSelectedCount())
@@ -228,7 +230,7 @@ public  class       ShareActivity
         ButterKnife.bind(this);
         initBack();
         app = CommonsApplication.getInstance();
-        backgroundImageView = (SimpleDraweeView)findViewById(R.id.backgroundImage);
+        backgroundImageView = (SimpleDraweeView) findViewById(R.id.backgroundImage);
         backgroundImageView.setHierarchy(GenericDraweeHierarchyBuilder
                 .newInstance(getResources())
                 .setPlaceholderImage(VectorDrawableCompat.create(getResources(),
@@ -254,7 +256,7 @@ public  class       ShareActivity
             backgroundImageView.setImageURI(mediaUri);
         }
 
-        if (savedInstanceState != null)  {
+        if (savedInstanceState != null) {
             contribution = savedInstanceState.getParcelable("contribution");
         }
 
@@ -279,7 +281,7 @@ public  class       ShareActivity
         if (useNewPermissions && (!storagePermitted || !locationPermitted)) {
             if (!storagePermitted && !locationPermitted) {
                 String permissionRationales =
-                        getResources().getString(R.string.storage_permission_rationale) + "\n"
+                        getResources().getString(R.string.read_storage_permission_rationale) + "\n"
                                 + getResources().getString(R.string.location_permission_rationale);
                 snackbar = requestPermissionUsingSnackBar(
                         permissionRationales,
@@ -292,7 +294,7 @@ public  class       ShareActivity
                 textView.setMaxLines(3);
             } else if (!storagePermitted) {
                 requestPermissionUsingSnackBar(
-                        getString(R.string.storage_permission_rationale),
+                        getString(R.string.read_storage_permission_rationale),
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                         REQUEST_PERM_ON_CREATE_STORAGE);
             } else if (!locationPermitted) {
@@ -307,7 +309,7 @@ public  class       ShareActivity
 
         SingleUploadFragment shareView = (SingleUploadFragment) getSupportFragmentManager().findFragmentByTag("shareView");
         categorizationFragment = (CategorizationFragment) getSupportFragmentManager().findFragmentByTag("categorization");
-        if(shareView == null && categorizationFragment == null) {
+        if (shareView == null && categorizationFragment == null) {
             shareView = new SingleUploadFragment();
             getSupportFragmentManager()
                     .beginTransaction()
@@ -417,12 +419,27 @@ public  class       ShareActivity
             // in older devices getPath() may fail depending on the source URI
             // creating and using a copy of the file seems to work instead.
             // TODO: there might be a more proper solution than this
-            String copyPath = getApplicationContext().getCacheDir().getAbsolutePath()
-                    + "/" + new Date().getTime() + ".jpg";
+            String copyPath = null;
             try {
                 ParcelFileDescriptor descriptor
                         = getContentResolver().openFileDescriptor(mediaUri, "r");
                 if (descriptor != null) {
+                    SharedPreferences sharedPref = PreferenceManager
+                            .getDefaultSharedPreferences(CommonsApplication.getInstance());
+                    boolean useExtStorage = sharedPref.getBoolean("useExternalStorage", true);
+                    if (useExtStorage) {
+                        copyPath = Environment.getExternalStorageDirectory().toString()
+                                + "/CommonsApp/" + new Date().getTime() + ".jpg";
+                        File newFile = new File(Environment.getExternalStorageDirectory().toString() + "/CommonsApp");
+                        newFile.mkdir();
+                        FileUtils.copy(
+                                descriptor.getFileDescriptor(),
+                                copyPath);
+                        Timber.d("Filepath (copied): %s", copyPath);
+                        return copyPath;
+                    }
+                    copyPath = getApplicationContext().getCacheDir().getAbsolutePath()
+                            + "/" + new Date().getTime() + ".jpg";
                     FileUtils.copy(
                             descriptor.getFileDescriptor(),
                             copyPath);
@@ -439,6 +456,7 @@ public  class       ShareActivity
 
     /**
      * Gets coordinates for category suggestions, either from EXIF data or user location
+     *
      * @param gpsEnabled if true use GPS
      */
     private void getFileMetadata(boolean gpsEnabled) {
@@ -474,7 +492,7 @@ public  class       ShareActivity
      * Then initiates the calls to MediaWiki API through an instance of MwVolleyApi.
      */
     public void useImageCoords() {
-        if(decimalCoords != null) {
+        if (decimalCoords != null) {
             Timber.d("Decimal coords of image: %s", decimalCoords);
 
             // Only set cache for this point if image has coords
@@ -508,8 +526,7 @@ public  class       ShareActivity
         try {
             imageObj.unregisterLocationManager();
             Timber.d("Unregistered locationManager");
-        }
-        catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             Timber.d("locationManager does not exist, not unregistered");
         }
     }
@@ -524,7 +541,7 @@ public  class       ShareActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                if(categorizationFragment!=null && categorizationFragment.isVisible()) {
+                if (categorizationFragment != null && categorizationFragment.isVisible()) {
                     categorizationFragment.showBackButtonDialog();
                 } else {
                     onBackPressed();
