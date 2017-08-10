@@ -40,6 +40,9 @@
   <string name="login_failed_network">Ni mòże sã wlogòwac - fela sécë</string>
   <string name="login_failed_username">Ni mòże sã wlogòwac - sprôwdzë miono brëkòwnika</string>
   <string name="login_failed_password">Ni mòże sã wlogòwac - sprôwdzë parolã</string>
+  <string name="login_failed_throttled">Za wiele nieùdałich prób wlogòwaniô. Spróbùjë znowa za czile minut.</string>
+  <string name="login_failed_blocked">Nen brëkòwnik òstôł zablokòwóny na Commons</string>
+  <string name="login_failed_2fa_needed">Mùszisz wpisac swój kòd dlô dwafaktorowi aùtorizacëji.</string>
   <string name="login_failed_generic">Logòwanié nie darzëło sã</string>
   <string name="share_upload_button">Wladënk</string>
   <string name="multiple_share_base_title">Miono tegò zestôwù</string>
@@ -48,6 +51,7 @@
   <string name="categories_search_text_hint">Szëkba kategòrëjów</string>
   <string name="menu_save_categories">Zapiszë:</string>
   <string name="refresh_button">Òdswierzë</string>
+  <string name="gps_disabled">GPS je w twòjim ùrządzeniém wëłączony. Chcesz gò włączëc?</string>
   <string name="enable_gps">Wëłączë GPS</string>
   <string name="contributions_subtitle_zero">Nie dô jesz wladënków</string>
   <plurals name="contributions_subtitle">
@@ -68,6 +72,8 @@
   <string name="title_activity_settings">Nastôwë</string>
   <string name="title_activity_signup">Wregistrëjë sã</string>
   <string name="menu_about">Ò aplikacëji</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Pòlitika priwatnotë&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Ùsôdzcë&lt;/a&gt;</string>
   <string name="title_activity_about">Ò aplikacëji</string>
   <string name="menu_feedback">Sélôj òpinijã (przez e-mail)</string>
   <string name="no_email_client">Felënk wjinstalowónegò e-mailowégò klienta</string>
