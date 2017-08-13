@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.auth;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -44,9 +43,8 @@ public class SignupActivity extends BaseActivity {
                         Toast.LENGTH_LONG
                 );
                 toast.show();
-
-                Intent intent = new Intent(CommonsApplication.getInstance(), LoginActivity.class);
-                startActivity(intent);
+                // terminate on task completion.
+                finish();
                 return true;
             } else {
                 //If user clicks any other links in the webview
