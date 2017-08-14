@@ -7,7 +7,7 @@
   <string name="login">Đăng nhập</string>
   <string name="signup">Mở tài khoản</string>
   <string name="logging_in_title">Đang đăng nhập</string>
-  <string name="logging_in_message" fuzzy="true">Vui lòng chờ…</string>
+  <string name="logging_in_message">Vui lòng chờ…</string>
   <string name="login_success">Đã đăng nhập thành công!</string>
   <string name="login_failed">Đăng nhập thất bại!</string>
   <string name="upload_failed">Không tìm thấy tập tin. Xin vui lòng thử tập tin khác.</string>
@@ -20,8 +20,8 @@
   <string name="upload_progress_notification_title_finishing">Đang hoàn thành việc tải lên tập tin %1$s</string>
   <string name="upload_failed_notification_title">Tải lên tập tin %1$s thất bại</string>
   <string name="upload_failed_notification_subtitle">Chạm để xem</string>
-  <string name="uploads_pending_notification_indicator" fuzzy="true">%d tập tin đang được tải lên</string>
-  <string name="title_activity_contributions" fuzzy="true">Tập tin do tôi tải lên</string>
+  <string name="uploads_pending_notification_indicator">%d tập tin đang được tải lên</string>
+  <string name="title_activity_contributions">Tập tin Tôi đã Tải lên Gần đây</string>
   <string name="contribution_state_queued">Đang chờ</string>
   <string name="contribution_state_failed">Thất bại</string>
   <string name="contribution_state_in_progress">Hoàn tất %1$d%%</string>
@@ -47,27 +47,29 @@
   <string name="categories_search_text_hint">Tìm thể loại</string>
   <string name="menu_save_categories">Lưu</string>
   <string name="refresh_button">Làm mới</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">Chưa tải lên tập tin</item>
+  <string name="enable_gps">Bật GPS</string>
+  <string name="contributions_subtitle_zero">Chưa có tập tin tải lên</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="other">%d tập tin tải lên</item>
   </plurals>
-  <string name="starting_multiple_uploads" fuzzy="true">Đang bắt đầu tải lên %d tập tin</string>
-  <string name="multiple_uploads_title" fuzzy="true">%d tập tin tải lên</string>
+  <string name="starting_multiple_uploads">Đang bắt đầu tải lên %d tập tin</string>
+  <string name="multiple_uploads_title">%d tập tin tải lên</string>
   <string name="categories_not_found">Không tìm thấy thể loại khớp với %1$s</string>
   <string name="categories_skip_explanation">Xếp các hình ảnh vào thể loại để cho chúng dễ tìm kiếm hơn trên Wikimedia Commons.\n\nHãy bắt đầu nhập tên thể loại để tìm kiếm.\nChạm vào thông điệp này (hoặc bấm Quay lại) để bỏ qua bước này.</string>
   <string name="categories_activity_title">Thể loại</string>
   <string name="title_activity_settings">Cài đặt</string>
   <string name="title_activity_signup">Mở tài khoản</string>
   <string name="menu_about">Giới thiệu</string>
-  <string name="about_license" fuzzy="true">Phần mềm mã nguồn mở được phát hành theo &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Giấy phép Apache v2&lt;/a&gt;. Wikimedia Commons và biểu trưng của nó là nhãn hiệu của Quỹ Wikimedia và được sử dụng do Quỹ Wikimedia cho phép. Chúng tôi không được Quỹ Wikimedia ủng hộ hoặc nhận làm chi nhánh.</string>
+  <string name="about_license">Phần mềm mã nguồn mở được phát hành theo &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Giấy phép Apache v2&lt;/a&gt;. %1$s và biểu trưng của nó là nhãn hiệu của Quỹ Wikimedia và được sử dụng do Quỹ Wikimedia cho phép. Chúng tôi không được Quỹ Wikimedia ủng hộ hoặc nhận làm chi nhánh.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Mã nguồn&lt;/a&gt; và &lt;a href=\"https://commons-app.github.io/\"&gt;trang chủ&lt;/a&gt; tại GitHub. &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;Tạo vấn đề GitHub mới&lt;/a&gt; để báo cáo lỗi hoặc gợi ý thay đổi.</string>
   <string name="about_privacy_policy"/>
-  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;CÔNG TRẠNG&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Công trạng&lt;/a&gt;</string>
   <string name="title_activity_about">Giới thiệu</string>
   <string name="menu_feedback">Gửi Phản hồi (qua Thư điện tử)</string>
   <string name="no_email_client">Không có chương trình thư điện tử nào được cài đặt</string>
   <string name="provider_categories">Thể loại được sử dụng gần đây</string>
-  <string name="waiting_first_sync" fuzzy="true">Đang chờ đồng bộ lần đầu tiên…</string>
+  <string name="waiting_first_sync">Đang chờ đồng bộ lần đầu tiên…</string>
   <string name="no_uploads_yet">Bạn chưa tải lên hình nào.</string>
   <string name="menu_retry_upload">Thử lại</string>
   <string name="menu_cancel_upload">Hủy bỏ</string>
@@ -114,7 +116,7 @@
   <string name="welcome_final_text">Bạn hiểu rồi chứ?</string>
   <string name="welcome_final_button_text">Có!</string>
   <string name="detail_panel_cats_label">Thể loại</string>
-  <string name="detail_panel_cats_loading" fuzzy="true">Đang tải…</string>
+  <string name="detail_panel_cats_loading">Đang tải…</string>
   <string name="detail_panel_cats_none">Chưa chọn</string>
   <string name="detail_description_empty">Không miêu tả</string>
   <string name="detail_license_empty">Giấy phép không rõ</string>
@@ -131,8 +133,35 @@
   <string name="media_detail_media_title">Tiêu đề phương tiện</string>
   <string name="media_detail_description">Mô tả</string>
   <string name="media_detail_description_explanation">Mô tả phương tiện xuất hiện tại đây. Nó có thể khá dài và sẽ cần phải ngắt thành nhiều dòng. Nhưng chúng tôi hy vọng sẽ trông ưa nhìn.</string>
+  <string name="media_detail_uploaded_date">Ngày tải lên</string>
+  <string name="media_detail_license">Giấy phép</string>
+  <string name="media_detail_coordinates">Tọa độ</string>
+  <string name="media_detail_coordinates_empty">Không cung cấp</string>
   <string name="become_a_tester_title">Trở thành người dùng thử nghiệm</string>
   <string name="become_a_tester_description">Tham gia kênh thử nghiệm của chúng tôi trên Google Play và nhận các tính năng mới cùng những bản sửa lỗi sớm hơn</string>
   <string name="use_wikidata">Dùng Wikidata</string>
   <string name="use_wikidata_summary">(Cảnh báo: tắt đi có thể tăng sử dụng dữ liệu di động rất lớn)</string>
+  <string name="maximum_limit">Tối đa</string>
+  <string name="commons_logo">Biểu trưng Commons</string>
+  <string name="background_image">Hình nền</string>
+  <string name="no_image_found">Không tìm thấy Hình ảnh</string>
+  <string name="upload_image">Tải lên Hình</string>
+  <string name="welcome_image_mount_zao">Núi Zaō</string>
+  <string name="welcome_image_llamas">Lạc đà không bướu</string>
+  <string name="welcome_image_rainbow_bridge">Cầu Cầu vồng</string>
+  <string name="welcome_image_tulip">Tu-líp</string>
+  <string name="welcome_image_sydney_opera_house">Nhà hát Opera Sydney</string>
+  <string name="cancel">Hủy bỏ</string>
+  <string name="navigation_drawer_open">Mở</string>
+  <string name="navigation_drawer_close">Đóng</string>
+  <string name="navigation_item_home">Đầu</string>
+  <string name="navigation_item_upload">Tải lên</string>
+  <string name="navigation_item_nearby">Lân cận</string>
+  <string name="navigation_item_about">Giới thiệu</string>
+  <string name="navigation_item_settings">Thiết lập</string>
+  <string name="navigation_item_feedback">Phản hồi</string>
+  <string name="navigation_item_logout">Đăng xuất</string>
+  <string name="navigation_item_info">Hướng dẫn</string>
+  <string name="nearby_info_menu_wikidata_article">Khoản mục Wikidata</string>
+  <string name="feedback_popup_decline">Thôi</string>
 </resources>

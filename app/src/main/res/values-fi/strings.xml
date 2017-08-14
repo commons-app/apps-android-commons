@@ -20,7 +20,7 @@
   <string name="upload_progress_notification_title_finishing">%1$s tallennettu</string>
   <string name="upload_failed_notification_title">Tiedoston %1$s tallentaminen epäonnistui</string>
   <string name="upload_failed_notification_subtitle">Napauta katsoaksesi</string>
-  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
+  <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">1 tiedosto tallentuu</item>
     <item quantity="other">%d tiedostoa tallentuu</item>
   </plurals>
@@ -145,10 +145,17 @@
   <string name="media_detail_media_title">Median otsikko</string>
   <string name="media_detail_description">Kuvaus</string>
   <string name="media_detail_uploaded_date">Tallennuspäivämäärä</string>
+  <string name="media_detail_license">Lisenssi</string>
+  <string name="media_detail_coordinates">Koordinaatit</string>
   <string name="become_a_tester_title">Ryhdy beetatestaajaksi</string>
   <string name="use_wikidata">Käytä Wikidataa</string>
   <string name="login_failed_2fa_not_supported">Kaksivaiheinen tunnistus ei ole vielä tuettu.</string>
   <string name="logout_verification">Haluatko kirjautua ulos?</string>
+  <string name="upload_image">Lataa kuva</string>
+  <string name="welcome_image_tulip">Tulppaani</string>
+  <string name="welcome_image_no_selfies">Ei selfieitä</string>
+  <string name="welcome_image_welcome_wikipedia">Tervetuloa Wikipediaan</string>
+  <string name="welcome_image_sydney_opera_house">Sydneyn oopperatalo</string>
   <string name="cancel">Peru</string>
   <string name="navigation_drawer_open">Avaa</string>
   <string name="navigation_drawer_close">Sulje</string>
@@ -159,6 +166,7 @@
   <string name="navigation_item_settings">Asetukset</string>
   <string name="navigation_item_feedback">Palaute</string>
   <string name="navigation_item_logout">Kirjaudu ulos</string>
-  <string name="nearby_info_menu_commons_article" fuzzy="true">Commons-artikkeli</string>
+  <string name="nearby_info_menu_commons_article">Commons-tiedostosivu</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata-kohde</string>
+  <string name="feedback_popup_decline">Ei kiitos</string>
 </resources>

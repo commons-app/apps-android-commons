@@ -20,11 +20,11 @@
   <string name="upload_progress_notification_title_finishing">Dokončenie nahrávania %1$s</string>
   <string name="upload_failed_notification_title">Nahrávanie %1$s zlyhalo</string>
   <string name="upload_failed_notification_subtitle">Kliknutím zobrazíte</string>
-  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
-    <item quantity="one">nahráva sa 1 súbor</item>
-    <item quantity="other">nahráva sa %d súborov</item>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">nahráva sa %d súbor</item>
+    <item quantity="other">nahrávajú sa %d súbory</item>
   </plurals>
-  <string name="title_activity_contributions" fuzzy="true">Moje obrázky</string>
+  <string name="title_activity_contributions">Moje nedávno nahrané</string>
   <string name="contribution_state_queued">Nahrávanie je v poradí</string>
   <string name="contribution_state_failed">Nahrávanie zlyhalo</string>
   <string name="contribution_state_in_progress">%1$d%% dokončené</string>
@@ -49,6 +49,8 @@
   <string name="menu_upload_single">Nahrať</string>
   <string name="categories_search_text_hint">Vyhľadávanie kategórií</string>
   <string name="menu_save_categories">Uložiť</string>
+  <string name="refresh_button">Obnoviť</string>
+  <string name="enable_gps">Povoliť GPS</string>
   <string name="categories_not_found">Žiadne kategórie nezodpovedajú „%1$s“</string>
   <string name="categories_skip_explanation">Pridajte kategórie, aby boli vaše obrázky možné na Wikimedia Commons nájsť.\n\nNa pridanie kategórií začnite písať.\nKliknite na tento odkaz (alebo na späť) ak chcete tento krok vynechať.</string>
   <string name="categories_activity_title">Kategórie</string>
@@ -71,7 +73,11 @@
   <string name="preference_license">Licencia</string>
   <string name="use_previous">Použiť predchádzajúci názov/popis</string>
   <string name="allow_gps">Automaticky získať súčasnú polohu</string>
-  <string name="license_name_cc_by_sa">Attribution-ShareAlike 3.0</string>
+  <string name="preference_theme">Nočný režim</string>
+  <string name="preference_theme_summary">Použiť tmavú tému vzhľadu</string>
+  <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four"> Attribution 4.0</string>
+  <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
   <string name="license_name_cc_by"> Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
@@ -104,15 +110,47 @@
   <string name="welcome_final_text">Myslíte, že rozumiete?</string>
   <string name="welcome_final_button_text">Áno!</string>
   <string name="detail_panel_cats_label">Kategórie</string>
-  <string name="detail_panel_cats_loading" fuzzy="true">Načítava sa…</string>
+  <string name="detail_panel_cats_loading">Načítava sa…</string>
   <string name="detail_panel_cats_none">Nič nebolo vybrané</string>
   <string name="detail_description_empty">Bez popisu</string>
   <string name="detail_license_empty">Neznáma licencia</string>
   <string name="menu_refresh">Obnoviť</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Miesta v okolí</string>
+  <string name="no_nearby">V okolí sa nenašli žiadne miesta</string>
   <string name="warning">Upozornenie</string>
   <string name="file_exists">Tento súbor už na Commons existuje. Ste si istí, že chcete pokračovať?</string>
   <string name="yes">Áno</string>
   <string name="no">Nie</string>
+  <string name="media_detail_title">Názov</string>
+  <string name="media_detail_media_title">Názov média</string>
+  <string name="media_detail_description">Popis</string>
+  <string name="media_detail_license">Licencia</string>
+  <string name="media_detail_coordinates">Súradnice</string>
+  <string name="media_detail_coordinates_empty">neposkytnuté</string>
+  <string name="become_a_tester_title">Staňte sa beta testerom</string>
+  <string name="use_wikidata">Použiť Wikiúdaje</string>
+  <string name="logout_verification">Naozaj sa chcete odhlásiť?</string>
+  <string name="commons_logo">Logo Commons</string>
+  <string name="background_image">Obrázok pozadia</string>
+  <string name="no_image_found">Nenašiel sa žiaden obrázok</string>
+  <string name="welcome_image_mount_zao">Hora Zaó</string>
+  <string name="welcome_image_llamas">Lamy</string>
+  <string name="welcome_image_rainbow_bridge">Dúhový most</string>
+  <string name="welcome_image_tulip">Tulipán</string>
+  <string name="welcome_image_no_selfies">Žiadne selfie</string>
+  <string name="welcome_image_sydney_opera_house">Opera v Sydney</string>
+  <string name="cancel">Zrušiť</string>
+  <string name="navigation_drawer_open">Otvoriť</string>
+  <string name="navigation_drawer_close">Zavrieť</string>
+  <string name="navigation_item_home">Domov</string>
+  <string name="navigation_item_upload">Nahrať</string>
+  <string name="navigation_item_nearby">V okolí</string>
+  <string name="navigation_item_about">O aplikácii</string>
+  <string name="navigation_item_settings">Nastavenia</string>
+  <string name="navigation_item_feedback">Spätná väzba</string>
+  <string name="navigation_item_logout">Odhlásiť sa</string>
+  <string name="navigation_item_info">Návod</string>
+  <string name="no_description_found">nenašiel sa žiaden popis</string>
+  <string name="feedback_popup_decline">Nie, vďaka</string>
 </resources>
