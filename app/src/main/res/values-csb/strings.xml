@@ -132,6 +132,20 @@
   <string name="become_a_tester_title">Bãdze beta-testerã</string>
   <string name="use_wikidata">Ùżëjë Wikipòdôwków</string>
   <string name="_2fa_code">Kòd 2FA</string>
+  <string name="logout_verification">Pò prôwdze chcesz sã wëlogòwac?</string>
+  <string name="commons_logo">Logò Commons</string>
+  <string name="background_image">Òbrôzk spódkù</string>
+  <string name="no_image_found">Felënk òbrôzka</string>
+  <string name="upload_image">Waldëjë òbrôzk</string>
+  <string name="welcome_image_mount_zao">Zaō</string>
+  <string name="welcome_image_llamas">Lamy</string>
+  <string name="welcome_image_rainbow_bridge">Rainbow Bridge</string>
+  <string name="welcome_image_tulip">Tulpa</string>
+  <string name="welcome_image_no_selfies">Felënk \"selfies\"</string>
+  <string name="welcome_image_proprietary">Zazychrowóny òbrôzk</string>
+  <string name="welcome_image_welcome_wikipedia">Witôj na Wikipediji</string>
+  <string name="welcome_image_welcome_copyright">Witôj w prawnych zastrzégach</string>
+  <string name="welcome_image_sydney_opera_house">Sydney Opera House</string>
   <string name="cancel">Òprzestóń</string>
   <string name="navigation_drawer_open">Òtemkni</string>
   <string name="navigation_drawer_close">Zamkni</string>
@@ -142,5 +156,9 @@
   <string name="navigation_item_settings">Nastôwë</string>
   <string name="navigation_item_feedback">Òpinije</string>
   <string name="navigation_item_logout">Wëlogùjë</string>
+  <string name="navigation_item_info">Samòùczk</string>
+  <string name="no_description_found">felënk òpisënka</string>
+  <string name="nearby_info_menu_commons_article">Starna lopka w Commons</string>
+  <string name="nearby_info_menu_wikidata_article">Element Wikipòdôwków</string>
   <string name="feedback_popup_decline">Nié, dzãkùjã</string>
 </resources>

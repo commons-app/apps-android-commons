@@ -20,11 +20,11 @@
   <string name="upload_progress_notification_title_finishing">Fin del telecargament %1$s</string>
   <string name="upload_failed_notification_title">Telecargament fracassat a %1$s</string>
   <string name="upload_failed_notification_subtitle">Quichar per afichar</string>
-  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
-    <item quantity="one">1 fichièr en telecargament</item>
-    <item quantity="other">%d fichièrs en telecargament</item>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%d fichièr en cors de cargament</item>
+    <item quantity="other">%d fichièrs en cors de cargament</item>
   </plurals>
-  <string name="title_activity_contributions" fuzzy="true">Mos telecargaments</string>
+  <string name="title_activity_contributions">Mos darrièrs cargaments</string>
   <string name="contribution_state_queued">Mes en fila d\'espèra</string>
   <string name="contribution_state_failed">Fracàs</string>
   <string name="contribution_state_in_progress">%1$d%% efectuat</string>
@@ -50,18 +50,18 @@
   <string name="categories_search_text_hint">Recercar de categorias</string>
   <string name="menu_save_categories">Enregistrar</string>
   <string name="refresh_button">Refrescar</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">Pas mai cap de telecargament</item>
-    <item quantity="one">1 telecargament</item>
-    <item quantity="other">%d telecargaments</item>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%d cargament</item>
+    <item quantity="other">%d cargaments</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">1 telecargament aviat</item>
-    <item quantity="other">%d telecargaments aviats</item>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">%d cargament aviat</item>
+    <item quantity="other">%d cargaments aviats</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">1 telecargament</item>
-    <item quantity="other">%d telecargaments</item>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%d cargament</item>
+    <item quantity="other">%d cargaments</item>
   </plurals>
   <string name="categories_not_found">Cap de categoria que correspond a %1$s pas trobada</string>
   <string name="categories_activity_title">Categorias</string>
@@ -74,7 +74,7 @@
   <string name="menu_feedback">Mandar vòstres comentaris (per corrièl)</string>
   <string name="no_email_client">Cap de client de corrièl pas installat</string>
   <string name="provider_categories">Categorias utilizadas recentament</string>
-  <string name="waiting_first_sync" fuzzy="true">Espèra de primièra sincronizacion…</string>
+  <string name="waiting_first_sync">Espèra de primièra sincronizacion...</string>
   <string name="no_uploads_yet">Avètz pas encara telecargat cap de fòto.</string>
   <string name="menu_retry_upload">Tornar ensajar</string>
   <string name="menu_cancel_upload">Anullar</string>

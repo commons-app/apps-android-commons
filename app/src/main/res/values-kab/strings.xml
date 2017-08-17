@@ -72,6 +72,7 @@
   <string name="title_activity_settings">Iɣewwaṛen</string>
   <string name="title_activity_signup">Jerred</string>
   <string name="menu_about">Ɣef</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Iɣbula&lt;/a&gt; akked &lt;a href=\"https://commons-app.github.io/\"&gt;usmel web&lt;/a&gt; di GitHub. Rnu &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;tummla GitHub&lt;/a&gt; tamaynut akken ad temmleḍ ibugen neɣ ad d-mudded isumar.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Tasertit n tbaḍnit&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Ismaden&lt;/a&gt;</string>
   <string name="title_activity_about">Ɣef</string>
@@ -79,8 +80,10 @@
   <string name="no_email_client">Ulac amsaɣ n yimayl ibedden</string>
   <string name="provider_categories">Taggayin yettwasqedcenmelmi kan</string>
   <string name="waiting_first_sync">Araǧu n umtawi amezwaru...</string>
+  <string name="no_uploads_yet">Ur tsuliḍ ara yakan tiwlafin.</string>
   <string name="menu_retry_upload">Ɛref̣ tikelt-nniḍen</string>
   <string name="menu_cancel_upload">Sefsex</string>
+  <string name="share_license_summary">Tugna-agi ad tili daw n turagt %1$s</string>
   <string name="menu_download">Sider</string>
   <string name="preference_license">Turagt</string>
   <string name="preference_theme">Askar  n yiḍ</string>
