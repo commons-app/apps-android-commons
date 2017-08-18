@@ -38,7 +38,7 @@ public abstract class AuthenticatedActivity extends NavigationBaseActivity {
                 .subscribeOn(Schedulers.io())
                 .map(AccountManagerFuture::getResult)
                 .doOnEvent((bundle, throwable) -> {
-                    if (bundle.containsKey(AccountManager.KEY_ACCOUNT_NAME)) {
+                    if (!bundle.containsKey(AccountManager.KEY_ACCOUNT_NAME)) {
                         throw new RuntimeException("Bundle doesn't contain account-name key: "
                                 + AccountManager.KEY_ACCOUNT_NAME);
                     }
