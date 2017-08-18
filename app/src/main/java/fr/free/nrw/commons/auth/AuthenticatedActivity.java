@@ -12,6 +12,9 @@ import java.io.IOException;
 
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
+import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 public abstract class AuthenticatedActivity extends NavigationBaseActivity {
@@ -24,41 +27,15 @@ public abstract class AuthenticatedActivity extends NavigationBaseActivity {
     public AuthenticatedActivity() {
         this.accountType = AccountUtil.accountType();
     }
-   
-    private class GetAuthCookieTask extends AsyncTask<Void, String, String> {
-        private Account account;
-        private AccountManager accountManager;
-        public GetAuthCookieTask(Account account, AccountManager accountManager) {
-            this.account = account;
-            this.accountManager = accountManager;
-        }
-        
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            if(result != null) {
-                authCookie = result;
-                onAuthCookieAcquired(result);
-            } else {
-                onAuthFailure();
-            }
-        }
 
-        @Override
-        protected String doInBackground(Void... params) {
-            try {
-                return accountManager.blockingGetAuthToken(account, "", false);
-            } catch (OperationCanceledException e) {
-                e.printStackTrace();
-                return null;
-            } catch (AuthenticatorException e) {
-                e.printStackTrace();
-                return null;
-            } catch (IOException e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
+    private void getAuthCookie(Account account, AccountManager accountManager) {
+        Single.fromCallable(() -> accountManager.blockingGetAuthToken(account, "", false))
+                .subscribeOn(Schedulers.io())
+                .doOnError(Timber::e)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        cookie -> onAuthCookieAcquired(cookie),
+                        throwable -> onAuthFailure());
     }
     
     private class AddAccountTask extends AsyncTask<Void, String, String> {
@@ -71,10 +48,9 @@ public abstract class AuthenticatedActivity extends NavigationBaseActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             if(result != null) {
-                Account[] allAccounts =accountManager.getAccountsByType(accountType);
+                Account[] allAccounts = accountManager.getAccountsByType(accountType);
                 Account curAccount = allAccounts[0];
-                GetAuthCookieTask getCookieTask = new GetAuthCookieTask(curAccount, accountManager);
-                getCookieTask.execute();
+                getAuthCookie(curAccount, accountManager);
             } else {
                 onAuthFailure();
             }
@@ -124,8 +100,7 @@ public abstract class AuthenticatedActivity extends NavigationBaseActivity {
             // See: https://groups.google.com/forum/?fromgroups=#!topic/android-developers/8M0RTFfO7-M
             addAccountTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         } else {
-            GetAuthCookieTask task = new GetAuthCookieTask(curAccount, accountManager);
-            task.execute();
+            getAuthCookie(curAccount, accountManager);
         }
     }
     
