@@ -39,7 +39,8 @@ public abstract class AuthenticatedActivity extends NavigationBaseActivity {
                 .map(AccountManagerFuture::getResult)
                 .doOnEvent((bundle, throwable) -> {
                     if (bundle.containsKey(AccountManager.KEY_ACCOUNT_NAME)) {
-                        throw new RuntimeException();
+                        throw new RuntimeException("Bundle doesn't contain account-name key: "
+                                + AccountManager.KEY_ACCOUNT_NAME);
                     }
                 })
                 .map(bundle -> bundle.getString(AccountManager.KEY_ACCOUNT_NAME))
