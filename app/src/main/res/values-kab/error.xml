@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="crash_dialog_title">Commons yeɣli</string>
+  <string name="crash_dialog_text">Ihuh. Yella wayen yeḍran!</string>
+  <string name="crash_dialog_comment_prompt">Ini-yaɣ-d ayen txeddmed, sakin bḍu-t s yimayl yid-neɣ. Aɣ-d-yefk afus akken ad t-nṣeggem.</string>
+  <string name="crash_dialog_ok_toast">Tanemmirt!</string>
+</resources>

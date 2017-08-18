@@ -147,6 +147,9 @@
   <string name="media_detail_description">Déskripsi</string>
   <string name="media_detail_description_explanation">Pedaran berkas nyangkaruk didieu. Bisa jadi matak ngalikakeun, sarta ngempladkeun kana sawatara baris. Sanajan kitu, muga bisa katémbong écés.</string>
   <string name="media_detail_uploaded_date">Tanggal ngunjal</string>
+  <string name="media_detail_license">Lisénsi</string>
+  <string name="media_detail_coordinates">Koordinat</string>
+  <string name="media_detail_coordinates_empty">Teu disadiakeun</string>
   <string name="become_a_tester_title">Jadi tukang ngetés Béta</string>
   <string name="become_a_tester_description">Pilihan asup kana saluran béta kami di Google Play sarta meunangkeun aksés munggaran pikeun fitur anyar jeung pameneran kutu</string>
   <string name="use_wikidata">Paké Wikidata</string>
@@ -185,7 +188,10 @@
   <string name="navigation_item_info">Pituduh</string>
   <string name="nearby_needs_permissions">Tempat sabudeureun teu bisa ditémbongkeun tanpa idin lokasi</string>
   <string name="no_description_found">teu manggihan pedaran</string>
-  <string name="nearby_info_menu_commons_article" fuzzy="true">Artikel Common</string>
+  <string name="nearby_info_menu_commons_article">Kaca berkas commons</string>
   <string name="nearby_info_menu_wikidata_article">item Wikidata</string>
   <string name="error_while_cache">Kasalahan nalika muat gambar</string>
+  <string name="feedback_popup_decline">Teu nuhun</string>
+  <string name="feedback_popup_accept">Tangtu, bawa kuring kadinya!</string>
+  <string name="navigation_item_developer_plans">Rencana pangembang</string>
 </resources>

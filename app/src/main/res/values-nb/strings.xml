@@ -73,7 +73,7 @@
   <string name="title_activity_settings">Innstillinger</string>
   <string name="title_activity_signup">Registrer deg</string>
   <string name="menu_about">Om</string>
-  <string name="about_license" fuzzy="true">Programvare med åpen kildekode sluppet under &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Wikimedia Commons og dets logo er varemerker fra Wikimedia Foundation og brukes med tillatelse fra dem. Vi er verken støttet av eller koblet til Wikimedia Foundation.</string>
+  <string name="about_license">Programvare med åpen kildekode sluppet under &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. %1$s og dets logo er varemerker fra Wikimedia Foundation og brukes med tillatelse fra dem. Vi er verken støttet av eller koblet til Wikimedia Foundation.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kildekode&lt;/a&gt; og &lt;a href=\"https://commons-app.github.io/\"&gt;nettside&lt;/a&gt; på GitHub. Opprett en ny &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-sak&lt;/a&gt; for feilrapporter og forslag.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Personvernpolicy&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-comons/blob/master/CREDITS\"&gt;Bidragsytere&lt;/a&gt;</string>
@@ -86,6 +86,7 @@
   <string name="menu_retry_upload">Prøv igjen</string>
   <string name="menu_cancel_upload">Avbryt</string>
   <string name="share_license_summary">Dette bildet vil bli lisensiert under %1$s</string>
+  <string name="media_upload_policy">Ved å laste opp dette bildet erklærer jeg at dette er mitt eget verk, og at det ikke inneholder opphavsrettsbeskyttet materiale eller selvportretter, og ellers er i samsvar med &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons\' retningslinjer&lt;/a&gt;.</string>
   <string name="menu_download">Last ned</string>
   <string name="preference_license">Lisens</string>
   <string name="use_previous">Bruk forrige tittel/beskrivelse</string>
@@ -147,6 +148,9 @@
   <string name="media_detail_description">Beskrivelse</string>
   <string name="media_detail_description_explanation">Beskrivelse av mediet skal være her. Denne kan potensielt være ganske lang, og vil trenge å strekke seg over flere linjer. Vi håper det ser bra nok ut.</string>
   <string name="media_detail_uploaded_date">Opplastingsdato</string>
+  <string name="media_detail_license">Lisens</string>
+  <string name="media_detail_coordinates">Koordinater</string>
+  <string name="media_detail_coordinates_empty">Ingen oppgitt</string>
   <string name="become_a_tester_title">Bli betatester</string>
   <string name="become_a_tester_description">Registrer deg på vår betakanal på Google Play og få tidlig tilgang til nye funksjoner og feilrettinger</string>
   <string name="use_wikidata">Bruk Wikidata</string>
@@ -185,6 +189,14 @@
   <string name="navigation_item_info">Veiviser</string>
   <string name="nearby_needs_permissions">Steder i nærheten kan ikke vises uten tillatelse for stedsbestemmelse</string>
   <string name="no_description_found">ingen beskrivelse funnet</string>
-  <string name="nearby_info_menu_commons_article" fuzzy="true">Commons-artikkel</string>
+  <string name="nearby_info_menu_commons_article">Commons-filside</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata-element</string>
+  <string name="error_while_cache">Feil under mellomlagring av bilder</string>
+  <string name="title_info">En unik beskrivende tittel for fila, som vil fungere som filnavn. Du kan bruke vanlig språk med mellomrom. Ikke ta med filendelsen</string>
+  <string name="description_info">Beskriv bidraget så mye som mulig: Hvor ble det tatt? Hva viser det? Hva er konteksten? Beskriv objektene eller personene. Gi informasjon som ikke kan gjettes lett, for eksempel når på dagen bildet ble tatt om det er et landskapsbilde. Om bildet viser noe uvanlig, forklar hva som gjør det uvanlig.</string>
+  <string name="feedback_popup_title">Tilbakemelding ønskes</string>
+  <string name="feedback_popup_description">Vi planlegger flere funksjoner og forbedringer i appen! Ønsker du å prøve dem ut og gi tilbakemelding?\n\n(Du kan alltid få tilgang til dette ved å velge «Utviklerplaner» i navigasjonsmenyen)</string>
+  <string name="feedback_popup_decline">Nei takk</string>
+  <string name="feedback_popup_accept">Ok!</string>
+  <string name="navigation_item_developer_plans">Utviklerplaner</string>
 </resources>

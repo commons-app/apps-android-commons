@@ -86,6 +86,7 @@
   <string name="menu_retry_upload">Reintentar</string>
   <string name="menu_cancel_upload">Encaboxar</string>
   <string name="share_license_summary">Esta imaxe quedará baxo la llicencia %1$s</string>
+  <string name="media_upload_policy">El presentar esta imaxe, declaro que ye una obra propia, que nun contien material con derechu d\'autor o «selfies», y que s\'atien a les &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;polítiques de Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Descargar</string>
   <string name="preference_license">Llicencia</string>
   <string name="use_previous">Usar un títulu/descripción anterior</string>
@@ -191,4 +192,11 @@
   <string name="nearby_info_menu_commons_article">Páxina del ficheru en Commons</string>
   <string name="nearby_info_menu_wikidata_article">Elementu de WikiData</string>
   <string name="error_while_cache">Error al poner les fotos na caché</string>
+  <string name="title_info">Un títulu descriptivu únicu pal ficheru, que sirvirá para da-y nome al ficheru. Se pue usar llinguax normal con espacios. Nun amiestes la estensión del ficheru</string>
+  <string name="description_info">Por favor, describi l\'elementu multimedia tantu como sía posible: ¿ónde se tomó?, ¿qué amuesa?, ¿cuál ye\'l contestu? Por favor, describi los oxetos o persones. Revela la información que nun pueda aldovinase de mou cenciellu, por casu el momentu del día si ye un paisaxe. Si\'l mediu amuesa daqué desacostumao, esplica qué lo fai raro.</string>
+  <string name="feedback_popup_title">Agradecemos opiniones</string>
+  <string name="feedback_popup_description">Tamos planificando delles carauterístiques y ameyoramientos nuevos pa l\'aplicación. ¿Prestaríate revisales y dar la to opinión?\n\n(Siempres puedas aportar a esto escoyendo «Planes de los desendolcadores» nel caxón de navegación)</string>
+  <string name="feedback_popup_decline">Non, gracies</string>
+  <string name="feedback_popup_accept">Claro, ¡llévame ende!</string>
+  <string name="navigation_item_developer_plans">Planes de los desendolcadores</string>
 </resources>

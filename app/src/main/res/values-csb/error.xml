@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="crash_dialog_title">Pókôza sã fela Commons.</string>
+  <string name="crash_dialog_text">Wejle! Cos je lëchò  pòszłé!</string>
+  <string name="crash_dialog_comment_prompt">Dôj nam wiédzã ò tim co të zrobił/-a sélając e-mailã. To nama pómòże naprôwic nã felã.</string>
+  <string name="crash_dialog_ok_toast">Dzãkùjemë!</string>
+</resources>
