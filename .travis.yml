@@ -1,17 +1,20 @@
 language: android
+
 addons:
   apt:
     packages:
       - w3m
-cache:
-  directories:
-    - ${TRAVIS_BUILD_DIR}/gradle/caches/
-    - ${TRAVIS_BUILD_DIR}/gradle/wrapper/dists/
+
 env:
   global:
     - ANDROID_TARGET=android-22
     - ANDROID_ABI=armeabi-v7a
     - ADB_INSTALL_TIMEOUT=12 # in minutes
+
+jdk:
+  # - openjdk8 # not yet available
+  - oraclejdk8
+
 android:
   components:
     - platform-tools
@@ -22,17 +25,27 @@ android:
     - ${ANDROID_TARGET}
     - android-25
     - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
+
 before_script:
   - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
   - emulator -avd test -no-audio -no-window -no-boot-anim &
   - android-wait-for-emulator
+
 script:
   - ./gradlew clean check connectedCheck jacocoTestReport --stacktrace
+
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+
 after_failure:
   - echo '*** Connected Test Rsults ***'
   - w3m -dump ${TRAVIS_BUILD_DIR}/app/build/reports/androidTests/connected/*Test.html
-jdk:
-  # - openjdk8 # not yet available
-  - oraclejdk8
+
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
