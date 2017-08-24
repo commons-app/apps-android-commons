@@ -73,7 +73,7 @@
   <string name="title_activity_settings">Séting</string>
   <string name="title_activity_signup">Daptar</string>
   <string name="menu_about">Ngeunaan</string>
-  <string name="about_license" fuzzy="true">Pakakas lemes kodeu nembrak dirilis di handapeun &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Lisénsi Apache v2&lt;/a&gt;. Wikimedia Commons sarta logona téh mérk dagang anu Yayasan Wikimédia ogé dipakéna kudu meunang widi ti Yayasan Wikimédia. Kami teu disatujuan ku atawa digawé bareng jeung Yayasan Wikimédia.</string>
+  <string name="about_license">Pakakas lemes kodeu nembrak dirilis di handapeun &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Lisénsi Apache v2&lt;/a&gt;. %1$s sarta logona téh mérk dagang anu Yayasan Wikimédia ogé dipakéna kudu meunang widi ti Yayasan Wikimédia. Kami teu disatujuan ku atawa digawé bareng jeung Yayasan Wikimédia.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sumber&lt;/a&gt; sarta &lt;a href=\"https://commons-app.github.io/\"&gt;situ wéb&lt;/a&gt; dina GitHub. Jieun anyar &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;perkara GitHub&lt;/a&gt; pikeun saran jeung laporan kutu.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Kawijakan privasi&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Pangajén&lt;/a&gt;</string>
@@ -86,6 +86,7 @@
   <string name="menu_retry_upload">Cobaan deui</string>
   <string name="menu_cancel_upload">Bolay</string>
   <string name="share_license_summary">Ieu gambar bakal ditangtayungan ku lisénsi %1$s</string>
+  <string name="media_upload_policy">Ku ngirimkeun ieu gambar, kuring ngedalkeun yén ieu mangrupa karya kuring sorangan, yén ieu karya teu ngandung matéri atawa hak pribadi nu ditangtayungan ku hak cipta, sarta mun teu nurut kana &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Kawijakan Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Undeur</string>
   <string name="preference_license">Lisénsi</string>
   <string name="use_previous">Paké baé judul/pedaran saméméhna</string>
@@ -191,6 +192,10 @@
   <string name="nearby_info_menu_commons_article">Kaca berkas commons</string>
   <string name="nearby_info_menu_wikidata_article">item Wikidata</string>
   <string name="error_while_cache">Kasalahan nalika muat gambar</string>
+  <string name="title_info">Judul déskriptif anu unik pikeun berkas, anu bakal miboga fungsi minangka ngaran berkas. Anjeun bisa maké basa basajan kalawan spasi. Ulah ngawuwuhkeun éksténsi berkas</string>
+  <string name="description_info">Pék émbarkeun wincikan média saloba-lobabana: Dimana éta dicokot? Naon nu titojokeunna? Naon kontéksna? Pék jéntrékeun obyék atawa jalmana. Ébré informasi anu teu gampang kajudi, kawas wayah mun éta mangrupa pamandangan. Ari média nu némbongkeun perkara nu teu guyub, pék jéntrékeun naon nu ngabalukarkeun éta téh teu guyub.</string>
+  <string name="feedback_popup_title">Eupan balik dipiharep</string>
+  <string name="feedback_popup_description">Kami keur ngarencanakeun sawatara fitur jeung oméanan anyar pikeun ieu aplikasi! Anda daék mariksa jeung méré eupan balik?</string>
   <string name="feedback_popup_decline">Teu nuhun</string>
   <string name="feedback_popup_accept">Tangtu, bawa kuring kadinya!</string>
   <string name="navigation_item_developer_plans">Rencana pangembang</string>
