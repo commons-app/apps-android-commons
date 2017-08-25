@@ -27,8 +27,11 @@ import com.google.gson.GsonBuilder;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
@@ -37,11 +40,12 @@ import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.UriSerializer;
 import timber.log.Timber;
 
-
 public class NearbyActivity extends NavigationBaseActivity {
 
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
+    @Inject CommonsApplication application;
+
     private boolean isMapViewActive = false;
     private static final int LOCATION_REQUEST = 1;
 
@@ -91,7 +95,7 @@ public class NearbyActivity extends NavigationBaseActivity {
         locationManager = new LocationServiceManager(this);
         locationManager.registerLocationManager();
         curLatLang = locationManager.getLatestLocation();
-        nearbyAsyncTask = new NearbyAsyncTask(this);
+        nearbyAsyncTask = new NearbyAsyncTask(this, application);
         nearbyAsyncTask.execute();
     }
 
@@ -230,7 +234,7 @@ public class NearbyActivity extends NavigationBaseActivity {
     }
 
     private void refreshView() {
-        nearbyAsyncTask = new NearbyAsyncTask(this);
+        nearbyAsyncTask = new NearbyAsyncTask(this, application);
         nearbyAsyncTask.execute();
     }
 
@@ -245,9 +249,11 @@ public class NearbyActivity extends NavigationBaseActivity {
     private class NearbyAsyncTask extends AsyncTask<Void, Integer, List<Place>> {
 
         private final Context mContext;
+        private final CommonsApplication application;
 
-        private NearbyAsyncTask(Context context) {
+        private NearbyAsyncTask(Context context, CommonsApplication application) {
             mContext = context;
+            this.application = application;
         }
 
         @Override
@@ -258,8 +264,7 @@ public class NearbyActivity extends NavigationBaseActivity {
         @Override
         protected List<Place> doInBackground(Void... params) {
             return NearbyController
-                    .loadAttractionsFromLocation(curLatLang, CommonsApplication.getInstance()
-                    );
+                    .loadAttractionsFromLocation(curLatLang, application);
         }
 
         @Override

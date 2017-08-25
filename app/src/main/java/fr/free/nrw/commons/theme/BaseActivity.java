@@ -5,15 +5,16 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 
+import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 
 public class BaseActivity extends AppCompatActivity {
     boolean currentTheme;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         if(Utils.isDarkTheme(this)){
             currentTheme = true;
             setTheme(R.style.DarkAppTheme);

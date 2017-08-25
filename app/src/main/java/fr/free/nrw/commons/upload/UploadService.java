@@ -247,7 +247,7 @@ public class UploadService extends HandlerService<Contribution> {
             String resultStatus = uploadResult.getResultStatus();
             if (!resultStatus.equals("Success")) {
                 showFailedNotification(contribution);
-                EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT)
+                EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT, CommonsApplication.getInstance())
                         .param("username", app.getCurrentAccount().name)
                         .param("source", contribution.getSource())
                         .param("multiple", contribution.getMultiple())
@@ -261,7 +261,7 @@ public class UploadService extends HandlerService<Contribution> {
                 contribution.setDateUploaded(uploadResult.getDateUploaded());
                 contribution.save();
 
-                EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT)
+                EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT, CommonsApplication.getInstance())
                         .param("username", app.getCurrentAccount().name)
                         .param("source", contribution.getSource()) //FIXME
                         .param("filename", contribution.getFilename())

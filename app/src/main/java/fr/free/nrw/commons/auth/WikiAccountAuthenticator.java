@@ -13,16 +13,19 @@ import android.support.annotation.Nullable;
 
 import java.io.IOException;
 
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 
 public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
 
-    private Context context;
+    private final Context context;
+    private final AccountUtil accountUtil;
+    private MediaWikiApi mediaWikiApi;
 
-    public WikiAccountAuthenticator(Context context) {
+    public WikiAccountAuthenticator(Context context, AccountUtil accountUtil, MediaWikiApi mwApi) {
         super(context);
         this.context = context;
+        this.accountUtil = accountUtil;
+        this.mediaWikiApi = mwApi;
     }
 
     private Bundle unsupportedOperation() {
@@ -36,7 +39,7 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
     }
 
     private boolean supportedAccountType(@Nullable String type) {
-        return AccountUtil.accountType().equals(type);
+        return accountUtil.accountType().equals(type);
     }
 
     @Override
@@ -75,11 +78,10 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
     }
 
     private String getAuthCookie(String username, String password) throws IOException {
-        MediaWikiApi api = CommonsApplication.getInstance().getMWApi();
         //TODO add 2fa support here
-        String result = api.login(username, password);
+        String result = mediaWikiApi.login(username, password);
         if(result.equals("PASS")) {
-            return api.getAuthCookie();
+            return mediaWikiApi.getAuthCookie();
         } else {
             return null;
         }
@@ -102,7 +104,7 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
             if (authCookie != null) {
                 final Bundle result = new Bundle();
                 result.putString(AccountManager.KEY_ACCOUNT_NAME, account.name);
-                result.putString(AccountManager.KEY_ACCOUNT_TYPE, AccountUtil.accountType());
+                result.putString(AccountManager.KEY_ACCOUNT_TYPE, accountUtil.accountType());
                 result.putString(AccountManager.KEY_AUTHTOKEN, authCookie);
                 return result;
             }

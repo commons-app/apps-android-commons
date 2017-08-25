@@ -131,7 +131,7 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
         switch(item.getItemId()) {
             case R.id.menu_share_current_image:
                 // Share - this is just logs it, intent set in onCreateOptionsMenu, around line 252
-                EventLog.schema(CommonsApplication.EVENT_SHARE_ATTEMPT)
+                EventLog.schema(CommonsApplication.EVENT_SHARE_ATTEMPT, CommonsApplication.getInstance())
                         .param("username", app.getCurrentAccount().name)
                         .param("filename", m.getFilename())
                         .log();

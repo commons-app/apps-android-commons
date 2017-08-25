@@ -5,6 +5,9 @@ import android.accounts.AccountManager;
 import android.accounts.AccountManagerFuture;
 import android.os.Bundle;
 
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import io.reactivex.Single;
@@ -14,27 +17,23 @@ import timber.log.Timber;
 
 public abstract class AuthenticatedActivity extends NavigationBaseActivity {
 
-    String accountType;
-    CommonsApplication app;
+    @Inject CommonsApplication app;
+    @Inject AccountUtil accountUtil;
 
     private String authCookie;
     
-    public AuthenticatedActivity() {
-        this.accountType = AccountUtil.accountType();
-    }
-
     private void getAuthCookie(Account account, AccountManager accountManager) {
         Single.fromCallable(() -> accountManager.blockingGetAuthToken(account, "", false))
                 .subscribeOn(Schedulers.io())
                 .doOnError(Timber::e)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        cookie -> onAuthCookieAcquired(cookie),
+                        this::onAuthCookieAcquired,
                         throwable -> onAuthFailure());
     }
 
     private void addAccount(AccountManager accountManager) {
-        Single.just(accountManager.addAccount(accountType, null, null, null, AuthenticatedActivity.this, null, null))
+        Single.just(accountManager.addAccount(accountUtil.accountType(), null, null, null, AuthenticatedActivity.this, null, null))
                 .subscribeOn(Schedulers.io())
                 .map(AccountManagerFuture::getResult)
                 .doOnEvent((bundle, throwable) -> {
@@ -47,7 +46,7 @@ public abstract class AuthenticatedActivity extends NavigationBaseActivity {
                 .doOnError(Timber::e)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s -> {
-                            Account[] allAccounts = accountManager.getAccountsByType(accountType);
+                            Account[] allAccounts = accountManager.getAccountsByType(accountUtil.accountType());
                             Account curAccount = allAccounts[0];
                             getAuthCookie(curAccount, accountManager);
                         },
@@ -71,7 +70,7 @@ public abstract class AuthenticatedActivity extends NavigationBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        app = CommonsApplication.getInstance();
+
         if(savedInstanceState != null) {
             authCookie = savedInstanceState.getString("authCookie");
         }

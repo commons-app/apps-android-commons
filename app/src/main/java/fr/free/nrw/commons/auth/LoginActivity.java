@@ -8,15 +8,16 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
@@ -34,6 +35,9 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
     public static final String PARAM_USERNAME = "fr.free.nrw.commons.login.username";
 
+    @Inject CommonsApplication application;
+    @Inject AccountUtil accountUtil;
+
     private SharedPreferences prefs = null;
 
     private Button loginButton;
@@ -43,13 +47,10 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     ProgressDialog progressDialog;
     private LoginTextWatcher textWatcher = new LoginTextWatcher();
 
-    private CommonsApplication app;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
-
-        app = CommonsApplication.getInstance();
 
         setContentView(R.layout.activity_login);
 
@@ -111,7 +112,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             WelcomeActivity.startYourself(this);
             prefs.edit().putBoolean("firstrun", false).apply();
         }
-        if (app.getCurrentAccount() != null) {
+        if (application.getCurrentAccount() != null) {
             startMainActivity();
         }
     }
@@ -143,7 +144,8 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 this,
                 canonicializeUsername(usernameEdit.getText().toString()),
                 passwordEdit.getText().toString(),
-                twoFactorEdit.getText().toString()
+                twoFactorEdit.getText().toString(),
+                accountUtil, application
         );
     }
 

@@ -10,6 +10,9 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.CommonsApplication;
 import timber.log.Timber;
 
@@ -33,9 +36,12 @@ public class ContributionsContentProvider extends ContentProvider{
         return Uri.parse(BASE_URI.toString() + "/" + id);
     }
 
+    @Inject CommonsApplication application;
+
     @Override
     public boolean onCreate() {
-        return false;
+        AndroidInjection.inject(this);
+        return true;
     }
 
     @Override
@@ -45,7 +51,7 @@ public class ContributionsContentProvider extends ContentProvider{
 
         int uriType = uriMatcher.match(uri);
 
-        SQLiteDatabase db = CommonsApplication.getInstance().getDBOpenHelper().getReadableDatabase();
+        SQLiteDatabase db = application.getDBOpenHelper().getReadableDatabase();
         Cursor cursor;
 
         switch(uriType) {
@@ -79,7 +85,7 @@ public class ContributionsContentProvider extends ContentProvider{
     @Override
     public Uri insert(@NonNull Uri uri, ContentValues contentValues) {
         int uriType = uriMatcher.match(uri);
-        SQLiteDatabase sqlDB = CommonsApplication.getInstance().getDBOpenHelper().getWritableDatabase();
+        SQLiteDatabase sqlDB = application.getDBOpenHelper().getWritableDatabase();
         long id = 0;
         switch (uriType) {
             case CONTRIBUTIONS:
@@ -97,7 +103,7 @@ public class ContributionsContentProvider extends ContentProvider{
         int rows = 0;
         int uriType = uriMatcher.match(uri);
 
-        SQLiteDatabase db = CommonsApplication.getInstance().getDBOpenHelper().getReadableDatabase();
+        SQLiteDatabase db = application.getDBOpenHelper().getReadableDatabase();
 
         switch(uriType) {
             case CONTRIBUTIONS_ID:
@@ -118,7 +124,7 @@ public class ContributionsContentProvider extends ContentProvider{
     public int bulkInsert(@NonNull Uri uri, @NonNull ContentValues[] values) {
         Timber.d("Hello, bulk insert! (ContributionsContentProvider)");
         int uriType = uriMatcher.match(uri);
-        SQLiteDatabase sqlDB = CommonsApplication.getInstance().getDBOpenHelper().getWritableDatabase();
+        SQLiteDatabase sqlDB = application.getDBOpenHelper().getWritableDatabase();
         sqlDB.beginTransaction();
         switch (uriType) {
             case CONTRIBUTIONS:
@@ -146,7 +152,7 @@ public class ContributionsContentProvider extends ContentProvider{
         In here, the only concat created argument is for id. It is cast to an int, and will error out otherwise.
          */
         int uriType = uriMatcher.match(uri);
-        SQLiteDatabase sqlDB = CommonsApplication.getInstance().getDBOpenHelper().getWritableDatabase();
+        SQLiteDatabase sqlDB = application.getDBOpenHelper().getWritableDatabase();
         int rowsUpdated = 0;
         switch (uriType) {
             case CONTRIBUTIONS:

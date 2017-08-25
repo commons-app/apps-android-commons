@@ -2,6 +2,7 @@ package fr.free.nrw.commons.mwapi;
 
 import android.os.Build;
 
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
 
 public class EventLog {
@@ -15,14 +16,14 @@ public class EventLog {
         }
     }
 
-    private static LogBuilder schema(String schema, long revision) {
-        return new LogBuilder(schema, revision);
+    private static LogBuilder schema(String schema, long revision, CommonsApplication application) {
+        return new LogBuilder(schema, revision, application);
     }
 
-    public static LogBuilder schema(Object[] scid) {
+    public static LogBuilder schema(Object[] scid, CommonsApplication application) {
         if (scid.length != 2) {
             throw new IllegalArgumentException("Needs an object array with schema as first param and revision as second");
         }
-        return schema((String) scid[0], (Long) scid[1]);
+        return schema((String) scid[0], (Long) scid[1], application);
     }
 }

@@ -17,14 +17,16 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.settings.Prefs;
 
 public class LogBuilder {
+    private final CommonsApplication application;
     private JSONObject data;
     private long rev;
     private String schema;
 
-    LogBuilder(String schema, long revision) {
+    LogBuilder(String schema, long revision, CommonsApplication application) {
         data = new JSONObject();
         this.schema = schema;
         this.rev = revision;
+        this.application = application;
     }
 
     public LogBuilder param(String key, Object value) {
@@ -56,11 +58,11 @@ public class LogBuilder {
     // Use *only* for tracking the user preference change for EventLogging
     // Attempting to use anywhere else will cause kitten explosions
     public void log(boolean force) {
-        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(CommonsApplication.getInstance());
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(application);
         if (!settings.getBoolean(Prefs.TRACKING_ENABLED, true) && !force) {
             return; // User has disabled tracking
         }
-        LogTask logTask = new LogTask();
+        LogTask logTask = new LogTask(application.getMWApi());
         logTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, this);
     }
 

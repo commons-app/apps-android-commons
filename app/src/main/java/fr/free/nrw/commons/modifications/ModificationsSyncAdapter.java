@@ -14,6 +14,8 @@ import android.os.RemoteException;
 
 import java.io.IOException;
 
+import javax.inject.Inject;
+
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.contributions.Contribution;
@@ -23,6 +25,8 @@ import timber.log.Timber;
 
 public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
 
+    @Inject CommonsApplication application;
+
     public ModificationsSyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
     }
@@ -30,6 +34,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
     @Override
     public void onPerformSync(Account account, Bundle bundle, String s, ContentProviderClient contentProviderClient, SyncResult syncResult) {
         // This code is fraught with possibilities of race conditions, but lalalalala I can't hear you!
+        ((CommonsApplication)getContext().getApplicationContext()).injector().inject(this);
 
         Cursor allModifications;
         try {
@@ -59,7 +64,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
             return;
         }
 
-        MediaWikiApi api = CommonsApplication.getInstance().getMWApi();
+        MediaWikiApi api = application.getMWApi();
         api.setAuthCookie(authCookie);
         String editToken;
 

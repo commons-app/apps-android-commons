@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.License;
 import fr.free.nrw.commons.LicenseList;
 import fr.free.nrw.commons.Media;
@@ -188,7 +189,7 @@ public class MediaDetailFragment extends Fragment {
 
             @Override
             protected void onPreExecute() {
-                extractor = new MediaDataExtractor(media.getFilename(), licenseList);
+                extractor = new MediaDataExtractor(media.getFilename(), licenseList, CommonsApplication.getInstance().getMWApi());
             }
 
             @Override

@@ -2,7 +2,6 @@ package fr.free.nrw.commons;
 
 import android.support.annotation.Nullable;
 
-import org.mediawiki.api.ApiResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -34,6 +33,7 @@ import timber.log.Timber;
  * which are not intrinsic to the media and may change due to editing.
  */
 public class MediaDataExtractor {
+    private final MediaWikiApi mediaWikiApi;
     private boolean fetched;
 
     private String filename;
@@ -45,14 +45,16 @@ public class MediaDataExtractor {
     private LicenseList licenseList;
 
     /**
+     * @param mwApi instance of MediaWikiApi
      * @param filename of the target media object, should include 'File:' prefix
      */
-    public MediaDataExtractor(String filename, LicenseList licenseList) {
+    public MediaDataExtractor(String filename, LicenseList licenseList, MediaWikiApi mwApi) {
         this.filename = filename;
-        categories = new ArrayList<>();
-        descriptions = new HashMap<>();
-        fetched = false;
+        this.categories = new ArrayList<>();
+        this.descriptions = new HashMap<>();
+        this.fetched = false;
         this.licenseList = licenseList;
+        this.mediaWikiApi = mwApi;
     }
 
     /**
@@ -66,8 +68,7 @@ public class MediaDataExtractor {
             throw new IllegalStateException("Tried to call MediaDataExtractor.fetch() again.");
         }
 
-        MediaWikiApi api = CommonsApplication.getInstance().getMWApi();
-        MediaResult result = api.fetchMediaByFilename(filename);
+        MediaResult result = mediaWikiApi.fetchMediaByFilename(filename);
 
         // In-page category links are extracted from source, as XML doesn't cover [[links]]
         extractCategories(result.getWikiSource());

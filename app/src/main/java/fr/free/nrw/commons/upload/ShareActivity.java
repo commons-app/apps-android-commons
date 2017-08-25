@@ -27,7 +27,6 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -168,7 +167,7 @@ public  class       ShareActivity
         // This is the wrong place for it, but bleh - better than not having it turned on by default for people who don't go throughl ogin
         ContentResolver.setSyncAutomatically(app.getCurrentAccount(), ModificationsContentProvider.AUTHORITY, true); // Enable sync by default!
 
-        EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT)
+        EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT, CommonsApplication.getInstance())
                 .param("username", app.getCurrentAccount().name)
                 .param("categories-count", categories.size())
                 .param("files-count", 1)
@@ -190,7 +189,7 @@ public  class       ShareActivity
     public void onBackPressed() {
         super.onBackPressed();
         if(categorizationFragment != null && categorizationFragment.isVisible()) {
-            EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT)
+            EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT, CommonsApplication.getInstance())
                     .param("username", app.getCurrentAccount().name)
                     .param("categories-count", categorizationFragment.getCurrentSelectedCount())
                     .param("files-count", 1)
@@ -198,7 +197,7 @@ public  class       ShareActivity
                     .param("result", "cancelled")
                     .log();
         } else {
-            EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT)
+            EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT, CommonsApplication.getInstance())
                     .param("username", app.getCurrentAccount().name)
                     .param("source", getIntent().getStringExtra(UploadService.EXTRA_SOURCE))
                     .param("multiple", true)

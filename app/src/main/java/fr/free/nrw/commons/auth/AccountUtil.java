@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import javax.inject.Inject;
+
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
@@ -15,8 +17,15 @@ import timber.log.Timber;
 
 public class AccountUtil {
 
-    public static void createAccount(@Nullable AccountAuthenticatorResponse response,
-                                     String username, String password) {
+    private final CommonsApplication application;
+
+    @Inject
+    public AccountUtil(CommonsApplication application) {
+        this.application = application;
+    }
+
+    public void createAccount(@Nullable AccountAuthenticatorResponse response,
+                              String username, String password) {
 
         Account account = new Account(username, accountType());
         boolean created = accountManager().addAccountExplicitly(account, password, null);
@@ -46,17 +55,12 @@ public class AccountUtil {
     }
 
     @NonNull
-    public static String accountType() {
+    public String accountType() {
         return "fr.free.nrw.commons";
     }
 
-    private static AccountManager accountManager() {
-        return AccountManager.get(app());
-    }
-
-    @NonNull
-    private static CommonsApplication app() {
-        return CommonsApplication.getInstance();
+    private AccountManager accountManager() {
+        return AccountManager.get(application);
     }
 
 }

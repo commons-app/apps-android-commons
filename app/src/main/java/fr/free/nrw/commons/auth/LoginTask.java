@@ -19,14 +19,16 @@ class LoginTask extends AsyncTask<String, String, String> {
     private String username;
     private String password;
     private String twoFactorCode = "";
+    private AccountUtil accountUtil;
     private CommonsApplication app;
 
-    public LoginTask(LoginActivity loginActivity, String username, String password, String twoFactorCode) {
+    public LoginTask(LoginActivity loginActivity, String username, String password, String twoFactorCode, AccountUtil accountUtil, CommonsApplication application) {
         this.loginActivity = loginActivity;
         this.username = username;
         this.password = password;
         this.twoFactorCode = twoFactorCode;
-        app = CommonsApplication.getInstance();
+        this.accountUtil = accountUtil;
+        this.app = application;
     }
 
     @Override
@@ -59,7 +61,7 @@ class LoginTask extends AsyncTask<String, String, String> {
         super.onPostExecute(result);
         Timber.d("Login done!");
 
-        EventLog.schema(CommonsApplication.EVENT_LOGIN_ATTEMPT)
+        EventLog.schema(CommonsApplication.EVENT_LOGIN_ATTEMPT, app)
                 .param("username", username)
                 .param("result", result)
                 .log();
@@ -83,12 +85,12 @@ class LoginTask extends AsyncTask<String, String, String> {
             if (response != null) {
                 Bundle authResult = new Bundle();
                 authResult.putString(AccountManager.KEY_ACCOUNT_NAME, username);
-                authResult.putString(AccountManager.KEY_ACCOUNT_TYPE, AccountUtil.accountType());
+                authResult.putString(AccountManager.KEY_ACCOUNT_TYPE, accountUtil.accountType());
                 response.onResult(authResult);
             }
         }
 
-        AccountUtil.createAccount(response, username, password);
+        accountUtil.createAccount(response, username, password);
         loginActivity.startMainActivity();
     }
 

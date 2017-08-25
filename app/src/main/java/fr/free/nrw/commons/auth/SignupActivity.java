@@ -6,12 +6,16 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.theme.BaseActivity;
 import timber.log.Timber;
 
 public class SignupActivity extends BaseActivity {
 
+    @Inject CommonsApplication application;
     private WebView webView;
 
     @Override
@@ -38,7 +42,7 @@ public class SignupActivity extends BaseActivity {
                 Timber.d("Overriding URL %s", url);
 
                 Toast toast = Toast.makeText(
-                        CommonsApplication.getInstance(),
+                        application,
                         "Account created!",
                         Toast.LENGTH_LONG
                 );

@@ -24,13 +24,17 @@ import android.widget.AdapterView;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 import butterknife.ButterKnife;
+import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -45,6 +49,9 @@ public  class       ContributionsActivity
                     MediaDetailPagerFragment.MediaDetailProvider,
                     FragmentManager.OnBackStackChangedListener,
                     ContributionsListFragment.SourceRefresher {
+
+    @Inject CommonsApplication application;
+    @Inject MediaWikiApi mediaWikiApi;
 
     private Cursor allContributions;
     private ContributionsListFragment contributionsList;
@@ -108,7 +115,7 @@ public  class       ContributionsActivity
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
         // Do a sync everytime we get here!
-        ContentResolver.requestSync(CommonsApplication.getInstance().getCurrentAccount(), ContributionsContentProvider.AUTHORITY, new Bundle());
+        ContentResolver.requestSync(application.getCurrentAccount(), ContributionsContentProvider.AUTHORITY, new Bundle());
         Intent uploadServiceIntent = new Intent(this, UploadService.class);
         uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
         startService(uploadServiceIntent);
@@ -263,10 +270,8 @@ public  class       ContributionsActivity
     }
 
     private void setUploadCount() {
-        CommonsApplication application = CommonsApplication.getInstance();
-
         compositeDisposable.add(
-                CommonsApplication.getInstance().getMWApi()
+                mediaWikiApi
                         .getUploadCount(application.getCurrentAccount().name)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())

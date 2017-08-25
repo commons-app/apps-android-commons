@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
 public class MediaWikiImageView extends SimpleDraweeView {
@@ -43,7 +44,8 @@ public class MediaWikiImageView extends SimpleDraweeView {
             setImageUrl(CommonsApplication.getInstance().getThumbnailUrlCache().get(media.getFilename()));
         } else {
             setImageUrl(null);
-            currentThumbnailTask = new ThumbnailFetchTask(media);
+            MediaWikiApi mediaWikiApi = CommonsApplication.getInstance().getMWApi();
+            currentThumbnailTask = new ThumbnailFetchTask(media, mediaWikiApi);
             currentThumbnailTask.execute(media.getFilename());
         }
     }
@@ -71,8 +73,8 @@ public class MediaWikiImageView extends SimpleDraweeView {
     }
 
     private class ThumbnailFetchTask extends MediaThumbnailFetchTask {
-        ThumbnailFetchTask(@NonNull Media media) {
-            super(media);
+        ThumbnailFetchTask(@NonNull Media media, @NonNull MediaWikiApi mwApi) {
+            super(media, mwApi);
         }
 
         @Override

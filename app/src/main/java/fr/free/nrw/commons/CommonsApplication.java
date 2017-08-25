@@ -4,7 +4,9 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
+import android.app.Activity;
 import android.app.Application;
+import android.content.ContentProvider;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -23,11 +25,21 @@ import org.acra.annotation.ReportsCrashes;
 import java.io.File;
 import java.io.IOException;
 
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjector;
+import dagger.android.DaggerApplication;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.HasActivityInjector;
+import dagger.android.HasContentProviderInjector;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.caching.CacheController;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.data.Category;
 import fr.free.nrw.commons.data.DBOpenHelper;
+import fr.free.nrw.commons.di.CommonsApplicationComponent;
+import fr.free.nrw.commons.di.CommonsApplicationModule;
+import fr.free.nrw.commons.di.DaggerCommonsApplicationComponent;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
@@ -44,7 +56,10 @@ import timber.log.Timber;
         resDialogCommentPrompt = R.string.crash_dialog_comment_prompt,
         resDialogOkToast = R.string.crash_dialog_ok_toast
 )
-public class CommonsApplication extends Application {
+public class CommonsApplication extends DaggerApplication {
+
+    @Inject MediaWikiApi mediaWikiApi;
+    @Inject AccountUtil accountUtil;
 
     private Account currentAccount = null; // Unlike a savings account...
     public static final String API_URL = "https://commons.wikimedia.org/w/api.php";
@@ -70,6 +85,7 @@ public class CommonsApplication extends Application {
     private CacheController cacheData = null;
     private DBOpenHelper dbOpenHelper = null;
     private NearbyPlaces nearbyPlaces = null;
+    private CommonsApplicationComponent component;
 
     /**
      * This should not be called by ANY application code (other than the magic Android glue)
@@ -121,6 +137,7 @@ public class CommonsApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
         if (LeakCanary.isInAnalyzerProcess(this)) {
             // This process is dedicated to LeakCanary for heap analysis.
             // You should not init your app in this process.
@@ -129,8 +146,6 @@ public class CommonsApplication extends Application {
         LeakCanary.install(this);
 
         Timber.plant(new Timber.DebugTree());
-
-
 
         if (!BuildConfig.DEBUG) {
             ACRA.init(this);
@@ -147,13 +162,27 @@ public class CommonsApplication extends Application {
         cacheData  = new CacheController();
     }
 
+    @Override
+    protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
+        return injector();
+    }
+
+    public CommonsApplicationComponent injector() {
+        if (component == null) {
+            component = DaggerCommonsApplicationComponent.builder()
+                    .appModule(new CommonsApplicationModule(this))
+                    .build();
+        }
+        return component;
+    }
+
     /**
      * @return Account|null
      */
     public Account getCurrentAccount() {
         if(currentAccount == null) {
             AccountManager accountManager = AccountManager.get(this);
-            Account[] allAccounts = accountManager.getAccountsByType(AccountUtil.accountType());
+            Account[] allAccounts = accountManager.getAccountsByType(accountUtil.accountType());
             if(allAccounts.length != 0) {
                 currentAccount = allAccounts[0];
             }
@@ -169,10 +198,10 @@ public class CommonsApplication extends Application {
             return false; // This should never happen
         }
         
-        accountManager.invalidateAuthToken(AccountUtil.accountType(), getMWApi().getAuthCookie());
+        accountManager.invalidateAuthToken(accountUtil.accountType(), mediaWikiApi.getAuthCookie());
         try {
             String authCookie = accountManager.blockingGetAuthToken(curAccount, "", false);
-            getMWApi().setAuthCookie(authCookie);
+            mediaWikiApi.setAuthCookie(authCookie);
             return true;
         } catch (OperationCanceledException | NullPointerException | IOException | AuthenticatorException e) {
             e.printStackTrace();
@@ -199,13 +228,13 @@ public class CommonsApplication extends Application {
         }
 
         AccountManager accountManager = AccountManager.get(this);
-        Account[] allAccounts = accountManager.getAccountsByType(AccountUtil.accountType());
+        Account[] allAccounts = accountManager.getAccountsByType(accountUtil.accountType());
         for (Account allAccount : allAccounts) {
             accountManager.removeAccount(allAccount, null, null);
         }
 
         //TODO: fix preference manager 
-        PreferenceManager.getDefaultSharedPreferences(getInstance()).edit().clear().commit();
+        PreferenceManager.getDefaultSharedPreferences(this).edit().clear().commit();
         SharedPreferences preferences = context
                 .getSharedPreferences("fr.free.nrw.commons", MODE_PRIVATE);
         preferences.edit().clear().commit();
@@ -219,7 +248,7 @@ public class CommonsApplication extends Application {
      * Deletes all tables and re-creates them.
      */
     public void updateAllDatabases() {
-        DBOpenHelper dbOpenHelper = CommonsApplication.getInstance().getDBOpenHelper();
+        DBOpenHelper dbOpenHelper = getDBOpenHelper();
         dbOpenHelper.getReadableDatabase().close();
         SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
 
