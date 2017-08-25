@@ -2,6 +2,8 @@ package fr.free.nrw.commons;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.accounts.AccountManagerCallback;
+import android.accounts.AccountManagerFuture;
 import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
 import android.app.Application;
@@ -11,6 +13,7 @@ import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
 import android.support.v4.util.LruCache;
+import android.util.Log;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.stetho.Stetho;
@@ -32,6 +35,7 @@ import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.NearbyPlaces;
+import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.FileUtils;
 import timber.log.Timber;
 
@@ -190,7 +194,7 @@ public class CommonsApplication extends Application {
                 pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT);
     }
 
-    public void clearApplicationData(Context context) {
+    public void clearApplicationData(Context context, NavigationBaseActivity.LogoutCompleteListener logoutCompleteListener) {
         File cacheDirectory = context.getCacheDir();
         File applicationDirectory = new File(cacheDirectory.getParent());
         if (applicationDirectory.exists()) {
@@ -204,19 +208,44 @@ public class CommonsApplication extends Application {
 
         AccountManager accountManager = AccountManager.get(this);
         Account[] allAccounts = accountManager.getAccountsByType(AccountUtil.accountType());
-        for (Account allAccount : allAccounts) {
-            accountManager.removeAccount(allAccount, null, null);
-        }
 
-        //TODO: fix preference manager 
-        PreferenceManager.getDefaultSharedPreferences(getInstance()).edit().clear().commit();
-        SharedPreferences preferences = context
-                .getSharedPreferences("fr.free.nrw.commons", MODE_PRIVATE);
-        preferences.edit().clear().commit();
-        context.getSharedPreferences("prefs", Context.MODE_PRIVATE).edit().clear().commit();
-        preferences.edit().putBoolean("firstrun", false).apply();
-        updateAllDatabases();
-        currentAccount = null;
+        AccountManagerCallback<Boolean> accountManagerCallback = new AccountManagerCallback<Boolean>() {
+            int index = 0;
+            @Override
+            public void run(AccountManagerFuture<Boolean> accountManagerFuture) {
+                index++;
+
+                try {
+                    if(accountManagerFuture.getResult())
+                    {
+                        Timber.d("Account removed successfully.");
+                    }
+                }
+                catch (OperationCanceledException | NullPointerException | IOException | AuthenticatorException e) {
+                    e.printStackTrace();
+                }
+
+                if(index == allAccounts.length)
+                {
+                    Timber.d("All accounts have been removed");
+                    //TODO: fix preference manager
+                    PreferenceManager.getDefaultSharedPreferences(getInstance()).edit().clear().commit();
+                    SharedPreferences preferences = context
+                            .getSharedPreferences("fr.free.nrw.commons", MODE_PRIVATE);
+                    preferences.edit().clear().commit();
+                    context.getSharedPreferences("prefs", Context.MODE_PRIVATE).edit().clear().commit();
+                    preferences.edit().putBoolean("firstrun", false).apply();
+                    updateAllDatabases();
+                    currentAccount = null;
+
+                    logoutCompleteListener.onLogoutComplete();
+                }
+            }
+        };
+
+        for (Account account : allAccounts) {
+            accountManager.removeAccount(account, accountManagerCallback, null);
+        }
     }
 
     /**
