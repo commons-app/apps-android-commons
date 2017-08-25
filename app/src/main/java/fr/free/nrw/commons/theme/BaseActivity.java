@@ -3,19 +3,17 @@ package fr.free.nrw.commons.theme;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
 
-import dagger.android.AndroidInjection;
+import dagger.android.DaggerActivity;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
 
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends DaggerActivity {
     boolean currentTheme;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        AndroidInjection.inject(this);
-        if(Utils.isDarkTheme(this)){
+        boolean currentThemeIsDark = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("theme", false);
+        if (currentThemeIsDark) {
             currentTheme = true;
             setTheme(R.style.DarkAppTheme);
         } else {
@@ -28,8 +26,8 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         // Restart activity if theme is changed
-        boolean newTheme = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("theme",false);
-        if(currentTheme!=newTheme){ //is activity theme changed
+        boolean newTheme = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("theme", false);
+        if (currentTheme != newTheme) { //is activity theme changed
             Intent intent = getIntent();
             finish();
             startActivity(intent);

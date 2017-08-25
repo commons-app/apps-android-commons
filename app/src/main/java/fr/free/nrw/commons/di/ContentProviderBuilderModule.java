@@ -13,12 +13,12 @@ import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 public abstract class ContentProviderBuilderModule {
 
     @ContributesAndroidInjector
-    abstract CategoryContentProvider bindCategoryContentProvider();
-
-    @ContributesAndroidInjector
     abstract ContributionsContentProvider bindContributionsContentProvider();
 
     @ContributesAndroidInjector
     abstract ModificationsContentProvider bindModificationsContentProvider();
+
+    @ContributesAndroidInjector
+    abstract CategoryContentProvider bindCategoryContentProvider();
 
 }

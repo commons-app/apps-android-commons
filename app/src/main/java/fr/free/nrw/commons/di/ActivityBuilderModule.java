@@ -16,30 +16,30 @@ import fr.free.nrw.commons.upload.ShareActivity;
 public abstract class ActivityBuilderModule {
 
     @ContributesAndroidInjector
-    abstract ContributionsActivity bindContributionsActivity();
+    abstract LoginActivity bindLoginActivity();
 
     @ContributesAndroidInjector
-    abstract MultipleShareActivity bindMultipleShareActivity();
+    abstract WelcomeActivity bindWelcomeActivity();
 
     @ContributesAndroidInjector
     abstract ShareActivity bindShareActivity();
 
     @ContributesAndroidInjector
-    abstract LoginActivity bindLoginActivity();
+    abstract MultipleShareActivity bindMultipleShareActivity();
+
+    @ContributesAndroidInjector
+    abstract ContributionsActivity bindContributionsActivity();
+
+    @ContributesAndroidInjector
+    abstract SettingsActivity bindSettingsActivity();
+
+    @ContributesAndroidInjector
+    abstract AboutActivity bindAboutActivity();
 
     @ContributesAndroidInjector
     abstract SignupActivity bindSignupActivity();
 
     @ContributesAndroidInjector
     abstract NearbyActivity bindNearbyActivity();
-
-    @ContributesAndroidInjector
-    abstract AboutActivity bindAboutActivity();
-
-    @ContributesAndroidInjector
-    abstract SettingsActivity bindSettingsActivity();
-
-    @ContributesAndroidInjector
-    abstract WelcomeActivity bindWelcomeActivity();
 
 }
