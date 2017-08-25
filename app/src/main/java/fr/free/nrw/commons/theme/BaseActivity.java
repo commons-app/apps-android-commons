@@ -4,10 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 
-import dagger.android.DaggerActivity;
+import dagger.android.support.DaggerAppCompatActivity;
 import fr.free.nrw.commons.R;
 
-public class BaseActivity extends DaggerActivity {
+public class BaseActivity extends DaggerAppCompatActivity {
     boolean currentTheme;
 
     @Override

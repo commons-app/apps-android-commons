@@ -5,6 +5,7 @@ import javax.inject.Singleton;
 import dagger.Component;
 import dagger.android.AndroidInjectionModule;
 import dagger.android.AndroidInjector;
+import dagger.android.support.AndroidSupportInjectionModule;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.auth.WikiAccountAuthenticatorService;
 import fr.free.nrw.commons.contributions.ContributionsSyncAdapter;
@@ -14,6 +15,7 @@ import fr.free.nrw.commons.modifications.ModificationsSyncAdapter;
 @Component(modules = {
         CommonsApplicationModule.class,
         AndroidInjectionModule.class,
+        AndroidSupportInjectionModule.class,
         ActivityBuilderModule.class,
         ContentProviderBuilderModule.class
 })
