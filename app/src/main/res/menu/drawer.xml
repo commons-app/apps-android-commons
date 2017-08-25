@@ -31,11 +31,6 @@
         android:title="@string/navigation_item_feedback"/>
 
     <item
-        android:id="@+id/action_developer_plans"
-        android:icon="@drawable/ic_help_outline_black_24dp"
-        android:title="@string/navigation_item_developer_plans"/>
-
-    <item
         android:id="@+id/action_logout"
         android:icon="@drawable/ic_exit_to_app_black_24dp"
         android:title="@string/navigation_item_logout"/>
