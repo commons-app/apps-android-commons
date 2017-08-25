@@ -134,7 +134,7 @@
   <string name="detail_description_empty">Sen descrición</string>
   <string name="detail_license_empty">Licenza descoñecida</string>
   <string name="menu_refresh">Refrescar</string>
-  <string name="storage_permission_rationale">Permiso necesarioː ler un almacenamento externo. A aplicación non pode funcionar sen isto.</string>
+  <string name="read_storage_permission_rationale">Permiso necesarioː ler un almacenamento externo. A aplicación non pode funcionar sen isto.</string>
   <string name="location_permission_rationale">Permiso opcionalː obter a localización actual para suxerir categorías</string>
   <string name="ok">Aceptar</string>
   <string name="title_activity_nearby">Lugares próximos</string>

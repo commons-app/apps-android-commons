@@ -134,7 +134,7 @@
   <string name="detail_description_empty">Sin descripción</string>
   <string name="detail_license_empty">Licencia desconocida</string>
   <string name="menu_refresh">Actualizar</string>
-  <string name="storage_permission_rationale">Permiso obligatorio: lectura de almacenamiento externo. La aplicación no puede funcionar sin él.</string>
+  <string name="read_storage_permission_rationale">Permiso obligatorio: lectura de almacenamiento externo. La aplicación no puede funcionar sin él.</string>
   <string name="location_permission_rationale">Permiso opcional: obtener la ubicación actual para sugerir categorías</string>
   <string name="ok">Aceptar</string>
   <string name="title_activity_nearby">Lugares cercanos</string>

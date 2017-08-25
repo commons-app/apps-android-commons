@@ -133,7 +133,7 @@
   <string name="detail_description_empty">Ei kuvausta</string>
   <string name="detail_license_empty">Tuntematon lisenssi</string>
   <string name="menu_refresh">Päivitä</string>
-  <string name="storage_permission_rationale">Vaadittu oikeus: Ulkoisen tallennustilan luku. Appi ei toimi ilman tätä oikeutta.</string>
+  <string name="read_storage_permission_rationale">Vaadittu oikeus: Ulkoisen tallennustilan luku. Appi ei toimi ilman tätä oikeutta.</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Läheiset paikat</string>
   <string name="no_nearby">Lähistöltä ei löytynyt paikkoja</string>
