@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.utils.UiUtils;
@@ -27,11 +26,10 @@ import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
 public class NearbyController {
     private static final int MAX_RESULTS = 1000;
+    private final NearbyPlaces nearbyPlaces;
 
-    private final CommonsApplication application;
-
-    public NearbyController(CommonsApplication application) {
-        this.application = application;
+    public NearbyController(NearbyPlaces nearbyPlaces) {
+        this.nearbyPlaces = nearbyPlaces;
     }
 
     /**
@@ -45,7 +43,6 @@ public class NearbyController {
         if (curLatLng == null) {
             return Collections.emptyList();
         }
-        NearbyPlaces nearbyPlaces = application.getNearbyPlaces();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         List<Place> places = prefs.getBoolean("useWikidata", true)
                 ? nearbyPlaces.getFromWikidataQuery(curLatLng, Locale.getDefault().getLanguage())

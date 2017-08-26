@@ -40,13 +40,11 @@ public class CategoryContentProvider extends ContentProvider {
     }
 
     @Inject CommonsApplication application;
-
-    private DBOpenHelper dbOpenHelper;
+    @Inject DBOpenHelper dbOpenHelper;
 
     @Override
     public boolean onCreate() {
         AndroidInjection.inject(this);
-        dbOpenHelper = application.getDBOpenHelper();
         return false;
     }
 

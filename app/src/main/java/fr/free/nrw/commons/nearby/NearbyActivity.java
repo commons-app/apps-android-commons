@@ -31,7 +31,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
@@ -43,7 +42,7 @@ public class NearbyActivity extends NavigationBaseActivity {
 
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
-    @Inject CommonsApplication application;
+    @Inject NearbyPlaces nearbyPlaces;
 
     private boolean isMapViewActive = false;
     private static final int LOCATION_REQUEST = 1;
@@ -94,7 +93,7 @@ public class NearbyActivity extends NavigationBaseActivity {
         locationManager = new LocationServiceManager(this);
         locationManager.registerLocationManager();
         curLatLang = locationManager.getLatestLocation();
-        nearbyAsyncTask = new NearbyAsyncTask(this, new NearbyController(application));
+        nearbyAsyncTask = new NearbyAsyncTask(this, new NearbyController(nearbyPlaces));
         nearbyAsyncTask.execute();
     }
 
@@ -233,7 +232,7 @@ public class NearbyActivity extends NavigationBaseActivity {
     }
 
     private void refreshView() {
-        nearbyAsyncTask = new NearbyAsyncTask(this, new NearbyController(application));
+        nearbyAsyncTask = new NearbyAsyncTask(this, new NearbyController(nearbyPlaces));
         nearbyAsyncTask.execute();
     }
 
@@ -262,7 +261,7 @@ public class NearbyActivity extends NavigationBaseActivity {
 
         @Override
         protected List<Place> doInBackground(Void... params) {
-            return nearbyController.loadAttractionsFromLocation(curLatLang, application);
+            return nearbyController.loadAttractionsFromLocation(curLatLang, NearbyActivity.this);
         }
 
         @Override

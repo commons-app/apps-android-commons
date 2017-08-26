@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.graphics.drawable.VectorDrawableCompat;
+import android.support.v4.util.LruCache;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.Toast;
@@ -19,6 +20,8 @@ import timber.log.Timber;
 public class MediaWikiImageView extends SimpleDraweeView {
     @Inject CommonsApplication application;
     @Inject MediaWikiApi mwApi;
+    @Inject LruCache<String, String> thumbnailUrlCache;
+
     private ThumbnailFetchTask currentThumbnailTask;
 
     public MediaWikiImageView(Context context) {
@@ -44,8 +47,8 @@ public class MediaWikiImageView extends SimpleDraweeView {
             return;
         }
 
-        if (application.getThumbnailUrlCache().get(media.getFilename()) != null) {
-            setImageUrl(application.getThumbnailUrlCache().get(media.getFilename()));
+        if (thumbnailUrlCache.get(media.getFilename()) != null) {
+            setImageUrl(thumbnailUrlCache.get(media.getFilename()));
         } else {
             setImageUrl(null);
             currentThumbnailTask = new ThumbnailFetchTask(media, mwApi);
@@ -91,8 +94,7 @@ public class MediaWikiImageView extends SimpleDraweeView {
             } else {
                 // only cache meaningful thumbnails received from network.
                 try {
-                    CommonsApplication app = (CommonsApplication) getContext().getApplicationContext();
-                    app.getThumbnailUrlCache().put(media.getFilename(), result);
+                    thumbnailUrlCache.put(media.getFilename(), result);
                 } catch (NullPointerException npe) {
                     Timber.e("error when adding pic to cache " + npe);
 

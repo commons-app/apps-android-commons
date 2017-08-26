@@ -14,6 +14,7 @@ import javax.inject.Inject;
 
 import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.data.DBOpenHelper;
 import timber.log.Timber;
 
 public class ModificationsContentProvider extends ContentProvider{
@@ -37,6 +38,7 @@ public class ModificationsContentProvider extends ContentProvider{
     }
 
     @Inject CommonsApplication application;
+    @Inject DBOpenHelper dbOpenHelper;
 
     @Override
     public boolean onCreate() {
@@ -58,7 +60,7 @@ public class ModificationsContentProvider extends ContentProvider{
                 throw new IllegalArgumentException("Unknown URI" + uri);
         }
 
-        SQLiteDatabase db = application.getDBOpenHelper().getReadableDatabase();
+        SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
 
         Cursor cursor = queryBuilder.query(db, projection, selection, selectionArgs, null, null, sortOrder);
         cursor.setNotificationUri(getContext().getContentResolver(), uri);
@@ -74,7 +76,7 @@ public class ModificationsContentProvider extends ContentProvider{
     @Override
     public Uri insert(@NonNull Uri uri, ContentValues contentValues) {
         int uriType = uriMatcher.match(uri);
-        SQLiteDatabase sqlDB = application.getDBOpenHelper().getWritableDatabase();
+        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         long id = 0;
         switch (uriType) {
             case MODIFICATIONS:
@@ -90,7 +92,7 @@ public class ModificationsContentProvider extends ContentProvider{
     @Override
     public int delete(@NonNull Uri uri, String s, String[] strings) {
         int uriType = uriMatcher.match(uri);
-        SQLiteDatabase sqlDB = application.getDBOpenHelper().getWritableDatabase();
+        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         switch (uriType) {
             case MODIFICATIONS_ID:
                 String id = uri.getLastPathSegment();
@@ -108,7 +110,7 @@ public class ModificationsContentProvider extends ContentProvider{
     public int bulkInsert(@NonNull Uri uri, @NonNull ContentValues[] values) {
         Timber.d("Hello, bulk insert! (ModificationsContentProvider)");
         int uriType = uriMatcher.match(uri);
-        SQLiteDatabase sqlDB = application.getDBOpenHelper().getWritableDatabase();
+        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         sqlDB.beginTransaction();
         switch (uriType) {
             case MODIFICATIONS:
@@ -136,7 +138,7 @@ public class ModificationsContentProvider extends ContentProvider{
         In here, the only concat created argument is for id. It is cast to an int, and will error out otherwise.
          */
         int uriType = uriMatcher.match(uri);
-        SQLiteDatabase sqlDB = application.getDBOpenHelper().getWritableDatabase();
+        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         int rowsUpdated = 0;
         switch (uriType) {
             case MODIFICATIONS:

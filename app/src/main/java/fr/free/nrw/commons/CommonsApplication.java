@@ -9,7 +9,6 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
-import android.support.v4.util.LruCache;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.stetho.Stetho;
@@ -27,7 +26,6 @@ import javax.inject.Inject;
 import dagger.android.AndroidInjector;
 import dagger.android.DaggerApplication;
 import fr.free.nrw.commons.auth.AccountUtil;
-import fr.free.nrw.commons.caching.CacheController;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.data.Category;
 import fr.free.nrw.commons.data.DBOpenHelper;
@@ -35,9 +33,7 @@ import fr.free.nrw.commons.di.CommonsApplicationComponent;
 import fr.free.nrw.commons.di.CommonsApplicationModule;
 import fr.free.nrw.commons.di.DaggerCommonsApplicationComponent;
 import fr.free.nrw.commons.modifications.ModifierSequence;
-import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
-import fr.free.nrw.commons.nearby.NearbyPlaces;
 import fr.free.nrw.commons.utils.FileUtils;
 import timber.log.Timber;
 
@@ -54,6 +50,7 @@ public class CommonsApplication extends DaggerApplication {
 
     @Inject MediaWikiApi mediaWikiApi;
     @Inject AccountUtil accountUtil;
+    @Inject DBOpenHelper dbOpenHelper;
 
     private Account currentAccount = null; // Unlike a savings account...
     public static final String API_URL = "https://commons.wikimedia.org/w/api.php";
@@ -73,36 +70,7 @@ public class CommonsApplication extends DaggerApplication {
     public static final String FEEDBACK_EMAIL = "commons-app-android@googlegroups.com";
     public static final String FEEDBACK_EMAIL_SUBJECT = "Commons Android App (%s) Feedback";
 
-    private LruCache<String, String> thumbnailUrlCache = new LruCache<>(1024);
-    private CacheController cacheData = null;
-    private DBOpenHelper dbOpenHelper = null;
-    private NearbyPlaces nearbyPlaces = null;
     private CommonsApplicationComponent component;
-
-    public CacheController getCacheData() {
-        if (cacheData == null) {
-            cacheData = new CacheController();
-        }
-        return cacheData;
-    }
-
-    public LruCache<String, String> getThumbnailUrlCache() {
-        return thumbnailUrlCache;
-    }
-
-    public synchronized DBOpenHelper getDBOpenHelper() {
-        if (dbOpenHelper == null) {
-            dbOpenHelper = new DBOpenHelper(this);
-        }
-        return dbOpenHelper;
-    }
-
-    public synchronized NearbyPlaces getNearbyPlaces() {
-        if (nearbyPlaces == null) {
-            nearbyPlaces = new NearbyPlaces();
-        }
-        return nearbyPlaces;
-    }
 
     @Override
     public void onCreate() {
@@ -127,9 +95,6 @@ public class CommonsApplication extends DaggerApplication {
         System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0");
 
         Fresco.initialize(this);
-
-        //For caching area -> categories
-        cacheData  = new CacheController();
     }
 
     @Override
@@ -150,24 +115,24 @@ public class CommonsApplication extends DaggerApplication {
      * @return Account|null
      */
     public Account getCurrentAccount() {
-        if(currentAccount == null) {
+        if (currentAccount == null) {
             AccountManager accountManager = AccountManager.get(this);
             Account[] allAccounts = accountManager.getAccountsByType(accountUtil.accountType());
-            if(allAccounts.length != 0) {
+            if (allAccounts.length != 0) {
                 currentAccount = allAccounts[0];
             }
         }
         return currentAccount;
     }
-    
+
     public Boolean revalidateAuthToken() {
         AccountManager accountManager = AccountManager.get(this);
         Account curAccount = getCurrentAccount();
-       
-        if(curAccount == null) {
+
+        if (curAccount == null) {
             return false; // This should never happen
         }
-        
+
         accountManager.invalidateAuthToken(accountUtil.accountType(), mediaWikiApi.getAuthCookie());
         try {
             String authCookie = accountManager.blockingGetAuthToken(curAccount, "", false);
@@ -218,7 +183,6 @@ public class CommonsApplication extends DaggerApplication {
      * Deletes all tables and re-creates them.
      */
     public void updateAllDatabases() {
-        DBOpenHelper dbOpenHelper = getDBOpenHelper();
         dbOpenHelper.getReadableDatabase().close();
         SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
 

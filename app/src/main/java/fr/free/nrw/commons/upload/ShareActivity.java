@@ -37,6 +37,7 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
+import fr.free.nrw.commons.caching.CacheController;
 import fr.free.nrw.commons.category.CategorizationFragment;
 import fr.free.nrw.commons.category.OnCategoriesSaveHandler;
 import fr.free.nrw.commons.contributions.Contribution;
@@ -68,6 +69,7 @@ public  class       ShareActivity
 
     @Inject CommonsApplication application;
     @Inject MediaWikiApi mwApi;
+    @Inject CacheController cacheController;
 
     private String source;
     private String mimeType;
@@ -137,7 +139,7 @@ public  class       ShareActivity
 
         if (!cacheFound) {
             //Has to be called after apiCall.request()
-            application.getCacheData().cacheCategory();
+            cacheController.cacheCategory();
             Timber.d("Cache the categories found");
         }
 
@@ -482,12 +484,12 @@ public  class       ShareActivity
             if (imageObj.imageCoordsExists) {
                 double decLongitude = imageObj.getDecLongitude();
                 double decLatitude = imageObj.getDecLatitude();
-                application.getCacheData().setQtPoint(decLongitude, decLatitude);
+                cacheController.setQtPoint(decLongitude, decLatitude);
             }
 
             MwVolleyApi apiCall = new MwVolleyApi(application);
 
-            List<String> displayCatList = application.getCacheData().findCategory();
+            List<String> displayCatList = cacheController.findCategory();
             boolean catListEmpty = displayCatList.isEmpty();
 
             // If no categories found in cache, call MediaWiki API to match image coords with nearby Commons categories
