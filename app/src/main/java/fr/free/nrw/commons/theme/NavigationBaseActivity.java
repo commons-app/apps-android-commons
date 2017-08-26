@@ -1,9 +1,7 @@
 package fr.free.nrw.commons.theme;
 
 import android.content.ActivityNotFoundException;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -11,7 +9,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
@@ -117,14 +114,6 @@ public class NavigationBaseActivity extends BaseActivity
                 } catch (ActivityNotFoundException e) {
                     Toast.makeText(this, R.string.no_email_client, Toast.LENGTH_SHORT).show();
                 }
-                return true;
-            case R.id.action_developer_plans:
-                drawerLayout.closeDrawer(navigationView);
-                // Go to the page
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri
-                        .parse(getResources()
-                                .getString(R.string.feedback_page_url)));
-                startActivity(browserIntent);
                 return true;
             case R.id.action_logout:
                 new AlertDialog.Builder(this)

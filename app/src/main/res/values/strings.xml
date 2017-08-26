@@ -203,10 +203,5 @@ Tap this message (or hit back) to skip this step.</string>
   <string name="error_while_cache">Error while caching pictures</string>
   <string name="title_info">A unique descriptive title for the file, which will serve as a filename. You may use plain language with spaces. Do not include the file extension</string>
   <string name="description_info">Please describe the media as much as possible: Where was it taken? What does it show? What is the context? Please describe the objects or persons. Reveal information that can not be easily guessed, for instance the time of day if it is a landscape. If the media shows something unusual, please explain what makes it unusual.</string>
-  <string name="feedback_popup_title">Feedback wanted</string>
-  <string name="feedback_popup_description">We are planning several new features and improvements for the app! Would you like to review them and provide feedback? \n\n(You can always access this by selecting "Developer plans" in the navigation drawer)</string>
-  <string name="feedback_popup_decline">No thanks</string>
-  <string name="feedback_popup_accept">Sure, take me there!</string>
-  <string name="feedback_page_url">https://meta.wikimedia.org/wiki/Grants:Project/Improve_\'Upload_to_Commons\'_Android_App/Renewal/User_feedback</string>
-  <string name="navigation_item_developer_plans">Developer plans</string>
+
 </resources>

@@ -3,13 +3,11 @@ package fr.free.nrw.commons.contributions;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.DataSetObserver;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
@@ -18,17 +16,13 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
-import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
@@ -109,19 +103,6 @@ public  class       ContributionsActivity
         if (isSettingsChanged) {
             refreshSource();
         }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        displayFeedbackPopup();
     }
 
     @Override
@@ -355,55 +336,4 @@ public  class       ContributionsActivity
         context.startActivity(contributionsIntent);
     }
 
-    private void displayFeedbackPopup() {
-
-        Date popupMessageEndDate = null;
-        try {
-            String validUntil = "23/08/2017";
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            popupMessageEndDate = sdf.parse(validUntil);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        final SharedPreferences prefs =  PreferenceManager.getDefaultSharedPreferences(
-                CommonsApplication.getInstance());
-
-        // boolean to save users request about displaying popup
-        boolean displayFeedbackPopup = prefs.getBoolean("display_feedbak_popup", true);
-
-        // boolean to recognize is application re-started. Will be used for "remind me later" option
-        int appStartCounter = prefs.getInt("app_start_counter" ,0);
-
-        // if time is valid and shared pref says display
-        if (new Date().before(popupMessageEndDate) && displayFeedbackPopup && (appStartCounter == 4)) {
-
-            new AlertDialog.Builder(this)
-            .setTitle(getResources().getString(R.string.feedback_popup_title))
-            .setMessage(getResources().getString(R.string.feedback_popup_description))
-            .setPositiveButton(getResources().getString(R.string.feedback_popup_accept),
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            // Go to the page
-                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri
-                                    .parse(getResources()
-                                    .getString(R.string.feedback_page_url)));
-                            startActivity(browserIntent);
-                            // No need to dislay this window to the user again.
-                            prefs.edit().putBoolean("display_feedbak_popup" , false).commit();
-                            dialog.dismiss();
-                        }
-                    })
-            .setNegativeButton(getResources().getString(R.string.feedback_popup_decline),
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            // Dismiss the dialog and not to show it later
-                            prefs.edit().putBoolean("display_feedbak_popup", false).commit();
-                            dialog.dismiss();
-                        }
-                    })
-            .create().show();
-        }
-    }
 }
