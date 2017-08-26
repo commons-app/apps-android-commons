@@ -13,13 +13,14 @@ import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.concurrent.Executors;
 
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
-import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.settings.Prefs;
 import timber.log.Timber;
@@ -109,7 +110,7 @@ public class UploadController {
                                 .getLength();
                         if(length == -1) {
                             // Let us find out the long way!
-                            length = Utils.countBytes(application.getContentResolver()
+                            length = countBytes(application.getContentResolver()
                                     .openInputStream(contribution.getLocalUri()));
                         }
                         contribution.setDataLength(length);
@@ -164,5 +165,15 @@ public class UploadController {
                 onComplete.onUploadStarted(contribution);
             }
         }.executeOnExecutor(Executors.newFixedThreadPool(1)); // TODO remove this by using a sensible thread handling strategy
+    }
+
+
+    private long countBytes(InputStream stream) throws IOException {
+        long count = 0;
+        BufferedInputStream bis = new BufferedInputStream(stream);
+        while (bis.read() != -1) {
+            count++;
+        }
+        return count;
     }
 }

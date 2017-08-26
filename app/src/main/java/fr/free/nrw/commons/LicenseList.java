@@ -5,7 +5,9 @@ import android.content.res.Resources;
 import android.support.annotation.Nullable;
 
 import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Locale;
@@ -21,7 +23,7 @@ public class LicenseList {
     public LicenseList(Activity activity) {
         res = activity.getResources();
         XmlPullParser parser = res.getXml(R.xml.wikimedia_licenses);
-        while (Utils.xmlFastForward(parser, XMLNS_LICENSE, "license")) {
+        while (xmlFastForward(parser, XMLNS_LICENSE, "license")) {
             String id = parser.getAttributeValue(null, "id");
             String template = parser.getAttributeValue(null, "template");
             String url = parser.getAttributeValue(null, "url");
@@ -76,4 +78,34 @@ public class LicenseList {
         }
         return template;
     }
+
+    /**
+     * Fast-forward an XmlPullParser to the next instance of the given element
+     * in the input stream (namespaced).
+     *
+     * @param parser
+     * @param namespace
+     * @param element
+     * @return true on match, false on failure
+     */
+    private boolean xmlFastForward(XmlPullParser parser, String namespace, String element) {
+        try {
+            while (parser.next() != XmlPullParser.END_DOCUMENT) {
+                if (parser.getEventType() == XmlPullParser.START_TAG &&
+                        parser.getNamespace().equals(namespace) &&
+                        parser.getName().equals(element)) {
+                    // We found it!
+                    return true;
+                }
+            }
+            return false;
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+            return false;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }

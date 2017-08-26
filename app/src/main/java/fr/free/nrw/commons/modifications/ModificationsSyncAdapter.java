@@ -17,7 +17,6 @@ import java.io.IOException;
 import javax.inject.Inject;
 
 import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
@@ -59,7 +58,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
             return;
         }
 
-        if (Utils.isNullOrWhiteSpace(authCookie)) {
+        if (isNullOrWhiteSpace(authCookie)) {
             Timber.d("Could not authenticate :(");
             return;
         }
@@ -132,5 +131,9 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                 contributionsClient.release();
             }
         }
+    }
+
+    private boolean isNullOrWhiteSpace(String value) {
+        return value == null || value.trim().isEmpty();
     }
 }

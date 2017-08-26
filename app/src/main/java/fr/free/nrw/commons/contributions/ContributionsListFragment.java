@@ -196,9 +196,15 @@ public class ContributionsListFragment extends DaggerFragment {
         menu.clear(); // See http://stackoverflow.com/a/8495697/17865
         inflater.inflate(R.menu.fragment_contributions_list, menu);
 
-        if (!application.deviceHasCamera()) {
+        if (!deviceHasCamera()) {
             menu.findItem(R.id.menu_from_camera).setEnabled(false);
         }
+    }
+
+    public boolean deviceHasCamera() {
+        PackageManager pm = getContext().getPackageManager();
+        return pm.hasSystemFeature(PackageManager.FEATURE_CAMERA) ||
+                pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT);
     }
 
     @Override

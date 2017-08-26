@@ -8,7 +8,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.Fragment;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -184,7 +184,7 @@ public class SingleUploadFragment extends DaggerFragment {
         if (motionEvent.getActionMasked() == MotionEvent.ACTION_DOWN) {
             Intent intent = new Intent();
             intent.setAction(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(Utils.licenseUrlFor(license)));
+            intent.setData(Uri.parse(licenseUrlFor(license)));
             startActivity(intent);
             return true;
         } else {
@@ -278,6 +278,23 @@ public class SingleUploadFragment extends DaggerFragment {
             InputMethodManager imm = (InputMethodManager) target.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(target.getWindowToken(), 0);
         }
+    }
+
+    @NonNull
+    private String licenseUrlFor(String license) {
+        switch (license) {
+            case Prefs.Licenses.CC_BY_3:
+                return "https://creativecommons.org/licenses/by/3.0/";
+            case Prefs.Licenses.CC_BY_4:
+                return "https://creativecommons.org/licenses/by/4.0/";
+            case Prefs.Licenses.CC_BY_SA_3:
+                return "https://creativecommons.org/licenses/by-sa/3.0/";
+            case Prefs.Licenses.CC_BY_SA_4:
+                return "https://creativecommons.org/licenses/by-sa/4.0/";
+            case Prefs.Licenses.CC0:
+                return "https://creativecommons.org/publicdomain/zero/1.0/";
+        }
+        throw new RuntimeException("Unrecognized license value: " + license);
     }
 
     private class TitleTextWatcher implements TextWatcher {

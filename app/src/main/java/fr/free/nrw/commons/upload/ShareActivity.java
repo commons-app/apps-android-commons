@@ -27,6 +27,9 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.List;
 
@@ -35,7 +38,6 @@ import javax.inject.Inject;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.caching.CacheController;
 import fr.free.nrw.commons.category.CategorizationFragment;
@@ -380,7 +382,7 @@ public  class       ShareActivity
                 try {
                     InputStream inputStream = getContentResolver().openInputStream(mediaUri);
                     Timber.d("Input stream created from %s", mediaUri.toString());
-                    String fileSHA1 = Utils.getSHA1(inputStream);
+                    String fileSHA1 = getSHA1(inputStream);
                     Timber.d("File SHA1 is: %s", fileSHA1);
 
                     ExistingFileAsync fileAsyncTask =
@@ -535,5 +537,42 @@ public  class       ShareActivity
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    // Get SHA1 of file from input stream
+    private String getSHA1(InputStream is) {
+
+        MessageDigest digest;
+        try {
+            digest = MessageDigest.getInstance("SHA1");
+        } catch (NoSuchAlgorithmException e) {
+            Timber.e(e, "Exception while getting Digest");
+            return "";
+        }
+
+        byte[] buffer = new byte[8192];
+        int read;
+        try {
+            while ((read = is.read(buffer)) > 0) {
+                digest.update(buffer, 0, read);
+            }
+            byte[] md5sum = digest.digest();
+            BigInteger bigInt = new BigInteger(1, md5sum);
+            String output = bigInt.toString(16);
+            // Fill to 40 chars
+            output = String.format("%40s", output).replace(' ', '0');
+            Timber.i("File SHA1: %s", output);
+
+            return output;
+        } catch (IOException e) {
+            Timber.e(e, "IO Exception");
+            return "";
+        } finally {
+            try {
+                is.close();
+            } catch (IOException e) {
+                Timber.e(e, "Exception on closing MD5 input stream");
+            }
+        }
     }
 }

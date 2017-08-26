@@ -144,12 +144,6 @@ public class CommonsApplication extends DaggerApplication {
         }
     }
 
-    public boolean deviceHasCamera() {
-        PackageManager pm = getPackageManager();
-        return pm.hasSystemFeature(PackageManager.FEATURE_CAMERA) ||
-                pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT);
-    }
-
     public void clearApplicationData(Context context) {
         File cacheDirectory = context.getCacheDir();
         File applicationDirectory = new File(cacheDirectory.getParent());
