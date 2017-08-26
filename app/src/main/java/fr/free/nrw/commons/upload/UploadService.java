@@ -117,8 +117,6 @@ public class UploadService extends HandlerService<Contribution> {
 
     @Override
     public void onCreate() {
-        ((CommonsApplication)getApplicationContext()).injector().inject(this);
-
         super.onCreate();
 
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);

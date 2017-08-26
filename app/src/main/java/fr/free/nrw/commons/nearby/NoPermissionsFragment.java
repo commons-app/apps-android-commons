@@ -7,13 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
+import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
 import timber.log.Timber;
 
 /**
  * Tells user that Nearby Places cannot be displayed if location permissions are denied
  */
-public class NoPermissionsFragment extends Fragment {
+public class NoPermissionsFragment extends DaggerFragment {
 
     public NoPermissionsFragment() {
     }

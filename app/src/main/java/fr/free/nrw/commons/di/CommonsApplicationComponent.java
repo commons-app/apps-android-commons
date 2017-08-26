@@ -19,14 +19,12 @@ import fr.free.nrw.commons.upload.UploadService;
         AndroidInjectionModule.class,
         AndroidSupportInjectionModule.class,
         ActivityBuilderModule.class,
+        FragmentBuilderModule.class,
+        ServiceBuilderModule.class,
         ContentProviderBuilderModule.class
 })
 public interface CommonsApplicationComponent extends AndroidInjector<CommonsApplication> {
     void inject(CommonsApplication application);
-
-    void inject(WikiAccountAuthenticatorService service);
-
-    void inject(UploadService service);
 
     void inject(ContributionsSyncAdapter syncAdapter);
 

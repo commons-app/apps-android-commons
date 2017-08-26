@@ -7,13 +7,15 @@ import android.os.IBinder;
 
 import javax.inject.Inject;
 
+import dagger.android.DaggerService;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 
-public class WikiAccountAuthenticatorService extends Service {
+public class WikiAccountAuthenticatorService extends DaggerService {
 
     @Inject MediaWikiApi mwApi;
     @Inject AccountUtil accountUtil;
+
     private WikiAccountAuthenticator wikiAccountAuthenticator = null;
 
     @Override
@@ -22,7 +24,6 @@ public class WikiAccountAuthenticatorService extends Service {
             return null;
         }
 
-        ((CommonsApplication)getApplication()).injector().inject(this);
         if (wikiAccountAuthenticator == null) {
             wikiAccountAuthenticator = new WikiAccountAuthenticator(this, accountUtil, mwApi);
         }

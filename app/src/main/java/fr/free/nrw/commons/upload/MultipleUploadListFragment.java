@@ -28,11 +28,12 @@ import android.widget.TextView;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 
-public class MultipleUploadListFragment extends Fragment {
+public class MultipleUploadListFragment extends DaggerFragment {
 
     public interface OnMultipleUploadInitiatedHandler {
         void OnMultipleUploadInitiated();

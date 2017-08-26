@@ -34,12 +34,13 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemSelected;
 import butterknife.OnTouch;
+import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.settings.Prefs;
 import timber.log.Timber;
 
-public class SingleUploadFragment extends Fragment {
+public class SingleUploadFragment extends DaggerFragment {
     private SharedPreferences prefs;
     private String license;
 
