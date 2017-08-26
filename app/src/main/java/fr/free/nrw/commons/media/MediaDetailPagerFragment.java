@@ -27,6 +27,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import javax.inject.Inject;
+
+import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
@@ -34,7 +37,7 @@ import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.mwapi.EventLog;
 
-public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPageChangeListener {
+public class MediaDetailPagerFragment extends DaggerFragment implements ViewPager.OnPageChangeListener {
 
     public interface MediaDetailProvider {
         Media getMediaAtPosition(int i);
@@ -48,9 +51,10 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
         void unregisterDataSetObserver(DataSetObserver observer);
     }
 
+    @Inject CommonsApplication application;
+
     private ViewPager pager;
     private Boolean editable;
-    private CommonsApplication app;
 
     public MediaDetailPagerFragment() {
         this(false);
@@ -120,7 +124,6 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
         if (savedInstanceState != null) {
             editable = savedInstanceState.getBoolean("editable");
         }
-        app = CommonsApplication.getInstance();
         setHasOptionsMenu(true);
     }
 
@@ -131,8 +134,8 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
         switch(item.getItemId()) {
             case R.id.menu_share_current_image:
                 // Share - this is just logs it, intent set in onCreateOptionsMenu, around line 252
-                EventLog.schema(CommonsApplication.EVENT_SHARE_ATTEMPT, CommonsApplication.getInstance())
-                        .param("username", app.getCurrentAccount().name)
+                EventLog.schema(CommonsApplication.EVENT_SHARE_ATTEMPT, application)
+                        .param("username", application.getCurrentAccount().name)
                         .param("filename", m.getFilename())
                         .log();
                 return true;

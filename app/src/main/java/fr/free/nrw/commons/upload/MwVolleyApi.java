@@ -33,13 +33,15 @@ public class MwVolleyApi {
     private static RequestQueue REQUEST_QUEUE;
     private static final Gson GSON = new GsonBuilder().create();
 
-    protected static Set<String> categorySet;
+    private static Set<String> categorySet;
     private static List<String> categoryList;
 
     private static final String MWURL = "https://commons.wikimedia.org/";
+    private final CommonsApplication application;
 
-    public MwVolleyApi() {
+    public MwVolleyApi(CommonsApplication application) {
         categorySet = new HashSet<>();
+        this.application = application;
     }
 
     public static List<String> getGpsCat() {
@@ -93,7 +95,7 @@ public class MwVolleyApi {
 
     private synchronized RequestQueue getQueue() {
         if (REQUEST_QUEUE == null) {
-            REQUEST_QUEUE = Volley.newRequestQueue(CommonsApplication.getInstance());
+            REQUEST_QUEUE = Volley.newRequestQueue(application);
         }
         return REQUEST_QUEUE;
     }

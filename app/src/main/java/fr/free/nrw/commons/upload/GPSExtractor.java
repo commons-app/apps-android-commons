@@ -26,6 +26,7 @@ import timber.log.Timber;
  */
 public class GPSExtractor {
 
+    private final CommonsApplication application;
     private ExifInterface exif;
     private double decLatitude;
     private double decLongitude;
@@ -38,26 +39,30 @@ public class GPSExtractor {
     /**
      * Construct from the file descriptor of the image (only for API 24 or newer).
      * @param fileDescriptor the file descriptor of the image
+     * @param application the application
      */
     @RequiresApi(24)
-    public GPSExtractor(@NonNull FileDescriptor fileDescriptor) {
+    public GPSExtractor(@NonNull FileDescriptor fileDescriptor, CommonsApplication application) {
         try {
             exif = new ExifInterface(fileDescriptor);
         } catch (IOException | IllegalArgumentException e) {
             Timber.w(e);
         }
+        this.application = application;
     }
 
     /**
      * Construct from the file path of the image.
      * @param path file path of the image
+     * @param application the application
      */
-    public GPSExtractor(@NonNull String path) {
+    public GPSExtractor(@NonNull String path, CommonsApplication application) {
         try {
             exif = new ExifInterface(path);
         } catch (IOException | IllegalArgumentException e) {
             Timber.w(e);
         }
+        this.application = application;
     }
 
     /**
@@ -66,7 +71,7 @@ public class GPSExtractor {
      */
     private boolean gpsPreferenceEnabled() {
         SharedPreferences sharedPref
-                = PreferenceManager.getDefaultSharedPreferences(CommonsApplication.getInstance());
+                = PreferenceManager.getDefaultSharedPreferences(application);
         boolean gpsPref = sharedPref.getBoolean("allowGps", false);
         Timber.d("Gps pref set to: %b", gpsPref);
         return gpsPref;
@@ -76,7 +81,7 @@ public class GPSExtractor {
      * Registers a LocationManager to listen for current location
      */
     protected void registerLocationManager() {
-        locationManager = (LocationManager) CommonsApplication.getInstance()
+        locationManager = (LocationManager) application
                 .getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
         String provider = locationManager.getBestProvider(criteria, true);

@@ -22,6 +22,8 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.inject.Inject;
+
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.R;
@@ -45,12 +47,11 @@ public class UploadService extends HandlerService<Contribution> {
     public static final String EXTRA_SOURCE = EXTRA_PREFIX + ".source";
     public static final String EXTRA_CAMPAIGN = EXTRA_PREFIX + ".campaign";
 
+    @Inject CommonsApplication application;
+
     private NotificationManager notificationManager;
     private ContentProviderClient contributionsProviderClient;
-    private CommonsApplication app;
-
     private NotificationCompat.Builder curProgressNotification;
-
     private int toUpload;
 
     // The file names of unfinished uploads, used to prevent overwriting
@@ -115,10 +116,11 @@ public class UploadService extends HandlerService<Contribution> {
 
     @Override
     public void onCreate() {
+        ((CommonsApplication)getApplicationContext()).injector().inject(this);
+
         super.onCreate();
 
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        app = CommonsApplication.getInstance();
         contributionsProviderClient = this.getContentResolver().acquireContentProviderClient(ContributionsContentProvider.AUTHORITY);
     }
 
@@ -180,7 +182,7 @@ public class UploadService extends HandlerService<Contribution> {
 
     @SuppressLint("StringFormatInvalid")
     private void uploadContribution(Contribution contribution) {
-        MediaWikiApi api = app.getMWApi();
+        MediaWikiApi api = application.getMWApi();
 
         InputStream file = null;
 
@@ -222,7 +224,7 @@ public class UploadService extends HandlerService<Contribution> {
             }
             if (!api.validateLogin()) {
                 // Need to revalidate!
-                if (app.revalidateAuthToken()) {
+                if (application.revalidateAuthToken()) {
                     Timber.d("Successfully revalidated token!");
                 } else {
                     Timber.d("Unable to revalidate :(");
@@ -247,8 +249,8 @@ public class UploadService extends HandlerService<Contribution> {
             String resultStatus = uploadResult.getResultStatus();
             if (!resultStatus.equals("Success")) {
                 showFailedNotification(contribution);
-                EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT, CommonsApplication.getInstance())
-                        .param("username", app.getCurrentAccount().name)
+                EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT, application)
+                        .param("username", application.getCurrentAccount().name)
                         .param("source", contribution.getSource())
                         .param("multiple", contribution.getMultiple())
                         .param("result", uploadResult.getErrorCode())
@@ -261,8 +263,8 @@ public class UploadService extends HandlerService<Contribution> {
                 contribution.setDateUploaded(uploadResult.getDateUploaded());
                 contribution.save();
 
-                EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT, CommonsApplication.getInstance())
-                        .param("username", app.getCurrentAccount().name)
+                EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT, application)
+                        .param("username", application.getCurrentAccount().name)
                         .param("source", contribution.getSource()) //FIXME
                         .param("filename", contribution.getFilename())
                         .param("multiple", contribution.getMultiple())
@@ -279,7 +281,7 @@ public class UploadService extends HandlerService<Contribution> {
             toUpload--;
             if (toUpload == 0) {
                 // Sync modifications right after all uplaods are processed
-                ContentResolver.requestSync((CommonsApplication.getInstance()).getCurrentAccount(), ModificationsContentProvider.AUTHORITY, new Bundle());
+                ContentResolver.requestSync(application.getCurrentAccount(), ModificationsContentProvider.AUTHORITY, new Bundle());
                 stopForeground(true);
             }
         }
@@ -302,7 +304,7 @@ public class UploadService extends HandlerService<Contribution> {
     }
 
     private String findUniqueFilename(String fileName) throws IOException {
-        MediaWikiApi api = app.getMWApi();
+        MediaWikiApi api = application.getMWApi();
         String sequenceFileName;
         for (int sequenceNumber = 1; true; sequenceNumber++) {
             if (sequenceNumber == 1) {

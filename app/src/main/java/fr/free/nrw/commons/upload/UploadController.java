@@ -26,14 +26,14 @@ import timber.log.Timber;
 
 public class UploadController {
     private UploadService uploadService;
-    private final CommonsApplication app;
+    private final CommonsApplication application;
 
     public interface ContributionUploadProgress {
         void onUploadStarted(Contribution contribution);
     }
 
-    public UploadController() {
-        app = CommonsApplication.getInstance();
+    public UploadController(CommonsApplication application) {
+        this.application = application;
     }
 
     private boolean isUploadServiceConnected;
@@ -52,15 +52,15 @@ public class UploadController {
     };
 
     public void prepareService() {
-        Intent uploadServiceIntent = new Intent(app, UploadService.class);
+        Intent uploadServiceIntent = new Intent(application, UploadService.class);
         uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
-        app.startService(uploadServiceIntent);
-        app.bindService(uploadServiceIntent, uploadServiceConnection, Context.BIND_AUTO_CREATE);
+        application.startService(uploadServiceIntent);
+        application.bindService(uploadServiceIntent, uploadServiceConnection, Context.BIND_AUTO_CREATE);
     }
 
     public void cleanup() {
         if(isUploadServiceConnected) {
-            app.unbindService(uploadServiceConnection);
+            application.unbindService(uploadServiceConnection);
         }
     }
 
@@ -68,7 +68,7 @@ public class UploadController {
         Contribution contribution;
 
         //TODO: Modify this to include coords
-        contribution = new Contribution(mediaUri, null, title, description, -1, null, null, app.getCurrentAccount().name, CommonsApplication.DEFAULT_EDIT_SUMMARY, decimalCoords);
+        contribution = new Contribution(mediaUri, null, title, description, -1, null, null, application.getCurrentAccount().name, CommonsApplication.DEFAULT_EDIT_SUMMARY, decimalCoords);
 
         contribution.setTag("mimeType", mimeType);
         contribution.setSource(source);
@@ -79,11 +79,11 @@ public class UploadController {
 
     public void startUpload(final Contribution contribution, final ContributionUploadProgress onComplete) {
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(app);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(application);
 
         //Set creator, desc, and license
         if(TextUtils.isEmpty(contribution.getCreator())) {
-            contribution.setCreator(app.getCurrentAccount().name);
+            contribution.setCreator(application.getCurrentAccount().name);
         }
 
         if(contribution.getDescription() == null) {
@@ -104,12 +104,12 @@ public class UploadController {
                 long length;
                 try {
                     if(contribution.getDataLength() <= 0) {
-                        length = app.getContentResolver()
+                        length = application.getContentResolver()
                                 .openAssetFileDescriptor(contribution.getLocalUri(), "r")
                                 .getLength();
                         if(length == -1) {
                             // Let us find out the long way!
-                            length = Utils.countBytes(app.getContentResolver()
+                            length = Utils.countBytes(application.getContentResolver()
                                     .openInputStream(contribution.getLocalUri()));
                         }
                         contribution.setDataLength(length);
@@ -126,7 +126,7 @@ public class UploadController {
                 Boolean imagePrefix = false;
 
                 if (mimeType == null || TextUtils.isEmpty(mimeType) || mimeType.endsWith("*")) {
-                    mimeType = app.getContentResolver().getType(contribution.getLocalUri());
+                    mimeType = application.getContentResolver().getType(contribution.getLocalUri());
                 }
 
                 if (mimeType != null) {
@@ -137,7 +137,7 @@ public class UploadController {
 
                 if (imagePrefix && contribution.getDateCreated() == null) {
                     Timber.d("local uri   " + contribution.getLocalUri());
-                    Cursor cursor = app.getContentResolver().query(contribution.getLocalUri(),
+                    Cursor cursor = application.getContentResolver().query(contribution.getLocalUri(),
                             new String[]{MediaStore.Images.ImageColumns.DATE_TAKEN}, null, null, null);
                     if (cursor != null && cursor.getCount() != 0 && cursor.getColumnCount() != 0) {
                         cursor.moveToFirst();

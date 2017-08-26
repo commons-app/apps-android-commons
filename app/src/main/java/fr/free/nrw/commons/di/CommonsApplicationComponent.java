@@ -10,6 +10,7 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.auth.WikiAccountAuthenticatorService;
 import fr.free.nrw.commons.contributions.ContributionsSyncAdapter;
 import fr.free.nrw.commons.modifications.ModificationsSyncAdapter;
+import fr.free.nrw.commons.upload.UploadService;
 
 @Singleton
 @Component(modules = {
@@ -23,6 +24,8 @@ public interface CommonsApplicationComponent extends AndroidInjector<CommonsAppl
     void inject(CommonsApplication application);
 
     void inject(WikiAccountAuthenticatorService service);
+
+    void inject(UploadService service);
 
     void inject(ContributionsSyncAdapter syncAdapter);
 

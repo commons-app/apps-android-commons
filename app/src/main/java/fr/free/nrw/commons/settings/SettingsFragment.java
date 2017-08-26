@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.settings;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,11 +12,22 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 
 public class SettingsFragment extends PreferenceFragment {
+    @Inject CommonsApplication application;
+
+    @Override
+    public void onAttach(Context context) {
+        AndroidInjection.inject(this);
+        super.onAttach(context);
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +53,7 @@ public class SettingsFragment extends PreferenceFragment {
 
         final EditTextPreference uploadLimit = (EditTextPreference) findPreference("uploads");
         final SharedPreferences sharedPref = PreferenceManager
-                .getDefaultSharedPreferences(CommonsApplication.getInstance());
+                .getDefaultSharedPreferences(application);
         int uploads = sharedPref.getInt(Prefs.UPLOADS_SHOWING, 100);
         uploadLimit.setText(uploads + "");
         uploadLimit.setSummary(uploads + "");

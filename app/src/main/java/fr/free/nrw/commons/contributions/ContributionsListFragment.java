@@ -1,8 +1,6 @@
 package fr.free.nrw.commons.contributions;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -23,8 +21,11 @@ import android.widget.GridView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.nearby.NearbyActivity;
@@ -33,7 +34,7 @@ import timber.log.Timber;
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.app.Activity.RESULT_OK;
 
-public class ContributionsListFragment extends Fragment {
+public class ContributionsListFragment extends DaggerFragment {
 
     public interface SourceRefresher {
         void refreshSource();
@@ -42,6 +43,8 @@ public class ContributionsListFragment extends Fragment {
     @BindView(R.id.contributionsList) GridView contributionsList;
     @BindView(R.id.waitingMessage) TextView waitingMessage;
     @BindView(R.id.emptyMessage) TextView emptyMessage;
+
+    @Inject CommonsApplication application;
 
     private ContributionController controller;
 
@@ -193,7 +196,7 @@ public class ContributionsListFragment extends Fragment {
         menu.clear(); // See http://stackoverflow.com/a/8495697/17865
         inflater.inflate(R.menu.fragment_contributions_list, menu);
 
-        if (!CommonsApplication.getInstance().deviceHasCamera()) {
+        if (!application.deviceHasCamera()) {
             menu.findItem(R.id.menu_from_camera).setEnabled(false);
         }
     }

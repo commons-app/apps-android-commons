@@ -24,6 +24,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
@@ -47,7 +49,9 @@ public  class       MultipleShareActivity
                     FragmentManager.OnBackStackChangedListener,
                     MultipleUploadListFragment.OnMultipleUploadInitiatedHandler,
         OnCategoriesSaveHandler {
-    private CommonsApplication app;
+    @Inject
+    CommonsApplication application;
+
     private ArrayList<Contribution> photosList = null;
 
     private MultipleUploadListFragment uploadsList;
@@ -133,7 +137,7 @@ public  class       MultipleShareActivity
                 if (uploadCount == photosList.size()) {
                     dialog.dismiss();
                     Toast startingToast = Toast.makeText(
-                            CommonsApplication.getInstance(),
+                            application,
                             R.string.uploading_started,
                             Toast.LENGTH_LONG
                     );
@@ -176,9 +180,9 @@ public  class       MultipleShareActivity
         }
         // FIXME: Make sure that the content provider is up
         // This is the wrong place for it, but bleh - better than not having it turned on by default for people who don't go throughl ogin
-        ContentResolver.setSyncAutomatically(app.getCurrentAccount(), ModificationsContentProvider.AUTHORITY, true); // Enable sync by default!
-        EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT, CommonsApplication.getInstance())
-                .param("username", app.getCurrentAccount().name)
+        ContentResolver.setSyncAutomatically(application.getCurrentAccount(), ModificationsContentProvider.AUTHORITY, true); // Enable sync by default!
+        EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT, application)
+                .param("username", application.getCurrentAccount().name)
                 .param("categories-count", categories.size())
                 .param("files-count", photosList.size())
                 .param("source", Contribution.SOURCE_EXTERNAL)
@@ -202,10 +206,9 @@ public  class       MultipleShareActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        uploadController = new UploadController();
+        uploadController = new UploadController(application);
 
         setContentView(R.layout.activity_multiple_uploads);
-        app = CommonsApplication.getInstance();
         ButterKnife.bind(this);
         initDrawer();
 
@@ -245,7 +248,7 @@ public  class       MultipleShareActivity
 
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
-        app.getMWApi().setAuthCookie(authCookie);
+        application.getMWApi().setAuthCookie(authCookie);
         Intent intent = getIntent();
 
         if(intent.getAction().equals(Intent.ACTION_SEND_MULTIPLE)) {
@@ -288,16 +291,16 @@ public  class       MultipleShareActivity
     public void onBackPressed() {
         super.onBackPressed();
         if(categorizationFragment != null && categorizationFragment.isVisible()) {
-            EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT, CommonsApplication.getInstance())
-                    .param("username", app.getCurrentAccount().name)
+            EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT, application)
+                    .param("username", application.getCurrentAccount().name)
                     .param("categories-count", categorizationFragment.getCurrentSelectedCount())
                     .param("files-count", photosList.size())
                     .param("source", Contribution.SOURCE_EXTERNAL)
                     .param("result", "cancelled")
                     .log();
         } else {
-            EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT, CommonsApplication.getInstance())
-                    .param("username", app.getCurrentAccount().name)
+            EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT, application)
+                    .param("username", application.getCurrentAccount().name)
                     .param("source", getIntent().getStringExtra(UploadService.EXTRA_SOURCE))
                     .param("multiple", true)
                     .param("result", "cancelled")
@@ -307,11 +310,7 @@ public  class       MultipleShareActivity
 
     @Override
     public void onBackStackChanged() {
-        if(mediaDetails != null && mediaDetails.isVisible()) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        } else {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        }
+        getSupportActionBar().setDisplayHomeAsUpEnabled(mediaDetails != null && mediaDetails.isVisible());
     }
 
 }

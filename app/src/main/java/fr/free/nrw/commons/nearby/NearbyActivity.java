@@ -31,7 +31,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
@@ -95,7 +94,7 @@ public class NearbyActivity extends NavigationBaseActivity {
         locationManager = new LocationServiceManager(this);
         locationManager.registerLocationManager();
         curLatLang = locationManager.getLatestLocation();
-        nearbyAsyncTask = new NearbyAsyncTask(this, application);
+        nearbyAsyncTask = new NearbyAsyncTask(this, new NearbyController(application));
         nearbyAsyncTask.execute();
     }
 
@@ -234,7 +233,7 @@ public class NearbyActivity extends NavigationBaseActivity {
     }
 
     private void refreshView() {
-        nearbyAsyncTask = new NearbyAsyncTask(this, application);
+        nearbyAsyncTask = new NearbyAsyncTask(this, new NearbyController(application));
         nearbyAsyncTask.execute();
     }
 
@@ -249,11 +248,11 @@ public class NearbyActivity extends NavigationBaseActivity {
     private class NearbyAsyncTask extends AsyncTask<Void, Integer, List<Place>> {
 
         private final Context mContext;
-        private final CommonsApplication application;
+        private final NearbyController nearbyController;
 
-        private NearbyAsyncTask(Context context, CommonsApplication application) {
-            mContext = context;
-            this.application = application;
+        private NearbyAsyncTask(Context context, NearbyController nearbyController) {
+            this.mContext = context;
+            this.nearbyController = nearbyController;
         }
 
         @Override
@@ -263,8 +262,7 @@ public class NearbyActivity extends NavigationBaseActivity {
 
         @Override
         protected List<Place> doInBackground(Void... params) {
-            return NearbyController
-                    .loadAttractionsFromLocation(curLatLang, application);
+            return nearbyController.loadAttractionsFromLocation(curLatLang, application);
         }
 
         @Override

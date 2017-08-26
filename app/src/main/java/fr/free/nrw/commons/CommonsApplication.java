@@ -79,28 +79,12 @@ public class CommonsApplication extends DaggerApplication {
     public static final String FEEDBACK_EMAIL = "commons-app-android@googlegroups.com";
     public static final String FEEDBACK_EMAIL_SUBJECT = "Commons Android App (%s) Feedback";
 
-    private static CommonsApplication instance = null;
     private MediaWikiApi api = null;
     private LruCache<String, String> thumbnailUrlCache = new LruCache<>(1024);
     private CacheController cacheData = null;
     private DBOpenHelper dbOpenHelper = null;
     private NearbyPlaces nearbyPlaces = null;
     private CommonsApplicationComponent component;
-
-    /**
-     * This should not be called by ANY application code (other than the magic Android glue)
-     * Use CommonsApplication.getInstance() instead to get the singleton.
-     */
-    public CommonsApplication() {
-        CommonsApplication.instance = this;
-    }
-
-    public static CommonsApplication getInstance() {
-        if (instance == null) {
-            instance = new CommonsApplication();
-        }
-        return instance;
-    }
 
     public MediaWikiApi getMWApi() {
         if (api == null) {

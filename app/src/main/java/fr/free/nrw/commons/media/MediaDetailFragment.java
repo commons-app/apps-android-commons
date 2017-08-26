@@ -22,6 +22,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.inject.Inject;
+
+import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.License;
 import fr.free.nrw.commons.LicenseList;
@@ -34,7 +37,7 @@ import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.ui.widget.CompatTextView;
 import timber.log.Timber;
 
-public class MediaDetailFragment extends Fragment {
+public class MediaDetailFragment extends DaggerFragment {
 
     private boolean editable;
     private MediaDetailPagerFragment.MediaDetailProvider detailProvider;
@@ -54,6 +57,8 @@ public class MediaDetailFragment extends Fragment {
         return mf;
     }
 
+    @Inject CommonsApplication application;
+
     private MediaWikiImageView image;
     private MediaDetailSpacer spacer;
     private int initialListTop = 0;
@@ -70,7 +75,7 @@ public class MediaDetailFragment extends Fragment {
     private boolean categoriesPresent = false;
     private ViewTreeObserver.OnGlobalLayoutListener layoutListener; // for layout stuff, only used once!
     private ViewTreeObserver.OnScrollChangedListener scrollListener;
-    DataSetObserver dataObserver;
+    private DataSetObserver dataObserver;
     private AsyncTask<Void,Void,Boolean> detailFetchTask;
     private LicenseList licenseList;
 
@@ -189,7 +194,7 @@ public class MediaDetailFragment extends Fragment {
 
             @Override
             protected void onPreExecute() {
-                extractor = new MediaDataExtractor(media.getFilename(), licenseList, CommonsApplication.getInstance().getMWApi());
+                extractor = new MediaDataExtractor(media.getFilename(), licenseList, application.getMWApi());
             }
 
             @Override

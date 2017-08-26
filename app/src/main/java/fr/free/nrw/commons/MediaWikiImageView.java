@@ -40,11 +40,12 @@ public class MediaWikiImageView extends SimpleDraweeView {
             return;
         }
 
-        if (CommonsApplication.getInstance().getThumbnailUrlCache().get(media.getFilename()) != null) {
-            setImageUrl(CommonsApplication.getInstance().getThumbnailUrlCache().get(media.getFilename()));
+        CommonsApplication app = (CommonsApplication) getContext().getApplicationContext();
+        if (app.getThumbnailUrlCache().get(media.getFilename()) != null) {
+            setImageUrl(app.getThumbnailUrlCache().get(media.getFilename()));
         } else {
             setImageUrl(null);
-            MediaWikiApi mediaWikiApi = CommonsApplication.getInstance().getMWApi();
+            MediaWikiApi mediaWikiApi = app.getMWApi();
             currentThumbnailTask = new ThumbnailFetchTask(media, mediaWikiApi);
             currentThumbnailTask.execute(media.getFilename());
         }
@@ -87,7 +88,8 @@ public class MediaWikiImageView extends SimpleDraweeView {
             } else {
                 // only cache meaningful thumbnails received from network.
                 try {
-                    CommonsApplication.getInstance().getThumbnailUrlCache().put(media.getFilename(), result);
+                    CommonsApplication app = (CommonsApplication) getContext().getApplicationContext();
+                    app.getThumbnailUrlCache().put(media.getFilename(), result);
                 } catch (NullPointerException npe) {
                     Timber.e("error when adding pic to cache " + npe);
 

@@ -10,7 +10,6 @@ import com.mapbox.mapboxsdk.annotations.IconFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -29,18 +28,24 @@ import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 public class NearbyController {
     private static final int MAX_RESULTS = 1000;
 
+    private final CommonsApplication application;
+
+    public NearbyController(CommonsApplication application) {
+        this.application = application;
+    }
+
     /**
      * Prepares Place list to make their distance information update later.
      * @param curLatLng current location for user
      * @param context context
      * @return Place list without distance information
      */
-    public static List<Place> loadAttractionsFromLocation(LatLng curLatLng, Context context) {
+    public List<Place> loadAttractionsFromLocation(LatLng curLatLng, Context context) {
         Timber.d("Loading attractions near %s", curLatLng);
         if (curLatLng == null) {
             return Collections.emptyList();
         }
-        NearbyPlaces nearbyPlaces = CommonsApplication.getInstance().getNearbyPlaces();
+        NearbyPlaces nearbyPlaces = application.getNearbyPlaces();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         List<Place> places = prefs.getBoolean("useWikidata", true)
                 ? nearbyPlaces.getFromWikidataQuery(curLatLng, Locale.getDefault().getLanguage())

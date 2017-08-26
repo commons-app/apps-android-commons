@@ -30,6 +30,8 @@ import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
@@ -63,7 +65,7 @@ public  class       ShareActivity
     private static final int REQUEST_PERM_ON_SUBMIT_STORAGE = 4;
     private CategorizationFragment categorizationFragment;
 
-    private CommonsApplication app;
+    @Inject CommonsApplication application;
 
     private String source;
     private String mimeType;
@@ -114,7 +116,7 @@ public  class       ShareActivity
     @RequiresApi(16)
     private boolean needsToRequestStoragePermission() {
         // We need to ask storage permission when
-        // the file is not owned by this app, (e.g. shared from the Gallery)
+        // the file is not owned by this application, (e.g. shared from the Gallery)
         // and permission is not obtained.
         return !FileUtils.isSelfOwned(getApplicationContext(), mediaUri)
                 && (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -125,7 +127,7 @@ public  class       ShareActivity
         getFileMetadata(locationPermitted);
 
         Toast startingToast = Toast.makeText(
-                CommonsApplication.getInstance(),
+                application,
                 R.string.uploading_started,
                 Toast.LENGTH_LONG
         );
@@ -133,7 +135,7 @@ public  class       ShareActivity
 
         if (!cacheFound) {
             //Has to be called after apiCall.request()
-            app.getCacheData().cacheCategory();
+            application.getCacheData().cacheCategory();
             Timber.d("Cache the categories found");
         }
 
@@ -165,10 +167,10 @@ public  class       ShareActivity
 
         // FIXME: Make sure that the content provider is up
         // This is the wrong place for it, but bleh - better than not having it turned on by default for people who don't go throughl ogin
-        ContentResolver.setSyncAutomatically(app.getCurrentAccount(), ModificationsContentProvider.AUTHORITY, true); // Enable sync by default!
+        ContentResolver.setSyncAutomatically(application.getCurrentAccount(), ModificationsContentProvider.AUTHORITY, true); // Enable sync by default!
 
-        EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT, CommonsApplication.getInstance())
-                .param("username", app.getCurrentAccount().name)
+        EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT, application)
+                .param("username", application.getCurrentAccount().name)
                 .param("categories-count", categories.size())
                 .param("files-count", 1)
                 .param("source", contribution.getSource())
@@ -189,16 +191,16 @@ public  class       ShareActivity
     public void onBackPressed() {
         super.onBackPressed();
         if(categorizationFragment != null && categorizationFragment.isVisible()) {
-            EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT, CommonsApplication.getInstance())
-                    .param("username", app.getCurrentAccount().name)
+            EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT, application)
+                    .param("username", application.getCurrentAccount().name)
                     .param("categories-count", categorizationFragment.getCurrentSelectedCount())
                     .param("files-count", 1)
                     .param("source", contribution.getSource())
                     .param("result", "cancelled")
                     .log();
         } else {
-            EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT, CommonsApplication.getInstance())
-                    .param("username", app.getCurrentAccount().name)
+            EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT, application)
+                    .param("username", application.getCurrentAccount().name)
                     .param("source", getIntent().getStringExtra(UploadService.EXTRA_SOURCE))
                     .param("multiple", true)
                     .param("result", "cancelled")
@@ -208,7 +210,7 @@ public  class       ShareActivity
 
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
-        app.getMWApi().setAuthCookie(authCookie);
+        application.getMWApi().setAuthCookie(authCookie);
 
     }
 
@@ -222,11 +224,10 @@ public  class       ShareActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        uploadController = new UploadController();
+        uploadController = new UploadController(application);
         setContentView(R.layout.activity_share);
         ButterKnife.bind(this);
         initBack();
-        app = CommonsApplication.getInstance();
         backgroundImageView = (SimpleDraweeView)findViewById(R.id.backgroundImage);
         backgroundImageView.setHierarchy(GenericDraweeHierarchyBuilder
                 .newInstance(getResources())
@@ -384,7 +385,7 @@ public  class       ShareActivity
                                 Timber.d("%s duplicate check: %s", mediaUri.toString(), result);
                                 duplicateCheckPassed = (result == DUPLICATE_PROCEED
                                         || result == NO_DUPLICATE);
-                            });
+                            }, application.getMWApi());
                     fileAsyncTask.execute();
                 } catch (IOException e) {
                     Timber.d(e, "IO Exception: ");
@@ -448,12 +449,12 @@ public  class       ShareActivity
                         = getContentResolver().openFileDescriptor(mediaUri, "r");
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     if (descriptor != null) {
-                        imageObj = new GPSExtractor(descriptor.getFileDescriptor());
+                        imageObj = new GPSExtractor(descriptor.getFileDescriptor(), application);
                     }
                 } else {
                     String filePath = getPathOfMediaOrCopy();
                     if (filePath != null) {
-                        imageObj = new GPSExtractor(filePath);
+                        imageObj = new GPSExtractor(filePath, application);
                     }
                 }
             }
@@ -480,12 +481,12 @@ public  class       ShareActivity
             if (imageObj.imageCoordsExists) {
                 double decLongitude = imageObj.getDecLongitude();
                 double decLatitude = imageObj.getDecLatitude();
-                app.getCacheData().setQtPoint(decLongitude, decLatitude);
+                application.getCacheData().setQtPoint(decLongitude, decLatitude);
             }
 
-            MwVolleyApi apiCall = new MwVolleyApi();
+            MwVolleyApi apiCall = new MwVolleyApi(application);
 
-            List<String> displayCatList = app.getCacheData().findCategory();
+            List<String> displayCatList = application.getCacheData().findCategory();
             boolean catListEmpty = displayCatList.isEmpty();
 
             // If no categories found in cache, call MediaWiki API to match image coords with nearby Commons categories

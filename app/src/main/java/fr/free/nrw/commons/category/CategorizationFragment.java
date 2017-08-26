@@ -30,8 +30,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.data.Category;
@@ -48,7 +51,7 @@ import static fr.free.nrw.commons.category.CategoryContentProvider.AUTHORITY;
 /**
  * Displays the category suggestion and selection screen. Category search is initiated here.
  */
-public class CategorizationFragment extends Fragment {
+public class CategorizationFragment extends DaggerFragment {
 
     public static final int SEARCH_CATS_LIMIT = 25;
 
@@ -62,6 +65,8 @@ public class CategorizationFragment extends Fragment {
     TextView categoriesNotFoundView;
     @BindView(R.id.categoriesExplanation)
     TextView categoriesSkip;
+
+    @Inject CommonsApplication application;
 
     private RVRendererAdapter<CategoryItem> categoriesAdapter;
     private OnCategoriesSaveHandler onCategoriesSaveHandler;
@@ -202,7 +207,7 @@ public class CategorizationFragment extends Fragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         s -> categoriesAdapter.add(s),
-                        throwable -> Timber.e(throwable),
+                        Timber::e,
                         () -> {
                             categoriesAdapter.notifyDataSetChanged();
                             categoriesSearchInProgress.setVisibility(View.GONE);
@@ -248,7 +253,7 @@ public class CategorizationFragment extends Fragment {
         SharedPreferences titleDesc = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String title = titleDesc.getString("Title", "");
 
-        return CommonsApplication.getInstance().getMWApi()
+        return application.getMWApi()
                 .searchTitles(title, SEARCH_CATS_LIMIT)
                 .map(name -> new CategoryItem(name, false));
     }
@@ -271,7 +276,7 @@ public class CategorizationFragment extends Fragment {
         }
 
         //otherwise, search API for matching categories
-        return CommonsApplication.getInstance().getMWApi()
+        return application.getMWApi()
                 .allCategories(term, SEARCH_CATS_LIMIT)
                 .map(name -> new CategoryItem(name, false));
     }
@@ -282,7 +287,7 @@ public class CategorizationFragment extends Fragment {
             return Observable.empty();
         }
 
-        return CommonsApplication.getInstance().getMWApi()
+        return application.getMWApi()
                 .searchCategories(term, SEARCH_CATS_LIMIT)
                 .map(s -> new CategoryItem(s, false));
     }
