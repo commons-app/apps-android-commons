@@ -45,6 +45,7 @@ import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
 import fr.free.nrw.commons.mwapi.EventLog;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.upload.ExistingFileAsync.Result.DUPLICATE_PROCEED;
@@ -66,6 +67,7 @@ public  class       ShareActivity
     private CategorizationFragment categorizationFragment;
 
     @Inject CommonsApplication application;
+    @Inject MediaWikiApi mwApi;
 
     private String source;
     private String mimeType;
@@ -169,7 +171,7 @@ public  class       ShareActivity
         // This is the wrong place for it, but bleh - better than not having it turned on by default for people who don't go throughl ogin
         ContentResolver.setSyncAutomatically(application.getCurrentAccount(), ModificationsContentProvider.AUTHORITY, true); // Enable sync by default!
 
-        EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT, application)
+        EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT, application, mwApi)
                 .param("username", application.getCurrentAccount().name)
                 .param("categories-count", categories.size())
                 .param("files-count", 1)
@@ -191,7 +193,7 @@ public  class       ShareActivity
     public void onBackPressed() {
         super.onBackPressed();
         if(categorizationFragment != null && categorizationFragment.isVisible()) {
-            EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT, application)
+            EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT, application, mwApi)
                     .param("username", application.getCurrentAccount().name)
                     .param("categories-count", categorizationFragment.getCurrentSelectedCount())
                     .param("files-count", 1)
@@ -199,7 +201,7 @@ public  class       ShareActivity
                     .param("result", "cancelled")
                     .log();
         } else {
-            EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT, application)
+            EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT, application, mwApi)
                     .param("username", application.getCurrentAccount().name)
                     .param("source", getIntent().getStringExtra(UploadService.EXTRA_SOURCE))
                     .param("multiple", true)
@@ -210,8 +212,7 @@ public  class       ShareActivity
 
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
-        application.getMWApi().setAuthCookie(authCookie);
-
+        mwApi.setAuthCookie(authCookie);
     }
 
     @Override
@@ -385,7 +386,7 @@ public  class       ShareActivity
                                 Timber.d("%s duplicate check: %s", mediaUri.toString(), result);
                                 duplicateCheckPassed = (result == DUPLICATE_PROCEED
                                         || result == NO_DUPLICATE);
-                            }, application.getMWApi());
+                            }, mwApi);
                     fileAsyncTask.execute();
                 } catch (IOException e) {
                     Timber.d(e, "IO Exception: ");

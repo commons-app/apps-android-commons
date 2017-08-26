@@ -4,9 +4,6 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
-import android.app.Activity;
-import android.app.Application;
-import android.content.ContentProvider;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -29,9 +26,6 @@ import javax.inject.Inject;
 
 import dagger.android.AndroidInjector;
 import dagger.android.DaggerApplication;
-import dagger.android.DispatchingAndroidInjector;
-import dagger.android.HasActivityInjector;
-import dagger.android.HasContentProviderInjector;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.caching.CacheController;
 import fr.free.nrw.commons.contributions.Contribution;
@@ -79,19 +73,11 @@ public class CommonsApplication extends DaggerApplication {
     public static final String FEEDBACK_EMAIL = "commons-app-android@googlegroups.com";
     public static final String FEEDBACK_EMAIL_SUBJECT = "Commons Android App (%s) Feedback";
 
-    private MediaWikiApi api = null;
     private LruCache<String, String> thumbnailUrlCache = new LruCache<>(1024);
     private CacheController cacheData = null;
     private DBOpenHelper dbOpenHelper = null;
     private NearbyPlaces nearbyPlaces = null;
     private CommonsApplicationComponent component;
-
-    public MediaWikiApi getMWApi() {
-        if (api == null) {
-            api = new ApacheHttpClientMediaWikiApi(API_URL);
-        }
-        return api;
-    }
 
     public CacheController getCacheData() {
         if (cacheData == null) {

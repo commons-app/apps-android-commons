@@ -48,6 +48,7 @@ public class UploadService extends HandlerService<Contribution> {
     public static final String EXTRA_CAMPAIGN = EXTRA_PREFIX + ".campaign";
 
     @Inject CommonsApplication application;
+    @Inject MediaWikiApi mwApi;
 
     private NotificationManager notificationManager;
     private ContentProviderClient contributionsProviderClient;
@@ -182,8 +183,6 @@ public class UploadService extends HandlerService<Contribution> {
 
     @SuppressLint("StringFormatInvalid")
     private void uploadContribution(Contribution contribution) {
-        MediaWikiApi api = application.getMWApi();
-
         InputStream file = null;
 
         String notificationTag = contribution.getLocalUri().toString();
@@ -222,7 +221,7 @@ public class UploadService extends HandlerService<Contribution> {
                 filename = findUniqueFilename(filename);
                 unfinishedUploads.add(filename);
             }
-            if (!api.validateLogin()) {
+            if (!mwApi.validateLogin()) {
                 // Need to revalidate!
                 if (application.revalidateAuthToken()) {
                     Timber.d("Successfully revalidated token!");
@@ -240,7 +239,7 @@ public class UploadService extends HandlerService<Contribution> {
                     getString(R.string.upload_progress_notification_title_finishing, contribution.getDisplayTitle()),
                     contribution
             );
-            UploadResult uploadResult = api.uploadFile(filename, file, contribution.getDataLength(), contribution.getPageContents(), contribution.getEditSummary(), notificationUpdater);
+            UploadResult uploadResult = mwApi.uploadFile(filename, file, contribution.getDataLength(), contribution.getPageContents(), contribution.getEditSummary(), notificationUpdater);
 
             Timber.d("Response is %s", uploadResult.toString());
 
@@ -249,7 +248,7 @@ public class UploadService extends HandlerService<Contribution> {
             String resultStatus = uploadResult.getResultStatus();
             if (!resultStatus.equals("Success")) {
                 showFailedNotification(contribution);
-                EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT, application)
+                EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT, application, mwApi)
                         .param("username", application.getCurrentAccount().name)
                         .param("source", contribution.getSource())
                         .param("multiple", contribution.getMultiple())
@@ -263,7 +262,7 @@ public class UploadService extends HandlerService<Contribution> {
                 contribution.setDateUploaded(uploadResult.getDateUploaded());
                 contribution.save();
 
-                EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT, application)
+                EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT, application, mwApi)
                         .param("username", application.getCurrentAccount().name)
                         .param("source", contribution.getSource()) //FIXME
                         .param("filename", contribution.getFilename())
@@ -304,7 +303,6 @@ public class UploadService extends HandlerService<Contribution> {
     }
 
     private String findUniqueFilename(String fileName) throws IOException {
-        MediaWikiApi api = application.getMWApi();
         String sequenceFileName;
         for (int sequenceNumber = 1; true; sequenceNumber++) {
             if (sequenceNumber == 1) {
@@ -320,7 +318,7 @@ public class UploadService extends HandlerService<Contribution> {
                     sequenceFileName = regexMatcher.replaceAll("$1 " + sequenceNumber + "$2");
                 }
             }
-            if (!api.fileExistsWithName(sequenceFileName)
+            if (!mwApi.fileExistsWithName(sequenceFileName)
                     && !unfinishedUploads.contains(sequenceFileName)) {
                 break;
             }

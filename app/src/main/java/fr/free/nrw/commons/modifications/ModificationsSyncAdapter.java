@@ -25,7 +25,7 @@ import timber.log.Timber;
 
 public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
 
-    @Inject CommonsApplication application;
+    @Inject MediaWikiApi mwApi;
 
     public ModificationsSyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
@@ -64,12 +64,11 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
             return;
         }
 
-        MediaWikiApi api = application.getMWApi();
-        api.setAuthCookie(authCookie);
+        mwApi.setAuthCookie(authCookie);
         String editToken;
 
         try {
-            editToken = api.getEditToken();
+            editToken = mwApi.getEditToken();
         } catch (IOException e) {
             Timber.d("Can not retreive edit token!");
             return;
@@ -100,7 +99,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                 if (contrib.getState() == Contribution.STATE_COMPLETED) {
                     String pageContent;
                     try {
-                        pageContent = api.revisionsByFilename(contrib.getFilename());
+                        pageContent = mwApi.revisionsByFilename(contrib.getFilename());
                     } catch (IOException e) {
                         Timber.d("Network fuckup on modifications sync!");
                         continue;
@@ -111,7 +110,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
 
                     String editResult;
                     try {
-                        editResult = api.edit(editToken, processedPageContent, contrib.getFilename(), sequence.getEditSummary());
+                        editResult = mwApi.edit(editToken, processedPageContent, contrib.getFilename(), sequence.getEditSummary());
                     } catch (IOException e) {
                         Timber.d("Network fuckup on modifications sync!");
                         continue;

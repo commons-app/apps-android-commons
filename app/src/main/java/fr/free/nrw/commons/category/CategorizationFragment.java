@@ -38,6 +38,7 @@ import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.data.Category;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.upload.MwVolleyApi;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -66,7 +67,7 @@ public class CategorizationFragment extends DaggerFragment {
     @BindView(R.id.categoriesExplanation)
     TextView categoriesSkip;
 
-    @Inject CommonsApplication application;
+    @Inject MediaWikiApi mwApi;
 
     private RVRendererAdapter<CategoryItem> categoriesAdapter;
     private OnCategoriesSaveHandler onCategoriesSaveHandler;
@@ -253,7 +254,7 @@ public class CategorizationFragment extends DaggerFragment {
         SharedPreferences titleDesc = PreferenceManager.getDefaultSharedPreferences(getActivity());
         String title = titleDesc.getString("Title", "");
 
-        return application.getMWApi()
+        return mwApi
                 .searchTitles(title, SEARCH_CATS_LIMIT)
                 .map(name -> new CategoryItem(name, false));
     }
@@ -276,7 +277,7 @@ public class CategorizationFragment extends DaggerFragment {
         }
 
         //otherwise, search API for matching categories
-        return application.getMWApi()
+        return mwApi
                 .allCategories(term, SEARCH_CATS_LIMIT)
                 .map(name -> new CategoryItem(name, false));
     }
@@ -287,7 +288,7 @@ public class CategorizationFragment extends DaggerFragment {
             return Observable.empty();
         }
 
-        return application.getMWApi()
+        return mwApi
                 .searchCategories(term, SEARCH_CATS_LIMIT)
                 .map(s -> new CategoryItem(s, false));
     }

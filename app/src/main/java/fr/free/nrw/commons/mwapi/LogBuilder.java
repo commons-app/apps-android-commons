@@ -16,17 +16,20 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.settings.Prefs;
 
+@SuppressWarnings("WeakerAccess")
 public class LogBuilder {
     private final CommonsApplication application;
-    private JSONObject data;
-    private long rev;
-    private String schema;
+    private final MediaWikiApi mwApi;
+    private final JSONObject data;
+    private final long rev;
+    private final String schema;
 
-    LogBuilder(String schema, long revision, CommonsApplication application) {
-        data = new JSONObject();
+    LogBuilder(String schema, long revision, CommonsApplication application, MediaWikiApi mwApi) {
+        this.data = new JSONObject();
         this.schema = schema;
         this.rev = revision;
         this.application = application;
+        this.mwApi = mwApi;
     }
 
     public LogBuilder param(String key, Object value) {
@@ -62,7 +65,7 @@ public class LogBuilder {
         if (!settings.getBoolean(Prefs.TRACKING_ENABLED, true) && !force) {
             return; // User has disabled tracking
         }
-        LogTask logTask = new LogTask(application.getMWApi());
+        LogTask logTask = new LogTask(mwApi);
         logTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, this);
     }
 

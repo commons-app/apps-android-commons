@@ -40,6 +40,7 @@ import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
 import fr.free.nrw.commons.mwapi.EventLog;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
 public  class       MultipleShareActivity
@@ -49,8 +50,8 @@ public  class       MultipleShareActivity
                     FragmentManager.OnBackStackChangedListener,
                     MultipleUploadListFragment.OnMultipleUploadInitiatedHandler,
         OnCategoriesSaveHandler {
-    @Inject
-    CommonsApplication application;
+    @Inject CommonsApplication application;
+    @Inject MediaWikiApi mwApi;
 
     private ArrayList<Contribution> photosList = null;
 
@@ -181,7 +182,7 @@ public  class       MultipleShareActivity
         // FIXME: Make sure that the content provider is up
         // This is the wrong place for it, but bleh - better than not having it turned on by default for people who don't go throughl ogin
         ContentResolver.setSyncAutomatically(application.getCurrentAccount(), ModificationsContentProvider.AUTHORITY, true); // Enable sync by default!
-        EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT, application)
+        EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT, application, mwApi)
                 .param("username", application.getCurrentAccount().name)
                 .param("categories-count", categories.size())
                 .param("files-count", photosList.size())
@@ -248,7 +249,7 @@ public  class       MultipleShareActivity
 
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
-        application.getMWApi().setAuthCookie(authCookie);
+        mwApi.setAuthCookie(authCookie);
         Intent intent = getIntent();
 
         if(intent.getAction().equals(Intent.ACTION_SEND_MULTIPLE)) {
@@ -291,7 +292,7 @@ public  class       MultipleShareActivity
     public void onBackPressed() {
         super.onBackPressed();
         if(categorizationFragment != null && categorizationFragment.isVisible()) {
-            EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT, application)
+            EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT, application, mwApi)
                     .param("username", application.getCurrentAccount().name)
                     .param("categories-count", categorizationFragment.getCurrentSelectedCount())
                     .param("files-count", photosList.size())
@@ -299,7 +300,7 @@ public  class       MultipleShareActivity
                     .param("result", "cancelled")
                     .log();
         } else {
-            EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT, application)
+            EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT, application, mwApi)
                     .param("username", application.getCurrentAccount().name)
                     .param("source", getIntent().getStringExtra(UploadService.EXTRA_SOURCE))
                     .param("multiple", true)

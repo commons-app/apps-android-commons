@@ -28,7 +28,7 @@ import timber.log.Timber;
 public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
     private static int COMMIT_THRESHOLD = 10;
 
-    @Inject CommonsApplication application;
+    @Inject MediaWikiApi mwApi;
 
     public ContributionsSyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
@@ -41,22 +41,23 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
         return limit; // FIXME: Parameterize!
     }
 
-    private static final String[] existsQuery = { Contribution.Table.COLUMN_FILENAME };
+    private static final String[] existsQuery = {Contribution.Table.COLUMN_FILENAME};
     private static final String existsSelection = Contribution.Table.COLUMN_FILENAME + " = ?";
+
     private boolean fileExists(ContentProviderClient client, String filename) {
         Cursor cursor = null;
         try {
             cursor = client.query(ContributionsContentProvider.BASE_URI,
                     existsQuery,
                     existsSelection,
-                    new String[] { filename },
+                    new String[]{filename},
                     ""
             );
             return cursor.getCount() != 0;
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         } finally {
-            if ( cursor != null ) {
+            if (cursor != null) {
                 cursor.close();
             }
         }
@@ -64,21 +65,20 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
 
     @Override
     public void onPerformSync(Account account, Bundle bundle, String s, ContentProviderClient contentProviderClient, SyncResult syncResult) {
-        ((CommonsApplication)getContext().getApplicationContext()).injector().inject(this);
+        ((CommonsApplication) getContext().getApplicationContext()).injector().inject(this);
 
         // This code is fraught with possibilities of race conditions, but lalalalala I can't hear you!
         String user = account.name;
-        MediaWikiApi api = application.getMWApi();
         SharedPreferences prefs = getContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
         String lastModified = prefs.getString("lastSyncTimestamp", "");
         Date curTime = new Date();
         LogEventResult result;
         Boolean done = false;
         String queryContinue = null;
-        while(!done) {
+        while (!done) {
 
             try {
-                result = api.logEvents(user, lastModified, queryContinue, getLimit());
+                result = mwApi.logEvents(user, lastModified, queryContinue, getLimit());
             } catch (IOException e) {
                 // There isn't really much we can do, eh?
                 // FIXME: Perhaps add EventLogging?
@@ -97,7 +97,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                     continue;
                 }
                 String filename = image.getFilename();
-                if(fileExists(contentProviderClient, filename)) {
+                if (fileExists(contentProviderClient, filename)) {
                     Timber.d("Skipping %s", filename);
                     continue;
                 }
@@ -107,7 +107,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                 contrib.setState(Contribution.STATE_COMPLETED);
                 imageValues.add(contrib.toContentValues());
 
-                if(imageValues.size() % COMMIT_THRESHOLD == 0) {
+                if (imageValues.size() % COMMIT_THRESHOLD == 0) {
                     try {
                         contentProviderClient.bulkInsert(ContributionsContentProvider.BASE_URI, imageValues.toArray(new ContentValues[]{}));
                     } catch (RemoteException e) {
@@ -117,7 +117,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                 }
             }
 
-            if(imageValues.size() != 0) {
+            if (imageValues.size() != 0) {
                 try {
                     contentProviderClient.bulkInsert(ContributionsContentProvider.BASE_URI, imageValues.toArray(new ContentValues[]{}));
                 } catch (RemoteException e) {
@@ -126,7 +126,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
             }
 
             queryContinue = result.getQueryContinue();
-            if(TextUtils.isEmpty(queryContinue)) {
+            if (TextUtils.isEmpty(queryContinue)) {
                 done = true;
             }
         }

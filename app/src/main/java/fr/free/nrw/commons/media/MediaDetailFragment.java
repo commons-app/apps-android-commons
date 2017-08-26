@@ -34,6 +34,7 @@ import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.ui.widget.CompatTextView;
 import timber.log.Timber;
 
@@ -57,8 +58,7 @@ public class MediaDetailFragment extends DaggerFragment {
         return mf;
     }
 
-    @Inject CommonsApplication application;
-
+    @Inject MediaWikiApi mwApi;
     private MediaWikiImageView image;
     private MediaDetailSpacer spacer;
     private int initialListTop = 0;
@@ -194,7 +194,7 @@ public class MediaDetailFragment extends DaggerFragment {
 
             @Override
             protected void onPreExecute() {
-                extractor = new MediaDataExtractor(media.getFilename(), licenseList, application.getMWApi());
+                extractor = new MediaDataExtractor(media.getFilename(), licenseList, mwApi);
             }
 
             @Override

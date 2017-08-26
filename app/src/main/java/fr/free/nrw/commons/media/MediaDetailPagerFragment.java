@@ -36,6 +36,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.mwapi.EventLog;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 
 public class MediaDetailPagerFragment extends DaggerFragment implements ViewPager.OnPageChangeListener {
 
@@ -52,6 +53,7 @@ public class MediaDetailPagerFragment extends DaggerFragment implements ViewPage
     }
 
     @Inject CommonsApplication application;
+    @Inject MediaWikiApi mwApi;
 
     private ViewPager pager;
     private Boolean editable;
@@ -134,7 +136,7 @@ public class MediaDetailPagerFragment extends DaggerFragment implements ViewPage
         switch(item.getItemId()) {
             case R.id.menu_share_current_image:
                 // Share - this is just logs it, intent set in onCreateOptionsMenu, around line 252
-                EventLog.schema(CommonsApplication.EVENT_SHARE_ATTEMPT, application)
+                EventLog.schema(CommonsApplication.EVENT_SHARE_ATTEMPT, application, mwApi)
                         .param("username", application.getCurrentAccount().name)
                         .param("filename", m.getFilename())
                         .log();

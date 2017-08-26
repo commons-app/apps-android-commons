@@ -11,10 +11,14 @@ import android.widget.Toast;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import javax.inject.Inject;
+
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
 public class MediaWikiImageView extends SimpleDraweeView {
+    @Inject CommonsApplication application;
+    @Inject MediaWikiApi mwApi;
     private ThumbnailFetchTask currentThumbnailTask;
 
     public MediaWikiImageView(Context context) {
@@ -40,13 +44,11 @@ public class MediaWikiImageView extends SimpleDraweeView {
             return;
         }
 
-        CommonsApplication app = (CommonsApplication) getContext().getApplicationContext();
-        if (app.getThumbnailUrlCache().get(media.getFilename()) != null) {
-            setImageUrl(app.getThumbnailUrlCache().get(media.getFilename()));
+        if (application.getThumbnailUrlCache().get(media.getFilename()) != null) {
+            setImageUrl(application.getThumbnailUrlCache().get(media.getFilename()));
         } else {
             setImageUrl(null);
-            MediaWikiApi mediaWikiApi = app.getMWApi();
-            currentThumbnailTask = new ThumbnailFetchTask(media, mediaWikiApi);
+            currentThumbnailTask = new ThumbnailFetchTask(media, mwApi);
             currentThumbnailTask.execute(media.getFilename());
         }
     }
@@ -60,6 +62,7 @@ public class MediaWikiImageView extends SimpleDraweeView {
     }
 
     private void init() {
+        ((CommonsApplication) getContext().getApplicationContext()).injector().inject(this);
         setHierarchy(GenericDraweeHierarchyBuilder
                 .newInstance(getResources())
                 .setPlaceholderImage(VectorDrawableCompat.create(getResources(),

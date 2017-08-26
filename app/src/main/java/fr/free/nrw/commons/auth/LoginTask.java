@@ -11,6 +11,7 @@ import java.io.IOException;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.mwapi.EventLog;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
 class LoginTask extends AsyncTask<String, String, String> {
@@ -21,14 +22,16 @@ class LoginTask extends AsyncTask<String, String, String> {
     private String twoFactorCode = "";
     private AccountUtil accountUtil;
     private CommonsApplication app;
+    private MediaWikiApi mwApi;
 
-    public LoginTask(LoginActivity loginActivity, String username, String password, String twoFactorCode, AccountUtil accountUtil, CommonsApplication application) {
+    public LoginTask(LoginActivity loginActivity, String username, String password, String twoFactorCode, AccountUtil accountUtil, CommonsApplication application, MediaWikiApi mwApi) {
         this.loginActivity = loginActivity;
         this.username = username;
         this.password = password;
         this.twoFactorCode = twoFactorCode;
         this.accountUtil = accountUtil;
         this.app = application;
+        this.mwApi = mwApi;
     }
 
     @Override
@@ -46,9 +49,9 @@ class LoginTask extends AsyncTask<String, String, String> {
     protected String doInBackground(String... params) {
         try {
             if (twoFactorCode.isEmpty()) {
-                return app.getMWApi().login(username, password);
+                return mwApi.login(username, password);
             } else {
-                return app.getMWApi().login(username, password, twoFactorCode);
+                return mwApi.login(username, password, twoFactorCode);
             }
         } catch (IOException e) {
             // Do something better!
@@ -61,7 +64,7 @@ class LoginTask extends AsyncTask<String, String, String> {
         super.onPostExecute(result);
         Timber.d("Login done!");
 
-        EventLog.schema(CommonsApplication.EVENT_LOGIN_ATTEMPT, app)
+        EventLog.schema(CommonsApplication.EVENT_LOGIN_ATTEMPT, app, mwApi)
                 .param("username", username)
                 .param("result", result)
                 .log();

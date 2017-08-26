@@ -25,6 +25,7 @@ import fr.free.nrw.commons.WelcomeActivity;
 
 import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
 import static android.view.KeyEvent.KEYCODE_ENTER;
@@ -36,6 +37,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     public static final String PARAM_USERNAME = "fr.free.nrw.commons.login.username";
 
     @Inject CommonsApplication application;
+    @Inject MediaWikiApi mwApi;
     @Inject AccountUtil accountUtil;
 
     private SharedPreferences prefs = null;
@@ -145,7 +147,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 canonicializeUsername(usernameEdit.getText().toString()),
                 passwordEdit.getText().toString(),
                 twoFactorEdit.getText().toString(),
-                accountUtil, application
+                accountUtil, application, mwApi
         );
     }
 
