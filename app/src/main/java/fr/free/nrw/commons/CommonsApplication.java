@@ -194,7 +194,7 @@ public class CommonsApplication extends Application {
                 pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT);
     }
 
-    public void clearApplicationData(Context context, NavigationBaseActivity.LogoutCompleteListener logoutCompleteListener) {
+    public void clearApplicationData(Context context, NavigationBaseActivity.LogoutListener logoutListener) {
         File cacheDirectory = context.getCacheDir();
         File applicationDirectory = new File(cacheDirectory.getParent());
         if (applicationDirectory.exists()) {
@@ -209,24 +209,33 @@ public class CommonsApplication extends Application {
         AccountManager accountManager = AccountManager.get(this);
         Account[] allAccounts = accountManager.getAccountsByType(AccountUtil.accountType());
 
-        AccountManagerCallback<Boolean> accountManagerCallback = new AccountManagerCallback<Boolean>() {
-            int index = 0;
+        AccountManagerCallback<Boolean> amCallback = new AccountManagerCallback<Boolean>() {
+            
+            private int index = 0;
+            
+            void setIndex(int index) {
+                this.index = index;
+            }
+
+            int getIndex() {
+                return index;
+            }
+
             @Override
             public void run(AccountManagerFuture<Boolean> accountManagerFuture) {
-                index++;
+                setIndex(index++);
 
                 try {
-                    if(accountManagerFuture.getResult())
-                    {
-                        Timber.d("Account removed successfully.");
+                    if (accountManagerFuture != null) {
+                        if (accountManagerFuture.getResult()) {
+                            Timber.d("Account removed successfully.");
+                        }
                     }
-                }
-                catch (OperationCanceledException | NullPointerException | IOException | AuthenticatorException e) {
+                } catch (OperationCanceledException | IOException | AuthenticatorException e) {
                     e.printStackTrace();
                 }
 
-                if(index == allAccounts.length)
-                {
+                if (getIndex() == allAccounts.length) {
                     Timber.d("All accounts have been removed");
                     //TODO: fix preference manager
                     PreferenceManager.getDefaultSharedPreferences(getInstance()).edit().clear().commit();
@@ -238,13 +247,13 @@ public class CommonsApplication extends Application {
                     updateAllDatabases();
                     currentAccount = null;
 
-                    logoutCompleteListener.onLogoutComplete();
+                    logoutListener.onLogoutComplete();
                 }
             }
         };
 
         for (Account account : allAccounts) {
-            accountManager.removeAccount(account, accountManagerCallback, null);
+            accountManager.removeAccount(account, amCallback, null);
         }
     }
 

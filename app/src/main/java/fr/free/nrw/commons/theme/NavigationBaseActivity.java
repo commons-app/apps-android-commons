@@ -151,7 +151,7 @@ public class NavigationBaseActivity extends BaseActivity
         }
     }
 
-    public interface LogoutCompleteListener {
+    public interface LogoutListener {
         void onLogoutComplete();
     }
 }
