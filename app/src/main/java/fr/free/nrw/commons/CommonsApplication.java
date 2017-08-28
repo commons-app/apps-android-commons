@@ -223,7 +223,7 @@ public class CommonsApplication extends Application {
 
             @Override
             public void run(AccountManagerFuture<Boolean> accountManagerFuture) {
-                setIndex(index++);
+                setIndex(getIndex() + 1);
 
                 try {
                     if (accountManagerFuture != null) {
