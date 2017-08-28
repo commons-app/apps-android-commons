@@ -194,9 +194,4 @@
   <string name="error_while_cache">Tuccḍa di tririt n tugniwin ar tuffirt</string>
   <string name="title_info">Azwul n useglem asuf i ufaylu, ara ttwasqedcen d isem n ufaylu. Tzemreḍ ad tesqedceḍ tutlayt fessusen s isekkilen ilmawen. Ur sedday ara asiɣzef n ufaylu</string>
   <string name="description_info">Ma ulac aɣilf, seglem amidya s wayen akk i tzemreḍ: Anida yettwasekles? Acu i d-yemmal? D acu-t usatal-is? Seglem tiɣawsiwin neɣ imdanen. Mudd-d talɣut ur yezmiren ad tettwaf s wudem fessusen, amedya akud n wass ma yella d agama. Ma yella admidya yaskan-d ayen ur nuɣ ara tanumi, ini-d d aci i tyettarran d ayen ifazen.</string>
-  <string name="feedback_popup_title">Tikti tettusuter</string>
-  <string name="feedback_popup_description">Nhegga ddeqs n tmahilin timaynutin deg usnas! Tebɣiḍ ad ten-twaliḍ sakin ad d-muddeḍ tikti? \n\n(Tzemreḍ yal tikelt ad tkecmeḍ ar waya s ufran n \"Iɣawasen n uneflay\" deh ugalis n tunigin)</string>
-  <string name="feedback_popup_decline">Uhu tanemmirt</string>
-  <string name="feedback_popup_accept">Amek ih, awi-yi ar din!</string>
-  <string name="navigation_item_developer_plans">Iɣawasen n uneflay</string>
 </resources>

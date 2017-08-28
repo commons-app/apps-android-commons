@@ -112,6 +112,4 @@
   <string name="navigation_item_upload">{{Identical|Upload}}</string>
   <string name="navigation_item_nearby">{{Identical|Nearby}}</string>
   <string name="navigation_item_info">{{Identical|Tutorial}}</string>
-  <string name="feedback_popup_description">\"Developer plans\" is {{msg-wm|Commons-android-strings-navigation item developer plans}}.</string>
-  <string name="feedback_page_url">{{ignored}}</string>
 </resources>

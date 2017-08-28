@@ -87,6 +87,4 @@
   <string name="navigation_item_logout">Iziet</string>
   <string name="navigation_item_info" fuzzy="true">Ievads</string>
   <string name="no_description_found">apraksts nav atrasts</string>
-  <string name="feedback_popup_decline">Nē, paldies</string>
-  <string name="navigation_item_developer_plans">Izstrādātāju plāni</string>
 </resources>

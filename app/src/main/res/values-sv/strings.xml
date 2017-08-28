@@ -194,9 +194,4 @@
   <string name="error_while_cache">Fel uppstod när bilder cachelagras</string>
   <string name="title_info">En unik beskrivande titel för filen, som kommer att fungera som ett filnamn. Du kan använda klarspråk med mellanslag. Ta inte med filändelsen</string>
   <string name="description_info">Beskriv mediafilen så mycket som möjligt. Var togs den? Vad visar den? Vad är sammanhanget? Beskriv föremålen eller personerna. Ge information som inte kan gissas fram, t.ex. tidpunkten om det är ett landskap. Om mediafilen visar någonting ovanligt, förklara vad som gör den ovanlig.</string>
-  <string name="feedback_popup_title">Återkoppling önskas</string>
-  <string name="feedback_popup_description">Vi planerar flera nya funktioner och förbättringar för appen! Vill du prova dem och ge återkoppling?\n\n(Kan kan alltid komma åt detta genom att markera \"Utvecklarplaner\" i navigeringsmenyn).</string>
-  <string name="feedback_popup_decline">Nej tack</string>
-  <string name="feedback_popup_accept">Visst, ta mig dit!</string>
-  <string name="navigation_item_developer_plans">Utvecklarplaner</string>
 </resources>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">कॉमन्स</string>
-  <string name="menu_settings">पसंद</string>
+  <string name="menu_settings">सेटिंग्स</string>
   <string name="username">सदस्य नाम</string>
   <string name="password">पासवर्ड</string>
   <string name="login">प्रवेश</string>
@@ -117,9 +117,9 @@
   <string name="tutorial_3_subtext">- सेल्फी या अपने दोस्तों की तस्वीरें\n- इंटरनेट से डाउनलोड की गई तस्वीरें\n- किसी निजी एप का स्क्रीनशॉट</string>
   <string name="tutorial_4_text">अपलोड का उदाहरण:</string>
   <string name="tutorial_4_subtext">- शीर्षक: सिडनी ओपेरा हाउस\n- विवरण: सिडनी ओपेरा हाउस खाड़ी के पार से देखा गया\n- श्रेणियाँ: सिडनी ओपेरा हाउस, पश्चिम से सिडनी ओपेरा हाउस, सिडनी ओपेरा हाउस दूर से</string>
-  <string name="welcome_wikipedia_text">अपने छवियों का योगदान करें और विकिपीडिया के लेखों को जीवित करने में सहायता करें।</string>
+  <string name="welcome_wikipedia_text">अपने छवियों का योगदान करें। विकिपीडिया के लेखों को जीवित करने में सहायता करें।</string>
   <string name="welcome_wikipedia_subtext">विकिपीडिया में छवि विकिमीडिया कॉमन्स से आती है।</string>
-  <string name="welcome_copyright_text">आपके लिए चित्र पूरे विश्व के लोगों को शिक्षित करेंगे।</string>
+  <string name="welcome_copyright_text">आपके चित्र पूरे विश्व के लोगों को शिक्षित करेंगे।</string>
   <string name="welcome_copyright_subtext">इंटरनेट से मिली कोई कॉपीराइट सामग्री के साथ साथ पोस्टर, पुस्तक के खड्डे आदि को भी अपलोड करने से बचें।</string>
   <string name="welcome_final_text">जो आपने सोचा वो मिला?</string>
   <string name="welcome_final_button_text">हाँ!</string>
@@ -145,5 +145,4 @@
   <string name="become_a_tester_title">बीटा परीक्षक बनें</string>
   <string name="use_wikidata">विकिडेटा का प्रयोग करें</string>
   <string name="maximum_limit">अधिकतम सीमा</string>
-  <string name="feedback_popup_decline">नहीं, धन्यवाद</string>
 </resources>

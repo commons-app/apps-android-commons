@@ -163,5 +163,4 @@
   <string name="navigation_item_logout">Đăng xuất</string>
   <string name="navigation_item_info">Hướng dẫn</string>
   <string name="nearby_info_menu_wikidata_article">Khoản mục Wikidata</string>
-  <string name="feedback_popup_decline">Thôi</string>
 </resources>

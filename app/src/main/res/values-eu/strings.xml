@@ -23,7 +23,7 @@
   <string name="title_activity_contributions">Nire azken igoerak</string>
   <string name="contribution_state_queued">Itxoite-zerrendan</string>
   <string name="contribution_state_failed">Hutsegitea</string>
-  <string name="contribution_state_in_progress">%1$d%% egina</string>
+  <string name="contribution_state_in_progress">%% %1$d egina</string>
   <string name="contribution_state_starting">Igotzen</string>
   <string name="menu_from_gallery">Galeriatik</string>
   <string name="menu_from_camera">Argazkia egin</string>
@@ -137,9 +137,4 @@
   <string name="nearby_info_menu_commons_article">Artxibo orrialde komuna</string>
   <string name="nearby_info_menu_wikidata_article" fuzzy="true">WikiData Artikulua</string>
   <string name="error_while_cache">Argazkiak hartzerakoan sortutako akatsa</string>
-  <string name="feedback_popup_title">Kritika nahi da</string>
-  <string name="feedback_popup_description">Aplikaziorako karakteristika eta hobekuntza berriak prestatzen ari gara! Zure iritzia eman nahi diguzu hauen inguruan?\n\n(\"Garatzaile planak\" hautatuz sartu zaitezke)</string>
-  <string name="feedback_popup_decline">Ez, eskerrik asko</string>
-  <string name="feedback_popup_accept">Noski, eraman nazazu hara!</string>
-  <string name="navigation_item_developer_plans">Garatzaile planak</string>
 </resources>

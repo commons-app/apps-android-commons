@@ -154,6 +154,4 @@
   <string name="navigation_item_feedback">Terugkoppeling</string>
   <string name="navigation_item_logout">Afmelden</string>
   <string name="error_while_cache">Error tijdens het laden van de afbeeldingen</string>
-  <string name="feedback_popup_decline">Neen, toch bedankt</string>
-  <string name="navigation_item_developer_plans">De plannen van de ontwikkelaar</string>
 </resources>

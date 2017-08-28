@@ -191,9 +191,4 @@
   <string name="nearby_info_menu_commons_article">공용 파일 문서</string>
   <string name="nearby_info_menu_wikidata_article">위키데이터 항목</string>
   <string name="error_while_cache">그림 캐시 처리 오류</string>
-  <string name="feedback_popup_title">피드백 필요</string>
-  <string name="feedback_popup_description">앱을 위한 일부 새로운 기능과 개선사항을 계획하고 있습니다. 검토해 보시고 의견을 주시겠습니까?\n\n(탐색 표시줄에서 \"개발자 계획\"을 선택하면 여기로 언제나 접근할 수 있습니다)</string>
-  <string name="feedback_popup_decline">괜찮습니다</string>
-  <string name="feedback_popup_accept">물론이죠, 거기 가고싶네요!</string>
-  <string name="navigation_item_developer_plans">개발자 계획</string>
 </resources>
