@@ -1,17 +1,17 @@
 package fr.free.nrw.commons;
 
-import android.support.test.runner.AndroidJUnit4;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import java.net.URLEncoder;
 
 import static org.hamcrest.CoreMatchers.is;
 
-// TODO: use Robolectric and make it runnable without a connected device
-@RunWith(AndroidJUnit4.class)
+@RunWith(RobolectricTestRunner.class)
+@Config(constants = BuildConfig.class, sdk = 21)
 public class PageTitleTest {
     @Test public void displayTextShouldNotBeUnderscored() {
         Assert.assertThat(new PageTitle("Ex_1 ").getDisplayText(),
