@@ -15,10 +15,12 @@ import timber.log.Timber;
 
 public class AccountUtil {
 
+    public static final String ACCOUNT_TYPE = "fr.free.nrw.commons";
+
     public static void createAccount(@Nullable AccountAuthenticatorResponse response,
                                      String username, String password) {
 
-        Account account = new Account(username, accountType());
+        Account account = new Account(username, ACCOUNT_TYPE);
         boolean created = accountManager().addAccountExplicitly(account, password, null);
 
         Timber.d("account creation " + (created ? "successful" : "failure"));
@@ -27,7 +29,7 @@ public class AccountUtil {
             if (response != null) {
                 Bundle bundle = new Bundle();
                 bundle.putString(AccountManager.KEY_ACCOUNT_NAME, username);
-                bundle.putString(AccountManager.KEY_ACCOUNT_TYPE, accountType());
+                bundle.putString(AccountManager.KEY_ACCOUNT_TYPE, ACCOUNT_TYPE);
 
 
                 response.onResult(bundle);
@@ -43,11 +45,6 @@ public class AccountUtil {
         // FIXME: If the user turns it off, it shouldn't be auto turned back on
         ContentResolver.setSyncAutomatically(account, ContributionsContentProvider.AUTHORITY, true); // Enable sync by default!
         ContentResolver.setSyncAutomatically(account, ModificationsContentProvider.AUTHORITY, true); // Enable sync by default!
-    }
-
-    @NonNull
-    public static String accountType() {
-        return "fr.free.nrw.commons";
     }
 
     private static AccountManager accountManager() {

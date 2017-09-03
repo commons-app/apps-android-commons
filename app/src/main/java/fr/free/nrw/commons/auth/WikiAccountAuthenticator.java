@@ -16,8 +16,9 @@ import java.io.IOException;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 
-public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
+class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
 
+    private static final String PARAM_USERNAME = "fr.free.nrw.commons.login.username";
     private Context context;
 
     public WikiAccountAuthenticator(Context context) {
@@ -36,7 +37,7 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
     }
 
     private boolean supportedAccountType(@Nullable String type) {
-        return AccountUtil.accountType().equals(type);
+        return AccountUtil.ACCOUNT_TYPE.equals(type);
     }
 
     @Override
@@ -102,7 +103,7 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
             if (authCookie != null) {
                 final Bundle result = new Bundle();
                 result.putString(AccountManager.KEY_ACCOUNT_NAME, account.name);
-                result.putString(AccountManager.KEY_ACCOUNT_TYPE, AccountUtil.accountType());
+                result.putString(AccountManager.KEY_ACCOUNT_TYPE, AccountUtil.ACCOUNT_TYPE);
                 result.putString(AccountManager.KEY_AUTHTOKEN, authCookie);
                 return result;
             }
@@ -112,7 +113,7 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
         // need to re-prompt them for their credentials. We do that by creating
         // an intent to display our AuthenticatorActivity panel.
         final Intent intent = new Intent(context, LoginActivity.class);
-        intent.putExtra(LoginActivity.PARAM_USERNAME, account.name);
+        intent.putExtra(PARAM_USERNAME, account.name);
         intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
         final Bundle bundle = new Bundle();
         bundle.putParcelable(AccountManager.KEY_INTENT, intent);
