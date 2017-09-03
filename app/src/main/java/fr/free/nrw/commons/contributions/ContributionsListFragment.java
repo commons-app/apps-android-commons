@@ -1,9 +1,7 @@
 package fr.free.nrw.commons.contributions;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -30,17 +28,15 @@ import timber.log.Timber;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.app.Activity.RESULT_OK;
+import static android.content.Context.MODE_PRIVATE;
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+import static android.view.View.GONE;
 
 public class ContributionsListFragment extends Fragment {
-
-    public interface SourceRefresher {
-        void refreshSource();
-    }
 
     @BindView(R.id.contributionsList) GridView contributionsList;
     @BindView(R.id.waitingMessage) TextView waitingMessage;
     @BindView(R.id.emptyMessage) TextView emptyMessage;
-
     private ContributionController controller;
 
     @Override
@@ -48,21 +44,21 @@ public class ContributionsListFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_contributions, container, false);
         ButterKnife.bind(this, v);
 
-        contributionsList.setOnItemClickListener((AdapterView.OnItemClickListener)getActivity());
-        if(savedInstanceState != null) {
+        contributionsList.setOnItemClickListener((AdapterView.OnItemClickListener) getActivity());
+        if (savedInstanceState != null) {
             Timber.d("Scrolling to %d", savedInstanceState.getInt("grid-position"));
             contributionsList.setSelection(savedInstanceState.getInt("grid-position"));
         }
 
         //TODO: Should this be in onResume?
-        SharedPreferences prefs = this.getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        SharedPreferences prefs = getActivity().getSharedPreferences("prefs", MODE_PRIVATE);
         String lastModified = prefs.getString("lastSyncTimestamp", "");
         Timber.d("Last Sync Timestamp: %s", lastModified);
 
         if (lastModified.equals("")) {
             waitingMessage.setVisibility(View.VISIBLE);
         } else {
-            waitingMessage.setVisibility(View.GONE);
+            waitingMessage.setVisibility(GONE);
         }
 
         return v;
@@ -91,7 +87,7 @@ public class ContributionsListFragment extends Fragment {
         //FIXME: must get the file data for Google Photos when receive the intent answer, in the onActivityResult method
         super.onActivityResult(requestCode, resultCode, data);
 
-        if ( resultCode == RESULT_OK ) {
+        if (resultCode == RESULT_OK) {
             Timber.d("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
                     requestCode, resultCode, data);
             controller.handleImagePicked(requestCode, data);
@@ -103,7 +99,7 @@ public class ContributionsListFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.menu_from_gallery:
                 //Gallery crashes before reach ShareActivity screen so must implement permissions check here
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -111,7 +107,7 @@ public class ContributionsListFragment extends Fragment {
                     // Here, thisActivity is the current activity
                     if (ContextCompat.checkSelfPermission(getActivity(),
                             READ_EXTERNAL_STORAGE)
-                            != PackageManager.PERMISSION_GRANTED) {
+                            != PERMISSION_GRANTED) {
 
                         // Should we show an explanation?
                         if (shouldShowRequestPermissionRationale(READ_EXTERNAL_STORAGE)) {
@@ -161,14 +157,15 @@ public class ContributionsListFragment extends Fragment {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-
-        Timber.d("onRequestPermissionsResult: req code = " + " perm = " + permissions + " grant =" + grantResults);
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        Timber.d("onRequestPermissionsResult: req code = " + " perm = "
+                + permissions + " grant =" + grantResults);
 
         switch (requestCode) {
             // 1 = Storage allowed when gallery selected
             case 1: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
                     Timber.d("Call controller.startGalleryPick()");
                     controller.startGalleryPick();
                 }
@@ -176,7 +173,7 @@ public class ContributionsListFragment extends Fragment {
             break;
             // 2 = Location allowed when 'nearby places' selected
             case 2: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
                     Timber.d("Location permission granted");
                     Intent nearbyIntent = new Intent(getActivity(), NearbyActivity.class);
                     startActivity(nearbyIntent);
@@ -191,7 +188,8 @@ public class ContributionsListFragment extends Fragment {
         menu.clear(); // See http://stackoverflow.com/a/8495697/17865
         inflater.inflate(R.menu.fragment_contributions_list, menu);
 
-        if (!CommonsApplication.getInstance().deviceHasCamera()) {
+        CommonsApplication app = (CommonsApplication) getContext().getApplicationContext();
+        if (!app.deviceHasCamera()) {
             menu.findItem(R.id.menu_from_camera).setEnabled(false);
         }
     }
@@ -215,6 +213,10 @@ public class ContributionsListFragment extends Fragment {
     }
 
     protected void clearSyncMessage() {
-        waitingMessage.setVisibility(View.GONE);
+        waitingMessage.setVisibility(GONE);
+    }
+
+    public interface SourceRefresher {
+        void refreshSource();
     }
 }

@@ -220,10 +220,8 @@ public class CommonsApplication extends Application {
                 setIndex(getIndex() + 1);
 
                 try {
-                    if (accountManagerFuture != null) {
-                        if (accountManagerFuture.getResult()) {
-                            Timber.d("Account removed successfully.");
-                        }
+                    if (accountManagerFuture != null && accountManagerFuture.getResult()) {
+                        Timber.d("Account removed successfully.");
                     }
                 } catch (OperationCanceledException | IOException | AuthenticatorException e) {
                     e.printStackTrace();

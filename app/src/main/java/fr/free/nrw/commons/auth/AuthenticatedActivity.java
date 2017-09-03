@@ -18,7 +18,7 @@ public abstract class AuthenticatedActivity extends NavigationBaseActivity {
     CommonsApplication app;
 
     private String authCookie;
-    
+
     public AuthenticatedActivity() {
         this.accountType = AccountUtil.accountType();
     }
@@ -53,24 +53,24 @@ public abstract class AuthenticatedActivity extends NavigationBaseActivity {
     }
 
     protected void requestAuthToken() {
-        if(authCookie != null) {
+        if (authCookie != null) {
             onAuthCookieAcquired(authCookie);
             return;
         }
         AccountManager accountManager = AccountManager.get(this);
         Account curAccount = app.getCurrentAccount();
-        if(curAccount == null) {
+        if (curAccount == null) {
             addAccount(accountManager);
         } else {
             getAuthCookie(curAccount, accountManager);
         }
     }
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         app = CommonsApplication.getInstance();
-        if(savedInstanceState != null) {
+        if (savedInstanceState != null) {
             authCookie = savedInstanceState.getString("authCookie");
         }
     }
@@ -82,5 +82,6 @@ public abstract class AuthenticatedActivity extends NavigationBaseActivity {
     }
 
     protected abstract void onAuthCookieAcquired(String authCookie);
+
     protected abstract void onAuthFailure();
 }
