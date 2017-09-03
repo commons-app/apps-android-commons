@@ -28,9 +28,7 @@ public abstract class AuthenticatedActivity extends NavigationBaseActivity {
                 .subscribeOn(Schedulers.io())
                 .doOnError(Timber::e)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        cookie -> onAuthCookieAcquired(cookie),
-                        throwable -> onAuthFailure());
+                .subscribe(this::onAuthCookieAcquired, throwable -> onAuthFailure());
     }
 
     private void addAccount(AccountManager accountManager) {
