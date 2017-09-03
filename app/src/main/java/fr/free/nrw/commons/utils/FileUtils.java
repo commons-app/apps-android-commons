@@ -15,7 +15,7 @@ public class FileUtils {
      * @return the content of the file
      */
     public static String readFromResource(String fileName) throws IOException {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         BufferedReader reader = null;
         try {
             reader = new BufferedReader(
