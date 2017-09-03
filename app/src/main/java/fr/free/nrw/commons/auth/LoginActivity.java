@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.PageTitle;
@@ -26,74 +28,38 @@ import timber.log.Timber;
 import static android.view.KeyEvent.KEYCODE_ENTER;
 import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
 
-
 public class LoginActivity extends AccountAuthenticatorActivity {
 
     public static final String PARAM_USERNAME = "fr.free.nrw.commons.login.username";
 
-    private SharedPreferences prefs = null;
+    @BindView(R.id.loginButton) Button loginButton;
+    @BindView(R.id.signupButton) Button signupButton;
+    @BindView(R.id.loginUsername) EditText usernameEdit;
+    @BindView(R.id.loginPassword) EditText passwordEdit;
+    @BindView(R.id.loginTwoFactor) EditText twoFactorEdit;
 
-    private Button loginButton;
-    private EditText usernameEdit;
-    private EditText passwordEdit;
-    private EditText twoFactorEdit;
     ProgressDialog progressDialog;
     private LoginTextWatcher textWatcher = new LoginTextWatcher();
-
+    private SharedPreferences prefs = null;
     private CommonsApplication app;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+        ButterKnife.bind(this);
 
         app = CommonsApplication.getInstance();
-
-        setContentView(R.layout.activity_login);
-
-        loginButton = (Button) findViewById(R.id.loginButton);
-        Button signupButton = (Button) findViewById(R.id.signupButton);
-        usernameEdit = (EditText) findViewById(R.id.loginUsername);
-        passwordEdit = (EditText) findViewById(R.id.loginPassword);
-        twoFactorEdit = (EditText) findViewById(R.id.loginTwoFactor);
-
         prefs = getSharedPreferences("fr.free.nrw.commons", MODE_PRIVATE);
-
         usernameEdit.addTextChangedListener(textWatcher);
         passwordEdit.addTextChangedListener(textWatcher);
         twoFactorEdit.addTextChangedListener(textWatcher);
         passwordEdit.setOnEditorActionListener(newLoginInputActionListener());
-
         loginButton.setOnClickListener(this::performLogin);
         signupButton.setOnClickListener(this::signUp);
     }
 
-    private class LoginTextWatcher extends AbstractTextWatcher {
-        @Override
-        public void afterTextChanged(Editable editable) {
-            if (usernameEdit.getText().length() != 0 && passwordEdit.getText().length() != 0 &&
-                    (BuildConfig.DEBUG || twoFactorEdit.getText().length() != 0 || twoFactorEdit.getVisibility() != View.VISIBLE)) {
-                loginButton.setEnabled(true);
-            } else {
-                loginButton.setEnabled(false);
-            }
-        }
-    }
-
-    private TextView.OnEditorActionListener newLoginInputActionListener() {
-        return (textView, actionId, keyEvent) -> {
-            if (loginButton.isEnabled()) {
-                if (actionId == IME_ACTION_DONE) {
-                    performLogin(textView);
-                    return true;
-                } else if ((keyEvent != null) && keyEvent.getKeyCode() == KEYCODE_ENTER) {
-                    performLogin(textView);
-                    return true;
-                }
-            }
-            return false;
-        };
-    }
-
+    @Override
     protected void onResume() {
         super.onResume();
         if (prefs.getBoolean("firstrun", true)) {
@@ -121,30 +87,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         super.onDestroy();
     }
 
-    private void performLogin(View view) {
-        Timber.d("Login to start!");
-        LoginTask task = getLoginTask();
-        task.execute();
-    }
-
-    private LoginTask getLoginTask() {
-        return new LoginTask(
-                this,
-                canonicializeUsername(usernameEdit.getText().toString()),
-                passwordEdit.getText().toString(),
-                twoFactorEdit.getText().toString()
-        );
-    }
-
-    /**
-     * Because Mediawiki is upercase-first-char-then-case-sensitive :)
-     * @param username String
-     * @return String canonicial username
-     */
-    private String canonicializeUsername(String username) {
-        return new PageTitle(username).getText();
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -153,15 +95,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * Called when Sign Up button is clicked.
-     * @param view View
-     */
-    public void signUp(View view) {
-        Intent intent = new Intent(this, SignupActivity.class);
-        startActivity(intent);
     }
 
     public void askUserForTwoFactorAuth() {
@@ -174,17 +107,12 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     }
 
     public void showUserToastAndCancelDialog(int resId) {
-        showUserToast(resId);
+        Toast.makeText(this, resId, Toast.LENGTH_LONG).show();
         progressDialog.cancel();
     }
 
-    private void showUserToast(int resId) {
-        Toast.makeText(this, resId, Toast.LENGTH_LONG).show();
-    }
-
     public void showSuccessToastAndDismissDialog() {
-        Toast successToast = Toast.makeText(this, R.string.login_success, Toast.LENGTH_SHORT);
-        successToast.show();
+        Toast.makeText(this, R.string.login_success, Toast.LENGTH_SHORT).show();
         progressDialog.dismiss();
     }
 
@@ -196,6 +124,65 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     public void startMainActivity() {
         ContributionsActivity.startYourself(this);
         finish();
+    }
+
+    /**
+     * Called when Login button is clicked.
+     *
+     * @param view View
+     */
+    private void performLogin(View view) {
+        Timber.d("Login to start!");
+        String username = canonicializeUsername(usernameEdit.getText().toString());
+        String password = passwordEdit.getText().toString();
+        String twoFactorCode = twoFactorEdit.getText().toString();
+        new LoginTask(this, username, password, twoFactorCode).execute();
+    }
+
+    /**
+     * Called when Sign Up button is clicked.
+     *
+     * @param view View
+     */
+    private void signUp(View view) {
+        startActivity(new Intent(this, SignupActivity.class));
+    }
+
+    /**
+     * Because Mediawiki is upercase-first-char-then-case-sensitive :)
+     *
+     * @param username String
+     * @return String canonicial username
+     */
+    private String canonicializeUsername(String username) {
+        return new PageTitle(username).getText();
+    }
+
+    private class LoginTextWatcher extends AbstractTextWatcher {
+        @Override
+        public void afterTextChanged(Editable editable) {
+            if (usernameEdit.getText().length() != 0 && passwordEdit.getText().length() != 0 &&
+                    (BuildConfig.DEBUG || twoFactorEdit.getText().length() != 0 || twoFactorEdit.getVisibility() != View.VISIBLE)) {
+                loginButton.setEnabled(true);
+            } else {
+                loginButton.setEnabled(false);
+            }
+        }
+    }
+
+    private TextView.OnEditorActionListener newLoginInputActionListener() {
+        return (textView, actionId, keyEvent) -> {
+            if (loginButton.isEnabled()) {
+                if (actionId == IME_ACTION_DONE) {
+                    performLogin(textView);
+                    return true;
+                } else if ((keyEvent != null) && keyEvent.getKeyCode() == KEYCODE_ENTER) {
+                    performLogin(textView);
+                    return true;
+                }
+            }
+            return false;
+        };
     }
 
 }
