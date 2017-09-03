@@ -11,7 +11,6 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -37,6 +36,7 @@ import butterknife.OnTouch;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.settings.Prefs;
+import fr.free.nrw.commons.utils.AbstractTextWatcher;
 import timber.log.Timber;
 
 public class SingleUploadFragment extends Fragment {
@@ -279,13 +279,7 @@ public class SingleUploadFragment extends Fragment {
         }
     }
 
-    private class TitleTextWatcher implements TextWatcher {
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) { }
-
-        @Override
-        public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) { }
-
+    private class TitleTextWatcher extends AbstractTextWatcher {
         @Override
         public void afterTextChanged(Editable editable) {
             if(getActivity() != null) {

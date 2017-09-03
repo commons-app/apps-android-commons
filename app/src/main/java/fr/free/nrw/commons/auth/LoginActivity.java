@@ -7,11 +7,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -19,11 +16,11 @@ import android.widget.Toast;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
-
-import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
+import fr.free.nrw.commons.utils.AbstractTextWatcher;
 import timber.log.Timber;
 
 import static android.view.KeyEvent.KEYCODE_ENTER;
@@ -70,15 +67,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         signupButton.setOnClickListener(this::signUp);
     }
 
-    private class LoginTextWatcher implements TextWatcher {
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
-        }
-
-        @Override
-        public void onTextChanged(CharSequence charSequence, int start, int count, int after) {
-        }
-
+    private class LoginTextWatcher extends AbstractTextWatcher {
         @Override
         public void afterTextChanged(Editable editable) {
             if (usernameEdit.getText().length() != 0 && passwordEdit.getText().length() != 0 &&

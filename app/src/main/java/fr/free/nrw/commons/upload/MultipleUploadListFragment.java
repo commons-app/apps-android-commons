@@ -6,9 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.Fragment;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -31,6 +29,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
+import fr.free.nrw.commons.utils.AbstractTextWatcher;
 
 public class MultipleUploadListFragment extends Fragment {
 
@@ -206,11 +205,7 @@ public class MultipleUploadListFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
-    private class TitleTextWatcher implements TextWatcher {
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int i1, int i2, int i3) {
-        }
-
+    private class TitleTextWatcher extends AbstractTextWatcher {
         @Override
         public void onTextChanged(CharSequence charSequence, int i1, int i2, int i3) {
             for(int i = 0; i < detailProvider.getTotalMediaCount(); i++) {
@@ -225,10 +220,6 @@ public class MultipleUploadListFragment extends Fragment {
                 }
             }
             detailProvider.notifyDatasetChanged();
-        }
-
-        @Override
-        public void afterTextChanged(Editable editable) {
         }
     }
 }
