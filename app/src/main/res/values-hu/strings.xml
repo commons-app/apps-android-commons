@@ -176,5 +176,5 @@
   <string name="navigation_item_info">Bevezető</string>
   <string name="no_description_found">nincs leírás</string>
   <string name="nearby_info_menu_commons_article" fuzzy="true">Commons szócikk</string>
-  <string name="nearby_info_menu_wikidata_article">Wikidata tétel</string>
+  <string name="nearby_info_menu_wikidata_article">Wikidata-elem</string>
 </resources>
