@@ -25,6 +25,7 @@ dependencies {
     compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:5.1.0@aar'){
         transitive=true
     }
+    compile 'info.debatty:java-string-similarity:0.24'
 
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     // Because RxAndroid releases are few and far between, it is recommended you also
