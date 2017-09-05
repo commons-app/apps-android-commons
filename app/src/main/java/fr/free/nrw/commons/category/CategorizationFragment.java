@@ -201,7 +201,7 @@ public class CategorizationFragment extends Fragment {
                 )
                 .filter(categoryItem -> !containsYear(categoryItem.getName()))
                 .distinct()
-                .sorted(sortByMatches(filter))
+                .sorted(sortBySimilarity(filter))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         s -> categoriesAdapter.add(s),
@@ -225,7 +225,7 @@ public class CategorizationFragment extends Fragment {
                 );
     }
 
-    private Comparator<CategoryItem> sortByMatches(final String filter) {
+    private Comparator<CategoryItem> sortBySimilarity(final String filter) {
         Comparator<String> stringSimilarityComparator = StringSortingUtils.sortBySimilarity(filter);
         return (firstItem, secondItem) -> stringSimilarityComparator.compare(firstItem.getName(), secondItem.getName());
     }
