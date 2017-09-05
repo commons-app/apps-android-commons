@@ -9,10 +9,19 @@ public class StringSortingUtils {
         //no-op
     }
 
+    /**
+     * Returns Comparator for sorting strings by its similarity with Levenshtein
+     * algorithm. By using this Comparator we get results from the highest to
+     * the lowest match.
+     *
+     * @param filter pattern to compare similarity
+     * @return Comparator with string similarity
+     */
+
     public static Comparator<String> sortBySimilarity(final String filter) {
         return (firstItem, secondItem) -> {
-            double firstItemSimilarity = StringSortingUtils.calculateSimilarity(firstItem, filter);
-            double secondItemSimilarity = StringSortingUtils.calculateSimilarity(secondItem, filter);
+            double firstItemSimilarity = calculateSimilarity(firstItem, filter);
+            double secondItemSimilarity = calculateSimilarity(secondItem, filter);
             return (int) Math.signum(secondItemSimilarity - firstItemSimilarity);
         };
     }

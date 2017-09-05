@@ -227,7 +227,8 @@ public class CategorizationFragment extends Fragment {
 
     private Comparator<CategoryItem> sortBySimilarity(final String filter) {
         Comparator<String> stringSimilarityComparator = StringSortingUtils.sortBySimilarity(filter);
-        return (firstItem, secondItem) -> stringSimilarityComparator.compare(firstItem.getName(), secondItem.getName());
+        return (firstItem, secondItem) -> stringSimilarityComparator
+                .compare(firstItem.getName(), secondItem.getName());
     }
 
     private List<String> getStringList(List<CategoryItem> input) {
