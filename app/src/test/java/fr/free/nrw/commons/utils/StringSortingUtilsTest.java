@@ -13,7 +13,7 @@ public class StringSortingUtilsTest {
         List<String> actualList = Arrays.asList("1234567", "4567", "12345", "123", "1234");
         List<String> expectedList = Arrays.asList("1234", "12345", "123", "1234567", "4567");
 
-        Collections.sort(actualList, StringSortingUtils.sortBySimilarity("tes"));
+        Collections.sort(actualList, StringSortingUtils.sortBySimilarity("1234"));
         Assert.assertEquals(expectedList, actualList);
     }
 
