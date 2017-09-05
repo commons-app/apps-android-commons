@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.utils;
 
-import info.debatty.java.stringsimilarity.Levenshtein;
 import java.util.Comparator;
+import info.debatty.java.stringsimilarity.Levenshtein;
 
 public class StringSortingUtils {
 
