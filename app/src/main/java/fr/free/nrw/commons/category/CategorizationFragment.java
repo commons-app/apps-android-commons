@@ -108,7 +108,7 @@ public class CategorizationFragment extends Fragment {
 
         RxTextView.textChanges(categoriesFilter)
                 .takeUntil(RxView.detaches(categoriesFilter))
-                .debounce(300, TimeUnit.MILLISECONDS)
+                .debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(filter -> updateCategoryList(filter.toString()));
         return rootView;
