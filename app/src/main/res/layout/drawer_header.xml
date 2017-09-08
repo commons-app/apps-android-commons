@@ -5,4 +5,4 @@
     android:layout_height="172dp"
     android:background="@android:color/darker_gray"
     android:padding="16dp"
-    android:src="@drawable/commons_logo_large"/>
+    android:src="@drawable/commons_logo_large_alt"/>

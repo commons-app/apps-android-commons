@@ -197,8 +197,8 @@ public class UploadService extends HandlerService<Contribution> {
 
         Timber.d("Before execution!");
         curProgressNotification = new NotificationCompat.Builder(this).setAutoCancel(true)
-                .setSmallIcon(R.drawable.ic_launcher)
-                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher))
+                .setSmallIcon(R.drawable.ic_launcher_alt)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher_alt))
                 .setAutoCancel(true)
                 .setContentTitle(getString(R.string.upload_progress_notification_title_start, contribution.getDisplayTitle()))
                 .setContentText(getResources().getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload))
@@ -288,7 +288,7 @@ public class UploadService extends HandlerService<Contribution> {
     @SuppressLint("StringFormatInvalid")
     private void showFailedNotification(Contribution contribution) {
         Notification failureNotification = new NotificationCompat.Builder(this).setAutoCancel(true)
-                .setSmallIcon(R.drawable.ic_launcher)
+                .setSmallIcon(R.drawable.ic_launcher_alt)
                 .setAutoCancel(true)
                 .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, ContributionsActivity.class), 0))
                 .setTicker(getString(R.string.upload_failed_notification_title, contribution.getDisplayTitle()))
