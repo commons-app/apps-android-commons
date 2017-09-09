@@ -13,7 +13,6 @@ import android.text.TextUtils;
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjection;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.data.Category;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import timber.log.Timber;
@@ -39,7 +38,6 @@ public class CategoryContentProvider extends ContentProvider {
         return Uri.parse(BASE_URI.toString() + "/" + id);
     }
 
-    @Inject CommonsApplication application;
     @Inject DBOpenHelper dbOpenHelper;
 
     @Override

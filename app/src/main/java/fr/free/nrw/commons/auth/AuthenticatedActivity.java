@@ -7,8 +7,6 @@ import android.os.Bundle;
 
 import javax.inject.Inject;
 
-import dagger.android.AndroidInjection;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -17,8 +15,8 @@ import timber.log.Timber;
 
 public abstract class AuthenticatedActivity extends NavigationBaseActivity {
 
-    @Inject CommonsApplication app;
     @Inject AccountUtil accountUtil;
+    @Inject SessionManager sessionManager;
 
     private String authCookie;
     
@@ -59,7 +57,7 @@ public abstract class AuthenticatedActivity extends NavigationBaseActivity {
             return;
         }
         AccountManager accountManager = AccountManager.get(this);
-        Account curAccount = app.getCurrentAccount();
+        Account curAccount = sessionManager.getCurrentAccount();
         if(curAccount == null) {
             addAccount(accountManager);
         } else {

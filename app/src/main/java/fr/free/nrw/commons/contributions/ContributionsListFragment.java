@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -21,12 +20,9 @@ import android.widget.GridView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.nearby.NearbyActivity;
 import timber.log.Timber;
@@ -43,8 +39,6 @@ public class ContributionsListFragment extends DaggerFragment {
     @BindView(R.id.contributionsList) GridView contributionsList;
     @BindView(R.id.waitingMessage) TextView waitingMessage;
     @BindView(R.id.emptyMessage) TextView emptyMessage;
-
-    @Inject CommonsApplication application;
 
     private ContributionController controller;
 

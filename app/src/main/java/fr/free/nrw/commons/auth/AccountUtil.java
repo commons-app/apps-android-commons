@@ -4,24 +4,21 @@ import android.accounts.Account;
 import android.accounts.AccountAuthenticatorResponse;
 import android.accounts.AccountManager;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import javax.inject.Inject;
-
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import timber.log.Timber;
 
 public class AccountUtil {
 
-    private final CommonsApplication application;
+    private Context context;
 
-    @Inject
-    public AccountUtil(CommonsApplication application) {
-        this.application = application;
+    public AccountUtil(Context context) {
+        this.context = context;
     }
 
     public void createAccount(@Nullable AccountAuthenticatorResponse response,
@@ -60,7 +57,7 @@ public class AccountUtil {
     }
 
     private AccountManager accountManager() {
-        return AccountManager.get(application);
+        return AccountManager.get(context);
     }
 
 }

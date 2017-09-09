@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.mwapi;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -18,17 +19,17 @@ import fr.free.nrw.commons.settings.Prefs;
 
 @SuppressWarnings("WeakerAccess")
 public class LogBuilder {
-    private final CommonsApplication application;
+    private final Context context;
     private final MediaWikiApi mwApi;
     private final JSONObject data;
     private final long rev;
     private final String schema;
 
-    LogBuilder(String schema, long revision, CommonsApplication application, MediaWikiApi mwApi) {
+    LogBuilder(String schema, long revision, Context context, MediaWikiApi mwApi) {
         this.data = new JSONObject();
         this.schema = schema;
         this.rev = revision;
-        this.application = application;
+        this.context = context;
         this.mwApi = mwApi;
     }
 
@@ -61,7 +62,7 @@ public class LogBuilder {
     // Use *only* for tracking the user preference change for EventLogging
     // Attempting to use anywhere else will cause kitten explosions
     public void log(boolean force) {
-        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(application);
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
         if (!settings.getBoolean(Prefs.TRACKING_ENABLED, true) && !force) {
             return; // User has disabled tracking
         }

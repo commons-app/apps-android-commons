@@ -19,11 +19,9 @@ import javax.inject.Inject;
 
 import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.BuildConfig;
-import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
-
-import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
@@ -36,9 +34,9 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
     public static final String PARAM_USERNAME = "fr.free.nrw.commons.login.username";
 
-    @Inject CommonsApplication application;
     @Inject MediaWikiApi mwApi;
     @Inject AccountUtil accountUtil;
+    @Inject SessionManager sessionManager;
 
     private SharedPreferences prefs = null;
 
@@ -114,7 +112,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             WelcomeActivity.startYourself(this);
             prefs.edit().putBoolean("firstrun", false).apply();
         }
-        if (application.getCurrentAccount() != null) {
+        if (sessionManager.getCurrentAccount() != null) {
             startMainActivity();
         }
     }
@@ -147,7 +145,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 canonicializeUsername(usernameEdit.getText().toString()),
                 passwordEdit.getText().toString(),
                 twoFactorEdit.getText().toString(),
-                accountUtil, application, mwApi
+                accountUtil, this, mwApi
         );
     }
 

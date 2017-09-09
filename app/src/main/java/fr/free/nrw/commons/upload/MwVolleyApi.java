@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload;
 
+import android.content.Context;
 import android.net.Uri;
 
 import com.android.volley.Cache;
@@ -20,7 +21,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import fr.free.nrw.commons.CommonsApplication;
 import timber.log.Timber;
 
 /**
@@ -37,11 +37,11 @@ public class MwVolleyApi {
     private static List<String> categoryList;
 
     private static final String MWURL = "https://commons.wikimedia.org/";
-    private final CommonsApplication application;
+    private final Context context;
 
-    public MwVolleyApi(CommonsApplication application) {
+    public MwVolleyApi(Context context) {
+        this.context = context;
         categorySet = new HashSet<>();
-        this.application = application;
     }
 
     public static List<String> getGpsCat() {
@@ -95,7 +95,7 @@ public class MwVolleyApi {
 
     private synchronized RequestQueue getQueue() {
         if (REQUEST_QUEUE == null) {
-            REQUEST_QUEUE = Volley.newRequestQueue(application);
+            REQUEST_QUEUE = Volley.newRequestQueue(context);
         }
         return REQUEST_QUEUE;
     }

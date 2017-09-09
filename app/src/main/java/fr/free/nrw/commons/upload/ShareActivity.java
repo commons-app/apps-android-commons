@@ -39,6 +39,7 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.caching.CacheController;
 import fr.free.nrw.commons.category.CategorizationFragment;
 import fr.free.nrw.commons.category.OnCategoriesSaveHandler;
@@ -69,9 +70,9 @@ public  class       ShareActivity
     private static final int REQUEST_PERM_ON_SUBMIT_STORAGE = 4;
     private CategorizationFragment categorizationFragment;
 
-    @Inject CommonsApplication application;
     @Inject MediaWikiApi mwApi;
     @Inject CacheController cacheController;
+    @Inject SessionManager sessionManager;
 
     private String source;
     private String mimeType;
@@ -132,11 +133,7 @@ public  class       ShareActivity
     private void uploadBegins() {
         getFileMetadata(locationPermitted);
 
-        Toast startingToast = Toast.makeText(
-                application,
-                R.string.uploading_started,
-                Toast.LENGTH_LONG
-        );
+        Toast startingToast = Toast.makeText(this, R.string.uploading_started, Toast.LENGTH_LONG);
         startingToast.show();
 
         if (!cacheFound) {
@@ -173,10 +170,10 @@ public  class       ShareActivity
 
         // FIXME: Make sure that the content provider is up
         // This is the wrong place for it, but bleh - better than not having it turned on by default for people who don't go throughl ogin
-        ContentResolver.setSyncAutomatically(application.getCurrentAccount(), ModificationsContentProvider.AUTHORITY, true); // Enable sync by default!
+        ContentResolver.setSyncAutomatically(sessionManager.getCurrentAccount(), ModificationsContentProvider.AUTHORITY, true); // Enable sync by default!
 
-        EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT, application, mwApi)
-                .param("username", application.getCurrentAccount().name)
+        EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT, getApplicationContext(), mwApi)
+                .param("username", sessionManager.getCurrentAccount().name)
                 .param("categories-count", categories.size())
                 .param("files-count", 1)
                 .param("source", contribution.getSource())
@@ -197,16 +194,16 @@ public  class       ShareActivity
     public void onBackPressed() {
         super.onBackPressed();
         if(categorizationFragment != null && categorizationFragment.isVisible()) {
-            EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT, application, mwApi)
-                    .param("username", application.getCurrentAccount().name)
+            EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT, getApplicationContext(), mwApi)
+                    .param("username", sessionManager.getCurrentAccount().name)
                     .param("categories-count", categorizationFragment.getCurrentSelectedCount())
                     .param("files-count", 1)
                     .param("source", contribution.getSource())
                     .param("result", "cancelled")
                     .log();
         } else {
-            EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT, application, mwApi)
-                    .param("username", application.getCurrentAccount().name)
+            EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT, getApplicationContext(), mwApi)
+                    .param("username", sessionManager.getCurrentAccount().name)
                     .param("source", getIntent().getStringExtra(UploadService.EXTRA_SOURCE))
                     .param("multiple", true)
                     .param("result", "cancelled")
@@ -229,7 +226,7 @@ public  class       ShareActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        uploadController = new UploadController(application);
+        uploadController = new UploadController(sessionManager, this);
         setContentView(R.layout.activity_share);
         ButterKnife.bind(this);
         initBack();
@@ -454,12 +451,12 @@ public  class       ShareActivity
                         = getContentResolver().openFileDescriptor(mediaUri, "r");
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     if (descriptor != null) {
-                        imageObj = new GPSExtractor(descriptor.getFileDescriptor(), application);
+                        imageObj = new GPSExtractor(descriptor.getFileDescriptor(), this);
                     }
                 } else {
                     String filePath = getPathOfMediaOrCopy();
                     if (filePath != null) {
-                        imageObj = new GPSExtractor(filePath, application);
+                        imageObj = new GPSExtractor(filePath, this);
                     }
                 }
             }
@@ -489,7 +486,7 @@ public  class       ShareActivity
                 cacheController.setQtPoint(decLongitude, decLatitude);
             }
 
-            MwVolleyApi apiCall = new MwVolleyApi(application);
+            MwVolleyApi apiCall = new MwVolleyApi(this);
 
             List<String> displayCatList = cacheController.findCategory();
             boolean catListEmpty = displayCatList.isEmpty();

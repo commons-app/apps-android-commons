@@ -28,6 +28,7 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
@@ -47,8 +48,8 @@ public class UploadService extends HandlerService<Contribution> {
     public static final String EXTRA_SOURCE = EXTRA_PREFIX + ".source";
     public static final String EXTRA_CAMPAIGN = EXTRA_PREFIX + ".campaign";
 
-    @Inject CommonsApplication application;
     @Inject MediaWikiApi mwApi;
+    @Inject SessionManager sessionManager;
 
     private NotificationManager notificationManager;
     private ContentProviderClient contributionsProviderClient;
@@ -221,7 +222,7 @@ public class UploadService extends HandlerService<Contribution> {
             }
             if (!mwApi.validateLogin()) {
                 // Need to revalidate!
-                if (application.revalidateAuthToken()) {
+                if (sessionManager.revalidateAuthToken()) {
                     Timber.d("Successfully revalidated token!");
                 } else {
                     Timber.d("Unable to revalidate :(");
@@ -246,8 +247,8 @@ public class UploadService extends HandlerService<Contribution> {
             String resultStatus = uploadResult.getResultStatus();
             if (!resultStatus.equals("Success")) {
                 showFailedNotification(contribution);
-                EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT, application, mwApi)
-                        .param("username", application.getCurrentAccount().name)
+                EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT, getApplicationContext(), mwApi)
+                        .param("username", sessionManager.getCurrentAccount().name)
                         .param("source", contribution.getSource())
                         .param("multiple", contribution.getMultiple())
                         .param("result", uploadResult.getErrorCode())
@@ -260,8 +261,8 @@ public class UploadService extends HandlerService<Contribution> {
                 contribution.setDateUploaded(uploadResult.getDateUploaded());
                 contribution.save();
 
-                EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT, application, mwApi)
-                        .param("username", application.getCurrentAccount().name)
+                EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT, getApplicationContext(), mwApi)
+                        .param("username", sessionManager.getCurrentAccount().name)
                         .param("source", contribution.getSource()) //FIXME
                         .param("filename", contribution.getFilename())
                         .param("multiple", contribution.getMultiple())
@@ -278,7 +279,7 @@ public class UploadService extends HandlerService<Contribution> {
             toUpload--;
             if (toUpload == 0) {
                 // Sync modifications right after all uplaods are processed
-                ContentResolver.requestSync(application.getCurrentAccount(), ModificationsContentProvider.AUTHORITY, new Bundle());
+                ContentResolver.requestSync(sessionManager.getCurrentAccount(), ModificationsContentProvider.AUTHORITY, new Bundle());
                 stopForeground(true);
             }
         }

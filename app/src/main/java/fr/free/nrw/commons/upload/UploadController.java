@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload;
 
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
@@ -21,20 +22,23 @@ import java.util.concurrent.Executors;
 
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.settings.Prefs;
 import timber.log.Timber;
 
 public class UploadController {
     private UploadService uploadService;
-    private final CommonsApplication application;
+    private SessionManager sessionManager;
+    private Context context;
 
     public interface ContributionUploadProgress {
         void onUploadStarted(Contribution contribution);
     }
 
-    public UploadController(CommonsApplication application) {
-        this.application = application;
+    public UploadController(SessionManager sessionManager, Context context) {
+        this.sessionManager = sessionManager;
+        this.context = context;
     }
 
     private boolean isUploadServiceConnected;
@@ -53,15 +57,15 @@ public class UploadController {
     };
 
     public void prepareService() {
-        Intent uploadServiceIntent = new Intent(application, UploadService.class);
+        Intent uploadServiceIntent = new Intent(context, UploadService.class);
         uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
-        application.startService(uploadServiceIntent);
-        application.bindService(uploadServiceIntent, uploadServiceConnection, Context.BIND_AUTO_CREATE);
+        context.startService(uploadServiceIntent);
+        context.bindService(uploadServiceIntent, uploadServiceConnection, Context.BIND_AUTO_CREATE);
     }
 
     public void cleanup() {
         if(isUploadServiceConnected) {
-            application.unbindService(uploadServiceConnection);
+            context.unbindService(uploadServiceConnection);
         }
     }
 
@@ -69,7 +73,9 @@ public class UploadController {
         Contribution contribution;
 
         //TODO: Modify this to include coords
-        contribution = new Contribution(mediaUri, null, title, description, -1, null, null, application.getCurrentAccount().name, CommonsApplication.DEFAULT_EDIT_SUMMARY, decimalCoords);
+        contribution = new Contribution(mediaUri, null, title, description, -1,
+                null, null, sessionManager.getCurrentAccount().name,
+                CommonsApplication.DEFAULT_EDIT_SUMMARY, decimalCoords);
 
         contribution.setTag("mimeType", mimeType);
         contribution.setSource(source);
@@ -79,12 +85,11 @@ public class UploadController {
     }
 
     public void startUpload(final Contribution contribution, final ContributionUploadProgress onComplete) {
-
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(application);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
 
         //Set creator, desc, and license
         if(TextUtils.isEmpty(contribution.getCreator())) {
-            contribution.setCreator(application.getCurrentAccount().name);
+            contribution.setCreator(sessionManager.getCurrentAccount().name);
         }
 
         if(contribution.getDescription() == null) {
@@ -103,14 +108,15 @@ public class UploadController {
             @Override
             protected Contribution doInBackground(Void... voids /* stare into you */) {
                 long length;
+                ContentResolver contentResolver = context.getContentResolver();
                 try {
                     if(contribution.getDataLength() <= 0) {
-                        length = application.getContentResolver()
+                        length = contentResolver
                                 .openAssetFileDescriptor(contribution.getLocalUri(), "r")
                                 .getLength();
                         if(length == -1) {
                             // Let us find out the long way!
-                            length = countBytes(application.getContentResolver()
+                            length = countBytes(contentResolver
                                     .openInputStream(contribution.getLocalUri()));
                         }
                         contribution.setDataLength(length);
@@ -127,7 +133,7 @@ public class UploadController {
                 Boolean imagePrefix = false;
 
                 if (mimeType == null || TextUtils.isEmpty(mimeType) || mimeType.endsWith("*")) {
-                    mimeType = application.getContentResolver().getType(contribution.getLocalUri());
+                    mimeType = contentResolver.getType(contribution.getLocalUri());
                 }
 
                 if (mimeType != null) {
@@ -138,7 +144,7 @@ public class UploadController {
 
                 if (imagePrefix && contribution.getDateCreated() == null) {
                     Timber.d("local uri   " + contribution.getLocalUri());
-                    Cursor cursor = application.getContentResolver().query(contribution.getLocalUri(),
+                    Cursor cursor = contentResolver.query(contribution.getLocalUri(),
                             new String[]{MediaStore.Images.ImageColumns.DATE_TAKEN}, null, null, null);
                     if (cursor != null && cursor.getCount() != 0 && cursor.getColumnCount() != 0) {
                         cursor.moveToFirst();

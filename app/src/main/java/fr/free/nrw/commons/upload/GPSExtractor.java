@@ -16,7 +16,6 @@ import android.support.annotation.RequiresApi;
 import java.io.FileDescriptor;
 import java.io.IOException;
 
-import fr.free.nrw.commons.CommonsApplication;
 import timber.log.Timber;
 
 /**
@@ -26,7 +25,7 @@ import timber.log.Timber;
  */
 public class GPSExtractor {
 
-    private final CommonsApplication application;
+    private final Context context;
     private ExifInterface exif;
     private double decLatitude;
     private double decLongitude;
@@ -39,30 +38,30 @@ public class GPSExtractor {
     /**
      * Construct from the file descriptor of the image (only for API 24 or newer).
      * @param fileDescriptor the file descriptor of the image
-     * @param application the application
+     * @param context the context
      */
     @RequiresApi(24)
-    public GPSExtractor(@NonNull FileDescriptor fileDescriptor, CommonsApplication application) {
+    public GPSExtractor(@NonNull FileDescriptor fileDescriptor, Context context) {
+        this.context = context;
         try {
             exif = new ExifInterface(fileDescriptor);
         } catch (IOException | IllegalArgumentException e) {
             Timber.w(e);
         }
-        this.application = application;
     }
 
     /**
      * Construct from the file path of the image.
      * @param path file path of the image
-     * @param application the application
+     * @param context the context
      */
-    public GPSExtractor(@NonNull String path, CommonsApplication application) {
+    public GPSExtractor(@NonNull String path, Context context) {
         try {
             exif = new ExifInterface(path);
         } catch (IOException | IllegalArgumentException e) {
             Timber.w(e);
         }
-        this.application = application;
+        this.context = context;
     }
 
     /**
@@ -71,7 +70,7 @@ public class GPSExtractor {
      */
     private boolean gpsPreferenceEnabled() {
         SharedPreferences sharedPref
-                = PreferenceManager.getDefaultSharedPreferences(application);
+                = PreferenceManager.getDefaultSharedPreferences(context);
         boolean gpsPref = sharedPref.getBoolean("allowGps", false);
         Timber.d("Gps pref set to: %b", gpsPref);
         return gpsPref;
@@ -81,8 +80,7 @@ public class GPSExtractor {
      * Registers a LocationManager to listen for current location
      */
     protected void registerLocationManager() {
-        locationManager = (LocationManager) application
-                .getSystemService(Context.LOCATION_SERVICE);
+        locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
         String provider = locationManager.getBestProvider(criteria, true);
         myLocationListener = new MyLocationListener();

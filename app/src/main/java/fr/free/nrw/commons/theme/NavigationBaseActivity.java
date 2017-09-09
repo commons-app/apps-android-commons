@@ -120,18 +120,17 @@ public class NavigationBaseActivity extends BaseActivity
                 new AlertDialog.Builder(this)
                         .setMessage(R.string.logout_verification)
                         .setCancelable(false)
-                        .setPositiveButton(R.string.yes, (dialog, which) -> {
-                            ((CommonsApplication) getApplicationContext())
-                                    .clearApplicationData(NavigationBaseActivity.this, () -> {
-                                        Timber.d("Logout complete callback received.");
-                                        Intent nearbyIntent = new Intent(
-                                                NavigationBaseActivity.this, LoginActivity.class);
-                                        nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                        nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                        startActivity(nearbyIntent);
-                                        finish();
-                                    });
-                        })
+                        .setPositiveButton(R.string.yes, (dialog, which) ->
+                                ((CommonsApplication) getApplicationContext())
+                                        .clearApplicationData(NavigationBaseActivity.this, () -> {
+                                            Timber.d("Logout complete callback received.");
+                                            Intent nearbyIntent = new Intent(
+                                                    NavigationBaseActivity.this, LoginActivity.class);
+                                            nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                            nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            startActivity(nearbyIntent);
+                                            finish();
+                                        }))
                         .setNegativeButton(R.string.no, (dialog, which) -> dialog.cancel())
                         .show();
                 return true;

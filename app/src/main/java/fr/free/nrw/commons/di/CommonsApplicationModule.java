@@ -7,6 +7,8 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.auth.AccountUtil;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.caching.CacheController;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
@@ -22,8 +24,14 @@ public class CommonsApplicationModule {
     }
 
     @Provides
-    public CommonsApplication providesCommonsApplication() {
-        return application;
+    public AccountUtil providesAccountUtil() {
+        return new AccountUtil(application);
+    }
+
+    @Provides
+    @Singleton
+    public SessionManager providesSessionManager(AccountUtil accountUtil, MediaWikiApi mediaWikiApi) {
+        return new SessionManager(application, accountUtil, mediaWikiApi);
     }
 
     @Provides
@@ -40,7 +48,7 @@ public class CommonsApplicationModule {
 
     @Provides
     @Singleton
-    public DBOpenHelper provideDBOpenHelper(CommonsApplication application) {
+    public DBOpenHelper provideDBOpenHelper() {
         return new DBOpenHelper(application);
     }
 

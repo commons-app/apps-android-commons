@@ -1,11 +1,5 @@
 package fr.free.nrw.commons;
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
-import android.accounts.AccountManagerCallback;
-import android.accounts.AccountManagerFuture;
-import android.accounts.AuthenticatorException;
-import android.accounts.OperationCanceledException;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
@@ -20,13 +14,12 @@ import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
 
 import java.io.File;
-import java.io.IOException;
 
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjector;
 import dagger.android.DaggerApplication;
-import fr.free.nrw.commons.auth.AccountUtil;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.data.Category;
 import fr.free.nrw.commons.data.DBOpenHelper;
@@ -37,6 +30,8 @@ import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.FileUtils;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 // TODO: Use ProGuard to rip out reporting when publishing
@@ -51,10 +46,9 @@ import timber.log.Timber;
 public class CommonsApplication extends DaggerApplication {
 
     @Inject MediaWikiApi mediaWikiApi;
-    @Inject AccountUtil accountUtil;
+    @Inject SessionManager sessionManager;
     @Inject DBOpenHelper dbOpenHelper;
 
-    private Account currentAccount = null; // Unlike a savings account...
     public static final String API_URL = "https://commons.wikimedia.org/w/api.php";
     public static final String IMAGE_URL_BASE = "https://upload.wikimedia.org/wikipedia/commons";
     public static final String HOME_URL = "https://commons.wikimedia.org/wiki/";
@@ -113,39 +107,6 @@ public class CommonsApplication extends DaggerApplication {
         return component;
     }
 
-    /**
-     * @return Account|null
-     */
-    public Account getCurrentAccount() {
-        if (currentAccount == null) {
-            AccountManager accountManager = AccountManager.get(this);
-            Account[] allAccounts = accountManager.getAccountsByType(accountUtil.accountType());
-            if (allAccounts.length != 0) {
-                currentAccount = allAccounts[0];
-            }
-        }
-        return currentAccount;
-    }
-
-    public Boolean revalidateAuthToken() {
-        AccountManager accountManager = AccountManager.get(this);
-        Account curAccount = getCurrentAccount();
-
-        if (curAccount == null) {
-            return false; // This should never happen
-        }
-
-        accountManager.invalidateAuthToken(accountUtil.accountType(), mediaWikiApi.getAuthCookie());
-        try {
-            String authCookie = accountManager.blockingGetAuthToken(curAccount, "", false);
-            mediaWikiApi.setAuthCookie(authCookie);
-            return true;
-        } catch (OperationCanceledException | NullPointerException | IOException | AuthenticatorException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
     public void clearApplicationData(Context context, NavigationBaseActivity.LogoutListener logoutListener) {
         File cacheDirectory = context.getCacheDir();
         File applicationDirectory = new File(cacheDirectory.getParent());
@@ -158,36 +119,10 @@ public class CommonsApplication extends DaggerApplication {
             }
         }
 
-        AccountManager accountManager = AccountManager.get(this);
-        Account[] allAccounts = accountManager.getAccountsByType(accountUtil.accountType());
-
-        AccountManagerCallback<Boolean> amCallback = new AccountManagerCallback<Boolean>() {
-
-            private int index = 0;
-
-            void setIndex(int index) {
-                this.index = index;
-            }
-
-            int getIndex() {
-                return index;
-            }
-
-            @Override
-            public void run(AccountManagerFuture<Boolean> accountManagerFuture) {
-                setIndex(getIndex() + 1);
-
-                try {
-                    if (accountManagerFuture != null) {
-                        if (accountManagerFuture.getResult()) {
-                            Timber.d("Account removed successfully.");
-                        }
-                    }
-                } catch (OperationCanceledException | IOException | AuthenticatorException e) {
-                    e.printStackTrace();
-                }
-
-                if (getIndex() == allAccounts.length) {
+        sessionManager.clearAllAccounts()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(() -> {
                     Timber.d("All accounts have been removed");
                     //TODO: fix preference manager
                     PreferenceManager.getDefaultSharedPreferences(CommonsApplication.this).edit().clear().commit();
@@ -197,22 +132,15 @@ public class CommonsApplication extends DaggerApplication {
                     context.getSharedPreferences("prefs", Context.MODE_PRIVATE).edit().clear().commit();
                     preferences.edit().putBoolean("firstrun", false).apply();
                     updateAllDatabases();
-                    currentAccount = null;
 
                     logoutListener.onLogoutComplete();
-                }
-            }
-        };
-
-        for (Account account : allAccounts) {
-            accountManager.removeAccount(account, amCallback, null);
-        }
+                });
     }
 
     /**
      * Deletes all tables and re-creates them.
      */
-    public void updateAllDatabases() {
+    private void updateAllDatabases() {
         dbOpenHelper.getReadableDatabase().close();
         SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
 

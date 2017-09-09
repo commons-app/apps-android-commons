@@ -18,7 +18,6 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
 public class MediaWikiImageView extends SimpleDraweeView {
-    @Inject CommonsApplication application;
     @Inject MediaWikiApi mwApi;
     @Inject LruCache<String, String> thumbnailUrlCache;
 

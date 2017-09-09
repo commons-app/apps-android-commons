@@ -33,6 +33,7 @@ import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.mwapi.EventLog;
@@ -52,8 +53,8 @@ public class MediaDetailPagerFragment extends DaggerFragment implements ViewPage
         void unregisterDataSetObserver(DataSetObserver observer);
     }
 
-    @Inject CommonsApplication application;
     @Inject MediaWikiApi mwApi;
+    @Inject SessionManager sessionManager;
 
     private ViewPager pager;
     private Boolean editable;
@@ -85,7 +86,7 @@ public class MediaDetailPagerFragment extends DaggerFragment implements ViewPage
 
         @Override
         public int getCount() {
-            return ((MediaDetailProvider)getActivity()).getTotalMediaCount();
+            return ((MediaDetailProvider) getActivity()).getTotalMediaCount();
         }
     }
 
@@ -131,13 +132,13 @@ public class MediaDetailPagerFragment extends DaggerFragment implements ViewPage
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        MediaDetailProvider provider = (MediaDetailProvider)getActivity();
+        MediaDetailProvider provider = (MediaDetailProvider) getActivity();
         Media m = provider.getMediaAtPosition(pager.getCurrentItem());
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.menu_share_current_image:
                 // Share - this is just logs it, intent set in onCreateOptionsMenu, around line 252
-                EventLog.schema(CommonsApplication.EVENT_SHARE_ATTEMPT, application, mwApi)
-                        .param("username", application.getCurrentAccount().name)
+                EventLog.schema(CommonsApplication.EVENT_SHARE_ATTEMPT, getContext().getApplicationContext(), mwApi)
+                        .param("username", sessionManager.getCurrentAccount().name)
                         .param("filename", m.getFilename())
                         .log();
                 return true;
@@ -154,12 +155,12 @@ public class MediaDetailPagerFragment extends DaggerFragment implements ViewPage
                 return true;
             case R.id.menu_retry_current_image:
                 // Retry
-                ((ContributionsActivity)getActivity()).retryUpload(pager.getCurrentItem());
+                ((ContributionsActivity) getActivity()).retryUpload(pager.getCurrentItem());
                 getActivity().getSupportFragmentManager().popBackStack();
                 return true;
             case R.id.menu_cancel_current_image:
                 // todo: delete image
-                ((ContributionsActivity)getActivity()).deleteUpload(pager.getCurrentItem());
+                ((ContributionsActivity) getActivity()).deleteUpload(pager.getCurrentItem());
                 getActivity().getSupportFragmentManager().popBackStack();
                 return true;
             default:
@@ -175,7 +176,7 @@ public class MediaDetailPagerFragment extends DaggerFragment implements ViewPage
      */
     private void downloadMedia(Media m) {
         String imageUrl = m.getImageUrl(),
-               fileName = m.getFilename();
+                fileName = m.getFilename();
         // Strip 'File:' from beginning of filename, we really shouldn't store it
         fileName = fileName.replaceFirst("^File:", "");
         Uri imageUri = Uri.parse(imageUrl);
@@ -190,13 +191,16 @@ public class MediaDetailPagerFragment extends DaggerFragment implements ViewPage
         req.allowScanningByMediaScanner();
         req.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !(ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
+                !(ContextCompat.checkSelfPermission(getContext(),
+                        Manifest.permission.READ_EXTERNAL_STORAGE) ==
+                        PackageManager.PERMISSION_GRANTED)) {
             Snackbar.make(getView(), R.string.storage_permission_rationale,
                     Snackbar.LENGTH_INDEFINITE)
                     .setAction(R.string.ok, view -> ActivityCompat.requestPermissions(getActivity(),
                             new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1)).show();
         } else {
-            final DownloadManager manager = (DownloadManager)getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
+            final DownloadManager manager = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
             manager.enqueue(req);
         }
     }
@@ -207,7 +211,7 @@ public class MediaDetailPagerFragment extends DaggerFragment implements ViewPage
             menu.clear(); // see http://stackoverflow.com/a/8495697/17865
             inflater.inflate(R.menu.fragment_image_detail, menu);
             if (pager != null) {
-                MediaDetailProvider provider = (MediaDetailProvider)getActivity();
+                MediaDetailProvider provider = (MediaDetailProvider) getActivity();
                 Media m = provider.getMediaAtPosition(pager.getCurrentItem());
                 if (m != null) {
                     // Enable default set of actions, then re-enable different set of actions only if it is a failed contrib
@@ -230,8 +234,8 @@ public class MediaDetailPagerFragment extends DaggerFragment implements ViewPage
                     }
 
                     if (m instanceof Contribution) {
-                        Contribution c = (Contribution)m;
-                        switch(c.getState()) {
+                        Contribution c = (Contribution) m;
+                        switch (c.getState()) {
                             case Contribution.STATE_FAILED:
                                 menu.findItem(R.id.menu_retry_current_image).setEnabled(true).setVisible(true);
                                 menu.findItem(R.id.menu_cancel_current_image).setEnabled(true).setVisible(true);
