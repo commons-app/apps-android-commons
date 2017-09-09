@@ -185,7 +185,4 @@
   <string name="no_description_found">keng Beschreiwung fonnt</string>
   <string name="nearby_info_menu_commons_article">Commons-Fichierssäit</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata-Element</string>
-  <string name="feedback_popup_title">Feedback gewënscht</string>
-  <string name="feedback_popup_decline">Nee, merci</string>
-  <string name="feedback_popup_accept">Sécher, bréngt mech dohin!</string>
 </resources>

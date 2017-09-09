@@ -168,5 +168,4 @@
   <string name="navigation_item_logout">Kirjaudu ulos</string>
   <string name="nearby_info_menu_commons_article">Commons-tiedostosivu</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata-kohde</string>
-  <string name="feedback_popup_decline">Ei kiitos</string>
 </resources>

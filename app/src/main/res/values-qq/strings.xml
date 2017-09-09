@@ -103,7 +103,8 @@
   <string name="welcome_image_llamas">An animal. See [[:d:Q42569|Wikidata item Q42569]] for a list of possible translations.</string>
   <string name="welcome_image_rainbow_bridge">A bridge in Japan. See [[:d:Q1046736|Wikidata item Q1046736]] for a list of possible translations.</string>
   <string name="welcome_image_tulip">A flower. See [[:d:Q93201|Wikidata item Q93201]] for a list of possible translations.</string>
-  <string name="welcome_image_welcome_wikipedia">Welcome Wikipedia</string>
+  <string name="welcome_image_welcome_wikipedia">Description of [https://github.com/commons-app/apps-android-commons/blob/master/app/src/main/res/drawable-hdpi/welcome_wikipedia.png the image] displayed on the welcome screen to illustrate {{msg-wm|Commons-android-strings-welcome wikipedia text}} and {{msg-wm|Commons-android-strings-welcome wikipedia subtext}}.</string>
+  <string name="welcome_image_welcome_copyright">Description of [https://github.com/commons-app/apps-android-commons/blob/master/app/src/main/res/drawable-hdpi/welcome_copyright.png the image] displayed on the welcome screen to illustrate {{msg-wm|Commons-android-strings-welcome copyright text}} and {{msg-wm|Commons-android-strings-welcome copyright subtext}}.</string>
   <string name="welcome_image_sydney_opera_house">A building in the city of Sydney. See [[:d:Q45178|Wikidata item Q45178]] for a list of possible translations.</string>
   <string name="cancel">{{Identical|Cancel}}</string>
   <string name="navigation_drawer_open">{{Identical|Open}}</string>
@@ -112,6 +113,4 @@
   <string name="navigation_item_upload">{{Identical|Upload}}</string>
   <string name="navigation_item_nearby">{{Identical|Nearby}}</string>
   <string name="navigation_item_info">{{Identical|Tutorial}}</string>
-  <string name="feedback_popup_description">\"Developer plans\" is {{msg-wm|Commons-android-strings-navigation item developer plans}}.</string>
-  <string name="feedback_page_url">{{ignored}}</string>
 </resources>

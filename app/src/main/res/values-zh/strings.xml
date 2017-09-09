@@ -194,9 +194,4 @@
   <string name="error_while_cache">缓存图片时出错</string>
   <string name="title_info">用于文件的唯一描述性标题，它将作为文件名使用。您可以使用有空格的简明语言。请不要包含文件扩展名</string>
   <string name="description_info">请尽可能详细地描述媒体：拍摄在何地？显示什么？例文是什么？请描述对象或个人。透露一些不易猜想到的信息，例如这幅风景画的具体日期时间。如果媒体显示了一些不寻常的事物，请说明为什么它显得不寻常。</string>
-  <string name="feedback_popup_title">需要反馈</string>
-  <string name="feedback_popup_description">我们正在计划为应用添加多个新功能，以及进行多方面改进！您是否需要查阅它们，并提供反馈？\n\n（您随时都可以通过选择导航菜单的“开发人员计划”访问它）</string>
-  <string name="feedback_popup_decline">不用了，谢谢</string>
-  <string name="feedback_popup_accept">好的，带我看看！</string>
-  <string name="navigation_item_developer_plans">开发人员计划</string>
 </resources>

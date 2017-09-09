@@ -152,5 +152,4 @@
   <string name="navigation_item_logout">Odhlásiť sa</string>
   <string name="navigation_item_info">Návod</string>
   <string name="no_description_found">nenašiel sa žiaden popis</string>
-  <string name="feedback_popup_decline">Nie, vďaka</string>
 </resources>

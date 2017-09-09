@@ -194,9 +194,4 @@
   <string name="error_while_cache">Erro mentras se gardaban as imaxes na caché</string>
   <string name="title_info">Un título único descritivo para o ficheiro, que servirá como un nome de ficheiro. Pode usar unha linguaxe clara con espazos. Non inclúa a extensión do ficheiro</string>
   <string name="description_info">Por favor, describa o ficheiro todo o posibleː Onde se gravou? Cal é o contexto? Por favor, describa os obxectos ou persoas. Indique información que non pode ser adiviñada de forma doada, por exemplo, a hora do día se é unha paisaxe. Se o ficheiro amosa algo pouco habitual, por favor, explique que é o que o fai excepcional.</string>
-  <string name="feedback_popup_title">Aprécianse comentarios</string>
-  <string name="feedback_popup_description">Estamos planeando moitas funcionalidades novas e melloras para a aplicaciónǃ Gustaríalle revisalas e comentar a súa opinión?\n\n(Sempre pode acceder a isto seleccionando \"Plans dos desenvolvedores\" no panel de navegación)</string>
-  <string name="feedback_popup_decline">Non, grazas</string>
-  <string name="feedback_popup_accept">Claro, lévame alí!</string>
-  <string name="navigation_item_developer_plans">Plans de desenvolvedor</string>
 </resources>

@@ -1,7 +1,4 @@
 <resources>
-    <dimen name="icon_size">120dp</dimen>
-    <dimen name="tiny_margin">4dp</dimen>
-    <dimen name="small_margin">8dp</dimen>
     <dimen name="bottom_peak_height">240dp</dimen>
     <dimen name="overflow_button_dimen">48dp</dimen>
 </resources>

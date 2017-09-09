@@ -190,9 +190,4 @@
   <string name="error_while_cache">שגיאה במשירת תמונות במטמון</string>
   <string name="title_info">כותרת מתארת ייחודית לקובץ, שתשמש שם קובץ. אפשר להשתמש בשפה פשוטה עם רווחים. אין לכלול סיומת קובץ</string>
   <string name="description_info">נא לתאר את המדיה כמה שיותר: איפה היא נוצרה? מה היא מראה? מה ההקשר? נא לתאר את העצמים או את האנשים. נא לחשוף מידע שאי־אפשר לנחש בקלות, למשל, הזמן ביום אם זאת תמונת נוף. אם המדיה מציגה משהו בלתי־רגיל, נא להסביר מה מיוחד בה.</string>
-  <string name="feedback_popup_title">אנחנו מזמינים משוב</string>
-  <string name="feedback_popup_description">אנחנו מתכננים מספר יכולות חדשות ושיפורים ליישום! האם מעניין אותך לסקור אותם ולשלוח משוב?\n\n(תמיד אפשר לגשת לזה באמצעות לחיצה על \"תוכניות מפתחים\" במגירת הניווט.)</string>
-  <string name="feedback_popup_decline">לא תודה</string>
-  <string name="feedback_popup_accept">בטח, קחו אותי לשם!</string>
-  <string name="navigation_item_developer_plans">תוכניות מפתחים</string>
 </resources>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="crash_dialog_title">कॉमन्स क्रैश हो गया</string>
-  <string name="crash_dialog_text">ओह, कुछ गलती हो गया!</string>
+  <string name="crash_dialog_text">ओह, कुछ गलत हो गया!</string>
   <string name="crash_dialog_comment_prompt">कृपया हमें बतायें कि आप क्या कर रहे थे, और उस जानकारी को ईमेल से भेज दें, जिससे इसे सुधारा जा सके।</string>
   <string name="crash_dialog_ok_toast">धन्यवाद!</string>
 </resources>

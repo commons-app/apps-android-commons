@@ -194,9 +194,4 @@
   <string name="error_while_cache">Kasalahan nalika muat gambar</string>
   <string name="title_info">Judul déskriptif anu unik pikeun berkas, anu bakal miboga fungsi minangka ngaran berkas. Anjeun bisa maké basa basajan kalawan spasi. Ulah ngawuwuhkeun éksténsi berkas</string>
   <string name="description_info">Pék émbarkeun wincikan média saloba-lobabana: Dimana éta dicokot? Naon nu titojokeunna? Naon kontéksna? Pék jéntrékeun obyék atawa jalmana. Ébré informasi anu teu gampang kajudi, kawas wayah mun éta mangrupa pamandangan. Ari média nu némbongkeun perkara nu teu guyub, pék jéntrékeun naon nu ngabalukarkeun éta téh teu guyub.</string>
-  <string name="feedback_popup_title">Eupan balik dipiharep</string>
-  <string name="feedback_popup_description">Kami keur ngarencanakeun sawatara fitur jeung oméanan anyar pikeun ieu aplikasi! Anda daék mariksa jeung méré eupan balik?</string>
-  <string name="feedback_popup_decline">Teu nuhun</string>
-  <string name="feedback_popup_accept">Tangtu, bawa kuring kadinya!</string>
-  <string name="navigation_item_developer_plans">Rencana pangembang</string>
 </resources>

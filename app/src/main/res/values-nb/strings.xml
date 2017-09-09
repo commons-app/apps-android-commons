@@ -194,9 +194,4 @@
   <string name="error_while_cache">Feil under mellomlagring av bilder</string>
   <string name="title_info">En unik beskrivende tittel for fila, som vil fungere som filnavn. Du kan bruke vanlig språk med mellomrom. Ikke ta med filendelsen</string>
   <string name="description_info">Beskriv bidraget så mye som mulig: Hvor ble det tatt? Hva viser det? Hva er konteksten? Beskriv objektene eller personene. Gi informasjon som ikke kan gjettes lett, for eksempel når på dagen bildet ble tatt om det er et landskapsbilde. Om bildet viser noe uvanlig, forklar hva som gjør det uvanlig.</string>
-  <string name="feedback_popup_title">Tilbakemelding ønskes</string>
-  <string name="feedback_popup_description">Vi planlegger flere funksjoner og forbedringer i appen! Ønsker du å prøve dem ut og gi tilbakemelding?\n\n(Du kan alltid få tilgang til dette ved å velge «Utviklerplaner» i navigasjonsmenyen)</string>
-  <string name="feedback_popup_decline">Nei takk</string>
-  <string name="feedback_popup_accept">Ok!</string>
-  <string name="navigation_item_developer_plans">Utviklerplaner</string>
 </resources>

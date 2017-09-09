@@ -194,9 +194,4 @@
   <string name="error_while_cache">Fehler beim Zwischenspeichern der Bilder</string>
   <string name="title_info">Ein eindeutiger beschreibender Titel für die Datei, der als Dateiname dient. Du kannst Klartext mit Leerzeichen verwenden. Gib nicht die Dateierweiterung mit an.</string>
   <string name="description_info">Bitte beschreibe das Medium so gut wie möglich: Wo wurde es aufgenommen? Was zeigt es? Was ist der Kontext? Bitte beschreibe die Objekte oder Personen. Zeige Informationen auf, die nicht einfach erraten werden können, zum Beispiel die Tageszeit, falls es eine Landschaft ist. Falls das Medium etwas Ungewöhnliches zeigt, erkläre bitte, was es ungewöhnlich macht.</string>
-  <string name="feedback_popup_title">Rückmeldung erwünscht</string>
-  <string name="feedback_popup_description">Wir planen mehrere neue Funktionen und Verbesserungen für die App! Möchtest du sie dir anschauen und eine Rückmeldung geben?\n\nDu kannst immer auf diese Meldung zugreifen, indem du in der Navigation „Entwicklerpläne“ auswählst.</string>
-  <string name="feedback_popup_decline">Nein danke</string>
-  <string name="feedback_popup_accept">Sicher, bring mich dorthin!</string>
-  <string name="navigation_item_developer_plans">Entwicklerpläne</string>
 </resources>

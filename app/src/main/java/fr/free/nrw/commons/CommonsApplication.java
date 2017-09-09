@@ -2,11 +2,12 @@ package fr.free.nrw.commons;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.accounts.AccountManagerCallback;
+import android.accounts.AccountManagerFuture;
 import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
 
@@ -34,6 +35,7 @@ import fr.free.nrw.commons.di.CommonsApplicationModule;
 import fr.free.nrw.commons.di.DaggerCommonsApplicationComponent;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.FileUtils;
 import timber.log.Timber;
 
@@ -144,7 +146,7 @@ public class CommonsApplication extends DaggerApplication {
         }
     }
 
-    public void clearApplicationData(Context context) {
+    public void clearApplicationData(Context context, NavigationBaseActivity.LogoutListener logoutListener) {
         File cacheDirectory = context.getCacheDir();
         File applicationDirectory = new File(cacheDirectory.getParent());
         if (applicationDirectory.exists()) {
@@ -158,19 +160,53 @@ public class CommonsApplication extends DaggerApplication {
 
         AccountManager accountManager = AccountManager.get(this);
         Account[] allAccounts = accountManager.getAccountsByType(accountUtil.accountType());
-        for (Account allAccount : allAccounts) {
-            accountManager.removeAccount(allAccount, null, null);
-        }
 
-        //TODO: fix preference manager 
-        PreferenceManager.getDefaultSharedPreferences(this).edit().clear().commit();
-        SharedPreferences preferences = context
-                .getSharedPreferences("fr.free.nrw.commons", MODE_PRIVATE);
-        preferences.edit().clear().commit();
-        context.getSharedPreferences("prefs", Context.MODE_PRIVATE).edit().clear().commit();
-        preferences.edit().putBoolean("firstrun", false).apply();
-        updateAllDatabases();
-        currentAccount = null;
+        AccountManagerCallback<Boolean> amCallback = new AccountManagerCallback<Boolean>() {
+
+            private int index = 0;
+
+            void setIndex(int index) {
+                this.index = index;
+            }
+
+            int getIndex() {
+                return index;
+            }
+
+            @Override
+            public void run(AccountManagerFuture<Boolean> accountManagerFuture) {
+                setIndex(getIndex() + 1);
+
+                try {
+                    if (accountManagerFuture != null) {
+                        if (accountManagerFuture.getResult()) {
+                            Timber.d("Account removed successfully.");
+                        }
+                    }
+                } catch (OperationCanceledException | IOException | AuthenticatorException e) {
+                    e.printStackTrace();
+                }
+
+                if (getIndex() == allAccounts.length) {
+                    Timber.d("All accounts have been removed");
+                    //TODO: fix preference manager
+                    PreferenceManager.getDefaultSharedPreferences(CommonsApplication.this).edit().clear().commit();
+                    SharedPreferences preferences = context
+                            .getSharedPreferences("fr.free.nrw.commons", MODE_PRIVATE);
+                    preferences.edit().clear().commit();
+                    context.getSharedPreferences("prefs", Context.MODE_PRIVATE).edit().clear().commit();
+                    preferences.edit().putBoolean("firstrun", false).apply();
+                    updateAllDatabases();
+                    currentAccount = null;
+
+                    logoutListener.onLogoutComplete();
+                }
+            }
+        };
+
+        for (Account account : allAccounts) {
+            accountManager.removeAccount(account, amCallback, null);
+        }
     }
 
     /**

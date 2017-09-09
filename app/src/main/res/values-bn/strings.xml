@@ -184,8 +184,4 @@
   <string name="no_description_found">কোন বিবরণ পাওয়া যায়নি</string>
   <string name="nearby_info_menu_commons_article">কমন্সে ফাইলের পাতা</string>
   <string name="nearby_info_menu_wikidata_article">উইকিউপাত্ত পদ</string>
-  <string name="feedback_popup_title">মতামত প্রয়োজন</string>
-  <string name="feedback_popup_decline">না, ধন্যবাদ</string>
-  <string name="feedback_popup_accept">নিশ্চয়ই, আমাকে সেখানে নিয়ে যান!</string>
-  <string name="navigation_item_developer_plans">উন্নয়নকারীর পরিকল্পনা</string>
 </resources>

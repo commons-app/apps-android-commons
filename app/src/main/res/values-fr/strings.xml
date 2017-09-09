@@ -27,7 +27,7 @@
   <string name="title_activity_contributions">Mes téléversements récents</string>
   <string name="contribution_state_queued">Mis en file d\'attente</string>
   <string name="contribution_state_failed">Échoué</string>
-  <string name="contribution_state_in_progress">%1$d%% effectué</string>
+  <string name="contribution_state_in_progress">%1$d %% effectué</string>
   <string name="contribution_state_starting">Téléversement en cours</string>
   <string name="menu_from_gallery">Depuis la galerie</string>
   <string name="menu_from_camera">Prendre une photo</string>
@@ -194,9 +194,4 @@
   <string name="error_while_cache">Erreur en mettant les images en cache</string>
   <string name="title_info">Un titre descriptif unique pour le fichier, qui servira de nom de fichier. Vous pouvez utiliser un langage simple avec des espaces. N’incluez pas l’extension du fichier</string>
   <string name="description_info">Veuillez décrire le média autant que possible : Où a-t-il été enregistré ? Que montre-t-il ? Quel est le contexte ? Veuillez décrire les objets ou les personnes. Révélez les informations qui ne peuvent pas être devinées facilement, par exemple l’heure de la journée si c’est un paysage. Si le média montre quelque chose d’inhabituel, veuillez expliquer ce qui le rend exceptionnel.</string>
-  <string name="feedback_popup_title">Avis demandé</string>
-  <string name="feedback_popup_description">Nous planifions plusieurs nouvelles fonctionnalités et améliorations pour l’application ! Voudriez-vous les voir et donner votre avis ? \n\n(Vous pouvez toujours accéder à cela en sélectionnant « Plans du développeur » dans le panneau de navigation)</string>
-  <string name="feedback_popup_decline">Non merci</string>
-  <string name="feedback_popup_accept">Bien sûr, amenez-y-moi !</string>
-  <string name="navigation_item_developer_plans">Plans du développeur</string>
 </resources>

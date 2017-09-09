@@ -194,9 +194,4 @@
   <string name="error_while_cache">Eror antramentre ch\'as butavo le plance an memòria local</string>
   <string name="title_info">Un tìtol dëscritiv ùnich për l\'archivi, che a servirà com nòm d\'archivi. A peul dovré un lengagi sempi con djë spassi. Ch\'a ancluda pa l\'estension dl\'archivi</string>
   <string name="description_info">Për piasì, ch\'a descriva ël mojen mej ch\'a peul: Andoa a l\'é stàit fàit? Për piasì, ch\'a descriva j\'oget o le përson-e. Ch\'a arvela j\'anformassion ch\'a l\'é nen belfé andviné, për esempi l\'ora dël dì, s\'a l\'é un panorama. Si ël mojen a smon cheicòs ëd foravìa, për piasì ch\'a spiega lòn ch\'a lo rend foravìa.</string>
-  <string name="feedback_popup_title">Avis ciamà</string>
-  <string name="feedback_popup_description">I antivëddoma vàire neuve fonsionalità e ameliorassion për l\'aplicassion! Vorij-lo vëddje e dene soa opinion?\n\n(A peul sempe acede a sòn an selessionand «Pian dël dësvlupador» ant la plancia ëd navigassion)</string>
-  <string name="feedback_popup_decline">Nò, mersì</string>
-  <string name="feedback_popup_accept">Bò, mneme ambelelà!</string>
-  <string name="navigation_item_developer_plans">Pian dël dësvlupador</string>
 </resources>

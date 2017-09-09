@@ -16,6 +16,7 @@
   <string name="upload_progress_notification_title_start">اپ لوڈ %1$s شروع تھیندا پئے</string>
   <string name="upload_progress_notification_title_in_progress">%1$s اپ لوڈ تھیندا پئے</string>
   <string name="upload_progress_notification_title_finishing">%1$s اپ لوڈ پورا تھیندا پئے</string>
+  <string name="upload_failed_notification_subtitle">ݙیکھݨ کیتے انگل پھیرو</string>
   <string name="title_activity_contributions">میݙے حالیہ اپ لوڈ</string>
   <string name="contribution_state_queued">قطار وچ</string>
   <string name="contribution_state_failed">ناکام</string>
@@ -50,6 +51,7 @@
   <string name="menu_download">ڈاؤن لوڈ ، لہاوݨ</string>
   <string name="preference_license">لائیسنس</string>
   <string name="preference_theme">رات آلا مزاج</string>
+  <string name="preference_theme_summary">گھاٹا تھیم ورتو</string>
   <string name="license_name_cc0">سی سی او</string>
   <string name="license_name_cc_zero">سی سی زیرو</string>
   <string name="tutorial_3_text">براہ مہربانی اپ لوڈ نہ کرو</string>
@@ -72,6 +74,7 @@
   <string name="media_detail_title">عنوان</string>
   <string name="media_detail_media_title">میڈیا دا عنوان</string>
   <string name="media_detail_description">تفصیل</string>
+  <string name="media_detail_uploaded_date">اپ لوڈ تھیوݨ دی تاریخ</string>
   <string name="media_detail_license">لائیسنس</string>
   <string name="media_detail_coordinates">کوآرڈینیٹ</string>
   <string name="media_detail_coordinates_empty">کجھ نی ݙسیا</string>
@@ -96,5 +99,4 @@
   <string name="navigation_item_feedback">تہاڈی رائے</string>
   <string name="navigation_item_logout">لاگ آؤٹ</string>
   <string name="nearby_info_menu_wikidata_article">وکی ڈیٹا آئٹم</string>
-  <string name="feedback_popup_decline">کو، شکریہ</string>
 </resources>

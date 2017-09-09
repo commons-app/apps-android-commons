@@ -186,5 +186,4 @@
   <string name="navigation_item_logout">Одјави ме</string>
   <string name="nearby_info_menu_commons_article" fuzzy="true">Чланак на Остави</string>
   <string name="nearby_info_menu_wikidata_article" fuzzy="true">Чланак на Википодацима</string>
-  <string name="feedback_popup_decline">Не, хвала</string>
 </resources>

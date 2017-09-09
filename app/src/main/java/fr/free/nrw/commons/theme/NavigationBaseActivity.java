@@ -22,6 +22,7 @@ import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.nearby.NearbyActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
+import timber.log.Timber;
 
 public class NavigationBaseActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -121,13 +122,15 @@ public class NavigationBaseActivity extends BaseActivity
                         .setCancelable(false)
                         .setPositiveButton(R.string.yes, (dialog, which) -> {
                             ((CommonsApplication) getApplicationContext())
-                                    .clearApplicationData(NavigationBaseActivity.this);
-                            Intent nearbyIntent = new Intent(
-                                    NavigationBaseActivity.this, LoginActivity.class);
-                            nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(nearbyIntent);
-                            finish();
+                                    .clearApplicationData(NavigationBaseActivity.this, () -> {
+                                        Timber.d("Logout complete callback received.");
+                                        Intent nearbyIntent = new Intent(
+                                                NavigationBaseActivity.this, LoginActivity.class);
+                                        nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(nearbyIntent);
+                                        finish();
+                                    });
                         })
                         .setNegativeButton(R.string.no, (dialog, which) -> dialog.cancel())
                         .show();
@@ -135,5 +138,9 @@ public class NavigationBaseActivity extends BaseActivity
             default:
                 return false;
         }
+    }
+
+    public interface LogoutListener {
+        void onLogoutComplete();
     }
 }
