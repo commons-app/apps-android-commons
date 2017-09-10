@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.auth;
 
 import android.accounts.AccountAuthenticatorResponse;
-import android.accounts.AccountManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -14,6 +13,11 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.mwapi.EventLog;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
+
+import static android.accounts.AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE;
+import static android.accounts.AccountManager.KEY_ACCOUNT_NAME;
+import static android.accounts.AccountManager.KEY_ACCOUNT_TYPE;
+import static fr.free.nrw.commons.auth.AccountUtil.ACCOUNT_TYPE;
 
 class LoginTask extends AsyncTask<String, String, String> {
 
@@ -87,11 +91,11 @@ class LoginTask extends AsyncTask<String, String, String> {
         Bundle extras = loginActivity.getIntent().getExtras();
         if (extras != null) {
             Timber.d("Bundle of extras: %s", extras);
-            response = extras.getParcelable(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE);
+            response = extras.getParcelable(KEY_ACCOUNT_AUTHENTICATOR_RESPONSE);
             if (response != null) {
                 Bundle authResult = new Bundle();
-                authResult.putString(AccountManager.KEY_ACCOUNT_NAME, username);
-                authResult.putString(AccountManager.KEY_ACCOUNT_TYPE, accountUtil.accountType());
+                authResult.putString(KEY_ACCOUNT_NAME, username);
+                authResult.putString(KEY_ACCOUNT_TYPE, ACCOUNT_TYPE);
                 response.onResult(authResult);
             }
         }

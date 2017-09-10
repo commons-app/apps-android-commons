@@ -30,8 +30,8 @@ public class CommonsApplicationModule {
 
     @Provides
     @Singleton
-    public SessionManager providesSessionManager(AccountUtil accountUtil, MediaWikiApi mediaWikiApi) {
-        return new SessionManager(application, accountUtil, mediaWikiApi);
+    public SessionManager providesSessionManager(MediaWikiApi mediaWikiApi) {
+        return new SessionManager(application, mediaWikiApi);
     }
 
     @Provides

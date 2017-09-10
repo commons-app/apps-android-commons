@@ -6,16 +6,20 @@ import android.accounts.AccountManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import timber.log.Timber;
 
+import static android.accounts.AccountManager.ERROR_CODE_REMOTE_EXCEPTION;
+import static android.accounts.AccountManager.KEY_ACCOUNT_NAME;
+import static android.accounts.AccountManager.KEY_ACCOUNT_TYPE;
+
 public class AccountUtil {
 
-    private Context context;
+    static final String ACCOUNT_TYPE = "fr.free.nrw.commons";
+    private final Context context;
 
     public AccountUtil(Context context) {
         this.context = context;
@@ -24,7 +28,7 @@ public class AccountUtil {
     public void createAccount(@Nullable AccountAuthenticatorResponse response,
                               String username, String password) {
 
-        Account account = new Account(username, accountType());
+        Account account = new Account(username, ACCOUNT_TYPE);
         boolean created = accountManager().addAccountExplicitly(account, password, null);
 
         Timber.d("account creation " + (created ? "successful" : "failure"));
@@ -32,8 +36,8 @@ public class AccountUtil {
         if (created) {
             if (response != null) {
                 Bundle bundle = new Bundle();
-                bundle.putString(AccountManager.KEY_ACCOUNT_NAME, username);
-                bundle.putString(AccountManager.KEY_ACCOUNT_TYPE, accountType());
+                bundle.putString(KEY_ACCOUNT_NAME, username);
+                bundle.putString(KEY_ACCOUNT_TYPE, ACCOUNT_TYPE);
 
 
                 response.onResult(bundle);
@@ -41,7 +45,7 @@ public class AccountUtil {
 
         } else {
             if (response != null) {
-                response.onError(AccountManager.ERROR_CODE_REMOTE_EXCEPTION, "");
+                response.onError(ERROR_CODE_REMOTE_EXCEPTION, "");
             }
             Timber.d("account creation failure");
         }
@@ -49,11 +53,6 @@ public class AccountUtil {
         // FIXME: If the user turns it off, it shouldn't be auto turned back on
         ContentResolver.setSyncAutomatically(account, ContributionsContentProvider.AUTHORITY, true); // Enable sync by default!
         ContentResolver.setSyncAutomatically(account, ModificationsContentProvider.AUTHORITY, true); // Enable sync by default!
-    }
-
-    @NonNull
-    public String accountType() {
-        return "fr.free.nrw.commons";
     }
 
     private AccountManager accountManager() {

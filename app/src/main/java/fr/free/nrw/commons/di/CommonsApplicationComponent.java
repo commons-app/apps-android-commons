@@ -8,10 +8,8 @@ import dagger.android.AndroidInjector;
 import dagger.android.support.AndroidSupportInjectionModule;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.MediaWikiImageView;
-import fr.free.nrw.commons.auth.WikiAccountAuthenticatorService;
 import fr.free.nrw.commons.contributions.ContributionsSyncAdapter;
 import fr.free.nrw.commons.modifications.ModificationsSyncAdapter;
-import fr.free.nrw.commons.upload.UploadService;
 
 @Singleton
 @Component(modules = {

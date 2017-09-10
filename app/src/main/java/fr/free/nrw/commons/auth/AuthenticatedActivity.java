@@ -13,9 +13,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
+import static android.accounts.AccountManager.KEY_ACCOUNT_NAME;
+import static fr.free.nrw.commons.auth.AccountUtil.ACCOUNT_TYPE;
+
 public abstract class AuthenticatedActivity extends NavigationBaseActivity {
 
-    @Inject AccountUtil accountUtil;
     @Inject SessionManager sessionManager;
 
     private String authCookie;
@@ -31,20 +33,21 @@ public abstract class AuthenticatedActivity extends NavigationBaseActivity {
     }
 
     private void addAccount(AccountManager accountManager) {
-        Single.just(accountManager.addAccount(accountUtil.accountType(), null, null, null, AuthenticatedActivity.this, null, null))
+        Single.just(accountManager.addAccount(ACCOUNT_TYPE, null, null,
+                null, AuthenticatedActivity.this, null, null))
                 .subscribeOn(Schedulers.io())
                 .map(AccountManagerFuture::getResult)
                 .doOnEvent((bundle, throwable) -> {
-                    if (!bundle.containsKey(AccountManager.KEY_ACCOUNT_NAME)) {
+                    if (!bundle.containsKey(KEY_ACCOUNT_NAME)) {
                         throw new RuntimeException("Bundle doesn't contain account-name key: "
-                                + AccountManager.KEY_ACCOUNT_NAME);
+                                + KEY_ACCOUNT_NAME);
                     }
                 })
-                .map(bundle -> bundle.getString(AccountManager.KEY_ACCOUNT_NAME))
+                .map(bundle -> bundle.getString(KEY_ACCOUNT_NAME))
                 .doOnError(Timber::e)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s -> {
-                            Account[] allAccounts = accountManager.getAccountsByType(accountUtil.accountType());
+                            Account[] allAccounts = accountManager.getAccountsByType(ACCOUNT_TYPE);
                             Account curAccount = allAccounts[0];
                             getAuthCookie(curAccount, accountManager);
                         },

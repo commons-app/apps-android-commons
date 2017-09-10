@@ -12,18 +12,18 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
 
+import static fr.free.nrw.commons.auth.AccountUtil.ACCOUNT_TYPE;
+
 /**
  * Manage the current logged in user session.
  */
 public class SessionManager {
     private final Context context;
-    private final AccountUtil accountUtil;
     private final MediaWikiApi mediaWikiApi;
     private Account currentAccount; // Unlike a savings account...  ;-)
 
-    public SessionManager(Context context, AccountUtil accountUtil, MediaWikiApi mediaWikiApi) {
+    public SessionManager(Context context, MediaWikiApi mediaWikiApi) {
         this.context = context;
-        this.accountUtil = accountUtil;
         this.mediaWikiApi = mediaWikiApi;
         this.currentAccount = null;
     }
@@ -34,7 +34,7 @@ public class SessionManager {
     public Account getCurrentAccount() {
         if (currentAccount == null) {
             AccountManager accountManager = AccountManager.get(context);
-            Account[] allAccounts = accountManager.getAccountsByType(accountUtil.accountType());
+            Account[] allAccounts = accountManager.getAccountsByType(ACCOUNT_TYPE);
             if (allAccounts.length != 0) {
                 currentAccount = allAccounts[0];
             }
@@ -50,7 +50,7 @@ public class SessionManager {
             return false; // This should never happen
         }
 
-        accountManager.invalidateAuthToken(accountUtil.accountType(), mediaWikiApi.getAuthCookie());
+        accountManager.invalidateAuthToken(ACCOUNT_TYPE, mediaWikiApi.getAuthCookie());
         try {
             String authCookie = accountManager.blockingGetAuthToken(curAccount, "", false);
             mediaWikiApi.setAuthCookie(authCookie);
@@ -63,7 +63,7 @@ public class SessionManager {
 
     public Completable clearAllAccounts() {
         AccountManager accountManager = AccountManager.get(context);
-        Account[] allAccounts = accountManager.getAccountsByType(accountUtil.accountType());
+        Account[] allAccounts = accountManager.getAccountsByType(ACCOUNT_TYPE);
         return Completable.fromObservable(Observable.fromArray(allAccounts)
                 .map(a -> accountManager.removeAccount(a, null, null).getResult()))
                 .doOnComplete(() -> currentAccount = null);

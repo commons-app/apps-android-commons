@@ -15,31 +15,41 @@ import java.io.IOException;
 
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 
+import static android.accounts.AccountManager.ERROR_CODE_UNSUPPORTED_OPERATION;
+import static android.accounts.AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE;
+import static android.accounts.AccountManager.KEY_ACCOUNT_NAME;
+import static android.accounts.AccountManager.KEY_ACCOUNT_TYPE;
+import static android.accounts.AccountManager.KEY_AUTHTOKEN;
+import static android.accounts.AccountManager.KEY_BOOLEAN_RESULT;
+import static android.accounts.AccountManager.KEY_ERROR_CODE;
+import static android.accounts.AccountManager.KEY_ERROR_MESSAGE;
+import static android.accounts.AccountManager.KEY_INTENT;
+import static fr.free.nrw.commons.auth.AccountUtil.ACCOUNT_TYPE;
+import static fr.free.nrw.commons.auth.LoginActivity.PARAM_USERNAME;
+
 public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
 
     private final Context context;
-    private final AccountUtil accountUtil;
     private MediaWikiApi mediaWikiApi;
 
-    public WikiAccountAuthenticator(Context context, AccountUtil accountUtil, MediaWikiApi mwApi) {
+    public WikiAccountAuthenticator(Context context, MediaWikiApi mwApi) {
         super(context);
         this.context = context;
-        this.accountUtil = accountUtil;
         this.mediaWikiApi = mwApi;
     }
 
     private Bundle unsupportedOperation() {
         Bundle bundle = new Bundle();
-        bundle.putInt(AccountManager.KEY_ERROR_CODE, AccountManager.ERROR_CODE_UNSUPPORTED_OPERATION);
+        bundle.putInt(KEY_ERROR_CODE, ERROR_CODE_UNSUPPORTED_OPERATION);
 
         // HACK: the docs indicate that this is a required key bit it's not displayed to the user.
-        bundle.putString(AccountManager.KEY_ERROR_MESSAGE, "");
+        bundle.putString(KEY_ERROR_MESSAGE, "");
 
         return bundle;
     }
 
     private boolean supportedAccountType(@Nullable String type) {
-        return accountUtil.accountType().equals(type);
+        return ACCOUNT_TYPE.equals(type);
     }
 
     @Override
@@ -57,10 +67,10 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
 
     private Bundle addAccount(AccountAuthenticatorResponse response) {
         Intent Intent = new Intent(context, LoginActivity.class);
-        Intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
+        Intent.putExtra(KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
 
         Bundle bundle = new Bundle();
-        bundle.putParcelable(AccountManager.KEY_INTENT, Intent);
+        bundle.putParcelable(KEY_INTENT, Intent);
 
         return bundle;
     }
@@ -80,12 +90,13 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
     private String getAuthCookie(String username, String password) throws IOException {
         //TODO add 2fa support here
         String result = mediaWikiApi.login(username, password);
-        if(result.equals("PASS")) {
+        if (result.equals("PASS")) {
             return mediaWikiApi.getAuthCookie();
         } else {
             return null;
         }
     }
+
     @Override
     public Bundle getAuthToken(AccountAuthenticatorResponse response, Account account, String authTokenType, Bundle options) throws NetworkErrorException {
         // Extract the username and password from the Account Manager, and ask
@@ -103,9 +114,9 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
             }
             if (authCookie != null) {
                 final Bundle result = new Bundle();
-                result.putString(AccountManager.KEY_ACCOUNT_NAME, account.name);
-                result.putString(AccountManager.KEY_ACCOUNT_TYPE, accountUtil.accountType());
-                result.putString(AccountManager.KEY_AUTHTOKEN, authCookie);
+                result.putString(KEY_ACCOUNT_NAME, account.name);
+                result.putString(KEY_ACCOUNT_TYPE, ACCOUNT_TYPE);
+                result.putString(KEY_AUTHTOKEN, authCookie);
                 return result;
             }
         }
@@ -114,10 +125,10 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
         // need to re-prompt them for their credentials. We do that by creating
         // an intent to display our AuthenticatorActivity panel.
         final Intent intent = new Intent(context, LoginActivity.class);
-        intent.putExtra(LoginActivity.PARAM_USERNAME, account.name);
-        intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
+        intent.putExtra(PARAM_USERNAME, account.name);
+        intent.putExtra(KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
         final Bundle bundle = new Bundle();
-        bundle.putParcelable(AccountManager.KEY_INTENT, intent);
+        bundle.putParcelable(KEY_INTENT, intent);
         return bundle;
     }
 
@@ -135,7 +146,7 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
                               @NonNull Account account, @NonNull String[] features)
             throws NetworkErrorException {
         Bundle bundle = new Bundle();
-        bundle.putBoolean(AccountManager.KEY_BOOLEAN_RESULT, false);
+        bundle.putBoolean(KEY_BOOLEAN_RESULT, false);
         return bundle;
     }
 
