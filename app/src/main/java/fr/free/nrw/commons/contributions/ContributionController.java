@@ -56,7 +56,7 @@ public class ContributionController {
         fragment.startActivityForResult(takePictureIntent, SELECT_FROM_CAMERA);
     }
 
-    private static void requestWritePermission(Context context, Intent intent, Uri uri){
+    private static void requestWritePermission(Context context, Intent intent, Uri uri) {
 
         List<ResolveInfo> resInfoList = context.getPackageManager().queryIntentActivities(intent,
                 PackageManager.MATCH_DEFAULT_ONLY);
