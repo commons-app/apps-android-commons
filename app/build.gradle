@@ -77,6 +77,29 @@ android {
         }
     }
 
+    productFlavors {
+        prod {
+            buildConfigField "String", "WIKIMEDIA_API_HOST", "\"https://commons.wikimedia.org/w/api.php\""
+            buildConfigField "String", "WIKIMEDIA_FORGE_API_HOST", "\"https://tools.wmflabs.org/\""
+            buildConfigField "String", "IMAGE_URL_BASE", "\"https://upload.wikimedia.org/wikipedia/commons\""
+            buildConfigField "String", "HOME_URL", "\"https://commons.wikimedia.org/wiki/\""
+            buildConfigField "String", "MOBILE_HOME_URL", "\"https://commons.m.wikimedia.org/wiki/\""
+            buildConfigField "String", "EVENTLOG_URL", "\"https://www.wikimedia.org/beacon/event\""
+            buildConfigField "String", "EVENTLOG_WIKI", "\"commonswiki\""
+        }
+
+        beta {
+            // What values do we need to hit the BETA versions of the site / api ?
+            buildConfigField "String", "WIKIMEDIA_API_HOST", "\"https://commons.wikimedia.beta.wmflabs.org/w/api.php\""
+            buildConfigField "String", "WIKIMEDIA_FORGE_API_HOST", "\"https://tools.wmflabs.org/\""
+            buildConfigField "String", "IMAGE_URL_BASE", "\"https://upload.beta.wmflabs.org/wikipedia/commons\""
+            buildConfigField "String", "HOME_URL", "\"https://commons.wikimedia.beta.wmflabs.org/wiki/\""
+            buildConfigField "String", "MOBILE_HOME_URL", "\"https://commons.m.wikimedia.beta.wmflabs.org/wiki/\""
+            buildConfigField "String", "EVENTLOG_URL", "\"https://commons.wikimedia.beta.wmflabs.org/beacon/event\""
+            buildConfigField "String", "EVENTLOG_WIKI", "\"commonswiki\""
+        }
+    }
+
     lintOptions {
         disable 'MissingTranslation'
         disable 'ExtraTranslation'
