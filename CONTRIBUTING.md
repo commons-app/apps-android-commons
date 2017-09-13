@@ -6,7 +6,7 @@ software.
 
 Always make a commit with complete commit message for a logically
 separate change. It is a good discipline. For details about how to
-write a good commit message, see the [Describe your changes well](#Describe your changes well).
+write a good commit message, see thei "Describe your changes" well section.
 
 Give an explanation for the change(s) that is detailed enough so
 that people can judge if it is good thing to do, without reading
