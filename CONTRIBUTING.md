@@ -1,6 +1,6 @@
-Thanks for considering to contribute to this project! Here are some
-guidelines for people who want to contribute their code to this
-software.
+Thanks for considering to contribute to this project! A few guidelines for
+people who want to contribute their code to this software are documented in
+this document. If you're not sure where to start head on to [this wiki page](https://github.com/commons-app/apps-android-commons/wiki/Volunteers-welcome!).
 
 ### Make separate commits for logically separate changes.
 
