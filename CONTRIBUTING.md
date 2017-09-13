@@ -1,4 +1,4 @@
-Thaks for considering contributing to this project! Here are some
+Thanks for considering to contribute to this project! Here are some
 guidelines for people who want to contribute their code to this
 software.
 
