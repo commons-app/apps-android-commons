@@ -6,6 +6,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.SessionManager;
@@ -37,7 +38,7 @@ public class CommonsApplicationModule {
     @Provides
     @Singleton
     public MediaWikiApi provideMediaWikiApi() {
-        return new ApacheHttpClientMediaWikiApi(CommonsApplication.API_URL);
+        return new ApacheHttpClientMediaWikiApi(BuildConfig.WIKIMEDIA_API_HOST);
     }
 
     @Provides

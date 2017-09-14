@@ -7,7 +7,7 @@ import android.preference.PreferenceManager;
 import dagger.android.support.DaggerAppCompatActivity;
 import fr.free.nrw.commons.R;
 
-public class BaseActivity extends DaggerAppCompatActivity {
+public abstract class BaseActivity extends DaggerAppCompatActivity {
     boolean currentTheme;
 
     @Override

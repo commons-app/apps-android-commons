@@ -49,13 +49,6 @@ public class CommonsApplication extends DaggerApplication {
     @Inject SessionManager sessionManager;
     @Inject DBOpenHelper dbOpenHelper;
 
-    public static final String API_URL = "https://commons.wikimedia.org/w/api.php";
-    public static final String IMAGE_URL_BASE = "https://upload.wikimedia.org/wikipedia/commons";
-    public static final String HOME_URL = "https://commons.wikimedia.org/wiki/";
-    public static final String MOBILE_HOME_URL = "https://commons.m.wikimedia.org/wiki/";
-    public static final String EVENTLOG_URL = "https://www.wikimedia.org/beacon/event";
-    public static final String EVENTLOG_WIKI = "commonswiki";
-
     public static final Object[] EVENT_UPLOAD_ATTEMPT = {"MobileAppUploadAttempts", 5334329L};
     public static final Object[] EVENT_LOGIN_ATTEMPT = {"MobileAppLoginAttempts", 5257721L};
     public static final Object[] EVENT_SHARE_ATTEMPT = {"MobileAppShareAttempts", 5346170L};

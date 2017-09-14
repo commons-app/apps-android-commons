@@ -47,12 +47,12 @@ public class LogBuilder {
         try {
             fullData.put("schema", schema);
             fullData.put("revision", rev);
-            fullData.put("wiki", CommonsApplication.EVENTLOG_WIKI);
+            fullData.put("wiki", BuildConfig.EVENTLOG_WIKI);
             data.put("device", EventLog.DEVICE);
             data.put("platform", "Android/" + Build.VERSION.RELEASE);
             data.put("appversion", "Android/" + BuildConfig.VERSION_NAME);
             fullData.put("event", data);
-            return new URL(CommonsApplication.EVENTLOG_URL + "?" + Utils.urlEncode(fullData.toString()) + ";");
+            return new URL(BuildConfig.EVENTLOG_URL + "?" + Utils.urlEncode(fullData.toString()) + ";");
         } catch (MalformedURLException | JSONException e) {
             throw new RuntimeException(e);
         }

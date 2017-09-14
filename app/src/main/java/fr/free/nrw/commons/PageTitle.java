@@ -58,7 +58,7 @@ public class PageTitle {
      */
     @NonNull
     public Uri getCanonicalUri() {
-        String uriStr = CommonsApplication.HOME_URL + Uri.encode(getPrefixedText(), ":/");
+        String uriStr = BuildConfig.HOME_URL + Uri.encode(getPrefixedText(), ":/");
         return Uri.parse(uriStr);
     }
 
@@ -71,7 +71,7 @@ public class PageTitle {
      */
     @NonNull
     public Uri getMobileUri() {
-        String uriStr = CommonsApplication.MOBILE_HOME_URL + Uri.encode(getPrefixedText(), ":/");
+        String uriStr = BuildConfig.MOBILE_HOME_URL + Uri.encode(getPrefixedText(), ":/");
         return Uri.parse(uriStr);
     }
 

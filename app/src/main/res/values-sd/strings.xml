@@ -41,7 +41,7 @@
   <string name="login_failed_username">ناقابلِ داخل ٿيڻ - براءِ مھرباني پنھنجو يُوزرنانءُ چڪاسيو</string>
   <string name="login_failed_password">ناقابل داخل ٿيڻ - براءِ مھرباني پنھنجو ڳجھولفظ چڪاسيو</string>
   <string name="login_failed_throttled">ھيڪانديون ناڪام ڪوششون. براءِ مھرباني ڪجھ منٽن کانپوءِ ٻيھر ڪوشش ڪريو.</string>
-  <string name="login_failed_blocked">افسوس، ھي يوزر العام تي بندشيل آھي</string>
+  <string name="login_failed_blocked">افسوس، ھي واھپ العام تي بندشيل آھي</string>
   <string name="login_failed_generic">داخل ٿيڻ ناڪام</string>
   <string name="share_upload_button">چاڙھيو</string>
   <string name="multiple_share_base_title">ھن سيٽ کي نالو ڏيو</string>
