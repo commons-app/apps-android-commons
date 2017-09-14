@@ -50,12 +50,6 @@ import timber.log.Timber;
 public class CommonsApplication extends Application {
 
     private Account currentAccount = null; // Unlike a savings account...
-    public static final String API_URL = "https://commons.wikimedia.org/w/api.php";
-    public static final String IMAGE_URL_BASE = "https://upload.wikimedia.org/wikipedia/commons";
-    public static final String HOME_URL = "https://commons.wikimedia.org/wiki/";
-    public static final String MOBILE_HOME_URL = "https://commons.m.wikimedia.org/wiki/";
-    public static final String EVENTLOG_URL = "https://www.wikimedia.org/beacon/event";
-    public static final String EVENTLOG_WIKI = "commonswiki";
 
     public static final Object[] EVENT_UPLOAD_ATTEMPT = {"MobileAppUploadAttempts", 5334329L};
     public static final Object[] EVENT_LOGIN_ATTEMPT = {"MobileAppLoginAttempts", 5257721L};
@@ -91,7 +85,7 @@ public class CommonsApplication extends Application {
 
     public MediaWikiApi getMWApi() {
         if (api == null) {
-            api = new ApacheHttpClientMediaWikiApi(API_URL);
+            api = new ApacheHttpClientMediaWikiApi(BuildConfig.WIKIMEDIA_API_HOST);
         }
         return api;
     }
