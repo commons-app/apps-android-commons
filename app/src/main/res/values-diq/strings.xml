@@ -111,4 +111,11 @@
   <string name="warning">Tembe kem</string>
   <string name="yes">E</string>
   <string name="no">Nê</string>
+  <string name="media_detail_title">Sername</string>
+  <string name="media_detail_license">Lisans</string>
+  <string name="media_detail_coordinates">Koordinati</string>
+  <string name="cancel">Bıtexelne</string>
+  <string name="navigation_drawer_open">Ake</string>
+  <string name="navigation_item_home">Keye</string>
+  <string name="navigation_item_upload">Bar ke</string>
 </resources>
