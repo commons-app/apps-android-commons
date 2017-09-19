@@ -84,8 +84,8 @@ on open source projects), you can use their Travis CI integration to
 test your changes.
 
 
-### Update the Wiki page
+### Update the Wiki pages
 
-Do not forget to update the [Wiki page](https://github.com/commons-app/apps-android-commons/wiki)
+Do not forget to update the [Wiki pages](https://github.com/commons-app/apps-android-commons/wiki)
 on GitHub to describe the updated behavior and make sure that the resulting
-Wiki page doesn't become stale as a consequence of your change.
+Wiki pages don't become stale as a consequence of your change.
