@@ -6,7 +6,7 @@ this document. If you're not sure where to start head on to [this wiki page](htt
 
 Always make a commit with complete commit message for a logically
 separate change. It is a good discipline. For details about how to
-write a good commit message see the "Describe your changes" well section.
+write a good commit message see the "Describe your changes well" section.
 
 Give an explanation for the change(s) that is detailed enough so
 that people can judge if it is good thing to do, without reading
