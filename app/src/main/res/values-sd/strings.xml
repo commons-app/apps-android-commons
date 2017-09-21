@@ -2,7 +2,7 @@
 <resources>
   <string name="app_name">العام</string>
   <string name="menu_settings">ترتيبون</string>
-  <string name="username">واھپ (يوزر)-نانءُ</string>
+  <string name="username">واپرائيندڙ-نانءُ</string>
   <string name="password">ڳجھولفظ</string>
   <string name="login">داخل ٿيو</string>
   <string name="signup">کاتو کوليو</string>
@@ -38,10 +38,10 @@
   <string name="share_title_hint">عنوان</string>
   <string name="share_description_hint">تشريح</string>
   <string name="login_failed_network">ناقابلِ داخل ٿيڻ - باھمڄار ناڪامي</string>
-  <string name="login_failed_username">ناقابلِ داخل ٿيڻ - براءِ مھرباني پنھنجو واھپ (يوزر)-نانءُ چڪاسيو</string>
+  <string name="login_failed_username">ناقابلِ داخل ٿيڻ - براءِ مھرباني پنھنجو واپرائيندڙ-نانءُ چڪاسيو</string>
   <string name="login_failed_password">ناقابل داخل ٿيڻ - براءِ مھرباني پنھنجو ڳجھولفظ چڪاسيو</string>
   <string name="login_failed_throttled">ھيڪانديون ناڪام ڪوششون. براءِ مھرباني ڪجھ منٽن کانپوءِ ٻيھر ڪوشش ڪريو.</string>
-  <string name="login_failed_blocked">افسوس، ھي واھپ العام تي بندشيل آھي</string>
+  <string name="login_failed_blocked">افسوس، ھي واپرائيندڙ العام تي بندشيل آھي</string>
   <string name="login_failed_generic">داخل ٿيڻ ناڪام</string>
   <string name="share_upload_button">چاڙھيو</string>
   <string name="multiple_share_base_title">ھن سيٽ کي نالو ڏيو</string>
@@ -123,7 +123,7 @@
   <string name="welcome_final_text">توھان سمجھو ٿا توھان سمجھي ويئو؟</string>
   <string name="welcome_final_button_text">ھا!</string>
   <string name="detail_panel_cats_label">زمرا</string>
-  <string name="detail_panel_cats_loading">لاهيندي (لوڊنگ)</string>
+  <string name="detail_panel_cats_loading">لاهيندي...</string>
   <string name="detail_panel_cats_none">ڪوبہ چونڊيل ناھي</string>
   <string name="detail_description_empty">ڪا تشريح ناھي</string>
   <string name="detail_license_empty">اڻڄاتل لائسنس</string>
@@ -145,8 +145,8 @@
   <string name="use_wikidata">وڪيڊيٽا استعماڪ ڪريو</string>
   <string name="number_of_uploads">منهنجي تازي چاڙهڻ (اَپلوڊ) جي حد (لِمٽ)</string>
   <string name="maximum_limit">وڌ ۾ وڌ حد (ميگزيمم لِمٽ)</string>
-  <string name="no_image_found">ڪا به تصوير نه ملي</string>
-  <string name="upload_image">تصوير چاڙهيو (اَپلوڊ اميج)</string>
+  <string name="no_image_found">ڪوبہ عڪس نہ لڌو</string>
+  <string name="upload_image">عڪس چاڙهيو</string>
   <string name="welcome_image_tulip">گل لالا (ٽيولپ)</string>
   <string name="welcome_image_no_selfies">ڪي به پاڻفيون نه (نو سيلفيز)</string>
   <string name="welcome_image_proprietary">سڃاڻپ واري تصوير (پروپرائٽري اميج)</string>

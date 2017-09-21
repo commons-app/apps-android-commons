@@ -153,6 +153,7 @@
   <string name="media_detail_uploaded_date">Дата загрузки</string>
   <string name="media_detail_license">Лицензия</string>
   <string name="media_detail_coordinates">Координаты</string>
+  <string name="media_detail_coordinates_empty">Не предоставлены</string>
   <string name="become_a_tester_title">Стать бета-тестером</string>
   <string name="become_a_tester_description">Подпишитесь на наш канал бета-версии на Google Play и получите ранний доступ к новым функциям и исправлениям ошибок</string>
   <string name="use_wikidata">Использовать Викиданные</string>
