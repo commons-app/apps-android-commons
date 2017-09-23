@@ -2,6 +2,8 @@ package fr.free.nrw.commons.contributions;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -11,17 +13,14 @@ import android.support.v4.content.FileProvider;
 
 import java.io.File;
 import java.util.Date;
+import java.util.List;
 
 import fr.free.nrw.commons.upload.ShareActivity;
-import fr.free.nrw.commons.upload.UploadService;
 import timber.log.Timber;
 
 import static android.content.Intent.ACTION_GET_CONTENT;
 import static android.content.Intent.ACTION_SEND;
 import static android.content.Intent.EXTRA_STREAM;
-import static android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION;
-import static android.content.Intent.FLAG_GRANT_WRITE_URI_PERMISSION;
-import static android.provider.MediaStore.EXTRA_OUTPUT;
 import static fr.free.nrw.commons.contributions.Contribution.SOURCE_CAMERA;
 import static fr.free.nrw.commons.contributions.Contribution.SOURCE_GALLERY;
 import static fr.free.nrw.commons.upload.UploadService.EXTRA_SOURCE;
@@ -51,15 +50,30 @@ class ContributionController {
                 photoFile);
     }
 
-    void startCameraCapture() {
-        Intent pictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        lastGeneratedCaptureUri = reGenerateImageCaptureUriInCache();
-        pictureIntent.setFlags(FLAG_GRANT_READ_URI_PERMISSION | FLAG_GRANT_WRITE_URI_PERMISSION);
-        pictureIntent.putExtra(EXTRA_OUTPUT, lastGeneratedCaptureUri);
-        fragment.startActivityForResult(pictureIntent, SELECT_FROM_CAMERA);
+    private static void requestWritePermission(Context context, Intent intent, Uri uri) {
+
+        List<ResolveInfo> resInfoList = context.getPackageManager().queryIntentActivities(intent,
+                PackageManager.MATCH_DEFAULT_ONLY);
+        for (ResolveInfo resolveInfo : resInfoList) {
+            String packageName = resolveInfo.activityInfo.packageName;
+            context.grantUriPermission(packageName, uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+                    | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        }
     }
 
-    void startGalleryPick() {
+    void startCameraCapture() {
+
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        lastGeneratedCaptureUri = reGenerateImageCaptureUriInCache();
+
+        // Intent.setFlags doesn't work for API level <20
+        requestWritePermission(fragment.getContext(), takePictureIntent, lastGeneratedCaptureUri);
+
+        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, lastGeneratedCaptureUri);
+        fragment.startActivityForResult(takePictureIntent, SELECT_FROM_CAMERA);
+    }
+
+    public void startGalleryPick() {
         //FIXME: Starts gallery (opens Google Photos)
         Intent pickImageIntent = new Intent(ACTION_GET_CONTENT);
         pickImageIntent.setType("image/*");
