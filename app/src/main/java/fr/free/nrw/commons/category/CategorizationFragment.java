@@ -101,6 +101,7 @@ public class CategorizationFragment extends DaggerFragment {
         categoriesCache = new HashMap<>();
         if (savedInstanceState != null) {
             items.addAll(savedInstanceState.getParcelableArrayList("currentCategories"));
+            //noinspection unchecked
             categoriesCache.putAll((HashMap<String, ArrayList<String>>) savedInstanceState
                     .getSerializable("categoriesCache"));
         }
@@ -206,7 +207,7 @@ public class CategorizationFragment extends DaggerFragment {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         s -> categoriesAdapter.add(s),
-                        Timber::e,
+                         Timber::e,
                         () -> {
                             categoriesAdapter.notifyDataSetChanged();
                             categoriesSearchInProgress.setVisibility(View.GONE);

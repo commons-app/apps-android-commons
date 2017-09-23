@@ -24,15 +24,13 @@ import fr.free.nrw.commons.nearby.NearbyActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
 import timber.log.Timber;
 
-public class NavigationBaseActivity extends BaseActivity
+public abstract class NavigationBaseActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-
     @BindView(R.id.navigation_view)
     NavigationView navigationView;
-
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
 
@@ -120,17 +118,11 @@ public class NavigationBaseActivity extends BaseActivity
                 new AlertDialog.Builder(this)
                         .setMessage(R.string.logout_verification)
                         .setCancelable(false)
-                        .setPositiveButton(R.string.yes, (dialog, which) ->
-                                ((CommonsApplication) getApplicationContext())
-                                        .clearApplicationData(NavigationBaseActivity.this, () -> {
-                                            Timber.d("Logout complete callback received.");
-                                            Intent nearbyIntent = new Intent(
-                                                    NavigationBaseActivity.this, LoginActivity.class);
-                                            nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                            nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                            startActivity(nearbyIntent);
-                                            finish();
-                                        }))
+                        .setPositiveButton(R.string.yes, (dialog, which) -> {
+                            BaseLogoutListener logoutListener = new BaseLogoutListener();
+                            CommonsApplication app = (CommonsApplication) getApplication();
+                            app.clearApplicationData(this, logoutListener);
+                        })
                         .setNegativeButton(R.string.no, (dialog, which) -> dialog.cancel())
                         .show();
                 return true;
@@ -139,7 +131,16 @@ public class NavigationBaseActivity extends BaseActivity
         }
     }
 
-    public interface LogoutListener {
-        void onLogoutComplete();
+    private class BaseLogoutListener implements CommonsApplication.LogoutListener {
+        @Override
+        public void onLogoutComplete() {
+            Timber.d("Logout complete callback received.");
+            Intent nearbyIntent = new Intent(
+                    NavigationBaseActivity.this, LoginActivity.class);
+            nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            nearbyIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(nearbyIntent);
+            finish();
+        }
     }
 }

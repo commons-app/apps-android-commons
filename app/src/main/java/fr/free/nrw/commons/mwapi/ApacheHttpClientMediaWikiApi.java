@@ -32,6 +32,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.Callable;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.PageTitle;
@@ -236,8 +237,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             }
 
             return categories;
-        })
-                .flatMapObservable(list -> Observable.fromIterable(list));
+        }).flatMapObservable(Observable::fromIterable);
     }
 
     @Override
@@ -266,15 +266,14 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             }
 
             return categories;
-        })
-                .flatMapObservable(list -> Observable.fromIterable(list));
+        }).flatMapObservable(Observable::fromIterable);
     }
 
     @Override
     @NonNull
     public Observable<String> searchTitles(String title, int searchCatsLimit) {
-        return Single.fromCallable(() -> {
-            ArrayList<ApiResult> categoryNodes = null;
+        return Single.fromCallable((Callable<List<String>>) () -> {
+            ArrayList<ApiResult> categoryNodes;
 
             try {
                 categoryNodes = api.action("query")
@@ -288,7 +287,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                         .getNodes("/api/query/search/p/@title");
             } catch (IOException e) {
                 Timber.e("Failed to obtain searchTitles", e);
-                return new ArrayList();
+                return Collections.emptyList();
             }
 
             if (categoryNodes == null) {
@@ -303,8 +302,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             }
 
             return titleCategories;
-        })
-                .flatMapObservable(list -> Observable.fromIterable(list));
+        }).flatMapObservable(Observable::fromIterable);
     }
 
     @Override

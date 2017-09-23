@@ -28,7 +28,6 @@ import fr.free.nrw.commons.di.CommonsApplicationModule;
 import fr.free.nrw.commons.di.DaggerCommonsApplicationComponent;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
-import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.FileUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -100,7 +99,7 @@ public class CommonsApplication extends DaggerApplication {
         return component;
     }
 
-    public void clearApplicationData(Context context, NavigationBaseActivity.LogoutListener logoutListener) {
+    public void clearApplicationData(Context context, LogoutListener logoutListener) {
         File cacheDirectory = context.getCacheDir();
         File applicationDirectory = new File(cacheDirectory.getParent());
         if (applicationDirectory.exists()) {
@@ -140,5 +139,9 @@ public class CommonsApplication extends DaggerApplication {
         ModifierSequence.Table.onDelete(db);
         Category.Table.onDelete(db);
         Contribution.Table.onDelete(db);
+    }
+
+    public interface LogoutListener {
+        void onLogoutComplete();
     }
 }

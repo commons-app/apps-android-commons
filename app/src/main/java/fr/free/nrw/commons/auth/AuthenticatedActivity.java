@@ -22,13 +22,14 @@ public abstract class AuthenticatedActivity extends NavigationBaseActivity {
 
     private String authCookie;
     
+
     private void getAuthCookie(Account account, AccountManager accountManager) {
         Single.fromCallable(() -> accountManager.blockingGetAuthToken(account, "", false))
                 .subscribeOn(Schedulers.io())
                 .doOnError(Timber::e)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        this::onAuthCookieAcquired,
+                        this:: onAuthCookieAcquired,
                         throwable -> onAuthFailure());
     }
 
@@ -55,24 +56,24 @@ public abstract class AuthenticatedActivity extends NavigationBaseActivity {
     }
 
     protected void requestAuthToken() {
-        if(authCookie != null) {
+        if (authCookie != null) {
             onAuthCookieAcquired(authCookie);
             return;
         }
         AccountManager accountManager = AccountManager.get(this);
         Account curAccount = sessionManager.getCurrentAccount();
-        if(curAccount == null) {
+        if (curAccount == null) {
             addAccount(accountManager);
         } else {
             getAuthCookie(curAccount, accountManager);
         }
     }
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if(savedInstanceState != null) {
+        if (savedInstanceState != null) {
             authCookie = savedInstanceState.getString("authCookie");
         }
     }
@@ -84,5 +85,6 @@ public abstract class AuthenticatedActivity extends NavigationBaseActivity {
     }
 
     protected abstract void onAuthCookieAcquired(String authCookie);
+
     protected abstract void onAuthFailure();
 }

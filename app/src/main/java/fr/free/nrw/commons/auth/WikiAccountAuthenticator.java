@@ -32,7 +32,7 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
     private final Context context;
     private MediaWikiApi mediaWikiApi;
 
-    public WikiAccountAuthenticator(Context context, MediaWikiApi mwApi) {
+    WikiAccountAuthenticator(Context context, MediaWikiApi mwApi) {
         super(context);
         this.context = context;
         this.mediaWikiApi = mwApi;
@@ -98,7 +98,8 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
     }
 
     @Override
-    public Bundle getAuthToken(AccountAuthenticatorResponse response, Account account, String authTokenType, Bundle options) throws NetworkErrorException {
+    public Bundle getAuthToken(AccountAuthenticatorResponse response, Account account,
+                               String authTokenType, Bundle options) throws NetworkErrorException {
         // Extract the username and password from the Account Manager, and ask
         // the server for an appropriate AuthToken.
         final AccountManager am = AccountManager.get(context);
@@ -154,8 +155,7 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
     @Override
     public Bundle updateCredentials(@NonNull AccountAuthenticatorResponse response,
                                     @NonNull Account account, @Nullable String authTokenType,
-                                    @Nullable Bundle options)
-            throws NetworkErrorException {
+                                    @Nullable Bundle options) throws NetworkErrorException {
         return unsupportedOperation();
     }
 

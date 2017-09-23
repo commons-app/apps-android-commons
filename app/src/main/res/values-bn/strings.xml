@@ -85,6 +85,7 @@
   <string name="menu_retry_upload">পুনঃচেষ্টা করুন</string>
   <string name="menu_cancel_upload">বাতিল</string>
   <string name="share_license_summary">এই ছবিটি %1$s এর অধীনে লাইসেন্স করা হবে</string>
+    <string name="media_upload_policy">এই চিত্র জমা দেয়ার দ্বারা, আমি ঘোষণা দিচ্ছি যে এটি আমার নিজস্ব কাজ, এতে কপিরাইটযুক্ত উপাদান নেই বা এটই সেলফি নয়, এবং &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/bn\"&gt;উইকিমিডিয়া কমন্স নীতি&lt;/a&gt; অনুসরণ করে।</string>
   <string name="menu_download">ডাউনলোড</string>
   <string name="preference_license">লাইসেন্স</string>
   <string name="use_previous">পূর্ববর্তী শিরোনাম/বিবরণ ব্যবহার করুন</string>
@@ -148,6 +149,7 @@
   <string name="media_detail_uploaded_date">আপলোডের তারিখ</string>
   <string name="media_detail_license">লাইসেন্স</string>
   <string name="media_detail_coordinates">স্থানাঙ্কসমূহ</string>
+    <string name="media_detail_coordinates_empty">কিছু দেয়া হয়নি</string>
   <string name="become_a_tester_title">বিটা টেস্টার হোন</string>
   <string name="use_wikidata">উইকিউপাত্ত ব্যবহার করুন</string>
   <string name="use_wikidata_summary">(সতর্কতা: এটি নিষ্ক্রিয় করা অধিক পরিমাণে মোবাইল ডেটা খরচ হওয়ার কারণ হতে পারে)</string>
@@ -166,6 +168,7 @@
   <string name="welcome_image_rainbow_bridge">রংধনুর সেতু</string>
   <string name="welcome_image_tulip">টিউলিপ</string>
   <string name="welcome_image_no_selfies">কোন সেলফি নয়</string>
+    <string name="welcome_image_proprietary">মালিকানা চিত্র</string>
   <string name="welcome_image_welcome_wikipedia">উইকিপিডিয়ায় স্বাগতম</string>
   <string name="welcome_image_welcome_copyright">স্বাগতম কপিরাইট</string>
   <string name="welcome_image_sydney_opera_house">সিডনি অপেরা হাউস</string>
