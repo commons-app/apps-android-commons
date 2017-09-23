@@ -13,7 +13,6 @@ import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
 import android.support.v4.util.LruCache;
-import android.util.Log;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.stetho.Stetho;
@@ -35,7 +34,6 @@ import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.NearbyPlaces;
-import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.FileUtils;
 import timber.log.Timber;
 
@@ -184,7 +182,7 @@ public class CommonsApplication extends Application {
                 pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT);
     }
 
-    public void clearApplicationData(Context context, NavigationBaseActivity.LogoutListener logoutListener) {
+    public void clearApplicationData(Context context, LogoutListener logoutListener) {
         File cacheDirectory = context.getCacheDir();
         File applicationDirectory = new File(cacheDirectory.getParent());
         if (applicationDirectory.exists()) {
@@ -216,10 +214,8 @@ public class CommonsApplication extends Application {
                 setIndex(getIndex() + 1);
 
                 try {
-                    if (accountManagerFuture != null) {
-                        if (accountManagerFuture.getResult()) {
-                            Timber.d("Account removed successfully.");
-                        }
+                    if (accountManagerFuture != null && accountManagerFuture.getResult()) {
+                        Timber.d("Account removed successfully.");
                     }
                 } catch (OperationCanceledException | IOException | AuthenticatorException e) {
                     e.printStackTrace();
@@ -258,5 +254,9 @@ public class CommonsApplication extends Application {
         ModifierSequence.Table.onDelete(db);
         Category.Table.onDelete(db);
         Contribution.Table.onDelete(db);
+    }
+
+    public interface LogoutListener {
+        void onLogoutComplete();
     }
 }

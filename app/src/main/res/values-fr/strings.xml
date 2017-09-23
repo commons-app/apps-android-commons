@@ -114,7 +114,7 @@
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zéro</string>
-  <string name="tutorial_1_text">Wikimedia Commons héberge la plupart des images qui sont utilisées dans Wikipédia.</string>
+    <string name="tutorial_1_text">Wikimedia Commons héberge la plupart des images qui sont utilisées dans Wikipédia.</string>
   <string name="tutorial_1_subtext">Vos images aident à éduquer les gens dans le monde entier !</string>
   <string name="tutorial_2_text">Veuillez téléverser des images qui sont prises ou créées entièrement par vous :</string>
   <string name="tutorial_2_subtext">- Objets naturels (fleurs, animaux, montagnes) \n- Objets utiles (bicyclettes, gares ferroviaires) \n- Personnes célèbres (votre maire, les athlètes olympiques que vous avez rencontrés)</string>
@@ -140,7 +140,7 @@
   <string name="title_activity_nearby">Endroits à proximité</string>
   <string name="no_nearby">Rien trouvé dans le voisinage</string>
   <string name="warning">Avertissement</string>
-  <string name="file_exists">Ce fichier existe déjà sur Commons. Êtes-vous sûr de vouloir continuer ?</string>
+    <string name="file_exists">Ce fichier existe déjà sur Commons. Êtes-vous sûr de vouloir continuer ?</string>
   <string name="yes">Oui</string>
   <string name="no">Non</string>
   <string name="media_detail_title">Titre</string>
@@ -162,7 +162,7 @@
   <string name="set_limit">Fixer la limite de téléversement récent</string>
   <string name="login_failed_2fa_not_supported">L’authentification à deux facteurs n’est pas prise en charge pour le moment.</string>
   <string name="logout_verification">Voulez-vous vraiment vous déconnecter ?</string>
-  <string name="commons_logo">Logo de Commons</string>
+    <string name="commons_logo">Logo de Commons</string>
   <string name="background_image">Image de fond</string>
   <string name="mediaimage_failed">Échec sur l’image du média</string>
   <string name="no_image_found">Aucune image trouvée</string>
@@ -189,7 +189,7 @@
   <string name="navigation_item_info">Tutoriel</string>
   <string name="nearby_needs_permissions">Les endroits proches ne peuvent pas être affichés si vous ne partagez pas votre position géographique.</string>
   <string name="no_description_found">aucune description trouvée</string>
-  <string name="nearby_info_menu_commons_article">Page des fichiers de Commons</string>
+    <string name="nearby_info_menu_commons_article">Page des fichiers de Commons</string>
   <string name="nearby_info_menu_wikidata_article">Élément de Wikidata</string>
   <string name="error_while_cache">Erreur en mettant les images en cache</string>
   <string name="title_info">Un titre descriptif unique pour le fichier, qui servira de nom de fichier. Vous pouvez utiliser un langage simple avec des espaces. N’incluez pas l’extension du fichier</string>

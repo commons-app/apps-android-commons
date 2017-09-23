@@ -15,31 +15,39 @@ import fr.free.nrw.commons.data.Category;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import timber.log.Timber;
 
+import static android.content.UriMatcher.NO_MATCH;
+import static fr.free.nrw.commons.data.Category.Table.ALL_FIELDS;
+import static fr.free.nrw.commons.data.Category.Table.COLUMN_ID;
+import static fr.free.nrw.commons.data.Category.Table.TABLE_NAME;
+
 public class CategoryContentProvider extends ContentProvider {
 
+    public static final String AUTHORITY = "fr.free.nrw.commons.categories.contentprovider";
     // For URI matcher
     private static final int CATEGORIES = 1;
     private static final int CATEGORIES_ID = 2;
-
-    public static final String AUTHORITY = "fr.free.nrw.commons.categories.contentprovider";
     private static final String BASE_PATH = "categories";
 
     public static final Uri BASE_URI = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH);
 
-    private static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+    private static final UriMatcher uriMatcher = new UriMatcher(NO_MATCH);
+
     static {
         uriMatcher.addURI(AUTHORITY, BASE_PATH, CATEGORIES);
         uriMatcher.addURI(AUTHORITY, BASE_PATH + "/#", CATEGORIES_ID);
     }
 
+    private DBOpenHelper dbOpenHelper;
+
     public static Uri uriForId(int id) {
         return Uri.parse(BASE_URI.toString() + "/" + id);
     }
 
-    private DBOpenHelper dbOpenHelper;
+    @SuppressWarnings("ConstantConditions")
     @Override
     public boolean onCreate() {
-        dbOpenHelper = CommonsApplication.getInstance().getDBOpenHelper();
+        CommonsApplication app = ((CommonsApplication) getContext().getApplicationContext());
+        dbOpenHelper = app.getDBOpenHelper();
         return false;
     }
 
@@ -48,23 +56,23 @@ public class CategoryContentProvider extends ContentProvider {
     public Cursor query(@NonNull Uri uri, String[] projection, String selection,
                         String[] selectionArgs, String sortOrder) {
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
-        queryBuilder.setTables(Category.Table.TABLE_NAME);
+        queryBuilder.setTables(TABLE_NAME);
 
         int uriType = uriMatcher.match(uri);
 
         SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
         Cursor cursor;
 
-        switch(uriType) {
+        switch (uriType) {
             case CATEGORIES:
                 cursor = queryBuilder.query(db, projection, selection, selectionArgs,
                         null, null, sortOrder);
                 break;
             case CATEGORIES_ID:
                 cursor = queryBuilder.query(db,
-                        Category.Table.ALL_FIELDS,
+                        ALL_FIELDS,
                         "_id = ?",
-                        new String[] { uri.getLastPathSegment() },
+                        new String[]{uri.getLastPathSegment()},
                         null,
                         null,
                         sortOrder
@@ -92,7 +100,7 @@ public class CategoryContentProvider extends ContentProvider {
         long id;
         switch (uriType) {
             case CATEGORIES:
-                id = sqlDB.insert(Category.Table.TABLE_NAME, null, contentValues);
+                id = sqlDB.insert(TABLE_NAME, null, contentValues);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
@@ -115,9 +123,9 @@ public class CategoryContentProvider extends ContentProvider {
         sqlDB.beginTransaction();
         switch (uriType) {
             case CATEGORIES:
-                for(ContentValues value: values) {
+                for (ContentValues value : values) {
                     Timber.d("Inserting! %s", value);
-                    sqlDB.insert(Category.Table.TABLE_NAME, null, value);
+                    sqlDB.insert(TABLE_NAME, null, value);
                 }
                 break;
             default:
@@ -145,13 +153,12 @@ public class CategoryContentProvider extends ContentProvider {
         int rowsUpdated;
         switch (uriType) {
             case CATEGORIES_ID:
-                int id = Integer.valueOf(uri.getLastPathSegment());
-
                 if (TextUtils.isEmpty(selection)) {
-                    rowsUpdated = sqlDB.update(Category.Table.TABLE_NAME,
+                    int id = Integer.valueOf(uri.getLastPathSegment());
+                    rowsUpdated = sqlDB.update(TABLE_NAME,
                             contentValues,
-                            Category.Table.COLUMN_ID + " = ?",
-                            new String[] { String.valueOf(id) } );
+                            COLUMN_ID + " = ?",
+                            new String[]{String.valueOf(id)});
                 } else {
                     throw new IllegalArgumentException(
                             "Parameter `selection` should be empty when updating an ID");

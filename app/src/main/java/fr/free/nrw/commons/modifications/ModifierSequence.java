@@ -48,7 +48,7 @@ public class ModifierSequence {
     }
 
     public String getEditSummary() {
-        StringBuffer editSummary = new StringBuffer();
+        StringBuilder editSummary = new StringBuilder();
         for(PageModifier modifier: modifiers) {
             editSummary.append(modifier.getEditSumary()).append(" ");
         }

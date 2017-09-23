@@ -97,6 +97,7 @@ public class CategorizationFragment extends Fragment {
         categoriesCache = new HashMap<>();
         if (savedInstanceState != null) {
             items.addAll(savedInstanceState.getParcelableArrayList("currentCategories"));
+            //noinspection unchecked
             categoriesCache.putAll((HashMap<String, ArrayList<String>>) savedInstanceState
                     .getSerializable("categoriesCache"));
         }
@@ -201,9 +202,7 @@ public class CategorizationFragment extends Fragment {
                 .distinct()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        s -> categoriesAdapter.add(s),
-                        throwable -> Timber.e(throwable),
-                        () -> {
+                        s -> categoriesAdapter.add(s), Timber::e, () -> {
                             categoriesAdapter.notifyDataSetChanged();
                             categoriesSearchInProgress.setVisibility(View.GONE);
 
