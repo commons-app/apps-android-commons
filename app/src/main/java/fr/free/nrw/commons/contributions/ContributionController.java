@@ -1,7 +1,10 @@
 package fr.free.nrw.commons.contributions;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -10,6 +13,7 @@ import android.support.v4.content.FileProvider;
 
 import java.io.File;
 import java.util.Date;
+import java.util.List;
 
 import fr.free.nrw.commons.upload.ShareActivity;
 import fr.free.nrw.commons.upload.UploadService;
@@ -41,12 +45,26 @@ public class ContributionController {
     }
 
     public void startCameraCapture() {
+
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         lastGeneratedCaptureUri = reGenerateImageCaptureUriInCache();
-        takePictureIntent.setFlags(
-                Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+
+        // Intent.setFlags doesn't work for API level <20
+        requestWritePermission(fragment.getContext(), takePictureIntent, lastGeneratedCaptureUri);
+
         takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, lastGeneratedCaptureUri);
         fragment.startActivityForResult(takePictureIntent, SELECT_FROM_CAMERA);
+    }
+
+    private static void requestWritePermission(Context context, Intent intent, Uri uri) {
+
+        List<ResolveInfo> resInfoList = context.getPackageManager().queryIntentActivities(intent,
+                PackageManager.MATCH_DEFAULT_ONLY);
+        for (ResolveInfo resolveInfo : resInfoList) {
+            String packageName = resolveInfo.activityInfo.packageName;
+            context.grantUriPermission(packageName, uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+                    | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        }
     }
 
     public void startGalleryPick() {
