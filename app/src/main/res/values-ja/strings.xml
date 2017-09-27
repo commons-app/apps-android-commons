@@ -138,11 +138,15 @@
   <string name="media_detail_description">記述</string>
   <string name="media_detail_description_explanation">ここにメディアの説明が入ります。かなり長文になる場合には数行にわたることがあります。それでも見栄えがよいと願っています。</string>
   <string name="media_detail_uploaded_date">アップロード日時</string>
+  <string name="media_detail_license">ライセンス</string>
+  <string name="media_detail_coordinates">緯度経度</string>
+  <string name="media_detail_coordinates_empty">情報なし</string>
   <string name="become_a_tester_title">ベータ版を使ってみましょう！</string>
   <string name="become_a_tester_description">Google Playのベータ版チャンネルにオプトインして、新機能やバグ修正プログラムに早期にアクセス</string>
   <string name="use_wikidata">ウィキデータを使用してください</string>
   <string name="use_wikidata_summary">（警告：これを無効にすると、モバイルデータを大量に消費する可能性があります）</string>
   <string name="number_of_uploads">最近のアップロードファイルに表示する最大件数</string>
+  <string name="logout_verification">ログアウトしてもよろしいですか？</string>
   <string name="background_image">背景画像</string>
   <string name="no_image_found">画像がありません</string>
   <string name="upload_image">画像をアップロード</string>
