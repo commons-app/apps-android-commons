@@ -3,7 +3,6 @@ package fr.free.nrw.commons;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
-import android.preference.PreferenceManager;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.stetho.Stetho;
@@ -16,6 +15,7 @@ import org.acra.annotation.ReportsCrashes;
 import java.io.File;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import dagger.android.AndroidInjector;
 import dagger.android.DaggerApplication;
@@ -27,7 +27,6 @@ import fr.free.nrw.commons.di.CommonsApplicationComponent;
 import fr.free.nrw.commons.di.CommonsApplicationModule;
 import fr.free.nrw.commons.di.DaggerCommonsApplicationComponent;
 import fr.free.nrw.commons.modifications.ModifierSequence;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.FileUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -44,9 +43,11 @@ import timber.log.Timber;
 )
 public class CommonsApplication extends DaggerApplication {
 
-    @Inject MediaWikiApi mediaWikiApi;
     @Inject SessionManager sessionManager;
     @Inject DBOpenHelper dbOpenHelper;
+    @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
+    @Inject @Named("application_preferences") SharedPreferences applicationPrefs;
+    @Inject @Named("prefs") SharedPreferences otherPrefs;
 
     public static final Object[] EVENT_UPLOAD_ATTEMPT = {"MobileAppUploadAttempts", 5334329L};
     public static final Object[] EVENT_LOGIN_ATTEMPT = {"MobileAppLoginAttempts", 5257721L};
@@ -117,12 +118,10 @@ public class CommonsApplication extends DaggerApplication {
                 .subscribe(() -> {
                     Timber.d("All accounts have been removed");
                     //TODO: fix preference manager
-                    PreferenceManager.getDefaultSharedPreferences(CommonsApplication.this).edit().clear().commit();
-                    SharedPreferences preferences = context
-                            .getSharedPreferences("fr.free.nrw.commons", MODE_PRIVATE);
-                    preferences.edit().clear().commit();
-                    context.getSharedPreferences("prefs", Context.MODE_PRIVATE).edit().clear().commit();
-                    preferences.edit().putBoolean("firstrun", false).apply();
+                    defaultPrefs.edit().clear().commit();
+                    applicationPrefs.edit().clear().commit();
+                    applicationPrefs.edit().putBoolean("firstrun", false).apply();
+                    otherPrefs.edit().clear().commit();
                     updateAllDatabases();
 
                     logoutListener.onLogoutComplete();

@@ -2,7 +2,7 @@ package fr.free.nrw.commons.auth;
 
 import android.accounts.AccountAuthenticatorResponse;
 import android.app.ProgressDialog;
-import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -26,19 +26,19 @@ class LoginTask extends AsyncTask<String, String, String> {
     private String password;
     private String twoFactorCode = "";
     private AccountUtil accountUtil;
-    private Context context;
     private MediaWikiApi mwApi;
+    private SharedPreferences prefs;
 
     public LoginTask(LoginActivity loginActivity, String username, String password,
                      String twoFactorCode, AccountUtil accountUtil,
-                     Context context, MediaWikiApi mwApi) {
+                     MediaWikiApi mwApi, SharedPreferences prefs) {
         this.loginActivity = loginActivity;
         this.username = username;
         this.password = password;
         this.twoFactorCode = twoFactorCode;
         this.accountUtil = accountUtil;
-        this.context = context;
         this.mwApi = mwApi;
+        this.prefs = prefs;
     }
 
     @Override
@@ -71,7 +71,7 @@ class LoginTask extends AsyncTask<String, String, String> {
         super.onPostExecute(result);
         Timber.d("Login done!");
 
-        EventLog.schema(CommonsApplication.EVENT_LOGIN_ATTEMPT, context, mwApi)
+        EventLog.schema(CommonsApplication.EVENT_LOGIN_ATTEMPT, mwApi, prefs)
                 .param("username", username)
                 .param("result", result)
                 .log();

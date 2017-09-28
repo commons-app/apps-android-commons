@@ -10,7 +10,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.IBinder;
-import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 
@@ -31,14 +30,16 @@ public class UploadController {
     private UploadService uploadService;
     private SessionManager sessionManager;
     private Context context;
+    private SharedPreferences prefs;
 
     public interface ContributionUploadProgress {
         void onUploadStarted(Contribution contribution);
     }
 
-    public UploadController(SessionManager sessionManager, Context context) {
+    public UploadController(SessionManager sessionManager, Context context, SharedPreferences sharedPreferences) {
         this.sessionManager = sessionManager;
         this.context = context;
+        this.prefs = sharedPreferences;
     }
 
     private boolean isUploadServiceConnected;
@@ -85,8 +86,6 @@ public class UploadController {
     }
 
     public void startUpload(final Contribution contribution, final ContributionUploadProgress onComplete) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
-
         //Set creator, desc, and license
         if(TextUtils.isEmpty(contribution.getCreator())) {
             contribution.setCreator(sessionManager.getCurrentAccount().name);

@@ -21,6 +21,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
@@ -28,11 +29,11 @@ import fr.free.nrw.commons.mwapi.LogEventResult;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
-import static android.content.Context.MODE_PRIVATE;
 import static fr.free.nrw.commons.contributions.Contribution.STATE_COMPLETED;
 import static fr.free.nrw.commons.contributions.Contribution.Table.COLUMN_FILENAME;
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.BASE_URI;
 
+@SuppressWarnings("WeakerAccess")
 public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
 
     private static final String[] existsQuery = {COLUMN_FILENAME};
@@ -42,6 +43,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
 
     @SuppressWarnings("WeakerAccess")
     @Inject MediaWikiApi mwApi;
+    @Inject @Named("prefs") SharedPreferences prefs;
 
     public ContributionsSyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
@@ -79,7 +81,6 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
         ((CommonsApplication) getContext().getApplicationContext()).injector().inject(this);
         // This code is fraught with possibilities of race conditions, but lalalalala I can't hear you!
         String user = account.name;
-        SharedPreferences prefs = getContext().getSharedPreferences("prefs", MODE_PRIVATE);
         String lastModified = prefs.getString("lastSyncTimestamp", "");
         Date curTime = new Date();
         LogEventResult result;

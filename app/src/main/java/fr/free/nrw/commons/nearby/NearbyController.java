@@ -3,7 +3,6 @@ package fr.free.nrw.commons.nearby;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.preference.PreferenceManager;
 import android.support.graphics.drawable.VectorDrawableCompat;
 
 import com.mapbox.mapboxsdk.annotations.IconFactory;
@@ -27,9 +26,11 @@ import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 public class NearbyController {
     private static final int MAX_RESULTS = 1000;
     private final NearbyPlaces nearbyPlaces;
+    private final SharedPreferences prefs;
 
-    public NearbyController(NearbyPlaces nearbyPlaces) {
+    public NearbyController(NearbyPlaces nearbyPlaces, SharedPreferences prefs) {
         this.nearbyPlaces = nearbyPlaces;
+        this.prefs = prefs;
     }
 
     /**
@@ -43,7 +44,6 @@ public class NearbyController {
         if (curLatLng == null) {
             return Collections.emptyList();
         }
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         List<Place> places = prefs.getBoolean("useWikidata", true)
                 ? nearbyPlaces.getFromWikidataQuery(curLatLng, Locale.getDefault().getLanguage())
                 : nearbyPlaces.getFromWikiNeedsPictures();

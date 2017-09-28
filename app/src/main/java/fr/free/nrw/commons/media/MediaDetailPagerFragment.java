@@ -3,6 +3,7 @@ package fr.free.nrw.commons.media;
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.DataSetObserver;
 import android.net.Uri;
 import android.os.Build;
@@ -25,6 +26,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.CommonsApplication;
@@ -46,6 +48,7 @@ public class MediaDetailPagerFragment extends DaggerFragment implements ViewPage
 
     @Inject MediaWikiApi mwApi;
     @Inject SessionManager sessionManager;
+    @Inject @Named("default_preferences") SharedPreferences prefs;
 
     private ViewPager pager;
     private Boolean editable;
@@ -109,7 +112,7 @@ public class MediaDetailPagerFragment extends DaggerFragment implements ViewPage
             case R.id.menu_share_current_image:
                 // Share - this is just logs it, intent set in onCreateOptionsMenu, around line 252
                 CommonsApplication app = (CommonsApplication) getActivity().getApplication();
-                EventLog.schema(EVENT_SHARE_ATTEMPT, getContext().getApplicationContext(), mwApi)
+                EventLog.schema(EVENT_SHARE_ATTEMPT, mwApi, prefs)
                         .param("username", sessionManager.getCurrentAccount().name)
                         .param("filename", m.getFilename())
                         .log();

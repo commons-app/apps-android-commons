@@ -3,7 +3,6 @@ package fr.free.nrw.commons.category;
 import android.content.ContentProviderClient;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -30,6 +29,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -66,6 +66,7 @@ public class CategorizationFragment extends DaggerFragment {
     TextView categoriesSkip;
 
     @Inject MediaWikiApi mwApi;
+    @Inject @Named("default_preferences") SharedPreferences prefs;
 
     private RVRendererAdapter<CategoryItem> categoriesAdapter;
     private OnCategoriesSaveHandler onCategoriesSaveHandler;
@@ -250,8 +251,7 @@ public class CategorizationFragment extends DaggerFragment {
 
     private Observable<CategoryItem> titleCategories() {
         //Retrieve the title that was saved when user tapped submit icon
-        SharedPreferences titleDesc = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String title = titleDesc.getString("Title", "");
+        String title = prefs.getString("Title", "");
 
         return mwApi
                 .searchTitles(title, SEARCH_CATS_LIMIT)

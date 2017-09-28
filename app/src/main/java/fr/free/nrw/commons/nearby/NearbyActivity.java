@@ -3,6 +3,7 @@ package fr.free.nrw.commons.nearby;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.net.Uri;
@@ -28,6 +29,7 @@ import com.google.gson.GsonBuilder;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,6 +45,7 @@ public class NearbyActivity extends NavigationBaseActivity {
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
     @Inject NearbyPlaces nearbyPlaces;
+    @Inject @Named("default_preferences") SharedPreferences prefs;
 
     private boolean isMapViewActive = false;
     private static final int LOCATION_REQUEST = 1;
@@ -93,7 +96,7 @@ public class NearbyActivity extends NavigationBaseActivity {
         locationManager = new LocationServiceManager(this);
         locationManager.registerLocationManager();
         curLatLang = locationManager.getLatestLocation();
-        nearbyAsyncTask = new NearbyAsyncTask(this, new NearbyController(nearbyPlaces));
+        nearbyAsyncTask = new NearbyAsyncTask(this, new NearbyController(nearbyPlaces, prefs));
         nearbyAsyncTask.execute();
     }
 
@@ -232,7 +235,7 @@ public class NearbyActivity extends NavigationBaseActivity {
     }
 
     private void refreshView() {
-        nearbyAsyncTask = new NearbyAsyncTask(this, new NearbyController(nearbyPlaces));
+        nearbyAsyncTask = new NearbyAsyncTask(this, new NearbyController(nearbyPlaces, prefs));
         nearbyAsyncTask.execute();
     }
 

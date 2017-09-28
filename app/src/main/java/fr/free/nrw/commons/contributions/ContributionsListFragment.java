@@ -19,6 +19,9 @@ import android.widget.GridView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
@@ -28,7 +31,6 @@ import timber.log.Timber;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.app.Activity.RESULT_OK;
-import static android.content.Context.MODE_PRIVATE;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import static android.view.View.GONE;
 
@@ -37,6 +39,7 @@ public class ContributionsListFragment extends DaggerFragment {
     @BindView(R.id.contributionsList) GridView contributionsList;
     @BindView(R.id.waitingMessage) TextView waitingMessage;
     @BindView(R.id.emptyMessage) TextView emptyMessage;
+    @Inject @Named("prefs") SharedPreferences prefs;
     private ContributionController controller;
 
     @Override
@@ -51,7 +54,6 @@ public class ContributionsListFragment extends DaggerFragment {
         }
 
         //TODO: Should this be in onResume?
-        SharedPreferences prefs = getActivity().getSharedPreferences("prefs", MODE_PRIVATE);
         String lastModified = prefs.getString("lastSyncTimestamp", "");
         Timber.d("Last Sync Timestamp: %s", lastModified);
 

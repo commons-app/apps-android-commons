@@ -8,6 +8,7 @@ import android.content.ContentProviderClient;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
@@ -23,6 +24,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
@@ -50,6 +52,7 @@ public class UploadService extends HandlerService<Contribution> {
 
     @Inject MediaWikiApi mwApi;
     @Inject SessionManager sessionManager;
+    @Inject @Named("default_preferences") SharedPreferences prefs;
 
     private NotificationManager notificationManager;
     private ContentProviderClient contributionsProviderClient;
@@ -247,7 +250,7 @@ public class UploadService extends HandlerService<Contribution> {
             String resultStatus = uploadResult.getResultStatus();
             if (!resultStatus.equals("Success")) {
                 showFailedNotification(contribution);
-                EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT, getApplicationContext(), mwApi)
+                EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT, mwApi, prefs)
                         .param("username", sessionManager.getCurrentAccount().name)
                         .param("source", contribution.getSource())
                         .param("multiple", contribution.getMultiple())
@@ -261,7 +264,7 @@ public class UploadService extends HandlerService<Contribution> {
                 contribution.setDateUploaded(uploadResult.getDateUploaded());
                 contribution.save();
 
-                EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT, getApplicationContext(), mwApi)
+                EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT, mwApi, prefs)
                         .param("username", sessionManager.getCurrentAccount().name)
                         .param("source", contribution.getSource()) //FIXME
                         .param("filename", contribution.getFilename())

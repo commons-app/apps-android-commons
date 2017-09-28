@@ -9,7 +9,6 @@ import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -24,6 +23,7 @@ import android.widget.AdapterView;
 import java.util.ArrayList;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.HandlerService;
@@ -45,7 +45,9 @@ import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
 import static fr.free.nrw.commons.contributions.Contribution.Table.ALL_FIELDS;
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.AUTHORITY;
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.BASE_URI;
-import static fr.free.nrw.commons.settings.Prefs.UPLOADS_SHOWING;public  class       ContributionsActivity
+import static fr.free.nrw.commons.settings.Prefs.UPLOADS_SHOWING;
+
+public  class       ContributionsActivity
         extends     AuthenticatedActivity
         implements  LoaderManager.LoaderCallbacks<Cursor>,
                     AdapterView.OnItemClickListener,
@@ -55,6 +57,7 @@ import static fr.free.nrw.commons.settings.Prefs.UPLOADS_SHOWING;public  class  
 
     @Inject MediaWikiApi mediaWikiApi;
     @Inject SessionManager sessionManager;
+    @Inject @Named("default_preferences") SharedPreferences prefs;
 
     private Cursor allContributions;
     private ContributionsListFragment contributionsList;
@@ -108,12 +111,8 @@ import static fr.free.nrw.commons.settings.Prefs.UPLOADS_SHOWING;public  class  
     @Override
     protected void onResume() {
         super.onResume();
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean isSettingsChanged =
-                sharedPreferences.getBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, false);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, false);
-        editor.apply();
+        boolean isSettingsChanged = prefs.getBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, false);
+        prefs.edit().putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, false).apply();
         if (isSettingsChanged) {
             refreshSource();
         }
@@ -235,8 +234,7 @@ import static fr.free.nrw.commons.settings.Prefs.UPLOADS_SHOWING;public  class  
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        int uploads = sharedPref.getInt(UPLOADS_SHOWING, 100);
+        int uploads = prefs.getInt(UPLOADS_SHOWING, 100);
         return new CursorLoader(this, BASE_URI,
                 ALL_FIELDS, CONTRIBUTION_SELECTION, null,
                 CONTRIBUTION_SORT + "LIMIT " + uploads);

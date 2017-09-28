@@ -8,13 +8,17 @@ import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 
 public class SettingsFragment extends PreferenceFragment {
+
+    @Inject @Named("default_preferences") SharedPreferences prefs;
 
     @Override
     public void onAttach(Context context) {
@@ -46,14 +50,12 @@ public class SettingsFragment extends PreferenceFragment {
         });
 
         final EditTextPreference uploadLimit = (EditTextPreference) findPreference("uploads");
-        final SharedPreferences sharedPref = PreferenceManager
-                .getDefaultSharedPreferences(getActivity().getApplicationContext());
-        int uploads = sharedPref.getInt(Prefs.UPLOADS_SHOWING, 100);
+        int uploads = prefs.getInt(Prefs.UPLOADS_SHOWING, 100);
         uploadLimit.setText(uploads + "");
         uploadLimit.setSummary(uploads + "");
         uploadLimit.setOnPreferenceChangeListener((preference, newValue) -> {
             int value = Integer.parseInt(newValue.toString());
-            final SharedPreferences.Editor editor = sharedPref.edit();
+            final SharedPreferences.Editor editor = prefs.edit();
             if (value > 500) {
                 new AlertDialog.Builder(getActivity())
                         .setTitle(R.string.maximum_limit)

@@ -28,6 +28,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -50,7 +53,8 @@ public class SingleUploadFragment extends DaggerFragment {
     @BindView(R.id.share_license_summary) TextView licenseSummaryView;
     @BindView(R.id.licenseSpinner) Spinner licenseSpinner;
 
-    private SharedPreferences prefs;
+    @Inject @Named("default_preferences") SharedPreferences prefs;
+
     private String license;
     private OnUploadActionInitiated uploadActionInitiatedHandler;
     private TitleTextWatcher textWatcher = new TitleTextWatcher();
@@ -73,11 +77,10 @@ public class SingleUploadFragment extends DaggerFragment {
                 String desc = descEdit.getText().toString();
 
                 //Save the title/desc in short-lived cache so next time this fragment is loaded, we can access these
-                SharedPreferences titleDesc = PreferenceManager.getDefaultSharedPreferences(getActivity());
-                SharedPreferences.Editor editor = titleDesc.edit();
-                editor.putString("Title", title);
-                editor.putString("Desc", desc);
-                editor.apply();
+                prefs.edit()
+                        .putString("Title", title)
+                        .putString("Desc", desc)
+                        .apply();
 
                 uploadActionInitiatedHandler.uploadActionInitiated(title, desc);
                 return true;
@@ -91,7 +94,6 @@ public class SingleUploadFragment extends DaggerFragment {
         View rootView = inflater.inflate(R.layout.fragment_single_upload, container, false);
         ButterKnife.bind(this, rootView);
 
-
         ArrayList<String> licenseItems = new ArrayList<>();
         licenseItems.add(getString(R.string.license_name_cc0));
         licenseItems.add(getString(R.string.license_name_cc_by));
@@ -99,7 +101,6 @@ public class SingleUploadFragment extends DaggerFragment {
         licenseItems.add(getString(R.string.license_name_cc_by_four));
         licenseItems.add(getString(R.string.license_name_cc_by_sa_four));
 
-        prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         license = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
 
         // check if this is the first time we have uploaded
@@ -172,9 +173,9 @@ public class SingleUploadFragment extends DaggerFragment {
         }
 
         setLicenseSummary(license);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(Prefs.DEFAULT_LICENSE, license);
-        editor.commit();
+        prefs.edit()
+                .putString(Prefs.DEFAULT_LICENSE, license)
+                .commit();
     }
 
     @OnTouch(R.id.share_license_summary)
@@ -193,9 +194,8 @@ public class SingleUploadFragment extends DaggerFragment {
     @OnClick(R.id.titleDescButton)
     void setTitleDescButton() {
         //Retrieve last title and desc entered
-        SharedPreferences titleDesc = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String title = titleDesc.getString("Title", "");
-        String desc = titleDesc.getString("Desc", "");
+        String title = prefs.getString("Title", "");
+        String desc = prefs.getString("Desc", "");
         Timber.d("Title: %s, Desc: %s", title, desc);
 
         titleEdit.setText(title);

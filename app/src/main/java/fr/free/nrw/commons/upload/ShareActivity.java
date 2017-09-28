@@ -3,6 +3,7 @@ package fr.free.nrw.commons.upload;
 import android.Manifest;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -34,6 +35,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
@@ -73,6 +75,8 @@ public  class       ShareActivity
     @Inject MediaWikiApi mwApi;
     @Inject CacheController cacheController;
     @Inject SessionManager sessionManager;
+    @Inject UploadController uploadController;
+    @Inject @Named("default_preferences") SharedPreferences prefs;
 
     private String source;
     private String mimeType;
@@ -80,8 +84,6 @@ public  class       ShareActivity
     private Uri mediaUri;
     private Contribution contribution;
     private SimpleDraweeView backgroundImageView;
-
-    private UploadController uploadController;
 
     private boolean cacheFound;
 
@@ -172,7 +174,7 @@ public  class       ShareActivity
         // This is the wrong place for it, but bleh - better than not having it turned on by default for people who don't go throughl ogin
         ContentResolver.setSyncAutomatically(sessionManager.getCurrentAccount(), ModificationsContentProvider.AUTHORITY, true); // Enable sync by default!
 
-        EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT, getApplicationContext(), mwApi)
+        EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT, mwApi, prefs)
                 .param("username", sessionManager.getCurrentAccount().name)
                 .param("categories-count", categories.size())
                 .param("files-count", 1)
@@ -194,7 +196,7 @@ public  class       ShareActivity
     public void onBackPressed() {
         super.onBackPressed();
         if(categorizationFragment != null && categorizationFragment.isVisible()) {
-            EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT, getApplicationContext(), mwApi)
+            EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT, mwApi, prefs)
                     .param("username", sessionManager.getCurrentAccount().name)
                     .param("categories-count", categorizationFragment.getCurrentSelectedCount())
                     .param("files-count", 1)
@@ -202,7 +204,7 @@ public  class       ShareActivity
                     .param("result", "cancelled")
                     .log();
         } else {
-            EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT, getApplicationContext(), mwApi)
+            EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT, mwApi, prefs)
                     .param("username", sessionManager.getCurrentAccount().name)
                     .param("source", getIntent().getStringExtra(UploadService.EXTRA_SOURCE))
                     .param("multiple", true)
@@ -226,7 +228,7 @@ public  class       ShareActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        uploadController = new UploadController(sessionManager, this);
+
         setContentView(R.layout.activity_share);
         ButterKnife.bind(this);
         initBack();
@@ -451,12 +453,12 @@ public  class       ShareActivity
                         = getContentResolver().openFileDescriptor(mediaUri, "r");
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     if (descriptor != null) {
-                        imageObj = new GPSExtractor(descriptor.getFileDescriptor(), this);
+                        imageObj = new GPSExtractor(descriptor.getFileDescriptor(), this, prefs);
                     }
                 } else {
                     String filePath = getPathOfMediaOrCopy();
                     if (filePath != null) {
-                        imageObj = new GPSExtractor(filePath, this);
+                        imageObj = new GPSExtractor(filePath, this, prefs);
                     }
                 }
             }

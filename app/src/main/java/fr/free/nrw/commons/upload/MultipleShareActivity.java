@@ -6,6 +6,7 @@ import android.content.ContentProviderClient;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.DataSetObserver;
 import android.net.Uri;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.CommonsApplication;
@@ -53,14 +55,14 @@ public class MultipleShareActivity extends AuthenticatedActivity
 
     @Inject MediaWikiApi mwApi;
     @Inject SessionManager sessionManager;
+    @Inject UploadController uploadController;
+    @Inject @Named("default_preferences") SharedPreferences prefs;
 
     private ArrayList<Contribution> photosList = null;
 
     private MultipleUploadListFragment uploadsList;
     private MediaDetailPagerFragment mediaDetails;
     private CategorizationFragment categorizationFragment;
-
-    private UploadController uploadController;
 
     @Override
     public Media getMediaAtPosition(int i) {
@@ -179,7 +181,7 @@ public class MultipleShareActivity extends AuthenticatedActivity
         // FIXME: Make sure that the content provider is up
         // This is the wrong place for it, but bleh - better than not having it turned on by default for people who don't go throughl ogin
         ContentResolver.setSyncAutomatically(sessionManager.getCurrentAccount(), ModificationsContentProvider.AUTHORITY, true); // Enable sync by default!
-        EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT, getApplicationContext(), mwApi)
+        EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT, mwApi, prefs)
                 .param("username", sessionManager.getCurrentAccount().name)
                 .param("categories-count", categories.size())
                 .param("files-count", photosList.size())
@@ -204,7 +206,6 @@ public class MultipleShareActivity extends AuthenticatedActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        uploadController = new UploadController(sessionManager, this);
 
         setContentView(R.layout.activity_multiple_uploads);
         ButterKnife.bind(this);
@@ -289,7 +290,7 @@ public class MultipleShareActivity extends AuthenticatedActivity
     public void onBackPressed() {
         super.onBackPressed();
         if (categorizationFragment != null && categorizationFragment.isVisible()) {
-            EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT, getApplicationContext(), mwApi)
+            EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT, mwApi, prefs)
                     .param("username", sessionManager.getCurrentAccount().name)
                     .param("categories-count", categorizationFragment.getCurrentSelectedCount())
                     .param("files-count", photosList.size())
@@ -297,7 +298,7 @@ public class MultipleShareActivity extends AuthenticatedActivity
                     .param("result", "cancelled")
                     .log();
         } else {
-            EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT, getApplicationContext(), mwApi)
+            EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT, mwApi, prefs)
                     .param("username", sessionManager.getCurrentAccount().name)
                     .param("source", getIntent().getStringExtra(UploadService.EXTRA_SOURCE))
                     .param("multiple", true)

@@ -8,7 +8,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.ExifInterface;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -26,6 +25,7 @@ import timber.log.Timber;
 public class GPSExtractor {
 
     private final Context context;
+    private SharedPreferences prefs;
     private ExifInterface exif;
     private double decLatitude;
     private double decLongitude;
@@ -41,8 +41,9 @@ public class GPSExtractor {
      * @param context the context
      */
     @RequiresApi(24)
-    public GPSExtractor(@NonNull FileDescriptor fileDescriptor, Context context) {
+    public GPSExtractor(@NonNull FileDescriptor fileDescriptor, Context context, SharedPreferences prefs) {
         this.context = context;
+        this.prefs = prefs;
         try {
             exif = new ExifInterface(fileDescriptor);
         } catch (IOException | IllegalArgumentException e) {
@@ -55,7 +56,8 @@ public class GPSExtractor {
      * @param path file path of the image
      * @param context the context
      */
-    public GPSExtractor(@NonNull String path, Context context) {
+    public GPSExtractor(@NonNull String path, Context context, SharedPreferences prefs) {
+        this.prefs = prefs;
         try {
             exif = new ExifInterface(path);
         } catch (IOException | IllegalArgumentException e) {
@@ -69,9 +71,7 @@ public class GPSExtractor {
      * @return true if enabled, false if disabled
      */
     private boolean gpsPreferenceEnabled() {
-        SharedPreferences sharedPref
-                = PreferenceManager.getDefaultSharedPreferences(context);
-        boolean gpsPref = sharedPref.getBoolean("allowGps", false);
+        boolean gpsPref = prefs.getBoolean("allowGps", false);
         Timber.d("Gps pref set to: %b", gpsPref);
         return gpsPref;
     }

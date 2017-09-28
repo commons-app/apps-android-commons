@@ -1,6 +1,6 @@
 package fr.free.nrw.commons.mwapi;
 
-import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 
 import fr.free.nrw.commons.Utils;
@@ -16,14 +16,14 @@ public class EventLog {
         }
     }
 
-    private static LogBuilder schema(String schema, long revision, Context context, MediaWikiApi mwApi) {
-        return new LogBuilder(schema, revision, context, mwApi);
+    private static LogBuilder schema(String schema, long revision, MediaWikiApi mwApi, SharedPreferences prefs) {
+        return new LogBuilder(schema, revision, mwApi, prefs);
     }
 
-    public static LogBuilder schema(Object[] scid, Context context, MediaWikiApi mwApi) {
+    public static LogBuilder schema(Object[] scid, MediaWikiApi mwApi, SharedPreferences prefs) {
         if (scid.length != 2) {
             throw new IllegalArgumentException("Needs an object array with schema as first param and revision as second");
         }
-        return schema((String) scid[0], (Long) scid[1], context, mwApi);
+        return schema((String) scid[0], (Long) scid[1], mwApi, prefs);
     }
 }

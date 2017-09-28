@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.BuildConfig;
@@ -37,8 +38,8 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     @Inject MediaWikiApi mwApi;
     @Inject AccountUtil accountUtil;
     @Inject SessionManager sessionManager;
-
-    private SharedPreferences prefs = null;
+    @Inject @Named("application_preferences") SharedPreferences prefs = null;
+    @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
 
     private Button loginButton;
     private EditText usernameEdit;
@@ -59,8 +60,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         usernameEdit = (EditText) findViewById(R.id.loginUsername);
         passwordEdit = (EditText) findViewById(R.id.loginPassword);
         twoFactorEdit = (EditText) findViewById(R.id.loginTwoFactor);
-
-        prefs = getSharedPreferences("fr.free.nrw.commons", MODE_PRIVATE);
 
         usernameEdit.addTextChangedListener(textWatcher);
         passwordEdit.addTextChangedListener(textWatcher);
@@ -145,7 +144,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
                 canonicializeUsername(usernameEdit.getText().toString()),
                 passwordEdit.getText().toString(),
                 twoFactorEdit.getText().toString(),
-                accountUtil, this, mwApi
+                accountUtil, mwApi, defaultPrefs
         );
     }
 
