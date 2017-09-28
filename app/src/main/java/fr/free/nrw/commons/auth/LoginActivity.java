@@ -18,6 +18,8 @@ import android.widget.Toast;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.PageTitle;
@@ -41,10 +43,12 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     @Inject @Named("application_preferences") SharedPreferences prefs = null;
     @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
 
-    private Button loginButton;
-    private EditText usernameEdit;
-    private EditText passwordEdit;
-    private EditText twoFactorEdit;
+    @BindView(R.id.loginButton) Button loginButton;
+    @BindView(R.id.signupButton) Button signupButton;
+    @BindView(R.id.loginUsername) EditText usernameEdit;
+    @BindView(R.id.loginPassword) EditText passwordEdit;
+    @BindView(R.id.loginTwoFactor) EditText twoFactorEdit;
+
     ProgressDialog progressDialog;
     private LoginTextWatcher textWatcher = new LoginTextWatcher();
 
@@ -54,12 +58,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_login);
-
-        loginButton = (Button) findViewById(R.id.loginButton);
-        Button signupButton = (Button) findViewById(R.id.signupButton);
-        usernameEdit = (EditText) findViewById(R.id.loginUsername);
-        passwordEdit = (EditText) findViewById(R.id.loginPassword);
-        twoFactorEdit = (EditText) findViewById(R.id.loginTwoFactor);
+        ButterKnife.bind(this);
 
         usernameEdit.addTextChangedListener(textWatcher);
         passwordEdit.addTextChangedListener(textWatcher);
