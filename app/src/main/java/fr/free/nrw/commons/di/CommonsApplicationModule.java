@@ -17,6 +17,7 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.NearbyPlaces;
 
 @Module
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class CommonsApplicationModule {
     private CommonsApplication application;
 

@@ -13,6 +13,7 @@ import fr.free.nrw.commons.upload.MultipleUploadListFragment;
 import fr.free.nrw.commons.upload.SingleUploadFragment;
 
 @Module
+@SuppressWarnings({"WeakerAccess", "unused"})
 public abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector

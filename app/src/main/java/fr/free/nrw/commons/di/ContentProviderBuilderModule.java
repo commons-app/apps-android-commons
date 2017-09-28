@@ -7,6 +7,7 @@ import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 
 @Module
+@SuppressWarnings({"WeakerAccess", "unused"})
 public abstract class ContentProviderBuilderModule {
 
     @ContributesAndroidInjector

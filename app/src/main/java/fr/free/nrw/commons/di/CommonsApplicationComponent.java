@@ -31,6 +31,7 @@ public interface CommonsApplicationComponent extends AndroidInjector<CommonsAppl
     void inject(MediaWikiImageView mediaWikiImageView);
 
     @Component.Builder
+    @SuppressWarnings({"WeakerAccess", "unused"})
     interface Builder {
         Builder appModule(CommonsApplicationModule applicationModule);
 

@@ -13,6 +13,7 @@ import fr.free.nrw.commons.upload.MultipleShareActivity;
 import fr.free.nrw.commons.upload.ShareActivity;
 
 @Module
+@SuppressWarnings({"WeakerAccess", "unused"})
 public abstract class ActivityBuilderModule {
 
     @ContributesAndroidInjector

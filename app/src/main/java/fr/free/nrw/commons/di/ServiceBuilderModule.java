@@ -6,6 +6,7 @@ import fr.free.nrw.commons.auth.WikiAccountAuthenticatorService;
 import fr.free.nrw.commons.upload.UploadService;
 
 @Module
+@SuppressWarnings({"WeakerAccess", "unused"})
 public abstract class ServiceBuilderModule {
 
     @ContributesAndroidInjector
