@@ -42,6 +42,7 @@
   <string name="login_failed_password">प्रवेश नहीं हो रहा - कृपया अपना पासवर्ड जाँचें</string>
   <string name="login_failed_throttled">ढेर सारे असफल प्रयास होने के कारण कुछ मिनटों के बाद प्रयास करें।</string>
   <string name="login_failed_blocked">क्षमा करें, यह सदस्य कॉमन्स में अवरोधित है</string>
+  <string name="login_failed_2fa_needed">आपको अपना दो कारक प्रमाणन कोड प्रदान करना होगा।</string>
   <string name="login_failed_generic">प्रवेश विफल</string>
   <string name="share_upload_button">अपलोड</string>
   <string name="multiple_share_base_title">सूचियों को नाम दें</string>
@@ -50,11 +51,10 @@
   <string name="categories_search_text_hint">श्रेणियाँ खोजें</string>
   <string name="menu_save_categories">सहेजें</string>
   <string name="refresh_button">ताजा करें</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">कोई अपलोड नहीं</item>
-    <item quantity="one">%d अपलोड</item>
-    <item quantity="other">%d अपलोड</item>
-  </plurals>
+  <string name="gps_disabled">आपके डिवाइस में जीपीएस अक्षम है। क्या आप इसे सक्षम करना चाहेंगे?</string>
+  <string name="enable_gps">जीपीएस सक्षम करें</string>
+  <string name="contributions_subtitle_zero">अभी तक कोई अपलोड नहीं</string>
+  <string name="contributions_subtitle">{{PLURAL | शून्य = @ स्ट्रिंग / योगदान_उपशीर्षक_शुन्य | एक =% d अपलोड |% d अपलोड्स}}</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">%d अपलोड शुरू</item>
     <item quantity="other">%d अपलोड शुरू</item>
@@ -69,10 +69,10 @@
   <string name="title_activity_settings">पसंद</string>
   <string name="title_activity_signup">खाता खोलें</string>
   <string name="menu_about">परिचय</string>
-  <string name="about_license" fuzzy="true">मुक्त स्रोत सॉफ्टवेयर जो &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;अपाचे लाइसेन्स&lt;/a&gt; के अंतर्गत जारी किया गया है। विकिमीडिया कॉमन्स और इसका लोगो विकिमीडिया संस्था का व्यापारिक चिह्न है और इसके मर्जी से ही उपयोग किया जाना चाहिए। हम किसी भी प्रकार से विकिमीडिया संस्था से जुड़े नहीं हैं।</string>
+  <string name="about_license">मुक्त स्रोत सॉफ्टवेयर जो &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;अपाचे लाइसेन्स&lt;/a&gt; के अंतर्गत जारी किया गया है। %1$s और इसका लोगो विकिमीडिया संस्था का व्यापारिक चिह्न है और इसके मर्जी से ही उपयोग किया जाना चाहिए। हम किसी भी प्रकार से विकिमीडिया संस्था से जुड़े नहीं हैं।</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;स्रोत&lt;/a&gt; और &lt;a href=\"https://commons-app.github.io/\"&gt;वेबसाइट&lt;/a&gt; गिटहब में है और त्रुटि व सुझाव हेतु &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;गिटहब समस्या&lt;/a&gt; देखें।</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;गोपनियता नीति&lt;/a&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;श्रेय&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;श्रेय&lt;/a&gt;</string>
   <string name="title_activity_about">परिचय</string>
   <string name="menu_feedback">प्रतिक्रिया दें (ईमेल द्वारा)</string>
   <string name="no_email_client">कोई ईमेल ग्राहक स्थापित नहीं</string>
@@ -82,6 +82,7 @@
   <string name="menu_retry_upload">फिर प्रयास करें</string>
   <string name="menu_cancel_upload">रद्द करें</string>
   <string name="share_license_summary">इस छवि का लाइसेन्स %1$s के अंतर्गत है।</string>
+  <string name="media_upload_policy">इस तस्वीर को सबमिट करके, मैं घोषणा करता हूं कि यह मेरा अपना काम है, इसमें कॉपीराइट सामग्री या सेल्फी नहीं है, और अन्यथा &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;विकीमीडिया कॉमन्स नीतियां का पालन करता हूँ &lt;/a&gt;</string>
   <string name="menu_download">डाउनलोड</string>
   <string name="preference_license">लाइसेन्स</string>
   <string name="use_previous">पिछले शीर्षक/विवरण का उपयोग करें</string>
@@ -133,6 +134,7 @@
   <string name="location_permission_rationale">वैकल्पिक अनुमति: श्रेणी सुझाव हेतु वर्तमान स्थान ज्ञात करें</string>
   <string name="ok">ठीक है</string>
   <string name="title_activity_nearby">आसपास के स्थान</string>
+  <string name="no_nearby">पास के कोई भी स्थान नहीं मिले</string>
   <string name="warning">चेतावनी</string>
   <string name="file_exists">यह फ़ाइल कॉमन्स पर पहले से है। क्या आप फिर भी आगे बढ़ना चाहते हैं?</string>
   <string name="yes">हाँ</string>
@@ -140,9 +142,52 @@
   <string name="media_detail_title">शीर्षक</string>
   <string name="media_detail_media_title">मीडिया का शीर्षक</string>
   <string name="media_detail_description">विवरण</string>
+  <string name="media_detail_description_explanation">मीडिया का विवरण यहाँ किया जाता है यह संभवतः काफी लंबा हो सकता है, और कई पंक्तियों में लपेटने की आवश्यकता होगी हालांकि हमें उम्मीद है कि यह अच्छा लग रहा है।</string>
+  <string name="media_detail_uploaded_date">अपलोड की गई दिनांक</string>
   <string name="media_detail_license">लाइसेंस</string>
   <string name="media_detail_coordinates">निर्देशांक</string>
+  <string name="media_detail_coordinates_empty">कुछ नहीं प्रदान किया गया</string>
   <string name="become_a_tester_title">बीटा परीक्षक बनें</string>
+  <string name="become_a_tester_description">गूगल प्ले पर हमारे बीटा चैनल में ऑप्ट-इन करें और नई सुविधाओं और बग फिक्स के लिए शीघ्र प्राप्त करें</string>
   <string name="use_wikidata">विकिडेटा का प्रयोग करें</string>
+  <string name="use_wikidata_summary">(चेतावनी: इसे अक्षम करने से बड़ी मोबाइल डेटा की खपत हो सकती है)</string>
+  <string name="_2fa_code">2 एफए कोड</string>
+  <string name="number_of_uploads">मेरी हाल ही की अपलोड सीमा</string>
   <string name="maximum_limit">अधिकतम सीमा</string>
+  <string name="maximum_limit_alert">500 से अधिक प्रदर्शित करने में असमर्थ</string>
+  <string name="set_limit">हाल ही में अपलोड सीमा सेट करें</string>
+  <string name="login_failed_2fa_not_supported">दो कारक प्रमाणीकरण वर्तमान में समर्थित नहीं है</string>
+  <string name="logout_verification">क्या आप वास्तव में निकास करना चाहते हैं?</string>
+  <string name="commons_logo">कॉमन्स का प्रतीक चिन्ह</string>
+  <string name="background_image">पृष्ठभूमि छवि</string>
+  <string name="mediaimage_failed">मीडिया छवि विफल</string>
+  <string name="no_image_found">कोई छवि नहीं मिली</string>
+  <string name="upload_image">तस्वीर डालिये</string>
+  <string name="welcome_image_mount_zao">माउंट ज़ाओ</string>
+  <string name="welcome_image_llamas">ल्लामस</string>
+  <string name="welcome_image_rainbow_bridge">इंद्रधनुष के पुल</string>
+  <string name="welcome_image_tulip">ट्यूलिप</string>
+  <string name="welcome_image_no_selfies">कोई सेल्फीज़ नहीं</string>
+  <string name="welcome_image_proprietary">स्वामित्व छवि</string>
+  <string name="welcome_image_welcome_wikipedia">विकिपीडिया में स्वागत है</string>
+  <string name="welcome_image_welcome_copyright">प्रतिलिप्याधिकार में स्वागत है</string>
+  <string name="welcome_image_sydney_opera_house">सिडनी का ओपेरा हाउस</string>
+  <string name="cancel">रद्द करें</string>
+  <string name="navigation_drawer_open">खोलें</string>
+  <string name="navigation_drawer_close">बंद करें</string>
+  <string name="navigation_item_home">घर</string>
+  <string name="navigation_item_upload">अपलोड करें</string>
+  <string name="navigation_item_nearby">पास में</string>
+  <string name="navigation_item_about">के बारे में</string>
+  <string name="navigation_item_settings">सेटिंग्स</string>
+  <string name="navigation_item_feedback">आपके सुझाव</string>
+  <string name="navigation_item_logout">प्रस्थान करें</string>
+  <string name="navigation_item_info">अनुशिक्षण</string>
+  <string name="nearby_needs_permissions">आस-पास के स्थान बिना स्थान अनुमतियों के प्रदर्शित नहीं किए जा सकते हैं</string>
+  <string name="no_description_found">कोई विवरण नहीं मिला</string>
+  <string name="nearby_info_menu_commons_article">कॉमन्स फाइल पृष्ठ</string>
+  <string name="nearby_info_menu_wikidata_article">विकिडाटा वस्तु</string>
+  <string name="error_while_cache">चित्र कैशिंग करते समय त्रुटि</string>
+  <string name="title_info">फ़ाइल के लिए एक अद्वितीय वर्णनात्मक शीर्षक, जो एक फ़ाइल नाम के रूप में काम करेगा। आप रिक्त स्थान के साथ सादे भाषा का उपयोग कर सकते हैं। फ़ाइल विस्तार शामिल न करें</string>
+  <string name="description_info">कृपया मीडिया जितना संभव हो उतना बताएं: यह कहां लिया गया? यह क्या दिखाता है? संदर्भ क्या है? कृपया वस्तुओं या व्यक्तियों का वर्णन करें। ऐसी जानकारी का खुलासा करें जिसे आसानी से अनुमानित नहीं किया जा सकता, उदाहरण के लिए दिन का समय यदि यह परिदृश्य है। अगर मीडिया कुछ असामान्य दिखाता है, तो कृपया बताएं कि इसे क्या असामान्य बनाता है।</string>
 </resources>

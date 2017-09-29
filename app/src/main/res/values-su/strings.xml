@@ -135,6 +135,7 @@
   <string name="detail_license_empty">Lisénsi teu dipikanyaho</string>
   <string name="menu_refresh">Segerkeun</string>
   <string name="read_storage_permission_rationale">Merlukeun widi: Baca simpenan éksternal. Aplikasi teu bisa jalan tanpa ieu.</string>
+  <string name="write_storage_permission_rationale">Merlukeun widi: Baca simpenan éksternal. Aplikasi teu bisa jalan tanpa ieu.</string>
   <string name="location_permission_rationale">Idin pilihan: Paké lokasi kiwari pikeun usulan kategori</string>
   <string name="ok">Oké</string>
   <string name="title_activity_nearby">Tempat Sabudeureun</string>
@@ -194,4 +195,6 @@
   <string name="error_while_cache">Kasalahan nalika muat gambar</string>
   <string name="title_info">Judul déskriptif anu unik pikeun berkas, anu bakal miboga fungsi minangka ngaran berkas. Anjeun bisa maké basa basajan kalawan spasi. Ulah ngawuwuhkeun éksténsi berkas</string>
   <string name="description_info">Pék émbarkeun wincikan média saloba-lobabana: Dimana éta dicokot? Naon nu titojokeunna? Naon kontéksna? Pék jéntrékeun obyék atawa jalmana. Ébré informasi anu teu gampang kajudi, kawas wayah mun éta mangrupa pamandangan. Ari média nu némbongkeun perkara nu teu guyub, pék jéntrékeun naon nu ngabalukarkeun éta téh teu guyub.</string>
+  <string name="use_external_storage">Paké panyimpenan éksternal</string>
+  <string name="use_external_storage_summary">Simpen gambar nu nyomotna ku aplikasi kaména na parangkat anjeun</string>
 </resources>

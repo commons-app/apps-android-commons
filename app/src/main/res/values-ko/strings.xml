@@ -134,6 +134,7 @@
   <string name="detail_license_empty">알 수 없는 라이선스</string>
   <string name="menu_refresh">새로 고침</string>
   <string name="read_storage_permission_rationale">권한 필요: 외부 저장소 읽기. 이것이 없으면 앱은 동작하지 않습니다.</string>
+  <string name="write_storage_permission_rationale">권한 필요: 외부 저장소 쓰기. 이것이 없으면 앱은 동작하지 않습니다.</string>
   <string name="location_permission_rationale">선택적 권한: 분류 추천을 위해 현재 위치 정보를 가져옵니다.</string>
   <string name="ok">확인</string>
   <string name="title_activity_nearby">근처의 장소</string>
@@ -191,4 +192,6 @@
   <string name="nearby_info_menu_commons_article">공용 파일 문서</string>
   <string name="nearby_info_menu_wikidata_article">위키데이터 항목</string>
   <string name="error_while_cache">그림 캐시 처리 오류</string>
+  <string name="use_external_storage">외부 저장소 사용하기</string>
+  <string name="use_external_storage_summary">장치의 인앱 카메라로 찍은 사진 저장하기</string>
 </resources>

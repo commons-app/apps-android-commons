@@ -135,6 +135,7 @@
   <string name="detail_license_empty">Ukjent lisens</string>
   <string name="menu_refresh">Gjenoppfrisk</string>
   <string name="read_storage_permission_rationale">Nødvendig tillatelse: Lese ekstern lagring. Appen virker ikke uten dette.</string>
+  <string name="write_storage_permission_rationale">Påkrevd tillatelse: Skriv til ekstern lagring. Appen fungerer ikke uten dette.</string>
   <string name="location_permission_rationale">Valgfri tillatelse: Hent nåværende posisjon for kategoriforslag</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Plasser i nærheten</string>
@@ -194,4 +195,6 @@
   <string name="error_while_cache">Feil under mellomlagring av bilder</string>
   <string name="title_info">En unik beskrivende tittel for fila, som vil fungere som filnavn. Du kan bruke vanlig språk med mellomrom. Ikke ta med filendelsen</string>
   <string name="description_info">Beskriv bidraget så mye som mulig: Hvor ble det tatt? Hva viser det? Hva er konteksten? Beskriv objektene eller personene. Gi informasjon som ikke kan gjettes lett, for eksempel når på dagen bildet ble tatt om det er et landskapsbilde. Om bildet viser noe uvanlig, forklar hva som gjør det uvanlig.</string>
+  <string name="use_external_storage">Bruk ekstern lagring</string>
+  <string name="use_external_storage_summary">Lagre bilder som er tatt med kameraet i appen på enheten din</string>
 </resources>
