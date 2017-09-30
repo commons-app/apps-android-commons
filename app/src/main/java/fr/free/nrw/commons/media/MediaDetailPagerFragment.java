@@ -167,7 +167,7 @@ public class MediaDetailPagerFragment extends DaggerFragment implements ViewPage
         req.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !(ContextCompat.checkSelfPermission(getContext(), READ_EXTERNAL_STORAGE) == PERMISSION_GRANTED)) {
-            Snackbar.make(getView(), R.string.storage_permission_rationale,
+            Snackbar.make(getView(), R.string.read_storage_permission_rationale,
                     Snackbar.LENGTH_INDEFINITE).setAction(R.string.ok,
                     view -> ActivityCompat.requestPermissions(getActivity(),
                             new String[]{READ_EXTERNAL_STORAGE}, 1)).show();

@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -30,16 +31,21 @@ import fr.free.nrw.commons.nearby.NearbyActivity;
 import timber.log.Timber;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.app.Activity.RESULT_OK;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import static android.view.View.GONE;
 
 public class ContributionsListFragment extends DaggerFragment {
 
-    @BindView(R.id.contributionsList) GridView contributionsList;
-    @BindView(R.id.waitingMessage) TextView waitingMessage;
-    @BindView(R.id.emptyMessage) TextView emptyMessage;
+    @BindView(R.id.contributionsList)
+    GridView contributionsList;
+    @BindView(R.id.waitingMessage)
+    TextView waitingMessage;
+    @BindView(R.id.emptyMessage)
+    TextView emptyMessage;
     @Inject @Named("prefs") SharedPreferences prefs;
+    @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
     private ContributionController controller;
 
     @Override
@@ -119,7 +125,7 @@ public class ContributionsListFragment extends DaggerFragment {
                             // sees the explanation, try again to request the permission.
 
                             new AlertDialog.Builder(getActivity())
-                                    .setMessage(getString(R.string.storage_permission_rationale))
+                                    .setMessage(getString(R.string.read_storage_permission_rationale))
                                     .setPositiveButton("OK", (dialog, which) -> {
                                         requestPermissions(new String[]{READ_EXTERNAL_STORAGE}, 1);
                                         dialog.dismiss();
@@ -151,7 +157,40 @@ public class ContributionsListFragment extends DaggerFragment {
 
                 return true;
             case R.id.menu_from_camera:
-                controller.startCameraCapture();
+                boolean useExtStorage = defaultPrefs.getBoolean("useExternalStorage", true);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && useExtStorage) {
+                    // Here, thisActivity is the current activity
+                    if (ContextCompat.checkSelfPermission(getActivity(), WRITE_EXTERNAL_STORAGE)
+                            != PackageManager.PERMISSION_GRANTED) {
+                        if (shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE)) {
+                            // Show an explanation to the user *asynchronously* -- don't block
+                            // this thread waiting for the user's response! After the user
+                            // sees the explanation, try again to request the permission.
+                            new AlertDialog.Builder(getActivity())
+                                    .setMessage(getString(R.string.write_storage_permission_rationale))
+                                    .setPositiveButton("OK", (dialog, which) -> {
+                                        requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE}, 3);
+                                        dialog.dismiss();
+                                    })
+                                    .setNegativeButton("Cancel", null)
+                                    .create()
+                                    .show();
+                        } else {
+                            // No explanation needed, we can request the permission.
+                            requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE},
+                                    3);
+                            // MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE is an
+                            // app-defined int constant. The callback method gets the
+                            // result of the request.
+                        }
+                    } else {
+                        controller.startCameraCapture();
+                        return true;
+                    }
+                } else {
+                    controller.startCameraCapture();
+                    return true;
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -182,6 +221,12 @@ public class ContributionsListFragment extends DaggerFragment {
                 }
             }
             break;
+            case 3: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Timber.d("Call controller.startCameraCapture()");
+                    controller.startCameraCapture();
+                }
+            }
         }
     }
 
