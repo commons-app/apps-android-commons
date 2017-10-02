@@ -25,6 +25,7 @@ import com.pedrogomez.renderers.RVRendererAdapter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -36,6 +37,7 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.data.Category;
 import fr.free.nrw.commons.upload.MwVolleyApi;
+import fr.free.nrw.commons.utils.StringSortingUtils;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -107,7 +109,7 @@ public class CategorizationFragment extends Fragment {
 
         RxTextView.textChanges(categoriesFilter)
                 .takeUntil(RxView.detaches(categoriesFilter))
-                .debounce(300, TimeUnit.MILLISECONDS)
+                .debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(filter -> updateCategoryList(filter.toString()));
         return rootView;
@@ -200,6 +202,7 @@ public class CategorizationFragment extends Fragment {
                 )
                 .filter(categoryItem -> !containsYear(categoryItem.getName()))
                 .distinct()
+                .sorted(sortBySimilarity(filter))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         s -> categoriesAdapter.add(s), Timber::e, () -> {
@@ -219,6 +222,12 @@ public class CategorizationFragment extends Fragment {
                             }
                         }
                 );
+    }
+
+    private Comparator<CategoryItem> sortBySimilarity(final String filter) {
+        Comparator<String> stringSimilarityComparator = StringSortingUtils.sortBySimilarity(filter);
+        return (firstItem, secondItem) -> stringSimilarityComparator
+                .compare(firstItem.getName(), secondItem.getName());
     }
 
     private List<String> getStringList(List<CategoryItem> input) {
