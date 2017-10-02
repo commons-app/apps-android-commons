@@ -8,10 +8,10 @@
   <string name="signup">Regístrate</string>
   <string name="logging_in_title">Accediendo</string>
   <string name="logging_in_message">Espera un momento…</string>
-  <string name="login_success">¡Inicio de sesión exitoso!</string>
-  <string name="login_failed">¡Inicio de sesión fallido!</string>
+  <string name="login_success">Acceso correcto.</string>
+  <string name="login_failed">Acceso fallido.</string>
   <string name="upload_failed">No se encontró el archivo. Prueba con otro.</string>
-  <string name="authentication_failed">¡Autentificación fallida!</string>
+  <string name="authentication_failed">Falló la autenticación.</string>
   <string name="uploading_started">¡Empenzando a subir!</string>
   <string name="upload_completed_notification_title">¡Se subieron %1$s!</string>
   <string name="upload_completed_notification_text">Pulsa para ver tu subida</string>
@@ -78,7 +78,7 @@
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Normativa de privacidad&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Créditos&lt;/a&gt;</string>
   <string name="title_activity_about">Acerca de</string>
-  <string name="menu_feedback">Enviar comentarios (por e-mail)</string>
+  <string name="menu_feedback">Enviar comentarios (por correo)</string>
   <string name="no_email_client">No se ha instalado ningún cliente de correo</string>
   <string name="provider_categories">Categorías usadas recientemente</string>
   <string name="waiting_first_sync">Esperando la primera sincronización…</string>
@@ -135,6 +135,7 @@
   <string name="detail_license_empty">Licencia desconocida</string>
   <string name="menu_refresh">Actualizar</string>
   <string name="read_storage_permission_rationale">Permiso obligatorio: lectura de almacenamiento externo. La aplicación no puede funcionar sin él.</string>
+  <string name="write_storage_permission_rationale">Permiso necesario: Escribir en almacenamiento externo. La aplicación no puede funcionar sin él.</string>
   <string name="location_permission_rationale">Permiso opcional: obtener la ubicación actual para sugerir categorías</string>
   <string name="ok">Aceptar</string>
   <string name="title_activity_nearby">Lugares cercanos</string>
@@ -194,4 +195,6 @@
   <string name="error_while_cache">Error mientras se guardaban imágenes en la caché</string>
   <string name="title_info">Un título único descriptivo para el archivo, que servirá como un nombre de archivo. Puede usar un lenguaje claro con espacios. No incluya la extensión del archivo.</string>
   <string name="description_info">Por favor, describa el elemento multimedia tanto como sea posible: ¿dónde fue tomado?, ¿qué muestra?, ¿cuál es el contexto? Por favor, describa los objetos o personas. Ofrezca la información que no puede ser inferida tan facilmente, por ejemplo el momento del día si es un paisaje. Si el medio muestra algo inusual, explique qué lo hace insual.</string>
+  <string name="use_external_storage">Utilizar almacenamiento externo</string>
+  <string name="use_external_storage_summary">Guardar en el dispositivo imágenes capturadas con la cámara de la aplicación</string>
 </resources>
