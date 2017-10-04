@@ -197,7 +197,7 @@ public class CategorizationFragment extends Fragment {
                 .concatWith(
                         searchAll(filter)
                                 .mergeWith(searchCategories(filter))
-                                .concatWith( TextUtils.isEmpty(filter)
+                                .concatWith(TextUtils.isEmpty(filter)
                                         ? defaultCategories() : Observable.empty())
                 )
                 .filter(categoryItem -> !containsYear(categoryItem.getName()))
