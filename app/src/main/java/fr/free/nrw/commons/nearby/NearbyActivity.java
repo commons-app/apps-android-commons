@@ -257,8 +257,7 @@ public class NearbyActivity extends NavigationBaseActivity {
         }
     }
 
-    private void setMapViewLastUsed(boolean lastUsed)
-    {
+    private void setMapViewLastUsed(boolean lastUsed) {
         sharedPreferences.edit().putBoolean(MAP_LAST_USED_PREFERENCE, lastUsed).apply();
     }
 
@@ -337,9 +336,7 @@ public class NearbyActivity extends NavigationBaseActivity {
             if (viewMode == NearbyActivityMode.MAP)
             {
                 setMapFragment();
-            }
-            else
-            {
+            } else {
                 setListFragment();
             }
 
