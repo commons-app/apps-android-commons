@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"      tools:context=".MainActivity">
 
     <item
-        android:id="@+id/action_map"
+        android:id="@+id/action_toggle_view"
         android:title="@string/refresh_button"
         android:icon="@drawable/ic_map_white_24dp"
         android:orderInCategory="1"
