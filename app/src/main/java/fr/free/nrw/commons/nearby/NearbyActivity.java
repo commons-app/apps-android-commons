@@ -64,10 +64,10 @@ public class NearbyActivity extends NavigationBaseActivity {
         checkLocationPermission();
         bundle = new Bundle();
         initDrawer();
-        initViewState();
+        initViewMode();
     }
 
-    private void initViewState() {
+    private void initViewMode() {
         if (sharedPreferences.getBoolean(MAP_LAST_USED_PREFERENCE, false)) {
             viewMode = NearbyActivityMode.MAP;
         } else {
