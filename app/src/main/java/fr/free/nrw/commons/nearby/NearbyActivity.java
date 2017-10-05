@@ -3,12 +3,14 @@ package fr.free.nrw.commons.nearby;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -42,28 +44,46 @@ public class NearbyActivity extends NavigationBaseActivity {
 
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
-    private boolean isMapViewActive = false;
     private static final int LOCATION_REQUEST = 1;
+    public static final String MAP_LAST_USED_PREFERENCE = "mapLastUsed";
 
     private LocationServiceManager locationManager;
     private LatLng curLatLang;
     private Bundle bundle;
     private NearbyAsyncTask nearbyAsyncTask;
+    private SharedPreferences sharedPreferences;
+    private NearbyActivityMode viewMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         setContentView(R.layout.activity_nearby);
         ButterKnife.bind(this);
         checkLocationPermission();
         bundle = new Bundle();
         initDrawer();
+        initViewState();
+    }
+
+    private void initViewState() {
+        if (sharedPreferences.getBoolean(MAP_LAST_USED_PREFERENCE, false)) {
+            viewMode = NearbyActivityMode.MAP;
+        } else {
+            viewMode = NearbyActivityMode.LIST;
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_nearby, menu);
+
+        if (viewMode == NearbyActivityMode.MAP) {
+            MenuItem item = menu.findItem(R.id.action_toggle_view);
+            item.setIcon(R.drawable.ic_list_white_24dp);
+        }
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -74,16 +94,20 @@ public class NearbyActivity extends NavigationBaseActivity {
             case R.id.action_refresh:
                 refreshView();
                 return true;
-            case R.id.action_map:
-                showMapView();
-                if (isMapViewActive) {
-                    item.setIcon(R.drawable.ic_list_white_24dp);
-                } else {
-                    item.setIcon(R.drawable.ic_map_white_24dp);
-                }
+            case R.id.action_toggle_view:
+                toggleView();
+                toggleIcon(item);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void toggleIcon(MenuItem item) {
+        if (viewMode == NearbyActivityMode.MAP) {
+            item.setIcon(R.drawable.ic_list_white_24dp);
+        } else {
+            item.setIcon(R.drawable.ic_map_white_24dp);
         }
     }
 
@@ -198,21 +222,28 @@ public class NearbyActivity extends NavigationBaseActivity {
         }
     }
 
-    private void showMapView() {
+    private void toggleView() {
         if (nearbyAsyncTask != null) {
-            if (!isMapViewActive) {
-                isMapViewActive = true;
+            if (viewMode == NearbyActivityMode.LIST) {
+                viewMode = NearbyActivityMode.MAP;
                 if (nearbyAsyncTask.getStatus() == AsyncTask.Status.FINISHED) {
                     setMapFragment();
+                    setMapViewLastUsed(true);
                 }
 
             } else {
-                isMapViewActive = false;
+                viewMode = NearbyActivityMode.LIST;
                 if (nearbyAsyncTask.getStatus() == AsyncTask.Status.FINISHED) {
                     setListFragment();
+                    setMapViewLastUsed(false);
                 }
             }
         }
+    }
+
+    private void setMapViewLastUsed(boolean lastUsed)
+    {
+        sharedPreferences.edit().putBoolean(MAP_LAST_USED_PREFERENCE, lastUsed).apply();
     }
 
     @Override
@@ -287,9 +318,12 @@ public class NearbyActivity extends NavigationBaseActivity {
             bundle.putString("CurLatLng", gsonCurLatLng);
 
             // Begin the transaction
-            if (isMapViewActive) {
+            if (viewMode == NearbyActivityMode.MAP)
+            {
                 setMapFragment();
-            } else {
+            }
+            else
+            {
                 setListFragment();
             }
 
