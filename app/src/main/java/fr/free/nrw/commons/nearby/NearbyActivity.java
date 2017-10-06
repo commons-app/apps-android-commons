@@ -317,8 +317,7 @@ public class NearbyActivity extends NavigationBaseActivity {
             bundle.putString("CurLatLng", gsonCurLatLng);
 
             // Begin the transaction
-            if (viewMode == NearbyActivityMode.MAP)
-            {
+            if (viewMode == NearbyActivityMode.MAP) {
                 setMapFragment();
             } else {
                 setListFragment();
