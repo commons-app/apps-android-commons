@@ -2,6 +2,11 @@
 
     <style name="DarkAppTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="mainBackground">@color/main_background_dark</item>
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorAccent">@color/primaryColor</item>
+        <item name="colorButtonNormal">@color/primaryColor</item>
+
         <item name="semitransparentText">@color/commons_app_blue_dark</item>
         <item name="commonsAppBlue">@color/activity_welcome_background_dark</item>
         <item name="subBackground">@color/sub_background_dark</item>
@@ -18,6 +23,11 @@
 
     <style name="LightAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="mainBackground">@color/main_background_light</item>
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorAccent">@color/primaryColor</item>
+        <item name="colorButtonNormal">@color/primaryColor</item>
+
         <item name="semitransparentText">@color/commons_app_blue_light</item>
         <item name="commonsAppBlue">@color/activity_welcome_background_light</item>
         <item name="subBackground">@color/sub_background_light</item>
@@ -30,8 +40,6 @@
         <item name="iconPhoto">@drawable/ic_photo_white_24dp</item>
         <item name="iconUndo">@drawable/ic_undo_white_24dp</item>
 
-        <item name="colorPrimary">@color/action_bar_blue</item>
-        <item name="colorPrimaryDark">@color/status_bar_blue</item>
         <item name="spinnerTheme">@style/LightSpinnerTheme</item>
     </style>
 

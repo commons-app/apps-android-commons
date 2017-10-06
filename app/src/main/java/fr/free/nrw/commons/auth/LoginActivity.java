@@ -5,11 +5,15 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.AppCompatDelegate;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -17,10 +21,10 @@ import android.widget.Toast;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.WelcomeActivity;
-
 import fr.free.nrw.commons.PageTitle;
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import timber.log.Timber;
 
@@ -32,6 +36,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
     public static final String PARAM_USERNAME = "fr.free.nrw.commons.login.username";
 
+    private AppCompatDelegate delegate;
     private SharedPreferences prefs = null;
 
     private Button loginButton;
@@ -40,22 +45,24 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     private EditText twoFactorEdit;
     ProgressDialog progressDialog;
     private LoginTextWatcher textWatcher = new LoginTextWatcher();
-
     private CommonsApplication app;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        setTheme(Utils.isDarkTheme(this) ? R.style.DarkAppTheme : R.style.LightAppTheme);
+        getDelegate().installViewFactory();
+        getDelegate().onCreate(savedInstanceState);
         super.onCreate(savedInstanceState);
 
         app = CommonsApplication.getInstance();
 
         setContentView(R.layout.activity_login);
 
-        loginButton = (Button) findViewById(R.id.loginButton);
-        Button signupButton = (Button) findViewById(R.id.signupButton);
-        usernameEdit = (EditText) findViewById(R.id.loginUsername);
-        passwordEdit = (EditText) findViewById(R.id.loginPassword);
-        twoFactorEdit = (EditText) findViewById(R.id.loginTwoFactor);
+        loginButton = findViewById(R.id.loginButton);
+        Button signupButton = findViewById(R.id.signupButton);
+        usernameEdit = findViewById(R.id.loginUsername);
+        passwordEdit = findViewById(R.id.loginPassword);
+        twoFactorEdit = findViewById(R.id.loginTwoFactor);
 
         prefs = getSharedPreferences("fr.free.nrw.commons", MODE_PRIVATE);
 
@@ -64,8 +71,77 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         twoFactorEdit.addTextChangedListener(textWatcher);
         passwordEdit.setOnEditorActionListener(newLoginInputActionListener());
 
-        loginButton.setOnClickListener(this::performLogin);
-        signupButton.setOnClickListener(this::signUp);
+        loginButton.setOnClickListener(view -> performLogin());
+        signupButton.setOnClickListener(view -> signUp());
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        getDelegate().onPostCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (prefs.getBoolean("firstrun", true)) {
+            WelcomeActivity.startYourself(this);
+            prefs.edit().putBoolean("firstrun", false).apply();
+        }
+        if (app.getCurrentAccount() != null) {
+            startMainActivity();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        try {
+            // To prevent leaked window when finish() is called, see http://stackoverflow.com/questions/32065854/activity-has-leaked-window-at-alertdialog-show-method
+            if (progressDialog != null && progressDialog.isShowing()) {
+                progressDialog.dismiss();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        usernameEdit.removeTextChangedListener(textWatcher);
+        passwordEdit.removeTextChangedListener(textWatcher);
+        twoFactorEdit.removeTextChangedListener(textWatcher);
+        delegate.onDestroy();
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        delegate.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        delegate.onStop();
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        getDelegate().onPostResume();
+    }
+
+    @Override
+    public void setContentView(View view, ViewGroup.LayoutParams params) {
+        getDelegate().setContentView(view, params);
+    }
+
+    private void performLogin() {
+        Timber.d("Login to start!");
+        LoginTask task = getLoginTask();
+        task.execute();
+    }
+
+    private void signUp() {
+        Intent intent = new Intent(this, SignupActivity.class);
+        startActivity(intent);
     }
 
     private class LoginTextWatcher implements TextWatcher {
@@ -92,48 +168,15 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         return (textView, actionId, keyEvent) -> {
             if (loginButton.isEnabled()) {
                 if (actionId == IME_ACTION_DONE) {
-                    performLogin(textView);
+                    performLogin();
                     return true;
                 } else if ((keyEvent != null) && keyEvent.getKeyCode() == KEYCODE_ENTER) {
-                    performLogin(textView);
+                    performLogin();
                     return true;
                 }
             }
             return false;
         };
-    }
-
-    protected void onResume() {
-        super.onResume();
-        if (prefs.getBoolean("firstrun", true)) {
-            WelcomeActivity.startYourself(this);
-            prefs.edit().putBoolean("firstrun", false).apply();
-        }
-        if (app.getCurrentAccount() != null) {
-            startMainActivity();
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        try {
-            // To prevent leaked window when finish() is called, see http://stackoverflow.com/questions/32065854/activity-has-leaked-window-at-alertdialog-show-method
-            if (progressDialog != null && progressDialog.isShowing()) {
-                progressDialog.dismiss();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        usernameEdit.removeTextChangedListener(textWatcher);
-        passwordEdit.removeTextChangedListener(textWatcher);
-        twoFactorEdit.removeTextChangedListener(textWatcher);
-        super.onDestroy();
-    }
-
-    private void performLogin(View view) {
-        Timber.d("Login to start!");
-        LoginTask task = getLoginTask();
-        task.execute();
     }
 
     private LoginTask getLoginTask() {
@@ -164,13 +207,10 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * Called when Sign Up button is clicked.
-     * @param view View
-     */
-    public void signUp(View view) {
-        Intent intent = new Intent(this, SignupActivity.class);
-        startActivity(intent);
+    @Override
+    @NonNull
+    public MenuInflater getMenuInflater() {
+        return getDelegate().getMenuInflater();
     }
 
     public void askUserForTwoFactorAuth() {
@@ -207,4 +247,10 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         finish();
     }
 
+    private AppCompatDelegate getDelegate() {
+        if (delegate == null) {
+            delegate = AppCompatDelegate.create(this, null);
+        }
+        return delegate;
+    }
 }
