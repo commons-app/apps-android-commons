@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatDelegate;
 import android.text.Editable;
@@ -17,7 +18,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
@@ -46,6 +46,8 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     ProgressDialog progressDialog;
     private LoginTextWatcher textWatcher = new LoginTextWatcher();
     private CommonsApplication app;
+    private ViewGroup errorMessageContainer;
+    private TextView errorMessage;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,6 +65,8 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         usernameEdit = findViewById(R.id.loginUsername);
         passwordEdit = findViewById(R.id.loginPassword);
         twoFactorEdit = findViewById(R.id.loginTwoFactor);
+        errorMessageContainer = findViewById(R.id.error_message_container);
+        errorMessage = findViewById(R.id.error_message);
 
         prefs = getSharedPreferences("fr.free.nrw.commons", MODE_PRIVATE);
 
@@ -216,24 +220,24 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     public void askUserForTwoFactorAuth() {
         if (BuildConfig.DEBUG) {
             twoFactorEdit.setVisibility(View.VISIBLE);
-            showUserToastAndCancelDialog(R.string.login_failed_2fa_needed);
+            showMessageAndCancelDialog(R.string.login_failed_2fa_needed);
         } else {
-            showUserToastAndCancelDialog(R.string.login_failed_2fa_not_supported);
+            showMessageAndCancelDialog(R.string.login_failed_2fa_not_supported);
         }
     }
 
-    public void showUserToastAndCancelDialog(int resId) {
-        showUserToast(resId);
+    public void showMessageAndCancelDialog(@StringRes int resId) {
+        showMessage(resId);
         progressDialog.cancel();
     }
 
-    private void showUserToast(int resId) {
-        Toast.makeText(this, resId, Toast.LENGTH_LONG).show();
+    private void showMessage(@StringRes int resId) {
+        errorMessage.setText(getString(resId));
+        errorMessageContainer.setVisibility(View.VISIBLE);
     }
 
-    public void showSuccessToastAndDismissDialog() {
-        Toast successToast = Toast.makeText(this, R.string.login_success, Toast.LENGTH_SHORT);
-        successToast.show();
+    public void showSuccessAndDismissDialog() {
+        showMessage(R.string.login_success);
         progressDialog.dismiss();
     }
 
