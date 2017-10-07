@@ -36,7 +36,7 @@
                     android:gravity="center"
                     android:paddingBottom="32dp"
                     android:paddingTop="32dp"
-                    android:text="Login to your account"
+                    android:text="@string/login_to_your_account"
                     android:textColor="@android:color/white"
                     android:textSize="24sp" />
 
@@ -179,13 +179,15 @@
             android:layout_height="64dp"
             android:elevation="8dp"
             android:layout_gravity="center_horizontal"
-            app:srcCompat="@drawable/blue_rinse_circle" />
+            app:srcCompat="@drawable/blue_rinse_circle"
+            tools:ignore="UnusedAttribute" />
 
         <android.support.v7.widget.AppCompatImageView
             android:layout_width="42dp"
             android:layout_height="42dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp"
+            tools:ignore="UnusedAttribute"
             android:elevation="8dp"
             app:srcCompat="@drawable/commons_logo_large" />
 

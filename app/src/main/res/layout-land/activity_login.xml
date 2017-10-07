@@ -36,7 +36,7 @@
                     android:gravity="center"
                     android:paddingBottom="32dp"
                     android:paddingTop="32dp"
-                    android:text="Login to your account"
+                    android:text="@string/login_to_your_account"
                     android:textColor="@android:color/white"
                     android:textSize="24sp" />
 
@@ -178,11 +178,13 @@
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:elevation="8dp"
+            tools:ignore="UnusedAttribute"
             android:layout_gravity="center_horizontal"
             app:srcCompat="@drawable/blue_rinse_circle" />
 
         <android.support.v7.widget.AppCompatImageView
             android:layout_width="42dp"
+            tools:ignore="UnusedAttribute"
             android:layout_height="42dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp"

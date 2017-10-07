@@ -206,4 +206,5 @@ Tap this message (or hit back) to skip this step.</string>
   <string name="description_info">Please describe the media as much as possible: Where was it taken? What does it show? What is the context? Please describe the objects or persons. Reveal information that can not be easily guessed, for instance the time of day if it is a landscape. If the media shows something unusual, please explain what makes it unusual.</string>
   <string name="use_external_storage">Use external storage</string>
   <string name="use_external_storage_summary">Save pictures taken with the in-app camera on your device</string>
+    <string name="login_to_your_account">Login to your account</string>
 </resources>

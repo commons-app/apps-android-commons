@@ -31,19 +31,16 @@ import timber.log.Timber;
 import static android.view.KeyEvent.KEYCODE_ENTER;
 import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
 
-
 public class LoginActivity extends AccountAuthenticatorActivity {
 
     public static final String PARAM_USERNAME = "fr.free.nrw.commons.login.username";
-
+    ProgressDialog progressDialog;
     private AppCompatDelegate delegate;
     private SharedPreferences prefs = null;
-
     private Button loginButton;
     private EditText usernameEdit;
     private EditText passwordEdit;
     private EditText twoFactorEdit;
-    ProgressDialog progressDialog;
     private LoginTextWatcher textWatcher = new LoginTextWatcher();
     private CommonsApplication app;
     private ViewGroup errorMessageContainer;
@@ -137,6 +134,51 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         getDelegate().setContentView(view, params);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    @NonNull
+    public MenuInflater getMenuInflater() {
+        return getDelegate().getMenuInflater();
+    }
+
+    public void askUserForTwoFactorAuth() {
+        if (BuildConfig.DEBUG) {
+            twoFactorEdit.setVisibility(View.VISIBLE);
+            showMessageAndCancelDialog(R.string.login_failed_2fa_needed);
+        } else {
+            showMessageAndCancelDialog(R.string.login_failed_2fa_not_supported);
+        }
+    }
+
+    public void showMessageAndCancelDialog(@StringRes int resId) {
+        showMessage(resId);
+        progressDialog.cancel();
+    }
+
+    public void showSuccessAndDismissDialog() {
+        showMessage(R.string.login_success);
+        progressDialog.dismiss();
+    }
+
+    public void emptySensitiveEditFields() {
+        passwordEdit.setText("");
+        twoFactorEdit.setText("");
+    }
+
+    public void startMainActivity() {
+        ContributionsActivity.startYourself(this);
+        finish();
+    }
+
     private void performLogin() {
         Timber.d("Login to start!");
         LoginTask task = getLoginTask();
@@ -146,26 +188,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     private void signUp() {
         Intent intent = new Intent(this, SignupActivity.class);
         startActivity(intent);
-    }
-
-    private class LoginTextWatcher implements TextWatcher {
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
-        }
-
-        @Override
-        public void onTextChanged(CharSequence charSequence, int start, int count, int after) {
-        }
-
-        @Override
-        public void afterTextChanged(Editable editable) {
-            if (usernameEdit.getText().length() != 0 && passwordEdit.getText().length() != 0 &&
-                    (BuildConfig.DEBUG || twoFactorEdit.getText().length() != 0 || twoFactorEdit.getVisibility() != View.VISIBLE)) {
-                loginButton.setEnabled(true);
-            } else {
-                loginButton.setEnabled(false);
-            }
-        }
     }
 
     private TextView.OnEditorActionListener newLoginInputActionListener() {
@@ -201,54 +223,9 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         return new PageTitle(username).getText();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    @NonNull
-    public MenuInflater getMenuInflater() {
-        return getDelegate().getMenuInflater();
-    }
-
-    public void askUserForTwoFactorAuth() {
-        if (BuildConfig.DEBUG) {
-            twoFactorEdit.setVisibility(View.VISIBLE);
-            showMessageAndCancelDialog(R.string.login_failed_2fa_needed);
-        } else {
-            showMessageAndCancelDialog(R.string.login_failed_2fa_not_supported);
-        }
-    }
-
-    public void showMessageAndCancelDialog(@StringRes int resId) {
-        showMessage(resId);
-        progressDialog.cancel();
-    }
-
     private void showMessage(@StringRes int resId) {
         errorMessage.setText(getString(resId));
         errorMessageContainer.setVisibility(View.VISIBLE);
-    }
-
-    public void showSuccessAndDismissDialog() {
-        showMessage(R.string.login_success);
-        progressDialog.dismiss();
-    }
-
-    public void emptySensitiveEditFields() {
-        passwordEdit.setText("");
-        twoFactorEdit.setText("");
-    }
-
-    public void startMainActivity() {
-        ContributionsActivity.startYourself(this);
-        finish();
     }
 
     private AppCompatDelegate getDelegate() {
@@ -256,5 +233,25 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             delegate = AppCompatDelegate.create(this, null);
         }
         return delegate;
+    }
+
+    private class LoginTextWatcher implements TextWatcher {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int start, int count, int after) {
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            if (usernameEdit.getText().length() != 0 && passwordEdit.getText().length() != 0 &&
+                    (BuildConfig.DEBUG || twoFactorEdit.getText().length() != 0 || twoFactorEdit.getVisibility() != View.VISIBLE)) {
+                loginButton.setEnabled(true);
+            } else {
+                loginButton.setEnabled(false);
+            }
+        }
     }
 }
