@@ -134,7 +134,8 @@
   <string name="detail_description_empty">Sen descrición</string>
   <string name="detail_license_empty">Licenza descoñecida</string>
   <string name="menu_refresh">Refrescar</string>
-  <string name="storage_permission_rationale">Permiso necesarioː ler un almacenamento externo. A aplicación non pode funcionar sen isto.</string>
+  <string name="read_storage_permission_rationale">Permiso necesarioː ler un almacenamento externo. A aplicación non pode funcionar sen isto.</string>
+  <string name="write_storage_permission_rationale">Permiso necesario: Escribir en almacenamento externo. A aplicación non pode funcionar sen el.</string>
   <string name="location_permission_rationale">Permiso opcionalː obter a localización actual para suxerir categorías</string>
   <string name="ok">Aceptar</string>
   <string name="title_activity_nearby">Lugares próximos</string>
@@ -194,4 +195,6 @@
   <string name="error_while_cache">Erro mentras se gardaban as imaxes na caché</string>
   <string name="title_info">Un título único descritivo para o ficheiro, que servirá como un nome de ficheiro. Pode usar unha linguaxe clara con espazos. Non inclúa a extensión do ficheiro</string>
   <string name="description_info">Por favor, describa o ficheiro todo o posibleː Onde se gravou? Cal é o contexto? Por favor, describa os obxectos ou persoas. Indique información que non pode ser adiviñada de forma doada, por exemplo, a hora do día se é unha paisaxe. Se o ficheiro amosa algo pouco habitual, por favor, explique que é o que o fai excepcional.</string>
+  <string name="use_external_storage">Usar o almacenamento externo</string>
+  <string name="use_external_storage_summary">Gardar as imaxes capturadas coa cámara do seu dispositivo</string>
 </resources>

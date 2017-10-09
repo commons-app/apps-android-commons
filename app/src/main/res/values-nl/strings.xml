@@ -129,7 +129,7 @@
   <string name="detail_description_empty">Geen beschrijving</string>
   <string name="detail_license_empty">Onbekende licentie</string>
   <string name="menu_refresh">Vernieuwen</string>
-  <string name="storage_permission_rationale">Benodigde toestemming: Lees externe opslag. Zonder deze toestemming kan de app niet functioneren.</string>
+  <string name="read_storage_permission_rationale">Benodigde toestemming: Lees externe opslag. Zonder deze toestemming kan de app niet functioneren.</string>
   <string name="location_permission_rationale">Optionele toestemming: Huidige locatie ophalen voor categoriesuggesties</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Plaatsen in de buurt</string>

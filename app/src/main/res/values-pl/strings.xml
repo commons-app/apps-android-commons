@@ -42,7 +42,7 @@
   <string name="login_failed_password">Nie można zalogować - sprawdź hasło</string>
   <string name="login_failed_throttled">Zbyt wiele nieudanych prób zalogowania. Spróbuj ponownie za kilka minut.</string>
   <string name="login_failed_blocked">Przepraszamy, ten użytkownik został zablokowany na Commons</string>
-    <string name="login_failed_2fa_needed">Wprowadź swój kod dla  dwuetapowej autoryzacji.</string>
+  <string name="login_failed_2fa_needed">Wprowadź swój kod dla  dwuetapowej autoryzacji.</string>
   <string name="login_failed_generic">Logowanie nie powiodło się</string>
   <string name="share_upload_button">Prześlij</string>
   <string name="multiple_share_base_title">Nazwij ten zestaw</string>
@@ -53,7 +53,7 @@
   <string name="refresh_button">Odśwież</string>
   <string name="gps_disabled">GPS w twoim urządzeniu jest wyłączony. Czy chcesz go włączyć?</string>
   <string name="enable_gps">Włącz GPS</string>
-    <string name="contributions_subtitle_zero">Na razie brak przesłanych plików!</string>
+  <string name="contributions_subtitle_zero">Na razie brak przesłanych plików!</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">Przesłano @string/contributions_subtitle_zero</item>
     <item quantity="one">Przesłano %d plik</item>
@@ -133,7 +133,7 @@
   <string name="detail_description_empty">Brak opisu</string>
   <string name="detail_license_empty">Nieznana licencja</string>
   <string name="menu_refresh">Odśwież</string>
-  <string name="storage_permission_rationale">Wymagane uprawnienia: odczyt z dysku zewnętrznego. Aplikacja nie będzie w stanie funkcjonować bez tego.</string>
+  <string name="read_storage_permission_rationale">Wymagane uprawnienia: odczyt z dysku zewnętrznego. Aplikacja nie będzie w stanie funkcjonować bez tego.</string>
   <string name="location_permission_rationale">Opcjonalne zezwolenie: uzyskiwanie bieżącej lokalizacji dla wygenerowania propozycji kategorii</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Pobliskie miejsca</string>
@@ -153,8 +153,8 @@
   <string name="become_a_tester_description">Dołącz do kanału bety w Google Play i dostań wczesny dostęp do nowych funkcji i łatek</string>
   <string name="use_wikidata">Użyj Wikidanych</string>
   <string name="_2fa_code">Kod 2FA</string>
-    <string name="maximum_limit">Górna Granica</string>
-    <string name="maximum_limit_alert">Nie można wyświetlić ponad 500</string>
+  <string name="maximum_limit">Górna Granica</string>
+  <string name="maximum_limit_alert">Nie można wyświetlić ponad 500</string>
   <string name="login_failed_2fa_not_supported">Uwierzytelnianie dwuskładnikowe obecnie nie jest obsługiwane.</string>
   <string name="logout_verification">Czy na pewno wylogować?</string>
   <string name="commons_logo">Logo Commons</string>
@@ -164,10 +164,10 @@
   <string name="welcome_image_llamas">Lamy</string>
   <string name="welcome_image_rainbow_bridge">Rainbow Bridge</string>
   <string name="welcome_image_tulip">Tulipan</string>
-    <string name="welcome_image_no_selfies">Brak Selfie</string>
+  <string name="welcome_image_no_selfies">Brak Selfie</string>
   <string name="welcome_image_welcome_wikipedia">Witaj na Wikipedii</string>
   <string name="welcome_image_welcome_copyright" fuzzy="true">Witaj w prawach autorskich.</string>
-    <string name="welcome_image_sydney_opera_house">Opera Sydnej</string>
+  <string name="welcome_image_sydney_opera_house">Opera Sydnej</string>
   <string name="cancel">Anuluj</string>
   <string name="navigation_drawer_open">Otwórz</string>
   <string name="navigation_drawer_close">Zamknij</string>
