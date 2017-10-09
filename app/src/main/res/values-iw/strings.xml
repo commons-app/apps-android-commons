@@ -134,6 +134,7 @@
   <string name="detail_license_empty">רישיון לא ידוע</string>
   <string name="menu_refresh">רענון</string>
   <string name="read_storage_permission_rationale">הרשאה מחייבת: אחסון. היישום לא יכול לעבוד בלי זה.</string>
+  <string name="write_storage_permission_rationale">נדרשת הרשאה: כתיבה לאחסון חיצוני. היישום לא יכול לעבוד בלי זה.</string>
   <string name="location_permission_rationale">הרשאה לא מחייבת: קבלת מיקום נוכחי בשביל הצעות קטגוריות</string>
   <string name="ok">אישור</string>
   <string name="title_activity_nearby">מקומות בסביבה</string>
@@ -190,4 +191,6 @@
   <string name="error_while_cache">שגיאה במשירת תמונות במטמון</string>
   <string name="title_info">כותרת מתארת ייחודית לקובץ, שתשמש שם קובץ. אפשר להשתמש בשפה פשוטה עם רווחים. אין לכלול סיומת קובץ</string>
   <string name="description_info">נא לתאר את המדיה כמה שיותר: איפה היא נוצרה? מה היא מראה? מה ההקשר? נא לתאר את העצמים או את האנשים. נא לחשוף מידע שאי־אפשר לנחש בקלות, למשל, הזמן ביום אם זאת תמונת נוף. אם המדיה מציגה משהו בלתי־רגיל, נא להסביר מה מיוחד בה.</string>
+  <string name="use_external_storage">להשתמש באחסון חיצוני</string>
+  <string name="use_external_storage_summary">שמירת תמונות שצולמו באמצעות מצלמה בתוך היישום במכשיר שלך</string>
 </resources>
