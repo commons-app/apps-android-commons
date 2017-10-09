@@ -5,9 +5,11 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v4.app.NavUtils;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatDelegate;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,6 +21,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.PageTitle;
@@ -34,17 +38,20 @@ import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
 public class LoginActivity extends AccountAuthenticatorActivity {
 
     public static final String PARAM_USERNAME = "fr.free.nrw.commons.login.username";
+
+    @BindView(R.id.loginButton) Button loginButton;
+    @BindView(R.id.signupButton) Button signupButton;
+    @BindView(R.id.loginUsername) EditText usernameEdit;
+    @BindView(R.id.loginPassword) EditText passwordEdit;
+    @BindView(R.id.loginTwoFactor) EditText twoFactorEdit;
+    @BindView(R.id.error_message_container) ViewGroup errorMessageContainer;
+    @BindView(R.id.error_message) TextView errorMessage;
+
+    private CommonsApplication app;
     ProgressDialog progressDialog;
     private AppCompatDelegate delegate;
     private SharedPreferences prefs = null;
-    private Button loginButton;
-    private EditText usernameEdit;
-    private EditText passwordEdit;
-    private EditText twoFactorEdit;
     private LoginTextWatcher textWatcher = new LoginTextWatcher();
-    private CommonsApplication app;
-    private ViewGroup errorMessageContainer;
-    private TextView errorMessage;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,13 +64,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
         setContentView(R.layout.activity_login);
 
-        loginButton = findViewById(R.id.loginButton);
-        Button signupButton = findViewById(R.id.signupButton);
-        usernameEdit = findViewById(R.id.loginUsername);
-        passwordEdit = findViewById(R.id.loginPassword);
-        twoFactorEdit = findViewById(R.id.loginTwoFactor);
-        errorMessageContainer = findViewById(R.id.error_message_container);
-        errorMessage = findViewById(R.id.error_message);
+        ButterKnife.bind(this);
 
         prefs = getSharedPreferences("fr.free.nrw.commons", MODE_PRIVATE);
 
@@ -160,12 +161,12 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     }
 
     public void showMessageAndCancelDialog(@StringRes int resId) {
-        showMessage(resId);
+        showMessage(resId, R.color.secondaryDarkColor);
         progressDialog.cancel();
     }
 
     public void showSuccessAndDismissDialog() {
-        showMessage(R.string.login_success);
+        showMessage(R.string.login_success, R.color.primaryDarkColor);
         progressDialog.dismiss();
     }
 
@@ -223,8 +224,9 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         return new PageTitle(username).getText();
     }
 
-    private void showMessage(@StringRes int resId) {
+    private void showMessage(@StringRes int resId, @ColorRes int colorResId) {
         errorMessage.setText(getString(resId));
+        errorMessage.setTextColor(ContextCompat.getColor(this, colorResId));
         errorMessageContainer.setVisibility(View.VISIBLE);
     }
 
@@ -246,12 +248,9 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
         @Override
         public void afterTextChanged(Editable editable) {
-            if (usernameEdit.getText().length() != 0 && passwordEdit.getText().length() != 0 &&
-                    (BuildConfig.DEBUG || twoFactorEdit.getText().length() != 0 || twoFactorEdit.getVisibility() != View.VISIBLE)) {
-                loginButton.setEnabled(true);
-            } else {
-                loginButton.setEnabled(false);
-            }
+            boolean enabled = usernameEdit.getText().length() != 0 && passwordEdit.getText().length() != 0 &&
+                    (BuildConfig.DEBUG || twoFactorEdit.getText().length() != 0 || twoFactorEdit.getVisibility() != View.VISIBLE);
+            loginButton.setEnabled(enabled);
         }
     }
 }

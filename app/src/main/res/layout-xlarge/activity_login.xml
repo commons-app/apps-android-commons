@@ -45,7 +45,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/title"
-                    android:background="@color/primaryLightColor"
                     android:visibility="gone"
                     tools:visibility="visible">
 
@@ -59,7 +58,7 @@
                         android:layout_marginStart="16dp"
                         android:paddingBottom="8dp"
                         android:paddingTop="8dp"
-                        android:textColor="@color/primaryDarkColor"
+                        android:textColor="@color/secondaryDarkColor"
                         tools:text="Check your password, something doesnt look right" />
                 </FrameLayout>
 
