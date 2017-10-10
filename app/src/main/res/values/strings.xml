@@ -80,7 +80,7 @@ Tap this message (or hit back) to skip this step.</string>
   <string name="about_license">The Wikimedia Commons app is an open-source app created and maintained by grantees and volunteers of the Wikimedia community. The Wikimedia Foundation is not involved in the creation, development, or maintenance of the app. </string>
   <string name="trademarked_name" translatable="false">Wikimedia Commons</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Source&lt;/a&gt; and &lt;a href=\"https://commons-app.github.io/\"&gt;website&lt;/a&gt; on GitHub. Create a new &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub issue&lt;/a&gt; for bug reports and suggestions.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privacy policy&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy-(draft)\"&gt;Privacy policy&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Credits&lt;/a&gt;</string>
   <string name="title_activity_about">About</string>
   <string name="menu_feedback">Send Feedback (via Email)</string>
