@@ -135,6 +135,7 @@
   <string name="detail_license_empty">Llicencia desconocida</string>
   <string name="menu_refresh">Refrescar</string>
   <string name="read_storage_permission_rationale">Permisu riquíu: llectura d\'almacenamientu esternu. L\'aplicación nun puede funcionar ensin él.</string>
+  <string name="write_storage_permission_rationale">Permisu riquíu: escritura d\'almacenamientu esternu. L\'aplicación nun puede funcionar ensin él.</string>
   <string name="location_permission_rationale">Permisu opcional: llograr l\'allugamientu actual pa suxerir categoríes</string>
   <string name="ok">Aceutar</string>
   <string name="title_activity_nearby">Llugares cercanos</string>
@@ -194,4 +195,6 @@
   <string name="error_while_cache">Error al poner les fotos na caché</string>
   <string name="title_info">Un títulu descriptivu únicu pal ficheru, que sirvirá para da-y nome al ficheru. Se pue usar llinguax normal con espacios. Nun amiestes la estensión del ficheru</string>
   <string name="description_info">Por favor, describi l\'elementu multimedia tantu como sía posible: ¿ónde se tomó?, ¿qué amuesa?, ¿cuál ye\'l contestu? Por favor, describi los oxetos o persones. Revela la información que nun pueda aldovinase de mou cenciellu, por casu el momentu del día si ye un paisaxe. Si\'l mediu amuesa daqué desacostumao, esplica qué lo fai raro.</string>
+  <string name="use_external_storage">Usar almacenamientu esternu</string>
+  <string name="use_external_storage_summary">Guardar nel preséu les imaxes tomaes cola cámara de la app</string>
 </resources>
