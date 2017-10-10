@@ -54,7 +54,7 @@
   <string name="gps_disabled">आपके डिवाइस में जीपीएस अक्षम है। क्या आप इसे सक्षम करना चाहेंगे?</string>
   <string name="enable_gps">जीपीएस सक्षम करें</string>
   <string name="contributions_subtitle_zero">अभी तक कोई अपलोड नहीं</string>
-  <string name="contributions_subtitle">{{PLURAL | शून्य = @ स्ट्रिंग / योगदान_उपशीर्षक_शुन्य | एक =% d अपलोड |% d अपलोड्स}}</string>
+  <string name="contributions_subtitle" formatted="false">{{PLURAL | शून्य = @ स्ट्रिंग / योगदान_उपशीर्षक_शुन्य | एक =% d अपलोड |% d अपलोड्स}}</string>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">%d अपलोड शुरू</item>
     <item quantity="other">%d अपलोड शुरू</item>
