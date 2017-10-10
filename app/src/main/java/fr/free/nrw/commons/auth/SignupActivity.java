@@ -25,7 +25,8 @@ public class SignupActivity extends BaseActivity {
 
         webView.setWebViewClient(new MyWebViewClient());
         WebSettings webSettings = webView.getSettings();
-        //Needed to refresh Captcha. Might introduce XSS vulnerabilities, but we can trust Wikimedia's site... right?
+        /*Needed to refresh Captcha. Might introduce XSS vulnerabilities, but we can
+         trust Wikimedia's site... right?*/
         webSettings.setJavaScriptEnabled(true);
 
         webView.loadUrl(BuildConfig.SIGNUP_LANDING_URL);
