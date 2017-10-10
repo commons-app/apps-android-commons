@@ -2,6 +2,7 @@ package fr.free.nrw.commons.nearby;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
@@ -158,13 +159,28 @@ public class NearbyActivity extends NavigationBaseActivity {
                     if (progressBar != null) {
                         progressBar.setVisibility(View.GONE);
                     }
-                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                    Fragment noPermissionsFragment = new NoPermissionsFragment();
-                    fragmentTransaction.replace(R.id.container, noPermissionsFragment);
-                    fragmentTransaction.commit();
+
+                    showLocationPermissionDeniedErrorDialog();
                 }
             }
         }
+    }
+
+    private void showLocationPermissionDeniedErrorDialog() {
+        new AlertDialog.Builder(this)
+                .setMessage(R.string.nearby_needs_permissions)
+                .setCancelable(false)
+                .setPositiveButton(R.string.give_permission, (dialog, which) -> {
+                    //will ask for the location permission again
+                    checkLocationPermission();
+                })
+                .setNegativeButton(R.string.cancel, (dialog, which) -> {
+                    //dismiss dialog and finish activity
+                    dialog.cancel();
+                    finish();
+                })
+                .create()
+                .show();
     }
 
     private void checkGps() {
