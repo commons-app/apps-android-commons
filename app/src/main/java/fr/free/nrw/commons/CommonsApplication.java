@@ -13,7 +13,6 @@ import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
 import android.support.v4.util.LruCache;
-import android.util.Log;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.stetho.Stetho;
@@ -35,7 +34,6 @@ import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.NearbyPlaces;
-import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.FileUtils;
 import timber.log.Timber;
 
@@ -51,12 +49,6 @@ import timber.log.Timber;
 public class CommonsApplication extends Application {
 
     private Account currentAccount = null; // Unlike a savings account...
-    public static final String API_URL = "https://commons.wikimedia.org/w/api.php";
-    public static final String IMAGE_URL_BASE = "https://upload.wikimedia.org/wikipedia/commons";
-    public static final String HOME_URL = "https://commons.wikimedia.org/wiki/";
-    public static final String MOBILE_HOME_URL = "https://commons.m.wikimedia.org/wiki/";
-    public static final String EVENTLOG_URL = "https://www.wikimedia.org/beacon/event";
-    public static final String EVENTLOG_WIKI = "commonswiki";
 
     public static final Object[] EVENT_UPLOAD_ATTEMPT = {"MobileAppUploadAttempts", 5334329L};
     public static final Object[] EVENT_LOGIN_ATTEMPT = {"MobileAppLoginAttempts", 5257721L};
@@ -92,7 +84,7 @@ public class CommonsApplication extends Application {
 
     public MediaWikiApi getMWApi() {
         if (api == null) {
-            api = new ApacheHttpClientMediaWikiApi(API_URL);
+            api = new ApacheHttpClientMediaWikiApi(BuildConfig.WIKIMEDIA_API_HOST);
         }
         return api;
     }
@@ -155,10 +147,10 @@ public class CommonsApplication extends Application {
      * @return Account|null
      */
     public Account getCurrentAccount() {
-        if(currentAccount == null) {
+        if (currentAccount == null) {
             AccountManager accountManager = AccountManager.get(this);
             Account[] allAccounts = accountManager.getAccountsByType(AccountUtil.accountType());
-            if(allAccounts.length != 0) {
+            if (allAccounts.length != 0) {
                 currentAccount = allAccounts[0];
             }
         }
@@ -169,7 +161,7 @@ public class CommonsApplication extends Application {
         AccountManager accountManager = AccountManager.get(this);
         Account curAccount = getCurrentAccount();
        
-        if(curAccount == null) {
+        if (curAccount == null) {
             return false; // This should never happen
         }
         
@@ -190,7 +182,7 @@ public class CommonsApplication extends Application {
                 pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT);
     }
 
-    public void clearApplicationData(Context context, NavigationBaseActivity.LogoutListener logoutListener) {
+    public void clearApplicationData(Context context, LogoutListener logoutListener) {
         File cacheDirectory = context.getCacheDir();
         File applicationDirectory = new File(cacheDirectory.getParent());
         if (applicationDirectory.exists()) {
@@ -222,10 +214,8 @@ public class CommonsApplication extends Application {
                 setIndex(getIndex() + 1);
 
                 try {
-                    if (accountManagerFuture != null) {
-                        if (accountManagerFuture.getResult()) {
-                            Timber.d("Account removed successfully.");
-                        }
+                    if (accountManagerFuture != null && accountManagerFuture.getResult()) {
+                        Timber.d("Account removed successfully.");
                     }
                 } catch (OperationCanceledException | IOException | AuthenticatorException e) {
                     e.printStackTrace();
@@ -234,11 +224,13 @@ public class CommonsApplication extends Application {
                 if (getIndex() == allAccounts.length) {
                     Timber.d("All accounts have been removed");
                     //TODO: fix preference manager
-                    PreferenceManager.getDefaultSharedPreferences(getInstance()).edit().clear().commit();
+                    PreferenceManager.getDefaultSharedPreferences(getInstance())
+                            .edit().clear().commit();
                     SharedPreferences preferences = context
                             .getSharedPreferences("fr.free.nrw.commons", MODE_PRIVATE);
                     preferences.edit().clear().commit();
-                    context.getSharedPreferences("prefs", Context.MODE_PRIVATE).edit().clear().commit();
+                    context.getSharedPreferences("prefs", Context.MODE_PRIVATE)
+                            .edit().clear().commit();
                     preferences.edit().putBoolean("firstrun", false).apply();
                     updateAllDatabases();
                     currentAccount = null;
@@ -264,5 +256,9 @@ public class CommonsApplication extends Application {
         ModifierSequence.Table.onDelete(db);
         Category.Table.onDelete(db);
         Contribution.Table.onDelete(db);
+    }
+
+    public interface LogoutListener {
+        void onLogoutComplete();
     }
 }

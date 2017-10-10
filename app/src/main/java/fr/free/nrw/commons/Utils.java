@@ -40,7 +40,6 @@ import javax.xml.transform.stream.StreamResult;
 import fr.free.nrw.commons.settings.Prefs;
 import timber.log.Timber;
 
-
 public class Utils {
 
     // Get SHA1 of file from input stream
@@ -80,10 +79,12 @@ public class Utils {
         }
     }
 
-    /** Fix Html.fromHtml is deprecated problem
+    /**
+     * Fix Html.fromHtml is deprecated problem
+     *
      * @param source provided Html string
      * @return returned Spanned of appropriate method according to version check
-     * */
+     */
     public static Spanned fromHtml(String source) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             return Html.fromHtml(source, Html.FROM_HTML_MODE_LEGACY);
@@ -127,7 +128,7 @@ public class Utils {
     public static String makeThumbBaseUrl(String filename) {
         String name = new PageTitle(filename).getPrefixedText();
         String sha = new String(Hex.encodeHex(DigestUtils.md5(name)));
-        return String.format("%s/%s/%s/%s", CommonsApplication.IMAGE_URL_BASE, sha.substring(0, 1), sha.substring(0, 2), urlEncode(name));
+        return String.format("%s/%s/%s/%s", BuildConfig.IMAGE_URL_BASE, sha.substring(0, 1), sha.substring(0, 2), urlEncode(name));
     }
 
     public static String getStringFromDOM(Node dom) {
@@ -241,9 +242,9 @@ public class Utils {
     public static boolean xmlFastForward(XmlPullParser parser, String namespace, String element) {
         try {
             while (parser.next() != XmlPullParser.END_DOCUMENT) {
-                if (parser.getEventType() == XmlPullParser.START_TAG &&
-                        parser.getNamespace().equals(namespace) &&
-                        parser.getName().equals(element)) {
+                if (parser.getEventType() == XmlPullParser.START_TAG
+                        && parser.getNamespace().equals(namespace)
+                        && parser.getName().equals(element)) {
                     // We found it!
                     return true;
                 }
@@ -266,7 +267,8 @@ public class Utils {
             extension = "jpg";
         }
         title = jpegPattern.matcher(title).replaceFirst(".jpg");
-        if (extension != null && !title.toLowerCase(Locale.getDefault()).endsWith("." + extension.toLowerCase(Locale.ENGLISH))) {
+        if (extension != null && !title.toLowerCase(Locale.getDefault())
+                .endsWith("." + extension.toLowerCase(Locale.ENGLISH))) {
             title += "." + extension;
         }
         return title;
@@ -277,6 +279,6 @@ public class Utils {
     }
 
     public static boolean isDarkTheme(Context context) {
-        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean("theme",false);
+        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean("theme", false);
     }
 }

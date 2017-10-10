@@ -132,7 +132,7 @@
   <string name="detail_description_empty">Keng Beschreiwung</string>
   <string name="detail_license_empty">Onbekannt Lizenz</string>
   <string name="menu_refresh">Aktualiséieren</string>
-  <string name="storage_permission_rationale">Obligatoresch Autorisatioun: Externe Späicher liesen. D\'App kann net ouni dat funktionéieren.</string>
+  <string name="read_storage_permission_rationale">Obligatoresch Autorisatioun: Externe Späicher liesen. D\'App kann net ouni dat funktionéieren.</string>
   <string name="location_permission_rationale">Fakultativ Autorisatioun: Déi aktuell Plaz kréie fir Propose fir Kategorien</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Plazen nobäi</string>
@@ -185,4 +185,6 @@
   <string name="no_description_found">keng Beschreiwung fonnt</string>
   <string name="nearby_info_menu_commons_article">Commons-Fichierssäit</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata-Element</string>
+  <string name="use_external_storage">Externe Späicher benotzen</string>
+  <string name="use_external_storage_summary">Biller späicheren déi mat der in-app Kamera vun Ärem Apparat gemaach goufen</string>
 </resources>

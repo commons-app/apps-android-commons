@@ -134,7 +134,8 @@
   <string name="detail_description_empty">Ingen beskrivning</string>
   <string name="detail_license_empty">Okänd licens</string>
   <string name="menu_refresh">Uppdatera</string>
-  <string name="storage_permission_rationale">Nödvändig behörighet: Läsa extern lagring. Appen fungerar inte utan detta.</string>
+  <string name="read_storage_permission_rationale">Nödvändig behörighet: Läsa extern lagring. Appen fungerar inte utan detta.</string>
+  <string name="write_storage_permission_rationale">Nödvändig behörighet: Skriva till extern lagring. Appen kan inte fungera så här.</string>
   <string name="location_permission_rationale">Valfri behörighet: Hämta aktuell plats för kategoriförslag</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Platser i närheten</string>
@@ -194,4 +195,6 @@
   <string name="error_while_cache">Fel uppstod när bilder cachelagras</string>
   <string name="title_info">En unik beskrivande titel för filen, som kommer att fungera som ett filnamn. Du kan använda klarspråk med mellanslag. Ta inte med filändelsen</string>
   <string name="description_info">Beskriv mediafilen så mycket som möjligt. Var togs den? Vad visar den? Vad är sammanhanget? Beskriv föremålen eller personerna. Ge information som inte kan gissas fram, t.ex. tidpunkten om det är ett landskap. Om mediafilen visar någonting ovanligt, förklara vad som gör den ovanlig.</string>
+  <string name="use_external_storage">Använd extern lagring</string>
+  <string name="use_external_storage_summary">Spara bilder som tas med kameran i appen på din enhet</string>
 </resources>

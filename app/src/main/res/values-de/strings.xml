@@ -134,7 +134,8 @@
   <string name="detail_description_empty">Keine Beschreibung</string>
   <string name="detail_license_empty">Unbekannte Lizenz</string>
   <string name="menu_refresh">Aktualisieren</string>
-  <string name="storage_permission_rationale">Erforderliche Berechtigung: Externen Speicher lesen. Die App funktioniert ohne diese Berechtigung nicht.</string>
+  <string name="read_storage_permission_rationale">Erforderliche Berechtigung: Externen Speicher lesen. Die App funktioniert ohne diese Berechtigung nicht.</string>
+  <string name="write_storage_permission_rationale">Erforderliche Berechtigung: Externen Speicher beschreiben. Die App kann ohne dies nicht funktionieren.</string>
   <string name="location_permission_rationale">Optionale Berechtigung: Ruft den aktuellen Standort für Kategorievorschläge ab</string>
   <string name="ok">Okay</string>
   <string name="title_activity_nearby">Orte in der Nähe</string>
@@ -194,4 +195,6 @@
   <string name="error_while_cache">Fehler beim Zwischenspeichern der Bilder</string>
   <string name="title_info">Ein eindeutiger beschreibender Titel für die Datei, der als Dateiname dient. Du kannst Klartext mit Leerzeichen verwenden. Gib nicht die Dateierweiterung mit an.</string>
   <string name="description_info">Bitte beschreibe das Medium so gut wie möglich: Wo wurde es aufgenommen? Was zeigt es? Was ist der Kontext? Bitte beschreibe die Objekte oder Personen. Zeige Informationen auf, die nicht einfach erraten werden können, zum Beispiel die Tageszeit, falls es eine Landschaft ist. Falls das Medium etwas Ungewöhnliches zeigt, erkläre bitte, was es ungewöhnlich macht.</string>
+  <string name="use_external_storage">Externen Speicher verwenden</string>
+  <string name="use_external_storage_summary">Mit der In-App-Kamera aufgenommene Bilder auf deinem Gerät speichern</string>
 </resources>

@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.upload;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;

@@ -133,7 +133,7 @@
   <string name="detail_description_empty">Deskrivadur ebet</string>
   <string name="detail_license_empty">Aotre-implijout dizanv</string>
   <string name="menu_refresh">Freskaat</string>
-  <string name="storage_permission_rationale">Aotre rekis : lenn ur stokañ diavaez. Hep se, n\'hall ket an arload mont en-dro.</string>
+  <string name="read_storage_permission_rationale">Aotre rekis : lenn ur stokañ diavaez. Hep se, n\'hall ket an arload mont en-dro.</string>
   <string name="location_permission_rationale">Aotre diret : kaout al lec\'hiadur red evit kinnig rummadoù</string>
   <string name="ok">Mat eo</string>
   <string name="title_activity_nearby">Lec\'hioù nes</string>
@@ -147,6 +147,9 @@
   <string name="media_detail_description">Deskrivadur</string>
   <string name="media_detail_description_explanation">Amañ e lakaer titl ar media. Gallout a ra bezañ hir-mat ha mont dre meur a linenn. Spi hon eus e vo bravik an disoc\'h koulskoude.</string>
   <string name="media_detail_uploaded_date">Deiziad enporzhiañ</string>
+  <string name="media_detail_license">Aotre-implijout</string>
+  <string name="media_detail_coordinates">Daveennoù</string>
+  <string name="media_detail_coordinates_empty">N\'eo ket bet pourchaset</string>
   <string name="become_a_tester_title">Deuit da vezañ un amprouer beta</string>
   <string name="become_a_tester_description">En em enskrivañ en hor c\'hanol beta war Google Play ha kaout ur rakmoned d\'an arc\'hwelioù nevez d\'an drein difaziet</string>
   <string name="use_wikidata">Ober gant Wikidata</string>

@@ -125,7 +125,7 @@
   <string name="detail_description_empty">説明はありません。</string>
   <string name="detail_license_empty">不明なライセンス</string>
   <string name="menu_refresh">更新</string>
-  <string name="storage_permission_rationale">必要な権限：外部ストレージを読み込みます。これがなければアプリは機能しません。</string>
+  <string name="read_storage_permission_rationale">必要な権限：外部ストレージを読み込みます。これがなければアプリは機能しません。</string>
   <string name="location_permission_rationale">オプションの権限：カテゴリ候補の現在の位置を取得する</string>
   <string name="ok">承認</string>
   <string name="title_activity_nearby">周りの場所</string>
@@ -138,11 +138,15 @@
   <string name="media_detail_description">記述</string>
   <string name="media_detail_description_explanation">ここにメディアの説明が入ります。かなり長文になる場合には数行にわたることがあります。それでも見栄えがよいと願っています。</string>
   <string name="media_detail_uploaded_date">アップロード日時</string>
+  <string name="media_detail_license">ライセンス</string>
+  <string name="media_detail_coordinates">緯度経度</string>
+  <string name="media_detail_coordinates_empty">情報なし</string>
   <string name="become_a_tester_title">ベータ版を使ってみましょう！</string>
   <string name="become_a_tester_description">Google Playのベータ版チャンネルにオプトインして、新機能やバグ修正プログラムに早期にアクセス</string>
   <string name="use_wikidata">ウィキデータを使用してください</string>
   <string name="use_wikidata_summary">（警告：これを無効にすると、モバイルデータを大量に消費する可能性があります）</string>
   <string name="number_of_uploads">最近のアップロードファイルに表示する最大件数</string>
+  <string name="logout_verification">ログアウトしてもよろしいですか？</string>
   <string name="background_image">背景画像</string>
   <string name="no_image_found">画像がありません</string>
   <string name="upload_image">画像をアップロード</string>
@@ -163,4 +167,5 @@
   <string name="navigation_item_info">チュートリアル</string>
   <string name="no_description_found">説明がありません</string>
   <string name="nearby_info_menu_wikidata_article">ウィキデータ項目</string>
+  <string name="use_external_storage">外部ストレージを使用</string>
 </resources>

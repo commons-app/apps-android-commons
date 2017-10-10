@@ -81,7 +81,7 @@
   <string name="title_activity_settings">Налаштування</string>
   <string name="title_activity_signup">Зареєструватися</string>
   <string name="menu_about">Про програму</string>
-  <string name="about_license" fuzzy="true">Програмне забезпечення з відкритим кодом випущено під &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;ліцензією Apache в.2&lt;/a&gt;. Вікісховище і його логотип є товарними знаками Фонду Вікімедіа і використовуються за дозволом Фонду Вікімедіа. Ми не користуємось підтримкою Фонду Вікімедіа і не є його афіліатом.</string>
+  <string name="about_license">Програмне забезпечення з відкритим кодом випущено під &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;ліцензією Apache в.2&lt;/a&gt;. 1$s і його логотип є товарними знаками Фонду Вікімедіа і використовуються за дозволом Фонду Вікімедіа. Ми не користуємось підтримкою Фонду Вікімедіа і не є його афіліатом.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Вихідний код&lt;/a&gt; і &lt;a href=\"https://commons-app.github.io/\"&gt;веб-сайт&lt;/a&gt; на GitHub. Створіть нове &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;завдання на GitHub&lt;/a&gt; для повідомлення про баги або для висловлення пропозицій.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Політика приватності&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Автори&lt;/a&gt;</string>
@@ -94,6 +94,7 @@
   <string name="menu_retry_upload">Повторити</string>
   <string name="menu_cancel_upload">Скасувати</string>
   <string name="share_license_summary">Це зображення буде ліцензоване згідно з %1$s</string>
+  <string name="media_upload_policy">Подаючи це зображення, я підтверджую, що це моя власна робота, яка не містить захищених авторським правом матеріалів чи селфі, а також відповідає &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/uk\"&gt;правилам Вікісховища&lt;/a&gt;.</string>
   <string name="menu_download">Завантажити</string>
   <string name="preference_license">Ліцензія</string>
   <string name="use_previous">Використати попередню назву/опис</string>
@@ -141,7 +142,7 @@
   <string name="detail_description_empty">Немає опису</string>
   <string name="detail_license_empty">Невідома ліцензія</string>
   <string name="menu_refresh">Оновити</string>
-  <string name="storage_permission_rationale">Обов\'язковий дозвіл: читання зовнішньої пам\'яті. Програмка не може працювати без цього.</string>
+  <string name="read_storage_permission_rationale">Обов\'язковий дозвіл: читання зовнішньої пам\'яті. Програмка не може працювати без цього.</string>
   <string name="location_permission_rationale">Додатковий дозвіл: отримувати поточне розташування для підказок категорій</string>
   <string name="ok">Гаразд</string>
   <string name="title_activity_nearby">Місця поблизу</string>
@@ -196,6 +197,9 @@
   <string name="navigation_item_info">Посібник</string>
   <string name="nearby_needs_permissions">Місця поблизу неможливо показати без дозволу на визначення місця розташування.</string>
   <string name="no_description_found">опис не знайдено</string>
-  <string name="nearby_info_menu_commons_article" fuzzy="true">Стаття на Вікісховищі</string>
+  <string name="nearby_info_menu_commons_article">Сторінка файлу у Вікісховищі</string>
   <string name="nearby_info_menu_wikidata_article">Елемент Вікіданих</string>
+  <string name="error_while_cache">Помилка кешування зображень</string>
+  <string name="title_info">Унікальна описова назва файлу. Ви можете використовувати простий текст з пробілами. Не вказуйте розширення файлу</string>
+  <string name="description_info">Будь ласка, докладно опишіть файл: де його було зроблено? що на ньому зображено? який контекст? Будь ласка, опишіть об\'єкти чи осіб. Додайте інформацію, яку не можна легко здогадатися, наприклад, пору доби для фотографії пейзажу. Якщо зображено щось незвичайне, постарайтеся пояснити, що робить його незвичайним.</string>
 </resources>

@@ -276,13 +276,13 @@ public class MediaDetailFragment extends Fragment {
         categoryContainer.removeAllViews();
         // @fixme add the category items
         for (String cat : categoryNames) {
-            View catLabel = buildCatLabel(cat);
+            View catLabel = buildCatLabel(cat, categoryContainer);
             categoryContainer.addView(catLabel);
         }
     }
 
-    private View buildCatLabel(final String catName) {
-        final View item = getLayoutInflater(null).inflate(R.layout.detail_category_item, null, false);
+    private View buildCatLabel(final String catName, ViewGroup categoryContainer) {
+        final View item = LayoutInflater.from(getContext()).inflate(R.layout.detail_category_item, categoryContainer, false);
         final CompatTextView textView = (CompatTextView)item.findViewById(R.id.mediaDetailCategoryItemText);
 
         textView.setText(catName);

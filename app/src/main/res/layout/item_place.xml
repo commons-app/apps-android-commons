@@ -1,66 +1,68 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:foreground="?attr/selectableItemBackground"
-    android:layout_height="@dimen/icon_size"
+    android:layout_height="wrap_content"
+    android:foreground="?selectableItemBackground"
+    android:minHeight="72dp"
     >
 
-    <RelativeLayout
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/white"
+        android:contentDescription="@string/no_image_found"
+        android:scaleType="centerCrop"
+        android:src="@drawable/empty_photo"
+        />
+
+    <TextView
+        android:id="@+id/distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        tools:text="@string/placeholder_place_distance"
+        />
+
+    <TextView
+        android:id="@+id/tvName"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/distance"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_toEndOf="@id/icon"
+        android:layout_toLeftOf="@id/distance"
+        android:layout_toRightOf="@id/icon"
+        android:layout_toStartOf="@id/distance"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        tools:text="@string/placeholder_place_name"
+        />
 
-        <ImageView
-            android:id="@+id/icon"
-            android:layout_width="@dimen/icon_size"
-            android:layout_height="match_parent"
-            android:src="@drawable/empty_photo"
-            android:background="#ffffff"
-            android:scaleType="centerCrop"
-            android:contentDescription="@string/no_image_found"
-            />
+    <TextView
+        android:id="@+id/tvDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/distance"
+        android:layout_alignLeft="@id/tvName"
+        android:layout_alignRight="@id/distance"
+        android:layout_alignStart="@id/tvName"
+        android:layout_below="@id/tvName"
+        android:layout_marginBottom="16dp"
+        android:ellipsize="end"
+        android:maxLines="4"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        tools:text="@string/placeholder_place_description"
+        />
 
-        <TextView
-            android:id="@+id/distance"
-            android:layout_width="@dimen/icon_size"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/icon"
-            android:gravity="center"
-            android:padding="@dimen/tiny_margin"
-            style="?android:textAppearanceSmallInverse"
-            android:textColor="#ffffff"
-            android:background="@color/text_background"
-            tools:text="@string/placeholder_place_distance"
-            />
-
-        <TextView
-            android:id="@+id/tvName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/icon"
-            android:layout_toRightOf="@+id/icon"
-            android:paddingTop="@dimen/small_margin"
-            android:paddingLeft="@dimen/small_margin"
-            android:paddingRight="@dimen/small_margin"
-            android:maxLines="2"
-            android:ellipsize="none"
-            style="?android:textAppearanceMedium"
-            tools:text="@string/placeholder_place_name"
-            />
-
-        <TextView
-            android:id="@+id/tvDesc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/icon"
-            android:layout_toRightOf="@+id/icon"
-            android:layout_below="@+id/tvName"
-            android:padding="@dimen/small_margin"
-            android:ellipsize="none"
-            android:maxLines="4"
-            style="?android:textAppearanceSmall"
-            tools:text="@string/placeholder_place_description"
-            />
-
-    </RelativeLayout>
-</FrameLayout>
+</RelativeLayout>

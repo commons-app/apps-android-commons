@@ -39,6 +39,7 @@
   <string name="login_failed_password">Không thể đăng nhập – xin vui lòng kiểm tra mật khẩu</string>
   <string name="login_failed_throttled">Đã đăng nhập thất bại quá nhiều lần. Xin vui lòng thử lại trong vòng vài phút.</string>
   <string name="login_failed_blocked">Rất tiếc, người dùng này đã bị cấm tại Commons</string>
+  <string name="login_failed_2fa_needed">Bạn phải cung cấp mã xác thực dùng hai nhân tố.</string>
   <string name="login_failed_generic">Đăng nhập thất bại</string>
   <string name="share_upload_button">Tải lên</string>
   <string name="multiple_share_base_title">Đặt tên nhóm này</string>
@@ -47,6 +48,7 @@
   <string name="categories_search_text_hint">Tìm thể loại</string>
   <string name="menu_save_categories">Lưu</string>
   <string name="refresh_button">Làm mới</string>
+  <string name="gps_disabled">Chức năng GPS đang tắt trên thiết bị của bạn. Bạn có muốn bật nó lên?</string>
   <string name="enable_gps">Bật GPS</string>
   <string name="contributions_subtitle_zero">Chưa có tập tin tải lên</string>
   <plurals name="contributions_subtitle">
@@ -74,6 +76,7 @@
   <string name="menu_retry_upload">Thử lại</string>
   <string name="menu_cancel_upload">Hủy bỏ</string>
   <string name="share_license_summary">Hình này sẽ được phát hành theo giấy phép %1$s</string>
+  <string name="media_upload_policy">Với việc đăng hình này, tôi tuyên bố rằng nó là tác phẩm của chính mình, rằng nó không chứa nội dung có bản quyền hoặc ảnh tự chụp, và về mặt khác thì hoàn toàn tuân theo &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines?uselang=vi\"&gt;các quy định Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Tải về</string>
   <string name="preference_license">Giấy phép</string>
   <string name="use_previous">Sử dụng tiêu đề/miêu tả trước</string>
@@ -121,7 +124,8 @@
   <string name="detail_description_empty">Không miêu tả</string>
   <string name="detail_license_empty">Giấy phép không rõ</string>
   <string name="menu_refresh">Làm tươi</string>
-  <string name="storage_permission_rationale">Yêu cầu cấp phép: Đọc thiết bị lưu trữ bên ngoài. Ứng dụng cần được phép đọc thiết bị lưu trữ bên ngoài để hoạt động.</string>
+  <string name="read_storage_permission_rationale">Yêu cầu cấp phép: Đọc thiết bị lưu trữ bên ngoài. Ứng dụng cần được phép đọc thiết bị lưu trữ bên ngoài để hoạt động.</string>
+  <string name="write_storage_permission_rationale">Yêu cầu cấp phép: Ghi vào thiết bị lưu trữ bên ngoài. Ứng dụng cần được phép ghi vào thiết bị lưu trữ bên ngoài để hoạt động.</string>
   <string name="location_permission_rationale">Tùy chọn cấp phép: Định vị hiện tại để nhận gợi ý thể loại</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Nơi Lân cận</string>
@@ -159,6 +163,9 @@
   <string name="welcome_image_rainbow_bridge">Cầu Cầu vồng</string>
   <string name="welcome_image_tulip">Tu-líp</string>
   <string name="welcome_image_no_selfies">Không cho phép Ảnh tự chụp</string>
+  <string name="welcome_image_proprietary">Hình có Bản quyền</string>
+  <string name="welcome_image_welcome_wikipedia">Hoan nghênh: Wikipedia</string>
+  <string name="welcome_image_welcome_copyright">Hoan nghênh: Bản quyền</string>
   <string name="welcome_image_sydney_opera_house">Nhà hát Opera Sydney</string>
   <string name="cancel">Hủy bỏ</string>
   <string name="navigation_drawer_open">Mở</string>
@@ -171,7 +178,13 @@
   <string name="navigation_item_feedback">Phản hồi</string>
   <string name="navigation_item_logout">Đăng xuất</string>
   <string name="navigation_item_info">Hướng dẫn</string>
+  <string name="nearby_needs_permissions">Cần có quyền truy cập vị trí của bạn để hiển thị các địa điểm lân cận</string>
   <string name="no_description_found">không tìm thấy miêu tả</string>
   <string name="nearby_info_menu_commons_article">Trang tập tin Commons</string>
   <string name="nearby_info_menu_wikidata_article">Khoản mục Wikidata</string>
+  <string name="error_while_cache">Xuất hiện lỗi khi đưa hình ảnh vào vùng nhớ đệm</string>
+  <string name="title_info">Tên ngắn và duy nhất cho tập tin sẽ được dùng làm tên tập tin. Có thể dùng thuật ngữ bình thường với khoảng cách. Đừng bao gồm phần mở rộng tập tin.</string>
+  <string name="description_info">Xin vui lòng miêu tả phương tiện càng đầy đủ càng tốt: Chụp ở đâu? Trong hình có gì? Bối cảnh làm sao? Xin vui lòng miêu tả các đối tượng và người trong hình. Cho biết những thông tin khó đoán ra, chẳng hạn giờ trong ngày nếu là phong cảnh. Nếu phương tiện có gì kỳ lạ, xin vui lòng giải thích tại sao nó kỳ lạ.</string>
+  <string name="use_external_storage">Sử dụng thiết bị lưu trữ bên ngoài</string>
+  <string name="use_external_storage_summary">Lưu các hình ảnh được chụp bằng máy chụp hình trong ứng dụng vào thiết bị của bạn</string>
 </resources>

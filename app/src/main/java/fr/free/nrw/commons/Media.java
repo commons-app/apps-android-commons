@@ -29,12 +29,66 @@ public class Media implements Parcelable {
         }
     };
 
+    private static Pattern displayTitlePattern = Pattern.compile("(.*)(\\.\\w+)", Pattern.CASE_INSENSITIVE);
+    // Primary metadata fields
+    protected Uri localUri;
+    protected String imageUrl;
+    protected String filename;
+    protected String description; // monolingual description on input...
+    protected long dataLength;
+    protected Date dateCreated;
+    protected @Nullable Date dateUploaded;
+    protected int width;
+    protected int height;
+    protected String license;
+    protected String creator;
+    protected ArrayList<String> categories; // as loaded at runtime?
+    private Map<String, String> descriptions; // multilingual descriptions as loaded
+    private HashMap<String, Object> tags = new HashMap<>();
+    private @Nullable LatLng coordinates;
+
     protected Media() {
         this.categories = new ArrayList<>();
         this.descriptions = new HashMap<>();
     }
 
-    private HashMap<String, Object> tags = new HashMap<>();
+    public Media(String filename) {
+        this();
+        this.filename = filename;
+    }
+
+    public Media(Uri localUri, String imageUrl, String filename, String description,
+                 long dataLength, Date dateCreated, @Nullable Date dateUploaded, String creator) {
+        this();
+        this.localUri = localUri;
+        this.imageUrl = imageUrl;
+        this.filename = filename;
+        this.description = description;
+        this.dataLength = dataLength;
+        this.dateCreated = dateCreated;
+        this.dateUploaded = dateUploaded;
+        this.creator = creator;
+    }
+
+    @SuppressWarnings("unchecked")
+    public Media(Parcel in) {
+        localUri = in.readParcelable(Uri.class.getClassLoader());
+        imageUrl = in.readString();
+        filename = in.readString();
+        description = in.readString();
+        dataLength = in.readLong();
+        dateCreated = (Date) in.readSerializable();
+        dateUploaded = (Date) in.readSerializable();
+        creator = in.readString();
+        tags = (HashMap<String, Object>) in.readSerializable();
+        width = in.readInt();
+        height = in.readInt();
+        license = in.readString();
+        if (categories != null) {
+            in.readStringList(categories);
+        }
+        descriptions = in.readHashMap(ClassLoader.getSystemClassLoader());
+    }
 
     public Object getTag(String key) {
         return tags.get(key);
@@ -44,15 +98,14 @@ public class Media implements Parcelable {
         tags.put(key, value);
     }
 
-    public static Pattern displayTitlePattern = Pattern.compile("(.*)(\\.\\w+)", Pattern.CASE_INSENSITIVE);
-    public  String getDisplayTitle() {
-        if(filename == null) {
+    public String getDisplayTitle() {
+        if (filename == null) {
             return "";
         }
         // FIXME: Gross hack bercause my regex skills suck maybe or I am too lazy who knows
         String title = getFilePageTitle().getDisplayText().replaceFirst("^File:", "");
         Matcher matcher = displayTitlePattern.matcher(title);
-        if(matcher.matches()) {
+        if (matcher.matches()) {
             return matcher.group(1);
         } else {
             return title;
@@ -68,7 +121,7 @@ public class Media implements Parcelable {
     }
 
     public String getImageUrl() {
-        if(imageUrl == null) {
+        if (imageUrl == null) {
             imageUrl = Utils.makeThumbBaseUrl(this.getFilename());
         }
         return imageUrl;
@@ -84,6 +137,10 @@ public class Media implements Parcelable {
 
     public String getDescription() {
         return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public long getDataLength() {
@@ -102,7 +159,8 @@ public class Media implements Parcelable {
         this.dateCreated = date;
     }
 
-    public @Nullable Date getDateUploaded() {
+    public @Nullable
+    Date getDateUploaded() {
         return dateUploaded;
     }
 
@@ -138,7 +196,8 @@ public class Media implements Parcelable {
         this.license = license;
     }
 
-    public @Nullable LatLng getCoordinates() {
+    public @Nullable
+    LatLng getCoordinates() {
         return coordinates;
     }
 
@@ -146,24 +205,9 @@ public class Media implements Parcelable {
         this.coordinates = coordinates;
     }
 
-    // Primary metadata fields
-    protected Uri localUri;
-    protected String imageUrl;
-    protected String filename;
-    protected String description; // monolingual description on input...
-    protected long dataLength;
-    protected Date dateCreated;
-    protected @Nullable Date dateUploaded;
-    protected int width;
-    protected int height;
-    protected String license;
-    private @Nullable LatLng coordinates;
-    protected String creator;
-    protected ArrayList<String> categories; // as loaded at runtime?
-    protected Map<String, String> descriptions; // multilingual descriptions as loaded
-
+    @SuppressWarnings("unchecked")
     public ArrayList<String> getCategories() {
-        return (ArrayList<String>)categories.clone(); // feels dirty
+        return (ArrayList<String>) categories.clone(); // feels dirty
     }
 
     public void setCategories(List<String> categories) {
@@ -171,7 +215,7 @@ public class Media implements Parcelable {
         this.categories.addAll(categories);
     }
 
-    public void setDescriptions(Map<String,String> descriptions) {
+    void setDescriptions(Map<String, String> descriptions) {
         for (String key : this.descriptions.keySet()) {
             this.descriptions.remove(key);
         }
@@ -196,23 +240,6 @@ public class Media implements Parcelable {
         }
     }
 
-    public Media(String filename) {
-        this();
-        this.filename = filename;
-    }
-
-    public Media(Uri localUri, String imageUrl, String filename, String description, long dataLength, Date dateCreated, @Nullable Date dateUploaded, String creator) {
-        this();
-        this.localUri = localUri;
-        this.imageUrl = imageUrl;
-        this.filename = filename;
-        this.description = description;
-        this.dataLength = dataLength;
-        this.dateCreated = dateCreated;
-        this.dateUploaded = dateUploaded;
-        this.creator = creator;
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -234,28 +261,5 @@ public class Media implements Parcelable {
         parcel.writeString(license);
         parcel.writeStringList(categories);
         parcel.writeMap(descriptions);
-    }
-
-    public Media(Parcel in) {
-        localUri = in.readParcelable(Uri.class.getClassLoader());
-        imageUrl = in.readString();
-        filename = in.readString();
-        description = in.readString();
-        dataLength = in.readLong();
-        dateCreated = (Date) in.readSerializable();
-        dateUploaded = (Date) in.readSerializable();
-        creator = in.readString();
-        tags = (HashMap<String, Object>)in.readSerializable();
-        width = in.readInt();
-        height = in.readInt();
-        license = in.readString();
-        if (categories != null) {
-            in.readStringList(categories);
-        }
-        descriptions = in.readHashMap(ClassLoader.getSystemClassLoader());
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 }

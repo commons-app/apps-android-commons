@@ -137,7 +137,8 @@
   <string name="detail_description_empty">Нет описания</string>
   <string name="detail_license_empty">Неизвестная лицензия</string>
   <string name="menu_refresh">Обновить</string>
-  <string name="storage_permission_rationale">Требуемые разрешения: чтение с внешнего накопителя. Приложение не сможет функционировать без этого.</string>
+  <string name="read_storage_permission_rationale">Требуемые разрешения: чтение с внешнего хранилища. Приложение не сможет функционировать без этого.</string>
+  <string name="write_storage_permission_rationale">Требуемые разрешения: запись на внешнее хранилище. Приложение не сможет функционировать без этого.</string>
   <string name="location_permission_rationale">Необязательное разрешение: получение текущего местоположения для предложения категорий</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Места поблизости</string>
@@ -153,6 +154,7 @@
   <string name="media_detail_uploaded_date">Дата загрузки</string>
   <string name="media_detail_license">Лицензия</string>
   <string name="media_detail_coordinates">Координаты</string>
+  <string name="media_detail_coordinates_empty">Не предоставлены</string>
   <string name="become_a_tester_title">Стать бета-тестером</string>
   <string name="become_a_tester_description">Подпишитесь на наш канал бета-версии на Google Play и получите ранний доступ к новым функциям и исправлениям ошибок</string>
   <string name="use_wikidata">Использовать Викиданные</string>
@@ -194,4 +196,6 @@
   <string name="nearby_info_menu_commons_article">Страница файла на Викискладе</string>
   <string name="nearby_info_menu_wikidata_article">Элемент Викиданных</string>
   <string name="error_while_cache">Ошибка при кэшировании картинок</string>
+  <string name="use_external_storage">Использовать внешнее хранилище</string>
+  <string name="use_external_storage_summary">Сохранять изображения, сделанные с помощью встроенной камеры на устройстве</string>
 </resources>
