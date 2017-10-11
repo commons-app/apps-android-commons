@@ -185,17 +185,17 @@ public class Category {
         }
 
         public static void onUpdate(SQLiteDatabase db, int from, int to) {
-                switch(from){
+            if (from < to) {
+                switch (from) {
                     case 4:
                         onCreate(db);
-                    /*
-                    add future cases without breaks
-                    case 5:
-                        do something;
-                    case 6:
-                        do something;
-                    */
-                }     
+                        break;
+                    default:
+                        break;
+                }
+                from++;
+                onUpdate(db, from, to);
+            }
         }
     }
     //endregion
