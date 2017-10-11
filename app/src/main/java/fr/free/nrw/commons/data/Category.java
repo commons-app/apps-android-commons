@@ -185,8 +185,8 @@ public class Category {
         }
 
         public static void onUpdate(SQLiteDatabase db, int from, int to) {
-            if (from < to){
-                switch (from){
+            if (from < to) {
+                switch (from) {
                     case 4:
                         onCreate(db);
                         break;
