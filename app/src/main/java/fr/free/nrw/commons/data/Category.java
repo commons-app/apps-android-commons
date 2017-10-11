@@ -194,7 +194,7 @@ public class Category {
                         break;
                 }
                 from++;
-                onUpgrade(db, from, to);
+                onUpdate(db, from, to);
             }
         }
     //endregion
