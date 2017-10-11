@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Commons</string>
-  <string name="menu_settings">Configuració</string>
-  <string name="username">Nom d\'usuari</string>
+    <string name="username">Nom d\'usuari</string>
   <string name="password">Contrasenya</string>
   <string name="login">Inicia una sessió</string>
   <string name="signup">Registre</string>
   <string name="logging_in_title">S’està iniciant la sessió</string>
   <string name="logging_in_message">Espereu…</string>
   <string name="login_success">S\'ha iniciat sessió correctament!</string>
-  <string name="login_failed">Error en iniciar la sessió!</string>
-  <string name="upload_failed">No s\'ha trobat el fitxer. Proveu-ho amb un altre fitxer.</string>
+    <string name="upload_failed">No s\'ha trobat el fitxer. Proveu-ho amb un altre fitxer.</string>
   <string name="authentication_failed">L\'autenticació ha fallat!</string>
   <string name="uploading_started">Ha començat la càrrega!</string>
-  <string name="upload_completed_notification_title">S\'ha carregat %1$s !</string>
-  <string name="upload_completed_notification_text">Prem per veure la teva càrrega</string>
-  <string name="upload_progress_notification_title_start">Començant la càrrega al servidor de  %1$s</string>
+    <string name="upload_progress_notification_title_start">Començant la càrrega al servidor de  %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Carregant %1$s</string>
   <string name="upload_progress_notification_title_finishing">Acabant la càrrega al servidor de %1$s</string>
   <string name="upload_failed_notification_title">Error al carregar %1$s</string>
@@ -27,12 +23,9 @@
   <string name="title_activity_contributions" fuzzy="true">Les meves càrregues</string>
   <string name="contribution_state_queued">En cua</string>
   <string name="contribution_state_failed">Ha fallat</string>
-  <string name="contribution_state_in_progress">%1$d%% completat</string>
-  <string name="contribution_state_starting">Càrrega en curs</string>
-  <string name="menu_from_gallery">De la galeria</string>
+    <string name="menu_from_gallery">De la galeria</string>
   <string name="menu_from_camera">Fes una foto</string>
-  <string name="menu_nearby">A prop</string>
-  <string name="provider_contributions">Les meves càrregues</string>
+    <string name="provider_contributions">Les meves càrregues</string>
   <string name="menu_share">Comparteix</string>
   <string name="menu_open_in_browser">Mostra al navegador</string>
   <string name="share_title_hint">Títol</string>
@@ -69,13 +62,11 @@
   <string name="categories_activity_title">Categories</string>
   <string name="title_activity_settings">Paràmetres</string>
   <string name="title_activity_signup">Registre</string>
-  <string name="menu_about">Quant a</string>
-  <string name="about_license" fuzzy="true">Programari de codi obert distribuït sota la &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;llicència Apache v2&lt;/a&gt;</string>
+    <string name="about_license" fuzzy="true">Programari de codi obert distribuït sota la &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;llicència Apache v2&lt;/a&gt;</string>
   <string name="about_improve" fuzzy="true">Codi a &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Informes d\'error a &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">Wikimedia:Commons-android-texts-sobre privacitat/ca</string>
   <string name="title_activity_about">Quant a</string>
-  <string name="menu_feedback">Envia comentaris (per correu)</string>
-  <string name="provider_categories">Categories usades recentment</string>
+    <string name="provider_categories">Categories usades recentment</string>
   <string name="waiting_first_sync">S’està esperant la primera sincronització…</string>
   <string name="no_uploads_yet">Encara no heu carregat cap foto.</string>
   <string name="menu_retry_upload">Reintenta</string>
@@ -89,32 +80,16 @@
   <string name="license_name_cc_by" fuzzy="true">CC Reconeixement 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Àustria)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Alemanya)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estònia)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Espanya)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Croàcia)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxemburg)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Països Baixos)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Noruega)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polònia)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romania)</string>
-  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
-  <string name="tutorial_4_text">Exemple de càrrega:</string>
-  <string name="welcome_wikipedia_text">Doneu les vostres imatges. Ajudeu a donar vida als articles de la Viquipèdia!</string>
-  <string name="welcome_wikipedia_subtext">Les imatges de la Viquipèdia vénen de la Wikimedia Commons.</string>
-  <string name="welcome_copyright_text">Les vostres imatges ajuden a educar gent d\'arreu del món.</string>
-  <string name="welcome_copyright_subtext">No utilitzis material amb copyright que puguis trobar a Internet, ni tampoc imatges de pòsters, portades de llibres, etc.</string>
-  <string name="welcome_final_text">Creieu que ho heu entès?</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="tutorial_4_text">Exemple de càrrega:</string>
+    <string name="welcome_final_text">Creieu que ho heu entès?</string>
   <string name="welcome_final_button_text">Sí!</string>
   <string name="detail_panel_cats_label">Categories</string>
   <string name="detail_panel_cats_loading">Carregant…</string>
   <string name="detail_panel_cats_none">No se n\'ha seleccionat cap</string>
   <string name="detail_description_empty">Sense descripció</string>
   <string name="detail_license_empty">Llicència desconeguda</string>
-  <string name="menu_refresh">Refresca</string>
-  <string name="ok">D\'acord</string>
+    <string name="ok">D\'acord</string>
   <string name="title_activity_nearby">Llocs propers</string>
   <string name="warning">Avís</string>
   <string name="yes">Sí</string>
@@ -135,8 +110,7 @@
   <string name="navigation_drawer_open">Obre</string>
   <string name="navigation_drawer_close">Tanca</string>
   <string name="navigation_item_home">Inici</string>
-  <string name="navigation_item_upload">Carrega</string>
-  <string name="navigation_item_nearby">A prop</string>
+    <string name="navigation_item_nearby">A prop</string>
   <string name="navigation_item_about">Quant a</string>
   <string name="navigation_item_settings">Paràmetres</string>
   <string name="navigation_item_feedback">Comentaris</string>

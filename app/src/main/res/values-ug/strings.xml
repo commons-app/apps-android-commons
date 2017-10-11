@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name" fuzzy="true">ۋىكى ۋاستە ھەمبەھىر</string>
-  <string name="menu_settings">تەڭشەكلەر</string>
-  <string name="username">ئىشلەتكۇچى ئىسمى</string>
+    <string name="username">ئىشلەتكۇچى ئىسمى</string>
   <string name="password">پارول</string>
   <string name="login">تىزىمغا كىرىڭ</string>
   <string name="logging_in_title">تىزىمغا كىرىۋاتىدۇ</string>
   <string name="logging_in_message">سەل كۈتۈڭ…</string>
   <string name="login_success">تىزىمغا كىرىش مۇۋەپپەقىيەتلىك!</string>
-  <string name="login_failed">تىزىمغا كىرەلمىدى!</string>
-  <string name="uploading_started">يۈكلەش باشلاندى!</string>
-  <string name="upload_completed_notification_title">%1$s يۈكلەندى!</string>
-  <string name="upload_progress_notification_title_start">باشلىنىۋاتىدۇ %1$s يۈكلەندى</string>
+    <string name="uploading_started">يۈكلەش باشلاندى!</string>
+    <string name="upload_progress_notification_title_start">باشلىنىۋاتىدۇ %1$s يۈكلەندى</string>
   <string name="upload_progress_notification_title_in_progress">%1$s يۈكلىنىۋاتىدۇ!</string>
   <string name="upload_progress_notification_title_finishing"> %1$s يۈكلەش تاماملىنىۋاتىدۇ</string>
   <string name="upload_failed_notification_title">يۈكلىنىۋاتىدۇ %1$s مەغلۇپ بولدى</string>
   <string name="title_activity_contributions">يۈكلىگەنلىرىم</string>
-  <string name="contribution_state_in_progress">%1$d%% تاماملاندى</string>
-  <string name="contribution_state_starting">يۈكلەۋاتىدۇ</string>
-  <string name="menu_from_camera">سۈرەتكە تارتىڭ</string>
+    <string name="menu_from_camera">سۈرەتكە تارتىڭ</string>
   <string name="provider_contributions">يۈكلىگەنلىرىم</string>
   <string name="menu_share">ئورتاقلىشىش</string>
   <string name="menu_open_in_browser">توركۆرگۈدە ئېچىڭ</string>
@@ -28,24 +23,14 @@
   <string name="categories_search_text_hint">كاتېگورىيىنى ئىزدەڭ</string>
   <string name="menu_save_categories">ساقلاڭ</string>
   <string name="title_activity_settings">تەڭشەكلەر</string>
-  <string name="menu_about">ھەققىدە</string>
-  <string name="menu_download">چۈشۈرۈڭ</string>
+    <string name="menu_download">چۈشۈرۈڭ</string>
   <string name="preference_license">ئىجازەتنامە</string>
   <string name="license_name_cc_by_sa" fuzzy="true">CC Attribution-ShareAlike 3.0</string>
   <string name="license_name_cc_by" fuzzy="true">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (ئاۋستىرىيە)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (گېرمانىيە)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (ئىسپانىيە)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (كىروتىيە)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (گوللاندىيە)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (نورۋىگىيە)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (پولشا)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (رومىنىيە)</string>
-  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_zero">CC0</string>
-  <string name="welcome_final_button_text">ھەئە!</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="welcome_final_button_text">ھەئە!</string>
   <string name="detail_panel_cats_label">كاتېگورىيە</string>
   <string name="detail_panel_cats_loading">يۈكلەۋاتىدۇ…</string>
   <string name="detail_panel_cats_none">تاللانمىغان</string>

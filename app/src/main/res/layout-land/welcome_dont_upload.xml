@@ -26,7 +26,6 @@
 
         <ImageView
             android:src="@drawable/proprietary_x"
-            android:id="@+id/proprietary_x"
             android:layout_marginLeft="10dp"
             android:layout_width="110dp"
             android:layout_height="wrap_content"

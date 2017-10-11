@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Ayen yettwasnen</string>
-  <string name="menu_settings">Iɣewwaren</string>
-  <string name="username">Isem n useqdac</string>
+    <string name="username">Isem n useqdac</string>
   <string name="password">Awal uffir</string>
   <string name="login">Qqen</string>
   <string name="signup">Jerred</string>
   <string name="logging_in_title">Tuqqna...</string>
   <string name="logging_in_message">Rǧu...</string>
   <string name="login_success">Tuqqna tedda!</string>
-  <string name="login_failed">Tqqna ur teddi ara!</string>
-  <string name="upload_failed">Ulac afaylu. Ɛreḍ wayeḍ ma ulac aɣilif.</string>
+    <string name="upload_failed">Ulac afaylu. Ɛreḍ wayeḍ ma ulac aɣilif.</string>
   <string name="authentication_failed">Asesteb yecceḍ!</string>
   <string name="uploading_started">Asali yebda!</string>
-  <string name="upload_completed_notification_title">%1$s yuli!</string>
-  <string name="upload_completed_notification_text">Senned akken ad twaliḍ asali-ik</string>
-  <string name="upload_progress_notification_title_start">Beddu n usali n %1$s</string>
+    <string name="upload_progress_notification_title_start">Beddu n usali n %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ulin</string>
   <string name="upload_progress_notification_title_finishing">Tagara n usali n %1$s</string>
   <string name="upload_failed_notification_title">Asali n  %1$s ur yeddi ara</string>
@@ -27,12 +23,9 @@
   <string name="title_activity_contributions">Ifuyla yulin melmi kan</string>
   <string name="contribution_state_queued">Ttraǧun</string>
   <string name="contribution_state_failed">Yecceḍ</string>
-  <string name="contribution_state_in_progress">%1$d%% yeddan</string>
-  <string name="contribution_state_starting">Asali</string>
-  <string name="menu_from_gallery">Seg timidelt</string>
+    <string name="menu_from_gallery">Seg timidelt</string>
   <string name="menu_from_camera">Ṭṭef tawlaft</string>
-  <string name="menu_nearby">S lqeṛban</string>
-  <string name="provider_contributions">Ifuyla i suliɣ</string>
+    <string name="provider_contributions">Ifuyla i suliɣ</string>
   <string name="menu_share">Bḍu</string>
   <string name="menu_open_in_browser">Sken deg yiminig</string>
   <string name="share_title_hint">Azwel</string>
@@ -72,14 +65,12 @@
   <string name="categories_activity_title">Taggayin</string>
   <string name="title_activity_settings">Iɣewwaṛen</string>
   <string name="title_activity_signup">Jerred</string>
-  <string name="menu_about">Ɣef</string>
-  <string name="about_license">Iseɣzanen n uɣbalu yeldin ffɣen-d  ddaw n &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;turagt Apache v2&lt;/a&gt;. %1$s akked ulugu-is d ticraḍ yersen n tesbeddit Wikimedia i yettwaseqdacen s tsiregt n tesbeddit Wikimedia. Ur nettwasireg ara sɣuṛ tasbeddit Wikimedia udiɣ ur nttekka ra ɣur-s.</string>
+    <string name="about_license">Iseɣzanen n uɣbalu yeldin ffɣen-d  ddaw n &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;turagt Apache v2&lt;/a&gt;. %1$s akked ulugu-is d ticraḍ yersen n tesbeddit Wikimedia i yettwaseqdacen s tsiregt n tesbeddit Wikimedia. Ur nettwasireg ara sɣuṛ tasbeddit Wikimedia udiɣ ur nttekka ra ɣur-s.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Iɣbula&lt;/a&gt; akked &lt;a href=\"https://commons-app.github.io/\"&gt;usmel web&lt;/a&gt; di GitHub. Rnu &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;tummla GitHub&lt;/a&gt; tamaynut akken ad temmleḍ ibugen neɣ ad d-mudded isumar.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Tasertit n tbaḍnit&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Ismaden&lt;/a&gt;</string>
   <string name="title_activity_about">Ɣef</string>
-  <string name="menu_feedback">Azen tikti (s yimayl)</string>
-  <string name="no_email_client">Ulac amsaɣ n yimayl ibedden</string>
+    <string name="no_email_client">Ulac amsaɣ n yimayl ibedden</string>
   <string name="provider_categories">Taggayin yettwasqedcenmelmi kan</string>
   <string name="waiting_first_sync">Araǧu n umtawi amezwaru...</string>
   <string name="no_uploads_yet">Ur tsuliḍ ara yakan tiwlafin.</string>
@@ -100,21 +91,8 @@
   <string name="license_name_cc_by">Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Ustriya)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Alman)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Istunya)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Spanya)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Karwasya)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luksumburg)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Huland)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Nurvij)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Puland)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (ṛumanya)</string>
-  <string name="license_name_cc_by_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_4_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
-  <string name="tutorial_1_text">Wikimedia Commons tettmuddu tanezduɣt i tugett n tugniwin ara yettwasqedcen di Wikipedia.</string>
+    <string name="license_name_cc_by_3_0">CC BY-SA 3.0</string>
+    <string name="tutorial_1_text">Wikimedia Commons tettmuddu tanezduɣt i tugett n tugniwin ara yettwasqedcen di Wikipedia.</string>
   <string name="tutorial_1_subtext">Tugniwin-ik ad d-muddent afus i useklem n yimdanen deg umaḍal meṛṛa.</string>
   <string name="tutorial_2_text">Sali tugniwin yettwaṭṭfen neɣ yettwarnan kan sɣuṛ-k.</string>
   <string name="tutorial_2_subtext">- Tiɣawsiwin n ugama (tijeggigin, iɣrsiwen, idurar) \n- Tiɣawsiwin ilaqen (iviluten, tiɣsar n tmacinin) \n- Imdanen yettwasnen(aselway n tɣiwant, inaddalen ulimpiken i d-muggreḍ)</string>
@@ -122,19 +100,14 @@
   <string name="tutorial_3_subtext">- isilfiyen neɣ tugniwin n yimdakkal-ik \n- tugniwin i d-sidreḍ si Internet\n- inɣal n ugdil n yisnasen yesɛan imawlan</string>
   <string name="tutorial_4_text">Amedya n usali:</string>
   <string name="tutorial_4_subtext">- Azwel: Tazqqa Opera n Sydney\n- Aglam : Tazeqqa Opera n Sydney seg ilel\n- Taggayin: Tazeqqa Opera n Sydney, Tazeqqa Opera n Sydney seg umalu, timeẓriyin s lebɛid n Tazeqqa Opera n Sydney.</string>
-  <string name="welcome_wikipedia_text">Ttekki s tugniwin-ik. Snerni imagraden n Wikipedia!</string>
-  <string name="welcome_wikipedia_subtext">Tugniwin ɣef Wikipedia ttasent-d si Wikimedia Commons.</string>
-  <string name="welcome_copyright_text">Tugniwin-ik ad slemdent imdanen deg umaḍal.</string>
-  <string name="welcome_copyright_subtext">Zgel axedddim yettwaḥerzen ara tafeḍ di Internet akked tugniwin n inazalen, tiduliwin n yidlisen, atg.</string>
-  <string name="welcome_final_text">Tɣileḍ igarrez?</string>
+    <string name="welcome_final_text">Tɣileḍ igarrez?</string>
   <string name="welcome_final_button_text">Ih!</string>
   <string name="detail_panel_cats_label">Taggayin</string>
   <string name="detail_panel_cats_loading">Asali...</string>
   <string name="detail_panel_cats_none">Ula d yiwet ur tettwafren</string>
   <string name="detail_description_empty">Ulac aglam</string>
   <string name="detail_license_empty">Turagt tarussint</string>
-  <string name="menu_refresh">Smiren</string>
-  <string name="read_storage_permission_rationale">Yesra tasiregt: Ɣeṛ asekles azɣaray. Asnas ur yezmir ara ad yeddu s war aya.</string>
+    <string name="read_storage_permission_rationale">Yesra tasiregt: Ɣeṛ asekles azɣaray. Asnas ur yezmir ara ad yeddu s war aya.</string>
   <string name="write_storage_permission_rationale">Ysera tasiregt: Aru deg usekles azɣaray. Asnas ur yezmir ara ad yeddu s war aya.</string>
   <string name="location_permission_rationale">Tasiregt tafrayant: Awi adig amiran i yisumar n taggayt</string>
   <string name="ok">IH</string>
@@ -157,15 +130,13 @@
   <string name="use_wikidata">Seqdec Wikipedia</string>
   <string name="use_wikidata_summary">(Ɣur-k: asensi n waya yezmer ad d-yeglu s waṭas n ussuder n isefka deg uziraz-ik)</string>
   <string name="_2fa_code">Tangalt 2FA</string>
-  <string name="number_of_uploads">Talast-iw n usali n melmi kan</string>
-  <string name="maximum_limit">Talast tafellayt</string>
+    <string name="maximum_limit">Talast tafellayt</string>
   <string name="maximum_limit_alert">Ur izmir ara ad d-yesken ugar n 500</string>
   <string name="set_limit">Sbadu talast n usali n melmi kan</string>
   <string name="login_failed_2fa_not_supported">Asesteb s snat n tarrayin ur yettusefrak ara akka tura.</string>
   <string name="logout_verification">Tabɣiḍ ad teffɣeḍ?</string>
   <string name="commons_logo">Alugu Commons</string>
-  <string name="background_image">Tugna n ugilal</string>
-  <string name="mediaimage_failed">Tugna n midya ur teddi ara</string>
+    <string name="mediaimage_failed">Tugna n midya ur teddi ara</string>
   <string name="no_image_found">Ulac tugna</string>
   <string name="upload_image">Sali tugna</string>
   <string name="welcome_image_mount_zao">Taqirruct Zao</string>
@@ -181,8 +152,7 @@
   <string name="navigation_drawer_open">Ldi</string>
   <string name="navigation_drawer_close">Mdel</string>
   <string name="navigation_item_home">Asebter agejdan</string>
-  <string name="navigation_item_upload">Sali</string>
-  <string name="navigation_item_nearby">S lqeṛban</string>
+    <string name="navigation_item_nearby">S lqeṛban</string>
   <string name="navigation_item_about">Ɣef</string>
   <string name="navigation_item_settings">Iɣewwaṛen</string>
   <string name="navigation_item_feedback">Tikti</string>

@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Commons</string>
-  <string name="menu_settings">Asetukset</string>
-  <string name="username">Käyttäjätunnus</string>
+    <string name="username">Käyttäjätunnus</string>
   <string name="password">Salasana</string>
   <string name="login">Kirjaudu sisään</string>
   <string name="signup">Rekisteröidy</string>
   <string name="logging_in_title">Kirjaudutaan</string>
   <string name="logging_in_message">Odota…</string>
   <string name="login_success">Kirjautuminen onnistui!</string>
-  <string name="login_failed">Kirjautuminen epäonnistui!</string>
-  <string name="upload_failed">Tiedostoa ei löytynyt. Yritä toista tiedostoa.</string>
+    <string name="upload_failed">Tiedostoa ei löytynyt. Yritä toista tiedostoa.</string>
   <string name="authentication_failed">Tunnistautuminen epäonnistui!</string>
   <string name="uploading_started">Tallentaminen aloitettiin!</string>
-  <string name="upload_completed_notification_title">%1$s tallennettiin!</string>
-  <string name="upload_completed_notification_text">Napauta katsoaksesi tallennusta</string>
-  <string name="upload_progress_notification_title_start">Aloitetaan tiedoston %1$s tallennusta</string>
+    <string name="upload_progress_notification_title_start">Aloitetaan tiedoston %1$s tallennusta</string>
   <string name="upload_progress_notification_title_in_progress">Tallennetaan %1$s</string>
   <string name="upload_progress_notification_title_finishing">%1$s tallennettu</string>
   <string name="upload_failed_notification_title">Tiedoston %1$s tallentaminen epäonnistui</string>
@@ -27,12 +23,9 @@
   <string name="title_activity_contributions">Viimeaikaiset tallennukseni</string>
   <string name="contribution_state_queued">Jonossa</string>
   <string name="contribution_state_failed">Epäonnistui</string>
-  <string name="contribution_state_in_progress">%1$d%% valmis</string>
-  <string name="contribution_state_starting">Tallennetaan</string>
-  <string name="menu_from_gallery">Galleriasta</string>
+    <string name="menu_from_gallery">Galleriasta</string>
   <string name="menu_from_camera">Ota kuva</string>
-  <string name="menu_nearby">Lähistöllä</string>
-  <string name="provider_contributions">Omat tallennukset</string>
+    <string name="provider_contributions">Omat tallennukset</string>
   <string name="menu_share">Jaa</string>
   <string name="menu_open_in_browser">Näytä selaimessa</string>
   <string name="share_title_hint">Otsikko</string>
@@ -72,14 +65,12 @@
   <string name="categories_activity_title">Luokat</string>
   <string name="title_activity_settings">Asetukset</string>
   <string name="title_activity_signup">Rekisteröidy</string>
-  <string name="menu_about">Tietoja</string>
-  <string name="about_license">Tämä on vapaan lähdekoodin ohjelmisto, joka on julkaistu &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; -lisenssin alaisena. Wikimedia Commons ja sen logo ovat Wikimedia Foundationin tavaramerkkejä ja niitä käytetään Wikimedia Foundationin luvalla. Emme ole hyväksyttyjä tai sidoksissa Wikimedia Foundationioniin.</string>
+    <string name="about_license">Tämä on vapaan lähdekoodin ohjelmisto, joka on julkaistu &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; -lisenssin alaisena. Wikimedia Commons ja sen logo ovat Wikimedia Foundationin tavaramerkkejä ja niitä käytetään Wikimedia Foundationin luvalla. Emme ole hyväksyttyjä tai sidoksissa Wikimedia Foundationioniin.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Lähde&lt;/a&gt; ja &lt;a href=\"https://commons-app.github.io/\"&gt;nettisivusto&lt;/a&gt; GitHubissa. Luo uusi &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-issue&lt;/a&gt; bugiraporteille ja ehdotuksille.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Yksityisyydensuoja&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Tekijät&lt;/a&gt;</string>
   <string name="title_activity_about">Tietoja</string>
-  <string name="menu_feedback">Lähetä palautetta (sähköpostitse)</string>
-  <string name="no_email_client">Sähköpostiohjelmaa ei ole asennettu</string>
+    <string name="no_email_client">Sähköpostiohjelmaa ei ole asennettu</string>
   <string name="provider_categories">Äskettäin käytetyt luokat</string>
   <string name="waiting_first_sync">Odotetaan ensimmäistä synkronointia…</string>
   <string name="no_uploads_yet">Et ole vielä tallentanut kuvia.</string>
@@ -100,21 +91,8 @@
   <string name="license_name_cc_by">Nimeä 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Itävalta)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Saksa)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Viro)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Espanja)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Kroatia)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxemburg)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Alankomaat)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norja)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Puola)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romania)</string>
-  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
-  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC0</string>
-  <string name="tutorial_1_text">Wikimedia Commonsiin on tallennettu lähes kaikki Wikipediassa käytetyt kuvat.</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="tutorial_1_text">Wikimedia Commonsiin on tallennettu lähes kaikki Wikipediassa käytetyt kuvat.</string>
   <string name="tutorial_1_subtext">Kuvasi auttavat ihmisiä kaikkialta maailmasta ymmärtämään maailmaa!</string>
   <string name="tutorial_2_text">Tallenna kuvia, jotka sinä itse olet ottanut tai luonut:</string>
   <string name="tutorial_2_subtext">- Luontokohteet (kukat, eläimet, vuoret)\n- Hyödylliset esineet (polkupyörät, rautatieasemat)\n- Kuuluisat henkilöt (kaupunginjohtajasi, tapaamasi olympiaurheilijat)</string>
@@ -122,19 +100,14 @@
   <string name="tutorial_3_subtext">- Selfiet tai kuvat ystävistäsi\n- Netistä ladatut kuvat\n- Kuvakaappaukset kaupallisista sovelluksista</string>
   <string name="tutorial_4_text">Tallennusesimerkki:</string>
   <string name="tutorial_4_subtext">- Nimi: Sydneyn operatalo\n- Kuvaus: Sydneyn oopperatalo katsottuna lahden toisella puolella\n- Luokat: Sydneyn oopperatalo, Sydneyn oopperatalo lännestä, Sydneyn oopperatalo remote views</string>
-  <string name="welcome_wikipedia_text">Herätä Wikipedia-artikkelit eloon kuvillasi! Tuo kuvasi Wikipediaan.</string>
-  <string name="welcome_wikipedia_subtext">Wikipedian kuvat tulevat Wikimedia Commonsista.</string>
-  <string name="welcome_copyright_text">Kuvasi auttavat useita ihmisiä ympäri maailmaa artikkeleiden ymmärtämisessä.</string>
-  <string name="welcome_copyright_subtext">Vältä tekijänoikeuksien alaista materiaalia, kuten julisteita, kirjan kansia ja useimpia Internetistä löydettyjä kuvia.</string>
-  <string name="welcome_final_text">Luuletko ymmärtäneesi tämän?</string>
+    <string name="welcome_final_text">Luuletko ymmärtäneesi tämän?</string>
   <string name="welcome_final_button_text">Kyllä!</string>
   <string name="detail_panel_cats_label">Luokat</string>
   <string name="detail_panel_cats_loading">Ladataan…</string>
   <string name="detail_panel_cats_none">Ei yhtään valittu</string>
   <string name="detail_description_empty">Ei kuvausta</string>
   <string name="detail_license_empty">Tuntematon lisenssi</string>
-  <string name="menu_refresh">Päivitä</string>
-  <string name="read_storage_permission_rationale">Vaadittu oikeus: Ulkoisen tallennustilan luku. Appi ei toimi ilman tätä oikeutta.</string>
+    <string name="read_storage_permission_rationale">Vaadittu oikeus: Ulkoisen tallennustilan luku. Appi ei toimi ilman tätä oikeutta.</string>
   <string name="location_permission_rationale">Valinnainen lupa: Saada tämänhetkinen sijainti loukkasuosituksia varten.</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Lähellä olevat paikat</string>
@@ -158,8 +131,7 @@
   <string name="login_failed_2fa_not_supported">Kaksivaiheinen tunnistus ei ole vielä tuettu.</string>
   <string name="logout_verification">Haluatko varmasti kirjautua ulos?</string>
   <string name="commons_logo">Commons Logo</string>
-  <string name="background_image">Taustakuva</string>
-  <string name="no_image_found">Kuvaa ei löytynyt</string>
+    <string name="no_image_found">Kuvaa ei löytynyt</string>
   <string name="upload_image">Lataa kuva</string>
   <string name="welcome_image_mount_zao">Zao-vuori</string>
   <string name="welcome_image_rainbow_bridge">Sateenkaarisilta</string>
@@ -172,8 +144,7 @@
   <string name="navigation_drawer_open">Avaa</string>
   <string name="navigation_drawer_close">Sulje</string>
   <string name="navigation_item_home">Koti</string>
-  <string name="navigation_item_upload">Tallenna</string>
-  <string name="navigation_item_nearby">Lähistöllä</string>
+    <string name="navigation_item_nearby">Lähistöllä</string>
   <string name="navigation_item_about">Tietoja</string>
   <string name="navigation_item_settings">Asetukset</string>
   <string name="navigation_item_feedback">Palaute</string>

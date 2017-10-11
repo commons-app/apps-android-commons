@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name" fuzzy="true">Wikimedia Commons</string>
-  <string name="menu_settings">Ayarlar</string>
-  <string name="username">Kullanıcı adı</string>
+    <string name="username">Kullanıcı adı</string>
   <string name="password">Parola</string>
   <string name="login">Oturum aç</string>
   <string name="logging_in_title">Oturum açılıyor</string>
   <string name="logging_in_message" fuzzy="true">Lütfen bekleyin…</string>
   <string name="login_success">Oturum açma başarılı!</string>
-  <string name="login_failed">Oturum açma başarısız oldu!</string>
-  <string name="authentication_failed">Kimlik doğrulama başarısız oldu!</string>
+    <string name="authentication_failed">Kimlik doğrulama başarısız oldu!</string>
   <string name="uploading_started">Yükleme başladı!</string>
-  <string name="upload_completed_notification_title">%1$s yüklendi!</string>
-  <string name="upload_completed_notification_text">Yüklemelerinizi görüntülemek için dokunun</string>
-  <string name="upload_progress_notification_title_start">%1$s yüklemesine başlanıyor</string>
+    <string name="upload_progress_notification_title_start">%1$s yüklemesine başlanıyor</string>
   <string name="upload_progress_notification_title_in_progress">%1$s yükleniyor</string>
   <string name="upload_progress_notification_title_finishing">%1$s yüklemesi bitiriliyor</string>
   <string name="upload_failed_notification_title">%1$s dosyasının yüklemesi başarısız oldu</string>
@@ -25,9 +21,7 @@
   <string name="title_activity_contributions" fuzzy="true">Yüklemelerim</string>
   <string name="contribution_state_queued">Sırada</string>
   <string name="contribution_state_failed">Başarısız</string>
-  <string name="contribution_state_in_progress">%1$d%% tamamlandı</string>
-  <string name="contribution_state_starting">Yükleniyor</string>
-  <string name="menu_from_gallery">Galeri\'den</string>
+    <string name="menu_from_gallery">Galeri\'den</string>
   <string name="menu_from_camera">Fotoğraf çek</string>
   <string name="provider_contributions">Yüklemelerim</string>
   <string name="menu_share">Paylaş</string>
@@ -63,13 +57,11 @@
   <string name="categories_skip_explanation">Resimlerinizi Wikimedia Commons\'ta daha bulunabilir duruma getirmek için kategoriler ekleyin.\n\nKategori eklemek için yazmaya başlayın.\nBu adımı atlamak için bu iletiye dokunun ya da geri tıklayın.</string>
   <string name="categories_activity_title">Kategoriler</string>
   <string name="title_activity_settings">Ayarlar</string>
-  <string name="menu_about">Hakkında</string>
-  <string name="about_license" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache Lisansı s2&lt;/a&gt; altında yayımlanan Açık Kaynak yazılımı</string>
+    <string name="about_license" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache Lisansı s2&lt;/a&gt; altında yayımlanan Açık Kaynak yazılımı</string>
   <string name="about_improve" fuzzy="true">Kaynak: &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;\n\nYazılım hataları: &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Gizlilik Politikası&lt;/a&gt;</string>
   <string name="title_activity_about">Hakkında</string>
-  <string name="menu_feedback">Geri Bildirim Gönder (E-posta ile)</string>
-  <string name="provider_categories">Son kullanılan kategoriler</string>
+    <string name="provider_categories">Son kullanılan kategoriler</string>
   <string name="waiting_first_sync">İlk eşitleme için bekleniyor…</string>
   <string name="no_uploads_yet">Henüz yüklenmiş hiç fotoğrafınız yok.</string>
   <string name="menu_retry_upload">Tekrar dene</string>
@@ -81,30 +73,14 @@
   <string name="license_name_cc_by" fuzzy="true">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Avusturya)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Almanya)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonya)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (İspanya)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Hırvatistan)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Lüksemburg)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Hollanda)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norveç)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polonya)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romanya)</string>
-  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_zero">CC0</string>
-  <string name="welcome_wikipedia_text">Resimleriniz ile Vikipedi maddelerinin canlandırılmasına katkıda bulunabilirsiniz!</string>
-  <string name="welcome_wikipedia_subtext">Vikipedi\'ye Wikimedia Commons\'tan gelen görüntüler.</string>
-  <string name="welcome_copyright_text">Görüntüler dünya insanlarının eğitiminde yardımcı olur.</string>
-  <string name="welcome_copyright_subtext">Telif hakkı olan ve internette bulunan film afişi, kitap kapağı gibi malzemelerin kullanımından kaçının.</string>
-  <string name="welcome_final_text">Bunu anladınız mı?</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="welcome_final_text">Bunu anladınız mı?</string>
   <string name="welcome_final_button_text">Evet!</string>
   <string name="detail_panel_cats_label">Kategoriler</string>
   <string name="detail_panel_cats_loading" fuzzy="true">Yükleniyor…</string>
   <string name="detail_panel_cats_none">Hiçbir şey seçilmedi</string>
   <string name="detail_description_empty">Açıklama yok</string>
   <string name="detail_license_empty">Bilinmeyen lisans</string>
-  <string name="menu_refresh">Yenile</string>
-  <string name="media_detail_license">Lisans</string>
+    <string name="media_detail_license">Lisans</string>
   <string name="media_detail_coordinates">Koordinatlar</string>
 </resources>

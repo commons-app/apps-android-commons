@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name" fuzzy="true">Wikimedia Commons</string>
-  <string name="menu_settings">Nastajenja</string>
-  <string name="username">Wužiwarske mjeno</string>
+    <string name="username">Wužiwarske mjeno</string>
   <string name="password">Hesło</string>
   <string name="login">Přizjewić</string>
   <string name="logging_in_title">Přizjewjenje</string>
   <string name="logging_in_message">Prošu čakaj…</string>
   <string name="login_success">Přizjewjenje wuspěšne!</string>
-  <string name="login_failed">Přizjewjenje je so njeporadźiło!</string>
-  <string name="authentication_failed">Awtentifikacija je so njeporadźiła!</string>
+    <string name="authentication_failed">Awtentifikacija je so njeporadźiła!</string>
   <string name="uploading_started">Nahraće je so započało!</string>
-  <string name="upload_completed_notification_title">%1$s nahraty!</string>
-  <string name="upload_completed_notification_text">Dótkń so, zo by swoje nahraće widźał</string>
-  <string name="upload_progress_notification_title_start">Nahraće %1$S startować</string>
+    <string name="upload_progress_notification_title_start">Nahraće %1$S startować</string>
   <string name="upload_progress_notification_title_in_progress">%1$s so nahrawa</string>
   <string name="upload_progress_notification_title_finishing">Nahraće %1$s so kónči</string>
   <string name="upload_failed_notification_title">Nahraće %1$s je so njeporadźiło</string>
@@ -21,9 +17,7 @@
   <string name="title_activity_contributions" fuzzy="true">Moje nahraća</string>
   <string name="contribution_state_queued">W čakanskim rynku</string>
   <string name="contribution_state_failed">Njeporadźiło</string>
-  <string name="contribution_state_in_progress">%1$d%% skónčeny</string>
-  <string name="contribution_state_starting">Nahrawa so</string>
-  <string name="menu_from_gallery">Z galerije</string>
+    <string name="menu_from_gallery">Z galerije</string>
   <string name="menu_from_camera">Fotografować</string>
   <string name="provider_contributions">Moje nahraća</string>
   <string name="menu_share">Dźělić</string>
@@ -45,13 +39,11 @@
   <string name="categories_not_found">Kategorija %1$s njeje so namakała</string>
   <string name="categories_activity_title">Kategorije</string>
   <string name="title_activity_settings">Nastajenja</string>
-  <string name="menu_about">Wo</string>
-  <string name="about_license" fuzzy="true">Software zjawneho žórła wozjewjena pod licencu &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
+    <string name="about_license" fuzzy="true">Software zjawneho žórła wozjewjena pod licencu &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
   <string name="about_improve" fuzzy="true">Žórłowy kod na &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Zdźělenja wo programowych zmylkach na &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"//de.wikipedia.org/wiki/Wikipedia:Datenschutz\"&gt;Prawidła priwatnosće&lt;/a&gt;</string>
   <string name="title_activity_about">Wo</string>
-  <string name="menu_feedback">Komentar pósłać (přez e-mejl)</string>
-  <string name="provider_categories">Njedawno wužite kategorije</string>
+    <string name="provider_categories">Njedawno wužite kategorije</string>
   <string name="waiting_first_sync">Čaka so na prěnju synchronizaciju…</string>
   <string name="no_uploads_yet">Hišće njejsy žane fota nahrał.</string>
   <string name="menu_retry_upload">Hišće raz spytać</string>
@@ -63,27 +55,12 @@
   <string name="license_name_cc_by" fuzzy="true">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Awstriska)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Němska)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estiska)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Španiska)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Chorwatska)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxemburgska)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Nižozemska)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norwegska)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Pólska)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Rumunska)</string>
-  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
-  <string name="welcome_wikipedia_text">Přinošuj swoje wobrazy. Pomhaj, nastawki Wikipedije k žiwjenju zbudźić!</string>
-  <string name="welcome_wikipedia_subtext">Wobrazy na Wikipedije pochadźeja z Wikimedia Commons.</string>
-  <string name="welcome_copyright_text">Twoje wobrazy pomhaja, ludźi w cyłym swěće kubłać.</string>
-  <string name="welcome_final_text">Sy zrozumił?</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="welcome_final_text">Sy zrozumił?</string>
   <string name="welcome_final_button_text">Haj!</string>
   <string name="detail_panel_cats_label">Kategorije</string>
   <string name="detail_panel_cats_loading">Začituje so…</string>
   <string name="detail_panel_cats_none">Ničo wubrane</string>
   <string name="detail_description_empty">Žane wopisanje</string>
   <string name="detail_license_empty">Njeznata licenca</string>
-  <string name="menu_refresh">Aktualizować</string>
 </resources>

@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Commons</string>
-  <string name="menu_settings">Impostazioni</string>
-  <string name="username">Nome utente</string>
+    <string name="username">Nome utente</string>
   <string name="password">Password</string>
   <string name="login">Entra</string>
   <string name="signup">Registrati</string>
   <string name="logging_in_title">Accesso in corso</string>
   <string name="logging_in_message">Attendi per favore…</string>
   <string name="login_success">Accesso effettuato!</string>
-  <string name="login_failed">Accesso non riuscito!</string>
-  <string name="upload_failed">File non trovato. Prova con un altro file.</string>
+    <string name="upload_failed">File non trovato. Prova con un altro file.</string>
   <string name="authentication_failed">Autenticazione non riuscita!</string>
   <string name="uploading_started">Caricamento iniziato!</string>
-  <string name="upload_completed_notification_title">%1$s caricato!</string>
-  <string name="upload_completed_notification_text">Premi per vedere i tuoi caricamenti</string>
-  <string name="upload_progress_notification_title_start">Inizio caricamento di %1$s</string>
+    <string name="upload_progress_notification_title_start">Inizio caricamento di %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Sto caricando %1$s</string>
   <string name="upload_progress_notification_title_finishing">Terminato il caricamento di %1$s</string>
   <string name="upload_failed_notification_title">Caricamento di %1$s non riuscito</string>
@@ -27,12 +23,9 @@
   <string name="title_activity_contributions">I miei ultimi caricamenti</string>
   <string name="contribution_state_queued">In coda</string>
   <string name="contribution_state_failed">Non riuscito</string>
-  <string name="contribution_state_in_progress">%1$d%% completo</string>
-  <string name="contribution_state_starting">Caricamento in corso</string>
-  <string name="menu_from_gallery">Dalla galleria</string>
+    <string name="menu_from_gallery">Dalla galleria</string>
   <string name="menu_from_camera">Scatta foto</string>
-  <string name="menu_nearby">Nelle vicinanze</string>
-  <string name="provider_contributions">I miei caricamenti</string>
+    <string name="provider_contributions">I miei caricamenti</string>
   <string name="menu_share">Condividi</string>
   <string name="menu_open_in_browser">Visualizza nel browser</string>
   <string name="share_title_hint">Titolo</string>
@@ -72,14 +65,12 @@
   <string name="categories_activity_title">Categorie</string>
   <string name="title_activity_settings">Impostazioni</string>
   <string name="title_activity_signup">Registrati</string>
-  <string name="menu_about">Informazioni</string>
-  <string name="about_license">Software open source rilasciato con &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;licenza Apache v2&lt;/a&gt;. %1$s ed il suo logo sono marchi registrati della Wikimedia Foundation e sono utilizzati con il permesso della Wikimedia Foundation. Non siamo approvati o affiliati con la Wikimedia Foundation.</string>
+    <string name="about_license">Software open source rilasciato con &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;licenza Apache v2&lt;/a&gt;. %1$s ed il suo logo sono marchi registrati della Wikimedia Foundation e sono utilizzati con il permesso della Wikimedia Foundation. Non siamo approvati o affiliati con la Wikimedia Foundation.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Codice sorgente&lt;/a&gt; e &lt;a href=\"https://commons-app.github.io/\"&gt;sito web&lt;/a&gt; su GitHub. Crea una nuova &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;segnalazione GitHub&lt;/a&gt; per riportare errori e suggerimenti.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politica sulla privacy&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Crediti&lt;/a&gt;</string>
   <string name="title_activity_about">Informazioni</string>
-  <string name="menu_feedback">Invia un commento (tramite email)</string>
-  <string name="no_email_client">Nessun client di posta elettronica installato</string>
+    <string name="no_email_client">Nessun client di posta elettronica installato</string>
   <string name="provider_categories">Categorie utilizzate recentemente</string>
   <string name="waiting_first_sync">Attendi per la prima sincronizzazione…</string>
   <string name="no_uploads_yet">Non hai ancora caricato alcuna foto.</string>
@@ -98,36 +89,18 @@
   <string name="license_name_cc_by"> Attribuzione 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Austria)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Germania)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonia)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Spagna)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Croazia)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Lussemburgo)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Paesi Bassi)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norvegia)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polonia)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romania)</string>
-  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
-  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
-  <string name="tutorial_1_text">Wikimedia Commons ospita la maggior parte delle immagini che vengono utilizzate in Wikipedia.</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="tutorial_1_text">Wikimedia Commons ospita la maggior parte delle immagini che vengono utilizzate in Wikipedia.</string>
   <string name="tutorial_1_subtext">Le tue immagini aiutano l\'istruzione di persone in tutto il mondo!</string>
   <string name="tutorial_4_text">Esempi di caricamento:</string>
-  <string name="welcome_wikipedia_text">Contribuisci con le tue immagini. Aiuta a rendere vive le voci di Wikipedia!</string>
-  <string name="welcome_wikipedia_subtext">Le immagini su Wikipedia provengono da Wikimedia Commons.</string>
-  <string name="welcome_copyright_text">Le tue immagini aiutano l\'istruzione di persone in tutto il mondo.</string>
-  <string name="welcome_copyright_subtext">Evita materiali protetti da copyright che hai trovato su Internet, come pure le immagini di poster, copertine di libri, ecc.</string>
-  <string name="welcome_final_text">Pensi di aver capito?</string>
+    <string name="welcome_final_text">Pensi di aver capito?</string>
   <string name="welcome_final_button_text">Sì!</string>
   <string name="detail_panel_cats_label">Categorie</string>
   <string name="detail_panel_cats_loading">Caricamento…</string>
   <string name="detail_panel_cats_none">Nessuna selezione</string>
   <string name="detail_description_empty">Nessuna descrizione</string>
   <string name="detail_license_empty">Licenza sconosciuta</string>
-  <string name="menu_refresh">Aggiorna</string>
-  <string name="ok">OK</string>
+    <string name="ok">OK</string>
   <string name="title_activity_nearby">Luoghi nelle vicinanze</string>
   <string name="no_nearby">Nessun luogo trovato nelle vicinanze</string>
   <string name="warning">Attenzione</string>
@@ -156,8 +129,7 @@
   <string name="navigation_drawer_open">Apri</string>
   <string name="navigation_drawer_close">Chiudi</string>
   <string name="navigation_item_home">Pagina principale</string>
-  <string name="navigation_item_upload">Carica</string>
-  <string name="navigation_item_nearby">Nelle vicinanze</string>
+    <string name="navigation_item_nearby">Nelle vicinanze</string>
   <string name="navigation_item_about">Informazioni</string>
   <string name="navigation_item_settings">Impostazioni</string>
   <string name="navigation_item_feedback">Commenti</string>

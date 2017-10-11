@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Wikimedia Commons</string>
-  <string name="menu_settings">Pengaturan</string>
-  <string name="username">Nama pengguna</string>
+    <string name="username">Nama pengguna</string>
   <string name="password">Kata sandi</string>
   <string name="login">Masuk log</string>
   <string name="logging_in_title">Memasuki log</string>
   <string name="logging_in_message">Silakan tunggu…</string>
   <string name="login_success">Berhasil masuk log!</string>
-  <string name="login_failed">Masuk log gagal!</string>
-  <string name="authentication_failed">Autentikasi gagal!</string>
+    <string name="authentication_failed">Autentikasi gagal!</string>
   <string name="uploading_started">Mulai unggah!</string>
-  <string name="upload_completed_notification_title">%1$s terunggah!</string>
-  <string name="upload_completed_notification_text">Tekan untuk melihat unggahan Anda</string>
-  <string name="upload_progress_notification_title_start">Memulai unggahan %1$s</string>
+    <string name="upload_progress_notification_title_start">Memulai unggahan %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s terunggah!</string>
   <string name="upload_progress_notification_title_finishing">Menyelesaikan pengunggahan %1$s</string>
   <string name="upload_failed_notification_title">Mengunggah %1$s gagal</string>
@@ -25,9 +21,7 @@
   <string name="title_activity_contributions">Unggahan saya</string>
   <string name="contribution_state_queued">Antrean</string>
   <string name="contribution_state_failed">Gagal</string>
-  <string name="contribution_state_in_progress">%1$d%% selesai</string>
-  <string name="contribution_state_starting">Mengunggah</string>
-  <string name="menu_from_gallery">Dari Galeri</string>
+    <string name="menu_from_gallery">Dari Galeri</string>
   <string name="menu_from_camera">Ambil foto</string>
   <string name="provider_contributions">Unggahan saya</string>
   <string name="menu_share">Bagikan</string>
@@ -65,16 +59,12 @@
 Mulai mengetik untuk menambahkan kategori.
 Tekan pesan ini (atau tekan kembali) untuk melewatkan langkah ini.</string>
   <string name="categories_activity_title">Kategori</string>
-  <string name="preference_tracking">Laporan penggunaan</string>
-  <string name="preference_tracking_summary">Kirimkan laporan penggunaan ke Wikimedia untuk membantu kami memperbaiki aplikasi</string>
-  <string name="title_activity_settings">Pengaturan</string>
-  <string name="menu_about">Tentang</string>
-  <string name="about_license">Perangkat lunak terbuka dirilis di bawah &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;lisensi Apache v2&lt;/a&gt;</string>
+    <string name="title_activity_settings">Pengaturan</string>
+    <string name="about_license">Perangkat lunak terbuka dirilis di bawah &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;lisensi Apache v2&lt;/a&gt;</string>
   <string name="about_improve">Bersumber di &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Bug di &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy/id\"&gt;Kebijakan privasi&lt;/a&gt;</string>
   <string name="title_activity_about">Tentang</string>
-  <string name="menu_feedback">Kirim umpan balik (via Surel)</string>
-  <string name="provider_categories">Kategori yang terakhir digunakan</string>
+    <string name="provider_categories">Kategori yang terakhir digunakan</string>
   <string name="waiting_first_sync">Menunggu sinkronisasi pertama…</string>
   <string name="no_uploads_yet">Anda belum mengunggah foto apapun.</string>
   <string name="menu_retry_upload">Coba lagi</string>
@@ -86,28 +76,12 @@ Tekan pesan ini (atau tekan kembali) untuk melewatkan langkah ini.</string>
   <string name="license_name_cc_by">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Austria)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Jerman)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonia)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Spanyol)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Kroasia)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luksemburg)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Belanda)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norwegia)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polandia)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Rumania)</string>
-  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_zero">CC Nol</string>
-  <string name="welcome_wikipedia_text">Sumbangkan gambar-gambar Anda. Bantu hidupkan artikel Wikipedia!</string>
-  <string name="welcome_wikipedia_subtext">Gambar di Wikipedia diambil dari Wikimedia Commons.</string>
-  <string name="welcome_copyright_text">Gambar Anda membantu mendidik orang-orang di seluruh dunia</string>
-  <string name="welcome_copyright_subtext">Hindari materi berhak cipta yang Anda temukan dari internet serta gambar poster, sampul buku, dll.</string>
-  <string name="welcome_final_text">Apakah Anda paham?</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="welcome_final_text">Apakah Anda paham?</string>
   <string name="welcome_final_button_text">Ya!</string>
   <string name="detail_panel_cats_label">Kategori</string>
   <string name="detail_panel_cats_loading">Memuat…</string>
   <string name="detail_panel_cats_none">Tidak ada yang dipilih</string>
   <string name="detail_description_empty">Tidak ada keterangan</string>
   <string name="detail_license_empty">Lisensi tidak diketahui</string>
-  <string name="menu_refresh">Segarkan</string>
 </resources>

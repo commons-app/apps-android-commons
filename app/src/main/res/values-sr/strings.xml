@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Остава</string>
-  <string name="menu_settings">Поставке</string>
-  <string name="username">Корисничко име</string>
+    <string name="username">Корисничко име</string>
   <string name="password">Лозинка</string>
   <string name="login">Пријави ме</string>
   <string name="signup">Отвори налог</string>
   <string name="logging_in_title">Пријављивање</string>
   <string name="logging_in_message">Сачекајте…</string>
   <string name="login_success">Успешно сте пријављени.</string>
-  <string name="login_failed">Пријављивање није успело.</string>
-  <string name="upload_failed">Датотека није пронађена. Покушајте са другом датотеком.</string>
+    <string name="upload_failed">Датотека није пронађена. Покушајте са другом датотеком.</string>
   <string name="authentication_failed">Провера идентитета није успела.</string>
   <string name="uploading_started">Отпремање је започето.</string>
-  <string name="upload_completed_notification_title">Датотека „%1$s“ је отпремљена.</string>
-  <string name="upload_completed_notification_text">Тапните да бисте видели отпремање</string>
-  <string name="upload_progress_notification_title_start">Почињем са отпремањем датотеке „%1$s“</string>
+    <string name="upload_progress_notification_title_start">Почињем са отпремањем датотеке „%1$s“</string>
   <string name="upload_progress_notification_title_in_progress">Отпремање датотеке „%1$s“</string>
   <string name="upload_progress_notification_title_finishing">Завршавам са отпремањем датотеке „%1$s“</string>
   <string name="upload_failed_notification_title">Не могу да отпремим „%1$s“</string>
@@ -27,12 +23,9 @@
   <string name="title_activity_contributions">Моја скорашња отпремања</string>
   <string name="contribution_state_queued">На чекању</string>
   <string name="contribution_state_failed">Није успело</string>
-  <string name="contribution_state_in_progress">%1$d%% отпремљено</string>
-  <string name="contribution_state_starting">Отпремам</string>
-  <string name="menu_from_gallery">Из галерије</string>
+    <string name="menu_from_gallery">Из галерије</string>
   <string name="menu_from_camera">Фотографиши</string>
-  <string name="menu_nearby">У близини</string>
-  <string name="provider_contributions">Моја отпремања</string>
+    <string name="provider_contributions">Моја отпремања</string>
   <string name="menu_share">Дели</string>
   <string name="menu_open_in_browser">Отвори у прегледачу</string>
   <string name="share_title_hint">Наслов</string>
@@ -72,14 +65,12 @@
   <string name="categories_activity_title">Категорије</string>
   <string name="title_activity_settings">Поставке</string>
   <string name="title_activity_signup">Отвори налог</string>
-  <string name="menu_about">О апликацији</string>
-  <string name="about_license" fuzzy="true">Софтвер отвореног кода доступан под лиценцом &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache вер. 2&lt;/a&gt; Викимедијина Остава и њен лого су заштитни знаци Викимедијине Фондације и користе се са дозволом Викимедијине Фондацине. Ми не одобравамо или подржавмо Викимедијину Фондацију.</string>
+    <string name="about_license" fuzzy="true">Софтвер отвореног кода доступан под лиценцом &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache вер. 2&lt;/a&gt; Викимедијина Остава и њен лого су заштитни знаци Викимедијине Фондације и користе се са дозволом Викимедијине Фондацине. Ми не одобравамо или подржавмо Викимедијину Фондацију.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Изворни кôд&lt;/a&gt; и &lt;a href=\"https://commons-app.github.io/\"&gt;веб-сајт&lt;/a&gt; на GitHub-у. Направите нови &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;захтев на GitHub-у&lt;/a&gt; да бисте пријавили грешке или дали предлоге.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Политика приватности&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Заслуге&lt;/a&gt;</string>
   <string name="title_activity_about">О апликацији</string>
-  <string name="menu_feedback">Пошаљите повратне информације (путем е-поште)</string>
-  <string name="no_email_client">Није инсталиран имејл клијент</string>
+    <string name="no_email_client">Није инсталиран имејл клијент</string>
   <string name="provider_categories">Недавно коришћене категорије</string>
   <string name="waiting_first_sync">Чекам на прву синхронизацију…</string>
   <string name="no_uploads_yet">Још нисте отпремили ниједну фотографију.</string>
@@ -99,21 +90,8 @@
   <string name="license_name_cc_by">Ауторство 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Аустрија)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Немачка)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Естонија)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Шпанија)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Хрватска)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Луксембург)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Холандија)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Норвешка)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Пољска)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Румунија)</string>
-  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
-  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Нула</string>
-  <string name="tutorial_1_text">Викимедијина Остава садржи већину слика која се користи на Википедији.</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="tutorial_1_text">Викимедијина Остава садржи већину слика која се користи на Википедији.</string>
   <string name="tutorial_1_subtext">Ваше слике помажу у образовању људи широм света.</string>
   <string name="tutorial_2_text">Молимо Вас да поставите слике које сте преузели или креирали у потпуности сами:</string>
   <string name="tutorial_2_subtext">- Природне објекте (цвеће, животиње, планине)\n- Корисне објекте (бицикле, железничке станице)\n- Познате људе (ваш градоначелник, Олимпијце које сте срели)</string>
@@ -121,19 +99,14 @@
   <string name="tutorial_3_subtext">- Селфије и слике твојих пријатеља\n- Слике које сте преузели са интернета\n- Скриншотове из сопствених апликација</string>
   <string name="tutorial_4_text">Пример отпремања:</string>
   <string name="tutorial_4_subtext">— Наслов: Сиднејска опера\n— Опис: Сиднејска опера, поглед преко залива\n— Категорије: Сиднејска опера, Сиднејска опера са запада, погледи на Сиднејксу оперу из даљине</string>
-  <string name="welcome_wikipedia_text">Делите своје слике. Оживите чланке на Википедији!</string>
-  <string name="welcome_wikipedia_subtext">Слике на Википедији долазе из Оставе.</string>
-  <string name="welcome_copyright_text">Са вашим сликама помажете у образовању људи широм света.</string>
-  <string name="welcome_copyright_subtext">Избегавајте материјале које сте нашли на интернету, као и слике плаката, корица књига итд.</string>
-  <string name="welcome_final_text">Јесте ли разумели?</string>
+    <string name="welcome_final_text">Јесте ли разумели?</string>
   <string name="welcome_final_button_text">Јесам!</string>
   <string name="detail_panel_cats_label">Категорије</string>
   <string name="detail_panel_cats_loading">Учитавам…</string>
   <string name="detail_panel_cats_none">Ништа није изабрано</string>
   <string name="detail_description_empty">Нема описа</string>
   <string name="detail_license_empty">Непозната лиценца</string>
-  <string name="menu_refresh">Освежи</string>
-  <string name="read_storage_permission_rationale">Потребна дозвола: Провера спољашње меморије. Апликација без овога не може да функционише.</string>
+    <string name="read_storage_permission_rationale">Потребна дозвола: Провера спољашње меморије. Апликација без овога не може да функционише.</string>
   <string name="location_permission_rationale">Опциона дозвола: Преузми тренутну локацију за предлоге категорија</string>
   <string name="ok">У реду</string>
   <string name="title_activity_nearby">Места у близини</string>
@@ -154,15 +127,13 @@
   <string name="use_wikidata">Користи Википодатке</string>
   <string name="use_wikidata_summary">(Упозорење: онемогућавањем овога може се изазвати велика потрошња мобилних података)</string>
   <string name="_2fa_code">2FA код</string>
-  <string name="number_of_uploads">Мој лимит за скорашња отпремања</string>
-  <string name="maximum_limit">Максимални лимит</string>
+    <string name="maximum_limit">Максимални лимит</string>
   <string name="maximum_limit_alert">Није могуће приказати више од 500</string>
   <string name="set_limit">Постави лимит за скорашња отпремања</string>
   <string name="login_failed_2fa_not_supported">Двофакторска аутентификација тренутно није подржана.</string>
   <string name="logout_verification">Заиста желите да се одјавите?</string>
   <string name="commons_logo">Лого Оставе</string>
-  <string name="background_image">Позадинска слика</string>
-  <string name="mediaimage_failed">Медијска слика неуспешна</string>
+    <string name="mediaimage_failed">Медијска слика неуспешна</string>
   <string name="no_image_found">Слика није пронађена</string>
   <string name="upload_image">Отпреми слику</string>
   <string name="welcome_image_mount_zao">Планина Зао</string>
@@ -178,8 +149,7 @@
   <string name="navigation_drawer_open">Отвори</string>
   <string name="navigation_drawer_close">Затвори</string>
   <string name="navigation_item_home">Почетна</string>
-  <string name="navigation_item_upload">Отпремање</string>
-  <string name="navigation_item_nearby">У близини</string>
+    <string name="navigation_item_nearby">У близини</string>
   <string name="navigation_item_about">О нама</string>
   <string name="navigation_item_settings">Подешавања</string>
   <string name="navigation_item_feedback">Повратне информације</string>

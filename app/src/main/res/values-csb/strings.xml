@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Commons</string>
-  <string name="menu_settings">Nastôwë</string>
-  <string name="username">Miono brëkòwnika</string>
+    <string name="username">Miono brëkòwnika</string>
   <string name="password">Parola</string>
   <string name="login">Wlogùjë mie</string>
   <string name="signup">Wregistrëjë sã</string>
   <string name="logging_in_title">Logòwanié</string>
   <string name="logging_in_message">Proszã żdac...</string>
   <string name="login_success">Ùdałi logòwanié!</string>
-  <string name="login_failed">Logòwanié nie darzëło sã!</string>
-  <string name="upload_failed">Felënk lopka. Proszã spróbòwac znowa.</string>
+    <string name="upload_failed">Felënk lopka. Proszã spróbòwac znowa.</string>
   <string name="authentication_failed">Fela ùdowierzaniô!</string>
   <string name="uploading_started">Wladënk zrëszony!</string>
-  <string name="upload_completed_notification_title">%1$s wladowóné!</string>
-  <string name="upload_completed_notification_text">Tkni, abë òbôczëc ladowóny lopk</string>
-  <string name="upload_progress_notification_title_start">Zrëszony wladënk lopka %1$s</string>
+    <string name="upload_progress_notification_title_start">Zrëszony wladënk lopka %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s wladënk</string>
   <string name="upload_progress_notification_title_finishing">Zakùńczony wladënk lopka %1$s</string>
   <string name="upload_failed_notification_title">Wladënk %1$s nie darzëł sã</string>
@@ -27,12 +23,9 @@
   <string name="title_activity_contributions">Mòjé slédno wladowóné lopczi</string>
   <string name="contribution_state_queued">Żdające</string>
   <string name="contribution_state_failed">Nie dzarzëło sã</string>
-  <string name="contribution_state_in_progress">%1$d%% zakùńczoné</string>
-  <string name="contribution_state_starting">Wladënk</string>
-  <string name="menu_from_gallery">Z galerëji</string>
+    <string name="menu_from_gallery">Z galerëji</string>
   <string name="menu_from_camera">Zrobi òdjimk</string>
-  <string name="menu_nearby">W òkòlim</string>
-  <string name="provider_contributions">Mòjé wladënczi</string>
+    <string name="provider_contributions">Mòjé wladënczi</string>
   <string name="menu_share">Ùprzistãpni</string>
   <string name="menu_open_in_browser">Òbôczë w przezérnikù</string>
   <string name="share_title_hint">Titel</string>
@@ -71,12 +64,10 @@
   <string name="categories_activity_title">Kategòrëje</string>
   <string name="title_activity_settings">Nastôwë</string>
   <string name="title_activity_signup">Wregistrëjë sã</string>
-  <string name="menu_about">Ò aplikacëji</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Pòlitika priwatnotë&lt;/a&gt;</string>
+    <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Pòlitika priwatnotë&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Ùsôdzcë&lt;/a&gt;</string>
   <string name="title_activity_about">Ò aplikacëji</string>
-  <string name="menu_feedback">Sélôj òpinijã (przez e-mail)</string>
-  <string name="no_email_client">Felënk wjinstalowónegò e-mailowégò klienta</string>
+    <string name="no_email_client">Felënk wjinstalowónegò e-mailowégò klienta</string>
   <string name="provider_categories">Slédno ùżëwóne kategòrëje</string>
   <string name="waiting_first_sync">Żdanié na pierszą synchronizacëjã...</string>
   <string name="no_uploads_yet">Nie môsz jesz wladowónych òdjimków</string>
@@ -95,21 +86,8 @@
   <string name="license_name_cc_by">Ùznanié ùsôdztwa 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Aùstrëjackô)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Miemieckô)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estóńskô)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Szpańskô)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Chòrwackô)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luksembùrskô)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Néderlandzkô)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norweskô)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Pòlskô)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Rumùńskô)</string>
-  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
-  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
-  <string name="tutorial_3_text">Proszimë NIE wladowiwac:</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="tutorial_3_text">Proszimë NIE wladowiwac:</string>
   <string name="tutorial_4_text">Przëmiôr wladënka:</string>
   <string name="welcome_final_button_text">Jo!</string>
   <string name="detail_panel_cats_label">Kategòrëje</string>
@@ -117,8 +95,7 @@
   <string name="detail_panel_cats_none">Felënk nacéchòwaniô</string>
   <string name="detail_description_empty">Felënk òpisënka</string>
   <string name="detail_license_empty">Nieznónô licencëja</string>
-  <string name="menu_refresh">Òdswierzë</string>
-  <string name="ok">Jo</string>
+    <string name="ok">Jo</string>
   <string name="warning">Òstrzéga</string>
   <string name="yes">Jo</string>
   <string name="no">Ni</string>
@@ -134,8 +111,7 @@
   <string name="_2fa_code">Kòd 2FA</string>
   <string name="logout_verification">Pò prôwdze chcesz sã wëlogòwac?</string>
   <string name="commons_logo">Logò Commons</string>
-  <string name="background_image">Òbrôzk spódkù</string>
-  <string name="no_image_found">Felënk òbrôzka</string>
+    <string name="no_image_found">Felënk òbrôzka</string>
   <string name="upload_image">Waldëjë òbrôzk</string>
   <string name="welcome_image_mount_zao">Zaō</string>
   <string name="welcome_image_llamas">Lamy</string>
@@ -150,8 +126,7 @@
   <string name="navigation_drawer_open">Òtemkni</string>
   <string name="navigation_drawer_close">Zamkni</string>
   <string name="navigation_item_home">Dodóm</string>
-  <string name="navigation_item_upload">Wladënk</string>
-  <string name="navigation_item_nearby">W òkòlim</string>
+    <string name="navigation_item_nearby">W òkòlim</string>
   <string name="navigation_item_about">Ò aplikacëji</string>
   <string name="navigation_item_settings">Nastôwë</string>
   <string name="navigation_item_feedback">Òpinije</string>

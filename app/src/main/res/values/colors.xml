@@ -3,7 +3,6 @@
     <!-- Some colours are same for dark/light themes. They are written two times in case
     we want to change light ones later.
       -->
-    <color name="item_white_background">#ffffffff</color>
     <color name="main_background_dark">#000000</color>
     <color name="main_background_light">#ffffff</color>
     <color name="commons_app_blue_dark">#33FFFFFF</color>

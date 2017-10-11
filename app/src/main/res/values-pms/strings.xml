@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Comun</string>
-  <string name="menu_settings">Paràmeter</string>
-  <string name="username">Stranòm</string>
+    <string name="username">Stranòm</string>
   <string name="password">Ciav</string>
   <string name="login">Intré ant ël sistema</string>
   <string name="signup">Anscriv-se</string>
   <string name="logging_in_title">Conession</string>
   <string name="logging_in_message">Ch\'a l\'abia passiensa…</string>
   <string name="login_success">A l\'é intrà ant ël sistema!</string>
-  <string name="login_failed">Falì a rintré ant ël sistema!</string>
-  <string name="upload_failed">Archivi nen trovà. Për piasì, ch\'a preuva con n\'àutr.</string>
+    <string name="upload_failed">Archivi nen trovà. Për piasì, ch\'a preuva con n\'àutr.</string>
   <string name="authentication_failed">Autentificassion falìa!</string>
   <string name="uploading_started">Cariament ancaminà!</string>
-  <string name="upload_completed_notification_title">%1$s carià!</string>
-  <string name="upload_completed_notification_text">Sgnaché për vëdde sò cariament</string>
-  <string name="upload_progress_notification_title_start">Inissi dël cariament %1$s</string>
+    <string name="upload_progress_notification_title_start">Inissi dël cariament %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s carià</string>
   <string name="upload_progress_notification_title_finishing">Fin dël cariament %1$s</string>
   <string name="upload_failed_notification_title">Cariament falì a %1$s</string>
@@ -27,12 +23,9 @@
   <string name="title_activity_contributions">Ij mè cariament recent</string>
   <string name="contribution_state_queued">An coa</string>
   <string name="contribution_state_failed">Falì</string>
-  <string name="contribution_state_in_progress">%1$d%% completà</string>
-  <string name="contribution_state_starting">Cariament</string>
-  <string name="menu_from_gallery">Da la galarìa</string>
+    <string name="menu_from_gallery">Da la galarìa</string>
   <string name="menu_from_camera">Fé na fòto</string>
-  <string name="menu_nearby">Davzin</string>
-  <string name="provider_contributions">Ij mè cariament</string>
+    <string name="provider_contributions">Ij mè cariament</string>
   <string name="menu_share">Partagé</string>
   <string name="menu_open_in_browser">Smon-e ant ël navigador</string>
   <string name="share_title_hint">Tìtol</string>
@@ -72,14 +65,12 @@
   <string name="categories_activity_title">Categorìe</string>
   <string name="title_activity_settings">Paràmeter</string>
   <string name="title_activity_signup">Marchesse</string>
-  <string name="menu_about">A propòsit</string>
-  <string name="about_license">Ij programa Open Source a son publicà sota la &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;licensa Apache v2&lt;/a&gt;. %1$s e sò sìmbol a son dle marche argistrà dla Fondassion Wikimedia e a son dovrà con ël përmess ëd la Fondassion Wikimedia. Nojàutri i soma nen aprovà da o afilià a la Fondassion Wikimedia.</string>
+    <string name="about_license">Ij programa Open Source a son publicà sota la &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;licensa Apache v2&lt;/a&gt;. %1$s e sò sìmbol a son dle marche argistrà dla Fondassion Wikimedia e a son dovrà con ël përmess ëd la Fondassion Wikimedia. Nojàutri i soma nen aprovà da o afilià a la Fondassion Wikimedia.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sorgiss&lt;/a&gt; e &lt;a href=\"https://commons-app.github.io/\"&gt;sit an sl\'aragnà&lt;/a&gt; su GitHub. Creé na neuva &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;signalassion GitHub&lt;/a&gt; për signalé dij givo e dij sugeriment.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Régole ëd confidensialità&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Ringrassiament&lt;/a&gt;</string>
   <string name="title_activity_about">A propòsit</string>
-  <string name="menu_feedback">Mandé dij coment (për pòsta eletrònica)</string>
-  <string name="no_email_client">Gnun clien ëd pòsta eletrònica anstalà</string>
+    <string name="no_email_client">Gnun clien ëd pòsta eletrònica anstalà</string>
   <string name="provider_categories">Categorìe dovrà ëd recent</string>
   <string name="waiting_first_sync">Atèisa ëd prima sincronisassion…</string>
   <string name="no_uploads_yet">A l\'ha ancor nen carià ëd fòto.</string>
@@ -100,21 +91,8 @@
   <string name="license_name_cc_by">Atribussion 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Àustria)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Almagna)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estònia)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Spagna)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Croassia)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Lussemborgh)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Pais Bass)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norvegia)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polònia)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romanìa)</string>
-  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
-  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
-  <string name="tutorial_1_text">Wikimedia Comun a òspita la pipart ëd le plance ch\'a son dovrà an Wikipedia.</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="tutorial_1_text">Wikimedia Comun a òspita la pipart ëd le plance ch\'a son dovrà an Wikipedia.</string>
   <string name="tutorial_1_subtext">Soe plance a giuto a eduché la gent daspërtut ant ël mond!</string>
   <string name="tutorial_2_text">Për piasì, ch\'a caria dle fòto ch\'a son ëstàite scatà o creà tute da chiel:</string>
   <string name="tutorial_2_subtext">- Oget naturaj (fior, animaj, montagne) \n- Oget ùtij (biciclëtte, stassion feroviarie)\n- Përson-e arnomà (sò sìndich, j\'atleta olìmpich che chiel a l\'ha rancontrà)</string>
@@ -122,19 +100,14 @@
   <string name="tutorial_3_subtext">- dj\'àuto-scat o dle fòto dij sò amis\n- dle fòto ch\'a l\'ha dëscarià d\'an sl\'Aragnà\n- Plance d\'aplicassion sota drit d\'autor</string>
   <string name="tutorial_4_text">Esempi ëd cariament:</string>
   <string name="tutorial_4_subtext">- Tìtol: Ël teatro dl\'òpera ëd Sidney\n- Descrission: Ël teatro dl\'òpera ëd Sidney s-ciairà dëdlà dl\'ansen\n- Categorìe: Teatro dl\'òpera ëd Sidney, Teatro dl\'òpera ëd Sidney da ponent, viste a distansa dël Teatro dl\'òpera ëd Sydney</string>
-  <string name="welcome_wikipedia_text">Ch\'a contribuissa con soe plance. Ch\'a giuta a j\'artìcoj ëd Wikipedia a pijé vita!</string>
-  <string name="welcome_wikipedia_subtext">Le plance su Wikipedia a ven-o da Wikimedia Commons.</string>
-  <string name="welcome_copyright_text">Soe plance a giuto a eduché la gent daspërtut ant ël mond.</string>
-  <string name="welcome_copyright_subtext">Ch\'a évita ij materiaj coatà da drit d\'autor ch\'a peul trové an sl\'Aragnà parèj coma le plance ëd tilèt, le cuvertin-e dij lìber e via fòrt.</string>
-  <string name="welcome_final_text">Second chiel, a va bin?</string>
+    <string name="welcome_final_text">Second chiel, a va bin?</string>
   <string name="welcome_final_button_text">É!</string>
   <string name="detail_panel_cats_label">Categorìe</string>
   <string name="detail_panel_cats_loading">Cariament…</string>
   <string name="detail_panel_cats_none">Gnun-a selession</string>
   <string name="detail_description_empty">Gnun-a descrission</string>
   <string name="detail_license_empty">Licensa sconossùa</string>
-  <string name="menu_refresh">Rinfrësché</string>
-  <string name="read_storage_permission_rationale">Autorisassion necessaria: Lese n\'anmagasinament estern. L\'aplicassion a peul pa marcé sensa lòn.</string>
+    <string name="read_storage_permission_rationale">Autorisassion necessaria: Lese n\'anmagasinament estern. L\'aplicassion a peul pa marcé sensa lòn.</string>
   <string name="write_storage_permission_rationale">Autorisassion necessaria: Scrive n\'anmagasinament estern. L\'aplicassion a peul pa marcé sensa \'d lòn.</string>
   <string name="location_permission_rationale">Autorisassion facoltativa: Oten-e la posission atual për dij sugeriment ëd categorìa</string>
   <string name="ok">Va bin</string>
@@ -157,15 +130,13 @@
   <string name="use_wikidata">Dovré Wikidàit</string>
   <string name="use_wikidata_summary">(Atension: disabilité sòn a podrìa provoché un gròss consum ëd dàit con ël sacociàbil)</string>
   <string name="_2fa_code">Còdes 2FA</string>
-  <string name="number_of_uploads">Mè lìmit ëd cariament recent</string>
-  <string name="maximum_limit">Lìmit màssim</string>
+    <string name="maximum_limit">Lìmit màssim</string>
   <string name="maximum_limit_alert">Impossìbil ësmon-e pi che 500</string>
   <string name="set_limit">Fissé la limitassion ëd cariament recent</string>
   <string name="login_failed_2fa_not_supported">L\'autentificassion a doi fator për ël moment a l\'é nen sostnùa.</string>
   <string name="logout_verification">Veul-lo për da bon seurte dal sistema?</string>
   <string name="commons_logo">Marca ëd Comun</string>
-  <string name="background_image">Plancia dë sfond</string>
-  <string name="mediaimage_failed">Faliment ëd la plancia dël mojen</string>
+    <string name="mediaimage_failed">Faliment ëd la plancia dël mojen</string>
   <string name="no_image_found">Gnun-a plancia trovà</string>
   <string name="upload_image">Carié na plancia</string>
   <string name="welcome_image_mount_zao">Mont Zao</string>
@@ -181,8 +152,7 @@
   <string name="navigation_drawer_open">Duverté</string>
   <string name="navigation_drawer_close">Saré</string>
   <string name="navigation_item_home">Pàgina d\'intrada</string>
-  <string name="navigation_item_upload">Carié</string>
-  <string name="navigation_item_nearby">Davzin</string>
+    <string name="navigation_item_nearby">Davzin</string>
   <string name="navigation_item_about">A propòsit</string>
   <string name="navigation_item_settings">Paràmeter</string>
   <string name="navigation_item_feedback">Sugeriment</string>

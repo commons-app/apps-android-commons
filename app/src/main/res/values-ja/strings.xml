@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">コモンズ</string>
-  <string name="menu_settings">設定</string>
-  <string name="username">利用者名</string>
+    <string name="username">利用者名</string>
   <string name="password">パスワード</string>
   <string name="login">ログイン</string>
   <string name="signup">利用者登録</string>
   <string name="logging_in_title">ログイン中</string>
   <string name="logging_in_message">お待ちください…</string>
   <string name="login_success">ログインしました!</string>
-  <string name="login_failed">ログインに失敗しました!</string>
-  <string name="upload_failed">ファイルが見つかりません。別のファイルでお試しください。</string>
+    <string name="upload_failed">ファイルが見つかりません。別のファイルでお試しください。</string>
   <string name="authentication_failed">認証に失敗しました!</string>
   <string name="uploading_started">アップロードを開始しました!</string>
-  <string name="upload_completed_notification_title">%1$s をアップロードしました!</string>
-  <string name="upload_completed_notification_text">アップロードしたものを表示するにはタップしてください</string>
-  <string name="upload_progress_notification_title_start">%1$s のアップロードを開始中</string>
+    <string name="upload_progress_notification_title_start">%1$s のアップロードを開始中</string>
   <string name="upload_progress_notification_title_in_progress">%1$s をアップロード中</string>
   <string name="upload_progress_notification_title_finishing">%1$s のアップロードを完了中</string>
   <string name="upload_failed_notification_title">%1$s のアップロードに失敗しました</string>
@@ -26,12 +22,9 @@
   <string name="title_activity_contributions">自分の最近のアップロードファイル</string>
   <string name="contribution_state_queued">順番待ち中</string>
   <string name="contribution_state_failed">失敗しました</string>
-  <string name="contribution_state_in_progress">%1$d%% 完了</string>
-  <string name="contribution_state_starting">アップロード中</string>
-  <string name="menu_from_gallery">ギャラリーから選択</string>
+    <string name="menu_from_gallery">ギャラリーから選択</string>
   <string name="menu_from_camera">写真を撮影</string>
-  <string name="menu_nearby">付近</string>
-  <string name="provider_contributions">自分のアップロード</string>
+    <string name="provider_contributions">自分のアップロード</string>
   <string name="menu_share">共有</string>
   <string name="menu_open_in_browser">ブラウザーで表示</string>
   <string name="share_title_hint">タイトル</string>
@@ -64,14 +57,12 @@
   <string name="categories_activity_title">カテゴリ</string>
   <string name="title_activity_settings">設定</string>
   <string name="title_activity_signup">利用者登録</string>
-  <string name="menu_about">このアプリについて</string>
-  <string name="about_license" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache ライセンス v2&lt;/a&gt; のもとで公開されているオープン ソース ソフトウェアです。Wikimedia Commons ならびにそのロゴはウィキメディア財団の商標であり、ウィキメディア財団の許可により使用しています。このサイトはウィキメディア財団の公認3でも提携先でもありません。</string>
+    <string name="about_license" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache ライセンス v2&lt;/a&gt; のもとで公開されているオープン ソース ソフトウェアです。Wikimedia Commons ならびにそのロゴはウィキメディア財団の商標であり、ウィキメディア財団の許可により使用しています。このサイトはウィキメディア財団の公認3でも提携先でもありません。</string>
   <string name="about_improve">ソースは &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt; にあります。バグとアイディアは &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt; へ。</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/プライバシー・ポリシー\"&gt;プライバシー・ポリシー&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;クレジット&lt;/a&gt;</string>
   <string name="title_activity_about">このアプリについて</string>
-  <string name="menu_feedback">フィードバックをメールで送信</string>
-  <string name="no_email_client">メールアプリケーションが見つかりません</string>
+    <string name="no_email_client">メールアプリケーションが見つかりません</string>
   <string name="provider_categories">最近使用したカテゴリ</string>
   <string name="waiting_first_sync">同期を待機中…</string>
   <string name="no_uploads_yet">まだ写真をアップロードしていません。</string>
@@ -91,21 +82,8 @@
   <string name="license_name_cc_by">表示 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC 表示-継承 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC 表示-継承 3.0 (オーストリア)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC 表示-継承 3.0 (ドイツ)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC 表示-継承 3.0 (エストニア)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC 表示-継承 3.0 (スペイン)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC 表示-継承 3.0 (クロアチア)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC 表示-継承 3.0 (ルクセンブルク)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC 表示-継承 3.0 (オランダ)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC 表示-継承 3.0 (ノルウェー)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC 表示-継承 3.0 (ポーランド)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC 表示-継承 3.0 (ルーマニア)</string>
-  <string name="license_name_cc_by_3_0">CC 表示 3.0</string>
-  <string name="license_name_cc_by_sa_4_0">CC 表示-継承 4.0</string>
-  <string name="license_name_cc_by_4_0">CC 表示 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
-  <string name="tutorial_1_text">ウィキメディア・コモンズにはウィキペディアで使用する画像のほぼすべてが保管されています。</string>
+    <string name="license_name_cc_by_3_0">CC 表示 3.0</string>
+    <string name="tutorial_1_text">ウィキメディア・コモンズにはウィキペディアで使用する画像のほぼすべてが保管されています。</string>
   <string name="tutorial_1_subtext">あなたの画像は世界中の人々が学習する助けになります!</string>
   <string name="tutorial_2_text">アップロードする画像はあなたご本人が撮影したものかあなたが単独で制作したものに限定します。</string>
   <string name="tutorial_2_subtext">- 自然物 (動植物、山)\n- 道具 (自転車、駅)\n- 著名人 (市区村長・都道府県知事、自分が会ったオリンピック選手)</string>
@@ -113,19 +91,14 @@
   <string name="tutorial_3_subtext">- あなたの友人の自撮り写真や画像\n- インターネットからダウンロードした画像\n- 著作権のあるアプリのスクリーンショット</string>
   <string name="tutorial_4_text">アップロードの例:</string>
   <string name="tutorial_4_subtext">- 題名: シドニー・オペラハウス\n- 説明: 湾の向こうから見たシドニー・オペラハウス\n- カテゴリ: シドニー・オペラハウス、シドニー・オペラハウスの西側、遠くから見たシドニー・オペラハウス</string>
-  <string name="welcome_wikipedia_text">画像を投稿してください。ウィキペディアの記事に彩りを！</string>
-  <string name="welcome_wikipedia_subtext">ウィキペディアの画像はウィキメディア・コモンズに保管されています。</string>
-  <string name="welcome_copyright_text">あなたの画像は世界中の人々が学習する助けになります</string>
-  <string name="welcome_copyright_subtext">インターネットで見つけた画像、ポスター、書籍の表紙など著作権のある素材は避けてください。</string>
-  <string name="welcome_final_text">ご理解いただけましたか?</string>
+    <string name="welcome_final_text">ご理解いただけましたか?</string>
   <string name="welcome_final_button_text">はい</string>
   <string name="detail_panel_cats_label">カテゴリ</string>
   <string name="detail_panel_cats_loading">読み込み中…</string>
   <string name="detail_panel_cats_none">ファイルを選択していません</string>
   <string name="detail_description_empty">説明はありません。</string>
   <string name="detail_license_empty">不明なライセンス</string>
-  <string name="menu_refresh">更新</string>
-  <string name="read_storage_permission_rationale">必要な権限：外部ストレージを読み込みます。これがなければアプリは機能しません。</string>
+    <string name="read_storage_permission_rationale">必要な権限：外部ストレージを読み込みます。これがなければアプリは機能しません。</string>
   <string name="location_permission_rationale">オプションの権限：カテゴリ候補の現在の位置を取得する</string>
   <string name="ok">承認</string>
   <string name="title_activity_nearby">周りの場所</string>
@@ -145,10 +118,8 @@
   <string name="become_a_tester_description">Google Playのベータ版チャンネルにオプトインして、新機能やバグ修正プログラムに早期にアクセス</string>
   <string name="use_wikidata">ウィキデータを使用してください</string>
   <string name="use_wikidata_summary">（警告：これを無効にすると、モバイルデータを大量に消費する可能性があります）</string>
-  <string name="number_of_uploads">最近のアップロードファイルに表示する最大件数</string>
-  <string name="logout_verification">ログアウトしてもよろしいですか？</string>
-  <string name="background_image">背景画像</string>
-  <string name="no_image_found">画像がありません</string>
+    <string name="logout_verification">ログアウトしてもよろしいですか？</string>
+    <string name="no_image_found">画像がありません</string>
   <string name="upload_image">画像をアップロード</string>
   <string name="welcome_image_mount_zao">蔵王連峰</string>
   <string name="welcome_image_llamas">リャマ</string>
@@ -159,8 +130,7 @@
   <string name="navigation_drawer_open">開く</string>
   <string name="navigation_drawer_close">閉じる</string>
   <string name="navigation_item_home">ホーム</string>
-  <string name="navigation_item_upload">アップロード</string>
-  <string name="navigation_item_about">このアプリについて</string>
+    <string name="navigation_item_about">このアプリについて</string>
   <string name="navigation_item_settings">設定</string>
   <string name="navigation_item_feedback">フィードバック</string>
   <string name="navigation_item_logout">ログアウト</string>

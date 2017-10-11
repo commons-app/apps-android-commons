@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Commons</string>
-  <string name="menu_settings">Inställningar</string>
-  <string name="username">Användarnamn</string>
+    <string name="username">Användarnamn</string>
   <string name="password">Lösenord</string>
   <string name="login">Logga in</string>
   <string name="signup">Registrera</string>
   <string name="logging_in_title">Loggar in</string>
   <string name="logging_in_message">Var god vänta…</string>
   <string name="login_success">Inloggningen lyckades!</string>
-  <string name="login_failed">Det gick inte att logga in!</string>
-  <string name="upload_failed">Filen hittades inte. Försök med en annan fil.</string>
+    <string name="upload_failed">Filen hittades inte. Försök med en annan fil.</string>
   <string name="authentication_failed">Autentisering misslyckades!</string>
   <string name="uploading_started">Överföring påbörjad!</string>
-  <string name="upload_completed_notification_title">%1$s överförd!</string>
-  <string name="upload_completed_notification_text">Tryck för att visa din uppladdning</string>
-  <string name="upload_progress_notification_title_start">Påbörjar uppladdning av %1$s</string>
+    <string name="upload_progress_notification_title_start">Påbörjar uppladdning av %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s laddas upp</string>
   <string name="upload_progress_notification_title_finishing">Avslutar uppladdning av %1$s</string>
   <string name="upload_failed_notification_title">Uppladdning av %1$s misslyckades</string>
@@ -27,12 +23,9 @@
   <string name="title_activity_contributions">Mina senaste uppladdningar</string>
   <string name="contribution_state_queued">Köade</string>
   <string name="contribution_state_failed">Misslyckades</string>
-  <string name="contribution_state_in_progress">%1$d%% färdigt</string>
-  <string name="contribution_state_starting">Laddar upp</string>
-  <string name="menu_from_gallery">Från galleri</string>
+    <string name="menu_from_gallery">Från galleri</string>
   <string name="menu_from_camera">Ta foto</string>
-  <string name="menu_nearby">I närheten</string>
-  <string name="provider_contributions">Mina uppladdningar</string>
+    <string name="provider_contributions">Mina uppladdningar</string>
   <string name="menu_share">Dela</string>
   <string name="menu_open_in_browser">Visa i webbläsaren</string>
   <string name="share_title_hint">Titel</string>
@@ -72,14 +65,12 @@
   <string name="categories_activity_title">Kategorier</string>
   <string name="title_activity_settings">Inställningar</string>
   <string name="title_activity_signup">Registrera</string>
-  <string name="menu_about">Om</string>
-  <string name="about_license">Programvara med öppen källkod släppt under &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;licensen Apache v2&lt;/a&gt;. %1$s och dess logotyp är varumärken av Wikimedia Foundation och används med tillstånd från Wikimedia Foundation. Vi varken stöds eller är kopplade med Wikimedia Foundation.</string>
+    <string name="about_license">Programvara med öppen källkod släppt under &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;licensen Apache v2&lt;/a&gt;. %1$s och dess logotyp är varumärken av Wikimedia Foundation och används med tillstånd från Wikimedia Foundation. Vi varken stöds eller är kopplade med Wikimedia Foundation.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Källkoden&lt;/a&gt; och &lt;a href=\"https://commons-app.github.io/\"&gt;webbplatsen&lt;/a&gt; på GitHub. Skapa ett nytt &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-ärende&lt;/a&gt; för att rapportera buggar och förslag.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Integritetspolicy&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Erkännande&lt;/a&gt;</string>
   <string name="title_activity_about">Om</string>
-  <string name="menu_feedback">Skicka feedback (via e-post)</string>
-  <string name="no_email_client">Ingen e-postklient är installerad</string>
+    <string name="no_email_client">Ingen e-postklient är installerad</string>
   <string name="provider_categories">Nyligen använda kategorier</string>
   <string name="waiting_first_sync">Väntar på första synkroniseringen…</string>
   <string name="no_uploads_yet">Du har inte lagt upp några bilder ännu.</string>
@@ -100,21 +91,8 @@
   <string name="license_name_cc_by">Erkännande 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Österrike)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Tyskland)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estland)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Spanien)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Kroatien)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxemburg)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Nederländerna)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norge)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polen)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Rumänien)</string>
-  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
-  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
-  <string name="tutorial_1_text">Wikimedia Commons lagrar de flesta bilderna som används på Wikipedia.</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="tutorial_1_text">Wikimedia Commons lagrar de flesta bilderna som används på Wikipedia.</string>
   <string name="tutorial_1_subtext">Dina bilder hjälper till att utbilda\nmänniskor runt hela världen!</string>
   <string name="tutorial_2_text">Ladda upp bilder som endast du har tagit eller skapat:</string>
   <string name="tutorial_2_subtext">- Naturliga föremål (blommor, djur, berg)\n- Användbar föremål (cyklar, tågstationer)\n- Berömda personer (din borgmästare, olympiska atleter du har träffat)</string>
@@ -122,19 +100,14 @@
   <string name="tutorial_3_subtext">- Selfies eller bilder på dina vänner\n- Bilder som du har laddat ned från Internet\n- Skärmdumpar på proprietära appar</string>
   <string name="tutorial_4_text">Uppladdningsexempel:</string>
   <string name="tutorial_4_subtext">- Titel: Sydneys operahus\n- Beskrivning: Sydneys operahus sedd från andra sidan bukten\n- Kategorier: Sydneys operahus, Sydneys operahus från väst, Sydneys operahus utifrån</string>
-  <string name="welcome_wikipedia_text">Bidra med dina bilder. Hjälp Wikipedia-artiklar att komma till liv!</string>
-  <string name="welcome_wikipedia_subtext">Bilder på Wikipedia kommer från Wikimedia Commons.</string>
-  <string name="welcome_copyright_text">Dina bilder hjälper till att utbilda människor runt om i världen.</string>
-  <string name="welcome_copyright_subtext">Undvik upphovsrättsskyddat material som du hittar på Internet, samt bilder av affischer, bokomslag, etc.</string>
-  <string name="welcome_final_text">Tror du att du förstår?</string>
+    <string name="welcome_final_text">Tror du att du förstår?</string>
   <string name="welcome_final_button_text">Ja!</string>
   <string name="detail_panel_cats_label">Kategorier</string>
   <string name="detail_panel_cats_loading">Läser in…</string>
   <string name="detail_panel_cats_none">Ingen markerad</string>
   <string name="detail_description_empty">Ingen beskrivning</string>
   <string name="detail_license_empty">Okänd licens</string>
-  <string name="menu_refresh">Uppdatera</string>
-  <string name="read_storage_permission_rationale">Nödvändig behörighet: Läsa extern lagring. Appen fungerar inte utan detta.</string>
+    <string name="read_storage_permission_rationale">Nödvändig behörighet: Läsa extern lagring. Appen fungerar inte utan detta.</string>
   <string name="write_storage_permission_rationale">Nödvändig behörighet: Skriva till extern lagring. Appen kan inte fungera så här.</string>
   <string name="location_permission_rationale">Valfri behörighet: Hämta aktuell plats för kategoriförslag</string>
   <string name="ok">OK</string>
@@ -157,15 +130,13 @@
   <string name="use_wikidata">Använd Wikidata</string>
   <string name="use_wikidata_summary">(Varning: Stora mängder mobildata kan förekomma om detta inaktiveras)</string>
   <string name="_2fa_code">2-stegsverif.kod</string>
-  <string name="number_of_uploads">Gräns för mina senaste uppladdningar</string>
-  <string name="maximum_limit">Maxgräns</string>
+    <string name="maximum_limit">Maxgräns</string>
   <string name="maximum_limit_alert">Kan inte visa fler än 500</string>
   <string name="set_limit">Ändra gräns för senaste uppladdningar</string>
   <string name="login_failed_2fa_not_supported">Tvåstegsverifiering stöds för tillfället inte.</string>
   <string name="logout_verification">Vill du verkligen logga ut?</string>
   <string name="commons_logo">Commons-logotyp</string>
-  <string name="background_image">Bakgrundsbild</string>
-  <string name="mediaimage_failed">Mediabild misslyckades</string>
+    <string name="mediaimage_failed">Mediabild misslyckades</string>
   <string name="no_image_found">Ingen bild hittades</string>
   <string name="upload_image">Ladda upp bild</string>
   <string name="welcome_image_mount_zao">Zao</string>
@@ -181,8 +152,7 @@
   <string name="navigation_drawer_open">Öppna</string>
   <string name="navigation_drawer_close">Stäng</string>
   <string name="navigation_item_home">Hem</string>
-  <string name="navigation_item_upload">Ladda upp</string>
-  <string name="navigation_item_nearby">I närheten</string>
+    <string name="navigation_item_nearby">I närheten</string>
   <string name="navigation_item_about">Om</string>
   <string name="navigation_item_settings">Inställningar</string>
   <string name="navigation_item_feedback">Återkoppling</string>
