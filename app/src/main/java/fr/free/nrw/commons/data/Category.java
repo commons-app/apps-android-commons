@@ -185,27 +185,17 @@ public class Category {
         }
 
         public static void onUpdate(SQLiteDatabase db, int from, int to) {
-            if (from == to) {
-                return;
-            }
-            if (from < 4) {
-                // doesn't exist yet
-                from++;
-                onUpdate(db, from, to);
-                return;
-            }
-            if (from == 4) {
-                // table added in version 5
-                onCreate(db);
-                from++;
-                onUpdate(db, from, to);
-                return;
-            }
-            if (from == 5) {
-                from++;
-                onUpdate(db, from, to);
-                return;
-            }
+                switch(from){
+                    case 4:
+                        onCreate(db);
+                    /*
+                    add future cases without breaks
+                    case 5:
+                        do something;
+                    case 6:
+                        do something;
+                    */
+                }     
         }
     }
     //endregion
