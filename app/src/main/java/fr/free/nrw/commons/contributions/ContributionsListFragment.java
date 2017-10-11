@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListAdapter;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -41,8 +42,9 @@ public class ContributionsListFragment extends Fragment {
     GridView contributionsList;
     @BindView(R.id.waitingMessage)
     TextView waitingMessage;
-    @BindView(R.id.emptyMessage)
-    TextView emptyMessage;
+    @BindView(R.id.loadingContributionsProgressBar)
+    ProgressBar progressBar;
+
     private ContributionController controller;
 
     @Override
@@ -67,6 +69,7 @@ public class ContributionsListFragment extends Fragment {
             waitingMessage.setVisibility(GONE);
         }
 
+        changeProgressBarVisibility(true);
         return v;
     }
 
@@ -76,6 +79,10 @@ public class ContributionsListFragment extends Fragment {
 
     public void setAdapter(ListAdapter adapter) {
         this.contributionsList.setAdapter(adapter);
+    }
+
+    public void changeProgressBarVisibility(boolean isVisible) {
+        this.progressBar.setVisibility(isVisible ? View.VISIBLE : View.GONE);
     }
 
     @Override
