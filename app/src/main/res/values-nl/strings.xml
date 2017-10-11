@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Commons</string>
-  <string name="menu_settings">Instellingen</string>
-  <string name="username">Gebruikersnaam</string>
+    <string name="username">Gebruikersnaam</string>
   <string name="password">Wachtwoord</string>
   <string name="login">Aanmelden</string>
   <string name="signup">Registreren</string>
   <string name="logging_in_title">Bezig met aanmelden</string>
   <string name="logging_in_message">Een ogenblik geduld…</string>
   <string name="login_success">Aanmelden geslaagd</string>
-  <string name="login_failed">Aanmelden mislukt</string>
-  <string name="upload_failed">Bestand niet gevonden. Probeer een ander bestand.</string>
+    <string name="upload_failed">Bestand niet gevonden. Probeer een ander bestand.</string>
   <string name="authentication_failed">Verificatie is mislukt</string>
   <string name="uploading_started">Uploaden is begonnen</string>
-  <string name="upload_completed_notification_title">%1$s geüpload</string>
-  <string name="upload_completed_notification_text">Wijs aan om uw upload te bekijken</string>
-  <string name="upload_progress_notification_title_start">Het uploaden van %1$s begint</string>
+    <string name="upload_progress_notification_title_start">Het uploaden van %1$s begint</string>
   <string name="upload_progress_notification_title_in_progress">Bezig met het uploaden van %1$s</string>
   <string name="upload_progress_notification_title_finishing">Het uploaden van %1$s is afgerond</string>
   <string name="upload_failed_notification_title">Het uploaden van %1$s is mislukt</string>
@@ -27,12 +23,9 @@
   <string name="title_activity_contributions" fuzzy="true">Mijn uploads</string>
   <string name="contribution_state_queued">In wachtrij</string>
   <string name="contribution_state_failed">Mislukt</string>
-  <string name="contribution_state_in_progress">%1$d%% afgerond</string>
-  <string name="contribution_state_starting">Bezig met uploaden</string>
-  <string name="menu_from_gallery">Uit galerij</string>
+    <string name="menu_from_gallery">Uit galerij</string>
   <string name="menu_from_camera">Foto nemen</string>
-  <string name="menu_nearby">In de buurt</string>
-  <string name="provider_contributions">Mijn uploads</string>
+    <string name="provider_contributions">Mijn uploads</string>
   <string name="menu_share">Delen</string>
   <string name="menu_open_in_browser">In browser bekijken</string>
   <string name="share_title_hint">Naam</string>
@@ -69,13 +62,11 @@
   <string name="categories_activity_title">Categorieën</string>
   <string name="title_activity_settings">Instellingen</string>
   <string name="title_activity_signup">Registreren</string>
-  <string name="menu_about">Over</string>
-  <string name="about_license">Opensourcesoftware vrijgegeven onder de &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Wikimedia Commons en haar logo zijn handelsmerken van de Wikimedia Foundation en worden gebruikt met toestemming van de Wikimedia Foundation. We worden niet bekrachtigd door en zijn niet verbonden met de Wikimedia Foundation.</string>
+    <string name="about_license">Opensourcesoftware vrijgegeven onder de &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Wikimedia Commons en haar logo zijn handelsmerken van de Wikimedia Foundation en worden gebruikt met toestemming van de Wikimedia Foundation. We worden niet bekrachtigd door en zijn niet verbonden met de Wikimedia Foundation.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Broncode&lt;/a&gt; en &lt;a href=\"https://commons-app.github.io/\"&gt;website&lt;/a&gt; op GitHub. Maak een nieuwe &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;melding op GitHub&lt;/a&gt; voor bugs en suggesties.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privacybeleid&lt;/a&gt;</string>
   <string name="title_activity_about">Over</string>
-  <string name="menu_feedback">Terugkoppeling geven (via e-mail)</string>
-  <string name="no_email_client">Geen e-mail-client geïnstalleerd</string>
+    <string name="no_email_client">Geen e-mail-client geïnstalleerd</string>
   <string name="provider_categories">Recent gebruikte categorieën</string>
   <string name="waiting_first_sync">Wachten op de eerste synchronisatie…</string>
   <string name="no_uploads_yet">U hebt nog geen afbeeldingen geüpload.</string>
@@ -95,21 +86,8 @@
   <string name="license_name_cc_by">Naamsvermelding 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Oostenrijk)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Duitsland)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estland)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Spanje)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Kroatië)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxemburg)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Nederland)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Noorwegen)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polen)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Roemenië)</string>
-  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
-  <string name="license_name_cc_by_4_0">CC BY-4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
-  <string name="tutorial_1_text">Op Wikimedia Commons staan de meeste afbeeldingen die worden gebruikt in Wikipedia.</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="tutorial_1_text">Op Wikimedia Commons staan de meeste afbeeldingen die worden gebruikt in Wikipedia.</string>
   <string name="tutorial_1_subtext">Uw afbeeldingen helpen mensen over de hele wereld met kennis opdoen!</string>
   <string name="tutorial_2_text">Upload alstublieft alleen afbeeldingen die volledig door uzelf gemaakt zijn:</string>
   <string name="tutorial_2_subtext">- Natuurlijke objecten (bloemen, dieren, bergen)\n- Nuttige objecten (fietsen, treinstations)\n- Beroemde mensen (uw burgemeester, Olympische atleten u hebt ontmoet)</string>
@@ -117,19 +95,14 @@
   <string name="tutorial_3_subtext">- Selfies of foto\'s van uw vrienden\n- Foto\'s die u hebt gedownload van het Internet\n- Screenshots van eigen apps</string>
   <string name="tutorial_4_text">Voorbeeld van een upload:</string>
   <string name="tutorial_4_subtext">- Titel: Sydney Opera House\n- Beschrijving: het Sydney Opera House gezien vanaf de overkant van de baai\n- Categorieën: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
-  <string name="welcome_wikipedia_text">Draag uw afbeelding bij. Help pagina\'s in Wikipedia tot leven te laten komen!</string>
-  <string name="welcome_wikipedia_subtext">Afbeeldingen op Wikipedia komen van Wikimedia Commons.</string>
-  <string name="welcome_copyright_text">Uw afbeeldingen helpen mensen van over de hele wereld te leren.</string>
-  <string name="welcome_copyright_subtext">Vermijd auteursrechtelijk beschermd materiaal dat u op internet hebt gevonden zoals  afbeeldingen van posters, boeken, enzovoort.</string>
-  <string name="welcome_final_text">Begrijpt u het?</string>
+    <string name="welcome_final_text">Begrijpt u het?</string>
   <string name="welcome_final_button_text">Ja!</string>
   <string name="detail_panel_cats_label">Categorieën</string>
   <string name="detail_panel_cats_loading" fuzzy="true">Bezig met laden…</string>
   <string name="detail_panel_cats_none">Geen selectie</string>
   <string name="detail_description_empty">Geen beschrijving</string>
   <string name="detail_license_empty">Onbekende licentie</string>
-  <string name="menu_refresh">Vernieuwen</string>
-  <string name="read_storage_permission_rationale">Benodigde toestemming: Lees externe opslag. Zonder deze toestemming kan de app niet functioneren.</string>
+    <string name="read_storage_permission_rationale">Benodigde toestemming: Lees externe opslag. Zonder deze toestemming kan de app niet functioneren.</string>
   <string name="location_permission_rationale">Optionele toestemming: Huidige locatie ophalen voor categoriesuggesties</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Plaatsen in de buurt</string>
@@ -147,8 +120,7 @@
   <string name="cancel">Annuleren</string>
   <string name="navigation_drawer_open">Openen</string>
   <string name="navigation_drawer_close">Sluiten</string>
-  <string name="navigation_item_upload">Uploaden</string>
-  <string name="navigation_item_nearby">In de buurt</string>
+    <string name="navigation_item_nearby">In de buurt</string>
   <string name="navigation_item_about">Over</string>
   <string name="navigation_item_settings">Instellingen</string>
   <string name="navigation_item_feedback">Terugkoppeling</string>

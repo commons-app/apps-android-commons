@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Vikimedia Commons</string>
-  <string name="menu_settings">Tənzimləmələr</string>
-  <string name="username">Ləqəb</string>
+    <string name="username">Ləqəb</string>
   <string name="password">Parol</string>
   <string name="login">Daxil ol</string>
   <string name="logging_in_title">Giriş edilir</string>
   <string name="logging_in_message">Lütfən gözləyin…</string>
   <string name="login_success">Daxil oldunuz!</string>
-  <string name="login_failed">Giriş baş tutmadı!</string>
-  <string name="authentication_failed">Şəxsiyyət təsdiqləmə uğursuz oldu!</string>
+    <string name="authentication_failed">Şəxsiyyət təsdiqləmə uğursuz oldu!</string>
   <string name="uploading_started">Yükləmə başladı!</string>
-  <string name="upload_completed_notification_title">%1$s yükləndi!</string>
-  <string name="upload_completed_notification_text">Yüklədiyini izlə</string>
-  <string name="upload_progress_notification_title_start">%1$s yüklənməsi başlanır</string>
+    <string name="upload_progress_notification_title_start">%1$s yüklənməsi başlanır</string>
   <string name="upload_progress_notification_title_in_progress">%1$s yüklənir</string>
   <string name="upload_progress_notification_title_finishing">%1$s yüklənməsi başa çatdı</string>
   <string name="upload_failed_notification_title">%1$s faylının yüklənməsi alınmadı</string>
@@ -21,9 +17,7 @@
   <string name="title_activity_contributions">Yükləmələrim</string>
   <string name="contribution_state_queued">Sırada</string>
   <string name="contribution_state_failed">Uğursuz</string>
-  <string name="contribution_state_in_progress">%1$d%% tamamlandı</string>
-  <string name="contribution_state_starting">Yüklənir</string>
-  <string name="menu_from_gallery">Qalereyadan</string>
+    <string name="menu_from_gallery">Qalereyadan</string>
   <string name="menu_from_camera">Foto çək</string>
   <string name="provider_contributions">Yükləmələrim</string>
   <string name="menu_share">Paylaş</string>
@@ -39,5 +33,4 @@
   <string name="menu_save_categories">Qeyd et</string>
   <string name="categories_not_found">%1$s axtarışına uyğun kateqoriya tapılmadı</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_zero">CC0</string>
 </resources>

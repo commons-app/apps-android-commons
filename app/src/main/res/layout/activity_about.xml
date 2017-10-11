@@ -52,7 +52,6 @@
                 android:text="@string/about_license" />
 
             <fr.free.nrw.commons.ui.widget.HtmlTextView
-                android:id="@+id/about_improve"
                 style="?android:textAppearanceSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -61,7 +60,6 @@
                 android:text="@string/about_improve" />
 
             <fr.free.nrw.commons.ui.widget.HtmlTextView
-                android:id="@+id/about_privacy_policy"
                 style="?android:textAppearanceSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -70,7 +68,6 @@
                 android:text="@string/about_privacy_policy" />
 
             <fr.free.nrw.commons.ui.widget.HtmlTextView
-                android:id="@+id/about_credits"
                 style="?android:textAppearanceSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -79,7 +76,6 @@
                 android:text="@string/about_credits" />
 
             <TextView
-                android:id="@+id/about_uploads_to"
                 style="?android:textAppearanceSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

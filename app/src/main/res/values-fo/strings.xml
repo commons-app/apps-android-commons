@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name" fuzzy="true">Wikimedia Commons</string>
-  <string name="menu_settings">Innstillingar</string>
-  <string name="username">Brúkaranavn</string>
+    <string name="username">Brúkaranavn</string>
   <string name="password">Loyniorð</string>
   <string name="login">Rita inn</string>
   <string name="logging_in_title">Ritar inn</string>
   <string name="logging_in_message" fuzzy="true">Vinarliga bíða…</string>
   <string name="login_success">Innritan væleydnað!</string>
-  <string name="login_failed">Innritan miseydnaðist</string>
-  <string name="authentication_failed">Góðkenning miseydnaðist!</string>
+    <string name="authentication_failed">Góðkenning miseydnaðist!</string>
   <string name="uploading_started">Upplóting er byrjað!</string>
-  <string name="upload_completed_notification_title">%1$s er lagt út!</string>
-  <string name="upload_completed_notification_text">Trýst fyri at síggja tað sum tú legði út</string>
-  <string name="upload_progress_notification_title_start">Byrjar %1$s útlegging</string>
+    <string name="upload_progress_notification_title_start">Byrjar %1$s útlegging</string>
   <string name="upload_progress_notification_title_in_progress">%1$s verður lagt út</string>
   <string name="upload_progress_notification_title_finishing">Útlegging av %1$s er við at vera liðug</string>
   <string name="upload_failed_notification_title">Tað miseydnaðist at leggja %1$s út</string>
@@ -21,9 +17,7 @@
   <string name="title_activity_contributions" fuzzy="true">Tað sum eg havi lagt út</string>
   <string name="contribution_state_queued">Í bíðirøð</string>
   <string name="contribution_state_failed">Miseydnaðist</string>
-  <string name="contribution_state_in_progress">%1$d%% liðugt</string>
-  <string name="contribution_state_starting">Leggur út</string>
-  <string name="menu_from_gallery">Frá Myndasavni</string>
+    <string name="menu_from_gallery">Frá Myndasavni</string>
   <string name="menu_from_camera">Tak mynd</string>
   <string name="provider_contributions">Tað sum eg havi lagt út</string>
   <string name="menu_share">Deil</string>
@@ -46,13 +40,11 @@
   <string name="categories_skip_explanation">Legg bólkar til fyri at tínar myndir verða lættari at finna á Wikimedia Commons.\n\nByrja við at skriva fyri at leggja bólkar til.\nTrýst hetta boðið (ella vend aftur) fyri at droppa hetta stigið.</string>
   <string name="categories_activity_title">Bólkar</string>
   <string name="title_activity_settings">Innstillingar</string>
-  <string name="menu_about">Um</string>
-  <string name="about_license" fuzzy="true">Open Source ritbúnaður útgivin undir &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
+    <string name="about_license" fuzzy="true">Open Source ritbúnaður útgivin undir &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
   <string name="about_improve" fuzzy="true">Kelda á &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Lýs (bugs) á &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privatlívs politikkur&lt;/a&gt;</string>
   <string name="title_activity_about">Um</string>
-  <string name="menu_feedback">Send afturmelding (við T-posti)</string>
-  <string name="provider_categories">Nýliga brúktir bólkar</string>
+    <string name="provider_categories">Nýliga brúktir bólkar</string>
   <string name="waiting_first_sync">Bíðar eftir fyrstu synkr…</string>
   <string name="no_uploads_yet">Tú hevur ikki lagt nakrar myndir út enn.</string>
   <string name="menu_retry_upload">Royn aftur</string>
@@ -64,28 +56,12 @@
   <string name="license_name_cc_by" fuzzy="true">CC Navnageving 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Eysturríki)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Týskland)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estland)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Spania)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Kroatia)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luksemburg)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Niðurlond)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Noreg)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Pólland)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Rumenia)</string>
-  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
-  <string name="welcome_wikipedia_text">Luttak við tínum myndum. Hjálp Wikipedia greinum at gerast livandi!</string>
-  <string name="welcome_wikipedia_subtext">Myndir á Wikipedia koma frá Wikimedia Commons.</string>
-  <string name="welcome_copyright_text">Tínar myndir hjálpa við at útbúgva fólk kring heimin.</string>
-  <string name="welcome_copyright_subtext">Ikki brúka tilfar sum er vart av upphavsrætti (copyright), sum tú hevur funnið á netinum, heldur ikki myndir av\nplakatum, forsíðum á bókum osfr.</string>
-  <string name="welcome_final_text">Hevur tú skilt tað?</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="welcome_final_text">Hevur tú skilt tað?</string>
   <string name="welcome_final_button_text">Ja!</string>
   <string name="detail_panel_cats_label">Bólkar</string>
   <string name="detail_panel_cats_loading">Innlesur…</string>
   <string name="detail_panel_cats_none">Onki valt</string>
   <string name="detail_description_empty">Ongin frágreiðing</string>
   <string name="detail_license_empty">Ókendur lisensur</string>
-  <string name="menu_refresh">Dagfør</string>
 </resources>

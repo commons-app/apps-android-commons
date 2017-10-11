@@ -19,7 +19,6 @@
 
         <ImageView
             android:src="@drawable/mount_zao"
-            android:id="@+id/mount_zao"
             android:layout_width="150dp"
             android:layout_height="118dp"
             android:scaleType="fitXY"
@@ -28,7 +27,6 @@
 
         <ImageView
             android:src="@drawable/llamas"
-            android:id="@+id/llamas"
             android:layout_width="150dp"
             android:layout_height="118dp"
             android:scaleType="fitXY"
@@ -37,7 +35,6 @@
 
         <ImageView
             android:src="@drawable/rainbow_bridge"
-            android:id="@+id/rainbow_bridge"
             android:layout_width="150dp"
             android:layout_height="118dp"
             android:scaleType="fitXY"
@@ -46,7 +43,6 @@
 
         <ImageView
             android:src="@drawable/tulip"
-            android:id="@+id/tulip"
             android:layout_width="150dp"
             android:layout_height="118dp"
             android:scaleType="fitXY"

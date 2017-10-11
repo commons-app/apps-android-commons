@@ -7,12 +7,9 @@
   <string name="logging_in_title">Dieħel</string>
   <string name="logging_in_message">Jekk jogħġbok stenna…</string>
   <string name="login_success">Dħalt b\'suċċess!</string>
-  <string name="login_failed">Id-dħul fil-kont ma rnexxiex!</string>
-  <string name="authentication_failed">L-awtentikar falla!</string>
+    <string name="authentication_failed">L-awtentikar falla!</string>
   <string name="uploading_started">Beda t-tlugħ!</string>
-  <string name="upload_completed_notification_title">%1$s tela\'!</string>
-  <string name="upload_completed_notification_text">Agħfas sabiex tara t-tlugħ tiegħek</string>
-  <string name="upload_progress_notification_title_start">Se jibda t-tlugħ ta\' %1$s</string>
+    <string name="upload_progress_notification_title_start">Se jibda t-tlugħ ta\' %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Tiela\' %1$s</string>
   <string name="upload_progress_notification_title_finishing">It-tlugħ ta\' %1$s spiċċa</string>
   <string name="upload_failed_notification_title">It-tlugħ ta\' %1$s ma rnexxiex</string>
@@ -20,9 +17,7 @@
   <string name="title_activity_contributions">It-tlugħ tiegħi</string>
   <string name="contribution_state_queued">Fil-kju</string>
   <string name="contribution_state_failed">Ma rnexxiex</string>
-  <string name="contribution_state_in_progress">%1$d%% komplut</string>
-  <string name="contribution_state_starting">Tiela\'</string>
-  <string name="menu_from_gallery">Mill-gallerija</string>
+    <string name="menu_from_gallery">Mill-gallerija</string>
   <string name="menu_from_camera">Ħu ritratt</string>
   <string name="provider_contributions">It-tlugħ tiegħi</string>
   <string name="menu_share">Aqsam</string>
@@ -43,11 +38,8 @@
 Ibda ikteb sabiex iżżid kategoriji.
 Agħfas fuq dan il-messaġġ (jew mur lura) sabiex taqbeż dan il-pass.</string>
   <string name="categories_activity_title">Kategoriji</string>
-  <string name="preference_tracking">Rapporti tal-użu</string>
-  <string name="preference_tracking_summary">Ibgħat ir-rapporti tal-użu lill-Wikimedia sabiex tgħinna ntejbdu l-app</string>
-  <string name="title_activity_settings">Issettjar</string>
-  <string name="menu_about">Dwar</string>
-  <string name="about_license" fuzzy="true">Softwer ta\' sors miftuħ rilaxxat taħt il-&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Liċenzja Apache v2&lt;/a&gt;</string>
+    <string name="title_activity_settings">Issettjar</string>
+    <string name="about_license" fuzzy="true">Softwer ta\' sors miftuħ rilaxxat taħt il-&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Liċenzja Apache v2&lt;/a&gt;</string>
   <string name="about_improve" fuzzy="true">Sors fuq &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Żbalji fuq &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politika tal-privatezza&lt;/a&gt;</string>
   <string name="title_activity_about">Dwar</string>
@@ -59,10 +51,6 @@ Agħfas fuq dan il-messaġġ (jew mur lura) sabiex taqbeż dan il-pass.</string>
   <string name="license_name_cc_by_sa" fuzzy="true">CC Attribution-ShareAlike</string>
   <string name="license_name_cc_by" fuzzy="true">CC Attribution</string>
   <string name="license_name_cc0">CC0</string>
-  <string name="welcome_wikipedia_text">Ikkontribwixxi l-istampi tiegħek. Agħti l-ħajja lill-artikli tal-Wikipedija!</string>
-  <string name="welcome_wikipedia_subtext">L-istampi fuq il-Wikipedija ġejjin mill-Wikimedia Commons.</string>
-  <string name="welcome_copyright_text">L-istampi tiegħek jgħinu jedukaw lin-nies madwar id-dinja.</string>
-  <string name="welcome_copyright_subtext">Evita materjal protett bil-copyright li ssib fuq l-internet kif ukoll stampi ta\' kartelluni, uċuħ ta\' kotba, etċ.</string>
-  <string name="welcome_final_text">Taħseb li fhimt kollox?</string>
+    <string name="welcome_final_text">Taħseb li fhimt kollox?</string>
   <string name="welcome_final_button_text">Iva!</string>
 </resources>

@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Commons</string>
-  <string name="menu_settings">Séting</string>
-  <string name="username">Sandiasma</string>
+    <string name="username">Sandiasma</string>
   <string name="password">Kecap sandi</string>
   <string name="login">Asup log</string>
   <string name="signup">Daptar</string>
   <string name="logging_in_title">Asup log</string>
   <string name="logging_in_message">Tungguan heula…</string>
   <string name="login_success">Asup log suksés!</string>
-  <string name="login_failed">Asup log Gagal!</string>
-  <string name="upload_failed">Berkas teu kapanggih. Coba berkas séjén.</string>
+    <string name="upload_failed">Berkas teu kapanggih. Coba berkas séjén.</string>
   <string name="authentication_failed">Oténtikasi gagal!</string>
   <string name="uploading_started">Ngamimitian ngunjal!</string>
-  <string name="upload_completed_notification_title">%1$s diunjal!</string>
-  <string name="upload_completed_notification_text">Toél pikeun némpo unjalan anjeun</string>
-  <string name="upload_progress_notification_title_start">Ngamimitian ngunjal %1$s</string>
+    <string name="upload_progress_notification_title_start">Ngamimitian ngunjal %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Ngunjal %1$s</string>
   <string name="upload_progress_notification_title_finishing">Méréskeun unjalan %1$s</string>
   <string name="upload_failed_notification_title">Ngunjal %1$s gagal</string>
@@ -27,12 +23,9 @@
   <string name="title_activity_contributions">Unjalan panungtung kuring</string>
   <string name="contribution_state_queued">Antrian</string>
   <string name="contribution_state_failed">Gagal</string>
-  <string name="contribution_state_in_progress">%1$d%% bérés</string>
-  <string name="contribution_state_starting">Ngunjal</string>
-  <string name="menu_from_gallery">Ti Galeri</string>
+    <string name="menu_from_gallery">Ti Galeri</string>
   <string name="menu_from_camera">Potrét poto</string>
-  <string name="menu_nearby">Sabudeureun</string>
-  <string name="provider_contributions">Unjalan kuring</string>
+    <string name="provider_contributions">Unjalan kuring</string>
   <string name="menu_share">Bagikeun</string>
   <string name="menu_open_in_browser">Tęmbong dina panyungsi</string>
   <string name="share_title_hint">Judul</string>
@@ -72,14 +65,12 @@
   <string name="categories_activity_title">Kategori</string>
   <string name="title_activity_settings">Séting</string>
   <string name="title_activity_signup">Daptar</string>
-  <string name="menu_about">Ngeunaan</string>
-  <string name="about_license">Pakakas lemes kodeu nembrak dirilis di handapeun &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Lisénsi Apache v2&lt;/a&gt;. %1$s sarta logona téh mérk dagang anu Yayasan Wikimédia ogé dipakéna kudu meunang widi ti Yayasan Wikimédia. Kami teu disatujuan ku atawa digawé bareng jeung Yayasan Wikimédia.</string>
+    <string name="about_license">Pakakas lemes kodeu nembrak dirilis di handapeun &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Lisénsi Apache v2&lt;/a&gt;. %1$s sarta logona téh mérk dagang anu Yayasan Wikimédia ogé dipakéna kudu meunang widi ti Yayasan Wikimédia. Kami teu disatujuan ku atawa digawé bareng jeung Yayasan Wikimédia.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sumber&lt;/a&gt; sarta &lt;a href=\"https://commons-app.github.io/\"&gt;situ wéb&lt;/a&gt; dina GitHub. Jieun anyar &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;perkara GitHub&lt;/a&gt; pikeun saran jeung laporan kutu.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Kawijakan privasi&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Pangajén&lt;/a&gt;</string>
   <string name="title_activity_about">Ngeunaan</string>
-  <string name="menu_feedback">Kirim eupan balik (via Surélék)</string>
-  <string name="no_email_client">Tanpa klayen surélék kapasang</string>
+    <string name="no_email_client">Tanpa klayen surélék kapasang</string>
   <string name="provider_categories">Kategori anu anyar dipaké</string>
   <string name="waiting_first_sync">Nungguan sinkronisasi munggaran…</string>
   <string name="no_uploads_yet">Anjeun can ngunjal foto hiji-hiji acan</string>
@@ -100,21 +91,8 @@
   <string name="license_name_cc_by">Atribusi 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Austria)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Jérman)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonia)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Spanyol)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Kroasia)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxembourg)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Netherlands)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norway)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Poland)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romania)</string>
-  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
-  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
-  <string name="tutorial_1_text">Wikimedia Commons ngimahan ampir sakabéh gambar anu dipaké di Wikipédia.</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="tutorial_1_text">Wikimedia Commons ngimahan ampir sakabéh gambar anu dipaké di Wikipédia.</string>
   <string name="tutorial_1_subtext">Gambar-gambar anjeun ngabantu ngatik jalma di sakuliah dunya!</string>
   <string name="tutorial_2_text">Mangga unjalkeun gambar-gambar jieunan anjeun:</string>
   <string name="tutorial_2_subtext">- Obyék alam (kekembangan, sasatoan, gunung, jsb.)\n- Obyék mangpaat (sapédah, stasiun karéta, jsb.)\n- Inohong (bupati, atlit nasional, jsb.)</string>
@@ -122,19 +100,14 @@
   <string name="tutorial_3_subtext">- Sélpi atawa poto sobat anjeun\n- Poto anu diundeur ti Internét\n- Poto layar aplikasi</string>
   <string name="tutorial_4_text">Conto unjalan:</string>
   <string name="tutorial_4_subtext">- Judul: Gedung Opera Sydney\n- Pedaran: Gedung Opera Sydney (Sydney Opera House) ditempo ti basisir peuntas\n- Kategori: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
-  <string name="welcome_wikipedia_text">Sumbangkeun gambar Anjeun. Bantuan ngahirupkeun artikel Wikipédia!</string>
-  <string name="welcome_wikipedia_subtext">Gambar di Wikipédia asalna ti Wikimedia Commons.</string>
-  <string name="welcome_copyright_text">Gambar-gambar anjeun ngabantu ngatik jalma di sakuliah dunya.</string>
-  <string name="welcome_copyright_subtext">Singkahan bahan-bahan ti Internét anu boga hak cipta, kaasup poto poster, jilid buku, jsb.</string>
-  <string name="welcome_final_text">Anjeun geus ngarti?</string>
+    <string name="welcome_final_text">Anjeun geus ngarti?</string>
   <string name="welcome_final_button_text">Enya</string>
   <string name="detail_panel_cats_label">Kategori</string>
   <string name="detail_panel_cats_loading">Keur muat…</string>
   <string name="detail_panel_cats_none">Taya nu dipilih</string>
   <string name="detail_description_empty">Tanpa pedaran</string>
   <string name="detail_license_empty">Lisénsi teu dipikanyaho</string>
-  <string name="menu_refresh">Segerkeun</string>
-  <string name="read_storage_permission_rationale">Merlukeun widi: Baca simpenan éksternal. Aplikasi teu bisa jalan tanpa ieu.</string>
+    <string name="read_storage_permission_rationale">Merlukeun widi: Baca simpenan éksternal. Aplikasi teu bisa jalan tanpa ieu.</string>
   <string name="write_storage_permission_rationale">Merlukeun widi: Baca simpenan éksternal. Aplikasi teu bisa jalan tanpa ieu.</string>
   <string name="location_permission_rationale">Idin pilihan: Paké lokasi kiwari pikeun usulan kategori</string>
   <string name="ok">Oké</string>
@@ -157,15 +130,13 @@
   <string name="use_wikidata">Paké Wikidata</string>
   <string name="use_wikidata_summary">(Mankahadé: maéhan ieu bisa ngakibatkeun pamakéan data sélulér nu pohara gedéna)</string>
   <string name="_2fa_code">Kode 2FA</string>
-  <string name="number_of_uploads">Water Unjal Panungtung Kuring</string>
-  <string name="maximum_limit">Wates Maksimum</string>
+    <string name="maximum_limit">Wates Maksimum</string>
   <string name="maximum_limit_alert">Teu bisa midangkeun leuwih ti 500</string>
   <string name="set_limit">Atur Wates Unjal Panungtung</string>
   <string name="login_failed_2fa_not_supported">Oténtikasi dua faktor kiwari teu dirojong.</string>
   <string name="logout_verification">Yakin anjeun rék kaluar?</string>
   <string name="commons_logo">Logo Commons</string>
-  <string name="background_image">Gambar Kasang Tukang</string>
-  <string name="mediaimage_failed">Gambar Média Gagal</string>
+    <string name="mediaimage_failed">Gambar Média Gagal</string>
   <string name="no_image_found">Gambar Teu Kapanggih</string>
   <string name="upload_image">Unjal Gambar</string>
   <string name="welcome_image_mount_zao">Mount Zao</string>
@@ -181,8 +152,7 @@
   <string name="navigation_drawer_open">Buka</string>
   <string name="navigation_drawer_close">Tutup</string>
   <string name="navigation_item_home">Tepas</string>
-  <string name="navigation_item_upload">Unjal</string>
-  <string name="navigation_item_nearby">Sabudeureun</string>
+    <string name="navigation_item_nearby">Sabudeureun</string>
   <string name="navigation_item_about">Ngeunaan</string>
   <string name="navigation_item_settings">Pangaturan</string>
   <string name="navigation_item_feedback">Eupan balik</string>

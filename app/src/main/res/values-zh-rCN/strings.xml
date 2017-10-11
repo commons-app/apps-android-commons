@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">维基共享资源</string>
-  <string name="menu_settings">设置</string>
-  <string name="username">用户名</string>
+    <string name="username">用户名</string>
   <string name="password">密码</string>
   <string name="login">登录</string>
   <string name="logging_in_title">登录中</string>
   <string name="logging_in_message">请稍候…</string>
   <string name="login_success">登录成功 ！</string>
-  <string name="login_failed">登录失败!</string>
-  <string name="authentication_failed">身份验证失败 ！</string>
+    <string name="authentication_failed">身份验证失败 ！</string>
   <string name="uploading_started">开始上传！</string>
-  <string name="upload_completed_notification_title">已上传%1$s！</string>
-  <string name="upload_completed_notification_text">轻触以查看您的上传</string>
-  <string name="upload_progress_notification_title_start">正在开始上传%1$s</string>
+    <string name="upload_progress_notification_title_start">正在开始上传%1$s</string>
   <string name="upload_progress_notification_title_in_progress">正在上传%1$s</string>
   <string name="upload_progress_notification_title_finishing">正在完成上传%1$s</string>
   <string name="upload_failed_notification_title">上传%1$s失败</string>
@@ -25,9 +21,7 @@
   <string name="title_activity_contributions">我上传的内容</string>
   <string name="contribution_state_queued">队列</string>
   <string name="contribution_state_failed">失败</string>
-  <string name="contribution_state_in_progress">%1$d%%完成</string>
-  <string name="contribution_state_starting">上传中</string>
-  <string name="menu_from_gallery">从图库</string>
+    <string name="menu_from_gallery">从图库</string>
   <string name="menu_from_camera">拍照</string>
   <string name="provider_contributions">我的上传</string>
   <string name="menu_share">分享</string>
@@ -65,16 +59,12 @@
 开始添加分类。
 点击本信息（或点击返回）跳过此步。</string>
   <string name="categories_activity_title">分类</string>
-  <string name="preference_tracking">使用报告</string>
-  <string name="preference_tracking_summary">向维基媒体发送使用报告，帮助我们改进应用</string>
-  <string name="title_activity_settings">设置</string>
-  <string name="menu_about">关于</string>
-  <string name="about_license">开放源码软件在&lt;a href=\" https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;下释放</string>
+    <string name="title_activity_settings">设置</string>
+    <string name="about_license">开放源码软件在&lt;a href=\" https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;下释放</string>
   <string name="about_improve">源代码位于&lt;a href=\"https://github.com/commons-app/android-commons\"&gt;GitHub&lt;/a&gt;。在&lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;报告错误。</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;隐私政策&lt;/a&gt;</string>
   <string name="title_activity_about">关于</string>
-  <string name="menu_feedback">反馈（通过电子邮件）</string>
-  <string name="provider_categories">最近使用过的类别</string>
+    <string name="provider_categories">最近使用过的类别</string>
   <string name="waiting_first_sync">等待第一次同步…</string>
   <string name="no_uploads_yet">你尚未上传任何照片。</string>
   <string name="menu_retry_upload">重试</string>
@@ -86,29 +76,12 @@
   <string name="license_name_cc_by">CC 署名 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">知识共享 署名-相同方式共享 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC署名-相同方式共享3.0（奥地利）</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC署名-相同方式共享3.0（德国）</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC署名-相同方式共享3.0（爱沙尼亚）</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC署名-相同方式共享3.0（西班牙）</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC署名-相同方式共享3.0（克罗地亚）</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC署名-相同方式共享3.0（卢森堡）</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC署名-相同方式共享3.0（荷兰）</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC署名-相同方式共享3.0（挪威）</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC署名-相同方式共享3.0（波兰）</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC署名-相同方式共享3.0（罗马尼亚）</string>
-  <string name="license_name_cc_by_3_0">CC署名3.0</string>
-  <string name="license_name_cc_zero">CC0</string>
-  <string name="welcome_wikipedia_text">贡献您持有的图像。
-让维基百科的条目更加生活化！</string>
-  <string name="welcome_wikipedia_subtext">维基百科上的图像来自维基共享资源。</string>
-  <string name="welcome_copyright_text">您的图像将有助于教育世界各地的人。</string>
-  <string name="welcome_copyright_subtext">避免使用来自互联网的图像、海报、书籍封面等受版权保护的材料。</string>
-  <string name="welcome_final_text">您明白了吗？</string>
+    <string name="license_name_cc_by_3_0">CC署名3.0</string>
+    <string name="welcome_final_text">您明白了吗？</string>
   <string name="welcome_final_button_text">是的！</string>
   <string name="detail_panel_cats_label">分类</string>
   <string name="detail_panel_cats_loading">正在载入…</string>
   <string name="detail_panel_cats_none">未选择</string>
   <string name="detail_description_empty">没有说明</string>
   <string name="detail_license_empty">未知授权协议</string>
-  <string name="menu_refresh">刷新</string>
 </resources>
