@@ -188,6 +188,7 @@ public class Category {
             switch (from){
                 case 4:
                     onCreate(db);
+                    break;
                 default:
                     break;
             }   
