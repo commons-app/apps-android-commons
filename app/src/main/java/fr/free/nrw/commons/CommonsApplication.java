@@ -147,10 +147,10 @@ public class CommonsApplication extends Application {
      * @return Account|null
      */
     public Account getCurrentAccount() {
-        if(currentAccount == null) {
+        if (currentAccount == null) {
             AccountManager accountManager = AccountManager.get(this);
             Account[] allAccounts = accountManager.getAccountsByType(AccountUtil.accountType());
-            if(allAccounts.length != 0) {
+            if (allAccounts.length != 0) {
                 currentAccount = allAccounts[0];
             }
         }
@@ -161,7 +161,7 @@ public class CommonsApplication extends Application {
         AccountManager accountManager = AccountManager.get(this);
         Account curAccount = getCurrentAccount();
        
-        if(curAccount == null) {
+        if (curAccount == null) {
             return false; // This should never happen
         }
         
@@ -224,11 +224,13 @@ public class CommonsApplication extends Application {
                 if (getIndex() == allAccounts.length) {
                     Timber.d("All accounts have been removed");
                     //TODO: fix preference manager
-                    PreferenceManager.getDefaultSharedPreferences(getInstance()).edit().clear().commit();
+                    PreferenceManager.getDefaultSharedPreferences(getInstance())
+                            .edit().clear().commit();
                     SharedPreferences preferences = context
                             .getSharedPreferences("fr.free.nrw.commons", MODE_PRIVATE);
                     preferences.edit().clear().commit();
-                    context.getSharedPreferences("prefs", Context.MODE_PRIVATE).edit().clear().commit();
+                    context.getSharedPreferences("prefs", Context.MODE_PRIVATE)
+                            .edit().clear().commit();
                     preferences.edit().putBoolean("firstrun", false).apply();
                     updateAllDatabases();
                     currentAccount = null;

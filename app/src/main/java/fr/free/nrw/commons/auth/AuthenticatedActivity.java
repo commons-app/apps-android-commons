@@ -14,7 +14,7 @@ import timber.log.Timber;
 
 public abstract class AuthenticatedActivity extends NavigationBaseActivity {
 
-    String accountType;
+    private String accountType;
     CommonsApplication app;
 
     private String authCookie;

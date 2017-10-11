@@ -142,11 +142,13 @@ public class CategoryContentProvider extends ContentProvider {
     public int update(@NonNull Uri uri, ContentValues contentValues, String selection,
                       String[] selectionArgs) {
         /*
-        SQL Injection warnings: First, note that we're not exposing this to the outside world (exported="false")
-        Even then, we should make sure to sanitize all user input appropriately. Input that passes through ContentValues
+        SQL Injection warnings: First, note that we're not exposing this to the
+        outside world (exported="false"). Even then, we should make sure to sanitize
+        all user input appropriately. Input that passes through ContentValues
         should be fine. So only issues are those that pass in via concating.
 
-        In here, the only concat created argument is for id. It is cast to an int, and will error out otherwise.
+        In here, the only concat created argument is for id. It is cast to an int,
+        and will error out otherwise.
          */
         int uriType = uriMatcher.match(uri);
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
