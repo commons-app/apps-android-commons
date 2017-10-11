@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Commons</string>
-  <string name="menu_settings">Configuración</string>
-  <string name="username">Nome d\'usuariu</string>
+    <string name="username">Nome d\'usuariu</string>
   <string name="password">Contraseña</string>
   <string name="login">Identificase</string>
   <string name="signup">Date d\'alta</string>
   <string name="logging_in_title">Aniciando sesión</string>
   <string name="logging_in_message">Espera…</string>
   <string name="login_success">¡Identificación correuta!</string>
-  <string name="login_failed">¡Falló l\'aniciu de sesión!</string>
-  <string name="upload_failed">Nun s\'alcontró\'l ficheru. Tenta con otru.</string>
+    <string name="upload_failed">Nun s\'alcontró\'l ficheru. Tenta con otru.</string>
   <string name="authentication_failed">¡Falló la identificación!</string>
   <string name="uploading_started">Principió la xuba</string>
-  <string name="upload_completed_notification_title">¡%1$s xubíu!</string>
-  <string name="upload_completed_notification_text">Toque pa ver la xuba</string>
-  <string name="upload_progress_notification_title_start">Principiando la xuba de %1$s</string>
+    <string name="upload_progress_notification_title_start">Principiando la xuba de %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ta xubiendo</string>
   <string name="upload_progress_notification_title_finishing">Acabando de xubir %1$s</string>
   <string name="upload_failed_notification_title">Falló la xuba de %1$s</string>
@@ -27,12 +23,9 @@
   <string name="title_activity_contributions">Les mios xubes recién</string>
   <string name="contribution_state_queued">En cola</string>
   <string name="contribution_state_failed">Falló</string>
-  <string name="contribution_state_in_progress">%1$d%% completao</string>
-  <string name="contribution_state_starting">Xubiendo</string>
-  <string name="menu_from_gallery">De la Galería</string>
+    <string name="menu_from_gallery">De la Galería</string>
   <string name="menu_from_camera">Sacar foto</string>
-  <string name="menu_nearby">Cercanu</string>
-  <string name="provider_contributions">Les mios xubes</string>
+    <string name="provider_contributions">Les mios xubes</string>
   <string name="menu_share">Compartir</string>
   <string name="menu_open_in_browser">Ver nel navegador</string>
   <string name="share_title_hint">Títulu</string>
@@ -72,14 +65,12 @@
   <string name="categories_activity_title">Categoríes</string>
   <string name="title_activity_settings">Configuración</string>
   <string name="title_activity_signup">Date d\'alta</string>
-  <string name="menu_about">Tocante a</string>
-  <string name="about_license">Software de códigu abiertu lliberáu baxo la &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Llicencia Apache v2&lt;/a&gt;. %1$s ya\'l so logotipu son marques rexistraes de la Fundación Wikimedia y utilícense col so permisu. Nun tamos acreditaos pola Fundación Wikimedia nin tamos afiliaos con ella.</string>
+    <string name="about_license">Software de códigu abiertu lliberáu baxo la &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Llicencia Apache v2&lt;/a&gt;. %1$s ya\'l so logotipu son marques rexistraes de la Fundación Wikimedia y utilícense col so permisu. Nun tamos acreditaos pola Fundación Wikimedia nin tamos afiliaos con ella.</string>
   <string name="about_improve">El &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;códigu fonte&lt;/a&gt; ya\'l &lt;a href=\"https://commons-app.github.io/\"&gt;sitiu web&lt;/a&gt; tán en GitHub. Crea una nueva &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;incidencia en GitHub&lt;/a&gt; pa informar de problemes y suxerencies.</string>
   <string name="about_privacy_policy">Wikimedia:Commons-android-strings-about privacy policy/ast</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Créditos&lt;/a&gt;</string>
   <string name="title_activity_about">Tocante a</string>
-  <string name="menu_feedback">Unviar comentarios (per corréu)</string>
-  <string name="no_email_client">Nun s\'instaló nengún veceru de corréu</string>
+    <string name="no_email_client">Nun s\'instaló nengún veceru de corréu</string>
   <string name="provider_categories">Categoríes usaes de recién</string>
   <string name="waiting_first_sync">Esperando pola primera sincronización…</string>
   <string name="no_uploads_yet">Inda nun xubió denguna foto.</string>
@@ -100,21 +91,8 @@
   <string name="license_name_cc_by"> Reconocimientu 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Austria)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Alemaña)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonia)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (España)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Croacia)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxemburgu)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Paises Baxos)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Noruega)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polonia)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Rumania)</string>
-  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
-  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
-  <string name="tutorial_1_text">Wikimedia Commons agospia la mayoría de les imáxenes que s\'usen en Wikipedia.</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="tutorial_1_text">Wikimedia Commons agospia la mayoría de les imáxenes que s\'usen en Wikipedia.</string>
   <string name="tutorial_1_subtext">¡Les tos imáxenes ayuden a instruir a persones de tol mundu!</string>
   <string name="tutorial_2_text">Xube namái imáxenes que tomasti o creasti tu mesmu:</string>
   <string name="tutorial_2_subtext">- Oxetos naturales (flores, animales, montes)\n- Oxetos útiles (bicicletes, estaciones de tren)\n- Persones famoses (l\'alcalde, dalgún atleta olímpicu que conoces)</string>
@@ -122,19 +100,14 @@
   <string name="tutorial_3_subtext">- Selfies o semeyes de los tos amigos\n- Imáxenes que descargasti d\'Internet\n- Imáxenes de pantalla d\'aplicaciones propietaries</string>
   <string name="tutorial_4_text">Exemplu de carga:</string>
   <string name="tutorial_4_subtext">- Títulu: Ópera de Sidney\n- Descripción: Teatru de la Ópera de Sidney vistu dende l\'otru llau de la badea\n- Categoríes: Ópera de Sidney, Ópera de Sidney dende l\'oeste, Vistes a distancia de la Ópera de Sidney</string>
-  <string name="welcome_wikipedia_text">Collabore coles sos imaxes. ¡Ayude a que los artículos de Wikipedia tengan vida!</string>
-  <string name="welcome_wikipedia_subtext">Les imaxes de Wikipedia vienen de\nWikimedia Commons.</string>
-  <string name="welcome_copyright_text">Les sos imaxes ayuden a educar a la xente alredor del mundu.</string>
-  <string name="welcome_copyright_subtext">Evite los materiales con drechos d\'autor qu\'atopó per internet, lo mesmo qu\'imaxes de cartelos, portaes de llibros, etc.</string>
-  <string name="welcome_final_text">¿Cree que yá sabe cómo va?</string>
+    <string name="welcome_final_text">¿Cree que yá sabe cómo va?</string>
   <string name="welcome_final_button_text">¡Si!</string>
   <string name="detail_panel_cats_label">Categoríes</string>
   <string name="detail_panel_cats_loading">Cargando…</string>
   <string name="detail_panel_cats_none">Nenguna seleicionada</string>
   <string name="detail_description_empty">Ensin descripción</string>
   <string name="detail_license_empty">Llicencia desconocida</string>
-  <string name="menu_refresh">Refrescar</string>
-  <string name="read_storage_permission_rationale">Permisu riquíu: llectura d\'almacenamientu esternu. L\'aplicación nun puede funcionar ensin él.</string>
+    <string name="read_storage_permission_rationale">Permisu riquíu: llectura d\'almacenamientu esternu. L\'aplicación nun puede funcionar ensin él.</string>
   <string name="write_storage_permission_rationale">Permisu riquíu: escritura d\'almacenamientu esternu. L\'aplicación nun puede funcionar ensin él.</string>
   <string name="location_permission_rationale">Permisu opcional: llograr l\'allugamientu actual pa suxerir categoríes</string>
   <string name="ok">Aceutar</string>
@@ -157,15 +130,13 @@
   <string name="use_wikidata">Usar Wikidata</string>
   <string name="use_wikidata_summary">(Avisu: desactivar esto pue causar un gran consumu de datos nel móvil)</string>
   <string name="_2fa_code">Códigu I2F</string>
-  <string name="number_of_uploads">Mio llende de xubes recién</string>
-  <string name="maximum_limit">Llende máxima</string>
+    <string name="maximum_limit">Llende máxima</string>
   <string name="maximum_limit_alert">Nun pueden vese más de 500</string>
   <string name="set_limit">Configurar la llende de xubíes recién</string>
   <string name="login_failed_2fa_not_supported">Anguaño nun hai encontu pa autenticación de dos factores.</string>
   <string name="logout_verification">¿Confirmes que quies salir?</string>
   <string name="commons_logo">Logo de Commons</string>
-  <string name="background_image">Imaxe de fondu</string>
-  <string name="mediaimage_failed">Falló la imaxe multimedia</string>
+    <string name="mediaimage_failed">Falló la imaxe multimedia</string>
   <string name="no_image_found">Nun s\'atopó nenguna imaxe</string>
   <string name="upload_image">Xubir imaxe</string>
   <string name="welcome_image_mount_zao">Monte Zao</string>
@@ -181,8 +152,7 @@
   <string name="navigation_drawer_open">Abrir</string>
   <string name="navigation_drawer_close">Zarrar</string>
   <string name="navigation_item_home">Entamu</string>
-  <string name="navigation_item_upload">Xubir</string>
-  <string name="navigation_item_nearby">Cercanu</string>
+    <string name="navigation_item_nearby">Cercanu</string>
   <string name="navigation_item_about">Tocante a</string>
   <string name="navigation_item_settings">Configuración</string>
   <string name="navigation_item_feedback">La to opinión</string>

@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Commons</string>
-  <string name="menu_settings">Configuracións</string>
-  <string name="username">Nome de usuario</string>
+    <string name="username">Nome de usuario</string>
   <string name="password">Contrasinal</string>
   <string name="login">Acceder ao sistema</string>
   <string name="signup">Rexistrarse</string>
   <string name="logging_in_title">Accedendo ao sistema</string>
   <string name="logging_in_message">Por favor, agarde…</string>
   <string name="login_success">Accedeu correctamente!</string>
-  <string name="login_failed">Erro durante o inición de sesión!</string>
-  <string name="upload_failed">Ficheiro non atopado. Por favor, probe con outro.</string>
+    <string name="upload_failed">Ficheiro non atopado. Por favor, probe con outro.</string>
   <string name="authentication_failed">Erro durante a autenticación!</string>
   <string name="uploading_started">A carga comezou!</string>
-  <string name="upload_completed_notification_title">Cargouse \"%1$s\"!</string>
-  <string name="upload_completed_notification_text">Prema para ollar a súa carga</string>
-  <string name="upload_progress_notification_title_start">Comezando a carga de \"%1$s\"</string>
+    <string name="upload_progress_notification_title_start">Comezando a carga de \"%1$s\"</string>
   <string name="upload_progress_notification_title_in_progress">Cargando \"%1$s\"</string>
   <string name="upload_progress_notification_title_finishing">Rematando a carga de \"%1$s\"</string>
   <string name="upload_failed_notification_title">Erro ao cargar \"%1$s\"</string>
@@ -27,12 +23,9 @@
   <string name="title_activity_contributions">As miñas subas recentes</string>
   <string name="contribution_state_queued">Na cola</string>
   <string name="contribution_state_failed">Erróneo</string>
-  <string name="contribution_state_in_progress">%1$d%% completado</string>
-  <string name="contribution_state_starting">Subindo</string>
-  <string name="menu_from_gallery">Da galería</string>
+    <string name="menu_from_gallery">Da galería</string>
   <string name="menu_from_camera">Tirar unha foto</string>
-  <string name="menu_nearby">Preto</string>
-  <string name="provider_contributions">As miñas subidas</string>
+    <string name="provider_contributions">As miñas subidas</string>
   <string name="menu_share">Compartir</string>
   <string name="menu_open_in_browser">Mostrar no navegador</string>
   <string name="share_title_hint">Título</string>
@@ -72,14 +65,12 @@
   <string name="categories_activity_title">Categorías</string>
   <string name="title_activity_settings">Configuracións</string>
   <string name="title_activity_signup">Rexistrarse</string>
-  <string name="menu_about">Acerca de</string>
-  <string name="about_license">Software de código aberto liberado baixo a &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;licenza Apache v2&lt;/a&gt;. %1$s e o seu logo son marcas rexistradas da Fundación Wikimedia e úsanse coa súa autorización. Non fomos acreditados pola Fundación Wikimedia nin estamos afiliados con ela.</string>
+    <string name="about_license">Software de código aberto liberado baixo a &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;licenza Apache v2&lt;/a&gt;. %1$s e o seu logo son marcas rexistradas da Fundación Wikimedia e úsanse coa súa autorización. Non fomos acreditados pola Fundación Wikimedia nin estamos afiliados con ela.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Código fonte&lt;/a&gt; e &lt;a href=\"https://commons-app.github.io/\"&gt;sitio web&lt;/a&gt; en GitHub. Crear unha nova &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;incidencia&lt;/a&gt; para informar de problemas e suxestións.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Política_de_protección_de_datos_(gl)\"&gt;Política de protección de datos&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Créditos&lt;/a&gt;</string>
   <string name="title_activity_about">Acerca de</string>
-  <string name="menu_feedback">Enviar comentarios (por correo electrónico)</string>
-  <string name="no_email_client">Non hai instalado ningún cliente de correo</string>
+    <string name="no_email_client">Non hai instalado ningún cliente de correo</string>
   <string name="provider_categories">Categorías usadas recentemente</string>
   <string name="waiting_first_sync">Agardando pola primeira sincronización…</string>
   <string name="no_uploads_yet">Aínda non cargou ningunha foto.</string>
@@ -100,21 +91,8 @@
   <string name="license_name_cc_by">Recoñecemento 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Austria)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Alemaña)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonia)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (España)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Croacia)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxemburgo)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Países Baixos)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Noruega)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polonia)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romanía)</string>
-  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
-  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
-  <string name="tutorial_1_text">Wikimedia Commons alberga a maioría das imaxes usada en Wikipedia.</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="tutorial_1_text">Wikimedia Commons alberga a maioría das imaxes usada en Wikipedia.</string>
   <string name="tutorial_1_subtext">As súas imaxes axudan a educar a persoas de todo o mundoǃ</string>
   <string name="tutorial_2_text">Por favor, suba unicamente imaxes capturadas ou creadas totalmente por vostedeː</string>
   <string name="tutorial_2_subtext">- Obxectos naturais (flores, animais, montañas)\n- Obxectos útiles (bicicletas, estacións de tren)\n- Personaxes famosos (o seu alcalde, atletas olímpicos que coñeza)</string>
@@ -122,19 +100,14 @@
   <string name="tutorial_3_subtext">- Selfies ou imaxes dos seus amigos\n- Imaxes descargadas de Internet\n- Capturas de pantalla de aplicacións con dereitos de autor</string>
   <string name="tutorial_4_text">Exemplo de subaː</string>
   <string name="tutorial_4_subtext">- Título: Ópera de Sydney\n- Descrición: A Ópera de Sydney vista dende a baía\n- Categorías: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
-  <string name="welcome_wikipedia_text">Achegue as súas imaxes. Axude a que os artigos da Wikipedia cobren vida!</string>
-  <string name="welcome_wikipedia_subtext">As imaxes da Wikipedia veñen da Wikimedia Commons.</string>
-  <string name="welcome_copyright_text">As súas imaxes axudan a educar xente de todo o mundo.</string>
-  <string name="welcome_copyright_subtext">Evite os materiais protexidos por dereitos de autoría que se atopen na internet, así como imaxes de pósters, portadas de libros etc.</string>
-  <string name="welcome_final_text">Entende como vai?</string>
+    <string name="welcome_final_text">Entende como vai?</string>
   <string name="welcome_final_button_text">Si!</string>
   <string name="detail_panel_cats_label">Categorías</string>
   <string name="detail_panel_cats_loading">Cargando…</string>
   <string name="detail_panel_cats_none">Ningunha seleccionada</string>
   <string name="detail_description_empty">Sen descrición</string>
   <string name="detail_license_empty">Licenza descoñecida</string>
-  <string name="menu_refresh">Refrescar</string>
-  <string name="read_storage_permission_rationale">Permiso necesarioː ler un almacenamento externo. A aplicación non pode funcionar sen isto.</string>
+    <string name="read_storage_permission_rationale">Permiso necesarioː ler un almacenamento externo. A aplicación non pode funcionar sen isto.</string>
   <string name="write_storage_permission_rationale">Permiso necesario: Escribir en almacenamento externo. A aplicación non pode funcionar sen el.</string>
   <string name="location_permission_rationale">Permiso opcionalː obter a localización actual para suxerir categorías</string>
   <string name="ok">Aceptar</string>
@@ -157,15 +130,13 @@
   <string name="use_wikidata">Usar Wikidata</string>
   <string name="use_wikidata_summary">(Aviso: desactivar isto pode ocasionar un gran consumo de datos do móbil)</string>
   <string name="_2fa_code">Código de autenticación de dous pasos</string>
-  <string name="number_of_uploads">O meu límite de subas recentes</string>
-  <string name="maximum_limit">Límite máximo</string>
+    <string name="maximum_limit">Límite máximo</string>
   <string name="maximum_limit_alert">Non se poden amosar máis de 500</string>
   <string name="set_limit">Establecer o límite de subas recentes</string>
   <string name="login_failed_2fa_not_supported">Actualmente non se permite a autenticación de dous factores.</string>
   <string name="logout_verification">Está seguro de querer saír?</string>
   <string name="commons_logo">Logo de Commons</string>
-  <string name="background_image">Imaxe de fondo</string>
-  <string name="mediaimage_failed">Fallou a imaxe de multimedia</string>
+    <string name="mediaimage_failed">Fallou a imaxe de multimedia</string>
   <string name="no_image_found">Non se atopou imaxe</string>
   <string name="upload_image">Subir imaxe</string>
   <string name="welcome_image_mount_zao">Monte Zao</string>
@@ -181,8 +152,7 @@
   <string name="navigation_drawer_open">Abrir</string>
   <string name="navigation_drawer_close">Pechar</string>
   <string name="navigation_item_home">Inicio</string>
-  <string name="navigation_item_upload">Subir</string>
-  <string name="navigation_item_nearby">Preto</string>
+    <string name="navigation_item_nearby">Preto</string>
   <string name="navigation_item_about">Acerca de</string>
   <string name="navigation_item_settings">Configuración</string>
   <string name="navigation_item_feedback">Comentarios</string>

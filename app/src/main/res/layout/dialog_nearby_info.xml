@@ -29,7 +29,6 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/link_preview_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackground"
@@ -85,13 +84,11 @@
                 tools:text="Lorem ipsum" />
 
             <View
-                android:id="@+id/link_preview_bottom_padding"
                 android:layout_width="match_parent"
                 android:layout_height="70dp" />
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/dialogButtonsLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/dialogInfoLayout"

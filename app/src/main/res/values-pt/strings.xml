@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Wikimedia Commons</string>
-  <string name="menu_settings">Configurações</string>
-  <string name="username">Nome de utilizador(a)</string>
+    <string name="username">Nome de utilizador(a)</string>
   <string name="password">Palavra-passe</string>
   <string name="login">Iniciar sessão</string>
   <string name="signup">Registar-se</string>
   <string name="logging_in_title">A iniciar sessão</string>
   <string name="logging_in_message">Aguarde, por favor…</string>
   <string name="login_success">Inicio de sessão bem sucedido</string>
-  <string name="login_failed">O início de sessão falhou!</string>
-  <string name="authentication_failed">Falha de autenticação!</string>
+    <string name="authentication_failed">Falha de autenticação!</string>
   <string name="uploading_started">Iniciado o carregamento!</string>
-  <string name="upload_completed_notification_title">%1$s enviado!</string>
-  <string name="upload_completed_notification_text">Toque para ver seu carregamento</string>
-  <string name="upload_progress_notification_title_start">A iniciar o carregamento de %1$s</string>
+    <string name="upload_progress_notification_title_start">A iniciar o carregamento de %1$s</string>
   <string name="upload_progress_notification_title_in_progress">A carregar %1$s</string>
   <string name="upload_progress_notification_title_finishing">A terminar o carregamento de %1$s</string>
   <string name="upload_failed_notification_title">O carregamento de %1$s falhou</string>
@@ -26,12 +22,9 @@
   <string name="title_activity_contributions" fuzzy="true">Meus carregamentos</string>
   <string name="contribution_state_queued">Em espera</string>
   <string name="contribution_state_failed">Falhou</string>
-  <string name="contribution_state_in_progress">%1$d%% concluído</string>
-  <string name="contribution_state_starting">A carregar</string>
-  <string name="menu_from_gallery">Da galeria</string>
+    <string name="menu_from_gallery">Da galeria</string>
   <string name="menu_from_camera">Tirar foto</string>
-  <string name="menu_nearby">Nas redondezas</string>
-  <string name="provider_contributions">Meus carregamentos</string>
+    <string name="provider_contributions">Meus carregamentos</string>
   <string name="menu_share">Partilhar</string>
   <string name="menu_open_in_browser">Ver no navegador</string>
   <string name="share_title_hint">Título</string>
@@ -65,13 +58,11 @@
   <string name="categories_skip_explanation">Adicione categorias para tornar as suas imagens mais fáceis de encontrar no Wikimedia Commons. \n\nComece a digitar para adicionar categorias.\nCarregue nesta mensagem (ou carregue para voltar) para saltar este passo</string>
   <string name="categories_activity_title">Categorias</string>
   <string name="title_activity_settings">Configurações</string>
-  <string name="menu_about">Sobre</string>
-  <string name="about_license" fuzzy="true">Software em código aberto distribuído sob &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. O Wikimedia Commons e o seu logótipo são marcas registadas da Wikimedia Foundation e são usadas com permissão da Wikimedia Foundation. Não somos endossados ou afiliados à Wikimedia Foundation.</string>
+    <string name="about_license" fuzzy="true">Software em código aberto distribuído sob &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. O Wikimedia Commons e o seu logótipo são marcas registadas da Wikimedia Foundation e são usadas com permissão da Wikimedia Foundation. Não somos endossados ou afiliados à Wikimedia Foundation.</string>
   <string name="about_improve" fuzzy="true">Código no &lt;a href=\"https://github.com/commons-app/android-commons\"&gt;GitHub&lt;/a&gt;. Erros no &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Política de privacidade&lt;/a&gt;</string>
   <string name="title_activity_about">Sobre</string>
-  <string name="menu_feedback">Enviar comentários (por e-mail)</string>
-  <string name="provider_categories">Categorias usadas recentemente</string>
+    <string name="provider_categories">Categorias usadas recentemente</string>
   <string name="waiting_first_sync">A aguardar pela primeira sincronização…</string>
   <string name="no_uploads_yet">Não carregou ainda nenhuma foto.</string>
   <string name="menu_retry_upload">Tente novamente</string>
@@ -86,35 +77,18 @@
   <string name="license_name_cc_by" fuzzy="true">CC Atribuição 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Áustria)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Alemanha)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estónia)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Espanha)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Croácia)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxemburgo)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Países Baixos)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Noruega)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polónia)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Roménia)</string>
-  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_by_sa_4_0">CC-BY-SA 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
-  <string name="tutorial_1_text">Wikimedia Commons armazena a maioria das imagens que são usadas na Wikipédia.</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="tutorial_1_text">Wikimedia Commons armazena a maioria das imagens que são usadas na Wikipédia.</string>
   <string name="tutorial_1_subtext">As suas imagens ajudam a educar pessoas em todo o mundo!</string>
   <string name="tutorial_4_text">Exemplo de carregamento:</string>
-  <string name="welcome_wikipedia_text">Contribua com as suas imagens. Ajude os artigos da Wikipédia a ganhar vida!</string>
-  <string name="welcome_wikipedia_subtext">As imagens na Wikipédia provêm do Wikimedia Commons.</string>
-  <string name="welcome_copyright_text">As suas imagens ajudam a educar as pessoas em todo o mundo.</string>
-  <string name="welcome_copyright_subtext">Evite materiais protegidos por direitos de autor que tenham sido encontrados na Internet, bem como imagens de cartazes, capas de livros, etc.</string>
-  <string name="welcome_final_text">Acha que conseguiu?</string>
+    <string name="welcome_final_text">Acha que conseguiu?</string>
   <string name="welcome_final_button_text">Sim!</string>
   <string name="detail_panel_cats_label">Categorias</string>
   <string name="detail_panel_cats_loading" fuzzy="true">A carregar…</string>
   <string name="detail_panel_cats_none">Nenhuma selecionada</string>
   <string name="detail_description_empty">Sem descrição</string>
   <string name="detail_license_empty">Licença desconhecida</string>
-  <string name="menu_refresh">Actualizar</string>
-  <string name="ok">OK</string>
+    <string name="ok">OK</string>
   <string name="title_activity_nearby">Locais Próximos</string>
   <string name="yes">Sim</string>
   <string name="no">Não</string>

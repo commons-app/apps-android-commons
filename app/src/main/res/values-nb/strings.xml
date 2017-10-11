@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Commons</string>
-  <string name="menu_settings">Innstillinger</string>
-  <string name="username">Brukernavn</string>
+    <string name="username">Brukernavn</string>
   <string name="password">Passord</string>
   <string name="login">Logg inn</string>
   <string name="signup">Registrer deg</string>
   <string name="logging_in_title">Logger inn</string>
   <string name="logging_in_message">Vennligst vent …</string>
   <string name="login_success">Innloggingen var vellykket!</string>
-  <string name="login_failed">Innloggingen feilet!</string>
-  <string name="upload_failed">Filen ble ikke funnet. Forsøk med en annen fil.</string>
+    <string name="upload_failed">Filen ble ikke funnet. Forsøk med en annen fil.</string>
   <string name="authentication_failed">Autentiseringen feilet!</string>
   <string name="uploading_started">Opplastingen startet</string>
-  <string name="upload_completed_notification_title">%1$s lastet opp!</string>
-  <string name="upload_completed_notification_text">Trykk for å vise din opplasting</string>
-  <string name="upload_progress_notification_title_start">Starter opplasting av %1$s</string>
+    <string name="upload_progress_notification_title_start">Starter opplasting av %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s lastet opp</string>
   <string name="upload_progress_notification_title_finishing">Avslutter opplasting av %1$s</string>
   <string name="upload_failed_notification_title">Opplastingen av %1$s feilet</string>
@@ -27,12 +23,9 @@
   <string name="title_activity_contributions">Mine nylige opplastinger</string>
   <string name="contribution_state_queued">I ventekø</string>
   <string name="contribution_state_failed">Feilet</string>
-  <string name="contribution_state_in_progress">%1$d%% ferdig</string>
-  <string name="contribution_state_starting">Laster opp</string>
-  <string name="menu_from_gallery">Fra galleriet</string>
+    <string name="menu_from_gallery">Fra galleriet</string>
   <string name="menu_from_camera">Knips foto</string>
-  <string name="menu_nearby">I nærheten</string>
-  <string name="provider_contributions">Mine opplastinger</string>
+    <string name="provider_contributions">Mine opplastinger</string>
   <string name="menu_share">Del</string>
   <string name="menu_open_in_browser">Vis i nettleser</string>
   <string name="share_title_hint">Tittel</string>
@@ -72,14 +65,12 @@
   <string name="categories_activity_title">Kategorier</string>
   <string name="title_activity_settings">Innstillinger</string>
   <string name="title_activity_signup">Registrer deg</string>
-  <string name="menu_about">Om</string>
-  <string name="about_license">Programvare med åpen kildekode sluppet under &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. %1$s og dets logo er varemerker fra Wikimedia Foundation og brukes med tillatelse fra dem. Vi er verken støttet av eller koblet til Wikimedia Foundation.</string>
+    <string name="about_license">Programvare med åpen kildekode sluppet under &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. %1$s og dets logo er varemerker fra Wikimedia Foundation og brukes med tillatelse fra dem. Vi er verken støttet av eller koblet til Wikimedia Foundation.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kildekode&lt;/a&gt; og &lt;a href=\"https://commons-app.github.io/\"&gt;nettside&lt;/a&gt; på GitHub. Opprett en ny &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-sak&lt;/a&gt; for feilrapporter og forslag.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Personvernpolicy&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-comons/blob/master/CREDITS\"&gt;Bidragsytere&lt;/a&gt;</string>
   <string name="title_activity_about">Om</string>
-  <string name="menu_feedback">Send tilbakemelding (via Epost)</string>
-  <string name="no_email_client">Ingen epostklient installert</string>
+    <string name="no_email_client">Ingen epostklient installert</string>
   <string name="provider_categories">Nylig brukte kategorier</string>
   <string name="waiting_first_sync">Venter på første synkronisering…</string>
   <string name="no_uploads_yet">Du har ikke lastet opp nøn bilder ennå.</string>
@@ -100,21 +91,8 @@
   <string name="license_name_cc_by">Navngivelse 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Østerrike)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Tyskland)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estland)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Spania)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Kroatia)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxembourg)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Nederland)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norge)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polen)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romania)</string>
-  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
-  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
-  <string name="tutorial_1_text">Wikimedia Commons lagrer de fleste bildene som brukes på Wikipedia.</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="tutorial_1_text">Wikimedia Commons lagrer de fleste bildene som brukes på Wikipedia.</string>
   <string name="tutorial_1_subtext">Dine bilder hjelper til å utdanne mennesker verden over!</string>
   <string name="tutorial_2_text">Last opp bilder som er tatt eller skapt av deg:</string>
   <string name="tutorial_2_subtext">– Naturlige objekter (blomster, dyr, fjell)\n– Nyttige objekter (sykler, togstasjoner)\n– Berømte personer (ordføreren din, OL-deltakere du har møtt)</string>
@@ -122,19 +100,14 @@
   <string name="tutorial_3_subtext">- Selfies eller bilder av vennene dine\n- Bilder som du har lastet ned fra internet\n- Skjermbilder tatt fra proprietære apper</string>
   <string name="tutorial_4_text">Opplastingseksempel:</string>
   <string name="tutorial_4_subtext">- Tittel: Sydneys Operahus\n- Beskrivelse: Operahuset i Sydney sett fra andre siden av bukten\n- Kategorier: Operahuset i Sydney, Operahuset i Sydney ifra vest, Operahuset i Sydney utenfra</string>
-  <string name="welcome_wikipedia_text">Bidra med dine bilder. Hjelp til med å blåse liv i Wikipedias artikler!</string>
-  <string name="welcome_wikipedia_subtext">Bilder på Wikipedia kommer fra Wikimedia Commons.</string>
-  <string name="welcome_copyright_text">Bildene dine kan være til hjelp for mennesker over hele verden som søker kunnskap og dannelse.</string>
-  <string name="welcome_copyright_subtext">Unngå opphavsrettsbeskyttet materiale som du har funnet på internett samt bilder av plakater, bokomslag, osv.</string>
-  <string name="welcome_final_text">Forstått?</string>
+    <string name="welcome_final_text">Forstått?</string>
   <string name="welcome_final_button_text">Ja!</string>
   <string name="detail_panel_cats_label">Kategorier</string>
   <string name="detail_panel_cats_loading">Laster …</string>
   <string name="detail_panel_cats_none">Ingen valgt</string>
   <string name="detail_description_empty">Ingen beskrivelse</string>
   <string name="detail_license_empty">Ukjent lisens</string>
-  <string name="menu_refresh">Gjenoppfrisk</string>
-  <string name="read_storage_permission_rationale">Nødvendig tillatelse: Lese ekstern lagring. Appen virker ikke uten dette.</string>
+    <string name="read_storage_permission_rationale">Nødvendig tillatelse: Lese ekstern lagring. Appen virker ikke uten dette.</string>
   <string name="write_storage_permission_rationale">Påkrevd tillatelse: Skriv til ekstern lagring. Appen fungerer ikke uten dette.</string>
   <string name="location_permission_rationale">Valgfri tillatelse: Hent nåværende posisjon for kategoriforslag</string>
   <string name="ok">OK</string>
@@ -157,15 +130,13 @@
   <string name="use_wikidata">Bruk Wikidata</string>
   <string name="use_wikidata_summary">(Advarsel: Store mengder mobildata kan bli brukt om denne slås av)</string>
   <string name="_2fa_code">2FA-kode</string>
-  <string name="number_of_uploads">Grense for mine seneste opplastinger</string>
-  <string name="maximum_limit">Maksimumsgrense</string>
+    <string name="maximum_limit">Maksimumsgrense</string>
   <string name="maximum_limit_alert">Kan ikke vise mer enn 500</string>
   <string name="set_limit">Sett grense for seneste opplastinger</string>
   <string name="login_failed_2fa_not_supported">Tofaktorautentisering støttes ikke ennå.</string>
   <string name="logout_verification">Ønsker du virkelig å logge ut?</string>
   <string name="commons_logo">Commons-logo</string>
-  <string name="background_image">Bakgrunnsbilde</string>
-  <string name="mediaimage_failed">Mediebilde feilet</string>
+    <string name="mediaimage_failed">Mediebilde feilet</string>
   <string name="no_image_found">Intet bilde funnet</string>
   <string name="upload_image">Last opp bilde</string>
   <string name="welcome_image_mount_zao">Zao</string>
@@ -181,8 +152,7 @@
   <string name="navigation_drawer_open">Åpne</string>
   <string name="navigation_drawer_close">Lukk</string>
   <string name="navigation_item_home">Hjem</string>
-  <string name="navigation_item_upload">Last opp</string>
-  <string name="navigation_item_nearby">I nærheten</string>
+    <string name="navigation_item_nearby">I nærheten</string>
   <string name="navigation_item_about">Om</string>
   <string name="navigation_item_settings">Innstillinger</string>
   <string name="navigation_item_feedback">Tilbakemeldinger</string>

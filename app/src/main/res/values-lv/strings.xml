@@ -1,30 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Commons</string>
-  <string name="menu_settings">Iestatījumi</string>
-  <string name="username">Lietotājvārds</string>
+    <string name="username">Lietotājvārds</string>
   <string name="password">Parole</string>
   <string name="login">Pieslēgties</string>
   <string name="signup">Reģistrēties</string>
   <string name="logging_in_title">Pieslēdzas</string>
   <string name="logging_in_message">Lūdzu, uzgaidiet…</string>
   <string name="login_success">Ieiešana veiksmīga</string>
-  <string name="login_failed">Pieteikšanās neizdevās.</string>
-  <string name="authentication_failed">Autentifikācija neizdevās!</string>
+    <string name="authentication_failed">Autentifikācija neizdevās!</string>
   <string name="uploading_started">Augšupielāde sākās!</string>
-  <string name="upload_completed_notification_title">%1$s augšupielādēti!</string>
-  <string name="upload_progress_notification_title_start">Uzsāk %1$s augšupielādi</string>
+    <string name="upload_progress_notification_title_start">Uzsāk %1$s augšupielādi</string>
   <string name="upload_progress_notification_title_in_progress">%1$s augšupielādēti</string>
   <string name="upload_progress_notification_title_finishing">Pabeidz %1$s augšupielādi</string>
   <string name="title_activity_contributions">Manas nesenās augšupielādes</string>
   <string name="contribution_state_queued">Rindā iekļauts</string>
   <string name="contribution_state_failed">Neizdevās</string>
-  <string name="contribution_state_in_progress">%1$d%% pabeigti</string>
-  <string name="contribution_state_starting">Augšupielādē</string>
-  <string name="menu_from_gallery">No galerijas</string>
+    <string name="menu_from_gallery">No galerijas</string>
   <string name="menu_from_camera">Uzņemt fotoattēlu</string>
-  <string name="menu_nearby">Tuvumā</string>
-  <string name="provider_contributions">Manas augsupielades</string>
+    <string name="provider_contributions">Manas augsupielades</string>
   <string name="menu_share">Dalīties</string>
   <string name="menu_open_in_browser">Skatīt pārlūkprogrammā</string>
   <string name="share_title_hint">Nosaukums</string>
@@ -41,12 +35,10 @@
   <string name="categories_activity_title">Kategorijas</string>
   <string name="title_activity_settings">Iestatījumi</string>
   <string name="title_activity_signup">Reģistrēties</string>
-  <string name="menu_about">Par</string>
-  <string name="about_improve" fuzzy="true">Izejas kods pieejams &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Kļūdas ziņot &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
+    <string name="about_improve" fuzzy="true">Izejas kods pieejams &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Kļūdas ziņot &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privātuma politika&lt;/a&gt;</string>
   <string name="title_activity_about">Par</string>
-  <string name="menu_feedback">Nosūtīt atsauksmes (pa e-pastu)</string>
-  <string name="provider_categories">Nesen lietotās kategorijas</string>
+    <string name="provider_categories">Nesen lietotās kategorijas</string>
   <string name="waiting_first_sync">Gaida pirmo sinhronizāciju…</string>
   <string name="no_uploads_yet">Jūs vēl neesat augšupielādējis nevienu fotogrāfiju.</string>
   <string name="menu_retry_upload">Mēģināt vēlreiz</string>
@@ -57,17 +49,13 @@
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
-  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
-  <string name="welcome_final_text">Jums šķiet, ka sapratāt?</string>
+    <string name="welcome_final_text">Jums šķiet, ka sapratāt?</string>
   <string name="welcome_final_button_text">Jā!</string>
   <string name="detail_panel_cats_label">Kategorijas</string>
   <string name="detail_panel_cats_loading">Ielādē…</string>
   <string name="detail_description_empty">Nav apraksta</string>
   <string name="detail_license_empty">Nezināma licence</string>
-  <string name="menu_refresh">Atjaunināt</string>
-  <string name="ok">Labi</string>
+    <string name="ok">Labi</string>
   <string name="warning">Brīdinājums</string>
   <string name="yes">Jā</string>
   <string name="no">Nē</string>
@@ -86,8 +74,7 @@
   <string name="navigation_drawer_open">Atvērt</string>
   <string name="navigation_drawer_close">Aizvērt</string>
   <string name="navigation_item_home">Sākums</string>
-  <string name="navigation_item_upload">Augšupielādēt</string>
-  <string name="navigation_item_nearby">Tuvumā</string>
+    <string name="navigation_item_nearby">Tuvumā</string>
   <string name="navigation_item_about">Par</string>
   <string name="navigation_item_settings">Iestatījumi</string>
   <string name="navigation_item_feedback">Atsauksmes</string>

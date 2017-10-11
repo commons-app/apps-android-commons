@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Вікісховище</string>
-  <string name="menu_settings">Налаштування</string>
-  <string name="username">Ім\'я користувача</string>
+    <string name="username">Ім\'я користувача</string>
   <string name="password">Пароль</string>
   <string name="login">Увійти</string>
   <string name="signup">Зареєструватися</string>
   <string name="logging_in_title">Вхід до системи</string>
   <string name="logging_in_message">Будь ласка, зачекайте…</string>
   <string name="login_success">Ви успішно увійшли!</string>
-  <string name="login_failed">Не вдалося увійти</string>
-  <string name="upload_failed">Файл не знайдено. Будь ласка, спробуйте інший файл.</string>
+    <string name="upload_failed">Файл не знайдено. Будь ласка, спробуйте інший файл.</string>
   <string name="authentication_failed">Помилка автентифікації</string>
   <string name="uploading_started">Завантаження розпочато!</string>
-  <string name="upload_completed_notification_title">Завантажено %1$s!</string>
-  <string name="upload_completed_notification_text">Торкніться, щоб переглянути Ваше завантаження</string>
-  <string name="upload_progress_notification_title_start">Розпочинається завантаження %1$s</string>
+    <string name="upload_progress_notification_title_start">Розпочинається завантаження %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s завантажується</string>
   <string name="upload_progress_notification_title_finishing">Завершення завантаження %1$s</string>
   <string name="upload_failed_notification_title">Не вдалося завантажити %1$s</string>
@@ -29,12 +25,9 @@
   <string name="title_activity_contributions">Мої останні завантаження</string>
   <string name="contribution_state_queued">У черзі</string>
   <string name="contribution_state_failed">Не вдалося</string>
-  <string name="contribution_state_in_progress">%1$d%% завершено</string>
-  <string name="contribution_state_starting">Завантаження</string>
-  <string name="menu_from_gallery">З галереї</string>
+    <string name="menu_from_gallery">З галереї</string>
   <string name="menu_from_camera">Оберіть фото</string>
-  <string name="menu_nearby">Поблизу</string>
-  <string name="provider_contributions">Мої завантаження</string>
+    <string name="provider_contributions">Мої завантаження</string>
   <string name="menu_share">Поділитися</string>
   <string name="menu_open_in_browser">Відкрити у браузері</string>
   <string name="share_title_hint">Назва</string>
@@ -80,14 +73,12 @@
   <string name="categories_activity_title">Категорії</string>
   <string name="title_activity_settings">Налаштування</string>
   <string name="title_activity_signup">Зареєструватися</string>
-  <string name="menu_about">Про програму</string>
-  <string name="about_license">Програмне забезпечення з відкритим кодом випущено під &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;ліцензією Apache в.2&lt;/a&gt;. 1$s і його логотип є товарними знаками Фонду Вікімедіа і використовуються за дозволом Фонду Вікімедіа. Ми не користуємось підтримкою Фонду Вікімедіа і не є його афіліатом.</string>
+    <string name="about_license">Програмне забезпечення з відкритим кодом випущено під &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;ліцензією Apache в.2&lt;/a&gt;. 1$s і його логотип є товарними знаками Фонду Вікімедіа і використовуються за дозволом Фонду Вікімедіа. Ми не користуємось підтримкою Фонду Вікімедіа і не є його афіліатом.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Вихідний код&lt;/a&gt; і &lt;a href=\"https://commons-app.github.io/\"&gt;веб-сайт&lt;/a&gt; на GitHub. Створіть нове &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;завдання на GitHub&lt;/a&gt; для повідомлення про баги або для висловлення пропозицій.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Політика приватності&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Автори&lt;/a&gt;</string>
   <string name="title_activity_about">Про програму</string>
-  <string name="menu_feedback">Надіслати відгук (електронною поштою)</string>
-  <string name="no_email_client">Не встановлено програми електронної пошти</string>
+    <string name="no_email_client">Не встановлено програми електронної пошти</string>
   <string name="provider_categories">Недавно використані категорії</string>
   <string name="waiting_first_sync">Очікується перша синхронізація…</string>
   <string name="no_uploads_yet">Ви ще не завантажили жодної світлини.</string>
@@ -108,21 +99,8 @@
   <string name="license_name_cc_by">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Австрія)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Німеччина)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Естонія)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Іспанія)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Хорватія)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Люксембург)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Нідерланди)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Норвегія)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Польща)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Румунія)</string>
-  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
-  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
-  <string name="tutorial_1_text">На Вікісховищі зберігається більшість зображень, що використовуються у Вікіпедії.</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="tutorial_1_text">На Вікісховищі зберігається більшість зображень, що використовуються у Вікіпедії.</string>
   <string name="tutorial_1_subtext">Ваші зображення допомагають навчати людей по всьому світі!</string>
   <string name="tutorial_2_text">Будь ласка, завантажуйте зображення, повністю виконані або створені Вами:</string>
   <string name="tutorial_2_subtext">u2022 Природні об\'єкти (квіти, тварини, гори) \nu2022 Корисні об\'єкти (велосипеди, залізничні вокзали) \nu2022 Відомі люди (Ваш мер, олімпійські атлети, яких Ви зустрічали)</string>
@@ -130,19 +108,14 @@
   <string name="tutorial_3_subtext">u2022 Селфі або фото своїх друзів \nu2022 Зображення, які Ви завантажили з інтернету \nu2022 Скріншоти патентованих програм</string>
   <string name="tutorial_4_text">Приклад завантаження:</string>
   <string name="tutorial_4_subtext">u2022 Назва: Сіднейський оперний театр \nu2022 Опис: Вид на Сіднейський оперний театр з боку бухти \nu2022 Категорії: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
-  <string name="welcome_wikipedia_text">Надсилайте Ваші зображення. Допоможіть оживити статті Вікіпедії!</string>
-  <string name="welcome_wikipedia_subtext">Зображення у Вікіпедії надходять з Вікісховища.</string>
-  <string name="welcome_copyright_text">Ваші зображення допомагають освіті людей у всьому світі.</string>
-  <string name="welcome_copyright_subtext">Уникайте захищених авторським правом матеріалів, знайдених в Інтернеті, а також зображень плакатів, обкладинок книг і т. п.</string>
-  <string name="welcome_final_text">Ви це зрозуміли?</string>
+    <string name="welcome_final_text">Ви це зрозуміли?</string>
   <string name="welcome_final_button_text">Так!</string>
   <string name="detail_panel_cats_label">Категорії</string>
   <string name="detail_panel_cats_loading">Завантаження…</string>
   <string name="detail_panel_cats_none">Нічого не обрано</string>
   <string name="detail_description_empty">Немає опису</string>
   <string name="detail_license_empty">Невідома ліцензія</string>
-  <string name="menu_refresh">Оновити</string>
-  <string name="read_storage_permission_rationale">Обов\'язковий дозвіл: читання зовнішньої пам\'яті. Програмка не може працювати без цього.</string>
+    <string name="read_storage_permission_rationale">Обов\'язковий дозвіл: читання зовнішньої пам\'яті. Програмка не може працювати без цього.</string>
   <string name="location_permission_rationale">Додатковий дозвіл: отримувати поточне розташування для підказок категорій</string>
   <string name="ok">Гаразд</string>
   <string name="title_activity_nearby">Місця поблизу</string>
@@ -164,15 +137,13 @@
   <string name="use_wikidata">Використати Вікідані</string>
   <string name="use_wikidata_summary">(Попередження: вимкнення цього може спричинити використання значного обсягу мобільних даних)</string>
   <string name="_2fa_code">Код 2FA</string>
-  <string name="number_of_uploads">Ліміт моїх останніх завантажень</string>
-  <string name="maximum_limit">Максимальний ліміт</string>
+    <string name="maximum_limit">Максимальний ліміт</string>
   <string name="maximum_limit_alert">Неможливо показати понад 500</string>
   <string name="set_limit">Встановити ліміт останніх завантажень</string>
   <string name="login_failed_2fa_not_supported">Двофакторна автентифікація наразі не підтримується.</string>
   <string name="logout_verification">Ви справді хочете вийти із системи?</string>
   <string name="commons_logo">Логотип Вікісховища</string>
-  <string name="background_image">Фонове зображення</string>
-  <string name="mediaimage_failed">Помилка медіазображення</string>
+    <string name="mediaimage_failed">Помилка медіазображення</string>
   <string name="no_image_found">Не знайдено зображення</string>
   <string name="upload_image">Завантажити зображення</string>
   <string name="welcome_image_mount_zao">Гора Зао</string>
@@ -188,8 +159,7 @@
   <string name="navigation_drawer_open">Відкрити</string>
   <string name="navigation_drawer_close">Закрити</string>
   <string name="navigation_item_home">Головна</string>
-  <string name="navigation_item_upload">Завантажити</string>
-  <string name="navigation_item_nearby">Поблизу</string>
+    <string name="navigation_item_nearby">Поблизу</string>
   <string name="navigation_item_about">Опис</string>
   <string name="navigation_item_settings">Налаштування</string>
   <string name="navigation_item_feedback">Зворотний зв\'язок</string>

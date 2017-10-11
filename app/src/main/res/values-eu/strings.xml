@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Commons</string>
-  <string name="menu_settings">Hobespenak</string>
-  <string name="username">Erabiltzaile izena</string>
+    <string name="username">Erabiltzaile izena</string>
   <string name="password">Pasahitza</string>
   <string name="login">Saioa hasi</string>
   <string name="signup">Eman izena</string>
   <string name="logging_in_title">Saioa hasten</string>
   <string name="logging_in_message">Mesedez itxaron…</string>
   <string name="login_success">Saio hasiera egina</string>
-  <string name="login_failed">Saio hasieran akatsa!</string>
-  <string name="upload_failed">Fitxategia ez da aurkitu. Mesedez saiatu beste batekin.</string>
+    <string name="upload_failed">Fitxategia ez da aurkitu. Mesedez saiatu beste batekin.</string>
   <string name="authentication_failed">Autentifikazioan akatsa!</string>
   <string name="uploading_started">Igoera hasi da!</string>
-  <string name="upload_completed_notification_title">%1$s igotzen!</string>
-  <string name="upload_completed_notification_text">Ukitu igotakoa ikusteko</string>
-  <string name="upload_progress_notification_title_start">%1$s igotzen hasten</string>
+    <string name="upload_progress_notification_title_start">%1$s igotzen hasten</string>
   <string name="upload_progress_notification_title_in_progress">%1$s igotzen</string>
   <string name="upload_progress_notification_title_finishing">%1$s igotzen bukatzen</string>
   <string name="upload_failed_notification_title">%1$s igotzean akatsa</string>
@@ -23,12 +19,9 @@
   <string name="title_activity_contributions">Nire azken igoerak</string>
   <string name="contribution_state_queued">Itxoite-zerrendan</string>
   <string name="contribution_state_failed">Hutsegitea</string>
-  <string name="contribution_state_in_progress">%% %1$d egina</string>
-  <string name="contribution_state_starting">Igotzen</string>
-  <string name="menu_from_gallery">Galeriatik</string>
+    <string name="menu_from_gallery">Galeriatik</string>
   <string name="menu_from_camera">Argazkia egin</string>
-  <string name="menu_nearby">Gertukoak</string>
-  <string name="provider_contributions">Nire igoerak</string>
+    <string name="provider_contributions">Nire igoerak</string>
   <string name="menu_share">Partekatu</string>
   <string name="menu_open_in_browser">Ikusi nabigatzailean</string>
   <string name="share_title_hint">Izenburua</string>
@@ -58,13 +51,11 @@
   <string name="categories_activity_title">Kategoriak</string>
   <string name="title_activity_settings">Hobespenak</string>
   <string name="title_activity_signup">Eman izena</string>
-  <string name="menu_about">Honi buruz</string>
-  <string name="about_license">Open Source softwarea &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache v2 Lizentziaren&lt;/a&gt; pean egina. Wikimedia Commons eta bere logoa Wikimedia Fundazioaren marka erregistratuak dira eta Wikimedia Fundazioaren baimenarekin erabiltzen dira. Ez gaude Wikimedia Fundaziora afiliatuta.</string>
+    <string name="about_license">Open Source softwarea &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache v2 Lizentziaren&lt;/a&gt; pean egina. Wikimedia Commons eta bere logoa Wikimedia Fundazioaren marka erregistratuak dira eta Wikimedia Fundazioaren baimenarekin erabiltzen dira. Ez gaude Wikimedia Fundaziora afiliatuta.</string>
   <string name="about_improve">GitHub-eko &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Iturria&lt;/a&gt; eta &lt;a href=\"https://commons-app.github.io/\"&gt;webgunea&lt;/a&gt;. &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-eko gai&lt;/a&gt; berria sortu erroreen berri emateko.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Pribatutasun politika&lt;/a&gt;</string>
   <string name="title_activity_about">Honi buruz</string>
-  <string name="menu_feedback">Bidali zure iritzia (e-posta bidez)</string>
-  <string name="no_email_client">Posta bezerorik ez da instalatu</string>
+    <string name="no_email_client">Posta bezerorik ez da instalatu</string>
   <string name="provider_categories">Berriki erabilitako kategoriak</string>
   <string name="waiting_first_sync">Itxoiten lehenengo sinkronizaziora…</string>
   <string name="no_uploads_yet">Oraindik ez duzu argazkirik igo.</string>
@@ -84,21 +75,8 @@
   <string name="license_name_cc_by">Esleipena 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Austria)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Alemania)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonia)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Espainia)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Kroazia)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxenburgo)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Herbehereak)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norvegia)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polonia)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Errumania)</string>
-  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
-  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
-  <string name="tutorial_3_text">Mesedez EZ igo:</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="tutorial_3_text">Mesedez EZ igo:</string>
   <string name="tutorial_4_text">Igoera adibidea:</string>
   <string name="welcome_final_text">Lortu duzula uste duzu?</string>
   <string name="welcome_final_button_text">Bai!</string>
@@ -107,8 +85,7 @@
   <string name="detail_panel_cats_none">Bat ere ez da aukeratu</string>
   <string name="detail_description_empty">Deskribapenik ez</string>
   <string name="detail_license_empty">Lizentzia ezezaguna</string>
-  <string name="menu_refresh">Eguneratu</string>
-  <string name="ok">Ados</string>
+    <string name="ok">Ados</string>
   <string name="title_activity_nearby">Gertuko lekuak</string>
   <string name="warning">Oharra</string>
   <string name="file_exists">Fifxategia dagoeneko Commonsen existitzen da. Ziur zaude jarraitu nahi duzula?</string>
@@ -127,8 +104,7 @@
   <string name="maximum_limit">Gehienezko muga</string>
   <string name="maximum_limit_alert">500 baino gehiago ezin dira erakutsi</string>
   <string name="commons_logo">Commonsen logoa</string>
-  <string name="background_image">Atzealdeko irudia</string>
-  <string name="mediaimage_failed">Media irudiak kale egin du</string>
+    <string name="mediaimage_failed">Media irudiak kale egin du</string>
   <string name="no_image_found">Ez da irudirik aurkitu</string>
   <string name="upload_image">Igo irudia</string>
   <string name="welcome_image_mount_zao">Zao Mendia</string>
@@ -144,8 +120,7 @@
   <string name="navigation_drawer_open">Ireki</string>
   <string name="navigation_drawer_close">Itxi</string>
   <string name="navigation_item_home">Hasiera</string>
-  <string name="navigation_item_upload">Igo</string>
-  <string name="navigation_item_nearby">Gertukoak</string>
+    <string name="navigation_item_nearby">Gertukoak</string>
   <string name="navigation_item_about">Honi buruz</string>
   <string name="navigation_item_settings">Ezarpenak</string>
   <string name="navigation_item_feedback">Atzeraelikadura</string>

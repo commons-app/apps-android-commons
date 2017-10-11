@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Commons</string>
-  <string name="menu_settings">Eyari</string>
-  <string name="username">Namey karberi</string>
+    <string name="username">Namey karberi</string>
   <string name="password">Parola</string>
   <string name="login">Cı kewe</string>
   <string name="signup">Qeyd be</string>
   <string name="logging_in_title">Cıkewtış</string>
   <string name="logging_in_message" fuzzy="true">Tay bıpawe</string>
   <string name="login_success">Cıkewtış hewl bi.</string>
-  <string name="login_failed">Nidekeweya de</string>
-  <string name="upload_failed">Dosya nêvineya. Dosyê da bine bıcerebnê.</string>
+    <string name="upload_failed">Dosya nêvineya. Dosyê da bine bıcerebnê.</string>
   <string name="authentication_failed">Tesdiq kerdış nebı</string>
   <string name="uploading_started">Barkerdış sertera!</string>
-  <string name="upload_completed_notification_title">%1$s bıbar!</string>
-  <string name="upload_completed_notification_text">Barkerdışê xo pıro bıde.</string>
-  <string name="upload_progress_notification_title_start">Barkerdışe %1$s sertera</string>
+    <string name="upload_progress_notification_title_start">Barkerdışe %1$s sertera</string>
   <string name="upload_progress_notification_title_in_progress">%1$s beno bar!</string>
   <string name="upload_progress_notification_title_finishing">Barkerdışe %1$s qedya</string>
   <string name="upload_failed_notification_title">%1$s bar nêbeno.</string>
@@ -27,12 +23,9 @@
   <string name="title_activity_contributions" fuzzy="true">Barkerdışê mı</string>
   <string name="contribution_state_queued">Ratneya</string>
   <string name="contribution_state_failed">Nêbı</string>
-  <string name="contribution_state_in_progress">%1$d%% temamya</string>
-  <string name="contribution_state_starting">Bar beno</string>
-  <string name="menu_from_gallery">Galeri ra</string>
+    <string name="menu_from_gallery">Galeri ra</string>
   <string name="menu_from_camera">Resım bıgêre</string>
-  <string name="menu_nearby">Nezdıra</string>
-  <string name="provider_contributions">Barkerdışê mı</string>
+    <string name="provider_contributions">Barkerdışê mı</string>
   <string name="menu_share">Vıla ke</string>
   <string name="menu_open_in_browser">Rovıte dı akê</string>
   <string name="share_title_hint">Sername</string>
@@ -67,12 +60,10 @@
   <string name="categories_activity_title">Kategoriy</string>
   <string name="title_activity_settings">Sazi</string>
   <string name="title_activity_signup">Qeyd be</string>
-  <string name="menu_about">Heq te cı</string>
-  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Çıme&lt;/a&gt; u &lt;a href=\"https://commons-app.github.io/\"&gt;website&lt;/a&gt; on GitHub&lt;/a&gt;. Newe vıraz &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub mewzu &lt;/a&gt; U rapor bıweseynê</string>
+    <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Çıme&lt;/a&gt; u &lt;a href=\"https://commons-app.github.io/\"&gt;website&lt;/a&gt; on GitHub&lt;/a&gt;. Newe vıraz &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub mewzu &lt;/a&gt; U rapor bıweseynê</string>
   <string name="about_privacy_policy">/</string>
   <string name="title_activity_about">Heq te cı</string>
-  <string name="menu_feedback">Peyd rışten bırış (E-posta ra)</string>
-  <string name="no_email_client">E-posta eyar nêbi</string>
+    <string name="no_email_client">E-posta eyar nêbi</string>
   <string name="provider_categories">Karıyaye Kategoriyê peyêni</string>
   <string name="menu_retry_upload">Fına</string>
   <string name="menu_cancel_upload">Bıtexelne</string>
@@ -82,21 +73,8 @@
   <string name="license_name_cc_by">Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC-BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC-BY-SA 3.0 (Awıstırya)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Almanya)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonya)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (İspanya)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Ğırvatistan)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luksemburg)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Hollanda)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norveç)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polonya)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romanya)</string>
-  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
-  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
-  <string name="tutorial_3_text">Bar mekeri:</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="tutorial_3_text">Bar mekeri:</string>
   <string name="tutorial_4_text">Misal bar kerden:</string>
   <string name="welcome_final_text">Şıma fam kerdê?</string>
   <string name="welcome_final_button_text">E!</string>
@@ -105,8 +83,7 @@
   <string name="detail_panel_cats_none">Theba nêweçineya</string>
   <string name="detail_description_empty">Akerdenayış çıniyo</string>
   <string name="detail_license_empty">Lisans nizaneyeno</string>
-  <string name="menu_refresh">Newe ke</string>
-  <string name="ok">TEMAM</string>
+    <string name="ok">TEMAM</string>
   <string name="title_activity_nearby">Cayê Nezdiy</string>
   <string name="warning">Tembe kem</string>
   <string name="yes">E</string>
@@ -117,5 +94,4 @@
   <string name="cancel">Bıtexelne</string>
   <string name="navigation_drawer_open">Ake</string>
   <string name="navigation_item_home">Keye</string>
-  <string name="navigation_item_upload">Bar ke</string>
 </resources>

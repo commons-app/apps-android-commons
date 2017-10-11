@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Commons</string>
-  <string name="menu_settings">Indstillinger</string>
-  <string name="username">Brugernavn</string>
+    <string name="username">Brugernavn</string>
   <string name="password">Adgangskode</string>
   <string name="login">Log på</string>
   <string name="signup">Opret en konto</string>
   <string name="logging_in_title">Logger på</string>
   <string name="logging_in_message">Vent…</string>
   <string name="login_success">Du er nu logget på!</string>
-  <string name="login_failed">Det mislykkedes at logge på!</string>
-  <string name="upload_failed">Filen blev ikke fundet. Forsøg med en anden fil.</string>
+    <string name="upload_failed">Filen blev ikke fundet. Forsøg med en anden fil.</string>
   <string name="authentication_failed">Godkendelse mislykkedes!</string>
   <string name="uploading_started">Overførsel begyndt!</string>
-  <string name="upload_completed_notification_title">%1$s overført!</string>
-  <string name="upload_completed_notification_text">Tryk for at få vist din upload</string>
-  <string name="upload_progress_notification_title_start">Starter med at uploade %1$s</string>
+    <string name="upload_progress_notification_title_start">Starter med at uploade %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s overføres</string>
   <string name="upload_progress_notification_title_finishing">Afslutter uploadning af %1$s</string>
   <string name="upload_failed_notification_title">Overførsel af %1$s mislykkedes</string>
@@ -27,12 +23,9 @@
   <string name="title_activity_contributions">Mine seneste overførsler</string>
   <string name="contribution_state_queued">I kø</string>
   <string name="contribution_state_failed">Mislykkedes</string>
-  <string name="contribution_state_in_progress">%1$d%% færdig</string>
-  <string name="contribution_state_starting">Overfører</string>
-  <string name="menu_from_gallery">Fra galleriet</string>
+    <string name="menu_from_gallery">Fra galleriet</string>
   <string name="menu_from_camera">Tag billede</string>
-  <string name="menu_nearby">I nærhenden</string>
-  <string name="provider_contributions">Mine uploads</string>
+    <string name="provider_contributions">Mine uploads</string>
   <string name="menu_share">Del</string>
   <string name="menu_open_in_browser">Åbn i browser</string>
   <string name="share_title_hint">Titel</string>
@@ -72,14 +65,12 @@
   <string name="categories_activity_title">Kategorier</string>
   <string name="title_activity_settings">Indstillinger</string>
   <string name="title_activity_signup">Opret konto</string>
-  <string name="menu_about">Om</string>
-  <string name="about_license">Open Source-programmer udgivet under &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. %1$s og dets logo er varemærker for Wikimedia Foundation og bruges med tilladelse fra Wikimedia Foundation. Vi er hverken støttet af eller forbundet med Wikimedia Foundation.</string>
+    <string name="about_license">Open Source-programmer udgivet under &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. %1$s og dets logo er varemærker for Wikimedia Foundation og bruges med tilladelse fra Wikimedia Foundation. Vi er hverken støttet af eller forbundet med Wikimedia Foundation.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kilde&lt;/a&gt; og &lt;a href=\"https://commons-app.github.io/\"&gt;hjemmeside&lt;/a&gt; på GitHub. Opret en ny &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-sag&lt;/a&gt; for fejlrapporter og forslag.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privacy policy&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Bidragsydere&lt;/a&gt;</string>
   <string name="title_activity_about">Om</string>
-  <string name="menu_feedback">Send tilbagemelding (med e-mail)</string>
-  <string name="no_email_client">Ingen e-postklient installeret</string>
+    <string name="no_email_client">Ingen e-postklient installeret</string>
   <string name="provider_categories">Nyligt anvendte kategorier</string>
   <string name="waiting_first_sync">Venter på den første synkronisering…</string>
   <string name="no_uploads_yet">Du har endnu ikke uploadet nogen billeder.</string>
@@ -100,21 +91,8 @@
   <string name="license_name_cc_by"> Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Østrig)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Tyskland)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estland)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC-BY-SA 3.0 (Spanien)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Kroatien)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC-BY-SA 3.0 (Luxemburg)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Holland)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norge)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polen)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Rumænien)</string>
-  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
-  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
-  <string name="tutorial_1_text">Wikimedia Commons lagrer de fleste billeder, som bruges på Wikipedia.</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="tutorial_1_text">Wikimedia Commons lagrer de fleste billeder, som bruges på Wikipedia.</string>
   <string name="tutorial_1_subtext">Dine billeder hjælper med til at uddanne folk rundt om i verden!</string>
   <string name="tutorial_2_text">Læg venligst kun billeder op som er taget af dig selv:</string>
   <string name="tutorial_2_subtext">– Naturobjekter (blomster, dyr, bjerge)\n– Nyttige objekter (cykler, togstationer)\n– Berømte personer (din borgmester, olympiske atleter)</string>
@@ -122,19 +100,14 @@
   <string name="tutorial_3_subtext">- Selvportrætter eller billeder af dine venner\n- Billeder du har hentet fra internettet\n- Skærmbilleder af dine proprietære programmer</string>
   <string name="tutorial_4_text">Eksempel på overførsel:</string>
   <string name="tutorial_4_subtext">- Titel: Sydneys Operahus\n- Beskrivelse: Operahuset i Sydney set fra anden siden af bugten\n- Kategorier: Operahuset i Sydney, Operahuset i Sydney fra vest, Operahuset i Sydney udefra</string>
-  <string name="welcome_wikipedia_text">Bidrag med dine billeder. Hjælp Wikipedias artikler med at komme til live!</string>
-  <string name="welcome_wikipedia_subtext">Billeder på Wikipedia kommer fra Wikimedia Commons.</string>
-  <string name="welcome_copyright_text">Dine billeder hjælper med til at uddanne folk rundt om i verden.</string>
-  <string name="welcome_copyright_subtext">Undgå ophavsretligt beskyttede materialer du har fundet på internettet samt billeder af plakater, bogomslag osv.</string>
-  <string name="welcome_final_text">Forstået?</string>
+    <string name="welcome_final_text">Forstået?</string>
   <string name="welcome_final_button_text">Ja!</string>
   <string name="detail_panel_cats_label">Kategorier</string>
   <string name="detail_panel_cats_loading">Indlæser…</string>
   <string name="detail_panel_cats_none">Ingen valgt</string>
   <string name="detail_description_empty">Ingen beskrivelse</string>
   <string name="detail_license_empty">Ukendt licens</string>
-  <string name="menu_refresh">Opdater</string>
-  <string name="read_storage_permission_rationale">Krævet tilladelse: Læs eksternt lager. Programmet kan ikke fungere uden denne tilladelse.</string>
+    <string name="read_storage_permission_rationale">Krævet tilladelse: Læs eksternt lager. Programmet kan ikke fungere uden denne tilladelse.</string>
   <string name="write_storage_permission_rationale">Krævet tilladelse: Skriv til eksternt lager. Program kan ikke fungere uden denne funktion.</string>
   <string name="location_permission_rationale">Valgfri tilladelse: Hent nuværende position for kategoriforslag</string>
   <string name="ok">O.k.</string>
@@ -157,15 +130,13 @@
   <string name="use_wikidata">Brug Wikidata</string>
   <string name="use_wikidata_summary">(Advarsel: Deaktivering kan medføre et stort mobilt dataforbrug)</string>
   <string name="_2fa_code">2FA-kode</string>
-  <string name="number_of_uploads">Grænse for mine seneste overførelser</string>
-  <string name="maximum_limit">Maksimumgrænse</string>
+    <string name="maximum_limit">Maksimumgrænse</string>
   <string name="maximum_limit_alert">Kan ikke vise mere end 500</string>
   <string name="set_limit">Angiv grænse for seneste overførelser</string>
   <string name="login_failed_2fa_not_supported">Tofaktorgodkendelse er ikke understøttet i øjeblikket.</string>
   <string name="logout_verification">Ønsker du at logge ud?</string>
   <string name="commons_logo">Commons-logo</string>
-  <string name="background_image">Baggrundsbillede</string>
-  <string name="mediaimage_failed">Mediebillede mislykkedes</string>
+    <string name="mediaimage_failed">Mediebillede mislykkedes</string>
   <string name="no_image_found">Intet billede fundet</string>
   <string name="upload_image">Overfør billede</string>
   <string name="welcome_image_mount_zao">Monter Zao</string>
@@ -181,8 +152,7 @@
   <string name="navigation_drawer_open">Åbn</string>
   <string name="navigation_drawer_close">Luk</string>
   <string name="navigation_item_home">Hjem</string>
-  <string name="navigation_item_upload">Overfør</string>
-  <string name="navigation_item_nearby">I nærheden</string>
+    <string name="navigation_item_nearby">I nærheden</string>
   <string name="navigation_item_about">Om</string>
   <string name="navigation_item_settings">Indstillinger</string>
   <string name="navigation_item_feedback">Tilbagemelding</string>

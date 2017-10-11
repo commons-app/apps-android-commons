@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">ვიკისაწყობი</string>
-  <string name="menu_settings">კონფიგურაცია</string>
-  <string name="username">მომხმარებლის სახელი</string>
+    <string name="username">მომხმარებლის სახელი</string>
   <string name="password">პაროლი</string>
   <string name="login">შესვლა</string>
   <string name="signup">რეგისტრაცია</string>
   <string name="logging_in_title">სისტემაში შესვლა</string>
   <string name="logging_in_message">გთხოვთ მოიცადოთ…</string>
   <string name="login_success">სისტემაში შესვლა წარმატებით განხორციელდა!</string>
-  <string name="login_failed">სისტემაში შესვლა ვერ განხორციელდა!</string>
-  <string name="upload_failed">ფაილი არ მოიძებნა. გთხოვთ, სცადოთ სხვა ფაილი.</string>
+    <string name="upload_failed">ფაილი არ მოიძებნა. გთხოვთ, სცადოთ სხვა ფაილი.</string>
   <string name="authentication_failed">ავთენტიფიკაცია ვერ მოხერხდა!</string>
   <string name="uploading_started">ატვირთვა დაიწყო!</string>
-  <string name="upload_completed_notification_title">%1$ ატვირთულია!</string>
-  <string name="upload_completed_notification_text">დააჭირეთ თქვენი ატვირთვის სანახავად</string>
-  <string name="upload_progress_notification_title_start">დაიწყო %1$ ატვირთვა</string>
+    <string name="upload_progress_notification_title_start">დაიწყო %1$ ატვირთვა</string>
   <string name="upload_progress_notification_title_in_progress">%1$ ატვირთვა</string>
   <string name="upload_progress_notification_title_finishing">ატვირთვის დასრულება %1$</string>
   <string name="upload_failed_notification_title">%1$ ატვირთვა ვერ მოხერხდა</string>
@@ -27,12 +23,9 @@
   <string name="title_activity_contributions">ჩემი ბოლო ატვირთვები</string>
   <string name="contribution_state_queued">რიგი</string>
   <string name="contribution_state_failed">ვერ მოხერხდა</string>
-  <string name="contribution_state_in_progress">%1$d%% დასრულდა</string>
-  <string name="contribution_state_starting">იტვირთება</string>
-  <string name="menu_from_gallery">გალერეიდან</string>
+    <string name="menu_from_gallery">გალერეიდან</string>
   <string name="menu_from_camera">ფოტოს გადაღება</string>
-  <string name="menu_nearby">ახლოს</string>
-  <string name="provider_contributions">ჩემი ატვირთვები</string>
+    <string name="provider_contributions">ჩემი ატვირთვები</string>
   <string name="menu_share">გაზიარება</string>
   <string name="menu_open_in_browser">ბრაუზერში გახსნა</string>
   <string name="share_title_hint">სათაური</string>
@@ -70,14 +63,12 @@
   <string name="categories_activity_title">კატეგორია</string>
   <string name="title_activity_settings">კონფიგურაცია</string>
   <string name="title_activity_signup">რეგისტრაცია</string>
-  <string name="menu_about">პროგრამის შესახებ</string>
-  <string name="about_license" fuzzy="true">ღია კოდის მქონე აპლიკაცია, ვრცელდება ლიცენზიით &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. ვიკისაწყობი და მისი ლოგო ფონდი ვიკიმედიის სავაჭრო ნიშნებია და ფონდი ვიკიმედიის ნებართვით გამოიყენება. ჩვენ არ ვართ დაკავშირებული ფონდ ვიკიმედიასთან.</string>
+    <string name="about_license" fuzzy="true">ღია კოდის მქონე აპლიკაცია, ვრცელდება ლიცენზიით &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. ვიკისაწყობი და მისი ლოგო ფონდი ვიკიმედიის სავაჭრო ნიშნებია და ფონდი ვიკიმედიის ნებართვით გამოიყენება. ჩვენ არ ვართ დაკავშირებული ფონდ ვიკიმედიასთან.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;წყარო&lt;/a&gt; და &lt;a href=\"https://commons-app.github.io/\"&gt;საიტი&lt;/a&gt; GitHub-ზე. შეცდომის შესატყობინებლად ან წინადადებისათვის შექმენით ახალი &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;მოთხოვნა GitHub-ზე&lt;/a&gt;.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;კონფიდენციალურობის პოლიტიკა&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;მადლობები&lt;/a&gt;</string>
   <string name="title_activity_about">პროგრამის შესახებ</string>
-  <string name="menu_feedback">გამოხმაურების გაგზავნა (ელ.ფოსტით)</string>
-  <string name="waiting_first_sync">პირველი სინქრონიზაციის მოლოდინი…</string>
+    <string name="waiting_first_sync">პირველი სინქრონიზაციის მოლოდინი…</string>
   <string name="no_uploads_yet">თქვენ ჯერ არცერთი ფოტო არ აგიტვირთავთ.</string>
   <string name="menu_retry_upload">გამეორება</string>
   <string name="menu_cancel_upload">გაუქმება</string>
@@ -94,37 +85,20 @@
   <string name="license_name_cc_by"> Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (ავსტრია)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (გერმანია)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (ესტონეთი)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (ესპანეთი)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (ხორვატია)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (ლუქსემბურგი)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (ნიდერლანდი)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (ნორვეგია)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (პოლონეთი)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (რუმინეთი)</string>
-  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
-  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
-  <string name="tutorial_2_text">გთხოვთ ატვირთოთ, მხოლოდ თქვენ მიერ გადაღებული ან შექმნილი სურათები:</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="tutorial_2_text">გთხოვთ ატვირთოთ, მხოლოდ თქვენ მიერ გადაღებული ან შექმნილი სურათები:</string>
   <string name="tutorial_2_subtext">- ბუნებრივი ობიექტები (ყვავილები, ცხოველები, მთები)\n- სასარგებლო ობიექტები (ველოსიპედები, მატარებლის სადგურები)\n- ცნობილი ადამიანები (თქვენი მერი, ოლიმპიელი სპორტსმენები რომელთაც შეხვედრიხართ)</string>
   <string name="tutorial_3_text">გთხოვთ არ ატვირთოთ:</string>
   <string name="tutorial_3_subtext">- სელფი ან მეგობრების სურათები\n- ინტერნეტიდან ჩამოტვირთული ფოტოები\n- არათავისუფალი აპლიკაციების სკრინშოტები</string>
   <string name="tutorial_4_text">ატვირთვის ნიმუში:</string>
   <string name="tutorial_4_subtext">- სათაური: სიდნეის ოპერის თეატრი\n- აღწერა: სიდნეის ოპერის თეატრის ხედი უბიდან\n- კატეგორიები: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
-  <string name="welcome_wikipedia_text">ატვირთეთ თქვენი ფოტოები. დაეხმარეთ ვიკიპედიის სტატიებს გაცოცხლებაში!</string>
-  <string name="welcome_wikipedia_subtext">ვიკიპედიის ფოტოები ვიკისაწყობში ინახება.</string>
-  <string name="welcome_copyright_text">თქვენი სურათები ხალხის განათლებას ეხმარება მთელ მსოფლიოში.</string>
-  <string name="welcome_final_button_text">დიახ!</string>
+    <string name="welcome_final_button_text">დიახ!</string>
   <string name="detail_panel_cats_label">კატეგორიები</string>
   <string name="detail_panel_cats_loading">იტვირთება…</string>
   <string name="detail_panel_cats_none">არჩეული არაფერია</string>
   <string name="detail_description_empty">არ არის აღწერა</string>
   <string name="detail_license_empty">უცნობი ლიცენზია</string>
-  <string name="menu_refresh">განახლება</string>
-  <string name="ok">კარგი</string>
+    <string name="ok">კარგი</string>
   <string name="title_activity_nearby">ახლომდებარე ადგილები</string>
   <string name="no_nearby">ახლომდებარე ადგილები ვერ მოიძებნა</string>
   <string name="warning">გაფრთხილება</string>
@@ -137,15 +111,13 @@
   <string name="become_a_tester_title">ბეტა ტესტირებაში მონაწილეობა</string>
   <string name="use_wikidata">ვიკიმონაცემების გამოყენება</string>
   <string name="_2fa_code">2ფა კოდი</string>
-  <string name="number_of_uploads">ჩემი ბოლო ატვირთვების ლიმიტი</string>
-  <string name="maximum_limit">მაქსიმალური ლიმიტი</string>
+    <string name="maximum_limit">მაქსიმალური ლიმიტი</string>
   <string name="maximum_limit_alert">500-ზე მეტის ჩვენება შეუძლებელია</string>
   <string name="set_limit">ბოლო ატვირთვების ლიმიტის დაყენება</string>
   <string name="login_failed_2fa_not_supported">ორფაქტორიანი ავტორიზაცია ამჟამად მიუწვდომელია.</string>
   <string name="logout_verification">ნამდვილად გსურთ გასვლა?</string>
   <string name="commons_logo">ვიკისაწყობის ლოგო</string>
-  <string name="background_image">ფონური სურათი</string>
-  <string name="mediaimage_failed">მედიაგამოსახულების შეცდომა</string>
+    <string name="mediaimage_failed">მედიაგამოსახულების შეცდომა</string>
   <string name="no_image_found">სურათი ვერ მოიძებნა</string>
   <string name="upload_image">სურათის ატვირთვა</string>
   <string name="welcome_image_mount_zao">ზაოს მთა</string>
@@ -161,8 +133,7 @@
   <string name="navigation_drawer_open">გახსნა</string>
   <string name="navigation_drawer_close">დახურვა</string>
   <string name="navigation_item_home">მთავარი</string>
-  <string name="navigation_item_upload">ატვირთვა</string>
-  <string name="navigation_item_nearby">ახლოს</string>
+    <string name="navigation_item_nearby">ახლოს</string>
   <string name="navigation_item_about">პროგრამის შესახებ</string>
   <string name="navigation_item_settings">კონფიგურაცია</string>
   <string name="navigation_item_feedback">გამოხმაურება</string>

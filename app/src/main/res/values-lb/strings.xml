@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Commons</string>
-  <string name="menu_settings">Astellungen</string>
-  <string name="username">Benotzernumm</string>
+    <string name="username">Benotzernumm</string>
   <string name="password">Passwuert</string>
   <string name="login">Aloggen</string>
   <string name="signup">Schreift Iech an</string>
   <string name="logging_in_title">Aloggen</string>
   <string name="logging_in_message">Waart w.e.g. …</string>
   <string name="login_success">Umeldung huet geklappt!</string>
-  <string name="login_failed">D\'Aloggen huet net funktionéiert</string>
-  <string name="upload_failed">Fichier net fonnt. probéiert w.e.g. en anere Fichier.</string>
+    <string name="upload_failed">Fichier net fonnt. probéiert w.e.g. en anere Fichier.</string>
   <string name="authentication_failed">Authentifizéierung huet net funktionéiert!</string>
   <string name="uploading_started">D\'Eroplueden huet ugefaang!</string>
-  <string name="upload_completed_notification_title">%1$s eropgelueden!</string>
-  <string name="upload_completed_notification_text">Dréckt fir de Fichier ze gesinn deen Dir eropgelueden hutt</string>
-  <string name="upload_progress_notification_title_start">D\'Eropluede vu(n) %1$s ufänken</string>
+    <string name="upload_progress_notification_title_start">D\'Eropluede vu(n) %1$s ufänken</string>
   <string name="upload_progress_notification_title_in_progress">%1$s gëtt eropgelueden</string>
   <string name="upload_progress_notification_title_finishing">Eroplueden vu(n) %1$s ofschléissen</string>
   <string name="upload_failed_notification_title">D\'Eropluede vu(n) %1$s huet net funktionéiert</string>
@@ -27,12 +23,9 @@
   <string name="title_activity_contributions">Meng rezent eropgeluede Fichieren</string>
   <string name="contribution_state_queued">An der Queue</string>
   <string name="contribution_state_failed">Huet net funktionéiert</string>
-  <string name="contribution_state_in_progress">%1$d%% fäerdeg</string>
-  <string name="contribution_state_starting">Eroplueden</string>
-  <string name="menu_from_gallery">Vun der Gallerie</string>
+    <string name="menu_from_gallery">Vun der Gallerie</string>
   <string name="menu_from_camera">Foto maachen</string>
-  <string name="menu_nearby">Nobäi</string>
-  <string name="provider_contributions">Meng eropgeluede Fichieren</string>
+    <string name="provider_contributions">Meng eropgeluede Fichieren</string>
   <string name="menu_share">Deelen</string>
   <string name="menu_open_in_browser">Am Browser kucken</string>
   <string name="share_title_hint">Titel</string>
@@ -71,14 +64,12 @@
   <string name="categories_activity_title">Kategorien</string>
   <string name="title_activity_settings">Astellungen</string>
   <string name="title_activity_signup">Mellt Iech un</string>
-  <string name="menu_about">Iwwer</string>
-  <string name="about_license">\'Open-Source-Software\' verëffentlecht ënner der &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache Lizenz v2&lt;/a&gt;. %1$s a säi Logo si Markenzeeche vun der Wikimedia Foundation a gi mat der Autorisatioun vun der Wikimedia Foundation benotzt. Mir sinn net confirméiert vun oder liéiert mat der Wikimedia Foundation.</string>
+    <string name="about_license">\'Open-Source-Software\' verëffentlecht ënner der &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache Lizenz v2&lt;/a&gt;. %1$s a säi Logo si Markenzeeche vun der Wikimedia Foundation a gi mat der Autorisatioun vun der Wikimedia Foundation benotzt. Mir sinn net confirméiert vun oder liéiert mat der Wikimedia Foundation.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Quell&lt;/a&gt; an &lt;a href=\"https://commons-app.github.io/\"&gt;Internetsite&lt;/a&gt; vu GitHub.\nLeet w.e.g. &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt; e GitHub Problem&lt;/a&gt; fir Problemer ze mellen a Proposen ze maachen.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Dateschutzerklärung&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Merci&lt;/a&gt;</string>
   <string name="title_activity_about">Iwwer</string>
-  <string name="menu_feedback">Feedback schécken (per E-Mail)</string>
-  <string name="no_email_client">Keen E-Mail-Client installéiert</string>
+    <string name="no_email_client">Keen E-Mail-Client installéiert</string>
   <string name="provider_categories">Rezent benotzt Kategorien</string>
   <string name="waiting_first_sync">Waarden op déi éischt Synchronisatioun…</string>
   <string name="no_uploads_yet">Dir hutt nach keng Fotoen eropgelueden.</string>
@@ -98,21 +89,8 @@
   <string name="license_name_cc_by">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Austria)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Germany)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonia)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Spain)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Croatia)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Lëtzebuerg)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Netherlands)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Germany)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Poland)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romania)</string>
-  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
-  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
-  <string name="tutorial_1_text">Wikimedia Commons späichert déi meescht Biller, déi op Wikipedia benotzt ginn.</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="tutorial_1_text">Wikimedia Commons späichert déi meescht Biller, déi op Wikipedia benotzt ginn.</string>
   <string name="tutorial_1_subtext">Är Biller hëllefe Leit op der ganzer Welt ze forméieren!</string>
   <string name="tutorial_2_text">Lued w.e.g. Biller erop déi komplett vun Iech opgeholl oder gemaacht goufen:</string>
   <string name="tutorial_2_subtext">- Natierlech Objeten (Blummen, Déieren, Bierger)\n- Nëtzlech Objeten (Vëloen, Garen)\n- Berühmt Persounen (Äre Buergermeeschter, olympesch Athleten, déi Dir begéint hutt)</string>
@@ -120,19 +98,14 @@
   <string name="tutorial_3_subtext">- Selfien oder Biller vun Äre Frënn\n- Biller déi Dir aus dem Internet erofgelueden hutt\n- Screenshots vu proprietäre Programmer</string>
   <string name="tutorial_4_text">Beispill-Upload:</string>
   <string name="tutorial_4_subtext">- Titel: Sydney Opera House\n- Beschreiwung: Sydney Opera House vun der Bay aus gesinn\n- Kategorien: Sydney Opera House, Sydney Opera House vu Westen, Sydney Opera House vu wäitem</string>
-  <string name="welcome_wikipedia_text">Maacht mat mat Äre Biller. Hëlleft Wikipedia-Artikele méi lieweg ze maachen!</string>
-  <string name="welcome_wikipedia_subtext">Biller op Wikipedia komme vu Wikimedia Commons.</string>
-  <string name="welcome_copyright_text">Är Biller hëllefe Leit op der ganzer Welt ze forméieren.</string>
-  <string name="welcome_copyright_subtext">Evitéiert Materialien déi ënner de Copyright falen an déi Dir um Internet fonnt hutt, genee sou wéi Biller vu Pousteren, Bicher, asw.</string>
-  <string name="welcome_final_text">Dir mengt Dir huet et verstan?</string>
+    <string name="welcome_final_text">Dir mengt Dir huet et verstan?</string>
   <string name="welcome_final_button_text">Jo!</string>
   <string name="detail_panel_cats_label">Kategorien</string>
   <string name="detail_panel_cats_loading">Lueden…</string>
   <string name="detail_panel_cats_none">Näischt ausgewielt</string>
   <string name="detail_description_empty">Keng Beschreiwung</string>
   <string name="detail_license_empty">Onbekannt Lizenz</string>
-  <string name="menu_refresh">Aktualiséieren</string>
-  <string name="read_storage_permission_rationale">Obligatoresch Autorisatioun: Externe Späicher liesen. D\'App kann net ouni dat funktionéieren.</string>
+    <string name="read_storage_permission_rationale">Obligatoresch Autorisatioun: Externe Späicher liesen. D\'App kann net ouni dat funktionéieren.</string>
   <string name="location_permission_rationale">Fakultativ Autorisatioun: Déi aktuell Plaz kréie fir Propose fir Kategorien</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Plazen nobäi</string>
@@ -158,8 +131,7 @@
   <string name="maximum_limit_alert">Et kënnen der net méi wéi 500 gewise ginn</string>
   <string name="logout_verification">Wëllt dir Iech wierklech ausloggen?</string>
   <string name="commons_logo">Commons-Logo</string>
-  <string name="background_image">Hannergrondbild</string>
-  <string name="no_image_found">Kee Bild fonnt</string>
+    <string name="no_image_found">Kee Bild fonnt</string>
   <string name="upload_image">Bild eroplueden</string>
   <string name="welcome_image_mount_zao">Bierg Zao</string>
   <string name="welcome_image_llamas">Lamaen</string>
@@ -174,8 +146,7 @@
   <string name="navigation_drawer_open">Opmaachen</string>
   <string name="navigation_drawer_close">Zoumaachen</string>
   <string name="navigation_item_home">Haaptsäit</string>
-  <string name="navigation_item_upload">Eroplueden</string>
-  <string name="navigation_item_nearby">Nobäi</string>
+    <string name="navigation_item_nearby">Nobäi</string>
   <string name="navigation_item_about">Iwwer</string>
   <string name="navigation_item_settings">Astellungen</string>
   <string name="navigation_item_feedback">Feedback</string>
