@@ -334,46 +334,34 @@ public class Contribution extends Media {
         }
 
         public static void onUpdate(SQLiteDatabase db, int from, int to) {
-            if (from == to) {
-                return;
-            }
-            if (from == 1) {
-                db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN description STRING;");
-                db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN creator STRING;");
+            if (from < to) {
+                switch (from) {
+                    case 1:
+                        db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN description STRING;");
+                        db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN creator STRING;");
+                        break;
+                    case 2:
+                        db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN multiple INTEGER;");
+                        db.execSQL("UPDATE " + TABLE_NAME + " SET multiple = 0");
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        // Added width and height fields
+                        db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN width INTEGER;");
+                        db.execSQL("UPDATE " + TABLE_NAME + " SET width = 0");
+                        db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN height INTEGER;");
+                        db.execSQL("UPDATE " + TABLE_NAME + " SET height = 0");
+                        db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN license STRING;");
+                        db.execSQL("UPDATE " + TABLE_NAME + " SET license='" + Prefs.Licenses.CC_BY_SA_3 + "';");
+                        break;
+                    default:
+                        break;
+                }
                 from++;
                 onUpdate(db, from, to);
-                return;
-            }
-            if (from == 2) {
-                db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN multiple INTEGER;");
-                db.execSQL("UPDATE " + TABLE_NAME + " SET multiple = 0");
-                from++;
-                onUpdate(db, from, to);
-                return;
-            }
-            if (from == 3) {
-                // Do nothing
-                from++;
-                onUpdate(db, from, to);
-                return;
-            }
-            if (from == 4) {
-                // Do nothing -- added Category
-                from++;
-                onUpdate(db, from, to);
-                return;
-            }
-            if (from == 5) {
-                // Added width and height fields
-                db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN width INTEGER;");
-                db.execSQL("UPDATE " + TABLE_NAME + " SET width = 0");
-                db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN height INTEGER;");
-                db.execSQL("UPDATE " + TABLE_NAME + " SET height = 0");
-                db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN license STRING;");
-                db.execSQL("UPDATE " + TABLE_NAME + " SET license='" + Prefs.Licenses.CC_BY_SA_3 + "';");
-                from++;
-                onUpdate(db, from, to);
-                return;
             }
         }
     }
