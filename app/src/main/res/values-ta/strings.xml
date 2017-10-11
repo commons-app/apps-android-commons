@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">விக்கிமீடியா காமன்சு</string>
-  <string name="menu_settings">அமைப்புகள்</string>
-  <string name="username">பயனர் பெயர்</string>
+    <string name="username">பயனர் பெயர்</string>
   <string name="password">கடவுச்சொல்</string>
   <string name="login">புகுபதிகை</string>
   <string name="logging_in_message">தயவுசெய்து காத்திருங்கள்…</string>
   <string name="login_success">புகுபதிகை வெற்றி</string>
-  <string name="login_failed">புகுபதிகை தோல்வியடைந்தது</string>
-  <string name="upload_completed_notification_title">%1$s பதிவேற்றப்பட்டது!</string>
-  <string name="upload_failed_notification_subtitle">காண்பதற்கு தட்டுக</string>
+    <string name="upload_failed_notification_subtitle">காண்பதற்கு தட்டுக</string>
   <string name="title_activity_contributions">எனது பதிவேற்றங்கள்</string>
-  <string name="contribution_state_in_progress">%1$d%% முடின்துள்ளத்து</string>
-  <string name="contribution_state_starting">பதிவேற்றப்படுகிறது</string>
-  <string name="menu_from_gallery">காட்சியகத்திலிருந்து</string>
+    <string name="menu_from_gallery">காட்சியகத்திலிருந்து</string>
   <string name="menu_from_camera">புகைப்படம் எடு</string>
   <string name="provider_contributions">எனது பதிவேற்றங்கள்</string>
   <string name="menu_share">பகிர்</string>

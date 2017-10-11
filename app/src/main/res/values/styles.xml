@@ -45,10 +45,4 @@
 
     <style name="ProgressBar" parent="Widget.AppCompat.ProgressBar.Horizontal" />
 
-    <style name="borderless_dialog">
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsFloating">true</item>
-        <item name="android:background">@android:color/transparent</item>
-    </style>
-
 </resources>

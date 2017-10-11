@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name" fuzzy="true">Wikimedia Commons програм</string>
-  <string name="menu_settings">Тохиргоо</string>
-  <string name="username">Хэрэглэгчийн нэр</string>
+    <string name="username">Хэрэглэгчийн нэр</string>
   <string name="password">Нууц үг</string>
   <string name="login">Нэвтрэх</string>
   <string name="logging_in_title">Нэвтэрч байна</string>
   <string name="logging_in_message">Түр хүлээнэ үү …</string>
   <string name="login_success">Нэвтрэлт амжилттай боллоо!</string>
-  <string name="login_failed">Нэвтэрч чадсангүй!</string>
-  <string name="authentication_failed">Таныг танихад алдаа гарлаа!</string>
+    <string name="authentication_failed">Таныг танихад алдаа гарлаа!</string>
   <string name="uploading_started">Upload хийж эхэллээ!</string>
-  <string name="upload_completed_notification_title">%1$s upload хийсэн!</string>
-  <string name="upload_completed_notification_text">upload хийсэн жагсаалт харах</string>
-  <string name="upload_progress_notification_title_start">%1$s upload хийж эхэлсэн</string>
+    <string name="upload_progress_notification_title_start">%1$s upload хийж эхэлсэн</string>
   <string name="upload_progress_notification_title_in_progress">%1$s upload хийж байна</string>
   <string name="upload_progress_notification_title_finishing">%1$s upload хийж дуусаж байна</string>
   <string name="upload_failed_notification_title">%1$s upload хийхэд алдаа</string>
@@ -21,9 +17,7 @@
   <string name="title_activity_contributions">Миний хийсэн upload</string>
   <string name="contribution_state_queued">Жагсаалтад орууллаа</string>
   <string name="contribution_state_failed">Алдаа гарлаа</string>
-  <string name="contribution_state_in_progress">%1$d%% хийгдсэн</string>
-  <string name="contribution_state_starting">upload хийж байна</string>
-  <string name="menu_from_gallery">Галлерейгээс</string>
+    <string name="menu_from_gallery">Галлерейгээс</string>
   <string name="menu_from_camera">Зураг авах</string>
   <string name="provider_contributions">Миний хийсэн upload</string>
   <string name="menu_share">Хуваалцах</string>
@@ -42,10 +36,8 @@
   <string name="categories_search_text_hint">Нэр төрлөөр хайх</string>
   <string name="menu_save_categories">Хадгалах</string>
   <string name="categories_activity_title">Нэр төрөл</string>
-  <string name="preference_tracking">Хэрэглээний мэдээлэл:</string>
-  <string name="title_activity_settings">Тохиргоо</string>
-  <string name="menu_about">Тухай</string>
-  <string name="title_activity_about">Тухай</string>
+    <string name="title_activity_settings">Тохиргоо</string>
+    <string name="title_activity_about">Тухай</string>
   <string name="menu_retry_upload">Дахин оролд</string>
   <string name="menu_cancel_upload">Болих</string>
   <string name="menu_download">Татаж авах</string>

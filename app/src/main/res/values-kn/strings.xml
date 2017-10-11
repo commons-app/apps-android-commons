@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">ಕಾಮನ್ಸ್</string>
-  <string name="menu_settings">ವ್ಯವಸ್ಥೆಗಳು</string>
-  <string name="username">ಬಳಕೆದಾರ ಹೆಸರು</string>
+    <string name="username">ಬಳಕೆದಾರ ಹೆಸರು</string>
   <string name="password">ಪ್ರವೇಶಪದ</string>
   <string name="login">ಲಾಗ್ ಇನ್</string>
   <string name="signup">ಸೈನ್ ಅಪ್</string>
   <string name="logging_in_title">ಲಾಗಿನ್ ಆಗುತ್ತಿದ್ದೀರಿ</string>
   <string name="logging_in_message">ದಯವಿಟ್ಟು ನಿರೀಕ್ಷಿಸಿ…</string>
   <string name="login_success">ಲಾಗಿನ್ ಯಶಸ್ವಿ!</string>
-  <string name="login_failed">ಲಾಗಿನ್ ಸಾಧ್ಯವಾಗಿಲ್ಲ!</string>
-  <string name="upload_failed">ಈ ಕಡತ ಕಂಡುಬಂದಿಲ್ಲ. ದಯವಿಟ್ಟು ಇನ್ನೊಂದು ಕಡತ ಪ್ರಯತ್ನಿಸಿ.</string>
+    <string name="upload_failed">ಈ ಕಡತ ಕಂಡುಬಂದಿಲ್ಲ. ದಯವಿಟ್ಟು ಇನ್ನೊಂದು ಕಡತ ಪ್ರಯತ್ನಿಸಿ.</string>
   <string name="authentication_failed">ದೃಢೀಕರಣ ವಿಫಲ!</string>
   <string name="uploading_started">ಅಪ್ಲೋಡ್ ಪ್ರಾರಂಭವಾಗಿದೆ!</string>
-  <string name="upload_completed_notification_title">%1$s ಅಪ್ಲೋಡ್ ಆಗಿದೆ!</string>
-  <string name="upload_completed_notification_text">ನಿಮ್ಮ ನಕಲೇರಿಕೆಯನ್ನು ನೋಡಲು ಮೆಲ್ಲಗೆ ತಟ್ಟಿ</string>
-  <string name="upload_progress_notification_title_start">ನಕಲೇರಿಕೆಯ%1$s ಪ್ರಾರಂಭ</string>
+    <string name="upload_progress_notification_title_start">ನಕಲೇರಿಕೆಯ%1$s ಪ್ರಾರಂಭ</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ನಕಲೇರಿಕೆ  ಆಗಿದೆ!</string>
   <string name="upload_progress_notification_title_finishing">%1$s ಅಪ್ಲೋಡ್ ಮಾಡುವಿಕೆಯನ್ನು ಪೂರ್ಣಗೊಳಿಸಲಾಗುತ್ತಿದೆ</string>
   <string name="upload_failed_notification_title">%1$s ಅಪ್ಲೋಡ್ ಮಾಡುವಿಕೆ ವಿಫಲವಾಗಿದೆ</string>
@@ -27,12 +23,9 @@
   <string name="title_activity_contributions">ನನ್ನ ಇತ್ತಿಚಿನ ಅಪ್ಲೋಡ್ಗಳು</string>
   <string name="contribution_state_queued">ಸರತಿಸಾಲಿನಲ್ಲಿದೆ</string>
   <string name="contribution_state_failed">ವಿಫಲವಾಗಿದೆ</string>
-  <string name="contribution_state_in_progress">%1$d%% ಸಂಪೂರ್ಣ</string>
-  <string name="contribution_state_starting">ನಕಲೇರಿಸಲಾಗುತ್ತಿದೆ</string>
-  <string name="menu_from_gallery">ಛಾಯಾಂಕಣದಿಂದ</string>
+    <string name="menu_from_gallery">ಛಾಯಾಂಕಣದಿಂದ</string>
   <string name="menu_from_camera">ಚಿತ್ರ ತೆಗೆಯಿರಿ</string>
-  <string name="menu_nearby">ಹತ್ತಿರದ</string>
-  <string name="provider_contributions">ನನ್ನ ನಕಲೇರಿಕೆಗಳು</string>
+    <string name="provider_contributions">ನನ್ನ ನಕಲೇರಿಕೆಗಳು</string>
   <string name="menu_share">ಹಂಚು</string>
   <string name="menu_open_in_browser">ಬ್ರೌಸರ್‌ನಲ್ಲಿ ತೆರೆ</string>
   <string name="share_title_hint">ಶೀರ್ಷಿಕೆ</string>
@@ -55,10 +48,8 @@
   <string name="enable_gps">ಜಿಪಿಎಸ್ ಸಕ್ರಿಯಗೊಳಿಸು</string>
   <string name="contributions_subtitle_zero">ಇನ್ನೂ ಯಾವುದೆ ಅಪ್ಲೋಡ್ಗಳಿಲ್ಲ</string>
   <string name="categories_activity_title">ವರ್ಗಗಳು</string>
-  <string name="preference_tracking">ಬಳಕೆಯ ವರದಿಗಳು</string>
-  <string name="title_activity_settings">ವ್ಯವಸ್ಥೆಗಳು</string>
-  <string name="menu_about">ಕುರಿತು</string>
-  <string name="title_activity_about">ಕುರಿತು</string>
+    <string name="title_activity_settings">ವ್ಯವಸ್ಥೆಗಳು</string>
+    <string name="title_activity_about">ಕುರಿತು</string>
   <string name="menu_retry_upload">ಪುನಃ ಪ್ರಯತ್ನಿಸಿ</string>
   <string name="menu_cancel_upload">ರದ್ದುಮಾಡಿ</string>
   <string name="menu_download">ನಕಲಿಳಿಸಿ</string>

@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Commons</string>
-  <string name="menu_settings">Paramètres</string>
-  <string name="username">Nom d’utilisateur</string>
+    <string name="username">Nom d’utilisateur</string>
   <string name="password">Mot de passe</string>
   <string name="login">Se connecter</string>
   <string name="signup">S’inscrire</string>
   <string name="logging_in_title">Connexion</string>
   <string name="logging_in_message">Veuillez patienter…</string>
   <string name="login_success">Connexion réussie !</string>
-  <string name="login_failed">Échec de la connexion !</string>
-  <string name="upload_failed">Fichier non trouvé. Veuillez en essayer un autre.</string>
+    <string name="upload_failed">Fichier non trouvé. Veuillez en essayer un autre.</string>
   <string name="authentication_failed">Échec de l’authentification !</string>
   <string name="uploading_started">Téléversement démarré !</string>
-  <string name="upload_completed_notification_title">%1$s téléversés !</string>
-  <string name="upload_completed_notification_text">Appuyer pour voir votre téléversement</string>
-  <string name="upload_progress_notification_title_start">Début de téléversement %1$s</string>
+    <string name="upload_progress_notification_title_start">Début de téléversement %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s téléversés</string>
   <string name="upload_progress_notification_title_finishing">Fin du téléversement %1$s</string>
   <string name="upload_failed_notification_title">Le téléversement de %1$s a échoué</string>
@@ -27,12 +23,9 @@
   <string name="title_activity_contributions">Mes téléversements récents</string>
   <string name="contribution_state_queued">Mis en file d\'attente</string>
   <string name="contribution_state_failed">Échoué</string>
-  <string name="contribution_state_in_progress">%1$d %% effectué</string>
-  <string name="contribution_state_starting">Téléversement en cours</string>
-  <string name="menu_from_gallery">Depuis la galerie</string>
+    <string name="menu_from_gallery">Depuis la galerie</string>
   <string name="menu_from_camera">Prendre une photo</string>
-  <string name="menu_nearby">À proximité</string>
-  <string name="provider_contributions">Mes téléversements</string>
+    <string name="provider_contributions">Mes téléversements</string>
   <string name="menu_share">Partager</string>
   <string name="menu_open_in_browser">Afficher dans le navigateur</string>
   <string name="share_title_hint">Titre</string>
@@ -72,14 +65,12 @@
   <string name="categories_activity_title">Catégories</string>
   <string name="title_activity_settings">Paramètres</string>
   <string name="title_activity_signup">S’inscrire</string>
-  <string name="menu_about">À propos</string>
-  <string name="about_license">Les logiciels Open Source sont publiés sous la &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;licence Apache v2&lt;/a&gt;. %1$s et son logo sont des marques déposées de la Fondation Wikimédia qui sont utilisées avec l’autorisation de la Fondation Wikimédia. Nous ne sommes pas approuvés par ou affiliés à la Fondation Wikimédia.</string>
+    <string name="about_license">Les logiciels Open Source sont publiés sous la &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;licence Apache v2&lt;/a&gt;. %1$s et son logo sont des marques déposées de la Fondation Wikimédia qui sont utilisées avec l’autorisation de la Fondation Wikimédia. Nous ne sommes pas approuvés par ou affiliés à la Fondation Wikimédia.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sources&lt;/a&gt; et &lt;a href=\"https://commons-app.github.io/\"&gt;site web&lt;/a&gt; sur GitHub. Créer un nouveau &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;signalement GitHub&lt;/a&gt; pour signales des bogues ou des suggestions.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politique de confidentialité&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Remerciements&lt;/a&gt;</string>
   <string name="title_activity_about">À propos</string>
-  <string name="menu_feedback">Envoyer vos commentaires (par courriel)</string>
-  <string name="no_email_client">Aucun client de courriel installé</string>
+    <string name="no_email_client">Aucun client de courriel installé</string>
   <string name="provider_categories">Catégories utilisées récemment</string>
   <string name="waiting_first_sync">Attente de première synchronisation…</string>
   <string name="no_uploads_yet">Vous n’avez pas encore téléchargé de photo.</string>
@@ -100,21 +91,8 @@
   <string name="license_name_cc_by">Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Autriche)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Allemagne)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonie)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Espagne)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Croatie)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxembourg)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Hollande)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norvège)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Pologne)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Roumanie)</string>
-  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
-  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zéro</string>
-  <string name="tutorial_1_text">Wikimedia Commons héberge la plupart des images qui sont utilisées dans Wikipédia.</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="tutorial_1_text">Wikimedia Commons héberge la plupart des images qui sont utilisées dans Wikipédia.</string>
   <string name="tutorial_1_subtext">Vos images aident à éduquer les gens dans le monde entier !</string>
   <string name="tutorial_2_text">Veuillez téléverser des images qui sont prises ou créées entièrement par vous :</string>
   <string name="tutorial_2_subtext">- Objets naturels (fleurs, animaux, montagnes) \n- Objets utiles (bicyclettes, gares ferroviaires) \n- Personnes célèbres (votre maire, les athlètes olympiques que vous avez rencontrés)</string>
@@ -122,19 +100,14 @@
   <string name="tutorial_3_subtext">- des selfies ou des images de vos amis \n- des images téléchargées sur Internet\n- des copies d’écran d’applications propriétaires</string>
   <string name="tutorial_4_text">Exemple de téléversement :</string>
   <string name="tutorial_4_subtext">- Titre : L’opéra de Sydney\n- Description : L’opéra de Sydney vu à travers la baie\n- Catégories : Opéra de Sydney, Opéra de Sydney depuis l’ouest, vues à distance de l’Opéra de Sydney</string>
-  <string name="welcome_wikipedia_text">Contribuez avec vos images. Aidez les articles de Wikipédia à prendre vie !</string>
-  <string name="welcome_wikipedia_subtext">Les images sur Wikipédia viennent de Wikimedia Commons.</string>
-  <string name="welcome_copyright_text">Vos images aident à éduquer les gens dans le monde entier.</string>
-  <string name="welcome_copyright_subtext">Évitez les œuvres protégées que vous pouvez trouver sur l’Internet ainsi que les images d’affiches, couvertures de livres, etc.</string>
-  <string name="welcome_final_text">Vous pensez que c’est bon ?</string>
+    <string name="welcome_final_text">Vous pensez que c’est bon ?</string>
   <string name="welcome_final_button_text">Oui !</string>
   <string name="detail_panel_cats_label">Catégories</string>
   <string name="detail_panel_cats_loading">Chargement…</string>
   <string name="detail_panel_cats_none">Aucune catégorie sélectionnée</string>
   <string name="detail_description_empty">Aucune description</string>
   <string name="detail_license_empty">Licence inconnue</string>
-  <string name="menu_refresh">Rafraîchir</string>
-  <string name="read_storage_permission_rationale">Autorisation nécessaire : Lire un stockage externe. L’application ne peut pas fonctionner sans cela.</string>
+    <string name="read_storage_permission_rationale">Autorisation nécessaire : Lire un stockage externe. L’application ne peut pas fonctionner sans cela.</string>
   <string name="write_storage_permission_rationale">Permission obligatoire : Écriture sur stockage externe. L’application ne peut pas fonctionner sans cela.</string>
   <string name="location_permission_rationale">Autorisation facultative : Obtenir l’emplacement actuel pour des suggestions de catégorie</string>
   <string name="ok">OK</string>
@@ -157,15 +130,13 @@
   <string name="use_wikidata">Utiliser Wikidata</string>
   <string name="use_wikidata_summary">(Attention : désactiver cela pourrait provoquer une consommation importante de données par mobile)</string>
   <string name="_2fa_code">Code 2FA</string>
-  <string name="number_of_uploads">Ma limite de téléversements récents</string>
-  <string name="maximum_limit">Limite maximale</string>
+    <string name="maximum_limit">Limite maximale</string>
   <string name="maximum_limit_alert">Impossible d’afficher plus de 500</string>
   <string name="set_limit">Fixer la limite de téléversement récent</string>
   <string name="login_failed_2fa_not_supported">L’authentification à deux facteurs n’est pas prise en charge pour le moment.</string>
   <string name="logout_verification">Voulez-vous vraiment vous déconnecter ?</string>
   <string name="commons_logo">Logo de Commons</string>
-  <string name="background_image">Image de fond</string>
-  <string name="mediaimage_failed">Échec sur l’image du média</string>
+    <string name="mediaimage_failed">Échec sur l’image du média</string>
   <string name="no_image_found">Aucune image trouvée</string>
   <string name="upload_image">Téléverser une image</string>
   <string name="welcome_image_mount_zao">Mont Zao</string>
@@ -181,8 +152,7 @@
   <string name="navigation_drawer_open">Ouvrir</string>
   <string name="navigation_drawer_close">Fermer</string>
   <string name="navigation_item_home">Accueil</string>
-  <string name="navigation_item_upload">Téléverser</string>
-  <string name="navigation_item_nearby">À proximité</string>
+    <string name="navigation_item_nearby">À proximité</string>
   <string name="navigation_item_about">À propos</string>
   <string name="navigation_item_settings">Paramètres</string>
   <string name="navigation_item_feedback">Commentaire</string>

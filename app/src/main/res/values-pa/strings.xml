@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name" fuzzy="true">ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼</string>
-  <string name="menu_settings">ਸੈਟਿੰਗ</string>
-  <string name="username">ਵਰਤੋਂਕਾਰ ਨਾਂ</string>
+    <string name="username">ਵਰਤੋਂਕਾਰ ਨਾਂ</string>
   <string name="password">ਪਾਸਵਰਡ</string>
   <string name="login">ਦਾਖ਼ਲ ਹੋਵੋ</string>
   <string name="logging_in_title">ਦਾਖ਼ਲਾ ਹੋ ਰਿਹਾ ਹੈ</string>
   <string name="logging_in_message">ਉਡੀਕੋ ਜੀ…</string>
   <string name="login_success">ਦਾਖ਼ਲਾ ਸਫ਼ਲ ਹੋਇਆ!</string>
-  <string name="login_failed">ਦਾਖ਼ਲਾ ਫੇਲ੍ਹ ਹੋਇਆ!</string>
-  <string name="upload_failed">ਫ਼ਾਇਲ ਦੀ ਖੋਜ ਨਹੀਂ ਹੋ ਸਕੀ। ਕਿਰਪਾ ਕਰਕੇ ਹੋਰ ਫ਼ਾਇਲ ਖੋਜੋ।</string>
+    <string name="upload_failed">ਫ਼ਾਇਲ ਦੀ ਖੋਜ ਨਹੀਂ ਹੋ ਸਕੀ। ਕਿਰਪਾ ਕਰਕੇ ਹੋਰ ਫ਼ਾਇਲ ਖੋਜੋ।</string>
   <string name="authentication_failed">ਪ੍ਰਮਾਣਤਾ ਫੇਲ੍ਹ ਹੋਈ!</string>
   <string name="uploading_started">ਅੱਪਲੋਡ ਸ਼ੁਰੂ ਹੋਇਆ!</string>
-  <string name="upload_completed_notification_title">%1$s ਅੱਪਲੋਡ ਹੋ ਗਏ!</string>
-  <string name="upload_completed_notification_text">ਆਪਣਾ ਅੱਪਲੋਡ ਵੇਖਣ ਲਈ ਥਪੇੜੋ</string>
-  <string name="upload_progress_notification_title_start">%1$s ਅੱਪਲੋਡ ਸ਼ੁਰੂ ਕੀਤੇ ਜਾ ਰਹੇ ਹਨ</string>
+    <string name="upload_progress_notification_title_start">%1$s ਅੱਪਲੋਡ ਸ਼ੁਰੂ ਕੀਤੇ ਜਾ ਰਹੇ ਹਨ</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ਅੱਪਲੋਡ ਕੀਤੇ ਜਾ ਰਹੇ ਹਨ</string>
   <string name="upload_progress_notification_title_finishing">%1$s ਦਾ ਅੱਪਲੋਡ ਖ਼ਤਮ ਹੋ ਰਿਹਾ ਹੈ</string>
   <string name="upload_failed_notification_title">%1$s ਦਾ ਅੱਪਲੋਡ ਫੇਲ੍ਹ ਹੋਇਆ</string>
@@ -26,12 +22,9 @@
   <string name="title_activity_contributions" fuzzy="true">ਮੇਰੇ ਅੱਪਲੋਡ</string>
   <string name="contribution_state_queued">ਕਤਾਰ ਵਿਚ</string>
   <string name="contribution_state_failed">ਫੇਲ੍ਹ ਹੋਇਆ</string>
-  <string name="contribution_state_in_progress">%1$d%% ਪੂਰਾ ਹੋਇਆ</string>
-  <string name="contribution_state_starting">ਅੱਪਲੋਡ ਜਾਰੀ ਹੈ</string>
-  <string name="menu_from_gallery">ਚਿੱਤਰਸ਼ਾਲਾ ਤੋਂ</string>
+    <string name="menu_from_gallery">ਚਿੱਤਰਸ਼ਾਲਾ ਤੋਂ</string>
   <string name="menu_from_camera">ਤਸਵੀਰ ਲਵੋ</string>
-  <string name="menu_nearby">ਨੇੜੇ-ਤੇੜੇ</string>
-  <string name="provider_contributions">ਮੇਰੇ ਅੱਪਲੋਡ</string>
+    <string name="provider_contributions">ਮੇਰੇ ਅੱਪਲੋਡ</string>
   <string name="menu_share">ਸਾਂਝਾ ਕਰੋ</string>
   <string name="menu_open_in_browser">ਬਰਾਊਜ਼ਰ ਵਿਚ ਵੇਖੋ</string>
   <string name="share_title_hint">ਸਿਰਲੇਖ</string>
@@ -70,14 +63,12 @@
   <string name="categories_activity_title">ਸ਼੍ਰੇਣੀਆਂ</string>
   <string name="title_activity_settings">ਸੈਟਿੰਗ</string>
   <string name="title_activity_signup">ਸਾਈਨ ਅੱਪ</string>
-  <string name="menu_about">ਇਸ ਬਾਰੇ</string>
-  <string name="about_license">ਅਜ਼ਾਦ ਸਰੋਤ ਸਾਫ਼ਟਵੇਅਰ ਨੂੰ &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; ਅਧੀਨ ਜਾਰੀ ਕੀਤਾ ਗਿਆ ਹੈ</string>
+    <string name="about_license">ਅਜ਼ਾਦ ਸਰੋਤ ਸਾਫ਼ਟਵੇਅਰ ਨੂੰ &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; ਅਧੀਨ ਜਾਰੀ ਕੀਤਾ ਗਿਆ ਹੈ</string>
   <string name="about_improve" fuzzy="true">ਸਰੋਤ &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt; ਉੱਤੇ। ਮੁਸ਼ਕਲਾਂ &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt; ਉੱਤੇ।</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privacy policy&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;ਕਰੈਡਿਟਸ&lt;/a&gt;</string>
   <string name="title_activity_about">ਇਸ ਬਾਰੇ</string>
-  <string name="menu_feedback">ਵਿਚਾਰ ਭੇਜੋ (ਈਮੇਲ ਰਾਹੀਂ)</string>
-  <string name="no_email_client">ਕੋਈ ਈਮੇਲ ਸਾਧਨ ਇੰਸਟਾਲ ਨਹੀਂ ਕੀਤਾ ਗਿਆ</string>
+    <string name="no_email_client">ਕੋਈ ਈਮੇਲ ਸਾਧਨ ਇੰਸਟਾਲ ਨਹੀਂ ਕੀਤਾ ਗਿਆ</string>
   <string name="provider_categories">ਹਾਲ \'ਚ ਵਰਤੀਆਂ ਗਈਆਂ ਸ਼੍ਰੇਣੀਆਂ</string>
   <string name="waiting_first_sync">ਪਹਿਲੀ ਸਿੰਕ ਲਈ ਉਡੀਕ…</string>
   <string name="no_uploads_yet">ਤੁਸੀਂ ਹਾਲੇ ਤੱਕ ਕੋਈ ਤਸਵੀਰਾਂ ਅੱਪਲੋਡ ਨਹੀਂ ਕੀਤੀਆਂ</string>
@@ -97,21 +88,8 @@
   <string name="license_name_cc_by">Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (ਅਸਟਰੀਆ)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (ਜਰਮਨੀ)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (ਇਸਟੋਨੀਆ)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (ਸਪੇਨ)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (ਕਰੋਸ਼ੀਆ)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (ਲਕਜ਼ਮਬਰਗ)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (ਨੀਦਰਲੈਂਡ)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (ਨੌਰਵੇ)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (ਪੋਲੈਂਡ)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (ਰੋਮਾਨੀਆ)</string>
-  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
-  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC ਸਿਫ਼ਰ</string>
-  <string name="tutorial_1_text">ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼ ਜ਼ਿਆਦਾਤਰ ਉਹ ਤਸਵੀਰਾਂ ਦਾ ਭੰਡਾਰ ਹੈ ਜੋ ਵਿਕੀਪੀਡੀਆ \'ਤੇ ਵਰਤੀਆਂ ਜਾਂਦੀਆਂ ਹਨ।</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="tutorial_1_text">ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼ ਜ਼ਿਆਦਾਤਰ ਉਹ ਤਸਵੀਰਾਂ ਦਾ ਭੰਡਾਰ ਹੈ ਜੋ ਵਿਕੀਪੀਡੀਆ \'ਤੇ ਵਰਤੀਆਂ ਜਾਂਦੀਆਂ ਹਨ।</string>
   <string name="tutorial_1_subtext">ਤੁਹਾਡੀਆਂ ਤਸਵੀਰਾਂ ਵਿਸ਼ਵ ਦੇ ਬਾਕੀ ਲੋਕਾਂ ਨੂੰ ਸਿੱਖਿਅਤ ਕਰਨ ਲਈ ਸਹਾਈ ਹਨ!</string>
   <string name="tutorial_2_text">ਕਿਰਪਾ ਕਰਕੇ ਉਹ ਤਸਵੀਰਾਂ ਅਪਲੋਡ ਕਰੋ ਜੋ ਤੁਹਾਡੇ ਦੁਆਰਾ ਲਈਆਂ ਗਈਆਂ ਹਨ ਜਾਂ ਬਣਾਈਆਂ ਗਈਆਂ ਹਨ:</string>
   <string name="tutorial_2_subtext">- ਕੁਦਰਤੀ ਇਕਾਈ (ਫੁੱਲ, ਜਾਨਵਰ, ਪਰਬਤ)\n- ਲਾਹੇਵੰਦ ਇਕਾਈਆਂ (ਸਾਇਕਲ, ਰੇਲਵੇ ਸਟੇਸ਼ਨ)\n- ਪ੍ਰਸਿੱਧ ਲੋਕ (ਤੁਹਾਡਾ ਮੇਅਰ, ਅਥਲੀਟ)</string>
@@ -119,19 +97,14 @@
   <string name="tutorial_3_subtext">- ਸੈਲਫ਼ੀਆਂ ਜਾਂ ਤੁਹਾਡੇ ਦੋਸਤਾਂ ਦੀਆਂ ਤਸਵੀਰਾਂ\n- ਜੋ ਤਸਵੀਰਾਂ ਤੁਸੀਂ ਇੰਟਰਨੈੱਟ ਤੋਂ ਡਾਊਨਲੋਡ ਕੀਤੀਆਂ ਹਨ\n- ਨਿੱਜੀ ਐਪਲੀਕੇਸ਼ਨਾਂ ਦੇ ਸਕਰੀਨਸ਼ੌਟ</string>
   <string name="tutorial_4_text">ਉਦਾਹਰਣ ਵਜੋਂ ਇਹ ਅਪਲੋਡ:</string>
   <string name="tutorial_4_subtext">- ਸਿਰਲੇਖ: Sydney Opera House\n- ਵੇਰਵਾ: ਸਿਡਨੀ ਓਪੇਰਾ ਹਾਊਸ ਦੀ ਤਸਵੀਰ\n- ਸ਼੍ਰੇਣੀਆਂ: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
-  <string name="welcome_wikipedia_text">ਆਪਣੀਆਂ ਤਸਵੀਰਾਂ ਦਾ ਯੋਗਦਾਨ ਪਾਓ। ਵਿਕੀਪੀਡੀਆ ਲੇਖਾਂ ਨੂੰ ਸੁਰਜੀਤ ਕਰ ਦਿਓ!</string>
-  <string name="welcome_wikipedia_subtext">ਵਿਕੀਪੀਡੀਆ ਉਤਲੀਆਂ ਤਸਵੀਰਾਂ ਵਿਕੀਮੀਡੀਆ ਕਾਮਨਜ਼ ਤੋਂ ਆਉਂਦੀਆਂ ਹਨ</string>
-  <string name="welcome_copyright_text">ਤੁਹਾਡੀਆਂ ਤਸਵੀਰਾਂ ਦੁਨੀਆਂ ਭਰ ਦੇ ਲੋਕਾਂ ਨੂੰ ਪੜ੍ਹਨ ਵਿਚ ਮਦਦ ਕਰਦੀਆਂ ਹਨ।</string>
-  <string name="welcome_copyright_subtext">ਇੰਟਰਨੈੱਟ ਉੱਤੇ ਮਿਲੀ ਕਾਪੀਰਾਈਟ ਸਮੱਗਰੀ ਅਤੇ ਪੋਸਟਰਾਂ, ਕਿਤਾਬਾਂ ਦੀਆਂ ਜਿਲਦਾਂ ਦੀਆਂ ਤਸਵੀਆਂ ਆਦਿ ਤੋਂ ਪਰਹੇਜ਼ ਰੱਖੋ।</string>
-  <string name="welcome_final_text">ਤੁਹਾਨੂੰ ਲੱਗਦਾ ਹੈ ਕਿ ਤੁਹਾਡੇ ਕੋਲ ਹੈ?</string>
+    <string name="welcome_final_text">ਤੁਹਾਨੂੰ ਲੱਗਦਾ ਹੈ ਕਿ ਤੁਹਾਡੇ ਕੋਲ ਹੈ?</string>
   <string name="welcome_final_button_text">ਹਾਂ!</string>
   <string name="detail_panel_cats_label">ਸ਼੍ਰੇਣੀਆਂ</string>
   <string name="detail_panel_cats_loading">ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...</string>
   <string name="detail_panel_cats_none">ਕੋਈ ਵੀ ਨਹੀਂ ਚੁਣਿਆ</string>
   <string name="detail_description_empty">ਕੋਈ ਵੇਰਵਾ ਨਹੀਂ</string>
   <string name="detail_license_empty">ਅਣਜਾਣ ਲਸੰਸ</string>
-  <string name="menu_refresh">ਤਾਜ਼ਾ ਕਰੋ</string>
-  <string name="read_storage_permission_rationale">ਆਗਿਆ ਚਾਹੀਦੀ ਹੈ: ਬਾਹਰੀ ਸਟੋਰੇਜ ਬਾਰੇ। ਇਸ ਤੋਂ ਬਿਨਾਂ ਐਪ ਕਾਰਜ ਨਹੀਂ ਕਰ ਸਕੇਗੀ।</string>
+    <string name="read_storage_permission_rationale">ਆਗਿਆ ਚਾਹੀਦੀ ਹੈ: ਬਾਹਰੀ ਸਟੋਰੇਜ ਬਾਰੇ। ਇਸ ਤੋਂ ਬਿਨਾਂ ਐਪ ਕਾਰਜ ਨਹੀਂ ਕਰ ਸਕੇਗੀ।</string>
   <string name="ok">ਠੀਕ ਹੈ</string>
   <string name="title_activity_nearby">ਨਜ਼ਦੀਕੀ ਥਾਵਾਂ</string>
   <string name="no_nearby">ਕੋਈ ਨਜ਼ਦੀਕੀ ਥਾਵਾਂ ਨਹੀਂ ਮਿਲੀਆਂ</string>
@@ -152,8 +125,7 @@
   <string name="maximum_limit_alert">500 ਤੋਂ ਵੱਧ ਵਿਖਾਉਣ ਵਿੱਚ ਅਸਮਰੱਥ</string>
   <string name="logout_verification">ਕੀ ਤੁਸੀਂ ਸੱਚੀਂ ਬੰਦ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?</string>
   <string name="commons_logo">ਕਾਮਨਜ਼ ਲੋਗੋ</string>
-  <string name="background_image">ਪਿੱਠਵਰਤੀ ਤਸਵੀਰ</string>
-  <string name="upload_image">ਤਸਵੀਰ ਅਪਲੋਡ</string>
+    <string name="upload_image">ਤਸਵੀਰ ਅਪਲੋਡ</string>
   <string name="welcome_image_no_selfies">ਕੋਈ ਸੈਲਫ਼ੀਆਂ ਨਹੀਂ</string>
   <string name="welcome_image_welcome_wikipedia">ਵਿਕੀਪੀਡੀਆ \'ਤੇ ਸੁਆਗਤ</string>
   <string name="welcome_image_welcome_copyright">ਕਾਪੀਰਾਈਟ ਸੁਆਗਤ</string>
@@ -161,8 +133,7 @@
   <string name="navigation_drawer_open">ਖੋਲ੍ਹੋ</string>
   <string name="navigation_drawer_close">ਬੰਦ ਕਰੋ</string>
   <string name="navigation_item_home">ਮੁੱਖ ਸਫ਼ਾ</string>
-  <string name="navigation_item_upload">ਚੜ੍ਹਾਉ</string>
-  <string name="navigation_item_nearby">ਨੇੜੇ-ਤੇੜੇ</string>
+    <string name="navigation_item_nearby">ਨੇੜੇ-ਤੇੜੇ</string>
   <string name="navigation_item_about">ਬਾਰੇ</string>
   <string name="navigation_item_settings">ਸੈਟਿੰਗਾਂ</string>
   <string name="navigation_item_feedback">ਫ਼ੀਡਬੈਕ</string>

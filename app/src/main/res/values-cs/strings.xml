@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Commons</string>
-  <string name="menu_settings">Nastavení</string>
-  <string name="username">Uživatelské jméno</string>
+    <string name="username">Uživatelské jméno</string>
   <string name="password">Heslo</string>
   <string name="login">Přihlásit se</string>
   <string name="signup">Zaregistrovat se</string>
   <string name="logging_in_title">Přihlášení</string>
   <string name="logging_in_message">Čekejte prosím…</string>
   <string name="login_success">Přihlášení uspělo!</string>
-  <string name="login_failed">Přihlášení se nezdařilo!</string>
-  <string name="upload_failed">Soubor nebyl nalezen. Prosím, zkuste jiný soubor.</string>
+    <string name="upload_failed">Soubor nebyl nalezen. Prosím, zkuste jiný soubor.</string>
   <string name="authentication_failed">Ověření se nezdařilo!</string>
   <string name="uploading_started">Nahrávání začalo!</string>
-  <string name="upload_completed_notification_title">%1$s nahráno!</string>
-  <string name="upload_completed_notification_text">Klepnutím zobrazíte upload</string>
-  <string name="upload_progress_notification_title_start">Spouští se načítání souboru %1$s</string>
+    <string name="upload_progress_notification_title_start">Spouští se načítání souboru %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Nahrává se soubor %1$s</string>
   <string name="upload_progress_notification_title_finishing">Dokončení nahrávání souboru %1$s</string>
   <string name="upload_failed_notification_title">Načítání souboru %1$s se nezdařilo</string>
@@ -27,12 +23,9 @@
   <string name="title_activity_contributions">Moje nedávné obrázky</string>
   <string name="contribution_state_queued">Ve frontě</string>
   <string name="contribution_state_failed">Selhalo</string>
-  <string name="contribution_state_in_progress">%1$d%% kompletní</string>
-  <string name="contribution_state_starting">Nahrávání</string>
-  <string name="menu_from_gallery">Z galerie</string>
+    <string name="menu_from_gallery">Z galerie</string>
   <string name="menu_from_camera">Vyfotit</string>
-  <string name="menu_nearby">Poblíž</string>
-  <string name="provider_contributions">Moje obrázky</string>
+    <string name="provider_contributions">Moje obrázky</string>
   <string name="menu_share">Sdílet</string>
   <string name="menu_open_in_browser">Zobrazit v prohlížeči</string>
   <string name="share_title_hint">Název</string>
@@ -72,14 +65,12 @@
   <string name="categories_activity_title">Kategorie</string>
   <string name="title_activity_settings">Nastavení</string>
   <string name="title_activity_signup">Zaregistrovat se</string>
-  <string name="menu_about">O aplikaci</string>
-  <string name="about_license">Open Source software dostupný za podmínek &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. %1$s a logo %1$s jsou ochranné známky Wikimedia Foundation a jsou použity se svolením Wikimedia Foundation. Nejsme podporováni Wikimedia Foundation ani nejsme její součástí.</string>
+    <string name="about_license">Open Source software dostupný za podmínek &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. %1$s a logo %1$s jsou ochranné známky Wikimedia Foundation a jsou použity se svolením Wikimedia Foundation. Nejsme podporováni Wikimedia Foundation ani nejsme její součástí.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Zdrojový kód&lt;/a&gt;, &lt;a href=\"https://commons-app.github.io/\"&gt;webová stránka&lt;/a&gt; a &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;hlášení chyb a sdílení nápadů&lt;/a&gt; na GitHubu.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Ochrana_osobních_údajů\"&gt;Ochrana osobních údajů&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Autoři&lt;/a&gt;</string>
   <string name="title_activity_about">O aplikaci</string>
-  <string name="menu_feedback">Poslat názory (e-mailem)</string>
-  <string name="no_email_client">Není nainstalován žádný e-mailový klient</string>
+    <string name="no_email_client">Není nainstalován žádný e-mailový klient</string>
   <string name="provider_categories">Nedávno použité kategorie</string>
   <string name="waiting_first_sync">Čeká se na první synchronizaci…</string>
   <string name="no_uploads_yet">Zatím jste nenahrál žádné fotky.</string>
@@ -99,21 +90,8 @@
   <string name="license_name_cc_by">CC Uveďte autora 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Rakousko)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Německo)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Estonsko)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Španělsko)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Chorvatsko)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Lucembursko)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Nizozemsko)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norsko)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polsko)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Rumunsko)</string>
-  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
-  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
-  <string name="tutorial_1_text">Wikimedia Commons je úložištěm většiny obrázků, které jsou používány na Wikipedii.</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="tutorial_1_text">Wikimedia Commons je úložištěm většiny obrázků, které jsou používány na Wikipedii.</string>
   <string name="tutorial_1_subtext">Vaše obrázky pomáhají vzdělávat lidi po celém světě</string>
   <string name="tutorial_2_text">Prosím, nahrávejte obrázky které jste vyfotil nebo nahrál sám:</string>
   <string name="tutorial_2_subtext">- Přírodní objekty (květiny, zvířata, hory)\n- Užitkové předměty (jízdní kola, vlakové nádraží)\n- Slavní lidé (starosta, olympjští sportovci)</string>
@@ -121,19 +99,14 @@
   <string name="tutorial_3_subtext">- Selfie nebo obrázky vašich přátel\n- Obrázky stažené z Internetu\n- Screenshoty z proprietárních aplikací</string>
   <string name="tutorial_4_text">Příklad nahraného souboru:</string>
   <string name="tutorial_4_subtext">- Název: Opera v Sydney\n- Popis: Opra v Sydney, pohled přes záliv\n- Kategorie: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
-  <string name="welcome_wikipedia_text">Přispějte svými obrázky. Pomozte oživit články na Wikipedii.</string>
-  <string name="welcome_wikipedia_subtext">Obrázky na Wikipedii pochází \nz Wikimedia Commons.</string>
-  <string name="welcome_copyright_text">Vaše obrázky pomáhají vzdělávat lidi po celém světě.</string>
-  <string name="welcome_copyright_subtext">Vyhněte se dílům chráněným autorským právem, která jste našli na internetu, jako i obrázkům plakátů, přebalů knih apod.</string>
-  <string name="welcome_final_text">Myslíte, že rozumíte?</string>
+    <string name="welcome_final_text">Myslíte, že rozumíte?</string>
   <string name="welcome_final_button_text">Ano!</string>
   <string name="detail_panel_cats_label">Kategorie</string>
   <string name="detail_panel_cats_loading">Načítá se…</string>
   <string name="detail_panel_cats_none">Nevybrány</string>
   <string name="detail_description_empty">Bez popisu</string>
   <string name="detail_license_empty">Neznámá licence</string>
-  <string name="menu_refresh">Obnovit</string>
-  <string name="read_storage_permission_rationale">Požadováno oprávnění ke čtení externího úložiště. Aplikace bez toho nemůže pracovat.</string>
+    <string name="read_storage_permission_rationale">Požadováno oprávnění ke čtení externího úložiště. Aplikace bez toho nemůže pracovat.</string>
   <string name="location_permission_rationale">Volitelně: Umožněte aplikaci, aby získávala aktuální polohu a nabízela na jejím základě kategorie</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Místa v okolí</string>
@@ -152,15 +125,13 @@
   <string name="use_wikidata">Použít Wikidata</string>
   <string name="use_wikidata_summary">(Varování: vypnutí tohoto režimu může vést k velké spotřebě dat)</string>
   <string name="_2fa_code">Kód pro dvoufázové ověření (2FA)</string>
-  <string name="number_of_uploads">Můj limit zobrazených souborů</string>
-  <string name="maximum_limit">Maximum</string>
+    <string name="maximum_limit">Maximum</string>
   <string name="maximum_limit_alert">Není možné zobrazit více než 500</string>
   <string name="set_limit">Počet nahraných souborů, které se zobrazí</string>
   <string name="login_failed_2fa_not_supported">Tato aplikace zatím nepodporuje tzv. dvoufázové ověření.</string>
   <string name="logout_verification">Opravdu se chcete odhlásit?</string>
   <string name="commons_logo">Logo Wikimedia Commons</string>
-  <string name="background_image">Obrázek na pozadí</string>
-  <string name="no_image_found">Nebyl nalezen žádný obrázek</string>
+    <string name="no_image_found">Nebyl nalezen žádný obrázek</string>
   <string name="upload_image">Nahrát obrázek</string>
   <string name="welcome_image_mount_zao">Hora Zao</string>
   <string name="welcome_image_llamas">Lamy</string>
@@ -175,8 +146,7 @@
   <string name="navigation_drawer_open">Otevřít</string>
   <string name="navigation_drawer_close">Zavřít</string>
   <string name="navigation_item_home">Domů</string>
-  <string name="navigation_item_upload">Nahrát</string>
-  <string name="navigation_item_nearby">Poblíž</string>
+    <string name="navigation_item_nearby">Poblíž</string>
   <string name="navigation_item_about">O aplikaci</string>
   <string name="navigation_item_settings">Nastavení</string>
   <string name="navigation_item_feedback">Zpětná vazba</string>

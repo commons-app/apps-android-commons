@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Commons</string>
-  <string name="menu_settings">Einstellungen</string>
-  <string name="username">Benutzername</string>
+    <string name="username">Benutzername</string>
   <string name="password">Passwort</string>
   <string name="login">Anmelden</string>
   <string name="signup">Registrieren</string>
   <string name="logging_in_title">Anmelden</string>
   <string name="logging_in_message">Bitte warten …</string>
   <string name="login_success">Anmeldung erfolgreich!</string>
-  <string name="login_failed">Anmeldung fehlgeschlagen!</string>
-  <string name="upload_failed">Datei nicht gefunden. Bitte versuche es mit einer anderen.</string>
+    <string name="upload_failed">Datei nicht gefunden. Bitte versuche es mit einer anderen.</string>
   <string name="authentication_failed">Authentifizierung fehlgeschlagen!</string>
   <string name="uploading_started">Hochladen gestartet!</string>
-  <string name="upload_completed_notification_title">„%1$s“ hochgeladen!</string>
-  <string name="upload_completed_notification_text">Tippe, um deinen Upload anzusehen</string>
-  <string name="upload_progress_notification_title_start">Hochladen von „%1$s“ starten</string>
+    <string name="upload_progress_notification_title_start">Hochladen von „%1$s“ starten</string>
   <string name="upload_progress_notification_title_in_progress">„%1$s“ hochladen</string>
   <string name="upload_progress_notification_title_finishing">Hochladen von „%1$s“ abschließen</string>
   <string name="upload_failed_notification_title">Hochladen von „%1$s“ fehlgeschlagen</string>
@@ -27,12 +23,9 @@
   <string name="title_activity_contributions">Meine kürzlich hochgeladenen Dateien</string>
   <string name="contribution_state_queued">In der Warteschlange</string>
   <string name="contribution_state_failed">Fehlgeschlagen</string>
-  <string name="contribution_state_in_progress">%1$d%% abgeschlossen</string>
-  <string name="contribution_state_starting">Hochladen</string>
-  <string name="menu_from_gallery">Von Galerie</string>
+    <string name="menu_from_gallery">Von Galerie</string>
   <string name="menu_from_camera">Foto schießen</string>
-  <string name="menu_nearby">In der Nähe</string>
-  <string name="provider_contributions">Meine hochgeladenen Dateien</string>
+    <string name="provider_contributions">Meine hochgeladenen Dateien</string>
   <string name="menu_share">Teilen</string>
   <string name="menu_open_in_browser">Im Browser anzeigen</string>
   <string name="share_title_hint">Titel</string>
@@ -72,14 +65,12 @@
   <string name="categories_activity_title">Kategorien</string>
   <string name="title_activity_settings">Einstellungen</string>
   <string name="title_activity_signup">Registrieren</string>
-  <string name="menu_about">Über</string>
-  <string name="about_license">Die Open-Source-Software wurde veröffentlicht unter der &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache-Lizenz v2&lt;/a&gt;. %1$s und das entsprechende Logo sind Markenzeichen der Wikimedia Foundation und wurden mit Genehmigung der Wikimedia Foundation verwendet. Wir wurden nicht von der Wikimedia Foundation bestätigt oder sind nicht mit ihr verbunden.</string>
+    <string name="about_license">Die Open-Source-Software wurde veröffentlicht unter der &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache-Lizenz v2&lt;/a&gt;. %1$s und das entsprechende Logo sind Markenzeichen der Wikimedia Foundation und wurden mit Genehmigung der Wikimedia Foundation verwendet. Wir wurden nicht von der Wikimedia Foundation bestätigt oder sind nicht mit ihr verbunden.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Quellcode&lt;/a&gt; und &lt;a href=\"https://commons-app.github.io/\"&gt;Website&lt;/a&gt; auf GitHub. Einen neuen &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-Eintrag&lt;/a&gt; für Fehlerberichte und Vorschläge erstellen.</string>
   <string name="about_privacy_policy">&lt;a href=\"//de.wikipedia.org/wiki/Wikipedia:Datenschutz\"&gt;Datenschutzrichtlinie&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Danksagungen&lt;/a&gt;</string>
   <string name="title_activity_about">Über</string>
-  <string name="menu_feedback">Rückmeldung per E-Mail senden</string>
-  <string name="no_email_client">Es ist kein E-Mail-Client installiert</string>
+    <string name="no_email_client">Es ist kein E-Mail-Client installiert</string>
   <string name="provider_categories">Kürzlich verwendete Kategorien</string>
   <string name="waiting_first_sync">Warte auf die erste Synchronisierung …</string>
   <string name="no_uploads_yet">Du hast noch keine Fotos hochgeladen.</string>
@@ -100,21 +91,8 @@
   <string name="license_name_cc_by">Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC-BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC-BY-SA 3.0 (Österreich)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC-BY-SA 3.0 (Deutschland)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC-BY-SA 3.0 (Estland)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC-BY-SA 3.0 (Spanien)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC-BY-SA 3.0 (Kroatien)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC-BY-SA 3.0 (Luxemburg)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC-BY-SA 3.0 (Niederlande)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC-BY-SA 3.0 (Norwegen)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC-BY-SA 3.0 (Polen)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC-BY-SA 3.0 (Rumänien)</string>
-  <string name="license_name_cc_by_3_0">CC-BY 3.0</string>
-  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
-  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
-  <string name="tutorial_1_text">Wikimedia Commons speichert die meisten Bilder, die in Wikipedia verwendet werden.</string>
+    <string name="license_name_cc_by_3_0">CC-BY 3.0</string>
+    <string name="tutorial_1_text">Wikimedia Commons speichert die meisten Bilder, die in Wikipedia verwendet werden.</string>
   <string name="tutorial_1_subtext">Deine Bilder helfen bei der Ausbildung von Menschen auf der ganzen Welt!</string>
   <string name="tutorial_2_text">Bitte lade Bilder hoch, die du völlig selbst aufgenommen oder erstellt hast:</string>
   <string name="tutorial_2_subtext">- Natürliche Objekte (Blumen, Tiere, Berge)\n- Nützliche Objekte (Fahrräder, Bahnhöfe)\n- Berühmte Personen (deinen Bürgermeister, olympische Athleten, die du getroffen hast)</string>
@@ -122,19 +100,14 @@
   <string name="tutorial_3_subtext">- Selfies oder Bilder deiner Freunde\n- Bilder, die du aus dem Internet heruntergeladen hast\n- Screenshots von proprietären Softwareanwendungen</string>
   <string name="tutorial_4_text">Beispiel-Upload:</string>
   <string name="tutorial_4_subtext">- Titel: Opernhaus von Sydney\n- Beschreibung: Opernhaus von Sydney, von der Bucht aus gesehen\n- Kategorien: Opernhaus von Sydney, Opernhaus von Sydney von Westen, Opernhaus von Sydney (Fernansicht)</string>
-  <string name="welcome_wikipedia_text">Teile deine Bilder. Erwecke Wikipedia-Artikel zum Leben!</string>
-  <string name="welcome_wikipedia_subtext">Die Bilder auf Wikipedia kommen von Wikimedia Commons.</string>
-  <string name="welcome_copyright_text">Deine Bilder helfen dabei, Menschen auf der ganzen Welt zu bilden.</string>
-  <string name="welcome_copyright_subtext">Vermeide urheberrechtlich geschütztes Material, das du im Internet gefunden hast wie Bilder von Postern, Buchcovern etc.</string>
-  <string name="welcome_final_text">Verstanden?</string>
+    <string name="welcome_final_text">Verstanden?</string>
   <string name="welcome_final_button_text">Ja!</string>
   <string name="detail_panel_cats_label">Kategorien</string>
   <string name="detail_panel_cats_loading">Lade …</string>
   <string name="detail_panel_cats_none">Keine ausgewählt</string>
   <string name="detail_description_empty">Keine Beschreibung</string>
   <string name="detail_license_empty">Unbekannte Lizenz</string>
-  <string name="menu_refresh">Aktualisieren</string>
-  <string name="read_storage_permission_rationale">Erforderliche Berechtigung: Externen Speicher lesen. Die App funktioniert ohne diese Berechtigung nicht.</string>
+    <string name="read_storage_permission_rationale">Erforderliche Berechtigung: Externen Speicher lesen. Die App funktioniert ohne diese Berechtigung nicht.</string>
   <string name="write_storage_permission_rationale">Erforderliche Berechtigung: Externen Speicher beschreiben. Die App kann ohne dies nicht funktionieren.</string>
   <string name="location_permission_rationale">Optionale Berechtigung: Ruft den aktuellen Standort für Kategorievorschläge ab</string>
   <string name="ok">Okay</string>
@@ -157,15 +130,13 @@
   <string name="use_wikidata">Wikidata verwenden</string>
   <string name="use_wikidata_summary">(Warnung: Die Deaktivierung kann einen hohen Verbrauch an mobilen Daten verursachen)</string>
   <string name="_2fa_code">2FA-Code</string>
-  <string name="number_of_uploads">Meine Grenze für kürzlich hochgeladene Dateien</string>
-  <string name="maximum_limit">Maximale Grenze</string>
+    <string name="maximum_limit">Maximale Grenze</string>
   <string name="maximum_limit_alert">Mehr als 500 Einträge können nicht angezeigt werden</string>
   <string name="set_limit">Grenze für kürzlich hochgeladene Dateien festlegen</string>
   <string name="login_failed_2fa_not_supported">Die Zwei-Faktor-Authentifikation wird derzeit nicht unterstützt.</string>
   <string name="logout_verification">Möchtest du dich wirklich abmelden?</string>
   <string name="commons_logo">Commons-Logo</string>
-  <string name="background_image">Hintergrundbild</string>
-  <string name="mediaimage_failed">Medienbild fehlgeschlagen</string>
+    <string name="mediaimage_failed">Medienbild fehlgeschlagen</string>
   <string name="no_image_found">Kein Bild gefunden</string>
   <string name="upload_image">Bild hochladen</string>
   <string name="welcome_image_mount_zao">Zaō</string>
@@ -181,8 +152,7 @@
   <string name="navigation_drawer_open">Öffnen</string>
   <string name="navigation_drawer_close">Schließen</string>
   <string name="navigation_item_home">Start</string>
-  <string name="navigation_item_upload">Hochladen</string>
-  <string name="navigation_item_nearby">In der Nähe</string>
+    <string name="navigation_item_nearby">In der Nähe</string>
   <string name="navigation_item_about">Über</string>
   <string name="navigation_item_settings">Einstellungen</string>
   <string name="navigation_item_feedback">Rückmeldungen</string>

@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Commons</string>
-  <string name="menu_settings">Beállítások</string>
-  <string name="username">Felhasználónév</string>
+    <string name="username">Felhasználónév</string>
   <string name="password">Jelszó</string>
   <string name="login">Bejelentkezés</string>
   <string name="signup">Regisztráció</string>
   <string name="logging_in_title">Belépés…</string>
   <string name="logging_in_message">Kérlek várj…</string>
   <string name="login_success">Sikeres bejelentkezés</string>
-  <string name="login_failed">A bejelentkezés nem sikerült.</string>
-  <string name="upload_failed">A fájl nem található. Próbálkozz másik fájllal.</string>
+    <string name="upload_failed">A fájl nem található. Próbálkozz másik fájllal.</string>
   <string name="authentication_failed">Sikertelen azonosítás.</string>
   <string name="uploading_started">Feltöltés indul.</string>
-  <string name="upload_completed_notification_title">%1$s feltöltve!</string>
-  <string name="upload_completed_notification_text">Feltöltés megtekintése</string>
-  <string name="upload_progress_notification_title_start">Feltöltés indul: %1$s</string>
+    <string name="upload_progress_notification_title_start">Feltöltés indul: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s feltöltése</string>
   <string name="upload_progress_notification_title_finishing">Feltöltés befejezve: %1$s</string>
   <string name="upload_failed_notification_title">%1$s feltöltése sikertelen</string>
@@ -27,12 +23,9 @@
   <string name="title_activity_contributions">Legutóbbi feltöltéseim</string>
   <string name="contribution_state_queued">Várólistán</string>
   <string name="contribution_state_failed">Sikertelen.</string>
-  <string name="contribution_state_in_progress">%1$d%% kész</string>
-  <string name="contribution_state_starting">Feltöltés</string>
-  <string name="menu_from_gallery">A galériából</string>
+    <string name="menu_from_gallery">A galériából</string>
   <string name="menu_from_camera">Fényképezés</string>
-  <string name="menu_nearby">Közelben</string>
-  <string name="provider_contributions">Feltöltéseim</string>
+    <string name="provider_contributions">Feltöltéseim</string>
   <string name="menu_share">Megosztás</string>
   <string name="menu_open_in_browser">Megtekintés böngészőben</string>
   <string name="share_title_hint">Cím</string>
@@ -72,14 +65,12 @@
   <string name="categories_activity_title">Kategóriák</string>
   <string name="title_activity_settings">Beállítások</string>
   <string name="title_activity_signup">Regisztráció</string>
-  <string name="menu_about">Névjegy</string>
-  <string name="about_license" fuzzy="true">Nyílt forráskódú szoftver &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; alatt kiadva. A Wikimédia Commons és a logója a Wikimédia Alapítvány védjegyei, és a Wikimédia Alapítvány engedélyével vannak használva. Az alkalmazás fejlesztői nincsenek semmilyen kapcsolatban Wikimédia Alapítvánnyal.</string>
+    <string name="about_license" fuzzy="true">Nyílt forráskódú szoftver &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; alatt kiadva. A Wikimédia Commons és a logója a Wikimédia Alapítvány védjegyei, és a Wikimédia Alapítvány engedélyével vannak használva. Az alkalmazás fejlesztői nincsenek semmilyen kapcsolatban Wikimédia Alapítvánnyal.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Forráskód&lt;/a&gt; és &lt;a href=\"https://commons-app.github.io/\"&gt;weboldal&lt;/a&gt; a GitHubon. Nyiss egy új &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-problémát&lt;/a&gt; hibabejelentéssel vagy fejlesztési javaslattal.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Adatvédelmi_irányelv\"&gt;Adatvédelmi irányelvek&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Köszönetnyilvánítás&lt;/a&gt;</string>
   <string name="title_activity_about">Névjegy</string>
-  <string name="menu_feedback">Visszajelzés küldése (e-mailben)</string>
-  <string name="no_email_client">Nincs telepített levelezőprogram</string>
+    <string name="no_email_client">Nincs telepített levelezőprogram</string>
   <string name="provider_categories">Legutóbb használt kategóriák</string>
   <string name="waiting_first_sync">Várakozás az első szinkronizálásra…</string>
   <string name="no_uploads_yet">Még nem töltöttél fel fotókat.</string>
@@ -99,21 +90,8 @@
   <string name="license_name_cc_by">Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC-BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Ausztria)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (Németország)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Észtország)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Spanyolország)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Horvátország)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxembourg)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Hollandia)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norvégia)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Lengyelország)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Románia)</string>
-  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
-  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
-  <string name="tutorial_1_text">A Wikimédia Commons tárolja a Wikipédián használt képek többségét.</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="tutorial_1_text">A Wikimédia Commons tárolja a Wikipédián használt képek többségét.</string>
   <string name="tutorial_1_subtext">A képeid segítik az ismeretterjesztést az egész világon!</string>
   <string name="tutorial_2_text">Kérjük, tölts fel képeket, amelyeket teljes mértékben te fotóztál vagy készítettél:</string>
   <string name="tutorial_2_subtext">- Természeti tárgyak (virágok, állatok, hegyek)\n- Hasznos tárgyak (kerékpárok, vasútállomások)\n- Híres emberek (a polgármestered, olimpikonok, akikkel találkoztál)</string>
@@ -121,19 +99,14 @@
   <string name="tutorial_3_subtext">- Szelfiket vagy képeket a barátaidról\n- Internetröl letöltött képeket\n- Kereskedelmi alkalmazások képernyőképeit</string>
   <string name="tutorial_4_text">Példa feltöltés:</string>
   <string name="tutorial_4_subtext">- Cím: Sydney-i Operaház\n- Leírás: A Sydney-i Operaház az öböl túlpartjáról\n- Kategóriák: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
-  <string name="welcome_wikipedia_text">Tedd közzé a képeidet! Segíts életre kelteni a Wikipédia-szócikkeket!</string>
-  <string name="welcome_wikipedia_subtext">A Wikipédián található képek a Wikimédia Commonsből származnak.</string>
-  <string name="welcome_copyright_text">A képeid segítenek a világ minden táján élő emberek oktatásában.</string>
-  <string name="welcome_copyright_subtext">Kerüld az internetről származó szerzői joggal védett anyagokat, valamint a posztereket, könyvborítókat stb.</string>
-  <string name="welcome_final_text">Megértetted?</string>
+    <string name="welcome_final_text">Megértetted?</string>
   <string name="welcome_final_button_text">Igen!</string>
   <string name="detail_panel_cats_label">Kategóriák</string>
   <string name="detail_panel_cats_loading">Betöltés…</string>
   <string name="detail_panel_cats_none">Nincs kijelölés</string>
   <string name="detail_description_empty">Nincs leírás</string>
   <string name="detail_license_empty">Ismeretlen licenc</string>
-  <string name="menu_refresh">Frissítés</string>
-  <string name="read_storage_permission_rationale">Szükséges engedély: Külső tárhely olvasása. Az alkalmazás nem működik enélkül.</string>
+    <string name="read_storage_permission_rationale">Szükséges engedély: Külső tárhely olvasása. Az alkalmazás nem működik enélkül.</string>
   <string name="location_permission_rationale">Lehetséges engedély: Jelenlegi hely megszerzése, a kategóriajavaslatok lehetőségéért.</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Közeli helyek</string>
@@ -152,23 +125,20 @@
   <string name="use_wikidata">Wikidata használata</string>
   <string name="use_wikidata_summary">(Figyelmeztetés: a kikapcsolása nagy mobiladat-forgalmat eredményezhet)</string>
   <string name="_2fa_code">2LH kód</string>
-  <string name="number_of_uploads">Legutóbbi feltöltéseim korlátja</string>
-  <string name="maximum_limit">Legnagyobb korlát</string>
+    <string name="maximum_limit">Legnagyobb korlát</string>
   <string name="maximum_limit_alert">Nem lehet 500-nál többet megjeleníteni</string>
   <string name="set_limit">Legutóbbi feltöltési korlát beállítása</string>
   <string name="login_failed_2fa_not_supported">A kétlépcsős hitelesítés jelenleg nem támogatott.</string>
   <string name="logout_verification">Kilépsz?</string>
   <string name="commons_logo">Commons Logo</string>
-  <string name="background_image">Háttérkép</string>
-  <string name="no_image_found">Nem található kép</string>
+    <string name="no_image_found">Nem található kép</string>
   <string name="upload_image">Kép feltöltése</string>
   <string name="welcome_image_sydney_opera_house">Sydney Operaház</string>
   <string name="cancel">Mégse</string>
   <string name="navigation_drawer_open">Megnyitás</string>
   <string name="navigation_drawer_close">Bezárás</string>
   <string name="navigation_item_home">Kezdőlap</string>
-  <string name="navigation_item_upload">Feltöltés</string>
-  <string name="navigation_item_nearby">Közelben</string>
+    <string name="navigation_item_nearby">Közelben</string>
   <string name="navigation_item_about">Névjegy</string>
   <string name="navigation_item_settings">Beállítások</string>
   <string name="navigation_item_feedback">Visszajelzés</string>

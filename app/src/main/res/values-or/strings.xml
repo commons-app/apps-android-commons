@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name" fuzzy="true">ଉଇକିମିଡ଼ିଆ କମନ୍ସ</string>
-  <string name="menu_settings">ସଂରଚନା</string>
-  <string name="username">ସଭ୍ୟ ନାମ</string>
+    <string name="username">ସଭ୍ୟ ନାମ</string>
   <string name="password">ପାସୱାର୍ଡ଼</string>
   <string name="login">ଲଗ-ଇନ (Log in)</string>
   <string name="logging_in_title">ଲଗ ଇନ କରୁଛି…</string>
   <string name="logging_in_message">ଟିକେ ଅପେକ୍ଷା କରନ୍ତୁ…</string>
   <string name="login_success">ଠିକଭାବେ ଲଗଇନ ହେଲା!</string>
-  <string name="login_failed">ଲଗଇନ ହେଲାନାହିଁ!</string>
-  <string name="authentication_failed">ନିଶ୍ଚିତ କରିବାରେ ବିଫଳ!</string>
+    <string name="authentication_failed">ନିଶ୍ଚିତ କରିବାରେ ବିଫଳ!</string>
   <string name="uploading_started">ଅପଲୋଡ଼ ଆରମ୍ଭ ହେଲା!</string>
-  <string name="upload_completed_notification_title">%1$s ଅପଲୋଡ଼ ହୋଇଗଲା!</string>
-  <string name="upload_completed_notification_text">ନିଜର ଅପଲୋଡ଼ ଦେଖିବା ନିମନ୍ତେ ଟ୍ୟାପ କରନ୍ତୁ</string>
-  <string name="upload_progress_notification_title_start">%1$sତମ ଅପଲୋଡ଼ ଆରମ୍ଭ କରୁଛି</string>
+    <string name="upload_progress_notification_title_start">%1$sତମ ଅପଲୋଡ଼ ଆରମ୍ଭ କରୁଛି</string>
   <string name="upload_progress_notification_title_in_progress">%1$s ଅପଲୋଡ଼ ହୋଇଗଲା</string>
   <string name="upload_progress_notification_title_finishing">%1$s ଅପଲୋଡ଼ ସରୁଛି</string>
   <string name="upload_failed_notification_title">%1$s ଅପଲୋଡ଼ କରିବାରେ ବିଫଳ ହେଲୁ</string>
@@ -21,9 +17,7 @@
   <string name="title_activity_contributions" fuzzy="true">ମୋ ଅପଲୋଡ଼ମାନ</string>
   <string name="contribution_state_queued">ଧାଡ଼ିରେ ଲାଗିଛି</string>
   <string name="contribution_state_failed">ବିଫଳ ହେଲା</string>
-  <string name="contribution_state_in_progress">%1$d%% ସରିଲା</string>
-  <string name="contribution_state_starting">ଅପଲୋଡ଼ ହେଉଛି</string>
-  <string name="menu_from_gallery">ଗ୍ୟାଲେରୀରୁ</string>
+    <string name="menu_from_gallery">ଗ୍ୟାଲେରୀରୁ</string>
   <string name="menu_from_camera">ଫଟୋଟିଏ ଉଠାନ୍ତୁ</string>
   <string name="provider_contributions">ମୋ ଅପଲୋଡ଼</string>
   <string name="menu_share">ସଭିଙ୍କୁ ଜଣାନ୍ତୁ</string>
@@ -46,13 +40,11 @@
   <string name="categories_skip_explanation">ଶ୍ରେଣୀମାନ ଯୋଡ଼ିବା ପାଇଁ ଟାଇପ କରନ୍ତୁ ।\nଏହି ସୋପାନଟି ବାଦ ଦେବା ପାଇଁ ମେସେଜଟି ଉପରେ ଟ୍ୟାପ କରନ୍ତୁ (କିମ୍ବା ପଛକୁ ଫେରନ୍ତୁ) ।</string>
   <string name="categories_activity_title">ଶ୍ରେଣୀସମୂହ</string>
   <string name="title_activity_settings">ସଂରଚନା</string>
-  <string name="menu_about">ବାବଦରେ</string>
-  <string name="about_license" fuzzy="true">ଓପନ ସୋର୍ସ ସଫ୍ଟୱାର &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;ରେ ବିତରିତ</string>
+    <string name="about_license" fuzzy="true">ଓପନ ସୋର୍ସ ସଫ୍ଟୱାର &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;ରେ ବିତରିତ</string>
   <string name="about_improve" fuzzy="true">ମୂଳସବୁ &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;ରେ ରହିଛି । ଅସୁବିଧାସବୁ &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;ରେ ଜଣାଇବେ ।</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;ଗୋପନୀୟତା ନୀତି&lt;/a&gt;</string>
   <string name="title_activity_about">ବାବଦରେ</string>
-  <string name="menu_feedback">ଇମେଲରେ ମତାମତ ପଠାଇବେ</string>
-  <string name="provider_categories">ନିକଟରେ ବ୍ୟବହୃତ ଶ୍ରେଣୀମାନ</string>
+    <string name="provider_categories">ନିକଟରେ ବ୍ୟବହୃତ ଶ୍ରେଣୀମାନ</string>
   <string name="waiting_first_sync">ପ୍ରଥମ ଥର ମିଳିତ ହେବା ପାଇଁ ଅପେକ୍ଷାରତ…</string>
   <string name="no_uploads_yet">ଆପଣ ଏ ଯାଏ ଗୋଟିଏ ବି ଫଟୋ ଅପଲୋଡ଼ କରିନାହାନ୍ତି ।</string>
   <string name="menu_retry_upload">ଆଉଥରେ ଚେଷ୍ଟା କରନ୍ତୁ</string>
@@ -64,28 +56,12 @@
   <string name="license_name_cc_by" fuzzy="true">CC Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (ଅଷ୍ଟ୍ରିଆ)</string>
-  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (ଜର୍ମାନୀ)</string>
-  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (ଏଷ୍ଟୋନିଆ)</string>
-  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (ସ୍ପେନ)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (କ୍ରୋଏସିଆ)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (ଲକ୍ସେମବର୍ଗ)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (ନେଦରଲାଣ୍ଡସ)</string>
-  <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (ନରୱେ)</string>
-  <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (ପୋଲାଣ୍ଡ)</string>
-  <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (ରୋମାନିଆ)</string>
-  <string name="license_name_cc_by_3_0">CC BY 3.0</string>
-  <string name="license_name_cc_zero">CC Zero</string>
-  <string name="welcome_wikipedia_text">ନିଜର ଛବିସବୁ ଅପଲୋଡ଼ କରନ୍ତୁ । ଉଇକିପିଡ଼ିଆ ପ୍ରସଙ୍ଗରେ ଜୀବନ ଆଣିବାରେ ସହଯୋଗ କରନ୍ତୁ ।</string>
-  <string name="welcome_wikipedia_subtext">ଉଇକିପିଡ଼ିଆର ଛବିସବୁ ଉଇକିମିଡ଼ିଆ କମନ୍ସରୁ ଆସିଥାଏ ।</string>
-  <string name="welcome_copyright_text">ଆପଣଙ୍କ ଛବି ଜଗତର ଅନେକଙ୍କ ଶିକ୍ଷାଲାଭରେ ସାହାଯ୍ୟ କରିଥାଏ ।</string>
-  <string name="welcome_copyright_subtext">ଇଣ୍ଟରନେଟରୁ ଡାଉନଲୋଡ଼ କରି ଛବିସବୁ, ପୋଷ୍ଟର, ବହି ମଲାଟର ଛବି ଆଦି ଅପଲୋଡ଼ କରନ୍ତୁ ନାହିଁ ।</string>
-  <string name="welcome_final_text">ବୁଝିପାରିଲେ କି?</string>
+    <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+    <string name="welcome_final_text">ବୁଝିପାରିଲେ କି?</string>
   <string name="welcome_final_button_text">ହଁ!</string>
   <string name="detail_panel_cats_label">ଶ୍ରେଣୀ</string>
   <string name="detail_panel_cats_loading">ଖୋଲୁଛି…</string>
   <string name="detail_panel_cats_none">ଗୋଟିଏ ମଧ୍ୟ ବଛା ଯାଇନାହିଁ</string>
   <string name="detail_description_empty">ବିବରଣୀ ନାହିଁ</string>
   <string name="detail_license_empty">ଅଜଣା ଲାଇସେନ୍ସ</string>
-  <string name="menu_refresh">ରିଫ୍ରେସ</string>
 </resources>
