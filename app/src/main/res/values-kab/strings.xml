@@ -73,9 +73,9 @@
   <string name="title_activity_settings">Iɣewwaṛen</string>
   <string name="title_activity_signup">Jerred</string>
   <string name="menu_about">Ɣef</string>
-  <string name="about_license">Iseɣzanen n uɣbalu yeldin ffɣen-d  ddaw n &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;turagt Apache v2&lt;/a&gt;. %1$s akked ulugu-is d ticraḍ yersen n tesbeddit Wikimedia i yettwaseqdacen s tsiregt n tesbeddit Wikimedia. Ur nettwasireg ara sɣuṛ tasbeddit Wikimedia udiɣ ur nttekka ra ɣur-s.</string>
+  <string name="about_license" fuzzy="true">Iseɣzanen n uɣbalu yeldin ffɣen-d  ddaw n &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;turagt Apache v2&lt;/a&gt;. %1$s akked ulugu-is d ticraḍ yersen n tesbeddit Wikimedia i yettwaseqdacen s tsiregt n tesbeddit Wikimedia. Ur nettwasireg ara sɣuṛ tasbeddit Wikimedia udiɣ ur nttekka ra ɣur-s.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Iɣbula&lt;/a&gt; akked &lt;a href=\"https://commons-app.github.io/\"&gt;usmel web&lt;/a&gt; di GitHub. Rnu &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;tummla GitHub&lt;/a&gt; tamaynut akken ad temmleḍ ibugen neɣ ad d-mudded isumar.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Tasertit n tbaḍnit&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Tasertit n tbaḍnit&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Ismaden&lt;/a&gt;</string>
   <string name="title_activity_about">Ɣef</string>
   <string name="menu_feedback">Azen tikti (s yimayl)</string>

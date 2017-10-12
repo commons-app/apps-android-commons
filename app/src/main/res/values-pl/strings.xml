@@ -75,7 +75,7 @@
   <string name="menu_about">O aplikacji</string>
   <string name="about_license" fuzzy="true">Oprogramowanie Open Source, wydane na licencji &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Wikimedia Commons i jego logo są znakami towarowymi Wikimedia Foundation i są wykorzystywane za zgodą Wikimedia Foundation. Nie jesteśmy powiązani z Wikimedia Foundation.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kod źródłowy&lt;/a&gt; oraz &lt;a href=\"https://commons-app.github.io/\"&gt;strona internetowa&lt;/a&gt; na GitHub. Aby zgłosić błąd lub sugestię, utwórz nowe &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;zgłoszenie na GitHub&lt;/a&gt;.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Polityka prywatności&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Polityka prywatności&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Twórcy&lt;/a&gt;</string>
   <string name="title_activity_about">O aplikacji</string>
   <string name="menu_feedback">Wyślij opinię (przez e-mail)</string>

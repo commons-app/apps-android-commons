@@ -73,9 +73,9 @@
   <string name="title_activity_settings">Einstellungen</string>
   <string name="title_activity_signup">Registrieren</string>
   <string name="menu_about">Über</string>
-  <string name="about_license">Die Open-Source-Software wurde veröffentlicht unter der &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache-Lizenz v2&lt;/a&gt;. %1$s und das entsprechende Logo sind Markenzeichen der Wikimedia Foundation und wurden mit Genehmigung der Wikimedia Foundation verwendet. Wir wurden nicht von der Wikimedia Foundation bestätigt oder sind nicht mit ihr verbunden.</string>
+  <string name="about_license">Die Wikimedia-Commons-App ist eine Open-Source-App, entwickelt und gewartet von Freiwilligen der Wikimedia-Gemeinschaft. Die Wikimedia Foundation ist nicht bei der Erstellung, Entwicklung oder Wartung der App beteiligt.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Quellcode&lt;/a&gt; und &lt;a href=\"https://commons-app.github.io/\"&gt;Website&lt;/a&gt; auf GitHub. Einen neuen &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-Eintrag&lt;/a&gt; für Fehlerberichte und Vorschläge erstellen.</string>
-  <string name="about_privacy_policy">&lt;a href=\"//de.wikipedia.org/wiki/Wikipedia:Datenschutz\"&gt;Datenschutzrichtlinie&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Datenschutzrichtlinie&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Danksagungen&lt;/a&gt;</string>
   <string name="title_activity_about">Über</string>
   <string name="menu_feedback">Rückmeldung per E-Mail senden</string>
@@ -195,6 +195,7 @@
   <string name="error_while_cache">Fehler beim Zwischenspeichern der Bilder</string>
   <string name="title_info">Ein eindeutiger beschreibender Titel für die Datei, der als Dateiname dient. Du kannst Klartext mit Leerzeichen verwenden. Gib nicht die Dateierweiterung mit an.</string>
   <string name="description_info">Bitte beschreibe das Medium so gut wie möglich: Wo wurde es aufgenommen? Was zeigt es? Was ist der Kontext? Bitte beschreibe die Objekte oder Personen. Zeige Informationen auf, die nicht einfach erraten werden können, zum Beispiel die Tageszeit, falls es eine Landschaft ist. Falls das Medium etwas Ungewöhnliches zeigt, erkläre bitte, was es ungewöhnlich macht.</string>
+  <string name="give_permission">Berechtigung geben</string>
   <string name="use_external_storage">Externen Speicher verwenden</string>
   <string name="use_external_storage_summary">Mit der In-App-Kamera aufgenommene Bilder auf deinem Gerät speichern</string>
 </resources>

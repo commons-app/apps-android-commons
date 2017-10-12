@@ -73,9 +73,9 @@
   <string name="title_activity_settings">Indstillinger</string>
   <string name="title_activity_signup">Opret konto</string>
   <string name="menu_about">Om</string>
-  <string name="about_license">Open Source-programmer udgivet under &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. %1$s og dets logo er varemærker for Wikimedia Foundation og bruges med tilladelse fra Wikimedia Foundation. Vi er hverken støttet af eller forbundet med Wikimedia Foundation.</string>
+  <string name="about_license" fuzzy="true">Open Source-programmer udgivet under &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. %1$s og dets logo er varemærker for Wikimedia Foundation og bruges med tilladelse fra Wikimedia Foundation. Vi er hverken støttet af eller forbundet med Wikimedia Foundation.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kilde&lt;/a&gt; og &lt;a href=\"https://commons-app.github.io/\"&gt;hjemmeside&lt;/a&gt; på GitHub. Opret en ny &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-sag&lt;/a&gt; for fejlrapporter og forslag.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privacy policy&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privacy policy&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Bidragsydere&lt;/a&gt;</string>
   <string name="title_activity_about">Om</string>
   <string name="menu_feedback">Send tilbagemelding (med e-mail)</string>

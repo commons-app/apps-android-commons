@@ -48,7 +48,7 @@
   <string name="menu_about">Wo</string>
   <string name="about_license" fuzzy="true">Software zjawneho žórła wozjewjena pod licencu &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
   <string name="about_improve" fuzzy="true">Žórłowy kod na &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Zdźělenja wo programowych zmylkach na &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
-  <string name="about_privacy_policy">&lt;a href=\"//de.wikipedia.org/wiki/Wikipedia:Datenschutz\"&gt;Prawidła priwatnosće&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"//de.wikipedia.org/wiki/Wikipedia:Datenschutz\"&gt;Prawidła priwatnosće&lt;/a&gt;</string>
   <string name="title_activity_about">Wo</string>
   <string name="menu_feedback">Komentar pósłać (přez e-mejl)</string>
   <string name="provider_categories">Njedawno wužite kategorije</string>

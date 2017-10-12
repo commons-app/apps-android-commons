@@ -73,9 +73,9 @@
   <string name="title_activity_settings">Ajustes</string>
   <string name="title_activity_signup">Regístrate</string>
   <string name="menu_about">Acerca de</string>
-  <string name="about_license">Programa de código abierto publicado bajo la &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Licencia Apache ver. 2&lt;/a&gt;. %1$s y su logotipo son marcas registradas de la Fundación Wikimedia y se utilizan con su permiso. No hemos sido acreditados por la Fundación Wikimedia ni estamos afiliados con ella.</string>
+  <string name="about_license" fuzzy="true">Programa de código abierto publicado bajo la &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Licencia Apache ver. 2&lt;/a&gt;. %1$s y su logotipo son marcas registradas de la Fundación Wikimedia y se utilizan con su permiso. No hemos sido acreditados por la Fundación Wikimedia ni estamos afiliados con ella.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Código fuente&lt;/a&gt; y &lt;a href=\"https://commons-app.github.io/\"&gt;sitio web&lt;/a&gt; en GitHub. Crea &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;incidencias&lt;/a&gt; para informar de problemas y sugerencias.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Normativa de privacidad&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Normativa de privacidad&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Créditos&lt;/a&gt;</string>
   <string name="title_activity_about">Acerca de</string>
   <string name="menu_feedback">Enviar comentarios (por correo)</string>

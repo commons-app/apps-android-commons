@@ -77,9 +77,9 @@
   <string name="title_activity_settings">Настройки</string>
   <string name="title_activity_signup">Зарегистрироваться</string>
   <string name="menu_about">О приложении</string>
-  <string name="about_license">Приложение с открытым исходным кодом, выпущено по лицензии &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. %1$s и его логотип являются товарными знаками Фонда Викимедиа и используются с разрешения Фонда Викимедиа. Мы не поддерживаемся и не связаны с Фондом Викимедиа.</string>
+  <string name="about_license" fuzzy="true">Приложение с открытым исходным кодом, выпущено по лицензии &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. %1$s и его логотип являются товарными знаками Фонда Викимедиа и используются с разрешения Фонда Викимедиа. Мы не поддерживаемся и не связаны с Фондом Викимедиа.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Исходный код&lt;/a&gt; и &lt;a href=\"https://commons-app.github.io/\"&gt;сайт&lt;/a&gt; на GitHub. Создайте новый &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;запрос на GitHub&lt;/a&gt;, чтоб сообщить об ошибке или внести предложение.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy/ru\"&gt;Политика конфиденциальности&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy/ru\"&gt;Политика конфиденциальности&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Благодарности&lt;/a&gt;</string>
   <string name="title_activity_about">О приложении</string>
   <string name="menu_feedback">Отправить отзыв (по эл. почте)</string>
