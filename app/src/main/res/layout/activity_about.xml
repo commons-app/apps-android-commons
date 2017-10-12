@@ -27,7 +27,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_launcher"
+                android:src="@drawable/ic_launcher_alt"
                 android:contentDescription= "@string/commons_logo"
                 />
 
