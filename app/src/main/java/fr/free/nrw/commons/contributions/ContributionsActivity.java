@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.contributions;
 
 import android.content.ComponentName;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
@@ -38,13 +37,17 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-public  class       ContributionsActivity
-        extends     AuthenticatedActivity
-        implements  LoaderManager.LoaderCallbacks<Cursor>,
-                    AdapterView.OnItemClickListener,
-                    MediaDetailPagerFragment.MediaDetailProvider,
-                    FragmentManager.OnBackStackChangedListener,
-                    ContributionsListFragment.SourceRefresher {
+import static android.content.ContentResolver.requestSync;
+import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
+import static fr.free.nrw.commons.contributions.Contribution.Table.ALL_FIELDS;
+import static fr.free.nrw.commons.contributions.ContributionsContentProvider.AUTHORITY;
+import static fr.free.nrw.commons.contributions.ContributionsContentProvider.BASE_URI;
+import static fr.free.nrw.commons.settings.Prefs.UPLOADS_SHOWING;
+
+public class ContributionsActivity extends AuthenticatedActivity
+        implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener,
+        MediaDetailPagerFragment.MediaDetailProvider, FragmentManager.OnBackStackChangedListener,
+        ContributionsListFragment.SourceRefresher {
 
     private Cursor allContributions;
     private ContributionsListFragment contributionsList;
@@ -63,14 +66,18 @@ public  class       ContributionsActivity
 
         This is why Contribution.STATE_COMPLETED is -1.
      */
-    private String CONTRIBUTION_SORT = Contribution.Table.COLUMN_STATE + " DESC, " + Contribution.Table.COLUMN_UPLOADED + " DESC , (" + Contribution.Table.COLUMN_TIMESTAMP + " * " + Contribution.Table.COLUMN_STATE + ")";
+    private String CONTRIBUTION_SORT = Contribution.Table.COLUMN_STATE + " DESC, "
+            + Contribution.Table.COLUMN_UPLOADED + " DESC , ("
+            + Contribution.Table.COLUMN_TIMESTAMP + " * "
+            + Contribution.Table.COLUMN_STATE + ")";
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     private ServiceConnection uploadServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder binder) {
-            uploadService = (UploadService) ((HandlerService.HandlerServiceLocalBinder)binder).getService();
+            uploadService = (UploadService) ((HandlerService.HandlerServiceLocalBinder) binder)
+                    .getService();
             isUploadServiceConnected = true;
         }
 
@@ -86,7 +93,7 @@ public  class       ContributionsActivity
         compositeDisposable.clear();
         getSupportFragmentManager().removeOnBackStackChangedListener(this);
         super.onDestroy();
-        if(isUploadServiceConnected) {
+        if (isUploadServiceConnected) {
             unbindService(uploadServiceConnection);
         }
     }
@@ -96,9 +103,9 @@ public  class       ContributionsActivity
         super.onResume();
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         boolean isSettingsChanged =
-                sharedPreferences.getBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED,false);
+                sharedPreferences.getBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, false);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED,false);
+        editor.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, false);
         editor.apply();
         if (isSettingsChanged) {
             refreshSource();
@@ -107,14 +114,16 @@ public  class       ContributionsActivity
 
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
-        // Do a sync everytime we get here!
-        ContentResolver.requestSync(CommonsApplication.getInstance().getCurrentAccount(), ContributionsContentProvider.AUTHORITY, new Bundle());
+        // Do a sync every time we get here!
+        CommonsApplication app = ((CommonsApplication) getApplication());
+        requestSync(app.getCurrentAccount(), AUTHORITY, new Bundle());
         Intent uploadServiceIntent = new Intent(this, UploadService.class);
         uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
         startService(uploadServiceIntent);
         bindService(uploadServiceIntent, uploadServiceConnection, Context.BIND_AUTO_CREATE);
 
-        allContributions = getContentResolver().query(ContributionsContentProvider.BASE_URI, Contribution.Table.ALL_FIELDS, CONTRIBUTION_SELECTION, null, CONTRIBUTION_SORT);
+        allContributions = getContentResolver().query(BASE_URI, ALL_FIELDS,
+                CONTRIBUTION_SELECTION, null, CONTRIBUTION_SORT);
 
         getSupportLoaderManager().initLoader(0, null, this);
     }
@@ -127,12 +136,13 @@ public  class       ContributionsActivity
 
         // Activity can call methods in the fragment by acquiring a
         // reference to the Fragment from FragmentManager, using findFragmentById()
-        contributionsList = (ContributionsListFragment)getSupportFragmentManager()
+        FragmentManager supportFragmentManager = getSupportFragmentManager();
+        contributionsList = (ContributionsListFragment) supportFragmentManager
                 .findFragmentById(R.id.contributionsListFragment);
 
-        getSupportFragmentManager().addOnBackStackChangedListener(this);
+        supportFragmentManager.addOnBackStackChangedListener(this);
         if (savedInstanceState != null) {
-            mediaDetails = (MediaDetailPagerFragment)getSupportFragmentManager()
+            mediaDetails = (MediaDetailPagerFragment) supportFragmentManager
                     .findFragmentById(R.id.contributionsFragmentContainer);
         }
         requestAuthToken();
@@ -143,21 +153,25 @@ public  class       ContributionsActivity
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putBoolean("mediaDetailsVisible", (mediaDetails != null && mediaDetails.isVisible()));
+        boolean mediaDetailsVisible = mediaDetails != null && mediaDetails.isVisible();
+        outState.putBoolean("mediaDetailsVisible", mediaDetailsVisible);
     }
 
-    /** Replace whatever is in the current contributionsFragmentContainer view with mediaDetailPagerFragment,
-    /   and preserve previous state in back stack.
-    /   Called when user selects a contribution. */
+    /**
+     * Replace whatever is in the current contributionsFragmentContainer view with
+     * mediaDetailPagerFragment, and preserve previous state in back stack.
+     * Called when user selects a contribution.
+     */
     private void showDetail(int i) {
-        if(mediaDetails == null ||!mediaDetails.isVisible()) {
+        if (mediaDetails == null || !mediaDetails.isVisible()) {
             mediaDetails = new MediaDetailPagerFragment();
-            this.getSupportFragmentManager()
+            FragmentManager supportFragmentManager = getSupportFragmentManager();
+            supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.contributionsFragmentContainer, mediaDetails)
                     .addToBackStack(null)
                     .commit();
-            this.getSupportFragmentManager().executePendingTransactions();
+            supportFragmentManager.executePendingTransactions();
         }
         mediaDetails.showImage(i);
     }
@@ -165,7 +179,7 @@ public  class       ContributionsActivity
     public void retryUpload(int i) {
         allContributions.moveToPosition(i);
         Contribution c = Contribution.fromCursor(allContributions);
-        if(c.getState() == Contribution.STATE_FAILED) {
+        if (c.getState() == STATE_FAILED) {
             uploadService.queue(UploadService.ACTION_UPLOAD_FILE, c);
             Timber.d("Restarting for %s", c.toContentValues());
         } else {
@@ -176,9 +190,9 @@ public  class       ContributionsActivity
     public void deleteUpload(int i) {
         allContributions.moveToPosition(i);
         Contribution c = Contribution.fromCursor(allContributions);
-        if(c.getState() == Contribution.STATE_FAILED) {
+        if (c.getState() == STATE_FAILED) {
             Timber.d("Deleting failed contrib %s", c.toContentValues());
-            c.setContentProviderClient(getContentResolver().acquireContentProviderClient(ContributionsContentProvider.AUTHORITY));
+            c.setContentProviderClient(getContentResolver().acquireContentProviderClient(AUTHORITY));
             c.delete();
         } else {
             Timber.d("Skipping deletion for non-failed contrib %s", c.toContentValues());
@@ -187,9 +201,9 @@ public  class       ContributionsActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case android.R.id.home:
-                if(mediaDetails.isVisible()) {
+                if (mediaDetails.isVisible()) {
                     getSupportFragmentManager().popBackStack();
                 }
                 return true;
@@ -215,21 +229,20 @@ public  class       ContributionsActivity
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        SharedPreferences sharedPref =
-                PreferenceManager.getDefaultSharedPreferences(this);
-        int uploads = sharedPref.getInt(Prefs.UPLOADS_SHOWING, 100);
-        return new CursorLoader(this, ContributionsContentProvider.BASE_URI,
-                Contribution.Table.ALL_FIELDS, CONTRIBUTION_SELECTION, null,
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        int uploads = sharedPref.getInt(UPLOADS_SHOWING, 100);
+        return new CursorLoader(this, BASE_URI,
+                ALL_FIELDS, CONTRIBUTION_SELECTION, null,
                 CONTRIBUTION_SORT + "LIMIT " + uploads);
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
-        if(contributionsList.getAdapter() == null) {
-            contributionsList
-                    .setAdapter(new ContributionsListAdapter(getApplicationContext(), cursor, 0));
+        if (contributionsList.getAdapter() == null) {
+            contributionsList.setAdapter(new ContributionsListAdapter(getApplicationContext(),
+                    cursor, 0));
         } else {
-            ((CursorAdapter)contributionsList.getAdapter()).swapCursor(cursor);
+            ((CursorAdapter) contributionsList.getAdapter()).swapCursor(cursor);
         }
 
         setUploadCount();
@@ -249,34 +262,32 @@ public  class       ContributionsActivity
         if (contributionsList.getAdapter() == null) {
             // not yet ready to return data
             return null;
-        } else  {
+        } else {
             return Contribution.fromCursor((Cursor) contributionsList.getAdapter().getItem(i));
         }
     }
 
     @Override
     public int getTotalMediaCount() {
-        if(contributionsList.getAdapter() == null) {
+        if (contributionsList.getAdapter() == null) {
             return 0;
         }
         return contributionsList.getAdapter().getCount();
     }
 
+    @SuppressWarnings("ConstantConditions")
     private void setUploadCount() {
-        CommonsApplication application = CommonsApplication.getInstance();
-
+        CommonsApplication app = ((CommonsApplication) getApplication());
         compositeDisposable.add(
-                CommonsApplication.getInstance().getMWApi()
-                        .getUploadCount(application.getCurrentAccount().name)
+                app.getMWApi()
+                        .getUploadCount(app.getCurrentAccount().name)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
-                                uploadCount ->
-                                        getSupportActionBar().setSubtitle(getResources()
-                                                .getQuantityString(R.plurals.contributions_subtitle,
-                                                        uploadCount,
-                                                        uploadCount)),
-                                throwable -> Timber.e(throwable, "Fetching upload count failed")
+                                uploadCount -> getSupportActionBar().setSubtitle(getResources()
+                                        .getQuantityString(R.plurals.contributions_subtitle,
+                                                uploadCount, uploadCount)),
+                                t -> Timber.e(t, "Fetching upload count failed")
                         )
         );
     }
@@ -332,8 +343,7 @@ public  class       ContributionsActivity
     }
 
     public static void startYourself(Context context) {
-        Intent contributionsIntent = new Intent(context, ContributionsActivity.class);
-        context.startActivity(contributionsIntent);
+        context.startActivity(new Intent(context, ContributionsActivity.class));
     }
 
 }

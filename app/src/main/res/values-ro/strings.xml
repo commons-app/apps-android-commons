@@ -74,7 +74,7 @@
   <string name="menu_about">Despre</string>
   <string name="about_license" fuzzy="true">Software cu sursă deschisă lansat sub &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Licența Apache v2&lt;/a&gt;</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sursa&lt;/a&gt; și &lt;a href=\"https://commons-app.github.io/\"&gt;pagina web&lt;/a&gt; pe GitHub. Deschide un nou &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;ticket pe GitHub&lt;/a&gt; pentru a raporta un bug sau a oferi o sugestie.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politica de confidențialitate&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politica de confidențialitate&lt;/a&gt;</string>
   <string name="title_activity_about">Despre</string>
   <string name="menu_feedback">Trimitere reacții (prin e-mail)</string>
   <string name="provider_categories">Categorii utilizate recent</string>

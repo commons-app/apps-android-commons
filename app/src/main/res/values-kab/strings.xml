@@ -73,9 +73,9 @@
   <string name="title_activity_settings">Iɣewwaṛen</string>
   <string name="title_activity_signup">Jerred</string>
   <string name="menu_about">Ɣef</string>
-  <string name="about_license">Iseɣzanen n uɣbalu yeldin ffɣen-d  ddaw n &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;turagt Apache v2&lt;/a&gt;. %1$s akked ulugu-is d ticraḍ yersen n tesbeddit Wikimedia i yettwaseqdacen s tsiregt n tesbeddit Wikimedia. Ur nettwasireg ara sɣuṛ tasbeddit Wikimedia udiɣ ur nttekka ra ɣur-s.</string>
+  <string name="about_license" fuzzy="true">Iseɣzanen n uɣbalu yeldin ffɣen-d  ddaw n &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;turagt Apache v2&lt;/a&gt;. %1$s akked ulugu-is d ticraḍ yersen n tesbeddit Wikimedia i yettwaseqdacen s tsiregt n tesbeddit Wikimedia. Ur nettwasireg ara sɣuṛ tasbeddit Wikimedia udiɣ ur nttekka ra ɣur-s.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Iɣbula&lt;/a&gt; akked &lt;a href=\"https://commons-app.github.io/\"&gt;usmel web&lt;/a&gt; di GitHub. Rnu &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;tummla GitHub&lt;/a&gt; tamaynut akken ad temmleḍ ibugen neɣ ad d-mudded isumar.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Tasertit n tbaḍnit&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Tasertit n tbaḍnit&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Ismaden&lt;/a&gt;</string>
   <string name="title_activity_about">Ɣef</string>
   <string name="menu_feedback">Azen tikti (s yimayl)</string>
@@ -134,7 +134,8 @@
   <string name="detail_description_empty">Ulac aglam</string>
   <string name="detail_license_empty">Turagt tarussint</string>
   <string name="menu_refresh">Smiren</string>
-  <string name="storage_permission_rationale">Yesra tasiregt: Ɣeṛ asekles azɣaray. Asnas ur yezmir ara ad yeddu s war aya.</string>
+  <string name="read_storage_permission_rationale">Yesra tasiregt: Ɣeṛ asekles azɣaray. Asnas ur yezmir ara ad yeddu s war aya.</string>
+  <string name="write_storage_permission_rationale">Ysera tasiregt: Aru deg usekles azɣaray. Asnas ur yezmir ara ad yeddu s war aya.</string>
   <string name="location_permission_rationale">Tasiregt tafrayant: Awi adig amiran i yisumar n taggayt</string>
   <string name="ok">IH</string>
   <string name="title_activity_nearby">Idigen iqeṛben</string>
@@ -194,4 +195,6 @@
   <string name="error_while_cache">Tuccḍa di tririt n tugniwin ar tuffirt</string>
   <string name="title_info">Azwul n useglem asuf i ufaylu, ara ttwasqedcen d isem n ufaylu. Tzemreḍ ad tesqedceḍ tutlayt fessusen s isekkilen ilmawen. Ur sedday ara asiɣzef n ufaylu</string>
   <string name="description_info">Ma ulac aɣilf, seglem amidya s wayen akk i tzemreḍ: Anida yettwasekles? Acu i d-yemmal? D acu-t usatal-is? Seglem tiɣawsiwin neɣ imdanen. Mudd-d talɣut ur yezmiren ad tettwaf s wudem fessusen, amedya akud n wass ma yella d agama. Ma yella admidya yaskan-d ayen ur nuɣ ara tanumi, ini-d d aci i tyettarran d ayen ifazen.</string>
+  <string name="use_external_storage">Seqdec asekles azɣaray</string>
+  <string name="use_external_storage_summary">Sekles tiwlafin yettwaṭṭfen s tkamirat yellan deg ibenk</string>
 </resources>

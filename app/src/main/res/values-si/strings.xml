@@ -67,7 +67,7 @@
   <string name="title_activity_settings">සැකසුම්</string>
   <string name="title_activity_signup">ලියාපදිංචි වන්න</string>
   <string name="menu_about">පිළිබඳ</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;පෞද්ගලිකත්ව ප්‍රතිපත්තිය&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;පෞද්ගලිකත්ව ප්‍රතිපත්තිය&lt;/a&gt;</string>
   <string name="title_activity_about">පිළිබඳ</string>
   <string name="menu_feedback">අදහස් යවන්න (විද්‍යුත් තැපෑල හරහා)</string>
   <string name="no_email_client">විද්‍යුත් තැපැල් සේවාදායකයා ස්ථාපනය කර නැත</string>

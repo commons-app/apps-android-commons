@@ -36,7 +36,7 @@ public abstract class AuthenticatedActivity extends NavigationBaseActivity {
                 .doOnError(Timber::e)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        this::onAuthCookieAcquired,
+                        this:: onAuthCookieAcquired,
                         throwable -> onAuthFailure());
     }
 
@@ -62,13 +62,13 @@ public abstract class AuthenticatedActivity extends NavigationBaseActivity {
     }
 
     protected void requestAuthToken() {
-        if(authCookie != null) {
+        if (authCookie != null) {
             onAuthCookieAcquired(authCookie);
             return;
         }
         AccountManager accountManager = AccountManager.get(this);
         Account curAccount = ((CommonsApplication)getApplication()).getCurrentAccount();
-        if(curAccount == null) {
+        if (curAccount == null) {
             addAccount(accountManager);
         } else {
             getAuthCookie(curAccount, accountManager);

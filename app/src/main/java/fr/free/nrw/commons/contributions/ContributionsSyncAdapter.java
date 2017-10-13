@@ -23,8 +23,18 @@ import fr.free.nrw.commons.mwapi.LogEventResult;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
+import static android.content.Context.MODE_PRIVATE;
+import static fr.free.nrw.commons.contributions.Contribution.STATE_COMPLETED;
+import static fr.free.nrw.commons.contributions.Contribution.Table.COLUMN_FILENAME;
+import static fr.free.nrw.commons.contributions.ContributionsContentProvider.BASE_URI;
+
 public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
+
+    private static final String[] existsQuery = {COLUMN_FILENAME};
+    private static final String existsSelection = COLUMN_FILENAME + " = ?";
+    private static final ContentValues[] EMPTY = {};
     private static int COMMIT_THRESHOLD = 10;
+
     public ContributionsSyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
     }
@@ -36,39 +46,38 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
         return limit; // FIXME: Parameterize!
     }
 
-    private static final String[] existsQuery = { Contribution.Table.COLUMN_FILENAME };
-    private static final String existsSelection = Contribution.Table.COLUMN_FILENAME + " = ?";
     private boolean fileExists(ContentProviderClient client, String filename) {
         Cursor cursor = null;
         try {
-            cursor = client.query(ContributionsContentProvider.BASE_URI,
+            cursor = client.query(BASE_URI,
                     existsQuery,
                     existsSelection,
-                    new String[] { filename },
+                    new String[]{filename},
                     ""
             );
-            return cursor.getCount() != 0;
+            return cursor != null && cursor.getCount() != 0;
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         } finally {
-            if ( cursor != null ) {
+            if (cursor != null) {
                 cursor.close();
             }
         }
     }
 
     @Override
-    public void onPerformSync(Account account, Bundle bundle, String s, ContentProviderClient contentProviderClient, SyncResult syncResult) {
+    public void onPerformSync(Account account, Bundle bundle, String authority,
+                              ContentProviderClient contentProviderClient, SyncResult syncResult) {
         // This code is fraught with possibilities of race conditions, but lalalalala I can't hear you!
         String user = account.name;
         MediaWikiApi api = CommonsApplication.getInstance().getMWApi();
-        SharedPreferences prefs = this.getContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        SharedPreferences prefs = getContext().getSharedPreferences("prefs", MODE_PRIVATE);
         String lastModified = prefs.getString("lastSyncTimestamp", "");
         Date curTime = new Date();
         LogEventResult result;
         Boolean done = false;
         String queryContinue = null;
-        while(!done) {
+        while (!done) {
 
             try {
                 result = api.logEvents(user, lastModified, queryContinue, getLimit());
@@ -90,19 +99,21 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                     continue;
                 }
                 String filename = image.getFilename();
-                if(fileExists(contentProviderClient, filename)) {
+                if (fileExists(contentProviderClient, filename)) {
                     Timber.d("Skipping %s", filename);
                     continue;
                 }
                 String thumbUrl = Utils.makeThumbBaseUrl(filename);
                 Date dateUpdated = image.getDateUpdated();
-                Contribution contrib = new Contribution(null, thumbUrl, filename, "", -1, dateUpdated, dateUpdated, user, "", "");
-                contrib.setState(Contribution.STATE_COMPLETED);
+                Contribution contrib = new Contribution(null, thumbUrl, filename,
+                        "", -1, dateUpdated, dateUpdated, user,
+                        "", "");
+                contrib.setState(STATE_COMPLETED);
                 imageValues.add(contrib.toContentValues());
 
-                if(imageValues.size() % COMMIT_THRESHOLD == 0) {
+                if (imageValues.size() % COMMIT_THRESHOLD == 0) {
                     try {
-                        contentProviderClient.bulkInsert(ContributionsContentProvider.BASE_URI, imageValues.toArray(new ContentValues[]{}));
+                        contentProviderClient.bulkInsert(BASE_URI, imageValues.toArray(EMPTY));
                     } catch (RemoteException e) {
                         throw new RuntimeException(e);
                     }
@@ -110,20 +121,21 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                 }
             }
 
-            if(imageValues.size() != 0) {
+            if (imageValues.size() != 0) {
                 try {
-                    contentProviderClient.bulkInsert(ContributionsContentProvider.BASE_URI, imageValues.toArray(new ContentValues[]{}));
+                    contentProviderClient.bulkInsert(BASE_URI, imageValues.toArray(EMPTY));
                 } catch (RemoteException e) {
                     throw new RuntimeException(e);
                 }
             }
 
             queryContinue = result.getQueryContinue();
-            if(TextUtils.isEmpty(queryContinue)) {
+            if (TextUtils.isEmpty(queryContinue)) {
                 done = true;
             }
         }
         prefs.edit().putString("lastSyncTimestamp", Utils.toMWDate(curTime)).apply();
         Timber.d("Oh hai, everyone! Look, a kitty!");
     }
+
 }

@@ -34,7 +34,6 @@ import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.NearbyPlaces;
-import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.FileUtils;
 import timber.log.Timber;
 
@@ -148,10 +147,10 @@ public class CommonsApplication extends Application {
      * @return Account|null
      */
     public Account getCurrentAccount() {
-        if(currentAccount == null) {
+        if (currentAccount == null) {
             AccountManager accountManager = AccountManager.get(this);
             Account[] allAccounts = accountManager.getAccountsByType(AccountUtil.ACCOUNT_TYPE);
-            if(allAccounts.length != 0) {
+            if (allAccounts.length != 0) {
                 currentAccount = allAccounts[0];
             }
         }
@@ -162,7 +161,7 @@ public class CommonsApplication extends Application {
         AccountManager accountManager = AccountManager.get(this);
         Account curAccount = getCurrentAccount();
        
-        if(curAccount == null) {
+        if (curAccount == null) {
             return false; // This should never happen
         }
 
@@ -183,7 +182,7 @@ public class CommonsApplication extends Application {
                 pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT);
     }
 
-    public void clearApplicationData(Context context, NavigationBaseActivity.LogoutListener logoutListener) {
+    public void clearApplicationData(Context context, LogoutListener logoutListener) {
         File cacheDirectory = context.getCacheDir();
         File applicationDirectory = new File(cacheDirectory.getParent());
         if (applicationDirectory.exists()) {
@@ -215,10 +214,8 @@ public class CommonsApplication extends Application {
                 setIndex(getIndex() + 1);
 
                 try {
-                    if (accountManagerFuture != null) {
-                        if (accountManagerFuture.getResult()) {
-                            Timber.d("Account removed successfully.");
-                        }
+                    if (accountManagerFuture != null && accountManagerFuture.getResult()) {
+                        Timber.d("Account removed successfully.");
                     }
                 } catch (OperationCanceledException | IOException | AuthenticatorException e) {
                     e.printStackTrace();
@@ -227,11 +224,13 @@ public class CommonsApplication extends Application {
                 if (getIndex() == allAccounts.length) {
                     Timber.d("All accounts have been removed");
                     //TODO: fix preference manager
-                    PreferenceManager.getDefaultSharedPreferences(getInstance()).edit().clear().commit();
+                    PreferenceManager.getDefaultSharedPreferences(getInstance())
+                            .edit().clear().commit();
                     SharedPreferences preferences = context
                             .getSharedPreferences("fr.free.nrw.commons", MODE_PRIVATE);
                     preferences.edit().clear().commit();
-                    context.getSharedPreferences("prefs", Context.MODE_PRIVATE).edit().clear().commit();
+                    context.getSharedPreferences("prefs", Context.MODE_PRIVATE)
+                            .edit().clear().commit();
                     preferences.edit().putBoolean("firstrun", false).apply();
                     updateAllDatabases();
                     currentAccount = null;
@@ -257,5 +256,9 @@ public class CommonsApplication extends Application {
         ModifierSequence.Table.onDelete(db);
         Category.Table.onDelete(db);
         Contribution.Table.onDelete(db);
+    }
+
+    public interface LogoutListener {
+        void onLogoutComplete();
     }
 }

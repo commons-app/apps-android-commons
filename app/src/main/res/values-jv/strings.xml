@@ -72,7 +72,7 @@
   <string name="title_activity_signup">Ndhaftar</string>
   <string name="menu_about">Ngenani</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sumber&lt;/a&gt; lan &lt;a href=\"https://commons-app.github.io/\"&gt;situs jaringan&lt;/a&gt; ing GitHub. Gawé anyar &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;bab GitHub&lt;/a&gt; ngenani lapuran ama lan saran.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Pranatan priangga&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Pranatan priangga&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Krèdhit&lt;/a&gt;</string>
   <string name="title_activity_about">Ngenani</string>
   <string name="menu_feedback">Kirim Pamrayoga (lumantar Layang-Èl)</string>
@@ -119,7 +119,7 @@
   <string name="detail_description_empty">Tanpa katerangan</string>
   <string name="detail_license_empty">Lisènsi ora kaweruhan</string>
   <string name="menu_refresh">Anyarana</string>
-  <string name="storage_permission_rationale">Butuh palilah: Maca panyimpenan njaba. Aplikasi mokal mlaku yèn tanpa iki.</string>
+  <string name="read_storage_permission_rationale">Butuh palilah: Maca panyimpenan njaba. Aplikasi mokal mlaku yèn tanpa iki.</string>
   <string name="location_permission_rationale">Palilah manasuka: Njupuk pernah saiki kanggo saran ing kategori</string>
   <string name="ok">Oké</string>
   <string name="title_activity_nearby">Papan Cedhak Kéné</string>

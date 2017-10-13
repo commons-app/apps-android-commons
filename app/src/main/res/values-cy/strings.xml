@@ -70,7 +70,7 @@
   <string name="menu_about">Amdanom</string>
   <string name="about_license" fuzzy="true">Meddalwedd Cynnwys Agored wedi\'i rhyddhau o dan &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Drwydded Apache v2&lt;/a&gt; Mae logo a nod masnach Comin Wicimedia yn eiddo i Sefydliad Wicimedia ac fe\'u defnyddir gyda chaniatad y Sefydliad hwnnw. Nid ydym ni wedi cael sêl bendith y sefydliad nac yn perthyn iddyn nhw.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Mae\'r codau ffynhonnell ar wefanau&lt;/a&gt; Comin a &lt;a href=\"https://commons-app.github.io/\"&gt;gwefan &lt;/a&gt; GitHub. Gellwch greu &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;Ymholiad Github&lt;/a&gt; os gwelwch byg, neu i awgrymu gwelliannau.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Polisi preifatrwydd&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Polisi preifatrwydd&lt;/a&gt;</string>
   <string name="title_activity_about">Amdanom</string>
   <string name="menu_feedback">Danfonwch Adborth (drwy Ebost)</string>
   <string name="no_email_client">Dim ebost client wedi\'i ganfod</string>

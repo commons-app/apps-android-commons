@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.Single;

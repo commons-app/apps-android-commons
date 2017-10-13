@@ -74,7 +74,7 @@
   <string name="menu_about">পরিচিতি</string>
   <string name="about_license" fuzzy="true">ওপেন সোর্স সফটওয়্যার &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;এ্যাপাচি লাইসেন্স v2&lt;/a&gt; অধীনে প্রকাশিত</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;উৎস&lt;/a&gt; ও &lt;a href=\"https://commons-app.github.io/\"&gt;ওয়েবসাইট&lt;/a&gt; GitHub এ&lt;/a&gt;। কোন সমস্যা ও পরামর্শের জন্য &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;গিটহাব ইস্যু&lt;/a&gt; তৈরি করুন।</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;গোপনীয়তা নীতি&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;গোপনীয়তার নীতি&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;কৃতিত্ব&lt;/a&gt;</string>
   <string name="title_activity_about">পরিচিতি</string>
   <string name="menu_feedback">প্রতিক্রিয়া পাঠান (ইমেইলের মাধ্যমে)</string>
@@ -85,6 +85,7 @@
   <string name="menu_retry_upload">পুনঃচেষ্টা করুন</string>
   <string name="menu_cancel_upload">বাতিল</string>
   <string name="share_license_summary">এই ছবিটি %1$s এর অধীনে লাইসেন্স করা হবে</string>
+  <string name="media_upload_policy">এই চিত্র জমা দেয়ার দ্বারা, আমি ঘোষণা দিচ্ছি যে এটি আমার নিজস্ব কাজ, এতে কপিরাইটযুক্ত উপাদান নেই বা এটই সেলফি নয়, এবং &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/bn\"&gt;উইকিমিডিয়া কমন্স নীতি&lt;/a&gt; অনুসরণ করে।</string>
   <string name="menu_download">ডাউনলোড</string>
   <string name="preference_license">লাইসেন্স</string>
   <string name="use_previous">পূর্ববর্তী শিরোনাম/বিবরণ ব্যবহার করুন</string>
@@ -132,7 +133,7 @@
   <string name="detail_description_empty">বিবরণ নেই</string>
   <string name="detail_license_empty">অজানা লাইসেন্স</string>
   <string name="menu_refresh">পুনঃসতেজ</string>
-  <string name="storage_permission_rationale">প্রয়োজনীয় অনুমতি: বহিঃস্ত সঞ্চয়স্থান পড়া। এটি ছাড়া অ্যাপ কাজ করবে না।</string>
+  <string name="read_storage_permission_rationale">প্রয়োজনীয় অনুমতি: বহিঃস্ত সঞ্চয়স্থান পড়া। এটি ছাড়া অ্যাপ কাজ করবে না।</string>
   <string name="location_permission_rationale">ঐচ্ছিক অনুমতি: বিষয়শ্রেণী পরামর্শের জন্য বর্তমান অবস্থান নেয়</string>
   <string name="ok">ঠিক আছে</string>
   <string name="title_activity_nearby">কাছাকাছি স্থান</string>
@@ -148,6 +149,7 @@
   <string name="media_detail_uploaded_date">আপলোডের তারিখ</string>
   <string name="media_detail_license">লাইসেন্স</string>
   <string name="media_detail_coordinates">স্থানাঙ্কসমূহ</string>
+  <string name="media_detail_coordinates_empty">কিছু দেয়া হয়নি</string>
   <string name="become_a_tester_title">বিটা টেস্টার হোন</string>
   <string name="use_wikidata">উইকিউপাত্ত ব্যবহার করুন</string>
   <string name="use_wikidata_summary">(সতর্কতা: এটি নিষ্ক্রিয় করা অধিক পরিমাণে মোবাইল ডেটা খরচ হওয়ার কারণ হতে পারে)</string>
@@ -166,6 +168,7 @@
   <string name="welcome_image_rainbow_bridge">রংধনুর সেতু</string>
   <string name="welcome_image_tulip">টিউলিপ</string>
   <string name="welcome_image_no_selfies">কোন সেলফি নয়</string>
+  <string name="welcome_image_proprietary">মালিকানা চিত্র</string>
   <string name="welcome_image_welcome_wikipedia">উইকিপিডিয়ায় স্বাগতম</string>
   <string name="welcome_image_welcome_copyright">স্বাগতম কপিরাইট</string>
   <string name="welcome_image_sydney_opera_house">সিডনি অপেরা হাউস</string>
@@ -184,4 +187,6 @@
   <string name="no_description_found">কোন বিবরণ পাওয়া যায়নি</string>
   <string name="nearby_info_menu_commons_article">কমন্সে ফাইলের পাতা</string>
   <string name="nearby_info_menu_wikidata_article">উইকিউপাত্ত পদ</string>
+  <string name="give_permission">অনুমতি দিন</string>
+  <string name="use_external_storage">বাহ্যিক সঞ্চয়স্থান ব্যবহার করুন</string>
 </resources>

@@ -49,7 +49,7 @@
   <string name="menu_about">ବାବଦରେ</string>
   <string name="about_license" fuzzy="true">ଓପନ ସୋର୍ସ ସଫ୍ଟୱାର &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;ରେ ବିତରିତ</string>
   <string name="about_improve" fuzzy="true">ମୂଳସବୁ &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;ରେ ରହିଛି । ଅସୁବିଧାସବୁ &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;ରେ ଜଣାଇବେ ।</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;ଗୋପନୀୟତା ନୀତି&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;ଗୋପନୀୟତା ନୀତି&lt;/a&gt;</string>
   <string name="title_activity_about">ବାବଦରେ</string>
   <string name="menu_feedback">ଇମେଲରେ ମତାମତ ପଠାଇବେ</string>
   <string name="provider_categories">ନିକଟରେ ବ୍ୟବହୃତ ଶ୍ରେଣୀମାନ</string>
