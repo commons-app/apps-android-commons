@@ -149,7 +149,7 @@ public class CommonsApplication extends Application {
     public Account getCurrentAccount() {
         if (currentAccount == null) {
             AccountManager accountManager = AccountManager.get(this);
-            Account[] allAccounts = accountManager.getAccountsByType(AccountUtil.accountType());
+            Account[] allAccounts = accountManager.getAccountsByType(AccountUtil.ACCOUNT_TYPE);
             if (allAccounts.length != 0) {
                 currentAccount = allAccounts[0];
             }
@@ -164,8 +164,8 @@ public class CommonsApplication extends Application {
         if (curAccount == null) {
             return false; // This should never happen
         }
-        
-        accountManager.invalidateAuthToken(AccountUtil.accountType(), getMWApi().getAuthCookie());
+
+        accountManager.invalidateAuthToken(AccountUtil.ACCOUNT_TYPE, getMWApi().getAuthCookie());
         try {
             String authCookie = accountManager.blockingGetAuthToken(curAccount, "", false);
             getMWApi().setAuthCookie(authCookie);
@@ -195,12 +195,12 @@ public class CommonsApplication extends Application {
         }
 
         AccountManager accountManager = AccountManager.get(this);
-        Account[] allAccounts = accountManager.getAccountsByType(AccountUtil.accountType());
+        Account[] allAccounts = accountManager.getAccountsByType(AccountUtil.ACCOUNT_TYPE);
 
         AccountManagerCallback<Boolean> amCallback = new AccountManagerCallback<Boolean>() {
-            
+
             private int index = 0;
-            
+
             void setIndex(int index) {
                 this.index = index;
             }

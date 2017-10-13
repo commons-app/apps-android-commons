@@ -18,16 +18,13 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi;
 
 import static android.accounts.AccountManager.ERROR_CODE_UNSUPPORTED_OPERATION;
 import static android.accounts.AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE;
-import static android.accounts.AccountManager.KEY_ACCOUNT_NAME;
-import static android.accounts.AccountManager.KEY_ACCOUNT_TYPE;
-import static android.accounts.AccountManager.KEY_AUTHTOKEN;
 import static android.accounts.AccountManager.KEY_BOOLEAN_RESULT;
 import static android.accounts.AccountManager.KEY_ERROR_CODE;
 import static android.accounts.AccountManager.KEY_ERROR_MESSAGE;
 import static android.accounts.AccountManager.KEY_INTENT;
-import static fr.free.nrw.commons.auth.LoginActivity.PARAM_USERNAME;
 
 public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
+    private static final String PARAM_USERNAME = "fr.free.nrw.commons.login.username";
 
     private Context context;
 
@@ -47,7 +44,7 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
     }
 
     private boolean supportedAccountType(@Nullable String type) {
-        return AccountUtil.accountType().equals(type);
+        return AccountUtil.ACCOUNT_TYPE.equals(type);
     }
 
     @Override
@@ -114,9 +111,9 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
             }
             if (authCookie != null) {
                 final Bundle result = new Bundle();
-                result.putString(KEY_ACCOUNT_NAME, account.name);
-                result.putString(KEY_ACCOUNT_TYPE, AccountUtil.accountType());
-                result.putString(KEY_AUTHTOKEN, authCookie);
+                result.putString(AccountManager.KEY_ACCOUNT_NAME, account.name);
+                result.putString(AccountManager.KEY_ACCOUNT_TYPE, AccountUtil.ACCOUNT_TYPE);
+                result.putString(AccountManager.KEY_AUTHTOKEN, authCookie);
                 return result;
             }
         }
@@ -126,9 +123,9 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
         // an intent to display our AuthenticatorActivity panel.
         final Intent intent = new Intent(context, LoginActivity.class);
         intent.putExtra(PARAM_USERNAME, account.name);
-        intent.putExtra(KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
+        intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE, response);
         final Bundle bundle = new Bundle();
-        bundle.putParcelable(KEY_INTENT, intent);
+        bundle.putParcelable(AccountManager.KEY_INTENT, intent);
         return bundle;
     }
 
