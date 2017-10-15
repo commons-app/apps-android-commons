@@ -11,7 +11,9 @@ import android.database.DataSetObserver;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.ParcelFileDescriptor;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
@@ -21,6 +23,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,6 +58,8 @@ public  class       MultipleShareActivity
     private CategorizationFragment categorizationFragment;
 
     private UploadController uploadController;
+
+    private boolean locationPermitted = false;
 
     @Override
     public Media getMediaAtPosition(int i) {
@@ -215,6 +220,14 @@ public  class       MultipleShareActivity
 
         getSupportFragmentManager().addOnBackStackChangedListener(this);
         requestAuthToken();
+
+        //TODO: 15/10/17 should location permission be explicitly requested if not provided?
+        //check if location permission is enabled
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                locationPermitted = true;
+            }
+        }
     }
 
     @Override
@@ -260,6 +273,11 @@ public  class       MultipleShareActivity
                     up.setTag("sequence", i);
                     up.setSource(Contribution.SOURCE_EXTERNAL);
                     up.setMultiple(true);
+                    String imageGpsCoordinates = extractImageGpsData(uri);
+                    if (imageGpsCoordinates != null) {
+                        Timber.d("GPS data for image found!");
+                        up.setDecimalCoords(imageGpsCoordinates);
+                    }
                     photosList.add(up);
                 }
             }
@@ -314,4 +332,46 @@ public  class       MultipleShareActivity
         }
     }
 
+    /**
+     * Will attempt to extract the gps coordinates using exif data or by using the current
+     * location if available for the image who's imageUri has been provided.
+     * @param imageUri The uri of the image who's GPS coordinates data we wish to extract
+     * @return GPS coordinates as a String as is returned by {@link GPSExtractor}
+     */
+    @Nullable
+    private String extractImageGpsData(Uri imageUri) {
+        Timber.d("Entering extractImagesGpsData");
+
+        if (imageUri == null) {
+            //now why would you do that???
+            return null;
+        }
+
+        GPSExtractor gpsExtractor = null;
+
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                ParcelFileDescriptor fd = getContentResolver().openFileDescriptor(imageUri,"r");
+                if (fd != null) {
+                    gpsExtractor = new GPSExtractor(fd.getFileDescriptor());
+                }
+            } else {
+                String filePath = FileUtils.getPath(this,imageUri);
+                if (filePath != null) {
+                    gpsExtractor = new GPSExtractor(filePath);
+                }
+            }
+
+            if (gpsExtractor != null) {
+                //get image coordinates from exif data or user location
+                return gpsExtractor.getCoords(locationPermitted);
+            }
+
+        } catch (FileNotFoundException fnfe) {
+            Timber.w(fnfe);
+            return null;
+        }
+
+        return null;
+    }
 }

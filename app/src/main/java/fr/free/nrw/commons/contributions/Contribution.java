@@ -263,6 +263,10 @@ public class Contribution extends Media {
         this.localUri = localUri;
     }
 
+    public void setDecimalCoords(String decimalCoords) {
+        this.decimalCoords = decimalCoords;
+    }
+
     public static class Table {
         public static final String TABLE_NAME = "contributions";
 
