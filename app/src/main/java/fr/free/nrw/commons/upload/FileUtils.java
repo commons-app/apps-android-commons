@@ -3,21 +3,27 @@ package fr.free.nrw.commons.upload;
 import android.annotation.SuppressLint;
 import android.content.ContentUris;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+import android.os.ParcelFileDescriptor;
+import android.preference.PreferenceManager;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
+import java.util.Date;
 
+import fr.free.nrw.commons.CommonsApplication;
 import timber.log.Timber;
 
 public class FileUtils {
@@ -85,8 +91,41 @@ public class FileUtils {
         // File
         else if ("file".equalsIgnoreCase(uri.getScheme())) {
             return uri.getPath();
+        } else {
+            //fetching path may fail depending on the source URI and all hope is lost
+            //so we will create and use a copy of the file, which seems to work
+            String copyPath = null;
+            try {
+                ParcelFileDescriptor descriptor
+                        = context.getContentResolver().openFileDescriptor(uri, "r");
+                if (descriptor != null) {
+                    SharedPreferences sharedPref = PreferenceManager
+                            .getDefaultSharedPreferences(CommonsApplication.getInstance());
+                    boolean useExtStorage = sharedPref.getBoolean("useExternalStorage", true);
+                    if (useExtStorage) {
+                        copyPath = Environment.getExternalStorageDirectory().toString()
+                                + "/CommonsApp/" + new Date().getTime() + ".jpg";
+                        File newFile = new File(Environment.getExternalStorageDirectory().toString() + "/CommonsApp");
+                        newFile.mkdir();
+                        FileUtils.copy(
+                                descriptor.getFileDescriptor(),
+                                copyPath);
+                        Timber.d("Filepath (copied): %s", copyPath);
+                        return copyPath;
+                    }
+                    copyPath = context.getCacheDir().getAbsolutePath()
+                            + "/" + new Date().getTime() + ".jpg";
+                    FileUtils.copy(
+                            descriptor.getFileDescriptor(),
+                            copyPath);
+                    Timber.d("Filepath (copied): %s", copyPath);
+                    return copyPath;
+                }
+            } catch (IOException e) {
+                Timber.w(e, "Error in file " + copyPath);
+                return null;
+            }
         }
-
         return null;
     }
 

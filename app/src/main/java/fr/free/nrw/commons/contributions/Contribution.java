@@ -197,6 +197,10 @@ public class Contribution extends Media {
         this.localUri = localUri;
     }
 
+    public void setDecimalCoords(String decimalCoords) {
+        this.decimalCoords = decimalCoords;
+    }
+
     @NonNull
     private String licenseTemplateFor(String license) {
         switch (license) {
@@ -215,6 +219,7 @@ public class Contribution extends Media {
             case Prefs.Licenses.CC_BY_SA:
                 return "{{self|cc-by-sa-3.0}}";
         }
+
         throw new RuntimeException("Unrecognized license value: " + license);
     }
 }
