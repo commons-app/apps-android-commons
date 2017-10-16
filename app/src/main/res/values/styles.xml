@@ -2,36 +2,30 @@
 
     <style name="DarkAppTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="mainBackground">@color/main_background_dark</item>
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorAccent">@color/primaryColor</item>
+        <item name="colorButtonNormal">@color/primaryColor</item>
+
         <item name="semitransparentText">@color/commons_app_blue_dark</item>
-        <item name="commonsAppBlue">@color/activity_welcome_background_dark</item>
         <item name="subBackground">@color/sub_background_dark</item>
         <item name="fragmentCategorisationBackground">@color/fragment_categorisation_background_dark</item>
         <item name="buttonBackground">@color/button_background_dark</item>
         <item name="uploadOverlayBackground">@color/upload_overlay_background_dark</item>
-        <item name="iconSend">@drawable/ic_send_white_24dp</item>
-        <item name="iconSave">@drawable/ic_save_white_24dp</item>
-        <item name="iconCamera">@drawable/ic_photo_camera_white_24dp</item>
-        <item name="iconPhoto">@drawable/ic_photo_white_24dp</item>
-        <item name="iconUndo">@drawable/ic_undo_white_24dp</item>
         <item name="spinnerTheme">@style/DarkSpinnerTheme</item>
     </style>
 
     <style name="LightAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="mainBackground">@color/main_background_light</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorAccent">@color/primaryColor</item>
+        <item name="colorButtonNormal">@color/primaryColor</item>
+
         <item name="semitransparentText">@color/commons_app_blue_light</item>
-        <item name="commonsAppBlue">@color/activity_welcome_background_light</item>
         <item name="subBackground">@color/sub_background_light</item>
         <item name="fragmentCategorisationBackground">@color/fragment_categorisation_background_light</item>
         <item name="buttonBackground">@color/button_background_light</item>
         <item name="uploadOverlayBackground">@color/upload_overlay_background_light</item>
-        <item name="iconSend">@drawable/ic_send_white_24dp</item>
-        <item name="iconSave">@drawable/ic_save_white_24dp</item>
-        <item name="iconCamera">@drawable/ic_photo_camera_white_24dp</item>
-        <item name="iconPhoto">@drawable/ic_photo_white_24dp</item>
-        <item name="iconUndo">@drawable/ic_undo_white_24dp</item>
-
-        <item name="colorPrimary">@color/action_bar_blue</item>
-        <item name="colorPrimaryDark">@color/status_bar_blue</item>
         <item name="spinnerTheme">@style/LightSpinnerTheme</item>
     </style>
 

@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/menu_upload_single"
         android:title="@string/menu_upload_single"
-        android:icon="?attr/iconSend"
+        android:icon="@drawable/ic_send_white_24dp"
         android:enabled="false"
         app:showAsAction="always" />
 </menu>

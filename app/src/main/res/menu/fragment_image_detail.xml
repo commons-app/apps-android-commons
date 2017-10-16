@@ -18,7 +18,7 @@
     <item
         android:id="@+id/menu_retry_current_image"
         android:enabled="false"
-        android:icon="?attr/iconUndo"
+        android:icon="@drawable/ic_undo_white_24dp"
         android:title="@string/menu_retry_upload"
         android:visible="false"
         app:showAsAction="ifRoom|withText" />
