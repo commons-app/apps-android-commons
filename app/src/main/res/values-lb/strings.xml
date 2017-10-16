@@ -74,7 +74,7 @@
   <string name="menu_about">Iwwer</string>
   <string name="about_license" fuzzy="true">\'Open-Source-Software\' verëffentlecht ënner der &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache Lizenz v2&lt;/a&gt;. %1$s a säi Logo si Markenzeeche vun der Wikimedia Foundation a gi mat der Autorisatioun vun der Wikimedia Foundation benotzt. Mir sinn net confirméiert vun oder liéiert mat der Wikimedia Foundation.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Quell&lt;/a&gt; an &lt;a href=\"https://commons-app.github.io/\"&gt;Internetsite&lt;/a&gt; vu GitHub.\nLeet w.e.g. &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt; e GitHub Problem&lt;/a&gt; fir Problemer ze mellen a Proposen ze maachen.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Dateschutzerklärung&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Dateschutzerklärung&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Merci&lt;/a&gt;</string>
   <string name="title_activity_about">Iwwer</string>
   <string name="menu_feedback">Feedback schécken (per E-Mail)</string>

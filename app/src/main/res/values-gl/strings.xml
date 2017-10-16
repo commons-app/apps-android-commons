@@ -73,9 +73,9 @@
   <string name="title_activity_settings">Configuracións</string>
   <string name="title_activity_signup">Rexistrarse</string>
   <string name="menu_about">Acerca de</string>
-  <string name="about_license" fuzzy="true">Software de código aberto liberado baixo a &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;licenza Apache v2&lt;/a&gt;. %1$s e o seu logo son marcas rexistradas da Fundación Wikimedia e úsanse coa súa autorización. Non fomos acreditados pola Fundación Wikimedia nin estamos afiliados con ela.</string>
+  <string name="about_license">A aplicación Wikimedia Commons é unha aplicación de código aberto creada e mantida polos cesionarios e voluntarios da comunidade de Wikimedia. A Fundación Wikimedia non está involucrada na creación, desenvolvemento ou mantemento da aplicación.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Código fonte&lt;/a&gt; e &lt;a href=\"https://commons-app.github.io/\"&gt;sitio web&lt;/a&gt; en GitHub. Crear unha nova &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;incidencia&lt;/a&gt; para informar de problemas e suxestións.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Política_de_protección_de_datos_(gl)\"&gt;Política de protección de datos&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Política de privacidade&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Créditos&lt;/a&gt;</string>
   <string name="title_activity_about">Acerca de</string>
   <string name="menu_feedback">Enviar comentarios (por correo electrónico)</string>
@@ -195,6 +195,7 @@
   <string name="error_while_cache">Erro mentras se gardaban as imaxes na caché</string>
   <string name="title_info">Un título único descritivo para o ficheiro, que servirá como un nome de ficheiro. Pode usar unha linguaxe clara con espazos. Non inclúa a extensión do ficheiro</string>
   <string name="description_info">Por favor, describa o ficheiro todo o posibleː Onde se gravou? Cal é o contexto? Por favor, describa os obxectos ou persoas. Indique información que non pode ser adiviñada de forma doada, por exemplo, a hora do día se é unha paisaxe. Se o ficheiro amosa algo pouco habitual, por favor, explique que é o que o fai excepcional.</string>
+  <string name="give_permission">Outorgar permiso</string>
   <string name="use_external_storage">Usar o almacenamento externo</string>
   <string name="use_external_storage_summary">Gardar as imaxes capturadas coa cámara do seu dispositivo</string>
 </resources>
