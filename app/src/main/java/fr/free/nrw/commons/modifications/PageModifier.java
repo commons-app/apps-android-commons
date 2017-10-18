@@ -7,9 +7,9 @@ public abstract class PageModifier {
 
     public static PageModifier fromJSON(JSONObject data) {
         String name = data.optString("name");
-        if(name.equals(CategoryModifier.MODIFIER_NAME)) {
+        if (name.equals(CategoryModifier.MODIFIER_NAME)) {
             return new CategoryModifier(data.optJSONObject("data"));
-        } else if(name.equals(TemplateRemoveModifier.MODIFIER_NAME)) {
+        } else if (name.equals(TemplateRemoveModifier.MODIFIER_NAME)) {
             return new TemplateRemoveModifier(data.optJSONObject("data"));
         }
 

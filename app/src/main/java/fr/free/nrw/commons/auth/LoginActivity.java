@@ -248,8 +248,8 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
         @Override
         public void afterTextChanged(Editable editable) {
-            boolean enabled = usernameEdit.getText().length() != 0 && passwordEdit.getText().length() != 0 &&
-                    (BuildConfig.DEBUG || twoFactorEdit.getText().length() != 0 || twoFactorEdit.getVisibility() != View.VISIBLE);
+            boolean enabled = usernameEdit.getText().length() != 0 && passwordEdit.getText().length() != 0
+                    && (BuildConfig.DEBUG || twoFactorEdit.getText().length() != 0 || twoFactorEdit.getVisibility() != View.VISIBLE);
             loginButton.setEnabled(enabled);
         }
     }
