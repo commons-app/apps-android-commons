@@ -198,4 +198,5 @@
   <string name="give_permission">Berechtigung geben</string>
   <string name="use_external_storage">Externen Speicher verwenden</string>
   <string name="use_external_storage_summary">Mit der In-App-Kamera aufgenommene Bilder auf deinem Gerät speichern</string>
+  <string name="login_to_your_account">Bei deinem Benutzerkonto anmelden</string>
 </resources>

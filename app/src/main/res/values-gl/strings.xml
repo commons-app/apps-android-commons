@@ -198,4 +198,5 @@
   <string name="give_permission">Outorgar permiso</string>
   <string name="use_external_storage">Usar o almacenamento externo</string>
   <string name="use_external_storage_summary">Gardar as imaxes capturadas coa cámara do seu dispositivo</string>
+  <string name="login_to_your_account">Comezar sesión na súa conta</string>
 </resources>

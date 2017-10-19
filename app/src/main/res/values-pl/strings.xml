@@ -182,4 +182,5 @@
   <string name="no_description_found">nie znaleziono opisu</string>
   <string name="nearby_info_menu_wikidata_article">Element Wikidanych</string>
   <string name="title_info">Podaj krótką, opisową i unikalną nazwę, która będzie służyła jako nazwa pliku. Możesz używać prostego języka i spacji. Nie dodawaj rozszerzenia pliku.</string>
+  <string name="login_to_your_account">Zaloguj się na swoje konto</string>
 </resources>

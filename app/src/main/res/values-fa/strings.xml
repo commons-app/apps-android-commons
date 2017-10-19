@@ -198,4 +198,5 @@
   <string name="give_permission">اجازه بده</string>
   <string name="use_external_storage">استفاده از حافظهٔ خارجی</string>
   <string name="use_external_storage_summary">ذخیرهٔ تصویرهای گرفته شده توسط دوربین درونکار اپلیکیشن بر روی دستگاه شما</string>
+  <string name="login_to_your_account">ورود به حساب کاربریتان</string>
 </resources>
