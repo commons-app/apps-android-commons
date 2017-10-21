@@ -1,5 +1,8 @@
 package fr.free.nrw.commons;
 
+import android.content.Context;
+import android.preference.PreferenceManager;
+
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
 
@@ -9,8 +12,8 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.settings.Prefs;
-
 
 public class Utils {
 
@@ -76,10 +79,14 @@ public class Utils {
             extension = "jpg";
         }
         title = jpegPattern.matcher(title).replaceFirst(".jpg");
-        if (extension != null && !title.toLowerCase(Locale.getDefault()).endsWith("." + extension.toLowerCase(Locale.ENGLISH))) {
+        if (extension != null && !title.toLowerCase(Locale.getDefault())
+                .endsWith("." + extension.toLowerCase(Locale.ENGLISH))) {
             title += "." + extension;
         }
         return title;
     }
 
+    public static boolean isDarkTheme(Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean("theme", false);
+    }
 }

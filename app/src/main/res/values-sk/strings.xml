@@ -59,7 +59,7 @@
   <string name="menu_about">O aplikácii</string>
   <string name="about_license" fuzzy="true">Open Source softvér dostupný za podmienok &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
   <string name="about_improve" fuzzy="true">Zdroj na &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Bugy na &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Ochrana osobných údajov&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Ochrana osobných údajov&lt;/a&gt;</string>
   <string name="title_activity_about">O aplikácii</string>
   <string name="menu_feedback">Odoslať spätnú väzbu (emailom)</string>
   <string name="no_email_client">Nemáte nainštalovaného žiadneho e-mailového klienta</string>

@@ -72,9 +72,9 @@
   <string name="title_activity_settings">설정</string>
   <string name="title_activity_signup">가입하기</string>
   <string name="menu_about">정보</string>
-  <string name="about_license">오픈 소스 소프트웨어는 &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;아파치 라이선스 v2&lt;/a&gt;에 따라 공개됩니다. %1$s 및 관련 로고는 위키미디어 재단의 상표이며 위키미디어 재단의 허가를 통해 사용될 수 있습니다. 저희는 위키미디어 재단에 의해 보증되거나 제휴되어 있지 않습니다.</string>
+  <string name="about_license" fuzzy="true">오픈 소스 소프트웨어는 &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;아파치 라이선스 v2&lt;/a&gt;에 따라 공개됩니다. %1$s 및 관련 로고는 위키미디어 재단의 상표이며 위키미디어 재단의 허가를 통해 사용될 수 있습니다. 저희는 위키미디어 재단에 의해 보증되거나 제휴되어 있지 않습니다.</string>
   <string name="about_improve">소스 코드는 &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;에 있으며, 웹사이트는 &lt;a href=\"https://commons-app.github.io/\"&gt;GitHub&lt;/a&gt;에 있습니다. 버그나 기타 제안은 &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub&lt;/a&gt;에 보고해주세요.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy/ko\"&gt;개인정보 정책&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;개인정보 정책&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;제작진&lt;/a&gt;</string>
   <string name="title_activity_about">정보</string>
   <string name="menu_feedback">(이메일로) 피드백 보내기</string>
@@ -192,6 +192,8 @@
   <string name="nearby_info_menu_commons_article">공용 파일 문서</string>
   <string name="nearby_info_menu_wikidata_article">위키데이터 항목</string>
   <string name="error_while_cache">그림 캐시 처리 오류</string>
+  <string name="give_permission">권한 부여</string>
   <string name="use_external_storage">외부 저장소 사용하기</string>
   <string name="use_external_storage_summary">장치의 인앱 카메라로 찍은 사진 저장하기</string>
+  <string name="login_to_your_account">자신의 계정으로 로그인</string>
 </resources>

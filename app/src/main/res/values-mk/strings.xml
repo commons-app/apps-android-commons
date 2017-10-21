@@ -73,9 +73,9 @@
   <string name="title_activity_settings">Нагодувања</string>
   <string name="title_activity_signup">Регистрација</string>
   <string name="menu_about">За извршникот</string>
-  <string name="about_license">Програм со отворен код, издаден под лиценцата &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Апачи вер. 2&lt;/a&gt;. %1$s и нејзиното лого се заштитни знаци на Фондацијата Викимедија и се користат со нејзина дозвола. Ние не сме поддржани и поврзани со Фондацијата Викимедија.</string>
+  <string name="about_license">Прилогот на Ризницата има отворен код. Негови творци и оддржувачи се примателите на наменските средства од Викимедиината заедница како и членовите на заедницата. Фондацијата Викимедија нема учество во нејзиното создавање, разработка и одржување.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Извор&lt;/a&gt; и &lt;a href=\"https://commons-app.github.io/\"&gt;мреж. место&lt;/a&gt; на GitHub&lt;/a&gt;. Создајте нов &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;случај на GitHub&lt;/a&gt; за пријавување грешки и давање предлози.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Заштита на личните податоци\"&gt;Заштита_на_личните_податоци&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Заштита на личните податоци&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Заслуги&lt;/a&gt;</string>
   <string name="title_activity_about">За извршникот</string>
   <string name="menu_feedback">Испратете Ваше мислење (по е-пошта)</string>
@@ -195,6 +195,8 @@
   <string name="error_while_cache">Грешка при меѓускладирање на сликите</string>
   <string name="title_info">Краток и единствен наслов на податотеката, кој ќе служи како нејзин назив. Можете да користите прост јазик со меѓупростор, но не пишувајте ја податотечната наставка</string>
   <string name="description_info">Објаснете ја податотеката што подобро можете: Каде е направена? Што е прикажано на неа? Кој е контекстот? Опишете ги предметите, објектите и личностите. Дајте сознанија што не можат лесно да се погодат, како на пр. време од денот ако се работи за природен предел. Ако на неа е претставено нешто необично, објаснете зошто прикажаното е необично.</string>
+  <string name="give_permission">Дај дозвола</string>
   <string name="use_external_storage">Користи надворешен склад</string>
   <string name="use_external_storage_summary">Зачувување на направените слики во прилогот со камерата на вашиот уред</string>
+  <string name="login_to_your_account">Најавете се со вашата сметка</string>
 </resources>

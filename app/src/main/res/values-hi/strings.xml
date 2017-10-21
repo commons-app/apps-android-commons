@@ -54,7 +54,10 @@
   <string name="gps_disabled">आपके डिवाइस में जीपीएस अक्षम है। क्या आप इसे सक्षम करना चाहेंगे?</string>
   <string name="enable_gps">जीपीएस सक्षम करें</string>
   <string name="contributions_subtitle_zero">अभी तक कोई अपलोड नहीं</string>
-  <string name="contributions_subtitle">{{PLURAL | शून्य = @ स्ट्रिंग / योगदान_उपशीर्षक_शुन्य | एक =% d अपलोड |% d अपलोड्स}}</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="one">%d अपलोड</item>
+    <item quantity="other">%d अपलोड्स</item>
+  </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">%d अपलोड शुरू</item>
     <item quantity="other">%d अपलोड शुरू</item>
@@ -69,9 +72,9 @@
   <string name="title_activity_settings">पसंद</string>
   <string name="title_activity_signup">खाता खोलें</string>
   <string name="menu_about">परिचय</string>
-  <string name="about_license">मुक्त स्रोत सॉफ्टवेयर जो &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;अपाचे लाइसेन्स&lt;/a&gt; के अंतर्गत जारी किया गया है। %1$s और इसका लोगो विकिमीडिया संस्था का व्यापारिक चिह्न है और इसके मर्जी से ही उपयोग किया जाना चाहिए। हम किसी भी प्रकार से विकिमीडिया संस्था से जुड़े नहीं हैं।</string>
+  <string name="about_license" fuzzy="true">मुक्त स्रोत सॉफ्टवेयर जो &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;अपाचे लाइसेन्स&lt;/a&gt; के अंतर्गत जारी किया गया है। %1$s और इसका लोगो विकिमीडिया संस्था का व्यापारिक चिह्न है और इसके मर्जी से ही उपयोग किया जाना चाहिए। हम किसी भी प्रकार से विकिमीडिया संस्था से जुड़े नहीं हैं।</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;स्रोत&lt;/a&gt; और &lt;a href=\"https://commons-app.github.io/\"&gt;वेबसाइट&lt;/a&gt; गिटहब में है और त्रुटि व सुझाव हेतु &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;गिटहब समस्या&lt;/a&gt; देखें।</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;गोपनियता नीति&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;गोपनियता नीति&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;श्रेय&lt;/a&gt;</string>
   <string name="title_activity_about">परिचय</string>
   <string name="menu_feedback">प्रतिक्रिया दें (ईमेल द्वारा)</string>
@@ -131,6 +134,7 @@
   <string name="detail_license_empty">अज्ञात लाइसेन्स</string>
   <string name="menu_refresh">ताजा करें</string>
   <string name="read_storage_permission_rationale">अनिवार्य अनुमति: बाहरी स्मृति पढ़ें। एप इसके बिना कार्य नहीं करेगा।</string>
+  <string name="write_storage_permission_rationale">अनिवार्य अनुमति:बाहरी कंप्यूटर स्टोरेज लिखना|इसके बिना एप कार्य नहीं करेगा।</string>
   <string name="location_permission_rationale">वैकल्पिक अनुमति: श्रेणी सुझाव हेतु वर्तमान स्थान ज्ञात करें</string>
   <string name="ok">ठीक है</string>
   <string name="title_activity_nearby">आसपास के स्थान</string>
@@ -190,4 +194,6 @@
   <string name="error_while_cache">चित्र कैशिंग करते समय त्रुटि</string>
   <string name="title_info">फ़ाइल के लिए एक अद्वितीय वर्णनात्मक शीर्षक, जो एक फ़ाइल नाम के रूप में काम करेगा। आप रिक्त स्थान के साथ सादे भाषा का उपयोग कर सकते हैं। फ़ाइल विस्तार शामिल न करें</string>
   <string name="description_info">कृपया मीडिया जितना संभव हो उतना बताएं: यह कहां लिया गया? यह क्या दिखाता है? संदर्भ क्या है? कृपया वस्तुओं या व्यक्तियों का वर्णन करें। ऐसी जानकारी का खुलासा करें जिसे आसानी से अनुमानित नहीं किया जा सकता, उदाहरण के लिए दिन का समय यदि यह परिदृश्य है। अगर मीडिया कुछ असामान्य दिखाता है, तो कृपया बताएं कि इसे क्या असामान्य बनाता है।</string>
+  <string name="use_external_storage">बाहरी स्टॉरज का पृयोग करे।</string>
+  <string name="use_external_storage_summary">आप अपने डिवाइस के इन-ऐप कैमरा से ली गई तस्वीरों को सहेजें।</string>
 </resources>

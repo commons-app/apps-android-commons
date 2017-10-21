@@ -3,12 +3,12 @@
     <item android:id="@+id/menu_from_camera"
           android:title="@string/menu_from_camera"
           app:showAsAction="ifRoom|withText"
-          android:icon="?attr/iconCamera"
+          android:icon="@drawable/ic_photo_camera_white_24dp"
             />
     <item android:id="@+id/menu_from_gallery"
         android:title="@string/menu_from_gallery"
         app:showAsAction="ifRoom|withText"
-        android:icon="?attr/iconPhoto"
+        android:icon="@drawable/ic_photo_white_24dp"
             />
     <!--<item android:id="@+id/menu_nearby"-->
         <!--android:title="@string/menu_nearby"-->

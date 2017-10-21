@@ -72,9 +72,9 @@
   <string name="title_activity_settings">הגדרות</string>
   <string name="title_activity_signup">רישום</string>
   <string name="menu_about">אודות</string>
-  <string name="about_license">תכנת קוד פתוח המתפרסמת לפי תנאי &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. השם %1$s והסמל שמשויך אליו הם סימני מסחר של קרן ויקימדיה ומשמשים באישור קרן ויקימדיה. איננו נתמכים על־ידי קרן ויקימדיה או קשורים אליה בשותפות.</string>
+  <string name="about_license" fuzzy="true">תכנת קוד פתוח המתפרסמת לפי תנאי &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. השם %1$s והסמל שמשויך אליו הם סימני מסחר של קרן ויקימדיה ומשמשים באישור קרן ויקימדיה. איננו נתמכים על־ידי קרן ויקימדיה או קשורים אליה בשותפות.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;קוד מקור&lt;/a&gt; ו&lt;a href=\"https://commons-app.github.io/\"&gt;אתר&lt;/a&gt; בגיטהאב. נא ליצור &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;דיווח בגיטהאב&lt;/a&gt; בשביל באגים והצעות.</string>
-  <string name="about_privacy_policy"/>
+  <string name="about_privacy_policy" fuzzy="true"/>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;יוצרים&lt;/a&gt;</string>
   <string name="title_activity_about">אודות</string>
   <string name="menu_feedback">שליחת משוב (בדוא\"ל)</string>
@@ -134,6 +134,7 @@
   <string name="detail_license_empty">רישיון לא ידוע</string>
   <string name="menu_refresh">רענון</string>
   <string name="read_storage_permission_rationale">הרשאה מחייבת: אחסון. היישום לא יכול לעבוד בלי זה.</string>
+  <string name="write_storage_permission_rationale">נדרשת הרשאה: כתיבה לאחסון חיצוני. היישום לא יכול לעבוד בלי זה.</string>
   <string name="location_permission_rationale">הרשאה לא מחייבת: קבלת מיקום נוכחי בשביל הצעות קטגוריות</string>
   <string name="ok">אישור</string>
   <string name="title_activity_nearby">מקומות בסביבה</string>
@@ -190,4 +191,6 @@
   <string name="error_while_cache">שגיאה במשירת תמונות במטמון</string>
   <string name="title_info">כותרת מתארת ייחודית לקובץ, שתשמש שם קובץ. אפשר להשתמש בשפה פשוטה עם רווחים. אין לכלול סיומת קובץ</string>
   <string name="description_info">נא לתאר את המדיה כמה שיותר: איפה היא נוצרה? מה היא מראה? מה ההקשר? נא לתאר את העצמים או את האנשים. נא לחשוף מידע שאי־אפשר לנחש בקלות, למשל, הזמן ביום אם זאת תמונת נוף. אם המדיה מציגה משהו בלתי־רגיל, נא להסביר מה מיוחד בה.</string>
+  <string name="use_external_storage">להשתמש באחסון חיצוני</string>
+  <string name="use_external_storage_summary">שמירת תמונות שצולמו באמצעות מצלמה בתוך היישום במכשיר שלך</string>
 </resources>

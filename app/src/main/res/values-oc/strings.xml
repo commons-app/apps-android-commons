@@ -69,7 +69,7 @@
   <string name="title_activity_signup">S’inscriure</string>
   <string name="menu_about">A prepaus</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Fonts&lt;/a&gt; e &lt;a href=\"https://commons-app.github.io/\"&gt;site web&lt;/a&gt; sus GitHub. Crear un novèl &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;senhalament GitHub&lt;/a&gt; per senhalar de bugs o de suggestions.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politica de confidencialitat&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politica de confidencialitat&lt;/a&gt;</string>
   <string name="title_activity_about">A prepaus</string>
   <string name="menu_feedback">Mandar vòstres comentaris (per corrièl)</string>
   <string name="no_email_client">Cap de client de corrièl pas installat</string>

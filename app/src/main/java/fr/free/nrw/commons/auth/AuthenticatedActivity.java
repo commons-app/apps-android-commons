@@ -21,7 +21,7 @@ public abstract class AuthenticatedActivity extends NavigationBaseActivity {
     @Inject SessionManager sessionManager;
 
     private String authCookie;
-    
+
 
     private void getAuthCookie(Account account, AccountManager accountManager) {
         Single.fromCallable(() -> accountManager.blockingGetAuthToken(account, "", false))

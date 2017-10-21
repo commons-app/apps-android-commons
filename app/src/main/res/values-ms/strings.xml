@@ -60,7 +60,7 @@
   <string name="menu_about">Perihal</string>
   <string name="about_license" fuzzy="true">Perisian Sumber Terbuka yang dikeluarkan dengan &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Lesen Apache v2&lt;/a&gt;</string>
   <string name="about_improve" fuzzy="true">Sumber di &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Pepijat di &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
-  <string name="about_privacy_policy">Wikimedia:Commons-android-strings-about privacy policy/ms</string>
+  <string name="about_privacy_policy" fuzzy="true">Wikimedia:Commons-android-strings-about privacy policy/ms</string>
   <string name="title_activity_about">Perihal</string>
   <string name="menu_feedback">Hantar Maklum Balas (secara e-mel)</string>
   <string name="provider_categories">Kategori yang baru digunakan</string>

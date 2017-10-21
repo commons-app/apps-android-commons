@@ -3,10 +3,10 @@ package fr.free.nrw.commons;
 import android.support.annotation.Nullable;
 
 public class License {
-    String key;
-    String template;
-    String url;
-    String name;
+    private String key;
+    private String template;
+    private String url;
+    private String name;
 
     public License(String key, String template, String url, String name) {
         if (key == null) {

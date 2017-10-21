@@ -73,9 +73,9 @@
   <string name="title_activity_settings">Поставке</string>
   <string name="title_activity_signup">Отвори налог</string>
   <string name="menu_about">О апликацији</string>
-  <string name="about_license" fuzzy="true">Софтвер отвореног кода доступан под лиценцом &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache вер. 2&lt;/a&gt; Викимедијина Остава и њен лого су заштитни знаци Викимедијине Фондације и користе се са дозволом Викимедијине Фондацине. Ми не одобравамо или подржавмо Викимедијину Фондацију.</string>
+  <string name="about_license">Софтвер отвореног кода доступан под лиценцом &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache вер. 2&lt;/a&gt; Викимедијина Остава и њен лого су заштитни знаци Викимедијине Фондације и користе се са дозволом Викимедијине Фондацине. Ми не одобравамо или подржавмо Викимедијину Фондацију.\n\nАпликација за Викимедијину оставу је апликација отвореног кода која је направљена и која се одржава помоћу грантова и волонтера Викимедијине заједнице. Задужбина Викимедија није укључена у стварање, развој или одржавање апликације.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Изворни кôд&lt;/a&gt; и &lt;a href=\"https://commons-app.github.io/\"&gt;веб-сајт&lt;/a&gt; на GitHub-у. Направите нови &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;захтев на GitHub-у&lt;/a&gt; да бисте пријавили грешке или дали предлоге.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Политика приватности&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Политика приватности&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Заслуге&lt;/a&gt;</string>
   <string name="title_activity_about">О апликацији</string>
   <string name="menu_feedback">Пошаљите повратне информације (путем е-поште)</string>
@@ -86,6 +86,7 @@
   <string name="menu_retry_upload">Покушај поново</string>
   <string name="menu_cancel_upload">Откажи</string>
   <string name="share_license_summary">Слика ће се водити под лиценцом %1$s</string>
+  <string name="media_upload_policy">Слањем ове слике, ја тврдим да је у питању мој рад, да не садржи материјал или селфије заштићене ауторским правима, те да је на остале начине у складу са &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;смерницама Викимедијине оставе&lt;/a&gt;.</string>
   <string name="menu_download">Преузми</string>
   <string name="preference_license">Лиценца</string>
   <string name="use_previous">Користи претходан наслов/опис</string>
@@ -134,6 +135,7 @@
   <string name="detail_license_empty">Непозната лиценца</string>
   <string name="menu_refresh">Освежи</string>
   <string name="read_storage_permission_rationale">Потребна дозвола: Провера спољашње меморије. Апликација без овога не може да функционише.</string>
+  <string name="write_storage_permission_rationale">Неопходна дозвола: Писање спољашњег складишта. Апликација не може да функционише без овога.</string>
   <string name="location_permission_rationale">Опциона дозвола: Преузми тренутну локацију за предлоге категорија</string>
   <string name="ok">У реду</string>
   <string name="title_activity_nearby">Места у близини</string>
@@ -149,6 +151,7 @@
   <string name="media_detail_uploaded_date">Датум отпремања</string>
   <string name="media_detail_license">Лиценца</string>
   <string name="media_detail_coordinates">Координате</string>
+  <string name="media_detail_coordinates_empty">Ништа није унето</string>
   <string name="become_a_tester_title">Постани Бета Тестер</string>
   <string name="become_a_tester_description">Прикључите се на наш бета канал на Гугл плеју и приступајте новим информацијама и поправкама багова</string>
   <string name="use_wikidata">Користи Википодатке</string>
@@ -184,6 +187,15 @@
   <string name="navigation_item_settings">Подешавања</string>
   <string name="navigation_item_feedback">Повратне информације</string>
   <string name="navigation_item_logout">Одјави ме</string>
-  <string name="nearby_info_menu_commons_article" fuzzy="true">Чланак на Остави</string>
-  <string name="nearby_info_menu_wikidata_article" fuzzy="true">Чланак на Википодацима</string>
+  <string name="navigation_item_info">Туторијал</string>
+  <string name="nearby_needs_permissions">Оближња места не могу да се приказују без дозвола за локацију</string>
+  <string name="no_description_found">опис није пронађен</string>
+  <string name="nearby_info_menu_commons_article">Страница датотеке на Остави</string>
+  <string name="nearby_info_menu_wikidata_article">Ставка на Википодацима</string>
+  <string name="error_while_cache">Грешка при кеширању слика</string>
+  <string name="title_info">Јединствен описни наслов за датотеку, који ће бити име датотеке. Можете да користите обични језик са размацима. Не треба уносити екстензију датотеке</string>
+  <string name="description_info">Молимо да опишете датотеку колико је то могуће: Где је направљена? Шта приказује? Шта је контекст? Опишите објекте и/или особе. Откријте информације које се не могу лако погодити, на пример доба дана ако је у питању пејзаж. Ако датотека приказује нешто необично, молимо да објасните шта је то чини необичном.</string>
+  <string name="give_permission">Давање дозволе</string>
+  <string name="use_external_storage">Употреба спољашњег складишта</string>
+  <string name="use_external_storage_summary">Спремање слика направљених камером апликације на Вашем уређају</string>
 </resources>

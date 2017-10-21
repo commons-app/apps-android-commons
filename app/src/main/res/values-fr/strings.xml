@@ -73,9 +73,9 @@
   <string name="title_activity_settings">Paramètres</string>
   <string name="title_activity_signup">S’inscrire</string>
   <string name="menu_about">À propos</string>
-  <string name="about_license">Les logiciels Open Source sont publiés sous la &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;licence Apache v2&lt;/a&gt;. %1$s et son logo sont des marques déposées de la Fondation Wikimédia qui sont utilisées avec l’autorisation de la Fondation Wikimédia. Nous ne sommes pas approuvés par ou affiliés à la Fondation Wikimédia.</string>
+  <string name="about_license">L\'application Wikimedia Commons est une application open-source crée et maintenue par les bénéficiaires et volontaires de la communauté Wikimedia. La fondation Wikimedia n\'est pas associée à la création, le développement ou la maintenance de l\'application.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sources&lt;/a&gt; et &lt;a href=\"https://commons-app.github.io/\"&gt;site web&lt;/a&gt; sur GitHub. Créer un nouveau &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;signalement GitHub&lt;/a&gt; pour signales des bogues ou des suggestions.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politique de confidentialité&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Politique de confidentialité&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Remerciements&lt;/a&gt;</string>
   <string name="title_activity_about">À propos</string>
   <string name="menu_feedback">Envoyer vos commentaires (par courriel)</string>
@@ -195,6 +195,8 @@
   <string name="error_while_cache">Erreur en mettant les images en cache</string>
   <string name="title_info">Un titre descriptif unique pour le fichier, qui servira de nom de fichier. Vous pouvez utiliser un langage simple avec des espaces. N’incluez pas l’extension du fichier</string>
   <string name="description_info">Veuillez décrire le média autant que possible : Où a-t-il été enregistré ? Que montre-t-il ? Quel est le contexte ? Veuillez décrire les objets ou les personnes. Révélez les informations qui ne peuvent pas être devinées facilement, par exemple l’heure de la journée si c’est un paysage. Si le média montre quelque chose d’inhabituel, veuillez expliquer ce qui le rend exceptionnel.</string>
+  <string name="give_permission">Accorder le droit</string>
   <string name="use_external_storage">Utiliser le stockage externe</string>
   <string name="use_external_storage_summary">Enregistrer les images prises avec l’appareil photo de votre appareil</string>
+  <string name="login_to_your_account">Connectez-vous à votre compte</string>
 </resources>

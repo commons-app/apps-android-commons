@@ -81,9 +81,9 @@
   <string name="title_activity_settings">Налаштування</string>
   <string name="title_activity_signup">Зареєструватися</string>
   <string name="menu_about">Про програму</string>
-  <string name="about_license">Програмне забезпечення з відкритим кодом випущено під &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;ліцензією Apache в.2&lt;/a&gt;. 1$s і його логотип є товарними знаками Фонду Вікімедіа і використовуються за дозволом Фонду Вікімедіа. Ми не користуємось підтримкою Фонду Вікімедіа і не є його афіліатом.</string>
+  <string name="about_license">Додаток «Вікісховище» — це програма з відкритим кодом, яку створили отримувачі грантів та волонтери спільноти Вікімедіа. Фонд Вікімедіа не брав участі у створенні, розробці чи обслуговуванні цього додатка.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Вихідний код&lt;/a&gt; і &lt;a href=\"https://commons-app.github.io/\"&gt;веб-сайт&lt;/a&gt; на GitHub. Створіть нове &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;завдання на GitHub&lt;/a&gt; для повідомлення про баги або для висловлення пропозицій.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Політика приватності&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Політика конфіденційності&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Автори&lt;/a&gt;</string>
   <string name="title_activity_about">Про програму</string>
   <string name="menu_feedback">Надіслати відгук (електронною поштою)</string>
@@ -143,6 +143,7 @@
   <string name="detail_license_empty">Невідома ліцензія</string>
   <string name="menu_refresh">Оновити</string>
   <string name="read_storage_permission_rationale">Обов\'язковий дозвіл: читання зовнішньої пам\'яті. Програмка не може працювати без цього.</string>
+  <string name="write_storage_permission_rationale">Необхідний дозвіл: записування на зовнішнє сховище. Додаток не може працювати без цього.</string>
   <string name="location_permission_rationale">Додатковий дозвіл: отримувати поточне розташування для підказок категорій</string>
   <string name="ok">Гаразд</string>
   <string name="title_activity_nearby">Місця поблизу</string>
@@ -202,4 +203,8 @@
   <string name="error_while_cache">Помилка кешування зображень</string>
   <string name="title_info">Унікальна описова назва файлу. Ви можете використовувати простий текст з пробілами. Не вказуйте розширення файлу</string>
   <string name="description_info">Будь ласка, докладно опишіть файл: де його було зроблено? що на ньому зображено? який контекст? Будь ласка, опишіть об\'єкти чи осіб. Додайте інформацію, яку не можна легко здогадатися, наприклад, пору доби для фотографії пейзажу. Якщо зображено щось незвичайне, постарайтеся пояснити, що робить його незвичайним.</string>
+  <string name="give_permission">Надати дозвіл</string>
+  <string name="use_external_storage">Використовувати зовнішнє сховище</string>
+  <string name="use_external_storage_summary">Зберігати зображення, виконані вбудованою в додатку камерою Вашого пристрою</string>
+  <string name="login_to_your_account">Увійдіть у свій обліковий запис</string>
 </resources>

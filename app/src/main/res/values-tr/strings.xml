@@ -5,10 +5,12 @@
   <string name="username">Kullanıcı adı</string>
   <string name="password">Parola</string>
   <string name="login">Oturum aç</string>
+  <string name="signup">Kaydol</string>
   <string name="logging_in_title">Oturum açılıyor</string>
-  <string name="logging_in_message" fuzzy="true">Lütfen bekleyin…</string>
+  <string name="logging_in_message">Lütfen bekleyin…</string>
   <string name="login_success">Oturum açma başarılı!</string>
   <string name="login_failed">Oturum açma başarısız oldu!</string>
+  <string name="upload_failed">Dosya bulunamadı. Lütfen başka bir dosya deneyin.</string>
   <string name="authentication_failed">Kimlik doğrulama başarısız oldu!</string>
   <string name="uploading_started">Yükleme başladı!</string>
   <string name="upload_completed_notification_title">%1$s yüklendi!</string>
@@ -18,11 +20,11 @@
   <string name="upload_progress_notification_title_finishing">%1$s yüklemesi bitiriliyor</string>
   <string name="upload_failed_notification_title">%1$s dosyasının yüklemesi başarısız oldu</string>
   <string name="upload_failed_notification_subtitle">Görüntülemek için dokunun</string>
-  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
-    <item quantity="one">1 dosya yükleniyor</item>
-    <item quantity="other">%d dosya yükleniyor</item>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%d dosya karşıya yükleniyor</item>
+    <item quantity="other">%d dosya karşıya yükleniyor</item>
   </plurals>
-  <string name="title_activity_contributions" fuzzy="true">Yüklemelerim</string>
+  <string name="title_activity_contributions">Yakın Zamandaki Yüklemelerim</string>
   <string name="contribution_state_queued">Sırada</string>
   <string name="contribution_state_failed">Başarısız</string>
   <string name="contribution_state_in_progress">%1$d%% tamamlandı</string>
@@ -37,7 +39,7 @@
   <string name="login_failed_network">Oturum açılamıyor - ağ hatası</string>
   <string name="login_failed_username">Oturum açılamıyor - lütfen kullanıcı adınızı kontrol edin</string>
   <string name="login_failed_password">Oturum açılamıyor - lütfen parolanızı kontrol edin</string>
-  <string name="login_failed_throttled" fuzzy="true">Çok sayıda başarısız girişimde bulundunuz. Birkaç dakika sonra tekrar deneyin.</string>
+  <string name="login_failed_throttled">Çok sayıda başarısız girişimde bulundunuz. Birkaç dakika sonra tekrar deneyin.</string>
   <string name="login_failed_blocked">Üzgünüz, bu kullanıcı Commons\'ta engellendi</string>
   <string name="login_failed_generic">Oturum açma başarısız</string>
   <string name="share_upload_button">Yükle</string>
@@ -46,6 +48,7 @@
   <string name="menu_upload_single">Yükle</string>
   <string name="categories_search_text_hint">Kategorileri ara</string>
   <string name="menu_save_categories">Kaydet</string>
+  <string name="refresh_button">Yenile</string>
   <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Henüz yükleme yok</item>
     <item quantity="one">1 yükleme</item>
@@ -66,7 +69,7 @@
   <string name="menu_about">Hakkında</string>
   <string name="about_license" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache Lisansı s2&lt;/a&gt; altında yayımlanan Açık Kaynak yazılımı</string>
   <string name="about_improve" fuzzy="true">Kaynak: &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;\n\nYazılım hataları: &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Gizlilik Politikası&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Gizlilik Politikası&lt;/a&gt;</string>
   <string name="title_activity_about">Hakkında</string>
   <string name="menu_feedback">Geri Bildirim Gönder (E-posta ile)</string>
   <string name="provider_categories">Son kullanılan kategoriler</string>
@@ -93,6 +96,9 @@
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romanya)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_zero">CC0</string>
+  <string name="tutorial_3_text">Lütfen şunları YÜKLEMEYİN:</string>
+  <string name="tutorial_3_subtext">- Öz çekimlerinizi ya da arkadaşlarınızın fotoğraflarını\n- İnternetten indirdiğiniz resimleri\n- Tescilli uygulamaların ekran görüntülerini</string>
+  <string name="tutorial_4_text">Yüklenebileceklere örnekler:</string>
   <string name="welcome_wikipedia_text">Resimleriniz ile Vikipedi maddelerinin canlandırılmasına katkıda bulunabilirsiniz!</string>
   <string name="welcome_wikipedia_subtext">Vikipedi\'ye Wikimedia Commons\'tan gelen görüntüler.</string>
   <string name="welcome_copyright_text">Görüntüler dünya insanlarının eğitiminde yardımcı olur.</string>

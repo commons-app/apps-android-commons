@@ -73,9 +73,9 @@
   <string name="title_activity_settings">Séting</string>
   <string name="title_activity_signup">Daptar</string>
   <string name="menu_about">Ngeunaan</string>
-  <string name="about_license">Pakakas lemes kodeu nembrak dirilis di handapeun &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Lisénsi Apache v2&lt;/a&gt;. %1$s sarta logona téh mérk dagang anu Yayasan Wikimédia ogé dipakéna kudu meunang widi ti Yayasan Wikimédia. Kami teu disatujuan ku atawa digawé bareng jeung Yayasan Wikimédia.</string>
+  <string name="about_license" fuzzy="true">Pakakas lemes kodeu nembrak dirilis di handapeun &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Lisénsi Apache v2&lt;/a&gt;. %1$s sarta logona téh mérk dagang anu Yayasan Wikimédia ogé dipakéna kudu meunang widi ti Yayasan Wikimédia. Kami teu disatujuan ku atawa digawé bareng jeung Yayasan Wikimédia.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sumber&lt;/a&gt; sarta &lt;a href=\"https://commons-app.github.io/\"&gt;situ wéb&lt;/a&gt; dina GitHub. Jieun anyar &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;perkara GitHub&lt;/a&gt; pikeun saran jeung laporan kutu.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Kawijakan privasi&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Kawijakan privasi&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Pangajén&lt;/a&gt;</string>
   <string name="title_activity_about">Ngeunaan</string>
   <string name="menu_feedback">Kirim eupan balik (via Surélék)</string>

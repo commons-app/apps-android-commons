@@ -87,7 +87,7 @@ public class CommonsApplication extends DaggerApplication {
     }
 
     @Override
-    protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
+     protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
         return injector();
     }
 
@@ -120,8 +120,7 @@ public class CommonsApplication extends DaggerApplication {
                     //TODO: fix preference manager
                     defaultPrefs.edit().clear().commit();
                     applicationPrefs.edit().clear().commit();
-                    applicationPrefs.edit().putBoolean("firstrun", false).apply();
-                    otherPrefs.edit().clear().commit();
+                    applicationPrefs.edit().putBoolean("firstrun", false).apply();otherPrefs.edit().clear().commit();
                     updateAllDatabases();
 
                     logoutListener.onLogoutComplete();

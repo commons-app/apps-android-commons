@@ -309,7 +309,7 @@ public class MultipleShareActivity extends AuthenticatedActivity
 
     @Override
     public void onBackStackChanged() {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(mediaDetails != null && mediaDetails.isVisible());
+        getSupportActionBar().setDisplayHomeAsUpEnabled(mediaDetails != null && mediaDetails.isVisible()) ;
     }
 
 }

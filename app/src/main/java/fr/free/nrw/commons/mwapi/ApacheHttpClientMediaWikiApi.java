@@ -391,7 +391,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     public UploadResult uploadFile(String filename, InputStream file, long dataLength, String pageContents, String editSummary, final ProgressListener progressListener) throws IOException {
         ApiResult result = api.upload(filename, file, dataLength, pageContents, editSummary, progressListener::onProgress);
 
-        Log.e("WTF", "Result: "+result.toString());
+        Log.e("WTF", "Result: " +result.toString());
 
         String resultStatus = result.getString("/api/upload/@result");
         if (!resultStatus.equals("Success")) {
