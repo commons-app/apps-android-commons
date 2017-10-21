@@ -86,7 +86,7 @@ public class SettingsFragment extends PreferenceFragment {
             return true;
         });
 
-        Preference sendLogsPreference = findPreference("sendLogs");
+        Preference sendLogsPreference = findPreference("sendLogFile");
         sendLogsPreference.setOnPreferenceClickListener(preference -> {
             //first we need to check if we have the necessary permissions
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

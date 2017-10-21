@@ -54,8 +54,8 @@
         />
 
     <Preference
-        android:key="sendLogs"
-        android:title="@string/send_logs"
-        android:summary="@string/send_logs_description"/>
+        android:key="sendLogFile"
+        android:title="@string/send_log_file"
+        android:summary="@string/send_log_file_description"/>
 
 </PreferenceScreen>
