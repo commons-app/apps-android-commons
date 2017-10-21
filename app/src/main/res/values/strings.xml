@@ -207,6 +207,7 @@ Tap this message (or hit back) to skip this step.</string>
   <string name="give_permission">Give permission</string>
   <string name="use_external_storage">Use external storage</string>
   <string name="use_external_storage_summary">Save pictures taken with the in-app camera on your device</string>
-    <string name="send_logs">Send Logs</string>
+  <string name="send_logs">Send Logs</string>
   <string name="send_logs_description">Send logs to developers via email</string>
+  <string name="login_to_your_account">Login to your account</string>
 </resources>

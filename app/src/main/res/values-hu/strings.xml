@@ -73,7 +73,7 @@
   <string name="title_activity_settings">Beállítások</string>
   <string name="title_activity_signup">Regisztráció</string>
   <string name="menu_about">Névjegy</string>
-  <string name="about_license" fuzzy="true">Nyílt forráskódú szoftver &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; alatt kiadva. A Wikimédia Commons és a logója a Wikimédia Alapítvány védjegyei, és a Wikimédia Alapítvány engedélyével vannak használva. Az alkalmazás fejlesztői nincsenek semmilyen kapcsolatban Wikimédia Alapítvánnyal.</string>
+  <string name="about_license">A Wikimedia Commons applikáció egy nyílt forráskódú szoftver, amit a Wikimedia-közösség önkéntesei készítettek és tartanak karban. A Wikimédia Alapítvány nem vesz részt az applikáció megalkotásában, fejlesztésében és üzemeltetésében.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Forráskód&lt;/a&gt; és &lt;a href=\"https://commons-app.github.io/\"&gt;weboldal&lt;/a&gt; a GitHubon. Nyiss egy új &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-problémát&lt;/a&gt; hibabejelentéssel vagy fejlesztési javaslattal.</string>
   <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Adatvédelmi_irányelv\"&gt;Adatvédelmi irányelvek&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Köszönetnyilvánítás&lt;/a&gt;</string>
@@ -86,6 +86,7 @@
   <string name="menu_retry_upload">Újra</string>
   <string name="menu_cancel_upload">Mégse</string>
   <string name="share_license_summary">Ez a kép %1$s licenc alatt kerül feltöltésre</string>
+  <string name="media_upload_policy">A kép feltöltésével kijelentem, hogy ez a saját munkám és nem tartalmaz jogvédett anyagot, nem szelfi és megfelel a&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons irányelveinek&lt;/a&gt;.</string>
   <string name="menu_download">Letöltés</string>
   <string name="preference_license">Licenc</string>
   <string name="use_previous">Előző cím/leírás használata</string>
@@ -134,6 +135,7 @@
   <string name="detail_license_empty">Ismeretlen licenc</string>
   <string name="menu_refresh">Frissítés</string>
   <string name="read_storage_permission_rationale">Szükséges engedély: Külső tárhely olvasása. Az alkalmazás nem működik enélkül.</string>
+  <string name="write_storage_permission_rationale">Szükséges engedély: Külső tárhely írása. Az alkalmazás nem működik enélkül.</string>
   <string name="location_permission_rationale">Lehetséges engedély: Jelenlegi hely megszerzése, a kategóriajavaslatok lehetőségéért.</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Közeli helyek</string>
@@ -147,6 +149,9 @@
   <string name="media_detail_description">Leírás</string>
   <string name="media_detail_description_explanation">A média leírása kerül ide. Ez akár egészen hosszú is lehet, és több sorba fog kerülni. Azért reméljük, jól néz majd ki.</string>
   <string name="media_detail_uploaded_date">Feltöltési dátum</string>
+  <string name="media_detail_license">Licenc</string>
+  <string name="media_detail_coordinates">Koordináták</string>
+  <string name="media_detail_coordinates_empty">Nincs megadva</string>
   <string name="become_a_tester_title">Béta tesztelővé válás</string>
   <string name="become_a_tester_description">Jelentkezz a béta csatornánkra a Google Playen, hogy hamarabb megkapd a hibajavításokat és az új funkciókat</string>
   <string name="use_wikidata">Wikidata használata</string>
@@ -162,6 +167,13 @@
   <string name="background_image">Háttérkép</string>
   <string name="no_image_found">Nem található kép</string>
   <string name="upload_image">Kép feltöltése</string>
+  <string name="welcome_image_mount_zao">Zaō-hegy</string>
+  <string name="welcome_image_llamas">Lámák</string>
+  <string name="welcome_image_rainbow_bridge">Rainbow Bridge</string>
+  <string name="welcome_image_tulip">Tulipán</string>
+  <string name="welcome_image_no_selfies">Csak semmi szelfi</string>
+  <string name="welcome_image_proprietary">Szabadalmaztatott kép</string>
+  <string name="welcome_image_welcome_wikipedia">Üdvözlünk a Wikipédián</string>
   <string name="welcome_image_sydney_opera_house">Sydney Operaház</string>
   <string name="cancel">Mégse</string>
   <string name="navigation_drawer_open">Megnyitás</string>
@@ -174,7 +186,12 @@
   <string name="navigation_item_feedback">Visszajelzés</string>
   <string name="navigation_item_logout">Kijelentkezés</string>
   <string name="navigation_item_info">Bevezető</string>
+  <string name="nearby_needs_permissions">Közeli helyek nem megjeleníthetőek a helyadatokhoz való hozzáférés engedélyezése nélkül</string>
   <string name="no_description_found">nincs leírás</string>
-  <string name="nearby_info_menu_commons_article" fuzzy="true">Commons szócikk</string>
+  <string name="nearby_info_menu_commons_article">Commons leírólap</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata-elem</string>
+  <string name="description_info">Kérlek a lehető legteljesebb módon írd le a fájlt: hol készült, mit ábrázol, mi a kontextus? Kérlek add meg az objektumokat vagy személyeket a képen, valamint a nehezen kitalálható információkat (például a kép készítésének dátumát, ha az egy tájkép). Amennyiben a média valami szokatlant ábrázol, kérlek fejtsd ki, hogy mi teszi szokatlanná.</string>
+  <string name="give_permission">Engedély adása</string>
+  <string name="use_external_storage">Külső tárhely használata</string>
+  <string name="login_to_your_account">Bejelentkezés a fiókodba</string>
 </resources>

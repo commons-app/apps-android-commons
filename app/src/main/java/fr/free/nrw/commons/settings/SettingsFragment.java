@@ -3,6 +3,7 @@ package fr.free.nrw.commons.settings;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -18,6 +19,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.widget.Toast;
 
 import java.io.File;
@@ -120,7 +122,13 @@ public class SettingsFragment extends PreferenceFragment {
     private void sendAppLogsViaEmail() {
         String appLogs = Utils.getAppLogs();
         File appLogsFile = FileUtils.createAndGetAppLogsFile(appLogs);
-        Uri appLogsFilePath = Uri.fromFile(appLogsFile);
+
+        Context applicationContext = getActivity().getApplicationContext();
+        Uri appLogsFilePath = FileProvider.getUriForFile(
+                getActivity(),
+                applicationContext.getPackageName() + ".provider",
+                appLogsFile
+        );
 
         Intent feedbackIntent = new Intent(Intent.ACTION_SEND);
         feedbackIntent.setType("message/rfc822");

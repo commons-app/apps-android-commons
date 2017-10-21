@@ -73,9 +73,9 @@
   <string name="title_activity_settings">Indstillinger</string>
   <string name="title_activity_signup">Opret konto</string>
   <string name="menu_about">Om</string>
-  <string name="about_license" fuzzy="true">Open Source-programmer udgivet under &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. %1$s og dets logo er varemærker for Wikimedia Foundation og bruges med tilladelse fra Wikimedia Foundation. Vi er hverken støttet af eller forbundet med Wikimedia Foundation.</string>
+  <string name="about_license">Wikimedia Commons-programmet oprettet og udviklet af frivillige i Wikimediafællesskabet. Wikimedia Foundation er ikke involveret i oprettelse, udvikling eller vedligeholdelse af programmet.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kilde&lt;/a&gt; og &lt;a href=\"https://commons-app.github.io/\"&gt;hjemmeside&lt;/a&gt; på GitHub. Opret en ny &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-sag&lt;/a&gt; for fejlrapporter og forslag.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privacy policy&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Privatlivspolitik&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Bidragsydere&lt;/a&gt;</string>
   <string name="title_activity_about">Om</string>
   <string name="menu_feedback">Send tilbagemelding (med e-mail)</string>
@@ -195,6 +195,8 @@
   <string name="error_while_cache">Fejl under mellemlagring af billeder</string>
   <string name="title_info">En unik beskrivelse for filen, som vil fungere som et filnavn. Du kan bruge normalt sprog med mellemrum. Udelad filendelsen.</string>
   <string name="description_info">Beskriv mediet så godt som muligt: Hvor blev det taget? Hvad viser det? Hvad er konteksten? Beskriv objekterne eller personerne. Giv information som ikke nemt kan gættes, for eksempel hvornår på dagen billedet blev taget, om det er et landskabsbillede. Om billedet viser noget usædvanligt, forklar hvad som gør det usædvanlig.</string>
+  <string name="give_permission">Giv tilladelse</string>
   <string name="use_external_storage">Brug eksternt lager</string>
   <string name="use_external_storage_summary">Gem billeder taget med din enheds program på kameraet</string>
+  <string name="login_to_your_account">Log ind på din konto</string>
 </resources>

@@ -2,17 +2,11 @@
 <resources>
     <attr name="mainBackground" format="reference"/>
     <attr name="semitransparentText" format="reference"/>
-    <attr name="commonsAppBlue" format="reference"/>
     <attr name="subBackground" format="reference"/>
     <attr name="fragmentCategorisationBackground" format="reference"/>
     <attr name="buttonBackground" format="reference"/>
     <attr name="uploadOverlayBackground" format="reference"/>
     <attr name="spinnerTheme" format="reference"/>
-    <attr name="iconSend" format="reference"/>
-    <attr name="iconSave" format="reference"/>
-    <attr name="iconCamera" format="reference"/>
-    <attr name="iconPhoto" format="reference"/>
-    <attr name="iconUndo" format="reference"/>
 
     <declare-styleable name="CompatTextView">
         <attr name="drawablePadding" format="dimension"/>

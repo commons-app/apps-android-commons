@@ -189,4 +189,5 @@
   <string name="nearby_info_menu_wikidata_article">উইকিউপাত্ত পদ</string>
   <string name="give_permission">অনুমতি দিন</string>
   <string name="use_external_storage">বাহ্যিক সঞ্চয়স্থান ব্যবহার করুন</string>
+  <string name="login_to_your_account">আপনার অ্যাকাউন্টে প্রবেশ করুন</string>
 </resources>

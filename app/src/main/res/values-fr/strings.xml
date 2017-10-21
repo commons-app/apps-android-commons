@@ -198,4 +198,5 @@
   <string name="give_permission">Accorder le droit</string>
   <string name="use_external_storage">Utiliser le stockage externe</string>
   <string name="use_external_storage_summary">Enregistrer les images prises avec l’appareil photo de votre appareil</string>
+  <string name="login_to_your_account">Connectez-vous à votre compte</string>
 </resources>
