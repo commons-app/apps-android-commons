@@ -258,6 +258,7 @@ public class NearbyActivity extends NavigationBaseActivity {
     }
 
     private void refreshView() {
+        curLatLang = locationManager.getLatestLocation();
         nearbyAsyncTask = new NearbyAsyncTask(this);
         nearbyAsyncTask.execute();
     }
