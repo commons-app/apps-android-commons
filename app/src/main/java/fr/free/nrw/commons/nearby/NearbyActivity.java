@@ -259,6 +259,7 @@ public class NearbyActivity extends NavigationBaseActivity {
 
     private void refreshView() {
         curLatLang = locationManager.getLatestLocation();
+        progressBar.setVisibility(View.VISIBLE);
         nearbyAsyncTask = new NearbyAsyncTask(this);
         nearbyAsyncTask.execute();
     }
