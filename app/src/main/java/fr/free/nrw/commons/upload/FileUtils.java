@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+import android.os.ParcelFileDescriptor;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -17,6 +18,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
+import java.util.Date;
 
 import timber.log.Timber;
 
@@ -36,6 +38,7 @@ public class FileUtils {
     @Nullable
     public static String getPath(Context context, Uri uri) {
 
+        String returnPath = null;
         final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
 
         // DocumentProvider
@@ -47,7 +50,7 @@ public class FileUtils {
                 final String type = split[0];
 
                 if ("primary".equalsIgnoreCase(type)) {
-                    return Environment.getExternalStorageDirectory() + "/" + split[1];
+                    returnPath = Environment.getExternalStorageDirectory() + "/" + split[1];
                 }
             }
             // DownloadsProvider
@@ -57,7 +60,7 @@ public class FileUtils {
                 final Uri contentUri = ContentUris.withAppendedId(
                         Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
 
-                return getDataColumn(context, contentUri, null, null);
+                returnPath = getDataColumn(context, contentUri, null, null);
             }
             // MediaProvider
             else if (isMediaDocument(uri)) {
@@ -79,16 +82,41 @@ public class FileUtils {
                         split[1]
                 };
 
-                return getDataColumn(context, contentUri, selection, selectionArgs);
+                returnPath = getDataColumn(context, contentUri, selection, selectionArgs);
             }
         }
         // MediaStore (and general)
         else if ("content".equalsIgnoreCase(uri.getScheme())) {
-            return getDataColumn(context, uri, null, null);
+            returnPath = getDataColumn(context, uri, null, null);
         }
         // File
         else if ("file".equalsIgnoreCase(uri.getScheme())) {
-            return uri.getPath();
+            returnPath = uri.getPath();
+        }
+
+        //below piece of code was earlier added to ShareActivity to getPathOfMediaOrCopy method. Moved it here to make it reusable
+        if(returnPath == null) {
+            // in older devices getPath() may fail depending on the source URI
+            // creating and using a copy of the file seems to work instead.
+            // TODO: there might be a more proper solution than this
+            String copyPath = context.getCacheDir().getAbsolutePath()
+                    + "/" + new Date().getTime() + ".jpg";
+            try {
+                ParcelFileDescriptor descriptor
+                        = context.getContentResolver().openFileDescriptor(uri, "r");
+                if (descriptor != null) {
+                    copy(
+                            descriptor.getFileDescriptor(),
+                            copyPath);
+                    Timber.d("Filepath (copied): %s", copyPath);
+                    return copyPath;
+                }
+            } catch (IOException e) {
+                Timber.w(e, "Error in file " + copyPath);
+                return null;
+            }
+        } else {
+            return returnPath;
         }
 
         return null;
@@ -109,7 +137,7 @@ public class FileUtils {
                                        String[] selectionArgs) {
 
         Cursor cursor = null;
-        final String column = "_data";
+        final String column = MediaStore.Images.ImageColumns.DATA;
         final String[] projection = {
                 column
         };
