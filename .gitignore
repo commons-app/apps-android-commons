@@ -30,3 +30,4 @@ app/gradle/wrapper/gradle-wrapper.properties
 
 #related to OpenCV
 /libraries/opencv/build
+app/src/main/jniLibs
