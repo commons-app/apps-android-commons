@@ -69,7 +69,7 @@
   <string name="title_activity_settings">Nustatymai</string>
   <string name="title_activity_signup">Užsiregistruoti</string>
   <string name="menu_about">Apie</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privatumo politika&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Privatumo politika&lt;/a&gt;</string>
   <string name="title_activity_about">Apie</string>
   <string name="menu_feedback">Siųsti Atsiliepimą (El. paštu)</string>
   <string name="no_email_client">Nėra įdiegtos el. pašto tvarkyklės</string>
@@ -106,7 +106,7 @@
   <string name="detail_description_empty">Nėra aprašymo</string>
   <string name="detail_license_empty">Nežinoma licencija</string>
   <string name="menu_refresh">Atnaujinti</string>
-  <string name="storage_permission_rationale">Reikalinga teisė: Skaityti išorinę talpyklą. Programėle be to negali funkcionuoti.</string>
+  <string name="read_storage_permission_rationale">Reikalinga teisė: Skaityti išorinę talpyklą. Programėle be to negali funkcionuoti.</string>
   <string name="location_permission_rationale">Neprivaloma teisė: Gauti dabartinę vietovę, kad būtų pasiūlomos kategorijos</string>
   <string name="ok">Gerai</string>
   <string name="title_activity_nearby">Netoliese Esančios Vietos</string>
@@ -116,4 +116,5 @@
   <string name="no">Ne</string>
   <string name="media_detail_title">Pavadinimas</string>
   <string name="media_detail_description">Aprašymas</string>
+  <string name="give_permission">Suteikti leidimą</string>
 </resources>

@@ -75,7 +75,7 @@
   <string name="menu_about">O</string>
   <string name="about_license" fuzzy="true">Program otvorenog kod objavljen pod licencom &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache v2&lt;/a&gt;. Wikimedia Commons i njen logo zaštitni su znaci Zadužbine Wikimedia i koriste se s njenom dozvolom. Nismo povezani niti nas podržava Zadužbina Wikimedia.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Izvorni kod&lt;/a&gt; i &lt;a href=\"https://commons-app.github.io/\"&gt;veb-sajt&lt;/a&gt; na GitHubu. Započnite novi &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;slučaj na GitHubu&lt;/a&gt; da biste prijavili greške i dali prijedloge.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politika privatnosti&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politika privatnosti&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Zasluge&lt;/a&gt;</string>
   <string name="title_activity_about">O</string>
   <string name="menu_feedback">Pošalji povratne informacije (putem e-pošte)</string>
@@ -133,7 +133,7 @@
   <string name="detail_description_empty">Nema opisa</string>
   <string name="detail_license_empty">Nepoznata licenca</string>
   <string name="menu_refresh">Osvježi</string>
-  <string name="storage_permission_rationale">Potrebna dozvola: Čitanje vanjske memorije. Aplikacija ne može raditi bez ovog.</string>
+  <string name="read_storage_permission_rationale">Potrebna dozvola: Čitanje vanjske memorije. Aplikacija ne može raditi bez ovog.</string>
   <string name="location_permission_rationale">Neobavezna dozvola: Dobavljanje trenutne lokacije za predlaganje kategorija</string>
   <string name="ok">U redu</string>
   <string name="title_activity_nearby">Mjesta u blizini</string>

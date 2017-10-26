@@ -242,9 +242,9 @@ public class Utils {
     public static boolean xmlFastForward(XmlPullParser parser, String namespace, String element) {
         try {
             while (parser.next() != XmlPullParser.END_DOCUMENT) {
-                if (parser.getEventType() == XmlPullParser.START_TAG &&
-                        parser.getNamespace().equals(namespace) &&
-                        parser.getName().equals(element)) {
+                if (parser.getEventType() == XmlPullParser.START_TAG
+                        && parser.getNamespace().equals(namespace)
+                        && parser.getName().equals(element)) {
                     // We found it!
                     return true;
                 }
@@ -267,7 +267,8 @@ public class Utils {
             extension = "jpg";
         }
         title = jpegPattern.matcher(title).replaceFirst(".jpg");
-        if (extension != null && !title.toLowerCase(Locale.getDefault()).endsWith("." + extension.toLowerCase(Locale.ENGLISH))) {
+        if (extension != null && !title.toLowerCase(Locale.getDefault())
+                .endsWith("." + extension.toLowerCase(Locale.ENGLISH))) {
             title += "." + extension;
         }
         return title;

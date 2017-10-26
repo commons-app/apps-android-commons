@@ -66,7 +66,7 @@
   <string name="menu_about">Тиркеме жөнүндө</string>
   <string name="about_license" fuzzy="true">баштапкы коду ачык тиркемелер, &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; лицензиясынын негизинде чыгарылган</string>
   <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt; шилтемесине баштапкы код. &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt; шилтемесиндеги катачылык.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Конфиденциалдуулук_саясаты\"&gt;Конфиденциалдуулук саясаты&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Конфиденциалдуулук_саясаты\"&gt;Конфиденциалдуулук саясаты&lt;/a&gt;</string>
   <string name="title_activity_about">Тиркеме жөнүндө</string>
   <string name="menu_feedback">Шарттуу жооп жөнөтүү (Email)</string>
   <string name="provider_categories">Жакында колдонулган түрмөктөр</string>

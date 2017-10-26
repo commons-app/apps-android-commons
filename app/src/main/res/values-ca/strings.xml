@@ -70,9 +70,9 @@
   <string name="title_activity_settings">Paràmetres</string>
   <string name="title_activity_signup">Registre</string>
   <string name="menu_about">Quant a</string>
-  <string name="about_license" fuzzy="true">Programari de codi obert distribuït sota la &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;llicència Apache v2&lt;/a&gt;</string>
+  <string name="about_license">L’aplicació de codi obert Wikimedia Commons fou creada per, i rep manteniment de, cessionaris i voluntaris de la comunitat de Wikimedia. La Fundació Wikimedia no està involucrada en la creació, el desenvolupament ni el manteniment de l’aplicació.</string>
   <string name="about_improve" fuzzy="true">Codi a &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Informes d\'error a &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
-  <string name="about_privacy_policy">Wikimedia:Commons-android-texts-sobre privacitat/ca</string>
+  <string name="about_privacy_policy" fuzzy="true">Wikimedia:Commons-android-texts-sobre privacitat/ca</string>
   <string name="title_activity_about">Quant a</string>
   <string name="menu_feedback">Envia comentaris (per correu)</string>
   <string name="provider_categories">Categories usades recentment</string>

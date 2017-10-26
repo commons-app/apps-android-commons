@@ -49,7 +49,7 @@
   <string name="menu_about">Pilina</string>
   <string name="about_license" fuzzy="true">Hāʻawi ʻia nā lako pōlamu kūmolenoa ma lalo o ka &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Laikini ʻApaki m2&lt;/a&gt;</string>
   <string name="about_improve" fuzzy="true">Aia ke kūmole ma &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Aia nā mū ma &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Kulekele pilikino&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Kulekele pilikino&lt;/a&gt;</string>
   <string name="title_activity_about">Pilina</string>
   <string name="menu_feedback">Hoʻouna Manaʻo (ia Lekauila)</string>
   <string name="provider_categories">Nā māhele i hanawale</string>

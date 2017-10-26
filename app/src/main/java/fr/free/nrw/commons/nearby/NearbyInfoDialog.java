@@ -63,10 +63,10 @@ public class NearbyInfoDialog extends OverlayDialog {
 
         overflowButton.setVisibility(showMenu() ? View.VISIBLE : View.GONE);
 
-        overflowButton.setOnClickListener(this::popupMenuListener);
+        overflowButton.setOnClickListener(v -> popupMenuListener());
     }
 
-    private void popupMenuListener(View v) {
+    private void popupMenuListener() {
         PopupMenu popupMenu = new PopupMenu(getActivity(), overflowButton);
         popupMenu.inflate(R.menu.nearby_info_dialog_options);
 

@@ -99,4 +99,6 @@
   <string name="navigation_item_feedback">تہاڈی رائے</string>
   <string name="navigation_item_logout">لاگ آؤٹ</string>
   <string name="nearby_info_menu_wikidata_article">وکی ڈیٹا آئٹم</string>
+  <string name="give_permission">اجازت ݙیوو</string>
+  <string name="login_to_your_account">آپݨے کھاتے وچ لاگ ان تھیوو</string>
 </resources>

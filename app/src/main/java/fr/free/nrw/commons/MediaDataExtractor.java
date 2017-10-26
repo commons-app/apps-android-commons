@@ -2,7 +2,6 @@ package fr.free.nrw.commons;
 
 import android.support.annotation.Nullable;
 
-import org.mediawiki.api.ApiResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -39,7 +38,6 @@ public class MediaDataExtractor {
     private String filename;
     private ArrayList<String> categories;
     private Map<String, String> descriptions;
-    private Date date;
     private String license;
     private @Nullable LatLng coordinates;
     private LicenseList licenseList;
@@ -180,7 +178,7 @@ public class MediaDataExtractor {
     }
 
     private static abstract class TemplateChildNodeComparator {
-        abstract public boolean match(Node node);
+        public abstract boolean match(Node node);
     }
 
     private Node findTemplateParameter(Node templateNode, String name) throws IOException {

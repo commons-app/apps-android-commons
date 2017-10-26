@@ -73,9 +73,9 @@
   <string name="title_activity_settings">設定</string>
   <string name="title_activity_signup">註冊</string>
   <string name="menu_about">關於</string>
-  <string name="about_license">以&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache許可證 v2&lt;/a&gt;釋放的開放源碼軟體。%1$s和其標誌圖像是維基媒體基金會的標記；並在維基媒體基金會的許可下使用。我們並非由維基媒體基金會所認可、也不隸屬於維基媒體基金會。</string>
+  <string name="about_license">維基共享資源應用程式是透過維基媒體社群上的受讓人、與志願者們所建立及維護的開放原始碼應用程式。維基媒體基金會並不涉及此應用程式的建立、開發、與維護方面。</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;原始碼&lt;/a&gt;和&lt;a href=\"https://commons-app.github.io/\"&gt;網站&lt;/a&gt;位於GitHub上。建立新的&lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub問題&lt;/a&gt;來回報問題和提出建議。</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://meta.wikimedia.org/wiki/Privacy_policy/zh\"&gt;隱私方針&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;隱私方針&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;製作群&lt;/a&gt;</string>
   <string name="title_activity_about">關於</string>
   <string name="menu_feedback">傳送回饋 （通過電子郵件）</string>
@@ -134,7 +134,8 @@
   <string name="detail_description_empty">無說明</string>
   <string name="detail_license_empty">不明授權</string>
   <string name="menu_refresh">重新整理</string>
-  <string name="storage_permission_rationale">必要權限：讀取外部存儲裝置。應用程式必須此功能，才能進行正確運作。</string>
+  <string name="read_storage_permission_rationale">必要權限：讀取外部存儲裝置。應用程式必須此功能，才能進行正確運作。</string>
+  <string name="write_storage_permission_rationale">必要權限：寫入外部存儲裝置。應用程式必須此功能，才能進行正確運作。</string>
   <string name="location_permission_rationale">可有可無的權限：獲取目前的地理位置，以用於分類建議</string>
   <string name="ok">好</string>
   <string name="title_activity_nearby">附近地點</string>
@@ -194,4 +195,8 @@
   <string name="error_while_cache">在快取圖片時發生錯誤</string>
   <string name="title_info">用於本檔案的唯一描述性標題。您可以使用帶有空格的簡明語言，另外請不要包含副檔名。</string>
   <string name="description_info">請盡可能說明媒體內容：拍攝於何處？是顯示什麼事物？有什麼脈絡？請描述對象或人物。透露出一些較不易猜測的訊息，例如是風景的話；可以是一天裡的時間。如果媒體顯示出一些不正常的事物，請說明出造成不正常原因。</string>
+  <string name="give_permission">給予權限</string>
+  <string name="use_external_storage">使用外部存儲裝置</string>
+  <string name="use_external_storage_summary">在您的裝置上使用照相機應用程式來儲存照片</string>
+  <string name="login_to_your_account">登入您的帳號</string>
 </resources>

@@ -63,7 +63,7 @@ public  class       MultipleShareActivity
 
     @Override
     public int getTotalMediaCount() {
-        if(photosList == null) {
+        if (photosList == null) {
             return 0;
         }
         return photosList.size();
@@ -71,7 +71,7 @@ public  class       MultipleShareActivity
 
     @Override
     public void notifyDatasetChanged() {
-        if(uploadsList != null) {
+        if (uploadsList != null) {
             uploadsList.notifyDatasetChanged();
         }
     }
@@ -145,7 +145,7 @@ public  class       MultipleShareActivity
         uploadsList.setImageOnlyMode(true);
 
         categorizationFragment = (CategorizationFragment) getSupportFragmentManager().findFragmentByTag("categorization");
-        if(categorizationFragment == null) {
+        if (categorizationFragment == null) {
             categorizationFragment = new CategorizationFragment();
         }
         // FIXME: Stops the keyboard from being shown 'stale' while moving out of this fragment into the next
@@ -162,7 +162,7 @@ public  class       MultipleShareActivity
 
     @Override
     public void onCategoriesSave(List<String> categories) {
-        if(categories.size() > 0) {
+        if (categories.size() > 0) {
         ContentProviderClient client = getContentResolver().acquireContentProviderClient(ModificationsContentProvider.AUTHORITY);
             for(Contribution contribution: photosList) {
                 ModifierSequence categoriesSequence = new ModifierSequence(contribution.getContentUri());
@@ -191,7 +191,7 @@ public  class       MultipleShareActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case android.R.id.home:
-                if(mediaDetails.isVisible()) {
+                if (mediaDetails.isVisible()) {
                     getSupportFragmentManager().popBackStack();
                 }
                 return true;
@@ -209,7 +209,7 @@ public  class       MultipleShareActivity
         ButterKnife.bind(this);
         initDrawer();
 
-        if(savedInstanceState != null) {
+        if (savedInstanceState != null) {
             photosList = savedInstanceState.getParcelableArrayList("uploadsList");
         }
 
@@ -225,7 +225,7 @@ public  class       MultipleShareActivity
     }
 
     private void showDetail(int i) {
-        if(mediaDetails == null ||!mediaDetails.isVisible()) {
+        if (mediaDetails == null ||!mediaDetails.isVisible()) {
             mediaDetails = new MediaDetailPagerFragment(true);
             getSupportFragmentManager()
                     .beginTransaction()
@@ -248,8 +248,8 @@ public  class       MultipleShareActivity
         app.getMWApi().setAuthCookie(authCookie);
         Intent intent = getIntent();
 
-        if(intent.getAction().equals(Intent.ACTION_SEND_MULTIPLE)) {
-            if(photosList == null) {
+        if (intent.getAction().equals(Intent.ACTION_SEND_MULTIPLE)) {
+            if (photosList == null) {
                 photosList = new ArrayList<>();
                 ArrayList<Uri> urisList = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
                 for(int i=0; i < urisList.size(); i++) {
@@ -265,7 +265,7 @@ public  class       MultipleShareActivity
             }
 
             uploadsList = (MultipleUploadListFragment) getSupportFragmentManager().findFragmentByTag("uploadsList");
-            if(uploadsList == null) {
+            if (uploadsList == null) {
                 uploadsList =  new MultipleUploadListFragment();
                 getSupportFragmentManager()
                         .beginTransaction()
@@ -287,7 +287,7 @@ public  class       MultipleShareActivity
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if(categorizationFragment != null && categorizationFragment.isVisible()) {
+        if (categorizationFragment != null && categorizationFragment.isVisible()) {
             EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT)
                     .param("username", app.getCurrentAccount().name)
                     .param("categories-count", categorizationFragment.getCurrentSelectedCount())
@@ -307,7 +307,7 @@ public  class       MultipleShareActivity
 
     @Override
     public void onBackStackChanged() {
-        if(mediaDetails != null && mediaDetails.isVisible()) {
+        if (mediaDetails != null && mediaDetails.isVisible()) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         } else {
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);

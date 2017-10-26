@@ -49,7 +49,7 @@
   <string name="menu_about">Um</string>
   <string name="about_license" fuzzy="true">Open Source ritbúnaður útgivin undir &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;</string>
   <string name="about_improve" fuzzy="true">Kelda á &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Lýs (bugs) á &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privatlívs politikkur&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privatlívs politikkur&lt;/a&gt;</string>
   <string name="title_activity_about">Um</string>
   <string name="menu_feedback">Send afturmelding (við T-posti)</string>
   <string name="provider_categories">Nýliga brúktir bólkar</string>

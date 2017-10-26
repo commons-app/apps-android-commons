@@ -69,7 +69,7 @@
   <string name="title_activity_signup">Qeyd be</string>
   <string name="menu_about">Heq te cı</string>
   <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Çıme&lt;/a&gt; u &lt;a href=\"https://commons-app.github.io/\"&gt;website&lt;/a&gt; on GitHub&lt;/a&gt;. Newe vıraz &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub mewzu &lt;/a&gt; U rapor bıweseynê</string>
-  <string name="about_privacy_policy">/</string>
+  <string name="about_privacy_policy" fuzzy="true">/</string>
   <string name="title_activity_about">Heq te cı</string>
   <string name="menu_feedback">Peyd rışten bırış (E-posta ra)</string>
   <string name="no_email_client">E-posta eyar nêbi</string>
@@ -111,4 +111,11 @@
   <string name="warning">Tembe kem</string>
   <string name="yes">E</string>
   <string name="no">Nê</string>
+  <string name="media_detail_title">Sername</string>
+  <string name="media_detail_license">Lisans</string>
+  <string name="media_detail_coordinates">Koordinati</string>
+  <string name="cancel">Bıtexelne</string>
+  <string name="navigation_drawer_open">Ake</string>
+  <string name="navigation_item_home">Keye</string>
+  <string name="navigation_item_upload">Bar ke</string>
 </resources>

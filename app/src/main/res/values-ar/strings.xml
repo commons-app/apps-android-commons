@@ -57,7 +57,7 @@
   <string name="menu_about">حول</string>
   <string name="about_license" fuzzy="true">برنامج مفتوح المصدر منشور &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;برخصة أباتشي النسخة 2&lt;/a&gt;</string>
   <string name="about_improve" fuzzy="true">المصدر على &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;غِتهب&lt;/a&gt;. العلل في &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;بغزِلا&lt;/a&gt;.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;سياسة الخصوصية&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;سياسة الخصوصية&lt;/a&gt;</string>
   <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;CREDITS&lt;/a&gt;</string>
   <string name="title_activity_about">حول</string>
   <string name="menu_feedback">إرسال ملاحظات (عبر البريد الإلكتروني)</string>
@@ -83,6 +83,7 @@
   <string name="detail_license_empty">ترخيص غير معلوم</string>
   <string name="menu_refresh">تحديث</string>
   <string name="ok">موافق</string>
+  <string name="title_activity_nearby">الأماكن القريبة</string>
   <string name="warning">تحذير</string>
   <string name="yes">نعم</string>
   <string name="no">لا</string>
@@ -92,7 +93,12 @@
   <string name="media_detail_license">الترخيص</string>
   <string name="media_detail_coordinates">الإحداثيات</string>
   <string name="use_wikidata">استخدم ويكي بيانات</string>
+  <string name="maximum_limit">الحد الأقصى</string>
   <string name="navigation_item_home">الرئيسية</string>
+  <string name="navigation_item_upload">رفع</string>
+  <string name="navigation_item_nearby">بالقرب من هنا</string>
+  <string name="navigation_item_about">حول</string>
   <string name="navigation_item_settings">الإعدادات</string>
+  <string name="navigation_item_logout">تسجيل الخروج</string>
   <string name="nearby_info_menu_commons_article">صفحة ملف كومنز</string>
 </resources>

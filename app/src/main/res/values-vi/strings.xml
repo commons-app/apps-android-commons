@@ -63,9 +63,9 @@
   <string name="title_activity_settings">Cài đặt</string>
   <string name="title_activity_signup">Mở tài khoản</string>
   <string name="menu_about">Giới thiệu</string>
-  <string name="about_license">Phần mềm mã nguồn mở được phát hành theo &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Giấy phép Apache v2&lt;/a&gt;. %1$s và biểu trưng của nó là nhãn hiệu của Quỹ Wikimedia và được sử dụng do Quỹ Wikimedia cho phép. Chúng tôi không được Quỹ Wikimedia ủng hộ hoặc nhận làm chi nhánh.</string>
+  <string name="about_license" fuzzy="true">Phần mềm mã nguồn mở được phát hành theo &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Giấy phép Apache v2&lt;/a&gt;. %1$s và biểu trưng của nó là nhãn hiệu của Quỹ Wikimedia và được sử dụng do Quỹ Wikimedia cho phép. Chúng tôi không được Quỹ Wikimedia ủng hộ hoặc nhận làm chi nhánh.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Mã nguồn&lt;/a&gt; và &lt;a href=\"https://commons-app.github.io/\"&gt;trang chủ&lt;/a&gt; tại GitHub. &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;Tạo vấn đề GitHub mới&lt;/a&gt; để báo cáo lỗi hoặc gợi ý thay đổi.</string>
-  <string name="about_privacy_policy"/>
+  <string name="about_privacy_policy" fuzzy="true"/>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Công trạng&lt;/a&gt;</string>
   <string name="title_activity_about">Giới thiệu</string>
   <string name="menu_feedback">Gửi Phản hồi (qua Thư điện tử)</string>
@@ -124,7 +124,8 @@
   <string name="detail_description_empty">Không miêu tả</string>
   <string name="detail_license_empty">Giấy phép không rõ</string>
   <string name="menu_refresh">Làm tươi</string>
-  <string name="storage_permission_rationale">Yêu cầu cấp phép: Đọc thiết bị lưu trữ bên ngoài. Ứng dụng cần được phép đọc thiết bị lưu trữ bên ngoài để hoạt động.</string>
+  <string name="read_storage_permission_rationale">Yêu cầu cấp phép: Đọc thiết bị lưu trữ bên ngoài. Ứng dụng cần được phép đọc thiết bị lưu trữ bên ngoài để hoạt động.</string>
+  <string name="write_storage_permission_rationale">Yêu cầu cấp phép: Ghi vào thiết bị lưu trữ bên ngoài. Ứng dụng cần được phép ghi vào thiết bị lưu trữ bên ngoài để hoạt động.</string>
   <string name="location_permission_rationale">Tùy chọn cấp phép: Định vị hiện tại để nhận gợi ý thể loại</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Nơi Lân cận</string>
@@ -184,4 +185,6 @@
   <string name="error_while_cache">Xuất hiện lỗi khi đưa hình ảnh vào vùng nhớ đệm</string>
   <string name="title_info">Tên ngắn và duy nhất cho tập tin sẽ được dùng làm tên tập tin. Có thể dùng thuật ngữ bình thường với khoảng cách. Đừng bao gồm phần mở rộng tập tin.</string>
   <string name="description_info">Xin vui lòng miêu tả phương tiện càng đầy đủ càng tốt: Chụp ở đâu? Trong hình có gì? Bối cảnh làm sao? Xin vui lòng miêu tả các đối tượng và người trong hình. Cho biết những thông tin khó đoán ra, chẳng hạn giờ trong ngày nếu là phong cảnh. Nếu phương tiện có gì kỳ lạ, xin vui lòng giải thích tại sao nó kỳ lạ.</string>
+  <string name="use_external_storage">Sử dụng thiết bị lưu trữ bên ngoài</string>
+  <string name="use_external_storage_summary">Lưu các hình ảnh được chụp bằng máy chụp hình trong ứng dụng vào thiết bị của bạn</string>
 </resources>

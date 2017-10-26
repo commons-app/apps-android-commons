@@ -33,7 +33,7 @@ public class CategoryModifier extends PageModifier {
         JSONArray categories;
         categories = params.optJSONArray(PARAM_CATEGORIES);
 
-        StringBuffer categoriesString = new StringBuffer();
+        StringBuilder categoriesString = new StringBuilder();
         for(int i=0; i < categories.length(); i++) {
             String category = categories.optString(i);
             categoriesString.append("\n[[Category:").append(category).append("]]");

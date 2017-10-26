@@ -75,7 +75,7 @@
   <string name="menu_about">Auer</string>
   <string name="about_license" fuzzy="true">Open Source software ütjden oner det lisens &lt;a href=\" https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;.\nWikimedia Commons an det Wikimedia-Commons-Logo san markintiaken faan\'t Wikimedia Foundation an wurd mä ferloof faan\'t Wikimedia Foundation brükt. Wi hiar ei tu\'t Wikimedia Foundation.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Code&lt;/a&gt; an &lt;a href=\"https://commons-app.github.io/\"&gt;Wääbsteed&lt;/a&gt; üüb GitHub&lt;/a&gt;. En neien &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-iindrach&lt;/a&gt; för feelern of föörslacher maage.</string>
-  <string name="about_privacy_policy">Brükerreegeln</string>
+  <string name="about_privacy_policy" fuzzy="true">Brükerreegeln</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Soonk&lt;/a&gt;</string>
   <string name="title_activity_about">Auer</string>
   <string name="menu_feedback">Wat wel dü üs sai ? (auer e-mail)</string>
@@ -133,7 +133,7 @@
   <string name="detail_description_empty">Nian beskriiwang</string>
   <string name="detail_license_empty">Ünbekäänd lisens</string>
   <string name="menu_refresh">Nei loose</string>
-  <string name="storage_permission_rationale">Ferlangd rochten: Ekstern spiiker lees. Det app koon saner detdiar rocht ei werke.</string>
+  <string name="read_storage_permission_rationale">Ferlangd rochten: Ekstern seekrang lees. Det app koon saner detdiar rocht ei werke.</string>
   <string name="location_permission_rationale">Mögelk rocht: Rept di aktuel plak för kategoriiföörslacher ap.</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Steeden naibi</string>
