@@ -95,7 +95,7 @@ public class FileUtils {
         }
 
         //below piece of code was earlier added to ShareActivity to getPathOfMediaOrCopy method. Moved it here to make it reusable
-        if(returnPath == null) {
+        if (returnPath == null) {
             // in older devices getPath() may fail depending on the source URI
             // creating and using a copy of the file seems to work instead.
             // TODO: there might be a more proper solution than this

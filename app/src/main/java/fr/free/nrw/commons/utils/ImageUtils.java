@@ -18,10 +18,11 @@ import timber.log.Timber;
  * Created by bluesir9 on 3/10/17.
  */
 
-public class ImageUtils
-{
-    private static final double MINIMUM_DARKNESS_FACTOR = 0.50; //atleast 50% of the image in question should be considered dark for the entire image to be dark
-    private static final double MINIMUM_BLURRYNESS_FACTOR = 0.50; //atleast 50% of the image in question should be considered blurry for the entire image to be blurry
+public class ImageUtils {
+    //atleast 50% of the image in question should be considered dark for the entire image to be dark
+    private static final double MINIMUM_DARKNESS_FACTOR = 0.50;
+    //atleast 50% of the image in question should be considered blurry for the entire image to be blurry
+    private static final double MINIMUM_BLURRYNESS_FACTOR = 0.50;
     private static final int LAPLACIAN_VARIANCE_THRESHOLD = 70;
 
     public enum Result {
@@ -74,11 +75,11 @@ public class ImageUtils
                     numberOfDarkRectangles++;
                 }
 
-                if(checkIfImageIsBlurred(processBitmap)) {
+                if (checkIfImageIsBlurred(processBitmap)) {
                     numberOfBlurredRectangles++;
                 }
                 checkImageTopPosition = checkImageBottomPosition;
-                checkImageBottomPosition += (checkImageBottomPosition < (loadImageHeight - checkImageBottomPosition)) ? checkImageBottomPosition: (loadImageHeight - checkImageBottomPosition);
+                checkImageBottomPosition += (checkImageBottomPosition < (loadImageHeight - checkImageBottomPosition)) ? checkImageBottomPosition : (loadImageHeight - checkImageBottomPosition);
             }
 
             checkImageTopPosition = 0; //reset to start
@@ -109,7 +110,7 @@ public class ImageUtils
      * 50 then the pixel is considered to be dark. Based on the MINIMUM_DARKNESS_FACTOR if enough pixels
      * are dark then the entire bitmap is considered to be dark.
      *
-     * For more information on this brightness/darkness calculation technique refer the accepted answer
+     * <p>For more information on this brightness/darkness calculation technique refer the accepted answer
      * on this -> https://stackoverflow.com/questions/35914461/how-to-detect-dark-photos-in-android/35914745
      * SO question and follow the trail.
      *
@@ -154,13 +155,13 @@ public class ImageUtils
     /**
      * Processes the bitmap provided to see if its blurry or not.
      *
-     * The OpenCV library is utilised to calculate the variance of the Laplacian of
+     * <p>The OpenCV library is utilised to calculate the variance of the Laplacian of
      * a grayscale version of the original bitmap.
      *
-     * A small excerpt from the article here -> https://www.pyimagesearch.com/2015/09/07/blur-detection-with-opencv/
+     * <p>A small excerpt from the article here -> https://www.pyimagesearch.com/2015/09/07/blur-detection-with-opencv/
      * which was used as reference, explaining why this technique works:
      *
-     * "The reason this method works is due to the definition of the Laplacian operator itself, which is used to measure
+     * <p>"The reason this method works is due to the definition of the Laplacian operator itself, which is used to measure
      * the 2nd derivative of an image. The Laplacian highlights regions of an image containing rapid intensity changes,
      * much like the Sobel and Scharr operators. And, just like these operators, the Laplacian is often used for edge detection.
      * The assumption here is that if an image contains high variance then there is a wide spread of responses,
@@ -172,7 +173,7 @@ public class ImageUtils
      * @return true if bitmap is blurry or null, false if bitmap is not blurry
      */
     private static boolean checkIfImageIsBlurred(Bitmap bitmap) {
-        if(bitmap == null) {
+        if (bitmap == null) {
             Timber.e("Expected bitmap was null");
             return false;
         }

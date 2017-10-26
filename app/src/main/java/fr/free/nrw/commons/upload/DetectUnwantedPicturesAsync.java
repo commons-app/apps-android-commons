@@ -13,10 +13,10 @@ import timber.log.Timber;
 /**
  * Created by bluesir9 on 16/9/17.
  *
- * Responsible for checking if the picture that the user is trying to upload is useful or not. Will attempt to filter
+ * <p>Responsible for checking if the picture that the user is trying to upload is useful or not. Will attempt to filter
  * away completely black,fuzzy/blurry pictures(for now).
  *
- * todo: Detect selfies?
+ * <p>todo: Detect selfies?
  */
 
 public class DetectUnwantedPicturesAsync extends AsyncTask<Void, Void, ImageUtils.Result> {
@@ -37,7 +37,7 @@ public class DetectUnwantedPicturesAsync extends AsyncTask<Void, Void, ImageUtil
     protected ImageUtils.Result doInBackground(Void... voids) {
         try {
             Timber.d("FilePath: " + imageMediaFilePath);
-            if(imageMediaFilePath == null) {
+            if (imageMediaFilePath == null) {
                 return ImageUtils.Result.IMAGE_OK;
             }
 

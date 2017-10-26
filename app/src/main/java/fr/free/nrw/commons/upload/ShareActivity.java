@@ -397,7 +397,7 @@ public  class      ShareActivity
                                  we are processing images that are already on server???...
                                 */
 
-                                if(duplicateCheckPassed) {
+                                if (duplicateCheckPassed) {
                                     //image can be uploaded, so now check if its a useless picture or not
                                     performUnwantedPictureDetectionProcess();
                                 }
@@ -438,8 +438,7 @@ public  class      ShareActivity
                 });
 
                 AlertDialog errorDialog = errorDialogBuilder.create();
-                if(!isFinishing())
-                {
+                if (!isFinishing()) {
                     errorDialog.show();
                 }
             }
