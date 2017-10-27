@@ -59,7 +59,7 @@ public class UploadController {
     }
 
     public void cleanup() {
-        if(isUploadServiceConnected) {
+        if (isUploadServiceConnected) {
             app.unbindService(uploadServiceConnection);
         }
     }
@@ -82,11 +82,11 @@ public class UploadController {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(app);
 
         //Set creator, desc, and license
-        if(TextUtils.isEmpty(contribution.getCreator())) {
+        if (TextUtils.isEmpty(contribution.getCreator())) {
             contribution.setCreator(app.getCurrentAccount().name);
         }
 
-        if(contribution.getDescription() == null) {
+        if (contribution.getDescription() == null) {
             contribution.setDescription("");
         }
 
@@ -103,11 +103,11 @@ public class UploadController {
             protected Contribution doInBackground(Void... voids /* stare into you */) {
                 long length;
                 try {
-                    if(contribution.getDataLength() <= 0) {
+                    if (contribution.getDataLength() <= 0) {
                         length = app.getContentResolver()
                                 .openAssetFileDescriptor(contribution.getLocalUri(), "r")
                                 .getLength();
-                        if(length == -1) {
+                        if (length == -1) {
                             // Let us find out the long way!
                             length = Utils.countBytes(app.getContentResolver()
                                     .openInputStream(contribution.getLocalUri()));

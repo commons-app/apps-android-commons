@@ -13,7 +13,7 @@ public class LatLng {
      * @param longitude double value
      */
     public LatLng(double latitude, double longitude, float accuracy) {
-        if(-180.0D <= longitude && longitude < 180.0D) {
+        if (-180.0D <= longitude && longitude < 180.0D) {
             this.longitude = longitude;
         } else {
             this.longitude = ((longitude - 180.0D) % 360.0D + 360.0D) % 360.0D - 180.0D;
@@ -33,9 +33,9 @@ public class LatLng {
     }
 
     public boolean equals(Object o) {
-        if(this == o) {
+        if (this == o) {
             return true;
-        } else if(!(o instanceof LatLng)) {
+        } else if (!(o instanceof LatLng)) {
             return false;
         } else {
             LatLng var2 = (LatLng)o;

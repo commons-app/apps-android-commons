@@ -178,8 +178,8 @@ public class CommonsApplication extends Application {
 
     public boolean deviceHasCamera() {
         PackageManager pm = getPackageManager();
-        return pm.hasSystemFeature(PackageManager.FEATURE_CAMERA) ||
-                pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT);
+        return pm.hasSystemFeature(PackageManager.FEATURE_CAMERA)
+                || pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT);
     }
 
     public void clearApplicationData(Context context, LogoutListener logoutListener) {
