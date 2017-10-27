@@ -29,6 +29,7 @@ public class NearbyPlaces {
     private static final Uri WIKIDATA_QUERY_URL = Uri.parse("https://query.wikidata.org/sparql");
     private static final Uri WIKIDATA_QUERY_UI_URL = Uri.parse("https://query.wikidata.org/");
     private final String wikidataQuery;
+    private double radius = INITIAL_RADIUS;
     private List<Place> places;
 
     public NearbyPlaces() {
@@ -42,11 +43,10 @@ public class NearbyPlaces {
 
     List<Place> getFromWikidataQuery(LatLng curLatLng, String lang) {
         List<Place> places = Collections.emptyList();
-        double radius = INITIAL_RADIUS;
 
         try {
             // increase the radius gradually to find a satisfactory number of nearby places
-            while (radius < MAX_RADIUS) {
+            while (radius <= MAX_RADIUS) {
                 places = getFromWikidataQuery(curLatLng, lang, radius);
                 Timber.d("%d results at radius: %f", places.size(), radius);
                 if (places.size() >= MIN_RESULTS) {
@@ -60,7 +60,13 @@ public class NearbyPlaces {
             // errors tend to be caused by too many results (and time out)
             // try a small radius next time
             Timber.d("back to initial radius: %f", radius);
+            radius = INITIAL_RADIUS;
         }
+        // make sure we will be able to send at least one request next time
+        if (radius > MAX_RADIUS) {
+            radius = MAX_RADIUS;
+        }
+
         return places;
     }
 
