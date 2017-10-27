@@ -90,6 +90,7 @@
   <string name="menu_retry_upload">Повторить</string>
   <string name="menu_cancel_upload">Отмена</string>
   <string name="share_license_summary">Это изображение будет лицензировано под %1$s</string>
+  <string name="media_upload_policy">Отправляя это изображение, я подтверждаю, что это моя собственная работа, которая не содержит защищённых авторским правом материалов или селфи, а также отвечает &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/ru\"&gt;правилам Викисклада&lt;/a&gt;.</string>
   <string name="menu_download">Скачать</string>
   <string name="preference_license">Лицензия</string>
   <string name="use_previous">Использовать предыдущие заголовок/описание</string>
@@ -196,6 +197,7 @@
   <string name="nearby_info_menu_commons_article">Страница файла на Викискладе</string>
   <string name="nearby_info_menu_wikidata_article">Элемент Викиданных</string>
   <string name="error_while_cache">Ошибка при кэшировании картинок</string>
+  <string name="title_info">Уникальное описание, которое будет сохранено как имя файла. Вы можете использовать естественный язык, разделяя слова пробелами. Пожалуйста, не указывайте расширение файла.</string>
   <string name="description_info">Пожалуйста, подробно опишите загружаемый файл: где он был снят? что на нём изображено? каков его контекст? Пожалуйста опишите изображённых персон или объекты. Добавьте информацию, о которой нельзя легко догадаться, например, время суток, когда снимался файл. Если снято что-то необычное, постарайтесь пояснить, что именно в этом необычного.</string>
   <string name="give_permission">Дать разрешение</string>
   <string name="use_external_storage">Использовать внешнее хранилище</string>
