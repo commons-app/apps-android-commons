@@ -56,7 +56,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
     }
 
     /**
-     * Set the username in navigationHeader
+     * Set the username in navigationHeader.
      */
     private void setUserName() {
 
