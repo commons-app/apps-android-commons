@@ -39,8 +39,6 @@ public abstract class NavigationBaseActivity extends BaseActivity
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
 
-    TextView username;
-
     private ActionBarDrawerToggle toggle;
 
     public void initDrawer() {
@@ -54,13 +52,17 @@ public abstract class NavigationBaseActivity extends BaseActivity
         toggle.setDrawerIndicatorEnabled(true);
         toggle.syncState();
         setDrawerPaneWidth();
-
-        View navHeaderView= navigationView.getHeaderView(0);
-        username = (TextView) navHeaderView.findViewById(R.id.username);
         setUserName();
     }
 
-    public void setUserName() {
+    /**
+     * Set the username in navigationHeader
+     */
+    private void setUserName() {
+
+        View navHeaderView = navigationView.getHeaderView(0);
+        TextView username = (TextView) navHeaderView.findViewById(R.id.username);
+
         AccountManager accountManager = AccountManager.get(this);
         Account[] allAccounts = accountManager.getAccountsByType(AccountUtil.accountType());
         if (allAccounts.length != 0) {
