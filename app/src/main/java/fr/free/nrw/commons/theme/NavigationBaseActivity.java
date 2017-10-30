@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.theme;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -9,7 +11,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import butterknife.BindView;
@@ -18,6 +22,7 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.WelcomeActivity;
+import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.nearby.NearbyActivity;
@@ -47,6 +52,22 @@ public abstract class NavigationBaseActivity extends BaseActivity
         toggle.setDrawerIndicatorEnabled(true);
         toggle.syncState();
         setDrawerPaneWidth();
+        setUserName();
+    }
+
+    /**
+     * Set the username in navigationHeader.
+     */
+    private void setUserName() {
+
+        View navHeaderView = navigationView.getHeaderView(0);
+        TextView username = (TextView) navHeaderView.findViewById(R.id.username);
+
+        AccountManager accountManager = AccountManager.get(this);
+        Account[] allAccounts = accountManager.getAccountsByType(AccountUtil.accountType());
+        if (allAccounts.length != 0) {
+            username.setText(allAccounts[0].name);
+        }
     }
 
     public void initBackButton() {
