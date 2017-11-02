@@ -238,6 +238,8 @@ public class ContributionsActivity extends AuthenticatedActivity
 
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
+        contributionsList.changeProgressBarVisibility(false);
+
         if (contributionsList.getAdapter() == null) {
             contributionsList.setAdapter(new ContributionsListAdapter(getApplicationContext(),
                     cursor, 0));

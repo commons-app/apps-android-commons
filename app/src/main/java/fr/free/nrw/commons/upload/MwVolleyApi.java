@@ -67,7 +67,7 @@ public class MwVolleyApi {
      * @param coords Coordinates to build query with
      * @return URL for API query
      */
-    private String buildUrl (String coords){
+    private String buildUrl(String coords) {
 
         Uri.Builder builder = Uri.parse(MWURL).buildUpon();
 
