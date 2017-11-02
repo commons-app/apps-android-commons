@@ -75,7 +75,7 @@
   <string name="menu_about">Névjegy</string>
   <string name="about_license">A Wikimedia Commons applikáció egy nyílt forráskódú szoftver, amit a Wikimedia-közösség önkéntesei készítettek és tartanak karban. A Wikimédia Alapítvány nem vesz részt az applikáció megalkotásában, fejlesztésében és üzemeltetésében.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Forráskód&lt;/a&gt; és &lt;a href=\"https://commons-app.github.io/\"&gt;weboldal&lt;/a&gt; a GitHubon. Nyiss egy új &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-problémát&lt;/a&gt; hibabejelentéssel vagy fejlesztési javaslattal.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Adatvédelmi_irányelv\"&gt;Adatvédelmi irányelvek&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Adatvédelmi irányelvek&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Köszönetnyilvánítás&lt;/a&gt;</string>
   <string name="title_activity_about">Névjegy</string>
   <string name="menu_feedback">Visszajelzés küldése (e-mailben)</string>
@@ -190,6 +190,7 @@
   <string name="no_description_found">nincs leírás</string>
   <string name="nearby_info_menu_commons_article">Commons leírólap</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata-elem</string>
+  <string name="title_info">Egy egyedi, leíró cím a fájlnak, ami fájlnévként fog szolgálni. Egyszerű nyelvezetet használhatsz szóközökkel. Ne tedd bele a kiterjesztést.</string>
   <string name="description_info">Kérlek a lehető legteljesebb módon írd le a fájlt: hol készült, mit ábrázol, mi a kontextus? Kérlek add meg az objektumokat vagy személyeket a képen, valamint a nehezen kitalálható információkat (például a kép készítésének dátumát, ha az egy tájkép). Amennyiben a média valami szokatlant ábrázol, kérlek fejtsd ki, hogy mi teszi szokatlanná.</string>
   <string name="give_permission">Engedély adása</string>
   <string name="use_external_storage">Külső tárhely használata</string>

@@ -195,5 +195,7 @@
   <string name="give_permission">권한 부여</string>
   <string name="use_external_storage">외부 저장소 사용하기</string>
   <string name="use_external_storage_summary">장치의 인앱 카메라로 찍은 사진 저장하기</string>
+  <string name="send_log_file">로그 파일 보내기</string>
+  <string name="send_log_file_description">이메일로 개발자에게 로그 파일 보내기</string>
   <string name="login_to_your_account">자신의 계정으로 로그인</string>
 </resources>
