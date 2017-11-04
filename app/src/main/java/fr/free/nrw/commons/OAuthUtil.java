@@ -56,7 +56,7 @@ public class OAuthUtil {
     }
 
     private static AuthorizationUIController getAuthorizationUIController(FragmentManager fragmentManager) {
-        return new DialogFragmentController(fragmentManager) {
+        return new DialogFragmentController(fragmentManager, true) {
 
             @Override
             public String getRedirectUri() throws IOException {
