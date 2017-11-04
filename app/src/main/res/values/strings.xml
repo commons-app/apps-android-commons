@@ -210,4 +210,5 @@ Tap this message (or hit back) to skip this step.</string>
   <string name="send_log_file">Send log file</string>
   <string name="send_log_file_description">Send log file to developers via email</string>
   <string name="login_to_your_account">Login to your account</string>
+    <string name="token_wikimedia_commons">wikimedia_commons</string>
 </resources>
