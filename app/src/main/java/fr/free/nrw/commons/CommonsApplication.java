@@ -140,11 +140,14 @@ public class CommonsApplication extends Application {
         cacheData  = new CacheController();
     }
 
-    protected RefWatcher setupLeakCanary() {
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            return RefWatcher.DISABLED;
+    protected void setupLeakCanary() {
+        if(!BuildConfig.DEBUG) {
+            return;
         }
-        return LeakCanary.install(this);
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return;
+        }
+        LeakCanary.install(this);
     }
 
     /**
