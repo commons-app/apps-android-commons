@@ -60,7 +60,7 @@ public class NearbyActivity extends NavigationBaseActivity {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         setContentView(R.layout.activity_nearby);
         ButterKnife.bind(this);
-        locationManager = new LocationServiceManager(this);
+        locationManager = LocationServiceManager.getInstance();
         checkLocationPermission();
         bundle = new Bundle();
         initDrawer();

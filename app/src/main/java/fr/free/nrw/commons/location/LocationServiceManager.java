@@ -7,6 +7,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 
+import fr.free.nrw.commons.CommonsApplication;
 import timber.log.Timber;
 
 public class LocationServiceManager implements LocationListener {
@@ -16,9 +17,19 @@ public class LocationServiceManager implements LocationListener {
     private LatLng latestLocation;
     private Float latestLocationAccuracy;
 
-    public LocationServiceManager(Context context) {
-        this.locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+    private static LocationServiceManager locationServiceManager;
+
+    private LocationServiceManager() {
+        Context applicationContext = CommonsApplication.getInstance().getApplicationContext();
+        this.locationManager = (LocationManager) applicationContext.getSystemService(Context.LOCATION_SERVICE);
         provider = locationManager.getBestProvider(new Criteria(), true);
+    }
+
+    public static LocationServiceManager getInstance() {
+        if (locationServiceManager == null) {
+            locationServiceManager = new LocationServiceManager();
+        }
+        return locationServiceManager;
     }
 
     public boolean isProviderEnabled() {
