@@ -130,11 +130,9 @@ public class CommonsApplication extends Application implements HasActivityInject
     public void onCreate() {
         super.onCreate();
 
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            refWatcher = RefWatcher.DISABLED;
+        if (setupLeakCanary() == RefWatcher.DISABLED) {
             return;
         }
-        refWatcher = LeakCanary.install(this);
 
         Timber.plant(new Timber.DebugTree());
 
@@ -157,6 +155,13 @@ public class CommonsApplication extends Application implements HasActivityInject
 
         //For caching area -> categories
         cacheData  = new CacheController();
+    }
+
+    protected RefWatcher setupLeakCanary() {
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return RefWatcher.DISABLED;
+        }
+        return LeakCanary.install(this);
     }
 
     public static RefWatcher getRefWatcher(Context context) {
