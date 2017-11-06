@@ -21,8 +21,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.squareup.leakcanary.RefWatcher;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.BuildConfig;
@@ -112,8 +110,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         twoFactorEdit.removeTextChangedListener(textWatcher);
         delegate.onDestroy();
         super.onDestroy();
-        RefWatcher refWatcher = CommonsApplication.getRefWatcher(this);
-        refWatcher.watch(this);
     }
 
     @Override
