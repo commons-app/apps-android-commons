@@ -21,6 +21,10 @@ public class LocationServiceManager implements LocationListener {
         provider = locationManager.getBestProvider(new Criteria(), true);
     }
 
+    public boolean isProviderEnabled() {
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+    }
+
     public LatLng getLatestLocation() {
         return latestLocation;
     }

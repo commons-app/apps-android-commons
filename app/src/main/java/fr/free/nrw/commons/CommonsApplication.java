@@ -77,6 +77,8 @@ public class CommonsApplication extends Application implements HasActivityInject
     private DBOpenHelper dbOpenHelper = null;
     private NearbyPlaces nearbyPlaces = null;
 
+    private RefWatcher refWatcher;
+
     /**
      * This should not be called by ANY application code (other than the magic Android glue)
      * Use CommonsApplication.getInstance() instead to get the singleton.
@@ -128,7 +130,11 @@ public class CommonsApplication extends Application implements HasActivityInject
     public void onCreate() {
         super.onCreate();
 
-        setupLeakCanary();
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            refWatcher = RefWatcher.DISABLED;
+            return;
+        }
+        refWatcher = LeakCanary.install(this);
 
         Timber.plant(new Timber.DebugTree());
 
@@ -153,11 +159,9 @@ public class CommonsApplication extends Application implements HasActivityInject
         cacheData  = new CacheController();
     }
 
-    protected RefWatcher setupLeakCanary() {
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            return RefWatcher.DISABLED;
-        }
-        return LeakCanary.install(this);
+    public static RefWatcher getRefWatcher(Context context) {
+        CommonsApplication application = (CommonsApplication) context.getApplicationContext();
+        return application.refWatcher;
     }
 
     /**

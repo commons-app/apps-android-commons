@@ -38,6 +38,7 @@ import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -156,6 +157,7 @@ public class ContributionsActivity extends AuthenticatedActivity
         requestAuthToken();
         initDrawer();
         setTitle(getString(R.string.title_activity_contributions));
+        setUploadCount();
     }
 
     @Override
@@ -255,8 +257,6 @@ public class ContributionsActivity extends AuthenticatedActivity
             ((CursorAdapter) contributionsList.getAdapter()).swapCursor(cursor);
         }
 
-        setUploadCount();
-
         contributionsList.clearSyncMessage();
         notifyAndMigrateDataSetObservers();
     }
@@ -288,18 +288,17 @@ public class ContributionsActivity extends AuthenticatedActivity
     @SuppressWarnings("ConstantConditions")
     private void setUploadCount() {
         CommonsApplication app = ((CommonsApplication) getApplication());
-        compositeDisposable.add(
-                mediaWikiApi
-                        .getUploadCount(app.getCurrentAccount().name)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(
-                                uploadCount -> getSupportActionBar().setSubtitle(getResources()
-                                        .getQuantityString(R.plurals.contributions_subtitle,
-                                                uploadCount, uploadCount)),
-                                t -> Timber.e(t, "Fetching upload count failed")
-                        )
-        );
+        Disposable uploadCountDisposable = mediaWikiApi
+                .getUploadCount(app.getCurrentAccount().name)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        uploadCount -> getSupportActionBar().setSubtitle(getResources()
+                                .getQuantityString(R.plurals.contributions_subtitle,
+                                        uploadCount, uploadCount)),
+                        t -> Timber.e(t, "Fetching upload count failed")
+                );
+        compositeDisposable.add(uploadCountDisposable);
     }
 
     @Override
