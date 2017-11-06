@@ -8,7 +8,7 @@
   <string name="signup">Зарегистрироваться</string>
   <string name="logging_in_title">Вход в систему</string>
   <string name="logging_in_message">Пожалуйста, подождите…</string>
-  <string name="login_success">Опознание прошло успешно</string>
+  <string name="login_success">Вход выполнен успешно.</string>
   <string name="login_failed">Ошибка входа в систему!</string>
   <string name="upload_failed">Файл не найден. Попробуйте другой файл.</string>
   <string name="authentication_failed">Ошибка аутентификации!</string>
@@ -26,7 +26,7 @@
     <item quantity="other">%d файлов загружается</item>
   </plurals>
   <string name="title_activity_contributions">Мои недавние загрузки</string>
-  <string name="contribution_state_queued">Очередь</string>
+  <string name="contribution_state_queued">В очереди</string>
   <string name="contribution_state_failed">Ошибка загрузки.</string>
   <string name="contribution_state_in_progress">Завершено %1$d%%</string>
   <string name="contribution_state_starting">Загрузка</string>
@@ -52,7 +52,7 @@
   <string name="categories_search_text_hint">Выбор категорий</string>
   <string name="menu_save_categories">Сохранить</string>
   <string name="refresh_button">Обновить</string>
-  <string name="gps_disabled">GPS отключен в вашем устройстве. Вы хотите включить его?</string>
+  <string name="gps_disabled">GPS отключен в вашем устройстве. Хотите включить его?</string>
   <string name="enable_gps">Включить GPS</string>
   <string name="contributions_subtitle_zero">Загрузок пока нет</string>
   <plurals name="contributions_subtitle">
@@ -95,7 +95,7 @@
   <string name="preference_license">Лицензия</string>
   <string name="use_previous">Использовать предыдущие заголовок/описание</string>
   <string name="allow_gps">Автоматически получить текущее местоположение</string>
-  <string name="allow_gps_summary">Получить текущее местоположение, чтобы получить предложения категорий, если изображение не содержит геотеги</string>
+  <string name="allow_gps_summary">Получить текущее местоположение, чтобы были предложены категории, если изображение не содержит геотегов</string>
   <string name="preference_theme">Ночной режим</string>
   <string name="preference_theme_summary">Использовать тёмную тему</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
@@ -121,7 +121,7 @@
   <string name="tutorial_1_text">Викисклад содержит большую часть изображений, которые используются в Википедии.</string>
   <string name="tutorial_1_subtext">Ваши изображения помогают образованию людей во всём мире!</string>
   <string name="tutorial_2_text">Пожалуйста, загрузите фотографии, которые были сняты или созданы исключительно вами:</string>
-  <string name="tutorial_2_subtext">— Природные объекты (цветы, животные, горы)\n— Полезные предметы (велосипеды, вокзалы)\n— Известные люди (ваш мэр, спортсмены-олимпийцы, которых вы встретили)</string>
+  <string name="tutorial_2_subtext">— Природные объекты (например, цветы, животные, горы)\n— Полезные предметы (например, велосипеды, вокзалы)\n— Известные люди (например, ваш мэр, спортсмены-олимпийцы, которых вы встретили)</string>
   <string name="tutorial_3_text">Пожалуйста, НЕ загружайте:</string>
   <string name="tutorial_3_subtext">— Селфи или фотографии ваших друзей\n— Фотографии, которые вы скачали из Интернета\n— Скриншоты несвободных приложений</string>
   <string name="tutorial_4_text">Пример загрузки:</string>
@@ -202,5 +202,7 @@
   <string name="give_permission">Дать разрешение</string>
   <string name="use_external_storage">Использовать внешнее хранилище</string>
   <string name="use_external_storage_summary">Сохранять изображения, сделанные с помощью встроенной камеры на устройстве</string>
+  <string name="send_log_file">Выслать лог-файл</string>
+  <string name="send_log_file_description">Выслать лог-файл разработчикам по е-мейлу</string>
   <string name="login_to_your_account">Войдите в свою учётную запись</string>
 </resources>
