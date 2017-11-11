@@ -23,13 +23,17 @@ import android.widget.AdapterView;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 import butterknife.ButterKnife;
+import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -56,6 +60,9 @@ public class ContributionsActivity extends AuthenticatedActivity
     private boolean isUploadServiceConnected;
     private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<>();
     private String CONTRIBUTION_SELECTION = "";
+
+    @Inject
+    MediaWikiApi mediaWikiApi;
 
     /*
         This sorts in the following order:
@@ -131,6 +138,7 @@ public class ContributionsActivity extends AuthenticatedActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AndroidInjection.inject(this);
         setContentView(R.layout.activity_contributions);
         ButterKnife.bind(this);
 
@@ -281,7 +289,7 @@ public class ContributionsActivity extends AuthenticatedActivity
     private void setUploadCount() {
         CommonsApplication app = ((CommonsApplication) getApplication());
         compositeDisposable.add(
-                app.getMWApi()
+                mediaWikiApi
                         .getUploadCount(app.getCurrentAccount().name)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
