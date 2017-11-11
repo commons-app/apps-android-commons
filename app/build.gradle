@@ -1,3 +1,4 @@
+apply from: '../gitutils.gradle'
 apply plugin: 'com.android.application'
 apply plugin: 'jacoco-android'
 apply from: 'quality.gradle'
@@ -66,6 +67,7 @@ android {
         applicationId 'fr.free.nrw.commons'
         versionCode 74
         versionName '2.5.0'
+        setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
         minSdkVersion project.minSdkVersion
         targetSdkVersion project.targetSdkVersion
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -79,6 +81,7 @@ android {
         }
         debug {
             testCoverageEnabled true
+            versionNameSuffix "-debug-" + getBranchName() + "~" + getBuildVersion()
         }
     }
 
