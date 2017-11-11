@@ -113,7 +113,6 @@ public abstract class NavigationBaseActivity extends BaseActivity
                     AboutActivity.startYourself(this);
                     this.finish();
                 }
-                this.finish();
                 return true;
             case R.id.action_settings:
                 drawerLayout.closeDrawer(navigationView);
