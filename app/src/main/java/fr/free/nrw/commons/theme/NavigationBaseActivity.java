@@ -97,30 +97,35 @@ public abstract class NavigationBaseActivity extends BaseActivity
                 drawerLayout.closeDrawer(navigationView);
                 if (!(this instanceof ContributionsActivity)) {
                     ContributionsActivity.startYourself(this);
+                    this.finish();
                 }
-                break;
+                return true;
             case R.id.action_nearby:
                 drawerLayout.closeDrawer(navigationView);
                 if (!(this instanceof NearbyActivity)) {
                     NearbyActivity.startYourself(this);
+                    this.finish();
                 }
-                break;
+                return true;
             case R.id.action_about:
                 drawerLayout.closeDrawer(navigationView);
                 if (!(this instanceof AboutActivity)) {
                     AboutActivity.startYourself(this);
+                    this.finish();
                 }
-                break;
+                this.finish();
+                return true;
             case R.id.action_settings:
                 drawerLayout.closeDrawer(navigationView);
                 if (!(this instanceof SettingsActivity)) {
                     SettingsActivity.startYourself(this);
+                    this.finish();
                 }
-                break;
+                return true;
             case R.id.action_introduction:
                 drawerLayout.closeDrawer(navigationView);
                 WelcomeActivity.startYourself(this);
-                break;
+                return true;
             case R.id.action_feedback:
                 drawerLayout.closeDrawer(navigationView);
                 Intent feedbackIntent = new Intent(Intent.ACTION_SEND);
@@ -135,7 +140,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
                 } catch (ActivityNotFoundException e) {
                     Toast.makeText(this, R.string.no_email_client, Toast.LENGTH_SHORT).show();
                 }
-                break;
+                return true;
             case R.id.action_logout:
                 new AlertDialog.Builder(this)
                         .setMessage(R.string.logout_verification)
@@ -147,13 +152,11 @@ public abstract class NavigationBaseActivity extends BaseActivity
                         })
                         .setNegativeButton(R.string.no, (dialog, which) -> dialog.cancel())
                         .show();
-                break;
+                return true;
             default:
                 Timber.e("Unknown option [%s] selected from the navigation menu", itemId);
                 return false;
         }
-        this.finish();
-        return true;
     }
 
     private class BaseLogoutListener implements CommonsApplication.LogoutListener {
