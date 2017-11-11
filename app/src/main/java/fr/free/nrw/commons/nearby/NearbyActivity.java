@@ -37,6 +37,7 @@ import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.UriSerializer;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -53,6 +54,7 @@ public class NearbyActivity extends NavigationBaseActivity {
     private Bundle bundle;
     private SharedPreferences sharedPreferences;
     private NearbyActivityMode viewMode;
+    private Disposable placesDisposable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -246,6 +248,12 @@ public class NearbyActivity extends NavigationBaseActivity {
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        placesDisposable.dispose();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         checkGps();
@@ -258,7 +266,7 @@ public class NearbyActivity extends NavigationBaseActivity {
     }
 
     private void setupPlaceList(Context context) {
-        Observable.fromCallable(() -> NearbyController
+        placesDisposable = Observable.fromCallable(() -> NearbyController
                 .loadAttractionsFromLocation(curLatLang, CommonsApplication.getInstance()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
