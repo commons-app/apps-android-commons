@@ -144,6 +144,8 @@ public class ContributionsActivity extends AuthenticatedActivity
         if (savedInstanceState != null) {
             mediaDetails = (MediaDetailPagerFragment) supportFragmentManager
                     .findFragmentById(R.id.contributionsFragmentContainer);
+
+            getSupportLoaderManager().initLoader(0, null, this);
         }
         requestAuthToken();
         initDrawer();
