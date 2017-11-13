@@ -141,8 +141,14 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
     private void downloadMedia(Media m) {
         String imageUrl = m.getImageUrl(),
                 fileName = m.getFilename();
+
+        if (imageUrl == null || fileName == null) {
+            return;
+        }
+
         // Strip 'File:' from beginning of filename, we really shouldn't store it
         fileName = fileName.replaceFirst("^File:", "");
+
         Uri imageUri = Uri.parse(imageUrl);
 
         DownloadManager.Request req = new DownloadManager.Request(imageUri);

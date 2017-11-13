@@ -3,6 +3,7 @@ package fr.free.nrw.commons;
 import android.content.Context;
 import android.os.Build;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.text.Html;
 import android.text.Spanned;
 
@@ -127,7 +128,7 @@ public class Utils {
         return isoFormat.format(date);
     }
 
-    public static String makeThumbBaseUrl(String filename) {
+    public static String makeThumbBaseUrl(@NonNull String filename) {
         String name = new PageTitle(filename).getPrefixedText();
         String sha = new String(Hex.encodeHex(DigestUtils.md5(name)));
         return String.format("%s/%s/%s/%s", BuildConfig.IMAGE_URL_BASE, sha.substring(0, 1), sha.substring(0, 2), urlEncode(name));
