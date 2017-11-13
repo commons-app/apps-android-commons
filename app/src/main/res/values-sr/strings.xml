@@ -198,5 +198,7 @@
   <string name="give_permission">Давање дозволе</string>
   <string name="use_external_storage">Употреба спољашњег складишта</string>
   <string name="use_external_storage_summary">Спремање слика направљених камером апликације на Вашем уређају</string>
+  <string name="send_log_file">Пошаљи дневничку датотеку</string>
+  <string name="send_log_file_description">Пошаљи дневничку датотеку девелоперима преко имејла</string>
   <string name="login_to_your_account">Пријавите се на свој налог</string>
 </resources>
