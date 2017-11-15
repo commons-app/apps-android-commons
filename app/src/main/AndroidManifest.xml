@@ -28,14 +28,24 @@
                   android:excludeFromRecents="true"
                   android:finishOnTaskLaunch="true" />
 
+        <!--<activity-->
+            <!--android:name=".auth.LoginActivity"-->
+            <!--&gt;-->
+            <!--<intent-filter>-->
+                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+                <!--<action android:name="android.intent.action.MAIN"/>-->
+            <!--</intent-filter>-->
+        <!--</activity>-->
+
         <activity
-            android:name=".auth.LoginActivity"
+            android:name=".auth.OAuthLoginActivity"
             >
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER"/>
                 <action android:name="android.intent.action.MAIN"/>
             </intent-filter>
         </activity>
+
         <activity
             android:name=".WelcomeActivity"
             >
