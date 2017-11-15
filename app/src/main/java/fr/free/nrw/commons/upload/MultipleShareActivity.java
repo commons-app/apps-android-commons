@@ -124,7 +124,7 @@ public  class       MultipleShareActivity
         dialog.setTitle(getResources().getQuantityString(R.plurals.starting_multiple_uploads, photosList.size(), photosList.size()));
         dialog.show();
 
-        for(int i = 0; i < photosList.size(); i++) {
+        for (int i = 0; i < photosList.size(); i++) {
             Contribution up = photosList.get(i);
             final int uploadCount = i + 1; // Goddamn Java
 
@@ -164,7 +164,7 @@ public  class       MultipleShareActivity
     public void onCategoriesSave(List<String> categories) {
         if (categories.size() > 0) {
         ContentProviderClient client = getContentResolver().acquireContentProviderClient(ModificationsContentProvider.AUTHORITY);
-            for(Contribution contribution: photosList) {
+            for (Contribution contribution: photosList) {
                 ModifierSequence categoriesSequence = new ModifierSequence(contribution.getContentUri());
 
                 categoriesSequence.queueModifier(new CategoryModifier(categories.toArray(new String[]{})));
@@ -189,7 +189,7 @@ public  class       MultipleShareActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case android.R.id.home:
                 if (mediaDetails.isVisible()) {
                     getSupportFragmentManager().popBackStack();
@@ -225,7 +225,7 @@ public  class       MultipleShareActivity
     }
 
     private void showDetail(int i) {
-        if (mediaDetails == null ||!mediaDetails.isVisible()) {
+        if (mediaDetails == null || !mediaDetails.isVisible()) {
             mediaDetails = new MediaDetailPagerFragment(true);
             getSupportFragmentManager()
                     .beginTransaction()
@@ -252,7 +252,7 @@ public  class       MultipleShareActivity
             if (photosList == null) {
                 photosList = new ArrayList<>();
                 ArrayList<Uri> urisList = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
-                for(int i=0; i < urisList.size(); i++) {
+                for (int i = 0; i < urisList.size(); i++) {
                     Contribution up = new Contribution();
                     Uri uri = urisList.get(i);
                     up.setLocalUri(uri);

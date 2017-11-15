@@ -14,7 +14,7 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if(Utils.isDarkTheme(this)){
+        if (Utils.isDarkTheme(this)) {
             currentTheme = true;
             setTheme(R.style.DarkAppTheme);
         } else {
@@ -28,7 +28,7 @@ public class BaseActivity extends AppCompatActivity {
     protected void onResume() {
         // Restart activity if theme is changed
         boolean newTheme = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("theme",false);
-        if(currentTheme!=newTheme){ //is activity theme changed
+        if (currentTheme != newTheme) { //is activity theme changed
             Intent intent = getIntent();
             finish();
             startActivity(intent);

@@ -6,6 +6,7 @@ import android.accounts.AccountManagerCallback;
 import android.accounts.AccountManagerFuture;
 import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -17,6 +18,7 @@ import android.support.v4.util.LruCache;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.stetho.Stetho;
 import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 
 import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
@@ -25,11 +27,16 @@ import org.acra.annotation.ReportsCrashes;
 import java.io.File;
 import java.io.IOException;
 
+import javax.inject.Inject;
+
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.HasActivityInjector;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.caching.CacheController;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.data.Category;
 import fr.free.nrw.commons.data.DBOpenHelper;
+import fr.free.nrw.commons.di.DaggerAppComponent;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
@@ -46,7 +53,7 @@ import timber.log.Timber;
         resDialogCommentPrompt = R.string.crash_dialog_comment_prompt,
         resDialogOkToast = R.string.crash_dialog_ok_toast
 )
-public class CommonsApplication extends Application {
+public class CommonsApplication extends Application implements HasActivityInjector {
 
     private Account currentAccount = null; // Unlike a savings account...
 
@@ -59,6 +66,9 @@ public class CommonsApplication extends Application {
 
     public static final String FEEDBACK_EMAIL = "commons-app-android@googlegroups.com";
     public static final String FEEDBACK_EMAIL_SUBJECT = "Commons Android App (%s) Feedback";
+
+    @Inject DispatchingAndroidInjector<Activity> dispatchingActivityInjector;
+    @Inject MediaWikiApi mediaWikiApi;
 
     private static CommonsApplication instance = null;
     private MediaWikiApi api = null;
@@ -117,16 +127,16 @@ public class CommonsApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            // This process is dedicated to LeakCanary for heap analysis.
-            // You should not init your app in this process.
-            return;
-        }
-        LeakCanary.install(this);
+
+        setupLeakCanary();
 
         Timber.plant(new Timber.DebugTree());
 
-
+        DaggerAppComponent
+                .builder()
+                .application(this)
+                .build()
+                .inject(this);
 
         if (!BuildConfig.DEBUG) {
             ACRA.init(this);
@@ -141,6 +151,13 @@ public class CommonsApplication extends Application {
 
         //For caching area -> categories
         cacheData  = new CacheController();
+    }
+
+    protected RefWatcher setupLeakCanary() {
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return RefWatcher.DISABLED;
+        }
+        return LeakCanary.install(this);
     }
 
     /**
@@ -164,11 +181,11 @@ public class CommonsApplication extends Application {
         if (curAccount == null) {
             return false; // This should never happen
         }
-        
-        accountManager.invalidateAuthToken(AccountUtil.accountType(), getMWApi().getAuthCookie());
+
+        accountManager.invalidateAuthToken(AccountUtil.accountType(), mediaWikiApi.getAuthCookie());
         try {
             String authCookie = accountManager.blockingGetAuthToken(curAccount, "", false);
-            getMWApi().setAuthCookie(authCookie);
+            mediaWikiApi.setAuthCookie(authCookie);
             return true;
         } catch (OperationCanceledException | NullPointerException | IOException | AuthenticatorException e) {
             e.printStackTrace();
@@ -178,8 +195,8 @@ public class CommonsApplication extends Application {
 
     public boolean deviceHasCamera() {
         PackageManager pm = getPackageManager();
-        return pm.hasSystemFeature(PackageManager.FEATURE_CAMERA) ||
-                pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT);
+        return pm.hasSystemFeature(PackageManager.FEATURE_CAMERA)
+                || pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT);
     }
 
     public void clearApplicationData(Context context, LogoutListener logoutListener) {
@@ -243,6 +260,11 @@ public class CommonsApplication extends Application {
         for (Account account : allAccounts) {
             accountManager.removeAccount(account, amCallback, null);
         }
+    }
+
+    @Override
+    public DispatchingAndroidInjector<Activity> activityInjector() {
+        return dispatchingActivityInjector;
     }
 
     /**

@@ -34,7 +34,7 @@ class ContributionsListAdapter extends CursorAdapter {
         views.seqNumView.setText(String.valueOf(cursor.getPosition() + 1));
         views.seqNumView.setVisibility(View.VISIBLE);
 
-        switch(contribution.getState()) {
+        switch (contribution.getState()) {
             case Contribution.STATE_COMPLETED:
                 views.stateView.setVisibility(View.GONE);
                 views.progressView.setVisibility(View.GONE);
@@ -50,7 +50,7 @@ class ContributionsListAdapter extends CursorAdapter {
                 views.progressView.setVisibility(View.VISIBLE);
                 long total = contribution.getDataLength();
                 long transferred = contribution.getTransferred();
-                if(transferred == 0 || transferred >= total) {
+                if (transferred == 0 || transferred >= total) {
                     views.progressView.setIndeterminate(true);
                 } else {
                     views.progressView.setProgress((int)(((double)transferred / (double)total) * 100));

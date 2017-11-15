@@ -147,7 +147,7 @@
   <string name="media_detail_title">Títulu</string>
   <string name="media_detail_media_title">Títulu del mediu</string>
   <string name="media_detail_description">Descripción</string>
-  <string name="media_detail_description_explanation">Equí va la descripción del mediu. Posiblemente pué ser llargo enforma, y necesitará espardese per delles llinies. Sicasí, esperamos que se vea guapo.</string>
+  <string name="media_detail_description_explanation">Equí va la descripción del mediu. Esto pué ser llargo enforma, y necesitará espardese per delles llinies. Sicasí, esperamos que se vea bien.</string>
   <string name="media_detail_uploaded_date">Data d\'unviu</string>
   <string name="media_detail_license">Llicencia</string>
   <string name="media_detail_coordinates">Coordenaes</string>
@@ -198,5 +198,7 @@
   <string name="give_permission">Dar permisu</string>
   <string name="use_external_storage">Usar almacenamientu esternu</string>
   <string name="use_external_storage_summary">Guardar nel preséu les imaxes tomaes cola cámara de la app</string>
+  <string name="send_log_file">Unviar ficheru de rexistru</string>
+  <string name="send_log_file_description">Unviar ficheru de rexistru a los desendolcadores per corréu electrónicu</string>
   <string name="login_to_your_account">Anicia sesión na to cuenta</string>
 </resources>

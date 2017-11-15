@@ -73,9 +73,9 @@
   <string name="title_activity_settings">Configurações</string>
   <string name="title_activity_signup">Criar conta</string>
   <string name="menu_about">Sobre</string>
-  <string name="about_license" fuzzy="true">Software livre distribuído sob a &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. %1$s e seu logotipo são marcas registradas da Wikimedia Foundation e são usadas com a permissão da Wikimedia Foundation. Não somos endossados nem afiliados à Wikimedia Foundation.</string>
+  <string name="about_license">O Wikimedia Commons é um aplicativo de código aberto criado e mantido por beneficiários e voluntários da comunidade Wikimedia. A Wikimedia Foundation não está envolvida na criação, desenvolvimento ou manutenção do aplicativo.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Fonte&lt;/a&gt; e &lt;a href=\"https://commons-app.github.io/\"&gt;site&lt;/a&gt; em GitHub. Crie um novo &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub issue&lt;/a&gt; para relatórios de bugs e sugestões.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Política de privacidade&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Política de privacidade&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Créditos&lt;/a&gt;</string>
   <string name="title_activity_about">Sobre</string>
   <string name="menu_feedback">Enviar comentários (por e-mail)</string>
@@ -198,4 +198,7 @@
   <string name="give_permission">Dar permissão</string>
   <string name="use_external_storage">Usar o armazenamento externo</string>
   <string name="use_external_storage_summary">Salvar as fotos tiradas com a câmera no aplicativo no seu dispositivo</string>
+  <string name="send_log_file">Enviar arquivo de registro</string>
+  <string name="send_log_file_description">Enviar arquivo de log para desenvolvedores por e-mail</string>
+  <string name="login_to_your_account">Faça login na sua conta</string>
 </resources>
