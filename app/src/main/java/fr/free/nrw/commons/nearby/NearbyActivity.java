@@ -5,9 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.location.LocationManager;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -37,6 +35,10 @@ import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.UriSerializer;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 
@@ -50,9 +52,9 @@ public class NearbyActivity extends NavigationBaseActivity {
     private LocationServiceManager locationManager;
     private LatLng curLatLang;
     private Bundle bundle;
-    private NearbyAsyncTask nearbyAsyncTask;
     private SharedPreferences sharedPreferences;
     private NearbyActivityMode viewMode;
+    private Disposable placesDisposable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,7 @@ public class NearbyActivity extends NavigationBaseActivity {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         setContentView(R.layout.activity_nearby);
         ButterKnife.bind(this);
+        locationManager = LocationServiceManager.getInstance();
         checkLocationPermission();
         bundle = new Bundle();
         initDrawer();
@@ -105,11 +108,8 @@ public class NearbyActivity extends NavigationBaseActivity {
     }
 
     private void startLookingForNearby() {
-        locationManager = new LocationServiceManager(this);
-        locationManager.registerLocationManager();
         curLatLang = locationManager.getLatestLocation();
-        nearbyAsyncTask = new NearbyAsyncTask(this);
-        nearbyAsyncTask.execute();
+        setupPlaceList(getBaseContext());
     }
 
     private void checkLocationPermission() {
@@ -169,9 +169,6 @@ public class NearbyActivity extends NavigationBaseActivity {
                     startLookingForNearby();
                 } else {
                     //If permission not granted, go to page that says Nearby Places cannot be displayed
-                    if (nearbyAsyncTask != null) {
-                        nearbyAsyncTask.cancel(true);
-                    }
                     if (progressBar != null) {
                         progressBar.setVisibility(View.GONE);
                     }
@@ -200,8 +197,7 @@ public class NearbyActivity extends NavigationBaseActivity {
     }
 
     private void checkGps() {
-        LocationManager manager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+        if (!locationManager.isProviderEnabled()) {
             Timber.d("GPS is not enabled");
             new AlertDialog.Builder(this)
                     .setMessage(R.string.gps_disabled)
@@ -231,16 +227,30 @@ public class NearbyActivity extends NavigationBaseActivity {
     }
 
     private void toggleView() {
-        if (nearbyAsyncTask != null) {
-            if (nearbyAsyncTask.getStatus() == AsyncTask.Status.FINISHED) {
-                if (viewMode.isMap()) {
-                    setMapFragment();
-                } else {
-                    setListFragment();
-                }
-            }
-            sharedPreferences.edit().putBoolean(MAP_LAST_USED_PREFERENCE, viewMode.isMap()).apply();
+        if (viewMode.isMap()) {
+            setMapFragment();
+        } else {
+            setListFragment();
         }
+        sharedPreferences.edit().putBoolean(MAP_LAST_USED_PREFERENCE, viewMode.isMap()).apply();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        locationManager.registerLocationManager();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        locationManager.unregisterLocationManager();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        placesDisposable.dispose();
     }
 
     @Override
@@ -249,83 +259,48 @@ public class NearbyActivity extends NavigationBaseActivity {
         checkGps();
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (nearbyAsyncTask != null) {
-            nearbyAsyncTask.cancel(true);
-        }
-    }
-
     private void refreshView() {
         curLatLang = locationManager.getLatestLocation();
         progressBar.setVisibility(View.VISIBLE);
-        nearbyAsyncTask = new NearbyAsyncTask(this);
-        nearbyAsyncTask.execute();
+        setupPlaceList(getBaseContext());
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (locationManager != null) {
-            locationManager.unregisterLocationManager();
-        }
+    private void setupPlaceList(Context context) {
+        placesDisposable = Observable.fromCallable(() -> NearbyController
+                .loadAttractionsFromLocation(curLatLang, CommonsApplication.getInstance()))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe((result) -> {
+                    populatePlaces(context, result);
+                });
     }
 
-    private class NearbyAsyncTask extends AsyncTask<Void, Integer, List<Place>> {
+    private void populatePlaces(Context context, List<Place> placeList) {
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Uri.class, new UriSerializer())
+                .create();
+        String gsonPlaceList = gson.toJson(placeList);
+        String gsonCurLatLng = gson.toJson(curLatLang);
 
-        private final Context mContext;
-
-        private NearbyAsyncTask(Context context) {
-            mContext = context;
+        if (placeList.size() == 0) {
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(context, R.string.no_nearby, duration);
+            toast.show();
         }
 
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            super.onProgressUpdate(values);
+        bundle.clear();
+        bundle.putString("PlaceList", gsonPlaceList);
+        bundle.putString("CurLatLng", gsonCurLatLng);
+
+        // Begin the transaction
+        if (viewMode.isMap()) {
+            setMapFragment();
+        } else {
+            setListFragment();
         }
 
-        @Override
-        protected List<Place> doInBackground(Void... params) {
-            return NearbyController
-                    .loadAttractionsFromLocation(curLatLang, CommonsApplication.getInstance()
-                    );
-        }
-
-        @Override
-        protected void onPostExecute(List<Place> placeList) {
-            super.onPostExecute(placeList);
-
-            if (isCancelled()) {
-                return;
-            }
-
-            Gson gson = new GsonBuilder()
-                    .registerTypeAdapter(Uri.class, new UriSerializer())
-                    .create();
-            String gsonPlaceList = gson.toJson(placeList);
-            String gsonCurLatLng = gson.toJson(curLatLang);
-
-            if (placeList.size() == 0) {
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(mContext, R.string.no_nearby, duration);
-                toast.show();
-            }
-
-            bundle.clear();
-            bundle.putString("PlaceList", gsonPlaceList);
-            bundle.putString("CurLatLng", gsonCurLatLng);
-
-            // Begin the transaction
-            if (viewMode.isMap()) {
-                setMapFragment();
-            } else {
-                setListFragment();
-            }
-
-            if (progressBar != null) {
-                progressBar.setVisibility(View.GONE);
-            }
+        if (progressBar != null) {
+            progressBar.setVisibility(View.GONE);
         }
     }
 
