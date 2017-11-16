@@ -129,7 +129,7 @@
   <string name="welcome_wikipedia_text">Загрузите свои изображения. Помогите Википедии оживить статьи!</string>
   <string name="welcome_wikipedia_subtext">Изображения в Википедии хранятся на Викискладе.</string>
   <string name="welcome_copyright_text">Ваши изображения помогают образованию людей во всём мире.</string>
-  <string name="welcome_copyright_subtext">Избегайте материалов, найденных в Интернете и защищённых авторским правом, а также изображений плакатов, книжных обложек и т.п.</string>
+  <string name="welcome_copyright_subtext">Избегайте материалов, защищённых авторским правом, например, найденных в Интернете, изображений плакатов, книжных обложек и т.п.</string>
   <string name="welcome_final_text">Вам это понятно?</string>
   <string name="welcome_final_button_text">Да!</string>
   <string name="detail_panel_cats_label">Категории</string>
@@ -159,7 +159,7 @@
   <string name="become_a_tester_title">Стать бета-тестером</string>
   <string name="become_a_tester_description">Подпишитесь на наш канал бета-версии на Google Play и получите ранний доступ к новым функциям и исправлениям ошибок</string>
   <string name="use_wikidata">Использовать Викиданные</string>
-  <string name="use_wikidata_summary">(Предупреждение: отключение может привести к большому потреблению мобильных данных)</string>
+  <string name="use_wikidata_summary">(Предупреждение: отключение может привести к значительному расходу мобильных данных)</string>
   <string name="_2fa_code">Код 2ФА</string>
   <string name="number_of_uploads">Лимит моих недавних загрузок</string>
   <string name="maximum_limit">Максимальный лимит</string>

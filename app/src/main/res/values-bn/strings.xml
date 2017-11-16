@@ -14,7 +14,7 @@
   <string name="authentication_failed">প্রমাণীকরণ ব্যর্থ হয়েছে!</string>
   <string name="uploading_started"> আপলোড আরম্ভ হয়েছে!</string>
   <string name="upload_completed_notification_title">%1$s আপলোড হয়েছে!</string>
-  <string name="upload_completed_notification_text">আপনার আপলোড দেখতে টোকা দিন</string>
+  <string name="upload_completed_notification_text">আপনার আপলোড দেখতে ট্যাপ করুন</string>
   <string name="upload_progress_notification_title_start">%1$s আপলোড শুরু হচ্ছে</string>
   <string name="upload_progress_notification_title_in_progress">%1$s আপলোড হচ্ছে</string>
   <string name="upload_progress_notification_title_finishing">%1$s আপলোড শেষ হয়েছে</string>
@@ -42,6 +42,7 @@
   <string name="login_failed_password">প্রবেশ করা যাচ্ছে না - অনুগ্রহ করে আপনার পাসওয়ার্ড পরীক্ষা করুন</string>
   <string name="login_failed_throttled">খুব বেশি অসফল প্রচেষ্টা। অনুগ্রহ করে কয়েক মিনিট পরে আবারও চেষ্টা করুন।</string>
   <string name="login_failed_blocked">দুঃখিত, এই ব্যবহারকারীকে কমন্সে বাধা দেয়া হয়েছে</string>
+  <string name="login_failed_2fa_needed">অাপনাকে অবশ্যই অাপনার দু\'স্তরের সত্যায়নকরণ কোড দিতে হবে।</string>
   <string name="login_failed_generic">প্রবেশ ব্যর্থ</string>
   <string name="share_upload_button">আপলোড</string>
   <string name="multiple_share_base_title">এই সেটের নাম</string>
@@ -72,7 +73,7 @@
   <string name="title_activity_settings">সেটিং</string>
   <string name="title_activity_signup">নিবন্ধন করুন</string>
   <string name="menu_about">পরিচিতি</string>
-  <string name="about_license" fuzzy="true">ওপেন সোর্স সফটওয়্যার &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;এ্যাপাচি লাইসেন্স v2&lt;/a&gt; অধীনে প্রকাশিত</string>
+  <string name="about_license">উইকিমিডিয়া কমন্স অ্যাপ হচ্ছে একটি উন্মুক্ত উৎস সম্বলিত অ্যাপ যা উইকিমিডিয়া সম্প্রদায়ের ব্যবহারিক ও সেচ্ছাসেবকবৃন্দ কর্তৃক তৈরি এবং পরিচালিত। উইকিমিডিয়া ফাউন্ডেশন এই অ্যাপ তৈরি, উন্নয়ন বা রক্ষণাবেক্ষণে জড়িত নয়।</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;উৎস&lt;/a&gt; ও &lt;a href=\"https://commons-app.github.io/\"&gt;ওয়েবসাইট&lt;/a&gt; GitHub এ&lt;/a&gt;। কোন সমস্যা ও পরামর্শের জন্য &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;গিটহাব ইস্যু&lt;/a&gt; তৈরি করুন।</string>
   <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;গোপনীয়তার নীতি&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;কৃতিত্ব&lt;/a&gt;</string>
@@ -134,6 +135,7 @@
   <string name="detail_license_empty">অজানা লাইসেন্স</string>
   <string name="menu_refresh">পুনঃসতেজ</string>
   <string name="read_storage_permission_rationale">প্রয়োজনীয় অনুমতি: বহিঃস্ত সঞ্চয়স্থান পড়া। এটি ছাড়া অ্যাপ কাজ করবে না।</string>
+  <string name="write_storage_permission_rationale">অনুমতি প্রয়োজন: অালাদাভাবে সংযুক্ত স্টোরেজ লিখুন। এটি ছাড়া অ্যাপটি চলতে পারেনা।</string>
   <string name="location_permission_rationale">ঐচ্ছিক অনুমতি: বিষয়শ্রেণী পরামর্শের জন্য বর্তমান অবস্থান নেয়</string>
   <string name="ok">ঠিক আছে</string>
   <string name="title_activity_nearby">কাছাকাছি স্থান</string>
@@ -151,12 +153,15 @@
   <string name="media_detail_coordinates">স্থানাঙ্কসমূহ</string>
   <string name="media_detail_coordinates_empty">কিছু দেয়া হয়নি</string>
   <string name="become_a_tester_title">বিটা টেস্টার হোন</string>
+  <string name="become_a_tester_description">গুগল প্লেতে আমাদের বেটা চ্যানেলে যুক্ত হন ! এতে নতুন ফিচারের পাশাপাশি পুরানো বাগগুলো\'র সংশোধিত রুপ সবার আগে ব্যবহারের সুযোগ পাবেন !!</string>
   <string name="use_wikidata">উইকিউপাত্ত ব্যবহার করুন</string>
   <string name="use_wikidata_summary">(সতর্কতা: এটি নিষ্ক্রিয় করা অধিক পরিমাণে মোবাইল ডেটা খরচ হওয়ার কারণ হতে পারে)</string>
+  <string name="_2fa_code">2FA কোড</string>
   <string name="number_of_uploads">আমার সাম্প্রতিক আপলোড সীমা</string>
   <string name="maximum_limit">সর্বোচ্চ সীমা</string>
   <string name="maximum_limit_alert">৫০০টির বেশি প্রদর্শন করা সম্ভব নয়</string>
   <string name="set_limit">সাম্প্রতিক আপলোড সীমা নির্ধারন করুন</string>
+  <string name="login_failed_2fa_not_supported">দুটি স্তরের প্রমাণীকরণ বর্তমানে সমর্থিত নয়।</string>
   <string name="logout_verification">আপনি কি সত্যিই প্রস্থান করতে চান?</string>
   <string name="commons_logo">কমন্সের লোগো</string>
   <string name="background_image">পটভূমির চিত্র</string>
@@ -187,7 +192,13 @@
   <string name="no_description_found">কোন বিবরণ পাওয়া যায়নি</string>
   <string name="nearby_info_menu_commons_article">কমন্সে ফাইলের পাতা</string>
   <string name="nearby_info_menu_wikidata_article">উইকিউপাত্ত পদ</string>
+  <string name="error_while_cache">ছবি আনার সময় ত্রুটি</string>
+  <string name="title_info">ফাইলের একটি স্বতন্ত্র বর্ণনামূলক নাম যা ফাইলের নাম হিসাবে কাজ করবে। অাপনি সাধারণ ভাষা ব্যবহার করতে পারেন শূন্যস্থানসহ। ফাইলের এক্সটেনশন যুক্ত করবেন না।</string>
+  <string name="description_info">যতটা সম্ভব মিডিয়াটি বর্ণনা করুন: এটি কোথায় ধারণ করা হয়েছিল? এটি কি প্রদর্শন করে? এটির প্রসঙ্গ কি? ধারণকৃত বস্তু অথবা ব্যক্তির বর্ণনা করুন। সহজে অনুমান করা যায়না সেরকম তথ্য উদঘাটন করুন, উদাহরণস্বরূপ, যদি ল্যান্ডস্কেপ হয় তাহলে দিবসকালের সময় দিন।</string>
   <string name="give_permission">অনুমতি দিন</string>
   <string name="use_external_storage">বাহ্যিক সঞ্চয়স্থান ব্যবহার করুন</string>
+  <string name="use_external_storage_summary">অাপনার ডিভাইসের নিজস্ব ক্যামেরায় ধারণকৃত ছবি সংরক্ষণ করুন</string>
+  <string name="send_log_file">লগ ফাইল পাঠান</string>
+  <string name="send_log_file_description">ডেভলপারের কাছে ইমেইলের মাধ্যমে লগ ফাইল পাঠান</string>
   <string name="login_to_your_account">আপনার অ্যাকাউন্টে প্রবেশ করুন</string>
 </resources>
