@@ -11,6 +11,7 @@
   <string name="login_success">لاگ ان کامیاب!</string>
   <string name="login_failed">لاگ ان ناکام!</string>
   <string name="upload_failed">فائل کائنی لبھی،ٻئی فائل کیتے کوشش کرو۔</string>
+  <string name="authentication_failed">تصدیق ناکام!</string>
   <string name="uploading_started">اپ لوڈ شروع!</string>
   <string name="upload_completed_notification_title">%1$s اپ لوڈ تھی ڳیا!</string>
   <string name="upload_progress_notification_title_start">اپ لوڈ %1$s شروع تھیندا پئے</string>
@@ -98,7 +99,9 @@
   <string name="navigation_item_settings">ترتیباں</string>
   <string name="navigation_item_feedback">تہاڈی رائے</string>
   <string name="navigation_item_logout">لاگ آؤٹ</string>
+  <string name="navigation_item_info">ٹیٹوریل</string>
   <string name="nearby_info_menu_wikidata_article">وکی ڈیٹا آئٹم</string>
   <string name="give_permission">اجازت ݙیوو</string>
+  <string name="send_log_file">لاگ فائل بھیجو</string>
   <string name="login_to_your_account">آپݨے کھاتے وچ لاگ ان تھیوو</string>
 </resources>
