@@ -3,6 +3,7 @@ package fr.free.nrw.commons.theme;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -95,31 +96,21 @@ public abstract class NavigationBaseActivity extends BaseActivity
         switch (itemId) {
             case R.id.action_home:
                 drawerLayout.closeDrawer(navigationView);
-                if (!(this instanceof ContributionsActivity)) {
-                    ContributionsActivity.startYourself(this);
-                    this.finish();
-                }
+                startActivityWithFlags(
+                        this, ContributionsActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP,
+                        Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 return true;
             case R.id.action_nearby:
                 drawerLayout.closeDrawer(navigationView);
-                if (!(this instanceof NearbyActivity)) {
-                    NearbyActivity.startYourself(this);
-                    this.finish();
-                }
+                startActivityWithFlags(this, NearbyActivity.class, Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 return true;
             case R.id.action_about:
                 drawerLayout.closeDrawer(navigationView);
-                if (!(this instanceof AboutActivity)) {
-                    AboutActivity.startYourself(this);
-                    this.finish();
-                }
+                startActivityWithFlags(this, AboutActivity.class, Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 return true;
             case R.id.action_settings:
                 drawerLayout.closeDrawer(navigationView);
-                if (!(this instanceof SettingsActivity)) {
-                    SettingsActivity.startYourself(this);
-                    this.finish();
-                }
+                startActivityWithFlags(this, SettingsActivity.class, Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 return true;
             case R.id.action_introduction:
                 drawerLayout.closeDrawer(navigationView);
@@ -169,5 +160,13 @@ public abstract class NavigationBaseActivity extends BaseActivity
             startActivity(nearbyIntent);
             finish();
         }
+    }
+
+    public static <T> void startActivityWithFlags(Context context, Class<T> cls, int... flags) {
+        Intent intent = new Intent(context, cls);
+        for (int flag: flags) {
+            intent.addFlags(flag);
+        }
+        context.startActivity(intent);
     }
 }
