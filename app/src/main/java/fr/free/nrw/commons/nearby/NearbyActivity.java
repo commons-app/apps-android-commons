@@ -27,14 +27,19 @@ import com.google.gson.GsonBuilder;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
+import fr.free.nrw.commons.location.LocationUpdateListener;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.utils.UriSerializer;
+import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -42,14 +47,15 @@ import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 
-public class NearbyActivity extends NavigationBaseActivity {
+public class NearbyActivity extends NavigationBaseActivity implements LocationUpdateListener {
 
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
     private static final int LOCATION_REQUEST = 1;
     private static final String MAP_LAST_USED_PREFERENCE = "mapLastUsed";
 
-    private LocationServiceManager locationManager;
+    @Inject
+    LocationServiceManager locationManager;
     private LatLng curLatLang;
     private Bundle bundle;
     private SharedPreferences sharedPreferences;
@@ -59,10 +65,10 @@ public class NearbyActivity extends NavigationBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AndroidInjection.inject(this);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         setContentView(R.layout.activity_nearby);
         ButterKnife.bind(this);
-        locationManager = LocationServiceManager.getInstance();
         checkLocationPermission();
         bundle = new Bundle();
         initDrawer();
@@ -95,7 +101,7 @@ public class NearbyActivity extends NavigationBaseActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_refresh:
-                refreshView();
+                refreshView(true);
                 return true;
             case R.id.action_toggle_view:
                 viewMode = viewMode.toggle();
@@ -107,16 +113,11 @@ public class NearbyActivity extends NavigationBaseActivity {
         }
     }
 
-    private void startLookingForNearby() {
-        curLatLang = locationManager.getLatestLocation();
-        setupPlaceList(getBaseContext());
-    }
-
     private void checkLocationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this,
                     Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                startLookingForNearby();
+                refreshView(false);
             } else {
                 if (ContextCompat.checkSelfPermission(this,
                         Manifest.permission.ACCESS_FINE_LOCATION)
@@ -157,7 +158,7 @@ public class NearbyActivity extends NavigationBaseActivity {
                 }
             }
         } else {
-            startLookingForNearby();
+            refreshView(false);
         }
     }
 
@@ -166,7 +167,7 @@ public class NearbyActivity extends NavigationBaseActivity {
         switch (requestCode) {
             case LOCATION_REQUEST: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    startLookingForNearby();
+                    refreshView(false);
                 } else {
                     //If permission not granted, go to page that says Nearby Places cannot be displayed
                     if (progressBar != null) {
@@ -222,7 +223,7 @@ public class NearbyActivity extends NavigationBaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
             Timber.d("User is back from Settings page");
-            refreshView();
+            refreshView(false);
         }
     }
 
@@ -239,11 +240,13 @@ public class NearbyActivity extends NavigationBaseActivity {
     protected void onStart() {
         super.onStart();
         locationManager.registerLocationManager();
+        locationManager.addLocationListener(this);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
+        locationManager.removeLocationListener(this);
         locationManager.unregisterLocationManager();
     }
 
@@ -259,13 +262,24 @@ public class NearbyActivity extends NavigationBaseActivity {
         checkGps();
     }
 
-    private void refreshView() {
-        curLatLang = locationManager.getLatestLocation();
+    private void refreshView(boolean isToastRequired) {
+        LatLng lastLocation = locationManager.getLastLocation();
+        if (curLatLang != null && curLatLang.equals(lastLocation)) { //refresh view only if location has changed
+            if (isToastRequired) {
+                ViewUtil.showLongToast(this, R.string.nearby_location_has_not_changed);
+            }
+            return;
+        }
+        curLatLang = lastLocation;
         progressBar.setVisibility(View.VISIBLE);
-        setupPlaceList(getBaseContext());
+        setupPlaceList(this);
     }
 
     private void setupPlaceList(Context context) {
+        if (curLatLang == null) {
+            Timber.d("Skipping update of nearby places as location is unavailable");
+            return;
+        }
         placesDisposable = Observable.fromCallable(() -> NearbyController
                 .loadAttractionsFromLocation(curLatLang, CommonsApplication.getInstance()))
                 .subscribeOn(Schedulers.io())
@@ -329,5 +343,10 @@ public class NearbyActivity extends NavigationBaseActivity {
     public static void startYourself(Context context) {
         Intent settingsIntent = new Intent(context, NearbyActivity.class);
         context.startActivity(settingsIntent);
+    }
+
+    @Override
+    public void onLocationChanged(LatLng latLng) {
+        refreshView(false);
     }
 }
