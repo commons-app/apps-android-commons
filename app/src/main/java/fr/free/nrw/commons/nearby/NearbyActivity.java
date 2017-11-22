@@ -61,6 +61,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     private SharedPreferences sharedPreferences;
     private NearbyActivityMode viewMode;
     private Disposable placesDisposable;
+    private boolean lockNearbyView; //Determines if the nearby places needs to be refreshed
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +102,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_refresh:
+                lockNearbyView = false;
                 refreshView(true);
                 return true;
             case R.id.action_toggle_view:
@@ -170,10 +172,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                     refreshView(false);
                 } else {
                     //If permission not granted, go to page that says Nearby Places cannot be displayed
-                    if (progressBar != null) {
-                        progressBar.setVisibility(View.GONE);
-                    }
-
+                    hideProgressBar();
                     showLocationPermissionDeniedErrorDialog();
                 }
             }
@@ -253,33 +252,41 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        placesDisposable.dispose();
+        if (placesDisposable != null) {
+            placesDisposable.dispose();
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        lockNearbyView = false;
         checkGps();
     }
 
-    private void refreshView(boolean isToastRequired) {
+    private void refreshView(boolean isHardRefresh) {
+        if (lockNearbyView) {
+            return;
+        }
         LatLng lastLocation = locationManager.getLastLocation();
         if (curLatLang != null && curLatLang.equals(lastLocation)) { //refresh view only if location has changed
-            if (isToastRequired) {
+            if (isHardRefresh) {
                 ViewUtil.showLongToast(this, R.string.nearby_location_has_not_changed);
             }
             return;
         }
         curLatLang = lastLocation;
+
+        if (curLatLang == null) {
+            Timber.d("Skipping update of nearby places as location is unavailable");
+            return;
+        }
+
         progressBar.setVisibility(View.VISIBLE);
         setupPlaceList(this);
     }
 
     private void setupPlaceList(Context context) {
-        if (curLatLang == null) {
-            Timber.d("Skipping update of nearby places as location is unavailable");
-            return;
-        }
         placesDisposable = Observable.fromCallable(() -> NearbyController
                 .loadAttractionsFromLocation(curLatLang, CommonsApplication.getInstance()))
                 .subscribeOn(Schedulers.io())
@@ -306,6 +313,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         bundle.putString("PlaceList", gsonPlaceList);
         bundle.putString("CurLatLng", gsonCurLatLng);
 
+        lockNearbyView = true;
         // Begin the transaction
         if (viewMode.isMap()) {
             setMapFragment();
@@ -313,6 +321,10 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             setListFragment();
         }
 
+        hideProgressBar();
+    }
+
+    private void hideProgressBar() {
         if (progressBar != null) {
             progressBar.setVisibility(View.GONE);
         }
