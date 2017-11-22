@@ -27,9 +27,4 @@ public class AboutActivity extends NavigationBaseActivity {
         versionText.setText(BuildConfig.VERSION_NAME);
         initDrawer();
     }
-
-    public static void startYourself(Context context) {
-        Intent settingsIntent = new Intent(context, AboutActivity.class);
-        context.startActivity(settingsIntent);
-    }
 }

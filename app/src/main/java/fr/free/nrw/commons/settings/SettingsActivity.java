@@ -54,9 +54,4 @@ public class SettingsActivity extends NavigationBaseActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
-    public static void startYourself(Context context) {
-        Intent settingsIntent = new Intent(context, SettingsActivity.class);
-        context.startActivity(settingsIntent);
-    }
 }

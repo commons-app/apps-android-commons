@@ -325,9 +325,4 @@ public class NearbyActivity extends NavigationBaseActivity {
         fragmentTransaction.replace(R.id.container, fragment);
         fragmentTransaction.commitAllowingStateLoss();
     }
-
-    public static void startYourself(Context context) {
-        Intent settingsIntent = new Intent(context, NearbyActivity.class);
-        context.startActivity(settingsIntent);
-    }
 }
