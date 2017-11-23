@@ -262,7 +262,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         super.onResume();
         lockNearbyView = false;
         checkGps();
-        setupPlaceList(this);
+        refreshView(false);
     }
 
     private void refreshView(boolean isHardRefresh) {
