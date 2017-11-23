@@ -352,9 +352,4 @@ public class ContributionsActivity extends AuthenticatedActivity
     public void refreshSource() {
         getSupportLoaderManager().restartLoader(0, null, this);
     }
-
-    public static void startYourself(Context context) {
-        context.startActivity(new Intent(context, ContributionsActivity.class));
-    }
-
 }
