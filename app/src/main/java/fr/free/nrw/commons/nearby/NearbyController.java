@@ -41,29 +41,28 @@ public class NearbyController {
      * Prepares Place list to make their distance information update later.
      *
      * @param curLatLng current location for user
-     * @param context   context
      * @return Place list without distance information
      */
-    public List<Place> loadAttractionsFromLocation(LatLng curLatLng, Context context) {
+    public List<Place> loadAttractionsFromLocation(LatLng curLatLng) {
         Timber.d("Loading attractions near %s", curLatLng);
         if (curLatLng == null) {
             return Collections.emptyList();
         }
-        List<Place> places = prefs.getBoolean("useWikidata", true)
-                ? nearbyPlaces.getFromWikidataQuery(curLatLng, Locale.getDefault().getLanguage())
-                : nearbyPlaces.getFromWikiNeedsPictures();
-        Timber.d("Sorting places by distance...");
-        final Map<Place, Double> distances = new HashMap<>();
-        for (Place place : places) {
-            distances.put(place, computeDistanceBetween(place.location, curLatLng));
+        List<Place> places = nearbyPlaces.getFromWikidataQuery(curLatLng, Locale.getDefault().getLanguage());
+        if (curLatLng != null) {
+            Timber.d("Sorting places by distance...");
+            final Map<Place, Double> distances = new HashMap<>();
+            for (Place place: places) {
+                distances.put(place, computeDistanceBetween(place.location, curLatLng));
+            }
+            Collections.sort(places,
+                    (lhs, rhs) -> {
+                        double lhsDistance = distances.get(lhs);
+                        double rhsDistance = distances.get(rhs);
+                        return (int) (lhsDistance - rhsDistance);
+                    }
+            );
         }
-        Collections.sort(places,
-                (lhs, rhs) -> {
-                    double lhsDistance = distances.get(lhs);
-                    double rhsDistance = distances.get(rhs);
-                    return (int) (lhsDistance - rhsDistance);
-                }
-        );
         return places;
     }
 
