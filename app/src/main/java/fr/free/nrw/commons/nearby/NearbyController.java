@@ -41,9 +41,7 @@ public class NearbyController {
         }
         NearbyPlaces nearbyPlaces = CommonsApplication.getInstance().getNearbyPlaces();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        List<Place> places = prefs.getBoolean("useWikidata", true)
-                ? nearbyPlaces.getFromWikidataQuery(curLatLng, Locale.getDefault().getLanguage())
-                : nearbyPlaces.getFromWikiNeedsPictures();
+        List<Place> places = nearbyPlaces.getFromWikidataQuery(curLatLng, Locale.getDefault().getLanguage());
         if (curLatLng != null) {
             Timber.d("Sorting places by distance...");
             final Map<Place, Double> distances = new HashMap<>();
