@@ -1,4 +1,4 @@
-apply from: '../gitutils.gradle'
+//apply from: '../gitutils.gradle'
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
@@ -78,10 +78,9 @@ android {
 
     defaultConfig {
         applicationId 'fr.free.nrw.commons'
-
         versionCode 76
         versionName '2.6.1'
-        setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
+        //setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
 
         minSdkVersion project.minSdkVersion
         targetSdkVersion project.targetSdkVersion
@@ -100,7 +99,7 @@ android {
         }
         debug {
             testCoverageEnabled true
-            versionNameSuffix "-debug-" + getBranchName() + "~" + getBuildVersion()
+            //versionNameSuffix "-debug-" + getBranchName() + "~" + getBuildVersion()
         }
     }
 

@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.nearby;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,10 +9,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -46,12 +43,13 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
+import static fr.free.nrw.commons.location.LocationServiceManager.LOCATION_REQUEST;
+
 
 public class NearbyActivity extends NavigationBaseActivity implements LocationUpdateListener {
 
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
-    private static final int LOCATION_REQUEST = 1;
     private static final String MAP_LAST_USED_PREFERENCE = "mapLastUsed";
 
     @Inject
@@ -70,7 +68,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         setContentView(R.layout.activity_nearby);
         ButterKnife.bind(this);
-        checkLocationPermission();
         bundle = new Bundle();
         initDrawer();
         initViewState();
@@ -102,7 +99,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_refresh:
-                lockNearbyView = false;
+                lockNearbyView(false);
                 refreshView(true);
                 return true;
             case R.id.action_toggle_view:
@@ -115,52 +112,9 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         }
     }
 
-    private void checkLocationPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(this,
-                    Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                refreshView(false);
-            } else {
-                if (ContextCompat.checkSelfPermission(this,
-                        Manifest.permission.ACCESS_FINE_LOCATION)
-                        != PackageManager.PERMISSION_GRANTED) {
-
-                    // Should we show an explanation?
-                    if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                            Manifest.permission.ACCESS_FINE_LOCATION)) {
-
-                        // Show an explanation to the user *asynchronously* -- don't block
-                        // this thread waiting for the user's response! After the user
-                        // sees the explanation, try again to request the permission.
-
-                        new AlertDialog.Builder(this)
-                                .setMessage(getString(R.string.location_permission_rationale))
-                                .setPositiveButton("OK", (dialog, which) -> {
-                                    ActivityCompat.requestPermissions(NearbyActivity.this,
-                                            new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                                            LOCATION_REQUEST);
-                                    dialog.dismiss();
-                                })
-                                .setNegativeButton("Cancel", null)
-                                .create()
-                                .show();
-
-                    } else {
-
-                        // No explanation needed, we can request the permission.
-
-                        ActivityCompat.requestPermissions(this,
-                                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                                LOCATION_REQUEST);
-
-                        // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-                        // app-defined int constant. The callback method gets the
-                        // result of the request.
-                    }
-                }
-            }
-        } else {
-            refreshView(false);
+    private void requestLocationPermissions() {
+        if (!isFinishing()) {
+            locationManager.requestPermissions(this);
         }
     }
 
@@ -185,7 +139,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                 .setCancelable(false)
                 .setPositiveButton(R.string.give_permission, (dialog, which) -> {
                     //will ask for the location permission again
-                    checkLocationPermission();
+                    checkGps();
                 })
                 .setNegativeButton(R.string.cancel, (dialog, which) -> {
                     //dismiss dialog and finish activity
@@ -214,6 +168,37 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                     .show();
         } else {
             Timber.d("GPS is enabled");
+            checkLocationPermission();
+        }
+    }
+
+    private void checkLocationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (locationManager.isLocationPermissionGranted()) {
+                refreshView(false);
+            } else {
+                // Should we show an explanation?
+                if (locationManager.isPermissionExplanationRequired(this)) {
+                    // Show an explanation to the user *asynchronously* -- don't block
+                    // this thread waiting for the user's response! After the user
+                    // sees the explanation, try again to request the permission.
+                    new AlertDialog.Builder(this)
+                            .setMessage(getString(R.string.location_permission_rationale_nearby))
+                            .setPositiveButton("OK", (dialog, which) -> {
+                                requestLocationPermissions();
+                                dialog.dismiss();
+                            })
+                            .setNegativeButton("Cancel", null)
+                            .create()
+                            .show();
+
+                } else {
+                    // No explanation needed, we can request the permission.
+                    requestLocationPermissions();
+                }
+            }
+        } else {
+            refreshView(false);
         }
     }
 
@@ -238,7 +223,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     @Override
     protected void onStart() {
         super.onStart();
-        locationManager.registerLocationManager();
         locationManager.addLocationListener(this);
     }
 
@@ -262,13 +246,18 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         super.onResume();
         lockNearbyView = false;
         checkGps();
-        refreshView(false);
     }
 
+    /**
+     * This method should be the single point to load/refresh nearby places
+     *
+     * @param isHardRefresh
+     */
     private void refreshView(boolean isHardRefresh) {
         if (lockNearbyView) {
             return;
         }
+        locationManager.registerLocationManager();
         LatLng lastLocation = locationManager.getLastLocation();
         if (curLatLang != null && curLatLang.equals(lastLocation)) { //refresh view only if location has changed
             if (isHardRefresh) {
@@ -314,7 +303,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         bundle.putString("PlaceList", gsonPlaceList);
         bundle.putString("CurLatLng", gsonCurLatLng);
 
-        lockNearbyView = true;
+        lockNearbyView(true);
         // Begin the transaction
         if (viewMode.isMap()) {
             setMapFragment();
@@ -323,6 +312,18 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         }
 
         hideProgressBar();
+    }
+
+    private void lockNearbyView(boolean lock) {
+        if (lock) {
+            lockNearbyView = true;
+            locationManager.unregisterLocationManager();
+            locationManager.removeLocationListener(this);
+        } else {
+            lockNearbyView = false;
+            locationManager.registerLocationManager();
+            locationManager.addLocationListener(this);
+        }
     }
 
     private void hideProgressBar() {
@@ -351,11 +352,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         fragment.setArguments(bundle);
         fragmentTransaction.replace(R.id.container, fragment, fragment.getClass().getSimpleName());
         fragmentTransaction.commitAllowingStateLoss();
-    }
-
-    public static void startYourself(Context context) {
-        Intent settingsIntent = new Intent(context, NearbyActivity.class);
-        context.startActivity(settingsIntent);
     }
 
     @Override
