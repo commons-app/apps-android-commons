@@ -1,4 +1,4 @@
-//apply from: '../gitutils.gradle'
+apply from: '../gitutils.gradle'
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
@@ -99,7 +99,7 @@ android {
         }
         debug {
             testCoverageEnabled true
-            //versionNameSuffix "-debug-" + getBranchName() + "~" + getBuildVersion()
+            versionNameSuffix "-debug-" + getBranchName() + "~" + getBuildVersion()
         }
     }
 
