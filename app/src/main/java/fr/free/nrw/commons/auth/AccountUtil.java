@@ -18,7 +18,7 @@ import static android.accounts.AccountManager.KEY_ACCOUNT_TYPE;
 
 public class AccountUtil {
 
-    static final String ACCOUNT_TYPE = "fr.free.nrw.commons";
+    public static final String ACCOUNT_TYPE = "fr.free.nrw.commons";
     private final Context context;
 
     public AccountUtil(Context context) {

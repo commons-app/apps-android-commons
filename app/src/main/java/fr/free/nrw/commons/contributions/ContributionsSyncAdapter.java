@@ -57,6 +57,9 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
     }
 
     private boolean fileExists(ContentProviderClient client, String filename) {
+        if (filename == null) {
+            return false;
+        }
         Cursor cursor = null;
         try {
             cursor = client.query(BASE_URI,

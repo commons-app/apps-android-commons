@@ -2,9 +2,7 @@
 
 The Wikimedia Commons Android app allows users to upload pictures from their Android phone/tablet to Wikimedia Commons. Download the app [here][1], or view our [website][2].
 
-Initially started by the Wikimedia Foundation, this app is now maintained by volunteers. Anyone is welcome to improve it, just choose among the [open issues][3] and send us a pull request :-) 
-
-We are currently applying for an [IEG renewal][10] to work on the app for the next 6 months. Feedback is very much welcomed.
+Initially started by the Wikimedia Foundation, this app is now maintained by grantees and volunteers of the Wikimedia community. Anyone is welcome to improve it, just choose among the [open issues][3] and send us a pull request :-) 
 
 <a href="https://f-droid.org/repository/browse/?fdid=fr.free.nrw.commons" target="_blank">
 <img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="90"/></a>

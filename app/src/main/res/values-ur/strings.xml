@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">کامنز</string>
+  <string name="menu_settings">ترتیبات</string>
+  <string name="username">صارف نام</string>
+  <string name="password">پاس ورڈ</string>
+  <string name="login">داخل ہوں</string>
+  <string name="signup">کھاتہ بنائیں</string>
+  <string name="logging_in_title">لاگ آن</string>
+  <string name="logging_in_message">براہ مہربانی کچھ دیر انتظار کریں۔۔۔</string>
+  <string name="login_success">لاگ ان کامیاب۔</string>
+  <string name="login_failed">داخل ہونے میں ناکامی ہوئی!</string>
+  <string name="upload_failed">فائل نہیں ملی، براہ کرم دوسری فائل آزمائیں۔</string>
+  <string name="authentication_failed">تصدیق ناکام!</string>
+  <string name="uploading_started">اپلوڈ شروع!</string>
+  <string name="upload_completed_notification_title">%1$s اپلوڈ شد!</string>
+  <string name="upload_completed_notification_text">اپنی اپلوڈ دیکھنے کے لیے ٹیپ کریں۔</string>
+  <string name="upload_progress_notification_title_start">%1$s کی اپلوڈنگ شروع ہو رہی ہے</string>
+  <string name="upload_progress_notification_title_in_progress">%1$s اپلوڈ جاری</string>
+  <string name="upload_progress_notification_title_finishing">%1$s کی اپلوڈنگ مکمل ہو رہی ہے</string>
+  <string name="upload_failed_notification_title">اپلوڈ %1$s ہونے میں ناکام</string>
+  <string name="upload_failed_notification_subtitle">دیکھنے کے لیے ٹیپ کریں</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%d فائل اپلوڈ ہورہی ہے</item>
+    <item quantity="other">%d فائلیں اپلوڈ ہورہی ہے</item>
+  </plurals>
+  <string name="title_activity_contributions">میں حالیہ اپلوڈ</string>
+  <string name="contribution_state_queued">قطار</string>
+  <string name="contribution_state_failed">ناکام</string>
+  <string name="contribution_state_in_progress">%1$d%% مکمل</string>
+  <string name="contribution_state_starting">اپلوڈ جاری ہے</string>
+  <string name="menu_from_gallery">از نگار خانہ</string>
+  <string name="menu_from_camera">تصویر لیں</string>
+  <string name="menu_nearby">قریبی</string>
+  <string name="provider_contributions">میری اپلوڈ</string>
+  <string name="menu_share">شیئر</string>
+  <string name="menu_open_in_browser">براؤزر میں کھولیں</string>
+  <string name="share_title_hint">عنوان</string>
+  <string name="share_description_hint">وضاحت</string>
+  <string name="login_failed_network">لاگ ان ہونے میں ناکام - نیٹ ورک ناکامی</string>
+  <string name="login_failed_username">لاگ ان ہونے میں ناکام - براہ مہربانی اپنا صارف نام کی جانچ کریں</string>
+  <string name="login_failed_password">لاگ ان ہونے میں ناکام - براہ مہربانی - اپنے پاس ورڈ کی جانچ کریں</string>
+  <string name="login_failed_throttled">بے شمار ناکام کوششیں کچھ منٹوں میں دوبارہ کوشش کریں۔</string>
+  <string name="login_failed_blocked">معذرت، یہ صارف کومنز پر بلاک کردیا گیا ہے</string>
+  <string name="login_failed_2fa_needed">آپ کو اپنے دو عامل کے تصدیق کوڈ فراہم کرنا چاہیے۔</string>
+  <string name="login_failed_generic">داخل ہونے میں ناکام</string>
+  <string name="share_upload_button">اپلوڈ کریں</string>
+  <string name="multiple_share_base_title">سیٹ کو نام دیں</string>
+  <string name="provider_modifications">اصلاحات</string>
+  <string name="menu_upload_single">اپلوڈ کریں</string>
+  <string name="categories_search_text_hint">زمرہ جات تلاش کریں</string>
+  <string name="menu_save_categories">محفوظ کریں</string>
+  <string name="refresh_button">تازہ کریں</string>
+  <string name="gps_disabled">جی پی ایس آپ کے آلے میں غیر فعال ہے۔ آپ اس کو فعال کرنا چاہینگے؟</string>
+  <string name="enable_gps">جی پی ایس فعال کریں</string>
+  <string name="contributions_subtitle_zero">ابھی تک کوئی اپلوڈ نہیں</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%d اپلوڈ</item>
+    <item quantity="other">%d اپلوڈ</item>
+  </plurals>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">شروع %d اپلوڈ</item>
+    <item quantity="other">شروع %d اپلوڈ</item>
+  </plurals>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%d اپلوڈ</item>
+    <item quantity="other">%d اپلوڈ</item>
+  </plurals>
+  <string name="categories_not_found">%1$s سے کوئی زمرہ جات میل نہیں کھاتے</string>
+  <string name="categories_skip_explanation">ویکیمیڈیا کامنز پر اپنی تصاویر کو قابل دریافت بنانے کے لیے زمرے شامل کریں۔\n\nزمرے شامل کرنے کے لیے لکھنا شروع کریں۔\n\nاس مرحلے کو نظر انداز کرنے کے لیے اس پیغام یا (یا پیچھے) پر ٹیپ کریں۔</string>
+  <string name="categories_activity_title">زمرہ جات</string>
+  <string name="title_activity_settings">ترتیبات</string>
+  <string name="title_activity_signup">کھاتہ بنائیں</string>
+  <string name="menu_about">بابت</string>
+  <string name="about_license">ویکیمیڈیا کامنز ایپ ایک اوپن سورس ایپ ہے جو موہوب الیہ اور رضاکاروں کی جانب سے برقرار رکھی جاتی اور بنائی گئی ہے۔ ویکیمیڈیا فاؤنڈیش کا اس ایپ کی برقراری اور تخلیق سے کوئی واسطہ نہیں ہے۔</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;ماخذ&lt;/a&gt; اور &lt;a href=\"https://commons-app.github.io/\"&gt;ویب سائٹ&lt;/a&gt; در گٹ ہب۔&lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;نیا گٹ ہب اجرا بنائیں&lt;/a&gt; تاکہ آپ bug شکایتیں اور تجایز دیں سکیں</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;سرگرمی کی تدبیر&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;کریڈٹ&lt;/a&gt;</string>
+  <string name="title_activity_about">تعارف</string>
+  <string name="menu_feedback">فیڈبیک بھیجیے (براستہ ای میل)</string>
+  <string name="no_email_client">ای میل کلائنٹ انسٹال نہیں</string>
+  <string name="provider_categories">حال ہی میں استعمال کیے گئے زمرے</string>
+  <string name="waiting_first_sync">سب سے پہلے sync کے انتظار میں۔۔۔</string>
+  <string name="no_uploads_yet">آپ نے ابھی تک کوئی تصاویر اپلوڈ نہیں کی ہے۔</string>
+  <string name="menu_retry_upload">دوبارہ کوشش کریں</string>
+  <string name="menu_cancel_upload">منسوخ</string>
+  <string name="share_license_summary">%1$s تلے یہ تصویر لائسنس یافتہ ہو گی</string>
+  <string name="media_upload_policy">اس تصویر کو درج کر کے، میں اقرار کرتا ہوں کہ یہ میرا اپنا کام ہے، اس ميں کاپی رائٹ مواد یا سیلفیاں نہیں ہیں، اور بصورت دیگر میں &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;ویکیمیڈیا کامنز پالیسیوں&lt;/a&gt; کا پابند ہوں۔</string>
+  <string name="menu_download">ڈاؤنلوڈ</string>
+  <string name="preference_license">اجازت نامہ</string>
+  <string name="use_previous">گزشتہ عنوان/وضاحت استعمال کریں</string>
+  <string name="allow_gps">خودکارانہ طریقے سے حالیہ جگہ حاصل کریں</string>
+  <string name="preference_theme">نائٹ موڈ</string>
+  <string name="preference_theme_summary">کالا تھیم استعمال کریں</string>
+  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (آسٹریا)</string>
+  <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (جرمنی)</string>
+  <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (اسٹونیا)</string>
+  <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (اسپین)</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (کرویئشا)</string>
+  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (لکسمبرگ)</string>
+  <string name="welcome_final_button_text">ہاں!</string>
+  <string name="detail_panel_cats_label">زمرہ جات</string>
+  <string name="detail_panel_cats_loading">لوڈ ہو رہا ہے۔۔۔</string>
+  <string name="detail_panel_cats_none">غیر منتخب</string>
+  <string name="detail_description_empty">کوئی وضاحت نہیں</string>
+  <string name="detail_license_empty">نامعلوم اجازت نامہ</string>
+  <string name="menu_refresh">ریفریش کریں</string>
+  <string name="ok">ٹھیک ہے</string>
+  <string name="yes">جی</string>
+  <string name="no">نہیں</string>
+  <string name="media_detail_license">اجازت نامہ</string>
+  <string name="media_detail_coordinates">متناسقات</string>
+  <string name="commons_logo">کامنز لوگو</string>
+  <string name="welcome_image_no_selfies">کوئی سیلفی نہیں</string>
+  <string name="navigation_item_about">تعارف</string>
+  <string name="navigation_item_settings">ترتیبات</string>
+  <string name="navigation_item_feedback">آپ کی رائے</string>
+  <string name="navigation_item_logout">لاگ آوٹ</string>
+  <string name="navigation_item_info">معلمی</string>
+</resources>

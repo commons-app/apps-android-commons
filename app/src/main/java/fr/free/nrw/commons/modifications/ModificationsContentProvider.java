@@ -16,7 +16,7 @@ import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import timber.log.Timber;
 
-public class ModificationsContentProvider extends ContentProvider{
+public class ModificationsContentProvider extends ContentProvider {
 
     private static final int MODIFICATIONS = 1;
     private static final int MODIFICATIONS_ID = 2;
@@ -51,7 +51,7 @@ public class ModificationsContentProvider extends ContentProvider{
 
         int uriType = uriMatcher.match(uri);
 
-        switch(uriType) {
+        switch (uriType) {
             case MODIFICATIONS:
                 break;
             default:
@@ -112,7 +112,7 @@ public class ModificationsContentProvider extends ContentProvider{
         sqlDB.beginTransaction();
         switch (uriType) {
             case MODIFICATIONS:
-                for(ContentValues value: values) {
+                for (ContentValues value: values) {
                     Timber.d("Inserting! %s", value);
                     sqlDB.insert(ModifierSequence.Table.TABLE_NAME, null, value);
                 }

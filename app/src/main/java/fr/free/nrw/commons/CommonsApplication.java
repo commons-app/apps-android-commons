@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.stetho.Stetho;
 import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 
 import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
@@ -60,17 +61,15 @@ public class CommonsApplication extends DaggerApplication {
     public static final String FEEDBACK_EMAIL_SUBJECT = "Commons Android App (%s) Feedback";
 
     private CommonsApplicationComponent component;
+    private RefWatcher refWatcher;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            // This process is dedicated to LeakCanary for heap analysis.
-            // You should not init your app in this process.
+        if (setupLeakCanary() == RefWatcher.DISABLED) {
             return;
         }
-        LeakCanary.install(this);
 
         Timber.plant(new Timber.DebugTree());
 
@@ -84,6 +83,18 @@ public class CommonsApplication extends DaggerApplication {
         System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0");
 
         Fresco.initialize(this);
+    }
+
+    protected RefWatcher setupLeakCanary() {
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return RefWatcher.DISABLED;
+        }
+        return LeakCanary.install(this);
+    }
+
+    public static RefWatcher getRefWatcher(Context context) {
+        CommonsApplication application = (CommonsApplication) context.getApplicationContext();
+        return application.refWatcher;
     }
 
     @Override

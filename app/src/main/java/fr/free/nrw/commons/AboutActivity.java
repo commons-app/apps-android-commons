@@ -1,7 +1,5 @@
 package fr.free.nrw.commons;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -26,10 +24,5 @@ public class AboutActivity extends NavigationBaseActivity {
 
         versionText.setText(BuildConfig.VERSION_NAME);
         initDrawer();
-    }
-
-    public static void startYourself(Context context) {
-        Intent settingsIntent = new Intent(context, AboutActivity.class);
-        context.startActivity(settingsIntent);
     }
 }

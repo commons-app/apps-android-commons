@@ -13,7 +13,7 @@ public abstract class BaseActivity extends DaggerAppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         boolean currentThemeIsDark = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("theme", false);
-        if (currentThemeIsDark) {
+        if (currentThemeIsDark){
             currentTheme = true;
             setTheme(R.style.DarkAppTheme);
         } else {

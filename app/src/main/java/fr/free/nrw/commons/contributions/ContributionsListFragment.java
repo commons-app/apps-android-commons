@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -18,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListAdapter;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import javax.inject.Inject;
@@ -42,10 +42,12 @@ public class ContributionsListFragment extends DaggerFragment {
     GridView contributionsList;
     @BindView(R.id.waitingMessage)
     TextView waitingMessage;
-    @BindView(R.id.emptyMessage)
-    TextView emptyMessage;
+    @BindView(R.id.loadingContributionsProgressBar)
+    ProgressBar progressBar;
+
     @Inject @Named("prefs") SharedPreferences prefs;
     @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
+
     private ContributionController controller;
 
     @Override
@@ -69,6 +71,7 @@ public class ContributionsListFragment extends DaggerFragment {
             waitingMessage.setVisibility(GONE);
         }
 
+        changeProgressBarVisibility(true);
         return v;
     }
 
@@ -78,6 +81,10 @@ public class ContributionsListFragment extends DaggerFragment {
 
     public void setAdapter(ListAdapter adapter) {
         this.contributionsList.setAdapter(adapter);
+    }
+
+    public void changeProgressBarVisibility(boolean isVisible) {
+        this.progressBar.setVisibility(isVisible ? View.VISIBLE : View.GONE);
     }
 
     @Override

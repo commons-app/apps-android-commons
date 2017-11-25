@@ -207,5 +207,10 @@ Tap this message (or hit back) to skip this step.</string>
   <string name="give_permission">Give permission</string>
   <string name="use_external_storage">Use external storage</string>
   <string name="use_external_storage_summary">Save pictures taken with the in-app camera on your device</string>
-    <string name="login_to_your_account">Login to your account</string>
+  <string name="send_log_file">Send log file</string>
+  <string name="send_log_file_description">Send log file to developers via email</string>
+  <string name="login_to_your_account">Login to your account</string>
+
+  <string name="nearby_location_has_not_changed">Location has not changed.</string>
+  <string name="nearby_location_not_available">Location not available.</string>
 </resources>

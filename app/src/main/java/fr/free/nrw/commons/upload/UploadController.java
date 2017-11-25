@@ -65,7 +65,7 @@ public class UploadController {
     }
 
     public void cleanup() {
-        if(isUploadServiceConnected) {
+        if (isUploadServiceConnected) {
             context.unbindService(uploadServiceConnection);
         }
     }
@@ -87,11 +87,11 @@ public class UploadController {
 
     public void startUpload(final Contribution contribution, final ContributionUploadProgress onComplete) {
         //Set creator, desc, and license
-        if(TextUtils.isEmpty(contribution.getCreator())) {
+        if (TextUtils.isEmpty(contribution.getCreator())) {
             contribution.setCreator(sessionManager.getCurrentAccount().name);
         }
 
-        if(contribution.getDescription() == null) {
+        if (contribution.getDescription() == null) {
             contribution.setDescription("");
         }
 
@@ -109,11 +109,11 @@ public class UploadController {
                 long length;
                 ContentResolver contentResolver = context.getContentResolver();
                 try {
-                    if(contribution.getDataLength() <= 0) {
+                    if (contribution.getDataLength() <= 0) {
                         length = contentResolver
                                 .openAssetFileDescriptor(contribution.getLocalUri(), "r")
                                 .getLength();
-                        if(length == -1) {
+                        if (length == -1) {
                             // Let us find out the long way!
                             length = countBytes(contentResolver
                                     .openInputStream(contribution.getLocalUri()));

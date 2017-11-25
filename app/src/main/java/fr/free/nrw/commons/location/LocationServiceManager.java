@@ -7,22 +7,33 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import timber.log.Timber;
 
 public class LocationServiceManager implements LocationListener {
 
     private String provider;
     private LocationManager locationManager;
-    private LatLng latestLocation;
+    private LatLng lastLocation;
     private Float latestLocationAccuracy;
+    private final List<LocationUpdateListener> locationListeners = new CopyOnWriteArrayList<>();
 
     public LocationServiceManager(Context context) {
         this.locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         provider = locationManager.getBestProvider(new Criteria(), true);
     }
 
-    public LatLng getLatestLocation() {
-        return latestLocation;
+    public boolean isProviderEnabled() {
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+    }
+
+    public LatLng getLastLocation() {
+        return lastLocation;
     }
 
     /**
@@ -64,6 +75,16 @@ public class LocationServiceManager implements LocationListener {
         }
     }
 
+    public void addLocationListener(LocationUpdateListener listener) {
+        if (!locationListeners.contains(listener)) {
+            locationListeners.add(listener);
+        }
+    }
+
+    public void removeLocationListener(LocationUpdateListener listener) {
+        locationListeners.remove(listener);
+    }
+
     @Override
     public void onLocationChanged(Location location) {
         double currentLatitude = location.getLatitude();
@@ -71,8 +92,11 @@ public class LocationServiceManager implements LocationListener {
         latestLocationAccuracy = location.getAccuracy();
         Timber.d("Latitude: %f Longitude: %f Accuracy %f",
                 currentLatitude, currentLongitude, latestLocationAccuracy);
+        lastLocation = new LatLng(currentLatitude, currentLongitude, latestLocationAccuracy);
 
-        latestLocation = new LatLng(currentLatitude, currentLongitude, latestLocationAccuracy);
+        for (LocationUpdateListener listener : locationListeners) {
+            listener.onLocationChanged(lastLocation);
+        }
     }
 
     @Override

@@ -14,6 +14,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.utils.UiUtils;
@@ -22,13 +25,14 @@ import timber.log.Timber;
 import static fr.free.nrw.commons.utils.LengthUtils.computeDistanceBetween;
 import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
-
 public class NearbyController {
     private static final int MAX_RESULTS = 1000;
     private final NearbyPlaces nearbyPlaces;
     private final SharedPreferences prefs;
 
-    public NearbyController(NearbyPlaces nearbyPlaces, SharedPreferences prefs) {
+    @Inject
+    public NearbyController(NearbyPlaces nearbyPlaces,
+                            @Named("default_preferences") SharedPreferences prefs) {
         this.nearbyPlaces = nearbyPlaces;
         this.prefs = prefs;
     }

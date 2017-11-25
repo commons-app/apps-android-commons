@@ -53,4 +53,9 @@
         android:summary="@string/use_external_storage_summary"
         />
 
+    <Preference
+        android:key="sendLogFile"
+        android:title="@string/send_log_file"
+        android:summary="@string/send_log_file_description"/>
+
 </PreferenceScreen>

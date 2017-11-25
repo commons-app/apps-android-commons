@@ -34,6 +34,7 @@ import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import timber.log.Timber;
 
 import static android.view.KeyEvent.KEYCODE_ENTER;
@@ -199,7 +200,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     }
 
     public void startMainActivity() {
-        ContributionsActivity.startYourself(this);
+        NavigationBaseActivity.startActivityWithFlags(this, ContributionsActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP);
         finish();
     }
 
@@ -253,8 +254,8 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
         @Override
         public void afterTextChanged(Editable editable) {
-            boolean enabled = usernameEdit.getText().length() != 0 && passwordEdit.getText().length() != 0 &&
-                    (BuildConfig.DEBUG || twoFactorEdit.getText().length() != 0 || twoFactorEdit.getVisibility() != View.VISIBLE);
+            boolean enabled = usernameEdit.getText().length() != 0 && passwordEdit.getText().length() != 0
+                    && (BuildConfig.DEBUG || twoFactorEdit.getText().length() != 0 || twoFactorEdit.getVisibility() != View.VISIBLE);
             loginButton.setEnabled(enabled);
         }
     }

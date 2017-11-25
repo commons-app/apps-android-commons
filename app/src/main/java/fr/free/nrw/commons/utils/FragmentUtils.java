@@ -23,8 +23,8 @@ public class FragmentUtils {
                     .commitNow();
             return true;
         } catch (IllegalStateException e) {
-            Timber.e(e, "Could not add & commit fragment. " +
-                    "Did you mean to call commitAllowingStateLoss?");
+            Timber.e(e, "Could not add & commit fragment. "
+                    + "Did you mean to call commitAllowingStateLoss?");
         }
         return false;
     }

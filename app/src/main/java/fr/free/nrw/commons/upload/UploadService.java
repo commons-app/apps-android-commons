@@ -185,7 +185,7 @@ public class UploadService extends HandlerService<Contribution> {
 
     @SuppressLint("StringFormatInvalid")
     private void uploadContribution(Contribution contribution) {
-        InputStream file = null;
+        InputStream file;
 
         String notificationTag = contribution.getLocalUri().toString();
 
@@ -196,6 +196,14 @@ public class UploadService extends HandlerService<Contribution> {
             Timber.d("File not found");
             Toast fileNotFound = Toast.makeText(this, R.string.upload_failed, Toast.LENGTH_LONG);
             fileNotFound.show();
+            return;
+        }
+
+        //As the file is null there's no point in continuing the upload process
+        //mwapi.upload accepts a NonNull input stream
+        if(file == null) {
+            Timber.d("File not found");
+            return;
         }
 
         Timber.d("Before execution!");

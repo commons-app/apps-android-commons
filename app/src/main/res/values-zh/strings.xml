@@ -198,5 +198,7 @@
   <string name="give_permission">提供权限</string>
   <string name="use_external_storage">使用外部存储</string>
   <string name="use_external_storage_summary">在您的设备上，使用应用中的照相机保存照片</string>
+  <string name="send_log_file">发送日志文件</string>
+  <string name="send_log_file_description">通过电子邮件将日志文件发送给开发人员</string>
   <string name="login_to_your_account">登录您的账户</string>
 </resources>

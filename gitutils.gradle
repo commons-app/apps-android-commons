@@ -1,0 +1,21 @@
+ext.getBuildVersion = { ->
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'rev-parse', '--short', 'HEAD'
+        standardOutput = stdout
+    }
+    return stdout.toString().trim()
+}
+
+ext.getBranchName = { ->
+    try {
+        def stdOut = new ByteArrayOutputStream()
+        exec {
+            commandLine 'git', 'rev-parse', '--abbrev-ref', 'HEAD'
+            standardOutput = stdOut
+        }
+        return stdOut.toString().trim()
+    } catch (ignored) {
+        return null
+    }
+}

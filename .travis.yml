@@ -17,14 +17,17 @@ jdk:
 
 android:
   components:
-    - platform-tools
     - tools
-    - build-tools-26.0.1
+    - platform-tools
+    - build-tools-26.0.2
     - extra-google-m2repository
     - extra-android-m2repository
     - ${ANDROID_TARGET}
     - android-25
+    - android-26
     - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
+  licenses:
+    - 'android-sdk-license-.+'
 
 before_script:
   - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
@@ -38,8 +41,10 @@ after_success:
   - bash <(curl -s https://codecov.io/bash)
 
 after_failure:
-  - echo '*** Connected Test Rsults ***'
-  - w3m -dump ${TRAVIS_BUILD_DIR}/app/build/reports/androidTests/connected/*Test.html
+  - echo '*** Debug Unit Test Results ***'
+  - w3m -dump ${TRAVIS_BUILD_DIR}/app/build/reports/tests/*/classes/*Test.html
+  - echo '*** Connected Test Results ***'
+  - w3m -dump ${TRAVIS_BUILD_DIR}/app/build/reports/androidTests/connected/flavors/*/*Test.html
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock

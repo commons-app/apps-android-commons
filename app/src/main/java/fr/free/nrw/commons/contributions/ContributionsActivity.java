@@ -149,10 +149,13 @@ public  class       ContributionsActivity
         if (savedInstanceState != null) {
             mediaDetails = (MediaDetailPagerFragment)supportFragmentManager
                     .findFragmentById(R.id.contributionsFragmentContainer);
+
+            getSupportLoaderManager().initLoader(0, null, this);
         }
         requestAuthToken();
         initDrawer();
         setTitle(getString(R.string.title_activity_contributions));
+        setUploadCount();
     }
 
     @Override
@@ -242,14 +245,14 @@ public  class       ContributionsActivity
 
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
+        contributionsList.changeProgressBarVisibility(false);
+
         if (contributionsList.getAdapter() == null) {
             contributionsList.setAdapter(new ContributionsListAdapter(getApplicationContext(),
                     cursor, 0));
         } else {
             ((CursorAdapter) contributionsList.getAdapter()).swapCursor(cursor);
         }
-
-        setUploadCount();
 
         contributionsList.clearSyncMessage();
         notifyAndMigrateDataSetObservers();
@@ -281,18 +284,16 @@ public  class       ContributionsActivity
 
     @SuppressWarnings("ConstantConditions")
     private void setUploadCount() {
-        compositeDisposable.add(
-                mediaWikiApi
-                        .getUploadCount(sessionManager.getCurrentAccount().name)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(
-                                uploadCount -> getSupportActionBar().setSubtitle(getResources()
-                                        .getQuantityString(R.plurals.contributions_subtitle,
-                                                uploadCount, uploadCount)),
-                                t -> Timber.e(t, "Fetching upload count failed")
-                        )
-        );
+        compositeDisposable.add(mediaWikiApi
+                .getUploadCount(sessionManager.getCurrentAccount().name)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        uploadCount -> getSupportActionBar().setSubtitle(getResources()
+                                .getQuantityString(R.plurals.contributions_subtitle,
+                                        uploadCount, uploadCount)),
+                        t -> Timber.e(t, "Fetching upload count failed")
+                ));
     }
 
     @Override
@@ -344,9 +345,4 @@ public  class       ContributionsActivity
     public void refreshSource() {
         getSupportLoaderManager().restartLoader(0, null, this);
     }
-
-    public static void startYourself(Context context) {
-        context.startActivity(new Intent(context, ContributionsActivity.class));
-    }
-
 }

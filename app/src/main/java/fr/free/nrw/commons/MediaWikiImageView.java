@@ -42,7 +42,7 @@ public class MediaWikiImageView extends SimpleDraweeView {
         if (currentThumbnailTask != null) {
             currentThumbnailTask.cancel(true);
         }
-        if(media == null) {
+        if (media == null) {
             return;
         }
 

@@ -15,6 +15,7 @@ import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.caching.CacheController;
 import fr.free.nrw.commons.data.DBOpenHelper;
+import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.NearbyPlaces;
@@ -69,6 +70,12 @@ public class CommonsApplicationModule {
     @Singleton
     public MediaWikiApi provideMediaWikiApi() {
         return new ApacheHttpClientMediaWikiApi(BuildConfig.WIKIMEDIA_API_HOST);
+    }
+
+    @Provides
+    @Singleton
+    public LocationServiceManager provideLocationServiceManager() {
+        return new LocationServiceManager(application);
     }
 
     @Provides
