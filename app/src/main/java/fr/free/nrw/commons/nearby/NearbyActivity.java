@@ -163,7 +163,10 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                                 Timber.d("Loaded settings page");
                                 startActivityForResult(callGPSSettingIntent, 1);
                             })
-                    .setNegativeButton(R.string.menu_cancel_upload, (dialog, id) -> dialog.cancel())
+                    .setNegativeButton(R.string.menu_cancel_upload, (dialog, id) -> {
+                        showLocationPermissionDeniedErrorDialog();
+                        dialog.cancel();
+                    })
                     .create()
                     .show();
         } else {
@@ -188,7 +191,10 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                                 requestLocationPermissions();
                                 dialog.dismiss();
                             })
-                            .setNegativeButton("Cancel", null)
+                            .setNegativeButton("Cancel", (dialog, id) -> {
+                                showLocationPermissionDeniedErrorDialog();
+                                dialog.cancel();
+                            })
                             .create()
                             .show();
 
