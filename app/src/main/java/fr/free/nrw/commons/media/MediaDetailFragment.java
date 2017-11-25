@@ -22,6 +22,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import javax.inject.Inject;
+import javax.inject.Provider;
 
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.License;
@@ -56,7 +57,9 @@ public class MediaDetailFragment extends DaggerFragment {
         return mf;
     }
 
-    @Inject MediaWikiApi mwApi;
+    @Inject
+    Provider<MediaDataExtractor> mediaDataExtractorProvider;
+
     private MediaWikiImageView image;
     private MediaDetailSpacer spacer;
     private int initialListTop = 0;
@@ -192,13 +195,13 @@ public class MediaDetailFragment extends DaggerFragment {
 
             @Override
             protected void onPreExecute() {
-                extractor = new MediaDataExtractor(media.getFilename(), licenseList, mwApi);
+                extractor = mediaDataExtractorProvider.get();
             }
 
             @Override
             protected Boolean doInBackground(Void... voids) {
                 try {
-                    extractor.fetch();
+                    extractor.fetch(media.getFilename(), licenseList);
                     return Boolean.TRUE;
                 } catch (IOException e) {
                     Timber.d(e);

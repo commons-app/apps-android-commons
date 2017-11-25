@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.inject.Inject;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -34,34 +35,26 @@ import timber.log.Timber;
 public class MediaDataExtractor {
     private final MediaWikiApi mediaWikiApi;
     private boolean fetched;
-
-    private String filename;
     private ArrayList<String> categories;
     private Map<String, String> descriptions;
     private String license;
     private @Nullable LatLng coordinates;
-    private LicenseList licenseList;
 
-    /**
-     * @param mwApi instance of MediaWikiApi
-     * @param filename of the target media object, should include 'File:' prefix
-     */
-    public MediaDataExtractor(String filename, LicenseList licenseList, MediaWikiApi mwApi) {
-        this.filename = filename;
+    @Inject
+    public MediaDataExtractor(MediaWikiApi mwApi) {
         this.categories = new ArrayList<>();
         this.descriptions = new HashMap<>();
         this.fetched = false;
-        this.licenseList = licenseList;
         this.mediaWikiApi = mwApi;
     }
 
-    /**
+    /*
      * Actually fetch the data over the network.
      * todo: use local caching?
      *
      * Warning: synchronous i/o, call on a background thread
      */
-    public void fetch() throws IOException {
+    public void fetch(String filename, LicenseList licenseList) throws IOException {
         if (fetched) {
             throw new IllegalStateException("Tried to call MediaDataExtractor.fetch() again.");
         }
@@ -72,7 +65,7 @@ public class MediaDataExtractor {
         extractCategories(result.getWikiSource());
 
         // Description template info is extracted from preprocessor XML
-        processWikiParseTree(result.getParseTreeXmlSource());
+        processWikiParseTree(result.getParseTreeXmlSource(), licenseList);
         fetched = true;
     }
 
@@ -91,7 +84,7 @@ public class MediaDataExtractor {
         }
     }
 
-    private void processWikiParseTree(String source) throws IOException {
+    private void processWikiParseTree(String source, LicenseList licenseList) throws IOException {
         Document doc;
         try {
             DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
