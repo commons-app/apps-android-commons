@@ -39,13 +39,8 @@ public class SettingsFragment extends PreferenceFragment {
     @Inject @Named("default_preferences") SharedPreferences prefs;
 
     @Override
-    public void onAttach(Context context) {
-        AndroidInjection.inject(this);
-        super.onAttach(context);
-    }
-
-    @Override
     public void onCreate(Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
 
         // Load the preferences from an XML resource
