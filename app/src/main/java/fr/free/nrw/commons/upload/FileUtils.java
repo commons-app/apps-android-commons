@@ -155,7 +155,7 @@ public class FileUtils {
     }
 
     /**
-     * Check if the URI is owned by the current application.
+     * Check if the URI is owned by the current app.
      */
     public static boolean isSelfOwned(Context context, Uri uri) {
         return uri.getAuthority().equals(context.getPackageName() + ".provider");
