@@ -202,6 +202,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         final String password = passwordEdit.getText().toString();
         String twoFactorCode = twoFactorEdit.getText().toString();
 
+        showLoggingProgressBar();
         Observable.fromCallable(() -> login(username, password, twoFactorCode))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
