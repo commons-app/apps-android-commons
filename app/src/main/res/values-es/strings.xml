@@ -201,4 +201,6 @@
   <string name="send_log_file">Enviar archivo de registro</string>
   <string name="send_log_file_description">Enviar archivo de registro a los desarrolladores por correo electrónico</string>
   <string name="login_to_your_account">Accede a tu cuenta</string>
+  <string name="nearby_location_has_not_changed">La ubicación no ha cambiado.</string>
+  <string name="nearby_location_not_available">La ubicación no está disponible.</string>
 </resources>
