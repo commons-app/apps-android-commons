@@ -201,4 +201,6 @@
   <string name="send_log_file">Envoyer le journal</string>
   <string name="send_log_file_description">Envoyer le journal aux développeurs par courriel</string>
   <string name="login_to_your_account">Connectez-vous à votre compte</string>
+  <string name="nearby_location_has_not_changed">L\'emplacement n\'a pas changé.</string>
+  <string name="nearby_location_not_available">Emplacement non disponible.</string>
 </resources>
