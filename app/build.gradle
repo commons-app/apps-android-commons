@@ -78,8 +78,8 @@ android {
     defaultConfig {
         applicationId 'fr.free.nrw.commons'
 
-        versionCode 75
-        versionName '2.6.0'
+        versionCode 76
+        versionName '2.6.1'
         setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
 
         minSdkVersion project.minSdkVersion
@@ -147,6 +147,8 @@ android {
     //FIXME: Temporary fix for https://github.com/commons-app/apps-android-commons/issues/709
     configurations.all {
         resolutionStrategy.force 'com.android.support:support-annotations:25.2.0'
+        exclude module: 'httpclient'
+        exclude module: 'commons-logging'
     }
     buildToolsVersion buildToolsVersion
 }
