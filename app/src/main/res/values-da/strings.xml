@@ -201,4 +201,6 @@
   <string name="send_log_file">Send logfil</string>
   <string name="send_log_file_description">Send logfil til udviklerne via e-post</string>
   <string name="login_to_your_account">Log ind på din konto</string>
+  <string name="nearby_location_has_not_changed">Sted er ikke ændret.</string>
+  <string name="nearby_location_not_available">Sted ikke tilgængeligt.</string>
 </resources>
