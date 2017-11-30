@@ -58,6 +58,7 @@ dependencies {
 
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.robolectric:robolectric:3.4'
+    testImplementation 'org.mockito:mockito-all:1.10.19'
 
     testImplementation 'com.squareup.okhttp3:mockwebserver:3.8.1'
     androidTestImplementation 'com.squareup.okhttp3:mockwebserver:3.8.1'

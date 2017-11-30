@@ -29,6 +29,7 @@ import java.io.IOException;
 
 import javax.inject.Inject;
 
+import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
 import fr.free.nrw.commons.auth.AccountUtil;
@@ -272,7 +273,7 @@ public class CommonsApplication extends Application implements HasActivityInject
     }
 
     @Override
-    public DispatchingAndroidInjector<Activity> activityInjector() {
+    public AndroidInjector<Activity> activityInjector() {
         return dispatchingActivityInjector;
     }
 
