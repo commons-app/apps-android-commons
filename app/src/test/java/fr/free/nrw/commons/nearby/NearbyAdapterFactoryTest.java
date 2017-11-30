@@ -20,13 +20,14 @@ import java.util.Collections;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.TestCommonsApplication;
 import fr.free.nrw.commons.location.LatLng;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@Config(constants = BuildConfig.class, sdk = 21, application = TestCommonsApplication.class)
 public class NearbyAdapterFactoryTest {
 
     private static final Place PLACE = new Place("name", Place.Description.AIRPORT,
