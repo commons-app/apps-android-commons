@@ -338,7 +338,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         Fragment fragment = new NearbyMapFragment();
         fragment.setArguments(bundle);
-        fragmentTransaction.replace(R.id.container, fragment);
+        fragmentTransaction.replace(R.id.container, fragment, fragment.getClass().getSimpleName());
         fragmentTransaction.commitAllowingStateLoss();
     }
 
@@ -349,7 +349,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         Fragment fragment = new NearbyListFragment();
         fragment.setArguments(bundle);
-        fragmentTransaction.replace(R.id.container, fragment);
+        fragmentTransaction.replace(R.id.container, fragment, fragment.getClass().getSimpleName());
         fragmentTransaction.commitAllowingStateLoss();
     }
 
