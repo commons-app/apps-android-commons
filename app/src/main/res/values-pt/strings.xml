@@ -10,6 +10,7 @@
   <string name="logging_in_message">Aguarde, por favor…</string>
   <string name="login_success">Inicio de sessão bem sucedido</string>
   <string name="login_failed">O início de sessão falhou!</string>
+  <string name="upload_failed">Ficheiro não encontrado. Por favor, tente outro ficheiro.</string>
   <string name="authentication_failed">Falha de autenticação!</string>
   <string name="uploading_started">Iniciado o carregamento!</string>
   <string name="upload_completed_notification_title">%1$s enviado!</string>
@@ -19,11 +20,11 @@
   <string name="upload_progress_notification_title_finishing">A terminar o carregamento de %1$s</string>
   <string name="upload_failed_notification_title">O carregamento de %1$s falhou</string>
   <string name="upload_failed_notification_subtitle">Toque para ver</string>
-  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
-    <item quantity="one">A carregar um ficheiro</item>
-    <item quantity="other">A carregar %d ficheiros</item>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%d a carregar um ficheiro</item>
+    <item quantity="other">a carregar %d ficheiros</item>
   </plurals>
-  <string name="title_activity_contributions" fuzzy="true">Meus carregamentos</string>
+  <string name="title_activity_contributions">Meus carregamentos recentes</string>
   <string name="contribution_state_queued">Em espera</string>
   <string name="contribution_state_failed">Falhou</string>
   <string name="contribution_state_in_progress">%1$d%% concluído</string>
@@ -39,8 +40,9 @@
   <string name="login_failed_network">Não foi possível iniciar sessão - falha de rede</string>
   <string name="login_failed_username">Não foi possível iniciar sessão - verifique o seu nome de utilizador(a)</string>
   <string name="login_failed_password">Não foi possível iniciar sessão - verifique a sua palavra-passe</string>
-  <string name="login_failed_throttled" fuzzy="true">Demasiadas tentativas mal sucedidas. Por favor, tente de novo dentro de alguns minutos</string>
+  <string name="login_failed_throttled">Demasiadas tentativas malsucedidas. Por favor, tente de novo dentro de alguns minutos.</string>
   <string name="login_failed_blocked">Desculpe, este utilizador foi bloqueado no Commons</string>
+  <string name="login_failed_2fa_needed">Precisa fornecer o seu código de ativação de dois fatores.</string>
   <string name="login_failed_generic">Falha ao iniciar sessão</string>
   <string name="share_upload_button">Carregar</string>
   <string name="multiple_share_base_title">Nomeie este conjunto</string>
@@ -48,9 +50,13 @@
   <string name="menu_upload_single">Enviar</string>
   <string name="categories_search_text_hint">Pesquisar categorias</string>
   <string name="menu_save_categories">Gravar</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">Sem carregamentos ainda</item>
-    <item quantity="one">1 carregamento</item>
+  <string name="refresh_button">Atualizar</string>
+  <string name="gps_disabled">O GPS está desativado no seu dispositivo. Gostarias de ativá-lo?</string>
+  <string name="enable_gps">Ativar GPS</string>
+  <string name="contributions_subtitle_zero">Ainda não foram enviados ficheiros</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%d carregamento</item>
     <item quantity="other">%d carregamentos</item>
   </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
@@ -65,12 +71,14 @@
   <string name="categories_skip_explanation">Adicione categorias para tornar as suas imagens mais fáceis de encontrar no Wikimedia Commons. \n\nComece a digitar para adicionar categorias.\nCarregue nesta mensagem (ou carregue para voltar) para saltar este passo</string>
   <string name="categories_activity_title">Categorias</string>
   <string name="title_activity_settings">Configurações</string>
+  <string name="title_activity_signup">Registar-se</string>
   <string name="menu_about">Sobre</string>
   <string name="about_license" fuzzy="true">Software em código aberto distribuído sob &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. O Wikimedia Commons e o seu logótipo são marcas registadas da Wikimedia Foundation e são usadas com permissão da Wikimedia Foundation. Não somos endossados ou afiliados à Wikimedia Foundation.</string>
   <string name="about_improve" fuzzy="true">Código no &lt;a href=\"https://github.com/commons-app/android-commons\"&gt;GitHub&lt;/a&gt;. Erros no &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
   <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Política de privacidade&lt;/a&gt;</string>
   <string name="title_activity_about">Sobre</string>
   <string name="menu_feedback">Enviar comentários (por e-mail)</string>
+  <string name="no_email_client">Não foi instalado nenhum cliente de correio eletrónico</string>
   <string name="provider_categories">Categorias usadas recentemente</string>
   <string name="waiting_first_sync">A aguardar pela primeira sincronização…</string>
   <string name="no_uploads_yet">Não carregou ainda nenhuma foto.</string>
@@ -118,4 +126,12 @@
   <string name="title_activity_nearby">Locais Próximos</string>
   <string name="yes">Sim</string>
   <string name="no">Não</string>
+  <string name="media_detail_title">Título</string>
+  <string name="media_detail_media_title">Título do ficheiro multimédia</string>
+  <string name="media_detail_description">Descrição</string>
+  <string name="media_detail_uploaded_date">Data de carregamento</string>
+  <string name="media_detail_license">Licença</string>
+  <string name="media_detail_coordinates">Coordenadas</string>
+  <string name="media_detail_coordinates_empty">Não fornecido</string>
+  <string name="use_wikidata">Utilizar o Wikidata</string>
 </resources>
