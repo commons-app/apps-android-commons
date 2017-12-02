@@ -213,4 +213,5 @@ Tap this message (or hit back) to skip this step.</string>
 
   <string name="nearby_location_has_not_changed">Location has not changed.</string>
   <string name="nearby_location_not_available">Location not available.</string>
+  <string name="location_permission_rationale_nearby">Permission required to display a list of nearby places</string>
 </resources>

@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.nearby;
 
 import android.app.Activity;
-import android.support.v4.app.Fragment;
 
 import org.junit.Before;
 import org.junit.Test;
