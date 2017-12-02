@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.auth;
 
 import android.accounts.AccountAuthenticatorActivity;
+import android.accounts.AccountAuthenticatorResponse;
+import android.accounts.AccountManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,8 +23,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.io.IOException;
+
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.PageTitle;
@@ -30,7 +37,12 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
+import fr.free.nrw.commons.mwapi.EventLog;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 import static android.view.KeyEvent.KEYCODE_ENTER;
@@ -48,6 +60,8 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     @BindView(R.id.error_message_container) ViewGroup errorMessageContainer;
     @BindView(R.id.error_message) TextView errorMessage;
 
+    @Inject MediaWikiApi mediaWikiApi;
+
     private CommonsApplication app;
     ProgressDialog progressDialog;
     private AppCompatDelegate delegate;
@@ -64,6 +78,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         app = CommonsApplication.getInstance();
 
         setContentView(R.layout.activity_login);
+        AndroidInjection.inject(this);
 
         ButterKnife.bind(this);
 
@@ -183,8 +198,105 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
     private void performLogin() {
         Timber.d("Login to start!");
-        LoginTask task = getLoginTask();
-        task.execute();
+        final String username = canonicializeUsername(usernameEdit.getText().toString());
+        final String password = passwordEdit.getText().toString();
+        String twoFactorCode = twoFactorEdit.getText().toString();
+
+        showLoggingProgressBar();
+        Observable.fromCallable(() -> login(username, password, twoFactorCode))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(result -> handleLogin(username, password, result));
+    }
+
+    private String login(String username, String password, String twoFactorCode) {
+        try {
+            if (twoFactorCode.isEmpty()) {
+                return mediaWikiApi.login(username, password);
+            } else {
+                return mediaWikiApi.login(username, password, twoFactorCode);
+            }
+        } catch (IOException e) {
+            // Do something better!
+            return "NetworkFailure";
+        }
+    }
+
+    private void handleLogin(String username, String password, String result) {
+        Timber.d("Login done!");
+
+        EventLog.schema(CommonsApplication.EVENT_LOGIN_ATTEMPT)
+                .param("username", username)
+                .param("result", result)
+                .log();
+
+        if (result.equals("PASS")) {
+            handlePassResult(username, password);
+        } else {
+            handleOtherResults(result);
+        }
+    }
+
+    private void showLoggingProgressBar() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setTitle(getString(R.string.logging_in_title));
+        progressDialog.setMessage(getString(R.string.logging_in_message));
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+    }
+
+    private void handlePassResult(String username, String password) {
+        showSuccessAndDismissDialog();
+
+        AccountAuthenticatorResponse response = null;
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            Timber.d("Bundle of extras: %s", extras);
+            response = extras.getParcelable(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE);
+            if (response != null) {
+                Bundle authResult = new Bundle();
+                authResult.putString(AccountManager.KEY_ACCOUNT_NAME, username);
+                authResult.putString(AccountManager.KEY_ACCOUNT_TYPE, AccountUtil.accountType());
+                response.onResult(authResult);
+            }
+        }
+
+        AccountUtil.createAccount(response, username, password);
+        startMainActivity();
+    }
+
+    /**
+     * Match known failure message codes and provide messages.
+     *
+     * @param result String
+     */
+    private void handleOtherResults(String result) {
+        if (result.equals("NetworkFailure")) {
+            // Matches NetworkFailure which is created by the doInBackground method
+            showMessageAndCancelDialog(R.string.login_failed_network);
+        } else if (result.toLowerCase().contains("nosuchuser".toLowerCase()) || result.toLowerCase().contains("noname".toLowerCase())) {
+            // Matches nosuchuser, nosuchusershort, noname
+            showMessageAndCancelDialog(R.string.login_failed_username);
+            emptySensitiveEditFields();
+        } else if (result.toLowerCase().contains("wrongpassword".toLowerCase())) {
+            // Matches wrongpassword, wrongpasswordempty
+            showMessageAndCancelDialog(R.string.login_failed_password);
+            emptySensitiveEditFields();
+        } else if (result.toLowerCase().contains("throttle".toLowerCase())) {
+            // Matches unknown throttle error codes
+            showMessageAndCancelDialog(R.string.login_failed_throttled);
+        } else if (result.toLowerCase().contains("userblocked".toLowerCase())) {
+            // Matches login-userblocked
+            showMessageAndCancelDialog(R.string.login_failed_blocked);
+        } else if (result.equals("2FA")) {
+            askUserForTwoFactorAuth();
+        } else {
+            // Occurs with unhandled login failure codes
+            Timber.d("Login failed with reason: %s", result);
+            showMessageAndCancelDialog(R.string.login_failed_generic);
+        }
     }
 
     private void signUp() {
@@ -205,15 +317,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             }
             return false;
         };
-    }
-
-    private LoginTask getLoginTask() {
-        return new LoginTask(
-                this,
-                canonicializeUsername(usernameEdit.getText().toString()),
-                passwordEdit.getText().toString(),
-                twoFactorEdit.getText().toString()
-        );
     }
 
     /**
