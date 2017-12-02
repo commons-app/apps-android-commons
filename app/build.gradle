@@ -80,7 +80,7 @@ android {
         applicationId 'fr.free.nrw.commons'
         versionCode 76
         versionName '2.6.1'
-        //setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
+        setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
 
         minSdkVersion project.minSdkVersion
         targetSdkVersion project.targetSdkVersion
