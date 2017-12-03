@@ -19,7 +19,6 @@ import javax.inject.Singleton;
 
 import timber.log.Timber;
 
-@Singleton
 public class LocationServiceManager implements LocationListener {
     public static final int LOCATION_REQUEST = 1;
 
@@ -32,7 +31,6 @@ public class LocationServiceManager implements LocationListener {
     private final List<LocationUpdateListener> locationListeners = new CopyOnWriteArrayList<>();
     private boolean isLocationManagerRegistered = false;
 
-    @Inject
     public LocationServiceManager(Context context) {
         this.context = context;
         this.locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);

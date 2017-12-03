@@ -1,9 +1,8 @@
 package fr.free.nrw.commons
 
-import org.hamcrest.CoreMatchers.`is` as _is
-
 import org.junit.Assert
 import org.junit.Test
+import org.hamcrest.CoreMatchers.`is` as _is
 
 class UtilsTest {
     @Test fun `strip nothing from non-localized string`() {

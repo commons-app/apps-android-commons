@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.RemoteException;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import java.text.SimpleDateFormat;
@@ -16,7 +17,6 @@ import java.util.Locale;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.settings.Prefs;
 
 public class Contribution extends Media {
@@ -149,7 +149,7 @@ public class Contribution extends Media {
         }
 
         buffer.append("== {{int:license-header}} ==\n")
-                .append(Utils.licenseTemplateFor(getLicense())).append("\n\n")
+                .append(licenseTemplateFor(getLicense())).append("\n\n")
                 .append("{{Uploaded from Mobile|platform=Android|version=").append(BuildConfig.VERSION_NAME).append("}}\n")
                 .append(getTrackingTemplates());
         return buffer.toString();
@@ -376,5 +376,26 @@ public class Contribution extends Media {
                 return;
             }
         }
+    }
+
+    @NonNull
+    private String licenseTemplateFor(String license) {
+        switch (license) {
+            case Prefs.Licenses.CC_BY_3:
+                return "{{self|cc-by-3.0}}";
+            case Prefs.Licenses.CC_BY_4:
+                return "{{self|cc-by-4.0}}";
+            case Prefs.Licenses.CC_BY_SA_3:
+                return "{{self|cc-by-sa-3.0}}";
+            case Prefs.Licenses.CC_BY_SA_4:
+                return "{{self|cc-by-sa-4.0}}";
+            case Prefs.Licenses.CC0:
+                return "{{self|cc-zero}}";
+            case Prefs.Licenses.CC_BY:
+                return "{{self|cc-by-3.0}}";
+            case Prefs.Licenses.CC_BY_SA:
+                return "{{self|cc-by-sa-3.0}}";
+        }
+        throw new RuntimeException("Unrecognized license value: " + license);
     }
 }

@@ -25,6 +25,8 @@ import org.mediawiki.api.MWApi;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -34,7 +36,6 @@ import java.util.concurrent.Callable;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.PageTitle;
-import fr.free.nrw.commons.Utils;
 import in.yuvi.http.fluent.Http;
 import io.reactivex.Observable;
 import io.reactivex.Single;
@@ -335,7 +336,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             logEvents.add(new LogEventResult.LogEvent(
                     image.getString("@pageid"),
                     image.getString("@title"),
-                    Utils.parseMWDate(image.getString("@timestamp")))
+                    parseMWDate(image.getString("@timestamp")))
             );
         }
         return logEvents;
@@ -402,7 +403,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             String errorCode = result.getString("/api/error/@code");
             return new UploadResult(resultStatus, errorCode);
         } else {
-            Date dateUploaded = Utils.parseMWDate(result.getString("/api/upload/imageinfo/@timestamp"));
+            Date dateUploaded = parseMWDate(result.getString("/api/upload/imageinfo/@timestamp"));
             String canonicalFilename = "File:" + result.getString("/api/upload/@filename").replace("_", " "); // Title vs Filename
             String imageUrl = result.getString("/api/upload/imageinfo/@url");
             return new UploadResult(resultStatus, dateUploaded, canonicalFilename, imageUrl);
@@ -427,5 +428,14 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
             String uploadCount = EntityUtils.toString(response.getEntity()).trim();
             return Integer.parseInt(uploadCount);
         });
+    }
+
+    private Date parseMWDate(String mwDate) {
+        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH); // Assuming MW always gives me UTC
+        try {
+            return isoFormat.parse(mwDate);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

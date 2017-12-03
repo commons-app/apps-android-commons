@@ -15,15 +15,17 @@ import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.widget.Toast;
 
 import java.io.File;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
@@ -34,8 +36,11 @@ public class SettingsFragment extends PreferenceFragment {
 
     private static final int REQUEST_CODE_WRITE_EXTERNAL_STORAGE = 100;
 
+    @Inject @Named("default_preferences") SharedPreferences prefs;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
 
         // Load the preferences from an XML resource
@@ -58,14 +63,12 @@ public class SettingsFragment extends PreferenceFragment {
         });
 
         final EditTextPreference uploadLimit = (EditTextPreference) findPreference("uploads");
-        final SharedPreferences sharedPref = PreferenceManager
-                .getDefaultSharedPreferences(CommonsApplication.getInstance());
-        int uploads = sharedPref.getInt(Prefs.UPLOADS_SHOWING, 100);
+        int uploads = prefs.getInt(Prefs.UPLOADS_SHOWING, 100);
         uploadLimit.setText(uploads + "");
         uploadLimit.setSummary(uploads + "");
         uploadLimit.setOnPreferenceChangeListener((preference, newValue) -> {
             int value = Integer.parseInt(newValue.toString());
-            final SharedPreferences.Editor editor = sharedPref.edit();
+            final SharedPreferences.Editor editor = prefs.edit();
             if (value > 500) {
                 new AlertDialog.Builder(getActivity())
                         .setTitle(R.string.maximum_limit)

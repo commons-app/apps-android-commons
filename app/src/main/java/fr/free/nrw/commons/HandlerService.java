@@ -1,6 +1,5 @@
 package fr.free.nrw.commons;
 
-import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.Handler;
@@ -9,7 +8,9 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 
-public abstract class HandlerService<T> extends Service {
+import dagger.android.DaggerService;
+
+public abstract class HandlerService<T> extends DaggerService {
     private volatile Looper threadLooper;
     private volatile ServiceHandler threadHandler;
     private String serviceName;

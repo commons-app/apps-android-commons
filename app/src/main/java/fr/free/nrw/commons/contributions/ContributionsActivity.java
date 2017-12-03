@@ -9,7 +9,6 @@ import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -24,21 +23,20 @@ import android.widget.AdapterView;
 import java.util.ArrayList;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.ButterKnife;
-import dagger.android.AndroidInjection;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -49,10 +47,17 @@ import static fr.free.nrw.commons.contributions.ContributionsContentProvider.AUT
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.BASE_URI;
 import static fr.free.nrw.commons.settings.Prefs.UPLOADS_SHOWING;
 
-public class ContributionsActivity extends AuthenticatedActivity
-        implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener,
-        MediaDetailPagerFragment.MediaDetailProvider, FragmentManager.OnBackStackChangedListener,
-        ContributionsListFragment.SourceRefresher {
+public  class       ContributionsActivity
+        extends     AuthenticatedActivity
+        implements  LoaderManager.LoaderCallbacks<Cursor>,
+                    AdapterView.OnItemClickListener,
+                    MediaDetailPagerFragment.MediaDetailProvider,
+                    FragmentManager.OnBackStackChangedListener,
+                    ContributionsListFragment.SourceRefresher {
+
+    @Inject MediaWikiApi mediaWikiApi;
+    @Inject SessionManager sessionManager;
+    @Inject @Named("default_preferences") SharedPreferences prefs;
 
     private Cursor allContributions;
     private ContributionsListFragment contributionsList;
@@ -61,9 +66,6 @@ public class ContributionsActivity extends AuthenticatedActivity
     private boolean isUploadServiceConnected;
     private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<>();
     private String CONTRIBUTION_SELECTION = "";
-
-    @Inject
-    MediaWikiApi mediaWikiApi;
 
     /*
         This sorts in the following order:
@@ -109,12 +111,8 @@ public class ContributionsActivity extends AuthenticatedActivity
     @Override
     protected void onResume() {
         super.onResume();
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean isSettingsChanged =
-                sharedPreferences.getBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, false);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, false);
-        editor.apply();
+        boolean isSettingsChanged = prefs.getBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, false);
+        prefs.edit().putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, false).apply();
         if (isSettingsChanged) {
             refreshSource();
         }
@@ -122,9 +120,8 @@ public class ContributionsActivity extends AuthenticatedActivity
 
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
-        // Do a sync every time we get here!
-        CommonsApplication app = ((CommonsApplication) getApplication());
-        requestSync(app.getCurrentAccount(), AUTHORITY, new Bundle());
+        // Do a sync everytime we get here!
+        requestSync(sessionManager.getCurrentAccount(), ContributionsContentProvider.AUTHORITY, new Bundle());
         Intent uploadServiceIntent = new Intent(this, UploadService.class);
         uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
         startService(uploadServiceIntent);
@@ -139,19 +136,18 @@ public class ContributionsActivity extends AuthenticatedActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AndroidInjection.inject(this);
         setContentView(R.layout.activity_contributions);
         ButterKnife.bind(this);
 
         // Activity can call methods in the fragment by acquiring a
         // reference to the Fragment from FragmentManager, using findFragmentById()
         FragmentManager supportFragmentManager = getSupportFragmentManager();
-        contributionsList = (ContributionsListFragment) supportFragmentManager
+        contributionsList = (ContributionsListFragment)supportFragmentManager
                 .findFragmentById(R.id.contributionsListFragment);
 
         supportFragmentManager.addOnBackStackChangedListener(this);
         if (savedInstanceState != null) {
-            mediaDetails = (MediaDetailPagerFragment) supportFragmentManager
+            mediaDetails = (MediaDetailPagerFragment)supportFragmentManager
                     .findFragmentById(R.id.contributionsFragmentContainer);
 
             getSupportLoaderManager().initLoader(0, null, this);
@@ -241,8 +237,7 @@ public class ContributionsActivity extends AuthenticatedActivity
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        int uploads = sharedPref.getInt(UPLOADS_SHOWING, 100);
+        int uploads = prefs.getInt(UPLOADS_SHOWING, 100);
         return new CursorLoader(this, BASE_URI,
                 ALL_FIELDS, CONTRIBUTION_SELECTION, null,
                 CONTRIBUTION_SORT + "LIMIT " + uploads);
@@ -289,9 +284,8 @@ public class ContributionsActivity extends AuthenticatedActivity
 
     @SuppressWarnings("ConstantConditions")
     private void setUploadCount() {
-        CommonsApplication app = ((CommonsApplication) getApplication());
-        Disposable uploadCountDisposable = mediaWikiApi
-                .getUploadCount(app.getCurrentAccount().name)
+        compositeDisposable.add(mediaWikiApi
+                .getUploadCount(sessionManager.getCurrentAccount().name)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -299,8 +293,7 @@ public class ContributionsActivity extends AuthenticatedActivity
                                 .getQuantityString(R.plurals.contributions_subtitle,
                                         uploadCount, uploadCount)),
                         t -> Timber.e(t, "Fetching upload count failed")
-                );
-        compositeDisposable.add(uploadCountDisposable);
+                ));
     }
 
     @Override

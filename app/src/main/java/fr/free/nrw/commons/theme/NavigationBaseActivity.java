@@ -62,10 +62,10 @@ public abstract class NavigationBaseActivity extends BaseActivity
     private void setUserName() {
 
         View navHeaderView = navigationView.getHeaderView(0);
-        TextView username = (TextView) navHeaderView.findViewById(R.id.username);
+        TextView username = navHeaderView.findViewById(R.id.username);
 
         AccountManager accountManager = AccountManager.get(this);
-        Account[] allAccounts = accountManager.getAccountsByType(AccountUtil.accountType());
+        Account[] allAccounts = accountManager.getAccountsByType(AccountUtil.ACCOUNT_TYPE);
         if (allAccounts.length != 0) {
             username.setText(allAccounts[0].name);
         }
