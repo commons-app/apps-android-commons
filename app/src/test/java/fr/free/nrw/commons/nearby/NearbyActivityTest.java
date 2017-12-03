@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.nearby;
 
+import android.app.Activity;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

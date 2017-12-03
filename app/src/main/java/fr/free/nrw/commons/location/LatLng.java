@@ -1,5 +1,8 @@
 package fr.free.nrw.commons.location;
 
+import android.location.Location;
+import android.support.annotation.NonNull;
+
 public class LatLng {
 
     private final double latitude;
@@ -20,6 +23,10 @@ public class LatLng {
         }
         this.latitude = Math.max(-90.0D, Math.min(90.0D, latitude));
         this.accuracy = accuracy;
+    }
+
+    public static LatLng from(@NonNull Location location) {
+        return new LatLng(location.getLatitude(), location.getLongitude(), location.getAccuracy());
     }
 
     public int hashCode() {

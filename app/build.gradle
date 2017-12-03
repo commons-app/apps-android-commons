@@ -83,7 +83,6 @@ android {
 
     defaultConfig {
         applicationId 'fr.free.nrw.commons'
-
         versionCode 76
         versionName '2.6.1'
         setProperty("archivesBaseName", "app-commons-v$versionName-" + getBranchName())
@@ -104,6 +103,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
         debug {
+            applicationIdSuffix ".debug"
             testCoverageEnabled true
             versionNameSuffix "-debug-" + getBranchName() + "~" + getBuildVersion()
         }
