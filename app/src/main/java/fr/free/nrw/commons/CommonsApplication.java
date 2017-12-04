@@ -67,6 +67,7 @@ public class CommonsApplication extends DaggerApplication {
     public void onCreate() {
         super.onCreate();
 
+        Fresco.initialize(this);
         if (setupLeakCanary() == RefWatcher.DISABLED) {
             return;
         }
@@ -81,8 +82,6 @@ public class CommonsApplication extends DaggerApplication {
 
         // Fire progress callbacks for every 3% of uploaded content
         System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0");
-
-        Fresco.initialize(this);
     }
 
     protected RefWatcher setupLeakCanary() {
