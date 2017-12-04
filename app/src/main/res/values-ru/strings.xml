@@ -207,4 +207,5 @@
   <string name="login_to_your_account">Войдите в свою учётную запись</string>
   <string name="nearby_location_has_not_changed">Местоположение не изменено.</string>
   <string name="nearby_location_not_available">Местоположение недоступно.</string>
+  <string name="location_permission_rationale_nearby">Необходимо разрешение для отображения списка ближайших мест</string>
 </resources>

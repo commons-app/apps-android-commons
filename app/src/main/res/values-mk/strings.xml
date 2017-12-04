@@ -203,4 +203,5 @@
   <string name="login_to_your_account">Најавете се со вашата сметка</string>
   <string name="nearby_location_has_not_changed">Местоположбата не е сменета.</string>
   <string name="nearby_location_not_available">Местоположбата е недостапна.</string>
+  <string name="location_permission_rationale_nearby">Се бара дозвола за приказ на список на околни места</string>
 </resources>

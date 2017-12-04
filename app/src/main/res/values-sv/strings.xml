@@ -203,4 +203,5 @@
   <string name="login_to_your_account">Logga in på ditt konto</string>
   <string name="nearby_location_has_not_changed">Platsen har inte ändrats.</string>
   <string name="nearby_location_not_available">Platsen är inte tillgänglig.</string>
+  <string name="location_permission_rationale_nearby">Behörighet krävs för att visa en lista över platser i närheten</string>
 </resources>

@@ -202,5 +202,6 @@
   <string name="send_log_file_description">ইমেইলের মাধ্যমে উন্নয়নকারীর কাছে লগ ফাইল পাঠান</string>
   <string name="login_to_your_account">আপনার অ্যাকাউন্টে প্রবেশ করুন</string>
   <string name="nearby_location_has_not_changed">অবস্থান পরিবর্তন হয়নি।</string>
-  <string name="nearby_location_not_available">অবস্থান বোধগম্য নয়।</string>
+  <string name="nearby_location_not_available">অবস্থান উপলব্ধ নয়।</string>
+  <string name="location_permission_rationale_nearby">কাছাকাছি স্থানসমূহের একটি তালিকা প্রদর্শন করতে অনুমতি প্রয়োজন</string>
 </resources>

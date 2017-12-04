@@ -203,4 +203,5 @@
   <string name="login_to_your_account">Connectez-vous à votre compte</string>
   <string name="nearby_location_has_not_changed">L\'emplacement n\'a pas changé.</string>
   <string name="nearby_location_not_available">Emplacement non disponible.</string>
+  <string name="location_permission_rationale_nearby">Une permission est requise pour afficher une liste de lieux relatifs</string>
 </resources>

@@ -201,4 +201,6 @@
   <string name="send_log_file">Unviar ficheru de rexistru</string>
   <string name="send_log_file_description">Unviar ficheru de rexistru a los desendolcadores per corréu electrónicu</string>
   <string name="login_to_your_account">Anicia sesión na to cuenta</string>
+  <string name="nearby_location_has_not_changed">L\'allugamientu nun camudó.</string>
+  <string name="nearby_location_not_available">L\'allugamientu nun ta disponible.</string>
 </resources>

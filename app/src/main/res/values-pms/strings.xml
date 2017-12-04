@@ -203,4 +203,5 @@
   <string name="login_to_your_account">Ch\'as colega a sò cont</string>
   <string name="nearby_location_has_not_changed">Ël leu a l\'é nen cangià.</string>
   <string name="nearby_location_not_available">Leu nen disponìbil.</string>
+  <string name="location_permission_rationale_nearby">A-i é da manca dël përmess pr\'ësmon-e na lista dij pòst davzin</string>
 </resources>
