@@ -10,7 +10,10 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
-import fr.free.nrw.commons.CommonsApplication;
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjection;
+import fr.free.nrw.commons.data.DBOpenHelper;
 import timber.log.Timber;
 
 import static android.content.UriMatcher.NO_MATCH;
@@ -36,9 +39,12 @@ public class ContributionsContentProvider extends ContentProvider {
         return Uri.parse(BASE_URI.toString() + "/" + id);
     }
 
+    @Inject DBOpenHelper dbOpenHelper;
+
     @Override
     public boolean onCreate() {
-        return false;
+        AndroidInjection.inject(this);
+        return true;
     }
 
     @SuppressWarnings("ConstantConditions")
@@ -50,8 +56,7 @@ public class ContributionsContentProvider extends ContentProvider {
 
         int uriType = uriMatcher.match(uri);
 
-        CommonsApplication app = (CommonsApplication) getContext().getApplicationContext();
-        SQLiteDatabase db = app.getDBOpenHelper().getReadableDatabase();
+        SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
         Cursor cursor;
 
         switch (uriType) {
@@ -87,9 +92,8 @@ public class ContributionsContentProvider extends ContentProvider {
     @Override
     public Uri insert(@NonNull Uri uri, ContentValues contentValues) {
         int uriType = uriMatcher.match(uri);
-        CommonsApplication app = (CommonsApplication) getContext().getApplicationContext();
-        SQLiteDatabase sqlDB = app.getDBOpenHelper().getWritableDatabase();
-        long id;
+        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
+        long id = 0;
         switch (uriType) {
             case CONTRIBUTIONS:
                 id = sqlDB.insert(TABLE_NAME, null, contentValues);
@@ -107,13 +111,12 @@ public class ContributionsContentProvider extends ContentProvider {
         int rows;
         int uriType = uriMatcher.match(uri);
 
-        CommonsApplication app = (CommonsApplication) getContext().getApplicationContext();
-        SQLiteDatabase sqlDB = app.getDBOpenHelper().getWritableDatabase();
+        SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
 
         switch (uriType) {
             case CONTRIBUTIONS_ID:
                 Timber.d("Deleting contribution id %s", uri.getLastPathSegment());
-                rows = sqlDB.delete(TABLE_NAME,
+                rows = db.delete(TABLE_NAME,
                         "_id = ?",
                         new String[]{uri.getLastPathSegment()}
                 );
@@ -130,8 +133,7 @@ public class ContributionsContentProvider extends ContentProvider {
     public int bulkInsert(@NonNull Uri uri, @NonNull ContentValues[] values) {
         Timber.d("Hello, bulk insert! (ContributionsContentProvider)");
         int uriType = uriMatcher.match(uri);
-        CommonsApplication app = (CommonsApplication) getContext().getApplicationContext();
-        SQLiteDatabase sqlDB = app.getDBOpenHelper().getWritableDatabase();
+        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         sqlDB.beginTransaction();
         switch (uriType) {
             case CONTRIBUTIONS:
@@ -162,9 +164,8 @@ public class ContributionsContentProvider extends ContentProvider {
         error out otherwise.
          */
         int uriType = uriMatcher.match(uri);
-        CommonsApplication app = (CommonsApplication) getContext().getApplicationContext();
-        SQLiteDatabase sqlDB = app.getDBOpenHelper().getWritableDatabase();
-        int rowsUpdated;
+        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
+        int rowsUpdated = 0;
         switch (uriType) {
             case CONTRIBUTIONS:
                 rowsUpdated = sqlDB.update(TABLE_NAME, contentValues, selection, selectionArgs);

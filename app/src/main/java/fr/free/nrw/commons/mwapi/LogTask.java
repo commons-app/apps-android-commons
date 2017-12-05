@@ -2,11 +2,16 @@ package fr.free.nrw.commons.mwapi;
 
 import android.os.AsyncTask;
 
-import fr.free.nrw.commons.CommonsApplication;
-
 class LogTask extends AsyncTask<LogBuilder, Void, Boolean> {
+
+    private final MediaWikiApi mwApi;
+
+    public LogTask(MediaWikiApi mwApi) {
+        this.mwApi = mwApi;
+    }
+
     @Override
     protected Boolean doInBackground(LogBuilder... logBuilders) {
-        return CommonsApplication.getInstance().getMWApi().logEvents(logBuilders);
+        return mwApi.logEvents(logBuilders);
     }
 }

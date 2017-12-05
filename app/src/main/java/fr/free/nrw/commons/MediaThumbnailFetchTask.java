@@ -7,16 +7,17 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi;
 
 class MediaThumbnailFetchTask extends AsyncTask<String, String, String> {
     protected final Media media;
+    private MediaWikiApi mediaWikiApi;
 
-    public MediaThumbnailFetchTask(@NonNull Media media) {
+    public MediaThumbnailFetchTask(@NonNull Media media, MediaWikiApi mwApi) {
         this.media = media;
+        this.mediaWikiApi = mwApi;
     }
 
     @Override
     protected String doInBackground(String... params) {
         try {
-            MediaWikiApi api = CommonsApplication.getInstance().getMWApi();
-            return api.findThumbnailByFilename(params[0]);
+            return mediaWikiApi.findThumbnailByFilename(params[0]);
         } catch (Exception e) {
             // Do something better!
         }

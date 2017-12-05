@@ -21,15 +21,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.BuildConfig;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
+import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import timber.log.Timber;
 
 import static android.view.KeyEvent.KEYCODE_ENTER;
@@ -39,6 +44,12 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
     public static final String PARAM_USERNAME = "fr.free.nrw.commons.login.username";
 
+    @Inject MediaWikiApi mwApi;
+    @Inject AccountUtil accountUtil;
+    @Inject SessionManager sessionManager;
+    @Inject @Named("application_preferences") SharedPreferences prefs;
+    @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
+
     @BindView(R.id.loginButton) Button loginButton;
     @BindView(R.id.signupButton) Button signupButton;
     @BindView(R.id.loginUsername) EditText usernameEdit;
@@ -46,11 +57,8 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     @BindView(R.id.loginTwoFactor) EditText twoFactorEdit;
     @BindView(R.id.error_message_container) ViewGroup errorMessageContainer;
     @BindView(R.id.error_message) TextView errorMessage;
-
-    private CommonsApplication app;
     ProgressDialog progressDialog;
     private AppCompatDelegate delegate;
-    private SharedPreferences prefs = null;
     private LoginTextWatcher textWatcher = new LoginTextWatcher();
 
     @Override
@@ -58,15 +66,12 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         setTheme(Utils.isDarkTheme(this) ? R.style.DarkAppTheme : R.style.LightAppTheme);
         getDelegate().installViewFactory();
         getDelegate().onCreate(savedInstanceState);
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
-
-        app = CommonsApplication.getInstance();
 
         setContentView(R.layout.activity_login);
 
         ButterKnife.bind(this);
-
-        prefs = getSharedPreferences("fr.free.nrw.commons", MODE_PRIVATE);
 
         usernameEdit.addTextChangedListener(textWatcher);
         passwordEdit.addTextChangedListener(textWatcher);
@@ -90,7 +95,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             WelcomeActivity.startYourself(this);
             prefs.edit().putBoolean("firstrun", false).apply();
         }
-        if (app.getCurrentAccount() != null) {
+        if (sessionManager.getCurrentAccount() != null) {
             startMainActivity();
         }
     }
@@ -110,6 +115,25 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         twoFactorEdit.removeTextChangedListener(textWatcher);
         delegate.onDestroy();
         super.onDestroy();
+    }
+
+    private LoginTask getLoginTask() {
+        return new LoginTask(
+                this,
+                canonicializeUsername(usernameEdit.getText().toString()),
+                passwordEdit.getText().toString(),
+                twoFactorEdit.getText().toString(),
+                accountUtil, mwApi, defaultPrefs
+        );
+    }
+
+    /**
+     * Because Mediawiki is upercase-first-char-then-case-sensitive :)
+     * @param username String
+     * @return String canonicial username
+     */
+    private String canonicializeUsername(String username) {
+        return new PageTitle(username).getText();
     }
 
     @Override
@@ -176,7 +200,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     }
 
     public void startMainActivity() {
-        ContributionsActivity.startYourself(this);
+        NavigationBaseActivity.startActivityWithFlags(this, ContributionsActivity.class, Intent.FLAG_ACTIVITY_CLEAR_TOP);
         finish();
     }
 
@@ -206,24 +230,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         };
     }
 
-    private LoginTask getLoginTask() {
-        return new LoginTask(
-                this,
-                canonicializeUsername(usernameEdit.getText().toString()),
-                passwordEdit.getText().toString(),
-                twoFactorEdit.getText().toString()
-        );
-    }
-
-    /**
-     * Because Mediawiki is upercase-first-char-then-case-sensitive :)
-     * @param username String
-     * @return String canonicial username
-     */
-    private String canonicializeUsername(String username) {
-        return new PageTitle(username).getText();
-    }
-
     private void showMessage(@StringRes int resId, @ColorRes int colorResId) {
         errorMessage.setText(getString(resId));
         errorMessage.setTextColor(ContextCompat.getColor(this, colorResId));
@@ -248,8 +254,8 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
         @Override
         public void afterTextChanged(Editable editable) {
-            boolean enabled = usernameEdit.getText().length() != 0 && passwordEdit.getText().length() != 0 &&
-                    (BuildConfig.DEBUG || twoFactorEdit.getText().length() != 0 || twoFactorEdit.getVisibility() != View.VISIBLE);
+            boolean enabled = usernameEdit.getText().length() != 0 && passwordEdit.getText().length() != 0
+                    && (BuildConfig.DEBUG || twoFactorEdit.getText().length() != 0 || twoFactorEdit.getVisibility() != View.VISIBLE);
             loginButton.setEnabled(enabled);
         }
     }

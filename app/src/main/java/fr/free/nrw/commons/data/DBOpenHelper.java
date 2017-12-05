@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 
-public class DBOpenHelper  extends SQLiteOpenHelper{
+public class DBOpenHelper  extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "commons.db";
     private static final int DATABASE_VERSION = 6;

@@ -1,6 +1,32 @@
 # Wikimedia Commons for Android
 
-## v2.5.0 beta
+## v2.6.4 beta
+- Excluded httpclient and commons-logging to fix release build errors
+- Fixed crashes caused by Fresco and Dagger
+
+## v2.6.3 beta
+- Same as 2.6.2 except with localizations added for Google Code-In 
+
+## v2.6.2 beta
+- Reverted temporarily to last stable version while working on crash fix
+
+## v2.6.1 beta
+- Failed attempt to fix crashes in release build with the previous beta release
+
+## v2.6.0 beta
+- Multiple bugfixes for location updates and list/map loading in Nearby
+- Multiple fixes for various crashes and memory leaks
+- Added several unit tests
+- Modified About page to include WMF disclaimer and modified Privacy Policy link to point to our individual privacy policy
+- Added option for users to send logs to developers (has to be manually activated by user)
+- Converted PNGs to WebPs
+- Improved login screen with new design and privacy policy link
+- Improved category display, if a category has an exact name entered, it will be shown first
+- New UI for Nearby list
+- Added product flavors for production and the beta-cluster Wikimedia servers 
+- Various improvements to navigation flow and backstack
+
+## v2.5.0 beta 
 - Added one-time popup for beta users to provide feedback on IEG renewal proposal
 - Added link to Commons policies in ShareActivity
 - Various string fixes

@@ -120,8 +120,9 @@ public class Media implements Parcelable {
         return localUri;
     }
 
+    @Nullable
     public String getImageUrl() {
-        if (imageUrl == null) {
+        if (imageUrl == null && this.getFilename() != null) {
             imageUrl = Utils.makeThumbBaseUrl(this.getFilename());
         }
         return imageUrl;

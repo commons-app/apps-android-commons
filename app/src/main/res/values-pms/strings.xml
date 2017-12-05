@@ -198,5 +198,10 @@
   <string name="give_permission">Dé ël përmess</string>
   <string name="use_external_storage">Dovré n\'anmagasinament estern</string>
   <string name="use_external_storage_summary">Argistré le plance pijà con la màchina fòto ëd sò angign</string>
+  <string name="send_log_file">Mandé l\'archivi d\'argistr</string>
+  <string name="send_log_file_description">Mandé l\'archivi d\'argistr ai dësvlupator për pòsta eletrònica</string>
   <string name="login_to_your_account">Ch\'as colega a sò cont</string>
+  <string name="nearby_location_has_not_changed">Ël leu a l\'é nen cangià.</string>
+  <string name="nearby_location_not_available">Leu nen disponìbil.</string>
+  <string name="location_permission_rationale_nearby">A-i é da manca dël përmess pr\'ësmon-e na lista dij pòst davzin</string>
 </resources>

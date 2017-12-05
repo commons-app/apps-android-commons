@@ -198,5 +198,7 @@
   <string name="give_permission">Mudd tasiregt</string>
   <string name="use_external_storage">Seqdec asekles azɣaray</string>
   <string name="use_external_storage_summary">Sekles tiwlafin yettwaṭṭfen s tkamirat yellan deg ibenk</string>
+  <string name="send_log_file">Azen afaylu n uɣmis</string>
+  <string name="send_log_file_description">Azen afaylu n uɣmis i yinermisen s yimayl</string>
   <string name="login_to_your_account">Qqen ar umiḍan-ik</string>
 </resources>

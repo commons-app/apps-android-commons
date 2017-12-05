@@ -73,7 +73,7 @@
   <string name="title_activity_settings">Paramètres</string>
   <string name="title_activity_signup">S’inscrire</string>
   <string name="menu_about">À propos</string>
-  <string name="about_license">L\'application Wikimedia Commons est une application open-source crée et maintenue par les bénéficiaires et volontaires de la communauté Wikimedia. La fondation Wikimedia n\'est pas associée à la création, le développement ou la maintenance de l\'application.</string>
+  <string name="about_license">L’application Wikimedia Commons est une application ouverte créée et tenue à jour par les bénéficiaires et volontaires de la communauté Wikimedia. La fondation Wikimedia n’est pas associée à la création, le développement ou l’entretien de l’application.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sources&lt;/a&gt; et &lt;a href=\"https://commons-app.github.io/\"&gt;site web&lt;/a&gt; sur GitHub. Créer un nouveau &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;signalement GitHub&lt;/a&gt; pour signales des bogues ou des suggestions.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Politique de confidentialité&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Remerciements&lt;/a&gt;</string>
@@ -198,5 +198,10 @@
   <string name="give_permission">Accorder le droit</string>
   <string name="use_external_storage">Utiliser le stockage externe</string>
   <string name="use_external_storage_summary">Enregistrer les images prises avec l’appareil photo de votre appareil</string>
+  <string name="send_log_file">Envoyer le journal</string>
+  <string name="send_log_file_description">Envoyer le journal aux développeurs par courriel</string>
   <string name="login_to_your_account">Connectez-vous à votre compte</string>
+  <string name="nearby_location_has_not_changed">L\'emplacement n\'a pas changé.</string>
+  <string name="nearby_location_not_available">Emplacement non disponible.</string>
+  <string name="location_permission_rationale_nearby">Une permission est requise pour afficher une liste de lieux relatifs</string>
 </resources>

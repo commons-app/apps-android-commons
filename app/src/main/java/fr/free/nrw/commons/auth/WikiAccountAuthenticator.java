@@ -13,7 +13,6 @@ import android.support.annotation.Nullable;
 
 import java.io.IOException;
 
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 
 import static android.accounts.AccountManager.ERROR_CODE_UNSUPPORTED_OPERATION;
@@ -25,15 +24,18 @@ import static android.accounts.AccountManager.KEY_BOOLEAN_RESULT;
 import static android.accounts.AccountManager.KEY_ERROR_CODE;
 import static android.accounts.AccountManager.KEY_ERROR_MESSAGE;
 import static android.accounts.AccountManager.KEY_INTENT;
+import static fr.free.nrw.commons.auth.AccountUtil.ACCOUNT_TYPE;
 import static fr.free.nrw.commons.auth.LoginActivity.PARAM_USERNAME;
 
 public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
 
-    private Context context;
+    private final Context context;
+    private MediaWikiApi mediaWikiApi;
 
-    WikiAccountAuthenticator(Context context) {
+    WikiAccountAuthenticator(Context context, MediaWikiApi mwApi) {
         super(context);
         this.context = context;
+        this.mediaWikiApi = mwApi;
     }
 
     private Bundle unsupportedOperation() {
@@ -47,7 +49,7 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
     }
 
     private boolean supportedAccountType(@Nullable String type) {
-        return AccountUtil.accountType().equals(type);
+        return ACCOUNT_TYPE.equals(type);
     }
 
     @Override
@@ -86,11 +88,10 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
     }
 
     private String getAuthCookie(String username, String password) throws IOException {
-        MediaWikiApi api = CommonsApplication.getInstance().getMWApi();
         //TODO add 2fa support here
-        String result = api.login(username, password);
+        String result = mediaWikiApi.login(username, password);
         if (result.equals("PASS")) {
-            return api.getAuthCookie();
+            return mediaWikiApi.getAuthCookie();
         } else {
             return null;
         }
@@ -115,7 +116,7 @@ public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
             if (authCookie != null) {
                 final Bundle result = new Bundle();
                 result.putString(KEY_ACCOUNT_NAME, account.name);
-                result.putString(KEY_ACCOUNT_TYPE, AccountUtil.accountType());
+                result.putString(KEY_ACCOUNT_TYPE, ACCOUNT_TYPE);
                 result.putString(KEY_AUTHTOKEN, authCookie);
                 return result;
             }

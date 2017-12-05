@@ -2,18 +2,22 @@
     package="fr.free.nrw.commons">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS"/>
-    <uses-permission android:name="android.permission.READ_SYNC_STATS"/>
-    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_SYNC_STATS" />
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
-    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
-    <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
-    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
-    <uses-permission android:name="android.permission.MANAGE_DOCUMENTS"/>
-    <uses-permission android:name="com.google.android.apps.photos.permission.GOOGLE_PHOTOS"/>
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.MANAGE_DOCUMENTS" />
+    <uses-permission android:name="com.google.android.apps.photos.permission.GOOGLE_PHOTOS" />
+    <uses-permission android:name="android.permission.READ_LOGS"/>
+
+    <!-- Needed only if your app targets Android 5.0 (API level 21) or higher. -->
+    <uses-feature android:name="android.hardware.location.gps" />
 
     <application
         android:name=".CommonsApplication"
@@ -27,23 +31,19 @@
                   android:excludeFromRecents="true"
                   android:finishOnTaskLaunch="true" />
 
-        <activity
-            android:name=".auth.LoginActivity"
-            >
+        <activity android:name=".auth.LoginActivity">
             <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER"/>
-                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".WelcomeActivity"
-            >
-        </activity>
+
+        <activity android:name=".WelcomeActivity" />
+
         <activity
             android:name=".upload.ShareActivity"
             android:icon="@drawable/ic_launcher"
-            android:label="@string/app_name"
-            >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -51,11 +51,11 @@
                 <data android:mimeType="audio/ogg" />
             </intent-filter>
         </activity>
+
         <activity
-                android:name=".upload.MultipleShareActivity"
-                android:icon="@drawable/ic_launcher"
-                android:label="@string/app_name"
-                >
+            android:name=".upload.MultipleShareActivity"
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.SEND_MULTIPLE" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -65,33 +65,34 @@
         </activity>
 
         <activity
-                android:name=".contributions.ContributionsActivity"
-                android:icon="@drawable/ic_launcher"
-                android:label="@string/app_name"
-                 >
-        </activity>
+            android:name=".contributions.ContributionsActivity"
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/app_name" />
+
         <activity
             android:name=".settings.SettingsActivity"
-            android:label="@string/title_activity_settings"
-            />
+            android:label="@string/title_activity_settings" />
+
         <activity
             android:name=".AboutActivity"
             android:label="@string/title_activity_about"
             android:parentActivityName=".contributions.ContributionsActivity" />
+
         <activity
             android:name=".auth.SignupActivity"
-            android:label="@string/title_activity_signup"/>
+            android:label="@string/title_activity_signup" />
+
         <activity
             android:name=".nearby.NearbyActivity"
             android:label="@string/title_activity_nearby"
             android:parentActivityName=".contributions.ContributionsActivity" />
 
-        <service android:name=".upload.UploadService" >
-        </service>
+        <service android:name=".upload.UploadService" />
+
         <service
             android:name=".auth.WikiAccountAuthenticatorService"
             android:exported="true"
-            android:process=":auth" >
+            android:process=":auth">
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator" />
             </intent-filter>
@@ -102,27 +103,25 @@
         </service>
 
         <service
-                android:name=".contributions.ContributionsSyncService"
-                android:exported="true">
+            android:name=".contributions.ContributionsSyncService"
+            android:exported="true">
             <intent-filter>
-                <action
-                        android:name="android.content.SyncAdapter" />
+                <action android:name="android.content.SyncAdapter" />
             </intent-filter>
             <meta-data
-                    android:name="android.content.SyncAdapter"
-                    android:resource="@xml/contributions_sync_adapter" />
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/contributions_sync_adapter" />
         </service>
 
         <service
-                android:name=".modifications.ModificationsSyncService"
-                android:exported="true">
+            android:name=".modifications.ModificationsSyncService"
+            android:exported="true">
             <intent-filter>
-                <action
-                        android:name="android.content.SyncAdapter" />
+                <action android:name="android.content.SyncAdapter" />
             </intent-filter>
             <meta-data
-                    android:name="android.content.SyncAdapter"
-                    android:resource="@xml/modifications_sync_adapter" />
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/modifications_sync_adapter" />
         </service>
 
         <provider
@@ -132,31 +131,29 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                android:resource="@xml/provider_paths" />
         </provider>
 
         <provider
-                android:name=".contributions.ContributionsContentProvider"
-                android:label="@string/provider_contributions"
-                android:syncable="true"
-                android:authorities="fr.free.nrw.commons.contributions.contentprovider"
-                android:exported="false">
-        </provider>
+            android:name=".contributions.ContributionsContentProvider"
+            android:authorities="fr.free.nrw.commons.contributions.contentprovider"
+            android:exported="false"
+            android:label="@string/provider_contributions"
+            android:syncable="true" />
 
         <provider
-                android:name=".modifications.ModificationsContentProvider"
-                android:label="@string/provider_modifications"
-                android:syncable="true"
-                android:authorities="fr.free.nrw.commons.modifications.contentprovider"
-                android:exported="false">
-        </provider>
+            android:name=".modifications.ModificationsContentProvider"
+            android:authorities="fr.free.nrw.commons.modifications.contentprovider"
+            android:exported="false"
+            android:label="@string/provider_modifications"
+            android:syncable="true" />
+
         <provider
-                android:name=".category.CategoryContentProvider"
-                android:label="@string/provider_categories"
-                android:syncable="false"
-                android:authorities="fr.free.nrw.commons.categories.contentprovider"
-                android:exported="false">
-        </provider>
+            android:name=".category.CategoryContentProvider"
+            android:authorities="fr.free.nrw.commons.categories.contentprovider"
+            android:exported="false"
+            android:label="@string/provider_categories"
+            android:syncable="false" />
 
     </application>
 

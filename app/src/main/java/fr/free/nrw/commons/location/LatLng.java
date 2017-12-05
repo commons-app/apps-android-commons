@@ -1,5 +1,8 @@
 package fr.free.nrw.commons.location;
 
+import android.location.Location;
+import android.support.annotation.NonNull;
+
 public class LatLng {
 
     private final double latitude;
@@ -13,13 +16,17 @@ public class LatLng {
      * @param longitude double value
      */
     public LatLng(double latitude, double longitude, float accuracy) {
-        if(-180.0D <= longitude && longitude < 180.0D) {
+        if (-180.0D <= longitude && longitude < 180.0D) {
             this.longitude = longitude;
         } else {
             this.longitude = ((longitude - 180.0D) % 360.0D + 360.0D) % 360.0D - 180.0D;
         }
         this.latitude = Math.max(-90.0D, Math.min(90.0D, latitude));
         this.accuracy = accuracy;
+    }
+
+    public static LatLng from(@NonNull Location location) {
+        return new LatLng(location.getLatitude(), location.getLongitude(), location.getAccuracy());
     }
 
     public int hashCode() {
@@ -33,9 +40,9 @@ public class LatLng {
     }
 
     public boolean equals(Object o) {
-        if(this == o) {
+        if (this == o) {
             return true;
-        } else if(!(o instanceof LatLng)) {
+        } else if (!(o instanceof LatLng)) {
             return false;
         } else {
             LatLng var2 = (LatLng)o;

@@ -11,9 +11,9 @@
   <string name="login_success">Sikeres bejelentkezés</string>
   <string name="login_failed">A bejelentkezés nem sikerült.</string>
   <string name="upload_failed">A fájl nem található. Próbálkozz másik fájllal.</string>
-  <string name="authentication_failed">Sikertelen azonosítás.</string>
-  <string name="uploading_started">Feltöltés indul.</string>
-  <string name="upload_completed_notification_title">%1$s feltöltve!</string>
+  <string name="authentication_failed">Sikertelen hitelesítés.</string>
+  <string name="uploading_started">Feltöltés elindult.</string>
+  <string name="upload_completed_notification_title">%1$s feltöltve.</string>
   <string name="upload_completed_notification_text">Feltöltés megtekintése</string>
   <string name="upload_progress_notification_title_start">Feltöltés indul: %1$s</string>
   <string name="upload_progress_notification_title_in_progress">%1$s feltöltése</string>
@@ -75,7 +75,7 @@
   <string name="menu_about">Névjegy</string>
   <string name="about_license">A Wikimedia Commons applikáció egy nyílt forráskódú szoftver, amit a Wikimedia-közösség önkéntesei készítettek és tartanak karban. A Wikimédia Alapítvány nem vesz részt az applikáció megalkotásában, fejlesztésében és üzemeltetésében.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Forráskód&lt;/a&gt; és &lt;a href=\"https://commons-app.github.io/\"&gt;weboldal&lt;/a&gt; a GitHubon. Nyiss egy új &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-problémát&lt;/a&gt; hibabejelentéssel vagy fejlesztési javaslattal.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Adatvédelmi_irányelv\"&gt;Adatvédelmi irányelvek&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Adatvédelmi irányelvek&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Köszönetnyilvánítás&lt;/a&gt;</string>
   <string name="title_activity_about">Névjegy</string>
   <string name="menu_feedback">Visszajelzés küldése (e-mailben)</string>
@@ -105,7 +105,7 @@
   <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (Észtország)</string>
   <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (Spanyolország)</string>
   <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (Horvátország)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxembourg)</string>
+  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (Luxemburg)</string>
   <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (Hollandia)</string>
   <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (Norvégia)</string>
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Lengyelország)</string>
@@ -190,8 +190,15 @@
   <string name="no_description_found">nincs leírás</string>
   <string name="nearby_info_menu_commons_article">Commons leírólap</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata-elem</string>
+  <string name="error_while_cache">Hiba a képek gyorsítótárazásakor</string>
+  <string name="title_info">Egy egyedi, leíró cím a fájlnak, ami fájlnévként fog szolgálni. Egyszerű nyelvezetet használhatsz szóközökkel. Ne tedd bele a kiterjesztést.</string>
   <string name="description_info">Kérlek a lehető legteljesebb módon írd le a fájlt: hol készült, mit ábrázol, mi a kontextus? Kérlek add meg az objektumokat vagy személyeket a képen, valamint a nehezen kitalálható információkat (például a kép készítésének dátumát, ha az egy tájkép). Amennyiben a média valami szokatlant ábrázol, kérlek fejtsd ki, hogy mi teszi szokatlanná.</string>
   <string name="give_permission">Engedély adása</string>
   <string name="use_external_storage">Külső tárhely használata</string>
+  <string name="use_external_storage_summary">Az alkalmazáson belüli kamerával készült képek mentése az eszközre</string>
+  <string name="send_log_file">Naplófájlok küldése</string>
+  <string name="send_log_file_description">Naplófájlok küldése e-mailben a fejlesztőknek</string>
   <string name="login_to_your_account">Bejelentkezés a fiókodba</string>
+  <string name="nearby_location_has_not_changed">A hely nem változott.</string>
+  <string name="nearby_location_not_available">A hely nem érhető el.</string>
 </resources>

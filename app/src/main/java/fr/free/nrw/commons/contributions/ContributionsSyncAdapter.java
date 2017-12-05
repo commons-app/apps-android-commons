@@ -13,9 +13,15 @@ import android.os.RemoteException;
 import android.text.TextUtils;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
@@ -23,17 +29,21 @@ import fr.free.nrw.commons.mwapi.LogEventResult;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
-import static android.content.Context.MODE_PRIVATE;
 import static fr.free.nrw.commons.contributions.Contribution.STATE_COMPLETED;
 import static fr.free.nrw.commons.contributions.Contribution.Table.COLUMN_FILENAME;
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.BASE_URI;
 
+@SuppressWarnings("WeakerAccess")
 public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
 
     private static final String[] existsQuery = {COLUMN_FILENAME};
     private static final String existsSelection = COLUMN_FILENAME + " = ?";
     private static final ContentValues[] EMPTY = {};
     private static int COMMIT_THRESHOLD = 10;
+
+    @SuppressWarnings("WeakerAccess")
+    @Inject MediaWikiApi mwApi;
+    @Inject @Named("prefs") SharedPreferences prefs;
 
     public ContributionsSyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
@@ -47,6 +57,9 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
     }
 
     private boolean fileExists(ContentProviderClient client, String filename) {
+        if (filename == null) {
+            return false;
+        }
         Cursor cursor = null;
         try {
             cursor = client.query(BASE_URI,
@@ -68,10 +81,9 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
     @Override
     public void onPerformSync(Account account, Bundle bundle, String authority,
                               ContentProviderClient contentProviderClient, SyncResult syncResult) {
+        ((CommonsApplication) getContext().getApplicationContext()).injector().inject(this);
         // This code is fraught with possibilities of race conditions, but lalalalala I can't hear you!
         String user = account.name;
-        MediaWikiApi api = CommonsApplication.getInstance().getMWApi();
-        SharedPreferences prefs = getContext().getSharedPreferences("prefs", MODE_PRIVATE);
         String lastModified = prefs.getString("lastSyncTimestamp", "");
         Date curTime = new Date();
         LogEventResult result;
@@ -80,7 +92,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
         while (!done) {
 
             try {
-                result = api.logEvents(user, lastModified, queryContinue, getLimit());
+                result = mwApi.logEvents(user, lastModified, queryContinue, getLimit());
             } catch (IOException e) {
                 // There isn't really much we can do, eh?
                 // FIXME: Perhaps add EventLogging?
@@ -134,8 +146,13 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                 done = true;
             }
         }
-        prefs.edit().putString("lastSyncTimestamp", Utils.toMWDate(curTime)).apply();
+        prefs.edit().putString("lastSyncTimestamp", toMWDate(curTime)).apply();
         Timber.d("Oh hai, everyone! Look, a kitty!");
     }
 
+    private String toMWDate(Date date) {
+        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH); // Assuming MW always gives me UTC
+        isoFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        return isoFormat.format(date);
+    }
 }

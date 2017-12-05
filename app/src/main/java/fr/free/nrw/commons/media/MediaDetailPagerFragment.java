@@ -3,6 +3,7 @@ package fr.free.nrw.commons.media;
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.DataSetObserver;
 import android.net.Uri;
 import android.os.Build;
@@ -24,12 +25,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.mwapi.EventLog;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.content.Context.DOWNLOAD_SERVICE;
@@ -37,7 +44,11 @@ import static android.content.Intent.ACTION_VIEW;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import static fr.free.nrw.commons.CommonsApplication.EVENT_SHARE_ATTEMPT;
 
-public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPageChangeListener {
+public class MediaDetailPagerFragment extends DaggerFragment implements ViewPager.OnPageChangeListener {
+
+    @Inject MediaWikiApi mwApi;
+    @Inject SessionManager sessionManager;
+    @Inject @Named("default_preferences") SharedPreferences prefs;
 
     private ViewPager pager;
     private Boolean editable;
@@ -101,8 +112,8 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
             case R.id.menu_share_current_image:
                 // Share - this is just logs it, intent set in onCreateOptionsMenu, around line 252
                 CommonsApplication app = (CommonsApplication) getActivity().getApplication();
-                EventLog.schema(EVENT_SHARE_ATTEMPT)
-                        .param("username", app.getCurrentAccount().name)
+                EventLog.schema(EVENT_SHARE_ATTEMPT, mwApi, prefs)
+                        .param("username", sessionManager.getCurrentAccount().name)
                         .param("filename", m.getFilename())
                         .log();
                 return true;
@@ -141,8 +152,14 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
     private void downloadMedia(Media m) {
         String imageUrl = m.getImageUrl(),
                 fileName = m.getFilename();
+
+        if (imageUrl == null || fileName == null) {
+            return;
+        }
+
         // Strip 'File:' from beginning of filename, we really shouldn't store it
         fileName = fileName.replaceFirst("^File:", "");
+
         Uri imageUri = Uri.parse(imageUrl);
 
         DownloadManager.Request req = new DownloadManager.Request(imageUri);
@@ -155,9 +172,7 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
         req.allowScanningByMediaScanner();
         req.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
-                && !(ContextCompat.checkSelfPermission(getContext(),
-                READ_EXTERNAL_STORAGE) == PERMISSION_GRANTED)) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !(ContextCompat.checkSelfPermission(getContext(), READ_EXTERNAL_STORAGE) == PERMISSION_GRANTED)) {
             Snackbar.make(getView(), R.string.read_storage_permission_rationale,
                     Snackbar.LENGTH_INDEFINITE).setAction(R.string.ok,
                     view -> ActivityCompat.requestPermissions(getActivity(),

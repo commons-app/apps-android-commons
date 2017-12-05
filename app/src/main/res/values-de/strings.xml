@@ -198,5 +198,10 @@
   <string name="give_permission">Berechtigung geben</string>
   <string name="use_external_storage">Externen Speicher verwenden</string>
   <string name="use_external_storage_summary">Mit der In-App-Kamera aufgenommene Bilder auf deinem Gerät speichern</string>
+  <string name="send_log_file">Logdatei senden</string>
+  <string name="send_log_file_description">Logdatei an die Entwickler per E-Mail senden</string>
   <string name="login_to_your_account">Bei deinem Benutzerkonto anmelden</string>
+  <string name="nearby_location_has_not_changed">Der Standort hat sich nicht geändert.</string>
+  <string name="nearby_location_not_available">Der Standort ist nicht verfügbar.</string>
+  <string name="location_permission_rationale_nearby">Berechtigung zur Anzeige einer Liste mit Orten in der Nähe erforderlich</string>
 </resources>
