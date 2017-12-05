@@ -3,8 +3,6 @@ package fr.free.nrw.commons.category;
 import android.content.ContentProviderClient;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -31,11 +29,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import fr.free.nrw.commons.CommonsApplication;
+import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.data.Category;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.upload.MwVolleyApi;
 import fr.free.nrw.commons.utils.StringSortingUtils;
 import io.reactivex.Observable;
@@ -50,7 +52,7 @@ import static fr.free.nrw.commons.category.CategoryContentProvider.AUTHORITY;
 /**
  * Displays the category suggestion and selection screen. Category search is initiated here.
  */
-public class CategorizationFragment extends Fragment {
+public class CategorizationFragment extends DaggerFragment {
 
     public static final int SEARCH_CATS_LIMIT = 25;
 
@@ -64,6 +66,9 @@ public class CategorizationFragment extends Fragment {
     TextView categoriesNotFoundView;
     @BindView(R.id.categoriesExplanation)
     TextView categoriesSkip;
+
+    @Inject MediaWikiApi mwApi;
+    @Inject @Named("default_preferences") SharedPreferences prefs;
 
     private RVRendererAdapter<CategoryItem> categoriesAdapter;
     private OnCategoriesSaveHandler onCategoriesSaveHandler;
@@ -205,7 +210,9 @@ public class CategorizationFragment extends Fragment {
                 .sorted(sortBySimilarity(filter))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        s -> categoriesAdapter.add(s), Timber::e, () -> {
+                        s -> categoriesAdapter.add(s),
+                         Timber::e,
+                        () -> {
                             categoriesAdapter.notifyDataSetChanged();
                             categoriesSearchInProgress.setVisibility(View.GONE);
 
@@ -253,10 +260,9 @@ public class CategorizationFragment extends Fragment {
 
     private Observable<CategoryItem> titleCategories() {
         //Retrieve the title that was saved when user tapped submit icon
-        SharedPreferences titleDesc = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String title = titleDesc.getString("Title", "");
+        String title = prefs.getString("Title", "");
 
-        return CommonsApplication.getInstance().getMWApi()
+        return mwApi
                 .searchTitles(title, SEARCH_CATS_LIMIT)
                 .map(name -> new CategoryItem(name, false));
     }
@@ -279,7 +285,7 @@ public class CategorizationFragment extends Fragment {
         }
 
         //otherwise, search API for matching categories
-        return CommonsApplication.getInstance().getMWApi()
+        return mwApi
                 .allCategories(term, SEARCH_CATS_LIMIT)
                 .map(name -> new CategoryItem(name, false));
     }
@@ -290,7 +296,7 @@ public class CategorizationFragment extends Fragment {
             return Observable.empty();
         }
 
-        return CommonsApplication.getInstance().getMWApi()
+        return mwApi
                 .searchCategories(term, SEARCH_CATS_LIMIT)
                 .map(s -> new CategoryItem(s, false));
     }

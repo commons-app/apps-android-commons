@@ -201,4 +201,7 @@
   <string name="send_log_file">发送日志文件</string>
   <string name="send_log_file_description">通过电子邮件将日志文件发送给开发人员</string>
   <string name="login_to_your_account">登录您的账户</string>
+  <string name="nearby_location_has_not_changed">位置没有更新。</string>
+  <string name="nearby_location_not_available">位置不可用。</string>
+  <string name="location_permission_rationale_nearby">需要权限以显示附近地点列表</string>
 </resources>

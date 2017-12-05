@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.Set;
 
 import fr.free.nrw.commons.BuildConfig;
+import fr.free.nrw.commons.TestCommonsApplication;
 import io.reactivex.observers.TestObserver;
 import okhttp3.HttpUrl;
 import okhttp3.mockwebserver.MockResponse;
@@ -28,7 +29,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@Config(constants = BuildConfig.class, sdk = 21, application = TestCommonsApplication.class)
 public class ApacheHttpClientMediaWikiApiTest {
 
     private ApacheHttpClientMediaWikiApi testObject;

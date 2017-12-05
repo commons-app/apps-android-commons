@@ -1,8 +1,8 @@
 package fr.free.nrw.commons.auth;
 
 import android.accounts.AccountAuthenticatorResponse;
-import android.accounts.AccountManager;
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -11,7 +11,13 @@ import java.io.IOException;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.mwapi.EventLog;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
+
+import static android.accounts.AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE;
+import static android.accounts.AccountManager.KEY_ACCOUNT_NAME;
+import static android.accounts.AccountManager.KEY_ACCOUNT_TYPE;
+import static fr.free.nrw.commons.auth.AccountUtil.ACCOUNT_TYPE;
 
 class LoginTask extends AsyncTask<String, String, String> {
 
@@ -19,14 +25,20 @@ class LoginTask extends AsyncTask<String, String, String> {
     private String username;
     private String password;
     private String twoFactorCode = "";
-    private CommonsApplication app;
+    private AccountUtil accountUtil;
+    private MediaWikiApi mwApi;
+    private SharedPreferences prefs;
 
-    public LoginTask(LoginActivity loginActivity, String username, String password, String twoFactorCode) {
+    public LoginTask(LoginActivity loginActivity, String username, String password,
+                     String twoFactorCode, AccountUtil accountUtil,
+                     MediaWikiApi mwApi, SharedPreferences prefs) {
         this.loginActivity = loginActivity;
         this.username = username;
         this.password = password;
         this.twoFactorCode = twoFactorCode;
-        app = CommonsApplication.getInstance();
+        this.accountUtil = accountUtil;
+        this.mwApi = mwApi;
+        this.prefs = prefs;
     }
 
     @Override
@@ -44,9 +56,9 @@ class LoginTask extends AsyncTask<String, String, String> {
     protected String doInBackground(String... params) {
         try {
             if (twoFactorCode.isEmpty()) {
-                return app.getMWApi().login(username, password);
+                return mwApi.login(username, password);
             } else {
-                return app.getMWApi().login(username, password, twoFactorCode);
+                return mwApi.login(username, password, twoFactorCode);
             }
         } catch (IOException e) {
             // Do something better!
@@ -59,7 +71,7 @@ class LoginTask extends AsyncTask<String, String, String> {
         super.onPostExecute(result);
         Timber.d("Login done!");
 
-        EventLog.schema(CommonsApplication.EVENT_LOGIN_ATTEMPT)
+        EventLog.schema(CommonsApplication.EVENT_LOGIN_ATTEMPT, mwApi, prefs)
                 .param("username", username)
                 .param("result", result)
                 .log();
@@ -79,16 +91,16 @@ class LoginTask extends AsyncTask<String, String, String> {
         Bundle extras = loginActivity.getIntent().getExtras();
         if (extras != null) {
             Timber.d("Bundle of extras: %s", extras);
-            response = extras.getParcelable(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE);
+            response = extras.getParcelable(KEY_ACCOUNT_AUTHENTICATOR_RESPONSE);
             if (response != null) {
                 Bundle authResult = new Bundle();
-                authResult.putString(AccountManager.KEY_ACCOUNT_NAME, username);
-                authResult.putString(AccountManager.KEY_ACCOUNT_TYPE, AccountUtil.accountType());
+                authResult.putString(KEY_ACCOUNT_NAME, username);
+                authResult.putString(KEY_ACCOUNT_TYPE, ACCOUNT_TYPE);
                 response.onResult(authResult);
             }
         }
 
-        AccountUtil.createAccount(response, username, password);
+        accountUtil.createAccount(response, username, password);
         loginActivity.startMainActivity();
     }
 

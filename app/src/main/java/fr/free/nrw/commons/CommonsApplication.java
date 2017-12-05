@@ -1,19 +1,8 @@
 package fr.free.nrw.commons;
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
-import android.accounts.AccountManagerCallback;
-import android.accounts.AccountManagerFuture;
-import android.accounts.AuthenticatorException;
-import android.accounts.OperationCanceledException;
-import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
-import android.preference.PreferenceManager;
-import android.support.v4.util.LruCache;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.stetho.Stetho;
@@ -25,23 +14,23 @@ import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
 
 import java.io.File;
-import java.io.IOException;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
-import dagger.android.DispatchingAndroidInjector;
-import dagger.android.HasActivityInjector;
-import fr.free.nrw.commons.auth.AccountUtil;
-import fr.free.nrw.commons.caching.CacheController;
+import dagger.android.AndroidInjector;
+import dagger.android.DaggerApplication;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.data.Category;
 import fr.free.nrw.commons.data.DBOpenHelper;
-import fr.free.nrw.commons.di.DaggerAppComponent;
+import fr.free.nrw.commons.di.CommonsApplicationComponent;
+import fr.free.nrw.commons.di.CommonsApplicationModule;
+import fr.free.nrw.commons.di.DaggerCommonsApplicationComponent;
 import fr.free.nrw.commons.modifications.ModifierSequence;
-import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
-import fr.free.nrw.commons.nearby.NearbyPlaces;
 import fr.free.nrw.commons.utils.FileUtils;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 // TODO: Use ProGuard to rip out reporting when publishing
@@ -53,9 +42,13 @@ import timber.log.Timber;
         resDialogCommentPrompt = R.string.crash_dialog_comment_prompt,
         resDialogOkToast = R.string.crash_dialog_ok_toast
 )
-public class CommonsApplication extends Application implements HasActivityInjector {
+public class CommonsApplication extends DaggerApplication {
 
-    private Account currentAccount = null; // Unlike a savings account...
+    @Inject SessionManager sessionManager;
+    @Inject DBOpenHelper dbOpenHelper;
+    @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
+    @Inject @Named("application_preferences") SharedPreferences applicationPrefs;
+    @Inject @Named("prefs") SharedPreferences otherPrefs;
 
     public static final Object[] EVENT_UPLOAD_ATTEMPT = {"MobileAppUploadAttempts", 5334329L};
     public static final Object[] EVENT_LOGIN_ATTEMPT = {"MobileAppLoginAttempts", 5257721L};
@@ -64,83 +57,22 @@ public class CommonsApplication extends Application implements HasActivityInject
 
     public static final String DEFAULT_EDIT_SUMMARY = "Uploaded using Android Commons app";
 
-    public static final String FEEDBACK_EMAIL = "commons-app-android-private@googlegroups.com";
+    public static final String FEEDBACK_EMAIL = "commons-app-android@googlegroups.com";
     public static final String FEEDBACK_EMAIL_SUBJECT = "Commons Android App (%s) Feedback";
 
-    @Inject DispatchingAndroidInjector<Activity> dispatchingActivityInjector;
-    @Inject MediaWikiApi mediaWikiApi;
-
-    private static CommonsApplication instance = null;
-    private MediaWikiApi api = null;
-    private LruCache<String, String> thumbnailUrlCache = new LruCache<>(1024);
-    private CacheController cacheData = null;
-    private DBOpenHelper dbOpenHelper = null;
-    private NearbyPlaces nearbyPlaces = null;
-
+    private CommonsApplicationComponent component;
     private RefWatcher refWatcher;
-
-    /**
-     * This should not be called by ANY application code (other than the magic Android glue)
-     * Use CommonsApplication.getInstance() instead to get the singleton.
-     */
-    public CommonsApplication() {
-        CommonsApplication.instance = this;
-    }
-
-    public static CommonsApplication getInstance() {
-        if (instance == null) {
-            instance = new CommonsApplication();
-        }
-        return instance;
-    }
-
-    public MediaWikiApi getMWApi() {
-        if (api == null) {
-            api = new ApacheHttpClientMediaWikiApi(BuildConfig.WIKIMEDIA_API_HOST);
-        }
-        return api;
-    }
-
-    public CacheController getCacheData() {
-        if (cacheData == null) {
-            cacheData = new CacheController();
-        }
-        return cacheData;
-    }
-
-    public LruCache<String, String> getThumbnailUrlCache() {
-        return thumbnailUrlCache;
-    }
-
-    public synchronized DBOpenHelper getDBOpenHelper() {
-        if (dbOpenHelper == null) {
-            dbOpenHelper = new DBOpenHelper(this);
-        }
-        return dbOpenHelper;
-    }
-
-    public synchronized NearbyPlaces getNearbyPlaces() {
-        if (nearbyPlaces == null) {
-            nearbyPlaces = new NearbyPlaces();
-        }
-        return nearbyPlaces;
-    }
 
     @Override
     public void onCreate() {
         super.onCreate();
 
+        Fresco.initialize(this);
         if (setupLeakCanary() == RefWatcher.DISABLED) {
             return;
         }
 
         Timber.plant(new Timber.DebugTree());
-
-        DaggerAppComponent
-                .builder()
-                .application(this)
-                .build()
-                .inject(this);
 
         if (!BuildConfig.DEBUG) {
             ACRA.init(this);
@@ -150,11 +82,6 @@ public class CommonsApplication extends Application implements HasActivityInject
 
         // Fire progress callbacks for every 3% of uploaded content
         System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0");
-
-        Fresco.initialize(this);
-
-        //For caching area -> categories
-        cacheData  = new CacheController();
     }
 
     protected RefWatcher setupLeakCanary() {
@@ -169,43 +96,18 @@ public class CommonsApplication extends Application implements HasActivityInject
         return application.refWatcher;
     }
 
-    /**
-     * @return Account|null
-     */
-    public Account getCurrentAccount() {
-        if (currentAccount == null) {
-            AccountManager accountManager = AccountManager.get(this);
-            Account[] allAccounts = accountManager.getAccountsByType(AccountUtil.accountType());
-            if (allAccounts.length != 0) {
-                currentAccount = allAccounts[0];
-            }
-        }
-        return currentAccount;
-    }
-    
-    public Boolean revalidateAuthToken() {
-        AccountManager accountManager = AccountManager.get(this);
-        Account curAccount = getCurrentAccount();
-       
-        if (curAccount == null) {
-            return false; // This should never happen
-        }
-
-        accountManager.invalidateAuthToken(AccountUtil.accountType(), mediaWikiApi.getAuthCookie());
-        try {
-            String authCookie = accountManager.blockingGetAuthToken(curAccount, "", false);
-            mediaWikiApi.setAuthCookie(authCookie);
-            return true;
-        } catch (OperationCanceledException | NullPointerException | IOException | AuthenticatorException e) {
-            e.printStackTrace();
-            return false;
-        }
+    @Override
+     protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
+        return injector();
     }
 
-    public boolean deviceHasCamera() {
-        PackageManager pm = getPackageManager();
-        return pm.hasSystemFeature(PackageManager.FEATURE_CAMERA)
-                || pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT);
+    public CommonsApplicationComponent injector() {
+        if (component == null) {
+            component = DaggerCommonsApplicationComponent.builder()
+                    .appModule(new CommonsApplicationModule(this))
+                    .build();
+        }
+        return component;
     }
 
     public void clearApplicationData(Context context, LogoutListener logoutListener) {
@@ -220,67 +122,25 @@ public class CommonsApplication extends Application implements HasActivityInject
             }
         }
 
-        AccountManager accountManager = AccountManager.get(this);
-        Account[] allAccounts = accountManager.getAccountsByType(AccountUtil.accountType());
-
-        AccountManagerCallback<Boolean> amCallback = new AccountManagerCallback<Boolean>() {
-            
-            private int index = 0;
-            
-            void setIndex(int index) {
-                this.index = index;
-            }
-
-            int getIndex() {
-                return index;
-            }
-
-            @Override
-            public void run(AccountManagerFuture<Boolean> accountManagerFuture) {
-                setIndex(getIndex() + 1);
-
-                try {
-                    if (accountManagerFuture != null && accountManagerFuture.getResult()) {
-                        Timber.d("Account removed successfully.");
-                    }
-                } catch (OperationCanceledException | IOException | AuthenticatorException e) {
-                    e.printStackTrace();
-                }
-
-                if (getIndex() == allAccounts.length) {
+        sessionManager.clearAllAccounts()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(() -> {
                     Timber.d("All accounts have been removed");
                     //TODO: fix preference manager
-                    PreferenceManager.getDefaultSharedPreferences(getInstance())
-                            .edit().clear().commit();
-                    SharedPreferences preferences = context
-                            .getSharedPreferences("fr.free.nrw.commons", MODE_PRIVATE);
-                    preferences.edit().clear().commit();
-                    context.getSharedPreferences("prefs", Context.MODE_PRIVATE)
-                            .edit().clear().commit();
-                    preferences.edit().putBoolean("firstrun", false).apply();
+                    defaultPrefs.edit().clear().commit();
+                    applicationPrefs.edit().clear().commit();
+                    applicationPrefs.edit().putBoolean("firstrun", false).apply();otherPrefs.edit().clear().commit();
                     updateAllDatabases();
-                    currentAccount = null;
 
                     logoutListener.onLogoutComplete();
-                }
-            }
-        };
-
-        for (Account account : allAccounts) {
-            accountManager.removeAccount(account, amCallback, null);
-        }
-    }
-
-    @Override
-    public DispatchingAndroidInjector<Activity> activityInjector() {
-        return dispatchingActivityInjector;
+                });
     }
 
     /**
      * Deletes all tables and re-creates them.
      */
-    public void updateAllDatabases() {
-        DBOpenHelper dbOpenHelper = CommonsApplication.getInstance().getDBOpenHelper();
+    private void updateAllDatabases() {
         dbOpenHelper.getReadableDatabase().close();
         SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
 

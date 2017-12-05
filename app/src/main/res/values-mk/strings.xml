@@ -17,7 +17,7 @@
   <string name="upload_completed_notification_text">Допрете за да го погледате подигањето</string>
   <string name="upload_progress_notification_title_start">Почнувам со подигањето на „%1$s“</string>
   <string name="upload_progress_notification_title_in_progress">Подигање на „%1$s“</string>
-  <string name="upload_progress_notification_title_finishing">Заврпувам со подигање на „%1$s“</string>
+  <string name="upload_progress_notification_title_finishing">Завршувам со подигање на „%1$s“</string>
   <string name="upload_failed_notification_title">Подигањето на „%1$s“ не успеа</string>
   <string name="upload_failed_notification_subtitle">Допрете за да погледате</string>
   <plurals name="uploads_pending_notification_indicator">
@@ -73,7 +73,7 @@
   <string name="title_activity_settings">Нагодувања</string>
   <string name="title_activity_signup">Регистрација</string>
   <string name="menu_about">За извршникот</string>
-  <string name="about_license">Прилогот на Ризницата има отворен код. Негови творци и оддржувачи се примателите на наменските средства од Викимедиината заедница како и членовите на заедницата. Фондацијата Викимедија нема учество во нејзиното создавање, разработка и одржување.</string>
+  <string name="about_license">Прилогот на Ризницата има отворен код. Негови творци и одржувачи се примателите на наменските средства од Викимедиината заедница како и членовите на заедницата. Фондацијата Викимедија нема учество во нејзиното создавање, разработка и одржување.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Извор&lt;/a&gt; и &lt;a href=\"https://commons-app.github.io/\"&gt;мреж. место&lt;/a&gt; на GitHub&lt;/a&gt;. Создајте нов &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;случај на GitHub&lt;/a&gt; за пријавување грешки и давање предлози.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Заштита на личните податоци&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Заслуги&lt;/a&gt;</string>
@@ -201,4 +201,7 @@
   <string name="send_log_file">Испрати дневничка податотека</string>
   <string name="send_log_file_description">Испрати дневничка податотека на разработувачите по е-пошта</string>
   <string name="login_to_your_account">Најавете се со вашата сметка</string>
+  <string name="nearby_location_has_not_changed">Местоположбата не е сменета.</string>
+  <string name="nearby_location_not_available">Местоположбата е недостапна.</string>
+  <string name="location_permission_rationale_nearby">Се бара дозвола за приказ на список на околни места</string>
 </resources>

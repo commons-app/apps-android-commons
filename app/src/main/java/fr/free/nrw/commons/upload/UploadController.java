@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.upload;
 
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
@@ -9,31 +10,36 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.IBinder;
-import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.concurrent.Executors;
 
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
-import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.settings.Prefs;
 import timber.log.Timber;
 
 public class UploadController {
     private UploadService uploadService;
-    private final CommonsApplication app;
+    private SessionManager sessionManager;
+    private Context context;
+    private SharedPreferences prefs;
 
     public interface ContributionUploadProgress {
         void onUploadStarted(Contribution contribution);
     }
 
-    public UploadController() {
-        app = CommonsApplication.getInstance();
+    public UploadController(SessionManager sessionManager, Context context, SharedPreferences sharedPreferences) {
+        this.sessionManager = sessionManager;
+        this.context = context;
+        this.prefs = sharedPreferences;
     }
 
     private boolean isUploadServiceConnected;
@@ -52,15 +58,15 @@ public class UploadController {
     };
 
     public void prepareService() {
-        Intent uploadServiceIntent = new Intent(app, UploadService.class);
+        Intent uploadServiceIntent = new Intent(context, UploadService.class);
         uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
-        app.startService(uploadServiceIntent);
-        app.bindService(uploadServiceIntent, uploadServiceConnection, Context.BIND_AUTO_CREATE);
+        context.startService(uploadServiceIntent);
+        context.bindService(uploadServiceIntent, uploadServiceConnection, Context.BIND_AUTO_CREATE);
     }
 
     public void cleanup() {
         if (isUploadServiceConnected) {
-            app.unbindService(uploadServiceConnection);
+            context.unbindService(uploadServiceConnection);
         }
     }
 
@@ -68,7 +74,9 @@ public class UploadController {
         Contribution contribution;
 
         //TODO: Modify this to include coords
-        contribution = new Contribution(mediaUri, null, title, description, -1, null, null, app.getCurrentAccount().name, CommonsApplication.DEFAULT_EDIT_SUMMARY, decimalCoords);
+        contribution = new Contribution(mediaUri, null, title, description, -1,
+                null, null, sessionManager.getCurrentAccount().name,
+                CommonsApplication.DEFAULT_EDIT_SUMMARY, decimalCoords);
 
         contribution.setTag("mimeType", mimeType);
         contribution.setSource(source);
@@ -78,12 +86,9 @@ public class UploadController {
     }
 
     public void startUpload(final Contribution contribution, final ContributionUploadProgress onComplete) {
-
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(app);
-
         //Set creator, desc, and license
         if (TextUtils.isEmpty(contribution.getCreator())) {
-            contribution.setCreator(app.getCurrentAccount().name);
+            contribution.setCreator(sessionManager.getCurrentAccount().name);
         }
 
         if (contribution.getDescription() == null) {
@@ -102,14 +107,15 @@ public class UploadController {
             @Override
             protected Contribution doInBackground(Void... voids /* stare into you */) {
                 long length;
+                ContentResolver contentResolver = context.getContentResolver();
                 try {
                     if (contribution.getDataLength() <= 0) {
-                        length = app.getContentResolver()
+                        length = contentResolver
                                 .openAssetFileDescriptor(contribution.getLocalUri(), "r")
                                 .getLength();
                         if (length == -1) {
                             // Let us find out the long way!
-                            length = Utils.countBytes(app.getContentResolver()
+                            length = countBytes(contentResolver
                                     .openInputStream(contribution.getLocalUri()));
                         }
                         contribution.setDataLength(length);
@@ -126,7 +132,7 @@ public class UploadController {
                 Boolean imagePrefix = false;
 
                 if (mimeType == null || TextUtils.isEmpty(mimeType) || mimeType.endsWith("*")) {
-                    mimeType = app.getContentResolver().getType(contribution.getLocalUri());
+                    mimeType = contentResolver.getType(contribution.getLocalUri());
                 }
 
                 if (mimeType != null) {
@@ -137,7 +143,7 @@ public class UploadController {
 
                 if (imagePrefix && contribution.getDateCreated() == null) {
                     Timber.d("local uri   " + contribution.getLocalUri());
-                    Cursor cursor = app.getContentResolver().query(contribution.getLocalUri(),
+                    Cursor cursor = contentResolver.query(contribution.getLocalUri(),
                             new String[]{MediaStore.Images.ImageColumns.DATE_TAKEN}, null, null, null);
                     if (cursor != null && cursor.getCount() != 0 && cursor.getColumnCount() != 0) {
                         cursor.moveToFirst();
@@ -164,5 +170,15 @@ public class UploadController {
                 onComplete.onUploadStarted(contribution);
             }
         }.executeOnExecutor(Executors.newFixedThreadPool(1)); // TODO remove this by using a sensible thread handling strategy
+    }
+
+
+    private long countBytes(InputStream stream) throws IOException {
+        long count = 0;
+        BufferedInputStream bis = new BufferedInputStream(stream);
+        while (bis.read() != -1) {
+            count++;
+        }
+        return count;
     }
 }

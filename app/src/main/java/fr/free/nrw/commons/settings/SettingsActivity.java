@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.settings;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatDelegate;

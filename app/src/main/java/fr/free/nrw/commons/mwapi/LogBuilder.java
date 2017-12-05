@@ -3,7 +3,6 @@ package fr.free.nrw.commons.mwapi;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.preference.PreferenceManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,19 +11,23 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import fr.free.nrw.commons.BuildConfig;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.settings.Prefs;
 
+@SuppressWarnings("WeakerAccess")
 public class LogBuilder {
-    private JSONObject data;
-    private long rev;
-    private String schema;
+    private final MediaWikiApi mwApi;
+    private final JSONObject data;
+    private final long rev;
+    private final String schema;
+    private final SharedPreferences prefs;
 
-    LogBuilder(String schema, long revision) {
-        data = new JSONObject();
+    LogBuilder(String schema, long revision, MediaWikiApi mwApi, SharedPreferences prefs) {
+        this.prefs = prefs;
+        this.data = new JSONObject();
         this.schema = schema;
         this.rev = revision;
+        this.mwApi = mwApi;
     }
 
     public LogBuilder param(String key, Object value) {
@@ -56,11 +59,10 @@ public class LogBuilder {
     // Use *only* for tracking the user preference change for EventLogging
     // Attempting to use anywhere else will cause kitten explosions
     public void log(boolean force) {
-        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(CommonsApplication.getInstance());
-        if (!settings.getBoolean(Prefs.TRACKING_ENABLED, true) && !force) {
+        if (!prefs.getBoolean(Prefs.TRACKING_ENABLED, true) && !force) {
             return; // User has disabled tracking
         }
-        LogTask logTask = new LogTask();
+        LogTask logTask = new LogTask(mwApi);
         logTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, this);
     }
 
