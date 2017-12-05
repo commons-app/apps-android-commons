@@ -136,7 +136,7 @@ public class SettingsFragment extends PreferenceFragment {
         Intent feedbackIntent = new Intent(Intent.ACTION_SEND);
         feedbackIntent.setType("message/rfc822");
         feedbackIntent.putExtra(Intent.EXTRA_EMAIL,
-                new String[]{CommonsApplication.FEEDBACK_EMAIL});
+                new String[]{CommonsApplication.LOGS_PRIVATE_EMAIL});
         feedbackIntent.putExtra(Intent.EXTRA_SUBJECT,
                 String.format(CommonsApplication.FEEDBACK_EMAIL_SUBJECT,
                         BuildConfig.VERSION_NAME));
