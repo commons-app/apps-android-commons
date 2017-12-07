@@ -10,7 +10,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.ParcelFileDescriptor;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -176,13 +175,6 @@ public  class      ShareActivity
         // This is the wrong place for it, but bleh - better than not having it turned on by default for people who don't go throughl ogin
         ContentResolver.setSyncAutomatically(sessionManager.getCurrentAccount(), ModificationsContentProvider.AUTHORITY, true); // Enable sync by default!
 
-        EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT, mwApi, prefs)
-                .param("username", sessionManager.getCurrentAccount().name)
-                .param("categories-count", categories.size())
-                .param("files-count", 1)
-                .param("source", contribution.getSource())
-                .param("result", "queued")
-                .log();
         finish();
     }
 
@@ -191,27 +183,6 @@ public  class      ShareActivity
         super.onSaveInstanceState(outState);
         if (contribution != null) {
             outState.putParcelable("contribution", contribution);
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        if (categorizationFragment != null && categorizationFragment.isVisible()) {
-            EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT, mwApi, prefs)
-                    .param("username", sessionManager.getCurrentAccount().name)
-                    .param("categories-count", categorizationFragment.getCurrentSelectedCount())
-                    .param("files-count", 1)
-                    .param("source", contribution.getSource())
-                    .param("result", "cancelled")
-                    .log();
-        } else {
-            EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT, mwApi, prefs)
-                    .param("username", sessionManager.getCurrentAccount().name)
-                    .param("source", getIntent().getStringExtra(UploadService.EXTRA_SOURCE))
-                    .param("multiple", true)
-                    .param("result", "cancelled")
-                    .log();
         }
     }
 

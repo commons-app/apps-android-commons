@@ -29,20 +29,17 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import dagger.android.support.DaggerFragment;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
-import fr.free.nrw.commons.mwapi.EventLog;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.content.Context.DOWNLOAD_SERVICE;
 import static android.content.Intent.ACTION_VIEW;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
-import static fr.free.nrw.commons.CommonsApplication.EVENT_SHARE_ATTEMPT;
 
 public class MediaDetailPagerFragment extends DaggerFragment implements ViewPager.OnPageChangeListener {
 
@@ -110,12 +107,7 @@ public class MediaDetailPagerFragment extends DaggerFragment implements ViewPage
         Media m = provider.getMediaAtPosition(pager.getCurrentItem());
         switch (item.getItemId()) {
             case R.id.menu_share_current_image:
-                // Share - this is just logs it, intent set in onCreateOptionsMenu, around line 252
-                CommonsApplication app = (CommonsApplication) getActivity().getApplication();
-                EventLog.schema(EVENT_SHARE_ATTEMPT, mwApi, prefs)
-                        .param("username", sessionManager.getCurrentAccount().name)
-                        .param("filename", m.getFilename())
-                        .log();
+                // Share - intent set in onCreateOptionsMenu, around line 252
                 return true;
             case R.id.menu_browser_current_image:
                 // View in browser

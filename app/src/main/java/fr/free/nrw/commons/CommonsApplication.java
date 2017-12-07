@@ -50,11 +50,6 @@ public class CommonsApplication extends DaggerApplication {
     @Inject @Named("application_preferences") SharedPreferences applicationPrefs;
     @Inject @Named("prefs") SharedPreferences otherPrefs;
 
-    public static final Object[] EVENT_UPLOAD_ATTEMPT = {"MobileAppUploadAttempts", 5334329L};
-    public static final Object[] EVENT_LOGIN_ATTEMPT = {"MobileAppLoginAttempts", 5257721L};
-    public static final Object[] EVENT_SHARE_ATTEMPT = {"MobileAppShareAttempts", 5346170L};
-    public static final Object[] EVENT_CATEGORIZATION_ATTEMPT = {"MobileAppCategorizationAttempts", 5359208L};
-
     public static final String DEFAULT_EDIT_SUMMARY = "Uploaded using Android Commons app";
 
     public static final String FEEDBACK_EMAIL = "commons-app-android@googlegroups.com";
