@@ -53,7 +53,7 @@
   <string name="categories_search_text_hint">Пошук категорій</string>
   <string name="menu_save_categories">Зберегти</string>
   <string name="refresh_button">Оновити</string>
-  <string name="gps_disabled">GPS вимкнено на Вашому пристрої. Чи хотіли б Ви його увімкнути?</string>
+  <string name="gps_disabled">GPS вимкнено на Вашому пристрої. Бажаєте увімкнути його?</string>
   <string name="enable_gps">Увімкнути GPS</string>
   <string name="contributions_subtitle_zero">Ще нема завантажень</string>
   <plurals name="contributions_subtitle">
@@ -209,4 +209,5 @@
   <string name="send_log_file">Надіслати лог-файл</string>
   <string name="send_log_file_description">Надіслати лог-файл розробникам електронною поштою</string>
   <string name="login_to_your_account">Увійдіть у свій обліковий запис</string>
+  <string name="nearby_location_has_not_changed">Розташування не змінено</string>
 </resources>
