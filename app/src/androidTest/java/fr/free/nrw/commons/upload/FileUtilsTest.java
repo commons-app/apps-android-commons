@@ -7,6 +7,8 @@ import android.support.test.runner.AndroidJUnit4;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import fr.free.nrw.commons.BuildConfig;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -14,7 +16,7 @@ import static org.junit.Assert.assertThat;
 public class FileUtilsTest {
     @Test
     public void isSelfOwned() throws Exception {
-        Uri uri = Uri.parse("content://fr.free.nrw.commons.provider/document/1");
+        Uri uri = Uri.parse("content://" + BuildConfig.APPLICATION_ID + ".provider/document/1");
         boolean selfOwned = FileUtils.isSelfOwned(InstrumentationRegistry.getTargetContext(), uri);
         assertThat(selfOwned, is(true));
     }
