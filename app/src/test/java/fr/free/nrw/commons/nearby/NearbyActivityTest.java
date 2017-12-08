@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.nearby;
 
 import android.app.Activity;
+import android.location.LocationManager;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,8 +10,11 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadow.api.Shadow;
+import org.robolectric.shadows.ShadowLocationManager;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.TestCommonsApplication;
@@ -33,6 +38,7 @@ public class NearbyActivityTest {
 
         TestCommonsApplication application = (TestCommonsApplication) RuntimeEnvironment.application;
         when(application.getLocationServiceManager().getLastLocation()).thenReturn(ST_LOUIS_MO_LAT_LNG);
+        when(application.getLocationServiceManager().isProviderEnabled()).thenReturn(true);
 
         activityController = Robolectric.buildActivity(NearbyActivity.class);
         nearbyActivity = activityController.get();
