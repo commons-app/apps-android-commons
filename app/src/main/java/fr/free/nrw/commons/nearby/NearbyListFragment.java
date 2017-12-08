@@ -60,7 +60,7 @@ public class NearbyListFragment extends DaggerFragment {
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-            String gsonPlaceList = bundle.getString("PlaceList");
+            String gsonPlaceList = bundle.getString("PlaceList", "[]");
             placeList = gson.fromJson(gsonPlaceList, LIST_TYPE);
 
             String gsonLatLng = bundle.getString("CurLatLng");
