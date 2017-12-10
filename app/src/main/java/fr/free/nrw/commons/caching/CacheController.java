@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import fr.free.nrw.commons.upload.MwVolleyApi;
+import fr.free.nrw.commons.upload.CategoryApi;
 import timber.log.Timber;
 
 public class CacheController {
@@ -31,8 +31,8 @@ public class CacheController {
 
     public void cacheCategory() {
         List<String> pointCatList = new ArrayList<>();
-        if (MwVolleyApi.GpsCatExists.getGpsCatExists()) {
-            pointCatList.addAll(MwVolleyApi.getGpsCat());
+        if (CategoryApi.GpsCatExists.getGpsCatExists()) {
+            pointCatList.addAll(CategoryApi.getGpsCat());
             Timber.d("Categories being cached: %s", pointCatList);
         } else {
             Timber.d("No categories found, so no categories cached");

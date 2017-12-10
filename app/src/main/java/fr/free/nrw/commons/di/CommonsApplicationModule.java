@@ -4,9 +4,11 @@ import android.content.ContentProviderClient;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.v4.util.LruCache;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -14,7 +16,6 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import fr.free.nrw.commons.BuildConfig;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.caching.CacheController;
@@ -24,6 +25,8 @@ import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.NearbyPlaces;
 import fr.free.nrw.commons.upload.UploadController;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
 
 import static android.content.Context.MODE_PRIVATE;
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.CONTRIBUTION_AUTHORITY;
@@ -67,6 +70,12 @@ public class CommonsApplicationModule {
     @Named("modification")
     public ContentProviderClient provideModificationContentProviderClient(Context context) {
         return context.getContentResolver().acquireContentProviderClient(MODIFICATIONS_AUTHORITY);
+    }
+
+    @Provides
+    @Singleton
+    public OkHttpClient provideOkHttpClient() {
+        return new OkHttpClient.Builder().build();
     }
 
     @Provides
@@ -127,6 +136,14 @@ public class CommonsApplicationModule {
     }
 
     @Provides
+    @Named("commons_mediawiki_url")
+    @NonNull
+    @SuppressWarnings("ConstantConditions")
+    public  HttpUrl provideMwUrl() {
+        return HttpUrl.parse("https://commons.wikimedia.org/");
+    }
+
+    @Provides
     @Singleton
     public LocationServiceManager provideLocationServiceManager(Context context) {
         return new LocationServiceManager(context);
@@ -139,7 +156,7 @@ public class CommonsApplicationModule {
     @Provides
     @Singleton
     public Gson provideGson() {
-        return new Gson();
+        return new GsonBuilder().create();
     }
 
     @Provides

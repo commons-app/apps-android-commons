@@ -39,7 +39,7 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
-import fr.free.nrw.commons.upload.MwVolleyApi;
+import fr.free.nrw.commons.upload.CategoryApi;
 import fr.free.nrw.commons.utils.StringSortingUtils;
 import fr.free.nrw.commons.utils.ViewUtil;
 import io.reactivex.Observable;
@@ -288,8 +288,8 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
 
     private Observable<CategoryItem> gpsCategories() {
         return Observable.fromIterable(
-                MwVolleyApi.GpsCatExists.getGpsCatExists()
-                        ? MwVolleyApi.getGpsCat() : new ArrayList<>())
+                CategoryApi.GpsCatExists.getGpsCatExists()
+                        ? CategoryApi.getGpsCat() : new ArrayList<>())
                 .map(name -> new CategoryItem(name, false));
     }
 
