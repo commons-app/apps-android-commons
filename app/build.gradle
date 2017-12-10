@@ -23,11 +23,11 @@ dependencies {
     }
 
 
-    implementation "com.android.support:support-v4:${project.supportLibVersion}"
-    implementation "com.android.support:appcompat-v7:${project.supportLibVersion}"
-    implementation "com.android.support:design:${project.supportLibVersion}"
+    implementation "com.android.support:support-v4:$SUPPORT_LIB_VERSION"
+    implementation "com.android.support:appcompat-v7:$SUPPORT_LIB_VERSION"
+    implementation "com.android.support:design:$SUPPORT_LIB_VERSION"
 
-    implementation "com.android.support:cardview-v7:${project.supportLibVersion}"
+    implementation "com.android.support:cardview-v7:$SUPPORT_LIB_VERSION"
 
     implementation "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
     kapt "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
@@ -44,7 +44,7 @@ dependencies {
     implementation 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.0.0'
     implementation 'com.jakewharton.rxbinding2:rxbinding-design:2.0.0'
 
-    implementation 'com.facebook.fresco:fresco:1.3.0'
+    implementation 'com.facebook.fresco:fresco:1.5.0'
     implementation 'com.facebook.stetho:stetho:1.5.0'
 
     implementation "com.google.dagger:dagger:$DAGGER_VERSION"
@@ -62,17 +62,17 @@ dependencies {
 
     testImplementation 'com.squareup.okhttp3:mockwebserver:3.8.1'
     androidTestImplementation 'com.squareup.okhttp3:mockwebserver:3.8.1'
-    androidTestImplementation "com.android.support:support-annotations:${project.supportLibVersion}"
+    androidTestImplementation "com.android.support:support-annotations:$SUPPORT_LIB_VERSION"
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.1'
-    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
-    testImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$LEAK_CANARY"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$LEAK_CANARY"
+    testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$LEAK_CANARY"
 
-    implementation 'com.google.dagger:dagger:2.11'
-    implementation 'com.google.dagger:dagger-android-support:2.11'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
-    annotationProcessor 'com.google.dagger:dagger-android-processor:2.11'
+    implementation "com.google.dagger:dagger:$DAGGER_VERSION"
+    implementation "com.google.dagger:dagger-android-support:$DAGGER_VERSION"
+    kapt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
+    kapt "com.google.dagger:dagger-android-processor:$DAGGER_VERSION"
 }
 
 android {
