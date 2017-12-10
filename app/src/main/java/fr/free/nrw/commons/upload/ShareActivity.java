@@ -123,6 +123,8 @@ public class ShareActivity
     @Inject
     ModifierSequenceDao modifierSequenceDao;
     @Inject
+    CategoryApi apiCall;
+    @Inject
     @Named("default_preferences")
     SharedPreferences prefs;
 
@@ -699,8 +701,6 @@ public class ShareActivity
                 cacheController.setQtPoint(decLongitude, decLatitude);
             }
 
-            MwVolleyApi apiCall = new MwVolleyApi(this);
-
             List<String> displayCatList = cacheController.findCategory();
             boolean catListEmpty = displayCatList.isEmpty();
 
@@ -712,7 +712,7 @@ public class ShareActivity
             } else {
                 cacheFound = true;
                 Timber.d("Cache found, setting categoryList in MwVolleyApi to %s", displayCatList);
-                MwVolleyApi.setGpsCat(displayCatList);
+                CategoryApi.setGpsCat(displayCatList);
             }
         }else{
             Timber.d("EXIF: no coords");
