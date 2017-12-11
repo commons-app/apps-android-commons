@@ -128,89 +128,177 @@ public class Media implements Parcelable {
         return imageUrl;
     }
 
+    /**
+     * Gets the name of the file.
+     * @return file name as a string
+     */
     public String getFilename() {
         return filename;
     }
 
+    /**
+     * Sets the name of the file.
+     * @param filename the new name of the file
+     */
     public void setFilename(String filename) {
         this.filename = filename;
     }
 
+    /**
+     * Gets the file description.
+     * @return file description as a string
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Sets the file description.
+     * @param description the new description of the file
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * Gets the datalength of the file.
+     * @return file datalength as a long
+     */
     public long getDataLength() {
         return dataLength;
     }
 
+    /**
+     * Sets the datalength of the file.
+     * @param dataLength as a long
+     */
     public void setDataLength(long dataLength) {
         this.dataLength = dataLength;
     }
 
+    /**
+     * Gets the creation date of the file.
+     * @return creation date as a Date
+     */
     public Date getDateCreated() {
         return dateCreated;
     }
 
+    /**
+     * Sets the creation date of the file.
+     * @param date creation date as a Date
+     */
     public void setDateCreated(Date date) {
         this.dateCreated = date;
     }
 
+    /**
+     * Gets the upload date of the file.
+     * Can be null.
+     * @return upload date as a Date
+     */
     public @Nullable
     Date getDateUploaded() {
         return dateUploaded;
     }
 
+    /**
+     * Gets the name of the creator of the file.
+     * @return creator name as a String
+     */
     public String getCreator() {
         return creator;
     }
 
+    /**
+     * Sets the creator name of the file.
+     * @param creator creator name as a string
+     */
     public void setCreator(String creator) {
         this.creator = creator;
     }
 
+    /**
+     * Gets the width of the media.
+     * @return file width as an int
+     */
     public int getWidth() {
         return width;
     }
 
+    /**
+     * Sets the width of the media.
+     * @param width file width as an int
+     */
     public void setWidth(int width) {
         this.width = width;
     }
 
+    /**
+     * Gets the height of the media.
+     * @return file height as an int
+     */
     public int getHeight() {
         return height;
     }
 
+    /**
+     * Sets the height of the media.
+     * @param height file height as an int
+     */
     public void setHeight(int height) {
         this.height = height;
     }
 
+    /**
+     * Gets the license name of the file.
+     * @return license as a String
+     */
     public String getLicense() {
         return license;
     }
 
+    /**
+     * Sets the license name of the file.
+     * @param license license name as a String
+     */
     public void setLicense(String license) {
         this.license = license;
     }
 
+    /**
+     * Gets the coordinates of where the file was created.
+     * @return file coordinates as a LatLng
+     */
     public @Nullable
     LatLng getCoordinates() {
         return coordinates;
     }
 
+    /**
+     * Sets the coordinates of where the file was created.
+     * @param coordinates file coordinates as a LatLng
+     */
     public void setCoordinates(@Nullable LatLng coordinates) {
         this.coordinates = coordinates;
     }
 
+    /**
+     * Gets the categories the file falls under.
+     * @return file categories as an ArrayList of Strings
+     */
     @SuppressWarnings("unchecked")
     public ArrayList<String> getCategories() {
         return (ArrayList<String>) categories.clone(); // feels dirty
     }
 
+    /**
+     * Sets the categories the file falls under.
+     * </p>
+     * Does not append: i.e. will clear the current categories
+     * and then add the specified ones.
+     * @param categories file categories as a list of Strings
+     */
     public void setCategories(List<String> categories) {
         this.categories.clear();
         this.categories.addAll(categories);

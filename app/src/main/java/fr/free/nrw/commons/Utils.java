@@ -51,6 +51,12 @@ public class Utils {
         }
     }
 
+    /**
+     * Capitalizes the first character of a string.
+     *
+     * @param string
+     * @return string with capitalized first character
+     */
     public static String capitalize(String string) {
         return string.substring(0, 1).toUpperCase(Locale.getDefault()) + string.substring(1);
     }
