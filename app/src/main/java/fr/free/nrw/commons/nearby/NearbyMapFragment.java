@@ -4,7 +4,9 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,6 +63,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         super.onCreate(savedInstanceState);
         Bundle bundle = this.getArguments();
         initViews();
+        setListeners();
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Uri.class, new UriDeserializer())
                 .create();
@@ -100,7 +103,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         bottomSheetDetails = getActivity().findViewById(R.id.bottom_sheet_details);
         bottomSheetDetailsBehavior = BottomSheetBehavior.from(bottomSheetDetails);
         bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-        
+
         fabList = getActivity().findViewById(R.id.fab_list);
         fabPlus = getActivity().findViewById(R.id.fab_plus);
         fabCamera = getActivity().findViewById(R.id.fab_camera);
@@ -112,6 +115,41 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         rotate_backward = AnimationUtils.loadAnimation(getActivity(),R.anim.rotate_backward);
 
         transparentView = getActivity().findViewById(R.id.transparentView);
+    }
+
+    private void setListeners() {
+        fabPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                animateFAB(isFabOpen);
+            }
+        });
+
+        bottomSheetDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
+                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                }
+                else{
+                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                }
+            }
+        });
+
+        bottomSheetDetailsBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                prepareViewsForSheetPosition(newState);
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+                if(slideOffset>=0){
+                    transparentView.setAlpha(slideOffset);
+                }
+            }
+        });
     }
 
     private void setupMapView(Bundle savedInstanceState) {
@@ -189,8 +227,74 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
             double nodeLatitude = centerLat + radiusLat * Math.sin(theta);
             circle.add(new LatLng(nodeLatitude, nodeLongitude));
         }
-
         return circle;
+    }
+
+    public void prepareViewsForSheetPosition(int bottomSheetState) {
+        if(bottomSheetState==BottomSheetBehavior.STATE_COLLAPSED){
+            if(!fabList.isShown()) fabList.show();
+            closeFabs(isFabOpen);
+            if(!fabPlus.isShown()){
+                CoordinatorLayout.LayoutParams p = (CoordinatorLayout.LayoutParams) fabPlus.getLayoutParams();
+                p.setAnchorId(getActivity().findViewById(R.id.bottom_sheet_details).getId());
+                fabPlus.setLayoutParams(p);
+                fabPlus.show();
+            }
+            this.getView().requestFocus();
+            //moreInfo.setVisibility(View.VISIBLE);
+            //NearbyActivity.bottomSheetStatus = NearbyActivity.BottomSheetStatus.DISPLAY_DETAILS_SHEET_COLLAPSED;
+        }
+        else if(bottomSheetState==BottomSheetBehavior.STATE_EXPANDED){
+            if(fabList.isShown()) fabList.hide();
+            this.getView().requestFocus();
+            //moreInfo.setVisibility(View.GONE);
+            //NearbyActivity.bottomSheetStatus = NearbyActivity.BottomSheetStatus.DISPLAY_DETAILS_SHEET_EXPANDED;
+        }
+        else if(bottomSheetState==BottomSheetBehavior.STATE_HIDDEN){
+            closeFabs(isFabOpen);
+            //get rid of anchors
+            //Somehow this was the only way https://stackoverflow.com/questions/32732932/floatingactionbutton-visible-for-sometime-even-if-visibility-is-set-to-gone
+            CoordinatorLayout.LayoutParams p = (CoordinatorLayout.LayoutParams) fabPlus.getLayoutParams();
+            p.setAnchorId(View.NO_ID);
+            fabPlus.setLayoutParams(p);
+            fabPlus.hide();
+            //moreInfo.setVisibility(View.GONE);
+        }
+        currBottomSheetState = bottomSheetState;
+    }
+
+    private void animateFAB(boolean isFabOpen) {
+
+        if (isFabOpen) {
+
+            fabPlus.startAnimation(rotate_backward);
+            fabCamera.startAnimation(fab_close);
+            fabGallery.startAnimation(fab_close);
+            fabCamera.setClickable(false);
+            fabGallery.setClickable(false);
+
+        } else {
+
+            fabPlus.startAnimation(rotate_forward);
+            fabCamera.startAnimation(fab_open);
+            fabGallery.startAnimation(fab_open);
+            fabCamera.setClickable(true);
+            fabGallery.setClickable(true);
+
+        }
+
+        this.isFabOpen=!isFabOpen;
+    }
+
+    private void closeFabs(boolean isFabOpen){
+        if(isFabOpen){
+            fabPlus.startAnimation(rotate_backward);
+            fabCamera.startAnimation(fab_close);
+            fabGallery.startAnimation(fab_close);
+            fabCamera.setClickable(false);
+            fabGallery.setClickable(false);
+            this.isFabOpen=!isFabOpen;
+        }
     }
 
     @Override
