@@ -267,9 +267,7 @@ public class Media implements Parcelable {
     }
 
     /**
-     * Gets the coordinates of the file.
-     * </p>
-     * Presumably indicates upload location.
+     * Gets the coordinates of where the file was created.
      * @return file coordinates as a LatLng
      */
     public @Nullable
@@ -278,7 +276,7 @@ public class Media implements Parcelable {
     }
 
     /**
-     * Sets the coordinates of the file.
+     * Sets the coordinates of where the file was created.
      * @param coordinates file coordinates as a LatLng
      */
     public void setCoordinates(@Nullable LatLng coordinates) {
