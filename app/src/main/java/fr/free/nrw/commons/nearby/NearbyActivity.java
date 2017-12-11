@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.nearby;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -43,8 +42,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.location.LocationServiceManager.LOCATION_REQUEST;
 
 
 public class NearbyActivity extends NavigationBaseActivity implements LocationUpdateListener {
@@ -413,6 +410,5 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             fabList.hide();
             //NearbyActivity.bottomSheetStatus = BottomSheetStatus.DISPLAY_LIST_SHEET;
         }
-
     }
 }
