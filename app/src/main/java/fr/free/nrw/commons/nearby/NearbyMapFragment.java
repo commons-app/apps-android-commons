@@ -5,9 +5,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +43,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     private fr.free.nrw.commons.location.LatLng curLatLng;
     private View bottomSheetList;
     private View bottomSheetDetails;
+    private View moreInfo;
     private BottomSheetBehavior bottomSheetListBehavior;
     private BottomSheetBehavior bottomSheetDetailsBehavior;
     private FloatingActionButton fabList;
@@ -96,6 +99,32 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         return mapView;
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        this.getView().setFocusableInTouchMode(true);
+        this.getView().requestFocus();
+        this.getView().setOnKeyListener( new View.OnKeyListener()
+        {
+            @Override
+            public boolean onKey( View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    if(bottomSheetDetailsBehavior.getState() == BottomSheetBehavior
+                            .STATE_EXPANDED) {
+                        bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                        return true;
+                    }
+                    else if (bottomSheetDetailsBehavior.getState() == BottomSheetBehavior
+                            .STATE_COLLAPSED) {
+                        bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                        return true;
+                    }
+                }
+                return false;
+            }
+        } );
+    }
+
     private void initViews() {
         bottomSheetList = getActivity().findViewById(R.id.bottom_sheet);
         bottomSheetListBehavior = BottomSheetBehavior.from(bottomSheetList);
@@ -114,6 +143,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         rotate_backward = AnimationUtils.loadAnimation(getActivity(),R.anim.rotate_backward);
 
         transparentView = getActivity().findViewById(R.id.transparentView);
+        moreInfo = getActivity().findViewById(R.id.more_info_button);
     }
 
     private void setListeners() {
@@ -258,13 +288,13 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
                 fabPlus.show();
             }
             this.getView().requestFocus();
-            //moreInfo.setVisibility(View.VISIBLE);
+            moreInfo.setVisibility(View.VISIBLE);
             //NearbyActivity.bottomSheetStatus = NearbyActivity.BottomSheetStatus.DISPLAY_DETAILS_SHEET_COLLAPSED;
         }
         else if(bottomSheetState==BottomSheetBehavior.STATE_EXPANDED){
             if(fabList.isShown()) fabList.hide();
             this.getView().requestFocus();
-            //moreInfo.setVisibility(View.GONE);
+            moreInfo.setVisibility(View.GONE);
             //NearbyActivity.bottomSheetStatus = NearbyActivity.BottomSheetStatus.DISPLAY_DETAILS_SHEET_EXPANDED;
         }
         else if(bottomSheetState==BottomSheetBehavior.STATE_HIDDEN){
@@ -275,7 +305,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
             p.setAnchorId(View.NO_ID);
             fabPlus.setLayoutParams(p);
             fabPlus.hide();
-            //moreInfo.setVisibility(View.GONE);
+            moreInfo.setVisibility(View.GONE);
         }
         //currBottomSheetState = bottomSheetState;
     }
