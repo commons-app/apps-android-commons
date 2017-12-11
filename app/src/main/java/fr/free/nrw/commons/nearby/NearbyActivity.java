@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
@@ -55,6 +56,8 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     ProgressBar progressBar;
     @BindView(R.id.bottom_sheet)
     LinearLayout bottomSheet;
+    @BindView(R.id.fab_list)
+    FloatingActionButton fabList;
 
     @Inject
     LocationServiceManager locationManager;
@@ -77,6 +80,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         ButterKnife.bind(this);
         bundle = new Bundle();
         initBottomSheetBehaviour();
+        initFabList();
         initDrawer();
         initViewState();
     }
@@ -104,6 +108,16 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             @Override
             public void onSlide(View bottomSheet, float slideOffset) {
 
+            }
+        });
+    }
+
+    private void initFabList() {
+        fabList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //nearbyMapFragment.bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
             }
         });
     }
