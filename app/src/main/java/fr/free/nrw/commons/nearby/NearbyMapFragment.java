@@ -48,7 +48,6 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     private FloatingActionButton fabCamera;
     private FloatingActionButton fabGallery;
     private View transparentView;
-    private int currBottomSheetState;
     private boolean isFabOpen=false;
     private Animation rotate_backward;
     private Animation fab_close;
@@ -137,7 +136,8 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
             }
         });
 
-        bottomSheetDetailsBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+        bottomSheetDetailsBehavior.setBottomSheetCallback(new BottomSheetBehavior
+                .BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
                 prepareViewsForSheetPosition(newState);
@@ -148,6 +148,21 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
                 if(slideOffset>=0){
                     transparentView.setAlpha(slideOffset);
                 }
+            }
+        });
+
+        bottomSheetListBehavior.setBottomSheetCallback(new BottomSheetBehavior
+                .BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                if (newState == BottomSheetBehavior.STATE_EXPANDED){
+                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                }
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
             }
         });
     }
@@ -170,7 +185,10 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
                 if (marker instanceof NearbyMarker) {
                     NearbyMarker nearbyMarker = (NearbyMarker) marker;
                     Place place = nearbyMarker.getNearbyBaseMarker().getPlace();
-                    NearbyInfoDialog.showYourself(getActivity(), place);
+                    passInfoToSheet(place);
+                    bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                    //NearbyInfoDialog.showYourself(getActivity(), place);
                 }
                 return false;
             });
@@ -257,7 +275,11 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
             fabPlus.hide();
             //moreInfo.setVisibility(View.GONE);
         }
-        currBottomSheetState = bottomSheetState;
+        //currBottomSheetState = bottomSheetState;
+    }
+
+    private void passInfoToSheet(Place place) {
+
     }
 
     private void animateFAB(boolean isFabOpen) {
