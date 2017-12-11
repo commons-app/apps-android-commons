@@ -419,6 +419,5 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             fabList.hide();
             //NearbyActivity.bottomSheetStatus = BottomSheetStatus.DISPLAY_LIST_SHEET;
         }
-
     }
 }
