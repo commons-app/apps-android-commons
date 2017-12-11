@@ -102,7 +102,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
             @Override
             public void onStateChanged(View bottomSheet, int newState) {
-                // TODO prepareViewsForSheetPosition(newState);
+                prepareViewsForSheetPosition(newState);
             }
 
             @Override
@@ -400,5 +400,16 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     @Override
     public void onLocationChanged(LatLng latLng) {
         refreshView(false);
+    }
+
+    public void prepareViewsForSheetPosition(int bottomSheetState) {
+        if (bottomSheetState >= BottomSheetBehavior.STATE_COLLAPSED) {
+            fabList.show();
+        }
+        else if (bottomSheetState == BottomSheetBehavior.STATE_EXPANDED) {
+            fabList.hide();
+            //NearbyActivity.bottomSheetStatus = BottomSheetStatus.DISPLAY_LIST_SHEET;
+        }
+
     }
 }
