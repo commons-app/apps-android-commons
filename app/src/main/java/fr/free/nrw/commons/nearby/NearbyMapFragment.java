@@ -104,8 +104,8 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         super.onViewCreated(view, savedInstanceState);
         this.getView().setFocusableInTouchMode(true);
         this.getView().requestFocus();
-        this.getView().setOnKeyListener( new View.OnKeyListener()
-        {
+        this.getView().setOnKeyListener( new View.OnKeyListener() {
+
             @Override
             public boolean onKey( View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_BACK) {
