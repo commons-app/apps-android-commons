@@ -8,6 +8,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -16,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -50,6 +53,11 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
 
+    @BindView(R.id.bottom_sheet)
+    LinearLayout bottomSheet;
+    @BindView(R.id.fab_list)
+    FloatingActionButton fabList;
+
     @Inject
     LocationServiceManager locationManager;
     @Inject
@@ -61,6 +69,8 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     private NearbyActivityMode viewMode;
     private Disposable placesDisposable;
     private boolean lockNearbyView; //Determines if the nearby places needs to be refreshed
+    private BottomSheetBehavior bottomSheetBehavior;
+
     @BindView(R.id.swipe_container) SwipeRefreshLayout swipeLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +79,10 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         setContentView(R.layout.activity_nearby);
         ButterKnife.bind(this);
         bundle = new Bundle();
+
+        initBottomSheetBehaviour();
+        initFabList();
+
         initDrawer();
         initViewState();
         swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -86,6 +100,35 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         } else {
             viewMode = NearbyActivityMode.LIST;
         }
+    }
+
+    private void initBottomSheetBehaviour() {
+        bottomSheet.getLayoutParams().height = getWindowManager()
+                .getDefaultDisplay().getHeight() / 16 * 9;
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+        // TODO initProperBottomSheetBehavior();
+        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+
+            @Override
+            public void onStateChanged(View bottomSheet, int newState) {
+                // TODO prepareViewsForSheetPosition(newState);
+            }
+
+            @Override
+            public void onSlide(View bottomSheet, float slideOffset) {
+
+            }
+        });
+    }
+
+    private void initFabList() {
+        fabList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //nearbyMapFragment.bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            }
+        });
     }
 
     @Override

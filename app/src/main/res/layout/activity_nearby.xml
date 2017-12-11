@@ -4,16 +4,21 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <RelativeLayout
+    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/coordinator_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/toolbar"
+        android:layout_height="match_parent"
+        >
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent">
+
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,9 +40,34 @@
                 android:layout_height="match_parent" />
             </android.support.v4.widget.SwipeRefreshLayout>
         </LinearLayout>
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_list"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignBottom="@id/toolbar"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="28dp"
+                android:layout_marginBottom="-96dp"
+                android:visibility="invisible"
+                app:elevation="6dp"
+                app:pressedTranslationZ="12dp"
+                android:backgroundTint="@color/cardview_light_background"
+                android:clickable="true"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/transparentView"
+                android:layout_below="@id/toolbar"
+                android:background="#aa969696"
+                android:elevation="6dp"
+                />
     </RelativeLayout>
+        <include layout="@layout/bottom_sheet_nearby" />
+    </android.support.design.widget.CoordinatorLayout>
 
-    <android.support.design.widget.NavigationView
+
+<android.support.design.widget.NavigationView
         android:id="@+id/navigation_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
