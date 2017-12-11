@@ -84,6 +84,12 @@ public class PageTitle {
         return titleKey;
     }
 
+    /**
+     * Gets the canonicalized title for displaying (such as "File:My example.jpg").
+     * </p>
+     * Essentially equivalent to getPrefixedText
+     * @return canonical title as a String
+     */
     @Override
     public String toString() {
         return getPrefixedText();

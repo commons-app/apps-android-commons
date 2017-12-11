@@ -203,4 +203,5 @@
   <string name="login_to_your_account">Log ind på din konto</string>
   <string name="nearby_location_has_not_changed">Sted er ikke ændret.</string>
   <string name="nearby_location_not_available">Sted ikke tilgængeligt.</string>
+  <string name="location_permission_rationale_nearby">Tilladelse kræves for at vise en liste over steder i nærheden</string>
 </resources>

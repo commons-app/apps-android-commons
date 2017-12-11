@@ -8,9 +8,7 @@ import android.os.Bundle;
 
 import java.io.IOException;
 
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.mwapi.EventLog;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
@@ -27,7 +25,6 @@ class LoginTask extends AsyncTask<String, String, String> {
     private String twoFactorCode = "";
     private AccountUtil accountUtil;
     private MediaWikiApi mwApi;
-    private SharedPreferences prefs;
 
     public LoginTask(LoginActivity loginActivity, String username, String password,
                      String twoFactorCode, AccountUtil accountUtil,
@@ -38,7 +35,6 @@ class LoginTask extends AsyncTask<String, String, String> {
         this.twoFactorCode = twoFactorCode;
         this.accountUtil = accountUtil;
         this.mwApi = mwApi;
-        this.prefs = prefs;
     }
 
     @Override
@@ -70,11 +66,6 @@ class LoginTask extends AsyncTask<String, String, String> {
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
         Timber.d("Login done!");
-
-        EventLog.schema(CommonsApplication.EVENT_LOGIN_ATTEMPT, mwApi, prefs)
-                .param("username", username)
-                .param("result", result)
-                .log();
 
         if (result.equals("PASS")) {
             handlePassResult();
