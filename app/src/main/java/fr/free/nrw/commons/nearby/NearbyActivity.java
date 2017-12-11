@@ -400,7 +400,9 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         Fragment fragment = new NearbyListFragment();
         fragment.setArguments(bundle);
-        fragmentTransaction.replace(R.id.container, fragment, fragment.getClass().getSimpleName());
+        fragmentTransaction.replace(R.id.container_sheet, fragment);
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        //TODO replace this sheet for details map
         fragmentTransaction.commitAllowingStateLoss();
     }
 
