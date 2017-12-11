@@ -2,9 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:foreground="?selectableItemBackground"
-    android:minHeight="72dp"
-    >
+    android:focusableInTouchMode="true"
+    android:minHeight="72dp">
 
     <ImageView
         android:id="@+id/icon"
@@ -30,6 +31,17 @@
         android:layout_marginTop="16dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         tools:text="@string/placeholder_place_distance"
+        />
+
+    <ImageView
+        android:id="@+id/toggleArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="32dp"
+        app:srcCompat="@drawable/ic_keyboard_arrow_right_black_24dp"
         />
 
     <TextView
@@ -65,4 +77,96 @@
         tools:text="@string/placeholder_place_description"
         />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonLayout"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        android:layout_below="@+id/icon"
+        >
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="72dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:textSize="16sp"
+            android:text="Description Description Description
+Description Description Description
+Description Description Description
+"       />
+
+        <LinearLayout
+            android:id="@+id/directionsButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="16dp"
+            android:clickable="true"
+            android:orientation="vertical"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                app:srcCompat="@drawable/ic_directions_black_48dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:layout_gravity="center_horizontal"
+                android:text="DIRECTIONS"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/wikidataButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="16dp"
+            android:clickable="true"
+            android:orientation="vertical"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                app:srcCompat="@drawable/ic_wikidata_logo_48dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:layout_gravity="center_horizontal"
+                android:text="WIKI DATA"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/wikipediaButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="16dp"
+            android:clickable="true"
+            android:orientation="vertical"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                app:srcCompat="@drawable/ic_wikipedia_logo_48dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:layout_gravity="center_horizontal"
+                android:text="WIKIPEDIA"
+
+                />
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>
