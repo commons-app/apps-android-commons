@@ -48,6 +48,10 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     private View transparentView;
     private int currBottomSheetState;
     private boolean isFabOpen=false;
+    private Animation rotate_backward;
+    private Animation fab_close;
+    private Animation fab_open;
+    private Animation rotate_forward;
 
     public NearbyMapFragment() {
     }
@@ -96,11 +100,16 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         bottomSheetDetails = getActivity().findViewById(R.id.bottom_sheet_details);
         bottomSheetDetailsBehavior = BottomSheetBehavior.from(bottomSheetDetails);
         bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-        //moreInfo = getActivity().findViewById(R.id.more_info_bar);
+        
         fabList = getActivity().findViewById(R.id.fab_list);
         fabPlus = getActivity().findViewById(R.id.fab_plus);
         fabCamera = getActivity().findViewById(R.id.fab_camera);
         fabGallery = getActivity().findViewById(R.id.fab_galery);
+
+        fab_open = AnimationUtils.loadAnimation(getActivity(), R.anim.fab_open);
+        fab_close = AnimationUtils.loadAnimation(getActivity(),R.anim.fab_close);
+        rotate_forward = AnimationUtils.loadAnimation(getActivity(),R.anim.rotate_forward);
+        rotate_backward = AnimationUtils.loadAnimation(getActivity(),R.anim.rotate_backward);
 
         transparentView = getActivity().findViewById(R.id.transparentView);
     }
