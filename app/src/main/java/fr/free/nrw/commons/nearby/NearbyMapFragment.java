@@ -4,9 +4,13 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -33,6 +37,11 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     private MapView mapView;
     private List<NearbyBaseMarker> baseMarkerOptions;
     private fr.free.nrw.commons.location.LatLng curLatLng;
+    private View bottomSheetList;
+    private View bottomSheetDetails;
+    private BottomSheetBehavior bottomSheetListBehavior;
+    private BottomSheetBehavior bottomSheetDetailsBehavior;
+
 
     public NearbyMapFragment() {
     }
@@ -41,6 +50,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle bundle = this.getArguments();
+        initViews();
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Uri.class, new UriDeserializer())
                 .create();
@@ -72,6 +82,16 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         setHasOptionsMenu(false);
 
         return mapView;
+    }
+
+    private void initViews() {
+        bottomSheetList = getActivity().findViewById(R.id.bottom_sheet);
+        bottomSheetListBehavior = BottomSheetBehavior.from(bottomSheetList);
+        bottomSheetDetails = getActivity().findViewById(R.id.bottom_sheet_details);
+        bottomSheetDetailsBehavior = BottomSheetBehavior.from(bottomSheetDetails);
+        bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        //moreInfo = getActivity().findViewById(R.id.more_info_bar);
+
     }
 
     private void setupMapView(Bundle savedInstanceState) {
