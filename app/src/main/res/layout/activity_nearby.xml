@@ -66,6 +66,57 @@
         <include layout="@layout/bottom_sheet_nearby" />
         <include layout="@layout/bottom_sheet_details" android:id="@+id/bottom_sheet_details" />
 
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_plus"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_margin="16dp"
+            android:visibility="invisible"
+            android:clickable="true"
+            app:elevation="6dp"
+            app:pressedTranslationZ="12dp"
+            app:backgroundTint="@color/primaryColor"
+            app:layout_anchor="@id/bottom_sheet_details"
+            app:layout_anchorGravity="top|right|end"/>
+        <View
+            android:id = "@+id/empty_view1"
+            android:layout_height = "206dip"
+            android:layout_width = "56dp"
+            android:visibility="invisible"
+            app:layout_anchor="@id/fab_plus"
+            app:layout_anchorGravity="center_horizontal"
+            />
+        <View
+            android:id = "@+id/empty_view2"
+            android:layout_height = "86dip"
+            android:layout_width = "56dp"
+            android:visibility="invisible"
+            app:layout_anchor="@id/fab_plus"
+            app:layout_anchorGravity="center_horizontal"
+            />
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_camera"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:visibility="invisible"
+            app:backgroundTint="@color/cardview_light_background"
+            app:elevation="6dp"
+            app:pressedTranslationZ="12dp"
+            app:layout_anchor="@id/empty_view1"
+            app:layout_anchorGravity="center_horizontal"/>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_galery"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="100dp"
+            android:visibility="invisible"
+            app:backgroundTint="@color/cardview_light_background"
+            app:elevation="6dp"
+            app:pressedTranslationZ="12dp"
+            app:layout_anchor="@id/empty_view2"
+            app:layout_anchorGravity="center_horizontal"
+            />
+
     </android.support.design.widget.CoordinatorLayout>
 
 

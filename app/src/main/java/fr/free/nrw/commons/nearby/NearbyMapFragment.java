@@ -41,7 +41,13 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     private View bottomSheetDetails;
     private BottomSheetBehavior bottomSheetListBehavior;
     private BottomSheetBehavior bottomSheetDetailsBehavior;
-
+    private FloatingActionButton fabList;
+    private FloatingActionButton fabPlus;
+    private FloatingActionButton fabCamera;
+    private FloatingActionButton fabGallery;
+    private View transparentView;
+    private int currBottomSheetState;
+    private boolean isFabOpen=false;
 
     public NearbyMapFragment() {
     }
@@ -91,7 +97,12 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         bottomSheetDetailsBehavior = BottomSheetBehavior.from(bottomSheetDetails);
         bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         //moreInfo = getActivity().findViewById(R.id.more_info_bar);
+        fabList = getActivity().findViewById(R.id.fab_list);
+        fabPlus = getActivity().findViewById(R.id.fab_plus);
+        fabCamera = getActivity().findViewById(R.id.fab_camera);
+        fabGallery = getActivity().findViewById(R.id.fab_galery);
 
+        transparentView = getActivity().findViewById(R.id.transparentView);
     }
 
     private void setupMapView(Bundle savedInstanceState) {
