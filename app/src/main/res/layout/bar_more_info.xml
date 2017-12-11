@@ -10,8 +10,9 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/show_list_button"
+        android:id="@+id/more_info_button"
         android:text="More Info"
+        android:layout_marginLeft="16dp"
         android:background="@color/default_circle_indicator_stroke_color"
         />
 </LinearLayout>
