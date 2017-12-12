@@ -57,6 +57,8 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     LinearLayout bottomSheet;
     @BindView(R.id.fab_list)
     FloatingActionButton fabList;
+    @BindView(R.id.transparentView)
+    View transparentView;
 
     @Inject
     LocationServiceManager locationManager;
@@ -103,6 +105,8 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     }
 
     private void initBottomSheetBehaviour() {
+        transparentView.setAlpha(0);
+
         bottomSheet.getLayoutParams().height = getWindowManager()
                 .getDefaultDisplay().getHeight() / 16 * 9;
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
@@ -330,7 +334,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
         progressBar.setVisibility(View.VISIBLE);
         placesDisposable = Observable.fromCallable(() -> nearbyController
-                .loadAttractionsFromLocation(curLatLang, this))
+                .loadAttractionsFromLocation(curLatLang))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::populatePlaces);
@@ -355,13 +359,19 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
         lockNearbyView(true);
         // Begin the transaction
-        if (viewMode.isMap()) {
+        // Begin the transaction
+        /*if (viewMode.isMap()) {
             setMapFragment();
         } else {
             setListFragment();
         }
         swipeLayout.setRefreshing(false);
+        }*/
+        setMapFragment();
+        setListFragment();
+
         hideProgressBar();
+        swipeLayout.setRefreshing(false);
     }
 
     private void lockNearbyView(boolean lock) {
