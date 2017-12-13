@@ -9,14 +9,13 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.view.GravityCompat;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -53,6 +52,11 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     private FloatingActionButton fabCamera;
     private FloatingActionButton fabGallery;
     private View transparentView;
+    private TextView description;
+    private TextView title;
+    private TextView distance;
+
+
     private boolean isFabOpen=false;
     private Animation rotate_backward;
     private Animation fab_close;
@@ -146,6 +150,10 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
 
         transparentView = getActivity().findViewById(R.id.transparentView);
         moreInfo = getActivity().findViewById(R.id.more_info_button);
+
+        description = getActivity().findViewById(R.id.description);
+        title = getActivity().findViewById(R.id.title);
+        distance = getActivity().findViewById(R.id.category);
     }
 
     private void setListeners() {
@@ -177,8 +185,9 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
 
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-                if(slideOffset>=0){
+                if (slideOffset >= 0) {
                     transparentView.setAlpha(slideOffset);
+
                 }
             }
         });
@@ -321,7 +330,9 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     }
 
     private void passInfoToSheet(Place place) {
-
+        description.setText(place.getDescription().toString());
+        title.setText(place.name.toString());
+        distance.setText(place.distance.toString());
     }
 
     private void animateFAB(boolean isFabOpen) {
