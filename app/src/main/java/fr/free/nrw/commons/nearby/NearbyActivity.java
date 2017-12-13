@@ -307,6 +307,8 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         checkGps();
     }
 
+
+
     /**
      * This method should be the single point to load/refresh nearby places
      *
