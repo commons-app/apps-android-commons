@@ -92,6 +92,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         Mapbox.getInstance(getActivity(),
                 getString(R.string.mapbox_commons_app_token));
         MapboxTelemetry.getInstance().setTelemetryEnabled(false);
+        setRetainInstance(true);
     }
 
     @Override
