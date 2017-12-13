@@ -187,7 +187,11 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
                 if (slideOffset >= 0) {
                     transparentView.setAlpha(slideOffset);
-
+                    if (slideOffset == 1) {
+                        transparentView.setClickable(true);
+                    } else if (slideOffset == 0){
+                        transparentView.setClickable(false);
+                    }
                 }
             }
         });
