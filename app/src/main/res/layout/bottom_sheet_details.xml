@@ -94,7 +94,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                app:srcCompat="@drawable/ic_wikidata_logo_48dp" />
+                app:srcCompat="@drawable/ic_wikidata_logo_24dp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -117,7 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                app:srcCompat="@drawable/ic_wikipedia_logo_48dp"
+                app:srcCompat="@drawable/ic_wikipedia_logo_24dp"
                 />
             <TextView
                 android:layout_width="wrap_content"
