@@ -53,6 +53,8 @@
                 app:pressedTranslationZ="12dp"
                 android:backgroundTint="@color/cardview_light_background"
                 android:clickable="true"
+                app:srcCompat="@drawable/ic_list_white_24dp"
+                android:scaleType="center"
                 />
             <View
                 android:layout_width="match_parent"
