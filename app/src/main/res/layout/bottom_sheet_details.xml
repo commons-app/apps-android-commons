@@ -148,9 +148,10 @@ Description Description Description
 Description Description Description
 " />
 
-    <FrameLayout
-        android:id="@+id/container_sheet"
+    <View xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></FrameLayout>
+        android:layout_height="48dp"
+        >
+    </View>
 
 </LinearLayout>
