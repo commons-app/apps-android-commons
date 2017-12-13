@@ -76,6 +76,8 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     private boolean lockNearbyView; //Determines if the nearby places needs to be refreshed
     private BottomSheetBehavior bottomSheetBehavior; // Behavior for list bottom sheet
     private BottomSheetBehavior bottomSheetBehaviorForDetails; // Behavior for details bottom sheet
+    private NearbyMapFragment nearbyMapFragment;
+    private static final String TAG_RETAINED_FRAGMENT = "RetainedFragment";
 
     @BindView(R.id.swipe_container) SwipeRefreshLayout swipeLayout;
     @Override
@@ -84,6 +86,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         setContentView(R.layout.activity_nearby);
         ButterKnife.bind(this);
+        resumeFragment();
         bundle = new Bundle();
 
         initBottomSheetBehaviour();
@@ -98,6 +101,21 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                 refreshView(true);
             }
         });
+    }
+
+    private void resumeFragment() {
+        // find the retained fragment on activity restarts
+        android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+        nearbyMapFragment = (NearbyMapFragment) fm.findFragmentByTag(TAG_RETAINED_FRAGMENT);
+
+        // create the fragment and data the first time
+        if (nearbyMapFragment == null) {
+            // add the fragment
+            nearbyMapFragment = new NearbyMapFragment();
+            fm.beginTransaction().add(nearbyMapFragment, TAG_RETAINED_FRAGMENT).commit();
+            // load data from a data source or perform any calculation
+        }
+
     }
 
     private void initViewState() {
@@ -314,6 +332,19 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         super.onResume();
         lockNearbyView = false;
         checkGps();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // this means that this activity will not be recreated now, user is leaving it
+        // or the activity is otherwise finishing
+        if(isFinishing()) {
+            android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+            // we will not need this fragment anymore, this may also be a good place to signal
+            // to the retained fragment object to perform its own cleanup.
+            fm.beginTransaction().remove(nearbyMapFragment).commit();
+        }
     }
 
 
