@@ -81,7 +81,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/buttonLayout"
         android:orientation="vertical"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_below="@+id/icon"
         >
 
@@ -93,84 +93,8 @@
             android:layout_marginRight="16dp"
             android:layout_marginTop="16dp"
             android:textSize="16sp"
-            android:text="Description Description Description
-Description Description Description
-Description Description Description
-"       />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+      />
 
-            <LinearLayout
-                android:id="@+id/directionsButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="16dp"
-                android:clickable="true"
-                android:orientation="vertical"
-                >
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    app:srcCompat="@drawable/ic_directions_black_48dp" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="8dp"
-                    android:layout_gravity="center_horizontal"
-                    android:text="DIRECTIONS"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/wikidataButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="16dp"
-                android:clickable="true"
-                android:orientation="vertical"
-                >
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    app:srcCompat="@drawable/ic_wikidata_logo_48dp" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="8dp"
-                    android:layout_gravity="center_horizontal"
-                    android:text="WIKI DATA"
-                    />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/wikipediaButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="16dp"
-                android:clickable="true"
-                android:orientation="vertical"
-                >
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    app:srcCompat="@drawable/ic_wikipedia_logo_48dp"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="8dp"
-                    android:layout_gravity="center_horizontal"
-                    android:text="WIKIPEDIA"
-
-                    />
-            </LinearLayout>
-        </LinearLayout>
+        <include layout="@layout/nearby_row_button" />
     </LinearLayout>
 </RelativeLayout>
