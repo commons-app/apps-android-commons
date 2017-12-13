@@ -90,7 +90,7 @@ class PlaceRenderer extends Renderer<Place> {
 
     private void closeLayout(LinearLayout buttonLayout){
         //openedItems.remove(buttonLayout);
-        buttonLayout.startAnimation(animationUp);
+        /*buttonLayout.startAnimation(animationUp);
         CountDownTimer countDownTimerStatic = new CountDownTimer(COUNTDOWN_RUNNING_TIME, 16) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -102,14 +102,16 @@ class PlaceRenderer extends Renderer<Place> {
                 //buttonLayout.setVisibility(View.GONE);
             }
         };
-        countDownTimerStatic.start();
+        countDownTimerStatic.start();*/
+        buttonLayout.setVisibility(View.GONE);
     }
 
     private void openLayout(LinearLayout buttonLayout){
-        buttonLayout.setVisibility(View.VISIBLE);
+        /*buttonLayout.setVisibility(View.VISIBLE);
         ViewCompat.setElevation( view, 10);
         buttonLayout.startAnimation(animationDown);
-        //openedItems.add(buttonLayout);
+        //openedItems.add(buttonLayout);*/
+        buttonLayout.setVisibility(View.VISIBLE);
     }
 
     @Override

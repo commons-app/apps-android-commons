@@ -9,6 +9,8 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.view.GravityCompat;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -279,36 +281,44 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     }
 
     public void prepareViewsForSheetPosition(int bottomSheetState) {
-        if(bottomSheetState==BottomSheetBehavior.STATE_COLLAPSED){
-            if(!fabList.isShown()) fabList.show();
+        if (bottomSheetState == BottomSheetBehavior.STATE_COLLAPSED) {
+            if (!fabList.isShown()) fabList.show();
             closeFabs(isFabOpen);
-            if(!fabPlus.isShown()){
-                CoordinatorLayout.LayoutParams p = (CoordinatorLayout.LayoutParams) fabPlus.getLayoutParams();
-                p.setAnchorId(getActivity().findViewById(R.id.bottom_sheet_details).getId());
-                fabPlus.setLayoutParams(p);
-                fabPlus.show();
-            }
+            if (!fabPlus.isShown()) showFAB();
             this.getView().requestFocus();
             moreInfo.setVisibility(View.VISIBLE);
             //NearbyActivity.bottomSheetStatus = NearbyActivity.BottomSheetStatus.DISPLAY_DETAILS_SHEET_COLLAPSED;
         }
-        else if(bottomSheetState==BottomSheetBehavior.STATE_EXPANDED){
-            if(fabList.isShown()) fabList.hide();
+        else if (bottomSheetState == BottomSheetBehavior.STATE_EXPANDED) {
+            if (fabList.isShown()) fabList.hide();
             this.getView().requestFocus();
-            moreInfo.setVisibility(View.GONE);
+            moreInfo.setVisibility(View.VISIBLE);
             //NearbyActivity.bottomSheetStatus = NearbyActivity.BottomSheetStatus.DISPLAY_DETAILS_SHEET_EXPANDED;
         }
-        else if(bottomSheetState==BottomSheetBehavior.STATE_HIDDEN){
+        else if (bottomSheetState == BottomSheetBehavior.STATE_HIDDEN) {
             closeFabs(isFabOpen);
-            //get rid of anchors
-            //Somehow this was the only way https://stackoverflow.com/questions/32732932/floatingactionbutton-visible-for-sometime-even-if-visibility-is-set-to-gone
-            CoordinatorLayout.LayoutParams p = (CoordinatorLayout.LayoutParams) fabPlus.getLayoutParams();
-            p.setAnchorId(View.NO_ID);
-            fabPlus.setLayoutParams(p);
-            fabPlus.hide();
+            hideFAB();
             moreInfo.setVisibility(View.GONE);
+            this.getView().clearFocus();
         }
         //currBottomSheetState = bottomSheetState;
+    }
+
+    private void hideFAB() {
+        //get rid of anchors
+        //Somehow this was the only way https://stackoverflow.com/questions/32732932/floatingactionbutton-visible-for-sometime-even-if-visibility-is-set-to-gone
+        CoordinatorLayout.LayoutParams p = (CoordinatorLayout.LayoutParams) fabPlus
+                .getLayoutParams();
+        p.setAnchorId(View.NO_ID);
+        fabPlus.setLayoutParams(p);
+        fabPlus.hide();
+    }
+
+    private void showFAB() {
+        CoordinatorLayout.LayoutParams p = (CoordinatorLayout.LayoutParams) fabPlus.getLayoutParams();
+        p.setAnchorId(getActivity().findViewById(R.id.bottom_sheet_details).getId());
+        fabPlus.setLayoutParams(p);
+        fabPlus.show();
     }
 
     private void passInfoToSheet(Place place) {

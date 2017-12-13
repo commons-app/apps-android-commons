@@ -2,17 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="48dp"
-    android:id="@+id/more_info_bar"
+    android:id="@+id/more_info_button"
     android:visibility="gone"
     android:layout_gravity="bottom"
     android:background="@color/default_circle_indicator_stroke_color"
     >
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/more_info_button"
-        android:text="More Info"
-        android:layout_marginLeft="16dp"
-        android:background="@color/default_circle_indicator_stroke_color"
-        />
+
 </LinearLayout>
