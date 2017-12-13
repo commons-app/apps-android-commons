@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -55,6 +56,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     private TextView description;
     private TextView title;
     private TextView distance;
+    private ImageView icon;
 
 
     private boolean isFabOpen=false;
@@ -154,6 +156,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         description = getActivity().findViewById(R.id.description);
         title = getActivity().findViewById(R.id.title);
         distance = getActivity().findViewById(R.id.category);
+        icon = getActivity().findViewById(R.id.icon);
     }
 
     private void setListeners() {
@@ -335,7 +338,9 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     }
 
     private void passInfoToSheet(Place place) {
-        description.setText(place.getDescription().toString());
+        //TODO set correct icon here
+        icon.setImageResource(place.getDescription().getIcon());
+        description.setText(place.getDescription().getText());
         title.setText(place.name.toString());
         distance.setText(place.distance.toString());
     }
