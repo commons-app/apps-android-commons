@@ -93,13 +93,6 @@ public class CategorizationFragment extends DaggerFragment {
 
         categoriesList.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        RxView.clicks(categoriesSkip)
-                .takeUntil(RxView.detaches(categoriesSkip))
-                .subscribe(o -> {
-                    getActivity().onBackPressed();
-                    getActivity().finish();
-                });
-
         ArrayList<CategoryItem> items = new ArrayList<>();
         categoriesCache = new HashMap<>();
         if (savedInstanceState != null) {

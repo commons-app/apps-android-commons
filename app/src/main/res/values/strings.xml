@@ -69,10 +69,9 @@
     <item quantity="other">%d uploads</item>
   </plurals>
   <string name="categories_not_found">No categories matching %1$s found</string>
-  <string name="categories_skip_explanation">Add categories to make your images more discoverable on Wikimedia Commons.
-
-Start typing to add categories.
-Tap this message (or hit back) to skip this step.</string>
+  -  <string name="categories_skip_explanation">Add categories to make your images more discoverable on Wikimedia Commons.
+  -
+  -Start typing to add categories.</string>
   <string name="categories_activity_title">Categories</string>
   <string name="title_activity_settings">Settings</string>
   <string name="title_activity_signup">Sign Up</string>
