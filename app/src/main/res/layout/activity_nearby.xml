@@ -78,7 +78,8 @@
             app:pressedTranslationZ="12dp"
             app:backgroundTint="@color/primaryColor"
             app:layout_anchor="@id/bottom_sheet_details"
-            app:layout_anchorGravity="top|right|end"/>
+            app:layout_anchorGravity="top|right|end"
+            app:srcCompat="@drawable/ic_add_white_24dp"/>
         <View
             android:id = "@+id/empty_view1"
             android:layout_height = "206dip"
@@ -97,18 +98,19 @@
             />
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_camera"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:visibility="invisible"
             app:backgroundTint="@color/cardview_light_background"
             app:elevation="6dp"
             app:pressedTranslationZ="12dp"
             app:layout_anchor="@id/empty_view1"
-            app:layout_anchorGravity="center_horizontal"/>
+            app:layout_anchorGravity="center_horizontal"
+            app:srcCompat="@drawable/ic_photo_camera_white_24dp"/>
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_galery"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginBottom="100dp"
             android:visibility="invisible"
             app:backgroundTint="@color/cardview_light_background"
@@ -116,7 +118,7 @@
             app:pressedTranslationZ="12dp"
             app:layout_anchor="@id/empty_view2"
             app:layout_anchorGravity="center_horizontal"
-            />
+            app:srcCompat="@drawable/ic_photo_white_24dp"/>
 
     </android.support.design.widget.CoordinatorLayout>
 
