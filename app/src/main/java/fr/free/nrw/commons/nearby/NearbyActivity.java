@@ -14,6 +14,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -55,6 +56,8 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     @BindView(R.id.bottom_sheet)
     LinearLayout bottomSheet;
+    @BindView(R.id.bottom_sheet_details)
+    LinearLayout bottomSheetDetails;
     @BindView(R.id.fab_list)
     FloatingActionButton fabList;
     @BindView(R.id.transparentView)
@@ -71,7 +74,8 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     private NearbyActivityMode viewMode;
     private Disposable placesDisposable;
     private boolean lockNearbyView; //Determines if the nearby places needs to be refreshed
-    private BottomSheetBehavior bottomSheetBehavior;
+    private BottomSheetBehavior bottomSheetBehavior; // Behavior for list bottom sheet
+    private BottomSheetBehavior bottomSheetBehaviorForDetails; // Behavior for details bottom sheet
 
     @BindView(R.id.swipe_container) SwipeRefreshLayout swipeLayout;
     @Override
@@ -115,6 +119,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
             @Override
             public void onStateChanged(View bottomSheet, int newState) {
+                Log.d("Deneme","deneme"+newState);
                 prepareViewsForSheetPosition(newState);
             }
 
@@ -123,13 +128,16 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
             }
         });
+
+        bottomSheetBehaviorForDetails = BottomSheetBehavior.from(bottomSheetDetails);
+        bottomSheetBehaviorForDetails.setState(BottomSheetBehavior.STATE_HIDDEN);
     }
 
     private void initFabList() {
         fabList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //nearbyMapFragment.bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                bottomSheetBehaviorForDetails.setState(BottomSheetBehavior.STATE_HIDDEN);
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
             }
         });
