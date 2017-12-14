@@ -20,13 +20,13 @@ Using the app is easy:
 - Press Save
 
 The following guidelines will help you to understand what photos the community is looking for: 
-? Photos that document the world around you - famous people, political events, festivals, monuments, landscapes, natural objects and animals, food, architecture, etc
-? Photos of notable objects that you find in the Nearby List in the app
-? Copyrighted pictures
-? Photos of you or your friends. But if you are documenting an event it doesn't matter if they are in the picture
-? Photos of poor quality. Make sure the things you are trying to document are visible on the picture
+✓ Photos that document the world around you - famous people, political events, festivals, monuments, landscapes, natural objects and animals, food, architecture, etc
+✓ Photos of notable objects that you find in the Nearby List in the app
+✖ Copyrighted pictures
+✖ Photos of you or your friends. But if you are documenting an event it doesn't matter if they are in the picture
+✖ Photos of poor quality. Make sure the things you are trying to document are visible on the picture
 
-- Website: https://commons-app.github.io/
+- Website: https://commons-app.github.io
 - Bug reports: https://github.com/commons-app/apps-android-commons/issues
 - Discussion: https://commons.wikimedia.org/wiki/Commons_talk:Mobile_app & https://groups.google.com/forum/#!forum/commons-app-android
 - Source code: https://github.com/commons-app/apps-android-commons
