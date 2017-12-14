@@ -68,7 +68,7 @@
     <item quantity="other">%d postavljanja</item>
   </plurals>
   <string name="categories_not_found">Nema kategorija koje odgovoraju %1$s</string>
-  <string name="categories_skip_explanation">Dodajte kategorije da biste korisnicima olakšali pronalaženje slika na Wikimedia Commonsu.\n\nPočnite pisati da biste dodali kategoriju.\nDodirnite ovu poruku (ili pritisnite dugme \"nazad\") da biste preskočili ovaj korak.</string>
+  <string name="categories_skip_explanation" fuzzy="true">Dodajte kategorije da biste korisnicima olakšali pronalaženje slika na Wikimedia Commonsu.\n\nPočnite pisati da biste dodali kategoriju.\nDodirnite ovu poruku (ili pritisnite dugme \"nazad\") da biste preskočili ovaj korak.</string>
   <string name="categories_activity_title">Kategorije</string>
   <string name="title_activity_settings">Postavke</string>
   <string name="title_activity_signup">Registracija</string>

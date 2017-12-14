@@ -72,7 +72,7 @@
     <item quantity="other">%d загрузок</item>
   </plurals>
   <string name="categories_not_found">Категории, соответствующие %1$s, не найдены</string>
-  <string name="categories_skip_explanation">Добавьте категории, чтобы ваши изображения можно было легко найти на Викискладе.\n\nНачните вводить название для добавления категорий.\nНажмите на это сообщение (или за ним), чтобы пропустить этот шаг.</string>
+  <string name="categories_skip_explanation" fuzzy="true">Добавьте категории, чтобы ваши изображения можно было легко найти на Викискладе.\n\nНачните вводить название для добавления категорий.\nНажмите на это сообщение (или за ним), чтобы пропустить этот шаг.</string>
   <string name="categories_activity_title">Категории</string>
   <string name="title_activity_settings">Настройки</string>
   <string name="title_activity_signup">Зарегистрироваться</string>

@@ -66,7 +66,7 @@
     <item quantity="other">%d چاڙھَ</item>
   </plurals>
   <string name="categories_not_found">%1$s سان ملندڙ ڪوبہ زمرو نہ لڌو</string>
-  <string name="categories_skip_explanation">پنھنجي عڪسن ۾ زمرا وجھو تہ جيئن وڪيميڊيا العام تي وڌيڪ ڳولا لائق ٿي سگھن.\n\nزمرا وجھڻ لاءِ لکڻ شروع ڪريو.\nھن پيغام تي ٺونگو ھڻو (يا پوئتي ڌڪ ھڻو) ھي قدم ڇڏڻ لاءِ.</string>
+  <string name="categories_skip_explanation" fuzzy="true">پنھنجي عڪسن ۾ زمرا وجھو تہ جيئن وڪيميڊيا العام تي وڌيڪ ڳولا لائق ٿي سگھن.\n\nزمرا وجھڻ لاءِ لکڻ شروع ڪريو.\nھن پيغام تي ٺونگو ھڻو (يا پوئتي ڌڪ ھڻو) ھي قدم ڇڏڻ لاءِ.</string>
   <string name="categories_activity_title">زمرا</string>
   <string name="title_activity_settings">ترتيبون</string>
   <string name="title_activity_signup">کاتو کوليو</string>

@@ -58,7 +58,7 @@
     <item quantity="other">การอัปโหลด %d รายการ</item>
   </plurals>
   <string name="categories_not_found">ไม่พบหมวดหมู่ที่ตรงกับ %$1s</string>
-  <string name="categories_skip_explanation">เพิ่มหมวดหมู่เพื่อทำให้รูปภาพของคุณค้นพบได้ง่ายขึ้นบน Wikimedia Commons\n\nเริ่มพิมพ์เพื่อเพิ่มหมวดหมู่\nแตะข้อความนี้ (หรือกดปุ่มย้อนกลับ) เพื่อข้ามขั้นตอนนี้</string>
+  <string name="categories_skip_explanation" fuzzy="true">เพิ่มหมวดหมู่เพื่อทำให้รูปภาพของคุณค้นพบได้ง่ายขึ้นบน Wikimedia Commons\n\nเริ่มพิมพ์เพื่อเพิ่มหมวดหมู่\nแตะข้อความนี้ (หรือกดปุ่มย้อนกลับ) เพื่อข้ามขั้นตอนนี้</string>
   <string name="categories_activity_title">หมวดหมู่</string>
   <string name="title_activity_settings">การตั้งค่า</string>
   <string name="title_activity_signup">สมัครใช้งาน</string>

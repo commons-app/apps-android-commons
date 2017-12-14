@@ -76,7 +76,7 @@
     <item quantity="other">%d завантажень</item>
   </plurals>
   <string name="categories_not_found">Категорій, відповідних %1$s, не знайдено</string>
-  <string name="categories_skip_explanation">Додайте категорії, щоб Ваші зображення було легше знайти у Вікісховищі. \n\nПочніть ввід, щоб додати категорії.\nНатисніть на це повідомлення (або поверніться назад), щоб пропустити цей крок.</string>
+  <string name="categories_skip_explanation" fuzzy="true">Додайте категорії, щоб Ваші зображення було легше знайти у Вікісховищі. \n\nПочніть ввід, щоб додати категорії.\nНатисніть на це повідомлення (або поверніться назад), щоб пропустити цей крок.</string>
   <string name="categories_activity_title">Категорії</string>
   <string name="title_activity_settings">Налаштування</string>
   <string name="title_activity_signup">Зареєструватися</string>

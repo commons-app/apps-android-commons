@@ -68,7 +68,7 @@
     <item quantity="other">%d subidas</item>
   </plurals>
   <string name="categories_not_found">No se encontraron categorías que coincidieran con %1$s</string>
-  <string name="categories_skip_explanation">Añade categorías para hacer que tus imágenes sean más fáciles de encontrar en Wikimedia Commons.\n\nComienza a escribir para añadir categorías.\nToca este mensaje (o pulsa Anterior) para omitir este paso.</string>
+  <string name="categories_skip_explanation">Añade categorías para hacer que tus imágenes sean más fáciles de encontrar en Wikimedia Commons.\n -\n -Comienza a escribir para añadir categorías.</string>
   <string name="categories_activity_title">Categorías</string>
   <string name="title_activity_settings">Ajustes</string>
   <string name="title_activity_signup">Regístrate</string>

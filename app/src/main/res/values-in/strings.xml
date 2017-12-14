@@ -63,7 +63,7 @@
     <item quantity="other">%d unggahan</item>
   </plurals>
   <string name="categories_not_found">Tidak ada kategori yang cocok dengan %1$s</string>
-  <string name="categories_skip_explanation">Tambahkan kategori agar foto Anda lebih mudah ditemukan di Wikimedia Commons.\n\nMulai mengetik untuk menambahkan kategori.\nTekan pesan ini (atau tekan kembali) untuk melewatkan langkah ini.</string>
+  <string name="categories_skip_explanation" fuzzy="true">Tambahkan kategori agar foto Anda lebih mudah ditemukan di Wikimedia Commons.\n\nMulai mengetik untuk menambahkan kategori.\nTekan pesan ini (atau tekan kembali) untuk melewatkan langkah ini.</string>
   <string name="categories_activity_title">Kategori</string>
   <string name="title_activity_settings">Pengaturan</string>
   <string name="title_activity_signup">Mendaftar</string>

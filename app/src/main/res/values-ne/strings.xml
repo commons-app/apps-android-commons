@@ -43,7 +43,7 @@
   <string name="categories_search_text_hint">खोज श्रेणीहरू</string>
   <string name="menu_save_categories">संग्रह गर्ने</string>
   <string name="categories_not_found">मिल्दो वर्ग %1$s फेला परेन</string>
-  <string name="categories_skip_explanation">विकिमिडिया कमन्समा आफ्नो तस्वीरहरू थप भेट्टाउने बनाउन श्रेणीहरू थप्नुहोस।\n\nश्रेणीहरू थप्नको लागि टाइप गर्न सुरु गर्नुहोस्।\nयो चरण छोड्न यो सन्देशमा ट्याप गर्नुहोस् (वा पछाडि जानेमा थिच्नुहोस्)।</string>
+  <string name="categories_skip_explanation" fuzzy="true">विकिमिडिया कमन्समा आफ्नो तस्वीरहरू थप भेट्टाउने बनाउन श्रेणीहरू थप्नुहोस।\n\nश्रेणीहरू थप्नको लागि टाइप गर्न सुरु गर्नुहोस्।\nयो चरण छोड्न यो सन्देशमा ट्याप गर्नुहोस् (वा पछाडि जानेमा थिच्नुहोस्)।</string>
   <string name="categories_activity_title">श्रेणीहरू</string>
   <string name="title_activity_settings">सेटिङ्गहरू</string>
   <string name="menu_about">बारेमा</string>

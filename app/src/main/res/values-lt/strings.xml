@@ -64,7 +64,7 @@
     <item quantity="other">%d įkėlimai</item>
   </plurals>
   <string name="categories_not_found">Nerasta kategorijų, atitinkančiu %1$s</string>
-  <string name="categories_skip_explanation">Pridėkite kategorijas, kad jūsų paveikslėliai būtų lengviau randami Vikimedija Commons.\n\nPradėkite rašyti, kad pridėtumėte kategorijas.\nPaspauskite šią žinutę (ar paspauskite atgal), kad praleistumėte šį žingsnį.</string>
+  <string name="categories_skip_explanation" fuzzy="true">Pridėkite kategorijas, kad jūsų paveikslėliai būtų lengviau randami Vikimedija Commons.\n\nPradėkite rašyti, kad pridėtumėte kategorijas.\nPaspauskite šią žinutę (ar paspauskite atgal), kad praleistumėte šį žingsnį.</string>
   <string name="categories_activity_title">Kategorijos</string>
   <string name="title_activity_settings">Nustatymai</string>
   <string name="title_activity_signup">Užsiregistruoti</string>

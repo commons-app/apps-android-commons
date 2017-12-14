@@ -68,7 +68,7 @@
     <item quantity="other">%d 次上傳</item>
   </plurals>
   <string name="categories_not_found">沒有發現與 %1$s 相符的分類</string>
-  <string name="categories_skip_explanation">為您的圖片添加分類，使別人在維基共享資源更容易找到。\n\n開始輸入以添加分類。\n按此（或按返回）跳過此步驟。</string>
+  <string name="categories_skip_explanation" fuzzy="true">為您的圖片添加分類，使別人在維基共享資源更容易找到。\n\n開始輸入以添加分類。\n按此（或按返回）跳過此步驟。</string>
   <string name="categories_activity_title">分類</string>
   <string name="title_activity_settings">設定</string>
   <string name="title_activity_signup">註冊</string>
@@ -194,7 +194,7 @@
   <string name="nearby_info_menu_wikidata_article">維基數據項目</string>
   <string name="error_while_cache">在快取圖片時發生錯誤</string>
   <string name="title_info">用於本檔案的唯一描述性標題。您可以使用帶有空格的簡明語言，另外請不要包含副檔名。</string>
-  <string name="description_info">請盡可能說明媒體內容：拍攝於何處？是顯示什麼事物？有什麼脈絡？請描述對象或人物。透露出一些較不易猜測的訊息，例如是風景的話；可以是一天裡的時間。如果媒體顯示出一些不正常的事物，請說明出造成不正常原因。</string>
+  <string name="description_info">請盡可能說明媒體內容：拍攝於何處？是顯示什麼事物？有什麼脈絡？請描述對象或人物。透露出一些較不易猜測的訊息，例如是風景的話，可以是一天裡的時間。如果媒體顯示出一些不正常的事物，請說明出造成不正常原因。</string>
   <string name="give_permission">給予權限</string>
   <string name="use_external_storage">使用外部存儲裝置</string>
   <string name="use_external_storage_summary">在您的裝置上使用照相機應用程式來儲存照片</string>

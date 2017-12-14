@@ -68,7 +68,7 @@
     <item quantity="other">%d اپلوڈ</item>
   </plurals>
   <string name="categories_not_found">%1$s سے کوئی زمرہ جات میل نہیں کھاتے</string>
-  <string name="categories_skip_explanation">ویکیمیڈیا کامنز پر اپنی تصاویر کو قابل دریافت بنانے کے لیے زمرے شامل کریں۔\n\nزمرے شامل کرنے کے لیے لکھنا شروع کریں۔\n\nاس مرحلے کو نظر انداز کرنے کے لیے اس پیغام یا (یا پیچھے) پر ٹیپ کریں۔</string>
+  <string name="categories_skip_explanation" fuzzy="true">ویکیمیڈیا کامنز پر اپنی تصاویر کو قابل دریافت بنانے کے لیے زمرے شامل کریں۔\n\nزمرے شامل کرنے کے لیے لکھنا شروع کریں۔\n\nاس مرحلے کو نظر انداز کرنے کے لیے اس پیغام یا (یا پیچھے) پر ٹیپ کریں۔</string>
   <string name="categories_activity_title">زمرہ جات</string>
   <string name="title_activity_settings">ترتیبات</string>
   <string name="title_activity_signup">کھاتہ بنائیں</string>

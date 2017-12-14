@@ -67,7 +67,7 @@
     <item quantity="other">%d अपलोड</item>
   </plurals>
   <string name="categories_not_found">%1$s से कोई श्रेणी मेल नहीं खाती</string>
-  <string name="categories_skip_explanation">अपने छवियों को विकिमीडिया कॉमन्स में अधिक ढूँढने लायक बनाने हेतु श्रेणियाँ लगायें। \n\nश्रेणी जोड़ने हेतु लिखना शुरू करें।\nइसे न करने हेतु इस संदेश को टैप करें या पीछे का बटन दबायें।</string>
+  <string name="categories_skip_explanation" fuzzy="true">अपने छवियों को विकिमीडिया कॉमन्स में अधिक ढूँढने लायक बनाने हेतु श्रेणियाँ लगायें। \n\nश्रेणी जोड़ने हेतु लिखना शुरू करें।\nइसे न करने हेतु इस संदेश को टैप करें या पीछे का बटन दबायें।</string>
   <string name="categories_activity_title">श्रेणियाँ</string>
   <string name="title_activity_settings">पसंद</string>
   <string name="title_activity_signup">खाता खोलें</string>

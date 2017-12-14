@@ -60,7 +60,7 @@
     <item quantity="other">%d жүктөө</item>
   </plurals>
   <string name="categories_not_found">%1$s түрмөктөрү табылган жок</string>
-  <string name="categories_skip_explanation">Уикиказынада Сиздин сүрөттөрдү жеңил табуу үчүн түрмөктөрдү кошуңуз.\n\nТүрмөктөрдү жазууну баштаңыз.\nБул кадамды аттап өтүү үчүн, бул билдирүүнү (же кийинкини) басыңыз.</string>
+  <string name="categories_skip_explanation" fuzzy="true">Уикиказынада Сиздин сүрөттөрдү жеңил табуу үчүн түрмөктөрдү кошуңуз.\n\nТүрмөктөрдү жазууну баштаңыз.\nБул кадамды аттап өтүү үчүн, бул билдирүүнү (же кийинкини) басыңыз.</string>
   <string name="categories_activity_title">Түрмөктөр</string>
   <string name="title_activity_settings">Ырастоолор</string>
   <string name="menu_about">Тиркеме жөнүндө</string>
