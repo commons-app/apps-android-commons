@@ -4,7 +4,7 @@
     android:id="@+id/buttonLayout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    android:visibility="visible"
+    android:visibility="gone"
     android:layout_below="@+id/icon"
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
