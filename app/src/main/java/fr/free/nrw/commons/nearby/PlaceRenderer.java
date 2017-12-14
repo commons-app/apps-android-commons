@@ -1,32 +1,49 @@
 package fr.free.nrw.commons.nearby;
 
+import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
+import android.support.transition.TransitionManager;
+import android.support.v4.view.ViewCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.pedrogomez.renderers.Renderer;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 
 class PlaceRenderer extends Renderer<Place> {
+    //private static boolean isAnyItemOpen = false;
+
     @BindView(R.id.tvName) TextView tvName;
     @BindView(R.id.tvDesc) TextView tvDesc;
     @BindView(R.id.distance) TextView distance;
     @BindView(R.id.icon) ImageView icon;
-    private final PlaceClickedListener listener;
+    @BindView(R.id.buttonLayout) LinearLayout buttonLayout;
 
-    PlaceRenderer(@NonNull PlaceClickedListener listener) {
-        this.listener = listener;
+    private View view;
+    private static ArrayList<LinearLayout> openedItems;
+
+
+    PlaceRenderer(){
+        Log.d("nesli","renderer created");
+        openedItems = new ArrayList<>();
     }
 
     @Override
     protected View inflate(LayoutInflater layoutInflater, ViewGroup viewGroup) {
-        return layoutInflater.inflate(R.layout.item_place, viewGroup, false);
+        view = layoutInflater.inflate(R.layout.item_place, viewGroup, false);
+        return view;
     }
 
     @Override
@@ -36,7 +53,41 @@ class PlaceRenderer extends Renderer<Place> {
 
     @Override
     protected void hookListeners(View view) {
-        view.setOnClickListener(v -> listener.placeClicked(getContent()));
+
+        final View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Renderer", "clicked");
+                TransitionManager.beginDelayedTransition(buttonLayout);
+
+                if(buttonLayout.isShown()){
+                    closeLayout(buttonLayout);
+                }else {
+                    openLayout(buttonLayout);
+                }
+
+            }
+        };
+        view.setOnClickListener(listener);
+        view.requestFocus();
+        view.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if(!hasFocus && buttonLayout.isShown()){
+                    closeLayout(buttonLayout);
+                }else if(hasFocus && !buttonLayout.isShown()) {
+                    listener.onClick(view);
+                }
+            }
+        });
+    }
+
+    private void closeLayout(LinearLayout buttonLayout){
+        buttonLayout.setVisibility(View.GONE);
+    }
+
+    private void openLayout(LinearLayout buttonLayout){
+        buttonLayout.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -50,9 +101,10 @@ class PlaceRenderer extends Renderer<Place> {
         tvDesc.setText(descriptionText);
         distance.setText(place.distance);
         icon.setImageResource(place.getDescription().getIcon());
+
     }
 
-    interface PlaceClickedListener {
-        void placeClicked(Place place);
-    }
+    /*interface PlaceClickedListener {
+        void onPlaceOpened(Place place);
+    }*/
 }

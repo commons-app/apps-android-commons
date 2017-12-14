@@ -26,7 +26,6 @@ import java.util.regex.Pattern;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
@@ -35,7 +34,6 @@ import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
-import fr.free.nrw.commons.mwapi.EventLog;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.mwapi.UploadResult;
 import timber.log.Timber;
@@ -258,27 +256,12 @@ public class UploadService extends HandlerService<Contribution> {
             String resultStatus = uploadResult.getResultStatus();
             if (!resultStatus.equals("Success")) {
                 showFailedNotification(contribution);
-                EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT, mwApi, prefs)
-                        .param("username", sessionManager.getCurrentAccount().name)
-                        .param("source", contribution.getSource())
-                        .param("multiple", contribution.getMultiple())
-                        .param("result", uploadResult.getErrorCode())
-                        .param("filename", contribution.getFilename())
-                        .log();
             } else {
                 contribution.setFilename(uploadResult.getCanonicalFilename());
                 contribution.setImageUrl(uploadResult.getImageUrl());
                 contribution.setState(Contribution.STATE_COMPLETED);
                 contribution.setDateUploaded(uploadResult.getDateUploaded());
                 contribution.save();
-
-                EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT, mwApi, prefs)
-                        .param("username", sessionManager.getCurrentAccount().name)
-                        .param("source", contribution.getSource()) //FIXME
-                        .param("filename", contribution.getFilename())
-                        .param("multiple", contribution.getMultiple())
-                        .param("result", "success")
-                        .log();
             }
         } catch (IOException e) {
             Timber.d("I have a network fuckup");
