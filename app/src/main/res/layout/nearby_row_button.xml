@@ -1,9 +1,13 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/buttonLayout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:visibility="gone"
+    android:layout_below="@+id/icon"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
 
     <LinearLayout
         android:id="@+id/directionsButton"
@@ -18,13 +22,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            app:srcCompat="@drawable/ic_directions_black_24dp" />
+            app:srcCompat="@drawable/ic_photo_camera_white_24dp"
+            android:tint="@color/primaryDarkColor"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="8dp"
             android:layout_gravity="center_horizontal"
-            android:text="DIRECTIONS"
+            android:text="CAMERA"
             />
     </LinearLayout>
     <LinearLayout
@@ -40,13 +45,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            app:srcCompat="@drawable/ic_wikidata_logo_24dp" />
+            app:srcCompat="@drawable/ic_photo_white_24dp"
+            android:tint="@color/primaryDarkColor"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="8dp"
             android:layout_gravity="center_horizontal"
-            android:text="WIKIDATA"
+            android:text="GALLERY"
             />
     </LinearLayout>
 
@@ -63,17 +69,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            app:srcCompat="@drawable/ic_wikipedia_logo_24dp"
+            app:srcCompat="@drawable/ic_directions_black_24dp"
             />
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="8dp"
             android:layout_gravity="center_horizontal"
-            android:text="WIKIPEDIA"
+            android:text="DIRECTIONS"
 
             />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/overflowButton"
         android:layout_width="wrap_content"
@@ -86,7 +93,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="center_horizontal"
             app:srcCompat="@drawable/ic_overflow"
             />
     </LinearLayout>
