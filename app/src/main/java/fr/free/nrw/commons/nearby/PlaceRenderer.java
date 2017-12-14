@@ -2,6 +2,7 @@ package fr.free.nrw.commons.nearby;
 
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
+import android.support.transition.TransitionManager;
 import android.support.v4.view.ViewCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,21 +30,14 @@ class PlaceRenderer extends Renderer<Place> {
     @BindView(R.id.distance) TextView distance;
     @BindView(R.id.icon) ImageView icon;
     @BindView(R.id.buttonLayout) LinearLayout buttonLayout;
-    private Animation animationUp;
-    private Animation animationDown;
 
     private View view;
-    private final int COUNTDOWN_RUNNING_TIME = 500;
     private static ArrayList<LinearLayout> openedItems;
 
 
-    //private final PlaceClickedListener listener;
-
     PlaceRenderer(){
-        //@NonNull PlaceClickedListener listener) {
         Log.d("nesli","renderer created");
         openedItems = new ArrayList<>();
-        //this.listener = listener;
     }
 
     @Override
@@ -55,8 +49,6 @@ class PlaceRenderer extends Renderer<Place> {
     @Override
     protected void setUpView(View view) {
         ButterKnife.bind(this, view);
-        animationUp = AnimationUtils.loadAnimation(getContext(),R.anim.slide_up);
-        animationDown = AnimationUtils.loadAnimation(getContext(),R.anim.slide_down);
     }
 
     @Override
@@ -66,6 +58,8 @@ class PlaceRenderer extends Renderer<Place> {
             @Override
             public void onClick(View view) {
                 Log.d("Renderer", "clicked");
+                TransitionManager.beginDelayedTransition(buttonLayout);
+
                 if(buttonLayout.isShown()){
                     closeLayout(buttonLayout);
                 }else {
@@ -89,28 +83,10 @@ class PlaceRenderer extends Renderer<Place> {
     }
 
     private void closeLayout(LinearLayout buttonLayout){
-        //openedItems.remove(buttonLayout);
-        /*buttonLayout.startAnimation(animationUp);
-        CountDownTimer countDownTimerStatic = new CountDownTimer(COUNTDOWN_RUNNING_TIME, 16) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-            }
-
-            @Override
-            public void onFinish() {
-                buttonLayout.setVisibility(View.GONE);
-                //buttonLayout.setVisibility(View.GONE);
-            }
-        };
-        countDownTimerStatic.start();*/
         buttonLayout.setVisibility(View.GONE);
     }
 
     private void openLayout(LinearLayout buttonLayout){
-        /*buttonLayout.setVisibility(View.VISIBLE);
-        ViewCompat.setElevation( view, 10);
-        buttonLayout.startAnimation(animationDown);
-        //openedItems.add(buttonLayout);*/
         buttonLayout.setVisibility(View.VISIBLE);
     }
 
