@@ -49,7 +49,6 @@ import timber.log.Timber;
 public class NearbyActivity extends NavigationBaseActivity implements LocationUpdateListener {
 
     private static final int LOCATION_REQUEST = 1;
-    private static final String MAP_LAST_USED_PREFERENCE = "mapLastUsed";
 
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
@@ -70,7 +69,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     private LatLng curLatLang;
     private Bundle bundle;
-    private SharedPreferences sharedPreferences;
     private NearbyActivityMode viewMode;
     private Disposable placesDisposable;
     private boolean lockNearbyView; //Determines if the nearby places needs to be refreshed
@@ -83,7 +81,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         setContentView(R.layout.activity_nearby);
         ButterKnife.bind(this);
         resumeFragment();
@@ -93,7 +90,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         initFabList();
 
         initDrawer();
-        initViewState();
         swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -116,14 +112,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             // load data from a data source or perform any calculation
         }
 
-    }
-
-    private void initViewState() {
-        if (sharedPreferences.getBoolean(MAP_LAST_USED_PREFERENCE, false)) {
-            viewMode = NearbyActivityMode.MAP;
-        } else {
-            viewMode = NearbyActivityMode.LIST;
-        }
     }
 
     private void initBottomSheetBehaviour() {
@@ -166,11 +154,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_nearby, menu);
 
-        if (viewMode.isMap()) {
-            MenuItem item = menu.findItem(R.id.action_toggle_view);
-            item.setIcon(viewMode.getIcon());
-        }
-
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -181,11 +164,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             case R.id.action_refresh:
                 lockNearbyView(false);
                 refreshView(true);
-                return true;
-            case R.id.action_toggle_view:
-                viewMode = viewMode.toggle();
-                item.setIcon(viewMode.getIcon());
-                toggleView();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -295,15 +273,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             Timber.d("User is back from Settings page");
             refreshView(false);
         }
-    }
-
-    private void toggleView() {
-        if (viewMode.isMap()) {
-            setMapFragment();
-        } else {
-            setListFragment();
-        }
-        sharedPreferences.edit().putBoolean(MAP_LAST_USED_PREFERENCE, viewMode.isMap()).apply();
     }
 
     @Override
@@ -468,7 +437,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         }
         else if (bottomSheetState == BottomSheetBehavior.STATE_EXPANDED) {
             fabList.hide();
-            //NearbyActivity.bottomSheetStatus = BottomSheetStatus.DISPLAY_LIST_SHEET;
         }
     }
 }
