@@ -3,7 +3,6 @@ package fr.free.nrw.commons.nearby;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -99,11 +98,8 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
 
             addCurrentLocationMarker(mapboxMap);
         });
-        if (PreferenceManager.getDefaultSharedPreferences(getActivity()).getBoolean("theme",false)) {
-            mapView.setStyleUrl(getResources().getString(R.string.map_theme_dark));
-        } else {
-            mapView.setStyleUrl(getResources().getString(R.string.map_theme_light));
-        }
+
+        mapView.setStyleUrl("asset://mapstyle.json");
     }
 
     /**
