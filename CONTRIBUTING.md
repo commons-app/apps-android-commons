@@ -1,5 +1,5 @@
 Thanks for considering to contribute to this project! A few guidelines for
-people who want to contribute their code to this software are documented at
+people who want to contribute their code to this software are documented in
 this project's Wiki. If you're not sure where to start head on to [this wiki page](https://github.com/commons-app/apps-android-commons/wiki/Volunteers-welcome!).
 
 Here's a jist of the guidelines,
