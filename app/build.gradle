@@ -18,7 +18,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.1'
     implementation 'com.jakewharton.timber:timber:4.5.1'
     implementation 'info.debatty:java-string-similarity:0.24'
-    implementation ('com.mapbox.mapboxsdk:mapbox-android-sdk:5.1.0@aar'){
+    implementation ('com.mapbox.mapboxsdk:mapbox-android-sdk:5.2.1@aar'){
         transitive=true
     }
 
