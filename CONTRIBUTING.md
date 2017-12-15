@@ -13,6 +13,6 @@ changed. It is also good to prefix the first line with "area: " where the "area"
 is a filename or identifier for the general area of the code being modified.
 The body should provide a meaningful commit message.
 
-# Write tests for your code
+# Write tests for your code (if possible)
 
-# Update the Wiki pages to ensure they don't become stale
+# Make sure the Wiki pages don't become stale by updating them (if needed)
