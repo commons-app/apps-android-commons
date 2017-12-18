@@ -68,7 +68,7 @@
     <item quantity="other">%d n usali</item>
   </plurals>
   <string name="categories_not_found">Ulac taggayin imenṭaḍen akked %1$s i yettwafen</string>
-  <string name="categories_skip_explanation" fuzzy="true">Rnu taggayin akken ad terreḍ tugniwin-ik fessus-it i tifin di Wikimedia Commons.\n\nBdu timerna n taggayin.\nSenneḍ ɣef yizen-agi (neɣ uɣal ar deffir) akken ad tnegzeḍ asebter-agi.</string>
+  <string name="categories_skip_explanation" fuzzy="true">Rnu taggayin akken ad terreḍ tugniwin-ik sehlent i tifin di Wikimedia Commons.\n\nBdu timerna n taggayin.</string>
   <string name="categories_activity_title">Taggayin</string>
   <string name="title_activity_settings">Iɣewwaṛen</string>
   <string name="title_activity_signup">Jerred</string>
@@ -201,4 +201,6 @@
   <string name="send_log_file">Azen afaylu n uɣmis</string>
   <string name="send_log_file_description">Azen afaylu n uɣmis i yinermisen s yimayl</string>
   <string name="login_to_your_account">Qqen ar umiḍan-ik</string>
+  <string name="nearby_location_has_not_changed">Adeg ur ibeddel ara.</string>
+  <string name="nearby_location_not_available">Ulac adeg</string>
 </resources>

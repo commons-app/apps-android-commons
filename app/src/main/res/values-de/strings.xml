@@ -68,7 +68,7 @@
     <item quantity="other">%d hochgeladene Dateien</item>
   </plurals>
   <string name="categories_not_found">Die Kategorie „%1$s“ wurde nicht gefunden</string>
-  <string name="categories_skip_explanation">Füge Kategorien hinzu, um deine Bilder auf Wikimedia Commons auffindbarer zu machen.\n\nBeginn zu schreiben, um Kategorien hinzuzufügen.</string>
+  <string name="categories_skip_explanation" fuzzy="true">Füge Kategorien hinzu, um deine Bilder auf Wikimedia Commons auffindbarer zu machen.\n\nBeginn zu schreiben, um Kategorien hinzuzufügen.</string>
   <string name="categories_activity_title">Kategorien</string>
   <string name="title_activity_settings">Einstellungen</string>
   <string name="title_activity_signup">Registrieren</string>
