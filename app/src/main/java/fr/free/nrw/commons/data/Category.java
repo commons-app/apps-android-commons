@@ -14,6 +14,9 @@ import java.util.Date;
 
 import fr.free.nrw.commons.category.CategoryContentProvider;
 
+/**
+ * Represents a category
+ */
 public class Category {
     private Uri contentUri;
 
@@ -22,67 +25,12 @@ public class Category {
     private int timesUsed;
 
     // Getters/setters
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    private Date getLastUsed() {
-        // warning: Date objects are mutable.
-        return (Date)lastUsed.clone();
-    }
-
-    public void setLastUsed(Date lastUsed) {
-        // warning: Date objects are mutable.
-        this.lastUsed = (Date)lastUsed.clone();
-    }
-
-    private void touch() {
-        lastUsed = new Date();
-    }
-
-    private int getTimesUsed() {
-        return timesUsed;
-    }
-
-    public void setTimesUsed(int timesUsed) {
-        this.timesUsed = timesUsed;
-    }
-
-    public void incTimesUsed() {
-        timesUsed++;
-        touch();
-    }
-
-    //region Database/content-provider stuff
 
     /**
-     * Persist category.
-     * @param client ContentProviderClient to handle DB connection
+     * Gets category from cursor
+     * @param cursor Category cursor
+     * @return Category from cursor
      */
-    public void save(ContentProviderClient client) {
-        try {
-            if (contentUri == null) {
-                contentUri = client.insert(CategoryContentProvider.BASE_URI, this.toContentValues());
-            } else {
-                client.update(contentUri, toContentValues(), null, null);
-            }
-        } catch (RemoteException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private ContentValues toContentValues() {
-        ContentValues cv = new ContentValues();
-        cv.put(Table.COLUMN_NAME, getName());
-        cv.put(Table.COLUMN_LAST_USED, getLastUsed().getTime());
-        cv.put(Table.COLUMN_TIMES_USED, getTimesUsed());
-        return cv;
-    }
-
     private static Category fromCursor(Cursor cursor) {
         // Hardcoding column positions!
         Category c = new Category();
@@ -152,6 +100,112 @@ public class Category {
         return items;
     }
 
+    /**
+     * Gets name
+     *
+     * @return name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Modifies name
+     *
+     * @param name Category name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Gets last used date
+     *
+     * @return Last used date
+     */
+    private Date getLastUsed() {
+        // warning: Date objects are mutable.
+        return (Date) lastUsed.clone();
+    }
+
+    /**
+     * Modifies last used date
+     *
+     * @param lastUsed Category date
+     */
+    public void setLastUsed(Date lastUsed) {
+        // warning: Date objects are mutable.
+        this.lastUsed = (Date) lastUsed.clone();
+    }
+
+    /**
+     * Generates new last used date
+     */
+    private void touch() {
+        lastUsed = new Date();
+    }
+
+    //region Database/content-provider stuff
+
+    /**
+     * Gets no. of times the category is used
+     *
+     * @return no. of times used
+     */
+    private int getTimesUsed() {
+        return timesUsed;
+    }
+
+    /**
+     * Modifies no. of times used
+     *
+     * @param timesUsed Category used times
+     */
+    public void setTimesUsed(int timesUsed) {
+        this.timesUsed = timesUsed;
+    }
+
+    /**
+     * Increments timesUsed by 1 and sets last used date as now.
+     */
+    public void incTimesUsed() {
+        timesUsed++;
+        touch();
+    }
+
+    /**
+     * Persist category.
+     *
+     * @param client ContentProviderClient to handle DB connection
+     */
+    public void save(ContentProviderClient client) {
+        try {
+            if (contentUri == null) {
+                contentUri = client.insert(CategoryContentProvider.BASE_URI, this.toContentValues());
+            } else {
+                client.update(contentUri, toContentValues(), null, null);
+            }
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Gets content values
+     *
+     * @return Content values
+     */
+    private ContentValues toContentValues() {
+        ContentValues cv = new ContentValues();
+        cv.put(Table.COLUMN_NAME, getName());
+        cv.put(Table.COLUMN_LAST_USED, getLastUsed().getTime());
+        cv.put(Table.COLUMN_TIMES_USED, getTimesUsed());
+        return cv;
+    }
+
+    /**
+     * Represents table
+     */
     public static class Table {
         public static final String TABLE_NAME = "categories";
 
