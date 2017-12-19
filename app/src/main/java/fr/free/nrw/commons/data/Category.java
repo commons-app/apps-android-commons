@@ -229,15 +229,30 @@ public class Category {
                 + COLUMN_TIMES_USED + " INTEGER"
                 + ");";
 
+        /**
+         * Creates new database with provided SQLite database
+         *
+         * @param db Category database
+         */
         public static void onCreate(SQLiteDatabase db) {
             db.execSQL(CREATE_TABLE_STATEMENT);
         }
 
+        /**
+         * Deletes existing database
+         * @param db Category database
+         */
         public static void onDelete(SQLiteDatabase db) {
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
             onCreate(db);
         }
 
+        /**
+         * Updates given database
+         * @param db Category database
+         * @param from Exiting category id
+         * @param to New category id
+         */
         public static void onUpdate(SQLiteDatabase db, int from, int to) {
             if (from == to) {
                 return;
