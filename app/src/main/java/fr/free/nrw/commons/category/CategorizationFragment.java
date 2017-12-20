@@ -37,6 +37,7 @@ import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.data.Category;
+import fr.free.nrw.commons.data.CategoryDao;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.upload.MwVolleyApi;
 import fr.free.nrw.commons.utils.StringSortingUtils;
@@ -79,7 +80,7 @@ public class CategorizationFragment extends DaggerFragment {
     private final CategoriesAdapterFactory adapterFactory = new CategoriesAdapterFactory(item -> {
         if (item.isSelected()) {
             selectedCategories.add(item);
-            updateCategoryCount(item, databaseClient);
+            updateCategoryCount(item);
         } else {
             selectedCategories.remove(item);
         }
@@ -261,7 +262,7 @@ public class CategorizationFragment extends DaggerFragment {
     }
 
     private Observable<CategoryItem> recentCategories() {
-        return Observable.fromIterable(Category.recentCategories(databaseClient, SEARCH_CATS_LIMIT))
+        return Observable.fromIterable(new CategoryDao(databaseClient).recentCategories(SEARCH_CATS_LIMIT))
                 .map(s -> new CategoryItem(s, false));
     }
 
@@ -311,24 +312,17 @@ public class CategorizationFragment extends DaggerFragment {
                 || item.matches("(.*)needing(.*)") || item.matches("(.*)taken on(.*)"));
     }
 
-    private void updateCategoryCount(CategoryItem item, ContentProviderClient client) {
-        Category cat = lookupCategory(item.getName());
-        cat.incTimesUsed();
-        cat.save(client);
-    }
+    private void updateCategoryCount(CategoryItem item) {
+        CategoryDao categoryDao = new CategoryDao(databaseClient);
+        Category category = categoryDao.find(item.getName());
 
-    private Category lookupCategory(String name) {
-        Category cat = Category.find(databaseClient, name);
-
-        if (cat == null) {
-            // Newly used category...
-            cat = new Category();
-            cat.setName(name);
-            cat.setLastUsed(new Date());
-            cat.setTimesUsed(0);
+        // Newly used category...
+        if (category == null) {
+            category = new Category(null, item.getName(), new Date(), 0);
         }
 
-        return cat;
+        category.incTimesUsed();
+        categoryDao.save(category);
     }
 
     public int getCurrentSelectedCount() {
