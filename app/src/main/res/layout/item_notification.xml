@@ -18,10 +18,11 @@
         android:contentDescription="@string/no_image_found"
         android:scaleType="centerCrop"
         android:src="@drawable/empty_photo"
+        android:tint="@color/primaryDarkColor"
         />
 
     <TextView
-        android:id="@+id/distance"
+        android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -34,16 +35,16 @@
         />
 
     <TextView
-        android:id="@+id/tvName"
+        android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/distance"
+        android:layout_alignTop="@id/time"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_toEndOf="@id/icon"
-        android:layout_toLeftOf="@id/distance"
+        android:layout_toLeftOf="@id/time"
         android:layout_toRightOf="@id/icon"
-        android:layout_toStartOf="@id/distance"
+        android:layout_toStartOf="@id/time"
         android:ellipsize="end"
         android:maxLines="2"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
@@ -51,14 +52,14 @@
         />
 
     <TextView
-        android:id="@+id/tvDesc"
+        android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@id/distance"
-        android:layout_alignLeft="@id/tvName"
-        android:layout_alignRight="@id/distance"
-        android:layout_alignStart="@id/tvName"
-        android:layout_below="@id/tvName"
+        android:layout_alignEnd="@id/time"
+        android:layout_alignLeft="@id/title"
+        android:layout_alignRight="@id/time"
+        android:layout_alignStart="@id/title"
+        android:layout_below="@id/title"
         android:layout_marginBottom="16dp"
         android:ellipsize="end"
         android:maxLines="4"

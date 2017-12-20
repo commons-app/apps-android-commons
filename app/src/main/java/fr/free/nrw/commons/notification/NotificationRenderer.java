@@ -17,12 +17,10 @@ import fr.free.nrw.commons.R;
  */
 
 public class NotificationRenderer extends Renderer<Notification> {
-    @BindView(R.id.tvName)
-    TextView tvName;
-    @BindView(R.id.tvDesc) TextView tvDesc;
-    @BindView(R.id.distance) TextView distance;
-    @BindView(R.id.icon)
-    ImageView icon;
+    @BindView(R.id.title) TextView title;
+    @BindView(R.id.description) TextView description;
+    @BindView(R.id.time) TextView time;
+    @BindView(R.id.icon) ImageView icon;
     private NotificationClicked listener;
 
 
@@ -48,16 +46,19 @@ public class NotificationRenderer extends Renderer<Notification> {
     @Override
     public void render() {
             Notification notification = getContent();
-            tvName.setText(notification.notificationText);
+            title.setText(notification.notificationText);
+            time.setText("3d");
+            description.setText("Example notification description");
             switch (notification.notificationType) {
                 case edit:
-                    icon.setImageResource(R.drawable.round_icon_unknown);
+                    icon.setImageResource(R.drawable.ic_edit_black_24dp);
+                    break;
                 case message:
-                    icon.setImageResource(R.drawable.round_icon_unknown);
+                    icon.setImageResource(R.drawable.ic_message_black_24dp);
+                    break;
                 case mention:
-                    icon.setImageResource(R.drawable.round_icon_unknown);
-                case block:
-                    icon.setImageResource(R.drawable.round_icon_unknown);
+                    icon.setImageResource(R.drawable.ic_chat_bubble_black_24px);
+                    break;
                 default:
                     icon.setImageResource(R.drawable.round_icon_unknown);
             }
