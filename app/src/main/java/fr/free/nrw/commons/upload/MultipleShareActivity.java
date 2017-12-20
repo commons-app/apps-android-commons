@@ -40,6 +40,7 @@ import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.modifications.CategoryModifier;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.modifications.ModifierSequence;
+import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
@@ -165,15 +166,14 @@ public class MultipleShareActivity extends AuthenticatedActivity
     @Override
     public void onCategoriesSave(List<String> categories) {
         if (categories.size() > 0) {
-            ContentProviderClient client = getContentResolver().acquireContentProviderClient(ModificationsContentProvider.AUTHORITY);
+            ModifierSequenceDao dao = new ModifierSequenceDao(getContentResolver().acquireContentProviderClient(ModificationsContentProvider.AUTHORITY));
             for (Contribution contribution : photosList) {
                 ModifierSequence categoriesSequence = new ModifierSequence(contribution.getContentUri());
 
                 categoriesSequence.queueModifier(new CategoryModifier(categories.toArray(new String[]{})));
                 categoriesSequence.queueModifier(new TemplateRemoveModifier("Uncategorized"));
 
-                categoriesSequence.setContentProviderClient(client);
-                categoriesSequence.save();
+                dao.save(categoriesSequence);
             }
         }
         // FIXME: Make sure that the content provider is up

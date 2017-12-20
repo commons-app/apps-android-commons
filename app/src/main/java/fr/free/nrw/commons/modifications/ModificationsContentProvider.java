@@ -16,13 +16,15 @@ import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import timber.log.Timber;
 
+import static fr.free.nrw.commons.modifications.ModifierSequenceDao.Table.TABLE_NAME;
+
 public class ModificationsContentProvider extends ContentProvider {
 
     private static final int MODIFICATIONS = 1;
     private static final int MODIFICATIONS_ID = 2;
 
     public static final String AUTHORITY = "fr.free.nrw.commons.modifications.contentprovider";
-    private static final String BASE_PATH = "modifications";
+    public static final String BASE_PATH = "modifications";
 
     public static final Uri BASE_URI = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH);
 
@@ -47,7 +49,7 @@ public class ModificationsContentProvider extends ContentProvider {
     @Override
     public Cursor query(@NonNull Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
-        queryBuilder.setTables(ModifierSequence.Table.TABLE_NAME);
+        queryBuilder.setTables(TABLE_NAME);
 
         int uriType = uriMatcher.match(uri);
 
@@ -78,7 +80,7 @@ public class ModificationsContentProvider extends ContentProvider {
         long id = 0;
         switch (uriType) {
             case MODIFICATIONS:
-                id = sqlDB.insert(ModifierSequence.Table.TABLE_NAME, null, contentValues);
+                id = sqlDB.insert(TABLE_NAME, null, contentValues);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
@@ -94,7 +96,7 @@ public class ModificationsContentProvider extends ContentProvider {
         switch (uriType) {
             case MODIFICATIONS_ID:
                 String id = uri.getLastPathSegment();
-                sqlDB.delete(ModifierSequence.Table.TABLE_NAME,
+                sqlDB.delete(TABLE_NAME,
                         "_id = ?",
                         new String[] { id }
                         );
@@ -114,7 +116,7 @@ public class ModificationsContentProvider extends ContentProvider {
             case MODIFICATIONS:
                 for (ContentValues value: values) {
                     Timber.d("Inserting! %s", value);
-                    sqlDB.insert(ModifierSequence.Table.TABLE_NAME, null, value);
+                    sqlDB.insert(TABLE_NAME, null, value);
                 }
                 break;
             default:
@@ -140,7 +142,7 @@ public class ModificationsContentProvider extends ContentProvider {
         int rowsUpdated = 0;
         switch (uriType) {
             case MODIFICATIONS:
-                rowsUpdated = sqlDB.update(ModifierSequence.Table.TABLE_NAME,
+                rowsUpdated = sqlDB.update(TABLE_NAME,
                         contentValues,
                         selection,
                         selectionArgs);
@@ -149,9 +151,9 @@ public class ModificationsContentProvider extends ContentProvider {
                 int id = Integer.valueOf(uri.getLastPathSegment());
 
                 if (TextUtils.isEmpty(selection)) {
-                    rowsUpdated = sqlDB.update(ModifierSequence.Table.TABLE_NAME,
+                    rowsUpdated = sqlDB.update(TABLE_NAME,
                             contentValues,
-                            ModifierSequence.Table.COLUMN_ID + " = ?",
+                            ModifierSequenceDao.Table.COLUMN_ID + " = ?",
                             new String[] { String.valueOf(id) } );
                 } else {
                     throw new IllegalArgumentException("Parameter `selection` should be empty when updating an ID");
