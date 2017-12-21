@@ -31,6 +31,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
@@ -66,6 +67,7 @@ public class UploadService extends HandlerService<Contribution> {
     public static final int NOTIFICATION_UPLOAD_IN_PROGRESS = 1;
     public static final int NOTIFICATION_UPLOAD_COMPLETE = 2;
     public static final int NOTIFICATION_UPLOAD_FAILED = 3;
+    private ContributionDao dao;
 
     public UploadService() {
         super("UploadService");
@@ -105,7 +107,7 @@ public class UploadService extends HandlerService<Contribution> {
             startForeground(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification.build());
 
             contribution.setTransferred(transferred);
-            contribution.save();
+            dao.save(contribution);
         }
 
     }
@@ -123,6 +125,7 @@ public class UploadService extends HandlerService<Contribution> {
 
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         contributionsProviderClient = this.getContentResolver().acquireContentProviderClient(ContributionsContentProvider.AUTHORITY);
+        dao = new ContributionDao(contributionsProviderClient);
     }
 
     @Override
@@ -144,9 +147,7 @@ public class UploadService extends HandlerService<Contribution> {
 
                 contribution.setState(Contribution.STATE_QUEUED);
                 contribution.setTransferred(0);
-                contribution.setContentProviderClient(contributionsProviderClient);
-
-                contribution.save();
+                dao.save(contribution);
                 toUpload++;
                 if (curProgressNotification != null && toUpload != 1) {
                     curProgressNotification.setContentText(getResources().getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload));
@@ -167,11 +168,11 @@ public class UploadService extends HandlerService<Contribution> {
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent.getAction().equals(ACTION_START_SERVICE) && freshStart) {
             ContentValues failedValues = new ContentValues();
-            failedValues.put(Contribution.Table.COLUMN_STATE, Contribution.STATE_FAILED);
+            failedValues.put(ContributionDao.Table.COLUMN_STATE, Contribution.STATE_FAILED);
 
             int updated = getContentResolver().update(ContributionsContentProvider.BASE_URI,
                     failedValues,
-                    Contribution.Table.COLUMN_STATE + " = ? OR " + Contribution.Table.COLUMN_STATE + " = ?",
+                    ContributionDao.Table.COLUMN_STATE + " = ? OR " + ContributionDao.Table.COLUMN_STATE + " = ?",
                     new String[]{ String.valueOf(Contribution.STATE_QUEUED), String.valueOf(Contribution.STATE_IN_PROGRESS) }
             );
             Timber.d("Set %d uploads to failed", updated);
@@ -261,7 +262,7 @@ public class UploadService extends HandlerService<Contribution> {
                 contribution.setImageUrl(uploadResult.getImageUrl());
                 contribution.setState(Contribution.STATE_COMPLETED);
                 contribution.setDateUploaded(uploadResult.getDateUploaded());
-                contribution.save();
+                dao.save(contribution);
             }
         } catch (IOException e) {
             Timber.d("I have a network fuckup");
@@ -292,7 +293,7 @@ public class UploadService extends HandlerService<Contribution> {
         notificationManager.notify(NOTIFICATION_UPLOAD_FAILED, failureNotification);
 
         contribution.setState(Contribution.STATE_FAILED);
-        contribution.save();
+        dao.save(contribution);
     }
 
     private String findUniqueFilename(String fileName) throws IOException {

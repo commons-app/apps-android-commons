@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 
 public class DBOpenHelper  extends SQLiteOpenHelper {
@@ -21,14 +21,14 @@ public class DBOpenHelper  extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        Contribution.Table.onCreate(sqLiteDatabase);
+        ContributionDao.Table.onCreate(sqLiteDatabase);
         ModifierSequence.Table.onCreate(sqLiteDatabase);
         Category.Table.onCreate(sqLiteDatabase);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int from, int to) {
-        Contribution.Table.onUpdate(sqLiteDatabase, from, to);
+        ContributionDao.Table.onUpdate(sqLiteDatabase, from, to);
         ModifierSequence.Table.onUpdate(sqLiteDatabase, from, to);
         Category.Table.onUpdate(sqLiteDatabase, from, to);
     }
