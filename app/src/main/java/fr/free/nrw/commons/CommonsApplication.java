@@ -44,15 +44,20 @@ import timber.log.Timber;
 )
 public class CommonsApplication extends DaggerApplication {
 
-    public static final String DEFAULT_EDIT_SUMMARY = "Uploaded using Android Commons app";
-    public static final String FEEDBACK_EMAIL = "commons-app-android@googlegroups.com";
-    public static final String LOGS_PRIVATE_EMAIL = "commons-app-android-private@googlegroups.com";
-    public static final String FEEDBACK_EMAIL_SUBJECT = "Commons Android App (%s) Feedback";
     @Inject SessionManager sessionManager;
     @Inject DBOpenHelper dbOpenHelper;
     @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
     @Inject @Named("application_preferences") SharedPreferences applicationPrefs;
     @Inject @Named("prefs") SharedPreferences otherPrefs;
+    
+    public static final String DEFAULT_EDIT_SUMMARY = "Uploaded using Android Commons app";
+    
+    public static final String FEEDBACK_EMAIL = "commons-app-android@googlegroups.com";
+    
+    public static final String LOGS_PRIVATE_EMAIL = "commons-app-android-private@googlegroups.com";
+    
+    public static final String FEEDBACK_EMAIL_SUBJECT = "Commons Android App (%s) Feedback";
+    
     private CommonsApplicationComponent component;
     private RefWatcher refWatcher;
 
