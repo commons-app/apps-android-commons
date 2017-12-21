@@ -67,7 +67,7 @@
     <item quantity="one">%d개 업로드</item>
   </plurals>
   <string name="categories_not_found">%1$s와(과) 일치하는 분류를 찾을 수 없습니다</string>
-  <string name="categories_skip_explanation" fuzzy="true">위키미디어 공용에서 그림을 더 찾기 쉽게 만들기 위해 분류를 추가합니다.\n  -\n  -분류를 추가하려면 입력을 시작하세요.</string>
+  <string name="categories_skip_explanation">위키미디어 공용에서 그림을 더 찾기 쉽게 만들기 위해 분류를 추가합니다.\n분류를 추가하려면 입력을 시작하세요.</string>
   <string name="categories_activity_title">분류</string>
   <string name="title_activity_settings">설정</string>
   <string name="title_activity_signup">가입하기</string>

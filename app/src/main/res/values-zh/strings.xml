@@ -68,7 +68,7 @@
     <item quantity="other">%d次上传</item>
   </plurals>
   <string name="categories_not_found">没有找到匹配%1$s的分类</string>
-  <string name="categories_skip_explanation" fuzzy="true">添加分类使您的图像更容易在维基共享资源被找到。\n  -\n  -开始输入以添加分类。</string>
+  <string name="categories_skip_explanation">添加分类使您的图像更容易在维基共享资源被找到。开始输入以添加分类。</string>
   <string name="categories_activity_title">分类</string>
   <string name="title_activity_settings">设置</string>
   <string name="title_activity_signup">注册</string>
