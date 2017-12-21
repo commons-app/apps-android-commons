@@ -62,17 +62,6 @@ public class CommonsApplication extends DaggerApplication {
     private RefWatcher refWatcher;
 
     /**
-     * Provides a way to get member refWatcher
-     *
-     * @param context Application context
-     * @return application member refWatcher
-     */
-    public static RefWatcher getRefWatcher(Context context) {
-        CommonsApplication application = (CommonsApplication) context.getApplicationContext();
-        return application.refWatcher;
-    }
-
-    /**
      * Used to declare and initialize various components and dependencies
      */
     @Override
@@ -106,11 +95,22 @@ public class CommonsApplication extends DaggerApplication {
         }
         return LeakCanary.install(this);
     }
-
-    /**
-     * Helps in injecting dependency library Dagger
-     * @return Dagger injector
+    
+  /**
+     * Provides a way to get member refWatcher
+     *
+     * @param context Application context
+     * @return application member refWatcher
      */
+    public static RefWatcher getRefWatcher(Context context) {
+        CommonsApplication application = (CommonsApplication) context.getApplicationContext();
+        return application.refWatcher;
+    }
+    
+    /**
+    * Helps in injecting dependency library Dagger
+    * @return Dagger injector
+    */
     @Override
     protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
         return injector();
