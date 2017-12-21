@@ -50,9 +50,9 @@ public class Utils {
     }
 
     /**
-     * Encodes given URL in UTF-8 format
+     * URL Encode an URL in UTF-8 format
      * @param url Unformatted URL
-     * @return Formatted URL
+     * @return Encoded URL
      */
     public static String urlEncode(String url) {
         try {
