@@ -10,13 +10,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class WelcomePagerAdapter extends PagerAdapter {
-    private static final int PAGE_FINAL = 4;
-    private Callback callback;
-
-    public interface Callback {
-        void onYesClicked();
-    }
-
     static final int[] PAGE_LAYOUTS = new int[]{
             R.layout.welcome_wikipedia,
             R.layout.welcome_do_upload,
@@ -24,16 +17,34 @@ public class WelcomePagerAdapter extends PagerAdapter {
             R.layout.welcome_image_details,
             R.layout.welcome_final
     };
+    private static final int PAGE_FINAL = 4;
+    private Callback callback;
 
+    /**
+     * Changes callback to provided one
+     *
+     * @param callback New callback
+     *                 it can be null.
+     */
     public void setCallback(@Nullable Callback callback) {
         this.callback = callback;
     }
 
+    /**
+     * Gets total number of layouts
+     * @return Number of layouts
+     */
     @Override
     public int getCount() {
         return PAGE_LAYOUTS.length;
     }
 
+    /**
+     * Compares given view with provided object
+     * @param view Adapter view
+     * @param object Adapter object
+     * @return Equality between view and object
+     */
     @Override
     public boolean isViewFromObject(View view, Object object) {
         return (view == object);
@@ -52,9 +63,22 @@ public class WelcomePagerAdapter extends PagerAdapter {
         return layout;
     }
 
+    /**
+     * Provides a way to remove an item from container
+     * @param container Adapter view group container
+     * @param position Index of item
+     * @param obj Adapter object
+     */
     @Override
     public void destroyItem(ViewGroup container, int position, Object obj) {
         container.removeView((View) obj);
+    }
+
+    /**
+     * Interface used create on clicked callback(s).
+     */
+    public interface Callback {
+        void onYesClicked();
     }
 
     class ViewHolder {
@@ -62,6 +86,9 @@ public class WelcomePagerAdapter extends PagerAdapter {
             ButterKnife.bind(this, view);
         }
 
+        /**
+         * Triggers on click callback on button click
+         */
         @OnClick(R.id.welcomeYesButton)
         void onClicked() {
             if (callback != null) {
