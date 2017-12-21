@@ -14,7 +14,7 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * Represents LicenseList
+ * Represents a list of 
  */
 public class LicenseList {
     private Map<String, License> licenses = new HashMap<>();
