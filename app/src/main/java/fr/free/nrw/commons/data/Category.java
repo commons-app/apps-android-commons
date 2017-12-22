@@ -14,6 +14,9 @@ import java.util.Date;
 
 import fr.free.nrw.commons.category.CategoryContentProvider;
 
+/**
+ * Represents a category
+ */
 public class Category {
     private Uri contentUri;
 
@@ -22,36 +25,72 @@ public class Category {
     private int timesUsed;
 
     // Getters/setters
+    /**
+     * Gets name
+     *
+     * @return name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Modifies name
+     *
+     * @param name Category name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Gets last used date
+     *
+     * @return Last used date
+     */
     private Date getLastUsed() {
         // warning: Date objects are mutable.
         return (Date)lastUsed.clone();
     }
 
+    /**
+     * Modifies last used date
+     *
+     * @param lastUsed Category date
+     */
     public void setLastUsed(Date lastUsed) {
         // warning: Date objects are mutable.
         this.lastUsed = (Date)lastUsed.clone();
     }
 
+    /**
+     * Generates new last used date
+     */
     private void touch() {
         lastUsed = new Date();
     }
 
+    /**
+     * Gets no. of times the category is used
+     *
+     * @return no. of times used
+     */
     private int getTimesUsed() {
         return timesUsed;
     }
 
+    /**
+     * Modifies no. of times used
+     *
+     * @param timesUsed Category used times
+     */
     public void setTimesUsed(int timesUsed) {
         this.timesUsed = timesUsed;
     }
 
+    /**
+     * Increments timesUsed by 1 and sets last used date as now.
+     */
     public void incTimesUsed() {
         timesUsed++;
         touch();
@@ -75,6 +114,11 @@ public class Category {
         }
     }
 
+    /**
+     * Gets content values
+     *
+     * @return Content values
+     */
     private ContentValues toContentValues() {
         ContentValues cv = new ContentValues();
         cv.put(Table.COLUMN_NAME, getName());
@@ -83,6 +127,11 @@ public class Category {
         return cv;
     }
 
+    /**
+     * Gets category from cursor
+     * @param cursor Category cursor
+     * @return Category from cursor
+     */
     private static Category fromCursor(Cursor cursor) {
         // Hardcoding column positions!
         Category c = new Category();
@@ -175,15 +224,30 @@ public class Category {
                 + COLUMN_TIMES_USED + " INTEGER"
                 + ");";
 
+        /**
+         * Creates new table with provided SQLite database
+         *
+         * @param db Category database
+         */
         public static void onCreate(SQLiteDatabase db) {
             db.execSQL(CREATE_TABLE_STATEMENT);
         }
 
+        /**
+         * Deletes existing table
+         * @param db Category database
+         */
         public static void onDelete(SQLiteDatabase db) {
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
             onCreate(db);
         }
 
+        /**
+         * Updates given database
+         * @param db Category database
+         * @param from Exiting category id
+         * @param to New category id
+         */
         public static void onUpdate(SQLiteDatabase db, int from, int to) {
             if (from == to) {
                 return;
