@@ -125,7 +125,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
             @Override
             public void onStateChanged(View bottomSheet, int newState) {
-                Log.d("Deneme","deneme"+newState);
                 prepareViewsForSheetPosition(newState);
             }
 

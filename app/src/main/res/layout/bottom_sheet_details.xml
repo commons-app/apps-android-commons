@@ -35,15 +35,13 @@
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:text="Denemeler" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:text="Denemeler" />
+                android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
     <View
@@ -77,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="8dp"
                 android:layout_gravity="center_horizontal"
-                android:text="DIRECTIONS"
+                android:text="@string/nearby_directions"
                 />
         </LinearLayout>
         <LinearLayout
@@ -99,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="8dp"
                 android:layout_gravity="center_horizontal"
-                android:text="WIKI DATA"
+                android:text="@string/nearby_wikidata"
                 />
         </LinearLayout>
 
@@ -123,7 +121,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="8dp"
                 android:layout_gravity="center_horizontal"
-                android:text="WIKIPEDIA"
+                android:text="@string/nearby_wikipedia"
 
                 />
         </LinearLayout>
