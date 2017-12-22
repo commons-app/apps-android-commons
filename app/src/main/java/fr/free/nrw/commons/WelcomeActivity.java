@@ -43,7 +43,7 @@ public class WelcomeActivity extends BaseActivity {
         adapter.setCallback(null);
         super.onDestroy();
     }
-    
+
     /**
      * Creates a way to change current activity to WelcomeActivity
      *
