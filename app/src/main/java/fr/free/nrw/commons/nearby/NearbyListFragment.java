@@ -56,7 +56,6 @@ public class NearbyListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_nearby, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.listView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        //adapterFactory = new NearbyAdapterFactory(place -> NearbyInfoDialog.showYourself(getActivity(), place));
         adapterFactory = new NearbyAdapterFactory();
         return view;
     }
