@@ -297,27 +297,28 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     }
 
     public void prepareViewsForSheetPosition(int bottomSheetState) {
-        if (bottomSheetState == BottomSheetBehavior.STATE_COLLAPSED) {
-            if (!fabList.isShown()) fabList.show();
-            closeFabs(isFabOpen);
-            if (!fabPlus.isShown()) showFAB();
-            this.getView().requestFocus();
-            moreInfo.setVisibility(View.VISIBLE);
-            //NearbyActivity.bottomSheetStatus = NearbyActivity.BottomSheetStatus.DISPLAY_DETAILS_SHEET_COLLAPSED;
+
+        switch (bottomSheetState) {
+            case (BottomSheetBehavior.STATE_COLLAPSED):
+                if (!fabList.isShown()) fabList.show();
+                closeFabs(isFabOpen);
+                if (!fabPlus.isShown()) showFAB();
+                this.getView().requestFocus();
+                moreInfo.setVisibility(View.VISIBLE);
+                break;
+            case (BottomSheetBehavior.STATE_EXPANDED):
+                if (fabList.isShown()) fabList.hide();
+                this.getView().requestFocus();
+                moreInfo.setVisibility(View.VISIBLE);
+                break;
+            case (BottomSheetBehavior.STATE_HIDDEN):
+                closeFabs(isFabOpen);
+                hideFAB();
+                moreInfo.setVisibility(View.GONE);
+                this.getView().clearFocus();
+                break;
         }
-        else if (bottomSheetState == BottomSheetBehavior.STATE_EXPANDED) {
-            if (fabList.isShown()) fabList.hide();
-            this.getView().requestFocus();
-            moreInfo.setVisibility(View.VISIBLE);
-            //NearbyActivity.bottomSheetStatus = NearbyActivity.BottomSheetStatus.DISPLAY_DETAILS_SHEET_EXPANDED;
-        }
-        else if (bottomSheetState == BottomSheetBehavior.STATE_HIDDEN) {
-            closeFabs(isFabOpen);
-            hideFAB();
-            moreInfo.setVisibility(View.GONE);
-            this.getView().clearFocus();
-        }
-        //currBottomSheetState = bottomSheetState;
+        
     }
 
     private void hideFAB() {
