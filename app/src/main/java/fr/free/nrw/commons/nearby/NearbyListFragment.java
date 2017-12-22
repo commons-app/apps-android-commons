@@ -17,12 +17,13 @@ import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.List;
 
+import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.utils.UriDeserializer;
 import timber.log.Timber;
 
-public class NearbyListFragment extends Fragment {
+public class NearbyListFragment extends DaggerFragment {
     private static final Type LIST_TYPE = new TypeToken<List<Place>>() {
     }.getType();
     private static final Type CUR_LAT_LNG_TYPE = new TypeToken<LatLng>() {
