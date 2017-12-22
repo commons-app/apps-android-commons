@@ -44,28 +44,22 @@ import timber.log.Timber;
 )
 public class CommonsApplication extends DaggerApplication {
 
-    public static final String DEFAULT_EDIT_SUMMARY = "Uploaded using Android Commons app";
-    public static final String FEEDBACK_EMAIL = "commons-app-android@googlegroups.com";
-    public static final String LOGS_PRIVATE_EMAIL = "commons-app-android-private@googlegroups.com";
-    public static final String FEEDBACK_EMAIL_SUBJECT = "Commons Android App (%s) Feedback";
     @Inject SessionManager sessionManager;
     @Inject DBOpenHelper dbOpenHelper;
     @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
     @Inject @Named("application_preferences") SharedPreferences applicationPrefs;
     @Inject @Named("prefs") SharedPreferences otherPrefs;
+    
+    public static final String DEFAULT_EDIT_SUMMARY = "Uploaded using Android Commons app";
+    
+    public static final String FEEDBACK_EMAIL = "commons-app-android@googlegroups.com";
+    
+    public static final String LOGS_PRIVATE_EMAIL = "commons-app-android-private@googlegroups.com";
+    
+    public static final String FEEDBACK_EMAIL_SUBJECT = "Commons Android App (%s) Feedback";
+    
     private CommonsApplicationComponent component;
     private RefWatcher refWatcher;
-
-    /**
-     * Provides a way to get member refWatcher
-     *
-     * @param context Application context
-     * @return application member refWatcher
-     */
-    public static RefWatcher getRefWatcher(Context context) {
-        CommonsApplication application = (CommonsApplication) context.getApplicationContext();
-        return application.refWatcher;
-    }
 
     /**
      * Used to declare and initialize various components and dependencies
@@ -101,11 +95,22 @@ public class CommonsApplication extends DaggerApplication {
         }
         return LeakCanary.install(this);
     }
-
-    /**
-     * Helps in injecting dependency library Dagger
-     * @return Dagger injector
+    
+  /**
+     * Provides a way to get member refWatcher
+     *
+     * @param context Application context
+     * @return application member refWatcher
      */
+    public static RefWatcher getRefWatcher(Context context) {
+        CommonsApplication application = (CommonsApplication) context.getApplicationContext();
+        return application.refWatcher;
+    }
+    
+    /**
+    * Helps in injecting dependency library Dagger
+    * @return Dagger injector
+    */
     @Override
     protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
         return injector();

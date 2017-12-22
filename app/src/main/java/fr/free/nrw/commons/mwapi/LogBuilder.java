@@ -83,10 +83,7 @@ public class LogBuilder {
         LogTask logTask = new LogTask(mwApi);
         logTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, this);
     }
-
-    /**
-     * Logs in  false
-     */
+    
     public void log() {
         log(false);
     }

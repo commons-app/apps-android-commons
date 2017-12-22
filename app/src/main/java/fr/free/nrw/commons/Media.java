@@ -119,7 +119,7 @@ public class Media implements Parcelable {
     }
 
     /**
-     * Modifies tag of media
+     * Modifies( or creates a) tag of media
      * @param key Media key
      * @param value Media value
      */
