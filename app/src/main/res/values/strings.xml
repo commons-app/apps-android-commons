@@ -213,4 +213,7 @@
   <string name="nearby_location_has_not_changed">Location has not changed.</string>
   <string name="nearby_location_not_available">Location not available.</string>
   <string name="location_permission_rationale_nearby">Permission required to display a list of nearby places</string>
+  <string name="nearby_directions">DIRECTIONS</string>
+  <string name="nearby_wikidata">WIKIDATA</string>
+  <string name="nearby_wikipedia">WIKIPEDIA</string>
 </resources>
