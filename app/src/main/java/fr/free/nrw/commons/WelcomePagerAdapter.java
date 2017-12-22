@@ -74,9 +74,6 @@ public class WelcomePagerAdapter extends PagerAdapter {
         container.removeView((View) obj);
     }
 
-    /**
-     * Interface used create on clicked callback(s).
-     */
     public interface Callback {
         void onYesClicked();
     }
