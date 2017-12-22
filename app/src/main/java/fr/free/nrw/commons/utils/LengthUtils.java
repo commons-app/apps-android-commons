@@ -64,9 +64,9 @@ public class LengthUtils {
     }
 
     /**
-     * Gets twice the amount of arc sine of (x)^(1/2)
+     * Computes inverse of haversine
      * @param x Angle in radian
-     * @return Twice the angle
+     * @return Inverse of haversine
      */
     private static double arcHav(double x) {
         return 2.0D * Math.asin(Math.sqrt(x));
@@ -84,9 +84,9 @@ public class LengthUtils {
     }
 
     /**
-     * Computes square sine function for half of the value entered
+     * Computes haversine
      * @param x Angle in radians
-     * @return One-forth of square of sine function
+     * @return Haversine of x
      */
     private static double hav(double x) {
         double sinHalf = Math.sin(x * 0.5D);
