@@ -42,10 +42,10 @@ public class Category {
     }
 
     /**
-     * Find persisted category in database, based on its name.
+     * Find persisted category in database table, based on its name.
      * @param client ContentProviderClient to handle DB connection
      * @param name Category's name
-     * @return category from database, or null if not found
+     * @return category from , database table, or null if not found
      */
     public static @Nullable Category find(ContentProviderClient client, String name) {
         Cursor cursor = null;
@@ -230,7 +230,7 @@ public class Category {
                 + ");";
 
         /**
-         * Creates new database with provided SQLite database
+         * Creates new table with provided SQLite database
          *
          * @param db Category database
          */
@@ -239,7 +239,7 @@ public class Category {
         }
 
         /**
-         * Deletes existing database
+         * Deletes existing table
          * @param db Category database
          */
         public static void onDelete(SQLiteDatabase db) {
