@@ -15,12 +15,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/toolbar"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
+            android:layout_marginLeft="@dimen/activity_margin_horizontal"
+            android:layout_marginStart="@dimen/activity_margin_horizontal"
+            android:layout_marginRight="@dimen/activity_margin_horizontal"
+            android:layout_marginEnd="@dimen/activity_margin_horizontal"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -47,7 +49,7 @@
                 style="?android:textAppearanceSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/standard_gap"
                 android:gravity="center"
                 android:text="@string/about_license" />
 
@@ -56,7 +58,7 @@
                 style="?android:textAppearanceSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/small_gap"
                 android:gravity="center"
                 android:text="@string/about_improve" />
 
@@ -65,7 +67,7 @@
                 style="?android:textAppearanceSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/standard_gap"
                 android:gravity="center"
                 android:text="@string/about_privacy_policy" />
 
@@ -74,7 +76,7 @@
                 style="?android:textAppearanceSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/standard_gap"
                 android:gravity="center"
                 android:text="@string/about_credits" />
 
@@ -83,7 +85,7 @@
                 style="?android:textAppearanceSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="@dimen/large_gap"
                 android:alpha="0.2"
                 android:gravity="center" />
 
