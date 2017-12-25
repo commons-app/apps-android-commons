@@ -63,17 +63,21 @@
             android:layout_weight="1"
             android:padding="16dp"
             android:clickable="true"
+            android:background="@drawable/button_background_selector"
             android:orientation="vertical"
             >
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:duplicateParentState="true"
                 app:srcCompat="@drawable/ic_directions_black_24dp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="8dp"
+                android:duplicateParentState="true"
+                android:textColor="@color/text_color_selector"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/nearby_directions"
                 />
@@ -85,17 +89,21 @@
             android:layout_weight="1"
             android:padding="16dp"
             android:clickable="true"
+            android:background="@drawable/button_background_selector"
             android:orientation="vertical"
             >
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:duplicateParentState="true"
                 app:srcCompat="@drawable/ic_wikidata_logo_24dp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="8dp"
+                android:duplicateParentState="true"
+                android:textColor="@color/text_color_selector"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/nearby_wikidata"
                 />
@@ -108,18 +116,22 @@
             android:layout_weight="1"
             android:padding="16dp"
             android:clickable="true"
+            android:background="@drawable/button_background_selector"
             android:orientation="vertical"
             >
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:duplicateParentState="true"
                 app:srcCompat="@drawable/ic_wikipedia_logo_24dp"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="8dp"
+                android:duplicateParentState="true"
+                android:textColor="@color/text_color_selector"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/nearby_wikipedia"
 

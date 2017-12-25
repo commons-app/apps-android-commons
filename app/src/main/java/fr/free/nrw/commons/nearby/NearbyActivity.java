@@ -367,15 +367,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         bundle.putString("CurLatLng", gsonCurLatLng);
 
         lockNearbyView(true);
-        // Begin the transaction
-        // Begin the transaction
-        /*if (viewMode.isMap()) {
-            setMapFragment();
-        } else {
-            setListFragment();
-        }
-        swipeLayout.setRefreshing(false);
-        }*/
         setMapFragment();
         setListFragment();
 

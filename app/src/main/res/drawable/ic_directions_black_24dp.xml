@@ -3,7 +3,7 @@
         android:height="24dp"
         android:viewportWidth="24.0"
         android:viewportHeight="24.0"
-        android:tint="@color/status_bar_blue"
+        android:tint="@color/button_color_selector"
     >
     <path
         android:fillColor="#FF000000"

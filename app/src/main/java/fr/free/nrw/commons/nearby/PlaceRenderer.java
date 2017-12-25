@@ -30,6 +30,9 @@ class PlaceRenderer extends Renderer<Place> {
     @BindView(R.id.distance) TextView distance;
     @BindView(R.id.icon) ImageView icon;
     @BindView(R.id.buttonLayout) LinearLayout buttonLayout;
+    @BindView(R.id.wikidataButton) LinearLayout wikidataButton;
+    @BindView(R.id.wikipediaButton) LinearLayout wikipediaButton;
+    @BindView(R.id.directionsButton) LinearLayout directionsButton;
 
     private View view;
     private static ArrayList<LinearLayout> openedItems;

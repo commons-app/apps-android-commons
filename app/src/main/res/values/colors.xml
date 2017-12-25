@@ -31,4 +31,9 @@
     <color name="upload_overlay_background_dark">#77000000</color>
     <color name="upload_overlay_background_light">#44000000</color>
 
+    <color name="pressed_button_background_light">#64999999</color>
+    <color name="focused_button_background_light">#32999999</color>
+    <color name="disabled_button_text_color_light">#48000000</color>
+    <color name="enabled_button_text_color_light">#B0000000</color>
+
 </resources>

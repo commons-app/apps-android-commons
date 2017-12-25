@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.nearby;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,7 +16,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -36,10 +39,12 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.utils.UriDeserializer;
 
 public class NearbyMapFragment extends android.support.v4.app.Fragment {
+
     private MapView mapView;
     private List<NearbyBaseMarker> baseMarkerOptions;
     private fr.free.nrw.commons.location.LatLng curLatLng;
@@ -48,6 +53,9 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     private View moreInfo;
     private BottomSheetBehavior bottomSheetListBehavior;
     private BottomSheetBehavior bottomSheetDetailsBehavior;
+    private LinearLayout wikipediaButton;
+    private LinearLayout wikidataButton;
+    private LinearLayout directionsButton;
     private FloatingActionButton fabList;
     private FloatingActionButton fabPlus;
     private FloatingActionButton fabCamera;
@@ -57,7 +65,6 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     private TextView title;
     private TextView distance;
     private ImageView icon;
-
 
     private boolean isFabOpen=false;
     private Animation rotate_backward;
@@ -158,6 +165,11 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         title = getActivity().findViewById(R.id.title);
         distance = getActivity().findViewById(R.id.category);
         icon = getActivity().findViewById(R.id.icon);
+
+        wikidataButton = getActivity().findViewById(R.id.wikidataButton);
+        wikipediaButton = getActivity().findViewById(R.id.wikipediaButton);
+        directionsButton = getActivity().findViewById(R.id.directionsButton);
+
     }
 
     private void setListeners() {
@@ -240,6 +252,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
                     bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
                     bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                     //NearbyInfoDialog.showYourself(getActivity(), place);
+
                 }
                 return false;
             });
@@ -318,7 +331,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
                 this.getView().clearFocus();
                 break;
         }
-        
+
     }
 
     private void hideFAB() {
@@ -339,11 +352,49 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     }
 
     private void passInfoToSheet(Place place) {
-        //TODO set correct icon here
+        wikipediaButton.setEnabled(
+                !(place.siteLinks == null || Uri.EMPTY.equals(place.siteLinks.getWikipediaLink())));
+        wikipediaButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openWebView(place.siteLinks.getWikipediaLink());
+            }
+        });
+
+        wikidataButton.setEnabled(
+                !(place.siteLinks == null || Uri.EMPTY.equals(place.siteLinks.getWikidataLink())));
+        wikidataButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openWebView(place.siteLinks.getWikidataLink());
+            }
+        });
+
+        directionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LatLng location = new LatLng(place.location.getLatitude()
+                        , place.location.getLongitude(), 0);
+                //Open map app at given position
+                Uri gmmIntentUri = Uri.parse(
+                        "geo:0,0?q=" + location.getLatitude() + "," + location.getLongitude());
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+
+                if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+                    startActivity(mapIntent);
+                }
+            }
+        });
+
         icon.setImageResource(place.getDescription().getIcon());
         description.setText(place.getDescription().getText());
         title.setText(place.name.toString());
         distance.setText(place.distance.toString());
+    }
+
+    private void openWebView(Uri link) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, link);
+        startActivity(browserIntent);
     }
 
     private void animateFAB(boolean isFabOpen) {
@@ -370,7 +421,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     }
 
     private void closeFabs(boolean isFabOpen){
-        if(isFabOpen){
+        if (isFabOpen) {
             fabPlus.startAnimation(rotate_backward);
             fabCamera.startAnimation(fab_close);
             fabGallery.startAnimation(fab_close);
