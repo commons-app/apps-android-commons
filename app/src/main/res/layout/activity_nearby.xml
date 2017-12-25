@@ -106,13 +106,13 @@
             android:layout_height="wrap_content"
             app:fabSize="mini"
             android:visibility="invisible"
-            app:backgroundTint="@color/button_blue"
+            app:backgroundTint="@color/main_background_light"
             app:elevation="6dp"
             app:pressedTranslationZ="12dp"
             app:layout_anchor="@id/empty_view1"
             app:layout_anchorGravity="center_horizontal"
             app:srcCompat="@drawable/ic_photo_camera_white_24dp"
-            android:tint="@color/button_background_dark"
+            android:tint="@color/button_blue"
             android:scaleType="center"/>
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_galery"
@@ -120,13 +120,13 @@
             android:layout_height="wrap_content"
             app:fabSize="mini"
             android:visibility="invisible"
-            app:backgroundTint="@color/button_blue"
+            app:backgroundTint="@color/main_background_light"
             app:elevation="6dp"
             app:pressedTranslationZ="12dp"
             app:layout_anchor="@id/empty_view2"
             app:layout_anchorGravity="center_horizontal"
             app:srcCompat="@drawable/ic_photo_white_24dp"
-            android:tint="@color/button_background_dark"
+            android:tint="@color/button_blue"
             android:scaleType="center"
             />
 
