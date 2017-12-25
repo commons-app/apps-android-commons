@@ -1,5 +1,7 @@
 package fr.free.nrw.commons.nearby;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.transition.TransitionManager;
@@ -14,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.pedrogomez.renderers.Renderer;
 
 import java.util.ArrayList;
@@ -30,8 +33,8 @@ class PlaceRenderer extends Renderer<Place> {
     @BindView(R.id.distance) TextView distance;
     @BindView(R.id.icon) ImageView icon;
     @BindView(R.id.buttonLayout) LinearLayout buttonLayout;
-    @BindView(R.id.wikidataButton) LinearLayout wikidataButton;
-    @BindView(R.id.wikipediaButton) LinearLayout wikipediaButton;
+    @BindView(R.id.cameraButton) LinearLayout cameraButton;
+    @BindView(R.id.galeryButton) LinearLayout galeryButton;
     @BindView(R.id.directionsButton) LinearLayout directionsButton;
 
     private View view;
@@ -104,9 +107,25 @@ class PlaceRenderer extends Renderer<Place> {
         tvDesc.setText(descriptionText);
         distance.setText(place.distance);
         icon.setImageResource(place.getLabel().getIcon());
+
+        directionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LatLng location = new LatLng(place.location.getLatitude()
+                        , place.location.getLongitude(), 0);
+                //Open map app at given position
+                Uri gmmIntentUri = Uri.parse(
+                        "geo:0,0?q=" + location.getLatitude() + "," + location.getLongitude());
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+
+                if (mapIntent.resolveActivity(view.getContext().getPackageManager()) != null) {
+                    view.getContext().startActivity(mapIntent);
+                }
+            }
+        });
     }
 
-    /*interface PlaceClickedListener {
-        void onPlaceOpened(Place place);
-    }*/
+    private void startActivity(Intent intent){
+
+    }
 }
