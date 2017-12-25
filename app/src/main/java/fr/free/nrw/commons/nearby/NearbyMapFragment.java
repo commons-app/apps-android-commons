@@ -208,9 +208,6 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
                     } else if (slideOffset == 0){
                         transparentView.setClickable(false);
                     }
-                } else {
-                    // Not to allow user swipe down, she should press back instead
-                    //bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                 }
             }
         });
@@ -252,8 +249,6 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
                     passInfoToSheet(place);
                     bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
                     bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                    //NearbyInfoDialog.showYourself(getActivity(), place);
-
                 }
                 return false;
             });
