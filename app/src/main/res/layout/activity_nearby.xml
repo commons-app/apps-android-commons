@@ -42,8 +42,9 @@
         </LinearLayout>
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fab_list"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fabSize="mini"
                 android:layout_alignBottom="@id/toolbar"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="28dp"
@@ -71,8 +72,9 @@
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_plus"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fabSize="normal"
             android:layout_margin="16dp"
             android:visibility="invisible"
             android:clickable="true"
@@ -100,8 +102,9 @@
             />
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_camera"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fabSize="mini"
             android:visibility="invisible"
             app:backgroundTint="@color/cardview_light_background"
             app:elevation="6dp"
@@ -113,8 +116,9 @@
             android:scaleType="center"/>
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_galery"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fabSize="mini"
             android:visibility="invisible"
             app:backgroundTint="@color/cardview_light_background"
             app:elevation="6dp"
