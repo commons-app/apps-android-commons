@@ -208,6 +208,9 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
                     } else if (slideOffset == 0){
                         transparentView.setClickable(false);
                     }
+                } else {
+                    // Not to allow user swipe down, she should press back instead
+                    //bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                 }
             }
         });
@@ -323,10 +326,13 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
                 moreInfo.setVisibility(View.VISIBLE);
                 break;
             case (BottomSheetBehavior.STATE_HIDDEN):
+                transparentView.setClickable(false);
+                transparentView.setAlpha(0);
+                if (!fabList.isShown()) fabList.show();
                 closeFabs(isFabOpen);
                 hideFAB();
+                this.getView().requestFocus();
                 moreInfo.setVisibility(View.GONE);
-                this.getView().clearFocus();
                 break;
         }
 
