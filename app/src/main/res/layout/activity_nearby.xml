@@ -39,23 +39,6 @@
                     android:layout_height="match_parent"></FrameLayout>
 
             </LinearLayout>
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab_list"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:fabSize="mini"
-                android:layout_alignBottom="@id/toolbar"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="28dp"
-                android:layout_marginBottom="-96dp"
-                android:visibility="invisible"
-                app:elevation="6dp"
-                app:pressedTranslationZ="12dp"
-                android:backgroundTint="@color/button_blue"
-                android:clickable="true"
-                app:srcCompat="@drawable/ic_list_white_24dp"
-                android:scaleType="center"
-                />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

@@ -51,6 +51,7 @@
   <string name="categories_search_text_hint">Search categories</string>
   <string name="menu_save_categories">Save</string>
   <string name="refresh_button">Refresh</string>
+  <string name="display_list_button">List</string>
   <string name="gps_disabled">GPS is disabled in your device. Would you like to enable it?</string>
   <string name="enable_gps">Enable GPS</string>
   <string name="contributions_subtitle_zero">No uploads yet</string>

@@ -56,8 +56,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     LinearLayout bottomSheet;
     @BindView(R.id.bottom_sheet_details)
     LinearLayout bottomSheetDetails;
-    @BindView(R.id.fab_list)
-    FloatingActionButton fabList;
     @BindView(R.id.transparentView)
     View transparentView;
 
@@ -85,8 +83,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         bundle = new Bundle();
 
         initBottomSheetBehaviour();
-        initFabList();
-
         initDrawer();
     }
 
@@ -129,16 +125,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         bottomSheetBehaviorForDetails.setState(BottomSheetBehavior.STATE_HIDDEN);
     }
 
-    private void initFabList() {
-        fabList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                bottomSheetBehaviorForDetails.setState(BottomSheetBehavior.STATE_HIDDEN);
-                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-            }
-        });
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -154,6 +140,10 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             case R.id.action_refresh:
                 lockNearbyView(false);
                 refreshView(true);
+                return true;
+            case R.id.action_display_list:
+                bottomSheetBehaviorForDetails.setState(BottomSheetBehavior.STATE_HIDDEN);
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -412,11 +402,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     }
 
     public void prepareViewsForSheetPosition(int bottomSheetState) {
-        if (bottomSheetState >= BottomSheetBehavior.STATE_COLLAPSED) {
-            fabList.show();
-        }
-        else if (bottomSheetState == BottomSheetBehavior.STATE_EXPANDED) {
-            fabList.hide();
-        }
+        // TODO
     }
 }

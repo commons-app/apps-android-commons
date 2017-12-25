@@ -56,7 +56,6 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     private LinearLayout wikipediaButton;
     private LinearLayout wikidataButton;
     private LinearLayout directionsButton;
-    private FloatingActionButton fabList;
     private FloatingActionButton fabPlus;
     private FloatingActionButton fabCamera;
     private FloatingActionButton fabGallery;
@@ -148,7 +147,6 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         bottomSheetDetailsBehavior = BottomSheetBehavior.from(bottomSheetDetails);
         bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 
-        fabList = getActivity().findViewById(R.id.fab_list);
         fabPlus = getActivity().findViewById(R.id.fab_plus);
         fabCamera = getActivity().findViewById(R.id.fab_camera);
         fabGallery = getActivity().findViewById(R.id.fab_galery);
@@ -309,21 +307,18 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
 
         switch (bottomSheetState) {
             case (BottomSheetBehavior.STATE_COLLAPSED):
-                if (!fabList.isShown()) fabList.show();
                 closeFabs(isFabOpen);
                 if (!fabPlus.isShown()) showFAB();
                 this.getView().requestFocus();
                 moreInfo.setVisibility(View.VISIBLE);
                 break;
             case (BottomSheetBehavior.STATE_EXPANDED):
-                if (fabList.isShown()) fabList.hide();
                 this.getView().requestFocus();
                 moreInfo.setVisibility(View.VISIBLE);
                 break;
             case (BottomSheetBehavior.STATE_HIDDEN):
                 transparentView.setClickable(false);
                 transparentView.setAlpha(0);
-                if (!fabList.isShown()) fabList.show();
                 closeFabs(isFabOpen);
                 hideFAB();
                 this.getView().requestFocus();
