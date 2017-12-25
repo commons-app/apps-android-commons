@@ -13,7 +13,7 @@
   <string name="upload_failed">No s\'ha trobat el fitxer. Proveu-ho amb un altre fitxer.</string>
   <string name="authentication_failed">L\'autenticació ha fallat!</string>
   <string name="uploading_started">Ha començat la càrrega!</string>
-  <string name="upload_completed_notification_title">S\'ha carregat %1$s !</string>
+  <string name="upload_completed_notification_title">S’ha pujat %1$s.</string>
   <string name="upload_completed_notification_text">Prem per veure la teva càrrega</string>
   <string name="upload_progress_notification_title_start">Començant la càrrega al servidor de  %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Carregant %1$s</string>
@@ -78,6 +78,7 @@
   <string name="about_privacy_policy" fuzzy="true">Wikimedia:Commons-android-texts-sobre privacitat/ca</string>
   <string name="title_activity_about">Quant a</string>
   <string name="menu_feedback">Envia comentaris (per correu)</string>
+  <string name="no_email_client">No hi ha cap client de correu instal·lat</string>
   <string name="provider_categories">Categories usades recentment</string>
   <string name="waiting_first_sync">S’està esperant la primera sincronització…</string>
   <string name="no_uploads_yet">Encara no heu carregat cap foto.</string>
