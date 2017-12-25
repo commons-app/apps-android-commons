@@ -6,8 +6,10 @@ import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.transition.TransitionManager;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.widget.PopupMenu;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -36,9 +38,11 @@ class PlaceRenderer extends Renderer<Place> {
     @BindView(R.id.cameraButton) LinearLayout cameraButton;
     @BindView(R.id.galeryButton) LinearLayout galeryButton;
     @BindView(R.id.directionsButton) LinearLayout directionsButton;
+    @BindView(R.id.iconOverflow) LinearLayout iconOverflow;
 
     private View view;
     private static ArrayList<LinearLayout> openedItems;
+    private Place place;
 
 
     PlaceRenderer(){
@@ -98,7 +102,7 @@ class PlaceRenderer extends Renderer<Place> {
 
     @Override
     public void render() {
-        Place place = getContent();
+        place = getContent();
         tvName.setText(place.name);
         String descriptionText = place.getLongDescription();
         if (descriptionText.equals("?")) {
@@ -123,9 +127,57 @@ class PlaceRenderer extends Renderer<Place> {
                 }
             }
         });
+
+        iconOverflow.setVisibility(showMenu() ? View.VISIBLE : View.GONE);
+        iconOverflow.setOnClickListener(v -> popupMenuListener());
+
     }
 
-    private void startActivity(Intent intent){
+    private void popupMenuListener() {
+        PopupMenu popupMenu = new PopupMenu(view.getContext(), iconOverflow);
+        popupMenu.inflate(R.menu.nearby_info_dialog_options);
 
+        MenuItem commonsArticle = popupMenu.getMenu()
+                .findItem(R.id.nearby_info_menu_commons_article);
+        MenuItem wikiDataArticle = popupMenu.getMenu()
+                .findItem(R.id.nearby_info_menu_wikidata_article);
+        MenuItem wikipediaArticle = popupMenu.getMenu()
+                .findItem(R.id.nearby_info_menu_wikipedia_article);
+
+        commonsArticle.setEnabled(!place.siteLinks.getCommonsLink().equals(Uri.EMPTY));
+        wikiDataArticle.setEnabled(!place.siteLinks.getWikidataLink().equals(Uri.EMPTY));
+        wikipediaArticle.setEnabled(!place.siteLinks.getWikipediaLink().equals(Uri.EMPTY));
+
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.nearby_info_menu_commons_article:
+                        openWebView(place.siteLinks.getCommonsLink());
+                        return true;
+                    case R.id.nearby_info_menu_wikidata_article:
+                        openWebView(place.siteLinks.getWikidataLink());
+                        return true;
+                    case R.id.nearby_info_menu_wikipedia_article:
+                        openWebView(place.siteLinks.getWikipediaLink());
+                        return true;
+                    default:
+                        break;
+                }
+                return false;
+            }
+        });
+        popupMenu.show();
     }
+
+    private void openWebView(Uri link) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, link);
+        view.getContext().startActivity(browserIntent);
+    }
+
+    private boolean showMenu() {
+        return !place.siteLinks.getCommonsLink().equals(Uri.EMPTY)
+                || !place.siteLinks.getWikidataLink().equals(Uri.EMPTY);
+    }
+
 }
