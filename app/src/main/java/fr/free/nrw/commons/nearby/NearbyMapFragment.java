@@ -4,19 +4,18 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -39,7 +38,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.utils.UriDeserializer;
 
@@ -59,6 +57,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     private FloatingActionButton fabPlus;
     private FloatingActionButton fabCamera;
     private FloatingActionButton fabGallery;
+    private FloatingActionButton fabCommons;
     private View transparentView;
     private TextView description;
     private TextView title;
@@ -70,6 +69,8 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     private Animation fab_close;
     private Animation fab_open;
     private Animation rotate_forward;
+
+    private Place place;
 
     public NearbyMapFragment() {
     }
@@ -150,6 +151,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         fabPlus = getActivity().findViewById(R.id.fab_plus);
         fabCamera = getActivity().findViewById(R.id.fab_camera);
         fabGallery = getActivity().findViewById(R.id.fab_galery);
+        fabCommons = getActivity().findViewById(R.id.fab_commons_page);
 
         fab_open = AnimationUtils.loadAnimation(getActivity(), R.anim.fab_open);
         fab_close = AnimationUtils.loadAnimation(getActivity(),R.anim.fab_close);
@@ -346,6 +348,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     }
 
     private void passInfoToSheet(Place place) {
+        this.place = place;
         wikipediaButton.setEnabled(
                 !(place.siteLinks == null || Uri.EMPTY.equals(place.siteLinks.getWikipediaLink())));
         wikipediaButton.setOnClickListener(new View.OnClickListener() {
@@ -362,6 +365,15 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
             public void onClick(View view) {
                 openWebView(place.siteLinks.getWikidataLink());
             }
+        });
+
+        fabCommons.setEnabled(
+                !(place.siteLinks == null || Uri.EMPTY.equals(place.siteLinks.getCommonsLink())));
+        fabCommons.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("deneme","deneme");
+                openWebView(place.siteLinks.getCommonsLink()); }
         });
 
         directionsButton.setOnClickListener(new View.OnClickListener() {
@@ -398,16 +410,22 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
             fabPlus.startAnimation(rotate_backward);
             fabCamera.startAnimation(fab_close);
             fabGallery.startAnimation(fab_close);
+            fabCommons.startAnimation(fab_close);
             fabCamera.setClickable(false);
             fabGallery.setClickable(false);
+            fabCommons.setClickable(false);
 
         } else {
 
             fabPlus.startAnimation(rotate_forward);
             fabCamera.startAnimation(fab_open);
             fabGallery.startAnimation(fab_open);
+            fabCommons.startAnimation(fab_open);
             fabCamera.setClickable(true);
             fabGallery.setClickable(true);
+            fabCommons.setClickable(
+                    !(place.siteLinks == null
+                            || Uri.EMPTY.equals(place.siteLinks.getCommonsLink())));
 
         }
 
@@ -419,8 +437,10 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
             fabPlus.startAnimation(rotate_backward);
             fabCamera.startAnimation(fab_close);
             fabGallery.startAnimation(fab_close);
+            fabCommons.startAnimation(fab_close);
             fabCamera.setClickable(false);
             fabGallery.setClickable(false);
+            fabCommons.setClickable(false);
             this.isFabOpen=!isFabOpen;
         }
     }
