@@ -338,6 +338,9 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         p.setAnchorId(View.NO_ID);
         fabPlus.setLayoutParams(p);
         fabPlus.hide();
+        fabCommons.hide();
+        fabCamera.hide();
+        fabGallery.hide();
     }
 
     private void showFAB() {
