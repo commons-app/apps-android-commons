@@ -85,16 +85,24 @@
             app:layout_anchorGravity="top|right|end"
             app:srcCompat="@drawable/ic_add_white_24dp"/>
         <View
-            android:id = "@+id/empty_view1"
-            android:layout_height = "206dip"
+            android:id = "@+id/empty_view2"
+            android:layout_height = "306dip"
             android:layout_width = "56dp"
             android:visibility="invisible"
             app:layout_anchor="@id/fab_plus"
             app:layout_anchorGravity="center_horizontal"
             />
         <View
-            android:id = "@+id/empty_view2"
-            android:layout_height = "86dip"
+            android:id = "@+id/empty_view1"
+            android:layout_height = "186dip"
+            android:layout_width = "56dp"
+            android:visibility="invisible"
+            app:layout_anchor="@id/fab_plus"
+            app:layout_anchorGravity="center_horizontal"
+            />
+        <View
+            android:id = "@+id/empty_view"
+            android:layout_height = "66dip"
             android:layout_width = "56dp"
             android:visibility="invisible"
             app:layout_anchor="@id/fab_plus"
@@ -123,10 +131,24 @@
             app:backgroundTint="@color/main_background_light"
             app:elevation="6dp"
             app:pressedTranslationZ="12dp"
-            app:layout_anchor="@id/empty_view2"
+            app:layout_anchor="@id/empty_view"
             app:layout_anchorGravity="center_horizontal"
             app:srcCompat="@drawable/ic_photo_white_24dp"
             android:tint="@color/button_blue"
+            android:scaleType="center"
+            />
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_commons_page"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fabSize="mini"
+            android:visibility="invisible"
+            app:backgroundTint="@color/main_background_light"
+            app:elevation="6dp"
+            app:pressedTranslationZ="12dp"
+            app:layout_anchor="@id/empty_view2"
+            app:layout_anchorGravity="center_horizontal"
+            app:srcCompat="@drawable/ic_commons_icon_vector"
             android:scaleType="center"
             />
 
