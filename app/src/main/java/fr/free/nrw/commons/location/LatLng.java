@@ -3,6 +3,9 @@ package fr.free.nrw.commons.location;
 import android.location.Location;
 import android.support.annotation.NonNull;
 
+/**
+ * the latitude and longitude of the user
+ */
 public class LatLng {
 
     private final double latitude;
@@ -10,7 +13,7 @@ public class LatLng {
     private final float accuracy;
 
     /** Accepts latitude and longitude.
-     * North and South values are cut off at 90Â°
+     * North and South values are cut off at 90°
      *
      * @param latitude double value
      * @param longitude double value
@@ -25,10 +28,18 @@ public class LatLng {
         this.accuracy = accuracy;
     }
 
+    /**
+     * gets the latitude and longitude of a given non-null location
+     * @param location the non-null location of the user
+     * @return
+     */
     public static LatLng from(@NonNull Location location) {
         return new LatLng(location.getLatitude(), location.getLongitude(), location.getAccuracy());
     }
-
+    
+    /**
+     * creates a hash code for the longitude and longitude
+     */
     public int hashCode() {
         boolean var1 = true;
         byte var2 = 1;
@@ -39,6 +50,10 @@ public class LatLng {
         return var5;
     }
 
+    /**
+     * checks for equality of two LatLng objects
+     * @param o the second LatLng object
+     */
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -50,6 +65,9 @@ public class LatLng {
         }
     }
 
+    /**
+     * returns a string representation of the latitude and longitude
+     */
     public String toString() {
         return "lat/lng: (" + this.latitude + "," + this.longitude + ")";
     }
