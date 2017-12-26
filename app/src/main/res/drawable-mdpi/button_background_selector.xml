@@ -2,10 +2,10 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:state_pressed="true"
-        android:drawable="@color/pressed_button_background_light" />
+        android:drawable="@color/pressed_button_light" />
     <item
         android:state_focused="true"
-        android:drawable="@color/focused_button_background_light" />
-    <item
-        android:drawable="@android:color/transparent" />
+        android:drawable="@color/focused_button_light"
+         />
+    <item android:drawable="@android:color/transparent" />
 </selector>
