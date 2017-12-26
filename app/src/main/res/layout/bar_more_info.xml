@@ -5,7 +5,7 @@
     android:id="@+id/more_info_button"
     android:visibility="gone"
     android:layout_gravity="bottom"
-    android:background="@color/default_circle_indicator_stroke_color"
+    android:background="?attr/bottomBar"
     >
 
 </LinearLayout>

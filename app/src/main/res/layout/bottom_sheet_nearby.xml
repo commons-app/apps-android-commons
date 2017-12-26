@@ -5,7 +5,7 @@
     android:id="@+id/bottom_sheet"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/cardview_light_background"
+    android:background="?attr/mainBackground"
     app:layout_behavior="@string/bottom_sheet_behavior"
     app:behavior_peekHeight="0dp"
     app:behavior_hideable="true"

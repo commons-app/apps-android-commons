@@ -374,7 +374,6 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         fabCommons.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("deneme","deneme");
                 openWebView(place.siteLinks.getCommonsLink()); }
         });
 
