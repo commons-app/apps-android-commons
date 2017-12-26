@@ -28,7 +28,6 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 
 class PlaceRenderer extends Renderer<Place> {
-    //private static boolean isAnyItemOpen = false;
 
     @BindView(R.id.tvName) TextView tvName;
     @BindView(R.id.tvDesc) TextView tvDesc;
@@ -46,7 +45,6 @@ class PlaceRenderer extends Renderer<Place> {
 
 
     PlaceRenderer(){
-        Log.d("nesli","renderer created");
         openedItems = new ArrayList<>();
     }
 
