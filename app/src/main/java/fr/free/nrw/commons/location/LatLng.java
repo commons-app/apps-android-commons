@@ -4,19 +4,26 @@ import android.location.Location;
 import android.support.annotation.NonNull;
 
 /**
- * the latitude and longitude of the user
+ * a latitude and longitude point with accuracy information, often of a picture
  */
 public class LatLng {
 
     private final double latitude;
     private final double longitude;
     private final float accuracy;
-
-    /** Accepts latitude and longitude.
-     * North and South values are cut off at 90�
-     *
-     * @param latitude double value
-     * @param longitude double value
+    
+    /**
+     * Accepts latitude and longitude.
+     * North and South values are cut off at 90°
+     * 
+     * @param latitude the latitude
+     * @param longitude the longitude
+     * @param accuracy the accuracy
+     * 
+     * Examples:
+     * the Statue of Liberty is located at 40.69° N, 74.04° W
+     * The Statue of Liberty could be constructed as LatLng(40.69, -74.04, 1.0)
+     * where positive signifies north, east and negative signifies south, west.
      */
     public LatLng(double latitude, double longitude, float accuracy) {
         if (-180.0D <= longitude && longitude < 180.0D) {
