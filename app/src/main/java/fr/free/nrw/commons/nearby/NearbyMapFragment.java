@@ -9,7 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.util.Log;
+
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -413,9 +413,9 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
             fabCamera.startAnimation(fab_close);
             fabGallery.startAnimation(fab_close);
             fabCommons.startAnimation(fab_close);
-            fabCamera.setClickable(false);
-            fabGallery.setClickable(false);
-            fabCommons.setClickable(false);
+            fabCamera.hide();
+            fabGallery.hide();
+            fabCommons.hide();
 
         } else {
 
@@ -423,8 +423,9 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
             fabCamera.startAnimation(fab_open);
             fabGallery.startAnimation(fab_open);
             fabCommons.startAnimation(fab_open);
-            fabCamera.setClickable(true);
-            fabGallery.setClickable(true);
+            fabCamera.show();
+            fabGallery.show();
+            fabCommons.show();
             fabCommons.setClickable(
                     !(place.siteLinks == null
                             || Uri.EMPTY.equals(place.siteLinks.getCommonsLink())));
@@ -440,9 +441,9 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
             fabCamera.startAnimation(fab_close);
             fabGallery.startAnimation(fab_close);
             fabCommons.startAnimation(fab_close);
-            fabCamera.setClickable(false);
-            fabGallery.setClickable(false);
-            fabCommons.setClickable(false);
+            fabCamera.hide();
+            fabGallery.hide();
+            fabCommons.hide();
             this.isFabOpen=!isFabOpen;
         }
     }
