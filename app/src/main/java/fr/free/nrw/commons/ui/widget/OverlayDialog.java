@@ -13,6 +13,7 @@ import android.view.WindowManager;
 
 /**
  * a formatted dialog fragment
+ * This class is used by NearbyInfoDialog
  */
 public abstract class OverlayDialog extends DialogFragment {
 
@@ -27,7 +28,8 @@ public abstract class OverlayDialog extends DialogFragment {
     }
 
     /**
-     * allows subclasses to initialize themselves if needed
+     * When the view is created, sets the dialog layout to full screen
+     * 
      * @param view the view being used
      * @param savedInstanceState bundle re-constructed from a previous saved state
      */
@@ -50,6 +52,12 @@ public abstract class OverlayDialog extends DialogFragment {
         window.setAttributes(wlp);
     }
 
+    /**
+     * builds custom dialog container
+     * 
+     * @param savedInstanceState the previously saved state
+     * @return the dialog
+     */
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
