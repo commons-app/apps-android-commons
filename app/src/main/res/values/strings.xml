@@ -123,7 +123,7 @@
   <string name="tutorial_3_text">Please do NOT upload:</string>
   <string name="tutorial_3_subtext">- Selfies or pictures of your friends\n- Pictures you downloaded from the Internet\n- Screenshots of proprietary apps</string>
   <string name="tutorial_4_text">Example upload:</string>
-  <string name="tutorial_4_subtext">- Title: Sydney Opera House\n- Description: Sydney Opera House as viewed from across the bay\n- Categories: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext">- Title: Sydney Opera House\n- Description: Sydney Opera House as viewed from across the bay\n- Categories: Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Contribute your images. Help Wikipedia articles come to life!</string>
   <string name="welcome_wikipedia_subtext">Images on Wikipedia come from Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Your images help educate people around the world.</string>
