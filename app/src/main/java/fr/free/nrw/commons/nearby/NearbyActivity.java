@@ -130,6 +130,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             }
         });
 
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         bottomSheetBehaviorForDetails = BottomSheetBehavior.from(bottomSheetDetails);
         bottomSheetBehaviorForDetails.setState(BottomSheetBehavior.STATE_HIDDEN);
     }
@@ -401,7 +402,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         Fragment fragment = new NearbyListFragment();
         fragment.setArguments(bundle);
         fragmentTransaction.replace(R.id.container_sheet, fragment);
-        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         //TODO replace this sheet for details map
         fragmentTransaction.commitAllowingStateLoss();
     }
