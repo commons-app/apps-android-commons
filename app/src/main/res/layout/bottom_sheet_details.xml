@@ -75,6 +75,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/directionsButtonText"
                 android:paddingTop="8dp"
                 android:duplicateParentState="true"
                 android:textColor="@color/text_color_selector"
@@ -101,6 +102,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/wikidataButtonText"
                 android:paddingTop="8dp"
                 android:duplicateParentState="true"
                 android:textColor="@color/text_color_selector"
@@ -129,6 +131,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/wikipediaButtonText"
                 android:paddingTop="8dp"
                 android:duplicateParentState="true"
                 android:textColor="@color/text_color_selector"
@@ -158,6 +161,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/commonsButtonText"
                 android:paddingTop="8dp"
                 android:duplicateParentState="true"
                 android:textColor="@color/text_color_selector"

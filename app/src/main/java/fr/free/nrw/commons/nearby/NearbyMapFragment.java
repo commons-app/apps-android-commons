@@ -10,10 +10,12 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -63,6 +65,11 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     private TextView title;
     private TextView distance;
     private ImageView icon;
+
+    private TextView wikipediaButtonText;
+    private TextView wikidataButtonText;
+    private TextView commonsButtonText;
+    private TextView directionsButtonText;
 
     private boolean isFabOpen=false;
     private Animation rotate_backward;
@@ -151,7 +158,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         fabPlus = getActivity().findViewById(R.id.fab_plus);
         fabCamera = getActivity().findViewById(R.id.fab_camera);
         fabGallery = getActivity().findViewById(R.id.fab_galery);
-        
+
         fab_open = AnimationUtils.loadAnimation(getActivity(), R.anim.fab_open);
         fab_close = AnimationUtils.loadAnimation(getActivity(),R.anim.fab_close);
         rotate_forward = AnimationUtils.loadAnimation(getActivity(),R.anim.rotate_forward);
@@ -169,6 +176,11 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         wikipediaButton = getActivity().findViewById(R.id.wikipediaButton);
         directionsButton = getActivity().findViewById(R.id.directionsButton);
         commonsButton = getActivity().findViewById(R.id.commonsButton);
+
+        wikidataButtonText = getActivity().findViewById(R.id.wikidataButtonText);
+        wikipediaButtonText = getActivity().findViewById(R.id.wikipediaButtonText);
+        directionsButtonText = getActivity().findViewById(R.id.directionsButtonText);
+        commonsButtonText = getActivity().findViewById(R.id.commonsButtonText);
 
     }
 
@@ -226,6 +238,17 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
 
             }
         });
+
+        // Remove texts if it doesnt fit
+        if (wikipediaButtonText.getLineCount() > 1
+                || wikidataButtonText.getLineCount() > 1
+                || commonsButtonText.getLineCount() > 1
+                || directionsButtonText.getLineCount() > 1) {
+            wikipediaButtonText.setVisibility(View.GONE);
+            wikidataButtonText.setVisibility(View.GONE);
+            commonsButtonText.setVisibility(View.GONE);
+            directionsButtonText.setVisibility(View.GONE);
+        }
     }
 
     private void setupMapView(Bundle savedInstanceState) {
