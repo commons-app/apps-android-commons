@@ -10,12 +10,10 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -50,7 +48,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     private fr.free.nrw.commons.location.LatLng curLatLng;
     private View bottomSheetList;
     private View bottomSheetDetails;
-    private View moreInfo;
+
     private BottomSheetBehavior bottomSheetListBehavior;
     private BottomSheetBehavior bottomSheetDetailsBehavior;
     private LinearLayout wikipediaButton;
@@ -165,7 +163,6 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         rotate_backward = AnimationUtils.loadAnimation(getActivity(),R.anim.rotate_backward);
 
         transparentView = getActivity().findViewById(R.id.transparentView);
-        moreInfo = getActivity().findViewById(R.id.more_info_button);
 
         description = getActivity().findViewById(R.id.description);
         title = getActivity().findViewById(R.id.title);
@@ -335,11 +332,9 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
                 closeFabs(isFabOpen);
                 if (!fabPlus.isShown()) showFAB();
                 this.getView().requestFocus();
-                moreInfo.setVisibility(View.VISIBLE);
                 break;
             case (BottomSheetBehavior.STATE_EXPANDED):
                 this.getView().requestFocus();
-                moreInfo.setVisibility(View.VISIBLE);
                 break;
             case (BottomSheetBehavior.STATE_HIDDEN):
                 transparentView.setClickable(false);
@@ -347,7 +342,6 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
                 closeFabs(isFabOpen);
                 hideFAB();
                 this.getView().requestFocus();
-                moreInfo.setVisibility(View.GONE);
                 break;
         }
 

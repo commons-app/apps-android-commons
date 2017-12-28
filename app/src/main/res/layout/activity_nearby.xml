@@ -51,7 +51,6 @@
 
         <include layout="@layout/bottom_sheet_nearby" />
         <include layout="@layout/bottom_sheet_details" android:id="@+id/bottom_sheet_details" />
-        <include layout="@layout/bar_more_info" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_plus"
