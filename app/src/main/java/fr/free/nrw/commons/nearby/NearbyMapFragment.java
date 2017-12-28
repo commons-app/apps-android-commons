@@ -54,10 +54,10 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     private LinearLayout wikipediaButton;
     private LinearLayout wikidataButton;
     private LinearLayout directionsButton;
+    private LinearLayout commonsButton;
     private FloatingActionButton fabPlus;
     private FloatingActionButton fabCamera;
     private FloatingActionButton fabGallery;
-    private FloatingActionButton fabCommons;
     private View transparentView;
     private TextView description;
     private TextView title;
@@ -151,8 +151,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         fabPlus = getActivity().findViewById(R.id.fab_plus);
         fabCamera = getActivity().findViewById(R.id.fab_camera);
         fabGallery = getActivity().findViewById(R.id.fab_galery);
-        fabCommons = getActivity().findViewById(R.id.fab_commons_page);
-
+        
         fab_open = AnimationUtils.loadAnimation(getActivity(), R.anim.fab_open);
         fab_close = AnimationUtils.loadAnimation(getActivity(),R.anim.fab_close);
         rotate_forward = AnimationUtils.loadAnimation(getActivity(),R.anim.rotate_forward);
@@ -169,6 +168,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         wikidataButton = getActivity().findViewById(R.id.wikidataButton);
         wikipediaButton = getActivity().findViewById(R.id.wikipediaButton);
         directionsButton = getActivity().findViewById(R.id.directionsButton);
+        commonsButton = getActivity().findViewById(R.id.commonsButton);
 
     }
 
@@ -338,7 +338,6 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         p.setAnchorId(View.NO_ID);
         fabPlus.setLayoutParams(p);
         fabPlus.hide();
-        fabCommons.hide();
         fabCamera.hide();
         fabGallery.hide();
     }
@@ -370,14 +369,6 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
             }
         });
 
-        fabCommons.setEnabled(
-                !(place.siteLinks == null || Uri.EMPTY.equals(place.siteLinks.getCommonsLink())));
-        fabCommons.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openWebView(place.siteLinks.getCommonsLink()); }
-        });
-
         directionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -391,6 +382,15 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
                 if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {
                     startActivity(mapIntent);
                 }
+            }
+        });
+
+        commonsButton.setEnabled(
+                !(place.siteLinks == null || Uri.EMPTY.equals(place.siteLinks.getCommonsLink())));
+        commonsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openWebView(place.siteLinks.getCommonsLink());
             }
         });
 
@@ -412,23 +412,16 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
             fabPlus.startAnimation(rotate_backward);
             fabCamera.startAnimation(fab_close);
             fabGallery.startAnimation(fab_close);
-            fabCommons.startAnimation(fab_close);
             fabCamera.hide();
             fabGallery.hide();
-            fabCommons.hide();
 
         } else {
 
             fabPlus.startAnimation(rotate_forward);
             fabCamera.startAnimation(fab_open);
             fabGallery.startAnimation(fab_open);
-            fabCommons.startAnimation(fab_open);
             fabCamera.show();
             fabGallery.show();
-            fabCommons.show();
-            fabCommons.setClickable(
-                    !(place.siteLinks == null
-                            || Uri.EMPTY.equals(place.siteLinks.getCommonsLink())));
 
         }
 
@@ -440,10 +433,8 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
             fabPlus.startAnimation(rotate_backward);
             fabCamera.startAnimation(fab_close);
             fabGallery.startAnimation(fab_close);
-            fabCommons.startAnimation(fab_close);
             fabCamera.hide();
             fabGallery.hide();
-            fabCommons.hide();
             this.isFabOpen=!isFabOpen;
         }
     }
