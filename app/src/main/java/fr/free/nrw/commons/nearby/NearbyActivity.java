@@ -403,7 +403,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         fragment.setArguments(bundle);
         fragmentTransaction.replace(R.id.container_sheet, fragment);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-        //TODO replace this sheet for details map
         fragmentTransaction.commitAllowingStateLoss();
     }
 

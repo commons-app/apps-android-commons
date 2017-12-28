@@ -28,9 +28,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/cameraButtonText"
             android:paddingTop="8dp"
             android:layout_gravity="center_horizontal"
             android:text="CAMERA"
+            android:visibility="gone"
             />
     </LinearLayout>
     <LinearLayout
@@ -53,10 +55,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/galeryButtonText"
             android:paddingTop="8dp"
             android:layout_gravity="center_horizontal"
             android:text="GALLERY"
-            android:duplicateParentState="true"/>
+            android:duplicateParentState="true"
+            android:visibility="gone"
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -78,10 +83,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/directionsButtonText"
             android:paddingTop="8dp"
             android:layout_gravity="center_horizontal"
             android:text="DIRECTIONS"
             android:duplicateParentState="true"
+            android:visibility="gone"
             />
     </LinearLayout>
 
@@ -103,10 +110,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/iconOverflowText"
             android:paddingTop="8dp"
             android:layout_gravity="center_horizontal"
             android:text="MORE"
             android:duplicateParentState="true"
+            android:visibility="gone"
             />
 
     </LinearLayout>
