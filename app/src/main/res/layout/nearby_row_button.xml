@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:visibility="gone"
+    android:layout_marginTop="16dp"
     android:layout_below="@+id/icon"
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
