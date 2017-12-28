@@ -241,4 +241,5 @@
   <string name="nearby_directions">DIRECTIONS</string>
   <string name="nearby_wikidata">WIKIDATA</string>
   <string name="nearby_wikipedia">WIKIPEDIA</string>
+  <string name="nearby_commons">COMMONS</string>
 </resources>
