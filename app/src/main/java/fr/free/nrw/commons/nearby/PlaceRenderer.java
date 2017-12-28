@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -38,6 +39,10 @@ class PlaceRenderer extends Renderer<Place> {
     @BindView(R.id.galeryButton) LinearLayout galeryButton;
     @BindView(R.id.directionsButton) LinearLayout directionsButton;
     @BindView(R.id.iconOverflow) LinearLayout iconOverflow;
+    @BindView(R.id.cameraButtonText) TextView cameraButtonText;
+    @BindView(R.id.galeryButtonText) TextView galeryButtonText;
+    @BindView(R.id.directionsButtonText) TextView directionsButtonText;
+    @BindView(R.id.iconOverflowText) TextView iconOverflowText;
 
     private View view;
     private static ArrayList<LinearLayout> openedItems;
@@ -88,6 +93,7 @@ class PlaceRenderer extends Renderer<Place> {
                 }
             }
         });
+
     }
 
     private void closeLayout(LinearLayout buttonLayout){
@@ -128,7 +134,6 @@ class PlaceRenderer extends Renderer<Place> {
 
         iconOverflow.setVisibility(showMenu() ? View.VISIBLE : View.GONE);
         iconOverflow.setOnClickListener(v -> popupMenuListener());
-
     }
 
     private void popupMenuListener() {
