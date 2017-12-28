@@ -11,20 +11,37 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+/**
+ * a formatted dialog fragment
+ * This class is used by NearbyInfoDialog
+ */
 public abstract class OverlayDialog extends DialogFragment {
 
+    /**
+     * creates a DialogFragment with the correct style and theme
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(STYLE_NO_FRAME, android.R.style.Theme_Holo_Light);
     }
 
+    /**
+     * When the view is created, sets the dialog layout to full screen
+     * 
+     * @param view the view being used
+     * @param savedInstanceState bundle re-constructed from a previous saved state
+     */
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         setDialogLayoutToFullScreen();
         super.onViewCreated(view, savedInstanceState);
     }
 
+    /**
+     * sets the dialog layout to fullscreen
+     */
     private void setDialogLayoutToFullScreen() {
         Window window = getDialog().getWindow();
         WindowManager.LayoutParams wlp = window.getAttributes();
@@ -35,6 +52,12 @@ public abstract class OverlayDialog extends DialogFragment {
         window.setAttributes(wlp);
     }
 
+    /**
+     * builds custom dialog container
+     * 
+     * @param savedInstanceState the previously saved state
+     * @return the dialog
+     */
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

@@ -3,17 +3,27 @@ package fr.free.nrw.commons.location;
 import android.location.Location;
 import android.support.annotation.NonNull;
 
+/**
+ * a latitude and longitude point with accuracy information, often of a picture
+ */
 public class LatLng {
 
     private final double latitude;
     private final double longitude;
     private final float accuracy;
-
-    /** Accepts latitude and longitude.
+    
+    /**
+     * Accepts latitude and longitude.
      * North and South values are cut off at 90°
-     *
-     * @param latitude double value
-     * @param longitude double value
+     * 
+     * @param latitude the latitude
+     * @param longitude the longitude
+     * @param accuracy the accuracy
+     * 
+     * Examples:
+     * the Statue of Liberty is located at 40.69° N, 74.04° W
+     * The Statue of Liberty could be constructed as LatLng(40.69, -74.04, 1.0)
+     * where positive signifies north, east and negative signifies south, west.
      */
     public LatLng(double latitude, double longitude, float accuracy) {
         if (-180.0D <= longitude && longitude < 180.0D) {
@@ -25,10 +35,18 @@ public class LatLng {
         this.accuracy = accuracy;
     }
 
+    /**
+     * gets the latitude and longitude of a given non-null location
+     * @param location the non-null location of the user
+     * @return
+     */
     public static LatLng from(@NonNull Location location) {
         return new LatLng(location.getLatitude(), location.getLongitude(), location.getAccuracy());
     }
-
+    
+    /**
+     * creates a hash code for the longitude and longitude
+     */
     public int hashCode() {
         boolean var1 = true;
         byte var2 = 1;
@@ -39,6 +57,10 @@ public class LatLng {
         return var5;
     }
 
+    /**
+     * checks for equality of two LatLng objects
+     * @param o the second LatLng object
+     */
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -50,6 +72,9 @@ public class LatLng {
         }
     }
 
+    /**
+     * returns a string representation of the latitude and longitude
+     */
     public String toString() {
         return "lat/lng: (" + this.latitude + "," + this.longitude + ")";
     }
