@@ -61,30 +61,24 @@ class PlaceRenderer extends Renderer<Place> {
     @Override
     protected void hookListeners(View view) {
 
-        final View.OnClickListener listener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("Renderer", "clicked");
-                TransitionManager.beginDelayedTransition(buttonLayout);
+        final View.OnClickListener listener = view12 -> {
+            Log.d("Renderer", "clicked");
+            TransitionManager.beginDelayedTransition(buttonLayout);
 
-                if(buttonLayout.isShown()){
-                    closeLayout(buttonLayout);
-                }else {
-                    openLayout(buttonLayout);
-                }
-
+            if(buttonLayout.isShown()){
+                closeLayout(buttonLayout);
+            }else {
+                openLayout(buttonLayout);
             }
+
         };
         view.setOnClickListener(listener);
         view.requestFocus();
-        view.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-                if(!hasFocus && buttonLayout.isShown()){
-                    closeLayout(buttonLayout);
-                }else if(hasFocus && !buttonLayout.isShown()) {
-                    listener.onClick(view);
-                }
+        view.setOnFocusChangeListener((view1, hasFocus) -> {
+            if (!hasFocus && buttonLayout.isShown()) {
+                closeLayout(buttonLayout);
+            } else if (hasFocus && !buttonLayout.isShown()) {
+                listener.onClick(view1);
             }
         });
 
@@ -110,19 +104,11 @@ class PlaceRenderer extends Renderer<Place> {
         distance.setText(place.distance);
         icon.setImageResource(place.getLabel().getIcon());
 
-        directionsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LatLng location = new LatLng(place.location.getLatitude()
-                        , place.location.getLongitude(), 0);
-                //Open map app at given position
-                Uri gmmIntentUri = Uri.parse(
-                        "geo:0,0?q=" + location.getLatitude() + "," + location.getLongitude());
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-
-                if (mapIntent.resolveActivity(view.getContext().getPackageManager()) != null) {
-                    view.getContext().startActivity(mapIntent);
-                }
+        directionsButton.setOnClickListener(view -> {
+            //Open map app at given position
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW, place.location.getGmmIntentUri());
+            if (mapIntent.resolveActivity(view.getContext().getPackageManager()) != null) {
+                view.getContext().startActivity(mapIntent);
             }
         });
 
@@ -141,28 +127,25 @@ class PlaceRenderer extends Renderer<Place> {
         MenuItem wikipediaArticle = popupMenu.getMenu()
                 .findItem(R.id.nearby_info_menu_wikipedia_article);
 
-        commonsArticle.setEnabled(!place.siteLinks.getCommonsLink().equals(Uri.EMPTY));
-        wikiDataArticle.setEnabled(!place.siteLinks.getWikidataLink().equals(Uri.EMPTY));
-        wikipediaArticle.setEnabled(!place.siteLinks.getWikipediaLink().equals(Uri.EMPTY));
+        commonsArticle.setEnabled(place.hasCommonsLink());
+        wikiDataArticle.setEnabled(place.hasWikidataLink());
+        wikipediaArticle.setEnabled(place.hasWikipediaLink());
 
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.nearby_info_menu_commons_article:
-                        openWebView(place.siteLinks.getCommonsLink());
-                        return true;
-                    case R.id.nearby_info_menu_wikidata_article:
-                        openWebView(place.siteLinks.getWikidataLink());
-                        return true;
-                    case R.id.nearby_info_menu_wikipedia_article:
-                        openWebView(place.siteLinks.getWikipediaLink());
-                        return true;
-                    default:
-                        break;
-                }
-                return false;
+        popupMenu.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.nearby_info_menu_commons_article:
+                    openWebView(place.siteLinks.getCommonsLink());
+                    return true;
+                case R.id.nearby_info_menu_wikidata_article:
+                    openWebView(place.siteLinks.getWikidataLink());
+                    return true;
+                case R.id.nearby_info_menu_wikipedia_article:
+                    openWebView(place.siteLinks.getWikipediaLink());
+                    return true;
+                default:
+                    break;
             }
+            return false;
         });
         popupMenu.show();
     }
@@ -173,8 +156,7 @@ class PlaceRenderer extends Renderer<Place> {
     }
 
     private boolean showMenu() {
-        return !place.siteLinks.getCommonsLink().equals(Uri.EMPTY)
-                || !place.siteLinks.getWikidataLink().equals(Uri.EMPTY);
+        return place.hasCommonsLink() || place.hasWikidataLink();
     }
 
 }
