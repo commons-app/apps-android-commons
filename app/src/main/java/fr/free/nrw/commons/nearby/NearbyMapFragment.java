@@ -1,11 +1,24 @@
 package fr.free.nrw.commons.nearby;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
+
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -29,9 +42,40 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.utils.UriDeserializer;
 
 public class NearbyMapFragment extends android.support.v4.app.Fragment {
+
     private MapView mapView;
     private List<NearbyBaseMarker> baseMarkerOptions;
     private fr.free.nrw.commons.location.LatLng curLatLng;
+    private View bottomSheetList;
+    private View bottomSheetDetails;
+
+    private BottomSheetBehavior bottomSheetListBehavior;
+    private BottomSheetBehavior bottomSheetDetailsBehavior;
+    private LinearLayout wikipediaButton;
+    private LinearLayout wikidataButton;
+    private LinearLayout directionsButton;
+    private LinearLayout commonsButton;
+    private FloatingActionButton fabPlus;
+    private FloatingActionButton fabCamera;
+    private FloatingActionButton fabGallery;
+    private View transparentView;
+    private TextView description;
+    private TextView title;
+    private TextView distance;
+    private ImageView icon;
+
+    private TextView wikipediaButtonText;
+    private TextView wikidataButtonText;
+    private TextView commonsButtonText;
+    private TextView directionsButtonText;
+
+    private boolean isFabOpen=false;
+    private Animation rotate_backward;
+    private Animation fab_close;
+    private Animation fab_open;
+    private Animation rotate_forward;
+
+    private Place place;
 
     public NearbyMapFragment() {
     }
@@ -40,6 +84,8 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle bundle = this.getArguments();
+        initViews();
+        setListeners();
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Uri.class, new UriDeserializer())
                 .create();
@@ -58,6 +104,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         Mapbox.getInstance(getActivity(),
                 getString(R.string.mapbox_commons_app_token));
         MapboxTelemetry.getInstance().setTelemetryEnabled(false);
+        setRetainInstance(true);
     }
 
     @Override
@@ -71,6 +118,134 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         setHasOptionsMenu(false);
 
         return mapView;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        this.getView().setFocusableInTouchMode(true);
+        this.getView().requestFocus();
+        this.getView().setOnKeyListener( new View.OnKeyListener() {
+
+            @Override
+            public boolean onKey( View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    if(bottomSheetDetailsBehavior.getState() == BottomSheetBehavior
+                            .STATE_EXPANDED) {
+                        bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                        return true;
+                    }
+                    else if (bottomSheetDetailsBehavior.getState() == BottomSheetBehavior
+                            .STATE_COLLAPSED) {
+                        bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                        return true;
+                    }
+                }
+                return false;
+            }
+        } );
+    }
+
+    private void initViews() {
+        bottomSheetList = getActivity().findViewById(R.id.bottom_sheet);
+        bottomSheetListBehavior = BottomSheetBehavior.from(bottomSheetList);
+        bottomSheetDetails = getActivity().findViewById(R.id.bottom_sheet_details);
+        bottomSheetDetailsBehavior = BottomSheetBehavior.from(bottomSheetDetails);
+        bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+
+        fabPlus = getActivity().findViewById(R.id.fab_plus);
+        fabCamera = getActivity().findViewById(R.id.fab_camera);
+        fabGallery = getActivity().findViewById(R.id.fab_galery);
+
+        fab_open = AnimationUtils.loadAnimation(getActivity(), R.anim.fab_open);
+        fab_close = AnimationUtils.loadAnimation(getActivity(),R.anim.fab_close);
+        rotate_forward = AnimationUtils.loadAnimation(getActivity(),R.anim.rotate_forward);
+        rotate_backward = AnimationUtils.loadAnimation(getActivity(),R.anim.rotate_backward);
+
+        transparentView = getActivity().findViewById(R.id.transparentView);
+
+        description = getActivity().findViewById(R.id.description);
+        title = getActivity().findViewById(R.id.title);
+        distance = getActivity().findViewById(R.id.category);
+        icon = getActivity().findViewById(R.id.icon);
+
+        wikidataButton = getActivity().findViewById(R.id.wikidataButton);
+        wikipediaButton = getActivity().findViewById(R.id.wikipediaButton);
+        directionsButton = getActivity().findViewById(R.id.directionsButton);
+        commonsButton = getActivity().findViewById(R.id.commonsButton);
+
+        wikidataButtonText = getActivity().findViewById(R.id.wikidataButtonText);
+        wikipediaButtonText = getActivity().findViewById(R.id.wikipediaButtonText);
+        directionsButtonText = getActivity().findViewById(R.id.directionsButtonText);
+        commonsButtonText = getActivity().findViewById(R.id.commonsButtonText);
+
+    }
+
+    private void setListeners() {
+        fabPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                animateFAB(isFabOpen);
+            }
+        });
+
+        bottomSheetDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
+                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                }
+                else{
+                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                }
+            }
+        });
+
+        bottomSheetDetailsBehavior.setBottomSheetCallback(new BottomSheetBehavior
+                .BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                prepareViewsForSheetPosition(newState);
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+                if (slideOffset >= 0) {
+                    transparentView.setAlpha(slideOffset);
+                    if (slideOffset == 1) {
+                        transparentView.setClickable(true);
+                    } else if (slideOffset == 0){
+                        transparentView.setClickable(false);
+                    }
+                }
+            }
+        });
+
+        bottomSheetListBehavior.setBottomSheetCallback(new BottomSheetBehavior
+                .BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                if (newState == BottomSheetBehavior.STATE_EXPANDED){
+                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                }
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
+            }
+        });
+
+        // Remove texts if it doesnt fit
+        if (wikipediaButtonText.getLineCount() > 1
+                || wikidataButtonText.getLineCount() > 1
+                || commonsButtonText.getLineCount() > 1
+                || directionsButtonText.getLineCount() > 1) {
+            wikipediaButtonText.setVisibility(View.GONE);
+            wikidataButtonText.setVisibility(View.GONE);
+            commonsButtonText.setVisibility(View.GONE);
+            directionsButtonText.setVisibility(View.GONE);
+        }
     }
 
     private void setupMapView(Bundle savedInstanceState) {
@@ -91,7 +266,9 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
                 if (marker instanceof NearbyMarker) {
                     NearbyMarker nearbyMarker = (NearbyMarker) marker;
                     Place place = nearbyMarker.getNearbyBaseMarker().getPlace();
-                    NearbyInfoDialog.showYourself(getActivity(), place);
+                    passInfoToSheet(place);
+                    bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                 }
                 return false;
             });
@@ -145,8 +322,138 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
             double nodeLatitude = centerLat + radiusLat * Math.sin(theta);
             circle.add(new LatLng(nodeLatitude, nodeLongitude));
         }
-
         return circle;
+    }
+
+    public void prepareViewsForSheetPosition(int bottomSheetState) {
+
+        switch (bottomSheetState) {
+            case (BottomSheetBehavior.STATE_COLLAPSED):
+                closeFabs(isFabOpen);
+                if (!fabPlus.isShown()) showFAB();
+                this.getView().requestFocus();
+                break;
+            case (BottomSheetBehavior.STATE_EXPANDED):
+                this.getView().requestFocus();
+                break;
+            case (BottomSheetBehavior.STATE_HIDDEN):
+                transparentView.setClickable(false);
+                transparentView.setAlpha(0);
+                closeFabs(isFabOpen);
+                hideFAB();
+                this.getView().requestFocus();
+                break;
+        }
+
+    }
+
+    private void hideFAB() {
+        //get rid of anchors
+        //Somehow this was the only way https://stackoverflow.com/questions/32732932/floatingactionbutton-visible-for-sometime-even-if-visibility-is-set-to-gone
+        CoordinatorLayout.LayoutParams p = (CoordinatorLayout.LayoutParams) fabPlus
+                .getLayoutParams();
+        p.setAnchorId(View.NO_ID);
+        fabPlus.setLayoutParams(p);
+        fabPlus.hide();
+        fabCamera.hide();
+        fabGallery.hide();
+    }
+
+    private void showFAB() {
+        CoordinatorLayout.LayoutParams p = (CoordinatorLayout.LayoutParams) fabPlus.getLayoutParams();
+        p.setAnchorId(getActivity().findViewById(R.id.bottom_sheet_details).getId());
+        fabPlus.setLayoutParams(p);
+        fabPlus.show();
+    }
+
+    private void passInfoToSheet(Place place) {
+        this.place = place;
+        wikipediaButton.setEnabled(
+                !(place.siteLinks == null || Uri.EMPTY.equals(place.siteLinks.getWikipediaLink())));
+        wikipediaButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openWebView(place.siteLinks.getWikipediaLink());
+            }
+        });
+
+        wikidataButton.setEnabled(
+                !(place.siteLinks == null || Uri.EMPTY.equals(place.siteLinks.getWikidataLink())));
+        wikidataButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openWebView(place.siteLinks.getWikidataLink());
+            }
+        });
+
+        directionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LatLng location = new LatLng(place.location.getLatitude()
+                        , place.location.getLongitude(), 0);
+                //Open map app at given position
+                Uri gmmIntentUri = Uri.parse(
+                        "geo:0,0?q=" + location.getLatitude() + "," + location.getLongitude());
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+
+                if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+                    startActivity(mapIntent);
+                }
+            }
+        });
+
+        commonsButton.setEnabled(
+                !(place.siteLinks == null || Uri.EMPTY.equals(place.siteLinks.getCommonsLink())));
+        commonsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openWebView(place.siteLinks.getCommonsLink());
+            }
+        });
+
+        icon.setImageResource(place.getDescription().getIcon());
+        description.setText(place.getDescription().getText());
+        title.setText(place.name.toString());
+        distance.setText(place.distance.toString());
+    }
+
+    private void openWebView(Uri link) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, link);
+        startActivity(browserIntent);
+    }
+
+    private void animateFAB(boolean isFabOpen) {
+
+        if (isFabOpen) {
+
+            fabPlus.startAnimation(rotate_backward);
+            fabCamera.startAnimation(fab_close);
+            fabGallery.startAnimation(fab_close);
+            fabCamera.hide();
+            fabGallery.hide();
+
+        } else {
+
+            fabPlus.startAnimation(rotate_forward);
+            fabCamera.startAnimation(fab_open);
+            fabGallery.startAnimation(fab_open);
+            fabCamera.show();
+            fabGallery.show();
+
+        }
+
+        this.isFabOpen=!isFabOpen;
+    }
+
+    private void closeFabs(boolean isFabOpen){
+        if (isFabOpen) {
+            fabPlus.startAnimation(rotate_backward);
+            fabCamera.startAnimation(fab_close);
+            fabGallery.startAnimation(fab_close);
+            fabCamera.hide();
+            fabGallery.hide();
+            this.isFabOpen=!isFabOpen;
+        }
     }
 
     @Override
