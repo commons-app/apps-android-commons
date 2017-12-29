@@ -46,6 +46,18 @@ public class Place {
         this.distance = distance;
     }
 
+    public boolean hasWikipediaLink() {
+        return !(siteLinks == null || Uri.EMPTY.equals(siteLinks.getWikipediaLink()));
+    }
+
+    public boolean hasWikidataLink() {
+        return !(siteLinks == null || Uri.EMPTY.equals(siteLinks.getWikidataLink()));
+    }
+
+    public boolean hasCommonsLink() {
+        return !(siteLinks == null || Uri.EMPTY.equals(siteLinks.getCommonsLink()));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o instanceof Place) {
