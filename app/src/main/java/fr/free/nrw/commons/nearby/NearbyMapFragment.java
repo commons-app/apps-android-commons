@@ -413,7 +413,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         });
 
         icon.setImageResource(place.getDescription().getIcon());
-        description.setText(place.getDescription().getText());
+        description.setText(place.getLongDescription());
         title.setText(place.name.toString());
         distance.setText(place.distance.toString());
 
