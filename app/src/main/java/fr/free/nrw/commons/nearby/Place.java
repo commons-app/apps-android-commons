@@ -71,8 +71,6 @@ public class Place {
      * Most common types of desc: building, house, cottage, farmhouse,
      * village, civil parish, church, railway station,
      * gatehouse, milestone, inn, secondary school, hotel
-     *
-     * TODO Give a more accurate class name (see issue #742).
      */
     public enum Label {
 
