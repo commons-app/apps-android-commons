@@ -24,6 +24,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.annotations.PolygonOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
@@ -77,6 +78,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     private Animation rotate_forward;
 
     private Place place;
+    private Marker selected;
 
     public NearbyMapFragment() {
     }
@@ -136,6 +138,8 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
                 else if (bottomSheetDetailsBehavior.getState() == BottomSheetBehavior
                         .STATE_COLLAPSED) {
                     bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                    mapView.getMapAsync(MapboxMap::deselectMarkers);
+                    selected=null;
                     return true;
                 }
             }
@@ -253,8 +257,15 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         mapView.getMapAsync(mapboxMap -> {
             mapboxMap.addMarkers(baseMarkerOptions);
 
+            mapboxMap.setOnInfoWindowCloseListener(marker -> {
+                if (marker == selected){
+                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                }
+            });
+
             mapboxMap.setOnMarkerClickListener(marker -> {
                 if (marker instanceof NearbyMarker) {
+                    this.selected = marker;
                     NearbyMarker nearbyMarker = (NearbyMarker) marker;
                     Place place = nearbyMarker.getNearbyBaseMarker().getPlace();
                     passInfoToSheet(place);
@@ -328,6 +339,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
                 this.getView().requestFocus();
                 break;
             case (BottomSheetBehavior.STATE_HIDDEN):
+                mapView.getMapAsync(MapboxMap::deselectMarkers);
                 transparentView.setClickable(false);
                 transparentView.setAlpha(0);
                 closeFabs(isFabOpen);
