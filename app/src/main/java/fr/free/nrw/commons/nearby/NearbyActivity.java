@@ -1,19 +1,15 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -66,7 +62,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     private LatLng curLatLang;
     private Bundle bundle;
-    private NearbyActivityMode viewMode;
     private Disposable placesDisposable;
     private boolean lockNearbyView; //Determines if the nearby places needs to be refreshed
     private BottomSheetBehavior bottomSheetBehavior; // Behavior for list bottom sheet
@@ -325,7 +320,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
         progressBar.setVisibility(View.VISIBLE);
         placesDisposable = Observable.fromCallable(() -> nearbyController
-                .loadAttractionsFromLocation(curLatLang, this))
+                .loadAttractionsFromLocation(curLatLang))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::populatePlaces);

@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.nearby;
 
-import android.support.annotation.NonNull;
-
 import com.pedrogomez.renderers.ListAdapteeCollection;
 import com.pedrogomez.renderers.RVRendererAdapter;
 import com.pedrogomez.renderers.RendererBuilder;
@@ -19,7 +17,7 @@ class NearbyAdapterFactory {
         RendererBuilder<Place> builder = new RendererBuilder<Place>()
                 .bind(Place.class, new PlaceRenderer());
         ListAdapteeCollection<Place> collection = new ListAdapteeCollection<>(
-                placeList != null ? placeList : Collections.<Place>emptyList());
+                placeList != null ? placeList : Collections.emptyList());
         return new RVRendererAdapter<>(builder, collection);
     }
 }

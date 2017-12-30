@@ -125,25 +125,21 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         super.onViewCreated(view, savedInstanceState);
         this.getView().setFocusableInTouchMode(true);
         this.getView().requestFocus();
-        this.getView().setOnKeyListener( new View.OnKeyListener() {
-
-            @Override
-            public boolean onKey( View v, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    if(bottomSheetDetailsBehavior.getState() == BottomSheetBehavior
-                            .STATE_EXPANDED) {
-                        bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                        return true;
-                    }
-                    else if (bottomSheetDetailsBehavior.getState() == BottomSheetBehavior
-                            .STATE_COLLAPSED) {
-                        bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                        return true;
-                    }
+        this.getView().setOnKeyListener((v, keyCode, event) -> {
+            if (keyCode == KeyEvent.KEYCODE_BACK) {
+                if(bottomSheetDetailsBehavior.getState() == BottomSheetBehavior
+                        .STATE_EXPANDED) {
+                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                    return true;
                 }
-                return false;
+                else if (bottomSheetDetailsBehavior.getState() == BottomSheetBehavior
+                        .STATE_COLLAPSED) {
+                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                    return true;
+                }
             }
-        } );
+            return false;
+        });
     }
 
     private void initViews() {
@@ -182,22 +178,14 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     }
 
     private void setListeners() {
-        fabPlus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                animateFAB(isFabOpen);
-            }
-        });
+        fabPlus.setOnClickListener(view -> animateFAB(isFabOpen));
 
-        bottomSheetDetails.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
-                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                }
-                else{
-                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                }
+        bottomSheetDetails.setOnClickListener(view -> {
+            if(bottomSheetDetailsBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
+                bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            }
+            else{
+                bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
             }
         });
 
@@ -368,53 +356,27 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
 
     private void passInfoToSheet(Place place) {
         this.place = place;
-        wikipediaButton.setEnabled(
-                !(place.siteLinks == null || Uri.EMPTY.equals(place.siteLinks.getWikipediaLink())));
-        wikipediaButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openWebView(place.siteLinks.getWikipediaLink());
+        wikipediaButton.setEnabled(place.hasWikipediaLink());
+        wikipediaButton.setOnClickListener(view -> openWebView(place.siteLinks.getWikipediaLink()));
+
+        wikidataButton.setEnabled(place.hasWikidataLink());
+        wikidataButton.setOnClickListener(view -> openWebView(place.siteLinks.getWikidataLink()));
+
+        directionsButton.setOnClickListener(view -> {
+            //Open map app at given position
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW, place.location.getGmmIntentUri());
+            if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+                startActivity(mapIntent);
             }
         });
 
-        wikidataButton.setEnabled(
-                !(place.siteLinks == null || Uri.EMPTY.equals(place.siteLinks.getWikidataLink())));
-        wikidataButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openWebView(place.siteLinks.getWikidataLink());
-            }
-        });
-
-        directionsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LatLng location = new LatLng(place.location.getLatitude()
-                        , place.location.getLongitude(), 0);
-                //Open map app at given position
-                Uri gmmIntentUri = Uri.parse(
-                        "geo:0,0?q=" + location.getLatitude() + "," + location.getLongitude());
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-
-                if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-                    startActivity(mapIntent);
-                }
-            }
-        });
-
-        commonsButton.setEnabled(
-                !(place.siteLinks == null || Uri.EMPTY.equals(place.siteLinks.getCommonsLink())));
-        commonsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openWebView(place.siteLinks.getCommonsLink());
-            }
-        });
+        commonsButton.setEnabled(place.hasCommonsLink());
+        commonsButton.setOnClickListener(view -> openWebView(place.siteLinks.getCommonsLink()));
 
         icon.setImageResource(place.getDescription().getIcon());
         description.setText(place.getDescription().getText());
-        title.setText(place.name.toString());
-        distance.setText(place.distance.toString());
+        title.setText(place.name);
+        distance.setText(place.distance);
     }
 
     private void openWebView(Uri link) {
