@@ -38,9 +38,9 @@ public class Place {
         return label;
     }
 
-    public String getLongDescription() {
-        return longDescription;
-    }
+    public String getName() { return name; }
+
+    public String getLongDescription() { return longDescription; }
 
     public void setDistance(String distance) {
         this.distance = distance;
