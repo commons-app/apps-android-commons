@@ -422,7 +422,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         fabCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: Change this to activate camera upload (see ContributionsListFragment)
+                //TODO: Change this to activate camera upload (see ContributionsListFragment). Insert shared preference.
                 Timber.d("Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
                 openWebView(place.siteLinks.getWikidataLink());
             }
@@ -431,7 +431,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         fabGallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: Change this to activate gallery upload (see ContributionsListFragment)
+                //TODO: Change this to activate gallery upload (see ContributionsListFragment). Insert shared preference.
                 Timber.d("Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
                 openWebView(place.siteLinks.getWikidataLink());
             }
