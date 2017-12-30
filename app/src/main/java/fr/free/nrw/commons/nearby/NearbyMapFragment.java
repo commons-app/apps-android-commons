@@ -415,6 +415,22 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         description.setText(place.getDescription().getText());
         title.setText(place.name.toString());
         distance.setText(place.distance.toString());
+
+        fabCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO: Change this to activate camera upload
+                openWebView(place.siteLinks.getWikidataLink());
+            }
+        });
+
+        fabGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO: Change this to activate gallery upload
+                openWebView(place.siteLinks.getWikidataLink());
+            }
+        });
     }
 
     private void openWebView(Uri link) {
