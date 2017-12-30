@@ -43,7 +43,7 @@ class PlaceRenderer extends Renderer<Place> {
     public void render() {
         Place place = getContent();
         tvName.setText(place.name);
-        String descriptionText = place.getDescription().getText();
+        String descriptionText = place.getLongDescription();
         if (descriptionText.equals("?")) {
             descriptionText = getContext().getString(R.string.no_description_found);
         }

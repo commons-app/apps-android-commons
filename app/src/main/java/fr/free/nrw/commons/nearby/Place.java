@@ -38,6 +38,10 @@ public class Place {
         return description;
     }
 
+    public String getLongDescription() {
+        return longDescription;
+    }
+
     public void setDistance(String distance) {
         this.distance = distance;
     }
