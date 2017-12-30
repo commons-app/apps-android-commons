@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.pedrogomez.renderers.Renderer;
 
 import java.util.ArrayList;
@@ -96,13 +95,13 @@ class PlaceRenderer extends Renderer<Place> {
     public void render() {
         place = getContent();
         tvName.setText(place.name);
-        String descriptionText = place.getDescription().getText();
+        String descriptionText = place.getLabel().getText();
         if (descriptionText.equals("?")) {
             descriptionText = getContext().getString(R.string.no_description_found);
         }
         tvDesc.setText(descriptionText);
         distance.setText(place.distance);
-        icon.setImageResource(place.getDescription().getIcon());
+        icon.setImageResource(place.getLabel().getIcon());
 
         directionsButton.setOnClickListener(view -> {
             //Open map app at given position

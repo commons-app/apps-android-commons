@@ -374,7 +374,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         commonsButton.setEnabled(place.hasCommonsLink());
         commonsButton.setOnClickListener(view -> openWebView(place.siteLinks.getCommonsLink()));
 
-        icon.setImageResource(place.getDescription().getIcon());
+        icon.setImageResource(place.getLabel().getIcon());
 
         description.setText(place.getLongDescription());
         title.setText(place.name.toString());
