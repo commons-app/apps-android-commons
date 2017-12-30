@@ -49,7 +49,7 @@ class PlaceRenderer extends Renderer<Place> {
         }
         tvDesc.setText(descriptionText);
         distance.setText(place.distance);
-        icon.setImageResource(place.getDescription().getIcon());
+        icon.setImageResource(place.getLabel().getIcon());
     }
 
     interface PlaceClickedListener {

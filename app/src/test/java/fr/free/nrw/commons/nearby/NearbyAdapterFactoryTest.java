@@ -30,9 +30,9 @@ import static org.junit.Assert.assertNotNull;
 @Config(constants = BuildConfig.class, sdk = 21, application = TestCommonsApplication.class)
 public class NearbyAdapterFactoryTest {
 
-    private static final Place PLACE = new Place("name", Place.Description.AIRPORT,
+    private static final Place PLACE = new Place("name", Place.Label.AIRPORT,
             "desc", null, new LatLng(38.6270, -90.1994, 0), null);
-    private static final Place UNKNOWN_PLACE = new Place("name", Place.Description.UNKNOWN,
+    private static final Place UNKNOWN_PLACE = new Place("name", Place.Label.UNKNOWN,
             "desc", null, new LatLng(39.7392, -104.9903, 0), null);
     private Place clickedPlace;
 
