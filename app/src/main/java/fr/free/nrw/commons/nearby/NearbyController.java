@@ -40,10 +40,9 @@ public class NearbyController {
     /**
      * Prepares Place list to make their distance information update later.
      * @param curLatLng current location for user
-     * @param context context
      * @return Place list without distance information
      */
-    public List<Place> loadAttractionsFromLocation(LatLng curLatLng, Context context) {
+    public List<Place> loadAttractionsFromLocation(LatLng curLatLng) {
         Timber.d("Loading attractions near %s", curLatLng);
         if (curLatLng == null) {
             return Collections.emptyList();
