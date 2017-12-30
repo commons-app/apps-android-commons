@@ -40,6 +40,7 @@ import java.util.List;
 
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.utils.UriDeserializer;
+import timber.log.Timber;
 
 public class NearbyMapFragment extends android.support.v4.app.Fragment {
 
@@ -416,10 +417,12 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         title.setText(place.name.toString());
         distance.setText(place.distance.toString());
 
+        Timber.d("Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
+
         fabCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: Change this to activate camera upload
+                //TODO: Change this to activate camera upload (see ContributionsListFragment)
                 openWebView(place.siteLinks.getWikidataLink());
             }
         });
@@ -427,7 +430,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         fabGallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: Change this to activate gallery upload
+                //TODO: Change this to activate gallery upload (see ContributionsListFragment)
                 openWebView(place.siteLinks.getWikidataLink());
             }
         });
