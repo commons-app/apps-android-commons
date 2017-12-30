@@ -417,12 +417,13 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         title.setText(place.name.toString());
         distance.setText(place.distance.toString());
 
-        Timber.d("Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
+
 
         fabCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //TODO: Change this to activate camera upload (see ContributionsListFragment)
+                Timber.d("Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
                 openWebView(place.siteLinks.getWikidataLink());
             }
         });
@@ -431,6 +432,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View view) {
                 //TODO: Change this to activate gallery upload (see ContributionsListFragment)
+                Timber.d("Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
                 openWebView(place.siteLinks.getWikidataLink());
             }
         });
