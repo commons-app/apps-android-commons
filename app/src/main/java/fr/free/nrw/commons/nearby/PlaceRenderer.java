@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.pedrogomez.renderers.Renderer;
 
 import java.util.ArrayList;

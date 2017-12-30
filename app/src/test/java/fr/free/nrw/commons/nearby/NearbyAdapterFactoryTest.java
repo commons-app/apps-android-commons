@@ -33,8 +33,12 @@ public class NearbyAdapterFactoryTest {
     private static final Place PLACE = new Place("name", Place.Label.AIRPORT,
             "desc", null, new LatLng(38.6270, -90.1994, 0), null);
     private static final Place UNKNOWN_PLACE = new Place("name", Place.Label.UNKNOWN,
+<<<<<<< 27ac8ae0d72011bc651affecf7b1da2100ec927e
             "?", null, new LatLng(39.7392, -104.9903, 0), null);
     // ^ "?" is a special value for unknown class names from Wikidata query results
+=======
+            "desc", null, new LatLng(39.7392, -104.9903, 0), null);
+>>>>>>> Rename Description to Label to prevent misunderstandings
     private Place clickedPlace;
 
     @Test
