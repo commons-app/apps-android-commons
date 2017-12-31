@@ -49,16 +49,21 @@ public class CommonsApplication extends DaggerApplication {
     @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
     @Inject @Named("application_preferences") SharedPreferences applicationPrefs;
     @Inject @Named("prefs") SharedPreferences otherPrefs;
-
+    
     public static final String DEFAULT_EDIT_SUMMARY = "Uploaded using Android Commons app";
-
+    
     public static final String FEEDBACK_EMAIL = "commons-app-android@googlegroups.com";
+    
     public static final String LOGS_PRIVATE_EMAIL = "commons-app-android-private@googlegroups.com";
+    
     public static final String FEEDBACK_EMAIL_SUBJECT = "Commons Android App (%s) Feedback";
-
+    
     private CommonsApplicationComponent component;
     private RefWatcher refWatcher;
 
+    /**
+     * Used to declare and initialize various components and dependencies
+     */
     @Override
     public void onCreate() {
         super.onCreate();
@@ -80,23 +85,41 @@ public class CommonsApplication extends DaggerApplication {
         System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0");
     }
 
+    /**
+     * Helps in setting up LeakCanary library
+     * @return instance of LeakCanary
+     */
     protected RefWatcher setupLeakCanary() {
         if (LeakCanary.isInAnalyzerProcess(this)) {
             return RefWatcher.DISABLED;
         }
         return LeakCanary.install(this);
     }
-
+    
+  /**
+     * Provides a way to get member refWatcher
+     *
+     * @param context Application context
+     * @return application member refWatcher
+     */
     public static RefWatcher getRefWatcher(Context context) {
         CommonsApplication application = (CommonsApplication) context.getApplicationContext();
         return application.refWatcher;
     }
-
+    
+    /**
+    * Helps in injecting dependency library Dagger
+    * @return Dagger injector
+    */
     @Override
-     protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
+    protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
         return injector();
     }
 
+    /**
+     * used to create injector of application component
+     * @return Application component of Dagger
+     */
     public CommonsApplicationComponent injector() {
         if (component == null) {
             component = DaggerCommonsApplicationComponent.builder()
@@ -106,6 +129,11 @@ public class CommonsApplication extends DaggerApplication {
         return component;
     }
 
+    /**
+     * clears data of current application
+     * @param context Application context
+     * @param logoutListener Implementation of interface LogoutListener
+     */
     public void clearApplicationData(Context context, LogoutListener logoutListener) {
         File cacheDirectory = context.getCacheDir();
         File applicationDirectory = new File(cacheDirectory.getParent());
@@ -145,6 +173,9 @@ public class CommonsApplication extends DaggerApplication {
         Contribution.Table.onDelete(db);
     }
 
+    /**
+     * Interface used to get log-out events
+     */
     public interface LogoutListener {
         void onLogoutComplete();
     }

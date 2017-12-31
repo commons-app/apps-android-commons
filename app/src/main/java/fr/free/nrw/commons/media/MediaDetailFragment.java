@@ -384,7 +384,7 @@ public class MediaDetailFragment extends DaggerFragment {
     private void openMap(LatLng coordinates) {
         //Open map app at given position
         Uri gmmIntentUri = Uri.parse(
-                "geo:0,0?q=" + coordinates.getLatitude() + "," + coordinates.getLatitude());
+                "geo:0,0?q=" + coordinates.getLatitude() + "," + coordinates.getLongitude());
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
 
         if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {

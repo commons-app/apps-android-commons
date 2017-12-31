@@ -67,7 +67,7 @@
     <item quantity="other">%d Fichieren eropgelueden</item>
   </plurals>
   <string name="categories_not_found">D\'Kategorie %1$s gouf net fonnt</string>
-  <string name="categories_skip_explanation">Setzt Kategorien dobäi fir datt Är Biller méi einfach op Wikimedia Commons ze fanne sinn.\n\nFänkt u mat Tippe fir Kategorien dobäizesetzen.</string>
+  <string name="categories_skip_explanation" fuzzy="true">Setzt Kategorien dobäi fir datt Är Biller méi einfach op Wikimedia Commons ze fanne sinn.\n\nFänkt u mat Tippe fir Kategorien dobäizesetzen.</string>
   <string name="categories_activity_title">Kategorien</string>
   <string name="title_activity_settings">Astellungen</string>
   <string name="title_activity_signup">Mellt Iech un</string>

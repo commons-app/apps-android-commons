@@ -37,12 +37,23 @@ public class Utils {
         }
     }
 
+    /**
+     * Creates an URL for thumbnail
+     *
+     * @param filename Thumbnail file name
+     * @return URL of thumbnail
+     */
     public static String makeThumbBaseUrl(@NonNull String filename) {
         String name = new PageTitle(filename).getPrefixedText();
         String sha = new String(Hex.encodeHex(DigestUtils.md5(name)));
         return String.format("%s/%s/%s/%s", BuildConfig.IMAGE_URL_BASE, sha.substring(0, 1), sha.substring(0, 2), urlEncode(name));
     }
 
+    /**
+     * URL Encode an URL in UTF-8 format
+     * @param url Unformatted URL
+     * @return Encoded URL
+     */
     public static String urlEncode(String url) {
         try {
             return URLEncoder.encode(url, "utf-8");
@@ -61,6 +72,11 @@ public class Utils {
         return string.substring(0, 1).toUpperCase(Locale.getDefault()) + string.substring(1);
     }
 
+    /**
+     * Generates licence name with given ID
+     * @param license License ID
+     * @return Name of license
+     */
     public static int licenseNameFor(String license) {
         switch (license) {
             case Prefs.Licenses.CC_BY_3:
@@ -81,6 +97,12 @@ public class Utils {
         throw new RuntimeException("Unrecognized license value: " + license);
     }
 
+    /**
+     * Fixing incorrect extension
+     * @param title File name
+     * @param extension Correct extension
+     * @return File with correct extension
+     */
     public static String fixExtension(String title, String extension) {
         Pattern jpegPattern = Pattern.compile("\\.jpeg$", Pattern.CASE_INSENSITIVE);
 
@@ -96,6 +118,11 @@ public class Utils {
         return title;
     }
 
+    /**
+     * Tells whether dark theme is active or not
+     * @param context Activity context
+     * @return The state of dark theme
+     */
     public static boolean isDarkTheme(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context).getBoolean("theme", false);
     }

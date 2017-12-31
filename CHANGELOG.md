@@ -1,5 +1,11 @@
 # Wikimedia Commons for Android
 
+## v2.6.5 beta
+- Changed "send log" feature to only send logs to private Google group forum
+- Switched to using Wikimedia maps server instead of Mapbox for privacy reasons
+- Removed event logging from app for privacy reasons
+- Fixed crash caused by rapidly switching from Nearby map to list while loading
+
 ## v2.6.4 beta
 - Excluded httpclient and commons-logging to fix release build errors
 - Fixed crashes caused by Fresco and Dagger
