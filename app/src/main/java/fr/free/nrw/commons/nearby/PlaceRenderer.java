@@ -111,6 +111,8 @@ class PlaceRenderer extends Renderer<Place> {
             }
         });
 
+        //TODO: Insert onClickListeners for galeryButton and cameraButton
+
         iconOverflow.setVisibility(showMenu() ? View.VISIBLE : View.GONE);
         iconOverflow.setOnClickListener(v -> popupMenuListener());
     }
