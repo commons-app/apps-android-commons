@@ -407,6 +407,13 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
             editor.putString("Desc", place.getLongDescription());
             editor.apply();
 
+            //TODO: Shift this into title/desc screen after upload initiated
+            sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+            String imageTitle = sharedPref.getString("Title", "");
+            String imageDesc = sharedPref.getString("Desc", "");
+
+            Timber.d("After shared prefs, image title: " + imageTitle + " Image desc: " + imageDesc);
+
             openWebView(place.siteLinks.getWikidataLink());
         });
 
