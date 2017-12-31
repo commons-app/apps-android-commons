@@ -68,7 +68,7 @@
     <item quantity="other">%d cargues</item>
   </plurals>
   <string name="categories_not_found">Nun s\'alcontró denguna categoría que case con %1$s</string>
-  <string name="categories_skip_explanation" fuzzy="true">Amieste categoríes pa facer les imaxes más fáciles d\'alcontrar en Wikimedia Commons.\n\nPrincipie a escribir p\'amestar categoríes.\nToque nesti mensaxe (o calque atrás) pa saltar esti pasu.</string>
+  <string name="categories_skip_explanation">Amiesta categoríes pa facer les imaxes más fáciles d\'alcontrar en Wikimedia Commons.\nPrincipia a escribir p\'amestar categoríes.</string>
   <string name="categories_activity_title">Categoríes</string>
   <string name="title_activity_settings">Configuración</string>
   <string name="title_activity_signup">Date d\'alta</string>
@@ -203,4 +203,5 @@
   <string name="login_to_your_account">Anicia sesión na to cuenta</string>
   <string name="nearby_location_has_not_changed">L\'allugamientu nun camudó.</string>
   <string name="nearby_location_not_available">L\'allugamientu nun ta disponible.</string>
+  <string name="location_permission_rationale_nearby">Ríquese permisu p\'amosar una llista de llugares cercanos</string>
 </resources>

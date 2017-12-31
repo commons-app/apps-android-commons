@@ -2,6 +2,9 @@ package fr.free.nrw.commons;
 
 import android.support.annotation.Nullable;
 
+/**
+ * represents Licence object
+ */
 public class License {
     private String key;
     private String template;
@@ -56,6 +59,12 @@ public class License {
         }
     }
 
+    /**
+     * Gets the license URL
+     *
+     * @param language license language
+     * @return URL
+     */
     public @Nullable String getUrl(String language) {
         if (url == null) {
             return null;

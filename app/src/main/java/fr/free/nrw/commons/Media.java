@@ -47,16 +47,35 @@ public class Media implements Parcelable {
     private HashMap<String, Object> tags = new HashMap<>();
     private @Nullable LatLng coordinates;
 
+    /**
+     * Provides local constructor
+     */
     protected Media() {
         this.categories = new ArrayList<>();
         this.descriptions = new HashMap<>();
     }
 
+    /**
+     * Provides a minimal constructor
+     *
+     * @param filename Media filename
+     */
     public Media(String filename) {
         this();
         this.filename = filename;
     }
 
+    /**
+     * Provide Media constructor
+     * @param localUri Media URI
+     * @param imageUrl Media image URL
+     * @param filename Media filename
+     * @param description Media description
+     * @param dataLength Media date length
+     * @param dateCreated Media creation date
+     * @param dateUploaded Media date uploaded
+     * @param creator Media creator
+     */
     public Media(Uri localUri, String imageUrl, String filename, String description,
                  long dataLength, Date dateCreated, @Nullable Date dateUploaded, String creator) {
         this();
@@ -90,19 +109,33 @@ public class Media implements Parcelable {
         descriptions = in.readHashMap(ClassLoader.getSystemClassLoader());
     }
 
+    /**
+     * Gets tag of media
+     * @param key Media key
+     * @return Media tag
+     */
     public Object getTag(String key) {
         return tags.get(key);
     }
 
+    /**
+     * Modifies( or creates a) tag of media
+     * @param key Media key
+     * @param value Media value
+     */
     public void setTag(String key, Object value) {
         tags.put(key, value);
     }
 
+    /**
+     * Gets media display title
+     * @return Media title
+     */
     public String getDisplayTitle() {
         if (filename == null) {
             return "";
         }
-        // FIXME: Gross hack bercause my regex skills suck maybe or I am too lazy who knows
+        // FIXME: Gross hack because my regex skills suck maybe or I am too lazy who knows
         String title = getFilePageTitle().getDisplayText().replaceFirst("^File:", "");
         Matcher matcher = displayTitlePattern.matcher(title);
         if (matcher.matches()) {
@@ -112,14 +145,27 @@ public class Media implements Parcelable {
         }
     }
 
+    /**
+     * Gets file page title
+     * @return New media page title
+     */
     public PageTitle getFilePageTitle() {
         return new PageTitle("File:" + getFilename().replaceFirst("^File:", ""));
     }
 
+    /**
+     * Gets local URI
+     * @return Media local URI
+     */
     public Uri getLocalUri() {
         return localUri;
     }
 
+    /**
+     * Gets image URL
+     * can be null.
+     * @return Image URL
+     */
     @Nullable
     public String getImageUrl() {
         if (imageUrl == null && this.getFilename() != null) {
@@ -304,6 +350,10 @@ public class Media implements Parcelable {
         this.categories.addAll(categories);
     }
 
+    /**
+     * Modifies (or sets) media descriptions
+     * @param descriptions Media descriptions
+     */
     void setDescriptions(Map<String, String> descriptions) {
         for (String key : this.descriptions.keySet()) {
             this.descriptions.remove(key);
@@ -313,6 +363,11 @@ public class Media implements Parcelable {
         }
     }
 
+    /**
+     * Gets media description in preferred language
+     * @param preferredLanguage Language preferred
+     * @return Description in preferred language
+     */
     public String getDescription(String preferredLanguage) {
         if (descriptions.containsKey(preferredLanguage)) {
             // See if the requested language is there.
@@ -329,11 +384,21 @@ public class Media implements Parcelable {
         }
     }
 
+    /**
+     * Method of Parcelable interface
+     * @return zero
+     */
     @Override
     public int describeContents() {
         return 0;
     }
 
+    /**
+     * Creates a way to transfer information between two or more
+     * activities.
+     * @param parcel Instance of Parcel
+     * @param flags Parcel flag
+     */
     @Override
     public void writeToParcel(Parcel parcel, int flags) {
         parcel.writeParcelable(localUri, flags);
