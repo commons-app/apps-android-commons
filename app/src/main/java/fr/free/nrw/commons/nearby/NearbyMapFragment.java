@@ -1,6 +1,8 @@
 package fr.free.nrw.commons.nearby;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -379,17 +381,24 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         description.setText(place.getLongDescription());
         title.setText(place.name.toString());
         distance.setText(place.distance.toString());
-        
+
         fabCamera.setOnClickListener(view -> {
-                //TODO: Change this to activate camera upload (see ContributionsListFragment). Insert shared preference.
-                Timber.d("Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
-                openWebView(place.siteLinks.getWikidataLink());
+            //TODO: Change this to activate camera upload (see ContributionsListFragment). Insert shared preference.
+            Timber.d("Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
+
+            SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString("Title", place.getName());
+            editor.putString("Desc", place.getLongDescription());
+            editor.apply();
+
+            openWebView(place.siteLinks.getWikidataLink());
         });
 
         fabGallery.setOnClickListener(view -> {
-                //TODO: Change this to activate gallery upload (see ContributionsListFragment). Insert shared preference.
-                Timber.d("Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
-                openWebView(place.siteLinks.getWikidataLink());
+            //TODO: Change this to activate gallery upload (see ContributionsListFragment). Insert shared preference.
+            Timber.d("Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
+            openWebView(place.siteLinks.getWikidataLink());
         });
     }
 
