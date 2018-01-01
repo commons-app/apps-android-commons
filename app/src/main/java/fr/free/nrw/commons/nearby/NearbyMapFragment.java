@@ -391,7 +391,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
             Timber.d("Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
 
             DirectUpload directUpload = new DirectUpload(place.getName(), place.getLongDescription(), this);
-            directUpload.storeSharedPrefs(getActivity());
+            directUpload.storeSharedPrefs();
             directUpload.initiateGalleryUpload(getActivity());
         });
     }

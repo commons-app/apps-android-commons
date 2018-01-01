@@ -48,23 +48,21 @@ class DirectUpload {
         Timber.d("After shared prefs, image title: " + imageTitle + " Image desc: " + imageDesc);
     }
 
-    void initiateGalleryUpload(Context context) {
-        Activity activity = (Activity) context;
-
+    void initiateGalleryUpload() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(activity, READ_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
-                if (activity.shouldShowRequestPermissionRationale(READ_EXTERNAL_STORAGE)) {
-                    new AlertDialog.Builder(activity)
-                            .setMessage(activity.getString(R.string.read_storage_permission_rationale))
+            if (ContextCompat.checkSelfPermission(fragment.getActivity(), READ_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
+                if (fragment.getActivity().shouldShowRequestPermissionRationale(READ_EXTERNAL_STORAGE)) {
+                    new AlertDialog.Builder(fragment.getActivity())
+                            .setMessage(fragment.getActivity().getString(R.string.read_storage_permission_rationale))
                             .setPositiveButton("OK", (dialog, which) -> {
-                                activity.requestPermissions(new String[]{READ_EXTERNAL_STORAGE}, 1);
+                                fragment.getActivity().requestPermissions(new String[]{READ_EXTERNAL_STORAGE}, 1);
                                 dialog.dismiss();
                             })
                             .setNegativeButton("Cancel", null)
                             .create()
                             .show();
                 } else {
-                    activity.requestPermissions(new String[]{READ_EXTERNAL_STORAGE},
+                    fragment.getActivity().requestPermissions(new String[]{READ_EXTERNAL_STORAGE},
                             1);
                 }
             } else {
