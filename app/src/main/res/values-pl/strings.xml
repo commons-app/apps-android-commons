@@ -120,7 +120,7 @@
   <string name="tutorial_3_text">Prosimy NIE wysyłać:</string>
   <string name="tutorial_3_subtext">- Zdjęć przedstawiających siebie lub znajomych\n- Zdjęć pobranych z Internetu\n- Zrzutów ekranów płatnych aplikacji</string>
   <string name="tutorial_4_text">Przykład przesłania pliku:</string>
-  <string name="tutorial_4_subtext">- Nazwa: Zamek Królewski w Warszawie\n- Opis: Zamek Królewski w Warszawie, widok od strony kolumny Zygmunta\n- Kategorie: Western facade (Royal Castle, Warsaw), Southern facade (Royal Castle, Warsaw), Castle Square in Warsaw</string>
+  <string name="tutorial_4_subtext" fuzzy="true">- Nazwa: Zamek Królewski w Warszawie\n- Opis: Zamek Królewski w Warszawie, widok od strony kolumny Zygmunta\n- Kategorie: Western facade (Royal Castle, Warsaw), Southern facade (Royal Castle, Warsaw), Castle Square in Warsaw</string>
   <string name="welcome_wikipedia_text">Dodaj swoje ilustracje. Pomóż ożyć artykułom w Wikipedii!</string>
   <string name="welcome_wikipedia_subtext">Ilustracje w Wikipedii pochodzą z Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Twoje ilustracje pomagają w edukacji ludzi na całym świecie.</string>

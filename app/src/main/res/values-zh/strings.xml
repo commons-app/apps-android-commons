@@ -121,7 +121,7 @@
   <string name="tutorial_3_text">请不要上传：</string>
   <string name="tutorial_3_subtext">- 您朋友的自拍照或图片\n- 您从互联网下载的图片\n- 专利应用的截图</string>
   <string name="tutorial_4_text">示例上传：</string>
-  <string name="tutorial_4_subtext">- 标题：悉尼歌剧院\n- 描述：从海湾对面看到的悉尼歌剧院\n- 分类：Sydney Opera House、Sydney Opera House from the west、Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext">- 标题：悉尼歌剧院\n- 描述：从海湾对面看到的悉尼歌剧院\n- 分类：Sydney Opera House from the west、Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">贡献您的图像。使维基百科的条目更加生动！</string>
   <string name="welcome_wikipedia_subtext">维基百科上的图像来自维基共享资源。</string>
   <string name="welcome_copyright_text">您的图像可以帮助教育世界各地的人。</string>

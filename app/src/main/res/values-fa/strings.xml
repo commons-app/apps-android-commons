@@ -121,7 +121,7 @@
   <string name="tutorial_3_text">لطفاً بارگذاری نکنید:</string>
   <string name="tutorial_3_subtext">-سلفی خودتان یا تصویر دوستانتان\n-تصاویری که از اینترنت دانلود کردید\n-نماگرفت از دیگر اپلیکیشن‌‌ها</string>
   <string name="tutorial_4_text">نمونه بارگذاری:</string>
-  <string name="tutorial_4_subtext">-عنوان: خانهٔ اپرای سیدنی\n-توضیحات: خانهٔ اپرای سیدنی از آن طرف خلیج\n-رده‌ها: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext" fuzzy="true">-عنوان: خانهٔ اپرای سیدنی\n-توضیحات: خانهٔ اپرای سیدنی از آن طرف خلیج\n-رده‌ها: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">عکس‌های خود را به اشتراک بگذارید. به ویکی‌پدیا کمک کنید تا مقالاتش زنده شوند!</string>
   <string name="welcome_wikipedia_subtext">ویکی‌پدیا از تصویرهای ویکی‌انبار استفاده می‌کند.</string>
   <string name="welcome_copyright_text">تصویرهای شما به مطالعهٔ مردم در سراسر دنیا کمک می‌کنند.</string>

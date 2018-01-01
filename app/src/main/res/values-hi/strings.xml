@@ -120,7 +120,7 @@
   <string name="tutorial_3_text">कृपया अपलोड न करें:</string>
   <string name="tutorial_3_subtext">- सेल्फी या अपने दोस्तों की तस्वीरें\n- इंटरनेट से डाउनलोड की गई तस्वीरें\n- किसी निजी एप का स्क्रीनशॉट</string>
   <string name="tutorial_4_text">अपलोड का उदाहरण:</string>
-  <string name="tutorial_4_subtext">- शीर्षक: सिडनी ओपेरा हाउस\n- विवरण: सिडनी ओपेरा हाउस खाड़ी के पार से देखा गया\n- श्रेणियाँ: सिडनी ओपेरा हाउस, पश्चिम से सिडनी ओपेरा हाउस, सिडनी ओपेरा हाउस दूर से</string>
+  <string name="tutorial_4_subtext" fuzzy="true">- शीर्षक: सिडनी ओपेरा हाउस\n- विवरण: सिडनी ओपेरा हाउस खाड़ी के पार से देखा गया\n- श्रेणियाँ: सिडनी ओपेरा हाउस, पश्चिम से सिडनी ओपेरा हाउस, सिडनी ओपेरा हाउस दूर से</string>
   <string name="welcome_wikipedia_text">अपने छवियों का योगदान करें। विकिपीडिया के लेखों को जीवित करने में सहायता करें।</string>
   <string name="welcome_wikipedia_subtext">विकिपीडिया में छवि विकिमीडिया कॉमन्स से आती है।</string>
   <string name="welcome_copyright_text">आपके चित्र पूरे विश्व के लोगों को शिक्षित करेंगे।</string>

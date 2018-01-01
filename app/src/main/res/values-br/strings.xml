@@ -120,7 +120,7 @@
   <string name="tutorial_3_text">ARABAT enporzhiañ :</string>
   <string name="tutorial_3_subtext">- Emskeudennoù pe skeudennoù eus ho mignoned\n- Skeudennoù pellgarget ganeoc\'h diwar an Internet\n- Tapadennoù-skramm arloadoù prevez</string>
   <string name="tutorial_4_text">Skouer un enporzhiadenn :</string>
-  <string name="tutorial_4_subtext">- Titl : Ti opera Sydney\n- Desskrivadur : Ti opera Sydney gwelet eus tu all ar bae\n- Rummadoù : Ti opera Sydney, Ti opera Sydney gwelet eus ar c\'hornôg, Gweloù a-bell eus ti opera Sydney</string>
+  <string name="tutorial_4_subtext" fuzzy="true">- Titl : Ti opera Sydney\n- Desskrivadur : Ti opera Sydney gwelet eus tu all ar bae\n- Rummadoù : Ti opera Sydney, Ti opera Sydney gwelet eus ar c\'hornôg, Gweloù a-bell eus ti opera Sydney</string>
   <string name="welcome_wikipedia_text">Kemerit perzh gant ho skeudennoù. Sikourit pennadoù Wikipedia da zont da vev !</string>
   <string name="welcome_wikipedia_subtext">Dont a ra skeudennoù Wikipedia eus Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Ho skeudennoù a sikour an dud da zeskiñ traoù dre ar bed a-bezh.</string>

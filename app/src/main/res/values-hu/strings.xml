@@ -121,7 +121,7 @@
   <string name="tutorial_3_text">Kérjük, NE tölts fel:</string>
   <string name="tutorial_3_subtext">- Szelfiket vagy képeket a barátaidról\n- Internetröl letöltött képeket\n- Kereskedelmi alkalmazások képernyőképeit</string>
   <string name="tutorial_4_text">Példa feltöltés:</string>
-  <string name="tutorial_4_subtext">- Cím: Sydney-i Operaház\n- Leírás: A Sydney-i Operaház az öböl túlpartjáról\n- Kategóriák: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext" fuzzy="true">- Cím: Sydney-i Operaház\n- Leírás: A Sydney-i Operaház az öböl túlpartjáról\n- Kategóriák: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Tedd közzé a képeidet! Segíts életre kelteni a Wikipédia-szócikkeket!</string>
   <string name="welcome_wikipedia_subtext">A Wikipédián található képek a Wikimédia Commonsből származnak.</string>
   <string name="welcome_copyright_text">A képeid segítenek a világ minden táján élő emberek oktatásában.</string>

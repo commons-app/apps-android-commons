@@ -113,7 +113,7 @@
   <string name="tutorial_3_text">გთხოვთ არ ატვირთოთ:</string>
   <string name="tutorial_3_subtext">- სელფი ან მეგობრების სურათები\n- ინტერნეტიდან ჩამოტვირთული ფოტოები\n- არათავისუფალი აპლიკაციების სკრინშოტები</string>
   <string name="tutorial_4_text">ატვირთვის ნიმუში:</string>
-  <string name="tutorial_4_subtext">- სათაური: სიდნეის ოპერის თეატრი\n- აღწერა: სიდნეის ოპერის თეატრის ხედი უბიდან\n- კატეგორიები: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext" fuzzy="true">- სათაური: სიდნეის ოპერის თეატრი\n- აღწერა: სიდნეის ოპერის თეატრის ხედი უბიდან\n- კატეგორიები: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">ატვირთეთ თქვენი ფოტოები. დაეხმარეთ ვიკიპედიის სტატიებს გაცოცხლებაში!</string>
   <string name="welcome_wikipedia_subtext">ვიკიპედიის ფოტოები ვიკისაწყობში ინახება.</string>
   <string name="welcome_copyright_text">თქვენი სურათები ხალხის განათლებას ეხმარება მთელ მსოფლიოში.</string>

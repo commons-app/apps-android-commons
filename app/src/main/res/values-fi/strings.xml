@@ -121,7 +121,7 @@
   <string name="tutorial_3_text">ÄLÄ tallenna seuraavia:</string>
   <string name="tutorial_3_subtext">- Selfiet tai kuvat ystävistäsi\n- Netistä ladatut kuvat\n- Kuvakaappaukset kaupallisista sovelluksista</string>
   <string name="tutorial_4_text">Tallennusesimerkki:</string>
-  <string name="tutorial_4_subtext">- Nimi: Sydneyn operatalo\n- Kuvaus: Sydneyn oopperatalo katsottuna lahden toisella puolella\n- Luokat: Sydneyn oopperatalo, Sydneyn oopperatalo lännestä, Sydneyn oopperatalo remote views</string>
+  <string name="tutorial_4_subtext" fuzzy="true">- Nimi: Sydneyn operatalo\n- Kuvaus: Sydneyn oopperatalo katsottuna lahden toisella puolella\n- Luokat: Sydneyn oopperatalo, Sydneyn oopperatalo lännestä, Sydneyn oopperatalo remote views</string>
   <string name="welcome_wikipedia_text">Herätä Wikipedia-artikkelit eloon kuvillasi! Tuo kuvasi Wikipediaan.</string>
   <string name="welcome_wikipedia_subtext">Wikipedian kuvat tulevat Wikimedia Commonsista.</string>
   <string name="welcome_copyright_text">Kuvasi auttavat useita ihmisiä ympäri maailmaa artikkeleiden ymmärtämisessä.</string>

@@ -121,7 +121,7 @@
   <string name="tutorial_3_text">Por favor, NON subaː</string>
   <string name="tutorial_3_subtext">- Selfies ou imaxes dos seus amigos\n- Imaxes descargadas de Internet\n- Capturas de pantalla de aplicacións con dereitos de autor</string>
   <string name="tutorial_4_text">Exemplo de subaː</string>
-  <string name="tutorial_4_subtext">- Título: Ópera de Sydney\n- Descrición: A Ópera de Sydney vista dende a baía\n- Categorías: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext" fuzzy="true">- Título: Ópera de Sydney\n- Descrición: A Ópera de Sydney vista dende a baía\n- Categorías: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Achegue as súas imaxes. Axude a que os artigos da Wikipedia cobren vida!</string>
   <string name="welcome_wikipedia_subtext">As imaxes da Wikipedia veñen da Wikimedia Commons.</string>
   <string name="welcome_copyright_text">As súas imaxes axudan a educar xente de todo o mundo.</string>

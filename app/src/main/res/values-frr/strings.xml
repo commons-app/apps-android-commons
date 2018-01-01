@@ -120,7 +120,7 @@
   <string name="tutorial_3_text">Oober schüür EI huuch:</string>
   <string name="tutorial_3_subtext">- Selfies of bilen faan din frinjer\n- Bilen, diar dü ütj at internet deellooset heest\n- Bilskirembilen faan ünfrei software</string>
   <string name="tutorial_4_text">Bispal:</string>
-  <string name="tutorial_4_subtext">- Tiitel: Sydney Opernhüs\n- Beskriiwang: Opernhüs fan Sydney, faan\'t bocht ütj sen\n- Kategoriin: Sydney Opernhüs, Sydney Opernhüs faan waasten, Sydney Opernhüs faan widj wech</string>
+  <string name="tutorial_4_subtext" fuzzy="true">- Tiitel: Sydney Opernhüs\n- Beskriiwang: Opernhüs fan Sydney, faan\'t bocht ütj sen\n- Kategoriin: Sydney Opernhüs, Sydney Opernhüs faan waasten, Sydney Opernhüs faan widj wech</string>
   <string name="welcome_wikipedia_text">Skaft din bilen. Halep mä an maage artiikler üüb Wikipedia labener!</string>
   <string name="welcome_wikipedia_subtext">A bilen üüb Wikipedia kem faan Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Mä din bilen halepst dü minsken üüb a hialer welt.</string>

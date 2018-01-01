@@ -121,7 +121,7 @@
   <string name="tutorial_3_text">Por favor, NÃO carregue:</string>
   <string name="tutorial_3_subtext">- Autorretratos ou imagens dos seus amigos\n- Imagens descarregadas da Internet\n- Capturas de ecrã de aplicações com direitos de autor</string>
   <string name="tutorial_4_text">Exemplo de carregamento:</string>
-  <string name="tutorial_4_subtext">- Título: Ópera de Sydney\n- Descrição: A Ópera de Sydney vista do outro lado da baía\n- Categorias: Ópera de Sydney, Ópera de Sydney vista de ocidente, Vistas à distância da Ópera de Sydney</string>
+  <string name="tutorial_4_subtext" fuzzy="true">- Título: Ópera de Sydney\n- Descrição: A Ópera de Sydney vista do outro lado da baía\n- Categorias: Ópera de Sydney, Ópera de Sydney vista de ocidente, Vistas à distância da Ópera de Sydney</string>
   <string name="welcome_wikipedia_text">Contribua com as suas imagens. Ajude os artigos da Wikipédia a ganhar vida!</string>
   <string name="welcome_wikipedia_subtext">As imagens na Wikipédia provêm do Wikimedia Commons.</string>
   <string name="welcome_copyright_text">As suas imagens ajudam a educar as pessoas em todo o mundo.</string>

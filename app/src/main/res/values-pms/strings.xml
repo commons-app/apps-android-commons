@@ -121,7 +121,7 @@
   <string name="tutorial_3_text">Për piasì, ch\'a caria NEN:</string>
   <string name="tutorial_3_subtext">- dj\'àuto-scat o dle fòto dij sò amis\n- dle fòto ch\'a l\'ha dëscarià d\'an sl\'Aragnà\n- Plance d\'aplicassion sota drit d\'autor</string>
   <string name="tutorial_4_text">Esempi ëd cariament:</string>
-  <string name="tutorial_4_subtext">- Tìtol: Ël teatro dl\'òpera ëd Sidney\n- Descrission: Ël teatro dl\'òpera ëd Sidney s-ciairà dëdlà dl\'ansen\n- Categorìe: Teatro dl\'òpera ëd Sidney, Teatro dl\'òpera ëd Sidney da ponent, viste a distansa dël Teatro dl\'òpera ëd Sydney</string>
+  <string name="tutorial_4_subtext" fuzzy="true">- Tìtol: Ël teatro dl\'òpera ëd Sidney\n- Descrission: Ël teatro dl\'òpera ëd Sidney s-ciairà dëdlà dl\'ansen\n- Categorìe: Teatro dl\'òpera ëd Sidney, Teatro dl\'òpera ëd Sidney da ponent, viste a distansa dël Teatro dl\'òpera ëd Sydney</string>
   <string name="welcome_wikipedia_text">Ch\'a contribuissa con soe plance. Ch\'a giuta a j\'artìcoj ëd Wikipedia a pijé vita!</string>
   <string name="welcome_wikipedia_subtext">Le plance su Wikipedia a ven-o da Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Soe plance a giuto a eduché la gent daspërtut ant ël mond.</string>

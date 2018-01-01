@@ -121,7 +121,7 @@
   <string name="tutorial_3_text">NUN xubas:</string>
   <string name="tutorial_3_subtext">- Selfies o semeyes de los tos amigos\n- Imáxenes que descargasti d\'Internet\n- Imáxenes de pantalla d\'aplicaciones propietaries</string>
   <string name="tutorial_4_text">Exemplu de carga:</string>
-  <string name="tutorial_4_subtext">- Títulu: Ópera de Sidney\n- Descripción: Teatru de la Ópera de Sidney vistu dende l\'otru llau de la badea\n- Categoríes: Ópera de Sidney, Ópera de Sidney dende l\'oeste, Vistes a distancia de la Ópera de Sidney</string>
+  <string name="tutorial_4_subtext" fuzzy="true">- Títulu: Ópera de Sidney\n- Descripción: Teatru de la Ópera de Sidney vistu dende l\'otru llau de la badea\n- Categoríes: Ópera de Sidney, Ópera de Sidney dende l\'oeste, Vistes a distancia de la Ópera de Sidney</string>
   <string name="welcome_wikipedia_text">Collabore coles sos imaxes. ¡Ayude a que los artículos de Wikipedia tengan vida!</string>
   <string name="welcome_wikipedia_subtext">Les imaxes de Wikipedia vienen de\nWikimedia Commons.</string>
   <string name="welcome_copyright_text">Les sos imaxes ayuden a educar a la xente alredor del mundu.</string>

@@ -121,7 +121,7 @@
   <string name="tutorial_3_text">請＊不要＊上傳：</string>
   <string name="tutorial_3_subtext">- 您自己的自拍照，或您朋友的照片\n- 從網路下載來的圖片\n- 專利版權應用程式的截取圖片</string>
   <string name="tutorial_4_text">上傳範例：</string>
-  <string name="tutorial_4_subtext">- 標題：雪梨歌劇院\n- 說明：從對面海灣所看到的雪梨歌劇院\n- 分類：Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext" fuzzy="true">- 標題：雪梨歌劇院\n- 說明：從對面海灣所看到的雪梨歌劇院\n- 分類：Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">貢獻您的圖片，使維基百科的文章更加生動！</string>
   <string name="welcome_wikipedia_subtext">維基百科的圖片，來自維基共享資源。</string>
   <string name="welcome_copyright_text">您的圖片可以幫助教育世界各地的人。</string>

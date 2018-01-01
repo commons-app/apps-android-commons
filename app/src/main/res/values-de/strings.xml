@@ -121,7 +121,7 @@
   <string name="tutorial_3_text">Bitte NICHT hochladen:</string>
   <string name="tutorial_3_subtext">- Selfies oder Bilder deiner Freunde\n- Bilder, die du aus dem Internet heruntergeladen hast\n- Screenshots von proprietären Softwareanwendungen</string>
   <string name="tutorial_4_text">Beispiel-Upload:</string>
-  <string name="tutorial_4_subtext">- Titel: Opernhaus von Sydney\n- Beschreibung: Opernhaus von Sydney, von der Bucht aus gesehen\n- Kategorien: Opernhaus von Sydney, Opernhaus von Sydney von Westen, Opernhaus von Sydney (Fernansicht)</string>
+  <string name="tutorial_4_subtext">- Titel: Opernhaus von Sydney\n- Beschreibung: Opernhaus von Sydney, von der Bucht aus gesehen\n- Kategorien: Opernhaus von Sydney von Westen, Opernhaus von Sydney (Fernansicht)</string>
   <string name="welcome_wikipedia_text">Teile deine Bilder. Erwecke Wikipedia-Artikel zum Leben!</string>
   <string name="welcome_wikipedia_subtext">Die Bilder auf Wikipedia kommen von Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Deine Bilder helfen dabei, Menschen auf der ganzen Welt zu bilden.</string>

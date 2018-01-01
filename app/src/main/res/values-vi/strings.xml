@@ -111,7 +111,7 @@
   <string name="tutorial_3_text">Xin DỪNG tải lên:</string>
   <string name="tutorial_3_subtext">- Hình tự sướng hoặc hình bạn bè\n- Hình ảnh tải về từ Internet\n- Ảnh chụp màn hình của ứng dụng thương mại</string>
   <string name="tutorial_4_text">Tập tin tải lên ví dụ:</string>
-  <string name="tutorial_4_subtext">- Tiêu đề: Nhà hát Opera Sydney\n- Miêu tả: Nhà hát Opera Sydney nhìn qua cảng\n- Thể loại: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext" fuzzy="true">- Tiêu đề: Nhà hát Opera Sydney\n- Miêu tả: Nhà hát Opera Sydney nhìn qua cảng\n- Thể loại: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Đóng góp hình ảnh của bạn. Làm sinh động các bài viết Wikipedia!</string>
   <string name="welcome_wikipedia_subtext">Các hình ảnh trên Wikipedia được cung cấp bởi Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Các hình ảnh của bạn giúp giáo dục người dân trên khắp thế giới.</string>

@@ -121,7 +121,7 @@
   <string name="tutorial_3_text">Vennligst IKKE last opp:</string>
   <string name="tutorial_3_subtext">- Selfies eller bilder av vennene dine\n- Bilder som du har lastet ned fra internet\n- Skjermbilder tatt fra proprietære apper</string>
   <string name="tutorial_4_text">Opplastingseksempel:</string>
-  <string name="tutorial_4_subtext">- Tittel: Sydneys Operahus\n- Beskrivelse: Operahuset i Sydney sett fra andre siden av bukten\n- Kategorier: Operahuset i Sydney, Operahuset i Sydney ifra vest, Operahuset i Sydney utenfra</string>
+  <string name="tutorial_4_subtext" fuzzy="true">- Tittel: Sydneys Operahus\n- Beskrivelse: Operahuset i Sydney sett fra andre siden av bukten\n- Kategorier: Operahuset i Sydney, Operahuset i Sydney ifra vest, Operahuset i Sydney utenfra</string>
   <string name="welcome_wikipedia_text">Bidra med dine bilder. Hjelp til med å blåse liv i Wikipedias artikler!</string>
   <string name="welcome_wikipedia_subtext">Bilder på Wikipedia kommer fra Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Bildene dine kan være til hjelp for mennesker over hele verden som søker kunnskap og dannelse.</string>

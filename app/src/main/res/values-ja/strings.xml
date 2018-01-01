@@ -115,7 +115,7 @@
   <string name="tutorial_3_text">アップロードが《禁止》のもの:</string>
   <string name="tutorial_3_subtext">- あなたの友人の自撮り写真や画像\n- インターネットからダウンロードした画像\n- 著作権のあるアプリのスクリーンショット</string>
   <string name="tutorial_4_text">アップロードの例:</string>
-  <string name="tutorial_4_subtext">- 題名: シドニー・オペラハウス\n- 説明: 湾の向こうから見たシドニー・オペラハウス\n- カテゴリ: シドニー・オペラハウス、シドニー・オペラハウスの西側、遠くから見たシドニー・オペラハウス</string>
+  <string name="tutorial_4_subtext" fuzzy="true">- 題名: シドニー・オペラハウス\n- 説明: 湾の向こうから見たシドニー・オペラハウス\n- カテゴリ: シドニー・オペラハウス、シドニー・オペラハウスの西側、遠くから見たシドニー・オペラハウス</string>
   <string name="welcome_wikipedia_text">画像を投稿してください。ウィキペディアの記事に彩りを！</string>
   <string name="welcome_wikipedia_subtext">ウィキペディアの画像はウィキメディア・コモンズに保管されています。</string>
   <string name="welcome_copyright_text">あなたの画像は世界中の人々が学習する助けになります</string>

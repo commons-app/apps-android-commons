@@ -120,7 +120,7 @@
   <string name="tutorial_3_text">נא לא להעלות:</string>
   <string name="tutorial_3_subtext">- תמונות עצמיות (\"סלפי\") או תמונות של חברים שלכם\n- תמונות שהורדתם מהאינטרנט\n- צילומי מסך של יישומים קנייניים</string>
   <string name="tutorial_4_text">העלאה לדוגמה:</string>
-  <string name="tutorial_4_subtext">- כותרת: בית האופרה של סידני\n- תיאור: בית האופרה של סידני מהצד השני של המפרץ\n- קטגוריות: Sydney Opera House (בית האופרה של סידני), Sydney Opera House from the west (בית האופרה של סידני מהמערב), Sydney Opera House remote views (מראה מרחוק על בית האופרה של סידני)</string>
+  <string name="tutorial_4_subtext" fuzzy="true">- כותרת: בית האופרה של סידני\n- תיאור: בית האופרה של סידני מהצד השני של המפרץ\n- קטגוריות: Sydney Opera House (בית האופרה של סידני), Sydney Opera House from the west (בית האופרה של סידני מהמערב), Sydney Opera House remote views (מראה מרחוק על בית האופרה של סידני)</string>
   <string name="welcome_wikipedia_text">תרמו את התמונות שלכם. עזרו לערכים בוויקיפדיה להתעורר לחיים!</string>
   <string name="welcome_wikipedia_subtext">התמונות בוויקיפדיה מגיעות מ־Wikimedia Commons.</string>
   <string name="welcome_copyright_text">התמונות שלכם עוזרות להעניק חינוך לאנשים מסביב לעולם.</string>

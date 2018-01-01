@@ -121,7 +121,7 @@
   <string name="tutorial_3_text">Veuillez ne PAS téléverser :</string>
   <string name="tutorial_3_subtext">- des selfies ou des images de vos amis \n- des images téléchargées sur Internet\n- des copies d’écran d’applications propriétaires</string>
   <string name="tutorial_4_text">Exemple de téléversement :</string>
-  <string name="tutorial_4_subtext">- Titre : L’opéra de Sydney\n- Description : L’opéra de Sydney vu à travers la baie\n- Catégories : Opéra de Sydney, Opéra de Sydney depuis l’ouest, vues à distance de l’Opéra de Sydney</string>
+  <string name="tutorial_4_subtext">- Titre : Opéra de Sydney\n- Description : L’opéra de Sydney vu à travers la baie\n- Catégories : Opéra de Sydney depuis l’ouest, vues à distance de l’Opéra de Sydney</string>
   <string name="welcome_wikipedia_text">Contribuez avec vos images. Aidez les articles de Wikipédia à prendre vie !</string>
   <string name="welcome_wikipedia_subtext">Les images sur Wikipédia viennent de Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Vos images aident à éduquer les gens dans le monde entier.</string>

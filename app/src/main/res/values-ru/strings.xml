@@ -125,7 +125,7 @@
   <string name="tutorial_3_text">Пожалуйста, НЕ загружайте:</string>
   <string name="tutorial_3_subtext">— Селфи или фотографии ваших друзей\n— Фотографии, которые вы скачали из Интернета\n— Скриншоты несвободных приложений</string>
   <string name="tutorial_4_text">Пример загрузки:</string>
-  <string name="tutorial_4_subtext">— Название: Сиднейский оперный театр\n— Описание: Сиднейский оперный театр, вид через залив\n— Категории: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext" fuzzy="true">— Название: Сиднейский оперный театр\n— Описание: Сиднейский оперный театр, вид через залив\n— Категории: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Загрузите свои изображения. Помогите Википедии оживить статьи!</string>
   <string name="welcome_wikipedia_subtext">Изображения в Википедии хранятся на Викискладе.</string>
   <string name="welcome_copyright_text">Ваши изображения помогают образованию людей во всём мире.</string>

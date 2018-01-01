@@ -87,6 +87,7 @@
   <string name="share_license_summary">Aquesta imatge es llicenciarà sota %1$s</string>
   <string name="menu_download">Baixa</string>
   <string name="preference_license">Llicència</string>
+  <string name="use_previous">Utilitza títol i descripció anteriors</string>
   <string name="preference_theme">Mode nocturn</string>
   <string name="preference_theme_summary">Utilitza el tema fosc</string>
   <string name="license_name_cc_by_sa_four">Reconeixement-CompartirIgual 4.0</string>
@@ -159,4 +160,7 @@
   <string name="no_description_found">no s\'ha trobat cap descripció</string>
   <string name="nearby_info_menu_commons_article">Article del fitxer a Commons</string>
   <string name="nearby_info_menu_wikidata_article">Element del Wikidata</string>
+  <string name="use_external_storage">Utilitza l’emmagatzematge extern</string>
+  <string name="nearby_location_has_not_changed">La ubicació no ha canviat.</string>
+  <string name="nearby_location_not_available">La ubicació no és disponible.</string>
 </resources>

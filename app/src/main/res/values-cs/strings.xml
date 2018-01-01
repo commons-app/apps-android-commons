@@ -120,7 +120,7 @@
   <string name="tutorial_3_text">Prosím NENAHRÁVEJTE:</string>
   <string name="tutorial_3_subtext">- Selfie nebo obrázky vašich přátel\n- Obrázky stažené z Internetu\n- Screenshoty z proprietárních aplikací</string>
   <string name="tutorial_4_text">Příklad nahraného souboru:</string>
-  <string name="tutorial_4_subtext">- Název: Opera v Sydney\n- Popis: Opera v Sydney, pohled přes záliv\n- Kategorie: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext" fuzzy="true">- Název: Opera v Sydney\n- Popis: Opera v Sydney, pohled přes záliv\n- Kategorie: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Přispějte svými obrázky. Pomozte oživit články na Wikipedii.</string>
   <string name="welcome_wikipedia_subtext">Obrázky na Wikipedii pochází \nz Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Vaše obrázky pomáhají vzdělávat lidi po celém světě.</string>

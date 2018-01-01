@@ -121,7 +121,7 @@
   <string name="tutorial_3_text">NO cargues:</string>
   <string name="tutorial_3_subtext">- Autorretratos o fotos de tus amigos\n- Imágenes que hayas descargado de Internet\n- Capturas de pantalla de aplicaciones privativas</string>
   <string name="tutorial_4_text">Ejemplo de carga:</string>
-  <string name="tutorial_4_subtext">- Título: Casa de la Ópera de Sídney\n- Descripción: Casa de la Ópera de Sídney vista desde el otro lado de la bahía\n- Categorías: Casa de la Ópera de Sídney, Casa de la Ópera de Sídney desde el oeste, Vistas a distancia de la Casa de la Ópera de Sídney</string>
+  <string name="tutorial_4_subtext" fuzzy="true">- Título: Casa de la Ópera de Sídney\n- Descripción: Casa de la Ópera de Sídney vista desde el otro lado de la bahía\n- Categorías: Casa de la Ópera de Sídney, Casa de la Ópera de Sídney desde el oeste, Vistas a distancia de la Casa de la Ópera de Sídney</string>
   <string name="welcome_wikipedia_text">Contribuye con tus imágenes.\n¡Ayuda a que los artículos de Wikipedia tengan vida!</string>
   <string name="welcome_wikipedia_subtext">Las imágenes en Wikipedia proceden de\nWikimedia Commons.</string>
   <string name="welcome_copyright_text">Tus imágenes ayudan a educar a la gente\nalrededor del mundo.</string>

@@ -105,7 +105,7 @@
   <string name="tutorial_3_text">कृपया अपभारण करू \'\'\'नका\'\'\':</string>
   <string name="tutorial_3_subtext">-आपल्या किंवा मित्रांच्या सेल्फी\n-आपण आंतरजाल (इंटरनेट) वरुन अधिभारण केलेली चित्रे\n-प्रोप्रायटरी अॲप्सचे स्क्रिनशॉट</string>
   <string name="tutorial_4_text">उदाहरणादाखल अपभारण:</string>
-  <string name="tutorial_4_subtext">- शीर्षक: Sydney Opera House\n- वर्णन: Sydney Opera House as viewed from across the bay\n- वर्ग: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext" fuzzy="true">- शीर्षक: Sydney Opera House\n- वर्णन: Sydney Opera House as viewed from across the bay\n- वर्ग: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">आपली चित्रे सहभागा. विकिपीडियावरील लेखात जीवंतपणा आणा!</string>
   <string name="welcome_wikipedia_subtext">विकिपीडियावरची चित्रे विकिमिडिया कॉमन्सवरुन येतात.</string>
   <string name="welcome_copyright_text">जगातल्या अनेक लोकांना आपल्या चित्राद्वारे शिकता येते.</string>

@@ -121,7 +121,7 @@
   <string name="tutorial_3_text">Overfør venligst IKKE:</string>
   <string name="tutorial_3_subtext">- Selvportrætter eller billeder af dine venner\n- Billeder du har hentet fra internettet\n- Skærmbilleder af dine proprietære programmer</string>
   <string name="tutorial_4_text">Eksempel på overførsel:</string>
-  <string name="tutorial_4_subtext">- Titel: Sydneys Operahus\n- Beskrivelse: Operahuset i Sydney set fra anden siden af bugten\n- Kategorier: Operahuset i Sydney, Operahuset i Sydney fra vest, Operahuset i Sydney udefra</string>
+  <string name="tutorial_4_subtext" fuzzy="true">- Titel: Sydneys Operahus\n- Beskrivelse: Operahuset i Sydney set fra anden siden af bugten\n- Kategorier: Operahuset i Sydney, Operahuset i Sydney fra vest, Operahuset i Sydney udefra</string>
   <string name="welcome_wikipedia_text">Bidrag med dine billeder. Hjælp Wikipedias artikler med at komme til live!</string>
   <string name="welcome_wikipedia_subtext">Billeder på Wikipedia kommer fra Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Dine billeder hjælper med til at uddanne folk rundt om i verden.</string>
