@@ -25,11 +25,11 @@ class DirectUpload {
     private ContributionController controller;
     private Fragment fragment;
 
-    DirectUpload(String title, String desc, Fragment fragment) {
+    DirectUpload(String title, String desc, Fragment fragment, ContributionController controller) {
         this.title = title;
         this.desc = desc;
         this.fragment = fragment;
-        controller = new ContributionController(fragment);
+        this.controller = controller;
     }
 
     void storeSharedPrefs() {
@@ -74,6 +74,6 @@ class DirectUpload {
         }
     }
 
-
+//TODO: Need to call onActivityResult() to handle the image picked
 //TODO: Handle onRequestPermissionsResult
 }

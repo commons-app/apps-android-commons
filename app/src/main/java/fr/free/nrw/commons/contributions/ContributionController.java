@@ -77,10 +77,11 @@ public class ContributionController {
         //FIXME: Starts gallery (opens Google Photos)
         Intent pickImageIntent = new Intent(ACTION_GET_CONTENT);
         pickImageIntent.setType("image/*");
+        Timber.d("startGalleryPick() called with pickImageIntent");
         fragment.startActivityForResult(pickImageIntent, SELECT_FROM_GALLERY);
     }
 
-    void handleImagePicked(int requestCode, Intent data) {
+    public void handleImagePicked(int requestCode, Intent data) {
         FragmentActivity activity = fragment.getActivity();
         Intent shareIntent = new Intent(activity, ShareActivity.class);
         shareIntent.setAction(ACTION_SEND);
