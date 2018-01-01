@@ -2,8 +2,11 @@ package fr.free.nrw.commons.nearby;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -20,17 +23,17 @@ class DirectUpload {
     private String title;
     private String desc;
     private ContributionController controller;
+    private Fragment fragment;
 
     DirectUpload(String title, String desc, Fragment fragment) {
         this.title = title;
         this.desc = desc;
+        this.fragment = fragment;
         controller = new ContributionController(fragment);
     }
 
-    void storeSharedPrefs(Context context) {
-
-        Activity activity = (Activity) context;
-        SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
+    void storeSharedPrefs() {
+        SharedPreferences sharedPref = fragment.getActivity().getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
         editor.putString("Title", title);
@@ -38,7 +41,7 @@ class DirectUpload {
         editor.apply();
 
         //TODO: Shift this into title/desc screen after upload initiated
-        sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
+        sharedPref = fragment.getActivity().getPreferences(Context.MODE_PRIVATE);
         String imageTitle = sharedPref.getString("Title", "");
         String imageDesc = sharedPref.getString("Desc", "");
 
@@ -72,4 +75,7 @@ class DirectUpload {
             controller.startGalleryPick();
         }
     }
+
+
+//TODO: Handle onRequestPermissionsResult
 }
