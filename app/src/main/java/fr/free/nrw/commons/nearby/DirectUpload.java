@@ -74,6 +74,4 @@ class DirectUpload {
         }
     }
 
-//TODO: Need to call onActivityResult() to handle the image picked
-//TODO: Handle onRequestPermissionsResult
 }
