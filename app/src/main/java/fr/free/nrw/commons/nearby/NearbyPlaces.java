@@ -1,7 +1,6 @@
 package fr.free.nrw.commons.nearby;
 
 import android.net.Uri;
-import android.os.StrictMode;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -30,7 +29,6 @@ public class NearbyPlaces {
     private static final Uri WIKIDATA_QUERY_UI_URL = Uri.parse("https://query.wikidata.org/");
     private final String wikidataQuery;
     private double radius = INITIAL_RADIUS;
-    private List<Place> places;
 
     public NearbyPlaces() {
         try {
@@ -139,68 +137,6 @@ public class NearbyPlaces {
         }
         in.close();
 
-        return places;
-    }
-
-    List<Place> getFromWikiNeedsPictures() {
-        if (places != null) {
-            return places;
-        } else {
-            try {
-                places = new ArrayList<>();
-                StrictMode.ThreadPolicy policy
-                        = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-                StrictMode.setThreadPolicy(policy);
-
-                URL file = new URL("https://tools.wmflabs.org/wiki-needs-pictures/data/data.csv");
-
-                BufferedReader in = new BufferedReader(new InputStreamReader(file.openStream()));
-
-                boolean firstLine = true;
-                String line;
-                Timber.d("Reading from CSV file...");
-
-                while ((line = in.readLine()) != null) {
-
-                    // Skip CSV header.
-                    if (firstLine) {
-                        firstLine = false;
-                        continue;
-                    }
-
-                    String[] fields = line.split(",");
-                    String name = Utils.stripLocalizedString(fields[0]);
-
-                    double latitude;
-                    double longitude;
-                    try {
-                        latitude = Double.parseDouble(fields[1]);
-                    } catch (NumberFormatException e) {
-                        latitude = 0;
-                    }
-                    try {
-                        longitude = Double.parseDouble(fields[2]);
-                    } catch (NumberFormatException e) {
-                        longitude = 0;
-                    }
-
-                    String type = fields[3];
-
-                    places.add(new Place(
-                            name,
-                            Place.Description.fromText(type), // list
-                            type, // details
-                            null,
-                            new LatLng(latitude, longitude, 0),
-                            new Sitelinks.Builder().build()
-                    ));
-                }
-                in.close();
-
-            } catch (IOException e) {
-                Timber.d(e.toString());
-            }
-        }
         return places;
     }
 }

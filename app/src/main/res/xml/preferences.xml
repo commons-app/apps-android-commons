@@ -31,13 +31,6 @@
         android:key="theme"
         />
 
-    <CheckBoxPreference
-        android:key="useWikidata"
-        android:title="@string/use_wikidata"
-        android:defaultValue="true"
-        android:summary="@string/use_wikidata_summary"
-        />
-
     <EditTextPreference
         android:key="uploads"
         android:defaultValue="100"

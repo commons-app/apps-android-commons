@@ -47,9 +47,7 @@ public class NearbyController {
         if (curLatLng == null) {
             return Collections.emptyList();
         }
-        List<Place> places = prefs.getBoolean("useWikidata", true)
-                ? nearbyPlaces.getFromWikidataQuery(curLatLng, Locale.getDefault().getLanguage())
-                : nearbyPlaces.getFromWikiNeedsPictures();
+        List<Place> places = nearbyPlaces.getFromWikidataQuery(curLatLng, Locale.getDefault().getLanguage());
         if (curLatLng != null) {
             Timber.d("Sorting places by distance...");
             final Map<Place, Double> distances = new HashMap<>();
