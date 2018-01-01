@@ -13,17 +13,17 @@
         android:background="?attr/subBackground"
         android:foreground="?attr/selectableItemBackground"
         android:gravity="center_vertical"
-        android:minHeight="48dp"
-        android:padding="12dp"
+        android:minHeight="@dimen/overflow_button_dimen"
+        android:padding="@dimen/quarter_standard_height"
         android:textColor="@android:color/white"
-        android:textSize="14sp"
-        app:drawablePadding="6dp"
+        android:textSize="@dimen/description_text_size"
+        app:drawablePadding="@dimen/small_gap"
         app:drawableStart="@drawable/ic_info_outline_white_24dp"
         />
 
     <fr.free.nrw.commons.media.MediaDetailSpacer
         android:layout_width="match_parent"
-        android:layout_height="8dp"
+        android:layout_height="@dimen/small_gap"
         />
 
 </LinearLayout>

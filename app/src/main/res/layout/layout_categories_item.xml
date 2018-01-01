@@ -6,7 +6,7 @@
     android:checkMark="?android:attr/textCheckMark"
     android:checked="false"
     android:gravity="center_vertical"
-    android:padding="4dp"
+    android:padding="@dimen/tiny_gap"
     android:theme="@style/DarkAppTheme">
 
 </CheckedTextView>

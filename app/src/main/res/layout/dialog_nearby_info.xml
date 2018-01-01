@@ -41,16 +41,18 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginRight="12dp"
+                    android:layout_marginLeft="@dimen/quarter_standard_height"
+                    android:layout_marginRight="@dimen/quarter_standard_height"
+                    android:layout_marginStart="@dimen/quarter_standard_height"
+                    android:layout_marginEnd="@dimen/quarter_standard_height"
                     android:layout_weight="1"
                     android:ellipsize="end"
                     android:fontFamily="serif"
                     android:lineSpacingMultiplier="0.9"
                     android:maxLines="3"
-                    android:paddingBottom="4dp"
+                    android:paddingBottom="@dimen/tiny_gap"
                     android:textColor="@android:color/black"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/subheading_text_size"
                     tools:text="Lorem ipsum" />
 
                 <ImageView
@@ -58,7 +60,7 @@
                     android:layout_width="@dimen/overflow_button_dimen"
                     android:layout_height="@dimen/overflow_button_dimen"
                     android:layout_gravity="center_vertical"
-                    android:padding="12dp"
+                    android:padding="@dimen/quarter_standard_height"
                     android:background="@android:color/white"
                     android:contentDescription="@string/abc_action_menu_overflow_description"
                     app:srcCompat="@drawable/ic_more_vert_white_24dp" />
@@ -67,8 +69,8 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginLeft="@dimen/standard_gap"
+                android:layout_marginRight="@dimen/standard_gap"
                 android:background="@android:color/black" />
 
             <TextView
@@ -76,11 +78,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:lineSpacingMultiplier="1.3"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:paddingTop="8dp"
+                android:paddingLeft="@dimen/standard_gap"
+                android:paddingRight="@dimen/standard_gap"
+                android:paddingTop="@dimen/small_gap"
                 android:textIsSelectable="true"
-                android:textSize="16sp"
+                android:textSize="@dimen/normal_text"
                 android:textColor="@android:color/black"
                 tools:text="Lorem ipsum" />
 
@@ -103,9 +105,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:paddingBottom="16dp"
-                android:paddingTop="16dp"
-                android:text="GET DIRECTIONS"
+                android:paddingBottom="@dimen/standard_gap"
+                android:paddingTop="@dimen/standard_gap"
+                android:text="@string/get_directions"
                 android:textColor="@android:color/black" />
 
             <TextView
@@ -114,9 +116,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:paddingBottom="16dp"
-                android:paddingTop="16dp"
-                android:text="READ ARTICLE"
+                android:paddingBottom="@dimen/standard_gap"
+                android:paddingTop="@dimen/standard_gap"
+                android:text="@string/read_article"
                 android:textColor="@android:color/black" />
 
         </LinearLayout>

@@ -5,12 +5,12 @@
     android:layout_gravity="fill"
     android:orientation="vertical"
     android:background="?attr/fragmentCategorisationBackground"
-    android:paddingBottom="8dip"
-    android:paddingLeft="16dip"
-    android:paddingStart="16dip"
-    android:paddingRight="16dip"
-    android:paddingEnd="16dip"
-    android:paddingTop="8dip"
+    android:paddingBottom="@dimen/small_gap"
+    android:paddingLeft="@dimen/standard_gap"
+    android:paddingStart="@dimen/standard_gap"
+    android:paddingRight="@dimen/standard_gap"
+    android:paddingEnd="@dimen/standard_gap"
+    android:paddingTop="@dimen/small_gap"
     android:theme="@style/DarkAppTheme"
     >
 
@@ -56,7 +56,7 @@
         android:text="@string/share_license_summary"
         android:id="@+id/share_license_summary"
         android:gravity="center"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/standard_gap"
         />
 
     <fr.free.nrw.commons.ui.widget.HtmlTextView
@@ -65,7 +65,7 @@
         android:id="@+id/media_upload_policy"
         android:text="@string/media_upload_policy"
         android:gravity="start"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/standard_gap"
         />
 
 </LinearLayout>
