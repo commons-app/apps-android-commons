@@ -383,19 +383,16 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         distance.setText(place.distance.toString());
 
         fabCamera.setOnClickListener(view -> {
-            //TODO: Change this to activate camera upload (see ContributionsListFragment). Insert shared preference.
-            Timber.d("Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
 
-            DirectUpload directUpload = new DirectUpload(place.getName(), place.getLongDescription(), this);
-            directUpload.storeSharedPrefs(getActivity());
-            directUpload.initiateUpload(getActivity());
 
         });
 
         fabGallery.setOnClickListener(view -> {
-            //TODO: Change this to activate gallery upload (see ContributionsListFragment). Insert shared preference.
             Timber.d("Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
-            openWebView(place.siteLinks.getWikidataLink());
+
+            DirectUpload directUpload = new DirectUpload(place.getName(), place.getLongDescription(), this);
+            directUpload.storeSharedPrefs(getActivity());
+            directUpload.initiateGalleryUpload(getActivity());
         });
     }
 

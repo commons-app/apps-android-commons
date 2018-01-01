@@ -45,7 +45,7 @@ class DirectUpload {
         Timber.d("After shared prefs, image title: " + imageTitle + " Image desc: " + imageDesc);
     }
 
-    void initiateUpload(Context context) {
+    void initiateGalleryUpload(Context context) {
         Activity activity = (Activity) context;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
