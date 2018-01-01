@@ -83,6 +83,7 @@ public class ContributionController {
 
     public void handleImagePicked(int requestCode, Intent data) {
         FragmentActivity activity = fragment.getActivity();
+        Timber.d("handleImagePicked() called with onActivityResult()");
         Intent shareIntent = new Intent(activity, ShareActivity.class);
         shareIntent.setAction(ACTION_SEND);
         switch (requestCode) {
