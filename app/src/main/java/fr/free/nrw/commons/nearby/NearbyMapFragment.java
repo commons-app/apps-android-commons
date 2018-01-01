@@ -42,8 +42,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.utils.UriDeserializer;
 import timber.log.Timber;
+
+import static android.app.Activity.RESULT_OK;
 
 public class NearbyMapFragment extends android.support.v4.app.Fragment {
 
@@ -78,6 +81,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     private Animation fab_close;
     private Animation fab_open;
     private Animation rotate_forward;
+    private ContributionController controller;
 
     private Place place;
     private Marker selected;
@@ -405,10 +409,26 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         fabGallery.setOnClickListener(view -> {
             Timber.d("Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
 
-            DirectUpload directUpload = new DirectUpload(place.getName(), place.getLongDescription(), this);
+            controller = new ContributionController(this);
+            DirectUpload directUpload = new DirectUpload(place.getName(), place.getLongDescription(), this, controller);
             directUpload.storeSharedPrefs();
             directUpload.initiateGalleryUpload();
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //FIXME: must get the file data for Google Photos when receive the intent answer, in the onActivityResult method
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            Timber.d("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
+                    requestCode, resultCode, data);
+            controller.handleImagePicked(requestCode, data);
+        } else {
+            Timber.e("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
+                    requestCode, resultCode, data);
+        }
     }
 
     private void openWebView(Uri link) {
