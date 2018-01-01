@@ -392,7 +392,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
 
             DirectUpload directUpload = new DirectUpload(place.getName(), place.getLongDescription(), this);
             directUpload.storeSharedPrefs();
-            directUpload.initiateGalleryUpload(getActivity());
+            directUpload.initiateGalleryUpload();
         });
     }
 
