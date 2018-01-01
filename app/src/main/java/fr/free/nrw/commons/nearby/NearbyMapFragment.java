@@ -401,8 +401,9 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
             //TODO: Change this to activate camera upload (see ContributionsListFragment). Insert shared preference.
             Timber.d("Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
 
-            DirectUpload directUpload = new DirectUpload(place.getName(), place.getLongDescription());
+            DirectUpload directUpload = new DirectUpload(place.getName(), place.getLongDescription(), this);
             directUpload.storeSharedPrefs(getActivity());
+            directUpload.initiateUpload(getActivity());
 
         });
 

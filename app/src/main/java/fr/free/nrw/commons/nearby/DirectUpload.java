@@ -49,8 +49,7 @@ class DirectUpload {
         Activity activity = (Activity) context;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(activity, READ_EXTERNAL_STORAGE)
-                    != PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(activity, READ_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
                 if (activity.shouldShowRequestPermissionRationale(READ_EXTERNAL_STORAGE)) {
                     new AlertDialog.Builder(activity)
                             .setMessage(activity.getString(R.string.read_storage_permission_rationale))
@@ -64,15 +63,13 @@ class DirectUpload {
                 } else {
                     activity.requestPermissions(new String[]{READ_EXTERNAL_STORAGE},
                             1);
-
-                    // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-                    // app-defined int constant. The callback method gets the
-                    // result of the request.
                 }
+            } else {
+                controller.startGalleryPick();
             }
-                else {
-                    controller.startGalleryPick();
-                    return true;
-                }
+        }
+        else {
+            controller.startGalleryPick();
+        }
     }
 }
