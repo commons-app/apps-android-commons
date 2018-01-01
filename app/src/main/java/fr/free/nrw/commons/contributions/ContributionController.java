@@ -25,14 +25,14 @@ import static fr.free.nrw.commons.contributions.Contribution.SOURCE_CAMERA;
 import static fr.free.nrw.commons.contributions.Contribution.SOURCE_GALLERY;
 import static fr.free.nrw.commons.upload.UploadService.EXTRA_SOURCE;
 
-class ContributionController {
+public class ContributionController {
 
     private static final int SELECT_FROM_GALLERY = 1;
     private static final int SELECT_FROM_CAMERA = 2;
 
     private Fragment fragment;
 
-    ContributionController(Fragment fragment) {
+    public ContributionController(Fragment fragment) {
         this.fragment = fragment;
     }
 

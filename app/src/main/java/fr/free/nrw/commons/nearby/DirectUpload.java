@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 
@@ -20,9 +21,10 @@ class DirectUpload {
     private String desc;
     private ContributionController controller;
 
-    DirectUpload(String title, String desc) {
+    DirectUpload(String title, String desc, Fragment fragment) {
         this.title = title;
         this.desc = desc;
+        controller = new ContributionController(fragment);
     }
 
     void storeSharedPrefs(Context context) {
