@@ -398,12 +398,14 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
             DirectUpload directUpload = new DirectUpload(place.getName(), place.getLongDescription(), this, controller);
             directUpload.storeSharedPrefs();
             directUpload.initiateGalleryUpload();
+
+//TODO: App crashes after image upload completes
+//TODO: Handle onRequestPermissionsResult
         });
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //FIXME: must get the file data for Google Photos when receive the intent answer, in the onActivityResult method
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK) {
