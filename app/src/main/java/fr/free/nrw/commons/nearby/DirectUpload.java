@@ -33,12 +33,21 @@ class DirectUpload {
     }
 
     void storeSharedPrefs() {
-        SharedPreferences sharedPref = fragment.getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = fragment.getActivity().getSharedPreferences("Direct Upload",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
         editor.putString("Title", title);
         editor.putString("Desc", desc);
         editor.apply();
+
+        /**
+        //TODO remove this
+        sharedPref = fragment.getActivity().getSharedPreferences(Context.MODE_PRIVATE);
+        String imageTitle = sharedPref.getString("Title", "");
+        String imageDesc = sharedPref.getString("Desc", "");
+
+        Timber.d("In DirectUpload, image title: " + imageTitle + " and image desc: " + imageDesc);
+         */
     }
 
     void initiateGalleryUpload() {
