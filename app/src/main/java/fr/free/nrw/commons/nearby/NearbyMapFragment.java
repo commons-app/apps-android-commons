@@ -399,7 +399,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
             directUpload.storeSharedPrefs();
             directUpload.initiateGalleryUpload();
 
-//TODO: App crashes after image upload completes
+//TODO: App crashes after image upload completes - but didn't happen 2nd time I tried?
 //TODO: Handle onRequestPermissionsResult
         });
     }
