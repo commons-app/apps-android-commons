@@ -112,10 +112,12 @@ public class ShareActivity
     private String title;
     private String description;
     private Snackbar snackbar;
+    private boolean duplicateCheckPassed = false;
+
     private String nearbyTitle;
     private String nearbyDesc;
-    private boolean duplicateCheckPassed = false;
     private boolean haveCheckedForOtherImages = false;
+    private boolean isNearbyUpload = false;
     /**
      * Called when user taps the submit button.
      */
@@ -213,6 +215,10 @@ public class ShareActivity
         finish();
     }
 
+    protected boolean isNearbyUpload() {
+        return isNearbyUpload;
+    }
+
     protected String getNearbyTitle() {
         return nearbyTitle;
     }
@@ -249,6 +255,7 @@ public class ShareActivity
             }
             if (intent.hasExtra("isDirectUpload")) {
                 Timber.d("This was initiated by a direct upload from Nearby");
+                isNearbyUpload = true;
 
                 SharedPreferences sharedPref = this.getSharedPreferences("Direct Upload", Context.MODE_PRIVATE);
                 nearbyTitle = sharedPref.getString("Title", "");
