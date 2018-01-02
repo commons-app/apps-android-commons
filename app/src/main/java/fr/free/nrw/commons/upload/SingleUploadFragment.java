@@ -105,8 +105,10 @@ public class SingleUploadFragment extends DaggerFragment {
 
         license = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
 
+        boolean isNearbyUpload = ((ShareActivity) getActivity()).isNearbyUpload();
+
         //TODO: Get this to display title and desc
-        if (true) {
+        if (isNearbyUpload) {
             String imageTitle = ((ShareActivity) getActivity()).getNearbyTitle();
             String imageDesc = ((ShareActivity) getActivity()).getNearbyDesc();
             titleEdit.setText(imageTitle);
@@ -249,7 +251,8 @@ public class SingleUploadFragment extends DaggerFragment {
         }
         return false;
     }
-    
+
+    @SuppressLint("StringFormatInvalid")
     private void setLicenseSummary(String license) {
         licenseSummaryView.setText(getString(R.string.share_license_summary, getString(Utils.licenseNameFor(license))));
     }
