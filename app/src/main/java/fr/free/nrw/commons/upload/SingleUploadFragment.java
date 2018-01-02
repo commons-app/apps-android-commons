@@ -106,9 +106,9 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
 
         license = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
 
+        // If this is a direct upload from Nearby, autofill title and desc fields with the Place's values
         boolean isNearbyUpload = ((ShareActivity) getActivity()).isNearbyUpload();
 
-        //TODO: Get this to display title and desc
         if (isNearbyUpload) {
             String imageTitle = ((ShareActivity) getActivity()).getNearbyTitle();
             String imageDesc = ((ShareActivity) getActivity()).getNearbyDesc();
