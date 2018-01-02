@@ -17,8 +17,8 @@ import fr.free.nrw.commons.data.DBOpenHelper;
 import timber.log.Timber;
 
 import static android.content.UriMatcher.NO_MATCH;
-import static fr.free.nrw.commons.contributions.Contribution.Table.ALL_FIELDS;
-import static fr.free.nrw.commons.contributions.Contribution.Table.TABLE_NAME;
+import static fr.free.nrw.commons.contributions.ContributionDao.Table.ALL_FIELDS;
+import static fr.free.nrw.commons.contributions.ContributionDao.Table.TABLE_NAME;
 
 public class ContributionsContentProvider extends ContentProvider {
 
@@ -176,7 +176,7 @@ public class ContributionsContentProvider extends ContentProvider {
                 if (TextUtils.isEmpty(selection)) {
                     rowsUpdated = sqlDB.update(TABLE_NAME,
                             contentValues,
-                            Contribution.Table.COLUMN_ID + " = ?",
+                            ContributionDao.Table.COLUMN_ID + " = ?",
                             new String[]{String.valueOf(id)});
                 } else {
                     throw new IllegalArgumentException(

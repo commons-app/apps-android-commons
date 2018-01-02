@@ -21,7 +21,7 @@ import javax.inject.Named;
 import dagger.android.AndroidInjector;
 import dagger.android.DaggerApplication;
 import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.data.Category;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.di.CommonsApplicationComponent;
@@ -170,7 +170,7 @@ public class CommonsApplication extends DaggerApplication {
 
         ModifierSequence.Table.onDelete(db);
         Category.Table.onDelete(db);
-        Contribution.Table.onDelete(db);
+        ContributionDao.Table.onDelete(db);
     }
 
     /**

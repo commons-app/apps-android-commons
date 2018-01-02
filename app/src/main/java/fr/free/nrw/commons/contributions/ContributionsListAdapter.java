@@ -26,7 +26,7 @@ class ContributionsListAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         final ContributionViewHolder views = (ContributionViewHolder)view.getTag();
-        final Contribution contribution = Contribution.fromCursor(cursor);
+        final Contribution contribution = ContributionDao.fromCursor(cursor);
 
         views.imageView.setMedia(contribution);
         views.titleView.setText(contribution.getDisplayTitle());
