@@ -411,7 +411,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         if (resultCode == RESULT_OK) {
             Timber.d("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
                     requestCode, resultCode, data);
-            controller.handleImagePicked(requestCode, data);
+            controller.handleImagePicked(requestCode, data, true);
         } else {
             Timber.e("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
                     requestCode, resultCode, data);
