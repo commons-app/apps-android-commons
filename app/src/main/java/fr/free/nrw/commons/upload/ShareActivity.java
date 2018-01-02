@@ -2,7 +2,7 @@ package fr.free.nrw.commons.upload;
 
 import android.Manifest;
 import android.content.ContentResolver;
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -236,6 +236,15 @@ public class ShareActivity
                 source = intent.getStringExtra(UploadService.EXTRA_SOURCE);
             } else {
                 source = Contribution.SOURCE_EXTERNAL;
+            }
+            if (intent.hasExtra("isDirectUpload")) {
+                Timber.d("This was initiated by a direct upload from Nearby");
+                //TODO: Shift this into title/desc screen after upload initiated
+                SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+                String imageTitle = sharedPref.getString("Title", "");
+                String imageDesc = sharedPref.getString("Desc", "");
+
+                Timber.d("In ShareActivity, image title: " + imageTitle + " and image desc: " + imageDesc);
             }
             mimeType = intent.getType();
         }

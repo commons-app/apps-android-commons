@@ -81,7 +81,7 @@ public class ContributionController {
         fragment.startActivityForResult(pickImageIntent, SELECT_FROM_GALLERY);
     }
 
-    public void handleImagePicked(int requestCode, Intent data) {
+    public void handleImagePicked(int requestCode, Intent data, boolean isDirectUpload) {
         FragmentActivity activity = fragment.getActivity();
         Timber.d("handleImagePicked() called with onActivityResult()");
         Intent shareIntent = new Intent(activity, ShareActivity.class);
@@ -93,6 +93,9 @@ public class ContributionController {
                 shareIntent.setType(activity.getContentResolver().getType(imageData));
                 shareIntent.putExtra(EXTRA_STREAM, imageData);
                 shareIntent.putExtra(EXTRA_SOURCE, SOURCE_GALLERY);
+                if (isDirectUpload) {
+                    shareIntent.putExtra("isDirectUpload", true);
+                }
                 break;
             case SELECT_FROM_CAMERA:
                 //FIXME: Find out appropriate mime type

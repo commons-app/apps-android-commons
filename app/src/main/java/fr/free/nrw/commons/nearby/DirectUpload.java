@@ -39,13 +39,6 @@ class DirectUpload {
         editor.putString("Title", title);
         editor.putString("Desc", desc);
         editor.apply();
-
-        //TODO: Shift this into title/desc screen after upload initiated
-        sharedPref = fragment.getActivity().getPreferences(Context.MODE_PRIVATE);
-        String imageTitle = sharedPref.getString("Title", "");
-        String imageDesc = sharedPref.getString("Desc", "");
-
-        Timber.d("After shared prefs, image title: " + imageTitle + " Image desc: " + imageDesc);
     }
 
     void initiateGalleryUpload() {
