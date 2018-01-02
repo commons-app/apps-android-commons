@@ -112,6 +112,8 @@ public class ShareActivity
     private String title;
     private String description;
     private Snackbar snackbar;
+    private String nearbyTitle;
+    private String nearbyDesc;
     private boolean duplicateCheckPassed = false;
     private boolean haveCheckedForOtherImages = false;
     /**
@@ -211,6 +213,14 @@ public class ShareActivity
         finish();
     }
 
+    protected String getNearbyTitle() {
+        return nearbyTitle;
+    }
+
+    protected String getNearbyDesc() {
+        return nearbyDesc;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -241,11 +251,9 @@ public class ShareActivity
                 Timber.d("This was initiated by a direct upload from Nearby");
 
                 SharedPreferences sharedPref = this.getSharedPreferences("Direct Upload", Context.MODE_PRIVATE);
-                String imageTitle = sharedPref.getString("Title", "");
-                String imageDesc = sharedPref.getString("Desc", "");
-                Timber.d("In ShareActivity, image title: " + imageTitle + " and image desc: " + imageDesc);
-
-
+                nearbyTitle = sharedPref.getString("Title", "");
+                nearbyDesc = sharedPref.getString("Desc", "");
+                Timber.d("In ShareActivity, image title: " + nearbyTitle + " and image desc: " + nearbyDesc);
             }
             mimeType = intent.getType();
         }

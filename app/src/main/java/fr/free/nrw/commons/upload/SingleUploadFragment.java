@@ -108,8 +108,10 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
 
         //TODO: Get this to display title and desc
         if (true) {
-            titleEdit.setText("");
-            descEdit.setText("");
+            String imageTitle = ((ShareActivity) getActivity()).getNearbyTitle();
+            String imageDesc = ((ShareActivity) getActivity()).getNearbyDesc();
+            titleEdit.setText(imageTitle);
+            descEdit.setText(imageDesc);
         }
 
         // check if this is the first time we have uploaded
@@ -266,7 +268,7 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
         }
         return false;
     }
-
+    
     private void setLicenseSummary(String license) {
         licenseSummaryView.setText(getString(R.string.share_license_summary, getString(Utils.licenseNameFor(license))));
     }
