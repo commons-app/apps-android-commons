@@ -239,12 +239,13 @@ public class ShareActivity
             }
             if (intent.hasExtra("isDirectUpload")) {
                 Timber.d("This was initiated by a direct upload from Nearby");
-                //TODO: Shift this into title/desc screen after upload initiated
+
                 SharedPreferences sharedPref = this.getSharedPreferences("Direct Upload", Context.MODE_PRIVATE);
                 String imageTitle = sharedPref.getString("Title", "");
                 String imageDesc = sharedPref.getString("Desc", "");
-
                 Timber.d("In ShareActivity, image title: " + imageTitle + " and image desc: " + imageDesc);
+
+
             }
             mimeType = intent.getType();
         }

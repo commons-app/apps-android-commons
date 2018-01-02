@@ -39,15 +39,6 @@ class DirectUpload {
         editor.putString("Title", title);
         editor.putString("Desc", desc);
         editor.apply();
-
-        /**
-        //TODO remove this
-        sharedPref = fragment.getActivity().getSharedPreferences(Context.MODE_PRIVATE);
-        String imageTitle = sharedPref.getString("Title", "");
-        String imageDesc = sharedPref.getString("Desc", "");
-
-        Timber.d("In DirectUpload, image title: " + imageTitle + " and image desc: " + imageDesc);
-         */
     }
 
     void initiateGalleryUpload() {

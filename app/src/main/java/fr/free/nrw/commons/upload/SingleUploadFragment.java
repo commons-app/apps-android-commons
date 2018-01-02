@@ -106,6 +106,12 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
 
         license = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
 
+        //TODO: Get this to display title and desc
+        if (true) {
+            titleEdit.setText("");
+            descEdit.setText("");
+        }
+
         // check if this is the first time we have uploaded
         if (prefs.getString("Title", "").trim().length() == 0
                 && prefs.getString("Desc", "").trim().length() == 0) {
