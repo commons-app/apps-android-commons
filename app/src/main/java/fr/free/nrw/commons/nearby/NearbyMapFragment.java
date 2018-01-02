@@ -339,7 +339,6 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
                 this.getView().requestFocus();
                 break;
         }
-
     }
 
     private void hideFAB() {
@@ -387,8 +386,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         distance.setText(place.distance.toString());
 
         fabCamera.setOnClickListener(view -> {
-
-
+            //TODO: Implement camera button
         });
 
         fabGallery.setOnClickListener(view -> {
