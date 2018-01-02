@@ -2,17 +2,16 @@ package fr.free.nrw.commons.auth;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
-import android.accounts.AuthenticatorException;
-import android.accounts.OperationCanceledException;
 import android.content.Context;
-
-import java.io.IOException;
 
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
+import io.reactivex.schedulers.Schedulers;
+import timber.log.Timber;
 
 import static fr.free.nrw.commons.auth.AccountUtil.ACCOUNT_TYPE;
+import static fr.free.nrw.commons.auth.AccountUtil.AUTH_TOKEN_TYPE;
 
 /**
  * Manage the current logged in user session.
@@ -51,14 +50,31 @@ public class SessionManager {
         }
 
         accountManager.invalidateAuthToken(ACCOUNT_TYPE, mediaWikiApi.getAuthCookie());
-        try {
-            String authCookie = accountManager.blockingGetAuthToken(curAccount, "", false);
-            mediaWikiApi.setAuthCookie(authCookie);
-            return true;
-        } catch (OperationCanceledException | NullPointerException | IOException | AuthenticatorException e) {
-            e.printStackTrace();
-            return false;
-        }
+        getAndSetAuthCookie().subscribeOn(Schedulers.io())
+                .subscribe(authCookie -> {
+                    mediaWikiApi.setAuthCookie(authCookie);
+                });
+        return true;
+    }
+
+    public Observable<String> getAndSetAuthCookie() {
+        AccountManager accountManager = AccountManager.get(context);
+        Account curAccount = getCurrentAccount();
+        return Observable.fromCallable(() -> {
+            String authCookie = accountManager.blockingGetAuthToken(curAccount, AUTH_TOKEN_TYPE, false);
+            if (authCookie == null) {
+                Timber.d("Media wiki auth cookie is %s", mediaWikiApi.getAuthCookie());
+                authCookie = mediaWikiApi.getAuthCookie();
+                //authCookie = currentAccount.name + "|" + currentAccount.type + "|" + mediaWikiApi.getUserAgent();
+                //mediaWikiApi.setAuthCookie(authCookie);
+
+            }
+            Timber.d("Auth cookie is %s", authCookie);
+            return authCookie;
+        }).onErrorReturn(throwable-> {
+            Timber.e(throwable, "Auth cookie is still null :(");
+            return null;
+        });
     }
 
     public Completable clearAllAccounts() {

@@ -69,9 +69,15 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         final SSLSocketFactory sslSocketFactory = SSLSocketFactory.getSocketFactory();
         schemeRegistry.register(new Scheme("https", sslSocketFactory, 443));
         ClientConnectionManager cm = new ThreadSafeClientConnManager(params, schemeRegistry);
-        params.setParameter(CoreProtocolPNames.USER_AGENT, "Commons/" + BuildConfig.VERSION_NAME + " (https://mediawiki.org/wiki/Apps/Commons) Android/" + Build.VERSION.RELEASE);
+        params.setParameter(CoreProtocolPNames.USER_AGENT, getUserAgent());
         httpClient = new DefaultHttpClient(cm, params);
         api = new MWApi(apiURL, httpClient);
+    }
+
+    @Override
+    @NonNull
+    public String getUserAgent() {
+        return "Commons/" + BuildConfig.VERSION_NAME + " (https://mediawiki.org/wiki/Apps/Commons) Android/" + Build.VERSION.RELEASE;
     }
 
     @VisibleForTesting
@@ -86,11 +92,13 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
      * @throws IOException On api request IO issue
      */
     public String login(String username, String password) throws IOException {
+        String loginToken = getLoginToken();
+        Timber.d("Login token is %s", loginToken);
         return getErrorCodeToReturn(api.action("clientlogin")
                 .param("rememberMe", "1")
                 .param("username", username)
                 .param("password", password)
-                .param("logintoken", getLoginToken())
+                .param("logintoken", loginToken)
                 .param("loginreturnurl", "https://commons.wikimedia.org")
                 .post());
     }
@@ -103,12 +111,14 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
      * @throws IOException On api request IO issue
      */
     public String login(String username, String password, String twoFactorCode) throws IOException {
+        String loginToken = getLoginToken();
+        Timber.d("Login token is %s", loginToken);
         return getErrorCodeToReturn(api.action("clientlogin")
-                .param("rememberMe", "1")
+                .param("rememberMe", "true")
                 .param("username", username)
                 .param("password", password)
-                .param("logintoken", getLoginToken())
-                .param("logincontinue", "1")
+                .param("logintoken", loginToken)
+                .param("logincontinue", "true")
                 .param("OATHToken", twoFactorCode)
                 .post());
     }

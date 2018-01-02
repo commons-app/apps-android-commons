@@ -19,6 +19,8 @@ import static fr.free.nrw.commons.modifications.ModificationsContentProvider.MOD
 public class AccountUtil {
 
     public static final String ACCOUNT_TYPE = "fr.free.nrw.commons";
+    public static final String AUTH_COOKIE = "authCookie";
+    public static final String AUTH_TOKEN_TYPE = "CommonsAndroid";
     private final Context context;
 
     public AccountUtil(Context context) {

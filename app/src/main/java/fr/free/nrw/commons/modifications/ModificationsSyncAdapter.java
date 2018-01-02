@@ -1,9 +1,6 @@
 package fr.free.nrw.commons.modifications;
 
 import android.accounts.Account;
-import android.accounts.AccountManager;
-import android.accounts.AuthenticatorException;
-import android.accounts.OperationCanceledException;
 import android.content.AbstractThreadedSyncAdapter;
 import android.content.ContentProviderClient;
 import android.content.Context;
@@ -16,7 +13,7 @@ import java.io.IOException;
 
 import javax.inject.Inject;
 
-import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
@@ -29,6 +26,8 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
     @Inject MediaWikiApi mwApi;
     @Inject ContributionDao contributionDao;
     @Inject ModifierSequenceDao modifierSequenceDao;
+    @Inject
+    SessionManager sessionManager;
 
     public ModificationsSyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
@@ -56,16 +55,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
             return;
         }
 
-        String authCookie;
-        try {
-            authCookie = AccountManager.get(getContext()).blockingGetAuthToken(account, "", false);
-        } catch (OperationCanceledException | AuthenticatorException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            Timber.d("Could not authenticate :(");
-            return;
-        }
-
+        String authCookie = sessionManager.getAndSetAuthCookie().blockingSingle();
         if (isNullOrWhiteSpace(authCookie)) {
             Timber.d("Could not authenticate :(");
             return;
