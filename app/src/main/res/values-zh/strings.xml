@@ -204,4 +204,6 @@
   <string name="nearby_location_has_not_changed">位置没有更新。</string>
   <string name="nearby_location_not_available">位置不可用。</string>
   <string name="location_permission_rationale_nearby">需要权限以显示附近地点列表</string>
+  <string name="get_directions">获得指示</string>
+  <string name="read_article">阅读条目</string>
 </resources>

@@ -204,4 +204,6 @@
   <string name="nearby_location_has_not_changed">O local não mudou.</string>
   <string name="nearby_location_not_available">Localização não disponível.</string>
   <string name="location_permission_rationale_nearby">Permissão necessária para exibir uma lista de locais próximos</string>
+  <string name="get_directions">OBTER DIREÇÕES</string>
+  <string name="read_article">LER ARTIGO</string>
 </resources>

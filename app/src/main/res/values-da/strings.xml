@@ -68,7 +68,7 @@
     <item quantity="other">%d overførsler</item>
   </plurals>
   <string name="categories_not_found">Ingen kategorier matchende %1$s er fundet</string>
-  <string name="categories_skip_explanation" fuzzy="true">Tilføj kategorier for at gøre billederne mere synlig på Wikimedia Commons.</string>
+  <string name="categories_skip_explanation">Tilføj kategorier for at gøre billederne mere synlig på Wikimedia Commons. Tast for at tilføje kategorier.</string>
   <string name="categories_activity_title">Kategorier</string>
   <string name="title_activity_settings">Indstillinger</string>
   <string name="title_activity_signup">Opret konto</string>
@@ -121,7 +121,7 @@
   <string name="tutorial_3_text">Overfør venligst IKKE:</string>
   <string name="tutorial_3_subtext">- Selvportrætter eller billeder af dine venner\n- Billeder du har hentet fra internettet\n- Skærmbilleder af dine proprietære programmer</string>
   <string name="tutorial_4_text">Eksempel på overførsel:</string>
-  <string name="tutorial_4_subtext" fuzzy="true">- Titel: Sydneys Operahus\n- Beskrivelse: Operahuset i Sydney set fra anden siden af bugten\n- Kategorier: Operahuset i Sydney, Operahuset i Sydney fra vest, Operahuset i Sydney udefra</string>
+  <string name="tutorial_4_subtext">- Titel: Sydneys Operahus\n- Beskrivelse: Operahuset i Sydney set fra den anden siden af\n  bugten\n- Kategorier: Operahuset i Sydney fra vest, Operahuset i Sydney\n  udefra</string>
   <string name="welcome_wikipedia_text">Bidrag med dine billeder. Hjælp Wikipedias artikler med at komme til live!</string>
   <string name="welcome_wikipedia_subtext">Billeder på Wikipedia kommer fra Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Dine billeder hjælper med til at uddanne folk rundt om i verden.</string>
@@ -204,4 +204,6 @@
   <string name="nearby_location_has_not_changed">Sted er ikke ændret.</string>
   <string name="nearby_location_not_available">Sted ikke tilgængeligt.</string>
   <string name="location_permission_rationale_nearby">Tilladelse kræves for at vise en liste over steder i nærheden</string>
+  <string name="get_directions">FÅ RUTEHJÆLP</string>
+  <string name="read_article">LÆS ARTIKEL</string>
 </resources>

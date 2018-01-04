@@ -155,4 +155,6 @@
   <string name="nearby_info_menu_commons_article">Artxibo orrialde komuna</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata itema</string>
   <string name="error_while_cache">Argazkiak hartzerakoan sortutako akatsa</string>
+  <string name="get_directions">NORABIDEAK JASO</string>
+  <string name="read_article">IRAKURRI ARTIKULUA</string>
 </resources>

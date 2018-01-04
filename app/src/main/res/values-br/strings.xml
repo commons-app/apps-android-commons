@@ -68,7 +68,7 @@
     <item quantity="other">%d pellgargadennoù</item>
   </plurals>
   <string name="categories_not_found">N\'eus bet kavet rummad ebet o klotañ gant %1$s</string>
-  <string name="categories_skip_explanation" fuzzy="true">Ouzhpennit rummadoù evit ma vo aesoc\'h kavout ho skeudennoù war Wikimedia Commons.\n\nKrogit da ouzhpennañ rummadoù.\nPouezit war ar c\'hemenn-mañ (pe distroit en a-raok) evit mont dreist ar bazenn-mañ.</string>
+  <string name="categories_skip_explanation">Ouzhpennit rummadoù evit ma vo aesoc\'h kavout ho skeudennoù war Wikimedia Commons.\n\nKrogit da skrivañ evit ouzhpennañ rummadoù.</string>
   <string name="categories_activity_title">Rummadoù</string>
   <string name="title_activity_settings">Arventennoù</string>
   <string name="title_activity_signup">En em enskrivañ</string>
@@ -186,4 +186,6 @@
   <string name="no_description_found">N\'eus bet kavet deskrivadur ebet</string>
   <string name="nearby_info_menu_commons_article" fuzzy="true">Pennad Commons</string>
   <string name="nearby_info_menu_wikidata_article">Elfenn Wikidata</string>
+  <string name="get_directions">Kaout urzhioù</string>
+  <string name="read_article">Lenn ar pennad</string>
 </resources>
