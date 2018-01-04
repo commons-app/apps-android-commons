@@ -22,7 +22,7 @@ import dagger.android.AndroidInjector;
 import dagger.android.DaggerApplication;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.ContributionDao;
-import fr.free.nrw.commons.data.Category;
+import fr.free.nrw.commons.data.CategoryDao;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.di.CommonsApplicationComponent;
 import fr.free.nrw.commons.di.CommonsApplicationModule;
@@ -49,15 +49,15 @@ public class CommonsApplication extends DaggerApplication {
     @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
     @Inject @Named("application_preferences") SharedPreferences applicationPrefs;
     @Inject @Named("prefs") SharedPreferences otherPrefs;
-    
+
     public static final String DEFAULT_EDIT_SUMMARY = "Uploaded using Android Commons app";
-    
+
     public static final String FEEDBACK_EMAIL = "commons-app-android@googlegroups.com";
-    
+
     public static final String LOGS_PRIVATE_EMAIL = "commons-app-android-private@googlegroups.com";
-    
+
     public static final String FEEDBACK_EMAIL_SUBJECT = "Commons Android App (%s) Feedback";
-    
+
     private CommonsApplicationComponent component;
     private RefWatcher refWatcher;
 
@@ -95,7 +95,7 @@ public class CommonsApplication extends DaggerApplication {
         }
         return LeakCanary.install(this);
     }
-    
+
   /**
      * Provides a way to get member refWatcher
      *
@@ -106,7 +106,7 @@ public class CommonsApplication extends DaggerApplication {
         CommonsApplication application = (CommonsApplication) context.getApplicationContext();
         return application.refWatcher;
     }
-    
+
     /**
     * Helps in injecting dependency library Dagger
     * @return Dagger injector
@@ -169,7 +169,7 @@ public class CommonsApplication extends DaggerApplication {
         SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
 
         ModifierSequence.Table.onDelete(db);
-        Category.Table.onDelete(db);
+        CategoryDao.Table.onDelete(db);
         ContributionDao.Table.onDelete(db);
     }
 

@@ -23,13 +23,13 @@ public class DBOpenHelper  extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         ContributionDao.Table.onCreate(sqLiteDatabase);
         ModifierSequence.Table.onCreate(sqLiteDatabase);
-        Category.Table.onCreate(sqLiteDatabase);
+        CategoryDao.Table.onCreate(sqLiteDatabase);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int from, int to) {
         ContributionDao.Table.onUpdate(sqLiteDatabase, from, to);
         ModifierSequence.Table.onUpdate(sqLiteDatabase, from, to);
-        Category.Table.onUpdate(sqLiteDatabase, from, to);
+        CategoryDao.Table.onUpdate(sqLiteDatabase, from, to);
     }
 }
