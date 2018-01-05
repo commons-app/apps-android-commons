@@ -24,6 +24,7 @@ import fr.free.nrw.commons.upload.UploadController;
 
 import static android.content.Context.MODE_PRIVATE;
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.CONTRIBUTION_AUTHORITY;
+import static fr.free.nrw.commons.modifications.ModificationsContentProvider.MODIFICATIONS_AUTHORITY;
 
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
@@ -51,6 +52,12 @@ public class CommonsApplicationModule {
     @Named("contribution")
     public ContentProviderClient provideContributionContentProviderClient() {
         return application.getContentResolver().acquireContentProviderClient(CONTRIBUTION_AUTHORITY);
+    }
+
+    @Provides
+    @Named("modification")
+    public ContentProviderClient provideModificationContentProviderClient() {
+        return application.getContentResolver().acquireContentProviderClient(MODIFICATIONS_AUTHORITY);
     }
 
     @Provides

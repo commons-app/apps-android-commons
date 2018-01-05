@@ -76,6 +76,7 @@ public  class      ShareActivity
     @Inject CacheController cacheController;
     @Inject SessionManager sessionManager;
     @Inject UploadController uploadController;
+    @Inject ModifierSequenceDao modifierSequenceDao;
     @Inject @Named("default_preferences") SharedPreferences prefs;
 
     private String source;
@@ -166,13 +167,12 @@ public  class      ShareActivity
 
             categoriesSequence.queueModifier(new CategoryModifier(categories.toArray(new String[]{})));
             categoriesSequence.queueModifier(new TemplateRemoveModifier("Uncategorized"));
-            ModifierSequenceDao dao = new ModifierSequenceDao(getContentResolver().acquireContentProviderClient(ModificationsContentProvider.AUTHORITY));
-            dao.save(categoriesSequence);
+            modifierSequenceDao.save(categoriesSequence);
         }
 
         // FIXME: Make sure that the content provider is up
         // This is the wrong place for it, but bleh - better than not having it turned on by default for people who don't go throughl ogin
-        ContentResolver.setSyncAutomatically(sessionManager.getCurrentAccount(), ModificationsContentProvider.AUTHORITY, true); // Enable sync by default!
+        ContentResolver.setSyncAutomatically(sessionManager.getCurrentAccount(), ModificationsContentProvider.MODIFICATIONS_AUTHORITY, true); // Enable sync by default!
 
         finish();
     }

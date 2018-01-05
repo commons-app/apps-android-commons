@@ -273,7 +273,7 @@ public class UploadService extends HandlerService<Contribution> {
             toUpload--;
             if (toUpload == 0) {
                 // Sync modifications right after all uplaods are processed
-                ContentResolver.requestSync(sessionManager.getCurrentAccount(), ModificationsContentProvider.AUTHORITY, new Bundle());
+                ContentResolver.requestSync(sessionManager.getCurrentAccount(), ModificationsContentProvider.MODIFICATIONS_AUTHORITY, new Bundle());
                 stopForeground(true);
             }
         }

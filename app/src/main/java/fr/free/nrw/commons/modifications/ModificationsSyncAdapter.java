@@ -27,6 +27,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
 
     @Inject MediaWikiApi mwApi;
     @Inject ContributionDao contributionDao;
+    @Inject ModifierSequenceDao modifierSequenceDao;
 
     public ModificationsSyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
@@ -84,8 +85,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
             contributionsClient = getContext().getContentResolver().acquireContentProviderClient(ContributionsContentProvider.CONTRIBUTION_AUTHORITY);
 
             while (!allModifications.isAfterLast()) {
-                ModifierSequence sequence = ModifierSequenceDao.fromCursor(allModifications);
-                ModifierSequenceDao dao = new ModifierSequenceDao(contributionsClient);
+                ModifierSequence sequence = modifierSequenceDao.fromCursor(allModifications);
                 Contribution contrib;
 
                 Cursor contributionCursor;
@@ -123,7 +123,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                         // FIXME: Log this somewhere else
                         Timber.d("Non success result! %s", editResult);
                     } else {
-                        dao.delete(sequence);
+                        modifierSequenceDao.delete(sequence);
                     }
                 }
                 allModifications.moveToNext();
