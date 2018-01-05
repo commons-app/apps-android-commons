@@ -27,7 +27,7 @@ import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.di.CommonsApplicationComponent;
 import fr.free.nrw.commons.di.CommonsApplicationModule;
 import fr.free.nrw.commons.di.DaggerCommonsApplicationComponent;
-import fr.free.nrw.commons.modifications.ModifierSequence;
+import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.utils.FileUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -168,7 +168,7 @@ public class CommonsApplication extends DaggerApplication {
         dbOpenHelper.getReadableDatabase().close();
         SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
 
-        ModifierSequence.Table.onDelete(db);
+        ModifierSequenceDao.Table.onDelete(db);
         CategoryDao.Table.onDelete(db);
         ContributionDao.Table.onDelete(db);
     }

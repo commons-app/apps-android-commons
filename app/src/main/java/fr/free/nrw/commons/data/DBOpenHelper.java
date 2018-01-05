@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import fr.free.nrw.commons.contributions.ContributionDao;
-import fr.free.nrw.commons.modifications.ModifierSequence;
+import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 
 public class DBOpenHelper  extends SQLiteOpenHelper {
 
@@ -13,7 +13,8 @@ public class DBOpenHelper  extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 6;
 
     /**
-     * Do not use, please call CommonsApplication.getDBOpenHelper()
+     * Do not use directly - @Inject an instance where it's needed and let
+     * dependency injection take care of managing this as a singleton.
      */
     public DBOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -22,14 +23,14 @@ public class DBOpenHelper  extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         ContributionDao.Table.onCreate(sqLiteDatabase);
-        ModifierSequence.Table.onCreate(sqLiteDatabase);
+        ModifierSequenceDao.Table.onCreate(sqLiteDatabase);
         CategoryDao.Table.onCreate(sqLiteDatabase);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int from, int to) {
         ContributionDao.Table.onUpdate(sqLiteDatabase, from, to);
-        ModifierSequence.Table.onUpdate(sqLiteDatabase, from, to);
+        ModifierSequenceDao.Table.onUpdate(sqLiteDatabase, from, to);
         CategoryDao.Table.onUpdate(sqLiteDatabase, from, to);
     }
 }

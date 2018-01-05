@@ -83,8 +83,8 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
             contributionsClient = getContext().getContentResolver().acquireContentProviderClient(ContributionsContentProvider.AUTHORITY);
 
             while (!allModifications.isAfterLast()) {
-                ModifierSequence sequence = ModifierSequence.fromCursor(allModifications);
-                sequence.setContentProviderClient(contentProviderClient);
+                ModifierSequence sequence = ModifierSequenceDao.fromCursor(allModifications);
+                ModifierSequenceDao dao = new ModifierSequenceDao(contributionsClient);
                 Contribution contrib;
 
                 Cursor contributionCursor;
@@ -122,7 +122,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                         // FIXME: Log this somewhere else
                         Timber.d("Non success result! %s", editResult);
                     } else {
-                        sequence.delete();
+                        dao.delete(sequence);
                     }
                 }
                 allModifications.moveToNext();

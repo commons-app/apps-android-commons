@@ -39,7 +39,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import butterknife.ButterKnife;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.auth.SessionManager;
@@ -50,8 +49,8 @@ import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.modifications.CategoryModifier;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.modifications.ModifierSequence;
+import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
-import fr.free.nrw.commons.mwapi.EventLog;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
@@ -167,8 +166,8 @@ public  class      ShareActivity
 
             categoriesSequence.queueModifier(new CategoryModifier(categories.toArray(new String[]{})));
             categoriesSequence.queueModifier(new TemplateRemoveModifier("Uncategorized"));
-            categoriesSequence.setContentProviderClient(getContentResolver().acquireContentProviderClient(ModificationsContentProvider.AUTHORITY));
-            categoriesSequence.save();
+            ModifierSequenceDao dao = new ModifierSequenceDao(getContentResolver().acquireContentProviderClient(ModificationsContentProvider.AUTHORITY));
+            dao.save(categoriesSequence);
         }
 
         // FIXME: Make sure that the content provider is up
