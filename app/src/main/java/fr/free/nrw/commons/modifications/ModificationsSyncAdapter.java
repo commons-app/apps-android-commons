@@ -26,6 +26,7 @@ import timber.log.Timber;
 public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
 
     @Inject MediaWikiApi mwApi;
+    @Inject ContributionDao contributionDao;
 
     public ModificationsSyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
@@ -80,7 +81,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
 
         ContentProviderClient contributionsClient = null;
         try {
-            contributionsClient = getContext().getContentResolver().acquireContentProviderClient(ContributionsContentProvider.AUTHORITY);
+            contributionsClient = getContext().getContentResolver().acquireContentProviderClient(ContributionsContentProvider.CONTRIBUTION_AUTHORITY);
 
             while (!allModifications.isAfterLast()) {
                 ModifierSequence sequence = ModifierSequenceDao.fromCursor(allModifications);
@@ -94,7 +95,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                     throw new RuntimeException(e);
                 }
                 contributionCursor.moveToFirst();
-                contrib = ContributionDao.fromCursor(contributionCursor);
+                contrib = contributionDao.fromCursor(contributionCursor);
 
                 if (contrib.getState() == Contribution.STATE_COMPLETED) {
                     String pageContent;

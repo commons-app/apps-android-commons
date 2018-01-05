@@ -43,7 +43,6 @@ import timber.log.Timber;
 import static android.content.ContentResolver.requestSync;
 import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
 import static fr.free.nrw.commons.contributions.ContributionDao.Table.ALL_FIELDS;
-import static fr.free.nrw.commons.contributions.ContributionsContentProvider.AUTHORITY;
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.BASE_URI;
 import static fr.free.nrw.commons.settings.Prefs.UPLOADS_SHOWING;
 
@@ -58,6 +57,7 @@ public  class       ContributionsActivity
     @Inject MediaWikiApi mediaWikiApi;
     @Inject SessionManager sessionManager;
     @Inject @Named("default_preferences") SharedPreferences prefs;
+    @Inject ContributionDao contributionDao;
 
     private Cursor allContributions;
     private ContributionsListFragment contributionsList;
@@ -121,7 +121,7 @@ public  class       ContributionsActivity
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
         // Do a sync everytime we get here!
-        requestSync(sessionManager.getCurrentAccount(), ContributionsContentProvider.AUTHORITY, new Bundle());
+        requestSync(sessionManager.getCurrentAccount(), ContributionsContentProvider.CONTRIBUTION_AUTHORITY, new Bundle());
         Intent uploadServiceIntent = new Intent(this, UploadService.class);
         uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
         startService(uploadServiceIntent);
@@ -186,7 +186,7 @@ public  class       ContributionsActivity
 
     public void retryUpload(int i) {
         allContributions.moveToPosition(i);
-        Contribution c = ContributionDao.fromCursor(allContributions);
+        Contribution c = contributionDao.fromCursor(allContributions);
         if (c.getState() == STATE_FAILED) {
             uploadService.queue(UploadService.ACTION_UPLOAD_FILE, c);
             Timber.d("Restarting for %s", c.toString());
@@ -197,10 +197,10 @@ public  class       ContributionsActivity
 
     public void deleteUpload(int i) {
         allContributions.moveToPosition(i);
-        Contribution c = ContributionDao.fromCursor(allContributions);
+        Contribution c = contributionDao.fromCursor(allContributions);
         if (c.getState() == STATE_FAILED) {
             Timber.d("Deleting failed contrib %s", c.toString());
-            new ContributionDao(getContentResolver().acquireContentProviderClient(AUTHORITY)).delete(c);
+            contributionDao.delete(c);
         } else {
             Timber.d("Skipping deletion for non-failed contrib %s", c.toString());
         }
@@ -248,7 +248,7 @@ public  class       ContributionsActivity
 
         if (contributionsList.getAdapter() == null) {
             contributionsList.setAdapter(new ContributionsListAdapter(getApplicationContext(),
-                    cursor, 0));
+                    cursor, 0, contributionDao));
         } else {
             ((CursorAdapter) contributionsList.getAdapter()).swapCursor(cursor);
         }
@@ -269,7 +269,7 @@ public  class       ContributionsActivity
             // not yet ready to return data
             return null;
         } else {
-            return ContributionDao.fromCursor((Cursor) contributionsList.getAdapter().getItem(i));
+            return contributionDao.fromCursor((Cursor) contributionsList.getAdapter().getItem(i));
         }
     }
 

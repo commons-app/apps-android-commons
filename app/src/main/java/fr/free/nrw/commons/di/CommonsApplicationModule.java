@@ -23,6 +23,7 @@ import fr.free.nrw.commons.nearby.NearbyPlaces;
 import fr.free.nrw.commons.upload.UploadController;
 
 import static android.content.Context.MODE_PRIVATE;
+import static fr.free.nrw.commons.contributions.ContributionsContentProvider.CONTRIBUTION_AUTHORITY;
 
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
@@ -42,8 +43,14 @@ public class CommonsApplicationModule {
 
     @Provides
     @Named("category")
-    public ContentProviderClient provideContentProviderClient() {
+    public ContentProviderClient provideCategoryContentProviderClient() {
         return application.getContentResolver().acquireContentProviderClient(CATEGORY_AUTHORITY);
+    }
+
+    @Provides
+    @Named("contribution")
+    public ContentProviderClient provideContributionContentProviderClient() {
+        return application.getContentResolver().acquireContentProviderClient(CONTRIBUTION_AUTHORITY);
     }
 
     @Provides

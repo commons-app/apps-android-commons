@@ -11,40 +11,51 @@ import android.text.TextUtils;
 
 import java.util.Date;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Provider;
+
 import fr.free.nrw.commons.settings.Prefs;
 
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.BASE_URI;
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.uriForId;
 
 public class ContributionDao {
-    private final ContentProviderClient client;
+    private final Provider<ContentProviderClient> clientProvider;
 
-    public ContributionDao(ContentProviderClient client) {
-        this.client = client;
+    @Inject
+    public ContributionDao(@Named("contribution") Provider<ContentProviderClient> clientProvider) {
+        this.clientProvider = clientProvider;
     }
 
     public void save(Contribution contribution) {
+        ContentProviderClient db = clientProvider.get();
         try {
             if (contribution.getContentUri() == null) {
-                contribution.setContentUri(client.insert(BASE_URI, toContentValues(contribution)));
+                contribution.setContentUri(db.insert(BASE_URI, toContentValues(contribution)));
             } else {
-                client.update(contribution.getContentUri(), toContentValues(contribution), null, null);
+                db.update(contribution.getContentUri(), toContentValues(contribution), null, null);
             }
         } catch (RemoteException e) {
             throw new RuntimeException(e);
+        } finally {
+            db.release();
         }
     }
 
     public void delete(Contribution contribution) {
+        ContentProviderClient db = clientProvider.get();
         try {
             if (contribution.getContentUri() == null) {
                 // noooo
                 throw new RuntimeException("tried to delete item with no content URI");
             } else {
-                client.delete(contribution.getContentUri(), null, null);
+                db.delete(contribution.getContentUri(), null, null);
             }
         } catch (RemoteException e) {
             throw new RuntimeException(e);
+        } finally {
+            db.release();
         }
     }
 
@@ -74,7 +85,7 @@ public class ContributionDao {
         return cv;
     }
 
-    public static Contribution fromCursor(Cursor cursor) {
+    public Contribution fromCursor(Cursor cursor) {
         // Hardcoding column positions!
         //Check that cursor has a value to avoid CursorIndexOutOfBoundsException
         if (cursor.getCount() > 0) {

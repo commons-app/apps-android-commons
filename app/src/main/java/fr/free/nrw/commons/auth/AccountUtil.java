@@ -8,13 +8,13 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import fr.free.nrw.commons.contributions.ContributionsContentProvider;
-import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import timber.log.Timber;
 
 import static android.accounts.AccountManager.ERROR_CODE_REMOTE_EXCEPTION;
 import static android.accounts.AccountManager.KEY_ACCOUNT_NAME;
 import static android.accounts.AccountManager.KEY_ACCOUNT_TYPE;
+import static fr.free.nrw.commons.contributions.ContributionsContentProvider.CONTRIBUTION_AUTHORITY;
+import static fr.free.nrw.commons.modifications.ModificationsContentProvider.AUTHORITY;
 
 public class AccountUtil {
 
@@ -51,8 +51,8 @@ public class AccountUtil {
         }
 
         // FIXME: If the user turns it off, it shouldn't be auto turned back on
-        ContentResolver.setSyncAutomatically(account, ContributionsContentProvider.AUTHORITY, true); // Enable sync by default!
-        ContentResolver.setSyncAutomatically(account, ModificationsContentProvider.AUTHORITY, true); // Enable sync by default!
+        ContentResolver.setSyncAutomatically(account, CONTRIBUTION_AUTHORITY, true); // Enable sync by default!
+        ContentResolver.setSyncAutomatically(account, AUTHORITY, true); // Enable sync by default!
     }
 
     private AccountManager accountManager() {
