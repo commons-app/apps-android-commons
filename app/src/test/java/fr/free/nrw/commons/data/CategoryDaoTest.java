@@ -50,20 +50,20 @@ import static org.mockito.Mockito.when;
 public class CategoryDaoTest {
 
     @Mock
-    ContentProviderClient client;
+    private ContentProviderClient client;
     @Mock
-    SQLiteDatabase database;
+    private SQLiteDatabase database;
     @Captor
-    ArgumentCaptor<ContentValues> captor;
+    private ArgumentCaptor<ContentValues> captor;
     @Captor
-    ArgumentCaptor<String[]> queryCaptor;
+    private ArgumentCaptor<String[]> queryCaptor;
 
     private CategoryDao testObject;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        testObject = new CategoryDao(client);
+        testObject = new CategoryDao(() -> client);
     }
 
     @Test

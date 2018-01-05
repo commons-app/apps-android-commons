@@ -12,25 +12,33 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Provider;
+
 import fr.free.nrw.commons.category.CategoryContentProvider;
 
 public class CategoryDao {
 
-    private final ContentProviderClient client;
+    private final Provider<ContentProviderClient> clientProvider;
 
-    public CategoryDao(ContentProviderClient client) {
-        this.client = client;
+    @Inject
+    public CategoryDao(@Named("category") Provider<ContentProviderClient> clientProvider) {
+        this.clientProvider = clientProvider;
     }
 
     public void save(Category category) {
+        ContentProviderClient db = clientProvider.get();
         try {
             if (category.getContentUri() == null) {
-                category.setContentUri(client.insert(CategoryContentProvider.BASE_URI, toContentValues(category)));
+                category.setContentUri(db.insert(CategoryContentProvider.BASE_URI, toContentValues(category)));
             } else {
-                client.update(category.getContentUri(), toContentValues(category), null, null);
+                db.update(category.getContentUri(), toContentValues(category), null, null);
             }
         } catch (RemoteException e) {
             throw new RuntimeException(e);
+        } finally {
+            db.release();
         }
     }
 
@@ -43,8 +51,9 @@ public class CategoryDao {
     public @Nullable
     Category find(String name) {
         Cursor cursor = null;
+        ContentProviderClient db = clientProvider.get();
         try {
-            cursor = client.query(
+            cursor = db.query(
                     CategoryContentProvider.BASE_URI,
                     Table.ALL_FIELDS,
                     Table.COLUMN_NAME + "=?",
@@ -60,6 +69,7 @@ public class CategoryDao {
             if (cursor != null) {
                 cursor.close();
             }
+            db.release();
         }
         return null;
     }
@@ -73,8 +83,9 @@ public class CategoryDao {
     List<String> recentCategories(int limit) {
         List<String> items = new ArrayList<>();
         Cursor cursor = null;
+        ContentProviderClient db = clientProvider.get();
         try {
-            cursor = client.query(
+            cursor = db.query(
                     CategoryContentProvider.BASE_URI,
                     Table.ALL_FIELDS,
                     null,
@@ -91,6 +102,7 @@ public class CategoryDao {
             if (cursor != null) {
                 cursor.close();
             }
+            db.release();
         }
         return items;
     }

@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.di;
 
+import android.content.ContentProviderClient;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.util.LruCache;
@@ -26,6 +27,8 @@ import static android.content.Context.MODE_PRIVATE;
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class CommonsApplicationModule {
+    public static final String CATEGORY_AUTHORITY = "fr.free.nrw.commons.categories.contentprovider";
+
     private CommonsApplication application;
 
     public CommonsApplicationModule(CommonsApplication application) {
@@ -35,6 +38,12 @@ public class CommonsApplicationModule {
     @Provides
     public AccountUtil providesAccountUtil() {
         return new AccountUtil(application);
+    }
+
+    @Provides
+    @Named("category")
+    public ContentProviderClient provideContentProviderClient() {
+        return application.getContentResolver().acquireContentProviderClient(CATEGORY_AUTHORITY);
     }
 
     @Provides
