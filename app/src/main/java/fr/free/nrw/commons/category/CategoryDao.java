@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.data;
+package fr.free.nrw.commons.category;
 
 import android.content.ContentProviderClient;
 import android.content.ContentValues;
@@ -15,8 +15,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Provider;
-
-import fr.free.nrw.commons.category.CategoryContentProvider;
 
 public class CategoryDao {
 
@@ -159,7 +157,7 @@ public class CategoryDao {
             onCreate(db);
         }
 
-        static void onUpdate(SQLiteDatabase db, int from, int to) {
+        public static void onUpdate(SQLiteDatabase db, int from, int to) {
             if (from == to) {
                 return;
             }

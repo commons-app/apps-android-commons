@@ -17,9 +17,9 @@ import fr.free.nrw.commons.data.DBOpenHelper;
 import timber.log.Timber;
 
 import static android.content.UriMatcher.NO_MATCH;
-import static fr.free.nrw.commons.data.CategoryDao.Table.ALL_FIELDS;
-import static fr.free.nrw.commons.data.CategoryDao.Table.COLUMN_ID;
-import static fr.free.nrw.commons.data.CategoryDao.Table.TABLE_NAME;
+import static fr.free.nrw.commons.category.CategoryDao.Table.ALL_FIELDS;
+import static fr.free.nrw.commons.category.CategoryDao.Table.COLUMN_ID;
+import static fr.free.nrw.commons.category.CategoryDao.Table.TABLE_NAME;
 
 public class CategoryContentProvider extends ContentProvider {
 

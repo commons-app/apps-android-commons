@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.data;
+package fr.free.nrw.commons.category;
 
 import android.content.ContentProviderClient;
 import android.content.ContentValues;
@@ -27,8 +27,7 @@ import java.util.List;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.TestCommonsApplication;
-import fr.free.nrw.commons.category.CategoryContentProvider;
-import fr.free.nrw.commons.data.CategoryDao.Table;
+import fr.free.nrw.commons.category.CategoryDao.Table;
 
 import static fr.free.nrw.commons.category.CategoryContentProvider.BASE_URI;
 import static fr.free.nrw.commons.category.CategoryContentProvider.uriForId;
