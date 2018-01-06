@@ -46,7 +46,7 @@ public class CategoryDao {
      * @param name Category's name
      * @return category from database, or null if not found
      */
-    public @Nullable
+    @Nullable
     Category find(String name) {
         Cursor cursor = null;
         ContentProviderClient db = clientProvider.get();
@@ -77,7 +77,7 @@ public class CategoryDao {
      *
      * @return a list containing recent categories
      */
-    public @NonNull
+    @NonNull
     List<String> recentCategories(int limit) {
         List<String> items = new ArrayList<>();
         Cursor cursor = null;

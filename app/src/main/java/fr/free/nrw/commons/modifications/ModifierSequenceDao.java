@@ -24,20 +24,6 @@ public class ModifierSequenceDao {
         this.clientProvider = clientProvider;
     }
 
-    public ModifierSequence fromCursor(Cursor cursor) {
-        // Hardcoding column positions!
-        ModifierSequence ms = null;
-        try {
-            ms = new ModifierSequence(Uri.parse(cursor.getString(1)),
-                new JSONObject(cursor.getString(2)));
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
-        ms.setContentUri( ModificationsContentProvider.uriForId(cursor.getInt(0)));
-
-        return ms;
-    }
-
     public void save(ModifierSequence sequence) {
         ContentProviderClient db = clientProvider.get();
         try {
@@ -62,6 +48,20 @@ public class ModifierSequenceDao {
         } finally {
             db.release();
         }
+    }
+
+    ModifierSequence fromCursor(Cursor cursor) {
+        // Hardcoding column positions!
+        ModifierSequence ms = null;
+        try {
+            ms = new ModifierSequence(Uri.parse(cursor.getString(1)),
+                    new JSONObject(cursor.getString(2)));
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+        ms.setContentUri( ModificationsContentProvider.uriForId(cursor.getInt(0)));
+
+        return ms;
     }
 
     private JSONObject toJSON(ModifierSequence sequence) {

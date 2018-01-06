@@ -89,6 +89,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
         LogEventResult result;
         Boolean done = false;
         String queryContinue = null;
+        ContributionDao contributionDao = new ContributionDao(() -> contentProviderClient);
         while (!done) {
 
             try {
@@ -121,7 +122,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                         "", -1, dateUpdated, dateUpdated, user,
                         "", "");
                 contrib.setState(STATE_COMPLETED);
-                imageValues.add(ContributionDao.toContentValues(contrib));
+                imageValues.add(contributionDao.toContentValues(contrib));
 
                 if (imageValues.size() % COMMIT_THRESHOLD == 0) {
                     try {

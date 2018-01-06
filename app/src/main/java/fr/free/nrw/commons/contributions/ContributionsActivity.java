@@ -65,21 +65,6 @@ public  class       ContributionsActivity
     private UploadService uploadService;
     private boolean isUploadServiceConnected;
     private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<>();
-    private String CONTRIBUTION_SELECTION = "";
-
-    /*
-        This sorts in the following order:
-        Currently Uploading
-        Failed (Sorted in ascending order of time added - FIFO)
-        Queued to Upload (Sorted in ascending order of time added - FIFO)
-        Completed (Sorted in descending order of time added)
-
-        This is why Contribution.STATE_COMPLETED is -1.
-     */
-    private String CONTRIBUTION_SORT = ContributionDao.Table.COLUMN_STATE + " DESC, "
-            + ContributionDao.Table.COLUMN_UPLOADED + " DESC , ("
-            + ContributionDao.Table.COLUMN_TIMESTAMP + " * "
-            + ContributionDao.Table.COLUMN_STATE + ")";
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -127,8 +112,7 @@ public  class       ContributionsActivity
         startService(uploadServiceIntent);
         bindService(uploadServiceIntent, uploadServiceConnection, Context.BIND_AUTO_CREATE);
 
-        allContributions = getContentResolver().query(BASE_URI, ALL_FIELDS,
-                CONTRIBUTION_SELECTION, null, CONTRIBUTION_SORT);
+        allContributions = contributionDao.loadAllContributions();
 
         getSupportLoaderManager().initLoader(0, null, this);
     }
@@ -238,8 +222,8 @@ public  class       ContributionsActivity
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         int uploads = prefs.getInt(UPLOADS_SHOWING, 100);
         return new CursorLoader(this, BASE_URI,
-                ALL_FIELDS, CONTRIBUTION_SELECTION, null,
-                CONTRIBUTION_SORT + "LIMIT " + uploads);
+                ALL_FIELDS, "", null,
+                ContributionDao.CONTRIBUTION_SORT + "LIMIT " + uploads);
     }
 
     @Override

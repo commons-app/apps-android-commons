@@ -17,15 +17,41 @@ import javax.inject.Provider;
 
 import fr.free.nrw.commons.settings.Prefs;
 
+import static fr.free.nrw.commons.contributions.ContributionDao.Table.ALL_FIELDS;
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.BASE_URI;
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.uriForId;
 
 public class ContributionDao {
+    /*
+        This sorts in the following order:
+        Currently Uploading
+        Failed (Sorted in ascending order of time added - FIFO)
+        Queued to Upload (Sorted in ascending order of time added - FIFO)
+        Completed (Sorted in descending order of time added)
+
+        This is why Contribution.STATE_COMPLETED is -1.
+     */
+    static final String CONTRIBUTION_SORT = Table.COLUMN_STATE + " DESC, "
+            + Table.COLUMN_UPLOADED + " DESC , ("
+            + Table.COLUMN_TIMESTAMP + " * "
+            + Table.COLUMN_STATE + ")";
+
     private final Provider<ContentProviderClient> clientProvider;
 
     @Inject
     public ContributionDao(@Named("contribution") Provider<ContentProviderClient> clientProvider) {
         this.clientProvider = clientProvider;
+    }
+
+    Cursor loadAllContributions() {
+        ContentProviderClient db = clientProvider.get();
+        try {
+            return db.query(BASE_URI, ALL_FIELDS, "", null, CONTRIBUTION_SORT);
+        } catch (RemoteException e) {
+            return null;
+        } finally {
+            db.release();
+        }
     }
 
     public void save(Contribution contribution) {
@@ -59,7 +85,7 @@ public class ContributionDao {
         }
     }
 
-    public static ContentValues toContentValues(Contribution contribution) {
+    ContentValues toContentValues(Contribution contribution) {
         ContentValues cv = new ContentValues();
         cv.put(Table.COLUMN_FILENAME, contribution.getFilename());
         if (contribution.getLocalUri() != null) {

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.ContentProviderClient;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -55,7 +54,6 @@ public class UploadService extends HandlerService<Contribution> {
     @Inject ContributionDao contributionDao;
 
     private NotificationManager notificationManager;
-    private ContentProviderClient contributionsProviderClient;
     private NotificationCompat.Builder curProgressNotification;
     private int toUpload;
 
@@ -115,7 +113,6 @@ public class UploadService extends HandlerService<Contribution> {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        contributionsProviderClient.release();
         Timber.d("UploadService.onDestroy; %s are yet to be uploaded", unfinishedUploads);
     }
 
@@ -124,7 +121,6 @@ public class UploadService extends HandlerService<Contribution> {
         super.onCreate();
 
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        contributionsProviderClient = this.getContentResolver().acquireContentProviderClient(ContributionsContentProvider.CONTRIBUTION_AUTHORITY);
     }
 
     @Override
