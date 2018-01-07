@@ -194,6 +194,7 @@
   <string name="navigation_item_feedback">Feedback</string>
   <string name="navigation_item_logout">Logout</string>
   <string name="navigation_item_info">Tutorial</string>
+  <string name="navigation_item_notification">Notifications</string>
   <string name="nearby_needs_permissions">Nearby places cannot be displayed without location permissions</string>
   <string name="no_description_found">no description found</string>
   <string name="nearby_info_menu_commons_article">Commons file page</string>
