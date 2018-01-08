@@ -68,7 +68,7 @@
     <item quantity="other">%d отпремања</item>
   </plurals>
   <string name="categories_not_found">Нема категорија које одговарају %1$s</string>
-  <string name="categories_skip_explanation" fuzzy="true">Додајте категорије на слике да бисте олакшали корисницима њихово проналажење на Остави.\n\nДа бисте додали категорију, почните са писањем њеног имена.\nТапните на ову поруку (или притисните назад) да бисте прескочили овај корак.</string>
+  <string name="categories_skip_explanation">Додајте категорије на слике да бисте олакшали корисницима њихово проналажење на Остави.\n\nДа бисте додали категорију, почните са писањем њеног имена.</string>
   <string name="categories_activity_title">Категорије</string>
   <string name="title_activity_settings">Поставке</string>
   <string name="title_activity_signup">Отвори налог</string>

@@ -4,11 +4,13 @@
   <string name="username">Ахархәаҩ ихьӡ</string>
   <string name="password">Ажәамаӡа</string>
   <string name="login">Аҭаларҭа</string>
+  <string name="signup">Иҟаҵатәуп арегистрациа</string>
   <string name="logging_in_title">Асистемахь аҭаларҭа</string>
   <string name="logging_in_message">Шәааҧшы ҧыҭрак...</string>
   <string name="login_success">Аҭалара қәҿиарала имҩаҧысит!</string>
   <string name="login_failed">Асистемахь аҭалараан агха!</string>
   <string name="upload_failed">Афаил ҧшаам. Даҽа фаилк шәахәаҧш.</string>
+  <string name="authentication_failed">Аутентификациа агха!</string>
   <string name="uploading_started">Аҭагалара иалагоуп!</string>
   <string name="upload_completed_notification_title">%1$s иҭагалоуп!</string>
   <string name="upload_completed_notification_text">Шәақәыӷәӷәа иҭагалоу афаил ахәаҧшраз</string>
@@ -22,6 +24,7 @@
   <string name="contribution_state_starting">Аҭагалара</string>
   <string name="menu_from_gallery">Агалереиа аҟынтәи</string>
   <string name="menu_from_camera">Афото ҭыхтәуп</string>
+  <string name="provider_contributions">Сара сҭагаламҭақәа</string>
   <string name="menu_open_in_browser">Иаарттәуп абраузер аҟны</string>
   <string name="share_title_hint">Ахьӡ</string>
   <string name="share_description_hint">Ахҳәаа</string>
@@ -32,13 +35,18 @@
   <string name="categories_search_text_hint">Актегориа алхра</string>
   <string name="menu_save_categories">Еиқәырхатәуп</string>
   <string name="refresh_button">Ирҿыцтәуп</string>
+  <string name="gps_disabled">GPS аҿыхуп шәара шәҟны. Ишәҭахума иаҿашәкыр?</string>
   <string name="enable_gps">Иаҿактәуп GPS</string>
+  <string name="contributions_subtitle_zero">Аҭагаламҭақәа макьана иҟам</string>
+  <string name="categories_activity_title">Акатегориақәа</string>
   <string name="title_activity_settings">Архиарақәа</string>
+  <string name="title_activity_signup">Арегистрациа ҟаҵатәуп</string>
   <string name="menu_retry_upload">Еиҭаҟаҵатәуп</string>
   <string name="menu_cancel_upload">Аҟәыхра</string>
   <string name="menu_download">Иҭыгатәуп</string>
   <string name="preference_license">Алицензиа</string>
   <string name="preference_theme">Уахынлатәи арежим</string>
+  <string name="preference_theme_summary">Ихархәатәуп еиқәаҵәоу атема</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
   <string name="license_name_cc_by_four">Attribution 4.0</string>
   <string name="license_name_cc_by_sa">Attribution-ShareAlike 3.0</string>
@@ -77,6 +85,7 @@
   <string name="media_detail_license">Алицензиа</string>
   <string name="media_detail_coordinates">Акоординатқәа</string>
   <string name="_2fa_code">2ФА Акод</string>
+  <string name="maximum_limit">Имаксималу алимит</string>
   <string name="maximum_limit_alert">Иауам 500 иреиҳаны раарҧшра</string>
   <string name="background_image">Аҿаҧшыратә сахьа</string>
   <string name="no_image_found">Асахьа ҧшаам</string>
@@ -84,6 +93,8 @@
   <string name="welcome_image_mount_zao">Ашьха Зао</string>
   <string name="welcome_image_tulip">Атиульпан</string>
   <string name="welcome_image_no_selfies">Аселфи ыҟаӡам</string>
+  <string name="welcome_image_welcome_wikipedia">Бзиала шәаабеит Википедиа ахь</string>
+  <string name="welcome_image_sydney_opera_house">Сиднеи аопера атеатр</string>
   <string name="cancel">Аҟәыхра</string>
   <string name="navigation_drawer_open">Иаарттәуп</string>
   <string name="navigation_drawer_close">Иарктәуп</string>

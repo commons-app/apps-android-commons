@@ -68,7 +68,7 @@
     <item quantity="other">%d nahrávání</item>
   </plurals>
   <string name="categories_not_found">Žádné kategorie neodpovídají „%1$s“</string>
-  <string name="categories_skip_explanation" fuzzy="true">Přidejte kategorie, aby bylo vaše obrázky možno na Wikimedia Commons najít.</string>
+  <string name="categories_skip_explanation">Přidejte kategorie, aby bylo vaše obrázky možno na Wikimedia Commons najít.</string>
   <string name="categories_activity_title">Kategorie</string>
   <string name="title_activity_settings">Nastavení</string>
   <string name="title_activity_signup">Zaregistrovat se</string>
@@ -147,6 +147,8 @@
   <string name="media_detail_description">Popis</string>
   <string name="media_detail_description_explanation">Sem patří popis média. Může být potenciálně velmi dlouhý, takže zabere několik řádků. Přesto doufáme, že to vypadá hezky.</string>
   <string name="media_detail_uploaded_date">Datum nahrání souboru</string>
+  <string name="media_detail_license">Licence</string>
+  <string name="media_detail_coordinates">Souřadnice</string>
   <string name="become_a_tester_title">Staňte se beta testery</string>
   <string name="become_a_tester_description">Přihlásit se do našeho beta kanálu na Google Play a dostávat včasný přístup k novinkám a opravám chyb</string>
   <string name="use_wikidata">Použít Wikidata</string>
@@ -160,6 +162,7 @@
   <string name="logout_verification">Opravdu se chcete odhlásit?</string>
   <string name="commons_logo">Logo Wikimedia Commons</string>
   <string name="background_image">Obrázek na pozadí</string>
+  <string name="mediaimage_failed">Obrázek</string>
   <string name="no_image_found">Nebyl nalezen žádný obrázek</string>
   <string name="upload_image">Nahrát obrázek</string>
   <string name="welcome_image_mount_zao">Hora Zao</string>
@@ -186,4 +189,12 @@
   <string name="no_description_found">nebyl nalezen žádný popisek</string>
   <string name="nearby_info_menu_commons_article">Stránka souboru na Commons</string>
   <string name="nearby_info_menu_wikidata_article">Položka Wikidat</string>
+  <string name="give_permission">Dát povolení</string>
+  <string name="send_log_file">Odeslat log</string>
+  <string name="send_log_file_description">Odeslat log vývojářům e-mailem</string>
+  <string name="login_to_your_account">Přihlásit se k účtu</string>
+  <string name="nearby_location_has_not_changed">Vaše umístění se nezměnilo.</string>
+  <string name="nearby_location_not_available">Umístění není dostupné.</string>
+  <string name="get_directions">NAVIGOVAT</string>
+  <string name="read_article">PŘEČÍST ČLÁNEK</string>
 </resources>

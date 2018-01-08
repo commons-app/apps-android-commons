@@ -204,4 +204,6 @@
   <string name="nearby_location_has_not_changed">Konum değiştirilmedi</string>
   <string name="nearby_location_not_available">Konum kullanılamıyor.</string>
   <string name="location_permission_rationale_nearby">Yakındaki yerler listesini görüntülemek için izin vermeniz gerekiyor</string>
+  <string name="get_directions">TALİMATLAR</string>
+  <string name="read_article">MADDE OKU</string>
 </resources>
