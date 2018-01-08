@@ -94,7 +94,7 @@ public  class       ContributionsActivity
         @Override
         public void onServiceDisconnected(ComponentName componentName) {
             // this should never happen
-            throw new RuntimeException("UploadService died but the rest of the process did not!");
+            Timber.e(new RuntimeException("UploadService died but the rest of the process did not!"));
         }
     };
 
