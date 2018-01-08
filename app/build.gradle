@@ -46,6 +46,9 @@ dependencies {
 
     implementation 'com.facebook.fresco:fresco:1.5.0'
     implementation 'com.facebook.stetho:stetho:1.5.0'
+    implementation "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
+    implementation "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
+    implementation 'org.apache.commons:commons-lang3:3.5'
 
     implementation "com.google.dagger:dagger:$DAGGER_VERSION"
     implementation "com.google.dagger:dagger-android-support:$DAGGER_VERSION"
@@ -118,6 +121,7 @@ android {
     productFlavors {
         prod {
             buildConfigField "String", "WIKIMEDIA_API_HOST", "\"https://commons.wikimedia.org/w/api.php\""
+            buildConfigField "String", "COMMONS_BASE_URL", "\"https://commons.wikimedia.org\""
             buildConfigField "String", "WIKIMEDIA_FORGE_API_HOST", "\"https://tools.wmflabs.org/\""
             buildConfigField "String", "IMAGE_URL_BASE", "\"https://upload.wikimedia.org/wikipedia/commons\""
             buildConfigField "String", "HOME_URL", "\"https://commons.wikimedia.org/wiki/\""
@@ -132,6 +136,7 @@ android {
         beta {
             // What values do we need to hit the BETA versions of the site / api ?
             buildConfigField "String", "WIKIMEDIA_API_HOST", "\"https://commons.wikimedia.beta.wmflabs.org/w/api.php\""
+            buildConfigField "String", "COMMONS_BASE_URL", "\"https://commons.wikimedia.beta.wmflabs.org\""
             buildConfigField "String", "WIKIMEDIA_FORGE_API_HOST", "\"https://tools.wmflabs.org/\""
             buildConfigField "String", "IMAGE_URL_BASE", "\"https://upload.beta.wmflabs.org/wikipedia/commons\""
             buildConfigField "String", "HOME_URL", "\"https://commons.wikimedia.beta.wmflabs.org/wiki/\""

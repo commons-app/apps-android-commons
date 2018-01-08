@@ -8,9 +8,13 @@ import android.widget.TextView;
 
 import com.pedrogomez.renderers.Renderer;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.utils.DateUtils;
 
 /**
  * Created by root on 19.12.2017.
@@ -45,23 +49,17 @@ public class NotificationRenderer extends Renderer<Notification> {
 
     @Override
     public void render() {
-            Notification notification = getContent();
-            title.setText(notification.notificationText);
-            time.setText("3d");
-            description.setText("Example notification description");
-            switch (notification.notificationType) {
-                case edit:
-                    icon.setImageResource(R.drawable.ic_edit_black_24dp);
-                    break;
-                case message:
-                    icon.setImageResource(R.drawable.ic_message_black_24dp);
-                    break;
-                case mention:
-                    icon.setImageResource(R.drawable.ic_chat_bubble_black_24px);
-                    break;
-                default:
-                    icon.setImageResource(R.drawable.round_icon_unknown);
-            }
+        Notification notification = getContent();
+        title.setText(notification.notificationText);
+        time.setText(notification.date);
+        description.setText(notification.description);
+        switch (notification.notificationType) {
+            case THANK_YOU_EDIT:
+                icon.setImageResource(R.drawable.ic_edit_black_24dp);
+                break;
+            default:
+                icon.setImageResource(R.drawable.round_icon_unknown);
+        }
     }
 
     public interface NotificationClicked{
