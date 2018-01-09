@@ -1,12 +1,16 @@
 package fr.free.nrw.commons.featured;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.widget.GridView;
+
+import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
-import fr.free.nrw.commons.contributions.ContributionsListFragment;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 
 /**
@@ -17,7 +21,7 @@ public class FeaturedImagesActivity
         extends AuthenticatedActivity
         implements FragmentManager.OnBackStackChangedListener {
 
-    private FeaturedImagesListFragment featuredImagesList;
+    private FeaturedImagesListFragment featuredImagesListFragment;
     private MediaDetailPagerFragment mediaDetails;
 
     @Override
@@ -39,7 +43,7 @@ public class FeaturedImagesActivity
         // Activity can call methods in the fragment by acquiring a
         // reference to the Fragment from FragmentManager, using findFragmentById()
         FragmentManager supportFragmentManager = getSupportFragmentManager();
-        featuredImagesList = (FeaturedImagesListFragment)supportFragmentManager
+        featuredImagesListFragment = (FeaturedImagesListFragment)supportFragmentManager
                 .findFragmentById(R.id.featuedListFragment);
 
         supportFragmentManager.addOnBackStackChangedListener(this);
