@@ -18,7 +18,7 @@
         android:layout_gravity="end|bottom"
         />
 
-    <ImageView
+    <fr.free.nrw.commons.MediaWikiImageView
         android:id="@+id/featuredImageView"
         android:layout_width="match_parent"
         android:layout_height="240dp"

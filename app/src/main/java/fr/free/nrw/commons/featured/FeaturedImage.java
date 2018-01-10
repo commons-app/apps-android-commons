@@ -2,26 +2,29 @@ package fr.free.nrw.commons.featured;
 
 import android.graphics.Bitmap;
 
+import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.MediaWikiImageView;
+
 /**
  * Created by root on 09.01.2018.
  */
 
 public class FeaturedImage {
-    private Bitmap image;
+    private Media image;
     private String author;
     private String fileName;
 
-    public FeaturedImage(Bitmap image, String author, String fileName) {
+    public FeaturedImage(Media image, String author, String fileName) {
         this.image = image;
         this.author = author;
         this.fileName = fileName;
     }
 
-    public Bitmap getImage() {
+    public Media getImage() {
         return image;
     }
 
-    public void setImage(Bitmap image) {
+    public void setImage(Media image) {
         this.image = image;
     }
 

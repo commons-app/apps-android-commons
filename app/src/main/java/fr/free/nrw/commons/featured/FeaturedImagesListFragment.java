@@ -14,6 +14,8 @@ import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
+import fr.free.nrw.commons.Media;
+import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.R;
 import timber.log.Timber;
 
@@ -48,7 +50,7 @@ public class FeaturedImagesListFragment extends DaggerFragment {
         ArrayList<FeaturedImage> featuredImages = new ArrayList<>();
         for (int i=0; i<10; i++){
             Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.commons_logo_large);
-            featuredImages.add(new FeaturedImage(bitmap, "username: test", "test file name"));
+            featuredImages.add(new FeaturedImage(new Media("test.jpg"), "username: test", "test file name"));
         }
         return featuredImages;
     }

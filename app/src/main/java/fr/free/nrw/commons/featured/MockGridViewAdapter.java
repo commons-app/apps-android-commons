@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.R;
 
 /**
@@ -38,12 +39,14 @@ public class MockGridViewAdapter extends ArrayAdapter {
         }
 
         FeaturedImage item = data.get(position);
-        ImageView imageView = (ImageView) convertView.findViewById(R.id.featuredImageView);
+        //ImageView imageView = (ImageView) convertView.findViewById(R.id.featuredImageView);
+        MediaWikiImageView imageView = (MediaWikiImageView) convertView.findViewById(R.id.featuredImageView);
         TextView fileName = (TextView) convertView.findViewById(R.id.featuredImageTitle);
         TextView author = (TextView) convertView.findViewById(R.id.featuredImageAuthor);
         fileName.setText("Test file name");
         author.setText("Uploaded by: Test user name");
-        imageView.setImageBitmap(item.getImage());
+        imageView.setMedia(item.getImage());
+        //imageView.setImageBitmap(item.getImage().getDrawingCache());
         return convertView;
     }
 
