@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.R;
 
 /**
- * Created by root on 09.01.2018.
+ * This is created to only display UI implementation. Needs to be changed in real implementation
  */
 
 public class MockGridViewAdapter extends ArrayAdapter {
@@ -39,14 +38,12 @@ public class MockGridViewAdapter extends ArrayAdapter {
         }
 
         FeaturedImage item = data.get(position);
-        //ImageView imageView = (ImageView) convertView.findViewById(R.id.featuredImageView);
-        MediaWikiImageView imageView = (MediaWikiImageView) convertView.findViewById(R.id.featuredImageView);
-        TextView fileName = (TextView) convertView.findViewById(R.id.featuredImageTitle);
-        TextView author = (TextView) convertView.findViewById(R.id.featuredImageAuthor);
+        MediaWikiImageView imageView = convertView.findViewById(R.id.featuredImageView);
+        TextView fileName = convertView.findViewById(R.id.featuredImageTitle);
+        TextView author = convertView.findViewById(R.id.featuredImageAuthor);
         fileName.setText("Test file name");
         author.setText("Uploaded by: Test user name");
         imageView.setMedia(item.getImage());
-        //imageView.setImageBitmap(item.getImage().getDrawingCache());
         return convertView;
     }
 

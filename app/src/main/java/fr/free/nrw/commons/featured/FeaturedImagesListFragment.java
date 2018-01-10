@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.featured;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -16,11 +14,8 @@ import java.util.ArrayList;
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.R;
-import timber.log.Timber;
 
-import static android.view.View.GONE;
 
 /**
  * Created by root on 09.01.2018.
@@ -51,7 +46,6 @@ public class FeaturedImagesListFragment extends DaggerFragment {
     private ArrayList<FeaturedImage> getMockFeaturedImages(){
         ArrayList<FeaturedImage> featuredImages = new ArrayList<>();
         for (int i=0; i<10; i++){
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.commons_logo_large);
             featuredImages.add(new FeaturedImage(new Media("test.jpg"), "username: test", "test file name"));
         }
         return featuredImages;

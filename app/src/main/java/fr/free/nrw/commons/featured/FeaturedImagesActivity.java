@@ -1,15 +1,10 @@
 package fr.free.nrw.commons.featured;
 
 import android.database.DataSetObserver;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.GridView;
-
-import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.Media;
@@ -18,7 +13,7 @@ import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 
 /**
- * Created by root on 09.01.2018.
+ * This activity displays pic of the days of last xx days
  */
 
 public class FeaturedImagesActivity

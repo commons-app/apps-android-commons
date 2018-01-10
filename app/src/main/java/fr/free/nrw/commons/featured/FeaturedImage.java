@@ -1,12 +1,10 @@
 package fr.free.nrw.commons.featured;
 
-import android.graphics.Bitmap;
 
 import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.MediaWikiImageView;
 
 /**
- * Created by root on 09.01.2018.
+ * Object to hold FeaturedImage
  */
 
 public class FeaturedImage {
