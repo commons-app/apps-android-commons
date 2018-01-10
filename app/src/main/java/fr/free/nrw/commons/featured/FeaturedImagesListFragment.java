@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ListAdapter;
 
 import java.util.ArrayList;
 
@@ -40,7 +41,8 @@ public class FeaturedImagesListFragment extends DaggerFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        gridView = (GridView) getView().findViewById(R.id.featuredImagesList);
+        gridView = getView().findViewById(R.id.featuredImagesList);
+        gridView.setOnItemClickListener((AdapterView.OnItemClickListener) getActivity());
         gridAdapter = new MockGridViewAdapter(this.getContext(), R.layout.layout_featured_images, getMockFeaturedImages());
         gridView.setAdapter(gridAdapter);
 
@@ -53,5 +55,9 @@ public class FeaturedImagesListFragment extends DaggerFragment {
             featuredImages.add(new FeaturedImage(new Media("test.jpg"), "username: test", "test file name"));
         }
         return featuredImages;
+    }
+
+    public ListAdapter getAdapter() {
+        return gridView.getAdapter();
     }
 }

@@ -1,14 +1,18 @@
 package fr.free.nrw.commons.featured;
 
+import android.database.DataSetObserver;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import java.util.ArrayList;
 
 import butterknife.ButterKnife;
+import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
@@ -19,7 +23,9 @@ import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 
 public class FeaturedImagesActivity
         extends AuthenticatedActivity
-        implements FragmentManager.OnBackStackChangedListener {
+        implements FragmentManager.OnBackStackChangedListener,
+                    MediaDetailPagerFragment.MediaDetailProvider,
+                    AdapterView.OnItemClickListener{
 
     private FeaturedImagesListFragment featuredImagesListFragment;
     private MediaDetailPagerFragment mediaDetails;
@@ -59,6 +65,54 @@ public class FeaturedImagesActivity
 
     @Override
     public void onBackStackChanged() {
+
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        if (mediaDetails == null || !mediaDetails.isVisible()) {
+            mediaDetails = new MediaDetailPagerFragment();
+            FragmentManager supportFragmentManager = getSupportFragmentManager();
+            supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.featuredFragmentContainer, mediaDetails)
+                    .addToBackStack(null)
+                    .commit();
+            supportFragmentManager.executePendingTransactions();
+        }
+        mediaDetails.showImage(i);
+    }
+
+    @Override
+    public Media getMediaAtPosition(int i) {
+        if (featuredImagesListFragment.getAdapter() == null) {
+            // not yet ready to return data
+            return null;
+        } else {
+            return ((FeaturedImage)featuredImagesListFragment.getAdapter().getItem(i)).getImage();
+        }
+    }
+
+    @Override
+    public int getTotalMediaCount() {
+        if (featuredImagesListFragment.getAdapter() == null) {
+            return 0;
+        }
+        return featuredImagesListFragment.getAdapter().getCount();
+    }
+
+    @Override
+    public void notifyDatasetChanged() {
+
+    }
+
+    @Override
+    public void registerDataSetObserver(DataSetObserver observer) {
+
+    }
+
+    @Override
+    public void unregisterDataSetObserver(DataSetObserver observer) {
 
     }
 }
