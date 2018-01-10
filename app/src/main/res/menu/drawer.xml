@@ -43,7 +43,7 @@
     <item
         android:id="@+id/action_featured_images"
         android:icon="@drawable/ic_star_black_24dp"
-        android:title="@string/navigation_item_notification"/>
+        android:title="@string/navigation_item_featured_images"/>
 
 
 </menu>
