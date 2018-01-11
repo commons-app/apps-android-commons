@@ -49,8 +49,8 @@ class DirectUpload {
     }
 
     void initiateCameraUpload() {
-        boolean useExtStorage = defaultPrefs.getBoolean("useExternalStorage", true);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && useExtStorage) {
+        //boolean useExtStorage = defaultPrefs.getBoolean("useExternalStorage", true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(fragment.getActivity(), WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 if (fragment.getActivity().shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE)) {
                     new AlertDialog.Builder(fragment.getActivity())
