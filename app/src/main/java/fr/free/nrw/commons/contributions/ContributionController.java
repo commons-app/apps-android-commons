@@ -61,7 +61,7 @@ public class ContributionController {
         }
     }
 
-    void startCameraCapture() {
+    public void startCameraCapture() {
 
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         lastGeneratedCaptureUri = reGenerateImageCaptureUriInCache();
