@@ -101,6 +101,9 @@ public class ContributionController {
                 shareIntent.setType("image/jpeg"); //FIXME: Find out appropriate mime type
                 shareIntent.putExtra(EXTRA_STREAM, lastGeneratedCaptureUri);
                 shareIntent.putExtra(EXTRA_SOURCE, SOURCE_CAMERA);
+                if (isDirectUpload) {
+                    shareIntent.putExtra("isDirectUpload", true);
+                }
                 break;
         }
         Timber.i("Image selected");
