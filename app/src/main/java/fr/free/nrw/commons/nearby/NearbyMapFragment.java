@@ -398,7 +398,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         distance.setText(place.distance.toString());
 
         fabCamera.setOnClickListener(view -> {
-            Timber.d("Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
+            Timber.d("Camera button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
             controller = new ContributionController(this);
             DirectUpload directUpload = new DirectUpload(place.getName(), place.getLongDescription(), this, controller);
             directUpload.storeSharedPrefs();
@@ -406,7 +406,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         });
 
         fabGallery.setOnClickListener(view -> {
-            Timber.d("Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
+            Timber.d("Gallery button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
             controller = new ContributionController(this);
             DirectUpload directUpload = new DirectUpload(place.getName(), place.getLongDescription(), this, controller);
             directUpload.storeSharedPrefs();
