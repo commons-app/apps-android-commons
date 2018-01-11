@@ -104,6 +104,9 @@ public class ContributionController {
                 shareIntent.setType("image/jpeg");
                 shareIntent.putExtra(EXTRA_STREAM, lastGeneratedCaptureUri);
                 shareIntent.putExtra(EXTRA_SOURCE, SOURCE_CAMERA);
+                if (isDirectUpload) {
+                    shareIntent.putExtra("isDirectUpload", true);
+                }
                 break;
             default:
                 break;
