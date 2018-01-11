@@ -398,7 +398,11 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         distance.setText(place.distance.toString());
 
         fabCamera.setOnClickListener(view -> {
-            //TODO: Implement camera button
+            Timber.d("Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
+            controller = new ContributionController(this);
+            DirectUpload directUpload = new DirectUpload(place.getName(), place.getLongDescription(), this, controller);
+            directUpload.storeSharedPrefs();
+            directUpload.initiateCameraUpload();
         });
 
         fabGallery.setOnClickListener(view -> {
