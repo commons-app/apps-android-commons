@@ -121,7 +121,7 @@
   <string name="tutorial_3_text">Молимо НЕ отпремајте:</string>
   <string name="tutorial_3_subtext">- Селфије и слике твојих пријатеља\n- Слике које сте преузели са интернета\n- Скриншотове из сопствених апликација</string>
   <string name="tutorial_4_text">Пример отпремања:</string>
-  <string name="tutorial_4_subtext" fuzzy="true">— Наслов: Сиднејска опера\n— Опис: Сиднејска опера, поглед преко залива\n— Категорије: Сиднејска опера, Сиднејска опера са запада, погледи на Сиднејксу оперу из даљине</string>
+  <string name="tutorial_4_subtext">— Наслов: Сиднејска опера\n— Опис: Сиднејска опера, поглед преко залива\n— Категорије: Сиднејска опера са запада, погледи на Сиднејксу оперу из даљине</string>
   <string name="welcome_wikipedia_text">Делите своје слике. Оживите чланке на Википедији!</string>
   <string name="welcome_wikipedia_subtext">Слике на Википедији долазе из Оставе.</string>
   <string name="welcome_copyright_text">Са вашим сликама помажете у образовању људи широм света.</string>
@@ -188,6 +188,7 @@
   <string name="navigation_item_feedback">Повратне информације</string>
   <string name="navigation_item_logout">Одјави ме</string>
   <string name="navigation_item_info">Туторијал</string>
+  <string name="navigation_item_notification">Обавештења</string>
   <string name="nearby_needs_permissions">Оближња места не могу да се приказују без дозвола за локацију</string>
   <string name="no_description_found">опис није пронађен</string>
   <string name="nearby_info_menu_commons_article">Страница датотеке на Остави</string>
@@ -201,4 +202,7 @@
   <string name="send_log_file">Пошаљи дневничку датотеку</string>
   <string name="send_log_file_description">Пошаљи дневничку датотеку девелоперима преко имејла</string>
   <string name="login_to_your_account">Пријавите се на свој налог</string>
+  <string name="nearby_location_has_not_changed">Локација није промењена.</string>
+  <string name="nearby_location_not_available">Локација није доступна.</string>
+  <string name="location_permission_rationale_nearby">Потребна је дозвола за приказивање листе локација у близини</string>
 </resources>

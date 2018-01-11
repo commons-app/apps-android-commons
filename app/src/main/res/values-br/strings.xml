@@ -182,6 +182,7 @@
   <string name="navigation_item_feedback">Evezhiadennoù</string>
   <string name="navigation_item_logout">Digevreañ</string>
   <string name="navigation_item_info">Tutorial</string>
+  <string name="navigation_item_notification">Kemennoù</string>
   <string name="nearby_needs_permissions">Ne c\'haller ket diskwel al lec\'hioù tost ma ne rannit ket ho lec\'hiadur</string>
   <string name="no_description_found">N\'eus bet kavet deskrivadur ebet</string>
   <string name="nearby_info_menu_commons_article" fuzzy="true">Pennad Commons</string>

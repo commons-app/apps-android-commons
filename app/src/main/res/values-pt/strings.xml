@@ -73,7 +73,7 @@
   <string name="title_activity_settings">Configurações</string>
   <string name="title_activity_signup">Registar-se</string>
   <string name="menu_about">Sobre</string>
-  <string name="about_license">A aplicação do Wikimedia Commons é uma aplicação de código aberto criada e mantida por beneficiários e voluntários da comunidade Wikimedia. A Fundação Wikimedia não está envolvida na criação, programação ou manutenção da aplicação.</string>
+  <string name="about_license">A aplicação do Wikimedia Commons é uma aplicação de código aberto criada e mantida por bolseiros e voluntários da comunidade Wikimedia. A Wikimedia Foundation não está envolvida na criação, desenvolvimento ou manutenção da aplicação.</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Fonte&lt;/a&gt; e &lt;a href=\"https://commons-app.github.io/\"&gt;sítio&lt;/a&gt; no GitHub. Criar uma nova &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;publicação no GitHub&lt;/a&gt; para informar erros e sugestões.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Política de privacidade&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Créditos&lt;/a&gt;</string>
