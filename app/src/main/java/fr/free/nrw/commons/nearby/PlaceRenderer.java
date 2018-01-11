@@ -81,6 +81,8 @@ class PlaceRenderer extends Renderer<Place> {
             }
         });
 
+        //TODO: Set onClickListeners for camera and gallery in list here?
+
     }
 
     private void closeLayout(LinearLayout buttonLayout){
