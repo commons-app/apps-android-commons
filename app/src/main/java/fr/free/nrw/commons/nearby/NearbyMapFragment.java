@@ -424,13 +424,11 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
 
     //TODO: Handle onRequestPermissionsResult
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        Timber.d("onRequestPermissionsResult: req code = " + " perm = "
-                + permissions + " grant =" + grantResults);
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        Timber.d("onRequestPermissionsResult: req code = " + " perm = " + permissions + " grant =" + grantResults);
 
         switch (requestCode) {
-            // 1 = Storage allowed when gallery selected
+            // 1 = "Read external storage" allowed when gallery selected
             case 1: {
                 if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
                     Timber.d("Call controller.startGalleryPick()");
@@ -438,15 +436,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
                 }
             }
             break;
-            // 2 = Location allowed when 'nearby places' selected
-            case 2: {
-                if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
-                    Timber.d("Location permission granted");
-                    Intent nearbyIntent = new Intent(getActivity(), NearbyActivity.class);
-                    startActivity(nearbyIntent);
-                }
-            }
-            break;
+            // 2 = "Write external storage" allowed when camera selected
             case 3: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Timber.d("Call controller.startCameraCapture()");
@@ -469,7 +459,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
                     requestCode, resultCode, data);
         }
     }
-    
+
     private void openWebView(Uri link) {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, link);
         startActivity(browserIntent);
