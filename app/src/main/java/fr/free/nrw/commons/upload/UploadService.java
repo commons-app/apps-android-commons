@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.ContentProviderClient;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -52,9 +51,9 @@ public class UploadService extends HandlerService<Contribution> {
     @Inject MediaWikiApi mwApi;
     @Inject SessionManager sessionManager;
     @Inject @Named("default_preferences") SharedPreferences prefs;
+    @Inject ContributionDao contributionDao;
 
     private NotificationManager notificationManager;
-    private ContentProviderClient contributionsProviderClient;
     private NotificationCompat.Builder curProgressNotification;
     private int toUpload;
 
@@ -67,7 +66,6 @@ public class UploadService extends HandlerService<Contribution> {
     public static final int NOTIFICATION_UPLOAD_IN_PROGRESS = 1;
     public static final int NOTIFICATION_UPLOAD_COMPLETE = 2;
     public static final int NOTIFICATION_UPLOAD_FAILED = 3;
-    private ContributionDao dao;
 
     public UploadService() {
         super("UploadService");
@@ -107,7 +105,7 @@ public class UploadService extends HandlerService<Contribution> {
             startForeground(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification.build());
 
             contribution.setTransferred(transferred);
-            dao.save(contribution);
+            contributionDao.save(contribution);
         }
 
     }
@@ -115,7 +113,6 @@ public class UploadService extends HandlerService<Contribution> {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        contributionsProviderClient.release();
         Timber.d("UploadService.onDestroy; %s are yet to be uploaded", unfinishedUploads);
     }
 
@@ -124,8 +121,6 @@ public class UploadService extends HandlerService<Contribution> {
         super.onCreate();
 
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        contributionsProviderClient = this.getContentResolver().acquireContentProviderClient(ContributionsContentProvider.AUTHORITY);
-        dao = new ContributionDao(contributionsProviderClient);
     }
 
     @Override
@@ -147,7 +142,7 @@ public class UploadService extends HandlerService<Contribution> {
 
                 contribution.setState(Contribution.STATE_QUEUED);
                 contribution.setTransferred(0);
-                dao.save(contribution);
+                contributionDao.save(contribution);
                 toUpload++;
                 if (curProgressNotification != null && toUpload != 1) {
                     curProgressNotification.setContentText(getResources().getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload));
@@ -262,7 +257,7 @@ public class UploadService extends HandlerService<Contribution> {
                 contribution.setImageUrl(uploadResult.getImageUrl());
                 contribution.setState(Contribution.STATE_COMPLETED);
                 contribution.setDateUploaded(uploadResult.getDateUploaded());
-                dao.save(contribution);
+                contributionDao.save(contribution);
             }
         } catch (IOException e) {
             Timber.d("I have a network fuckup");
@@ -274,7 +269,7 @@ public class UploadService extends HandlerService<Contribution> {
             toUpload--;
             if (toUpload == 0) {
                 // Sync modifications right after all uplaods are processed
-                ContentResolver.requestSync(sessionManager.getCurrentAccount(), ModificationsContentProvider.AUTHORITY, new Bundle());
+                ContentResolver.requestSync(sessionManager.getCurrentAccount(), ModificationsContentProvider.MODIFICATIONS_AUTHORITY, new Bundle());
                 stopForeground(true);
             }
         }
@@ -293,7 +288,7 @@ public class UploadService extends HandlerService<Contribution> {
         notificationManager.notify(NOTIFICATION_UPLOAD_FAILED, failureNotification);
 
         contribution.setState(Contribution.STATE_FAILED);
-        dao.save(contribution);
+        contributionDao.save(contribution);
     }
 
     private String findUniqueFilename(String fileName) throws IOException {

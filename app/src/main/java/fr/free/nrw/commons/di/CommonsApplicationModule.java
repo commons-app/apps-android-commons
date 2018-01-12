@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.di;
 
+import android.content.ContentProviderClient;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.util.LruCache;
@@ -22,10 +23,14 @@ import fr.free.nrw.commons.nearby.NearbyPlaces;
 import fr.free.nrw.commons.upload.UploadController;
 
 import static android.content.Context.MODE_PRIVATE;
+import static fr.free.nrw.commons.contributions.ContributionsContentProvider.CONTRIBUTION_AUTHORITY;
+import static fr.free.nrw.commons.modifications.ModificationsContentProvider.MODIFICATIONS_AUTHORITY;
 
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class CommonsApplicationModule {
+    public static final String CATEGORY_AUTHORITY = "fr.free.nrw.commons.categories.contentprovider";
+
     private CommonsApplication application;
 
     public CommonsApplicationModule(CommonsApplication application) {
@@ -35,6 +40,24 @@ public class CommonsApplicationModule {
     @Provides
     public AccountUtil providesAccountUtil() {
         return new AccountUtil(application);
+    }
+
+    @Provides
+    @Named("category")
+    public ContentProviderClient provideCategoryContentProviderClient() {
+        return application.getContentResolver().acquireContentProviderClient(CATEGORY_AUTHORITY);
+    }
+
+    @Provides
+    @Named("contribution")
+    public ContentProviderClient provideContributionContentProviderClient() {
+        return application.getContentResolver().acquireContentProviderClient(CONTRIBUTION_AUTHORITY);
+    }
+
+    @Provides
+    @Named("modification")
+    public ContentProviderClient provideModificationContentProviderClient() {
+        return application.getContentResolver().acquireContentProviderClient(MODIFICATIONS_AUTHORITY);
     }
 
     @Provides

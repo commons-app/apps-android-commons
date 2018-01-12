@@ -26,6 +26,8 @@ import timber.log.Timber;
 public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
 
     @Inject MediaWikiApi mwApi;
+    @Inject ContributionDao contributionDao;
+    @Inject ModifierSequenceDao modifierSequenceDao;
 
     public ModificationsSyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
@@ -80,11 +82,10 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
 
         ContentProviderClient contributionsClient = null;
         try {
-            contributionsClient = getContext().getContentResolver().acquireContentProviderClient(ContributionsContentProvider.AUTHORITY);
+            contributionsClient = getContext().getContentResolver().acquireContentProviderClient(ContributionsContentProvider.CONTRIBUTION_AUTHORITY);
 
             while (!allModifications.isAfterLast()) {
-                ModifierSequence sequence = ModifierSequenceDao.fromCursor(allModifications);
-                ModifierSequenceDao dao = new ModifierSequenceDao(contributionsClient);
+                ModifierSequence sequence = modifierSequenceDao.fromCursor(allModifications);
                 Contribution contrib;
 
                 Cursor contributionCursor;
@@ -94,7 +95,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                     throw new RuntimeException(e);
                 }
                 contributionCursor.moveToFirst();
-                contrib = ContributionDao.fromCursor(contributionCursor);
+                contrib = contributionDao.fromCursor(contributionCursor);
 
                 if (contrib.getState() == Contribution.STATE_COMPLETED) {
                     String pageContent;
@@ -122,7 +123,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                         // FIXME: Log this somewhere else
                         Timber.d("Non success result! %s", editResult);
                     } else {
-                        dao.delete(sequence);
+                        modifierSequenceDao.delete(sequence);
                     }
                 }
                 allModifications.moveToNext();

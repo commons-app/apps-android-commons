@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.category;
 
-import android.content.ContentProviderClient;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -36,8 +35,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.data.Category;
-import fr.free.nrw.commons.data.CategoryDao;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.upload.MwVolleyApi;
 import fr.free.nrw.commons.utils.StringSortingUtils;
@@ -48,7 +45,6 @@ import timber.log.Timber;
 
 import static android.view.KeyEvent.ACTION_UP;
 import static android.view.KeyEvent.KEYCODE_BACK;
-import static fr.free.nrw.commons.category.CategoryContentProvider.AUTHORITY;
 
 /**
  * Displays the category suggestion and selection screen. Category search is initiated here.
@@ -70,12 +66,12 @@ public class CategorizationFragment extends DaggerFragment {
 
     @Inject MediaWikiApi mwApi;
     @Inject @Named("default_preferences") SharedPreferences prefs;
+    @Inject CategoryDao categoryDao;
 
     private RVRendererAdapter<CategoryItem> categoriesAdapter;
     private OnCategoriesSaveHandler onCategoriesSaveHandler;
     private HashMap<String, ArrayList<String>> categoriesCache;
     private List<CategoryItem> selectedCategories = new ArrayList<>();
-    private ContentProviderClient databaseClient;
 
     private final CategoriesAdapterFactory adapterFactory = new CategoriesAdapterFactory(item -> {
         if (item.isSelected()) {
@@ -141,7 +137,6 @@ public class CategorizationFragment extends DaggerFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        databaseClient.release();
     }
 
     @Override
@@ -179,7 +174,6 @@ public class CategorizationFragment extends DaggerFragment {
         setHasOptionsMenu(true);
         onCategoriesSaveHandler = (OnCategoriesSaveHandler) getActivity();
         getActivity().setTitle(R.string.categories_activity_title);
-        databaseClient = getActivity().getContentResolver().acquireContentProviderClient(AUTHORITY);
     }
 
     private void updateCategoryList(String filter) {
@@ -262,7 +256,7 @@ public class CategorizationFragment extends DaggerFragment {
     }
 
     private Observable<CategoryItem> recentCategories() {
-        return Observable.fromIterable(new CategoryDao(databaseClient).recentCategories(SEARCH_CATS_LIMIT))
+        return Observable.fromIterable(categoryDao.recentCategories(SEARCH_CATS_LIMIT))
                 .map(s -> new CategoryItem(s, false));
     }
 
@@ -313,7 +307,6 @@ public class CategorizationFragment extends DaggerFragment {
     }
 
     private void updateCategoryCount(CategoryItem item) {
-        CategoryDao categoryDao = new CategoryDao(databaseClient);
         Category category = categoryDao.find(item.getName());
 
         // Newly used category...
