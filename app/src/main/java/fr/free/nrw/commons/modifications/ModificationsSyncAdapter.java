@@ -20,6 +20,7 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
+import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
@@ -36,7 +37,11 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
     @Override
     public void onPerformSync(Account account, Bundle bundle, String s, ContentProviderClient contentProviderClient, SyncResult syncResult) {
         // This code is fraught with possibilities of race conditions, but lalalalala I can't hear you!
-        ((CommonsApplication)getContext().getApplicationContext()).injector().inject(this);
+        ApplicationlessInjection
+                .getInstance(getContext()
+                        .getApplicationContext())
+                .getCommonsApplicationComponent()
+                .inject(this);
 
         Cursor allModifications;
         try {

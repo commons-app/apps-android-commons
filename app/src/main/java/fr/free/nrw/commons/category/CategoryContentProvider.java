@@ -12,8 +12,10 @@ import android.text.TextUtils;
 
 import javax.inject.Inject;
 
+import dagger.Lazy;
 import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.data.DBOpenHelper;
+import fr.free.nrw.commons.di.FixedDaggerContentProvider;
 import timber.log.Timber;
 
 import static android.content.UriMatcher.NO_MATCH;
@@ -21,7 +23,7 @@ import static fr.free.nrw.commons.category.CategoryDao.Table.ALL_FIELDS;
 import static fr.free.nrw.commons.category.CategoryDao.Table.COLUMN_ID;
 import static fr.free.nrw.commons.category.CategoryDao.Table.TABLE_NAME;
 
-public class CategoryContentProvider extends ContentProvider {
+public class CategoryContentProvider extends FixedDaggerContentProvider {
 
     public static final String AUTHORITY = "fr.free.nrw.commons.categories.contentprovider";
     // For URI matcher
@@ -42,12 +44,12 @@ public class CategoryContentProvider extends ContentProvider {
         return Uri.parse(BASE_URI.toString() + "/" + id);
     }
 
-    @Inject DBOpenHelper dbOpenHelper;
+    @Inject Lazy<DBOpenHelper> dbOpenHelper;
 
     @Override
     public boolean onCreate() {
-        AndroidInjection.inject(this);
-        return false;
+        super.onCreate();
+        return true;
     }
 
     @SuppressWarnings("ConstantConditions")
@@ -59,7 +61,7 @@ public class CategoryContentProvider extends ContentProvider {
 
         int uriType = uriMatcher.match(uri);
 
-        SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
+        SQLiteDatabase db = dbOpenHelper.get().getReadableDatabase();
         Cursor cursor;
 
         switch (uriType) {
@@ -95,7 +97,7 @@ public class CategoryContentProvider extends ContentProvider {
     @Override
     public Uri insert(@NonNull Uri uri, ContentValues contentValues) {
         int uriType = uriMatcher.match(uri);
-        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
+        SQLiteDatabase sqlDB = dbOpenHelper.get().getWritableDatabase();
         long id;
         switch (uriType) {
             case CATEGORIES:
@@ -118,7 +120,7 @@ public class CategoryContentProvider extends ContentProvider {
     public int bulkInsert(@NonNull Uri uri, @NonNull ContentValues[] values) {
         Timber.d("Hello, bulk insert! (CategoryContentProvider)");
         int uriType = uriMatcher.match(uri);
-        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
+        SQLiteDatabase sqlDB = dbOpenHelper.get().getWritableDatabase();
         sqlDB.beginTransaction();
         switch (uriType) {
             case CATEGORIES:
@@ -150,7 +152,7 @@ public class CategoryContentProvider extends ContentProvider {
         and will error out otherwise.
          */
         int uriType = uriMatcher.match(uri);
-        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
+        SQLiteDatabase sqlDB = dbOpenHelper.get().getWritableDatabase();
         int rowsUpdated;
         switch (uriType) {
             case CATEGORIES_ID:

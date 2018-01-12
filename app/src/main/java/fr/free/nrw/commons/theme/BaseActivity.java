@@ -3,11 +3,14 @@ package fr.free.nrw.commons.theme;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
 
+import dagger.android.AndroidInjection;
 import dagger.android.support.DaggerAppCompatActivity;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.di.FixedDaggerAppCompatActivity;
 
-public abstract class BaseActivity extends DaggerAppCompatActivity {
+public abstract class BaseActivity extends FixedDaggerAppCompatActivity {
     boolean currentTheme;
 
     @Override

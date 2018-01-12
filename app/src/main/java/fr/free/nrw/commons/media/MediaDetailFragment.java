@@ -1,11 +1,13 @@
 package fr.free.nrw.commons.media;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +26,7 @@ import java.util.Locale;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
+import dagger.android.support.AndroidSupportInjection;
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.License;
 import fr.free.nrw.commons.LicenseList;
@@ -37,7 +40,7 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.ui.widget.CompatTextView;
 import timber.log.Timber;
 
-public class MediaDetailFragment extends DaggerFragment {
+public class MediaDetailFragment extends Fragment {
 
     private boolean editable;
     private MediaDetailPagerFragment.MediaDetailProvider detailProvider;
@@ -55,6 +58,12 @@ public class MediaDetailFragment extends DaggerFragment {
         mf.setArguments(state);
 
         return mf;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        AndroidSupportInjection.inject(this);
+        super.onAttach(context);
     }
 
     @Inject

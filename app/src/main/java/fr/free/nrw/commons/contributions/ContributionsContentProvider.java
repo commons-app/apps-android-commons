@@ -12,15 +12,17 @@ import android.text.TextUtils;
 
 import javax.inject.Inject;
 
+import dagger.Lazy;
 import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.data.DBOpenHelper;
+import fr.free.nrw.commons.di.FixedDaggerContentProvider;
 import timber.log.Timber;
 
 import static android.content.UriMatcher.NO_MATCH;
 import static fr.free.nrw.commons.contributions.ContributionDao.Table.ALL_FIELDS;
 import static fr.free.nrw.commons.contributions.ContributionDao.Table.TABLE_NAME;
 
-public class ContributionsContentProvider extends ContentProvider {
+public class ContributionsContentProvider extends FixedDaggerContentProvider {
 
     private static final int CONTRIBUTIONS = 1;
     private static final int CONTRIBUTIONS_ID = 2;
@@ -39,11 +41,12 @@ public class ContributionsContentProvider extends ContentProvider {
         return Uri.parse(BASE_URI.toString() + "/" + id);
     }
 
-    @Inject DBOpenHelper dbOpenHelper;
+    @Inject
+    Lazy<DBOpenHelper> dbOpenHelper;
 
     @Override
     public boolean onCreate() {
-        AndroidInjection.inject(this);
+        super.onCreate();
         return true;
     }
 
@@ -56,7 +59,7 @@ public class ContributionsContentProvider extends ContentProvider {
 
         int uriType = uriMatcher.match(uri);
 
-        SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
+        SQLiteDatabase db = dbOpenHelper.get().getReadableDatabase();
         Cursor cursor;
 
         switch (uriType) {
@@ -92,7 +95,7 @@ public class ContributionsContentProvider extends ContentProvider {
     @Override
     public Uri insert(@NonNull Uri uri, ContentValues contentValues) {
         int uriType = uriMatcher.match(uri);
-        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
+        SQLiteDatabase sqlDB = dbOpenHelper.get().getWritableDatabase();
         long id = 0;
         switch (uriType) {
             case CONTRIBUTIONS:
@@ -111,7 +114,7 @@ public class ContributionsContentProvider extends ContentProvider {
         int rows;
         int uriType = uriMatcher.match(uri);
 
-        SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
+        SQLiteDatabase db = dbOpenHelper.get().getReadableDatabase();
 
         switch (uriType) {
             case CONTRIBUTIONS_ID:
@@ -133,7 +136,7 @@ public class ContributionsContentProvider extends ContentProvider {
     public int bulkInsert(@NonNull Uri uri, @NonNull ContentValues[] values) {
         Timber.d("Hello, bulk insert! (ContributionsContentProvider)");
         int uriType = uriMatcher.match(uri);
-        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
+        SQLiteDatabase sqlDB = dbOpenHelper.get().getWritableDatabase();
         sqlDB.beginTransaction();
         switch (uriType) {
             case CONTRIBUTIONS:
@@ -164,7 +167,7 @@ public class ContributionsContentProvider extends ContentProvider {
         error out otherwise.
          */
         int uriType = uriMatcher.match(uri);
-        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
+        SQLiteDatabase sqlDB = dbOpenHelper.get().getWritableDatabase();
         int rowsUpdated = 0;
         switch (uriType) {
             case CONTRIBUTIONS:
