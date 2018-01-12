@@ -3,6 +3,7 @@ package fr.free.nrw.commons.nearby;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -47,6 +48,7 @@ import fr.free.nrw.commons.utils.UriDeserializer;
 import timber.log.Timber;
 
 import static android.app.Activity.RESULT_OK;
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 public class NearbyMapFragment extends android.support.v4.app.Fragment {
 
@@ -411,9 +413,41 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
             DirectUpload directUpload = new DirectUpload(place.getName(), place.getLongDescription(), this, controller);
             directUpload.storeSharedPrefs();
             directUpload.initiateGalleryUpload();
-
-//TODO: Handle onRequestPermissionsResult
         });
+    }
+
+    //TODO: Handle onRequestPermissionsResult
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        Timber.d("onRequestPermissionsResult: req code = " + " perm = "
+                + permissions + " grant =" + grantResults);
+
+        switch (requestCode) {
+            // 1 = Storage allowed when gallery selected
+            case 1: {
+                if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
+                    Timber.d("Call controller.startGalleryPick()");
+                    controller.startGalleryPick();
+                }
+            }
+            break;
+            // 2 = Location allowed when 'nearby places' selected
+            case 2: {
+                if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
+                    Timber.d("Location permission granted");
+                    Intent nearbyIntent = new Intent(getActivity(), NearbyActivity.class);
+                    startActivity(nearbyIntent);
+                }
+            }
+            break;
+            case 3: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Timber.d("Call controller.startCameraCapture()");
+                    controller.startCameraCapture();
+                }
+            }
+        }
     }
 
     @Override
@@ -429,7 +463,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
                     requestCode, resultCode, data);
         }
     }
-
+    
     private void openWebView(Uri link) {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, link);
         startActivity(browserIntent);
