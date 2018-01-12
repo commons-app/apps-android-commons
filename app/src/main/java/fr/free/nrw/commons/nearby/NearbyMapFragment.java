@@ -422,7 +422,6 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         });
     }
 
-    //TODO: Handle onRequestPermissionsResult
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         Timber.d("onRequestPermissionsResult: req code = " + " perm = " + permissions + " grant =" + grantResults);
