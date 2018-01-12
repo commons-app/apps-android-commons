@@ -432,7 +432,8 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
                 }
             }
             break;
-            // 2 = "Write external storage" allowed when camera selected
+            
+            // 3 = "Write external storage" allowed when camera selected
             case 3: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Timber.d("Call controller.startCameraCapture()");
