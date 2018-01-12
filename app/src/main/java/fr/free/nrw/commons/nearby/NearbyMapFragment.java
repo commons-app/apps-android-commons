@@ -1,8 +1,6 @@
 package fr.free.nrw.commons.nearby;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
@@ -12,7 +10,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
-
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
