@@ -15,6 +15,6 @@ public class ExecutorUtils {
         }
     };
 
-    public static Executor uiExecutor () { return uiExecutor;}
+    public static Executor uiExecutor() { return uiExecutor; }
 
 }

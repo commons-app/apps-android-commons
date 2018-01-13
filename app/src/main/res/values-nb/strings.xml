@@ -68,7 +68,7 @@
     <item quantity="other">%d opplastinger</item>
   </plurals>
   <string name="categories_not_found">Ingen kategorier som stemte overens med %1$s funnet</string>
-  <string name="categories_skip_explanation">Legg til kategorier for å gjøre bildene dine lettere å finne på Wikimedia Commons.\n\nBegynn å skrive navnet på kategoriene.\nTrykk på denne meldingen (eller trykk tilbake) for å hoppe over dette steget.</string>
+  <string name="categories_skip_explanation">Legg til kategorier for å gjøre bildene dine lettere å finne på Wikimedia Commons.\n\nBegynn å skrive navnet på kategoriene.</string>
   <string name="categories_activity_title">Kategorier</string>
   <string name="title_activity_settings">Innstillinger</string>
   <string name="title_activity_signup">Registrer deg</string>
@@ -121,7 +121,7 @@
   <string name="tutorial_3_text">Vennligst IKKE last opp:</string>
   <string name="tutorial_3_subtext">- Selfies eller bilder av vennene dine\n- Bilder som du har lastet ned fra internet\n- Skjermbilder tatt fra proprietære apper</string>
   <string name="tutorial_4_text">Opplastingseksempel:</string>
-  <string name="tutorial_4_subtext">- Tittel: Sydneys Operahus\n- Beskrivelse: Operahuset i Sydney sett fra andre siden av bukten\n- Kategorier: Operahuset i Sydney, Operahuset i Sydney ifra vest, Operahuset i Sydney utenfra</string>
+  <string name="tutorial_4_subtext">- Tittel: Sydneys operahus\n- Beskrivelse: Operahuset i Sydney sett fra andre siden av bukten\n- Kategorier: Operahuset i Sydney ifra vest, Operahuset i Sydney utenfra</string>
   <string name="welcome_wikipedia_text">Bidra med dine bilder. Hjelp til med å blåse liv i Wikipedias artikler!</string>
   <string name="welcome_wikipedia_subtext">Bilder på Wikipedia kommer fra Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Bildene dine kan være til hjelp for mennesker over hele verden som søker kunnskap og dannelse.</string>
@@ -188,6 +188,7 @@
   <string name="navigation_item_feedback">Tilbakemeldinger</string>
   <string name="navigation_item_logout">Logg ut</string>
   <string name="navigation_item_info">Veiviser</string>
+  <string name="navigation_item_notification">Varsler</string>
   <string name="nearby_needs_permissions">Steder i nærheten kan ikke vises uten tillatelse for stedsbestemmelse</string>
   <string name="no_description_found">ingen beskrivelse funnet</string>
   <string name="nearby_info_menu_commons_article">Commons-filside</string>
@@ -198,5 +199,12 @@
   <string name="give_permission">Gi tillatelse</string>
   <string name="use_external_storage">Bruk ekstern lagring</string>
   <string name="use_external_storage_summary">Lagre bilder som er tatt med kameraet i appen på enheten din</string>
+  <string name="send_log_file">Send loggfil</string>
+  <string name="send_log_file_description">Send loggfil til utviklerne via epost</string>
   <string name="login_to_your_account">Logg inn med kontoen din</string>
+  <string name="nearby_location_has_not_changed">Stedet har ikke blitt endret.</string>
+  <string name="nearby_location_not_available">Sted ikke tilgjengelig.</string>
+  <string name="location_permission_rationale_nearby">Tillatelse kreves for å vise listen over steder i nærheten</string>
+  <string name="get_directions">FÅ VEIBESKRIVELSE</string>
+  <string name="read_article">LES ARTIKKEL</string>
 </resources>

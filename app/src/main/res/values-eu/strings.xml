@@ -54,7 +54,7 @@
     <item quantity="other">%d igoera</item>
   </plurals>
   <string name="categories_not_found">Ez da kategoriak aukritu %1$s izenarekin</string>
-  <string name="categories_skip_explanation">Gehitu kategoriak zure argazkiak Wikimedia Commonsen aurkitzen errazagoak izan daitezen.</string>
+  <string name="categories_skip_explanation" fuzzy="true">Gehitu kategoriak zure argazkiak Wikimedia Commonsen aurkitzen errazagoak izan daitezen.</string>
   <string name="categories_activity_title">Kategoriak</string>
   <string name="title_activity_settings">Hobespenak</string>
   <string name="title_activity_signup">Eman izena</string>
@@ -155,4 +155,6 @@
   <string name="nearby_info_menu_commons_article">Artxibo orrialde komuna</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata itema</string>
   <string name="error_while_cache">Argazkiak hartzerakoan sortutako akatsa</string>
+  <string name="get_directions">NORABIDEAK JASO</string>
+  <string name="read_article">IRAKURRI ARTIKULUA</string>
 </resources>

@@ -68,7 +68,7 @@
     <item quantity="other">%d n usali</item>
   </plurals>
   <string name="categories_not_found">Ulac taggayin imenṭaḍen akked %1$s i yettwafen</string>
-  <string name="categories_skip_explanation">Rnu taggayin akken ad terreḍ tugniwin-ik fessus-it i tifin di Wikimedia Commons.\n\nBdu timerna n taggayin.\nSenneḍ ɣef yizen-agi (neɣ uɣal ar deffir) akken ad tnegzeḍ asebter-agi.</string>
+  <string name="categories_skip_explanation">Rnu taggayin akken ad terreḍ tugniwin-ik sehlent i tifin di Wikimedia Commons.\n\nBdu timerna n taggayin.</string>
   <string name="categories_activity_title">Taggayin</string>
   <string name="title_activity_settings">Iɣewwaṛen</string>
   <string name="title_activity_signup">Jerred</string>
@@ -121,7 +121,7 @@
   <string name="tutorial_3_text">UR salay ara:</string>
   <string name="tutorial_3_subtext">- isilfiyen neɣ tugniwin n yimdakkal-ik \n- tugniwin i d-sidreḍ si Internet\n- inɣal n ugdil n yisnasen yesɛan imawlan</string>
   <string name="tutorial_4_text">Amedya n usali:</string>
-  <string name="tutorial_4_subtext">- Azwel: Tazqqa Opera n Sydney\n- Aglam : Tazeqqa Opera n Sydney seg ilel\n- Taggayin: Tazeqqa Opera n Sydney, Tazeqqa Opera n Sydney seg umalu, timeẓriyin s lebɛid n Tazeqqa Opera n Sydney.</string>
+  <string name="tutorial_4_subtext">- Azwel: Tazqqa Opera n Sydney\n- Aglam : Tazeqqa Opera n Sydney seg ilel\n- Taggayin: Tazeqqa Opera n Sydney, Tazeqqa Opera n Sydney seg umalu, timeẓriyin s lebɛid n Tazeqqa Opera n Sydney</string>
   <string name="welcome_wikipedia_text">Ttekki s tugniwin-ik. Snerni imagraden n Wikipedia!</string>
   <string name="welcome_wikipedia_subtext">Tugniwin ɣef Wikipedia ttasent-d si Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Tugniwin-ik ad slemdent imdanen deg umaḍal.</string>
@@ -198,5 +198,12 @@
   <string name="give_permission">Mudd tasiregt</string>
   <string name="use_external_storage">Seqdec asekles azɣaray</string>
   <string name="use_external_storage_summary">Sekles tiwlafin yettwaṭṭfen s tkamirat yellan deg ibenk</string>
+  <string name="send_log_file">Azen afaylu n uɣmis</string>
+  <string name="send_log_file_description">Azen afaylu n uɣmis i yinermisen s yimayl</string>
   <string name="login_to_your_account">Qqen ar umiḍan-ik</string>
+  <string name="nearby_location_has_not_changed">Adeg ur ibeddel ara.</string>
+  <string name="nearby_location_not_available">Ulac adeg</string>
+  <string name="location_permission_rationale_nearby">Ilaq usireg i uskan tabdart n wadigen iqerben</string>
+  <string name="get_directions">AWI IWELLIHEN</string>
+  <string name="read_article">ƔER AMAGRAD</string>
 </resources>

@@ -14,14 +14,20 @@ import android.os.RemoteException;
 
 import java.io.IOException;
 
+import javax.inject.Inject;
+
 import fr.free.nrw.commons.CommonsApplication;
-import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
 public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
+
+    @Inject MediaWikiApi mwApi;
+    @Inject ContributionDao contributionDao;
+    @Inject ModifierSequenceDao modifierSequenceDao;
 
     public ModificationsSyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
@@ -30,6 +36,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
     @Override
     public void onPerformSync(Account account, Bundle bundle, String s, ContentProviderClient contentProviderClient, SyncResult syncResult) {
         // This code is fraught with possibilities of race conditions, but lalalalala I can't hear you!
+        ((CommonsApplication)getContext().getApplicationContext()).injector().inject(this);
 
         Cursor allModifications;
         try {
@@ -54,17 +61,16 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
             return;
         }
 
-        if (Utils.isNullOrWhiteSpace(authCookie)) {
+        if (isNullOrWhiteSpace(authCookie)) {
             Timber.d("Could not authenticate :(");
             return;
         }
 
-        MediaWikiApi api = CommonsApplication.getInstance().getMWApi();
-        api.setAuthCookie(authCookie);
+        mwApi.setAuthCookie(authCookie);
         String editToken;
 
         try {
-            editToken = api.getEditToken();
+            editToken = mwApi.getEditToken();
         } catch (IOException e) {
             Timber.d("Can not retreive edit token!");
             return;
@@ -76,11 +82,10 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
 
         ContentProviderClient contributionsClient = null;
         try {
-            contributionsClient = getContext().getContentResolver().acquireContentProviderClient(ContributionsContentProvider.AUTHORITY);
+            contributionsClient = getContext().getContentResolver().acquireContentProviderClient(ContributionsContentProvider.CONTRIBUTION_AUTHORITY);
 
             while (!allModifications.isAfterLast()) {
-                ModifierSequence sequence = ModifierSequence.fromCursor(allModifications);
-                sequence.setContentProviderClient(contentProviderClient);
+                ModifierSequence sequence = modifierSequenceDao.fromCursor(allModifications);
                 Contribution contrib;
 
                 Cursor contributionCursor;
@@ -90,12 +95,12 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                     throw new RuntimeException(e);
                 }
                 contributionCursor.moveToFirst();
-                contrib = Contribution.fromCursor(contributionCursor);
+                contrib = contributionDao.fromCursor(contributionCursor);
 
                 if (contrib.getState() == Contribution.STATE_COMPLETED) {
                     String pageContent;
                     try {
-                        pageContent = api.revisionsByFilename(contrib.getFilename());
+                        pageContent = mwApi.revisionsByFilename(contrib.getFilename());
                     } catch (IOException e) {
                         Timber.d("Network fuckup on modifications sync!");
                         continue;
@@ -106,7 +111,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
 
                     String editResult;
                     try {
-                        editResult = api.edit(editToken, processedPageContent, contrib.getFilename(), sequence.getEditSummary());
+                        editResult = mwApi.edit(editToken, processedPageContent, contrib.getFilename(), sequence.getEditSummary());
                     } catch (IOException e) {
                         Timber.d("Network fuckup on modifications sync!");
                         continue;
@@ -118,7 +123,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                         // FIXME: Log this somewhere else
                         Timber.d("Non success result! %s", editResult);
                     } else {
-                        sequence.delete();
+                        modifierSequenceDao.delete(sequence);
                     }
                 }
                 allModifications.moveToNext();
@@ -128,5 +133,9 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                 contributionsClient.release();
             }
         }
+    }
+
+    private boolean isNullOrWhiteSpace(String value) {
+        return value == null || value.trim().isEmpty();
     }
 }

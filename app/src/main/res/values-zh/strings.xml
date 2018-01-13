@@ -68,7 +68,7 @@
     <item quantity="other">%d次上传</item>
   </plurals>
   <string name="categories_not_found">没有找到匹配%1$s的分类</string>
-  <string name="categories_skip_explanation">添加分类使您的图像更容易在维基共享资源被找到。\n\n开始输入以添加分类。点击该信息（或按返回）以跳过此步。</string>
+  <string name="categories_skip_explanation">添加分类使您的图像更容易在维基共享资源被找到。开始输入以添加分类。</string>
   <string name="categories_activity_title">分类</string>
   <string name="title_activity_settings">设置</string>
   <string name="title_activity_signup">注册</string>
@@ -121,7 +121,7 @@
   <string name="tutorial_3_text">请不要上传：</string>
   <string name="tutorial_3_subtext">- 您朋友的自拍照或图片\n- 您从互联网下载的图片\n- 专利应用的截图</string>
   <string name="tutorial_4_text">示例上传：</string>
-  <string name="tutorial_4_subtext">- 标题：悉尼歌剧院\n- 描述：从海湾对面看到的悉尼歌剧院\n- 分类：Sydney Opera House、Sydney Opera House from the west、Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext">- 标题：悉尼歌剧院\n- 描述：从海湾对面看到的悉尼歌剧院\n- 分类：Sydney Opera House from the west、Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">贡献您的图像。使维基百科的条目更加生动！</string>
   <string name="welcome_wikipedia_subtext">维基百科上的图像来自维基共享资源。</string>
   <string name="welcome_copyright_text">您的图像可以帮助教育世界各地的人。</string>
@@ -188,6 +188,7 @@
   <string name="navigation_item_feedback">反馈</string>
   <string name="navigation_item_logout">退出</string>
   <string name="navigation_item_info">教程</string>
+  <string name="navigation_item_notification">通知</string>
   <string name="nearby_needs_permissions">附近地点不能在没有位置权限的情况下显示</string>
   <string name="no_description_found">找不到描述</string>
   <string name="nearby_info_menu_commons_article">共享资源文件页面</string>
@@ -198,5 +199,12 @@
   <string name="give_permission">提供权限</string>
   <string name="use_external_storage">使用外部存储</string>
   <string name="use_external_storage_summary">在您的设备上，使用应用中的照相机保存照片</string>
+  <string name="send_log_file">发送日志文件</string>
+  <string name="send_log_file_description">通过电子邮件将日志文件发送给开发人员</string>
   <string name="login_to_your_account">登录您的账户</string>
+  <string name="nearby_location_has_not_changed">位置没有更新。</string>
+  <string name="nearby_location_not_available">位置不可用。</string>
+  <string name="location_permission_rationale_nearby">需要权限以显示附近地点列表</string>
+  <string name="get_directions">获得指示</string>
+  <string name="read_article">阅读条目</string>
 </resources>

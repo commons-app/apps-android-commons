@@ -42,8 +42,8 @@
   <string name="title_activity_settings">Iestatījumi</string>
   <string name="title_activity_signup">Reģistrēties</string>
   <string name="menu_about">Par</string>
-  <string name="about_improve" fuzzy="true">Izejas kods pieejams &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Kļūdas ziņot &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privātuma politika&lt;/a&gt;</string>
+  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Izejas kods&lt;/a&gt; un &lt;a href=\"https://commons-app.github.io/\"&gt;tīmekļa vietne&lt;/a&gt; GitHub. Izveido jaunu &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub pieteikumu&lt;/a&gt; kļūdas ziņojumam vai ieteikumam.</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Privātuma politika&lt;/a&gt;</string>
   <string name="title_activity_about">Par</string>
   <string name="menu_feedback">Nosūtīt atsauksmes (pa e-pastu)</string>
   <string name="provider_categories">Nesen lietotās kategorijas</string>
@@ -96,4 +96,5 @@
   <string name="no_description_found">apraksts nav atrasts</string>
   <string name="give_permission">Atļaut</string>
   <string name="use_external_storage">Izmantot ārējo krātuvi</string>
+  <string name="read_article">LASĪT RAKSTU</string>
 </resources>

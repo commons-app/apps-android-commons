@@ -68,7 +68,7 @@
     <item quantity="other">%d caricamenti</item>
   </plurals>
   <string name="categories_not_found">Non è stata trovata alcuna categoria che contiene %1$s</string>
-  <string name="categories_skip_explanation">Aggiungi categorie per rendere le tue immagini più facilmente individuabili su Wikimedia Commons.\n\nInizia a digitare per aggiungere categorie.\nTocca questo messaggio (o premi Indietro) per saltare l\'aggiunta di categorie.</string>
+  <string name="categories_skip_explanation">Aggiungi categorie per rendere le tue immagini più facilmente individuabili su Wikimedia Commons.\nInizia a digitare per aggiungere categorie.</string>
   <string name="categories_activity_title">Categorie</string>
   <string name="title_activity_settings">Impostazioni</string>
   <string name="title_activity_signup">Registrati</string>
@@ -114,6 +114,7 @@
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_1_text">Wikimedia Commons ospita la maggior parte delle immagini che vengono utilizzate in Wikipedia.</string>
   <string name="tutorial_1_subtext">Le tue immagini aiutano l\'istruzione di persone in tutto il mondo!</string>
+  <string name="tutorial_3_text">Per favore NON caricare:</string>
   <string name="tutorial_4_text">Esempi di caricamento:</string>
   <string name="welcome_wikipedia_text">Contribuisci con le tue immagini. Aiuta a rendere vive le voci di Wikipedia!</string>
   <string name="welcome_wikipedia_subtext">Le immagini su Wikipedia provengono da Wikimedia Commons.</string>
@@ -146,11 +147,15 @@
   <string name="maximum_limit_alert">Non è possibile mostrarne più di 500</string>
   <string name="login_failed_2fa_not_supported">L\'autenticazione a due fattori non è attualmente supportata.</string>
   <string name="logout_verification">Vuoi veramente uscire?</string>
+  <string name="commons_logo">Logo di Commons</string>
   <string name="no_image_found">Nessuna immagine trovata</string>
   <string name="upload_image">Carica immagine</string>
+  <string name="welcome_image_mount_zao">Monte Zao</string>
   <string name="welcome_image_rainbow_bridge">Arcobaleno</string>
   <string name="welcome_image_tulip">Tulipano</string>
   <string name="welcome_image_no_selfies">No autoscatti (selfie)</string>
+  <string name="welcome_image_welcome_wikipedia">Benvenuto Wikipedia</string>
+  <string name="welcome_image_welcome_copyright">Benvenuto Copyright</string>
   <string name="welcome_image_sydney_opera_house">Teatro dell\'opera di Sydney</string>
   <string name="cancel">Annulla</string>
   <string name="navigation_drawer_open">Apri</string>
@@ -163,8 +168,14 @@
   <string name="navigation_item_feedback">Commenti</string>
   <string name="navigation_item_logout">Esci</string>
   <string name="navigation_item_info">Tutorial</string>
+  <string name="navigation_item_notification">Notifiche</string>
   <string name="no_description_found">nessuna descrizione trovata</string>
   <string name="nearby_info_menu_commons_article">Pagina di Commons del file</string>
   <string name="nearby_info_menu_wikidata_article">Elemento Wikidata</string>
+  <string name="give_permission">Dai autorizzazione</string>
   <string name="login_to_your_account">Accedi alla tua utenza</string>
+  <string name="nearby_location_has_not_changed">La posizione non è cambiata.</string>
+  <string name="nearby_location_not_available">Posizione non disponibile.</string>
+  <string name="get_directions">OTTIENI DIREZIONI</string>
+  <string name="read_article">LEGGI VOCE</string>
 </resources>

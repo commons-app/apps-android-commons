@@ -68,7 +68,7 @@
     <item quantity="other">%d cargues</item>
   </plurals>
   <string name="categories_not_found">Nun s\'alcontró denguna categoría que case con %1$s</string>
-  <string name="categories_skip_explanation">Amieste categoríes pa facer les imaxes más fáciles d\'alcontrar en Wikimedia Commons.\n\nPrincipie a escribir p\'amestar categoríes.\nToque nesti mensaxe (o calque atrás) pa saltar esti pasu.</string>
+  <string name="categories_skip_explanation">Amiesta categoríes pa facer les imaxes más fáciles d\'alcontrar en Wikimedia Commons.\nPrincipia a escribir p\'amestar categoríes.</string>
   <string name="categories_activity_title">Categoríes</string>
   <string name="title_activity_settings">Configuración</string>
   <string name="title_activity_signup">Date d\'alta</string>
@@ -121,7 +121,7 @@
   <string name="tutorial_3_text">NUN xubas:</string>
   <string name="tutorial_3_subtext">- Selfies o semeyes de los tos amigos\n- Imáxenes que descargasti d\'Internet\n- Imáxenes de pantalla d\'aplicaciones propietaries</string>
   <string name="tutorial_4_text">Exemplu de carga:</string>
-  <string name="tutorial_4_subtext">- Títulu: Ópera de Sidney\n- Descripción: Teatru de la Ópera de Sidney vistu dende l\'otru llau de la badea\n- Categoríes: Ópera de Sidney, Ópera de Sidney dende l\'oeste, Vistes a distancia de la Ópera de Sidney</string>
+  <string name="tutorial_4_subtext">- Títulu: Ópera de Sidney\n- Descripción: Teatru de la Ópera de Sidney vistu dende l\'otru llau de la badea\n- Categoríes: Ópera de Sidney dende l\'oeste, Vistes a distancia de la Ópera de Sidney</string>
   <string name="welcome_wikipedia_text">Collabore coles sos imaxes. ¡Ayude a que los artículos de Wikipedia tengan vida!</string>
   <string name="welcome_wikipedia_subtext">Les imaxes de Wikipedia vienen de\nWikimedia Commons.</string>
   <string name="welcome_copyright_text">Les sos imaxes ayuden a educar a la xente alredor del mundu.</string>
@@ -147,7 +147,7 @@
   <string name="media_detail_title">Títulu</string>
   <string name="media_detail_media_title">Títulu del mediu</string>
   <string name="media_detail_description">Descripción</string>
-  <string name="media_detail_description_explanation">Equí va la descripción del mediu. Posiblemente pué ser llargo enforma, y necesitará espardese per delles llinies. Sicasí, esperamos que se vea guapo.</string>
+  <string name="media_detail_description_explanation">Equí va la descripción del mediu. Esto pué ser llargo enforma, y necesitará espardese per delles llinies. Sicasí, esperamos que se vea bien.</string>
   <string name="media_detail_uploaded_date">Data d\'unviu</string>
   <string name="media_detail_license">Llicencia</string>
   <string name="media_detail_coordinates">Coordenaes</string>
@@ -188,6 +188,7 @@
   <string name="navigation_item_feedback">La to opinión</string>
   <string name="navigation_item_logout">Salir</string>
   <string name="navigation_item_info">Tutorial</string>
+  <string name="navigation_item_notification">Avisos</string>
   <string name="nearby_needs_permissions">Los sitios cercanos nun pueden amosase ensin los permisos d\'allugamientu</string>
   <string name="no_description_found">nun s\'atoparon descripciones</string>
   <string name="nearby_info_menu_commons_article">Páxina del ficheru en Commons</string>
@@ -198,5 +199,12 @@
   <string name="give_permission">Dar permisu</string>
   <string name="use_external_storage">Usar almacenamientu esternu</string>
   <string name="use_external_storage_summary">Guardar nel preséu les imaxes tomaes cola cámara de la app</string>
+  <string name="send_log_file">Unviar ficheru de rexistru</string>
+  <string name="send_log_file_description">Unviar ficheru de rexistru a los desendolcadores per corréu electrónicu</string>
   <string name="login_to_your_account">Anicia sesión na to cuenta</string>
+  <string name="nearby_location_has_not_changed">L\'allugamientu nun camudó.</string>
+  <string name="nearby_location_not_available">L\'allugamientu nun ta disponible.</string>
+  <string name="location_permission_rationale_nearby">Ríquese permisu p\'amosar una llista de llugares cercanos</string>
+  <string name="get_directions">CÓMO LLEGAR</string>
+  <string name="read_article">LLEER L\'ARTÍCULU</string>
 </resources>

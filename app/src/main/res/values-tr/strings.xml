@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name" fuzzy="true">Wikimedia Commons</string>
+  <string name="app_name">Commons</string>
   <string name="menu_settings">Ayarlar</string>
   <string name="username">Kullanıcı adı</string>
   <string name="password">Parola</string>
@@ -31,6 +31,7 @@
   <string name="contribution_state_starting">Yükleniyor</string>
   <string name="menu_from_gallery">Galeri\'den</string>
   <string name="menu_from_camera">Fotoğraf çek</string>
+  <string name="menu_nearby">Yakınındakiler</string>
   <string name="provider_contributions">Yüklemelerim</string>
   <string name="menu_share">Paylaş</string>
   <string name="menu_open_in_browser">Tarayıcıda görüntüle</string>
@@ -41,6 +42,7 @@
   <string name="login_failed_password">Oturum açılamıyor - lütfen parolanızı kontrol edin</string>
   <string name="login_failed_throttled">Çok sayıda başarısız girişimde bulundunuz. Birkaç dakika sonra tekrar deneyin.</string>
   <string name="login_failed_blocked">Üzgünüz, bu kullanıcı Commons\'ta engellendi</string>
+  <string name="login_failed_2fa_needed">İki faktörlü kimlik doğrulama kodunu sağlamalısınız.</string>
   <string name="login_failed_generic">Oturum açma başarısız</string>
   <string name="share_upload_button">Yükle</string>
   <string name="multiple_share_base_title">Bu grubun adı</string>
@@ -49,39 +51,53 @@
   <string name="categories_search_text_hint">Kategorileri ara</string>
   <string name="menu_save_categories">Kaydet</string>
   <string name="refresh_button">Yenile</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">Henüz yükleme yok</item>
-    <item quantity="one">1 yükleme</item>
+  <string name="gps_disabled">GPS, cihazınızda devre dışı bırakılmıştır. Etkinleştirmek ister misiniz?</string>
+  <string name="enable_gps">GPS\'i etkinleştir</string>
+  <string name="contributions_subtitle_zero">Henüz yüklenmedi</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%d yükleme</item>
     <item quantity="other">%d yükleme</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">1 yüklemeye başlanıyor</item>
-    <item quantity="other">%d yüklemeye başlanıyor</item>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">%d yüklenmeye başlanıyor</item>
+    <item quantity="other">%d yüklenmeye başlanıyor</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">1 yükleme</item>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%d yükleme</item>
     <item quantity="other">%d yükleme</item>
   </plurals>
   <string name="categories_not_found">%1$s ile eşleşen bir kategori bulunamadı</string>
-  <string name="categories_skip_explanation">Resimlerinizi Wikimedia Commons\'ta daha bulunabilir duruma getirmek için kategoriler ekleyin.\n\nKategori eklemek için yazmaya başlayın.\nBu adımı atlamak için bu iletiye dokunun ya da geri tıklayın.</string>
+  <string name="categories_skip_explanation">Resimlerinizi Wikimedia Commons\'ta daha bulunabilir duruma getirmek için kategoriler ekleyin.\nKategori eklemek için yazmaya başlayın.</string>
   <string name="categories_activity_title">Kategoriler</string>
   <string name="title_activity_settings">Ayarlar</string>
+  <string name="title_activity_signup">Kaydol</string>
   <string name="menu_about">Hakkında</string>
-  <string name="about_license" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache Lisansı s2&lt;/a&gt; altında yayımlanan Açık Kaynak yazılımı</string>
-  <string name="about_improve" fuzzy="true">Kaynak: &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;\n\nYazılım hataları: &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Gizlilik Politikası&lt;/a&gt;</string>
+  <string name="about_license">Wikimedia Commons uygulaması, Wikimedia topluluğunun imtiyaz sahibi ve gönüllüleri tarafından oluşturulmuş ve sürdürülmüş açık kaynak kodlu bir uygulamadır. Vikipedi Vakfı, uygulamanın oluşturulması, geliştirilmesi veya bakımına dahil değildir.</string>
+  <string name="about_improve">GitHub üzerinde &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kaynak&lt;/a&gt; ve &lt;a href=\"https://commons-app.github.io/\"&gt;website&lt;/a&gt;. Hata raporları ve önerileri için yeni bir &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub sorunu&lt;/a&gt; oluştur.</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Gizlilik Politikası&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Katkıda bulunanlar&lt;/a&gt;</string>
   <string name="title_activity_about">Hakkında</string>
   <string name="menu_feedback">Geri Bildirim Gönder (E-posta ile)</string>
+  <string name="no_email_client">Yüklü bir e-posta istemcisi yok</string>
   <string name="provider_categories">Son kullanılan kategoriler</string>
   <string name="waiting_first_sync">İlk eşitleme için bekleniyor…</string>
   <string name="no_uploads_yet">Henüz yüklenmiş hiç fotoğrafınız yok.</string>
   <string name="menu_retry_upload">Tekrar dene</string>
   <string name="menu_cancel_upload">İptal</string>
   <string name="share_license_summary">Bu resmi %1$s lisansı altında olacak.</string>
+  <string name="media_upload_policy">Bu resmi göndererek bunun kendi eserim olduğumu, telif hakkıyla korunan materyal veya selfie içermediğini ve aksi takdirde &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons politikalarına&lt;/a&gt; uyduğunu beyan ederim.</string>
   <string name="menu_download">İndir</string>
   <string name="preference_license">Lisans</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CC Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by" fuzzy="true">CC Attribution 3.0</string>
+  <string name="use_previous">Önceki başlığı/açıklamayı kullan</string>
+  <string name="allow_gps">Otomatik olarak mevcut konumu al</string>
+  <string name="allow_gps_summary">Resim koordinat olarak etiketlendirilmemişse kategori önerileri için mevcut konum bulun</string>
+  <string name="preference_theme">Gece modu</string>
+  <string name="preference_theme_summary">Koyu temayı kullanın</string>
+  <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
+  <string name="license_name_cc_by_four"> Attribution 4.0</string>
+  <string name="license_name_cc_by_sa"> Attribution-ShareAlike 3.0</string>
+  <string name="license_name_cc_by"> Attribution 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Avusturya)</string>
@@ -95,10 +111,17 @@
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polonya)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romanya)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
+  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC0</string>
+  <string name="tutorial_1_text">Wikimedia Commons, Vikipedi\'de kullanılan resimlerin çoğunu barındırır.</string>
+  <string name="tutorial_1_subtext">Resimleriniz dünyanın dört bir yanındaki insanlara eğitim vermeye yardımcı olur!</string>
+  <string name="tutorial_2_text">Lütfen tamamen kendiniz çektiğiniz veya oluşturduğunuz resimleri yükleyin:</string>
+  <string name="tutorial_2_subtext">- Doğal nesneler (çiçekler, hayvanlar, dağlar)\n- Faydalı nesneler (bisiklet, tren istasyonları)\n- Ünlü insanlar (belediye başkanınız, tanıştığınız Olimpik atletler)</string>
   <string name="tutorial_3_text">Lütfen şunları YÜKLEMEYİN:</string>
   <string name="tutorial_3_subtext">- Öz çekimlerinizi ya da arkadaşlarınızın fotoğraflarını\n- İnternetten indirdiğiniz resimleri\n- Tescilli uygulamaların ekran görüntülerini</string>
   <string name="tutorial_4_text">Yüklenebileceklere örnekler:</string>
+  <string name="tutorial_4_subtext">- Başlık: Sydney Opera Binası\n- Tanım: Körfezin genelinden bakıldığında Sydney Opera Binası\n- Kategoriler: Sydney Opera Binası, batıdan Sydney Opera Binası</string>
   <string name="welcome_wikipedia_text">Resimleriniz ile Vikipedi maddelerinin canlandırılmasına katkıda bulunabilirsiniz!</string>
   <string name="welcome_wikipedia_subtext">Vikipedi\'ye Wikimedia Commons\'tan gelen görüntüler.</string>
   <string name="welcome_copyright_text">Görüntüler dünya insanlarının eğitiminde yardımcı olur.</string>
@@ -106,11 +129,82 @@
   <string name="welcome_final_text">Bunu anladınız mı?</string>
   <string name="welcome_final_button_text">Evet!</string>
   <string name="detail_panel_cats_label">Kategoriler</string>
-  <string name="detail_panel_cats_loading" fuzzy="true">Yükleniyor…</string>
+  <string name="detail_panel_cats_loading">Yükleniyor...</string>
   <string name="detail_panel_cats_none">Hiçbir şey seçilmedi</string>
   <string name="detail_description_empty">Açıklama yok</string>
   <string name="detail_license_empty">Bilinmeyen lisans</string>
   <string name="menu_refresh">Yenile</string>
+  <string name="read_storage_permission_rationale">Gerekli izinler: Harici depolama biriminin okunması. Uygulama buna izin verilmeden çalışmaz.</string>
+  <string name="write_storage_permission_rationale">Gerekli izin: Harici depolama birimi üzerine yazma. Uygulama buna izin verilmeden çalışmaz.</string>
+  <string name="location_permission_rationale">İsteğe bağlı izin: Kategori önerileri için geçerli konum alma</string>
+  <string name="ok">Tamam</string>
+  <string name="title_activity_nearby">Yakındaki yerler</string>
+  <string name="no_nearby">Yakınlardaki yer bulunamadı</string>
+  <string name="warning">Uyarı</string>
+  <string name="file_exists">Bu dosya zaten Commons\'da var. Devam etmek istediğinizden emin misiniz?</string>
+  <string name="yes">Evet</string>
+  <string name="no">Hayır</string>
+  <string name="media_detail_title">Başlık</string>
+  <string name="media_detail_media_title">Medyanın başlığı</string>
+  <string name="media_detail_description">Açıklama</string>
+  <string name="media_detail_description_explanation">Medya için yapılan tanımı/açıklamayı buraya yazınız. Açıklamanız uzun olabilir ve birden fazla satıra sığabilir. Umuyoruz ki güzel ve bilgilendirici olacaktır.</string>
+  <string name="media_detail_uploaded_date">Yükleme tarihi</string>
   <string name="media_detail_license">Lisans</string>
   <string name="media_detail_coordinates">Koordinatlar</string>
+  <string name="media_detail_coordinates_empty">Sağlanmamış</string>
+  <string name="become_a_tester_title">Beta Deneycisi Olun</string>
+  <string name="become_a_tester_description">Google Play\'deki beta kanalımıza dahil olarak yeni özelliklere ve hata düzeltmelerine erken erişin</string>
+  <string name="use_wikidata">Vikiveri\'yi kullanın</string>
+  <string name="use_wikidata_summary">(Uyarı: devre dışı bırakılması mobil veri tüketimine neden olabilir)</string>
+  <string name="_2fa_code">2 Faktörlü Kimlik Doğrulama (2FA) Kodu</string>
+  <string name="number_of_uploads">Son Yükleme Limitim</string>
+  <string name="maximum_limit">Maksimum Limit</string>
+  <string name="maximum_limit_alert">500\'den fazla görüntülenemiyor</string>
+  <string name="set_limit">Yeni Yükleme Sınırı Ayarla</string>
+  <string name="login_failed_2fa_not_supported">İki faktörlü kimlik doğrulama şu anda desteklenmiyor.</string>
+  <string name="logout_verification">Gerçekten çıkış yapmak istiyor musunuz?</string>
+  <string name="commons_logo">Commons Logo</string>
+  <string name="background_image">Arka plan görüntüsü</string>
+  <string name="mediaimage_failed">Medya Görüntüsü Başarısız Oldu</string>
+  <string name="no_image_found">Resim Bulunamadı</string>
+  <string name="upload_image">Resim Yükle</string>
+  <string name="welcome_image_mount_zao">Zao Dağı</string>
+  <string name="welcome_image_llamas">Lamalar</string>
+  <string name="welcome_image_rainbow_bridge">Gökkuşağı Köprüsü</string>
+  <string name="welcome_image_tulip">Lale</string>
+  <string name="welcome_image_no_selfies">Selfie (\'\'özçekim\'\') göndermeyin</string>
+  <string name="welcome_image_proprietary">Tescilli Resim</string>
+  <string name="welcome_image_welcome_wikipedia">Vikipedi\'ye Hoş Geldiniz</string>
+  <string name="welcome_image_welcome_copyright">Telif Haklarına Hoş Geldiniz</string>
+  <string name="welcome_image_sydney_opera_house">Sidney Opera Binası</string>
+  <string name="cancel">İptal</string>
+  <string name="navigation_drawer_open">Aç</string>
+  <string name="navigation_drawer_close">Kapat</string>
+  <string name="navigation_item_home">Anasayfa</string>
+  <string name="navigation_item_upload">Yükle</string>
+  <string name="navigation_item_nearby">Yakınındakiler</string>
+  <string name="navigation_item_about">Hakkında</string>
+  <string name="navigation_item_settings">Ayarlar</string>
+  <string name="navigation_item_feedback">Geri bildirim</string>
+  <string name="navigation_item_logout">Çıkış</string>
+  <string name="navigation_item_info">Eğitim</string>
+  <string name="navigation_item_notification">Bildirimler</string>
+  <string name="nearby_needs_permissions">Yakındaki yerler, konum izinleri olmadan görüntülenemez</string>
+  <string name="no_description_found">hiçbir açıklama bulunamadı</string>
+  <string name="nearby_info_menu_commons_article">Commons dosya sayfası</string>
+  <string name="nearby_info_menu_wikidata_article">Vikiveri ögesi</string>
+  <string name="error_while_cache">Resimler önbelleğe alınırken hata oluştu</string>
+  <string name="title_info">Dosya için dosya adı olarak kullanılacak benzersiz açıklayıcı bir başlık olmalıdır. Boşluk bırakarak sade bir dil kullanabilirsiniz. Dosya uzantısını dahil etmeyin</string>
+  <string name="description_info">Lütfen medyayı mümkün olduğunca açıklayın: Nerede çekildi? Ne gösteriyor? Bağlam nedir? Lütfen nesneleri veya kişileri tanımlayın. Kolay tahmin edilemeyen bilgileri açıklayın, örneğin bir manzara ise günün saatini belirtin. Medya alışılmadık bir şey gösteriyorsa lütfen olağandışı yapan şeyleri açıklayın.</string>
+  <string name="give_permission">İzin ver</string>
+  <string name="use_external_storage">Harici depolamayı kullanın</string>
+  <string name="use_external_storage_summary">Uygulama kamerası kullanıldığında çekilen fotoğrafları cihazına kaydedin</string>
+  <string name="send_log_file">Kayıt dosyasını gönder</string>
+  <string name="send_log_file_description">Kayıt dosyasını, e-posta aracılığıyla geliştiricilere gönderin</string>
+  <string name="login_to_your_account">Hesabınızda oturum açın</string>
+  <string name="nearby_location_has_not_changed">Konum değiştirilmedi</string>
+  <string name="nearby_location_not_available">Konum kullanılamıyor.</string>
+  <string name="location_permission_rationale_nearby">Yakındaki yerler listesini görüntülemek için izin vermeniz gerekiyor</string>
+  <string name="get_directions">TALİMATLAR</string>
+  <string name="read_article">MADDE OKU</string>
 </resources>

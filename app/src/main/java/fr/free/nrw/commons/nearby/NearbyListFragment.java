@@ -2,7 +2,6 @@ package fr.free.nrw.commons.nearby;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,12 +16,13 @@ import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.List;
 
+import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.utils.UriDeserializer;
 import timber.log.Timber;
 
-public class NearbyListFragment extends Fragment {
+public class NearbyListFragment extends DaggerFragment {
     private static final Type LIST_TYPE = new TypeToken<List<Place>>() {
     }.getType();
     private static final Type CUR_LAT_LNG_TYPE = new TypeToken<LatLng>() {
@@ -60,7 +60,7 @@ public class NearbyListFragment extends Fragment {
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-            String gsonPlaceList = bundle.getString("PlaceList");
+            String gsonPlaceList = bundle.getString("PlaceList", "[]");
             placeList = gson.fromJson(gsonPlaceList, LIST_TYPE);
 
             String gsonLatLng = bundle.getString("CurLatLng");

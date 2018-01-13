@@ -11,8 +11,10 @@
   <string name="login_success">لاگ ان کامیاب!</string>
   <string name="login_failed">لاگ ان ناکام!</string>
   <string name="upload_failed">فائل کائنی لبھی،ٻئی فائل کیتے کوشش کرو۔</string>
+  <string name="authentication_failed">تصدیق ناکام!</string>
   <string name="uploading_started">اپ لوڈ شروع!</string>
   <string name="upload_completed_notification_title">%1$s اپ لوڈ تھی ڳیا!</string>
+  <string name="upload_completed_notification_text">آپݨی اپلوڈ ݙیکھݨ کیتے ٹیپ کرو</string>
   <string name="upload_progress_notification_title_start">اپ لوڈ %1$s شروع تھیندا پئے</string>
   <string name="upload_progress_notification_title_in_progress">%1$s اپ لوڈ تھیندا پئے</string>
   <string name="upload_progress_notification_title_finishing">%1$s اپ لوڈ پورا تھیندا پئے</string>
@@ -53,6 +55,9 @@
   <string name="preference_theme">رات آلا مزاج</string>
   <string name="preference_theme_summary">گھاٹا تھیم ورتو</string>
   <string name="license_name_cc0">سی سی او</string>
+  <string name="license_name_cc_by_3_0">سی سی بی وائی ٣.٠</string>
+  <string name="license_name_cc_by_sa_4_0">سی سی بی وائی۔ایس اے ٤.٠</string>
+  <string name="license_name_cc_by_4_0">سی سی بی وائی ٤.٠</string>
   <string name="license_name_cc_zero">سی سی زیرو</string>
   <string name="tutorial_3_text">براہ مہربانی اپ لوڈ نہ کرو</string>
   <string name="tutorial_4_text">مثال اپ لوڈ:</string>
@@ -98,7 +103,9 @@
   <string name="navigation_item_settings">ترتیباں</string>
   <string name="navigation_item_feedback">تہاڈی رائے</string>
   <string name="navigation_item_logout">لاگ آؤٹ</string>
+  <string name="navigation_item_info">ٹیٹوریل</string>
   <string name="nearby_info_menu_wikidata_article">وکی ڈیٹا آئٹم</string>
   <string name="give_permission">اجازت ݙیوو</string>
+  <string name="send_log_file">لاگ فائل بھیجو</string>
   <string name="login_to_your_account">آپݨے کھاتے وچ لاگ ان تھیوو</string>
 </resources>

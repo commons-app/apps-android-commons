@@ -11,7 +11,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.ParcelFileDescriptor;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -32,14 +31,20 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import butterknife.ButterKnife;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
+import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.caching.CacheController;
 import fr.free.nrw.commons.category.CategorizationFragment;
 import fr.free.nrw.commons.category.OnCategoriesSaveHandler;
 import fr.free.nrw.commons.contributions.Contribution;
@@ -47,9 +52,11 @@ import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.modifications.CategoryModifier;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.modifications.ModifierSequence;
+import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
 import fr.free.nrw.commons.mwapi.EventLog;
 import fr.free.nrw.commons.utils.ImageUtils;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.upload.ExistingFileAsync.Result.DUPLICATE_PROCEED;
@@ -70,7 +77,12 @@ public  class      ShareActivity
     private static final int REQUEST_PERM_ON_SUBMIT_STORAGE = 4;
     private CategorizationFragment categorizationFragment;
 
-    private CommonsApplication app;
+    @Inject MediaWikiApi mwApi;
+    @Inject CacheController cacheController;
+    @Inject SessionManager sessionManager;
+    @Inject UploadController uploadController;
+    @Inject ModifierSequenceDao modifierSequenceDao;
+    @Inject @Named("default_preferences") SharedPreferences prefs;
 
     private String source;
     private String mimeType;
@@ -78,8 +90,6 @@ public  class      ShareActivity
     private Uri mediaUri;
     private Contribution contribution;
     private SimpleDraweeView backgroundImageView;
-
-    private UploadController uploadController;
 
     private boolean cacheFound;
 
@@ -121,7 +131,7 @@ public  class      ShareActivity
     @RequiresApi(16)
     private boolean needsToRequestStoragePermission() {
         // We need to ask storage permission when
-        // the file is not owned by this app, (e.g. shared from the Gallery)
+        // the file is not owned by this application, (e.g. shared from the Gallery)
         // and permission is not obtained.
         return !FileUtils.isSelfOwned(getApplicationContext(), mediaUri)
                 && (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -131,16 +141,12 @@ public  class      ShareActivity
     private void uploadBegins() {
         getFileMetadata(locationPermitted);
 
-        Toast startingToast = Toast.makeText(
-                CommonsApplication.getInstance(),
-                R.string.uploading_started,
-                Toast.LENGTH_LONG
-        );
+        Toast startingToast = Toast.makeText(this, R.string.uploading_started, Toast.LENGTH_LONG);
         startingToast.show();
 
         if (!cacheFound) {
             //Has to be called after apiCall.request()
-            app.getCacheData().cacheCategory();
+            cacheController.cacheCategory();
             Timber.d("Cache the categories found");
         }
 
@@ -166,21 +172,13 @@ public  class      ShareActivity
 
             categoriesSequence.queueModifier(new CategoryModifier(categories.toArray(new String[]{})));
             categoriesSequence.queueModifier(new TemplateRemoveModifier("Uncategorized"));
-            categoriesSequence.setContentProviderClient(getContentResolver().acquireContentProviderClient(ModificationsContentProvider.AUTHORITY));
-            categoriesSequence.save();
+            modifierSequenceDao.save(categoriesSequence);
         }
 
         // FIXME: Make sure that the content provider is up
         // This is the wrong place for it, but bleh - better than not having it turned on by default for people who don't go throughl ogin
-        ContentResolver.setSyncAutomatically(app.getCurrentAccount(), ModificationsContentProvider.AUTHORITY, true); // Enable sync by default!
+        ContentResolver.setSyncAutomatically(sessionManager.getCurrentAccount(), ModificationsContentProvider.MODIFICATIONS_AUTHORITY, true); // Enable sync by default!
 
-        EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT)
-                .param("username", app.getCurrentAccount().name)
-                .param("categories-count", categories.size())
-                .param("files-count", 1)
-                .param("source", contribution.getSource())
-                .param("result", "queued")
-                .log();
         finish();
     }
 
@@ -193,30 +191,8 @@ public  class      ShareActivity
     }
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        if (categorizationFragment != null && categorizationFragment.isVisible()) {
-            EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT)
-                    .param("username", app.getCurrentAccount().name)
-                    .param("categories-count", categorizationFragment.getCurrentSelectedCount())
-                    .param("files-count", 1)
-                    .param("source", contribution.getSource())
-                    .param("result", "cancelled")
-                    .log();
-        } else {
-            EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT)
-                    .param("username", app.getCurrentAccount().name)
-                    .param("source", getIntent().getStringExtra(UploadService.EXTRA_SOURCE))
-                    .param("multiple", true)
-                    .param("result", "cancelled")
-                    .log();
-        }
-    }
-
-    @Override
     protected void onAuthCookieAcquired(String authCookie) {
-        app.getMWApi().setAuthCookie(authCookie);
-
+        mwApi.setAuthCookie(authCookie);
     }
 
     @Override
@@ -229,11 +205,10 @@ public  class      ShareActivity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        uploadController = new UploadController();
+
         setContentView(R.layout.activity_share);
         ButterKnife.bind(this);
         initBack();
-        app = CommonsApplication.getInstance();
         backgroundImageView = (SimpleDraweeView) findViewById(R.id.backgroundImage);
         backgroundImageView.setHierarchy(GenericDraweeHierarchyBuilder
                 .newInstance(getResources())
@@ -383,7 +358,7 @@ public  class      ShareActivity
                 try {
                     InputStream inputStream = getContentResolver().openInputStream(mediaUri);
                     Timber.d("Input stream created from %s", mediaUri.toString());
-                    String fileSHA1 = Utils.getSHA1(inputStream);
+                    String fileSHA1 = getSHA1(inputStream);
                     Timber.d("File SHA1 is: %s", fileSHA1);
 
                     ExistingFileAsync fileAsyncTask =
@@ -391,7 +366,6 @@ public  class      ShareActivity
                                 Timber.d("%s duplicate check: %s", mediaUri.toString(), result);
                                 duplicateCheckPassed = (result == DUPLICATE_PROCEED
                                         || result == NO_DUPLICATE);
-
                                 /*
                                  TODO: 16/9/17 should we run DetectUnwantedPicturesAsync if DUPLICATE_PROCEED is returned? Since that means
                                  we are processing images that are already on server???...
@@ -402,7 +376,7 @@ public  class      ShareActivity
                                     performUnwantedPictureDetectionProcess();
                                 }
 
-                            });
+                            },mwApi);
                     fileAsyncTask.execute();
                 } catch (IOException e) {
                     Timber.d(e, "IO Exception: ");
@@ -461,6 +435,40 @@ public  class      ShareActivity
     private String getPathOfMediaOrCopy() {
         String filePath = FileUtils.getPath(getApplicationContext(), mediaUri);
         Timber.d("Filepath: " + filePath);
+        if (filePath == null) {
+            // in older devices getPath() may fail depending on the source URI
+            // creating and using a copy of the file seems to work instead.
+            // TODO: there might be a more proper solution than this
+            String copyPath = null;
+            try {
+                ParcelFileDescriptor descriptor
+                        = getContentResolver().openFileDescriptor(mediaUri, "r");
+                if (descriptor != null) {
+                    boolean useExtStorage = prefs.getBoolean("useExternalStorage", true);
+                    if (useExtStorage) {
+                        copyPath = Environment.getExternalStorageDirectory().toString()
+                                + "/CommonsApp/" + new Date().getTime() + ".jpg";
+                        File newFile = new File(Environment.getExternalStorageDirectory().toString() + "/CommonsApp");
+                        newFile.mkdir();
+                        FileUtils.copy(
+                                descriptor.getFileDescriptor(),
+                                copyPath);
+                        Timber.d("Filepath (copied): %s", copyPath);
+                        return copyPath;
+                    }
+                    copyPath = getApplicationContext().getCacheDir().getAbsolutePath()
+                            + "/" + new Date().getTime() + ".jpg";
+                    FileUtils.copy(
+                            descriptor.getFileDescriptor(),
+                            copyPath);
+                    Timber.d("Filepath (copied): %s", copyPath);
+                    return copyPath;
+                }
+            } catch (IOException e) {
+                Timber.w(e, "Error in file " + copyPath);
+                return null;
+            }
+        }
         return filePath;
     }
 
@@ -477,12 +485,12 @@ public  class      ShareActivity
                         = getContentResolver().openFileDescriptor(mediaUri, "r");
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     if (descriptor != null) {
-                        imageObj = new GPSExtractor(descriptor.getFileDescriptor());
+                        imageObj = new GPSExtractor(descriptor.getFileDescriptor(), this, prefs);
                     }
                 } else {
                     String filePath = getPathOfMediaOrCopy();
                     if (filePath != null) {
-                        imageObj = new GPSExtractor(filePath);
+                        imageObj = new GPSExtractor(filePath, this, prefs);
                     }
                 }
             }
@@ -509,12 +517,12 @@ public  class      ShareActivity
             if (imageObj.imageCoordsExists) {
                 double decLongitude = imageObj.getDecLongitude();
                 double decLatitude = imageObj.getDecLatitude();
-                app.getCacheData().setQtPoint(decLongitude, decLatitude);
+                cacheController.setQtPoint(decLongitude, decLatitude);
             }
 
-            MwVolleyApi apiCall = new MwVolleyApi();
+            MwVolleyApi apiCall = new MwVolleyApi(this);
 
-            List<String> displayCatList = app.getCacheData().findCategory();
+            List<String> displayCatList = cacheController.findCategory();
             boolean catListEmpty = displayCatList.isEmpty();
 
             // If no categories found in cache, call MediaWiki API to match image coords with nearby Commons categories
@@ -559,5 +567,42 @@ public  class      ShareActivity
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    // Get SHA1 of file from input stream
+    private String getSHA1(InputStream is) {
+
+        MessageDigest digest;
+        try {
+            digest = MessageDigest.getInstance("SHA1");
+        } catch (NoSuchAlgorithmException e) {
+            Timber.e(e, "Exception while getting Digest");
+            return "";
+        }
+
+        byte[] buffer = new byte[8192];
+        int read;
+        try {
+            while ((read = is.read(buffer)) > 0) {
+                digest.update(buffer, 0, read);
+            }
+            byte[] md5sum = digest.digest();
+            BigInteger bigInt = new BigInteger(1, md5sum);
+            String output = bigInt.toString(16);
+            // Fill to 40 chars
+            output = String.format("%40s", output).replace(' ', '0');
+            Timber.i("File SHA1: %s", output);
+
+            return output;
+        } catch (IOException e) {
+            Timber.e(e, "IO Exception");
+            return "";
+        } finally {
+            try {
+                is.close();
+            } catch (IOException e) {
+                Timber.e(e, "Exception on closing MD5 input stream");
+            }
+        }
     }
 }

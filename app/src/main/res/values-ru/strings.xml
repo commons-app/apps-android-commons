@@ -8,7 +8,7 @@
   <string name="signup">Зарегистрироваться</string>
   <string name="logging_in_title">Вход в систему</string>
   <string name="logging_in_message">Пожалуйста, подождите…</string>
-  <string name="login_success">Опознание прошло успешно</string>
+  <string name="login_success">Вход выполнен успешно!</string>
   <string name="login_failed">Ошибка входа в систему!</string>
   <string name="upload_failed">Файл не найден. Попробуйте другой файл.</string>
   <string name="authentication_failed">Ошибка аутентификации!</string>
@@ -26,7 +26,7 @@
     <item quantity="other">%d файлов загружается</item>
   </plurals>
   <string name="title_activity_contributions">Мои недавние загрузки</string>
-  <string name="contribution_state_queued">Очередь</string>
+  <string name="contribution_state_queued">В очереди</string>
   <string name="contribution_state_failed">Ошибка загрузки.</string>
   <string name="contribution_state_in_progress">Завершено %1$d%%</string>
   <string name="contribution_state_starting">Загрузка</string>
@@ -52,7 +52,7 @@
   <string name="categories_search_text_hint">Выбор категорий</string>
   <string name="menu_save_categories">Сохранить</string>
   <string name="refresh_button">Обновить</string>
-  <string name="gps_disabled">GPS отключен в вашем устройстве. Вы хотите включить его?</string>
+  <string name="gps_disabled">GPS отключен в вашем устройстве. Хотите включить его?</string>
   <string name="enable_gps">Включить GPS</string>
   <string name="contributions_subtitle_zero">Загрузок пока нет</string>
   <plurals name="contributions_subtitle">
@@ -72,7 +72,7 @@
     <item quantity="other">%d загрузок</item>
   </plurals>
   <string name="categories_not_found">Категории, соответствующие %1$s, не найдены</string>
-  <string name="categories_skip_explanation">Добавьте категории, чтобы ваши изображения можно было легко найти на Викискладе.\n\nНачните вводить название для добавления категорий.\nНажмите на это сообщение (или за ним), чтобы пропустить этот шаг.</string>
+  <string name="categories_skip_explanation">Добавьте категории, чтобы ваши изображения можно было легко найти на Викискладе.\nНачните вводить название для добавления категорий.</string>
   <string name="categories_activity_title">Категории</string>
   <string name="title_activity_settings">Настройки</string>
   <string name="title_activity_signup">Зарегистрироваться</string>
@@ -90,11 +90,12 @@
   <string name="menu_retry_upload">Повторить</string>
   <string name="menu_cancel_upload">Отмена</string>
   <string name="share_license_summary">Это изображение будет лицензировано под %1$s</string>
+  <string name="media_upload_policy">Отправляя это изображение, я подтверждаю, что это моя собственная работа, которая не содержит защищённых авторским правом материалов или селфи, а также отвечает &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines/ru\"&gt;правилам Викисклада&lt;/a&gt;.</string>
   <string name="menu_download">Скачать</string>
   <string name="preference_license">Лицензия</string>
   <string name="use_previous">Использовать предыдущие заголовок/описание</string>
   <string name="allow_gps">Автоматически получить текущее местоположение</string>
-  <string name="allow_gps_summary">Получить текущее местоположение, чтобы получить предложения категорий, если изображение не содержит геотеги</string>
+  <string name="allow_gps_summary">Получить текущее местоположение, чтобы были предложены категории, если изображение не содержит геотегов</string>
   <string name="preference_theme">Ночной режим</string>
   <string name="preference_theme_summary">Использовать тёмную тему</string>
   <string name="license_name_cc_by_sa_four"> Attribution-ShareAlike 4.0</string>
@@ -120,15 +121,15 @@
   <string name="tutorial_1_text">Викисклад содержит большую часть изображений, которые используются в Википедии.</string>
   <string name="tutorial_1_subtext">Ваши изображения помогают образованию людей во всём мире!</string>
   <string name="tutorial_2_text">Пожалуйста, загрузите фотографии, которые были сняты или созданы исключительно вами:</string>
-  <string name="tutorial_2_subtext">— Природные объекты (цветы, животные, горы)\n— Полезные предметы (велосипеды, вокзалы)\n— Известные люди (ваш мэр, спортсмены-олимпийцы, которых вы встретили)</string>
+  <string name="tutorial_2_subtext">— Природные объекты (например, цветы, животные, горы)\n— Полезные предметы (например, велосипеды, вокзалы)\n— Известные люди (например, ваш мэр, спортсмены-олимпийцы, которых вы встретили)</string>
   <string name="tutorial_3_text">Пожалуйста, НЕ загружайте:</string>
   <string name="tutorial_3_subtext">— Селфи или фотографии ваших друзей\n— Фотографии, которые вы скачали из Интернета\n— Скриншоты несвободных приложений</string>
   <string name="tutorial_4_text">Пример загрузки:</string>
-  <string name="tutorial_4_subtext">— Название: Сиднейский оперный театр\n— Описание: Сиднейский оперный театр, вид через залив\n— Категории: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext">— Название: Сиднейский оперный театр\n— Описание: Сиднейский оперный театр, вид через залив\n— Категории: Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Загрузите свои изображения. Помогите Википедии оживить статьи!</string>
   <string name="welcome_wikipedia_subtext">Изображения в Википедии хранятся на Викискладе.</string>
   <string name="welcome_copyright_text">Ваши изображения помогают образованию людей во всём мире.</string>
-  <string name="welcome_copyright_subtext">Избегайте материалов, найденных в Интернете и защищённых авторским правом, а также изображений плакатов, книжных обложек и т.п.</string>
+  <string name="welcome_copyright_subtext">Избегайте материалов, защищённых авторским правом, например, найденных в Интернете, изображений плакатов, книжных обложек и т.п.</string>
   <string name="welcome_final_text">Вам это понятно?</string>
   <string name="welcome_final_button_text">Да!</string>
   <string name="detail_panel_cats_label">Категории</string>
@@ -158,7 +159,7 @@
   <string name="become_a_tester_title">Стать бета-тестером</string>
   <string name="become_a_tester_description">Подпишитесь на наш канал бета-версии на Google Play и получите ранний доступ к новым функциям и исправлениям ошибок</string>
   <string name="use_wikidata">Использовать Викиданные</string>
-  <string name="use_wikidata_summary">(Предупреждение: отключение может привести к большому потреблению мобильных данных)</string>
+  <string name="use_wikidata_summary">(Предупреждение: отключение может привести к значительному расходу мобильных данных)</string>
   <string name="_2fa_code">Код 2ФА</string>
   <string name="number_of_uploads">Лимит моих недавних загрузок</string>
   <string name="maximum_limit">Максимальный лимит</string>
@@ -191,14 +192,22 @@
   <string name="navigation_item_feedback">Обратная связь</string>
   <string name="navigation_item_logout">Выйти</string>
   <string name="navigation_item_info">Руководство</string>
+  <string name="navigation_item_notification">Уведомления</string>
   <string name="nearby_needs_permissions">Ближайшие места не могут быть отображены без разрешения на геолокацию</string>
   <string name="no_description_found">описание не найдено</string>
   <string name="nearby_info_menu_commons_article">Страница файла на Викискладе</string>
   <string name="nearby_info_menu_wikidata_article">Элемент Викиданных</string>
   <string name="error_while_cache">Ошибка при кэшировании картинок</string>
+  <string name="title_info">Уникальное описание, которое будет сохранено как имя файла. Вы можете использовать естественный язык, разделяя слова пробелами. Пожалуйста, не указывайте расширение файла.</string>
   <string name="description_info">Пожалуйста, подробно опишите загружаемый файл: где он был снят? что на нём изображено? каков его контекст? Пожалуйста опишите изображённых персон или объекты. Добавьте информацию, о которой нельзя легко догадаться, например, время суток, когда снимался файл. Если снято что-то необычное, постарайтесь пояснить, что именно в этом необычного.</string>
   <string name="give_permission">Дать разрешение</string>
   <string name="use_external_storage">Использовать внешнее хранилище</string>
   <string name="use_external_storage_summary">Сохранять изображения, сделанные с помощью встроенной камеры на устройстве</string>
+  <string name="send_log_file">Выслать лог-файл</string>
+  <string name="send_log_file_description">Выслать лог-файл разработчикам по е-мейлу</string>
   <string name="login_to_your_account">Войдите в свою учётную запись</string>
+  <string name="nearby_location_has_not_changed">Местоположение не изменено.</string>
+  <string name="nearby_location_not_available">Местоположение недоступно.</string>
+  <string name="location_permission_rationale_nearby">Необходимо разрешение для отображения списка ближайших мест</string>
+  <string name="read_article">ЧИТАТЬ СТАТЬЮ</string>
 </resources>

@@ -68,7 +68,7 @@
     <item quantity="other">%d pellgargadennoù</item>
   </plurals>
   <string name="categories_not_found">N\'eus bet kavet rummad ebet o klotañ gant %1$s</string>
-  <string name="categories_skip_explanation">Ouzhpennit rummadoù evit ma vo aesoc\'h kavout ho skeudennoù war Wikimedia Commons.\n\nKrogit da ouzhpennañ rummadoù.\nPouezit war ar c\'hemenn-mañ (pe distroit en a-raok) evit mont dreist ar bazenn-mañ.</string>
+  <string name="categories_skip_explanation">Ouzhpennit rummadoù evit ma vo aesoc\'h kavout ho skeudennoù war Wikimedia Commons.\n\nKrogit da skrivañ evit ouzhpennañ rummadoù.</string>
   <string name="categories_activity_title">Rummadoù</string>
   <string name="title_activity_settings">Arventennoù</string>
   <string name="title_activity_signup">En em enskrivañ</string>
@@ -120,7 +120,7 @@
   <string name="tutorial_3_text">ARABAT enporzhiañ :</string>
   <string name="tutorial_3_subtext">- Emskeudennoù pe skeudennoù eus ho mignoned\n- Skeudennoù pellgarget ganeoc\'h diwar an Internet\n- Tapadennoù-skramm arloadoù prevez</string>
   <string name="tutorial_4_text">Skouer un enporzhiadenn :</string>
-  <string name="tutorial_4_subtext">- Titl : Ti opera Sydney\n- Desskrivadur : Ti opera Sydney gwelet eus tu all ar bae\n- Rummadoù : Ti opera Sydney, Ti opera Sydney gwelet eus ar c\'hornôg, Gweloù a-bell eus ti opera Sydney</string>
+  <string name="tutorial_4_subtext" fuzzy="true">- Titl : Ti opera Sydney\n- Desskrivadur : Ti opera Sydney gwelet eus tu all ar bae\n- Rummadoù : Ti opera Sydney, Ti opera Sydney gwelet eus ar c\'hornôg, Gweloù a-bell eus ti opera Sydney</string>
   <string name="welcome_wikipedia_text">Kemerit perzh gant ho skeudennoù. Sikourit pennadoù Wikipedia da zont da vev !</string>
   <string name="welcome_wikipedia_subtext">Dont a ra skeudennoù Wikipedia eus Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Ho skeudennoù a sikour an dud da zeskiñ traoù dre ar bed a-bezh.</string>
@@ -182,8 +182,11 @@
   <string name="navigation_item_feedback">Evezhiadennoù</string>
   <string name="navigation_item_logout">Digevreañ</string>
   <string name="navigation_item_info">Tutorial</string>
+  <string name="navigation_item_notification">Kemennoù</string>
   <string name="nearby_needs_permissions">Ne c\'haller ket diskwel al lec\'hioù tost ma ne rannit ket ho lec\'hiadur</string>
   <string name="no_description_found">N\'eus bet kavet deskrivadur ebet</string>
   <string name="nearby_info_menu_commons_article" fuzzy="true">Pennad Commons</string>
   <string name="nearby_info_menu_wikidata_article">Elfenn Wikidata</string>
+  <string name="get_directions">Kaout urzhioù</string>
+  <string name="read_article">Lenn ar pennad</string>
 </resources>

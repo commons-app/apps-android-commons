@@ -67,7 +67,7 @@
     <item quantity="other">%d Fichieren eropgelueden</item>
   </plurals>
   <string name="categories_not_found">D\'Kategorie %1$s gouf net fonnt</string>
-  <string name="categories_skip_explanation">Fänkt u mat Tippen fir Kategorien derbäizesetzen.\nKlickt op dëse Message (oder dréck op Zréck) fir dëse Schrëtt z\'iwwersprangen.</string>
+  <string name="categories_skip_explanation">Setzt Kategorien dobäi fir datt Är Biller méi einfach op Wikimedia Commons ze fanne sinn.\n\nFänkt u mat Tippe fir Kategorien dobäizesetzen.</string>
   <string name="categories_activity_title">Kategorien</string>
   <string name="title_activity_settings">Astellungen</string>
   <string name="title_activity_signup">Mellt Iech un</string>
@@ -181,6 +181,7 @@
   <string name="navigation_item_feedback">Feedback</string>
   <string name="navigation_item_logout">Ausloggen</string>
   <string name="navigation_item_info">Uleedung</string>
+  <string name="navigation_item_notification">Notifikatiounen</string>
   <string name="nearby_needs_permissions">Plazen nobäi kënnen net gewise ginn ouni Rechter fir d\'Lokalisatioun</string>
   <string name="no_description_found">keng Beschreiwung fonnt</string>
   <string name="nearby_info_menu_commons_article">Commons-Fichierssäit</string>
@@ -188,5 +189,10 @@
   <string name="give_permission">Autorisatioun ginn</string>
   <string name="use_external_storage">Externe Späicher benotzen</string>
   <string name="use_external_storage_summary">Biller späicheren déi mat der in-app Kamera vun Ärem Apparat gemaach goufen</string>
+  <string name="send_log_file">Log-Fichier schécken</string>
+  <string name="send_log_file_description">Log-Fichier per E-Mail un d\'Entwéckler schécken</string>
   <string name="login_to_your_account">An Äre Benotzerkont aloggen</string>
+  <string name="nearby_location_has_not_changed">De Plaz huet net geännert.</string>
+  <string name="nearby_location_not_available">Plaz ass net disponibel.</string>
+  <string name="read_article">ARTIKEL LIESEN</string>
 </resources>

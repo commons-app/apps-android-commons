@@ -67,7 +67,7 @@
     <item quantity="other">%d अपलोड</item>
   </plurals>
   <string name="categories_not_found">%1$s से कोई श्रेणी मेल नहीं खाती</string>
-  <string name="categories_skip_explanation">अपने छवियों को विकिमीडिया कॉमन्स में अधिक ढूँढने लायक बनाने हेतु श्रेणियाँ लगायें। \n\nश्रेणी जोड़ने हेतु लिखना शुरू करें।\nइसे न करने हेतु इस संदेश को टैप करें या पीछे का बटन दबायें।</string>
+  <string name="categories_skip_explanation">विकिमीडिया कॉमन्स पर अपनी छवियों को अधिक खोजने योग्य बनाने के लिए श्रेणियां जोड़ें|\nश्रेणियां जोड़ने के लिए टाइप करना प्रारंभ करें|</string>
   <string name="categories_activity_title">श्रेणियाँ</string>
   <string name="title_activity_settings">पसंद</string>
   <string name="title_activity_signup">खाता खोलें</string>
@@ -120,7 +120,7 @@
   <string name="tutorial_3_text">कृपया अपलोड न करें:</string>
   <string name="tutorial_3_subtext">- सेल्फी या अपने दोस्तों की तस्वीरें\n- इंटरनेट से डाउनलोड की गई तस्वीरें\n- किसी निजी एप का स्क्रीनशॉट</string>
   <string name="tutorial_4_text">अपलोड का उदाहरण:</string>
-  <string name="tutorial_4_subtext">- शीर्षक: सिडनी ओपेरा हाउस\n- विवरण: सिडनी ओपेरा हाउस खाड़ी के पार से देखा गया\n- श्रेणियाँ: सिडनी ओपेरा हाउस, पश्चिम से सिडनी ओपेरा हाउस, सिडनी ओपेरा हाउस दूर से</string>
+  <string name="tutorial_4_subtext" fuzzy="true">- शीर्षक: सिडनी ओपेरा हाउस\n- विवरण: सिडनी ओपेरा हाउस खाड़ी के पार से देखा गया\n- श्रेणियाँ: सिडनी ओपेरा हाउस, पश्चिम से सिडनी ओपेरा हाउस, सिडनी ओपेरा हाउस दूर से</string>
   <string name="welcome_wikipedia_text">अपने छवियों का योगदान करें। विकिपीडिया के लेखों को जीवित करने में सहायता करें।</string>
   <string name="welcome_wikipedia_subtext">विकिपीडिया में छवि विकिमीडिया कॉमन्स से आती है।</string>
   <string name="welcome_copyright_text">आपके चित्र पूरे विश्व के लोगों को शिक्षित करेंगे।</string>
@@ -196,4 +196,6 @@
   <string name="description_info">कृपया मीडिया जितना संभव हो उतना बताएं: यह कहां लिया गया? यह क्या दिखाता है? संदर्भ क्या है? कृपया वस्तुओं या व्यक्तियों का वर्णन करें। ऐसी जानकारी का खुलासा करें जिसे आसानी से अनुमानित नहीं किया जा सकता, उदाहरण के लिए दिन का समय यदि यह परिदृश्य है। अगर मीडिया कुछ असामान्य दिखाता है, तो कृपया बताएं कि इसे क्या असामान्य बनाता है।</string>
   <string name="use_external_storage">बाहरी स्टॉरज का पृयोग करे।</string>
   <string name="use_external_storage_summary">आप अपने डिवाइस के इन-ऐप कैमरा से ली गई तस्वीरों को सहेजें।</string>
+  <string name="get_directions">दिशा - निर्देश प्राप्त करें</string>
+  <string name="read_article">लेख पढ़ें</string>
 </resources>

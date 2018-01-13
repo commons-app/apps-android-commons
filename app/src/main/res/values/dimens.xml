@@ -1,4 +1,25 @@
 <resources>
     <dimen name="bottom_peak_height">240dp</dimen>
+
+    <!-- Standard margin / padding for the containing activity -->
+    <dimen name="activity_margin_horizontal">16dp</dimen>
+    <dimen name="activity_margin_vertical">16dp</dimen>
+
+    <!-- Standard margins / padding -->
+    <dimen name="huge_gap">48dp</dimen>
+    <dimen name="large_gap">32dp</dimen>
+    <dimen name="standard_gap">16dp</dimen>
+    <dimen name="small_gap">8dp</dimen>
+    <dimen name="tiny_gap">4dp</dimen>
+
+    <!-- Component sizes -->
     <dimen name="overflow_button_dimen">48dp</dimen>
+    <dimen name="half_standard_height">24dp</dimen>
+    <dimen name="quarter_standard_height">12dp</dimen>
+
+    <!-- Text sizes -->
+    <dimen name="heading_text_size">24sp</dimen>
+    <dimen name="subheading_text_size">20sp</dimen>
+    <dimen name="normal_text">16sp</dimen>
+    <dimen name="description_text_size">14sp</dimen>
 </resources>

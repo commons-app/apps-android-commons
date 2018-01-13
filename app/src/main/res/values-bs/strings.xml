@@ -68,7 +68,7 @@
     <item quantity="other">%d postavljanja</item>
   </plurals>
   <string name="categories_not_found">Nema kategorija koje odgovoraju %1$s</string>
-  <string name="categories_skip_explanation">Dodajte kategorije da biste korisnicima olakšali pronalaženje slika na Wikimedia Commonsu.\n\nPočnite pisati da biste dodali kategoriju.\nDodirnite ovu poruku (ili pritisnite dugme \"nazad\") da biste preskočili ovaj korak.</string>
+  <string name="categories_skip_explanation" fuzzy="true">Dodajte kategorije da biste korisnicima olakšali pronalaženje slika na Wikimedia Commonsu.\n\nPočnite pisati da biste dodali kategoriju.\nDodirnite ovu poruku (ili pritisnite dugme \"nazad\") da biste preskočili ovaj korak.</string>
   <string name="categories_activity_title">Kategorije</string>
   <string name="title_activity_settings">Postavke</string>
   <string name="title_activity_signup">Registracija</string>
@@ -120,7 +120,7 @@
   <string name="tutorial_3_text">NE postavljajte:</string>
   <string name="tutorial_3_subtext">– Vlastite slike ili slike svojih prijatelja\n– Slike koje ste preuzeli s interneta\n– Slike ekrana neslobodnih aplikacija</string>
   <string name="tutorial_4_text">Primjer postavljanja:</string>
-  <string name="tutorial_4_subtext">– Naziv: Sidnejska opera\n– Opis: Pogled na Sidnejsku operu sa zaliva\n– Kategorije: Sidnejska opera, Sidnejska opera sa zapada, Sidnejska opera iz daleka</string>
+  <string name="tutorial_4_subtext" fuzzy="true">– Naziv: Sidnejska opera\n– Opis: Pogled na Sidnejsku operu sa zaliva\n– Kategorije: Sidnejska opera, Sidnejska opera sa zapada, Sidnejska opera iz daleka</string>
   <string name="welcome_wikipedia_text">Podijelite vaše slike. Pomozite člancima na Wikipediji da zažive!</string>
   <string name="welcome_wikipedia_subtext">Slike na Wikipediji se uzimaju sa Wikimedia Commonsa.</string>
   <string name="welcome_copyright_text">Vaše slike pomažu u obrazovanju ljudi širom svijeta.</string>

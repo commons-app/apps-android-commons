@@ -53,7 +53,7 @@
   <string name="categories_search_text_hint">Пошук категорій</string>
   <string name="menu_save_categories">Зберегти</string>
   <string name="refresh_button">Оновити</string>
-  <string name="gps_disabled">GPS вимкнено на Вашому пристрої. Чи хотіли б Ви його увімкнути?</string>
+  <string name="gps_disabled">GPS вимкнено на Вашому пристрої. Бажаєте увімкнути його?</string>
   <string name="enable_gps">Увімкнути GPS</string>
   <string name="contributions_subtitle_zero">Ще нема завантажень</string>
   <plurals name="contributions_subtitle">
@@ -76,7 +76,7 @@
     <item quantity="other">%d завантажень</item>
   </plurals>
   <string name="categories_not_found">Категорій, відповідних %1$s, не знайдено</string>
-  <string name="categories_skip_explanation">Додайте категорії, щоб Ваші зображення було легше знайти у Вікісховищі. \n\nПочніть ввід, щоб додати категорії.\nНатисніть на це повідомлення (або поверніться назад), щоб пропустити цей крок.</string>
+  <string name="categories_skip_explanation" fuzzy="true">Додайте категорії, щоб Ваші зображення було легше знайти у Вікісховищі. \n\nПочніть ввід, щоб додати категорії.\nНатисніть на це повідомлення (або поверніться назад), щоб пропустити цей крок.</string>
   <string name="categories_activity_title">Категорії</string>
   <string name="title_activity_settings">Налаштування</string>
   <string name="title_activity_signup">Зареєструватися</string>
@@ -129,7 +129,7 @@
   <string name="tutorial_3_text">Будь ласка, НЕ завантажуйте:</string>
   <string name="tutorial_3_subtext">u2022 Селфі або фото своїх друзів \nu2022 Зображення, які Ви завантажили з інтернету \nu2022 Скріншоти патентованих програм</string>
   <string name="tutorial_4_text">Приклад завантаження:</string>
-  <string name="tutorial_4_subtext">u2022 Назва: Сіднейський оперний театр \nu2022 Опис: Вид на Сіднейський оперний театр з боку бухти \nu2022 Категорії: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext" fuzzy="true">u2022 Назва: Сіднейський оперний театр \nu2022 Опис: Вид на Сіднейський оперний театр з боку бухти \nu2022 Категорії: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Надсилайте Ваші зображення. Допоможіть оживити статті Вікіпедії!</string>
   <string name="welcome_wikipedia_subtext">Зображення у Вікіпедії надходять з Вікісховища.</string>
   <string name="welcome_copyright_text">Ваші зображення допомагають освіті людей у всьому світі.</string>
@@ -206,5 +206,8 @@
   <string name="give_permission">Надати дозвіл</string>
   <string name="use_external_storage">Використовувати зовнішнє сховище</string>
   <string name="use_external_storage_summary">Зберігати зображення, виконані вбудованою в додатку камерою Вашого пристрою</string>
+  <string name="send_log_file">Надіслати лог-файл</string>
+  <string name="send_log_file_description">Надіслати лог-файл розробникам електронною поштою</string>
   <string name="login_to_your_account">Увійдіть у свій обліковий запис</string>
+  <string name="nearby_location_has_not_changed">Розташування не змінено</string>
 </resources>

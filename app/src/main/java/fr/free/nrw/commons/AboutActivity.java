@@ -1,7 +1,5 @@
 package fr.free.nrw.commons;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -10,10 +8,18 @@ import butterknife.ButterKnife;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
 
+/**
+ * Represents about screen of this app
+ */
 public class AboutActivity extends NavigationBaseActivity {
     @BindView(R.id.about_version) TextView versionText;
     @BindView(R.id.about_license) HtmlTextView aboutLicenseText;
 
+    /**
+     * This method helps in the creation About screen
+     *
+     * @param savedInstanceState Data bundle
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,10 +32,5 @@ public class AboutActivity extends NavigationBaseActivity {
 
         versionText.setText(BuildConfig.VERSION_NAME);
         initDrawer();
-    }
-
-    public static void startYourself(Context context) {
-        Intent settingsIntent = new Intent(context, AboutActivity.class);
-        context.startActivity(settingsIntent);
     }
 }

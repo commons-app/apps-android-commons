@@ -24,7 +24,7 @@
     <item quantity="one">1 dosye selagnayış</item>
     <item quantity="other">%d dosye Selagnayışi</item>
   </plurals>
-  <string name="title_activity_contributions" fuzzy="true">Barkerdışê mı</string>
+  <string name="title_activity_contributions">Barkerdışê mınê peyêni</string>
   <string name="contribution_state_queued">Ratneya</string>
   <string name="contribution_state_failed">Nêbı</string>
   <string name="contribution_state_in_progress">%1$d%% temamya</string>
@@ -63,7 +63,7 @@
     <item quantity="other">%d bar kerdışi </item>
   </plurals>
   <string name="categories_not_found">Kategoriyan de %1$s deye theba çıniyo</string>
-  <string name="categories_skip_explanation">Kategori cı kerdışi rê nusnayış bıkeré. Ena gamer ravêrdışi rê mesaci bıpıloğnê yana peyd şırê.</string>
+  <string name="categories_skip_explanation" fuzzy="true">Kategori cı kerdışi rê nusnayış bıkeré. Ena gamer ravêrdışi rê mesaci bıpıloğnê yana peyd şırê.</string>
   <string name="categories_activity_title">Kategoriy</string>
   <string name="title_activity_settings">Sazi</string>
   <string name="title_activity_signup">Qeyd be</string>
@@ -118,4 +118,5 @@
   <string name="navigation_drawer_open">Ake</string>
   <string name="navigation_item_home">Keye</string>
   <string name="navigation_item_upload">Bar ke</string>
+  <string name="navigation_item_logout">Veciyayış</string>
 </resources>

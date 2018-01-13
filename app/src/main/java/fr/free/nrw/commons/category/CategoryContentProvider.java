@@ -10,14 +10,16 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
-import fr.free.nrw.commons.CommonsApplication;
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import timber.log.Timber;
 
 import static android.content.UriMatcher.NO_MATCH;
-import static fr.free.nrw.commons.data.Category.Table.ALL_FIELDS;
-import static fr.free.nrw.commons.data.Category.Table.COLUMN_ID;
-import static fr.free.nrw.commons.data.Category.Table.TABLE_NAME;
+import static fr.free.nrw.commons.category.CategoryDao.Table.ALL_FIELDS;
+import static fr.free.nrw.commons.category.CategoryDao.Table.COLUMN_ID;
+import static fr.free.nrw.commons.category.CategoryDao.Table.TABLE_NAME;
 
 public class CategoryContentProvider extends ContentProvider {
 
@@ -36,17 +38,15 @@ public class CategoryContentProvider extends ContentProvider {
         uriMatcher.addURI(AUTHORITY, BASE_PATH + "/#", CATEGORIES_ID);
     }
 
-    private DBOpenHelper dbOpenHelper;
-
     public static Uri uriForId(int id) {
         return Uri.parse(BASE_URI.toString() + "/" + id);
     }
 
-    @SuppressWarnings("ConstantConditions")
+    @Inject DBOpenHelper dbOpenHelper;
+
     @Override
     public boolean onCreate() {
-        CommonsApplication app = ((CommonsApplication) getContext().getApplicationContext());
-        dbOpenHelper = app.getDBOpenHelper();
+        AndroidInjection.inject(this);
         return false;
     }
 

@@ -12,10 +12,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/sydney_opera_house"
-        android:paddingLeft="24dp"
-        android:paddingRight="24dp"
-        android:paddingTop="24dp"
-        android:paddingBottom="24dp"
+        android:paddingLeft="@dimen/large_gap"
+        android:paddingRight="@dimen/standard_gap"
+        android:paddingTop="@dimen/large_gap"
+        android:paddingBottom="@dimen/large_gap"
         android:adjustViewBounds="true"
         android:layout_gravity="center"
         android:contentDescription="@string/welcome_image_sydney_opera_house"
@@ -34,7 +34,7 @@
             android:layout_gravity="center"
             android:textStyle="bold"
             android:textAlignment="center"
-            android:paddingTop="24dp"
+            android:textSize="@dimen/normal_text"
             android:gravity="center_horizontal"
             android:textColor="@android:color/white"/>
 
@@ -45,7 +45,7 @@
             android:text="@string/tutorial_4_subtext"
             android:layout_gravity="center"
             android:textAlignment="textStart"
-            android:paddingTop="16dp"
+            android:paddingTop="@dimen/standard_gap"
             android:gravity="start"
             android:textColor="@android:color/white"
             />

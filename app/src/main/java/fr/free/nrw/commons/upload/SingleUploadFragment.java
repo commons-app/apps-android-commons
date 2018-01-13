@@ -7,7 +7,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.Fragment;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -28,11 +28,15 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemSelected;
 import butterknife.OnTouch;
+import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.settings.Prefs;
@@ -41,7 +45,7 @@ import timber.log.Timber;
 import static android.view.MotionEvent.ACTION_DOWN;
 import static android.view.MotionEvent.ACTION_UP;
 
-public class SingleUploadFragment extends Fragment {
+public class SingleUploadFragment extends DaggerFragment {
 
     @BindView(R.id.titleEdit) EditText titleEdit;
     @BindView(R.id.descEdit) EditText descEdit;
@@ -49,7 +53,8 @@ public class SingleUploadFragment extends Fragment {
     @BindView(R.id.share_license_summary) TextView licenseSummaryView;
     @BindView(R.id.licenseSpinner) Spinner licenseSpinner;
 
-    private SharedPreferences prefs;
+    @Inject @Named("default_preferences") SharedPreferences prefs;
+
     private String license;
     private OnUploadActionInitiated uploadActionInitiatedHandler;
     private TitleTextWatcher textWatcher = new TitleTextWatcher();
@@ -72,11 +77,10 @@ public class SingleUploadFragment extends Fragment {
                 String desc = descEdit.getText().toString();
 
                 //Save the title/desc in short-lived cache so next time this fragment is loaded, we can access these
-                SharedPreferences titleDesc = PreferenceManager.getDefaultSharedPreferences(getActivity());
-                SharedPreferences.Editor editor = titleDesc.edit();
-                editor.putString("Title", title);
-                editor.putString("Desc", desc);
-                editor.apply();
+                prefs.edit()
+                        .putString("Title", title)
+                        .putString("Desc", desc)
+                        .apply();
 
                 uploadActionInitiatedHandler.uploadActionInitiated(title, desc);
                 return true;
@@ -91,7 +95,6 @@ public class SingleUploadFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_single_upload, container, false);
         ButterKnife.bind(this, rootView);
 
-
         ArrayList<String> licenseItems = new ArrayList<>();
         licenseItems.add(getString(R.string.license_name_cc0));
         licenseItems.add(getString(R.string.license_name_cc_by));
@@ -99,7 +102,6 @@ public class SingleUploadFragment extends Fragment {
         licenseItems.add(getString(R.string.license_name_cc_by_four));
         licenseItems.add(getString(R.string.license_name_cc_by_sa_four));
 
-        prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         license = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
 
         // check if this is the first time we have uploaded
@@ -172,9 +174,9 @@ public class SingleUploadFragment extends Fragment {
         }
 
         setLicenseSummary(license);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(Prefs.DEFAULT_LICENSE, license);
-        editor.commit();
+        prefs.edit()
+                .putString(Prefs.DEFAULT_LICENSE, license)
+                .commit();
     }
 
     @OnTouch(R.id.share_license_summary)
@@ -182,7 +184,7 @@ public class SingleUploadFragment extends Fragment {
         if (motionEvent.getActionMasked() == ACTION_DOWN) {
             Intent intent = new Intent();
             intent.setAction(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(Utils.licenseUrlFor(license)));
+            intent.setData(Uri.parse(licenseUrlFor(license)));
             startActivity(intent);
             return true;
         } else {
@@ -193,9 +195,8 @@ public class SingleUploadFragment extends Fragment {
     @OnClick(R.id.titleDescButton)
     void setTitleDescButton() {
         //Retrieve last title and desc entered
-        SharedPreferences titleDesc = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String title = titleDesc.getString("Title", "");
-        String desc = titleDesc.getString("Desc", "");
+        String title = prefs.getString("Title", "");
+        String desc = prefs.getString("Desc", "");
         Timber.d("Title: %s, Desc: %s", title, desc);
 
         titleEdit.setText(title);
@@ -261,6 +262,23 @@ public class SingleUploadFragment extends Fragment {
             InputMethodManager imm = (InputMethodManager) target.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(target.getWindowToken(), 0);
         }
+    }
+
+    @NonNull
+    private String licenseUrlFor(String license) {
+        switch (license) {
+            case Prefs.Licenses.CC_BY_3:
+                return "https://creativecommons.org/licenses/by/3.0/";
+            case Prefs.Licenses.CC_BY_4:
+                return "https://creativecommons.org/licenses/by/4.0/";
+            case Prefs.Licenses.CC_BY_SA_3:
+                return "https://creativecommons.org/licenses/by-sa/3.0/";
+            case Prefs.Licenses.CC_BY_SA_4:
+                return "https://creativecommons.org/licenses/by-sa/4.0/";
+            case Prefs.Licenses.CC0:
+                return "https://creativecommons.org/publicdomain/zero/1.0/";
+        }
+        throw new RuntimeException("Unrecognized license value: " + license);
     }
 
     public interface OnUploadActionInitiated {

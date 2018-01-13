@@ -151,8 +151,9 @@ public class FileUtils {
         } catch (IllegalArgumentException e) {
             Timber.d(e);
         } finally {
-            if (cursor != null)
+            if (cursor != null) {
                 cursor.close();
+            }
         }
         return null;
     }

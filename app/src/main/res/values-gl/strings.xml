@@ -68,7 +68,7 @@
     <item quantity="other">%d cargas</item>
   </plurals>
   <string name="categories_not_found">Non se atopou ningunha categoría que coincidise con \"%1$s\"</string>
-  <string name="categories_skip_explanation">Engada categorías para facer máis accesibles as súas imaxes na Wikimedia Commons.\n\nComece a escribir para engadir categorías.\nPrema nesta mensaxe (ou no botón \"Atrás\") para saltar este paso.</string>
+  <string name="categories_skip_explanation">Engada categorías para facer máis accesibles as súas imaxes na Wikimedia Commons.\nComece a escribir para engadir categorías.</string>
   <string name="categories_activity_title">Categorías</string>
   <string name="title_activity_settings">Configuracións</string>
   <string name="title_activity_signup">Rexistrarse</string>
@@ -121,7 +121,7 @@
   <string name="tutorial_3_text">Por favor, NON subaː</string>
   <string name="tutorial_3_subtext">- Selfies ou imaxes dos seus amigos\n- Imaxes descargadas de Internet\n- Capturas de pantalla de aplicacións con dereitos de autor</string>
   <string name="tutorial_4_text">Exemplo de subaː</string>
-  <string name="tutorial_4_subtext">- Título: Ópera de Sydney\n- Descrición: A Ópera de Sydney vista dende a baía\n- Categorías: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext">- Título: Ópera de Sydney\n- Descrición: A Ópera de Sydney vista dende a baía\n- Categorías: Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Achegue as súas imaxes. Axude a que os artigos da Wikipedia cobren vida!</string>
   <string name="welcome_wikipedia_subtext">As imaxes da Wikipedia veñen da Wikimedia Commons.</string>
   <string name="welcome_copyright_text">As súas imaxes axudan a educar xente de todo o mundo.</string>
@@ -188,6 +188,7 @@
   <string name="navigation_item_feedback">Comentarios</string>
   <string name="navigation_item_logout">Saír</string>
   <string name="navigation_item_info">Titorial</string>
+  <string name="navigation_item_notification">Notificacións</string>
   <string name="nearby_needs_permissions">Os sitios situados preto non poden visualizarse sen permisos de localización</string>
   <string name="no_description_found">non se atopou descrición</string>
   <string name="nearby_info_menu_commons_article">Páxina do ficheiro en Commons</string>
@@ -198,5 +199,12 @@
   <string name="give_permission">Outorgar permiso</string>
   <string name="use_external_storage">Usar o almacenamento externo</string>
   <string name="use_external_storage_summary">Gardar as imaxes capturadas coa cámara do seu dispositivo</string>
+  <string name="send_log_file">Enviar ficheiro de rexistro</string>
+  <string name="send_log_file_description">Enviar ficheiro de rexistro ós desenvolvedores por correo electrónico</string>
   <string name="login_to_your_account">Comezar sesión na súa conta</string>
+  <string name="nearby_location_has_not_changed">A localización non cambiou.</string>
+  <string name="nearby_location_not_available">A localización non está dispoñible.</string>
+  <string name="location_permission_rationale_nearby">Precísase permiso para amosar unha lista de lugares preto de aquí</string>
+  <string name="get_directions">OBTER DIRECCIÓNS</string>
+  <string name="read_article">LER ARTIGO</string>
 </resources>

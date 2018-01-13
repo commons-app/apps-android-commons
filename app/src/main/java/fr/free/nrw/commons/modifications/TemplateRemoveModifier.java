@@ -41,18 +41,18 @@ public class TemplateRemoveModifier extends PageModifier {
         Pattern templateStartPattern = Pattern.compile("\\{\\{" + templateNormalized, Pattern.CASE_INSENSITIVE);
         Matcher matcher = templateStartPattern.matcher(pageContents);
 
-        while(matcher.find()) {
+        while (matcher.find()) {
             int braceCount = 1;
             int startIndex = matcher.start();
             int curIndex = matcher.end();
             Matcher openMatch = PATTERN_TEMPLATE_OPEN.matcher(pageContents);
             Matcher closeMatch = PATTERN_TEMPLATE_CLOSE.matcher(pageContents);
 
-            while(curIndex < pageContents.length()) {
+            while (curIndex < pageContents.length()) {
                 boolean openFound = openMatch.find(curIndex);
                 boolean closeFound = closeMatch.find(curIndex);
 
-                if(openFound && (!closeFound || openMatch.start() < closeMatch.start())) {
+                if (openFound && (!closeFound || openMatch.start() < closeMatch.start())) {
                     braceCount++;
                     curIndex = openMatch.end();
                 } else if (closeFound) {
@@ -71,8 +71,8 @@ public class TemplateRemoveModifier extends PageModifier {
             }
 
             // Strip trailing whitespace
-            while(curIndex < pageContents.length()) {
-                if(pageContents.charAt(curIndex) == ' ' || pageContents.charAt(curIndex) == '\n') {
+            while (curIndex < pageContents.length()) {
+                if (pageContents.charAt(curIndex) == ' ' || pageContents.charAt(curIndex) == '\n') {
                     curIndex++;
                 } else {
                     break;
