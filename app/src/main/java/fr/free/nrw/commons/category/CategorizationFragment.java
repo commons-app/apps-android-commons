@@ -84,11 +84,6 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
     });
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_categorization, container, false);
@@ -138,11 +133,6 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
                 return false;
             });
         }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
     }
 
     @Override

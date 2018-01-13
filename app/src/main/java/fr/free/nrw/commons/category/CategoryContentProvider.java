@@ -43,12 +43,6 @@ public class CategoryContentProvider extends CommonsDaggerContentProvider {
 
     @Inject DBOpenHelper dbOpenHelper;
 
-    @Override
-    public boolean onCreate() {
-        super.onCreate();
-        return true;
-    }
-
     @SuppressWarnings("ConstantConditions")
     @Override
     public Cursor query(@NonNull Uri uri, String[] projection, String selection,

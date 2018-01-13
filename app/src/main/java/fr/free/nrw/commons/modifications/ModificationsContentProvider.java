@@ -40,12 +40,6 @@ public class ModificationsContentProvider extends CommonsDaggerContentProvider {
     @Inject DBOpenHelper dbOpenHelper;
 
     @Override
-    public boolean onCreate() {
-        super.onCreate();
-        return true;
-    }
-
-    @Override
     public Cursor query(@NonNull Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
         queryBuilder.setTables(TABLE_NAME);

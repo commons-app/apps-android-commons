@@ -16,11 +16,6 @@ public class WikiAccountAuthenticatorService extends CommonsDaggerService {
     private WikiAccountAuthenticator wikiAccountAuthenticator = null;
 
     @Override
-    public void onCreate() {
-        super.onCreate();
-    }
-
-    @Override
     public IBinder onBind(Intent intent) {
         if (!intent.getAction().equals(ACTION_AUTHENTICATOR_INTENT)) {
             return null;
