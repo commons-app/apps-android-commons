@@ -10,7 +10,7 @@ import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 
-public abstract class FixedDaggerFragment extends Fragment implements HasSupportFragmentInjector {
+public abstract class CommonsDaggerSupportFragment extends Fragment implements HasSupportFragmentInjector {
 
     @Inject
     DispatchingAndroidInjector<Fragment> childFragmentInjector;

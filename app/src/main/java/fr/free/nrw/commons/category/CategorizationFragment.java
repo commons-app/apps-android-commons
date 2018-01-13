@@ -35,7 +35,7 @@ import javax.inject.Named;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.di.FixedDaggerFragment;
+import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.upload.MwVolleyApi;
 import fr.free.nrw.commons.utils.StringSortingUtils;
@@ -50,7 +50,7 @@ import static android.view.KeyEvent.KEYCODE_BACK;
 /**
  * Displays the category suggestion and selection screen. Category search is initiated here.
  */
-public class CategorizationFragment extends FixedDaggerFragment {
+public class CategorizationFragment extends CommonsDaggerSupportFragment {
 
     public static final int SEARCH_CATS_LIMIT = 25;
 

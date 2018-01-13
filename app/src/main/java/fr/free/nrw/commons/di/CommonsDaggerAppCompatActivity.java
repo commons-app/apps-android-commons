@@ -12,7 +12,7 @@ import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 
-public abstract class FixedDaggerAppCompatActivity extends AppCompatActivity implements HasSupportFragmentInjector {
+public abstract class CommonsDaggerAppCompatActivity extends AppCompatActivity implements HasSupportFragmentInjector {
 
     @Inject
     DispatchingAndroidInjector<Fragment> supportFragmentInjector;

@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.modifications;
 
-import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
@@ -12,15 +11,13 @@ import android.text.TextUtils;
 
 import javax.inject.Inject;
 
-import dagger.Lazy;
-import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.data.DBOpenHelper;
-import fr.free.nrw.commons.di.FixedDaggerContentProvider;
+import fr.free.nrw.commons.di.CommonsDaggerContentProvider;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.modifications.ModifierSequenceDao.Table.TABLE_NAME;
 
-public class ModificationsContentProvider extends FixedDaggerContentProvider {
+public class ModificationsContentProvider extends CommonsDaggerContentProvider {
 
     private static final int MODIFICATIONS = 1;
     private static final int MODIFICATIONS_ID = 2;
@@ -40,7 +37,7 @@ public class ModificationsContentProvider extends FixedDaggerContentProvider {
         return Uri.parse(BASE_URI.toString() + "/" + id);
     }
 
-    @Inject Lazy<DBOpenHelper> dbOpenHelper;
+    @Inject DBOpenHelper dbOpenHelper;
 
     @Override
     public boolean onCreate() {
@@ -62,7 +59,7 @@ public class ModificationsContentProvider extends FixedDaggerContentProvider {
                 throw new IllegalArgumentException("Unknown URI" + uri);
         }
 
-        SQLiteDatabase db = dbOpenHelper.get().getReadableDatabase();
+        SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
 
         Cursor cursor = queryBuilder.query(db, projection, selection, selectionArgs, null, null, sortOrder);
         cursor.setNotificationUri(getContext().getContentResolver(), uri);
@@ -78,7 +75,7 @@ public class ModificationsContentProvider extends FixedDaggerContentProvider {
     @Override
     public Uri insert(@NonNull Uri uri, ContentValues contentValues) {
         int uriType = uriMatcher.match(uri);
-        SQLiteDatabase sqlDB = dbOpenHelper.get().getWritableDatabase();
+        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         long id = 0;
         switch (uriType) {
             case MODIFICATIONS:
@@ -94,7 +91,7 @@ public class ModificationsContentProvider extends FixedDaggerContentProvider {
     @Override
     public int delete(@NonNull Uri uri, String s, String[] strings) {
         int uriType = uriMatcher.match(uri);
-        SQLiteDatabase sqlDB = dbOpenHelper.get().getWritableDatabase();
+        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         switch (uriType) {
             case MODIFICATIONS_ID:
                 String id = uri.getLastPathSegment();
@@ -112,7 +109,7 @@ public class ModificationsContentProvider extends FixedDaggerContentProvider {
     public int bulkInsert(@NonNull Uri uri, @NonNull ContentValues[] values) {
         Timber.d("Hello, bulk insert! (ModificationsContentProvider)");
         int uriType = uriMatcher.match(uri);
-        SQLiteDatabase sqlDB = dbOpenHelper.get().getWritableDatabase();
+        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         sqlDB.beginTransaction();
         switch (uriType) {
             case MODIFICATIONS:
@@ -140,7 +137,7 @@ public class ModificationsContentProvider extends FixedDaggerContentProvider {
         In here, the only concat created argument is for id. It is cast to an int, and will error out otherwise.
          */
         int uriType = uriMatcher.match(uri);
-        SQLiteDatabase sqlDB = dbOpenHelper.get().getWritableDatabase();
+        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         int rowsUpdated = 0;
         switch (uriType) {
             case MODIFICATIONS:

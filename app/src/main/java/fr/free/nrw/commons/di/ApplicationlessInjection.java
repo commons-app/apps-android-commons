@@ -29,18 +29,12 @@ public class ApplicationlessInjection
 
     private static ApplicationlessInjection instance = null;
 
-    @Inject
-    DispatchingAndroidInjector<Activity> activityInjector;
-    @Inject
-    DispatchingAndroidInjector<BroadcastReceiver> broadcastReceiverInjector;
-    @Inject
-    DispatchingAndroidInjector<android.app.Fragment> fragmentInjector;
-    @Inject
-    DispatchingAndroidInjector<Fragment> supportFragmentInjector;
-    @Inject
-    DispatchingAndroidInjector<Service> serviceInjector;
-    @Inject
-    DispatchingAndroidInjector<ContentProvider> contentProviderInjector;
+    @Inject DispatchingAndroidInjector<Activity> activityInjector;
+    @Inject DispatchingAndroidInjector<BroadcastReceiver> broadcastReceiverInjector;
+    @Inject DispatchingAndroidInjector<android.app.Fragment> fragmentInjector;
+    @Inject DispatchingAndroidInjector<Fragment> supportFragmentInjector;
+    @Inject DispatchingAndroidInjector<Service> serviceInjector;
+    @Inject DispatchingAndroidInjector<ContentProvider> contentProviderInjector;
 
     private CommonsApplicationComponent commonsApplicationComponent;
 

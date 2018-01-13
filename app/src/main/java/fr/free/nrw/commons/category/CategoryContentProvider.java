@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.category;
 
-import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
@@ -12,10 +11,8 @@ import android.text.TextUtils;
 
 import javax.inject.Inject;
 
-import dagger.Lazy;
-import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.data.DBOpenHelper;
-import fr.free.nrw.commons.di.FixedDaggerContentProvider;
+import fr.free.nrw.commons.di.CommonsDaggerContentProvider;
 import timber.log.Timber;
 
 import static android.content.UriMatcher.NO_MATCH;
@@ -23,7 +20,7 @@ import static fr.free.nrw.commons.category.CategoryDao.Table.ALL_FIELDS;
 import static fr.free.nrw.commons.category.CategoryDao.Table.COLUMN_ID;
 import static fr.free.nrw.commons.category.CategoryDao.Table.TABLE_NAME;
 
-public class CategoryContentProvider extends FixedDaggerContentProvider {
+public class CategoryContentProvider extends CommonsDaggerContentProvider {
 
     public static final String AUTHORITY = "fr.free.nrw.commons.categories.contentprovider";
     // For URI matcher
@@ -44,7 +41,7 @@ public class CategoryContentProvider extends FixedDaggerContentProvider {
         return Uri.parse(BASE_URI.toString() + "/" + id);
     }
 
-    @Inject Lazy<DBOpenHelper> dbOpenHelper;
+    @Inject DBOpenHelper dbOpenHelper;
 
     @Override
     public boolean onCreate() {
@@ -61,7 +58,7 @@ public class CategoryContentProvider extends FixedDaggerContentProvider {
 
         int uriType = uriMatcher.match(uri);
 
-        SQLiteDatabase db = dbOpenHelper.get().getReadableDatabase();
+        SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
         Cursor cursor;
 
         switch (uriType) {
@@ -97,7 +94,7 @@ public class CategoryContentProvider extends FixedDaggerContentProvider {
     @Override
     public Uri insert(@NonNull Uri uri, ContentValues contentValues) {
         int uriType = uriMatcher.match(uri);
-        SQLiteDatabase sqlDB = dbOpenHelper.get().getWritableDatabase();
+        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         long id;
         switch (uriType) {
             case CATEGORIES:
@@ -120,7 +117,7 @@ public class CategoryContentProvider extends FixedDaggerContentProvider {
     public int bulkInsert(@NonNull Uri uri, @NonNull ContentValues[] values) {
         Timber.d("Hello, bulk insert! (CategoryContentProvider)");
         int uriType = uriMatcher.match(uri);
-        SQLiteDatabase sqlDB = dbOpenHelper.get().getWritableDatabase();
+        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         sqlDB.beginTransaction();
         switch (uriType) {
             case CATEGORIES:
@@ -152,7 +149,7 @@ public class CategoryContentProvider extends FixedDaggerContentProvider {
         and will error out otherwise.
          */
         int uriType = uriMatcher.match(uri);
-        SQLiteDatabase sqlDB = dbOpenHelper.get().getWritableDatabase();
+        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         int rowsUpdated;
         switch (uriType) {
             case CATEGORIES_ID:

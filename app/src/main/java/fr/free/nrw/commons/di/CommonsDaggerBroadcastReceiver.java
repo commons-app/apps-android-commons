@@ -6,9 +6,9 @@ import android.content.Intent;
 
 import dagger.android.AndroidInjector;
 
-public abstract class FixedDaggerBroadcastReceiver extends BroadcastReceiver {
+public abstract class CommonsDaggerBroadcastReceiver extends BroadcastReceiver {
 
-    public FixedDaggerBroadcastReceiver() {
+    public CommonsDaggerBroadcastReceiver() {
         super();
     }
 

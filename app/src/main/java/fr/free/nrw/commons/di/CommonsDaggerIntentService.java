@@ -5,9 +5,9 @@ import android.app.Service;
 
 import dagger.android.AndroidInjector;
 
-public abstract class FixedDaggerIntentService extends IntentService {
+public abstract class CommonsDaggerIntentService extends IntentService {
 
-    public FixedDaggerIntentService(String name) {
+    public CommonsDaggerIntentService(String name) {
         super(name);
     }
 

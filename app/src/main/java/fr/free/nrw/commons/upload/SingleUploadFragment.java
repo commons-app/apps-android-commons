@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -37,18 +36,16 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemSelected;
 import butterknife.OnTouch;
-import dagger.android.support.AndroidSupportInjection;
-import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.di.FixedDaggerFragment;
+import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.settings.Prefs;
 import timber.log.Timber;
 
 import static android.view.MotionEvent.ACTION_DOWN;
 import static android.view.MotionEvent.ACTION_UP;
 
-public class SingleUploadFragment extends FixedDaggerFragment {
+public class SingleUploadFragment extends CommonsDaggerSupportFragment {
 
     @BindView(R.id.titleEdit) EditText titleEdit;
     @BindView(R.id.descEdit) EditText descEdit;
@@ -68,11 +65,6 @@ public class SingleUploadFragment extends FixedDaggerFragment {
         if (titleEdit != null) {
             menu.findItem(R.id.menu_upload_single).setEnabled(titleEdit.getText().length() != 0);
         }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
     }
 
     @Override

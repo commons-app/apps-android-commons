@@ -5,9 +5,9 @@ import android.content.ContentProvider;
 import dagger.android.AndroidInjector;
 
 
-public abstract class FixedDaggerContentProvider extends ContentProvider {
+public abstract class CommonsDaggerContentProvider extends ContentProvider {
 
-    public FixedDaggerContentProvider() {
+    public CommonsDaggerContentProvider() {
         super();
     }
 

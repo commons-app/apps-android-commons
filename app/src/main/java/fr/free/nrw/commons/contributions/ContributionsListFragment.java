@@ -1,13 +1,11 @@
 package fr.free.nrw.commons.contributions;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -27,10 +25,8 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import dagger.android.support.AndroidSupportInjection;
-import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.di.FixedDaggerFragment;
+import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.nearby.NearbyActivity;
 import timber.log.Timber;
 
@@ -40,7 +36,7 @@ import static android.app.Activity.RESULT_OK;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import static android.view.View.GONE;
 
-public class ContributionsListFragment extends FixedDaggerFragment {
+public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
     @BindView(R.id.contributionsList)
     GridView contributionsList;
@@ -77,11 +73,6 @@ public class ContributionsListFragment extends FixedDaggerFragment {
 
         changeProgressBarVisibility(true);
         return v;
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
     }
 
     public ListAdapter getAdapter() {
