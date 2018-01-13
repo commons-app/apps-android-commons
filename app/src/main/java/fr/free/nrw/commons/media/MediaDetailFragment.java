@@ -1,13 +1,11 @@
 package fr.free.nrw.commons.media;
 
-import android.content.Context;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,8 +24,6 @@ import java.util.Locale;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
-import dagger.android.support.AndroidSupportInjection;
-import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.License;
 import fr.free.nrw.commons.LicenseList;
 import fr.free.nrw.commons.Media;
@@ -37,7 +33,6 @@ import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LatLng;
-import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.ui.widget.CompatTextView;
 import timber.log.Timber;
 

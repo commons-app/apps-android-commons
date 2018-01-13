@@ -2,7 +2,6 @@ package fr.free.nrw.commons.media;
 
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.DataSetObserver;
@@ -29,8 +28,6 @@ import android.view.ViewGroup;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import dagger.android.support.AndroidSupportInjection;
-import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
