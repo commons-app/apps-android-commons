@@ -27,7 +27,6 @@ public class ImageUtils {
 
     public enum Result {
         IMAGE_DARK,
-        IMAGE_BLURRY,
         IMAGE_OK
     }
 
@@ -35,16 +34,15 @@ public class ImageUtils {
      * BitmapRegionDecoder allows us to process a large bitmap by breaking it down into smaller rectangles. The rectangles
      * are obtained by setting an initial width, height and start position of the rectangle as a factor of the width and
      * height of the original bitmap and then manipulating the width, height and position to loop over the entire original
-     * bitmap. Each individual rectangle is independently processed to check if its bright enough or too blurry. Based on
-     * the factor of "bright enough" or "blurry" individual rectangles amongst the total rectangles into which the image
+     * bitmap. Each individual rectangle is independently processed to check if its too dark. Based on
+     * the factor of "bright enough" individual rectangles amongst the total rectangles into which the image
      * was divided, we will declare the image as wanted/unwanted
      *
      * @param bitmapRegionDecoder BitmapRegionDecoder for the image we wish to process
      * @return Result.IMAGE_OK if image is neither dark nor blurry or if the input bitmapRegionDecoder provided is null
-     *         Result.IMAGE_DARK if image is dark
-     *         Result.IMAGE_BLURRY if image is blurry
+     *         Result.IMAGE_DARK if image is too dark
      */
-    public static Result checkIfImageIsDarkOrBlurry(BitmapRegionDecoder bitmapRegionDecoder) {
+    public static Result checkIfImageIsTooDark(BitmapRegionDecoder bitmapRegionDecoder) {
         if (bitmapRegionDecoder == null) {
             Timber.e("Expected bitmapRegionDecoder was null");
             return Result.IMAGE_OK;
@@ -60,7 +58,6 @@ public class ImageUtils {
 
         int totalDividedRectangles = 0;
         int numberOfDarkRectangles = 0;
-        int numberOfBlurredRectangles = 0;
 
         while ((checkImageRightPosition <= loadImageWidth) && (checkImageLeftPosition < checkImageRightPosition)) {
             while ((checkImageBottomPosition <= loadImageHeight) && (checkImageTopPosition < checkImageBottomPosition)) {
@@ -75,9 +72,6 @@ public class ImageUtils {
                     numberOfDarkRectangles++;
                 }
 
-                if (checkIfImageIsBlurred(processBitmap)) {
-                    numberOfBlurredRectangles++;
-                }
                 checkImageTopPosition = checkImageBottomPosition;
                 checkImageBottomPosition += (checkImageBottomPosition < (loadImageHeight - checkImageBottomPosition)) ? checkImageBottomPosition : (loadImageHeight - checkImageBottomPosition);
             }
@@ -89,15 +83,9 @@ public class ImageUtils {
         }
 
         Timber.d("dark rectangles count = " + numberOfDarkRectangles + ", total rectangles count = " + totalDividedRectangles);
-        Timber.d("blurred rectangles count = " + numberOfBlurredRectangles + ", total rectangles count = " + totalDividedRectangles);
-
 
         if (numberOfDarkRectangles > totalDividedRectangles * MINIMUM_DARKNESS_FACTOR) {
             return Result.IMAGE_DARK;
-        }
-
-        if (numberOfBlurredRectangles > totalDividedRectangles * MINIMUM_BLURRYNESS_FACTOR) {
-            return Result.IMAGE_BLURRY;
         }
 
         return Result.IMAGE_OK;
@@ -150,49 +138,5 @@ public class ImageUtils {
         }
 
         return isImageDark;
-    }
-
-    /**
-     * Processes the bitmap provided to see if its blurry or not.
-     *
-     * <p>The OpenCV library is utilised to calculate the variance of the Laplacian of
-     * a grayscale version of the original bitmap.
-     *
-     * <p>A small excerpt from the article here -> https://www.pyimagesearch.com/2015/09/07/blur-detection-with-opencv/
-     * which was used as reference, explaining why this technique works:
-     *
-     * <p>"The reason this method works is due to the definition of the Laplacian operator itself, which is used to measure
-     * the 2nd derivative of an image. The Laplacian highlights regions of an image containing rapid intensity changes,
-     * much like the Sobel and Scharr operators. And, just like these operators, the Laplacian is often used for edge detection.
-     * The assumption here is that if an image contains high variance then there is a wide spread of responses,
-     * both edge-like and non-edge like, representative of a normal, in-focus image. But if there is very low variance,
-     * then there is a tiny spread of responses, indicating there are very little edges in the image. As we know,
-     * the more an image is blurred, the less edges there are."
-     *
-     * @param bitmap The bitmap that needs to be checked.
-     * @return true if bitmap is blurry or null, false if bitmap is not blurry
-     */
-    private static boolean checkIfImageIsBlurred(Bitmap bitmap) {
-        if (bitmap == null) {
-            Timber.e("Expected bitmap was null");
-            return false;
-        }
-
-        Mat imageBitmapMat = new Mat(bitmap.getWidth(),bitmap.getHeight(),CvType.CV_8UC1);
-        Utils.bitmapToMat(bitmap,imageBitmapMat);
-
-        Mat grayscaleBitmapMat = new Mat();
-        Imgproc.cvtColor(imageBitmapMat,grayscaleBitmapMat,Imgproc.COLOR_RGB2GRAY);
-
-        Mat postLaplacianMat = new Mat();
-        Imgproc.Laplacian(grayscaleBitmapMat,postLaplacianMat,3);
-
-        MatOfDouble mean = new MatOfDouble();
-        MatOfDouble standardDeviation = new MatOfDouble();
-        Core.meanStdDev(postLaplacianMat,mean,standardDeviation);
-
-        double result = Math.pow(standardDeviation.get(0,0)[0],2);
-        Timber.d("blurry result = " + result);
-        return result < LAPLACIAN_VARIANCE_THRESHOLD;   //true if image is blurry, false otherwise
     }
 }

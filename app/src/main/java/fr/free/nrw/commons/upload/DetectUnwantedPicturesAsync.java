@@ -43,7 +43,7 @@ public class DetectUnwantedPicturesAsync extends AsyncTask<Void, Void, ImageUtil
 
             BitmapRegionDecoder decoder = BitmapRegionDecoder.newInstance(imageMediaFilePath,false);
 
-            return ImageUtils.checkIfImageIsDarkOrBlurry(decoder);
+            return ImageUtils.checkIfImageIsTooDark(decoder);
         } catch (IOException ioe) {
             Timber.e(ioe, "IO Exception");
             return ImageUtils.Result.IMAGE_OK;
