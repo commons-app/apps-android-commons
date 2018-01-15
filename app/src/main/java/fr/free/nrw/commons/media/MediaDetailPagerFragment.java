@@ -28,12 +28,12 @@ import android.view.ViewGroup;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
+import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
@@ -41,7 +41,7 @@ import static android.content.Context.DOWNLOAD_SERVICE;
 import static android.content.Intent.ACTION_VIEW;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
-public class MediaDetailPagerFragment extends DaggerFragment implements ViewPager.OnPageChangeListener {
+public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment implements ViewPager.OnPageChangeListener {
 
     @Inject MediaWikiApi mwApi;
     @Inject SessionManager sessionManager;

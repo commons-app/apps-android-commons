@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.contributions;
 
-import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
@@ -12,15 +11,15 @@ import android.text.TextUtils;
 
 import javax.inject.Inject;
 
-import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.data.DBOpenHelper;
+import fr.free.nrw.commons.di.CommonsDaggerContentProvider;
 import timber.log.Timber;
 
 import static android.content.UriMatcher.NO_MATCH;
 import static fr.free.nrw.commons.contributions.ContributionDao.Table.ALL_FIELDS;
 import static fr.free.nrw.commons.contributions.ContributionDao.Table.TABLE_NAME;
 
-public class ContributionsContentProvider extends ContentProvider {
+public class ContributionsContentProvider extends CommonsDaggerContentProvider {
 
     private static final int CONTRIBUTIONS = 1;
     private static final int CONTRIBUTIONS_ID = 2;
@@ -40,12 +39,6 @@ public class ContributionsContentProvider extends ContentProvider {
     }
 
     @Inject DBOpenHelper dbOpenHelper;
-
-    @Override
-    public boolean onCreate() {
-        AndroidInjection.inject(this);
-        return true;
-    }
 
     @SuppressWarnings("ConstantConditions")
     @Override

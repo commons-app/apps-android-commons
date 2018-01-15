@@ -14,6 +14,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 
 import javax.inject.Inject;
 
+import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
@@ -71,7 +72,11 @@ public class MediaWikiImageView extends SimpleDraweeView {
      * Initializes MediaWikiImageView.
      */
     private void init() {
-        ((CommonsApplication) getContext().getApplicationContext()).injector().inject(this);
+        ApplicationlessInjection
+                .getInstance(getContext()
+                        .getApplicationContext())
+                .getCommonsApplicationComponent()
+                .inject(this);
         setHierarchy(GenericDraweeHierarchyBuilder
                 .newInstance(getResources())
                 .setPlaceholderImage(VectorDrawableCompat.create(getResources(),

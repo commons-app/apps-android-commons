@@ -30,6 +30,7 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.utils.FileUtils;
 
 public class SettingsFragment extends PreferenceFragment {
@@ -40,8 +41,11 @@ public class SettingsFragment extends PreferenceFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
+        ApplicationlessInjection
+                .getInstance(getActivity().getApplicationContext())
+                .getCommonsApplicationComponent()
+                .inject(this);
 
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preferences);
