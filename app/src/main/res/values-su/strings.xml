@@ -121,7 +121,7 @@
   <string name="tutorial_3_text">Wayahna ULAH ngunjal:</string>
   <string name="tutorial_3_subtext">- Sélpi atawa poto sobat anjeun\n- Poto anu diundeur ti Internét\n- Poto layar aplikasi</string>
   <string name="tutorial_4_text">Conto unjalan:</string>
-  <string name="tutorial_4_subtext">- Judul: Gedung Opera Sydney\n- Pedaran: Gedung Opera Sydney (Sydney Opera House) ditempo ti basisir peuntas\n- Kategori: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext" fuzzy="true">- Judul: Gedung Opera Sydney\n- Pedaran: Gedung Opera Sydney (Sydney Opera House) ditempo ti basisir peuntas\n- Kategori: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Sumbangkeun gambar Anjeun. Bantuan ngahirupkeun artikel Wikipédia!</string>
   <string name="welcome_wikipedia_subtext">Gambar di Wikipédia asalna ti Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Gambar-gambar anjeun ngabantu ngatik jalma di sakuliah dunya.</string>

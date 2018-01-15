@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.ContentProviderClient;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -31,6 +30,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
@@ -51,9 +51,9 @@ public class UploadService extends HandlerService<Contribution> {
     @Inject MediaWikiApi mwApi;
     @Inject SessionManager sessionManager;
     @Inject @Named("default_preferences") SharedPreferences prefs;
+    @Inject ContributionDao contributionDao;
 
     private NotificationManager notificationManager;
-    private ContentProviderClient contributionsProviderClient;
     private NotificationCompat.Builder curProgressNotification;
     private int toUpload;
 
@@ -105,7 +105,7 @@ public class UploadService extends HandlerService<Contribution> {
             startForeground(NOTIFICATION_UPLOAD_IN_PROGRESS, curProgressNotification.build());
 
             contribution.setTransferred(transferred);
-            contribution.save();
+            contributionDao.save(contribution);
         }
 
     }
@@ -113,7 +113,6 @@ public class UploadService extends HandlerService<Contribution> {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        contributionsProviderClient.release();
         Timber.d("UploadService.onDestroy; %s are yet to be uploaded", unfinishedUploads);
     }
 
@@ -122,7 +121,6 @@ public class UploadService extends HandlerService<Contribution> {
         super.onCreate();
 
         notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        contributionsProviderClient = this.getContentResolver().acquireContentProviderClient(ContributionsContentProvider.AUTHORITY);
     }
 
     @Override
@@ -144,9 +142,7 @@ public class UploadService extends HandlerService<Contribution> {
 
                 contribution.setState(Contribution.STATE_QUEUED);
                 contribution.setTransferred(0);
-                contribution.setContentProviderClient(contributionsProviderClient);
-
-                contribution.save();
+                contributionDao.save(contribution);
                 toUpload++;
                 if (curProgressNotification != null && toUpload != 1) {
                     curProgressNotification.setContentText(getResources().getQuantityString(R.plurals.uploads_pending_notification_indicator, toUpload, toUpload));
@@ -167,11 +163,11 @@ public class UploadService extends HandlerService<Contribution> {
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent.getAction().equals(ACTION_START_SERVICE) && freshStart) {
             ContentValues failedValues = new ContentValues();
-            failedValues.put(Contribution.Table.COLUMN_STATE, Contribution.STATE_FAILED);
+            failedValues.put(ContributionDao.Table.COLUMN_STATE, Contribution.STATE_FAILED);
 
             int updated = getContentResolver().update(ContributionsContentProvider.BASE_URI,
                     failedValues,
-                    Contribution.Table.COLUMN_STATE + " = ? OR " + Contribution.Table.COLUMN_STATE + " = ?",
+                    ContributionDao.Table.COLUMN_STATE + " = ? OR " + ContributionDao.Table.COLUMN_STATE + " = ?",
                     new String[]{ String.valueOf(Contribution.STATE_QUEUED), String.valueOf(Contribution.STATE_IN_PROGRESS) }
             );
             Timber.d("Set %d uploads to failed", updated);
@@ -261,7 +257,7 @@ public class UploadService extends HandlerService<Contribution> {
                 contribution.setImageUrl(uploadResult.getImageUrl());
                 contribution.setState(Contribution.STATE_COMPLETED);
                 contribution.setDateUploaded(uploadResult.getDateUploaded());
-                contribution.save();
+                contributionDao.save(contribution);
             }
         } catch (IOException e) {
             Timber.d("I have a network fuckup");
@@ -273,7 +269,7 @@ public class UploadService extends HandlerService<Contribution> {
             toUpload--;
             if (toUpload == 0) {
                 // Sync modifications right after all uplaods are processed
-                ContentResolver.requestSync(sessionManager.getCurrentAccount(), ModificationsContentProvider.AUTHORITY, new Bundle());
+                ContentResolver.requestSync(sessionManager.getCurrentAccount(), ModificationsContentProvider.MODIFICATIONS_AUTHORITY, new Bundle());
                 stopForeground(true);
             }
         }
@@ -292,7 +288,7 @@ public class UploadService extends HandlerService<Contribution> {
         notificationManager.notify(NOTIFICATION_UPLOAD_FAILED, failureNotification);
 
         contribution.setState(Contribution.STATE_FAILED);
-        contribution.save();
+        contributionDao.save(contribution);
     }
 
     private String findUniqueFilename(String fileName) throws IOException {

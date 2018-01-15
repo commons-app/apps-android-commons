@@ -121,7 +121,7 @@
   <string name="tutorial_3_text">UR salay ara:</string>
   <string name="tutorial_3_subtext">- isilfiyen neɣ tugniwin n yimdakkal-ik \n- tugniwin i d-sidreḍ si Internet\n- inɣal n ugdil n yisnasen yesɛan imawlan</string>
   <string name="tutorial_4_text">Amedya n usali:</string>
-  <string name="tutorial_4_subtext">- Azwel: Tazqqa Opera n Sydney\n- Aglam : Tazeqqa Opera n Sydney seg ilel\n- Taggayin: Tazeqqa Opera n Sydney, Tazeqqa Opera n Sydney seg umalu, timeẓriyin s lebɛid n Tazeqqa Opera n Sydney.</string>
+  <string name="tutorial_4_subtext">- Azwel: Tazqqa Opera n Sydney\n- Aglam : Tazeqqa Opera n Sydney seg ilel\n- Taggayin: Tazeqqa Opera n Sydney, Tazeqqa Opera n Sydney seg umalu, timeẓriyin s lebɛid n Tazeqqa Opera n Sydney</string>
   <string name="welcome_wikipedia_text">Ttekki s tugniwin-ik. Snerni imagraden n Wikipedia!</string>
   <string name="welcome_wikipedia_subtext">Tugniwin ɣef Wikipedia ttasent-d si Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Tugniwin-ik ad slemdent imdanen deg umaḍal.</string>
@@ -204,4 +204,6 @@
   <string name="nearby_location_has_not_changed">Adeg ur ibeddel ara.</string>
   <string name="nearby_location_not_available">Ulac adeg</string>
   <string name="location_permission_rationale_nearby">Ilaq usireg i uskan tabdart n wadigen iqerben</string>
+  <string name="get_directions">AWI IWELLIHEN</string>
+  <string name="read_article">ƔER AMAGRAD</string>
 </resources>

@@ -30,7 +30,7 @@ import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.contributions.Contribution.STATE_COMPLETED;
-import static fr.free.nrw.commons.contributions.Contribution.Table.COLUMN_FILENAME;
+import static fr.free.nrw.commons.contributions.ContributionDao.Table.COLUMN_FILENAME;
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.BASE_URI;
 
 @SuppressWarnings("WeakerAccess")
@@ -89,6 +89,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
         LogEventResult result;
         Boolean done = false;
         String queryContinue = null;
+        ContributionDao contributionDao = new ContributionDao(() -> contentProviderClient);
         while (!done) {
 
             try {
@@ -121,7 +122,7 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
                         "", -1, dateUpdated, dateUpdated, user,
                         "", "");
                 contrib.setState(STATE_COMPLETED);
-                imageValues.add(contrib.toContentValues());
+                imageValues.add(contributionDao.toContentValues(contrib));
 
                 if (imageValues.size() % COMMIT_THRESHOLD == 0) {
                     try {

@@ -120,7 +120,7 @@
   <string name="tutorial_3_text">업로드하지 마십시오:</string>
   <string name="tutorial_3_subtext">- 자기 자신 또는 친구의 사진\n- 인터넷에서 다운로드한 사진\n- 사유 앱의 스크린샷</string>
   <string name="tutorial_4_text">업로드 예시:</string>
-  <string name="tutorial_4_subtext">- 제목: 시드니 오페라 하우스\n- 설명: 항만에서 바라본 시드니 오페라 하우스\n- 분류: 시드니 오페라 하우스, 서쪽에서 본 시드니 오페라 하우스, 시드니 오페라 하우스 원경</string>
+  <string name="tutorial_4_subtext">- 제목: 시드니 오페라 하우스\n- 설명: 항만 건너편에서 바라본 시드니 오페라 하우스\n- 분류: 시드니 오페라 하우스, 서쪽에서 본 시드니 오페라 하우스, 시드니 오페라 하우스 원경</string>
   <string name="welcome_wikipedia_text">당신의 그림을 기여하세요. 위키백과 문서의 생명이 오는 데 도와주세요!</string>
   <string name="welcome_wikipedia_subtext">위키백과의 그림은 위키미디어 공용에서 옵니다.</string>
   <string name="welcome_copyright_text">당신의 그림은 전 세계 사람들을 교육하는 데 도움이 됩니다.</string>
@@ -187,6 +187,7 @@
   <string name="navigation_item_feedback">피드백</string>
   <string name="navigation_item_logout">로그아웃</string>
   <string name="navigation_item_info">강좌</string>
+  <string name="navigation_item_notification">알림</string>
   <string name="nearby_needs_permissions">위치 권한이 없으면 주변 장소를 표시할 수 없습니다</string>
   <string name="no_description_found">설명이 없습니다</string>
   <string name="nearby_info_menu_commons_article">공용 파일 문서</string>

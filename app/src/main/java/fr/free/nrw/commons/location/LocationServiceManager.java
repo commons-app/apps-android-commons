@@ -31,20 +31,36 @@ public class LocationServiceManager implements LocationListener {
     private final List<LocationUpdateListener> locationListeners = new CopyOnWriteArrayList<>();
     private boolean isLocationManagerRegistered = false;
 
+    /**
+     * Constructs a new instance of LocationServiceManager.
+     * @param context the context
+     */
     public LocationServiceManager(Context context) {
         this.context = context;
         this.locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
     }
 
+    /**
+     * Returns the current status of the GPS provider.
+     * @return true if the GPS provider is enabled
+     */
     public boolean isProviderEnabled() {
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
     }
 
+    /**
+     * Returns whether the location permission is granted.
+     * @return true if the location permission is granted
+     */
     public boolean isLocationPermissionGranted() {
         return ContextCompat.checkSelfPermission(context,
                 Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
     }
 
+    /**
+     * Requests the location permission to be granted.
+     * @param activity the activity
+     */
     public void requestPermissions(Activity activity) {
         if (activity.isFinishing()) {
             return;
@@ -77,6 +93,11 @@ public class LocationServiceManager implements LocationListener {
                     && requestLocationUpdatesFromProvider(LocationManager.GPS_PROVIDER);
     }
 
+    /**
+     * Requests location updates from the specified provider.
+     * @param locationProvider the location provider
+     * @return true if successful
+     */
     private boolean requestLocationUpdatesFromProvider(String locationProvider) {
         try {
             locationManager.requestLocationUpdates(locationProvider,
@@ -93,6 +114,12 @@ public class LocationServiceManager implements LocationListener {
         }
     }
 
+    /**
+     * Returns whether a given location is better than the current best location.
+     * @param location the location to be tested
+     * @param currentBestLocation the current best location
+     * @return true if the given location is better
+     */
     protected boolean isBetterLocation(Location location, Location currentBestLocation) {
         if (currentBestLocation == null) {
             // A new location is always better than no location
@@ -156,12 +183,20 @@ public class LocationServiceManager implements LocationListener {
         }
     }
 
+    /**
+     * Adds a new listener to the list of location listeners.
+     * @param listener the new listener
+     */
     public void addLocationListener(LocationUpdateListener listener) {
         if (!locationListeners.contains(listener)) {
             locationListeners.add(listener);
         }
     }
 
+    /**
+     * Removes a listener from the list of location listeners.
+     * @param listener the listener to be removed
+     */
     public void removeLocationListener(LocationUpdateListener listener) {
         locationListeners.remove(listener);
     }

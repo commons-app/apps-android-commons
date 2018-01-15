@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/toolbar"
-            android:orientation="vertical"></FrameLayout>
+            android:orientation="vertical" />
     </RelativeLayout>
 
     <android.support.design.widget.NavigationView

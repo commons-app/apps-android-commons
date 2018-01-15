@@ -120,5 +120,6 @@
   <string name="navigation_item_about">حول</string>
   <string name="navigation_item_settings">الإعدادات</string>
   <string name="navigation_item_logout">تسجيل الخروج</string>
+  <string name="navigation_item_notification">إشعارات</string>
   <string name="nearby_info_menu_commons_article">صفحة ملف كومنز</string>
 </resources>

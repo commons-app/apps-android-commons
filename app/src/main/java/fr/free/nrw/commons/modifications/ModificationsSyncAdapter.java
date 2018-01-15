@@ -18,6 +18,7 @@ import javax.inject.Inject;
 
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
@@ -25,6 +26,8 @@ import timber.log.Timber;
 public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
 
     @Inject MediaWikiApi mwApi;
+    @Inject ContributionDao contributionDao;
+    @Inject ModifierSequenceDao modifierSequenceDao;
 
     public ModificationsSyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
@@ -79,11 +82,10 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
 
         ContentProviderClient contributionsClient = null;
         try {
-            contributionsClient = getContext().getContentResolver().acquireContentProviderClient(ContributionsContentProvider.AUTHORITY);
+            contributionsClient = getContext().getContentResolver().acquireContentProviderClient(ContributionsContentProvider.CONTRIBUTION_AUTHORITY);
 
             while (!allModifications.isAfterLast()) {
-                ModifierSequence sequence = ModifierSequence.fromCursor(allModifications);
-                sequence.setContentProviderClient(contentProviderClient);
+                ModifierSequence sequence = modifierSequenceDao.fromCursor(allModifications);
                 Contribution contrib;
 
                 Cursor contributionCursor;
@@ -93,7 +95,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                     throw new RuntimeException(e);
                 }
                 contributionCursor.moveToFirst();
-                contrib = Contribution.fromCursor(contributionCursor);
+                contrib = contributionDao.fromCursor(contributionCursor);
 
                 if (contrib.getState() == Contribution.STATE_COMPLETED) {
                     String pageContent;
@@ -121,7 +123,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                         // FIXME: Log this somewhere else
                         Timber.d("Non success result! %s", editResult);
                     } else {
-                        sequence.delete();
+                        modifierSequenceDao.delete(sequence);
                     }
                 }
                 allModifications.moveToNext();

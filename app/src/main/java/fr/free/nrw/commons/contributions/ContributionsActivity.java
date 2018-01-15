@@ -42,8 +42,7 @@ import timber.log.Timber;
 
 import static android.content.ContentResolver.requestSync;
 import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
-import static fr.free.nrw.commons.contributions.Contribution.Table.ALL_FIELDS;
-import static fr.free.nrw.commons.contributions.ContributionsContentProvider.AUTHORITY;
+import static fr.free.nrw.commons.contributions.ContributionDao.Table.ALL_FIELDS;
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.BASE_URI;
 import static fr.free.nrw.commons.settings.Prefs.UPLOADS_SHOWING;
 
@@ -58,6 +57,7 @@ public  class       ContributionsActivity
     @Inject MediaWikiApi mediaWikiApi;
     @Inject SessionManager sessionManager;
     @Inject @Named("default_preferences") SharedPreferences prefs;
+    @Inject ContributionDao contributionDao;
 
     private Cursor allContributions;
     private ContributionsListFragment contributionsList;
@@ -65,21 +65,6 @@ public  class       ContributionsActivity
     private UploadService uploadService;
     private boolean isUploadServiceConnected;
     private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<>();
-    private String CONTRIBUTION_SELECTION = "";
-
-    /*
-        This sorts in the following order:
-        Currently Uploading
-        Failed (Sorted in ascending order of time added - FIFO)
-        Queued to Upload (Sorted in ascending order of time added - FIFO)
-        Completed (Sorted in descending order of time added)
-
-        This is why Contribution.STATE_COMPLETED is -1.
-     */
-    private String CONTRIBUTION_SORT = Contribution.Table.COLUMN_STATE + " DESC, "
-            + Contribution.Table.COLUMN_UPLOADED + " DESC , ("
-            + Contribution.Table.COLUMN_TIMESTAMP + " * "
-            + Contribution.Table.COLUMN_STATE + ")";
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -94,7 +79,7 @@ public  class       ContributionsActivity
         @Override
         public void onServiceDisconnected(ComponentName componentName) {
             // this should never happen
-            throw new RuntimeException("UploadService died but the rest of the process did not!");
+            Timber.e(new RuntimeException("UploadService died but the rest of the process did not!"));
         }
     };
 
@@ -121,14 +106,13 @@ public  class       ContributionsActivity
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
         // Do a sync everytime we get here!
-        requestSync(sessionManager.getCurrentAccount(), ContributionsContentProvider.AUTHORITY, new Bundle());
+        requestSync(sessionManager.getCurrentAccount(), ContributionsContentProvider.CONTRIBUTION_AUTHORITY, new Bundle());
         Intent uploadServiceIntent = new Intent(this, UploadService.class);
         uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
         startService(uploadServiceIntent);
         bindService(uploadServiceIntent, uploadServiceConnection, Context.BIND_AUTO_CREATE);
 
-        allContributions = getContentResolver().query(BASE_URI, ALL_FIELDS,
-                CONTRIBUTION_SELECTION, null, CONTRIBUTION_SORT);
+        allContributions = contributionDao.loadAllContributions();
 
         getSupportLoaderManager().initLoader(0, null, this);
     }
@@ -186,24 +170,23 @@ public  class       ContributionsActivity
 
     public void retryUpload(int i) {
         allContributions.moveToPosition(i);
-        Contribution c = Contribution.fromCursor(allContributions);
+        Contribution c = contributionDao.fromCursor(allContributions);
         if (c.getState() == STATE_FAILED) {
             uploadService.queue(UploadService.ACTION_UPLOAD_FILE, c);
-            Timber.d("Restarting for %s", c.toContentValues());
+            Timber.d("Restarting for %s", c.toString());
         } else {
-            Timber.d("Skipping re-upload for non-failed %s", c.toContentValues());
+            Timber.d("Skipping re-upload for non-failed %s", c.toString());
         }
     }
 
     public void deleteUpload(int i) {
         allContributions.moveToPosition(i);
-        Contribution c = Contribution.fromCursor(allContributions);
+        Contribution c = contributionDao.fromCursor(allContributions);
         if (c.getState() == STATE_FAILED) {
-            Timber.d("Deleting failed contrib %s", c.toContentValues());
-            c.setContentProviderClient(getContentResolver().acquireContentProviderClient(AUTHORITY));
-            c.delete();
+            Timber.d("Deleting failed contrib %s", c.toString());
+            contributionDao.delete(c);
         } else {
-            Timber.d("Skipping deletion for non-failed contrib %s", c.toContentValues());
+            Timber.d("Skipping deletion for non-failed contrib %s", c.toString());
         }
     }
 
@@ -239,8 +222,8 @@ public  class       ContributionsActivity
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         int uploads = prefs.getInt(UPLOADS_SHOWING, 100);
         return new CursorLoader(this, BASE_URI,
-                ALL_FIELDS, CONTRIBUTION_SELECTION, null,
-                CONTRIBUTION_SORT + "LIMIT " + uploads);
+                ALL_FIELDS, "", null,
+                ContributionDao.CONTRIBUTION_SORT + "LIMIT " + uploads);
     }
 
     @Override
@@ -249,7 +232,7 @@ public  class       ContributionsActivity
 
         if (contributionsList.getAdapter() == null) {
             contributionsList.setAdapter(new ContributionsListAdapter(getApplicationContext(),
-                    cursor, 0));
+                    cursor, 0, contributionDao));
         } else {
             ((CursorAdapter) contributionsList.getAdapter()).swapCursor(cursor);
         }
@@ -270,7 +253,7 @@ public  class       ContributionsActivity
             // not yet ready to return data
             return null;
         } else {
-            return Contribution.fromCursor((Cursor) contributionsList.getAdapter().getItem(i));
+            return contributionDao.fromCursor((Cursor) contributionsList.getAdapter().getItem(i));
         }
     }
 

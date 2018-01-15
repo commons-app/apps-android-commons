@@ -121,7 +121,7 @@
   <string name="tutorial_3_text">请不要上传：</string>
   <string name="tutorial_3_subtext">- 您朋友的自拍照或图片\n- 您从互联网下载的图片\n- 专利应用的截图</string>
   <string name="tutorial_4_text">示例上传：</string>
-  <string name="tutorial_4_subtext">- 标题：悉尼歌剧院\n- 描述：从海湾对面看到的悉尼歌剧院\n- 分类：Sydney Opera House、Sydney Opera House from the west、Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext">- 标题：悉尼歌剧院\n- 描述：从海湾对面看到的悉尼歌剧院\n- 分类：Sydney Opera House from the west、Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">贡献您的图像。使维基百科的条目更加生动！</string>
   <string name="welcome_wikipedia_subtext">维基百科上的图像来自维基共享资源。</string>
   <string name="welcome_copyright_text">您的图像可以帮助教育世界各地的人。</string>
@@ -188,6 +188,7 @@
   <string name="navigation_item_feedback">反馈</string>
   <string name="navigation_item_logout">退出</string>
   <string name="navigation_item_info">教程</string>
+  <string name="navigation_item_notification">通知</string>
   <string name="nearby_needs_permissions">附近地点不能在没有位置权限的情况下显示</string>
   <string name="no_description_found">找不到描述</string>
   <string name="nearby_info_menu_commons_article">共享资源文件页面</string>
@@ -204,4 +205,6 @@
   <string name="nearby_location_has_not_changed">位置没有更新。</string>
   <string name="nearby_location_not_available">位置不可用。</string>
   <string name="location_permission_rationale_nearby">需要权限以显示附近地点列表</string>
+  <string name="get_directions">获得指示</string>
+  <string name="read_article">阅读条目</string>
 </resources>

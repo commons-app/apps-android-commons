@@ -96,4 +96,5 @@
   <string name="no_description_found">apraksts nav atrasts</string>
   <string name="give_permission">Atļaut</string>
   <string name="use_external_storage">Izmantot ārējo krātuvi</string>
+  <string name="read_article">LASĪT RAKSTU</string>
 </resources>

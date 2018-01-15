@@ -121,7 +121,7 @@
   <string name="tutorial_3_text">Bitte NICHT hochladen:</string>
   <string name="tutorial_3_subtext">- Selfies oder Bilder deiner Freunde\n- Bilder, die du aus dem Internet heruntergeladen hast\n- Screenshots von proprietären Softwareanwendungen</string>
   <string name="tutorial_4_text">Beispiel-Upload:</string>
-  <string name="tutorial_4_subtext">- Titel: Opernhaus von Sydney\n- Beschreibung: Opernhaus von Sydney, von der Bucht aus gesehen\n- Kategorien: Opernhaus von Sydney, Opernhaus von Sydney von Westen, Opernhaus von Sydney (Fernansicht)</string>
+  <string name="tutorial_4_subtext">- Titel: Opernhaus von Sydney\n- Beschreibung: Opernhaus von Sydney, von der Bucht aus gesehen\n- Kategorien: Opernhaus von Sydney von Westen, Opernhaus von Sydney (Fernansicht)</string>
   <string name="welcome_wikipedia_text">Teile deine Bilder. Erwecke Wikipedia-Artikel zum Leben!</string>
   <string name="welcome_wikipedia_subtext">Die Bilder auf Wikipedia kommen von Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Deine Bilder helfen dabei, Menschen auf der ganzen Welt zu bilden.</string>
@@ -188,6 +188,7 @@
   <string name="navigation_item_feedback">Rückmeldungen</string>
   <string name="navigation_item_logout">Abmelden</string>
   <string name="navigation_item_info">Anleitung</string>
+  <string name="navigation_item_notification">Benachrichtigungen</string>
   <string name="nearby_needs_permissions">Orte in der Nähe können ohne Berechtigung zur Standortbestimmung nicht ermittelt werden</string>
   <string name="no_description_found">Keine Beschreibung gefunden</string>
   <string name="nearby_info_menu_commons_article">Commons-Dateiseite</string>
@@ -204,4 +205,6 @@
   <string name="nearby_location_has_not_changed">Der Standort hat sich nicht geändert.</string>
   <string name="nearby_location_not_available">Der Standort ist nicht verfügbar.</string>
   <string name="location_permission_rationale_nearby">Berechtigung zur Anzeige einer Liste mit Orten in der Nähe erforderlich</string>
+  <string name="get_directions">RICHTUNGEN ABRUFEN</string>
+  <string name="read_article">ARTIKEL LESEN</string>
 </resources>

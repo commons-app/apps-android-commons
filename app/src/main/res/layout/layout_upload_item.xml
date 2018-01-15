@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center|bottom"
         android:background="#77000000"
-        android:padding="4dp"
+        android:padding="@dimen/tiny_gap"
         >
 
         <TextView

@@ -38,6 +38,10 @@ public class MediaWikiImageView extends SimpleDraweeView {
         init();
     }
 
+    /**
+     * Sets the media. Fetches its thumbnail if necessary.
+     * @param media the new media
+     */
     public void setMedia(Media media) {
         if (currentThumbnailTask != null) {
             currentThumbnailTask.cancel(true);
@@ -63,6 +67,9 @@ public class MediaWikiImageView extends SimpleDraweeView {
         super.onDetachedFromWindow();
     }
 
+    /**
+     * Initializes MediaWikiImageView.
+     */
     private void init() {
         ((CommonsApplication) getContext().getApplicationContext()).injector().inject(this);
         setHierarchy(GenericDraweeHierarchyBuilder
@@ -74,6 +81,10 @@ public class MediaWikiImageView extends SimpleDraweeView {
                 .build());
     }
 
+    /**
+     * Displays the image from the URL.
+     * @param url the URL of the image
+     */
     private void setImageUrl(@Nullable String url) {
         setImageURI(url);
     }

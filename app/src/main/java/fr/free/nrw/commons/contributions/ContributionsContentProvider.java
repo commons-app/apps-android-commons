@@ -17,8 +17,8 @@ import fr.free.nrw.commons.data.DBOpenHelper;
 import timber.log.Timber;
 
 import static android.content.UriMatcher.NO_MATCH;
-import static fr.free.nrw.commons.contributions.Contribution.Table.ALL_FIELDS;
-import static fr.free.nrw.commons.contributions.Contribution.Table.TABLE_NAME;
+import static fr.free.nrw.commons.contributions.ContributionDao.Table.ALL_FIELDS;
+import static fr.free.nrw.commons.contributions.ContributionDao.Table.TABLE_NAME;
 
 public class ContributionsContentProvider extends ContentProvider {
 
@@ -26,13 +26,13 @@ public class ContributionsContentProvider extends ContentProvider {
     private static final int CONTRIBUTIONS_ID = 2;
     private static final String BASE_PATH = "contributions";
     private static final UriMatcher uriMatcher = new UriMatcher(NO_MATCH);
-    public static final String AUTHORITY = "fr.free.nrw.commons.contributions.contentprovider";
+    public static final String CONTRIBUTION_AUTHORITY = "fr.free.nrw.commons.contributions.contentprovider";
 
-    public static final Uri BASE_URI = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH);
+    public static final Uri BASE_URI = Uri.parse("content://" + CONTRIBUTION_AUTHORITY + "/" + BASE_PATH);
 
     static {
-        uriMatcher.addURI(AUTHORITY, BASE_PATH, CONTRIBUTIONS);
-        uriMatcher.addURI(AUTHORITY, BASE_PATH + "/#", CONTRIBUTIONS_ID);
+        uriMatcher.addURI(CONTRIBUTION_AUTHORITY, BASE_PATH, CONTRIBUTIONS);
+        uriMatcher.addURI(CONTRIBUTION_AUTHORITY, BASE_PATH + "/#", CONTRIBUTIONS_ID);
     }
 
     public static Uri uriForId(int id) {
@@ -176,7 +176,7 @@ public class ContributionsContentProvider extends ContentProvider {
                 if (TextUtils.isEmpty(selection)) {
                     rowsUpdated = sqlDB.update(TABLE_NAME,
                             contentValues,
-                            Contribution.Table.COLUMN_ID + " = ?",
+                            ContributionDao.Table.COLUMN_ID + " = ?",
                             new String[]{String.valueOf(id)});
                 } else {
                     throw new IllegalArgumentException(

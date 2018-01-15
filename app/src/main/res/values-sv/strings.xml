@@ -68,7 +68,7 @@
     <item quantity="other">%d uppladdningar</item>
   </plurals>
   <string name="categories_not_found">Inga kategorier som stämmer överens med %1$s hittades</string>
-  <string name="categories_skip_explanation" fuzzy="true">Lägg till kategorier för att göra dina bilder synliga på Wikimedia Commons.\n\nBörja skriva för att lägga till kategorier.\nTryck på detta meddelande (eller gå tillbaka) för att hoppa över detta steg.</string>
+  <string name="categories_skip_explanation">Lägg till kategorier för att göra dina bilder enklare att hitta på Wikimedia Commons.\n\nBörja skriva för att lägga till kategorier.</string>
   <string name="categories_activity_title">Kategorier</string>
   <string name="title_activity_settings">Inställningar</string>
   <string name="title_activity_signup">Registrera</string>
@@ -121,7 +121,7 @@
   <string name="tutorial_3_text">Ladda INTE upp:</string>
   <string name="tutorial_3_subtext">- Selfies eller bilder på dina vänner\n- Bilder som du har laddat ned från Internet\n- Skärmdumpar på proprietära appar</string>
   <string name="tutorial_4_text">Uppladdningsexempel:</string>
-  <string name="tutorial_4_subtext">- Titel: Sydneys operahus\n- Beskrivning: Sydneys operahus sedd från andra sidan bukten\n- Kategorier: Sydneys operahus, Sydneys operahus från väst, Sydneys operahus utifrån</string>
+  <string name="tutorial_4_subtext">- Titel: Sydneys operahus\n- Beskrivning: Sydneys operahus sedd från andra sidan bukten\n- Kategorier: Sydneys operahus från väst, Sydneys operahus utifrån</string>
   <string name="welcome_wikipedia_text">Bidra med dina bilder. Hjälp Wikipedia-artiklar att komma till liv!</string>
   <string name="welcome_wikipedia_subtext">Bilder på Wikipedia kommer från Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Dina bilder hjälper till att utbilda människor runt om i världen.</string>
@@ -188,6 +188,7 @@
   <string name="navigation_item_feedback">Återkoppling</string>
   <string name="navigation_item_logout">Logga ut</string>
   <string name="navigation_item_info">Guide</string>
+  <string name="navigation_item_notification">Meddelanden</string>
   <string name="nearby_needs_permissions">Platser i närheten kan inte visas utan platsbehörigheter</string>
   <string name="no_description_found">ingen beskrivning hittades</string>
   <string name="nearby_info_menu_commons_article">Commons-filsida</string>
@@ -204,4 +205,6 @@
   <string name="nearby_location_has_not_changed">Platsen har inte ändrats.</string>
   <string name="nearby_location_not_available">Platsen är inte tillgänglig.</string>
   <string name="location_permission_rationale_nearby">Behörighet krävs för att visa en lista över platser i närheten</string>
+  <string name="get_directions">FÅ VÄGBESKRIVNINGAR</string>
+  <string name="read_article">LÄS ARTIKEL</string>
 </resources>

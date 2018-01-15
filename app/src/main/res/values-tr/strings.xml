@@ -188,6 +188,7 @@
   <string name="navigation_item_feedback">Geri bildirim</string>
   <string name="navigation_item_logout">Çıkış</string>
   <string name="navigation_item_info">Eğitim</string>
+  <string name="navigation_item_notification">Bildirimler</string>
   <string name="nearby_needs_permissions">Yakındaki yerler, konum izinleri olmadan görüntülenemez</string>
   <string name="no_description_found">hiçbir açıklama bulunamadı</string>
   <string name="nearby_info_menu_commons_article">Commons dosya sayfası</string>
@@ -204,4 +205,6 @@
   <string name="nearby_location_has_not_changed">Konum değiştirilmedi</string>
   <string name="nearby_location_not_available">Konum kullanılamıyor.</string>
   <string name="location_permission_rationale_nearby">Yakındaki yerler listesini görüntülemek için izin vermeniz gerekiyor</string>
+  <string name="get_directions">TALİMATLAR</string>
+  <string name="read_article">MADDE OKU</string>
 </resources>

@@ -121,7 +121,7 @@
   <string name="tutorial_3_text">Veuillez ne PAS téléverser :</string>
   <string name="tutorial_3_subtext">- des selfies ou des images de vos amis \n- des images téléchargées sur Internet\n- des copies d’écran d’applications propriétaires</string>
   <string name="tutorial_4_text">Exemple de téléversement :</string>
-  <string name="tutorial_4_subtext">- Titre : L’opéra de Sydney\n- Description : L’opéra de Sydney vu à travers la baie\n- Catégories : Opéra de Sydney, Opéra de Sydney depuis l’ouest, vues à distance de l’Opéra de Sydney</string>
+  <string name="tutorial_4_subtext">- Titre : Opéra de Sydney\n- Description : L’opéra de Sydney vu à travers la baie\n- Catégories : Opéra de Sydney depuis l’ouest, vues à distance de l’Opéra de Sydney</string>
   <string name="welcome_wikipedia_text">Contribuez avec vos images. Aidez les articles de Wikipédia à prendre vie !</string>
   <string name="welcome_wikipedia_subtext">Les images sur Wikipédia viennent de Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Vos images aident à éduquer les gens dans le monde entier.</string>
@@ -188,6 +188,7 @@
   <string name="navigation_item_feedback">Commentaire</string>
   <string name="navigation_item_logout">Déconnexion</string>
   <string name="navigation_item_info">Tutoriel</string>
+  <string name="navigation_item_notification">Notifications</string>
   <string name="nearby_needs_permissions">Les endroits proches ne peuvent pas être affichés si vous ne partagez pas votre position géographique.</string>
   <string name="no_description_found">aucune description trouvée</string>
   <string name="nearby_info_menu_commons_article">Page des fichiers de Commons</string>
@@ -204,4 +205,6 @@
   <string name="nearby_location_has_not_changed">L\'emplacement n\'a pas changé.</string>
   <string name="nearby_location_not_available">Emplacement non disponible.</string>
   <string name="location_permission_rationale_nearby">Une permission est requise pour afficher une liste de lieux relatifs</string>
+  <string name="get_directions">OBTENIR DES DIRECTIVES</string>
+  <string name="read_article">LIRE L’ARTICLE</string>
 </resources>

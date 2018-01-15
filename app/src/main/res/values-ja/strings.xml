@@ -70,7 +70,7 @@
   <string name="menu_about">このアプリについて</string>
   <string name="about_license">ウィキメディア・コモンズ・アプリはウィキメディア・コミュニティの助成金受給者とボランティアによって製作・メンテナンスされているオープンソースソフトウェアです。ウィキメディア財団はこのアプリの製作・開発・メンテナンスに関与していません。</string>
   <string name="about_improve">ソースは &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt; にあります。バグとアイディアは &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt; へ。</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/プライバシー・ポリシー\"&gt;プライバシー・ポリシー&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/プライバシー・ポリシー\"&gt;プライバシー・ポリシー&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;クレジット&lt;/a&gt;</string>
   <string name="title_activity_about">このアプリについて</string>
   <string name="menu_feedback">フィードバックをメールで送信</string>
@@ -115,7 +115,7 @@
   <string name="tutorial_3_text">アップロードが《禁止》のもの:</string>
   <string name="tutorial_3_subtext">- あなたの友人の自撮り写真や画像\n- インターネットからダウンロードした画像\n- 著作権のあるアプリのスクリーンショット</string>
   <string name="tutorial_4_text">アップロードの例:</string>
-  <string name="tutorial_4_subtext">- 題名: シドニー・オペラハウス\n- 説明: 湾の向こうから見たシドニー・オペラハウス\n- カテゴリ: シドニー・オペラハウス、シドニー・オペラハウスの西側、遠くから見たシドニー・オペラハウス</string>
+  <string name="tutorial_4_subtext">- 題名: シドニー・オペラハウス\n- 説明: 湾の向こうから見たシドニー・オペラハウス\n- カテゴリ: 西側から見たシドニー・オペラハウス、遠くから見たシドニー・オペラハウス</string>
   <string name="welcome_wikipedia_text">画像を投稿してください。ウィキペディアの記事に彩りを！</string>
   <string name="welcome_wikipedia_subtext">ウィキペディアの画像はウィキメディア・コモンズに保管されています。</string>
   <string name="welcome_copyright_text">あなたの画像は世界中の人々が学習する助けになります</string>
@@ -155,6 +155,7 @@
   <string name="set_limit">最近のアップロードファイルに表示する最大件数</string>
   <string name="login_failed_2fa_not_supported">2段階認証は現在サポートされていません。</string>
   <string name="logout_verification">ログアウトしてもよろしいですか？</string>
+  <string name="commons_logo">コモンズの商標</string>
   <string name="background_image">背景画像</string>
   <string name="no_image_found">画像がありません</string>
   <string name="upload_image">画像をアップロード</string>
@@ -175,6 +176,7 @@
   <string name="navigation_item_feedback">フィードバック</string>
   <string name="navigation_item_logout">ログアウト</string>
   <string name="navigation_item_info">チュートリアル</string>
+  <string name="navigation_item_notification">通知</string>
   <string name="nearby_needs_permissions">場所の権限がないと、近くの場所を表示できません</string>
   <string name="no_description_found">説明がありません</string>
   <string name="nearby_info_menu_wikidata_article">ウィキデータ項目</string>
