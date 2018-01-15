@@ -33,6 +33,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
+import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import timber.log.Timber;
@@ -66,8 +67,12 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         setTheme(Utils.isDarkTheme(this) ? R.style.DarkAppTheme : R.style.LightAppTheme);
         getDelegate().installViewFactory();
         getDelegate().onCreate(savedInstanceState);
-        AndroidInjection.inject(this);
+
         super.onCreate(savedInstanceState);
+        ApplicationlessInjection
+                .getInstance(this.getApplicationContext())
+                .getCommonsApplicationComponent()
+                .inject(this);
 
         setContentView(R.layout.activity_login);
 

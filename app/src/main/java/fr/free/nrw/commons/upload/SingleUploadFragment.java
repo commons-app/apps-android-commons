@@ -36,16 +36,16 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemSelected;
 import butterknife.OnTouch;
-import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.settings.Prefs;
 import timber.log.Timber;
 
 import static android.view.MotionEvent.ACTION_DOWN;
 import static android.view.MotionEvent.ACTION_UP;
 
-public class SingleUploadFragment extends DaggerFragment {
+public class SingleUploadFragment extends CommonsDaggerSupportFragment {
 
     @BindView(R.id.titleEdit) EditText titleEdit;
     @BindView(R.id.descEdit) EditText descEdit;

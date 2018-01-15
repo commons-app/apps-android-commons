@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.category;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -33,8 +34,8 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.upload.MwVolleyApi;
 import fr.free.nrw.commons.utils.StringSortingUtils;
@@ -49,7 +50,7 @@ import static android.view.KeyEvent.KEYCODE_BACK;
 /**
  * Displays the category suggestion and selection screen. Category search is initiated here.
  */
-public class CategorizationFragment extends DaggerFragment {
+public class CategorizationFragment extends CommonsDaggerSupportFragment {
 
     public static final int SEARCH_CATS_LIMIT = 25;
 
@@ -132,11 +133,6 @@ public class CategorizationFragment extends DaggerFragment {
                 return false;
             });
         }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
     }
 
     @Override
