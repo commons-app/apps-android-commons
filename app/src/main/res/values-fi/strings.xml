@@ -68,7 +68,7 @@
     <item quantity="other">%d tallennusta</item>
   </plurals>
   <string name="categories_not_found">Luokkaa %1$s ei löytynyt</string>
-  <string name="categories_skip_explanation" fuzzy="true">Lisää luokkia tehdäksesi kuvistasi helpommin löydettäviä.\n\nAloita kirjoittaminen lisätäksesi luokkia.\nNapauta tätä viestiä (tai paina takaisin) ohittaaksesi tämän vaiheen.</string>
+  <string name="categories_skip_explanation">Lisää luokkia tehdäksesi kuvistasi enemmän löydettäviä Wikimedia Commonssissa.\nAloita kirjoittaminen lisätäksesi luokkia.</string>
   <string name="categories_activity_title">Luokat</string>
   <string name="title_activity_settings">Asetukset</string>
   <string name="title_activity_signup">Rekisteröidy</string>
@@ -153,6 +153,7 @@
   <string name="become_a_tester_title">Ryhdy beetatestaajaksi</string>
   <string name="use_wikidata">Käytä Wikidataa</string>
   <string name="use_wikidata_summary">(Varoitus: poiskytkeminen voi aiheuttaa suuren mobiilidatankäytön)</string>
+  <string name="_2fa_code">2FA koodi</string>
   <string name="maximum_limit">Maksimimäärä</string>
   <string name="maximum_limit_alert">Ei voida näyttää enempää, kuin 500</string>
   <string name="login_failed_2fa_not_supported">Kaksivaiheinen tunnistus ei ole vielä tuettu.</string>
@@ -162,9 +163,11 @@
   <string name="no_image_found">Kuvaa ei löytynyt</string>
   <string name="upload_image">Lataa kuva</string>
   <string name="welcome_image_mount_zao">Zao-vuori</string>
+  <string name="welcome_image_llamas">Laamat</string>
   <string name="welcome_image_rainbow_bridge">Sateenkaarisilta</string>
   <string name="welcome_image_tulip">Tulppaani</string>
   <string name="welcome_image_no_selfies">Ei selfieitä</string>
+  <string name="welcome_image_proprietary">Patentoitu kuva</string>
   <string name="welcome_image_welcome_wikipedia">Tervetuloa Wikipediaan</string>
   <string name="welcome_image_welcome_copyright">Tervetuloa tekijänoikeus</string>
   <string name="welcome_image_sydney_opera_house">Sydneyn oopperatalo</string>
@@ -179,8 +182,17 @@
   <string name="navigation_item_feedback">Palaute</string>
   <string name="navigation_item_logout">Kirjaudu ulos</string>
   <string name="navigation_item_info">Opas</string>
+  <string name="navigation_item_notification">Ilmoitukset</string>
   <string name="nearby_needs_permissions">Lähellä olevia paikkoja ei voida näyttää ilman sijaintilupaa</string>
   <string name="nearby_info_menu_commons_article">Commons-tiedostosivu</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata-kohde</string>
   <string name="title_info">Tiedoston yksilöllinen ja kuvaava otsikko, jota käytetään tiedostonimenä. Voit käyttää tavallista kieltä välilyönnein. Älä sisällytä tiedoston päätettä.</string>
+  <string name="give_permission">Anna lupa</string>
+  <string name="use_external_storage">Käytä ulkoista tallennustilaa</string>
+  <string name="send_log_file">Lähetä lokitiedosto</string>
+  <string name="send_log_file_description">Lähetä logitiedosto kehittäjille sähköpostin kautta</string>
+  <string name="login_to_your_account">Kirjaudu tilillesi</string>
+  <string name="nearby_location_has_not_changed">Sijainti ei ole muuttunut.</string>
+  <string name="nearby_location_not_available">Sijainti ei käytettävissä.</string>
+  <string name="read_article">LUE ARTIKKELI</string>
 </resources>

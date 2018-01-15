@@ -9,10 +9,10 @@
   <string name="logging_in_title">प्रवेश हो रहा</string>
   <string name="logging_in_message">प्रतीक्षा करें…</string>
   <string name="login_success">प्रवेश में सफल हुआ!</string>
-  <string name="login_failed">प्रवेश विफल हुआ</string>
-  <string name="upload_failed">फ़ाइल नहीं मिला, कृपया अन्य फ़ाइल से कोशिश करें।</string>
+  <string name="login_failed">प्रवेश विफल हुआ!</string>
+  <string name="upload_failed">फ़ाइल नहीं मिली, कृपया अन्य फ़ाइल से प्रयास करें।</string>
   <string name="authentication_failed">प्रमाणीकरण विफल!</string>
-  <string name="uploading_started">अपलोड शुरू हुआ!</string>
+  <string name="uploading_started">अपलोड आरंभ!</string>
   <string name="upload_completed_notification_title">%1$s अपलोड हुआ!</string>
   <string name="upload_completed_notification_text">अपना अपलोड देखने के लिए टैप करें</string>
   <string name="upload_progress_notification_title_start">%1$s का अपलोड शुरू हुआ</string>
@@ -72,40 +72,40 @@
   <string name="title_activity_settings">पसंद</string>
   <string name="title_activity_signup">खाता खोलें</string>
   <string name="menu_about">परिचय</string>
-  <string name="about_license" fuzzy="true">मुक्त स्रोत सॉफ्टवेयर जो &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;अपाचे लाइसेन्स&lt;/a&gt; के अंतर्गत जारी किया गया है। %1$s और इसका लोगो विकिमीडिया संस्था का व्यापारिक चिह्न है और इसके मर्जी से ही उपयोग किया जाना चाहिए। हम किसी भी प्रकार से विकिमीडिया संस्था से जुड़े नहीं हैं।</string>
+  <string name="about_license">विकिमीडिया कॉमन्स एप्प एक मुक्त स्रोत एप्प है जो कि विकिमीडिया समुदाय के अनुदानप्राप्तकर्ताओं व स्वयंसेवकों द्वारा निर्मित एवं प्रबंधित है। विकिमीडिया फॉऊण्डेशन इस एप्प के निर्माण, विकास व प्रबंधन में किसी प्रकार से भी संलग्न नहीं है।</string>
   <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;स्रोत&lt;/a&gt; और &lt;a href=\"https://commons-app.github.io/\"&gt;वेबसाइट&lt;/a&gt; गिटहब में है और त्रुटि व सुझाव हेतु &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;गिटहब समस्या&lt;/a&gt; देखें।</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;गोपनियता नीति&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;गोपनीयता नीति&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;श्रेय&lt;/a&gt;</string>
   <string name="title_activity_about">परिचय</string>
   <string name="menu_feedback">प्रतिक्रिया दें (ईमेल द्वारा)</string>
-  <string name="no_email_client">कोई ईमेल ग्राहक स्थापित नहीं</string>
+  <string name="no_email_client">कोई ईमेल साधन स्थापित नहीं</string>
   <string name="provider_categories">हाल ही उपयोग में ली गयी श्रेणियाँ</string>
   <string name="waiting_first_sync">पहले सिंक हेतु प्रतीक्षा में…</string>
   <string name="no_uploads_yet">आपने अब तक कोई फोटो अपलोड नहीं किया है।</string>
   <string name="menu_retry_upload">फिर प्रयास करें</string>
   <string name="menu_cancel_upload">रद्द करें</string>
-  <string name="share_license_summary">इस छवि का लाइसेन्स %1$s के अंतर्गत है।</string>
+  <string name="share_license_summary">इस छवि का लाइसेन्स %1$s के अंतर्गत होगा।</string>
   <string name="media_upload_policy">इस तस्वीर को सबमिट करके, मैं घोषणा करता हूं कि यह मेरा अपना काम है, इसमें कॉपीराइट सामग्री या सेल्फी नहीं है, और अन्यथा &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;विकीमीडिया कॉमन्स नीतियां का पालन करता हूँ &lt;/a&gt;</string>
   <string name="menu_download">डाउनलोड</string>
   <string name="preference_license">लाइसेन्स</string>
   <string name="use_previous">पिछले शीर्षक/विवरण का उपयोग करें</string>
   <string name="allow_gps">वर्तमान स्थान स्वतः ज्ञात करें</string>
-  <string name="allow_gps_summary">यदि छवि जियोटैगेड नहीं है तो श्रेणियों के सुझाव हेतु वर्तमान स्थान ज्ञात करें।</string>
+  <string name="allow_gps_summary">यदि छवि पर जियोटैग नहीं है तो श्रेणियों के सुझाव हेतु वर्तमान स्थान ज्ञात करें।</string>
   <string name="preference_theme">रात्रि मोड</string>
   <string name="preference_theme_summary">डार्क थीम का प्रयोग करें</string>
-  <string name="license_name_cc_by_sa_four">विशेषता-साझेदारी 4.0</string>
+  <string name="license_name_cc_by_sa_four">एट्रीब्यूशन-शेयरअलाइक 4.0</string>
   <string name="license_name_cc_by_four">एट्रिब्यूशन 4.0</string>
-  <string name="license_name_cc_by_sa">एट्रीबुसन-शेयरअलाइक 3.0</string>
-  <string name="license_name_cc_by">एट्रीबुसन 3.0</string>
-  <string name="license_name_cc0">CC0</string>
-  <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
-  <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (ऑस्ट्रीया)</string>
+  <string name="license_name_cc_by_sa">एट्रीब्यूशन-शेयरअलाइक 3.0</string>
+  <string name="license_name_cc_by">एट्रीब्यूशन 3.0</string>
+  <string name="license_name_cc0">सीसी0</string>
+  <string name="license_name_cc_by_sa_3_0">सीसी बाय-एसए 3.0</string>
+  <string name="license_name_cc_by_sa_3_0_at">सीसी बाय-एसए 3.0 (ऑस्ट्रिया)</string>
   <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (जर्मनी)</string>
   <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (एस्टोनिया)</string>
   <string name="license_name_cc_by_sa_3_0_es">CC BY-SA 3.0 (स्पेन)</string>
-  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (क्रोटिया)</string>
-  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (लुक्सेमबौर्ग)</string>
-  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (नेदरलैंड)</string>
+  <string name="license_name_cc_by_sa_3_0_hr">CC BY-SA 3.0 (क्रोएशिया)</string>
+  <string name="license_name_cc_by_sa_3_0_lu">CC BY-SA 3.0 (लक्समबर्ग)</string>
+  <string name="license_name_cc_by_sa_3_0_nl">CC BY-SA 3.0 (नीदरलैंड)</string>
   <string name="license_name_cc_by_sa_3_0_no">CC BY-SA 3.0 (नॉर्वे)</string>
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (पोलैंड)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (रोमानिया)</string>
@@ -113,19 +113,19 @@
   <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
-  <string name="tutorial_1_text">विकिपीडिया में उपयोग होने वाले कई चित्रों को होस्ट विकिमीडिया कॉमन्स करता है।</string>
-  <string name="tutorial_1_subtext">आपके लिए चित्र पूरे विश्व के लोगों को शिक्षित करेंगे!</string>
-  <string name="tutorial_2_text">कृपया उन तस्वीरों को डालें, जो आपने ली है या केवल आपके द्वारा बनाई गई है:</string>
-  <string name="tutorial_2_subtext">- प्राकृतिक वस्तुओं (फूल, पशु, पहाड़ों)\n- उपयोगी वस्तुओं (साइकिल, रेलवे स्टेशन)\n- प्रसिद्ध लोगों (आपके महापौर, ओलंपिक एथलीटों जिनसे आप मिले हो)</string>
+  <string name="tutorial_1_text">विकिपीडिया में उपयोग होने वाले अधिकतर चित्र विकिमीडिया कॉमन्स पर रखे जाते है।</string>
+  <string name="tutorial_1_subtext">आपके लिए चित्र पूरे विश्व के लोगों को शिक्षित करने में सहायता करेंगे!</string>
+  <string name="tutorial_2_text">कृपया उन तस्वीरों को डालें, जो केवल आपके द्वारा ली गई या बनाई गई है:</string>
+  <string name="tutorial_2_subtext">- प्राकृतिक वस्तुएँ (फूल, पशु, पहाड़)\n- उपयोगी वस्तुएँ (साइकिल, रेलवे स्टेशन)\n- प्रसिद्ध लोग (आपके महापौर, ओलंपिक एथलीट जिनसे आप मिले हों)</string>
   <string name="tutorial_3_text">कृपया अपलोड न करें:</string>
   <string name="tutorial_3_subtext">- सेल्फी या अपने दोस्तों की तस्वीरें\n- इंटरनेट से डाउनलोड की गई तस्वीरें\n- किसी निजी एप का स्क्रीनशॉट</string>
   <string name="tutorial_4_text">अपलोड का उदाहरण:</string>
-  <string name="tutorial_4_subtext" fuzzy="true">- शीर्षक: सिडनी ओपेरा हाउस\n- विवरण: सिडनी ओपेरा हाउस खाड़ी के पार से देखा गया\n- श्रेणियाँ: सिडनी ओपेरा हाउस, पश्चिम से सिडनी ओपेरा हाउस, सिडनी ओपेरा हाउस दूर से</string>
-  <string name="welcome_wikipedia_text">अपने छवियों का योगदान करें। विकिपीडिया के लेखों को जीवित करने में सहायता करें।</string>
+  <string name="tutorial_4_subtext">- शीर्षक: सिडनी ओपेरा हाउस\n- विवरण: सिडनी ओपेरा हाउस का खाड़ी के पार से दृश्य\n- श्रेणियाँ: सिडनी ओपेरा हाउस, पश्चिम से सिडनी ओपेरा हाउस, सिडनी ओपेरा हाउस दूर से</string>
+  <string name="welcome_wikipedia_text">अपने लिए चित्रों का योगदान करें। विकिपीडिया के लेखों में जान फूँकने में सहायता करें।</string>
   <string name="welcome_wikipedia_subtext">विकिपीडिया में छवि विकिमीडिया कॉमन्स से आती है।</string>
-  <string name="welcome_copyright_text">आपके चित्र पूरे विश्व के लोगों को शिक्षित करेंगे।</string>
+  <string name="welcome_copyright_text">आपके चित्र पूरे विश्व के लोगों को शिक्षित करने में सहायता करते हैं।</string>
   <string name="welcome_copyright_subtext">इंटरनेट से मिली कोई कॉपीराइट सामग्री के साथ साथ पोस्टर, पुस्तक के खड्डे आदि को भी अपलोड करने से बचें।</string>
-  <string name="welcome_final_text">जो आपने सोचा वो मिला?</string>
+  <string name="welcome_final_text">क्या आपको लगता है कि आप समझ गए?</string>
   <string name="welcome_final_button_text">हाँ!</string>
   <string name="detail_panel_cats_label">श्रेणियाँ</string>
   <string name="detail_panel_cats_loading">लोड हो रहा है…</string>
@@ -152,9 +152,9 @@
   <string name="media_detail_coordinates">निर्देशांक</string>
   <string name="media_detail_coordinates_empty">कुछ नहीं प्रदान किया गया</string>
   <string name="become_a_tester_title">बीटा परीक्षक बनें</string>
-  <string name="become_a_tester_description">गूगल प्ले पर हमारे बीटा चैनल में ऑप्ट-इन करें और नई सुविधाओं और बग फिक्स के लिए शीघ्र प्राप्त करें</string>
+  <string name="become_a_tester_description">गूगल प्ले पर हमारे बीटा चैनल का चयन करें और नई सुविधाओं व त्रुटिसुधारों तक पहले पहुँचे</string>
   <string name="use_wikidata">विकिडेटा का प्रयोग करें</string>
-  <string name="use_wikidata_summary">(चेतावनी: इसे अक्षम करने से बड़ी मोबाइल डेटा की खपत हो सकती है)</string>
+  <string name="use_wikidata_summary">(चेतावनी: इसे अक्षम करने से मोबाइल डेटा की खपत अधिक हो सकती है)</string>
   <string name="_2fa_code">2 एफए कोड</string>
   <string name="number_of_uploads">मेरी हाल ही की अपलोड सीमा</string>
   <string name="maximum_limit">अधिकतम सीमा</string>
@@ -187,6 +187,7 @@
   <string name="navigation_item_feedback">आपके सुझाव</string>
   <string name="navigation_item_logout">प्रस्थान करें</string>
   <string name="navigation_item_info">अनुशिक्षण</string>
+  <string name="navigation_item_notification">सूचनायें</string>
   <string name="nearby_needs_permissions">आस-पास के स्थान बिना स्थान अनुमतियों के प्रदर्शित नहीं किए जा सकते हैं</string>
   <string name="no_description_found">कोई विवरण नहीं मिला</string>
   <string name="nearby_info_menu_commons_article">कॉमन्स फाइल पृष्ठ</string>
@@ -194,8 +195,15 @@
   <string name="error_while_cache">चित्र कैशिंग करते समय त्रुटि</string>
   <string name="title_info">फ़ाइल के लिए एक अद्वितीय वर्णनात्मक शीर्षक, जो एक फ़ाइल नाम के रूप में काम करेगा। आप रिक्त स्थान के साथ सादे भाषा का उपयोग कर सकते हैं। फ़ाइल विस्तार शामिल न करें</string>
   <string name="description_info">कृपया मीडिया जितना संभव हो उतना बताएं: यह कहां लिया गया? यह क्या दिखाता है? संदर्भ क्या है? कृपया वस्तुओं या व्यक्तियों का वर्णन करें। ऐसी जानकारी का खुलासा करें जिसे आसानी से अनुमानित नहीं किया जा सकता, उदाहरण के लिए दिन का समय यदि यह परिदृश्य है। अगर मीडिया कुछ असामान्य दिखाता है, तो कृपया बताएं कि इसे क्या असामान्य बनाता है।</string>
+  <string name="give_permission">अनुमति दें</string>
   <string name="use_external_storage">बाहरी स्टॉरज का पृयोग करे।</string>
   <string name="use_external_storage_summary">आप अपने डिवाइस के इन-ऐप कैमरा से ली गई तस्वीरों को सहेजें।</string>
+  <string name="send_log_file">लॉग फाइल भेजें</string>
+  <string name="send_log_file_description">डेवेलपर्स को लॉग फाइल ई-मेल से भेजें</string>
+  <string name="login_to_your_account">अपने खाते में प्रवेश करें</string>
+  <string name="nearby_location_has_not_changed">स्थान परिवर्तन नहीं हुआ।</string>
+  <string name="nearby_location_not_available">स्थान उपलब्ध नहीं।</string>
+  <string name="location_permission_rationale_nearby">आसपास के स्थान दिखाने के लिए अनुमति चाहिए</string>
   <string name="get_directions">दिशा - निर्देश प्राप्त करें</string>
   <string name="read_article">लेख पढ़ें</string>
 </resources>
