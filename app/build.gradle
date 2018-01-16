@@ -181,4 +181,11 @@ android {
         exclude module: 'commons-logging'
     }
     buildToolsVersion buildToolsVersion
+
+    splits {
+        abi {
+            enable true
+            universalApk false
+        }
+    }
 }
