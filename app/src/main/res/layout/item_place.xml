@@ -63,6 +63,7 @@
         android:maxLines="4"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         tools:text="@string/placeholder_place_description"
+        android:visibility="invisible"
         />
 
 </RelativeLayout>
