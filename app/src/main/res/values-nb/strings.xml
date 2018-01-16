@@ -188,6 +188,7 @@
   <string name="navigation_item_feedback">Tilbakemeldinger</string>
   <string name="navigation_item_logout">Logg ut</string>
   <string name="navigation_item_info">Veiviser</string>
+  <string name="navigation_item_notification">Varsler</string>
   <string name="nearby_needs_permissions">Steder i nærheten kan ikke vises uten tillatelse for stedsbestemmelse</string>
   <string name="no_description_found">ingen beskrivelse funnet</string>
   <string name="nearby_info_menu_commons_article">Commons-filside</string>

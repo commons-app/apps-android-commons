@@ -25,8 +25,8 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.nearby.NearbyActivity;
 import timber.log.Timber;
 
@@ -36,7 +36,7 @@ import static android.app.Activity.RESULT_OK;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import static android.view.View.GONE;
 
-public class ContributionsListFragment extends DaggerFragment {
+public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
     @BindView(R.id.contributionsList)
     GridView contributionsList;

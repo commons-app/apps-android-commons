@@ -188,6 +188,7 @@
   <string name="navigation_item_feedback">Sugeriment</string>
   <string name="navigation_item_logout">Seurte dal sistema</string>
   <string name="navigation_item_info">Cors d\'antrodussion</string>
+  <string name="navigation_item_notification">Notìfiche</string>
   <string name="nearby_needs_permissions">Ij pòst ant j\'anviron a peulo nen esse smonù sensa ij përmess ëd localisassion</string>
   <string name="no_description_found">gnun-a descrission trovà</string>
   <string name="nearby_info_menu_commons_article">Pàgina dj\'archivi ëd Comun</string>

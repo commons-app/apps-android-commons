@@ -68,7 +68,7 @@
     <item quantity="other">%d càrregues</item>
   </plurals>
   <string name="categories_not_found">No s\'ha trobat cap categoria que coincideixi amb %1$s</string>
-  <string name="categories_skip_explanation" fuzzy="true">Afegiu categories per fer que les vostres imatges siguin més fàcils de trobar a Wikimedia Commons.</string>
+  <string name="categories_skip_explanation">Afegiu categories per fer que les vostres imatges siguin més fàcils de trobar a Wikimedia Commons.</string>
   <string name="categories_activity_title">Categories</string>
   <string name="title_activity_settings">Paràmetres</string>
   <string name="title_activity_signup">Registre</string>
@@ -147,6 +147,8 @@
   <string name="upload_image">Carrega la imatge</string>
   <string name="welcome_image_llamas">Llames</string>
   <string name="welcome_image_proprietary">Imatge privativa</string>
+  <string name="welcome_image_welcome_wikipedia">Benvinguts a la Viquipèdia</string>
+  <string name="welcome_image_sydney_opera_house">Casa d\'Òpera de Sydney</string>
   <string name="cancel">Cancel·la</string>
   <string name="navigation_drawer_open">Obre</string>
   <string name="navigation_drawer_close">Tanca</string>
@@ -157,10 +159,17 @@
   <string name="navigation_item_settings">Paràmetres</string>
   <string name="navigation_item_feedback">Comentaris</string>
   <string name="navigation_item_logout">Finalitza la sessió</string>
+  <string name="navigation_item_info">Tutorial</string>
+  <string name="navigation_item_notification">Notificacions</string>
   <string name="no_description_found">no s\'ha trobat cap descripció</string>
   <string name="nearby_info_menu_commons_article">Article del fitxer a Commons</string>
   <string name="nearby_info_menu_wikidata_article">Element del Wikidata</string>
+  <string name="error_while_cache">Error mentre es carregaven les fotografies</string>
+  <string name="give_permission">Dóna permís</string>
   <string name="use_external_storage">Utilitza l’emmagatzematge extern</string>
+  <string name="send_log_file">Envia log arxiu</string>
+  <string name="send_log_file_description">Envia log a desenvolupadors via correu electrònic</string>
+  <string name="login_to_your_account">Login al vostre compte</string>
   <string name="nearby_location_has_not_changed">La ubicació no ha canviat.</string>
   <string name="nearby_location_not_available">La ubicació no és disponible.</string>
   <string name="get_directions">COM ANAR-HI</string>

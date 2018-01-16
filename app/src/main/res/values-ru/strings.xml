@@ -72,7 +72,7 @@
     <item quantity="other">%d загрузок</item>
   </plurals>
   <string name="categories_not_found">Категории, соответствующие %1$s, не найдены</string>
-  <string name="categories_skip_explanation" fuzzy="true">Добавьте категории, чтобы ваши изображения можно было легко найти на Викискладе.\n\nНачните вводить название для добавления категорий.\nНажмите на это сообщение (или за ним), чтобы пропустить этот шаг.</string>
+  <string name="categories_skip_explanation">Добавьте категории, чтобы ваши изображения можно было легко найти на Викискладе.\nНачните вводить название для добавления категорий.</string>
   <string name="categories_activity_title">Категории</string>
   <string name="title_activity_settings">Настройки</string>
   <string name="title_activity_signup">Зарегистрироваться</string>
@@ -125,7 +125,7 @@
   <string name="tutorial_3_text">Пожалуйста, НЕ загружайте:</string>
   <string name="tutorial_3_subtext">— Селфи или фотографии ваших друзей\n— Фотографии, которые вы скачали из Интернета\n— Скриншоты несвободных приложений</string>
   <string name="tutorial_4_text">Пример загрузки:</string>
-  <string name="tutorial_4_subtext" fuzzy="true">— Название: Сиднейский оперный театр\n— Описание: Сиднейский оперный театр, вид через залив\n— Категории: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext">— Название: Сиднейский оперный театр\n— Описание: Сиднейский оперный театр, вид через залив\n— Категории: Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Загрузите свои изображения. Помогите Википедии оживить статьи!</string>
   <string name="welcome_wikipedia_subtext">Изображения в Википедии хранятся на Викискладе.</string>
   <string name="welcome_copyright_text">Ваши изображения помогают образованию людей во всём мире.</string>
@@ -192,6 +192,7 @@
   <string name="navigation_item_feedback">Обратная связь</string>
   <string name="navigation_item_logout">Выйти</string>
   <string name="navigation_item_info">Руководство</string>
+  <string name="navigation_item_notification">Уведомления</string>
   <string name="nearby_needs_permissions">Ближайшие места не могут быть отображены без разрешения на геолокацию</string>
   <string name="no_description_found">описание не найдено</string>
   <string name="nearby_info_menu_commons_article">Страница файла на Викискладе</string>
@@ -208,4 +209,5 @@
   <string name="nearby_location_has_not_changed">Местоположение не изменено.</string>
   <string name="nearby_location_not_available">Местоположение недоступно.</string>
   <string name="location_permission_rationale_nearby">Необходимо разрешение для отображения списка ближайших мест</string>
+  <string name="read_article">ЧИТАТЬ СТАТЬЮ</string>
 </resources>

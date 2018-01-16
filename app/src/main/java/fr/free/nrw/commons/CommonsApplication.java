@@ -1,5 +1,6 @@
 package fr.free.nrw.commons;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
@@ -18,15 +19,12 @@ import java.io.File;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import dagger.android.AndroidInjector;
-import dagger.android.DaggerApplication;
 import fr.free.nrw.commons.auth.SessionManager;
+import fr.free.nrw.commons.category.CategoryDao;
 import fr.free.nrw.commons.contributions.ContributionDao;
-import fr.free.nrw.commons.data.CategoryDao;
 import fr.free.nrw.commons.data.DBOpenHelper;
+import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.di.CommonsApplicationComponent;
-import fr.free.nrw.commons.di.CommonsApplicationModule;
-import fr.free.nrw.commons.di.DaggerCommonsApplicationComponent;
 import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.utils.FileUtils;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -42,10 +40,11 @@ import timber.log.Timber;
         resDialogCommentPrompt = R.string.crash_dialog_comment_prompt,
         resDialogOkToast = R.string.crash_dialog_ok_toast
 )
-public class CommonsApplication extends DaggerApplication {
+public class CommonsApplication extends Application {
 
     @Inject SessionManager sessionManager;
     @Inject DBOpenHelper dbOpenHelper;
+
     @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
     @Inject @Named("application_preferences") SharedPreferences applicationPrefs;
     @Inject @Named("prefs") SharedPreferences otherPrefs;
@@ -61,12 +60,18 @@ public class CommonsApplication extends DaggerApplication {
     private CommonsApplicationComponent component;
     private RefWatcher refWatcher;
 
+
     /**
      * Used to declare and initialize various components and dependencies
      */
     @Override
     public void onCreate() {
         super.onCreate();
+
+        ApplicationlessInjection
+                .getInstance(this)
+                .getCommonsApplicationComponent()
+                .inject(this);
 
         Fresco.initialize(this);
         if (setupLeakCanary() == RefWatcher.DISABLED) {
@@ -84,6 +89,7 @@ public class CommonsApplication extends DaggerApplication {
         // Fire progress callbacks for every 3% of uploaded content
         System.setProperty("in.yuvi.http.fluent.PROGRESS_TRIGGER_THRESHOLD", "3.0");
     }
+
 
     /**
      * Helps in setting up LeakCanary library
@@ -105,28 +111,6 @@ public class CommonsApplication extends DaggerApplication {
     public static RefWatcher getRefWatcher(Context context) {
         CommonsApplication application = (CommonsApplication) context.getApplicationContext();
         return application.refWatcher;
-    }
-
-    /**
-    * Helps in injecting dependency library Dagger
-    * @return Dagger injector
-    */
-    @Override
-    protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
-        return injector();
-    }
-
-    /**
-     * used to create injector of application component
-     * @return Application component of Dagger
-     */
-    public CommonsApplicationComponent injector() {
-        if (component == null) {
-            component = DaggerCommonsApplicationComponent.builder()
-                    .appModule(new CommonsApplicationModule(this))
-                    .build();
-        }
-        return component;
     }
 
     /**
