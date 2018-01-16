@@ -19,7 +19,7 @@ class PlaceRenderer extends Renderer<Place> {
     @BindView(R.id.distance) TextView distance;
     @BindView(R.id.icon) ImageView icon;
     private final PlaceClickedListener listener;
-    tvDesc.setVisibility(View.GONE);
+    
     PlaceRenderer(@NonNull PlaceClickedListener listener) {
         this.listener = listener;
     }
@@ -45,9 +45,8 @@ class PlaceRenderer extends Renderer<Place> {
         tvName.setText(place.name);
         String descriptionText = place.getLongDescription();
         if (descriptionText.equals("?")) {
-            descriptionText = getContext().getString(R.string.no_description_found);
+            tvDesc.setVisibility(View.GONE);
         }
-        tvDesc.setText(descriptionText);
         distance.setText(place.distance);
         icon.setImageResource(place.getLabel().getIcon());
     }
