@@ -19,7 +19,7 @@ class PlaceRenderer extends Renderer<Place> {
     @BindView(R.id.distance) TextView distance;
     @BindView(R.id.icon) ImageView icon;
     private final PlaceClickedListener listener;
-
+    tvDesc.setVisibility(View.INVISIBLE);
     PlaceRenderer(@NonNull PlaceClickedListener listener) {
         this.listener = listener;
     }
