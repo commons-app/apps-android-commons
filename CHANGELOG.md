@@ -1,5 +1,12 @@
 # Wikimedia Commons for Android
 
+## v2.6.6
+- Refactored Dagger to fix crashes encountered in production
+- Fixed "?" displaying in description of Nearby places
+- Database-related cleanup and tests
+- Optimized dimens.xml
+- Fixed issue where map opens with incorrect coordinates
+
 ## v2.6.5 beta
 - Changed "send log" feature to only send logs to private Google group forum
 - Switched to using Wikimedia maps server instead of Mapbox for privacy reasons
