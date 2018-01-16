@@ -81,8 +81,7 @@ class PlaceRenderer extends Renderer<Place> {
             }
         });
 
-        //TODO: Set onClickListeners for camera and gallery in list here?
-
+        //TODO: Set onClickListeners for camera and gallery in list here
     }
 
     private void closeLayout(LinearLayout buttonLayout){
@@ -112,8 +111,6 @@ class PlaceRenderer extends Renderer<Place> {
                 view.getContext().startActivity(mapIntent);
             }
         });
-
-        //TODO: Insert onClickListeners for galeryButton and cameraButton
 
         iconOverflow.setVisibility(showMenu() ? View.VISIBLE : View.GONE);
         iconOverflow.setOnClickListener(v -> popupMenuListener());
