@@ -213,4 +213,5 @@
   <string name="location_permission_rationale_nearby">Permission required to display a list of nearby places</string>
     <string name="get_directions">GET DIRECTIONS</string>
   <string name="read_article">READ ARTICLE</string>
+  <string name="reset_password_link">&lt;a href= "https://commons.wikimedia.org/wiki/Special:PasswordReset"&gt;Forgot password?&lt;/a&gt;</string>
 </resources>
