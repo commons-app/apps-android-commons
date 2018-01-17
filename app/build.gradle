@@ -47,8 +47,6 @@ dependencies {
     compile 'com.facebook.fresco:fresco:1.3.0'
     compile 'com.facebook.stetho:stetho:1.5.0'
 
-    compile project(':libraries:opencv')
-
     testCompile 'junit:junit:4.12'
     testCompile 'org.robolectric:robolectric:3.4'
 
@@ -181,11 +179,4 @@ android {
         exclude module: 'commons-logging'
     }
     buildToolsVersion buildToolsVersion
-
-    splits {
-        abi {
-            enable true
-            universalApk false
-        }
-    }
 }

@@ -12,7 +12,6 @@ import com.squareup.leakcanary.RefWatcher;
 import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
-import org.opencv.android.OpenCVLoader;
 
 import java.io.File;
 
@@ -75,11 +74,6 @@ public class CommonsApplication extends DaggerApplication {
         }
 
         Timber.plant(new Timber.DebugTree());
-
-        if(!OpenCVLoader.initDebug()) {
-            //failed to initialise OpenCV so we will not be able to use it!
-            Timber.e("OpenCV init failed!!!");
-        }
 
         if (!BuildConfig.DEBUG) {
             ACRA.init(this);
