@@ -188,7 +188,6 @@
   <string name="navigation_item_feedback">Comentários</string>
   <string name="navigation_item_logout">Sair</string>
   <string name="navigation_item_info">Tutorial</string>
-  <string name="navigation_item_notification">Notificações</string>
   <string name="nearby_needs_permissions">Os sítios aqui perto não podem ser apresentados sem permissões de localização</string>
   <string name="no_description_found">não foi encontrada nenhuma descrição</string>
   <string name="nearby_info_menu_commons_article">Página do ficheiro no Commons</string>

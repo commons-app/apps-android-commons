@@ -188,7 +188,6 @@
   <string name="navigation_item_feedback">Geri bildirim</string>
   <string name="navigation_item_logout">Çıkış</string>
   <string name="navigation_item_info">Eğitim</string>
-  <string name="navigation_item_notification">Bildirimler</string>
   <string name="nearby_needs_permissions">Yakındaki yerler, konum izinleri olmadan görüntülenemez</string>
   <string name="no_description_found">hiçbir açıklama bulunamadı</string>
   <string name="nearby_info_menu_commons_article">Commons dosya sayfası</string>

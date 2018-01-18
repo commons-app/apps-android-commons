@@ -187,7 +187,6 @@
   <string name="navigation_item_feedback">आपके सुझाव</string>
   <string name="navigation_item_logout">प्रस्थान करें</string>
   <string name="navigation_item_info">अनुशिक्षण</string>
-  <string name="navigation_item_notification">सूचनायें</string>
   <string name="nearby_needs_permissions">आस-पास के स्थान बिना स्थान अनुमतियों के प्रदर्शित नहीं किए जा सकते हैं</string>
   <string name="no_description_found">कोई विवरण नहीं मिला</string>
   <string name="nearby_info_menu_commons_article">कॉमन्स फाइल पृष्ठ</string>

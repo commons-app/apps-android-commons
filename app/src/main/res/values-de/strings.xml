@@ -188,7 +188,6 @@
   <string name="navigation_item_feedback">Rückmeldungen</string>
   <string name="navigation_item_logout">Abmelden</string>
   <string name="navigation_item_info">Anleitung</string>
-  <string name="navigation_item_notification">Benachrichtigungen</string>
   <string name="nearby_needs_permissions">Orte in der Nähe können ohne Berechtigung zur Standortbestimmung nicht ermittelt werden</string>
   <string name="no_description_found">Keine Beschreibung gefunden</string>
   <string name="nearby_info_menu_commons_article">Commons-Dateiseite</string>

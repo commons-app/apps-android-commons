@@ -188,7 +188,6 @@
   <string name="navigation_item_feedback">Commentaire</string>
   <string name="navigation_item_logout">Déconnexion</string>
   <string name="navigation_item_info">Tutoriel</string>
-  <string name="navigation_item_notification">Notifications</string>
   <string name="nearby_needs_permissions">Les endroits proches ne peuvent pas être affichés si vous ne partagez pas votre position géographique.</string>
   <string name="no_description_found">aucune description trouvée</string>
   <string name="nearby_info_menu_commons_article">Page des fichiers de Commons</string>

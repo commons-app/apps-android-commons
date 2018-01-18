@@ -188,7 +188,6 @@
   <string name="navigation_item_feedback">Повратне информације</string>
   <string name="navigation_item_logout">Одјави ме</string>
   <string name="navigation_item_info">Туторијал</string>
-  <string name="navigation_item_notification">Обавештења</string>
   <string name="nearby_needs_permissions">Оближња места не могу да се приказују без дозволе за локацију</string>
   <string name="no_description_found">опис није пронађен</string>
   <string name="nearby_info_menu_commons_article">Страница датотеке на Остави</string>

@@ -187,7 +187,6 @@
   <string name="navigation_item_feedback">피드백</string>
   <string name="navigation_item_logout">로그아웃</string>
   <string name="navigation_item_info">강좌</string>
-  <string name="navigation_item_notification">알림</string>
   <string name="nearby_needs_permissions">위치 권한이 없으면 주변 장소를 표시할 수 없습니다</string>
   <string name="no_description_found">설명이 없습니다</string>
   <string name="nearby_info_menu_commons_article">공용 파일 문서</string>

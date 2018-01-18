@@ -6,7 +6,7 @@
   <string name="password">Wagwoord</string>
   <string name="login">Meld aan</string>
   <string name="logging_in_title">Besig met aanmelding</string>
-  <string name="logging_in_message">Wag asseblief…</string>
+  <string name="logging_in_message" fuzzy="true">Wag asseblief…</string>
   <string name="login_success">Aanmelding geslaagd</string>
   <string name="login_failed">Aanmelding gefaal</string>
   <string name="authentication_failed">Verifikasie het gefaal!</string>
@@ -18,7 +18,7 @@
   <string name="upload_progress_notification_title_finishing">Voltooi oplaai van %1$s</string>
   <string name="upload_failed_notification_title">Oplaai van %1$s het gefaal</string>
   <string name="upload_failed_notification_subtitle">Vat om te kyk</string>
-  <string name="title_activity_contributions">My oplaaie</string>
+  <string name="title_activity_contributions" fuzzy="true">My oplaaie</string>
   <string name="contribution_state_queued">Gewaglys</string>
   <string name="contribution_state_failed">Gefaal</string>
   <string name="contribution_state_in_progress">%1$d%% voltooi</string>
@@ -43,10 +43,7 @@
   <string name="categories_search_text_hint">Soek kategorieë</string>
   <string name="menu_save_categories">Stoor</string>
   <string name="categories_not_found">Geen kategorieë met \"%1$s\" gevind nie</string>
-  <string name="categories_skip_explanation">Voeg kategorieë by om dit makliker te maak om u beelde op te spoor.
-
-Begin tik om kategorieë by te sit.
-Tik die boodskap (of terug) om die stap oor te slaan.</string>
+  <string name="categories_skip_explanation" fuzzy="true">Voeg kategorieë by om dit makliker te maak om u beelde op te spoor.\n\nBegin tik om kategorieë by te sit.\nTik die boodskap (of terug) om die stap oor te slaan.</string>
   <string name="categories_activity_title">Kategorieë</string>
   <string name="title_activity_settings">Voorkeure</string>
   <string name="menu_about">Oor ons</string>
@@ -58,7 +55,7 @@ Tik die boodskap (of terug) om die stap oor te slaan.</string>
   <string name="preference_license">Lisensie</string>
   <string name="welcome_final_button_text">Ja!</string>
   <string name="detail_panel_cats_label">Kategorieë</string>
-  <string name="detail_panel_cats_loading">Laai…</string>
+  <string name="detail_panel_cats_loading" fuzzy="true">Laai…</string>
   <string name="detail_panel_cats_none">Niks gekies nie</string>
   <string name="detail_description_empty">Geen beskrywing</string>
   <string name="detail_license_empty">Onbekende lisensie</string>

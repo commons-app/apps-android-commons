@@ -168,7 +168,6 @@
   <string name="navigation_item_feedback">Commenti</string>
   <string name="navigation_item_logout">Esci</string>
   <string name="navigation_item_info">Tutorial</string>
-  <string name="navigation_item_notification">Notifiche</string>
   <string name="no_description_found">nessuna descrizione trovata</string>
   <string name="nearby_info_menu_commons_article">Pagina di Commons del file</string>
   <string name="nearby_info_menu_wikidata_article">Elemento Wikidata</string>

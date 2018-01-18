@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">कमन्स</string>
-  <string name="menu_settings">सेटिङ्गहरू</string>
+  <string name="menu_settings">सेटिङहरू</string>
   <string name="username">प्रयोगकर्ता नाम</string>
   <string name="password">पासवर्ड</string>
   <string name="login">प्रवेश</string>
@@ -9,8 +9,9 @@
   <string name="logging_in_message">कृपया प्रतिक्षा गर्नुहोस् …</string>
   <string name="login_success">प्रवेश सफल!</string>
   <string name="login_failed">प्रवेश सफल हुन सकेन!</string>
+  <string name="upload_failed">फाइल भेटिएन। कृपया अर्को फाइल प्रयास गर्नुहोस्।</string>
   <string name="authentication_failed">प्रमाणिकरण असफल भयो!</string>
-  <string name="uploading_started">अपलोड सुरु भयो!</string>
+  <string name="uploading_started">अपलोड शुरू भयो!</string>
   <string name="upload_completed_notification_title">%1$s अपलोड गरियो !</string>
   <string name="upload_completed_notification_text">तपाईंको अपलोड हेर्नको लागि ट्याप गर्नुहोस्</string>
   <string name="upload_progress_notification_title_start"> %1$s अपलोड सुरू गर्दैै</string>
@@ -18,13 +19,14 @@
   <string name="upload_progress_notification_title_finishing"> %1$s अपलोड सकाउँदै</string>
   <string name="upload_failed_notification_title"> %1$s अपलोड असफल भयो</string>
   <string name="upload_failed_notification_subtitle">हेर्नको लागि ट्याप गर्नुहोस्</string>
-  <string name="title_activity_contributions" fuzzy="true">मेरा अपलोडहरू</string>
+  <string name="title_activity_contributions">मेरा हालैका अपलोडहरू</string>
   <string name="contribution_state_queued">लाममा राखियो</string>
   <string name="contribution_state_failed">असफल भयो</string>
   <string name="contribution_state_in_progress">%1$d%% पूरा भयो</string>
   <string name="contribution_state_starting">अपलोड हुँदै</string>
   <string name="menu_from_gallery">ग्यालरीबाट</string>
   <string name="menu_from_camera">फोटो खिच्नुहोस्</string>
+  <string name="menu_nearby">वरिपरिका</string>
   <string name="provider_contributions">मेरा अपलोडहरू</string>
   <string name="menu_share">बाड्ने</string>
   <string name="menu_open_in_browser">ब्राउजरमा हेर्ने</string>

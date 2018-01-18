@@ -188,7 +188,6 @@
   <string name="navigation_item_feedback">Σχόλια</string>
   <string name="navigation_item_logout">Αποσύνδεση</string>
   <string name="navigation_item_info">Σεμινάριο</string>
-  <string name="navigation_item_notification">Ενημερώσεις</string>
   <string name="nearby_needs_permissions">Οι κοντινές τοποθεσίες δεν μπορούν να προβληθούν δίχως τις άδειες τοποθεσίας</string>
   <string name="no_description_found">δεν βρέθηκε περιγραφή</string>
   <string name="nearby_info_menu_commons_article">Σελίδα φακέλλου κοινής χρήσης</string>
