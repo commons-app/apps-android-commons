@@ -53,6 +53,14 @@
                 android:gravity="center"
                 android:text="@string/about_license" />
 
+            <fr.free.nrw.commons.ui.widget.HtmlTextView
+                android:id="@+id/about_improve"
+                style="?android:textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_gap"
+                android:gravity="center"
+                android:text="@string/about_improve" />
 
 
             <LinearLayout
