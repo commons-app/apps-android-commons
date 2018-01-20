@@ -242,7 +242,10 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
     }
 
     private void setLicenseSummary(String license) {
-        licenseSummaryView.setText(getString(R.string.share_license_summary, getString(Utils.licenseNameFor(license))));
+        String udata=getString(R.string.share_license_summary, getString(Utils.licenseNameFor(license)));
+        SpannableString content = new SpannableString(udata);
+        content.setSpan(new UnderlineSpan(), 33, udata.length(), 0);
+        licenseSummaryView.setText(content);
     }
 
     @Override

@@ -87,7 +87,7 @@
   <string name="no_uploads_yet">You have not yet uploaded any photos.</string>
   <string name="menu_retry_upload">Retry</string>
   <string name="menu_cancel_upload">Cancel</string>
-  <string name="share_license_summary">This image will be licensed under %1$s</string>
+  <string name="share_license_summary">This image will be licensed under %1$s </string>
   <string name="media_upload_policy">By submitting this picture, I declare that this is my own work, that it does not contain copyrighted material or selfies, and otherwise adheres to &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons policies&lt;/a&gt;.</string>
   <string name="menu_download">Download</string>
   <string name="preference_license">License</string>
