@@ -129,11 +129,11 @@ public class ApacheHttpClientMediaWikiApiTest {
 
         RecordedRequest loginRequest = assertBasicRequestParameters(server, "POST");
         body = parseBody(loginRequest.getBody().readUtf8());
-        assertEquals("1", body.get("rememberMe"));
+        assertEquals("true", body.get("rememberMe"));
         assertEquals("foo", body.get("username"));
         assertEquals("bar", body.get("password"));
         assertEquals("baz", body.get("logintoken"));
-        assertEquals("1", body.get("logincontinue"));
+        assertEquals("true", body.get("logincontinue"));
         assertEquals("2fa", body.get("OATHToken"));
         assertEquals("xml", body.get("format"));
 
