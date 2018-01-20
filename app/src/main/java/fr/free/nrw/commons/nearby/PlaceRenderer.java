@@ -47,6 +47,9 @@ class PlaceRenderer extends Renderer<Place> {
         if (descriptionText.equals("?")) {
             tvDesc.setVisibility(View.GONE);
         }
+        else{
+            tvDesc.setText(descriptionText);
+        }
         distance.setText(place.distance);
         icon.setImageResource(place.getLabel().getIcon());
     }
