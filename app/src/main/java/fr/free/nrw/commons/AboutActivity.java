@@ -1,6 +1,9 @@
 package fr.free.nrw.commons;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -32,5 +35,30 @@ public class AboutActivity extends NavigationBaseActivity {
 
         versionText.setText(BuildConfig.VERSION_NAME);
         initDrawer();
+    }
+
+    public void getOpenFacebookIntent(View view) {
+
+        Intent intent;
+        try {
+            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/" + "1921335171459985"));
+            intent.setPackage("com.facebook.katana");
+            startActivity(intent);
+        } catch (Exception e) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/" + "1921335171459985")));
+        }
+
+    }
+
+    public void getOpenGithubIntent(View view) {
+
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/commons-app/apps-android-commons\\"));
+        startActivity(browserIntent);
+    }
+
+    public void getOpenWebsiteIntent(View view) {
+
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://commons-app.github.io/\\"));
+        startActivity(browserIntent);
     }
 }
