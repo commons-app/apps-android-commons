@@ -19,7 +19,7 @@ import static fr.free.nrw.commons.auth.AccountUtil.ACCOUNT_TYPE;
 import static fr.free.nrw.commons.auth.AccountUtil.AUTH_TOKEN_TYPE;
 
 public class WikiAccountAuthenticator extends AbstractAccountAuthenticator {
-    private static final String[] SYNC_AUTHORITIES = {ContributionsContentProvider.AUTHORITY, ModificationsContentProvider.AUTHORITY};
+    private static final String[] SYNC_AUTHORITIES = {ContributionsContentProvider.CONTRIBUTION_AUTHORITY, ModificationsContentProvider.MODIFICATIONS_AUTHORITY};
 
     @NonNull
     private final Context context;

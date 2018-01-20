@@ -6,8 +6,6 @@ import javax.inject.Inject;
 
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 import static fr.free.nrw.commons.auth.AccountUtil.AUTH_COOKIE;
 
@@ -23,13 +21,10 @@ public abstract class AuthenticatedActivity extends NavigationBaseActivity {
             onAuthCookieAcquired(authCookie);
             return;
         }
-        sessionManager.getAndSetAuthCookie()
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(cookie -> {
-                    authCookie = cookie;
-                    onAuthCookieAcquired(authCookie);
-                });
+        authCookie = sessionManager.getAuthCookie();
+        if (authCookie != null) {
+            onAuthCookieAcquired(authCookie);
+        }
     }
 
     @Override

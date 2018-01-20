@@ -3,15 +3,14 @@ package fr.free.nrw.commons.auth;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
-import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.auth.AccountUtil.ACCOUNT_TYPE;
-import static fr.free.nrw.commons.auth.AccountUtil.AUTH_TOKEN_TYPE;
 
 /**
  * Manage the current logged in user session.
@@ -20,11 +19,13 @@ public class SessionManager {
     private final Context context;
     private final MediaWikiApi mediaWikiApi;
     private Account currentAccount; // Unlike a savings account...  ;-)
+    private SharedPreferences sharedPreferences;
 
-    public SessionManager(Context context, MediaWikiApi mediaWikiApi) {
+    public SessionManager(Context context, MediaWikiApi mediaWikiApi, SharedPreferences sharedPreferences) {
         this.context = context;
         this.mediaWikiApi = mediaWikiApi;
         this.currentAccount = null;
+        this.sharedPreferences = sharedPreferences;
     }
 
     /**
@@ -50,31 +51,28 @@ public class SessionManager {
         }
 
         accountManager.invalidateAuthToken(ACCOUNT_TYPE, mediaWikiApi.getAuthCookie());
-        getAndSetAuthCookie().subscribeOn(Schedulers.io())
-                .subscribe(authCookie -> {
-                    mediaWikiApi.setAuthCookie(authCookie);
-                });
+        String authCookie = getAuthCookie();
+
+        if (authCookie == null) {
+            return false;
+        }
+        mediaWikiApi.setAuthCookie(authCookie);
         return true;
     }
 
-    public Observable<String> getAndSetAuthCookie() {
-        AccountManager accountManager = AccountManager.get(context);
-        Account curAccount = getCurrentAccount();
-        return Observable.fromCallable(() -> {
-            String authCookie = accountManager.blockingGetAuthToken(curAccount, AUTH_TOKEN_TYPE, false);
-            if (authCookie == null) {
-                Timber.d("Media wiki auth cookie is %s", mediaWikiApi.getAuthCookie());
-                authCookie = mediaWikiApi.getAuthCookie();
-                //authCookie = currentAccount.name + "|" + currentAccount.type + "|" + mediaWikiApi.getUserAgent();
-                //mediaWikiApi.setAuthCookie(authCookie);
+    public String getAuthCookie() {
+        boolean isLoggedIn = sharedPreferences.getBoolean("isUserLoggedIn", false);
 
-            }
-            Timber.d("Auth cookie is %s", authCookie);
-            return authCookie;
-        }).onErrorReturn(throwable-> {
-            Timber.e(throwable, "Auth cookie is still null :(");
+        if (!isLoggedIn) {
+            Timber.e("User is not logged in");
             return null;
-        });
+        } else {
+            String authCookie = sharedPreferences.getString("getAuthCookie", null);
+            if (authCookie == null) {
+                Timber.e("Auth cookie is null even after login");
+            }
+            return authCookie;
+        }
     }
 
     public Completable clearAllAccounts() {

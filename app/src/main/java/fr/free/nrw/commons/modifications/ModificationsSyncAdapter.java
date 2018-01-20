@@ -55,7 +55,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
             return;
         }
 
-        String authCookie = sessionManager.getAndSetAuthCookie().blockingSingle();
+        String authCookie = sessionManager.getAuthCookie();
         if (isNullOrWhiteSpace(authCookie)) {
             Timber.d("Could not authenticate :(");
             return;

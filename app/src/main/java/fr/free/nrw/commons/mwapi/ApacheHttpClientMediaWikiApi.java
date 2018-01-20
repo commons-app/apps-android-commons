@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.mwapi;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -60,8 +61,9 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     private AbstractHttpClient httpClient;
     private MWApi api;
     private Context context;
+    private SharedPreferences sharedPreferences;
 
-    public ApacheHttpClientMediaWikiApi(Context context, String apiURL) {
+    public ApacheHttpClientMediaWikiApi(Context context, String apiURL, SharedPreferences sharedPreferences) {
         this.context = context;
         BasicHttpParams params = new BasicHttpParams();
         SchemeRegistry schemeRegistry = new SchemeRegistry();
@@ -72,6 +74,7 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         params.setParameter(CoreProtocolPNames.USER_AGENT, getUserAgent());
         httpClient = new DefaultHttpClient(cm, params);
         api = new MWApi(apiURL, httpClient);
+        this.sharedPreferences = sharedPreferences;
     }
 
     @Override
@@ -143,19 +146,34 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         String status = loginApiResult.getString("/api/clientlogin/@status");
         if (status.equals("PASS")) {
             api.isLoggedIn = true;
+            setAuthCookieOnLogin(true);
             return status;
         } else if (status.equals("FAIL")) {
+            setAuthCookieOnLogin(false);
             return loginApiResult.getString("/api/clientlogin/@messagecode");
         } else if (
                 status.equals("UI")
                         && loginApiResult.getString("/api/clientlogin/requests/_v/@id").equals("TOTPAuthenticationRequest")
                         && loginApiResult.getString("/api/clientlogin/requests/_v/@provider").equals("Two-factor authentication (OATH).")
                 ) {
+            setAuthCookieOnLogin(false);
             return "2FA";
         }
 
         // UI, REDIRECT, RESTART
         return "genericerror-" + status;
+    }
+
+    private void setAuthCookieOnLogin(boolean isLoggedIn) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        if (isLoggedIn) {
+            editor.putBoolean("isUserLoggedIn", true);
+            editor.putString("getAuthCookie", api.getAuthCookie());
+        } else {
+            editor.putBoolean("isUserLoggedIn", false);
+            editor.remove("getAuthCookie");
+        }
+        editor.apply();
     }
 
     @Override
