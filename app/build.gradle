@@ -94,7 +94,12 @@ android {
     }
 
     sourceSets {
+        // use kotlin only in tests (for now)
         test.java.srcDirs += 'src/test/kotlin'
+
+        // use main assets and resources in test
+        test.assets.srcDirs += 'src/main/assets'
+        test.resources.srcDirs += 'src/main/resoures'
     }
 
     buildTypes {
