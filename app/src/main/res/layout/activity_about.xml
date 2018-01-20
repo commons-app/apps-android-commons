@@ -53,14 +53,48 @@
                 android:gravity="center"
                 android:text="@string/about_license" />
 
-            <fr.free.nrw.commons.ui.widget.HtmlTextView
-                android:id="@+id/about_improve"
-                style="?android:textAppearanceSmall"
-                android:layout_width="wrap_content"
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/small_gap"
                 android:gravity="center"
-                android:text="@string/about_improve" />
+                android:orientation="horizontal"
+                android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                android:layout_marginStart="@dimen/activity_margin_horizontal"
+                android:layout_marginRight="@dimen/activity_margin_horizontal"
+                android:layout_marginTop="@dimen/activity_margin_horizontal"
+                android:layout_marginEnd="@dimen/activity_margin_horizontal"
+                >
+
+                <ImageView
+                    android:layout_width="@dimen/overflow_icon_dimen"
+                    android:layout_height="@dimen/overflow_icon_dimen"
+                    android:src="@drawable/ic_action_globe"
+                    android:contentDescription= "@string/commons_website"
+                    android:layout_margin="@dimen/activity_margin_horizontal"
+                    android:onClick="getOpenWebsiteIntent"
+                    />
+
+                <ImageView
+                    android:layout_width="@dimen/overflow_icon_dimen"
+                    android:layout_height="@dimen/overflow_icon_dimen"
+                    android:src="@drawable/ic_action_facebook"
+                    android:contentDescription= "@string/commons_facebook"
+                    android:layout_margin="@dimen/activity_margin_horizontal"
+                    android:onClick="getOpenFacebookIntent"
+                    />
+
+                <ImageView
+                    android:layout_width="@dimen/overflow_icon_dimen"
+                    android:layout_height="@dimen/overflow_icon_dimen"
+                    android:src="@drawable/ic_action_github"
+                    android:contentDescription= "@string/commons_github"
+                    android:layout_margin="@dimen/activity_margin_horizontal"
+                    android:onClick="getOpenGithubIntent"
+                    />
+
+            </LinearLayout>
 
             <fr.free.nrw.commons.ui.widget.HtmlTextView
                 android:id="@+id/about_privacy_policy"
