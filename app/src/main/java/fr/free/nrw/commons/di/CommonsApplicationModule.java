@@ -9,7 +9,6 @@ import android.support.v4.util.LruCache;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
 import fr.free.nrw.commons.BuildConfig;
@@ -22,7 +21,6 @@ import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.mwapi.ApacheHttpClientMediaWikiApi;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.nearby.NearbyPlaces;
-import fr.free.nrw.commons.notification.NotificationClient;
 import fr.free.nrw.commons.upload.UploadController;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -136,11 +134,5 @@ public class CommonsApplicationModule {
     @Singleton
     public LruCache<String, String> provideLruCache() {
         return new LruCache<>(1024);
-    }
-
-    @Provides
-    @Singleton
-    public NotificationClient provideNotificationClient() {
-        return new NotificationClient(BuildConfig.COMMONS_BASE_URL);
     }
 }
