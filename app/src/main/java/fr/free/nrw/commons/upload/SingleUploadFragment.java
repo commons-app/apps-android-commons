@@ -50,7 +50,7 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.titleEdit) EditText titleEdit;
     @BindView(R.id.descEdit) EditText descEdit;
     @BindView(R.id.titleDescButton) Button titleDescButton;
-    @BindView(R.id.share_license_summary) TextView licenseSummaryView;
+    @BindView(R.id.share_license_summary) HtmlTextView licenseSummaryView;
     @BindView(R.id.licenseSpinner) Spinner licenseSpinner;
 
     @Inject @Named("default_preferences") SharedPreferences prefs;
