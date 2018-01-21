@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
 
@@ -37,6 +38,7 @@ public class AboutActivity extends NavigationBaseActivity {
         initDrawer();
     }
 
+    @OnClick(R.id.facebook_launch_icon)
     public void launchFacebook(View view) {
 
         Intent intent;
@@ -50,12 +52,14 @@ public class AboutActivity extends NavigationBaseActivity {
 
     }
 
+    @OnClick(R.id.github_launch_icon)
     public void launchGithub(View view) {
 
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/commons-app/apps-android-commons\\"));
         startActivity(browserIntent);
     }
 
+    @OnClick(R.id.website_launch_icon)
     public void launchWebsite(View view) {
 
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://commons-app.github.io/\\"));
