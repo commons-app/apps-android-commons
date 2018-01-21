@@ -37,7 +37,7 @@ public class AboutActivity extends NavigationBaseActivity {
         initDrawer();
     }
 
-    public void getOpenFacebookIntent(View view) {
+    public void launchFacebook(View view) {
 
         Intent intent;
         try {
@@ -50,13 +50,13 @@ public class AboutActivity extends NavigationBaseActivity {
 
     }
 
-    public void getOpenGithubIntent(View view) {
+    public void launchGithub(View view) {
 
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/commons-app/apps-android-commons\\"));
         startActivity(browserIntent);
     }
 
-    public void getOpenWebsiteIntent(View view) {
+    public void launchWebsite(View view) {
 
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://commons-app.github.io/\\"));
         startActivity(browserIntent);
