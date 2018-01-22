@@ -99,9 +99,13 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                 } catch (RemoteException e) {
                     throw new RuntimeException(e);
                 }
-                contributionCursor.moveToFirst();
-                contrib = contributionDao.fromCursor(contributionCursor);
 
+                if (contributionCursor != null) {
+                    contributionCursor.moveToFirst();
+                }
+
+                contrib = contributionDao.fromCursor(contributionCursor);
+                
                 if (contrib.getState() == Contribution.STATE_COMPLETED) {
                     String pageContent;
                     try {
