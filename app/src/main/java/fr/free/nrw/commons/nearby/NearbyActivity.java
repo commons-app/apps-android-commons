@@ -279,7 +279,9 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             Timber.d("Skipping update of nearby places as location is unavailable");
             return;
         }
-
+        
+        lockNearbyView(true); 
+        // Begin refresh 
         progressBar.setVisibility(View.VISIBLE);
         placesDisposable = Observable.fromCallable(() -> nearbyController
                 .loadAttractionsFromLocation(curLatLang, this))
