@@ -10,15 +10,17 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
+
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.SwitchPreference;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import java.io.File;
 
@@ -30,7 +32,6 @@ import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
-import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.utils.FileUtils;
 
 public class SettingsFragment extends PreferenceFragment {
@@ -41,11 +42,8 @@ public class SettingsFragment extends PreferenceFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
-        ApplicationlessInjection
-                .getInstance(getActivity().getApplicationContext())
-                .getCommonsApplicationComponent()
-                .inject(this);
 
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preferences);
@@ -60,7 +58,9 @@ public class SettingsFragment extends PreferenceFragment {
             return true;
         });
 
-        CheckBoxPreference themePreference = (CheckBoxPreference) findPreference("theme");
+        SwitchPreference themePreference = (SwitchPreference) findPreference("theme");
+        SwitchPreference useWikidata = (SwitchPreference) findPreference("useWikidata");
+
         themePreference.setOnPreferenceChangeListener((preference, newValue) -> {
             getActivity().recreate();
             return true;
