@@ -185,9 +185,9 @@
                     <fr.free.nrw.commons.ui.widget.HtmlTextView
                         android:id="@+id/reset_password_link"
                         style="?android:textAppearanceSmall"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/large_gap"
+                        android:gravity="center_horizontal"
                         android:layout_weight="1"
                         android:layout_marginBottom="@dimen/standard_gap"
                         android:text="@string/reset_password_link" />
@@ -195,8 +195,9 @@
                     <fr.free.nrw.commons.ui.widget.HtmlTextView
                         android:id="@+id/about_privacy_policy"
                         style="?android:textAppearanceSmall"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
                         android:layout_weight="1"
                         android:layout_marginBottom="@dimen/standard_gap"
                         android:text="@string/about_privacy_policy" />
