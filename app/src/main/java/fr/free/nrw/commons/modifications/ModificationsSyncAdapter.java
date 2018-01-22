@@ -95,6 +95,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
 
                 Cursor contributionCursor;
                 try {
+                    //TODO: How do we prevent this NPE?
                     contributionCursor = contributionsClient.query(sequence.getMediaUri(), null, null, null, null);
                 } catch (RemoteException e) {
                     throw new RuntimeException(e);
