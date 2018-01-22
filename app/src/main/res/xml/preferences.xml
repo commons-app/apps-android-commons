@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    >
-
+    ><PreferenceCategory
+    android:key="pref_admin_settings"
+    android:title="@string/appearance">
+    <SwitchPreference
+        android:title="@string/preference_theme"
+        android:defaultValue="false"
+        android:summary="@string/preference_theme_summary"
+        android:key="theme"
+        />
+</PreferenceCategory>
+    <PreferenceCategory
+        android:key="pref_admin_settings"
+        android:title="@string/general">
     <ListPreference
         android:key="defaultLicense"
         android:title="@string/preference_license"
@@ -10,28 +21,7 @@
         android:entryValues="@array/pref_defaultLicense_values"
         android:defaultValue="@string/license_pref_cc_by_sa_4_0"
         />
-
-    <CheckBoxPreference
-        android:key="allowGps"
-        android:title="@string/allow_gps"
-        android:defaultValue="false"
-        android:summary="@string/allow_gps_summary"
-        />
-
-    <Preference android:title="@string/become_a_tester_title"
-        android:summary="@string/become_a_tester_description">
-        <intent android:action="android.intent.action.VIEW"
-            android:data="@string/beta_opt_in_link" />
-    </Preference>
-
-    <CheckBoxPreference
-        android:title="@string/preference_theme"
-        android:defaultValue="false"
-        android:summary="@string/preference_theme_summary"
-        android:key="theme"
-        />
-
-    <CheckBoxPreference
+    <SwitchPreference
         android:key="useWikidata"
         android:title="@string/use_wikidata"
         android:defaultValue="true"
@@ -46,16 +36,36 @@
         android:maxLength="3"
         />
 
-    <CheckBoxPreference
+    <SwitchPreference
         android:key="useExternalStorage"
         android:title="@string/use_external_storage"
         android:defaultValue="true"
         android:summary="@string/use_external_storage_summary"
         />
 
-    <Preference
-        android:key="sendLogFile"
-        android:title="@string/send_log_file"
-        android:summary="@string/send_log_file_description"/>
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="allowGps"
+        android:summary="@string/allow_gps_summary"
+        android:title="@string/allow_gps" />
 
+
+
+    <Preference android:title="@string/become_a_tester_title"
+        android:summary="@string/become_a_tester_description">
+        <intent android:action="android.intent.action.VIEW"
+            android:data="@string/beta_opt_in_link" />
+    </Preference>
+    </PreferenceCategory>
+
+
+    <PreferenceCategory
+        android:key="pref_admin_settings"
+        android:title="@string/feedback">
+        <Preference
+            android:key="sendLogFile"
+            android:summary="@string/send_log_file_description"
+            android:title="@string/send_log_file"
+            />
+    </PreferenceCategory>
 </PreferenceScreen>
