@@ -59,7 +59,7 @@ public class SettingsFragment extends PreferenceFragment {
         });
 
         SwitchPreference themePreference = (SwitchPreference) findPreference("theme");
-        SwitchPreference useWikidata = (SwitchPreference) findPreference("useWikidata");
+       
 
         themePreference.setOnPreferenceChangeListener((preference, newValue) -> {
             getActivity().recreate();
