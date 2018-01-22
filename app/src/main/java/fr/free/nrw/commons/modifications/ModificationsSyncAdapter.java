@@ -105,8 +105,8 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                 }
 
                 contrib = contributionDao.fromCursor(contributionCursor);
-                
-                if (contrib.getState() == Contribution.STATE_COMPLETED) {
+
+                if (contrib != null && contrib.getState() == Contribution.STATE_COMPLETED) {
                     String pageContent;
                     try {
                         pageContent = mwApi.revisionsByFilename(contrib.getFilename());
