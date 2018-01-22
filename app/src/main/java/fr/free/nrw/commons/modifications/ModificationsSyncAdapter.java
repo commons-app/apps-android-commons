@@ -111,7 +111,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                     try {
                         pageContent = mwApi.revisionsByFilename(contrib.getFilename());
                     } catch (IOException e) {
-                        Timber.d("Network fuckup on modifications sync!");
+                        Timber.d("Network messed up on modifications sync!");
                         continue;
                     }
 
@@ -122,7 +122,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                     try {
                         editResult = mwApi.edit(editToken, processedPageContent, contrib.getFilename(), sequence.getEditSummary());
                     } catch (IOException e) {
-                        Timber.d("Network fuckup on modifications sync!");
+                        Timber.d("Network messed up on modifications sync!");
                         continue;
                     }
 
