@@ -128,7 +128,6 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
 
                     Timber.d("Response is %s", editResult);
 
-                    if (!editResult.equals("Success")) {
                         // FIXME: Log this somewhere else
                         Timber.d("Non success result! %s", editResult);
                     } else {
