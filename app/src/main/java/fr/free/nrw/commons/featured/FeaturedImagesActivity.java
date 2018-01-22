@@ -66,7 +66,8 @@ public class FeaturedImagesActivity
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         if (mediaDetails == null || !mediaDetails.isVisible()) {
-            mediaDetails = new MediaDetailPagerFragment();
+            // set isFeaturedImage true for featured images, to include author field on media detail
+            mediaDetails = new MediaDetailPagerFragment(false, true);
             FragmentManager supportFragmentManager = getSupportFragmentManager();
             supportFragmentManager
                     .beginTransaction()
