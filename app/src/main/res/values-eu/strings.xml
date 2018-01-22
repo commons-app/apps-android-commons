@@ -124,6 +124,7 @@
   <string name="become_a_tester_title">Beta testatzaile bihurtu</string>
   <string name="use_wikidata">Wikidata erabili</string>
   <string name="use_wikidata_summary">(Erne:hau kentzeak mugikorrak datu asko kontsumitzea ekar dezake)</string>
+  <string name="_2fa_code">2FA Kodea</string>
   <string name="maximum_limit">Gehienezko muga</string>
   <string name="maximum_limit_alert">500 baino gehiago ezin dira erakutsi</string>
   <string name="commons_logo">Commonsen logoa</string>
@@ -155,6 +156,8 @@
   <string name="nearby_info_menu_commons_article">Artxibo orrialde komuna</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata itema</string>
   <string name="error_while_cache">Argazkiak hartzerakoan sortutako akatsa</string>
+  <string name="give_permission">Baimena eman</string>
+  <string name="login_to_your_account">Zure kontuan saioa hasi</string>
   <string name="get_directions">NORABIDEAK JASO</string>
   <string name="read_article">IRAKURRI ARTIKULUA</string>
 </resources>

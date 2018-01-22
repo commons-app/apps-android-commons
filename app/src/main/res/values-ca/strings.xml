@@ -166,9 +166,9 @@
   <string name="error_while_cache">Error mentre es carregaven les fotografies</string>
   <string name="give_permission">Dóna permís</string>
   <string name="use_external_storage">Utilitza l’emmagatzematge extern</string>
-  <string name="send_log_file">Envia log arxiu</string>
-  <string name="send_log_file_description">Envia log a desenvolupadors via correu electrònic</string>
-  <string name="login_to_your_account">Login al vostre compte</string>
+  <string name="send_log_file">Envia el fitxer de registre</string>
+  <string name="send_log_file_description">Envia el registre als desenvolupadors per correu</string>
+  <string name="login_to_your_account">Entreu en el vostre compte</string>
   <string name="nearby_location_has_not_changed">La ubicació no ha canviat.</string>
   <string name="nearby_location_not_available">La ubicació no és disponible.</string>
   <string name="get_directions">COM ANAR-HI</string>
