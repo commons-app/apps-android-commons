@@ -40,14 +40,16 @@ import timber.log.Timber;
 public class MediaDetailFragment extends DaggerFragment {
 
     private boolean editable;
+    private boolean isFeaturedMedia;
     private MediaDetailPagerFragment.MediaDetailProvider detailProvider;
     private int index;
 
-    public static MediaDetailFragment forMedia(int index, boolean editable) {
+    public static MediaDetailFragment forMedia(int index, boolean editable, boolean isFeaturedMedia) {
         MediaDetailFragment mf = new MediaDetailFragment();
 
         Bundle state = new Bundle();
         state.putBoolean("editable", editable);
+        state.putBoolean("isFeaturedMedia", isFeaturedMedia);
         state.putInt("index", index);
         state.putInt("listIndex", 0);
         state.putInt("listTop", 0);
@@ -66,10 +68,12 @@ public class MediaDetailFragment extends DaggerFragment {
 
     private TextView title;
     private TextView desc;
+    private TextView author;
     private TextView license;
     private TextView coordinates;
     private TextView uploadedDate;
     private LinearLayout categoryContainer;
+    private LinearLayout authorLayout;
     private ScrollView scrollView;
     private ArrayList<String> categoryNames;
     private boolean categoriesLoaded = false;
@@ -85,6 +89,7 @@ public class MediaDetailFragment extends DaggerFragment {
         super.onSaveInstanceState(outState);
         outState.putInt("index", index);
         outState.putBoolean("editable", editable);
+        outState.putBoolean("isFeaturedMedia", isFeaturedMedia);
 
         getScrollPosition();
         outState.putInt("listTop", initialListTop);
@@ -100,13 +105,16 @@ public class MediaDetailFragment extends DaggerFragment {
 
         if (savedInstanceState != null) {
             editable = savedInstanceState.getBoolean("editable");
+            isFeaturedMedia = savedInstanceState.getBoolean("isFeaturedMedia");
             index = savedInstanceState.getInt("index");
             initialListTop = savedInstanceState.getInt("listTop");
         } else {
             editable = getArguments().getBoolean("editable");
+            isFeaturedMedia = getArguments().getBoolean("isFeaturedMedia");
             index = getArguments().getInt("index");
             initialListTop = 0;
         }
+
         categoryNames = new ArrayList<>();
         categoryNames.add(getString(R.string.detail_panel_cats_loading));
 
@@ -119,10 +127,18 @@ public class MediaDetailFragment extends DaggerFragment {
         spacer = (MediaDetailSpacer) view.findViewById(R.id.mediaDetailSpacer);
         title = (TextView) view.findViewById(R.id.mediaDetailTitle);
         desc = (TextView) view.findViewById(R.id.mediaDetailDesc);
+        author = (TextView) view.findViewById(R.id.mediaDetailAuthor);
         license = (TextView) view.findViewById(R.id.mediaDetailLicense);
         coordinates = (TextView) view.findViewById(R.id.mediaDetailCoordinates);
         uploadedDate = (TextView) view.findViewById(R.id.mediaDetailuploadeddate);
         categoryContainer = (LinearLayout) view.findViewById(R.id.mediaDetailCategoryContainer);
+        authorLayout = (LinearLayout) view.findViewById(R.id.authorLinearLayout);
+
+        if (isFeaturedMedia){
+            authorLayout.setVisibility(View.VISIBLE);
+        } else {
+            authorLayout.setVisibility(View.GONE);
+        }
 
         licenseList = new LicenseList(getActivity());
 

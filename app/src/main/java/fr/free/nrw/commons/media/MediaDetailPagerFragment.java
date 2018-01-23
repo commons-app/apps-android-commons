@@ -49,14 +49,16 @@ public class MediaDetailPagerFragment extends DaggerFragment implements ViewPage
 
     private ViewPager pager;
     private Boolean editable;
+    private boolean isFeaturedImage;
 
     public MediaDetailPagerFragment() {
-        this(false);
+        this(false, false);
     }
 
     @SuppressLint("ValidFragment")
-    public MediaDetailPagerFragment(Boolean editable) {
+    public MediaDetailPagerFragment(Boolean editable, boolean isFeaturedImage) {
         this.editable = editable;
+        this.isFeaturedImage = isFeaturedImage;
     }
 
     @Override
@@ -90,6 +92,7 @@ public class MediaDetailPagerFragment extends DaggerFragment implements ViewPage
         super.onSaveInstanceState(outState);
         outState.putInt("current-page", pager.getCurrentItem());
         outState.putBoolean("editable", editable);
+        outState.putBoolean("isFeaturedImage", isFeaturedImage);
     }
 
     @Override
@@ -97,6 +100,7 @@ public class MediaDetailPagerFragment extends DaggerFragment implements ViewPage
         super.onCreate(savedInstanceState);
         if (savedInstanceState != null) {
             editable = savedInstanceState.getBoolean("editable");
+            isFeaturedImage = savedInstanceState.getBoolean("isFeaturedImage");
         }
         setHasOptionsMenu(true);
     }
@@ -272,7 +276,7 @@ public class MediaDetailPagerFragment extends DaggerFragment implements ViewPage
                 // See bug https://code.google.com/p/android/issues/detail?id=27526
                 pager.postDelayed(() -> getActivity().supportInvalidateOptionsMenu(), 5);
             }
-            return MediaDetailFragment.forMedia(i, editable);
+            return MediaDetailFragment.forMedia(i, editable, isFeaturedImage);
         }
 
         @Override
