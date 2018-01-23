@@ -79,27 +79,30 @@
                     android:id="@+id/website_launch_icon"
                     android:layout_width="@dimen/overflow_icon_dimen"
                     android:layout_height="@dimen/overflow_icon_dimen"
-                    android:src="@drawable/ic_action_globe"
+                    app:srcCompat="@drawable/ic_action_website"
                     android:contentDescription= "@string/commons_website"
                     android:layout_margin="@dimen/activity_margin_horizontal"
+                    android:tint="?attr/iconsTheme"
                     />
 
                 <ImageView
                     android:id="@+id/facebook_launch_icon"
                     android:layout_width="@dimen/overflow_icon_dimen"
                     android:layout_height="@dimen/overflow_icon_dimen"
-                    android:src="@drawable/ic_action_facebook"
+                    app:srcCompat="@drawable/ic_action_facebook"
                     android:contentDescription= "@string/commons_facebook"
                     android:layout_margin="@dimen/activity_margin_horizontal"
+                    android:tint="?attr/iconsTheme"
                     />
 
                 <ImageView
                     android:id="@+id/github_launch_icon"
                     android:layout_width="@dimen/overflow_icon_dimen"
                     android:layout_height="@dimen/overflow_icon_dimen"
-                    android:src="@drawable/ic_action_github"
+                    app:srcCompat="@drawable/ic_action_github"
                     android:contentDescription= "@string/commons_github"
                     android:layout_margin="@dimen/activity_margin_horizontal"
+                    android:tint="?attr/iconsTheme"
                     />
 
             </LinearLayout>
