@@ -1,5 +1,4 @@
 package fr.free.nrw.commons.settings;
-
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
@@ -10,7 +9,6 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -21,13 +19,10 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.widget.Toast;
 import android.widget.ToggleButton;
-
 import java.io.File;
-
+import fr.free.nrw.commons.di.ApplicationlessInjection;
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
@@ -42,9 +37,11 @@ public class SettingsFragment extends PreferenceFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
-
+        ApplicationlessInjection		
+ -                .getInstance(getActivity().getApplicationContext())		
+ -                .getCommonsApplicationComponent()		
+ -                .inject(this);
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preferences);
 
@@ -58,9 +55,8 @@ public class SettingsFragment extends PreferenceFragment {
             return true;
         });
 
-        SwitchPreference themePreference = (SwitchPreference) findPreference("theme");
-       
-
+        SwitchPreference themePreference = (SwitchPreference) 
+            findPreference("theme");       
         themePreference.setOnPreferenceChangeListener((preference, newValue) -> {
             getActivity().recreate();
             return true;
