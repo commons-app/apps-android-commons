@@ -13,7 +13,7 @@
     <dimen name="tiny_gap">4dp</dimen>
 
     <!-- Component sizes -->
-    <dimen name="overflow_icon_dimen">64dp</dimen>
+    <dimen name="overflow_icon_dimen">56dp</dimen>
     <dimen name="overflow_button_dimen">48dp</dimen>
     <dimen name="half_standard_height">24dp</dimen>
     <dimen name="quarter_standard_height">12dp</dimen>
