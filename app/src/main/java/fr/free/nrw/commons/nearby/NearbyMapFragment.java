@@ -91,6 +91,7 @@ public class NearbyMapFragment extends DaggerFragment {
     private Marker selected;
 
     @Inject @Named("prefs") SharedPreferences prefs;
+    @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
 
     public NearbyMapFragment() {
     }
@@ -407,7 +408,7 @@ public class NearbyMapFragment extends DaggerFragment {
             Timber.d("Camera button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
             controller = new ContributionController(this);
             DirectUpload directUpload = new DirectUpload(place.getName(), place.getLongDescription(), this, controller, prefs);
-            directUpload.storeSharedPrefs();
+            storeSharedPrefs();
             directUpload.initiateCameraUpload();
         });
 
@@ -415,9 +416,17 @@ public class NearbyMapFragment extends DaggerFragment {
             Timber.d("Gallery button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
             controller = new ContributionController(this);
             DirectUpload directUpload = new DirectUpload(place.getName(), place.getLongDescription(), this, controller, prefs);
-            directUpload.storeSharedPrefs();
+            storeSharedPrefs();
             directUpload.initiateGalleryUpload();
         });
+    }
+
+    void storeSharedPrefs() {
+        SharedPreferences.Editor editor = directPrefs.edit();
+
+        editor.putString("Title", title);
+        editor.putString("Desc", desc);
+        editor.apply();
     }
 
     @Override
