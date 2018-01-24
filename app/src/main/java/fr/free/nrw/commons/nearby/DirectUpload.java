@@ -19,17 +19,13 @@ import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 public class DirectUpload {
 
-    private String title;
-    private String desc;
     private ContributionController controller;
     private Fragment fragment;
     private SharedPreferences prefs;
 
 
 
-    DirectUpload(String title, String desc, Fragment fragment, ContributionController controller, SharedPreferences prefs) {
-        this.title = title;
-        this.desc = desc;
+    DirectUpload(Fragment fragment, ContributionController controller, SharedPreferences prefs) {
         this.fragment = fragment;
         this.controller = controller;
         this.prefs = prefs;
