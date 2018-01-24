@@ -25,7 +25,7 @@ public class DirectUpload {
     private Fragment fragment;
     private SharedPreferences prefs;
 
-
+    @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
 
     DirectUpload(String title, String desc, Fragment fragment, ContributionController controller, SharedPreferences prefs) {
         this.title = title;
@@ -36,8 +36,7 @@ public class DirectUpload {
     }
 
     void storeSharedPrefs() {
-        SharedPreferences sharedPref = fragment.getActivity().getSharedPreferences("Direct Upload", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
+        SharedPreferences.Editor editor = directPrefs.edit();
 
         editor.putString("Title", title);
         editor.putString("Desc", desc);
