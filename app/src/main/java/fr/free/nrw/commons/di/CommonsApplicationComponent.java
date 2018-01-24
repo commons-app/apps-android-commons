@@ -10,6 +10,7 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.contributions.ContributionsSyncAdapter;
 import fr.free.nrw.commons.modifications.ModificationsSyncAdapter;
+import fr.free.nrw.commons.nearby.DirectUpload;
 
 @Singleton
 @Component(modules = {
@@ -29,6 +30,8 @@ public interface CommonsApplicationComponent extends AndroidInjector<CommonsAppl
     void inject(ModificationsSyncAdapter syncAdapter);
 
     void inject(MediaWikiImageView mediaWikiImageView);
+
+    void inject(DirectUpload directUpload);
 
     @Component.Builder
     @SuppressWarnings({"WeakerAccess", "unused"})
