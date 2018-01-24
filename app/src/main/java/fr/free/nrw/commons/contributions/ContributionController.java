@@ -70,6 +70,9 @@ public class ContributionController {
         requestWritePermission(fragment.getContext(), takePictureIntent, lastGeneratedCaptureUri);
 
         takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, lastGeneratedCaptureUri);
+        if (!fragment.isAdded()) {
+            return;
+        }
         fragment.startActivityForResult(takePictureIntent, SELECT_FROM_CAMERA);
     }
 
@@ -79,6 +82,9 @@ public class ContributionController {
         pickImageIntent.setType("image/*");
         Timber.d("startGalleryPick() called with pickImageIntent");
         //TODO Add fix for IllegalStateException here
+        if (!fragment.isAdded()) {
+            return;
+        }
         fragment.startActivityForResult(pickImageIntent, SELECT_FROM_GALLERY);
     }
 
