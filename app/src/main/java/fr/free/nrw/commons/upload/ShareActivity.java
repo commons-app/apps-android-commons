@@ -2,7 +2,6 @@ package fr.free.nrw.commons.upload;
 
 import android.Manifest;
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -55,7 +54,6 @@ import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
-import fr.free.nrw.commons.mwapi.EventLog;
 import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
