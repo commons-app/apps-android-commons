@@ -219,14 +219,6 @@ public class ShareActivity
         return isNearbyUpload;
     }
 
-    protected String getNearbyTitle() {
-        return nearbyTitle;
-    }
-
-    protected String getNearbyDesc() {
-        return nearbyDesc;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
