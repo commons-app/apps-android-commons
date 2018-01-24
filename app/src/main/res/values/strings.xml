@@ -87,7 +87,7 @@
   <string name="no_uploads_yet">You have not yet uploaded any photos.</string>
   <string name="menu_retry_upload">Retry</string>
   <string name="menu_cancel_upload">Cancel</string>
-  <string name="share_license_summary">This image will be licensed under %1$s</string>
+  <string name="share_license_summary">This image will be licensed under &lt;a href=\"\"&gt; %1$s&lt;/&gt;</string>
   <string name="media_upload_policy">By submitting this picture, I declare that this is my own work, that it does not contain copyrighted material or selfies, and otherwise adheres to &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons policies&lt;/a&gt;.</string>
   <string name="menu_download">Download</string>
   <string name="preference_license">License</string>
@@ -210,7 +210,7 @@
   <string name="send_log_file">Send log file</string>
   <string name="send_log_file_description">Send log file to developers via email</string>
   <string name="login_to_your_account">Login to your account</string>
-
+<string name="login_to_your_account_beta">Use Commons beta server login credentials. </string>
   <string name="nearby_location_has_not_changed">Location has not changed.</string>
   <string name="nearby_location_not_available">Location not available.</string>
   <string name="location_permission_rationale_nearby">Permission required to display a list of nearby places</string>
