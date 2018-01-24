@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +12,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -136,9 +138,27 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
 
         titleEdit.addTextChangedListener(textWatcher);
 
+        titleEdit.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                hideKeyboard(v);
+            }
+        });
+
+        descEdit.setOnFocusChangeListener((v, hasFocus) -> {
+            if(!hasFocus){
+                hideKeyboard(v);
+            }
+        });
+
         setLicenseSummary(license);
 
         return rootView;
+    }
+
+    public void hideKeyboard(View view) {
+        Log.i("hide", "hideKeyboard: ");
+        InputMethodManager inputMethodManager =(InputMethodManager)getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     @Override
