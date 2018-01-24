@@ -82,7 +82,6 @@
                     app:srcCompat="@drawable/ic_action_website"
                     android:contentDescription= "@string/commons_website"
                     android:layout_margin="@dimen/activity_margin_horizontal"
-                    android:tint="?attr/iconsTheme"
                     />
 
                 <ImageView
@@ -92,7 +91,6 @@
                     app:srcCompat="@drawable/ic_action_facebook"
                     android:contentDescription= "@string/commons_facebook"
                     android:layout_margin="@dimen/activity_margin_horizontal"
-                    android:tint="?attr/iconsTheme"
                     />
 
                 <ImageView
@@ -102,7 +100,6 @@
                     app:srcCompat="@drawable/ic_action_github"
                     android:contentDescription= "@string/commons_github"
                     android:layout_margin="@dimen/activity_margin_horizontal"
-                    android:tint="?attr/iconsTheme"
                     />
 
             </LinearLayout>
