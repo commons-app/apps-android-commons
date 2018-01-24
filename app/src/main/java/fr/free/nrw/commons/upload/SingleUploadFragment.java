@@ -8,8 +8,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
+import android.text.TextPaint;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -40,6 +42,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.settings.Prefs;
+import fr.free.nrw.commons.ui.widget.HtmlTextView;
 import timber.log.Timber;
 
 import static android.view.MotionEvent.ACTION_DOWN;
@@ -50,7 +53,8 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.titleEdit) EditText titleEdit;
     @BindView(R.id.descEdit) EditText descEdit;
     @BindView(R.id.titleDescButton) Button titleDescButton;
-    @BindView(R.id.share_license_summary) TextView licenseSummaryView;
+    @BindView(R.id.share_license_summary) HtmlTextView licenseSummaryView;
+
     @BindView(R.id.licenseSpinner) Spinner licenseSpinner;
 
     @Inject @Named("default_preferences") SharedPreferences prefs;
@@ -242,7 +246,7 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
     }
 
     private void setLicenseSummary(String license) {
-        licenseSummaryView.setText(getString(R.string.share_license_summary, getString(Utils.licenseNameFor(license))));
+        licenseSummaryView.setHtmlText(getString(R.string.share_license_summary, getString(Utils.licenseNameFor(license))));
     }
 
     @Override
