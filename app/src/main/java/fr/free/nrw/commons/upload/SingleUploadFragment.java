@@ -56,6 +56,8 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.licenseSpinner) Spinner licenseSpinner;
 
     @Inject @Named("default_preferences") SharedPreferences prefs;
+    @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
+
 
     private String license;
     private OnUploadActionInitiated uploadActionInitiatedHandler;
@@ -110,8 +112,8 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
         boolean isNearbyUpload = ((ShareActivity) getActivity()).isNearbyUpload();
 
         if (isNearbyUpload) {
-            String imageTitle = ((ShareActivity) getActivity()).getNearbyTitle();
-            String imageDesc = ((ShareActivity) getActivity()).getNearbyDesc();
+            String imageTitle = directPrefs.getString("Title", "");
+            String imageDesc = directPrefs.getString("Desc", "");
             titleEdit.setText(imageTitle);
             descEdit.setText(imageDesc);
         }
