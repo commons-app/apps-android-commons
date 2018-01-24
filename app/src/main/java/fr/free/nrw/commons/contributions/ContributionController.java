@@ -78,6 +78,7 @@ public class ContributionController {
         Intent pickImageIntent = new Intent(ACTION_GET_CONTENT);
         pickImageIntent.setType("image/*");
         Timber.d("startGalleryPick() called with pickImageIntent");
+        //TODO Add fix for IllegalStateException here
         fragment.startActivityForResult(pickImageIntent, SELECT_FROM_GALLERY);
     }
 

@@ -97,7 +97,7 @@ public  class      ShareActivity
     private String description;
     private Snackbar snackbar;
     private boolean duplicateCheckPassed = false;
-    
+
     private boolean isNearbyUpload = false;
 
     /**
