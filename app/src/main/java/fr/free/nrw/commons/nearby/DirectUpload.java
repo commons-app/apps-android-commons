@@ -17,7 +17,7 @@ import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
-class DirectUpload {
+public class DirectUpload {
 
     private String title;
     private String desc;
