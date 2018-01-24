@@ -87,10 +87,14 @@ public class CommonsApplicationModule {
     }
 
     @Provides
-    public UploadController providesUploadController(Context context,
-                                                     SessionManager sessionManager,
-                                                     @Named("default_preferences") SharedPreferences sharedPreferences) {
-        return new UploadController(sessionManager, context, sharedPreferences);
+    @Named("direct_nearby_upload_prefs")
+    public SharedPreferences providesDirectNearbyUploadPreferences() {
+        return application.getSharedPreferences("direct_nearby_upload_prefs", MODE_PRIVATE);
+    }
+
+    @Provides
+    public UploadController providesUploadController(SessionManager sessionManager, @Named("default_preferences") SharedPreferences sharedPreferences) {
+        return new UploadController(sessionManager, application, sharedPreferences);
     }
 
     @Provides
