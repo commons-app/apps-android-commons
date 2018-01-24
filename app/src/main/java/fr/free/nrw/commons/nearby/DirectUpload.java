@@ -23,15 +23,11 @@ public class DirectUpload {
     private Fragment fragment;
     private SharedPreferences prefs;
 
-
-
     DirectUpload(Fragment fragment, ContributionController controller, SharedPreferences prefs) {
         this.fragment = fragment;
         this.controller = controller;
         this.prefs = prefs;
     }
-
-
 
     void initiateCameraUpload() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
