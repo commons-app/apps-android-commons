@@ -81,7 +81,7 @@ public class ContributionController {
         Intent pickImageIntent = new Intent(ACTION_GET_CONTENT);
         pickImageIntent.setType("image/*");
         Timber.d("startGalleryPick() called with pickImageIntent");
-        //TODO Add fix for IllegalStateException here
+        // See https://stackoverflow.com/questions/22366596/android-illegalstateexception-fragment-not-attached-to-activity-webview
         if (!fragment.isAdded()) {
             return;
         }
