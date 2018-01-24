@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
@@ -38,6 +39,9 @@ import com.mapbox.services.android.telemetry.MapboxTelemetry;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
@@ -85,6 +89,8 @@ public class NearbyMapFragment extends DaggerFragment {
 
     private Place place;
     private Marker selected;
+
+    @Inject @Named("prefs") SharedPreferences prefs;
 
     public NearbyMapFragment() {
     }
@@ -400,7 +406,7 @@ public class NearbyMapFragment extends DaggerFragment {
         fabCamera.setOnClickListener(view -> {
             Timber.d("Camera button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
             controller = new ContributionController(this);
-            DirectUpload directUpload = new DirectUpload(place.getName(), place.getLongDescription(), this, controller);
+            DirectUpload directUpload = new DirectUpload(place.getName(), place.getLongDescription(), this, controller, prefs);
             directUpload.storeSharedPrefs();
             directUpload.initiateCameraUpload();
         });
@@ -408,7 +414,7 @@ public class NearbyMapFragment extends DaggerFragment {
         fabGallery.setOnClickListener(view -> {
             Timber.d("Gallery button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
             controller = new ContributionController(this);
-            DirectUpload directUpload = new DirectUpload(place.getName(), place.getLongDescription(), this, controller);
+            DirectUpload directUpload = new DirectUpload(place.getName(), place.getLongDescription(), this, controller, prefs);
             directUpload.storeSharedPrefs();
             directUpload.initiateGalleryUpload();
         });
