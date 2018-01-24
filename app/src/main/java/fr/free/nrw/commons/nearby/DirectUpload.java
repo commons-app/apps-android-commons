@@ -23,15 +23,16 @@ class DirectUpload {
     private String desc;
     private ContributionController controller;
     private Fragment fragment;
+    private SharedPreferences prefs;
 
-    @Inject @Named("prefs") SharedPreferences prefs;
-    @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
 
-    DirectUpload(String title, String desc, Fragment fragment, ContributionController controller) {
+
+    DirectUpload(String title, String desc, Fragment fragment, ContributionController controller, SharedPreferences prefs) {
         this.title = title;
         this.desc = desc;
         this.fragment = fragment;
         this.controller = controller;
+        this.prefs = prefs;
     }
 
     void storeSharedPrefs() {
