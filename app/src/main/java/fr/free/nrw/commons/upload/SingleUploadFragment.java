@@ -57,7 +57,6 @@ public class SingleUploadFragment extends DaggerFragment {
     @Inject @Named("default_preferences") SharedPreferences prefs;
     @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
 
-
     private String license;
     private OnUploadActionInitiated uploadActionInitiatedHandler;
     private TitleTextWatcher textWatcher = new TitleTextWatcher();
@@ -87,7 +86,6 @@ public class SingleUploadFragment extends DaggerFragment {
 
                 uploadActionInitiatedHandler.uploadActionInitiated(title, desc);
                 return true;
-
         }
         return super.onOptionsItemSelected(item);
     }
