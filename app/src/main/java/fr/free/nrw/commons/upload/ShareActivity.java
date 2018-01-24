@@ -245,10 +245,12 @@ public  class      ShareActivity
                 Timber.d("This was initiated by a direct upload from Nearby");
                 isNearbyUpload = true;
 
+                /**
                 SharedPreferences sharedPref = this.getSharedPreferences("Direct Upload", Context.MODE_PRIVATE);
                 nearbyTitle = sharedPref.getString("Title", "");
                 nearbyDesc = sharedPref.getString("Desc", "");
                 Timber.d("In ShareActivity, image title: " + nearbyTitle + " and image desc: " + nearbyDesc);
+                 */
             }
             mimeType = intent.getType();
         }
