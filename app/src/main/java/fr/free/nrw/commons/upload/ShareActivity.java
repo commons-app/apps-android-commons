@@ -111,9 +111,6 @@ public class ShareActivity
     private String description;
     private Snackbar snackbar;
     private boolean duplicateCheckPassed = false;
-
-    private String nearbyTitle;
-    private String nearbyDesc;
     private boolean haveCheckedForOtherImages = false;
     private boolean isNearbyUpload = false;
     /**
