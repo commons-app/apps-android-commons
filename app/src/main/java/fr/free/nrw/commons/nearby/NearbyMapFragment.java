@@ -39,6 +39,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.utils.UriDeserializer;
@@ -47,7 +48,7 @@ import timber.log.Timber;
 import static android.app.Activity.RESULT_OK;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
-public class NearbyMapFragment extends android.support.v4.app.Fragment {
+public class NearbyMapFragment extends DaggerFragment {
 
     private MapView mapView;
     private List<NearbyBaseMarker> baseMarkerOptions;
