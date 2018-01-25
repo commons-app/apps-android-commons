@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.upload;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,7 +11,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -42,6 +40,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.settings.Prefs;
+import fr.free.nrw.commons.ui.widget.HtmlTextView;
 import timber.log.Timber;
 
 import static android.view.MotionEvent.ACTION_DOWN;
@@ -52,7 +51,7 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.titleEdit) EditText titleEdit;
     @BindView(R.id.descEdit) EditText descEdit;
     @BindView(R.id.titleDescButton) Button titleDescButton;
-    @BindView(R.id.share_license_summary) TextView licenseSummaryView;
+    @BindView(R.id.share_license_summary) HtmlTextView licenseSummaryView;
     @BindView(R.id.licenseSpinner) Spinner licenseSpinner;
 
     @Inject @Named("default_preferences") SharedPreferences prefs;
@@ -138,27 +137,9 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
 
         titleEdit.addTextChangedListener(textWatcher);
 
-        titleEdit.setOnFocusChangeListener((v, hasFocus) -> {
-            if (!hasFocus) {
-                hideKeyboard(v);
-            }
-        });
-
-        descEdit.setOnFocusChangeListener((v, hasFocus) -> {
-            if(!hasFocus){
-                hideKeyboard(v);
-            }
-        });
-
         setLicenseSummary(license);
 
         return rootView;
-    }
-
-    public void hideKeyboard(View view) {
-        Log.i("hide", "hideKeyboard: ");
-        InputMethodManager inputMethodManager =(InputMethodManager)getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     @Override
@@ -262,7 +243,7 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
     }
 
     private void setLicenseSummary(String license) {
-        licenseSummaryView.setText(getString(R.string.share_license_summary, getString(Utils.licenseNameFor(license))));
+        licenseSummaryView.setHtmlText(getString(R.string.share_license_summary, getString(Utils.licenseNameFor(license))));
     }
 
     @Override
