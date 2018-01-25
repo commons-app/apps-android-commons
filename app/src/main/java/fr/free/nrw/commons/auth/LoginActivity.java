@@ -87,9 +87,9 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         loginButton.setOnClickListener(view -> performLogin());
         signupButton.setOnClickListener(view -> signUp());
 
-        if(BuildConfig.LOGIN_CREDENTIALS){
+        if(BuildConfig.DEBUG){
             loginCredentials.setText("Use Commons Beta Credentials");
-        } else if ( ! BuildConfig.LOGIN_CREDENTIALS){
+        } else if ( ! BuildConfig.DEBUG){
             loginCredentials.setVisibility(View.GONE);
         }
     }
