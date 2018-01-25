@@ -64,7 +64,7 @@
   <string name="title_activity_signup">Mở tài khoản</string>
   <string name="menu_about">Giới thiệu</string>
   <string name="about_license" fuzzy="true">Phần mềm mã nguồn mở được phát hành theo &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Giấy phép Apache v2&lt;/a&gt;. %1$s và biểu trưng của nó là nhãn hiệu của Quỹ Wikimedia và được sử dụng do Quỹ Wikimedia cho phép. Chúng tôi không được Quỹ Wikimedia ủng hộ hoặc nhận làm chi nhánh.</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Mã nguồn&lt;/a&gt; và &lt;a href=\"https://commons-app.github.io/\"&gt;trang chủ&lt;/a&gt; tại GitHub. &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;Tạo vấn đề GitHub mới&lt;/a&gt; để báo cáo lỗi hoặc gợi ý thay đổi.</string>
+  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Mã nguồn&lt;/a&gt; và &lt;a href=\"https://commons-app.github.io/\"&gt;trang chủ&lt;/a&gt; tại GitHub. &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;Tạo vấn đề GitHub mới&lt;/a&gt; để báo cáo lỗi hoặc gợi ý thay đổi.</string>
   <string name="about_privacy_policy" fuzzy="true"/>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Công trạng&lt;/a&gt;</string>
   <string name="title_activity_about">Giới thiệu</string>

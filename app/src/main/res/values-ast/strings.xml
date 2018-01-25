@@ -74,7 +74,7 @@
   <string name="title_activity_signup">Date d\'alta</string>
   <string name="menu_about">Tocante a</string>
   <string name="about_license">La app de Wikimedia Commons ye software de códigu abiertu, creáu y calteníu por becaos y voluntarios de la comunidá de Wikimedia. La Fundación Wikimedia nun participa na creación, desendolcu nin caltenimientu de la app.</string>
-  <string name="about_improve">El &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;códigu fonte&lt;/a&gt; ya\'l &lt;a href=\"https://commons-app.github.io/\"&gt;sitiu web&lt;/a&gt; tán en GitHub. Crea una nueva &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;incidencia en GitHub&lt;/a&gt; pa informar de problemes y suxerencies.</string>
+  <string name="about_improve" fuzzy="true">El &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;códigu fonte&lt;/a&gt; ya\'l &lt;a href=\"https://commons-app.github.io/\"&gt;sitiu web&lt;/a&gt; tán en GitHub. Crea una nueva &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;incidencia en GitHub&lt;/a&gt; pa informar de problemes y suxerencies.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Política d\'intimidá&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Créditos&lt;/a&gt;</string>
   <string name="title_activity_about">Tocante a</string>

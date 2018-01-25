@@ -76,13 +76,13 @@
     <item quantity="other">%d завантажень</item>
   </plurals>
   <string name="categories_not_found">Категорій, відповідних %1$s, не знайдено</string>
-  <string name="categories_skip_explanation" fuzzy="true">Додайте категорії, щоб Ваші зображення було легше знайти у Вікісховищі. \n\nПочніть ввід, щоб додати категорії.\nНатисніть на це повідомлення (або поверніться назад), щоб пропустити цей крок.</string>
+  <string name="categories_skip_explanation">Додайте категорії, щоб Ваші зображення було легше знайти у Вікісховищі. \n\nПочніть вводити текст, щоб додати категорії.</string>
   <string name="categories_activity_title">Категорії</string>
   <string name="title_activity_settings">Налаштування</string>
   <string name="title_activity_signup">Зареєструватися</string>
   <string name="menu_about">Про програму</string>
   <string name="about_license">Додаток «Вікісховище» — це програма з відкритим кодом, яку створили отримувачі грантів та волонтери спільноти Вікімедіа. Фонд Вікімедіа не брав участі у створенні, розробці чи обслуговуванні цього додатка.</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Вихідний код&lt;/a&gt; і &lt;a href=\"https://commons-app.github.io/\"&gt;веб-сайт&lt;/a&gt; на GitHub. Створіть нове &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;завдання на GitHub&lt;/a&gt; для повідомлення про баги або для висловлення пропозицій.</string>
+  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Вихідний код&lt;/a&gt; і &lt;a href=\"https://commons-app.github.io/\"&gt;веб-сайт&lt;/a&gt; на GitHub. Створіть нове &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;завдання на GitHub&lt;/a&gt; для повідомлення про баги або для висловлення пропозицій.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Політика конфіденційності&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Автори&lt;/a&gt;</string>
   <string name="title_activity_about">Про програму</string>
@@ -129,7 +129,7 @@
   <string name="tutorial_3_text">Будь ласка, НЕ завантажуйте:</string>
   <string name="tutorial_3_subtext">u2022 Селфі або фото своїх друзів \nu2022 Зображення, які Ви завантажили з інтернету \nu2022 Скріншоти патентованих програм</string>
   <string name="tutorial_4_text">Приклад завантаження:</string>
-  <string name="tutorial_4_subtext" fuzzy="true">u2022 Назва: Сіднейський оперний театр \nu2022 Опис: Вид на Сіднейський оперний театр з боку бухти \nu2022 Категорії: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext">- Назва: Сіднейський оперний театр \n- Опис: Вид на Сіднейський оперний театр з боку бухти \n- Категорії: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Надсилайте Ваші зображення. Допоможіть оживити статті Вікіпедії!</string>
   <string name="welcome_wikipedia_subtext">Зображення у Вікіпедії надходять з Вікісховища.</string>
   <string name="welcome_copyright_text">Ваші зображення допомагають освіті людей у всьому світі.</string>
@@ -210,4 +210,8 @@
   <string name="send_log_file_description">Надіслати лог-файл розробникам електронною поштою</string>
   <string name="login_to_your_account">Увійдіть у свій обліковий запис</string>
   <string name="nearby_location_has_not_changed">Розташування не змінено</string>
+  <string name="nearby_location_not_available">Місцезнаходження недоступне</string>
+  <string name="location_permission_rationale_nearby">Потрібний дозвіл для показу списку місць поблизу</string>
+  <string name="get_directions">ОТРИМАТИ НАПРЯМИ</string>
+  <string name="read_article">ЧИТАТИ СТАТТЮ</string>
 </resources>

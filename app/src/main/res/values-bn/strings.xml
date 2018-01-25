@@ -74,7 +74,7 @@
   <string name="title_activity_signup">নিবন্ধন করুন</string>
   <string name="menu_about">পরিচিতি</string>
   <string name="about_license">উইকিমিডিয়া কমন্স অ্যাপ হচ্ছে একটি উন্মুক্ত উৎস সম্বলিত অ্যাপ যা উইকিমিডিয়া সম্প্রদায়ের ব্যবহারকারী ও সেচ্ছাসেবকবৃন্দ কর্তৃক তৈরিকৃত এবং পরিচালিত। উইকিমিডিয়া ফাউন্ডেশন এই অ্যাপ তৈরি, উন্নয়ন বা রক্ষণাবেক্ষণে জড়িত নয়।</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;উৎস&lt;/a&gt; ও &lt;a href=\"https://commons-app.github.io/\"&gt;ওয়েবসাইট&lt;/a&gt; GitHub এ&lt;/a&gt;। কোন সমস্যা ও পরামর্শের জন্য &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;গিটহাব ইস্যু&lt;/a&gt; তৈরি করুন।</string>
+  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;উৎস&lt;/a&gt; ও &lt;a href=\"https://commons-app.github.io/\"&gt;ওয়েবসাইট&lt;/a&gt; GitHub এ&lt;/a&gt;। কোন সমস্যা ও পরামর্শের জন্য &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;গিটহাব ইস্যু&lt;/a&gt; তৈরি করুন।</string>
   <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;গোপনীয়তার নীতি&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;কৃতিত্ব&lt;/a&gt;</string>
   <string name="title_activity_about">পরিচিতি</string>

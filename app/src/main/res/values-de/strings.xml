@@ -74,7 +74,7 @@
   <string name="title_activity_signup">Registrieren</string>
   <string name="menu_about">Über</string>
   <string name="about_license">Die Wikimedia-Commons-App ist eine Open-Source-App, entwickelt und gewartet von Freiwilligen der Wikimedia-Gemeinschaft. Die Wikimedia Foundation ist nicht bei der Erstellung, Entwicklung oder Wartung der App beteiligt.</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Quellcode&lt;/a&gt; und &lt;a href=\"https://commons-app.github.io/\"&gt;Website&lt;/a&gt; auf GitHub. Einen neuen &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-Eintrag&lt;/a&gt; für Fehlerberichte und Vorschläge erstellen.</string>
+  <string name="about_improve">Einen neuen &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-Eintrag&lt;/a&gt; für Fehlerberichte und Vorschläge erstellen.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Datenschutzrichtlinie&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Danksagungen&lt;/a&gt;</string>
   <string name="title_activity_about">Über</string>
@@ -164,6 +164,9 @@
   <string name="login_failed_2fa_not_supported">Die Zwei-Faktor-Authentifikation wird derzeit nicht unterstützt.</string>
   <string name="logout_verification">Möchtest du dich wirklich abmelden?</string>
   <string name="commons_logo">Commons-Logo</string>
+  <string name="commons_website">Commons-Website</string>
+  <string name="commons_facebook">Commons-Facebookseite</string>
+  <string name="commons_github">Commons-Quellcode auf Github</string>
   <string name="background_image">Hintergrundbild</string>
   <string name="mediaimage_failed">Medienbild fehlgeschlagen</string>
   <string name="no_image_found">Kein Bild gefunden</string>

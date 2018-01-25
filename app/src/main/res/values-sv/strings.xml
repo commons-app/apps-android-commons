@@ -74,7 +74,7 @@
   <string name="title_activity_signup">Registrera</string>
   <string name="menu_about">Om</string>
   <string name="about_license">Wikimedia Commons är en app med öppen källkod som skapas och underhålls av frivilliga från Wikimedias gemenskap. Wikimedia Foundation är inte involverad i skapandet, utvecklingen eller underhållet av appen.</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Källkoden&lt;/a&gt; och &lt;a href=\"https://commons-app.github.io/\"&gt;webbplatsen&lt;/a&gt; på GitHub. Skapa ett nytt &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-ärende&lt;/a&gt; för att rapportera buggar och förslag.</string>
+  <string name="about_improve">Skapa ett nytt &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;ärende på GitHub&lt;/a&gt; för att rapportera buggar och förslag.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Integritetspolicy&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Erkännande&lt;/a&gt;</string>
   <string name="title_activity_about">Om</string>
@@ -164,6 +164,9 @@
   <string name="login_failed_2fa_not_supported">Tvåstegsverifiering stöds för tillfället inte.</string>
   <string name="logout_verification">Vill du verkligen logga ut?</string>
   <string name="commons_logo">Commons-logotyp</string>
+  <string name="commons_website">Commons webbplats</string>
+  <string name="commons_facebook">Commons Facebook-sida</string>
+  <string name="commons_github">Commons Github-källkod</string>
   <string name="background_image">Bakgrundsbild</string>
   <string name="mediaimage_failed">Mediabild misslyckades</string>
   <string name="no_image_found">Ingen bild hittades</string>

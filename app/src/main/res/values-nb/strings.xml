@@ -74,7 +74,7 @@
   <string name="title_activity_signup">Registrer deg</string>
   <string name="menu_about">Om</string>
   <string name="about_license">Wikimedia Commons-appen er åpen kildekode og er skapt og vedlikeholdt av stipendiater og frivillige fra Wikimedia-fellesskapet. Wikimedia Foundation er ikke involvert i utviklingen eller vedlikeholdet av appen.</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kildekode&lt;/a&gt; og &lt;a href=\"https://commons-app.github.io/\"&gt;nettside&lt;/a&gt; på GitHub. Opprett en ny &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-sak&lt;/a&gt; for feilrapporter og forslag.</string>
+  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kildekode&lt;/a&gt; og &lt;a href=\"https://commons-app.github.io/\"&gt;nettside&lt;/a&gt; på GitHub. Opprett en ny &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-sak&lt;/a&gt; for feilrapporter og forslag.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Personvernpolicy&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-comons/blob/master/CREDITS\"&gt;Bidragsytere&lt;/a&gt;</string>
   <string name="title_activity_about">Om</string>

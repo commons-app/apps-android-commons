@@ -64,7 +64,7 @@
   <string name="title_activity_signup">สมัครใช้งาน</string>
   <string name="menu_about">เกี่ยวกับ</string>
   <string name="about_license">แอป Wikimedia Commons เป็นแอปโอเพนซอร์สที่สร้างขึ้นและดูแลโดยผู้มีสิทธิและอาสาสมัครของชุมชนวิกิมีเดีย มูลนิธิวิกิมีเดียไม่มีส่วนเกี่ยวข้องในการสร้าง พัฒนา หรือการบำรุงรักษาแอปใดๆ ทั้งสิ้น</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;ซอร์สโค้ด&lt;/a&gt;และ&lt;a href=\"https://commons-app.github.io/\"&gt;เว็บไซต์&lt;/a&gt;บน GitHub สร้าง &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub issue&lt;/a&gt; ใหม่เพื่อรายงานบั๊กและส่งข้อเสนอแนะ</string>
+  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;ซอร์สโค้ด&lt;/a&gt;และ&lt;a href=\"https://commons-app.github.io/\"&gt;เว็บไซต์&lt;/a&gt;บน GitHub สร้าง &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub issue&lt;/a&gt; ใหม่เพื่อรายงานบั๊กและส่งข้อเสนอแนะ</string>
   <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;นโยบายความเป็นส่วนตัว&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;เครดิต&lt;/a&gt;</string>
   <string name="title_activity_about">เกี่ยวกับ</string>

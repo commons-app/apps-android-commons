@@ -74,7 +74,7 @@
   <string name="title_activity_signup">Εγγραφή</string>
   <string name="menu_about">Σχετικά</string>
   <string name="about_license">Λογισμικό ανοικτού κωδικού που κυκλοφορεί υπό την &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Άδεια Apache v2&lt;/a&gt;. Το Wikimedia Commons και το λογότυπο είναι εμπορικά σήματα του Ιδρύματος Wikimedia και χρησιμοποιούνται με άδεια από το Ίδρυμα Wikimedia. Δεν συμμετέχουμε  στην δημιουργία, ανάπτυξη ή συντήρηση  του Ιδρύματος  Wikimedia.</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Πηγή&lt;/a&gt; και &lt;a href=\"https://commons-app.github.io/\"&gt;ιστοσελίδα&lt;/a&gt; στο GitHub. Δημιουργήστε ένα νέο &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub θέμα&lt;/a&gt; για αναφορές σφαλμάτων και προτάσεις.</string>
+  <string name="about_improve">Δημιουργήστε ένα νέο &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub θέμα&lt;/a&gt; για αναφορές σφαλμάτων και προτάσεις.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Πολιτική Απορρήτου και προσωπικών δεδομένων&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;CREDITS&lt;/a&gt;</string>
   <string name="title_activity_about">Σχετικά</string>
@@ -164,6 +164,9 @@
   <string name="login_failed_2fa_not_supported">Πιστοποίηση με δύο παράγοντες δεν υποστηρίζεται προς το παρόν.</string>
   <string name="logout_verification">Θέλετε πράγματι να αποσυνδεθείτε;</string>
   <string name="commons_logo">Κοινό Λογότυπο</string>
+  <string name="commons_website">Ιστοσελίδα των Κοινών</string>
+  <string name="commons_facebook">Σελίδα των Κοινών στο Facebook</string>
+  <string name="commons_github">Κώδικας πηγής των Κοινών στο GitHub</string>
   <string name="background_image">Εικόνα Υποβάθρου</string>
   <string name="mediaimage_failed">Η Εικόνα των Μέσων Απέτυχε (δεν μπορεί να φορτωθεί)</string>
   <string name="no_image_found">Δεν Βρέθηκε καμία Εικόνα</string>
