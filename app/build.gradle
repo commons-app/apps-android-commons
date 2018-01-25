@@ -126,6 +126,7 @@ android {
             buildConfigField "String", "EVENTLOG_WIKI", "\"commonswiki\""
             buildConfigField "String", "SIGNUP_LANDING_URL", "\"https://commons.m.wikimedia.org/w/index.php?title=Special:CreateAccount&returnto=Main+Page&returntoquery=welcome%3Dyes\""
             buildConfigField "String", "SIGNUP_SUCCESS_REDIRECTION_URL", "\"https://commons.m.wikimedia.org/w/index.php?title=Main_Page&welcome=yes\""
+            buildConfigField "boolean", "LOGIN_CREDENTIALS" , "false"
             dimension 'tier'
         }
 
@@ -140,6 +141,7 @@ android {
             buildConfigField "String", "EVENTLOG_WIKI", "\"commonswiki\""
             buildConfigField "String", "SIGNUP_LANDING_URL", "\"https://commons.m.wikimedia.beta.wmflabs.org/w/index.php?title=Special:CreateAccount&returnto=Main+Page&returntoquery=welcome%3Dyes\""
             buildConfigField "String", "SIGNUP_SUCCESS_REDIRECTION_URL", "\"https://commons.m.wikimedia.beta.wmflabs.org/w/index.php?title=Main_Page&welcome=yes\""
+            buildConfigField "boolean", "LOGIN_CREDENTIALS" , "true"
             dimension 'tier'
         }
     }

@@ -58,6 +58,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     @BindView(R.id.loginTwoFactor) EditText twoFactorEdit;
     @BindView(R.id.error_message_container) ViewGroup errorMessageContainer;
     @BindView(R.id.error_message) TextView errorMessage;
+    @BindView(R.id.login_credentials) TextView loginCredentials;
     ProgressDialog progressDialog;
     private AppCompatDelegate delegate;
     private LoginTextWatcher textWatcher = new LoginTextWatcher();
@@ -85,6 +86,12 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
         loginButton.setOnClickListener(view -> performLogin());
         signupButton.setOnClickListener(view -> signUp());
+
+        if(BuildConfig.LOGIN_CREDENTIALS){
+            loginCredentials.setText("Use Commons Beta Credentials");
+        } else if ( ! BuildConfig.LOGIN_CREDENTIALS){
+            loginCredentials.setVisibility(View.GONE);
+        }
     }
 
     @Override
