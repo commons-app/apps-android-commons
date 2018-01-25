@@ -6,7 +6,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.io.IOException;
@@ -38,7 +40,7 @@ public class ApacheHttpClientMediaWikiApiTest {
     @Before
     public void setUp() throws Exception {
         server = new MockWebServer();
-        testObject = new ApacheHttpClientMediaWikiApi("http://" + server.getHostName() + ":" + server.getPort() + "/");
+        testObject = new ApacheHttpClientMediaWikiApi(RuntimeEnvironment.application, "http://" + server.getHostName() + ":" + server.getPort() + "/");
         testObject.setWikiMediaToolforgeUrl("http://" + server.getHostName() + ":" + server.getPort() + "/");
     }
 

@@ -89,7 +89,7 @@ public class TestCommonsApplication extends CommonsApplication {
                         }
 
                         @Override
-                        public MediaWikiApi provideMediaWikiApi() {
+                        public MediaWikiApi provideMediaWikiApi(Context context) {
                             return mediaWikiApi;
                         }
 
