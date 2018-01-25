@@ -12,8 +12,6 @@
     android:paddingEnd="@dimen/standard_gap"
     android:paddingTop="@dimen/small_gap"
     android:theme="@style/DarkAppTheme"
-    android:clickable="true"
-    android:focusableInTouchMode="true"
     >
 
     <EditText
@@ -52,7 +50,7 @@
         android:id="@+id/titleDescButton"
         />
 
-    <TextView
+    <fr.free.nrw.commons.ui.widget.HtmlTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/share_license_summary"
