@@ -216,4 +216,7 @@
   <string name="location_permission_rationale_nearby">Permission required to display a list of nearby places</string>
     <string name="get_directions">GET DIRECTIONS</string>
   <string name="read_article">READ ARTICLE</string>
+    <string name="appearance">Appearance</string>
+  <string name="general">General</string>
+  <string name="feedback">Feedback</string>
 </resources>

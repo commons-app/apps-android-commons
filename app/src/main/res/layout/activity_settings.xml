@@ -15,7 +15,7 @@
             layout="@layout/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
+    
         <fragment
             android:id="@+id/settingsFragment"
             android:name="fr.free.nrw.commons.settings.SettingsFragment"
@@ -24,7 +24,7 @@
             tools:layout="@xml/preferences"
             android:layout_below="@id/toolbar"/>
     </RelativeLayout>
-
+    
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation_view"
         android:layout_width="wrap_content"
@@ -32,5 +32,5 @@
         android:layout_gravity="start"
         app:headerLayout="@layout/drawer_header"
         app:menu="@menu/drawer"/>
-
+    
 </android.support.v4.widget.DrawerLayout>
