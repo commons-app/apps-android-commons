@@ -12,6 +12,8 @@
     android:paddingEnd="@dimen/standard_gap"
     android:paddingTop="@dimen/small_gap"
     android:theme="@style/DarkAppTheme"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
     >
 
     <EditText
