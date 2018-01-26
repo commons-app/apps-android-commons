@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.mwapi;
 
+import android.content.Context;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -21,6 +22,8 @@ import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.util.EntityUtils;
 import org.mediawiki.api.ApiResult;
 import org.mediawiki.api.MWApi;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,10 +39,16 @@ import java.util.concurrent.Callable;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.PageTitle;
+import fr.free.nrw.commons.notification.Notification;
 import in.yuvi.http.fluent.Http;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import timber.log.Timber;
+
+import static fr.free.nrw.commons.notification.NotificationType.UNKNOWN;
+import static fr.free.nrw.commons.notification.NotificationUtils.getNotificationFromApiResult;
+import static fr.free.nrw.commons.notification.NotificationUtils.getNotificationType;
+import static fr.free.nrw.commons.notification.NotificationUtils.isCommonsNotification;
 
 /**
  * @author Addshore
@@ -50,8 +59,10 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     private static final String THUMB_SIZE = "640";
     private AbstractHttpClient httpClient;
     private MWApi api;
+    private Context context;
 
-    public ApacheHttpClientMediaWikiApi(String apiURL) {
+    public ApacheHttpClientMediaWikiApi(Context context, String apiURL) {
+        this.context = context;
         BasicHttpParams params = new BasicHttpParams();
         SchemeRegistry schemeRegistry = new SchemeRegistry();
         schemeRegistry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
@@ -352,6 +363,42 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
                 .get()
                 .getString("/api/query/pages/page/revisions/rev");
     }
+
+    @Override
+    @NonNull
+    public List<Notification> getNotifications() {
+        ApiResult notificationNode = null;
+        try {
+            notificationNode = api.action("query")
+                    .param("notprop", "list")
+                    .param("format", "xml")
+                    .param("meta", "notifications")
+                    .param("notfilter", "!read")
+                    .get()
+                    .getNode("/api/query/notifications/list");
+        } catch (IOException e) {
+            Timber.e("Failed to obtain searchCategories", e);
+        }
+
+        if (notificationNode == null) {
+            return new ArrayList<>();
+        }
+
+        List<Notification> notifications = new ArrayList<>();
+
+        NodeList childNodes = notificationNode.getDocument().getChildNodes();
+
+        for (int i = 0; i < childNodes.getLength(); i++) {
+            Node node = childNodes.item(i);
+            if (isCommonsNotification(node)
+                    && !getNotificationType(node).equals(UNKNOWN)) {
+                notifications.add(getNotificationFromApiResult(context, node));
+            }
+        }
+
+        return notifications;
+    }
+
 
     @Override
     public boolean existingFile(String fileSha1) throws IOException {

@@ -9,10 +9,10 @@ import android.support.v4.util.LruCache;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
 import fr.free.nrw.commons.BuildConfig;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.caching.CacheController;
@@ -31,7 +31,9 @@ import static fr.free.nrw.commons.modifications.ModificationsContentProvider.MOD
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class CommonsApplicationModule {
     public static final String CATEGORY_AUTHORITY = "fr.free.nrw.commons.categories.contentprovider";
+    public static final long OK_HTTP_CACHE_SIZE = 10 * 1024 * 1024;
 
+    private CommonsApplication application;
     private Context applicationContext;
 
     public CommonsApplicationModule(Context applicationContext) {
@@ -100,8 +102,8 @@ public class CommonsApplicationModule {
 
     @Provides
     @Singleton
-    public MediaWikiApi provideMediaWikiApi() {
-        return new ApacheHttpClientMediaWikiApi(BuildConfig.WIKIMEDIA_API_HOST);
+    public MediaWikiApi provideMediaWikiApi(Context context) {
+        return new ApacheHttpClientMediaWikiApi(context, BuildConfig.WIKIMEDIA_API_HOST);
     }
 
     @Provides

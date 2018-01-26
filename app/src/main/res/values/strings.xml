@@ -197,6 +197,7 @@
   <string name="navigation_item_feedback">Feedback</string>
   <string name="navigation_item_logout">Logout</string>
   <string name="navigation_item_info">Tutorial</string>
+  <string name="navigation_item_notification">Notifications</string>
   <string name="nearby_needs_permissions">Nearby places cannot be displayed without location permissions</string>
   <string name="no_description_found">no description found</string>
   <string name="nearby_info_menu_commons_article">Commons file page</string>
@@ -216,7 +217,7 @@
   <string name="location_permission_rationale_nearby">Permission required to display a list of nearby places</string>
     <string name="get_directions">GET DIRECTIONS</string>
   <string name="read_article">READ ARTICLE</string>
-    <string name="appearance">Appearance</string>
+  <string name="appearance">Appearance</string>
   <string name="general">General</string>
   <string name="feedback">Feedback</string>
 </resources>
