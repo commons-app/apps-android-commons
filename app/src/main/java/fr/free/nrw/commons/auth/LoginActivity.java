@@ -88,7 +88,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
         signupButton.setOnClickListener(view -> signUp());
 
         if(BuildConfig.FLAVOR == "beta"){
-            loginCredentials.setText(getString(R.string.login_credentials));
+            loginCredentials.setText(getString(R.string.login_credential));
         } else {
             loginCredentials.setVisibility(View.GONE);
         }
