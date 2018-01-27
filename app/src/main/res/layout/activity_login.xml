@@ -53,7 +53,7 @@
                         android:paddingTop="@dimen/small_gap"
                         android:textAlignment="center"
                         android:textColor="@color/secondaryDarkColor"
-                        tools:text="Use Commons Beta Credentials" />
+                        tools:text="You are using Commons Beta Credentials" />
 
 
                 <FrameLayout
