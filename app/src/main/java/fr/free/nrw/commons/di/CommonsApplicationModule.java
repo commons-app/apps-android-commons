@@ -30,7 +30,6 @@ import static android.content.Context.MODE_PRIVATE;
 public class CommonsApplicationModule {
 
     private Context applicationContext;
-    private CommonsApplication application;
 
     public CommonsApplicationModule(Context applicationContext) {
         this.applicationContext = applicationContext;
