@@ -184,6 +184,7 @@
   <string name="navigation_item_feedback">Palaute</string>
   <string name="navigation_item_logout">Kirjaudu ulos</string>
   <string name="navigation_item_info">Opas</string>
+  <string name="navigation_item_notification">Ilmoitukset</string>
   <string name="nearby_needs_permissions">Lähellä olevia paikkoja ei voida näyttää ilman sijaintilupaa</string>
   <string name="no_description_found">kuvausta ei löytynyt</string>
   <string name="nearby_info_menu_commons_article">Commons-tiedostosivu</string>

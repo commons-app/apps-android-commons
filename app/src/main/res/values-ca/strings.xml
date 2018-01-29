@@ -143,6 +143,9 @@
   <string name="maximum_limit">Límit màxim</string>
   <string name="logout_verification">Realment voleu finalitzar la sessió?</string>
   <string name="commons_logo">Logo de Commons</string>
+  <string name="commons_website">Lloc web del Commons</string>
+  <string name="commons_facebook">Pàgina del Facebook del Commons</string>
+  <string name="commons_github">Codi font del Commons a GitHub</string>
   <string name="no_image_found">No s’ha trobat cap imatge</string>
   <string name="upload_image">Carrega la imatge</string>
   <string name="welcome_image_llamas">Llames</string>
@@ -160,6 +163,7 @@
   <string name="navigation_item_feedback">Comentaris</string>
   <string name="navigation_item_logout">Finalitza la sessió</string>
   <string name="navigation_item_info">Tutorial</string>
+  <string name="navigation_item_notification">Notificacions</string>
   <string name="no_description_found">no s\'ha trobat cap descripció</string>
   <string name="nearby_info_menu_commons_article">Article del fitxer a Commons</string>
   <string name="nearby_info_menu_wikidata_article">Element del Wikidata</string>
@@ -173,4 +177,6 @@
   <string name="nearby_location_not_available">La ubicació no és disponible.</string>
   <string name="get_directions">COM ANAR-HI</string>
   <string name="read_article">LLEGIU L’ARTICLE</string>
+  <string name="notifications_thank_you_edit">Gràcies per fer una modificació</string>
+  <string name="notifications_mention">%s us ha mencionat a %s.</string>
 </resources>

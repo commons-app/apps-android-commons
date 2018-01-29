@@ -73,7 +73,7 @@
   <string name="title_activity_signup">खाता खोलें</string>
   <string name="menu_about">परिचय</string>
   <string name="about_license">विकिमीडिया कॉमन्स एप्प एक मुक्त स्रोत एप्प है जो कि विकिमीडिया समुदाय के अनुदानप्राप्तकर्ताओं व स्वयंसेवकों द्वारा निर्मित एवं प्रबंधित है। विकिमीडिया फॉऊण्डेशन इस एप्प के निर्माण, विकास व प्रबंधन में किसी प्रकार से भी संलग्न नहीं है।</string>
-  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;स्रोत&lt;/a&gt; और &lt;a href=\"https://commons-app.github.io/\"&gt;वेबसाइट&lt;/a&gt; गिटहब में है और त्रुटि व सुझाव हेतु &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;गिटहब समस्या&lt;/a&gt; देखें।</string>
+  <string name="about_improve">त्रुटि की सूचना और सुझावों के लिए &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt; GitHub समस्या &lt;/a&gt; बनाएं</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;गोपनीयता नीति&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;श्रेय&lt;/a&gt;</string>
   <string name="title_activity_about">परिचय</string>
@@ -163,6 +163,9 @@
   <string name="login_failed_2fa_not_supported">दो कारक प्रमाणीकरण वर्तमान में समर्थित नहीं है</string>
   <string name="logout_verification">क्या आप वास्तव में निकास करना चाहते हैं?</string>
   <string name="commons_logo">कॉमन्स का प्रतीक चिन्ह</string>
+  <string name="commons_website">कॉमन्स जालस्थान</string>
+  <string name="commons_facebook">कॉमन्स फेसबुक पृष्ठ</string>
+  <string name="commons_github">कॉमन्स गिटहब स्त्रोत कूटशब्द</string>
   <string name="background_image">पृष्ठभूमि छवि</string>
   <string name="mediaimage_failed">मीडिया छवि विफल</string>
   <string name="no_image_found">कोई छवि नहीं मिली</string>
@@ -187,6 +190,7 @@
   <string name="navigation_item_feedback">आपके सुझाव</string>
   <string name="navigation_item_logout">प्रस्थान करें</string>
   <string name="navigation_item_info">अनुशिक्षण</string>
+  <string name="navigation_item_notification">सूचनायें</string>
   <string name="nearby_needs_permissions">आस-पास के स्थान बिना स्थान अनुमतियों के प्रदर्शित नहीं किए जा सकते हैं</string>
   <string name="no_description_found">कोई विवरण नहीं मिला</string>
   <string name="nearby_info_menu_commons_article">कॉमन्स फाइल पृष्ठ</string>
@@ -205,4 +209,8 @@
   <string name="location_permission_rationale_nearby">आसपास के स्थान दिखाने के लिए अनुमति चाहिए</string>
   <string name="get_directions">दिशा - निर्देश प्राप्त करें</string>
   <string name="read_article">लेख पढ़ें</string>
+  <string name="notifications_welcome">विकिमीडिया कॉमन्स पर आपका स्वागत है, %s! हमें हर्ष है कि आप यहाँ हैं।</string>
+  <string name="notifications_talk_page_message">%s ने आपके वार्ता पृष्ठ पर सन्देश छोड़ा है</string>
+  <string name="notifications_thank_you_edit">सम्पादन करने के लिए धन्यवाद</string>
+  <string name="notifications_mention">%s ने %s में आपका उल्लेख किया है</string>
 </resources>

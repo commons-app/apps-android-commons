@@ -58,7 +58,7 @@
   <string name="menu_about">{{Identical|About}}</string>
   <string name="about_license">License and legal notice. %1$s is {{msg-wm|Commons-android-strings-trademarked name}}</string>
   <string name="trademarked_name">{{Ignored}}\n\nUsed in {{msg-wm|Commons-android-strings-about license}}\n\n{{Identical|Wikimedia Commons}}</string>
-  <string name="about_improve">{{doc-important|Please make sure that your translation of \"source\" means \"source code\", not \"reference source\".}}\nSource and Bugs</string>
+  <string name="about_improve">Indicator for reporting bugs and suggestions.</string>
   <string name="about_privacy_policy">HTML fragment linking to Wikimedia\'s privacy policy. Note: avoid percent-encoding in the URL, as this causes problems with Android\'s resource compiler. Use accented/non-ASCII characters \"as is\" if possible. (We can fix it manually, so don\'t worry too much about it.)\n{{Identical|Privacy policy}}</string>
   <string name="about_credits">{{Identical|Credit}}</string>
   <string name="title_activity_about">{{Identical|About}}</string>

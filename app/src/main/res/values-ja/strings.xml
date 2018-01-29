@@ -176,6 +176,7 @@
   <string name="navigation_item_feedback">フィードバック</string>
   <string name="navigation_item_logout">ログアウト</string>
   <string name="navigation_item_info">チュートリアル</string>
+  <string name="navigation_item_notification">通知</string>
   <string name="nearby_needs_permissions">場所の権限がないと、近くの場所を表示できません</string>
   <string name="no_description_found">説明がありません</string>
   <string name="nearby_info_menu_wikidata_article">ウィキデータ項目</string>

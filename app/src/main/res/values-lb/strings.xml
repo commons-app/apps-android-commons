@@ -73,7 +73,7 @@
   <string name="title_activity_signup">Mellt Iech un</string>
   <string name="menu_about">Iwwer</string>
   <string name="about_license">D\'App Wikimedia Commons ass eng \'Open-Source-App\' déi vu Fräiwëllege vun der Wikimedia Foundation entwéckelt gouf an och vun hinnen ënnerhal gëtt. D\'Wikimedia Foundation ass net an d\'Entwécklung oder den Ënnerhalt vun der App implizéiert.</string>
-  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Quell&lt;/a&gt; an &lt;a href=\"https://commons-app.github.io/\"&gt;Internetsite&lt;/a&gt; vu GitHub.\nLeet w.e.g. &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt; e GitHub Problem&lt;/a&gt; fir Problemer ze mellen a Proposen ze maachen.</string>
+  <string name="about_improve">Leet w.e.g. &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt; e GitHub Problem&lt;/a&gt; fir Problemer ze mellen a Proposen ze maachen.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Dateschutzerklärung&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Merci&lt;/a&gt;</string>
   <string name="title_activity_about">Iwwer</string>
@@ -181,6 +181,7 @@
   <string name="navigation_item_feedback">Feedback</string>
   <string name="navigation_item_logout">Ausloggen</string>
   <string name="navigation_item_info">Uleedung</string>
+  <string name="navigation_item_notification">Notifikatiounen</string>
   <string name="nearby_needs_permissions">Plazen nobäi kënnen net gewise ginn ouni Rechter fir d\'Lokalisatioun</string>
   <string name="no_description_found">keng Beschreiwung fonnt</string>
   <string name="nearby_info_menu_commons_article">Commons-Fichierssäit</string>
@@ -194,4 +195,5 @@
   <string name="nearby_location_has_not_changed">De Plaz huet net geännert.</string>
   <string name="nearby_location_not_available">Plaz ass net disponibel.</string>
   <string name="read_article">ARTIKEL LIESEN</string>
+  <string name="notifications_thank_you_edit">Merci datt Dir eng Ännerung gemaach hutt</string>
 </resources>

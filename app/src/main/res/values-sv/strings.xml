@@ -191,6 +191,7 @@
   <string name="navigation_item_feedback">Återkoppling</string>
   <string name="navigation_item_logout">Logga ut</string>
   <string name="navigation_item_info">Guide</string>
+  <string name="navigation_item_notification">Meddelanden</string>
   <string name="nearby_needs_permissions">Platser i närheten kan inte visas utan platsbehörigheter</string>
   <string name="no_description_found">ingen beskrivning hittades</string>
   <string name="nearby_info_menu_commons_article">Commons-filsida</string>
@@ -209,4 +210,8 @@
   <string name="location_permission_rationale_nearby">Behörighet krävs för att visa en lista över platser i närheten</string>
   <string name="get_directions">FÅ VÄGBESKRIVNINGAR</string>
   <string name="read_article">LÄS ARTIKEL</string>
+  <string name="notifications_welcome">Välkommen till Wikimedia Commons, %s! Vi är glada att du är här.</string>
+  <string name="notifications_talk_page_message">%s lämnade ett meddelande på din diskussionssida</string>
+  <string name="notifications_thank_you_edit">Tack för att du gjorde en redigering</string>
+  <string name="notifications_mention">%s nämnde dig på %s.</string>
 </resources>

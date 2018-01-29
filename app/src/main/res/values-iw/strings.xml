@@ -73,7 +73,7 @@
   <string name="title_activity_signup">רישום</string>
   <string name="menu_about">אודות</string>
   <string name="about_license">יישום ויקישיתוף (Wikimedia Commons app) הוא יישום קוד פתוח שמפותח ומתוחזק על־ידי מקבלי מלגות ומתנדבים של קהילת ויקימדיה. קרן ויקימדיה אינה מעורבת ביצירה, פיתוח, או תחזוקה של היישום.</string>
-  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;קוד מקור&lt;/a&gt; ו&lt;a href=\"https://commons-app.github.io/\"&gt;אתר&lt;/a&gt; בגיטהאב. נא ליצור &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;דיווח בגיטהאב&lt;/a&gt; בשביל באגים והצעות.</string>
+  <string name="about_improve">נא ליצור &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;דיווח בגיטהאב&lt;/a&gt; בשביל באגים והצעות.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;מדיניות פרטיות&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;יוצרים&lt;/a&gt;</string>
   <string name="title_activity_about">אודות</string>
@@ -163,6 +163,7 @@
   <string name="login_failed_2fa_not_supported">אימות דו־שלבי אינו נתמך כעת.</string>
   <string name="logout_verification">האם באמת לצאת מהחשבון?</string>
   <string name="commons_logo">סמל ויקישיתוף</string>
+  <string name="commons_website">אתר ויקישיתוף</string>
   <string name="background_image">תמונת רקע</string>
   <string name="no_image_found">לא נמצאה תמונה</string>
   <string name="upload_image">העלאת תמונה</string>

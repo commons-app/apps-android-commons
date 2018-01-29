@@ -74,7 +74,7 @@
   <string name="title_activity_signup">注册</string>
   <string name="menu_about">关于</string>
   <string name="about_license">维基共享资源应用程序是由维基媒体社区的受助者和志愿者创建和维护的开源应用程序。维基媒体基金会不参与该应用程序的创立，开发或维护。</string>
-  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;源代码&lt;/a&gt;和&lt;a href=\"https://commons-app.github.io/\"&gt;网站&lt;/a&gt;位于GitHub。创建新的&lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub问题&lt;/a&gt;以发送错误报告和建议。</string>
+  <string name="about_improve">创建新的&lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub问题&lt;/a&gt;以发送错误报告和建议。</string>
   <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;隐私政策&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;制作人员&lt;/a&gt;</string>
   <string name="title_activity_about">关于</string>
@@ -164,6 +164,9 @@
   <string name="login_failed_2fa_not_supported">目前不支持双因素验证。</string>
   <string name="logout_verification">您真的想要退出么？</string>
   <string name="commons_logo">共享资源标志</string>
+  <string name="commons_website">共享资源网站</string>
+  <string name="commons_facebook">共享资源Facebook页面</string>
+  <string name="commons_github">共享资源Github源代码</string>
   <string name="background_image">背景图片</string>
   <string name="mediaimage_failed">媒体图片失败</string>
   <string name="no_image_found">找不到图片</string>
@@ -188,6 +191,7 @@
   <string name="navigation_item_feedback">反馈</string>
   <string name="navigation_item_logout">退出</string>
   <string name="navigation_item_info">教程</string>
+  <string name="navigation_item_notification">通知</string>
   <string name="nearby_needs_permissions">附近地点不能在没有位置权限的情况下显示</string>
   <string name="no_description_found">找不到描述</string>
   <string name="nearby_info_menu_commons_article">共享资源文件页面</string>
@@ -206,4 +210,8 @@
   <string name="location_permission_rationale_nearby">需要权限以显示附近地点列表</string>
   <string name="get_directions">获得指示</string>
   <string name="read_article">阅读条目</string>
+  <string name="notifications_welcome">欢迎来到维基共享资源，%s！我们很高兴您来这里。</string>
+  <string name="notifications_talk_page_message">%s在您的讨论页上留下了一条消息</string>
+  <string name="notifications_thank_you_edit">感谢您做出编辑</string>
+  <string name="notifications_mention">%s在%s提到了您。</string>
 </resources>

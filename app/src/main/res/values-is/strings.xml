@@ -74,7 +74,7 @@
   <string name="title_activity_signup">Nýskrá</string>
   <string name="menu_about">Um</string>
   <string name="about_license">Wikimedia Commons forritið er opinn og frjáls hugbúnaður sem gerður er og viðhaldið af stuðningsaðilum og sjálfboðaliðum Wikimedia samfélagsins. Wikimedia Foundation sjálfseignarstofnunin kemur ekki að gerð, forritun eða viðhaldi forritsins. \</string>
-  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Grunnkóði&lt;/a&gt; og &lt;a href=\"https://commons-app.github.io/\"&gt;vefsvæði&lt;/a&gt; eru á GitHub. Útbúðu nýjar &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub tilkynningar (issue)&lt;/a&gt; til að koma villum og uppástungum á framfæri.</string>
+  <string name="about_improve">Útbúðu nýjar &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub tilkynningar (issue)&lt;/a&gt; til að koma villum og uppástungum á framfæri.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Meðferð persónuupplýsinga&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Framlög&lt;/a&gt;</string>
   <string name="title_activity_about">Um</string>
@@ -164,6 +164,9 @@
   <string name="login_failed_2fa_not_supported">Tveggja-þrepa auðkenning er ekki studd í augnablikinu.</string>
   <string name="logout_verification">Viltu í alvörunni skrá þig út?</string>
   <string name="commons_logo">Táknmerki Commons</string>
+  <string name="commons_website">Commons vefsvæðið</string>
+  <string name="commons_facebook">Commons Facebook-síðan</string>
+  <string name="commons_github">Grunnkóði Commons á Github</string>
   <string name="background_image">Bakgrunnsmynd</string>
   <string name="mediaimage_failed">Mynd gagnamiðils brást</string>
   <string name="no_image_found">Engin mynd fannst</string>
@@ -188,6 +191,7 @@
   <string name="navigation_item_feedback">Umsagnir</string>
   <string name="navigation_item_logout">Útskráning</string>
   <string name="navigation_item_info">Kennsla</string>
+  <string name="navigation_item_notification">Tilkynningar</string>
   <string name="nearby_needs_permissions">Ekki er hægt að birta nálæga staði an heimildar til að ná í hnattstaðsetningu</string>
   <string name="no_description_found">engin lýsing fannst</string>
   <string name="nearby_info_menu_commons_article">Síða Commons-skrár</string>
@@ -206,4 +210,8 @@
   <string name="location_permission_rationale_nearby">Heimild þarf til að birta lista yfir staði í nágrenninu</string>
   <string name="get_directions">FÁ LEIÐSÖGN</string>
   <string name="read_article">LESA GREIN</string>
+  <string name="notifications_welcome">Velkomin á Wikimedia Commons, %s! Við erum ánægð með að þú skulir vera hérna.</string>
+  <string name="notifications_talk_page_message">%s skildi eftir skilaboð á spjallsíðunni þinni</string>
+  <string name="notifications_thank_you_edit">Takk fyrir að hafa gert breytingar</string>
+  <string name="notifications_mention">%s minntist á þig á %s.</string>
 </resources>

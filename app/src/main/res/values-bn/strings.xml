@@ -74,7 +74,7 @@
   <string name="title_activity_signup">নিবন্ধন করুন</string>
   <string name="menu_about">পরিচিতি</string>
   <string name="about_license">উইকিমিডিয়া কমন্স অ্যাপ হচ্ছে একটি উন্মুক্ত উৎস সম্বলিত অ্যাপ যা উইকিমিডিয়া সম্প্রদায়ের ব্যবহারকারী ও সেচ্ছাসেবকবৃন্দ কর্তৃক তৈরিকৃত এবং পরিচালিত। উইকিমিডিয়া ফাউন্ডেশন এই অ্যাপ তৈরি, উন্নয়ন বা রক্ষণাবেক্ষণে জড়িত নয়।</string>
-  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;উৎস&lt;/a&gt; ও &lt;a href=\"https://commons-app.github.io/\"&gt;ওয়েবসাইট&lt;/a&gt; GitHub এ&lt;/a&gt;। কোন সমস্যা ও পরামর্শের জন্য &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;গিটহাব ইস্যু&lt;/a&gt; তৈরি করুন।</string>
+  <string name="about_improve">কোন সমস্যা ও পরামর্শের জন্য &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;গিটহাব ইস্যু&lt;/a&gt; তৈরি করুন।</string>
   <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;গোপনীয়তার নীতি&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;কৃতিত্ব&lt;/a&gt;</string>
   <string name="title_activity_about">পরিচিতি</string>
@@ -164,6 +164,9 @@
   <string name="login_failed_2fa_not_supported">দুটি স্তরের প্রমাণীকরণ বর্তমানে সমর্থিত নয়।</string>
   <string name="logout_verification">আপনি কি সত্যিই প্রস্থান করতে চান?</string>
   <string name="commons_logo">কমন্সের লোগো</string>
+  <string name="commons_website">কমন্স ওয়েবসাইট</string>
+  <string name="commons_facebook">কমন্সের ফেসবুক পাতা</string>
+  <string name="commons_github">কমন্স গিটহাব উৎস কোড</string>
   <string name="background_image">পটভূমির চিত্র</string>
   <string name="mediaimage_failed">মিডিয়া চিত্র ব্যর্থ হয়েছে</string>
   <string name="no_image_found">কোন চিত্র পাওয়া যায়নি</string>
@@ -206,4 +209,8 @@
   <string name="location_permission_rationale_nearby">কাছাকাছি স্থানসমূহের একটি তালিকা প্রদর্শন করতে অনুমতি প্রয়োজন</string>
   <string name="get_directions">নির্দেশনা পান</string>
   <string name="read_article">নিবন্ধ পড়ুন</string>
+  <string name="notifications_welcome">উইকিমিডিয়া কমন্সে স্বাগতম, %s! আপনাকে এখানে পেয়ে আমরা আনন্দিত।</string>
+  <string name="notifications_talk_page_message">%s আপনার আলাপ পাতায় একটি বার্তা দিয়েছেন</string>
+  <string name="notifications_thank_you_edit">একটি সম্পাদনা করার জন্য আপনাকে ধন্যবাদ</string>
+  <string name="notifications_mention">%s আপনাকে %s-এ উল্লেখ করেছেন।</string>
 </resources>

@@ -191,6 +191,7 @@
   <string name="navigation_item_feedback">Мислења</string>
   <string name="navigation_item_logout">Одјава</string>
   <string name="navigation_item_info">Упатства</string>
+  <string name="navigation_item_notification">Известувања</string>
   <string name="nearby_needs_permissions">Местата во близина не можат да се прикажат без дозволи за местоположба.</string>
   <string name="no_description_found">не најдов описи</string>
   <string name="nearby_info_menu_commons_article">Податотечна страница</string>
@@ -209,4 +210,8 @@
   <string name="location_permission_rationale_nearby">Се бара дозвола за приказ на список на околни места</string>
   <string name="get_directions">ДАЈ НАСОКИ</string>
   <string name="read_article">ПРОЧИТАЈ СТАТИЈА</string>
+  <string name="notifications_welcome">Добре дојдовте на Ризницата, %s! Драго ни е што сте тука.</string>
+  <string name="notifications_talk_page_message">%s ви остави порака на разговорната страница</string>
+  <string name="notifications_thank_you_edit">Ви благодариме за уредувањето</string>
+  <string name="notifications_mention">%s ве спомна на %s.</string>
 </resources>
