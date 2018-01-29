@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.category;
+package fr.free.nrw.commons.data;
 
 import android.net.Uri;
 

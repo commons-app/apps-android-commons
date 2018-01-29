@@ -1,4 +1,4 @@
-package fr.free.nrw.commons.category;
+package fr.free.nrw.commons.data;
 
 import android.content.ContentProviderClient;
 import android.content.ContentValues;
@@ -27,7 +27,8 @@ import java.util.List;
 
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.TestCommonsApplication;
-import fr.free.nrw.commons.category.CategoryDao.Table;
+import fr.free.nrw.commons.category.CategoryContentProvider;
+import fr.free.nrw.commons.data.CategoryDao.Table;
 
 import static fr.free.nrw.commons.category.CategoryContentProvider.BASE_URI;
 import static fr.free.nrw.commons.category.CategoryContentProvider.uriForId;
@@ -49,20 +50,20 @@ import static org.mockito.Mockito.when;
 public class CategoryDaoTest {
 
     @Mock
-    private ContentProviderClient client;
+    ContentProviderClient client;
     @Mock
-    private SQLiteDatabase database;
+    SQLiteDatabase database;
     @Captor
-    private ArgumentCaptor<ContentValues> captor;
+    ArgumentCaptor<ContentValues> captor;
     @Captor
-    private ArgumentCaptor<String[]> queryCaptor;
+    ArgumentCaptor<String[]> queryCaptor;
 
     private CategoryDao testObject;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        testObject = new CategoryDao(() -> client);
+        testObject = new CategoryDao(client);
     }
 
     @Test
