@@ -20,8 +20,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import fr.free.nrw.commons.auth.SessionManager;
-import fr.free.nrw.commons.category.CategoryDao;
 import fr.free.nrw.commons.contributions.ContributionDao;
+import fr.free.nrw.commons.data.CategoryDao;
 import fr.free.nrw.commons.data.DBOpenHelper;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.di.CommonsApplicationComponent;

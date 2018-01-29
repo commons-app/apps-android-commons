@@ -25,13 +25,13 @@ public class ContributionsContentProvider extends CommonsDaggerContentProvider {
     private static final int CONTRIBUTIONS_ID = 2;
     private static final String BASE_PATH = "contributions";
     private static final UriMatcher uriMatcher = new UriMatcher(NO_MATCH);
-    public static final String CONTRIBUTION_AUTHORITY = "fr.free.nrw.commons.contributions.contentprovider";
+    public static final String AUTHORITY = "fr.free.nrw.commons.contributions.contentprovider";
 
-    public static final Uri BASE_URI = Uri.parse("content://" + CONTRIBUTION_AUTHORITY + "/" + BASE_PATH);
+    public static final Uri BASE_URI = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH);
 
     static {
-        uriMatcher.addURI(CONTRIBUTION_AUTHORITY, BASE_PATH, CONTRIBUTIONS);
-        uriMatcher.addURI(CONTRIBUTION_AUTHORITY, BASE_PATH + "/#", CONTRIBUTIONS_ID);
+        uriMatcher.addURI(AUTHORITY, BASE_PATH, CONTRIBUTIONS);
+        uriMatcher.addURI(AUTHORITY, BASE_PATH + "/#", CONTRIBUTIONS_ID);
     }
 
     public static Uri uriForId(int id) {

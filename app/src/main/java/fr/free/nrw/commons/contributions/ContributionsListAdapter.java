@@ -11,11 +11,8 @@ import fr.free.nrw.commons.R;
 
 class ContributionsListAdapter extends CursorAdapter {
 
-    private final ContributionDao contributionDao;
-
-    public ContributionsListAdapter(Context context, Cursor c, int flags, ContributionDao contributionDao) {
+    public ContributionsListAdapter(Context context, Cursor c, int flags) {
         super(context, c, flags);
-        this.contributionDao = contributionDao;
     }
 
     @Override
@@ -29,7 +26,7 @@ class ContributionsListAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         final ContributionViewHolder views = (ContributionViewHolder)view.getTag();
-        final Contribution contribution = contributionDao.fromCursor(cursor);
+        final Contribution contribution = ContributionDao.fromCursor(cursor);
 
         views.imageView.setMedia(contribution);
         views.titleView.setText(contribution.getDisplayTitle());

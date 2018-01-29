@@ -24,15 +24,13 @@ import fr.free.nrw.commons.nearby.NearbyPlaces;
 import fr.free.nrw.commons.upload.UploadController;
 
 import static android.content.Context.MODE_PRIVATE;
-import static fr.free.nrw.commons.contributions.ContributionsContentProvider.CONTRIBUTION_AUTHORITY;
-import static fr.free.nrw.commons.modifications.ModificationsContentProvider.MODIFICATIONS_AUTHORITY;
 
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class CommonsApplicationModule {
-    public static final String CATEGORY_AUTHORITY = "fr.free.nrw.commons.categories.contentprovider";
 
     private Context applicationContext;
+    private CommonsApplication application;
 
     public CommonsApplicationModule(Context applicationContext) {
         this.applicationContext = applicationContext;
@@ -46,24 +44,6 @@ public class CommonsApplicationModule {
     @Provides
     public AccountUtil providesAccountUtil(Context context) {
         return new AccountUtil(context);
-    }
-
-    @Provides
-    @Named("category")
-    public ContentProviderClient provideCategoryContentProviderClient(Context context) {
-        return context.getContentResolver().acquireContentProviderClient(CATEGORY_AUTHORITY);
-    }
-
-    @Provides
-    @Named("contribution")
-    public ContentProviderClient provideContributionContentProviderClient(Context context) {
-        return context.getContentResolver().acquireContentProviderClient(CONTRIBUTION_AUTHORITY);
-    }
-
-    @Provides
-    @Named("modification")
-    public ContentProviderClient provideModificationContentProviderClient(Context context) {
-        return context.getContentResolver().acquireContentProviderClient(MODIFICATIONS_AUTHORITY);
     }
 
     @Provides

@@ -2,6 +2,7 @@ package fr.free.nrw.commons.upload;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.ContentProviderClient;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -54,7 +55,6 @@ public class MultipleShareActivity extends AuthenticatedActivity
     @Inject MediaWikiApi mwApi;
     @Inject SessionManager sessionManager;
     @Inject UploadController uploadController;
-    @Inject ModifierSequenceDao modifierSequenceDao;
     @Inject @Named("default_preferences") SharedPreferences prefs;
 
     private ArrayList<Contribution> photosList = null;
@@ -166,18 +166,19 @@ public class MultipleShareActivity extends AuthenticatedActivity
     @Override
     public void onCategoriesSave(List<String> categories) {
         if (categories.size() > 0) {
+            ModifierSequenceDao dao = new ModifierSequenceDao(getContentResolver().acquireContentProviderClient(ModificationsContentProvider.AUTHORITY));
             for (Contribution contribution : photosList) {
                 ModifierSequence categoriesSequence = new ModifierSequence(contribution.getContentUri());
 
                 categoriesSequence.queueModifier(new CategoryModifier(categories.toArray(new String[]{})));
                 categoriesSequence.queueModifier(new TemplateRemoveModifier("Uncategorized"));
 
-                modifierSequenceDao.save(categoriesSequence);
+                dao.save(categoriesSequence);
             }
         }
         // FIXME: Make sure that the content provider is up
         // This is the wrong place for it, but bleh - better than not having it turned on by default for people who don't go throughl ogin
-        ContentResolver.setSyncAutomatically(sessionManager.getCurrentAccount(), ModificationsContentProvider.MODIFICATIONS_AUTHORITY, true); // Enable sync by default!
+        ContentResolver.setSyncAutomatically(sessionManager.getCurrentAccount(), ModificationsContentProvider.AUTHORITY, true); // Enable sync by default!
         finish();
     }
 

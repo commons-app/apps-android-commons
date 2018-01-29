@@ -52,14 +52,14 @@ public class ModifierSequenceDaoTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        testObject = new ModifierSequenceDao(() -> client);
+        testObject = new ModifierSequenceDao(client);
     }
 
     @Test
     public void createFromCursorWithEmptyModifiers() {
         MatrixCursor cursor = createCursor("");
 
-        ModifierSequence seq = testObject.fromCursor(cursor);
+        ModifierSequence seq = ModifierSequenceDao.fromCursor(cursor);
 
         assertEquals(EXPECTED_MEDIA_URI, seq.getMediaUri().toString());
         assertEquals(BASE_URI.buildUpon().appendPath("1").toString(), seq.getContentUri().toString());
@@ -70,7 +70,7 @@ public class ModifierSequenceDaoTest {
     public void createFromCursorWtihCategoryModifier() {
         MatrixCursor cursor = createCursor("{\"name\": \"CategoriesModifier\", \"data\": {}}");
 
-        ModifierSequence seq = testObject.fromCursor(cursor);
+        ModifierSequence seq = ModifierSequenceDao.fromCursor(cursor);
 
         assertEquals(1, seq.getModifiers().size());
         assertTrue(seq.getModifiers().get(0) instanceof CategoryModifier);
@@ -80,7 +80,7 @@ public class ModifierSequenceDaoTest {
     public void createFromCursorWithRemoveModifier() {
         MatrixCursor cursor = createCursor("{\"name\": \"TemplateRemoverModifier\", \"data\": {}}");
 
-        ModifierSequence seq = testObject.fromCursor(cursor);
+        ModifierSequence seq = ModifierSequenceDao.fromCursor(cursor);
 
         assertEquals(1, seq.getModifiers().size());
         assertTrue(seq.getModifiers().get(0) instanceof TemplateRemoveModifier);
@@ -89,7 +89,7 @@ public class ModifierSequenceDaoTest {
     @Test
     public void deleteSequence() throws Exception {
         when(client.delete(isA(Uri.class), isNull(String.class), isNull(String[].class))).thenReturn(1);
-        ModifierSequence seq = testObject.fromCursor(createCursor(""));
+        ModifierSequence seq = ModifierSequenceDao.fromCursor(createCursor(""));
 
         testObject.delete(seq);
 
@@ -99,7 +99,7 @@ public class ModifierSequenceDaoTest {
     @Test(expected = RuntimeException.class)
     public void deleteTranslatesRemoteExceptions() throws Exception {
         when(client.delete(isA(Uri.class), isNull(String.class), isNull(String[].class))).thenThrow(new RemoteException(""));
-        ModifierSequence seq = testObject.fromCursor(createCursor(""));
+        ModifierSequence seq = ModifierSequenceDao.fromCursor(createCursor(""));
 
         testObject.delete(seq);
     }
@@ -110,9 +110,9 @@ public class ModifierSequenceDaoTest {
         String expectedData = "{\"modifiers\":[" + modifierJson + "]}";
         MatrixCursor cursor = createCursor(modifierJson);
 
-        testObject.save(testObject.fromCursor(cursor));
+        testObject.save(ModifierSequenceDao.fromCursor(cursor));
 
-        verify(client).update(eq(testObject.fromCursor(cursor).getContentUri()), contentValuesCaptor.capture(), isNull(String.class), isNull(String[].class));
+        verify(client).update(eq(ModifierSequenceDao.fromCursor(cursor).getContentUri()), contentValuesCaptor.capture(), isNull(String.class), isNull(String[].class));
         ContentValues cv = contentValuesCaptor.getValue();
         assertEquals(2, cv.size());
         assertEquals(EXPECTED_MEDIA_URI, cv.get(ModifierSequenceDao.Table.COLUMN_MEDIA_URI));

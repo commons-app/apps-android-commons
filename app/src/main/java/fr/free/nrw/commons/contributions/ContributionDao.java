@@ -11,81 +11,44 @@ import android.text.TextUtils;
 
 import java.util.Date;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Provider;
-
 import fr.free.nrw.commons.settings.Prefs;
 
-import static fr.free.nrw.commons.contributions.ContributionDao.Table.ALL_FIELDS;
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.BASE_URI;
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.uriForId;
 
 public class ContributionDao {
-    /*
-        This sorts in the following order:
-        Currently Uploading
-        Failed (Sorted in ascending order of time added - FIFO)
-        Queued to Upload (Sorted in ascending order of time added - FIFO)
-        Completed (Sorted in descending order of time added)
+    private final ContentProviderClient client;
 
-        This is why Contribution.STATE_COMPLETED is -1.
-     */
-    static final String CONTRIBUTION_SORT = Table.COLUMN_STATE + " DESC, "
-            + Table.COLUMN_UPLOADED + " DESC , ("
-            + Table.COLUMN_TIMESTAMP + " * "
-            + Table.COLUMN_STATE + ")";
-
-    private final Provider<ContentProviderClient> clientProvider;
-
-    @Inject
-    public ContributionDao(@Named("contribution") Provider<ContentProviderClient> clientProvider) {
-        this.clientProvider = clientProvider;
-    }
-
-    Cursor loadAllContributions() {
-        ContentProviderClient db = clientProvider.get();
-        try {
-            return db.query(BASE_URI, ALL_FIELDS, "", null, CONTRIBUTION_SORT);
-        } catch (RemoteException e) {
-            return null;
-        } finally {
-            db.release();
-        }
+    public ContributionDao(ContentProviderClient client) {
+        this.client = client;
     }
 
     public void save(Contribution contribution) {
-        ContentProviderClient db = clientProvider.get();
         try {
             if (contribution.getContentUri() == null) {
-                contribution.setContentUri(db.insert(BASE_URI, toContentValues(contribution)));
+                contribution.setContentUri(client.insert(BASE_URI, toContentValues(contribution)));
             } else {
-                db.update(contribution.getContentUri(), toContentValues(contribution), null, null);
+                client.update(contribution.getContentUri(), toContentValues(contribution), null, null);
             }
         } catch (RemoteException e) {
             throw new RuntimeException(e);
-        } finally {
-            db.release();
         }
     }
 
     public void delete(Contribution contribution) {
-        ContentProviderClient db = clientProvider.get();
         try {
             if (contribution.getContentUri() == null) {
                 // noooo
                 throw new RuntimeException("tried to delete item with no content URI");
             } else {
-                db.delete(contribution.getContentUri(), null, null);
+                client.delete(contribution.getContentUri(), null, null);
             }
         } catch (RemoteException e) {
             throw new RuntimeException(e);
-        } finally {
-            db.release();
         }
     }
 
-    ContentValues toContentValues(Contribution contribution) {
+    public static ContentValues toContentValues(Contribution contribution) {
         ContentValues cv = new ContentValues();
         cv.put(Table.COLUMN_FILENAME, contribution.getFilename());
         if (contribution.getLocalUri() != null) {
@@ -111,7 +74,7 @@ public class ContributionDao {
         return cv;
     }
 
-    public Contribution fromCursor(Cursor cursor) {
+    public static Contribution fromCursor(Cursor cursor) {
         // Hardcoding column positions!
         //Check that cursor has a value to avoid CursorIndexOutOfBoundsException
         if (cursor.getCount() > 0) {

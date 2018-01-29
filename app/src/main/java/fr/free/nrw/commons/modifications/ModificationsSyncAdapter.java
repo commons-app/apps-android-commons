@@ -27,8 +27,6 @@ import timber.log.Timber;
 public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
 
     @Inject MediaWikiApi mwApi;
-    @Inject ContributionDao contributionDao;
-    @Inject ModifierSequenceDao modifierSequenceDao;
 
     public ModificationsSyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
@@ -87,10 +85,11 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
 
         ContentProviderClient contributionsClient = null;
         try {
-            contributionsClient = getContext().getContentResolver().acquireContentProviderClient(ContributionsContentProvider.CONTRIBUTION_AUTHORITY);
+            contributionsClient = getContext().getContentResolver().acquireContentProviderClient(ContributionsContentProvider.AUTHORITY);
 
             while (!allModifications.isAfterLast()) {
-                ModifierSequence sequence = modifierSequenceDao.fromCursor(allModifications);
+                ModifierSequence sequence = ModifierSequenceDao.fromCursor(allModifications);
+                ModifierSequenceDao dao = new ModifierSequenceDao(contributionsClient);
                 Contribution contrib;
 
                 Cursor contributionCursor;
@@ -100,7 +99,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                     throw new RuntimeException(e);
                 }
                 contributionCursor.moveToFirst();
-                contrib = contributionDao.fromCursor(contributionCursor);
+                contrib = ContributionDao.fromCursor(contributionCursor);
 
                 if (contrib.getState() == Contribution.STATE_COMPLETED) {
                     String pageContent;
@@ -128,7 +127,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                         // FIXME: Log this somewhere else
                         Timber.d("Non success result! %s", editResult);
                     } else {
-                        modifierSequenceDao.delete(sequence);
+                        dao.delete(sequence);
                     }
                 }
                 allModifications.moveToNext();
