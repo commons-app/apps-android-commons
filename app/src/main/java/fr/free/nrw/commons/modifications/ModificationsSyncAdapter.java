@@ -95,6 +95,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                 Cursor contributionCursor;
 
                 if (contributionsClient == null) {
+                    Timber.e("ContributionsClient is null. This should not happen!");
                     return;
                 }
 
