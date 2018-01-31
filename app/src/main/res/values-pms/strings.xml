@@ -213,5 +213,5 @@
   <string name="notifications_welcome">Bin-ëvnù an Wikimedia Commons, %s! I soma content ëd vëdd-lo sì.</string>
   <string name="notifications_talk_page_message">%s a l\'ha lassà un mëssagi su soa pàgina ëd ciaciarade</string>
   <string name="notifications_thank_you_edit">Mersì d\'avèj fàit na modìfica</string>
-  <string name="notifications_mention">%s a l\'ha massionalo su %s .</string>
+  <string name="notifications_mention">%1$s a l\'ha massionalo su %2$s .</string>
 </resources>

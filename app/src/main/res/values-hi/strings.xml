@@ -212,5 +212,5 @@
   <string name="notifications_welcome">विकिमीडिया कॉमन्स पर आपका स्वागत है, %s! हमें हर्ष है कि आप यहाँ हैं।</string>
   <string name="notifications_talk_page_message">%s ने आपके वार्ता पृष्ठ पर सन्देश छोड़ा है</string>
   <string name="notifications_thank_you_edit">सम्पादन करने के लिए धन्यवाद</string>
-  <string name="notifications_mention">%s ने %s में आपका उल्लेख किया है</string>
+  <string name="notifications_mention">%1$s ने %2$s में आपका उल्लेख किया है</string>
 </resources>

@@ -213,5 +213,5 @@
   <string name="notifications_welcome">Добре дојдовте на Ризницата, %s! Драго ни е што сте тука.</string>
   <string name="notifications_talk_page_message">%s ви остави порака на разговорната страница</string>
   <string name="notifications_thank_you_edit">Ви благодариме за уредувањето</string>
-  <string name="notifications_mention">%s ве спомна на %s.</string>
+  <string name="notifications_mention">%1$s ве спомна на %2$s.</string>
 </resources>
