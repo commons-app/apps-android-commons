@@ -92,10 +92,13 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
             while (!allModifications.isAfterLast()) {
                 ModifierSequence sequence = modifierSequenceDao.fromCursor(allModifications);
                 Contribution contrib;
-
                 Cursor contributionCursor;
+
+                if (contributionsClient == null) {
+                    return;
+                }
+
                 try {
-                    //TODO: How do we prevent this NPE?
                     contributionCursor = contributionsClient.query(sequence.getMediaUri(), null, null, null, null);
                 } catch (RemoteException e) {
                     throw new RuntimeException(e);
