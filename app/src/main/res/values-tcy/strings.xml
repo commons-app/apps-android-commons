@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">%1$s ಅಪ್ಲೋಡ್ ಸರಿ ಆತಿಜಿ</string>
   <string name="upload_failed_notification_subtitle">ತುಯಾರ ಮೆಲ್ಲ ಒತ್ತುಲೆ</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d ಕಡತ ಅಪ್ಲೊಡ್ ಆವೊಂದುಂಡು</item>
-    <item quantity="other">%d ಕಡತೊಲು ಅಪ್ಲೋಡ್ ಆವೊಂದುಂಡು</item>
+    <item quantity="one">%1$d ಕಡತ ಅಪ್ಲೊಡ್ ಆವೊಂದುಂಡು</item>
+    <item quantity="other">%1$d ಕಡತೊಲು ಅಪ್ಲೋಡ್ ಆವೊಂದುಂಡು</item>
   </plurals>
   <string name="title_activity_contributions">ಎನ್ನ ದಿಂಜಯೀನಾ ವಿಚಾರೊಳು</string>
   <string name="contribution_state_queued">ದಿಂಜೊಂತುಂಡು</string>

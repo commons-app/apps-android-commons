@@ -20,8 +20,8 @@
   <string name="upload_failed_notification_title">Title for notification about upload failing. %1$s represents file name</string>
   <string name="upload_failed_notification_subtitle">Text for notification about upload being completed.</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">Status text about number of uploads left.\n* %d represents number of uploads left, including current one\n</item>
-    <item quantity="other">Status text about number of uploads left.\n* %d represents number of uploads left, including current one\n</item>
+    <item quantity="one">Status text about number of uploads left.\n* %1$d represents number of uploads left, including current one\n</item>
+    <item quantity="other">Status text about number of uploads left.\n* %1$d represents number of uploads left, including current one\n</item>
   </plurals>
   <string name="title_activity_contributions">Title for screen showing my contributions.</string>
   <string name="contribution_state_queued">Show status of upload as currently queued.\n{{Identical|Queue}}</string>

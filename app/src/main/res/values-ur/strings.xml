@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">اپلوڈ %1$s ہونے میں ناکام</string>
   <string name="upload_failed_notification_subtitle">دیکھنے کے لیے ٹیپ کریں</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d فائل اپلوڈ ہورہی ہے</item>
-    <item quantity="other">%d فائلیں اپلوڈ ہورہی ہے</item>
+    <item quantity="one">%1$d فائل اپلوڈ ہورہی ہے</item>
+    <item quantity="other">%1$d فائلیں اپلوڈ ہورہی ہے</item>
   </plurals>
   <string name="title_activity_contributions">میں حالیہ اپلوڈ</string>
   <string name="contribution_state_queued">قطار</string>
@@ -56,16 +56,16 @@
   <string name="contributions_subtitle_zero">ابھی تک کوئی اپلوڈ نہیں</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d اپلوڈ</item>
-    <item quantity="other">%d اپلوڈ</item>
+    <item quantity="one">%1$d اپلوڈ</item>
+    <item quantity="other">%1$d اپلوڈ</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">شروع %d اپلوڈ</item>
-    <item quantity="other">شروع %d اپلوڈ</item>
+    <item quantity="one">شروع %1$d اپلوڈ</item>
+    <item quantity="other">شروع %d$1 اپلوڈ</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d اپلوڈ</item>
-    <item quantity="other">%d اپلوڈ</item>
+    <item quantity="one">%1$d اپلوڈ</item>
+    <item quantity="other">%1$d اپلوڈ</item>
   </plurals>
   <string name="categories_not_found">%1$s سے کوئی زمرہ جات میل نہیں کھاتے</string>
   <string name="categories_skip_explanation">ویکیمیڈیا کامنز پر اپنی تصاویر کو قابل دریافت بنانے کے لیے زمرے شامل کریں۔\n\nزمرے شامل کرنے کے لیے لکھنا شروع کریں۔\n\nاس مرحلے کو نظر انداز کرنے کے لیے اس پیغام یا (یا پیچھے) پر ٹیپ کریں۔</string>

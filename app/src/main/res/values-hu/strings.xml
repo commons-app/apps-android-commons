@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">%1$s feltöltése sikertelen</string>
   <string name="upload_failed_notification_subtitle">Érintsd meg a megtekintéshez</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d fájl feltöltése folyamatban</item>
-    <item quantity="other">%d fájl feltöltése folyamatban</item>
+    <item quantity="one">%1$d fájl feltöltése folyamatban</item>
+    <item quantity="other">%1$d fájl feltöltése folyamatban</item>
   </plurals>
   <string name="title_activity_contributions">Legutóbbi feltöltéseim</string>
   <string name="contribution_state_queued">Várólistán</string>
@@ -56,16 +56,16 @@
   <string name="contributions_subtitle_zero">Még nincsenek feltöltések</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d feltöltés</item>
-    <item quantity="other">%d feltöltés</item>
+    <item quantity="one">%1$d feltöltés</item>
+    <item quantity="other">%1$d feltöltés</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">%d feltöltés kezdése</item>
-    <item quantity="other">%d feltöltés kezdése</item>
+    <item quantity="one">%1$d feltöltés kezdése</item>
+    <item quantity="other">%1$d feltöltés kezdése</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d feltöltés</item>
-    <item quantity="other">%d feltöltés</item>
+    <item quantity="one">%1$d feltöltés</item>
+    <item quantity="other">%1$d feltöltés</item>
   </plurals>
   <string name="categories_not_found">Nincs a(z) „%1$s” keresési kifejezésnek megfelelő kategória</string>
   <string name="categories_skip_explanation">Adj kategóriákat a képekhez, hogy könnyebben meg lehessen találni őket a Commonson.\nKezdd el beírni a kategória nevét, hogy hozzáadd.\nBökj erre az üzenetre (vagy a vissza gombra) a lépés kihagyásához</string>

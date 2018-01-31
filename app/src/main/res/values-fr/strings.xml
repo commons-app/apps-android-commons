@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">Le téléversement de %1$s a échoué</string>
   <string name="upload_failed_notification_subtitle">Appuyer pour afficher</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d fichier en cours de téléversement</item>
-    <item quantity="other">%d fichiers en cours de téléversement</item>
+    <item quantity="one">%1$d fichier en cours de téléversement</item>
+    <item quantity="other">%1$d fichiers en cours de téléversement</item>
   </plurals>
   <string name="title_activity_contributions">Mes téléversements récents</string>
   <string name="contribution_state_queued">Mis en file d\'attente</string>
@@ -56,16 +56,16 @@
   <string name="contributions_subtitle_zero">Encore aucun téléversement</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d téléversement</item>
-    <item quantity="other">%d téléversements</item>
+    <item quantity="one">%1$d téléversement</item>
+    <item quantity="other">%1$d téléversements</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">%d téléversement démarré</item>
-    <item quantity="other">%d téléversements démarrés</item>
+    <item quantity="one">%1$d téléversement démarré</item>
+    <item quantity="other">%1$d téléversements démarrés</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d téléversement</item>
-    <item quantity="other">%d téléversements</item>
+    <item quantity="one">%1$d téléversement</item>
+    <item quantity="other">%1$d téléversements</item>
   </plurals>
   <string name="categories_not_found">Aucune catégorie correspondant à %1$s trouvée</string>
   <string name="categories_skip_explanation">Ajoutez des catégories pour rendre vos images plus simples à trouver sur Wikimedia Commons. \nCommencer à ajouter des catégories.</string>
@@ -210,8 +210,8 @@
   <string name="location_permission_rationale_nearby">Une permission est requise pour afficher une liste de lieux relatifs</string>
   <string name="get_directions">OBTENIR DES DIRECTIVES</string>
   <string name="read_article">LIRE L’ARTICLE</string>
-  <string name="notifications_welcome">Bienvenue sur Wikimedia Commons, %s! Nous sommes heureux que vous soyez venu.</string>
-  <string name="notifications_talk_page_message">%s a laissé un message sur votre page de discussion</string>
+  <string name="notifications_welcome">Bienvenue sur Wikimedia Commons, %1$s! Nous sommes heureux que vous soyez venu.</string>
+  <string name="notifications_talk_page_message">%1$s a laissé un message sur votre page de discussion</string>
   <string name="notifications_thank_you_edit">Merci de faire une modification</string>
   <string name="notifications_mention">%1$s vous a mentionné sur %2$s .</string>
 </resources>

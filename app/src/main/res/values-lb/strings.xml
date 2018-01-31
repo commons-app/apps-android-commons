@@ -22,7 +22,7 @@
   <string name="upload_failed_notification_subtitle">Dréckt fir nach eng Kéier ze probéieren</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">ee Fichier eroplueden</item>
-    <item quantity="other">%d Fichieren eroplueden</item>
+    <item quantity="other">%1$d Fichieren eroplueden</item>
   </plurals>
   <string name="title_activity_contributions">Meng rezent eropgeluede Fichieren</string>
   <string name="contribution_state_queued">An der Queue</string>
@@ -56,15 +56,15 @@
   <plurals name="contributions_subtitle">
     <item quantity="zero">N@string/contributions_subtitle_zero</item>
     <item quantity="one">1 Fichier eropgelueden</item>
-    <item quantity="other">%d Fichieren eropgelueden</item>
+    <item quantity="other">%1$d Fichieren eropgelueden</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Ugefaang 1 Fichier eropzelueden</item>
-    <item quantity="other">Ugefaang %d Fichieren eropzelueden</item>
+    <item quantity="other">Ugefaang %1$d Fichieren eropzelueden</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">1 Fichier eropgelueden</item>
-    <item quantity="other">%d Fichieren eropgelueden</item>
+    <item quantity="other">%1$d Fichieren eropgelueden</item>
   </plurals>
   <string name="categories_not_found">D\'Kategorie %1$s gouf net fonnt</string>
   <string name="categories_skip_explanation">Setzt Kategorien dobäi fir datt Är Biller méi einfach op Wikimedia Commons ze fanne sinn.\n\nFänkt u mat Tippe fir Kategorien dobäizesetzen.</string>

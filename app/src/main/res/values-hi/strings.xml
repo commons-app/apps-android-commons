@@ -55,16 +55,16 @@
   <string name="enable_gps">जीपीएस सक्षम करें</string>
   <string name="contributions_subtitle_zero">अभी तक कोई अपलोड नहीं</string>
   <plurals name="contributions_subtitle">
-    <item quantity="one">%d अपलोड</item>
-    <item quantity="other">%d अपलोड्स</item>
+    <item quantity="one">%1$d अपलोड</item>
+    <item quantity="other">%1$d अपलोड्स</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">%d अपलोड शुरू</item>
-    <item quantity="other">%d अपलोड शुरू</item>
+    <item quantity="one">%1$d अपलोड शुरू</item>
+    <item quantity="other">%1$d अपलोड शुरू</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d अपलोड</item>
-    <item quantity="other">%d अपलोड</item>
+    <item quantity="one">%1$d अपलोड</item>
+    <item quantity="other">%1$d अपलोड</item>
   </plurals>
   <string name="categories_not_found">%1$s से कोई श्रेणी मेल नहीं खाती</string>
   <string name="categories_skip_explanation">विकिमीडिया कॉमन्स पर अपनी छवियों को अधिक खोजने योग्य बनाने के लिए श्रेणियां जोड़ें|\nश्रेणियां जोड़ने के लिए टाइप करना प्रारंभ करें|</string>
@@ -209,8 +209,8 @@
   <string name="location_permission_rationale_nearby">आसपास के स्थान दिखाने के लिए अनुमति चाहिए</string>
   <string name="get_directions">दिशा - निर्देश प्राप्त करें</string>
   <string name="read_article">लेख पढ़ें</string>
-  <string name="notifications_welcome">विकिमीडिया कॉमन्स पर आपका स्वागत है, %s! हमें हर्ष है कि आप यहाँ हैं।</string>
-  <string name="notifications_talk_page_message">%s ने आपके वार्ता पृष्ठ पर सन्देश छोड़ा है</string>
+  <string name="notifications_welcome">विकिमीडिया कॉमन्स पर आपका स्वागत है, %1$s! हमें हर्ष है कि आप यहाँ हैं।</string>
+  <string name="notifications_talk_page_message">%1$s ने आपके वार्ता पृष्ठ पर सन्देश छोड़ा है</string>
   <string name="notifications_thank_you_edit">सम्पादन करने के लिए धन्यवाद</string>
   <string name="notifications_mention">%1$s ने %2$s में आपका उल्लेख किया है</string>
 </resources>

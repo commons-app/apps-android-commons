@@ -55,16 +55,16 @@
   <string name="contributions_subtitle_zero">Durung ana unggahan</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d unggahan</item>
-    <item quantity="other">%d unggahan</item>
+    <item quantity="one">%1$d unggahan</item>
+    <item quantity="other">%1$d unggahan</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Miwiti %d unggahan</item>
-    <item quantity="other">Miwiti %d unggahan</item>
+    <item quantity="one">Miwiti %1$d unggahan</item>
+    <item quantity="other">Miwiti %1$d unggahan</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d unggahan</item>
-    <item quantity="other">%d unggahan</item>
+    <item quantity="one">%1$d unggahan</item>
+    <item quantity="other">%1$d unggahan</item>
   </plurals>
   <string name="categories_not_found">Ora ana kategori sing cocog karo %1$s</string>
   <string name="categories_activity_title">Kategori</string>

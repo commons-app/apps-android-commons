@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">Erro ao cargar \"%1$s\"</string>
   <string name="upload_failed_notification_subtitle">Prema para mostralo</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">Cargando %d ficheiro</item>
-    <item quantity="other">Cargando %d ficheiros</item>
+    <item quantity="one">Cargando %1$d ficheiro</item>
+    <item quantity="other">Cargando %1$d ficheiros</item>
   </plurals>
   <string name="title_activity_contributions">As miñas subas recentes</string>
   <string name="contribution_state_queued">Na cola</string>
@@ -56,16 +56,16 @@
   <string name="contributions_subtitle_zero">Aínda non hai subas</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d carga</item>
-    <item quantity="other">%d cargas</item>
+    <item quantity="one">%1$d carga</item>
+    <item quantity="other">%1$d cargas</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Iniciando %d carga</item>
-    <item quantity="other">Iniciando %d cargas</item>
+    <item quantity="one">Iniciando %1$d carga</item>
+    <item quantity="other">Iniciando %1$d cargas</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d carga</item>
-    <item quantity="other">%d cargas</item>
+    <item quantity="one">%1$d carga</item>
+    <item quantity="other">%1$d cargas</item>
   </plurals>
   <string name="categories_not_found">Non se atopou ningunha categoría que coincidise con \"%1$s\"</string>
   <string name="categories_skip_explanation">Engada categorías para facer máis accesibles as súas imaxes na Wikimedia Commons.\nComece a escribir para engadir categorías.</string>
@@ -210,8 +210,8 @@
   <string name="location_permission_rationale_nearby">Precísase permiso para amosar unha lista de lugares preto de aquí</string>
   <string name="get_directions">OBTER DIRECCIÓNS</string>
   <string name="read_article">LER ARTIGO</string>
-  <string name="notifications_welcome">Benvido a Wikimedia Commons, %s! Alegrámonos de que estea aquí.</string>
-  <string name="notifications_talk_page_message">%s deixoulle unha mensaxe na súa páxina de conversa</string>
+  <string name="notifications_welcome">Benvido a Wikimedia Commons, %1$s! Alegrámonos de que estea aquí.</string>
+  <string name="notifications_talk_page_message">%1$s deixoulle unha mensaxe na súa páxina de conversa</string>
   <string name="notifications_thank_you_edit">Grazas por realizar unha edición</string>
   <string name="notifications_mention">%1$s mencionouno en %2$s.</string>
 </resources>

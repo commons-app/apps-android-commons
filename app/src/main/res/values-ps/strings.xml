@@ -34,7 +34,7 @@
   <string name="refresh_button">بياتازه کول</string>
   <plurals name="multiple_uploads_title">
     <item quantity="one">1 پورته کول</item>
-    <item quantity="other">%d پورته کول</item>
+    <item quantity="other">%1$d پورته کول</item>
   </plurals>
   <string name="categories_activity_title">وېشنيزې</string>
   <string name="title_activity_settings">امستنې</string>

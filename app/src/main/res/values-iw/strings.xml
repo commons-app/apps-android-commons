@@ -56,15 +56,15 @@
   <string name="contributions_subtitle_zero">לא הועלה עדיין שום דבר</string>
   <plurals name="contributions_subtitle">
     <item quantity="one">העלאה אחת</item>
-    <item quantity="other">%d העלאות</item>
+    <item quantity="other">%1$d העלאות</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">התחלת העלאה</item>
-    <item quantity="other">התחלת %d העלאות</item>
+    <item quantity="other">התחלת 1$d% העלאות</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">העלאה אחת</item>
-    <item quantity="other">%d העלאות</item>
+    <item quantity="other">%1$d העלאות</item>
   </plurals>
   <string name="categories_not_found">לא נמצאו קטגוריות בשם %1$s</string>
   <string name="categories_skip_explanation">יש להוסיף קטגוריות כדי שיהיה קל יותר למצוא את התמונות שלך בוויקישיתוף.\nכדי להוסיף קטגוריה יש להתחיל לכתוב.</string>
