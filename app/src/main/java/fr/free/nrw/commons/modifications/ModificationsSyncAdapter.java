@@ -92,22 +92,31 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
             while (!allModifications.isAfterLast()) {
                 ModifierSequence sequence = modifierSequenceDao.fromCursor(allModifications);
                 Contribution contrib;
-
                 Cursor contributionCursor;
+
+                if (contributionsClient == null) {
+                    Timber.e("ContributionsClient is null. This should not happen!");
+                    return;
+                }
+
                 try {
                     contributionCursor = contributionsClient.query(sequence.getMediaUri(), null, null, null, null);
                 } catch (RemoteException e) {
                     throw new RuntimeException(e);
                 }
-                contributionCursor.moveToFirst();
+
+                if (contributionCursor != null) {
+                    contributionCursor.moveToFirst();
+                }
+
                 contrib = contributionDao.fromCursor(contributionCursor);
 
-                if (contrib.getState() == Contribution.STATE_COMPLETED) {
+                if (contrib != null && contrib.getState() == Contribution.STATE_COMPLETED) {
                     String pageContent;
                     try {
                         pageContent = mwApi.revisionsByFilename(contrib.getFilename());
                     } catch (IOException e) {
-                        Timber.d("Network fuckup on modifications sync!");
+                        Timber.d("Network messed up on modifications sync!");
                         continue;
                     }
 
@@ -118,13 +127,13 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                     try {
                         editResult = mwApi.edit(editToken, processedPageContent, contrib.getFilename(), sequence.getEditSummary());
                     } catch (IOException e) {
-                        Timber.d("Network fuckup on modifications sync!");
+                        Timber.d("Network messed up on modifications sync!");
                         continue;
                     }
 
                     Timber.d("Response is %s", editResult);
 
-                    if (!editResult.equals("Success")) {
+                    if (!"Success".equals(editResult)) {
                         // FIXME: Log this somewhere else
                         Timber.d("Non success result! %s", editResult);
                     } else {
