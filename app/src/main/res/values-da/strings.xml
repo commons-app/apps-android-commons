@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">Overførsel af %1$s mislykkedes</string>
   <string name="upload_failed_notification_subtitle">Klik for at se</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d fil overføres</item>
-    <item quantity="other">%d filer overføres</item>
+    <item quantity="one">%1$d fil overføres</item>
+    <item quantity="other">%1$d filer overføres</item>
   </plurals>
   <string name="title_activity_contributions">Mine seneste overførsler</string>
   <string name="contribution_state_queued">I kø</string>
@@ -56,16 +56,16 @@
   <string name="contributions_subtitle_zero">Ingen overførelser endnu</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d overførsel</item>
-    <item quantity="other">%d overførelser</item>
+    <item quantity="one">%1$d overførsel</item>
+    <item quantity="other">%1$d overførelser</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Starter %d overførsel</item>
-    <item quantity="other">Starter %d overførsler</item>
+    <item quantity="one">Starter %1$d overførsel</item>
+    <item quantity="other">Starter %1$d overførsler</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d overførsel</item>
-    <item quantity="other">%d overførsler</item>
+    <item quantity="one">%1$d overførsel</item>
+    <item quantity="other">%1$d overførsler</item>
   </plurals>
   <string name="categories_not_found">Ingen kategorier matchende %1$s er fundet</string>
   <string name="categories_skip_explanation">Tilføj kategorier for at gøre billederne mere synlig på Wikimedia Commons. Tast for at tilføje kategorier.</string>

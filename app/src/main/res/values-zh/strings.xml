@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">上传%1$s失败</string>
   <string name="upload_failed_notification_subtitle">点击查看</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d个文件正在上传</item>
-    <item quantity="other">%d个文件正在上传</item>
+    <item quantity="one">%1$d个文件正在上传</item>
+    <item quantity="other">%1$d个文件正在上传</item>
   </plurals>
   <string name="title_activity_contributions">我的最近上传</string>
   <string name="contribution_state_queued">已入队列</string>
@@ -56,16 +56,16 @@
   <string name="contributions_subtitle_zero">尚无上传</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d次上传</item>
-    <item quantity="other">%d次上传</item>
+    <item quantity="one">%1$d次上传</item>
+    <item quantity="other">%1$d次上传</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">开始%d次上传</item>
-    <item quantity="other">开始%d次上传</item>
+    <item quantity="one">开始%1$d次上传</item>
+    <item quantity="other">开始%1$d次上传</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d次上传</item>
-    <item quantity="other">%d次上传</item>
+    <item quantity="one">%1$d次上传</item>
+    <item quantity="other">%1$d次上传</item>
   </plurals>
   <string name="categories_not_found">没有找到匹配%1$s的分类</string>
   <string name="categories_skip_explanation">添加分类使您的图像更容易在维基共享资源被找到。开始输入以添加分类。</string>
@@ -213,5 +213,5 @@
   <string name="notifications_welcome">欢迎来到维基共享资源，%s！我们很高兴您来这里。</string>
   <string name="notifications_talk_page_message">%s在您的讨论页上留下了一条消息</string>
   <string name="notifications_thank_you_edit">感谢您做出编辑</string>
-  <string name="notifications_mention">%s在%s提到了您。</string>
+  <string name="notifications_mention">%1$s在%2$s提到了您。</string>
 </resources>

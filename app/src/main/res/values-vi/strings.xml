@@ -53,10 +53,10 @@
   <string name="contributions_subtitle_zero">Chưa có tập tin tải lên</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="other">%d tập tin tải lên</item>
+    <item quantity="other">%1$d tập tin tải lên</item>
   </plurals>
-  <string name="starting_multiple_uploads">Đang bắt đầu tải lên %d tập tin</string>
-  <string name="multiple_uploads_title">%d tập tin tải lên</string>
+  <string name="starting_multiple_uploads">Đang bắt đầu tải lên %1$d tập tin</string>
+  <string name="multiple_uploads_title">%1$d tập tin tải lên</string>
   <string name="categories_not_found">Không tìm thấy thể loại khớp với %1$s</string>
   <string name="categories_skip_explanation" fuzzy="true">Xếp các hình ảnh vào thể loại để cho chúng dễ tìm kiếm hơn trên Wikimedia Commons.\n\nHãy bắt đầu nhập tên thể loại để tìm kiếm.\nChạm vào thông điệp này (hoặc bấm Quay lại) để bỏ qua bước này.</string>
   <string name="categories_activity_title">Thể loại</string>

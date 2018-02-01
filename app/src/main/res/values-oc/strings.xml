@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">Telecargament fracassat a %1$s</string>
   <string name="upload_failed_notification_subtitle">Quichar per afichar</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d fichièr en cors de cargament</item>
-    <item quantity="other">%d fichièrs en cors de cargament</item>
+    <item quantity="one">%1$d fichièr en cors de cargament</item>
+    <item quantity="other">%1$d fichièrs en cors de cargament</item>
   </plurals>
   <string name="title_activity_contributions">Mos darrièrs cargaments</string>
   <string name="contribution_state_queued">Mes en fila d\'espèra</string>
@@ -52,16 +52,16 @@
   <string name="refresh_button">Refrescar</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d cargament</item>
-    <item quantity="other">%d cargaments</item>
+    <item quantity="one">%1$d cargament</item>
+    <item quantity="other">%1$d cargaments</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">%d cargament aviat</item>
-    <item quantity="other">%d cargaments aviats</item>
+    <item quantity="one">%1$d cargament aviat</item>
+    <item quantity="other">%1$d cargaments aviats</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d cargament</item>
-    <item quantity="other">%d cargaments</item>
+    <item quantity="one">%1$d cargament</item>
+    <item quantity="other">%1$d cargaments</item>
   </plurals>
   <string name="categories_not_found">Cap de categoria que correspond a %1$s pas trobada</string>
   <string name="categories_activity_title">Categorias</string>

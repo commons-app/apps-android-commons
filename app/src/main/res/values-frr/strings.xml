@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">Huuchschüüren faan „%1$s“ skiaf gingen</string>
   <string name="upload_failed_notification_subtitle">Tipe, am det uuntulukin</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d datei woort huuchschüürd</item>
-    <item quantity="other">%d datein wurd huuchschüürd</item>
+    <item quantity="one">%1$d datei woort huuchschüürd</item>
+    <item quantity="other">%1$d datein wurd huuchschüürd</item>
   </plurals>
   <string name="title_activity_contributions">Min tuleetst huuchschüürd datein</string>
   <string name="contribution_state_queued">Skal noch teew</string>
@@ -57,15 +57,15 @@
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">Ian huuchschüürd datei</item>
-    <item quantity="other">%d huuchschüürd datein</item>
+    <item quantity="other">%1$d huuchschüürd datein</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Began %d upload</item>
-    <item quantity="other">Began %d uploads</item>
+    <item quantity="one">Began %1$d upload</item>
+    <item quantity="other">Began %1$d uploads</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d huuchschüürd datei</item>
-    <item quantity="other">%d huuchschüürd datein</item>
+    <item quantity="one">%1$d huuchschüürd datei</item>
+    <item quantity="other">%1$d huuchschüürd datein</item>
   </plurals>
   <string name="categories_not_found">Det kategorii „%1$s“ küd ei fünjen wurd.</string>
   <string name="categories_skip_explanation" fuzzy="true">Dü könst nei kategoriin iinracht, amdat din bilen beeder fünjen wurd. Eder skriiw en kategorii-nööm of tipe üüb det nooracht (of gung üüb det \'turag\'-fial), an läät di straal ütj.</string>

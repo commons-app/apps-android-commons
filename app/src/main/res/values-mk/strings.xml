@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">Подигањето на „%1$s“ не успеа</string>
   <string name="upload_failed_notification_subtitle">Допрете за да погледате</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">Се подига %d податотека</item>
-    <item quantity="other">Се подигаат %d податотеки</item>
+    <item quantity="one">Се подига %1$d податотека</item>
+    <item quantity="other">Се подигаат %1$d податотеки</item>
   </plurals>
   <string name="title_activity_contributions">Мои скорешни подигања</string>
   <string name="contribution_state_queued">Чека ред</string>
@@ -56,16 +56,16 @@
   <string name="contributions_subtitle_zero">Сè уште нема подигања</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d подигање</item>
-    <item quantity="other">%d подигања</item>
+    <item quantity="one">%1$d подигање</item>
+    <item quantity="other">%1$d подигања</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Започнувам %d подигање</item>
-    <item quantity="other">Започнувам %d подигања</item>
+    <item quantity="one">Започнувам %1$d подигање</item>
+    <item quantity="other">Започнувам %1$d подигања</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d подигање</item>
-    <item quantity="other">%d подигања</item>
+    <item quantity="one">%1$d подигање</item>
+    <item quantity="other">%1$d подигања</item>
   </plurals>
   <string name="categories_not_found">Нема категории што одговараат на %1$s</string>
   <string name="categories_skip_explanation">Ставете им категории на сликите, за да можат корисниците полесно да ги најдат на Ризницата.\n\nЗа да ставите категорија, почнете со пишување на нејзиното име.</string>
@@ -210,8 +210,8 @@
   <string name="location_permission_rationale_nearby">Се бара дозвола за приказ на список на околни места</string>
   <string name="get_directions">ДАЈ НАСОКИ</string>
   <string name="read_article">ПРОЧИТАЈ СТАТИЈА</string>
-  <string name="notifications_welcome">Добре дојдовте на Ризницата, %s! Драго ни е што сте тука.</string>
-  <string name="notifications_talk_page_message">%s ви остави порака на разговорната страница</string>
+  <string name="notifications_welcome">Добре дојдовте на Ризницата, %1$s! Драго ни е што сте тука.</string>
+  <string name="notifications_talk_page_message">%1$s ви остави порака на разговорната страница</string>
   <string name="notifications_thank_you_edit">Ви благодариме за уредувањето</string>
-  <string name="notifications_mention">%s ве спомна на %s.</string>
+  <string name="notifications_mention">%1$s ве спомна на %2$s.</string>
 </resources>

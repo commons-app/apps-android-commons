@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">%1$s جو چاڙھڻ ناڪام ويو</string>
   <string name="upload_failed_notification_subtitle">ڏسڻ لاءِ ٺونگيو</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d فائيل چاڙھيندي</item>
-    <item quantity="other">%d فائيلَ چاڙھيندي</item>
+    <item quantity="one">%1$d فائيل چاڙھيندي</item>
+    <item quantity="other">%1$d فائيلَ چاڙھيندي</item>
   </plurals>
   <string name="title_activity_contributions">منھنجا تازا چاڙھ</string>
   <string name="contribution_state_queued">قطار ۾</string>
@@ -54,16 +54,16 @@
   <string name="contributions_subtitle_zero">اڃان تائين ڪو به ڄاڙهه (اَپلوڊ) نه ٿيو آهي</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d چاڙھ</item>
-    <item quantity="other">%d چاڙھَ</item>
+    <item quantity="one">%1$d چاڙھ</item>
+    <item quantity="other">%1$d چاڙھَ</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">چاڙھ %d شروع ڪندي</item>
-    <item quantity="other">چاڙھَ %d شروع ڪندي</item>
+    <item quantity="one">چاڙھ %1$d شروع ڪندي</item>
+    <item quantity="other">چاڙھَ %d$1 شروع ڪندي</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d چاڙھ</item>
-    <item quantity="other">%d چاڙھَ</item>
+    <item quantity="one">%1$d چاڙھ</item>
+    <item quantity="other">%1$d چاڙھَ</item>
   </plurals>
   <string name="categories_not_found">%1$s سان ملندڙ ڪوبہ زمرو نہ لڌو</string>
   <string name="categories_skip_explanation">پنھنجي عڪسن ۾ زمرا وجھو تہ جيئن وڪيميڊيا العام تي وڌيڪ ڳولا لائق ٿي سگھن.\n\nزمرا وجھڻ لاءِ لکڻ شروع ڪريو.</string>

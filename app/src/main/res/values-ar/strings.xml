@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">فشل رفع %1$s</string>
   <string name="upload_failed_notification_subtitle">انقر لتشاهد</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d رفع ملف</item>
-    <item quantity="other">%d رفع ملفات</item>
+    <item quantity="one">%1$d رفع ملف</item>
+    <item quantity="other">%1$d رفع ملفات</item>
   </plurals>
   <string name="title_activity_contributions">مرفوعاتي الأخيرة</string>
   <string name="contribution_state_queued">في قائمة الانتظار</string>

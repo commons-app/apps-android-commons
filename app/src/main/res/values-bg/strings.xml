@@ -32,8 +32,8 @@
   <string name="menu_upload_single">Качване</string>
   <string name="menu_save_categories">Съхраняване</string>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d качване</item>
-    <item quantity="other">%d качвания</item>
+    <item quantity="one">%1$d качване</item>
+    <item quantity="other">%1$d качвания</item>
   </plurals>
   <string name="categories_activity_title">Категории</string>
   <string name="title_activity_settings">Настройки</string>

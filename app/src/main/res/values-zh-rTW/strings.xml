@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">上傳%1$s失敗</string>
   <string name="upload_failed_notification_subtitle">輕觸檢視</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">正在上載 %d 個檔案</item>
-    <item quantity="other">正在上載 %d 個檔案</item>
+    <item quantity="one">正在上載 %1$d 個檔案</item>
+    <item quantity="other">正在上載 %1$d 個檔案</item>
   </plurals>
   <string name="title_activity_contributions">我的最近上傳</string>
   <string name="contribution_state_queued">已佇列</string>
@@ -56,16 +56,16 @@
   <string name="contributions_subtitle_zero">尚未上傳</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d 次上傳</item>
-    <item quantity="other">%d 次上傳</item>
+    <item quantity="one">%1$d 次上傳</item>
+    <item quantity="other">%1$d 次上傳</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">開始 %d 次上傳</item>
-    <item quantity="other">開始 %d 次上傳</item>
+    <item quantity="one">開始 %1$d 次上傳</item>
+    <item quantity="other">開始 %1$d 次上傳</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d 次上傳</item>
-    <item quantity="other">%d 次上傳</item>
+    <item quantity="one">%1$d 次上傳</item>
+    <item quantity="other">%1$d 次上傳</item>
   </plurals>
   <string name="categories_not_found">沒有發現與 %1$s 相符的分類</string>
   <string name="categories_skip_explanation">為您的圖片添加分類，使別人在維基共享資源更容易找到。\n\n開始輸入以添加分類。</string>
@@ -210,8 +210,8 @@
   <string name="location_permission_rationale_nearby">需權限來顯示附近地點清單</string>
   <string name="get_directions">取得導向</string>
   <string name="read_article">讀取條目</string>
-  <string name="notifications_welcome">%s，歡迎來到維基共享資源！我們很高興您來到這裡。</string>
-  <string name="notifications_talk_page_message">%s 留了訊息在您的對話頁</string>
+  <string name="notifications_welcome">%1$s，歡迎來到維基共享資源！我們很高興您來到這裡。</string>
+  <string name="notifications_talk_page_message">%1$s 留了訊息在您的對話頁</string>
   <string name="notifications_thank_you_edit">感謝您所做的編輯</string>
-  <string name="notifications_mention">%s 在 %s 提到了您。</string>
+  <string name="notifications_mention">%1$s 在 %2$s 提到了您。</string>
 </resources>

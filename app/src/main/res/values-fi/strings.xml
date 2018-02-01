@@ -22,7 +22,7 @@
   <string name="upload_failed_notification_subtitle">Napauta katsoaksesi</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">1 tiedosto tallentuu</item>
-    <item quantity="other">%d tiedostoa tallentuu</item>
+    <item quantity="other">%1$d tiedostoa tallentuu</item>
   </plurals>
   <string name="title_activity_contributions">Viimeaikaiset tallennukseni</string>
   <string name="contribution_state_queued">Jonossa</string>
@@ -56,16 +56,16 @@
   <string name="contributions_subtitle_zero">Ei tallennuksia vielä</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d tallennus</item>
-    <item quantity="other">%d tallennusta</item>
+    <item quantity="one">%1$d tallennus</item>
+    <item quantity="other">%1$d tallennusta</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">aloitetaan %d tallennus</item>
-    <item quantity="other">aloitetaan %d tallennusta</item>
+    <item quantity="one">aloitetaan %1$d tallennus</item>
+    <item quantity="other">aloitetaan %1$d tallennusta</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d tallennus</item>
-    <item quantity="other">%d tallennusta</item>
+    <item quantity="one">%1$d tallennus</item>
+    <item quantity="other">%1$d tallennusta</item>
   </plurals>
   <string name="categories_not_found">Luokkaa %1$s ei löytynyt</string>
   <string name="categories_skip_explanation">Lisää luokkia tehdäksesi kuvistasi enemmän löydettäviä Wikimedia Commonssissa.\nAloita kirjoittaminen lisätäksesi luokkia.</string>

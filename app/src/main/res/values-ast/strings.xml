@@ -22,7 +22,7 @@
   <string name="upload_failed_notification_subtitle">Toque pa velo</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Xubiendo un ficheru</item>
-    <item quantity="other">Xubiendo %d ficheros</item>
+    <item quantity="other">Xubiendo %1$d ficheros</item>
   </plurals>
   <string name="title_activity_contributions">Les mios xubes recién</string>
   <string name="contribution_state_queued">En cola</string>
@@ -57,15 +57,15 @@
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">1 carga</item>
-    <item quantity="other">%d cargues</item>
+    <item quantity="other">%1$d cargues</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Principiando 1 carga</item>
-    <item quantity="other">Principiando %d cargues</item>
+    <item quantity="other">Principiando %1$d cargues</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">1 carga</item>
-    <item quantity="other">%d cargues</item>
+    <item quantity="other">%1$d cargues</item>
   </plurals>
   <string name="categories_not_found">Nun s\'alcontró denguna categoría que case con %1$s</string>
   <string name="categories_skip_explanation">Amiesta categoríes pa facer les imaxes más fáciles d\'alcontrar en Wikimedia Commons.\nPrincipia a escribir p\'amestar categoríes.</string>

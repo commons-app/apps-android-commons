@@ -51,7 +51,7 @@
   <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Oraindik igoerarik ez</item>
     <item quantity="one">igoera 1</item>
-    <item quantity="other">%d igoera</item>
+    <item quantity="other">%1$d igoera</item>
   </plurals>
   <string name="categories_not_found">Ez da kategoriak aukritu %1$s izenarekin</string>
   <string name="categories_skip_explanation" fuzzy="true">Gehitu kategoriak zure argazkiak Wikimedia Commonsen aurkitzen errazagoak izan daitezen.</string>

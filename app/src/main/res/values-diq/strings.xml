@@ -22,7 +22,7 @@
   <string name="upload_failed_notification_subtitle">pıpawane xo bıvin</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">1 dosye selagnayış</item>
-    <item quantity="other">%d dosye Selagnayışi</item>
+    <item quantity="other">%1$d dosye Selagnayışi</item>
   </plurals>
   <string name="title_activity_contributions">Barkerdışê mınê peyêni</string>
   <string name="contribution_state_queued">Ratneya</string>
@@ -52,15 +52,15 @@
   <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Theba bar nêbı</item>
     <item quantity="one">1 bar kerdış</item>
-    <item quantity="other">%d bar kerdışi</item>
+    <item quantity="other">%1$d bar kerdışi</item>
   </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Sergendış 1 bar kerdış</item>
-    <item quantity="other">Sergendış %d bar kerdışi </item>
+    <item quantity="other">Sergendış %1$d bar kerdışi </item>
   </plurals>
   <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 bar kerdış</item>
-    <item quantity="other">%d bar kerdışi </item>
+    <item quantity="other">%1$d bar kerdışi </item>
   </plurals>
   <string name="categories_not_found">Kategoriyan de %1$s deye theba çıniyo</string>
   <string name="categories_skip_explanation" fuzzy="true">Kategori cı kerdışi rê nusnayış bıkeré. Ena gamer ravêrdışi rê mesaci bıpıloğnê yana peyd şırê.</string>

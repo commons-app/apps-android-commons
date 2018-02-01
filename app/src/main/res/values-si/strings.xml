@@ -57,15 +57,15 @@
   <plurals name="contributions_subtitle">
     <item quantity="zero">තවමත් කිසිදු උඩුගත කිරීමක් නැත</item>
     <item quantity="one">එක් උඩුගත කිරීමක් ඇත</item>
-    <item quantity="other">උඩුගත කිරීම් %d ක් ඇත</item>
+    <item quantity="other">උඩුගත කිරීම් %1$d ක් ඇත</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">1 උඩුගත කිරීමක් ආරම්භ කරමින්</item>
-    <item quantity="other">උඩුගත කිරීම් %d ක් ආරම්භ කරමින්</item>
+    <item quantity="other">උඩුගත කිරීම් %1$d ක් ආරම්භ කරමින්</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">1 උඩුගත කිරීමක්</item>
-    <item quantity="other">උඩුගත කිරීම් %d ක්</item>
+    <item quantity="other">උඩුගත කිරීම් %1$d ක්</item>
   </plurals>
   <string name="categories_not_found">ප්‍රවර්ග සැසඳේන්නේ නැත %1$s හමුවිsය</string>
   <string name="categories_activity_title">ප්‍රවර්ග</string>
@@ -174,5 +174,5 @@
   <string name="nearby_location_not_available">ස්ථානය දී නොමැත</string>
   <string name="read_article">මෙමේ ලිපිය කියවන්න</string>
   <string name="notifications_welcome">විකිමීඩියා කොමන්ස් වෙත ඔබව සාදරයෙන් පිළිගනිමු! ඔබ මෙහි පැමිණීම ගැන අපි හද පත්ලෙන්ම සතුටු වෙමු.</string>
-  <string name="notifications_talk_page_message">ඔබගේ කතා පිටුවේ %s විසින් පණිවුඩයක් තබා ඇත</string>
+  <string name="notifications_talk_page_message">ඔබගේ කතා පිටුවේ %1$s විසින් පණිවුඩයක් තබා ඇත</string>
 </resources>
