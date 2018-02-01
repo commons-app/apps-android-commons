@@ -164,7 +164,10 @@
   <string name="logout_verification">האם באמת לצאת מהחשבון?</string>
   <string name="commons_logo">סמל ויקישיתוף</string>
   <string name="commons_website">אתר ויקישיתוף</string>
+  <string name="commons_facebook">עמוד הפייסבוק של ויקישיתוף</string>
+  <string name="commons_github">קוד המקור של ויקישיתוף ב־GitHub</string>
   <string name="background_image">תמונת רקע</string>
+  <string name="mediaimage_failed">תמונת המדיה נכשלה</string>
   <string name="no_image_found">לא נמצאה תמונה</string>
   <string name="upload_image">העלאת תמונה</string>
   <string name="welcome_image_mount_zao">הר זאו</string>
@@ -186,6 +189,7 @@
   <string name="navigation_item_feedback">משוב</string>
   <string name="navigation_item_logout">יציאה</string>
   <string name="navigation_item_info">מדריך</string>
+  <string name="navigation_item_notification">הודעות</string>
   <string name="nearby_needs_permissions">אי־אפשר להציג מקומות בסביבה ללא הרשאות מיקום</string>
   <string name="no_description_found">לא נמצא תיאור</string>
   <string name="nearby_info_menu_commons_article">דף קובץ בוויקישיתוף</string>
@@ -204,4 +208,8 @@
   <string name="location_permission_rationale_nearby">נדרשת הרשאה כדי להציג רשימה של מקומות בסביבה</string>
   <string name="get_directions">קבלת כיוונים</string>
   <string name="read_article">קריאה הערך</string>
+  <string name="notifications_welcome">ברוך בואך לוויקישיתוף של ויקימדיה, %s! שמחים לראות אותך כאן אצלנו.</string>
+  <string name="notifications_talk_page_message">קיבלת הודעה מאת %s בעמוד השיחה שלך</string>
+  <string name="notifications_thank_you_edit">תודה לך על העריכה</string>
+  <string name="notifications_mention">אוזכרת על ידי %s ב%s.</string>
 </resources>

@@ -199,6 +199,7 @@
   <string name="navigation_item_feedback">Зворотний зв\'язок</string>
   <string name="navigation_item_logout">Вийти</string>
   <string name="navigation_item_info">Посібник</string>
+  <string name="navigation_item_notification">Сповіщення</string>
   <string name="nearby_needs_permissions">Місця поблизу неможливо показати без дозволу на визначення місця розташування.</string>
   <string name="no_description_found">опис не знайдено</string>
   <string name="nearby_info_menu_commons_article">Сторінка файлу у Вікісховищі</string>
@@ -217,4 +218,8 @@
   <string name="location_permission_rationale_nearby">Потрібний дозвіл для показу списку місць поблизу</string>
   <string name="get_directions">Показати на мапі у зовнішній програмі</string>
   <string name="read_article">ЧИТАТИ СТАТТЮ</string>
+  <string name="notifications_welcome">Вітаємо у Wikimedia Commons, %s! Раді вас тут бачити.</string>
+  <string name="notifications_talk_page_message">%s залишив повідомлення на вашій сторінці обговорення</string>
+  <string name="notifications_thank_you_edit">Дякуємо за правку</string>
+  <string name="notifications_mention">%s згадав вас на %s.</string>
 </resources>

@@ -161,6 +161,8 @@
   <string name="login_failed_2fa_not_supported">Tato aplikace zatím nepodporuje tzv. dvoufázové ověření.</string>
   <string name="logout_verification">Opravdu se chcete odhlásit?</string>
   <string name="commons_logo">Logo Wikimedia Commons</string>
+  <string name="commons_website">Stránka Commons</string>
+  <string name="commons_facebook">Facebooková stránka Commons</string>
   <string name="background_image">Obrázek na pozadí</string>
   <string name="mediaimage_failed">Obrázek</string>
   <string name="no_image_found">Nebyl nalezen žádný obrázek</string>
@@ -197,4 +199,8 @@
   <string name="nearby_location_not_available">Umístění není dostupné.</string>
   <string name="get_directions">NAVIGOVAT</string>
   <string name="read_article">PŘEČÍST ČLÁNEK</string>
+  <string name="notifications_welcome">Vítejte na Wikimedia Commons, %s! Jsme rádi, že jste zde.</string>
+  <string name="notifications_talk_page_message">%s vám napsal na vaši diskusní stránku</string>
+  <string name="notifications_thank_you_edit">Děkujeme za vaši editaci</string>
+  <string name="notifications_mention">%s vás zmínil na %s.</string>
 </resources>
