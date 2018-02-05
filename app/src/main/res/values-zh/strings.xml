@@ -210,8 +210,8 @@
   <string name="location_permission_rationale_nearby">需要权限以显示附近地点列表</string>
   <string name="get_directions">获得指示</string>
   <string name="read_article">阅读条目</string>
-  <string name="notifications_welcome">欢迎来到维基共享资源，%s！我们很高兴您来这里。</string>
-  <string name="notifications_talk_page_message">%s在您的讨论页上留下了一条消息</string>
+  <string name="notifications_welcome">欢迎来到维基共享资源，%1$s！我们很高兴您来这里。</string>
+  <string name="notifications_talk_page_message">%1$s在您的讨论页上留下了一条消息</string>
   <string name="notifications_thank_you_edit">感谢您做出编辑</string>
   <string name="notifications_mention">%1$s在%2$s提到了您。</string>
 </resources>
