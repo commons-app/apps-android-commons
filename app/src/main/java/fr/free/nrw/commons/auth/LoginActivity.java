@@ -289,13 +289,10 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     }
 
     public void askUserForTwoFactorAuth() {
-        if (BuildConfig.DEBUG) {
-            twoFactorContainer.setVisibility(VISIBLE);
-            twoFactorEdit.setVisibility(VISIBLE);
-            showMessageAndCancelDialog(R.string.login_failed_2fa_needed);
-        } else {
-            showMessageAndCancelDialog(R.string.login_failed_2fa_not_supported);
-        }
+        progressDialog.dismiss();
+        twoFactorContainer.setVisibility(VISIBLE);
+        twoFactorEdit.setVisibility(VISIBLE);
+        showMessageAndCancelDialog(R.string.login_failed_2fa_needed);
     }
 
     public void showMessageAndCancelDialog(@StringRes int resId) {
