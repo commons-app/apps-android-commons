@@ -105,7 +105,7 @@ public class ContributionsListFragment extends DaggerFragment {
         if (resultCode == RESULT_OK) {
             Timber.d("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
                     requestCode, resultCode, data);
-            controller.handleImagePicked(requestCode, data);
+            controller.handleImagePicked(requestCode, data, false);
         } else {
             Timber.e("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
                     requestCode, resultCode, data);

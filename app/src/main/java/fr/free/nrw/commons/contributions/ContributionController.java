@@ -25,14 +25,14 @@ import static fr.free.nrw.commons.contributions.Contribution.SOURCE_CAMERA;
 import static fr.free.nrw.commons.contributions.Contribution.SOURCE_GALLERY;
 import static fr.free.nrw.commons.upload.UploadService.EXTRA_SOURCE;
 
-class ContributionController {
+public class ContributionController {
 
     private static final int SELECT_FROM_GALLERY = 1;
     private static final int SELECT_FROM_CAMERA = 2;
 
     private Fragment fragment;
 
-    ContributionController(Fragment fragment) {
+    public ContributionController(Fragment fragment) {
         this.fragment = fragment;
     }
 
@@ -61,7 +61,7 @@ class ContributionController {
         }
     }
 
-    void startCameraCapture() {
+    public void startCameraCapture() {
 
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         lastGeneratedCaptureUri = reGenerateImageCaptureUriInCache();
@@ -70,6 +70,9 @@ class ContributionController {
         requestWritePermission(fragment.getContext(), takePictureIntent, lastGeneratedCaptureUri);
 
         takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, lastGeneratedCaptureUri);
+        if (!fragment.isAdded()) {
+            return;
+        }
         fragment.startActivityForResult(takePictureIntent, SELECT_FROM_CAMERA);
     }
 
@@ -77,11 +80,17 @@ class ContributionController {
         //FIXME: Starts gallery (opens Google Photos)
         Intent pickImageIntent = new Intent(ACTION_GET_CONTENT);
         pickImageIntent.setType("image/*");
+        Timber.d("startGalleryPick() called with pickImageIntent");
+        // See https://stackoverflow.com/questions/22366596/android-illegalstateexception-fragment-not-attached-to-activity-webview
+        if (!fragment.isAdded()) {
+            return;
+        }
         fragment.startActivityForResult(pickImageIntent, SELECT_FROM_GALLERY);
     }
 
-    void handleImagePicked(int requestCode, Intent data) {
+    public void handleImagePicked(int requestCode, Intent data, boolean isDirectUpload) {
         FragmentActivity activity = fragment.getActivity();
+        Timber.d("handleImagePicked() called with onActivityResult()");
         Intent shareIntent = new Intent(activity, ShareActivity.class);
         shareIntent.setAction(ACTION_SEND);
         switch (requestCode) {
@@ -91,11 +100,17 @@ class ContributionController {
                 shareIntent.setType(activity.getContentResolver().getType(imageData));
                 shareIntent.putExtra(EXTRA_STREAM, imageData);
                 shareIntent.putExtra(EXTRA_SOURCE, SOURCE_GALLERY);
+                if (isDirectUpload) {
+                    shareIntent.putExtra("isDirectUpload", true);
+                }
                 break;
             case SELECT_FROM_CAMERA:
                 shareIntent.setType("image/jpeg"); //FIXME: Find out appropriate mime type
                 shareIntent.putExtra(EXTRA_STREAM, lastGeneratedCaptureUri);
                 shareIntent.putExtra(EXTRA_SOURCE, SOURCE_CAMERA);
+                if (isDirectUpload) {
+                    shareIntent.putExtra("isDirectUpload", true);
+                }
                 break;
         }
         Timber.i("Image selected");
