@@ -186,9 +186,9 @@
   <string name="give_permission">権限を取得</string>
   <string name="use_external_storage">外部ストレージを使用</string>
   <string name="use_external_storage_summary">アプリ内のカメラで撮影した写真を端末に保存する</string>
+  <string name="login_to_your_account">自分のアカウントにログイン</string>
   <string name="send_log_file">ログファイルを送信する</string>
   <string name="send_log_file_description">メールで開発者にログファイルを送信する</string>
-  <string name="login_to_your_account">自分のアカウントにログイン</string>
   <string name="nearby_location_has_not_changed">場所は変更されていません。</string>
   <string name="nearby_location_not_available">位置が無効です。</string>
 </resources>

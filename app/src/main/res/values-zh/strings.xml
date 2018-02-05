@@ -199,12 +199,14 @@
   <string name="error_while_cache">缓存图片时出错</string>
   <string name="title_info">用于文件的唯一描述性标题，它将作为文件名使用。您可以使用有空格的简明语言。请不要包含文件扩展名</string>
   <string name="description_info">请尽可能详细地描述媒体：拍摄在何地？显示什么？例文是什么？请描述对象或个人。透露一些不易猜想到的信息，例如这幅风景画的具体日期时间。如果媒体显示了一些不寻常的事物，请说明为什么它显得不寻常。</string>
+  <string name="upload_image_too_dark">此图片太暗，您确定要上传它么？维基共享资源只接受对百科全书有价值的图片。</string>
+  <string name="upload_image_blurry">此图片模糊不清，您确定要上传它么？维基共享资源只接受对百科全书有价值的图片。</string>
   <string name="give_permission">提供权限</string>
   <string name="use_external_storage">使用外部存储</string>
   <string name="use_external_storage_summary">在您的设备上，使用应用中的照相机保存照片</string>
+  <string name="login_to_your_account">登录您的账户</string>
   <string name="send_log_file">发送日志文件</string>
   <string name="send_log_file_description">通过电子邮件将日志文件发送给开发人员</string>
-  <string name="login_to_your_account">登录您的账户</string>
   <string name="nearby_location_has_not_changed">位置没有更新。</string>
   <string name="nearby_location_not_available">位置不可用。</string>
   <string name="location_permission_rationale_nearby">需要权限以显示附近地点列表</string>

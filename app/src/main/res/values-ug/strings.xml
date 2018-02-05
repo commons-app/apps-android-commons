@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name" fuzzy="true">ۋىكى ۋاستە ھەمبەھىر</string>
+  <string name="app_name">بايلىق ھەمبەھىرلەش</string>
   <string name="menu_settings">تەڭشەكلەر</string>
   <string name="username">ئىشلەتكۇچى ئىسمى</string>
   <string name="password">پارول</string>
@@ -20,7 +20,7 @@
   <string name="upload_progress_notification_title_finishing"> %1$s يۈكلەش تاماملىنىۋاتىدۇ</string>
   <string name="upload_failed_notification_title">يۈكلىنىۋاتىدۇ %1$s مەغلۇپ بولدى</string>
   <string name="upload_failed_notification_subtitle">چېكىپ كۆرۈش</string>
-  <string name="title_activity_contributions" fuzzy="true">يۈكلىگەنلىرىم</string>
+  <string name="title_activity_contributions">يىقىندا يوللىغىنىم</string>
   <string name="contribution_state_queued">ئادەم كىردى</string>
   <string name="contribution_state_failed">مەغلۇپ بولدى</string>
   <string name="contribution_state_in_progress">%1$d%% تاماملاندى</string>
@@ -54,8 +54,8 @@
   <string name="menu_cancel_upload">ۋاز كەچ</string>
   <string name="menu_download">چۈشۈرۈڭ</string>
   <string name="preference_license">ئىجازەتنامە</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CC Attribution-ShareAlike 3.0</string>
-  <string name="license_name_cc_by" fuzzy="true">CC Attribution 3.0</string>
+  <string name="license_name_cc_by_sa">ئوخشاش  ئىمزالىق ئورتاق  ھەمبەھىرلىنىش</string>
+  <string name="license_name_cc_by">ئىمزا قويۇش</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (ئاۋستىرىيە)</string>
@@ -70,9 +70,11 @@
   <string name="license_name_cc_zero">CC0</string>
   <string name="welcome_final_button_text">ھەئە!</string>
   <string name="detail_panel_cats_label">تۈرلەر</string>
-  <string name="detail_panel_cats_loading" fuzzy="true">يۈكلەۋاتىدۇ…</string>
+  <string name="detail_panel_cats_loading">يۈكلىنۋاتىدۇ…</string>
   <string name="detail_panel_cats_none">تاللانمىغان</string>
   <string name="detail_description_empty">چۈشەندۈرۈلۈشى يوق</string>
+  <string name="detail_license_empty">نامەلۇم ئىجازەت كېلىشىمى</string>
+  <string name="menu_refresh">تولۇق يېڭىلاش</string>
   <string name="ok">جەزملەش</string>
   <string name="warning">ئاگاھلاندۇرۇش</string>
   <string name="yes">ھەئە</string>

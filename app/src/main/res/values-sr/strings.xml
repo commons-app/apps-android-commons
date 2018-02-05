@@ -54,12 +54,12 @@
   <string name="gps_disabled">GPS је онемогућен на Вашем уређају. Желите ли га омогућити?</string>
   <string name="enable_gps">Омогући GPS</string>
   <string name="contributions_subtitle_zero">Још увек нема отпремања</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
+  <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d отпремање</item>
     <item quantity="other">%1$d отпремања</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
+  <plurals name="starting_multiple_uploads">
     <item quantity="one">Започни %1$d отпремање</item>
     <item quantity="other">Започни %1$d отпремања</item>
   </plurals>
@@ -74,7 +74,7 @@
   <string name="title_activity_signup">Отвори налог</string>
   <string name="menu_about">О апликацији</string>
   <string name="about_license">Софтвер отвореног кода доступан под лиценцом &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache вер. 2&lt;/a&gt; Викимедијина Остава и њен лого су заштитни знаци Викимедијине Фондације и користе се са дозволом Викимедијине Фондацине. Ми не одобравамо или подржавмо Викимедијину Фондацију.\n\nАпликација за Викимедијину оставу је апликација отвореног кода која је направљена и која се одржава помоћу грантова и волонтера Викимедијине заједнице. Задужбина Викимедија није укључена у стварање, развој или одржавање апликације.</string>
-  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Изворни кôд&lt;/a&gt; и &lt;a href=\"https://commons-app.github.io/\"&gt;веб-сајт&lt;/a&gt; на GitHub-у. Направите нови &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;захтев на GitHub-у&lt;/a&gt; да бисте пријавили грешке или дали предлоге.</string>
+  <string name="about_improve">Направите нови &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;захтев на GitHub-у&lt;/a&gt; да бисте пријавили грешке или дали предлоге.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Политика приватности&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Заслуге&lt;/a&gt;</string>
   <string name="title_activity_about">О апликацији</string>
@@ -164,6 +164,9 @@
   <string name="login_failed_2fa_not_supported">Двофакторска аутентификација тренутно није подржана.</string>
   <string name="logout_verification">Заиста желите да се одјавите?</string>
   <string name="commons_logo">Лого Оставе</string>
+  <string name="commons_website">Веб-сајт Оставе</string>
+  <string name="commons_facebook">Фејсбук страница Оставе</string>
+  <string name="commons_github">Изворни код на Github-у</string>
   <string name="background_image">Позадинска слика</string>
   <string name="mediaimage_failed">Медијска слика неуспешна</string>
   <string name="no_image_found">Нисам пронашла слику</string>
@@ -199,12 +202,14 @@
   <string name="give_permission">Давање дозволе</string>
   <string name="use_external_storage">Употреба спољашње меморије</string>
   <string name="use_external_storage_summary">Спремање слика направљених камером апликације на Вашем уређају</string>
+  <string name="login_to_your_account">Пријавите се на Ваш налог</string>
   <string name="send_log_file">Пошаљи дневничку датотеку</string>
   <string name="send_log_file_description">Пошаљи дневничку датотеку девелоперима преко имејла</string>
-  <string name="login_to_your_account">Пријавите се на Ваш налог</string>
   <string name="nearby_location_has_not_changed">Локација није промењена.</string>
   <string name="nearby_location_not_available">Локација није доступна.</string>
   <string name="location_permission_rationale_nearby">Потребна је дозвола за приказивање листе локација у близини</string>
   <string name="get_directions">Добити упутства</string>
   <string name="read_article">Прочитај чланак</string>
+  <string name="notifications_thank_you_edit">Хвала Вам за прављење измене</string>
+  <string name="toggle_view_button">Пребаци приказ</string>
 </resources>
