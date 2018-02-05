@@ -199,8 +199,8 @@
   <string name="nearby_location_not_available">Umístění není dostupné.</string>
   <string name="get_directions">NAVIGOVAT</string>
   <string name="read_article">PŘEČÍST ČLÁNEK</string>
-  <string name="notifications_welcome">Vítejte na Wikimedia Commons, %s! Jsme rádi, že jste zde.</string>
-  <string name="notifications_talk_page_message">%s vám napsal na vaši diskusní stránku</string>
+  <string name="notifications_welcome">Vítejte na Wikimedia Commons, %1$s! Jsme rádi, že jste zde.</string>
+  <string name="notifications_talk_page_message">%2$s vám napsal na vaši diskusní stránku</string>
   <string name="notifications_thank_you_edit">Děkujeme za vaši editaci</string>
-  <string name="notifications_mention">%s vás zmínil na %s.</string>
+  <string name="notifications_mention">%1$s vás zmínil na %2$s.</string>
 </resources>

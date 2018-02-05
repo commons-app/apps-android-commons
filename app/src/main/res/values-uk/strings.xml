@@ -218,8 +218,8 @@
   <string name="location_permission_rationale_nearby">Потрібний дозвіл для показу списку місць поблизу</string>
   <string name="get_directions">Показати на мапі у зовнішній програмі</string>
   <string name="read_article">ЧИТАТИ СТАТТЮ</string>
-  <string name="notifications_welcome">Вітаємо у Wikimedia Commons, %s! Раді вас тут бачити.</string>
-  <string name="notifications_talk_page_message">%s залишив повідомлення на вашій сторінці обговорення</string>
+  <string name="notifications_welcome">Вітаємо у Wikimedia Commons, %1$s! Раді вас тут бачити.</string>
+  <string name="notifications_talk_page_message">%1$s залишив повідомлення на вашій сторінці обговорення</string>
   <string name="notifications_thank_you_edit">Дякуємо за правку</string>
-  <string name="notifications_mention">%s згадав вас на %s.</string>
+  <string name="notifications_mention">%1$s згадав вас на %2$s.</string>
 </resources>
