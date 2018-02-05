@@ -213,5 +213,5 @@
   <string name="notifications_welcome">Velkomin á Wikimedia Commons, %s! Við erum ánægð með að þú skulir vera hérna.</string>
   <string name="notifications_talk_page_message">%s skildi eftir skilaboð á spjallsíðunni þinni</string>
   <string name="notifications_thank_you_edit">Takk fyrir að hafa gert breytingar</string>
-  <string name="notifications_mention">%s minntist á þig á %s.</string>
+  <string name="notifications_mention" formatted="false">%s minntist á þig á %s.</string>
 </resources>

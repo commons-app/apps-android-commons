@@ -213,5 +213,5 @@
   <string name="notifications_welcome">%s، به ویکی‌انبار خوش آمدید! خوشحالیم که اینجا هستید.</string>
   <string name="notifications_talk_page_message">%s در صفحهٔ بحث شما پیامی گذاشته‌است</string>
   <string name="notifications_thank_you_edit">برای ویرایش ممنون</string>
-  <string name="notifications_mention">%s در %s به شما اشاره کرده‌است.</string>
+  <string name="notifications_mention" formatted="false">%s در %s به شما اشاره کرده‌است.</string>
 </resources>

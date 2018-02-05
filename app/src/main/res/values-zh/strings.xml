@@ -213,5 +213,5 @@
   <string name="notifications_welcome">欢迎来到维基共享资源，%s！我们很高兴您来这里。</string>
   <string name="notifications_talk_page_message">%s在您的讨论页上留下了一条消息</string>
   <string name="notifications_thank_you_edit">感谢您做出编辑</string>
-  <string name="notifications_mention">%s在%s提到了您。</string>
+  <string name="notifications_mention" formatted="false">%s在%s提到了您。</string>
 </resources>

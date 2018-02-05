@@ -178,5 +178,5 @@
   <string name="get_directions">COM ANAR-HI</string>
   <string name="read_article">LLEGIU L’ARTICLE</string>
   <string name="notifications_thank_you_edit">Gràcies per fer una modificació</string>
-  <string name="notifications_mention">%s us ha mencionat a %s.</string>
+  <string name="notifications_mention" formatted="false">%s us ha mencionat a %s.</string>
 </resources>

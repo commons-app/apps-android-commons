@@ -217,5 +217,5 @@
   <string name="notifications_welcome">Добро пожаловать в Wikimedia Commons, %s! Рады вас здесь видеть :-)</string>
   <string name="notifications_talk_page_message">%s оставил сообщение на вашей странице обсуждения</string>
   <string name="notifications_thank_you_edit">Спасибо за правку</string>
-  <string name="notifications_mention">%s упомянул вас на %s.</string>
+  <string name="notifications_mention" formatted="false">%s упомянул вас на %s.</string>
 </resources>
