@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.nearby;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.transition.TransitionManager;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,9 @@ import android.widget.TextView;
 import com.pedrogomez.renderers.Renderer;
 
 import java.util.ArrayList;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,6 +50,9 @@ class PlaceRenderer extends Renderer<Place> {
     private Fragment fragment;
     private ContributionController controller;
 
+
+    @Inject @Named("prefs") SharedPreferences prefs;
+    @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
 
     PlaceRenderer(){
         openedItems = new ArrayList<>();
@@ -107,6 +114,13 @@ class PlaceRenderer extends Renderer<Place> {
             storeSharedPrefs();
             directUpload.initiateGalleryUpload();
         });
+    }
+
+    void storeSharedPrefs() {
+        SharedPreferences.Editor editor = directPrefs.edit();
+        editor.putString("Title", place.getName());
+        editor.putString("Desc", place.getLongDescription());
+        editor.apply();
     }
 
     private void closeLayout(LinearLayout buttonLayout){
