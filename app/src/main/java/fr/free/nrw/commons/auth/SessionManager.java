@@ -2,15 +2,13 @@ package fr.free.nrw.commons.auth;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
-import android.accounts.AuthenticatorException;
-import android.accounts.OperationCanceledException;
 import android.content.Context;
-
-import java.io.IOException;
+import android.content.SharedPreferences;
 
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
+import timber.log.Timber;
 
 import static fr.free.nrw.commons.auth.AccountUtil.ACCOUNT_TYPE;
 
@@ -21,11 +19,13 @@ public class SessionManager {
     private final Context context;
     private final MediaWikiApi mediaWikiApi;
     private Account currentAccount; // Unlike a savings account...  ;-)
+    private SharedPreferences sharedPreferences;
 
-    public SessionManager(Context context, MediaWikiApi mediaWikiApi) {
+    public SessionManager(Context context, MediaWikiApi mediaWikiApi, SharedPreferences sharedPreferences) {
         this.context = context;
         this.mediaWikiApi = mediaWikiApi;
         this.currentAccount = null;
+        this.sharedPreferences = sharedPreferences;
     }
 
     /**
@@ -51,13 +51,27 @@ public class SessionManager {
         }
 
         accountManager.invalidateAuthToken(ACCOUNT_TYPE, mediaWikiApi.getAuthCookie());
-        try {
-            String authCookie = accountManager.blockingGetAuthToken(curAccount, "", false);
-            mediaWikiApi.setAuthCookie(authCookie);
-            return true;
-        } catch (OperationCanceledException | NullPointerException | IOException | AuthenticatorException e) {
-            e.printStackTrace();
+        String authCookie = getAuthCookie();
+
+        if (authCookie == null) {
             return false;
+        }
+        mediaWikiApi.setAuthCookie(authCookie);
+        return true;
+    }
+
+    public String getAuthCookie() {
+        boolean isLoggedIn = sharedPreferences.getBoolean("isUserLoggedIn", false);
+
+        if (!isLoggedIn) {
+            Timber.e("User is not logged in");
+            return null;
+        } else {
+            String authCookie = sharedPreferences.getString("getAuthCookie", null);
+            if (authCookie == null) {
+                Timber.e("Auth cookie is null even after login");
+            }
+            return authCookie;
         }
     }
 

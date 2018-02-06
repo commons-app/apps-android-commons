@@ -96,14 +96,15 @@ public class CommonsApplicationModule {
     @Provides
     @Singleton
     public SessionManager providesSessionManager(Context context,
-                                                 MediaWikiApi mediaWikiApi) {
-        return new SessionManager(context, mediaWikiApi);
+                                                 MediaWikiApi mediaWikiApi,
+                                                 @Named("default_preferences") SharedPreferences sharedPreferences) {
+        return new SessionManager(context, mediaWikiApi, sharedPreferences);
     }
 
     @Provides
     @Singleton
-    public MediaWikiApi provideMediaWikiApi(Context context) {
-        return new ApacheHttpClientMediaWikiApi(context, BuildConfig.WIKIMEDIA_API_HOST);
+    public MediaWikiApi provideMediaWikiApi(Context context, @Named("default_preferences") SharedPreferences sharedPreferences) {
+        return new ApacheHttpClientMediaWikiApi(context, BuildConfig.WIKIMEDIA_API_HOST, sharedPreferences);
     }
 
     @Provides
