@@ -84,6 +84,21 @@ class PlaceRenderer extends Renderer<Place> {
         });
 
         //TODO: Set onClickListeners for camera and gallery in list here
+        cameraButton.setOnClickListener(view2 -> {
+            Timber.d("Camera button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
+            controller = new ContributionController(this);
+            DirectUpload directUpload = new DirectUpload(this, controller, prefs);
+            storeSharedPrefs();
+            directUpload.initiateCameraUpload();
+        });
+
+        galleryButton.setOnClickListener(view3 -> {
+            Timber.d("Gallery button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
+            controller = new ContributionController(this);
+            DirectUpload directUpload = new DirectUpload(this, controller, prefs);
+            storeSharedPrefs();
+            directUpload.initiateGalleryUpload();
+        });
     }
 
     private void closeLayout(LinearLayout buttonLayout){
