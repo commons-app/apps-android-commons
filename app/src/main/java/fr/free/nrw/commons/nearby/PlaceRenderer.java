@@ -44,6 +44,7 @@ class PlaceRenderer extends Renderer<Place> {
     private static ArrayList<LinearLayout> openedItems;
     private Place place;
     private Fragment fragment;
+    private ContributionController controller;
 
 
     PlaceRenderer(){
@@ -93,7 +94,7 @@ class PlaceRenderer extends Renderer<Place> {
         //TODO: Set onClickListeners for camera and gallery in list here
         cameraButton.setOnClickListener(view2 -> {
             Timber.d("Camera button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
-            controller = new ContributionController(this);
+            controller = new ContributionController(fragment);
             DirectUpload directUpload = new DirectUpload(this, controller, prefs);
             storeSharedPrefs();
             directUpload.initiateCameraUpload();
@@ -101,7 +102,7 @@ class PlaceRenderer extends Renderer<Place> {
 
         galleryButton.setOnClickListener(view3 -> {
             Timber.d("Gallery button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
-            controller = new ContributionController(this);
+            controller = new ContributionController(fragment);
             DirectUpload directUpload = new DirectUpload(this, controller, prefs);
             storeSharedPrefs();
             directUpload.initiateGalleryUpload();
