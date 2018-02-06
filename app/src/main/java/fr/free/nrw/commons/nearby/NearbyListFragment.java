@@ -48,7 +48,7 @@ public class NearbyListFragment extends DaggerFragment {
         View view = inflater.inflate(R.layout.fragment_nearby, container, false);
         recyclerView = view.findViewById(R.id.listView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapterFactory = new NearbyAdapterFactory();
+        adapterFactory = new NearbyAdapterFactory(this);
         return view;
     }
 
