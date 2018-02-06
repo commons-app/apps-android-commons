@@ -3,6 +3,7 @@ package fr.free.nrw.commons.nearby;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.transition.TransitionManager;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.PopupMenu;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,9 +43,15 @@ class PlaceRenderer extends Renderer<Place> {
     private View view;
     private static ArrayList<LinearLayout> openedItems;
     private Place place;
+    private Fragment fragment;
 
 
     PlaceRenderer(){
+        openedItems = new ArrayList<>();
+    }
+
+    PlaceRenderer(Fragment fragment) {
+        this.fragment = fragment;
         openedItems = new ArrayList<>();
     }
 
