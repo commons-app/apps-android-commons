@@ -6,6 +6,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionController;
 
@@ -18,6 +21,7 @@ public class DirectUpload {
     private ContributionController controller;
     private Fragment fragment;
     private SharedPreferences prefs;
+
 
     DirectUpload(Fragment fragment, ContributionController controller, SharedPreferences prefs) {
         this.fragment = fragment;
