@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.contributions.ContributionController;
+import timber.log.Timber;
 
 class PlaceRenderer extends Renderer<Place> {
 
@@ -29,11 +31,11 @@ class PlaceRenderer extends Renderer<Place> {
     @BindView(R.id.icon) ImageView icon;
     @BindView(R.id.buttonLayout) LinearLayout buttonLayout;
     @BindView(R.id.cameraButton) LinearLayout cameraButton;
-    @BindView(R.id.galeryButton) LinearLayout galeryButton;
+    @BindView(R.id.galleryButton) LinearLayout galleryButton;
     @BindView(R.id.directionsButton) LinearLayout directionsButton;
     @BindView(R.id.iconOverflow) LinearLayout iconOverflow;
     @BindView(R.id.cameraButtonText) TextView cameraButtonText;
-    @BindView(R.id.galeryButtonText) TextView galeryButtonText;
+    @BindView(R.id.galleryButtonText) TextView galleryButtonText;
     @BindView(R.id.directionsButtonText) TextView directionsButtonText;
     @BindView(R.id.iconOverflowText) TextView iconOverflowText;
 
