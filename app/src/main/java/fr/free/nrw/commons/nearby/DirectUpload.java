@@ -29,6 +29,11 @@ public class DirectUpload {
         this.prefs = prefs;
     }
 
+    DirectUpload(Fragment fragment, ContributionController controller) {
+        this.fragment = fragment;
+        this.controller = controller;
+    }
+
     void initiateCameraUpload() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(fragment.getActivity(), WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
