@@ -25,7 +25,6 @@ import java.io.File;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;

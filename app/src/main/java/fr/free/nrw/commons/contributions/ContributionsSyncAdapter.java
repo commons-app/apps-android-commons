@@ -23,7 +23,6 @@ import java.util.TimeZone;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.mwapi.LogEventResult;

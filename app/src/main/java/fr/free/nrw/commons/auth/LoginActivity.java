@@ -32,7 +32,6 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
