@@ -6,9 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionController;
 

@@ -58,7 +58,7 @@ public class PlaceRenderer extends Renderer<Place> {
     public PlaceRenderer(){
         openedItems = new ArrayList<>();
     }
-    
+
     public PlaceRenderer(Fragment fragment, ContributionController controller) {
         this.fragment = fragment;
         this.controller = controller;
