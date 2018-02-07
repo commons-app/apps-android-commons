@@ -58,16 +58,7 @@ public class PlaceRenderer extends Renderer<Place> {
     public PlaceRenderer(){
         openedItems = new ArrayList<>();
     }
-
-    /**
-    @Inject
-    PlaceRenderer(@Named("prefs") SharedPreferences prefs, @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs, Fragment fragment) {
-        this.fragment = fragment;
-        this.prefs = prefs;
-        this.directPrefs = directPrefs;
-        openedItems = new ArrayList<>();
-    }
-*/
+    
     public PlaceRenderer(Fragment fragment, ContributionController controller) {
         this.fragment = fragment;
         this.controller = controller;
