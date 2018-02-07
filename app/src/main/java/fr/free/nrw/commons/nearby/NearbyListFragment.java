@@ -61,6 +61,7 @@ public class NearbyListFragment extends DaggerFragment {
         View view = inflater.inflate(R.layout.fragment_nearby, container, false);
         recyclerView = view.findViewById(R.id.listView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        controller = new ContributionController(this);
         adapterFactory = new NearbyAdapterFactory(this, controller);
         return view;
     }
@@ -70,8 +71,6 @@ public class NearbyListFragment extends DaggerFragment {
         // Check that this is the first time view is created,
         // to avoid double list when screen orientation changed
         List<Place> placeList = Collections.emptyList();
-        controller = new ContributionController(this);
-
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             String gsonPlaceList = bundle.getString("PlaceList", "[]");
