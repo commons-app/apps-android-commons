@@ -80,11 +80,12 @@ public class ContributionController {
         //FIXME: Starts gallery (opens Google Photos)
         Intent pickImageIntent = new Intent(ACTION_GET_CONTENT);
         pickImageIntent.setType("image/*");
-        Timber.d("startGalleryPick() called with pickImageIntent");
         // See https://stackoverflow.com/questions/22366596/android-illegalstateexception-fragment-not-attached-to-activity-webview
         if (!fragment.isAdded()) {
+            Timber.d("Fragment is not added, startActivityForResult cannot be called");
             return;
         }
+        Timber.d("startGalleryPick() called with pickImageIntent");
         fragment.startActivityForResult(pickImageIntent, SELECT_FROM_GALLERY);
     }
 
