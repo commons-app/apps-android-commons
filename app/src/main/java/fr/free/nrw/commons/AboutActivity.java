@@ -31,7 +31,7 @@ public class AboutActivity extends NavigationBaseActivity {
 
         ButterKnife.bind(this);
 
-        String aboutText = getString(R.string.about_license, getString(R.string.trademarked_name));
+        String aboutText = getString(R.string.about_license);
         aboutLicenseText.setHtmlText(aboutText);
 
         versionText.setText(BuildConfig.VERSION_NAME);
