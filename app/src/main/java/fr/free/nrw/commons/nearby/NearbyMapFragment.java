@@ -410,7 +410,7 @@ public class NearbyMapFragment extends DaggerFragment {
         fabCamera.setOnClickListener(view -> {
             Timber.d("Camera button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
             controller = new ContributionController(this);
-            DirectUpload directUpload = new DirectUpload(this, controller, prefs);
+            DirectUpload directUpload = new DirectUpload(this, controller);
             storeSharedPrefs();
             directUpload.initiateCameraUpload();
         });
@@ -418,7 +418,7 @@ public class NearbyMapFragment extends DaggerFragment {
         fabGallery.setOnClickListener(view -> {
             Timber.d("Gallery button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
             controller = new ContributionController(this);
-            DirectUpload directUpload = new DirectUpload(this, controller, prefs);
+            DirectUpload directUpload = new DirectUpload(this, controller);
             storeSharedPrefs();
             directUpload.initiateGalleryUpload();
 
