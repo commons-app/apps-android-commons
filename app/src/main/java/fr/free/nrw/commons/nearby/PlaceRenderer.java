@@ -24,11 +24,12 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionController;
 import timber.log.Timber;
 
-class PlaceRenderer extends Renderer<Place> {
+public class PlaceRenderer extends Renderer<Place> {
 
     @BindView(R.id.tvName) TextView tvName;
     @BindView(R.id.tvDesc) TextView tvDesc;
@@ -54,12 +55,22 @@ class PlaceRenderer extends Renderer<Place> {
     @Inject @Named("prefs") SharedPreferences prefs;
     @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
 
-    PlaceRenderer(){
+    public PlaceRenderer(){
         openedItems = new ArrayList<>();
     }
 
-    PlaceRenderer(Fragment fragment) {
+    /**
+    @Inject
+    PlaceRenderer(@Named("prefs") SharedPreferences prefs, @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs, Fragment fragment) {
         this.fragment = fragment;
+        this.prefs = prefs;
+        this.directPrefs = directPrefs;
+        openedItems = new ArrayList<>();
+    }
+*/
+    public PlaceRenderer(Fragment fragment) {
+        this.fragment = fragment;
+        ((CommonsApplication) getContext().getApplicationContext()).injector().inject(this);
         openedItems = new ArrayList<>();
     }
 
@@ -103,7 +114,7 @@ class PlaceRenderer extends Renderer<Place> {
             Timber.d("Camera button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
             controller = new ContributionController(fragment);
             DirectUpload directUpload = new DirectUpload(fragment, controller);
-            storeSharedPrefs();
+            //storeSharedPrefs();
             directUpload.initiateCameraUpload();
         });
 
@@ -111,7 +122,7 @@ class PlaceRenderer extends Renderer<Place> {
             Timber.d("Gallery button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
             controller = new ContributionController(fragment);
             DirectUpload directUpload = new DirectUpload(fragment, controller);
-            storeSharedPrefs();
+            //storeSharedPrefs();
             directUpload.initiateGalleryUpload();
         });
     }
