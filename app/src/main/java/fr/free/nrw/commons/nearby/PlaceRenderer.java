@@ -70,7 +70,6 @@ public class PlaceRenderer extends Renderer<Place> {
 */
     public PlaceRenderer(Fragment fragment) {
         this.fragment = fragment;
-        ((CommonsApplication) getContext().getApplicationContext()).injector().inject(this);
         openedItems = new ArrayList<>();
     }
 
@@ -144,6 +143,7 @@ public class PlaceRenderer extends Renderer<Place> {
 
     @Override
     public void render() {
+        ((CommonsApplication) getContext().getApplicationContext()).injector().inject(this);
         place = getContent();
         tvName.setText(place.name);
         String descriptionText = place.getLabel().getText();
