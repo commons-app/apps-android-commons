@@ -113,7 +113,7 @@ public class PlaceRenderer extends Renderer<Place> {
             Timber.d("Camera button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
             controller = new ContributionController(fragment);
             DirectUpload directUpload = new DirectUpload(fragment, controller);
-            //storeSharedPrefs();
+            storeSharedPrefs();
             directUpload.initiateCameraUpload();
         });
 
@@ -121,13 +121,14 @@ public class PlaceRenderer extends Renderer<Place> {
             Timber.d("Gallery button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
             controller = new ContributionController(fragment);
             DirectUpload directUpload = new DirectUpload(fragment, controller);
-            //storeSharedPrefs();
+            storeSharedPrefs();
             directUpload.initiateGalleryUpload();
         });
     }
 
     void storeSharedPrefs() {
         SharedPreferences.Editor editor = directPrefs.edit();
+        Timber.d("directPrefs stored");
         editor.putString("Title", place.getName());
         editor.putString("Desc", place.getLongDescription());
         editor.apply();
