@@ -47,5 +47,4 @@ public abstract class FragmentBuilderModule {
     @ContributesAndroidInjector
     abstract SingleUploadFragment bindSingleUploadFragment();
 
-
 }
