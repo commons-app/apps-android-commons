@@ -133,5 +133,4 @@ public class ContributionController {
             lastGeneratedCaptureUri = savedInstanceState.getParcelable("lastGeneratedCaptureURI");
         }
     }
-
 }
