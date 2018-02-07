@@ -109,10 +109,8 @@ public class PlaceRenderer extends Renderer<Place> {
             }
         });
 
-        //TODO: Set onClickListeners for camera and gallery in list here
         cameraButton.setOnClickListener(view2 -> {
             Timber.d("Camera button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
-            //controller = new ContributionController(fragment);
             DirectUpload directUpload = new DirectUpload(fragment, controller);
             storeSharedPrefs();
             directUpload.initiateCameraUpload();
@@ -120,14 +118,13 @@ public class PlaceRenderer extends Renderer<Place> {
 
         galleryButton.setOnClickListener(view3 -> {
             Timber.d("Gallery button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
-            //controller = new ContributionController(fragment);
             DirectUpload directUpload = new DirectUpload(fragment, controller);
             storeSharedPrefs();
             directUpload.initiateGalleryUpload();
         });
     }
 
-    void storeSharedPrefs() {
+    private void storeSharedPrefs() {
         SharedPreferences.Editor editor = directPrefs.edit();
         Timber.d("directPrefs stored");
         editor.putString("Title", place.getName());
