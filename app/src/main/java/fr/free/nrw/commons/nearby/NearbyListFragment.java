@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.nearby;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,9 +19,12 @@ import java.util.List;
 
 import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.contributions.ContributionController;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.utils.UriDeserializer;
 import timber.log.Timber;
+
+import static android.app.Activity.RESULT_OK;
 
 public class NearbyListFragment extends DaggerFragment {
     private static final Type LIST_TYPE = new TypeToken<List<Place>>() {
@@ -33,6 +37,7 @@ public class NearbyListFragment extends DaggerFragment {
 
     private NearbyAdapterFactory adapterFactory;
     private RecyclerView recyclerView;
+    private ContributionController controller;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,6 +62,7 @@ public class NearbyListFragment extends DaggerFragment {
         // Check that this is the first time view is created,
         // to avoid double list when screen orientation changed
         List<Place> placeList = Collections.emptyList();
+        controller = new ContributionController(this);
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
@@ -68,7 +74,21 @@ public class NearbyListFragment extends DaggerFragment {
 
             placeList = NearbyController.loadAttractionsFromLocationToPlaces(curLatLng, placeList);
         }
-
         recyclerView.setAdapter(adapterFactory.create(placeList));
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            Timber.d("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
+                    requestCode, resultCode, data);
+            controller.handleImagePicked(requestCode, data, true);
+        } else {
+            Timber.e("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
+                    requestCode, resultCode, data);
+        }
+    }
+
 }
