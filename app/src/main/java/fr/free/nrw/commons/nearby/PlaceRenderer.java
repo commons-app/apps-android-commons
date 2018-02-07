@@ -83,9 +83,9 @@ public class PlaceRenderer extends Renderer<Place> {
             Log.d("Renderer", "clicked");
             TransitionManager.beginDelayedTransition(buttonLayout);
 
-            if(buttonLayout.isShown()){
+            if(buttonLayout.isShown()) {
                 closeLayout(buttonLayout);
-            }else {
+            } else {
                 openLayout(buttonLayout);
             }
 
