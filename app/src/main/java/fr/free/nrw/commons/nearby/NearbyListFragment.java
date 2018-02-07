@@ -2,8 +2,10 @@ package fr.free.nrw.commons.nearby;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -27,6 +29,7 @@ import fr.free.nrw.commons.utils.UriDeserializer;
 import timber.log.Timber;
 
 import static android.app.Activity.RESULT_OK;
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 public class NearbyListFragment extends DaggerFragment {
     private static final Type LIST_TYPE = new TypeToken<List<Place>>() {
@@ -84,6 +87,32 @@ public class NearbyListFragment extends DaggerFragment {
         recyclerView.setAdapter(adapterFactory.create(placeList));
     }
 
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        Timber.d("onRequestPermissionsResult: req code = " + " perm = " + permissions + " grant =" + grantResults);
+
+        switch (requestCode) {
+            // 1 = "Read external storage" allowed when gallery selected
+            case 1: {
+                if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
+                    Timber.d("Call controller.startGalleryPick()");
+                    controller.startGalleryPick();
+                }
+            }
+            break;
+
+            // 3 = "Write external storage" allowed when camera selected
+            case 3: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Timber.d("Call controller.startCameraCapture()");
+                    controller.startCameraCapture();
+                }
+            }
+        }
+    }
+
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -97,5 +126,4 @@ public class NearbyListFragment extends DaggerFragment {
                     requestCode, resultCode, data);
         }
     }
-
 }
