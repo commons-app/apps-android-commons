@@ -20,7 +20,7 @@
   <string name="upload_progress_notification_title_finishing">Avslutter opplasting av %1$s</string>
   <string name="upload_failed_notification_title">Opplastingen av %1$s feilet</string>
   <string name="upload_failed_notification_subtitle">Trykk for å vise</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">%1$d fil lastes opp</item>
     <item quantity="other">%1$d filer lastes opp</item>
   </plurals>
@@ -54,7 +54,7 @@
   <string name="gps_disabled">GPS er slått av på denne enheten. Ønsker du å slå den på?</string>
   <string name="enable_gps">Slå på GPS</string>
   <string name="contributions_subtitle_zero">Ingen opplastinger ennå</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d opplasting</item>
     <item quantity="other">%1$d opplastinger</item>
@@ -63,7 +63,7 @@
     <item quantity="one">Starter %1$d opplasting</item>
     <item quantity="other">Starter %1$d opplastinger</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d opplasting</item>
     <item quantity="other">%1$d opplastinger</item>
   </plurals>

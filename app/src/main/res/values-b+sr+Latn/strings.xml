@@ -54,16 +54,16 @@
   <string name="gps_disabled">GPS je onemogućen na Vašem uređaju. Želite li ga omogućiti?</string>
   <string name="enable_gps">Omogući GPS</string>
   <string name="contributions_subtitle_zero">Još uvek nema otpremanja</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d otpremanje</item>
     <item quantity="other">%1$d otpremanja</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Započni %1$d otpremanje</item>
     <item quantity="other">Započni %1$d otpremanja</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d otpremanje</item>
     <item quantity="other">%1$d otpremanja</item>
   </plurals>
@@ -205,4 +205,5 @@
   <string name="nearby_location_has_not_changed">Lokacija nije promenjena.</string>
   <string name="nearby_location_not_available">Lokacija nije dostupna.</string>
   <string name="location_permission_rationale_nearby">Potrebna je dozvola za prikazivanje liste lokacija u blizini</string>
+  <string name="notifications_welcome">Dobrodošli na Wikimedia Commons, %1$s! Drago nam je da ste ovdje.</string>
 </resources>

@@ -52,12 +52,12 @@
   <string name="refresh_button">تازو ڪيو</string>
   <string name="enable_gps">جي پي ايس چالو ڪيو (اين ايبل جي پي ايس)</string>
   <string name="contributions_subtitle_zero">اڃان تائين ڪو به ڄاڙهه (اَپلوڊ) نه ٿيو آهي</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d چاڙھ</item>
     <item quantity="other">%1$d چاڙھَ</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">چاڙھ %1$d شروع ڪندي</item>
     <item quantity="other">چاڙھَ %d$1 شروع ڪندي</item>
   </plurals>

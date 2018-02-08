@@ -52,7 +52,7 @@
   <string name="enable_gps">เปิดใช้งาน GPS</string>
   <string name="contributions_subtitle_zero">ยังไม่มีการอัปโหลด</string>
   <string name="contributions_subtitle">การอัปโหลด %1$d รายการ</string>
-  <string name="starting_multiple_uploads">กำลังเริ่มการอัปโหลด %1$d รายการ</string>
+  <string name="starting_multiple_uploads" fuzzy="true">กำลังเริ่มการอัปโหลด %1$d รายการ</string>
   <plurals name="multiple_uploads_title">
     <item quantity="one">การอัปโหลด %1$d รายการ</item>
     <item quantity="other">การอัปโหลด %1$d รายการ</item>

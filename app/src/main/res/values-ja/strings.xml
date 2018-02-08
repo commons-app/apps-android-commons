@@ -21,7 +21,7 @@
   <string name="upload_failed_notification_title">%1$s のアップロードに失敗しました</string>
   <string name="upload_failed_notification_subtitle">閲覧するにはタップしてください</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="other">%d 件のファイルをアップロード中</item>
+    <item quantity="other">%1$d 件のファイルをアップロード中</item>
   </plurals>
   <string name="title_activity_contributions">自分の最近のアップロードファイル</string>
   <string name="contribution_state_queued">順番待ち中</string>
@@ -46,7 +46,7 @@
   <string name="multiple_share_base_title">このセットに名前をつけてください</string>
   <string name="provider_modifications">変更</string>
   <string name="menu_upload_single">アップロード</string>
-  <string name="categories_search_text_hint">検索するカテゴリ</string>
+  <string name="categories_search_text_hint">カテゴリを検索</string>
   <string name="menu_save_categories">保存</string>
   <string name="refresh_button">更新</string>
   <string name="gps_disabled">お使いのデバイスではGPSが無効になっています。有効にしますか?</string>

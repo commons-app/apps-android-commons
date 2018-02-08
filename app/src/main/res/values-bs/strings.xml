@@ -54,16 +54,16 @@
   <string name="gps_disabled">GPS je onemogućen na Vašem uređaju. Želite li ga omogućiti?</string>
   <string name="enable_gps">Omogući GPS</string>
   <string name="contributions_subtitle_zero">Zasad nema postavljenih datoteka</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">postavljena %1$d datoteka</item>
     <item quantity="other">postavljenih datoteka: %1$d</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Započinjem postavljanje %1$d datoteke</item>
     <item quantity="other">Započinjem postavljanje %1$d datoteka/-e</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d postavljanje</item>
     <item quantity="other">%1$d postavljanja</item>
   </plurals>

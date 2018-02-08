@@ -54,16 +54,16 @@
   <string name="gps_disabled">GPS as üüb dan aperoot ei uun. Wel dü det nü aktiwiare?</string>
   <string name="enable_gps">GPS aktiwiare</string>
   <string name="contributions_subtitle_zero">Bit nü nian uploads</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">Ian huuchschüürd datei</item>
     <item quantity="other">%1$d huuchschüürd datein</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Began %1$d upload</item>
     <item quantity="other">Began %1$d uploads</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d huuchschüürd datei</item>
     <item quantity="other">%1$d huuchschüürd datein</item>
   </plurals>

@@ -56,7 +56,7 @@
   <string name="contributions_subtitle_zero">Non è stato ancora caricato niente</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">1 caricamento</item>
+    <item quantity="one">%1$d caricamento</item>
     <item quantity="other">%1$d caricamenti</item>
   </plurals>
   <plurals name="starting_multiple_uploads">

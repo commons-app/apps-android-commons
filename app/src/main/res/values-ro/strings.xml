@@ -61,7 +61,7 @@
     <item quantity="few">Se pornesc %1$d încărcări</item>
     <item quantity="other">Se pornesc %1$d de încărcări</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 încărcare</item>
     <item quantity="few">%1$d încărcări</item>
     <item quantity="other">%1$d de încărcări</item>

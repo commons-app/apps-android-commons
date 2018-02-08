@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">%1$s আপলোড ব্যর্থ</string>
   <string name="upload_failed_notification_subtitle">দেখার জন্য টোকা দিন</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%dটি ফাইল আপলোড হচ্ছে</item>
-    <item quantity="other">%dটি ফাইল আপলোড হচ্ছে</item>
+    <item quantity="one">%1$dটি ফাইল আপলোড হচ্ছে</item>
+    <item quantity="other">%1$dটি ফাইল আপলোড হচ্ছে</item>
   </plurals>
   <string name="title_activity_contributions">আমার সাম্প্রতিক আপলোড</string>
   <string name="contribution_state_queued">অপেক্ষারত</string>

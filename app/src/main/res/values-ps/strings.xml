@@ -32,7 +32,7 @@
   <string name="categories_search_text_hint">وېشنيزې پلټل</string>
   <string name="menu_save_categories">خوندي کول</string>
   <string name="refresh_button">بياتازه کول</string>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 پورته کول</item>
     <item quantity="other">%1$d پورته کول</item>
   </plurals>

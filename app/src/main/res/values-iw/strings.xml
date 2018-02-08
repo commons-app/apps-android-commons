@@ -22,7 +22,7 @@
   <string name="upload_failed_notification_subtitle">נא ללחוץ כדי להציג</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">קובץ אחד מועלה</item>
-    <item quantity="other">%d קבצים מועלים</item>
+    <item quantity="other">%1$d קבצים מועלים</item>
   </plurals>
   <string name="title_activity_contributions">ההעלאות האחרונות שלי</string>
   <string name="contribution_state_queued">בתור</string>
@@ -55,6 +55,7 @@
   <string name="enable_gps">הפעלת GPS</string>
   <string name="contributions_subtitle_zero">לא הועלה עדיין שום דבר</string>
   <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">העלאה אחת</item>
     <item quantity="other">%1$d העלאות</item>
   </plurals>
@@ -211,5 +212,6 @@
   <string name="notifications_welcome">ברוך בואך לוויקישיתוף של ויקימדיה, %1$s! שמחים לראות אותך כאן אצלנו.</string>
   <string name="notifications_talk_page_message">קיבלת הודעה מאת %1$s בעמוד השיחה שלך</string>
   <string name="notifications_thank_you_edit">תודה לך על העריכה</string>
-  <string name="notifications_mention">אוזכרת על ידי %2$s ב%1$s.</string>
+  <string name="notifications_mention">אוזכרת על ידי %2$s ב{{GRAMMAR:תחילית|%1$s}}.</string>
+  <string name="toggle_view_button">החלפת מצב תצוגה</string>
 </resources>

@@ -20,7 +20,7 @@
   <string name="upload_progress_notification_title_finishing">%1$s का अपलोड पूरा हुआ</string>
   <string name="upload_failed_notification_title">%1$s का अपलोड विफल हुआ</string>
   <string name="upload_failed_notification_subtitle">देखने हेतु टैप करें</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">%d फ़ाइल अपलोड हो रहा</item>
     <item quantity="other">%d फ़ाइलें अपलोड हो रहीं</item>
   </plurals>
@@ -62,7 +62,7 @@
     <item quantity="one">%1$d अपलोड शुरू</item>
     <item quantity="other">%1$d अपलोड शुरू</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d अपलोड</item>
     <item quantity="other">%1$d अपलोड</item>
   </plurals>
@@ -209,8 +209,8 @@
   <string name="location_permission_rationale_nearby">आसपास के स्थान दिखाने के लिए अनुमति चाहिए</string>
   <string name="get_directions">दिशा - निर्देश प्राप्त करें</string>
   <string name="read_article">लेख पढ़ें</string>
-  <string name="notifications_welcome">विकिमीडिया कॉमन्स पर आपका स्वागत है, %1$s! हमें हर्ष है कि आप यहाँ हैं।</string>
-  <string name="notifications_talk_page_message">%1$s ने आपके वार्ता पृष्ठ पर सन्देश छोड़ा है</string>
+  <string name="notifications_welcome" fuzzy="true">विकिमीडिया कॉमन्स पर आपका स्वागत है, %1$s! हमें हर्ष है कि आप यहाँ हैं।</string>
+  <string name="notifications_talk_page_message" fuzzy="true">%1$s ने आपके वार्ता पृष्ठ पर सन्देश छोड़ा है</string>
   <string name="notifications_thank_you_edit">सम्पादन करने के लिए धन्यवाद</string>
-  <string name="notifications_mention">%1$s ने %2$s में आपका उल्लेख किया है</string>
+  <string name="notifications_mention" fuzzy="true">%1$s ने %2$s में आपका उल्लेख किया है</string>
 </resources>

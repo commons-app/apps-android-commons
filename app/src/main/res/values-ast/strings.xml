@@ -56,15 +56,15 @@
   <string name="contributions_subtitle_zero">Inda nun hai xubes</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">1 carga</item>
+    <item quantity="one">%1$d carga</item>
     <item quantity="other">%1$d cargues</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Principiando 1 carga</item>
+    <item quantity="one">Principiando %1$d carga</item>
     <item quantity="other">Principiando %1$d cargues</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">1 carga</item>
+    <item quantity="one">%1$d carga</item>
     <item quantity="other">%1$d cargues</item>
   </plurals>
   <string name="categories_not_found">Nun s\'alcontró denguna categoría que case con %1$s</string>
@@ -214,4 +214,5 @@
   <string name="notifications_talk_page_message">%1$s dexó un mensaxe na to páxina d\'alderique</string>
   <string name="notifications_thank_you_edit">Gracies por facer una edición</string>
   <string name="notifications_mention">%1$s te mentó en %2$s.</string>
+  <string name="toggle_view_button">Alternar vista</string>
 </resources>

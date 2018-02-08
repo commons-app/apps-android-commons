@@ -123,7 +123,7 @@
   <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
   <string name="tutorial_1_text">На Вікісховищі зберігається більшість зображень, що використовуються у Вікіпедії.</string>
-  <string name="tutorial_1_subtext">Ваші зображення допомагають навчати людей по всьому світі!</string>
+  <string name="tutorial_1_subtext">Ваші зображення допомагають освіті людей по всьому світу!</string>
   <string name="tutorial_2_text">Будь ласка, завантажуйте зображення, повністю виконані або створені Вами:</string>
   <string name="tutorial_2_subtext">u2022 Природні об\'єкти (квіти, тварини, гори) \nu2022 Корисні об\'єкти (велосипеди, залізничні вокзали) \nu2022 Відомі люди (Ваш мер, олімпійські атлети, яких Ви зустрічали)</string>
   <string name="tutorial_3_text">Будь ласка, НЕ завантажуйте:</string>
@@ -142,8 +142,8 @@
   <string name="detail_description_empty">Немає опису</string>
   <string name="detail_license_empty">Невідома ліцензія</string>
   <string name="menu_refresh">Оновити</string>
-  <string name="read_storage_permission_rationale">Обов\'язковий дозвіл: читання зовнішньої пам\'яті. Програмка не може працювати без цього.</string>
-  <string name="write_storage_permission_rationale">Необхідний дозвіл: записування на зовнішнє сховище. Додаток не може працювати без цього.</string>
+  <string name="read_storage_permission_rationale">Обов\'язковий дозвіл: читання зовнішньої пам\'яті. Програма не може працювати без цього.</string>
+  <string name="write_storage_permission_rationale">Обов\'язковий дозвіл: записування на зовнішнє сховище. Програма не може працювати без цього.</string>
   <string name="location_permission_rationale">Додатковий дозвіл: отримувати поточне розташування для підказок категорій</string>
   <string name="ok">Гаразд</string>
   <string name="title_activity_nearby">Місця поблизу</string>
@@ -161,9 +161,9 @@
   <string name="media_detail_coordinates">Координати</string>
   <string name="media_detail_coordinates_empty">Не передбачено</string>
   <string name="become_a_tester_title">Станьте бета-тестером</string>
-  <string name="become_a_tester_description">Увійдіть на наш бета-канал на Google Play і отримайте ранній доступ до нових функцій та виправлень багів</string>
+  <string name="become_a_tester_description">Підпишіться на наш бета-канал на Google Play і отримайте ранній доступ до нових функцій та виправлень багів</string>
   <string name="use_wikidata">Використати Вікідані</string>
-  <string name="use_wikidata_summary">(Попередження: вимкнення цього може спричинити використання значного обсягу мобільних даних)</string>
+  <string name="use_wikidata_summary">(Попередження: вимкнення може спричинити використання значного обсягу мобільних даних)</string>
   <string name="_2fa_code">Код 2FA</string>
   <string name="number_of_uploads">Ліміт моїх останніх завантажень</string>
   <string name="maximum_limit">Максимальний ліміт</string>
@@ -209,7 +209,7 @@
   <string name="description_info">Будь ласка, докладно опишіть файл: де його було зроблено? що на ньому зображено? який контекст? Будь ласка, опишіть об\'єкти чи осіб. Додайте інформацію, яку не можна легко здогадатися, наприклад, пору доби для фотографії пейзажу. Якщо зображено щось незвичайне, постарайтеся пояснити, що робить його незвичайним.</string>
   <string name="give_permission">Надати дозвіл</string>
   <string name="use_external_storage">Використовувати зовнішнє сховище</string>
-  <string name="use_external_storage_summary">Зберігати зображення, виконані вбудованою в додатку камерою Вашого пристрою</string>
+  <string name="use_external_storage_summary">Зберігати зображення, виконані вбудованою камерою Вашого пристрою</string>
   <string name="send_log_file">Надіслати лог-файл</string>
   <string name="send_log_file_description">Надіслати лог-файл розробникам електронною поштою</string>
   <string name="login_to_your_account">Увійдіть у свій обліковий запис</string>
@@ -218,8 +218,9 @@
   <string name="location_permission_rationale_nearby">Потрібний дозвіл для показу списку місць поблизу</string>
   <string name="get_directions">Показати на мапі у зовнішній програмі</string>
   <string name="read_article">ЧИТАТИ СТАТТЮ</string>
-  <string name="notifications_welcome">Вітаємо у Wikimedia Commons, %1$s! Раді вас тут бачити.</string>
+  <string name="notifications_welcome">Вітаємо у Wikimedia Commons, %1$s! Раді вас бачити.</string>
   <string name="notifications_talk_page_message">%1$s залишив повідомлення на вашій сторінці обговорення</string>
   <string name="notifications_thank_you_edit">Дякуємо за правку</string>
   <string name="notifications_mention">%1$s згадав вас на %2$s.</string>
+  <string name="toggle_view_button">Перемкнути режим перегляду</string>
 </resources>

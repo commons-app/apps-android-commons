@@ -20,7 +20,7 @@
   <string name="upload_progress_notification_title_finishing"> %1$s උඩුගතකිරීම් අවසන් කරමින්</string>
   <string name="upload_failed_notification_title">උදුගතකරමින්  %1$s අසාර්ථකයි</string>
   <string name="upload_failed_notification_subtitle">පෙන්වන්න තට්ටු කරන්න.</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">1 ගොනුවක් උඩුගත කෙරේ</item>
     <item quantity="other">ගොනු %d ක් උඩුගත කෙරේ</item>
   </plurals>
@@ -54,16 +54,16 @@
   <string name="gps_disabled">ඔබගේ උපකරණයේ GPS ක්‍රියා විරහිත කර ඇත. ඔබ එය නැවත ක්‍රියා කිරීමට කැමතිද?</string>
   <string name="enable_gps">GPS ක්‍රියා කරවන්න</string>
   <string name="contributions_subtitle_zero">තවම උඩුගත කිරීම් කිසිවක් නැත</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">තවමත් කිසිදු උඩුගත කිරීමක් නැත</item>
     <item quantity="one">එක් උඩුගත කිරීමක් ඇත</item>
     <item quantity="other">උඩුගත කිරීම් %1$d ක් ඇත</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">1 උඩුගත කිරීමක් ආරම්භ කරමින්</item>
     <item quantity="other">උඩුගත කිරීම් %1$d ක් ආරම්භ කරමින්</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 උඩුගත කිරීමක්</item>
     <item quantity="other">උඩුගත කිරීම් %1$d ක්</item>
   </plurals>
@@ -173,6 +173,6 @@
   <string name="nearby_location_has_not_changed">ස්ථානය වෙනස් වී නොමැත</string>
   <string name="nearby_location_not_available">ස්ථානය දී නොමැත</string>
   <string name="read_article">මෙමේ ලිපිය කියවන්න</string>
-  <string name="notifications_welcome">විකිමීඩියා කොමන්ස් වෙත ඔබව සාදරයෙන් පිළිගනිමු! ඔබ මෙහි පැමිණීම ගැන අපි හද පත්ලෙන්ම සතුටු වෙමු.</string>
-  <string name="notifications_talk_page_message">ඔබගේ කතා පිටුවේ %1$s විසින් පණිවුඩයක් තබා ඇත</string>
+  <string name="notifications_welcome" fuzzy="true">විකිමීඩියා කොමන්ස් වෙත ඔබව සාදරයෙන් පිළිගනිමු! ඔබ මෙහි පැමිණීම ගැන අපි හද පත්ලෙන්ම සතුටු වෙමු.</string>
+  <string name="notifications_talk_page_message" fuzzy="true">ඔබගේ කතා පිටුවේ %1$s විසින් පණිවුඩයක් තබා ඇත</string>
 </resources>

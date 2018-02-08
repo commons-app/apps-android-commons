@@ -43,13 +43,13 @@
   <string name="menu_upload_single">Muat naik</string>
   <string name="categories_search_text_hint">Cari dalam kategori</string>
   <string name="menu_save_categories">Simpan</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Belum ada muatnaik</item>
     <item quantity="one">%1$d muatnaik</item>
     <item quantity="other">%1$d muatnaik</item>
   </plurals>
   <string name="starting_multiple_uploads" fuzzy="true">Memulakan %d kerja muat naik</string>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d muatnaik</item>
     <item quantity="other">%1$d muatnaik</item>
   </plurals>

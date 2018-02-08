@@ -56,8 +56,7 @@
   <string name="contributions_subtitle_zero">아직 올린 항목이 없습니다</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">1개 업로드</item>
-    <item quantity="other">%1$d개 업로드</item>
+    <item quantity="one">%1$d개 업로드</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">%1$d장의 업로드를 시작합니다</item>
@@ -163,6 +162,7 @@
   <string name="login_failed_2fa_not_supported">2요소 인증은 현재 지원하지 않습니다.</string>
   <string name="logout_verification">정말 로그아웃하시겠습니까?</string>
   <string name="commons_logo">공용 로고</string>
+  <string name="commons_website">공용 웹사이트</string>
   <string name="background_image">배경 그림</string>
   <string name="mediaimage_failed">미디어 그림 실패</string>
   <string name="no_image_found">그림이 없습니다</string>
@@ -203,4 +203,8 @@
   <string name="nearby_location_has_not_changed">위치가 변경되지 않았습니다.</string>
   <string name="nearby_location_not_available">위치를 사용할 수 없습니다.</string>
   <string name="location_permission_rationale_nearby">주변 장소의 목록을 표시하기 위한 권한이 필요합니다.</string>
+  <string name="notifications_welcome">%1$s님, 위키미디어 공용에 오신 것을 환영합니다! 반갑습니다.</string>
+  <string name="notifications_talk_page_message">%1$s님이 당신의 사용자 토론 문서에 글을 남겼습니다</string>
+  <string name="notifications_thank_you_edit">편집해 주셔서 감사합니다</string>
+  <string name="notifications_mention">%1$s님이 %2$s에서 당신을 언급했습니다.</string>
 </resources>

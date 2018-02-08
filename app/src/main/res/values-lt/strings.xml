@@ -22,7 +22,7 @@
   <string name="upload_failed_notification_subtitle">Bakstelėkite norėdami Rodyti</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">%1$d keliamas failas</item>
-    <item quantity="other">%1$d keliamų failų</item>
+    <item quantity="other">%1$d keliami failai</item>
   </plurals>
   <string name="title_activity_contributions">Naujausi mano įkėlimai</string>
   <string name="contribution_state_queued">Eilėje</string>
@@ -53,8 +53,8 @@
   <string name="gps_disabled">GPS išjungta jūsų įrenginyje. Ar norite įjungti?</string>
   <string name="enable_gps">Išjungti GPS</string>
   <string name="contributions_subtitle_zero">Nėra įkėlimų kol kas</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">Dar nėra įkėlimų</item>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">1 įkėlimas</item>
     <item quantity="other">%1$d įkėlimai</item>
   </plurals>
@@ -136,4 +136,7 @@
   <string name="navigation_item_logout">Atsijungti</string>
   <string name="give_permission">Suteikti leidimą</string>
   <string name="login_to_your_account">Prisijunkite prie savo paskyros</string>
+  <string name="notifications_talk_page_message">%1$s paliko žinutę jūsų aptarimo puslapyje</string>
+  <string name="notifications_thank_you_edit">Dėkoja jums už atliktą pakeitimą</string>
+  <string name="notifications_mention">%1$s jus paminėjo %2$s.</string>
 </resources>

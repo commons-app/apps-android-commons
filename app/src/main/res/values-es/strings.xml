@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">Falló la carga de %1$s</string>
   <string name="upload_failed_notification_subtitle">Toca para ver</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">Subiendo %1$d archivo</item>
-    <item quantity="other">Subiendo %1$d archivos</item>
+    <item quantity="one">Cargando %1$d archivo</item>
+    <item quantity="other">Cargando %1$d archivos</item>
   </plurals>
   <string name="title_activity_contributions">Mis subidas recientes</string>
   <string name="contribution_state_queued">En la cola</string>
@@ -56,16 +56,16 @@
   <string name="contributions_subtitle_zero">No hay subidas aún</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%1$d subida</item>
-    <item quantity="other">%1$d subidas</item>
+    <item quantity="one">%1$d carga</item>
+    <item quantity="other">%1$d cargas</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Iniciando 1 subida</item>
-    <item quantity="other">Iniciando %1$d subidas</item>
+    <item quantity="one">Iniciando %1$d carga</item>
+    <item quantity="other">Iniciando %1$d cargas</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%1$d subida</item>
-    <item quantity="other">%1$d subidas</item>
+    <item quantity="one">%1$d carga</item>
+    <item quantity="other">%1$d cargas</item>
   </plurals>
   <string name="categories_not_found">No se encontraron categorías que coincidieran con %1$s</string>
   <string name="categories_skip_explanation">Añade categorías para hacer que tus imágenes sean más fáciles de encontrar en Wikimedia Commons.\nComienza a escribir para añadir categorías.</string>

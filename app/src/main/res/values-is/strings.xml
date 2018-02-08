@@ -54,16 +54,16 @@
   <string name="gps_disabled">GPS er óvirkt í tækinu þínu. Viltu virkja það?</string>
   <string name="enable_gps">Virkja GPS</string>
   <string name="contributions_subtitle_zero">Engar innsendingar ennþá</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d innsending</item>
     <item quantity="other">%1$d innsendingar</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Byrja %1$d innsendingu</item>
     <item quantity="other">Byrja %1$d innsendingar</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">%1$d innsending</item>
     <item quantity="other">%1$d innsendingar</item>
   </plurals>
@@ -210,8 +210,8 @@
   <string name="location_permission_rationale_nearby">Heimild þarf til að birta lista yfir staði í nágrenninu</string>
   <string name="get_directions">FÁ LEIÐSÖGN</string>
   <string name="read_article">LESA GREIN</string>
-  <string name="notifications_welcome">Velkomin á Wikimedia Commons, %1$s! Við erum ánægð með að þú skulir vera hérna.</string>
+  <string name="notifications_welcome" fuzzy="true">Velkomin á Wikimedia Commons, %1$s! Við erum ánægð með að þú skulir vera hérna.</string>
   <string name="notifications_talk_page_message">%1$s skildi eftir skilaboð á spjallsíðunni þinni</string>
   <string name="notifications_thank_you_edit">Takk fyrir að hafa gert breytingar</string>
-  <string name="notifications_mention">%1$s minntist á þig á %2$s.</string>
+  <string name="notifications_mention" fuzzy="true">%1$s minntist á þig á %2$s.</string>
 </resources>

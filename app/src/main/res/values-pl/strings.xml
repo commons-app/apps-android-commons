@@ -184,4 +184,5 @@
   <string name="title_info">Podaj krótką, opisową i unikalną nazwę, która będzie służyła jako nazwa pliku. Możesz używać prostego języka i spacji. Nie dodawaj rozszerzenia pliku.</string>
   <string name="login_to_your_account">Zaloguj się na swoje konto</string>
   <string name="notifications_welcome">Witamy w Wikimedia Commons, %1$s! Cieszymy się, że tu jesteś.</string>
+  <string name="notifications_mention">%1$s wspomniał o Tobie w %2$s.</string>
 </resources>
