@@ -459,10 +459,60 @@ public class ShareActivity
             if (imageObj != null) {
                 // Gets image coords from exif data or user location
                 decimalCoords = imageObj.getCoords(gpsEnabled);
+                if(decimalCoords==null || !imageObj.imageCoordsExists){
+//                  Check if the location is from GPS or EXIF
+//                  Find other photos taken around the same time which has gps coordinates
+                    Timber.d("EXIF:false");
+                    findOtherImages(gpsEnabled);
+                }
                 useImageCoords();
             }
         } catch (FileNotFoundException e) {
             Timber.w("File not found: " + mediaUri, e);
+        }
+    }
+
+    private void findOtherImages(boolean gpsEnabled) {
+        Timber.d("filePath"+getPathOfMediaOrCopy());
+        String filePath = getPathOfMediaOrCopy();
+        long timeOfCreation = new File(filePath).lastModified();//Time when the original image was created
+        File folder = new File(filePath.substring(0,filePath.lastIndexOf('/')));
+//        Timber.d("folderath"+folderPath);
+        File[] files = folder.listFiles();
+        Timber.d("folder:"+files.length);
+
+        for(File file : files){
+            if(file.lastModified()-timeOfCreation<=(120*1000) && file.lastModified()-timeOfCreation>=-(120*1000)){
+                //Make sure the photos were taken within 20seconds
+                Timber.d("fild date:"+file.lastModified()+ " time of creation"+timeOfCreation);
+                GPSExtractor tempImageObj = null;//Temporary GPSExtractor to extract coords from these photos
+                ParcelFileDescriptor descriptor
+                        = null;
+                try {
+                    descriptor = getContentResolver().openFileDescriptor(Uri.parse(file.getAbsolutePath()), "r");
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    if (descriptor != null) {
+                        tempImageObj = new GPSExtractor(descriptor.getFileDescriptor());
+                    }
+                } else {
+                    if (filePath != null) {
+                        tempImageObj = new GPSExtractor(file.getAbsolutePath());
+                    }
+                }
+
+                if(tempImageObj!=null){
+                    Timber.d("not null fild EXIF"+tempImageObj.imageCoordsExists +" coords"+tempImageObj.getCoords(gpsEnabled));
+                    if(tempImageObj.getCoords(gpsEnabled)!=null && tempImageObj.imageCoordsExists){
+//                       Current image has gps coordinates and it's not current gps locaiton
+                        Timber.d("This fild has image coords:"+ file.getAbsolutePath());
+                    }
+
+                }
+
+            }
         }
     }
 
@@ -473,6 +523,7 @@ public class ShareActivity
     public void useImageCoords() {
         if (decimalCoords != null) {
             Timber.d("Decimal coords of image: %s", decimalCoords);
+            Timber.d("is EXIF data present:"+imageObj.imageCoordsExists);
 
             // Only set cache for this point if image has coords
             if (imageObj.imageCoordsExists) {
@@ -496,7 +547,10 @@ public class ShareActivity
                 Timber.d("Cache found, setting categoryList in MwVolleyApi to %s", displayCatList);
                 MwVolleyApi.setGpsCat(displayCatList);
             }
+        }else{
+            Timber.d("EXIF: no coords");
         }
+
     }
 
     @Override
