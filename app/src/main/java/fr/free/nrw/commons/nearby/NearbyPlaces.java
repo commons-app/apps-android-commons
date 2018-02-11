@@ -100,6 +100,7 @@ public class NearbyPlaces {
             }
 
             String[] fields = line.split("\t");
+
             String point = fields[0];
             String name = Utils.stripLocalizedString(fields[2]);
             String type = Utils.stripLocalizedString(fields[4]);
