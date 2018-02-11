@@ -17,6 +17,7 @@ public class Place {
     private final String longDescription;
     private final Uri secondaryImageUrl;
     public final LatLng location;
+    private final String category;
 
     public Bitmap image;
     public Bitmap secondaryImage;
@@ -25,12 +26,13 @@ public class Place {
 
 
     public Place(String name, Label label, String longDescription,
-                 Uri secondaryImageUrl, LatLng location, Sitelinks siteLinks) {
+                 Uri secondaryImageUrl, LatLng location, String category, Sitelinks siteLinks) {
         this.name = name;
         this.label = label;
         this.longDescription = longDescription;
         this.secondaryImageUrl = secondaryImageUrl;
         this.location = location;
+        this.category = category;
         this.siteLinks = siteLinks;
     }
 
