@@ -23,6 +23,8 @@ SELECT
      OPTIONAL {?item rdfs:label ?item_label_preferred_language. FILTER (lang(?item_label_preferred_language) = "${LANG}")}
      OPTIONAL {?item rdfs:label ?item_label_any_language}
 
+     # Get Commons category (P373)
+
      # Get the class label in the preferred language of the user, or any other language if no label is available in that language.
      OPTIONAL {
        ?item p:P31/ps:P31 ?classId.
