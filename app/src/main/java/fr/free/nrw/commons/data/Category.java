@@ -171,6 +171,8 @@ public class Category {
         return null;
     }
 
+    //TODO: Add category suggestions for direct uploads here
+
     /**
      * Retrieve recently-used categories, ordered by descending date.
      * @return a list containing recent categories
