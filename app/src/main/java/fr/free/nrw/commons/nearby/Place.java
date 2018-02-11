@@ -44,6 +44,8 @@ public class Place {
 
     public String getLongDescription() { return longDescription; }
 
+    public String getCategory() {return category; }
+
     public void setDistance(String distance) {
         this.distance = distance;
     }
