@@ -22,9 +22,9 @@
   <string name="upload_failed_notification_subtitle">बघण्यास अलगद टपली मारा</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">१ संचिका अपभारीत आहे</item>
-    <item quantity="other">%d संचिका अपभारीत आहे</item>
+    <item quantity="other">%1$d संचिका अपभारीत आहे</item>
   </plurals>
-  <string name="title_activity_contributions" fuzzy="true">माझी अपभारणे</string>
+  <string name="title_activity_contributions">माझी अपभारणे</string>
   <string name="contribution_state_queued">प्रतिक्षावलीत ठेवले</string>
   <string name="contribution_state_failed">अपयशी</string>
   <string name="contribution_state_in_progress">%1$d%% पूर्ण</string>
@@ -42,6 +42,7 @@
   <string name="login_failed_password">सनोंद प्रवेश अशक्य - कृपया आपला परवलीचा शब्द तपासा</string>
   <string name="login_failed_throttled">अनेक अयशस्वी प्रयत्न.काही मिनीटांनंतर पुन्हा प्रयत्न करा.</string>
   <string name="login_failed_blocked">माफ करा,कॉमन्सवर हा सदस्य प्रतिबंधित आहे</string>
+  <string name="login_failed_2fa_needed">आपण आपल्या दोन कारक प्रमाणिकरण कोड प्रदान करणे आवश्यक आहे.</string>
   <string name="login_failed_generic">सनोंद प्रवेश अयशस्वी!</string>
   <string name="share_upload_button">अपभारण करा</string>
   <string name="multiple_share_base_title">या संचास नाव द्या</string>
@@ -52,18 +53,18 @@
   <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">अद्याप अपभारणे नाहीत</item>
     <item quantity="one">एक अपभारण</item>
-    <item quantity="other">%d अपभारणे</item>
+    <item quantity="other">%1$d अपभारणे</item>
   </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">१ अपभारण सुरू करीत आहे upload</item>
-    <item quantity="other">%d अपभारणे सुरू करीत आहे</item>
+    <item quantity="other">%1$d अपभारणे सुरू करीत आहे</item>
   </plurals>
   <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">१ अपभारण</item>
-    <item quantity="other">%d अपभारणे</item>
+    <item quantity="other">%1$d अपभारणे</item>
   </plurals>
   <string name="categories_not_found">%1$s शी जुळणारे कोणतेच वर्ग सापडले नाहीत</string>
-  <string name="categories_skip_explanation">विकिमिडिया कॉमन्सवर आपल्या संचिकांना शोधणे सोपी जाण्यासाठी त्यांना वर्ग जोडा.\n\nवर्ग जोडण्यास टंकन सुरू करा.\nही पायरी चुकविण्यास या संदेशावर अलगद टिचका (किंवा बॅक कळ टिचका)</string>
+  <string name="categories_skip_explanation" fuzzy="true">विकिमिडिया कॉमन्सवर आपल्या संचिकांना शोधणे सोपी जाण्यासाठी त्यांना वर्ग जोडा.\n\nवर्ग जोडण्यास टंकन सुरू करा.\nही पायरी चुकविण्यास या संदेशावर अलगद टिचका (किंवा बॅक कळ टिचका)</string>
   <string name="categories_activity_title">वर्ग</string>
   <string name="title_activity_settings">मांडण्या</string>
   <string name="title_activity_signup">नोंदणी करा</string>
@@ -104,7 +105,7 @@
   <string name="tutorial_3_text">कृपया अपभारण करू \'\'\'नका\'\'\':</string>
   <string name="tutorial_3_subtext">-आपल्या किंवा मित्रांच्या सेल्फी\n-आपण आंतरजाल (इंटरनेट) वरुन अधिभारण केलेली चित्रे\n-प्रोप्रायटरी अॲप्सचे स्क्रिनशॉट</string>
   <string name="tutorial_4_text">उदाहरणादाखल अपभारण:</string>
-  <string name="tutorial_4_subtext">- शीर्षक: Sydney Opera House\n- वर्णन: Sydney Opera House as viewed from across the bay\n- वर्ग: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext" fuzzy="true">- शीर्षक: Sydney Opera House\n- वर्णन: Sydney Opera House as viewed from across the bay\n- वर्ग: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">आपली चित्रे सहभागा. विकिपीडियावरील लेखात जीवंतपणा आणा!</string>
   <string name="welcome_wikipedia_subtext">विकिपीडियावरची चित्रे विकिमिडिया कॉमन्सवरुन येतात.</string>
   <string name="welcome_copyright_text">जगातल्या अनेक लोकांना आपल्या चित्राद्वारे शिकता येते.</string>
@@ -117,7 +118,7 @@
   <string name="detail_description_empty">वर्णन नाही.</string>
   <string name="detail_license_empty">अनोळखी परवाना</string>
   <string name="menu_refresh">ताजेतवाने करा</string>
-  <string name="storage_permission_rationale">परवानगी आवश्यक:बाह्य भंडारण वाचन. याशिवाय अॲप काम करू शकत नाही.</string>
+  <string name="read_storage_permission_rationale">परवानगी आवश्यक:बाह्य भंडारण वाचन. याशिवाय अॲप काम करू शकत नाही.</string>
   <string name="location_permission_rationale">ऐच्छिक परवानगी:वर्ग सुचवण्यांसाठी सध्याचे स्थान मिळवा</string>
   <string name="ok">ठीक आहे</string>
   <string name="title_activity_nearby">जवळपासची स्थाने</string>

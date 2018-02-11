@@ -13,7 +13,7 @@
   <string name="upload_failed">No s\'ha trobat el fitxer. Proveu-ho amb un altre fitxer.</string>
   <string name="authentication_failed">L\'autenticació ha fallat!</string>
   <string name="uploading_started">Ha començat la càrrega!</string>
-  <string name="upload_completed_notification_title">S\'ha carregat %1$s !</string>
+  <string name="upload_completed_notification_title">S’ha pujat %1$s.</string>
   <string name="upload_completed_notification_text">Prem per veure la teva càrrega</string>
   <string name="upload_progress_notification_title_start">Començant la càrrega al servidor de  %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Carregant %1$s</string>
@@ -22,9 +22,9 @@
   <string name="upload_failed_notification_subtitle">Prem per veure-ho</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">s\'està carregant 1 fitxer</item>
-    <item quantity="other">s\'estan carregant %d fitxers</item>
+    <item quantity="other">s\'estan carregant %1$d fitxers</item>
   </plurals>
-  <string name="title_activity_contributions" fuzzy="true">Les meves càrregues</string>
+  <string name="title_activity_contributions">Les meves càrregues recents</string>
   <string name="contribution_state_queued">En cua</string>
   <string name="contribution_state_failed">Ha fallat</string>
   <string name="contribution_state_in_progress">%1$d%% completat</string>
@@ -42,6 +42,7 @@
   <string name="login_failed_password">No s’ha pogut iniciar la sessió. Comproveu la vostra contrasenya</string>
   <string name="login_failed_throttled">Massa intents erronis – Proveu-ho de nou d\'aquí uns minuts.</string>
   <string name="login_failed_blocked">Ho sentim, aquest usuari ha estat blocat a Commons</string>
+  <string name="login_failed_2fa_needed">Heu de proporcionar el vostre codi d\'autenticació de dos factors.</string>
   <string name="login_failed_generic">Ha fallat l\'inici de sessió</string>
   <string name="share_upload_button">Carrega</string>
   <string name="multiple_share_base_title">Anomena aquest conjunt</string>
@@ -50,19 +51,21 @@
   <string name="categories_search_text_hint">Categories de cerca</string>
   <string name="menu_save_categories">Desa</string>
   <string name="refresh_button">Refresca</string>
+  <string name="gps_disabled">El vostre dispositiu no té el GPS habilitat. El voleu habilitar?</string>
+  <string name="enable_gps">Habilita el GPS</string>
   <string name="contributions_subtitle_zero">Encara no hi ha cap càrrega</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">No hi ha cap càrrega encara</item>
-    <item quantity="one">1 càrrega</item>
-    <item quantity="other">%d càrregues</item>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%1$d càrrega</item>
+    <item quantity="other">%1$d càrregues</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">S\'està iniciant 1 càrrega</item>
-    <item quantity="other">S\'estan iniciant %d càrregues</item>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">S\'està iniciant %1$d càrrega</item>
+    <item quantity="other">S\'estan iniciant %1$d càrregues</item>
   </plurals>
   <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 càrrega</item>
-    <item quantity="other">%d càrregues</item>
+    <item quantity="other">%1$d càrregues</item>
   </plurals>
   <string name="categories_not_found">No s\'ha trobat cap categoria que coincideixi amb %1$s</string>
   <string name="categories_skip_explanation">Afegiu categories per fer que les vostres imatges siguin més fàcils de trobar a Wikimedia Commons.</string>
@@ -70,11 +73,12 @@
   <string name="title_activity_settings">Paràmetres</string>
   <string name="title_activity_signup">Registre</string>
   <string name="menu_about">Quant a</string>
-  <string name="about_license" fuzzy="true">Programari de codi obert distribuït sota la &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;llicència Apache v2&lt;/a&gt;</string>
+  <string name="about_license">L’aplicació de codi obert Wikimedia Commons fou creada per, i rep manteniment de, cessionaris i voluntaris de la comunitat de Wikimedia. La Fundació Wikimedia no està involucrada en la creació, el desenvolupament ni el manteniment de l’aplicació.</string>
   <string name="about_improve" fuzzy="true">Codi a &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Informes d\'error a &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt;.</string>
-  <string name="about_privacy_policy">Wikimedia:Commons-android-texts-sobre privacitat/ca</string>
+  <string name="about_privacy_policy" fuzzy="true">Wikimedia:Commons-android-texts-sobre privacitat/ca</string>
   <string name="title_activity_about">Quant a</string>
   <string name="menu_feedback">Envia comentaris (per correu)</string>
+  <string name="no_email_client">No hi ha cap client de correu instal·lat</string>
   <string name="provider_categories">Categories usades recentment</string>
   <string name="waiting_first_sync">S’està esperant la primera sincronització…</string>
   <string name="no_uploads_yet">Encara no heu carregat cap foto.</string>
@@ -83,10 +87,13 @@
   <string name="share_license_summary">Aquesta imatge es llicenciarà sota %1$s</string>
   <string name="menu_download">Baixa</string>
   <string name="preference_license">Llicència</string>
+  <string name="use_previous">Utilitza títol i descripció anteriors</string>
   <string name="preference_theme">Mode nocturn</string>
   <string name="preference_theme_summary">Utilitza el tema fosc</string>
-  <string name="license_name_cc_by_sa" fuzzy="true">CC Reconeixement-CompartirIgual 3.0</string>
-  <string name="license_name_cc_by" fuzzy="true">CC Reconeixement 3.0</string>
+  <string name="license_name_cc_by_sa_four">Reconeixement-CompartirIgual 4.0</string>
+  <string name="license_name_cc_by_four">Reconeixement 4.0</string>
+  <string name="license_name_cc_by_sa">Reconeixement-CompartirIgual 3.0</string>
+  <string name="license_name_cc_by">Reconeixement 3.0</string>
   <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0">CC BY-SA 3.0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (Àustria)</string>
@@ -100,7 +107,10 @@
   <string name="license_name_cc_by_sa_3_0_pl">CC BY-SA 3.0 (Polònia)</string>
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Romania)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
+  <string name="license_name_cc_by_sa_4_0">CC BY-SA 4.0</string>
+  <string name="license_name_cc_by_4_0">CC BY 4.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
+  <string name="tutorial_3_text">NO carregueu:</string>
   <string name="tutorial_4_text">Exemple de càrrega:</string>
   <string name="welcome_wikipedia_text">Doneu les vostres imatges. Ajudeu a donar vida als articles de la Viquipèdia!</string>
   <string name="welcome_wikipedia_subtext">Les imatges de la Viquipèdia vénen de la Wikimedia Commons.</string>
@@ -116,21 +126,32 @@
   <string name="menu_refresh">Refresca</string>
   <string name="ok">D\'acord</string>
   <string name="title_activity_nearby">Llocs propers</string>
+  <string name="no_nearby">No s\'han trobat llocs propers</string>
   <string name="warning">Avís</string>
+  <string name="file_exists">El fitxer ja existeix a Commons. Segur que voleu procedir?</string>
   <string name="yes">Sí</string>
   <string name="no">No</string>
   <string name="media_detail_title">Títol</string>
   <string name="media_detail_media_title">Títol del fitxer multimèdia</string>
   <string name="media_detail_description">Descripció</string>
   <string name="media_detail_uploaded_date">Data de càrrega</string>
+  <string name="media_detail_license">Llicència</string>
+  <string name="media_detail_coordinates">Coordenades</string>
+  <string name="media_detail_coordinates_empty">No s\'ha proporcionat cap</string>
   <string name="use_wikidata">Utilitza Wikidata</string>
+  <string name="_2fa_code">Codi 2FA</string>
   <string name="maximum_limit">Límit màxim</string>
   <string name="logout_verification">Realment voleu finalitzar la sessió?</string>
   <string name="commons_logo">Logo de Commons</string>
+  <string name="commons_website">Lloc web del Commons</string>
+  <string name="commons_facebook">Pàgina del Facebook del Commons</string>
+  <string name="commons_github">Codi font del Commons a GitHub</string>
   <string name="no_image_found">No s’ha trobat cap imatge</string>
   <string name="upload_image">Carrega la imatge</string>
   <string name="welcome_image_llamas">Llames</string>
   <string name="welcome_image_proprietary">Imatge privativa</string>
+  <string name="welcome_image_welcome_wikipedia">Benvinguts a la Viquipèdia</string>
+  <string name="welcome_image_sydney_opera_house">Casa d\'Òpera de Sydney</string>
   <string name="cancel">Cancel·la</string>
   <string name="navigation_drawer_open">Obre</string>
   <string name="navigation_drawer_close">Tanca</string>
@@ -141,7 +162,21 @@
   <string name="navigation_item_settings">Paràmetres</string>
   <string name="navigation_item_feedback">Comentaris</string>
   <string name="navigation_item_logout">Finalitza la sessió</string>
+  <string name="navigation_item_info">Tutorial</string>
+  <string name="navigation_item_notification">Notificacions</string>
   <string name="no_description_found">no s\'ha trobat cap descripció</string>
-  <string name="nearby_info_menu_commons_article" fuzzy="true">Article al Commons</string>
+  <string name="nearby_info_menu_commons_article">Article del fitxer a Commons</string>
   <string name="nearby_info_menu_wikidata_article">Element del Wikidata</string>
+  <string name="error_while_cache">Error mentre es carregaven les fotografies</string>
+  <string name="give_permission">Dóna permís</string>
+  <string name="use_external_storage">Utilitza l’emmagatzematge extern</string>
+  <string name="send_log_file">Envia el fitxer de registre</string>
+  <string name="send_log_file_description">Envia el registre als desenvolupadors per correu</string>
+  <string name="login_to_your_account">Entreu en el vostre compte</string>
+  <string name="nearby_location_has_not_changed">La ubicació no ha canviat.</string>
+  <string name="nearby_location_not_available">La ubicació no és disponible.</string>
+  <string name="get_directions">COM ANAR-HI</string>
+  <string name="read_article">LLEGIU L’ARTICLE</string>
+  <string name="notifications_thank_you_edit">Gràcies per fer una modificació</string>
+  <string name="notifications_mention" fuzzy="true">%1$s us ha mencionat a %2$s.</string>
 </resources>

@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">Erro ao cargar \"%1$s\"</string>
   <string name="upload_failed_notification_subtitle">Prema para mostralo</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">Cargando %d ficheiro</item>
-    <item quantity="other">Cargando %d ficheiros</item>
+    <item quantity="one">Cargando %1$d ficheiro</item>
+    <item quantity="other">Cargando %1$d ficheiros</item>
   </plurals>
   <string name="title_activity_contributions">As miñas subas recentes</string>
   <string name="contribution_state_queued">Na cola</string>
@@ -56,26 +56,26 @@
   <string name="contributions_subtitle_zero">Aínda non hai subas</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d carga</item>
-    <item quantity="other">%d cargas</item>
+    <item quantity="one">%1$d carga</item>
+    <item quantity="other">%1$d cargas</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Iniciando %d carga</item>
-    <item quantity="other">Iniciando %d cargas</item>
+    <item quantity="one">Iniciando %1$d carga</item>
+    <item quantity="other">Iniciando %1$d cargas</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d carga</item>
-    <item quantity="other">%d cargas</item>
+    <item quantity="one">%1$d carga</item>
+    <item quantity="other">%1$d cargas</item>
   </plurals>
   <string name="categories_not_found">Non se atopou ningunha categoría que coincidise con \"%1$s\"</string>
-  <string name="categories_skip_explanation">Engada categorías para facer máis accesibles as súas imaxes na Wikimedia Commons.\n\nComece a escribir para engadir categorías.\nPrema nesta mensaxe (ou no botón \"Atrás\") para saltar este paso.</string>
+  <string name="categories_skip_explanation">Engada categorías para facer máis accesibles as súas imaxes na Wikimedia Commons.\nComece a escribir para engadir categorías.</string>
   <string name="categories_activity_title">Categorías</string>
   <string name="title_activity_settings">Configuracións</string>
   <string name="title_activity_signup">Rexistrarse</string>
   <string name="menu_about">Acerca de</string>
-  <string name="about_license">Software de código aberto liberado baixo a &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;licenza Apache v2&lt;/a&gt;. %1$s e o seu logo son marcas rexistradas da Fundación Wikimedia e úsanse coa súa autorización. Non fomos acreditados pola Fundación Wikimedia nin estamos afiliados con ela.</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Código fonte&lt;/a&gt; e &lt;a href=\"https://commons-app.github.io/\"&gt;sitio web&lt;/a&gt; en GitHub. Crear unha nova &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;incidencia&lt;/a&gt; para informar de problemas e suxestións.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Política_de_protección_de_datos_(gl)\"&gt;Política de protección de datos&lt;/a&gt;</string>
+  <string name="about_license">A aplicación Wikimedia Commons é unha aplicación de código aberto creada e mantida polos cesionarios e voluntarios da comunidade de Wikimedia. A Fundación Wikimedia non está involucrada na creación, desenvolvemento ou mantemento da aplicación.</string>
+  <string name="about_improve">Crear unha nova &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;incidencia&lt;/a&gt; para informar de problemas e suxestións.</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Política de privacidade&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Créditos&lt;/a&gt;</string>
   <string name="title_activity_about">Acerca de</string>
   <string name="menu_feedback">Enviar comentarios (por correo electrónico)</string>
@@ -121,7 +121,7 @@
   <string name="tutorial_3_text">Por favor, NON subaː</string>
   <string name="tutorial_3_subtext">- Selfies ou imaxes dos seus amigos\n- Imaxes descargadas de Internet\n- Capturas de pantalla de aplicacións con dereitos de autor</string>
   <string name="tutorial_4_text">Exemplo de subaː</string>
-  <string name="tutorial_4_subtext">- Título: Ópera de Sydney\n- Descrición: A Ópera de Sydney vista dende a baía\n- Categorías: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext">- Título: Ópera de Sydney\n- Descrición: A Ópera de Sydney vista dende a baía\n- Categorías: Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Achegue as súas imaxes. Axude a que os artigos da Wikipedia cobren vida!</string>
   <string name="welcome_wikipedia_subtext">As imaxes da Wikipedia veñen da Wikimedia Commons.</string>
   <string name="welcome_copyright_text">As súas imaxes axudan a educar xente de todo o mundo.</string>
@@ -134,7 +134,8 @@
   <string name="detail_description_empty">Sen descrición</string>
   <string name="detail_license_empty">Licenza descoñecida</string>
   <string name="menu_refresh">Refrescar</string>
-  <string name="storage_permission_rationale">Permiso necesarioː ler un almacenamento externo. A aplicación non pode funcionar sen isto.</string>
+  <string name="read_storage_permission_rationale">Permiso necesarioː ler un almacenamento externo. A aplicación non pode funcionar sen isto.</string>
+  <string name="write_storage_permission_rationale">Permiso necesario: Escribir en almacenamento externo. A aplicación non pode funcionar sen el.</string>
   <string name="location_permission_rationale">Permiso opcionalː obter a localización actual para suxerir categorías</string>
   <string name="ok">Aceptar</string>
   <string name="title_activity_nearby">Lugares próximos</string>
@@ -163,6 +164,9 @@
   <string name="login_failed_2fa_not_supported">Actualmente non se permite a autenticación de dous factores.</string>
   <string name="logout_verification">Está seguro de querer saír?</string>
   <string name="commons_logo">Logo de Commons</string>
+  <string name="commons_website">Sitio web de Commons</string>
+  <string name="commons_facebook">Páxina de Facebook en Commons</string>
+  <string name="commons_github">Código fonte de Commons en Github</string>
   <string name="background_image">Imaxe de fondo</string>
   <string name="mediaimage_failed">Fallou a imaxe de multimedia</string>
   <string name="no_image_found">Non se atopou imaxe</string>
@@ -187,6 +191,7 @@
   <string name="navigation_item_feedback">Comentarios</string>
   <string name="navigation_item_logout">Saír</string>
   <string name="navigation_item_info">Titorial</string>
+  <string name="navigation_item_notification">Notificacións</string>
   <string name="nearby_needs_permissions">Os sitios situados preto non poden visualizarse sen permisos de localización</string>
   <string name="no_description_found">non se atopou descrición</string>
   <string name="nearby_info_menu_commons_article">Páxina do ficheiro en Commons</string>
@@ -194,4 +199,19 @@
   <string name="error_while_cache">Erro mentras se gardaban as imaxes na caché</string>
   <string name="title_info">Un título único descritivo para o ficheiro, que servirá como un nome de ficheiro. Pode usar unha linguaxe clara con espazos. Non inclúa a extensión do ficheiro</string>
   <string name="description_info">Por favor, describa o ficheiro todo o posibleː Onde se gravou? Cal é o contexto? Por favor, describa os obxectos ou persoas. Indique información que non pode ser adiviñada de forma doada, por exemplo, a hora do día se é unha paisaxe. Se o ficheiro amosa algo pouco habitual, por favor, explique que é o que o fai excepcional.</string>
+  <string name="give_permission">Outorgar permiso</string>
+  <string name="use_external_storage">Usar o almacenamento externo</string>
+  <string name="use_external_storage_summary">Gardar as imaxes capturadas coa cámara do seu dispositivo</string>
+  <string name="send_log_file">Enviar ficheiro de rexistro</string>
+  <string name="send_log_file_description">Enviar ficheiro de rexistro ós desenvolvedores por correo electrónico</string>
+  <string name="login_to_your_account">Comezar sesión na súa conta</string>
+  <string name="nearby_location_has_not_changed">A localización non cambiou.</string>
+  <string name="nearby_location_not_available">A localización non está dispoñible.</string>
+  <string name="location_permission_rationale_nearby">Precísase permiso para amosar unha lista de lugares preto de aquí</string>
+  <string name="get_directions">OBTER DIRECCIÓNS</string>
+  <string name="read_article">LER ARTIGO</string>
+  <string name="notifications_welcome">Benvido a Wikimedia Commons, %1$s! Alegrámonos de que estea aquí.</string>
+  <string name="notifications_talk_page_message">%1$s deixoulle unha mensaxe na súa páxina de conversa</string>
+  <string name="notifications_thank_you_edit">Grazas por realizar unha edición</string>
+  <string name="notifications_mention">%1$s mencionouno en %2$s.</string>
 </resources>

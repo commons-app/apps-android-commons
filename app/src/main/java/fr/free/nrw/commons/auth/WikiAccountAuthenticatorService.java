@@ -1,24 +1,26 @@
 package fr.free.nrw.commons.auth;
 
-import android.accounts.AccountManager;
-import android.app.Service;
+import android.accounts.AbstractAccountAuthenticator;
 import android.content.Intent;
 import android.os.IBinder;
+import android.support.annotation.Nullable;
 
-public class WikiAccountAuthenticatorService extends Service {
+import fr.free.nrw.commons.di.CommonsDaggerService;
 
-    private static WikiAccountAuthenticator wikiAccountAuthenticator = null;
-    
+public class WikiAccountAuthenticatorService extends CommonsDaggerService {
+
+    @Nullable
+    private AbstractAccountAuthenticator authenticator;
+
     @Override
-    public IBinder onBind(Intent intent) {
-        if (!intent.getAction().equals(AccountManager.ACTION_AUTHENTICATOR_INTENT)) {
-            return null;
-        }
-
-        if (wikiAccountAuthenticator == null) {
-            wikiAccountAuthenticator = new WikiAccountAuthenticator(this);
-        }
-        return wikiAccountAuthenticator.getIBinder();
+    public void onCreate() {
+        super.onCreate();
+        authenticator = new WikiAccountAuthenticator(this);
     }
 
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return authenticator == null ? null : authenticator.getIBinder();
+    }
 }

@@ -2,7 +2,7 @@
 <resources>
   <string name="app_name">العام</string>
   <string name="menu_settings">ترتيبون</string>
-  <string name="username">يُوزرنانءُ</string>
+  <string name="username">واپرائيندڙ-نانءُ</string>
   <string name="password">ڳجھولفظ</string>
   <string name="login">داخل ٿيو</string>
   <string name="signup">کاتو کوليو</string>
@@ -20,11 +20,11 @@
   <string name="upload_progress_notification_title_finishing">%1$s جو چاڙھ مڪمل ٿيندي</string>
   <string name="upload_failed_notification_title">%1$s جو چاڙھڻ ناڪام ويو</string>
   <string name="upload_failed_notification_subtitle">ڏسڻ لاءِ ٺونگيو</string>
-  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
-    <item quantity="one">1 فائيل چاڙھيندي</item>
-    <item quantity="other">%d فائيلَ چاڙھيندي</item>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d فائيل چاڙھيندي</item>
+    <item quantity="other">%1$d فائيلَ چاڙھيندي</item>
   </plurals>
-  <string name="title_activity_contributions" fuzzy="true">منھنجا چاڙھ</string>
+  <string name="title_activity_contributions">منھنجا تازا چاڙھ</string>
   <string name="contribution_state_queued">قطار ۾</string>
   <string name="contribution_state_failed">ناڪام</string>
   <string name="contribution_state_in_progress">%1$d%% مڪمل</string>
@@ -38,10 +38,10 @@
   <string name="share_title_hint">عنوان</string>
   <string name="share_description_hint">تشريح</string>
   <string name="login_failed_network">ناقابلِ داخل ٿيڻ - باھمڄار ناڪامي</string>
-  <string name="login_failed_username">ناقابلِ داخل ٿيڻ - براءِ مھرباني پنھنجو يُوزرنانءُ چڪاسيو</string>
+  <string name="login_failed_username">ناقابلِ داخل ٿيڻ - براءِ مھرباني پنھنجو واپرائيندڙ-نانءُ چڪاسيو</string>
   <string name="login_failed_password">ناقابل داخل ٿيڻ - براءِ مھرباني پنھنجو ڳجھولفظ چڪاسيو</string>
   <string name="login_failed_throttled">ھيڪانديون ناڪام ڪوششون. براءِ مھرباني ڪجھ منٽن کانپوءِ ٻيھر ڪوشش ڪريو.</string>
-  <string name="login_failed_blocked">افسوس، ھي واھپ العام تي بندشيل آھي</string>
+  <string name="login_failed_blocked">افسوس، ھي واپرائيندڙ العام تي بندشيل آھي</string>
   <string name="login_failed_generic">داخل ٿيڻ ناڪام</string>
   <string name="share_upload_button">چاڙھيو</string>
   <string name="multiple_share_base_title">ھن سيٽ کي نالو ڏيو</string>
@@ -50,26 +50,28 @@
   <string name="categories_search_text_hint">زمرا ڳوليو</string>
   <string name="menu_save_categories">سانڍيو</string>
   <string name="refresh_button">تازو ڪيو</string>
+  <string name="enable_gps">جي پي ايس چالو ڪيو (اين ايبل جي پي ايس)</string>
+  <string name="contributions_subtitle_zero">اڃان تائين ڪو به ڄاڙهه (اَپلوڊ) نه ٿيو آهي</string>
   <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">اڃان تائين ڪو چاڙھ ناھي</item>
-    <item quantity="one">1 چاڙھ</item>
-    <item quantity="other">%d چاڙھَ</item>
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%1$d چاڙھ</item>
+    <item quantity="other">%1$d چاڙھَ</item>
   </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">ھڪ 1 چاڙھ شروع ڪندي</item>
-    <item quantity="other">چاڙھَ %d شروع ڪندي</item>
+    <item quantity="one">چاڙھ %1$d شروع ڪندي</item>
+    <item quantity="other">چاڙھَ %d$1 شروع ڪندي</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">1 چاڙھ</item>
-    <item quantity="other">%d چاڙھَ</item>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d چاڙھ</item>
+    <item quantity="other">%1$d چاڙھَ</item>
   </plurals>
   <string name="categories_not_found">%1$s سان ملندڙ ڪوبہ زمرو نہ لڌو</string>
-  <string name="categories_skip_explanation">پنھنجي عڪسن ۾ زمرا وجھو تہ جيئن وڪيميڊيا العام تي وڌيڪ ڳولا لائق ٿي سگھن.\n\nزمرا وجھڻ لاءِ لکڻ شروع ڪريو.\nھن پيغام تي ٺونگو ھڻو (يا پوئتي ڌڪ ھڻو) ھي قدم ڇڏڻ لاءِ.</string>
+  <string name="categories_skip_explanation">پنھنجي عڪسن ۾ زمرا وجھو تہ جيئن وڪيميڊيا العام تي وڌيڪ ڳولا لائق ٿي سگھن.\n\nزمرا وجھڻ لاءِ لکڻ شروع ڪريو.</string>
   <string name="categories_activity_title">زمرا</string>
   <string name="title_activity_settings">ترتيبون</string>
   <string name="title_activity_signup">کاتو کوليو</string>
   <string name="menu_about">بابت</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;ذاتيات پاليسي&lt;/a&gt;</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;ذاتيات پاليسي&lt;/a&gt;</string>
   <string name="title_activity_about">بابت</string>
   <string name="menu_feedback">پذيرائي موڪليو (برقٽپال ذريعي)</string>
   <string name="no_email_client">ڪوبہ برقٽپال ڪلائينٽ تنصيبيل ناھي</string>
@@ -113,7 +115,7 @@
   <string name="tutorial_3_text">براءِ مھرباني نہ چاڙھيو:</string>
   <string name="tutorial_3_subtext">u2022 سيلفيون يا پنھنجي دوستن جو تصويرون \nu2022 اھي تصويرون جيڪي توھان انٽرنيٽ تان ڊائونلوڊ ڪيون \nu2022 پروپرائيٽري ايپس جا اسڪرين شاٽ</string>
   <string name="tutorial_4_text">مثال چاڙھ:</string>
-  <string name="tutorial_4_subtext">u2022 عنوان: سڊني اوپيرا گھر \nu2022 تشريح: سڊني اوپيرا گھر نھر جي پاسي کان ڏيک \nu2022 زمرا: سڊني اوپيرا گھر، سڊني اوپيرا گھر اولھ کان، سڊني اوپيرا گھر ڏورانھان ڏيک</string>
+  <string name="tutorial_4_subtext">- عنوان: سڊني اوپيرا گھر \n- تشريح: سڊني اوپيرا گھر نھر جي پاسي کان ڏيک \n- زمرا: سڊني اوپيرا گھر، سڊني اوپيرا گھر اولھ کان، سڊني اوپيرا گھر ڏورانھان ڏيک</string>
   <string name="welcome_wikipedia_text">پنھنجي عڪسن جي ڀاڱيداري ڪريو. وڪيپيڊيا ڪي مضمونن ۾ زندگي آڻيو!</string>
   <string name="welcome_wikipedia_subtext">وڪيپيڊيا تي عڪس وڪيميڊيا العام تان اچن ٿا.</string>
   <string name="welcome_copyright_text">توھان جا عڪس سڄي دنيا ۾ ماڻھن کي تعليم يافتا ڪرڻ ۾ مدد ڪن ٿا.</string>
@@ -121,12 +123,12 @@
   <string name="welcome_final_text">توھان سمجھو ٿا توھان سمجھي ويئو؟</string>
   <string name="welcome_final_button_text">ھا!</string>
   <string name="detail_panel_cats_label">زمرا</string>
-  <string name="detail_panel_cats_loading" fuzzy="true">اتاريندي…</string>
+  <string name="detail_panel_cats_loading">لاهيندي...</string>
   <string name="detail_panel_cats_none">ڪوبہ چونڊيل ناھي</string>
   <string name="detail_description_empty">ڪا تشريح ناھي</string>
   <string name="detail_license_empty">اڻڄاتل لائسنس</string>
   <string name="menu_refresh">تازو ڪريو</string>
-  <string name="storage_permission_rationale">گھربل اجازت: خارجي اسٽوريج پڙھڻ. ايپ ھن کانسواءِ فنڪشن نٿي ڪري سگھي.</string>
+  <string name="read_storage_permission_rationale">گھربل اجازت: خارجي اسٽوريج پڙھڻ. ايپ ھن کانسواءِ فنڪشن نٿي ڪري سگھي.</string>
   <string name="location_permission_rationale">چونڊ اجازت: زمرن جي تجويزن لاءِ ھاڻوڪي مڪانيت وٺو</string>
   <string name="ok">ٺيڪ</string>
   <string name="title_activity_nearby">ويجھڙائيءَ ۾ جڳھون</string>
@@ -137,6 +139,49 @@
   <string name="media_detail_title">عنوان</string>
   <string name="media_detail_media_title">ابلاغ جو عنوان</string>
   <string name="media_detail_description">تشريح</string>
+  <string name="media_detail_uploaded_date">چاڙھيل تاريخ</string>
+  <string name="media_detail_license">لائسنس (اجازت نامو)</string>
   <string name="become_a_tester_title">آزمائشي آزمائيندڙ ٿيو</string>
   <string name="use_wikidata">وڪيڊيٽا استعماڪ ڪريو</string>
+  <string name="number_of_uploads">منهنجي تازي چاڙهڻ (اَپلوڊ) جي حد (لِمٽ)</string>
+  <string name="maximum_limit">وڌ ۾ وڌ حد (ميگزيمم لِمٽ)</string>
+  <string name="maximum_limit_alert">500 کان ٿي ڏيکارڻ کان قاصر آھي</string>
+  <string name="logout_verification">ڇا توھان سچ ۾ خارج ٿيڻ ٿا چاھيو؟</string>
+  <string name="commons_logo">العام جي سڃاڻپ جو نشان (Commons Logo)</string>
+  <string name="background_image">پسمنظر جي تصوير</string>
+  <string name="no_image_found">ڪوبہ عڪس نہ لڌو</string>
+  <string name="upload_image">عڪس چاڙهيو</string>
+  <string name="welcome_image_rainbow_bridge">انڊلٺ پل</string>
+  <string name="welcome_image_tulip">گل لالا (ٽيولپ)</string>
+  <string name="welcome_image_no_selfies">ڪي به پاڻفيون نه (نو سيلفيز)</string>
+  <string name="welcome_image_proprietary">سڃاڻپ واري تصوير (پروپرائٽري اميج)</string>
+  <string name="welcome_image_welcome_wikipedia">وڪيپيڊيا تي ڀليڪار</string>
+  <string name="welcome_image_welcome_copyright">حقن ۽ واسطن جي آجيان (ويلڪم ڪاپي رائيٽ)</string>
+  <string name="welcome_image_sydney_opera_house">سڊني اوپيرا هائوس</string>
+  <string name="cancel">رد</string>
+  <string name="navigation_drawer_open">کوليو</string>
+  <string name="navigation_drawer_close">بند ڪريو</string>
+  <string name="navigation_item_home">مکيه صفحو</string>
+  <string name="navigation_item_upload">چاڙهيو</string>
+  <string name="navigation_item_nearby">ويجھا</string>
+  <string name="navigation_item_about">بابت</string>
+  <string name="navigation_item_settings">ترتيبون (سيٽنگس)</string>
+  <string name="navigation_item_feedback">اوهان جي راءِ</string>
+  <string name="navigation_item_logout">ٻاهر نڪرو</string>
+  <string name="navigation_item_info">سکيا (ٽيوٽوريل)</string>
+  <string name="nearby_needs_permissions">ويجھيو جڳھون بغير مڪانيت اجازت جي نٿيون ڏيکاري سگھجن</string>
+  <string name="no_description_found">ڪا به وضاحت نه ملي</string>
+  <string name="nearby_info_menu_commons_article">ڪامن فائيل جو ورق</string>
+  <string name="nearby_info_menu_wikidata_article">وڪيڊيٽا جزو (وڪيڊيٽا آئيٽم)</string>
+  <string name="give_permission">اجازت ڏيو</string>
+  <string name="use_external_storage">ٻاھري سنڀار استعمال ڪريو</string>
+  <string name="use_external_storage_summary">ايپ ۾ ڪئمرا سان ڪڍيل تصويرون پنھنجي ڊوائيس تي سانڍيو</string>
+  <string name="send_log_file">لاگ فائيل موڪليو</string>
+  <string name="send_log_file_description">لاگ فائيل سرجڻھارن کي برقٽپال ذريعي موڪليو</string>
+  <string name="login_to_your_account">پنھنجي کاتي ۾ داخل ٿيو</string>
+  <string name="nearby_location_has_not_changed">مڪانيت تبديلي ناھي ٿي.</string>
+  <string name="nearby_location_not_available">مڪانيت موجود ناھي.</string>
+  <string name="location_permission_rationale_nearby">ويجھين جڳھن جي فھرست ڏيکارڻ لاءِ اجازت گھربل آھي</string>
+  <string name="get_directions">ھدايتون وٺو</string>
+  <string name="read_article">مضمون پڙھو</string>
 </resources>

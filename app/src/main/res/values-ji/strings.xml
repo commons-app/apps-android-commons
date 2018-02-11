@@ -20,7 +20,7 @@
   <string name="upload_progress_notification_title_finishing">געענדיקט ארויפֿלאדן %1$s</string>
   <string name="upload_failed_notification_title">ארויפֿלאדן %1$s דורכגעפֿאלן</string>
   <string name="upload_failed_notification_subtitle">דרוקט צו באקוקן</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">%d טעקע לאדט אן</item>
     <item quantity="other">%d טעקעס לאדן אן</item>
   </plurals>
@@ -45,12 +45,12 @@
   <string name="categories_search_text_hint">זוכן קאטעגאריעס</string>
   <string name="menu_save_categories">אויפֿהיטן</string>
   <string name="refresh_button">דערפֿרישן</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero </item>
     <item quantity="one">איין ארויפֿלאד</item>
     <item quantity="other">%d ארויפֿלאדן</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
+  <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">אנהייבן %d ארויפֿלאד</item>
     <item quantity="other"> אנהייבן %d ארויפֿלאדן</item>
   </plurals>

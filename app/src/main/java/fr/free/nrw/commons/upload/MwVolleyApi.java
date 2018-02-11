@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload;
 
+import android.content.Context;
 import android.net.Uri;
 
 import com.android.volley.Cache;
@@ -20,7 +21,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import fr.free.nrw.commons.CommonsApplication;
 import timber.log.Timber;
 
 /**
@@ -33,12 +33,14 @@ public class MwVolleyApi {
     private static RequestQueue REQUEST_QUEUE;
     private static final Gson GSON = new GsonBuilder().create();
 
-    protected static Set<String> categorySet;
+    private static Set<String> categorySet;
     private static List<String> categoryList;
 
     private static final String MWURL = "https://commons.wikimedia.org/";
+    private final Context context;
 
-    public MwVolleyApi() {
+    public MwVolleyApi(Context context) {
+        this.context = context;
         categorySet = new HashSet<>();
     }
 
@@ -67,7 +69,7 @@ public class MwVolleyApi {
      * @param coords Coordinates to build query with
      * @return URL for API query
      */
-    private String buildUrl (String coords){
+    private String buildUrl(String coords) {
 
         Uri.Builder builder = Uri.parse(MWURL).buildUpon();
 
@@ -93,7 +95,7 @@ public class MwVolleyApi {
 
     private synchronized RequestQueue getQueue() {
         if (REQUEST_QUEUE == null) {
-            REQUEST_QUEUE = Volley.newRequestQueue(CommonsApplication.getInstance());
+            REQUEST_QUEUE = Volley.newRequestQueue(context);
         }
         return REQUEST_QUEUE;
     }

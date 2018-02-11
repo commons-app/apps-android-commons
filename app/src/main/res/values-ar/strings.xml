@@ -20,7 +20,10 @@
   <string name="upload_progress_notification_title_finishing">اكتمال رفع %1$s</string>
   <string name="upload_failed_notification_title">فشل رفع %1$s</string>
   <string name="upload_failed_notification_subtitle">انقر لتشاهد</string>
-  <string name="uploads_pending_notification_indicator" fuzzy="true">متبقى %d</string>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d رفع ملف</item>
+    <item quantity="other">%1$d رفع ملفات</item>
+  </plurals>
   <string name="title_activity_contributions">مرفوعاتي الأخيرة</string>
   <string name="contribution_state_queued">في قائمة الانتظار</string>
   <string name="contribution_state_failed">فشل</string>
@@ -39,6 +42,7 @@
   <string name="login_failed_password">لا يمكن تسجيل الدخول - فضلا تحقق من كلمة السر</string>
   <string name="login_failed_throttled">الكثير من المحاولات غير الناجحة. الرجاء المحاولة مرة أخرى في بضع دقائق.</string>
   <string name="login_failed_blocked">عذراً، لقد تم منع هذا المستخدم على كومنز</string>
+  <string name="login_failed_2fa_needed">يجب توفير رمز التحقق المزدوج.</string>
   <string name="login_failed_generic">فشل تسجيل الدخول</string>
   <string name="share_upload_button">ارفع</string>
   <string name="multiple_share_base_title">اسم هذه المجموعة</string>
@@ -47,18 +51,23 @@
   <string name="categories_search_text_hint">تصنيفات البحث</string>
   <string name="menu_save_categories">احفظ</string>
   <string name="refresh_button">أنعش</string>
+  <string name="gps_disabled">عطل نظام الملاحة العالمي GPS بجهازك. أترغب في التنشيط؟</string>
+  <string name="enable_gps">تفعيل GPS</string>
+  <string name="contributions_subtitle_zero">لا مرفوعات بعد</string>
+  <string name="multiple_uploads_title">{{جمع|واحد=%1$d رفع|%1$d رفع}}</string>
   <string name="categories_not_found">لا توجد تصنيفات تطابق %1$s</string>
-  <string name="categories_skip_explanation">أضف التصانيف لتسهل اكتشاف صورك على ويكيميديا كومنز.\n\nابدأ الكتاب لتضيف التصانيف.\nانقر هذه الرسالة لتتجاوز هذه الخطوة.</string>
+  <string name="categories_skip_explanation" fuzzy="true">أضف التصانيف لتسهل اكتشاف صورك على ويكيميديا كومنز.\n\nابدأ الكتاب لتضيف التصانيف.\nانقر هذه الرسالة لتتجاوز هذه الخطوة.</string>
   <string name="categories_activity_title">تصنيفات</string>
   <string name="title_activity_settings">الإعدادات</string>
   <string name="title_activity_signup">سجّل</string>
   <string name="menu_about">حول</string>
   <string name="about_license" fuzzy="true">برنامج مفتوح المصدر منشور &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;برخصة أباتشي النسخة 2&lt;/a&gt;</string>
   <string name="about_improve" fuzzy="true">المصدر على &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;غِتهب&lt;/a&gt;. العلل في &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;بغزِلا&lt;/a&gt;.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;سياسة الخصوصية&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;سياسة الخصوصية&lt;/a&gt;</string>
   <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;CREDITS&lt;/a&gt;</string>
   <string name="title_activity_about">حول</string>
   <string name="menu_feedback">إرسال ملاحظات (عبر البريد الإلكتروني)</string>
+  <string name="no_email_client">عميل البريد الإلكتروني غير مثبت</string>
   <string name="provider_categories">التصانيف المستخدمة مؤخرا</string>
   <string name="waiting_first_sync">ينتظر أول مزامنة…</string>
   <string name="no_uploads_yet">لم ترفع بعد أية صور.</string>
@@ -68,6 +77,10 @@
   <string name="menu_download">نزّل</string>
   <string name="preference_license">الرخصة</string>
   <string name="preference_theme">الوضع الليلي</string>
+  <string name="preference_theme_summary">استخدم النمط الغامق</string>
+  <string name="tutorial_3_text">الرجاء عدم رفع</string>
+  <string name="tutorial_3_subtext">- صور ذاتية أو صور لأصدقاء\n- صور محملة من الانترنت\n- لقطات شاشة ذات ملكية خاصة</string>
+  <string name="tutorial_4_text">مثال رفع:</string>
   <string name="welcome_wikipedia_text">ساهم بصورك. أنعش مقالات ويكيبيديا!</string>
   <string name="welcome_wikipedia_subtext">تأتي صور ويكيبيديا من ويكيميديا كومنز.</string>
   <string name="welcome_copyright_text">صورك تساعد الناس في شتى أنحاء العالم على التعلم.</string>
@@ -81,10 +94,36 @@
   <string name="detail_license_empty">ترخيص غير معلوم</string>
   <string name="menu_refresh">تحديث</string>
   <string name="ok">موافق</string>
+  <string name="title_activity_nearby">الأماكن القريبة</string>
+  <string name="no_nearby">الأماكن القريبة غير متوفرة</string>
   <string name="warning">تحذير</string>
   <string name="yes">نعم</string>
   <string name="no">لا</string>
   <string name="media_detail_title">العنوان</string>
+  <string name="media_detail_media_title">عنوان الوسيط</string>
   <string name="media_detail_description">الوصف</string>
+  <string name="media_detail_uploaded_date">تاريخ الرفع</string>
+  <string name="media_detail_license">الترخيص</string>
+  <string name="media_detail_coordinates">الإحداثيات</string>
+  <string name="media_detail_coordinates_empty">غير متوفر</string>
+  <string name="become_a_tester_title">انضم لمختبري اصدارات Beta (بيتا)</string>
+  <string name="use_wikidata">استخدم ويكي بيانات</string>
+  <string name="_2fa_code">رمز التحقق المزدوج 2FA</string>
+  <string name="number_of_uploads">حد الرفع الحالي</string>
+  <string name="maximum_limit">الحد الأقصى</string>
+  <string name="maximum_limit_alert">لا يمكن عرض أكثر من 500</string>
+  <string name="set_limit">تحديد حد الرفع الحالي</string>
+  <string name="login_failed_2fa_not_supported">التحقق المزدودج 2FA غير مدعوم حاليا</string>
+  <string name="logout_verification">أترغب فعلا في الخروج؟</string>
+  <string name="navigation_item_home">الرئيسية</string>
+  <string name="navigation_item_upload">رفع</string>
+  <string name="navigation_item_nearby">بالقرب من هنا</string>
+  <string name="navigation_item_about">حول</string>
   <string name="navigation_item_settings">الإعدادات</string>
+  <string name="navigation_item_logout">تسجيل الخروج</string>
+  <string name="navigation_item_notification">إشعارات</string>
+  <string name="nearby_info_menu_commons_article">صفحة ملف كومنز</string>
+  <string name="notifications_welcome">مرحبا بكم في ويكيمديا كومنز، %1$s! نحن سعداء لأنك هنا.</string>
+  <string name="notifications_talk_page_message">%1$s رسالة على صفحة الحديث</string>
+  <string name="notifications_mention">%1$s ذكر لك على %2$s.</string>
 </resources>

@@ -22,8 +22,8 @@
   <string name="upload_failed_notification_subtitle">Atingeți pentru a vizualiza</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">1 fișier se încarcă</item>
-    <item quantity="few">%d fișiere se încarcă</item>
-    <item quantity="other">%d de fișiere se încarcă</item>
+    <item quantity="few">%1$d fișiere se încarcă</item>
+    <item quantity="other">%1$d de fișiere se încarcă</item>
   </plurals>
   <string name="title_activity_contributions" fuzzy="true">Încărcările mele</string>
   <string name="contribution_state_queued">În așteptare</string>
@@ -52,29 +52,29 @@
   <string name="menu_save_categories">Salvare</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d încărcare</item>
-    <item quantity="few">%d încărcări</item>
-    <item quantity="other">%d de încărcări</item>
+    <item quantity="one">%1$d încărcare</item>
+    <item quantity="few">%1$d încărcări</item>
+    <item quantity="other">%1$d de încărcări</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Se pornește 1 încărcare</item>
-    <item quantity="few">Se pornesc %d încărcări</item>
-    <item quantity="other">Se pornesc %d de încărcări</item>
+    <item quantity="few">Se pornesc %1$d încărcări</item>
+    <item quantity="other">Se pornesc %1$d de încărcări</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 încărcare</item>
-    <item quantity="few">%d încărcări</item>
-    <item quantity="other">%d de încărcări</item>
+    <item quantity="few">%1$d încărcări</item>
+    <item quantity="other">%1$d de încărcări</item>
   </plurals>
   <string name="categories_not_found">Nu s-a găsit nicio categorie corespunzătoare cu %1$s</string>
-  <string name="categories_skip_explanation">Adăugați categorii pentru a facilita găsirea imaginilor dumneavoastră la Wikimedia Commons.\n\nÎncepeți să tastați pentru a adăuga categorii.\nAtingeți acest mesaj (sau mergeți înapoi) pentru a omite acest pas.</string>
+  <string name="categories_skip_explanation" fuzzy="true">Adăugați categorii pentru a facilita găsirea imaginilor dumneavoastră la Wikimedia Commons.\n\nÎncepeți să tastați pentru a adăuga categorii.\nAtingeți acest mesaj (sau mergeți înapoi) pentru a omite acest pas.</string>
   <string name="categories_activity_title">Categorii</string>
   <string name="title_activity_settings">Setări</string>
   <string name="title_activity_signup">Înregistrare</string>
   <string name="menu_about">Despre</string>
   <string name="about_license" fuzzy="true">Software cu sursă deschisă lansat sub &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Licența Apache v2&lt;/a&gt;</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sursa&lt;/a&gt; și &lt;a href=\"https://commons-app.github.io/\"&gt;pagina web&lt;/a&gt; pe GitHub. Deschide un nou &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;ticket pe GitHub&lt;/a&gt; pentru a raporta un bug sau a oferi o sugestie.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politica de confidențialitate&lt;/a&gt;</string>
+  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sursa&lt;/a&gt; și &lt;a href=\"https://commons-app.github.io/\"&gt;pagina web&lt;/a&gt; pe GitHub. Deschide un nou &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;ticket pe GitHub&lt;/a&gt; pentru a raporta un bug sau a oferi o sugestie.</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Politica de confidențialitate&lt;/a&gt;</string>
   <string name="title_activity_about">Despre</string>
   <string name="menu_feedback">Trimitere reacții (prin e-mail)</string>
   <string name="provider_categories">Categorii utilizate recent</string>

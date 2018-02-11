@@ -11,8 +11,11 @@ import fr.free.nrw.commons.R;
 
 class ContributionsListAdapter extends CursorAdapter {
 
-    public ContributionsListAdapter(Context context, Cursor c, int flags) {
+    private final ContributionDao contributionDao;
+
+    public ContributionsListAdapter(Context context, Cursor c, int flags, ContributionDao contributionDao) {
         super(context, c, flags);
+        this.contributionDao = contributionDao;
     }
 
     @Override
@@ -26,7 +29,7 @@ class ContributionsListAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         final ContributionViewHolder views = (ContributionViewHolder)view.getTag();
-        final Contribution contribution = Contribution.fromCursor(cursor);
+        final Contribution contribution = contributionDao.fromCursor(cursor);
 
         views.imageView.setMedia(contribution);
         views.titleView.setText(contribution.getDisplayTitle());
@@ -34,7 +37,7 @@ class ContributionsListAdapter extends CursorAdapter {
         views.seqNumView.setText(String.valueOf(cursor.getPosition() + 1));
         views.seqNumView.setVisibility(View.VISIBLE);
 
-        switch(contribution.getState()) {
+        switch (contribution.getState()) {
             case Contribution.STATE_COMPLETED:
                 views.stateView.setVisibility(View.GONE);
                 views.progressView.setVisibility(View.GONE);
@@ -50,7 +53,7 @@ class ContributionsListAdapter extends CursorAdapter {
                 views.progressView.setVisibility(View.VISIBLE);
                 long total = contribution.getDataLength();
                 long transferred = contribution.getTransferred();
-                if(transferred == 0 || transferred >= total) {
+                if (transferred == 0 || transferred >= total) {
                     views.progressView.setIndeterminate(true);
                 } else {
                     views.progressView.setProgress((int)(((double)transferred / (double)total) * 100));

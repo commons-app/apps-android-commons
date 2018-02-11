@@ -1,11 +1,9 @@
 package fr.free.nrw.commons.media;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
+import android.content.SharedPreferences;
 import android.database.DataSetObserver;
 import android.net.Uri;
 import android.os.Build;
@@ -27,30 +25,30 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import fr.free.nrw.commons.CommonsApplication;
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
-import fr.free.nrw.commons.mwapi.EventLog;
+import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 
-public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPageChangeListener {
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.content.Context.DOWNLOAD_SERVICE;
+import static android.content.Intent.ACTION_VIEW;
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
-    public interface MediaDetailProvider {
-        Media getMediaAtPosition(int i);
+public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment implements ViewPager.OnPageChangeListener {
 
-        int getTotalMediaCount();
-
-        void notifyDatasetChanged();
-
-        void registerDataSetObserver(DataSetObserver observer);
-
-        void unregisterDataSetObserver(DataSetObserver observer);
-    }
+    @Inject MediaWikiApi mwApi;
+    @Inject SessionManager sessionManager;
+    @Inject @Named("default_preferences") SharedPreferences prefs;
 
     private ViewPager pager;
     private Boolean editable;
-    private CommonsApplication app;
 
     public MediaDetailPagerFragment() {
         this(false);
@@ -61,30 +59,10 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
         this.editable = editable;
     }
 
-    //FragmentStatePagerAdapter allows user to swipe across collection of images (no. of images undetermined)
-    private class MediaDetailAdapter extends FragmentStatePagerAdapter {
-
-        public MediaDetailAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int i) {
-            if (i == 0) {
-                // See bug https://code.google.com/p/android/issues/detail?id=27526
-                pager.postDelayed(() -> getActivity().supportInvalidateOptionsMenu(), 5);
-            }
-            return MediaDetailFragment.forMedia(i, editable);
-        }
-
-        @Override
-        public int getCount() {
-            return ((MediaDetailProvider)getActivity()).getTotalMediaCount();
-        }
-    }
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater,
+                             ViewGroup container,
+                             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_media_detail_pager, container, false);
         pager = (ViewPager) view.findViewById(R.id.mediaDetailsPager);
         pager.addOnPageChangeListener(this);
@@ -120,26 +98,21 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
         if (savedInstanceState != null) {
             editable = savedInstanceState.getBoolean("editable");
         }
-        app = CommonsApplication.getInstance();
         setHasOptionsMenu(true);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        MediaDetailProvider provider = (MediaDetailProvider)getActivity();
+        MediaDetailProvider provider = (MediaDetailProvider) getActivity();
         Media m = provider.getMediaAtPosition(pager.getCurrentItem());
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.menu_share_current_image:
-                // Share - this is just logs it, intent set in onCreateOptionsMenu, around line 252
-                EventLog.schema(CommonsApplication.EVENT_SHARE_ATTEMPT)
-                        .param("username", app.getCurrentAccount().name)
-                        .param("filename", m.getFilename())
-                        .log();
+                // Share - intent set in onCreateOptionsMenu, around line 252
                 return true;
             case R.id.menu_browser_current_image:
                 // View in browser
                 Intent viewIntent = new Intent();
-                viewIntent.setAction(Intent.ACTION_VIEW);
+                viewIntent.setAction(ACTION_VIEW);
                 viewIntent.setData(m.getFilePageTitle().getMobileUri());
                 startActivity(viewIntent);
                 return true;
@@ -149,12 +122,12 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
                 return true;
             case R.id.menu_retry_current_image:
                 // Retry
-                ((ContributionsActivity)getActivity()).retryUpload(pager.getCurrentItem());
+                ((ContributionsActivity) getActivity()).retryUpload(pager.getCurrentItem());
                 getActivity().getSupportFragmentManager().popBackStack();
                 return true;
             case R.id.menu_cancel_current_image:
                 // todo: delete image
-                ((ContributionsActivity)getActivity()).deleteUpload(pager.getCurrentItem());
+                ((ContributionsActivity) getActivity()).deleteUpload(pager.getCurrentItem());
                 getActivity().getSupportFragmentManager().popBackStack();
                 return true;
             default:
@@ -170,9 +143,15 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
      */
     private void downloadMedia(Media m) {
         String imageUrl = m.getImageUrl(),
-               fileName = m.getFilename();
+                fileName = m.getFilename();
+
+        if (imageUrl == null || fileName == null) {
+            return;
+        }
+
         // Strip 'File:' from beginning of filename, we really shouldn't store it
         fileName = fileName.replaceFirst("^File:", "");
+
         Uri imageUri = Uri.parse(imageUrl);
 
         DownloadManager.Request req = new DownloadManager.Request(imageUri);
@@ -185,14 +164,13 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
         req.allowScanningByMediaScanner();
         req.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !(ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)) {
-            Snackbar.make(getView(), R.string.storage_permission_rationale,
-                    Snackbar.LENGTH_INDEFINITE)
-                    .setAction(R.string.ok, view -> ActivityCompat.requestPermissions(getActivity(),
-                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1)).show();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !(ContextCompat.checkSelfPermission(getContext(), READ_EXTERNAL_STORAGE) == PERMISSION_GRANTED)) {
+            Snackbar.make(getView(), R.string.read_storage_permission_rationale,
+                    Snackbar.LENGTH_INDEFINITE).setAction(R.string.ok,
+                    view -> ActivityCompat.requestPermissions(getActivity(),
+                            new String[]{READ_EXTERNAL_STORAGE}, 1)).show();
         } else {
-            final DownloadManager manager = (DownloadManager)getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
-            manager.enqueue(req);
+            ((DownloadManager) getActivity().getSystemService(DOWNLOAD_SERVICE)).enqueue(req);
         }
     }
 
@@ -202,7 +180,7 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
             menu.clear(); // see http://stackoverflow.com/a/8495697/17865
             inflater.inflate(R.menu.fragment_image_detail, menu);
             if (pager != null) {
-                MediaDetailProvider provider = (MediaDetailProvider)getActivity();
+                MediaDetailProvider provider = (MediaDetailProvider) getActivity();
                 Media m = provider.getMediaAtPosition(pager.getCurrentItem());
                 if (m != null) {
                     // Enable default set of actions, then re-enable different set of actions only if it is a failed contrib
@@ -225,8 +203,8 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
                     }
 
                     if (m instanceof Contribution) {
-                        Contribution c = (Contribution)m;
-                        switch(c.getState()) {
+                        Contribution c = (Contribution) m;
+                        switch (c.getState()) {
                             case Contribution.STATE_FAILED:
                                 menu.findItem(R.id.menu_retry_current_image).setEnabled(true).setVisible(true);
                                 menu.findItem(R.id.menu_cancel_current_image).setEnabled(true).setVisible(true);
@@ -267,6 +245,39 @@ public class MediaDetailPagerFragment extends Fragment implements ViewPager.OnPa
 
     @Override
     public void onPageScrollStateChanged(int i) {
+    }
 
+    public interface MediaDetailProvider {
+        Media getMediaAtPosition(int i);
+
+        int getTotalMediaCount();
+
+        void notifyDatasetChanged();
+
+        void registerDataSetObserver(DataSetObserver observer);
+
+        void unregisterDataSetObserver(DataSetObserver observer);
+    }
+
+    //FragmentStatePagerAdapter allows user to swipe across collection of images (no. of images undetermined)
+    private class MediaDetailAdapter extends FragmentStatePagerAdapter {
+
+        public MediaDetailAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int i) {
+            if (i == 0) {
+                // See bug https://code.google.com/p/android/issues/detail?id=27526
+                pager.postDelayed(() -> getActivity().supportInvalidateOptionsMenu(), 5);
+            }
+            return MediaDetailFragment.forMedia(i, editable);
+        }
+
+        @Override
+        public int getCount() {
+            return ((MediaDetailProvider) getActivity()).getTotalMediaCount();
+        }
     }
 }

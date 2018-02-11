@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.modifications;
 
-import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
@@ -10,50 +9,51 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
-import fr.free.nrw.commons.CommonsApplication;
+import javax.inject.Inject;
+
+import fr.free.nrw.commons.data.DBOpenHelper;
+import fr.free.nrw.commons.di.CommonsDaggerContentProvider;
 import timber.log.Timber;
 
-public class ModificationsContentProvider extends ContentProvider{
+import static fr.free.nrw.commons.modifications.ModifierSequenceDao.Table.TABLE_NAME;
+
+public class ModificationsContentProvider extends CommonsDaggerContentProvider {
 
     private static final int MODIFICATIONS = 1;
     private static final int MODIFICATIONS_ID = 2;
 
-    public static final String AUTHORITY = "fr.free.nrw.commons.modifications.contentprovider";
-    private static final String BASE_PATH = "modifications";
+    public static final String MODIFICATIONS_AUTHORITY = "fr.free.nrw.commons.modifications.contentprovider";
+    public static final String BASE_PATH = "modifications";
 
-    public static final Uri BASE_URI = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH);
+    public static final Uri BASE_URI = Uri.parse("content://" + MODIFICATIONS_AUTHORITY + "/" + BASE_PATH);
 
     private static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
     static {
-        uriMatcher.addURI(AUTHORITY, BASE_PATH, MODIFICATIONS);
-        uriMatcher.addURI(AUTHORITY, BASE_PATH + "/#", MODIFICATIONS_ID);
+        uriMatcher.addURI(MODIFICATIONS_AUTHORITY, BASE_PATH, MODIFICATIONS);
+        uriMatcher.addURI(MODIFICATIONS_AUTHORITY, BASE_PATH + "/#", MODIFICATIONS_ID);
     }
 
     public static Uri uriForId(int id) {
         return Uri.parse(BASE_URI.toString() + "/" + id);
     }
 
-
-    @Override
-    public boolean onCreate() {
-        return false;
-    }
+    @Inject DBOpenHelper dbOpenHelper;
 
     @Override
     public Cursor query(@NonNull Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
-        queryBuilder.setTables(ModifierSequence.Table.TABLE_NAME);
+        queryBuilder.setTables(TABLE_NAME);
 
         int uriType = uriMatcher.match(uri);
 
-        switch(uriType) {
+        switch (uriType) {
             case MODIFICATIONS:
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI" + uri);
         }
 
-        SQLiteDatabase db = CommonsApplication.getInstance().getDBOpenHelper().getReadableDatabase();
+        SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
 
         Cursor cursor = queryBuilder.query(db, projection, selection, selectionArgs, null, null, sortOrder);
         cursor.setNotificationUri(getContext().getContentResolver(), uri);
@@ -69,11 +69,11 @@ public class ModificationsContentProvider extends ContentProvider{
     @Override
     public Uri insert(@NonNull Uri uri, ContentValues contentValues) {
         int uriType = uriMatcher.match(uri);
-        SQLiteDatabase sqlDB = CommonsApplication.getInstance().getDBOpenHelper().getWritableDatabase();
+        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         long id = 0;
         switch (uriType) {
             case MODIFICATIONS:
-                id = sqlDB.insert(ModifierSequence.Table.TABLE_NAME, null, contentValues);
+                id = sqlDB.insert(TABLE_NAME, null, contentValues);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
@@ -85,11 +85,11 @@ public class ModificationsContentProvider extends ContentProvider{
     @Override
     public int delete(@NonNull Uri uri, String s, String[] strings) {
         int uriType = uriMatcher.match(uri);
-        SQLiteDatabase sqlDB = CommonsApplication.getInstance().getDBOpenHelper().getWritableDatabase();
+        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         switch (uriType) {
             case MODIFICATIONS_ID:
                 String id = uri.getLastPathSegment();
-                sqlDB.delete(ModifierSequence.Table.TABLE_NAME,
+                sqlDB.delete(TABLE_NAME,
                         "_id = ?",
                         new String[] { id }
                         );
@@ -103,13 +103,13 @@ public class ModificationsContentProvider extends ContentProvider{
     public int bulkInsert(@NonNull Uri uri, @NonNull ContentValues[] values) {
         Timber.d("Hello, bulk insert! (ModificationsContentProvider)");
         int uriType = uriMatcher.match(uri);
-        SQLiteDatabase sqlDB = CommonsApplication.getInstance().getDBOpenHelper().getWritableDatabase();
+        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         sqlDB.beginTransaction();
         switch (uriType) {
             case MODIFICATIONS:
-                for(ContentValues value: values) {
+                for (ContentValues value: values) {
                     Timber.d("Inserting! %s", value);
-                    sqlDB.insert(ModifierSequence.Table.TABLE_NAME, null, value);
+                    sqlDB.insert(TABLE_NAME, null, value);
                 }
                 break;
             default:
@@ -131,11 +131,11 @@ public class ModificationsContentProvider extends ContentProvider{
         In here, the only concat created argument is for id. It is cast to an int, and will error out otherwise.
          */
         int uriType = uriMatcher.match(uri);
-        SQLiteDatabase sqlDB = CommonsApplication.getInstance().getDBOpenHelper().getWritableDatabase();
+        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         int rowsUpdated = 0;
         switch (uriType) {
             case MODIFICATIONS:
-                rowsUpdated = sqlDB.update(ModifierSequence.Table.TABLE_NAME,
+                rowsUpdated = sqlDB.update(TABLE_NAME,
                         contentValues,
                         selection,
                         selectionArgs);
@@ -144,9 +144,9 @@ public class ModificationsContentProvider extends ContentProvider{
                 int id = Integer.valueOf(uri.getLastPathSegment());
 
                 if (TextUtils.isEmpty(selection)) {
-                    rowsUpdated = sqlDB.update(ModifierSequence.Table.TABLE_NAME,
+                    rowsUpdated = sqlDB.update(TABLE_NAME,
                             contentValues,
-                            ModifierSequence.Table.COLUMN_ID + " = ?",
+                            ModifierSequenceDao.Table.COLUMN_ID + " = ?",
                             new String[] { String.valueOf(id) } );
                 } else {
                     throw new IllegalArgumentException("Parameter `selection` should be empty when updating an ID");

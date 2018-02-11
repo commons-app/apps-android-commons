@@ -34,7 +34,7 @@
   <string name="refresh_button">بياتازه کول</string>
   <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 پورته کول</item>
-    <item quantity="other">%d پورته کول</item>
+    <item quantity="other">%1$d پورته کول</item>
   </plurals>
   <string name="categories_activity_title">وېشنيزې</string>
   <string name="title_activity_settings">امستنې</string>
@@ -68,6 +68,8 @@
   <string name="yes">هو</string>
   <string name="no">نه</string>
   <string name="media_detail_title">سرليک</string>
+  <string name="welcome_image_welcome_wikipedia">ويکيپېډياښه راغلئ</string>
+  <string name="cancel">ناگارل</string>
   <string name="navigation_drawer_open">پرانيستل</string>
   <string name="navigation_drawer_close">تړل</string>
   <string name="navigation_item_home">کور</string>

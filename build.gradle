@@ -1,14 +1,16 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
+    ext.kotlin_version = '1.1.51'
     repositories {
         jcenter()
         mavenCentral()
+        google()
     }
     dependencies {
         classpath "com.android.tools.build:gradle:${project.gradleVersion}"
         classpath 'com.dicedmelon.gradle:jacoco-android:0.1.1'
         classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.7.1'
-        classpath 'me.tatarka:gradle-retrolambda:3.6.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
@@ -16,5 +18,7 @@ allprojects {
     repositories {
         jcenter()
         maven { url "https://jitpack.io" }
+        maven { url "https://maven.google.com" }
+        google()
     }
 }

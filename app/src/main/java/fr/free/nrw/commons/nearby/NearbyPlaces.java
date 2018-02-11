@@ -34,7 +34,7 @@ public class NearbyPlaces {
 
     public NearbyPlaces() {
         try {
-            wikidataQuery = FileUtils.readFromResource("/assets/queries/nearby_query.rq");
+            wikidataQuery = FileUtils.readFromResource("/queries/nearby_query.rq");
             Timber.v(wikidataQuery);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -46,7 +46,7 @@ public class NearbyPlaces {
 
         try {
             // increase the radius gradually to find a satisfactory number of nearby places
-            while (radius < MAX_RADIUS) {
+            while (radius <= MAX_RADIUS) {
                 places = getFromWikidataQuery(curLatLng, lang, radius);
                 Timber.d("%d results at radius: %f", places.size(), radius);
                 if (places.size() >= MIN_RESULTS) {
@@ -62,6 +62,11 @@ public class NearbyPlaces {
             Timber.d("back to initial radius: %f", radius);
             radius = INITIAL_RADIUS;
         }
+        // make sure we will be able to send at least one request next time
+        if (radius > MAX_RADIUS) {
+            radius = MAX_RADIUS;
+        }
+
         return places;
     }
 
@@ -121,7 +126,7 @@ public class NearbyPlaces {
 
             places.add(new Place(
                     name,
-                    Place.Description.fromText(type), // list
+                    Place.Label.fromText(type), // list
                     type, // details
                     Uri.parse(icon),
                     new LatLng(latitude, longitude, 0),
@@ -183,7 +188,7 @@ public class NearbyPlaces {
 
                     places.add(new Place(
                             name,
-                            Place.Description.fromText(type), // list
+                            Place.Label.fromText(type), // list
                             type, // details
                             null,
                             new LatLng(latitude, longitude, 0),

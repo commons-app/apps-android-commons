@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="crash_dialog_title">ვიკიოწკარუექ აკორთუ</string>
+  <string name="crash_dialog_text">უი. მუდგაინქ ქჷმოხვადუǃ</string>
+  <string name="crash_dialog_comment_prompt">ქომწით მუს აკეთენდით დო ქჷმომჯღონით ელექტრონული ფოსტათ. თენა ჩქი პრობლემაშ გიშათინუა ქემეხვარებჷნა!</string>
+  <string name="crash_dialog_ok_toast">დიდი მარდიǃ</string>
+</resources>

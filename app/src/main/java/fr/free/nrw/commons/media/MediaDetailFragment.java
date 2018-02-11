@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,8 +21,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import javax.inject.Inject;
+import javax.inject.Provider;
+
+
 import fr.free.nrw.commons.License;
 import fr.free.nrw.commons.LicenseList;
 import fr.free.nrw.commons.Media;
@@ -31,11 +36,12 @@ import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.ui.widget.CompatTextView;
 import timber.log.Timber;
 
-public class MediaDetailFragment extends Fragment {
+public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     private boolean editable;
     private MediaDetailPagerFragment.MediaDetailProvider detailProvider;
@@ -55,10 +61,14 @@ public class MediaDetailFragment extends Fragment {
         return mf;
     }
 
+
+    @Inject
+    Provider<MediaDataExtractor> mediaDataExtractorProvider;
     @BindView(R.id.mediaDetailImage)
     MediaWikiImageView image;
     @BindView(R.id.mediaDetailSpacer)
     MediaDetailSpacer spacer;
+  
     private int initialListTop = 0;
 
     @BindView(R.id.mediaDetailTitle)
@@ -80,8 +90,10 @@ public class MediaDetailFragment extends Fragment {
     private boolean categoriesPresent = false;
     private ViewTreeObserver.OnGlobalLayoutListener layoutListener; // for layout stuff, only used once!
     private ViewTreeObserver.OnScrollChangedListener scrollListener;
+
     DataSetObserver dataObserver;
     private AsyncTask<Void, Void, Boolean> detailFetchTask;
+
     private LicenseList licenseList;
 
     @Override
@@ -188,13 +200,13 @@ public class MediaDetailFragment extends Fragment {
 
             @Override
             protected void onPreExecute() {
-                extractor = new MediaDataExtractor(media.getFilename(), licenseList);
+                extractor = mediaDataExtractorProvider.get();
             }
 
             @Override
             protected Boolean doInBackground(Void... voids) {
                 try {
-                    extractor.fetch();
+                    extractor.fetch(media.getFilename(), licenseList);
                     return Boolean.TRUE;
                 } catch (IOException e) {
                     Timber.d(e);
@@ -276,14 +288,16 @@ public class MediaDetailFragment extends Fragment {
         categoryContainer.removeAllViews();
         // @fixme add the category items
         for (String cat : categoryNames) {
-            View catLabel = buildCatLabel(cat);
+            View catLabel = buildCatLabel(cat, categoryContainer);
             categoryContainer.addView(catLabel);
         }
     }
 
-    private View buildCatLabel(final String catName) {
-        final View item = getLayoutInflater(null).inflate(R.layout.detail_category_item, null, false);
-        final CompatTextView textView = (CompatTextView) item.findViewById(R.id.mediaDetailCategoryItemText);
+
+    private View buildCatLabel(final String catName, ViewGroup categoryContainer) {
+        final View item = LayoutInflater.from(getContext()).inflate(R.layout.detail_category_item, categoryContainer, false);
+        final CompatTextView textView = (CompatTextView)item.findViewById(R.id.mediaDetailCategoryItemText);
+
 
         textView.setText(catName);
         if (categoriesLoaded && categoriesPresent) {
@@ -379,7 +393,7 @@ public class MediaDetailFragment extends Fragment {
     private void openMap(LatLng coordinates) {
         //Open map app at given position
         Uri gmmIntentUri = Uri.parse(
-                "geo:0,0?q=" + coordinates.getLatitude() + "," + coordinates.getLatitude());
+                "geo:0,0?q=" + coordinates.getLatitude() + "," + coordinates.getLongitude());
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
 
         if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {

@@ -3,20 +3,20 @@ package fr.free.nrw.commons.nearby;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.preference.PreferenceManager;
 import android.support.graphics.drawable.VectorDrawableCompat;
 
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import fr.free.nrw.commons.CommonsApplication;
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.utils.UiUtils;
@@ -25,9 +25,17 @@ import timber.log.Timber;
 import static fr.free.nrw.commons.utils.LengthUtils.computeDistanceBetween;
 import static fr.free.nrw.commons.utils.LengthUtils.formatDistanceBetween;
 
-
 public class NearbyController {
     private static final int MAX_RESULTS = 1000;
+    private final NearbyPlaces nearbyPlaces;
+    private final SharedPreferences prefs;
+
+    @Inject
+    public NearbyController(NearbyPlaces nearbyPlaces,
+                            @Named("default_preferences") SharedPreferences prefs) {
+        this.nearbyPlaces = nearbyPlaces;
+        this.prefs = prefs;
+    }
 
     /**
      * Prepares Place list to make their distance information update later.
@@ -35,13 +43,11 @@ public class NearbyController {
      * @param context context
      * @return Place list without distance information
      */
-    public static List<Place> loadAttractionsFromLocation(LatLng curLatLng, Context context) {
+    public List<Place> loadAttractionsFromLocation(LatLng curLatLng, Context context) {
         Timber.d("Loading attractions near %s", curLatLng);
         if (curLatLng == null) {
             return Collections.emptyList();
         }
-        NearbyPlaces nearbyPlaces = CommonsApplication.getInstance().getNearbyPlaces();
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         List<Place> places = prefs.getBoolean("useWikidata", true)
                 ? nearbyPlaces.getFromWikidataQuery(curLatLng, Locale.getDefault().getLanguage())
                 : nearbyPlaces.getFromWikiNeedsPictures();

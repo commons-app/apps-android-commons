@@ -2,10 +2,10 @@ package fr.free.nrw.commons.upload;
 
 import android.Manifest;
 import android.app.ProgressDialog;
-import android.content.ContentProviderClient;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.DataSetObserver;
 import android.net.Uri;
@@ -24,11 +24,14 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import butterknife.ButterKnife;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.category.CategorizationFragment;
 import fr.free.nrw.commons.category.OnCategoriesSaveHandler;
 import fr.free.nrw.commons.contributions.Contribution;
@@ -36,25 +39,29 @@ import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.modifications.CategoryModifier;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.modifications.ModifierSequence;
+import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
-import fr.free.nrw.commons.mwapi.EventLog;
+import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
-public  class       MultipleShareActivity
-        extends     AuthenticatedActivity
-        implements  MediaDetailPagerFragment.MediaDetailProvider,
-                    AdapterView.OnItemClickListener,
-                    FragmentManager.OnBackStackChangedListener,
-                    MultipleUploadListFragment.OnMultipleUploadInitiatedHandler,
+public class MultipleShareActivity extends AuthenticatedActivity
+        implements MediaDetailPagerFragment.MediaDetailProvider,
+        AdapterView.OnItemClickListener,
+        FragmentManager.OnBackStackChangedListener,
+        MultipleUploadListFragment.OnMultipleUploadInitiatedHandler,
         OnCategoriesSaveHandler {
-    private CommonsApplication app;
+
+    @Inject MediaWikiApi mwApi;
+    @Inject SessionManager sessionManager;
+    @Inject UploadController uploadController;
+    @Inject ModifierSequenceDao modifierSequenceDao;
+    @Inject @Named("default_preferences") SharedPreferences prefs;
+
     private ArrayList<Contribution> photosList = null;
 
     private MultipleUploadListFragment uploadsList;
     private MediaDetailPagerFragment mediaDetails;
     private CategorizationFragment categorizationFragment;
-
-    private UploadController uploadController;
 
     @Override
     public Media getMediaAtPosition(int i) {
@@ -63,7 +70,7 @@ public  class       MultipleShareActivity
 
     @Override
     public int getTotalMediaCount() {
-        if(photosList == null) {
+        if (photosList == null) {
             return 0;
         }
         return photosList.size();
@@ -71,7 +78,7 @@ public  class       MultipleShareActivity
 
     @Override
     public void notifyDatasetChanged() {
-        if(uploadsList != null) {
+        if (uploadsList != null) {
             uploadsList.notifyDatasetChanged();
         }
     }
@@ -124,7 +131,7 @@ public  class       MultipleShareActivity
         dialog.setTitle(getResources().getQuantityString(R.plurals.starting_multiple_uploads, photosList.size(), photosList.size()));
         dialog.show();
 
-        for(int i = 0; i < photosList.size(); i++) {
+        for (int i = 0; i < photosList.size(); i++) {
             Contribution up = photosList.get(i);
             final int uploadCount = i + 1; // Goddamn Java
 
@@ -132,11 +139,7 @@ public  class       MultipleShareActivity
                 dialog.setProgress(uploadCount);
                 if (uploadCount == photosList.size()) {
                     dialog.dismiss();
-                    Toast startingToast = Toast.makeText(
-                            CommonsApplication.getInstance(),
-                            R.string.uploading_started,
-                            Toast.LENGTH_LONG
-                    );
+                    Toast startingToast = Toast.makeText(this, R.string.uploading_started, Toast.LENGTH_LONG);
                     startingToast.show();
                 }
             });
@@ -145,7 +148,7 @@ public  class       MultipleShareActivity
         uploadsList.setImageOnlyMode(true);
 
         categorizationFragment = (CategorizationFragment) getSupportFragmentManager().findFragmentByTag("categorization");
-        if(categorizationFragment == null) {
+        if (categorizationFragment == null) {
             categorizationFragment = new CategorizationFragment();
         }
         // FIXME: Stops the keyboard from being shown 'stale' while moving out of this fragment into the next
@@ -162,36 +165,27 @@ public  class       MultipleShareActivity
 
     @Override
     public void onCategoriesSave(List<String> categories) {
-        if(categories.size() > 0) {
-        ContentProviderClient client = getContentResolver().acquireContentProviderClient(ModificationsContentProvider.AUTHORITY);
-            for(Contribution contribution: photosList) {
+        if (categories.size() > 0) {
+            for (Contribution contribution : photosList) {
                 ModifierSequence categoriesSequence = new ModifierSequence(contribution.getContentUri());
 
                 categoriesSequence.queueModifier(new CategoryModifier(categories.toArray(new String[]{})));
                 categoriesSequence.queueModifier(new TemplateRemoveModifier("Uncategorized"));
 
-                categoriesSequence.setContentProviderClient(client);
-                categoriesSequence.save();
+                modifierSequenceDao.save(categoriesSequence);
             }
         }
         // FIXME: Make sure that the content provider is up
         // This is the wrong place for it, but bleh - better than not having it turned on by default for people who don't go throughl ogin
-        ContentResolver.setSyncAutomatically(app.getCurrentAccount(), ModificationsContentProvider.AUTHORITY, true); // Enable sync by default!
-        EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT)
-                .param("username", app.getCurrentAccount().name)
-                .param("categories-count", categories.size())
-                .param("files-count", photosList.size())
-                .param("source", Contribution.SOURCE_EXTERNAL)
-                .param("result", "queued")
-                .log();
+        ContentResolver.setSyncAutomatically(sessionManager.getCurrentAccount(), ModificationsContentProvider.MODIFICATIONS_AUTHORITY, true); // Enable sync by default!
         finish();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case android.R.id.home:
-                if(mediaDetails.isVisible()) {
+                if (mediaDetails.isVisible()) {
                     getSupportFragmentManager().popBackStack();
                 }
                 return true;
@@ -202,14 +196,12 @@ public  class       MultipleShareActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        uploadController = new UploadController();
 
         setContentView(R.layout.activity_multiple_uploads);
-        app = CommonsApplication.getInstance();
         ButterKnife.bind(this);
         initDrawer();
 
-        if(savedInstanceState != null) {
+        if (savedInstanceState != null) {
             photosList = savedInstanceState.getParcelableArrayList("uploadsList");
         }
 
@@ -225,7 +217,7 @@ public  class       MultipleShareActivity
     }
 
     private void showDetail(int i) {
-        if(mediaDetails == null ||!mediaDetails.isVisible()) {
+        if (mediaDetails == null || !mediaDetails.isVisible()) {
             mediaDetails = new MediaDetailPagerFragment(true);
             getSupportFragmentManager()
                     .beginTransaction()
@@ -245,14 +237,14 @@ public  class       MultipleShareActivity
 
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
-        app.getMWApi().setAuthCookie(authCookie);
+        mwApi.setAuthCookie(authCookie);
         Intent intent = getIntent();
 
-        if(intent.getAction().equals(Intent.ACTION_SEND_MULTIPLE)) {
-            if(photosList == null) {
+        if (intent.getAction().equals(Intent.ACTION_SEND_MULTIPLE)) {
+            if (photosList == null) {
                 photosList = new ArrayList<>();
                 ArrayList<Uri> urisList = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
-                for(int i=0; i < urisList.size(); i++) {
+                for (int i = 0; i < urisList.size(); i++) {
                     Contribution up = new Contribution();
                     Uri uri = urisList.get(i);
                     up.setLocalUri(uri);
@@ -265,8 +257,8 @@ public  class       MultipleShareActivity
             }
 
             uploadsList = (MultipleUploadListFragment) getSupportFragmentManager().findFragmentByTag("uploadsList");
-            if(uploadsList == null) {
-                uploadsList =  new MultipleUploadListFragment();
+            if (uploadsList == null) {
+                uploadsList = new MultipleUploadListFragment();
                 getSupportFragmentManager()
                         .beginTransaction()
                         .add(R.id.uploadsFragmentContainer, uploadsList, "uploadsList")
@@ -285,33 +277,8 @@ public  class       MultipleShareActivity
     }
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        if(categorizationFragment != null && categorizationFragment.isVisible()) {
-            EventLog.schema(CommonsApplication.EVENT_CATEGORIZATION_ATTEMPT)
-                    .param("username", app.getCurrentAccount().name)
-                    .param("categories-count", categorizationFragment.getCurrentSelectedCount())
-                    .param("files-count", photosList.size())
-                    .param("source", Contribution.SOURCE_EXTERNAL)
-                    .param("result", "cancelled")
-                    .log();
-        } else {
-            EventLog.schema(CommonsApplication.EVENT_UPLOAD_ATTEMPT)
-                    .param("username", app.getCurrentAccount().name)
-                    .param("source", getIntent().getStringExtra(UploadService.EXTRA_SOURCE))
-                    .param("multiple", true)
-                    .param("result", "cancelled")
-                    .log();
-        }
-    }
-
-    @Override
     public void onBackStackChanged() {
-        if(mediaDetails != null && mediaDetails.isVisible()) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        } else {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        }
+        getSupportActionBar().setDisplayHomeAsUpEnabled(mediaDetails != null && mediaDetails.isVisible()) ;
     }
 
 }

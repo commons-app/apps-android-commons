@@ -31,15 +31,12 @@ class CategoriesRenderer extends Renderer<CategoryItem> {
 
     @Override
     protected void hookListeners(View view) {
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CategoryItem item = getContent();
-                item.setSelected(!item.isSelected());
-                checkedView.setChecked(item.isSelected());
-                if (listener != null) {
-                    listener.categoryClicked(item);
-                }
+        view.setOnClickListener(v -> {
+            CategoryItem item = getContent();
+            item.setSelected(!item.isSelected());
+            checkedView.setChecked(item.isSelected());
+            if (listener != null) {
+                listener.categoryClicked(item);
             }
         });
     }
