@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import fr.free.nrw.commons.License;
 import fr.free.nrw.commons.LicenseList;
 import fr.free.nrw.commons.Media;
@@ -53,24 +55,33 @@ public class MediaDetailFragment extends Fragment {
         return mf;
     }
 
-    private MediaWikiImageView image;
-    private MediaDetailSpacer spacer;
+    @BindView(R.id.mediaDetailImage)
+    MediaWikiImageView image;
+    @BindView(R.id.mediaDetailSpacer)
+    MediaDetailSpacer spacer;
     private int initialListTop = 0;
 
-    private TextView title;
-    private TextView desc;
-    private TextView license;
-    private TextView coordinates;
-    private TextView uploadedDate;
-    private LinearLayout categoryContainer;
-    private ScrollView scrollView;
+    @BindView(R.id.mediaDetailTitle)
+    TextView title;
+    @BindView(R.id.mediaDetailDesc)
+    TextView desc;
+    @BindView(R.id.mediaDetailLicense)
+    TextView license;
+    @BindView(R.id.mediaDetailCoordinates)
+    TextView coordinates;
+    @BindView(R.id.mediaDetailuploadedDate)
+    TextView uploadedDate;
+    @BindView(R.id.mediaDetailCategoryContainer)
+    LinearLayout categoryContainer;
+    @BindView(R.id.mediaDetailScrollView)
+    ScrollView scrollView;
     private ArrayList<String> categoryNames;
     private boolean categoriesLoaded = false;
     private boolean categoriesPresent = false;
     private ViewTreeObserver.OnGlobalLayoutListener layoutListener; // for layout stuff, only used once!
     private ViewTreeObserver.OnScrollChangedListener scrollListener;
     DataSetObserver dataObserver;
-    private AsyncTask<Void,Void,Boolean> detailFetchTask;
+    private AsyncTask<Void, Void, Boolean> detailFetchTask;
     private LicenseList licenseList;
 
     @Override
@@ -89,7 +100,7 @@ public class MediaDetailFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        detailProvider = (MediaDetailPagerFragment.MediaDetailProvider)getActivity();
+        detailProvider = (MediaDetailPagerFragment.MediaDetailProvider) getActivity();
 
         if (savedInstanceState != null) {
             editable = savedInstanceState.getBoolean("editable");
@@ -104,19 +115,7 @@ public class MediaDetailFragment extends Fragment {
         categoryNames.add(getString(R.string.detail_panel_cats_loading));
 
         final View view = inflater.inflate(R.layout.fragment_media_detail, container, false);
-
-        image = (MediaWikiImageView) view.findViewById(R.id.mediaDetailImage);
-        scrollView = (ScrollView) view.findViewById(R.id.mediaDetailScrollView);
-
-        // Detail consists of a list view with main pane in header view, plus category list.
-        spacer = (MediaDetailSpacer) view.findViewById(R.id.mediaDetailSpacer);
-        title = (TextView) view.findViewById(R.id.mediaDetailTitle);
-        desc = (TextView) view.findViewById(R.id.mediaDetailDesc);
-        license = (TextView) view.findViewById(R.id.mediaDetailLicense);
-        coordinates = (TextView) view.findViewById(R.id.mediaDetailCoordinates);
-        uploadedDate = (TextView) view.findViewById(R.id.mediaDetailuploadeddate);
-        categoryContainer = (LinearLayout) view.findViewById(R.id.mediaDetailCategoryContainer);
-
+        ButterKnife.bind(this, view);
         licenseList = new LicenseList(getActivity());
 
         // Progressively darken the image in the background when we scroll detail pane up
@@ -150,7 +149,8 @@ public class MediaDetailFragment extends Fragment {
         return view;
     }
 
-    @Override public void onResume() {
+    @Override
+    public void onResume() {
         super.onResume();
         Media media = detailProvider.getMediaAtPosition(index);
         if (media == null) {
@@ -238,7 +238,7 @@ public class MediaDetailFragment extends Fragment {
         }
         if (scrollListener != null) {
             getView().getViewTreeObserver().removeOnScrollChangedListener(scrollListener);
-            scrollListener  = null;
+            scrollListener = null;
         }
         if (dataObserver != null) {
             detailProvider.unregisterDataSetObserver(dataObserver);
@@ -283,7 +283,7 @@ public class MediaDetailFragment extends Fragment {
 
     private View buildCatLabel(final String catName) {
         final View item = getLayoutInflater(null).inflate(R.layout.detail_category_item, null, false);
-        final CompatTextView textView = (CompatTextView)item.findViewById(R.id.mediaDetailCategoryItemText);
+        final CompatTextView textView = (CompatTextView) item.findViewById(R.id.mediaDetailCategoryItemText);
 
         textView.setText(catName);
         if (categoriesLoaded && categoriesPresent) {
@@ -302,7 +302,7 @@ public class MediaDetailFragment extends Fragment {
         // You must face the darkness alone
         int scrollY = scrollView.getScrollY();
         int scrollMax = getView().getHeight();
-        float scrollPercentage = (float)scrollY / (float)scrollMax;
+        float scrollPercentage = (float) scrollY / (float) scrollMax;
         final float transparencyMax = 0.75f;
         if (scrollPercentage > transparencyMax) {
             scrollPercentage = transparencyMax;
@@ -356,7 +356,9 @@ public class MediaDetailFragment extends Fragment {
     }
 
 
-    private @Nullable String licenseLink(Media media) {
+    private
+    @Nullable
+    String licenseLink(Media media) {
         String licenseKey = media.getLicense();
         if (licenseKey == null || licenseKey.equals("")) {
             return null;

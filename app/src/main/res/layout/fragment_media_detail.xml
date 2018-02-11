@@ -232,7 +232,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/mediaDetailuploadeddate"
+                        android:id="@+id/mediaDetailuploadedDate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
