@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -99,8 +100,10 @@ public class NearbyPlaces {
                 continue;
             }
 
-            String[] fields = line.split("\t");
+            // 02-11 21:14:11.199: V/NearbyPlaces(7015): Fields: ["Point(175.28333333 -37.78333333)"^^<http://www.opengis.net/ont/geosparql#wktLiteral>, <http://www.wikidata.org/entity/Q869420>, "Roman Catholic Diocese of Hamilton, New Zealand"@en, <http://www.wikidata.org/entity/Q3146899>, "diocese of the Catholic Church"@en, , , Roman Catholic Diocese of Hamilton, New Zealand, <https://en.wikipedia.org/wiki/Roman_Catholic_Diocese_of_Hamilton,_New_Zealand>, <https://commons.wikimedia.org/wiki/Category:Roman_Catholic_Diocese_of_Hamilton,_New_Zealand>
 
+            String[] fields = line.split("\t");
+            Timber.v("Fields: " + Arrays.toString(fields));
             String point = fields[0];
             String name = Utils.stripLocalizedString(fields[2]);
             String type = Utils.stripLocalizedString(fields[4]);
