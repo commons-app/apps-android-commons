@@ -101,8 +101,8 @@ public class NearbyPlaces {
             }
 
             // Fields: ["Point(153.073 -27.6111)"^^<http://www.opengis.net/ont/geosparql#wktLiteral>, <http://www.wikidata.org/entity/Q7271010>, "Queensland State Archives"@en, <http://www.wikidata.org/entity/Q327333>, "government agency"@en, , , Images from the Queensland State Archives, <https://en.wikipedia.org/wiki/Queensland_State_Archives>, <https://commons.wikimedia.org/wiki/Category:Images_from_the_Queensland_State_Archives>
-
-
+            // Produces: 02-11 21:32:45.015: V/NearbyPlaces(9300): Name: Queensland State Archives, type: government agency, category: Images from the Queensland State Archives, wikipediaSitelink: <https://en.wikipedia.org/wiki/Queensland_State_Archives>, commonsSitelink: <https://commons.wikimedia.org/wiki/Category:Images_from_the_Queensland_State_Archives>
+            
             String[] fields = line.split("\t");
             Timber.v("Fields: " + Arrays.toString(fields));
             String point = fields[0];
@@ -113,7 +113,7 @@ public class NearbyPlaces {
             String category = Utils.stripLocalizedString(fields[7]);
             String wikipediaSitelink = Utils.stripLocalizedString(fields[8]);
             String commonsSitelink = Utils.stripLocalizedString(fields[9]);
-            
+
             Timber.v("Name: " + name + ", type: " + type + ", category: " + category + ", wikipediaSitelink: " + wikipediaSitelink + ", commonsSitelink: " + commonsSitelink);
 
             double latitude;
