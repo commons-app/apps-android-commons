@@ -100,17 +100,21 @@ public class NearbyPlaces {
                 continue;
             }
 
-            // 02-11 21:14:11.199: V/NearbyPlaces(7015): Fields: ["Point(175.28333333 -37.78333333)"^^<http://www.opengis.net/ont/geosparql#wktLiteral>, <http://www.wikidata.org/entity/Q869420>, "Roman Catholic Diocese of Hamilton, New Zealand"@en, <http://www.wikidata.org/entity/Q3146899>, "diocese of the Catholic Church"@en, , , Roman Catholic Diocese of Hamilton, New Zealand, <https://en.wikipedia.org/wiki/Roman_Catholic_Diocese_of_Hamilton,_New_Zealand>, <https://commons.wikimedia.org/wiki/Category:Roman_Catholic_Diocese_of_Hamilton,_New_Zealand>
+            // Fields: ["Point(153.073 -27.6111)"^^<http://www.opengis.net/ont/geosparql#wktLiteral>, <http://www.wikidata.org/entity/Q7271010>, "Queensland State Archives"@en, <http://www.wikidata.org/entity/Q327333>, "government agency"@en, , , Images from the Queensland State Archives, <https://en.wikipedia.org/wiki/Queensland_State_Archives>, <https://commons.wikimedia.org/wiki/Category:Images_from_the_Queensland_State_Archives>
+
 
             String[] fields = line.split("\t");
             Timber.v("Fields: " + Arrays.toString(fields));
             String point = fields[0];
+            String wikiDataLink = Utils.stripLocalizedString(fields[1]);
             String name = Utils.stripLocalizedString(fields[2]);
             String type = Utils.stripLocalizedString(fields[4]);
-            String wikipediaSitelink = Utils.stripLocalizedString(fields[7]);
-            String commonsSitelink = Utils.stripLocalizedString(fields[8]);
-            String wikiDataLink = Utils.stripLocalizedString(fields[1]);
             String icon = fields[5];
+            String category = Utils.stripLocalizedString(fields[7]);
+            String wikipediaSitelink = Utils.stripLocalizedString(fields[8]);
+            String commonsSitelink = Utils.stripLocalizedString(fields[9]);
+            
+            Timber.v("Name: " + name + ", type: " + type + ", category: " + category + ", wikipediaSitelink: " + wikipediaSitelink + ", commonsSitelink: " + commonsSitelink);
 
             double latitude;
             double longitude;
