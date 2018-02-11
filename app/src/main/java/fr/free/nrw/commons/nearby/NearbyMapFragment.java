@@ -425,6 +425,7 @@ public class NearbyMapFragment extends DaggerFragment {
         SharedPreferences.Editor editor = directPrefs.edit();
         editor.putString("Title", place.getName());
         editor.putString("Desc", place.getLongDescription());
+        editor.putString("Category", place.getCategory());
         editor.apply();
     }
 
