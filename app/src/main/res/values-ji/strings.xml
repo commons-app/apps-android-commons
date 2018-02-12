@@ -20,9 +20,9 @@
   <string name="upload_progress_notification_title_finishing">געענדיקט ארויפֿלאדן %1$s</string>
   <string name="upload_failed_notification_title">ארויפֿלאדן %1$s דורכגעפֿאלן</string>
   <string name="upload_failed_notification_subtitle">דרוקט צו באקוקן</string>
-  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
-    <item quantity="one">%d טעקע לאדט אן</item>
-    <item quantity="other">%d טעקעס לאדן אן</item>
+  <plurals name="uploads_pending_notification_indicator">
+    <item quantity="one">%1$d טעקע לאדט אן</item>
+    <item quantity="other">%1$d טעקעס לאדן אן</item>
   </plurals>
   <string name="title_activity_contributions">מײַנע לעצטיקע ארויפֿלאדן</string>
   <string name="contribution_state_queued">אין ריי</string>
@@ -45,14 +45,14 @@
   <string name="categories_search_text_hint">זוכן קאטעגאריעס</string>
   <string name="menu_save_categories">אויפֿהיטן</string>
   <string name="refresh_button">דערפֿרישן</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
+  <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero </item>
     <item quantity="one">איין ארויפֿלאד</item>
-    <item quantity="other">%d ארויפֿלאדן</item>
+    <item quantity="other">%1$d ארויפֿלאדן</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">אנהייבן %d ארויפֿלאד</item>
-    <item quantity="other"> אנהייבן %d ארויפֿלאדן</item>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">אנהייבן %1$d ארויפֿלאד</item>
+    <item quantity="other"> אנהייבן %1$d ארויפֿלאדן</item>
   </plurals>
   <string name="categories_activity_title">קאַטעגאריעס</string>
   <string name="title_activity_settings">איינשטעלונגען</string>

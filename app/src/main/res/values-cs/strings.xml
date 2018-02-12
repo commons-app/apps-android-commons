@@ -74,7 +74,7 @@
   <string name="title_activity_signup">Zaregistrovat se</string>
   <string name="menu_about">O aplikaci</string>
   <string name="about_license">Aplikace Wikimedia Commons je open source software vytvářený a spravovaný členy komunity Wikimedia. Nadace Wikimedia se neúčastní tvorby, vývoje či správy aplikace.</string>
-  <string name="about_improve">Založte nový &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub problém&lt;/a&gt; pro nahlášení chyb a návrhy.</string>
+  <string name="about_improve">Otevřete nové &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;hlášení na GitHubu&lt;/a&gt; pro nahlášení chyb a návrhů.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Ochrana osobních údajů&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Autoři&lt;/a&gt;</string>
   <string name="title_activity_about">O aplikaci</string>
@@ -166,7 +166,7 @@
   <string name="commons_logo">Logo Wikimedia Commons</string>
   <string name="commons_website">Stránka Commons</string>
   <string name="commons_facebook">Facebooková stránka Commons</string>
-  <string name="commons_github">Zdrojový kód Commons Github</string>
+  <string name="commons_github">Zdrojový kód Commons na GitHubu</string>
   <string name="background_image">Obrázek na pozadí</string>
   <string name="mediaimage_failed">Obrázek</string>
   <string name="no_image_found">Nebyl nalezen žádný obrázek</string>
@@ -198,7 +198,7 @@
   <string name="nearby_info_menu_wikidata_article">Položka Wikidat</string>
   <string name="error_while_cache">Chyba při meziukládání obrázků</string>
   <string name="title_info">Unikátní a popisný název pro daný soubor, který bude sloužit jako název souboru. Můžete použít běžný psaný jazyk s mezerami; nezahrnujte koncovku souboru.</string>
-  <string name="description_info">Popište prosím obrázek, jak jen to je možné: Kde byl pořízen? Co znázorňuje? Jaký je kontext obrázku? Popisujte prosím významné předměty nebo osoby na obrázku a nezapomeňte na informace, které není možné snadno odhadnout ze samotného obrázku, jako je například denní doba. Pokud je na obrázku něco neobvyklého, popište co to dělá neobvyklým.</string>
+  <string name="description_info">Popište prosím obrázek, jak jen to je možné: Kde byl pořízen? Co znázorňuje? Jaký je kontext obrázku? Popisujte prosím významné předměty nebo osoby na obrázku a nezapomeňte na informace, které není možné snadno odhadnout ze samotného obrázku, jako je například denní doba, pokud jde o krajinu. Pokud je na obrázku něco neobvyklého, popište, co to dělá neobvyklým.</string>
   <string name="give_permission">Dát povolení</string>
   <string name="use_external_storage">Použít externí úložiště</string>
   <string name="use_external_storage_summary">Uložit obrázky pořízené fotoaparátem, jenž je součástí této aplikace</string>
