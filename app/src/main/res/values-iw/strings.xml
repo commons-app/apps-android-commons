@@ -22,7 +22,7 @@
   <string name="upload_failed_notification_subtitle">נא ללחוץ כדי להציג</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">קובץ אחד מועלה</item>
-    <item quantity="other">%d קבצים מועלים</item>
+    <item quantity="other">%1$d קבצים מועלים</item>
   </plurals>
   <string name="title_activity_contributions">ההעלאות האחרונות שלי</string>
   <string name="contribution_state_queued">בתור</string>
@@ -55,16 +55,17 @@
   <string name="enable_gps">הפעלת GPS</string>
   <string name="contributions_subtitle_zero">לא הועלה עדיין שום דבר</string>
   <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">העלאה אחת</item>
-    <item quantity="other">%d העלאות</item>
+    <item quantity="other">%1$d העלאות</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">התחלת העלאה</item>
-    <item quantity="other">התחלת %d העלאות</item>
+    <item quantity="other">התחלת 1$d% העלאות</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">העלאה אחת</item>
-    <item quantity="other">%d העלאות</item>
+    <item quantity="other">%1$d העלאות</item>
   </plurals>
   <string name="categories_not_found">לא נמצאו קטגוריות בשם %1$s</string>
   <string name="categories_skip_explanation">יש להוסיף קטגוריות כדי שיהיה קל יותר למצוא את התמונות שלך בוויקישיתוף.\nכדי להוסיף קטגוריה יש להתחיל לכתוב.</string>
@@ -164,7 +165,10 @@
   <string name="logout_verification">האם באמת לצאת מהחשבון?</string>
   <string name="commons_logo">סמל ויקישיתוף</string>
   <string name="commons_website">אתר ויקישיתוף</string>
+  <string name="commons_facebook">עמוד הפייסבוק של ויקישיתוף</string>
+  <string name="commons_github">קוד המקור של ויקישיתוף ב־GitHub</string>
   <string name="background_image">תמונת רקע</string>
+  <string name="mediaimage_failed">תמונת המדיה נכשלה</string>
   <string name="no_image_found">לא נמצאה תמונה</string>
   <string name="upload_image">העלאת תמונה</string>
   <string name="welcome_image_mount_zao">הר זאו</string>
@@ -186,6 +190,7 @@
   <string name="navigation_item_feedback">משוב</string>
   <string name="navigation_item_logout">יציאה</string>
   <string name="navigation_item_info">מדריך</string>
+  <string name="navigation_item_notification">הודעות</string>
   <string name="nearby_needs_permissions">אי־אפשר להציג מקומות בסביבה ללא הרשאות מיקום</string>
   <string name="no_description_found">לא נמצא תיאור</string>
   <string name="nearby_info_menu_commons_article">דף קובץ בוויקישיתוף</string>
@@ -204,4 +209,9 @@
   <string name="location_permission_rationale_nearby">נדרשת הרשאה כדי להציג רשימה של מקומות בסביבה</string>
   <string name="get_directions">קבלת כיוונים</string>
   <string name="read_article">קריאה הערך</string>
+  <string name="notifications_welcome">ברוך בואך לוויקישיתוף של ויקימדיה, %1$s! שמחים לראות אותך כאן אצלנו.</string>
+  <string name="notifications_talk_page_message">קיבלת הודעה מאת %1$s בעמוד השיחה שלך</string>
+  <string name="notifications_thank_you_edit">תודה לך על העריכה</string>
+  <string name="notifications_mention">אוזכרת על ידי %2$s ב{{GRAMMAR:תחילית|%1$s}}.</string>
+  <string name="toggle_view_button">החלפת מצב תצוגה</string>
 </resources>

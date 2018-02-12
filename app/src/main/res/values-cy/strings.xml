@@ -22,7 +22,7 @@
   <string name="upload_failed_notification_subtitle">Tapiwch i weld</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">1 ffeil yn uwchlwytho</item>
-    <item quantity="other">%d ffeil yn uwchlwytho</item>
+    <item quantity="other">%1$d ffeil yn uwchlwytho</item>
   </plurals>
   <string name="title_activity_contributions" fuzzy="true">Fy uwchlwythiadau</string>
   <string name="contribution_state_queued">Yn y ciw</string>
@@ -52,15 +52,15 @@
   <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Dim Uwchlwythiadau eto</item>
     <item quantity="one">1 uwchlwythiad</item>
-    <item quantity="other">%d uwchlwythiad</item>
+    <item quantity="other">%1$d uwchlwythiad</item>
   </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Cychwyn uwchlwytho 1 ffeil</item>
-    <item quantity="other">Cychwyn uwchlwytho %d ffeil</item>
+    <item quantity="other">Cychwyn uwchlwytho %1$d ffeil</item>
   </plurals>
   <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 uwchlwythiad</item>
-    <item quantity="other">%d uwchlwythiad</item>
+    <item quantity="other">%1$d uwchlwythiad</item>
   </plurals>
   <string name="categories_not_found">Dim categori\'n cyfateb i %1$s ar gael</string>
   <string name="categories_skip_explanation" fuzzy="true">Cychwynwch deipio i ychwanegu categoriau.\nCyffyrddwch y neges hon (neu ddewis Nôl) i fynd i\'r cam nesaf.</string>

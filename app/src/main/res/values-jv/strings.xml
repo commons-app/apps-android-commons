@@ -20,7 +20,7 @@
   <string name="upload_progress_notification_title_finishing">Rampung ngunggah %1$s</string>
   <string name="upload_failed_notification_title">Wurung ngunggah %1$s</string>
   <string name="upload_failed_notification_subtitle">Tunyuk saperlu ndeleng</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">%d barkas lagi diunggah</item>
   </plurals>
   <string name="title_activity_contributions">Unggahanku Sing Anyar</string>
@@ -53,18 +53,18 @@
   <string name="gps_disabled">GPS dipatèni ing pirantiné panjenengan. Panjenengan arep ngurubaké?</string>
   <string name="enable_gps">Urubaké GPS</string>
   <string name="contributions_subtitle_zero">Durung ana unggahan</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d unggahan</item>
-    <item quantity="other">%d unggahan</item>
+    <item quantity="one">%1$d unggahan</item>
+    <item quantity="other">%1$d unggahan</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">Miwiti %d unggahan</item>
-    <item quantity="other">Miwiti %d unggahan</item>
+  <plurals name="starting_multiple_uploads" fuzzy="true">
+    <item quantity="one">Miwiti %1$d unggahan</item>
+    <item quantity="other">Miwiti %1$d unggahan</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%d unggahan</item>
-    <item quantity="other">%d unggahan</item>
+  <plurals name="multiple_uploads_title" fuzzy="true">
+    <item quantity="one">%1$d unggahan</item>
+    <item quantity="other">%1$d unggahan</item>
   </plurals>
   <string name="categories_not_found">Ora ana kategori sing cocog karo %1$s</string>
   <string name="categories_activity_title">Kategori</string>

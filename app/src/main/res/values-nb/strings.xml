@@ -20,9 +20,9 @@
   <string name="upload_progress_notification_title_finishing">Avslutter opplasting av %1$s</string>
   <string name="upload_failed_notification_title">Opplastingen av %1$s feilet</string>
   <string name="upload_failed_notification_subtitle">Trykk for å vise</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d fil lastes opp</item>
-    <item quantity="other">%d filer lastes opp</item>
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
+    <item quantity="one">%1$d fil lastes opp</item>
+    <item quantity="other">%1$d filer lastes opp</item>
   </plurals>
   <string name="title_activity_contributions">Mine nylige opplastinger</string>
   <string name="contribution_state_queued">I ventekø</string>
@@ -54,18 +54,18 @@
   <string name="gps_disabled">GPS er slått av på denne enheten. Ønsker du å slå den på?</string>
   <string name="enable_gps">Slå på GPS</string>
   <string name="contributions_subtitle_zero">Ingen opplastinger ennå</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d opplasting</item>
-    <item quantity="other">%d opplastinger</item>
+    <item quantity="one">%1$d opplasting</item>
+    <item quantity="other">%1$d opplastinger</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Starter %d opplasting</item>
-    <item quantity="other">Starter %d opplastinger</item>
+    <item quantity="one">Starter %1$d opplasting</item>
+    <item quantity="other">Starter %1$d opplastinger</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%d opplasting</item>
-    <item quantity="other">%d opplastinger</item>
+  <plurals name="multiple_uploads_title" fuzzy="true">
+    <item quantity="one">%1$d opplasting</item>
+    <item quantity="other">%1$d opplastinger</item>
   </plurals>
   <string name="categories_not_found">Ingen kategorier som stemte overens med %1$s funnet</string>
   <string name="categories_skip_explanation">Legg til kategorier for å gjøre bildene dine lettere å finne på Wikimedia Commons.\n\nBegynn å skrive navnet på kategoriene.</string>
@@ -74,7 +74,7 @@
   <string name="title_activity_signup">Registrer deg</string>
   <string name="menu_about">Om</string>
   <string name="about_license">Wikimedia Commons-appen er åpen kildekode og er skapt og vedlikeholdt av stipendiater og frivillige fra Wikimedia-fellesskapet. Wikimedia Foundation er ikke involvert i utviklingen eller vedlikeholdet av appen.</string>
-  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kildekode&lt;/a&gt; og &lt;a href=\"https://commons-app.github.io/\"&gt;nettside&lt;/a&gt; på GitHub. Opprett en ny &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-sak&lt;/a&gt; for feilrapporter og forslag.</string>
+  <string name="about_improve">Opprett en ny &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-sak&lt;/a&gt; for feilrapporter og forslag.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Personvernpolicy&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-comons/blob/master/CREDITS\"&gt;Bidragsytere&lt;/a&gt;</string>
   <string name="title_activity_about">Om</string>
@@ -164,6 +164,9 @@
   <string name="login_failed_2fa_not_supported">Tofaktorautentisering støttes ikke ennå.</string>
   <string name="logout_verification">Ønsker du virkelig å logge ut?</string>
   <string name="commons_logo">Commons-logo</string>
+  <string name="commons_website">Commons-nettsted</string>
+  <string name="commons_facebook">Commons\' Facebook-side</string>
+  <string name="commons_github">Commons\' kildekode på GitHub</string>
   <string name="background_image">Bakgrunnsbilde</string>
   <string name="mediaimage_failed">Mediebilde feilet</string>
   <string name="no_image_found">Intet bilde funnet</string>
@@ -207,4 +210,8 @@
   <string name="location_permission_rationale_nearby">Tillatelse kreves for å vise listen over steder i nærheten</string>
   <string name="get_directions">FÅ VEIBESKRIVELSE</string>
   <string name="read_article">LES ARTIKKEL</string>
+  <string name="notifications_welcome">Velkommen til Wikimedia Commons, %1$s! Vi er glade for at du er her.</string>
+  <string name="notifications_talk_page_message">%1$s la igjen en beskjed på diskusjonssiden din</string>
+  <string name="notifications_thank_you_edit">Takk for at du har gjort en redigering</string>
+  <string name="notifications_mention">%1$s nevnte deg på %2$s.</string>
 </resources>

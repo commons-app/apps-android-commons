@@ -1,12 +1,13 @@
 package fr.free.nrw.commons.mwapi;
 
+import android.content.SharedPreferences;
 import android.os.Build;
+import android.preference.PreferenceManager;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
@@ -36,11 +37,13 @@ public class ApacheHttpClientMediaWikiApiTest {
 
     private ApacheHttpClientMediaWikiApi testObject;
     private MockWebServer server;
+    private SharedPreferences sharedPreferences;
 
     @Before
     public void setUp() throws Exception {
         server = new MockWebServer();
-        testObject = new ApacheHttpClientMediaWikiApi(RuntimeEnvironment.application, "http://" + server.getHostName() + ":" + server.getPort() + "/");
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(RuntimeEnvironment.application);
+        testObject = new ApacheHttpClientMediaWikiApi(RuntimeEnvironment.application, "http://" + server.getHostName() + ":" + server.getPort() + "/", sharedPreferences);
         testObject.setWikiMediaToolforgeUrl("http://" + server.getHostName() + ":" + server.getPort() + "/");
     }
 
@@ -126,11 +129,11 @@ public class ApacheHttpClientMediaWikiApiTest {
 
         RecordedRequest loginRequest = assertBasicRequestParameters(server, "POST");
         body = parseBody(loginRequest.getBody().readUtf8());
-        assertEquals("1", body.get("rememberMe"));
+        assertEquals("true", body.get("rememberMe"));
         assertEquals("foo", body.get("username"));
         assertEquals("bar", body.get("password"));
         assertEquals("baz", body.get("logintoken"));
-        assertEquals("1", body.get("logincontinue"));
+        assertEquals("true", body.get("logincontinue"));
         assertEquals("2fa", body.get("OATHToken"));
         assertEquals("xml", body.get("format"));
 

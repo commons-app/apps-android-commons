@@ -22,7 +22,7 @@
   <string name="upload_failed_notification_subtitle">Tippen zum Betrachten</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Eine Datei wird hochgeladen</item>
-    <item quantity="other">%d Dateien werden hochgeladen</item>
+    <item quantity="other">%1$d Dateien werden hochgeladen</item>
   </plurals>
   <string name="title_activity_contributions">Meine kürzlich hochgeladenen Dateien</string>
   <string name="contribution_state_queued">In der Warteschlange</string>
@@ -57,15 +57,15 @@
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">Eine hochgeladene Datei</item>
-    <item quantity="other">%d hochgeladene Dateien</item>
+    <item quantity="other">%1$d hochgeladene Dateien</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Starte einen Upload</item>
-    <item quantity="other">Starte %d Uploads</item>
+    <item quantity="other">Starte %1$d Uploads</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">Eine hochgeladene Datei</item>
-    <item quantity="other">%d hochgeladene Dateien</item>
+    <item quantity="other">%1$d hochgeladene Dateien</item>
   </plurals>
   <string name="categories_not_found">Die Kategorie „%1$s“ wurde nicht gefunden</string>
   <string name="categories_skip_explanation">Füge Kategorien hinzu, um deine Bilder auf Wikimedia Commons auffindbarer zu machen.\nBeginne mit der Eingabe, um Kategorien hinzuzufügen.</string>
@@ -210,8 +210,9 @@
   <string name="location_permission_rationale_nearby">Berechtigung zur Anzeige einer Liste mit Orten in der Nähe erforderlich</string>
   <string name="get_directions">RICHTUNGEN ABRUFEN</string>
   <string name="read_article">ARTIKEL LESEN</string>
-  <string name="notifications_welcome">Willkommen auf Wikimedia Commons, %s! Wir sind froh, dass du hier bist.</string>
-  <string name="notifications_talk_page_message">%s hinterließ eine Nachricht auf deiner Diskussionsseite</string>
+  <string name="notifications_welcome">Willkommen auf Wikimedia Commons, %1$s! Wir sind froh, dass du hier bist.</string>
+  <string name="notifications_talk_page_message">%1$s hinterließ eine Nachricht auf deiner Diskussionsseite</string>
   <string name="notifications_thank_you_edit">Vielen Dank für deine Bearbeitung</string>
-  <string name="notifications_mention" formatted="false">%s erwähnte dich auf %s.</string>
+  <string name="notifications_mention">%1$s erwähnte dich auf %2$s.</string>
+  <string name="toggle_view_button">Ansicht wechseln</string>
 </resources>

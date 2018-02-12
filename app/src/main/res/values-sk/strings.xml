@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">Nahrávanie %1$s zlyhalo</string>
   <string name="upload_failed_notification_subtitle">Kliknutím zobrazíte</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">nahráva sa %d súbor</item>
-    <item quantity="other">nahrávajú sa %d súbory</item>
+    <item quantity="one">nahráva sa %1$d súbor</item>
+    <item quantity="other">nahrávajú sa %1$d súbory</item>
   </plurals>
   <string name="title_activity_contributions">Moje nedávno nahrané</string>
   <string name="contribution_state_queued">Nahrávanie je v poradí</string>
@@ -151,5 +151,6 @@
   <string name="navigation_item_feedback">Spätná väzba</string>
   <string name="navigation_item_logout">Odhlásiť sa</string>
   <string name="navigation_item_info">Návod</string>
+  <string name="navigation_item_notification">Upozornenia</string>
   <string name="no_description_found">nenašiel sa žiaden popis</string>
 </resources>

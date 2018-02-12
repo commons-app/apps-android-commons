@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">Postavljanje datoteke %1$s nije uspjelo</string>
   <string name="upload_failed_notification_subtitle">Dodirnite da biste vidjeli</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">postavlja se %d datoteka</item>
-    <item quantity="other">postavlja se %d datoteka</item>
+    <item quantity="one">postavlja se %1$d datoteka</item>
+    <item quantity="other">postavlja se %1$d datoteka</item>
   </plurals>
   <string name="title_activity_contributions">Moje nedavno postavljene datoteke</string>
   <string name="contribution_state_queued">Na čekanju</string>
@@ -54,18 +54,18 @@
   <string name="gps_disabled">GPS je onemogućen na Vašem uređaju. Želite li ga omogućiti?</string>
   <string name="enable_gps">Omogući GPS</string>
   <string name="contributions_subtitle_zero">Zasad nema postavljenih datoteka</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">postavljena %d datoteka</item>
-    <item quantity="other">postavljenih datoteka: %d</item>
+    <item quantity="one">postavljena %1$d datoteka</item>
+    <item quantity="other">postavljenih datoteka: %1$d</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">Započinjem postavljanje %d datoteke</item>
-    <item quantity="other">Započinjem postavljanje %d datoteka/-e</item>
+  <plurals name="starting_multiple_uploads" fuzzy="true">
+    <item quantity="one">Započinjem postavljanje %1$d datoteke</item>
+    <item quantity="other">Započinjem postavljanje %1$d datoteka/-e</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%d postavljanje</item>
-    <item quantity="other">%d postavljanja</item>
+  <plurals name="multiple_uploads_title" fuzzy="true">
+    <item quantity="one">%1$d postavljanje</item>
+    <item quantity="other">%1$d postavljanja</item>
   </plurals>
   <string name="categories_not_found">Nema kategorija koje odgovoraju %1$s</string>
   <string name="categories_skip_explanation" fuzzy="true">Dodajte kategorije da biste korisnicima olakšali pronalaženje slika na Wikimedia Commonsu.\n\nPočnite pisati da biste dodali kategoriju.\nDodirnite ovu poruku (ili pritisnite dugme \"nazad\") da biste preskočili ovaj korak.</string>

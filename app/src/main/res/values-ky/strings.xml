@@ -20,7 +20,7 @@
   <string name="upload_failed_notification_subtitle">Көрүү үчүн басыңыз</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">1 файл жүктөлүүдө</item>
-    <item quantity="other">%d файл жүктөлүүдө</item>
+    <item quantity="other">%1$d файл жүктөлүүдө</item>
   </plurals>
   <string name="title_activity_contributions" fuzzy="true">Менин жүктөөлөрүм</string>
   <string name="contribution_state_queued">Кезек</string>
@@ -49,15 +49,15 @@
   <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Азырынча жүктөөлөр жок</item>
     <item quantity="one">1 жүктөө</item>
-    <item quantity="other">%d жүктөө</item>
+    <item quantity="other">%1$d жүктөө</item>
   </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">1 жүктөө башталды</item>
-    <item quantity="other">%d жүктөө башталды</item>
+    <item quantity="other">%1$d жүктөө башталды</item>
   </plurals>
   <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 жүктөө</item>
-    <item quantity="other">%d жүктөө</item>
+    <item quantity="other">%1$d жүктөө</item>
   </plurals>
   <string name="categories_not_found">%1$s түрмөктөрү табылган жок</string>
   <string name="categories_skip_explanation" fuzzy="true">Уикиказынада Сиздин сүрөттөрдү жеңил табуу үчүн түрмөктөрдү кошуңуз.\n\nТүрмөктөрдү жазууну баштаңыз.\nБул кадамды аттап өтүү үчүн, бул билдирүүнү (же кийинкини) басыңыз.</string>

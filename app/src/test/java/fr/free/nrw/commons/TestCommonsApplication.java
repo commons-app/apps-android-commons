@@ -84,12 +84,12 @@ public class TestCommonsApplication extends CommonsApplication {
                         }
 
                         @Override
-                        public SessionManager providesSessionManager(Context context, MediaWikiApi mediaWikiApi) {
+                        public SessionManager providesSessionManager(Context context, MediaWikiApi mediaWikiApi, SharedPreferences sharedPreferences) {
                             return sessionManager;
                         }
 
                         @Override
-                        public MediaWikiApi provideMediaWikiApi(Context context) {
+                        public MediaWikiApi provideMediaWikiApi(Context context, SharedPreferences sharedPreferences) {
                             return mediaWikiApi;
                         }
 

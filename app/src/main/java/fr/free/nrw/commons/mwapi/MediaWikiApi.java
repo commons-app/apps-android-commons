@@ -12,6 +12,8 @@ import io.reactivex.Observable;
 import io.reactivex.Single;
 
 public interface MediaWikiApi {
+    String getUserAgent();
+
     String getAuthCookie();
 
     void setAuthCookie(String authCookie);

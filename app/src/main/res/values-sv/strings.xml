@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">Uppladdning av %1$s misslyckades</string>
   <string name="upload_failed_notification_subtitle">Tryck för att visa</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d fil laddas upp</item>
-    <item quantity="other">%d filer laddas upp</item>
+    <item quantity="one">%1$d fil laddas upp</item>
+    <item quantity="other">%1$d filer laddas upp</item>
   </plurals>
   <string name="title_activity_contributions">Mina senaste uppladdningar</string>
   <string name="contribution_state_queued">Köade</string>
@@ -56,16 +56,16 @@
   <string name="contributions_subtitle_zero">Inga uppladdningar ännu</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d uppladdning</item>
-    <item quantity="other">%d uppladdningar</item>
+    <item quantity="one">%1$d uppladdning</item>
+    <item quantity="other">%1$d uppladdningar</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Startar %d uppladdning</item>
-    <item quantity="other">Startar %d uppladdningar</item>
+    <item quantity="one">Startar %1$d uppladdning</item>
+    <item quantity="other">Startar %1$d uppladdningar</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d uppladdning</item>
-    <item quantity="other">%d uppladdningar</item>
+    <item quantity="one">%1$d uppladdning</item>
+    <item quantity="other">%1$d uppladdningar</item>
   </plurals>
   <string name="categories_not_found">Inga kategorier som stämmer överens med %1$s hittades</string>
   <string name="categories_skip_explanation">Lägg till kategorier för att göra dina bilder enklare att hitta på Wikimedia Commons.\n\nBörja skriva för att lägga till kategorier.</string>
@@ -210,8 +210,9 @@
   <string name="location_permission_rationale_nearby">Behörighet krävs för att visa en lista över platser i närheten</string>
   <string name="get_directions">FÅ VÄGBESKRIVNINGAR</string>
   <string name="read_article">LÄS ARTIKEL</string>
-  <string name="notifications_welcome">Välkommen till Wikimedia Commons, %s! Vi är glada att du är här.</string>
-  <string name="notifications_talk_page_message">%s lämnade ett meddelande på din diskussionssida</string>
+  <string name="notifications_welcome">Välkommen till Wikimedia Commons, %1$s! Vi är glada att du är här.</string>
+  <string name="notifications_talk_page_message">%1$s lämnade ett meddelande på din diskussionssida</string>
   <string name="notifications_thank_you_edit">Tack för att du gjorde en redigering</string>
-  <string name="notifications_mention" formatted="false">%s nämnde dig på %s.</string>
+  <string name="notifications_mention">%1$s nämnde dig på %2$s.</string>
+  <string name="toggle_view_button">Växla vy</string>
 </resources>

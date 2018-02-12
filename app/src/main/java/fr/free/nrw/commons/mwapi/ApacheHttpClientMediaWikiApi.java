@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.mwapi;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -60,8 +61,9 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
     private AbstractHttpClient httpClient;
     private MWApi api;
     private Context context;
+    private SharedPreferences sharedPreferences;
 
-    public ApacheHttpClientMediaWikiApi(Context context, String apiURL) {
+    public ApacheHttpClientMediaWikiApi(Context context, String apiURL, SharedPreferences sharedPreferences) {
         this.context = context;
         BasicHttpParams params = new BasicHttpParams();
         SchemeRegistry schemeRegistry = new SchemeRegistry();
@@ -69,9 +71,16 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         final SSLSocketFactory sslSocketFactory = SSLSocketFactory.getSocketFactory();
         schemeRegistry.register(new Scheme("https", sslSocketFactory, 443));
         ClientConnectionManager cm = new ThreadSafeClientConnManager(params, schemeRegistry);
-        params.setParameter(CoreProtocolPNames.USER_AGENT, "Commons/" + BuildConfig.VERSION_NAME + " (https://mediawiki.org/wiki/Apps/Commons) Android/" + Build.VERSION.RELEASE);
+        params.setParameter(CoreProtocolPNames.USER_AGENT, getUserAgent());
         httpClient = new DefaultHttpClient(cm, params);
         api = new MWApi(apiURL, httpClient);
+        this.sharedPreferences = sharedPreferences;
+    }
+
+    @Override
+    @NonNull
+    public String getUserAgent() {
+        return "Commons/" + BuildConfig.VERSION_NAME + " (https://mediawiki.org/wiki/Apps/Commons) Android/" + Build.VERSION.RELEASE;
     }
 
     @VisibleForTesting
@@ -86,11 +95,13 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
      * @throws IOException On api request IO issue
      */
     public String login(String username, String password) throws IOException {
+        String loginToken = getLoginToken();
+        Timber.d("Login token is %s", loginToken);
         return getErrorCodeToReturn(api.action("clientlogin")
                 .param("rememberMe", "1")
                 .param("username", username)
                 .param("password", password)
-                .param("logintoken", getLoginToken())
+                .param("logintoken", loginToken)
                 .param("loginreturnurl", "https://commons.wikimedia.org")
                 .post());
     }
@@ -103,12 +114,14 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
      * @throws IOException On api request IO issue
      */
     public String login(String username, String password, String twoFactorCode) throws IOException {
+        String loginToken = getLoginToken();
+        Timber.d("Login token is %s", loginToken);
         return getErrorCodeToReturn(api.action("clientlogin")
-                .param("rememberMe", "1")
+                .param("rememberMe", "true")
                 .param("username", username)
                 .param("password", password)
-                .param("logintoken", getLoginToken())
-                .param("logincontinue", "1")
+                .param("logintoken", loginToken)
+                .param("logincontinue", "true")
                 .param("OATHToken", twoFactorCode)
                 .post());
     }
@@ -133,19 +146,34 @@ public class ApacheHttpClientMediaWikiApi implements MediaWikiApi {
         String status = loginApiResult.getString("/api/clientlogin/@status");
         if (status.equals("PASS")) {
             api.isLoggedIn = true;
+            setAuthCookieOnLogin(true);
             return status;
         } else if (status.equals("FAIL")) {
+            setAuthCookieOnLogin(false);
             return loginApiResult.getString("/api/clientlogin/@messagecode");
         } else if (
                 status.equals("UI")
                         && loginApiResult.getString("/api/clientlogin/requests/_v/@id").equals("TOTPAuthenticationRequest")
                         && loginApiResult.getString("/api/clientlogin/requests/_v/@provider").equals("Two-factor authentication (OATH).")
                 ) {
+            setAuthCookieOnLogin(false);
             return "2FA";
         }
 
         // UI, REDIRECT, RESTART
         return "genericerror-" + status;
+    }
+
+    private void setAuthCookieOnLogin(boolean isLoggedIn) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        if (isLoggedIn) {
+            editor.putBoolean("isUserLoggedIn", true);
+            editor.putString("getAuthCookie", api.getAuthCookie());
+        } else {
+            editor.putBoolean("isUserLoggedIn", false);
+            editor.remove("getAuthCookie");
+        }
+        editor.apply();
     }
 
     @Override

@@ -22,7 +22,7 @@
   <string name="upload_failed_notification_subtitle">Toque pa velo</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Xubiendo un ficheru</item>
-    <item quantity="other">Xubiendo %d ficheros</item>
+    <item quantity="other">Xubiendo %1$d ficheros</item>
   </plurals>
   <string name="title_activity_contributions">Les mios xubes recién</string>
   <string name="contribution_state_queued">En cola</string>
@@ -56,16 +56,16 @@
   <string name="contributions_subtitle_zero">Inda nun hai xubes</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">1 carga</item>
-    <item quantity="other">%d cargues</item>
+    <item quantity="one">%1$d carga</item>
+    <item quantity="other">%1$d cargues</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Principiando 1 carga</item>
-    <item quantity="other">Principiando %d cargues</item>
+    <item quantity="one">Principiando %1$d carga</item>
+    <item quantity="other">Principiando %1$d cargues</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">1 carga</item>
-    <item quantity="other">%d cargues</item>
+    <item quantity="one">%1$d carga</item>
+    <item quantity="other">%1$d cargues</item>
   </plurals>
   <string name="categories_not_found">Nun s\'alcontró denguna categoría que case con %1$s</string>
   <string name="categories_skip_explanation">Amiesta categoríes pa facer les imaxes más fáciles d\'alcontrar en Wikimedia Commons.\nPrincipia a escribir p\'amestar categoríes.</string>
@@ -74,7 +74,7 @@
   <string name="title_activity_signup">Date d\'alta</string>
   <string name="menu_about">Tocante a</string>
   <string name="about_license">La app de Wikimedia Commons ye software de códigu abiertu, creáu y calteníu por becaos y voluntarios de la comunidá de Wikimedia. La Fundación Wikimedia nun participa na creación, desendolcu nin caltenimientu de la app.</string>
-  <string name="about_improve" fuzzy="true">El &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;códigu fonte&lt;/a&gt; ya\'l &lt;a href=\"https://commons-app.github.io/\"&gt;sitiu web&lt;/a&gt; tán en GitHub. Crea una nueva &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;incidencia en GitHub&lt;/a&gt; pa informar de problemes y suxerencies.</string>
+  <string name="about_improve">Crea una nueva &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;incidencia en GitHub&lt;/a&gt; pa informar de problemes y suxerencies.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Política d\'intimidá&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Créditos&lt;/a&gt;</string>
   <string name="title_activity_about">Tocante a</string>
@@ -164,6 +164,9 @@
   <string name="login_failed_2fa_not_supported">Anguaño nun hai encontu pa autenticación de dos factores.</string>
   <string name="logout_verification">¿Confirmes que quies salir?</string>
   <string name="commons_logo">Logo de Commons</string>
+  <string name="commons_website">Sitiu web de Commons</string>
+  <string name="commons_facebook">Páxina de Facebook de Commons</string>
+  <string name="commons_github">Códigu fonte de Commons en GitHub</string>
   <string name="background_image">Imaxe de fondu</string>
   <string name="mediaimage_failed">Falló la imaxe multimedia</string>
   <string name="no_image_found">Nun s\'atopó nenguna imaxe</string>
@@ -207,4 +210,9 @@
   <string name="location_permission_rationale_nearby">Ríquese permisu p\'amosar una llista de llugares cercanos</string>
   <string name="get_directions">CÓMO LLEGAR</string>
   <string name="read_article">LLEER L\'ARTÍCULU</string>
+  <string name="notifications_welcome">¡Afáyate\'n Wikimedia Commons, %1$s! Préstanos que teas equí.</string>
+  <string name="notifications_talk_page_message">%1$s dexó un mensaxe na to páxina d\'alderique</string>
+  <string name="notifications_thank_you_edit">Gracies por facer una edición</string>
+  <string name="notifications_mention">%1$s te mentó en %2$s.</string>
+  <string name="toggle_view_button">Alternar vista</string>
 </resources>
