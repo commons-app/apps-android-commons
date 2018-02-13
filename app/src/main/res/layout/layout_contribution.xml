@@ -62,5 +62,11 @@
             android:ellipsize="end"
             />
     </LinearLayout>
-
+    <ImageView
+        android:id="@+id/contributionDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:padding="@dimen/small_gap"
+        android:src="@drawable/ic_delete_black_24dp"/>
 </FrameLayout>
