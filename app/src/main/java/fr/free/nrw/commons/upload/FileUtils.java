@@ -23,7 +23,6 @@ import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.Date;
 
-import fr.free.nrw.commons.CommonsApplication;
 import timber.log.Timber;
 
 public class FileUtils {
@@ -98,15 +97,10 @@ public class FileUtils {
         }
         // File
         else if ("file".equalsIgnoreCase(uri.getScheme())) {
-<<<<<<< HEAD
             returnPath = uri.getPath();
         }
 
         if(returnPath == null) {
-=======
-            return uri.getPath();
-        } else {
->>>>>>> Made changes to ensure that when attempting to upload multiple images, the GPS data is extracted and attached correctly.
             //fetching path may fail depending on the source URI and all hope is lost
             //so we will create and use a copy of the file, which seems to work
             String copyPath = null;
@@ -114,12 +108,9 @@ public class FileUtils {
                 ParcelFileDescriptor descriptor
                         = context.getContentResolver().openFileDescriptor(uri, "r");
                 if (descriptor != null) {
-<<<<<<< HEAD
 
-=======
->>>>>>> Made changes to ensure that when attempting to upload multiple images, the GPS data is extracted and attached correctly.
                     SharedPreferences sharedPref = PreferenceManager
-                            .getDefaultSharedPreferences(CommonsApplication.getInstance());
+                            .getDefaultSharedPreferences(context);
                     boolean useExtStorage = sharedPref.getBoolean("useExternalStorage", true);
                     if (useExtStorage) {
                         copyPath = Environment.getExternalStorageDirectory().toString()
@@ -144,12 +135,10 @@ public class FileUtils {
                 Timber.w(e, "Error in file " + copyPath);
                 return null;
             }
-<<<<<<< HEAD
         } else {
             return returnPath;
-=======
->>>>>>> Made changes to ensure that when attempting to upload multiple images, the GPS data is extracted and attached correctly.
         }
+
         return null;
     }
 
