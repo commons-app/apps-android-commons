@@ -17,6 +17,7 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.view.MenuItem;
 import android.view.View;
@@ -58,7 +59,7 @@ import static fr.free.nrw.commons.upload.ExistingFileAsync.Result.NO_DUPLICATE;
 public  class      ShareActivity
         extends    AuthenticatedActivity
         implements SingleUploadFragment.OnUploadActionInitiated,
-        OnCategoriesSaveHandler {
+        OnCategoriesSaveHandler,SimilarImageDialogFragment.onResponse {
 
     private static final int REQUEST_PERM_ON_CREATE_STORAGE = 1;
     private static final int REQUEST_PERM_ON_CREATE_LOCATION = 2;
@@ -80,6 +81,7 @@ public  class      ShareActivity
     private boolean cacheFound;
 
     private GPSExtractor imageObj;
+    private GPSExtractor tempImageObj;
     private String decimalCoords;
 
     private boolean useNewPermissions = false;
@@ -486,7 +488,10 @@ public  class      ShareActivity
                     Timber.d("EXIF:false");
                     findOtherImages(gpsEnabled);
                 }
-                useImageCoords();
+                else {
+//                  As the selected image has GPS data in EXIF go ahead with the same.
+                    useImageCoords();
+                }
             }
         } catch (FileNotFoundException e) {
             Timber.w("File not found: " + mediaUri, e);
@@ -498,15 +503,14 @@ public  class      ShareActivity
         String filePath = getPathOfMediaOrCopy();
         long timeOfCreation = new File(filePath).lastModified();//Time when the original image was created
         File folder = new File(filePath.substring(0,filePath.lastIndexOf('/')));
-//        Timber.d("folderath"+folderPath);
         File[] files = folder.listFiles();
-        Timber.d("folder:"+files.length);
+        Timber.d("folderTime Number:"+files.length);
 
         for(File file : files){
             if(file.lastModified()-timeOfCreation<=(120*1000) && file.lastModified()-timeOfCreation>=-(120*1000)){
                 //Make sure the photos were taken within 20seconds
                 Timber.d("fild date:"+file.lastModified()+ " time of creation"+timeOfCreation);
-                GPSExtractor tempImageObj = null;//Temporary GPSExtractor to extract coords from these photos
+                tempImageObj = null;//Temporary GPSExtractor to extract coords from these photos
                 ParcelFileDescriptor descriptor
                         = null;
                 try {
@@ -529,12 +533,37 @@ public  class      ShareActivity
                     if(tempImageObj.getCoords(gpsEnabled)!=null && tempImageObj.imageCoordsExists){
 //                       Current image has gps coordinates and it's not current gps locaiton
                         Timber.d("This fild has image coords:"+ file.getAbsolutePath());
+//                       Create a dialog fragment for the suggestion
+                        FragmentManager fragmentManager = getSupportFragmentManager();
+                        SimilarImageDialogFragment newFragment = new SimilarImageDialogFragment();
+                        Bundle args = new Bundle();
+                        args.putString("originalImagePath",filePath);
+                        args.putString("possibleImagePath",file.getAbsolutePath());
+                        newFragment.setArguments(args);
+                        newFragment.show(fragmentManager, "dialog");
+                        break;
                     }
 
                 }
 
             }
         }
+        return;
+    }
+
+    @Override
+    public void onPostiveResponse() {
+        imageObj = tempImageObj;
+        decimalCoords = imageObj.getCoords(false);// Not necessary to use gps as image already ha EXIF data
+        Timber.d("EXIF from tempImageObj");
+        useImageCoords();
+    }
+
+    @Override
+    public void onNegativeResponse() {
+        Timber.d("EXIF from imageObj");
+        useImageCoords();
+
     }
 
     /**
@@ -604,4 +633,6 @@ public  class      ShareActivity
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }
