@@ -8,7 +8,7 @@ How can we reproduce the issue?
 
 **Add System logs:**
 
-Add logcat files here(If you are able to add).
+Add logcat files here (if possible).
 
 **Expected behavior:** 
 
@@ -22,9 +22,12 @@ What did you see instead?  Describe your issue in detail here.
 
 What make and model device (e.g., Samsung J7) did you encounter this on?  What Android
 version (e.g., Android 4.0 Ice Cream Sandwich or Android 6.0 Marshmallow) are you running?  Is it
- the stock
-version from the manufacturer or a custom ROM ?
-What version of Commons app are you running?
+ the stock version from the manufacturer or a custom ROM ?
+ 
+ **Commons app version:** 
+
+You can find this information by going to the navigation drawer in the app and tapping 'About'
+
 **Screen-shots:** 
 
 Can be created by pressing the Volume Down and Power Button at the same time on Android 4.0 and higher.
