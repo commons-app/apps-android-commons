@@ -256,7 +256,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     /**
      * This method should be the single point to load/refresh nearby places
      *
-     * @param isHardRefresh
+     * @param isHardRefresh Should display a toast if the location hasn't changed
      */
     private void refreshView(boolean isHardRefresh) {
         if (lockNearbyView) {
