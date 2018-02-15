@@ -22,7 +22,7 @@
   <string name="upload_failed_notification_subtitle">Tekan untuk melihat</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">mengunggah 1 berkas</item>
-    <item quantity="other">mengunggah %d berkas</item>
+    <item quantity="other">mengunggah %1$d berkas</item>
   </plurals>
   <string name="title_activity_contributions" fuzzy="true">Unggahan saya</string>
   <string name="contribution_state_queued">Antrean</string>
@@ -52,18 +52,18 @@
   <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Tidak ada unggahan</item>
     <item quantity="one">1 unggahan</item>
-    <item quantity="other">%d unggahan</item>
+    <item quantity="other">%1$d unggahan</item>
   </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Memulai 1 unggahan</item>
-    <item quantity="other">Memulai %d unggahan</item>
+    <item quantity="other">Memulai %1$d unggahan</item>
   </plurals>
   <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 unggahan</item>
-    <item quantity="other">%d unggahan</item>
+    <item quantity="other">%1$d unggahan</item>
   </plurals>
   <string name="categories_not_found">Tidak ada kategori yang cocok dengan %1$s</string>
-  <string name="categories_skip_explanation">Tambahkan kategori agar foto Anda lebih mudah ditemukan di Wikimedia Commons.\n\nMulai mengetik untuk menambahkan kategori.\nTekan pesan ini (atau tekan kembali) untuk melewatkan langkah ini.</string>
+  <string name="categories_skip_explanation" fuzzy="true">Tambahkan kategori agar foto Anda lebih mudah ditemukan di Wikimedia Commons.\n\nMulai mengetik untuk menambahkan kategori.\nTekan pesan ini (atau tekan kembali) untuk melewatkan langkah ini.</string>
   <string name="categories_activity_title">Kategori</string>
   <string name="title_activity_settings">Pengaturan</string>
   <string name="title_activity_signup">Mendaftar</string>

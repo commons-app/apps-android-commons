@@ -22,7 +22,7 @@
   <string name="upload_failed_notification_subtitle">Napauta katsoaksesi</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">1 tiedosto tallentuu</item>
-    <item quantity="other">%d tiedostoa tallentuu</item>
+    <item quantity="other">%1$d tiedostoa tallentuu</item>
   </plurals>
   <string name="title_activity_contributions">Viimeaikaiset tallennukseni</string>
   <string name="contribution_state_queued">Jonossa</string>
@@ -54,28 +54,28 @@
   <string name="gps_disabled">GPS ei ole käytössä. Haluatko ottaa sen käyttöön?</string>
   <string name="enable_gps">Ota GPS käyttöön</string>
   <string name="contributions_subtitle_zero">Ei tallennuksia vielä</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d tallennus</item>
-    <item quantity="other">%d tallennusta</item>
+    <item quantity="one">%1$d tallennus</item>
+    <item quantity="other">%1$d tallennusta</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">aloitetaan %d tallennus</item>
-    <item quantity="other">aloitetaan %d tallennusta</item>
+  <plurals name="starting_multiple_uploads" fuzzy="true">
+    <item quantity="one">aloitetaan %1$d tallennus</item>
+    <item quantity="other">aloitetaan %1$d tallennusta</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%d tallennus</item>
-    <item quantity="other">%d tallennusta</item>
+  <plurals name="multiple_uploads_title" fuzzy="true">
+    <item quantity="one">%1$d tallennus</item>
+    <item quantity="other">%1$d tallennusta</item>
   </plurals>
   <string name="categories_not_found">Luokkaa %1$s ei löytynyt</string>
-  <string name="categories_skip_explanation">Lisää luokkia tehdäksesi kuvistasi helpommin löydettäviä.\n\nAloita kirjoittaminen lisätäksesi luokkia.\nNapauta tätä viestiä (tai paina takaisin) ohittaaksesi tämän vaiheen.</string>
+  <string name="categories_skip_explanation">Lisää luokkia tehdäksesi kuvistasi enemmän löydettäviä Wikimedia Commonssissa.\nAloita kirjoittaminen lisätäksesi luokkia.</string>
   <string name="categories_activity_title">Luokat</string>
   <string name="title_activity_settings">Asetukset</string>
   <string name="title_activity_signup">Rekisteröidy</string>
   <string name="menu_about">Tietoja</string>
   <string name="about_license" fuzzy="true">Tämä on vapaan lähdekoodin ohjelmisto, joka on julkaistu &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; -lisenssin alaisena. Wikimedia Commons ja sen logo ovat Wikimedia Foundationin tavaramerkkejä ja niitä käytetään Wikimedia Foundationin luvalla. Emme ole hyväksyttyjä tai sidoksissa Wikimedia Foundationioniin.</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Lähde&lt;/a&gt; ja &lt;a href=\"https://commons-app.github.io/\"&gt;nettisivusto&lt;/a&gt; GitHubissa. Luo uusi &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-issue&lt;/a&gt; bugiraporteille ja ehdotuksille.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Yksityisyydensuoja&lt;/a&gt;</string>
+  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Lähde&lt;/a&gt; ja &lt;a href=\"https://commons-app.github.io/\"&gt;nettisivusto&lt;/a&gt; GitHubissa. Luo uusi &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-issue&lt;/a&gt; bugiraporteille ja ehdotuksille.</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Yksityisyydensuoja&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Tekijät&lt;/a&gt;</string>
   <string name="title_activity_about">Tietoja</string>
   <string name="menu_feedback">Lähetä palautetta (sähköpostitse)</string>
@@ -121,7 +121,7 @@
   <string name="tutorial_3_text">ÄLÄ tallenna seuraavia:</string>
   <string name="tutorial_3_subtext">- Selfiet tai kuvat ystävistäsi\n- Netistä ladatut kuvat\n- Kuvakaappaukset kaupallisista sovelluksista</string>
   <string name="tutorial_4_text">Tallennusesimerkki:</string>
-  <string name="tutorial_4_subtext">- Nimi: Sydneyn operatalo\n- Kuvaus: Sydneyn oopperatalo katsottuna lahden toisella puolella\n- Luokat: Sydneyn oopperatalo, Sydneyn oopperatalo lännestä, Sydneyn oopperatalo remote views</string>
+  <string name="tutorial_4_subtext">- Otsikko: Sydneyn oopperatalo\n- Kuvaus: Sydneyn oopperatalo katsottuna lahden toiselta puolelta\n- Luokat: Sydneyn oopperatalo, Sydneyn oopperatalo lännestä, Sydneyn oopperatalon etänäkymät</string>
   <string name="welcome_wikipedia_text">Herätä Wikipedia-artikkelit eloon kuvillasi! Tuo kuvasi Wikipediaan.</string>
   <string name="welcome_wikipedia_subtext">Wikipedian kuvat tulevat Wikimedia Commonsista.</string>
   <string name="welcome_copyright_text">Kuvasi auttavat useita ihmisiä ympäri maailmaa artikkeleiden ymmärtämisessä.</string>
@@ -153,8 +153,11 @@
   <string name="become_a_tester_title">Ryhdy beetatestaajaksi</string>
   <string name="use_wikidata">Käytä Wikidataa</string>
   <string name="use_wikidata_summary">(Varoitus: poiskytkeminen voi aiheuttaa suuren mobiilidatankäytön)</string>
+  <string name="_2fa_code">2FA koodi</string>
+  <string name="number_of_uploads">Tuorein latausrajani</string>
   <string name="maximum_limit">Maksimimäärä</string>
   <string name="maximum_limit_alert">Ei voida näyttää enempää, kuin 500</string>
+  <string name="set_limit">Aseta tuore latausraja</string>
   <string name="login_failed_2fa_not_supported">Kaksivaiheinen tunnistus ei ole vielä tuettu.</string>
   <string name="logout_verification">Haluatko varmasti kirjautua ulos?</string>
   <string name="commons_logo">Commons Logo</string>
@@ -162,9 +165,11 @@
   <string name="no_image_found">Kuvaa ei löytynyt</string>
   <string name="upload_image">Lataa kuva</string>
   <string name="welcome_image_mount_zao">Zao-vuori</string>
+  <string name="welcome_image_llamas">Laamat</string>
   <string name="welcome_image_rainbow_bridge">Sateenkaarisilta</string>
   <string name="welcome_image_tulip">Tulppaani</string>
   <string name="welcome_image_no_selfies">Ei selfieitä</string>
+  <string name="welcome_image_proprietary">Patentoitu kuva</string>
   <string name="welcome_image_welcome_wikipedia">Tervetuloa Wikipediaan</string>
   <string name="welcome_image_welcome_copyright">Tervetuloa tekijänoikeus</string>
   <string name="welcome_image_sydney_opera_house">Sydneyn oopperatalo</string>
@@ -179,8 +184,18 @@
   <string name="navigation_item_feedback">Palaute</string>
   <string name="navigation_item_logout">Kirjaudu ulos</string>
   <string name="navigation_item_info">Opas</string>
+  <string name="navigation_item_notification">Ilmoitukset</string>
   <string name="nearby_needs_permissions">Lähellä olevia paikkoja ei voida näyttää ilman sijaintilupaa</string>
+  <string name="no_description_found">kuvausta ei löytynyt</string>
   <string name="nearby_info_menu_commons_article">Commons-tiedostosivu</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata-kohde</string>
   <string name="title_info">Tiedoston yksilöllinen ja kuvaava otsikko, jota käytetään tiedostonimenä. Voit käyttää tavallista kieltä välilyönnein. Älä sisällytä tiedoston päätettä.</string>
+  <string name="give_permission">Anna lupa</string>
+  <string name="use_external_storage">Käytä ulkoista tallennustilaa</string>
+  <string name="send_log_file">Lähetä lokitiedosto</string>
+  <string name="send_log_file_description">Lähetä logitiedosto kehittäjille sähköpostin kautta</string>
+  <string name="login_to_your_account">Kirjaudu tilillesi</string>
+  <string name="nearby_location_has_not_changed">Sijainti ei ole muuttunut.</string>
+  <string name="nearby_location_not_available">Sijainti ei käytettävissä.</string>
+  <string name="read_article">LUE ARTIKKELI</string>
 </resources>

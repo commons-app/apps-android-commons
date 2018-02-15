@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">上传%1$s失败</string>
   <string name="upload_failed_notification_subtitle">点击查看</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d个文件正在上传</item>
-    <item quantity="other">%d个文件正在上传</item>
+    <item quantity="one">%1$d个文件正在上传</item>
+    <item quantity="other">%1$d个文件正在上传</item>
   </plurals>
   <string name="title_activity_contributions">我的最近上传</string>
   <string name="contribution_state_queued">已入队列</string>
@@ -56,25 +56,25 @@
   <string name="contributions_subtitle_zero">尚无上传</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d次上传</item>
-    <item quantity="other">%d次上传</item>
+    <item quantity="one">%1$d次上传</item>
+    <item quantity="other">%1$d次上传</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">开始%d次上传</item>
-    <item quantity="other">开始%d次上传</item>
+    <item quantity="one">开始%1$d次上传</item>
+    <item quantity="other">开始%1$d次上传</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d次上传</item>
-    <item quantity="other">%d次上传</item>
+    <item quantity="one">%1$d次上传</item>
+    <item quantity="other">%1$d次上传</item>
   </plurals>
   <string name="categories_not_found">没有找到匹配%1$s的分类</string>
-  <string name="categories_skip_explanation">添加分类使您的图像更容易在维基共享资源被找到。\n\n开始输入以添加分类。点击该信息（或按返回）以跳过此步。</string>
+  <string name="categories_skip_explanation">添加分类使您的图像更容易在维基共享资源被找到。开始输入以添加分类。</string>
   <string name="categories_activity_title">分类</string>
   <string name="title_activity_settings">设置</string>
   <string name="title_activity_signup">注册</string>
   <string name="menu_about">关于</string>
   <string name="about_license">维基共享资源应用程序是由维基媒体社区的受助者和志愿者创建和维护的开源应用程序。维基媒体基金会不参与该应用程序的创立，开发或维护。</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;源代码&lt;/a&gt;和&lt;a href=\"https://commons-app.github.io/\"&gt;网站&lt;/a&gt;位于GitHub。创建新的&lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub问题&lt;/a&gt;以发送错误报告和建议。</string>
+  <string name="about_improve">创建新的&lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub问题&lt;/a&gt;以发送错误报告和建议。</string>
   <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;隐私政策&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;制作人员&lt;/a&gt;</string>
   <string name="title_activity_about">关于</string>
@@ -121,7 +121,7 @@
   <string name="tutorial_3_text">请不要上传：</string>
   <string name="tutorial_3_subtext">- 您朋友的自拍照或图片\n- 您从互联网下载的图片\n- 专利应用的截图</string>
   <string name="tutorial_4_text">示例上传：</string>
-  <string name="tutorial_4_subtext">- 标题：悉尼歌剧院\n- 描述：从海湾对面看到的悉尼歌剧院\n- 分类：Sydney Opera House、Sydney Opera House from the west、Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext">- 标题：悉尼歌剧院\n- 描述：从海湾对面看到的悉尼歌剧院\n- 分类：Sydney Opera House from the west、Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">贡献您的图像。使维基百科的条目更加生动！</string>
   <string name="welcome_wikipedia_subtext">维基百科上的图像来自维基共享资源。</string>
   <string name="welcome_copyright_text">您的图像可以帮助教育世界各地的人。</string>
@@ -164,6 +164,9 @@
   <string name="login_failed_2fa_not_supported">目前不支持双因素验证。</string>
   <string name="logout_verification">您真的想要退出么？</string>
   <string name="commons_logo">共享资源标志</string>
+  <string name="commons_website">共享资源网站</string>
+  <string name="commons_facebook">共享资源Facebook页面</string>
+  <string name="commons_github">共享资源Github源代码</string>
   <string name="background_image">背景图片</string>
   <string name="mediaimage_failed">媒体图片失败</string>
   <string name="no_image_found">找不到图片</string>
@@ -188,6 +191,7 @@
   <string name="navigation_item_feedback">反馈</string>
   <string name="navigation_item_logout">退出</string>
   <string name="navigation_item_info">教程</string>
+  <string name="navigation_item_notification">通知</string>
   <string name="nearby_needs_permissions">附近地点不能在没有位置权限的情况下显示</string>
   <string name="no_description_found">找不到描述</string>
   <string name="nearby_info_menu_commons_article">共享资源文件页面</string>
@@ -203,4 +207,12 @@
   <string name="login_to_your_account">登录您的账户</string>
   <string name="nearby_location_has_not_changed">位置没有更新。</string>
   <string name="nearby_location_not_available">位置不可用。</string>
+  <string name="location_permission_rationale_nearby">需要权限以显示附近地点列表</string>
+  <string name="get_directions">获得指示</string>
+  <string name="read_article">阅读条目</string>
+  <string name="notifications_welcome">欢迎来到维基共享资源，%1$s！我们很高兴您来这里。</string>
+  <string name="notifications_talk_page_message">%1$s在您的讨论页上留下了一条消息</string>
+  <string name="notifications_thank_you_edit">感谢您做出编辑</string>
+  <string name="notifications_mention">%1$s在%2$s提到了您。</string>
+  <string name="toggle_view_button">切换视图</string>
 </resources>

@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.contributions;
 
-import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
@@ -10,36 +9,36 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
-import fr.free.nrw.commons.CommonsApplication;
+import javax.inject.Inject;
+
+import fr.free.nrw.commons.data.DBOpenHelper;
+import fr.free.nrw.commons.di.CommonsDaggerContentProvider;
 import timber.log.Timber;
 
 import static android.content.UriMatcher.NO_MATCH;
-import static fr.free.nrw.commons.contributions.Contribution.Table.ALL_FIELDS;
-import static fr.free.nrw.commons.contributions.Contribution.Table.TABLE_NAME;
+import static fr.free.nrw.commons.contributions.ContributionDao.Table.ALL_FIELDS;
+import static fr.free.nrw.commons.contributions.ContributionDao.Table.TABLE_NAME;
 
-public class ContributionsContentProvider extends ContentProvider {
+public class ContributionsContentProvider extends CommonsDaggerContentProvider {
 
     private static final int CONTRIBUTIONS = 1;
     private static final int CONTRIBUTIONS_ID = 2;
     private static final String BASE_PATH = "contributions";
     private static final UriMatcher uriMatcher = new UriMatcher(NO_MATCH);
-    public static final String AUTHORITY = "fr.free.nrw.commons.contributions.contentprovider";
+    public static final String CONTRIBUTION_AUTHORITY = "fr.free.nrw.commons.contributions.contentprovider";
 
-    public static final Uri BASE_URI = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH);
+    public static final Uri BASE_URI = Uri.parse("content://" + CONTRIBUTION_AUTHORITY + "/" + BASE_PATH);
 
     static {
-        uriMatcher.addURI(AUTHORITY, BASE_PATH, CONTRIBUTIONS);
-        uriMatcher.addURI(AUTHORITY, BASE_PATH + "/#", CONTRIBUTIONS_ID);
+        uriMatcher.addURI(CONTRIBUTION_AUTHORITY, BASE_PATH, CONTRIBUTIONS);
+        uriMatcher.addURI(CONTRIBUTION_AUTHORITY, BASE_PATH + "/#", CONTRIBUTIONS_ID);
     }
 
     public static Uri uriForId(int id) {
         return Uri.parse(BASE_URI.toString() + "/" + id);
     }
 
-    @Override
-    public boolean onCreate() {
-        return false;
-    }
+    @Inject DBOpenHelper dbOpenHelper;
 
     @SuppressWarnings("ConstantConditions")
     @Override
@@ -50,8 +49,7 @@ public class ContributionsContentProvider extends ContentProvider {
 
         int uriType = uriMatcher.match(uri);
 
-        CommonsApplication app = (CommonsApplication) getContext().getApplicationContext();
-        SQLiteDatabase db = app.getDBOpenHelper().getReadableDatabase();
+        SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
         Cursor cursor;
 
         switch (uriType) {
@@ -87,9 +85,8 @@ public class ContributionsContentProvider extends ContentProvider {
     @Override
     public Uri insert(@NonNull Uri uri, ContentValues contentValues) {
         int uriType = uriMatcher.match(uri);
-        CommonsApplication app = (CommonsApplication) getContext().getApplicationContext();
-        SQLiteDatabase sqlDB = app.getDBOpenHelper().getWritableDatabase();
-        long id;
+        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
+        long id = 0;
         switch (uriType) {
             case CONTRIBUTIONS:
                 id = sqlDB.insert(TABLE_NAME, null, contentValues);
@@ -107,13 +104,12 @@ public class ContributionsContentProvider extends ContentProvider {
         int rows;
         int uriType = uriMatcher.match(uri);
 
-        CommonsApplication app = (CommonsApplication) getContext().getApplicationContext();
-        SQLiteDatabase sqlDB = app.getDBOpenHelper().getWritableDatabase();
+        SQLiteDatabase db = dbOpenHelper.getReadableDatabase();
 
         switch (uriType) {
             case CONTRIBUTIONS_ID:
                 Timber.d("Deleting contribution id %s", uri.getLastPathSegment());
-                rows = sqlDB.delete(TABLE_NAME,
+                rows = db.delete(TABLE_NAME,
                         "_id = ?",
                         new String[]{uri.getLastPathSegment()}
                 );
@@ -130,8 +126,7 @@ public class ContributionsContentProvider extends ContentProvider {
     public int bulkInsert(@NonNull Uri uri, @NonNull ContentValues[] values) {
         Timber.d("Hello, bulk insert! (ContributionsContentProvider)");
         int uriType = uriMatcher.match(uri);
-        CommonsApplication app = (CommonsApplication) getContext().getApplicationContext();
-        SQLiteDatabase sqlDB = app.getDBOpenHelper().getWritableDatabase();
+        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
         sqlDB.beginTransaction();
         switch (uriType) {
             case CONTRIBUTIONS:
@@ -162,9 +157,8 @@ public class ContributionsContentProvider extends ContentProvider {
         error out otherwise.
          */
         int uriType = uriMatcher.match(uri);
-        CommonsApplication app = (CommonsApplication) getContext().getApplicationContext();
-        SQLiteDatabase sqlDB = app.getDBOpenHelper().getWritableDatabase();
-        int rowsUpdated;
+        SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
+        int rowsUpdated = 0;
         switch (uriType) {
             case CONTRIBUTIONS:
                 rowsUpdated = sqlDB.update(TABLE_NAME, contentValues, selection, selectionArgs);
@@ -175,7 +169,7 @@ public class ContributionsContentProvider extends ContentProvider {
                 if (TextUtils.isEmpty(selection)) {
                     rowsUpdated = sqlDB.update(TABLE_NAME,
                             contentValues,
-                            Contribution.Table.COLUMN_ID + " = ?",
+                            ContributionDao.Table.COLUMN_ID + " = ?",
                             new String[]{String.valueOf(id)});
                 } else {
                     throw new IllegalArgumentException(

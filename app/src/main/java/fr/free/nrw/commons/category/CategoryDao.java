@@ -1,115 +1,64 @@
-package fr.free.nrw.commons.data;
+package fr.free.nrw.commons.category;
 
 import android.content.ContentProviderClient;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
 import android.os.RemoteException;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-import fr.free.nrw.commons.category.CategoryContentProvider;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Provider;
 
-public class Category {
-    private Uri contentUri;
+public class CategoryDao {
 
-    private String name;
-    private Date lastUsed;
-    private int timesUsed;
+    private final Provider<ContentProviderClient> clientProvider;
 
-    // Getters/setters
-    public String getName() {
-        return name;
+    @Inject
+    public CategoryDao(@Named("category") Provider<ContentProviderClient> clientProvider) {
+        this.clientProvider = clientProvider;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    private Date getLastUsed() {
-        // warning: Date objects are mutable.
-        return (Date)lastUsed.clone();
-    }
-
-    public void setLastUsed(Date lastUsed) {
-        // warning: Date objects are mutable.
-        this.lastUsed = (Date)lastUsed.clone();
-    }
-
-    private void touch() {
-        lastUsed = new Date();
-    }
-
-    private int getTimesUsed() {
-        return timesUsed;
-    }
-
-    public void setTimesUsed(int timesUsed) {
-        this.timesUsed = timesUsed;
-    }
-
-    public void incTimesUsed() {
-        timesUsed++;
-        touch();
-    }
-
-    //region Database/content-provider stuff
-
-    /**
-     * Persist category.
-     * @param client ContentProviderClient to handle DB connection
-     */
-    public void save(ContentProviderClient client) {
+    public void save(Category category) {
+        ContentProviderClient db = clientProvider.get();
         try {
-            if (contentUri == null) {
-                contentUri = client.insert(CategoryContentProvider.BASE_URI, this.toContentValues());
+            if (category.getContentUri() == null) {
+                category.setContentUri(db.insert(CategoryContentProvider.BASE_URI, toContentValues(category)));
             } else {
-                client.update(contentUri, toContentValues(), null, null);
+                db.update(category.getContentUri(), toContentValues(category), null, null);
             }
         } catch (RemoteException e) {
             throw new RuntimeException(e);
+        } finally {
+            db.release();
         }
-    }
-
-    private ContentValues toContentValues() {
-        ContentValues cv = new ContentValues();
-        cv.put(Table.COLUMN_NAME, getName());
-        cv.put(Table.COLUMN_LAST_USED, getLastUsed().getTime());
-        cv.put(Table.COLUMN_TIMES_USED, getTimesUsed());
-        return cv;
-    }
-
-    private static Category fromCursor(Cursor cursor) {
-        // Hardcoding column positions!
-        Category c = new Category();
-        c.contentUri = CategoryContentProvider.uriForId(cursor.getInt(0));
-        c.name = cursor.getString(1);
-        c.lastUsed = new Date(cursor.getLong(2));
-        c.timesUsed = cursor.getInt(3);
-        return c;
     }
 
     /**
      * Find persisted category in database, based on its name.
-     * @param client ContentProviderClient to handle DB connection
+     *
      * @param name Category's name
      * @return category from database, or null if not found
      */
-    public static @Nullable Category find(ContentProviderClient client, String name) {
+    @Nullable
+    Category find(String name) {
         Cursor cursor = null;
+        ContentProviderClient db = clientProvider.get();
         try {
-            cursor = client.query(
+            cursor = db.query(
                     CategoryContentProvider.BASE_URI,
-                    Category.Table.ALL_FIELDS,
-                    Category.Table.COLUMN_NAME + "=?",
+                    Table.ALL_FIELDS,
+                    Table.COLUMN_NAME + "=?",
                     new String[]{name},
                     null);
             if (cursor != null && cursor.moveToFirst()) {
-                return Category.fromCursor(cursor);
+                return fromCursor(cursor);
             }
         } catch (RemoteException e) {
             // This feels lazy, but to hell with checked exceptions. :)
@@ -118,29 +67,32 @@ public class Category {
             if (cursor != null) {
                 cursor.close();
             }
+            db.release();
         }
         return null;
     }
 
     /**
      * Retrieve recently-used categories, ordered by descending date.
+     *
      * @return a list containing recent categories
      */
-    public static @NonNull ArrayList<String> recentCategories(ContentProviderClient client, int limit) {
-        ArrayList<String> items = new ArrayList<>();
+    @NonNull
+    List<String> recentCategories(int limit) {
+        List<String> items = new ArrayList<>();
         Cursor cursor = null;
+        ContentProviderClient db = clientProvider.get();
         try {
-            cursor = client.query(
+            cursor = db.query(
                     CategoryContentProvider.BASE_URI,
-                    Category.Table.ALL_FIELDS,
+                    Table.ALL_FIELDS,
                     null,
                     new String[]{},
-                    Category.Table.COLUMN_LAST_USED + " DESC");
+                    Table.COLUMN_LAST_USED + " DESC");
             // fixme add a limit on the original query instead of falling out of the loop?
             while (cursor != null && cursor.moveToNext()
                     && cursor.getPosition() < limit) {
-                Category cat = Category.fromCursor(cursor);
-                items.add(cat.getName());
+                items.add(fromCursor(cursor).getName());
             }
         } catch (RemoteException e) {
             throw new RuntimeException(e);
@@ -148,17 +100,36 @@ public class Category {
             if (cursor != null) {
                 cursor.close();
             }
+            db.release();
         }
         return items;
+    }
+
+    Category fromCursor(Cursor cursor) {
+        // Hardcoding column positions!
+        return new Category(
+                CategoryContentProvider.uriForId(cursor.getInt(0)),
+                cursor.getString(1),
+                new Date(cursor.getLong(2)),
+                cursor.getInt(3)
+        );
+    }
+
+    private ContentValues toContentValues(Category category) {
+        ContentValues cv = new ContentValues();
+        cv.put(CategoryDao.Table.COLUMN_NAME, category.getName());
+        cv.put(CategoryDao.Table.COLUMN_LAST_USED, category.getLastUsed().getTime());
+        cv.put(CategoryDao.Table.COLUMN_TIMES_USED, category.getTimesUsed());
+        return cv;
     }
 
     public static class Table {
         public static final String TABLE_NAME = "categories";
 
         public static final String COLUMN_ID = "_id";
-        public static final String COLUMN_NAME = "name";
-        public static final String COLUMN_LAST_USED = "last_used";
-        public static final String COLUMN_TIMES_USED = "times_used";
+        static final String COLUMN_NAME = "name";
+        static final String COLUMN_LAST_USED = "last_used";
+        static final String COLUMN_TIMES_USED = "times_used";
 
         // NOTE! KEEP IN SAME ORDER AS THEY ARE DEFINED UP THERE. HELPS HARD CODE COLUMN INDICES.
         public static final String[] ALL_FIELDS = {
@@ -168,7 +139,9 @@ public class Category {
                 COLUMN_TIMES_USED
         };
 
-        private static final String CREATE_TABLE_STATEMENT = "CREATE TABLE " + TABLE_NAME + " ("
+        static final String DROP_TABLE_STATEMENT = "DROP TABLE IF EXISTS " + TABLE_NAME;
+
+        static final String CREATE_TABLE_STATEMENT = "CREATE TABLE " + TABLE_NAME + " ("
                 + COLUMN_ID + " INTEGER PRIMARY KEY,"
                 + COLUMN_NAME + " STRING,"
                 + COLUMN_LAST_USED + " INTEGER,"
@@ -180,7 +153,7 @@ public class Category {
         }
 
         public static void onDelete(SQLiteDatabase db) {
-            db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+            db.execSQL(DROP_TABLE_STATEMENT);
             onCreate(db);
         }
 
@@ -208,5 +181,4 @@ public class Category {
             }
         }
     }
-    //endregion
 }

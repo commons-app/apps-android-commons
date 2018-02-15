@@ -13,16 +13,16 @@
   <string name="upload_failed">No s\'ha trobat el fitxer. Proveu-ho amb un altre fitxer.</string>
   <string name="authentication_failed">L\'autenticació ha fallat!</string>
   <string name="uploading_started">Ha començat la càrrega!</string>
-  <string name="upload_completed_notification_title">S\'ha carregat %1$s !</string>
+  <string name="upload_completed_notification_title">S’ha pujat %1$s.</string>
   <string name="upload_completed_notification_text">Prem per veure la teva càrrega</string>
   <string name="upload_progress_notification_title_start">Començant la càrrega al servidor de  %1$s</string>
   <string name="upload_progress_notification_title_in_progress">Carregant %1$s</string>
   <string name="upload_progress_notification_title_finishing">Acabant la càrrega al servidor de %1$s</string>
   <string name="upload_failed_notification_title">Error al carregar %1$s</string>
   <string name="upload_failed_notification_subtitle">Prem per veure-ho</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">s\'està carregant 1 fitxer</item>
-    <item quantity="other">s\'estan carregant %d fitxers</item>
+    <item quantity="other">s\'estan carregant %1$d fitxers</item>
   </plurals>
   <string name="title_activity_contributions">Les meves càrregues recents</string>
   <string name="contribution_state_queued">En cua</string>
@@ -56,16 +56,16 @@
   <string name="contributions_subtitle_zero">Encara no hi ha cap càrrega</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d càrrega</item>
-    <item quantity="other">%d càrregues</item>
+    <item quantity="one">%1$d càrrega</item>
+    <item quantity="other">%1$d càrregues</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">S\'està iniciant %d càrrega</item>
-    <item quantity="other">S\'estan iniciant %d càrregues</item>
+    <item quantity="one">S\'està iniciant %1$d càrrega</item>
+    <item quantity="other">S\'estan iniciant %1$d càrregues</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 càrrega</item>
-    <item quantity="other">%d càrregues</item>
+    <item quantity="other">%1$d càrregues</item>
   </plurals>
   <string name="categories_not_found">No s\'ha trobat cap categoria que coincideixi amb %1$s</string>
   <string name="categories_skip_explanation">Afegiu categories per fer que les vostres imatges siguin més fàcils de trobar a Wikimedia Commons.</string>
@@ -78,6 +78,7 @@
   <string name="about_privacy_policy" fuzzy="true">Wikimedia:Commons-android-texts-sobre privacitat/ca</string>
   <string name="title_activity_about">Quant a</string>
   <string name="menu_feedback">Envia comentaris (per correu)</string>
+  <string name="no_email_client">No hi ha cap client de correu instal·lat</string>
   <string name="provider_categories">Categories usades recentment</string>
   <string name="waiting_first_sync">S’està esperant la primera sincronització…</string>
   <string name="no_uploads_yet">Encara no heu carregat cap foto.</string>
@@ -86,6 +87,7 @@
   <string name="share_license_summary">Aquesta imatge es llicenciarà sota %1$s</string>
   <string name="menu_download">Baixa</string>
   <string name="preference_license">Llicència</string>
+  <string name="use_previous">Utilitza títol i descripció anteriors</string>
   <string name="preference_theme">Mode nocturn</string>
   <string name="preference_theme_summary">Utilitza el tema fosc</string>
   <string name="license_name_cc_by_sa_four">Reconeixement-CompartirIgual 4.0</string>
@@ -141,10 +143,15 @@
   <string name="maximum_limit">Límit màxim</string>
   <string name="logout_verification">Realment voleu finalitzar la sessió?</string>
   <string name="commons_logo">Logo de Commons</string>
+  <string name="commons_website">Lloc web del Commons</string>
+  <string name="commons_facebook">Pàgina del Facebook del Commons</string>
+  <string name="commons_github">Codi font del Commons a GitHub</string>
   <string name="no_image_found">No s’ha trobat cap imatge</string>
   <string name="upload_image">Carrega la imatge</string>
   <string name="welcome_image_llamas">Llames</string>
   <string name="welcome_image_proprietary">Imatge privativa</string>
+  <string name="welcome_image_welcome_wikipedia">Benvinguts a la Viquipèdia</string>
+  <string name="welcome_image_sydney_opera_house">Casa d\'Òpera de Sydney</string>
   <string name="cancel">Cancel·la</string>
   <string name="navigation_drawer_open">Obre</string>
   <string name="navigation_drawer_close">Tanca</string>
@@ -155,7 +162,21 @@
   <string name="navigation_item_settings">Paràmetres</string>
   <string name="navigation_item_feedback">Comentaris</string>
   <string name="navigation_item_logout">Finalitza la sessió</string>
+  <string name="navigation_item_info">Tutorial</string>
+  <string name="navigation_item_notification">Notificacions</string>
   <string name="no_description_found">no s\'ha trobat cap descripció</string>
   <string name="nearby_info_menu_commons_article">Article del fitxer a Commons</string>
   <string name="nearby_info_menu_wikidata_article">Element del Wikidata</string>
+  <string name="error_while_cache">Error mentre es carregaven les fotografies</string>
+  <string name="give_permission">Dóna permís</string>
+  <string name="use_external_storage">Utilitza l’emmagatzematge extern</string>
+  <string name="send_log_file">Envia el fitxer de registre</string>
+  <string name="send_log_file_description">Envia el registre als desenvolupadors per correu</string>
+  <string name="login_to_your_account">Entreu en el vostre compte</string>
+  <string name="nearby_location_has_not_changed">La ubicació no ha canviat.</string>
+  <string name="nearby_location_not_available">La ubicació no és disponible.</string>
+  <string name="get_directions">COM ANAR-HI</string>
+  <string name="read_article">LLEGIU L’ARTICLE</string>
+  <string name="notifications_thank_you_edit">Gràcies per fer una modificació</string>
+  <string name="notifications_mention" fuzzy="true">%1$s us ha mencionat a %2$s.</string>
 </resources>

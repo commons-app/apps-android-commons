@@ -1,5 +1,34 @@
 # Wikimedia Commons for Android
 
+## v2.6.7
+- Added null checks to prevent frequent crashes in ModificationsSyncAdapter
+
+## v2.6.6
+- Refactored Dagger to fix crashes encountered in production
+- Fixed "?" displaying in description of Nearby places
+- Database-related cleanup and tests
+- Optimized dimens.xml
+- Fixed issue where map opens with incorrect coordinates
+
+## v2.6.5 beta
+- Changed "send log" feature to only send logs to private Google group forum
+- Switched to using Wikimedia maps server instead of Mapbox for privacy reasons
+- Removed event logging from app for privacy reasons
+- Fixed crash caused by rapidly switching from Nearby map to list while loading
+
+## v2.6.4 beta
+- Excluded httpclient and commons-logging to fix release build errors
+- Fixed crashes caused by Fresco and Dagger
+
+## v2.6.3 beta
+- Same as 2.6.2 except with localizations added for Google Code-In 
+
+## v2.6.2 beta
+- Reverted temporarily to last stable version while working on crash fix
+
+## v2.6.1 beta
+- Failed attempt to fix crashes in release build with the previous beta release
+
 ## v2.6.0 beta
 - Multiple bugfixes for location updates and list/map loading in Nearby
 - Multiple fixes for various crashes and memory leaks

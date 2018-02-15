@@ -15,28 +15,37 @@ import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.widget.Toast;
 
 import java.io.File;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.utils.FileUtils;
 
 public class SettingsFragment extends PreferenceFragment {
 
     private static final int REQUEST_CODE_WRITE_EXTERNAL_STORAGE = 100;
 
+    @Inject @Named("default_preferences") SharedPreferences prefs;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ApplicationlessInjection
+                .getInstance(getActivity().getApplicationContext())
+                .getCommonsApplicationComponent()
+                .inject(this);
 
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preferences);
@@ -58,14 +67,12 @@ public class SettingsFragment extends PreferenceFragment {
         });
 
         final EditTextPreference uploadLimit = (EditTextPreference) findPreference("uploads");
-        final SharedPreferences sharedPref = PreferenceManager
-                .getDefaultSharedPreferences(CommonsApplication.getInstance());
-        int uploads = sharedPref.getInt(Prefs.UPLOADS_SHOWING, 100);
+        int uploads = prefs.getInt(Prefs.UPLOADS_SHOWING, 100);
         uploadLimit.setText(uploads + "");
         uploadLimit.setSummary(uploads + "");
         uploadLimit.setOnPreferenceChangeListener((preference, newValue) -> {
             int value = Integer.parseInt(newValue.toString());
-            final SharedPreferences.Editor editor = sharedPref.edit();
+            final SharedPreferences.Editor editor = prefs.edit();
             if (value > 500) {
                 new AlertDialog.Builder(getActivity())
                         .setTitle(R.string.maximum_limit)
@@ -133,7 +140,7 @@ public class SettingsFragment extends PreferenceFragment {
         Intent feedbackIntent = new Intent(Intent.ACTION_SEND);
         feedbackIntent.setType("message/rfc822");
         feedbackIntent.putExtra(Intent.EXTRA_EMAIL,
-                new String[]{CommonsApplication.FEEDBACK_EMAIL});
+                new String[]{CommonsApplication.LOGS_PRIVATE_EMAIL});
         feedbackIntent.putExtra(Intent.EXTRA_SUBJECT,
                 String.format(CommonsApplication.FEEDBACK_EMAIL_SUBJECT,
                         BuildConfig.VERSION_NAME));

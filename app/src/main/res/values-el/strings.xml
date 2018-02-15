@@ -22,7 +22,7 @@
   <string name="upload_failed_notification_subtitle">Πατήστε για να δείτε</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">1 αρχείο επιφορτώνεται</item>
-    <item quantity="other">%d αρχεία επιφορτώνονται</item>
+    <item quantity="other">%1$d αρχεία επιφορτώνονται</item>
   </plurals>
   <string name="title_activity_contributions">Οι Πρόσφατες Φορτώσεις Μου</string>
   <string name="contribution_state_queued">Στην ουρά</string>
@@ -54,18 +54,18 @@
   <string name="gps_disabled">Το GPS στην συσκευή είναι απενεργοποιημένο. Θέλετε να το ενεργοποιήσετε;</string>
   <string name="enable_gps">  Ενεργοποιήσετε το GPS</string>
   <string name="contributions_subtitle_zero">Δεν υπάρχουν ακόμα φορτωμένα αρχεία</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
+  <plurals name="contributions_subtitle">
     <item quantity="zero">Δεν υπάρχουν επιφορτώσεις ακόμη</item>
-    <item quantity="one">1 επιφόρτωση</item>
-    <item quantity="other">%d επιφορτώσεις</item>
+    <item quantity="one">%1$d επιφόρτωση</item>
+    <item quantity="other">%1$d επιφορτώσεις</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
-    <item quantity="one">Έναρξη 1 επιφόρτωσης</item>
-    <item quantity="other">Έναρτξη %d επιφορτώσεων</item>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">Έναρξη %1$d επιφόρτωσης</item>
+    <item quantity="other">Έναρξη %1$d επιφορτώσεων</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
-    <item quantity="one">1 επιφόρτωση</item>
-    <item quantity="other">%d επιφορτώσεις</item>
+  <plurals name="multiple_uploads_title">
+    <item quantity="one">%1$d επιφόρτωση</item>
+    <item quantity="other">%1$d επιφορτώσεις</item>
   </plurals>
   <string name="categories_not_found">Δεν βρέθηκαν κατηγορίες που ταιριάζουν %1$s</string>
   <string name="categories_skip_explanation">Προσθέστε κατηγορίες για να κάνετε τις εικόνες σας πιο ανιχνεύσιμες στα Wikimedia Commons.\n\nΑρχίστε να γράφετε για να προσθέσετε κατηγορίες.\nΠατήστε αυτό το μήνυμα (ή πατήστε επιστροφή) για να παραλείψετε αυτό το βήμα.</string>
@@ -74,9 +74,9 @@
   <string name="title_activity_signup">Εγγραφή</string>
   <string name="menu_about">Σχετικά</string>
   <string name="about_license">Λογισμικό ανοικτού κωδικού που κυκλοφορεί υπό την &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Άδεια Apache v2&lt;/a&gt;. Το Wikimedia Commons και το λογότυπο είναι εμπορικά σήματα του Ιδρύματος Wikimedia και χρησιμοποιούνται με άδεια από το Ίδρυμα Wikimedia. Δεν συμμετέχουμε  στην δημιουργία, ανάπτυξη ή συντήρηση  του Ιδρύματος  Wikimedia.</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Πηγή&lt;/a&gt; και &lt;a href=\"https://commons-app.github.io/\"&gt;ιστοσελίδα&lt;/a&gt; στο GitHub. Δημιουργήστε ένα νέο &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub θέμα&lt;/a&gt; για αναφορές σφαλμάτων και προτάσεις.</string>
+  <string name="about_improve">Δημιουργήστε ένα νέο &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub θέμα&lt;/a&gt; για αναφορές σφαλμάτων και προτάσεις.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Πολιτική Απορρήτου και προσωπικών δεδομένων&lt;/a&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;CREDITS&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;CREDITS&lt;/a&gt;</string>
   <string name="title_activity_about">Σχετικά</string>
   <string name="menu_feedback">Αποστολή σχολίων (μέσω Email)</string>
   <string name="no_email_client">Δεν υπάρχει εγκατεστημένη εφαρμογή ηλεκτρονικού ταχυδρομείου</string>
@@ -164,6 +164,9 @@
   <string name="login_failed_2fa_not_supported">Πιστοποίηση με δύο παράγοντες δεν υποστηρίζεται προς το παρόν.</string>
   <string name="logout_verification">Θέλετε πράγματι να αποσυνδεθείτε;</string>
   <string name="commons_logo">Κοινό Λογότυπο</string>
+  <string name="commons_website">Ιστοσελίδα των Κοινών</string>
+  <string name="commons_facebook">Σελίδα των Κοινών στο Facebook</string>
+  <string name="commons_github">Κώδικας πηγής των Κοινών στο GitHub</string>
   <string name="background_image">Εικόνα Υποβάθρου</string>
   <string name="mediaimage_failed">Η Εικόνα των Μέσων Απέτυχε (δεν μπορεί να φορτωθεί)</string>
   <string name="no_image_found">Δεν Βρέθηκε καμία Εικόνα</string>
@@ -172,6 +175,7 @@
   <string name="welcome_image_llamas">Llamas</string>
   <string name="welcome_image_rainbow_bridge">Γέφυρα Ουρανίου Τόξου</string>
   <string name="welcome_image_tulip">Τουλίπα</string>
+  <string name="welcome_image_no_selfies">Όχι selfies</string>
   <string name="welcome_image_proprietary">Ιδιόκτητη Εικόνα</string>
   <string name="welcome_image_welcome_wikipedia"> Καλωσόρισες Βικιπαίδεια</string>
   <string name="welcome_image_welcome_copyright">Καλωσορίστε το Δικαίωμα Αντιγραφής</string>
@@ -187,6 +191,7 @@
   <string name="navigation_item_feedback">Σχόλια</string>
   <string name="navigation_item_logout">Αποσύνδεση</string>
   <string name="navigation_item_info">Σεμινάριο</string>
+  <string name="navigation_item_notification">Ενημερώσεις</string>
   <string name="nearby_needs_permissions">Οι κοντινές τοποθεσίες δεν μπορούν να προβληθούν δίχως τις άδειες τοποθεσίας</string>
   <string name="no_description_found">δεν βρέθηκε περιγραφή</string>
   <string name="nearby_info_menu_commons_article">Σελίδα φακέλλου κοινής χρήσης</string>
@@ -199,4 +204,15 @@
   <string name="use_external_storage_summary">Αποθηκεύσετε εικόνες που παίρνονται στην κάμερα εφαρμογής στην συσκευή σας</string>
   <string name="send_log_file">Αποστείλατε τον φάκελλο σύνδεσης</string>
   <string name="send_log_file_description">Στείλατε τον φάκελλο σύνδεσης στους δημιουργούς μέσω email</string>
+  <string name="login_to_your_account">Συνδεθείτε στο λογαριασμό σας.</string>
+  <string name="nearby_location_has_not_changed">Ο εντοπισμός δεν έχει αλλάξει.</string>
+  <string name="nearby_location_not_available">Ο τόπος δεν είναι διαθέσιμος.</string>
+  <string name="location_permission_rationale_nearby">Απαιτείται άδεια για την εμφάνιση λίστας κοντινών σημείων</string>
+  <string name="get_directions">Λάβετε κατευθύνσεις</string>
+  <string name="read_article">Ανάγνωση άρθρου</string>
+  <string name="notifications_welcome">Καλωσήρθατε στο Wikimedia Commons, %1$s! Είμαστε χαρούμενοι που είστε εδώ.</string>
+  <string name="notifications_talk_page_message">Ο %1$s άφησε ένα μήνυμα στην σελίδα συζήτησής σας</string>
+  <string name="notifications_thank_you_edit">Ευχαριστούμε που κάνατε μια επεξεργασία</string>
+  <string name="notifications_mention">Ο %1$s σας ανέφερε στο %2$s.</string>
+  <string name="toggle_view_button">Μεταβολή προβολής</string>
 </resources>

@@ -22,7 +22,7 @@
   <string name="upload_failed_notification_subtitle">Tippen zum Betrachten</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">Eine Datei wird hochgeladen</item>
-    <item quantity="other">%d Dateien werden hochgeladen</item>
+    <item quantity="other">%1$d Dateien werden hochgeladen</item>
   </plurals>
   <string name="title_activity_contributions">Meine kürzlich hochgeladenen Dateien</string>
   <string name="contribution_state_queued">In der Warteschlange</string>
@@ -57,24 +57,24 @@
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">Eine hochgeladene Datei</item>
-    <item quantity="other">%d hochgeladene Dateien</item>
+    <item quantity="other">%1$d hochgeladene Dateien</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Starte einen Upload</item>
-    <item quantity="other">Starte %d Uploads</item>
+    <item quantity="other">Starte %1$d Uploads</item>
   </plurals>
   <plurals name="multiple_uploads_title">
     <item quantity="one">Eine hochgeladene Datei</item>
-    <item quantity="other">%d hochgeladene Dateien</item>
+    <item quantity="other">%1$d hochgeladene Dateien</item>
   </plurals>
   <string name="categories_not_found">Die Kategorie „%1$s“ wurde nicht gefunden</string>
-  <string name="categories_skip_explanation">Füge Kategorien hinzu, um deine Bilder auf Wikimedia Commons auffindbarer zu machen.\n\nBeginn zu schreiben, um Kategorien hinzuzufügen.\nTippe auf diese Nachricht oder drücke „Zurück“, um diesen Schritt zu überspringen.</string>
+  <string name="categories_skip_explanation">Füge Kategorien hinzu, um deine Bilder auf Wikimedia Commons auffindbarer zu machen.\nBeginne mit der Eingabe, um Kategorien hinzuzufügen.</string>
   <string name="categories_activity_title">Kategorien</string>
   <string name="title_activity_settings">Einstellungen</string>
   <string name="title_activity_signup">Registrieren</string>
   <string name="menu_about">Über</string>
   <string name="about_license">Die Wikimedia-Commons-App ist eine Open-Source-App, entwickelt und gewartet von Freiwilligen der Wikimedia-Gemeinschaft. Die Wikimedia Foundation ist nicht bei der Erstellung, Entwicklung oder Wartung der App beteiligt.</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Quellcode&lt;/a&gt; und &lt;a href=\"https://commons-app.github.io/\"&gt;Website&lt;/a&gt; auf GitHub. Einen neuen &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-Eintrag&lt;/a&gt; für Fehlerberichte und Vorschläge erstellen.</string>
+  <string name="about_improve">Einen neuen &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-Eintrag&lt;/a&gt; für Fehlerberichte und Vorschläge erstellen.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Datenschutzrichtlinie&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Danksagungen&lt;/a&gt;</string>
   <string name="title_activity_about">Über</string>
@@ -121,7 +121,7 @@
   <string name="tutorial_3_text">Bitte NICHT hochladen:</string>
   <string name="tutorial_3_subtext">- Selfies oder Bilder deiner Freunde\n- Bilder, die du aus dem Internet heruntergeladen hast\n- Screenshots von proprietären Softwareanwendungen</string>
   <string name="tutorial_4_text">Beispiel-Upload:</string>
-  <string name="tutorial_4_subtext">- Titel: Opernhaus von Sydney\n- Beschreibung: Opernhaus von Sydney, von der Bucht aus gesehen\n- Kategorien: Opernhaus von Sydney, Opernhaus von Sydney von Westen, Opernhaus von Sydney (Fernansicht)</string>
+  <string name="tutorial_4_subtext">- Titel: Opernhaus von Sydney\n- Beschreibung: Opernhaus von Sydney, von der Bucht aus gesehen\n- Kategorien: Opernhaus von Sydney von Westen, Opernhaus von Sydney (Fernansicht)</string>
   <string name="welcome_wikipedia_text">Teile deine Bilder. Erwecke Wikipedia-Artikel zum Leben!</string>
   <string name="welcome_wikipedia_subtext">Die Bilder auf Wikipedia kommen von Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Deine Bilder helfen dabei, Menschen auf der ganzen Welt zu bilden.</string>
@@ -164,6 +164,9 @@
   <string name="login_failed_2fa_not_supported">Die Zwei-Faktor-Authentifikation wird derzeit nicht unterstützt.</string>
   <string name="logout_verification">Möchtest du dich wirklich abmelden?</string>
   <string name="commons_logo">Commons-Logo</string>
+  <string name="commons_website">Commons-Website</string>
+  <string name="commons_facebook">Commons-Facebookseite</string>
+  <string name="commons_github">Commons-Quellcode auf Github</string>
   <string name="background_image">Hintergrundbild</string>
   <string name="mediaimage_failed">Medienbild fehlgeschlagen</string>
   <string name="no_image_found">Kein Bild gefunden</string>
@@ -188,6 +191,7 @@
   <string name="navigation_item_feedback">Rückmeldungen</string>
   <string name="navigation_item_logout">Abmelden</string>
   <string name="navigation_item_info">Anleitung</string>
+  <string name="navigation_item_notification">Benachrichtigungen</string>
   <string name="nearby_needs_permissions">Orte in der Nähe können ohne Berechtigung zur Standortbestimmung nicht ermittelt werden</string>
   <string name="no_description_found">Keine Beschreibung gefunden</string>
   <string name="nearby_info_menu_commons_article">Commons-Dateiseite</string>
@@ -203,4 +207,12 @@
   <string name="login_to_your_account">Bei deinem Benutzerkonto anmelden</string>
   <string name="nearby_location_has_not_changed">Der Standort hat sich nicht geändert.</string>
   <string name="nearby_location_not_available">Der Standort ist nicht verfügbar.</string>
+  <string name="location_permission_rationale_nearby">Berechtigung zur Anzeige einer Liste mit Orten in der Nähe erforderlich</string>
+  <string name="get_directions">RICHTUNGEN ABRUFEN</string>
+  <string name="read_article">ARTIKEL LESEN</string>
+  <string name="notifications_welcome">Willkommen auf Wikimedia Commons, %1$s! Wir sind froh, dass du hier bist.</string>
+  <string name="notifications_talk_page_message">%1$s hinterließ eine Nachricht auf deiner Diskussionsseite</string>
+  <string name="notifications_thank_you_edit">Vielen Dank für deine Bearbeitung</string>
+  <string name="notifications_mention">%1$s erwähnte dich auf %2$s.</string>
+  <string name="toggle_view_button">Ansicht wechseln</string>
 </resources>

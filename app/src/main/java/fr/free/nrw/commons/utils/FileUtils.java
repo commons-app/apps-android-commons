@@ -4,10 +4,11 @@ import android.os.Environment;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
 import fr.free.nrw.commons.CommonsApplication;
@@ -17,16 +18,18 @@ public class FileUtils {
     /**
      * Read and return the content of a resource file as string.
      *
-     * @param fileName asset file's path (e.g. "/assets/queries/nearby_query.rq")
+     * @param fileName asset file's path (e.g. "/queries/nearby_query.rq")
      * @return the content of the file
      */
     public static String readFromResource(String fileName) throws IOException {
         StringBuilder buffer = new StringBuilder();
         BufferedReader reader = null;
         try {
-            reader = new BufferedReader(
-                    new InputStreamReader(
-                            CommonsApplication.class.getResourceAsStream(fileName), "UTF-8"));
+            InputStream inputStream = FileUtils.class.getResourceAsStream(fileName);
+            if (inputStream == null) {
+                throw new FileNotFoundException(fileName);
+            }
+            reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
             String line;
             while ((line = reader.readLine()) != null) {
                 buffer.append(line + "\n");

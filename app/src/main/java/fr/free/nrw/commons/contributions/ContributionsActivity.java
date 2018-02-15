@@ -9,7 +9,6 @@ import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -24,35 +23,41 @@ import android.widget.AdapterView;
 import java.util.ArrayList;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.ButterKnife;
-import dagger.android.AndroidInjection;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.HandlerService;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.settings.Prefs;
 import fr.free.nrw.commons.upload.UploadService;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 import static android.content.ContentResolver.requestSync;
 import static fr.free.nrw.commons.contributions.Contribution.STATE_FAILED;
-import static fr.free.nrw.commons.contributions.Contribution.Table.ALL_FIELDS;
-import static fr.free.nrw.commons.contributions.ContributionsContentProvider.AUTHORITY;
+import static fr.free.nrw.commons.contributions.ContributionDao.Table.ALL_FIELDS;
 import static fr.free.nrw.commons.contributions.ContributionsContentProvider.BASE_URI;
 import static fr.free.nrw.commons.settings.Prefs.UPLOADS_SHOWING;
 
-public class ContributionsActivity extends AuthenticatedActivity
-        implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener,
-        MediaDetailPagerFragment.MediaDetailProvider, FragmentManager.OnBackStackChangedListener,
-        ContributionsListFragment.SourceRefresher {
+public  class       ContributionsActivity
+        extends     AuthenticatedActivity
+        implements  LoaderManager.LoaderCallbacks<Cursor>,
+                    AdapterView.OnItemClickListener,
+                    MediaDetailPagerFragment.MediaDetailProvider,
+                    FragmentManager.OnBackStackChangedListener,
+                    ContributionsListFragment.SourceRefresher {
+
+    @Inject MediaWikiApi mediaWikiApi;
+    @Inject SessionManager sessionManager;
+    @Inject @Named("default_preferences") SharedPreferences prefs;
+    @Inject ContributionDao contributionDao;
 
     private Cursor allContributions;
     private ContributionsListFragment contributionsList;
@@ -60,24 +65,6 @@ public class ContributionsActivity extends AuthenticatedActivity
     private UploadService uploadService;
     private boolean isUploadServiceConnected;
     private ArrayList<DataSetObserver> observersWaitingForLoad = new ArrayList<>();
-    private String CONTRIBUTION_SELECTION = "";
-
-    @Inject
-    MediaWikiApi mediaWikiApi;
-
-    /*
-        This sorts in the following order:
-        Currently Uploading
-        Failed (Sorted in ascending order of time added - FIFO)
-        Queued to Upload (Sorted in ascending order of time added - FIFO)
-        Completed (Sorted in descending order of time added)
-
-        This is why Contribution.STATE_COMPLETED is -1.
-     */
-    private String CONTRIBUTION_SORT = Contribution.Table.COLUMN_STATE + " DESC, "
-            + Contribution.Table.COLUMN_UPLOADED + " DESC , ("
-            + Contribution.Table.COLUMN_TIMESTAMP + " * "
-            + Contribution.Table.COLUMN_STATE + ")";
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -92,7 +79,7 @@ public class ContributionsActivity extends AuthenticatedActivity
         @Override
         public void onServiceDisconnected(ComponentName componentName) {
             // this should never happen
-            throw new RuntimeException("UploadService died but the rest of the process did not!");
+            Timber.e(new RuntimeException("UploadService died but the rest of the process did not!"));
         }
     };
 
@@ -109,12 +96,8 @@ public class ContributionsActivity extends AuthenticatedActivity
     @Override
     protected void onResume() {
         super.onResume();
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean isSettingsChanged =
-                sharedPreferences.getBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, false);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, false);
-        editor.apply();
+        boolean isSettingsChanged = prefs.getBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, false);
+        prefs.edit().putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED, false).apply();
         if (isSettingsChanged) {
             refreshSource();
         }
@@ -122,16 +105,14 @@ public class ContributionsActivity extends AuthenticatedActivity
 
     @Override
     protected void onAuthCookieAcquired(String authCookie) {
-        // Do a sync every time we get here!
-        CommonsApplication app = ((CommonsApplication) getApplication());
-        requestSync(app.getCurrentAccount(), AUTHORITY, new Bundle());
+        // Do a sync everytime we get here!
+        requestSync(sessionManager.getCurrentAccount(), ContributionsContentProvider.CONTRIBUTION_AUTHORITY, new Bundle());
         Intent uploadServiceIntent = new Intent(this, UploadService.class);
         uploadServiceIntent.setAction(UploadService.ACTION_START_SERVICE);
         startService(uploadServiceIntent);
         bindService(uploadServiceIntent, uploadServiceConnection, Context.BIND_AUTO_CREATE);
 
-        allContributions = getContentResolver().query(BASE_URI, ALL_FIELDS,
-                CONTRIBUTION_SELECTION, null, CONTRIBUTION_SORT);
+        allContributions = contributionDao.loadAllContributions();
 
         getSupportLoaderManager().initLoader(0, null, this);
     }
@@ -139,19 +120,18 @@ public class ContributionsActivity extends AuthenticatedActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AndroidInjection.inject(this);
         setContentView(R.layout.activity_contributions);
         ButterKnife.bind(this);
 
         // Activity can call methods in the fragment by acquiring a
         // reference to the Fragment from FragmentManager, using findFragmentById()
         FragmentManager supportFragmentManager = getSupportFragmentManager();
-        contributionsList = (ContributionsListFragment) supportFragmentManager
+        contributionsList = (ContributionsListFragment)supportFragmentManager
                 .findFragmentById(R.id.contributionsListFragment);
 
         supportFragmentManager.addOnBackStackChangedListener(this);
         if (savedInstanceState != null) {
-            mediaDetails = (MediaDetailPagerFragment) supportFragmentManager
+            mediaDetails = (MediaDetailPagerFragment)supportFragmentManager
                     .findFragmentById(R.id.contributionsFragmentContainer);
 
             getSupportLoaderManager().initLoader(0, null, this);
@@ -190,24 +170,23 @@ public class ContributionsActivity extends AuthenticatedActivity
 
     public void retryUpload(int i) {
         allContributions.moveToPosition(i);
-        Contribution c = Contribution.fromCursor(allContributions);
+        Contribution c = contributionDao.fromCursor(allContributions);
         if (c.getState() == STATE_FAILED) {
             uploadService.queue(UploadService.ACTION_UPLOAD_FILE, c);
-            Timber.d("Restarting for %s", c.toContentValues());
+            Timber.d("Restarting for %s", c.toString());
         } else {
-            Timber.d("Skipping re-upload for non-failed %s", c.toContentValues());
+            Timber.d("Skipping re-upload for non-failed %s", c.toString());
         }
     }
 
     public void deleteUpload(int i) {
         allContributions.moveToPosition(i);
-        Contribution c = Contribution.fromCursor(allContributions);
+        Contribution c = contributionDao.fromCursor(allContributions);
         if (c.getState() == STATE_FAILED) {
-            Timber.d("Deleting failed contrib %s", c.toContentValues());
-            c.setContentProviderClient(getContentResolver().acquireContentProviderClient(AUTHORITY));
-            c.delete();
+            Timber.d("Deleting failed contrib %s", c.toString());
+            contributionDao.delete(c);
         } else {
-            Timber.d("Skipping deletion for non-failed contrib %s", c.toContentValues());
+            Timber.d("Skipping deletion for non-failed contrib %s", c.toString());
         }
     }
 
@@ -241,11 +220,10 @@ public class ContributionsActivity extends AuthenticatedActivity
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        int uploads = sharedPref.getInt(UPLOADS_SHOWING, 100);
+        int uploads = prefs.getInt(UPLOADS_SHOWING, 100);
         return new CursorLoader(this, BASE_URI,
-                ALL_FIELDS, CONTRIBUTION_SELECTION, null,
-                CONTRIBUTION_SORT + "LIMIT " + uploads);
+                ALL_FIELDS, "", null,
+                ContributionDao.CONTRIBUTION_SORT + "LIMIT " + uploads);
     }
 
     @Override
@@ -254,7 +232,7 @@ public class ContributionsActivity extends AuthenticatedActivity
 
         if (contributionsList.getAdapter() == null) {
             contributionsList.setAdapter(new ContributionsListAdapter(getApplicationContext(),
-                    cursor, 0));
+                    cursor, 0, contributionDao));
         } else {
             ((CursorAdapter) contributionsList.getAdapter()).swapCursor(cursor);
         }
@@ -275,7 +253,7 @@ public class ContributionsActivity extends AuthenticatedActivity
             // not yet ready to return data
             return null;
         } else {
-            return Contribution.fromCursor((Cursor) contributionsList.getAdapter().getItem(i));
+            return contributionDao.fromCursor((Cursor) contributionsList.getAdapter().getItem(i));
         }
     }
 
@@ -289,9 +267,8 @@ public class ContributionsActivity extends AuthenticatedActivity
 
     @SuppressWarnings("ConstantConditions")
     private void setUploadCount() {
-        CommonsApplication app = ((CommonsApplication) getApplication());
-        Disposable uploadCountDisposable = mediaWikiApi
-                .getUploadCount(app.getCurrentAccount().name)
+        compositeDisposable.add(mediaWikiApi
+                .getUploadCount(sessionManager.getCurrentAccount().name)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -299,8 +276,7 @@ public class ContributionsActivity extends AuthenticatedActivity
                                 .getQuantityString(R.plurals.contributions_subtitle,
                                         uploadCount, uploadCount)),
                         t -> Timber.e(t, "Fetching upload count failed")
-                );
-        compositeDisposable.add(uploadCountDisposable);
+                ));
     }
 
     @Override

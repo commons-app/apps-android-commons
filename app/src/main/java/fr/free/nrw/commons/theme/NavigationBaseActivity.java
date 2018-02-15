@@ -27,6 +27,7 @@ import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.nearby.NearbyActivity;
+import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
 import timber.log.Timber;
 
@@ -62,10 +63,10 @@ public abstract class NavigationBaseActivity extends BaseActivity
     private void setUserName() {
 
         View navHeaderView = navigationView.getHeaderView(0);
-        TextView username = (TextView) navHeaderView.findViewById(R.id.username);
+        TextView username = navHeaderView.findViewById(R.id.username);
 
         AccountManager accountManager = AccountManager.get(this);
-        Account[] allAccounts = accountManager.getAccountsByType(AccountUtil.accountType());
+        Account[] allAccounts = accountManager.getAccountsByType(AccountUtil.ACCOUNT_TYPE);
         if (allAccounts.length != 0) {
             username.setText(allAccounts[0].name);
         }
@@ -142,6 +143,10 @@ public abstract class NavigationBaseActivity extends BaseActivity
                         })
                         .setNegativeButton(R.string.no, (dialog, which) -> dialog.cancel())
                         .show();
+                return true;
+            case R.id.action_notifications:
+                drawerLayout.closeDrawer(navigationView);
+                NotificationActivity.startYourself(this);
                 return true;
             default:
                 Timber.e("Unknown option [%s] selected from the navigation menu", itemId);

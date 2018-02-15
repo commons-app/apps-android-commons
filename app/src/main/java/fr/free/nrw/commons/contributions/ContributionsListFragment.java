@@ -5,9 +5,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -22,21 +20,23 @@ import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.nearby.NearbyActivity;
 import timber.log.Timber;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.app.Activity.RESULT_OK;
-import static android.content.Context.MODE_PRIVATE;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import static android.view.View.GONE;
 
-public class ContributionsListFragment extends Fragment {
+public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
     @BindView(R.id.contributionsList)
     GridView contributionsList;
@@ -44,6 +44,9 @@ public class ContributionsListFragment extends Fragment {
     TextView waitingMessage;
     @BindView(R.id.loadingContributionsProgressBar)
     ProgressBar progressBar;
+
+    @Inject @Named("prefs") SharedPreferences prefs;
+    @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
 
     private ContributionController controller;
 
@@ -59,7 +62,6 @@ public class ContributionsListFragment extends Fragment {
         }
 
         //TODO: Should this be in onResume?
-        SharedPreferences prefs = getActivity().getSharedPreferences("prefs", MODE_PRIVATE);
         String lastModified = prefs.getString("lastSyncTimestamp", "");
         Timber.d("Last Sync Timestamp: %s", lastModified);
 
@@ -162,9 +164,7 @@ public class ContributionsListFragment extends Fragment {
 
                 return true;
             case R.id.menu_from_camera:
-                SharedPreferences sharedPref = PreferenceManager
-                        .getDefaultSharedPreferences(CommonsApplication.getInstance());
-                boolean useExtStorage = sharedPref.getBoolean("useExternalStorage", true);
+                boolean useExtStorage = defaultPrefs.getBoolean("useExternalStorage", true);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && useExtStorage) {
                     // Here, thisActivity is the current activity
                     if (ContextCompat.checkSelfPermission(getActivity(), WRITE_EXTERNAL_STORAGE)
@@ -242,10 +242,15 @@ public class ContributionsListFragment extends Fragment {
         menu.clear(); // See http://stackoverflow.com/a/8495697/17865
         inflater.inflate(R.menu.fragment_contributions_list, menu);
 
-        CommonsApplication app = (CommonsApplication) getContext().getApplicationContext();
-        if (!app.deviceHasCamera()) {
+        if (!deviceHasCamera()) {
             menu.findItem(R.id.menu_from_camera).setEnabled(false);
         }
+    }
+
+    public boolean deviceHasCamera() {
+        PackageManager pm = getContext().getPackageManager();
+        return pm.hasSystemFeature(PackageManager.FEATURE_CAMERA) ||
+                pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT);
     }
 
     @Override

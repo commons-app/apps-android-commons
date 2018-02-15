@@ -9,10 +9,9 @@
 
     <LinearLayout
         android:gravity="center"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_height="180dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         >
 
         <ImageView
@@ -20,7 +19,6 @@
             android:id="@+id/welcome_wikipedia"
             android:layout_width="150dp"
             android:layout_height="180dp"
-            android:layout_marginLeft="30dp"
             android:contentDescription="@string/welcome_image_welcome_wikipedia"
             />
 
@@ -29,7 +27,8 @@
             android:layout_width="160dp"
             android:layout_height="120dp"
             android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="@dimen/standard_gap"
+            android:layout_marginStart="@dimen/standard_gap"
             android:contentDescription="@string/welcome_image_welcome_copyright"
             />
 
@@ -42,6 +41,7 @@
         android:text="@string/welcome_final_text"
         android:layout_gravity="center"
         android:textStyle="bold"
+        android:textSize="@dimen/normal_text"
         android:textAlignment="center"
         android:gravity="center_horizontal"
         android:textColor="@android:color/white"
@@ -49,10 +49,11 @@
 
     <Button
         android:layout_width="120dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="@dimen/overflow_button_dimen"
+        android:layout_marginTop="@dimen/standard_gap"
         android:text="@string/welcome_final_button_text"
         android:id="@+id/welcomeYesButton"
+        android:textSize="@dimen/normal_text"
         android:layout_gravity="center"
         android:background="@android:color/white"
         android:textColor="#0c609c"

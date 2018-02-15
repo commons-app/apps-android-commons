@@ -28,6 +28,7 @@ import android.widget.TextView;
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import dagger.android.support.AndroidSupportInjection;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.media.MediaDetailPagerFragment;
@@ -54,6 +55,12 @@ public class MultipleUploadListFragment extends Fragment {
         private SimpleDraweeView image;
         private TextView title;
         private RelativeLayout overlay;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        AndroidSupportInjection.inject(this);
+        super.onAttach(context);
     }
 
     private class PhotoDisplayAdapter extends BaseAdapter {

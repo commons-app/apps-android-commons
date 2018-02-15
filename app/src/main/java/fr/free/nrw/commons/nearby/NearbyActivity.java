@@ -28,8 +28,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import dagger.android.AndroidInjection;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.location.LocationServiceManager;
@@ -48,12 +46,17 @@ import static fr.free.nrw.commons.location.LocationServiceManager.LOCATION_REQUE
 
 public class NearbyActivity extends NavigationBaseActivity implements LocationUpdateListener {
 
+    private static final int LOCATION_REQUEST = 1;
+    private static final String MAP_LAST_USED_PREFERENCE = "mapLastUsed";
+
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
-    private static final String MAP_LAST_USED_PREFERENCE = "mapLastUsed";
 
     @Inject
     LocationServiceManager locationManager;
+    @Inject
+    NearbyController nearbyController;
+
     private LatLng curLatLang;
     private Bundle bundle;
     private SharedPreferences sharedPreferences;
@@ -64,7 +67,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AndroidInjection.inject(this);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         setContentView(R.layout.activity_nearby);
         ButterKnife.bind(this);
@@ -279,20 +281,14 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         }
 
         progressBar.setVisibility(View.VISIBLE);
-        setupPlaceList(this);
-    }
-
-    private void setupPlaceList(Context context) {
-        placesDisposable = Observable.fromCallable(() -> NearbyController
-                .loadAttractionsFromLocation(curLatLang, CommonsApplication.getInstance()))
+        placesDisposable = Observable.fromCallable(() -> nearbyController
+                .loadAttractionsFromLocation(curLatLang, this))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe((result) -> {
-                    populatePlaces(context, result);
-                });
+                .subscribe(this::populatePlaces);
     }
 
-    private void populatePlaces(Context context, List<Place> placeList) {
+    private void populatePlaces(List<Place> placeList) {
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Uri.class, new UriSerializer())
                 .create();
@@ -301,7 +297,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
         if (placeList.size() == 0) {
             int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, R.string.no_nearby, duration);
+            Toast toast = Toast.makeText(this, R.string.no_nearby, duration);
             toast.show();
         }
 

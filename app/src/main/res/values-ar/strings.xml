@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">فشل رفع %1$s</string>
   <string name="upload_failed_notification_subtitle">انقر لتشاهد</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d رفع ملف</item>
-    <item quantity="other">%d رفع ملفات</item>
+    <item quantity="one">%1$d رفع ملف</item>
+    <item quantity="other">%1$d رفع ملفات</item>
   </plurals>
   <string name="title_activity_contributions">مرفوعاتي الأخيرة</string>
   <string name="contribution_state_queued">في قائمة الانتظار</string>
@@ -54,8 +54,9 @@
   <string name="gps_disabled">عطل نظام الملاحة العالمي GPS بجهازك. أترغب في التنشيط؟</string>
   <string name="enable_gps">تفعيل GPS</string>
   <string name="contributions_subtitle_zero">لا مرفوعات بعد</string>
+  <string name="multiple_uploads_title">{{جمع|واحد=%1$d رفع|%1$d رفع}}</string>
   <string name="categories_not_found">لا توجد تصنيفات تطابق %1$s</string>
-  <string name="categories_skip_explanation">أضف التصانيف لتسهل اكتشاف صورك على ويكيميديا كومنز.\n\nابدأ الكتاب لتضيف التصانيف.\nانقر هذه الرسالة لتتجاوز هذه الخطوة.</string>
+  <string name="categories_skip_explanation" fuzzy="true">أضف التصانيف لتسهل اكتشاف صورك على ويكيميديا كومنز.\n\nابدأ الكتاب لتضيف التصانيف.\nانقر هذه الرسالة لتتجاوز هذه الخطوة.</string>
   <string name="categories_activity_title">تصنيفات</string>
   <string name="title_activity_settings">الإعدادات</string>
   <string name="title_activity_signup">سجّل</string>
@@ -120,5 +121,9 @@
   <string name="navigation_item_about">حول</string>
   <string name="navigation_item_settings">الإعدادات</string>
   <string name="navigation_item_logout">تسجيل الخروج</string>
+  <string name="navigation_item_notification">إشعارات</string>
   <string name="nearby_info_menu_commons_article">صفحة ملف كومنز</string>
+  <string name="notifications_welcome">مرحبا بكم في ويكيمديا كومنز، %1$s! نحن سعداء لأنك هنا.</string>
+  <string name="notifications_talk_page_message">%1$s رسالة على صفحة الحديث</string>
+  <string name="notifications_mention">%1$s ذكر لك على %2$s.</string>
 </resources>

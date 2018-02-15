@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">Подигањето на „%1$s“ не успеа</string>
   <string name="upload_failed_notification_subtitle">Допрете за да погледате</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">Се подига %d податотека</item>
-    <item quantity="other">Се подигаат %d податотеки</item>
+    <item quantity="one">Се подига %1$d податотека</item>
+    <item quantity="other">Се подигаат %1$d податотеки</item>
   </plurals>
   <string name="title_activity_contributions">Мои скорешни подигања</string>
   <string name="contribution_state_queued">Чека ред</string>
@@ -56,25 +56,25 @@
   <string name="contributions_subtitle_zero">Сè уште нема подигања</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d подигање</item>
-    <item quantity="other">%d подигања</item>
+    <item quantity="one">%1$d подигање</item>
+    <item quantity="other">%1$d подигања</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Започнувам %d подигање</item>
-    <item quantity="other">Започнувам %d подигања</item>
+    <item quantity="one">Започнувам %1$d подигање</item>
+    <item quantity="other">Започнувам %1$d подигања</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d подигање</item>
-    <item quantity="other">%d подигања</item>
+    <item quantity="one">%1$d подигање</item>
+    <item quantity="other">%1$d подигања</item>
   </plurals>
   <string name="categories_not_found">Нема категории што одговараат на %1$s</string>
-  <string name="categories_skip_explanation">Ставете им категории на сликите, за да можат корисниците полесно да ги најдат на Ризницата.\n\nЗа да ставите категорија, почнете со пишување на нејзиното име.\nДопрете ја поракава (или стиснете на назад) за да го прескокнете овој чекор.</string>
+  <string name="categories_skip_explanation">Ставете им категории на сликите, за да можат корисниците полесно да ги најдат на Ризницата.\n\nЗа да ставите категорија, почнете со пишување на нејзиното име.</string>
   <string name="categories_activity_title">Категории</string>
   <string name="title_activity_settings">Нагодувања</string>
   <string name="title_activity_signup">Регистрација</string>
   <string name="menu_about">За извршникот</string>
   <string name="about_license">Прилогот на Ризницата има отворен код. Негови творци и одржувачи се примателите на наменските средства од Викимедиината заедница како и членовите на заедницата. Фондацијата Викимедија нема учество во нејзиното создавање, разработка и одржување.</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Извор&lt;/a&gt; и &lt;a href=\"https://commons-app.github.io/\"&gt;мреж. место&lt;/a&gt; на GitHub&lt;/a&gt;. Создајте нов &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;случај на GitHub&lt;/a&gt; за пријавување грешки и давање предлози.</string>
+  <string name="about_improve">Создајте нов &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;проблем на GitHub&lt;/a&gt; за пријавување на грешки и давање предлози.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Заштита на личните податоци&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Заслуги&lt;/a&gt;</string>
   <string name="title_activity_about">За извршникот</string>
@@ -121,7 +121,7 @@
   <string name="tutorial_3_text">НЕ подигајте:</string>
   <string name="tutorial_3_subtext">u2022 Слики од вас или вашите пријатели \nu2022 Слики што сте ги презеле од семрежјето \nu2022 Екрански снимки на неслободни прилози (апликации)</string>
   <string name="tutorial_4_text">Пример за подигање:</string>
-  <string name="tutorial_4_subtext">u2022 Наслов: Сиднејска опера \nu2022 Опис: Поглед на Сиднејската опера преку заливот\nu2022 Категорија: Сиднејска опера, Сиднејската опера од запад, Сиднејската опера од далеку</string>
+  <string name="tutorial_4_subtext">- Наслов: Сиднејска опера \n- Опис: Поглед на Сиднејската опера преку заливот\n- Категорија: Сиднејска опера, Сиднејската опера од запад, Сиднејската опера од далеку</string>
   <string name="welcome_wikipedia_text">Споделете ги Вашите слики. Да ги оживееме статиите на Википедија!</string>
   <string name="welcome_wikipedia_subtext">Сликите на Википедија доаѓаат од Ризницата.</string>
   <string name="welcome_copyright_text">Со Вашите слики помагате во образованието на луѓето ширум светот.</string>
@@ -164,6 +164,9 @@
   <string name="login_failed_2fa_not_supported">Двочинителската заверка засега не е поддржана.</string>
   <string name="logout_verification">Дали навистина сакате да се одјавите?</string>
   <string name="commons_logo">Лого на Ризницата</string>
+  <string name="commons_website">Ризница</string>
+  <string name="commons_facebook">Ризницата на Facebook</string>
+  <string name="commons_github">Изворен код на Ризницата на Github</string>
   <string name="background_image">Заднинска слика</string>
   <string name="mediaimage_failed">Сликата не успеа</string>
   <string name="no_image_found">Не најдов слики</string>
@@ -188,6 +191,7 @@
   <string name="navigation_item_feedback">Мислења</string>
   <string name="navigation_item_logout">Одјава</string>
   <string name="navigation_item_info">Упатства</string>
+  <string name="navigation_item_notification">Известувања</string>
   <string name="nearby_needs_permissions">Местата во близина не можат да се прикажат без дозволи за местоположба.</string>
   <string name="no_description_found">не најдов описи</string>
   <string name="nearby_info_menu_commons_article">Податотечна страница</string>
@@ -203,4 +207,12 @@
   <string name="login_to_your_account">Најавете се со вашата сметка</string>
   <string name="nearby_location_has_not_changed">Местоположбата не е сменета.</string>
   <string name="nearby_location_not_available">Местоположбата е недостапна.</string>
+  <string name="location_permission_rationale_nearby">Се бара дозвола за приказ на список на околни места</string>
+  <string name="get_directions">ДАЈ НАСОКИ</string>
+  <string name="read_article">ПРОЧИТАЈ СТАТИЈА</string>
+  <string name="notifications_welcome">Добре дојдовте на Ризницата, %1$s! Драго ни е што сте тука.</string>
+  <string name="notifications_talk_page_message">%1$s ви остави порака на разговорната страница</string>
+  <string name="notifications_thank_you_edit">Ви благодариме за уредувањето</string>
+  <string name="notifications_mention">%1$s ве спомна на %2$s.</string>
+  <string name="toggle_view_button">Смени поглед</string>
 </resources>

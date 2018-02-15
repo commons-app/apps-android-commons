@@ -20,9 +20,9 @@
   <string name="upload_progress_notification_title_finishing">ატვირთვის დასრულება %1$</string>
   <string name="upload_failed_notification_title">%1$ ატვირთვა ვერ მოხერხდა</string>
   <string name="upload_failed_notification_subtitle">დააჭირეთ სანახავად</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d ფაილი იტვირთება</item>
-    <item quantity="other">%d ფაილი იტვირთება</item>
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
+    <item quantity="one">%1$d ფაილი იტვირთება</item>
+    <item quantity="other">%1$d ფაილი იტვირთება</item>
   </plurals>
   <string name="title_activity_contributions">ჩემი ბოლო ატვირთვები</string>
   <string name="contribution_state_queued">რიგი</string>
@@ -54,25 +54,25 @@
   <string name="gps_disabled">თქვენ მოწყობილობაზე GPS გამორთულია. ნამდვილად გსურთ ჩართვა?</string>
   <string name="enable_gps">GPS-ის ჩართვა</string>
   <string name="contributions_subtitle_zero">ატვირთვები არ არის</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d ატვირთვა</item>
-    <item quantity="other">%d ატვირთვა</item>
+    <item quantity="one">%1$d ატვირთვა</item>
+    <item quantity="other">%1$d ატვირთვა</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">იწყება %d ატვირთვა</item>
-    <item quantity="other">იწყება %d ატვირთვა</item>
+  <plurals name="starting_multiple_uploads" fuzzy="true">
+    <item quantity="one">იწყება %1$d ატვირთვა</item>
+    <item quantity="other">იწყება %1$d ატვირთვა</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%d ატვირთვა</item>
-    <item quantity="other">%d ატვირთვა</item>
+  <plurals name="multiple_uploads_title" fuzzy="true">
+    <item quantity="one">%1$d ატვირთვა</item>
+    <item quantity="other">%1$d ატვირთვა</item>
   </plurals>
   <string name="categories_activity_title">კატეგორია</string>
   <string name="title_activity_settings">კონფიგურაცია</string>
   <string name="title_activity_signup">რეგისტრაცია</string>
   <string name="menu_about">პროგრამის შესახებ</string>
   <string name="about_license" fuzzy="true">ღია კოდის მქონე აპლიკაცია, ვრცელდება ლიცენზიით &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. ვიკისაწყობი და მისი ლოგო ფონდი ვიკიმედიის სავაჭრო ნიშნებია და ფონდი ვიკიმედიის ნებართვით გამოიყენება. ჩვენ არ ვართ დაკავშირებული ფონდ ვიკიმედიასთან.</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;წყარო&lt;/a&gt; და &lt;a href=\"https://commons-app.github.io/\"&gt;საიტი&lt;/a&gt; GitHub-ზე. შეცდომის შესატყობინებლად ან წინადადებისათვის შექმენით ახალი &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;მოთხოვნა GitHub-ზე&lt;/a&gt;.</string>
+  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;წყარო&lt;/a&gt; და &lt;a href=\"https://commons-app.github.io/\"&gt;საიტი&lt;/a&gt; GitHub-ზე. შეცდომის შესატყობინებლად ან წინადადებისათვის შექმენით ახალი &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;მოთხოვნა GitHub-ზე&lt;/a&gt;.</string>
   <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;კონფიდენციალურობის პოლიტიკა&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;მადლობები&lt;/a&gt;</string>
   <string name="title_activity_about">პროგრამის შესახებ</string>
@@ -113,7 +113,7 @@
   <string name="tutorial_3_text">გთხოვთ არ ატვირთოთ:</string>
   <string name="tutorial_3_subtext">- სელფი ან მეგობრების სურათები\n- ინტერნეტიდან ჩამოტვირთული ფოტოები\n- არათავისუფალი აპლიკაციების სკრინშოტები</string>
   <string name="tutorial_4_text">ატვირთვის ნიმუში:</string>
-  <string name="tutorial_4_subtext">- სათაური: სიდნეის ოპერის თეატრი\n- აღწერა: სიდნეის ოპერის თეატრის ხედი უბიდან\n- კატეგორიები: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext" fuzzy="true">- სათაური: სიდნეის ოპერის თეატრი\n- აღწერა: სიდნეის ოპერის თეატრის ხედი უბიდან\n- კატეგორიები: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">ატვირთეთ თქვენი ფოტოები. დაეხმარეთ ვიკიპედიის სტატიებს გაცოცხლებაში!</string>
   <string name="welcome_wikipedia_subtext">ვიკიპედიის ფოტოები ვიკისაწყობში ინახება.</string>
   <string name="welcome_copyright_text">თქვენი სურათები ხალხის განათლებას ეხმარება მთელ მსოფლიოში.</string>
