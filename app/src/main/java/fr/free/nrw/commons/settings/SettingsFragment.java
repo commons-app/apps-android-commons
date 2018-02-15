@@ -92,7 +92,7 @@ public class SettingsFragment extends PreferenceFragment {
             } else {
                 editor.putInt(Prefs.UPLOADS_SHOWING, value);
                 editor.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED,true);
-                uploadLimit.setSummary(newValue.toString());
+                uploadLimit.setSummary(String.valueOf(value));
             }
             editor.apply();
             return true;
