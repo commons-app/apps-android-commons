@@ -302,7 +302,7 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
         return ((item.matches(".*(19|20)\\d{2}.*") && !item.contains(yearInString) && !item.contains(prevYearInString))
                 || item.matches("(.*)needing(.*)") || item.matches("(.*)taken on(.*)")
                 || (item.matches(".*0s.*") && !item.matches(".*(200|201)0s.*"))
-                || !item.matches(".*(0|1|2)\\d{1}.{1}\\d{2}.{1}\\d{2}.*"));
+                || !item.matches(".*(0|1)\\d{1}.{1}\\d{2}.{1}\\d{2}.*"));
     }
 
     private void updateCategoryCount(CategoryItem item) {
