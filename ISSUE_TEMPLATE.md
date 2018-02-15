@@ -1,3 +1,5 @@
+_Before creating an issue, please search the existing issues to see if a similar one has already been created. You can search issues by specific labels (e.g. `label:nearby `) or just by typing keywords into the search filter._
+
 **Summary:** 
 
 Summarize your issue in one sentence (what goes wrong, what did you expect to happen)
