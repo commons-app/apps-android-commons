@@ -495,11 +495,11 @@ public class ShareActivity
                 }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     if (descriptor != null) {
-                        tempImageObj = new GPSExtractor(descriptor.getFileDescriptor());
+                        tempImageObj = new GPSExtractor(descriptor.getFileDescriptor(),this, prefs);
                     }
                 } else {
                     if (filePath != null) {
-                        tempImageObj = new GPSExtractor(file.getAbsolutePath());
+                        tempImageObj = new GPSExtractor(file.getAbsolutePath(), this, prefs);
                     }
                 }
 
