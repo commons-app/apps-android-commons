@@ -38,7 +38,7 @@ public class LatLng {
     /**
      * gets the latitude and longitude of a given non-null location
      * @param location the non-null location of the user
-     * @return
+     * @return A new instance of the class
      */
     public static LatLng from(@NonNull Location location) {
         return new LatLng(location.getLatitude(), location.getLongitude(), location.getAccuracy());
