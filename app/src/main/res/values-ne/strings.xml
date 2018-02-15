@@ -90,4 +90,5 @@
   <string name="detail_description_empty">वर्णन छैन</string>
   <string name="detail_license_empty">अज्ञान अनुमतिपत्र</string>
   <string name="menu_refresh">ताजागर्ने</string>
+  <string name="toggle_view_button">टगल दृश्य</string>
 </resources>

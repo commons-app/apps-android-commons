@@ -55,7 +55,7 @@
   <string name="enable_gps">Spustit GPS</string>
   <string name="contributions_subtitle_zero">Žádné nahrané soubory</string>
   <plurals name="contributions_subtitle">
-    <item quantity="zero">Žádné soubory</item>
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">1 soubor</item>
     <item quantity="other">%1$d souborů</item>
   </plurals>
