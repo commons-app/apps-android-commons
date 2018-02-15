@@ -38,7 +38,7 @@ public class LatLng {
     /**
      * gets the latitude and longitude of a given non-null location
      * @param location the non-null location of the user
-     * @return
+     * @return LatLng the Latitude and Longitude of a given location
      */
     public static LatLng from(@NonNull Location location) {
         return new LatLng(location.getLatitude(), location.getLongitude(), location.getAccuracy());
@@ -48,13 +48,12 @@ public class LatLng {
      * creates a hash code for the longitude and longitude
      */
     public int hashCode() {
-        boolean var1 = true;
-        byte var2 = 1;
-        long var3 = Double.doubleToLongBits(this.latitude);
-        int var5 = 31 * var2 + (int)(var3 ^ var3 >>> 32);
-        var3 = Double.doubleToLongBits(this.longitude);
-        var5 = 31 * var5 + (int)(var3 ^ var3 >>> 32);
-        return var5;
+        byte var1 = 1;
+        long var2 = Double.doubleToLongBits(this.latitude);
+        int var3 = 31 * var1 + (int)(var2 ^ var2 >>> 32);
+        var2 = Double.doubleToLongBits(this.longitude);
+        var3 = 31 * var3 + (int)(var2 ^ var2 >>> 32);
+        return var3;
     }
 
     /**

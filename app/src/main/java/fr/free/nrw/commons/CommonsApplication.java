@@ -57,7 +57,6 @@ public class CommonsApplication extends Application {
 
     public static final String FEEDBACK_EMAIL_SUBJECT = "Commons Android App (%s) Feedback";
 
-    private CommonsApplicationComponent component;
     private RefWatcher refWatcher;
 
 
@@ -136,9 +135,10 @@ public class CommonsApplication extends Application {
                 .subscribe(() -> {
                     Timber.d("All accounts have been removed");
                     //TODO: fix preference manager
-                    defaultPrefs.edit().clear().commit();
-                    applicationPrefs.edit().clear().commit();
-                    applicationPrefs.edit().putBoolean("firstrun", false).apply();otherPrefs.edit().clear().commit();
+                    defaultPrefs.edit().clear().apply();
+                    applicationPrefs.edit().clear().apply();
+                    applicationPrefs.edit().putBoolean("firstrun", false).apply();
+                    otherPrefs.edit().clear().apply();
                     updateAllDatabases();
 
                     logoutListener.onLogoutComplete();
