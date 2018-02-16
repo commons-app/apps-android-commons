@@ -19,7 +19,7 @@ public abstract class OverlayDialog extends DialogFragment {
 
     /**
      * creates a DialogFragment with the correct style and theme
-     * @param savedInstanceState
+     * @param savedInstanceState bundle re-constructed from a previous saved state
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
