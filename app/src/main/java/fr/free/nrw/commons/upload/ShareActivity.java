@@ -16,6 +16,7 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.view.MenuItem;
 import android.view.View;
@@ -64,7 +65,7 @@ import static fr.free.nrw.commons.upload.ExistingFileAsync.Result.NO_DUPLICATE;
 public  class      ShareActivity
         extends    AuthenticatedActivity
         implements SingleUploadFragment.OnUploadActionInitiated,
-        OnCategoriesSaveHandler {
+        OnCategoriesSaveHandler,SimilarImageDialogFragment.onResponse {
 
     private static final int REQUEST_PERM_ON_CREATE_STORAGE = 1;
     private static final int REQUEST_PERM_ON_CREATE_LOCATION = 2;
@@ -89,6 +90,7 @@ public  class      ShareActivity
     private boolean cacheFound;
 
     private GPSExtractor imageObj;
+    private GPSExtractor tempImageObj;
     private String decimalCoords;
 
     private boolean useNewPermissions = false;
@@ -99,7 +101,7 @@ public  class      ShareActivity
     private String description;
     private Snackbar snackbar;
     private boolean duplicateCheckPassed = false;
-
+    private boolean haveCheckedForOtherImages = false;
     /**
      * Called when user taps the submit button.
      */
@@ -452,11 +454,91 @@ public  class      ShareActivity
             if (imageObj != null) {
                 // Gets image coords from exif data or user location
                 decimalCoords = imageObj.getCoords(gpsEnabled);
-                useImageCoords();
+                if(decimalCoords==null || !imageObj.imageCoordsExists){
+//                  Check if the location is from GPS or EXIF
+//                  Find other photos taken around the same time which has gps coordinates
+                    Timber.d("EXIF:false");
+                    Timber.d("EXIF call"+(imageObj==tempImageObj));
+                    if(!haveCheckedForOtherImages)
+                        findOtherImages(gpsEnabled);// Do not do repeat the process
+                }
+                else {
+//                  As the selected image has GPS data in EXIF go ahead with the same.
+                    useImageCoords();
+                }
             }
         } catch (FileNotFoundException e) {
             Timber.w("File not found: " + mediaUri, e);
         }
+    }
+
+    private void findOtherImages(boolean gpsEnabled) {
+        Timber.d("filePath"+getPathOfMediaOrCopy());
+        String filePath = getPathOfMediaOrCopy();
+        long timeOfCreation = new File(filePath).lastModified();//Time when the original image was created
+        File folder = new File(filePath.substring(0,filePath.lastIndexOf('/')));
+        File[] files = folder.listFiles();
+        Timber.d("folderTime Number:"+files.length);
+
+        for(File file : files){
+            if(file.lastModified()-timeOfCreation<=(120*1000) && file.lastModified()-timeOfCreation>=-(120*1000)){
+                //Make sure the photos were taken within 20seconds
+                Timber.d("fild date:"+file.lastModified()+ " time of creation"+timeOfCreation);
+                tempImageObj = null;//Temporary GPSExtractor to extract coords from these photos
+                ParcelFileDescriptor descriptor
+                        = null;
+                try {
+                    descriptor = getContentResolver().openFileDescriptor(Uri.parse(file.getAbsolutePath()), "r");
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    if (descriptor != null) {
+                        tempImageObj = new GPSExtractor(descriptor.getFileDescriptor(),this, prefs);
+                    }
+                } else {
+                    if (filePath != null) {
+                        tempImageObj = new GPSExtractor(file.getAbsolutePath(), this, prefs);
+                    }
+                }
+
+                if(tempImageObj!=null){
+                    Timber.d("not null fild EXIF"+tempImageObj.imageCoordsExists +" coords"+tempImageObj.getCoords(gpsEnabled));
+                    if(tempImageObj.getCoords(gpsEnabled)!=null && tempImageObj.imageCoordsExists){
+//                       Current image has gps coordinates and it's not current gps locaiton
+                        Timber.d("This fild has image coords:"+ file.getAbsolutePath());
+//                       Create a dialog fragment for the suggestion
+                        FragmentManager fragmentManager = getSupportFragmentManager();
+                        SimilarImageDialogFragment newFragment = new SimilarImageDialogFragment();
+                        Bundle args = new Bundle();
+                        args.putString("originalImagePath",filePath);
+                        args.putString("possibleImagePath",file.getAbsolutePath());
+                        newFragment.setArguments(args);
+                        newFragment.show(fragmentManager, "dialog");
+                        break;
+                    }
+
+                }
+
+            }
+        }
+        haveCheckedForOtherImages = true; //Finished checking for other images
+        return;
+    }
+
+    @Override
+    public void onPostiveResponse() {
+        imageObj = tempImageObj;
+        decimalCoords = imageObj.getCoords(false);// Not necessary to use gps as image already ha EXIF data
+        Timber.d("EXIF from tempImageObj");
+        useImageCoords();
+    }
+
+    @Override
+    public void onNegativeResponse() {
+        Timber.d("EXIF from imageObj");
+        useImageCoords();
+
     }
 
     /**
@@ -466,6 +548,7 @@ public  class      ShareActivity
     public void useImageCoords() {
         if (decimalCoords != null) {
             Timber.d("Decimal coords of image: %s", decimalCoords);
+            Timber.d("is EXIF data present:"+imageObj.imageCoordsExists+" from findOther image:"+(imageObj==tempImageObj));
 
             // Only set cache for this point if image has coords
             if (imageObj.imageCoordsExists) {
@@ -489,7 +572,10 @@ public  class      ShareActivity
                 Timber.d("Cache found, setting categoryList in MwVolleyApi to %s", displayCatList);
                 MwVolleyApi.setGpsCat(displayCatList);
             }
+        }else{
+            Timber.d("EXIF: no coords");
         }
+
     }
 
     @Override
