@@ -101,7 +101,7 @@ public  class      ShareActivity
     private String description;
     private Snackbar snackbar;
     private boolean duplicateCheckPassed = false;
-
+    private boolean haveCheckedForOtherImages = false;
     /**
      * Called when user taps the submit button.
      */
@@ -458,7 +458,9 @@ public  class      ShareActivity
 //                  Check if the location is from GPS or EXIF
 //                  Find other photos taken around the same time which has gps coordinates
                     Timber.d("EXIF:false");
-                    findOtherImages(gpsEnabled);
+                    Timber.d("EXIF call"+(imageObj==tempImageObj));
+                    if(!haveCheckedForOtherImages)
+                        findOtherImages(gpsEnabled);// Do not do repeat the process
                 }
                 else {
 //                  As the selected image has GPS data in EXIF go ahead with the same.
@@ -520,6 +522,7 @@ public  class      ShareActivity
 
             }
         }
+        haveCheckedForOtherImages = true; //Finished checking for other images
         return;
     }
 
@@ -545,7 +548,7 @@ public  class      ShareActivity
     public void useImageCoords() {
         if (decimalCoords != null) {
             Timber.d("Decimal coords of image: %s", decimalCoords);
-            Timber.d("is EXIF data present:"+imageObj.imageCoordsExists);
+            Timber.d("is EXIF data present:"+imageObj.imageCoordsExists+" from findOther image:"+(imageObj==tempImageObj));
 
             // Only set cache for this point if image has coords
             if (imageObj.imageCoordsExists) {
