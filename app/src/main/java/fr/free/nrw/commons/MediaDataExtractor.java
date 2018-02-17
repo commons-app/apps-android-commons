@@ -11,12 +11,12 @@ import org.xml.sax.SAXException;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.inject.Inject;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -33,46 +33,39 @@ import timber.log.Timber;
  * which are not intrinsic to the media and may change due to editing.
  */
 public class MediaDataExtractor {
+    private final MediaWikiApi mediaWikiApi;
     private boolean fetched;
-
-    private String filename;
     private ArrayList<String> categories;
     private Map<String, String> descriptions;
-    private Date date;
     private String license;
     private @Nullable LatLng coordinates;
-    private LicenseList licenseList;
 
-    /**
-     * @param filename of the target media object, should include 'File:' prefix
-     */
-    public MediaDataExtractor(String filename, LicenseList licenseList) {
-        this.filename = filename;
-        categories = new ArrayList<>();
-        descriptions = new HashMap<>();
-        fetched = false;
-        this.licenseList = licenseList;
+    @Inject
+    public MediaDataExtractor(MediaWikiApi mwApi) {
+        this.categories = new ArrayList<>();
+        this.descriptions = new HashMap<>();
+        this.fetched = false;
+        this.mediaWikiApi = mwApi;
     }
 
-    /**
+    /*
      * Actually fetch the data over the network.
      * todo: use local caching?
      *
      * Warning: synchronous i/o, call on a background thread
      */
-    public void fetch() throws IOException {
+    public void fetch(String filename, LicenseList licenseList) throws IOException {
         if (fetched) {
             throw new IllegalStateException("Tried to call MediaDataExtractor.fetch() again.");
         }
 
-        MediaWikiApi api = CommonsApplication.getInstance().getMWApi();
-        MediaResult result = api.fetchMediaByFilename(filename);
+        MediaResult result = mediaWikiApi.fetchMediaByFilename(filename);
 
         // In-page category links are extracted from source, as XML doesn't cover [[links]]
         extractCategories(result.getWikiSource());
 
         // Description template info is extracted from preprocessor XML
-        processWikiParseTree(result.getParseTreeXmlSource());
+        processWikiParseTree(result.getParseTreeXmlSource(), licenseList);
         fetched = true;
     }
 
@@ -91,7 +84,7 @@ public class MediaDataExtractor {
         }
     }
 
-    private void processWikiParseTree(String source) throws IOException {
+    private void processWikiParseTree(String source, LicenseList licenseList) throws IOException {
         Document doc;
         try {
             DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -153,7 +146,7 @@ public class MediaDataExtractor {
     }
 
     private Node findTemplate(Element parentNode, String title_) throws IOException {
-        String title= new PageTitle(title_).getDisplayText();
+        String title = new PageTitle(title_).getDisplayText();
         NodeList nodes = parentNode.getChildNodes();
         for (int i = 0, length = nodes.getLength(); i < length; i++) {
             Node node = nodes.item(i);
@@ -179,7 +172,7 @@ public class MediaDataExtractor {
     }
 
     private static abstract class TemplateChildNodeComparator {
-        abstract public boolean match(Node node);
+        public abstract boolean match(Node node);
     }
 
     private Node findTemplateParameter(Node templateNode, String name) throws IOException {
@@ -290,7 +283,7 @@ public class MediaDataExtractor {
     /**
      * Take our metadata and inject it into a live Media object.
      * Media object might contain stale or cached data, or emptiness.
-     * @param media
+     * @param media Media object to inject into
      */
     public void fill(Media media) {
         if (!fetched) {

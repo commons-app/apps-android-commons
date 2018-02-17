@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name" fuzzy="true">వికీమీడియా కామన్స్</string>
+  <string name="app_name">కామన్స్</string>
   <string name="menu_settings">అమరికలు</string>
   <string name="username">వాడుకరిపేరు</string>
   <string name="password">సంకేతపదం</string>
   <string name="login">లాగినవండి</string>
+  <string name="signup">నమోదవ్వండి</string>
   <string name="logging_in_title">లాగినవుతున్నారు</string>
   <string name="logging_in_message">వేచివుండండి…</string>
   <string name="login_success">లాగిన్ విజయవంతమైంది!</string>
@@ -25,6 +26,7 @@
   <string name="contribution_state_starting">ఎక్కిస్తున్నాం</string>
   <string name="menu_from_gallery">ప్రదర్శనశాల నుంచి</string>
   <string name="menu_from_camera">ఫోటో తీయండి</string>
+  <string name="menu_nearby">చుట్టుపక్కల</string>
   <string name="provider_contributions">నా ఎక్కింపులు</string>
   <string name="menu_share">పంచుకోండి</string>
   <string name="menu_open_in_browser">విహారిణిలో చూపు</string>
@@ -33,7 +35,7 @@
   <string name="login_failed_network">లాగిన్ చెయ్యలేకపోయాం - నెట్‍వర్కు విఫలం</string>
   <string name="login_failed_username">లాగిన్ చెయ్యలేకపోయాం - మీ వాడుకరిపేరును సరిచూసుకోండి</string>
   <string name="login_failed_password">లాగిన్ చెయ్యలేకపోయాం - మీ సంకేతపదాన్ని సరిచూసుకోండి</string>
-  <string name="login_failed_throttled" fuzzy="true">మరీ ఎక్కువ విఫల యత్నాలు చేసారు. కొద్ది నిముషాలాగి ప్రయత్నించండి</string>
+  <string name="login_failed_throttled">మరీ ఎక్కువ విఫల యత్నాలు చేసారు. కొద్ది నిముషాలాగి ప్రయత్నించండి</string>
   <string name="login_failed_blocked">ఈ వాడుకరి కామన్స్ లో నిరోధించబడ్డారు, సారీ.</string>
   <string name="login_failed_generic">లాగిన్ విఫలమైంది</string>
   <string name="share_upload_button">ఎక్కింపు</string>
@@ -43,9 +45,10 @@
   <string name="categories_search_text_hint">వర్గాల్లో వెతకండి</string>
   <string name="menu_save_categories">భద్రపరచు</string>
   <string name="categories_not_found">%1$s తో సరిపోలే వర్గాలేమీ లేవు</string>
-  <string name="categories_skip_explanation">వికీమీడియా కామన్స్ లో వెతికేటపుడు మీ బొమ్మలు మరింత సులువుగా కనబడేందుకు వాటికి వర్గాలను చేర్చండి.\n\nవర్గాలను చేర్చేందుకు టైపండి.\nఈ అంగను దాటేసి ముందుకు పోయేందుకు, ఈ సందేశాన్ని నొక్కండి (లేదా ’బ్యాక్’ నొక్కండి)</string>
+  <string name="categories_skip_explanation" fuzzy="true">వికీమీడియా కామన్స్ లో వెతికేటపుడు మీ బొమ్మలు మరింత సులువుగా కనబడేందుకు వాటికి వర్గాలను చేర్చండి.\n\nవర్గాలను చేర్చేందుకు టైపండి.\nఈ అంగను దాటేసి ముందుకు పోయేందుకు, ఈ సందేశాన్ని నొక్కండి (లేదా ’బ్యాక్’ నొక్కండి)</string>
   <string name="categories_activity_title">వర్గాలు</string>
   <string name="title_activity_settings">అమరికలు</string>
+  <string name="title_activity_signup">నమోదవ్వండి</string>
   <string name="menu_about">గురించి</string>
   <string name="about_license" fuzzy="true">ఓపెన్ సోర్సు సాఫ్టువేరు &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; కు లోబడి విడుదలైంది</string>
   <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;గోప్యతా విధానం&lt;/a&gt;</string>
@@ -86,9 +89,20 @@
   <string name="detail_description_empty">వివరణ లేదు</string>
   <string name="detail_license_empty">తెలియని లైసెన్సు</string>
   <string name="menu_refresh">తాజాకరించు</string>
+  <string name="ok">సరే</string>
   <string name="warning">హెచ్చరిక</string>
   <string name="yes">అవును</string>
   <string name="no">కాదు</string>
   <string name="media_detail_title">శీర్షిక</string>
   <string name="media_detail_description">వివరణ</string>
+  <string name="media_detail_license">లైసెన్సు</string>
+  <string name="maximum_limit">గరిష్ఠ పరిమితి</string>
+  <string name="cancel">రద్దుచేయి</string>
+  <string name="navigation_drawer_close">మూసివేయి</string>
+  <string name="navigation_item_home">ముంగిలి</string>
+  <string name="navigation_item_upload">ఎక్కించు</string>
+  <string name="navigation_item_about">గురించి</string>
+  <string name="navigation_item_settings">అమరికలు</string>
+  <string name="navigation_item_feedback">ప్రతిస్పందన</string>
+  <string name="navigation_item_notification">గమనింపులు</string>
 </resources>

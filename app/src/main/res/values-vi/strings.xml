@@ -20,7 +20,7 @@
   <string name="upload_progress_notification_title_finishing">Đang hoàn thành việc tải lên tập tin %1$s</string>
   <string name="upload_failed_notification_title">Tải lên tập tin %1$s thất bại</string>
   <string name="upload_failed_notification_subtitle">Chạm để xem</string>
-  <string name="uploads_pending_notification_indicator">%d tập tin đang được tải lên</string>
+  <string name="uploads_pending_notification_indicator" fuzzy="true">%d tập tin đang được tải lên</string>
   <string name="title_activity_contributions">Tập tin Tôi đã Tải lên Gần đây</string>
   <string name="contribution_state_queued">Đang chờ</string>
   <string name="contribution_state_failed">Thất bại</string>
@@ -51,20 +51,20 @@
   <string name="gps_disabled">Chức năng GPS đang tắt trên thiết bị của bạn. Bạn có muốn bật nó lên?</string>
   <string name="enable_gps">Bật GPS</string>
   <string name="contributions_subtitle_zero">Chưa có tập tin tải lên</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="other">%d tập tin tải lên</item>
+    <item quantity="other">%1$d tập tin tải lên</item>
   </plurals>
-  <string name="starting_multiple_uploads">Đang bắt đầu tải lên %d tập tin</string>
-  <string name="multiple_uploads_title">%d tập tin tải lên</string>
+  <string name="starting_multiple_uploads">Đang bắt đầu tải lên %1$d tập tin</string>
+  <string name="multiple_uploads_title" fuzzy="true">%1$d tập tin tải lên</string>
   <string name="categories_not_found">Không tìm thấy thể loại khớp với %1$s</string>
-  <string name="categories_skip_explanation">Xếp các hình ảnh vào thể loại để cho chúng dễ tìm kiếm hơn trên Wikimedia Commons.\n\nHãy bắt đầu nhập tên thể loại để tìm kiếm.\nChạm vào thông điệp này (hoặc bấm Quay lại) để bỏ qua bước này.</string>
+  <string name="categories_skip_explanation" fuzzy="true">Xếp các hình ảnh vào thể loại để cho chúng dễ tìm kiếm hơn trên Wikimedia Commons.\n\nHãy bắt đầu nhập tên thể loại để tìm kiếm.\nChạm vào thông điệp này (hoặc bấm Quay lại) để bỏ qua bước này.</string>
   <string name="categories_activity_title">Thể loại</string>
   <string name="title_activity_settings">Cài đặt</string>
   <string name="title_activity_signup">Mở tài khoản</string>
   <string name="menu_about">Giới thiệu</string>
   <string name="about_license" fuzzy="true">Phần mềm mã nguồn mở được phát hành theo &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Giấy phép Apache v2&lt;/a&gt;. %1$s và biểu trưng của nó là nhãn hiệu của Quỹ Wikimedia và được sử dụng do Quỹ Wikimedia cho phép. Chúng tôi không được Quỹ Wikimedia ủng hộ hoặc nhận làm chi nhánh.</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Mã nguồn&lt;/a&gt; và &lt;a href=\"https://commons-app.github.io/\"&gt;trang chủ&lt;/a&gt; tại GitHub. &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;Tạo vấn đề GitHub mới&lt;/a&gt; để báo cáo lỗi hoặc gợi ý thay đổi.</string>
+  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Mã nguồn&lt;/a&gt; và &lt;a href=\"https://commons-app.github.io/\"&gt;trang chủ&lt;/a&gt; tại GitHub. &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;Tạo vấn đề GitHub mới&lt;/a&gt; để báo cáo lỗi hoặc gợi ý thay đổi.</string>
   <string name="about_privacy_policy" fuzzy="true"/>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Công trạng&lt;/a&gt;</string>
   <string name="title_activity_about">Giới thiệu</string>
@@ -111,7 +111,7 @@
   <string name="tutorial_3_text">Xin DỪNG tải lên:</string>
   <string name="tutorial_3_subtext">- Hình tự sướng hoặc hình bạn bè\n- Hình ảnh tải về từ Internet\n- Ảnh chụp màn hình của ứng dụng thương mại</string>
   <string name="tutorial_4_text">Tập tin tải lên ví dụ:</string>
-  <string name="tutorial_4_subtext">- Tiêu đề: Nhà hát Opera Sydney\n- Miêu tả: Nhà hát Opera Sydney nhìn qua cảng\n- Thể loại: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext" fuzzy="true">- Tiêu đề: Nhà hát Opera Sydney\n- Miêu tả: Nhà hát Opera Sydney nhìn qua cảng\n- Thể loại: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Đóng góp hình ảnh của bạn. Làm sinh động các bài viết Wikipedia!</string>
   <string name="welcome_wikipedia_subtext">Các hình ảnh trên Wikipedia được cung cấp bởi Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Các hình ảnh của bạn giúp giáo dục người dân trên khắp thế giới.</string>

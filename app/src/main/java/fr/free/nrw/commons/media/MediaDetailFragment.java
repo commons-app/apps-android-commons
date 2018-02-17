@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +21,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.inject.Inject;
+import javax.inject.Provider;
+
 import fr.free.nrw.commons.License;
 import fr.free.nrw.commons.LicenseList;
 import fr.free.nrw.commons.Media;
@@ -29,11 +31,12 @@ import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.ui.widget.CompatTextView;
 import timber.log.Timber;
 
-public class MediaDetailFragment extends Fragment {
+public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     private boolean editable;
     private MediaDetailPagerFragment.MediaDetailProvider detailProvider;
@@ -53,6 +56,9 @@ public class MediaDetailFragment extends Fragment {
         return mf;
     }
 
+    @Inject
+    Provider<MediaDataExtractor> mediaDataExtractorProvider;
+
     private MediaWikiImageView image;
     private MediaDetailSpacer spacer;
     private int initialListTop = 0;
@@ -69,8 +75,8 @@ public class MediaDetailFragment extends Fragment {
     private boolean categoriesPresent = false;
     private ViewTreeObserver.OnGlobalLayoutListener layoutListener; // for layout stuff, only used once!
     private ViewTreeObserver.OnScrollChangedListener scrollListener;
-    DataSetObserver dataObserver;
-    private AsyncTask<Void,Void,Boolean> detailFetchTask;
+    private DataSetObserver dataObserver;
+    private AsyncTask<Void, Void, Boolean> detailFetchTask;
     private LicenseList licenseList;
 
     @Override
@@ -89,7 +95,7 @@ public class MediaDetailFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        detailProvider = (MediaDetailPagerFragment.MediaDetailProvider)getActivity();
+        detailProvider = (MediaDetailPagerFragment.MediaDetailProvider) getActivity();
 
         if (savedInstanceState != null) {
             editable = savedInstanceState.getBoolean("editable");
@@ -150,7 +156,8 @@ public class MediaDetailFragment extends Fragment {
         return view;
     }
 
-    @Override public void onResume() {
+    @Override
+    public void onResume() {
         super.onResume();
         Media media = detailProvider.getMediaAtPosition(index);
         if (media == null) {
@@ -188,13 +195,13 @@ public class MediaDetailFragment extends Fragment {
 
             @Override
             protected void onPreExecute() {
-                extractor = new MediaDataExtractor(media.getFilename(), licenseList);
+                extractor = mediaDataExtractorProvider.get();
             }
 
             @Override
             protected Boolean doInBackground(Void... voids) {
                 try {
-                    extractor.fetch();
+                    extractor.fetch(media.getFilename(), licenseList);
                     return Boolean.TRUE;
                 } catch (IOException e) {
                     Timber.d(e);
@@ -232,13 +239,13 @@ public class MediaDetailFragment extends Fragment {
             detailFetchTask.cancel(true);
             detailFetchTask = null;
         }
-        if (layoutListener != null) {
+        if (layoutListener != null && getView() != null) {
             getView().getViewTreeObserver().removeGlobalOnLayoutListener(layoutListener); // old Android was on crack. CRACK IS WHACK
             layoutListener = null;
         }
-        if (scrollListener != null) {
+        if (scrollListener != null && getView() != null) {
             getView().getViewTreeObserver().removeOnScrollChangedListener(scrollListener);
-            scrollListener  = null;
+            scrollListener = null;
         }
         if (dataObserver != null) {
             detailProvider.unregisterDataSetObserver(dataObserver);
@@ -283,7 +290,7 @@ public class MediaDetailFragment extends Fragment {
 
     private View buildCatLabel(final String catName, ViewGroup categoryContainer) {
         final View item = LayoutInflater.from(getContext()).inflate(R.layout.detail_category_item, categoryContainer, false);
-        final CompatTextView textView = (CompatTextView)item.findViewById(R.id.mediaDetailCategoryItemText);
+        final CompatTextView textView = (CompatTextView) item.findViewById(R.id.mediaDetailCategoryItemText);
 
         textView.setText(catName);
         if (categoriesLoaded && categoriesPresent) {
@@ -302,7 +309,7 @@ public class MediaDetailFragment extends Fragment {
         // You must face the darkness alone
         int scrollY = scrollView.getScrollY();
         int scrollMax = getView().getHeight();
-        float scrollPercentage = (float)scrollY / (float)scrollMax;
+        float scrollPercentage = (float) scrollY / (float) scrollMax;
         final float transparencyMax = 0.75f;
         if (scrollPercentage > transparencyMax) {
             scrollPercentage = transparencyMax;
@@ -356,7 +363,8 @@ public class MediaDetailFragment extends Fragment {
     }
 
 
-    private @Nullable String licenseLink(Media media) {
+    private @Nullable
+    String licenseLink(Media media) {
         String licenseKey = media.getLicense();
         if (licenseKey == null || licenseKey.equals("")) {
             return null;
@@ -377,7 +385,7 @@ public class MediaDetailFragment extends Fragment {
     private void openMap(LatLng coordinates) {
         //Open map app at given position
         Uri gmmIntentUri = Uri.parse(
-                "geo:0,0?q=" + coordinates.getLatitude() + "," + coordinates.getLatitude());
+                "geo:0,0?q=" + coordinates.getLatitude() + "," + coordinates.getLongitude());
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
 
         if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {

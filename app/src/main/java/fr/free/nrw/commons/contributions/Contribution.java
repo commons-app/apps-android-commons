@@ -1,13 +1,8 @@
 package fr.free.nrw.commons.contributions;
 
-import android.content.ContentProviderClient;
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Parcel;
-import android.os.RemoteException;
-import android.text.TextUtils;
+import android.support.annotation.NonNull;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,7 +11,6 @@ import java.util.Locale;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Media;
-import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.settings.Prefs;
 
 public class Contribution extends Media {
@@ -43,7 +37,6 @@ public class Contribution extends Media {
     public static final String SOURCE_GALLERY = "gallery";
     public static final String SOURCE_EXTERNAL = "external";
 
-    private ContentProviderClient client;
     private Uri contentUri;
     private String source;
     private String editSummary;
@@ -51,22 +44,40 @@ public class Contribution extends Media {
     private int state;
     private long transferred;
     private String decimalCoords;
-
     private boolean isMultiple;
 
-    public boolean getMultiple() {
-        return isMultiple;
+    public Contribution(Uri contentUri, String filename, Uri localUri, String imageUrl, Date timestamp,
+                        int state, long dataLength, Date dateUploaded, long transferred,
+                        String source, String description, String creator, boolean isMultiple,
+                        int width, int height, String license) {
+        super(localUri, imageUrl, filename, description, dataLength, timestamp, dateUploaded, creator);
+        this.contentUri = contentUri;
+        this.state = state;
+        this.timestamp = timestamp;
+        this.transferred = transferred;
+        this.source = source;
+        this.isMultiple = isMultiple;
+        this.width = width;
+        this.height = height;
+        this.license = license;
     }
 
-    public void setMultiple(boolean multiple) {
-        isMultiple = multiple;
-    }
-
-    public Contribution(Uri localUri, String remoteUri, String filename, String description, long dataLength, Date dateCreated, Date dateUploaded, String creator, String editSummary, String decimalCoords) {
-        super(localUri, remoteUri, filename, description, dataLength, dateCreated, dateUploaded, creator);
+    public Contribution(Uri localUri, String imageUrl, String filename, String description, long dataLength,
+                        Date dateCreated, Date dateUploaded, String creator, String editSummary, String decimalCoords) {
+        super(localUri, imageUrl, filename, description, dataLength, dateCreated, dateUploaded, creator);
         this.decimalCoords = decimalCoords;
         this.editSummary = editSummary;
         timestamp = new Date(System.currentTimeMillis());
+    }
+
+    public Contribution(Parcel in) {
+        super(in);
+        contentUri = in.readParcelable(Uri.class.getClassLoader());
+        source = in.readString();
+        timestamp = (Date) in.readSerializable();
+        state = in.readInt();
+        transferred = in.readLong();
+        isMultiple = in.readInt() == 1;
     }
 
     @Override
@@ -80,14 +91,12 @@ public class Contribution extends Media {
         parcel.writeInt(isMultiple ? 1 : 0);
     }
 
-    public Contribution(Parcel in) {
-        super(in);
-        contentUri = in.readParcelable(Uri.class.getClassLoader());
-        source = in.readString();
-        timestamp = (Date) in.readSerializable();
-        state = in.readInt();
-        transferred = in.readLong();
-        isMultiple = in.readInt() == 1;
+    public boolean getMultiple() {
+        return isMultiple;
+    }
+
+    public void setMultiple(boolean multiple) {
+        isMultiple = multiple;
     }
 
     public long getTransferred() {
@@ -106,8 +115,16 @@ public class Contribution extends Media {
         return contentUri;
     }
 
+    public void setContentUri(Uri contentUri) {
+        this.contentUri = contentUri;
+    }
+
     public Date getTimestamp() {
         return timestamp;
+    }
+
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
     }
 
     public int getState() {
@@ -149,66 +166,10 @@ public class Contribution extends Media {
         }
 
         buffer.append("== {{int:license-header}} ==\n")
-                .append(Utils.licenseTemplateFor(getLicense())).append("\n\n")
+                .append(licenseTemplateFor(getLicense())).append("\n\n")
                 .append("{{Uploaded from Mobile|platform=Android|version=").append(BuildConfig.VERSION_NAME).append("}}\n")
                 .append(getTrackingTemplates());
         return buffer.toString();
-    }
-
-    public void setContentProviderClient(ContentProviderClient client) {
-        this.client = client;
-    }
-
-    public void save() {
-        try {
-            if (contentUri == null) {
-                contentUri = client.insert(ContributionsContentProvider.BASE_URI, this.toContentValues());
-            } else {
-                client.update(contentUri, toContentValues(), null, null);
-            }
-        } catch (RemoteException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void delete() {
-        try {
-            if (contentUri == null) {
-                // noooo
-                throw new RuntimeException("tried to delete item with no content URI");
-            } else {
-                client.delete(contentUri, null, null);
-            }
-        } catch (RemoteException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-
-    public ContentValues toContentValues() {
-        ContentValues cv = new ContentValues();
-        cv.put(Table.COLUMN_FILENAME, getFilename());
-        if (getLocalUri() != null) {
-            cv.put(Table.COLUMN_LOCAL_URI, getLocalUri().toString());
-        }
-        if (getImageUrl() != null) {
-            cv.put(Table.COLUMN_IMAGE_URL, getImageUrl());
-        }
-        if (getDateUploaded() != null) {
-            cv.put(Table.COLUMN_UPLOADED, getDateUploaded().getTime());
-        }
-        cv.put(Table.COLUMN_LENGTH, getDataLength());
-        cv.put(Table.COLUMN_TIMESTAMP, getTimestamp().getTime());
-        cv.put(Table.COLUMN_STATE, getState());
-        cv.put(Table.COLUMN_TRANSFERRED, transferred);
-        cv.put(Table.COLUMN_SOURCE, source);
-        cv.put(Table.COLUMN_DESCRIPTION, description);
-        cv.put(Table.COLUMN_CREATOR, creator);
-        cv.put(Table.COLUMN_MULTIPLE, isMultiple ? 1 : 0);
-        cv.put(Table.COLUMN_WIDTH, width);
-        cv.put(Table.COLUMN_HEIGHT, height);
-        cv.put(Table.COLUMN_LICENSE, license);
-        return cv;
     }
 
     @Override
@@ -222,33 +183,6 @@ public class Contribution extends Media {
 
     public Contribution() {
         timestamp = new Date(System.currentTimeMillis());
-    }
-
-    public static Contribution fromCursor(Cursor cursor) {
-        // Hardcoding column positions!
-        Contribution c = new Contribution();
-
-        //Check that cursor has a value to avoid CursorIndexOutOfBoundsException
-        if (cursor.getCount() > 0) {
-            c.contentUri = ContributionsContentProvider.uriForId(cursor.getInt(0));
-            c.filename = cursor.getString(1);
-            c.localUri = TextUtils.isEmpty(cursor.getString(2)) ? null : Uri.parse(cursor.getString(2));
-            c.imageUrl = cursor.getString(3);
-            c.timestamp = cursor.getLong(4) == 0 ? null : new Date(cursor.getLong(4));
-            c.state = cursor.getInt(5);
-            c.dataLength = cursor.getLong(6);
-            c.dateUploaded = cursor.getLong(7) == 0 ? null : new Date(cursor.getLong(7));
-            c.transferred = cursor.getLong(8);
-            c.source = cursor.getString(9);
-            c.description = cursor.getString(10);
-            c.creator = cursor.getString(11);
-            c.isMultiple = cursor.getInt(12) == 1;
-            c.width = cursor.getInt(13);
-            c.height = cursor.getInt(14);
-            c.license = cursor.getString(15);
-        }
-
-        return c;
     }
 
     public String getSource() {
@@ -267,118 +201,25 @@ public class Contribution extends Media {
         this.decimalCoords = decimalCoords;
     }
 
-    public static class Table {
-        public static final String TABLE_NAME = "contributions";
-
-        public static final String COLUMN_ID = "_id";
-        public static final String COLUMN_FILENAME = "filename";
-        public static final String COLUMN_LOCAL_URI = "local_uri";
-        public static final String COLUMN_IMAGE_URL = "image_url";
-        public static final String COLUMN_TIMESTAMP = "timestamp";
-        public static final String COLUMN_STATE = "state";
-        public static final String COLUMN_LENGTH = "length";
-        public static final String COLUMN_UPLOADED = "uploaded";
-        public static final String COLUMN_TRANSFERRED = "transferred"; // Currently transferred number of bytes
-        public static final String COLUMN_SOURCE = "source";
-        public static final String COLUMN_DESCRIPTION = "description";
-        public static final String COLUMN_CREATOR = "creator"; // Initial uploader
-        public static final String COLUMN_MULTIPLE = "multiple";
-        public static final String COLUMN_WIDTH = "width";
-        public static final String COLUMN_HEIGHT = "height";
-        public static final String COLUMN_LICENSE = "license";
-
-        // NOTE! KEEP IN SAME ORDER AS THEY ARE DEFINED UP THERE. HELPS HARD CODE COLUMN INDICES.
-        public static final String[] ALL_FIELDS = {
-                COLUMN_ID,
-                COLUMN_FILENAME,
-                COLUMN_LOCAL_URI,
-                COLUMN_IMAGE_URL,
-                COLUMN_TIMESTAMP,
-                COLUMN_STATE,
-                COLUMN_LENGTH,
-                COLUMN_UPLOADED,
-                COLUMN_TRANSFERRED,
-                COLUMN_SOURCE,
-                COLUMN_DESCRIPTION,
-                COLUMN_CREATOR,
-                COLUMN_MULTIPLE,
-                COLUMN_WIDTH,
-                COLUMN_HEIGHT,
-                COLUMN_LICENSE
-        };
-
-
-        private static final String CREATE_TABLE_STATEMENT = "CREATE TABLE " + TABLE_NAME + " ("
-                + "_id INTEGER PRIMARY KEY,"
-                + "filename STRING,"
-                + "local_uri STRING,"
-                + "image_url STRING,"
-                + "uploaded INTEGER,"
-                + "timestamp INTEGER,"
-                + "state INTEGER,"
-                + "length INTEGER,"
-                + "transferred INTEGER,"
-                + "source STRING,"
-                + "description STRING,"
-                + "creator STRING,"
-                + "multiple INTEGER,"
-                + "width INTEGER,"
-                + "height INTEGER,"
-                + "LICENSE STRING"
-                + ");";
-
-
-        public static void onCreate(SQLiteDatabase db) {
-            db.execSQL(CREATE_TABLE_STATEMENT);
+    @NonNull
+    private String licenseTemplateFor(String license) {
+        switch (license) {
+            case Prefs.Licenses.CC_BY_3:
+                return "{{self|cc-by-3.0}}";
+            case Prefs.Licenses.CC_BY_4:
+                return "{{self|cc-by-4.0}}";
+            case Prefs.Licenses.CC_BY_SA_3:
+                return "{{self|cc-by-sa-3.0}}";
+            case Prefs.Licenses.CC_BY_SA_4:
+                return "{{self|cc-by-sa-4.0}}";
+            case Prefs.Licenses.CC0:
+                return "{{self|cc-zero}}";
+            case Prefs.Licenses.CC_BY:
+                return "{{self|cc-by-3.0}}";
+            case Prefs.Licenses.CC_BY_SA:
+                return "{{self|cc-by-sa-3.0}}";
         }
 
-        public static void onDelete(SQLiteDatabase db) {
-            db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-            onCreate(db);
-        }
-
-        public static void onUpdate(SQLiteDatabase db, int from, int to) {
-            if (from == to) {
-                return;
-            }
-            if (from == 1) {
-                db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN description STRING;");
-                db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN creator STRING;");
-                from++;
-                onUpdate(db, from, to);
-                return;
-            }
-            if (from == 2) {
-                db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN multiple INTEGER;");
-                db.execSQL("UPDATE " + TABLE_NAME + " SET multiple = 0");
-                from++;
-                onUpdate(db, from, to);
-                return;
-            }
-            if (from == 3) {
-                // Do nothing
-                from++;
-                onUpdate(db, from, to);
-                return;
-            }
-            if (from == 4) {
-                // Do nothing -- added Category
-                from++;
-                onUpdate(db, from, to);
-                return;
-            }
-            if (from == 5) {
-                // Added width and height fields
-                db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN width INTEGER;");
-                db.execSQL("UPDATE " + TABLE_NAME + " SET width = 0");
-                db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN height INTEGER;");
-                db.execSQL("UPDATE " + TABLE_NAME + " SET height = 0");
-                db.execSQL("ALTER TABLE " + TABLE_NAME + " ADD COLUMN license STRING;");
-                db.execSQL("UPDATE " + TABLE_NAME + " SET license='" + Prefs.Licenses.CC_BY_SA_3 + "';");
-                from++;
-                onUpdate(db, from, to);
-                return;
-            }
-        }
+        throw new RuntimeException("Unrecognized license value: " + license);
     }
 }

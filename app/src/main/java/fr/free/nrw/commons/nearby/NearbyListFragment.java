@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.nearby;
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.List;
 
+import dagger.android.support.AndroidSupportInjection;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.utils.UriDeserializer;
@@ -41,6 +43,12 @@ public class NearbyListFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        AndroidSupportInjection.inject(this);
+        super.onAttach(context);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
@@ -60,7 +68,7 @@ public class NearbyListFragment extends Fragment {
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-            String gsonPlaceList = bundle.getString("PlaceList");
+            String gsonPlaceList = bundle.getString("PlaceList", "[]");
             placeList = gson.fromJson(gsonPlaceList, LIST_TYPE);
 
             String gsonLatLng = bundle.getString("CurLatLng");

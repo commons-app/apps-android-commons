@@ -43,18 +43,18 @@
   <string name="menu_upload_single">Muat naik</string>
   <string name="categories_search_text_hint">Cari dalam kategori</string>
   <string name="menu_save_categories">Simpan</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Belum ada muatnaik</item>
-    <item quantity="one">%d muatnaik</item>
-    <item quantity="other">%d muatnaik</item>
+    <item quantity="one">%1$d muatnaik</item>
+    <item quantity="other">%1$d muatnaik</item>
   </plurals>
   <string name="starting_multiple_uploads" fuzzy="true">Memulakan %d kerja muat naik</string>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%d muatnaik</item>
-    <item quantity="other">%d muatnaik</item>
+  <plurals name="multiple_uploads_title" fuzzy="true">
+    <item quantity="one">%1$d muatnaik</item>
+    <item quantity="other">%1$d muatnaik</item>
   </plurals>
   <string name="categories_not_found">Tiada kategori yang sepadan dengan %1$s dijumpai</string>
-  <string name="categories_skip_explanation">Tambahkan kategori supaya gambar-gambar anda lebih senang ditemui di Wikimedia Commons.\n\nMula menaip untuk menambahkan kategori.\nKetik mesej ini (atau tekan butang undur) untuk melangkau langkah ini.</string>
+  <string name="categories_skip_explanation" fuzzy="true">Tambahkan kategori supaya gambar-gambar anda lebih senang ditemui di Wikimedia Commons.\n\nMula menaip untuk menambahkan kategori.\nKetik mesej ini (atau tekan butang undur) untuk melangkau langkah ini.</string>
   <string name="categories_activity_title">Kategori</string>
   <string name="title_activity_settings">Tetapan</string>
   <string name="menu_about">Perihal</string>

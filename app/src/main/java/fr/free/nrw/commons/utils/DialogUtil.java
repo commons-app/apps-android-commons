@@ -11,6 +11,11 @@ import timber.log.Timber;
 
 public class DialogUtil {
 
+    /**
+     * Dismisses a dialog safely.
+     * @param activity the activity
+     * @param dialog the dialog to be dismissed
+     */
     public static void dismissSafely(@Nullable Activity activity, @Nullable DialogFragment dialog) {
         boolean isActivityDestroyed = false;
 
@@ -33,6 +38,11 @@ public class DialogUtil {
         }
     }
 
+    /**
+     * Shows a dialog safely.
+     * @param activity the activity
+     * @param dialog the dialog to be shown
+     */
     public static void showSafely(Activity activity, Dialog dialog) {
         if (activity == null || dialog == null) {
             Timber.d("Show called with null activity / dialog. Ignoring.");
@@ -54,6 +64,11 @@ public class DialogUtil {
         }
     }
 
+    /**
+     * Shows a dialog safely.
+     * @param activity the activity
+     * @param dialog the dialog to be shown
+     */
     public static void showSafely(FragmentActivity activity, DialogFragment dialog) {
         boolean isActivityDestroyed = false;
 

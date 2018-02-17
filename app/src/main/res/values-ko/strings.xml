@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">%1$s 파일 올리기 실패</string>
   <string name="upload_failed_notification_subtitle">보려면 탭하세요</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d개의 파일을 올리는 중</item>
-    <item quantity="other">%d개의 파일을 올리는 중</item>
+    <item quantity="one">%1$d개의 파일을 올리는 중</item>
+    <item quantity="other">%1$d개의 파일을 올리는 중</item>
   </plurals>
   <string name="title_activity_contributions">내 최근 업로드</string>
   <string name="contribution_state_queued">대기 중</string>
@@ -56,24 +56,23 @@
   <string name="contributions_subtitle_zero">아직 올린 항목이 없습니다</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">1개 업로드</item>
-    <item quantity="other">%d개 업로드</item>
+    <item quantity="one">%1$d개 업로드</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">%d장의 업로드를 시작합니다</item>
-    <item quantity="other">%d장의 업로드를 시작합니다</item>
+    <item quantity="one">%1$d장의 업로드를 시작합니다</item>
+    <item quantity="other">%1$d장의 업로드를 시작합니다</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d개 업로드</item>
+    <item quantity="one">%1$d개 업로드</item>
   </plurals>
   <string name="categories_not_found">%1$s와(과) 일치하는 분류를 찾을 수 없습니다</string>
-  <string name="categories_skip_explanation">위키미디어 공용에 그림을 더 찾을 수 있도록 분류를 추가합니다.\n\n분류를 추가하려면 입력을 시작하세요.\n이 단계를 건너뛰려면 이 메시지를 탭하세요(또는 뒤로를 누르세요).</string>
+  <string name="categories_skip_explanation">위키미디어 공용에서 그림을 더 찾기 쉽게 만들기 위해 분류를 추가합니다.\n분류를 추가하려면 입력을 시작하세요.</string>
   <string name="categories_activity_title">분류</string>
   <string name="title_activity_settings">설정</string>
   <string name="title_activity_signup">가입하기</string>
   <string name="menu_about">정보</string>
-  <string name="about_license" fuzzy="true">오픈 소스 소프트웨어는 &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;아파치 라이선스 v2&lt;/a&gt;에 따라 공개됩니다. %1$s 및 관련 로고는 위키미디어 재단의 상표이며 위키미디어 재단의 허가를 통해 사용될 수 있습니다. 저희는 위키미디어 재단에 의해 보증되거나 제휴되어 있지 않습니다.</string>
-  <string name="about_improve">소스 코드는 &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;에 있으며, 웹사이트는 &lt;a href=\"https://commons-app.github.io/\"&gt;GitHub&lt;/a&gt;에 있습니다. 버그나 기타 제안은 &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub&lt;/a&gt;에 보고해주세요.</string>
+  <string name="about_license">위키미디어 공용 앱은 오픈 소스 애플리케이션이며 위키미디어 공동체 내의 자원봉사자에 의해 유지됩니다. 위키미디어 재단은 애플리케이션의 생성, 개발, 유지보수에 관여하지 않습니다.</string>
+  <string name="about_improve" fuzzy="true">소스 코드는 &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;에 있으며, 웹사이트는 &lt;a href=\"https://commons-app.github.io/\"&gt;GitHub&lt;/a&gt;에 있습니다. 버그나 기타 제안은 &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub&lt;/a&gt;에 보고해주세요.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;개인정보 정책&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;제작진&lt;/a&gt;</string>
   <string name="title_activity_about">정보</string>
@@ -120,7 +119,7 @@
   <string name="tutorial_3_text">업로드하지 마십시오:</string>
   <string name="tutorial_3_subtext">- 자기 자신 또는 친구의 사진\n- 인터넷에서 다운로드한 사진\n- 사유 앱의 스크린샷</string>
   <string name="tutorial_4_text">업로드 예시:</string>
-  <string name="tutorial_4_subtext">- 제목: 시드니 오페라 하우스\n- 설명: 항만에서 바라본 시드니 오페라 하우스\n- 분류: 시드니 오페라 하우스, 서쪽에서 본 시드니 오페라 하우스, 시드니 오페라 하우스 원경</string>
+  <string name="tutorial_4_subtext">- 제목: 시드니 오페라 하우스\n- 설명: 항만 건너편에서 바라본 시드니 오페라 하우스\n- 분류: 시드니 오페라 하우스, 서쪽에서 본 시드니 오페라 하우스, 시드니 오페라 하우스 원경</string>
   <string name="welcome_wikipedia_text">당신의 그림을 기여하세요. 위키백과 문서의 생명이 오는 데 도와주세요!</string>
   <string name="welcome_wikipedia_subtext">위키백과의 그림은 위키미디어 공용에서 옵니다.</string>
   <string name="welcome_copyright_text">당신의 그림은 전 세계 사람들을 교육하는 데 도움이 됩니다.</string>
@@ -163,6 +162,7 @@
   <string name="login_failed_2fa_not_supported">2요소 인증은 현재 지원하지 않습니다.</string>
   <string name="logout_verification">정말 로그아웃하시겠습니까?</string>
   <string name="commons_logo">공용 로고</string>
+  <string name="commons_website">공용 웹사이트</string>
   <string name="background_image">배경 그림</string>
   <string name="mediaimage_failed">미디어 그림 실패</string>
   <string name="no_image_found">그림이 없습니다</string>
@@ -187,12 +187,24 @@
   <string name="navigation_item_feedback">피드백</string>
   <string name="navigation_item_logout">로그아웃</string>
   <string name="navigation_item_info">강좌</string>
+  <string name="navigation_item_notification">알림</string>
   <string name="nearby_needs_permissions">위치 권한이 없으면 주변 장소를 표시할 수 없습니다</string>
   <string name="no_description_found">설명이 없습니다</string>
   <string name="nearby_info_menu_commons_article">공용 파일 문서</string>
   <string name="nearby_info_menu_wikidata_article">위키데이터 항목</string>
   <string name="error_while_cache">그림 캐시 처리 오류</string>
+  <string name="title_info">이 파일을 설명할 수 있는 제목으로, 파일 이름으로 사용됩니다. 띄어쓰기를 포함한 일반적인 단어를 사용할 수 있습니다. 파일 확장자는 포함하지 마세요</string>
   <string name="give_permission">권한 부여</string>
   <string name="use_external_storage">외부 저장소 사용하기</string>
   <string name="use_external_storage_summary">장치의 인앱 카메라로 찍은 사진 저장하기</string>
+  <string name="send_log_file">로그 파일 보내기</string>
+  <string name="send_log_file_description">이메일로 개발자에게 로그 파일 보내기</string>
+  <string name="login_to_your_account">자신의 계정으로 로그인</string>
+  <string name="nearby_location_has_not_changed">위치가 변경되지 않았습니다.</string>
+  <string name="nearby_location_not_available">위치를 사용할 수 없습니다.</string>
+  <string name="location_permission_rationale_nearby">주변 장소의 목록을 표시하기 위한 권한이 필요합니다.</string>
+  <string name="notifications_welcome">%1$s님, 위키미디어 공용에 오신 것을 환영합니다! 반갑습니다.</string>
+  <string name="notifications_talk_page_message">%1$s님이 당신의 사용자 토론 문서에 글을 남겼습니다</string>
+  <string name="notifications_thank_you_edit">편집해 주셔서 감사합니다</string>
+  <string name="notifications_mention">%1$s님이 %2$s에서 당신을 언급했습니다.</string>
 </resources>

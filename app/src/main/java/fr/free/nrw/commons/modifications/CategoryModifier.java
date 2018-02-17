@@ -13,7 +13,7 @@ public class CategoryModifier extends PageModifier {
     public CategoryModifier(String... categories) {
         super(MODIFIER_NAME);
         JSONArray categoriesArray = new JSONArray();
-        for(String category: categories) {
+        for (String category: categories) {
             categoriesArray.put(category);
         }
         try {
@@ -34,7 +34,7 @@ public class CategoryModifier extends PageModifier {
         categories = params.optJSONArray(PARAM_CATEGORIES);
 
         StringBuilder categoriesString = new StringBuilder();
-        for(int i=0; i < categories.length(); i++) {
+        for (int i = 0; i < categories.length(); i++) {
             String category = categories.optString(i);
             categoriesString.append("\n[[Category:").append(category).append("]]");
         }

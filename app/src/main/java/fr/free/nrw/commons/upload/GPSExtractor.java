@@ -8,7 +8,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.ExifInterface;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -16,7 +15,6 @@ import android.support.annotation.RequiresApi;
 import java.io.FileDescriptor;
 import java.io.IOException;
 
-import fr.free.nrw.commons.CommonsApplication;
 import timber.log.Timber;
 
 /**
@@ -26,6 +24,8 @@ import timber.log.Timber;
  */
 public class GPSExtractor {
 
+    private final Context context;
+    private SharedPreferences prefs;
     private ExifInterface exif;
     private double decLatitude;
     private double decLongitude;
@@ -38,9 +38,12 @@ public class GPSExtractor {
     /**
      * Construct from the file descriptor of the image (only for API 24 or newer).
      * @param fileDescriptor the file descriptor of the image
+     * @param context the context
      */
     @RequiresApi(24)
-    public GPSExtractor(@NonNull FileDescriptor fileDescriptor) {
+    public GPSExtractor(@NonNull FileDescriptor fileDescriptor, Context context, SharedPreferences prefs) {
+        this.context = context;
+        this.prefs = prefs;
         try {
             exif = new ExifInterface(fileDescriptor);
         } catch (IOException | IllegalArgumentException e) {
@@ -51,13 +54,16 @@ public class GPSExtractor {
     /**
      * Construct from the file path of the image.
      * @param path file path of the image
+     * @param context the context
      */
-    public GPSExtractor(@NonNull String path) {
+    public GPSExtractor(@NonNull String path, Context context, SharedPreferences prefs) {
+        this.prefs = prefs;
         try {
             exif = new ExifInterface(path);
         } catch (IOException | IllegalArgumentException e) {
             Timber.w(e);
         }
+        this.context = context;
     }
 
     /**
@@ -65,9 +71,7 @@ public class GPSExtractor {
      * @return true if enabled, false if disabled
      */
     private boolean gpsPreferenceEnabled() {
-        SharedPreferences sharedPref
-                = PreferenceManager.getDefaultSharedPreferences(CommonsApplication.getInstance());
-        boolean gpsPref = sharedPref.getBoolean("allowGps", false);
+        boolean gpsPref = prefs.getBoolean("allowGps", false);
         Timber.d("Gps pref set to: %b", gpsPref);
         return gpsPref;
     }
@@ -76,8 +80,7 @@ public class GPSExtractor {
      * Registers a LocationManager to listen for current location
      */
     protected void registerLocationManager() {
-        locationManager = (LocationManager) CommonsApplication.getInstance()
-                .getSystemService(Context.LOCATION_SERVICE);
+        locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
         String provider = locationManager.getBestProvider(criteria, true);
         myLocationListener = new MyLocationListener();
@@ -110,11 +113,11 @@ public class GPSExtractor {
      */
     @Nullable
     public String getCoords(boolean useGPS) {
-        String latitude = "";
-        String longitude = "";
-        String latitude_ref = "";
-        String longitude_ref = "";
-        String decimalCoords = "";
+        String latitude;
+        String longitude;
+        String latitudeRef;
+        String longitudeRef;
+        String decimalCoords;
 
         //If image has no EXIF data and user has enabled GPS setting, get user's location
         if (exif == null || exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE) == null) {
@@ -147,15 +150,15 @@ public class GPSExtractor {
             Timber.d("EXIF data has location info");
 
             latitude = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE);
-            latitude_ref = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE_REF);
+            latitudeRef = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE_REF);
             longitude = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE);
-            longitude_ref = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE_REF);
+            longitudeRef = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE_REF);
 
-            if (latitude!=null && latitude_ref!=null && longitude!=null && longitude_ref!=null) {
-                Timber.d("Latitude: %s %s", latitude, latitude_ref);
-                Timber.d("Longitude: %s %s", longitude, longitude_ref);
+            if (latitude!=null && latitudeRef!=null && longitude!=null && longitudeRef!=null) {
+                Timber.d("Latitude: %s %s", latitude, latitudeRef);
+                Timber.d("Longitude: %s %s", longitude, longitudeRef);
 
-                decimalCoords = getDecimalCoords(latitude, latitude_ref, longitude, longitude_ref);
+                decimalCoords = getDecimalCoords(latitude, latitudeRef, longitude, longitudeRef);
                 return decimalCoords;
             } else {
                 return null;
@@ -221,7 +224,7 @@ public class GPSExtractor {
         return decimalCoords;
     }
 
-    private double convertToDegree(String stringDMS){
+    private double convertToDegree(String stringDMS) {
         double result;
         String[] DMS = stringDMS.split(",", 3);
 
