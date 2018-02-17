@@ -19,7 +19,6 @@ import java.util.Collections;
 import java.util.List;
 
 import dagger.android.support.AndroidSupportInjection;
-import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.utils.UriDeserializer;

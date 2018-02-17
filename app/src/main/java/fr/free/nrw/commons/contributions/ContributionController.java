@@ -93,9 +93,14 @@ class ContributionController {
                 shareIntent.putExtra(EXTRA_SOURCE, SOURCE_GALLERY);
                 break;
             case SELECT_FROM_CAMERA:
-                shareIntent.setType("image/jpeg"); //FIXME: Find out appropriate mime type
+                //FIXME: Find out appropriate mime type
+                // AFAIK this is the right type for a JPEG image
+                // https://developer.android.com/training/sharing/send.html#send-binary-content
+                shareIntent.setType("image/jpeg");
                 shareIntent.putExtra(EXTRA_STREAM, lastGeneratedCaptureUri);
                 shareIntent.putExtra(EXTRA_SOURCE, SOURCE_CAMERA);
+                break;
+            default:
                 break;
         }
         Timber.i("Image selected");

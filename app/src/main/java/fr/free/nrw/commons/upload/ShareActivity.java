@@ -62,8 +62,8 @@ import static fr.free.nrw.commons.upload.ExistingFileAsync.Result.NO_DUPLICATE;
  * Activity for the title/desc screen after image is selected. Also starts processing image
  * GPS coordinates or user location (if enabled in Settings) for category suggestions.
  */
-public  class      ShareActivity
-        extends    AuthenticatedActivity
+public class ShareActivity
+        extends AuthenticatedActivity
         implements SingleUploadFragment.OnUploadActionInitiated,
         OnCategoriesSaveHandler,SimilarImageDialogFragment.onResponse {
 
@@ -73,12 +73,19 @@ public  class      ShareActivity
     private static final int REQUEST_PERM_ON_SUBMIT_STORAGE = 4;
     private CategorizationFragment categorizationFragment;
 
-    @Inject MediaWikiApi mwApi;
-    @Inject CacheController cacheController;
-    @Inject SessionManager sessionManager;
-    @Inject UploadController uploadController;
-    @Inject ModifierSequenceDao modifierSequenceDao;
-    @Inject @Named("default_preferences") SharedPreferences prefs;
+    @Inject
+    MediaWikiApi mwApi;
+    @Inject
+    CacheController cacheController;
+    @Inject
+    SessionManager sessionManager;
+    @Inject
+    UploadController uploadController;
+    @Inject
+    ModifierSequenceDao modifierSequenceDao;
+    @Inject
+    @Named("default_preferences")
+    SharedPreferences prefs;
 
     private String source;
     private String mimeType;
@@ -218,7 +225,7 @@ public  class      ShareActivity
         //Receive intent from ContributionController.java when user selects picture to upload
         Intent intent = getIntent();
 
-        if (intent.getAction().equals(Intent.ACTION_SEND)) {
+        if (Intent.ACTION_SEND.equals(intent.getAction())) {
             mediaUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
             if (intent.hasExtra(UploadService.EXTRA_SOURCE)) {
                 source = intent.getStringExtra(UploadService.EXTRA_SOURCE);
