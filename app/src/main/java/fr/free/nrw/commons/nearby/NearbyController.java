@@ -39,8 +39,9 @@ public class NearbyController {
 
     /**
      * Prepares Place list to make their distance information update later.
+     *
      * @param curLatLng current location for user
-     * @param context context
+     * @param context   context
      * @return Place list without distance information
      */
     public List<Place> loadAttractionsFromLocation(LatLng curLatLng, Context context) {
@@ -51,25 +52,24 @@ public class NearbyController {
         List<Place> places = prefs.getBoolean("useWikidata", true)
                 ? nearbyPlaces.getFromWikidataQuery(curLatLng, Locale.getDefault().getLanguage())
                 : nearbyPlaces.getFromWikiNeedsPictures();
-        if (curLatLng != null) {
-            Timber.d("Sorting places by distance...");
-            final Map<Place, Double> distances = new HashMap<>();
-            for (Place place: places) {
-                distances.put(place, computeDistanceBetween(place.location, curLatLng));
-            }
-            Collections.sort(places,
-                    (lhs, rhs) -> {
-                        double lhsDistance = distances.get(lhs);
-                        double rhsDistance = distances.get(rhs);
-                        return (int) (lhsDistance - rhsDistance);
-                    }
-            );
+        Timber.d("Sorting places by distance...");
+        final Map<Place, Double> distances = new HashMap<>();
+        for (Place place : places) {
+            distances.put(place, computeDistanceBetween(place.location, curLatLng));
         }
+        Collections.sort(places,
+                (lhs, rhs) -> {
+                    double lhsDistance = distances.get(lhs);
+                    double rhsDistance = distances.get(rhs);
+                    return (int) (lhsDistance - rhsDistance);
+                }
+        );
         return places;
     }
 
     /**
      * Loads attractions from location for list view, we need to return Place data type.
+     *
      * @param curLatLng users current location
      * @param placeList list of nearby places in Place data type
      * @return Place list that holds nearby places
@@ -78,7 +78,7 @@ public class NearbyController {
             LatLng curLatLng,
             List<Place> placeList) {
         placeList = placeList.subList(0, Math.min(placeList.size(), MAX_RESULTS));
-        for (Place place: placeList) {
+        for (Place place : placeList) {
             String distance = formatDistanceBetween(curLatLng, place.location);
             place.setDistance(distance);
         }
@@ -86,7 +86,8 @@ public class NearbyController {
     }
 
     /**
-     *Loads attractions from location for map view, we need to return BaseMarkerOption data type.
+     * Loads attractions from location for map view, we need to return BaseMarkerOption data type.
+     *
      * @param curLatLng users current location
      * @param placeList list of nearby places in Place data type
      * @return BaseMarkerOptions list that holds nearby places
@@ -103,26 +104,28 @@ public class NearbyController {
 
         placeList = placeList.subList(0, Math.min(placeList.size(), MAX_RESULTS));
 
-        Bitmap icon = UiUtils.getBitmap(
-                VectorDrawableCompat.create(
-                        context.getResources(), R.drawable.ic_custom_map_marker, context.getTheme()
-                ));
+        VectorDrawableCompat vectorDrawable = VectorDrawableCompat.create(
+                context.getResources(), R.drawable.ic_custom_map_marker, context.getTheme()
+        );
+        if (vectorDrawable != null) {
+            Bitmap icon = UiUtils.getBitmap(vectorDrawable);
 
-        for (Place place: placeList) {
-            String distance = formatDistanceBetween(curLatLng, place.location);
-            place.setDistance(distance);
+            for (Place place : placeList) {
+                String distance = formatDistanceBetween(curLatLng, place.location);
+                place.setDistance(distance);
 
-            NearbyBaseMarker nearbyBaseMarker = new NearbyBaseMarker();
-            nearbyBaseMarker.title(place.name);
-            nearbyBaseMarker.position(
-                    new com.mapbox.mapboxsdk.geometry.LatLng(
-                            place.location.getLatitude(),
-                            place.location.getLongitude()));
-            nearbyBaseMarker.place(place);
-            nearbyBaseMarker.icon(IconFactory.getInstance(context)
-                    .fromBitmap(icon));
+                NearbyBaseMarker nearbyBaseMarker = new NearbyBaseMarker();
+                nearbyBaseMarker.title(place.name);
+                nearbyBaseMarker.position(
+                        new com.mapbox.mapboxsdk.geometry.LatLng(
+                                place.location.getLatitude(),
+                                place.location.getLongitude()));
+                nearbyBaseMarker.place(place);
+                nearbyBaseMarker.icon(IconFactory.getInstance(context)
+                        .fromBitmap(icon));
 
-            baseMarkerOptions.add(nearbyBaseMarker);
+                baseMarkerOptions.add(nearbyBaseMarker);
+            }
         }
         return baseMarkerOptions;
     }

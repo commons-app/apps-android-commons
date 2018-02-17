@@ -20,6 +20,8 @@ import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.Arrays;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -45,8 +47,12 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     @BindView(R.id.loadingContributionsProgressBar)
     ProgressBar progressBar;
 
-    @Inject @Named("prefs") SharedPreferences prefs;
-    @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
+    @Inject
+    @Named("prefs")
+    SharedPreferences prefs;
+    @Inject
+    @Named("default_preferences")
+    SharedPreferences defaultPrefs;
 
     private ContributionController controller;
 
@@ -208,7 +214,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         Timber.d("onRequestPermissionsResult: req code = " + " perm = "
-                + permissions + " grant =" + grantResults);
+                + Arrays.toString(permissions) + " grant =" + Arrays.toString(grantResults));
 
         switch (requestCode) {
             // 1 = Storage allowed when gallery selected

@@ -25,7 +25,6 @@ import java.io.File;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
@@ -71,7 +70,12 @@ public class SettingsFragment extends PreferenceFragment {
         uploadLimit.setText(uploads + "");
         uploadLimit.setSummary(uploads + "");
         uploadLimit.setOnPreferenceChangeListener((preference, newValue) -> {
-            int value = Integer.parseInt(newValue.toString());
+            int value;
+            try {
+                value = Integer.parseInt(newValue.toString());
+            } catch(Exception e) {
+                value = 100; //Default number
+            }
             final SharedPreferences.Editor editor = prefs.edit();
             if (value > 500) {
                 new AlertDialog.Builder(getActivity())
@@ -85,9 +89,9 @@ public class SettingsFragment extends PreferenceFragment {
                 uploadLimit.setSummary(500 + "");
                 uploadLimit.setText(500 + "");
             } else {
-                editor.putInt(Prefs.UPLOADS_SHOWING, Integer.parseInt(newValue.toString()));
+                editor.putInt(Prefs.UPLOADS_SHOWING, value);
                 editor.putBoolean(Prefs.IS_CONTRIBUTION_COUNT_CHANGED,true);
-                uploadLimit.setSummary(newValue.toString());
+                uploadLimit.setSummary(String.valueOf(value));
             }
             editor.apply();
             return true;

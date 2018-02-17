@@ -1,7 +1,5 @@
 package fr.free.nrw.commons.di;
 
-import android.content.Context;
-
 import javax.inject.Singleton;
 
 import dagger.Component;
@@ -11,10 +9,7 @@ import dagger.android.support.AndroidSupportInjectionModule;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.auth.LoginActivity;
-import fr.free.nrw.commons.category.CategoryContentProvider;
-import fr.free.nrw.commons.contributions.ContributionsContentProvider;
 import fr.free.nrw.commons.contributions.ContributionsSyncAdapter;
-import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.modifications.ModificationsSyncAdapter;
 import fr.free.nrw.commons.settings.SettingsFragment;
 

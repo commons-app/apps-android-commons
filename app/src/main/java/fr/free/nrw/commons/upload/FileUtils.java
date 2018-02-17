@@ -28,7 +28,7 @@ public class FileUtils {
      * other file-based ContentProviders.
      *
      * @param context The context.
-     * @param uri The Uri to query.
+     * @param uri     The Uri to query.
      * @author paulburke
      */
     // Can be safely suppressed, checks for isKitKat before running isDocumentUri
@@ -49,29 +49,31 @@ public class FileUtils {
                 if ("primary".equalsIgnoreCase(type)) {
                     return Environment.getExternalStorageDirectory() + "/" + split[1];
                 }
-            }
-            // DownloadsProvider
-            else if (isDownloadsDocument(uri)) {
+            } else if (isDownloadsDocument(uri))  { // DownloadsProvider
 
                 final String id = DocumentsContract.getDocumentId(uri);
                 final Uri contentUri = ContentUris.withAppendedId(
                         Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
 
                 return getDataColumn(context, contentUri, null, null);
-            }
-            // MediaProvider
-            else if (isMediaDocument(uri)) {
+            } else if (isMediaDocument(uri)) { // MediaProvider
                 final String docId = DocumentsContract.getDocumentId(uri);
                 final String[] split = docId.split(":");
                 final String type = split[0];
 
                 Uri contentUri = null;
-                if ("image".equals(type)) {
-                    contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-                } else if ("video".equals(type)) {
-                    contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
-                } else if ("audio".equals(type)) {
-                    contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+                switch (type) {
+                    case "image":
+                        contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+                        break;
+                    case "video":
+                        contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
+                        break;
+                    case "audio":
+                        contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+                        break;
+                    default:
+                        break;
                 }
 
                 final String selection = "_id=?";
@@ -163,7 +165,8 @@ public class FileUtils {
 
     /**
      * Copy content from source file to destination file.
-     * @param source stream copied from
+     *
+     * @param source      stream copied from
      * @param destination stream copied to
      * @throws IOException thrown when failing to read source or opening destination file
      */
@@ -176,7 +179,8 @@ public class FileUtils {
 
     /**
      * Copy content from source file to destination file.
-     * @param source file descriptor copied from
+     *
+     * @param source      file descriptor copied from
      * @param destination file path copied to
      * @throws IOException thrown when failing to read source or opening destination file
      */

@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
 import dagger.android.support.AndroidSupportInjection;
-import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
 import timber.log.Timber;
 

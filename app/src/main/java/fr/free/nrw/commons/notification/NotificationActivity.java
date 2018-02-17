@@ -61,9 +61,7 @@ public class NotificationActivity extends NavigationBaseActivity {
                 .subscribe(notificationList -> {
                     Timber.d("Number of notifications is %d", notificationList.size());
                     setAdapter(notificationList);
-                }, throwable -> {
-                    Timber.e(throwable, "Error occurred while loading notifications");
-                });
+                }, throwable -> Timber.e(throwable, "Error occurred while loading notifications"));
     }
 
     private void handleUrl(String url) {

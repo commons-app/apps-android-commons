@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.nearby;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -40,8 +39,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
-
-import static fr.free.nrw.commons.location.LocationServiceManager.LOCATION_REQUEST;
 
 
 public class NearbyActivity extends NavigationBaseActivity implements LocationUpdateListener {
@@ -259,7 +256,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     /**
      * This method should be the single point to load/refresh nearby places
      *
-     * @param isHardRefresh
+     * @param isHardRefresh Should display a toast if the location hasn't changed
      */
     private void refreshView(boolean isHardRefresh) {
         if (lockNearbyView) {
