@@ -51,11 +51,17 @@ public class MultipleShareActivity extends AuthenticatedActivity
         MultipleUploadListFragment.OnMultipleUploadInitiatedHandler,
         OnCategoriesSaveHandler {
 
-    @Inject MediaWikiApi mwApi;
-    @Inject SessionManager sessionManager;
-    @Inject UploadController uploadController;
-    @Inject ModifierSequenceDao modifierSequenceDao;
-    @Inject @Named("default_preferences") SharedPreferences prefs;
+    @Inject
+    MediaWikiApi mwApi;
+    @Inject
+    SessionManager sessionManager;
+    @Inject
+    UploadController uploadController;
+    @Inject
+    ModifierSequenceDao modifierSequenceDao;
+    @Inject
+    @Named("default_preferences")
+    SharedPreferences prefs;
 
     private ArrayList<Contribution> photosList = null;
 
@@ -240,7 +246,7 @@ public class MultipleShareActivity extends AuthenticatedActivity
         mwApi.setAuthCookie(authCookie);
         Intent intent = getIntent();
 
-        if (intent.getAction().equals(Intent.ACTION_SEND_MULTIPLE)) {
+        if (Intent.ACTION_SEND_MULTIPLE.equals(intent.getAction())) {
             if (photosList == null) {
                 photosList = new ArrayList<>();
                 ArrayList<Uri> urisList = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
@@ -278,7 +284,7 @@ public class MultipleShareActivity extends AuthenticatedActivity
 
     @Override
     public void onBackStackChanged() {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(mediaDetails != null && mediaDetails.isVisible()) ;
+        getSupportActionBar().setDisplayHomeAsUpEnabled(mediaDetails != null && mediaDetails.isVisible());
     }
 
 }

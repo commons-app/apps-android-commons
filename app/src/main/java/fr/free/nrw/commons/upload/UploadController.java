@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
+import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -49,7 +50,7 @@ public class UploadController {
     private ServiceConnection uploadServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder binder) {
-            uploadService = (UploadService) ((HandlerService.HandlerServiceLocalBinder)binder).getService();
+            uploadService = (UploadService) ((HandlerService.HandlerServiceLocalBinder) binder).getService();
             isUploadServiceConnected = true;
         }
 
@@ -81,13 +82,14 @@ public class UploadController {
 
     /**
      * Starts a new upload task.
-     * @param title the title of the contribution
-     * @param mediaUri the media URI of the contribution
-     * @param description the description of the contribution
-     * @param mimeType the MIME type of the contribution
-     * @param source the source of the contribution
+     *
+     * @param title         the title of the contribution
+     * @param mediaUri      the media URI of the contribution
+     * @param description   the description of the contribution
+     * @param mimeType      the MIME type of the contribution
+     * @param source        the source of the contribution
      * @param decimalCoords the coordinates in decimal. (e.g. "37.51136|-77.602615")
-     * @param onComplete the progress tracker
+     * @param onComplete    the progress tracker
      */
     public void startUpload(String title, Uri mediaUri, String description, String mimeType, String source, String decimalCoords, ContributionUploadProgress onComplete) {
         Contribution contribution;
@@ -106,8 +108,9 @@ public class UploadController {
 
     /**
      * Starts a new upload task.
+     *
      * @param contribution the contribution object
-     * @param onComplete the progress tracker
+     * @param onComplete   the progress tracker
      */
     public void startUpload(final Contribution contribution, final ContributionUploadProgress onComplete) {
         //Set creator, desc, and license
@@ -134,15 +137,17 @@ public class UploadController {
                 ContentResolver contentResolver = context.getContentResolver();
                 try {
                     if (contribution.getDataLength() <= 0) {
-                        length = contentResolver
-                                .openAssetFileDescriptor(contribution.getLocalUri(), "r")
-                                .getLength();
-                        if (length == -1) {
-                            // Let us find out the long way!
-                            length = countBytes(contentResolver
-                                    .openInputStream(contribution.getLocalUri()));
+                        AssetFileDescriptor assetFileDescriptor = contentResolver
+                                .openAssetFileDescriptor(contribution.getLocalUri(), "r");
+                        if (assetFileDescriptor != null) {
+                            length = assetFileDescriptor.getLength();
+                            if (length == -1) {
+                                // Let us find out the long way!
+                                length = countBytes(contentResolver
+                                        .openInputStream(contribution.getLocalUri()));
+                            }
+                            contribution.setDataLength(length);
                         }
-                        contribution.setDataLength(length);
                     }
                 } catch (IOException e) {
                     Timber.e(e, "IO Exception: ");
@@ -152,7 +157,7 @@ public class UploadController {
                     Timber.e(e, "Security Exception: ");
                 }
 
-                String mimeType = (String)contribution.getTag("mimeType");
+                String mimeType = (String) contribution.getTag("mimeType");
                 Boolean imagePrefix = false;
 
                 if (mimeType == null || TextUtils.isEmpty(mimeType) || mimeType.endsWith("*")) {
@@ -199,6 +204,7 @@ public class UploadController {
 
     /**
      * Counts the number of bytes in {@code stream}.
+     *
      * @param stream the stream
      * @return the number of bytes in {@code stream}
      * @throws IOException if an I/O error occurs

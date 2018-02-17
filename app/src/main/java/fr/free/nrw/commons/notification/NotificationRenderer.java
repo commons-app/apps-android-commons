@@ -8,13 +8,9 @@ import android.widget.TextView;
 
 import com.pedrogomez.renderers.Renderer;
 
-import java.util.Calendar;
-import java.util.Date;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.utils.DateUtils;
 
 /**
  * Created by root on 19.12.2017.
