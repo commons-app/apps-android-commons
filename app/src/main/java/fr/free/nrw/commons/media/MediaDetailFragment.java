@@ -14,6 +14,7 @@ import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -298,7 +299,15 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                 Intent viewIntent = new Intent();
                 viewIntent.setAction(Intent.ACTION_VIEW);
                 viewIntent.setData(new PageTitle(selectedCategoryTitle).getCanonicalUri());
-                startActivity(viewIntent);
+                //check if web browser available
+                if(viewIntent.resolveActivity(getActivity().getPackageManager()) != null){
+                    startActivity(viewIntent);
+                } else {
+                    CharSequence text = "No app found to open URL";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(getContext(), text, duration);
+                    toast.show();
+                }
             });
         }
         return item;
@@ -377,7 +386,17 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     private void openWebBrowser(String url) {
         Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        startActivity(browser);
+        //check if web browser available
+        if(browser.resolveActivity(getActivity().getPackageManager()) != null){
+            startActivity(browser);
+        } else {
+            CharSequence text = "No app found to open URL";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(getContext(), text, duration);
+            toast.show();
+        }
+
     }
 
     private void openMap(LatLng coordinates) {

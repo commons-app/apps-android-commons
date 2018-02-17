@@ -1,10 +1,13 @@
 package fr.free.nrw.commons;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,12 +28,12 @@ public class AboutActivity extends NavigationBaseActivity {
      * @param savedInstanceState Data bundle
      */
     @Override
+    @SuppressLint("StringFormatInvalid")
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
 
         ButterKnife.bind(this);
-
         String aboutText = getString(R.string.about_license, getString(R.string.trademarked_name));
         aboutLicenseText.setHtmlText(aboutText);
 
@@ -42,12 +45,25 @@ public class AboutActivity extends NavigationBaseActivity {
     public void launchFacebook(View view) {
 
         Intent intent;
+
         try {
             intent = new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/" + "1921335171459985"));
             intent.setPackage("com.facebook.katana");
             startActivity(intent);
+
         } catch (Exception e) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/" + "1921335171459985")));
+            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/" + "1921335171459985\\"));
+            //check if web browser available
+            if(intent.resolveActivity(this.getPackageManager()) != null){
+                startActivity(intent);
+            } else {
+                CharSequence text = "No app found to open URL";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(this, text, duration);
+                toast.show();
+            }
+
         }
 
     }
@@ -56,13 +72,29 @@ public class AboutActivity extends NavigationBaseActivity {
     public void launchGithub(View view) {
 
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/commons-app/apps-android-commons\\"));
-        startActivity(browserIntent);
+        //check if web browser available
+        if (browserIntent.resolveActivity(this.getPackageManager()) != null) {
+            startActivity(browserIntent);
+        } else {
+            CharSequence text = "No app found to open URL";
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(this, text, duration);
+            toast.show();
+        }
     }
 
     @OnClick(R.id.website_launch_icon)
     public void launchWebsite(View view) {
 
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://commons-app.github.io/\\"));
-        startActivity(browserIntent);
+        //check if web browser available
+        if (browserIntent.resolveActivity(this.getPackageManager()) != null) {
+            startActivity(browserIntent);
+        } else {
+            CharSequence text = "No app found to open URL";
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(this, text, duration);
+            toast.show();
+        }
     }
 }

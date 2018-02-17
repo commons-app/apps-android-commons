@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.pedrogomez.renderers.RVRendererAdapter;
 
@@ -66,10 +67,22 @@ public class NotificationActivity extends NavigationBaseActivity {
     }
 
     private void handleUrl(String url) {
+
         if (url == null || url.equals("")) {
             return;
         }
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+
+        Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        //check if web browser available
+        if(browser.resolveActivity(this.getPackageManager()) != null){
+            startActivity(browser);
+        } else {
+            CharSequence text = "No app found to open URL";
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(this, text, duration);
+            toast.show();
+        }
+
     }
 
     private void setAdapter(List<Notification> notificationList) {

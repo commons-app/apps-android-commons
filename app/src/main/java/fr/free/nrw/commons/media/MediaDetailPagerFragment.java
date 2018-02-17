@@ -24,6 +24,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -114,7 +115,17 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 Intent viewIntent = new Intent();
                 viewIntent.setAction(ACTION_VIEW);
                 viewIntent.setData(m.getFilePageTitle().getMobileUri());
-                startActivity(viewIntent);
+                //check if web browser available
+                if(viewIntent.resolveActivity(getActivity().getPackageManager()) != null){
+                    startActivity(viewIntent);
+                } else {
+                    CharSequence text = "No app found to open URL";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(getContext(), text, duration);
+                    toast.show();
+                }
+
                 return true;
             case R.id.menu_download_current_image:
                 // Download
