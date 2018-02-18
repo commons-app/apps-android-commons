@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.modifications;
 
-import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
@@ -12,13 +11,13 @@ import android.text.TextUtils;
 
 import javax.inject.Inject;
 
-import dagger.android.AndroidInjection;
 import fr.free.nrw.commons.data.DBOpenHelper;
+import fr.free.nrw.commons.di.CommonsDaggerContentProvider;
 import timber.log.Timber;
 
 import static fr.free.nrw.commons.modifications.ModifierSequenceDao.Table.TABLE_NAME;
 
-public class ModificationsContentProvider extends ContentProvider {
+public class ModificationsContentProvider extends CommonsDaggerContentProvider {
 
     private static final int MODIFICATIONS = 1;
     private static final int MODIFICATIONS_ID = 2;
@@ -39,12 +38,6 @@ public class ModificationsContentProvider extends ContentProvider {
     }
 
     @Inject DBOpenHelper dbOpenHelper;
-
-    @Override
-    public boolean onCreate() {
-        AndroidInjection.inject(this);
-        return true;
-    }
 
     @Override
     public Cursor query(@NonNull Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
@@ -77,7 +70,7 @@ public class ModificationsContentProvider extends ContentProvider {
     public Uri insert(@NonNull Uri uri, ContentValues contentValues) {
         int uriType = uriMatcher.match(uri);
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
-        long id = 0;
+        long id;
         switch (uriType) {
             case MODIFICATIONS:
                 id = sqlDB.insert(TABLE_NAME, null, contentValues);
@@ -139,7 +132,7 @@ public class ModificationsContentProvider extends ContentProvider {
          */
         int uriType = uriMatcher.match(uri);
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
-        int rowsUpdated = 0;
+        int rowsUpdated;
         switch (uriType) {
             case MODIFICATIONS:
                 rowsUpdated = sqlDB.update(TABLE_NAME,

@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">Het uploaden van %1$s is mislukt</string>
   <string name="upload_failed_notification_subtitle">Wijs aan om te bekijken</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
-    <item quantity="one">%d bestand aan het uploaden</item>
-    <item quantity="other">%d bestanden aan het uploaden</item>
+    <item quantity="one">%1$d bestand aan het uploaden</item>
+    <item quantity="other">%1$d bestanden aan het uploaden</item>
   </plurals>
   <string name="title_activity_contributions" fuzzy="true">Mijn uploads</string>
   <string name="contribution_state_queued">In wachtrij</string>
@@ -54,15 +54,15 @@
   <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Nog geen uploads</item>
     <item quantity="one">1 upload</item>
-    <item quantity="other">%d uploads</item>
+    <item quantity="other">%1$d uploads</item>
   </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Bezig met 1 upload</item>
-    <item quantity="other">Bezig met %d uploads</item>
+    <item quantity="other">Bezig met %1$d uploads</item>
   </plurals>
   <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 upload</item>
-    <item quantity="other">%d uploads</item>
+    <item quantity="other">%1$d uploads</item>
   </plurals>
   <string name="categories_not_found">Er zijn geen categorieën met \"%1$s\" gevonden</string>
   <string name="categories_skip_explanation" fuzzy="true">Voeg categorieën toe om uw afbeeldingen makkelijker te vinden te maken op Wikimedia Commons.\n\nBegin met het toevoegen van categorieën.\n\nKlik op dit bericht, of ga terug, om deze stap over te slaan.</string>
@@ -71,7 +71,7 @@
   <string name="title_activity_signup">Registreren</string>
   <string name="menu_about">Over</string>
   <string name="about_license" fuzzy="true">Opensourcesoftware vrijgegeven onder de &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Wikimedia Commons en haar logo zijn handelsmerken van de Wikimedia Foundation en worden gebruikt met toestemming van de Wikimedia Foundation. We worden niet bekrachtigd door en zijn niet verbonden met de Wikimedia Foundation.</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Broncode&lt;/a&gt; en &lt;a href=\"https://commons-app.github.io/\"&gt;website&lt;/a&gt; op GitHub. Maak een nieuwe &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;melding op GitHub&lt;/a&gt; voor bugs en suggesties.</string>
+  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Broncode&lt;/a&gt; en &lt;a href=\"https://commons-app.github.io/\"&gt;website&lt;/a&gt; op GitHub. Maak een nieuwe &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;melding op GitHub&lt;/a&gt; voor bugs en suggesties.</string>
   <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Privacybeleid&lt;/a&gt;</string>
   <string name="title_activity_about">Over</string>
   <string name="menu_feedback">Terugkoppeling geven (via e-mail)</string>

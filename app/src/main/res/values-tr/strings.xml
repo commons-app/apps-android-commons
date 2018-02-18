@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">%1$s dosyasının yüklemesi başarısız oldu</string>
   <string name="upload_failed_notification_subtitle">Görüntülemek için dokunun</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d dosya karşıya yükleniyor</item>
-    <item quantity="other">%d dosya karşıya yükleniyor</item>
+    <item quantity="one">%1$d dosya karşıya yükleniyor</item>
+    <item quantity="other">%1$d dosya karşıya yükleniyor</item>
   </plurals>
   <string name="title_activity_contributions">Yakın Zamandaki Yüklemelerim</string>
   <string name="contribution_state_queued">Sırada</string>
@@ -54,18 +54,18 @@
   <string name="gps_disabled">GPS, cihazınızda devre dışı bırakılmıştır. Etkinleştirmek ister misiniz?</string>
   <string name="enable_gps">GPS\'i etkinleştir</string>
   <string name="contributions_subtitle_zero">Henüz yüklenmedi</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d yükleme</item>
-    <item quantity="other">%d yükleme</item>
+    <item quantity="one">%1$d yükleme</item>
+    <item quantity="other">%1$d yükleme</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">%d yüklenmeye başlanıyor</item>
-    <item quantity="other">%d yüklenmeye başlanıyor</item>
+  <plurals name="starting_multiple_uploads" fuzzy="true">
+    <item quantity="one">%1$d yüklenmeye başlanıyor</item>
+    <item quantity="other">%1$d yüklenmeye başlanıyor</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%d yükleme</item>
-    <item quantity="other">%d yükleme</item>
+  <plurals name="multiple_uploads_title" fuzzy="true">
+    <item quantity="one">%1$d yükleme</item>
+    <item quantity="other">%1$d yükleme</item>
   </plurals>
   <string name="categories_not_found">%1$s ile eşleşen bir kategori bulunamadı</string>
   <string name="categories_skip_explanation">Resimlerinizi Wikimedia Commons\'ta daha bulunabilir duruma getirmek için kategoriler ekleyin.\nKategori eklemek için yazmaya başlayın.</string>
@@ -74,7 +74,7 @@
   <string name="title_activity_signup">Kaydol</string>
   <string name="menu_about">Hakkında</string>
   <string name="about_license">Wikimedia Commons uygulaması, Wikimedia topluluğunun imtiyaz sahibi ve gönüllüleri tarafından oluşturulmuş ve sürdürülmüş açık kaynak kodlu bir uygulamadır. Vikipedi Vakfı, uygulamanın oluşturulması, geliştirilmesi veya bakımına dahil değildir.</string>
-  <string name="about_improve">GitHub üzerinde &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kaynak&lt;/a&gt; ve &lt;a href=\"https://commons-app.github.io/\"&gt;website&lt;/a&gt;. Hata raporları ve önerileri için yeni bir &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub sorunu&lt;/a&gt; oluştur.</string>
+  <string name="about_improve" fuzzy="true">GitHub üzerinde &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kaynak&lt;/a&gt; ve &lt;a href=\"https://commons-app.github.io/\"&gt;website&lt;/a&gt;. Hata raporları ve önerileri için yeni bir &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub sorunu&lt;/a&gt; oluştur.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Gizlilik Politikası&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Katkıda bulunanlar&lt;/a&gt;</string>
   <string name="title_activity_about">Hakkında</string>

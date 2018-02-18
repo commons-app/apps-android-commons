@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">Uploading %1$s failed</string>
   <string name="upload_failed_notification_subtitle">Tap to view</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d file uploading</item>
-    <item quantity="other">%d files uploading</item>
+    <item quantity="one">%1$d file uploading</item>
+    <item quantity="other">%1$d files uploading</item>
   </plurals>
   <string name="title_activity_contributions">My Recent Uploads</string>
   <string name="contribution_state_queued">Queued</string>
@@ -57,16 +57,16 @@
   <plurals name="contributions_subtitle">
     <!--zero is not used in english. Category mentioned here for easy reference in future-->
     <item quantity="zero">@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d upload</item>
-    <item quantity="other">%d uploads</item>
+    <item quantity="one">%1$d upload</item>
+    <item quantity="other">%1$d uploads</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Starting %d upload</item>
-    <item quantity="other">Starting %d uploads</item>
+    <item quantity="one">Starting %1$d upload</item>
+    <item quantity="other">Starting %1$d uploads</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d upload</item>
-    <item quantity="other">%d uploads</item>
+    <item quantity="one">%1$d upload</item>
+    <item quantity="other">%1$d uploads</item>
   </plurals>
   <string name="categories_not_found">No categories matching %1$s found</string>
   <string name="categories_skip_explanation">Add categories to make your images more discoverable on Wikimedia Commons.\nStart typing to add categories.</string>
@@ -76,7 +76,7 @@
   <string name="menu_about">About</string>
   <string name="about_license">The Wikimedia Commons app is an open-source app created and maintained by grantees and volunteers of the Wikimedia community. The Wikimedia Foundation is not involved in the creation, development, or maintenance of the app. </string>
   <string name="trademarked_name" translatable="false">Wikimedia Commons</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Source&lt;/a&gt; and &lt;a href=\"https://commons-app.github.io/\"&gt;website&lt;/a&gt; on GitHub. Create a new &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub issue&lt;/a&gt; for bug reports and suggestions.</string>
+  <string name="about_improve">Create a new &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub issue&lt;/a&gt; for bug reports and suggestions.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Privacy policy&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Credits&lt;/a&gt;</string>
   <string name="title_activity_about">About</string>
@@ -170,6 +170,9 @@
   <string name="login_failed_2fa_not_supported">Two factor authentication is currently not supported.</string>
   <string name="logout_verification">Do you really want to logout?</string>
   <string name="commons_logo">Commons Logo</string>
+  <string name="commons_website">Commons Website</string>
+  <string name="commons_facebook">Commons Facebook Page</string>
+  <string name="commons_github">Commons Github Source Code</string>
   <string name="background_image">Background Image</string>
   <string name="mediaimage_failed">Media Image Failed</string>
   <string name="no_image_found">No Image Found</string>
@@ -214,6 +217,12 @@
   <string name="nearby_location_has_not_changed">Location has not changed.</string>
   <string name="nearby_location_not_available">Location not available.</string>
   <string name="location_permission_rationale_nearby">Permission required to display a list of nearby places</string>
-    <string name="get_directions">GET DIRECTIONS</string>
+  <string name="get_directions">GET DIRECTIONS</string>
   <string name="read_article">READ ARTICLE</string>
+
+  <string name="notifications_welcome" formatted="false">Welcome to Wikimedia Commons, %1$s! We\'re glad you\'re here.</string>
+  <string name="notifications_talk_page_message">%1$s left a message on your talk page</string>
+  <string name="notifications_thank_you_edit">Thank you for making an edit</string>
+  <string name="notifications_mention">%1$s mentioned you on %2$s.</string>
+  <string name="toggle_view_button">Toggle view</string>
 </resources>

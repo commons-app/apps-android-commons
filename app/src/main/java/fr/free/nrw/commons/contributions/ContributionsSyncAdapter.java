@@ -23,8 +23,8 @@ import java.util.TimeZone;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.Utils;
+import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.mwapi.LogEventResult;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
@@ -81,7 +81,11 @@ public class ContributionsSyncAdapter extends AbstractThreadedSyncAdapter {
     @Override
     public void onPerformSync(Account account, Bundle bundle, String authority,
                               ContentProviderClient contentProviderClient, SyncResult syncResult) {
-        ((CommonsApplication) getContext().getApplicationContext()).injector().inject(this);
+        ApplicationlessInjection
+                .getInstance(getContext()
+                        .getApplicationContext())
+                .getCommonsApplicationComponent()
+                .inject(this);
         // This code is fraught with possibilities of race conditions, but lalalalala I can't hear you!
         String user = account.name;
         String lastModified = prefs.getString("lastSyncTimestamp", "");

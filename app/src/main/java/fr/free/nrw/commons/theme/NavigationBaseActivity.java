@@ -146,7 +146,7 @@ public abstract class NavigationBaseActivity extends BaseActivity
                 return true;
             case R.id.action_notifications:
                 drawerLayout.closeDrawer(navigationView);
-                startActivityWithFlags(this, NotificationActivity.class, Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                NotificationActivity.startYourself(this);
                 return true;
             default:
                 Timber.e("Unknown option [%s] selected from the navigation menu", itemId);

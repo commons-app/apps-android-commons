@@ -33,8 +33,8 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.upload.MwVolleyApi;
 import fr.free.nrw.commons.utils.StringSortingUtils;
@@ -49,7 +49,7 @@ import static android.view.KeyEvent.KEYCODE_BACK;
 /**
  * Displays the category suggestion and selection screen. Category search is initiated here.
  */
-public class CategorizationFragment extends DaggerFragment {
+public class CategorizationFragment extends CommonsDaggerSupportFragment {
 
     public static final int SEARCH_CATS_LIMIT = 25;
 
@@ -132,11 +132,6 @@ public class CategorizationFragment extends DaggerFragment {
                 return false;
             });
         }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
     }
 
     @Override
@@ -302,8 +297,10 @@ public class CategorizationFragment extends DaggerFragment {
         //Check if item contains a 4-digit word anywhere within the string (.* is wildcard)
         //And that item does not equal the current year or previous year
         //And if it is an irrelevant category such as Media_needing_categories_as_of_16_June_2017(Issue #750)
+        //Check if the year in the form of XX(X)0s is relevant, i.e. in the 2000s or 2010s as stated in Issue #1029
         return ((item.matches(".*(19|20)\\d{2}.*") && !item.contains(yearInString) && !item.contains(prevYearInString))
-                || item.matches("(.*)needing(.*)") || item.matches("(.*)taken on(.*)"));
+                || item.matches("(.*)needing(.*)") || item.matches("(.*)taken on(.*)")
+                || (item.matches(".*0s.*") && !item.matches(".*(200|201)0s.*")));
     }
 
     private void updateCategoryCount(CategoryItem item) {

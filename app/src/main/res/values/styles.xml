@@ -13,6 +13,7 @@
         <item name="buttonBackground">@color/button_background_dark</item>
         <item name="uploadOverlayBackground">@color/upload_overlay_background_dark</item>
         <item name="spinnerTheme">@style/DarkSpinnerTheme</item>
+        <item name="iconsTheme">@color/main_background_light</item>
     </style>
 
     <style name="LightAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -27,6 +28,7 @@
         <item name="buttonBackground">@color/button_background_light</item>
         <item name="uploadOverlayBackground">@color/upload_overlay_background_light</item>
         <item name="spinnerTheme">@style/LightSpinnerTheme</item>
+        <item name="iconsTheme">@color/main_background_dark</item>
     </style>
 
     <style name="DarkSpinnerTheme" parent="DarkAppTheme">

@@ -1,9 +1,6 @@
 package fr.free.nrw.commons.modifications;
 
 import android.accounts.Account;
-import android.accounts.AccountManager;
-import android.accounts.AuthenticatorException;
-import android.accounts.OperationCanceledException;
 import android.content.AbstractThreadedSyncAdapter;
 import android.content.ContentProviderClient;
 import android.content.Context;
@@ -16,10 +13,11 @@ import java.io.IOException;
 
 import javax.inject.Inject;
 
-import fr.free.nrw.commons.CommonsApplication;
+import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionDao;
 import fr.free.nrw.commons.contributions.ContributionsContentProvider;
+import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
@@ -28,6 +26,8 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
     @Inject MediaWikiApi mwApi;
     @Inject ContributionDao contributionDao;
     @Inject ModifierSequenceDao modifierSequenceDao;
+    @Inject
+    SessionManager sessionManager;
 
     public ModificationsSyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
@@ -36,7 +36,11 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
     @Override
     public void onPerformSync(Account account, Bundle bundle, String s, ContentProviderClient contentProviderClient, SyncResult syncResult) {
         // This code is fraught with possibilities of race conditions, but lalalalala I can't hear you!
-        ((CommonsApplication)getContext().getApplicationContext()).injector().inject(this);
+        ApplicationlessInjection
+                .getInstance(getContext()
+                        .getApplicationContext())
+                .getCommonsApplicationComponent()
+                .inject(this);
 
         Cursor allModifications;
         try {
@@ -51,16 +55,7 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
             return;
         }
 
-        String authCookie;
-        try {
-            authCookie = AccountManager.get(getContext()).blockingGetAuthToken(account, "", false);
-        } catch (OperationCanceledException | AuthenticatorException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            Timber.d("Could not authenticate :(");
-            return;
-        }
-
+        String authCookie = sessionManager.getAuthCookie();
         if (isNullOrWhiteSpace(authCookie)) {
             Timber.d("Could not authenticate :(");
             return;
@@ -87,22 +82,31 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
             while (!allModifications.isAfterLast()) {
                 ModifierSequence sequence = modifierSequenceDao.fromCursor(allModifications);
                 Contribution contrib;
-
                 Cursor contributionCursor;
+
+                if (contributionsClient == null) {
+                    Timber.e("ContributionsClient is null. This should not happen!");
+                    return;
+                }
+
                 try {
                     contributionCursor = contributionsClient.query(sequence.getMediaUri(), null, null, null, null);
                 } catch (RemoteException e) {
                     throw new RuntimeException(e);
                 }
-                contributionCursor.moveToFirst();
+
+                if (contributionCursor != null) {
+                    contributionCursor.moveToFirst();
+                }
+
                 contrib = contributionDao.fromCursor(contributionCursor);
 
-                if (contrib.getState() == Contribution.STATE_COMPLETED) {
+                if (contrib != null && contrib.getState() == Contribution.STATE_COMPLETED) {
                     String pageContent;
                     try {
                         pageContent = mwApi.revisionsByFilename(contrib.getFilename());
                     } catch (IOException e) {
-                        Timber.d("Network fuckup on modifications sync!");
+                        Timber.d("Network messed up on modifications sync!");
                         continue;
                     }
 
@@ -113,13 +117,13 @@ public class ModificationsSyncAdapter extends AbstractThreadedSyncAdapter {
                     try {
                         editResult = mwApi.edit(editToken, processedPageContent, contrib.getFilename(), sequence.getEditSummary());
                     } catch (IOException e) {
-                        Timber.d("Network fuckup on modifications sync!");
+                        Timber.d("Network messed up on modifications sync!");
                         continue;
                     }
 
                     Timber.d("Response is %s", editResult);
 
-                    if (!editResult.equals("Success")) {
+                    if (!"Success".equals(editResult)) {
                         // FIXME: Log this somewhere else
                         Timber.d("Non success result! %s", editResult);
                     } else {

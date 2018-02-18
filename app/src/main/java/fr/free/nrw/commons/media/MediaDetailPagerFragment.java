@@ -28,12 +28,12 @@ import android.view.ViewGroup;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.Media;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.SessionManager;
 import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
+import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
@@ -41,11 +41,15 @@ import static android.content.Context.DOWNLOAD_SERVICE;
 import static android.content.Intent.ACTION_VIEW;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
-public class MediaDetailPagerFragment extends DaggerFragment implements ViewPager.OnPageChangeListener {
+public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment implements ViewPager.OnPageChangeListener {
 
-    @Inject MediaWikiApi mwApi;
-    @Inject SessionManager sessionManager;
-    @Inject @Named("default_preferences") SharedPreferences prefs;
+    @Inject
+    MediaWikiApi mwApi;
+    @Inject
+    SessionManager sessionManager;
+    @Inject
+    @Named("default_preferences")
+    SharedPreferences prefs;
 
     private ViewPager pager;
     private Boolean editable;
@@ -164,13 +168,19 @@ public class MediaDetailPagerFragment extends DaggerFragment implements ViewPage
         req.allowScanningByMediaScanner();
         req.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !(ContextCompat.checkSelfPermission(getContext(), READ_EXTERNAL_STORAGE) == PERMISSION_GRANTED)) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
+                ContextCompat.checkSelfPermission(getContext(), READ_EXTERNAL_STORAGE)
+                        != PERMISSION_GRANTED
+                && getView() != null) {
             Snackbar.make(getView(), R.string.read_storage_permission_rationale,
                     Snackbar.LENGTH_INDEFINITE).setAction(R.string.ok,
                     view -> ActivityCompat.requestPermissions(getActivity(),
                             new String[]{READ_EXTERNAL_STORAGE}, 1)).show();
         } else {
-            ((DownloadManager) getActivity().getSystemService(DOWNLOAD_SERVICE)).enqueue(req);
+            DownloadManager systemService = (DownloadManager) getActivity().getSystemService(DOWNLOAD_SERVICE);
+            if (systemService != null) {
+                systemService.enqueue(req);
+            }
         }
     }
 

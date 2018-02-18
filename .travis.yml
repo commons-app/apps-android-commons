@@ -35,7 +35,7 @@ before_script:
   - android-wait-for-emulator
 
 script:
-  - ./gradlew clean check connectedCheck jacocoTestReport --stacktrace
+  - ./gradlew clean check connectedCheck jacocoTestReport
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)

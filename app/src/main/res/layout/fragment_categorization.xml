@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:hint="@string/categories_search_text_hint"
             android:maxLines="1"
-            android:inputType="text"
+            android:inputType="textCapWords"
             android:imeOptions="flagNoExtractUi"
             />
 
@@ -36,7 +36,7 @@
             android:indeterminateOnly="true"
             android:layout_marginRight="@dimen/tiny_gap"
             android:layout_marginEnd="@dimen/tiny_gap"
-            android:layout_gravity="center_vertical|right|end"
+            android:layout_gravity="center_vertical|end"
             style="?android:progressBarStyleSmall"
             android:visibility="gone"
             />

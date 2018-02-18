@@ -20,13 +20,15 @@ import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.Arrays;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import dagger.android.support.DaggerFragment;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.nearby.NearbyActivity;
 import timber.log.Timber;
 
@@ -36,7 +38,7 @@ import static android.app.Activity.RESULT_OK;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import static android.view.View.GONE;
 
-public class ContributionsListFragment extends DaggerFragment {
+public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
     @BindView(R.id.contributionsList)
     GridView contributionsList;
@@ -45,8 +47,12 @@ public class ContributionsListFragment extends DaggerFragment {
     @BindView(R.id.loadingContributionsProgressBar)
     ProgressBar progressBar;
 
-    @Inject @Named("prefs") SharedPreferences prefs;
-    @Inject @Named("default_preferences") SharedPreferences defaultPrefs;
+    @Inject
+    @Named("prefs")
+    SharedPreferences prefs;
+    @Inject
+    @Named("default_preferences")
+    SharedPreferences defaultPrefs;
 
     private ContributionController controller;
 
@@ -208,7 +214,7 @@ public class ContributionsListFragment extends DaggerFragment {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         Timber.d("onRequestPermissionsResult: req code = " + " perm = "
-                + permissions + " grant =" + grantResults);
+                + Arrays.toString(permissions) + " grant =" + Arrays.toString(grantResults));
 
         switch (requestCode) {
             // 1 = Storage allowed when gallery selected
