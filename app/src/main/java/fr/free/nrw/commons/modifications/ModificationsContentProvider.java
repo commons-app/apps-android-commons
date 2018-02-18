@@ -70,7 +70,7 @@ public class ModificationsContentProvider extends CommonsDaggerContentProvider {
     public Uri insert(@NonNull Uri uri, ContentValues contentValues) {
         int uriType = uriMatcher.match(uri);
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
-        long id = 0;
+        long id;
         switch (uriType) {
             case MODIFICATIONS:
                 id = sqlDB.insert(TABLE_NAME, null, contentValues);
@@ -132,7 +132,7 @@ public class ModificationsContentProvider extends CommonsDaggerContentProvider {
          */
         int uriType = uriMatcher.match(uri);
         SQLiteDatabase sqlDB = dbOpenHelper.getWritableDatabase();
-        int rowsUpdated = 0;
+        int rowsUpdated;
         switch (uriType) {
             case MODIFICATIONS:
                 rowsUpdated = sqlDB.update(TABLE_NAME,

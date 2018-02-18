@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="crash_dialog_title">Commons-forritið hrundi</string>
+  <string name="crash_dialog_text">Úbbs. Eitthvað fór úrskeiðis!</string>
+  <string name="crash_dialog_comment_prompt">Lýstu því fyrir okkur, eins nákvæmlega og þú getur, hvað þú varst að gera þegar forritið hrundi. Sendu það svo til okkar í tölvupósti, það getur hjálpað okkur við að laga þetta.</string>
+  <string name="crash_dialog_ok_toast">Þakka þér fyrir!</string>
+</resources>

@@ -20,7 +20,7 @@
   <string name="upload_progress_notification_title_finishing">%1$s का अपलोड पूरा हुआ</string>
   <string name="upload_failed_notification_title">%1$s का अपलोड विफल हुआ</string>
   <string name="upload_failed_notification_subtitle">देखने हेतु टैप करें</string>
-  <plurals name="uploads_pending_notification_indicator">
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">%d फ़ाइल अपलोड हो रहा</item>
     <item quantity="other">%d फ़ाइलें अपलोड हो रहीं</item>
   </plurals>
@@ -55,16 +55,16 @@
   <string name="enable_gps">जीपीएस सक्षम करें</string>
   <string name="contributions_subtitle_zero">अभी तक कोई अपलोड नहीं</string>
   <plurals name="contributions_subtitle">
-    <item quantity="one">%d अपलोड</item>
-    <item quantity="other">%d अपलोड्स</item>
+    <item quantity="one">%1$d अपलोड</item>
+    <item quantity="other">%1$d अपलोड्स</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">%d अपलोड शुरू</item>
-    <item quantity="other">%d अपलोड शुरू</item>
+    <item quantity="one">%1$d अपलोड शुरू</item>
+    <item quantity="other">%1$d अपलोड शुरू</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%d अपलोड</item>
-    <item quantity="other">%d अपलोड</item>
+  <plurals name="multiple_uploads_title" fuzzy="true">
+    <item quantity="one">%1$d अपलोड</item>
+    <item quantity="other">%1$d अपलोड</item>
   </plurals>
   <string name="categories_not_found">%1$s से कोई श्रेणी मेल नहीं खाती</string>
   <string name="categories_skip_explanation">विकिमीडिया कॉमन्स पर अपनी छवियों को अधिक खोजने योग्य बनाने के लिए श्रेणियां जोड़ें|\nश्रेणियां जोड़ने के लिए टाइप करना प्रारंभ करें|</string>
@@ -73,7 +73,7 @@
   <string name="title_activity_signup">खाता खोलें</string>
   <string name="menu_about">परिचय</string>
   <string name="about_license">विकिमीडिया कॉमन्स एप्प एक मुक्त स्रोत एप्प है जो कि विकिमीडिया समुदाय के अनुदानप्राप्तकर्ताओं व स्वयंसेवकों द्वारा निर्मित एवं प्रबंधित है। विकिमीडिया फॉऊण्डेशन इस एप्प के निर्माण, विकास व प्रबंधन में किसी प्रकार से भी संलग्न नहीं है।</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;स्रोत&lt;/a&gt; और &lt;a href=\"https://commons-app.github.io/\"&gt;वेबसाइट&lt;/a&gt; गिटहब में है और त्रुटि व सुझाव हेतु &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;गिटहब समस्या&lt;/a&gt; देखें।</string>
+  <string name="about_improve">त्रुटि की सूचना और सुझावों के लिए &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt; GitHub समस्या &lt;/a&gt; बनाएं</string>
   <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;गोपनीयता नीति&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;श्रेय&lt;/a&gt;</string>
   <string name="title_activity_about">परिचय</string>
@@ -163,6 +163,9 @@
   <string name="login_failed_2fa_not_supported">दो कारक प्रमाणीकरण वर्तमान में समर्थित नहीं है</string>
   <string name="logout_verification">क्या आप वास्तव में निकास करना चाहते हैं?</string>
   <string name="commons_logo">कॉमन्स का प्रतीक चिन्ह</string>
+  <string name="commons_website">कॉमन्स जालस्थान</string>
+  <string name="commons_facebook">कॉमन्स फेसबुक पृष्ठ</string>
+  <string name="commons_github">कॉमन्स गिटहब स्त्रोत कूटशब्द</string>
   <string name="background_image">पृष्ठभूमि छवि</string>
   <string name="mediaimage_failed">मीडिया छवि विफल</string>
   <string name="no_image_found">कोई छवि नहीं मिली</string>
@@ -206,4 +209,8 @@
   <string name="location_permission_rationale_nearby">आसपास के स्थान दिखाने के लिए अनुमति चाहिए</string>
   <string name="get_directions">दिशा - निर्देश प्राप्त करें</string>
   <string name="read_article">लेख पढ़ें</string>
+  <string name="notifications_welcome" fuzzy="true">विकिमीडिया कॉमन्स पर आपका स्वागत है, %1$s! हमें हर्ष है कि आप यहाँ हैं।</string>
+  <string name="notifications_talk_page_message" fuzzy="true">%1$s ने आपके वार्ता पृष्ठ पर सन्देश छोड़ा है</string>
+  <string name="notifications_thank_you_edit">सम्पादन करने के लिए धन्यवाद</string>
+  <string name="notifications_mention" fuzzy="true">%1$s ने %2$s में आपका उल्लेख किया है</string>
 </resources>

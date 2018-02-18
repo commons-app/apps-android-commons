@@ -65,7 +65,7 @@ public class Utils {
     /**
      * Capitalizes the first character of a string.
      *
-     * @param string
+     * @param string String to alter
      * @return string with capitalized first character
      */
     public static String capitalize(String string) {

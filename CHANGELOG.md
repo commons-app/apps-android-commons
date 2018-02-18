@@ -1,5 +1,8 @@
 # Wikimedia Commons for Android
 
+## v2.6.7
+- Added null checks to prevent frequent crashes in ModificationsSyncAdapter
+
 ## v2.6.6
 - Refactored Dagger to fix crashes encountered in production
 - Fixed "?" displaying in description of Nearby places

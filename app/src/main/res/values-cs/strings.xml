@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">Načítání souboru %1$s se nezdařilo</string>
   <string name="upload_failed_notification_subtitle">Klepnutím zobrazíte</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d soubor se nahrává</item>
-    <item quantity="other">%d souborů se nahrává</item>
+    <item quantity="one">%1$d soubor se nahrává</item>
+    <item quantity="other">%1$d souborů se nahrává</item>
   </plurals>
   <string name="title_activity_contributions">Moje nedávné obrázky</string>
   <string name="contribution_state_queued">Ve frontě</string>
@@ -55,17 +55,17 @@
   <string name="enable_gps">Spustit GPS</string>
   <string name="contributions_subtitle_zero">Žádné nahrané soubory</string>
   <plurals name="contributions_subtitle">
-    <item quantity="zero">Žádné soubory</item>
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">1 soubor</item>
-    <item quantity="other">%d souborů</item>
+    <item quantity="other">%1$d souborů</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Spouští se nahrávání %d souboru</item>
-    <item quantity="other">Spouští se nahrávání %d souborů</item>
+    <item quantity="one">Spouští se nahrávání %1$d souboru</item>
+    <item quantity="other">Spouští se nahrávání %1$d souborů</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d nahrávání</item>
-    <item quantity="other">%d nahrávání</item>
+    <item quantity="one">%1$d nahrávání</item>
+    <item quantity="other">%1$d nahrávání</item>
   </plurals>
   <string name="categories_not_found">Žádné kategorie neodpovídají „%1$s“</string>
   <string name="categories_skip_explanation">Přidejte kategorie, aby bylo vaše obrázky možno na Wikimedia Commons najít.</string>
@@ -73,8 +73,8 @@
   <string name="title_activity_settings">Nastavení</string>
   <string name="title_activity_signup">Zaregistrovat se</string>
   <string name="menu_about">O aplikaci</string>
-  <string name="about_license" fuzzy="true">Open Source software dostupný za podmínek &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. %1$s a logo %1$s jsou ochranné známky Wikimedia Foundation a jsou použity se svolením Wikimedia Foundation. Nejsme podporováni Wikimedia Foundation ani nejsme její součástí.</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Zdrojový kód&lt;/a&gt;, &lt;a href=\"https://commons-app.github.io/\"&gt;webová stránka&lt;/a&gt; a &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;hlášení chyb a sdílení nápadů&lt;/a&gt; na GitHubu.</string>
+  <string name="about_license">Aplikace Wikimedia Commons je open source software vytvářený a spravovaný členy komunity Wikimedia. Nadace Wikimedia se neúčastní tvorby, vývoje či správy aplikace.</string>
+  <string name="about_improve">Otevřete nové &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;hlášení na GitHubu&lt;/a&gt; pro nahlášení chyb a návrhů.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Ochrana osobních údajů&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Autoři&lt;/a&gt;</string>
   <string name="title_activity_about">O aplikaci</string>
@@ -86,6 +86,7 @@
   <string name="menu_retry_upload">Opakovat</string>
   <string name="menu_cancel_upload">Zrušit</string>
   <string name="share_license_summary">Tento obrázek bude zveřejněn pod licencí %1$s</string>
+  <string name="media_upload_policy">Odesláním tohoto souboru potvrzuji, že je mým vlastním dílem, neobsahuje autorskoprávně chráněný materiál a nejedná se o selfie a ani jinak neporušuje &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;pravidla a doporučení Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Stáhnout</string>
   <string name="preference_license">Licence</string>
   <string name="use_previous">Použít předchozí název a popis</string>
@@ -120,7 +121,7 @@
   <string name="tutorial_3_text">Prosím NENAHRÁVEJTE:</string>
   <string name="tutorial_3_subtext">- Selfie nebo obrázky vašich přátel\n- Obrázky stažené z Internetu\n- Screenshoty z proprietárních aplikací</string>
   <string name="tutorial_4_text">Příklad nahraného souboru:</string>
-  <string name="tutorial_4_subtext" fuzzy="true">- Název: Opera v Sydney\n- Popis: Opera v Sydney, pohled přes záliv\n- Kategorie: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext">- Název: Opera v Sydney\n- Popis: Opera v Sydney, pohled přes záliv\n- Kategorie: Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Přispějte svými obrázky. Pomozte oživit články na Wikipedii.</string>
   <string name="welcome_wikipedia_subtext">Obrázky na Wikipedii pochází \nz Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Vaše obrázky pomáhají vzdělávat lidi po celém světě.</string>
@@ -134,6 +135,7 @@
   <string name="detail_license_empty">Neznámá licence</string>
   <string name="menu_refresh">Obnovit</string>
   <string name="read_storage_permission_rationale">Požadováno oprávnění ke čtení externího úložiště. Aplikace bez toho nemůže pracovat.</string>
+  <string name="write_storage_permission_rationale">Požadováno oprávnění k zápisu do externího úložiště. Aplikace bez toho nemůže pracovat.</string>
   <string name="location_permission_rationale">Volitelně: Umožněte aplikaci, aby získávala aktuální polohu a nabízela na jejím základě kategorie</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Místa v okolí</string>
@@ -149,6 +151,7 @@
   <string name="media_detail_uploaded_date">Datum nahrání souboru</string>
   <string name="media_detail_license">Licence</string>
   <string name="media_detail_coordinates">Souřadnice</string>
+  <string name="media_detail_coordinates_empty">Žádné vložené souřadnice</string>
   <string name="become_a_tester_title">Staňte se beta testery</string>
   <string name="become_a_tester_description">Přihlásit se do našeho beta kanálu na Google Play a dostávat včasný přístup k novinkám a opravám chyb</string>
   <string name="use_wikidata">Použít Wikidata</string>
@@ -161,6 +164,9 @@
   <string name="login_failed_2fa_not_supported">Tato aplikace zatím nepodporuje tzv. dvoufázové ověření.</string>
   <string name="logout_verification">Opravdu se chcete odhlásit?</string>
   <string name="commons_logo">Logo Wikimedia Commons</string>
+  <string name="commons_website">Stránka Commons</string>
+  <string name="commons_facebook">Facebooková stránka Commons</string>
+  <string name="commons_github">Zdrojový kód Commons na GitHubu</string>
   <string name="background_image">Obrázek na pozadí</string>
   <string name="mediaimage_failed">Obrázek</string>
   <string name="no_image_found">Nebyl nalezen žádný obrázek</string>
@@ -185,16 +191,28 @@
   <string name="navigation_item_feedback">Zpětná vazba</string>
   <string name="navigation_item_logout">Odhlášení</string>
   <string name="navigation_item_info">Průvodce</string>
+  <string name="navigation_item_notification">Upozornění</string>
   <string name="nearby_needs_permissions">Místa poblíž nebude možné zobrazit, neuvedete-li svojí polohu.</string>
   <string name="no_description_found">nebyl nalezen žádný popisek</string>
   <string name="nearby_info_menu_commons_article">Stránka souboru na Commons</string>
   <string name="nearby_info_menu_wikidata_article">Položka Wikidat</string>
+  <string name="error_while_cache">Chyba při meziukládání obrázků</string>
+  <string name="title_info">Unikátní a popisný název pro daný soubor, který bude sloužit jako název souboru. Můžete použít běžný psaný jazyk s mezerami; nezahrnujte koncovku souboru.</string>
+  <string name="description_info">Popište prosím obrázek, jak jen to je možné: Kde byl pořízen? Co znázorňuje? Jaký je kontext obrázku? Popisujte prosím významné předměty nebo osoby na obrázku a nezapomeňte na informace, které není možné snadno odhadnout ze samotného obrázku, jako je například denní doba, pokud jde o krajinu. Pokud je na obrázku něco neobvyklého, popište, co to dělá neobvyklým.</string>
   <string name="give_permission">Dát povolení</string>
+  <string name="use_external_storage">Použít externí úložiště</string>
+  <string name="use_external_storage_summary">Uložit obrázky pořízené fotoaparátem, jenž je součástí této aplikace</string>
   <string name="send_log_file">Odeslat log</string>
   <string name="send_log_file_description">Odeslat log vývojářům e-mailem</string>
   <string name="login_to_your_account">Přihlásit se k účtu</string>
   <string name="nearby_location_has_not_changed">Vaše umístění se nezměnilo.</string>
   <string name="nearby_location_not_available">Umístění není dostupné.</string>
+  <string name="location_permission_rationale_nearby">Vyžadováno povolení k zobrazení seznamu blízkých míst</string>
   <string name="get_directions">NAVIGOVAT</string>
   <string name="read_article">PŘEČÍST ČLÁNEK</string>
+  <string name="notifications_welcome">Vítejte na Wikimedia Commons, %1$s! Jsme rádi, že jste zde.</string>
+  <string name="notifications_talk_page_message">%2$s vám napsal na vaši diskusní stránku</string>
+  <string name="notifications_thank_you_edit">Děkujeme za vaši editaci</string>
+  <string name="notifications_mention">%1$s vás zmínil na %2$s.</string>
+  <string name="toggle_view_button">Přepnout pohled</string>
 </resources>

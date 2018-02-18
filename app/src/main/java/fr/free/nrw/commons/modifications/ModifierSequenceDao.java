@@ -52,7 +52,7 @@ public class ModifierSequenceDao {
 
     ModifierSequence fromCursor(Cursor cursor) {
         // Hardcoding column positions!
-        ModifierSequence ms = null;
+        ModifierSequence ms;
         try {
             ms = new ModifierSequence(Uri.parse(cursor.getString(1)),
                     new JSONObject(cursor.getString(2)));

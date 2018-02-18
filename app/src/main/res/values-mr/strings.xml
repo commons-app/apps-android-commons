@@ -22,7 +22,7 @@
   <string name="upload_failed_notification_subtitle">बघण्यास अलगद टपली मारा</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">१ संचिका अपभारीत आहे</item>
-    <item quantity="other">%d संचिका अपभारीत आहे</item>
+    <item quantity="other">%1$d संचिका अपभारीत आहे</item>
   </plurals>
   <string name="title_activity_contributions">माझी अपभारणे</string>
   <string name="contribution_state_queued">प्रतिक्षावलीत ठेवले</string>
@@ -53,15 +53,15 @@
   <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">अद्याप अपभारणे नाहीत</item>
     <item quantity="one">एक अपभारण</item>
-    <item quantity="other">%d अपभारणे</item>
+    <item quantity="other">%1$d अपभारणे</item>
   </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">१ अपभारण सुरू करीत आहे upload</item>
-    <item quantity="other">%d अपभारणे सुरू करीत आहे</item>
+    <item quantity="other">%1$d अपभारणे सुरू करीत आहे</item>
   </plurals>
   <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">१ अपभारण</item>
-    <item quantity="other">%d अपभारणे</item>
+    <item quantity="other">%1$d अपभारणे</item>
   </plurals>
   <string name="categories_not_found">%1$s शी जुळणारे कोणतेच वर्ग सापडले नाहीत</string>
   <string name="categories_skip_explanation" fuzzy="true">विकिमिडिया कॉमन्सवर आपल्या संचिकांना शोधणे सोपी जाण्यासाठी त्यांना वर्ग जोडा.\n\nवर्ग जोडण्यास टंकन सुरू करा.\nही पायरी चुकविण्यास या संदेशावर अलगद टिचका (किंवा बॅक कळ टिचका)</string>

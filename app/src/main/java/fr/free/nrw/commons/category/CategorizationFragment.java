@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.category;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -298,8 +297,10 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
         //Check if item contains a 4-digit word anywhere within the string (.* is wildcard)
         //And that item does not equal the current year or previous year
         //And if it is an irrelevant category such as Media_needing_categories_as_of_16_June_2017(Issue #750)
+        //Check if the year in the form of XX(X)0s is relevant, i.e. in the 2000s or 2010s as stated in Issue #1029
         return ((item.matches(".*(19|20)\\d{2}.*") && !item.contains(yearInString) && !item.contains(prevYearInString))
-                || item.matches("(.*)needing(.*)") || item.matches("(.*)taken on(.*)"));
+                || item.matches("(.*)needing(.*)") || item.matches("(.*)taken on(.*)")
+                || (item.matches(".*0s.*") && !item.matches(".*(200|201)0s.*")));
     }
 
     private void updateCategoryCount(CategoryItem item) {

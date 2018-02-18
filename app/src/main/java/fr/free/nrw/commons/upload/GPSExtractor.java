@@ -113,11 +113,11 @@ public class GPSExtractor {
      */
     @Nullable
     public String getCoords(boolean useGPS) {
-        String latitude = "";
-        String longitude = "";
-        String latitude_ref = "";
-        String longitude_ref = "";
-        String decimalCoords = "";
+        String latitude;
+        String longitude;
+        String latitudeRef;
+        String longitudeRef;
+        String decimalCoords;
 
         //If image has no EXIF data and user has enabled GPS setting, get user's location
         if (exif == null || exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE) == null) {
@@ -150,15 +150,15 @@ public class GPSExtractor {
             Timber.d("EXIF data has location info");
 
             latitude = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE);
-            latitude_ref = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE_REF);
+            latitudeRef = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE_REF);
             longitude = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE);
-            longitude_ref = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE_REF);
+            longitudeRef = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE_REF);
 
-            if (latitude!=null && latitude_ref!=null && longitude!=null && longitude_ref!=null) {
-                Timber.d("Latitude: %s %s", latitude, latitude_ref);
-                Timber.d("Longitude: %s %s", longitude, longitude_ref);
+            if (latitude!=null && latitudeRef!=null && longitude!=null && longitudeRef!=null) {
+                Timber.d("Latitude: %s %s", latitude, latitudeRef);
+                Timber.d("Longitude: %s %s", longitude, longitudeRef);
 
-                decimalCoords = getDecimalCoords(latitude, latitude_ref, longitude, longitude_ref);
+                decimalCoords = getDecimalCoords(latitude, latitudeRef, longitude, longitudeRef);
                 return decimalCoords;
             } else {
                 return null;

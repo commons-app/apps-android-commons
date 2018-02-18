@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Остава</string>
-  <string name="menu_settings">Поставке</string>
+  <string name="menu_settings">Подешавања</string>
   <string name="username">Корисничко име</string>
   <string name="password">Лозинка</string>
   <string name="login">Пријави ме</string>
@@ -10,25 +10,25 @@
   <string name="logging_in_message">Сачекајте…</string>
   <string name="login_success">Успешно сте пријављени.</string>
   <string name="login_failed">Пријављивање није успело.</string>
-  <string name="upload_failed">Датотека није пронађена. Покушајте са другом датотеком.</string>
+  <string name="upload_failed">Нисам пронашла датотеку. Покушајте са другом датотеком.</string>
   <string name="authentication_failed">Провера идентитета није успела.</string>
   <string name="uploading_started">Отпремање је започето.</string>
   <string name="upload_completed_notification_title">Датотека „%1$s“ је отпремљена.</string>
-  <string name="upload_completed_notification_text">Тапните да бисте видели отпремање</string>
+  <string name="upload_completed_notification_text">Додирните да бисте видели отпремање</string>
   <string name="upload_progress_notification_title_start">Почињем са отпремањем датотеке „%1$s“</string>
-  <string name="upload_progress_notification_title_in_progress">Отпремање датотеке „%1$s“</string>
-  <string name="upload_progress_notification_title_finishing">Завршавање отпремања датотеке „%1$s“</string>
+  <string name="upload_progress_notification_title_in_progress">Отпремам датотеку „%1$s“</string>
+  <string name="upload_progress_notification_title_finishing">Завршавам отпремање датотеке „%1$s“</string>
   <string name="upload_failed_notification_title">Отпремање „%1$s“ неуспешно</string>
   <string name="upload_failed_notification_subtitle">Додирните да бисте видели</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d датотека се отпрема</item>
-    <item quantity="other">%d датотеке се отпремају</item>
+    <item quantity="one">%1$d датотека се отпрема</item>
+    <item quantity="other">%1$d датотеке се отпремају</item>
   </plurals>
   <string name="title_activity_contributions">Моја скорашња отпремања</string>
   <string name="contribution_state_queued">На чекању</string>
   <string name="contribution_state_failed">Није успело</string>
   <string name="contribution_state_in_progress">%1$d%% отпремљено</string>
-  <string name="contribution_state_starting">Отпремање</string>
+  <string name="contribution_state_starting">Отпремам</string>
   <string name="menu_from_gallery">Из галерије</string>
   <string name="menu_from_camera">Фотографиши</string>
   <string name="menu_nearby">У близини</string>
@@ -54,18 +54,18 @@
   <string name="gps_disabled">GPS је онемогућен на Вашем уређају. Желите ли га омогућити?</string>
   <string name="enable_gps">Омогући GPS</string>
   <string name="contributions_subtitle_zero">Још увек нема отпремања</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d отпремање</item>
-    <item quantity="other">%d отпремања</item>
+    <item quantity="one">%1$d отпремање</item>
+    <item quantity="other">%1$d отпремања</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">Започни %d отпремање</item>
-    <item quantity="other">Започни %d отпремања</item>
+  <plurals name="starting_multiple_uploads" fuzzy="true">
+    <item quantity="one">Започни %1$d отпремање</item>
+    <item quantity="other">Започни %1$d отпремања</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d отпремање</item>
-    <item quantity="other">%d отпремања</item>
+    <item quantity="one">%1$d отпремање</item>
+    <item quantity="other">%1$d отпремања</item>
   </plurals>
   <string name="categories_not_found">Нема категорија које одговарају %1$s</string>
   <string name="categories_skip_explanation">Додајте категорије на слике да бисте олакшали корисницима њихово проналажење на Остави.\n\nДа бисте додали категорију, почните са писањем њеног имена.</string>
@@ -74,7 +74,7 @@
   <string name="title_activity_signup">Отвори налог</string>
   <string name="menu_about">О апликацији</string>
   <string name="about_license">Софтвер отвореног кода доступан под лиценцом &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache вер. 2&lt;/a&gt; Викимедијина Остава и њен лого су заштитни знаци Викимедијине Фондације и користе се са дозволом Викимедијине Фондацине. Ми не одобравамо или подржавмо Викимедијину Фондацију.\n\nАпликација за Викимедијину оставу је апликација отвореног кода која је направљена и која се одржава помоћу грантова и волонтера Викимедијине заједнице. Задужбина Викимедија није укључена у стварање, развој или одржавање апликације.</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Изворни кôд&lt;/a&gt; и &lt;a href=\"https://commons-app.github.io/\"&gt;веб-сајт&lt;/a&gt; на GitHub-у. Направите нови &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;захтев на GitHub-у&lt;/a&gt; да бисте пријавили грешке или дали предлоге.</string>
+  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Изворни кôд&lt;/a&gt; и &lt;a href=\"https://commons-app.github.io/\"&gt;веб-сајт&lt;/a&gt; на GitHub-у. Направите нови &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;захтев на GitHub-у&lt;/a&gt; да бисте пријавили грешке или дали предлоге.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Политика приватности&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Заслуге&lt;/a&gt;</string>
   <string name="title_activity_about">О апликацији</string>
@@ -116,9 +116,9 @@
   <string name="license_name_cc_zero">CC Нула</string>
   <string name="tutorial_1_text">Викимедијина Остава садржи већину слика која се користи на Википедији.</string>
   <string name="tutorial_1_subtext">Ваше слике помажу у образовању људи широм света!</string>
-  <string name="tutorial_2_text">Молимо Вас да поставите слике које сте преузели или креирали у потпуности сами:</string>
+  <string name="tutorial_2_text">Поставите слике које сте преузели или креирали у потпуности сами:</string>
   <string name="tutorial_2_subtext">- Природне објекте (цвеће, животиње, планине)\n- Корисне објекте (бицикле, железничке станице)\n- Познате људе (ваш градоначелник, Олимпијце које сте срели)</string>
-  <string name="tutorial_3_text">Молимо НЕ отпремајте:</string>
+  <string name="tutorial_3_text">НЕ отпремајте:</string>
   <string name="tutorial_3_subtext">- Селфије и слике Ваших пријатеља\n- Слике које Сте преузели са интернета\n- Скриншотове из сопствених апликација</string>
   <string name="tutorial_4_text">Пример отпремања:</string>
   <string name="tutorial_4_subtext">— Наслов: Сиднејска опера\n— Опис: Сиднејска опера, поглед преко залива\n— Категорије: Сиднејска опера са запада, погледи на Сиднејксу оперу из даљине</string>
@@ -129,14 +129,14 @@
   <string name="welcome_final_text">Јесте ли разумели?</string>
   <string name="welcome_final_button_text">Јесам!</string>
   <string name="detail_panel_cats_label">Категорије</string>
-  <string name="detail_panel_cats_loading">Учитавање...</string>
+  <string name="detail_panel_cats_loading">Учитавам…</string>
   <string name="detail_panel_cats_none">Ништа није изабрано</string>
   <string name="detail_description_empty">Нема описа</string>
   <string name="detail_license_empty">Непозната лиценца</string>
   <string name="menu_refresh">Освежи</string>
   <string name="read_storage_permission_rationale">Потребна дозвола: читање спољашње меморије. \nАпликација не може да функционише без овога.</string>
   <string name="write_storage_permission_rationale">Потребна дозвола: писање у спољашњој меморији. \nАпликација не може да функционише без овога.</string>
-  <string name="location_permission_rationale">Опциона дозвола: преузми тренутну локацију за предлоге категорија</string>
+  <string name="location_permission_rationale">Необавезна дозвола: преузми тренутну локацију за предлоге категорија</string>
   <string name="ok">У реду</string>
   <string name="title_activity_nearby">Места у близини</string>
   <string name="no_nearby">Нису пронађена оближња места</string>
@@ -157,16 +157,16 @@
   <string name="use_wikidata">Користи Википодатке</string>
   <string name="use_wikidata_summary">(Упозорење: онемогућавање овога може изазвати велику потрошњу мобилних података)</string>
   <string name="_2fa_code">2FA код</string>
-  <string name="number_of_uploads">Мој лимит за скорашња отпремања</string>
-  <string name="maximum_limit">Максимални лимит</string>
+  <string name="number_of_uploads">Моја ограничења за скорашња отпремања</string>
+  <string name="maximum_limit">Максимално ограничење</string>
   <string name="maximum_limit_alert">Није могуће приказати више од 500</string>
-  <string name="set_limit">Постави лимит за скорашња отпремања</string>
+  <string name="set_limit">Постави ограничење за скорашња отпремања</string>
   <string name="login_failed_2fa_not_supported">Двофакторска аутентификација тренутно није подржана.</string>
   <string name="logout_verification">Заиста желите да се одјавите?</string>
   <string name="commons_logo">Лого Оставе</string>
   <string name="background_image">Позадинска слика</string>
   <string name="mediaimage_failed">Медијска слика неуспешна</string>
-  <string name="no_image_found">Слика није пронађена</string>
+  <string name="no_image_found">Нисам пронашла слику</string>
   <string name="upload_image">Отпреми слику</string>
   <string name="welcome_image_mount_zao">Планина Зао</string>
   <string name="welcome_image_llamas">Ламе</string>
@@ -195,7 +195,7 @@
   <string name="nearby_info_menu_wikidata_article">Ставка на Википодацима</string>
   <string name="error_while_cache">Грешка при кеширању слика</string>
   <string name="title_info">Јединствен описни наслов за датотеку, који ће бити име датотеке. Можете да користите обични језик са размацима. Не треба уносити екстензију датотеке</string>
-  <string name="description_info">Молимо да опишете датотеку колико је то могуће: Где је направљена? Шта приказује? Шта је контекст? Опишите објекте и/или особе. Откријте информације које се не могу лако погодити, на пример доба дана ако је у питању пејзаж. Ако датотека приказује нешто необично, молимо да објасните шта је то чини необичном.</string>
+  <string name="description_info">Опишете датотеку колико је то могуће: Где је направљена? Шта приказује? Шта је контекст? Опишите објекте и/или особе. Откријте информације које се не могу лако погодити, на пример доба дана ако је у питању пејзаж. Ако датотека приказује нешто необично, молимо да објасните шта је то чини необичном.</string>
   <string name="give_permission">Давање дозволе</string>
   <string name="use_external_storage">Употреба спољашње меморије</string>
   <string name="use_external_storage_summary">Спремање слика направљених камером апликације на Вашем уређају</string>

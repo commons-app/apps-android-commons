@@ -21,7 +21,7 @@
   <string name="upload_failed_notification_title">%1$s のアップロードに失敗しました</string>
   <string name="upload_failed_notification_subtitle">閲覧するにはタップしてください</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="other">%d 件のファイルをアップロード中</item>
+    <item quantity="other">%1$d 件のファイルをアップロード中</item>
   </plurals>
   <string name="title_activity_contributions">自分の最近のアップロードファイル</string>
   <string name="contribution_state_queued">順番待ち中</string>
@@ -46,7 +46,7 @@
   <string name="multiple_share_base_title">このセットに名前をつけてください</string>
   <string name="provider_modifications">変更</string>
   <string name="menu_upload_single">アップロード</string>
-  <string name="categories_search_text_hint">検索するカテゴリ</string>
+  <string name="categories_search_text_hint">カテゴリを検索</string>
   <string name="menu_save_categories">保存</string>
   <string name="refresh_button">更新</string>
   <string name="gps_disabled">お使いのデバイスではGPSが無効になっています。有効にしますか?</string>
@@ -54,13 +54,13 @@
   <string name="contributions_subtitle_zero">まだ何もアップロードされていません。</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="other">%d 件のアップロード</item>
+    <item quantity="other">%1$d 件のアップロード</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="other">%d 件のアップロードを開始中</item>
+    <item quantity="other">%1$d 件のアップロードを開始中</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="other">%d 件のアップロード</item>
+    <item quantity="other">%1$d 件のアップロード</item>
   </plurals>
   <string name="categories_not_found">%1$s に一致するカテゴリが見つかりません</string>
   <string name="categories_skip_explanation">あなたの画像をウィキメディア・コモンズで見つけやすくするためにカテゴリを追加してください。\n\nカテゴリ名の入力を開始してください。\nこの手順をスキップするにはこのメッセージをタップしてください(または戻るボタン)。</string>
@@ -69,7 +69,7 @@
   <string name="title_activity_signup">利用者登録</string>
   <string name="menu_about">このアプリについて</string>
   <string name="about_license">ウィキメディア・コモンズ・アプリはウィキメディア・コミュニティの助成金受給者とボランティアによって製作・メンテナンスされているオープンソースソフトウェアです。ウィキメディア財団はこのアプリの製作・開発・メンテナンスに関与していません。</string>
-  <string name="about_improve">ソースは &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt; にあります。バグとアイディアは &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt; へ。</string>
+  <string name="about_improve" fuzzy="true">ソースは &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt; にあります。バグとアイディアは &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt; へ。</string>
   <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/プライバシー・ポリシー\"&gt;プライバシー・ポリシー&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;クレジット&lt;/a&gt;</string>
   <string name="title_activity_about">このアプリについて</string>

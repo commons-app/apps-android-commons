@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">C\'hwitet en deus enporzhiañ %1$s</string>
   <string name="upload_failed_notification_subtitle">Pouezit evit diskwel</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d restr o vezañ karget</item>
-    <item quantity="other">%d restr o vezañ karget</item>
+    <item quantity="one">%1$d restr o vezañ karget</item>
+    <item quantity="other">%1$d restr o vezañ karget</item>
   </plurals>
   <string name="title_activity_contributions">Ma enporzhiadennoù nevez</string>
   <string name="contribution_state_queued">Lakaet el lostenn</string>
@@ -56,16 +56,16 @@
   <string name="contributions_subtitle_zero">Enporzhiadenn ebet c\'hoazh !</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">Pellgardenn ebet c\'hoazh</item>
-    <item quantity="one">%d bellgargadenn</item>
-    <item quantity="other">%d Pellgargadennoù</item>
+    <item quantity="one">%1$d bellgargadenn</item>
+    <item quantity="other">%1$d Pellgargadennoù</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">%d bellgargadenn loc\'het</item>
-    <item quantity="other">%d pellgargadennoù loc\'het</item>
+    <item quantity="one">%1$d bellgargadenn loc\'het</item>
+    <item quantity="other">%1$d pellgargadennoù loc\'het</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d bellgargadenn</item>
-    <item quantity="other">%d pellgargadennoù</item>
+    <item quantity="one">%1$d bellgargadenn</item>
+    <item quantity="other">%1$d pellgargadennoù</item>
   </plurals>
   <string name="categories_not_found">N\'eus bet kavet rummad ebet o klotañ gant %1$s</string>
   <string name="categories_skip_explanation">Ouzhpennit rummadoù evit ma vo aesoc\'h kavout ho skeudennoù war Wikimedia Commons.\n\nKrogit da skrivañ evit ouzhpennañ rummadoù.</string>
@@ -74,8 +74,8 @@
   <string name="title_activity_signup">En em enskrivañ</string>
   <string name="menu_about">Diwar-benn</string>
   <string name="about_license" fuzzy="true">Meziant frank a wirioù embannet dindan &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;an Aotre-implijout Apache v2&lt;/a&gt;. Merkoù kenwerzhel eus Diazezadur Wikimedia eo Wikimedia Commons hag e logoioù. Gallout a reont bezañ implijet gant aotre an Diazezadur. N\'omp nag aprouet gant Diazezadur Wiikimedia na stag outañ.</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Mammenn&lt;/a&gt; ha &lt;a href=\"https://commons-app.github.io/\"&gt;lec\'hienn&lt;/a&gt; war GitHub. Krouiñ ur &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;gemennadenn GitHub nevez&lt;/a&gt; evit kelaouiñ a-zivout un draen bennak pe bet kinnigoù.</string>
-  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Reolennoù prevezded&lt;/a&gt;</string>
+  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Mammenn&lt;/a&gt; ha &lt;a href=\"https://commons-app.github.io/\"&gt;lec\'hienn&lt;/a&gt; war GitHub. Krouiñ ur &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;gemennadenn GitHub nevez&lt;/a&gt; evit kelaouiñ a-zivout un draen bennak pe bet kinnigoù.</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy_policy\"&gt;Reolennoù prevezded&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Trugarekadennoù&lt;/a&gt;</string>
   <string name="title_activity_about">Diwar-benn</string>
   <string name="menu_feedback">Kas ho soñj (dre bostel)</string>
@@ -120,7 +120,7 @@
   <string name="tutorial_3_text">ARABAT enporzhiañ :</string>
   <string name="tutorial_3_subtext">- Emskeudennoù pe skeudennoù eus ho mignoned\n- Skeudennoù pellgarget ganeoc\'h diwar an Internet\n- Tapadennoù-skramm arloadoù prevez</string>
   <string name="tutorial_4_text">Skouer un enporzhiadenn :</string>
-  <string name="tutorial_4_subtext" fuzzy="true">- Titl : Ti opera Sydney\n- Desskrivadur : Ti opera Sydney gwelet eus tu all ar bae\n- Rummadoù : Ti opera Sydney, Ti opera Sydney gwelet eus ar c\'hornôg, Gweloù a-bell eus ti opera Sydney</string>
+  <string name="tutorial_4_subtext">- Titl : Ti opera Sydney\n- Desskrivadur : Ti opera Sydney gwelet eus tu all ar bae\n- Rummadoù : Ti opera Sydney, Ti opera Sydney gwelet eus ar c\'hornôg, Gweloù a-bell eus ti opera Sydney</string>
   <string name="welcome_wikipedia_text">Kemerit perzh gant ho skeudennoù. Sikourit pennadoù Wikipedia da zont da vev !</string>
   <string name="welcome_wikipedia_subtext">Dont a ra skeudennoù Wikipedia eus Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Ho skeudennoù a sikour an dud da zeskiñ traoù dre ar bed a-bezh.</string>
@@ -160,6 +160,9 @@
   <string name="login_failed_2fa_not_supported">Ne vez ket embreget an dilesadur gant daou faktor evit ar mare.</string>
   <string name="logout_verification">Sur oc\'h e fell deoc\'h digevreañ ?</string>
   <string name="commons_logo">Logo Commons</string>
+  <string name="commons_website">Lec\'hienn web Commons</string>
+  <string name="commons_facebook">Pajenn Facebook Commons</string>
+  <string name="commons_github">Kod mammenn Github Commons</string>
   <string name="no_image_found">N\'eus bet kavet skeudenn ebet</string>
   <string name="upload_image">Kargañ ur skeudenn</string>
   <string name="welcome_image_mount_zao">Menez Zao</string>
@@ -185,8 +188,13 @@
   <string name="navigation_item_notification">Kemennoù</string>
   <string name="nearby_needs_permissions">Ne c\'haller ket diskwel al lec\'hioù tost ma ne rannit ket ho lec\'hiadur</string>
   <string name="no_description_found">N\'eus bet kavet deskrivadur ebet</string>
-  <string name="nearby_info_menu_commons_article" fuzzy="true">Pennad Commons</string>
+  <string name="nearby_info_menu_commons_article">Pajennad restroù Commons</string>
   <string name="nearby_info_menu_wikidata_article">Elfenn Wikidata</string>
+  <string name="give_permission">Reiñ ar gwir</string>
+  <string name="use_external_storage">Implijout ar stokañ diavaez</string>
+  <string name="use_external_storage_summary">Enrollit ar skeudennoù tennet gant luc\'hskeudennerez ho penveg</string>
+  <string name="login_to_your_account">Kevreit ouzh ho kont</string>
+  <string name="nearby_location_has_not_changed">N\'eo ket cheñchet al lec\'hiadur.</string>
   <string name="get_directions">Kaout urzhioù</string>
   <string name="read_article">Lenn ar pennad</string>
 </resources>

@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">اپلوڈ %1$s ہونے میں ناکام</string>
   <string name="upload_failed_notification_subtitle">دیکھنے کے لیے ٹیپ کریں</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d فائل اپلوڈ ہورہی ہے</item>
-    <item quantity="other">%d فائلیں اپلوڈ ہورہی ہے</item>
+    <item quantity="one">%1$d فائل اپلوڈ ہورہی ہے</item>
+    <item quantity="other">%1$d فائلیں اپلوڈ ہورہی ہے</item>
   </plurals>
   <string name="title_activity_contributions">میں حالیہ اپلوڈ</string>
   <string name="contribution_state_queued">قطار</string>
@@ -54,21 +54,21 @@
   <string name="gps_disabled">جی پی ایس آپ کے آلے میں غیر فعال ہے۔ آپ اس کو فعال کرنا چاہینگے؟</string>
   <string name="enable_gps">جی پی ایس فعال کریں</string>
   <string name="contributions_subtitle_zero">ابھی تک کوئی اپلوڈ نہیں</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d اپلوڈ</item>
-    <item quantity="other">%d اپلوڈ</item>
+    <item quantity="one">%1$d اپلوڈ</item>
+    <item quantity="other">%1$d اپلوڈ</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">شروع %d اپلوڈ</item>
-    <item quantity="other">شروع %d اپلوڈ</item>
+  <plurals name="starting_multiple_uploads" fuzzy="true">
+    <item quantity="one">شروع %1$d اپلوڈ</item>
+    <item quantity="other">شروع %d$1 اپلوڈ</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%d اپلوڈ</item>
-    <item quantity="other">%d اپلوڈ</item>
+  <plurals name="multiple_uploads_title" fuzzy="true">
+    <item quantity="one">%1$d اپلوڈ</item>
+    <item quantity="other">%1$d اپلوڈ</item>
   </plurals>
   <string name="categories_not_found">%1$s سے کوئی زمرہ جات میل نہیں کھاتے</string>
-  <string name="categories_skip_explanation" fuzzy="true">ویکیمیڈیا کامنز پر اپنی تصاویر کو قابل دریافت بنانے کے لیے زمرے شامل کریں۔\n\nزمرے شامل کرنے کے لیے لکھنا شروع کریں۔\n\nاس مرحلے کو نظر انداز کرنے کے لیے اس پیغام یا (یا پیچھے) پر ٹیپ کریں۔</string>
+  <string name="categories_skip_explanation">ویکیمیڈیا کامنز پر اپنی تصاویر کو قابل دریافت بنانے کے لیے زمرے شامل کریں۔\n\nزمرے شامل کرنے کے لیے لکھنا شروع کریں۔\n\nاس مرحلے کو نظر انداز کرنے کے لیے اس پیغام یا (یا پیچھے) پر ٹیپ کریں۔</string>
   <string name="categories_activity_title">زمرہ جات</string>
   <string name="title_activity_settings">ترتیبات</string>
   <string name="title_activity_signup">کھاتہ بنائیں</string>
@@ -91,8 +91,14 @@
   <string name="preference_license">اجازت نامہ</string>
   <string name="use_previous">گزشتہ عنوان/وضاحت استعمال کریں</string>
   <string name="allow_gps">خودکارانہ طریقے سے حالیہ جگہ حاصل کریں</string>
+  <string name="allow_gps_summary">اگر تصویر جغرافیائی نہیں ہے تو قسم کے تجاویز پیش کرنے کیلئے موجودہ مقام کو دوبارہ حاصل کریں</string>
   <string name="preference_theme">نائٹ موڈ</string>
   <string name="preference_theme_summary">کالا تھیم استعمال کریں</string>
+  <string name="license_name_cc_by_sa_four">انتباہ-شراکت 4.0</string>
+  <string name="license_name_cc_by_four">انتباہ 4.0</string>
+  <string name="license_name_cc_by_sa">انتباہ-شراکت 3.0</string>
+  <string name="license_name_cc_by">انتباہ 3.0</string>
+  <string name="license_name_cc0">CC0</string>
   <string name="license_name_cc_by_sa_3_0_at">CC BY-SA 3.0 (آسٹریا)</string>
   <string name="license_name_cc_by_sa_3_0_de">CC BY-SA 3.0 (جرمنی)</string>
   <string name="license_name_cc_by_sa_3_0_ee">CC BY-SA 3.0 (اسٹونیا)</string>
