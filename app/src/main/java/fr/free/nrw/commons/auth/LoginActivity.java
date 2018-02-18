@@ -116,7 +116,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
 
     public void hideKeyboard(View view) {
-        Log.i("hide", "hideKeyboard: ");
         InputMethodManager inputMethodManager =(InputMethodManager)this.getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }

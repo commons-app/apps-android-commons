@@ -190,7 +190,6 @@ public class MultipleUploadListFragment extends Fragment {
     }
 
     public void hideKeyboard(View view) {
-        Log.i("hide", "hideKeyboard: ");
         InputMethodManager inputMethodManager =(InputMethodManager)getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
