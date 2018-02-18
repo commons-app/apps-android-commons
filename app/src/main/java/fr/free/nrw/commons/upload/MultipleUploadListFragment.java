@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Point;
 import android.net.Uri;
@@ -10,6 +11,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -177,7 +179,20 @@ public class MultipleUploadListFragment extends Fragment {
         photosGrid.setColumnWidth(photoSize.x);
 
         baseTitle.addTextChangedListener(textWatcher);
+
+        baseTitle.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                hideKeyboard(v);
+            }
+        });
+
         return view;
+    }
+
+    public void hideKeyboard(View view) {
+        Log.i("hide", "hideKeyboard: ");
+        InputMethodManager inputMethodManager =(InputMethodManager)getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     @Override

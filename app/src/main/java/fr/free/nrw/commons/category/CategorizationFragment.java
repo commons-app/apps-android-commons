@@ -1,17 +1,22 @@
 package fr.free.nrw.commons.category;
 
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -37,6 +42,7 @@ import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.upload.MwVolleyApi;
+import fr.free.nrw.commons.upload.SingleUploadFragment;
 import fr.free.nrw.commons.utils.StringSortingUtils;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -72,6 +78,7 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
     private OnCategoriesSaveHandler onCategoriesSaveHandler;
     private HashMap<String, ArrayList<String>> categoriesCache;
     private List<CategoryItem> selectedCategories = new ArrayList<>();
+    private TitleTextWatcher textWatcher = new TitleTextWatcher();
 
     private final CategoriesAdapterFactory adapterFactory = new CategoriesAdapterFactory(item -> {
         if (item.isSelected()) {
@@ -102,6 +109,15 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
         categoriesAdapter = adapterFactory.create(items);
         categoriesList.setAdapter(categoriesAdapter);
 
+
+        categoriesFilter.addTextChangedListener(textWatcher);
+
+        categoriesFilter.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                hideKeyboard(v);
+            }
+        });
+
         RxTextView.textChanges(categoriesFilter)
                 .takeUntil(RxView.detaches(categoriesFilter))
                 .debounce(500, TimeUnit.MILLISECONDS)
@@ -109,6 +125,19 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
                 .subscribe(filter -> updateCategoryList(filter.toString()));
         return rootView;
     }
+
+    public void hideKeyboard(View view) {
+        Log.i("hide", "hideKeyboard: ");
+        InputMethodManager inputMethodManager =(InputMethodManager)getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    @Override
+    public void onDestroyView() {
+        categoriesFilter.removeTextChangedListener(textWatcher);
+        super.onDestroyView();
+    }
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -350,5 +379,22 @@ public class CategorizationFragment extends CommonsDaggerSupportFragment {
                 })
                 .create()
                 .show();
+    }
+
+    private class TitleTextWatcher implements TextWatcher {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            if (getActivity() != null) {
+                getActivity().invalidateOptionsMenu();
+            }
+        }
     }
 }

@@ -11,11 +11,15 @@
     android:paddingEnd="@dimen/standard_gap"
     android:paddingTop="@dimen/small_gap"
     android:theme="@style/DarkAppTheme"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
     >
 
     <FrameLayout
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:clickable="true"
+        android:focusableInTouchMode="true"
         >
 
         <EditText
