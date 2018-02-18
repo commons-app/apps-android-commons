@@ -23,7 +23,6 @@ import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.Date;
 
-import fr.free.nrw.commons.CommonsApplication;
 import timber.log.Timber;
 
 public class FileUtils {
@@ -42,6 +41,7 @@ public class FileUtils {
     @Nullable
     public static String getPath(Context context, Uri uri) {
 
+        String returnPath = null;
         final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
 
         // DocumentProvider
@@ -53,7 +53,7 @@ public class FileUtils {
                 final String type = split[0];
 
                 if ("primary".equalsIgnoreCase(type)) {
-                    return Environment.getExternalStorageDirectory() + "/" + split[1];
+                    returnPath = Environment.getExternalStorageDirectory() + "/" + split[1];
                 }
             } else if (isDownloadsDocument(uri))  { // DownloadsProvider
 
@@ -61,8 +61,9 @@ public class FileUtils {
                 final Uri contentUri = ContentUris.withAppendedId(
                         Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
 
-                return getDataColumn(context, contentUri, null, null);
+                returnPath =  getDataColumn(context, contentUri, null, null);
             } else if (isMediaDocument(uri)) { // MediaProvider
+
                 final String docId = DocumentsContract.getDocumentId(uri);
                 final String[] split = docId.split(":");
                 final String type = split[0];
@@ -87,17 +88,19 @@ public class FileUtils {
                         split[1]
                 };
 
-                return getDataColumn(context, contentUri, selection, selectionArgs);
+                returnPath = getDataColumn(context, contentUri, selection, selectionArgs);
             }
         }
         // MediaStore (and general)
         else if ("content".equalsIgnoreCase(uri.getScheme())) {
-            return getDataColumn(context, uri, null, null);
+            returnPath = getDataColumn(context, uri, null, null);
         }
         // File
         else if ("file".equalsIgnoreCase(uri.getScheme())) {
-            return uri.getPath();
-        } else {
+            returnPath = uri.getPath();
+        }
+
+        if(returnPath == null) {
             //fetching path may fail depending on the source URI and all hope is lost
             //so we will create and use a copy of the file, which seems to work
             String copyPath = null;
@@ -105,6 +108,7 @@ public class FileUtils {
                 ParcelFileDescriptor descriptor
                         = context.getContentResolver().openFileDescriptor(uri, "r");
                 if (descriptor != null) {
+
                     SharedPreferences sharedPref = PreferenceManager
                             .getDefaultSharedPreferences(CommonsApplication.getInstance());
                     boolean useExtStorage = sharedPref.getBoolean("useExternalStorage", true);
@@ -131,7 +135,10 @@ public class FileUtils {
                 Timber.w(e, "Error in file " + copyPath);
                 return null;
             }
+        } else {
+            return returnPath;
         }
+
         return null;
     }
 
@@ -150,7 +157,7 @@ public class FileUtils {
                                        String[] selectionArgs) {
 
         Cursor cursor = null;
-        final String column = "_data";
+        final String column = MediaStore.Images.ImageColumns.DATA;
         final String[] projection = {
                 column
         };
