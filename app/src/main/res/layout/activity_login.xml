@@ -19,6 +19,8 @@
             android:layout_marginRight="@dimen/standard_gap"
             android:layout_marginStart="@dimen/standard_gap"
             android:layout_marginTop="@dimen/large_gap"
+            android:clickable="true"
+            android:focusableInTouchMode="true"
             app:cardCornerRadius="4dp"
             app:cardElevation="4dp">
 
@@ -26,7 +28,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:clickable="true"
+                android:focusableInTouchMode="true">
 
                 <TextView
                     android:id="@+id/title"
