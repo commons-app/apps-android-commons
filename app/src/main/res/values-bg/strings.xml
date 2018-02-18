@@ -8,8 +8,8 @@
   <string name="signup">Регистриране</string>
   <string name="logging_in_title">Влизане в системата</string>
   <string name="logging_in_message">Изчакайте…</string>
-  <string name="login_success">Успешно вписване.</string>
-  <string name="login_failed">Неуспешно вписване!</string>
+  <string name="login_success">Успешно влизане.</string>
+  <string name="login_failed">Неуспешно влизане!</string>
   <string name="upload_failed">Файлът не е намерен. Моля, опитайте с друг файл.</string>
   <string name="authentication_failed">Неуспешен опит за удостоверяване!</string>
   <string name="uploading_started">Качването започна!</string>
@@ -32,8 +32,8 @@
   <string name="menu_upload_single">Качване</string>
   <string name="menu_save_categories">Съхраняване</string>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d качване</item>
-    <item quantity="other">%d качвания</item>
+    <item quantity="one">%1$d качване</item>
+    <item quantity="other">%1$d качвания</item>
   </plurals>
   <string name="categories_activity_title">Категории</string>
   <string name="title_activity_settings">Настройки</string>

@@ -43,15 +43,13 @@
   <string name="categories_search_text_hint">Huli i nā māhele</string>
   <string name="menu_save_categories">Mālama</string>
   <string name="categories_not_found">ʻAʻohe māhele e huli ʻia e like me %1$s</string>
-  <string name="categories_skip_explanation">Hoʻohui i nā māhele no ke kaunānā ʻana ma Kahilehulehu Wikimedia.</string>
+  <string name="categories_skip_explanation" fuzzy="true">Hoʻohui i nā māhele no ke kaunānā ʻana ma Kahilehulehu Wikimedia.</string>
   <string name="categories_activity_title">Māhele</string>
-  <string name="preference_tracking">Hōʻike hana</string>
-  <string name="preference_tracking_summary">Hoʻouka i nā hōʻike hana iā Wikimedia no ka holomua ʻana o kēia pōlamu</string>
   <string name="title_activity_settings">Makemake</string>
   <string name="menu_about">Pilina</string>
   <string name="about_license" fuzzy="true">Hāʻawi ʻia nā lako pōlamu kūmolenoa ma lalo o ka &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Laikini ʻApaki m2&lt;/a&gt;</string>
   <string name="about_improve" fuzzy="true">Aia ke kūmole ma &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Aia nā mū ma &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Kulekele pilikino&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Kulekele pilikino&lt;/a&gt;</string>
   <string name="title_activity_about">Pilina</string>
   <string name="menu_feedback">Hoʻouna Manaʻo (ia Lekauila)</string>
   <string name="provider_categories">Nā māhele i hanawale</string>

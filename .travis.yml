@@ -1,40 +1,56 @@
 language: android
+
 addons:
   apt:
     packages:
       - w3m
-cache:
-  directories:
-    - ${TRAVIS_BUILD_DIR}/gradle/caches/
-    - ${TRAVIS_BUILD_DIR}/gradle/wrapper/dists/
+
 env:
   global:
     - ANDROID_TARGET=android-22
     - ANDROID_ABI=armeabi-v7a
     - ADB_INSTALL_TIMEOUT=12 # in minutes
+
+jdk:
+  # - openjdk8 # not yet available
+  - oraclejdk8
+
 android:
   components:
-    - platform-tools
     - tools
-    - build-tools-25.0.1
+    - platform-tools
+    - build-tools-26.0.2
     - extra-google-m2repository
     - extra-android-m2repository
     - ${ANDROID_TARGET}
     - android-25
+    - android-26
     - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
+  licenses:
+    - 'android-sdk-license-.+'
+
 before_script:
   - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
   - emulator -avd test -no-audio -no-window -no-boot-anim &
   - android-wait-for-emulator
+
 script:
-  - ./gradlew clean check connectedCheck jacocoTestReport --stacktrace
+  - ./gradlew clean check connectedCheck jacocoTestReport
+
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+
 after_failure:
-  - echo '*** Connected Test Rsults ***'
-  - w3m -dump ${TRAVIS_BUILD_DIR}/app/build/reports/androidTests/connected/*Test.html
-  - echo '*** Lint Results ***'
-  - cat ${TRAVIS_BUILD_DIR}/app/build/reports/lint-results.xml
-jdk:
-  # - openjdk8 # not yet available
-  - oraclejdk8
+  - echo '*** Debug Unit Test Results ***'
+  - w3m -dump ${TRAVIS_BUILD_DIR}/app/build/reports/tests/*/classes/*Test.html
+  - echo '*** Connected Test Results ***'
+  - w3m -dump ${TRAVIS_BUILD_DIR}/app/build/reports/androidTests/connected/flavors/*/*Test.html
+
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/

@@ -18,6 +18,11 @@ public class WelcomeActivity extends BaseActivity {
 
     private WelcomePagerAdapter adapter = new WelcomePagerAdapter();
 
+    /**
+     * Initialises exiting fields and dependencies
+     *
+     * @param savedInstanceState WelcomeActivity bundled data
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,20 +32,23 @@ public class WelcomeActivity extends BaseActivity {
 
         pager.setAdapter(adapter);
         indicator.setViewPager(pager);
-        adapter.setCallback(new WelcomePagerAdapter.Callback() {
-            @Override
-            public void onYesClicked() {
-                finish();
-            }
-        });
+        adapter.setCallback(this::finish);
     }
 
+    /**
+     * References WelcomePageAdapter to null before the activity is destroyed
+     */
     @Override
     public void onDestroy() {
         adapter.setCallback(null);
         super.onDestroy();
     }
 
+    /**
+     * Creates a way to change current activity to WelcomeActivity
+     *
+     * @param context Activity context
+     */
     public static void startYourself(Context context) {
         Intent welcomeIntent = new Intent(context, WelcomeActivity.class);
         context.startActivity(welcomeIntent);

@@ -29,7 +29,6 @@
   <string name="categories_search_text_hint">Ҷустуҷӯи гурӯҳҳо</string>
   <string name="menu_save_categories">Захира</string>
   <string name="categories_activity_title">Гурӯҳҳо</string>
-  <string name="preference_tracking">Ҳисоботи истифода</string>
   <string name="title_activity_settings">Танзимот</string>
   <string name="menu_about">Дар бораи</string>
   <string name="title_activity_about">Дар бораи</string>
@@ -53,6 +52,7 @@
   <string name="license_name_cc_by_sa_3_0_ro">CC BY-SA 3.0 (Руминия)</string>
   <string name="license_name_cc_by_3_0">CC BY 3.0</string>
   <string name="license_name_cc_zero">CC Zero</string>
+  <string name="tutorial_1_text">Викианбор дорои бисёр парвандаҳое аст, ки тарафи Википедия истифода мешаванд.</string>
   <string name="welcome_copyright_text">Аксҳои шумо барои таълими одамон аз тамоми ҷаҳон кӯмак мерасонанд.</string>
   <string name="welcome_final_text">Фикр мекунед дарк кардед?</string>
   <string name="welcome_final_button_text">Бале!</string>
@@ -60,4 +60,9 @@
   <string name="detail_panel_cats_loading">Дар ҳоли кушодашавӣ…</string>
   <string name="detail_panel_cats_none">Ҳеҷ яке интихоб нашудааст</string>
   <string name="detail_license_empty">Иҷозатномаи ношинос</string>
+  <string name="media_detail_license">Иҷозатнома</string>
+  <string name="media_detail_coordinates">Координатҳо</string>
+  <string name="use_wikidata">Истифодаи Викидода</string>
+  <string name="nearby_info_menu_wikidata_article">Унсури Викидода</string>
+  <string name="error_while_cache">Хатогӣ ҳангоми кэшкунии тасвир</string>
 </resources>

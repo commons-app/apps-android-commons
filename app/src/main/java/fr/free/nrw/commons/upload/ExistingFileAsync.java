@@ -1,14 +1,12 @@
 package fr.free.nrw.commons.upload;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 
 import java.io.IOException;
 
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
@@ -19,6 +17,7 @@ import timber.log.Timber;
  * Displays a warning to the user if the file already exists on Commons
  */
 public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
+
     interface Callback {
         void onResult(Result result);
     }
@@ -29,14 +28,16 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
         DUPLICATE_CANCELLED
     }
 
+    private final MediaWikiApi api;
     private final String fileSha1;
     private final Context context;
     private final Callback callback;
 
-    public ExistingFileAsync(String fileSha1, Context context, Callback callback) {
+    public ExistingFileAsync(String fileSha1, Context context, Callback callback, MediaWikiApi mwApi) {
         this.fileSha1 = fileSha1;
         this.context = context;
         this.callback = callback;
+        this.api = mwApi;
     }
 
     @Override
@@ -46,7 +47,6 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
 
     @Override
     protected Boolean doInBackground(Void... voids) {
-        MediaWikiApi api = CommonsApplication.getInstance().getMWApi();
 
         // https://commons.wikimedia.org/w/api.php?action=query&list=allimages&format=xml&aisha1=801957214aba50cb63bb6eb1b0effa50188900ba
         boolean fileExists;
@@ -72,21 +72,13 @@ public class ExistingFileAsync extends AsyncTask<Void, Void, Boolean> {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setMessage(R.string.file_exists)
                     .setTitle(R.string.warning);
-            builder.setPositiveButton(R.string.no, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int id) {
-                    //Go back to ContributionsActivity
-                    Intent intent = new Intent(context, ContributionsActivity.class);
-                    context.startActivity(intent);
-                    callback.onResult(Result.DUPLICATE_CANCELLED);
-                }
+            builder.setPositiveButton(R.string.no, (dialog, id) -> {
+                //Go back to ContributionsActivity
+                Intent intent = new Intent(context, ContributionsActivity.class);
+                context.startActivity(intent);
+                callback.onResult(Result.DUPLICATE_CANCELLED);
             });
-            builder.setNegativeButton(R.string.yes, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int id) {
-                    callback.onResult(Result.DUPLICATE_PROCEED);
-                }
-            });
+            builder.setNegativeButton(R.string.yes, (dialog, id) -> callback.onResult(Result.DUPLICATE_PROCEED));
 
             AlertDialog dialog = builder.create();
             dialog.show();

@@ -22,9 +22,9 @@
   <string name="upload_failed_notification_subtitle">Toque para ver</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">carregando arquivo</item>
-    <item quantity="other">carregando %d arquivos</item>
+    <item quantity="other">carregando %1$d arquivos</item>
   </plurals>
-  <string name="title_activity_contributions" fuzzy="true">Meus envios</string>
+  <string name="title_activity_contributions">Meus envios recentes</string>
   <string name="contribution_state_queued">Na fila</string>
   <string name="contribution_state_failed">Falhou</string>
   <string name="contribution_state_in_progress">%1$d%% concluída</string>
@@ -53,31 +53,30 @@
   <string name="refresh_button">Atualizar</string>
   <string name="gps_disabled">O GPS está desligado no seu aparelho. Gostarias de ligá-lo ?</string>
   <string name="enable_gps">GPS inapto.</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
-    <item quantity="zero">Nenhum envio</item>
-    <item quantity="one">1 envio</item>
-    <item quantity="other">%d envios</item>
+  <string name="contributions_subtitle_zero">Ainda não carregado</string>
+  <plurals name="contributions_subtitle">
+    <item quantity="zero">\@string/contributions_subtitle_zero</item>
+    <item quantity="one">%1$d envio</item>
+    <item quantity="other">%1$d envios</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Iniciando 1 carregamento</item>
-    <item quantity="other">Iniciando %d carregamentos</item>
+    <item quantity="one">Iniciando %1$d carregamento</item>
+    <item quantity="other">Iniciando %1$d carregamentos</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">1 carregamento</item>
-    <item quantity="other">%d carregamentos</item>
+    <item quantity="one">%1$d carregamento</item>
+    <item quantity="other">%1$d carregamentos</item>
   </plurals>
   <string name="categories_not_found">Nenhuma categoria correspondente %1$s encontrada</string>
   <string name="categories_skip_explanation">Adicione categorias para fazer suas imagens mais vistas no Wikimedia Commons. \n\nComece a digitar para adicionar categorias.\nAperte nesta mensagem (ou aperte para voltar) para pular este passo</string>
   <string name="categories_activity_title">Categorias</string>
-  <string name="preference_tracking">Relatórios de uso</string>
-  <string name="preference_tracking_summary">Enviar relatório de uso para a Wikimedia para nos ajudar a melhorar o aplicativo</string>
   <string name="title_activity_settings">Configurações</string>
   <string name="title_activity_signup">Criar conta</string>
   <string name="menu_about">Sobre</string>
-  <string name="about_license">Software livre distribuído sob a &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Wikimedia Commons e seu logotipo são marcas registradas da Wikimedia Foundation e são usadas com a permissão da Wikimedia Foundation. Não somos endossados nem afiliados à Wikimedia Foundation.</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Fonte&lt;/a&gt; e &lt;a href=\"https://commons-app.github.io/\"&gt;site&lt;/a&gt; em GitHub. Crie um novo &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub issue&lt;/a&gt; para relatórios de bugs e sugestões.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Política de privacidade&lt;/a&gt;</string>
-  <string name="about_credits" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;CRÉDITOS&lt;/a&gt;</string>
+  <string name="about_license">O Wikimedia Commons é um aplicativo de código aberto criado e mantido por beneficiários e voluntários da comunidade Wikimedia. A Wikimedia Foundation não está envolvida na criação, desenvolvimento ou manutenção do aplicativo.</string>
+  <string name="about_improve">Criar uma nova &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;publicação no GitHub&lt;/a&gt; para informar erros e sugestões.</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Política de privacidade&lt;/a&gt;</string>
+  <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Créditos&lt;/a&gt;</string>
   <string name="title_activity_about">Sobre</string>
   <string name="menu_feedback">Enviar comentários (por e-mail)</string>
   <string name="no_email_client">Nenhum cliente de e-mail instalado</string>
@@ -87,6 +86,7 @@
   <string name="menu_retry_upload">Repetir</string>
   <string name="menu_cancel_upload">Cancelar</string>
   <string name="share_license_summary">Essa imagem será licenciada sob %1$s</string>
+  <string name="media_upload_policy">Ao enviar esta imagem, declaro que este é o meu próprio trabalho, que não contém material protegido ou selfies, e, de outra forma, adere a &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Políticas do Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Download</string>
   <string name="preference_license">Licença</string>
   <string name="use_previous">Usar o título/descrição anterior</string>
@@ -129,12 +129,13 @@
   <string name="welcome_final_text">Você acha que conseguiu?</string>
   <string name="welcome_final_button_text">Sim!</string>
   <string name="detail_panel_cats_label">Categorias</string>
-  <string name="detail_panel_cats_loading" fuzzy="true">Carregando…</string>
+  <string name="detail_panel_cats_loading">Carregando…</string>
   <string name="detail_panel_cats_none">Nenhum selecionado</string>
   <string name="detail_description_empty">Sem descrição</string>
   <string name="detail_license_empty">Licença desconhecida</string>
   <string name="menu_refresh">Atualizar</string>
-  <string name="storage_permission_rationale">Permissão necessária: Ler armazenamento externo. O aplicativo não pode funcionar sem isso.</string>
+  <string name="read_storage_permission_rationale">Permissão necessária: Ler armazenamento externo. O aplicativo não pode funcionar sem isso.</string>
+  <string name="write_storage_permission_rationale">Permissão necessária: Escreva armazenamento externo. A aplicação não pode funcionar sem isso.</string>
   <string name="location_permission_rationale">Permissão opcional: Obter a localização atual de sugestões de categoria</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Lugares próximos</string>
@@ -148,14 +149,37 @@
   <string name="media_detail_description">Descrição</string>
   <string name="media_detail_description_explanation">Descrição da mídia aqui. Isso pode ser potencialmente longo e precisará envolver múltiplas linhas. Esperamos que seja agradável.</string>
   <string name="media_detail_uploaded_date">Data de envio.</string>
+  <string name="media_detail_license">Licença</string>
+  <string name="media_detail_coordinates">Coordenadas</string>
+  <string name="media_detail_coordinates_empty">Nenhum fornecido</string>
   <string name="become_a_tester_title">Seja um Testador Beta</string>
   <string name="become_a_tester_description">Entre no nosso canal beta no Google Play e receba acesso prévio a novos recursos e correções de erros</string>
   <string name="use_wikidata">Usa Wikidata</string>
   <string name="use_wikidata_summary">(Aviso: desabilitar isso pode causar grande consumo de dados móveis)</string>
   <string name="_2fa_code">Código 2FA</string>
+  <string name="number_of_uploads">Meu limite de upload recente</string>
+  <string name="maximum_limit">Limite máximo</string>
   <string name="maximum_limit_alert">Incapaz de exibir mais de 500.</string>
+  <string name="set_limit">Definir o limite de carregamento recente</string>
   <string name="login_failed_2fa_not_supported">Dois fatores de autenticação não são suportados.</string>
   <string name="logout_verification">Quer realmente sair ?</string>
+  <string name="commons_logo">Logotipo do Commons</string>
+  <string name="commons_website">Site do Commons</string>
+  <string name="commons_facebook">Página do Commons no Facebook</string>
+  <string name="commons_github">Código fonte do Commons no Github</string>
+  <string name="background_image">Imagem de fundo</string>
+  <string name="mediaimage_failed">Falha na imagem de mídia</string>
+  <string name="no_image_found">Nenhuma imagem encontrada</string>
+  <string name="upload_image">Enviar Imagem</string>
+  <string name="welcome_image_mount_zao">Mount Zao</string>
+  <string name="welcome_image_llamas">Llamas</string>
+  <string name="welcome_image_rainbow_bridge">Ponte de Arco-Íris</string>
+  <string name="welcome_image_tulip">Tulipa</string>
+  <string name="welcome_image_no_selfies">Sem Selfies</string>
+  <string name="welcome_image_proprietary">Imagem proprietária</string>
+  <string name="welcome_image_welcome_wikipedia">Bem-vindo à Wikipédia</string>
+  <string name="welcome_image_welcome_copyright">Direitos de autor são bem vindo</string>
+  <string name="welcome_image_sydney_opera_house">Ópera de Sydney</string>
   <string name="cancel">Cancelar</string>
   <string name="navigation_drawer_open">Abrir</string>
   <string name="navigation_drawer_close">Fechar</string>
@@ -166,4 +190,29 @@
   <string name="navigation_item_settings">Configurações</string>
   <string name="navigation_item_feedback">Comentários</string>
   <string name="navigation_item_logout">Sair</string>
+  <string name="navigation_item_info">Tutorial</string>
+  <string name="navigation_item_notification">Notificações</string>
+  <string name="nearby_needs_permissions">Os locais próximos não podem ser exibidos sem permissões de localização</string>
+  <string name="no_description_found">Nenhuma descrição encontrada</string>
+  <string name="nearby_info_menu_commons_article">Página de arquivo do Commons</string>
+  <string name="nearby_info_menu_wikidata_article">Item do Wikidata</string>
+  <string name="error_while_cache">Erro durante o cache de imagens</string>
+  <string name="title_info">Um título descritivo exclusivo para o arquivo, que servirá como um nome de arquivo. Você pode usar linguagem simples com espaços. Não inclua a extensão do arquivo</string>
+  <string name="description_info">Por favor, descreva a mídia tanto quanto possível: onde foi tomada? O que isso mostra? Qual é o contexto? Descreva os objetos ou pessoas. Revelar informações que não podem ser facilmente adivinhadas, por exemplo, a hora do dia, se for uma paisagem. Se a mídia mostrar algo incomum, explique o que torna incomum.</string>
+  <string name="give_permission">Dar permissão</string>
+  <string name="use_external_storage">Usar o armazenamento externo</string>
+  <string name="use_external_storage_summary">Salvar as fotos tiradas com a câmera no aplicativo no seu dispositivo</string>
+  <string name="send_log_file">Enviar arquivo de registro</string>
+  <string name="send_log_file_description">Enviar arquivo de log para desenvolvedores por e-mail</string>
+  <string name="login_to_your_account">Faça login na sua conta</string>
+  <string name="nearby_location_has_not_changed">O local não mudou.</string>
+  <string name="nearby_location_not_available">Localização não disponível.</string>
+  <string name="location_permission_rationale_nearby">Permissão necessária para exibir uma lista de locais próximos</string>
+  <string name="get_directions">OBTER DIREÇÕES</string>
+  <string name="read_article">LER ARTIGO</string>
+  <string name="notifications_welcome">Bem-vindo ao Wikimedia Commons, %1$s! É um prazer tê-lo aqui.</string>
+  <string name="notifications_talk_page_message">%1$s deixou uma mensagem na sua página de discussão</string>
+  <string name="notifications_thank_you_edit">Obrigado por ter realizado uma edição</string>
+  <string name="notifications_mention">%1$s fez menção a você em %2$s.</string>
+  <string name="toggle_view_button">Visualização de alternância</string>
 </resources>

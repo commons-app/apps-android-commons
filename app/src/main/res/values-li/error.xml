@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="crash_dialog_title">Commons is vasgeloupe</string>
+  <string name="crash_dialog_text">Oj. Get góng verkieërdj!</string>
+  <string name="crash_dialog_comment_prompt">Vertèl ós waat se duis, e-mail \'t den nao ós. Det hölp ós \'t op te losse!</string>
+  <string name="crash_dialog_ok_toast">Danke!</string>
+</resources>

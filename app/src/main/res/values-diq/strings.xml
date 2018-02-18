@@ -22,9 +22,9 @@
   <string name="upload_failed_notification_subtitle">pıpawane xo bıvin</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">1 dosye selagnayış</item>
-    <item quantity="other">%d dosye Selagnayışi</item>
+    <item quantity="other">%1$d dosye Selagnayışi</item>
   </plurals>
-  <string name="title_activity_contributions" fuzzy="true">Barkerdışê mı</string>
+  <string name="title_activity_contributions">Barkerdışê mınê peyêni</string>
   <string name="contribution_state_queued">Ratneya</string>
   <string name="contribution_state_failed">Nêbı</string>
   <string name="contribution_state_in_progress">%1$d%% temamya</string>
@@ -52,26 +52,24 @@
   <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Theba bar nêbı</item>
     <item quantity="one">1 bar kerdış</item>
-    <item quantity="other">%d bar kerdışi</item>
+    <item quantity="other">%1$d bar kerdışi</item>
   </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Sergendış 1 bar kerdış</item>
-    <item quantity="other">Sergendış %d bar kerdışi </item>
+    <item quantity="other">Sergendış %1$d bar kerdışi </item>
   </plurals>
   <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 bar kerdış</item>
-    <item quantity="other">%d bar kerdışi </item>
+    <item quantity="other">%1$d bar kerdışi </item>
   </plurals>
   <string name="categories_not_found">Kategoriyan de %1$s deye theba çıniyo</string>
-  <string name="categories_skip_explanation">Kategori cı kerdışi rê nusnayış bıkeré. Ena gamer ravêrdışi rê mesaci bıpıloğnê yana peyd şırê.</string>
-  <string name="categories_activity_title">Kategoriy</string>
-  <string name="preference_tracking">Rapore karkerden</string>
-  <string name="preference_tracking_summary">Raporanê gırweynayışi Wikimedia rê bırışên ke wa ma dest bıdê ma ke programi (app) aver berime.</string>
+  <string name="categories_skip_explanation" fuzzy="true">Kategori cı kerdışi rê nusnayış bıkeré. Ena gamer ravêrdışi rê mesaci bıpıloğnê yana peyd şırê.</string>
+  <string name="categories_activity_title">Kategoriyi</string>
   <string name="title_activity_settings">Sazi</string>
   <string name="title_activity_signup">Qeyd be</string>
   <string name="menu_about">Heq te cı</string>
   <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Çıme&lt;/a&gt; u &lt;a href=\"https://commons-app.github.io/\"&gt;website&lt;/a&gt; on GitHub&lt;/a&gt;. Newe vıraz &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub mewzu &lt;/a&gt; U rapor bıweseynê</string>
-  <string name="about_privacy_policy">/</string>
+  <string name="about_privacy_policy" fuzzy="true">/</string>
   <string name="title_activity_about">Heq te cı</string>
   <string name="menu_feedback">Peyd rışten bırış (E-posta ra)</string>
   <string name="no_email_client">E-posta eyar nêbi</string>
@@ -102,7 +100,7 @@
   <string name="tutorial_4_text">Misal bar kerden:</string>
   <string name="welcome_final_text">Şıma fam kerdê?</string>
   <string name="welcome_final_button_text">E!</string>
-  <string name="detail_panel_cats_label">Kategoriy</string>
+  <string name="detail_panel_cats_label">Kategoriyi</string>
   <string name="detail_panel_cats_loading">Bar beno…</string>
   <string name="detail_panel_cats_none">Theba nêweçineya</string>
   <string name="detail_description_empty">Akerdenayış çıniyo</string>
@@ -113,4 +111,12 @@
   <string name="warning">Tembe kem</string>
   <string name="yes">E</string>
   <string name="no">Nê</string>
+  <string name="media_detail_title">Sername</string>
+  <string name="media_detail_license">Lisans</string>
+  <string name="media_detail_coordinates">Koordinati</string>
+  <string name="cancel">Bıtexelne</string>
+  <string name="navigation_drawer_open">Ake</string>
+  <string name="navigation_item_home">Keye</string>
+  <string name="navigation_item_upload">Bar ke</string>
+  <string name="navigation_item_logout">Veciyayış</string>
 </resources>

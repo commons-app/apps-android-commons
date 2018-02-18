@@ -7,7 +7,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import fr.free.nrw.commons.notification.Notification;
+import io.reactivex.Observable;
+import io.reactivex.Single;
+
 public interface MediaWikiApi {
+    String getUserAgent();
+
     String getAuthCookie();
 
     void setAuthCookie(String authCookie);
@@ -36,21 +42,29 @@ public interface MediaWikiApi {
     MediaResult fetchMediaByFilename(String filename) throws IOException;
 
     @NonNull
-    List<String> searchCategories(int searchCatsLimit, String filterValue) throws IOException;
+    Observable<String> searchCategories(String filterValue, int searchCatsLimit);
 
     @NonNull
-    List<String> allCategories(int searchCatsLimit, String filter) throws IOException;
+    Observable<String> allCategories(String filter, int searchCatsLimit);
 
     @NonNull
-    List<String> searchTitles(int searchCatsLimit, String title) throws IOException;
+    List<Notification> getNotifications() throws IOException;
+
+    @NonNull
+    Observable<String> searchTitles(String title, int searchCatsLimit);
 
     @Nullable
     String revisionsByFilename(String filename) throws IOException;
 
     boolean existingFile(String fileSha1) throws IOException;
 
+
+
     @NonNull
     LogEventResult logEvents(String user, String lastModified, String queryContinue, int limit) throws IOException;
+
+    @NonNull
+    Single<Integer> getUploadCount(String userName);
 
     interface ProgressListener {
         void onProgress(long transferred, long total);

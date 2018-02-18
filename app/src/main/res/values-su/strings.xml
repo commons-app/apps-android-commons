@@ -20,9 +20,9 @@
   <string name="upload_progress_notification_title_finishing">Méréskeun unjalan %1$s</string>
   <string name="upload_failed_notification_title">Ngunjal %1$s gagal</string>
   <string name="upload_failed_notification_subtitle">Toél pikeun nempo</string>
-  <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">ngunjal %d berkas</item>
-    <item quantity="other">ngunjal %d berkas</item>
+  <plurals name="uploads_pending_notification_indicator" fuzzy="true">
+    <item quantity="one">ngunjal %1$d berkas</item>
+    <item quantity="other">ngunjal %1$d berkas</item>
   </plurals>
   <string name="title_activity_contributions">Unjalan panungtung kuring</string>
   <string name="contribution_state_queued">Antrian</string>
@@ -56,28 +56,26 @@
   <string name="contributions_subtitle_zero">Can aya nu diunjal</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d unjalan</item>
-    <item quantity="other">%d unjalan</item>
+    <item quantity="one">%1$d unjalan</item>
+    <item quantity="other">%1$d unjalan</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
     <item quantity="one">Ngamimitian saunjalan</item>
-    <item quantity="other">Ngamimitian %d unjalan</item>
+    <item quantity="other">Ngamimitian %1$d unjalan</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
+  <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">saunjalan</item>
-    <item quantity="other">%d unjalan</item>
+    <item quantity="other">%1$d unjalan</item>
   </plurals>
   <string name="categories_not_found">Teu mendak kategori anu cocog jeung %1$s</string>
-  <string name="categories_skip_explanation">Tambahkeun kategori hambéh gambar anjeun beuki gampang katarana di Wikimédia Commons.\n\nMimitian ku ngetik kategori.\nToél ieu talatah (atawa toél deui) pikeun ngaliwatkeun ieu bagęan.</string>
+  <string name="categories_skip_explanation" fuzzy="true">Tambahkeun kategori hambéh gambar anjeun beuki gampang katarana di Wikimédia Commons.\n\nMimitian ku ngetik kategori.\nToél ieu talatah (atawa toél deui) pikeun ngaliwatkeun ieu bagęan.</string>
   <string name="categories_activity_title">Kategori</string>
-  <string name="preference_tracking">Laporan pamakéan</string>
-  <string name="preference_tracking_summary">Kirim laporan pamakéan ka Wikimédia sangkan bisa rumojong ka kami dina mekarkeun ieu aplikasi</string>
   <string name="title_activity_settings">Séting</string>
   <string name="title_activity_signup">Daptar</string>
   <string name="menu_about">Ngeunaan</string>
-  <string name="about_license">Pakakas lemes kodeu nembrak dirilis di handapeun &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Lisénsi Apache v2&lt;/a&gt;. Wikimedia Commons sarta logona téh mérk dagang anu Yayasan Wikimédia ogé dipakéna kudu meunang widi ti Yayasan Wikimédia. Kami teu disatujuan ku atawa digawé bareng jeung Yayasan Wikimédia.</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sumber&lt;/a&gt; sarta &lt;a href=\"https://commons-app.github.io/\"&gt;situ wéb&lt;/a&gt; dina GitHub. Jieun anyar &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;perkara GitHub&lt;/a&gt; pikeun saran jeung laporan kutu.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Kawijakan privasi&lt;/a&gt;</string>
+  <string name="about_license">Aplikasi Wikimédia Commons mangrupa aplikasi sumber nembrak nu dijieun jeung dikokolakeun ku panampa hibah sarta rélawan komunitas Wikimédia. Wikimedia Foundation teu pépérodeun dina nyieun, ngamekarkeun, atawa mulasara ieu aplikasi.</string>
+  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Sumber&lt;/a&gt; sarta &lt;a href=\"https://commons-app.github.io/\"&gt;situ wéb&lt;/a&gt; dina GitHub. Jieun anyar &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;perkara GitHub&lt;/a&gt; pikeun saran jeung laporan kutu.</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Kawijakan privasi&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Pangajén&lt;/a&gt;</string>
   <string name="title_activity_about">Ngeunaan</string>
   <string name="menu_feedback">Kirim eupan balik (via Surélék)</string>
@@ -88,6 +86,7 @@
   <string name="menu_retry_upload">Cobaan deui</string>
   <string name="menu_cancel_upload">Bolay</string>
   <string name="share_license_summary">Ieu gambar bakal ditangtayungan ku lisénsi %1$s</string>
+  <string name="media_upload_policy">Ku ngirimkeun ieu gambar, kuring ngedalkeun yén ieu mangrupa karya kuring sorangan, yén ieu karya teu ngandung matéri atawa hak pribadi nu ditangtayungan ku hak cipta, sarta mun teu nurut kana &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Kawijakan Wikimedia Commons&lt;/a&gt;.</string>
   <string name="menu_download">Undeur</string>
   <string name="preference_license">Lisénsi</string>
   <string name="use_previous">Paké baé judul/pedaran saméméhna</string>
@@ -122,7 +121,7 @@
   <string name="tutorial_3_text">Wayahna ULAH ngunjal:</string>
   <string name="tutorial_3_subtext">- Sélpi atawa poto sobat anjeun\n- Poto anu diundeur ti Internét\n- Poto layar aplikasi</string>
   <string name="tutorial_4_text">Conto unjalan:</string>
-  <string name="tutorial_4_subtext">- Judul: Gedung Opera Sydney\n- Pedaran: Gedung Opera Sydney (Sydney Opera House) ditempo ti basisir peuntas\n- Kategori: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext" fuzzy="true">- Judul: Gedung Opera Sydney\n- Pedaran: Gedung Opera Sydney (Sydney Opera House) ditempo ti basisir peuntas\n- Kategori: Sydney Opera House, Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Sumbangkeun gambar Anjeun. Bantuan ngahirupkeun artikel Wikipédia!</string>
   <string name="welcome_wikipedia_subtext">Gambar di Wikipédia asalna ti Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Gambar-gambar anjeun ngabantu ngatik jalma di sakuliah dunya.</string>
@@ -135,7 +134,8 @@
   <string name="detail_description_empty">Tanpa pedaran</string>
   <string name="detail_license_empty">Lisénsi teu dipikanyaho</string>
   <string name="menu_refresh">Segerkeun</string>
-  <string name="storage_permission_rationale">Merlukeun widi: Baca simpenan éksternal. Aplikasi teu bisa jalan tanpa ieu.</string>
+  <string name="read_storage_permission_rationale">Merlukeun widi: Baca simpenan éksternal. Aplikasi teu bisa jalan tanpa ieu.</string>
+  <string name="write_storage_permission_rationale">Merlukeun widi: Baca simpenan éksternal. Aplikasi teu bisa jalan tanpa ieu.</string>
   <string name="location_permission_rationale">Idin pilihan: Paké lokasi kiwari pikeun usulan kategori</string>
   <string name="ok">Oké</string>
   <string name="title_activity_nearby">Tempat Sabudeureun</string>
@@ -149,6 +149,9 @@
   <string name="media_detail_description">Déskripsi</string>
   <string name="media_detail_description_explanation">Pedaran berkas nyangkaruk didieu. Bisa jadi matak ngalikakeun, sarta ngempladkeun kana sawatara baris. Sanajan kitu, muga bisa katémbong écés.</string>
   <string name="media_detail_uploaded_date">Tanggal ngunjal</string>
+  <string name="media_detail_license">Lisénsi</string>
+  <string name="media_detail_coordinates">Koordinat</string>
+  <string name="media_detail_coordinates_empty">Teu disadiakeun</string>
   <string name="become_a_tester_title">Jadi tukang ngetés Béta</string>
   <string name="become_a_tester_description">Pilihan asup kana saluran béta kami di Google Play sarta meunangkeun aksés munggaran pikeun fitur anyar jeung pameneran kutu</string>
   <string name="use_wikidata">Paké Wikidata</string>
@@ -187,7 +190,15 @@
   <string name="navigation_item_info">Pituduh</string>
   <string name="nearby_needs_permissions">Tempat sabudeureun teu bisa ditémbongkeun tanpa idin lokasi</string>
   <string name="no_description_found">teu manggihan pedaran</string>
-  <string name="nearby_info_menu_commons_article">Artikel Common</string>
+  <string name="nearby_info_menu_commons_article">Kaca berkas commons</string>
   <string name="nearby_info_menu_wikidata_article">item Wikidata</string>
   <string name="error_while_cache">Kasalahan nalika muat gambar</string>
+  <string name="title_info">Judul déskriptif anu unik pikeun berkas, anu bakal miboga fungsi minangka ngaran berkas. Anjeun bisa maké basa basajan kalawan spasi. Ulah ngawuwuhkeun éksténsi berkas</string>
+  <string name="description_info">Pék émbarkeun wincikan média saloba-lobabana: Dimana éta dicokot? Naon nu titojokeunna? Naon kontéksna? Pék jéntrékeun obyék atawa jalmana. Ébré informasi anu teu gampang kajudi, kawas wayah mun éta mangrupa pamandangan. Ari média nu némbongkeun perkara nu teu guyub, pék jéntrékeun naon nu ngabalukarkeun éta téh teu guyub.</string>
+  <string name="give_permission">Béré idin</string>
+  <string name="use_external_storage">Paké panyimpenan éksternal</string>
+  <string name="use_external_storage_summary">Simpen gambar nu nyomotna ku aplikasi kaména na parangkat anjeun</string>
+  <string name="send_log_file">Kirim berkas log</string>
+  <string name="send_log_file_description">Kirim berkas log ka pamekar liwat surélék</string>
+  <string name="login_to_your_account">Asup log kana akun anjeun</string>
 </resources>

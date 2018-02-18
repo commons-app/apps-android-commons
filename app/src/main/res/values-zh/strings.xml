@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">上传%1$s失败</string>
   <string name="upload_failed_notification_subtitle">点击查看</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d个文件正在上传</item>
-    <item quantity="other">%d个文件正在上传</item>
+    <item quantity="one">%1$d个文件正在上传</item>
+    <item quantity="other">%1$d个文件正在上传</item>
   </plurals>
   <string name="title_activity_contributions">我的最近上传</string>
   <string name="contribution_state_queued">已入队列</string>
@@ -56,28 +56,26 @@
   <string name="contributions_subtitle_zero">尚无上传</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d次上传</item>
-    <item quantity="other">%d次上传</item>
+    <item quantity="one">%1$d次上传</item>
+    <item quantity="other">%1$d次上传</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">开始%d次上传</item>
-    <item quantity="other">开始%d次上传</item>
+    <item quantity="one">开始%1$d次上传</item>
+    <item quantity="other">开始%1$d次上传</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d次上传</item>
-    <item quantity="other">%d次上传</item>
+    <item quantity="one">%1$d次上传</item>
+    <item quantity="other">%1$d次上传</item>
   </plurals>
   <string name="categories_not_found">没有找到匹配%1$s的分类</string>
-  <string name="categories_skip_explanation">添加分类使您的图像更容易在维基共享资源被找到。\n\n开始输入以添加分类。点击该信息（或按返回）以跳过此步。</string>
+  <string name="categories_skip_explanation">添加分类使您的图像更容易在维基共享资源被找到。开始输入以添加分类。</string>
   <string name="categories_activity_title">分类</string>
-  <string name="preference_tracking">使用报告</string>
-  <string name="preference_tracking_summary">发送使用报告至维基媒体以帮助我们改进该应用</string>
   <string name="title_activity_settings">设置</string>
   <string name="title_activity_signup">注册</string>
   <string name="menu_about">关于</string>
-  <string name="about_license">本开源软件采用&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache许可证第二版&lt;/a&gt;授权。Wikimedia Commons及其标志是维基媒体基金会的商标，并在维基媒体基金会的许可下使用。我们并不被维基媒体基金会认可，也不与基金会有任何联系。</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;源代码&lt;/a&gt;和&lt;a href=\"https://commons-app.github.io/\"&gt;网站&lt;/a&gt;位于GitHub。创建新的&lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub问题&lt;/a&gt;以发送错误报告和建议。</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;隐私政策&lt;/a&gt;</string>
+  <string name="about_license">维基共享资源应用程序是由维基媒体社区的受助者和志愿者创建和维护的开源应用程序。维基媒体基金会不参与该应用程序的创立，开发或维护。</string>
+  <string name="about_improve">创建新的&lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub问题&lt;/a&gt;以发送错误报告和建议。</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;隐私政策&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;制作人员&lt;/a&gt;</string>
   <string name="title_activity_about">关于</string>
   <string name="menu_feedback">发送反馈（通过电子邮件）</string>
@@ -88,6 +86,7 @@
   <string name="menu_retry_upload">重试</string>
   <string name="menu_cancel_upload">取消</string>
   <string name="share_license_summary">该图像会采用%1$s授权</string>
+  <string name="media_upload_policy">通过提交该图片，我声明这是我自己的作品，其不包含受版权保护的材料或自拍像，并遵循&lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;维基共享资源&lt;/a&gt;方针。</string>
   <string name="menu_download">下载</string>
   <string name="preference_license">许可协议</string>
   <string name="use_previous">使用之前的标题/描述</string>
@@ -122,7 +121,7 @@
   <string name="tutorial_3_text">请不要上传：</string>
   <string name="tutorial_3_subtext">- 您朋友的自拍照或图片\n- 您从互联网下载的图片\n- 专利应用的截图</string>
   <string name="tutorial_4_text">示例上传：</string>
-  <string name="tutorial_4_subtext">- 标题：悉尼歌剧院\n- 描述：从海湾对面看到的悉尼歌剧院\n- 分类：Sydney Opera House、Sydney Opera House from the west、Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext">- 标题：悉尼歌剧院\n- 描述：从海湾对面看到的悉尼歌剧院\n- 分类：Sydney Opera House from the west、Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">贡献您的图像。使维基百科的条目更加生动！</string>
   <string name="welcome_wikipedia_subtext">维基百科上的图像来自维基共享资源。</string>
   <string name="welcome_copyright_text">您的图像可以帮助教育世界各地的人。</string>
@@ -135,7 +134,8 @@
   <string name="detail_description_empty">没有说明</string>
   <string name="detail_license_empty">未知许可协议</string>
   <string name="menu_refresh">刷新</string>
-  <string name="storage_permission_rationale">需要权限：读取外部存储。应用不能在没有它的情况下运行。</string>
+  <string name="read_storage_permission_rationale">需要权限：读取外部存储。应用不能在没有它的情况下运行。</string>
+  <string name="write_storage_permission_rationale">需要权限：写入外部存储。应用不能在没有它的情况下运行。</string>
   <string name="location_permission_rationale">可选权限：获取当前位置以提供分类建议</string>
   <string name="ok">确定</string>
   <string name="title_activity_nearby">附近地点</string>
@@ -149,6 +149,9 @@
   <string name="media_detail_description">说明</string>
   <string name="media_detail_description_explanation">在此填写媒体的说明。这可能会相当长，并将需要包裹在多行中。我们希望它看起来很好。</string>
   <string name="media_detail_uploaded_date">上传日期</string>
+  <string name="media_detail_license">许可协议</string>
+  <string name="media_detail_coordinates">坐标</string>
+  <string name="media_detail_coordinates_empty">未提供</string>
   <string name="become_a_tester_title">成为测试版的测试者</string>
   <string name="become_a_tester_description">加入我们在Google Play上的测试频道，并更早获取新功能以及错误修复</string>
   <string name="use_wikidata">使用维基数据</string>
@@ -161,6 +164,9 @@
   <string name="login_failed_2fa_not_supported">目前不支持双因素验证。</string>
   <string name="logout_verification">您真的想要退出么？</string>
   <string name="commons_logo">共享资源标志</string>
+  <string name="commons_website">共享资源网站</string>
+  <string name="commons_facebook">共享资源Facebook页面</string>
+  <string name="commons_github">共享资源Github源代码</string>
   <string name="background_image">背景图片</string>
   <string name="mediaimage_failed">媒体图片失败</string>
   <string name="no_image_found">找不到图片</string>
@@ -185,9 +191,28 @@
   <string name="navigation_item_feedback">反馈</string>
   <string name="navigation_item_logout">退出</string>
   <string name="navigation_item_info">教程</string>
+  <string name="navigation_item_notification">通知</string>
   <string name="nearby_needs_permissions">附近地点不能在没有位置权限的情况下显示</string>
   <string name="no_description_found">找不到描述</string>
-  <string name="nearby_info_menu_commons_article">共享资源条目</string>
+  <string name="nearby_info_menu_commons_article">共享资源文件页面</string>
   <string name="nearby_info_menu_wikidata_article">维基数据项</string>
   <string name="error_while_cache">缓存图片时出错</string>
+  <string name="title_info">用于文件的唯一描述性标题，它将作为文件名使用。您可以使用有空格的简明语言。请不要包含文件扩展名</string>
+  <string name="description_info">请尽可能详细地描述媒体：拍摄在何地？显示什么？例文是什么？请描述对象或个人。透露一些不易猜想到的信息，例如这幅风景画的具体日期时间。如果媒体显示了一些不寻常的事物，请说明为什么它显得不寻常。</string>
+  <string name="give_permission">提供权限</string>
+  <string name="use_external_storage">使用外部存储</string>
+  <string name="use_external_storage_summary">在您的设备上，使用应用中的照相机保存照片</string>
+  <string name="send_log_file">发送日志文件</string>
+  <string name="send_log_file_description">通过电子邮件将日志文件发送给开发人员</string>
+  <string name="login_to_your_account">登录您的账户</string>
+  <string name="nearby_location_has_not_changed">位置没有更新。</string>
+  <string name="nearby_location_not_available">位置不可用。</string>
+  <string name="location_permission_rationale_nearby">需要权限以显示附近地点列表</string>
+  <string name="get_directions">获得指示</string>
+  <string name="read_article">阅读条目</string>
+  <string name="notifications_welcome">欢迎来到维基共享资源，%1$s！我们很高兴您来这里。</string>
+  <string name="notifications_talk_page_message">%1$s在您的讨论页上留下了一条消息</string>
+  <string name="notifications_thank_you_edit">感谢您做出编辑</string>
+  <string name="notifications_mention">%1$s在%2$s提到了您。</string>
+  <string name="toggle_view_button">切换视图</string>
 </resources>

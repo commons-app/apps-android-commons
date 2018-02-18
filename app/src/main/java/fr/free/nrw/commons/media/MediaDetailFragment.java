@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +21,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.inject.Inject;
+import javax.inject.Provider;
+
 import fr.free.nrw.commons.License;
 import fr.free.nrw.commons.LicenseList;
 import fr.free.nrw.commons.Media;
@@ -29,10 +31,12 @@ import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LatLng;
+import fr.free.nrw.commons.ui.widget.CompatTextView;
 import timber.log.Timber;
 
-public class MediaDetailFragment extends Fragment {
+public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     private boolean editable;
     private MediaDetailPagerFragment.MediaDetailProvider detailProvider;
@@ -52,6 +56,9 @@ public class MediaDetailFragment extends Fragment {
         return mf;
     }
 
+    @Inject
+    Provider<MediaDataExtractor> mediaDataExtractorProvider;
+
     private MediaWikiImageView image;
     private MediaDetailSpacer spacer;
     private int initialListTop = 0;
@@ -68,8 +75,8 @@ public class MediaDetailFragment extends Fragment {
     private boolean categoriesPresent = false;
     private ViewTreeObserver.OnGlobalLayoutListener layoutListener; // for layout stuff, only used once!
     private ViewTreeObserver.OnScrollChangedListener scrollListener;
-    DataSetObserver dataObserver;
-    private AsyncTask<Void,Void,Boolean> detailFetchTask;
+    private DataSetObserver dataObserver;
+    private AsyncTask<Void, Void, Boolean> detailFetchTask;
     private LicenseList licenseList;
 
     @Override
@@ -88,7 +95,7 @@ public class MediaDetailFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        detailProvider = (MediaDetailPagerFragment.MediaDetailProvider)getActivity();
+        detailProvider = (MediaDetailPagerFragment.MediaDetailProvider) getActivity();
 
         if (savedInstanceState != null) {
             editable = savedInstanceState.getBoolean("editable");
@@ -119,12 +126,7 @@ public class MediaDetailFragment extends Fragment {
         licenseList = new LicenseList(getActivity());
 
         // Progressively darken the image in the background when we scroll detail pane up
-        scrollListener = new ViewTreeObserver.OnScrollChangedListener() {
-            @Override
-            public void onScrollChanged() {
-                updateTheDarkness();
-            }
-        };
+        scrollListener = this::updateTheDarkness;
         view.getViewTreeObserver().addOnScrollChangedListener(scrollListener);
 
         // Layout layoutListener to size the spacer item relative to the available space.
@@ -154,7 +156,8 @@ public class MediaDetailFragment extends Fragment {
         return view;
     }
 
-    @Override public void onResume() {
+    @Override
+    public void onResume() {
         super.onResume();
         Media media = detailProvider.getMediaAtPosition(index);
         if (media == null) {
@@ -192,13 +195,13 @@ public class MediaDetailFragment extends Fragment {
 
             @Override
             protected void onPreExecute() {
-                extractor = new MediaDataExtractor(media.getFilename(), licenseList);
+                extractor = mediaDataExtractorProvider.get();
             }
 
             @Override
             protected Boolean doInBackground(Void... voids) {
                 try {
-                    extractor.fetch();
+                    extractor.fetch(media.getFilename(), licenseList);
                     return Boolean.TRUE;
                 } catch (IOException e) {
                     Timber.d(e);
@@ -216,22 +219,8 @@ public class MediaDetailFragment extends Fragment {
                 if (success) {
                     extractor.fill(media);
 
-                    // Set text of desc, license, and categories
-                    desc.setText(prettyDescription(media));
-                    license.setText(prettyLicense(media));
-                    coordinates.setText(prettyCoordinates(media));
-                    uploadedDate.setText(prettyUploadedDate(media));
-
-                    categoryNames.clear();
-                    categoryNames.addAll(media.getCategories());
-
-                    categoriesLoaded = true;
-                    categoriesPresent = (categoryNames.size() > 0);
-                    if (!categoriesPresent) {
-                        // Stick in a filler element.
-                        categoryNames.add(getString(R.string.detail_panel_cats_none));
-                    }
-                    rebuildCatList();
+                    setTextFields(media);
+                    setOnClickListeners(media);
                 } else {
                     Timber.d("Failed to load photo details.");
                 }
@@ -250,13 +239,13 @@ public class MediaDetailFragment extends Fragment {
             detailFetchTask.cancel(true);
             detailFetchTask = null;
         }
-        if (layoutListener != null) {
+        if (layoutListener != null && getView() != null) {
             getView().getViewTreeObserver().removeGlobalOnLayoutListener(layoutListener); // old Android was on crack. CRACK IS WHACK
             layoutListener = null;
         }
-        if (scrollListener != null) {
+        if (scrollListener != null && getView() != null) {
             getView().getViewTreeObserver().removeOnScrollChangedListener(scrollListener);
-            scrollListener  = null;
+            scrollListener = null;
         }
         if (dataObserver != null) {
             detailProvider.unregisterDataSetObserver(dataObserver);
@@ -265,30 +254,52 @@ public class MediaDetailFragment extends Fragment {
         super.onDestroyView();
     }
 
+    private void setTextFields(Media media) {
+        desc.setText(prettyDescription(media));
+        license.setText(prettyLicense(media));
+        coordinates.setText(prettyCoordinates(media));
+        uploadedDate.setText(prettyUploadedDate(media));
+
+        categoryNames.clear();
+        categoryNames.addAll(media.getCategories());
+
+        categoriesLoaded = true;
+        categoriesPresent = (categoryNames.size() > 0);
+        if (!categoriesPresent) {
+            // Stick in a filler element.
+            categoryNames.add(getString(R.string.detail_panel_cats_none));
+        }
+        rebuildCatList();
+    }
+
+    private void setOnClickListeners(final Media media) {
+        license.setOnClickListener(v -> openWebBrowser(licenseLink(media)));
+        if (media.getCoordinates() != null) {
+            coordinates.setOnClickListener(v -> openMap(media.getCoordinates()));
+        }
+    }
+
     private void rebuildCatList() {
         categoryContainer.removeAllViews();
         // @fixme add the category items
         for (String cat : categoryNames) {
-            View catLabel = buildCatLabel(cat);
+            View catLabel = buildCatLabel(cat, categoryContainer);
             categoryContainer.addView(catLabel);
         }
     }
 
-    private View buildCatLabel(final String catName) {
-        final View item = getLayoutInflater(null).inflate(R.layout.detail_category_item, null, false);
-        final TextView textView = (TextView)item.findViewById(R.id.mediaDetailCategoryItemText);
+    private View buildCatLabel(final String catName, ViewGroup categoryContainer) {
+        final View item = LayoutInflater.from(getContext()).inflate(R.layout.detail_category_item, categoryContainer, false);
+        final CompatTextView textView = (CompatTextView) item.findViewById(R.id.mediaDetailCategoryItemText);
 
         textView.setText(catName);
         if (categoriesLoaded && categoriesPresent) {
-            textView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    String selectedCategoryTitle = "Category:" + catName;
-                    Intent viewIntent = new Intent();
-                    viewIntent.setAction(Intent.ACTION_VIEW);
-                    viewIntent.setData(new PageTitle(selectedCategoryTitle).getCanonicalUri());
-                    startActivity(viewIntent);
-                }
+            textView.setOnClickListener(view -> {
+                String selectedCategoryTitle = "Category:" + catName;
+                Intent viewIntent = new Intent();
+                viewIntent.setAction(Intent.ACTION_VIEW);
+                viewIntent.setData(new PageTitle(selectedCategoryTitle).getCanonicalUri());
+                startActivity(viewIntent);
             });
         }
         return item;
@@ -298,7 +309,7 @@ public class MediaDetailFragment extends Fragment {
         // You must face the darkness alone
         int scrollY = scrollView.getScrollY();
         int scrollMax = getView().getHeight();
-        float scrollPercentage = (float)scrollY / (float)scrollMax;
+        float scrollPercentage = (float) scrollY / (float) scrollMax;
         final float transparencyMax = 0.75f;
         if (scrollPercentage > transparencyMax) {
             scrollPercentage = transparencyMax;
@@ -349,5 +360,36 @@ public class MediaDetailFragment extends Fragment {
             return getString(R.string.media_detail_coordinates_empty);
         }
         return media.getCoordinates().getPrettyCoordinateString();
+    }
+
+
+    private @Nullable
+    String licenseLink(Media media) {
+        String licenseKey = media.getLicense();
+        if (licenseKey == null || licenseKey.equals("")) {
+            return null;
+        }
+        License licenseObj = licenseList.get(licenseKey);
+        if (licenseObj == null) {
+            return null;
+        } else {
+            return licenseObj.getUrl(Locale.getDefault().getLanguage());
+        }
+    }
+
+    private void openWebBrowser(String url) {
+        Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(browser);
+    }
+
+    private void openMap(LatLng coordinates) {
+        //Open map app at given position
+        Uri gmmIntentUri = Uri.parse(
+                "geo:0,0?q=" + coordinates.getLatitude() + "," + coordinates.getLongitude());
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+
+        if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivity(mapIntent);
+        }
     }
 }

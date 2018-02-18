@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">Wysyłanie %1$s nieudane</string>
   <string name="upload_failed_notification_subtitle">Dotknij, aby zobaczyć</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">Przesyłanie %d pliku</item>
-    <item quantity="other">Przesyłanie %d plików</item>
+    <item quantity="one">Przesyłanie %1$d pliku</item>
+    <item quantity="other">Przesyłanie %1$d plików</item>
   </plurals>
   <string name="title_activity_contributions">Niedawno przesłane</string>
   <string name="contribution_state_queued">W kolejce</string>
@@ -42,6 +42,7 @@
   <string name="login_failed_password">Nie można zalogować - sprawdź hasło</string>
   <string name="login_failed_throttled">Zbyt wiele nieudanych prób zalogowania. Spróbuj ponownie za kilka minut.</string>
   <string name="login_failed_blocked">Przepraszamy, ten użytkownik został zablokowany na Commons</string>
+  <string name="login_failed_2fa_needed">Wprowadź swój kod dla  dwuetapowej autoryzacji.</string>
   <string name="login_failed_generic">Logowanie nie powiodło się</string>
   <string name="share_upload_button">Prześlij</string>
   <string name="multiple_share_base_title">Nazwij ten zestaw</string>
@@ -52,30 +53,29 @@
   <string name="refresh_button">Odśwież</string>
   <string name="gps_disabled">GPS w twoim urządzeniu jest wyłączony. Czy chcesz go włączyć?</string>
   <string name="enable_gps">Włącz GPS</string>
+  <string name="contributions_subtitle_zero">Na razie brak przesłanych plików!</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">Przesłano @string/contributions_subtitle_zero</item>
-    <item quantity="one">Przesłano %d plik</item>
-    <item quantity="other">Przesłano %d pliki</item>
+    <item quantity="one">Przesłano %1$d plik</item>
+    <item quantity="other">Przesłano %1$d pliki</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Rozpoczęto %d przesyłanie</item>
-    <item quantity="other">Rozpoczęto %d przesyłania</item>
+    <item quantity="one">Rozpoczęto %1$d przesyłanie</item>
+    <item quantity="other">Rozpoczęto %1$d przesyłania</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d przesłanie</item>
-    <item quantity="other">%d przesłania</item>
+    <item quantity="one">%1$d przesłanie</item>
+    <item quantity="other">%1$d przesłania</item>
   </plurals>
   <string name="categories_not_found">Nie znaleziono kategorii pasujących do %1$s</string>
-  <string name="categories_skip_explanation">Dodaj kategorie, aby ułatwić odnalezienie plików w Wikimedia Commons.\n\nZacznij pisać, aby dodać kategorię.\nKliknij ten komunikat lub naciśnij „cofnij”, aby pominąć ten krok.</string>
+  <string name="categories_skip_explanation">Dodaj kategorie, aby ułatwić odnalezienie plików w Wikimedia Commons.\nZacznij pisać, aby dodać kategorie.</string>
   <string name="categories_activity_title">Kategorie</string>
-  <string name="preference_tracking">Raporty użycia</string>
-  <string name="preference_tracking_summary">Wyślij raporty do Wikimedia, aby pomóc w ulepszeniu aplikacji</string>
   <string name="title_activity_settings">Ustawienia</string>
   <string name="title_activity_signup">Zarejestruj się</string>
   <string name="menu_about">O aplikacji</string>
-  <string name="about_license">Oprogramowanie Open Source, wydane na licencji &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Wikimedia Commons i jego logo są znakami towarowymi Wikimedia Foundation i są wykorzystywane za zgodą Wikimedia Foundation. Nie jesteśmy powiązani z Wikimedia Foundation.</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kod źródłowy&lt;/a&gt; oraz &lt;a href=\"https://commons-app.github.io/\"&gt;strona internetowa&lt;/a&gt; na GitHub. Aby zgłosić błąd lub sugestię, utwórz nowe &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;zgłoszenie na GitHub&lt;/a&gt;.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Polityka prywatności&lt;/a&gt;</string>
+  <string name="about_license" fuzzy="true">Oprogramowanie Open Source, wydane na licencji &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt;. Wikimedia Commons i jego logo są znakami towarowymi Wikimedia Foundation i są wykorzystywane za zgodą Wikimedia Foundation. Nie jesteśmy powiązani z Wikimedia Foundation.</string>
+  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Kod źródłowy&lt;/a&gt; oraz &lt;a href=\"https://commons-app.github.io/\"&gt;strona internetowa&lt;/a&gt; na GitHub. Aby zgłosić błąd lub sugestię, utwórz nowe &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;zgłoszenie na GitHub&lt;/a&gt;.</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Polityka prywatności&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Twórcy&lt;/a&gt;</string>
   <string name="title_activity_about">O aplikacji</string>
   <string name="menu_feedback">Wyślij opinię (przez e-mail)</string>
@@ -120,7 +120,7 @@
   <string name="tutorial_3_text">Prosimy NIE wysyłać:</string>
   <string name="tutorial_3_subtext">- Zdjęć przedstawiających siebie lub znajomych\n- Zdjęć pobranych z Internetu\n- Zrzutów ekranów płatnych aplikacji</string>
   <string name="tutorial_4_text">Przykład przesłania pliku:</string>
-  <string name="tutorial_4_subtext">- Nazwa: Zamek Królewski w Warszawie\n- Opis: Zamek Królewski w Warszawie, widok od strony kolumny Zygmunta\n- Kategorie: Western facade (Royal Castle, Warsaw), Southern facade (Royal Castle, Warsaw), Castle Square in Warsaw</string>
+  <string name="tutorial_4_subtext" fuzzy="true">- Nazwa: Zamek Królewski w Warszawie\n- Opis: Zamek Królewski w Warszawie, widok od strony kolumny Zygmunta\n- Kategorie: Western facade (Royal Castle, Warsaw), Southern facade (Royal Castle, Warsaw), Castle Square in Warsaw</string>
   <string name="welcome_wikipedia_text">Dodaj swoje ilustracje. Pomóż ożyć artykułom w Wikipedii!</string>
   <string name="welcome_wikipedia_subtext">Ilustracje w Wikipedii pochodzą z Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Twoje ilustracje pomagają w edukacji ludzi na całym świecie.</string>
@@ -133,10 +133,11 @@
   <string name="detail_description_empty">Brak opisu</string>
   <string name="detail_license_empty">Nieznana licencja</string>
   <string name="menu_refresh">Odśwież</string>
-  <string name="storage_permission_rationale">Wymagane uprawnienia: odczyt z dysku zewnętrznego. Aplikacja nie będzie w stanie funkcjonować bez tego.</string>
+  <string name="read_storage_permission_rationale">Wymagane uprawnienia: odczyt z dysku zewnętrznego. Aplikacja nie będzie w stanie funkcjonować bez tego.</string>
   <string name="location_permission_rationale">Opcjonalne zezwolenie: uzyskiwanie bieżącej lokalizacji dla wygenerowania propozycji kategorii</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Pobliskie miejsca</string>
+  <string name="no_nearby">Nie znaleziono niczego w pobliżu</string>
   <string name="warning">Ostrzeżenie</string>
   <string name="file_exists">Ten plik już istnieje na Commons. Jesteś pewien, że chcesz kontynuować?</string>
   <string name="yes">Tak</string>
@@ -145,22 +146,43 @@
   <string name="media_detail_media_title">Tytuł pliku</string>
   <string name="media_detail_description">Opis</string>
   <string name="media_detail_description_explanation">Tu jest miejsce na opis pliku. Mogą być dość długie i wymagać przewijania podczas czytania. Chcemy, by wszystko wyglądało dobrze.</string>
+  <string name="media_detail_uploaded_date">Data przesłania</string>
+  <string name="media_detail_license">Licencja</string>
+  <string name="media_detail_coordinates">Współrzędne</string>
   <string name="become_a_tester_title">Zostań beta-testerem</string>
   <string name="become_a_tester_description">Dołącz do kanału bety w Google Play i dostań wczesny dostęp do nowych funkcji i łatek</string>
   <string name="use_wikidata">Użyj Wikidanych</string>
   <string name="_2fa_code">Kod 2FA</string>
+  <string name="maximum_limit">Górna Granica</string>
+  <string name="maximum_limit_alert">Nie można wyświetlić ponad 500</string>
   <string name="login_failed_2fa_not_supported">Uwierzytelnianie dwuskładnikowe obecnie nie jest obsługiwane.</string>
+  <string name="logout_verification">Czy na pewno wylogować?</string>
+  <string name="commons_logo">Logo Commons</string>
+  <string name="background_image">Obraz w tle</string>
+  <string name="upload_image">Załaduj zdjęcie</string>
+  <string name="welcome_image_mount_zao">Zaō</string>
+  <string name="welcome_image_llamas">Lamy</string>
+  <string name="welcome_image_rainbow_bridge">Rainbow Bridge</string>
+  <string name="welcome_image_tulip">Tulipan</string>
+  <string name="welcome_image_no_selfies">Brak Selfie</string>
   <string name="welcome_image_welcome_wikipedia">Witaj na Wikipedii</string>
   <string name="welcome_image_welcome_copyright" fuzzy="true">Witaj w prawach autorskich.</string>
+  <string name="welcome_image_sydney_opera_house">Opera Sydnej</string>
   <string name="cancel">Anuluj</string>
   <string name="navigation_drawer_open">Otwórz</string>
   <string name="navigation_drawer_close">Zamknij</string>
   <string name="navigation_item_home">Dom</string>
   <string name="navigation_item_upload">Prześlij</string>
+  <string name="navigation_item_nearby">W pobliżu</string>
   <string name="navigation_item_about">O aplikacji</string>
   <string name="navigation_item_settings">Ustawienia</string>
   <string name="navigation_item_feedback">Opinie</string>
   <string name="navigation_item_logout">Wyloguj</string>
   <string name="navigation_item_info">Samouczek</string>
+  <string name="no_description_found">nie znaleziono opisu</string>
   <string name="nearby_info_menu_wikidata_article">Element Wikidanych</string>
+  <string name="title_info">Podaj krótką, opisową i unikalną nazwę, która będzie służyła jako nazwa pliku. Możesz używać prostego języka i spacji. Nie dodawaj rozszerzenia pliku.</string>
+  <string name="login_to_your_account">Zaloguj się na swoje konto</string>
+  <string name="notifications_welcome">Witamy w Wikimedia Commons, %1$s! Cieszymy się, że tu jesteś.</string>
+  <string name="notifications_mention">%1$s wspomniał o Tobie w %2$s.</string>
 </resources>

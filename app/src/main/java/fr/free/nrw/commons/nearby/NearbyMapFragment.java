@@ -3,8 +3,6 @@ package fr.free.nrw.commons.nearby;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +11,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.annotations.PolygonOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
@@ -22,7 +19,6 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
-import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.services.android.telemetry.MapboxTelemetry;
 
 import java.lang.reflect.Type;
@@ -80,6 +76,8 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     private void setupMapView(Bundle savedInstanceState) {
         MapboxMapOptions options = new MapboxMapOptions()
                 .styleUrl(Style.OUTDOORS)
+                .logoEnabled(false)
+                .attributionEnabled(false)
                 .camera(new CameraPosition.Builder()
                         .target(new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude()))
                         .zoom(11)
@@ -88,31 +86,22 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         // create map
         mapView = new MapView(getActivity(), options);
         mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(MapboxMap mapboxMap) {
-                mapboxMap.addMarkers(baseMarkerOptions);
+        mapView.getMapAsync(mapboxMap -> {
+            mapboxMap.addMarkers(baseMarkerOptions);
 
-                mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
-                    @Override
-                    public boolean onMarkerClick(@NonNull Marker marker) {
-                        if (marker instanceof NearbyMarker) {
-                            NearbyMarker nearbyMarker = (NearbyMarker) marker;
-                            Place place = nearbyMarker.getNearbyBaseMarker().getPlace();
-                            NearbyInfoDialog.showYourself(getActivity(), place);
-                        }
-                        return false;
-                    }
-                });
+            mapboxMap.setOnMarkerClickListener(marker -> {
+                if (marker instanceof NearbyMarker) {
+                    NearbyMarker nearbyMarker = (NearbyMarker) marker;
+                    Place place = nearbyMarker.getNearbyBaseMarker().getPlace();
+                    NearbyInfoDialog.showYourself(getActivity(), place);
+                }
+                return false;
+            });
 
-                addCurrentLocationMarker(mapboxMap);
-            }
+            addCurrentLocationMarker(mapboxMap);
         });
-        if (PreferenceManager.getDefaultSharedPreferences(getActivity()).getBoolean("theme",true)) {
-            mapView.setStyleUrl(getResources().getString(R.string.map_theme_dark));
-        } else {
-            mapView.setStyleUrl(getResources().getString(R.string.map_theme_light));
-        }
+
+        mapView.setStyleUrl("asset://mapstyle.json");
     }
 
     /**

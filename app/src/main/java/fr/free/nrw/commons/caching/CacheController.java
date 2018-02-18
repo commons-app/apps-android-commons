@@ -32,7 +32,7 @@ public class CacheController {
     public void cacheCategory() {
         List<String> pointCatList = new ArrayList<>();
         if (MwVolleyApi.GpsCatExists.getGpsCatExists()) {
-             pointCatList.addAll(MwVolleyApi.getGpsCat());
+            pointCatList.addAll(MwVolleyApi.getGpsCat());
             Timber.d("Categories being cached: %s", pointCatList);
         } else {
             Timber.d("No categories found, so no categories cached");

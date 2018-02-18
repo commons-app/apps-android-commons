@@ -3,21 +3,27 @@ package fr.free.nrw.commons.upload;
 import android.annotation.SuppressLint;
 import android.content.ContentUris;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+import android.os.ParcelFileDescriptor;
+import android.preference.PreferenceManager;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
+import java.util.Date;
 
+import fr.free.nrw.commons.CommonsApplication;
 import timber.log.Timber;
 
 public class FileUtils {
@@ -28,7 +34,7 @@ public class FileUtils {
      * other file-based ContentProviders.
      *
      * @param context The context.
-     * @param uri The Uri to query.
+     * @param uri     The Uri to query.
      * @author paulburke
      */
     // Can be safely suppressed, checks for isKitKat before running isDocumentUri
@@ -49,29 +55,31 @@ public class FileUtils {
                 if ("primary".equalsIgnoreCase(type)) {
                     return Environment.getExternalStorageDirectory() + "/" + split[1];
                 }
-            }
-            // DownloadsProvider
-            else if (isDownloadsDocument(uri)) {
+            } else if (isDownloadsDocument(uri))  { // DownloadsProvider
 
                 final String id = DocumentsContract.getDocumentId(uri);
                 final Uri contentUri = ContentUris.withAppendedId(
                         Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
 
                 return getDataColumn(context, contentUri, null, null);
-            }
-            // MediaProvider
-            else if (isMediaDocument(uri)) {
+            } else if (isMediaDocument(uri)) { // MediaProvider
                 final String docId = DocumentsContract.getDocumentId(uri);
                 final String[] split = docId.split(":");
                 final String type = split[0];
 
                 Uri contentUri = null;
-                if ("image".equals(type)) {
-                    contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-                } else if ("video".equals(type)) {
-                    contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
-                } else if ("audio".equals(type)) {
-                    contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+                switch (type) {
+                    case "image":
+                        contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+                        break;
+                    case "video":
+                        contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
+                        break;
+                    case "audio":
+                        contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+                        break;
+                    default:
+                        break;
                 }
 
                 final String selection = "_id=?";
@@ -89,8 +97,41 @@ public class FileUtils {
         // File
         else if ("file".equalsIgnoreCase(uri.getScheme())) {
             return uri.getPath();
+        } else {
+            //fetching path may fail depending on the source URI and all hope is lost
+            //so we will create and use a copy of the file, which seems to work
+            String copyPath = null;
+            try {
+                ParcelFileDescriptor descriptor
+                        = context.getContentResolver().openFileDescriptor(uri, "r");
+                if (descriptor != null) {
+                    SharedPreferences sharedPref = PreferenceManager
+                            .getDefaultSharedPreferences(context);
+                    boolean useExtStorage = sharedPref.getBoolean("useExternalStorage", true);
+                    if (useExtStorage) {
+                        copyPath = Environment.getExternalStorageDirectory().toString()
+                                + "/CommonsApp/" + new Date().getTime() + ".jpg";
+                        File newFile = new File(Environment.getExternalStorageDirectory().toString() + "/CommonsApp");
+                        newFile.mkdir();
+                        FileUtils.copy(
+                                descriptor.getFileDescriptor(),
+                                copyPath);
+                        Timber.d("Filepath (copied): %s", copyPath);
+                        return copyPath;
+                    }
+                    copyPath = context.getCacheDir().getAbsolutePath()
+                            + "/" + new Date().getTime() + ".jpg";
+                    FileUtils.copy(
+                            descriptor.getFileDescriptor(),
+                            copyPath);
+                    Timber.d("Filepath (copied): %s", copyPath);
+                    return copyPath;
+                }
+            } catch (IOException e) {
+                Timber.w(e, "Error in file " + copyPath);
+                return null;
+            }
         }
-
         return null;
     }
 
@@ -123,8 +164,9 @@ public class FileUtils {
         } catch (IllegalArgumentException e) {
             Timber.d(e);
         } finally {
-            if (cursor != null)
+            if (cursor != null) {
                 cursor.close();
+            }
         }
         return null;
     }
@@ -162,7 +204,8 @@ public class FileUtils {
 
     /**
      * Copy content from source file to destination file.
-     * @param source stream copied from
+     *
+     * @param source      stream copied from
      * @param destination stream copied to
      * @throws IOException thrown when failing to read source or opening destination file
      */
@@ -175,7 +218,8 @@ public class FileUtils {
 
     /**
      * Copy content from source file to destination file.
-     * @param source file descriptor copied from
+     *
+     * @param source      file descriptor copied from
      * @param destination file path copied to
      * @throws IOException thrown when failing to read source or opening destination file
      */

@@ -1,17 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Main application background color -->
+    <color name="main_background_dark">#303030</color>
+    <color name="main_background_light">#fafafa</color>
+
+    <!-- Colors used by newer Android + Support library for material design theme -->
+    <color name="primaryColor">#0c609c</color>
+    <color name="primaryDarkColor">#00376d</color>
+    <color name="primaryLightColor">#528dcd</color>
+    <color name="primarySuperLightColor">#d7e8fb</color>
+    <color name="secondaryColor">#f38b04</color>
+    <color name="secondaryDarkColor">#ba5d00</color>
+    <color name="secondaryLightColor">#ffbc46</color>
+    <color name="primaryTextColor">#ffffff</color>
+    <color name="secondaryTextColor">#000000</color>
+
     <!-- Some colours are same for dark/light themes. They are written two times in case
     we want to change light ones later.
       -->
-    <color name="text_background">#90000000</color>
     <color name="item_white_background">#ffffffff</color>
-    <color name="main_background_dark">#000000</color>
-    <color name="main_background_light">#ffffff</color>
     <color name="commons_app_blue_dark">#33FFFFFF</color>
     <color name="commons_app_blue_light">#33FFFFFF</color>
-    <color name="activity_welcome_background_dark">#0c609c</color>
-    <color name="activity_welcome_background_light">#0c609c</color>
-    <color name="action_bar_blue">#0c609c</color>
     <color name="status_bar_blue">#08436d</color>
     <color name="sub_background_dark">#20ffffff</color>
     <color name="sub_background_light">#20ffffff</color>
@@ -21,4 +30,5 @@
     <color name="button_background_light">#B0000000</color>
     <color name="upload_overlay_background_dark">#77000000</color>
     <color name="upload_overlay_background_light">#44000000</color>
+
 </resources>

@@ -22,7 +22,7 @@
   <string name="upload_failed_notification_subtitle">Tekan untuk melihat</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">mengunggah 1 berkas</item>
-    <item quantity="other">mengunggah %d berkas</item>
+    <item quantity="other">mengunggah %1$d berkas</item>
   </plurals>
   <string name="title_activity_contributions" fuzzy="true">Unggahan saya</string>
   <string name="contribution_state_queued">Antrean</string>
@@ -52,27 +52,25 @@
   <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Tidak ada unggahan</item>
     <item quantity="one">1 unggahan</item>
-    <item quantity="other">%d unggahan</item>
+    <item quantity="other">%1$d unggahan</item>
   </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">Memulai 1 unggahan</item>
-    <item quantity="other">Memulai %d unggahan</item>
+    <item quantity="other">Memulai %1$d unggahan</item>
   </plurals>
   <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 unggahan</item>
-    <item quantity="other">%d unggahan</item>
+    <item quantity="other">%1$d unggahan</item>
   </plurals>
   <string name="categories_not_found">Tidak ada kategori yang cocok dengan %1$s</string>
-  <string name="categories_skip_explanation">Tambahkan kategori agar foto Anda lebih mudah ditemukan di Wikimedia Commons.\n\nMulai mengetik untuk menambahkan kategori.\nTekan pesan ini (atau tekan kembali) untuk melewatkan langkah ini.</string>
+  <string name="categories_skip_explanation" fuzzy="true">Tambahkan kategori agar foto Anda lebih mudah ditemukan di Wikimedia Commons.\n\nMulai mengetik untuk menambahkan kategori.\nTekan pesan ini (atau tekan kembali) untuk melewatkan langkah ini.</string>
   <string name="categories_activity_title">Kategori</string>
-  <string name="preference_tracking">Laporan penggunaan</string>
-  <string name="preference_tracking_summary">Kirimkan laporan penggunaan ke Wikimedia untuk membantu kami memperbaiki aplikasi</string>
   <string name="title_activity_settings">Pengaturan</string>
   <string name="title_activity_signup">Mendaftar</string>
   <string name="menu_about">Tentang</string>
   <string name="about_license" fuzzy="true">Perangkat lunak sumber terbuka dirilis di bawah &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;lisensi Apache v2&lt;/a&gt;. Wikimedia Commons dan logonya merupakan merek dagang dari Wikimedia Foundation dan digunakan dengan izin dari Wikimedia Foundation. Kami tidak disetujui oleh atau berafiliasi dengan Wikimedia Foundation.</string>
   <string name="about_improve" fuzzy="true">Bersumber di &lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt;. Bug di &lt;a href=\"https://bugzilla.wikimedia.org/enter_bug.cgi?product=Commons%20App\"&gt;Bugzilla&lt;/a&gt;.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy/id\"&gt;Kebijakan privasi&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy/id\"&gt;Kebijakan privasi&lt;/a&gt;</string>
   <string name="title_activity_about">Tentang</string>
   <string name="menu_feedback">Kirim umpan balik (via Surel)</string>
   <string name="provider_categories">Kategori yang terakhir digunakan</string>

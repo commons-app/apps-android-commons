@@ -20,7 +20,7 @@
   <string name="upload_failed_notification_subtitle">Көрүү үчүн басыңыз</string>
   <plurals name="uploads_pending_notification_indicator" fuzzy="true">
     <item quantity="one">1 файл жүктөлүүдө</item>
-    <item quantity="other">%d файл жүктөлүүдө</item>
+    <item quantity="other">%1$d файл жүктөлүүдө</item>
   </plurals>
   <string name="title_activity_contributions" fuzzy="true">Менин жүктөөлөрүм</string>
   <string name="contribution_state_queued">Кезек</string>
@@ -49,26 +49,24 @@
   <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">Азырынча жүктөөлөр жок</item>
     <item quantity="one">1 жүктөө</item>
-    <item quantity="other">%d жүктөө</item>
+    <item quantity="other">%1$d жүктөө</item>
   </plurals>
   <plurals name="starting_multiple_uploads" fuzzy="true">
     <item quantity="one">1 жүктөө башталды</item>
-    <item quantity="other">%d жүктөө башталды</item>
+    <item quantity="other">%1$d жүктөө башталды</item>
   </plurals>
   <plurals name="multiple_uploads_title" fuzzy="true">
     <item quantity="one">1 жүктөө</item>
-    <item quantity="other">%d жүктөө</item>
+    <item quantity="other">%1$d жүктөө</item>
   </plurals>
   <string name="categories_not_found">%1$s түрмөктөрү табылган жок</string>
-  <string name="categories_skip_explanation">Уикиказынада Сиздин сүрөттөрдү жеңил табуу үчүн түрмөктөрдү кошуңуз.\n\nТүрмөктөрдү жазууну баштаңыз.\nБул кадамды аттап өтүү үчүн, бул билдирүүнү (же кийинкини) басыңыз.</string>
+  <string name="categories_skip_explanation" fuzzy="true">Уикиказынада Сиздин сүрөттөрдү жеңил табуу үчүн түрмөктөрдү кошуңуз.\n\nТүрмөктөрдү жазууну баштаңыз.\nБул кадамды аттап өтүү үчүн, бул билдирүүнү (же кийинкини) басыңыз.</string>
   <string name="categories_activity_title">Түрмөктөр</string>
-  <string name="preference_tracking">Отчеттор</string>
-  <string name="preference_tracking_summary">Тиркемени жакшыртуу үчүн Уикимедианы колдонууда отчет жөнөтүү</string>
   <string name="title_activity_settings">Ырастоолор</string>
   <string name="menu_about">Тиркеме жөнүндө</string>
   <string name="about_license" fuzzy="true">баштапкы коду ачык тиркемелер, &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;Apache License v2&lt;/a&gt; лицензиясынын негизинде чыгарылган</string>
   <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;GitHub&lt;/a&gt; шилтемесине баштапкы код. &lt;a href=\" https://github.com/commons-app/apps-android-commons/issues\"&gt;Github&lt;/a&gt; шилтемесиндеги катачылык.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Конфиденциалдуулук_саясаты\"&gt;Конфиденциалдуулук саясаты&lt;/a&gt;</string>
+  <string name="about_privacy_policy" fuzzy="true">&lt;a href=\"https://wikimediafoundation.org/wiki/Конфиденциалдуулук_саясаты\"&gt;Конфиденциалдуулук саясаты&lt;/a&gt;</string>
   <string name="title_activity_about">Тиркеме жөнүндө</string>
   <string name="menu_feedback">Шарттуу жооп жөнөтүү (Email)</string>
   <string name="provider_categories">Жакында колдонулган түрмөктөр</string>

@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">Uppladdning av %1$s misslyckades</string>
   <string name="upload_failed_notification_subtitle">Tryck för att visa</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d fil laddas upp</item>
-    <item quantity="other">%d filer laddas upp</item>
+    <item quantity="one">%1$d fil laddas upp</item>
+    <item quantity="other">%1$d filer laddas upp</item>
   </plurals>
   <string name="title_activity_contributions">Mina senaste uppladdningar</string>
   <string name="contribution_state_queued">Köade</string>
@@ -56,28 +56,26 @@
   <string name="contributions_subtitle_zero">Inga uppladdningar ännu</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d uppladdning</item>
-    <item quantity="other">%d uppladdningar</item>
+    <item quantity="one">%1$d uppladdning</item>
+    <item quantity="other">%1$d uppladdningar</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Startar %d uppladdning</item>
-    <item quantity="other">Startar %d uppladdningar</item>
+    <item quantity="one">Startar %1$d uppladdning</item>
+    <item quantity="other">Startar %1$d uppladdningar</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d uppladdning</item>
-    <item quantity="other">%d uppladdningar</item>
+    <item quantity="one">%1$d uppladdning</item>
+    <item quantity="other">%1$d uppladdningar</item>
   </plurals>
   <string name="categories_not_found">Inga kategorier som stämmer överens med %1$s hittades</string>
-  <string name="categories_skip_explanation">Lägg till kategorier för att göra dina bilder synliga på Wikimedia Commons.\n\nBörja skriva för att lägga till kategorier.\nTryck på detta meddelande (eller gå tillbaka) för att hoppa över detta steg.</string>
+  <string name="categories_skip_explanation">Lägg till kategorier för att göra dina bilder enklare att hitta på Wikimedia Commons.\n\nBörja skriva för att lägga till kategorier.</string>
   <string name="categories_activity_title">Kategorier</string>
-  <string name="preference_tracking">Användningsrapporter</string>
-  <string name="preference_tracking_summary">Skicka användningsrapporter till Wikimedia för att hjälpa oss förbättra appen</string>
   <string name="title_activity_settings">Inställningar</string>
   <string name="title_activity_signup">Registrera</string>
   <string name="menu_about">Om</string>
-  <string name="about_license">Programvara med öppen källkod släppt under &lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/COPYING\"&gt;licensen Apache v2&lt;/a&gt;. Wikimedia Commons och dess logotyp är varumärken av Wikimedia Foundation och används med tillstånd från Wikimedia Foundation. Vi varken stöds eller är kopplade med Wikimedia Foundation.</string>
-  <string name="about_improve">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Källkoden&lt;/a&gt; och &lt;a href=\"https://commons-app.github.io/\"&gt;webbplatsen&lt;/a&gt; på GitHub. Skapa ett nytt &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub-ärende&lt;/a&gt; för att rapportera buggar och förslag.</string>
-  <string name="about_privacy_policy">&lt;a href=\"https://wikimediafoundation.org/wiki/Privacy_policy\"&gt;Integritetspolicy&lt;/a&gt;</string>
+  <string name="about_license">Wikimedia Commons är en app med öppen källkod som skapas och underhålls av frivilliga från Wikimedias gemenskap. Wikimedia Foundation är inte involverad i skapandet, utvecklingen eller underhållet av appen.</string>
+  <string name="about_improve">Skapa ett nytt &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;ärende på GitHub&lt;/a&gt; för att rapportera buggar och förslag.</string>
+  <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Integritetspolicy&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Erkännande&lt;/a&gt;</string>
   <string name="title_activity_about">Om</string>
   <string name="menu_feedback">Skicka feedback (via e-post)</string>
@@ -88,6 +86,7 @@
   <string name="menu_retry_upload">Försök igen</string>
   <string name="menu_cancel_upload">Avbryt</string>
   <string name="share_license_summary">Denna bild kommer att licensieras under %1$s</string>
+  <string name="media_upload_policy">Genom att skicka in denna bild intygar jag att detta är mitt eget verk, som inte innehåller upphovsrättsskyddat material eller selfies samt annars följer &lt;a href=\"https://commons.wikimedia.org/wiki/Commons:Policies_and_guidelines\"&gt;Wikimedia Commons-policys&lt;/a&gt;.</string>
   <string name="menu_download">Ladda ned</string>
   <string name="preference_license">Licens</string>
   <string name="use_previous">Använd föregående titel/beskrivning</string>
@@ -122,7 +121,7 @@
   <string name="tutorial_3_text">Ladda INTE upp:</string>
   <string name="tutorial_3_subtext">- Selfies eller bilder på dina vänner\n- Bilder som du har laddat ned från Internet\n- Skärmdumpar på proprietära appar</string>
   <string name="tutorial_4_text">Uppladdningsexempel:</string>
-  <string name="tutorial_4_subtext">- Titel: Sydneys operahus\n- Beskrivning: Sydneys operahus sedd från andra sidan bukten\n- Kategorier: Sydneys operahus, Sydneys operahus från väst, Sydneys operahus utifrån</string>
+  <string name="tutorial_4_subtext">- Titel: Sydneys operahus\n- Beskrivning: Sydneys operahus sedd från andra sidan bukten\n- Kategorier: Sydneys operahus från väst, Sydneys operahus utifrån</string>
   <string name="welcome_wikipedia_text">Bidra med dina bilder. Hjälp Wikipedia-artiklar att komma till liv!</string>
   <string name="welcome_wikipedia_subtext">Bilder på Wikipedia kommer från Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Dina bilder hjälper till att utbilda människor runt om i världen.</string>
@@ -135,7 +134,8 @@
   <string name="detail_description_empty">Ingen beskrivning</string>
   <string name="detail_license_empty">Okänd licens</string>
   <string name="menu_refresh">Uppdatera</string>
-  <string name="storage_permission_rationale">Nödvändig behörighet: Läsa extern lagring. Appen fungerar inte utan detta.</string>
+  <string name="read_storage_permission_rationale">Nödvändig behörighet: Läsa extern lagring. Appen fungerar inte utan detta.</string>
+  <string name="write_storage_permission_rationale">Nödvändig behörighet: Skriva till extern lagring. Appen kan inte fungera så här.</string>
   <string name="location_permission_rationale">Valfri behörighet: Hämta aktuell plats för kategoriförslag</string>
   <string name="ok">OK</string>
   <string name="title_activity_nearby">Platser i närheten</string>
@@ -149,6 +149,9 @@
   <string name="media_detail_description">Beskrivning</string>
   <string name="media_detail_description_explanation">Beskrivningen för mediafilen ska vara här. Den kan vara riktig lång och kommer att behöva sträcka sig över flera rader. Vi hoppas i alla fall att det kommer se bra ut.</string>
   <string name="media_detail_uploaded_date">Uppladdningsdatum</string>
+  <string name="media_detail_license">Licens</string>
+  <string name="media_detail_coordinates">Koordinater</string>
+  <string name="media_detail_coordinates_empty">Inte angivet</string>
   <string name="become_a_tester_title">Bli en betatestare</string>
   <string name="become_a_tester_description">Registrera dig på våra betakanal på Google Play och få tidig åtkomst till nya funktioner och buggfixar</string>
   <string name="use_wikidata">Använd Wikidata</string>
@@ -161,6 +164,9 @@
   <string name="login_failed_2fa_not_supported">Tvåstegsverifiering stöds för tillfället inte.</string>
   <string name="logout_verification">Vill du verkligen logga ut?</string>
   <string name="commons_logo">Commons-logotyp</string>
+  <string name="commons_website">Commons webbplats</string>
+  <string name="commons_facebook">Commons Facebook-sida</string>
+  <string name="commons_github">Commons Github-källkod</string>
   <string name="background_image">Bakgrundsbild</string>
   <string name="mediaimage_failed">Mediabild misslyckades</string>
   <string name="no_image_found">Ingen bild hittades</string>
@@ -185,9 +191,28 @@
   <string name="navigation_item_feedback">Återkoppling</string>
   <string name="navigation_item_logout">Logga ut</string>
   <string name="navigation_item_info">Guide</string>
+  <string name="navigation_item_notification">Meddelanden</string>
   <string name="nearby_needs_permissions">Platser i närheten kan inte visas utan platsbehörigheter</string>
   <string name="no_description_found">ingen beskrivning hittades</string>
-  <string name="nearby_info_menu_commons_article">Commons-artikel</string>
+  <string name="nearby_info_menu_commons_article">Commons-filsida</string>
   <string name="nearby_info_menu_wikidata_article">Wikidata-objekt</string>
   <string name="error_while_cache">Fel uppstod när bilder cachelagras</string>
+  <string name="title_info">En unik beskrivande titel för filen, som kommer att fungera som ett filnamn. Du kan använda klarspråk med mellanslag. Ta inte med filändelsen</string>
+  <string name="description_info">Beskriv mediafilen så mycket som möjligt. Var togs den? Vad visar den? Vad är sammanhanget? Beskriv föremålen eller personerna. Ge information som inte kan gissas fram, t.ex. tidpunkten om det är ett landskap. Om mediafilen visar någonting ovanligt, förklara vad som gör den ovanlig.</string>
+  <string name="give_permission">Ge behörighet</string>
+  <string name="use_external_storage">Använd extern lagring</string>
+  <string name="use_external_storage_summary">Spara bilder som tas med kameran i appen på din enhet</string>
+  <string name="send_log_file">Skicka loggfil</string>
+  <string name="send_log_file_description">Skicka loggfilen till utvecklarna via e-post</string>
+  <string name="login_to_your_account">Logga in på ditt konto</string>
+  <string name="nearby_location_has_not_changed">Platsen har inte ändrats.</string>
+  <string name="nearby_location_not_available">Platsen är inte tillgänglig.</string>
+  <string name="location_permission_rationale_nearby">Behörighet krävs för att visa en lista över platser i närheten</string>
+  <string name="get_directions">FÅ VÄGBESKRIVNINGAR</string>
+  <string name="read_article">LÄS ARTIKEL</string>
+  <string name="notifications_welcome">Välkommen till Wikimedia Commons, %1$s! Vi är glada att du är här.</string>
+  <string name="notifications_talk_page_message">%1$s lämnade ett meddelande på din diskussionssida</string>
+  <string name="notifications_thank_you_edit">Tack för att du gjorde en redigering</string>
+  <string name="notifications_mention">%1$s nämnde dig på %2$s.</string>
+  <string name="toggle_view_button">Växla vy</string>
 </resources>

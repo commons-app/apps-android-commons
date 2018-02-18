@@ -1,12 +1,15 @@
 package fr.free.nrw.commons.mwapi;
 
+import android.content.SharedPreferences;
 import android.os.Build;
+import android.preference.PreferenceManager;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.io.IOException;
@@ -17,6 +20,8 @@ import java.util.Map;
 import java.util.Set;
 
 import fr.free.nrw.commons.BuildConfig;
+import fr.free.nrw.commons.TestCommonsApplication;
+import io.reactivex.observers.TestObserver;
 import okhttp3.HttpUrl;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
@@ -27,16 +32,19 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@Config(constants = BuildConfig.class, sdk = 21, application = TestCommonsApplication.class)
 public class ApacheHttpClientMediaWikiApiTest {
 
     private ApacheHttpClientMediaWikiApi testObject;
     private MockWebServer server;
+    private SharedPreferences sharedPreferences;
 
     @Before
     public void setUp() throws Exception {
         server = new MockWebServer();
-        testObject = new ApacheHttpClientMediaWikiApi("http://" + server.getHostName() + ":" + server.getPort() + "/");
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(RuntimeEnvironment.application);
+        testObject = new ApacheHttpClientMediaWikiApi(RuntimeEnvironment.application, "http://" + server.getHostName() + ":" + server.getPort() + "/", sharedPreferences);
+        testObject.setWikiMediaToolforgeUrl("http://" + server.getHostName() + ":" + server.getPort() + "/");
     }
 
     @After
@@ -121,11 +129,11 @@ public class ApacheHttpClientMediaWikiApiTest {
 
         RecordedRequest loginRequest = assertBasicRequestParameters(server, "POST");
         body = parseBody(loginRequest.getBody().readUtf8());
-        assertEquals("1", body.get("rememberMe"));
+        assertEquals("true", body.get("rememberMe"));
         assertEquals("foo", body.get("username"));
         assertEquals("bar", body.get("password"));
         assertEquals("baz", body.get("logintoken"));
-        assertEquals("1", body.get("logincontinue"));
+        assertEquals("true", body.get("logincontinue"));
         assertEquals("2fa", body.get("OATHToken"));
         assertEquals("xml", body.get("format"));
 
@@ -193,6 +201,19 @@ public class ApacheHttpClientMediaWikiApiTest {
         assertFalse(result);
     }
 
+    @Test
+    public void getUploadCount() throws InterruptedException {
+        server.enqueue(new MockResponse().setBody("23\n"));
+
+        TestObserver<Integer> testObserver = testObject.getUploadCount("testUsername").test();
+
+        RecordedRequest request = server.takeRequest();
+        Map<String, String> params = parseQueryParams(request);
+        assertEquals("testUsername", params.get("user"));
+
+        assertEquals(1, testObserver.valueCount());
+        assertEquals(23, (int)testObserver.values().get(0));
+    }
 
     private RecordedRequest assertBasicRequestParameters(MockWebServer server, String method) throws InterruptedException {
         RecordedRequest request = server.takeRequest();

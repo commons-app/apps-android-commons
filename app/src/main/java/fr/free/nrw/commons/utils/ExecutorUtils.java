@@ -7,17 +7,16 @@ import java.util.concurrent.Executor;
 
 public class ExecutorUtils {
 
-    private static final Executor uiExecutor = new Executor() {
-        @Override
-        public void execute(Runnable command) {
-            if (Looper.myLooper() == Looper.getMainLooper()) {
-                command.run();
-            } else {
-                new Handler(Looper.getMainLooper()).post(command);
-            }
+    private static final Executor uiExecutor = command -> {
+        if (Looper.myLooper() == Looper.getMainLooper()) {
+            command.run();
+        } else {
+            new Handler(Looper.getMainLooper()).post(command);
         }
     };
 
-    public static Executor uiExecutor () { return uiExecutor;}
+    public static Executor uiExecutor() {
+        return uiExecutor;
+    }
 
 }

@@ -20,7 +20,7 @@
   <string name="upload_failed_notification_subtitle">דרוקט צו באקוקן</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">1 טעקע לאדט אן</item>
-    <item quantity="other">%d טעקעס לאדן אן</item>
+    <item quantity="other">%1$d טעקעס לאדן אן</item>
   </plurals>
   <string name="title_activity_contributions">מײַנע ארויפלאדן</string>
   <string name="contribution_state_queued">אין ריי</string>
@@ -43,7 +43,7 @@
   <plurals name="contributions_subtitle">
     <item quantity="zero">נאך נישט קיין ארויפֿלאדן </item>
     <item quantity="one">1 ארויפֿלאד</item>
-    <item quantity="other">%d ארויפֿלאדן</item>
+    <item quantity="other">%1$d ארויפֿלאדן</item>
   </plurals>
   <string name="categories_activity_title">קאַטעגאריעס</string>
   <string name="preference_tracking">באניץ באריכטן</string>

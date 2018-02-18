@@ -63,12 +63,7 @@ public class NearbyInfoDialog extends OverlayDialog {
 
         overflowButton.setVisibility(showMenu() ? View.VISIBLE : View.GONE);
 
-        overflowButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popupMenuListener();
-            }
-        });
+        overflowButton.setOnClickListener(v -> popupMenuListener());
     }
 
     private void popupMenuListener() {
@@ -114,7 +109,7 @@ public class NearbyInfoDialog extends OverlayDialog {
         NearbyInfoDialog mDialog = new NearbyInfoDialog();
         Bundle bundle = new Bundle();
         bundle.putString(ARG_TITLE, place.name);
-        bundle.putString(ARG_DESC, place.getDescription().getText());
+        bundle.putString(ARG_DESC, place.getLongDescription());
         bundle.putDouble(ARG_LATITUDE, place.location.getLatitude());
         bundle.putDouble(ARG_LONGITUDE, place.location.getLongitude());
         bundle.putParcelable(ARG_SITE_LINK, place.siteLinks);
