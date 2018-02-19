@@ -1,5 +1,8 @@
 package fr.free.nrw.commons.nearby;
 
+import android.animation.ObjectAnimator;
+import android.animation.TypeEvaluator;
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -78,6 +81,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
 
     private Place place;
     private Marker selected;
+    private MarkerOptions currentLocationMarker;
 
     public NearbyMapFragment() {
     }
@@ -147,7 +151,26 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     }
 
     public void updateMapWithLocationChanges() {
-        
+// Get arguments from bundle for new location
+        Bundle bundle = this.getArguments();
+        Gson gson = new GsonBuilder()
+            .registerTypeAdapter(Uri.class, new UriDeserializer())
+            .create();
+        if (bundle != null) {
+            String gsonLatLng = bundle.getString("CurLatLng");
+            Type curLatLngType = new TypeToken<fr.free.nrw.commons.location.LatLng>() {}.getType();
+            curLatLng = gson.fromJson(gsonLatLng, curLatLngType);
+        }
+
+        updateMapView();
+    }
+
+    private void updateMapView() {
+        // Change
+        ValueAnimator markerAnimator = ObjectAnimator.ofObject(currentLocationMarker, "position",
+                new LatLngEvaluator(), currentLocationMarker.getPosition(), curLatLng);
+        markerAnimator.setDuration(2000);
+        markerAnimator.start();
     }
 
     private void initViews() {
@@ -245,7 +268,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     }
 
     private void setupMapView(Bundle savedInstanceState) {
-        MapboxMapOptions options = new MapboxMapOptions()
+        options = new MapboxMapOptions()
                 .styleUrl(Style.OUTDOORS)
                 .camera(new CameraPosition.Builder()
                         .target(new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude()))
@@ -473,4 +496,21 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         }
         super.onDestroyView();
     }
+
+    private static class LatLngEvaluator implements TypeEvaluator<LatLng> {
+        // Method is used to interpolate the marker animation.
+
+        private LatLng latLng = new LatLng();
+
+        @Override
+        public LatLng evaluate(float fraction, LatLng startValue, LatLng endValue) {
+            latLng.setLatitude(startValue.getLatitude()
+                    + ((endValue.getLatitude() - startValue.getLatitude()) * fraction));
+            latLng.setLongitude(startValue.getLongitude()
+                    + ((endValue.getLongitude() - startValue.getLongitude()) * fraction));
+            return latLng;
+        }
+    }
+}
+
 }

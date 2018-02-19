@@ -388,7 +388,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     private void updateMapFragment() {
         getMapFragment().setArguments(bundle);
-        getMapFragment().updateMapViewWithLocationChanges();
+        getMapFragment().updateMapWithLocationChanges();
     }
 
     /**
@@ -415,12 +415,14 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     @Override
     public void onLocationChangedSignificantly(LatLng latLng) {
-        refreshView(false, LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
+        refreshView(false,
+                LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
     }
 
     @Override
     public void onLocationChangedSlightly(LatLng latLng) {
-        refreshView(false, LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED);
+        refreshView(false,
+                LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED);
     }
 
     public void prepareViewsForSheetPosition(int bottomSheetState) {
