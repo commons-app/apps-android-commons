@@ -409,18 +409,23 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         Fragment fragment = new NearbyListFragment();
         fragment.setArguments(bundle);
-        fragmentTransaction.replace(R.id.container, fragment, fragment.getClass().getSimpleName());
+        fragmentTransaction.replace(R.id.container_sheet, fragment, fragment.getClass().getSimpleName());
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         fragmentTransaction.commitAllowingStateLoss();
     }
 
     @Override
     public void onLocationChangedSignificantly(LatLng latLng) {
+        Toast.makeText(this, "onLocationChangedSignificantly",
+                Toast.LENGTH_LONG).show();
         refreshView(false,
                 LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
     }
 
     @Override
     public void onLocationChangedSlightly(LatLng latLng) {
+        Toast.makeText(this, "onLocationChangedSlightly",
+                Toast.LENGTH_LONG).show();
         refreshView(false,
                 LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED);
     }

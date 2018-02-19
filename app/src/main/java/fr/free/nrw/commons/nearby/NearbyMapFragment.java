@@ -268,7 +268,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     }
 
     private void setupMapView(Bundle savedInstanceState) {
-        options = new MapboxMapOptions()
+        MapboxMapOptions options = new MapboxMapOptions()
                 .styleUrl(Style.OUTDOORS)
                 .camera(new CameraPosition.Builder()
                         .target(new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude()))
@@ -513,4 +513,3 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     }
 }
 
-}
