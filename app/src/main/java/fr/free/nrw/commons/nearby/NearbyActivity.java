@@ -392,7 +392,12 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     }
 
     @Override
-    public void onLocationChanged(LatLng latLng) {
+    public void onLocationChangedSignificantly(LatLng latLng) {
+        refreshView(false);
+    }
+
+    @Override
+    public void onLocationChangedSlightly(LatLng latLng) {
         refreshView(false);
     }
 

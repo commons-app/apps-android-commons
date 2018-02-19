@@ -136,11 +136,11 @@ public class LocationServiceManager implements LocationListener {
             } else {
                 return LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
             }
-           // If the new location is more than two minutes older, it must be worse
+            // If the new location is more than two minutes older, it must be worse
         } else{
             Log.d("deneme","distance:"+results[0]);
             return LocationChangeType.LOCATION_NOT_CHANGED;
-       }
+        }
 
     }
 
@@ -178,14 +178,20 @@ public class LocationServiceManager implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
             Log.d("deneme","location changed");
-            if (isBetterLocation(location, lastLocation)) {
+            if (isBetterLocation(location, lastLocation)
+                    .equals(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)) {
                 Log.d("deneme","location changed better location");
                 lastLocation = location;
                 for (LocationUpdateListener listener : locationListeners) {
-                    listener.onLocationChanged(LatLng.from(lastLocation));
+                    listener.onLocationChangedSignificantly(LatLng.from(lastLocation));
                 }
-            } else {
-                Log.d("deneme","location changed worse location");
+            } else if (isBetterLocation(location, lastLocation)
+                    .equals(LocationChangeType.LOCATION_SLIGHTLY_CHANGED)) {
+                Log.d("deneme","location changed better location");
+                lastLocation = location;
+                for (LocationUpdateListener listener : locationListeners) {
+                    listener.onLocationChangedSlightly(LatLng.from(lastLocation));
+                }
             }
     }
 
