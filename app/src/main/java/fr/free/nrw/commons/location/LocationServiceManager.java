@@ -94,10 +94,10 @@ public class LocationServiceManager implements LocationListener {
         }
     }
 
-    protected boolean isBetterLocation(Location location, Location currentBestLocation) {
+    protected LocationChangeType isBetterLocation(Location location, Location currentBestLocation) {
         if (currentBestLocation == null) {
             // A new location is always better than no location
-            return true;
+            return LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
         }
 
         // Check whether the new location fix is newer or older
@@ -105,15 +105,6 @@ public class LocationServiceManager implements LocationListener {
         boolean isSignificantlyNewer = timeDelta > MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS;
         boolean isSignificantlyOlder = timeDelta < -MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS;
         boolean isNewer = timeDelta > 0;
-
-        // If it's been more than two minutes since the current location, use the new location
-        // because the user has likely moved
-        if (isSignificantlyNewer) {
-            return true;
-            // If the new location is more than two minutes older, it must be worse
-        } else if (isSignificantlyOlder) {
-            return false;
-        }
 
         // Check whether the new location fix is more or less accurate
         int accuracyDelta = (int) (location.getAccuracy() - currentBestLocation.getAccuracy());
@@ -125,25 +116,31 @@ public class LocationServiceManager implements LocationListener {
         boolean isFromSameProvider = isSameProvider(location.getProvider(),
                 currentBestLocation.getProvider());
 
-                float[] results = new float[5];
-                Location.distanceBetween(
-                                currentBestLocation.getLatitude(),
-                                currentBestLocation.getLongitude(),
-                                location.getLatitude(),
-                                location.getLongitude(),
-                                results);
+        float[] results = new float[5];
+        Location.distanceBetween(
+                        currentBestLocation.getLatitude(),
+                        currentBestLocation.getLongitude(),
+                        location.getLatitude(),
+                        location.getLongitude(),
+                        results);
 
-                if (isSignificantlyNewer
-                        || isMoreAccurate
-                        || (isNewer && !isLessAccurate)
-                        || (isNewer && !isSignificantlyLessAccurate && isFromSameProvider)) {
-                    Log.d("deneme","distance:"+results[0]);
-                    return true;
-                   // If the new location is more than two minutes older, it must be worse
-                } else{
-                    Log.d("deneme","distance:"+results[0]);
-                    return false;
-               }
+        // If it's been more than two minutes since the current location, use the new location
+        // because the user has likely moved
+        if (isSignificantlyNewer
+                || isMoreAccurate
+                || (isNewer && !isLessAccurate)
+                || (isNewer && !isSignificantlyLessAccurate && isFromSameProvider)) {
+            Log.d("deneme","distance:"+results[0]);
+            if (results[0] < 1000) { // Means change is smaller than 1000 meter
+                return LocationChangeType.LOCATION_SLIGHTLY_CHANGED;
+            } else {
+                return LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
+            }
+           // If the new location is more than two minutes older, it must be worse
+        } else{
+            Log.d("deneme","distance:"+results[0]);
+            return LocationChangeType.LOCATION_NOT_CHANGED;
+       }
 
     }
 
@@ -205,5 +202,11 @@ public class LocationServiceManager implements LocationListener {
     @Override
     public void onProviderDisabled(String provider) {
         Timber.d("Provider %s disabled", provider);
+    }
+
+    public enum LocationChangeType{
+        LOCATION_SIGNIFICANTLY_CHANGED,
+        LOCATION_SLIGHTLY_CHANGED,
+        LOCATION_NOT_CHANGED
     }
 }
