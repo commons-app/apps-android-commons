@@ -135,7 +135,8 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         switch (item.getItemId()) {
             case R.id.action_refresh:
                 lockNearbyView(false);
-                refreshView(true);
+                refreshView(true,
+                        LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
                 return true;
             case R.id.action_display_list:
                 bottomSheetBehaviorForDetails.setState(BottomSheetBehavior.STATE_HIDDEN);
@@ -157,7 +158,8 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         switch (requestCode) {
             case LOCATION_REQUEST: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    refreshView(false);
+                    refreshView(false,
+                            LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
                 } else {
                     //If permission not granted, go to page that says Nearby Places cannot be displayed
                     hideProgressBar();
@@ -212,7 +214,8 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     private void checkLocationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (locationManager.isLocationPermissionGranted()) {
-                refreshView(false);
+                refreshView(false,
+                        LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
             } else {
                 // Should we show an explanation?
                 if (locationManager.isPermissionExplanationRequired(this)) {
@@ -238,7 +241,8 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                 }
             }
         } else {
-            refreshView(false);
+            refreshView(false,
+                    LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
         }
     }
 
@@ -247,7 +251,8 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
             Timber.d("User is back from Settings page");
-            refreshView(false);
+            refreshView(false,
+                    LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
         }
     }
 
@@ -298,8 +303,10 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
      * This method should be the single point to load/refresh nearby places
      *
      * @param isHardRefresh
+     * @param locationChangeType defines if location shanged significantly or slightly
      */
-    private void refreshView(boolean isHardRefresh) {
+    private void refreshView(boolean isHardRefresh,
+                             LocationServiceManager.LocationChangeType locationChangeType) {
         if (lockNearbyView) {
             return;
         }
@@ -318,12 +325,19 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             return;
         }
 
-        progressBar.setVisibility(View.VISIBLE);
-        placesDisposable = Observable.fromCallable(() -> nearbyController
-                .loadAttractionsFromLocation(curLatLang))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::populatePlaces);
+        if (locationChangeType
+                .equals(LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)) {
+            progressBar.setVisibility(View.VISIBLE);
+            placesDisposable = Observable.fromCallable(() -> nearbyController
+                    .loadAttractionsFromLocation(curLatLang))
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(this::populatePlaces);
+        } else if (locationChangeType
+                .equals(LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED)) {
+//TODO: update current location marker and camera
+        }
+
     }
 
     private void populatePlaces(List<Place> placeList) {
@@ -393,12 +407,12 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     @Override
     public void onLocationChangedSignificantly(LatLng latLng) {
-        refreshView(false);
+        refreshView(false, LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
     }
 
     @Override
     public void onLocationChangedSlightly(LatLng latLng) {
-        refreshView(false);
+        refreshView(false, LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED);
     }
 
     public void prepareViewsForSheetPosition(int bottomSheetState) {
