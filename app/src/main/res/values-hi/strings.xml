@@ -198,12 +198,13 @@
   <string name="error_while_cache">चित्र कैशिंग करते समय त्रुटि</string>
   <string name="title_info">फ़ाइल के लिए एक अद्वितीय वर्णनात्मक शीर्षक, जो एक फ़ाइल नाम के रूप में काम करेगा। आप रिक्त स्थान के साथ सादे भाषा का उपयोग कर सकते हैं। फ़ाइल विस्तार शामिल न करें</string>
   <string name="description_info">कृपया मीडिया जितना संभव हो उतना बताएं: यह कहां लिया गया? यह क्या दिखाता है? संदर्भ क्या है? कृपया वस्तुओं या व्यक्तियों का वर्णन करें। ऐसी जानकारी का खुलासा करें जिसे आसानी से अनुमानित नहीं किया जा सकता, उदाहरण के लिए दिन का समय यदि यह परिदृश्य है। अगर मीडिया कुछ असामान्य दिखाता है, तो कृपया बताएं कि इसे क्या असामान्य बनाता है।</string>
+  <string name="upload_image_too_dark">यह चित्र बहुत गहरा है, क्या आप वाकई इसे अपलोड करना चाहते हैं? विकिमीडिया कॉमन्स केवल विश्वकोषीय मूल्य वाले चित्रों के लिए है।</string>
   <string name="give_permission">अनुमति दें</string>
   <string name="use_external_storage">बाहरी स्टॉरज का पृयोग करे।</string>
   <string name="use_external_storage_summary">आप अपने डिवाइस के इन-ऐप कैमरा से ली गई तस्वीरों को सहेजें।</string>
+  <string name="login_to_your_account">अपने खाते में प्रवेश करें</string>
   <string name="send_log_file">लॉग फाइल भेजें</string>
   <string name="send_log_file_description">डेवेलपर्स को लॉग फाइल ई-मेल से भेजें</string>
-  <string name="login_to_your_account">अपने खाते में प्रवेश करें</string>
   <string name="nearby_location_has_not_changed">स्थान परिवर्तन नहीं हुआ।</string>
   <string name="nearby_location_not_available">स्थान उपलब्ध नहीं।</string>
   <string name="location_permission_rationale_nearby">आसपास के स्थान दिखाने के लिए अनुमति चाहिए</string>

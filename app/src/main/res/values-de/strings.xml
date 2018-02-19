@@ -199,12 +199,14 @@
   <string name="error_while_cache">Fehler beim Zwischenspeichern der Bilder</string>
   <string name="title_info">Ein eindeutiger beschreibender Titel für die Datei, der als Dateiname dient. Du kannst Klartext mit Leerzeichen verwenden. Gib nicht die Dateierweiterung mit an.</string>
   <string name="description_info">Bitte beschreibe das Medium so gut wie möglich: Wo wurde es aufgenommen? Was zeigt es? Was ist der Kontext? Bitte beschreibe die Objekte oder Personen. Zeige Informationen auf, die nicht einfach erraten werden können, zum Beispiel die Tageszeit, falls es eine Landschaft ist. Falls das Medium etwas Ungewöhnliches zeigt, erkläre bitte, was es ungewöhnlich macht.</string>
+  <string name="upload_image_too_dark">Dieses Bild ist zu dunkel. Bist du sicher, dass du es hochladen möchtest? Wikimedia Commons ist nur für Bilder mit enzyklopädischem Wert gedacht.</string>
+  <string name="upload_image_blurry">Dieses Bild ist verschwommen. Bist du sicher, dass du es hochladen möchtest? Wikimedia Commons ist nur für Bilder mit enzyklopädischem Wert gedacht.</string>
   <string name="give_permission">Berechtigung geben</string>
   <string name="use_external_storage">Externen Speicher verwenden</string>
   <string name="use_external_storage_summary">Mit der In-App-Kamera aufgenommene Bilder auf deinem Gerät speichern</string>
+  <string name="login_to_your_account">Bei deinem Benutzerkonto anmelden</string>
   <string name="send_log_file">Logdatei senden</string>
   <string name="send_log_file_description">Logdatei an die Entwickler per E-Mail senden</string>
-  <string name="login_to_your_account">Bei deinem Benutzerkonto anmelden</string>
   <string name="nearby_location_has_not_changed">Der Standort hat sich nicht geändert.</string>
   <string name="nearby_location_not_available">Der Standort ist nicht verfügbar.</string>
   <string name="location_permission_rationale_nearby">Berechtigung zur Anzeige einer Liste mit Orten in der Nähe erforderlich</string>
