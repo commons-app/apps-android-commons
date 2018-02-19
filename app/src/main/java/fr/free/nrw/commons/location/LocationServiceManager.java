@@ -10,6 +10,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -124,15 +125,26 @@ public class LocationServiceManager implements LocationListener {
         boolean isFromSameProvider = isSameProvider(location.getProvider(),
                 currentBestLocation.getProvider());
 
-        // Determine location quality using a combination of timeliness and accuracy
-        if (isMoreAccurate) {
-            return true;
-        } else if (isNewer && !isLessAccurate) {
-            return true;
-        } else if (isNewer && !isSignificantlyLessAccurate && isFromSameProvider) {
-            return true;
-        }
-        return false;
+                float[] results = new float[5];
+                Location.distanceBetween(
+                                currentBestLocation.getLatitude(),
+                                currentBestLocation.getLongitude(),
+                                location.getLatitude(),
+                                location.getLongitude(),
+                                results);
+
+                if (isSignificantlyNewer
+                        || isMoreAccurate
+                        || (isNewer && !isLessAccurate)
+                        || (isNewer && !isSignificantlyLessAccurate && isFromSameProvider)) {
+                    Log.d("deneme","distance:"+results[0]);
+                    return true;
+                   // If the new location is more than two minutes older, it must be worse
+                } else{
+                    Log.d("deneme","distance:"+results[0]);
+                    return false;
+               }
+
     }
 
     /**
@@ -168,12 +180,16 @@ public class LocationServiceManager implements LocationListener {
 
     @Override
     public void onLocationChanged(Location location) {
-        if (isBetterLocation(location, lastLocation)) {
-            lastLocation = location;
-            for (LocationUpdateListener listener : locationListeners) {
-                listener.onLocationChanged(LatLng.from(lastLocation));
+            Log.d("deneme","location changed");
+            if (isBetterLocation(location, lastLocation)) {
+                Log.d("deneme","location changed better location");
+                lastLocation = location;
+                for (LocationUpdateListener listener : locationListeners) {
+                    listener.onLocationChanged(LatLng.from(lastLocation));
+                }
+            } else {
+                Log.d("deneme","location changed worse location");
             }
-        }
     }
 
     @Override
