@@ -382,6 +382,15 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         }
     }
 
+    private NearbyMapFragment getMapFragment() {
+        return (NearbyMapFragment) getSupportFragmentManager().findFragmentByTag("NearbyMapFragment");
+    }
+
+    private void updateMapFragment() {
+        getMapFragment().setArguments(bundle);
+        getMapFragment().updateMapViewWithLocationChanges();
+    }
+
     /**
      * Calls fragment for map view.
      */
@@ -400,8 +409,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         Fragment fragment = new NearbyListFragment();
         fragment.setArguments(bundle);
-        fragmentTransaction.replace(R.id.container_sheet, fragment);
-        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        fragmentTransaction.replace(R.id.container, fragment, fragment.getClass().getSimpleName());
         fragmentTransaction.commitAllowingStateLoss();
     }
 
