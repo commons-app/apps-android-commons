@@ -21,22 +21,14 @@
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:layout_below="@id/toolbar">
-
-
             <ProgressBar
                 android:id="@+id/progressBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-
             <android.support.v4.widget.SwipeRefreshLayout
-
-
                 android:id="@+id/swipe_container"
-
                 android:layout_width="match_parent"
-
                 android:layout_height="match_parent">
-
             <FrameLayout
                 android:id="@+id/container"
                 android:layout_width="match_parent"

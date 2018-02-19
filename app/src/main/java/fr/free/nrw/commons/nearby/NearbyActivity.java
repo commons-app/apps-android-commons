@@ -61,7 +61,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     private NearbyActivityMode viewMode;
     private Disposable placesDisposable;
     private boolean lockNearbyView; //Determines if the nearby places needs to be refreshed
-    SwipeRefreshLayout swipeLayout;
+    @BindView(R.id.swipe_container) SwipeRefreshLayout swipeLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +71,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         bundle = new Bundle();
         initDrawer();
         initViewState();
-        swipeLayout=(SwipeRefreshLayout)findViewById(R.id.swipe_container);
         swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
