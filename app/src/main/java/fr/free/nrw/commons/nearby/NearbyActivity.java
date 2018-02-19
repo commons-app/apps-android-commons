@@ -335,7 +335,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                     .subscribe(this::populatePlaces);
         } else if (locationChangeType
                 .equals(LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED)) {
-//TODO: update current location marker and camera
+            updateMapFragment();
         }
 
     }

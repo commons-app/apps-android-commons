@@ -146,6 +146,10 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         });
     }
 
+    public void updateMapWithLocationChanges() {
+        
+    }
+
     private void initViews() {
         bottomSheetList = getActivity().findViewById(R.id.bottom_sheet);
         bottomSheetListBehavior = BottomSheetBehavior.from(bottomSheetList);
