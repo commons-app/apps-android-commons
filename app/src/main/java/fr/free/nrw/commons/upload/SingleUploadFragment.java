@@ -5,10 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -228,35 +230,64 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
      */
     @OnTouch(R.id.titleEdit)
     boolean titleInfo(View view, MotionEvent motionEvent) {
-        //Should replace right with end to support different right-to-left languages as well
-        final int value = titleEdit.getRight() - titleEdit.getCompoundDrawables()[2].getBounds().width();
-
-        if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() >= value) {
-            new AlertDialog.Builder(getContext())
-                    .setTitle(R.string.media_detail_title)
-                    .setMessage(R.string.title_info)
-                    .setCancelable(true)
-                    .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
-                    .create()
-                    .show();
-            return true;
+        final int value;
+        if (ViewCompat.getLayoutDirection(getView()) == ViewCompat.LAYOUT_DIRECTION_LTR) {
+            value = titleEdit.getRight() - titleEdit.getCompoundDrawables()[2].getBounds().width();
+            if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() >= value) {
+                new AlertDialog.Builder(getContext())
+                        .setTitle(R.string.media_detail_title)
+                        .setMessage(R.string.title_info)
+                        .setCancelable(true)
+                        .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
+                        .create()
+                        .show();
+                return true;
+            }
+        }
+        else {
+            value = titleEdit.getLeft() + titleEdit.getCompoundDrawables()[0].getBounds().width();
+            if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() <= value) {
+                new AlertDialog.Builder(getContext())
+                        .setTitle(R.string.media_detail_title)
+                        .setMessage(R.string.title_info)
+                        .setCancelable(true)
+                        .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
+                        .create()
+                        .show();
+                return true;
+            }
         }
         return false;
     }
 
     @OnTouch(R.id.descEdit)
     boolean descriptionInfo(View view, MotionEvent motionEvent) {
-        final int value = descEdit.getRight() - descEdit.getCompoundDrawables()[2].getBounds().width();
-
-        if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() >= value) {
-            new AlertDialog.Builder(getContext())
-                    .setTitle(R.string.media_detail_description)
-                    .setMessage(R.string.description_info)
-                    .setCancelable(true)
-                    .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
-                    .create()
-                    .show();
-            return true;
+        final int value;
+        if (ViewCompat.getLayoutDirection(getView()) == ViewCompat.LAYOUT_DIRECTION_LTR) {
+            value = descEdit.getRight() - descEdit.getCompoundDrawables()[2].getBounds().width();
+            if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() >= value) {
+                new AlertDialog.Builder(getContext())
+                        .setTitle(R.string.media_detail_description)
+                        .setMessage(R.string.description_info)
+                        .setCancelable(true)
+                        .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
+                        .create()
+                        .show();
+                return true;
+            }
+        }
+        else{
+            value = descEdit.getLeft() + descEdit.getCompoundDrawables()[0].getBounds().width();
+            if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() <= value) {
+                new AlertDialog.Builder(getContext())
+                        .setTitle(R.string.media_detail_description)
+                        .setMessage(R.string.description_info)
+                        .setCancelable(true)
+                        .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
+                        .create()
+                        .show();
+                return true;
+            }
         }
         return false;
     }
