@@ -189,9 +189,9 @@
   <string name="give_permission">Autorisatioun ginn</string>
   <string name="use_external_storage">Externe Späicher benotzen</string>
   <string name="use_external_storage_summary">Biller späicheren déi mat der in-app Kamera vun Ärem Apparat gemaach goufen</string>
+  <string name="login_to_your_account">An Äre Benotzerkont aloggen</string>
   <string name="send_log_file">Log-Fichier schécken</string>
   <string name="send_log_file_description">Log-Fichier per E-Mail un d\'Entwéckler schécken</string>
-  <string name="login_to_your_account">An Äre Benotzerkont aloggen</string>
   <string name="nearby_location_has_not_changed">De Plaz huet net geännert.</string>
   <string name="nearby_location_not_available">Plaz ass net disponibel.</string>
   <string name="read_article">ARTIKEL LIESEN</string>

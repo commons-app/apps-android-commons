@@ -199,12 +199,14 @@
   <string name="error_while_cache">Fejl under mellemlagring af billeder</string>
   <string name="title_info">En unik beskrivelse for filen, som vil fungere som et filnavn. Du kan bruge normalt sprog med mellemrum. Udelad filendelsen.</string>
   <string name="description_info">Beskriv mediet så godt som muligt: Hvor blev det taget? Hvad viser det? Hvad er konteksten? Beskriv objekterne eller personerne. Giv information som ikke nemt kan gættes, for eksempel hvornår på dagen billedet blev taget, om det er et landskabsbillede. Om billedet viser noget usædvanligt, forklar hvad som gør det usædvanlig.</string>
+  <string name="upload_image_too_dark">Billedet er for mørkt. Er du sikker på, at du ønsker at overføre det? Wikimedia Commons er kun for billeder encyklopædisk værdi.</string>
+  <string name="upload_image_blurry">Dette billede er sløret. Er du sikker på, at du ønsker at overføre det? Wikimedia Commons er kun for billeder med encyklopædisk værdi.</string>
   <string name="give_permission">Giv tilladelse</string>
   <string name="use_external_storage">Brug eksternt lager</string>
   <string name="use_external_storage_summary">Gem billeder taget med din enheds program på kameraet</string>
+  <string name="login_to_your_account">Log ind på din konto</string>
   <string name="send_log_file">Send logfil</string>
   <string name="send_log_file_description">Send logfil til udviklerne via e-post</string>
-  <string name="login_to_your_account">Log ind på din konto</string>
   <string name="nearby_location_has_not_changed">Sted er ikke ændret.</string>
   <string name="nearby_location_not_available">Sted ikke tilgængeligt.</string>
   <string name="location_permission_rationale_nearby">Tilladelse kræves for at vise en liste over steder i nærheden</string>

@@ -199,12 +199,14 @@
   <string name="error_while_cache">Υπήρξε σφάλμα κατά την σκίαση εικόνων</string>
   <string name="title_info">Ένας μοναδικός τίτλος περιγραφής του φακέλλου, που θα χρησιμεύσει ως όνομα φακέλλου. Μπορείτε να χρησιμοποιήσετε τις ήδη υπάρχουσες γλώσσες με διαστήματα. Μην συμπεριλάβετε την επέκταση φακέλλου</string>
   <string name="description_info">\nΠαρακαλώ περιγράψετε τα μέσα το δυνατό περισσότερο : Πού οδηγήθηκε αυτό; Τι δείχνει; Ποιο είναι το περιεχόμενο του; Παρακαλώ περιγράψετε τα αντικείμενα ή τα πρόσωπα. Αποκαλύψετε πληροφορίες που δεν μπορούν εύκολο να μαντέψει κανείς, για παράδειγμα την ώρα εντός της ημέρας αν πρόκειται για τοπίο. Αν τα μέσα δείξουν κάτι ασύνηθες, παρακαλώ εξηγήστε τι το καθιστά μη συνηθισμένα.</string>
+  <string name="upload_image_too_dark">Αυτή η εικόνα είναι πολύ σκοτεινή, είστε βέβαιοι ότι θέλετε να την ανεβάσετε; Το Wikimedia Commons είναι μόνο για εικόνες με εγκυκλοπαιδική αξία.</string>
+  <string name="upload_image_blurry">Αυτή η εικόνα είναι θολή, είστε βέβαιοι ότι θέλετε να την ανεβάσετε; Το Wikimedia Commons είναι μόνο για εικόνες με εγκυκλοπαιδική αξία.</string>
   <string name="give_permission">Χορηγήστε άδεια</string>
   <string name="use_external_storage">Χρησιμοποιήσετε την εξωτερική αποθήκευση</string>
   <string name="use_external_storage_summary">Αποθηκεύσετε εικόνες που παίρνονται στην κάμερα εφαρμογής στην συσκευή σας</string>
+  <string name="login_to_your_account">Συνδεθείτε στο λογαριασμό σας.</string>
   <string name="send_log_file">Αποστείλατε τον φάκελλο σύνδεσης</string>
   <string name="send_log_file_description">Στείλατε τον φάκελλο σύνδεσης στους δημιουργούς μέσω email</string>
-  <string name="login_to_your_account">Συνδεθείτε στο λογαριασμό σας.</string>
   <string name="nearby_location_has_not_changed">Ο εντοπισμός δεν έχει αλλάξει.</string>
   <string name="nearby_location_not_available">Ο τόπος δεν είναι διαθέσιμος.</string>
   <string name="location_permission_rationale_nearby">Απαιτείται άδεια για την εμφάνιση λίστας κοντινών σημείων</string>

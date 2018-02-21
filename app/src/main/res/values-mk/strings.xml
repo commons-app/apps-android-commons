@@ -199,12 +199,14 @@
   <string name="error_while_cache">Грешка при меѓускладирање на сликите</string>
   <string name="title_info">Краток и единствен наслов на податотеката, кој ќе служи како нејзин назив. Можете да користите прост јазик со меѓупростор, но не пишувајте ја податотечната наставка</string>
   <string name="description_info">Објаснете ја податотеката што подобро можете: Каде е направена? Што е прикажано на неа? Кој е контекстот? Опишете ги предметите, објектите и личностите. Дајте сознанија што не можат лесно да се погодат, како на пр. време од денот ако се работи за природен предел. Ако на неа е претставено нешто необично, објаснете зошто прикажаното е необично.</string>
+  <string name="upload_image_too_dark">Сликата ви е претемна. Дали сигурно сакате да ја подигнете? Ризницата е посветена само на слики со енциклопедиска вредност.</string>
+  <string name="upload_image_blurry">Сликата ви е матна. Дали сигурно сакате да ја подигнете? Ризницата е посветена само на слики со енциклопедиска вредност.</string>
   <string name="give_permission">Дај дозвола</string>
   <string name="use_external_storage">Користи надворешен склад</string>
   <string name="use_external_storage_summary">Зачувување на направените слики во прилогот со камерата на вашиот уред</string>
+  <string name="login_to_your_account">Најавете се со вашата сметка</string>
   <string name="send_log_file">Испрати дневничка податотека</string>
   <string name="send_log_file_description">Испрати дневничка податотека на разработувачите по е-пошта</string>
-  <string name="login_to_your_account">Најавете се со вашата сметка</string>
   <string name="nearby_location_has_not_changed">Местоположбата не е сменета.</string>
   <string name="nearby_location_not_available">Местоположбата е недостапна.</string>
   <string name="location_permission_rationale_nearby">Се бара дозвола за приказ на список на околни места</string>

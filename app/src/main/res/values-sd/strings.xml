@@ -176,9 +176,9 @@
   <string name="give_permission">اجازت ڏيو</string>
   <string name="use_external_storage">ٻاھري سنڀار استعمال ڪريو</string>
   <string name="use_external_storage_summary">ايپ ۾ ڪئمرا سان ڪڍيل تصويرون پنھنجي ڊوائيس تي سانڍيو</string>
+  <string name="login_to_your_account">پنھنجي کاتي ۾ داخل ٿيو</string>
   <string name="send_log_file">لاگ فائيل موڪليو</string>
   <string name="send_log_file_description">لاگ فائيل سرجڻھارن کي برقٽپال ذريعي موڪليو</string>
-  <string name="login_to_your_account">پنھنجي کاتي ۾ داخل ٿيو</string>
   <string name="nearby_location_has_not_changed">مڪانيت تبديلي ناھي ٿي.</string>
   <string name="nearby_location_not_available">مڪانيت موجود ناھي.</string>
   <string name="location_permission_rationale_nearby">ويجھين جڳھن جي فھرست ڏيکارڻ لاءِ اجازت گھربل آھي</string>
