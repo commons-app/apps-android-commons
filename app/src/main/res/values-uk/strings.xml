@@ -210,9 +210,9 @@
   <string name="give_permission">Надати дозвіл</string>
   <string name="use_external_storage">Використовувати зовнішнє сховище</string>
   <string name="use_external_storage_summary">Зберігати зображення, виконані вбудованою камерою Вашого пристрою</string>
+  <string name="login_to_your_account">Увійдіть у свій обліковий запис</string>
   <string name="send_log_file">Надіслати лог-файл</string>
   <string name="send_log_file_description">Надіслати лог-файл розробникам електронною поштою</string>
-  <string name="login_to_your_account">Увійдіть у свій обліковий запис</string>
   <string name="nearby_location_has_not_changed">Розташування не змінено</string>
   <string name="nearby_location_not_available">Місцезнаходження недоступне</string>
   <string name="location_permission_rationale_nearby">Потрібний дозвіл для показу списку місць поблизу</string>

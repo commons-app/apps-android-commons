@@ -106,6 +106,6 @@
   <string name="navigation_item_info">ٹیٹوریل</string>
   <string name="nearby_info_menu_wikidata_article">وکی ڈیٹا آئٹم</string>
   <string name="give_permission">اجازت ݙیوو</string>
-  <string name="send_log_file">لاگ فائل بھیجو</string>
   <string name="login_to_your_account">آپݨے کھاتے وچ لاگ ان تھیوو</string>
+  <string name="send_log_file">لاگ فائل بھیجو</string>
 </resources>

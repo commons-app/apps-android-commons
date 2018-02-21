@@ -199,12 +199,14 @@
   <string name="error_while_cache">Erro ao colocar imagens na cache</string>
   <string name="title_info">Um título descritivo exclusivo para o ficheiro, que servirá como um nome de ficheiro. Pode utilizar uma linguagem simples com espaços. Não inclua a extensão do ficheiro</string>
   <string name="description_info">Por favor, descreva o ficheiro da melhor forma possível: Onde foi tirado? O que isso mostra? Qual é o contexto? Por favor, descreva os objetos ou as pessoas. Indique as informações que não podem ser facilmente adivinhadas, por exemplo, a hora do dia, se for uma paisagem. Se o ficheiro mostrar algo incomum, explique o que torna incomum.</string>
+  <string name="upload_image_too_dark">Esta imagem está demasiada escura, tem a certeza de que deseja carregá-la? O Wikimedia Commons só aceita as imagens de valor enciclopédico.</string>
+  <string name="upload_image_blurry">Esta imagem está desfocada, tem a certeza de que deseja carregá-la? O Wikimedia Commons serve apenas para imagens de valor enciclopédico.</string>
   <string name="give_permission">Permitir</string>
   <string name="use_external_storage">Utilizar a armazenagem externa</string>
   <string name="use_external_storage_summary">Gravar as fotografias tiradas com a câmara da aplicação no seu dispositivo</string>
+  <string name="login_to_your_account">Inicie sessão na sua conta</string>
   <string name="send_log_file">Enviar ficheiro de registo</string>
   <string name="send_log_file_description">Enviar o ficheiro de registo aos programadores por correio eletrónico</string>
-  <string name="login_to_your_account">Inicie sessão na sua conta</string>
   <string name="nearby_location_has_not_changed">A localização não foi alterada.</string>
   <string name="nearby_location_not_available">A localização não está disponível.</string>
   <string name="location_permission_rationale_nearby">É necessária a permissão para mostrar uma lista dos sítios aqui perto</string>
