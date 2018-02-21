@@ -389,7 +389,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private void openWebBrowser(String url) {
         Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         //check if web browser available
-        if(browser.resolveActivity(getActivity().getPackageManager()) != null){
+        if (browser.resolveActivity(getActivity().getPackageManager()) != null) {
             startActivity(browser);
         } else {
             Toast toast = Toast.makeText(getContext(), getString(R.string.no_web_browser), LENGTH_SHORT);
