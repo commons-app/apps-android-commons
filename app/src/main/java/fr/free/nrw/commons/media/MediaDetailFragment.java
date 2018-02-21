@@ -37,6 +37,8 @@ import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.ui.widget.CompatTextView;
 import timber.log.Timber;
 
+import static android.widget.Toast.LENGTH_SHORT;
+
 public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     private boolean editable;
@@ -309,9 +311,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                 if(viewIntent.resolveActivity(getActivity().getPackageManager()) != null){
                     startActivity(viewIntent);
                 } else {
-                    CharSequence text = "No app found to open URL";
-                    int duration = Toast.LENGTH_SHORT;
-                    Toast toast = Toast.makeText(getContext(), text, duration);
+                    Toast toast = Toast.makeText(getContext(), getString(R.string.no_web_browser), LENGTH_SHORT);
                     toast.show();
                 }
             });
@@ -397,10 +397,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         if(browser.resolveActivity(getActivity().getPackageManager()) != null){
             startActivity(browser);
         } else {
-            CharSequence text = "No app found to open URL";
-            int duration = Toast.LENGTH_SHORT;
-
-            Toast toast = Toast.makeText(getContext(), text, duration);
+            Toast toast = Toast.makeText(getContext(), getString(R.string.no_web_browser), LENGTH_SHORT);
             toast.show();
         }
 

@@ -24,6 +24,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
+import static android.widget.Toast.LENGTH_SHORT;
+
 /**
  * Created by root on 18.12.2017.
  */
@@ -65,22 +67,17 @@ public class NotificationActivity extends NavigationBaseActivity {
     }
 
     private void handleUrl(String url) {
-
         if (url == null || url.equals("")) {
             return;
         }
-
         Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         //check if web browser available
         if(browser.resolveActivity(this.getPackageManager()) != null){
             startActivity(browser);
         } else {
-            CharSequence text = "No app found to open URL";
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(this, text, duration);
+            Toast toast = Toast.makeText(this, getString(R.string.no_web_browser), LENGTH_SHORT);
             toast.show();
         }
-
     }
 
     private void setAdapter(List<Notification> notificationList) {

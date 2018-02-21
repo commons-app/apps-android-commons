@@ -15,6 +15,8 @@ import butterknife.OnClick;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
 import fr.free.nrw.commons.ui.widget.HtmlTextView;
 
+import static android.widget.Toast.LENGTH_SHORT;
+
 /**
  * Represents about screen of this app
  */
@@ -57,10 +59,7 @@ public class AboutActivity extends NavigationBaseActivity {
             if(intent.resolveActivity(this.getPackageManager()) != null){
                 startActivity(intent);
             } else {
-                CharSequence text = "No app found to open URL";
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(this, text, duration);
+                Toast toast = Toast.makeText(this, getString(R.string.no_web_browser), LENGTH_SHORT);
                 toast.show();
             }
 
@@ -76,9 +75,7 @@ public class AboutActivity extends NavigationBaseActivity {
         if (browserIntent.resolveActivity(this.getPackageManager()) != null) {
             startActivity(browserIntent);
         } else {
-            CharSequence text = "No app found to open URL";
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(this, text, duration);
+            Toast toast = Toast.makeText(this, getString(R.string.no_web_browser), LENGTH_SHORT);
             toast.show();
         }
     }
@@ -91,9 +88,7 @@ public class AboutActivity extends NavigationBaseActivity {
         if (browserIntent.resolveActivity(this.getPackageManager()) != null) {
             startActivity(browserIntent);
         } else {
-            CharSequence text = "No app found to open URL";
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(this, text, duration);
+            Toast toast = Toast.makeText(this, getString(R.string.no_web_browser), LENGTH_SHORT);
             toast.show();
         }
     }

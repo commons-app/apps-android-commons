@@ -41,6 +41,7 @@ import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.content.Context.DOWNLOAD_SERVICE;
 import static android.content.Intent.ACTION_VIEW;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+import static android.widget.Toast.LENGTH_SHORT;
 
 public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment implements ViewPager.OnPageChangeListener {
 
@@ -123,10 +124,7 @@ public class MediaDetailPagerFragment extends CommonsDaggerSupportFragment imple
                 if(viewIntent.resolveActivity(getActivity().getPackageManager()) != null){
                     startActivity(viewIntent);
                 } else {
-                    CharSequence text = "No app found to open URL";
-                    int duration = Toast.LENGTH_SHORT;
-
-                    Toast toast = Toast.makeText(getContext(), text, duration);
+                    Toast toast = Toast.makeText(getContext(), getString(R.string.no_web_browser), LENGTH_SHORT);
                     toast.show();
                 }
 
