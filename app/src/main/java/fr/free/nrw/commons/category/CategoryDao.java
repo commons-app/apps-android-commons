@@ -108,10 +108,10 @@ public class CategoryDao {
     Category fromCursor(Cursor cursor) {
         // Hardcoding column positions!
         return new Category(
-                CategoryContentProvider.uriForId(cursor.getInt(0)),
-                cursor.getString(1),
-                new Date(cursor.getLong(2)),
-                cursor.getInt(3)
+                CategoryContentProvider.uriForId(cursor.getInt(cursor.getColumnIndex(Table.COLUMN_ID))),
+                    cursor.getString(cursor.getColumnIndex(Table.COLUMN_NAME)),
+                    new Date(cursor.getLong(cursor.getColumnIndex(Table.COLUMN_LAST_USED))),
+                    cursor.getInt(cursor.getColumnIndex(Table.COLUMN_TIMES_USED))
         );
     }
 
