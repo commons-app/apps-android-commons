@@ -3,7 +3,7 @@ people who want to contribute their code to this software are documented in
 [this project's Wiki](https://github.com/commons-app/apps-android-commons/wiki/Contributing-Guidelines).
 If you're not sure where to start head on to [this wiki page](https://github.com/commons-app/apps-android-commons/wiki/Volunteers-welcome!).
 
-Here's a jist of the guidelines,
+Here's a gist of the guidelines,
 
 # Make separate commits for logically separate changes
 
