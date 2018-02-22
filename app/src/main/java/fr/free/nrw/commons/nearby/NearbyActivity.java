@@ -260,6 +260,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     protected void onStart() {
         super.onStart();
         locationManager.addLocationListener(this);
+        locationManager.registerLocationManager();
     }
 
     @Override
@@ -335,6 +336,11 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                     .subscribe(this::populatePlaces);
         } else if (locationChangeType
                 .equals(LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED)) {
+            Gson gson = new GsonBuilder()
+                    .registerTypeAdapter(Uri.class, new UriSerializer())
+                    .create();
+            String gsonCurLatLng = gson.toJson(curLatLang);
+            bundle.putString("CurLatLng", gsonCurLatLng);
             updateMapFragment();
         }
 
@@ -362,10 +368,11 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         setListFragment();
 
         hideProgressBar();
+        lockNearbyView(false);
     }
 
     private void lockNearbyView(boolean lock) {
-        if (lock) {
+        /*if (lock) {
             lockNearbyView = true;
             locationManager.unregisterLocationManager();
             locationManager.removeLocationListener(this);
@@ -373,7 +380,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             lockNearbyView = false;
             locationManager.registerLocationManager();
             locationManager.addLocationListener(this);
-        }
+        }*/
     }
 
     private void hideProgressBar() {
@@ -387,8 +394,11 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     }
 
     private void updateMapFragment() {
-        getMapFragment().setArguments(bundle);
-        getMapFragment().updateMapWithLocationChanges();
+        NearbyMapFragment nearbyMapFragment = getMapFragment();
+        if (nearbyMapFragment != null) {
+            nearbyMapFragment.setArguments(bundle);
+            nearbyMapFragment.updateMapWithLocationChanges();
+        }
     }
 
     /**
