@@ -1,14 +1,20 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:fillViewport="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusableInTouchMode="true"
+        android:gravity="center">
+
+        <FrameLayout
         android:layout_width="400sp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/small_gap">
+        android:layout_gravity="center">
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
@@ -203,5 +209,7 @@
             app:srcCompat="@drawable/commons_logo_large" />
 
     </FrameLayout>
+
+    </RelativeLayout>
 
 </ScrollView>
