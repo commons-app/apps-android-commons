@@ -23,7 +23,7 @@ import timber.log.Timber;
 public class LocationServiceManager implements LocationListener {
     public static final int LOCATION_REQUEST = 1;
 
-    private static final long MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS = 2 * 60 * 1000;
+    private static final long MIN_LOCATION_UPDATE_REQUEST_TIME_IN_MILLIS = 2 * 60 * 100;
     private static final long MIN_LOCATION_UPDATE_REQUEST_DISTANCE_IN_METERS = 10;
 
     private Context context;
@@ -180,14 +180,14 @@ public class LocationServiceManager implements LocationListener {
             Log.d("deneme","location changed");
             if (isBetterLocation(location, lastLocation)
                     .equals(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)) {
-                Log.d("deneme","location changed better location");
+                Log.d("deneme","location SIGNIFICANTLY changed better location");
                 lastLocation = location;
                 for (LocationUpdateListener listener : locationListeners) {
                     listener.onLocationChangedSignificantly(LatLng.from(lastLocation));
                 }
             } else if (isBetterLocation(location, lastLocation)
                     .equals(LocationChangeType.LOCATION_SLIGHTLY_CHANGED)) {
-                Log.d("deneme","location changed better location");
+                Log.d("deneme","location SLIGHTLY changed better location");
                 lastLocation = location;
                 for (LocationUpdateListener listener : locationListeners) {
                     listener.onLocationChangedSlightly(LatLng.from(lastLocation));
