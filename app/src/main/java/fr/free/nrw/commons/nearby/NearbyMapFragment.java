@@ -13,6 +13,7 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,13 +30,16 @@ import com.google.gson.reflect.TypeToken;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
+import com.mapbox.mapboxsdk.annotations.Polygon;
 import com.mapbox.mapboxsdk.annotations.PolygonOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.constants.Style;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.services.android.telemetry.MapboxTelemetry;
 
 import java.lang.reflect.Type;
@@ -81,7 +85,10 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
 
     private Place place;
     private Marker selected;
-    private MarkerOptions currentLocationMarker;
+    private Marker currentLocationMarker;
+    private MapboxMap mapboxMap;
+    private PolygonOptions currentLocationPolygonOptions;
+    //private MarkerOptions currentLocationMarkerOptions;
 
     public NearbyMapFragment() {
     }
@@ -167,12 +174,37 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
 
     private void updateMapView() {
         // Change
-        ValueAnimator markerAnimator = ObjectAnimator.ofObject(currentLocationMarker, "position",
-                new LatLngEvaluator(), currentLocationMarker.getPosition(), curLatLng);
-        markerAnimator.setDuration(2000);
-        markerAnimator.start();
-    }
+        Log.d("deneme","updateMapView");
+        if (currentLocationMarker != null) {
+            LatLng curMapBoxLatLng = new LatLng(curLatLng.getLatitude(),curLatLng.getLongitude());
+            ValueAnimator markerAnimator = ObjectAnimator.ofObject(currentLocationMarker, "position",
+                    new LatLngEvaluator(), currentLocationMarker.getPosition(),
+                    curMapBoxLatLng);
+            markerAnimator.setDuration(1000);
+            markerAnimator.start();
 
+            List<LatLng> circle = createCircleArray(curLatLng.getLatitude(), curLatLng.getLongitude(),
+                    curLatLng.getAccuracy() * 2, 100);
+            if (currentLocationPolygonOptions != null){
+                mapboxMap.removePolygon(currentLocationPolygonOptions.getPolygon());
+                currentLocationPolygonOptions = new PolygonOptions()
+                        .addAll(circle)
+                        .strokeColor(Color.parseColor("#55000000"))
+                        .fillColor(Color.parseColor("#11000000"));
+                mapboxMap.addPolygon(currentLocationPolygonOptions);
+            }
+
+            // Make camera to follow user on location change
+            CameraPosition position = new CameraPosition.Builder()
+                    .target(curMapBoxLatLng) // Sets the new camera position
+                    .zoom(11) // Same zoom level
+                    .build();
+
+            mapboxMap.animateCamera(CameraUpdateFactory
+                    .newCameraPosition(position), 1000);
+        }
+    }
+    
     private void initViews() {
         bottomSheetList = getActivity().findViewById(R.id.bottom_sheet);
         bottomSheetListBehavior = BottomSheetBehavior.from(bottomSheetList);
@@ -278,6 +310,32 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         // create map
         mapView = new MapView(getActivity(), options);
         mapView.onCreate(savedInstanceState);
+        /*mapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(MapboxMap mapboxMap) {
+                NearbyMapFragment.this.mapboxMap = mapboxMap;
+                NearbyMapFragment.this.mapboxMap.addMarkers(baseMarkerOptions);
+
+                NearbyMapFragment.this.mapboxMap.setOnInfoWindowCloseListener(marker -> {
+                    if (marker == selected){
+                        bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                    }
+                });
+
+                NearbyMapFragment.this.mapboxMap.setOnMarkerClickListener(marker -> {
+                    if (marker instanceof NearbyMarker) {
+                        NearbyMapFragment.this.selected = marker;
+                        NearbyMarker nearbyMarker = (NearbyMarker) marker;
+                        Place place = nearbyMarker.getNearbyBaseMarker().getPlace();
+                        passInfoToSheet(place);
+                        bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                        bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                    }
+                    return false;
+                });
+                addCurrentLocationMarker(NearbyMapFragment.this.mapboxMap);
+            }
+        });*/
         mapView.getMapAsync(mapboxMap -> {
             mapboxMap.addMarkers(baseMarkerOptions);
 
@@ -300,6 +358,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
             });
 
             addCurrentLocationMarker(mapboxMap);
+            NearbyMapFragment.this.mapboxMap = mapboxMap;
         });
 
         mapView.setStyleUrl("asset://mapstyle.json");
@@ -312,20 +371,21 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
      * of 95%.
      */
     private void addCurrentLocationMarker(MapboxMap mapboxMap) {
-        MarkerOptions currentLocationMarker = new MarkerOptions()
+        MarkerOptions currentLocationMarkerOptions = new MarkerOptions()
                 .position(new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude()));
-        mapboxMap.addMarker(currentLocationMarker);
+        currentLocationMarker = mapboxMap.addMarker(currentLocationMarkerOptions);
 
         List<LatLng> circle = createCircleArray(curLatLng.getLatitude(), curLatLng.getLongitude(),
                 curLatLng.getAccuracy() * 2, 100);
 
-        mapboxMap.addPolygon(
-                new PolygonOptions()
-                        .addAll(circle)
-                        .strokeColor(Color.parseColor("#55000000"))
-                        .fillColor(Color.parseColor("#11000000"))
-        );
+        currentLocationPolygonOptions = new PolygonOptions()
+                .addAll(circle)
+                .strokeColor(Color.parseColor("#55000000"))
+                .fillColor(Color.parseColor("#11000000"));
+        mapboxMap.addPolygon(currentLocationPolygonOptions);
     }
+
+
 
     /**
      * Creates a series of points that create a circle on the map.
