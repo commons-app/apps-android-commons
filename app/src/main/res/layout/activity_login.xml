@@ -19,12 +19,16 @@
             android:layout_marginRight="@dimen/standard_gap"
             android:layout_marginStart="@dimen/standard_gap"
             android:layout_marginTop="@dimen/large_gap"
+            android:clickable="true"
+            android:focusableInTouchMode="true"
             app:cardCornerRadius="4dp"
             app:cardElevation="4dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusableInTouchMode="true"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -149,8 +153,8 @@
 
                     <Button
                         android:id="@+id/signupButton"
-                        android:layout_width="0dp"
                         style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginEnd="@dimen/small_gap"
@@ -160,8 +164,8 @@
 
                     <Button
                         android:id="@+id/loginButton"
-                        android:layout_width="0dp"
                         style="@style/Widget.AppCompat.Button.Colored"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/small_gap"
                         android:layout_marginStart="@dimen/small_gap"
@@ -188,19 +192,19 @@
         <android.support.v7.widget.AppCompatImageView
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:elevation="8dp"
-            tools:ignore="UnusedAttribute"
             android:layout_gravity="center_horizontal"
-            app:srcCompat="@drawable/blue_rinse_circle" />
+            android:elevation="8dp"
+            app:srcCompat="@drawable/blue_rinse_circle"
+            tools:ignore="UnusedAttribute" />
 
         <android.support.v7.widget.AppCompatImageView
             android:layout_width="42dp"
             android:layout_height="42dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp"
-            tools:ignore="UnusedAttribute"
             android:elevation="8dp"
-            app:srcCompat="@drawable/commons_logo_large" />
+            app:srcCompat="@drawable/commons_logo_large"
+            tools:ignore="UnusedAttribute" />
 
     </FrameLayout>
 
