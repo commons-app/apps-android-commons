@@ -42,17 +42,39 @@ public class NearbyController {
      * @param curLatLng current location for user
      * @return Place list without distance information
      */
-    public List<Place> loadAttractionsFromLocation(LatLng curLatLng) {
+    //public List<Place> loadAttractionsFromLocation(LatLng curLatLng) {
+    public NearbyPlacesInfo loadAttractionsFromLocation(LatLng curLatLng) {
         Timber.d("Loading attractions near %s", curLatLng);
+        NearbyPlacesInfo nearbyPlacesInfo = new NearbyPlacesInfo();
+        //LatLng[] cornerCoordinates = new LatLng[4];
+        //LatLng west, east, north, south = new LatLng(0,0,0);
         if (curLatLng == null) {
-            return Collections.emptyList();
+            //return Collections.emptyList();
+            return null;
         }
         List<Place> places = nearbyPlaces.getFromWikidataQuery(curLatLng, Locale.getDefault().getLanguage());
+        LatLng[] boundaryCoordinates = {places.get(0).location,   // south
+                                        places.get(0).location, // north
+                                        places.get(0).location, // west
+                                        places.get(0).location};// east, init with a random location
         if (curLatLng != null) {
             Timber.d("Sorting places by distance...");
             final Map<Place, Double> distances = new HashMap<>();
             for (Place place: places) {
                 distances.put(place, computeDistanceBetween(place.location, curLatLng));
+                // Find boundaries with basic find max approach
+                if (place.location.getLatitude() < boundaryCoordinates[0].getLatitude()) {
+                    boundaryCoordinates[0] = place.location;
+                }
+                if (place.location.getLatitude() > boundaryCoordinates[1].getLatitude()) {
+                    boundaryCoordinates[1] = place.location;
+                }
+                if (place.location.getLongitude() < boundaryCoordinates[2].getLongitude()) {
+                    boundaryCoordinates[2] = place.location;
+                }
+                if (place.location.getLongitude() > boundaryCoordinates[3].getLongitude()) {
+                    boundaryCoordinates[3] = place.location;
+                }
             }
             Collections.sort(places,
                     (lhs, rhs) -> {
@@ -62,7 +84,9 @@ public class NearbyController {
                     }
             );
         }
-        return places;
+        nearbyPlacesInfo.placeList = places;
+        nearbyPlacesInfo.boundaryCoordinates = boundaryCoordinates;
+        return nearbyPlacesInfo;
     }
 
     /**
@@ -122,5 +146,10 @@ public class NearbyController {
             baseMarkerOptions.add(nearbyBaseMarker);
         }
         return baseMarkerOptions;
+    }
+
+    public class NearbyPlacesInfo {
+        List<Place> placeList; // List of nearby places
+        LatLng[] boundaryCoordinates; // Corners of nearby area
     }
 }
