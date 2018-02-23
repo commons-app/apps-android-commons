@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">Uppladdning av %1$s misslyckades</string>
   <string name="upload_failed_notification_subtitle">Tryck för att visa</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d fil laddas upp</item>
-    <item quantity="other">%d filer laddas upp</item>
+    <item quantity="one">%1$d fil laddas upp</item>
+    <item quantity="other">%1$d filer laddas upp</item>
   </plurals>
   <string name="title_activity_contributions">Mina senaste uppladdningar</string>
   <string name="contribution_state_queued">Köade</string>
@@ -56,16 +56,16 @@
   <string name="contributions_subtitle_zero">Inga uppladdningar ännu</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d uppladdning</item>
-    <item quantity="other">%d uppladdningar</item>
+    <item quantity="one">%1$d uppladdning</item>
+    <item quantity="other">%1$d uppladdningar</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Startar %d uppladdning</item>
-    <item quantity="other">Startar %d uppladdningar</item>
+    <item quantity="one">Startar %1$d uppladdning</item>
+    <item quantity="other">Startar %1$d uppladdningar</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d uppladdning</item>
-    <item quantity="other">%d uppladdningar</item>
+    <item quantity="one">%1$d uppladdning</item>
+    <item quantity="other">%1$d uppladdningar</item>
   </plurals>
   <string name="categories_not_found">Inga kategorier som stämmer överens med %1$s hittades</string>
   <string name="categories_skip_explanation">Lägg till kategorier för att göra dina bilder enklare att hitta på Wikimedia Commons.\n\nBörja skriva för att lägga till kategorier.</string>
@@ -191,6 +191,7 @@
   <string name="navigation_item_feedback">Återkoppling</string>
   <string name="navigation_item_logout">Logga ut</string>
   <string name="navigation_item_info">Guide</string>
+  <string name="navigation_item_notification">Meddelanden</string>
   <string name="nearby_needs_permissions">Platser i närheten kan inte visas utan platsbehörigheter</string>
   <string name="no_description_found">ingen beskrivning hittades</string>
   <string name="nearby_info_menu_commons_article">Commons-filsida</string>
@@ -198,15 +199,22 @@
   <string name="error_while_cache">Fel uppstod när bilder cachelagras</string>
   <string name="title_info">En unik beskrivande titel för filen, som kommer att fungera som ett filnamn. Du kan använda klarspråk med mellanslag. Ta inte med filändelsen</string>
   <string name="description_info">Beskriv mediafilen så mycket som möjligt. Var togs den? Vad visar den? Vad är sammanhanget? Beskriv föremålen eller personerna. Ge information som inte kan gissas fram, t.ex. tidpunkten om det är ett landskap. Om mediafilen visar någonting ovanligt, förklara vad som gör den ovanlig.</string>
+  <string name="upload_image_too_dark">Denna bild är för mörk, är du säker på att du vill ladda upp den? Wikimedia Commons är endast till för bilder med encyklopediskt värde.</string>
+  <string name="upload_image_blurry">Denna bild är suddig, är du säker på att du vill ladda upp den? Wikimedia Commons är endast till för bilder med encyklopediskt värde.</string>
   <string name="give_permission">Ge behörighet</string>
   <string name="use_external_storage">Använd extern lagring</string>
   <string name="use_external_storage_summary">Spara bilder som tas med kameran i appen på din enhet</string>
+  <string name="login_to_your_account">Logga in på ditt konto</string>
   <string name="send_log_file">Skicka loggfil</string>
   <string name="send_log_file_description">Skicka loggfilen till utvecklarna via e-post</string>
-  <string name="login_to_your_account">Logga in på ditt konto</string>
   <string name="nearby_location_has_not_changed">Platsen har inte ändrats.</string>
   <string name="nearby_location_not_available">Platsen är inte tillgänglig.</string>
   <string name="location_permission_rationale_nearby">Behörighet krävs för att visa en lista över platser i närheten</string>
   <string name="get_directions">FÅ VÄGBESKRIVNINGAR</string>
   <string name="read_article">LÄS ARTIKEL</string>
+  <string name="notifications_welcome">Välkommen till Wikimedia Commons, %1$s! Vi är glada att du är här.</string>
+  <string name="notifications_talk_page_message">%1$s lämnade ett meddelande på din diskussionssida</string>
+  <string name="notifications_thank_you_edit">Tack för att du gjorde en redigering</string>
+  <string name="notifications_mention">%1$s nämnde dig på %2$s.</string>
+  <string name="toggle_view_button">Växla vy</string>
 </resources>

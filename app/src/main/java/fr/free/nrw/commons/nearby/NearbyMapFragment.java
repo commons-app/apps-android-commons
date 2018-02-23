@@ -76,6 +76,8 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     private void setupMapView(Bundle savedInstanceState) {
         MapboxMapOptions options = new MapboxMapOptions()
                 .styleUrl(Style.OUTDOORS)
+                .logoEnabled(false)
+                .attributionEnabled(false)
                 .camera(new CameraPosition.Builder()
                         .target(new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude()))
                         .zoom(11)

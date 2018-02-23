@@ -1,7 +1,7 @@
 package fr.free.nrw.commons.ui.widget;
 
-/**
- * Created by mikel on 07/08/2017.
+/*
+ *Created by mikel on 07/08/2017.
  */
 
 import android.content.Context;
@@ -20,20 +20,22 @@ import fr.free.nrw.commons.utils.UiUtils;
  * a text view compatible with older versions of the platform
  */
 public class CompatTextView extends AppCompatTextView {
-	
+
     /**
      * Constructs a new instance of CompatTextView
+     *
      * @param context the view context
      */
     public CompatTextView(Context context) {
         super(context);
         init(null);
     }
-    
+
     /**
      * Constructs a new instance of CompatTextView
+     *
      * @param context the view context
-     * @param attrs the set of attributes for the view
+     * @param attrs   the set of attributes for the view
      */
     public CompatTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -42,6 +44,7 @@ public class CompatTextView extends AppCompatTextView {
 
     /**
      * Constructs a new instance of CompatTextView
+     *
      * @param context
      * @param attrs
      * @param defStyleAttr
@@ -53,6 +56,7 @@ public class CompatTextView extends AppCompatTextView {
 
     /**
      * initializes the view
+     *
      * @param attrs the attribute set of the view, which can be null
      */
     private void init(@Nullable AttributeSet attrs) {

@@ -5,11 +5,15 @@ import android.support.annotation.Nullable;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
+import fr.free.nrw.commons.notification.Notification;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 
 public interface MediaWikiApi {
+    String getUserAgent();
+
     String getAuthCookie();
 
     void setAuthCookie(String authCookie);
@@ -44,12 +48,17 @@ public interface MediaWikiApi {
     Observable<String> allCategories(String filter, int searchCatsLimit);
 
     @NonNull
+    List<Notification> getNotifications() throws IOException;
+
+    @NonNull
     Observable<String> searchTitles(String title, int searchCatsLimit);
 
     @Nullable
     String revisionsByFilename(String filename) throws IOException;
 
     boolean existingFile(String fileSha1) throws IOException;
+
+
 
     @NonNull
     LogEventResult logEvents(String user, String lastModified, String queryContinue, int limit) throws IOException;

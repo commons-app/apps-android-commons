@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">%1$s ಅಪ್ಲೋಡ್ ಮಾಡುವಿಕೆ ವಿಫಲವಾಗಿದೆ</string>
   <string name="upload_failed_notification_subtitle">ನೋಡಲು ಮೆಲ್ಲಗೆ ತಟ್ಟಿ</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d ಕಡತ ಅಪ್ಲೋಡ್ ಅಗುತ್ತಿದೆ</item>
-    <item quantity="other">%d ಕಡತಗಳು ಅಪ್ಲೋಡ್ ಅಗುತ್ತಿದೆ</item>
+    <item quantity="one">%1$d ಕಡತ ಅಪ್ಲೋಡ್ ಅಗುತ್ತಿದೆ</item>
+    <item quantity="other">%1$d ಕಡತಗಳು ಅಪ್ಲೋಡ್ ಅಗುತ್ತಿದೆ</item>
   </plurals>
   <string name="title_activity_contributions">ನನ್ನ ಇತ್ತಿಚಿನ ಅಪ್ಲೋಡ್ಗಳು</string>
   <string name="contribution_state_queued">ಸರತಿಸಾಲಿನಲ್ಲಿದೆ</string>

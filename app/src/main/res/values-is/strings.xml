@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">Innsending á %1$s mistókst</string>
   <string name="upload_failed_notification_subtitle">Bankaðu til að skoða</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d skrá að sendast inn</item>
-    <item quantity="other">%d skrár að sendast inn</item>
+    <item quantity="one">%1$d skrá að sendast inn</item>
+    <item quantity="other">%1$d skrár að sendast inn</item>
   </plurals>
   <string name="title_activity_contributions">Nýlega innsendar skrár</string>
   <string name="contribution_state_queued">Í biðröð</string>
@@ -56,16 +56,16 @@
   <string name="contributions_subtitle_zero">Engar innsendingar ennþá</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d innsending</item>
-    <item quantity="other">%d innsendingar</item>
+    <item quantity="one">%1$d innsending</item>
+    <item quantity="other">%1$d innsendingar</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Byrja %d innsendingu</item>
-    <item quantity="other">Byrja %d innsendingar</item>
+    <item quantity="one">Byrja %1$d innsendingu</item>
+    <item quantity="other">Byrja %1$d innsendingar</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">%d innsending</item>
-    <item quantity="other">%d innsendingar</item>
+    <item quantity="one">%1$d innsending</item>
+    <item quantity="other">%1$d innsendingar</item>
   </plurals>
   <string name="categories_not_found">Engir flokkar sem samsvara %1$s fundust</string>
   <string name="categories_skip_explanation">Bættu við flokkum til að gera myndirnar þínar aðgengilegri á Wikimedia Commons\nByrjaðu að skrifa til að bæta við flokkum.</string>
@@ -74,7 +74,7 @@
   <string name="title_activity_signup">Nýskrá</string>
   <string name="menu_about">Um</string>
   <string name="about_license">Wikimedia Commons forritið er opinn og frjáls hugbúnaður sem gerður er og viðhaldið af stuðningsaðilum og sjálfboðaliðum Wikimedia samfélagsins. Wikimedia Foundation sjálfseignarstofnunin kemur ekki að gerð, forritun eða viðhaldi forritsins. \</string>
-  <string name="about_improve" fuzzy="true">&lt;a href=\"https://github.com/commons-app/apps-android-commons\"&gt;Grunnkóði&lt;/a&gt; og &lt;a href=\"https://commons-app.github.io/\"&gt;vefsvæði&lt;/a&gt; eru á GitHub. Útbúðu nýjar &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub tilkynningar (issue)&lt;/a&gt; til að koma villum og uppástungum á framfæri.</string>
+  <string name="about_improve">Útbúðu nýjar &lt;a href=\"https://github.com/commons-app/apps-android-commons/issues\"&gt;GitHub tilkynningar (issue)&lt;/a&gt; til að koma villum og uppástungum á framfæri.</string>
   <string name="about_privacy_policy">&lt;a href=\"https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\"&gt;Meðferð persónuupplýsinga&lt;/a&gt;</string>
   <string name="about_credits">&lt;a href=\"https://github.com/commons-app/apps-android-commons/blob/master/CREDITS\"&gt;Framlög&lt;/a&gt;</string>
   <string name="title_activity_about">Um</string>
@@ -164,6 +164,9 @@
   <string name="login_failed_2fa_not_supported">Tveggja-þrepa auðkenning er ekki studd í augnablikinu.</string>
   <string name="logout_verification">Viltu í alvörunni skrá þig út?</string>
   <string name="commons_logo">Táknmerki Commons</string>
+  <string name="commons_website">Commons vefsvæðið</string>
+  <string name="commons_facebook">Commons Facebook-síðan</string>
+  <string name="commons_github">Grunnkóði Commons á Github</string>
   <string name="background_image">Bakgrunnsmynd</string>
   <string name="mediaimage_failed">Mynd gagnamiðils brást</string>
   <string name="no_image_found">Engin mynd fannst</string>
@@ -188,6 +191,7 @@
   <string name="navigation_item_feedback">Umsagnir</string>
   <string name="navigation_item_logout">Útskráning</string>
   <string name="navigation_item_info">Kennsla</string>
+  <string name="navigation_item_notification">Tilkynningar</string>
   <string name="nearby_needs_permissions">Ekki er hægt að birta nálæga staði an heimildar til að ná í hnattstaðsetningu</string>
   <string name="no_description_found">engin lýsing fannst</string>
   <string name="nearby_info_menu_commons_article">Síða Commons-skrár</string>
@@ -195,15 +199,22 @@
   <string name="error_while_cache">Villa kom upp í skyndiminni mynda</string>
   <string name="title_info">Einstakur og lýsandi titill, sem mun verða skráarheiti. Þú mátt nota einfaldan texta með bilum. Ekki hafa með neina skráarendingu</string>
   <string name="description_info">Lýstu gögnunum eins vel og auðið er: Hvar er myndin tekin? Hvað sýnir hún? Hvert er samhengið? Lýstu fólki og fyrirbærum. Gefðu upp þær upplýsingar sem ekki er auðvelt að giska á, til dæmis á hvaða tíma dags myndin er tekin ef hún sýnir landslag. Ef gögnin sýna eitthvað óvenjulegt, útskýrðu þá hvað það er sem sé sérstakt.</string>
+  <string name="upload_image_too_dark">Þessi mynd er of dökk, ertu viss um að þú viljir senda hana inn? Wikimedia Commons er aðeins fyrir myndir sem hafa eitthvað fræðslugildi.</string>
+  <string name="upload_image_blurry">Þessi mynd er ekki skörp, ertu viss um að þú viljir senda hana inn? Wikimedia Commons er aðeins fyrir myndir sem hafa eitthvað fræðslugildi.</string>
   <string name="give_permission">Gefa heimild</string>
   <string name="use_external_storage">Nota ytri gagnageymslu</string>
   <string name="use_external_storage_summary">Vistaðu myndir sem teknar hafa verið með innbyggðu myndavélinni í tækinu þínu</string>
+  <string name="login_to_your_account">Skrá inn á aðganginn þinn</string>
   <string name="send_log_file">Senda atvikaskrá</string>
   <string name="send_log_file_description">Senda atvikaskrá til forritaranna með tölvupósti</string>
-  <string name="login_to_your_account">Skrá inn á aðganginn þinn</string>
   <string name="nearby_location_has_not_changed">Staðsetning hefur ekki breyst.</string>
   <string name="nearby_location_not_available">Staðsetning ekki tiltæk.</string>
   <string name="location_permission_rationale_nearby">Heimild þarf til að birta lista yfir staði í nágrenninu</string>
   <string name="get_directions">FÁ LEIÐSÖGN</string>
   <string name="read_article">LESA GREIN</string>
+  <string name="notifications_welcome">Velkomin á Wikimedia Commons, %1$s! Við erum ánægð með að þú skulir vera hérna.</string>
+  <string name="notifications_talk_page_message">%1$s skildi eftir skilaboð á spjallsíðunni þinni</string>
+  <string name="notifications_thank_you_edit">Takk fyrir að hafa gert breytingar</string>
+  <string name="notifications_mention">%1$s minntist á þig á %2$s.</string>
+  <string name="toggle_view_button">Víxla sýn</string>
 </resources>

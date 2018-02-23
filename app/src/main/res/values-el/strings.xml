@@ -22,7 +22,7 @@
   <string name="upload_failed_notification_subtitle">Πατήστε για να δείτε</string>
   <plurals name="uploads_pending_notification_indicator">
     <item quantity="one">1 αρχείο επιφορτώνεται</item>
-    <item quantity="other">%d αρχεία επιφορτώνονται</item>
+    <item quantity="other">%1$d αρχεία επιφορτώνονται</item>
   </plurals>
   <string name="title_activity_contributions">Οι Πρόσφατες Φορτώσεις Μου</string>
   <string name="contribution_state_queued">Στην ουρά</string>
@@ -56,16 +56,16 @@
   <string name="contributions_subtitle_zero">Δεν υπάρχουν ακόμα φορτωμένα αρχεία</string>
   <plurals name="contributions_subtitle">
     <item quantity="zero">Δεν υπάρχουν επιφορτώσεις ακόμη</item>
-    <item quantity="one">1 επιφόρτωση</item>
-    <item quantity="other">%d επιφορτώσεις</item>
+    <item quantity="one">%1$d επιφόρτωση</item>
+    <item quantity="other">%1$d επιφορτώσεις</item>
   </plurals>
   <plurals name="starting_multiple_uploads">
-    <item quantity="one">Έναρξη 1 επιφόρτωσης</item>
-    <item quantity="other">Έναρτξη %d επιφορτώσεων</item>
+    <item quantity="one">Έναρξη %1$d επιφόρτωσης</item>
+    <item quantity="other">Έναρξη %1$d επιφορτώσεων</item>
   </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">1 επιφόρτωση</item>
-    <item quantity="other">%d επιφορτώσεις</item>
+    <item quantity="one">%1$d επιφόρτωση</item>
+    <item quantity="other">%1$d επιφορτώσεις</item>
   </plurals>
   <string name="categories_not_found">Δεν βρέθηκαν κατηγορίες που ταιριάζουν %1$s</string>
   <string name="categories_skip_explanation">Προσθέστε κατηγορίες για να κάνετε τις εικόνες σας πιο ανιχνεύσιμες στα Wikimedia Commons.\n\nΑρχίστε να γράφετε για να προσθέσετε κατηγορίες.\nΠατήστε αυτό το μήνυμα (ή πατήστε επιστροφή) για να παραλείψετε αυτό το βήμα.</string>
@@ -191,6 +191,7 @@
   <string name="navigation_item_feedback">Σχόλια</string>
   <string name="navigation_item_logout">Αποσύνδεση</string>
   <string name="navigation_item_info">Σεμινάριο</string>
+  <string name="navigation_item_notification">Ενημερώσεις</string>
   <string name="nearby_needs_permissions">Οι κοντινές τοποθεσίες δεν μπορούν να προβληθούν δίχως τις άδειες τοποθεσίας</string>
   <string name="no_description_found">δεν βρέθηκε περιγραφή</string>
   <string name="nearby_info_menu_commons_article">Σελίδα φακέλλου κοινής χρήσης</string>
@@ -198,15 +199,22 @@
   <string name="error_while_cache">Υπήρξε σφάλμα κατά την σκίαση εικόνων</string>
   <string name="title_info">Ένας μοναδικός τίτλος περιγραφής του φακέλλου, που θα χρησιμεύσει ως όνομα φακέλλου. Μπορείτε να χρησιμοποιήσετε τις ήδη υπάρχουσες γλώσσες με διαστήματα. Μην συμπεριλάβετε την επέκταση φακέλλου</string>
   <string name="description_info">\nΠαρακαλώ περιγράψετε τα μέσα το δυνατό περισσότερο : Πού οδηγήθηκε αυτό; Τι δείχνει; Ποιο είναι το περιεχόμενο του; Παρακαλώ περιγράψετε τα αντικείμενα ή τα πρόσωπα. Αποκαλύψετε πληροφορίες που δεν μπορούν εύκολο να μαντέψει κανείς, για παράδειγμα την ώρα εντός της ημέρας αν πρόκειται για τοπίο. Αν τα μέσα δείξουν κάτι ασύνηθες, παρακαλώ εξηγήστε τι το καθιστά μη συνηθισμένα.</string>
+  <string name="upload_image_too_dark">Αυτή η εικόνα είναι πολύ σκοτεινή, είστε βέβαιοι ότι θέλετε να την ανεβάσετε; Το Wikimedia Commons είναι μόνο για εικόνες με εγκυκλοπαιδική αξία.</string>
+  <string name="upload_image_blurry">Αυτή η εικόνα είναι θολή, είστε βέβαιοι ότι θέλετε να την ανεβάσετε; Το Wikimedia Commons είναι μόνο για εικόνες με εγκυκλοπαιδική αξία.</string>
   <string name="give_permission">Χορηγήστε άδεια</string>
   <string name="use_external_storage">Χρησιμοποιήσετε την εξωτερική αποθήκευση</string>
   <string name="use_external_storage_summary">Αποθηκεύσετε εικόνες που παίρνονται στην κάμερα εφαρμογής στην συσκευή σας</string>
+  <string name="login_to_your_account">Συνδεθείτε στο λογαριασμό σας.</string>
   <string name="send_log_file">Αποστείλατε τον φάκελλο σύνδεσης</string>
   <string name="send_log_file_description">Στείλατε τον φάκελλο σύνδεσης στους δημιουργούς μέσω email</string>
-  <string name="login_to_your_account">Συνδεθείτε στο λογαριασμό σας.</string>
   <string name="nearby_location_has_not_changed">Ο εντοπισμός δεν έχει αλλάξει.</string>
   <string name="nearby_location_not_available">Ο τόπος δεν είναι διαθέσιμος.</string>
   <string name="location_permission_rationale_nearby">Απαιτείται άδεια για την εμφάνιση λίστας κοντινών σημείων</string>
   <string name="get_directions">Λάβετε κατευθύνσεις</string>
   <string name="read_article">Ανάγνωση άρθρου</string>
+  <string name="notifications_welcome">Καλωσήρθατε στο Wikimedia Commons, %1$s! Είμαστε χαρούμενοι που είστε εδώ.</string>
+  <string name="notifications_talk_page_message">Ο %1$s άφησε ένα μήνυμα στην σελίδα συζήτησής σας</string>
+  <string name="notifications_thank_you_edit">Ευχαριστούμε που κάνατε μια επεξεργασία</string>
+  <string name="notifications_mention">Ο %1$s σας ανέφερε στο %2$s.</string>
+  <string name="toggle_view_button">Μεταβολή προβολής</string>
 </resources>

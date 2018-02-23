@@ -21,8 +21,8 @@
   <string name="upload_failed_notification_title">Ne mogu da otpremim „%1$s“</string>
   <string name="upload_failed_notification_subtitle">Tapnite da biste videli</string>
   <plurals name="uploads_pending_notification_indicator">
-    <item quantity="one">%d datoteka se otprema</item>
-    <item quantity="other">%d datoteke se otpremaju</item>
+    <item quantity="one">%1$d datoteka se otprema</item>
+    <item quantity="other">%1$d datoteke se otpremaju</item>
   </plurals>
   <string name="title_activity_contributions">Moja skorašnja otpremanja</string>
   <string name="contribution_state_queued">Na čekanju</string>
@@ -54,18 +54,18 @@
   <string name="gps_disabled">GPS je onemogućen na Vašem uređaju. Želite li ga omogućiti?</string>
   <string name="enable_gps">Omogući GPS</string>
   <string name="contributions_subtitle_zero">Još uvek nema otpremanja</string>
-  <plurals name="contributions_subtitle">
+  <plurals name="contributions_subtitle" fuzzy="true">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
-    <item quantity="one">%d otpremanje</item>
-    <item quantity="other">%d otpremanja</item>
+    <item quantity="one">%1$d otpremanje</item>
+    <item quantity="other">%1$d otpremanja</item>
   </plurals>
-  <plurals name="starting_multiple_uploads">
-    <item quantity="one">Započni %d otpremanje</item>
-    <item quantity="other">Započni %d otpremanja</item>
+  <plurals name="starting_multiple_uploads" fuzzy="true">
+    <item quantity="one">Započni %1$d otpremanje</item>
+    <item quantity="other">Započni %1$d otpremanja</item>
   </plurals>
-  <plurals name="multiple_uploads_title">
-    <item quantity="one">%d otpremanje</item>
-    <item quantity="other">%d otpremanja</item>
+  <plurals name="multiple_uploads_title" fuzzy="true">
+    <item quantity="one">%1$d otpremanje</item>
+    <item quantity="other">%1$d otpremanja</item>
   </plurals>
   <string name="categories_not_found">Nema kategorija koje odgovaraju %1$s</string>
   <string name="categories_skip_explanation">Dodajte kategorije na slike da biste olakšali korisnicima njihovo pronalaženje na Ostavi.\n\nDa biste dodali kategoriju, počnite sa pisanjem njenog imena.</string>
@@ -188,6 +188,7 @@
   <string name="navigation_item_feedback">Povratne informacije</string>
   <string name="navigation_item_logout">Odjavi me</string>
   <string name="navigation_item_info">Tutorijal</string>
+  <string name="navigation_item_notification">Obaveštenja</string>
   <string name="nearby_needs_permissions">Obližnja mesta ne mogu da se prikazuju bez dozvola za lokaciju</string>
   <string name="no_description_found">opis nije pronađen</string>
   <string name="nearby_info_menu_commons_article">Stranica datoteke na Ostavi</string>
@@ -198,10 +199,11 @@
   <string name="give_permission">Davanje dozvole</string>
   <string name="use_external_storage">Upotreba spoljašnjeg skladišta</string>
   <string name="use_external_storage_summary">Spremanje slika napravljenih kamerom aplikacije na Vašem uređaju</string>
+  <string name="login_to_your_account">Prijavite se na svoj nalog</string>
   <string name="send_log_file">Pošalji dnevničku datoteku</string>
   <string name="send_log_file_description">Pošalji dnevničku datoteku developerima preko imejla</string>
-  <string name="login_to_your_account">Prijavite se na svoj nalog</string>
   <string name="nearby_location_has_not_changed">Lokacija nije promenjena.</string>
   <string name="nearby_location_not_available">Lokacija nije dostupna.</string>
   <string name="location_permission_rationale_nearby">Potrebna je dozvola za prikazivanje liste lokacija u blizini</string>
+  <string name="notifications_welcome">Dobrodošli na Wikimedia Commons, %1$s! Drago nam je da ste ovdje.</string>
 </resources>

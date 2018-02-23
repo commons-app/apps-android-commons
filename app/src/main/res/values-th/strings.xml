@@ -20,7 +20,7 @@
   <string name="upload_progress_notification_title_finishing">กำลังเสร็จสิ้นการอัปโหลด %1$s</string>
   <string name="upload_failed_notification_title">การอัปโหลด %1$s ล้มเหลว</string>
   <string name="upload_failed_notification_subtitle">แตะเพื่อดู</string>
-  <string name="uploads_pending_notification_indicator">กำลังอัปโหลดไฟล์ %d ไฟล์</string>
+  <string name="uploads_pending_notification_indicator">กำลังอัปโหลดไฟล์ %1$d ไฟล์</string>
   <string name="title_activity_contributions">การอัปโหลดล่าสุดของฉัน</string>
   <string name="contribution_state_queued">อยู่ในคิว</string>
   <string name="contribution_state_failed">ล้มเหลว</string>
@@ -51,11 +51,14 @@
   <string name="gps_disabled">GPS ถูกปิดใช้งานในอุปกรณ์ของคุณอยู่ คุณต้องการเปิดใช้งานหรือไม่?</string>
   <string name="enable_gps">เปิดใช้งาน GPS</string>
   <string name="contributions_subtitle_zero">ยังไม่มีการอัปโหลด</string>
-  <string name="contributions_subtitle">การอัปโหลด %d รายการ</string>
-  <string name="starting_multiple_uploads">กำลังเริ่มการอัปโหลด %d รายการ</string>
+  <string name="contributions_subtitle">การอัปโหลด %1$d รายการ</string>
+  <plurals name="starting_multiple_uploads">
+    <item quantity="one">กำลังเริ่มอัปโหลด %1$d รายการ</item>
+    <item quantity="other">กำลังเริ่มอัปโหลด %1$d รายการ</item>
+  </plurals>
   <plurals name="multiple_uploads_title">
-    <item quantity="one">การอัปโหลด %d รายการ</item>
-    <item quantity="other">การอัปโหลด %d รายการ</item>
+    <item quantity="one">การอัปโหลด %1$d รายการ</item>
+    <item quantity="other">การอัปโหลด %1$d รายการ</item>
   </plurals>
   <string name="categories_not_found">ไม่พบหมวดหมู่ที่ตรงกับ %$1s</string>
   <string name="categories_skip_explanation" fuzzy="true">เพิ่มหมวดหมู่เพื่อทำให้รูปภาพของคุณค้นพบได้ง่ายขึ้นบน Wikimedia Commons\n\nเริ่มพิมพ์เพื่อเพิ่มหมวดหมู่\nแตะข้อความนี้ (หรือกดปุ่มย้อนกลับ) เพื่อข้ามขั้นตอนนี้</string>
