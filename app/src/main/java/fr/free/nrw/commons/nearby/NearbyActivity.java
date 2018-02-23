@@ -341,17 +341,21 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                     .create();
             String gsonCurLatLng = gson.toJson(curLatLang);
             bundle.putString("CurLatLng", gsonCurLatLng);
-            updateMapFragment();
+            updateMapFragment(true);
         }
 
     }
 
-    private void populatePlaces(List<Place> placeList) {
+    //private void populatePlaces(List<Place> placeList) {
+    private void populatePlaces(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
+        List<Place> placeList = nearbyPlacesInfo.placeList;
+        LatLng[] boundaryCoordinates = nearbyPlacesInfo.boundaryCoordinates;
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Uri.class, new UriSerializer())
                 .create();
         String gsonPlaceList = gson.toJson(placeList);
         String gsonCurLatLng = gson.toJson(curLatLang);
+        String gsonBoundaryCoordinates = gson.toJson(boundaryCoordinates);
 
         if (placeList.size() == 0) {
             int duration = Toast.LENGTH_SHORT;
@@ -362,13 +366,20 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         bundle.clear();
         bundle.putString("PlaceList", gsonPlaceList);
         bundle.putString("CurLatLng", gsonCurLatLng);
+        bundle.putString("BoundaryCoord", gsonBoundaryCoordinates);
 
-        lockNearbyView(true);
-        setMapFragment();
-        setListFragment();
+        // First time to init fragments
+        if (getMapFragment() == null){
+            lockNearbyView(true);
+            setMapFragment();
+            setListFragment();
 
-        hideProgressBar();
-        lockNearbyView(false);
+            hideProgressBar();
+            lockNearbyView(false);
+        } else { // There are fragments, just update the map and list
+            updateMapFragment(false);
+        }
+
     }
 
     private void lockNearbyView(boolean lock) {
@@ -393,11 +404,38 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         return (NearbyMapFragment) getSupportFragmentManager().findFragmentByTag("NearbyMapFragment");
     }
 
-    private void updateMapFragment() {
+    private void updateMapFragment(boolean isSlightUpdate) {
+        /*
+        * Significant update means updating nearby place markers. Slightly update means only
+        * updating current location marker and camera target.
+        * We update our map Significantly on each 1000 meter change, but we can't never know
+        * the frequency of nearby places. Thus we check if we are close to the boundaries of
+        * our nearby markers, we update our map Significantly.
+        * */
+
         NearbyMapFragment nearbyMapFragment = getMapFragment();
         if (nearbyMapFragment != null) {
-            nearbyMapFragment.setArguments(bundle);
-            nearbyMapFragment.updateMapWithLocationChanges();
+            // TODO: buradasın eger sınırlara yakınsan significant update yap ve methodların adlarını değiştir.
+            /*
+            * If we are close to nearby places boundaries, we need a significant update to
+            * get new nearby places. Check order is south, north, west, east
+            * */
+            if (curLatLang.getLatitude() <= nearbyMapFragment.boundaryCoordinates[0].getLatitude()
+                    || curLatLang.getLatitude() >= nearbyMapFragment.boundaryCoordinates[1].getLatitude()
+                    || curLatLang.getLatitude() <= nearbyMapFragment.boundaryCoordinates[2].getLatitude()
+                    || curLatLang.getLatitude() >= nearbyMapFragment.boundaryCoordinates[3].getLatitude()) {
+                nearbyMapFragment.setArguments(bundle);
+                nearbyMapFragment.updateMapSignificantly();
+                return;
+            }
+
+            if (isSlightUpdate) {
+                nearbyMapFragment.setArguments(bundle);
+                nearbyMapFragment.updateMapSlightly();
+            } else {
+                nearbyMapFragment.setArguments(bundle);
+                nearbyMapFragment.updateMapSignificantly();
+            }
         }
     }
 

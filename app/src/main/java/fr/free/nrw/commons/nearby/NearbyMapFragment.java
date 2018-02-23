@@ -52,7 +52,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     private MapView mapView;
     private List<NearbyBaseMarker> baseMarkerOptions;
     private fr.free.nrw.commons.location.LatLng curLatLng;
-    private fr.free.nrw.commons.location.LatLng[] boundaryCoordinations;
+    public fr.free.nrw.commons.location.LatLng[] boundaryCoordinates;
     // Latest significant update means update of nearby markers
     private fr.free.nrw.commons.location.LatLng latestSignificantUpdate;
 
@@ -116,11 +116,11 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
                     .loadAttractionsFromLocationToBaseMarkerOptions(curLatLng,
                             placeList,
                             getActivity());
-            boundaryCoordinations = gson.fromJson(gsonBoundaryCoordinates, gsonBoundaryCoordinatesType);
-            Log.d("deneme",boundaryCoordinations[0].getLatitude()+","+boundaryCoordinations[0].getLongitude());
-            Log.d("deneme",boundaryCoordinations[1].getLatitude()+","+boundaryCoordinations[1].getLongitude());
-            Log.d("deneme",boundaryCoordinations[2].getLatitude()+","+boundaryCoordinations[2].getLongitude());
-            Log.d("deneme",boundaryCoordinations[3].getLatitude()+","+boundaryCoordinations[3].getLongitude());
+            boundaryCoordinates = gson.fromJson(gsonBoundaryCoordinates, gsonBoundaryCoordinatesType);
+            Log.d("deneme", boundaryCoordinates[0].getLatitude()+","+ boundaryCoordinates[0].getLongitude());
+            Log.d("deneme", boundaryCoordinates[1].getLatitude()+","+ boundaryCoordinates[1].getLongitude());
+            Log.d("deneme", boundaryCoordinates[2].getLatitude()+","+ boundaryCoordinates[2].getLongitude());
+            Log.d("deneme", boundaryCoordinates[3].getLatitude()+","+ boundaryCoordinates[3].getLongitude());
         }
         Mapbox.getInstance(getActivity(),
                 getString(R.string.mapbox_commons_app_token));
@@ -198,7 +198,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
                     .loadAttractionsFromLocationToBaseMarkerOptions(curLatLng,
                             placeList,
                             getActivity());
-            boundaryCoordinations = gson.fromJson(gsonBoundaryCoordinates, gsonBoundaryCoordinatesType);
+            boundaryCoordinates = gson.fromJson(gsonBoundaryCoordinates, gsonBoundaryCoordinatesType);
         }
         updateMapToTrackPosition();
         addNearbyMarkerstoMapBoxMap();
