@@ -75,8 +75,8 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
             //What happens when the 'submit' icon is tapped
             case R.id.menu_upload_single:
 
-                String title = titleEdit.getText().toString();
-                String desc = descEdit.getText().toString();
+                String title = titleEdit.getText().toString().trim();
+                String desc = descEdit.getText().toString().trim();
 
                 //Save the title/desc in short-lived cache so next time this fragment is loaded, we can access these
                 prefs.edit()
@@ -196,7 +196,7 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
         setLicenseSummary(license);
         prefs.edit()
                 .putString(Prefs.DEFAULT_LICENSE, license)
-                .commit();
+                .apply();
     }
 
     @OnTouch(R.id.share_license_summary)
