@@ -39,6 +39,7 @@ public class NearbyListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Timber.d("NearbyListFragment: onCreate");
         setRetainInstance(true);
     }
 
@@ -52,7 +53,7 @@ public class NearbyListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
-        Timber.d("NearbyListFragment created");
+        Timber.d("NearbyListFragment onCreateView");
         View view = inflater.inflate(R.layout.fragment_nearby, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.listView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -66,6 +67,7 @@ public class NearbyListFragment extends Fragment {
         // to avoid double list when screen orientation changed
         List<Place> placeList = Collections.emptyList();
 
+        Timber.d("NearbyListFragment onViewCreated");
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             String gsonPlaceList = bundle.getString("PlaceList", "[]");
