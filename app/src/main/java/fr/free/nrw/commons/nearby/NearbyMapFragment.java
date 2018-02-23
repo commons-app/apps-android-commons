@@ -30,7 +30,6 @@ import com.google.gson.reflect.TypeToken;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
-import com.mapbox.mapboxsdk.annotations.Polygon;
 import com.mapbox.mapboxsdk.annotations.PolygonOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
@@ -39,7 +38,6 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
-import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.services.android.telemetry.MapboxTelemetry;
 
 import java.lang.reflect.Type;
@@ -47,7 +45,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.utils.UriDeserializer;
 
 public class NearbyMapFragment extends android.support.v4.app.Fragment {
@@ -168,8 +165,8 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         });
     }
 
-    public void updateMapWithLocationChanges() {
-// Get arguments from bundle for new location
+    public void updateMapSlightly() {
+    // Get arguments from bundle for new location
         Bundle bundle = this.getArguments();
         Gson gson = new GsonBuilder()
             .registerTypeAdapter(Uri.class, new UriDeserializer())
@@ -180,13 +177,37 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
             curLatLng = gson.fromJson(gsonLatLng, curLatLngType);
         }
 
-        updateMapView();
+        updateMapToTrackPosition();
+    }
+
+    public void updateMapSignificantly() {
+        Bundle bundle = this.getArguments();
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Uri.class, new UriDeserializer())
+                .create();
+        if (bundle != null) {
+            String gsonPlaceList = bundle.getString("PlaceList");
+            String gsonLatLng = bundle.getString("CurLatLng");
+            String gsonBoundaryCoordinates = bundle.getString("BoundaryCoord");
+            Type listType = new TypeToken<List<Place>>() {}.getType();
+            List<Place> placeList = gson.fromJson(gsonPlaceList, listType);
+            Type curLatLngType = new TypeToken<fr.free.nrw.commons.location.LatLng>() {}.getType();
+            Type gsonBoundaryCoordinatesType = new TypeToken<fr.free.nrw.commons.location.LatLng[]>() {}.getType();
+            curLatLng = gson.fromJson(gsonLatLng, curLatLngType);
+            baseMarkerOptions = NearbyController
+                    .loadAttractionsFromLocationToBaseMarkerOptions(curLatLng,
+                            placeList,
+                            getActivity());
+            boundaryCoordinations = gson.fromJson(gsonBoundaryCoordinates, gsonBoundaryCoordinatesType);
+        }
+        updateMapToTrackPosition();
+        addNearbyMarkerstoMapBoxMap();
     }
 
     // Only update current position marker and camera view
-    private void updateMapView() {
+    private void updateMapToTrackPosition() {
         // Change
-        Log.d("deneme","updateMapView");
+        Log.d("deneme","updateMapToTrackPosition");
         if (currentLocationMarker != null) {
             LatLng curMapBoxLatLng = new LatLng(curLatLng.getLatitude(),curLatLng.getLongitude());
             ValueAnimator markerAnimator = ObjectAnimator.ofObject(currentLocationMarker, "position",
@@ -348,32 +369,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
                 addCurrentLocationMarker(NearbyMapFragment.this.mapboxMap);
             }
         });*/
-        mapView.getMapAsync(mapboxMap -> {
-            mapboxMap.addMarkers(baseMarkerOptions);
-
-            mapboxMap.setOnInfoWindowCloseListener(marker -> {
-                if (marker == selected){
-                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                }
-            });
-
-            mapboxMap.setOnMarkerClickListener(marker -> {
-                if (marker instanceof NearbyMarker) {
-                    this.selected = marker;
-                    NearbyMarker nearbyMarker = (NearbyMarker) marker;
-                    Place place = nearbyMarker.getNearbyBaseMarker().getPlace();
-                    passInfoToSheet(place);
-                    bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                }
-                return false;
-            });
-
-            addCurrentLocationMarker(mapboxMap);
-            NearbyMapFragment.this.mapboxMap = mapboxMap;
-        });
-
-        mapView.setStyleUrl("asset://mapstyle.json");
+        addNearbyMarkerstoMapBoxMap();
     }
 
     /**
@@ -400,6 +396,35 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
                 .fillColor(Color.parseColor("#11000000"));
         mapboxMap.addPolygon(currentLocationPolygonOptions);
         latestSignificantUpdate = curLatLng; // To remember the last point we update nearby markers
+    }
+
+    private void addNearbyMarkerstoMapBoxMap() {
+        mapView.getMapAsync(mapboxMap -> {
+            mapboxMap.addMarkers(baseMarkerOptions);
+
+            mapboxMap.setOnInfoWindowCloseListener(marker -> {
+                if (marker == selected){
+                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                }
+            });
+
+            mapboxMap.setOnMarkerClickListener(marker -> {
+                if (marker instanceof NearbyMarker) {
+                    this.selected = marker;
+                    NearbyMarker nearbyMarker = (NearbyMarker) marker;
+                    Place place = nearbyMarker.getNearbyBaseMarker().getPlace();
+                    passInfoToSheet(place);
+                    bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                }
+                return false;
+            });
+
+            addCurrentLocationMarker(mapboxMap);
+            NearbyMapFragment.this.mapboxMap = mapboxMap;
+        });
+
+        mapView.setStyleUrl("asset://mapstyle.json");
     }
 
 
