@@ -422,8 +422,8 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             * */
             if (curLatLang.getLatitude() <= nearbyMapFragment.boundaryCoordinates[0].getLatitude()
                     || curLatLang.getLatitude() >= nearbyMapFragment.boundaryCoordinates[1].getLatitude()
-                    || curLatLang.getLatitude() <= nearbyMapFragment.boundaryCoordinates[2].getLatitude()
-                    || curLatLang.getLatitude() >= nearbyMapFragment.boundaryCoordinates[3].getLatitude()) {
+                    || curLatLang.getLongitude() <= nearbyMapFragment.boundaryCoordinates[2].getLongitude()
+                    || curLatLang.getLongitude() >= nearbyMapFragment.boundaryCoordinates[3].getLongitude()) {
                 nearbyMapFragment.setArguments(bundle);
                 nearbyMapFragment.updateMapSignificantly();
                 return;
