@@ -47,6 +47,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.location.LocationServiceManager;
 import fr.free.nrw.commons.utils.UriDeserializer;
 
 public class NearbyMapFragment extends android.support.v4.app.Fragment {
@@ -54,6 +55,10 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     private MapView mapView;
     private List<NearbyBaseMarker> baseMarkerOptions;
     private fr.free.nrw.commons.location.LatLng curLatLng;
+    private fr.free.nrw.commons.location.LatLng[] boundaryCoordinations;
+    // Latest significant update means update of nearby markers
+    private fr.free.nrw.commons.location.LatLng latestSignificantUpdate;
+
     private View bottomSheetList;
     private View bottomSheetDetails;
 
@@ -88,7 +93,6 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     private Marker currentLocationMarker;
     private MapboxMap mapboxMap;
     private PolygonOptions currentLocationPolygonOptions;
-    //private MarkerOptions currentLocationMarkerOptions;
 
     public NearbyMapFragment() {
     }
@@ -105,14 +109,21 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         if (bundle != null) {
             String gsonPlaceList = bundle.getString("PlaceList");
             String gsonLatLng = bundle.getString("CurLatLng");
+            String gsonBoundaryCoordinates = bundle.getString("BoundaryCoord");
             Type listType = new TypeToken<List<Place>>() {}.getType();
             List<Place> placeList = gson.fromJson(gsonPlaceList, listType);
             Type curLatLngType = new TypeToken<fr.free.nrw.commons.location.LatLng>() {}.getType();
+            Type gsonBoundaryCoordinatesType = new TypeToken<fr.free.nrw.commons.location.LatLng[]>() {}.getType();
             curLatLng = gson.fromJson(gsonLatLng, curLatLngType);
             baseMarkerOptions = NearbyController
                     .loadAttractionsFromLocationToBaseMarkerOptions(curLatLng,
                             placeList,
                             getActivity());
+            boundaryCoordinations = gson.fromJson(gsonBoundaryCoordinates, gsonBoundaryCoordinatesType);
+            Log.d("deneme",boundaryCoordinations[0].getLatitude()+","+boundaryCoordinations[0].getLongitude());
+            Log.d("deneme",boundaryCoordinations[1].getLatitude()+","+boundaryCoordinations[1].getLongitude());
+            Log.d("deneme",boundaryCoordinations[2].getLatitude()+","+boundaryCoordinations[2].getLongitude());
+            Log.d("deneme",boundaryCoordinations[3].getLatitude()+","+boundaryCoordinations[3].getLongitude());
         }
         Mapbox.getInstance(getActivity(),
                 getString(R.string.mapbox_commons_app_token));
@@ -172,6 +183,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         updateMapView();
     }
 
+    // Only update current position marker and camera view
     private void updateMapView() {
         // Change
         Log.d("deneme","updateMapView");
@@ -204,7 +216,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
                     .newCameraPosition(position), 1000);
         }
     }
-    
+
     private void initViews() {
         bottomSheetList = getActivity().findViewById(R.id.bottom_sheet);
         bottomSheetListBehavior = BottomSheetBehavior.from(bottomSheetList);
@@ -369,6 +381,10 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
      * circle which uses the accuracy * 2, to draw a circle
      * which represents the user's position with an accuracy
      * of 95%.
+     *
+     * Should be called only on creation of mapboxMap, there
+     * is other method to update markers location with users
+     * move.
      */
     private void addCurrentLocationMarker(MapboxMap mapboxMap) {
         MarkerOptions currentLocationMarkerOptions = new MarkerOptions()
@@ -383,6 +399,7 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
                 .strokeColor(Color.parseColor("#55000000"))
                 .fillColor(Color.parseColor("#11000000"));
         mapboxMap.addPolygon(currentLocationPolygonOptions);
+        latestSignificantUpdate = curLatLng; // To remember the last point we update nearby markers
     }
 
 
