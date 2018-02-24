@@ -19,6 +19,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.ui.widget.OverlayDialog;
 import fr.free.nrw.commons.utils.DialogUtil;
@@ -143,13 +144,7 @@ public class NearbyInfoDialog extends OverlayDialog {
     }
 
     private void openWebView(Uri link) {
-        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
-        builder.setToolbarColor(ContextCompat.getColor(getContext(), R.color.primaryColor));
-        builder.setSecondaryToolbarColor(ContextCompat.getColor(getContext(), R.color.primaryDarkColor));
-        builder.setExitAnimations(getContext(), android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-        CustomTabsIntent customTabsIntent = builder.build();
-        customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        customTabsIntent.launchUrl(getContext(), link);
+        Utils.handleWebUrl(getContext(),link);
     }
 
     @OnClick(R.id.emptyLayout)
