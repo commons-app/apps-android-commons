@@ -20,6 +20,8 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.mapbox.mapboxsdk.maps.MapboxMap;
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
 import java.util.List;
 
@@ -383,7 +385,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     }
 
     private void lockNearbyView(boolean lock) {
-        /*if (lock) {
+        if (lock) {
             lockNearbyView = true;
             locationManager.unregisterLocationManager();
             locationManager.removeLocationListener(this);
@@ -391,7 +393,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             lockNearbyView = false;
             locationManager.registerLocationManager();
             locationManager.addLocationListener(this);
-        }*/
+        }
     }
 
     private void hideProgressBar() {
@@ -420,10 +422,18 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             * If we are close to nearby places boundaries, we need a significant update to
             * get new nearby places. Check order is south, north, west, east
             * */
+            hideProgressBar(); // In case it is visible (this happens, not an impossible case)
+
             if (curLatLang.getLatitude() <= nearbyMapFragment.boundaryCoordinates[0].getLatitude()
                     || curLatLang.getLatitude() >= nearbyMapFragment.boundaryCoordinates[1].getLatitude()
                     || curLatLang.getLongitude() <= nearbyMapFragment.boundaryCoordinates[2].getLongitude()
                     || curLatLang.getLongitude() >= nearbyMapFragment.boundaryCoordinates[3].getLongitude()) {
+                // populate places
+                placesDisposable = Observable.fromCallable(() -> nearbyController
+                        .loadAttractionsFromLocation(curLatLang))
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(this::populatePlaces);
                 nearbyMapFragment.setArguments(bundle);
                 nearbyMapFragment.updateMapSignificantly();
                 return;
@@ -436,6 +446,13 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                 nearbyMapFragment.setArguments(bundle);
                 nearbyMapFragment.updateMapSignificantly();
             }
+        } else {
+            lockNearbyView(true);
+            setMapFragment();
+            setListFragment();
+
+            hideProgressBar();
+            lockNearbyView(false);
         }
     }
 
@@ -481,4 +498,5 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     public void prepareViewsForSheetPosition(int bottomSheetState) {
         // TODO
     }
+
 }
