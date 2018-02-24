@@ -44,14 +44,29 @@
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/heading_text_size" />
 
+                    <TextView
+                        android:id="@+id/login_credentials"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/title"
+                        android:layout_marginEnd="@dimen/standard_gap"
+                        android:layout_marginLeft="@dimen/standard_gap"
+                        android:layout_marginRight="@dimen/standard_gap"
+                        android:layout_marginStart="@dimen/standard_gap"
+                        android:paddingBottom="@dimen/small_gap"
+                        android:paddingTop="@dimen/small_gap"
+                        android:textAlignment="center"
+                        android:textColor="@color/secondaryDarkColor"
+                        tools:text="@string/login_credential"/>
+
+
                 <FrameLayout
                     android:id="@+id/error_message_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/title"
+                    android:layout_below="@id/login_credentials"
                     android:visibility="gone"
                     tools:visibility="visible">
-
                     <TextView
                         android:id="@+id/error_message"
                         android:layout_width="match_parent"
