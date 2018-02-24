@@ -13,6 +13,7 @@ import fr.free.nrw.commons.notification.NotificationActivity;
 import fr.free.nrw.commons.settings.SettingsActivity;
 import fr.free.nrw.commons.upload.MultipleShareActivity;
 import fr.free.nrw.commons.upload.ShareActivity;
+import fr.free.nrw.commons.upload.UploadActivity;
 
 @Module
 @SuppressWarnings({"WeakerAccess", "unused"})
@@ -50,4 +51,7 @@ public abstract class ActivityBuilderModule {
 
     @ContributesAndroidInjector
     abstract CategoryImagesActivity bindFeaturedImagesActivity();
+
+    @ContributesAndroidInjector
+    abstract UploadActivity bindUploadActivity();
 }
