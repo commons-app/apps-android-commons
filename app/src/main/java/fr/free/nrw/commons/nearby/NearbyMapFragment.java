@@ -48,7 +48,7 @@ import java.util.List;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.utils.UriDeserializer;
 
-public class NearbyMapFragment extends android.support.v4.app.Fragment {
+public class NearbyMapFragment extends android.support.v4.app.Fragment{
 
     private MapView mapView;
     private List<NearbyBaseMarker> baseMarkerOptions;
@@ -166,48 +166,62 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
 
     public void updateMapSlightly() {
     // Get arguments from bundle for new location
+
         Bundle bundle = this.getArguments();
-        Gson gson = new GsonBuilder()
-            .registerTypeAdapter(Uri.class, new UriDeserializer())
-            .create();
-        if (bundle != null) {
-            String gsonLatLng = bundle.getString("CurLatLng");
-            Type curLatLngType = new TypeToken<fr.free.nrw.commons.location.LatLng>() {}.getType();
-            curLatLng = gson.fromJson(gsonLatLng, curLatLngType);
+        if (mapboxMap != null) {
+            Gson gson = new GsonBuilder()
+                    .registerTypeAdapter(Uri.class, new UriDeserializer())
+                    .create();
+            if (bundle != null) {
+                String gsonLatLng = bundle.getString("CurLatLng");
+                Type curLatLngType = new TypeToken<fr.free.nrw.commons.location.LatLng>() {}.getType();
+                curLatLng = gson.fromJson(gsonLatLng, curLatLngType);
+            }
+
+            updateMapToTrackPosition();
         }
 
-        updateMapToTrackPosition();
     }
 
     public void updateMapSignificantly() {
+        Log.d("deneme", "oldu updateMapSignificantly");
         Bundle bundle = this.getArguments();
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(Uri.class, new UriDeserializer())
-                .create();
-        if (bundle != null) {
-            String gsonPlaceList = bundle.getString("PlaceList");
-            String gsonLatLng = bundle.getString("CurLatLng");
-            String gsonBoundaryCoordinates = bundle.getString("BoundaryCoord");
-            Type listType = new TypeToken<List<Place>>() {}.getType();
-            List<Place> placeList = gson.fromJson(gsonPlaceList, listType);
-            Type curLatLngType = new TypeToken<fr.free.nrw.commons.location.LatLng>() {}.getType();
-            Type gsonBoundaryCoordinatesType = new TypeToken<fr.free.nrw.commons.location.LatLng[]>() {}.getType();
-            curLatLng = gson.fromJson(gsonLatLng, curLatLngType);
-            baseMarkerOptions = NearbyController
-                    .loadAttractionsFromLocationToBaseMarkerOptions(curLatLng,
-                            placeList,
-                            getActivity());
-            boundaryCoordinates = gson.fromJson(gsonBoundaryCoordinates, gsonBoundaryCoordinatesType);
-        }
-        updateMapToTrackPosition();
-        //addNearbyMarkerstoMapBoxMap();
+        if (mapboxMap != null) {
+            Log.d("deneme", "oldu1 updateMapSignificantly");
+            if (bundle != null) {
+                Gson gson = new GsonBuilder()
+                        .registerTypeAdapter(Uri.class, new UriDeserializer())
+                        .create();
+                Log.d("deneme", "oldu2 updateMapSignificantly");
+                String gsonPlaceList = bundle.getString("PlaceList");
+                String gsonLatLng = bundle.getString("CurLatLng");
+                String gsonBoundaryCoordinates = bundle.getString("BoundaryCoord");
+                Type listType = new TypeToken<List<Place>>() {}.getType();
+                List<Place> placeList = gson.fromJson(gsonPlaceList, listType);
+                Type curLatLngType = new TypeToken<fr.free.nrw.commons.location.LatLng>() {}.getType();
+                Type gsonBoundaryCoordinatesType = new TypeToken<fr.free.nrw.commons.location.LatLng[]>() {}.getType();
+                curLatLng = gson.fromJson(gsonLatLng, curLatLngType);
+                baseMarkerOptions = NearbyController
+                        .loadAttractionsFromLocationToBaseMarkerOptions(curLatLng,
+                                placeList,
+                                getActivity());
+                boundaryCoordinates = gson.fromJson(gsonBoundaryCoordinates, gsonBoundaryCoordinatesType);
+            }
+            mapboxMap.clear();
+            addCurrentLocationMarker(mapboxMap);
+            updateMapToTrackPosition();
+            addNearbyMarkerstoMapBoxMap();
+        } /*else {
+            setupMapView(bundle);
+        }*/
+        //mapView.setStyleUrl("asset://mapstyle.json");
     }
 
     // Only update current position marker and camera view
     private void updateMapToTrackPosition() {
         // Change
         Log.d("deneme","updateMapToTrackPosition");
-        if (currentLocationMarker != null && mapboxMap != null) {
+        if (currentLocationMarker != null) {
             LatLng curMapBoxLatLng = new LatLng(curLatLng.getLatitude(),curLatLng.getLongitude());
             ValueAnimator markerAnimator = ObjectAnimator.ofObject(currentLocationMarker, "position",
                     new LatLngEvaluator(), currentLocationMarker.getPosition(),
@@ -342,34 +356,15 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
         // create map
         mapView = new MapView(getActivity(), options);
         mapView.onCreate(savedInstanceState);
-        /*mapView.getMapAsync(new OnMapReadyCallback() {
+        mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(MapboxMap mapboxMap) {
                 NearbyMapFragment.this.mapboxMap = mapboxMap;
-                NearbyMapFragment.this.mapboxMap.addMarkers(baseMarkerOptions);
-
-                NearbyMapFragment.this.mapboxMap.setOnInfoWindowCloseListener(marker -> {
-                    if (marker == selected){
-                        bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                    }
-                });
-
-                NearbyMapFragment.this.mapboxMap.setOnMarkerClickListener(marker -> {
-                    if (marker instanceof NearbyMarker) {
-                        NearbyMapFragment.this.selected = marker;
-                        NearbyMarker nearbyMarker = (NearbyMarker) marker;
-                        Place place = nearbyMarker.getNearbyBaseMarker().getPlace();
-                        passInfoToSheet(place);
-                        bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                        bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                    }
-                    return false;
-                });
-                addCurrentLocationMarker(NearbyMapFragment.this.mapboxMap);
+                //addNearbyMarkerstoMapBoxMap();
+                updateMapSignificantly();
             }
-        });*/
-        addNearbyMarkerstoMapBoxMap();
-        //addCurrentLocationMarker(mapboxMap);
+        });
+        mapView.setStyleUrl("asset://mapstyle.json");
     }
 
     /**
@@ -403,38 +398,28 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     }
 
     private void addNearbyMarkerstoMapBoxMap() {
-        mapView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(MapboxMap mapboxMap) {
+        Log.d("deneme", "oldu3");
+        mapboxMap.addMarkers(baseMarkerOptions);
 
+        mapboxMap.setOnInfoWindowCloseListener(marker -> {
+            if (marker == selected){
+                bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
             }
         });
-        mapView.getMapAsync(mapboxMap -> {
-            mapboxMap.addMarkers(baseMarkerOptions);
 
-            mapboxMap.setOnInfoWindowCloseListener(marker -> {
-                if (marker == selected){
-                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                }
-            });
-
-            mapboxMap.setOnMarkerClickListener(marker -> {
-                if (marker instanceof NearbyMarker) {
-                    this.selected = marker;
-                    NearbyMarker nearbyMarker = (NearbyMarker) marker;
-                    Place place = nearbyMarker.getNearbyBaseMarker().getPlace();
-                    passInfoToSheet(place);
-                    bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                    bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                }
-                return false;
-            });
-
-            addCurrentLocationMarker(mapboxMap);
-            NearbyMapFragment.this.mapboxMap = mapboxMap;
+        mapboxMap.setOnMarkerClickListener(marker -> {
+            if (marker instanceof NearbyMarker) {
+                this.selected = marker;
+                NearbyMarker nearbyMarker = (NearbyMarker) marker;
+                Place place = nearbyMarker.getNearbyBaseMarker().getPlace();
+                passInfoToSheet(place);
+                bottomSheetListBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            }
+            return false;
         });
 
-        mapView.setStyleUrl("asset://mapstyle.json");
+        // addCurrentLocationMarker(mapboxMap);
     }
 
 
@@ -589,6 +574,9 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
     public void onResume() {
         if (mapView != null) {
             mapView.onResume();
+            if (mapboxMap!=null) {
+                mapboxMap.clear(); // To clear nearby markers from previous setup
+            }
         }
         super.onResume();
     }
@@ -623,5 +611,6 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment {
             return latLng;
         }
     }
+
 }
 
