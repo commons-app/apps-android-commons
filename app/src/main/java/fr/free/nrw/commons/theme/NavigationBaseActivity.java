@@ -5,6 +5,7 @@ import android.accounts.AccountManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -130,6 +131,17 @@ public abstract class NavigationBaseActivity extends BaseActivity
                     startActivity(feedbackIntent);
                 } catch (ActivityNotFoundException e) {
                     Toast.makeText(this, R.string.no_email_client, Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            case R.id.action_rate:
+                drawerLayout.closeDrawer(navigationView);
+                final String appPackageName = getPackageName();
+                Toast.makeText(this, appPackageName, Toast.LENGTH_SHORT).show();
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                }
+                catch (android.content.ActivityNotFoundException anfe) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
                 }
                 return true;
             case R.id.action_logout:
