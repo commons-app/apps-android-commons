@@ -3,7 +3,9 @@ package fr.free.nrw.commons.nearby;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -141,8 +143,13 @@ public class NearbyInfoDialog extends OverlayDialog {
     }
 
     private void openWebView(Uri link) {
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, link);
-        startActivity(browserIntent);
+        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+        builder.setToolbarColor(ContextCompat.getColor(getContext(), R.color.primaryColor));
+        builder.setSecondaryToolbarColor(ContextCompat.getColor(getContext(), R.color.primaryDarkColor));
+        builder.setExitAnimations(getContext(), android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+        CustomTabsIntent customTabsIntent = builder.build();
+        customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        customTabsIntent.launchUrl(getContext(), link);
     }
 
     @OnClick(R.id.emptyLayout)

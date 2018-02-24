@@ -3,6 +3,8 @@ package fr.free.nrw.commons;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.customtabs.CustomTabsIntent;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.TextView;
 
@@ -47,22 +49,61 @@ public class AboutActivity extends NavigationBaseActivity {
             intent.setPackage("com.facebook.katana");
             startActivity(intent);
         } catch (Exception e) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/" + "1921335171459985")));
+            CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+            builder.setToolbarColor(ContextCompat.getColor(this, R.color.primaryColor));
+            builder.setSecondaryToolbarColor(ContextCompat.getColor(this, R.color.primaryDarkColor));
+            builder.setExitAnimations(this, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+            CustomTabsIntent customTabsIntent = builder.build();
+            customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            customTabsIntent.launchUrl(this, Uri.parse("https://www.facebook.com/" + "1921335171459985"));
         }
-
     }
 
     @OnClick(R.id.github_launch_icon)
     public void launchGithub(View view) {
-
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/commons-app/apps-android-commons\\"));
-        startActivity(browserIntent);
+        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+        builder.setToolbarColor(ContextCompat.getColor(this, R.color.primaryColor));
+        builder.setSecondaryToolbarColor(ContextCompat.getColor(this, R.color.primaryDarkColor));
+        builder.setExitAnimations(this, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+        CustomTabsIntent customTabsIntent = builder.build();
+        customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        customTabsIntent.launchUrl(this, Uri.parse("https://commons-app.github.io/\\"));
     }
 
     @OnClick(R.id.website_launch_icon)
     public void launchWebsite(View view) {
-
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://commons-app.github.io/\\"));
-        startActivity(browserIntent);
+        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+        builder.setToolbarColor(ContextCompat.getColor(this, R.color.primaryColor));
+        builder.setSecondaryToolbarColor(ContextCompat.getColor(this, R.color.primaryDarkColor));
+        builder.setExitAnimations(this, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+        CustomTabsIntent customTabsIntent = builder.build();
+        customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        customTabsIntent.launchUrl(this, Uri.parse("https://commons-app.github.io/\\"));
     }
+
+    @OnClick(R.id.about_credits)
+    public void launchCredits(View view) {
+
+        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+        builder.setToolbarColor(ContextCompat.getColor(this, R.color.primaryColor));
+        builder.setSecondaryToolbarColor(ContextCompat.getColor(this, R.color.primaryDarkColor));
+        builder.setExitAnimations(this, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+        CustomTabsIntent customTabsIntent = builder.build();
+        customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        customTabsIntent.launchUrl(this, Uri.parse("https://github.com/commons-app/apps-android-commons/blob/master/CREDITS/\\"));
+    }
+
+    @OnClick(R.id.about_privacy_policy)
+    public void launchPrivacyPolicy(View view) {
+
+        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+        builder.setToolbarColor(ContextCompat.getColor(this, R.color.primaryColor));
+        builder.setSecondaryToolbarColor(ContextCompat.getColor(this, R.color.primaryDarkColor));
+        builder.setExitAnimations(this, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+        CustomTabsIntent customTabsIntent = builder.build();
+        customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        customTabsIntent.launchUrl(this, Uri.parse("https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\\"));
+    }
+
+
 }
