@@ -46,7 +46,6 @@ public class NotificationActivity extends NavigationBaseActivity {
     }
 
     private void initListView() {
-        recyclerView = findViewById(R.id.listView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         DividerItemDecoration itemDecor = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(itemDecor);
