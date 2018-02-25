@@ -46,7 +46,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     private static final int LOCATION_REQUEST = 1;
     private static final String MAP_LAST_USED_PREFERENCE = "mapLastUsed";
-
+    private boolean LOCATION_CHANGED=false;
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
 
@@ -273,10 +273,15 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         locationManager.registerLocationManager();
         LatLng lastLocation = locationManager.getLastLocation();
         if (curLatLang != null && curLatLang.equals(lastLocation)) { //refresh view only if location has changed
+            LOCATION_CHANGED=false;
             if (isHardRefresh) {
                 ViewUtil.showLongToast(this, R.string.nearby_location_has_not_changed);
+                swipeLayout.setRefreshing(false);
             }
             return;
+        }
+        else {
+            LOCATION_CHANGED=true;
         }
         curLatLang = lastLocation;
 
@@ -363,6 +368,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     @Override
     public void onLocationChanged(LatLng latLng) {
-        refreshView(false);
+        if(LOCATION_CHANGED)
+            refreshView(false);
     }
 }
