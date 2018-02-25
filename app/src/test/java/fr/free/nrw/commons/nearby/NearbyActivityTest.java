@@ -80,7 +80,7 @@ public class NearbyActivityTest {
         nearbyActivity.onOptionsItemSelected(refresh);
 
         Fragment nearbyListFragment = nearbyActivity.getSupportFragmentManager()
-                .findFragmentByTag(NearbyListFragment.class.getSimpleName());
+                .findFragmentByTag("NearByListFragment");
         assertNotNull(nearbyListFragment);
 
         // one element (AIRPORT) exists in the list
