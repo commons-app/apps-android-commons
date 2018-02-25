@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.pedrogomez.renderers.RVRendererAdapter;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -58,6 +59,7 @@ public class NotificationActivity extends NavigationBaseActivity {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(notificationList -> {
+                    Collections.reverse(notificationList);
                     Timber.d("Number of notifications is %d", notificationList.size());
                     setAdapter(notificationList);
                 }, throwable -> Timber.e(throwable, "Error occurred while loading notifications"));
