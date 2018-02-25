@@ -82,8 +82,10 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     private void initViewState() {
         if (sharedPreferences.getBoolean(MAP_LAST_USED_PREFERENCE, false)) {
+            swipeLayout.setEnabled(false);
             viewMode = NearbyActivityMode.MAP;
         } else {
+            swipeLayout.setEnabled(true);
             viewMode = NearbyActivityMode.LIST;
         }
     }
@@ -226,8 +228,10 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     private void toggleView() {
         if (viewMode.isMap()) {
+            swipeLayout.setEnabled(false);
             setMapFragment();
         } else {
+            swipeLayout.setEnabled(true);
             setListFragment();
         }
         sharedPreferences.edit().putBoolean(MAP_LAST_USED_PREFERENCE, viewMode.isMap()).apply();
