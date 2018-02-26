@@ -49,7 +49,7 @@ dependencies {
     compile 'com.facebook.stetho:stetho:1.5.0'
 
     testCompile 'junit:junit:4.12'
-    testCompile 'org.robolectric:robolectric:3.4'
+    testCompile 'org.robolectric:robolectric:3.7.1'
 
     testCompile 'com.squareup.okhttp3:mockwebserver:3.8.1'
     androidTestCompile 'com.squareup.okhttp3:mockwebserver:3.8.1'
@@ -78,7 +78,7 @@ dependencies {
     androidTestImplementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
     testImplementation 'junit:junit:4.12'
-    testImplementation 'org.robolectric:robolectric:3.4'
+    testImplementation 'org.robolectric:robolectric:3.7.1'
     testImplementation 'org.mockito:mockito-all:1.10.19'
 
     testImplementation 'com.squareup.okhttp3:mockwebserver:3.8.1'
