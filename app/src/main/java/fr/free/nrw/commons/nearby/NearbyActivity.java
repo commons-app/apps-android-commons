@@ -10,6 +10,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -60,7 +61,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     private NearbyActivityMode viewMode;
     private Disposable placesDisposable;
     private boolean lockNearbyView; //Determines if the nearby places needs to be refreshed
-
+    @BindView(R.id.swipe_container) SwipeRefreshLayout swipeLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +71,13 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         bundle = new Bundle();
         initDrawer();
         initViewState();
+        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                lockNearbyView(false);
+                refreshView(true);
+            }
+        });
     }
 
     private void initViewState() {
@@ -309,7 +317,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         } else {
             setListFragment();
         }
-
+        swipeLayout.setRefreshing(false);
         hideProgressBar();
     }
 

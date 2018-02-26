@@ -198,9 +198,9 @@
   <string name="give_permission">اجازه بده</string>
   <string name="use_external_storage">استفاده از حافظهٔ خارجی</string>
   <string name="use_external_storage_summary">ذخیرهٔ تصویرهای گرفته شده توسط دوربین درونکار اپلیکیشن بر روی دستگاه شما</string>
+  <string name="login_to_your_account">ورود به حساب کاربریتان</string>
   <string name="send_log_file">ارسال فایل سیاهه</string>
   <string name="send_log_file_description">ارسال فایل سیاهه به‌وسیلهٔ ایمیل برای توسعه‌دهندگان</string>
-  <string name="login_to_your_account">ورود به حساب کاربریتان</string>
   <string name="nearby_location_has_not_changed">مکان تغییر نکرده‌است.</string>
   <string name="nearby_location_not_available">مکان موجود نیست.</string>
   <string name="location_permission_rationale_nearby">برای نمایش مکان‌ّای اطراف نیاز به اجازه است.</string>

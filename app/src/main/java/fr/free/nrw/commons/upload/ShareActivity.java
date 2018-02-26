@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -20,6 +21,7 @@ import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -50,11 +52,14 @@ import fr.free.nrw.commons.caching.CacheController;
 import fr.free.nrw.commons.category.CategorizationFragment;
 import fr.free.nrw.commons.category.OnCategoriesSaveHandler;
 import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.modifications.CategoryModifier;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.modifications.ModifierSequenceDao;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
+import fr.free.nrw.commons.mwapi.EventLog;
+import fr.free.nrw.commons.utils.ImageUtils;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
@@ -290,7 +295,7 @@ public class ShareActivity
                         REQUEST_PERM_ON_CREATE_LOCATION);
             }
         }
-        performPreuploadProcessingOfFile();
+        performPreUploadProcessingOfFile();
 
 
         SingleUploadFragment shareView = (SingleUploadFragment) getSupportFragmentManager().findFragmentByTag("shareView");
@@ -314,7 +319,7 @@ public class ShareActivity
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     backgroundImageView.setImageURI(mediaUri);
                     storagePermitted = true;
-                    performPreuploadProcessingOfFile();
+                    performPreUploadProcessingOfFile();
                 }
                 return;
             }
@@ -322,7 +327,7 @@ public class ShareActivity
                 if (grantResults.length >= 1
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     locationPermitted = true;
-                    performPreuploadProcessingOfFile();
+                    performPreUploadProcessingOfFile();
                 }
                 return;
             }
@@ -331,12 +336,12 @@ public class ShareActivity
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     backgroundImageView.setImageURI(mediaUri);
                     storagePermitted = true;
-                    performPreuploadProcessingOfFile();
+                    performPreUploadProcessingOfFile();
                 }
                 if (grantResults.length >= 2
                         && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                     locationPermitted = true;
-                    performPreuploadProcessingOfFile();
+                    performPreUploadProcessingOfFile();
                 }
                 return;
             }
@@ -347,7 +352,7 @@ public class ShareActivity
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     //It is OK to call this at both (1) and (4) because if perm had been granted at
                     //snackbar, user should not be prompted at submit button
-                    performPreuploadProcessingOfFile();
+                    performPreUploadProcessingOfFile();
 
                     //Uploading only begins if storage permission granted from arrow icon
                     uploadBegins();
@@ -358,7 +363,7 @@ public class ShareActivity
         }
     }
 
-    private void performPreuploadProcessingOfFile() {
+    private void performPreUploadProcessingOfFile() {
         if (!useNewPermissions || storagePermitted) {
             if (!duplicateCheckPassed) {
                 //Test SHA1 of image to see if it matches SHA1 of a file on Commons
@@ -373,7 +378,17 @@ public class ShareActivity
                                 Timber.d("%s duplicate check: %s", mediaUri.toString(), result);
                                 duplicateCheckPassed = (result == DUPLICATE_PROCEED
                                         || result == NO_DUPLICATE);
-                            }, mwApi);
+                                /*
+                                 TODO: 16/9/17 should we run DetectUnwantedPicturesAsync if DUPLICATE_PROCEED is returned? Since that means
+                                 we are processing images that are already on server???...
+                                */
+
+                                if (duplicateCheckPassed) {
+                                    //image can be uploaded, so now check if its a useless picture or not
+                                    performUnwantedPictureDetectionProcess();
+                                }
+
+                            },mwApi);
                     fileAsyncTask.execute();
                 } catch (IOException e) {
                     Timber.d(e, "IO Exception: ");
@@ -385,6 +400,37 @@ public class ShareActivity
             Timber.w("not ready for preprocessing: useNewPermissions=%s storage=%s location=%s",
                     useNewPermissions, storagePermitted, locationPermitted);
         }
+    }
+
+    private void performUnwantedPictureDetectionProcess() {
+        String imageMediaFilePath = FileUtils.getPath(this,mediaUri);
+        DetectUnwantedPicturesAsync detectUnwantedPicturesAsync = new DetectUnwantedPicturesAsync(imageMediaFilePath, result -> {
+
+            if (result != ImageUtils.Result.IMAGE_OK) {
+                //show appropriate error message
+                String errorMessage = result == ImageUtils.Result.IMAGE_DARK ? getString(R.string.upload_image_too_dark) : getString(R.string.upload_image_blurry);
+                AlertDialog.Builder errorDialogBuilder = new AlertDialog.Builder(this);
+                errorDialogBuilder.setMessage(errorMessage);
+                errorDialogBuilder.setTitle(getString(R.string.warning));
+                errorDialogBuilder.setPositiveButton(getString(R.string.no), (dialogInterface, i) -> {
+                    //user does not wish to upload the picture, take them back to ContributionsActivity
+                    Intent intent = new Intent(ShareActivity.this, ContributionsActivity.class);
+                    dialogInterface.dismiss();
+                    startActivity(intent);
+                });
+                errorDialogBuilder.setNegativeButton(getString(R.string.yes), (dialogInterface, i) -> {
+                    //user wishes to go ahead with the upload of this picture, just dismiss this dialog
+                    dialogInterface.dismiss();
+                });
+
+                AlertDialog errorDialog = errorDialogBuilder.create();
+                if (!isFinishing()) {
+                    errorDialog.show();
+                }
+            }
+        });
+
+        detectUnwantedPicturesAsync.execute();
     }
 
     private Snackbar requestPermissionUsingSnackBar(String rationale,

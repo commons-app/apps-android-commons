@@ -54,16 +54,16 @@
   <string name="gps_disabled">GPS er óvirkt í tækinu þínu. Viltu virkja það?</string>
   <string name="enable_gps">Virkja GPS</string>
   <string name="contributions_subtitle_zero">Engar innsendingar ennþá</string>
-  <plurals name="contributions_subtitle" fuzzy="true">
+  <plurals name="contributions_subtitle">
     <item quantity="zero">\@string/contributions_subtitle_zero</item>
     <item quantity="one">%1$d innsending</item>
     <item quantity="other">%1$d innsendingar</item>
   </plurals>
-  <plurals name="starting_multiple_uploads" fuzzy="true">
+  <plurals name="starting_multiple_uploads">
     <item quantity="one">Byrja %1$d innsendingu</item>
     <item quantity="other">Byrja %1$d innsendingar</item>
   </plurals>
-  <plurals name="multiple_uploads_title" fuzzy="true">
+  <plurals name="multiple_uploads_title">
     <item quantity="one">%1$d innsending</item>
     <item quantity="other">%1$d innsendingar</item>
   </plurals>
@@ -199,19 +199,22 @@
   <string name="error_while_cache">Villa kom upp í skyndiminni mynda</string>
   <string name="title_info">Einstakur og lýsandi titill, sem mun verða skráarheiti. Þú mátt nota einfaldan texta með bilum. Ekki hafa með neina skráarendingu</string>
   <string name="description_info">Lýstu gögnunum eins vel og auðið er: Hvar er myndin tekin? Hvað sýnir hún? Hvert er samhengið? Lýstu fólki og fyrirbærum. Gefðu upp þær upplýsingar sem ekki er auðvelt að giska á, til dæmis á hvaða tíma dags myndin er tekin ef hún sýnir landslag. Ef gögnin sýna eitthvað óvenjulegt, útskýrðu þá hvað það er sem sé sérstakt.</string>
+  <string name="upload_image_too_dark">Þessi mynd er of dökk, ertu viss um að þú viljir senda hana inn? Wikimedia Commons er aðeins fyrir myndir sem hafa eitthvað fræðslugildi.</string>
+  <string name="upload_image_blurry">Þessi mynd er ekki skörp, ertu viss um að þú viljir senda hana inn? Wikimedia Commons er aðeins fyrir myndir sem hafa eitthvað fræðslugildi.</string>
   <string name="give_permission">Gefa heimild</string>
   <string name="use_external_storage">Nota ytri gagnageymslu</string>
   <string name="use_external_storage_summary">Vistaðu myndir sem teknar hafa verið með innbyggðu myndavélinni í tækinu þínu</string>
+  <string name="login_to_your_account">Skrá inn á aðganginn þinn</string>
   <string name="send_log_file">Senda atvikaskrá</string>
   <string name="send_log_file_description">Senda atvikaskrá til forritaranna með tölvupósti</string>
-  <string name="login_to_your_account">Skrá inn á aðganginn þinn</string>
   <string name="nearby_location_has_not_changed">Staðsetning hefur ekki breyst.</string>
   <string name="nearby_location_not_available">Staðsetning ekki tiltæk.</string>
   <string name="location_permission_rationale_nearby">Heimild þarf til að birta lista yfir staði í nágrenninu</string>
   <string name="get_directions">FÁ LEIÐSÖGN</string>
   <string name="read_article">LESA GREIN</string>
-  <string name="notifications_welcome" fuzzy="true">Velkomin á Wikimedia Commons, %1$s! Við erum ánægð með að þú skulir vera hérna.</string>
+  <string name="notifications_welcome">Velkomin á Wikimedia Commons, %1$s! Við erum ánægð með að þú skulir vera hérna.</string>
   <string name="notifications_talk_page_message">%1$s skildi eftir skilaboð á spjallsíðunni þinni</string>
   <string name="notifications_thank_you_edit">Takk fyrir að hafa gert breytingar</string>
-  <string name="notifications_mention" fuzzy="true">%1$s minntist á þig á %2$s.</string>
+  <string name="notifications_mention">%1$s minntist á þig á %2$s.</string>
+  <string name="toggle_view_button">Víxla sýn</string>
 </resources>
