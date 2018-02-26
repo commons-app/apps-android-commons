@@ -25,6 +25,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -62,9 +63,6 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.activity_share, menu);
-        if (titleEdit != null) {
-            menu.findItem(R.id.menu_upload_single).setEnabled(titleEdit.getText().length() != 0);
-        }
     }
 
     @Override
@@ -72,6 +70,11 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
         switch (item.getItemId()) {
             //What happens when the 'submit' icon is tapped
             case R.id.menu_upload_single:
+
+                if (titleEdit.getText().toString().isEmpty()) {
+                    Toast.makeText(getContext(), R.string.add_title_toast, Toast.LENGTH_LONG).show();
+                    return false;
+                }
 
                 String title = titleEdit.getText().toString();
                 String desc = descEdit.getText().toString();
