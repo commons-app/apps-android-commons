@@ -104,6 +104,14 @@
 
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/about_rate_us"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/standard_gap"
+                android:gravity="center"
+                android:textColor="@color/primaryColor"
+                android:text="@string/about_rate_us" />
             <fr.free.nrw.commons.ui.widget.HtmlTextView
                 android:id="@+id/about_privacy_policy"
                 style="?android:textAppearanceSmall"

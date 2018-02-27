@@ -1,6 +1,8 @@
 package fr.free.nrw.commons;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 
@@ -158,5 +160,16 @@ public class Utils {
         }
 
         return stringBuilder.toString();
+    }
+
+    public static void rateApp(Context context) {
+        final String appPackageName = context.getPackageName();
+        try {
+            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+        }
+        catch (android.content.ActivityNotFoundException anfe) {
+            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+        }
+        return ;
     }
 }

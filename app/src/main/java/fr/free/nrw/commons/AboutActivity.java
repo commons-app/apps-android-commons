@@ -65,4 +65,10 @@ public class AboutActivity extends NavigationBaseActivity {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://commons-app.github.io/\\"));
         startActivity(browserIntent);
     }
+
+    @OnClick(R.id.about_rate_us)
+    public void rateApp(View view) {
+
+        Utils.rateApp(this);
+    }
 }

@@ -31,11 +31,6 @@
         android:title="@string/navigation_item_feedback"/>
 
     <item
-        android:id="@+id/action_rate"
-        android:icon="@drawable/ic_star_black_24dp"
-        android:title="@string/navigation_item_rate"/>
-
-    <item
         android:id="@+id/action_logout"
         android:icon="@drawable/ic_exit_to_app_black_24dp"
         android:title="@string/navigation_item_logout"/>

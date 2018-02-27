@@ -23,6 +23,7 @@ import fr.free.nrw.commons.AboutActivity;
 import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.WelcomeActivity;
 import fr.free.nrw.commons.auth.AccountUtil;
 import fr.free.nrw.commons.auth.LoginActivity;
@@ -131,17 +132,6 @@ public abstract class NavigationBaseActivity extends BaseActivity
                     startActivity(feedbackIntent);
                 } catch (ActivityNotFoundException e) {
                     Toast.makeText(this, R.string.no_email_client, Toast.LENGTH_SHORT).show();
-                }
-                return true;
-            case R.id.action_rate:
-                drawerLayout.closeDrawer(navigationView);
-                final String appPackageName = getPackageName();
-                Toast.makeText(this, appPackageName, Toast.LENGTH_SHORT).show();
-                try {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-                }
-                catch (android.content.ActivityNotFoundException anfe) {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
                 }
                 return true;
             case R.id.action_logout:
