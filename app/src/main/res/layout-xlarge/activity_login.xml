@@ -121,7 +121,7 @@
                     android:layout_marginRight="@dimen/standard_gap"
                     android:layout_marginStart="@dimen/standard_gap"
                     android:visibility="gone"
-                    app:passwordToggleEnabled="false"
+                    app:passwordToggleEnabled="true"
                     tools:visibility="visible">
 
                     <android.support.design.widget.TextInputEditText
