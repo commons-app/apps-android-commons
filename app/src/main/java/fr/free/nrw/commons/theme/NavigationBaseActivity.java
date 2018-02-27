@@ -121,8 +121,9 @@ public abstract class NavigationBaseActivity extends BaseActivity
                 return true;
             case R.id.action_feedback:
                 drawerLayout.closeDrawer(navigationView);
-                Intent feedbackIntent = new Intent(Intent.ACTION_SEND);
+                Intent feedbackIntent = new Intent(Intent.ACTION_SENDTO);
                 feedbackIntent.setType("message/rfc822");
+                feedbackIntent.setData(Uri.parse("mailto:"));
                 feedbackIntent.putExtra(Intent.EXTRA_EMAIL,
                         new String[]{CommonsApplication.FEEDBACK_EMAIL});
                 feedbackIntent.putExtra(Intent.EXTRA_SUBJECT,

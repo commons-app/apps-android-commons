@@ -72,6 +72,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     @BindView(R.id.loginTwoFactor) EditText twoFactorEdit;
     @BindView(R.id.error_message_container) ViewGroup errorMessageContainer;
     @BindView(R.id.error_message) TextView errorMessage;
+    @BindView(R.id.login_credentials) TextView loginCredentials;
     @BindView(R.id.two_factor_container)TextInputLayout twoFactorContainer;
     ProgressDialog progressDialog;
     private AppCompatDelegate delegate;
@@ -112,6 +113,12 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
         loginButton.setOnClickListener(view -> performLogin());
         signupButton.setOnClickListener(view -> signUp());
+
+        if(BuildConfig.FLAVOR == "beta"){
+            loginCredentials.setText(getString(R.string.login_credential));
+        } else {
+            loginCredentials.setVisibility(View.GONE);
+        }
     }
 
 

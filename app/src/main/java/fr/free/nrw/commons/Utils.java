@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.customtabs.CustomTabsIntent;
+import android.support.v4.content.ContextCompat;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -13,6 +15,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -172,4 +175,15 @@ public class Utils {
         }
         return ;
     }
+
+    public static void handleWebUrl(Context context,Uri url){
+        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+        builder.setToolbarColor(ContextCompat.getColor(context, R.color.primaryColor));
+        builder.setSecondaryToolbarColor(ContextCompat.getColor(context, R.color.primaryDarkColor));
+        builder.setExitAnimations(context, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+        CustomTabsIntent customTabsIntent = builder.build();
+        customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        customTabsIntent.launchUrl(context, url);
+    }
+
 }
