@@ -149,6 +149,10 @@
                         tools:text="License link" />
                 </LinearLayout>
 
+                <fr.free.nrw.commons.media.MediaDetailSpacer
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/small_gap" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

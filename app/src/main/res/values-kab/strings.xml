@@ -202,9 +202,9 @@
   <string name="give_permission">Mudd tasiregt</string>
   <string name="use_external_storage">Seqdec asekles azɣaray</string>
   <string name="use_external_storage_summary">Sekles tiwlafin yettwaṭṭfen s tkamirat yellan deg ibenk</string>
+  <string name="login_to_your_account">Qqen ar umiḍan-ik</string>
   <string name="send_log_file">Azen afaylu n uɣmis</string>
   <string name="send_log_file_description">Azen afaylu n uɣmis i yinermisen s yimayl</string>
-  <string name="login_to_your_account">Qqen ar umiḍan-ik</string>
   <string name="nearby_location_has_not_changed">Adeg ur ibeddel ara.</string>
   <string name="nearby_location_not_available">Ulac adeg</string>
   <string name="location_permission_rationale_nearby">Ilaq usireg i uskan tabdart n wadigen iqerben</string>

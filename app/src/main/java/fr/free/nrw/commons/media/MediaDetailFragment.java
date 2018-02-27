@@ -14,6 +14,7 @@ import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -76,7 +77,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private ViewTreeObserver.OnGlobalLayoutListener layoutListener; // for layout stuff, only used once!
     private ViewTreeObserver.OnScrollChangedListener scrollListener;
     private DataSetObserver dataObserver;
-    private AsyncTask<Void,Void,Boolean> detailFetchTask;
+    private AsyncTask<Void, Void, Boolean> detailFetchTask;
     private LicenseList licenseList;
 
     @Override
@@ -95,7 +96,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        detailProvider = (MediaDetailPagerFragment.MediaDetailProvider)getActivity();
+        detailProvider = (MediaDetailPagerFragment.MediaDetailProvider) getActivity();
 
         if (savedInstanceState != null) {
             editable = savedInstanceState.getBoolean("editable");
@@ -156,7 +157,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         return view;
     }
 
-    @Override public void onResume() {
+    @Override
+    public void onResume() {
         super.onResume();
         Media media = detailProvider.getMediaAtPosition(index);
         if (media == null) {
@@ -238,13 +240,13 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             detailFetchTask.cancel(true);
             detailFetchTask = null;
         }
-        if (layoutListener != null) {
+        if (layoutListener != null && getView() != null) {
             getView().getViewTreeObserver().removeGlobalOnLayoutListener(layoutListener); // old Android was on crack. CRACK IS WHACK
             layoutListener = null;
         }
-        if (scrollListener != null) {
+        if (scrollListener != null && getView() != null) {
             getView().getViewTreeObserver().removeOnScrollChangedListener(scrollListener);
-            scrollListener  = null;
+            scrollListener = null;
         }
         if (dataObserver != null) {
             detailProvider.unregisterDataSetObserver(dataObserver);
@@ -272,7 +274,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     }
 
     private void setOnClickListeners(final Media media) {
-        license.setOnClickListener(v -> openWebBrowser(licenseLink(media)));
+        if (licenseLink(media) != null) {
+            license.setOnClickListener(v -> openWebBrowser(licenseLink(media)));
+            } else {
+            Toast toast = Toast.makeText(getContext(), getString(R.string.null_url), Toast.LENGTH_SHORT);
+            toast.show();
+            }
         if (media.getCoordinates() != null) {
             coordinates.setOnClickListener(v -> openMap(media.getCoordinates()));
         }
@@ -289,7 +296,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     private View buildCatLabel(final String catName, ViewGroup categoryContainer) {
         final View item = LayoutInflater.from(getContext()).inflate(R.layout.detail_category_item, categoryContainer, false);
-        final CompatTextView textView = (CompatTextView)item.findViewById(R.id.mediaDetailCategoryItemText);
+        final CompatTextView textView = (CompatTextView) item.findViewById(R.id.mediaDetailCategoryItemText);
 
         textView.setText(catName);
         if (categoriesLoaded && categoriesPresent) {
@@ -308,7 +315,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         // You must face the darkness alone
         int scrollY = scrollView.getScrollY();
         int scrollMax = getView().getHeight();
-        float scrollPercentage = (float)scrollY / (float)scrollMax;
+        float scrollPercentage = (float) scrollY / (float) scrollMax;
         final float transparencyMax = 0.75f;
         if (scrollPercentage > transparencyMax) {
             scrollPercentage = transparencyMax;
@@ -362,7 +369,8 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     }
 
 
-    private @Nullable String licenseLink(Media media) {
+    private @Nullable
+    String licenseLink(Media media) {
         String licenseKey = media.getLicense();
         if (licenseKey == null || licenseKey.equals("")) {
             return null;

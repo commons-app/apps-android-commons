@@ -11,7 +11,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
-import fr.free.nrw.commons.CommonsApplication;
 import timber.log.Timber;
 
 public class FileUtils {
@@ -32,7 +31,7 @@ public class FileUtils {
             reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
             String line;
             while ((line = reader.readLine()) != null) {
-                buffer.append(line + "\n");
+                buffer.append(line).append("\n");
             }
         } finally {
             if (reader != null) {

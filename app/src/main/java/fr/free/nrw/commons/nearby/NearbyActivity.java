@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.nearby;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -11,6 +10,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -41,8 +41,6 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-import static fr.free.nrw.commons.location.LocationServiceManager.LOCATION_REQUEST;
-
 
 public class NearbyActivity extends NavigationBaseActivity implements LocationUpdateListener {
 
@@ -63,7 +61,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     private NearbyActivityMode viewMode;
     private Disposable placesDisposable;
     private boolean lockNearbyView; //Determines if the nearby places needs to be refreshed
-
+    @BindView(R.id.swipe_container) SwipeRefreshLayout swipeLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +71,13 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         bundle = new Bundle();
         initDrawer();
         initViewState();
+        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                lockNearbyView(false);
+                refreshView(true);
+            }
+        });
     }
 
     private void initViewState() {
@@ -259,7 +264,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     /**
      * This method should be the single point to load/refresh nearby places
      *
-     * @param isHardRefresh
+     * @param isHardRefresh Should display a toast if the location hasn't changed
      */
     private void refreshView(boolean isHardRefresh) {
         if (lockNearbyView) {
@@ -312,7 +317,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         } else {
             setListFragment();
         }
-
+        swipeLayout.setRefreshing(false);
         hideProgressBar();
     }
 

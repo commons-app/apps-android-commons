@@ -283,7 +283,7 @@ public class MediaDataExtractor {
     /**
      * Take our metadata and inject it into a live Media object.
      * Media object might contain stale or cached data, or emptiness.
-     * @param media
+     * @param media Media object to inject into
      */
     public void fill(Media media) {
         if (!fetched) {

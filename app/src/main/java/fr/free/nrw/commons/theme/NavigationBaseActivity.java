@@ -5,6 +5,7 @@ import android.accounts.AccountManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -119,8 +120,9 @@ public abstract class NavigationBaseActivity extends BaseActivity
                 return true;
             case R.id.action_feedback:
                 drawerLayout.closeDrawer(navigationView);
-                Intent feedbackIntent = new Intent(Intent.ACTION_SEND);
+                Intent feedbackIntent = new Intent(Intent.ACTION_SENDTO);
                 feedbackIntent.setType("message/rfc822");
+                feedbackIntent.setData(Uri.parse("mailto:"));
                 feedbackIntent.putExtra(Intent.EXTRA_EMAIL,
                         new String[]{CommonsApplication.FEEDBACK_EMAIL});
                 feedbackIntent.putExtra(Intent.EXTRA_SUBJECT,

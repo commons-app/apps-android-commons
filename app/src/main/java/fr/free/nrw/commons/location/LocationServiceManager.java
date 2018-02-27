@@ -14,9 +14,6 @@ import android.support.v4.content.ContextCompat;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 import timber.log.Timber;
 
 public class LocationServiceManager implements LocationListener {
@@ -33,6 +30,7 @@ public class LocationServiceManager implements LocationListener {
 
     /**
      * Constructs a new instance of LocationServiceManager.
+     *
      * @param context the context
      */
     public LocationServiceManager(Context context) {
@@ -42,6 +40,7 @@ public class LocationServiceManager implements LocationListener {
 
     /**
      * Returns the current status of the GPS provider.
+     *
      * @return true if the GPS provider is enabled
      */
     public boolean isProviderEnabled() {
@@ -50,6 +49,7 @@ public class LocationServiceManager implements LocationListener {
 
     /**
      * Returns whether the location permission is granted.
+     *
      * @return true if the location permission is granted
      */
     public boolean isLocationPermissionGranted() {
@@ -59,6 +59,7 @@ public class LocationServiceManager implements LocationListener {
 
     /**
      * Requests the location permission to be granted.
+     *
      * @param activity the activity
      */
     public void requestPermissions(Activity activity) {
@@ -71,11 +72,9 @@ public class LocationServiceManager implements LocationListener {
     }
 
     public boolean isPermissionExplanationRequired(Activity activity) {
-        if (activity.isFinishing()) {
-            return false;
-        }
-        return ActivityCompat.shouldShowRequestPermissionRationale(activity,
-                Manifest.permission.ACCESS_FINE_LOCATION);
+        return !activity.isFinishing() &&
+                ActivityCompat.shouldShowRequestPermissionRationale(activity,
+                        Manifest.permission.ACCESS_FINE_LOCATION);
     }
 
     public LatLng getLastLocation() {
@@ -85,7 +84,8 @@ public class LocationServiceManager implements LocationListener {
         return LatLng.from(lastLocation);
     }
 
-    /** Registers a LocationManager to listen for current location.
+    /**
+     * Registers a LocationManager to listen for current location.
      */
     public void registerLocationManager() {
         if (!isLocationManagerRegistered)
@@ -95,6 +95,7 @@ public class LocationServiceManager implements LocationListener {
 
     /**
      * Requests location updates from the specified provider.
+     *
      * @param locationProvider the location provider
      * @return true if successful
      */
@@ -116,7 +117,8 @@ public class LocationServiceManager implements LocationListener {
 
     /**
      * Returns whether a given location is better than the current best location.
-     * @param location the location to be tested
+     *
+     * @param location            the location to be tested
      * @param currentBestLocation the current best location
      * @return true if the given location is better
      */
@@ -172,7 +174,8 @@ public class LocationServiceManager implements LocationListener {
         return provider1.equals(provider2);
     }
 
-    /** Unregisters location manager.
+    /**
+     * Unregisters location manager.
      */
     public void unregisterLocationManager() {
         isLocationManagerRegistered = false;
@@ -185,6 +188,7 @@ public class LocationServiceManager implements LocationListener {
 
     /**
      * Adds a new listener to the list of location listeners.
+     *
      * @param listener the new listener
      */
     public void addLocationListener(LocationUpdateListener listener) {
@@ -195,6 +199,7 @@ public class LocationServiceManager implements LocationListener {
 
     /**
      * Removes a listener from the list of location listeners.
+     *
      * @param listener the listener to be removed
      */
     public void removeLocationListener(LocationUpdateListener listener) {
