@@ -6,11 +6,13 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentTransaction;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -32,6 +34,8 @@ import fr.free.nrw.commons.MediaDataExtractor;
 import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.PageTitle;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.contributions.Contribution;
+import fr.free.nrw.commons.delete.DeleteActivity;
 import fr.free.nrw.commons.di.CommonsDaggerSupportFragment;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.ui.widget.CompatTextView;
@@ -70,6 +74,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     private TextView coordinates;
     private TextView uploadedDate;
     private LinearLayout categoryContainer;
+    private Button delete;
     private ScrollView scrollView;
     private ArrayList<String> categoryNames;
     private boolean categoriesLoaded = false;
@@ -122,6 +127,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         license = (TextView) view.findViewById(R.id.mediaDetailLicense);
         coordinates = (TextView) view.findViewById(R.id.mediaDetailCoordinates);
         uploadedDate = (TextView) view.findViewById(R.id.mediaDetailuploadeddate);
+        delete = (Button) view.findViewById(R.id.nominateDeletion);
         categoryContainer = (LinearLayout) view.findViewById(R.id.mediaDetailCategoryContainer);
 
         licenseList = new LicenseList(getActivity());
@@ -180,6 +186,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         } else {
             Timber.d("MediaDetailFragment ready to display details");
             displayMediaDetails(media);
+        }
+        if (media instanceof Contribution) {
+            Contribution c = (Contribution) media;
+            if (c.getState()!= Contribution.STATE_COMPLETED) {
+                delete.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -282,6 +294,14 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
             }
         if (media.getCoordinates() != null) {
             coordinates.setOnClickListener(v -> openMap(media.getCoordinates()));
+        }
+        if (delete.getVisibility()!=View.GONE){
+            delete.setOnClickListener(v -> {
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("media",media);
+                Intent deleteIntent = new Intent(getActivity(), DeleteActivity.class);
+                startActivity(deleteIntent);
+            });
         }
     }
 
