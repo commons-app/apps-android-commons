@@ -10,6 +10,7 @@ import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.MediaWikiImageView;
 import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.contributions.ContributionsSyncAdapter;
+import fr.free.nrw.commons.delete.DeleteActivity;
 import fr.free.nrw.commons.modifications.ModificationsSyncAdapter;
 import fr.free.nrw.commons.settings.SettingsFragment;
 
@@ -33,6 +34,8 @@ public interface CommonsApplicationComponent extends AndroidInjector<Application
     void inject(MediaWikiImageView mediaWikiImageView);
 
     void inject(LoginActivity activity);
+
+    void inject(DeleteActivity activity);
 
     void inject(SettingsFragment fragment);
 

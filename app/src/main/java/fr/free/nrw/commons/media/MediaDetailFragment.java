@@ -297,6 +297,7 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
         }
         if (delete.getVisibility()!=View.GONE){
             delete.setOnClickListener(v -> {
+                Timber.d("clicked delete");
                 Bundle bundle = new Bundle();
                 bundle.putParcelable("media",media);
                 Intent deleteIntent = new Intent(getActivity(), DeleteActivity.class);
