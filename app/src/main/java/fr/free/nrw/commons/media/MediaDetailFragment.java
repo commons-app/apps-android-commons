@@ -14,6 +14,7 @@ import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -273,7 +274,12 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
     }
 
     private void setOnClickListeners(final Media media) {
-        license.setOnClickListener(v -> openWebBrowser(licenseLink(media)));
+        if (licenseLink(media) != null) {
+            license.setOnClickListener(v -> openWebBrowser(licenseLink(media)));
+            } else {
+            Toast toast = Toast.makeText(getContext(), getString(R.string.null_url), Toast.LENGTH_SHORT);
+            toast.show();
+            }
         if (media.getCoordinates() != null) {
             coordinates.setOnClickListener(v -> openMap(media.getCoordinates()));
         }
