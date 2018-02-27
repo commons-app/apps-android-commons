@@ -20,8 +20,6 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.mapbox.mapboxsdk.maps.MapboxMap;
-import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
 import java.util.List;
 
@@ -69,7 +67,9 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     private BottomSheetBehavior bottomSheetBehavior; // Behavior for list bottom sheet
     private BottomSheetBehavior bottomSheetBehaviorForDetails; // Behavior for details bottom sheet
     private NearbyMapFragment nearbyMapFragment;
-    private static final String TAG_RETAINED_FRAGMENT = "RetainedFragment";
+    private NearbyListFragment nearbyListFragment;
+    private static final String TAG_RETAINED_MAP_FRAGMENT = NearbyMapFragment.class.getSimpleName();
+    private static final String TAG_RETAINED_LIST_FRAGMENT = NearbyListFragment.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,13 +86,14 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     private void resumeFragment() {
         // find the retained fragment on activity restarts
         android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
-        nearbyMapFragment = (NearbyMapFragment) fm.findFragmentByTag(TAG_RETAINED_FRAGMENT);
+        nearbyMapFragment = (NearbyMapFragment) fm.findFragmentByTag(TAG_RETAINED_MAP_FRAGMENT);
 
         // create the fragment and data the first time
         if (nearbyMapFragment == null) {
             // add the fragment
-            nearbyMapFragment = new NearbyMapFragment();
-            fm.beginTransaction().add(nearbyMapFragment, TAG_RETAINED_FRAGMENT).commit();
+            //nearbyMapFragment = new NearbyMapFragment();
+            //fm.beginTransaction().add(nearbyMapFragment, TAG_RETAINED_MAP_FRAGMENT).commit();
+            setMapFragment();
             // load data from a data source or perform any calculation
         }
 
@@ -296,7 +297,8 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
             // we will not need this fragment anymore, this may also be a good place to signal
             // to the retained fragment object to perform its own cleanup.
-            fm.beginTransaction().remove(nearbyMapFragment).commit();
+            //fm.beginTransaction().remove(nearbyMapFragment).commit();
+            setMapFragment();
         }
     }
 
@@ -403,7 +405,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     }
 
     private NearbyMapFragment getMapFragment() {
-        return (NearbyMapFragment) getSupportFragmentManager().findFragmentByTag("NearbyMapFragment");
+        return (NearbyMapFragment) getSupportFragmentManager().findFragmentByTag(NearbyMapFragment.class.getName());
     }
 
     private void updateMapFragment(boolean isSlightUpdate) {
@@ -436,6 +438,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                         .subscribe(this::populatePlaces);
                 nearbyMapFragment.setArguments(bundle);
                 nearbyMapFragment.updateMapSignificantly();
+
                 return;
             }
 
@@ -461,9 +464,9 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
      */
     private void setMapFragment() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        Fragment fragment = new NearbyMapFragment();
-        fragment.setArguments(bundle);
-        fragmentTransaction.replace(R.id.container, fragment, fragment.getClass().getSimpleName());
+        nearbyMapFragment = new NearbyMapFragment();
+        nearbyMapFragment.setArguments(bundle);
+        fragmentTransaction.replace(R.id.container, nearbyMapFragment, nearbyMapFragment.getClass().getSimpleName());
         fragmentTransaction.commitAllowingStateLoss();
     }
 
