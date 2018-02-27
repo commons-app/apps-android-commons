@@ -134,6 +134,17 @@ public abstract class NavigationBaseActivity extends BaseActivity
                     Toast.makeText(this, R.string.no_email_client, Toast.LENGTH_SHORT).show();
                 }
                 return true;
+            case R.id.action_rate:
+                drawerLayout.closeDrawer(navigationView);
+                final String appPackageName = getPackageName();
+                Toast.makeText(this, appPackageName, Toast.LENGTH_SHORT).show();
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                }
+                catch (android.content.ActivityNotFoundException anfe) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+                }
+                return true;
             case R.id.action_logout:
                 new AlertDialog.Builder(this)
                         .setMessage(R.string.logout_verification)
