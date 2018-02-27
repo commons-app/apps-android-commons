@@ -233,26 +233,14 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
         if (ViewCompat.getLayoutDirection(getView()) == ViewCompat.LAYOUT_DIRECTION_LTR) {
             value = titleEdit.getRight() - titleEdit.getCompoundDrawables()[2].getBounds().width();
             if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() >= value) {
-                new AlertDialog.Builder(getContext())
-                        .setTitle(R.string.media_detail_title)
-                        .setMessage(R.string.title_info)
-                        .setCancelable(true)
-                        .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
-                        .create()
-                        .show();
+                showInfoAlert(R.string.media_detail_title, R.string.title_info);
                 return true;
             }
         }
         else {
             value = titleEdit.getLeft() + titleEdit.getCompoundDrawables()[0].getBounds().width();
             if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() <= value) {
-                new AlertDialog.Builder(getContext())
-                        .setTitle(R.string.media_detail_title)
-                        .setMessage(R.string.title_info)
-                        .setCancelable(true)
-                        .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
-                        .create()
-                        .show();
+                showInfoAlert(R.string.media_detail_title, R.string.title_info);
                 return true;
             }
         }
@@ -265,26 +253,14 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
         if (ViewCompat.getLayoutDirection(getView()) == ViewCompat.LAYOUT_DIRECTION_LTR) {
             value = descEdit.getRight() - descEdit.getCompoundDrawables()[2].getBounds().width();
             if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() >= value) {
-                new AlertDialog.Builder(getContext())
-                        .setTitle(R.string.media_detail_description)
-                        .setMessage(R.string.description_info)
-                        .setCancelable(true)
-                        .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
-                        .create()
-                        .show();
+                showInfoAlert(R.string.media_detail_description,R.string.description_info);
                 return true;
             }
         }
         else{
             value = descEdit.getLeft() + descEdit.getCompoundDrawables()[0].getBounds().width();
             if (motionEvent.getAction() == ACTION_UP && motionEvent.getRawX() <= value) {
-                new AlertDialog.Builder(getContext())
-                        .setTitle(R.string.media_detail_description)
-                        .setMessage(R.string.description_info)
-                        .setCancelable(true)
-                        .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
-                        .create()
-                        .show();
+                showInfoAlert(R.string.media_detail_description,R.string.description_info);
                 return true;
             }
         }
@@ -350,5 +326,15 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
                 getActivity().invalidateOptionsMenu();
             }
         }
+    }
+
+    private void showInfoAlert (int titleStringID, int messageStringID){
+        new AlertDialog.Builder(getContext())
+                .setTitle(titleStringID)
+                .setMessage(messageStringID)
+                .setCancelable(true)
+                .setNeutralButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
+                .create()
+                .show();
     }
 }
