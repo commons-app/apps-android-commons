@@ -354,11 +354,25 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
      * Calls fragment for list view.
      */
     private void setListFragment() {
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        Fragment fragment = new NearbyListFragment();
-        fragment.setArguments(bundle);
-        fragmentTransaction.replace(R.id.container, fragment, fragment.getClass().getSimpleName());
-        fragmentTransaction.commitAllowingStateLoss();
+        NearbyListFragment nearbyListFragment;
+        final String NEARBY_LIST_FRAGMENT_TAG = "NearByListFragment";
+
+        // Lookup the fragment instance that already exists by tag.
+        nearbyListFragment = (NearbyListFragment) getSupportFragmentManager()
+                .findFragmentByTag(NEARBY_LIST_FRAGMENT_TAG);
+
+        if(nearbyListFragment == null){
+            // Only create fragment if its haven't been instantiated.
+            Timber.d("NearbyListFragment -> Instantiating fragment");
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            Fragment fragment = new NearbyListFragment();
+            fragment.setArguments(bundle);
+            fragmentTransaction.replace(R.id.container, fragment, NEARBY_LIST_FRAGMENT_TAG);
+            fragmentTransaction.commitAllowingStateLoss();
+        } else{
+            // fragment is already instantiated, so no need to do it again.
+            Timber.d("NearbyListFragment Fragment already instantiated.");
+        }
     }
 
     @Override
