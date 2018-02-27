@@ -38,6 +38,7 @@ public class AboutActivity extends NavigationBaseActivity {
 
         versionText.setText(BuildConfig.VERSION_NAME);
         initDrawer();
+
     }
 
     @OnClick(R.id.facebook_launch_icon)
@@ -71,6 +72,14 @@ public class AboutActivity extends NavigationBaseActivity {
     @OnClick(R.id.about_privacy_policy)
     public void launchPrivacyPolicy(View view) {
         Utils.handleWebUrl(this,Uri.parse("https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\\"));
+    }
+    @OnClick(R.id.about_rating)
+    public void launchRating(View view) {
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=fr.free.nrw.commons")));
+        } catch (android.content.ActivityNotFoundException e) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=fr.free.nrw.commons")));
+        }
     }
 
 
