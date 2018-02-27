@@ -1,12 +1,17 @@
 package fr.free.nrw.commons.contributions;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
+import android.support.customtabs.CustomTabsIntent;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import fr.free.nrw.commons.BuildConfig;
 import fr.free.nrw.commons.R;
 
 class ContributionsListAdapter extends CursorAdapter {
@@ -33,7 +38,7 @@ class ContributionsListAdapter extends CursorAdapter {
 
         views.imageView.setMedia(contribution);
         views.titleView.setText(contribution.getDisplayTitle());
-
+        views.deleteView.setOnClickListener(v -> delete());
         views.seqNumView.setText(String.valueOf(cursor.getPosition() + 1));
         views.seqNumView.setVisibility(View.VISIBLE);
 
@@ -65,5 +70,17 @@ class ContributionsListAdapter extends CursorAdapter {
                 views.progressView.setVisibility(View.GONE);
                 break;
         }
+    }
+
+    private void delete() {
+        Uri uri = Uri.parse(BuildConfig.DELETE_CONTRIBUTION_URL);
+        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+        builder.setToolbarColor(ContextCompat.getColor(mContext, R.color.primaryColor));
+        builder.setSecondaryToolbarColor(ContextCompat.getColor(mContext, R.color.primaryDarkColor));
+        builder.setExitAnimations(mContext, android.R.anim.slide_in_left,
+                android.R.anim.slide_out_right);
+        CustomTabsIntent customTabsIntent = builder.build();
+        customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        customTabsIntent.launchUrl(mContext, uri);
     }
 }

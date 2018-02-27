@@ -1,6 +1,7 @@
 package fr.free.nrw.commons.contributions;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -13,6 +14,7 @@ class ContributionViewHolder {
     final TextView stateView;
     final TextView seqNumView;
     final ProgressBar progressView;
+    final ImageView deleteView;
 
     ContributionViewHolder(View parent) {
         imageView = (MediaWikiImageView) parent.findViewById(R.id.contributionImage);
@@ -20,5 +22,6 @@ class ContributionViewHolder {
         stateView = (TextView)parent.findViewById(R.id.contributionState);
         seqNumView = (TextView)parent.findViewById(R.id.contributionSequenceNumber);
         progressView = (ProgressBar)parent.findViewById(R.id.contributionProgress);
+        deleteView = (ImageView) parent.findViewById(R.id.contributionDelete);
     }
 }
