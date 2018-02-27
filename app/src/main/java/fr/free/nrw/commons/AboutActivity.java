@@ -3,6 +3,8 @@ package fr.free.nrw.commons;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.customtabs.CustomTabsIntent;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.TextView;
 
@@ -47,22 +49,29 @@ public class AboutActivity extends NavigationBaseActivity {
             intent.setPackage("com.facebook.katana");
             startActivity(intent);
         } catch (Exception e) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/" + "1921335171459985")));
+            Utils.handleWebUrl(this,Uri.parse("https://www.facebook.com/" + "1921335171459985"));
         }
-
     }
 
     @OnClick(R.id.github_launch_icon)
     public void launchGithub(View view) {
-
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/commons-app/apps-android-commons\\"));
-        startActivity(browserIntent);
+        Utils.handleWebUrl(this,Uri.parse("https://commons-app.github.io/\\"));
     }
 
     @OnClick(R.id.website_launch_icon)
     public void launchWebsite(View view) {
-
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://commons-app.github.io/\\"));
-        startActivity(browserIntent);
+        Utils.handleWebUrl(this,Uri.parse("https://commons-app.github.io/\\"));
     }
+
+    @OnClick(R.id.about_credits)
+    public void launchCredits(View view) {
+        Utils.handleWebUrl(this,Uri.parse("https://github.com/commons-app/apps-android-commons/blob/master/CREDITS/\\"));
+    }
+
+    @OnClick(R.id.about_privacy_policy)
+    public void launchPrivacyPolicy(View view) {
+        Utils.handleWebUrl(this,Uri.parse("https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\\"));
+    }
+
+
 }
