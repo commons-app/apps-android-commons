@@ -60,6 +60,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     private SharedPreferences sharedPreferences;
     private NearbyActivityMode viewMode;
     private Disposable placesDisposable;
+    private boolean locationChanged;
     private boolean lockNearbyView; //Determines if the nearby places needs to be refreshed
     @BindView(R.id.swipe_container) SwipeRefreshLayout swipeLayout;
     @Override
@@ -82,8 +83,10 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     private void initViewState() {
         if (sharedPreferences.getBoolean(MAP_LAST_USED_PREFERENCE, false)) {
+            swipeLayout.setEnabled(false);
             viewMode = NearbyActivityMode.MAP;
         } else {
+            swipeLayout.setEnabled(true);
             viewMode = NearbyActivityMode.LIST;
         }
     }
@@ -226,8 +229,10 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     private void toggleView() {
         if (viewMode.isMap()) {
+            swipeLayout.setEnabled(false);
             setMapFragment();
         } else {
+            swipeLayout.setEnabled(true);
             setListFragment();
         }
         sharedPreferences.edit().putBoolean(MAP_LAST_USED_PREFERENCE, viewMode.isMap()).apply();
@@ -273,10 +278,15 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         locationManager.registerLocationManager();
         LatLng lastLocation = locationManager.getLastLocation();
         if (curLatLang != null && curLatLang.equals(lastLocation)) { //refresh view only if location has changed
+            locationChanged=false;
             if (isHardRefresh) {
                 ViewUtil.showLongToast(this, R.string.nearby_location_has_not_changed);
+                swipeLayout.setRefreshing(false);
             }
             return;
+        }
+        else {
+            locationChanged=true;
         }
         curLatLang = lastLocation;
 
@@ -363,6 +373,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     @Override
     public void onLocationChanged(LatLng latLng) {
-        refreshView(false);
+        if(locationChanged)
+            refreshView(false);
     }
 }
