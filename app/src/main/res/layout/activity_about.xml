@@ -104,35 +104,6 @@
 
                 </LinearLayout>
 
-                <fr.free.nrw.commons.ui.widget.HtmlTextView
-                    android:id="@+id/about_privacy_policy"
-                    style="?android:textAppearanceSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/standard_gap"
-                    android:gravity="center"
-                    android:text="@string/about_privacy_policy" />
-
-                <fr.free.nrw.commons.ui.widget.HtmlTextView
-                    android:id="@+id/about_credits"
-                    style="?android:textAppearanceSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/standard_gap"
-                    android:gravity="center"
-                    android:text="@string/about_credits" />
-
-                <TextView
-                    android:id="@+id/about_uploads_to"
-                    style="?android:textAppearanceSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/large_gap"
-                    android:alpha="0.2"
-                    android:gravity="center" />
-
-            </LinearLayout>
-
             <TextView
                 android:id="@+id/about_rate_us"
                 android:layout_width="wrap_content"
@@ -142,20 +113,22 @@
                 android:textColor="@color/primaryColor"
                 android:text="@string/about_rate_us" />
           
-            <fr.free.nrw.commons.ui.widget.HtmlTextView
+            <TextView
                 android:id="@+id/about_privacy_policy"
                 style="?android:textAppearanceSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/standard_gap"
+                android:textColor="@color/primaryColor"
                 android:gravity="center"
                 android:text="@string/about_privacy_policy" />
 
-            <fr.free.nrw.commons.ui.widget.HtmlTextView
+            <TextView
                 android:id="@+id/about_credits"
                 style="?android:textAppearanceSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/primaryColor"
                 android:layout_marginTop="@dimen/standard_gap"
                 android:gravity="center"
                 android:text="@string/about_credits" />
