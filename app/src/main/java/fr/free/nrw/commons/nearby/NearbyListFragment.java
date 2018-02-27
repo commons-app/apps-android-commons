@@ -71,4 +71,8 @@ public class NearbyListFragment extends DaggerFragment {
 
         recyclerView.setAdapter(adapterFactory.create(placeList));
     }
+
+    public void updateNearbyListSignificantly() {
+        adapterFactory.updateAdapterData();
+    }
 }

@@ -9,6 +9,7 @@ import java.util.List;
 
 class NearbyAdapterFactory {
 
+
     NearbyAdapterFactory(){
 
     }
@@ -19,5 +20,10 @@ class NearbyAdapterFactory {
         ListAdapteeCollection<Place> collection = new ListAdapteeCollection<>(
                 placeList != null ? placeList : Collections.emptyList());
         return new RVRendererAdapter<>(builder, collection);
+    }
+
+    public void updateAdapterData(List<Place> newPlaceList, RVRendererAdapter<Place> rendererAdapter) {
+        rendererAdapter.notifyDataSetChanged();
+        rendererAdapter.diffUpdate(newPlaceList);
     }
 }
