@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Commons</string>
+  <string name="bullet">&#8226;  </string>
   <string name="menu_settings">Settings</string>
   <string name="username">Username</string>
   <string name="password">Password</string>
@@ -120,11 +121,20 @@
   <string name="tutorial_1_text">Wikimedia Commons hosts most of the images that are used in Wikipedia.</string>
   <string name="tutorial_1_subtext">Your images help educate people around the world!</string>
   <string name="tutorial_2_text">Please upload pictures that are taken or created entirely by yourself:</string>
-  <string name="tutorial_2_subtext">- Natural objects (flowers, animals, mountains)\n- Useful objects (bicycles, train stations)\n- Famous people (your mayor, Olympic athletes you met)</string>
+  <string name="tutorial_2_subtext">Natural objects (flowers, animals, mountains)\n&#8226; Useful objects (bicycles, train stations)\n&#8226; Famous people (your mayor, Olympic athletes you met)</string>
+  <string name="tutorial_2_subtext_1">Natural objects (flowers, animals, mountains)</string>
+  <string name="tutorial_2_subtext_2">Useful objects (bicycles, train stations)</string>
+  <string name="tutorial_2_subtext_3">Famous people (your mayor, Olympic athletes you met)</string>
   <string name="tutorial_3_text">Please do NOT upload:</string>
   <string name="tutorial_3_subtext">- Selfies or pictures of your friends\n- Pictures you downloaded from the Internet\n- Screenshots of proprietary apps</string>
+  <string name="tutorial_3_subtext_1">Selfies or pictures of your friends</string>
+  <string name="tutorial_3_subtext_2">Pictures you downloaded from the Internet</string>
+  <string name="tutorial_3_subtext_3">Screenshots of proprietary apps</string>
   <string name="tutorial_4_text">Example upload:</string>
   <string name="tutorial_4_subtext">- Title: Sydney Opera House\n- Description: Sydney Opera House as viewed from across the bay\n- Categories: Sydney Opera House from the west, Sydney Opera House remote views</string>
+  <string name="tutorial_4_subtext_1">Title: Sydney Opera House</string>
+  <string name="tutorial_4_subtext_2">Description: Sydney Opera House as viewed from across the bay</string>
+  <string name="tutorial_4_subtext_3">Categories: Sydney Opera House from the west, Sydney Opera House remote views</string>
   <string name="welcome_wikipedia_text">Contribute your images. Help Wikipedia articles come to life!</string>
   <string name="welcome_wikipedia_subtext">Images on Wikipedia come from Wikimedia Commons.</string>
   <string name="welcome_copyright_text">Your images help educate people around the world.</string>
@@ -214,6 +224,7 @@
   <string name="login_to_your_account">Login to your account</string>
   <string name="send_log_file">Send log file</string>
   <string name="send_log_file_description">Send log file to developers via email</string>
+  <string name="null_url">Error! URL not found</string>
 
   <string name="nearby_location_has_not_changed">Location has not changed.</string>
   <string name="nearby_location_not_available">Location not available.</string>
