@@ -73,5 +73,4 @@ public class AboutActivity extends NavigationBaseActivity {
         Utils.handleWebUrl(this,Uri.parse("https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\\"));
     }
 
-
 }
