@@ -47,17 +47,13 @@ public class AboutActivity extends NavigationBaseActivity {
 
     @OnClick(R.id.facebook_launch_icon)
     public void launchFacebook(View view) {
-
         Intent intent;
-
         try {
             intent = new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/" + "1921335171459985"));
             intent.setPackage("com.facebook.katana");
             startActivity(intent);
-
         } catch (Exception e) {
             intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/" + "1921335171459985\\"));
-            //check if web browser available
             if(intent.resolveActivity(this.getPackageManager()) != null){
                 Utils.handleWebUrl(this,Uri.parse("https://www.facebook.com/" + "1921335171459985"));
             } else {
@@ -82,7 +78,6 @@ public class AboutActivity extends NavigationBaseActivity {
     @OnClick(R.id.website_launch_icon)
     public void launchWebsite(View view) {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://commons-app.github.io/\\"));
-        //check if web browser available
         if (browserIntent.resolveActivity(this.getPackageManager()) != null) {
             Utils.handleWebUrl(this,Uri.parse("https://commons-app.github.io/\\"));
         } else {
@@ -95,7 +90,6 @@ public class AboutActivity extends NavigationBaseActivity {
     @OnClick(R.id.about_credits)
     public void launchCredits(View view) {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/commons-app/apps-android-commons/blob/master/CREDITS/\\"));
-        //check if web browser available
         if (browserIntent.resolveActivity(this.getPackageManager()) != null) {
             Utils.handleWebUrl(this,Uri.parse("https://github.com/commons-app/apps-android-commons/blob/master/CREDITS/\\"));
         } else {
@@ -107,14 +101,12 @@ public class AboutActivity extends NavigationBaseActivity {
     @OnClick(R.id.about_privacy_policy)
     public void launchPrivacyPolicy(View view) {
       Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\\"));
-        //check if web browser available
         if (browserIntent.resolveActivity(this.getPackageManager()) != null) {
             Utils.handleWebUrl(this,Uri.parse("https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\\"));
         } else {
             Toast toast = Toast.makeText(this, getString(R.string.no_web_browser), LENGTH_SHORT);
             toast.show();
         }
-        
     }
 
 }
