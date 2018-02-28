@@ -5,119 +5,130 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/toolbar"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/toolbar"
-            android:layout_marginLeft="@dimen/activity_margin_horizontal"
-            android:layout_marginStart="@dimen/activity_margin_horizontal"
-            android:layout_marginRight="@dimen/activity_margin_horizontal"
-            android:layout_marginEnd="@dimen/activity_margin_horizontal"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_launcher"
-                android:contentDescription= "@string/commons_logo"
-                />
-
-            <TextView
-                style="?android:textAppearanceLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/app_name" />
-
-            <TextView
-                android:id="@+id/about_version"
-                android:layout_width="wrap_content"
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <fr.free.nrw.commons.ui.widget.HtmlTextView
-                android:id="@+id/about_license"
-                style="?android:textAppearanceSmall"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/toolbar"
+                android:layout_marginEnd="@dimen/activity_margin_horizontal"
+                android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                android:layout_marginRight="@dimen/activity_margin_horizontal"
+                android:layout_marginStart="@dimen/activity_margin_horizontal"
+                android:layout_marginTop="@dimen/activity_margin_vertical"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/commons_logo"
+                    android:src="@drawable/ic_launcher" />
+
+                <TextView
+                    style="?android:textAppearanceLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/app_name" />
+
+                <TextView
+                    android:id="@+id/about_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <fr.free.nrw.commons.ui.widget.HtmlTextView
+                    android:id="@+id/about_license"
+                    style="?android:textAppearanceSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/standard_gap"
+                    android:gravity="center"
+                    android:text="@string/about_license" />
+
+                <fr.free.nrw.commons.ui.widget.HtmlTextView
+                    android:id="@+id/about_improve"
+                    style="?android:textAppearanceSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_gap"
+                    android:gravity="center"
+                    android:text="@string/about_improve" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/activity_margin_horizontal"
+                    android:layout_marginLeft="@dimen/activity_margin_horizontal"
+                    android:layout_marginRight="@dimen/activity_margin_horizontal"
+                    android:layout_marginStart="@dimen/activity_margin_horizontal"
+                    android:layout_marginTop="@dimen/activity_margin_horizontal"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/website_launch_icon"
+                        android:layout_width="@dimen/overflow_icon_dimen"
+                        android:layout_height="@dimen/overflow_icon_dimen"
+                        android:layout_margin="@dimen/activity_margin_horizontal"
+                        android:contentDescription="@string/commons_website"
+                        app:srcCompat="@drawable/ic_action_website" />
+
+                    <ImageView
+                        android:id="@+id/facebook_launch_icon"
+                        android:layout_width="@dimen/overflow_icon_dimen"
+                        android:layout_height="@dimen/overflow_icon_dimen"
+                        android:layout_margin="@dimen/activity_margin_horizontal"
+                        android:contentDescription="@string/commons_facebook"
+                        app:srcCompat="@drawable/ic_action_facebook" />
+
+                    <ImageView
+                        android:id="@+id/github_launch_icon"
+                        android:layout_width="@dimen/overflow_icon_dimen"
+                        android:layout_height="@dimen/overflow_icon_dimen"
+                        android:layout_margin="@dimen/activity_margin_horizontal"
+                        android:contentDescription="@string/commons_github"
+                        app:srcCompat="@drawable/ic_action_github" />
+
+                </LinearLayout>
+
+            <TextView
+                android:id="@+id/about_rate_us"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/standard_gap"
                 android:gravity="center"
-                android:text="@string/about_license" />
-
-            <fr.free.nrw.commons.ui.widget.HtmlTextView
-                android:id="@+id/about_improve"
-                style="?android:textAppearanceSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/small_gap"
-                android:gravity="center"
-                android:text="@string/about_improve" />
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_marginLeft="@dimen/activity_margin_horizontal"
-                android:layout_marginStart="@dimen/activity_margin_horizontal"
-                android:layout_marginRight="@dimen/activity_margin_horizontal"
-                android:layout_marginTop="@dimen/activity_margin_horizontal"
-                android:layout_marginEnd="@dimen/activity_margin_horizontal"
-                >
-
-                <ImageView
-                    android:id="@+id/website_launch_icon"
-                    android:layout_width="@dimen/overflow_icon_dimen"
-                    android:layout_height="@dimen/overflow_icon_dimen"
-                    app:srcCompat="@drawable/ic_action_website"
-                    android:contentDescription= "@string/commons_website"
-                    android:layout_margin="@dimen/activity_margin_horizontal"
-                    />
-
-                <ImageView
-                    android:id="@+id/facebook_launch_icon"
-                    android:layout_width="@dimen/overflow_icon_dimen"
-                    android:layout_height="@dimen/overflow_icon_dimen"
-                    app:srcCompat="@drawable/ic_action_facebook"
-                    android:contentDescription= "@string/commons_facebook"
-                    android:layout_margin="@dimen/activity_margin_horizontal"
-                    />
-
-                <ImageView
-                    android:id="@+id/github_launch_icon"
-                    android:layout_width="@dimen/overflow_icon_dimen"
-                    android:layout_height="@dimen/overflow_icon_dimen"
-                    app:srcCompat="@drawable/ic_action_github"
-                    android:contentDescription= "@string/commons_github"
-                    android:layout_margin="@dimen/activity_margin_horizontal"
-                    />
-
-            </LinearLayout>
-
-            <fr.free.nrw.commons.ui.widget.HtmlTextView
+                android:textColor="@color/primaryColor"
+                android:text="@string/about_rate_us" />
+          
+            <TextView
                 android:id="@+id/about_privacy_policy"
                 style="?android:textAppearanceSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/standard_gap"
+                android:textColor="@color/primaryColor"
                 android:gravity="center"
                 android:text="@string/about_privacy_policy" />
 
-            <fr.free.nrw.commons.ui.widget.HtmlTextView
+            <TextView
                 android:id="@+id/about_credits"
                 style="?android:textAppearanceSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/primaryColor"
                 android:layout_marginTop="@dimen/standard_gap"
                 android:gravity="center"
                 android:text="@string/about_credits" />
@@ -132,7 +143,8 @@
                 android:gravity="center" />
 
         </LinearLayout>
-    </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation_view"
@@ -140,6 +152,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/drawer_header"
-        app:menu="@menu/drawer"/>
+        app:menu="@menu/drawer" />
 
 </android.support.v4.widget.DrawerLayout>

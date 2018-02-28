@@ -5,12 +5,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.pedrogomez.renderers.RVRendererAdapter;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -48,8 +50,9 @@ public class NotificationActivity extends NavigationBaseActivity {
     }
 
     private void initListView() {
-        recyclerView = findViewById(R.id.listView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        DividerItemDecoration itemDecor = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
+        recyclerView.addItemDecoration(itemDecor);
         addNotifications();
     }
 
@@ -61,6 +64,7 @@ public class NotificationActivity extends NavigationBaseActivity {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(notificationList -> {
+                    Collections.reverse(notificationList);
                     Timber.d("Number of notifications is %d", notificationList.size());
                     setAdapter(notificationList);
                 }, throwable -> Timber.e(throwable, "Error occurred while loading notifications"));

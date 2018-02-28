@@ -3,7 +3,9 @@ package fr.free.nrw.commons.nearby;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -17,6 +19,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.Utils;
 import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.ui.widget.OverlayDialog;
 import fr.free.nrw.commons.utils.DialogUtil;
@@ -141,8 +144,7 @@ public class NearbyInfoDialog extends OverlayDialog {
     }
 
     private void openWebView(Uri link) {
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, link);
-        startActivity(browserIntent);
+        Utils.handleWebUrl(getContext(),link);
     }
 
     @OnClick(R.id.emptyLayout)

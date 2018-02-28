@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.support.customtabs.CustomTabsIntent;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,23 +59,20 @@ public class AboutActivity extends NavigationBaseActivity {
             intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/" + "1921335171459985\\"));
             //check if web browser available
             if(intent.resolveActivity(this.getPackageManager()) != null){
-                startActivity(intent);
+                Utils.handleWebUrl(this,Uri.parse("https://www.facebook.com/" + "1921335171459985"));
             } else {
                 Toast toast = Toast.makeText(this, getString(R.string.no_web_browser), LENGTH_SHORT);
                 toast.show();
             }
-
         }
-
     }
 
     @OnClick(R.id.github_launch_icon)
     public void launchGithub(View view) {
-
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/commons-app/apps-android-commons\\"));
         //check if web browser available
         if (browserIntent.resolveActivity(this.getPackageManager()) != null) {
-            startActivity(browserIntent);
+            Utils.handleWebUrl(this,Uri.parse("https://github.com/commons-app/apps-android-commons\\"));
         } else {
             Toast toast = Toast.makeText(this, getString(R.string.no_web_browser), LENGTH_SHORT);
             toast.show();
@@ -82,14 +81,40 @@ public class AboutActivity extends NavigationBaseActivity {
 
     @OnClick(R.id.website_launch_icon)
     public void launchWebsite(View view) {
-
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://commons-app.github.io/\\"));
         //check if web browser available
         if (browserIntent.resolveActivity(this.getPackageManager()) != null) {
-            startActivity(browserIntent);
+            Utils.handleWebUrl(this,Uri.parse("https://commons-app.github.io/\\"));
         } else {
             Toast toast = Toast.makeText(this, getString(R.string.no_web_browser), LENGTH_SHORT);
             toast.show();
         }
     }
+
+  
+    @OnClick(R.id.about_credits)
+    public void launchCredits(View view) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/commons-app/apps-android-commons/blob/master/CREDITS/\\"));
+        //check if web browser available
+        if (browserIntent.resolveActivity(this.getPackageManager()) != null) {
+            Utils.handleWebUrl(this,Uri.parse("https://github.com/commons-app/apps-android-commons/blob/master/CREDITS/\\"));
+        } else {
+            Toast toast = Toast.makeText(this, getString(R.string.no_web_browser), LENGTH_SHORT);
+            toast.show();
+        }
+    }
+
+    @OnClick(R.id.about_privacy_policy)
+    public void launchPrivacyPolicy(View view) {
+      Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\\"));
+        //check if web browser available
+        if (browserIntent.resolveActivity(this.getPackageManager()) != null) {
+            Utils.handleWebUrl(this,Uri.parse("https://github.com/commons-app/apps-android-commons/wiki/Privacy-policy\\"));
+        } else {
+            Toast toast = Toast.makeText(this, getString(R.string.no_web_browser), LENGTH_SHORT);
+            toast.show();
+        }
+        
+    }
+
 }
