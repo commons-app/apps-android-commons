@@ -85,9 +85,9 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     private void resumeFragment() {
         // find the retained fragment on activity restarts
-        android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
-        nearbyMapFragment = (NearbyMapFragment) fm.findFragmentByTag(TAG_RETAINED_MAP_FRAGMENT);
-
+        //android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+       // nearbyMapFragment = (NearbyMapFragment) fm.findFragmentByTag(TAG_RETAINED_MAP_FRAGMENT);
+        nearbyMapFragment = getMapFragment();
         // create the fragment and data the first time
         if (nearbyMapFragment == null) {
             // add the fragment
@@ -294,11 +294,9 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         // this means that this activity will not be recreated now, user is leaving it
         // or the activity is otherwise finishing
         if(isFinishing()) {
-            android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
             // we will not need this fragment anymore, this may also be a good place to signal
             // to the retained fragment object to perform its own cleanup.
-            //fm.beginTransaction().remove(nearbyMapFragment).commit();
-            setMapFragment();
+            removeFragment();
         }
     }
 
@@ -408,6 +406,13 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         return (NearbyMapFragment) getSupportFragmentManager().findFragmentByTag(NearbyMapFragment.class.getName());
     }
 
+    private void removeFragment() {
+        if (nearbyMapFragment != null) {
+            android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+            fm.beginTransaction().remove(nearbyMapFragment).commit();
+        }
+    }
+
     private void updateMapFragment(boolean isSlightUpdate) {
         /*
         * Significant update means updating nearby place markers. Slightly update means only
@@ -466,7 +471,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         nearbyMapFragment = new NearbyMapFragment();
         nearbyMapFragment.setArguments(bundle);
-        fragmentTransaction.replace(R.id.container, nearbyMapFragment, nearbyMapFragment.getClass().getSimpleName());
+        fragmentTransaction.replace(R.id.container, nearbyMapFragment, TAG_RETAINED_MAP_FRAGMENT);
         fragmentTransaction.commitAllowingStateLoss();
     }
 
