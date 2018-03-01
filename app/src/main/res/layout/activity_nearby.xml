@@ -14,6 +14,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_recenter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/toolbar"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="19dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:backgroundTint="@color/main_background_light"
+                app:fabSize="normal"
+                app:layout_anchorGravity="top|right"
+                app:srcCompat="@drawable/ic_my_location_black_24dp" />
+
             <include
                 android:id="@+id/toolbar"
                 layout="@layout/toolbar"
@@ -36,21 +53,28 @@
                 <FrameLayout
                     android:id="@+id/container"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"></FrameLayout>
+                    android:layout_height="match_parent">
+
+                </FrameLayout>
 
             </LinearLayout>
+
             <View
+                android:id="@+id/transparentView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/transparentView"
-                android:layout_below="@id/toolbar"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
                 android:background="#aa969696"
-                android:elevation="6dp"
-                />
+                android:elevation="6dp" />
+
         </RelativeLayout>
 
         <include layout="@layout/bottom_sheet_nearby" />
         <include layout="@layout/bottom_sheet_details" android:id="@+id/bottom_sheet_details" />
+
+
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_plus"
@@ -133,6 +157,7 @@
             app:srcCompat="@drawable/ic_commons_icon_vector"
             android:scaleType="center"
             />
+
 
     </android.support.design.widget.CoordinatorLayout>
 
