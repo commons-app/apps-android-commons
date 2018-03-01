@@ -212,18 +212,18 @@ public class NearbyMapFragment extends DaggerFragment {
         });
 
         fabRecenter.setOnClickListener(view -> {
+            if(curLatLng!=null) {
+                mapView.getMapAsync(mapboxMap -> {
+                    CameraPosition position = new CameraPosition.Builder()
+                            .target(new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude())) // Sets the new camera position
+                            .zoom(11) // Sets the zoom
+                            .build(); // Creates a CameraPosition from the builder
 
-            mapView.getMapAsync(mapboxMap ->  {
-                CameraPosition position = new CameraPosition.Builder()
-                        .target(new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude())) // Sets the new camera position
-                        .zoom(11) // Sets the zoom
-                        .build(); // Creates a CameraPosition from the builder
+                    mapboxMap.animateCamera(CameraUpdateFactory
+                            .newCameraPosition(position), 1000);
 
-                mapboxMap.animateCamera(CameraUpdateFactory
-                        .newCameraPosition(position), 1000);
-
-            });
-
+                });
+            }
         });
 
         bottomSheetDetailsBehavior.setBottomSheetCallback(new BottomSheetBehavior
@@ -286,7 +286,7 @@ public class NearbyMapFragment extends DaggerFragment {
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(mapboxMap -> {
             mapboxMap.addMarkers(baseMarkerOptions);
-
+            fabRecenter.setVisibility(View.VISIBLE);
             mapboxMap.setOnInfoWindowCloseListener(marker -> {
                 if (marker == selected){
                     bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);

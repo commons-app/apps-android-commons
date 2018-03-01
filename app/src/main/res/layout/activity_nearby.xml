@@ -28,6 +28,7 @@
                 android:focusable="true"
                 app:backgroundTint="@color/main_background_light"
                 app:fabSize="normal"
+                android:visibility="invisible"
                 app:layout_anchorGravity="top|right"
                 app:srcCompat="@drawable/ic_my_location_black_24dp" />
 
