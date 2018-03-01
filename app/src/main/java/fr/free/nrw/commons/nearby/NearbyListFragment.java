@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.pedrogomez.renderers.RVRendererAdapter;
+import com.pedrogomez.renderers.RendererAdapter;
 
 import java.lang.reflect.Type;
 import java.util.Collections;
@@ -56,9 +58,19 @@ public class NearbyListFragment extends DaggerFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         // Check that this is the first time view is created,
         // to avoid double list when screen orientation changed
+        Bundle bundle = this.getArguments();
+        recyclerView.setAdapter(adapterFactory.create(getPlaceListFromBundle(bundle)));
+    }
+
+    public void updateNearbyListSignificantly() {
+        Bundle bundle = this.getArguments();
+        adapterFactory.updateAdapterData(getPlaceListFromBundle(bundle),
+                (RVRendererAdapter<Place>) recyclerView.getAdapter());
+    }
+
+    private List<Place> getPlaceListFromBundle(Bundle bundle) {
         List<Place> placeList = Collections.emptyList();
 
-        Bundle bundle = this.getArguments();
         if (bundle != null) {
             String gsonPlaceList = bundle.getString("PlaceList", "[]");
             placeList = gson.fromJson(gsonPlaceList, LIST_TYPE);
@@ -68,11 +80,6 @@ public class NearbyListFragment extends DaggerFragment {
 
             placeList = NearbyController.loadAttractionsFromLocationToPlaces(curLatLng, placeList);
         }
-
-        recyclerView.setAdapter(adapterFactory.create(placeList));
-    }
-
-    public void updateNearbyListSignificantly() {
-        adapterFactory.updateAdapterData();
+        return placeList;
     }
 }

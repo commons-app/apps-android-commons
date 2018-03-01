@@ -78,7 +78,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         resumeFragment();
         bundle = new Bundle();
 
-        initBottomSheetBehaviour();
+        //initBottomSheetBehaviour();
         initDrawer();
     }
 
@@ -379,23 +379,23 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         if (nearbyMapFragment == null) {
             lockNearbyView(true);
             setMapFragment();
-
+            setListFragment();
 
             hideProgressBar();
             lockNearbyView(false);
         } else { // There are fragments, just update the map and list
             updateMapFragment(false);
-
+            updateListFragment();
 
         }
 
-        if (nearbyListFragment == null) {
+        /*if (nearbyListFragment == null) {
             lockNearbyView(true);
             setListFragment();
             lockNearbyView(false);
         } else {
             updateListFragment();
-        }
+        }*/
 
     }
 
@@ -449,7 +449,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         * */
 
         NearbyMapFragment nearbyMapFragment = getMapFragment();
-        if (nearbyMapFragment != null) {
+        if (nearbyMapFragment != null && curLatLang != null) {
             // TODO: buradasın eger sınırlara yakınsan significant update yap ve methodların adlarını değiştir.
             /*
             * If we are close to nearby places boundaries, we need a significant update to
@@ -469,7 +469,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
                         .subscribe(this::populatePlaces);
                 nearbyMapFragment.setArguments(bundle);
                 nearbyMapFragment.updateMapSignificantly();
-
+                updateListFragment();
                 return;
             }
 
@@ -479,6 +479,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             } else {
                 nearbyMapFragment.setArguments(bundle);
                 nearbyMapFragment.updateMapSignificantly();
+                updateListFragment();
             }
         } else {
             lockNearbyView(true);
@@ -491,6 +492,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     }
 
     private void updateListFragment() {
+        nearbyListFragment.setArguments(bundle);
         nearbyListFragment.updateNearbyListSignificantly();
     }
 
@@ -503,6 +505,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         nearbyMapFragment.setArguments(bundle);
         fragmentTransaction.replace(R.id.container, nearbyMapFragment, TAG_RETAINED_MAP_FRAGMENT);
         fragmentTransaction.commitAllowingStateLoss();
+        //hideProgressBar();
     }
 
     /**
@@ -513,6 +516,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         nearbyListFragment = new NearbyListFragment();
         nearbyListFragment.setArguments(bundle);
         fragmentTransaction.replace(R.id.container_sheet, nearbyListFragment, TAG_RETAINED_LIST_FRAGMENT);
+        initBottomSheetBehaviour();
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         fragmentTransaction.commitAllowingStateLoss();
     }
