@@ -225,6 +225,7 @@
   <string name="login_to_your_account">Login to your account</string>
   <string name="send_log_file">Send log file</string>
   <string name="send_log_file_description">Send log file to developers via email</string>
+  <string name="no_web_browser">No web browser found to open URL</string>
   <string name="null_url">Error! URL not found</string>
 
   <string name="nearby_location_has_not_changed">Location has not changed.</string>
