@@ -16,4 +16,8 @@
         <attr name="drawableEnd" format="reference"/>
         <attr name="drawableBottom" format="reference"/>
     </declare-styleable>
+
+    <declare-styleable name="ExpandableTextView">
+        <attr name="trimLength" format="integer"/>
+    </declare-styleable>
 </resources>
