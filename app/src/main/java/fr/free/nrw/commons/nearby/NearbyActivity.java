@@ -7,7 +7,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.view.Menu;
@@ -95,6 +94,11 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             //fm.beginTransaction().add(nearbyMapFragment, TAG_RETAINED_MAP_FRAGMENT).commit();
             setMapFragment();
             // load data from a data source or perform any calculation
+        }
+
+        nearbyListFragment = getListFragment();
+        if (nearbyListFragment == null) {
+            setListFragment();
         }
 
     }
@@ -296,7 +300,8 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         if(isFinishing()) {
             // we will not need this fragment anymore, this may also be a good place to signal
             // to the retained fragment object to perform its own cleanup.
-            removeFragment();
+            removeMapFragment();
+            removeListFragment();
         }
     }
 
@@ -371,15 +376,25 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         bundle.putString("BoundaryCoord", gsonBoundaryCoordinates);
 
         // First time to init fragments
-        if (getMapFragment() == null){
+        if (nearbyMapFragment == null) {
             lockNearbyView(true);
             setMapFragment();
-            setListFragment();
+
 
             hideProgressBar();
             lockNearbyView(false);
         } else { // There are fragments, just update the map and list
             updateMapFragment(false);
+
+
+        }
+
+        if (nearbyListFragment == null) {
+            lockNearbyView(true);
+            setListFragment();
+            lockNearbyView(false);
+        } else {
+            updateListFragment();
         }
 
     }
@@ -403,13 +418,24 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     }
 
     private NearbyMapFragment getMapFragment() {
-        return (NearbyMapFragment) getSupportFragmentManager().findFragmentByTag(NearbyMapFragment.class.getName());
+        return (NearbyMapFragment) getSupportFragmentManager().findFragmentByTag(TAG_RETAINED_MAP_FRAGMENT);
     }
 
-    private void removeFragment() {
+    private void removeMapFragment() {
         if (nearbyMapFragment != null) {
             android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
             fm.beginTransaction().remove(nearbyMapFragment).commit();
+        }
+    }
+
+    private NearbyListFragment getListFragment() {
+        return (NearbyListFragment) getSupportFragmentManager().findFragmentByTag(TAG_RETAINED_LIST_FRAGMENT);
+    }
+
+    private void removeListFragment() {
+        if (nearbyListFragment != null) {
+            android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+            fm.beginTransaction().remove(nearbyListFragment).commit();
         }
     }
 
@@ -464,6 +490,10 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         }
     }
 
+    private void updateListFragment() {
+        nearbyListFragment.updateNearbyListSignificantly();
+    }
+
     /**
      * Calls fragment for map view.
      */
@@ -480,9 +510,9 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
      */
     private void setListFragment() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        Fragment fragment = new NearbyListFragment();
-        fragment.setArguments(bundle);
-        fragmentTransaction.replace(R.id.container_sheet, fragment, fragment.getClass().getSimpleName());
+        nearbyListFragment = new NearbyListFragment();
+        nearbyListFragment.setArguments(bundle);
+        fragmentTransaction.replace(R.id.container_sheet, nearbyListFragment, TAG_RETAINED_LIST_FRAGMENT);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         fragmentTransaction.commitAllowingStateLoss();
     }
