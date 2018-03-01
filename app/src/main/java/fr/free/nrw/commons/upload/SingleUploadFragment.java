@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.upload;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -54,6 +55,7 @@ public class SingleUploadFragment extends DaggerFragment {
     @BindView(R.id.licenseSpinner) Spinner licenseSpinner;
 
     @Inject @Named("default_preferences") SharedPreferences prefs;
+    @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
 
     private String license;
     private OnUploadActionInitiated uploadActionInitiatedHandler;
@@ -84,7 +86,6 @@ public class SingleUploadFragment extends DaggerFragment {
 
                 uploadActionInitiatedHandler.uploadActionInitiated(title, desc);
                 return true;
-
         }
         return super.onOptionsItemSelected(item);
     }
@@ -103,6 +104,16 @@ public class SingleUploadFragment extends DaggerFragment {
         licenseItems.add(getString(R.string.license_name_cc_by_sa_four));
 
         license = prefs.getString(Prefs.DEFAULT_LICENSE, Prefs.Licenses.CC_BY_SA_3);
+
+        // If this is a direct upload from Nearby, autofill title and desc fields with the Place's values
+        boolean isNearbyUpload = ((ShareActivity) getActivity()).isNearbyUpload();
+
+        if (isNearbyUpload) {
+            String imageTitle = directPrefs.getString("Title", "");
+            String imageDesc = directPrefs.getString("Desc", "");
+            titleEdit.setText(imageTitle);
+            descEdit.setText(imageDesc);
+        }
 
         // check if this is the first time we have uploaded
         if (prefs.getString("Title", "").trim().length() == 0
@@ -241,6 +252,7 @@ public class SingleUploadFragment extends DaggerFragment {
         return false;
     }
 
+    @SuppressLint("StringFormatInvalid")
     private void setLicenseSummary(String license) {
         licenseSummaryView.setText(getString(R.string.share_license_summary, getString(Utils.licenseNameFor(license))));
     }

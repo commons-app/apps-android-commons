@@ -124,7 +124,7 @@ public class NearbyPlaces {
 
             places.add(new Place(
                     name,
-                    Place.Description.fromText(type), // list
+                    Place.Label.fromText(type), // list
                     type, // details
                     Uri.parse(icon),
                     new LatLng(latitude, longitude, 0),

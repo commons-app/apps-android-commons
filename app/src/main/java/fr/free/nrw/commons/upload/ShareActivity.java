@@ -39,7 +39,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import butterknife.ButterKnife;
-import fr.free.nrw.commons.CommonsApplication;
 import fr.free.nrw.commons.R;
 import fr.free.nrw.commons.auth.AuthenticatedActivity;
 import fr.free.nrw.commons.auth.SessionManager;
@@ -51,7 +50,6 @@ import fr.free.nrw.commons.modifications.CategoryModifier;
 import fr.free.nrw.commons.modifications.ModificationsContentProvider;
 import fr.free.nrw.commons.modifications.ModifierSequence;
 import fr.free.nrw.commons.modifications.TemplateRemoveModifier;
-import fr.free.nrw.commons.mwapi.EventLog;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import timber.log.Timber;
 
@@ -99,6 +97,8 @@ public  class      ShareActivity
     private String description;
     private Snackbar snackbar;
     private boolean duplicateCheckPassed = false;
+
+    private boolean isNearbyUpload = false;
 
     /**
      * Called when user taps the submit button.
@@ -198,6 +198,10 @@ public  class      ShareActivity
         finish();
     }
 
+    protected boolean isNearbyUpload() {
+        return isNearbyUpload;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -223,6 +227,10 @@ public  class      ShareActivity
                 source = intent.getStringExtra(UploadService.EXTRA_SOURCE);
             } else {
                 source = Contribution.SOURCE_EXTERNAL;
+            }
+            if (intent.hasExtra("isDirectUpload")) {
+                Timber.d("This was initiated by a direct upload from Nearby");
+                isNearbyUpload = true;
             }
             mimeType = intent.getType();
         }

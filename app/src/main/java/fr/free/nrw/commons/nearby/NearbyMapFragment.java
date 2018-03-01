@@ -4,6 +4,8 @@ import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -45,10 +47,19 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.free.nrw.commons.R;
-import fr.free.nrw.commons.utils.UriDeserializer;
+import javax.inject.Inject;
+import javax.inject.Named;
 
-public class NearbyMapFragment extends android.support.v4.app.Fragment{
+import dagger.android.support.DaggerFragment;
+import fr.free.nrw.commons.R;
+import fr.free.nrw.commons.contributions.ContributionController;
+import fr.free.nrw.commons.utils.UriDeserializer;
+import timber.log.Timber;
+
+import static android.app.Activity.RESULT_OK;
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+
+public class NearbyMapFragment extends DaggerFragment {
 
     private MapView mapView;
     private List<NearbyBaseMarker> baseMarkerOptions;
@@ -83,12 +94,16 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment{
     private Animation fab_close;
     private Animation fab_open;
     private Animation rotate_forward;
+    private ContributionController controller;
 
     private Place place;
     private Marker selected;
     private Marker currentLocationMarker;
     private MapboxMap mapboxMap;
     private PolygonOptions currentLocationPolygonOptions;
+
+    @Inject @Named("prefs") SharedPreferences prefs;
+    @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
 
     public NearbyMapFragment() {
     }
@@ -468,7 +483,6 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment{
                 this.getView().requestFocus();
                 break;
         }
-
     }
 
     private void hideFAB() {
@@ -509,10 +523,72 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment{
         commonsButton.setEnabled(place.hasCommonsLink());
         commonsButton.setOnClickListener(view -> openWebView(place.siteLinks.getCommonsLink()));
 
-        icon.setImageResource(place.getDescription().getIcon());
-        description.setText(place.getDescription().getText());
-        title.setText(place.name);
-        distance.setText(place.distance);
+        icon.setImageResource(place.getLabel().getIcon());
+
+        description.setText(place.getLongDescription());
+        title.setText(place.name.toString());
+        distance.setText(place.distance.toString());
+
+        fabCamera.setOnClickListener(view -> {
+            Timber.d("Camera button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
+            controller = new ContributionController(this);
+            DirectUpload directUpload = new DirectUpload(this, controller, prefs);
+            storeSharedPrefs();
+            directUpload.initiateCameraUpload();
+        });
+
+        fabGallery.setOnClickListener(view -> {
+            Timber.d("Gallery button tapped. Image title: " + place.getName() + "Image desc: " + place.getLongDescription());
+            controller = new ContributionController(this);
+            DirectUpload directUpload = new DirectUpload(this, controller, prefs);
+            storeSharedPrefs();
+            directUpload.initiateGalleryUpload();
+        });
+    }
+
+    void storeSharedPrefs() {
+        SharedPreferences.Editor editor = directPrefs.edit();
+        editor.putString("Title", place.getName());
+        editor.putString("Desc", place.getLongDescription());
+        editor.apply();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        Timber.d("onRequestPermissionsResult: req code = " + " perm = " + permissions + " grant =" + grantResults);
+
+        switch (requestCode) {
+            // 1 = "Read external storage" allowed when gallery selected
+            case 1: {
+                if (grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) {
+                    Timber.d("Call controller.startGalleryPick()");
+                    controller.startGalleryPick();
+                }
+            }
+            break;
+            
+            // 3 = "Write external storage" allowed when camera selected
+            case 3: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Timber.d("Call controller.startCameraCapture()");
+                    controller.startCameraCapture();
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            Timber.d("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
+                    requestCode, resultCode, data);
+            controller.handleImagePicked(requestCode, data, true);
+        } else {
+            Timber.e("OnActivityResult() parameters: Req code: %d Result code: %d Data: %s",
+                    requestCode, resultCode, data);
+        }
     }
 
     private void openWebView(Uri link) {
@@ -521,25 +597,19 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment{
     }
 
     private void animateFAB(boolean isFabOpen) {
-
         if (isFabOpen) {
-
             fabPlus.startAnimation(rotate_backward);
             fabCamera.startAnimation(fab_close);
             fabGallery.startAnimation(fab_close);
             fabCamera.hide();
             fabGallery.hide();
-
         } else {
-
             fabPlus.startAnimation(rotate_forward);
             fabCamera.startAnimation(fab_open);
             fabGallery.startAnimation(fab_open);
             fabCamera.show();
             fabGallery.show();
-
         }
-
         this.isFabOpen=!isFabOpen;
     }
 
@@ -611,6 +681,5 @@ public class NearbyMapFragment extends android.support.v4.app.Fragment{
             return latLng;
         }
     }
-
 }
 
