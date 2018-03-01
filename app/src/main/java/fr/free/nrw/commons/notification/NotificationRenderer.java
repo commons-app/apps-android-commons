@@ -17,8 +17,8 @@ import fr.free.nrw.commons.R;
  */
 
 public class NotificationRenderer extends Renderer<Notification> {
-    @BindView(R.id.title) TextView title;
-    @BindView(R.id.description) TextView description;
+    @BindView(R.id.title) ExpandableTextView title;
+    @BindView(R.id.description) ExpandableTextView description;
     @BindView(R.id.time) TextView time;
     @BindView(R.id.icon) ImageView icon;
     private NotificationClicked listener;
