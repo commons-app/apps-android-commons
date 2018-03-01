@@ -29,11 +29,13 @@ import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.annotations.PolygonOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.constants.Style;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.services.android.telemetry.MapboxTelemetry;
 
 import java.lang.reflect.Type;
@@ -69,6 +71,7 @@ public class NearbyMapFragment extends DaggerFragment {
     private FloatingActionButton fabPlus;
     private FloatingActionButton fabCamera;
     private FloatingActionButton fabGallery;
+    private FloatingActionButton fabRecenter;
     private View transparentView;
     private TextView description;
     private TextView title;
@@ -170,6 +173,7 @@ public class NearbyMapFragment extends DaggerFragment {
         fabPlus = getActivity().findViewById(R.id.fab_plus);
         fabCamera = getActivity().findViewById(R.id.fab_camera);
         fabGallery = getActivity().findViewById(R.id.fab_galery);
+        fabRecenter = getActivity().findViewById(R.id.fab_recenter);
 
         fab_open = AnimationUtils.loadAnimation(getActivity(), R.anim.fab_open);
         fab_close = AnimationUtils.loadAnimation(getActivity(),R.anim.fab_close);
@@ -204,6 +208,21 @@ public class NearbyMapFragment extends DaggerFragment {
             }
             else{
                 bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            }
+        });
+
+        fabRecenter.setOnClickListener(view -> {
+            if(curLatLng!=null) {
+                mapView.getMapAsync(mapboxMap -> {
+                    CameraPosition position = new CameraPosition.Builder()
+                            .target(new LatLng(curLatLng.getLatitude(), curLatLng.getLongitude())) // Sets the new camera position
+                            .zoom(11) // Sets the zoom
+                            .build(); // Creates a CameraPosition from the builder
+
+                    mapboxMap.animateCamera(CameraUpdateFactory
+                            .newCameraPosition(position), 1000);
+
+                });
             }
         });
 
@@ -267,7 +286,7 @@ public class NearbyMapFragment extends DaggerFragment {
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(mapboxMap -> {
             mapboxMap.addMarkers(baseMarkerOptions);
-
+            fabRecenter.setVisibility(View.VISIBLE);
             mapboxMap.setOnInfoWindowCloseListener(marker -> {
                 if (marker == selected){
                     bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
