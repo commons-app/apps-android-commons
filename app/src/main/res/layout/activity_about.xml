@@ -105,6 +105,15 @@
                 </LinearLayout>
 
             <TextView
+                android:id="@+id/about_donation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_gap"
+                android:gravity="center"
+                android:textColor="@color/primaryColor"
+                android:text="@string/about_donation" />
+
+            <TextView
                 android:id="@+id/about_rate_us"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

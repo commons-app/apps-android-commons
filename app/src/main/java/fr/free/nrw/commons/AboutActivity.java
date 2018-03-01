@@ -63,6 +63,11 @@ public class AboutActivity extends NavigationBaseActivity {
         Utils.handleWebUrl(this,Uri.parse("https://commons-app.github.io/\\"));
     }
 
+    @OnClick(R.id.about_donation)
+    public void launchDonation(View view) {
+        Utils.handleWebUrl(this, Uri.parse("https://wikimediafoundation.org/wiki/Ways_to_Give"));
+    }
+
     @OnClick(R.id.about_credits)
     public void launchCredits(View view) {
         Utils.handleWebUrl(this,Uri.parse("https://github.com/commons-app/apps-android-commons/blob/master/CREDITS/\\"));
