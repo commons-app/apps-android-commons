@@ -272,6 +272,7 @@ public class NearbyMapFragment extends DaggerFragment {
         bottomSheetDetails = getActivity().findViewById(R.id.bottom_sheet_details);
         bottomSheetDetailsBehavior = BottomSheetBehavior.from(bottomSheetDetails);
         bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        bottomSheetDetails.setVisibility(View.VISIBLE);
 
         fabPlus = getActivity().findViewById(R.id.fab_plus);
         fabCamera = getActivity().findViewById(R.id.fab_camera);
