@@ -226,7 +226,7 @@ public class NearbyMapFragment extends DaggerFragment {
             addCurrentLocationMarker(mapboxMap);
             updateMapToTrackPosition();
             addNearbyMarkerstoMapBoxMap();
-        } /*else {
+        }/*else {
             setupMapView(bundle);
         }*/
         //mapView.setStyleUrl("asset://mapstyle.json");

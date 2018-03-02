@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -83,27 +84,30 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     }
 
     private void resumeFragment() {
+        Log.d("deneme","resumeFragment");
         // find the retained fragment on activity restarts
         //android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
        // nearbyMapFragment = (NearbyMapFragment) fm.findFragmentByTag(TAG_RETAINED_MAP_FRAGMENT);
         nearbyMapFragment = getMapFragment();
         // create the fragment and data the first time
-        if (nearbyMapFragment == null) {
+        /*if (nearbyMapFragment == null) {
             // add the fragment
             //nearbyMapFragment = new NearbyMapFragment();
             //fm.beginTransaction().add(nearbyMapFragment, TAG_RETAINED_MAP_FRAGMENT).commit();
             setMapFragment();
             // load data from a data source or perform any calculation
-        }
+        }*/
 
         nearbyListFragment = getListFragment();
-        if (nearbyListFragment == null) {
+        /*if (nearbyListFragment == null) {
             setListFragment();
-        }
+        }*/
 
     }
 
     private void initBottomSheetBehaviour() {
+        Log.d("deneme","initBottomSheetBehaviour");
+
         transparentView.setAlpha(0);
 
         bottomSheet.getLayoutParams().height = getWindowManager()
@@ -255,6 +259,8 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("deneme","onActivityResult");
+
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
             Timber.d("User is back from Settings page");
@@ -315,6 +321,8 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
      */
     private void refreshView(boolean isHardRefresh,
                              LocationServiceManager.LocationChangeType locationChangeType) {
+        Log.d("deneme","refreshView");
+
         if (lockNearbyView) {
             return;
         }
@@ -355,6 +363,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     //private void populatePlaces(List<Place> placeList) {
     private void populatePlaces(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
+        Log.d("deneme","populatePlaces");
         List<Place> placeList = nearbyPlacesInfo.placeList;
         LatLng[] boundaryCoordinates = nearbyPlacesInfo.boundaryCoordinates;
         Gson gson = new GsonBuilder()
@@ -400,6 +409,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     }
 
     private void lockNearbyView(boolean lock) {
+        Log.d("deneme","lockNearbyView");
         if (lock) {
             lockNearbyView = true;
             locationManager.unregisterLocationManager();
@@ -412,6 +422,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     }
 
     private void hideProgressBar() {
+        Log.d("deneme","hideProgressBar");
         if (progressBar != null) {
             progressBar.setVisibility(View.GONE);
         }
@@ -422,6 +433,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     }
 
     private void removeMapFragment() {
+        Log.d("deneme","removeMapFragment");
         if (nearbyMapFragment != null) {
             android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
             fm.beginTransaction().remove(nearbyMapFragment).commit();
@@ -433,6 +445,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     }
 
     private void removeListFragment() {
+        Log.d("deneme","removeListFragment");
         if (nearbyListFragment != null) {
             android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
             fm.beginTransaction().remove(nearbyListFragment).commit();
@@ -440,6 +453,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     }
 
     private void updateMapFragment(boolean isSlightUpdate) {
+        Log.d("deneme","updateMapFragment");
         /*
         * Significant update means updating nearby place markers. Slightly update means only
         * updating current location marker and camera target.
@@ -457,10 +471,12 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             * */
             hideProgressBar(); // In case it is visible (this happens, not an impossible case)
 
-            if (curLatLang.getLatitude() <= nearbyMapFragment.boundaryCoordinates[0].getLatitude()
+            if (nearbyMapFragment.boundaryCoordinates != null
+                    && (curLatLang.getLatitude() <= nearbyMapFragment.boundaryCoordinates[0].getLatitude()
                     || curLatLang.getLatitude() >= nearbyMapFragment.boundaryCoordinates[1].getLatitude()
                     || curLatLang.getLongitude() <= nearbyMapFragment.boundaryCoordinates[2].getLongitude()
-                    || curLatLang.getLongitude() >= nearbyMapFragment.boundaryCoordinates[3].getLongitude()) {
+                    || curLatLang.getLongitude() >= nearbyMapFragment.boundaryCoordinates[3].getLongitude())) {
+                Log.d("deneme","updateMapFragment1");
                 // populate places
                 placesDisposable = Observable.fromCallable(() -> nearbyController
                         .loadAttractionsFromLocation(curLatLang))
@@ -474,14 +490,17 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             }
 
             if (isSlightUpdate) {
+                Log.d("deneme","updateMapFragment2");
                 nearbyMapFragment.setArguments(bundle);
                 nearbyMapFragment.updateMapSlightly();
             } else {
+                Log.d("deneme","updateMapFragment3");
                 nearbyMapFragment.setArguments(bundle);
                 nearbyMapFragment.updateMapSignificantly();
                 updateListFragment();
             }
         } else {
+            Log.d("deneme","updateMapFragment4");
             lockNearbyView(true);
             setMapFragment();
             setListFragment();
@@ -500,6 +519,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
      * Calls fragment for map view.
      */
     private void setMapFragment() {
+        Log.d("deneme","setMapFragment");
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         nearbyMapFragment = new NearbyMapFragment();
         nearbyMapFragment.setArguments(bundle);
@@ -512,6 +532,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
      * Calls fragment for list view.
      */
     private void setListFragment() {
+        Log.d("deneme","setListFragment");
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         nearbyListFragment = new NearbyListFragment();
         nearbyListFragment.setArguments(bundle);
@@ -523,6 +544,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     @Override
     public void onLocationChangedSignificantly(LatLng latLng) {
+        Log.d("deneme","onLocationChangedSignificantly");
         Toast.makeText(this, "onLocationChangedSignificantly",
                 Toast.LENGTH_LONG).show();
         refreshView(false,
@@ -531,6 +553,7 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     @Override
     public void onLocationChangedSlightly(LatLng latLng) {
+        Log.d("deneme","onLocationChangedSlightly");
         Toast.makeText(this, "onLocationChangedSlightly",
                 Toast.LENGTH_LONG).show();
         refreshView(false,
