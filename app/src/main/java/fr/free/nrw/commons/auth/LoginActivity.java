@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
@@ -27,6 +28,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -73,7 +75,9 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     @BindView(R.id.error_message_container) ViewGroup errorMessageContainer;
     @BindView(R.id.error_message) TextView errorMessage;
     @BindView(R.id.login_credentials) TextView loginCredentials;
-    @BindView(R.id.two_factor_container)TextInputLayout twoFactorContainer;
+    @BindView(R.id.two_factor_container) TextInputLayout twoFactorContainer;
+    @BindView(R.id.forgotPassword) TextView forgotPasswordText;
+
     ProgressDialog progressDialog;
     private AppCompatDelegate delegate;
     private LoginTextWatcher textWatcher = new LoginTextWatcher();
@@ -108,17 +112,28 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             }
         });
 
+        forgotPasswordText.setText(getString(R.string.forgot_password));
+        forgotPasswordText.setTextColor(ContextCompat.getColor(this, R.color.status_bar_blue));
+        forgotPasswordText.setVisibility(VISIBLE);
+
         twoFactorEdit.addTextChangedListener(textWatcher);
         passwordEdit.setOnEditorActionListener(newLoginInputActionListener());
 
         loginButton.setOnClickListener(view -> performLogin());
         signupButton.setOnClickListener(view -> signUp());
 
+        forgotPasswordText.setOnClickListener(view -> forgotPassword());
+
         if(BuildConfig.FLAVOR == "beta"){
             loginCredentials.setText(getString(R.string.login_credential));
         } else {
             loginCredentials.setVisibility(View.GONE);
         }
+    }
+
+    private void forgotPassword() {
+        Intent launchBrowser = new Intent(Intent.ACTION_VIEW, Uri.parse("https://commons.wikimedia.org/wiki/Special:PasswordReset"));
+        startActivity(launchBrowser);
     }
 
 
