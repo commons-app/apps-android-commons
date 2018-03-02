@@ -12,7 +12,6 @@ import fr.free.nrw.commons.auth.LoginActivity;
 import fr.free.nrw.commons.contributions.ContributionsSyncAdapter;
 import fr.free.nrw.commons.modifications.ModificationsSyncAdapter;
 import fr.free.nrw.commons.settings.SettingsFragment;
-import fr.free.nrw.commons.nearby.DirectUpload;
 import fr.free.nrw.commons.nearby.PlaceRenderer;
 
 @Singleton
@@ -40,7 +39,6 @@ public interface CommonsApplicationComponent extends AndroidInjector<Application
 
     @Override
     void inject(ApplicationlessInjection instance);
-    void inject(DirectUpload directUpload);
     void inject(PlaceRenderer placeRenderer);
 
     @Component.Builder
