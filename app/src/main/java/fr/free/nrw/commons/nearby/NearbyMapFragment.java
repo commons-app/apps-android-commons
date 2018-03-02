@@ -112,8 +112,8 @@ public class NearbyMapFragment extends DaggerFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle bundle = this.getArguments();
-        initViews();
-        setListeners();
+        //initViews();
+        //setListeners();
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Uri.class, new UriDeserializer())
                 .create();
@@ -642,13 +642,17 @@ public class NearbyMapFragment extends DaggerFragment {
 
     @Override
     public void onResume() {
+        super.onResume();
         if (mapView != null) {
             mapView.onResume();
-            if (mapboxMap!=null) {
-                mapboxMap.clear(); // To clear nearby markers from previous setup
-            }
         }
-        super.onResume();
+        initViews();
+        setListeners();
+        transparentView.setClickable(false);
+        transparentView.setAlpha(0);
+        /*closeFabs(isFabOpen);
+        hideFAB();
+        this.getView().requestFocus();*/
     }
 
     @Override
