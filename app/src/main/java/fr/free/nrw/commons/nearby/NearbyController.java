@@ -46,10 +46,8 @@ public class NearbyController {
     public NearbyPlacesInfo loadAttractionsFromLocation(LatLng curLatLng) {
         Timber.d("Loading attractions near %s", curLatLng);
         NearbyPlacesInfo nearbyPlacesInfo = new NearbyPlacesInfo();
-        //LatLng[] cornerCoordinates = new LatLng[4];
-        //LatLng west, east, north, south = new LatLng(0,0,0);
+
         if (curLatLng == null) {
-            //return Collections.emptyList();
             return null;
         }
         List<Place> places = nearbyPlaces.getFromWikidataQuery(curLatLng, Locale.getDefault().getLanguage());

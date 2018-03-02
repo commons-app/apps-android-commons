@@ -78,38 +78,18 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         ButterKnife.bind(this);
         resumeFragment();
         bundle = new Bundle();
-
-        //initBottomSheetBehaviour();
         initDrawer();
     }
 
     private void resumeFragment() {
-        Log.d("deneme","resumeFragment");
-        // find the retained fragment on activity restarts
-        //android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
-       // nearbyMapFragment = (NearbyMapFragment) fm.findFragmentByTag(TAG_RETAINED_MAP_FRAGMENT);
+        // Find the retained fragment on activity restarts
         nearbyMapFragment = getMapFragment();
-        // create the fragment and data the first time
-        /*if (nearbyMapFragment == null) {
-            // add the fragment
-            //nearbyMapFragment = new NearbyMapFragment();
-            //fm.beginTransaction().add(nearbyMapFragment, TAG_RETAINED_MAP_FRAGMENT).commit();
-            setMapFragment();
-            // load data from a data source or perform any calculation
-        }*/
-
         nearbyListFragment = getListFragment();
-        /*if (nearbyListFragment == null) {
-            setListFragment();
-        }*/
-
     }
 
     private void initBottomSheetBehaviour() {
-        Log.d("deneme","initBottomSheetBehaviour");
 
         transparentView.setAlpha(0);
-
         bottomSheet.getLayoutParams().height = getWindowManager()
                 .getDefaultDisplay().getHeight() / 16 * 9;
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
@@ -259,8 +239,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d("deneme","onActivityResult");
-
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
             Timber.d("User is back from Settings page");
@@ -321,13 +299,13 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
      */
     private void refreshView(boolean isHardRefresh,
                              LocationServiceManager.LocationChangeType locationChangeType) {
-        Log.d("deneme","refreshView");
 
         if (lockNearbyView) {
             return;
         }
         locationManager.registerLocationManager();
         LatLng lastLocation = locationManager.getLastLocation();
+
         if (curLatLang != null && curLatLang.equals(lastLocation)) { //refresh view only if location has changed
             if (isHardRefresh) {
                 ViewUtil.showLongToast(this, R.string.nearby_location_has_not_changed);
@@ -358,12 +336,9 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             bundle.putString("CurLatLng", gsonCurLatLng);
             updateMapFragment(true);
         }
-
     }
 
-    //private void populatePlaces(List<Place> placeList) {
     private void populatePlaces(NearbyController.NearbyPlacesInfo nearbyPlacesInfo) {
-        Log.d("deneme","populatePlaces");
         List<Place> placeList = nearbyPlacesInfo.placeList;
         LatLng[] boundaryCoordinates = nearbyPlacesInfo.boundaryCoordinates;
         Gson gson = new GsonBuilder()
@@ -389,27 +364,16 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             lockNearbyView(true);
             setMapFragment();
             setListFragment();
-
             hideProgressBar();
             lockNearbyView(false);
-        } else { // There are fragments, just update the map and list
+        } else {
+            // There are fragments, just update the map and list
             updateMapFragment(false);
             updateListFragment();
-
         }
-
-        /*if (nearbyListFragment == null) {
-            lockNearbyView(true);
-            setListFragment();
-            lockNearbyView(false);
-        } else {
-            updateListFragment();
-        }*/
-
     }
 
     private void lockNearbyView(boolean lock) {
-        Log.d("deneme","lockNearbyView");
         if (lock) {
             lockNearbyView = true;
             locationManager.unregisterLocationManager();
@@ -422,7 +386,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     }
 
     private void hideProgressBar() {
-        Log.d("deneme","hideProgressBar");
         if (progressBar != null) {
             progressBar.setVisibility(View.GONE);
         }
@@ -433,7 +396,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     }
 
     private void removeMapFragment() {
-        Log.d("deneme","removeMapFragment");
         if (nearbyMapFragment != null) {
             android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
             fm.beginTransaction().remove(nearbyMapFragment).commit();
@@ -445,7 +407,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     }
 
     private void removeListFragment() {
-        Log.d("deneme","removeListFragment");
         if (nearbyListFragment != null) {
             android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
             fm.beginTransaction().remove(nearbyListFragment).commit();
@@ -453,7 +414,6 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     }
 
     private void updateMapFragment(boolean isSlightUpdate) {
-        Log.d("deneme","updateMapFragment");
         /*
         * Significant update means updating nearby place markers. Slightly update means only
         * updating current location marker and camera target.
@@ -463,20 +423,18 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
         * */
 
         NearbyMapFragment nearbyMapFragment = getMapFragment();
+
         if (nearbyMapFragment != null && curLatLang != null) {
-            // TODO: buradasın eger sınırlara yakınsan significant update yap ve methodların adlarını değiştir.
+            hideProgressBar(); // In case it is visible (this happens, not an impossible case)
             /*
             * If we are close to nearby places boundaries, we need a significant update to
             * get new nearby places. Check order is south, north, west, east
             * */
-            hideProgressBar(); // In case it is visible (this happens, not an impossible case)
-
             if (nearbyMapFragment.boundaryCoordinates != null
                     && (curLatLang.getLatitude() <= nearbyMapFragment.boundaryCoordinates[0].getLatitude()
                     || curLatLang.getLatitude() >= nearbyMapFragment.boundaryCoordinates[1].getLatitude()
                     || curLatLang.getLongitude() <= nearbyMapFragment.boundaryCoordinates[2].getLongitude()
                     || curLatLang.getLongitude() >= nearbyMapFragment.boundaryCoordinates[3].getLongitude())) {
-                Log.d("deneme","updateMapFragment1");
                 // populate places
                 placesDisposable = Observable.fromCallable(() -> nearbyController
                         .loadAttractionsFromLocation(curLatLang))
@@ -490,21 +448,17 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
             }
 
             if (isSlightUpdate) {
-                Log.d("deneme","updateMapFragment2");
                 nearbyMapFragment.setArguments(bundle);
                 nearbyMapFragment.updateMapSlightly();
             } else {
-                Log.d("deneme","updateMapFragment3");
                 nearbyMapFragment.setArguments(bundle);
                 nearbyMapFragment.updateMapSignificantly();
                 updateListFragment();
             }
         } else {
-            Log.d("deneme","updateMapFragment4");
             lockNearbyView(true);
             setMapFragment();
             setListFragment();
-
             hideProgressBar();
             lockNearbyView(false);
         }
@@ -519,20 +473,17 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
      * Calls fragment for map view.
      */
     private void setMapFragment() {
-        Log.d("deneme","setMapFragment");
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         nearbyMapFragment = new NearbyMapFragment();
         nearbyMapFragment.setArguments(bundle);
         fragmentTransaction.replace(R.id.container, nearbyMapFragment, TAG_RETAINED_MAP_FRAGMENT);
         fragmentTransaction.commitAllowingStateLoss();
-        //hideProgressBar();
     }
 
     /**
      * Calls fragment for list view.
      */
     private void setListFragment() {
-        Log.d("deneme","setListFragment");
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         nearbyListFragment = new NearbyListFragment();
         nearbyListFragment.setArguments(bundle);
@@ -544,18 +495,12 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
 
     @Override
     public void onLocationChangedSignificantly(LatLng latLng) {
-        Log.d("deneme","onLocationChangedSignificantly");
-        Toast.makeText(this, "onLocationChangedSignificantly",
-                Toast.LENGTH_LONG).show();
         refreshView(false,
                 LocationServiceManager.LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED);
     }
 
     @Override
     public void onLocationChangedSlightly(LatLng latLng) {
-        Log.d("deneme","onLocationChangedSlightly");
-        Toast.makeText(this, "onLocationChangedSlightly",
-                Toast.LENGTH_LONG).show();
         refreshView(false,
                 LocationServiceManager.LocationChangeType.LOCATION_SLIGHTLY_CHANGED);
     }
@@ -563,5 +508,4 @@ public class NearbyActivity extends NavigationBaseActivity implements LocationUp
     public void prepareViewsForSheetPosition(int bottomSheetState) {
         // TODO
     }
-
 }

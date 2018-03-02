@@ -103,6 +103,7 @@ public class NearbyMapFragment extends DaggerFragment {
     private PolygonOptions currentLocationPolygonOptions;
 
     private boolean isBottomListSheetExpanded;
+    private final double CAMERA_TARGET_SHIFT_FACTOR = 0.06;
 
     @Inject @Named("prefs") SharedPreferences prefs;
     @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
@@ -114,8 +115,7 @@ public class NearbyMapFragment extends DaggerFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle bundle = this.getArguments();
-        //initViews();
-        //setListeners();
+
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Uri.class, new UriDeserializer())
                 .create();
@@ -133,10 +133,6 @@ public class NearbyMapFragment extends DaggerFragment {
                             placeList,
                             getActivity());
             boundaryCoordinates = gson.fromJson(gsonBoundaryCoordinates, gsonBoundaryCoordinatesType);
-            Log.d("deneme", boundaryCoordinates[0].getLatitude()+","+ boundaryCoordinates[0].getLongitude());
-            Log.d("deneme", boundaryCoordinates[1].getLatitude()+","+ boundaryCoordinates[1].getLongitude());
-            Log.d("deneme", boundaryCoordinates[2].getLatitude()+","+ boundaryCoordinates[2].getLongitude());
-            Log.d("deneme", boundaryCoordinates[3].getLatitude()+","+ boundaryCoordinates[3].getLongitude());
         }
         Mapbox.getInstance(getActivity(),
                 getString(R.string.mapbox_commons_app_token));
@@ -182,8 +178,7 @@ public class NearbyMapFragment extends DaggerFragment {
     }
 
     public void updateMapSlightly() {
-    // Get arguments from bundle for new location
-
+        // Get arguments from bundle for new location
         Bundle bundle = this.getArguments();
         if (mapboxMap != null) {
             Gson gson = new GsonBuilder()
@@ -194,22 +189,20 @@ public class NearbyMapFragment extends DaggerFragment {
                 Type curLatLngType = new TypeToken<fr.free.nrw.commons.location.LatLng>() {}.getType();
                 curLatLng = gson.fromJson(gsonLatLng, curLatLngType);
             }
-
             updateMapToTrackPosition();
         }
 
     }
 
     public void updateMapSignificantly() {
-        Log.d("deneme", "oldu updateMapSignificantly");
+
         Bundle bundle = this.getArguments();
         if (mapboxMap != null) {
-            Log.d("deneme", "oldu1 updateMapSignificantly");
             if (bundle != null) {
                 Gson gson = new GsonBuilder()
                         .registerTypeAdapter(Uri.class, new UriDeserializer())
                         .create();
-                Log.d("deneme", "oldu2 updateMapSignificantly");
+
                 String gsonPlaceList = bundle.getString("PlaceList");
                 String gsonLatLng = bundle.getString("CurLatLng");
                 String gsonBoundaryCoordinates = bundle.getString("BoundaryCoord");
@@ -228,16 +221,12 @@ public class NearbyMapFragment extends DaggerFragment {
             addCurrentLocationMarker(mapboxMap);
             updateMapToTrackPosition();
             addNearbyMarkerstoMapBoxMap();
-        }/*else {
-            setupMapView(bundle);
-        }*/
-        //mapView.setStyleUrl("asset://mapstyle.json");
+        }
     }
 
     // Only update current position marker and camera view
     private void updateMapToTrackPosition() {
-        // Change
-        Log.d("deneme","updateMapToTrackPosition");
+
         if (currentLocationMarker != null) {
             LatLng curMapBoxLatLng = new LatLng(curLatLng.getLatitude(),curLatLng.getLongitude());
             ValueAnimator markerAnimator = ObjectAnimator.ofObject(currentLocationMarker, "position",
@@ -260,7 +249,7 @@ public class NearbyMapFragment extends DaggerFragment {
                 // Make camera to follow user on location change
                 CameraPosition position = new CameraPosition.Builder()
                         .target(isBottomListSheetExpanded ?
-                                new LatLng(curMapBoxLatLng.getLatitude()- 0.09,
+                                new LatLng(curMapBoxLatLng.getLatitude()- CAMERA_TARGET_SHIFT_FACTOR,
                                         curMapBoxLatLng.getLongitude())
                                 : curMapBoxLatLng ) // Sets the new camera position
                         .zoom(11) // Same zoom level
@@ -279,23 +268,22 @@ public class NearbyMapFragment extends DaggerFragment {
             if (isBottomListSheetExpanded) {
                 // Make camera to follow user on location change
                 position = new CameraPosition.Builder()
-                        .target(new LatLng(curLatLng.getLatitude() - 0.09,
-                                curLatLng.getLongitude())) // Sets the new camera target above current to make it visible when sheet is expanded
+                        .target(new LatLng(curLatLng.getLatitude() - CAMERA_TARGET_SHIFT_FACTOR,
+                                curLatLng.getLongitude())) // Sets the new camera target above
+                        // current to make it visible when sheet is expanded
                         .zoom(11) // Same zoom level
                         .build();
-
 
             } else {
                 // Make camera to follow user on location change
                 position = new CameraPosition.Builder()
                         .target(new LatLng(curLatLng.getLatitude(),
-                                curLatLng.getLongitude())) // Sets the new camera target above current to make it visible when sheet is expanded
+                                curLatLng.getLongitude())) // Sets the new camera target to curLatLng
                         .zoom(11) // Same zoom level
                         .build();
             }
             mapboxMap.animateCamera(CameraUpdateFactory
                     .newCameraPosition(position), 1000);
-
         }
     }
 
@@ -412,7 +400,6 @@ public class NearbyMapFragment extends DaggerFragment {
             @Override
             public void onMapReady(MapboxMap mapboxMap) {
                 NearbyMapFragment.this.mapboxMap = mapboxMap;
-                //addNearbyMarkerstoMapBoxMap();
                 updateMapSignificantly();
             }
         });
@@ -446,13 +433,11 @@ public class NearbyMapFragment extends DaggerFragment {
                 .strokeColor(Color.parseColor("#55000000"))
                 .fillColor(Color.parseColor("#11000000"));
         mapboxMap.addPolygon(currentLocationPolygonOptions);
-        //latestSignificantUpdate = curLatLng; // To remember the last point we update nearby markers
     }
 
     private void addNearbyMarkerstoMapBoxMap() {
-        Log.d("deneme", "oldu3");
-        mapboxMap.addMarkers(baseMarkerOptions);
 
+        mapboxMap.addMarkers(baseMarkerOptions);
         mapboxMap.setOnInfoWindowCloseListener(marker -> {
             if (marker == selected){
                 bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
@@ -471,7 +456,6 @@ public class NearbyMapFragment extends DaggerFragment {
             return false;
         });
 
-        // addCurrentLocationMarker(mapboxMap);
     }
 
 
@@ -687,9 +671,6 @@ public class NearbyMapFragment extends DaggerFragment {
         setListeners();
         transparentView.setClickable(false);
         transparentView.setAlpha(0);
-        /*closeFabs(isFabOpen);
-        hideFAB();
-        this.getView().requestFocus();*/
     }
 
     @Override
@@ -710,7 +691,6 @@ public class NearbyMapFragment extends DaggerFragment {
 
     private static class LatLngEvaluator implements TypeEvaluator<LatLng> {
         // Method is used to interpolate the marker animation.
-
         private LatLng latLng = new LatLng();
 
         @Override

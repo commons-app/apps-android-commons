@@ -15,9 +15,6 @@ import android.util.Log;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 import timber.log.Timber;
 
 public class LocationServiceManager implements LocationListener {
@@ -131,18 +128,14 @@ public class LocationServiceManager implements LocationListener {
                 || isMoreAccurate
                 || (isNewer && !isLessAccurate)
                 || (isNewer && !isSignificantlyLessAccurate && isFromSameProvider)) {
-            Log.d("deneme","distance:"+results[0]);
             if (results[0] < 1000) { // Means change is smaller than 1000 meter
                 return LocationChangeType.LOCATION_SLIGHTLY_CHANGED;
             } else {
                 return LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED;
             }
-            // If the new location is more than two minutes older, it must be worse
         } else{
-            Log.d("deneme","distance:"+results[0]);
             return LocationChangeType.LOCATION_NOT_CHANGED;
         }
-
     }
 
     /**
@@ -178,17 +171,14 @@ public class LocationServiceManager implements LocationListener {
 
     @Override
     public void onLocationChanged(Location location) {
-            Log.d("deneme","location changed");
             if (isBetterLocation(location, lastLocation)
                     .equals(LocationChangeType.LOCATION_SIGNIFICANTLY_CHANGED)) {
-                Log.d("deneme","location SIGNIFICANTLY changed better location");
                 lastLocation = location;
                 for (LocationUpdateListener listener : locationListeners) {
                     listener.onLocationChangedSignificantly(LatLng.from(lastLocation));
                 }
             } else if (isBetterLocation(location, lastLocation)
                     .equals(LocationChangeType.LOCATION_SLIGHTLY_CHANGED)) {
-                Log.d("deneme","location SLIGHTLY changed better location");
                 lastLocation = location;
                 for (LocationUpdateListener listener : locationListeners) {
                     listener.onLocationChangedSlightly(LatLng.from(lastLocation));
@@ -212,8 +202,8 @@ public class LocationServiceManager implements LocationListener {
     }
 
     public enum LocationChangeType{
-        LOCATION_SIGNIFICANTLY_CHANGED,
-        LOCATION_SLIGHTLY_CHANGED,
+        LOCATION_SIGNIFICANTLY_CHANGED, //Went out of borders of nearby markers
+        LOCATION_SLIGHTLY_CHANGED,      //User might be walking or driving
         LOCATION_NOT_CHANGED
     }
 }
