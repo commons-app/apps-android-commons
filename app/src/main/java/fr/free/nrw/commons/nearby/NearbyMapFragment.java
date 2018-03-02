@@ -102,6 +102,8 @@ public class NearbyMapFragment extends DaggerFragment {
     private MapboxMap mapboxMap;
     private PolygonOptions currentLocationPolygonOptions;
 
+    private boolean isBottomListSheetExpanded;
+
     @Inject @Named("prefs") SharedPreferences prefs;
     @Inject @Named("direct_nearby_upload_prefs") SharedPreferences directPrefs;
 
@@ -255,14 +257,45 @@ public class NearbyMapFragment extends DaggerFragment {
                 mapboxMap.addPolygon(currentLocationPolygonOptions);
             }
 
-            // Make camera to follow user on location change
-            CameraPosition position = new CameraPosition.Builder()
-                    .target(curMapBoxLatLng) // Sets the new camera position
-                    .zoom(11) // Same zoom level
-                    .build();
+                // Make camera to follow user on location change
+                CameraPosition position = new CameraPosition.Builder()
+                        .target(isBottomListSheetExpanded ?
+                                new LatLng(curMapBoxLatLng.getLatitude()- 0.09,
+                                        curMapBoxLatLng.getLongitude())
+                                : curMapBoxLatLng ) // Sets the new camera position
+                        .zoom(11) // Same zoom level
+                        .build();
 
+                mapboxMap.animateCamera(CameraUpdateFactory
+                        .newCameraPosition(position), 1000);
+
+        }
+    }
+
+    private void updateMapCameraAccordingToBottomSheet(boolean isBottomListSheetExpanded) {
+        CameraPosition position;
+        this.isBottomListSheetExpanded = isBottomListSheetExpanded;
+        if (mapboxMap != null && curLatLng != null) {
+            if (isBottomListSheetExpanded) {
+                // Make camera to follow user on location change
+                position = new CameraPosition.Builder()
+                        .target(new LatLng(curLatLng.getLatitude() - 0.09,
+                                curLatLng.getLongitude())) // Sets the new camera target above current to make it visible when sheet is expanded
+                        .zoom(11) // Same zoom level
+                        .build();
+
+
+            } else {
+                // Make camera to follow user on location change
+                position = new CameraPosition.Builder()
+                        .target(new LatLng(curLatLng.getLatitude(),
+                                curLatLng.getLongitude())) // Sets the new camera target above current to make it visible when sheet is expanded
+                        .zoom(11) // Same zoom level
+                        .build();
+            }
             mapboxMap.animateCamera(CameraUpdateFactory
                     .newCameraPosition(position), 1000);
+
         }
     }
 
@@ -340,6 +373,9 @@ public class NearbyMapFragment extends DaggerFragment {
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
                 if (newState == BottomSheetBehavior.STATE_EXPANDED){
                     bottomSheetDetailsBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                    updateMapCameraAccordingToBottomSheet(true);
+                } else {
+                    updateMapCameraAccordingToBottomSheet(false);
                 }
             }
 
