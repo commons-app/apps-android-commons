@@ -46,6 +46,7 @@ import fr.free.nrw.commons.contributions.ContributionsActivity;
 import fr.free.nrw.commons.di.ApplicationlessInjection;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.theme.NavigationBaseActivity;
+import fr.free.nrw.commons.ui.widget.HtmlTextView;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -76,7 +77,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     @BindView(R.id.error_message) TextView errorMessage;
     @BindView(R.id.login_credentials) TextView loginCredentials;
     @BindView(R.id.two_factor_container) TextInputLayout twoFactorContainer;
-    @BindView(R.id.forgotPassword) TextView forgotPasswordText;
+    @BindView(R.id.forgotPassword) HtmlTextView forgotPasswordText;
 
     ProgressDialog progressDialog;
     private AppCompatDelegate delegate;
@@ -114,7 +115,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
 
         forgotPasswordText.setText(getString(R.string.forgot_password));
         forgotPasswordText.setTextColor(ContextCompat.getColor(this, R.color.status_bar_blue));
-        forgotPasswordText.setVisibility(VISIBLE);
 
         twoFactorEdit.addTextChangedListener(textWatcher);
         passwordEdit.setOnEditorActionListener(newLoginInputActionListener());
@@ -132,7 +132,7 @@ public class LoginActivity extends AccountAuthenticatorActivity {
     }
 
     private void forgotPassword() {
-        Intent launchBrowser = new Intent(Intent.ACTION_VIEW, Uri.parse("https://commons.wikimedia.org/wiki/Special:PasswordReset"));
+        Intent launchBrowser = new Intent(Intent.ACTION_VIEW, Uri.parse(BuildConfig.FORGOT_PASSWORD_URL));
         startActivity(launchBrowser);
     }
 

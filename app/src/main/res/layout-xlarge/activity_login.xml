@@ -188,11 +188,21 @@
                 </LinearLayout>
 
                 <fr.free.nrw.commons.ui.widget.HtmlTextView
+                    android:visibility="visible"
+                    android:id="@+id/forgotPassword"
+                    android:layout_width="match_parent"
+                    android:gravity="center_horizontal"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/buttonFrame"
+                    android:layout_marginBottom="@dimen/standard_gap"
+                    tools:text="@string/forgot_password" />
+
+                <fr.free.nrw.commons.ui.widget.HtmlTextView
                     android:id="@+id/about_privacy_policy"
                     style="?android:textAppearanceSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/buttonFrame"
+                    android:layout_below="@id/forgotPassword"
                     android:layout_centerHorizontal="true"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="@dimen/standard_gap"
