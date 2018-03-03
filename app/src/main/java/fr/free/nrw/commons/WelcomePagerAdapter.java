@@ -54,10 +54,14 @@ public class WelcomePagerAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         LayoutInflater inflater = LayoutInflater.from(container.getContext());
         ViewGroup layout = (ViewGroup) inflater.inflate(PAGE_LAYOUTS[position], container, false);
-
-        if (position == PAGE_FINAL) {
+        if( BuildConfig.FLAVOR == "beta"){
             ViewHolder holder = new ViewHolder(layout);
             layout.setTag(holder);
+        } else {
+            if (position == PAGE_FINAL) {
+                ViewHolder holder = new ViewHolder(layout);
+                layout.setTag(holder);
+            }
         }
         container.addView(layout);
         return layout;
