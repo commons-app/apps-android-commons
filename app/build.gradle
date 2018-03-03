@@ -94,6 +94,8 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:$DAGGER_VERSION"
     kapt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
     kapt "com.google.dagger:dagger-android-processor:$DAGGER_VERSION"
+
+    compile 'com.borjabravo:readmoretextview:2.1.0'
 }
 
 android {
