@@ -1,11 +1,10 @@
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:foreground="?selectableItemBackground"
-    android:minHeight="72dp"
-    >
+    android:minHeight="72dp">
 
     <ImageView
         android:id="@+id/icon"
@@ -34,7 +33,7 @@
         tools:text="@string/placeholder_place_distance"
         />
 
-    <fr.free.nrw.commons.notification.ExpandableTextView
+    <com.borjabravo.readmoretextview.ReadMoreTextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -46,12 +45,13 @@
         android:layout_toRightOf="@id/icon"
         android:layout_toStartOf="@id/time"
         android:ellipsize="end"
-
+        app:trimLines="2"
+        app:colorClickableText="#969494"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         tools:text="@string/placeholder_place_name"
         />
 
-    <fr.free.nrw.commons.notification.ExpandableTextView
+    <com.borjabravo.readmoretextview.ReadMoreTextView
         android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -62,7 +62,8 @@
         android:layout_below="@id/title"
         android:layout_marginBottom="16dp"
         android:ellipsize="end"
-
+        app:trimLines="2"
+        app:colorClickableText="#969494"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         tools:text="@string/placeholder_place_description"
         />

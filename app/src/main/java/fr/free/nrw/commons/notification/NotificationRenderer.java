@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.borjabravo.readmoretextview.ReadMoreTextView;
 import com.pedrogomez.renderers.Renderer;
 
 import butterknife.BindView;
@@ -17,8 +18,8 @@ import fr.free.nrw.commons.R;
  */
 
 public class NotificationRenderer extends Renderer<Notification> {
-    @BindView(R.id.title) ExpandableTextView title;
-    @BindView(R.id.description) ExpandableTextView description;
+    @BindView(R.id.title) ReadMoreTextView title;
+    @BindView(R.id.description) ReadMoreTextView description;
     @BindView(R.id.time) TextView time;
     @BindView(R.id.icon) ImageView icon;
     private NotificationClicked listener;
