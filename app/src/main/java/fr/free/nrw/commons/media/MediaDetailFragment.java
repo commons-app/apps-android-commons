@@ -37,6 +37,8 @@ import fr.free.nrw.commons.location.LatLng;
 import fr.free.nrw.commons.ui.widget.CompatTextView;
 import timber.log.Timber;
 
+import static android.widget.Toast.LENGTH_SHORT;
+
 public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     private boolean editable;
@@ -305,7 +307,13 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
                 Intent viewIntent = new Intent();
                 viewIntent.setAction(Intent.ACTION_VIEW);
                 viewIntent.setData(new PageTitle(selectedCategoryTitle).getCanonicalUri());
-                startActivity(viewIntent);
+                //check if web browser available
+                if(viewIntent.resolveActivity(getActivity().getPackageManager()) != null){
+                    startActivity(viewIntent);
+                } else {
+                    Toast toast = Toast.makeText(getContext(), getString(R.string.no_web_browser), LENGTH_SHORT);
+                    toast.show();
+                }
             });
         }
         return item;
@@ -385,7 +393,14 @@ public class MediaDetailFragment extends CommonsDaggerSupportFragment {
 
     private void openWebBrowser(String url) {
         Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        startActivity(browser);
+        //check if web browser available
+        if (browser.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivity(browser);
+        } else {
+            Toast toast = Toast.makeText(getContext(), getString(R.string.no_web_browser), LENGTH_SHORT);
+            toast.show();
+        }
+
     }
 
     private void openMap(LatLng coordinates) {

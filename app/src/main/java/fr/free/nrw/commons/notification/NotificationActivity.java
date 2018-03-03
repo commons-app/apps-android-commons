@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.pedrogomez.renderers.RVRendererAdapter;
 
@@ -24,6 +25,8 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
+
+import static android.widget.Toast.LENGTH_SHORT;
 
 /**
  * Created by root on 18.12.2017.
@@ -71,7 +74,14 @@ public class NotificationActivity extends NavigationBaseActivity {
         if (url == null || url.equals("")) {
             return;
         }
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+        Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        //check if web browser available
+        if(browser.resolveActivity(this.getPackageManager()) != null){
+            startActivity(browser);
+        } else {
+            Toast toast = Toast.makeText(this, getString(R.string.no_web_browser), LENGTH_SHORT);
+            toast.show();
+        }
     }
 
     private void setAdapter(List<Notification> notificationList) {

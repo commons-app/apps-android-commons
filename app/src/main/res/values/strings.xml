@@ -38,6 +38,7 @@
   <string name="menu_share">Share</string>
   <string name="menu_open_in_browser">View in Browser</string>
   <string name="share_title_hint">Title</string>
+  <string name="add_title_toast">Please give a Title to proceed</string>
   <string name="share_description_hint">Description</string>
   <string name="login_failed_network">Unable to login - network failure</string>
   <string name="login_failed_username">Unable to login - please check your username</string>
@@ -224,6 +225,7 @@
   <string name="login_to_your_account">Login to your account</string>
   <string name="send_log_file">Send log file</string>
   <string name="send_log_file_description">Send log file to developers via email</string>
+  <string name="no_web_browser">No web browser found to open URL</string>
   <string name="null_url">Error! URL not found</string>
 
   <string name="nearby_location_has_not_changed">Location has not changed.</string>
