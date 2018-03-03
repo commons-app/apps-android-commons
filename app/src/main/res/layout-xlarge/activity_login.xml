@@ -195,7 +195,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/buttonFrame"
                     android:layout_marginBottom="@dimen/standard_gap"
-                    tools:text="@string/forgot_password" />
+                    android:text="@string/forgot_password"
+                    android:textColor="@color/status_bar_blue" />
 
                 <fr.free.nrw.commons.ui.widget.HtmlTextView
                     android:id="@+id/about_privacy_policy"

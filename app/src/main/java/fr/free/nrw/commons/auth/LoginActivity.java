@@ -113,9 +113,6 @@ public class LoginActivity extends AccountAuthenticatorActivity {
             }
         });
 
-        forgotPasswordText.setText(getString(R.string.forgot_password));
-        forgotPasswordText.setTextColor(ContextCompat.getColor(this, R.color.status_bar_blue));
-
         twoFactorEdit.addTextChangedListener(textWatcher);
         passwordEdit.setOnEditorActionListener(newLoginInputActionListener());
 
