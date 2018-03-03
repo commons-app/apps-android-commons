@@ -28,6 +28,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -77,7 +78,8 @@ public class SingleUploadFragment extends CommonsDaggerSupportFragment {
             case R.id.menu_upload_single:
 
                 String title = titleEdit.getText().toString();
-                String desc = descEdit.getText().toString();
+                title = title.replaceAll("^[\\p{Alpha}]]", "").replaceAll(" ", "_");
+                String desc = descEdit.getText().toString().trim();
 
                 //Save the title/desc in short-lived cache so next time this fragment is loaded, we can access these
                 prefs.edit()
