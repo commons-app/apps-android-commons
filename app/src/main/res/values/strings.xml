@@ -39,6 +39,7 @@
   <string name="menu_share">Share</string>
   <string name="menu_open_in_browser">View in Browser</string>
   <string name="share_title_hint">Title</string>
+  <string name="add_title_toast">Please give a Title to proceed</string>
   <string name="share_description_hint">Description</string>
   <string name="login_failed_network">Unable to login - network failure</string>
   <string name="login_failed_username">Unable to login - please check your username</string>
