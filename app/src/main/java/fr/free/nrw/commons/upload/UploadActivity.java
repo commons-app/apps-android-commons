@@ -45,10 +45,14 @@ public class UploadActivity extends AuthenticatedActivity
     SimpleDraweeView background;
     @BindView(R.id.view_flipper)
     ViewFlipper viewFlipper;
-    @BindView(R.id.floating_next)
-    Button floatingNext;
-    @BindView(R.id.floating_previous)
-    Button floatingPrevious;
+    @BindView(R.id.category_next)
+    Button categoryNext;
+    @BindView(R.id.category_previous)
+    Button categoryPrevious;
+    @BindView(R.id.submit)
+    Button submit;
+    @BindView(R.id.license_previous)
+    Button licensePrevious;
 
     // Top Card
     @BindView(R.id.top_card)
@@ -105,8 +109,10 @@ public class UploadActivity extends AuthenticatedActivity
         bottomCardExpandButton.setOnClickListener(v -> presenter.toggleBottomCardState());
         next.setOnClickListener(v -> presenter.handleNext());
         previous.setOnClickListener(v -> presenter.handlePrevious());
-        floatingNext.setOnClickListener(v -> presenter.handleNext());
-        floatingPrevious.setOnClickListener(v -> presenter.handlePrevious());
+        categoryNext.setOnClickListener(v -> presenter.handleNext());
+        categoryPrevious.setOnClickListener(v -> presenter.handlePrevious());
+        licensePrevious.setOnClickListener(v -> presenter.handlePrevious());
+        submit.setOnClickListener(v -> presenter.handleSubmit());
 
         presenter.init(savedInstanceState);
         receiveSharedItems();
@@ -153,13 +159,15 @@ public class UploadActivity extends AuthenticatedActivity
     @Override
     public void setNextEnabled(boolean available) {
         next.setEnabled(available);
-        floatingNext.setEnabled(available);
+        categoryNext.setEnabled(available);
+        submit.setEnabled(available);
     }
 
     @Override
     public void setPreviousEnabled(boolean available) {
         previous.setEnabled(available);
-        floatingPrevious.setEnabled(available);
+        categoryPrevious.setEnabled(available);
+        licensePrevious.setEnabled(available);
     }
 
     @Override
@@ -173,8 +181,14 @@ public class UploadActivity extends AuthenticatedActivity
     }
 
     @Override
-    public void setBottomCardVisibility(boolean visible) {
-        viewFlipper.setDisplayedChild(visible ? 0 : 1);
+    public void setBottomCardVisibility(@UploadPage int page) {
+        if (page == TITLE_CARD) {
+            viewFlipper.setDisplayedChild(0);
+        } else if (page == CATEGORIES) {
+            viewFlipper.setDisplayedChild(1);
+        } else if (page == LICENSE) {
+            viewFlipper.setDisplayedChild(2);
+        }
     }
 
     @Override
@@ -189,7 +203,7 @@ public class UploadActivity extends AuthenticatedActivity
 
     @Override
     public void dismissKeyboard() {
-        InputMethodManager inputMethodManager =(InputMethodManager)this.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        InputMethodManager inputMethodManager = (InputMethodManager) this.getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(imageTitle.getWindowToken(), 0);
     }
 

@@ -3,6 +3,7 @@ package fr.free.nrw.commons.upload;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.pedrogomez.renderers.Renderer;
@@ -13,6 +14,7 @@ class UploadThumbnailRenderer extends Renderer<UploadModel.UploadItem> {
     private ThumbnailClickedListener listener;
     private SimpleDraweeView background;
     private View space;
+    private ImageView error;
 
     public UploadThumbnailRenderer(ThumbnailClickedListener listener) {
         this.listener = listener;
@@ -25,6 +27,7 @@ class UploadThumbnailRenderer extends Renderer<UploadModel.UploadItem> {
 
     @Override
     protected void setUpView(View rootView) {
+        error = rootView.findViewById(R.id.error);
         space = rootView.findViewById(R.id.left_space);
         background = rootView.findViewById(R.id.thumbnail);
     }
@@ -40,6 +43,7 @@ class UploadThumbnailRenderer extends Renderer<UploadModel.UploadItem> {
         background.setImageURI(content.mediaUri);
         background.setAlpha(content.selected ? 1.0f : 0.5f);
         space.setVisibility(content.first ? View.VISIBLE : View.GONE);
+        error.setVisibility(content.visited && content.error ? View.VISIBLE : View.GONE);
     }
 
     public interface ThumbnailClickedListener {
