@@ -32,6 +32,8 @@ public class UploadPresenter {
 
     public void imageTitleChanged(String text) {
         uploadModel.getCurrentItem().title = text;
+        uploadModel.getCurrentItem().error = text.trim().isEmpty();
+        view.updateTopCardContent();
     }
 
     public void descriptionChanged(String text) {
@@ -107,8 +109,25 @@ public class UploadPresenter {
         view.setBackground(uploadModel.getCurrentItem().mediaUri);
 
         view.updateBottomCardContent(uploadModel.getCurrentStep(), uploadModel.getStepCount(), uploadModel.getCurrentItem());
-        view.setBottomCardVisibility(uploadModel.isShowingItem());
         view.updateTopCardContent();
+
+        showCorrectBottomCard(uploadModel.getCurrentStep(), uploadModel.getCount());
+    }
+
+    private void showCorrectBottomCard(int currentStep, int uploadCount) {
+        @UploadView.UploadPage int page;
+        if (currentStep <= uploadCount) {
+            page = UploadView.TITLE_CARD;
+        } else if (currentStep == uploadCount + 1) {
+            page = UploadView.CATEGORIES;
+        } else {
+            page = UploadView.LICENSE;
+        }
+        view.setBottomCardVisibility(page);
+    }
+
+    public void handleSubmit() {
+
     }
     //endregion
 }

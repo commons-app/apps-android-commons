@@ -13,7 +13,7 @@ public class UploadModel {
     private List<UploadItem> items = Collections.emptyList();
     private boolean topCardState = true;
     private boolean bottomCardState = true;
-    private int currentStep = 1;
+    private int currentStepIndex = 0;
 
     @Inject
     UploadModel() {
@@ -21,7 +21,7 @@ public class UploadModel {
 
     public void receive(List<Uri> mediaUri, String mimeType, String source) {
         items = new ArrayList<>();
-        currentStep = 1;
+        currentStepIndex = 0;
         for (int i = 0; i < mediaUri.size(); i++) {
             Uri uri = mediaUri.get(i);
             UploadItem e = new UploadItem(uri, mimeType, source);
@@ -32,15 +32,15 @@ public class UploadModel {
     }
 
     public boolean isPreviousAvailable() {
-        return currentStep > 1;
+        return currentStepIndex > 0;
     }
 
     public boolean isNextAvailable() {
-        return currentStep < (items.size() + 2);
+        return currentStepIndex < (items.size() + 1);
     }
 
     public int getCurrentStep() {
-        return currentStep;
+        return currentStepIndex + 1;
     }
 
     public int getStepCount() {
@@ -72,42 +72,52 @@ public class UploadModel {
     }
 
     public void next() {
-        if (currentStep < items.size() + 2) {
-            currentStep++;
+        markCurrentUploadVisited();
+        if (currentStepIndex < items.size() + 1) {
+            currentStepIndex++;
         }
-        updateSelectedState();
+        updateItemState();
     }
 
     public void previous() {
-        if (currentStep > 1) {
-            currentStep--;
+        markCurrentUploadVisited();
+        if (currentStepIndex > 0) {
+            currentStepIndex--;
         }
-        updateSelectedState();
+        updateItemState();
     }
 
     public void jumpTo(UploadItem item) {
-        int index = items.indexOf(item);
-        currentStep = index + 1;
-        updateSelectedState();
+        currentStepIndex = items.indexOf(item);
+        item.visited = true;
+        updateItemState();
     }
 
     public UploadItem getCurrentItem() {
-        return isShowingItem() ? items.get(currentStep - 1) : DUMMY;
+        return isShowingItem() ? items.get(currentStepIndex) : DUMMY;
     }
 
     public boolean isShowingItem() {
-        return currentStep <= items.size();
+        return currentStepIndex < items.size();
     }
 
-    private void updateSelectedState() {
+    private void updateItemState() {
         int count = items.size();
         for (int i = 0; i < count; i++) {
-            UploadItem uploadItem = items.get(i);
-            uploadItem.selected = (currentStep > count || i == currentStep - 1);
+            UploadItem item = items.get(i);
+            item.selected = (currentStepIndex >= count || i == currentStepIndex);
+            item.error = item.title == null || item.title.trim().isEmpty();
         }
     }
 
-    public static class UploadItem {
+    private void markCurrentUploadVisited() {
+        if (currentStepIndex < items.size() && currentStepIndex >= 0) {
+            items.get(currentStepIndex).visited = true;
+        }
+    }
+
+    @SuppressWarnings("WeakerAccess")
+    static class UploadItem {
         public boolean selected = false;
         public boolean first = false;
         public final Uri mediaUri;
@@ -115,8 +125,10 @@ public class UploadModel {
         public final String source;
         public String title;
         public String description;
+        public boolean visited;
+        public boolean error;
 
-        public UploadItem(Uri mediaUri, String mimeType, String source) {
+        UploadItem(Uri mediaUri, String mimeType, String source) {
             this.mediaUri = mediaUri;
             this.mimeType = mimeType;
             this.source = source;
