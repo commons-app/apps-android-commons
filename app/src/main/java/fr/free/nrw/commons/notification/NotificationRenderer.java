@@ -1,5 +1,6 @@
 package fr.free.nrw.commons.notification;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,9 +48,13 @@ public class NotificationRenderer extends Renderer<Notification> {
     @Override
     public void render() {
         Notification notification = getContent();
-        title.setText(notification.notificationText);
+        StringBuilder str = new StringBuilder(notification.notificationText);
+        str.append(" " );
+        title.setText(str);
         time.setText(notification.date);
-        description.setText(notification.description);
+        StringBuilder desc = new StringBuilder(notification.description);
+        desc.append(" ");
+        description.setText(desc);
         switch (notification.notificationType) {
             case THANK_YOU_EDIT:
                 icon.setImageResource(R.drawable.ic_edit_black_24dp);
