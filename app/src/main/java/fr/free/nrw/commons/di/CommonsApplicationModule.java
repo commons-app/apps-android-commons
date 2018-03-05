@@ -1,10 +1,12 @@
 package fr.free.nrw.commons.di;
 
+import android.app.Activity;
 import android.content.ContentProviderClient;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.util.LruCache;
+import android.view.inputmethod.InputMethodManager;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -36,6 +38,11 @@ public class CommonsApplicationModule {
     @Provides
     public Context providesApplicationContext() {
         return this.applicationContext;
+    }
+
+    @Provides
+    public InputMethodManager provideInputMethodManager() {
+        return (InputMethodManager) applicationContext.getSystemService(Activity.INPUT_METHOD_SERVICE);
     }
 
     @Provides

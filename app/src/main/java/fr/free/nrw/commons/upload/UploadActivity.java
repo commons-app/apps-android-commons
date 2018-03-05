@@ -1,6 +1,5 @@
 package fr.free.nrw.commons.upload;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -31,8 +30,9 @@ import fr.free.nrw.commons.contributions.Contribution;
 import fr.free.nrw.commons.mwapi.MediaWikiApi;
 import fr.free.nrw.commons.utils.AbstractTextWatcher;
 
-public class UploadActivity extends AuthenticatedActivity
-        implements UploadThumbnailRenderer.ThumbnailClickedListener, UploadView {
+public class UploadActivity extends AuthenticatedActivity implements UploadView {
+    @Inject
+    InputMethodManager inputMethodManager;
     @Inject
     MediaWikiApi mwApi;
     @Inject
@@ -45,14 +45,6 @@ public class UploadActivity extends AuthenticatedActivity
     SimpleDraweeView background;
     @BindView(R.id.view_flipper)
     ViewFlipper viewFlipper;
-    @BindView(R.id.category_next)
-    Button categoryNext;
-    @BindView(R.id.category_previous)
-    Button categoryPrevious;
-    @BindView(R.id.submit)
-    Button submit;
-    @BindView(R.id.license_previous)
-    Button licensePrevious;
 
     // Top Card
     @BindView(R.id.top_card)
@@ -80,6 +72,22 @@ public class UploadActivity extends AuthenticatedActivity
     @BindView(R.id.image_description)
     EditText imageDescription;
 
+    // Category Search
+    @BindView(R.id.categories_title)
+    TextView categoryTitle;
+    @BindView(R.id.category_next)
+    Button categoryNext;
+    @BindView(R.id.category_previous)
+    Button categoryPrevious;
+
+    // Final Submission
+    @BindView(R.id.license_title)
+    TextView licenseTitle;
+    @BindView(R.id.submit)
+    Button submit;
+    @BindView(R.id.license_previous)
+    Button licensePrevious;
+
     private AbstractTextWatcher titleWatcher;
     private AbstractTextWatcher descriptionWatcher;
 
@@ -89,22 +97,12 @@ public class UploadActivity extends AuthenticatedActivity
         setContentView(R.layout.activity_upload);
         ButterKnife.bind(this);
 
-        titleWatcher = new AbstractTextWatcher() {
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                presenter.imageTitleChanged(imageTitle.getText().toString());
-            }
-        };
-        descriptionWatcher = new AbstractTextWatcher() {
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                presenter.descriptionChanged(imageDescription.getText().toString());
-            }
-        };
-        adapterFactory.setListener(this);
         topCardThumbnails.setLayoutManager(new LinearLayoutManager(this,
                 LinearLayoutManager.HORIZONTAL, false));
 
+        titleWatcher = new AbstractTextWatcher(this::handleImageTitleChanged);
+        descriptionWatcher = new AbstractTextWatcher(this::handleImageDescriptionChanged);
+        adapterFactory.setListener(presenter::thumbnailClicked);
         topCardExpandButton.setOnClickListener(v -> presenter.toggleTopCardState());
         bottomCardExpandButton.setOnClickListener(v -> presenter.toggleBottomCardState());
         next.setOnClickListener(v -> presenter.handleNext());
@@ -143,7 +141,10 @@ public class UploadActivity extends AuthenticatedActivity
 
     @Override
     public void updateBottomCardContent(int currentStep, int stepCount, UploadModel.UploadItem uploadItem) {
-        bottomCardTitle.setText(getResources().getString(R.string.step_count, currentStep, stepCount));
+        String title = getResources().getString(R.string.step_count, currentStep, stepCount);
+        bottomCardTitle.setText(title);
+        categoryTitle.setText(title);
+        licenseTitle.setText(title);
         imageTitle.setText(uploadItem.title);
         imageDescription.setText(uploadItem.description);
     }
@@ -203,7 +204,6 @@ public class UploadActivity extends AuthenticatedActivity
 
     @Override
     public void dismissKeyboard() {
-        InputMethodManager inputMethodManager = (InputMethodManager) this.getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(imageTitle.getWindowToken(), 0);
     }
 
@@ -246,9 +246,12 @@ public class UploadActivity extends AuthenticatedActivity
         finish();
     }
 
-    @Override
-    public void thumbnailClicked(UploadModel.UploadItem content) {
-        presenter.thumbnailClicked(content);
+    private void handleImageDescriptionChanged() {
+        presenter.descriptionChanged(imageDescription.getText().toString());
+    }
+
+    private void handleImageTitleChanged() {
+        presenter.imageTitleChanged(imageTitle.getText().toString());
     }
 
     private void updateCardState(boolean state, ImageView button, View... content) {

@@ -6,6 +6,23 @@
     android:orientation="vertical"
     tools:showIn="@layout/activity_upload">
 
+    <TextView
+        android:id="@+id/license_title"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginStart="@dimen/standard_gap"
+        android:layout_marginLeft="@dimen/standard_gap"
+        android:layout_marginTop="@dimen/standard_gap"
+        android:layout_marginEnd="@dimen/standard_gap"
+        android:layout_marginRight="@dimen/standard_gap"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/normal_text"
+        android:textStyle="bold"
+        tools:text="Step 1 of 15" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/categories"
         android:layout_width="match_parent"
@@ -14,7 +31,8 @@
         android:layout_marginLeft="@dimen/standard_gap"
         android:layout_marginEnd="@dimen/standard_gap"
         android:layout_marginRight="@dimen/standard_gap"
-        android:layout_above="@+id/button_divider" />
+        android:layout_above="@+id/button_divider"
+        android:layout_below="@id/license_title" />
 
     <View
         android:id="@+id/button_divider"
