@@ -139,7 +139,6 @@ public  class       ContributionsActivity
         requestAuthToken();
         initDrawer();
         setTitle(getString(R.string.title_activity_contributions));
-        setUploadCount();
     }
 
     @Override
@@ -266,17 +265,9 @@ public  class       ContributionsActivity
     }
 
     @SuppressWarnings("ConstantConditions")
-    private void setUploadCount() {
-        compositeDisposable.add(mediaWikiApi
-                .getUploadCount(sessionManager.getCurrentAccount().name)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        uploadCount -> getSupportActionBar().setSubtitle(getResources()
-                                .getQuantityString(R.plurals.contributions_subtitle,
-                                        uploadCount, uploadCount)),
-                        t -> Timber.e(t, "Fetching upload count failed")
-                ));
+    public void setUploadCount(int uploadCount) {
+        getSupportActionBar().setSubtitle(getResources()
+                .getQuantityString(R.plurals.contributions_subtitle, uploadCount, uploadCount));
     }
 
     @Override

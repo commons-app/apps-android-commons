@@ -56,6 +56,7 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
     private ContributionController controller;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_contributions, container, false);
@@ -87,6 +88,8 @@ public class ContributionsListFragment extends CommonsDaggerSupportFragment {
 
     public void setAdapter(ListAdapter adapter) {
         this.contributionsList.setAdapter(adapter);
+        Timber.d("ContributionsListFragment -> " + adapter.getCount());
+        ((ContributionsActivity) getActivity()).setUploadCount(adapter.getCount());
     }
 
     public void changeProgressBarVisibility(boolean isVisible) {
